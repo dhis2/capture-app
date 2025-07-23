@@ -1,16 +1,13 @@
-// @flow
 import { connect } from 'react-redux';
 import { NewEventsList } from './RecentlyAddedEventsList.component';
 
-const mapStateToProps = (state: ReduxState) => ({
+const mapStateToProps = (state: any) => ({
     events: state.recentlyAddedEvents,
     eventsValues: state.recentlyAddedEventsValues,
 });
 
 const mapDispatchToProps = () => ({
-    onRowClick: () => {
-    },
+    onRowClick: () => undefined,
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const EventsList = connect(mapStateToProps, mapDispatchToProps)(NewEventsList);

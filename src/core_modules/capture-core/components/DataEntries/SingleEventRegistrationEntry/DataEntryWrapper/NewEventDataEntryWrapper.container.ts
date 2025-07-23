@@ -6,25 +6,18 @@ import {
     setNewEventFormLayoutDirection,
 } from './newEventDataEntryWrapper.actions';
 import { getDataEntryHasChanges } from '../getNewEventDataEntryHasChanges';
-import type { Props, ContainerProps, StateProps, MapStateToProps } from './NewEventDataEntryWrapper.types';
+import type { ContainerProps, StateProps, MapStateToProps } from './NewEventDataEntryWrapper.types';
 
-const makeMapStateToProps = (): MapStateToProps => (state: ReduxState): StateProps => ({
+const makeMapStateToProps = (): MapStateToProps => (state: any): StateProps => ({
     dataEntryHasChanges: getDataEntryHasChanges(state),
     formHorizontal: !!state.newEventPage.formHorizontal,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onFormLayoutDirectionChange: (formHorizontal: boolean) => {
         dispatch(setNewEventFormLayoutDirection(formHorizontal));
     },
 });
 
 export const NewEventDataEntryWrapper: ComponentType<ContainerProps> =
-    connect<
-        Props,
-        ContainerProps,
-        StateProps,
-        *,
-        ReduxState,
-        *,
-    >(makeMapStateToProps, mapDispatchToProps)(NewEventDataEntryWrapperComponent);
+    connect(makeMapStateToProps, mapDispatchToProps)(NewEventDataEntryWrapperComponent);
