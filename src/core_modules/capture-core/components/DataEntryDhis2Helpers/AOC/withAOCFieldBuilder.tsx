@@ -45,6 +45,16 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
             return { id: category.id, label: category.displayName, options };
         };
 
+        const sortOptionsByLabel = (a: any, b: any) => {
+            if (a.label === b.label) {
+                return 0;
+            }
+            if (a.label < b.label) {
+                return -1;
+            }
+            return 1;
+        };
+
         const loadCagoryOptions = useCallback(() => {
             setCategories([]);
             cancelablePromiseRef.current?.cancel();
@@ -66,16 +76,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
                 .promise
                 .then((optionResults: any) => {
                     const newCategories = optionResults.map(({ options, ...rest }: any) => {
-                        options.sort((a: any, b: any) => {
-                            if (a.label === b.label) {
-                                return 0;
-                            }
-                            if (a.label < b.label) {
-                                return -1;
-                            }
-                            return 1;
-                        });
-
+                        options.sort(sortOptionsByLabel);
                         return { options, ...rest };
                     });
                     setCategories(newCategories);
