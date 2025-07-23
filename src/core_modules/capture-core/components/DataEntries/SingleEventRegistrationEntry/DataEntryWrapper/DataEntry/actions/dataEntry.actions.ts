@@ -1,7 +1,6 @@
-// @flow
 import { actionCreator, actionPayloadAppender } from '../../../../../../actions/actions.utils';
 import { effectMethods } from '../../../../../../trackerOffline';
-import typeof { newEventSaveTypes } from '../newEventSaveTypes';
+import { newEventSaveTypes } from '../newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForNewSingleEventActionsBatch',
@@ -46,18 +45,18 @@ export const actionTypes = {
     NEW_EVENT_SAVED_AFTER_RETURN_TO_LIST: 'NewEventSavedAfterReturnToList',
 };
 
-export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
+export const startRunRulesOnUpdateForNewSingleEvent = (actionData: any) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
-export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: any) =>
     actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)(
         { eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] },
     );
 
-export const newEventSavedAfterReturnedToMainPage = (selections: Object) =>
+export const newEventSavedAfterReturnedToMainPage = (selections: any) =>
     actionCreator(actionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE)(null, { selections });
 
-export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, relationshipData: ?Object, selections: Object) => {
+export const startSaveNewEventAfterReturnedToMainPage = (serverData: any, relationshipData: any, selections: any) => {
     const actionType = actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE;
     return actionCreator(actionType)({ selections }, {
         offline: {
@@ -72,8 +71,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, rel
     });
 };
 
-
-export const startSaveNewEventRelationships = (serverData: Object, selections: Object, triggerAction: string) =>
+export const startSaveNewEventRelationships = (serverData: any, selections: any, triggerAction: string) =>
     actionCreator(actionTypes.START_SAVE_NEW_EVENT_RELATIONSHIPS)({ selections }, {
         offline: {
             effect: {
@@ -86,7 +84,7 @@ export const startSaveNewEventRelationships = (serverData: Object, selections: O
         },
     });
 
-export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selections: Object, triggerAction: string, relationshipData: Array<any>, relationshipClientId: string) =>
+export const startSaveTeiForNewEventRelationship = (teiPayload: any, selections: any, triggerAction: string, relationshipData: any, relationshipClientId: string) =>
     actionCreator(actionTypes.START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS)({ selections }, {
         offline: {
             effect: {
@@ -117,20 +115,20 @@ export const cancelNewEventInitializeWorkingLists = () =>
 export const cancelOpenNewEventInDataEntry = () =>
     actionCreator(actionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL)();
 
-export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) =>
+export const setNewEventSaveTypes = (newSaveTypes: Array<typeof newEventSaveTypes[keyof typeof newEventSaveTypes]> | null) =>
     actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
 
 export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>
     actionCreator(actionTypes.ADD_NEW_EVENT_NOTE)({ itemId, dataEntryId, note });
 
-export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: any) =>
     actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)({
         eventId,
         dataEntryId,
         formFoundation,
     }, { skipLogging: ['formFoundation'] });
 
-export const requestSaveNewEventInStage = (eventId: string, dataEntryId: string, formFoundation: Object, completed?: boolean) =>
+export const requestSaveNewEventInStage = (eventId: string, dataEntryId: string, formFoundation: any, completed?: boolean) =>
     actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE)({
         eventId,
         dataEntryId,
@@ -140,9 +138,9 @@ export const requestSaveNewEventInStage = (eventId: string, dataEntryId: string,
 
 export const startSaveNewEventAddAnother =
 (
-    serverData: Object,
-    relationshipData: ?Object,
-    selections: Object,
+    serverData: any,
+    relationshipData: any,
+    selections: any,
     clientId: string,
 ) => {
     const actionType = actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER;
@@ -162,9 +160,9 @@ export const startSaveNewEventAddAnother =
 
 export const startSaveNewEventAndReturnToList =
 (
-    serverData: Object,
-    relationshipData: ?Object,
-    selections: Object,
+    serverData: any,
+    relationshipData: any,
+    selections: any,
 ) => {
     const actionType = actionTypes.START_SAVE_NEW_EVENT_AND_RETURN_TO_LIST;
 
@@ -180,16 +178,16 @@ export const startSaveNewEventAndReturnToList =
         },
     });
 };
-export const newEventSavedAddAnother = (selections: Object) =>
+export const newEventSavedAddAnother = (selections: any) =>
     actionCreator(actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER)(null, { selections });
 
-export const newEventReturnToList = (selections: Object) =>
+export const newEventReturnToList = (selections: any) =>
     actionCreator(actionTypes.NEW_EVENT_SAVED_AFTER_RETURN_TO_LIST)(null, { selections });
 
 export const startAsyncUpdateFieldForNewEvent = (
-    innerAction: ReduxAction<any, any>,
-    onSuccess: Function,
-    onError: Function,
+    innerAction: any,
+    onSuccess: any,
+    onError: any,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });
 

@@ -1,9 +1,8 @@
-// @flow
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import { type OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
@@ -22,14 +21,15 @@ import {
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
-import { type RenderFoundation } from '../../../../../metaData';
+import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
-import typeof { newEventSaveTypes } from './newEventSaveTypes';
+import { newEventSaveTypes } from './newEventSaveTypes';
+import type { ReduxAction } from '../../../../../../capture-core-utils/types';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => ({
+    const mapStateToProps = (state: any, props: any) => ({
         recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
         ready: !state.activePage.isDataEntryLoading,
         error: !props.formFoundation ?
@@ -39,12 +39,10 @@ const makeMapStateToProps = () => {
         orgUnitName: state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit?.name,
     });
 
-
-    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -89,7 +87,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) => {
+    onSetSaveTypes: (newSaveTypes: Array<typeof newEventSaveTypes[keyof typeof newEventSaveTypes]> | null) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
@@ -112,7 +110,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
 );

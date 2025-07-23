@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -11,15 +10,15 @@ import { SimpleSplitButton } from '../../../../Buttons';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
 
 type Props = {
-    onSave: (saveType: $Values<typeof newEventSaveTypes>) => void,
+    onSave: (saveType: typeof newEventSaveTypes[keyof typeof newEventSaveTypes]) => void,
     onCancel: () => void,
     saveTypes: Array<string>,
-    formHorizontal?: ?boolean,
-    dataEntryHasChanges?: ?boolean,
+    formHorizontal?: boolean | null,
+    dataEntryHasChanges: boolean | null,
     formFoundation: RenderFoundation,
-    finalInProgress?: ?boolean,
-    hasRecentlyAddedEvents?: ?boolean,
-    isCreateNew?: ?boolean,
+    finalInProgress?: boolean | null,
+    hasRecentlyAddedEvents: boolean | null,
+    isCreateNew?: boolean | null,
 };
 
 const buttonTypes = {
@@ -57,9 +56,9 @@ const buttonDefinitions = {
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
-        getButtonDefinition = (type: $Values<typeof buttonTypes>) => buttonDefinitions[type](this.props)
+        getButtonDefinition = (type: typeof buttonTypes[keyof typeof buttonTypes]) => buttonDefinitions[type](this.props)
 
-        getFormHorizontalButtons = (dataEntryHasChanges: ?boolean, hasRecentlyAddedEvents: ?boolean) => {
+        getFormHorizontalButtons = (dataEntryHasChanges: boolean | null, hasRecentlyAddedEvents: boolean | null) => {
             const buttons = [
                 this.getButtonDefinition(buttonTypes.SAVEANDADDANOTHER),
                 this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
@@ -70,9 +69,8 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
 
-        getFormVerticalButtons = (dataEntryHasChanges: ?boolean, hasRecentlyAddedEvents: ?boolean, saveTypes: ?Array<string>) => {
+        getFormVerticalButtons = (dataEntryHasChanges: boolean | null, hasRecentlyAddedEvents: boolean | null, saveTypes: Array<string> | null) => {
             const buttons = saveTypes ?
-                // $FlowFixMe[missing-annot] automated comment
                 saveTypes.map(saveType => this.getButtonDefinition(saveType)) :
                 [
                     this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
@@ -83,7 +81,9 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
 
-        renderMultiButton = (buttons: any, hasWriteAccess: ?boolean) => {
+        innerInstance: any;
+
+        renderMultiButton = (buttons: any, hasWriteAccess: boolean | null) => {
             const primary = buttons[0];
             const secondaries = buttons.slice(1);
             return (
@@ -132,12 +132,9 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 this.getFormHorizontalButtons(dataEntryHasChanges, hasRecentlyAddedEvents) :
                 this.getFormVerticalButtons(dataEntryHasChanges, hasRecentlyAddedEvents, saveTypes);
 
-            // $FlowFixMe[extra-arg] automated comment
             const mainButton = this.renderMultiButton(buttons, hasWriteAccess);
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
-                    // $FlowFixMe[prop-missing] automated comment
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
                     formHorizontal={formHorizontal}
@@ -147,7 +144,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => {
+const mapStateToProps = (state: any, props: { id: string }) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     const dataEntryHasChanges = getDataEntryHasChanges(state);
@@ -164,7 +161,5 @@ const mapDispatchToProps = () => ({});
 
 export const withMainButton = () =>
     (InnerComponent: React.ComponentType<any>) =>
-
-        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

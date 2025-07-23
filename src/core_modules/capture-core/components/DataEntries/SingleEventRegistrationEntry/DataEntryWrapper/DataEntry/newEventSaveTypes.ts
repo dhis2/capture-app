@@ -1,4 +1,3 @@
-// @flow
 
 export const newEventSaveTypes = {
     SAVEANDADDANOTHER: 'SAVEANDADDANOTHER',

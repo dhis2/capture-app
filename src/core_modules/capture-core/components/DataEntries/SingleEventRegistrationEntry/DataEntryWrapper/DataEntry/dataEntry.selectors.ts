@@ -1,11 +1,9 @@
-// @flow
 import { createSelector } from 'reselect';
 import { programCollection } from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 import { type ProgramStage } from '../../../../../metaData';
 
-const programIdSelector = state => state.currentSelections.programId;
+const programIdSelector = (state: any) => state.currentSelections.programId;
 
-// $FlowFixMe[missing-annot] automated comment
 export const makeProgramNameSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
@@ -15,10 +13,9 @@ export const makeProgramNameSelector = () => createSelector(
     },
 );
 
-const stageSelector = props => props.stage;
+const stageSelector = (props: any) => props.stage;
 
-// $FlowFixMe[missing-annot] automated comment
 export const makeWritableRelationshipTypesSelector = () => createSelector(
     stageSelector,
-    (stage: ?ProgramStage) => (stage ? stage.relationshipTypesWhereStageIsFrom.filter(r => r.access.data.write) : []),
+    (stage: ProgramStage) => (stage ? stage.relationshipTypesWhereStageIsFrom.filter((r: any) => r.access.data.write) : []),
 );
