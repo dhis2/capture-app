@@ -1,8 +1,7 @@
-// @flow
 import type { ComponentType } from 'react';
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
 import { useOriginLabel } from './hooks/useOriginLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -13,12 +12,11 @@ export const breadcrumbsKeys = Object.freeze({
     BULK_DATA_ENTRY: 'bulkDataEntry',
 });
 
-type Props = {
-    onBackToOriginPage: () => void,
-    displayFrontPageList?: boolean,
-    programId: string,
-    page: $Values<typeof breadcrumbsKeys>,
-    ...CssClasses,
+type PlainProps = {
+    onBackToOriginPage: () => void;
+    displayFrontPageList?: boolean;
+    programId: string;
+    page: keyof typeof breadcrumbsKeys;
 };
 
 const styles = {
@@ -34,7 +32,7 @@ const BreadcrumbsPlain = ({
     displayFrontPageList,
     page,
     classes,
-}: Props) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { label } = useOriginLabel({
         programId,
         displayFrontPageList,
@@ -53,7 +51,7 @@ const BreadcrumbsPlain = ({
                 },
                 {
                     key: breadcrumbsKeys.BULK_DATA_ENTRY,
-                    onClick: () => {},
+                    onClick: () => undefined,
                     label: i18n.t('Bulk data entry'),
                     selected: true,
                     condition: true,
@@ -79,4 +77,4 @@ const BreadcrumbsPlain = ({
     );
 };
 
-export const BulkDataEntryBreadcrumb: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbsPlain);
+export const BulkDataEntryBreadcrumb = withStyles(styles)(BreadcrumbsPlain) as ComponentType<PlainProps>;

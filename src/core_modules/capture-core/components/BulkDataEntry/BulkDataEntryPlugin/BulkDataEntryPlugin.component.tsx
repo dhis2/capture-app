@@ -1,8 +1,7 @@
-// @flow
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
-import { withStyles } from '@material-ui/core/styles';
-import type { Props } from './BulkDataEntryPlugin.types';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { PlainProps } from './BulkDataEntryPlugin.types';
 
 const styles = () => ({
     container: {
@@ -18,13 +17,13 @@ const BulkDataEntryPluginPlain = ({
     onDefer,
     trackedEntityIds,
     classes,
-}: Props) => {
-    const [pluginSize, setPluginSize] = useState({ width: undefined, height: undefined });
-    const containerRef = useRef<?HTMLDivElement>();
+}: PlainProps & WithStyles<typeof styles>) => {
+    const [pluginSize, setPluginSize] = useState<{ width?: number; height?: number }>({ width: undefined, height: undefined });
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const { current: container } = containerRef;
-        if (!container) return () => {};
+        if (!container) return undefined;
 
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach(entry =>
@@ -34,7 +33,6 @@ const BulkDataEntryPluginPlain = ({
 
         resizeObserver.observe(container);
 
-        // Cleanup function
         return () => {
             resizeObserver.unobserve(container);
             resizeObserver.disconnect();
