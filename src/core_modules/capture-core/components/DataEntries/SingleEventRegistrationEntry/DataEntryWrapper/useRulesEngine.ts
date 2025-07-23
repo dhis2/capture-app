@@ -12,8 +12,8 @@ export const useRulesEngine = ({
     formFoundation,
 }: {
     programId: string;
-    orgUnitContext?: OrgUnit | null;
-    formFoundation?: RenderFoundation | null;
+    orgUnitContext: OrgUnit | null;
+    formFoundation: RenderFoundation | null;
 }) => {
     const dispatch = useDispatch();
     const program = useMemo(() => programId && getEventProgramThrowIfNotFound(programId), [programId]);
@@ -41,7 +41,6 @@ export const useRulesEngine = ({
         program,
         orgUnitContext,
         formFoundation,
-        state,
     ]);
 
     return orgUnitRef.current === orgUnitContext;
