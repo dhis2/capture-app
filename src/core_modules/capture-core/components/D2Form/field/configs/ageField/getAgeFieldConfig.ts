@@ -4,7 +4,7 @@ import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { AgeFieldForForm } from '../../Components';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
-import { convertDateanyToDateFormatString } from '../../../../../../capture-core/utils/converters/date';
+import { convertDateObjectToDateFormatString } from '../../../../../../capture-core/utils/converters/date';
 import { type DateDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
@@ -20,7 +20,7 @@ export const getAgeFieldConfig = (metaData: DateDataElement, options: any, query
         datePopupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
         calendarType: systemSettingsStore.get().calendar,
         dateFormat: systemSettingsStore.get().dateFormat,
-        calendarMax: !metaData.allowFutureDate ? convertDateanyToDateFormatString(moment()) : undefined,
+        calendarMax: !metaData.allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined,
     }, options, metaData);
 
     return createFieldConfig({
