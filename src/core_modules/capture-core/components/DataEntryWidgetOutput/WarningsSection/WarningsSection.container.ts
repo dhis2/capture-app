@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import { WarningsSectionComponent } from '../../Pages/ViewEvent/RightColumn/WarningsSection/WarningsSection.component';
 import { makeGetVisibleMessages } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/messageSection.selectors';
@@ -6,7 +5,7 @@ import { makeGetVisibleMessages } from '../../Pages/ViewEvent/RightColumn/Errors
 const makeStateToProps = () => {
     const getVisibleMessages = makeGetVisibleMessages();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => {
+    const mapStateToProps = (state: any, props: { dataEntryKey: string }) => {
         const key = props.dataEntryKey;
         const messagesContainer = state.rulesEffectsGeneralWarnings[key];
         const showOnComplete = state.dataEntriesUI &&
@@ -24,9 +23,7 @@ const makeStateToProps = () => {
             warnings: rulesWarnings,
         };
     };
-    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-// $FlowFixMe[missing-annot] automated comment
 export const WarningsSection = connect(makeStateToProps, () => ({}))(WarningsSectionComponent);

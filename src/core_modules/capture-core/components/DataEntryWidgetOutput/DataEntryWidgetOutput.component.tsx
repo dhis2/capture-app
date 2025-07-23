@@ -1,29 +1,27 @@
-
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
-import { WarningsSection } from './WarningsSection/WaningsSection.container';
+import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
 import { IndicatorsSection } from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
 
-type Props = {
-    onLink: (teiId: string, values: Object) => void,
-    classes: {
-        stickyOnScroll: string,
-    }
+type OwnProps = {
+    onLink: (teiId: string, values: Record<string, unknown>) => void;
 };
 
 const getStyles = (theme: Theme) => ({
     stickyOnScroll: {
-        position: 'relative',
+        position: 'relative' as const,
         flexGrow: 1,
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
         marginTop: 0,
     },
 });
+
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
@@ -33,7 +31,7 @@ const componentContainers = [
 ];
 
 class DataEntryWidgetOutputPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => {
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => {
         const { renderCardActions, ...otherProps } = props;
 
         const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
@@ -47,6 +45,7 @@ class DataEntryWidgetOutputPlain extends React.Component<Props> {
         return (
             <StickyOnScroll
                 offsetTop={50}
+                minViewpointWidth={768}
                 containerClass={classes.stickyOnScroll}
             >
                 <div>
