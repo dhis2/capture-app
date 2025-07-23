@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../../../metaData';
@@ -32,7 +31,7 @@ const fieldForTypes = {
     [dataElementTypes.MULTI_TEXT]: getMultiOptionSetFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
     [dataElementTypes.LONG_TEXT]:
-    (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
+    (metaData: DataElement, options: any, querySingleResource: QuerySingleResource) => {
         const fieldConfig = getTextFieldConfig(metaData, options, querySingleResource, { multiLine: true });
         return fieldConfig;
     },
@@ -58,16 +57,14 @@ const fieldForTypes = {
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
-export function getCustomFormField(metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) {
+export function getCustomFormField(metaData: DataElement, options: any, querySingleResource: QuerySingleResource) {
     if (options.viewMode) {
         return getViewModeFieldConfig(metaData, options);
     }
 
     const type = metaData.type;
-    // $FlowFixMe dataElementTypes flow error
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
-        // $FlowFixMe dataElementTypes flow error
         return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, querySingleResource);
     }
 
@@ -75,6 +72,5 @@ export function getCustomFormField(metaData: DataElement, options: Object, query
         return getOptionSetFieldConfig(metaData, options, querySingleResource);
     }
 
-    // $FlowFixMe dataElementTypes flow error
     return fieldForTypes[type](metaData, options, querySingleResource);
 }

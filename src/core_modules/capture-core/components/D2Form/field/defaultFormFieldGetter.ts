@@ -1,4 +1,4 @@
-// @flow
+
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../../../metaData';
@@ -29,9 +29,9 @@ const errorMessages = {
 };
 
 type FieldForTypes = {
-    [type: $Keys<typeof dataElementTypes>]: (
+    [type: keyof typeof dataElementTypes]: (
         metaData: DataElement,
-        options: Object,
+        options: any,
         querySingleResource: QuerySingleResource,
     ) => any,
 }
@@ -42,7 +42,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.MULTI_TEXT]: getMultiOptionSetFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
     [dataElementTypes.LONG_TEXT]:
-    (metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) => {
+    (metaData: DataElement, options: any, querySingleResource: QuerySingleResource) => {
         const fieldConfig = getTextFieldConfig(metaData, options, querySingleResource, { multiLine: true });
         return fieldConfig;
     },
@@ -58,7 +58,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.BOOLEAN]: getBooleanFieldConfig,
     [dataElementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
-    [dataElementTypes.DATE]: (metaData: any, options: Object, querySingleResource: QuerySingleResource) =>
+    [dataElementTypes.DATE]: (metaData: any, options: any, querySingleResource: QuerySingleResource) =>
         getDateFieldConfig(metaData, options, querySingleResource),
     [dataElementTypes.DATE_RANGE]: getDateRangeFieldConfig,
     [dataElementTypes.DATETIME]: getDateTimeFieldConfig,
@@ -67,7 +67,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.TIME_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
     [dataElementTypes.URL]: getTextFieldConfig,
-    [dataElementTypes.AGE]: (metaData: any, options: Object, querySingleResource: QuerySingleResource) =>
+    [dataElementTypes.AGE]: (metaData: any, options: any, querySingleResource: QuerySingleResource) =>
         getAgeFieldConfig(metaData, options, querySingleResource),
     [dataElementTypes.ORGANISATION_UNIT]: getOrgUnitFieldConfig,
     [dataElementTypes.COORDINATE]: getCoordinateFieldConfig,
@@ -78,7 +78,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
-export function getDefaultFormField(metaData: DataElement, options: Object, querySingleResource: QuerySingleResource) {
+export function getDefaultFormField(metaData: DataElement, options: any, querySingleResource: QuerySingleResource) {
     if (options.viewMode) {
         return getViewModeFieldConfig(metaData, options);
     }
