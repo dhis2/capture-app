@@ -21,10 +21,6 @@ const getStyles = (theme: any) => ({
     buttonContainer: {
         paddingRight: theme.spacing.unit * 2,
     },
-    header: {
-        fontSize: 18,
-        fontWeight: 500,
-    },
 });
 
 type Props = {

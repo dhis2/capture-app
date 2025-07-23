@@ -27,10 +27,10 @@ const mapDispatchToProps = (dispatch: any) => ({
     onCancel: (dataEntryId: string) => {
         dispatch(newEventCancelNewRelationship(dataEntryId));
     },
-    onAddRelationship: (relationshipType: { id: string; name: string }, entity: Object, entityType: string) => {
+    onAddRelationship: (relationshipType: { id: string; name: string }, entity: Record<string, unknown>, entityType: string) => {
         dispatch(addNewEventRelationship(relationshipType, entity, entityType));
     },
 });
 
-export const NewRelationshipWrapper: ComponentType<{}> =
+export const NewRelationshipWrapper: ComponentType<Record<string, never>> =
   connect(makeMapStateToProps, mapDispatchToProps)(NewRelationshipWrapperComponent);

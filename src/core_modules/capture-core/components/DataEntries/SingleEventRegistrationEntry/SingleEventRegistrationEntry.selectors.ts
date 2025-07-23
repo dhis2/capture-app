@@ -9,5 +9,5 @@ export const makeEventAccessSelector = () => createSelector(
     programIdSelector,
     categoriesMetaSelector,
     programStageIdSelector,
-    (programId: string, categoriesMeta?: Object | null, programStageId?: string | null) =>
+    (programId: string, categoriesMeta: any | null, programStageId: string | null) =>
         programId && getProgramEventAccess(programId, programStageId, categoriesMeta));

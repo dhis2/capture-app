@@ -20,4 +20,4 @@ export type DispatchProps = {
     onCancel: () => void;
 };
 
-export type MapStateToProps = (ReduxState: any, ContainerProps: ContainerProps) => StateProps;
+export type MapStateToProps = (ReduxState: any, props: ContainerProps) => StateProps;

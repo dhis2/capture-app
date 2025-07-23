@@ -56,6 +56,21 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
             discardDialogOpen: false,
         };
     }
+
+    onGetUnsavedAttributeValues = (id: string) => {
+        const { unsavedRelationships } = this.props;
+        return unsavedRelationships
+            .map((r) => {
+                if (!r.to.data || !r.to.data.attributes) {
+                    return null;
+                }
+
+                const attributeItem = r.to.data.attributes.find(a => a.attribute === id);
+                return attributeItem && attributeItem.value;
+            })
+            .filter(v => v);
+    }
+
     handleDiscard = () => {
         this.setState({ discardDialogOpen: true });
     }
@@ -73,20 +88,6 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
             </div>
         </div>
     );
-
-    onGetUnsavedAttributeValues = (id: string) => {
-        const { unsavedRelationships } = this.props;
-        return unsavedRelationships
-            .map((r) => {
-                if (!r.to.data || !r.to.data.attributes) {
-                    return null;
-                }
-
-                const attributeItem = r.to.data.attributes.find(a => a.attribute === id);
-                return attributeItem && attributeItem.value;
-            })
-            .filter(v => v);
-    }
 
     render() {
         const { classes, onCancel, ...passOnProps } = this.props;
