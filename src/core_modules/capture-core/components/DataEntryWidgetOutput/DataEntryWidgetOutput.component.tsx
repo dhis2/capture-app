@@ -11,9 +11,9 @@ type OwnProps = {
     onLink: (teiId: string, values: Record<string, unknown>) => void;
 };
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: Theme): Readonly<any> => ({
     stickyOnScroll: {
-        position: 'relative' as const,
+        position: 'relative',
         flexGrow: 1,
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
@@ -31,7 +31,7 @@ const componentContainers = [
 ];
 
 class DataEntryWidgetOutputPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => {
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Record<string, any>) => {
         const { renderCardActions, ...otherProps } = props;
 
         const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
