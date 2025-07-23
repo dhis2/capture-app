@@ -1,4 +1,3 @@
-// @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -7,41 +6,53 @@ import {
     OptionSet,
     Option,
     DataElement,
-    typeof dataElementTypes,
+    dataElementTypes,
 } from '../../../metaData';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../converters/clientToList';
 import type { RenderFoundation } from '../../../metaData';
 
+type CaptureClientEvent = {
+    eventId: string;
+    programId: string;
+    programStageId: string;
+    orgUnitId: string;
+    trackedEntityInstanceId?: string;
+    enrollmentId?: string;
+    enrollmentStatus?: string;
+    status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    occurredAt: string;
+    scheduledAt: string;
+    completedAt: string;
+    attributeCategoryOptions?: string;
+};
+
 type EventContainer = {
-    event: CaptureClientEvent,
-    eventValues: { [key: string]: any },
+    event: CaptureClientEvent;
+    eventValues: { [key: string]: any };
 };
 
 type ColumnOrderFromState = {
-    id: string,
-    visible: boolean,
-    isMainProperty?: ?boolean,
-    header?: ?string,
-    type?: ?$Keys<dataElementTypes>,
-    options?: ?Array<{text: string, value: string}>,
+    id: string;
+    visible: boolean;
+    isMainProperty?: boolean;
+    header?: string;
+    type?: keyof typeof dataElementTypes;
+    options?: Array<{text: string; value: string}>;
 };
 
 type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 
-// #HEADERS
-const programIdSelector = (state, props) => state.workingListsContext[props.listId].programId;
-const columnsOrderStateSelector = (state, props) => state.workingListsColumnsOrder[props.listId];
+const programIdSelector = (state: any, props: any) => state.workingListsContext[props.listId].programId;
+const columnsOrderStateSelector = (state: any, props: any) => state.workingListsColumnsOrder[props.listId];
 
 const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
     const dataElement = new DataElement((o) => {
         o.id = column.id;
-        // $FlowFixMe
         o.type = column.type;
     });
 
-    // $FlowFixMe
-    const options = column.options.map(option =>
+    const options = column.options?.map(option =>
         new Option((o) => {
             o.text = option.text;
             o.value = option.value;
@@ -52,16 +63,14 @@ const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
     return optionSet;
 };
 
-// $FlowFixMe
 export const makeColumnsSelector = () => createSelector(
     programIdSelector,
     columnsOrderStateSelector,
-    (programId, columnsOrderFromState: ColumnsOrderFromState) => {
+    (programId: string, columnsOrderFromState: ColumnsOrderFromState) => {
         const stageContainer = getStageForEventProgram(programId);
         if (stageContainer.error) {
             return columnsOrderFromState;
         }
-
 
         const stageForm: RenderFoundation = stageContainer.stage.stageForm;
 
@@ -84,21 +93,18 @@ export const makeColumnsSelector = () => createSelector(
             });
     },
 );
-// #END HEADERS
 
-const eventsMainDataSelector = (state, props) => props.events;
-const eventsValuesSelector = (state, props) => props.eventsValues;
-const sortOrderSelector = (state, props) => state.workingLists[props.listId].order;
+const eventsMainDataSelector = (state: any, props: any) => props.events;
+const eventsValuesSelector = (state: any, props: any) => props.eventsValues;
+const sortOrderSelector = (state: any, props: any) => state.workingLists[props.listId].order;
 
-
-const createEventsContainer = (events, eventsValues, sortOrder): Array<EventContainer> =>
+const createEventsContainer = (events: any, eventsValues: any, sortOrder: any): Array<EventContainer> =>
     sortOrder
-        .map(eventId => ({
+        .map((eventId: string) => ({
             event: events[eventId],
             eventValues: eventsValues[eventId],
         }));
 
-// $FlowFixMe
 export const makeCreateEventsContainer = () => createSelector(
     eventsMainDataSelector,
     eventsValuesSelector,
@@ -128,7 +134,7 @@ const createDeepEqualSelector = createSelectorCreator(
 
 const buildWorkingListData = (
     eventsContainer: Array<EventContainer>,
-    columns,
+    columns: any,
 ) => {
     if (eventsContainer.length === 0) {
         return [];
@@ -143,13 +149,12 @@ const buildWorkingListData = (
         .map((eventContainer) => {
             const convertedValues = stage.stageForm.convertValues(eventContainer.eventValues, convertValue);
             const convertedMainEvent = columns
-                .filter(column => column.isMainProperty)
-                .reduce((acc, mainColumn) => {
+                .filter((column: any) => column.isMainProperty)
+                .reduce((acc: any, mainColumn: any) => {
                     const sourceValue = eventContainer.event[mainColumn.id];
                     if (sourceValue) {
                         if (mainColumn.options) {
-                            // TODO: Need is equal comparer for types
-                            const option = mainColumn.options.find(o => o.value === sourceValue);
+                            const option = mainColumn.options.find((o: any) => o.value === sourceValue);
                             if (!option) {
                                 log.error(
                                     errorCreator(
@@ -174,9 +179,8 @@ const buildWorkingListData = (
         });
 };
 
-// $FlowFixMe
 export const makeCreateWorkingListData = () => createDeepEqualSelector(
-    (eventContainers, columns) => ({ eventContainers, columns }),
-    ({ eventContainers, columns }) =>
+    (eventContainers: any, columns: any) => ({ eventContainers, columns }),
+    ({ eventContainers, columns }: any) =>
         buildWorkingListData(eventContainers, columns),
 );

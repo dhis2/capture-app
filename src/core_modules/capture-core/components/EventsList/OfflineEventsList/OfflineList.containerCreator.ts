@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import {
     makeColumnsSelector,
@@ -11,7 +10,7 @@ const makeMapStateToProps = () => {
     const createEventsContainer = makeCreateEventsContainer();
     const createWorkingListData = makeCreateWorkingListData();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => {
+    const mapStateToProps = (state: any, props: any) => {
         const columns = columnsSelector(state, props);
         const eventsContainer = createEventsContainer(state, props);
         const sortById = state.workingListsMeta[props.listId].sortById;
@@ -28,5 +27,4 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-// $FlowFixMe[missing-annot] automated comment
 export const OfflineListContainerCreator = connect(makeMapStateToProps, {});
