@@ -31,7 +31,7 @@ export type ApiEnrollmentEvent = {
     followUp?: boolean;
 };
 
-type ApiAttributeValues = {
+export type ApiAttributeValues = {
     attribute: { id: string };
     value: string;
 };
