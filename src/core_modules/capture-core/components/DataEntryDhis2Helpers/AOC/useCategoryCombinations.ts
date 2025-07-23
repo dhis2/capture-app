@@ -1,7 +1,6 @@
-// @flow
 import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
-export const useCategoryCombinations = (programId: string, disabled: boolean = false) => {
+export const useCategoryCombinations = (programId: string, disabled = false) => {
     const {
         program,
         isLoading,
