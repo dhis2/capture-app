@@ -1,4 +1,3 @@
-// @flow
 import { useCallback } from 'react';
 import { useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
@@ -6,8 +5,8 @@ import { setBulkDataEntry, removeBulkDataEntry } from './bulkDataEntryStorageUti
 import { useBulkDataEntryFromIndexedDB } from './useBulkDataEntryFromIndexedDB';
 import { useBulkDataEntryDatastoreConfigurations } from './useBulkDataEntryDatastoreConfigurations';
 
-const getActiveBulkDataEntryConfiguration = (bulkDataEntryConfigurations, cachedBulkDataEntry) =>
-    bulkDataEntryConfigurations?.find(config => config.configKey === cachedBulkDataEntry?.activeList?.configKey);
+const getActiveBulkDataEntryConfiguration = (bulkDataEntryConfigurations: any, cachedBulkDataEntry: any) =>
+    bulkDataEntryConfigurations?.find((config: any) => config.configKey === cachedBulkDataEntry?.activeList?.configKey);
 
 export const useBulkDataEntryConfigurations = (programId: string) => {
     const queryClient = useQueryClient();

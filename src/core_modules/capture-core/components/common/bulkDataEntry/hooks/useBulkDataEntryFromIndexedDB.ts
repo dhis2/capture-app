@@ -1,12 +1,11 @@
-// @flow
 import { getBulkDataEntry } from './bulkDataEntryStorageUtils';
 import type { ActiveList } from './bulkDataEntryStorageUtils';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 
-export type CachedBulkDataEntry = {|
-    id: string,
-    activeList: ActiveList,
-|};
+export type CachedBulkDataEntry = {
+    id: string;
+    activeList: ActiveList;
+};
 
 export const useBulkDataEntryFromIndexedDB = (programId: string) => {
     const {
@@ -15,7 +14,6 @@ export const useBulkDataEntryFromIndexedDB = (programId: string) => {
         isError,
     } = useIndexedDBQuery(
         ['cachedBulkDataEntry', programId],
-        // $FlowFixMe
         () => getBulkDataEntry(programId),
         {
             staleTime: Infinity,
