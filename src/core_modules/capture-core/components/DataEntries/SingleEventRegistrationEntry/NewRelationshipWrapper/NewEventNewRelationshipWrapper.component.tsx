@@ -1,14 +1,12 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Card } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 
-
-const getStyles = theme => ({
+const getStyles = (theme: any) => ({
     headerContainer: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -42,24 +40,17 @@ const getStyles = theme => ({
 });
 
 type Props = {
-    onCancel: (dataEntryid: string) => void,
-    dataEntryKey: string,
-    classes: {
-        headerContainer: string,
-        header: string,
-        backToEventContainer: string,
-        backToEventButton: string,
-        newRelationshipPaper: string,
-    },
-    unsavedRelationships: Object,
-}
+    onCancel: (dataEntryid: string) => void;
+    dataEntryKey: string;
+    unsavedRelationships: any;
+};
 
 type State = {
-    discardDialogOpen: ?boolean,
-}
+    discardDialogOpen?: boolean | null;
+};
 
-class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
-    constructor(props: Props) {
+class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<typeof getStyles>, State> {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.state = {
             discardDialogOpen: false,

@@ -1,4 +1,3 @@
-// @flow
 import { connect, useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
@@ -16,11 +15,11 @@ import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCate
 import { itemId } from './DataEntryWrapper/DataEntry/helpers/constants';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 
-const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
+const inEffect = (state: any) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = (): MapStateToProps => {
     const eventAccessSelector = makeEventAccessSelector();
-    return (state: ReduxState, { id }: ContainerProps): StateProps => ({
+    return (state: any, { id }: ContainerProps): StateProps => ({
         ready: state.dataEntries[id]?.itemId === itemId,
         showAddRelationship: !!state.newEventPage.showAddRelationship,
         eventAccess: eventAccessSelector(state),
@@ -37,7 +36,7 @@ const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerP
         const { selectedScopeId, orgUnitId } = props;
         const { orgUnit } = useCoreOrgUnit(orgUnitId);
         const dispatch = useDispatch();
-        const selectedCategories = useSelector((state: ReduxState) => state.currentSelections.categories);
+        const selectedCategories = useSelector((state: any) => state.currentSelections.categories);
         const { isLoading, programCategory } = useCategoryCombinations(selectedScopeId);
 
         useEffect(() => {
@@ -61,14 +60,7 @@ const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerP
 export const SingleEventRegistrationEntry: React.ComponentType<ContainerProps> =
     compose(
         openSingleEventDataEntry,
-        connect<
-            StateProps,
-            ContainerProps,
-            StateProps,
-            *,
-            ReduxState,
-            *,
-        >(makeMapStateToProps, mapDispatchToProps, mergeProps),
+        connect(makeMapStateToProps, mapDispatchToProps, mergeProps),
         withLoadingIndicator(),
         withBrowserBackWarning(dialogConfig, inEffect),
     )(SingleEventRegistrationEntryComponent);

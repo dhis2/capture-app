@@ -1,11 +1,10 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -15,25 +14,24 @@ const getStyles = (theme: Theme) => ({
     },
     buttonRow: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap' as const,
         paddingTop: 10,
         marginLeft: '-8px',
     },
     buttonContainer: {
         paddingRight: theme.spacing.unit * 2,
     },
-});
-type Props = {
-    classes: {
-        contents: string,
-        buttonRow: string,
-        buttonContainer: string,
-        header: string,
+    header: {
+        fontSize: 18,
+        fontWeight: 500,
     },
-    onCancel: () => void,
+});
+
+type Props = {
+    onCancel: () => void;
 };
 
-class DataEntrySelectionsNoAccessPlain extends Component<Props> {
+class DataEntrySelectionsNoAccessPlain extends Component<Props & WithStyles<typeof getStyles>> {
     render() {
         const { classes, onCancel } = this.props;
         return (
@@ -49,8 +47,7 @@ class DataEntrySelectionsNoAccessPlain extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
-                            variant="raised"
-                            color="primary"
+                            primary
                             disabled
                         >
                             {i18n.t('Save')}
@@ -60,8 +57,7 @@ class DataEntrySelectionsNoAccessPlain extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
-                            variant="text"
-                            color="primary"
+                            secondary
                             onClick={onCancel}
                         >
                             {i18n.t('Cancel')}

@@ -1,4 +1,3 @@
-// @flow
 import type { RenderFoundation } from '../../../metaData';
 
 export function convertGeometryOut(dataEntryValue: any, foundation: RenderFoundation, customFeatureType: string) {
@@ -14,7 +13,7 @@ export function convertGeometryOut(dataEntryValue: any, foundation: RenderFounda
     };
 }
 
-export function getConvertGeometryIn(foundation: ?RenderFoundation) {
+export function getConvertGeometryIn(foundation: RenderFoundation | null) {
     return (value: any) => {
         if (!value || !foundation || value.type !== foundation.featureType) {
             return null;
