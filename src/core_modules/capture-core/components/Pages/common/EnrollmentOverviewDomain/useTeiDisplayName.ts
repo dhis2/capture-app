@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { pipe } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -7,14 +6,14 @@ import type { DataElement } from '../../../../metaData/DataElement';
 import { convertServerToClient, convertClientToView } from '../../../../converters';
 
 type Attribute = {
-    valueType: string,
-    attribute: string,
-    value: string,
+    valueType: string;
+    attribute: string;
+    value: string;
 };
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
-const convertValue = (attribute?: Attribute, dataElement) =>
+const convertValue = (attribute?: Attribute, dataElement?: DataElement) =>
     (attribute?.value ? convertFn(attribute.value, attribute.valueType, dataElement) : '');
 
 const getAttributesValues = (attributes: Array<Attribute>, first?: DataElement, second?: DataElement) => {
@@ -64,11 +63,13 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
     );
 
     const teiDisplayName = useMemo(
-        () =>
-            (data?.trackedEntities?.attributes && data?.trackedEntities?.trackedEntityType
-                ? deriveTeiName(data.trackedEntities.attributes, data.trackedEntities.trackedEntityType, teiId)
-                : ''),
-        [data?.trackedEntities?.attributes, data?.trackedEntities?.trackedEntityType, teiId],
+        () => {
+            const trackedEntity = data?.trackedEntities as any;
+            return (trackedEntity?.attributes && trackedEntity?.trackedEntityType
+                ? deriveTeiName(trackedEntity.attributes, trackedEntity.trackedEntityType, teiId)
+                : '');
+        },
+        [data?.trackedEntities, teiId],
     );
 
     return {
