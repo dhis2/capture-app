@@ -11,7 +11,6 @@ type Props = {
 type OnGetContainerClass = (props: any) => string | null;
 
 export const withCustomElementContainer = (onGetContainerClass?: OnGetContainerClass) =>
-    // $FlowFixMe[prop-missing] automated comment
     (InnerComponent: React.ComponentType<any>) =>
         class CustomElementContainerHOC extends React.Component<Props> {
             constructor(props: Props) {
