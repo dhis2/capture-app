@@ -1,4 +1,4 @@
-//
+
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { MultiOptionSetSelectFieldForCustomForm } from '../../Components';
 import { getOptionsForSelect } from './optionSetHelpers';

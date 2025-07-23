@@ -1,4 +1,4 @@
-//
+
 import log from 'loglevel';
 import { pipe, errorCreator } from 'capture-core-utils';
 import type { OptionSet } from '../../../../../metaData';

@@ -1,4 +1,4 @@
-//
+
 import moment from 'moment';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';

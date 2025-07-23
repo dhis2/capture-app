@@ -1,4 +1,4 @@
-//
+
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { ImageFieldForCustomForm } from '../../Components';

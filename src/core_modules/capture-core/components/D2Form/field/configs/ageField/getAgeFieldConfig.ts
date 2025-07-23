@@ -1,4 +1,4 @@
-//
+
 import moment from 'moment';
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';

@@ -1,4 +1,4 @@
-//
+
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { CoordinateFieldForForm } from '../../Components';

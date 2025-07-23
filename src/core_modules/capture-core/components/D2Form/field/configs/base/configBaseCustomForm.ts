@@ -1,4 +1,4 @@
-//
+
 import type { FieldConfig } from '../../../FormBuilder';
 import { getBaseConfigForField } from './configBase';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';

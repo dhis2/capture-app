@@ -1,4 +1,4 @@
-//
+
 import type { FieldConfig } from '../../../FormBuilder';
 
 import { convertPx, getBaseConfigForField } from './configBase';
