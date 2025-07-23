@@ -1,14 +1,13 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
 
 type Props = {
-    programId: string,
-    displayFrontPageList?: boolean,
-    trackedEntityName?: string,
-    page: string,
+    programId: string;
+    displayFrontPageList?: boolean;
+    trackedEntityName?: string;
+    page: string;
 };
 
 const DefaultFilterLabels = {
@@ -18,21 +17,21 @@ const DefaultFilterLabels = {
     cancelled: i18n.t('Cancelled enrollments'),
 };
 
-const getWorkingListLabel = (selectedTemplate, selectedTemplateId) => {
+const getWorkingListLabel = (selectedTemplate: any, selectedTemplateId: string) => {
     if (selectedTemplate && !selectedTemplate.isDefault) {
         return selectedTemplate.name;
     }
     if (selectedTemplateId && !selectedTemplate) {
-        return DefaultFilterLabels[selectedTemplateId];
+        return DefaultFilterLabels[selectedTemplateId as keyof typeof DefaultFilterLabels];
     }
     return i18n.t('Program overview');
 };
 
 export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props) => {
-    const workingListTemplates = useSelector(({ workingListsTemplates }) => workingListsTemplates?.teiList);
-    const workingListProgramId = useSelector(({ workingListsContext }) => workingListsContext?.teiList?.programIdView);
+    const workingListTemplates = useSelector(({ workingListsTemplates }: any) => workingListsTemplates?.teiList);
+    const workingListProgramId = useSelector(({ workingListsContext }: any) => workingListsContext?.teiList?.programIdView);
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
-    const selectedTemplate = templates?.find(({ id }) => id === selectedTemplateId);
+    const selectedTemplate = templates?.find(({ id }: any) => id === selectedTemplateId);
     const isSameProgram = workingListProgramId === programId;
 
     const label = useMemo(() => {

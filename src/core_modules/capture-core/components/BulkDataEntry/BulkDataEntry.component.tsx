@@ -1,8 +1,7 @@
-// @flow
 import React, { useCallback } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
-import type { Props } from './BulkDataEntry.types';
+import type { PlainProps } from './BulkDataEntry.types';
 import { BulkDataEntryPlugin } from './BulkDataEntryPlugin';
 import { BulkDataEntryBreadcrumb } from '../Breadcrumbs/BulkDataEntryBreadcrumb';
 import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
@@ -20,7 +19,7 @@ const BulkDataEntryPlain = ({
     page,
     trackedEntityIds,
     classes,
-}: Props) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
     const onComplete = useCallback(async () => {
