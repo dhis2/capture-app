@@ -18,8 +18,8 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             const { getComponent, getComponentProps, getValidatorContainers, getPropName } = settings;
 
             const Component = getComponent(this.props);
-            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props, fieldId));
-            const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props, fieldId)) || [];
+            const componentProps = this.reselectComponentProps(getComponentProps?.(this.props, fieldId));
+            const validatorContainers = getValidatorContainers?.(this.props, fieldId) || [];
             const key = getPropName(this.props, fieldId);
 
             const handleRef = (instance: any) => {
@@ -51,7 +51,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
 
         getFieldElementFromProps(fieldId: string) {
             const { getMeta } = settings;
-            const meta = getMeta && getMeta(this.props);
+            const meta = getMeta?.(this.props);
             const fieldContainer = this.getFieldElement(fieldId);
             const metaData = meta ? {
                 placement: meta.placement ?? placements.TOP,
@@ -67,9 +67,9 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
         getFields() {
             const { getIsHidden, getFieldIds } = settings;
             const { fields } = this.props;
-            const fieldIds = getFieldIds ? getFieldIds(this.props) : [];
+            const fieldIds = getFieldIds?.(this.props) || [];
 
-            if (getIsHidden && getIsHidden(this.props)) return fields ? [...fields] : [];
+            if (getIsHidden?.(this.props)) return fields ? [...fields] : [];
 
             const otherFields = fieldIds ? [...fieldIds.map((fieldId: any) => this.getFieldElementFromProps(fieldId))] : [];
             return fields ? [...otherFields, ...fields] : [...otherFields];

@@ -9,7 +9,7 @@ import type { Props, Settings } from './withAOCFieldBuilder.types';
 const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, selectedOrgUnitId } = props;
-        const hideAOC = settings && settings.hideAOC?.(props);
+        const hideAOC = settings?.hideAOC?.(props);
         const [categories, setCategories] = useState<any>(null);
         const cancelablePromiseRef = useRef<any>(null);
         const { programCategory, isLoading } = useCategoryCombinations(programId, hideAOC);
@@ -47,7 +47,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
 
         const loadCagoryOptions = useCallback(() => {
             setCategories([]);
-            cancelablePromiseRef.current && cancelablePromiseRef.current.cancel();
+            cancelablePromiseRef.current?.cancel();
 
             let currentRequestCancelablePromises: any;
 
@@ -100,13 +100,13 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         }, [loadCagoryOptions, hideAOC]);
 
         useEffect(() => () => {
-            cancelablePromiseRef.current && cancelablePromiseRef.current.cancel();
+            cancelablePromiseRef.current?.cancel();
             cancelablePromiseRef.current = null;
         }, []);
 
         if (hideAOC) { return <InnerComponent{...props} />; }
         return (
-            !isLoading && categories ? <InnerComponent
+            (!isLoading && categories) ? <InnerComponent
                 {...props}
                 programCategory={programCategory}
                 categories={categories}
