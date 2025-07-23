@@ -115,7 +115,7 @@ export const cancelNewEventInitializeWorkingLists = () =>
 export const cancelOpenNewEventInDataEntry = () =>
     actionCreator(actionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL)();
 
-export const setNewEventSaveTypes = (newSaveTypes?: typeof newEventSaveTypes[keyof typeof newEventSaveTypes]) =>
+export const setNewEventSaveTypes = (newSaveTypes: Array<typeof newEventSaveTypes[keyof typeof newEventSaveTypes]> | null) =>
     actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
 
 export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>

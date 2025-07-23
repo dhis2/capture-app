@@ -518,7 +518,7 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
+const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry) as any;
 
 
 type Props = {
@@ -540,7 +540,7 @@ type Props = {
     theme: any,
     formHorizontal: boolean | null,
     recentlyAddedRelationshipId?: string | null,
-    onScrollToRelationships?: () => void;
+    onScrollToRelationships: () => void;
 };
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements],
@@ -574,6 +574,9 @@ const dataEntrySectionDefinitions = {
 };
 
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
+    fieldOptions: { theme: any };
+    dataEntrySections: { [key: string]: DataEntrySection };
+    relationshipsInstance: HTMLDivElement | null = null;
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
@@ -589,7 +592,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
     componentDidMount() {
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
             this.relationshipsInstance.scrollIntoView();
-            this.props.onScrollToRelationships && this.props.onScrollToRelationships();
+            this.props.onScrollToRelationships();
         }
     }
 
@@ -615,10 +618,6 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
             this.props.onSaveEventInStage(itemId, dataEntryId, formFoundation, true);
         }
     }
-
-    fieldOptions: { theme: any };
-    dataEntrySections: { [key: string]: DataEntrySection };
-    relationshipsInstance: HTMLDivElement | null = null;
 
     getSavingText() {
         const { orgUnitName, programName } = this.props;
@@ -668,6 +667,16 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
                     <WrappedDataEntry
                         id={'singleEvent'}
                         onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
+                        onUpdateFormField={onUpdateField(orgUnit)}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
+                        selectedOrgUnitId={orgUnit?.id}
+                        onSave={this.handleSave}
+                        fieldOptions={this.fieldOptions}
+                        dataEntrySections={this.dataEntrySections}
+                        relationshipsRef={this.setRelationshipsInstance}
+                        orgUnit={orgUnit}
+                        // @ts-expect-error - keeping original functionality as before ts rewrite
+                        orgUnitId={orgUnit?.id}
                         {...passOnProps}
                     />
                 </div>

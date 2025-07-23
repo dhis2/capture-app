@@ -87,7 +87,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes?: typeof newEventSaveTypes[keyof typeof newEventSaveTypes]) => {
+    onSetSaveTypes: (newSaveTypes: Array<typeof newEventSaveTypes[keyof typeof newEventSaveTypes]> | null) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {

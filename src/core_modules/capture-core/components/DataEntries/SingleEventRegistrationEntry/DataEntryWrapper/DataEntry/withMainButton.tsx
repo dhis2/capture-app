@@ -56,7 +56,7 @@ const buttonDefinitions = {
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
-        getButtonDefinition = (type: string) => buttonDefinitions[type](this.props)
+        getButtonDefinition = (type: typeof buttonTypes[keyof typeof buttonTypes]) => buttonDefinitions[type](this.props)
 
         getFormHorizontalButtons = (dataEntryHasChanges: boolean | null, hasRecentlyAddedEvents: boolean | null) => {
             const buttons = [
