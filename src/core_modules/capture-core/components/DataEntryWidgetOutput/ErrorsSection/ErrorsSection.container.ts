@@ -7,9 +7,7 @@ const makeStateToProps = () => {
     const mapStateToProps = (state: any, props: { dataEntryKey: string }) => {
         const key = props.dataEntryKey;
         const messagesContainer = state.rulesEffectsGeneralErrors[key];
-        const showOnComplete = state.dataEntriesUI &&
-        state.dataEntriesUI[key] &&
-        state.dataEntriesUI[key].saveAttempted;
+        const showOnComplete = state.dataEntriesUI?.[key]?.saveAttempted;
 
         return {
             errors: getVisibleErrors({

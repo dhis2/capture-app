@@ -8,9 +8,7 @@ const makeStateToProps = () => {
     const mapStateToProps = (state: any, props: { dataEntryKey: string }) => {
         const key = props.dataEntryKey;
         const messagesContainer = state.rulesEffectsGeneralWarnings[key];
-        const showOnComplete = state.dataEntriesUI &&
-        state.dataEntriesUI[key] &&
-        state.dataEntriesUI[key].saveAttempted;
+        const showOnComplete = state.dataEntriesUI?.[key]?.saveAttempted;
 
         const rulesWarnings = getVisibleMessages({
             messagesContainer,

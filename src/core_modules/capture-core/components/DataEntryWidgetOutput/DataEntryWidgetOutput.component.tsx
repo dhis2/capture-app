@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
