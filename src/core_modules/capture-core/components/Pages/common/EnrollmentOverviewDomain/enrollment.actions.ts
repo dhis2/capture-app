@@ -1,6 +1,4 @@
 import { actionCreator } from '../../../../actions/actions.utils';
-import type { ApiEnrollment } from '../../../../../capture-core-utils/types/api-types';
-import type { AttributeValue } from './useCommonEnrollmentDomainData/useCommonEnrollmentDomainData.types';
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
@@ -26,7 +24,7 @@ export const enrollmentSiteActionTypes = {
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
 };
 
-export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: Array<AttributeValue>) =>
+export const setCommonEnrollmentSiteData = (enrollment: any, attributeValues: any) =>
     actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues });
 
 export const updateEnrollmentDate = (enrollmentDate: string) =>
