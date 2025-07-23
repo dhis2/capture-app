@@ -1,11 +1,10 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getUserDataStorageController, USER_DATA_STORES } from 'capture-core/storageControllers';
 
-export type ActiveList = {|
-    configKey: string,
-|};
+export type ActiveList = {
+    configKey: string;
+};
 
 export const getBulkDataEntry = async (programId: string) => {
     try {
@@ -17,7 +16,7 @@ export const getBulkDataEntry = async (programId: string) => {
     }
 };
 
-export const setBulkDataEntry = async (bulkDataEntry: { id: string, activeList: ActiveList }) => {
+export const setBulkDataEntry = async (bulkDataEntry: { id: string; activeList: ActiveList }) => {
     try {
         const storageController = getUserDataStorageController();
         await storageController.set(USER_DATA_STORES.BULK_DATA_ENTRY, bulkDataEntry);

@@ -1,11 +1,10 @@
-// @flow
 import { z } from 'zod';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
-import type { DataStoreConfiguration, BulkDataEntryConfigurations } from '../bulkDataEntry.types';
+import type { DataStoreConfiguration } from '../bulkDataEntry.types';
 
 const bulkDataEntryDatastoreSchema = z.object({
     version: z.number(),
@@ -21,7 +20,7 @@ const bulkDataEntryDatastoreSchema = z.object({
     ),
 });
 
-const validateStructure = (data) => {
+const validateStructure = (data: any) => {
     const supportedVersion = 1;
     const { success, error } = bulkDataEntryDatastoreSchema.safeParse(data);
 
@@ -40,7 +39,7 @@ const validateStructure = (data) => {
     };
 };
 
-const getLocalizedString = (field: { [string]: string }, locale: string): string => {
+const getLocalizedString = (field: Record<string, string>, locale: string): string => {
     if (field[locale]) {
         return field[locale];
     }
@@ -48,12 +47,7 @@ const getLocalizedString = (field: { [string]: string }, locale: string): string
     return field[Object.keys(field)[0]];
 };
 
-export const useBulkDataEntryDatastoreConfigurations = (
-    programId: string,
-): {|
-    bulkDataEntryConfigurations?: BulkDataEntryConfigurations,
-    isLoading: boolean,
-|} => {
+export const useBulkDataEntryDatastoreConfigurations = (programId: string) => {
     const { locale } = useUserLocale();
     const {
         data: configExists,
@@ -63,7 +57,7 @@ export const useBulkDataEntryDatastoreConfigurations = (
     } = useApiMetadataQuery<any>(
         ['dataStore', 'capture'],
         { resource: 'dataStore/capture' },
-        { select: (captureKeys: ?Array<string>) => captureKeys?.includes('bulkDataEntry') },
+        { select: (captureKeys: Array<string> | null) => captureKeys?.includes('bulkDataEntry') },
     );
 
     const { data, isLoading, isError, error } = useApiMetadataQuery<any>(
@@ -71,7 +65,7 @@ export const useBulkDataEntryDatastoreConfigurations = (
         { resource: 'dataStore/capture/bulkDataEntry' },
         {
             enabled: !!configExists && !!programId,
-            select: (dataStoreConfigurationRaw) => {
+            select: (dataStoreConfigurationRaw: any) => {
                 const { data: dataStoreConfigurationValidated, validationError } =
                     validateStructure(dataStoreConfigurationRaw);
 
@@ -80,7 +74,7 @@ export const useBulkDataEntryDatastoreConfigurations = (
                     return [];
                 }
 
-                return dataStoreConfigurationValidated?.config.reduce((acc, configuration) => {
+                return dataStoreConfigurationValidated?.config.reduce((acc: DataStoreConfiguration[], configuration: any) => {
                     if (configuration.programId === programId) {
                         const configurationWithLocale: DataStoreConfiguration = {
                             ...configuration,
