@@ -1,7 +1,6 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
@@ -46,7 +45,7 @@ const NewEventDataEntryWrapperPlain = ({
     classes,
     formHorizontal,
     onFormLayoutDirectionChange,
-}: PlainProps) => {
+}: PlainProps & WithStyles<typeof getStyles>) => {
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
     const { formFoundation, stage, isLoading } = useMetadataForProgramStage({ programId });

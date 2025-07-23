@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const recentlyAddedEventsActionTypes = {
@@ -9,8 +8,7 @@ export const recentlyAddedEventsActionTypes = {
     LIST_RESET: 'ListReset',
 };
 
-// $FlowFixMe[missing-annot] automated comment
-export const newRecentlyAddedEvent = (event, eventValues) =>
+export const newRecentlyAddedEvent = (event: any, eventValues: any) =>
     actionCreator(recentlyAddedEventsActionTypes.NEW_RECENTLY_ADDED_EVENT)({ event, eventValues });
 
 export const prependListItem =
