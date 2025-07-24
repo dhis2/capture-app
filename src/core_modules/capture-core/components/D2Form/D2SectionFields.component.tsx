@@ -141,6 +141,15 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
     }
 
+    validateFull(formBuilderInstance: FormBuilder) {
+        const formBuilderIsValid = formBuilderInstance.isValid();
+        if (!formBuilderIsValid) {
+            return false;
+        }
+
+        return this.rulesIsValid();
+    }
+
     isValid(options?: { isCompleting: boolean } | null) {
         const formBuilderInstance = this.formBuilderInstance;
         if (!formBuilderInstance) {
@@ -195,10 +204,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return invalidFields;
     }
 
-    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => {
-        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
-    }
-
     handleUpdateField(
         value: any,
         uiState: any,
@@ -207,6 +212,10 @@ export class D2SectionFieldsComponent extends Component<Props> {
         updateCompletePromise: Promise<any> | null,
     ) {
         this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
+    }
+
+    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
     }
 
     buildRulesCompulsoryErrors() {
@@ -249,15 +258,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
                 rulesDisabled: this.props.rulesDisabledFields[formField.id],
             },
         }));
-    }
-
-    validateFull(formBuilderInstance: FormBuilder) {
-        const formBuilderIsValid = formBuilderInstance.isValid();
-        if (!formBuilderIsValid) {
-            return false;
-        }
-
-        return this.rulesIsValid();
     }
 
     render() {

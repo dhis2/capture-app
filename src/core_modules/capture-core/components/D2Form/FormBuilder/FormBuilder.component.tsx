@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-
+/* eslint-disable react/sort-comp */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { v4 as uuid } from 'uuid';

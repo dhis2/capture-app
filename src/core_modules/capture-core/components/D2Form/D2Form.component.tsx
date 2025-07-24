@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -10,6 +11,17 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         super(props);
         this.name = 'D2Form';
         this.sectionInstances = new Map();
+    }
+
+    validateFormScrollToFirstFailedField(options: any) {
+        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
+        if (isValid) {
+            return true;
+        }
+
+        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
+        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
+        return false;
     }
 
     setSectionInstance(instance: any | null, id: string) {
@@ -28,17 +40,6 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
 
     getFormBuilderId(sectionId: string) {
         return `${this.props.id}-${sectionId}`;
-    }
-
-    validateFormScrollToFirstFailedField(options: any) {
-        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
-        if (isValid) {
-            return true;
-        }
-
-        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
-        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
-        return false;
     }
 
     validateFormIncludeSectionFailedFields(options: any) {
