@@ -1,6 +1,4 @@
-// @flow
 import { useEffect } from 'react';
-// $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { setCommonEnrollmentSiteData } from '../enrollment.actions';
 import type { Output } from './useCommonEnrollmentDomainData.types';
@@ -13,7 +11,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollmentId: storedEnrollmentId,
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
-    } = useSelector(({ enrollmentDomain }) => enrollmentDomain);
+    } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain);
 
     const { data, error } = useApiDataQuery(
         ['stages&event', 'enrollmentData', teiId, programId, enrollmentId],
@@ -30,12 +28,12 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             staleTime: 0,
             cacheTime: 0,
         },
-    );
+    ) as any;
 
     const fetchedEnrollmentData = {
         reference: data,
         enrollment: data?.enrollments
-            ?.find(enrollment => enrollment.enrollment === enrollmentId),
+            ?.find((enrollment: any) => enrollment.enrollment === enrollmentId),
         attributeValues: data?.attributes,
     };
 
@@ -44,7 +42,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             dispatch(setCommonEnrollmentSiteData(
                 fetchedEnrollmentData.enrollment,
                 fetchedEnrollmentData.attributeValues
-                    .map(({ attribute, value }) => ({ id: attribute, value })),
+                    .map(({ attribute, value }: any) => ({ id: attribute, value })),
             ));
         }
     }, [

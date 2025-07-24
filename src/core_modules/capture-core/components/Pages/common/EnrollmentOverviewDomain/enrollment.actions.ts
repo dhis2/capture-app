@@ -1,6 +1,4 @@
-// @flow
 import { actionCreator } from '../../../../actions/actions.utils';
-import type { EventReducerProps } from '../../../WidgetEnrollment/enrollment.types';
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
@@ -26,7 +24,7 @@ export const enrollmentSiteActionTypes = {
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
 };
 
-export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
+export const setCommonEnrollmentSiteData = (enrollment: any, attributeValues: any) =>
     actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues });
 
 export const updateEnrollmentDate = (enrollmentDate: string) =>
@@ -39,7 +37,7 @@ export const updateIncidentDate = (incidentDate: string) =>
         incidentDate,
     });
 
-export const updateEnrollmentEvent = (eventId: string, eventData: Object) =>
+export const updateEnrollmentEvent = (eventId: string, eventData: any) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT)({
         eventId,
         eventData,
@@ -55,7 +53,7 @@ export const commitEnrollmentEvent = (eventId: string) =>
         eventId,
     });
 
-export const updateOrAddEnrollmentEvents = ({ events }: EventReducerProps) =>
+export const updateOrAddEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_OR_ADD_ENROLLMENT_EVENTS)({ events });
 
 export const deleteEnrollmentEvent = (eventId: string) =>
@@ -71,13 +69,13 @@ export const updateEnrollmentEventStatus = (eventId: string, status: string, upd
         updatedAt,
     });
 
-export const rollbackEnrollmentEvents = ({ events }: EventReducerProps) =>
+export const rollbackEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENTS)({ events });
 
-export const commitEnrollmentEvents = ({ events }: EventReducerProps) =>
+export const commitEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENTS)({ events });
 
-export const updateEnrollmentEventWithoutId = (uid: string, eventData: Object) =>
+export const updateEnrollmentEventWithoutId = (uid: string, eventData: any) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT_WITHOUT_ID)({
         eventData,
         uid,
@@ -95,7 +93,7 @@ export const showEnrollmentError = ({ message }: { message: string }) =>
         message,
     });
 
-export const updateEnrollmentAndEvents = (enrollment: ApiEnrollment) =>
+export const updateEnrollmentAndEvents = (enrollment: any) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_AND_EVENTS)({
         enrollment,
     });
@@ -116,5 +114,5 @@ export const setExternalEnrollmentStatus = (status: string) =>
         status,
     });
 
-export const addPersistedEnrollmentEvents = ({ events }: EventReducerProps) =>
+export const addPersistedEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.ADD_PERSISTED_ENROLLMENT_EVENTS)({ events });

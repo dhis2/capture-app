@@ -1,23 +1,20 @@
-// @flow
 import { useEffect, useMemo, useState } from 'react';
 import { convertValue } from '../../../../../converters/serverToClient';
 import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound, type TrackerProgram } from '../../../../../metaData';
 import type { UseRuleEffectsInput } from './useRuleEffects.types';
 
-// $FlowFixMe
 const convertDate = (date: string): string => convertValue(date, dataElementTypes.DATE);
 
 const getDataElementsInProgram = (program: TrackerProgram) =>
     [...program.stages.values()]
-        // $FlowFixMe
-        .reduce((acc, { stageForm }) => ({
+        .reduce((acc, { stageForm }: any) => ({
             ...acc,
             ...stageForm.getElementsById(),
         }), {});
 
-const getClientFormattedDataValuesAsObject = (dataValues, elementsById) =>
-    dataValues.reduce((acc, { dataElement: id, value }) => {
+const getClientFormattedDataValuesAsObject = (dataValues: any, elementsById: any) =>
+    dataValues.reduce((acc: any, { dataElement: id, value }: any) => {
         const dataElement = elementsById[id];
         if (dataElement) {
             acc[id] = convertValue(value, elementsById[id].type);
@@ -25,10 +22,10 @@ const getClientFormattedDataValuesAsObject = (dataValues, elementsById) =>
         return acc;
     }, {});
 
-const useEventsData = (enrollment, program) => {
+const useEventsData = (enrollment: any, program: TrackerProgram) => {
     const elementsById = useMemo(() => getDataElementsInProgram(program), [program]);
 
-    return useMemo(() => enrollment && enrollment.events.map(event => ({
+    return useMemo(() => enrollment && enrollment.events.map((event: any) => ({
         eventId: event.event,
         programId: event.program,
         programStageId: event.programStage,
@@ -43,7 +40,7 @@ const useEventsData = (enrollment, program) => {
     })), [elementsById, enrollment]);
 };
 
-const useEnrollmentData = enrollment => useMemo(() => {
+const useEnrollmentData = (enrollment: any) => useMemo(() => {
     if (!enrollment) {
         return undefined;
     }
@@ -60,16 +57,16 @@ const useEnrollmentData = enrollment => useMemo(() => {
 }, [enrollment]);
 
 export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeValues }: UseRuleEffectsInput) => {
-    const [ruleEffects, setRuleEffects] = useState(undefined);
+    const [ruleEffects, setRuleEffects] = useState<any>(undefined);
     const attributesObject = useMemo(() =>
-        program.attributes.reduce((acc, attribute) => {
+        program.attributes.reduce((acc: any, attribute: any) => {
             acc[attribute.id] = attribute;
             return acc;
         }, {}), [program.attributes]);
 
     const attributeValues = useMemo(() => apiAttributeValues &&
         apiAttributeValues
-            .reduce((acc, { id, value }) => {
+            .reduce((acc: any, { id, value }) => {
                 acc[id] = convertValue(value, attributesObject[id]?.type);
                 return acc;
             }, {}), [apiAttributeValues, attributesObject]);
