@@ -17,10 +17,6 @@ import { enrollmentAccessLevels, serverErrorMessages } from '../EnrollmentPage.c
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { getAncestorIds } from '../../../../metadataRetrieval/orgUnitName';
 
-type InputObservable = any;
-type ReduxStore = any;
-type ApiUtils = any;
-
 const sortByDate = (enrollments: any[] = []) => enrollments.sort((a: any, b: any) =>
     moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
 
@@ -141,7 +137,7 @@ const handleErrorsFromOlderBackends = (error: any) => {
     return showErrorViewOnEnrollmentPage({ error: errorMessage });
 };
 
-export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const fetchEnrollmentsEpic = (action$: any, store: any, { querySingleResource }: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
         concatMap(() => {
