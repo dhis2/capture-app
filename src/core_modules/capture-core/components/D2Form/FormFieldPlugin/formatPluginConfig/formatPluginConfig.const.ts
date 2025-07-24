@@ -1,10 +1,8 @@
-// @flow
-
-type Attributes = {| [id: string]: {
+type Attributes = { [id: string]: {
         IdFromPlugin: string;
         IdFromApp: string;
-    }
-|}
+    };
+};
 
 export const PluginConfigConvertFns = Object.freeze({
     attributeValues: (value: any, attributes: Attributes) => {

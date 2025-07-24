@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { FormFieldPluginComponent } from './FormFieldPlugin.component';
 import type { ContainerProps } from './FormFieldPlugin.types';
