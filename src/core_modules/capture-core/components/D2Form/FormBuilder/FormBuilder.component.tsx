@@ -110,17 +110,17 @@ export class FormBuilder extends React.Component<Props> {
             const fieldUI = fieldsUI[fieldId];
             accAsyncUIState[fieldId] = FormBuilder.getFieldAsyncUIState(fieldUI);
             return accAsyncUIState;
-        }, {} as { [id: string]: any });
+        }, {});
     }
 
     static getFieldAsyncUIState(fieldUI: FieldUI) {
         const ignoreKeys = ['valid', 'errorMessage', 'touched'];
         return Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
             if (!ignoreKeys.includes(propId)) {
-                accFieldAsyncUIState[propId] = fieldUI[propId as keyof FieldUI];
+                accFieldAsyncUIState[propId] = fieldUI[propId];
             }
             return accFieldAsyncUIState;
-        }, {} as any);
+        }, {});
     }
 
     static updateAsyncUIState(
@@ -186,8 +186,8 @@ export class FormBuilder extends React.Component<Props> {
                         validationContext,
                         postProcessAsyncValidatonInitiation: handleIsValidatingInternal,
                     });
-                } catch (reason) {
-                    if (reason && isObject(reason) && (reason as any).isCanceled) {
+                } catch (reason: any) {
+                    if (reason && isObject(reason) && reason.isCanceled) {
                         validationData = null;
                     } else {
                         validationData = {
@@ -237,7 +237,7 @@ export class FormBuilder extends React.Component<Props> {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
             if (this.props.validateIfNoUIData) {
-                this.validateAllFields(this.props);
+                this.validateAllFields(newProps);
             }
         } else {
             this.asyncUIState =
@@ -455,6 +455,21 @@ export class FormBuilder extends React.Component<Props> {
         }
     }
 
+    isValid(typesToCheck?: Array<string> | null) {
+        return Object
+            .keys(this.props.fieldsUI)
+            .every((key) => {
+                const fieldUI = this.props.fieldsUI[key];
+                if (typesToCheck) {
+                    const isCheckable = typesToCheck.includes(fieldUI.errorType || '');
+                    if (!isCheckable) {
+                        return true;
+                    }
+                }
+                return fieldUI.valid;
+            });
+    }
+
     getInvalidFields(externalInvalidFields?: { [id: string]: boolean } | null) {
         const propFields = this.props.fields;
         return propFields.reduce((invalidFieldsContainer, field) => {
@@ -474,21 +489,6 @@ export class FormBuilder extends React.Component<Props> {
             }
             return invalidFieldsContainer;
         }, [] as Array<{ prop: FieldConfig; instance: any; uiState: FieldUI }>);
-    }
-
-    isValid(typesToCheck?: Array<string> | null) {
-        return Object
-            .keys(this.props.fieldsUI)
-            .every((key) => {
-                const fieldUI = this.props.fieldsUI[key];
-                if (typesToCheck) {
-                    const isCheckable = typesToCheck.includes(fieldUI.errorType || '');
-                    if (!isCheckable) {
-                        return true;
-                    }
-                }
-                return fieldUI.valid;
-            });
     }
 
     renderPlugin = (
@@ -534,14 +534,22 @@ export class FormBuilder extends React.Component<Props> {
             fieldsUI,
             validationAttempted,
             id,
+            onFieldsValidated,
+            onUpdateField,
+            onUpdateFieldAsync,
+            onUpdateFieldUIOnly,
+            validateIfNoUIData,
+            children,
+            onRenderDivider: extractOnRenderDivider,
+            onGetContainerProps: extractOnGetContainerProps,
+            onIsValidating,
+            onGetValidationContext,
+            loadNr,
             onPostProcessErrorMessage,
-        } = this.props;
-
-        if (field.plugin) {
-            return this.renderPlugin(field);
-        }
+            ...passOnProps } = this.props;
 
         const props = field.props || {};
+        const fieldUI = fieldsUI[field.id] || {};
         const value = values[field.id];
 
         const commitFieldHandler = this.commitFieldUpdateFromDataElement.bind(this, field.id);
@@ -557,57 +565,67 @@ export class FormBuilder extends React.Component<Props> {
             asyncProps.asyncUIState = this.asyncUIState[field.id];
         }
 
-        const fieldUI = fieldsUI[field.id] || {};
-        const validationAttemptedForField = validationAttempted || fieldUI.touched;
-
-        let errorMessage: string | Array<string> | Array<{[key: string]: string}> | null | undefined = fieldUI.errorMessage;
-        if (onPostProcessErrorMessage && errorMessage) {
-            const processedMessage = onPostProcessErrorMessage({
-                errorMessage,
-                errorType: fieldUI.errorType || null,
+        const errorMessage = onPostProcessErrorMessage && fieldUI.errorMessage ?
+            onPostProcessErrorMessage({
+                errorMessage: fieldUI.errorMessage,
+                errorType: fieldUI.errorType,
                 errorData: fieldUI.errorData,
-                id,
+                id: `${id}-${field.id}`,
                 fieldId: field.id,
                 fieldLabel: props.label,
-            });
-            if (typeof processedMessage === 'string' || Array.isArray(processedMessage)) {
-                errorMessage = processedMessage;
-            }
-        }
-
-        const containerProps = onGetContainerProps ? onGetContainerProps(index, fields.length, field) : {};
+            }) : fieldUI.errorMessage;
 
         return (
             <div
                 key={field.id}
-                ref={(fieldDomElement) => { this.setFieldInstance(fieldDomElement, field.id); }}
-                {...containerProps}
+                className={defaultClasses.fieldOuterContainer}
+                data-test={'form-field'}
             >
-                <field.component
-                    value={value}
-                    valid={validationAttemptedForField ? fieldUI.valid : true}
-                    errorMessage={validationAttemptedForField ? errorMessage : null}
-                    validatingMessage={fieldUI.validatingMessage}
-                    {...props}
-                    {...commitPropObject}
-                    {...asyncProps}
-                />
+                <div
+                    {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
+                    data-test={`form-field-${field.id}`}
+                >
+                    <field.component
+                        ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
+                        value={value}
+                        errorMessage={errorMessage}
+                        touched={fieldUI.touched}
+                        validationAttempted={validationAttempted}
+                        validatingMessage={fieldUI.validatingMessage}
+                        {...commitPropObject}
+                        {...props}
+                        {...passOnProps}
+                        {...asyncProps}
+                    />
+                </div>
+
                 {onRenderDivider && onRenderDivider(index, fields.length, field)}
             </div>
         );
     }
 
-    render() {
-        const { children, fields } = this.props;
+    renderFields() {
+        const { fields, children, onRenderDivider, onGetContainerProps } = this.props;
 
         if (children) {
             return children(this.renderField, fields);
         }
+        return fields.map(
+            (field, index) => {
+                if (field.plugin && field.props) {
+                    return this.renderPlugin(field);
+                }
 
+                return this.renderField(field, index, onRenderDivider, onGetContainerProps);
+            },
+        );
+    }
+
+    render() {
         return (
-            <div className={defaultClasses.form}>
-                {fields.map((field, index) => this.renderField(field, index))}
-            </div>
+            <React.Fragment>
+                {this.renderFields()}
+            </React.Fragment>
         );
     }
 }

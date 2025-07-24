@@ -8,7 +8,7 @@ export type ErrorData = {
 
 export type PostProcessErrorMessage = (params: {
     errorMessage: string | Array<string> | Array<{[key: string]: string}>;
-    errorType: string | null;
+    errorType?: string | null;
     errorData?: ErrorData;
     id: string;
     fieldId: string;

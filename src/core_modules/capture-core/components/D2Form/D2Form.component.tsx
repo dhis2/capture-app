@@ -173,5 +173,3 @@ export const D2FormComponent = (props: Props) => {
         />
     );
 };
-
-export { D2Form };

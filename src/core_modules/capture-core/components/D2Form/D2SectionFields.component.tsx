@@ -62,7 +62,7 @@ type Props = {
     formHorizontal: boolean,
     fieldOptions?: any | null,
     customForm: CustomForm,
-    validationStrategy: any,
+    validationStrategy: typeof validationStrategies[keyof typeof validationStrategies],
     loadNr: number,
     viewMode?: boolean | null,
     querySingleResource: QuerySingleResource,
@@ -299,5 +299,3 @@ export class D2SectionFieldsComponent extends Component<Props> {
         );
     }
 }
-
-export { D2SectionFieldsComponent as D2SectionFields };
