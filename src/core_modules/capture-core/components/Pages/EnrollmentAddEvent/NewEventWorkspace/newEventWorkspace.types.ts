@@ -1,0 +1,17 @@
+import type { WithStyles } from '@material-ui/core';
+import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
+
+export type Props = {
+    programId: string;
+    stageId: string;
+    orgUnitId: string;
+    teiId: string;
+    enrollmentId: string;
+    dataEntryHasChanges: boolean;
+    widgetReducerName: string;
+    rulesExecutionDependencies: Record<string, unknown>;
+    onSave: ExternalSaveHandler;
+    onCancel: () => void;
+};
+
+export type PlainProps = Props & WithStyles<any>;

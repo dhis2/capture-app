@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -16,7 +15,7 @@ import type { PlainProps, Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
-const styles = () => ({
+const styles: Readonly<any> = () => ({
     innerWrapper: {
         padding: `0 ${spacersNum.dp16}px`,
     },
@@ -35,13 +34,13 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: PlainProps) => {
     const { tab } = useLocationQuery();
-    const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
-    const tempMode = useRef(undefined);
+    const tempMode = useRef<string | undefined>(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
 
-    const onHandleSwitchTab = (newMode) => {
+    const onHandleSwitchTab = (newMode: string) => {
         if (dataEntryHasChanges) {
             setWarningVisible(true);
             tempMode.current = newMode;
@@ -95,7 +94,7 @@ const NewEventWorkspacePlain = ({
                         }
                         onSave={onSave}
                         onCancel={onCancel}
-                        {...passOnProps}
+                        {...passOnProps as any}
                     />}
                     {mode === tabMode.SCHEDULE && <WidgetEventSchedule
                         programId={programId}
@@ -125,6 +124,4 @@ const NewEventWorkspacePlain = ({
     );
 };
 
-export const NewEventWorkspace: ComponentType<
-    Props,
-> = withStyles(styles)(NewEventWorkspacePlain);
+export const NewEventWorkspace: ComponentType<Props> = withStyles(styles)(NewEventWorkspacePlain) as ComponentType<Props>;

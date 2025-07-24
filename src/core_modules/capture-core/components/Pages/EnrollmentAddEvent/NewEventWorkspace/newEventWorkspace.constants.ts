@@ -1,5 +1,5 @@
-export const tabMode = Object.freeze({
+export const tabMode = {
     REPORT: 'REPORT',
     SCHEDULE: 'SCHEDULE',
     REFER: 'REFER',
-});
+};
