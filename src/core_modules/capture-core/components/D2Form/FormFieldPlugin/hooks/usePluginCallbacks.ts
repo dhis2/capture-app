@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { useCallback } from 'react';
 import type { SetFieldValueProps, UsePluginCallbacksProps } from '../FormFieldPlugin.types';

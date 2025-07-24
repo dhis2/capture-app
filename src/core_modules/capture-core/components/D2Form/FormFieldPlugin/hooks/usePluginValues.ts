@@ -1,4 +1,3 @@
-// @flow
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import type { MetadataByPluginId, PluginContext } from '../FormFieldPlugin.types';
@@ -8,7 +7,7 @@ export const usePluginValues = (
     metadataByPluginId: MetadataByPluginId,
     pluginContext: PluginContext = {},
 ) => {
-    const formValuesRedux = useSelector(({ formsValues }) => formsValues[formId]);
+    const formValuesRedux = useSelector((state: any) => state.formsValues[formId]);
 
     const formValues = useMemo(() => {
         if (!formValuesRedux) {
@@ -17,7 +16,6 @@ export const usePluginValues = (
 
         return Object.entries(metadataByPluginId)
             .reduce((acc, [pluginId, metadata]) => {
-                // $FlowFixMe - flow does not understand that metadata is a dataElement
                 const value = formValuesRedux[metadata.id];
                 if (value) {
                     acc[pluginId] = value;
@@ -28,7 +26,6 @@ export const usePluginValues = (
 
     const contextValues = useMemo(() => Object.entries(pluginContext)
         .reduce((acc, [key, value]) => {
-            // $FlowFixMe
             acc[key] = value.value;
             return acc;
         }, {}), [pluginContext]);

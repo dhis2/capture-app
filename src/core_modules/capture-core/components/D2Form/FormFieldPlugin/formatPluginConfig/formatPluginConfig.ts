@@ -1,14 +1,13 @@
-// @flow
 import { PluginConfigConvertFns } from './formatPluginConfig.const';
 import type { PluginFormFieldMetadata } from '../FormFieldPlugin.types';
 import type { DataElement } from '../../../../metaData';
 
-type FormattedAttributes = {| [key: string]: any |};
+type FormattedAttributes = { [key: string]: any };
 
-type FormatOptions = {|
-    keysToOmit?: Array<string>,
-    attributes?: FormattedAttributes,
-|}
+type FormatOptions = {
+    keysToOmit?: string[];
+    attributes?: FormattedAttributes;
+};
 
 export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
     dataElement: DataElement | PluginFormFieldMetadata,
@@ -50,6 +49,5 @@ export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
             return acc;
         }, {});
 
-    // $FlowFixMe
-    return removeUnderscoreFromObjectAttributes(dataElement);
+    return removeUnderscoreFromObjectAttributes(dataElement) as TConfigReturn;
 };
