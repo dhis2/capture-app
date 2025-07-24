@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,7 +34,7 @@ const useComponentLifecycle = () => {
     const {
         enrollmentPageStatus,
         programId: enrollmentProgramId,
-    } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
 
     const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, autoEnrollmentId } = useEnrollmentInfo(enrollmentId, programId, teiId);
     useEffect(() => {
@@ -70,7 +69,7 @@ const useComputedEnrollmentPageStatus = () => {
     const {
         enrollmentPageStatus,
         programId: reduxProgramId,
-    } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
 
     const { teiId, programId, enrollmentId } = useLocationQuery();
     const { scopeType } = useScopeInfo(programId);
@@ -94,12 +93,12 @@ const useComputedEnrollmentPageStatus = () => {
     ]);
 };
 
-export const EnrollmentPage: ComponentType<{||}> = () => {
+export const EnrollmentPage: ComponentType<Record<string, never>> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
     const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
-    const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
@@ -112,7 +111,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useEffect(() => { dispatch(changedProgramId({ programId })); }, [dispatch, programId]);
 
     const error: boolean =
-      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
+      useSelector(({ activePage }: any) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
         <>

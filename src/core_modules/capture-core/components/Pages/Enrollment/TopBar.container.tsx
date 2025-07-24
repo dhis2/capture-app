@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -21,7 +20,7 @@ type TopBarProps = {
     enrollmentId: string,
     trackedEntityName: string,
     teiDisplayName: string,
-    enrollmentsAsOptions: Array<Object>,
+    enrollmentsAsOptions: Array<Record<string, unknown>>,
 };
 
 export const TopBar = ({
@@ -48,7 +47,7 @@ export const TopBar = ({
             selectedOrgUnitId={orgUnitId}
             onSetProgramId={id => setProgramIdAndResetEnrollmentContext(id)}
             onSetOrgUnit={id => setOrgUnitId(id)}
-            onResetProgramId={() => resetProgramIdAndEnrollmentContext()}
+            onResetProgramId={() => resetProgramIdAndEnrollmentContext('', {})}
             onResetOrgUnitId={() => resetOrgUnitId()}
             onStartAgain={() => reset()}
         >

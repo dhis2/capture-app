@@ -1,8 +1,8 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map, filter } from 'rxjs/operators';
 import { from, EMPTY } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
+
 import {
     enrollmentPageActionTypes,
     resetEnrollmentId,
@@ -69,23 +69,23 @@ const deselectTei = (navigate) => {
 };
 
 // Check fetch status
-const enrollmentIdReady = (store: ReduxStore): boolean => {
+const enrollmentIdReady = (store: any): boolean => {
     const { fetchStatus } = store.value.enrollmentPage;
     return fetchStatus.enrollmentId === selectionStatus.READY;
 };
 
-const teiIdReady = (store: ReduxStore): boolean => {
+const teiIdReady = (store: any): boolean => {
     const { teiId, fetchStatus } = store.value.enrollmentPage;
     return teiId && fetchStatus.teiId === selectionStatus.READY;
 };
 
-const programIdReady = (store: ReduxStore): boolean => {
+const programIdReady = (store: any): boolean => {
     const { fetchStatus } = store.value.enrollmentPage;
     return fetchStatus.programId === selectionStatus.READY;
 };
 
-const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =>
-    enrollments && enrollments.some(enrollment => enrollment.enrollment === enrollmentId);
+const enrollmentIdLoaded = (enrollmentId: string, enrollments: Array<Record<string, unknown>> | null | undefined) =>
+    enrollments && enrollments.some((enrollment: any) => enrollment.enrollment === enrollmentId);
 
 
 // The verification epics which are triggered by the completion of
@@ -100,7 +100,7 @@ const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =
 // using the old store object as well).
 
 // Epics for enrollmentId
-export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const changedEnrollmentIdEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID),
         filter(({ payload: enrollmentId }) =>
@@ -116,7 +116,7 @@ export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxSt
         }),
     );
 
-export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const fetchEnrollmentIdEpic = (action$: any, store: any, { querySingleResource }: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID),
         concatMap(({ payload: { enrollmentId } }) =>
@@ -125,14 +125,14 @@ export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStor
                 .catch(() => fetchEnrollmentIdError(enrollmentId))),
     );
 
-export const verifyEnrollmentIdSuccessEpic = (action$: InputObservable, store: ReduxStore) =>
+export const verifyEnrollmentIdSuccessEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.VERIFY_ENROLLMENT_ID_SUCCESS),
         filter(({ payload }) => payload.enrollmentId === store.value.enrollmentPage.enrollmentId),
         map(({ payload }) => fetchEnrollmentIdSuccess(payload)),
     );
 
-export const enrollmentIdErrorEpic = (action$: InputObservable) =>
+export const enrollmentIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) =>
@@ -140,7 +140,7 @@ export const enrollmentIdErrorEpic = (action$: InputObservable) =>
     );
 
 // Epics for teiId
-export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const changedTeiIdEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(
             enrollmentPageActionTypes.PROCESS_TEI_ID,
@@ -152,7 +152,7 @@ export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
         map(({ payload }) => fetchTei(payload)),
     );
 
-export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const resetTeiIdEpic = (action$: any, store: any, { navigate }: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.RESET_TEI_ID),
         filter(() =>
@@ -163,7 +163,7 @@ export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore, { na
             )(store.value.enrollmentPage)),
     );
 
-export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const fetchTeiIdEpic = (action$: any, store: any, { querySingleResource }: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI),
         concatMap(({ payload: { teiId, programId } }) => from(querySingleResource(teiQuery(teiId))
@@ -180,21 +180,21 @@ export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { qu
             .catch(() => fetchTeiError(teiId)))),
     );
 
-export const verifyTeiFetchSuccessEpic = (action$: InputObservable, store: ReduxStore) =>
+export const verifyTeiFetchSuccessEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS),
         filter(() => enrollmentIdReady(store)),
         map(({ payload }) => fetchTeiSuccess(payload)),
     );
 
-export const fetchTeiErrorEpic = (action$: InputObservable) =>
+export const fetchTeiErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI_ERROR),
         map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({ error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }) })),
     );
 
 // Epics for programId
-export const changedProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const changedProgramIdEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(
             enrollmentPageActionTypes.PROCESS_PROGRAM_ID,
@@ -214,7 +214,7 @@ export const changedProgramIdEpic = (action$: InputObservable, store: ReduxStore
         }),
     );
 
-export const programIdErrorEpic = (action$: InputObservable) =>
+export const programIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
         map(({ payload: { programId } }) =>
@@ -222,7 +222,7 @@ export const programIdErrorEpic = (action$: InputObservable) =>
     );
 
 // Epics for enrollments
-export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const teiOrProgramChangeEpic = (action$: any, store: any, { navigate }: any) =>
     action$.pipe(
         ofType(
             enrollmentPageActionTypes.FETCH_TEI_SUCCESS,
@@ -241,10 +241,10 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
 
             return null;
         }),
-        filter(action => action),
+        filter((action: any) => Boolean(action)),
     );
 
-export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: ReduxStore) =>
+export const verifyFetchedEnrollmentsEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.VERIFY_FETCHED_ENROLLMENTS),
         filter(() => enrollmentIdReady(store)),
@@ -256,17 +256,17 @@ export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: Re
     );
 
 // Auto-switch orgUnit epic
-export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, navigate }: ApiUtils) =>
+export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleResource, navigate }: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
         map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
         concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
             .pipe(
-                map(({ programOwners }) => programOwners.find(programOwner => programOwner.program === programId)),
+                map(({ programOwners }: any) => programOwners.find((programOwner: any) => programOwner.program === programId)),
                 filter(programOwner => programOwner),
                 concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
                     .pipe(
-                        concatMap(({ organisationUnits }) => {
+                        concatMap(({ organisationUnits }: any) => {
                             if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();
@@ -281,7 +281,7 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
     );
 
 // Manage error messages for unsuccessful data fetches.
-export const clearErrorViewEpic = (action$: InputObservable, store: ReduxStore) =>
+export const clearErrorViewEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(
             enrollmentPageActionTypes.RESET_ENROLLMENT_ID,
