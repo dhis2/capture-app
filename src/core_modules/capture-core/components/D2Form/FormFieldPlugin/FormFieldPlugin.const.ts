@@ -5,7 +5,6 @@ export const PluginErrorMessages = Object.freeze({
 });
 
 export const FormFieldTypes = Object.freeze({
-    // TODO [DHIS2-17605] - Unified field types
     DATA_ELEMENT: 'dataElement',
     PLUGIN: 'plugin',
 });
