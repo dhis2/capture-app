@@ -1,8 +1,7 @@
-// @flow
-/* eslint-disable react/no-multi-comp */
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
 
@@ -16,11 +15,10 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    selectedProgramId: ?string,
-    classes: Object,
-    onUpdateSelectedOrgUnit: (orgUnit: ?Object, resetProgramSelection: boolean) => void,
-    programId: string,
-};
+    selectedProgramId?: string | null;
+    onUpdateSelectedOrgUnit: (orgUnit: Record<string, unknown> | null | undefined, resetProgramSelection: boolean) => void;
+    programId: string;
+} & WithStyles<typeof getStyles>;
 
 class RegUnitSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -32,7 +30,7 @@ class RegUnitSelectorPlain extends React.Component<Props> {
         },
     };
 
-    handleUpdateSelectedOrgUnit = (orgUnit: Object) => {
+    handleUpdateSelectedOrgUnit = (orgUnit: Record<string, unknown>) => {
         const { programId, onUpdateSelectedOrgUnit } = this.props;
         if (!programId || !orgUnit) {
             onUpdateSelectedOrgUnit(orgUnit, false);
@@ -47,19 +45,18 @@ class RegUnitSelectorPlain extends React.Component<Props> {
             return;
         }
 
-        onUpdateSelectedOrgUnit(orgUnit, program?.organisationUnits ? !program.organisationUnits[orgUnit.id] : false);
+        onUpdateSelectedOrgUnit(orgUnit, program?.organisationUnits ? !program.organisationUnits[(orgUnit as any).id] : false);
     }
 
     render() {
         const { classes, onUpdateSelectedOrgUnit, programId, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedRegUnitSelector
                 labelClass={classes.label}
-                label={i18n.t('Organisation Unit')}
+                label={i18n.t('Organisation Unit') as string}
                 styles={RegUnitSelectorPlain.baseComponentStyles}
                 onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
-                {...passOnProps}
+                {...passOnProps as any}
             />
         );
     }

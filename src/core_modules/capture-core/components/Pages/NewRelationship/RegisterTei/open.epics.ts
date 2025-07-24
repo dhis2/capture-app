@@ -1,10 +1,10 @@
-// @flow
 import { of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { filter, switchMap } from 'rxjs/operators';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import type { Observable } from 'rxjs';
 import {
     actionTypes as newRelationshipActionTypes,
 } from '../newRelationship.actions';
@@ -18,9 +18,8 @@ import {
 } from '../../../../metaData';
 import { findModes } from '../findModes';
 
-// get tracker program if the suggested program id is valid for the current context
 function getTrackerProgram(suggestedProgramId: string) {
-    let trackerProgram: ?TrackerProgram;
+    let trackerProgram: TrackerProgram | null = null;
     try {
         const program = getTrackerProgramThrowIfNotFound(suggestedProgramId);
         if (program.access.data.write) {
@@ -35,7 +34,7 @@ function getTrackerProgram(suggestedProgramId: string) {
     return trackerProgram;
 }
 
-function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgram) {
+function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: TrackerProgram | null) {
     let orgUnitId;
     if (trackerProgram) {
         orgUnitId = trackerProgram.organisationUnits[suggestedOrgUnitId] ? suggestedOrgUnitId : null;
@@ -45,27 +44,26 @@ function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgra
     return orgUnitId;
 }
 
-export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openNewRelationshipRegisterTeiEpic = (action$: Observable<any>, store: any) =>
     action$.pipe(
         ofType(newRelationshipActionTypes.SELECT_FIND_MODE),
-        filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
+        filter((action: any) => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
         switchMap(() => {
             const state = store.value;
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
             const { programId: suggestedProgramId } = selectedRelationshipType.to;
             const { orgUnitId: suggestedOrgUnitId } = state.currentSelections;
 
-            let trackerProgram: ?TrackerProgram;
+            let trackerProgram: TrackerProgram | null = null;
             if (suggestedProgramId) {
                 try {
                     trackerProgram = getTrackerProgram(suggestedProgramId);
                 } catch (error) {
-                    return Promise.resolve(initializeRegisterTeiFailed(error));
+                    return Promise.resolve(initializeRegisterTeiFailed(String(error)));
                 }
             }
             const orgUnitId = getOrgUnitId(suggestedOrgUnitId, trackerProgram);
 
-            // can't run rules when no valid organisation unit is specified, i.e. only the registration section will be visible
             if (!orgUnitId) {
                 return Promise.resolve(initializeRegisterTei(trackerProgram && trackerProgram.id));
             }

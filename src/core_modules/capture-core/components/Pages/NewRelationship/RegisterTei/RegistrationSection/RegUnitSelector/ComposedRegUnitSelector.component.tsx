@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import {
     withDefaultShouldUpdateInterface,
@@ -14,21 +13,19 @@ import {
 const OrgUnitFieldImplicitRootsFilterHandlerHOC =
     withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField);
 
-
 type Props = {
-    onUpdateSelectedOrgUnit: (orgUnit: ?Object) => void,
+    onUpdateSelectedOrgUnit: (orgUnit?: Record<string, unknown> | null) => void;
 };
 
 class OrgUnitFieldWrapper extends React.Component<Props> {
     render() {
         const { onUpdateSelectedOrgUnit, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OrgUnitFieldImplicitRootsFilterHandlerHOC
                 onSelect={onUpdateSelectedOrgUnit}
                 scope={orgUnitFieldScopes.USER_CAPTURE}
                 maxTreeHeight={200}
-                {...passOnProps}
+                {...passOnProps as any}
             />
         );
     }
@@ -38,11 +35,11 @@ export const ComposedRegUnitSelector =
     withDefaultShouldUpdateInterface()(
         withDefaultFieldContainer()(
             withLabel({
-                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                onGetCustomFieldLabeClass: (props: Object) =>
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
                     props.labelClass,
             })(
-                withFilterProps((props: Object) => {
+                withFilterProps((props: any) => {
                     const { labelClass, ...passOnProps } = props;
                     return passOnProps;
                 })(

@@ -1,20 +1,19 @@
-// @flow
-import React, { type ComponentType, useContext, useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
-import type { Props } from './RegisterTei.types';
+import type { PlainProps } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../HOC';
 import type { EnrollmentPayload } from
     '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
 import type { TeiPayload } from '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance';
 
-const getStyles = () => ({
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -24,25 +23,37 @@ const getStyles = () => ({
         flexBasis: 0,
         margin: 8,
     },
-});
+};
 
-const CardListButton = (({ teiId, values, handleOnClick }) => (
+type CardListButtonProps = {
+    teiId: string;
+    values: any;
+    handleOnClick: (teiId: string, values: any) => void;
+};
+
+const CardListButton = ({ teiId, values, handleOnClick }: CardListButtonProps) => (
     <Button
         small
         dataTest="view-dashboard-button"
         onClick={() => { handleOnClick(teiId, values); }}
     >
-        {i18n.t('Link')}
+        {i18n.t('Link') as string}
     </Button>
-));
+);
 
-const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
+type DialogButtonsProps = {
+    onCancel: () => void;
+    onSave: () => void;
+    trackedEntityName?: string | null;
+};
+
+const DialogButtons = ({ onCancel, onSave, trackedEntityName }: DialogButtonsProps) => (
     <>
         <Button
             onClick={onCancel}
             secondary
         >
-            {i18n.t('Cancel')}
+            {i18n.t('Cancel') as string}
         </Button>
         <div style={{ marginLeft: 16 }}>
             <Button
@@ -52,11 +63,13 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
             >
                 {i18n.t('Save as new {{trackedEntityName}}', {
                     trackedEntityName, interpolation: { escapeValue: false },
-                })}
+                }) as string}
             </Button>
         </div>
     </>
 );
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const RegisterTeiPlain = ({
     dataEntryId,
@@ -70,9 +83,9 @@ const RegisterTeiPlain = ({
     newRelationshipProgramId,
     classes,
 }: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+    const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
 
-    const renderDuplicatesCardActions = useCallback(({ item }) => (
+    const renderDuplicatesCardActions = useCallback(({ item }: { item: any }) => (
         <CardListButton
             teiId={item.id}
             values={item.values}
@@ -80,7 +93,7 @@ const RegisterTeiPlain = ({
         />
     ), [onLink]);
 
-    const renderDuplicatesDialogActions = useCallback((callbackOnCancel, onSaveArgument) => (
+    const renderDuplicatesDialogActions = useCallback((callbackOnCancel: () => void, onSaveArgument: () => void) => (
         <DialogButtons
             onCancel={callbackOnCancel}
             onSave={onSaveArgument}
@@ -88,13 +101,13 @@ const RegisterTeiPlain = ({
         />
     ), [trackedEntityName]);
 
-    const ExistingUniqueValueDialogActions = useCallback(({ teiId, attributeValues }) => (
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId, attributeValues }: { teiId: string; attributeValues: any }) => (
         <Button
             dataTest="existing-unique-value-link-tei-button"
             primary
             onClick={() => { onLink(teiId, attributeValues); }}
         >
-            {i18n.t('Link')}
+            {i18n.t('Link') as string}
         </Button>
     ), [onLink]);
 
@@ -107,21 +120,23 @@ const RegisterTeiPlain = ({
             <div className={classes.leftContainer}>
                 <RegistrationSection />
                 <RegisterTeiDataEntry
-                    onLink={onLink}
-                    onSave={handleSave}
-                    onCancel={onCancel}
-                    onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-                    duplicatesReviewPageSize={resultsPageSize}
-                    renderDuplicatesDialogActions={renderDuplicatesDialogActions}
-                    renderDuplicatesCardActions={renderDuplicatesCardActions}
-                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-                    trackedEntityTypeId={trackedEntityTypeId}
+                    {...{
+                        onLink,
+                        onSave: handleSave,
+                        onCancel,
+                        onGetUnsavedAttributeValues,
+                        duplicatesReviewPageSize: resultsPageSize,
+                        renderDuplicatesDialogActions,
+                        renderDuplicatesCardActions,
+                        ExistingUniqueValueDialogActions,
+                        trackedEntityTypeId,
+                    } as any}
                 />
             </div>
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
-                renderCardActions={({ item }) =>
+                renderCardActions={({ item }: { item: any }) =>
                     <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
                 }
             />
@@ -129,8 +144,7 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> =
-  compose(
-      withErrorMessageHandler(),
-      withStyles(getStyles),
-  )(RegisterTeiPlain);
+export const RegisterTeiComponent = compose(
+    withErrorMessageHandler(),
+    withStyles(styles),
+)(RegisterTeiPlain) as React.ComponentType<PlainProps>;
