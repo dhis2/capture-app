@@ -285,7 +285,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                 style={this.props.formHorizontal ? styles.horizontalSection as any : {}}
             >
                 <CustomFormHOC
-                    // formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
+                    formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                     id={formId}
                     fields={this.getFieldConfigWithRulesEffects()}
                     dataElements={this.formFields}
