@@ -1,19 +1,17 @@
-// @flow
-/* eslint-disable complexity */
 import * as React from 'react';
 
 type Props = {
-    errorMessage: ?string,
-    warningMessage?: ?string,
-    infoMessage?: ?string,
-    validatingMessage?: ?string,
-    rulesErrorMessage: ?string,
-    rulesWarningMessage: ?string,
-    rulesErrorMessageOnComplete: ?string,
-    rulesWarningMessageOnComplete: ?string,
-    rulesCompulsoryError?: ?string,
-    touched: boolean,
-    validationAttempted?: ?boolean,
+    errorMessage: string | null;
+    warningMessage?: string | null;
+    infoMessage?: string | null;
+    validatingMessage?: string | null;
+    rulesErrorMessage: string | null;
+    rulesWarningMessage: string | null;
+    rulesErrorMessageOnComplete: string | null;
+    rulesWarningMessageOnComplete: string | null;
+    rulesCompulsoryError: string | null;
+    touched: boolean;
+    validationAttempted: boolean | null;
 };
 
 const typeKeysForProperty = {
@@ -30,10 +28,9 @@ const messageKeys = {
     validatingMessages: 'validatingMessage',
 };
 
-
-const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overrideMessagesPropNames: Object = {}) =>
+const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overrideMessagesPropNames: any = {}) =>
     class CalculateMessagesHOC extends React.Component<Props> {
-        static getMessage(errorText: ?string, warningText: ?string, infoText: ?string, validatingText: ?string) {
+        static getMessage(errorText: string | null, warningText: string | null, infoText: string | null, validatingText: string | null) {
             let message;
             let typeKey;
 
@@ -58,13 +55,13 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
         }
 
         static getRulesMessage(
-            errorText: ?string,
-            warningText: ?string,
-            errorTextOnComplete: ?string,
-            warningTextOnComplete: ?string,
-            rulesCompulsoryError: ?string,
+            errorText: string | null,
+            warningText: string | null,
+            errorTextOnComplete: string | null,
+            warningTextOnComplete: string | null,
+            rulesCompulsoryError: string | null,
             touched: boolean,
-            validationAttempted: ?boolean,
+            validationAttempted: boolean | null,
         ) {
             let message;
             let typeKey;
@@ -92,7 +89,7 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
             };
         }
 
-        getMessage = (messageKey: $Values<typeof messageKeys>) => (
+        getMessage = (messageKey: typeof messageKeys[keyof typeof messageKeys]) => (
             overrideMessagesPropNames[messageKey] ?
                 this.props[overrideMessagesPropNames[messageKey]] : this.props[messageKey]
         );
@@ -113,7 +110,7 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
                 ...passOnProps
             } = this.props;
 
-            let messageContainer =
+            let messageContainer: any =
                 (touched || validationAttempted) ?
                     CalculateMessagesHOC.getMessage(
                         this.getMessage(messageKeys.errorMessages),
@@ -138,8 +135,6 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
 
             const passOnMessage =
                 messageContainer.message ? {
-
-                    // $FlowFixMe[invalid-computed-prop] automated comment
                     [messageContainer.typeKey]: messageContainer.message,
                 } : null;
 
@@ -154,6 +149,6 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
         }
     };
 
-export const withCalculateMessages = (overrideMessagesPropNames?: Object) =>
+export const withCalculateMessages = (overrideMessagesPropNames?: any) =>
     (InnerComponent: React.ComponentType<any>) =>
         (getCalculateMessagesHOC(InnerComponent, overrideMessagesPropNames));

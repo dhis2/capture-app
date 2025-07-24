@@ -1,8 +1,7 @@
-// @flow
 import * as React from 'react';
 
 type Props = {
-    hidden?: ?boolean,
+    hidden?: boolean | null;
 };
 
 export const withHideCompatibility = () =>

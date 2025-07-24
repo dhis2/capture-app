@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
@@ -17,30 +16,27 @@ const getStyles = () => ({
 });
 
 type Icon = {
-    name: string,
-    color: string,
+    name: string;
+    color: string;
 };
 
 type Props = {
-    options: Array<{icon?: Icon}>,
-    label?: ?string,
+    options: Array<{icon?: Icon}>;
+    label?: string | null;
     classes: {
-        iconContainer: string,
-        icon: string,
-    },
+        iconContainer: string;
+        icon: string;
+    };
 };
 
 /**
  * Converts icon objects in options to React nodes, with property key icon.
 */
-
 export const withOptionsIconElement = () =>
     (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
         class CreateOptionsIconElementHOC extends React.Component<Props> {
-            options: Array<{icon: React.Node}>;
             constructor(props: Props) {
                 super(props);
-                // $FlowFixMe
                 this.options = this.getOptions();
             }
 
@@ -73,11 +69,12 @@ export const withOptionsIconElement = () =>
                     }));
             }
 
+            options: Array<{icon: React.ReactNode}>;
+
             render() {
                 const { options, classes, ...passOnProps } = this.props;
 
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         options={this.options}
                         {...passOnProps}

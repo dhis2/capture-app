@@ -1,8 +1,7 @@
-// @flow
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
     container: {
@@ -22,23 +21,15 @@ const styles = () => ({
 });
 
 type Props = {
-    classes: {
-        container: string,
-        activeContainer: string,
-        validatingContainer: string,
-        errorContainer: string,
-        warningContainer: string,
-        infoContainer: string,
-    },
-    inFocus?: ?boolean,
-    validatingMessage?: ?string,
-    errorMessage?: ?string,
-    warningMessage?: ?string,
-    infoMessage?: ?string,
+    inFocus?: boolean | null;
+    validatingMessage?: string | null;
+    errorMessage?: string | null;
+    warningMessage?: string | null;
+    infoMessage?: string | null;
 };
 
-const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: ?Object) =>
-    class FieldContainerBuilder extends React.Component<Props> {
+const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: any | null) =>
+    class FieldContainerBuilder extends React.Component<Props & WithStyles<typeof styles>> {
         render() {
             const { classes, ...passOnProps } = this.props;
             const containerClasses = classNames(
@@ -59,7 +50,7 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
             return (
                 <div
                     className={containerClasses}
-                    style={customStyles}
+                    style={customStyles as React.CSSProperties}
                 >
                     <InnerComponent
                         {...passOnProps}
@@ -69,6 +60,6 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
         }
     };
 
-export const withDefaultFieldContainer = (customStyles?: ?Object) =>
+export const withDefaultFieldContainer = (customStyles?: any | null) =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(getFieldContainerBuilder(InnerComponent, customStyles));

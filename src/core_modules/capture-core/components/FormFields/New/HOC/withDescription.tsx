@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo16, Popover, colors, spacers } from '@dhis2/ui';
@@ -25,7 +24,7 @@ const getStylesLabel = () => ({
     },
     popOverContainer: {
         padding: `${spacers.dp12} ${spacers.dp12}`,
-        wordBreak: 'break-word',
+        wordBreak: 'break-word' as any,
         '& + &': {
             paddingTop: 0,
         },
@@ -49,20 +48,21 @@ const getStylesLabel = () => ({
 });
 
 type State = {
-    popOverOpen: boolean
-}
+    popOverOpen: boolean;
+};
+
 export const withDescription = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        withStyles(getStylesLabel)(class DataElementDescription extends React.Component<Object, State> {
-            iconRef: any;
-
-            constructor(props) {
+        withStyles(getStylesLabel)(class DataElementDescription extends React.Component<any, State> {
+            constructor(props: any) {
                 super(props);
                 this.iconRef = React.createRef();
                 this.state = {
                     popOverOpen: false,
                 };
             }
+
+            iconRef: any;
             renderDescription(description, url) {
                 const { classes } = this.props;
                 return (<div>
@@ -107,4 +107,3 @@ export const withDescription = () =>
                 );
             }
         });
-

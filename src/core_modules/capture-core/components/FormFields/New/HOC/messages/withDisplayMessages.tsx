@@ -1,7 +1,8 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { CircularLoader, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
 
@@ -38,7 +39,7 @@ const styles = (theme: Theme) => ({
         marginRight: 4,
     },
     listItem: {
-        listStylePosition: 'inside',
+        listStylePosition: 'inside' as any,
     },
 });
 
@@ -50,29 +51,19 @@ const messageTypes = {
 };
 
 type Props = {
-    validatingMessage?: ?string | ?Array<string>,
-    errorMessage?: ?string | ?Array<string>,
-    warningMessage?: ?string | ?Array<string>,
-    infoMessage?: ?string | ?Array<string>,
-    classes: {
-        base: string,
-        error: string,
-        warning: string,
-        info: string,
-        validating: string,
-        validatingContainer: string,
-        validatingIndicator: string,
-        listItem: string
-    }
+    validatingMessage?: string | Array<string> | null;
+    errorMessage?: string | Array<string> | null;
+    warningMessage?: string | Array<string> | null;
+    infoMessage?: string | Array<string> | null;
 };
 
 type MessageContainer = {
-    element?: ?React.Element<any>,
-    innerMessage?: ?Object,
-}
+    element?: React.ReactElement<any> | null;
+    innerMessage?: Record<string, unknown> | null;
+};
 
 const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
-    class DisplayMessagesHOC extends React.Component<Props> {
+    class DisplayMessagesHOC extends React.Component<Props & WithStyles<typeof styles>> {
         static createMessageElement(text, baseClass, messageClass, validatorClasses, listItemClass, type) {
             if (type === messageTypes.validating) {
                 return (
@@ -111,7 +102,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
-        convertMessage = (message, messageType: $Values<typeof messageTypes>): MessageContainer => {
+        convertMessage = (message: any, messageType: typeof messageTypes[keyof typeof messageTypes]): MessageContainer => {
             if (isObject(message) && !React.isValidElement(message)) {
                 return {
                     innerMessage: { message, messageType },
@@ -136,7 +127,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
         }
 
         getMessage(errorMessages, warningMessage, infoMessage, validatingMessage) {
-            let messages = {};
+            let messages: any = {};
 
             if (validatingMessage) {
                 messages = this.convertMessage(validatingMessage, messageTypes.validating);
@@ -160,13 +151,12 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                 validatingMessage,
                 ...passOnProps
             } = this.props;
-            const messages =
+            const messages: any =
                 this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage);
 
             const calculatedMessageProps = messages.innerMessage ? { innerMessage: messages.innerMessage } : null;
             return (
                 <div>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         {...calculatedMessageProps}
                         {...passOnProps}
@@ -179,4 +169,4 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
 
 export const withDisplayMessages = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        withStyles(styles)(getDisplayMessagesHOC(InnerComponent));
+        withStyles(styles)(getDisplayMessagesHOC(InnerComponent) as any);

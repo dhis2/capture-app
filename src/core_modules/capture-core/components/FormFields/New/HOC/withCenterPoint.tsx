@@ -1,10 +1,10 @@
-// @flow
-import React, { type ComponentType, useMemo, useState, useEffect } from 'react';
-import { ceil } from 'lodash';
+import React, { useMemo, useState, useEffect } from 'react';
+import type { ComponentType } from 'react';
+import { ceil } from 'lodash/fp';
 import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
 type Props = {
-    orgUnitId: ?string,
+    orgUnitId: string | null;
 };
 
 const DEFAULT_CENTER = [51.505, -0.09];
@@ -69,8 +69,7 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => ({ orgUnitId, ...
         [fetchEnabled, orgUnitFetchId],
     );
 
-    // $FlowFixMe When the query is disabled, the prerequisites for the queryKey and the queryFn are not met.
-    const { data } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
+    const { data }: any = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     useEffect(() => {
         if (data?.parent && !data?.geometry) {
