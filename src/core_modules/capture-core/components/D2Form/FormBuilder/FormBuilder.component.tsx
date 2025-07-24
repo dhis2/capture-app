@@ -246,9 +246,8 @@ export class FormBuilder extends React.Component<Props> {
         const remainingCompleteUids: Array<string> = Object
             .keys(this.fieldsValidatingPromiseContainer)
             .map((key) => {
-                const container = this.fieldsValidatingPromiseContainer[key];
-                if (!container) return null;
-                const { cancelableValidatingPromise, validatingCompleteUid } = container;
+                const { cancelableValidatingPromise, validatingCompleteUid }: any =
+                    this.fieldsValidatingPromiseContainer[key] || {};
                 cancelableValidatingPromise && cancelableValidatingPromise.cancel();
                 return validatingCompleteUid;
             })
@@ -332,11 +331,7 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: FieldCommitOptions | null) {
-        const fieldProp = this.getFieldProp(fieldId);
-        if (!fieldProp) {
-            return;
-        }
-        const { validators, onIsEqual } = fieldProp;
+        const { validators, onIsEqual }: any = this.getFieldProp(fieldId);
         this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
     }
 
@@ -386,7 +381,7 @@ export class FormBuilder extends React.Component<Props> {
             return fieldValidatingPromiseContainer.cancelableValidatingPromise!.promise;
         };
 
-        const updateField = ({ valid, errorMessage, errorType, errorData }: { valid: boolean; errorMessage: any; errorType: string; errorData: any }) => {
+        const updateField = ({ valid, errorMessage, errorType, errorData }) => {
             onUpdateField(
                 value,
                 {
@@ -421,8 +416,8 @@ export class FormBuilder extends React.Component<Props> {
                 .then(({ valid, errorMessage, errorType, errorData }: any) => {
                     updateField({ valid, errorMessage, errorType, errorData });
                 })
-                .catch((reason) => {
-                    if (!reason || !isObject(reason) || !(reason as any).isCanceled) {
+                .catch((reason: any) => {
+                    if (!reason || !isObject(reason) || !reason.isCanceled) {
                         log.error({ reason, fieldId, value });
                         onUpdateField(
                             value,
@@ -452,7 +447,6 @@ export class FormBuilder extends React.Component<Props> {
     /**
      *  Retain a reference to the form field instance
     */
-
     setFieldInstance(instance: any, id: string) {
         if (!instance) {
             if (this.fieldInstances.has(id)) {

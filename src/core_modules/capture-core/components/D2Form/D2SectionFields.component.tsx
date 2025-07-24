@@ -16,7 +16,7 @@ import type { QuerySingleResource } from '../../utils/api/api.types';
 import { FormFieldPlugin } from './FormFieldPlugin';
 import { FormFieldPluginConfig } from '../../metaData/FormFieldPluginConfig';
 
-const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
+const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer))) as any;
 
 const styles = {
     horizontalSection: {
@@ -285,7 +285,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                 style={this.props.formHorizontal ? styles.horizontalSection as any : {}}
             >
                 <CustomFormHOC
-                    formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
+                    // formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                     id={formId}
                     fields={this.getFieldConfigWithRulesEffects()}
                     dataElements={this.formFields}
