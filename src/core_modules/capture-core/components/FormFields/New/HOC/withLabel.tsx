@@ -1,9 +1,9 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo16, Tooltip, colors, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 import { withDescription } from './withDescription';
@@ -18,7 +18,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const getStylesLabel = (theme: Theme) => ({
+const getStylesLabel = (theme: any) => ({
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -39,53 +39,45 @@ const getStylesLabel = (theme: Theme) => ({
     },
 });
 
-type IconType = { name?: string, color?: string };
+type IconType = { name?: string; color?: string };
 
 type IconProps = {
-    icon: ?IconType,
-    label: ?string,
+    icon?: IconType | null;
+    label?: string | null;
 };
 
 type CalculatedLabelProps = {
-    label: string,
-    required: boolean,
-    requiredClass: string,
+    label: string;
+    required: boolean;
+    requiredClass: string;
 };
 
 type RequiredLabelProps = {
-    label: string,
-    requiredClass: string,
+    label: string;
+    requiredClass: string;
 };
 
 type Props = {
-    label: ?string,
-    required: boolean,
-    icon: ?IconType,
-    classes: {
-        container: string,
-        label: string,
-        labelVertical: string,
-        required: string,
-        iconContainer: string,
-        tooltipIcon: string,
-    },
-    dataElementDescription?: ?React.Element<any>
+    label?: string | null;
+    required: boolean;
+    icon?: IconType | null;
+    dataElementDescription?: React.ReactElement | null;
 };
 
 type HOCParams = {
-    onGetUseVerticalOrientation?: ?(props: Object) => boolean,
-    onGetCustomFieldLabeClass?: ?(props: Object) => string,
-    customTooltip?: ?(props: Object) => string
+    onGetUseVerticalOrientation?: ((props: any) => boolean) | null;
+    onGetCustomFieldLabeClass?: ((props: any) => string) | null;
+    customTooltip?: ((props: any) => string) | null;
 };
 
-export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
+export const withLabel = (hocParams?: HOCParams | null) => (InnerComponent: React.ComponentType<any>) => {
     const onGetUseVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation;
     const onGetCustomFieldLabeClass = hocParams && hocParams.onGetCustomFieldLabeClass;
     const customTooltip = hocParams && hocParams.customTooltip;
 
     const LabelHOCWithStyles = UIWithLabel({
-        onGetUseVerticalOrientation: (props: Object) => onGetUseVerticalOrientation && onGetUseVerticalOrientation(props),
-        onSplitClasses: (classes, props: Object) => {
+        onGetUseVerticalOrientation: (props: any) => onGetUseVerticalOrientation && onGetUseVerticalOrientation(props),
+        onSplitClasses: (classes, props: any) => {
             const { label, labelVertical, ...rest } = classes;
             const useVerticalOrientation = onGetUseVerticalOrientation && onGetUseVerticalOrientation(props);
             return {
@@ -138,7 +130,7 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
             : label;
     };
 
-    const Label = (props: Props) => {
+    const Label = (props: Props & WithStyles<typeof getStylesLabel>) => {
         const { label, required, icon, classes, dataElementDescription } = props;
         return (
             <div
@@ -158,7 +150,7 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
                     requiredClass={classes.required}
                 />
                 {customTooltip ?
-                    <Tooltip content={customTooltip()}>
+                    <Tooltip content={customTooltip({})}>
                         <div className={classes.tooltipIcon}>
                             <IconInfo16 color={colors.grey600} />
                         </div>
@@ -170,11 +162,10 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
         );
     };
     const LabelWithStyles = withDescription()(withStyles(getStylesLabel)(Label));
-    const ProjectLabelHOC = withStyles(getStyles)((props: Props) => {
+    const ProjectLabelHOC = withStyles(getStyles)((props: any ) => {
         const { label, required, icon, ...passOnProps } = props;
         const { classes, ...propsWithoutClasses } = props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <LabelHOCWithStyles
                 label={(<LabelWithStyles {...propsWithoutClasses} />)}
                 {...passOnProps}
