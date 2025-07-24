@@ -29,7 +29,7 @@ type ReduxState = {
 };
 
 const mapStateToProps = (state: ReduxState) => ({
-    error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
+    error: state.activePage.selectionsError?.error, // TODO: Should probably remove this
     ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
 
@@ -79,7 +79,7 @@ const useMainPageStatus = ({
         if (selectedProgram?.categoryCombination) {
             if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
-            if (programCategories.some((category: any) => !categories || !categories[category.id])) {
+            if (programCategories.some((category: any) => !categories?.[category.id])) {
                 return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             }
             if (withoutOrgUnit) {
