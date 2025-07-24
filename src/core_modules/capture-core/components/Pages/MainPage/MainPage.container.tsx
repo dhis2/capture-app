@@ -29,8 +29,8 @@ type ReduxState = {
 };
 
 const mapStateToProps = (state: ReduxState) => ({
-    error: state.activePage.selectionsError && state.activePage.selectionsError.error,
-    ready: !state.activePage.lockedSelectorLoads,
+    error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
+    ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
 
 const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, navigate }: {
