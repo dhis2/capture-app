@@ -7,39 +7,13 @@ import type { Props, PropsForPureComponent } from './D2Form.types';
 import { Section } from '../../metaData';
 
 class D2Form extends React.PureComponent<PropsForPureComponent> {
+    name: string;
+    sectionInstances: Map<string, any>;
+
     constructor(props: PropsForPureComponent) {
         super(props);
         this.name = 'D2Form';
         this.sectionInstances = new Map();
-    }
-
-    validateFormScrollToFirstFailedField(options: any) {
-        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
-        if (isValid) {
-            return true;
-        }
-
-        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
-        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
-        return false;
-    }
-
-    setSectionInstance(instance: any | null, id: string) {
-        if (!instance) {
-            if (this.sectionInstances.has(id)) {
-                this.sectionInstances.delete(id);
-            }
-        } else {
-            this.sectionInstances.set(id, instance);
-        }
-    }
-
-    getFormId() {
-        return this.props.id;
-    }
-
-    getFormBuilderId(sectionId: string) {
-        return `${this.props.id}-${sectionId}`;
     }
 
     validateFormIncludeSectionFailedFields(options: any) {
@@ -79,8 +53,34 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         };
     }
 
-    name: string;
-    sectionInstances: Map<string, any>;
+    validateFormScrollToFirstFailedField(options: any) {
+        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
+        if (isValid) {
+            return true;
+        }
+
+        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
+        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
+        return false;
+    }
+
+    setSectionInstance(instance: any | null, id: string) {
+        if (!instance) {
+            if (this.sectionInstances.has(id)) {
+                this.sectionInstances.delete(id);
+            }
+        } else {
+            this.sectionInstances.set(id, instance);
+        }
+    }
+
+    getFormId() {
+        return this.props.id;
+    }
+
+    getFormBuilderId(sectionId: string) {
+        return `${this.props.id}-${sectionId}`;
+    }
 
     renderHorizontal = (section: Section, passOnProps: any) => (
         <D2SectionContainer

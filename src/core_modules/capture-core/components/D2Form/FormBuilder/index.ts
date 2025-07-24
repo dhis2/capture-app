@@ -1,4 +1,4 @@
 export { FormBuilder } from './FormBuilder.component';
-export { FormBuilderContainer } from './FormBuilder.container';
-export type { FieldConfig, FieldCommitOptions, FieldCommitOptionsExtended } from './FormBuilder.component';
-export type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
+export type { PostProcessErrorMessage, ErrorData } from './formbuilder.types';
+export type { FieldConfig, FieldCommitOptionsExtended } from './FormBuilder.component';
+

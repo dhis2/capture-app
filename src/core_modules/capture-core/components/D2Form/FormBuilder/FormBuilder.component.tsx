@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { v4 as uuid } from 'uuid';
 import * as React from 'react';
-import { makeCancelablePromise, makeCancelable } from 'capture-core-utils';
+import { makeCancelablePromise } from 'capture-core-utils';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
@@ -228,7 +228,7 @@ export class FormBuilder extends React.Component<Props> {
         this.commitUpdateTriggeredForFields = {};
 
         if (this.props.validateIfNoUIData) {
-            this.validateAllFields();
+            this.validateAllFields(this.props);
         }
     }
 
@@ -237,7 +237,7 @@ export class FormBuilder extends React.Component<Props> {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
             if (this.props.validateIfNoUIData) {
-                this.validateAllFields();
+                this.validateAllFields(this.props);
             }
         } else {
             this.asyncUIState =
@@ -261,34 +261,52 @@ export class FormBuilder extends React.Component<Props> {
         return remainingCompleteUids;
     }
 
-    async validateAllFields() {
+    validateAllFields(
+        props: Props,
+    ) {
         this.validateAllCancelablePromise && this.validateAllCancelablePromise.cancel();
+        this.validateAllCancelablePromise = makeCancelablePromise(
+            FormBuilder.executeValidateAllFields(props, this.fieldsValidatingPromiseContainer),
+        );
 
-        const validationContainers = FormBuilder.executeValidateAllFields(this.props, this.fieldsValidatingPromiseContainer);
-        const validationContainerArray = await validationContainers;
-        const promisesAndIdForActuallyValidatedFields = validationContainerArray
-            .filter(validationDataContainer => validationDataContainer.validationData &&
-                        !!validationDataContainer.validationData) as Array<{id: string; validationData: any}>;
-
-        if (promisesAndIdForActuallyValidatedFields.length === 0) {
-            return Promise.resolve();
-        }
-
-        this.validateAllCancelablePromise = makeCancelable(
-            Promise.all(promisesAndIdForActuallyValidatedFields.map(validationDataContainer => validationDataContainer.validationData))
-                .then((validationResults) => {
-                    const fieldsUI = validationResults.reduce((accFieldsUI, validationResult, index) => {
-                        const fieldId = promisesAndIdForActuallyValidatedFields[index].id;
-                        accFieldsUI[fieldId] = validationResult;
+        this.validateAllCancelablePromise && this.validateAllCancelablePromise
+            .promise
+            .then((validationContainerArray) => {
+                const validationContainers = validationContainerArray
+                    .reduce((accFieldsUI, container) => {
+                        accFieldsUI[container.id] = container.validationData;
                         return accFieldsUI;
                     }, {});
 
-                    const validatingUids = promisesAndIdForActuallyValidatedFields.map(validationDataContainer => validationDataContainer.id);
-                    this.props.onFieldsValidated && this.props.onFieldsValidated(fieldsUI, this.props.id, validatingUids);
-                }),
-        );
+                const promisesAndIdForActuallyValidatedFields = validationContainerArray
+                    .map(validationDataContainer => ({
+                        promises: this.fieldsValidatingPromiseContainer[validationDataContainer.id],
+                        id: validationDataContainer.id,
+                        commitUpdateTriggeredForField: this.commitUpdateTriggeredForFields[validationDataContainer.id],
+                    }))
+                    .filter(c => !c.commitUpdateTriggeredForField);
 
-        return this.validateAllCancelablePromise!.promise;
+                props.onFieldsValidated && props.onFieldsValidated(
+                    validationContainers,
+                    props.id,
+                    promisesAndIdForActuallyValidatedFields.map(c => c.promises.validatingCompleteUid),
+                );
+
+                promisesAndIdForActuallyValidatedFields
+                    .forEach((container) => {
+                        this.fieldsValidatingPromiseContainer[container.id] = null;
+                    });
+
+                this.validateAllCancelablePromise = null;
+            })
+            .catch((reason) => {
+                if (!reason || !isObject(reason) || !reason.isCanceled) {
+                    log.error({
+                        reason,
+                        message: 'formBuilder validate all fields failed',
+                    });
+                }
+            });
     }
 
 
@@ -311,58 +329,19 @@ export class FormBuilder extends React.Component<Props> {
         return valueChanged;
     }
 
+    commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: FieldCommitOptions | null) {
+        const fieldProp = this.getFieldProp(fieldId);
+        if (!fieldProp) return;
+        const { validators, onIsEqual } = fieldProp;
+        this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
+    }
+
     commitFieldUpdateFromPlugin(fieldMetadata: DataElement, value: any, options?: FieldCommitOptions | null) {
         const { id: fieldId } = fieldMetadata;
         const { querySingleResource } = this.props;
         const validators = getValidators(fieldMetadata, querySingleResource);
 
         this.commitFieldUpdate({ fieldId, validators }, value, { ...options, plugin: true });
-    }
-
-    setFieldInstance(instance: any, id: string) {
-        if (!instance) {
-            if (this.fieldInstances.has(id)) {
-                this.fieldInstances.delete(id);
-            }
-        } else {
-            this.fieldInstances.set(id, instance);
-        }
-    }
-
-    getInvalidFields(externalInvalidFields?: { [id: string]: boolean } | null) {
-        const propFields = this.props.fields;
-        return propFields.reduce((invalidFieldsContainer, field) => {
-            const fieldUI = this.props.fieldsUI[field.id];
-            if (!fieldUI.valid) {
-                invalidFieldsContainer.push({
-                    prop: field,
-                    instance: this.fieldInstances.get(field.id),
-                    uiState: fieldUI,
-                });
-            } else if (externalInvalidFields && externalInvalidFields[field.id]) {
-                invalidFieldsContainer.push({
-                    prop: field,
-                    instance: this.fieldInstances.get(field.id),
-                    uiState: fieldUI,
-                });
-            }
-            return invalidFieldsContainer;
-        }, [] as Array<{ prop: FieldConfig; instance: any; uiState: FieldUI }>);
-    }
-
-    isValid(typesToCheck?: Array<string> | null) {
-        return Object
-            .keys(this.props.fieldsUI)
-            .every((key) => {
-                const fieldUI = this.props.fieldsUI[key];
-                if (typesToCheck) {
-                    const isCheckable = typesToCheck.includes(fieldUI.errorType || '');
-                    if (!isCheckable) {
-                        return true;
-                    }
-                }
-                return fieldUI.valid;
-            });
     }
 
     async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: FieldCommitOptionsExtended | null) {
@@ -465,13 +444,52 @@ export class FormBuilder extends React.Component<Props> {
     handleCommitAsync = (fieldId: string, fieldLabel: string, callback: (...args: any[]) => any) => {
         this.props.onUpdateFieldAsync(fieldId, fieldLabel, this.props.id, callback);
     }
-    commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: FieldCommitOptions | null) {
-        const fieldProp = this.getFieldProp(fieldId);
-        if (!fieldProp) return;
-        const { validators, onIsEqual } = fieldProp;
-        this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
+
+    setFieldInstance(instance: any, id: string) {
+        if (!instance) {
+            if (this.fieldInstances.has(id)) {
+                this.fieldInstances.delete(id);
+            }
+        } else {
+            this.fieldInstances.set(id, instance);
+        }
     }
 
+    getInvalidFields(externalInvalidFields?: { [id: string]: boolean } | null) {
+        const propFields = this.props.fields;
+        return propFields.reduce((invalidFieldsContainer, field) => {
+            const fieldUI = this.props.fieldsUI[field.id];
+            if (!fieldUI.valid) {
+                invalidFieldsContainer.push({
+                    prop: field,
+                    instance: this.fieldInstances.get(field.id),
+                    uiState: fieldUI,
+                });
+            } else if (externalInvalidFields && externalInvalidFields[field.id]) {
+                invalidFieldsContainer.push({
+                    prop: field,
+                    instance: this.fieldInstances.get(field.id),
+                    uiState: fieldUI,
+                });
+            }
+            return invalidFieldsContainer;
+        }, [] as Array<{ prop: FieldConfig; instance: any; uiState: FieldUI }>);
+    }
+
+    isValid(typesToCheck?: Array<string> | null) {
+        return Object
+            .keys(this.props.fieldsUI)
+            .every((key) => {
+                const fieldUI = this.props.fieldsUI[key];
+                if (typesToCheck) {
+                    const isCheckable = typesToCheck.includes(fieldUI.errorType || '');
+                    if (!isCheckable) {
+                        return true;
+                    }
+                }
+                return fieldUI.valid;
+            });
+    }
 
     renderPlugin = (
         field: FieldConfig,
