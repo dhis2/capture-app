@@ -1,13 +1,12 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Section } from '../Section/Section.component';
 import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
 import { D2SectionFields } from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
 import { SectionDescriptionBox } from './SectionDescriptionBox.component';
 
-const getStyles = theme => ({
+const styles: Readonly<any> = (theme: any) => ({
     section: {
         backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(892),
@@ -18,29 +17,24 @@ const getStyles = theme => ({
     },
 });
 
-type Props = {
-    sectionMetaData: MetaDataSection,
-    isHidden?: ?boolean,
-    classes: {
-        section: string,
-        containerCustomForm: string,
-    },
-    formHorizontal: ?boolean,
-    applyCustomFormClass: boolean,
-    sectionId: string,
-    formBuilderId: string,
-    formId: string,
-    onFieldsValidated: ?(fieldsUI: Object, formId: string, uidsForIsValidating: Array<string>) => void,
+type OwnProps = {
+    sectionMetaData: MetaDataSection;
+    isHidden?: boolean | null;
+    formHorizontal: boolean | null;
+    applyCustomFormClass: boolean;
+    sectionId: string;
+    formBuilderId: string;
+    formId: string;
+    onFieldsValidated?: ((fieldsUI: any, formId: string, uidsForIsValidating: Array<string>) => void) | null;
 };
 
+type Props = OwnProps & WithStyles<typeof styles>;
+
 class D2SectionPlain extends React.PureComponent<Props> {
-    // $FlowFixMe[speculation-ambiguous] automated comment
-    sectionFieldsInstance: ?D2SectionFields;
     componentDidMount() {
         if (this.props.isHidden) {
-            // Inform withSaveHandler that this section is done initialising
             this.props.onFieldsValidated?.(
-                Array.from(this.props.sectionMetaData.elements.keys()).reduce((acc, fieldKey) => {
+                Array.from(this.props.sectionMetaData.elements.keys()).reduce((acc: any, fieldKey: any) => {
                     acc[fieldKey] = { valid: true };
                     return acc;
                 }, {}),
@@ -49,6 +43,8 @@ class D2SectionPlain extends React.PureComponent<Props> {
             );
         }
     }
+
+    sectionFieldsInstance: any | null = null;
 
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
@@ -76,11 +72,10 @@ class D2SectionPlain extends React.PureComponent<Props> {
         );
     }
 
-    renderSection(sectionProps) {
+    renderSection(sectionProps: any) {
         const { sectionMetaData, classes, sectionId, ...passOnProps } = sectionProps;
 
         const sectionFields = (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2SectionFields
                 ref={(instance) => { this.sectionFieldsInstance = instance; }}
                 fieldsMetaData={sectionMetaData.elements}
@@ -93,9 +88,8 @@ class D2SectionPlain extends React.PureComponent<Props> {
             return (
                 <div>
                     <Section
-                        header={this.renderSectionHeader()}
-                        description={this.renderSectionDescription()}
-                        elevation={2}
+                        header={this.renderSectionHeader() || undefined}
+                        description={this.renderSectionDescription() || undefined}
                         className={classes.section}
                     >
                         {sectionFields}
@@ -125,4 +119,4 @@ class D2SectionPlain extends React.PureComponent<Props> {
     }
 }
 
-export const D2Section = withStyles(getStyles)(D2SectionPlain);
+export const D2Section = withStyles(styles)(D2SectionPlain);

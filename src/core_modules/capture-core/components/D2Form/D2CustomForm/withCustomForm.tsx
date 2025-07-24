@@ -1,11 +1,10 @@
-// @flow
 import * as React from 'react';
 import { D2CustomForm } from './D2CustomForm.component';
 
-import type { CustomForm as MetadataCustomForm } from '../../../metaData';
 
 type Props = {
-    customForm: MetadataCustomForm,
+    customForm: any,
+    [key: string]: any,
 };
 
 export const withCustomForm = () => (InnerComponent: React.ComponentType<any>) =>

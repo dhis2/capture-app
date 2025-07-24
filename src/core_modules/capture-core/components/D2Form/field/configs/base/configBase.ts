@@ -7,7 +7,7 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 export type FieldConfigForType = {
     component: ComponentType<any>,
-    props?: any | null,
+    props: any | null,
     id?: string,
     validators?: Array<ValidatorContainer>,
     commitEvent?: string | null,
@@ -25,6 +25,7 @@ export const commitEvents = {
 
 export const getBaseConfigForField = (metaData: DataElement, querySingleResource: QuerySingleResource) => ({
     id: metaData.id,
+    props: null,
     validators: getValidators(metaData, querySingleResource),
     commitEvent: commitEvents.ON_BLUR,
 });

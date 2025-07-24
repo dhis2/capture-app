@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -7,19 +6,45 @@ import type { Props, PropsForPureComponent } from './D2Form.types';
 import { Section } from '../../metaData';
 
 class D2Form extends React.PureComponent<PropsForPureComponent> {
-    name: string;
-    sectionInstances: Map<string, Object>;
-
     constructor(props: PropsForPureComponent) {
         super(props);
         this.name = 'D2Form';
         this.sectionInstances = new Map();
     }
 
-    validateFormIncludeSectionFailedFields(options: Object) {
-        let failedFormFields = [];
+    setSectionInstance(instance: any | null, id: string) {
+        if (!instance) {
+            if (this.sectionInstances.has(id)) {
+                this.sectionInstances.delete(id);
+            }
+        } else {
+            this.sectionInstances.set(id, instance);
+        }
+    }
+
+    getFormId() {
+        return this.props.id;
+    }
+
+    getFormBuilderId(sectionId: string) {
+        return `${this.props.id}-${sectionId}`;
+    }
+
+    validateFormScrollToFirstFailedField(options: any) {
+        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
+        if (isValid) {
+            return true;
+        }
+
+        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
+        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
+        return false;
+    }
+
+    validateFormIncludeSectionFailedFields(options: any) {
+        let failedFormFields: any[] = [];
         const isValid = Array.from(this.sectionInstances.entries())
-            .map(entry => entry[1])
+            .map((entry: any) => entry[1])
             .every((sectionInstance) => {
                 const isHidden = sectionInstance.props.isHidden;
                 if (isHidden) {
@@ -53,34 +78,8 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         };
     }
 
-    validateFormScrollToFirstFailedField(options: Object) {
-        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
-        if (isValid) {
-            return true;
-        }
-
-        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
-        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
-        return false;
-    }
-
-    setSectionInstance(instance: ?Object, id: string) {
-        if (!instance) {
-            if (this.sectionInstances.has(id)) {
-                this.sectionInstances.delete(id);
-            }
-        } else {
-            this.sectionInstances.set(id, instance);
-        }
-    }
-
-    getFormId() {
-        return this.props.id;
-    }
-
-    getFormBuilderId(sectionId: string) {
-        return `${this.props.id}-${sectionId}`;
-    }
+    name: string;
+    sectionInstances: Map<string, any>;
 
     renderHorizontal = (section: Section, passOnProps: any) => (
         <D2SectionContainer
@@ -122,7 +121,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             ...passOnProps
         } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries())
-            .map(entry => entry[1])
+            .map((entry: any) => entry[1])
             .filter(section => section.id !== Section.LEFTOVERS_SECTION_ID);
 
         const sections = metaDataSectionsAsArray.map(section => (
@@ -161,7 +160,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
 export const D2FormComponent = (props: Props) => {
     const { formRef, ...passOnProps } = props;
 
-    const handleRef = (instance) => {
+    const handleRef = (instance: any) => {
         if (formRef) {
             formRef(instance);
         }
@@ -174,3 +173,5 @@ export const D2FormComponent = (props: Props) => {
         />
     );
 };
+
+export { D2Form };

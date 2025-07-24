@@ -1,9 +1,8 @@
-// @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 
 import { IconInfo16, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import type { Props, PlainProps } from './SectionDescriptionBox.types';
+import type { PlainProps } from './SectionDescriptionBox.types';
 
 const styles = {
     descriptionBox: {
@@ -39,4 +38,4 @@ const SectionDescriptionBoxPlain = (props: PlainProps) => {
     );
 };
 
-export const SectionDescriptionBox: ComponentType<Props> = withStyles(styles)(SectionDescriptionBoxPlain);
+export const SectionDescriptionBox = withStyles(styles)(SectionDescriptionBoxPlain);

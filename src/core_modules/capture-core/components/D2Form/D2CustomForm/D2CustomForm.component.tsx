@@ -1,22 +1,20 @@
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
 import { walk, kinds } from 'react-transform-tree';
 import { errorCreator } from 'capture-core-utils';
 import type { FieldConfig } from '../FormBuilder';
-import { CustomForm } from '../../../metaData';
 
 type Props = {
     fields: Array<FieldConfig>,
-    onRenderField: (field: FieldConfig) => React.Element<any>,
-    specs: CustomForm,
+    onRenderField: (field: FieldConfig) => React.ReactNode,
+    specs: any,
 };
 
 type EventListenerSpec = {
     id: string,
     type: string,
     handler: string,
-    handlerRef?: ?() => void,
+    handlerRef?: (() => void) | null,
 };
 
 /**
@@ -26,7 +24,7 @@ type EventListenerSpec = {
  * @extends {React.Component<Props>}
  */
 export class D2CustomForm extends React.Component<Props> {
-    static getEventListenersForCurrentNode(nodeProps: Object): Array<string> {
+    static getEventListenersForCurrentNode(nodeProps: any): Array<string> {
         const eventListeners =
             Object
                 .keys(nodeProps)
@@ -36,8 +34,8 @@ export class D2CustomForm extends React.Component<Props> {
 
     static getEventListenerSpecsForCurrentNode(
         eventListeners: Array<string>,
-        nodeProps: Object,
-        id: number): Array<Object> {
+        nodeProps: any,
+        id: number): Array<any> {
         const eventListenerSpecsForCurrentNode = eventListeners
             .map((propName) => {
                 const handler = nodeProps[propName];
@@ -53,20 +51,18 @@ export class D2CustomForm extends React.Component<Props> {
     }
 
     static renderField(
-        field: FieldConfig,
-        customFormElementProps: Object,
-        onRenderField: (field: FieldConfig) => React.Node) {
+        fieldConfig: FieldConfig,
+        customFormElementProps: any,
+        onRenderField: (field: FieldConfig) => React.ReactNode) {
         return onRenderField({
-            ...field,
+            ...fieldConfig,
             props: {
-                ...field.props,
+                ...fieldConfig.props,
                 customFormElementProps,
             },
         });
     }
 
-    eventListenerSpecs: Array<EventListenerSpec>;
-    preProcessedSourceTree: Array<React.Node>;
     constructor(props: Props) {
         super(props);
         this.preProcessSourceTree();
@@ -81,6 +77,9 @@ export class D2CustomForm extends React.Component<Props> {
         this.removeEventListeners();
     }
 
+    eventListenerSpecs: Array<EventListenerSpec> = [];
+    preProcessedSourceTree: Array<React.ReactNode> = [];
+
     static errorMessages = {
         PRE_PROCESS_FAILED: 'Could not pre process custom form source tree',
     };
@@ -94,10 +93,9 @@ export class D2CustomForm extends React.Component<Props> {
         const { specs } = this.props;
         const sourceTree = specs.data.elements;
         let autoId = 1;
-        let eventListenerSpecs = [];
+        let eventListenerSpecs: any[] = [];
         let preProcessedSourceTree = [];
         try {
-            // $FlowFixMe[incompatible-call] automated comment
             preProcessedSourceTree = walk(sourceTree, {
                 [kinds.DOM_ELEMENT]: (path) => {
                     const { node } = path;
@@ -123,9 +121,6 @@ export class D2CustomForm extends React.Component<Props> {
                                     ...passOnNodeProps,
                                     'data-custom-form-id': autoId,
                                 },
-
-                                // $FlowFixMe[incompatible-type] automated comment
-                                // $FlowFixMe[prop-missing] automated comment
                                 ...path.walkChildren(),
                             );
                             autoId += 1;
@@ -136,9 +131,6 @@ export class D2CustomForm extends React.Component<Props> {
                     return React.cloneElement(
                         node,
                         node.props,
-
-                        // $FlowFixMe[incompatible-type] automated comment
-                        // $FlowFixMe[prop-missing] automated comment
                         ...path.walkChildren(),
                     );
                 },
@@ -167,7 +159,6 @@ export class D2CustomForm extends React.Component<Props> {
                 domScriptElement.async = true;
                 domScriptElement.innerHTML = scriptData;
 
-                // $FlowFixMe[incompatible-use] automated comment
                 document.body.appendChild(domScriptElement);
             });
     }
@@ -183,11 +174,10 @@ export class D2CustomForm extends React.Component<Props> {
         const specsWithHandlerRef = eventListenerSpecs
             .map((spec) => {
                 const handlerRef = () => { eval(spec.handler); } //eslint-disable-line
-                document
-                    .querySelector(`[data-custom-form-id="${spec.id}"]`)
-
-                    // $FlowFixMe[incompatible-use] automated comment
-                    .addEventListener(spec.type, handlerRef);
+                const element = document.querySelector(`[data-custom-form-id="${spec.id}"]`);
+                if (element) {
+                    element.addEventListener(spec.type, handlerRef);
+                }
 
                 return {
                     ...spec,
@@ -204,12 +194,10 @@ export class D2CustomForm extends React.Component<Props> {
     removeEventListeners() {
         this.eventListenerSpecs
             .forEach((spec) => {
-                document
-                    .querySelector(`[data-custom-form-id="${spec.id}"]`)
-
-                    // $FlowFixMe[incompatible-use] automated comment
-                    // $FlowFixMe[incompatible-call] automated comment
-                    .removeEventListener(spec.type, spec.handlerRef);
+                const element = document.querySelector(`[data-custom-form-id="${spec.id}"]`);
+                if (element && spec.handlerRef) {
+                    element.removeEventListener(spec.type, spec.handlerRef);
+                }
             });
     }
 
@@ -224,15 +212,14 @@ export class D2CustomForm extends React.Component<Props> {
         const sourceTree = this.preProcessedSourceTree;
 
 
-        // $FlowFixMe[incompatible-call] automated comment
         const transformedTree = walk(sourceTree, {
             [kinds.DOM_ELEMENT]: (path) => {
                 const { node } = path;
                 if (node.type === 'FormField') {
                     const fieldId = node.props.id;
-                    const field = fields.find(f => f.id === fieldId);
-                    if (field) {
-                        return D2CustomForm.renderField(field, node.props.customFormElementProps, onRenderField);
+                    const fieldConfig = fields.find(f => f.id === fieldId);
+                    if (fieldConfig) {
+                        return D2CustomForm.renderField(fieldConfig, node.props.customFormElementProps, onRenderField);
                     }
                     return null;
                 }

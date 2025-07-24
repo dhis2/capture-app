@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -39,13 +38,13 @@ type RulesCompulsoryFields = { [id: string]: boolean };
 type RulesDisabledFields = { [id: string]: boolean };
 
 type RulesMessage = {
-    error?: ?string,
-    warning?: ?string,
-    errorOnComplete?: ?string,
-    warningOnComplete?: ?string,
+    error?: string | null,
+    warning?: string | null,
+    errorOnComplete?: string | null,
+    warningOnComplete?: string | null,
 }
 type RulesMessages = {
-    [id: string]: ?RulesMessage,
+    [id: string]: RulesMessage | null,
 };
 
 type Props = {
@@ -55,16 +54,16 @@ type Props = {
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
     rulesDisabledFields: RulesDisabledFields,
-    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string, updateCompletePromise: ?Promise<any>) => void,
-    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
+    onUpdateField: (value: any, uiState: any, elementId: string, formBuilderId: string, formId: string, updateCompletePromise: Promise<any> | null) => void,
+    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: (...args: any[]) => any) => void,
     formId: string,
     formBuilderId: string,
     formHorizontal: boolean,
-    fieldOptions?: ?Object,
+    fieldOptions?: any | null,
     customForm: CustomForm,
-    validationStrategy: $Values<typeof validationStrategies>,
+    validationStrategy: any,
     loadNr: number,
-    viewMode?: ?boolean,
+    viewMode?: boolean | null,
     querySingleResource: QuerySingleResource,
 };
 
@@ -74,7 +73,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
 
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
-            // $FlowFixMe[incompatible-return] automated comment
             .map((metaDataElement) => {
                 if (metaDataElement instanceof FormFieldPluginConfig) {
                     return ({
@@ -93,7 +91,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     });
                 }
 
-                // $FlowFixMe - filter removes undefined values
                 return buildField(
                     metaDataElement,
                     {
@@ -113,18 +110,12 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return formBuilderInstance.isValid([validatorTypes.TYPE_BASE]);
     }
 
-    handleUpdateField: (elementId: string, value: any) => void;
-    formBuilderInstance: ?FormBuilder;
-    formFields: Array<FieldConfig>;
-    rulesCompulsoryErrors: { [elementId: string]: boolean };
-
     static defaultProps = {
         values: {},
     };
 
     constructor(props: Props) {
         super(props);
-        this.handleUpdateField = this.handleUpdateField.bind(this);
         this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
         this.rulesCompulsoryErrors = {};
     }
@@ -133,56 +124,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
         if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
             this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
         }
-    }
-
-    rulesIsValid() {
-        const rulesMessages = this.props.rulesMessages;
-        const errorMessages = Object.keys(rulesMessages)
-            .map(id => rulesMessages[id] &&
-                (rulesMessages[id][messageStateKeys.ERROR]))
-            .filter(errorMessage => errorMessage);
-
-        return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
-    }
-
-    validateFull(formBuilderInstance: FormBuilder) {
-        const formBuilderIsValid = formBuilderInstance.isValid();
-        if (!formBuilderIsValid) {
-            return false;
-        }
-
-        return this.rulesIsValid();
-    }
-
-    isValid(options?: ?{ isCompleting: boolean }) {
-        const formBuilderInstance = this.formBuilderInstance;
-        if (!formBuilderInstance) {
-            log.error(
-                errorCreator(
-                    'could not get formbuilder instance')(
-                    {
-                        method: 'isValid',
-                        object: this,
-                    },
-                ),
-            );
-            return false;
-        }
-        return this.validateBasedOnStrategy(options, formBuilderInstance);
-    }
-
-    validateBasedOnStrategy(options?: ?{ isCompleting: boolean }, formBuilderInstance: FormBuilder) {
-        const validationStrategy = this.props.validationStrategy;
-        if (validationStrategy === validationStrategies.NONE) {
-            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
-        } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
-            const isCompleting = options && options.isCompleting;
-            if (isCompleting) {
-                return this.validateFull(formBuilderInstance);
-            }
-            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
-        }
-        return this.validateFull(formBuilderInstance);
     }
 
     getInvalidFields() {
@@ -208,18 +149,29 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return invalidFields;
     }
 
-    handleUpdateField(
-        value: any,
-        uiState: Object,
-        elementId: string,
-        formBuilderId: string,
-        updateCompletePromise: ?Promise<any>,
-    ) {
-        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
-    }
-
-    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => {
-        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
+    getFieldConfigWithRulesEffects(): Array<FieldConfig> {
+        return this.formFields.map(formField => ({
+            ...formField,
+            props: {
+                ...formField.props,
+                hidden: this.props.rulesHiddenFields[formField.id],
+                rulesErrorMessage:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id]![messageStateKeys.ERROR],
+                rulesWarningMessage:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id]![messageStateKeys.WARNING],
+                rulesErrorMessageOnComplete:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id]![messageStateKeys.ERROR_ON_COMPLETE],
+                rulesWarningMessageOnComplete:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id]![messageStateKeys.WARNING_ON_COMPLETE],
+                rulesCompulsory: this.props.rulesCompulsoryFields[formField.id],
+                rulesCompulsoryError: this.rulesCompulsoryErrors[formField.id],
+                rulesDisabled: this.props.rulesDisabledFields[formField.id],
+            },
+        }));
     }
 
     buildRulesCompulsoryErrors() {
@@ -239,30 +191,73 @@ export class D2SectionFieldsComponent extends Component<Props> {
             }, {});
     }
 
-    getFieldConfigWithRulesEffects(): Array<FieldConfig> {
-        return this.formFields.map(formField => ({
-            ...formField,
-            props: {
-                ...formField.props,
-                hidden: this.props.rulesHiddenFields[formField.id],
-                rulesErrorMessage:
-                    this.props.rulesMessages[formField.id] &&
-                    this.props.rulesMessages[formField.id][messageStateKeys.ERROR],
-                rulesWarningMessage:
-                    this.props.rulesMessages[formField.id] &&
-                    this.props.rulesMessages[formField.id][messageStateKeys.WARNING],
-                rulesErrorMessageOnComplete:
-                    this.props.rulesMessages[formField.id] &&
-                    this.props.rulesMessages[formField.id][messageStateKeys.ERROR_ON_COMPLETE],
-                rulesWarningMessageOnComplete:
-                    this.props.rulesMessages[formField.id] &&
-                    this.props.rulesMessages[formField.id][messageStateKeys.WARNING_ON_COMPLETE],
-                rulesCompulsory: this.props.rulesCompulsoryFields[formField.id],
-                rulesCompulsoryError: this.rulesCompulsoryErrors[formField.id],
-                rulesDisabled: this.props.rulesDisabledFields[formField.id],
-            },
-        }));
+    rulesIsValid() {
+        const rulesMessages = this.props.rulesMessages;
+        const errorMessages = Object.keys(rulesMessages)
+            .map(id => rulesMessages[id] &&
+                (rulesMessages[id][messageStateKeys.ERROR]))
+            .filter(errorMessage => errorMessage);
+
+        return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
     }
+
+    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
+    }
+
+    handleUpdateField(
+        value: any,
+        uiState: any,
+        elementId: string,
+        formBuilderId: string,
+        updateCompletePromise: Promise<any> | null,
+    ) {
+        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
+    }
+
+    validateBasedOnStrategy(options: { isCompleting: boolean } | null | undefined, formBuilderInstance: FormBuilder) {
+        const validationStrategy = this.props.validationStrategy;
+        if (validationStrategy === validationStrategies.NONE) {
+            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
+        } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
+            const isCompleting = options && options.isCompleting;
+            if (isCompleting) {
+                return this.validateFull(formBuilderInstance);
+            }
+            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
+        }
+        return this.validateFull(formBuilderInstance);
+    }
+
+    isValid(options?: { isCompleting: boolean } | null | undefined) {
+        const formBuilderInstance = this.formBuilderInstance;
+        if (!formBuilderInstance) {
+            log.error(
+                errorCreator(
+                    'could not get formbuilder instance')(
+                    {
+                        method: 'isValid',
+                        object: this,
+                    },
+                ),
+            );
+            return false;
+        }
+        return this.validateBasedOnStrategy(options, formBuilderInstance);
+    }
+
+    validateFull(formBuilderInstance: FormBuilder) {
+        const formBuilderIsValid = formBuilderInstance.isValid();
+        if (!formBuilderIsValid) {
+            return false;
+        }
+
+        return this.rulesIsValid();
+    }
+
+    formBuilderInstance: FormBuilder | null = null;
+    formFields: Array<FieldConfig>;
+    rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     render() {
         const {
@@ -285,11 +280,10 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return (
             <div
                 data-test="d2-section-fields"
-                style={this.props.formHorizontal ? styles.horizontalSection : {}}
+                style={this.props.formHorizontal ? styles.horizontalSection as any : {}}
             >
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <CustomFormHOC
-                    formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
+                    ref={(instance: any) => { this.formBuilderInstance = instance; }}
                     id={formId}
                     fields={this.getFieldConfigWithRulesEffects()}
                     dataElements={this.formFields}
@@ -304,3 +298,5 @@ export class D2SectionFieldsComponent extends Component<Props> {
         );
     }
 }
+
+export { D2SectionFieldsComponent as D2SectionFields };
