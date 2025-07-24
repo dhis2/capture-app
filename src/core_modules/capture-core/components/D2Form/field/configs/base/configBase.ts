@@ -25,7 +25,6 @@ export const commitEvents = {
 
 export const getBaseConfigForField = (metaData: DataElement, querySingleResource: QuerySingleResource) => ({
     id: metaData.id,
-    props: null,
     validators: getValidators(metaData, querySingleResource),
     commitEvent: commitEvents.ON_BLUR,
 });

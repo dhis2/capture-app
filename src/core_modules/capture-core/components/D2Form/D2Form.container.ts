@@ -4,11 +4,7 @@ import type { PropsFromRedux, OwnProps } from './D2Form.types';
 import { withAsyncHandler } from './asyncHandlerHOC';
 import { D2FormComponent } from './D2Form.component';
 
-type ReduxState = {
-    forms: { [key: string]: any };
-};
-
-const mapStateToProps = (state: ReduxState, ownProps: OwnProps): PropsFromRedux => {
+const mapStateToProps = (state: any, ownProps: OwnProps): PropsFromRedux => {
     const { forms } = state;
 
     const isFormInReduxStore = !!forms[ownProps.id];
@@ -16,6 +12,6 @@ const mapStateToProps = (state: ReduxState, ownProps: OwnProps): PropsFromRedux 
 };
 
 export const D2Form = compose(
-    connect<PropsFromRedux, Record<string, never>, OwnProps, ReduxState>(mapStateToProps, () => ({})),
+    connect<PropsFromRedux, Record<string, never>, OwnProps, any>(mapStateToProps, () => ({})),
     withAsyncHandler(),
 )(D2FormComponent);

@@ -115,7 +115,6 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         const {
             formFoundation,
             id,
-            classes,
             isFormInReduxStore,
             getCustomContent,
             ...passOnProps

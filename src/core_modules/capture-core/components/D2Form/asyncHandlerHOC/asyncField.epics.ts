@@ -15,8 +15,8 @@ import {
 export const asyncUpdateFieldEpic = (action$: any) =>
     action$.pipe(
         ofType(actionTypes.START_UPDATE_FIELD_ASYNC),
-        concatMap((action) => {
-            const payload = (action as any).payload;
+        concatMap((action: any) => {
+            const payload = action.payload;
             const { elementId, formBuilderId, formId, callback, uid, onSuccess, onError } = payload;
 
             const uiState = {

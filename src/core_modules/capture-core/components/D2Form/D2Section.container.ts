@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { D2Section } from './D2Section.component';
+import type { Section as MetaDataSection } from '../../metaData';
 import { withApiUtils } from '../../HOC';
 
-const mapStateToProps = (state: any, props: { sectionMetaData: any, formId: string }) => {
+const mapStateToProps = (state: any, props: { sectionMetaData: MetaDataSection, formId: string }) => {
     const fieldsHiddenByRules = state.rulesEffectsHiddenFields[props.formId];
     if (fieldsHiddenByRules) {
         const visibleFields = Array.from(props.sectionMetaData.elements.keys())

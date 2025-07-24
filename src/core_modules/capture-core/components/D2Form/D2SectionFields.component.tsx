@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -110,6 +111,10 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return formBuilderInstance.isValid([validatorTypes.TYPE_BASE]);
     }
 
+    formBuilderInstance: FormBuilder | null = null;
+    formFields: Array<FieldConfig>;
+    rulesCompulsoryErrors: { [elementId: string]: boolean };
+
     static defaultProps = {
         values: {},
     };
@@ -124,6 +129,47 @@ export class D2SectionFieldsComponent extends Component<Props> {
         if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
             this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
         }
+    }
+
+    rulesIsValid() {
+        const rulesMessages = this.props.rulesMessages;
+        const errorMessages = Object.keys(rulesMessages)
+            .map(id => rulesMessages[id] &&
+                (rulesMessages[id][messageStateKeys.ERROR]))
+            .filter(errorMessage => errorMessage);
+
+        return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
+    }
+
+    isValid(options?: { isCompleting: boolean } | null) {
+        const formBuilderInstance = this.formBuilderInstance;
+        if (!formBuilderInstance) {
+            log.error(
+                errorCreator(
+                    'could not get formbuilder instance')(
+                    {
+                        method: 'isValid',
+                        object: this,
+                    },
+                ),
+            );
+            return false;
+        }
+        return this.validateBasedOnStrategy(options, formBuilderInstance);
+    }
+
+    validateBasedOnStrategy(options: { isCompleting: boolean } | null | undefined, formBuilderInstance: FormBuilder) {
+        const validationStrategy = this.props.validationStrategy;
+        if (validationStrategy === validationStrategies.NONE) {
+            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
+        } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
+            const isCompleting = options && options.isCompleting;
+            if (isCompleting) {
+                return this.validateFull(formBuilderInstance);
+            }
+            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
+        }
+        return this.validateFull(formBuilderInstance);
     }
 
     getInvalidFields() {
@@ -147,6 +193,37 @@ export class D2SectionFieldsComponent extends Component<Props> {
         const invalidFields = this.formBuilderInstance ?
             this.formBuilderInstance.getInvalidFields(externalInvalidFields) : [];
         return invalidFields;
+    }
+
+    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
+    }
+
+    handleUpdateField(
+        value: any,
+        uiState: any,
+        elementId: string,
+        formBuilderId: string,
+        updateCompletePromise: Promise<any> | null,
+    ) {
+        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
+    }
+
+    buildRulesCompulsoryErrors() {
+        const rulesCompulsory = this.props.rulesCompulsoryFields;
+        const values = this.props.values;
+
+        this.rulesCompulsoryErrors = Object.keys(rulesCompulsory)
+            .reduce((accCompulsoryErrors, key) => {
+                const isCompulsory = rulesCompulsory[key];
+                if (isCompulsory) {
+                    const value = values[key];
+                    if (!value && value !== 0 && value !== false) {
+                        accCompulsoryErrors[key] = 'This field is required';
+                    }
+                }
+                return accCompulsoryErrors;
+            }, {});
     }
 
     getFieldConfigWithRulesEffects(): Array<FieldConfig> {
@@ -174,78 +251,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
         }));
     }
 
-    buildRulesCompulsoryErrors() {
-        const rulesCompulsory = this.props.rulesCompulsoryFields;
-        const values = this.props.values;
-
-        this.rulesCompulsoryErrors = Object.keys(rulesCompulsory)
-            .reduce((accCompulsoryErrors, key) => {
-                const isCompulsory = rulesCompulsory[key];
-                if (isCompulsory) {
-                    const value = values[key];
-                    if (!value && value !== 0 && value !== false) {
-                        accCompulsoryErrors[key] = 'This field is required';
-                    }
-                }
-                return accCompulsoryErrors;
-            }, {});
-    }
-
-    rulesIsValid() {
-        const rulesMessages = this.props.rulesMessages;
-        const errorMessages = Object.keys(rulesMessages)
-            .map(id => rulesMessages[id] &&
-                (rulesMessages[id][messageStateKeys.ERROR]))
-            .filter(errorMessage => errorMessage);
-
-        return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
-    }
-
-    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => {
-        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
-    }
-
-    handleUpdateField(
-        value: any,
-        uiState: any,
-        elementId: string,
-        formBuilderId: string,
-        updateCompletePromise: Promise<any> | null,
-    ) {
-        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
-    }
-
-    validateBasedOnStrategy(options: { isCompleting: boolean } | null | undefined, formBuilderInstance: FormBuilder) {
-        const validationStrategy = this.props.validationStrategy;
-        if (validationStrategy === validationStrategies.NONE) {
-            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
-        } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
-            const isCompleting = options && options.isCompleting;
-            if (isCompleting) {
-                return this.validateFull(formBuilderInstance);
-            }
-            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
-        }
-        return this.validateFull(formBuilderInstance);
-    }
-
-    isValid(options?: { isCompleting: boolean } | null | undefined) {
-        const formBuilderInstance = this.formBuilderInstance;
-        if (!formBuilderInstance) {
-            log.error(
-                errorCreator(
-                    'could not get formbuilder instance')(
-                    {
-                        method: 'isValid',
-                        object: this,
-                    },
-                ),
-            );
-            return false;
-        }
-        return this.validateBasedOnStrategy(options, formBuilderInstance);
-    }
-
     validateFull(formBuilderInstance: FormBuilder) {
         const formBuilderIsValid = formBuilderInstance.isValid();
         if (!formBuilderIsValid) {
@@ -254,10 +259,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
 
         return this.rulesIsValid();
     }
-
-    formBuilderInstance: FormBuilder | null = null;
-    formFields: Array<FieldConfig>;
-    rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     render() {
         const {
@@ -283,7 +284,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                 style={this.props.formHorizontal ? styles.horizontalSection as any : {}}
             >
                 <CustomFormHOC
-                    ref={(instance: any) => { this.formBuilderInstance = instance; }}
+                    formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                     id={formId}
                     fields={this.getFieldConfigWithRulesEffects()}
                     dataElements={this.formFields}

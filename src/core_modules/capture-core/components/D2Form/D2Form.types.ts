@@ -19,9 +19,7 @@ export type PropsFromRedux = {
     readonly isFormInReduxStore?: boolean;
 };
 
-export type Props = {
-    readonly classes?: any;
-} & OwnProps & PropsFromRedux;
+export type Props = OwnProps & PropsFromRedux;
 
 export type PropsForPureComponent = Omit<Props, keyof FormRef> & {
     readonly formRef?: (instance: any) => void;

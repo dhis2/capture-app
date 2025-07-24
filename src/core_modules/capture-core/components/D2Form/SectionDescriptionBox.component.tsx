@@ -2,7 +2,8 @@ import React from 'react';
 
 import { IconInfo16, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import type { PlainProps } from './SectionDescriptionBox.types';
+import type { WithStyles } from '@material-ui/core/styles';
+import type { Props } from './SectionDescriptionBox.types';
 
 const styles = {
     descriptionBox: {
@@ -23,7 +24,7 @@ const styles = {
     },
 };
 
-const SectionDescriptionBoxPlain = (props: PlainProps) => {
+const SectionDescriptionBoxPlain = (props: Props & WithStyles<typeof styles>) => {
     const { classes, description } = props;
 
     return (
