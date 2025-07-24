@@ -1,7 +1,5 @@
-// @flow
 import React, { useCallback, useMemo } from 'react';
 import moment from 'moment';
-// $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
@@ -52,29 +50,29 @@ export const EnrollmentAddEventPageDefault = ({
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
 
-    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
+    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate: any) => {
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
     }, [dispatch]);
 
-    const onUpdateEnrollmentStatusError = useCallback((message) => {
+    const onUpdateEnrollmentStatusError = useCallback((message: string) => {
         dispatch(rollbackEnrollmentAndEvents());
         dispatch(showEnrollmentError({ message }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
+    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
         dispatch(commitEnrollmentAndEvents());
         redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
-        ({ enrollments, events, linkMode }) => {
+        ({ enrollments, events, linkMode }: any) => {
             if (linkMode && linkMode === relatedStageActions.ENTER_DATA) return;
 
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
 
-            const eventsWithUpdatedDate = events.map(event => ({
+            const eventsWithUpdatedDate = events.map((event: any) => ({
                 ...convertEventAttributeOptions(event),
                 updatedAt,
             }));
@@ -99,7 +97,7 @@ export const EnrollmentAddEventPageDefault = ({
         dispatch(deleteEnrollment({ enrollmentId }));
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, navigate, programId, orgUnitId, teiId]);
-    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentError = (message: string) => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
     const onAccessLostFromTransfer = () => {
@@ -108,12 +106,11 @@ export const EnrollmentAddEventPageDefault = ({
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
-    const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
+    const dataEntryHasChanges = useSelector((state: any) => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
-    const selectedProgramStage = [...program?.stages.values() ?? []].find(item => item.id === stageId);
+    const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
-    // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name ?? '';
 
     const rulesExecutionDependencies = useMemo(() => ({

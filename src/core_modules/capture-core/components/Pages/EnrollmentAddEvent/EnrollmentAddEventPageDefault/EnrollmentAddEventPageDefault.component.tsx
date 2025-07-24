@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
@@ -9,7 +8,7 @@ import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
-const styles = ({ typography }) => ({
+const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
         padding: '16px 24px 16px 24px',
     },
@@ -93,5 +92,5 @@ const EnrollmentAddEventPagePain = ({
     );
 };
 
-export const EnrollmentAddEventPageDefaultComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const EnrollmentAddEventPageDefaultComponent: ComponentType<any> =
     withStyles(styles)(EnrollmentAddEventPagePain);

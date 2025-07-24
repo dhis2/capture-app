@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-16T12:06:33.579Z\n"
-"PO-Revision-Date: 2025-07-16T12:06:33.579Z\n"
+"POT-Creation-Date: 2025-07-24T06:52:16.579Z\n"
+"PO-Revision-Date: 2025-07-24T06:52:16.579Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -725,9 +725,6 @@ msgstr "Report"
 
 msgid "Schedule"
 msgstr "Schedule"
-
-msgid "Refer"
-msgstr "Refer"
 
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"
