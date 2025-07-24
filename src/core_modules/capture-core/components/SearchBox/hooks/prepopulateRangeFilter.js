@@ -15,14 +15,14 @@ const RANGE_TYPES = [
 
 export const isEqualRangeValue = (value: any, type: string): boolean => {
     if (!RANGE_TYPES.includes(type)) {
-        return false;
+        return true;
     }
 
     if (value && typeof value === 'object' && 'from' in value && 'to' in value) {
         return value.from === value.to;
     }
 
-    return false;
+    return true;
 };
 
 
