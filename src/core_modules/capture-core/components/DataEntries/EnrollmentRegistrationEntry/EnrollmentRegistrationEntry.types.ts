@@ -58,7 +58,7 @@ export type OwnProps = {
     onCancel: () => void;
     duplicatesReviewPageSize: number;
     renderDuplicatesCardActions?: RenderCustomCardActions;
-    renderDuplicatesDialogActions?: (onCancel: () => void, onSave?: () => void) => ReactNode;
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => ReactNode;
     ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent;
     teiId?: string;
     skipDuplicateCheck?: boolean;
@@ -97,7 +97,7 @@ type PropsAddedInHOC = {
 
 type PropsRemovedInHOC = {
     renderDuplicatesCardActions?: RenderCustomCardActions;
-    renderDuplicatesDialogActions?: (onCancel: () => void, onSave?: () => void) => ReactNode;
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => ReactNode;
     duplicatesReviewPageSize: number;
     onSave: SaveForDuplicateCheck;
 };

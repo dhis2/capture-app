@@ -33,8 +33,8 @@ export const requestSaveEvent = ({
     onSaveErrorActionType,
 }: {
     requestEvent: RequestEvent;
-    linkedEvent?: LinkedRequestEvent;
-    relationship?: Record<string, unknown>;
+    linkedEvent: LinkedRequestEvent | null;
+    relationship: Record<string, unknown> | null;
     serverData: Record<string, unknown>;
     linkMode?: keyof typeof relatedStageActions;
     onSaveExternal?: ExternalSaveHandler;

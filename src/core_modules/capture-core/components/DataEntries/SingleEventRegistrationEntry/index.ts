@@ -1,5 +1,3 @@
-// @flow
-
 // actions
 export {
     actionTypes as dataEntryActionTypes,

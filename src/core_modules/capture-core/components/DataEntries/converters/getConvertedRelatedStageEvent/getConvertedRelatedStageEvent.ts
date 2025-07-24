@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { relatedStageActions } from '../../../WidgetRelatedStages';
@@ -18,9 +17,9 @@ const getEventDetailsByLinkMode = ({
     teiId,
     enrollmentId,
     serverRequestEvent,
-}): {
-    linkedEvent: ?LinkedRequestEvent,
-    linkedEventId: ?string,
+}: any): {
+    linkedEvent: LinkedRequestEvent | null;
+    linkedEventId: string | null;
 } => {
     const baseEventDetails = {
         event: generateUID(),
@@ -32,7 +31,7 @@ const getEventDetailsByLinkMode = ({
         enrollment: enrollmentId,
         dataValues: [],
         notes: [],
-        status: 'SCHEDULE',
+        status: 'SCHEDULE' as const,
     };
 
     if (linkMode === relatedStageActions.SCHEDULE_IN_ORG) {
@@ -113,7 +112,7 @@ export const getConvertedRelatedStageEvent = ({
         serverRequestEvent,
     });
 
-    const relationship = linkedEventId && {
+    const relationship = linkedEventId ? {
         relationshipType: relatedStageType.id,
         relationship: generateUID(),
         from: {
@@ -126,7 +125,7 @@ export const getConvertedRelatedStageEvent = ({
                 event: requestEventIsFromConstraint ? linkedEventId : serverRequestEvent.event,
             },
         },
-    };
+    } : null;
 
     return {
         linkedEvent,

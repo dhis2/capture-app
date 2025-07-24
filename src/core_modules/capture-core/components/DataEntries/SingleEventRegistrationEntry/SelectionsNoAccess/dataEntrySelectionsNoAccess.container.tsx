@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import { DataEntrySelectionsNoAccess } from './dataEntrySelectionsNoAccess.component';
 import {
@@ -8,12 +7,10 @@ import {
 const mapStateToProps = () => ({
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onCancel: () => {
         dispatch(cancelNewEventAndReturnToMainPage());
     },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const SelectionsNoAccess = connect(mapStateToProps, mapDispatchToProps)(DataEntrySelectionsNoAccess);
