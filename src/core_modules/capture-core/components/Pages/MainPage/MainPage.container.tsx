@@ -107,7 +107,7 @@ const useSelectorMainPage = () =>
             reduxSelectedTemplateId: workingListsTemplates.teiList?.selectedTemplateId,
             workingListProgramId: workingListsContext.teiList?.programIdView,
             ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
-            error: activePage.selectionsError && activePage.selectionsError.error,
+            error: activePage.selectionsError?.error,
         }),
         shallowEqual,
     );
