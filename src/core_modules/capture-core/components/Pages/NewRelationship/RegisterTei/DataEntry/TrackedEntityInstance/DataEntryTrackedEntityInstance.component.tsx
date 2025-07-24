@@ -27,6 +27,7 @@ const RelationshipTrackedEntityInstancePlain =
             <TeiRegistrationEntry
                 id={DATA_ENTRY_ID}
                 orgUnitId={orgUnitId}
+                // @ts-expect-error - keeping original functionality as before ts rewrite
                 teiRegistrationMetadata={teiRegistrationMetadata}
                 selectedScopeId={teiRegistrationMetadata.form.id}
                 saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {

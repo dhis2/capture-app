@@ -19,7 +19,7 @@ type Props = {
         eventId: string,
         dataEntryId: string,
         formFoundation: RenderFoundation,
-        enrollment: string,
+        enrollment: Record<string, unknown>,
     ) => void;
 };
 

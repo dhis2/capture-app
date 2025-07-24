@@ -25,8 +25,8 @@ export const createServerData = ({
     enrollment,
 }: {
     serverRequestEvent: RequestEvent;
-    linkedEvent?: LinkedRequestEvent;
-    relationship?: Record<string, unknown>;
+    linkedEvent: LinkedRequestEvent | null;
+    relationship: Record<string, unknown> | null;
     enrollment?: Record<string, unknown>;
 }) => {
     const relationships = relationship ? [relationship] : undefined;

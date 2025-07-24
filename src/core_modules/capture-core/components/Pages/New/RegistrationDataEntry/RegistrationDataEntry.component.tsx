@@ -56,7 +56,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
     },
 });
 
-const DialogButtons = ({ onCancel, onSave }: { onCancel: () => void; onSave?: () => void }) => (
+const DialogButtons = ({ onCancel, onSave }) => (
     <>
         <Button onClick={onCancel} secondary>
             {i18n.t('Cancel')}
@@ -127,7 +127,7 @@ const RegistrationDataEntryPlain = ({
         setScopeId(id);
     };
 
-    const renderDuplicatesDialogActions = useCallback((callbackOnCancel: () => void, onSave?: () => void) => (
+    const renderDuplicatesDialogActions = useCallback((callbackOnCancel, onSave) => (
         <DialogButtons
             onCancel={callbackOnCancel}
             onSave={onSave}

@@ -22,7 +22,7 @@ import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
-const ValidatedComponentWrapper = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC);
+const ValidatedComponentWrapper = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC) as any;
 
 export const Validated = ({
     program,

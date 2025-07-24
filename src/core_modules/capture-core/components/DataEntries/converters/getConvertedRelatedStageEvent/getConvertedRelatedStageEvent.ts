@@ -112,7 +112,7 @@ export const getConvertedRelatedStageEvent = ({
         serverRequestEvent,
     });
 
-    const relationship = linkedEventId && {
+    const relationship = linkedEventId ? {
         relationshipType: relatedStageType.id,
         relationship: generateUID(),
         from: {
@@ -125,7 +125,7 @@ export const getConvertedRelatedStageEvent = ({
                 event: requestEventIsFromConstraint ? linkedEventId : serverRequestEvent.event,
             },
         },
-    };
+    } : null;
 
     return {
         linkedEvent,
