@@ -153,11 +153,8 @@ export class FormBuilder extends React.Component<Props> {
         const validationPromises = fields
             .map(async (field) => {
                 const fieldId = field.id;
-                let fieldValidatingPromiseContainer = fieldsValidatingPromiseContainer[fieldId];
-                if (!fieldValidatingPromiseContainer) {
-                    fieldValidatingPromiseContainer = { validatingCompleteUid: uuid() };
-                    fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
-                }
+                const fieldValidatingPromiseContainer: any = fieldsValidatingPromiseContainer[fieldId] || {};
+                fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
 
                 if (!fieldValidatingPromiseContainer.validatingCompleteUid) {
                     fieldValidatingPromiseContainer.validatingCompleteUid = uuid();
@@ -309,7 +306,12 @@ export class FormBuilder extends React.Component<Props> {
             });
     }
 
-
+    /**
+     * Retreive the field that has the specified field id
+     *
+     * @param fieldId
+     * @returns {}
+    */
     getFieldProp(fieldId: string): FieldConfig | undefined {
         return this.props.fields.find(f => f.id === fieldId);
     }
@@ -331,7 +333,9 @@ export class FormBuilder extends React.Component<Props> {
 
     commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: FieldCommitOptions | null) {
         const fieldProp = this.getFieldProp(fieldId);
-        if (!fieldProp) return;
+        if (!fieldProp) {
+            return;
+        }
         const { validators, onIsEqual } = fieldProp;
         this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
     }
@@ -360,10 +364,10 @@ export class FormBuilder extends React.Component<Props> {
             return;
         }
 
-        let fieldValidatingPromiseContainer = this.fieldsValidatingPromiseContainer[fieldId];
-        if (!fieldValidatingPromiseContainer) {
-            fieldValidatingPromiseContainer = { validatingCompleteUid: uuid() };
-            this.fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
+        const fieldValidatingPromiseContainer: any = this.fieldsValidatingPromiseContainer[fieldId] || {};
+        this.fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
+        if (!fieldValidatingPromiseContainer.validatingCompleteUid) {
+            fieldValidatingPromiseContainer.validatingCompleteUid = uuid();
         }
         fieldValidatingPromiseContainer.cancelableValidatingPromise &&
         fieldValidatingPromiseContainer.cancelableValidatingPromise.cancel();
@@ -444,6 +448,10 @@ export class FormBuilder extends React.Component<Props> {
     handleCommitAsync = (fieldId: string, fieldLabel: string, callback: (...args: any[]) => any) => {
         this.props.onUpdateFieldAsync(fieldId, fieldLabel, this.props.id, callback);
     }
+
+    /**
+     *  Retain a reference to the form field instance
+    */
 
     setFieldInstance(instance: any, id: string) {
         if (!instance) {

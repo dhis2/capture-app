@@ -121,6 +121,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
+        this.handleUpdateField = this.handleUpdateField.bind(this);
         this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
         this.rulesCompulsoryErrors = {};
     }
