@@ -1,6 +1,4 @@
-// @flow
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-// $FlowFixMe
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
@@ -12,12 +10,36 @@ import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
 
+type ReduxState = {
+    activePage: {
+        selectionsError?: { error: boolean };
+        lockedSelectorLoads: boolean;
+        isLoading: boolean;
+    };
+    currentSelections: {
+        categories: any;
+        categoriesMeta: any;
+    };
+    workingListsTemplates: {
+        teiList?: { selectedTemplateId: string };
+    };
+    workingListsContext: {
+        teiList?: { programIdView: string };
+    };
+};
+
 const mapStateToProps = (state: ReduxState) => ({
-    error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
-    ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
+    error: state.activePage.selectionsError && state.activePage.selectionsError.error,
+    ready: !state.activePage.lockedSelectorLoads,
 });
 
-const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, navigate }) => {
+const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, navigate }: {
+    programId: string;
+    orgUnitId?: string;
+    selectedTemplateId?: string;
+    showAllAccessible: boolean;
+    navigate: (url: string) => void;
+}) => {
     if (orgUnitId) {
         selectedTemplateId
             ? navigate(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId })}`)
@@ -38,6 +60,14 @@ const useMainPageStatus = ({
     showAllAccessible,
     categoryOptionIsInvalidForOrgUnit,
     showBulkDataEntryPlugin,
+}: {
+    programId?: string;
+    selectedProgram?: any;
+    categories?: any;
+    orgUnitId?: string;
+    showAllAccessible: boolean;
+    categoryOptionIsInvalidForOrgUnit: boolean;
+    showBulkDataEntryPlugin: boolean;
 }) => {
     const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
@@ -49,7 +79,7 @@ const useMainPageStatus = ({
         if (selectedProgram?.categoryCombination) {
             if (!categories) return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
-            if (programCategories.some(category => !categories || !categories[category.id])) {
+            if (programCategories.some((category: any) => !categories || !categories[category.id])) {
                 return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
             }
             if (withoutOrgUnit) {
@@ -71,7 +101,7 @@ const useMainPageStatus = ({
 
 const useSelectorMainPage = () =>
     useSelector(
-        ({ currentSelections, activePage, workingListsTemplates, workingListsContext }) => ({
+        ({ currentSelections, activePage, workingListsTemplates, workingListsContext }: ReduxState) => ({
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
             reduxSelectedTemplateId: workingListsTemplates.teiList?.selectedTemplateId,
@@ -89,14 +119,21 @@ const useCallbackMainPage = ({
     navigate,
     setShowBulkDataEntryPlugin,
     setBulkDataEntryTrackedEntityIds,
+}: {
+    orgUnitId?: string;
+    programId?: string;
+    showAllAccessible: boolean;
+    navigate: (url: string) => void;
+    setShowBulkDataEntryPlugin: (show: boolean) => void;
+    setBulkDataEntryTrackedEntityIds: (ids?: Array<string>) => void;
 }) => {
     const onChangeTemplate = useCallback(
-        id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, navigate }),
+        (id?: string) => handleChangeTemplateUrl({ programId: programId || '', orgUnitId, selectedTemplateId: id, showAllAccessible, navigate }),
         [navigate, orgUnitId, programId, showAllAccessible],
     );
 
     const onSetShowAccessible = useCallback(
-        () => navigate(`/?${buildUrlQueryString({ programId })}&all`),
+        () => navigate(`/?${buildUrlQueryString({ programId: programId || '' })}&all`),
         [navigate, programId],
     );
 
@@ -105,7 +142,7 @@ const useCallbackMainPage = ({
         setShowBulkDataEntryPlugin(false);
     }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
 
-    const onOpenBulkDataEntryPlugin = useCallback((trackedEntityIds) => {
+    const onOpenBulkDataEntryPlugin = useCallback((trackedEntityIds?: Array<string>) => {
         setBulkDataEntryTrackedEntityIds(trackedEntityIds);
         setShowBulkDataEntryPlugin(true);
     }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
@@ -120,7 +157,7 @@ const useCallbackMainPage = ({
 
 const MainPageContainer = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
-    const [bulkDataEntryTrackedEntityIds, setBulkDataEntryTrackedEntityIds] = useState(undefined);
+    const [bulkDataEntryTrackedEntityIds, setBulkDataEntryTrackedEntityIds] = useState<Array<string> | undefined>(undefined);
 
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
@@ -138,7 +175,6 @@ const MainPageContainer = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
 
     const selectedProgram = programCollection.get(programId);
-    // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
     const MainPageStatus = useMainPageStatus({
@@ -157,7 +193,6 @@ const MainPageContainer = () => {
             programId,
             showAllAccessible,
             navigate,
-            dispatch,
             setShowBulkDataEntryPlugin,
             setBulkDataEntryTrackedEntityIds,
         });
@@ -204,13 +239,13 @@ const MainPageContainer = () => {
             <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <MainPageComponent
                 MainPageStatus={MainPageStatus}
-                programId={programId}
-                orgUnitId={orgUnitId}
+                programId={programId || ''}
+                orgUnitId={orgUnitId || ''}
                 trackedEntityTypeId={trackedEntityTypeId}
                 selectedTemplateId={selectedTemplateId}
                 setShowAccessible={onSetShowAccessible}
                 onChangeTemplate={onChangeTemplate}
-                error={error}
+                error={error || false}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
                 onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
@@ -221,5 +256,4 @@ const MainPageContainer = () => {
     );
 };
 
-// $FlowFixMe[missing-annot] automated comment
 export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(MainPageContainer));

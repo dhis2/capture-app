@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const mainPageActionTypes = {
@@ -7,7 +6,7 @@ export const mainPageActionTypes = {
     ALL_CATEGORY_OPTIONS_RESET: 'MainPage.AllCategoryOptionsReset',
 };
 
-export const setCategoryOption = (categoryId: string, categoryOption: Object) =>
+export const setCategoryOption = (categoryId: string, categoryOption: Record<string, any>) =>
     actionCreator(mainPageActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
 export const resetCategoryOption = (categoryId: string) =>
