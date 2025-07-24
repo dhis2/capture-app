@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormBuilder } from './index';
 import { updateFieldUIOnly } from './formBuilder.actions';
-import { ErrorsSection } from 'capture-core/components/DataEntryWidgetOutput/ErrorsSection/ErrorsSection.container';
 
 const FormBuilderRefBuilder = (props: any) => {
     const { formBuilderRef, ...passOnProps } = props;

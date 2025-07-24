@@ -269,21 +269,6 @@ export class FormBuilder extends React.Component<Props> {
         }
     }
 
-    isValid(typesToCheck?: Array<string> | null) {
-        return Object
-            .keys(this.props.fieldsUI)
-            .every((key) => {
-                const fieldUI = this.props.fieldsUI[key];
-                if (typesToCheck) {
-                    const isCheckable = typesToCheck.includes(fieldUI.errorType || '');
-                    if (!isCheckable) {
-                        return true;
-                    }
-                }
-                return fieldUI.valid;
-            });
-    }
-
     getInvalidFields(externalInvalidFields?: { [id: string]: boolean } | null) {
         const propFields = this.props.fields;
         return propFields.reduce((invalidFieldsContainer, field) => {
@@ -303,6 +288,21 @@ export class FormBuilder extends React.Component<Props> {
             }
             return invalidFieldsContainer;
         }, [] as Array<{ prop: FieldConfig; instance: any; uiState: FieldUI }>);
+    }
+
+    isValid(typesToCheck?: Array<string> | null) {
+        return Object
+            .keys(this.props.fieldsUI)
+            .every((key) => {
+                const fieldUI = this.props.fieldsUI[key];
+                if (typesToCheck) {
+                    const isCheckable = typesToCheck.includes(fieldUI.errorType || '');
+                    if (!isCheckable) {
+                        return true;
+                    }
+                }
+                return fieldUI.valid;
+            });
     }
 
     async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: FieldCommitOptionsExtended | null) {
