@@ -7,7 +7,7 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 export type FieldConfigForType = {
     component: ComponentType<any>,
-    props?: any | null,
+    props: any | null,
     id?: string,
     validators?: Array<ValidatorContainer>,
     commitEvent?: string | null,

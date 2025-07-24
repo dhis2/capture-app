@@ -1,4 +1,4 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -8,7 +8,7 @@ import { Section } from '../../metaData';
 
 class D2Form extends React.PureComponent<PropsForPureComponent> {
     name: string;
-    sectionInstances: Map<string, Object>;
+    sectionInstances: Map<string, any>;
 
     constructor(props: PropsForPureComponent) {
         super(props);
@@ -16,10 +16,10 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         this.sectionInstances = new Map();
     }
 
-    validateFormIncludeSectionFailedFields(options: Object) {
-        let failedFormFields = [];
+    validateFormIncludeSectionFailedFields(options: any) {
+        let failedFormFields: any[] = [];
         const isValid = Array.from(this.sectionInstances.entries())
-            .map(entry => entry[1])
+            .map((entry: any) => entry[1])
             .every((sectionInstance) => {
                 const isHidden = sectionInstance.props.isHidden;
                 if (isHidden) {
@@ -53,7 +53,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         };
     }
 
-    validateFormScrollToFirstFailedField(options: Object) {
+    validateFormScrollToFirstFailedField(options: any) {
         const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
         if (isValid) {
             return true;
@@ -64,7 +64,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         return false;
     }
 
-    setSectionInstance(instance: ?Object, id: string) {
+    setSectionInstance(instance: any | null, id: string) {
         if (!instance) {
             if (this.sectionInstances.has(id)) {
                 this.sectionInstances.delete(id);
@@ -116,13 +116,12 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         const {
             formFoundation,
             id,
-            classes,
             isFormInReduxStore,
             getCustomContent,
             ...passOnProps
         } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries())
-            .map(entry => entry[1])
+            .map((entry: any) => entry[1])
             .filter(section => section.id !== Section.LEFTOVERS_SECTION_ID);
 
         const sections = metaDataSectionsAsArray.map(section => (
@@ -161,7 +160,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
 export const D2FormComponent = (props: Props) => {
     const { formRef, ...passOnProps } = props;
 
-    const handleRef = (instance) => {
+    const handleRef = (instance: any) => {
         if (formRef) {
             formRef(instance);
         }

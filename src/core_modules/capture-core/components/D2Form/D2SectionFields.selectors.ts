@@ -1,4 +1,3 @@
-// @flow
 import { createSelectorCreator, defaultMemoize } from 'reselect';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
@@ -15,14 +14,13 @@ const sectionValuesSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
     const values = state.formsValues[props.formId] || {};
     const sectionValues = Array.from(metaData.entries())
-        .map(entry => entry[1])
+        .map((entry: any) => entry[1])
         .reduce((accValues, metaDataElement) => {
             accValues[metaDataElement.id] = values[metaDataElement.id];
             return accValues;
         }, {});
     return sectionValues;
 };
-// $FlowFixMe[missing-annot] automated comment
 export const makeGetSectionValues = () => createDeepEqualSelector(
     sectionValuesSelector,
     sectionValues => sectionValues,
@@ -32,14 +30,13 @@ const sectionIsCompulsorySelector = (state, props) => {
     const metaData = props.fieldsMetaData;
     const compulsoryFields = state.rulesEffectsCompulsoryFields[props.formId] || {};
     const sectionCompulsoryFields = Array.from(metaData.entries())
-        .map(entry => entry[1])
+        .map((entry: any) => entry[1])
         .reduce((accCompulsoryFields, metaDataElement) => {
             accCompulsoryFields[metaDataElement.id] = compulsoryFields[metaDataElement.id];
             return accCompulsoryFields;
         }, {});
     return sectionCompulsoryFields;
 };
-// $FlowFixMe[missing-annot] automated comment
 export const makeGetCompulsory = () => createDeepEqualSelector(
     sectionIsCompulsorySelector,
     sectionCompulsoryFields => sectionCompulsoryFields,
@@ -49,14 +46,13 @@ const sectionIsDisabledSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
     const disabledFields = state.rulesEffectsDisabledFields[props.formId] || {};
     const sectionDisabledFields = Array.from(metaData.entries())
-        .map(entry => entry[1])
+        .map((entry: any) => entry[1])
         .reduce((accDisabledFields, metaDataElement) => {
             accDisabledFields[metaDataElement.id] = disabledFields[metaDataElement.id];
             return accDisabledFields;
         }, {});
     return sectionDisabledFields;
 };
-// $FlowFixMe[missing-annot] automated comment
 export const makeGetDisabled = () => createDeepEqualSelector(
     sectionIsDisabledSelector,
     sectionDisabledFields => sectionDisabledFields,
@@ -66,14 +62,13 @@ const sectionHiddenFieldsSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
     const hiddenFields = state.rulesEffectsHiddenFields[props.formId] || {};
     const sectionHiddenFields = Array.from(metaData.entries())
-        .map(entry => entry[1])
+        .map((entry: any) => entry[1])
         .reduce((accHiddenFields, metaDataElement) => {
             accHiddenFields[metaDataElement.id] = hiddenFields[metaDataElement.id] ? true : undefined;
             return accHiddenFields;
         }, {});
     return sectionHiddenFields;
 };
-// $FlowFixMe[missing-annot] automated comment
 export const makeGetHiddenFieldsValues = () => createDeepEqualSelector(
     sectionHiddenFieldsSelector,
     sectionHiddenFields => sectionHiddenFields,
@@ -93,16 +88,14 @@ const sectionRulesMessagesSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
     const messages = state.rulesEffectsMessages[props.formId] || {};
     const sectionErrorMessages = Array.from(metaData.entries())
-        .map(entry => entry[1])
+        .map((entry: any) => entry[1])
         .reduce((accErrorFields, metaDataElement) => {
             accErrorFields[metaDataElement.id] = messages[metaDataElement.id];
             return accErrorFields;
         }, {});
     return sectionErrorMessages;
 };
-// $FlowFixMe[missing-annot] automated comment
 export const makeGetMessages = () => createMessagesDeepEqualSelector(
     sectionRulesMessagesSelector,
     sectionMessages => sectionMessages,
 );
-

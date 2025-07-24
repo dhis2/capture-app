@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { concatMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
@@ -13,10 +12,10 @@ import {
 } from './actions';
 
 // epic for handlng async field updates, e.g. file and image
-export const asyncUpdateFieldEpic = (action$: InputObservable) =>
+export const asyncUpdateFieldEpic = (action$: any) =>
     action$.pipe(
         ofType(actionTypes.START_UPDATE_FIELD_ASYNC),
-        concatMap((action) => {
+        concatMap((action: any) => {
             const payload = action.payload;
             const { elementId, formBuilderId, formId, callback, uid, onSuccess, onError } = payload;
 

@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import { D2SectionFieldsComponent } from './D2SectionFields.component';
 import { updateField } from './D2SectionFields.actions';
@@ -16,7 +15,7 @@ const makeMapStateToProps = () => {
     const getRulesMessages = makeGetMessages();
     const getCompulsory = makeGetCompulsory();
     const getDisabled = makeGetDisabled();
-    const mapStateToProps = (state: Object, props: { formId: string, fieldsMetaData: any }) => ({
+    const mapStateToProps = (state: any, props: { formId: string, fieldsMetaData: any }) => ({
         values: getSectionValues(state, props),
         rulesHiddenFields: getHiddenFields(state, props),
         rulesMessages: getRulesMessages(state, props),
@@ -27,8 +26,8 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (value: any, uiState: Object, elementId: string, sectionId: string, formId: string) => {
+const mapDispatchToProps = (dispatch: any) => ({
+    onUpdateField: (value: any, uiState: any, elementId: string, sectionId: string, formId: string) => {
         dispatch(updateField(value, uiState, elementId, sectionId, formId));
     },
 });
@@ -40,5 +39,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return mergedProps;
 };
 
-// $FlowFixMe[missing-annot] automated comment
 export const D2SectionFields = connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })(D2SectionFieldsComponent);
