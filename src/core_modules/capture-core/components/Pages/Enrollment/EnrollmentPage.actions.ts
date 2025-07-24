@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentPageActionTypes = {
@@ -42,10 +41,9 @@ export const enrollmentPageActionTypes = {
     BREAK_THE_GLASS_SUCCESS: 'EnrollmentPage.BreakTheGlassSuccess',
 };
 
-
 type IdSuite = {
-    teiId?: ?string,
-    programId?: ?string,
+    teiId?: string | null | undefined;
+    programId?: string | null | undefined;
 };
 
 export const openEnrollmentPage = () =>
@@ -55,7 +53,7 @@ export const closeEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLOSE)();
 
 // enrollmentId
-export const changedEnrollmentId = (enrollmentId: ?string) =>
+export const changedEnrollmentId = (enrollmentId: string | null | undefined) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID)(enrollmentId);
 
 export const resetEnrollmentId = (payload: IdSuite) =>
@@ -64,7 +62,7 @@ export const resetEnrollmentId = (payload: IdSuite) =>
 export const fetchEnrollmentId = (enrollmentId: string) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID)({ enrollmentId });
 
-export const verifyEnrollmentIdSuccess = ({ enrollmentId, trackedEntity, program }: Object) =>
+export const verifyEnrollmentIdSuccess = ({ enrollmentId, trackedEntity, program }: { enrollmentId: string; trackedEntity: string; program: string }) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_ENROLLMENT_ID_SUCCESS)({ enrollmentId, teiId: trackedEntity, programId: program });
 
 export const fetchEnrollmentIdSuccess = (payload: IdSuite) =>
@@ -83,10 +81,10 @@ export const resetTeiId = () =>
 export const fetchTei = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);
 
-export const verifyFetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: Array<{ orgUnit: string, program: string}> }) =>
+export const verifyFetchTeiSuccess = (payload: IdSuite & { teiDisplayName: string; tetId: string; programOwners: Array<{ orgUnit: string; program: string }> }) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS)(payload);
 
-export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: Array<{ orgUnit: string, program: string}> }) =>
+export const fetchTeiSuccess = (payload: IdSuite & { teiDisplayName: string; tetId: string; programOwners: Array<{ orgUnit: string; program: string }> }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI_SUCCESS)(payload);
 
 export const fetchTeiError = (teiId: string) =>
@@ -109,7 +107,7 @@ export const programIdError = (programId: string) =>
 export const fetchEnrollments = () =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS)();
 
-export const verifyFetchedEnrollments = ({ teiId, programId, action }: Object) =>
+export const verifyFetchedEnrollments = ({ teiId, programId, action }: { teiId: string; programId: string; action: any }) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_FETCHED_ENROLLMENTS)({ teiId, programId, action });
 
 export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
@@ -134,7 +132,6 @@ export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
 export const clearErrorView = () =>
     actionCreator(enrollmentPageActionTypes.CLEAR_ERROR_VIEW)();
 
-// Mutations
 export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>
     actionCreator(enrollmentPageActionTypes.DELETE_ENROLLMENT)({
         enrollmentId,
@@ -145,8 +142,8 @@ export const updateTeiDisplayName = (teiDisplayName: string) =>
         teiDisplayName,
     });
 
-export const updateEnrollmentDate = ({ enrollmentId, enrollmentDate }: { enrollmentId: string, enrollmentDate: string }) =>
+export const updateEnrollmentDate = ({ enrollmentId, enrollmentDate }: { enrollmentId: string; enrollmentDate: string }) =>
     actionCreator(enrollmentPageActionTypes.UPDATE_ENROLLMENT_DATE)({ enrollmentId, enrollmentDate });
 
-export const breakTheGlassSuccess = ({ teiId, programId }: { teiId: string, programId: string }) =>
+export const breakTheGlassSuccess = ({ teiId, programId }: { teiId: string; programId: string }) =>
     actionCreator(enrollmentPageActionTypes.BREAK_THE_GLASS_SUCCESS)({ teiId, programId });

@@ -1,8 +1,7 @@
-// @flow
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
@@ -28,7 +27,7 @@ export const missingStatuses = {
 };
 
 const useMissingStatus = () => {
-    const [missingStatus, setStatus] = useState(null);
+    const [missingStatus, setStatus] = useState<string | null>(null);
 
     const { programId, enrollmentId, teiId } = useLocationQuery();
 
@@ -41,7 +40,7 @@ const useMissingStatus = () => {
         onlyEnrollOnce,
         tetId,
     } = useEnrollmentInfo(enrollmentId, programId, teiId);
-    const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
@@ -85,7 +84,7 @@ const useMissingStatus = () => {
 
 const useNavigations = () => {
     const { navigate } = useNavigate();
-    const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { tetId } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
 
     const { programId, orgUnitId, teiId } = useLocationQuery();
     const navigateToTrackerProgramRegistrationPage = () =>
@@ -105,17 +104,21 @@ const useNavigations = () => {
     };
 };
 
-const getStyles = () => ({
+const styles: Readonly<any> = {
     lineHeight: { lineHeight: 1.8 },
     link: {
         background: 'transparent',
         padding: 0,
     },
-});
+};
 
-export const MissingMessage = withStyles(getStyles)(({
+type PlainProps = Record<string, never>;
+
+type Props = PlainProps & WithStyles<typeof styles>;
+
+const MissingMessagePlain = ({
     classes,
-}) => {
+}: Props) => {
     const dispatch = useDispatch();
     const {
         navigateToTrackerProgramRegistrationPage,
@@ -124,7 +127,7 @@ export const MissingMessage = withStyles(getStyles)(({
     } = useNavigations();
     const { missingStatus } = useMissingStatus();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
-    const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { programId, teiId, enrollmentId } = useLocationQuery();
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
@@ -189,7 +192,7 @@ export const MissingMessage = withStyles(getStyles)(({
                     dispatch(breakTheGlassSuccess({ teiId, programId }));
                     dispatch(fetchEnrollments());
                 }}
-                onCancel={resetProgramIdAndEnrollmentContext}
+                onCancel={() => resetProgramIdAndEnrollmentContext('', {})}
             />
         }
 
@@ -268,4 +271,6 @@ export const MissingMessage = withStyles(getStyles)(({
         }
 
     </>);
-});
+};
+
+export const MissingMessage = withStyles(styles)(MissingMessagePlain);

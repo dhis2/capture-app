@@ -1,8 +1,8 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map, filter } from 'rxjs/operators';
 import { from, EMPTY } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
+
 import {
     enrollmentPageActionTypes,
     resetEnrollmentId,
@@ -27,6 +27,10 @@ import { buildUrlQueryString, getLocationQuery } from '../../../../utils/routing
 import { deriveTeiName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { getScopeInfo } from '../../../../metaData';
 import { scopeTypes } from '../../../../metaData/helpers/constants';
+
+type InputObservable = any;
+type ReduxStore = any;
+type ApiUtils = any;
 
 const teiQuery = id => ({
     resource: 'tracker/trackedEntities',
@@ -84,8 +88,8 @@ const programIdReady = (store: ReduxStore): boolean => {
     return fetchStatus.programId === selectionStatus.READY;
 };
 
-const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =>
-    enrollments && enrollments.some(enrollment => enrollment.enrollment === enrollmentId);
+const enrollmentIdLoaded = (enrollmentId: string, enrollments: Array<Record<string, unknown>> | null | undefined) =>
+    enrollments && enrollments.some((enrollment: any) => enrollment.enrollment === enrollmentId);
 
 
 // The verification epics which are triggered by the completion of
@@ -241,7 +245,7 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
 
             return null;
         }),
-        filter(action => action),
+        filter((action: any) => Boolean(action)),
     );
 
 export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -262,11 +266,11 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
         map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
         concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
             .pipe(
-                map(({ programOwners }) => programOwners.find(programOwner => programOwner.program === programId)),
+                map(({ programOwners }: any) => programOwners.find((programOwner: any) => programOwner.program === programId)),
                 filter(programOwner => programOwner),
                 concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
                     .pipe(
-                        concatMap(({ organisationUnits }) => {
+                        concatMap(({ organisationUnits }: any) => {
                             if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();

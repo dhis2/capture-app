@@ -1,10 +1,10 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
+
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
     enrollmentPageActionTypes,
@@ -17,10 +17,14 @@ import { enrollmentAccessLevels, serverErrorMessages } from '../EnrollmentPage.c
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { getAncestorIds } from '../../../../metadataRetrieval/orgUnitName';
 
-const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
+type InputObservable = any;
+type ReduxStore = any;
+type ApiUtils = any;
+
+const sortByDate = (enrollments: any[] = []) => enrollments.sort((a: any, b: any) =>
     moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
 
-const enrollmentsQuery = (teiId, programId) => ({
+const enrollmentsQuery = (teiId: string, programId: string) => ({
     resource: 'tracker/trackedEntities',
     id: teiId,
     params: {
@@ -29,16 +33,16 @@ const enrollmentsQuery = (teiId, programId) => ({
     },
 });
 
-const makeCheckIsOwnerInScope = (querySingleResource, ownerId) => async (scope) => {
+const makeCheckIsOwnerInScope = (querySingleResource: any, ownerId: string) => async (scope: string[]) => {
     const ownerPath = [
         ...await getAncestorIds(ownerId, querySingleResource),
         ownerId,
     ];
 
-    return ownerPath.some(orgUnitId => scope.includes(orgUnitId));
+    return ownerPath.some((orgUnitId: string) => scope.includes(orgUnitId));
 };
 
-const handleOpenAndAuditedAccessLevel = async (checkIsOwnerInScope) => {
+const handleOpenAndAuditedAccessLevel = async (checkIsOwnerInScope: any) => {
     const { captureScope, searchScope } = systemSettingsStore.get();
     const extendedSearchScope = [
         ...captureScope,
@@ -52,7 +56,7 @@ const handleOpenAndAuditedAccessLevel = async (checkIsOwnerInScope) => {
     return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
 };
 
-const handleClosedAccessLevel = async (checkIsOwnerInScope) => {
+const handleClosedAccessLevel = async (checkIsOwnerInScope: any) => {
     const { captureScope } = systemSettingsStore.get();
     if (await checkIsOwnerInScope(captureScope)) {
         return saveEnrollments({ enrollments: [] });
@@ -61,7 +65,7 @@ const handleClosedAccessLevel = async (checkIsOwnerInScope) => {
     return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
 };
 
-const handleProtectedAccessLevel = async (checkIsOwnerInScope, breakTheGlassAccessUntil) => {
+const handleProtectedAccessLevel = async (checkIsOwnerInScope: any, breakTheGlassAccessUntil: number) => {
     const { captureScope } = systemSettingsStore.get();
     if (await checkIsOwnerInScope(captureScope)) {
         return saveEnrollments({ enrollments: [] });
@@ -85,13 +89,13 @@ const accessLevelHandlers = {
     PROTECTED: handleProtectedAccessLevel,
 };
 
-const handleNotFoundError = async ({ ownerId, programId, breakTheGlassAccessUntil, querySingleResource }) => {
+const handleNotFoundError = async ({ ownerId, programId, breakTheGlassAccessUntil, querySingleResource }: any) => {
     if (!ownerId) {
         return saveEnrollments({ enrollments: [] });
     }
 
     const programAccessLevel = await getUserMetadataStorageController().get(USER_METADATA_STORES.PROGRAMS, programId, {
-        project: ({ accessLevel }) => accessLevel,
+        project: ({ accessLevel }: any) => accessLevel,
     });
 
     const checkIsOwnerInScope = makeCheckIsOwnerInScope(querySingleResource, ownerId);
@@ -105,7 +109,7 @@ const handleErrorsFromNewerBackends = ({
     programId,
     breakTheGlassAccessUntil,
     querySingleResource,
-}) => {
+}: any) => {
     const { httpStatusCode } = error?.details || {};
     if (httpStatusCode === 404) {
         return from(handleNotFoundError({
@@ -120,7 +124,7 @@ const handleErrorsFromNewerBackends = ({
     return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
 };
 
-const handleErrorsFromOlderBackends = (error) => {
+const handleErrorsFromOlderBackends = (error: any) => {
     const { message } = error || {};
     if (message) {
         if (message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {
@@ -144,12 +148,12 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
             const { teiId, programId } = store.value.enrollmentPage;
             return from(querySingleResource(enrollmentsQuery(teiId, programId)))
                 .pipe(
-                    map(({ enrollments }) => {
+                    map(({ enrollments }: any) => {
                         const enrollmentsSortedByDate = sortByDate(enrollments
-                            .filter(enrollment => enrollment.program === programId));
+                            .filter((enrollment: any) => enrollment.program === programId));
                         return saveEnrollments({ enrollments: enrollmentsSortedByDate });
                     }),
-                    catchError((error) => {
+                    catchError((error: any) => {
                         if (featureAvailable(FEATURES.moreGenericErrorMessages)) {
                             return handleErrorsFromNewerBackends({
                                 error,
@@ -161,7 +165,7 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                         }
                         return of(handleErrorsFromOlderBackends(error));
                     }),
-                    map(action => verifyFetchedEnrollments({ teiId, programId, action })),
+                    map((action: any) => verifyFetchedEnrollments({ teiId, programId, action })),
                 );
         }),
     );

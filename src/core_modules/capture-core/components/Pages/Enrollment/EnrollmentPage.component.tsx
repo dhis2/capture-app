@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import type { ComponentType } from 'react';
 import { compose } from 'redux';
@@ -9,7 +8,7 @@ import { withErrorMessageHandler } from '../../../HOC';
 import { MissingMessage } from './MissingMessage.component';
 import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 
-const EnrollmentPagePlain = ({ enrollmentPageStatus }) => (
+const EnrollmentPagePlain = ({ enrollmentPageStatus }: { enrollmentPageStatus: any }) => (
     <div data-test="enrollment-page-content">
         {enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS && <MissingMessage />}
 
@@ -19,6 +18,6 @@ const EnrollmentPagePlain = ({ enrollmentPageStatus }) => (
     </div>
 );
 
-export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
+export const EnrollmentPageComponent: ComponentType<Omit<Props, 'classes'>> = compose(
     withErrorMessageHandler(),
 )(EnrollmentPagePlain);
