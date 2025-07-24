@@ -19,7 +19,7 @@ export const isEqualRangeValue = (value: any, type: string): boolean => {
     }
 
     if (value && typeof value === 'object' && 'from' in value && 'to' in value) {
-        return value.from !== value.to;
+        return value.from === value.to;
     }
 
     return false;
@@ -31,5 +31,5 @@ export const filteredRangeForPrepopulation = (currentSearchTerms: ?CurrentSearch
         return [];
     }
 
-    return currentSearchTerms.filter(item => !isEqualRangeValue(item.value, item.type));
+    return currentSearchTerms.filter(item => isEqualRangeValue(item.value, item.type));
 };
