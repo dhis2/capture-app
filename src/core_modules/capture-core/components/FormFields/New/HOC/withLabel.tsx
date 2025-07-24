@@ -42,8 +42,8 @@ const getStylesLabel = (theme: any) => ({
 type IconType = { name?: string; color?: string };
 
 type IconProps = {
-    icon?: IconType | null;
-    label?: string | null;
+    icon: IconType | null;
+    label: string | null;
 };
 
 type CalculatedLabelProps = {
@@ -58,9 +58,9 @@ type RequiredLabelProps = {
 };
 
 type Props = {
-    label?: string | null;
+    label: string | null;
     required: boolean;
-    icon?: IconType | null;
+    icon: IconType | null;
     dataElementDescription?: React.ReactElement | null;
 };
 
@@ -162,7 +162,7 @@ export const withLabel = (hocParams?: HOCParams | null) => (InnerComponent: Reac
         );
     };
     const LabelWithStyles = withDescription()(withStyles(getStylesLabel)(Label));
-    const ProjectLabelHOC = withStyles(getStyles)((props: any ) => {
+    const ProjectLabelHOC = withStyles(getStyles)((props: any) => {
         const { label, required, icon, ...passOnProps } = props;
         const { classes, ...propsWithoutClasses } = props;
         return (

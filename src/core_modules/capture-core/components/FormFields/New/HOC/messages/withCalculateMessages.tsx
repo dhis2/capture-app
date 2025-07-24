@@ -1,17 +1,17 @@
 import * as React from 'react';
 
 type Props = {
-    errorMessage?: string | null;
+    errorMessage: string | null;
     warningMessage?: string | null;
     infoMessage?: string | null;
     validatingMessage?: string | null;
-    rulesErrorMessage?: string | null;
-    rulesWarningMessage?: string | null;
-    rulesErrorMessageOnComplete?: string | null;
-    rulesWarningMessageOnComplete?: string | null;
-    rulesCompulsoryError?: string | null;
+    rulesErrorMessage: string | null;
+    rulesWarningMessage: string | null;
+    rulesErrorMessageOnComplete: string | null;
+    rulesWarningMessageOnComplete: string | null;
+    rulesCompulsoryError: string | null;
     touched: boolean;
-    validationAttempted?: boolean | null;
+    validationAttempted: boolean | null;
 };
 
 const typeKeysForProperty = {
@@ -30,7 +30,7 @@ const messageKeys = {
 
 const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overrideMessagesPropNames: any = {}) =>
     class CalculateMessagesHOC extends React.Component<Props> {
-        static getMessage(errorText?: string | null, warningText?: string | null, infoText?: string | null, validatingText?: string | null) {
+        static getMessage(errorText: string | null, warningText: string | null, infoText: string | null, validatingText: string | null) {
             let message;
             let typeKey;
 
@@ -55,13 +55,13 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
         }
 
         static getRulesMessage(
-            errorText?: string | null,
-            warningText?: string | null,
-            errorTextOnComplete?: string | null,
-            warningTextOnComplete?: string | null,
-            rulesCompulsoryError?: string | null,
-            touched?: boolean,
-            validationAttempted?: boolean | null,
+            errorText: string | null,
+            warningText: string | null,
+            errorTextOnComplete: string | null,
+            warningTextOnComplete: string | null,
+            rulesCompulsoryError: string | null,
+            touched: boolean,
+            validationAttempted: boolean | null,
         ) {
             let message;
             let typeKey;
@@ -89,9 +89,9 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
             };
         }
 
-        getMessage = (messageKey: any) => (
+        getMessage = (messageKey: typeof messageKeys[keyof typeof messageKeys]) => (
             overrideMessagesPropNames[messageKey] ?
-                this.props[overrideMessagesPropNames[messageKey]] : (this.props as any)[messageKey]
+                this.props[overrideMessagesPropNames[messageKey]] : this.props[messageKey]
         );
 
         render() {

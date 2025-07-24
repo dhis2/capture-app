@@ -16,13 +16,13 @@ export const withConvertedOptionSet = () =>
                 this.formOptionSet = this.buildFormOptionSet();
             }
 
-            formOptionSet: OptionSet | null;
+            formOptionSet: OptionSet;
 
             static errorMessages = {
                 DATAELEMENT_MISSING: 'DataElement missing',
             };
 
-            buildFormOptionSet(): OptionSet | null {
+            buildFormOptionSet() {
                 const optionSet = this.props.optionSet;
                 if (!optionSet.dataElement) {
                     log.error(errorCreator(OptionSetConverter.errorMessages.DATAELEMENT_MISSING)({ OptionSetConverter: this }));

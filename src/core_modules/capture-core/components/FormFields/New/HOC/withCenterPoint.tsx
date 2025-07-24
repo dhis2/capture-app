@@ -4,7 +4,7 @@ import { ceil } from 'lodash/fp';
 import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
 type Props = {
-    orgUnitId?: string | null;
+    orgUnitId: string | null;
 };
 
 const DEFAULT_CENTER = [51.505, -0.09];

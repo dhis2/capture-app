@@ -1,7 +1,7 @@
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
     container: {
@@ -21,14 +21,6 @@ const styles = () => ({
 });
 
 type Props = {
-    classes: {
-        container: string;
-        activeContainer: string;
-        validatingContainer: string;
-        errorContainer: string;
-        warningContainer: string;
-        infoContainer: string;
-    };
     inFocus?: boolean | null;
     validatingMessage?: string | null;
     errorMessage?: string | null;
@@ -36,8 +28,8 @@ type Props = {
     infoMessage?: string | null;
 };
 
-const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: Record<string, unknown> | null) =>
-    class FieldContainerBuilder extends React.Component<Props> {
+const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: any | null) =>
+    class FieldContainerBuilder extends React.Component<Props & WithStyles<typeof styles>> {
         render() {
             const { classes, ...passOnProps } = this.props;
             const containerClasses = classNames(
@@ -68,6 +60,6 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
         }
     };
 
-export const withDefaultFieldContainer = (customStyles?: Record<string, unknown> | null) =>
+export const withDefaultFieldContainer = (customStyles?: any | null) =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(getFieldContainerBuilder(InnerComponent, customStyles));

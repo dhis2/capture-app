@@ -1,7 +1,7 @@
 /* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { CircularLoader, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
@@ -55,16 +55,6 @@ type Props = {
     errorMessage?: string | Array<string> | null;
     warningMessage?: string | Array<string> | null;
     infoMessage?: string | Array<string> | null;
-    classes: {
-        base: string;
-        error: string;
-        warning: string;
-        info: string;
-        validating: string;
-        validatingContainer: string;
-        validatingIndicator: string;
-        listItem: string;
-    };
 };
 
 type MessageContainer = {
@@ -73,7 +63,7 @@ type MessageContainer = {
 };
 
 const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
-    class DisplayMessagesHOC extends React.Component<Props> {
+    class DisplayMessagesHOC extends React.Component<Props & WithStyles<typeof styles>> {
         static createMessageElement(text, baseClass, messageClass, validatorClasses, listItemClass, type) {
             if (type === messageTypes.validating) {
                 return (
@@ -179,4 +169,4 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
 
 export const withDisplayMessages = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        withStyles(styles as any)(getDisplayMessagesHOC(InnerComponent) as any);
+        withStyles(styles)(getDisplayMessagesHOC(InnerComponent) as any);
