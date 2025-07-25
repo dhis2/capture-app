@@ -1,6 +1,6 @@
 export type ContainerProps = {
     programId: string;
-    orgUnitId: string;
+    orgUnitId?: string;
     selectedTemplateId?: string;
     trackedEntityTypeId?: string;
     displayFrontPageList?: boolean;

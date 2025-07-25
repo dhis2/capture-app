@@ -240,7 +240,7 @@ const MainPageContainer = () => {
             <MainPageComponent
                 MainPageStatus={MainPageStatus}
                 programId={programId || ''}
-                orgUnitId={orgUnitId || ''}
+                orgUnitId={orgUnitId}
                 trackedEntityTypeId={trackedEntityTypeId}
                 selectedTemplateId={selectedTemplateId}
                 setShowAccessible={onSetShowAccessible}

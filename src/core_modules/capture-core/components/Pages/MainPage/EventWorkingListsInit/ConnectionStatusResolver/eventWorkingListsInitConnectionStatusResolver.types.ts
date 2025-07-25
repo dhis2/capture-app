@@ -1,4 +1,6 @@
 type PassOnProps = {
+    programId: string;
+    orgUnitId?: string;
     mutationInProgress: boolean;
 };
 
