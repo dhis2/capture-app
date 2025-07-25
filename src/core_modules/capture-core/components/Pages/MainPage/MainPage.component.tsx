@@ -1,9 +1,6 @@
-// @flow
-import React, { useMemo } from 'react';
-import { compose } from 'redux';
+import React, { useMemo, type ComponentType } from 'react';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import type { ComponentType } from 'react';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 import type { Props, ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
@@ -20,7 +17,7 @@ import {
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
 import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
 
-const getStyles = () => ({
+const styles: Readonly<any> = {
     listContainer: {
         padding: 24,
         display: 'flex',
@@ -46,7 +43,7 @@ const getStyles = () => ({
         borderColor: colors.grey400,
         borderRadius: 3,
     },
-});
+};
 
 const MainPagePlain = ({
     programId,
@@ -133,9 +130,6 @@ const MainPagePlain = ({
 };
 
 
-export const MainPageComponent: ComponentType<ContainerProps> =
-    compose(
-        withLoadingIndicator(),
-        withErrorMessageHandler(),
-        withStyles(getStyles),
-    )(MainPagePlain);
+const MainPageWithStyles = withStyles(styles)(MainPagePlain);
+const MainPageWithError = withErrorMessageHandler()(MainPageWithStyles);
+export const MainPageComponent = withLoadingIndicator()(MainPageWithError) as ComponentType<ContainerProps>;
