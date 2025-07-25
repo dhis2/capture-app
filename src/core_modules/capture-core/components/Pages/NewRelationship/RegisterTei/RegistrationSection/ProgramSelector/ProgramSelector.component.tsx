@@ -32,7 +32,7 @@ class ProgramSelectorPlain extends React.Component<Props> {
                 dataTest="relationship-register-tei-program-selector"
                 styles={ProgramSelectorPlain.baseComponentStyles}
                 programLabelClass={classes.programLabel}
-                label={i18n.t('Program') as string}
+                label={i18n.t('Program')}
                 {...passOnProps as any}
             />
         );

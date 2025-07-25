@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import {
     withDefaultShouldUpdateInterface,
     withDefaultFieldContainer,
@@ -14,7 +15,7 @@ const OrgUnitFieldImplicitRootsFilterHandlerHOC =
     withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField);
 
 type Props = {
-    onUpdateSelectedOrgUnit: (orgUnit?: Record<string, unknown> | null) => void;
+    onUpdateSelectedOrgUnit: (orgUnit?: OrgUnit | null) => void;
 };
 
 class OrgUnitFieldWrapper extends React.Component<Props> {

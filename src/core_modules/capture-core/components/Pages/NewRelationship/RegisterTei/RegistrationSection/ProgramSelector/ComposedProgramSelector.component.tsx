@@ -29,7 +29,7 @@ const getStyles = (theme: Theme) => ({
     },
     isFilteredContainer: {
         fontSize: 12,
-        color: theme.palette.grey[600],
+        color: theme.palette.grey[500],
         paddingTop: 5,
     },
     isFilteredLink: {
@@ -95,12 +95,12 @@ class ProgramSelector extends React.Component<Props> {
             <div
                 className={classes.isFilteredContainer}
             >
-                {i18n.t('Some programs are being filtered.') as string}
+                {i18n.t('Some programs are being filtered.')}
                 <LinkButton
                     className={classes.isFilteredLink}
                     onClick={onClearFilter}
                 >
-                    {i18n.t('Show all') as string}
+                    {i18n.t('Show all')}
                 </LinkButton>
             </div>
         );
@@ -114,7 +114,7 @@ class ProgramSelector extends React.Component<Props> {
                 baselineFilter={this.baseLineFilter}
             >
                 {
-                    (programs: any, isFiltered: any) => (
+                    (programs: Program[], isFiltered: boolean) => (
                         <div>
                             <VirtualizedSelectField
                                 options={this.getOptionsFromPrograms(programs)}
