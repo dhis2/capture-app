@@ -1,6 +1,6 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { LinkButton } from '../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../ProgramFilterer';
@@ -29,7 +29,7 @@ const getStyles = (theme: Theme) => ({
     },
     isFilteredContainer: {
         fontSize: 12,
-        color: theme.palette.grey.dark,
+        color: theme.palette.grey[500],
         paddingTop: 5,
     },
     isFilteredLink: {
@@ -39,29 +39,20 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Option = {
-    label: string,
-    value: string,
-    iconLeft?: ?React.Node,
+    label: string;
+    value: string;
+    iconLeft?: React.ReactNode | null;
 };
 
 type Props = {
-    orgUnitIds: ?Array<string>,
-    value: string,
-    trackedEntityTypeId: string,
-    classes: Object,
-    onUpdateSelectedProgram: (programId: string) => void,
-    onClearFilter: () => void,
-};
+    orgUnitIds?: Array<string> | null;
+    value: string;
+    trackedEntityTypeId: string;
+    onUpdateSelectedProgram: (programId: string) => void;
+    onClearFilter: () => void;
+} & WithStyles<typeof getStyles>;
 
 class ProgramSelector extends React.Component<Props> {
-    baseLineFilter = (program: Program) => {
-        const { trackedEntityTypeId } = this.props;
-
-        return program instanceof TrackerProgram &&
-        program.trackedEntityType.id === trackedEntityTypeId &&
-        program.access.data.write;
-    }
-
     getOptionsFromPrograms = (programs: Array<Program>): Array<Option> =>
         programs
             .map(program => ({
@@ -70,7 +61,8 @@ class ProgramSelector extends React.Component<Props> {
                 iconLeft: this.getProgramIcon(program),
             }));
 
-    getProgramIcon({ icon: { color, name } = {}, name: programName }: Program) {
+    getProgramIcon({ icon = {}, name: programName }: Program) {
+        const { color, name } = icon;
         const { classes } = this.props;
 
         return (
@@ -87,6 +79,14 @@ class ProgramSelector extends React.Component<Props> {
                 />
             </div>
         );
+    }
+
+    baseLineFilter = (program: Program) => {
+        const { trackedEntityTypeId } = this.props;
+
+        return program instanceof TrackerProgram &&
+        program.trackedEntityType.id === trackedEntityTypeId &&
+        program.access.data.write;
     }
 
     renderIsFilteredText() {
@@ -114,15 +114,13 @@ class ProgramSelector extends React.Component<Props> {
                 baselineFilter={this.baseLineFilter}
             >
                 {
-                    (programs, isFiltered) => (
+                    (programs: Program[], isFiltered: boolean) => (
                         <div>
-                            {/* $FlowFixMe[cannot-spread-inexact] automated
-                              * comment */}
                             <VirtualizedSelectField
                                 options={this.getOptionsFromPrograms(programs)}
                                 required={false}
                                 onSelect={onUpdateSelectedProgram}
-                                {...passOnProps}
+                                {...passOnProps as any}
                             />
                             {isFiltered ? this.renderIsFilteredText() : null }
                         </div>
@@ -137,10 +135,10 @@ export const ComposedProgramSelector =
     withFocusSaver()(
         withDefaultFieldContainer()(
             withLabel({
-                onGetCustomFieldLabeClass: (props: Object) =>
+                onGetCustomFieldLabeClass: (props: any) =>
                     props.programLabelClass,
             })(
-                withFilterProps((props: Object) => {
+                withFilterProps((props: any) => {
                     const { programLabelClass, ...passOnProps } = props;
                     return passOnProps;
                 })(

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RegisterTeiComponent } from './RegisterTei.component';
@@ -14,13 +13,13 @@ const useNewRelationshipScopeId = (): string =>
             newRelationship: {
                 selectedRelationshipType: { to: { trackedEntityTypeId } },
             },
-        }) => (programId || trackedEntityTypeId),
+        }: any) => (programId || trackedEntityTypeId),
     );
 
 export const RegisterTei = ({ onLink, onSave, onCancel, onGetUnsavedAttributeValues }: OwnProps) => {
     const dataEntryId = 'relationship';
-    const itemId = useSelector(({ dataEntries }) => dataEntries[dataEntryId]?.itemId);
-    const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
+    const itemId = useSelector(({ dataEntries }: any) => dataEntries[dataEntryId]?.itemId);
+    const error = useSelector(({ newRelationshipRegisterTei }: any) => (newRelationshipRegisterTei.error));
     const newRelationshipProgramId = useNewRelationshipScopeId();
     const { trackedEntityName, tetId: trackedEntityTypeId } = useScopeInfo(newRelationshipProgramId);
 
@@ -39,4 +38,3 @@ export const RegisterTei = ({ onLink, onSave, onCancel, onGetUnsavedAttributeVal
         />
     );
 };
-

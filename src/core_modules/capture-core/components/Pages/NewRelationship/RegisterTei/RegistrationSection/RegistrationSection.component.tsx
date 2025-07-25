@@ -1,6 +1,6 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { SectionContents } from './SectionContents.component';
@@ -12,9 +12,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props = {
-    classes: Object,
-};
+type Props = WithStyles<typeof getStyles>;
 
 const renderSectionHeader = () => {
     const title = i18n.t('Registration');
@@ -30,7 +28,6 @@ const RegistrationSectionPlain = (props: Props) => {
     return (
         <Section
             header={renderSectionHeader()}
-            elevation={2}
             className={classes.section}
         >
             <SectionContents />
