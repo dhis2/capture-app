@@ -6,15 +6,15 @@ import { SearchContext } from './Search.context';
 const FocusableDebounceField = withFocusSaver()(withTextFieldFocusHandler()(DebounceField));
 
 type Props = {
-    inputDomRef: (element: HTMLElement | null | undefined) => void;
+    inputDomRef: (element: HTMLElement | null) => void;
     inputWrapperClasses: any;
     onUpdateValue: (value: string) => void;
     onHighlightSuggestion: () => void;
     onSelectSuggestion: () => void;
     onResetDisplayedHighlight: () => void;
     onExitSearch: () => void;
-    useUpwardList?: boolean | null | undefined;
-    placeholder?: string | null | undefined;
+    useUpwardList?: boolean | null;
+    placeholder?: string | null;
 };
 
 const isSuggestionBlurTarget = (target: any, suggestionName: string) => {

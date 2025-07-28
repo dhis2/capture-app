@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SearchContext } from './Search.context';
 import defaultClasses from './searchSuggestionsUp.module.css';
 
 type Props = {
@@ -16,7 +15,7 @@ export const SearchSuggestionsUp = (props: Props) => {
             listUpEl.current.scrollTop = listUpEl.current.scrollHeight;
         }
     }, []);
-    const { suggestionName } = React.useContext(SearchContext);
+
     const handleKeyDown = React.useCallback((event: any) => {
         if (event.keyCode === 38) {
             onHighlightNext();
@@ -31,7 +30,6 @@ export const SearchSuggestionsUp = (props: Props) => {
 
     return (
         <div
-            data-name={suggestionName}
             tabIndex={-1}
             onKeyDown={handleKeyDown}
             role={'none'}
@@ -41,7 +39,6 @@ export const SearchSuggestionsUp = (props: Props) => {
                 className={defaultClasses.listUp}
             >
                 <div
-                    data-name={suggestionName}
                     className={defaultClasses.listUpInner}
                 >
                     {children}

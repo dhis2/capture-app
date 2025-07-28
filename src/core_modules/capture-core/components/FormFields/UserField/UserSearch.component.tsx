@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
@@ -23,16 +24,16 @@ type Props = {
     inputWrapperClasses: any;
     focusInputOnMount: boolean;
     exitBehaviour: 'selectBestChoice' | 'clear' | 'doNothing';
-    inputPlaceholderText?: string | null | undefined;
-    useUpwardList?: boolean | null | undefined;
+    inputPlaceholderText?: string | null;
+    useUpwardList?: boolean | null;
     querySingleResource: QuerySingleResource;
 } & WithStyles<typeof getStyles>;
 
 type State = {
     suggestions: User[];
     searchValue: string;
-    suggestionsError?: string | null | undefined;
-    highlightedSuggestion?: User | null | undefined;
+    suggestionsError?: string | null;
+    highlightedSuggestion?: User | null;
     inputKey: number;
     noMatch: boolean;
 };
@@ -44,10 +45,11 @@ const exitBehaviours = {
 };
 
 class UserSearchPlain extends React.Component<Props, State> {
+    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null = null;
     suggestionElements: Map<string, HTMLElement>;
-    inputDomElement: HTMLInputElement | null | undefined;
+    inputDomElement: HTMLInputElement | null = null;
     domNames: any;
-    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null | undefined;
+
     constructor(props: Props) {
         super(props);
         this.suggestionElements = new Map();
@@ -250,7 +252,7 @@ class UserSearchPlain extends React.Component<Props, State> {
         }
     }
 
-    handleSuggestionRef = (ref: HTMLElement | null | undefined, user: User) => {
+    handleSuggestionRef = (ref: HTMLElement | null, user: User) => {
         if (!ref) {
             if (this.suggestionElements.has(user.id)) {
                 this.suggestionElements.delete(user.id);
@@ -260,7 +262,7 @@ class UserSearchPlain extends React.Component<Props, State> {
         }
     }
 
-    handleInputDomRef = (element: HTMLElement | null | undefined) => {
+    handleInputDomRef = (element: HTMLElement | null) => {
         this.inputDomElement = element as HTMLInputElement;
     }
 
@@ -282,7 +284,7 @@ class UserSearchPlain extends React.Component<Props, State> {
                 onResetDisplayedHighlight={this.resetHighlighted}
                 onExitSearch={this.handleExitSearchFromInput}
                 inputWrapperClasses={inputWrapperClasses}
-                placeholder={inputPlaceholderText || undefined}
+                placeholder={inputPlaceholderText}
                 useUpwardList={useUpwardList}
             />
         );

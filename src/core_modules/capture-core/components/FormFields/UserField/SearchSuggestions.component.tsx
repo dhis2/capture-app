@@ -7,9 +7,9 @@ import type { User } from './types';
 type Props = {
     suggestions: User[];
     query: string;
-    highlighted: User | null | undefined;
-    useUpwardList?: boolean | null | undefined;
-    suggestionRef?: (ref: HTMLElement | null | undefined, user: User) => void;
+    highlighted?: User | null;
+    useUpwardList?: boolean | null;
+    suggestionRef?: (ref: HTMLElement | null, user: User) => void;
     onHighlightNext?: (user: User) => void;
     onHighlightPrev?: (user: User) => void;
     onSelect?: (user: User) => void;

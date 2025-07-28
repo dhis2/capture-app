@@ -14,8 +14,8 @@ type Props = {
     onHighlightPrev: (user: User) => void;
     onSelect: (user: User) => void;
     onExitSearch: () => void;
-    suggestionRef: (ref: HTMLElement | null | undefined, user: User) => void;
-    useUpwardList?: boolean | null | undefined;
+    suggestionRef: (ref: HTMLElement | null, user: User) => void;
+    useUpwardList?: boolean | null;
 };
 
 function match(text: string, query: string) {
@@ -96,7 +96,6 @@ export const SearchSuggestion = (props: Props) => {
     }, [onExitSearch, suggestionName, inputName]);
     return (
         <div
-            data-name={suggestionName}
             role="button"
             tabIndex={-1}
             ref={handleRef}
