@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { debounce } from 'lodash';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import VirtualizedSelect from 'react-virtualized-select';
 
 import 'react-select/dist/react-select.css';
@@ -24,8 +24,7 @@ const getStyles = () => ({
     },
 });
 
-
-type Props = {
+type OwnProps = {
     onSelect: (value: any) => void;
     onFocus?: any | null;
     options: Array<VirtualizedOptionConfig>;
@@ -44,12 +43,10 @@ type Props = {
         noResults: string;
     };
     multi?: boolean | null;
-    classes: {
-        selectedOptionContainer: string;
-        selectedIconContainer: string;
-    };
     dataTest?: string;
 };
+
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
 type State = {
     filterValue?: string | null;

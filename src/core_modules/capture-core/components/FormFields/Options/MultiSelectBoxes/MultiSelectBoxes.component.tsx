@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { Checkbox, spacersNum, FieldSet, Label } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
 import { FormGroup } from '../FormGroup.component';
 
@@ -13,19 +13,16 @@ const styles = (theme: any) => ({
     },
 });
 
-
-type Props = {
+type OwnProps = {
     onBlur: (value: any) => void;
     options: Array<{text: string; value: any}>;
     label?: string;
     value?: any;
-    orientation?: keyof typeof multiOrientations | null;
+    orientation?: typeof multiOrientations[keyof typeof multiOrientations] | null;
     required?: boolean | null;
-    classes: {
-        label: string;
-        checkbox: string;
-    };
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 class MultiSelectBoxesPlain extends Component<Props> {
     constructor(props: Props) {

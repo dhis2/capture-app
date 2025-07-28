@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { Radio, colors, spacersNum, FieldSet, Label } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { singleOrientations } from './singleSelectBoxes.const';
-import type { Props } from './singleSelectBoxes.types';
+import type { Props as OwnProps } from './singleSelectBoxes.types';
 import { FormGroup } from '../FormGroup.component';
 
 
@@ -21,6 +21,7 @@ const styles = ({ typography, palette }: any) => ({
     },
 });
 
+type Props = OwnProps & WithStyles<typeof styles>;
 
 class SingleSelectBoxesPlain extends Component<Props> {
     constructor(props: Props) {

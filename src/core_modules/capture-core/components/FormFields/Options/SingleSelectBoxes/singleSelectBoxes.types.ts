@@ -6,13 +6,7 @@ export type Props = {
     label?: string;
     nullable?: boolean;
     value?: any;
-    orientation?: keyof typeof singleOrientations | null;
+    orientation?: typeof singleOrientations[keyof typeof singleOrientations] | null;
     required?: boolean | null;
-    classes: {
-        label: string;
-        iconSelected: string;
-        iconDeselected: string;
-        radio: string;
-    };
     style?: any | null;
 };

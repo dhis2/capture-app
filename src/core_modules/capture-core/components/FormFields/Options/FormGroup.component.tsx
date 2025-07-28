@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 
 const styles: Readonly<any> = {
     formGroup: {
@@ -14,11 +14,12 @@ const styles: Readonly<any> = {
     },
 };
 
-type Props = {
+type OwnProps = {
     row?: boolean;
-    classes: any;
     children: any;
 }
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const FormGroupPlain = ({ children, classes, row = false, ...props }: Props) => (
     <div {...props} className={row ? classes.formGroupRow : classes.formGroup} >
