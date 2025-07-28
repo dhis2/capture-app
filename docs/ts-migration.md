@@ -6,7 +6,7 @@
 2.  **Convert Component Code:** Update the code within `[FileName.tsx]`:
     *   PLEASE NEVER CHANGE ANY LOGIC, ONLY ADD TYPES. If you encounter any errors that are not related to types, add a TODO comment and notify the user. Make sure to check that you have the correct file extension for the file you're editing. If you encounter an error that is not related to types, finish the migration without trying to fix the error and notify the user. IF YOU ARE NOT SURE, ASK THE USER.
     *   Remove Flow directives (`// @flow`) and related comments (`// $FlowFixMe`).
-    *   Convert Flow types (`type`, `?Type`, `Array<Type>`) to TypeScript equivalents (e.g., `type`, `Type | undefined` or `Type | null`, `Type[]`). **Note:** Pay close attention to nullability; check if the consuming code/library expects `undefined` or `null`.
+    *   Convert Flow types (`type`, `?Type`, `Array<Type>`) to TypeScript equivalents (e.g., `type`, `Type | undefined` or `Type | null`, `Type[]`). **Note:** Pay close attention to nullability; check if the consuming code/library expects `undefined` or `null`. Convert `Object` to `any`.
     *   Prefer using `type` aliases over `interface` for defining object shapes and types, unless extending interfaces.
     *   Add explicit types for component props (e.g., using `props: Props`), state (`useState<Type>`), refs (`useRef<Type>`), event handlers, and function parameters/return values.
     *   Handle refs passed through props, often requiring `React.forwardRef<ElementType, PropsType>(...)`.

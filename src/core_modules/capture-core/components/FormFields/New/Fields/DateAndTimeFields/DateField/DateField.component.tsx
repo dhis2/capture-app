@@ -1,6 +1,5 @@
-// @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles, withTheme, WithStyles } from '@material-ui/core/styles';
 import { IconButton, DateField as UIDateField, orientations } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
 import classNames from 'classnames';
@@ -11,7 +10,7 @@ const getStyles = () => ({
         display: 'flex',
     },
     fieldsContainerVertical: {
-        flexDirection: 'column-reverse',
+        flexDirection: 'column-reverse' as const,
         alignItems: 'center',
     },
     clearButton: {
@@ -26,14 +25,9 @@ type Props = {
     disabled?: boolean,
     onBlur?: (value: any) => void,
     orientation: string,
-    classes: {
-        fieldsContainer: string,
-        fieldsContainerVertical: string,
-        clearButton: string,
-    },
 };
 
-const DateFieldPlain = (props: Props) => {
+const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const {
         value,
         onBlur,
@@ -65,7 +59,6 @@ const DateFieldPlain = (props: Props) => {
                 [classes.fieldsContainerVertical]: isVertical,
             })}
         >
-            {/*  $FlowFixMe[cannot-spread-inexact] automated comment */}
             <UIDateField
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 locale={systemSettingsStore.get().uiLocale}

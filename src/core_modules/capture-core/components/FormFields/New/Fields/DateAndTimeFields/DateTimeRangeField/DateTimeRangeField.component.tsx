@@ -1,10 +1,9 @@
-// @flow
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateTimeRangeField as UIDateTimeRangeField } from 'capture-ui';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     innerInputError: {
         color: theme.palette.error.main,
         padding: theme.typography.pxToRem(3),
@@ -28,7 +27,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    theme: Object,
+    theme: any,
 }
 
 class DateTimeRangeFieldPlain extends React.Component<Props> {

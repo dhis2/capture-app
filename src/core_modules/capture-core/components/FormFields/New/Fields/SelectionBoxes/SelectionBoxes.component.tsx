@@ -1,10 +1,9 @@
-// @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 import { SelectionBoxes as UISelectionBoxes } from 'capture-ui';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     iconSelected: {
         fill: theme.palette.secondary.main,
     },
@@ -19,9 +18,8 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props = {};
 
-class SelectionBoxesPlain extends React.Component<Props> {
+class SelectionBoxesPlain extends React.Component {
     render() {
         const { ...passOnProps } = this.props;
         return (

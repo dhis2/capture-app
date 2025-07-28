@@ -1,9 +1,15 @@
-// @flow
 import { useEffect, useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-export const usePreviousOrganizationUnit = (previousOrgUnitId?: string) => {
-    const { data, refetch } = useDataQuery(
+type PreviousOrganizationUnitResult = {
+    id?: string;
+    displayName?: string;
+    path?: string;
+    expandedPaths?: string[];
+};
+
+export const usePreviousOrganizationUnit = (previousOrgUnitId?: string): PreviousOrganizationUnitResult => {
+    const { data, refetch }: {data?: any, refetch: any } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {

@@ -1,6 +1,5 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { OptionsSelectVirtualized } from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { withFocusHandler } from './withFocusHandler';
 
@@ -8,21 +7,17 @@ const getStyles = () => ({
 });
 
 type Props = {
-    value: ?string,
+    value: string | null,
     onChange?: any,
-    onBlur?: ?(value: any) => void,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-    },
+    onBlur?: (value: any) => void | null,
 };
 
 const VirtualizedSelectComponent =
     withFocusHandler()(
         OptionsSelectVirtualized,
-    );
+    ) as any;
 
-class VirtualizedSelectFieldPlain extends Component<Props> {
+class VirtualizedSelectFieldPlain extends Component<Props & WithStyles<typeof getStyles>> {
     handleSelect = (value: any) => {
         this.props.onBlur && this.props.onBlur(value);
     }
@@ -37,7 +32,6 @@ class VirtualizedSelectFieldPlain extends Component<Props> {
         } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <VirtualizedSelectComponent
                 value={value || ''}
                 onSelect={this.handleSelect}

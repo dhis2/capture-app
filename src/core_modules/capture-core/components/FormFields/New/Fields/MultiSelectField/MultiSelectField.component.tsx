@@ -1,13 +1,12 @@
-// @flow
 import * as React from 'react';
 import { compose } from 'redux';
 import { useState, useEffect } from 'react';
 import { MultiSelectField as MultiSelectFieldUI, MultiSelectOption } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { withFocusHandler } from './withFocusHandler';
 import type { Props } from './MultiSelectField.types';
 
-const styles = theme => ({
+export const styles = theme => ({
     label: {
         display: 'flex',
         alignItems: 'center',
@@ -23,9 +22,9 @@ const styles = theme => ({
 
 const MULTI_TEXT_SEPARATOR = ',';
 
-const MultiSelectFieldComponentPlain = (props: Props) => {
+const MultiSelectFieldComponentPlain = (props: Props & WithStyles<typeof styles>) => {
     const { onSelect, options, value = '', translations, onFocus, onBlur, disabled } = props;
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState<string[] | undefined>([]);
 
     useEffect(() => {
         const multiSelectValue = (value === null || value === '') ? [] : value.split(MULTI_TEXT_SEPARATOR);

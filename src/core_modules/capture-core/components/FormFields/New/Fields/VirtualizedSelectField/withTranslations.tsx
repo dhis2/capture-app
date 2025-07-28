@@ -8,19 +8,19 @@ type Props = {
 
 function buildTranslations() {
     return {
-        filterPlaceholder: i18n.t('Type to filter options'),
-        noMatchText: i18n.t('No match found'),
+        clearText: i18n.t('Clear'),
+        noResults: i18n.t('No results'),
     };
 }
 
-export const withSelectMultiTranslations = () =>
+export const withSelectTranslations = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class TranslationBuilder extends React.Component<Props> {
-            translations: Object;
             constructor(props: Props) {
                 super(props);
                 this.translations = buildTranslations();
             }
+            translations: any;
 
             render() {
                 const { ...passOnProps } = this.props;

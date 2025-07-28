@@ -1,9 +1,8 @@
-// @flow
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { DebounceField } from 'capture-ui';
 import { OrgUnitTree } from './OrgUnitTree.component';
 
@@ -38,22 +37,17 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    onSelectClick: (selectedOrgUnit: Object) => void,
-    onBlur: (selectedOrgUnit: Object) => void,
-    selected?: ?string,
-    maxTreeHeight?: ?number,
-    disabled?: ?boolean,
-    classes: {
-        outerContainer: string,
-        container: string,
-        searchField: string,
-        debounceFieldContainer: string,
-        orgUnitTreeContainer: string,
-    },
-    previousOrgUnitId?: string,
-    dataTest?: string,
+type OrgUnitFieldProps = {
+    onSelectClick: (selectedOrgUnit: any) => void;
+    onBlur: (selectedOrgUnit: any) => void;
+    selected?: string;
+    maxTreeHeight?: number;
+    disabled?: boolean;
+    previousOrgUnitId?: string;
+    dataTest?: string;
 };
+
+type Props = OrgUnitFieldProps & WithStyles<typeof getStyles>;
 
 const OrgUnitFieldPlain = (props: Props) => {
     const {
@@ -66,8 +60,8 @@ const OrgUnitFieldPlain = (props: Props) => {
         previousOrgUnitId,
         dataTest,
     } = props;
-    const [searchText, setSearchText] = React.useState(undefined);
-    const [key, setKey] = React.useState(undefined);
+    const [searchText, setSearchText] = React.useState<string | undefined>(undefined);
+    const [key, setKey] = React.useState<string | undefined>(undefined);
 
     const { loading, data } = useDataQuery(
         React.useMemo(
@@ -99,7 +93,6 @@ const OrgUnitFieldPlain = (props: Props) => {
                         withinUserSearchHierarchy: true,
                         pageSize: 15,
                     }),
-
                 },
             }),
             [],
@@ -119,7 +112,7 @@ const OrgUnitFieldPlain = (props: Props) => {
     const renderOrgUnitTree = () => {
         if (searchText?.length) {
             return (<OrgUnitTree
-                roots={searchData?.orgUnits?.organisationUnits}
+                roots={(searchData?.orgUnits as any)?.organisationUnits || []}
                 onSelectClick={onSelectClick}
                 ready={ready}
                 treeKey={key}
@@ -127,7 +120,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             />);
         }
         return (<OrgUnitTree
-            roots={data?.orgUnits?.organisationUnits}
+            roots={(data?.orgUnits as any)?.organisationUnits}
             onSelectClick={onSelectClick}
             ready={ready}
             treeKey={'initial'}
@@ -136,7 +129,7 @@ const OrgUnitFieldPlain = (props: Props) => {
         />);
     };
 
-    const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         setSearchText(event.currentTarget.value);
     };
 
@@ -145,7 +138,7 @@ const OrgUnitFieldPlain = (props: Props) => {
     };
 
 
-    const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
+    const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' as const } : undefined;
     return (
         <div
             className={classes.container}

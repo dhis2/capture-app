@@ -1,31 +1,29 @@
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
 import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
-import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import { orgUnitFieldScopes } from './scopes.const';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
+import type { OrgUnitFieldScope } from './scopes.const';
 
 type Props = {
-    defaultRoots: Array<any>,
-    scope: $Values<typeof orgUnitFieldScopes>,
-    onSearchError?: ?(message: string) => void,
-    onSelect: Function,
-    querySingleResource: QuerySingleResource
+    defaultRoots: Array<any>;
+    scope: OrgUnitFieldScope;
+    onSearchError?: (message: string) => void;
+    onSelect: (value: any) => void;
+    querySingleResource: QuerySingleResource;
 };
 
 type State = {
-    filteredRoots: ?Array<any>,
-    filterText: ?string,
-    inProgress: boolean,
-    treeKey: string,
+    filteredRoots: Array<any> | null;
+    filterText: string | null;
+    inProgress: boolean;
+    treeKey: string;
 };
 
 // Handles organisation unit filtering internally in this component.
 export const withInternalFilterHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OrgUnitInternalFilterHandlerHOC extends React.Component<Props, State> {
-            cancelablePromise: ?CancelablePromise<any>;
             constructor(props: Props) {
                 super(props);
                 this.state = {
@@ -44,6 +42,8 @@ export const withInternalFilterHandler = () =>
             }
 
             static INITIAL_TREE_KEY = 'initial';
+
+            cancelablePromise: any;
 
             filterOrgUnits(filterText: string) {
                 const { scope, onSearchError, querySingleResource } = this.props;
@@ -74,7 +74,7 @@ export const withInternalFilterHandler = () =>
 
                 cancelablePromise
                     .promise
-                    .then((orgUnitCollection: Object) => {
+                    .then((orgUnitCollection: Record<string, any>) => {
                         this.setState({
                             filteredRoots: orgUnitCollection.toArray(),
                             filterText,
@@ -111,7 +111,6 @@ export const withInternalFilterHandler = () =>
                 const { defaultRoots, onSearchError, onSelect, scope, ...passOnProps } = this.props;
                 const { filteredRoots, filterText, treeKey, inProgress } = this.state;
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         roots={filteredRoots || defaultRoots}
                         treeKey={treeKey}

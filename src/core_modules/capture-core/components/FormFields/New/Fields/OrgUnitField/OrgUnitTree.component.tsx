@@ -1,7 +1,6 @@
-// @flow
 import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
@@ -16,15 +15,14 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    roots: Array<Object>,
-    classes: {
-        orgunitTree: string,
-    },
-    onSelectClick: Function,
-    treeKey: string,
-    previousOrgUnitId?: Object
+type OrgUnitTreeProps = {
+    roots: Array<Record<string, any>>;
+    onSelectClick: (payload: any) => void;
+    treeKey: string;
+    previousOrgUnitId?: any;
 };
+
+type Props = OrgUnitTreeProps & WithStyles<typeof getStyles>;
 
 const OrgUnitTreePlain = (props: Props) => {
     const { roots, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
@@ -48,7 +46,7 @@ const OrgUnitTreePlain = (props: Props) => {
 
     const initiallyExpanded = getExpandedItems();
 
-    const [expanded, setExpanded] = React.useState(initiallyExpanded);
+    const [expanded, setExpanded] = React.useState<string[] | undefined>(initiallyExpanded);
 
     React.useEffect(() => {
         if (previousSelectedOrgUnit?.expandedPaths) {
@@ -56,13 +54,13 @@ const OrgUnitTreePlain = (props: Props) => {
         }
     }, [previousSelectedOrgUnit?.expandedPaths]);
 
-    const handleExpand = ({ path }) => {
+    const handleExpand = ({ path }: { path: string }) => {
         if (expanded && !expanded.includes(path)) {
             setExpanded([...expanded, path]);
         }
     };
 
-    const handleCollapse = ({ path }) => {
+    const handleCollapse = ({ path }: { path: string }) => {
         const pathIndex = expanded?.indexOf(path);
 
         if (pathIndex && pathIndex !== -1 && expanded) {
@@ -87,6 +85,7 @@ const OrgUnitTreePlain = (props: Props) => {
             <OrganisationUnitTree
                 key={treeKey}
                 roots={roots.map(item => item.id)}
+                // @ts-expect-error - keeping original functionality as before ts rewrite
                 expanded={expanded}
                 handleExpand={handleExpand}
                 handleCollapse={handleCollapse}

@@ -1,9 +1,8 @@
-// @flow
 import * as React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
-import { typeof orientations } from '../../../New';
+import { orientations } from '../../../New';
 import { withCenterPoint } from '../../HOC';
 
 const getStyles = () => ({
@@ -15,21 +14,14 @@ const getStyles = () => ({
 });
 
 type Props = {
-    value?: ?any,
+    value?: any | null,
     onBlur: (value: any) => void,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-    },
-    orientation: $Values<orientations>,
+    orientation: typeof orientations[keyof typeof orientations],
     dialogLabel: string,
 }
 
-class PolygonFieldPlain extends React.Component<Props> {
-    dialogClasses: Object;
-    passOnClasses: Object;
-
-    constructor(props) {
+class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
 
         const { dialogPaper, ...passOnClasses } = props.classes;
@@ -39,14 +31,16 @@ class PolygonFieldPlain extends React.Component<Props> {
         };
     }
 
+    dialogClasses: any;
+    passOnClasses: any;
+
     render() {
         const { classes, dialogLabel, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIPolygonField
                 mapDialog={
                     <Modal
-                        classes={this.dialogClasses}
+                        className={this.dialogClasses}
                         large
                     >
                         <ModalTitle key="title">{dialogLabel}</ModalTitle>
