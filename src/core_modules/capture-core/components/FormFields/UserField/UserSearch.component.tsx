@@ -1,7 +1,6 @@
-// @flow
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { makeCancelablePromise } from 'capture-core-utils';
@@ -12,7 +11,7 @@ import type { User } from './types';
 import { withApiUtils } from '../../../HOC';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     noMatchFound: {
         color: colors.red600,
         fontSize: theme.typography.pxToRem(14),
@@ -20,23 +19,22 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    onSet: (user: User) => void,
-    inputWrapperClasses: Object,
-    focusInputOnMount: boolean,
-    exitBehaviour: 'selectBestChoice' | 'clear' | 'doNothing',
-    inputPlaceholderText?: ?string,
-    useUpwardList?: ?boolean,
-    querySingleResource: QuerySingleResource,
-    ...CssClasses,
-};
+    onSet: (user: User) => void;
+    inputWrapperClasses: any;
+    focusInputOnMount: boolean;
+    exitBehaviour: 'selectBestChoice' | 'clear' | 'doNothing';
+    inputPlaceholderText?: string | null | undefined;
+    useUpwardList?: boolean | null | undefined;
+    querySingleResource: QuerySingleResource;
+} & WithStyles<typeof getStyles>;
 
 type State = {
-    suggestions: Array<User>,
-    searchValue: string,
-    suggestionsError?: ?string,
-    highlightedSuggestion?: ?User,
-    inputKey: number,
-    noMatch: boolean,
+    suggestions: User[];
+    searchValue: string;
+    suggestionsError?: string | null | undefined;
+    highlightedSuggestion?: User | null | undefined;
+    inputKey: number;
+    noMatch: boolean;
 };
 
 const exitBehaviours = {
@@ -46,10 +44,10 @@ const exitBehaviours = {
 };
 
 class UserSearchPlain extends React.Component<Props, State> {
-    cancelablePromise: ?{cancel: () => void, promise: Promise<any>};
+    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null | undefined;
     suggestionElements: Map<string, HTMLElement>;
-    inputDomElement: ?HTMLInputElement;
-    domNames: Object;
+    inputDomElement: HTMLInputElement | null | undefined;
+    domNames: any;
     constructor(props: Props) {
         super(props);
         this.suggestionElements = new Map();
@@ -89,7 +87,7 @@ class UserSearchPlain extends React.Component<Props, State> {
         this.resetSuggestions();
     }
 
-    setSuggestions(suggestions: Array<User>, searchValue: string) {
+    setSuggestions(suggestions: User[], searchValue: string) {
         this.setState({
             suggestions,
             highlightedSuggestion: undefined,
@@ -140,10 +138,10 @@ class UserSearchPlain extends React.Component<Props, State> {
             resource: 'userLookup',
             params: { query },
         })
-            .then((response) => {
+            .then((response: any) => {
                 const apiUsers = (response && response.users) || [];
                 return apiUsers
-                    .map(au => ({
+                    .map((au: any) => ({
                         id: au.id,
                         name: au.displayName,
                         username: au.username,
@@ -162,10 +160,10 @@ class UserSearchPlain extends React.Component<Props, State> {
             this.cancelablePromise = cancelablePromise;
             cancelablePromise
                 .promise
-                .then((suggestions) => {
+                .then((suggestions: any) => {
                     this.setSuggestions(suggestions, value);
                 })
-                .catch((error) => {
+                .catch((error: any) => {
                     if (!error || !error.isCanceled) {
                         this.setSuggestionsError(i18n.t('suggestions could not be retrieved'));
                     }
@@ -222,8 +220,7 @@ class UserSearchPlain extends React.Component<Props, State> {
         switch (exitBehaviour) {
         case exitBehaviours.SELECT_BEST_CHOICE:
 
-            // $FlowFixMe[incompatible-call] automated comment
-            this.props.onSet(highlightedSuggestion);
+            this.props.onSet(highlightedSuggestion!);
             break;
         case exitBehaviours.CLEAR:
             this.clear();
@@ -253,7 +250,7 @@ class UserSearchPlain extends React.Component<Props, State> {
         }
     }
 
-    handleSuggestionRef = (ref: ?HTMLElement, user: User) => {
+    handleSuggestionRef = (ref: HTMLElement | null | undefined, user: User) => {
         if (!ref) {
             if (this.suggestionElements.has(user.id)) {
                 this.suggestionElements.delete(user.id);
@@ -263,9 +260,8 @@ class UserSearchPlain extends React.Component<Props, State> {
         }
     }
 
-    handleInputDomRef = (element: ?HTMLElement) => {
-        // $FlowFixMe[incompatible-type] automated comment
-        this.inputDomElement = element;
+    handleInputDomRef = (element: HTMLElement | null | undefined) => {
+        this.inputDomElement = element as HTMLInputElement;
     }
 
     handleSuggestionSelect = (user: User) => {
@@ -286,7 +282,7 @@ class UserSearchPlain extends React.Component<Props, State> {
                 onResetDisplayedHighlight={this.resetHighlighted}
                 onExitSearch={this.handleExitSearchFromInput}
                 inputWrapperClasses={inputWrapperClasses}
-                placeholder={inputPlaceholderText}
+                placeholder={inputPlaceholderText || undefined}
                 useUpwardList={useUpwardList}
             />
         );

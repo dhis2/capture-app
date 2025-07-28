@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import defaultClasses from './searchSuggestions.module.css';
 import { SearchSuggestionsUp } from './SearchSuggestionsUp.component';
@@ -6,18 +5,23 @@ import { SearchSuggestion } from './SearchSuggestion.component';
 import type { User } from './types';
 
 type Props = {
-    suggestions: Array<User>,
-    query: string,
-    highlighted: ?User,
-    useUpwardList?: ?boolean,
+    suggestions: User[];
+    query: string;
+    highlighted: User | null | undefined;
+    useUpwardList?: boolean | null | undefined;
+    suggestionRef?: (ref: HTMLElement | null | undefined, user: User) => void;
+    onHighlightNext?: (user: User) => void;
+    onHighlightPrev?: (user: User) => void;
+    onSelect?: (user: User) => void;
+    onExitSearch?: () => void;
 };
 
 export class SearchSuggestions extends React.Component<Props> {
     static renderSuggestions(
-        suggestions: Array<User>,
+        suggestions: User[],
         query: string,
-        highlighted: ?User,
-        passOnProps: Object) {
+        highlighted: User | null | undefined,
+        passOnProps: any) {
         const suggestionElements = suggestions
             .map(u => (
                 <SearchSuggestion

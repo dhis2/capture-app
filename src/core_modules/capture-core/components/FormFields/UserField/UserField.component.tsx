@@ -1,6 +1,5 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { UserSearch } from './UserSearch.component';
 import { Selected } from './Selected.component';
 import type { User } from './types';
@@ -9,14 +8,14 @@ const getStyles = () => ({
 });
 
 type Props = {
-    value: ?User | ?string,
-    onSet: (user?: User | string) => void,
-    classes: Object,
-    useUpwardSuggestions?: ?boolean,
-    focusOnMount?: ?boolean,
-    inputPlaceholderText?: ?string,
-    usernameOnlyMode?: boolean,
-};
+    value: User | string | null | undefined;
+    onSet: (user?: User | string) => void;
+    classes: any;
+    useUpwardSuggestions?: boolean | null | undefined;
+    focusOnMount?: boolean | null | undefined;
+    inputPlaceholderText?: string | null | undefined;
+    usernameOnlyMode?: boolean;
+} & WithStyles<typeof getStyles>;
 
 const UserFieldPlain = (props: Props) => {
     const {
@@ -54,18 +53,15 @@ const UserFieldPlain = (props: Props) => {
     };
 
     const handleBlur = () => {
-        // $FlowExpectedError
-        onSet(value);
+        onSet(value as any);
     };
 
     if (value) {
         return (
             <Selected
-                // $FlowFixMe
-                text={usernameOnlyMode ? value : value.name}
+                text={usernameOnlyMode ? value as string : (value as User).name}
                 onClear={handleClear}
-                // $FlowFixMe[incompatible-type] automated comment
-                focusInputOnMount={focusSelectedInput.current}
+                focusInputOnMount={focusSelectedInput.current || false}
             />
         );
     }
@@ -75,7 +71,6 @@ const UserFieldPlain = (props: Props) => {
             <UserSearch
                 onSet={handleSet}
                 inputWrapperClasses={classes}
-                // $FlowFixMe[incompatible-type] automated comment
                 focusInputOnMount={focusSearchInput.current}
                 useUpwardList={useUpwardSuggestions}
                 inputPlaceholderText={inputPlaceholderText}

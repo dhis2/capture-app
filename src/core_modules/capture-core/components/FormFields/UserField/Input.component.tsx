@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { DebounceField, withTextFieldFocusHandler, withFocusSaver } from 'capture-ui';
@@ -7,18 +6,18 @@ import { SearchContext } from './Search.context';
 const FocusableDebounceField = withFocusSaver()(withTextFieldFocusHandler()(DebounceField));
 
 type Props = {
-    inputDomRef: Function,
-    inputWrapperClasses: Object,
-    onUpdateValue: (value: string) => void,
-    onHighlightSuggestion: () => void,
-    onSelectSuggestion: () => void,
-    onResetDisplayedHighlight: () => void,
-    onExitSearch: () => void,
-    useUpwardList?: ?boolean,
-    placeholder: ?string,
+    inputDomRef: Function;
+    inputWrapperClasses: any;
+    onUpdateValue: (value: string) => void;
+    onHighlightSuggestion: () => void;
+    onSelectSuggestion: () => void;
+    onResetDisplayedHighlight: () => void;
+    onExitSearch: () => void;
+    useUpwardList?: boolean | null | undefined;
+    placeholder?: string | null | undefined;
 };
 
-const isSuggestionBlurTarget = (target, suggestionName) => {
+const isSuggestionBlurTarget = (target: any, suggestionName: string) => {
     if (target.getAttribute('name') === suggestionName) {
         return true;
     }
@@ -47,7 +46,7 @@ export const Input = (props: Props) => {
 
     const { inputName, suggestionName } = React.useContext(SearchContext);
 
-    const handleUpdateValue = React.useCallback(event => onUpdateValue(event.currentTarget.value), [onUpdateValue]);
+    const handleUpdateValue = React.useCallback((event: any) => onUpdateValue(event.currentTarget.value), [onUpdateValue]);
 
     // eslint-disable-next-line complexity
     const handleKeyDown = React.useCallback((event) => {
@@ -59,14 +58,13 @@ export const Input = (props: Props) => {
             onSelectSuggestion();
         }
     }, [onHighlightSuggestion, onSelectSuggestion, useUpwardList]);
-    const handleBlur = React.useCallback((event) => {
+    const handleBlur = React.useCallback((event: any) => {
         if (!event.relatedTarget || !isSuggestionBlurTarget(event.relatedTarget, suggestionName)) {
             onExitSearch();
         }
     }, [onExitSearch, suggestionName]);
 
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
         <FocusableDebounceField
             name={inputName}
             inputRef={inputDomRef}
