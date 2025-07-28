@@ -19,14 +19,14 @@ type OrgUnitTreeProps = {
     roots: Array<Record<string, any>>;
     onSelectClick: (payload: any) => void;
     treeKey: string;
-    previousOrgUnitId?: Record<string, any> | string;
+    previousOrgUnitId?: any;
 };
 
 type Props = OrgUnitTreeProps & WithStyles<typeof getStyles>;
 
 const OrgUnitTreePlain = (props: Props) => {
     const { roots, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
-    const previousSelectedOrgUnit = usePreviousOrganizationUnit(typeof previousOrgUnitId === 'string' ? previousOrgUnitId : previousOrgUnitId?.id);
+    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
     const getExpandedItems = () => {
         if (roots && roots.length === 1) {
             return [`/${roots[0].id}`];
@@ -85,12 +85,13 @@ const OrgUnitTreePlain = (props: Props) => {
             <OrganisationUnitTree
                 key={treeKey}
                 roots={roots.map(item => item.id)}
-                initiallyExpanded={expanded}
-                onExpand={handleExpand}
-                onCollapse={handleCollapse}
+                // @ts-expect-error - keeping original functionality as before ts rewrite
+                expanded={expanded}
+                handleExpand={handleExpand}
+                handleCollapse={handleCollapse}
                 singleSelection
                 selected={getHighlightedItems()}
-                onChange={(payload: any) => onSelectClick(payload)}
+                onChange={onSelectClick}
             />
         </div>
     );

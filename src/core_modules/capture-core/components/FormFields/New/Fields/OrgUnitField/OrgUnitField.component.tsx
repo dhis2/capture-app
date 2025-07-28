@@ -104,7 +104,7 @@ const OrgUnitFieldPlain = (props: Props) => {
 
     React.useEffect(() => {
         if (searchText?.length) {
-            refetchOrg({ variables: searchText });
+            refetchOrg({ variables: { searchText } });
             setKey(`${searchText}-${new Date().getTime()}`);
         }
     }, [refetchOrg, searchText]);

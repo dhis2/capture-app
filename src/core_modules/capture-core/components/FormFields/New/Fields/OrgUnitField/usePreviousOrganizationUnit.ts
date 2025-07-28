@@ -9,7 +9,7 @@ type PreviousOrganizationUnitResult = {
 };
 
 export const usePreviousOrganizationUnit = (previousOrgUnitId?: string): PreviousOrganizationUnitResult => {
-    const { data, refetch } = useDataQuery(
+    const { data, refetch }: {data?: any, refetch: any } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {
@@ -28,20 +28,19 @@ export const usePreviousOrganizationUnit = (previousOrgUnitId?: string): Previou
 
     useEffect(() => {
         if (previousOrgUnitId) {
-            refetch({ id: previousOrgUnitId });
+            refetch({ variables: previousOrgUnitId });
         }
     }, [previousOrgUnitId, refetch]);
 
     const expandedPaths = useMemo(() => {
-        const orgUnit = data?.organisationUnits as any;
-        const paths = orgUnit?.path?.split('/').filter((p: string) => p);
-        return paths?.map((_: any, index: number) => `/${paths.slice(0, index + 1).join('/')}`);
-    }, [data?.organisationUnits]);
+        const paths = data?.organisationUnits?.path.split('/').filter(p => p);
+        return paths?.map((_, index) => `/${paths.slice(0, index + 1).join('/')}`);
+    }, [data?.organisationUnits?.path]);
 
     return {
         id: previousOrgUnitId,
-        displayName: (data?.organisationUnits as any)?.displayName,
-        path: (data?.organisationUnits as any)?.path,
+        displayName: data?.organisationUnits?.displayName,
+        path: data?.organisationUnits?.path,
         expandedPaths,
     };
 };

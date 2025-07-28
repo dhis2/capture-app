@@ -24,7 +24,7 @@ type OrgUnitValue = {
 };
 
 type SingleOrgUnitSelectFieldState = {
-    previousOrgUnitId: Record<string, any> | null;
+    previousOrgUnitId: any;
 };
 
 type SingleOrgUnitSelectFieldProps = {
@@ -75,7 +75,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         return (
             <OrgUnitField
                 onSelectClick={this.onSelectOrgUnit}
-                previousOrgUnitId={this.state.previousOrgUnitId?.id}
+                previousOrgUnitId={this.state.previousOrgUnitId}
                 {...passOnProps}
             />
         );

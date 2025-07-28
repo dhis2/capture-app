@@ -5,16 +5,16 @@ import { orgUnitFieldScopes } from './scopes.const';
 import { withApiUtils } from '../../../../../../HOC';
 import type { OrgUnitFieldScope } from './scopes.const';
 
-type WithImplicitRootsProps = {
+type Props = {
     scope: OrgUnitFieldScope;
 };
 
 export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
-    <T extends Record<string, any>>(InnerComponent: React.ComponentType<T>) => {
+    (InnerComponent: React.ComponentType<any>) => {
         const InternalFilterHandlerHOC = withApiUtils(withInternalFilterHandler()(InnerComponent));
 
-        class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<WithImplicitRootsProps & T> {
-            constructor(props: WithImplicitRootsProps & T) {
+        class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props> {
+            constructor(props: Props) {
                 super(props);
                 const { scope } = this.props;
                 this.defaultRoots =
@@ -33,7 +33,7 @@ export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
                 return (
                     <InternalFilterHandlerHOC
                         defaultRoots={this.defaultRoots}
-                        {...(passOnProps as T)}
+                        {...passOnProps}
                     />
                 );
             }

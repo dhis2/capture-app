@@ -5,7 +5,7 @@ import { orgUnitFieldScopes } from './scopes.const';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import type { OrgUnitFieldScope } from './scopes.const';
 
-type WithInternalFilterHandlerProps = {
+type Props = {
     defaultRoots: Array<any>;
     scope: OrgUnitFieldScope;
     onSearchError?: (message: string) => void;
@@ -13,23 +13,24 @@ type WithInternalFilterHandlerProps = {
     querySingleResource: QuerySingleResource;
 };
 
-type WithInternalFilterHandlerState = {
+type State = {
     filteredRoots: Array<any> | null;
     filterText: string | null;
     inProgress: boolean;
     treeKey: string;
 };
 
+// Handles organisation unit filtering internally in this component.
 export const withInternalFilterHandler = () =>
-    <T extends Record<string, any>>(InnerComponent: React.ComponentType<T>) =>
-        class OrgUnitInternalFilterHandlerHOC extends React.Component<WithInternalFilterHandlerProps & T, WithInternalFilterHandlerState> {
-            constructor(props: WithInternalFilterHandlerProps & T) {
+    (InnerComponent: React.ComponentType<any>) =>
+        class OrgUnitInternalFilterHandlerHOC extends React.Component<Props, State> {
+            constructor(props: Props) {
                 super(props);
                 this.state = {
                     filteredRoots: null,
                     filterText: null,
                     inProgress: false,
-                    treeKey: 'initial',
+                    treeKey: OrgUnitInternalFilterHandlerHOC.INITIAL_TREE_KEY,
                 };
                 this.cancelablePromise = null;
             }
@@ -117,7 +118,7 @@ export const withInternalFilterHandler = () =>
                         ready={!inProgress}
                         onSearch={this.handleFilterChange}
                         onBlur={onSelect}
-                        {...(passOnProps as T)}
+                        {...passOnProps}
                     />
                 );
             }
