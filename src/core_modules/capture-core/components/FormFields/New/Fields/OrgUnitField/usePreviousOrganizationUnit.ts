@@ -14,6 +14,7 @@ export const usePreviousOrganizationUnit = (previousOrgUnitId?: string): Previou
             () => ({
                 organisationUnits: {
                     resource: 'organisationUnits',
+                    id: ({ variables: { previousOrgUnitId: id } }) => id,
                     params: {
                         fields: ['displayName,path'],
                     },

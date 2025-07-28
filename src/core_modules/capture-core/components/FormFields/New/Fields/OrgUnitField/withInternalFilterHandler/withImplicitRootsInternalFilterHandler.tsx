@@ -9,7 +9,7 @@ type Props = {
     scope: OrgUnitFieldScope;
 };
 
-// Wraps withInternalFilterHandler. Passes on defaultRoots from the organisation unit store based on the input scope
+// Wraps withInternalFilterHandler. Passes on defaultRoots from the organisation unit store based on the input scope.
 export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
     (InnerComponent: React.ComponentType<any>) => {
         const InternalFilterHandlerHOC = withApiUtils(withInternalFilterHandler()(InnerComponent));
