@@ -1,16 +1,16 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import { Input } from '@dhis2/ui';
 import React, { Component } from 'react';
 
 type Props = {
-    onChange?: ?(value: string, event: HTMLInputElement) => void,
-    onBlur?: ?(value: string, event: HTMLInputElement) => void,
-    value: ?string,
+    onChange?: (value: string, event: HTMLInputElement) => void;
+    onBlur?: (value: string, event: HTMLInputElement) => void;
+    value?: string;
 };
 
 export class D2TextField extends Component<Props> {
-    materialUIInstance: ?HTMLInputElement;
-    materialUIContainerInstance: ?HTMLDivElement;
+    materialUIInstance: HTMLInputElement | null = null;
+    materialUIContainerInstance: HTMLDivElement | null = null;
     static defaultProps = {
         value: '',
     };
@@ -21,12 +21,12 @@ export class D2TextField extends Component<Props> {
         this.handleBlur = this.handleBlur.bind(this);
     }
 
-    handleChange = (event: HTMLInputElement) => {
-        this.props.onChange && this.props.onChange(event.value, event);
+    handleChange = (payload: { value?: string }, event: any) => {
+        this.props.onChange && this.props.onChange(payload.value || '', event);
     }
 
-    handleBlur = (event: HTMLInputElement) => {
-        this.props.onBlur && this.props.onBlur(event.value, event);
+    handleBlur = (payload: { value?: string }, event: any) => {
+        this.props.onBlur && this.props.onBlur(payload.value || '', event);
     }
 
     focus() {
@@ -38,9 +38,8 @@ export class D2TextField extends Component<Props> {
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Input
-                    inputRef={(inst) => { this.materialUIInstance = inst; }}
+                    ref={(inst: any) => { this.materialUIInstance = inst; }}
                     value={value || ''}
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}

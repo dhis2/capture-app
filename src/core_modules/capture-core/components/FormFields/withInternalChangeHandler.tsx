@@ -1,20 +1,17 @@
-// @flow
 import * as React from 'react';
 
 type Props = {
-    onChange: (value: any) => void,
-    value: any,
+    onChange: (value: any) => void;
+    value: any;
 };
 
 type State = {
-    value: any,
+    value: any;
 };
 
 export const withInternalChangeHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         (class DefaultFieldChangeHandler extends React.Component<Props, State> {
-            handleChange: (value: any) => void;
-
             constructor(props: Props) {
                 super(props);
                 this.handleChange = this.handleChange.bind(this);
@@ -42,7 +39,6 @@ export const withInternalChangeHandler = () =>
                 const stateValue = this.state.value;
 
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         onChange={this.handleChange}
                         value={stateValue}

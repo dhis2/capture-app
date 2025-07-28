@@ -1,8 +1,23 @@
+/* eslint-disable react/sort-comp */
 import React from 'react';
 import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { Tree } from './Tree';
 
-export class OrgUnitTree extends React.Component {
+type Props = {
+    value?: string;
+    onBlur: (value: any) => void;
+    querySingleResource: (params: any) => Promise<any>;
+    label?: string;
+    selectable?: boolean;
+    required?: boolean;
+};
+
+type State = {
+    list: Array<any>;
+    selected?: string;
+};
+
+export class OrgUnitTree extends React.Component<Props, State> {
   state = {
       list: [],
       selected: this.props.value,
@@ -12,7 +27,8 @@ export class OrgUnitTree extends React.Component {
       await this.fetchRoot();
   }
 
-  UNSAFE_componentWillReceiveProps({ value }) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
+      const { value } = nextProps;
       this.setState({ selected: value });
   }
 
@@ -82,13 +98,13 @@ export class OrgUnitTree extends React.Component {
           const organisationUnits = r.organisationUnits;
           const units = organisationUnits[0].children;
 
-          const items = [];
+          const items: any[] = [];
           for (const child of units) {
               const { value: selectedPath } = this.props;
               const children = child.children.length > 0 ? [] : null;
               let open = children !== null && selectedPath && selectedPath.startsWith(child.path);
 
-              if (open && opening && selectedPath.substr(child.path.length).indexOf('/') > -1) {
+              if (open && opening && selectedPath && selectedPath.substr(child.path.length).indexOf('/') > -1) {
                   this.fetchNode(child.path, opening);
               } else {
                   open = false;
@@ -142,7 +158,7 @@ export class OrgUnitTree extends React.Component {
               multiple={false}
               selectable={typeof selectable !== 'undefined' ? selectable : true}
               list={list}
-              selected={selected}
+              selected={selected ? [selected] : undefined}
               onIconClick={this.onIconClick}
               setSelected={this.setSelected}
           />

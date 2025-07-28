@@ -1,6 +1,6 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import { IconCheckmark24, colors, CircularLoader, Button } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
@@ -8,30 +8,23 @@ import { LinkButton } from '../../Buttons/LinkButton.component';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { withApiUtils } from '../../../HOC';
 
-type Props = {
-    value: ?{ value: string, name: string, url?: ?string, previewUrl: ?string },
-    orientation: $Values<typeof orientations>,
-    disabled?: ?boolean,
-    classes: {
-        container: string,
-        verticalContainer: string,
-        innerContainer: string,
-        selectedImageTextContainer: string,
-        deleteButton: string,
-        input: string,
-        image: string,
-    },
-    onCommitAsync: (callback: Function) => void,
-    onBlur: (value: ?Object) => void,
-    asyncUIState: { loading?: ?boolean },
-    mutate: (data: any) => Promise<any>
-}
-
-type State = {
-    imageSelectorOpen: boolean,
+type OwnProps = {
+    value?: { value: string; name: string; url?: string; previewUrl?: string };
+    orientation: typeof orientations[keyof typeof orientations];
+    disabled?: boolean;
+    onCommitAsync: (callback: () => void) => void;
+    onBlur: (value: Record<string, unknown> | null) => void;
+    asyncUIState: { loading?: boolean };
+    mutate: (data: any) => Promise<any>;
 };
 
-const styles = theme => ({
+type Props = OwnProps & WithStyles<typeof styles>;
+
+type State = {
+    imageSelectorOpen: boolean;
+};
+
+const styles: Readonly<any> = theme => ({
     horizontalContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -78,7 +71,6 @@ const styles = theme => ({
 
 class D2ImagePlain extends Component<Props, State> {
     hiddenimageSelectorRef: any;
-    imageSelectorOpen: boolean;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -86,8 +78,8 @@ class D2ImagePlain extends Component<Props, State> {
         };
     }
 
-    handleImageChange = (e: Object) => {
-        this.setState((state) => { state.imageSelectorOpen = false; });
+    handleImageChange = (e: any) => {
+        this.setState({ imageSelectorOpen: false });
         e.preventDefault();
         const image = e.target.files[0];
         e.target.value = null;
@@ -116,11 +108,11 @@ class D2ImagePlain extends Component<Props, State> {
     }
     handleButtonClick = () => {
         this.hiddenimageSelectorRef.click();
-        this.setState((state) => { state.imageSelectorOpen = true; });
+        this.setState({ imageSelectorOpen: true });
     }
 
     handleCancel = () => {
-        this.setState((state) => { state.imageSelectorOpen = false; });
+        this.setState({ imageSelectorOpen: false });
     }
 
     handleRemoveClick = () => {
@@ -129,7 +121,8 @@ class D2ImagePlain extends Component<Props, State> {
 
     handleBlur = () => {
         if (!this.state.imageSelectorOpen) {
-            this.props.onBlur(this.getImageUrl());
+            const imageUrl = this.getImageUrl();
+            this.props.onBlur(imageUrl ? { url: imageUrl } : null);
         }
     }
 
@@ -155,9 +148,7 @@ class D2ImagePlain extends Component<Props, State> {
         const isUploading = asyncUIState && asyncUIState.loading;
         const imageUrl = this.getImageUrl();
         const previewUrl = this.getPreviewUrl();
-        // $FlowFixMe[prop-missing] automated comment
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
-        // $FlowFixMe[prop-missing] automated comment
         const selectedImageTextContainerClass = isVertical ? classes.verticalSelectedImageTextContainer : classes.horizontalSelectedImageTextContainer;
         return (
             <div onBlur={this.handleBlur}>
@@ -169,7 +160,6 @@ class D2ImagePlain extends Component<Props, State> {
                         this.hiddenimageSelectorRef = hiddenimageSelector;
                     }}
                     onChange={e => this.handleImageChange(e)}
-                    onCancel={this.handleCancel} // eslint-disable-line react/no-unknown-property
                 />
                 {
                     (() => {
@@ -188,11 +178,11 @@ class D2ImagePlain extends Component<Props, State> {
                                         <div className={classes.innerContainer}>
                                             <a
                                                 target="_blank"
-                                                href={imageUrl}
+                                                href={imageUrl || undefined}
                                                 rel="noopener noreferrer"
                                                 onBlur={(event) => { event.stopPropagation(); }}
                                             >
-                                                <img src={previewUrl} alt="" className={classes.image} />
+                                                <img src={previewUrl || undefined} alt="" className={classes.image} />
                                             </a>
                                         </div>
                                     }
@@ -202,7 +192,7 @@ class D2ImagePlain extends Component<Props, State> {
                                             value.name :
                                             <a
                                                 target="_blank"
-                                                href={imageUrl}
+                                                href={imageUrl || undefined}
                                                 rel="noopener noreferrer"
                                             >
                                                 {value.name}

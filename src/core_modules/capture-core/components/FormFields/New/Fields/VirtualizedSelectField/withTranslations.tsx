@@ -1,10 +1,7 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 
-type Props = {
-
-};
+type Props = Record<string, any>;
 
 function buildTranslations() {
     return {
@@ -26,7 +23,6 @@ export const withSelectTranslations = () =>
                 const { ...passOnProps } = this.props;
 
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         translations={this.translations}
                         {...passOnProps}
