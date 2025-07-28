@@ -44,10 +44,10 @@ const exitBehaviours = {
 };
 
 class UserSearchPlain extends React.Component<Props, State> {
-    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null | undefined;
     suggestionElements: Map<string, HTMLElement>;
     inputDomElement: HTMLInputElement | null | undefined;
     domNames: any;
+    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null | undefined;
     constructor(props: Props) {
         super(props);
         this.suggestionElements = new Map();
