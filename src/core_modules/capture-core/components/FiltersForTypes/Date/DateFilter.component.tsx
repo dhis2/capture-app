@@ -1,7 +1,8 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
@@ -9,7 +10,7 @@ import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes'
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 import type { UpdatableFilterContent } from '../types';
-import { type DateValue } from './types';
+import type { DateValue } from './types';
 import { FromDateFilter } from './From.component';
 import { ToDateFilter } from './To.component';
 import { dataElementTypes } from '../../../metaData';
@@ -19,7 +20,7 @@ import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: Theme) => ({
     fromToContainer: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -42,29 +43,24 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-export type Value = ?{
-    from?: ?DateValue,
-    to?: ?DateValue,
-    main?: ?string,
-    start?: ?string,
-    end?: ?string,
+export type Value = {
+    from?: DateValue | null;
+    to?: DateValue | null;
+    main?: string | null;
+    start?: string | null;
+    end?: string | null;
+} | null;
+
+type OwnProps = {
+    onCommitValue: (value?: { from?: string | null; to?: string | null } | null) => void;
+    value: Value;
+    onFocusUpdateButton: () => void;
 };
 
-type Props = {
-    onCommitValue: (value: ?{ from?: ?string, to?: ?string }) => void,
-    value: Value,
-    classes: {
-        fromToContainer: string,
-        inputContainer: string,
-        error: string,
-        logicErrorContainer: string,
-        toLabelContainer: string,
-    },
-    onFocusUpdateButton: () => void,
-};
+type Props = OwnProps & WithStyles<typeof styles>;
 
 type State = {
-    submitAttempted: boolean,
+    submitAttempted: boolean;
 };
 
 // eslint-disable-next-line complexity
@@ -77,7 +73,7 @@ const getAbsoluteRangeErrors = (fromValue, toValue, submitAttempted) => {
     if (!fromValueString && !toValueString) {
         return {
             dateLogicError: submitAttempted
-                ? i18n.t(DateFilter.errorMessages.ABSOLUTE_RANGE_WITHOUT_VALUES)
+                ? i18n.t(DateFilterPlain.errorMessages.ABSOLUTE_RANGE_WITHOUT_VALUES)
                 : null,
         };
     }
@@ -87,11 +83,11 @@ const getAbsoluteRangeErrors = (fromValue, toValue, submitAttempted) => {
         toValueString &&
         isFromValueValid &&
         isToValueValid &&
-        DateFilter.isFromAfterTo(fromValueString, toValueString);
+        DateFilterPlain.isFromAfterTo(fromValueString, toValueString);
 
     return {
         dateLogicError: hasDateLogicError
-            ? i18n.t(DateFilter.errorMessages.FROM_GREATER_THAN_TO)
+            ? i18n.t(DateFilterPlain.errorMessages.FROM_GREATER_THAN_TO)
             : null,
     };
 };
@@ -105,11 +101,11 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     if (!startValue && !endValue) {
         errors = {
             ...errors,
-            bufferLogicError: submitAttempted ? i18n.t(DateFilter.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
+            bufferLogicError: submitAttempted ? i18n.t(DateFilterPlain.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
         };
     }
-    const { error: startValueError } = DateFilter.validateRelativeRangeValue(startValue);
-    const { error: endValueError } = DateFilter.validateRelativeRangeValue(endValue);
+    const { error: startValueError } = DateFilterPlain.validateRelativeRangeValue(startValue);
+    const { error: endValueError } = DateFilterPlain.validateRelativeRangeValue(endValue);
     errors = {
         ...errors,
         startValueError,
@@ -138,7 +134,7 @@ const isAbsoluteRangeFilterValid = (from, to) => {
         return true;
     }
 
-    return !DateFilter.isFromAfterTo(fromValue, toValue);
+    return !DateFilterPlain.isFromAfterTo(fromValue, toValue);
 };
 
 const isRelativeRangeFilterValid = (startValue, endValue) => {
@@ -146,17 +142,16 @@ const isRelativeRangeFilterValid = (startValue, endValue) => {
         return false;
     }
     if (
-        !DateFilter.validateRelativeRangeValue(startValue).isValid ||
-        !DateFilter.validateRelativeRangeValue(endValue).isValid
+        !DateFilterPlain.validateRelativeRangeValue(startValue).isValid ||
+        !DateFilterPlain.validateRelativeRangeValue(endValue).isValid
     ) {
         return false;
     }
     return true;
 };
 
-// $FlowFixMe[incompatible-variance] automated comment
 class DateFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
-    static validateRelativeRangeValue(value: ?string) {
+    static validateRelativeRangeValue(value?: string | null) {
         if (!value) {
             return {
                 isValid: true,
@@ -168,16 +163,16 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
         return {
             isValid,
-            error: isValid ? null : i18n.t(DateFilter.errorMessages[dataElementTypes.INTEGER_ZERO_OR_POSITIVE]),
+            error: isValid ? null : i18n.t(DateFilterPlain.errorMessages[dataElementTypes.INTEGER_ZERO_OR_POSITIVE]),
         };
     }
 
     static isFilterValid(
-        mainValue?: ?string,
-        fromValue?: ?DateValue,
-        toValue?: ?DateValue,
-        startValue?: ?string,
-        endValue?: ?string,
+        mainValue?: string | null,
+        fromValue?: DateValue | null,
+        toValue?: DateValue | null,
+        startValue?: string | null,
+        endValue?: string | null,
     ) {
         if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
             return isAbsoluteRangeFilterValid(fromValue, toValue);
@@ -259,18 +254,16 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         if (!value) {
             return null;
         }
-        // $FlowFixMe
-        return getDateFilterData(value);
+        return getDateFilterData(value as any);
     }
 
     onIsValid() {
         this.setState({ submitAttempted: true });
         const values = this.props.value;
-        return !values || DateFilter.isFilterValid(values.main, values.from, values.to, values.start, values.end);
+        return !values || DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
     getUpdatedValue(valuePart: { [key: string]: string }) {
-        // $FlowFixMe[cannot-spread-indexer] automated comment
         const valueObject = {
             ...this.props.value,
             ...valuePart,
@@ -290,7 +283,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             valueObject.main === mainOptionKeys.ABSOLUTE_RANGE ||
             valueObject.main === mainOptionKeys.RELATIVE_RANGE
         ) {
-            // $FlowFixMe[incompatible-type] automated comment
             valueObject.main = null;
         }
 
@@ -311,7 +303,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     handleMainSelect = (value: string) => {
         const valueObject = value ? { main: value } : null;
-        this.props.onCommitValue(valueObject);
+        this.props.onCommitValue(valueObject as any);
     };
 
     setToD2DateTextFieldInstance = (instance: any) => {
@@ -355,20 +347,17 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return (
             <div id="dateFilter">
                 <div>
-                    {/* $FlowFixMe */}
                     <SelectBoxes
-                        optionSet={DateFilter.mainOptionSet}
-                        orientation={orientations.VERTICAL}
+                        optionSet={DateFilterPlain.mainOptionSet}
+                        orientation={orientations.VERTICAL as any}
                         value={value && value.main}
                         onBlur={this.handleMainSelect}
-                        color="secondary"
                         nullable
+                        {...({} as any)}
                     />
                 </div>
                 <div className={classes.fromToContainer}>
                     <div className={classes.inputContainer}>
-                        {/* $FlowSuppress: Flow not working 100% with HOCs */}
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <FromDateFilter
                             value={fromValue?.value}
                             onBlur={this.handleFieldBlur}
@@ -380,8 +369,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                     </div>
                     <div className={classes.toLabelContainer}>{i18n.t('to')}</div>
                     <div className={classes.inputContainer}>
-                        {/* $FlowSuppress: Flow not working 100% with HOCs */}
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <ToDateFilter
                             value={toValue?.value}
                             onBlur={this.handleFieldBlur}
@@ -393,14 +380,13 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                     </div>
                 </div>
                 <div>
-                    {/* $FlowFixMe */}
                     <SelectBoxes
-                        optionSet={DateFilter.optionSet}
-                        orientation={orientations.VERTICAL}
+                        optionSet={DateFilterPlain.optionSet}
+                        orientation={orientations.VERTICAL as any}
                         value={value && value.main}
                         onBlur={this.handleMainSelect}
-                        color="secondary"
                         nullable
+                        {...({} as any)}
                     />
                 </div>
                 <div>
@@ -418,4 +404,4 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 }
 
-export const DateFilter = withStyles(getStyles)(DateFilterPlain);
+export const DateFilter = withStyles(styles)(DateFilterPlain);

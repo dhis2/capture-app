@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
@@ -10,13 +9,13 @@ import type { Value } from './DateFilter.component';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 type Props = {
-    filter: ?DateFilterData,
-    filterTypeRef: Function,
-    handleCommitValue: () => void,
+    filter?: DateFilterData | null;
+    filterTypeRef: (instance: any) => void;
+    handleCommitValue: () => void;
 };
 
 type State = {
-    value?: Value,
+    value?: Value;
 };
 
 export class DateFilterManager extends React.Component<Props, State> {
@@ -48,7 +47,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    static calculateDefaultValueState(filter: ?DateFilterData) {
+    static calculateDefaultValueState(filter?: DateFilterData | null) {
         if (!filter) {
             return undefined;
         }
@@ -79,7 +78,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: ?Value) => {
+    handleCommitValue = (value?: Value | null) => {
         this.setState({ value });
         this.props.handleCommitValue && this.props.handleCommitValue();
     };
@@ -88,10 +87,9 @@ export class DateFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DateFilter
                 value={this.state.value}
-                innerRef={filterTypeRef}
+                innerRef={filterTypeRef as any}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

@@ -1,15 +1,14 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
-    value: ?string,
-    error: ?string,
-    onBlur: ({ start: string }) => void,
-    onEnterKey: () => void,
-    errorClass: string,
+    value?: string | null;
+    error?: string | null;
+    onBlur: ({ start }: { start: string }) => void;
+    onEnterKey: () => void;
+    errorClass: string;
 };
 
 class StartRangeFilterPlain extends Component<Props> {
@@ -21,7 +20,7 @@ class StartRangeFilterPlain extends Component<Props> {
         this.props.onBlur(StartRangeFilterPlain.getValueObject(value));
     };
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey();
         }
@@ -31,7 +30,6 @@ class StartRangeFilterPlain extends Component<Props> {
         const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2TextField
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}

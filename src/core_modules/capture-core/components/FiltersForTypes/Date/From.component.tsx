@@ -1,15 +1,14 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
-import { type DateValue } from './types/date.types';
+import type { DateValue } from './types/date.types';
 
 type Props = {
-    value: ?DateValue,
-    error: ?string,
-    errorClass: ?string,
-    onBlur: ({ from: DateValue }) => void,
+    value?: DateValue | null;
+    error?: string | null;
+    errorClass?: string | null;
+    onBlur: ({ from }: { from: DateValue }) => void;
 };
 
 class FromDateFilterPlain extends Component<Props> {
@@ -25,7 +24,6 @@ class FromDateFilterPlain extends Component<Props> {
         const { error, errorClass, onBlur, ...passOnProps } = this.props;
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('From')}
@@ -33,7 +31,7 @@ class FromDateFilterPlain extends Component<Props> {
                     calendarWidth="330px"
                     {...passOnProps}
                 />
-                <div className={errorClass}>
+                <div className={errorClass || undefined}>
                     {error ? i18n.t('Please provide a valid date') : error}
                 </div>
             </div>
