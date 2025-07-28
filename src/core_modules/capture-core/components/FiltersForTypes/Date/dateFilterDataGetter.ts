@@ -1,31 +1,28 @@
-// @flow
 import { parseNumber } from 'capture-core-utils/parsers';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
-import { type AbsoluteDateFilterData, type RelativeDateFilterData, type DateValue } from './types';
+import type { AbsoluteDateFilterData, RelativeDateFilterData, DateValue } from './types';
 
 type Value = {
-    main: string,
-    from?: ?DateValue,
-    to?: ?DateValue,
-    start?: ?string,
-    end?: ?string,
+    main: string;
+    from?: DateValue | null;
+    to?: DateValue | null;
+    start?: string | null;
+    end?: string | null;
 };
 
-function convertAbsoluteDate(fromValue: ?string, toValue: ?string) {
+function convertAbsoluteDate(fromValue?: string | null, toValue?: string | null) {
     const rangeData: AbsoluteDateFilterData = {
         type: dateFilterTypes.ABSOLUTE,
     };
 
     if (fromValue) {
-        // $FlowFixMe[incompatible-type] automated comment
         const fromClientValue: string = convertLocalToIsoCalendar(fromValue);
         rangeData.ge = fromClientValue;
     }
 
     if (toValue) {
-        // $FlowFixMe[incompatible-type] automated comment
         const toClientValue: string = convertLocalToIsoCalendar(toValue);
         rangeData.le = toClientValue;
     }

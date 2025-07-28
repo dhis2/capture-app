@@ -3,7 +3,7 @@ import { orientations } from './selectBoxes.const';
 
 type BaseProps = {
     multiSelect?: boolean | null;
-    orientation?: keyof typeof orientations | null;
+    orientation?: typeof orientations[keyof typeof orientations] | null;
     onBlur: (value: any) => void;
     label?: string;
     value?: any;
@@ -21,7 +21,7 @@ type MultiSelectBaseProps<OptionsType> = Readonly<BaseProps & {
 
 type WithOptionSet = {
     optionSet: OptionSet;
-    options: null;
+    options?: null;
 };
 
 export type Options = Array<{text: string; value: any}>;

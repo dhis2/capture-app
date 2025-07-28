@@ -1,12 +1,13 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { StartRangeFilter } from './Start.component';
 import { EndRangeFilter } from './End.component';
 import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: Theme) => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -30,34 +31,28 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Value = {
-    start?: ?string,
-    end?: ?string,
+    start?: string | null;
+    end?: string | null;
 };
 
-type RangeFilterData = ?{
-    start?: ?number,
-    end?: ?number,
+type RangeFilterData = {
+    start?: number | null;
+    end?: number | null;
+} | null;
+
+type OwnProps = {
+    handleFieldBlur: (value?: Value | null) => void;
+    value: RangeFilterData;
+    startValueError?: string | null;
+    endValueError?: string | null;
 };
 
-type Props = {
-    handleFieldBlur: (value: ?Value) => void,
-    value: RangeFilterData,
-    startValueError?: ?string,
-    endValueError?: ?string,
-    classes: {
-        container: string,
-        inputContainer: string,
-        error: string,
-        logicErrorContainer: string,
-        toLabelContainer: string,
-    },
-};
+type Props = OwnProps & WithStyles<typeof styles>;
 
 class RangeFilterPlain extends Component<Props> {
     endD2TextFieldInstance: D2TextField;
 
-    getUpdatedValue(valuePart: { [key: string]: ?string }) {
-        // $FlowFixMe[cannot-spread-indexer] automated comment
+    getUpdatedValue(valuePart: { [key: string]: string | null }) {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
@@ -72,8 +67,8 @@ class RangeFilterPlain extends Component<Props> {
         this.endD2TextFieldInstance.focus();
     };
 
-    handleFieldBlur = (value: { [key: string]: ?string }) => {
-        this.props.handleFieldBlur && this.props.handleFieldBlur(this.getUpdatedValue(value));
+    handleFieldBlur = (value: { [key: string]: string | null }) => {
+        this.props.handleFieldBlur && this.props.handleFieldBlur(this.getUpdatedValue(value) as any);
     };
 
     setEndD2TextFieldInstance = (instance: any) => {
@@ -86,8 +81,6 @@ class RangeFilterPlain extends Component<Props> {
             <div>
                 <div className={classes.container}>
                     <div className={classes.inputContainer}>
-                        {/* $FlowSuppress: Flow not working 100% with HOCs */}
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <StartRangeFilter
                             value={value && value.start}
                             error={startValueError}
@@ -98,8 +91,6 @@ class RangeFilterPlain extends Component<Props> {
                     </div>
                     <div className={classes.toLabelContainer}>{i18n.t('to')}</div>
                     <div className={classes.inputContainer}>
-                        {/* $FlowSuppress: Flow not working 100% with HOCs */}
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <EndRangeFilter
                             value={value && value.end}
                             error={endValueError}
@@ -114,4 +105,4 @@ class RangeFilterPlain extends Component<Props> {
     }
 }
 
-export const RangeFilter = withStyles(getStyles)(RangeFilterPlain);
+export const RangeFilter = withStyles(styles)(RangeFilterPlain);
