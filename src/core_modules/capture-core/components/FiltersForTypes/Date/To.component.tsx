@@ -7,7 +7,7 @@ import type { DateValue } from './types/date.types';
 type Props = {
     value?: DateValue | null;
     error?: string | null;
-    errorClass?: string | null;
+    errorClass?: string;
     onBlur: ({ to }: { to: DateValue }) => void;
     onFocusUpdateButton: () => void;
 };
@@ -37,7 +37,7 @@ class ToDateFilterPlain extends Component<Props> {
                     calendarWidth="330px"
                     {...passOnProps}
                 />
-                <div className={errorClass || undefined}>
+                <div className={errorClass}>
                     {error ? i18n.t('Please provide a valid date') : error}
                 </div>
             </div>

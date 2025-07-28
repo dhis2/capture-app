@@ -349,11 +349,10 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                 <div>
                     <SelectBoxes
                         optionSet={DateFilterPlain.mainOptionSet}
-                        orientation={orientations.VERTICAL as any}
+                        orientation={orientations.VERTICAL}
                         value={value && value.main}
                         onBlur={this.handleMainSelect}
                         nullable
-                        {...({} as any)}
                     />
                 </div>
                 <div className={classes.fromToContainer}>
@@ -382,11 +381,10 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                 <div>
                     <SelectBoxes
                         optionSet={DateFilterPlain.optionSet}
-                        orientation={orientations.VERTICAL as any}
+                        orientation={orientations.VERTICAL}
                         value={value && value.main}
                         onBlur={this.handleMainSelect}
                         nullable
-                        {...({} as any)}
                     />
                 </div>
                 <div>
