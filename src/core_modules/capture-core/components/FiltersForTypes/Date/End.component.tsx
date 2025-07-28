@@ -1,16 +1,15 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
-    value: ?string,
-    error: ?string,
-    onBlur: ({ end: string }) => void,
-    onEnterKey: ({ end: string }) => void,
-    textFieldRef: (instance: any) => void,
-    errorClass: string,
+    value?: string | null;
+    error?: string | null;
+    onBlur: ({ end }: { end: string }) => void;
+    onEnterKey: ({ end }: { end: string }) => void;
+    textFieldRef: (instance: any) => void;
+    errorClass: string;
 };
 
 class EndRangeFilterPlain extends Component<Props> {
@@ -26,7 +25,6 @@ class EndRangeFilterPlain extends Component<Props> {
         const { error, onBlur, onEnterKey, textFieldRef, errorClass, ...passOnProps } = this.props;
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2TextField
                     ref={textFieldRef}
                     onBlur={this.handleBlur}
