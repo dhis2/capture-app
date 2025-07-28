@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
@@ -96,19 +97,19 @@ class UserSearchPlain extends React.Component<Props, State> {
         });
     }
 
+    // suggestionsError is never been used (report lgmt)
+    setSuggestionsError(message: string) {
+        this.setState({
+            suggestionsError: message,
+        });
+    }
+
     resetSuggestions() {
         this.setState({
             suggestions: [],
             highlightedSuggestion: undefined,
             searchValue: '',
             noMatch: false,
-        });
-    }
-
-    // suggestionsError is never been used (report lgmt)
-    setSuggestionsError(message: string) {
-        this.setState({
-            suggestionsError: message,
         });
     }
 
