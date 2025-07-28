@@ -1,14 +1,19 @@
-// @flow
 import { useEffect, useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-export const usePreviousOrganizationUnit = (previousOrgUnitId?: string) => {
+type PreviousOrganizationUnitResult = {
+    id?: string;
+    displayName?: string;
+    path?: string;
+    expandedPaths?: string[];
+};
+
+export const usePreviousOrganizationUnit = (previousOrgUnitId?: string): PreviousOrganizationUnitResult => {
     const { data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {
                     resource: 'organisationUnits',
-                    id: ({ variables: { previousOrgUnitId: id } }) => id,
                     params: {
                         fields: ['displayName,path'],
                     },
@@ -23,19 +28,20 @@ export const usePreviousOrganizationUnit = (previousOrgUnitId?: string) => {
 
     useEffect(() => {
         if (previousOrgUnitId) {
-            refetch({ variables: { previousOrgUnitId } });
+            refetch({ id: previousOrgUnitId });
         }
     }, [previousOrgUnitId, refetch]);
 
     const expandedPaths = useMemo(() => {
-        const paths = data?.organisationUnits?.path.split('/').filter(p => p);
-        return paths?.map((_, index) => `/${paths.slice(0, index + 1).join('/')}`);
-    }, [data?.organisationUnits?.path]);
+        const orgUnit = data?.organisationUnits as any;
+        const paths = orgUnit?.path?.split('/').filter((p: string) => p);
+        return paths?.map((_: any, index: number) => `/${paths.slice(0, index + 1).join('/')}`);
+    }, [data?.organisationUnits]);
 
     return {
         id: previousOrgUnitId,
-        displayName: data?.organisationUnits?.displayName,
-        path: data?.organisationUnits?.path,
+        displayName: (data?.organisationUnits as any)?.displayName,
+        path: (data?.organisationUnits as any)?.path,
         expandedPaths,
     };
 };

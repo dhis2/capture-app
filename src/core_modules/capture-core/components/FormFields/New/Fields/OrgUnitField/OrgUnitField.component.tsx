@@ -1,9 +1,8 @@
-// @flow
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { DebounceField } from 'capture-ui';
 import { OrgUnitTree } from './OrgUnitTree.component';
 
@@ -38,22 +37,17 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    onSelectClick: (selectedOrgUnit: Object) => void,
-    onBlur: (selectedOrgUnit: Object) => void,
-    selected?: ?string,
-    maxTreeHeight?: ?number,
-    disabled?: ?boolean,
-    classes: {
-        outerContainer: string,
-        container: string,
-        searchField: string,
-        debounceFieldContainer: string,
-        orgUnitTreeContainer: string,
-    },
-    previousOrgUnitId?: string,
-    dataTest?: string,
+type OrgUnitFieldProps = {
+    onSelectClick: (selectedOrgUnit: Record<string, any>) => void;
+    onBlur: (selectedOrgUnit: Record<string, any>) => void;
+    selected?: string;
+    maxTreeHeight?: number;
+    disabled?: boolean;
+    previousOrgUnitId?: string;
+    dataTest?: string;
 };
+
+type Props = OrgUnitFieldProps & WithStyles<typeof getStyles>;
 
 const OrgUnitFieldPlain = (props: Props) => {
     const {
@@ -66,8 +60,8 @@ const OrgUnitFieldPlain = (props: Props) => {
         previousOrgUnitId,
         dataTest,
     } = props;
-    const [searchText, setSearchText] = React.useState(undefined);
-    const [key, setKey] = React.useState(undefined);
+    const [searchText, setSearchText] = React.useState<string | undefined>(undefined);
+    const [key, setKey] = React.useState<string | undefined>(undefined);
 
     const { loading, data } = useDataQuery(
         React.useMemo(
@@ -89,17 +83,15 @@ const OrgUnitFieldPlain = (props: Props) => {
             () => ({
                 orgUnits: {
                     resource: 'organisationUnits',
-                    params: ({ variables: { searchText: currentSearchText } }) => ({
+                    params: {
                         fields: [
                             'id,displayName,path,publicAccess,access,lastUpdated',
                             'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                         ].join(','),
                         paging: true,
-                        query: currentSearchText,
                         withinUserSearchHierarchy: true,
                         pageSize: 15,
-                    }),
-
+                    },
                 },
             }),
             [],
@@ -111,7 +103,7 @@ const OrgUnitFieldPlain = (props: Props) => {
 
     React.useEffect(() => {
         if (searchText?.length) {
-            refetchOrg({ variables: { searchText } });
+            refetchOrg({ query: searchText });
             setKey(`${searchText}-${new Date().getTime()}`);
         }
     }, [refetchOrg, searchText]);
@@ -119,15 +111,15 @@ const OrgUnitFieldPlain = (props: Props) => {
     const renderOrgUnitTree = () => {
         if (searchText?.length) {
             return (<OrgUnitTree
-                roots={searchData?.orgUnits?.organisationUnits}
+                roots={(searchData?.orgUnits as any)?.organisationUnits || []}
                 onSelectClick={onSelectClick}
                 ready={ready}
-                treeKey={key}
+                treeKey={key || 'search'}
                 selected={selected}
             />);
         }
         return (<OrgUnitTree
-            roots={data?.orgUnits?.organisationUnits}
+            roots={(data?.orgUnits as any)?.organisationUnits || []}
             onSelectClick={onSelectClick}
             ready={ready}
             treeKey={'initial'}
@@ -136,16 +128,16 @@ const OrgUnitFieldPlain = (props: Props) => {
         />);
     };
 
-    const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchText(event.currentTarget.value);
     };
 
     const handleBlur = () => {
-        onBlur && onBlur(null);
+        onBlur && onBlur({} as any);
     };
 
 
-    const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
+    const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' as const } : undefined;
     return (
         <div
             className={classes.container}

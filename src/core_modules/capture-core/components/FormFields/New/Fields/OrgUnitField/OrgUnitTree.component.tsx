@@ -1,7 +1,6 @@
-// @flow
 import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
@@ -16,19 +15,18 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    roots: Array<Object>,
-    classes: {
-        orgunitTree: string,
-    },
-    onSelectClick: Function,
-    treeKey: string,
-    previousOrgUnitId?: Object
+type OrgUnitTreeProps = {
+    roots: Array<Record<string, any>>;
+    onSelectClick: (payload: any) => void;
+    treeKey: string;
+    previousOrgUnitId?: Record<string, any> | string;
 };
+
+type Props = OrgUnitTreeProps & WithStyles<typeof getStyles>;
 
 const OrgUnitTreePlain = (props: Props) => {
     const { roots, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
-    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
+    const previousSelectedOrgUnit = usePreviousOrganizationUnit(typeof previousOrgUnitId === 'string' ? previousOrgUnitId : previousOrgUnitId?.id);
     const getExpandedItems = () => {
         if (roots && roots.length === 1) {
             return [`/${roots[0].id}`];
@@ -48,7 +46,7 @@ const OrgUnitTreePlain = (props: Props) => {
 
     const initiallyExpanded = getExpandedItems();
 
-    const [expanded, setExpanded] = React.useState(initiallyExpanded);
+    const [expanded, setExpanded] = React.useState<string[] | undefined>(initiallyExpanded);
 
     React.useEffect(() => {
         if (previousSelectedOrgUnit?.expandedPaths) {
@@ -56,13 +54,13 @@ const OrgUnitTreePlain = (props: Props) => {
         }
     }, [previousSelectedOrgUnit?.expandedPaths]);
 
-    const handleExpand = ({ path }) => {
+    const handleExpand = ({ path }: { path: string }) => {
         if (expanded && !expanded.includes(path)) {
             setExpanded([...expanded, path]);
         }
     };
 
-    const handleCollapse = ({ path }) => {
+    const handleCollapse = ({ path }: { path: string }) => {
         const pathIndex = expanded?.indexOf(path);
 
         if (pathIndex && pathIndex !== -1 && expanded) {
@@ -87,12 +85,12 @@ const OrgUnitTreePlain = (props: Props) => {
             <OrganisationUnitTree
                 key={treeKey}
                 roots={roots.map(item => item.id)}
-                expanded={expanded}
-                handleExpand={handleExpand}
-                handleCollapse={handleCollapse}
+                initiallyExpanded={expanded}
+                onExpand={handleExpand}
+                onCollapse={handleCollapse}
                 singleSelection
                 selected={getHighlightedItems()}
-                onChange={onSelectClick}
+                onChange={(payload: any) => onSelectClick(payload)}
             />
         </div>
     );
