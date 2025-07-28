@@ -6,26 +6,32 @@ import type { DateValue } from '../../../FiltersForTypes/Date/types/date.types';
 type Props = {
     label?: string;
     value?: string;
-    calendarWidth?: number;
-    inputWidth?: number;
+    calendarWidth?: string;
+    inputWidth?: string;
     onBlur: (value: DateValue) => void;
     onFocus?: () => void;
     onDateSelectedFromCalendar?: () => void;
-    classes?: Record<string, unknown>;
     disabled?: boolean;
+    placeholder?: string;
 };
 
 type State = {
     date?: string;
 };
 
+type Validation = {
+    validationCode: string,
+    validationText: string,
+    error: boolean,
+    valid: boolean,
+};
 
 export class D2Date extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
     }
 
-    handleDateSelected = (value: any) => {
+    handleDateSelected = (value: {calendarDateString: string, validation?: Validation} | null) => {
         const { calendarDateString: selectedDate, validation } = value || {};
         if (selectedDate !== undefined) {
             this.props.onBlur({
@@ -41,7 +47,6 @@ export class D2Date extends React.Component<Props, State> {
         const {
             calendarWidth,
             inputWidth,
-            classes,
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
@@ -62,8 +67,8 @@ export class D2Date extends React.Component<Props, State> {
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
                     date={this.props.value}
-                    width={calendarWidth?.toString()}
-                    inputWidth={inputWidth?.toString()}
+                    width={calendarWidth}
+                    inputWidth={inputWidth}
                     onFocus={onFocus}
                     disabled={disabled}
                 />

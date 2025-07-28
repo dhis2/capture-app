@@ -5,7 +5,7 @@ import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHa
 import type { DateValue } from './types/date.types';
 
 type Props = {
-    value?: DateValue | null;
+    value?: string;
     error?: string | null;
     errorClass?: string;
     onBlur: ({ from }: { from: DateValue }) => void;
@@ -39,4 +39,4 @@ class FromDateFilterPlain extends Component<Props> {
     }
 }
 
-export const FromDateFilter = withInternalChangeHandler()(FromDateFilterPlain);
+export const FromDateFilter = withInternalChangeHandler()(FromDateFilterPlain) as any;

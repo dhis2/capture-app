@@ -9,7 +9,6 @@ import { Option } from '../../../metaData/OptionSet/Option';
 type Props = {
     allowMultiple?: boolean;
     onBlur: (value: any) => void;
-    [key: string]: any;
 };
 
 export class D2TrueFalse extends Component<Props> {
@@ -37,7 +36,6 @@ export class D2TrueFalse extends Component<Props> {
                 <SelectBoxes
                     {...passOnProps}
                     optionSet={this.optionSet}
-                    options={null}
                     multiSelect={allowMultiple}
                 />
             </div>

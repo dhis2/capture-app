@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ComponentType } from 'react';
 import { compose } from 'redux';
 import { useState, useEffect } from 'react';
 import { MultiSelectField as MultiSelectFieldUI, MultiSelectOption } from '@dhis2/ui';
@@ -64,4 +63,4 @@ const MultiSelectFieldComponentPlain = (props: Props & WithStyles<typeof styles>
     );
 };
 
-export const MultiSelectField = compose(withStyles(styles), withFocusHandler())(MultiSelectFieldComponentPlain) as ComponentType<Props>;
+export const MultiSelectField = compose(withStyles(styles), withFocusHandler())(MultiSelectFieldComponentPlain) as any;

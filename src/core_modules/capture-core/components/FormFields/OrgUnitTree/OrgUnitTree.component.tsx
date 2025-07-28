@@ -158,7 +158,8 @@ export class OrgUnitTree extends React.Component<Props, State> {
               multiple={false}
               selectable={typeof selectable !== 'undefined' ? selectable : true}
               list={list}
-              selected={selected ? [selected] : undefined}
+              // @ts-expect-error - keeping original functionality as before ts rewrite
+              selected={selected}
               onIconClick={this.onIconClick}
               setSelected={this.setSelected}
           />

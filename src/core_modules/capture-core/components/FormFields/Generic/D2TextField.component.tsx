@@ -6,6 +6,9 @@ type Props = {
     onChange?: (value: string, event: HTMLInputElement) => void;
     onBlur?: (value: string, event: HTMLInputElement) => void;
     value?: string;
+    placeholder?: string;
+    dataTest?: string;
+    onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export class D2TextField extends Component<Props> {

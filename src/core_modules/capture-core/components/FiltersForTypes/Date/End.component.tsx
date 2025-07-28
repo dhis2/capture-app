@@ -4,7 +4,7 @@ import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
-    value?: string | null;
+    value?: string;
     error?: string | null;
     onBlur: ({ end }: { end: string }) => void;
     onEnterKey: ({ end }: { end: string }) => void;
@@ -29,7 +29,6 @@ class EndRangeFilterPlain extends Component<Props> {
                     ref={textFieldRef}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Days in the future')}
-                    fullWidth
                     dataTest="date-range-filter-end"
                     {...passOnProps}
                 />
@@ -39,4 +38,4 @@ class EndRangeFilterPlain extends Component<Props> {
     }
 }
 
-export const EndRangeFilter = withInternalChangeHandler()(EndRangeFilterPlain);
+export const EndRangeFilter = withInternalChangeHandler()(EndRangeFilterPlain) as any;

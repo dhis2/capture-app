@@ -67,8 +67,6 @@ type TreeProps = {
     multiple?: boolean;
     selectable?: boolean;
     selected?: Array<string>;
-    required?: boolean;
-    label?: string;
 };
 
 export class Tree extends React.Component<TreeProps> {
@@ -147,15 +145,12 @@ export class Tree extends React.Component<TreeProps> {
     }
 
     render() {
-        const { required, label } = this.props;
-
         if (this.props.list.length === 0) {
             return null;
         }
 
         return (
             <div className="ou-tree-container">
-                {label && <div className="ou-tree-label">{label}{required && ' *'}</div>}
                 <div className="ou-tree">{this.view()}</div>
             </div>
         );

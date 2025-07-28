@@ -6,7 +6,7 @@ import { withTranslations } from '../FormFields/Options/SelectVirtualized/withTr
 import type { VirtualizedOptionConfig } from
     '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
-const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized);
+const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized) as any;
 
 type Props = {
     rowsPerPage: number;
