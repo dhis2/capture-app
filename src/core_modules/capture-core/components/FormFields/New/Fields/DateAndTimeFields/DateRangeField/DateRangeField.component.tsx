@@ -1,10 +1,9 @@
-// @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
-import { DateTimeField as UIDateTimeField } from 'capture-ui';
+import { withStyles, withTheme, WithStyles } from '@material-ui/core/styles';
+import { DateRangeField as UIDateRangeField } from 'capture-ui';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     innerInputError: {
         color: theme.palette.error.main,
         padding: theme.typography.pxToRem(3),
@@ -28,19 +27,18 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    theme: Object,
+    value?: any | null,
+    onBlur: (value: any) => void,
 }
 
-class DateTimeFieldPlain extends React.Component<Props> {
-    render() {
-        const { ...passOnProps } = this.props;
-        return (
-            <UIDateTimeField
-                {...passOnProps}
-                locale={systemSettingsStore.get().uiLocale}
-            />
-        );
-    }
-}
+const DateRangeFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
+    const { ...passOnProps } = props;
+    return (
+        <UIDateRangeField
+            {...passOnProps}
+            locale={systemSettingsStore.get().uiLocale}
+        />
+    );
+};
 
-export const DateTimeField = withTheme()(withStyles(getStyles)(DateTimeFieldPlain));
+export const DateRangeField = withTheme()(withStyles(getStyles)(DateRangeFieldPlain));

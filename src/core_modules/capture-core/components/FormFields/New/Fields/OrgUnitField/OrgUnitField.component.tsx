@@ -38,8 +38,8 @@ const getStyles = () => ({
 });
 
 type OrgUnitFieldProps = {
-    onSelectClick: (selectedOrgUnit: Record<string, any>) => void;
-    onBlur: (selectedOrgUnit: Record<string, any>) => void;
+    onSelectClick: (selectedOrgUnit: any) => void;
+    onBlur: (selectedOrgUnit: any) => void;
     selected?: string;
     maxTreeHeight?: number;
     disabled?: boolean;
@@ -83,15 +83,16 @@ const OrgUnitFieldPlain = (props: Props) => {
             () => ({
                 orgUnits: {
                     resource: 'organisationUnits',
-                    params: {
+                    params: ({ variables: { searchText: currentSearchText } }) => ({
                         fields: [
                             'id,displayName,path,publicAccess,access,lastUpdated',
                             'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                         ].join(','),
                         paging: true,
+                        query: currentSearchText,
                         withinUserSearchHierarchy: true,
                         pageSize: 15,
-                    },
+                    }),
                 },
             }),
             [],
@@ -103,7 +104,7 @@ const OrgUnitFieldPlain = (props: Props) => {
 
     React.useEffect(() => {
         if (searchText?.length) {
-            refetchOrg({ query: searchText });
+            refetchOrg({ variables: searchText });
             setKey(`${searchText}-${new Date().getTime()}`);
         }
     }, [refetchOrg, searchText]);
@@ -114,12 +115,12 @@ const OrgUnitFieldPlain = (props: Props) => {
                 roots={(searchData?.orgUnits as any)?.organisationUnits || []}
                 onSelectClick={onSelectClick}
                 ready={ready}
-                treeKey={key || 'search'}
+                treeKey={key}
                 selected={selected}
             />);
         }
         return (<OrgUnitTree
-            roots={(data?.orgUnits as any)?.organisationUnits || []}
+            roots={(data?.orgUnits as any)?.organisationUnits}
             onSelectClick={onSelectClick}
             ready={ready}
             treeKey={'initial'}
@@ -128,12 +129,12 @@ const OrgUnitFieldPlain = (props: Props) => {
         />);
     };
 
-    const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         setSearchText(event.currentTarget.value);
     };
 
     const handleBlur = () => {
-        onBlur && onBlur({} as any);
+        onBlur && onBlur(null);
     };
 
 

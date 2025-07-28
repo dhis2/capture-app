@@ -1,15 +1,11 @@
 
-// @flow
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 
 type Props = {
-    value?: ?any,
-    valueConverter?: ?(value: any) => any,
-    classes: {
-        container: string,
-    },
+    value?: any | null,
+    valueConverter?: (value: any) => any | null,
 }
 
 const getStyles = () => ({
@@ -21,7 +17,7 @@ const getStyles = () => ({
     },
 });
 
-class ViewModeFieldPlain extends React.Component<Props> {
+class ViewModeFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     render() {
         const { value, valueConverter, classes } = this.props;
         const displayValue = valueConverter ? valueConverter(value) : value;

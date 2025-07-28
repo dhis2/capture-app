@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './selectField.module.css';
@@ -7,7 +6,7 @@ type Props = {
     onSetFocus: () => void,
     onRemoveFocus: () => void,
     inFocus: boolean,
-    onBlur?: ?(event: SyntheticEvent<HTMLInputElement>) => void,
+    onBlur?: (event: React.SyntheticEvent<HTMLInputElement>) => void | null,
     onFocus: () => void,
     classes: {
         inputWrapperFocused: string,
@@ -17,7 +16,7 @@ type Props = {
 
 export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) =>
     class FocusHandlerHOC extends React.Component<Props> {
-        handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
+        handleBlur = (event: React.SyntheticEvent<HTMLInputElement>) => {
             this.props.onRemoveFocus();
             this.props.onBlur && this.props.onBlur(event);
         }
@@ -35,7 +34,6 @@ export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) 
                 <div
                     className={classNames(defaultClasses.inputWrapper, inputWrapper)}
                 >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerCompnent
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}

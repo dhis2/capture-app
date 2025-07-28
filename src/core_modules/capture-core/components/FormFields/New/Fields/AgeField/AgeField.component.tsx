@@ -1,10 +1,9 @@
-// @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
-import { DateRangeField as UIDateRangeField } from 'capture-ui';
-import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
+import { withStyles, withTheme, WithStyles } from '@material-ui/core/styles';
+import { AgeField as UIAgeField } from 'capture-ui';
+import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     innerInputError: {
         color: theme.palette.error.main,
         padding: theme.typography.pxToRem(3),
@@ -28,26 +27,22 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    value?: ?any,
+    value?: any | null,
     onBlur: (value: any) => void,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-        innerInputError: string,
-        innerInputWarning: string,
-        innerInputInfo: string,
-        innerInputValidating: string,
-    },
 }
 
-const DateRangeFieldPlain = (props: Props) => {
-    const { ...passOnProps } = props;
+const AgeFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
+    const {
+        ...passOnProps
+    } = props;
+
     return (
-        <UIDateRangeField
-            {...passOnProps}
+        <UIAgeField
+            datePlaceholder={systemSettingsStore.get().dateFormat.toLowerCase()}
             locale={systemSettingsStore.get().uiLocale}
+            {...passOnProps}
         />
     );
 };
 
-export const DateRangeField = withTheme()(withStyles(getStyles)(DateRangeFieldPlain));
+export const AgeField = withTheme()(withStyles(getStyles)(AgeFieldPlain));

@@ -1,22 +1,19 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import { WithStyles } from '@material-ui/core/styles';
 import defaultClasses from './selectField.module.css';
+import { styles } from './MultiSelectField.component';
 
 type Props = {
     onSetFocus: () => void,
     onRemoveFocus: () => void,
     inFocus: boolean,
-    onBlur?: (value: ?string) => void,
+    onBlur?: (value: string | null) => void,
     onFocus: () => void,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-    }
 };
 
 export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
-    class FocusHandlerHOC extends React.Component<Props> {
+    class FocusHandlerHOC extends React.Component<Props & WithStyles<typeof styles>> {
         handleRemoveFocus = (value: string) => {
             this.props.onRemoveFocus();
             this.props.onBlur && this.props.onBlur(value);
@@ -40,7 +37,6 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
                 <div
                     className={classNames(defaultClasses.inputWrapper, inputWrapper)}
                 >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         onFocus={this.handleFocus}
                         onBlur={this.handleRemoveFocus}

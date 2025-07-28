@@ -1,14 +1,13 @@
-// @flow
 import * as React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
-import { typeof orientations } from '../../../New';
+import { orientations } from '../../../New';
 import { withCenterPoint } from '../../HOC';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     inputWrapperFocused: {
-        position: 'relative',
+        position: 'relative' as const,
         zIndex: 10,
     },
     innerInputError: {
@@ -45,24 +44,13 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    value?: ?any,
+    value?: any | null,
     onBlur: (value: any) => void,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-        innerInputError: string,
-        innerInputWarning: string,
-        innerInputInfo: string,
-        innerInputValidating: string,
-    },
-    orientation: $Values<orientations>,
+    orientation: typeof orientations[keyof typeof orientations],
     dialogLabel: string,
 }
 
-class CoordinateFieldPlain extends React.Component<Props> {
-    dialogClasses: Object;
-    passOnClasses: Object;
-
+class CoordinateFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     constructor(props) {
         super(props);
 
@@ -72,12 +60,13 @@ class CoordinateFieldPlain extends React.Component<Props> {
             paper: props.classes.dialogPaper,
         };
     }
+    dialogClasses: any;
+    passOnClasses: any;
 
     render() {
         const { classes, dialogLabel, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UICoordinateField
                 mapDialog={
                     <Modal

@@ -1,10 +1,9 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 import { BooleanField as UIBooleanField } from 'capture-ui';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     iconSelected: {
         fill: theme.palette.secondary.main,
     },
@@ -23,11 +22,10 @@ type Props = {
     onBlur: (value: any, event: any) => void,
 };
 
-class BooleanFieldPlain extends React.Component<Props> {
+class BooleanFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIBooleanField
                 onSelect={onBlur}
                 {...passOnProps}

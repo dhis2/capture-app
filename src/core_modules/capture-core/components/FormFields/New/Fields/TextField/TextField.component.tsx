@@ -1,27 +1,22 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { TextField as UITextField } from 'capture-ui';
 
 const getStyles = () => ({
 });
 
 type Props = {
-    value: ?string,
-    onChange?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
-    onBlur?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-    },
+    value: string | null,
+    onChange?: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void | null,
+    onBlur?: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void | null,
 };
 
-class TextFieldPlain extends Component<Props> {
-    handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+class TextFieldPlain extends Component<Props & WithStyles<typeof getStyles>> {
+    handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         this.props.onChange && this.props.onChange(event.currentTarget.value, event);
     }
 
-    handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
+    handleBlur = (event: React.SyntheticEvent<HTMLInputElement>) => {
         this.props.onBlur && this.props.onBlur(event.currentTarget.value, event);
     }
 
@@ -35,7 +30,6 @@ class TextFieldPlain extends Component<Props> {
         } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UITextField
                 value={value || ''}
                 onChange={this.handleChange}
