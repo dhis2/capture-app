@@ -1,8 +1,7 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 
-const styles = {
+const styles: Readonly<any> = {
     formGroup: {
         display: 'flex',
         flexDirection: 'column',
@@ -15,11 +14,12 @@ const styles = {
     },
 };
 
-type Props = {
+type OwnProps = {
     row?: boolean;
-    classes: Object;
     children: any;
 }
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const FormGroupPlain = ({ children, classes, row = false, ...props }: Props) => (
     <div {...props} className={row ? classes.formGroupRow : classes.formGroup} >

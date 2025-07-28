@@ -1,9 +1,8 @@
-// @flow
 /* eslint-disable class-methods-use-this */
 
 import * as React from 'react';
 import { debounce } from 'lodash';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import VirtualizedSelect from 'react-virtualized-select';
 
 import 'react-select/dist/react-select.css';
@@ -13,7 +12,7 @@ import './optionsSelectVirtualized.css';
 
 import { OptionsSelectVirtualizedOption } from './OptionsSelectVirtualizedOption.component';
 
-export type VirtualizedOptionConfig = {label: string, value: any, icon?: ?React.Node };
+export type VirtualizedOptionConfig = {label: string; value: any; icon?: React.ReactNode | null};
 
 const getStyles = () => ({
     selectedOptionContainer: {
@@ -25,44 +24,41 @@ const getStyles = () => ({
     },
 });
 
-
-type Props = {
-    onSelect: (value: any) => void,
-    onFocus?: ?any,
-    options: Array<VirtualizedOptionConfig>,
-    label?: string,
-    value: any,
-    nullable?: boolean,
-    style?: ?Object,
-    menuStyle?: ?Object,
-    maxHeight?: ?number,
-    disabled?: ?boolean,
-    useHintLabel?: ?boolean,
-    required?: ?boolean,
-    withoutUnderline?: ?boolean,
+type OwnProps = {
+    onSelect: (value: any) => void;
+    onFocus?: any | null;
+    options: Array<VirtualizedOptionConfig>;
+    label?: string;
+    value: any;
+    nullable?: boolean;
+    style?: any | null;
+    menuStyle?: any | null;
+    maxHeight?: number | null;
+    disabled?: boolean | null;
+    useHintLabel?: boolean | null;
+    required?: boolean | null;
+    withoutUnderline?: boolean | null;
     translations: {
-        clearText: string,
-        noResults: string,
-    },
-    multi?: ?boolean,
-    classes: {
-        selectedOptionContainer: string,
-        selectedIconContainer: string,
-    },
-    dataTest?: string,
+        clearText: string;
+        noResults: string;
+    };
+    multi?: boolean | null;
+    dataTest?: string;
 };
 
+type Props = OwnProps & WithStyles<typeof getStyles>;
+
 type State = {
-    filterValue?: ?string;
+    filterValue?: string | null;
 }
 
 type OptionContainer = {
-    focusedOption: VirtualizedOptionConfig,
-    focusOption: (option: VirtualizedOptionConfig) => void,
-    option: VirtualizedOptionConfig,
-    style: Object,
-    selectValue: (value: VirtualizedOptionConfig) => void,
-    valueArray: ?Array<VirtualizedOptionConfig>,
+    focusedOption: VirtualizedOptionConfig;
+    focusOption: (option: VirtualizedOptionConfig) => void;
+    option: VirtualizedOptionConfig;
+    style: any;
+    selectValue: (value: VirtualizedOptionConfig) => void;
+    valueArray: Array<VirtualizedOptionConfig> | null;
 }
 
 class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
@@ -71,13 +67,6 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         return (options && options.filter(o => o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1)) || [];
     }
 
-    handleChange: (selectedItem: VirtualizedOptionConfig) => void;
-    materialUIContainerInstance: any;
-    filterOptions: any;
-    renderOption: () => React$Element<any>;
-    prevFilterValue: ?string;
-    prevFilteredOptions: Array<VirtualizedOptionConfig>;
-    isUnmounted: boolean;
 
     static defaultProps = {
         translations: {
@@ -107,9 +96,41 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         this.isUnmounted = true;
     }
 
+    onBlur = () => {
+        this.props.onSelect(this.props.value);
+    }
+
+    getValue() {
+        const options = this.props.options;
+        const selectedValue = this.props.value;
+        if (options && selectedValue) {
+            return options.find(option => option.value === selectedValue);
+        }
+        return null;
+    }
+
+    prevFilterValue: string | null = null;
+    prevFilteredOptions: Array<VirtualizedOptionConfig> = [];
+    isUnmounted = false;
+
+    materialUIContainerInstance: any;
+
     static defaultSelectStyle = {
     };
     static defaultMenuContainerStyle = {
+    }
+
+    handleChange(selectedItem: VirtualizedOptionConfig) {
+        const selectedValue = selectedItem && selectedItem.value;
+        if (selectedValue !== this.props.value) {
+            this.props.onSelect(selectedValue === '' ? null : selectedValue);
+        }
+    }
+
+    handleInputChange = (value: any) => {
+        if (!this.isUnmounted) {
+            this.setState({ filterValue: value });
+        }
     }
 
     filterOptions = () => {
@@ -124,34 +145,12 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             this.state.filterValue.indexOf(this.prevFilterValue) > -1
         ) {
             this.prevFilteredOptions =
-                OptionsSelectVirtualized.getFilteredOptions(this.prevFilteredOptions, this.state.filterValue);
+                OptionsSelectVirtualizedPlain.getFilteredOptions(this.prevFilteredOptions, this.state.filterValue);
         }
-        this.prevFilteredOptions = OptionsSelectVirtualized.getFilteredOptions(this.props.options, this.state.filterValue);
+        this.prevFilteredOptions = OptionsSelectVirtualizedPlain.getFilteredOptions(this.props.options, this.state.filterValue);
         this.prevFilterValue = this.state.filterValue;
 
         return this.prevFilteredOptions;
-    }
-
-    handleInputChange = (value: any) => {
-        if (!this.isUnmounted) {
-            this.setState({ filterValue: value });
-        }
-    }
-
-    handleChange(selectedItem: VirtualizedOptionConfig) {
-        const selectedValue = selectedItem && selectedItem.value;
-        if (selectedValue !== this.props.value) {
-            this.props.onSelect(selectedValue === '' ? null : selectedValue);
-        }
-    }
-
-    getValue() {
-        const options = this.props.options;
-        const selectedValue = this.props.value;
-        if (options && selectedValue) {
-            return options.find(option => option.value === selectedValue);
-        }
-        return null;
     }
 
     renderOption(optionContainer: OptionContainer) {
@@ -193,9 +192,6 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         );
     }
 
-    onBlur = () => {
-        this.props.onSelect(this.props.value);
-    }
 
     render() {
         const {
@@ -215,8 +211,8 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             dataTest,
             ...toSelect } = this.props;
         const calculatedValue = toSelect.multi ? value : this.getValue();
-        const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
-        const menuContainerStyle = { ...OptionsSelectVirtualized.defaultMenuContainerStyle, ...menuStyle };
+        const selectStyle = { ...OptionsSelectVirtualizedPlain.defaultSelectStyle, ...style };
+        const menuContainerStyle = { ...OptionsSelectVirtualizedPlain.defaultMenuContainerStyle, ...menuStyle };
         return (
             <div
                 data-test="virtualized-select"
@@ -226,7 +222,6 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
                     data-test={dataTest}
                     onBlur={this.onBlur}
                 >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <VirtualizedSelect
                         disabled={disabled}
                         options={options}

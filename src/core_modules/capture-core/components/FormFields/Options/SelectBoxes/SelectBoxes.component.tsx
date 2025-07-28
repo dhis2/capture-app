@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 
 import { MultiSelectBoxes, multiOrientations } from '../MultiSelectBoxes';
@@ -10,7 +9,6 @@ import type { Props, Options } from './selectBoxes.types';
 export const SelectBoxes = (props: Props) => {
     const { multiSelect, options, optionSet, orientation, ...passOnProps } = props;
 
-    // $FlowFixMe even with a cheat flow could not figure out this one
     const outputOptions: Options = useMemo(() => {
         if (optionSet) {
             return optionSet.options
