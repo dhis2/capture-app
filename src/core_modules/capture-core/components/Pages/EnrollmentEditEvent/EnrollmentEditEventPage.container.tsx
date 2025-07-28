@@ -49,6 +49,7 @@ import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEnt
 import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import type { UserFormField } from '../../FormFields/UserField';
 
 const getEventDate = (event: Record<string, unknown>) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
@@ -270,14 +271,14 @@ const EnrollmentEditEventPageWithContextPlain = ({
     });
     const assignee = useAssignee(event);
     const getAssignedUserSaveContext = useAssignedUserSaveContext(event);
-    const onSaveAssignee = (newAssignee: Record<string, unknown>) => {
+    const onSaveAssignee = (newAssignee: UserFormField) => {
         const assignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
     const onAccessLostFromTransfer = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
-    const onSaveAssigneeError = (prevAssignee: Record<string, unknown> | null) => {
+    const onSaveAssigneeError = (prevAssignee: UserFormField | null) => {
         const assignedUser = prevAssignee
             ? convertClientToServer(prevAssignee, dataElementTypes.ASSIGNEE)
             : undefined;

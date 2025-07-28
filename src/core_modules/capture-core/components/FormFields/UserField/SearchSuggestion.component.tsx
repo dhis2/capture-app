@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import parse from 'autosuggest-highlight/parse';
 import { MenuItem } from '@dhis2/ui';
@@ -8,18 +7,18 @@ import defaultClasses from './searchSuggestion.module.css';
 import type { User } from './types';
 
 type Props = {
-    user: User,
-    query: string,
-    isHighlighted: boolean,
-    onHighlightNext: (user: User) => void,
-    onHighlightPrev: (user: User) => void,
-    onSelect: (user: User) => void,
-    onExitSearch: (use: User) => void,
-    suggestionRef: (ref: ?HTMLElement, user: User) => void,
-    useUpwardList?: ?boolean,
+    user: User;
+    query: string;
+    isHighlighted: boolean;
+    onHighlightNext: (user: User) => void;
+    onHighlightPrev: (user: User) => void;
+    onSelect: (user: User) => void;
+    onExitSearch: () => void;
+    suggestionRef: (ref: HTMLElement | null, user: User) => void;
+    useUpwardList?: boolean | null;
 };
 
-function match(text, query) {
+function match(text: string, query: string) {
     const lcText = text.toLocaleLowerCase();
     const lcQUery = query.toLocaleLowerCase();
     const index = lcText.indexOf(lcQUery);
@@ -35,7 +34,7 @@ function match(text, query) {
     ];
 }
 
-function isInternalTarget(target, suggestionName, inputName) {
+function isInternalTarget(target: any, suggestionName: string, inputName: string) {
     if (target.getAttribute('name') === suggestionName ||
         target.getAttribute('name') === inputName) {
         return true;
@@ -69,7 +68,7 @@ export const SearchSuggestion = (props: Props) => {
     const parts = parse(userText, matches);
 
     // eslint-disable-next-line complexity
-    const handleKeyDown = React.useCallback((event) => {
+    const handleKeyDown = React.useCallback((event: any) => {
         if ((event.keyCode === 40 && !useUpwardList) || (event.keyCode === 38 && useUpwardList)) {
             onHighlightNext(user);
         } else if ((event.keyCode === 38 && !useUpwardList) || (event.keyCode === 40 && useUpwardList)) {
@@ -81,24 +80,22 @@ export const SearchSuggestion = (props: Props) => {
         event.preventDefault();
     }, [onHighlightNext, onHighlightPrev, onSelect, user, useUpwardList]);
 
-    const handleRef = React.useCallback((ref) => {
+    const handleRef = React.useCallback((ref: any) => {
         suggestionRef(ref, user);
     }, [suggestionRef, user]);
 
-    const handleClick = React.useCallback((event) => {
+    const handleClick = React.useCallback((event: any) => {
         onSelect(user);
         event.stopPropagation();
     }, [onSelect, user]);
 
-    const handleBlur = React.useCallback((event) => {
+    const handleBlur = React.useCallback((event: any) => {
         if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
-            // $FlowFixMe[incompatible-call] automated comment
             onExitSearch();
         }
     }, [onExitSearch, suggestionName, inputName]);
     return (
         <div
-            name={suggestionName}
             role="button"
             tabIndex={-1}
             ref={handleRef}
@@ -109,6 +106,7 @@ export const SearchSuggestion = (props: Props) => {
         >
             <MenuItem
                 active={isHighlighted}
+                suffix=""
                 label={(
                     <div>
                         {parts.map((part, index) => (part.highlight ? (
