@@ -28,7 +28,7 @@ export const usePreviousOrganizationUnit = (previousOrgUnitId?: string): Previou
 
     useEffect(() => {
         if (previousOrgUnitId) {
-            refetch({ variables: previousOrgUnitId });
+            refetch({ variables: { previousOrgUnitId } });
         }
     }, [previousOrgUnitId, refetch]);
 
