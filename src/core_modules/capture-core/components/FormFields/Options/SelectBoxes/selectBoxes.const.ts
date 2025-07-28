@@ -1,6 +1,4 @@
-// @flow
-
-export const multiOrientations = {
+export const orientations = {
     HORIZONTAL: 'horizontal',
     VERTICAL: 'vertical',
 };

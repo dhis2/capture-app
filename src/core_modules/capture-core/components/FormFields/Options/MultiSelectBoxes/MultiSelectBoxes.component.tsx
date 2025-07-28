@@ -1,12 +1,11 @@
-// @flow
 /* eslint-disable react/no-array-index-key */
-import React, { Component, type ComponentType } from 'react';
+import React, { Component } from 'react';
 import { Checkbox, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
 import { FormGroup } from '../FormGroup.component';
 
-const styles = theme => ({
+const styles = (theme: any) => ({
     label: theme.typography.formFieldTitle,
     checkbox: {
         marginTop: spacersNum.dp8,
@@ -14,37 +13,27 @@ const styles = theme => ({
     },
 });
 
+
 type Props = {
-    onBlur: (value: any) => void,
-    options: Array<{text: string, value: any}>,
-    label?: string,
-    value?: any,
-    orientation?: ?$Values<typeof multiOrientations>,
-    required?: ?boolean,
+    onBlur: (value: any) => void;
+    options: Array<{text: string; value: any}>;
+    label?: string;
+    value?: any;
+    orientation?: keyof typeof multiOrientations | null;
+    required?: boolean | null;
     classes: {
-        label: string,
-        checkbox: string,
-    }
+        label: string;
+        checkbox: string;
+    };
 };
 
 class MultiSelectBoxesPlain extends Component<Props> {
-    handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
-    materialUIContainerInstance: any;
-    checkedValues: ?Set<any>;
-    goto: () => void;
-    labelClasses: Object;
-
     constructor(props: Props) {
         super(props);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.labelClasses = this.buildLabelClasses();
     }
 
-    buildLabelClasses() {
-        return {
-            root: this.props.classes.label,
-        };
-    }
 
     getBoxes() {
         const { options, classes } = this.props;
@@ -54,7 +43,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
                 checked={this.isChecked(value)}
                 label={text}
                 name={`multiSelectBoxes-${index}`}
-                onChange={(e: Object) => { this.handleOptionChange(e, value); }}
+                onChange={(e: any) => { this.handleOptionChange(e, value); }}
                 value={value}
                 className={classes.checkbox}
                 dense
@@ -62,18 +51,34 @@ class MultiSelectBoxesPlain extends Component<Props> {
         ));
     }
 
-    handleOptionChange(e: Object, value: any) {
-        this.handleSelectUpdate(e.checked, value);
+    setCheckedStatusForBoxes() {
+        const value = this.props.value;
+        if (value || value === false || value === 0) {
+            this.checkedValues = new Set(value);
+        } else {
+            this.checkedValues = null;
+        }
+    }
+
+    checkedValues!: Set<any> | null;
+
+    labelClasses: any;
+
+    materialUIContainerInstance: any;
+
+    buildLabelClasses() {
+        return {
+            root: this.props.classes.label,
+        };
     }
 
     handleSelectUpdate(isChecked: boolean, value: any) {
-        let emitValues = null;
+        let emitValues: any = null;
 
         if (isChecked) {
             if (this.checkedValues) {
                 this.checkedValues.add(value);
 
-                // $FlowFixMe[incompatible-call] automated comment
                 emitValues = Array.from(this.checkedValues);
             } else {
                 emitValues = [value];
@@ -81,9 +86,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
         } else if (this.checkedValues) {
             this.checkedValues.delete(value);
 
-            // $FlowFixMe[incompatible-use] automated comment
             if (this.checkedValues.size > 0) {
-                // $FlowFixMe[incompatible-call] automated comment
                 emitValues = Array.from(this.checkedValues);
             } else {
                 emitValues = null;
@@ -93,14 +96,8 @@ class MultiSelectBoxesPlain extends Component<Props> {
         this.props.onBlur(emitValues);
     }
 
-    setCheckedStatusForBoxes() {
-        const value = this.props.value;
-        if (value || value === false || value === 0) {
-            // $FlowFixMe[prop-missing] automated comment
-            this.checkedValues = new Set(value);
-        } else {
-            this.checkedValues = null;
-        }
+    handleOptionChange(e: any, value: any) {
+        this.handleSelectUpdate((e as any).checked, value);
     }
 
     isChecked(value: any) {
@@ -145,7 +142,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
-                                    className={this.labelClasses}
+                                    className={this.labelClasses as any}
                                 >
                                     {label}
                                 </Label>
@@ -159,4 +156,4 @@ class MultiSelectBoxesPlain extends Component<Props> {
     }
 }
 
-export const MultiSelectBoxes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(MultiSelectBoxesPlain);
+export const MultiSelectBoxes = withStyles(styles)(MultiSelectBoxesPlain);

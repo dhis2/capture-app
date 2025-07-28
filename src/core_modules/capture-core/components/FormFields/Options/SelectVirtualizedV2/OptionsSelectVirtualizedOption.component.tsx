@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { Tooltip } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
@@ -14,20 +13,20 @@ const getStyles = () => ({
 });
 
 type Props = {
-    option: VirtualizedOptionConfig,
-    style: Object,
-    onSelect: (selectedOption: VirtualizedOptionConfig) => void,
-    currentlySelectedValues: ?Array<VirtualizedOptionConfig>,
+    option: VirtualizedOptionConfig;
+    style: any;
+    onSelect: (selectedOption: VirtualizedOptionConfig) => void;
+    currentlySelectedValues: Array<VirtualizedOptionConfig> | null;
     classes: {
-        popper: string,
-        iconContainer: string,
-    },
-    inFocus: ?boolean,
-    onFocusOption: (option: VirtualizedOptionConfig) => void,
+        popper: string;
+        iconContainer: string;
+    };
+    inFocus: boolean | null;
+    onFocusOption: (option: VirtualizedOptionConfig) => void;
 };
 
 class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
-    static defaultContainerStyle = {
+    static defaultContainerStyle: any = {
         display: 'flex',
         alignItems: 'center',
         cursor: 'default',
@@ -40,12 +39,12 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
         fontSize: 14,
     };
 
-    static selectedStyle = {
+    static selectedStyle: any = {
         fontWeight: '600',
         backgroundColor: '#fbfcfd',
     };
 
-    static inFocusStyle = {
+    static inFocusStyle: any = {
         backgroundColor: '#f3f5f7',
     };
 
@@ -55,10 +54,10 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
         const isSelected = !!currentlySelectedValues && currentlySelectedValues.includes(option);
         const renderStyle = Object.assign(
             {},
-            OptionsSelectVirtualizedOption.defaultContainerStyle,
+            OptionsSelectVirtualizedOptionPlain.defaultContainerStyle,
             style,
-            currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null,
-            inFocus ? OptionsSelectVirtualizedOption.inFocusStyle : null,
+            currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOptionPlain.selectedStyle : null,
+            inFocus ? OptionsSelectVirtualizedOptionPlain.inFocusStyle : null,
         );
         return (
             <Tooltip

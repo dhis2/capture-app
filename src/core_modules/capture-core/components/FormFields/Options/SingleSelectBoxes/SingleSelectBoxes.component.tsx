@@ -1,6 +1,5 @@
-// @flow
 /* eslint-disable react/no-array-index-key */
-import React, { Component, type ComponentType } from 'react';
+import React, { Component } from 'react';
 import { Radio, colors, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { singleOrientations } from './singleSelectBoxes.const';
@@ -8,7 +7,7 @@ import type { Props } from './singleSelectBoxes.types';
 import { FormGroup } from '../FormGroup.component';
 
 
-const styles = ({ typography, palette }) => ({
+const styles = ({ typography, palette }: any) => ({
     label: typography.formFieldTitle,
     iconSelected: {
         fill: palette.secondary.main,
@@ -22,24 +21,14 @@ const styles = ({ typography, palette }) => ({
     },
 });
 
-class SingleSelectBoxesPlain extends Component<Props> {
-    handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
-    materialUIContainerInstance: any;
-    checkedValues: ?Set<any>;
-    goto: () => void;
-    labelClasses: Object;
 
+class SingleSelectBoxesPlain extends Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.labelClasses = this.buildLabelClasses();
     }
 
-    buildLabelClasses() {
-        return {
-            root: this.props.classes.label,
-        };
-    }
 
     getBoxes() {
         const { options, classes } = this.props;
@@ -49,23 +38,12 @@ class SingleSelectBoxesPlain extends Component<Props> {
                 checked={this.isChecked(value)}
                 label={text}
                 name={`singleSelectBoxes-${index}`}
-                onChange={(e: Object) => { this.handleOptionChange(e, value); }}
+                onChange={(e: any) => { this.handleOptionChange(e, value); }}
                 value={value}
                 className={classes.radio}
                 dense
             />
         ));
-    }
-
-    handleOptionChange(e: Object, value: any) {
-        this.handleSingleSelectUpdate(e.checked, value);
-    }
-
-    handleSingleSelectUpdate(isChecked: boolean, value: any) {
-        if (isChecked === false && !this.props.nullable) {
-            return;
-        }
-        this.props.onBlur(isChecked ? value : null);
     }
 
     setCheckedStatusForBoxes() {
@@ -75,6 +53,29 @@ class SingleSelectBoxesPlain extends Component<Props> {
         } else {
             this.checkedValues = null;
         }
+    }
+
+    checkedValues!: Set<any> | null;
+
+    labelClasses: any;
+
+    materialUIContainerInstance: any;
+
+    buildLabelClasses() {
+        return {
+            root: this.props.classes.label,
+        };
+    }
+
+    handleSingleSelectUpdate(isChecked: boolean, value: any) {
+        if (isChecked === false && !this.props.nullable) {
+            return;
+        }
+        this.props.onBlur(isChecked ? value : null);
+    }
+
+    handleOptionChange(e: any, value: any) {
+        this.handleSingleSelectUpdate((e as any).checked, value);
     }
 
     isChecked(value: any) {
@@ -121,7 +122,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
-                                    className={this.labelClasses}
+                                    className={this.labelClasses as any}
                                 >
                                     {label}
                                 </Label>
@@ -135,4 +136,4 @@ class SingleSelectBoxesPlain extends Component<Props> {
     }
 }
 
-export const SingleSelectBoxes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(SingleSelectBoxesPlain);
+export const SingleSelectBoxes = withStyles(styles)(SingleSelectBoxesPlain);
