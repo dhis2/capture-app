@@ -1,4 +1,3 @@
-// @flow
 import type { OptionSetFilterData } from './types';
 
 function getSelectOptionSetFilterData(

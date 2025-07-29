@@ -1,21 +1,20 @@
-// @flow
 import * as React from 'react';
 import { OptionSetFilter } from './OptionSetFilter.component';
 import type { OptionSetFilterData } from './types';
 
 type Props = {
-    filter: ?OptionSetFilterData,
-    filterTypeRef: Function,
-    singleSelect?: ?boolean,
+    filter: OptionSetFilterData | null,
+    filterTypeRef: (instance: any) => void,
+    singleSelect?: boolean | null,
     handleCommitValue: () => void,
 };
 
 type State = {
-    value?: ?Array<any>,
+    value?: Array<any> | null,
 };
 
 export class OptionSetFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: ?OptionSetFilterData, singleSelect: boolean) {
+    static calculateDefaultValueState(filter: OptionSetFilterData | null, singleSelect: boolean) {
         if (!filter) {
             return undefined;
         }
@@ -30,7 +29,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: ?Array<any>) => {
+    handleCommitValue = (value: Array<any> | null) => {
         this.setState({
             value,
         });
@@ -41,7 +40,6 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OptionSetFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}

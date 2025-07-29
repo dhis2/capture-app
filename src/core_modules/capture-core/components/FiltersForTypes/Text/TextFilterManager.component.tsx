@@ -1,20 +1,21 @@
-// @flow
 import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
+import type { Value } from './Text.types';
 
 type Props = {
-    filter: ?TextFilterData,
-    filterTypeRef: Function,
-    handleCommitValue: () => void,
+    filter: TextFilterData | null | undefined;
+    filterTypeRef: (instance: any) => void;
+    handleCommitValue: () => void;
+    onUpdate: (updatedValue: Value) => void;
 };
 
 type State = {
-    value: ?string,
+    value: string | null | undefined;
 };
 
 export class TextFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: ?TextFilterData) {
+    static calculateDefaultState(filter: TextFilterData | null | undefined) {
         return {
             value: (filter && filter.value ? filter.value : undefined),
         };
@@ -25,7 +26,7 @@ export class TextFilterManager extends React.Component<Props, State> {
         this.state = TextFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleCommitValue = (value: ?string) => {
+    handleCommitValue = (value: string | null | undefined) => {
         this.setState({
             value,
         });
@@ -36,7 +37,6 @@ export class TextFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextFilter
                 value={this.state.value}
                 ref={filterTypeRef}
