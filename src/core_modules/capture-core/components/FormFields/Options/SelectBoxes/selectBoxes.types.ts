@@ -28,7 +28,7 @@ export type Options = Array<{text: string; value: any}>;
 
 type WithOptions = {
     options: Options;
-    optionSet: null;
+    optionSet?: null;
 };
 
 export type Props =

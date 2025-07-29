@@ -6,9 +6,3 @@ export type TextFilterProps = {
     value: Value;
 };
 
-export type InputProps = {
-    onChange: (value: string) => void;
-    onBlur: (value: string) => void;
-    onEnterKey: (value: Value) => void;
-    value: Value;
-};

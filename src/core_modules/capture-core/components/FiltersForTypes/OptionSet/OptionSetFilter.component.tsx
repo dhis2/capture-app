@@ -52,7 +52,6 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
                         orientation={orientations.VERTICAL}
                         multiSelect={!singleSelect}
                         nullable
-                        optionSet={null}
                     />
                 </div>
             </div>

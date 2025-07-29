@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
+import type { Value } from './Text.types';
 
 type Props = {
     filter: TextFilterData | null | undefined;
     filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void;
+    onUpdate: (updatedValue: Value) => void;
 };
 
 type State = {
@@ -38,7 +40,6 @@ export class TextFilterManager extends React.Component<Props, State> {
             <TextFilter
                 value={this.state.value}
                 ref={filterTypeRef}
-                onUpdate={this.handleCommitValue}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

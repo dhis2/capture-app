@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
 import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { Props, Value } from './TrueOnly.types';
+import type { PlainProps, Value } from './TrueOnly.types';
 
 export const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
         marginRight: theme.typography.pxToRem(-24),
     },
 });
+
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
