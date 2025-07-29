@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
@@ -16,7 +17,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    onUpdate: (data: Object | null, commitValue?: any) => void;
+    onUpdate: (data: any | null, commitValue?: any) => void;
     onClose: () => void;
     onRemove: () => void;
     isRemovable?: boolean;

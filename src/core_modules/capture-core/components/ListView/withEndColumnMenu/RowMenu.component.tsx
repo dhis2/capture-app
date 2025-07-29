@@ -43,7 +43,7 @@ export const RowMenu = (props: Props) => {
                 <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
                         placement="right"
-                        reference={anchorRef.current}
+                        reference={anchorRef.current || undefined}
                         data-test="row-menu-popper"
                     >
                         <FlyoutMenu>

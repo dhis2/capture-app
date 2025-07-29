@@ -76,24 +76,27 @@ const DragDropListItemPlain = ({
     const opacity = isDragging ? 0 : 1;
 
     return (
-        <DataTableRow
+        <div
             ref={ref}
             style={{ opacity }}
-            className={isDraggingAny ? classes.rowWithoutHover : undefined}
             draggable
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
         >
-            <DataTableCell>{text}</DataTableCell>
-            <DataTableCell>
-                <Checkbox
-                    checked={visible}
-                    onChange={handleToggle(id)}
-                    valid
-                    dense
-                />
-            </DataTableCell>
-        </DataTableRow>
+            <DataTableRow
+                className={isDraggingAny ? classes.rowWithoutHover : undefined}
+            >
+                <DataTableCell>{text}</DataTableCell>
+                <DataTableCell>
+                    <Checkbox
+                        checked={visible}
+                        onChange={handleToggle(id)}
+                        valid
+                        dense
+                    />
+                </DataTableCell>
+            </DataTableRow>
+        </div>
     );
 };
 

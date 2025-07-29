@@ -6,9 +6,11 @@ import { DataTable, TableHead, TableBody, DataTableRow, DataTableColumnHeader } 
 import i18n from '@dhis2/d2-i18n';
 import { DragDropListItem } from './DragDropListItem.component';
 
+import type { Columns } from '../../types';
+
 type Props = {
-    listItems: Array<Object>;
-    handleUpdateListOrder: (sortedList: Array<Object>) => void;
+    listItems: Columns;
+    handleUpdateListOrder: (sortedList: Columns) => void;
     handleToggle: (id: string) => () => any;
 };
 

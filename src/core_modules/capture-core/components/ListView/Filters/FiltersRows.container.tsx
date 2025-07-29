@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { FiltersRowsComponent } from './FiltersRows.component';
 import type { Column, FiltersOnly, AdditionalFilters } from '../types';
@@ -8,11 +7,11 @@ type Props = {
     columns: Array<Column>,
     filtersOnly?: FiltersOnly,
     additionalFilters?: AdditionalFilters,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    onRemoveFilter: Function,
-    onSelectRestMenuItem: Function,
-    stickyFilters: Object,
+    onUpdateFilter: (filterId: string, filterData: any) => void,
+    onClearFilter: (filterId: string) => void,
+    onRemoveFilter: (filterId: string, additionalData?: any) => void,
+    onSelectRestMenuItem: (filterId: string, item: any) => void,
+    stickyFilters: Record<string, unknown>,
 };
 
 const useAdditionalFiltersButtons = ({ additionalFilters, stickyFilters, filterHasValue }) => {

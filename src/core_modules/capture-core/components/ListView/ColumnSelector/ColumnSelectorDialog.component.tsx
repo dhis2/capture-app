@@ -5,11 +5,13 @@ import i18n from '@dhis2/d2-i18n';
 
 import { DragDropList } from './DragDropList';
 
+import type { Columns } from '../types';
+
 type Props = {
     open: boolean | null;
-    onClose: Function;
-    onSave: Function;
-    columns: Array<Object>;
+    onClose: () => void;
+    onSave: (columns: Columns) => void;
+    columns: Columns;
 };
 
 export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) => {
@@ -31,7 +33,7 @@ export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) 
         setColumnList(toggleList);
     };
 
-    const handleUpdateListOrder = (sortedList: Array<Object>) => {
+    const handleUpdateListOrder = (sortedList: Columns) => {
         setColumnList(sortedList);
     };
 

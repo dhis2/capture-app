@@ -20,12 +20,12 @@ type Props = {
     columns: Array<Column> | null;
     filtersOnly?: FiltersOnly;
     additionalFilters?: AdditionalFilters;
-    visibleSelectorId?: string;
+    visibleSelectorId?: string | null;
     stickyFilters: StickyFilters;
-    onSelectRestMenuItem: Function;
-    onUpdateFilter: Function;
-    onClearFilter: Function;
-    onRemoveFilter: Function;
+    onSelectRestMenuItem: (id: string) => void;
+    onUpdateFilter: (data: any, itemId: string) => void;
+    onClearFilter: (itemId: string) => void;
+    onRemoveFilter: (itemId: string, options: any) => void;
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
@@ -92,7 +92,9 @@ const fillUpIndividualElements = (
     const availableSpots = INDIVIDUAL_DISPLAY_COUNT_BASE - occupiedSpots;
 
     for (let index = 0; elementConfigs.size > 0 && index < availableSpots; index++) {
-        const [key, value] = elementConfigs.entries().next().value;
+        const entry = elementConfigs.entries().next().value;
+        if (!entry) break;
+        const [key, value] = entry;
         fillUpElements.set(key, value);
         elementConfigs.delete(key);
     }
@@ -188,7 +190,7 @@ const getIndividualElementsArray = (
         }
         return undefined;
     })
-    .filter(element => element);
+    .filter((element): element is Column | FilterOnly => element !== undefined);
 
 const renderIndividualFilterButtons = ({
     individualElementsArray,
@@ -203,10 +205,10 @@ const renderIndividualFilterButtons = ({
     individualElementsArray: Array<Column | FilterOnly>;
     filtersOnly?: FiltersOnly;
     visibleSelectorId: string | null;
-    onSetVisibleSelector: Function;
-    onUpdateFilter: Function;
-    onClearFilter: Function;
-    onRemoveFilter: Function;
+    onSetVisibleSelector: (itemId?: string | null) => void;
+    onUpdateFilter: (data: any, itemId: string) => void;
+    onClearFilter: (itemId: string) => void;
+    onRemoveFilter: (itemId: string, options: any) => void;
     classes: any;
 }) => [...(filtersOnly || []), ...individualElementsArray]
     .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton }: any) => (
@@ -237,7 +239,7 @@ const renderIndividualFilterButtons = ({
 
 const renderRestButton = (
     restElementsArray: Array<Column | FilterOnly>,
-    onSelectRestMenuItem: Function,
+    onSelectRestMenuItem: (id: string) => void,
 ) => (restElementsArray.length > 0 ? (
     <FilterRestMenu
         key={'restMenu'}
@@ -261,7 +263,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         classes,
     } = props;
 
-    const [visibleSelectorId, setVisibleSelector] = React.useState(props.visibleSelectorId);
+    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null>(props.visibleSelectorId ?? null);
     const defaultFiltersOnly = useMemo(() =>
         (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);
     const defaultFiltersOnlyCount = defaultFiltersOnly.length;
@@ -276,7 +278,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         const validFilterConfigs = getValidFilterConfigs(filtersOnlyForShowInMoreFilters);
 
         const validElementConfigs: Map<string, Column | FilterOnly> = new Map([
-            ...validColumnElementConfigs,
+            ...validColumnElementConfigs as any,
             ...validFilterConfigs,
         ]);
 
@@ -340,7 +342,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         const individualFilterButtons = renderIndividualFilterButtons({
             individualElementsArray,
             visibleSelectorId,
-            onSetVisibleSelector: setVisibleSelector,
+            onSetVisibleSelector: (itemId?: string | null) => setVisibleSelector(itemId ?? null),
             onUpdateFilter,
             onClearFilter,
             onRemoveFilter,

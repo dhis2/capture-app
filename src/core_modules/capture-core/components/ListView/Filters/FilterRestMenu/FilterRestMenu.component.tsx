@@ -26,6 +26,7 @@ export const FilterRestMenu = ({ columns, onItemSelected }: Props) => {
                 key={column.id}
                 onClick={() => handleItemSelected(column.id)}
                 label={column.header}
+                suffix={null}
             />
         ))
     ), [columns, handleItemSelected]);

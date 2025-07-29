@@ -1,5 +1,4 @@
-// @flow
-import React, { useMemo, useState, type ComponentType } from 'react';
+import React, { useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import { withButtons } from './withButtons';
@@ -94,5 +93,5 @@ const FilterSelectorContentsPlain = ({
     );
 };
 
-export const FilterSelectorContents: ComponentType<Omit<Props, 'classes'>> =
+export const FilterSelectorContents: any =
     withStyles(getStyles)(FilterSelectorContentsPlain);

@@ -6,7 +6,7 @@ import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';
 import type { Columns } from '../types';
 
 type Props = {
-    onSave: Function;
+    onSave: (columns: Columns) => void;
     columns: Columns;
 };
 

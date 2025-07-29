@@ -38,10 +38,10 @@ type Props = {
     }>;
     filtersOnly?: FiltersOnly;
     additionalFilters?: AdditionalFilters;
-    onUpdateFilter: Function;
-    onClearFilter: Function;
-    onRemoveFilter: Function;
-    onSelectRestMenuItem: Function;
+    onUpdateFilter: (filterId: string, filterData: any) => void;
+    onClearFilter: (filterId: string) => void;
+    onRemoveFilter: (filterId: string, additionalData?: any) => void;
+    onSelectRestMenuItem: (filterId: string, item: any) => void;
     stickyFilters: any;
     shouldRenderAdditionalFiltersButtons: boolean;
     visibleSelectorId: string | null;
