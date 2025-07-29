@@ -1,29 +1,30 @@
-// @flow
 import * as React from 'react';
 import { AssigneeFilter } from './AssigneeFilter.component';
 import type { AssigneeFilterData } from './types';
 
 type Props = {
-    filter: ?AssigneeFilterData,
-    filterTypeRef: ?Function,
+    filter: AssigneeFilterData | null,
+    filterTypeRef: () => void | null,
     handleCommitValue: () => void,
 };
 
+type Value = {
+    mode: string;
+    provided?: any;
+} | null;
+
 type State = {
-    value?: ?{
-        mode?: ?string,
-        provided?: ?Object,
-    },
+    value: Value;
 };
 
 export class AssigneeFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: ?AssigneeFilterData) {
+    static calculateDefaultValueState(filter: AssigneeFilterData | null): Value {
         if (!filter) {
-            return undefined;
+            return null;
         }
 
         return {
-            mode: filter.assignedUserMode,
+            mode: filter.assignedUserMode as string,
             provided: filter.assignedUser,
         };
     }
@@ -35,7 +36,7 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: ?Object) => {
+    handleCommitValue = (value: any | null) => {
         this.setState({
             value,
         });
@@ -46,10 +47,8 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <AssigneeFilter
                 value={this.state.value}
-                innerRef={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

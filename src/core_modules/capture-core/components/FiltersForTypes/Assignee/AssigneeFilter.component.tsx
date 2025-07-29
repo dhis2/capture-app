@@ -1,6 +1,6 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
@@ -8,7 +8,7 @@ import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: Theme) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
@@ -19,24 +19,23 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Value = ?{
-    mode: string,
-    provided: ?Object,
+type Value = {
+    mode: string;
+    provided?: any;
+} | null;
+
+type PlainProps = {
+    value: Value;
+    onCommitValue: (value: any) => void;
 };
 
-type Props = {
-    value: Value,
-    onCommitValue: (value: any) => void,
-    classes: Object,
-};
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 type State = {
-    error: string,
+    error: string;
 };
-// $FlowSuppress
-// $FlowFixMe[incompatible-variance] automated comment
+
 class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
-    modeOptions: Array<Object>;
     constructor(props: Props) {
         super(props);
         this.modeOptions = getModeOptions();
@@ -61,6 +60,8 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         return true;
     }
 
+    modeOptions: Array<any>;
+
     handleModeSelect = (value: string) => {
         this.setState({
             error: '',
@@ -73,7 +74,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         }
     }
 
-    handleUserSelect = (user: ?Object) => {
+    handleUserSelect = (user: any) => {
         this.setState({
             error: '',
         });
@@ -122,4 +123,4 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 }
 
-export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain);
+export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain) as React.ComponentType<PlainProps>;

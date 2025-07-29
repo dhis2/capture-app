@@ -1,35 +1,31 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
+import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
-import { orientations } from '../../FormFields/Options/SelectBoxes'; // TODO: Refactor
 import {
     getMultiSelectBooleanFilterData,
     getSingleSelectBooleanFilterData,
 } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: Theme) => ({
     selectBoxesContainer: {
         marginRight: theme.typography.pxToRem(-24),
     },
 });
 
-type Value = ?Array<any> | string;
+type Value = Array<any> | string | boolean | null;
 
-type Props = {
-    value: Value,
-    onCommitValue: (value: Value) => void,
-    allowMultiple: boolean,
-    classes: {
-        selectBoxesContainer: string,
-    },
+type PlainProps = {
+    value: Value;
+    onCommitValue: (value: Value) => void;
+    allowMultiple: boolean;
 };
-// $FlowSuppress
-// $FlowFixMe[incompatible-variance] automated comment
-class BooleanFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
-    booleanFieldInstance: ?D2TrueFalse;
 
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
+class BooleanFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value, allowMultiple } = this.props;
 
@@ -44,13 +40,11 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
         return getMultiSelectBooleanFilterData(value);
     }
 
-    onIsValid() { //eslint-disable-line
-        return true;
-    }
-
-    setBooleanFieldInstance = (instance: ?D2TrueFalse) => {
+    setBooleanFieldInstance = (instance: D2TrueFalse | null) => {
         this.booleanFieldInstance = instance;
     }
+
+    booleanFieldInstance: D2TrueFalse | null = null;
 
     render() {
         const { onCommitValue, value, classes } = this.props;
@@ -71,4 +65,4 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     }
 }
 
-export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain);
+export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain) as React.ComponentType<PlainProps>;
