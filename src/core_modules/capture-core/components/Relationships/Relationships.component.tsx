@@ -1,21 +1,21 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { IconButton } from 'capture-ui';
 import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
-const styles: Readonly<any> = {
+const styles: Readonly<any> = (theme: any) => ({
     relationship: {
         display: 'flex',
         alignItems: 'center',
         padding: 5,
     },
     relationshipDetails: {
-        backgroundColor: '#f5f5f5',
+        backgroundColor: theme.palette.grey.lighter,
         padding: 7,
         flexGrow: 1,
     },
@@ -47,21 +47,31 @@ const styles: Readonly<any> = {
     addButtonContainer: {
         display: 'inline-block',
     },
+    '@keyframes background-fade': {
+        '0%': {
+            backgroundColor: theme.palette.secondary.lightest,
+        },
+        '70%': {
+            backgroundColor: theme.palette.secondary.lightest,
+        },
+        '100%': {
+            backgroundColor: theme.palette.grey.lighter,
+        },
+    },
     relationshipHighlight: {
-        backgroundColor: '#e3f2fd',
+        animation: 'background-fade 2.5s forwards',
     },
     tooltip: {
         display: 'inline-flex',
         borderRadius: '100%',
     },
-};
+});
 
 const fromNames = {
     PROGRAM_STAGE_INSTANCE: i18n.t('This event'),
 };
 
-type Props = {
-    classes: any;
+type PlainProps = {
     relationships: Array<Relationship>;
     highlightRelationshipId?: string;
     writableRelationshipTypes: Array<RelationshipType>;
@@ -71,7 +81,10 @@ type Props = {
     onRenderConnectedEntity: (entity: Entity) => React.ReactNode;
     currentEntityId: string;
     smallMainButton: boolean;
+    relationshipsRef: (instance: any) => void;
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 class RelationshipsPlain extends React.Component<Props> {
     static defaultProps = {
@@ -159,11 +172,11 @@ class RelationshipsPlain extends React.Component<Props> {
         this.renderRelationship(relationship))
 
     render() {
-        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, smallMainButton } = this.props;
+        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (
             <div className={classes.container}>
-                <div className={classes.relationshipsContainer}>
+                <div className={classes.relationshipsContainer} ref={relationshipsRef}>
                     {this.renderRelationships()}
                 </div>
                 <div>
