@@ -14,13 +14,13 @@ type Value = {
 } | null;
 
 type State = {
-    value: Value;
+    value?: Value | null;
 };
 
 export class AssigneeFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: AssigneeFilterData | null): Value {
+    static calculateDefaultValueState(filter: AssigneeFilterData | null): Value | undefined {
         if (!filter) {
-            return null;
+            return undefined;
         }
 
         return {
@@ -49,6 +49,8 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         return (
             <AssigneeFilter
                 value={this.state.value}
+                // @ts-expect-error - keeping original functionality as before ts rewrite
+                innerRef={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

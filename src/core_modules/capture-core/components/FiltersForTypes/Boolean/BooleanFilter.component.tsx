@@ -18,7 +18,7 @@ const getStyles: Readonly<any> = (theme: Theme) => ({
 type Value = Array<any> | string | boolean | null;
 
 type PlainProps = {
-    value: Value;
+    value?: Value;
     onCommitValue: (value: Value) => void;
     allowMultiple: boolean;
 };

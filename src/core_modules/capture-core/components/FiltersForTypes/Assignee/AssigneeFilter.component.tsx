@@ -25,7 +25,7 @@ type Value = {
 } | null;
 
 type PlainProps = {
-    value: Value;
+    value?: Value;
     onCommitValue: (value: any) => void;
 };
 

@@ -10,16 +10,16 @@ type Props = {
 };
 
 type State = {
-    value: Array<any> | string | boolean | null,
+    value: Array<string> | string | boolean | null | undefined,
 };
 
 export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(
         filter: BooleanFilterStringified | null,
         singleSelect: boolean,
-    ): (Array<string> | string | null) {
+    ): (Array<string> | string | null | boolean | undefined) {
         if (!filter) {
-            return null;
+            return undefined;
         }
 
         return singleSelect ? filter.values[0] : filter.values;
@@ -32,7 +32,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: Array<any> | string | boolean | null) => {
+    handleCommitValue = (value?: Array<string> | string | boolean| null) => {
         this.setState({
             value,
         });
@@ -45,6 +45,8 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         return (
             <BooleanFilter
                 value={this.state.value}
+                // @ts-expect-error - keeping original functionality as before ts rewrite
+                innerRef={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 allowMultiple={!singleSelect}
                 {...passOnProps}
