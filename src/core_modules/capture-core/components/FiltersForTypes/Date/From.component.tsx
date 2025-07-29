@@ -9,6 +9,8 @@ type Props = {
     error?: string | null;
     errorClass?: string;
     onBlur: ({ from }: { from: DateValue }) => void;
+    onEnterKey: () => void;
+    onDateSelectedFromCalendar: () => void;
 };
 
 class FromDateFilterPlain extends Component<Props> {
@@ -39,4 +41,4 @@ class FromDateFilterPlain extends Component<Props> {
     }
 }
 
-export const FromDateFilter = withInternalChangeHandler()(FromDateFilterPlain) as any;
+export const FromDateFilter = withInternalChangeHandler()(FromDateFilterPlain);

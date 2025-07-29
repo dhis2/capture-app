@@ -7,7 +7,7 @@ type Props = {
     value?: string;
     error?: string | null;
     onBlur: ({ end }: { end: string }) => void;
-    onEnterKey: ({ end }: { end: string }) => void;
+    onEnterKey?: ({ end }: { end: string }) => void;
     textFieldRef: (instance: any) => void;
     errorClass: string;
 };
@@ -38,4 +38,4 @@ class EndRangeFilterPlain extends Component<Props> {
     }
 }
 
-export const EndRangeFilter = withInternalChangeHandler()(EndRangeFilterPlain) as any;
+export const EndRangeFilter = withInternalChangeHandler()(EndRangeFilterPlain);

@@ -12,7 +12,7 @@ import {
 import type { ComposedRegUnitSelectorProps } from './RegUnitSelector.types';
 
 const OrgUnitFieldImplicitRootsFilterHandlerHOC =
-    withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField) as any;
+    withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField);
 
 class OrgUnitFieldWrapper extends React.Component<ComposedRegUnitSelectorProps> {
     render() {

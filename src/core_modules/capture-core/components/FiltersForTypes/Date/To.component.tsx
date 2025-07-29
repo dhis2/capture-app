@@ -10,6 +10,7 @@ type Props = {
     errorClass?: string;
     onBlur: ({ to }: { to: DateValue }) => void;
     onFocusUpdateButton: () => void;
+    textFieldRef: (instance: any) => void;
 };
 
 class ToDateFilterPlain extends Component<Props> {
@@ -45,4 +46,4 @@ class ToDateFilterPlain extends Component<Props> {
     }
 }
 
-export const ToDateFilter = withInternalChangeHandler()(ToDateFilterPlain) as any;
+export const ToDateFilter = withInternalChangeHandler()(ToDateFilterPlain);

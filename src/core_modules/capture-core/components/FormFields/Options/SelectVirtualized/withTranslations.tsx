@@ -13,9 +13,9 @@ function buildTranslations() {
 }
 
 export const withTranslations = () =>
-    (InnerComponent: React.ComponentType<any>) =>
-        class TranslationBuilder extends React.Component<Props> {
-            constructor(props: Props) {
+    <P extends Record<string, unknown>>(InnerComponent: React.ComponentType<P>) =>
+        class TranslationBuilder extends React.Component<Props & P> {
+            constructor(props: Props & P) {
                 super(props);
                 this.translations = buildTranslations();
             }

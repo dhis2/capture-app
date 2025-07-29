@@ -25,7 +25,7 @@ type Props = OwnProps & WithStyles<typeof styles>;
 
 class D2TrueOnlyPlain extends Component<Props> {
     materialUIContainerInstance: HTMLDivElement | null = null;
-    labelClasses: Record<string, unknown>;
+    labelClasses: any;
 
     constructor(props: Props) {
         super(props);

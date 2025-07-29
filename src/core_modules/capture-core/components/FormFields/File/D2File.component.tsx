@@ -146,6 +146,8 @@ class D2FilePlain extends Component<Props, State> {
                         this.hiddenFileSelectorRef = hiddenFileSelector;
                     }}
                     onChange={e => this.handleFileChange(e)}
+                    // @ts-expect-error - keeping original functionality as before ts rewrite
+                    onCancel={this.handleCancel} // eslint-disable-line react/no-unknown-property
                 />
                 {
                     (() => {

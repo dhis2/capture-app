@@ -43,4 +43,4 @@ class StartRangeFilterPlain extends Component<Props> {
     }
 }
 
-export const StartRangeFilter = withInternalChangeHandler()(StartRangeFilterPlain) as any;
+export const StartRangeFilter = withInternalChangeHandler()(StartRangeFilterPlain);
