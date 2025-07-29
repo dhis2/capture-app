@@ -1,6 +1,6 @@
 export const assigneeFilterModes = Object.freeze({
-    CURRENT_USER: 'CURRENT_USER',
     PROVIDED: 'PROVIDED',
-    NONE: 'NONE',
+    CURRENT: 'CURRENT',
     ANY: 'ANY',
+    NONE: 'NONE',
 });

@@ -4,7 +4,7 @@ import type { BooleanFilterStringified } from './types';
 
 type Props = {
     filter: BooleanFilterStringified | null,
-    filterTypeRef: () => void,
+    filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
     singleSelect: boolean,
 };

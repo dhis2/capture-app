@@ -4,7 +4,7 @@ import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
-import type { DateFilterData } from './types';
+import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData } from './types';
 import type { Value } from './DateFilter.component';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
@@ -23,7 +23,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         const localDate = convertIsoToLocalCalendar(rawValue);
         return localDate;
     }
-    static calculateAbsoluteRangeValueState(filter: DateFilterData) {
+    static calculateAbsoluteRangeValueState(filter: AbsoluteDateFilterData) {
         return {
             main: mainOptionKeys.ABSOLUTE_RANGE,
             from: filter.ge ? {
@@ -36,7 +36,7 @@ export class DateFilterManager extends React.Component<Props, State> {
             } : undefined,
         };
     }
-    static calculateRelativeRangeValueState(filter: DateFilterData) {
+    static calculateRelativeRangeValueState(filter: RelativeDateFilterData) {
         return {
             main: mainOptionKeys.RELATIVE_RANGE,
             start:

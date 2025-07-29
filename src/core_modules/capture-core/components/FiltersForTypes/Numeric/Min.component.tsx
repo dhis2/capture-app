@@ -1,13 +1,12 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
-    value: ?string,
-    error: ?string,
-    onBlur: ({ min: string }) => void,
+    value: string,
+    error: string | null,
+    onBlur: ({ min }: { min: string }) => void,
     onEnterKey: () => void,
     errorClass: string,
 };
@@ -21,7 +20,7 @@ class MinNumericFilterPlain extends Component<Props> {
         this.props.onBlur(MinNumericFilterPlain.getValueObject(value));
     }
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey();
         }
@@ -31,7 +30,6 @@ class MinNumericFilterPlain extends Component<Props> {
         const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2TextField
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}

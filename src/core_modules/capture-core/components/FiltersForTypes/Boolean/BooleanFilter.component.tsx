@@ -40,6 +40,10 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
         return getMultiSelectBooleanFilterData(value);
     }
 
+    onIsValid() { //eslint-disable-line
+        return true;
+    }
+
     setBooleanFieldInstance = (instance: D2TrueFalse | null) => {
         this.booleanFieldInstance = instance;
     }

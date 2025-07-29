@@ -1,24 +1,23 @@
-// @flow
 import * as React from 'react';
 import { NumericFilter } from './NumericFilter.component';
 import type { NumericFilterData } from './types';
 
 type Props = {
-    filter: ?NumericFilterData,
-    filterTypeRef: ?Function,
+    filter: NumericFilterData | null,
+    filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
 };
 
 type State = {
     value: {
-        min: ?string,
-        max: ?string,
+        min?: string | null,
+        max?: string | null,
     },
 };
 
 export class NumericFilterManager extends React.Component<Props, State> {
     // eslint-disable-next-line complexity
-    static calculateDefaultState(filter: ?NumericFilterData) {
+    static calculateDefaultState(filter: NumericFilterData | null) {
         return {
             min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
             max: filter && (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
@@ -32,7 +31,7 @@ export class NumericFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: Object) => {
+    handleCommitValue = (value: any) => {
         this.setState({
             value,
         });
@@ -43,7 +42,6 @@ export class NumericFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <NumericFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}

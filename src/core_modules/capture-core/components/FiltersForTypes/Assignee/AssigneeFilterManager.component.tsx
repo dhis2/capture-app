@@ -4,7 +4,7 @@ import type { AssigneeFilterData } from './types';
 
 type Props = {
     filter: AssigneeFilterData | null,
-    filterTypeRef: () => void | null,
+    filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
 };
 
@@ -24,7 +24,7 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         }
 
         return {
-            mode: filter.assignedUserMode as string,
+            mode: filter.assignedUserMode,
             provided: filter.assignedUser,
         };
     }

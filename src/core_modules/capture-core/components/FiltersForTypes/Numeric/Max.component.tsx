@@ -1,14 +1,13 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
-    value: ?string,
-    error: ?string,
-    onBlur: ({ max: string }) => void,
-    onEnterKey: ({ max: string }) => void,
+    value?: string,
+    error: string | null,
+    onBlur: ({ max }: { max: string }) => void,
+    onEnterKey: ({ max }: { max: string }) => void,
     textFieldRef: (instance: any) => void,
     errorClass: string,
 };
@@ -22,7 +21,7 @@ class MaxNumericFilterPlain extends Component<Props> {
         this.props.onBlur(MaxNumericFilterPlain.getValueObject(value));
     }
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(this.props.value || ''));
         }
@@ -32,7 +31,6 @@ class MaxNumericFilterPlain extends Component<Props> {
         const { error, onBlur, onEnterKey, textFieldRef, errorClass, ...passOnProps } = this.props;
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2TextField
                     ref={textFieldRef}
                     onKeyPress={this.handleKeyPress}

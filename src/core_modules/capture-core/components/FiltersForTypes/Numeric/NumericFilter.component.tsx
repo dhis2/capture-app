@@ -1,7 +1,7 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import {
     isValidNumber,
@@ -17,7 +17,7 @@ import type { D2TextField } from '../../FormFields/Generic/D2TextField.component
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: any = (theme: any) => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -40,28 +40,20 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Value = ?{
-    min?: ?string,
-    max?: ?string,
-};
+type Value = {
+    min?: string | null,
+    max?: string | null,
+} | null;
 
 type Props = {
-    onCommitValue: (value: ?{ min?: ?string, max?: ?string }) => void,
+    onCommitValue: (value: { min?: string | null, max?: string | null} | null) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
-    type: $Keys<typeof dataElementTypes>,
-    classes: {
-        container: string,
-        inputContainer: string,
-        error: string,
-        logicErrorContainer: string,
-        toLabelContainer: string,
-    },
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };
 
-// $FlowFixMe[incompatible-variance] automated comment
-class NumericFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
-    static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
+class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>> implements UpdatableFilterContent<Value> {
+    static validateField(value: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
         if (!value) {
             return {
                 isValid: true,
@@ -69,26 +61,24 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
             };
         }
 
-        // $FlowFixMe dataElementTypes flow error
-        const typeValidator = NumericFilter.validatorForTypes[type];
+        const typeValidator = NumericFilterPlain.validatorForTypes[type];
         const isValid = typeValidator(value);
 
         return {
             isValid,
-            // $FlowFixMe dataElementTypes flow error
-            error: isValid ? null : i18n.t(NumericFilter.errorMessages[type]),
+            error: isValid ? null : i18n.t(NumericFilterPlain.errorMessages[type]),
         };
     }
 
-    static isFilterValid(minValue?: ?string, maxValue?: ?string, type: $Keys<typeof dataElementTypes>) {
-        if (!NumericFilter.validateField(minValue, type).isValid || !NumericFilter.validateField(maxValue, type).isValid) {
+    static isFilterValid(minValue: string | null | undefined, maxValue: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
+        if (!NumericFilterPlain.validateField(minValue, type).isValid || !NumericFilterPlain.validateField(maxValue, type).isValid) {
             return false;
         }
 
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
     }
 
-    maxD2TextFieldInstance: D2TextField;
+    maxD2TextFieldInstance: D2TextField | null = null;
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
@@ -100,7 +90,7 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
 
     onIsValid() {
         const values = this.props.value;
-        return !values || NumericFilter.isFilterValid(values.min, values.max, this.props.type);
+        return !values || NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type);
     }
 
     static errorMessages = {
@@ -121,7 +111,6 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
     };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
-        // $FlowFixMe[cannot-spread-indexer] automated comment
         const valueObject = {
             ...this.props.value,
             ...valuePart,
@@ -135,14 +124,14 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
 
     handleEnterKeyInMin = () => {
         // focus Max
-        this.maxD2TextFieldInstance.focus();
+        this.maxD2TextFieldInstance?.focus();
     }
 
     handleEnterKeyInMax = (value: {[key: string]: string}) => {
         // validate with updated values
         const values = this.getUpdatedValue(value);
 
-        if (values && !NumericFilter.isFilterValid(values.min, values.max, this.props.type)) {
+        if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values);
         } else {
             this.props.onUpdate(values || null);
@@ -167,12 +156,12 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
         const maxValue = values && values.max;
         const type = this.props.type;
 
-        const { isValid: isMinValueValid, error: minValueError } = NumericFilter.validateField(minValue, type);
-        const { isValid: isMaxValueValid, error: maxValueError } = NumericFilter.validateField(maxValue, type);
+        const { isValid: isMinValueValid, error: minValueError } = NumericFilterPlain.validateField(minValue, type);
+        const { isValid: isMaxValueValid, error: maxValueError } = NumericFilterPlain.validateField(maxValue, type);
 
         let logicError = null;
         if (isMinValueValid && isMaxValueValid && minValue && maxValue && Number(minValue) > Number(maxValue)) {
-            logicError = i18n.t(NumericFilter.errorMessages.MIN_GREATER_THAN_MAX);
+            logicError = i18n.t(NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX);
         }
 
         return {
@@ -191,8 +180,6 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
                     <div
                         className={classes.inputContainer}
                     >
-                        { /* $FlowSuppress: Flow not working 100% with HOCs */ }
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <MinNumericFilter
                             value={value && value.min}
                             error={minValueError}
@@ -210,8 +197,6 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
                     <div
                         className={classes.inputContainer}
                     >
-                        { /* $FlowSuppress: Flow not working 100% with HOCs */ }
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <MaxNumericFilter
                             value={value && value.max}
                             error={maxValueError}

@@ -1,10 +1,9 @@
-// @flow
 import { parseNumber } from 'capture-core-utils/parsers';
 import type { NumericFilterData } from './types';
 
 type Value = {
-    min?: ?string,
-    max?: ?string,
+    min?: string | null,
+    max?: string | null,
 }
 
 export function getNumericFilterData(value: Value): NumericFilterData {
