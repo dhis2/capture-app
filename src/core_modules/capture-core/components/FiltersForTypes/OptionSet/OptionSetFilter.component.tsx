@@ -1,23 +1,23 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { Props } from './optionSetFilter.types';
+import type { PlainProps, Value } from './OptionSetFilter.types';
 
-const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
-        overflowY: 'auto',
+        overflowY: 'auto' as const,
     },
     selectBoxesInnerContainer: {
         marginLeft: 12,
     },
 });
 
-// $FlowFixMe[incompatible-variance] automated comment
-// $FlowFixMe[cannot-resolve-name] automated comment
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
 class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value, singleSelect } = this.props;
@@ -45,7 +45,6 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
                 className={classes.selectBoxesContainer}
             >
                 <div className={classes.selectBoxesInnerContainer}>
-                    { /* $FlowFixMe */ }
                     <SelectBoxes
                         options={options}
                         value={value}
@@ -53,6 +52,7 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
                         orientation={orientations.VERTICAL}
                         multiSelect={!singleSelect}
                         nullable
+                        optionSet={null}
                     />
                 </div>
             </div>

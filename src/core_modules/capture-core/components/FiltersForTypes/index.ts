@@ -1,4 +1,3 @@
-// @flow
 export { TextFilter } from './Text';
 export { NumericFilter } from './Numeric';
 export { TrueOnlyFilter } from './TrueOnly';

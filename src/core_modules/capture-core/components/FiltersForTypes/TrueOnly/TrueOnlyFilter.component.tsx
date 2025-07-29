@@ -1,29 +1,19 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
-import { orientations } from '../../FormFields/Options/SelectBoxes';  // TODO: Refactor
+import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
+import type { Props, Value } from './TrueOnly.types';
 
-const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
         marginRight: theme.typography.pxToRem(-24),
     },
 });
 
-type Value = ?Array<any>;
-
-type Props = {
-    value: Value,
-    onCommitValue: (value: Value) => void,
-    classes: {
-        selectBoxesContainer: string,
-    },
-};
-// $FlowSuppress
-// $FlowFixMe[incompatible-variance] automated comment
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const value = this.props.value;
@@ -35,11 +25,9 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
         return getTrueOnlyFilterData();
     }
 
-    onIsValid() { //eslint-disable-line
-        return true;
-    }
+    onIsValid = () => true
 
-    handleTrueOnlyBlur = (value: ?string) => {
+    handleTrueOnlyBlur = (value: string | null | undefined) => {
         this.props.onCommitValue(value ? [value] : null);
     }
 

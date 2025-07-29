@@ -1,20 +1,19 @@
-// @flow
 import * as React from 'react';
 import { TrueOnlyFilter } from './TrueOnlyFilter.component';
 import type { TrueOnlyFilterData } from './types';
 
 type Props = {
-    filter: ?TrueOnlyFilterData,
-    filterTypeRef: ?Function,
+    filter: TrueOnlyFilterData | null,
+    filterTypeRef: (instance: any) => void,
     handleCommitValue: () => void,
 };
 
 type State = {
-    value: ?Array<string>,
+    value?: Array<string> | null,
 };
 
 export class TrueOnlyFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: ?TrueOnlyFilterData) {
+    static calculateDefaultState(filter: TrueOnlyFilterData | null) {
         return {
             value: filter && filter.value ? ['true'] : undefined,
         };
@@ -25,7 +24,7 @@ export class TrueOnlyFilterManager extends React.Component<Props, State> {
         this.state = TrueOnlyFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleCommitValue = (value: ?Array<string>) => {
+    handleCommitValue = (value: Array<string> | null) => {
         this.setState({
             value,
         });
@@ -36,7 +35,6 @@ export class TrueOnlyFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TrueOnlyFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}
