@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -8,13 +7,13 @@ import i18n from '@dhis2/d2-i18n';
 import { DragDropListItem } from './DragDropListItem.component';
 
 type Props = {
-    listItems: Array<Object>,
-    handleUpdateListOrder: (sortedList: Array<Object>) => void,
-    handleToggle: (id: string) => () => any,
+    listItems: Array<Object>;
+    handleUpdateListOrder: (sortedList: Array<Object>) => void;
+    handleToggle: (id: string) => () => any;
 };
 
 type State = {
-    isDraggingAny: boolean,
+    isDraggingAny: boolean;
 };
 
 export class DragDropList extends Component<Props, State> {

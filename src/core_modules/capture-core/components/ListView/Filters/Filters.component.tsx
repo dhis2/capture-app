@@ -1,7 +1,7 @@
-// @flow
 import React, { memo, useMemo } from 'react';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
@@ -17,16 +17,15 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    columns: ?Array<Column>,
-    filtersOnly?: FiltersOnly,
-    additionalFilters?: AdditionalFilters,
-    visibleSelectorId?: string,
-    stickyFilters: StickyFilters,
-    onSelectRestMenuItem: Function,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    onRemoveFilter: Function,
-    classes: Object,
+    columns: Array<Column> | null;
+    filtersOnly?: FiltersOnly;
+    additionalFilters?: AdditionalFilters;
+    visibleSelectorId?: string;
+    stickyFilters: StickyFilters;
+    onSelectRestMenuItem: Function;
+    onUpdateFilter: Function;
+    onClearFilter: Function;
+    onRemoveFilter: Function;
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
@@ -57,7 +56,7 @@ const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
 const getValidFilterConfigs = (filtersOnly: FiltersOnly) => new Map(filtersOnly.map(filter => [filter.id, filter]));
 
 const splitBasedOnHasValueOnInit =
-    (elementConfigs: Map<string, Column | FilterOnly>, filtersWithValueOnInit: ?Object) => {
+    (elementConfigs: Map<string, Column | FilterOnly>, filtersWithValueOnInit: any | null) => {
         const filtersNotEmpty = filtersWithValueOnInit || {};
         return Object
             .keys(filtersNotEmpty)
@@ -93,7 +92,6 @@ const fillUpIndividualElements = (
     const availableSpots = INDIVIDUAL_DISPLAY_COUNT_BASE - occupiedSpots;
 
     for (let index = 0; elementConfigs.size > 0 && index < availableSpots; index++) {
-        // $FlowFixMe
         const [key, value] = elementConfigs.entries().next().value;
         fillUpElements.set(key, value);
         elementConfigs.delete(key);
@@ -107,7 +105,7 @@ const fillUpIndividualElements = (
 
 const getUserSelectedElements = (
     elementConfigs: Map<string, Column | FilterOnly>,
-    userSelectedFilters: ?Object,
+    userSelectedFilters: any | null,
 ) => {
     const userSelectedFiltersNonEmpty = userSelectedFilters || {};
 
@@ -135,8 +133,8 @@ const getUserSelectedElements = (
 const addAdditionalFiltersElements = (
     elementConfigs: Map<string, Column | FilterOnly>,
     additionalFilters?: AdditionalFilters,
-    filtersWithValueOnInit: Object = {},
-    userSelectedFilters: Object = {},
+    filtersWithValueOnInit: any = {},
+    userSelectedFilters: any = {},
 ) => {
     const mainButtonAdditionalFilters = additionalFilters && additionalFilters.find(filter => filter.mainButton);
     if (mainButtonAdditionalFilters) {
@@ -145,7 +143,6 @@ const addAdditionalFiltersElements = (
 
         if (addToRemainingElements) {
             const remainingElements =
-            // $FlowFixMe[prop-missing]
                 new Map([...elementConfigs, [mainButtonAdditionalFilters.id, mainButtonAdditionalFilters]]);
             return { remainingElements };
         }
@@ -157,8 +154,8 @@ const addAdditionalFiltersElements = (
 const addShowInMoreFilters = (
     elementConfigs: Map<string, Column | FilterOnly>,
     filtersOnlyForShowInMoreFilters: FiltersOnly,
-    filtersWithValueOnInit: Object = {},
-    userSelectedFilters: Object = {},
+    filtersWithValueOnInit: any = {},
+    userSelectedFilters: any = {},
 ) => {
     const remainingElements: Map<string, Column | FilterOnly> =
         new Map([...elementConfigs]);
@@ -189,7 +186,6 @@ const getIndividualElementsArray = (
             userSelectedElements.has(element.id)) {
             return element;
         }
-        // $FlowFixMe
         return undefined;
     })
     .filter(element => element);
@@ -204,17 +200,16 @@ const renderIndividualFilterButtons = ({
     onRemoveFilter,
     classes,
 }: {
-    individualElementsArray: Array<Column | FilterOnly>,
-    filtersOnly?: FiltersOnly,
-    visibleSelectorId: ?string,
-    onSetVisibleSelector: Function,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    onRemoveFilter: Function,
-    classes: Object,
+    individualElementsArray: Array<Column | FilterOnly>;
+    filtersOnly?: FiltersOnly;
+    visibleSelectorId: string | null;
+    onSetVisibleSelector: Function;
+    onUpdateFilter: Function;
+    onClearFilter: Function;
+    onRemoveFilter: Function;
+    classes: any;
 }) => [...(filtersOnly || []), ...individualElementsArray]
-    // $FlowFixMe[prop-missing]
-    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton }) => (
+    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton }: any) => (
         <div
             key={id}
             data-test={`filter-button-container-${id}`}
@@ -253,7 +248,7 @@ const renderRestButton = (
 ) : null);
 
 
-const FiltersPlain = memo<Props>((props: Props) => {
+const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & WithStyles<typeof getStyles>) => {
     const {
         columns,
         stickyFilters,

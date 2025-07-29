@@ -1,18 +1,17 @@
-// @flow
 import * as React from 'react';
 import { FiltersRows } from '../Filters';
 import type { Columns, FiltersOnly, AdditionalFilters } from '../types';
 
 type Props = {
-    columns: Columns,
-    filtersOnly?: FiltersOnly,
-    additionalFilters?: AdditionalFilters,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    onRemoveFilter: Function,
-    onSelectRestMenuItem: Function,
-    stickyFilters: Object,
-    programStageId?: string,
+    columns: Columns;
+    filtersOnly?: FiltersOnly;
+    additionalFilters?: AdditionalFilters;
+    onUpdateFilter: Function;
+    onClearFilter: Function;
+    onRemoveFilter: Function;
+    onSelectRestMenuItem: Function;
+    stickyFilters: any;
+    programStageId?: string;
 };
 
 export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>

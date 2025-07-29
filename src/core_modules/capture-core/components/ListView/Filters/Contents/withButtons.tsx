@@ -1,6 +1,6 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import type { UpdatableFilterContent } from '../../../FiltersForTypes';
@@ -16,32 +16,28 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    onUpdate: (data: ?Object, commitValue?: any) => void,
-    onClose: () => void,
-    onRemove: () => void,
-    isRemovable?: boolean,
-    disabledReset: boolean,
-    disabledUpdate: boolean,
-    classes: {
-        buttonsContainer: string,
-        buttonContainer: string,
-    },
+    onUpdate: (data: Object | null, commitValue?: any) => void;
+    onClose: () => void;
+    onRemove: () => void;
+    isRemovable?: boolean;
+    disabledReset: boolean;
+    disabledUpdate: boolean;
 };
 
 export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
-    withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props> {
-        filterTypeInstance: UpdatableFilterContent<any>;
-        updateButtonInstance: HTMLButtonElement;
-        closeButtonInstance: HTMLButtonElement;
-        removeButtonInstance: HTMLButtonElement;
+    withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props & WithStyles<typeof getStyles>> {
+        filterTypeInstance: UpdatableFilterContent<any> | null = null;
+        updateButtonInstance: HTMLButtonElement | null = null;
+        closeButtonInstance: HTMLButtonElement | null = null;
+        removeButtonInstance: HTMLButtonElement | null = null;
 
         update = (commitValue?: any) => {
-            const updateData = this.filterTypeInstance.onGetUpdateData(commitValue);
+            const updateData = this.filterTypeInstance?.onGetUpdateData(commitValue);
             this.props.onUpdate(updateData);
         }
 
         isValid() {
-            return this.filterTypeInstance.onIsValid ? this.filterTypeInstance.onIsValid() : true;
+            return this.filterTypeInstance?.onIsValid ? this.filterTypeInstance.onIsValid() : true;
         }
 
         handleUpdateClick = () => {
@@ -91,7 +87,6 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <React.Fragment>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         filterTypeRef={this.setFilterTypeInstance}
                         onUpdate={this.update}
@@ -108,7 +103,6 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                         >
                             <Button
                                 dataTest="list-view-filter-apply-button"
-                                muiButtonRef={this.setUpdateButtonInstance}
                                 primary
                                 onClick={this.handleUpdateClick}
                                 disabled={disabledUpdate}
@@ -121,7 +115,6 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                         >
                             <Button
                                 dataTest="list-view-filter-cancel-button"
-                                muiButtonRef={this.setCloseButtonInstance}
                                 secondary
                                 onClick={onClose}
                                 disabled={disabledReset}
@@ -135,7 +128,6 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                         >
                             <Button
                                 dataTest="list-view-filter-remove-button"
-                                muiButtonRef={this.setRemoveButtonInstance}
                                 destructive
                                 onClick={onRemove}
                             >

@@ -1,12 +1,11 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Filters } from './Filters.component';
 import type { Column, FiltersOnly, AdditionalFilters } from '../types';
 
-const getStyles = () => ({
+const getStyles: Readonly<any> = {
     filtersButtons: {
         display: 'flex',
         alignItems: 'baseline',
@@ -31,23 +30,21 @@ const getStyles = () => ({
         color: colors.grey600,
         fontSize: 12,
     },
-});
+};
 
 type Props = {
-    columns: Array<{
-        ...Column,
-        additionalColumn?: boolean,
-    }>,
-    filtersOnly?: FiltersOnly,
-    additionalFilters?: AdditionalFilters,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    onRemoveFilter: Function,
-    onSelectRestMenuItem: Function,
-    stickyFilters: Object,
-    shouldRenderAdditionalFiltersButtons: boolean,
-    visibleSelectorId: ?string,
-    classes: Object,
+    columns: Array<Column & {
+        additionalColumn?: boolean;
+    }>;
+    filtersOnly?: FiltersOnly;
+    additionalFilters?: AdditionalFilters;
+    onUpdateFilter: Function;
+    onClearFilter: Function;
+    onRemoveFilter: Function;
+    onSelectRestMenuItem: Function;
+    stickyFilters: any;
+    shouldRenderAdditionalFiltersButtons: boolean;
+    visibleSelectorId: string | null;
 };
 
 export const FiltersRowsPlain = ({
@@ -62,7 +59,7 @@ export const FiltersRowsPlain = ({
     shouldRenderAdditionalFiltersButtons,
     visibleSelectorId,
     classes,
-}: Props) => (
+}: Props & WithStyles<typeof getStyles>) => (
     <>
         <div className={classes.filtersButtons}>
             <Filters
@@ -89,7 +86,7 @@ export const FiltersRowsPlain = ({
                         onSelectRestMenuItem={onSelectRestMenuItem}
                         stickyFilters={stickyFilters}
                         visibleSelectorId={visibleSelectorId}
-                        onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
+                        onRemoveFilter={itemId => onRemoveFilter(itemId, (stickyFilters as any).filtersWithValueOnInit)}
                     />
                 </div>
             </>

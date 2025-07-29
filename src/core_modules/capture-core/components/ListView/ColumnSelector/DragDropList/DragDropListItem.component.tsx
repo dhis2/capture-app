@@ -1,8 +1,7 @@
-// @flow
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
 const ItemTypes = {
     LISTITEM: 'listItem',
@@ -17,16 +16,15 @@ const styles = {
 };
 
 type Props = {
-    id: string,
-    visible: boolean,
-    text: string,
-    index: number,
-    handleToggle: (id: string) => any,
-    moveListItem: (dragIndex: number, hoverIndex: number) => void,
-    isDraggingAny: boolean,
-    onDragStart: () => void,
-    onDragEnd: () => void,
-    classes: any,
+    id: string;
+    visible: boolean;
+    text: string;
+    index: number;
+    handleToggle: (id: string) => any;
+    moveListItem: (dragIndex: number, hoverIndex: number) => void;
+    isDraggingAny: boolean;
+    onDragStart: () => void;
+    onDragEnd: () => void;
 };
 
 const DragDropListItemPlain = ({
@@ -40,12 +38,12 @@ const DragDropListItemPlain = ({
     onDragStart,
     onDragEnd,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const ref = useRef(null);
 
     const [, drop] = useDrop({
         accept: ItemTypes.LISTITEM,
-        hover(item: { id: string, index: number }) {
+        hover(item: { id: string; index: number }) {
             const dragIndex = item.index;
             const hoverIndex = index;
 
@@ -81,7 +79,7 @@ const DragDropListItemPlain = ({
         <DataTableRow
             ref={ref}
             style={{ opacity }}
-            className={isDraggingAny ? classes.rowWithoutHover : null}
+            className={isDraggingAny ? classes.rowWithoutHover : undefined}
             draggable
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}

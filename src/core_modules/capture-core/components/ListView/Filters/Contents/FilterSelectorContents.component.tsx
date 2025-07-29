@@ -14,7 +14,7 @@ import {
 } from '../../../FiltersForTypes';
 import type { Props } from './filterSelectorContents.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         padding: theme.typography.pxToRem(24),
     },
@@ -94,5 +94,5 @@ const FilterSelectorContentsPlain = ({
     );
 };
 
-export const FilterSelectorContents: ComponentType<$Diff<Props, CssClasses>> =
+export const FilterSelectorContents: ComponentType<Omit<Props, 'classes'>> =
     withStyles(getStyles)(FilterSelectorContentsPlain);

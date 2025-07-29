@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useEffect } from 'react';
 import { isEqual } from 'lodash';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button } from '@dhis2/ui';
@@ -7,10 +6,10 @@ import i18n from '@dhis2/d2-i18n';
 import { DragDropList } from './DragDropList';
 
 type Props = {
-    open: ?boolean,
-    onClose: Function,
-    onSave: Function,
-    columns: Array<Object>,
+    open: boolean | null;
+    onClose: Function;
+    onSave: Function;
+    columns: Array<Object>;
 };
 
 export const ColumnSelectorDialog = ({ columns, open, onClose, onSave }: Props) => {

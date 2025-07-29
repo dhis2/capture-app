@@ -1,12 +1,11 @@
-// @flow
 import React, { useState, useCallback } from 'react';
 import { FlyoutMenu, MenuItem, DropdownButton } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { Column, FilterOnly } from '../../types';
 
 type Props = {
-    columns: Array<Column | FilterOnly>,
-    onItemSelected: (id: string) => void,
+    columns: Array<Column | FilterOnly>;
+    onItemSelected: (id: string) => void;
 };
 
 export const FilterRestMenu = ({ columns, onItemSelected }: Props) => {
@@ -38,7 +37,6 @@ export const FilterRestMenu = ({ columns, onItemSelected }: Props) => {
             open={filterSelectorOpen}
             component={
                 <FlyoutMenu
-                    role="menu"
                     dataTest="more-filters-menu"
                     maxHeight="300px"
                 >

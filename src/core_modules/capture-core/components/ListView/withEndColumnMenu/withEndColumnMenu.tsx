@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { getMenuColumnSettings } from './getMenuColumnSettings';
 
@@ -7,21 +6,21 @@ type Props = {
 }
 
 type Settings = {
-    getCellBody: (row: {eventId: string, [elementId: string]: any}, props: Object) => React.Node,
-    getCellHeader?: ?(props: Object) => React.Node,
-    headerCellStyle?: ?Object,
-    bodyCellStyle?: ?Object,
+    getCellBody: (row: {eventId: string, [elementId: string]: any}, props: any) => React.ReactNode;
+    getCellHeader?: ((props: any) => React.ReactNode) | null;
+    headerCellStyle?: any | null;
+    bodyCellStyle?: any | null;
 }
 
 export const withEndColumnMenu = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class CustomEndCellHOC extends React.Component<Props> {
-            getCustomEndCellBody = (row: {eventId: string, [elementId: string]: any}, props: Object) => {
+            getCustomEndCellBody = (row: {eventId: string, [elementId: string]: any}, props: any) => {
                 const settings: Settings = getMenuColumnSettings();
                 return settings.getCellBody(row, props);
             }
 
-            getCustomEndCellHeader = (row: string, props: Object) => {
+            getCustomEndCellHeader = (row: string, props: any) => {
                 const settings: Settings = getMenuColumnSettings();
                 return settings.getCellHeader && settings.getCellHeader(props);
             }
@@ -29,7 +28,6 @@ export const withEndColumnMenu = () =>
             render() {
                 const settings: Settings = getMenuColumnSettings();
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         getCustomEndCellHeader={this.getCustomEndCellHeader}
                         getCustomEndCellBody={this.getCustomEndCellBody}

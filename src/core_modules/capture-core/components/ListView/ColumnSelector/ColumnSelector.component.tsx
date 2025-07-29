@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { IconButton } from 'capture-ui';
 import { IconSettings24, Tooltip } from '@dhis2/ui';
@@ -7,12 +6,12 @@ import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';
 import type { Columns } from '../types';
 
 type Props = {
-    onSave: Function,
-    columns: Columns,
+    onSave: Function;
+    columns: Columns;
 };
 
 type State = {
-    dialogOpen: boolean,
+    dialogOpen: boolean;
 };
 
 export class ColumnSelector extends React.PureComponent<Props, State> {

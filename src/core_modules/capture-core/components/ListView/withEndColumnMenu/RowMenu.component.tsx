@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useRef } from 'react';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
@@ -7,7 +6,7 @@ import type { Props } from './rowMenu.types';
 export const RowMenu = (props: Props) => {
     const { customRowMenuContents = [], row } = props;
 
-    const anchorRef = useRef(null);
+    const anchorRef = useRef<HTMLDivElement>(null);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const toggle = () => {
@@ -23,12 +22,12 @@ export const RowMenu = (props: Props) => {
                     return;
                 }
                 setActionsIsOpen(false);
-                // $FlowFixMe common flow, I checked this 4 lines up
                 content.clickHandler(row);
             }}
             disabled={!content.clickHandler}
             label={content.label}
             icon={content.icon}
+            suffix={null}
         />
     ));
 
@@ -41,13 +40,13 @@ export const RowMenu = (props: Props) => {
                 <IconMore24 />
             </IconButton>
             {actionsIsOpen && (
-                <Layer onBackdropClick={() => setActionsIsOpen(false)} transparent>
+                <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
                         placement="right"
-                        reference={anchorRef}
+                        reference={anchorRef.current}
                         data-test="row-menu-popper"
                     >
-                        <FlyoutMenu role="menu">
+                        <FlyoutMenu>
                             {renderMenuItems()}
                         </FlyoutMenu>
                     </Popper>
