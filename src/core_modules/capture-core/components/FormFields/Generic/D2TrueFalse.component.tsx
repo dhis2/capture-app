@@ -1,14 +1,16 @@
 /* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-
+import { orientations } from 'capture-ui';
 import { SelectBoxes } from '../Options/SelectBoxes';
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 
 type Props = {
+    value: any;
     allowMultiple?: boolean;
     onBlur: (value: any) => void;
+    orientation: typeof orientations[keyof typeof orientations];
 };
 
 export class D2TrueFalse extends Component<Props> {

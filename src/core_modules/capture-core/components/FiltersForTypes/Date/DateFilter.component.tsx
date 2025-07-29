@@ -263,7 +263,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return !values || DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
-    getUpdatedValue(valuePart: { [key: string]: string }) {
+    getUpdatedValue(valuePart: any) {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
@@ -297,7 +297,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.toD2DateTextFieldInstance && this.toD2DateTextFieldInstance.focus();
     };
 
-    handleFieldBlur = (value: { [key: string]: string | DateValue }) => {
+    handleFieldBlur = (value: any) => {
         this.props.onCommitValue(this.getUpdatedValue(value));
     };
 

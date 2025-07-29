@@ -1,24 +1,23 @@
-// @flow
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
 import type { BooleanFilterStringified } from './types';
 
 type Props = {
-    filter: ?BooleanFilterStringified,
-    filterTypeRef: Function,
+    filter: BooleanFilterStringified | null,
+    filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
     singleSelect: boolean,
 };
 
 type State = {
-    value: ?Array<string> | string,
+    value: Array<string> | string | boolean | null | undefined,
 };
 
 export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(
-        filter: ?BooleanFilterStringified,
+        filter: BooleanFilterStringified | null,
         singleSelect: boolean,
-    ): ?(Array<string> | string) {
+    ): (Array<string> | string | null | boolean | undefined) {
         if (!filter) {
             return undefined;
         }
@@ -33,7 +32,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: ?Array<string>) => {
+    handleCommitValue = (value?: Array<string> | string | boolean| null) => {
         this.setState({
             value,
         });
@@ -44,9 +43,9 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, singleSelect, ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <BooleanFilter
                 value={this.state.value}
+                // @ts-expect-error - keeping original functionality as before ts rewrite
                 innerRef={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 allowMultiple={!singleSelect}

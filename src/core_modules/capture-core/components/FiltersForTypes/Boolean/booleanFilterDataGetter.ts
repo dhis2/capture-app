@@ -1,4 +1,3 @@
-// @flow
 import type { BooleanFilterStringified } from './types';
 
 export function getBooleanFilterData(
