@@ -70,6 +70,7 @@ class D2TrueOnlyPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
+                                    className={this.labelClasses}
                                 >
                                     {label}
                                 </Label>

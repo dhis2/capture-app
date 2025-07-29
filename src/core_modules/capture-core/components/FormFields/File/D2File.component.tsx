@@ -12,7 +12,7 @@ type OwnProps = {
     value?: { value: string; name: string; url?: string };
     disabled?: boolean;
     onCommitAsync: (callback: () => void) => void;
-    onBlur: (value: Record<string, unknown> | null) => void;
+    onBlur: (value: any | null) => void;
     asyncUIState: { loading?: boolean };
     orientation: typeof orientations[keyof typeof orientations];
     mutate: (data: any) => Promise<any>;
@@ -117,8 +117,7 @@ class D2FilePlain extends Component<Props, State> {
 
     handleBlur = () => {
         if (!this.state.fileSelectorOpen) {
-            const fileUrl = this.getFileUrl();
-            this.props.onBlur(fileUrl ? { url: fileUrl } : null);
+            this.props.onBlur(this.getFileUrl());
         }
     }
 
@@ -127,7 +126,7 @@ class D2FilePlain extends Component<Props, State> {
         if (value) {
             return value.url || inMemoryFileStore.get(value.value);
         }
-        return null;
+        return undefined;
     }
 
     render() {
@@ -168,7 +167,7 @@ class D2FilePlain extends Component<Props, State> {
                                         <a
                                             className={!isVertical ? classes.horizontalLink : undefined}
                                             target="_blank"
-                                            href={fileUrl || undefined}
+                                            href={fileUrl}
                                             rel="noopener noreferrer"
                                             onBlur={(event) => { event.stopPropagation(); }}
                                         >
