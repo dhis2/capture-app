@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
@@ -29,7 +28,7 @@ const translatedPeriods = {
     [periods.RELATIVE_RANGE]: i18n.t('Relative range'),
 };
 
-function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
+function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
     let appliedText = '';
     const fromValue = filter.ge;
     const toValue = filter.le;

@@ -1,11 +1,16 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 
-const ClearIcon = ({ className, ...props }) => (
+type ClearIconProps = {
+    className?: string;
+    [key: string]: any;
+};
+
+const ClearIcon = ({ className, ...props }: ClearIconProps) => (
     <svg
         className={className}
         {...props}
@@ -17,7 +22,7 @@ const ClearIcon = ({ className, ...props }) => (
     </svg>
 );
 
-const getStyles = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: Theme) => ({
     button: {
         backgroundColor: 'rgb(184, 215, 243) !important',
     },
@@ -33,42 +38,35 @@ const getStyles = (theme: Theme) => ({
 });
 
 type State = {
-    isHovered: boolean,
+    isHovered: boolean;
 };
 
 type Props = {
-    onChange: (event: SyntheticMouseEvent<HTMLButtonElement>) => void,
-    onClear: () => void,
-    classes: {
-        button: string,
-        hovered: string,
-        contents: string,
-        clearIcon: string,
-        label: string,
-    },
-    iconClass: string,
-    title: string,
-    arrowIconElement: React.Node,
-    buttonText?: string,
+    onChange: (event: any) => void;
+    onClear: () => void;
+    iconClass: string;
+    title: string;
+    arrowIconElement: React.ReactNode;
+    buttonText?: string;
 };
 
 const MAX_LENGTH_OF_VALUE = 10;
 
-class ActiveFilterButtonPlain extends React.Component<Props, State> {
-    static stopClearPropagation(event: SyntheticEvent<any>) {
+class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof getStyles>, State> {
+    static stopClearPropagation(event: React.SyntheticEvent<any>) {
         event.stopPropagation();
     }
 
-    static getCappedValue(value: string) {
+    static getCappedValue(value: string): string {
         const cappedValue = value.substring(0, MAX_LENGTH_OF_VALUE - 3).trimRight();
         return `${cappedValue}...`;
     }
-    static getViewValueForFilter(buttonText?: string = '') {
-        const calculatedValue = buttonText.length > MAX_LENGTH_OF_VALUE ? ActiveFilterButton.getCappedValue(buttonText) : buttonText;
+    static getViewValueForFilter(buttonText = ''): string {
+        const calculatedValue = buttonText.length > MAX_LENGTH_OF_VALUE ? ActiveFilterButtonPlain.getCappedValue(buttonText) : buttonText;
         return `: ${calculatedValue}`;
     }
 
-    constructor(props: Props) {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.state = {
             isHovered: false,
@@ -87,7 +85,7 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
         });
     }
 
-    handleClearClick = (event: SyntheticMouseEvent<any>) => {
+    handleClearClick = (event: React.MouseEvent<any>) => {
         event.stopPropagation();
         this.props.onClear();
     }
@@ -107,7 +105,7 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
                     onClick={onChange}
                 >
                     {title}
-                    {ActiveFilterButton.getViewValueForFilter(buttonText)}
+                    {ActiveFilterButtonPlain.getViewValueForFilter(buttonText)}
                     {arrowIconElement}
                     <Tooltip
                         content={i18n.t('Clear')}
@@ -119,13 +117,13 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
                             onMouseLeave={this.setIsHovered}
                             className={classNames(iconClass, classes.clearIcon)}
                             onClick={this.handleClearClick}
-                            onMouseDown={ActiveFilterButton.stopClearPropagation}
-                            onMouseUp={ActiveFilterButton.stopClearPropagation}
-                            onTouchStart={ActiveFilterButton.stopClearPropagation}
-                            onTouchEnd={ActiveFilterButton.stopClearPropagation}
-                            onTouchMove={ActiveFilterButton.stopClearPropagation}
-                            onKeyDown={ActiveFilterButton.stopClearPropagation}
-                            onKeyUp={ActiveFilterButton.stopClearPropagation}
+                            onMouseDown={ActiveFilterButtonPlain.stopClearPropagation}
+                            onMouseUp={ActiveFilterButtonPlain.stopClearPropagation}
+                            onTouchStart={ActiveFilterButtonPlain.stopClearPropagation}
+                            onTouchEnd={ActiveFilterButtonPlain.stopClearPropagation}
+                            onTouchMove={ActiveFilterButtonPlain.stopClearPropagation}
+                            onKeyDown={ActiveFilterButtonPlain.stopClearPropagation}
+                            onKeyUp={ActiveFilterButtonPlain.stopClearPropagation}
                         />
                     </Tooltip>
                 </Button>

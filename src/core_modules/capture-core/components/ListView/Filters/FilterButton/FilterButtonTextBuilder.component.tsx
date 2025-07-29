@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo, memo } from 'react';
 import type { Props } from './filterButtonTextBuilder.types';
 import { FilterButtonMain } from './FilterButtonMain.component';
@@ -9,7 +8,7 @@ export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, options
         if (!filterValue) {
             return filterValue;
         }
-        return buildButtonText(filterValue, type, options);
+        return buildButtonText(filterValue, type.toString(), options);
     }, [
         filterValue,
         type,

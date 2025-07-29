@@ -1,16 +1,17 @@
-// @flow
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+/* eslint-disable react/sort-comp */
+import React from 'react';
 import { Button, Popover } from '@dhis2/ui';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
+import { LockedFilterButton } from './LockedFilterButton.component';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
 import type { FilterData, Options, FilterDataInput } from '../../../FiltersForTypes';
-import { LockedFilterButton } from './LockedFilterButton.component';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: Theme) => ({
     icon: {
         paddingLeft: theme.typography.pxToRem(12),
         display: 'flex',
@@ -25,41 +26,36 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    itemId: string,
-    type: string,
-    options?: ?Options,
-    multiValueFilter?: boolean,
-    title: string,
-    classes: {
-        icon: string,
-        inactiveFilterButton: string,
-        inactiveFilterButtonLabel: string,
-    },
-    onUpdateFilter: UpdateFilter,
-    onClearFilter: ClearFilter,
-    onRemoveFilter: RemoveFilter,
-    isRemovable?: boolean,
-    onSetVisibleSelector: Function,
-    selectorVisible: boolean,
-    filterValue?: FilterDataInput,
-    buttonText?: string,
-    disabled?: boolean,
-    tooltipContent?: string,
+    itemId: string;
+    type: string;
+    options?: Options | null;
+    multiValueFilter?: boolean;
+    title: string;
+    onUpdateFilter: UpdateFilter;
+    onClearFilter: ClearFilter;
+    onRemoveFilter: RemoveFilter;
+    isRemovable?: boolean;
+    onSetVisibleSelector: (itemId?: string) => void;
+    selectorVisible: boolean;
+    filterValue?: FilterDataInput;
+    buttonText?: string;
+    disabled?: boolean;
+    tooltipContent?: string;
 };
 
 type State = {
-    isMounted: boolean,
+    isMounted: boolean;
 };
 
-class FilterButtonMainPlain extends Component<Props, State> {
-    activeFilterButtonInstance: ?any;
-    anchorRef: { current: null | HTMLDivElement };
-    constructor(props: Props) {
+class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof getStyles>, State> {
+    activeFilterButtonInstance: any;
+    anchorRef: React.RefObject<HTMLDivElement>;
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.state = {
             isMounted: false,
         };
-        this.anchorRef = React.createRef();
+        this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
     }
 
     componentDidMount() {
@@ -90,10 +86,10 @@ class FilterButtonMainPlain extends Component<Props, State> {
     onRemove = () => {
         const { itemId, onRemoveFilter } = this.props;
         this.closeFilterSelector();
-        onRemoveFilter && onRemoveFilter(itemId);
+        onRemoveFilter && onRemoveFilter(itemId, {});
     }
 
-    handleFilterUpdate = (data: ?FilterData) => {
+    handleFilterUpdate = (data: FilterData | null) => {
         const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
             onClearFilter(itemId);
@@ -119,7 +115,6 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}
-                // $FlowFixMe
                 filterValue={filterValue}
                 onRemove={this.onRemove}
                 isRemovable={isRemovable}
@@ -127,7 +122,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
         );
     }
 
-    refActiveFilterInstance = (activeFilterButtonInstance) => {
+    refActiveFilterInstance = (activeFilterButtonInstance: any) => {
         this.activeFilterButtonInstance = activeFilterButtonInstance;
     }
 
@@ -178,7 +173,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
         return (
             <ConditionalTooltip
                 content={tooltipContent}
-                enabled={disabled}
+                enabled={!!disabled}
                 closeDelay={50}
             >
                 <Button
@@ -210,7 +205,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 </div>
                 {(selectorVisible && isMounted) && (
                     <Popover
-                        reference={this.anchorRef.current}
+                        reference={this.anchorRef.current || undefined}
                         arrow={false}
                         placement="bottom-start"
                         onClickOutside={this.closeFilterSelector}

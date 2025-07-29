@@ -1,4 +1,3 @@
-// @flow
 import React, { useContext } from 'react';
 import {
     FilterValuesContext,
@@ -11,7 +10,6 @@ export const FilterButtonContextConsumer = ({ itemId, ...passOnProps }: Props) =
     const filterValue = (filterValues && filterValues[itemId]) || undefined;
 
     return (
-        // $FlowFixMe fixed in later PR
         <FilterButtonTextBuilder
             {...passOnProps}
             itemId={itemId}

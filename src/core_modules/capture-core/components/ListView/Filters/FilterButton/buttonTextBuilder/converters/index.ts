@@ -1,4 +1,3 @@
-// @flow
 export { convertDate } from './dateConverter';
 export { convertAssignee } from './assigneeConverter';
 export { convertBoolean } from './booleanConverter';
