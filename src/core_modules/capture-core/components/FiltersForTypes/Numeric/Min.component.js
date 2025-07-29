@@ -36,7 +36,6 @@ class MinNumericFilterPlain extends Component<Props> {
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Min')}
-                    fullWidth
                     {...passOnProps}
                 />
                 <div className={errorClass}>

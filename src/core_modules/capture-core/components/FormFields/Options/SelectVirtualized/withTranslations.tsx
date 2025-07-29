@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 
@@ -14,19 +13,19 @@ function buildTranslations() {
 }
 
 export const withTranslations = () =>
-    (InnerComponent: React.ComponentType<any>) =>
-        class TranslationBuilder extends React.Component<Props> {
-            translations: Object;
-            constructor(props: Props) {
+    <P extends Record<string, unknown>>(InnerComponent: React.ComponentType<P>) =>
+        class TranslationBuilder extends React.Component<Props & P> {
+            constructor(props: Props & P) {
                 super(props);
                 this.translations = buildTranslations();
             }
+
+            translations: any;
 
             render() {
                 const { ...passOnProps } = this.props;
 
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         translations={this.translations}
                         {...passOnProps}

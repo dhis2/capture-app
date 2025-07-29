@@ -5,10 +5,12 @@ import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHa
 import type { DateValue } from './types/date.types';
 
 type Props = {
-    value?: DateValue | null;
+    value?: string;
     error?: string | null;
     errorClass?: string;
     onBlur: ({ from }: { from: DateValue }) => void;
+    onEnterKey: () => void;
+    onDateSelectedFromCalendar: () => void;
 };
 
 class FromDateFilterPlain extends Component<Props> {

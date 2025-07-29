@@ -1,6 +1,18 @@
+/* eslint-disable react/sort-comp */
 import React from 'react';
 import cx from 'classnames';
 import './styles.css';
+
+type NodeProps = {
+    label: string;
+    value: string;
+    open: boolean;
+    depth: number;
+    isSelected: boolean;
+    children?: React.ReactNode;
+    onClick: (value: string) => void;
+    onIconClick: (evt: any, open: boolean, value: string) => void;
+};
 
 function Node({
     label,
@@ -11,7 +23,7 @@ function Node({
     children,
     onClick,
     onIconClick,
-}) {
+}: NodeProps) {
     const hasChildren = children && Array.isArray(children);
     let minWidth = depth * 20;
     if (!hasChildren) {
@@ -48,7 +60,16 @@ function Node({
     );
 }
 
-export class Tree extends React.Component {
+type TreeProps = {
+    list: Array<any>;
+    onIconClick: (value: string, open: boolean, list: Array<any>) => void;
+    setSelected: (selected: Array<string>, isSelected: boolean, value: string) => void;
+    multiple?: boolean;
+    selectable?: boolean;
+    selected?: Array<string>;
+};
+
+export class Tree extends React.Component<TreeProps> {
     updateState(list, open, value) {
         if (!Array.isArray(list)) {
             return list;
@@ -89,9 +110,9 @@ export class Tree extends React.Component {
         }
 
         if (isSelected) {
-            selected = selected.filter(v => v !== value);
+            selected = selected?.filter(v => v !== value) || [];
         } else {
-            selected = selected.slice(0);
+            selected = selected?.slice(0) || [];
             selected.push(value);
         }
 

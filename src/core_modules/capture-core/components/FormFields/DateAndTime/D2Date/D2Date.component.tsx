@@ -1,41 +1,37 @@
-// @flow
 import * as React from 'react';
 import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
-import { type DateValue } from '../../../FiltersForTypes/Date/types/date.types';
+import type { DateValue } from '../../../FiltersForTypes/Date/types/date.types';
 
 type Props = {
-    label?: ?string,
-    value: ?string,
-    calendarWidth?: ?number,
-    inputWidth?: ?number,
-    onBlur: (value: DateValue) => void,
-    onFocus?: ?() => void,
-    onDateSelectedFromCalendar?: () => void,
-    classes?: Object,
-    disabled?: boolean,
+    label?: string;
+    value?: string;
+    calendarWidth?: string;
+    inputWidth?: string;
+    onBlur: (value: DateValue) => void;
+    onFocus?: () => void;
+    onDateSelectedFromCalendar?: () => void;
+    disabled?: boolean;
+    placeholder?: string;
 };
 
 type State = {
-    date: ?string,
+    date?: string;
 };
 
-type Validation = {|
+type Validation = {
     validationCode: string,
     validationText: string,
     error: boolean,
     valid: boolean,
-|};
+};
 
 export class D2Date extends React.Component<Props, State> {
-    handleDateSelected: (value: {calendarDateString: string}) => void;
-
     constructor(props: Props) {
         super(props);
-        this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
-    handleDateSelected(value: {calendarDateString: string, validation: Validation}) {
+    handleDateSelected = (value: {calendarDateString: string, validation?: Validation} | null) => {
         const { calendarDateString: selectedDate, validation } = value || {};
         if (selectedDate !== undefined) {
             this.props.onBlur({
@@ -51,7 +47,6 @@ export class D2Date extends React.Component<Props, State> {
         const {
             calendarWidth,
             inputWidth,
-            classes,
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,

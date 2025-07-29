@@ -1,9 +1,9 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import { Checkbox, Switch, spacersNum, FieldSet, Label } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles: Readonly<any> = theme => ({
     label: theme.typography.formFieldTitle,
     checkbox: {
         marginTop: spacersNum.dp12,
@@ -11,24 +11,21 @@ const styles = theme => ({
     },
 });
 
-type Props = {
-    onBlur: (value: any) => void,
-    value?: ?string,
-    label?: ?string,
-    required?: ?boolean,
-    classes: {
-        label: string,
-        checkbox: string,
-    },
-    style?: ?Object,
-    useSwitch?: ?boolean,
-    useValueLabel?: ?boolean,
+type OwnProps = {
+    onBlur: (value: any) => void;
+    value?: string;
+    label?: string;
+    required?: boolean;
+    style?: Record<string, unknown>;
+    useSwitch?: boolean;
+    useValueLabel?: boolean;
 };
 
+type Props = OwnProps & WithStyles<typeof styles>;
+
 class D2TrueOnlyPlain extends Component<Props> {
-    handleChange: (e: Object) => void;
-    materialUIContainerInstance: ?HTMLDivElement;
-    labelClasses: Object;
+    materialUIContainerInstance: HTMLDivElement | null = null;
+    labelClasses: any;
 
     constructor(props: Props) {
         super(props);
@@ -43,7 +40,7 @@ class D2TrueOnlyPlain extends Component<Props> {
         };
     }
 
-    handleChange(e: Object) {
+    handleChange(e: any) {
         let value;
 
         if (e.checked) {
@@ -73,7 +70,7 @@ class D2TrueOnlyPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
-                                    classes={this.labelClasses}
+                                    className={this.labelClasses}
                                 >
                                     {label}
                                 </Label>

@@ -5,11 +5,12 @@ import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHa
 import type { DateValue } from './types/date.types';
 
 type Props = {
-    value?: DateValue | null;
+    value?: string;
     error?: string | null;
     errorClass?: string;
     onBlur: ({ to }: { to: DateValue }) => void;
     onFocusUpdateButton: () => void;
+    textFieldRef: (instance: any) => void;
 };
 
 class ToDateFilterPlain extends Component<Props> {

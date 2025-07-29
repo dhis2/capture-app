@@ -11,11 +11,11 @@ type Props = {
 
 // Wraps withInternalFilterHandler. Passes on defaultRoots from the organisation unit store based on the input scope.
 export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
-    (InnerComponent: React.ComponentType<any>) => {
+    <P extends Record<string, unknown>>(InnerComponent: React.ComponentType<P>) => {
         const InternalFilterHandlerHOC = withApiUtils(withInternalFilterHandler()(InnerComponent));
 
-        class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props> {
-            constructor(props: Props) {
+        class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props & P> {
+            constructor(props: Props & P) {
                 super(props);
                 const { scope } = this.props;
                 this.defaultRoots =

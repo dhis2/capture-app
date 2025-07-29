@@ -1,6 +1,6 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import { IconCheckmark24, colors, CircularLoader, Button } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
@@ -8,31 +8,23 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { withApiUtils } from '../../../HOC';
 
-type Props = {
-    value: ?{ value: string, name: string, url?: ?string },
-    disabled?: ?boolean,
-    classes: {
-        horizontalContainer: string,
-        verticalContainer: string,
-        innerContainer: string,
-        horizontalSelectedFileTextContainer: string,
-        verticalSelectedFileTextContainer: string,
-        deleteButton: string,
-        input: string,
-        horizontalLink: string,
-    },
-    onCommitAsync: (callback: Function) => void,
-    onBlur: (value: ?Object) => void,
-    asyncUIState: { loading?: ?boolean },
-    orientation: $Values<typeof orientations>,
-    mutate: (data: any) => Promise<any>
-}
-
-type State = {
-    fileSelectorOpen: boolean,
+type OwnProps = {
+    value?: { value: string; name: string; url?: string };
+    disabled?: boolean;
+    onCommitAsync: (callback: () => void) => void;
+    onBlur: (value: any | null) => void;
+    asyncUIState: { loading?: boolean };
+    orientation: typeof orientations[keyof typeof orientations];
+    mutate: (data: any) => Promise<any>;
 };
 
-const styles = theme => ({
+type Props = OwnProps & WithStyles<typeof styles>;
+
+type State = {
+    fileSelectorOpen: boolean;
+};
+
+const styles: Readonly<any> = theme => ({
     horizontalContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -80,7 +72,7 @@ const styles = theme => ({
 
 class D2FilePlain extends Component<Props, State> {
     hiddenFileSelectorRef: any;
-    fileSelectorOpen: boolean;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -88,8 +80,8 @@ class D2FilePlain extends Component<Props, State> {
         };
     }
 
-    handleFileChange = (e: Object) => {
-        this.setState((state) => { state.fileSelectorOpen = false; });
+    handleFileChange = (e: any) => {
+        this.setState({ fileSelectorOpen: false });
         e.preventDefault();
         const file = e.target.files[0];
         e.target.value = null;
@@ -112,11 +104,11 @@ class D2FilePlain extends Component<Props, State> {
     }
     handleButtonClick = () => {
         this.hiddenFileSelectorRef.click();
-        this.setState((state) => { state.fileSelectorOpen = true; });
+        this.setState({ fileSelectorOpen: true });
     }
 
     handleCancel = () => {
-        this.setState((state) => { state.fileSelectorOpen = false; });
+        this.setState({ fileSelectorOpen: false });
     }
 
     handleRemoveClick = () => {
@@ -134,7 +126,7 @@ class D2FilePlain extends Component<Props, State> {
         if (value) {
             return value.url || inMemoryFileStore.get(value.value);
         }
-        return null;
+        return undefined;
     }
 
     render() {
@@ -153,6 +145,7 @@ class D2FilePlain extends Component<Props, State> {
                         this.hiddenFileSelectorRef = hiddenFileSelector;
                     }}
                     onChange={e => this.handleFileChange(e)}
+                    // @ts-expect-error - keeping original functionality as before ts rewrite
                     onCancel={this.handleCancel} // eslint-disable-line react/no-unknown-property
                 />
                 {
@@ -172,7 +165,7 @@ class D2FilePlain extends Component<Props, State> {
                                     <div className={selectedFileTextContainerClass}>
                                         <IconCheckmark24 color={colors.green600} />
                                         <a
-                                            className={!isVertical && classes.horizontalLink}
+                                            className={!isVertical ? classes.horizontalLink : undefined}
                                             target="_blank"
                                             href={fileUrl}
                                             rel="noopener noreferrer"

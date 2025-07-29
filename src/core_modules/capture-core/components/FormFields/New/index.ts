@@ -1,4 +1,3 @@
-// @flow
 // Fields
 export { TextField } from './Fields/TextField/TextField.component';
 export { BooleanField } from './Fields/BooleanField/BooleanField.component';

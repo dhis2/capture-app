@@ -1,4 +1,4 @@
-// @flow
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 
@@ -7,7 +7,8 @@ import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 
 type Props = {
-    allowMultiple?: boolean,
+    allowMultiple?: boolean;
+    onBlur: (value: any) => void;
 };
 
 export class D2TrueFalse extends Component<Props> {
@@ -32,7 +33,6 @@ export class D2TrueFalse extends Component<Props> {
         const { allowMultiple, ...passOnProps } = this.props;
         return (
             <div>
-                { /* $FlowFixMe */ }
                 <SelectBoxes
                     {...passOnProps}
                     optionSet={this.optionSet}

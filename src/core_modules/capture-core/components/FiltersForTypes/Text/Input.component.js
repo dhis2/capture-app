@@ -22,7 +22,6 @@ class InputPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2TextField
                 onKeyPress={this.handleKeyPress}
-                fullWidth
                 placeholder={i18n.t('Contains text')}
                 {...passOnProps}
             />

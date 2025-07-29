@@ -46,4 +46,4 @@ export const ComposedRegUnitSelector =
                 ),
             ),
         ),
-    );
+    ) as any;

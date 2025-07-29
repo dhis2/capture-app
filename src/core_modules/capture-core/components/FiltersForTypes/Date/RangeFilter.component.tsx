@@ -50,7 +50,7 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class RangeFilterPlain extends Component<Props> {
-    endD2TextFieldInstance: D2TextField;
+    endD2TextFieldInstance: D2TextField | null = null
 
     getUpdatedValue(valuePart: { [key: string]: string | null }) {
         const valueObject = {
@@ -64,7 +64,7 @@ class RangeFilterPlain extends Component<Props> {
     }
 
     handleEnterKeyInStart = () => {
-        this.endD2TextFieldInstance.focus();
+        this.endD2TextFieldInstance?.focus();
     };
 
     handleFieldBlur = (value: { [key: string]: string | null }) => {

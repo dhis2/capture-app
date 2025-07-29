@@ -63,4 +63,4 @@ const MultiSelectFieldComponentPlain = (props: Props & WithStyles<typeof styles>
     );
 };
 
-export const MultiSelectField = compose(withStyles(styles), withFocusHandler())(MultiSelectFieldComponentPlain);
+export const MultiSelectField = compose(withStyles(styles), withFocusHandler())(MultiSelectFieldComponentPlain) as any;

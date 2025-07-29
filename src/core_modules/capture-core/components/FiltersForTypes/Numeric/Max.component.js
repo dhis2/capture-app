@@ -38,7 +38,6 @@ class MaxNumericFilterPlain extends Component<Props> {
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Max')}
-                    fullWidth
                     {...passOnProps}
                 />
                 <div className={errorClass}>
