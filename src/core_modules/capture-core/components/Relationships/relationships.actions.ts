@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../actions/actions.utils';
 import type { Relationship } from './relationships.types';
 
@@ -20,4 +19,3 @@ export const updateRelationship = (key: string, updatedRelationship: Relationshi
 
 export const removeRelationship = (key: string, relationshipClientId: string) =>
     actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ key, relationshipClientId });
-

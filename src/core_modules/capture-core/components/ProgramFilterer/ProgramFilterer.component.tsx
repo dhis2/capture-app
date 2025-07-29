@@ -1,23 +1,15 @@
-// @flow
 import * as React from 'react';
 import { pipe } from 'capture-core-utils';
 import { programCollection } from '../../metaDataMemoryStores';
 import type { Program } from '../../metaData';
+import type { ProgramFiltererProps } from './ProgramFilterer.types';
 
-type Props = {
-    orgUnitIds: ?Array<string>,
-    baselineFilter: (program: Program) => boolean,
-    children: (programs: Array<Program>, isFiltered: boolean, passOnProps: Object) => React.Node,
-};
-
-// Filter programs based on organisation units and a baseline filter. Uses a render prop for children.
-export class ProgramFilterer extends React.Component<Props> {
+export class ProgramFilterer extends React.Component<ProgramFiltererProps> {
     static isBeingFiltered(basePrograms: Array<Program>, filteredPrograms: Array<Program>) {
         return basePrograms.length !== filteredPrograms.length;
     }
 
-    programs: Array<Program>;
-    constructor(props: Props) {
+    constructor(props: ProgramFiltererProps) {
         super(props);
         this.programs = Array.from(programCollection.values());
     }
@@ -26,6 +18,12 @@ export class ProgramFilterer extends React.Component<Props> {
         const { baselineFilter } = this.props;
         return programs
             .filter(program => baselineFilter(program));
+    }
+
+    getPrograms(basePrograms: Array<Program>) {
+        return pipe(
+            this.filterPrograms,
+        )(basePrograms);
     }
 
     filterPrograms = (programs: Array<Program>): Array<Program> => {
@@ -37,11 +35,7 @@ export class ProgramFilterer extends React.Component<Props> {
             );
     }
 
-    getPrograms(basePrograms: Array<Program>) {
-        return pipe(
-            this.filterPrograms,
-        )(basePrograms);
-    }
+    programs: Array<Program>;
 
     render() {
         const { orgUnitIds, baselineFilter, children, ...passOnProps } = this.props;
