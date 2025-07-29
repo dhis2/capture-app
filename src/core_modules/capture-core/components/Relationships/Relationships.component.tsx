@@ -1,16 +1,14 @@
-// @flow
-
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { IconButton } from 'capture-ui';
 import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: any) => ({
     relationship: {
         display: 'flex',
         alignItems: 'center',
@@ -73,37 +71,25 @@ const fromNames = {
     PROGRAM_STAGE_INSTANCE: i18n.t('This event'),
 };
 
-type Props = {
-    classes: {
-        container: string,
-        relationshipsContainer: string,
-        relationship: string,
-        relationshipDetails: string,
-        relationshipTypeName: string,
-        relationshipEntities: string,
-        arrowIcon: string,
-        relationshipActions: string,
-        relationshipHighlight: string,
-        tooltip: string,
-        deleteButton: string,
-        addButtonContainer: string,
-    },
-    relationships: Array<Relationship>,
-    highlightRelationshipId?: ?string,
-    writableRelationshipTypes: Array<RelationshipType>,
-    entityAccess: { read: boolean, write: boolean },
-    onRemoveRelationship: (relationshipClientId: string) => void,
-    onOpenAddRelationship: () => void,
-    onRenderConnectedEntity: (entity: Entity) => React.Node,
-    currentEntityId: string,
-    smallMainButton: boolean,
+type PlainProps = {
+    relationships: Array<Relationship>;
+    highlightRelationshipId?: string;
+    writableRelationshipTypes: Array<RelationshipType>;
+    entityAccess: { read: boolean; write: boolean };
+    onRemoveRelationship: (relationshipClientId: string) => void;
+    onOpenAddRelationship: () => void;
+    onRenderConnectedEntity: (entity: Entity) => React.ReactNode;
+    currentEntityId: string;
+    smallMainButton: boolean;
+    relationshipsRef: (instance: any) => void;
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 class RelationshipsPlain extends React.Component<Props> {
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
-
 
     shouldComponentUpdate(nextProps: Props) {
         const changes = Object.keys(nextProps).filter(propName => nextProps[propName] !== this.props[propName]);
@@ -119,8 +105,29 @@ class RelationshipsPlain extends React.Component<Props> {
         return numberOfChanges > 0;
     }
 
-    renderRelationships = () => this.props.relationships.map(relationship => relationship &&
-        this.renderRelationship(relationship))
+    getEntityName = (entity: Entity) => {
+        const { onRenderConnectedEntity } = this.props;
+
+        if (entity.id === this.props.currentEntityId) {
+            return fromNames[entity.type];
+        }
+
+        return onRenderConnectedEntity ? onRenderConnectedEntity(entity) : entity.name;
+    }
+
+    shouldHighlightRelationship = (relationship: Relationship) => {
+        const highlightRelationshipId = this.props.highlightRelationshipId;
+        return highlightRelationshipId && highlightRelationshipId === relationship.clientId;
+    }
+
+    canDelete = (relationship: Relationship) => {
+        const { entityAccess, writableRelationshipTypes } = this.props;
+        return (
+            relationship.from.id === this.props.currentEntityId &&
+            entityAccess.write &&
+            writableRelationshipTypes.some(rt => rt.id === relationship.relationshipType.id && rt.access.data.write)
+        );
+    }
 
     renderRelationship = (relationship: Relationship) => {
         const { classes, onRemoveRelationship } = this.props;
@@ -161,32 +168,10 @@ class RelationshipsPlain extends React.Component<Props> {
         );
     }
 
-    shouldHighlightRelationship = (relationship: Relationship) => {
-        const highlightRelationshipId = this.props.highlightRelationshipId;
-        return highlightRelationshipId && highlightRelationshipId === relationship.clientId;
-    }
-
-    getEntityName = (entity: Entity) => {
-        const { onRenderConnectedEntity } = this.props;
-
-        if (entity.id === this.props.currentEntityId) {
-            return fromNames[entity.type];
-        }
-
-        return onRenderConnectedEntity ? onRenderConnectedEntity(entity) : entity.name;
-    }
-
-    canDelete = (relationship: Relationship) => {
-        const { entityAccess, writableRelationshipTypes } = this.props;
-        return (
-            relationship.from.id === this.props.currentEntityId &&
-            entityAccess.write &&
-            writableRelationshipTypes.some(rt => rt.id === relationship.relationshipType.id && rt.access.data.write)
-        );
-    }
+    renderRelationships = () => this.props.relationships.map(relationship => relationship &&
+        this.renderRelationship(relationship))
 
     render() {
-        // $FlowFixMe[prop-missing] automated comment
         const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (
@@ -219,4 +204,4 @@ class RelationshipsPlain extends React.Component<Props> {
     }
 }
 
-export const Relationships = withStyles(getStyles)(RelationshipsPlain);
+export const Relationships = withStyles(styles)(RelationshipsPlain);
