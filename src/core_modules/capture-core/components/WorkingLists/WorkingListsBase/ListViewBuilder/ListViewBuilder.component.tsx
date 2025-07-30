@@ -1,4 +1,3 @@
-// @flow
 import React, { useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -7,7 +6,6 @@ import { ListViewBuilderContext } from '../workingListsBase.context';
 import type { Props } from './listViewBuilder.types';
 
 
-// eslint-disable-next-line complexity
 export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: Props) => {
     const context = useContext(ListViewBuilderContext);
     if (!context) {

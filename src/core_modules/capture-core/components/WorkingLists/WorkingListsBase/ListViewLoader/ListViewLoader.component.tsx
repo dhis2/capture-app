@@ -1,4 +1,3 @@
-// @flow
 import React, { memo, useCallback, useContext, useEffect, useRef } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import { ListViewUpdater } from '../ListViewUpdater';

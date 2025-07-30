@@ -19,10 +19,10 @@ export type TrackerWorkingListsViewMenuSetupOutputProps = {|
     onLoadView: LoadTeiView,
     onUpdateList: UpdateList,
     customUpdateTrigger: ?string,
-    allRowsAreSelected: ?boolean,
+    allRowsAreSelected: boolean,
     selectedRows: { [key: string]: boolean },
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
-    selectionInProgress: ?boolean,
+    selectionInProgress: boolean,
     bulkActionBarComponent: React$Element<any>,
 |};

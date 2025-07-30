@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect, useRef, useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';

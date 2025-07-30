@@ -102,8 +102,7 @@ type OptionalExtractedProps = {
     viewPreloaded: boolean,
 };
 
-type RestProps = Omit<WorkingListsOutputProps & OptionalExtractedProps,
-    keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = WorkingListsOutputProps & OptionalExtractedProps & ExtractedProps;
 
 export type Props = WorkingListsOutputProps;
 

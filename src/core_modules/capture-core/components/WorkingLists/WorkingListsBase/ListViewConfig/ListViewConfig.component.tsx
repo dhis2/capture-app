@@ -1,4 +1,3 @@
-// @flow
 import React, { useContext } from 'react';
 import { ListViewConfigContext } from '../workingListsBase.context';
 import { ListViewConfigMenuContent } from '../ListViewConfigMenuContent';

@@ -1,4 +1,3 @@
-// @flow
 import type {
     ColumnConfigs,
     Categories,
@@ -8,21 +7,17 @@ import type {
 import type { FiltersData } from '../../../ListView';
 import type { ListViewConfigMenuContentOutputProps } from '../ListViewConfigMenuContent';
 
-type ExtractedProps = {|
+type ExtractedProps = {
     currentTemplate: WorkingListTemplate,
     programId: string,
     programStageId?: string,
-|};
+};
 
-type RestProps = $Rest<ListViewConfigMenuContentOutputProps, ExtractedProps>;
+type RestProps = ListViewConfigMenuContentOutputProps & ExtractedProps;
 
-export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
-|};
+export type Props = RestProps & ExtractedProps;
 
-export type ListViewLoaderOutputProps = {|
-    ...RestProps,
+export type ListViewLoaderOutputProps = RestProps & {
     sortById: string,
     sortByDirection: string,
     filters: FiltersData,
@@ -33,4 +28,4 @@ export type ListViewLoaderOutputProps = {|
     categories?: Categories,
     onUpdateList: UpdateList,
     viewLoadedOnFirstRun: boolean,
-|};
+};

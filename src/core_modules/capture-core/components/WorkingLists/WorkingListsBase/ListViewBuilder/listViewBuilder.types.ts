@@ -1,21 +1,17 @@
-// @flow
 import type { ColumnConfigs } from '../workingListsBase.types';
 import type { CustomMenuContents, StickyFilters } from '../../../ListView';
 import type { ListViewUpdaterOutputProps } from '../ListViewUpdater';
 
-type ExtractedProps = {|
+type ExtractedProps = {
     columns: ColumnConfigs,
     customListViewMenuContents?: CustomMenuContents,
     stickyFilters?: StickyFilters,
-|};
+};
 
-type OptionalExtractedProps = {|
+type OptionalExtractedProps = {
     stickyFilters: StickyFilters,
-|};
+};
 
-type RestProps = $Rest<ListViewUpdaterOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
+type RestProps = ListViewUpdaterOutputProps & OptionalExtractedProps & ExtractedProps;
 
-export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
-|};
+export type Props = RestProps & ExtractedProps;
