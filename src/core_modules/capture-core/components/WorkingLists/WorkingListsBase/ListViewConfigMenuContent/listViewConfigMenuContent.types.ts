@@ -21,7 +21,7 @@ type OptionalExtractedProps = {
     templateSharingType: string,
 };
 
-type RestProps = Omit<ListViewConfigOutputProps & OptionalExtractedProps, keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = OptionalExtractedProps & ListViewConfigOutputProps & ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

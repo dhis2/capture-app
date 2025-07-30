@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { ListViewContextBuilderPassOnProps } from '../ContextBuilder';
+
 import type {
     Columns,
     CustomMenuContents,
@@ -25,7 +26,7 @@ type ComponentProps = {
     onClickListRow: SelectRow;
     onRowSelect: (id: string) => void;
     onSelectAll: (rows: Array<string>) => void;
-    isSelectionInProgress?: boolean;
+    isSelectionInProgress: boolean;
     bulkActionBarComponent: ReactNode;
 };
 

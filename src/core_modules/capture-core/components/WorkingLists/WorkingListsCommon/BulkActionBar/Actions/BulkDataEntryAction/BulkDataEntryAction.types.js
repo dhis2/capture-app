@@ -3,5 +3,5 @@
 export type Props = {
     programId: string,
     onOpenBulkDataEntryPlugin: () => void,
-    selectionInProgress: ?boolean
+    selectionInProgress: boolean
 };

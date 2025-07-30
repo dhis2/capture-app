@@ -18,7 +18,7 @@ type OptionalExtractedProps = {
     categories: Categories,
 };
 
-type RestProps = ListViewLoaderOutputProps & OptionalExtractedProps & ExtractedProps & OptionalExtractedProps;
+type RestProps = ListViewLoaderOutputProps & OptionalExtractedProps & ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 
@@ -28,4 +28,5 @@ export type ListViewUpdaterOutputProps = RestProps & {
     sortByDirection: string,
     currentPage: number,
     rowsPerPage: number,
+    rowIdKey: string,
 };

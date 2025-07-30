@@ -13,7 +13,7 @@ type ExtractedProps = {
     programStageId?: string,
 };
 
-type RestProps = Omit<ListViewConfigMenuContentOutputProps, keyof ExtractedProps>;
+type RestProps = ListViewConfigMenuContentOutputProps & ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

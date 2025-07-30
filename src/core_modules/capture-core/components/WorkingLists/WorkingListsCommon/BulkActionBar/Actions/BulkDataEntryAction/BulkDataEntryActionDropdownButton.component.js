@@ -18,7 +18,7 @@ const styles = {
 type Props = {
     programId: string,
     onOpenBulkDataEntryPlugin: () => void,
-    selectionInProgress: ?boolean,
+    selectionInProgress: boolean,
 };
 
 const BulkDataEntryActionDropdownButtonPlain = ({

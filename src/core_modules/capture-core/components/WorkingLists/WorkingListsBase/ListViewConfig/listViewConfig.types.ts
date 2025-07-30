@@ -5,7 +5,7 @@ type ExtractedProps = {
     children: (currentListIsModified: boolean) => ReactNode;
 };
 
-type RestProps = Omit<TemplatesManagerOutputProps, keyof ExtractedProps>;
+type RestProps = TemplatesManagerOutputProps & ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

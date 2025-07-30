@@ -35,8 +35,8 @@ export type Props = Readonly<{
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
     selectedRows: { [key: string]: boolean },
-    allRowsAreSelected: boolean | null,
-    selectionInProgress: boolean | null,
+    allRowsAreSelected: boolean,
+    selectionInProgress: boolean,
     bulkActionBarComponent: ReactElement<any>,
     children: ReactNode,
 }>;

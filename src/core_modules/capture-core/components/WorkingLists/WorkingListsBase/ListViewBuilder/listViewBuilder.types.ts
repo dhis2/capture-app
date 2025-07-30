@@ -12,7 +12,6 @@ type OptionalExtractedProps = {
     stickyFilters: StickyFilters,
 };
 
-type RestProps = Omit<ListViewUpdaterOutputProps & OptionalExtractedProps,
-    keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = ListViewUpdaterOutputProps & OptionalExtractedProps & ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;

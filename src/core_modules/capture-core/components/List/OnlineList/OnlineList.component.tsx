@@ -46,7 +46,7 @@ type Props = {
     onSelectAll: (ids: Array<string>) => void;
     onRowSelect: (id: string) => void;
     allRowsAreSelected: boolean;
-    isSelectionInProgress: boolean | null;
+    isSelectionInProgress: boolean;
     sortById: string;
     showSelectCheckBox: boolean | null;
     sortByDirection: string;
