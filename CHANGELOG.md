@@ -1,3 +1,10 @@
+## [103.2.1](https://github.com/dhis2/capture-app/compare/v103.2.0...v103.2.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15155] Filter Range Search Values before Prepopulation ([#4245](https://github.com/dhis2/capture-app/issues/4245)) ([4b27128](https://github.com/dhis2/capture-app/commit/4b27128dbb3c975f13fa82ce28aa1c5789f26d51))
+
 # [103.2.0](https://github.com/dhis2/capture-app/compare/v103.1.3...v103.2.0) (2025-07-30)
 
 
