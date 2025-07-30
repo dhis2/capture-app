@@ -4,12 +4,12 @@ import type {
 } from '../../workingListsBase.types';
 
 export type Props = Readonly<{
-    rowsPerPage?: number;
-    currentPage?: number;
-    onCancelUpdateList?: CancelUpdateList;
-    customUpdateTrigger?: any;
-    forceUpdateOnMount?: boolean;
-    dirtyList: boolean;
-    children: ReactNode;
-    loadedOrgUnitId?: string;
+    rowsPerPage?: number,
+    currentPage?: number,
+    onCancelUpdateList?: CancelUpdateList,
+    customUpdateTrigger?: any,
+    forceUpdateOnMount?: boolean,
+    dirtyList: boolean,
+    children: ReactNode,
+    loadedOrgUnitId?: string,
 }>;

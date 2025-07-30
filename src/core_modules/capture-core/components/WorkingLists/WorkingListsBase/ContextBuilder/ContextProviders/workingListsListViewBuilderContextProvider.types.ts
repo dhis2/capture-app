@@ -16,27 +16,27 @@ import type {
 } from '../../../../ListView';
 
 export type Props = Readonly<{
-    updating: boolean;
-    updatingWithDialog: boolean;
-    dataSource?: DataSource;
-    onClickListRow: SelectRow;
-    onSortList: Sort;
-    onSetListColumnOrder: SetColumnOrder;
-    customRowMenuContents?: CustomRowMenuContents;
-    customTopBarActions?: CustomTopBarActions;
-    onUpdateFilter: UpdateFilter;
-    onClearFilter: ClearFilter;
-    onRemoveFilter: RemoveFilter;
-    onSelectRestMenuItem: SelectRestMenuItem;
-    onChangePage: ChangePage;
-    onChangeRowsPerPage: ChangeRowsPerPage;
-    stickyFilters?: StickyFilters;
-    programStageId?: string;
-    onRowSelect: (id: string) => void;
-    onSelectAll: (rows: Array<string>) => void;
-    selectedRows: { [key: string]: boolean };
-    selectionInProgress: boolean | null | undefined;
-    allRowsAreSelected: boolean | null | undefined;
-    bulkActionBarComponent: ReactElement<any>;
-    children: ReactNode;
+    updating: boolean,
+    updatingWithDialog: boolean,
+    dataSource?: DataSource,
+    onClickListRow: SelectRow,
+    onSortList: Sort,
+    onSetListColumnOrder: SetColumnOrder,
+    customRowMenuContents?: CustomRowMenuContents,
+    customTopBarActions?: CustomTopBarActions,
+    onUpdateFilter: UpdateFilter,
+    onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    stickyFilters?: StickyFilters,
+    programStageId?: string,
+    onRowSelect: (id: string) => void,
+    onSelectAll: (rows: Array<string>) => void,
+    selectedRows: { [key: string]: boolean },
+    allRowsAreSelected: boolean | null | undefined,
+    selectionInProgress: boolean | null | undefined,
+    bulkActionBarComponent: ReactElement<any>,
+    children: ReactNode,
 }>;

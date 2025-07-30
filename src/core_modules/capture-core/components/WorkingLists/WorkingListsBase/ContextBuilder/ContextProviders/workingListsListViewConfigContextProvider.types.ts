@@ -6,9 +6,9 @@ import type {
 } from '../../workingListsBase.types';
 
 export type Props = Readonly<{
-    currentViewHasTemplateChanges?: boolean;
-    onAddTemplate?: AddTemplate;
-    onUpdateTemplate?: UpdateTemplate;
-    onDeleteTemplate?: DeleteTemplate;
-    children: ReactNode;
+    currentViewHasTemplateChanges?: boolean,
+    onAddTemplate?: AddTemplate,
+    onUpdateTemplate?: UpdateTemplate,
+    onDeleteTemplate?: DeleteTemplate,
+    children: ReactNode,
 }>;

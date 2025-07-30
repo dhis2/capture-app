@@ -34,72 +34,72 @@ import type {
 } from '../workingListsBase.types';
 
 type ExtractedProps = Readonly<{
-    categories?: Categories;
-    columns: ColumnConfigs;
-    currentPage?: number;
-    currentTemplate?: WorkingListTemplate;
-    currentViewHasTemplateChanges?: boolean;
-    customRowMenuContents?: CustomRowMenuContents;
-    customTopBarActions?: CustomTopBarActions;
-    customUpdateTrigger?: any;
-    dataSource?: DataSource;
-    filters?: FiltersData;
-    forceUpdateOnMount?: boolean;
-    loadedContext?: LoadedContext;
-    loading: boolean;
-    loadViewError?: string;
-    onAddTemplate?: AddTemplate;
-    onCancelLoadView?: CancelLoadView;
-    onCancelUpdateList?: CancelUpdateList;
-    onChangePage: ChangePage;
-    onChangeRowsPerPage: ChangeRowsPerPage;
-    onClearFilter: ClearFilter;
-    onRemoveFilter: RemoveFilter;
-    onDeleteTemplate?: DeleteTemplate;
-    onLoadView: LoadView;
-    onUpdateFilter: UpdateFilter;
-    onClickListRow: SelectRow;
-    onSelectRestMenuItem: SelectRestMenuItem;
-    onSelectTemplate: SelectTemplate;
-    onSetListColumnOrder: SetColumnOrder;
-    onSortList: Sort;
-    onUnloadingContext?: UnloadingContext;
-    onUpdateList: UpdateList;
-    onUpdateTemplate?: UpdateTemplate;
-    orgUnitId: string;
-    rowsPerPage?: number;
-    sortByDirection?: string;
-    sortById?: string;
-    stickyFilters?: StickyFilters;
-    programStageId?: string;
-    updating: boolean;
-    updatingWithDialog: boolean;
-    templates?: WorkingListTemplates;
-    viewPreloaded?: boolean;
-    bulkActionBarComponent: ReactNode;
+    categories?: Categories,
+    columns: ColumnConfigs,
+    currentPage?: number,
+    currentTemplate?: WorkingListTemplate,
+    currentViewHasTemplateChanges?: boolean,
+    customRowMenuContents?: CustomRowMenuContents,
+    customTopBarActions?: CustomTopBarActions,
+    customUpdateTrigger?: any,
+    dataSource?: DataSource,
+    filters?: FiltersData,
+    forceUpdateOnMount?: boolean,
+    loadedContext?: LoadedContext,
+    loading: boolean,
+    loadViewError?: string,
+    onAddTemplate?: AddTemplate,
+    onCancelLoadView?: CancelLoadView,
+    onCancelUpdateList?: CancelUpdateList,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
+    onDeleteTemplate?: DeleteTemplate,
+    onLoadView: LoadView,
+    onUpdateFilter: UpdateFilter,
+    onClickListRow: SelectRow,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onSelectTemplate: SelectTemplate,
+    onSetListColumnOrder: SetColumnOrder,
+    onSortList: Sort,
+    onUnloadingContext?: UnloadingContext,
+    onUpdateList: UpdateList,
+    onUpdateTemplate?: UpdateTemplate,
+    orgUnitId: string,
+    rowsPerPage?: number,
+    sortByDirection?: string,
+    sortById?: string,
+    stickyFilters?: StickyFilters,
+    programStageId?: string,
+    updating: boolean,
+    updatingWithDialog: boolean,
+    templates?: WorkingListTemplates,
+    viewPreloaded?: boolean,
+    bulkActionBarComponent: ReactNode,
 }>;
 
 type OptionalExtractedProps = {
-    categories: Categories;
-    currentPage: number;
-    currentTemplate: WorkingListTemplate;
-    currentViewHasTemplateChanges: boolean;
-    customRowMenuContents: CustomRowMenuContents;
-    customUpdateTrigger: any;
-    dataSource: DataSource;
-    filters: FiltersData;
-    forceUpdateOnMount: boolean;
-    loadedContext: LoadedContext;
-    loadViewError: string;
-    onCancelLoadView: CancelLoadView;
-    onCancelUpdateList: CancelUpdateList;
-    onUnloadingContext: UnloadingContext;
-    rowsPerPage: number;
-    sortByDirection: string;
-    sortById: string;
-    stickyFilters: StickyFilters;
-    templates: WorkingListTemplates;
-    viewPreloaded: boolean;
+    categories: Categories,
+    currentPage: number,
+    currentTemplate: WorkingListTemplate,
+    currentViewHasTemplateChanges: boolean,
+    customRowMenuContents: CustomRowMenuContents,
+    customUpdateTrigger: any,
+    dataSource: DataSource,
+    filters: FiltersData,
+    forceUpdateOnMount: boolean,
+    loadedContext: LoadedContext,
+    loadViewError: string,
+    onCancelLoadView: CancelLoadView,
+    onCancelUpdateList: CancelUpdateList,
+    onUnloadingContext: UnloadingContext,
+    rowsPerPage: number,
+    sortByDirection: string,
+    sortById: string,
+    stickyFilters: StickyFilters,
+    templates: WorkingListTemplates,
+    viewPreloaded: boolean,
 };
 
 type RestProps = Omit<WorkingListsOutputProps & OptionalExtractedProps,
@@ -108,7 +108,7 @@ type RestProps = Omit<WorkingListsOutputProps & OptionalExtractedProps,
 export type Props = WorkingListsOutputProps;
 
 export type ContextBuilderOutputProps = RestProps & {
-    dirtyTemplates: boolean;
-    loadedProgramIdForTemplates?: string;
-    templates?: WorkingListTemplates;
+    dirtyTemplates: boolean,
+    loadedProgramIdForTemplates?: string,
+    templates?: WorkingListTemplates,
 };
