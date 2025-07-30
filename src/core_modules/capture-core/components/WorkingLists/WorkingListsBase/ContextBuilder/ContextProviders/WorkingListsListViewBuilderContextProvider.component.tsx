@@ -1,6 +1,7 @@
-// @flow
 import React, { useMemo } from 'react';
-import { ListViewBuilderContext } from '../../workingListsBase.context';
+import {
+    ListViewBuilderContext,
+} from '../../workingListsBase.context';
 import type { Props } from './workingListsListViewBuilderContextProvider.types';
 
 export const WorkingListsListViewBuilderContextProvider = ({

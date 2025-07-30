@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import {
     ListViewLoaderContext,

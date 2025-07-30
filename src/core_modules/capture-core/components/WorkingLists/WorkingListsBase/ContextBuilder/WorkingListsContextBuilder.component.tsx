@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect, useMemo, useRef } from 'react';
 import {
     WorkingListsListViewBuilderContextProvider,

@@ -1,0 +1,42 @@
+import type { ReactNode, ReactElement } from 'react';
+import type {
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    CustomRowMenuContents,
+    CustomTopBarActions,
+    DataSource,
+    RemoveFilter,
+    SelectRestMenuItem,
+    SelectRow,
+    SetColumnOrder,
+    Sort,
+    StickyFilters,
+    UpdateFilter,
+} from '../../../../ListView';
+
+export type Props = Readonly<{
+    updating: boolean;
+    updatingWithDialog: boolean;
+    dataSource?: DataSource;
+    onClickListRow: SelectRow;
+    onSortList: Sort;
+    onSetListColumnOrder: SetColumnOrder;
+    customRowMenuContents?: CustomRowMenuContents;
+    customTopBarActions?: CustomTopBarActions;
+    onUpdateFilter: UpdateFilter;
+    onClearFilter: ClearFilter;
+    onRemoveFilter: RemoveFilter;
+    onSelectRestMenuItem: SelectRestMenuItem;
+    onChangePage: ChangePage;
+    onChangeRowsPerPage: ChangeRowsPerPage;
+    stickyFilters?: StickyFilters;
+    programStageId?: string;
+    onRowSelect: (id: string) => void;
+    onSelectAll: (rows: Array<string>) => void;
+    selectedRows: { [key: string]: boolean };
+    selectionInProgress: boolean | null | undefined;
+    allRowsAreSelected: boolean | null | undefined;
+    bulkActionBarComponent: ReactElement<any>;
+    children: ReactNode;
+}>;
