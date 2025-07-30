@@ -1,14 +1,12 @@
 // @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
-import { pipe } from 'capture-core-utils';
-import { convertClientToServer, convertFormToClient } from '../../../../converters';
+import { convertClientToServer, convertClientToView } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 import { dateUtils } from '../../../../rules/converters';
-import { convertIsoToLocalCalendar } from '../../../converters/date';
 
 export const isValidPeriod = (
     reportDate: string,
-    expiryPeriod?: {
+    expiryPeriod?: ?{
         expiryPeriodType: ?string,
         expiryDays: ?number,
     },
@@ -23,8 +21,7 @@ export const isValidPeriod = (
         return { isWithinValidPeriod: true, firstValidDate: undefined };
     }
 
-    const convertFn = pipe(convertFormToClient, convertClientToServer);
-    const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
+    const reportDateServer = ((convertClientToServer(reportDate, dataElementTypes.DATE): any): string);
     const today = dateUtils.getToday();
 
     const threshold = expiryDays
@@ -40,7 +37,7 @@ export const isValidPeriod = (
     const firstValidDateServer = thresholdPeriod.startDate;
 
     const isWithinValidPeriod = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
-    const firstValidDate = convertIsoToLocalCalendar(firstValidDateServer);
+    const firstValidDate = convertClientToView(firstValidDateServer, dataElementTypes.DATE);
 
     return { isWithinValidPeriod, firstValidDate };
 };

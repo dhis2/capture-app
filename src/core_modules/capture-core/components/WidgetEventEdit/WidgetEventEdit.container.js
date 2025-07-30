@@ -8,7 +8,6 @@ import {
     spacers,
 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
 import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -19,6 +18,7 @@ import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
+import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
 
 const styles = {
     container: {
@@ -98,6 +98,8 @@ const WidgetEventEditPlain = ({
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
+    const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
@@ -123,6 +125,7 @@ const WidgetEventEditPlain = ({
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
+                            occurredAt={occurredAt}
                         />
                     }
                     noncollapsible
@@ -154,6 +157,7 @@ const WidgetEventEditPlain = ({
                                     stageId={stageId}
                                     teiId={teiId}
                                     enrollmentId={enrollmentId}
+                                    expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
                                     onCancelEditEvent={onCancelEditEvent}

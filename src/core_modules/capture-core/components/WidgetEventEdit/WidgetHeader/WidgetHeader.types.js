@@ -8,6 +8,7 @@ export type PlainProps = {|
     programId: string,
     orgUnit: OrgUnit,
     setChangeLogIsOpen: (toggle: boolean) => void,
+    occurredAt: string,
 |};
 
 export type Props = {|
