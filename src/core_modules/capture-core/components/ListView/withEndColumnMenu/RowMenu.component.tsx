@@ -43,7 +43,8 @@ export const RowMenu = (props: Props) => {
                 <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
                         placement="right"
-                        reference={anchorRef.current || undefined}
+                        // @ts-expect-error - keeping original functionality as before ts rewrite
+                        reference={anchorRef}
                         data-test="row-menu-popper"
                     >
                         <FlyoutMenu>
