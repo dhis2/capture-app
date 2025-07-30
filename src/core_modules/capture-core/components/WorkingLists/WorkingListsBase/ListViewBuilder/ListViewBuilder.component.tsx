@@ -1,4 +1,3 @@
-// @flow
 import React, { useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -7,8 +6,8 @@ import { ListViewBuilderContext } from '../workingListsBase.context';
 import type { Props } from './listViewBuilder.types';
 
 
-// eslint-disable-next-line complexity
-export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: Props) => {
+export const ListViewBuilder = (props: Props) => {
+    const { customListViewMenuContents, stickyFilters, ...passOnProps } = props;
     const context = useContext(ListViewBuilderContext);
     if (!context) {
         throw Error('missing ListViewBuilderContext');
@@ -23,7 +22,6 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
         allRowsAreSelected,
         onSortList,
         onSetListColumnOrder,
-        stickyFilters,
         ...passOnContext
     } = context;
 
@@ -41,7 +39,7 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
             {...passOnContext}
             dataSource={dataSource}
             selectedRows={selectedRows}
-            allRowsAreSelected={allRowsAreSelected}
+            allRowsAreSelected={allRowsAreSelected ?? false}
             onClickListRow={onClickListRow}
             onRowSelect={onRowSelect}
             onSelectAll={onSelectAll}

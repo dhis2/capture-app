@@ -1,4 +1,3 @@
-// @flow
 import React, { memo, useCallback, useContext, useEffect, useRef } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import { ListViewUpdater } from '../ListViewUpdater';
@@ -139,12 +138,12 @@ export const ListViewLoader = memo<Props>((props: Props) => {
     return (
         <EventListUpdaterWithLoadingIndicator
             {...passOnProps}
-            sortById={sortById}
-            sortByDirection={sortByDirection}
-            filters={filters}
+            sortById={sortById ?? ''}
+            sortByDirection={sortByDirection ?? ''}
+            filters={filters ?? {}}
             columns={columns}
             programId={programId}
-            programStageId={programStageId}
+            programStageId={programStageId ?? ''}
             orgUnitId={orgUnitId}
             categories={categories}
             ready={!triggerLoad && !loading}

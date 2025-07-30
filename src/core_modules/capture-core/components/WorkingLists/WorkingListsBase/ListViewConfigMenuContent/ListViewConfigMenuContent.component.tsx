@@ -1,6 +1,5 @@
-// @flow
-import React, { useState, useRef, useCallback, useMemo, type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ListViewLoader } from '../ListViewLoader';
 import { TemplateMaintenance, dialogModes } from '../TemplateMaintenance';
@@ -12,7 +11,9 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const ListViewConfigMenuContentPlain = (props: Props) => {
+type PlainProps = Props & WithStyles<typeof getStyles>;
+
+const ListViewConfigMenuContentPlain = (props: PlainProps) => {
     const {
         currentTemplate,
         onAddTemplate,
@@ -25,38 +26,37 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
         templateSharingType,
         ...passOnProps
     } = props;
-    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState(null);
-    const templateMaintenanceInstance = useRef(null);
+    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<string | null>(null);
+    const templateMaintenanceInstance = useRef<any>(null);
 
     const handleClose = useCallback(() => {
         setMaintenanceDialogOpenMode(null);
     }, []);
 
-    const handleUpdateTemplate = useCallback((...args) => {
+    const handleUpdateTemplate = useCallback((template: any) => {
         setMaintenanceDialogOpenMode(null);
-        onUpdateTemplate && onUpdateTemplate(...args);
+        onUpdateTemplate?.(template);
     }, [onUpdateTemplate]);
 
-    const handleAddTemplate = useCallback((...args) => {
+    const handleAddTemplate = useCallback((name: string) => {
         setMaintenanceDialogOpenMode(null);
-        onAddTemplate && onAddTemplate(...args);
+        onAddTemplate?.(name);
     }, [onAddTemplate]);
 
-    const handleDeleteTemplate = useCallback((...args) => {
+    const handleDeleteTemplate = useCallback((template: any) => {
         setMaintenanceDialogOpenMode(null);
-        onDeleteTemplate && onDeleteTemplate(...args);
+        onDeleteTemplate?.(template);
     }, [onDeleteTemplate]);
 
-    const handleSetSharingSettings = useCallback((...args) => {
+    const handleSetSharingSettings = useCallback((sharingSettings: any, templateId: string) => {
         setMaintenanceDialogOpenMode(null);
-        onSetTemplateSharingSettings && onSetTemplateSharingSettings(...args);
+        onSetTemplateSharingSettings?.(sharingSettings, templateId);
     }, [onSetTemplateSharingSettings]);
 
     const getSaveItem = useCallback(() => ({
         key: 'save',
         clickHandler: () => {
-            // $FlowFixMe[incompatible-use] automated comment
-            templateMaintenanceInstance.current.handleUpdateTemplate();
+            templateMaintenanceInstance.current?.handleUpdateTemplate();
         },
         element: i18n.t('Update view'),
     }), []);
@@ -107,8 +107,8 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
 
     // eslint-disable-next-line complexity
     const customListViewMenuContentsExtended = useMemo(() => {
-        const currentViewContents = [];
-        const savedViewContents = [];
+        const currentViewContents: any[] = [];
+        const savedViewContents: any[] = [];
 
         const { access, isDefault, notPreserved, name } = currentTemplate;
 
@@ -159,7 +159,6 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
                 customListViewMenuContents={customListViewMenuContentsExtended}
             />
             <TemplateMaintenance
-                // $FlowFixMe[incompatible-type] automated comment
                 ref={templateMaintenanceInstance}
                 onClose={handleClose}
                 mode={maintenanceDialogOpenMode}
@@ -174,5 +173,4 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
     );
 };
 
-export const ListViewConfigMenuContent: ComponentType<$Diff<Props, CssClasses>> =
-    withStyles(getStyles)(ListViewConfigMenuContentPlain);
+export const ListViewConfigMenuContent = withStyles(getStyles)(ListViewConfigMenuContentPlain);

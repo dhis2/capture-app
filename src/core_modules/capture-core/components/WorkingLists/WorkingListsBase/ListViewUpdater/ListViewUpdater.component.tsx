@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect, useRef, useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -34,8 +33,8 @@ const useUpdateEffect = (callback, { forceFirstRunUpdate, filters, restDependenc
             }
         }
         return callback();
-    // https://github.com/facebook/create-react-app/issues/6880
-    // eslint-disable-next-line
+        // https://github.com/facebook/create-react-app/issues/6880
+        // eslint-disable-next-line
     }, useUpdateListMemoize([filters, forceFirstRunUpdate, ...restDependencies]));
 };
 // eslint-disable-next-line complexity
