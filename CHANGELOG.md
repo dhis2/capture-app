@@ -1,3 +1,10 @@
+# [103.2.0](https://github.com/dhis2/capture-app/compare/v103.1.3...v103.2.0) (2025-07-30)
+
+
+### Features
+
+* [DHIS2-7080] Expired Period Validation for Edit Events ([#4157](https://github.com/dhis2/capture-app/issues/4157)) ([40e8905](https://github.com/dhis2/capture-app/commit/40e8905b0ccb7f0ff85a694cc94f083d9e6ac71c))
+
 ## [103.1.3](https://github.com/dhis2/capture-app/compare/v103.1.2...v103.1.3) (2025-07-28)
 
 
