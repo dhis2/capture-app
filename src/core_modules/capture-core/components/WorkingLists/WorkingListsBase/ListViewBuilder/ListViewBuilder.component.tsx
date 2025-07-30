@@ -6,8 +6,7 @@ import { ListViewBuilderContext } from '../workingListsBase.context';
 import type { Props } from './listViewBuilder.types';
 
 
-export const ListViewBuilder = (props: Props) => {
-    const { customListViewMenuContents, stickyFilters, ...passOnProps } = props;
+export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: Props) => {
     const context = useContext(ListViewBuilderContext);
     if (!context) {
         throw Error('missing ListViewBuilderContext');
@@ -22,6 +21,7 @@ export const ListViewBuilder = (props: Props) => {
         allRowsAreSelected,
         onSortList,
         onSetListColumnOrder,
+        stickyFilters,
         ...passOnContext
     } = context;
 

@@ -35,22 +35,22 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
 
     const handleUpdateTemplate = useCallback((template: any) => {
         setMaintenanceDialogOpenMode(null);
-        onUpdateTemplate?.(template);
+        onUpdateTemplate && onUpdateTemplate(template);
     }, [onUpdateTemplate]);
 
     const handleAddTemplate = useCallback((name: string) => {
         setMaintenanceDialogOpenMode(null);
-        onAddTemplate?.(name);
+        onAddTemplate && onAddTemplate(name);
     }, [onAddTemplate]);
 
     const handleDeleteTemplate = useCallback((template: any) => {
         setMaintenanceDialogOpenMode(null);
-        onDeleteTemplate?.(template);
+        onDeleteTemplate && onDeleteTemplate(template);
     }, [onDeleteTemplate]);
 
     const handleSetSharingSettings = useCallback((sharingSettings: any, templateId: string) => {
         setMaintenanceDialogOpenMode(null);
-        onSetTemplateSharingSettings?.(sharingSettings, templateId);
+        onSetTemplateSharingSettings && onSetTemplateSharingSettings(sharingSettings, templateId);
     }, [onSetTemplateSharingSettings]);
 
     const getSaveItem = useCallback(() => ({
