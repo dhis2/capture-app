@@ -5,12 +5,7 @@ import { Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 
-type ClearIconProps = {
-    className?: string;
-    [key: string]: any;
-};
-
-const ClearIcon = ({ className, ...props }: ClearIconProps) => (
+const ClearIcon = ({ className, ...props }) => (
     <svg
         className={className}
         {...props}

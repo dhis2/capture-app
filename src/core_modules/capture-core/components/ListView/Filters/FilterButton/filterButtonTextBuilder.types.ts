@@ -4,7 +4,7 @@ import type { FilterButtonContextConsumerOutputProps } from './filterButtonConte
 
 type ExtractedProps = Readonly<{
     filterValue?: FilterData;
-    type: keyof typeof filterTypesObject;
+    type: typeof filterTypesObject[keyof typeof filterTypesObject];
     options?: Options | null;
 }>;
 
@@ -12,7 +12,7 @@ type RestProps = Omit<FilterButtonContextConsumerOutputProps, keyof ExtractedPro
 
 export type Props = RestProps & ExtractedProps & {
     filterValue?: FilterData;
-    type: keyof typeof filterTypesObject;
+    type: typeof filterTypesObject[keyof typeof filterTypesObject];
     options?: Options | null;
     buttonText?: string;
 };

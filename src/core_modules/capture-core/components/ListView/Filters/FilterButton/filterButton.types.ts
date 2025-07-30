@@ -1,10 +1,11 @@
 import { filterTypesObject } from '../filters.const';
 import type { Options } from '../../../FiltersForTypes';
+import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
 
 export type Props = {
     'data-test': string;
     itemId: string;
-    type: keyof typeof filterTypesObject;
+    type: typeof filterTypesObject[keyof typeof filterTypesObject];
     title: string;
     options?: Options | null;
     multiValueFilter?: boolean;
@@ -12,9 +13,9 @@ export type Props = {
     tooltipContent?: string;
     onSetVisibleSelector: (itemId?: string) => void;
     selectorVisible: boolean;
-    onUpdateFilter: (data: any, itemId: string) => void;
-    onClearFilter: (itemId: string) => void;
-    onRemoveFilter?: (itemId: string, options: any) => void;
+    onUpdateFilter: UpdateFilter;
+    onClearFilter: ClearFilter;
+    onRemoveFilter?: RemoveFilter
     isRemovable?: boolean;
 };
 

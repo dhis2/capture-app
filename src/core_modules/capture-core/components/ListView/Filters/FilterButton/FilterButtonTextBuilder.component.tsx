@@ -8,7 +8,7 @@ export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, options
         if (!filterValue) {
             return filterValue;
         }
-        return buildButtonText(filterValue, type.toString(), options);
+        return buildButtonText(filterValue, type, options);
     }, [
         filterValue,
         type,

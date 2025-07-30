@@ -7,12 +7,10 @@ import type {
     CustomTopBarActions,
     SetColumnOrder,
     SelectRow,
-    DataSource,
 } from '../types';
 
 type WithFilterPassOnProps = ListViewContextBuilderPassOnProps & {
     filters: ReactNode;
-    dataSource: DataSource;
 };
 
 type ComponentProps = {

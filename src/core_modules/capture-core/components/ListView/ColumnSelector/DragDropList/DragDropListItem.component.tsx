@@ -63,7 +63,7 @@ const DragDropListItemPlain = ({
         },
     });
 
-    const [{ isDragging }, drag] = useDrag({
+    const [{}, drag] = useDrag({
         type: ItemTypes.LISTITEM,
         item: { id, index },
         collect: monitor => ({
@@ -73,30 +73,25 @@ const DragDropListItemPlain = ({
 
     drag(drop(ref));
 
-    const opacity = isDragging ? 0 : 1;
-
     return (
-        <div
+        <DataTableRow
+            // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
             ref={ref}
-            style={{ opacity }}
+            className={isDraggingAny ? classes.rowWithoutHover : undefined}
             draggable
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
         >
-            <DataTableRow
-                className={isDraggingAny ? classes.rowWithoutHover : undefined}
-            >
-                <DataTableCell>{text}</DataTableCell>
-                <DataTableCell>
-                    <Checkbox
-                        checked={visible}
-                        onChange={handleToggle(id)}
-                        valid
-                        dense
-                    />
-                </DataTableCell>
-            </DataTableRow>
-        </div>
+            <DataTableCell>{text}</DataTableCell>
+            <DataTableCell>
+                <Checkbox
+                    checked={visible}
+                    onChange={handleToggle(id)}
+                    valid
+                    dense
+                />
+            </DataTableCell>
+        </DataTableRow>
     );
 };
 

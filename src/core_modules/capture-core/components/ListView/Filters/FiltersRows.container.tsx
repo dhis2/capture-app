@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { FiltersRowsComponent } from './FiltersRows.component';
-import type { Column, FiltersOnly, AdditionalFilters } from '../types';
+import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
 
 type Props = {
     programStageId?: string,
     columns: Array<Column>,
     filtersOnly?: FiltersOnly,
     additionalFilters?: AdditionalFilters,
-    onUpdateFilter: (filterId: string, filterData: any) => void,
-    onClearFilter: (filterId: string) => void,
-    onRemoveFilter: (filterId: string, additionalData?: any) => void,
+    onUpdateFilter: UpdateFilter,
+    onClearFilter: ClearFilter,
+    onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: (filterId: string, item: any) => void,
     stickyFilters: Record<string, unknown>,
 };

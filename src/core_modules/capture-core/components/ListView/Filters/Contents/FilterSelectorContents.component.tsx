@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import { withButtons } from './withButtons';
 import {
@@ -83,7 +83,7 @@ const FilterSelectorContentsPlain = ({
     multiValueFilter,
     isRemovable,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof getStyles>) => {
     const contents =
         useContents({ classes, filterValue, type, options, multiValueFilter, isRemovable, ...passOnProps });
     return (

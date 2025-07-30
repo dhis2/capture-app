@@ -86,7 +86,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
     onRemove = () => {
         const { itemId, onRemoveFilter } = this.props;
         this.closeFilterSelector();
-        onRemoveFilter && onRemoveFilter(itemId, {});
+        onRemoveFilter && onRemoveFilter(itemId);
     }
 
     handleFilterUpdate = (data: FilterData | null) => {

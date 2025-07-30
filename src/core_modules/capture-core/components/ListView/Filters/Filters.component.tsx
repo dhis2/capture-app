@@ -6,7 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
-import type { Column, StickyFilters, FiltersOnly, AdditionalFilters, FilterOnly } from '../types';
+import type { Column, StickyFilters, FiltersOnly, AdditionalFilters, FilterOnly, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
@@ -23,9 +23,9 @@ type Props = {
     visibleSelectorId?: string | null;
     stickyFilters: StickyFilters;
     onSelectRestMenuItem: (id: string) => void;
-    onUpdateFilter: (data: any, itemId: string) => void;
-    onClearFilter: (itemId: string) => void;
-    onRemoveFilter: (itemId: string, options: any) => void;
+    onUpdateFilter: UpdateFilter;
+    onClearFilter: ClearFilter;
+    onRemoveFilter: RemoveFilter;
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
@@ -206,9 +206,9 @@ const renderIndividualFilterButtons = ({
     filtersOnly?: FiltersOnly;
     visibleSelectorId: string | null;
     onSetVisibleSelector: (itemId?: string | null) => void;
-    onUpdateFilter: (data: any, itemId: string) => void;
-    onClearFilter: (itemId: string) => void;
-    onRemoveFilter: (itemId: string, options: any) => void;
+    onUpdateFilter: UpdateFilter;
+    onClearFilter: ClearFilter;
+    onRemoveFilter: RemoveFilter;
     classes: any;
 }) => [...(filtersOnly || []), ...individualElementsArray]
     .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton }: any) => (

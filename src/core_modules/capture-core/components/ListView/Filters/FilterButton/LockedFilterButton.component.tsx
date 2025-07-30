@@ -10,9 +10,6 @@ const getStyles = () => ({
 });
 
 type Props = {
-    classes: {
-        button: string;
-    };
     title: string;
     buttonText?: string;
 };

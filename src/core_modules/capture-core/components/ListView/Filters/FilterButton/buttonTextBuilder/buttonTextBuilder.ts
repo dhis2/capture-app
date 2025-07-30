@@ -8,22 +8,22 @@ import {
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
 import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
-import { dataElementTypes } from '../../../../../metaData';
+import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes: any = {
-    [dataElementTypes.TEXT]: convertText,
-    [dataElementTypes.NUMBER]: convertNumeric,
-    [dataElementTypes.INTEGER]: convertNumeric,
-    [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
-    [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
-    [dataElementTypes.DATE]: convertDate,
-    [dataElementTypes.ASSIGNEE]: convertAssignee,
-    [dataElementTypes.BOOLEAN]: convertBoolean,
-    [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
+    [filterTypesObject.TEXT]: convertText,
+    [filterTypesObject.NUMBER]: convertNumeric,
+    [filterTypesObject.INTEGER]: convertNumeric,
+    [filterTypesObject.INTEGER_POSITIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_NEGATIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
+    [filterTypesObject.DATE]: convertDate,
+    [filterTypesObject.ASSIGNEE]: convertAssignee,
+    [filterTypesObject.BOOLEAN]: convertBoolean,
+    [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
 };
 
-function getOptionSetText(filter: OptionSetFilterData, options: Options): string {
+function getOptionSetText(filter: OptionSetFilterData, options: Options) {
     const optionText = filter
         .values
         .map((value) => {
@@ -38,12 +38,12 @@ function getOptionSetText(filter: OptionSetFilterData, options: Options): string
 
 export function buildButtonText(
     filter: FilterData,
-    type: string,
+    type: typeof filterTypesObject[keyof typeof filterTypesObject],
     options?: Options | null,
 ): string {
-    if ((filter as any).usingOptionSet && options) {
-        return getOptionSetText(filter as OptionSetFilterData, options);
+    if ('usingOptionSet' in filter && options) {
+        return getOptionSetText(filter, options);
     }
 
-    return convertersForTypes[type](filter as any);
+    return convertersForTypes[type](filter);
 }
