@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FiltersRows } from '../Filters';
-import type { Columns, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
+import type { Columns, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter, StickyFilters } from '../types';
 
 type Props = {
     columns: Columns,
@@ -10,7 +10,7 @@ type Props = {
     onClearFilter: ClearFilter;
     onRemoveFilter: RemoveFilter;
     onSelectRestMenuItem: (filterId: string, item: any) => void;
-    stickyFilters: any,
+    stickyFilters: StickyFilters,
     programStageId?: string,
 };
 

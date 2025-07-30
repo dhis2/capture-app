@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Filters } from './Filters.component';
-import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
+import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter, StickyFilters } from '../types';
 
 const getStyles: Readonly<any> = {
     filtersButtons: {
@@ -42,7 +42,7 @@ type Props = {
     onClearFilter: ClearFilter;
     onRemoveFilter: RemoveFilter;
     onSelectRestMenuItem: (filterId: string, item: any) => void;
-    stickyFilters: any;
+    stickyFilters: StickyFilters;
     shouldRenderAdditionalFiltersButtons: boolean;
     visibleSelectorId: string | null;
 };
@@ -86,7 +86,7 @@ export const FiltersRowsPlain = ({
                         onSelectRestMenuItem={onSelectRestMenuItem}
                         stickyFilters={stickyFilters}
                         visibleSelectorId={visibleSelectorId}
-                        onRemoveFilter={itemId => onRemoveFilter(itemId, (stickyFilters as any).filtersWithValueOnInit)}
+                        onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
                     />
                 </div>
             </>

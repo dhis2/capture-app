@@ -35,7 +35,7 @@ type Props = {
     onClearFilter: ClearFilter;
     onRemoveFilter: RemoveFilter;
     isRemovable?: boolean;
-    onSetVisibleSelector: (itemId?: string) => void;
+    onSetVisibleSelector: (itemId?: string | null) => void;
     selectorVisible: boolean;
     filterValue?: FilterDataInput;
     buttonText?: string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FiltersRowsComponent } from './FiltersRows.component';
-import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
+import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter, StickyFilters } from '../types';
 
 type Props = {
     programStageId?: string,
@@ -11,7 +11,7 @@ type Props = {
     onClearFilter: ClearFilter,
     onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: (filterId: string, item: any) => void,
-    stickyFilters: Record<string, unknown>,
+    stickyFilters: StickyFilters,
 };
 
 const useAdditionalFiltersButtons = ({ additionalFilters, stickyFilters, filterHasValue }) => {

@@ -11,7 +11,7 @@ export type Props = {
     multiValueFilter?: boolean;
     disabled?: boolean;
     tooltipContent?: string;
-    onSetVisibleSelector: (itemId?: string) => void;
+    onSetVisibleSelector: (itemId?: string | null) => void;
     selectorVisible: boolean;
     onUpdateFilter: UpdateFilter;
     onClearFilter: ClearFilter;

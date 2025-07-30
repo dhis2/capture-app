@@ -190,7 +190,7 @@ const getIndividualElementsArray = (
         }
         return undefined;
     })
-    .filter((element): element is Column | FilterOnly => element !== undefined);
+    .filter(element => element !== undefined);
 
 const renderIndividualFilterButtons = ({
     individualElementsArray,
@@ -204,7 +204,7 @@ const renderIndividualFilterButtons = ({
 }: {
     individualElementsArray: Array<Column | FilterOnly>;
     filtersOnly?: FiltersOnly;
-    visibleSelectorId: string | null;
+    visibleSelectorId?: string | null;
     onSetVisibleSelector: (itemId?: string | null) => void;
     onUpdateFilter: UpdateFilter;
     onClearFilter: ClearFilter;
@@ -263,7 +263,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         classes,
     } = props;
 
-    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null>(props.visibleSelectorId ?? null);
+    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(props.visibleSelectorId ?? null);
     const defaultFiltersOnly = useMemo(() =>
         (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);
     const defaultFiltersOnlyCount = defaultFiltersOnly.length;
@@ -342,7 +342,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         const individualFilterButtons = renderIndividualFilterButtons({
             individualElementsArray,
             visibleSelectorId,
-            onSetVisibleSelector: (itemId?: string | null) => setVisibleSelector(itemId ?? null),
+            onSetVisibleSelector: setVisibleSelector,
             onUpdateFilter,
             onClearFilter,
             onRemoveFilter,
