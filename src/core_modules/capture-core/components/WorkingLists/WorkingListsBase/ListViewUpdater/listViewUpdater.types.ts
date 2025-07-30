@@ -3,30 +3,29 @@ import type { FiltersData } from '../../../ListView';
 import type { ListViewLoaderOutputProps } from '../ListViewLoader';
 
 type ExtractedProps = {
-    filters: FiltersData;
-    sortById: string;
-    sortByDirection: string;
-    onUpdateList: UpdateList;
-    programId: string;
-    programStageId: string;
-    orgUnitId: string;
-    categories?: Categories;
-    viewLoadedOnFirstRun: boolean;
+    filters: FiltersData,
+    sortById: string,
+    sortByDirection: string,
+    onUpdateList: UpdateList,
+    programId: string,
+    programStageId: string,
+    orgUnitId: string,
+    categories?: Categories,
+    viewLoadedOnFirstRun: boolean,
 };
 
 type OptionalExtractedProps = {
-    categories: Categories;
+    categories: Categories,
 };
 
-type RestProps = Omit<ListViewLoaderOutputProps & OptionalExtractedProps, keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = ListViewLoaderOutputProps & OptionalExtractedProps & ExtractedProps & OptionalExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 
 export type ListViewUpdaterOutputProps = RestProps & {
-    filters: FiltersData;
-    sortById: string;
-    sortByDirection: string;
-    currentPage: number;
-    rowsPerPage: number;
-    programStageId?: string;
+    filters: FiltersData,
+    sortById: string,
+    sortByDirection: string,
+    currentPage: number,
+    rowsPerPage: number,
 };

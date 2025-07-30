@@ -39,7 +39,7 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
             {...passOnContext}
             dataSource={dataSource}
             selectedRows={selectedRows}
-            allRowsAreSelected={allRowsAreSelected ?? false}
+            allRowsAreSelected={allRowsAreSelected}
             onClickListRow={onClickListRow}
             onRowSelect={onRowSelect}
             onSelectAll={onSelectAll}

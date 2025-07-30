@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import type { Categories } from '../workingListsBase.types';
@@ -6,7 +5,7 @@ import type { Categories } from '../workingListsBase.types';
 export const useIsContextInSync = (
     programId: string,
     categories?: Categories,
-    viewContext: ?Object,
+    viewContext?: any | null,
 ) => useMemo(() => {
     if (!viewContext) {
         return false;

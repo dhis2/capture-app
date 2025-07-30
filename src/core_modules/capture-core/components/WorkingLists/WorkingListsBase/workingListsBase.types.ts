@@ -235,10 +235,10 @@ export type InterfaceProps = Readonly<{
     viewPreloaded?: boolean,
     programStageId?: string,
     templateSharingType: string,
-    allRowsAreSelected: boolean | null | undefined,
+    allRowsAreSelected: boolean | null,
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
-    selectionInProgress: boolean | null | undefined,
+    selectionInProgress: boolean | null,
     selectedRows: { [key: string]: boolean },
     bulkActionBarComponent: ReactElement<any>,
 }>;
