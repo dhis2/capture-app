@@ -1,4 +1,4 @@
-// @flow
+import type { ReactNode, ReactElement } from 'react';
 import type {
     ChangePage,
     ChangeRowsPerPage,
@@ -15,7 +15,7 @@ import type {
     UpdateFilter,
 } from '../../../../ListView';
 
-export type Props = $ReadOnly<{|
+export type Props = Readonly<{
     updating: boolean,
     updatingWithDialog: boolean,
     dataSource?: DataSource,
@@ -35,8 +35,8 @@ export type Props = $ReadOnly<{|
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
     selectedRows: { [key: string]: boolean },
-    allRowsAreSelected: ?boolean,
-    selectionInProgress: ?boolean,
-    bulkActionBarComponent: React$Element<any>,
-    children: React$Node,
-|}>;
+    allRowsAreSelected: boolean | null | undefined,
+    selectionInProgress: boolean | null | undefined,
+    bulkActionBarComponent: ReactElement<any>,
+    children: ReactNode,
+}>;

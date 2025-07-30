@@ -1,5 +1,5 @@
-// @flow
-import { typeof dataElementTypes } from '../../../metaData';
+import type { ReactElement } from 'react';
+import type { dataElementTypes } from '../../../metaData';
 import type {
     AdditionalFilters,
     ChangePage,
@@ -22,7 +22,7 @@ import type {
 
 export type WorkingListTemplate = {
     id: string,
-    isDefault?: ?boolean,
+    isDefault?: boolean | null | undefined,
     name: string,
     access: {
         update: boolean,
@@ -41,9 +41,9 @@ export type WorkingListTemplates = Array<WorkingListTemplate>;
 export type ColumnConfig = {
     id: string,
     visible: boolean,
-    type: $Values<dataElementTypes>,
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
     header: string,
-    options?: ?Array<{text: string, value: any}>,
+    options?: Array<{text: string, value: any}> | null,
     multiValueFilter?: boolean,
     filterHidden?: boolean,
     additionalColumn?: boolean,
@@ -54,19 +54,19 @@ export type ColumnConfigs = Array<ColumnConfig>;
 
 export type ColumnOrder = Array<{ id: string, visible: boolean }>;
 
-export type LoadedContext = {|
+export type LoadedContext = {
     programIdTemplates?: string,
     programIdView?: string,
     programStageId?: string,
     orgUnitId?: string,
-    categories?: Object,
-|};
+    categories?: any,
+};
 
-export type LoadedViewContext = {|
+export type LoadedViewContext = {
     programId?: string,
     orgUnitId?: string,
-    categories?: Object,
-|};
+    categories?: any,
+};
 
 export type Categories = { [id: string]: string };
 
@@ -77,14 +77,14 @@ export type CancelUpdateList = () => void;
 export type DeleteTemplate = (template: WorkingListTemplate) => void;
 export type LoadView = (
     template: WorkingListTemplate,
-    meta: {|
+    meta: {
         programId: string,
         orgUnitId: string,
         categories?: Categories,
         programStageId?: string,
-    |}) => void;
+    }) => void;
 export type LoadTemplates = (programId: string) => void;
-export type SelectTemplate = (templateId: string, programStageId?: ?string) => void;
+export type SelectTemplate = (templateId: string, programStageId?: string | null | undefined) => void;
 export type UnloadingContext = () => void;
 export type UpdateTemplate = (template: WorkingListTemplate) => void;
 export type UpdateList = (data: {
@@ -100,19 +100,19 @@ export type UpdateList = (data: {
     resetMode: boolean,
 }) => void;
 
-export type ManagerContextData = {|
+export type ManagerContextData = {
     currentTemplate?: WorkingListTemplate,
     onSelectTemplate: SelectTemplate,
-|};
+};
 
-export type ListViewConfigContextData = {|
+export type ListViewConfigContextData = {
     currentViewHasTemplateChanges?: boolean,
     onAddTemplate?: AddTemplate,
     onUpdateTemplate?: UpdateTemplate,
     onDeleteTemplate?: DeleteTemplate,
-|};
+};
 
-export type ListViewLoaderContextData = {|
+export type ListViewLoaderContextData = {
     sortById?: string,
     sortByDirection?: string,
     filters?: FiltersData,
@@ -127,19 +127,19 @@ export type ListViewLoaderContextData = {|
     dirtyView: boolean,
     loadedViewContext: LoadedViewContext,
     viewPreloaded?: boolean,
-|};
+};
 
-export type ListViewUpdaterContextData = {|
+export type ListViewUpdaterContextData = {
     currentPage?: number,
     rowsPerPage?: number,
-    onCancelUpdateList?: Function,
+    onCancelUpdateList?: () => void,
     customUpdateTrigger?: any,
     forceUpdateOnMount?: boolean,
     dirtyList: boolean,
     loadedOrgUnitId?: string,
-|};
+};
 
-export type ListViewBuilderContextData = {|
+export type ListViewBuilderContextData = {
     updating: boolean,
     updatingWithDialog: boolean,
     dataSource?: DataSource,
@@ -159,12 +159,12 @@ export type ListViewBuilderContextData = {|
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
     selectedRows: { [key: string]: boolean },
-    selectionInProgress: ?boolean,
-    allRowsAreSelected: ?boolean,
-    bulkActionBarComponent: React$Element<any>,
-|};
+    selectionInProgress: boolean | null | undefined,
+    allRowsAreSelected: boolean | null | undefined,
+    bulkActionBarComponent: ReactElement<any>,
+};
 
-export type SharingSettings = {|
+export type SharingSettings = {
     externalAccess: boolean,
     publicAccess: string,
     userAccesses: Array<{
@@ -177,10 +177,10 @@ export type SharingSettings = {|
         name: string,
         access: string,
     }>,
-|};
+};
 export type SetTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string) => void;
 
-export type InterfaceProps = $ReadOnly<{|
+export type InterfaceProps = Readonly<{
     categories?: Categories,
     columns: ColumnConfigs,
     currentPage?: number,
@@ -234,12 +234,12 @@ export type InterfaceProps = $ReadOnly<{|
     viewPreloaded?: boolean,
     programStageId?: string,
     templateSharingType: string,
-    allRowsAreSelected: ?boolean,
+    allRowsAreSelected: boolean | null | undefined,
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
-    selectionInProgress: ?boolean,
+    selectionInProgress: boolean | null | undefined,
     selectedRows: { [key: string]: boolean },
-    bulkActionBarComponent: React$Element<any>,
-|}>;
+    bulkActionBarComponent: ReactElement<any>,
+}>;
 
 export type WorkingListsOutputProps = InterfaceProps;

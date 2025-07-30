@@ -1,4 +1,7 @@
-// @flow
+import type { ReactNode } from 'react';
+import type {
+    FiltersData,
+} from '../../../../ListView';
 import type {
     ColumnConfigs,
     LoadView,
@@ -7,11 +10,8 @@ import type {
     Categories,
     LoadedViewContext,
 } from '../../workingListsBase.types';
-import type {
-    FiltersData,
-} from '../../../../ListView';
 
-export type Props = $ReadOnly<{|
+export type Props = Readonly<{
     sortById?: string,
     sortByDirection?: string,
     filters?: FiltersData,
@@ -26,5 +26,5 @@ export type Props = $ReadOnly<{|
     dirtyView: boolean,
     loadedViewContext: LoadedViewContext,
     viewPreloaded?: boolean,
-    children: React$Node,
-|}>;
+    children: ReactNode,
+}>;

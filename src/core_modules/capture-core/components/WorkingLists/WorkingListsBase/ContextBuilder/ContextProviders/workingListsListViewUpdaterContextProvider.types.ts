@@ -1,15 +1,15 @@
-// @flow
+import type { ReactNode } from 'react';
 import type {
     CancelUpdateList,
 } from '../../workingListsBase.types';
 
-export type Props = $ReadOnly<{|
+export type Props = Readonly<{
     rowsPerPage?: number,
     currentPage?: number,
     onCancelUpdateList?: CancelUpdateList,
     customUpdateTrigger?: any,
     forceUpdateOnMount?: boolean,
     dirtyList: boolean,
-    children: React$Node,
+    children: ReactNode,
     loadedOrgUnitId?: string,
-|}>;
+}>;

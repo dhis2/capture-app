@@ -1,4 +1,20 @@
-// @flow
+import type { ReactNode } from 'react';
+import type {
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    CustomRowMenuContents,
+    CustomTopBarActions,
+    DataSource,
+    FiltersData,
+    RemoveFilter,
+    SelectRestMenuItem,
+    SelectRow,
+    SetColumnOrder,
+    Sort,
+    StickyFilters,
+    UpdateFilter,
+} from '../../../ListView';
 import type {
     AddTemplate,
     CancelLoadView,
@@ -16,24 +32,8 @@ import type {
     WorkingListTemplate,
     WorkingListTemplates,
 } from '../workingListsBase.types';
-import type {
-    ChangePage,
-    ChangeRowsPerPage,
-    ClearFilter,
-    CustomRowMenuContents,
-    CustomTopBarActions,
-    DataSource,
-    FiltersData,
-    RemoveFilter,
-    SelectRestMenuItem,
-    SelectRow,
-    SetColumnOrder,
-    Sort,
-    StickyFilters,
-    UpdateFilter,
-} from '../../../ListView';
 
-type ExtractedProps = $ReadOnly<{|
+type ExtractedProps = Readonly<{
     categories?: Categories,
     columns: ColumnConfigs,
     currentPage?: number,
@@ -76,10 +76,10 @@ type ExtractedProps = $ReadOnly<{|
     updatingWithDialog: boolean,
     templates?: WorkingListTemplates,
     viewPreloaded?: boolean,
-    bulkActionBarComponent: React$Node,
-|}>;
+    bulkActionBarComponent: ReactNode,
+}>;
 
-type OptionalExtractedProps = {|
+type OptionalExtractedProps = {
     categories: Categories,
     currentPage: number,
     currentTemplate: WorkingListTemplate,
@@ -100,18 +100,15 @@ type OptionalExtractedProps = {|
     stickyFilters: StickyFilters,
     templates: WorkingListTemplates,
     viewPreloaded: boolean,
-|};
+};
 
-type RestProps = $Rest<WorkingListsOutputProps & OptionalExtractedProps,
-    ExtractedProps & OptionalExtractedProps>;
+type RestProps = Omit<WorkingListsOutputProps & OptionalExtractedProps,
+    keyof (ExtractedProps & OptionalExtractedProps)>;
 
-export type Props = $ReadOnly<{|
-    ...WorkingListsOutputProps,
-|}>;
+export type Props = WorkingListsOutputProps;
 
-export type ContextBuilderOutputProps = $ReadOnly<{|
-    ...RestProps,
+export type ContextBuilderOutputProps = RestProps & {
     dirtyTemplates: boolean,
     loadedProgramIdForTemplates?: string,
     templates?: WorkingListTemplates,
-|}>;
+};

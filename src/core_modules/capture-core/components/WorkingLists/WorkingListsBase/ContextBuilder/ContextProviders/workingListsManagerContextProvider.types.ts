@@ -1,8 +1,8 @@
-// @flow
+import type { ReactNode } from 'react';
 import type { WorkingListTemplate, SelectTemplate } from '../../workingListsBase.types';
 
-export type Props = $ReadOnly<{|
+export type Props = Readonly<{
     currentTemplate?: WorkingListTemplate,
     onSelectTemplate: SelectTemplate,
-    children: React$Node,
-|}>;
+    children: ReactNode,
+}>;
