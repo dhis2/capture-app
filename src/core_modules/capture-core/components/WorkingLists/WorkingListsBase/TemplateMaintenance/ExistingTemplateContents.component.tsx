@@ -1,11 +1,10 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 
 type Props = {
-    onSaveTemplate: () => void,
-    onClose: () => void,
+    onSaveTemplate: () => void;
+    onClose: () => void;
 };
 
 export const ExistingTemplateContents = (props: Props) => {

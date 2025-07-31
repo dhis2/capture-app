@@ -1,15 +1,14 @@
-// @flow
 import * as React from 'react';
 import { Modal } from '@dhis2/ui';
-import { NewTemplateContents } from './NewTemplateContents.component';
+import { ExistingTemplateContents } from './ExistingTemplateContents.component';
 
 type Props = {
-    open: boolean,
-    onClose: () => void,
-    onSaveTemplate: (name: string) => void,
+    open: boolean;
+    onClose: () => void;
+    onSaveTemplate: () => void;
 };
 
-export const NewTemplateDialog = (props: Props) => {
+export const ExistingTemplateDialog = (props: Props) => {
     const {
         open,
         onClose,
@@ -24,10 +23,10 @@ export const NewTemplateDialog = (props: Props) => {
         <Modal
             hide={!open}
             onClose={onClose}
-            dataTest={'new-template-dialog'}
-            position={'center'}
+            position={'middle'}
+            dataTest={'existing-template-dialog'}
         >
-            <NewTemplateContents
+            <ExistingTemplateContents
                 onSaveTemplate={onSaveTemplate}
                 onClose={onClose}
             />

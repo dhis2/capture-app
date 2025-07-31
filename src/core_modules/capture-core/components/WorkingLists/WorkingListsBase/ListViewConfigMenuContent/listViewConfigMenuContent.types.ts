@@ -21,7 +21,7 @@ type OptionalExtractedProps = {
     templateSharingType: string,
 };
 
-type RestProps = OptionalExtractedProps & ListViewConfigOutputProps & ExtractedProps;
+type RestProps = ListViewConfigOutputProps & OptionalExtractedProps | ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

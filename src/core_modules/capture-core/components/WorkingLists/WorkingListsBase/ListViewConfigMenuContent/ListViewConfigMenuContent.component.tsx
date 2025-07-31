@@ -26,7 +26,7 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
         templateSharingType,
         ...passOnProps
     } = props;
-    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<string | null>(null);
+    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<'NEW' | 'REPLACE' | 'DELETE' | 'SHARING' | null>(null);
     const templateMaintenanceInstance = useRef<any>(null);
 
     const handleClose = useCallback(() => {
@@ -153,6 +153,7 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
 
     return (
         <React.Fragment>
+            {/* @ts-expect-error - I'll look at this in the next PR when more of the WLs functionality is migrated. Currently, it's missing & { programId: string; } and is incorrectly expecting currentViewHasTemplateChanges and templateSharingType. */}
             <ListViewLoader
                 {...passOnProps}
                 currentTemplate={currentTemplate}

@@ -12,6 +12,6 @@ type OptionalExtractedProps = {
     stickyFilters: StickyFilters,
 };
 
-type RestProps = ListViewUpdaterOutputProps & OptionalExtractedProps & ExtractedProps;
+type RestProps = ListViewUpdaterOutputProps & (OptionalExtractedProps | ExtractedProps);
 
 export type Props = RestProps & ExtractedProps;

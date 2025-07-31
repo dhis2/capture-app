@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useCallback, useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -14,7 +13,7 @@ const TemplatesManagerPlain = (props: Props) => {
     const {
         currentTemplate,
         onSelectTemplate,
-    } = useContext(ManagerContext) || {};
+    } = useContext(ManagerContext) || { currentTemplate: undefined, onSelectTemplate: undefined };
 
     if (!templates || !currentTemplate) {
         log.error(
@@ -26,8 +25,7 @@ const TemplatesManagerPlain = (props: Props) => {
     const handleSelectTemplate = useCallback((template: WorkingListTemplate) => {
         if (template.id === currentTemplate.id) {
             const defaultTemplate = templates.find(t => t.isDefault);
-            // $FlowFixMe
-            onSelectTemplate(defaultTemplate.id);
+            defaultTemplate && onSelectTemplate(defaultTemplate.id);
             return;
         }
         onSelectTemplate(template.id);
@@ -58,4 +56,4 @@ const TemplatesManagerPlain = (props: Props) => {
     );
 };
 
-export const TemplatesManager: ComponentType<Props> = withBorder()(TemplatesManagerPlain);
+export const TemplatesManager = withBorder()(TemplatesManagerPlain) as ComponentType<Props>;

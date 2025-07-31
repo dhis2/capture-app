@@ -1,7 +1,7 @@
-// @flow
 import * as React from 'react';
 import { Button, ButtonStrip, colors, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTemplateTextField } from './NewTemplateTextField.component';
 
@@ -20,19 +20,18 @@ const getStyles = (theme: Theme) => ({
     },
 });
 type Props = {
-    onSaveTemplate: (name: string) => void,
-    onClose: () => void,
-    classes: Object,
-};
+    onSaveTemplate: (name: string) => void;
+    onClose: () => void;
+} & WithStyles<typeof getStyles>;
 
 const NewTemplateContentsPlain = (props: Props) => {
     const { onSaveTemplate, onClose, classes } = props;
     const [name, setName] = React.useState('');
-    const [error, setError] = React.useState();
+    const [error, setError] = React.useState<string>();
 
-    const nameBlurHandler = React.useCallback(({ value }) => {
+    const nameBlurHandler = React.useCallback(({ value }: { value?: string }) => {
         value && setError(undefined);
-        setName(value);
+        setName(value || '');
     }, []);
 
     const handleSave = React.useCallback(() => {

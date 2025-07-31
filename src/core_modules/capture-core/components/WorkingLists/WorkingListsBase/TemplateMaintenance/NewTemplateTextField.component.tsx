@@ -1,13 +1,17 @@
-// @flow
 import * as React from 'react';
 import { InputField } from '@dhis2/ui';
 
 type PassOnProps = {
-    onBlur: (event: { value: string }) => void,
+    onBlur: (event: { value?: string }) => void;
+    className?: string;
+    label?: string;
+    error?: boolean;
+    dataTest?: string;
+    initialFocus?: boolean;
+    required?: boolean;
+    name?: string;
 };
-type Props = {
-    ...PassOnProps,
-};
+type Props = PassOnProps;
 
 export const NewTemplateTextField = (props: Props) => {
     const { ...passOnProps } = props;

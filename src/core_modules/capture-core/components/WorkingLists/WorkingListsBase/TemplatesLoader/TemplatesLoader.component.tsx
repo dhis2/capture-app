@@ -1,4 +1,3 @@
-// @flow
 import React, { memo, useCallback, useEffect, useRef } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import { TemplatesManager } from '../TemplatesManager';
@@ -48,7 +47,7 @@ const useLoadTemplates = ({
     return triggerLoad;
 };
 
-export const TemplatesLoader = memo<Props>((props: Props) => {
+export const TemplatesLoader = memo((props: Props) => {
     const {
         loadTemplatesError,
         onLoadTemplates,

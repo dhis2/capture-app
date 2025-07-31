@@ -1,18 +1,10 @@
-// @flow
-import React, { useMemo, useCallback, type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useMemo, useCallback } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { SharingDialog as UISharingDialog } from '@dhis2/ui';
 import type { Props } from './sharingDialog.types';
 
-const styles = {
-    dialog: {
-        width: 1000,
-        display: 'flex',
-    },
-};
 
-const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharingType, dataTest }: Props) => {
+export const SharingDialog = ({ onClose, open, templateId, templateSharingType, dataTest }: Props) => {
     const { refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -32,7 +24,7 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharin
             [],
         ),
         { lazy: true,
-            onComplete: ({ sharing }) => {
+            onComplete: ({ sharing }: any) => {
                 const {
                     externalAccess,
                     publicAccess,
@@ -57,13 +49,11 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharin
     return (
         open ?
             <UISharingDialog
-                type={templateSharingType}
+                type={templateSharingType as any}
                 id={templateId}
                 onClose={handleClose}
-                className={classes.dialog}
+                // @ts-expect-error - UI library expects a dataTest prop, but it is not defined in the types
                 dataTest={dataTest}
             /> : null
     );
 };
-
-export const SharingDialog: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(SharingDialogPlain);
