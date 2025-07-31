@@ -71,12 +71,13 @@ export const saveNewEventSucceededEpic = (action$: EpicAction<any>, store: Redux
             }
 
             if (enrollmentDomain?.eventSaveInProgress) {
+                const eventSaveInProgress = enrollmentDomain.eventSaveInProgress;
                 const {
                     linkMode,
                     requestEventId,
                     linkedEventId,
                     linkedOrgUnitId,
-                } = enrollmentDomain?.eventSaveInProgress;
+                } = eventSaveInProgress;
                 const requestEvent = eventsFromApi.find(event => event.uid === requestEventId);
 
                 if (requestEvent) {

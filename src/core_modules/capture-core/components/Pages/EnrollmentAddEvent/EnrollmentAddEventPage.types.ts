@@ -1,5 +1,3 @@
-type CssClasses = {
+export type Props = {
     classes: Record<string, string>;
 };
-
-export type Props = CssClasses;
