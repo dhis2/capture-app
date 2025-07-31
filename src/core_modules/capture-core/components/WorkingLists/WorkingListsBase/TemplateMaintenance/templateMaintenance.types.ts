@@ -8,15 +8,15 @@ import type {
 } from '../workingListsBase.types';
 
 export type PassOnProps = {
-    onClose: () => void;
+    onClose: () => void,
 };
 
 export type Props = PassOnProps & {
-    mode?: keyof typeof dialogModes | null;
-    currentTemplate: WorkingListTemplate;
-    onAddTemplate: AddTemplate;
-    onUpdateTemplate: UpdateTemplate;
-    onDeleteTemplate: DeleteTemplate;
-    onSetSharingSettings: SetTemplateSharingSettings;
-    templateSharingType: string;
+    mode?: typeof dialogModes[keyof typeof dialogModes] | null,
+    currentTemplate: WorkingListTemplate,
+    onAddTemplate: AddTemplate,
+    onUpdateTemplate: UpdateTemplate,
+    onDeleteTemplate: DeleteTemplate,
+    onSetSharingSettings: SetTemplateSharingSettings,
+    templateSharingType: string,
 };

@@ -3,18 +3,18 @@ import type { WorkingListTemplates, WorkingListTemplate } from '../workingListsB
 import type { TemplatesLoaderOutputProps } from '../TemplatesLoader';
 
 type ExtractedProps = {
-    templates?: WorkingListTemplates;
+    templates?: WorkingListTemplates,
 };
 
 type OptionalExtractedProps = {
-    templates: WorkingListTemplates;
+    templates: WorkingListTemplates,
 };
 
-type RestProps = Omit<TemplatesLoaderOutputProps & OptionalExtractedProps, keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = TemplatesLoaderOutputProps & OptionalExtractedProps & ExtractedProps;
 
 export type Props = Readonly<RestProps & ExtractedProps>;
 
 export type TemplatesManagerOutputProps = Readonly<RestProps & {
-    currentTemplate: WorkingListTemplate;
-    children: (currentListIsModified: boolean) => ReactNode;
+    currentTemplate: WorkingListTemplate,
+    children: (currentListIsModified: boolean) => ReactNode,
 }>;

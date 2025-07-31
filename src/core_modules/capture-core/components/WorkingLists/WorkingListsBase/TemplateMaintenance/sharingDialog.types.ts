@@ -1,9 +1,4 @@
-import type { WithStyles } from '@material-ui/core';
 import type { SharingSettings } from '../workingListsBase.types';
-
-type CssClasses = WithStyles<{
-    dialog: any;
-}>;
 
 export type Props = {
     onClose: (sharingSettings: SharingSettings) => void;
@@ -11,4 +6,4 @@ export type Props = {
     templateId: string;
     templateSharingType: string;
     dataTest: string;
-} & CssClasses;
+};

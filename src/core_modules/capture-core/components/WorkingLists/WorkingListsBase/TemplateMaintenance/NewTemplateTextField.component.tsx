@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InputField } from '@dhis2/ui';
 
-type Props = {
+type PassOnProps = {
     onBlur: (event: { value?: string }) => void;
     className?: string;
     label?: string;
@@ -11,29 +11,24 @@ type Props = {
     required?: boolean;
     name?: string;
 };
+type Props = PassOnProps;
 
 export const NewTemplateTextField = (props: Props) => {
-    const { onBlur, ...passOnProps } = props;
+    const { ...passOnProps } = props;
     const [name, setName] = React.useState('');
 
-    const nameChangeHandler = React.useCallback((payload: { value?: string }) => {
-        const { value } = payload;
-        if (value && value.length > 50) {
+    const nameChangeHandler = React.useCallback(({ value }) => {
+        if (value.length > 50) {
             setName(value.substring(0, 50));
             return;
         }
-        setName(value || '');
+        setName(value);
     }, []);
-
-    const handleBlur = React.useCallback(() => {
-        onBlur({ value: name });
-    }, [onBlur, name]);
 
     return (
         <InputField
             {...passOnProps}
             onChange={nameChangeHandler}
-            onBlur={handleBlur}
             value={name}
         />
     );

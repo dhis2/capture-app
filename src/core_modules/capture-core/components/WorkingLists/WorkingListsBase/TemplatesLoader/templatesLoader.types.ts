@@ -2,30 +2,30 @@ import type { ReactElement } from 'react';
 import type { ContextBuilderOutputProps } from '../ContextBuilder';
 
 type ExtractedProps = {
-    loadTemplatesError?: string;
-    onLoadTemplates: (programId: string) => void;
-    onCancelLoadTemplates?: () => void;
-    programId: string;
-    loadedProgramIdForTemplates?: string;
-    dirtyTemplates: boolean;
-    templatesLoading: boolean;
+    loadTemplatesError?: string,
+    onLoadTemplates: (programId: string) => void,
+    onCancelLoadTemplates?: () => void,
+    programId: string,
+    loadedProgramIdForTemplates?: string,
+    dirtyTemplates: boolean,
+    templatesLoading: boolean,
 };
 
 type OptionalExtractedProps = {
-    allRowsAreSelected: boolean;
-    selectedRows: { [key: string]: boolean };
-    loadTemplatesError: string;
-    onCancelLoadTemplates: () => void;
-    loadedProgramIdForTemplates: string;
-    onRowSelect: () => void;
-    onSelectAll: () => void;
-    bulkActionBarComponent: ReactElement<any>;
+    allRowsAreSelected: boolean,
+    selectedRows: { [key: string]: boolean },
+    loadTemplatesError: string,
+    onCancelLoadTemplates: () => void,
+    loadedProgramIdForTemplates: string,
+    onRowSelect: () => void,
+    onSelectAll: () => void,
+    bulkActionBarComponent: ReactElement<any>,
 };
 
-type RestProps = Omit<ContextBuilderOutputProps & OptionalExtractedProps, keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = ContextBuilderOutputProps & OptionalExtractedProps & ExtractedProps;
 
-export type Props = Readonly<ExtractedProps & { [key: string]: any }>;
+export type Props = RestProps & ExtractedProps;
 
 export type TemplatesLoaderOutputProps = Readonly<RestProps & {
-    programId: string;
+    programId: string,
 }>;
