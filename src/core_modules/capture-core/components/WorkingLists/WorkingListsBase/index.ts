@@ -1,4 +1,3 @@
-// @flow
 export { WorkingListsBase } from './WorkingListsBase.component';
 export { areFiltersEqual } from './utils';
 export {

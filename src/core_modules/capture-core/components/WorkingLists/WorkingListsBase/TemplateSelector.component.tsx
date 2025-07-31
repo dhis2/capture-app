@@ -1,7 +1,8 @@
-// @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import type { WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import { CaptureScrollHeight } from './CaptureScrollHeight.component';
@@ -9,7 +10,7 @@ import { LinkButton } from '../../Buttons/LinkButton.component';
 import type { WorkingListTemplates } from './workingListsBase.types';
 
 const getBorder = (theme: Theme) => {
-    const color = theme.palette.dividerLighter;
+    const color = theme.palette.grey[300];
     return `${theme.typography.pxToRem(1)} solid ${color}`;
 };
 
@@ -21,14 +22,14 @@ const getStyles = (theme: Theme) => ({
     },
     configsContainer: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap' as const,
         padding: `${theme.typography.pxToRem(3)} 0rem`,
         maxHeight,
-        overflow: 'hidden',
+        overflow: 'hidden' as const,
     },
     configsContainerExpanded: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap' as const,
         padding: `${theme.typography.pxToRem(3)} 0rem`,
     },
     chipContainer: {
@@ -37,7 +38,7 @@ const getStyles = (theme: Theme) => ({
     linkButtonContainer: {
         marginBottom: 5,
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'center' as const,
     },
     linkButton: {
         fontSize: 10,
@@ -49,14 +50,15 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props = {
-    templates: WorkingListTemplates,
-    currentTemplateId: string,
-    currentListIsModified: boolean,
-    onSelectTemplate: Function,
-    selectionInProgress: boolean,
-    classes: Object,
+type OwnProps = {
+    templates: WorkingListTemplates;
+    currentTemplateId: string;
+    currentListIsModified: boolean;
+    onSelectTemplate: (template: any) => void;
+    selectionInProgress: boolean;
 };
+
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
 const TemplateSelectorPlain = (props: Props) => {
     const {
@@ -68,7 +70,7 @@ const TemplateSelectorPlain = (props: Props) => {
         classes,
     } = props;
 
-    const containerEl = React.useRef(null);
+    const containerEl = React.useRef<HTMLDivElement>(null!);
     const [isExpanded, setExpandedStatus] = React.useState(false);
 
     const customTemplates = React.useMemo(() => templates
