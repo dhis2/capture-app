@@ -1,5 +1,3 @@
-// @flow
-
 export const EnrollmentAddEventPageStatuses = Object.freeze({
     DEFAULT: 'DEFAULT',
     MISSING_REQUIRED_VALUES: 'MISSING_REQUIRED_VALUES',
