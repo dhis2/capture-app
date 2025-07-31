@@ -56,7 +56,7 @@ const getStyles: any = () => ({
         gap: spacers.dp4,
     },
     button: {
-        whiteSpace: 'nowrap' as const,
+        whiteSpace: 'nowrap',
     },
     editButtonContainer: {},
 });
@@ -96,16 +96,16 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
 
     const tooltipContent = useMemo(() => {
         if (!eventAccess.write) {
-            return String(i18n.t("You don't have access to edit this event"));
+            return i18n.t("You don't have access to edit this event");
         }
         if (!isWithinValidPeriod) {
-            return String(i18n.t(
+            return i18n.t(
                 '{{occurredAt}} belongs to an expired period. Event cannot be edited',
                 {
                     occurredAt: eventData?.dataEntryValues?.occurredAt,
                     interpolation: { escapeValue: false },
                 },
-            ));
+            );
         }
         return undefined;
     }, [
@@ -155,7 +155,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             secondary
                             small
                         >
-                            {String(i18n.t('Edit event'))}
+                            {i18n.t('Edit event')}
                         </Button>
                     </ConditionalTooltip>
                 </div>}
@@ -192,7 +192,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             <ViewEventSection
                 header={(
                     <div className={classes.headerContainer}>
-                        <ViewEventSectionHeader text={String(i18n.t('Event details'))} icon={IconFileDocument24} />
+                        <ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />
                         {renderActionsContainer()}
                     </div>
                 )}

@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { getCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
+import { getCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
 
@@ -44,7 +44,7 @@ export const getEventOpeningFromEventListEpic = (
                 }
                 return getCoreOrgUnit({
                     orgUnitId: eventContainer.event.orgUnitId,
-                    onSuccess: (orgUnit: any) => startOpenEventForView(eventContainer, orgUnit),
+                    onSuccess: (orgUnit: CoreOrgUnit) => startOpenEventForView(eventContainer, orgUnit),
                     onError: (error: any) => {
                         const { message, details } = getErrorMessageAndDetails(error);
                         log.error(
@@ -105,7 +105,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: any) =>
             const eventContainer = action.payload.eventContainer;
             return getCoreOrgUnit({
                 orgUnitId: eventContainer.event.orgUnitId,
-                onSuccess: (orgUnit: any) => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
+                onSuccess: (orgUnit: CoreOrgUnit) => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
                 onError: (error: any) => {
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(
