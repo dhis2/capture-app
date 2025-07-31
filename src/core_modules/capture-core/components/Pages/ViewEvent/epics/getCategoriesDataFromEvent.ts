@@ -3,5 +3,6 @@ export const getCategoriesDataFromEvent = (event: any) => {
     return categoriesData;
 };
 
-export const getCategoriesDataFromEventAsync = (event: any) =>
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const getCategoriesDataFromEventAsync = (event: any, querySingleResource: any) =>
     Promise.resolve(getCategoriesDataFromEvent(event));

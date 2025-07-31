@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-24T07:02:15.725Z\n"
-"PO-Revision-Date: 2025-07-24T07:02:15.725Z\n"
+"POT-Creation-Date: 2025-07-31T12:00:23.278Z\n"
+"PO-Revision-Date: 2025-07-31T12:00:23.278Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -910,11 +910,11 @@ msgstr "Warnings"
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Event could not be loaded. Are you sure it exists?"
 
-msgid "Event could not be loaded"
-msgstr "Event could not be loaded"
-
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
+
+msgid "Event could not be loaded"
+msgstr "Event could not be loaded"
 
 msgid "Selected program"
 msgstr "Selected program"
