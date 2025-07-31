@@ -1,7 +1,7 @@
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core/styles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import {
@@ -92,5 +92,4 @@ const EnrollmentAddEventPagePain = ({
     );
 };
 
-export const EnrollmentAddEventPageDefaultComponent: ComponentType<any> =
-    withStyles(styles)(EnrollmentAddEventPagePain);
+export const EnrollmentAddEventPageDefaultComponent = withStyles(styles)(EnrollmentAddEventPagePain);

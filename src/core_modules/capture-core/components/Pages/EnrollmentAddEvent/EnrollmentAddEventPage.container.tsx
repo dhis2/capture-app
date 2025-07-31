@@ -39,21 +39,19 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         error: commonDataError,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
-        selectedScopeId: validIds[IdTypes.PROGRAM_ID]?.id,
+        selectedScopeId: validIds[IdTypes.PROGRAM_ID]?.id ?? null,
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_NEW,
         defaultPageLayout: DefaultPageLayout,
     });
 
-    const pageIsInvalid = (!loading && !Object.values(validIds)?.every((Id: any) => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
         if (!programId || !enrollmentId || !teiId) {
             return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
         }
-        // $FlowFixMe[prop-missing]
         if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
             return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
         }
-        // $FlowFixMe[prop-missing]
         if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) {
             return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
         }
@@ -79,8 +77,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     if (pageStatus === EnrollmentAddEventPageStatuses.DEFAULT) {
         return (
             <EnrollmentAddEventPageDefault
-                // $FlowFixMe - Business logic dictates that pageLayout is defined
-                pageLayout={pageLayout}
+                pageLayout={pageLayout!}
                 enrollment={enrollment}
                 attributeValues={attributeValues as Record<string, unknown> | null | undefined}
                 commonDataError={Boolean(commonDataError)}

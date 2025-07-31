@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import type { ReduxState } from '../../../App/withAppUrlSync.types';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import {
     useSetOrgUnitId,
@@ -21,7 +22,7 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     const { resetTeiId } = useResetTeiId();
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
-    const userInteractionInProgress = useSelector((state: any) => dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
+    const userInteractionInProgress = useSelector((state: ReduxState) => dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
 
     const handleResetProgramId = useCallback(
         () => resetProgramIdAndEnrollmentContext('enrollment', { teiId, programId }), [resetProgramIdAndEnrollmentContext, teiId, programId],
@@ -32,7 +33,7 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     const handleResetEventId = useCallback(() => resetEventId('enrollmentEventNew'), [resetEventId]);
 
     const { teiDisplayName, error: teiDisplayNameError } = useTeiDisplayName(teiId, programId);
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollment || {} as any], programId);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollment || {}], programId);
 
     return {
         handleSetOrgUnitId: setOrgUnitId,

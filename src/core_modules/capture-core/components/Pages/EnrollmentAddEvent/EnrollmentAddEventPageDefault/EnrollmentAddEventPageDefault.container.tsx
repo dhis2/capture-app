@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox } from '@dhis2/ui';
+import type { ReduxState } from '../../../App/withAppUrlSync.types';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentAddEventTopBar, useEnrollmentAddEventTopBar } from '../TopBar';
@@ -106,7 +107,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
-    const dataEntryHasChanges = useSelector((state: any) => getDataEntryHasChanges(state, widgetReducerName));
+    const dataEntryHasChanges = useSelector((state: ReduxState) => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
     const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
