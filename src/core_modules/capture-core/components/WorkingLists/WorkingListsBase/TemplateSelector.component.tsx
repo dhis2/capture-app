@@ -9,8 +9,8 @@ import { CaptureScrollHeight } from './CaptureScrollHeight.component';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import type { WorkingListTemplates } from './workingListsBase.types';
 
-const getBorder = (theme: Theme) => {
-    const color = theme.palette.grey[300];
+const getBorder = (theme: any) => {
+    const color = theme.palette.dividerLighter;
     return `${theme.typography.pxToRem(1)} solid ${color}`;
 };
 

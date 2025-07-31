@@ -59,7 +59,6 @@ export const TemplateSelectorChip = (props: Props) => {
                     text={name}
                     maxCharacters={maxCharacters}
                     isSelectedTemplate={id === currentTemplateId}
-                    disabled={disabled}
                 />
             </Chip>
         </TooltipForChip>

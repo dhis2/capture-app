@@ -3,7 +3,6 @@ type Props = {
     maxCharacters: number;
     text: string;
     isSelectedTemplate: boolean;
-    disabled?: boolean;
 };
 
 export const TemplateSelectorChipContent = (props: Props) => {

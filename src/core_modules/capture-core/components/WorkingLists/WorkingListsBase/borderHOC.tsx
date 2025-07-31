@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import type { WithStyles } from '@material-ui/core';
 import type { Theme } from '@material-ui/core/styles';
 
-const getBorder = (theme: Theme) => {
-    const color = theme.palette.grey[300];
+const getBorder = (theme: any) => {
+    const color = theme.palette.dividerLighter;
     return `${theme.typography.pxToRem(1)} solid ${color}`;
 };
 
