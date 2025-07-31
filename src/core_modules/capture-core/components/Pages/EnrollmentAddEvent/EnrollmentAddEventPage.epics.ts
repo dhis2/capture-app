@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
@@ -13,12 +12,18 @@ import {
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 import { buildUrlQueryString } from '../../../utils/routing';
+import type { EpicAction, ReduxStore, ApiUtils } from '../../../../capture-core-utils/types/global';
 
 const shouldNavigateWithRelatedStage = ({
     linkMode,
     linkedEventId,
     linkedOrgUnitId,
     navigate,
+}: {
+    linkMode?: string;
+    linkedEventId?: string;
+    linkedOrgUnitId?: string;
+    navigate: (url: string) => void;
 }) => {
     if (linkMode && linkedEventId) {
         if (linkMode === relatedStageActions.ENTER_DATA) {
@@ -32,22 +37,39 @@ const shouldNavigateWithRelatedStage = ({
     return {};
 };
 
-export const saveNewEventSucceededEpic = (action$: InputObservable, state: ReduxStore, { navigate }: ApiUtils) =>
+type EventSaveSuccessPayload = {
+    bundleReport: {
+        typeReportMap: {
+            EVENT: {
+                objectReports: Array<{ uid: string }>;
+            };
+        };
+    };
+};
+
+type EventSaveSuccessMeta = {
+    serverData: {
+        events?: any[];
+        enrollments: Array<{ events: any[] }>;
+    };
+};
+
+export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPayload, EventSaveSuccessMeta>, state: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS,
         ),
-        map((action) => {
-            const actions = [];
+        map((action: any) => {
+            const actions: any[] = [];
             const { enrollmentDomain } = state.value;
             const eventsFromApi = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
             const { serverData: { events, enrollments } } = action.meta;
             const serverDataEvents = events ?? enrollments[0].events;
-            const enrollmentEvents = enrollmentDomain.enrollment.events;
+            const enrollmentEvents = enrollmentDomain?.enrollment?.events || [];
 
-            const { eventsToCommit, eventsToAdd } = serverDataEvents.reduce((acc, event) => {
-                const eventFromRedux = enrollmentEvents.find(e => e.event === event.event);
+            const { eventsToCommit, eventsToAdd } = serverDataEvents.reduce((acc: { eventsToCommit: any[]; eventsToAdd: any[] }, event: any) => {
+                const eventFromRedux = enrollmentEvents?.find((e: any) => e.event === event.event);
 
                 if (!eventFromRedux) {
                     acc.eventsToAdd.push(event);
@@ -70,7 +92,7 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
                 );
             }
 
-            if (enrollmentDomain.eventSaveInProgress) {
+            if (enrollmentDomain?.eventSaveInProgress) {
                 const {
                     linkMode,
                     requestEventId,
@@ -95,13 +117,20 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
         }),
     );
 
-export const saveNewEventFailedEpic = (action$: InputObservable) =>
+type EventSaveErrorMeta = {
+    serverData: {
+        events?: any[];
+        enrollments: Array<{ events: any[] }>;
+    };
+};
+
+export const saveNewEventFailedEpic = (action$: EpicAction<any, EventSaveErrorMeta>) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
         ),
-        map((action) => {
+        map((action: any) => {
             const { serverData: { events, enrollments } } = action.meta;
             const rollbackEvents = events ?? enrollments[0].events;
 
@@ -113,4 +142,3 @@ export const saveNewEventFailedEpic = (action$: InputObservable) =>
             ]);
         }),
     );
-

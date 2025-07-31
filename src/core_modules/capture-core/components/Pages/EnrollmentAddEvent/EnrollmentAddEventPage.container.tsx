@@ -1,8 +1,7 @@
-// @flow
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import {
@@ -12,7 +11,7 @@ import {
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import { type Props } from './EnrollmentAddEventPage.types';
+import type { PlainProps } from './EnrollmentAddEventPage.types';
 import {
     useEnrollmentPageLayout,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
@@ -26,6 +25,9 @@ const styles = {
         marginRight: spacersNum.dp16,
     },
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
+
 const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     const { navigate } = useNavigate();
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
@@ -41,17 +43,14 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         defaultPageLayout: DefaultPageLayout,
     });
 
-    // $FlowFixMe
-    const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageIsInvalid = (!loading && !Object.values(validIds)?.every((Id: any) => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
         if (!programId || !enrollmentId || !teiId) {
             return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
         }
-        // $FlowFixMe[prop-missing]
         if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
             return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
         }
-        // $FlowFixMe[prop-missing]
         if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) {
             return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
         }
@@ -77,10 +76,9 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     if (pageStatus === EnrollmentAddEventPageStatuses.DEFAULT) {
         return (
             <EnrollmentAddEventPageDefault
-                // $FlowFixMe - Business logic dictates that pageLayout is defined
                 pageLayout={pageLayout}
                 enrollment={enrollment}
-                attributeValues={attributeValues}
+                attributeValues={attributeValues as any}
                 commonDataError={Boolean(commonDataError)}
             />
         );
@@ -92,17 +90,17 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
                 error
                 title={'An error has occurred'}
             >
-                {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES && (
+                {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES &&
                     i18n.t('Page is missing required values from URL')
-                )}
+                }
 
-                {pageStatus === EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID && (
+                {pageStatus === EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID &&
                     i18n.t('Org unit is not valid with current program')
-                )}
+                }
 
-                {pageStatus === EnrollmentAddEventPageStatuses.PAGE_INVALID && (
+                {pageStatus === EnrollmentAddEventPageStatuses.PAGE_INVALID &&
                     i18n.t('There was an error opening the Page')
-                )}
+                }
             </NoticeBox>
         </div>
     );

@@ -1,5 +1,3 @@
-// @flow
-// $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 
 export const useWidgetDataFromStore = (reducerName: string) => useSelector(({
@@ -7,7 +5,7 @@ export const useWidgetDataFromStore = (reducerName: string) => useSelector(({
     rulesEffectsIndicators,
     rulesEffectsGeneralWarnings,
     rulesEffectsGeneralErrors,
-}) => ({
+}: any) => ({
     feedbacks: [
         ...rulesEffectsFeedback[reducerName]?.displayTexts || [],
         ...rulesEffectsFeedback[reducerName]?.displayKeyValuePairs || [],

@@ -1,4 +1,3 @@
-// @flow
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
@@ -6,8 +5,9 @@ import {
     resetProgramIdBase,
 } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { scopeSelectorActionTypes } from '../../ScopeSelector';
+import type { EpicAction, ReduxStore } from '../../../../capture-core-utils/types/global';
 
-const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
+const programShouldReset = (orgUnitId: string, currentlySelectedProgramId?: string | null) => {
     if (!currentlySelectedProgramId) {
         return false;
     }
@@ -24,7 +24,11 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
     return true;
 };
 
-export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
+type OrgUnitSetPayload = {
+    orgUnitId: string;
+};
+
+export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: EpicAction<OrgUnitSetPayload>, store: ReduxStore) =>
     action$.pipe(
         ofType(
             scopeSelectorActionTypes.ORG_UNIT_ID_SET,
@@ -35,4 +39,3 @@ export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputOb
             return programShouldReset(orgUnitId, currentlySelectedProgramId);
         }),
         map(() => resetProgramIdBase()));
-
