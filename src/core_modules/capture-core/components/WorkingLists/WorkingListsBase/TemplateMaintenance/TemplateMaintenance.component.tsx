@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useImperativeHandle, forwardRef } from 'react';
 import { ExistingTemplateDialog } from './ExistingTemplateDialog.component';
 import { NewTemplateDialog } from './NewTemplateDialog.component';
@@ -8,7 +7,7 @@ import { dialogModes } from './dialogModes';
 import type { SharingSettings } from '../workingListsBase.types';
 import type { Props } from './templateMaintenance.types';
 
-const TemplateMaintenancePlain = (props: Props, ref) => {
+const TemplateMaintenancePlain = (props: Props, ref: any) => {
     const {
         mode,
         currentTemplate,
@@ -71,4 +70,4 @@ const TemplateMaintenancePlain = (props: Props, ref) => {
     );
 };
 
-export const TemplateMaintenance = forwardRef<Props, { handleUpdateTemplate: Function }>(TemplateMaintenancePlain);
+export const TemplateMaintenance = forwardRef<{ handleUpdateTemplate:() => void }, Props>(TemplateMaintenancePlain);

@@ -154,11 +154,19 @@ export const WorkingListsContextBuilder = (props: Props) => {
                         >
                             <TemplatesLoader
                                 {...passOnProps}
-                                templates={templates}
+                                templates={templates || []}
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
                                 loadedProgramIdForTemplates={loadedProgramIdForTemplates}
                                 programStageId={programStageId}
                                 selectionInProgress={selectionInProgress}
+                                orgUnitId={orgUnitId}
+                                categories={categories || {}}
+                                loading={loading}
+                                columns={columns}
+                                currentTemplate={currentTemplate!}
+                                onAddTemplate={onAddTemplate}
+                                onUpdateTemplate={onUpdateTemplate}
+                                onDeleteTemplate={onDeleteTemplate}
                             />
                         </WorkingListsListViewBuilderContextProvider>
                     </WorkingListsListViewUpdaterContextProvider>

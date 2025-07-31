@@ -21,11 +21,15 @@ type OptionalExtractedProps = {
     templateSharingType: string,
 };
 
-type RestProps = OptionalExtractedProps & ListViewConfigOutputProps & ExtractedProps;
+type RestProps = Omit<OptionalExtractedProps & ListViewConfigOutputProps, keyof ExtractedProps>;
 
 export type Props = RestProps & ExtractedProps;
 
-export type ListViewConfigMenuContentOutputProps = RestProps & {
+export type ListViewConfigMenuContentOutputProps = Omit<RestProps, 'onAddTemplate' | 'onUpdateTemplate' | 'onDeleteTemplate' | 'onSetTemplateSharingSettings'> & {
     currentTemplate: WorkingListTemplate,
     customListViewMenuContents?: CustomMenuContents,
+    onAddTemplate?: AddTemplate,
+    onUpdateTemplate?: UpdateTemplate,
+    onDeleteTemplate?: DeleteTemplate,
+    onSetTemplateSharingSettings?: SetTemplateSharingSettings,
 };

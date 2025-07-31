@@ -1,5 +1,4 @@
-// @flow
-import React, { useMemo, useCallback, type ComponentType } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { SharingDialog as UISharingDialog } from '@dhis2/ui';
@@ -12,7 +11,7 @@ const styles = {
     },
 };
 
-const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharingType, dataTest }: Props) => {
+const SharingDialogPlain = ({ onClose, open, templateId, templateSharingType }: Props) => {
     const { refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -32,13 +31,13 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharin
             [],
         ),
         { lazy: true,
-            onComplete: ({ sharing }) => {
+            onComplete: ({ sharing }: any) => {
                 const {
                     externalAccess,
                     publicAccess,
                     userAccesses,
                     userGroupAccesses,
-                } = sharing.object;
+                } = (sharing as any)?.object || {};
 
                 onClose({
                     externalAccess,
@@ -57,13 +56,11 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharin
     return (
         open ?
             <UISharingDialog
-                type={templateSharingType}
+                type={templateSharingType as any}
                 id={templateId}
                 onClose={handleClose}
-                className={classes.dialog}
-                dataTest={dataTest}
             /> : null
     );
 };
 
-export const SharingDialog: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(SharingDialogPlain);
+export const SharingDialog = withStyles(styles)(SharingDialogPlain);
