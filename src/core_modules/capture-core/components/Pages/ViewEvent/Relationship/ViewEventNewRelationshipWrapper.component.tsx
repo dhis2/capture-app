@@ -1,14 +1,14 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Card } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { NewRelationship } from '../../NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
+import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
 
-
-const getStyles = theme => ({
+const getStyles = (theme: Theme) => ({
     container: {
         padding: `${theme.typography.pxToRem(10)} ${theme.typography.pxToRem(24)}`,
     },
@@ -44,21 +44,11 @@ const getStyles = theme => ({
     },
 });
 
-type Props = {
-    onCancel: () => void,
-    classes: {
-        container: string,
-        headerContainer: string,
-        header: string,
-        backToEventContainer: string,
-        backToEventButton: string,
-        newRelationshipPaper: string,
-    },
-}
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 type State = {
-    discardDialogOpen: ?boolean,
-}
+    discardDialogOpen?: boolean;
+};
 
 class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -99,7 +89,6 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <NewRelationship
                         header={i18n.t('New event relationship')}
                         onCancel={onCancel}

@@ -1,4 +1,3 @@
-// @flow
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { actionCreator } from '../../../../actions/actions.utils';
 import { effectMethods } from '../../../../trackerOffline';
@@ -26,7 +25,7 @@ export const updateEventNoteField = (value: string) =>
 export const requestSaveEventNote = (note: string) =>
     actionCreator(actionTypes.REQUEST_SAVE_EVENT_NOTE)({ note });
 
-export const startSaveEventNote = (eventUid: string, serverData: Object, selections: Object, clientId: string) =>
+export const startSaveEventNote = (eventUid: string, serverData: any, selections: any, clientId: string) =>
     actionCreator(actionTypes.START_SAVE_EVENT_NOTE)({ selections, clientId }, {
         offline: {
             effect: {

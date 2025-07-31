@@ -1,4 +1,3 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
@@ -32,9 +31,9 @@ import { getRelationshipNewTeiName } from '../../NewRelationship/RegisterTei';
 const relationshipKey = 'viewEvent';
 
 export const loadRelationshipsForViewEventEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { querySingleResource }: ApiUtils,
+    action$: any,
+    _: any,
+    { querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(
@@ -42,25 +41,24 @@ export const loadRelationshipsForViewEventEpic = (
             viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
             viewEventActionTypes.START_OPEN_EVENT_FOR_VIEW,
         ),
-        switchMap((action) => {
-            // Load event relationships
+        switchMap((action: any) => {
             const event = action.payload.eventContainer.event;
             return getRelationshipsForEvent(event.eventId, event.programId, event.programStageId, querySingleResource)
-                .then(relationships => batchActions([
+                .then((relationships: any) => batchActions([
                     eventRelationshipsLoaded(),
                     setRelationships(relationshipKey, relationships || []),
                 ], viewEventRelationshipsBatchActionTypes.LOAD_EVENT_RELATIONSHIPS_BATCH));
         }));
 
-export const deleteRelationshipForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const deleteRelationshipForViewEventEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(
             viewEventRelationshipsActionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP,
         ),
-        map((action) => {
+        map((action: any) => {
             const clientId = action.payload.clientId;
             const state = store.value;
-            const relationship = state.relationships.viewEvent.find(r => r.clientId === clientId);
+            const relationship = state.relationships.viewEvent.find((r: any) => r.clientId === clientId);
             const serverData = { relationships: [{ relationship: relationship.id }] };
 
             return batchActions([
@@ -70,10 +68,10 @@ export const deleteRelationshipForViewEventEpic = (action$: InputObservable, sto
         }));
 
 
-export const addRelationshipForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP),
-        map((action) => {
+        map((action: any) => {
             const state = store.value;
             const eventId = state.viewEventPage.eventId;
             const existingRelationships = state.dataEntriesRelationships[relationshipKey] || [];
@@ -96,7 +94,7 @@ export const addRelationshipForViewEventEpic = (action$: InputObservable, store:
                 relationshipType: { ...payload.relationshipType },
             };
 
-            if (existingRelationships.some(r =>
+            if (existingRelationships.some((r: any) =>
                 r.relationshipType.id === clientRelationship.relationshipType.id &&
                     r.to.id &&
                     r.to.id === clientRelationship.to.id)
@@ -113,7 +111,6 @@ export const addRelationshipForViewEventEpic = (action$: InputObservable, store:
 
             let saveAction;
             if (toEntity.data) {
-                // save new tei before saving the relationship
                 saveAction = saveEventRelationshipNewTei(clientRelationship, state.currentSelections, relationshipClientId);
             } else {
                 const serverRelationshipData = {
@@ -128,10 +125,10 @@ export const addRelationshipForViewEventEpic = (action$: InputObservable, store:
             ], viewEventRelationshipsBatchActionTypes.SAVE_EVENT_RELATIONSHIP_BATCH);
         }));
 
-export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: InputObservable) =>
+export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: any) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS),
-        map((action) => {
+        map((action: any) => {
             const teiId = action.payload.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const { clientData, selections, clientId } = action.meta;
             const to = clientData.to;
@@ -144,22 +141,22 @@ export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: InputObs
             return startSaveEventRelationship(serverRelationshipData, selections, clientId);
         }));
 
-export const handleViewEventRelationshipSaveTeiFailedEpic = (action$: InputObservable) =>
+export const handleViewEventRelationshipSaveTeiFailedEpic = (action$: any) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED),
-        map(action => removeRelationship(relationshipKey, action.meta.clientId)));
+        map((action: any) => removeRelationship(relationshipKey, action.meta.clientId)));
 
-export const saveRelationshipFailedForViewEventEpic = (action$: InputObservable) =>
+export const saveRelationshipFailedForViewEventEpic = (action$: any) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.SAVE_FAILED_FOR_EVENT_RELATIONSHIP),
-        map(action => removeRelationship(relationshipKey, action.meta.clientId)));
+        map((action: any) => removeRelationship(relationshipKey, action.meta.clientId)));
 
-export const relationshipSavedForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const relationshipSavedForViewEventEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_SAVED),
-        map((action) => {
+        map((action: any) => {
             const state = store.value;
-            const relationship = state.relationships[relationshipKey].find(r => r.clientId === action.meta.clientId);
+            const relationship = state.relationships[relationshipKey].find((r: any) => r.clientId === action.meta.clientId);
 
             const relationshipId = action.payload.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
             const updatedRelationship = {
@@ -168,4 +165,3 @@ export const relationshipSavedForViewEventEpic = (action$: InputObservable, stor
             };
             return updateRelationship(relationshipKey, updatedRelationship);
         }));
-
