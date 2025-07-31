@@ -1,6 +1,7 @@
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
+import type { EpicAction, ReduxStore, ApiUtils } from '../../../../capture-core-utils/types';
 import {
     addEnrollmentEventPageDefaultActionTypes,
 } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
@@ -12,18 +13,12 @@ import {
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 import { buildUrlQueryString } from '../../../utils/routing';
-import type { EpicAction, ReduxStore, ApiUtils } from '../../../../capture-core-utils/types/global';
 
 const shouldNavigateWithRelatedStage = ({
     linkMode,
     linkedEventId,
     linkedOrgUnitId,
     navigate,
-}: {
-    linkMode?: string;
-    linkedEventId?: string;
-    linkedOrgUnitId?: string;
-    navigate: (url: string) => void;
 }) => {
     if (linkMode && linkedEventId) {
         if (linkMode === relatedStageActions.ENTER_DATA) {
@@ -37,24 +32,7 @@ const shouldNavigateWithRelatedStage = ({
     return {};
 };
 
-type EventSaveSuccessPayload = {
-    bundleReport: {
-        typeReportMap: {
-            EVENT: {
-                objectReports: Array<{ uid: string }>;
-            };
-        };
-    };
-};
-
-type EventSaveSuccessMeta = {
-    serverData: {
-        events?: any[];
-        enrollments: Array<{ events: any[] }>;
-    };
-};
-
-export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPayload, EventSaveSuccessMeta>, store: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventSucceededEpic = (action$: EpicAction<any>, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
@@ -117,14 +95,7 @@ export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPa
         }),
     );
 
-type EventSaveErrorMeta = {
-    serverData: {
-        events?: any[];
-        enrollments: Array<{ events: any[] }>;
-    };
-};
-
-export const saveNewEventFailedEpic = (action$: EpicAction<any, EventSaveErrorMeta>) =>
+export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
@@ -142,3 +113,4 @@ export const saveNewEventFailedEpic = (action$: EpicAction<any, EventSaveErrorMe
             ]);
         }),
     );
+
