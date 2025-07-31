@@ -25,10 +25,10 @@ const TemplatesManagerPlain = (props: Props) => {
     const handleSelectTemplate = useCallback((template: WorkingListTemplate) => {
         if (template.id === currentTemplate.id) {
             const defaultTemplate = templates.find(t => t.isDefault);
-            onSelectTemplate!(defaultTemplate.id);
+            defaultTemplate && onSelectTemplate(defaultTemplate.id);
             return;
         }
-        onSelectTemplate!(template.id);
+        onSelectTemplate(template.id);
     }, [
         onSelectTemplate,
         currentTemplate.id,

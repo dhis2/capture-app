@@ -4,13 +4,14 @@ import type { TemplatesLoaderOutputProps } from '../TemplatesLoader';
 
 type ExtractedProps = {
     templates?: WorkingListTemplates,
+    selectionInProgress: boolean,
 };
 
 type OptionalExtractedProps = {
     templates: WorkingListTemplates,
 };
 
-type RestProps = TemplatesLoaderOutputProps & OptionalExtractedProps & ExtractedProps;
+type RestProps = TemplatesLoaderOutputProps & OptionalExtractedProps | ExtractedProps;
 
 export type Props = Readonly<RestProps & ExtractedProps>;
 

@@ -22,7 +22,7 @@ type OptionalExtractedProps = {
     bulkActionBarComponent: ReactElement<any>,
 };
 
-type RestProps = ContextBuilderOutputProps & OptionalExtractedProps & ExtractedProps;
+type RestProps = ContextBuilderOutputProps & OptionalExtractedProps | ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

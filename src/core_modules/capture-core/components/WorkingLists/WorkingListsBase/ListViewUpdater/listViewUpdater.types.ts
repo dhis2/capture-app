@@ -18,7 +18,7 @@ type OptionalExtractedProps = {
     categories: Categories,
 };
 
-type RestProps = ListViewLoaderOutputProps & OptionalExtractedProps & ExtractedProps;
+type RestProps = ListViewLoaderOutputProps & OptionalExtractedProps | ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 
