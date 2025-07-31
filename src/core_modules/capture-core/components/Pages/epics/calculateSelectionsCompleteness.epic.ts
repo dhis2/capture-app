@@ -26,9 +26,9 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
         return false;
     }
 
-    const selectedProgram = state.programId && programCollection.get(state.programId);
+    const selectedProgram = state.programId ? programCollection.get(state.programId) : null;
 
-    if (selectedProgram && selectedProgram.categoryCombination) {
+    if (selectedProgram?.categoryCombination) {
         const categories = Array.from(selectedProgram.categoryCombination.categories.values());
 
         if (categories.some((category: any) => !state.categories?.[category.id])) {
@@ -61,6 +61,6 @@ export const calculateSelectionsCompletenessEpic = (action$: EpicAction<Category
             const isComplete = calculateCompleteStatus(store.value.currentSelections);
             return calculateSelectionsCompleteness(
                 isComplete,
-                (action.payload && action.payload.triggeringActionType) || action.type,
+                action.payload?.triggeringActionType || action.type,
             );
         }));
