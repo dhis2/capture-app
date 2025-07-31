@@ -30,7 +30,7 @@ export const SharingDialog = ({ onClose, open, templateId, templateSharingType, 
                     publicAccess,
                     userAccesses,
                     userGroupAccesses,
-                } = sharing;
+                } = sharing.object;
 
                 onClose({
                     externalAccess,
