@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../actions/actions.utils';
 import { effectMethods } from '../../../../trackerOffline';
 
@@ -31,13 +30,13 @@ export const eventRelationshipsLoaded = () =>
 export const eventCancelNewRelationship = () =>
     actionCreator(actionTypes.EVENT_CANCEL_NEW_RELATIONSHIP)({});
 
-export const requestAddEventRelationship = (relationshipType: { id: string, name: string }, entity: Object, entityType: string) =>
+export const requestAddEventRelationship = (relationshipType: { id: string, name: string }, entity: any, entityType: string) =>
     actionCreator(actionTypes.REQUEST_ADD_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType });
 
 export const eventRelationshipAlreadyExists = (message: string) =>
     actionCreator(actionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS)({ message });
 
-export const saveEventRelationshipNewTei = (clientData: Object, selections: Object, clientId: string) =>
+export const saveEventRelationshipNewTei = (clientData: any, selections: any, clientId: string) =>
     actionCreator(actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE)({ selections }, {
         offline: {
             effect: {
@@ -51,7 +50,7 @@ export const saveEventRelationshipNewTei = (clientData: Object, selections: Obje
         },
     });
 
-export const startSaveEventRelationship = (serverData: Object, selections: Object, clientId: string) =>
+export const startSaveEventRelationship = (serverData: any, selections: any, clientId: string) =>
     actionCreator(actionTypes.START_SAVE_EVENT_RELATIONSHIP)({ selections }, {
         offline: {
             effect: {
@@ -65,18 +64,17 @@ export const startSaveEventRelationship = (serverData: Object, selections: Objec
         },
     });
 
-const handleDequeueUpdate = (deleteAction, saveAction, responseAction) => {
+const handleDequeueUpdate = (deleteAction: any, saveAction: any, responseAction: any) => {
     if (responseAction.type === 'SaveFailedForEventRelationship') return null;
 
     deleteAction.meta.offline.effect.url = 'tracker?importStrategy=DELETE&async=false';
     return deleteAction;
 };
 
-
 export const requestDeleteEventRelationship = (clientId: string) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP)({ clientId });
 
-export const startDeleteEventRelationship = (serverData: Object, clientId: string, selections: Object) =>
+export const startDeleteEventRelationship = (serverData: any, clientId: string, selections: any) =>
     actionCreator(actionTypes.START_DELETE_EVENT_RELATIONSHIP)({ selections }, {
         offline: {
             effect: {

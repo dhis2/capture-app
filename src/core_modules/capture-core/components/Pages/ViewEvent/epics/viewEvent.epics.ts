@@ -1,10 +1,9 @@
-// @flow
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { getCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
+import { getCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
 
@@ -31,22 +30,22 @@ import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/action
 import { buildUrlQueryString } from '../../../../utils/routing';
 
 export const getEventOpeningFromEventListEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$: any,
+    _: any,
+    { absoluteApiPath, querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap(({ payload: { eventId } }) => getEvent(eventId, absoluteApiPath, querySingleResource)
-            .then((eventContainer) => {
+        switchMap(({ payload: { eventId } }: any) => getEvent(eventId, absoluteApiPath, querySingleResource)
+            .then((eventContainer: any) => {
                 if (!eventContainer) {
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
                 }
                 return getCoreOrgUnit({
                     orgUnitId: eventContainer.event.orgUnitId,
-                    onSuccess: orgUnit => startOpenEventForView(eventContainer, orgUnit),
-                    onError: (error) => {
+                    onSuccess: (orgUnit: CoreOrgUnit) => startOpenEventForView(eventContainer, orgUnit),
+                    onError: (error: any) => {
                         const { message, details } = getErrorMessageAndDetails(error);
                         log.error(
                             errorCreator(
@@ -57,7 +56,7 @@ export const getEventOpeningFromEventListEpic = (
                     },
                 });
             })
-            .catch((error) => {
+            .catch((error: any) => {
                 const { message, details } = getErrorMessageAndDetails(error);
                 log.error(
                     errorCreator(
@@ -70,26 +69,25 @@ export const getEventOpeningFromEventListEpic = (
     );
 
 export const getEventFromUrlEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$: any,
+    store: any,
+    { absoluteApiPath, querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const eventId = action.payload.eventId;
-            const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
+            const prevProgramId = store.value.currentSelections.programId;
             return getEvent(eventId, absoluteApiPath, querySingleResource)
-                .then((eventContainer) => {
+                .then((eventContainer: any) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(
                             i18n.t('Event could not be loaded. Are you sure it exists?'));
                     }
-                    // need to retrieve category names from API (due to 50k category options requirement)
                     return getCategoriesDataFromEventAsync(eventContainer.event, querySingleResource)
-                        .then(categoriesData => eventFromUrlRetrieved(eventContainer, prevProgramId, categoriesData));
+                        .then((categoriesData: any) => eventFromUrlRetrieved(eventContainer, prevProgramId, categoriesData));
                 })
-                .catch((error) => {
+                .catch((error: any) => {
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(
                         errorCreator(
@@ -100,15 +98,15 @@ export const getEventFromUrlEpic = (
                 });
         }));
 
-export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
+export const getOrgUnitOnUrlUpdateEpic = (action$: any) =>
     action$.pipe(
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
-        map((action) => {
+        map((action: any) => {
             const eventContainer = action.payload.eventContainer;
             return getCoreOrgUnit({
                 orgUnitId: eventContainer.event.orgUnitId,
-                onSuccess: orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
-                onError: (error) => {
+                onSuccess: (orgUnit: CoreOrgUnit) => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
+                onError: (error: any) => {
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(
                         message ||
@@ -118,18 +116,17 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
             });
         }));
 
-export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { navigate }: ApiUtils) =>
+export const openViewPageLocationChangeEpic = (action$: any, _: any, { navigate }: any) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        map(({ payload: { eventId: viewEventId, orgUnitId } }) => {
+        map(({ payload: { eventId: viewEventId, orgUnitId } }: any) => {
             navigate(`/viewEvent?${buildUrlQueryString({ viewEventId, orgUnitId })}`);
             return resetLocationChange();
         }));
 
-export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
+export const backToMainPageEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        // eslint-disable-next-line complexity
         map(() => {
             const state = store.value;
 
@@ -157,10 +154,10 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             return noWorkingListUpdateNeededOnBackToMainPage();
         }));
 
-export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const backToMainPageLocationChangeEpic = (action$: any, store: any, { navigate }: any) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const orgUnitId = action.payload.orgUnitId;
             const state = store.value;
             const programId = state.currentSelections.programId;
@@ -178,7 +175,7 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
             });
         }));
 
-export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>
+export const openAddRelationshipForViewEventEpic = (action$: any) =>
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP),
         map(() => initializeNewRelationship()));

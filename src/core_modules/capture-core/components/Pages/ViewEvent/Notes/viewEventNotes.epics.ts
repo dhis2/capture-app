@@ -1,4 +1,3 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
@@ -22,24 +21,23 @@ import {
 
 const noteKey = 'viewEvent';
 
-const createServerData = (eventId, note, useNewEndpoint) => {
+const createServerData = (eventId: string, note: string, useNewEndpoint: boolean) => {
     if (useNewEndpoint) {
         return { event: eventId, value: note };
     }
     return { event: eventId, notes: [{ value: note }] };
 };
 
-export const loadNotesForViewEventEpic = (action$: InputObservable) =>
+export const loadNotesForViewEventEpic = (action$: any) =>
     action$.pipe(
         ofType(
             viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
             viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
             viewEventActionTypes.START_OPEN_EVENT_FOR_VIEW,
         ),
-        map((action) => {
+        map((action: any) => {
             const eventContainer = action.payload.eventContainer;
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
-            // Load event relationships
 
             return batchActions([
                 eventNotesLoaded(),
@@ -47,10 +45,10 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         }));
 
-export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForViewEventEpic = (action$: any, store: any, { querySingleResource, fromClientDate }: any) =>
     action$.pipe(
         ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const state = store.value;
             const payload = action.payload;
             const eventId = state.viewEventPage.eventId;
@@ -61,7 +59,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
                 params: {
                     fields: 'userName,firstName,surname',
                 },
-            }).then((user) => {
+            }).then((user: any) => {
                 const { userName, firstName, surname } = user;
                 const clientId = uuid();
                 const serverData = createServerData(eventId, payload.note, useNewEndpoint);
@@ -79,13 +77,12 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
                 };
                 return batchActions([
                     startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
-                    // $FlowFixMe[incompatible-call] automated comment
                     addNote(noteKey, clientNote),
                 ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
             });
         }));
 
-export const saveNoteForViewEventFailedEpic = (action$: InputObservable) =>
+export const saveNoteForViewEventFailedEpic = (action$: any) =>
     action$.pipe(
         ofType(viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED),
-        map(action => removeNote(noteKey, action.meta.clientId)));
+        map((action: any) => removeNote(noteKey, action.meta.clientId)));

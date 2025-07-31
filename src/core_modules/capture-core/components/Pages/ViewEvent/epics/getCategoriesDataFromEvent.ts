@@ -1,23 +1,21 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
-import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
-const getCategoryOptionsAsync = async (optionIds: string, querySingleResource: QuerySingleResource) =>
+const getCategoryOptionsAsync = async (optionIds: string, querySingleResource: any) =>
     querySingleResource({
         resource: 'categoryOptions',
         params: {
             fields: 'id,displayName,categories~pluck,access',
             filter: `id:in:[${optionIds}]`,
         },
-    }).then(response => response?.categoryOptions);
+    }).then((response: any) => response?.categoryOptions);
 
 
 export async function getCategoriesDataFromEventAsync(
-    event: CaptureClientEvent,
-    querySingleResource: QuerySingleResource,
-): Promise<?Array<Object>> {
+    event: any,
+    querySingleResource: any,
+): Promise<Array<any> | null> {
     const optionIdsFromEvent = event.attributeCategoryOptions?.replace(/;/g, ',');
     if (!optionIdsFromEvent) {
         return null;
@@ -38,9 +36,9 @@ export async function getCategoriesDataFromEventAsync(
     }
 
     return programCategories
-        .map((c) => {
+        .map((c: any) => {
             const option = categoryOptions
-                .find(co => co.categories.includes(c.id));
+                .find((co: any) => co.categories.includes(c.id));
 
             if (!option) {
                 log.error(errorCreator('option not found for category')({ category: c }));
@@ -55,7 +53,7 @@ export async function getCategoriesDataFromEventAsync(
             }
 
             categoryOptions = categoryOptions
-                .filter(co => co !== option);
+                .filter((co: any) => co !== option);
 
             return {
                 categoryId: c.id,

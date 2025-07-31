@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
@@ -18,7 +17,7 @@ import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
-import { dataElementTypes, type ProgramStage } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { FEATURES, useFeature } from '../../../../../capture-core-utils';
@@ -27,13 +26,13 @@ import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
-import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { convertFormToClient } from '../../../../converters';
+import type { PlainProps } from './EventDetailsSection.types';
 
-const getStyles = () => ({
+const getStyles: any = () => ({
     container: {
         flexGrow: 2,
         flexBasis: 0,
@@ -62,28 +61,7 @@ const getStyles = () => ({
     editButtonContainer: {},
 });
 
-type Props = {
-    showEditEvent: ?boolean,
-    eventId: string,
-    eventData: Object,
-    onOpenEditEvent: (orgUnit: Object, programCategory: ?ProgramCategory) => void,
-    programStage: ProgramStage,
-    eventAccess: { read: boolean, write: boolean },
-    programId: string,
-    onBackToAllEvents: () => void,
-    classes: {
-        container: string,
-        headerContainer: string,
-        dataEntryContent: string,
-        dataEntryContainer: string,
-        actionsContainer: string,
-        button: string,
-        editButtonContainer: string,
-    },
-};
-
-// eslint-disable-next-line complexity
-const EventDetailsSectionPlain = (props: Props) => {
+const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,
         eventId,
@@ -96,7 +74,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         programId,
         ...passOnProps
     } = props;
-    const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
+    const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
@@ -112,8 +90,8 @@ const EventDetailsSectionPlain = (props: Props) => {
         onBackToAllEvents();
     };
 
-    const occurredAtClient = ((convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE): any): string);
-    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
+    const occurredAtClient = convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string;
+    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
     const isDisabled = !eventAccess.write || !isWithinValidPeriod;
 
     const tooltipContent = useMemo(() => {
@@ -143,7 +121,6 @@ const EventDetailsSectionPlain = (props: Props) => {
     const renderDataEntryContainer = () => (
         <div className={classes.dataEntryContainer}>
             {showEditEvent ?
-            // $FlowFixMe[cannot-spread-inexact] automated comment
                 <EditEventDataEntry
                     dataEntryId={dataEntryIds.SINGLE_EVENT}
                     formFoundation={formFoundation}
@@ -153,7 +130,6 @@ const EventDetailsSectionPlain = (props: Props) => {
                     programId={programId}
                     {...passOnProps}
                 /> :
-            // $FlowFixMe[cannot-spread-inexact] automated comment
                 <ViewEventDataEntry
                     dataEntryId={dataEntryIds.SINGLE_EVENT}
                     formFoundation={formFoundation}
@@ -194,6 +170,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                         <FlyoutMenu dense>
                             <MenuItem
                                 label={i18n.t('View changelog')}
+                                suffix={null}
                                 onClick={() => {
                                     setChangeLogIsOpen(true);
                                     setActionsIsOpen(false);
@@ -241,6 +218,5 @@ const EventDetailsSectionPlain = (props: Props) => {
         </div>
     );
 };
-
 
 export const EventDetailsSection = withStyles(getStyles)(EventDetailsSectionPlain);
