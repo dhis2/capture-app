@@ -19,6 +19,11 @@ const shouldNavigateWithRelatedStage = ({
     linkedEventId,
     linkedOrgUnitId,
     navigate,
+}: {
+    linkMode?: string;
+    linkedEventId?: string;
+    linkedOrgUnitId?: string;
+    navigate: (url: string) => void;
 }) => {
     if (linkMode && linkedEventId) {
         if (linkMode === relatedStageActions.ENTER_DATA) {
