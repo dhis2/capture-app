@@ -1,19 +1,14 @@
 import { shallowEqual, useSelector } from 'react-redux';
 
-export const useWidgetDataFromStore = (reducerName: string) => useSelector(({
-    rulesEffectsFeedback,
-    rulesEffectsIndicators,
-    rulesEffectsGeneralWarnings,
-    rulesEffectsGeneralErrors,
-}: any) => ({
+export const useWidgetDataFromStore = (reducerName: string) => useSelector((state: any) => ({
     feedbacks: [
-        ...rulesEffectsFeedback[reducerName]?.displayTexts || [],
-        ...rulesEffectsFeedback[reducerName]?.displayKeyValuePairs || [],
+        ...state.rulesEffectsFeedback[reducerName]?.displayTexts || [],
+        ...state.rulesEffectsFeedback[reducerName]?.displayKeyValuePairs || [],
     ],
     indicators: [
-        ...rulesEffectsIndicators[reducerName]?.displayTexts || [],
-        ...rulesEffectsIndicators[reducerName]?.displayKeyValuePairs || [],
+        ...state.rulesEffectsIndicators[reducerName]?.displayTexts || [],
+        ...state.rulesEffectsIndicators[reducerName]?.displayKeyValuePairs || [],
     ],
-    warnings: rulesEffectsGeneralWarnings[reducerName]?.warning,
-    errors: rulesEffectsGeneralErrors[reducerName]?.error,
+    warnings: state.rulesEffectsGeneralWarnings[reducerName]?.warning,
+    errors: state.rulesEffectsGeneralErrors[reducerName]?.error,
 }), shallowEqual);

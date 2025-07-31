@@ -1,5 +1,5 @@
-import type { WithStyles } from '@material-ui/core';
+type CssClasses = {
+    classes: Record<string, string>;
+};
 
-export type PlainProps = Record<string, never>;
-
-export type Props = PlainProps & WithStyles<any>;
+export type Props = CssClasses;

@@ -1,7 +1,8 @@
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import type { ComponentType } from 'react';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import {
@@ -11,7 +12,7 @@ import {
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import type { PlainProps } from './EnrollmentAddEventPage.types';
+import type { Props } from './EnrollmentAddEventPage.types';
 import {
     useEnrollmentPageLayout,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
@@ -25,8 +26,6 @@ const styles = {
         marginRight: spacersNum.dp16,
     },
 };
-
-type Props = PlainProps & WithStyles<typeof styles>;
 
 const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     const { navigate } = useNavigate();
@@ -78,7 +77,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
             <EnrollmentAddEventPageDefault
                 pageLayout={pageLayout}
                 enrollment={enrollment}
-                attributeValues={attributeValues as any}
+                attributeValues={attributeValues as Record<string, unknown> | null | undefined}
                 commonDataError={Boolean(commonDataError)}
             />
         );
@@ -106,4 +105,4 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     );
 };
 
-export const EnrollmentAddEventPage = withStyles(styles)(EnrollmentAddEventPagePlain);
+export const EnrollmentAddEventPage: ComponentType<Props> = withStyles(styles)(EnrollmentAddEventPagePlain) as ComponentType<Props>;

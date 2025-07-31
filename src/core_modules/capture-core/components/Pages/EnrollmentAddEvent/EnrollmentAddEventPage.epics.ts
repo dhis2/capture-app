@@ -54,7 +54,7 @@ type EventSaveSuccessMeta = {
     };
 };
 
-export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPayload, EventSaveSuccessMeta>, state: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPayload, EventSaveSuccessMeta>, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
@@ -62,7 +62,7 @@ export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPa
         ),
         map((action: any) => {
             const actions: any[] = [];
-            const { enrollmentDomain } = state.value;
+            const { enrollmentDomain } = store.value;
             const eventsFromApi = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
             const { serverData: { events, enrollments } } = action.meta;
             const serverDataEvents = events ?? enrollments[0].events;
@@ -98,7 +98,7 @@ export const saveNewEventSucceededEpic = (action$: EpicAction<EventSaveSuccessPa
                     requestEventId,
                     linkedEventId,
                     linkedOrgUnitId,
-                } = enrollmentDomain.eventSaveInProgress;
+                } = enrollmentDomain?.eventSaveInProgress;
                 const requestEvent = eventsFromApi.find(event => event.uid === requestEventId);
 
                 if (requestEvent) {
