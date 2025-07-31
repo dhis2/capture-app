@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-24T07:02:15.725Z\n"
-"PO-Revision-Date: 2025-07-24T07:02:15.725Z\n"
+"POT-Creation-Date: 2025-07-31T11:26:01.713Z\n"
+"PO-Revision-Date: 2025-07-31T11:26:01.713Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -904,6 +904,15 @@ msgstr "Feedback"
 msgid "Indicators"
 msgstr "Indicators"
 
+msgid "Notes about this event"
+msgstr "Notes about this event"
+
+msgid "Write a note about this event"
+msgstr "Write a note about this event"
+
+msgid "This event doesn't have any notes"
+msgstr "This event doesn't have any notes"
+
 msgid "Warnings"
 msgstr "Warnings"
 
@@ -1323,15 +1332,6 @@ msgstr "Event completed"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "The event cannot be edited after it has been completed"
-
-msgid "Notes about this event"
-msgstr "Notes about this event"
-
-msgid "Write a note about this event"
-msgstr "Write a note about this event"
-
-msgid "This event doesn't have any notes"
-msgstr "This event doesn't have any notes"
 
 msgid "after"
 msgstr "after"

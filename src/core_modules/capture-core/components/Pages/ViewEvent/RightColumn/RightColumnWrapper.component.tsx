@@ -1,8 +1,7 @@
-
-// @flow
 import * as React from 'react';
 import { spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
@@ -10,17 +9,12 @@ import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.contain
 import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
 import { NotesSection } from './NotesSection/NotesSection.container';
 import { AssigneeSection } from './AssigneeSection';
-
-type Props = {
-    classes: {
-        container: string,
-    }
-};
+import type { PlainProps } from './RightColumnWrapper.types';
 
 const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as const,
         flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
         minWidth: theme.typography.pxToRem(300),
@@ -38,15 +32,17 @@ const componentContainers = [
     { id: 'NotesSection', Component: NotesSection },
 ];
 
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
 class RightColumnWrapperPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
+    renderComponent = (container: any, props: any) => (
         <container.Component key={container.id} {...props} />
     )
 
     render() {
         const { classes, ...passOnProps } = this.props;
         return (
-            <div className={this.props.classes.container}>
+            <div className={classes.container}>
                 {componentContainers.map(c => this.renderComponent(c, passOnProps))}
             </div>
         );
