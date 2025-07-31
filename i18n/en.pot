@@ -879,6 +879,9 @@ msgstr "event"
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+
 msgid "View changelog"
 msgstr "View changelog"
 
@@ -1510,6 +1513,9 @@ msgstr "This stage can only have one event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 
 msgid "An error occurred while deleting the event"
 msgstr "An error occurred while deleting the event"

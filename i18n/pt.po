@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Shelsea Chumaio, 2025\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -1765,6 +1765,9 @@ msgstr "ocorreu um erro ao carregar as listas de trabalho"
 msgid "You do not have access to complete events"
 msgstr "Não tem acesso a eventos completos"
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr "Eventos completos"
 
@@ -1790,11 +1793,11 @@ msgstr " Ocorreu um erro desconhecido."
 msgid "An error occurred while completing events"
 msgstr "Ocorreu um erro durante a conclusão dos eventos"
 
-msgid "An error occurred while deleting the events"
-msgstr "Ocorreu um erro ao apagar os eventos"
-
 msgid "You do not have access to delete events"
 msgstr "Não tem acesso aos eventos a eliminar"
+
+msgid "An error occurred while deleting the events"
+msgstr "Ocorreu um erro ao apagar os eventos"
 
 msgid "Delete events"
 msgstr "Eliminar eventos"
@@ -1822,6 +1825,9 @@ msgstr "Acompanhamento"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Escolha uma etapa do programa para filtrar por {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "Não tem acesso a inscrições completas em massa"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1872,9 +1878,6 @@ msgstr[2] ""
 
 msgid "Mark all events within enrollments as complete"
 msgstr "Marcar todos os eventos dentro das inscrições como concluídos"
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr "Não tem acesso a inscrições completas em massa"
 
 msgid "Complete enrollments"
 msgstr "Concluir as inscrições"
@@ -1971,19 +1974,6 @@ msgstr "A lista de trabalho não pôde ser atualizada"
 msgid "an error occurred loading the working lists"
 msgstr "ocorreu um erro ao carregar as listas de trabalho"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-"ocorreu um erro ao carregar as listas de instâncias de entidades rastreadas"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} selecionado"
-msgstr[1] "{{count}} selecionado"
-msgstr[2] "{{count}} seleccionado"
-
-msgid "Deselect all"
-msgstr "Desmarcar todos"
-
 msgid "Update view"
 msgstr "Vista de atualização"
 
@@ -2016,6 +2006,30 @@ msgstr "Mostre menos"
 
 msgid "Show All"
 msgstr "Mostre tudo"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} selecionado"
+msgstr[1] "{{count}} selecionado"
+msgstr[2] "{{count}} seleccionado"
+
+msgid "Deselect all"
+msgstr "Desmarcar todos"
 
 msgid "Download as JSON"
 msgstr "Baixar como JSON"

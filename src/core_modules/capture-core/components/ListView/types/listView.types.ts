@@ -58,6 +58,9 @@ export type CustomRowMenuContent = {
     clickHandler?: (rowData: DataSourceItem) => any;
     icon?: ReactNode;
     label: string;
+    tooltipContent?: (rowData: DataSourceItem) => string | null;
+    tooltipEnabled?: (rowData: DataSourceItem) => boolean;
+    disabled?: (rowData: DataSourceItem) => boolean;
 };
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 

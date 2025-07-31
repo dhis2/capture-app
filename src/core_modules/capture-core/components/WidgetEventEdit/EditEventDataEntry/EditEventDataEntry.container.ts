@@ -40,6 +40,7 @@ const mapStateToProps = (state: any, props: any) => {
         itemId,
         isCompleted,
         orgUnitFieldValue,
+        expiryPeriod: props.expiryPeriod,
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
         eventData: state.enrollmentDomain?.enrollment?.events,

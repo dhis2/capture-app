@@ -1,6 +1,8 @@
 import i18n from '@dhis2/d2-i18n';
-import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
-import { isValidDate, isValidPeriod } from '../../../utils/validation/validators/form';
+import { isValidOrgUnit } from 'capture-core-utils/validators/form';
+import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
+import { convertFormToClient } from 'capture-core/converters';
+import { dataElementTypes } from 'capture-core/metaData';
 import { relatedStageActions } from '../constants';
 
 type Props = {
@@ -35,7 +37,8 @@ export const isScheduledDateValid = (
         };
     }
 
-    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(scheduledDate, expiryPeriod);
+    const occurredAtClient = convertFormToClient(scheduledDate, dataElementTypes.DATE) as string;
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
 
     if (!isWithinValidPeriod) {
         return {

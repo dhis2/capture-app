@@ -1,6 +1,8 @@
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate, isValidPeriod } from '../../../../../utils/validation/validators/form';
+import { convertFormToClient } from '../../../../../converters';
+import { dataElementTypes } from '../../../../../metaData';
 
 const preValidateDate = (
     value?: string | null,
@@ -17,10 +19,11 @@ const validateNotExpired = (
     value: string,
     props: any,
 ) => {
-    if (!value || !props.expiryPeriod) {
+    if (!value || !props?.expiryPeriod) {
         return true;
     }
-    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(value, props.expiryPeriod);
+    const occurredAtClient = convertFormToClient(value, dataElementTypes.DATE) as string;
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, props.expiryPeriod);
 
     return {
         valid: isWithinValidPeriod,

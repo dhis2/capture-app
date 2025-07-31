@@ -9,15 +9,15 @@
 # Karoline Tufte Lien <karoline@dhis2.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Philip Larsen Donnelly, 2025
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2025
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2025\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,10 +46,10 @@ msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
 msgid "Bulk data entry"
-msgstr ""
+msgstr "Saisie de données en bloc"
 
 msgid "Program overview"
-msgstr ""
+msgstr "Aperçu du programme"
 
 msgid "Active enrollments"
 msgstr "Inscriptions actives"
@@ -64,10 +64,10 @@ msgid "Search"
 msgstr "Chercher"
 
 msgid "Enrollment dashboard"
-msgstr ""
+msgstr "Tableau de bord des inscriptions"
 
 msgid "View event"
-msgstr ""
+msgstr "Afficher l'événement"
 
 msgid "Edit event"
 msgstr "Modifier un événement"
@@ -76,13 +76,13 @@ msgid "New event"
 msgstr "Nouvel événement"
 
 msgid "Event list"
-msgstr ""
+msgstr "Liste des événements"
 
 msgid "More"
 msgstr "Plus"
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Voir le tableau de bord de {{programName}} "
 
 msgid "View dashboard"
 msgstr "Voir le tableau de bord"
@@ -112,16 +112,16 @@ msgid "Last updated"
 msgstr "Dernière mise à jour"
 
 msgid "Lat"
-msgstr ""
+msgstr "Lat"
 
 msgid "Long"
-msgstr ""
+msgstr "Long"
 
 msgid "lat"
-msgstr ""
+msgstr "lat"
 
 msgid "long"
-msgstr ""
+msgstr "long"
 
 msgid "Show less"
 msgstr "Afficher moins"
@@ -151,12 +151,14 @@ msgid "Enrollment"
 msgstr "Inscription"
 
 msgid "Complete event"
-msgstr "Evènement complété"
+msgstr "Événement terminé"
 
 msgid ""
 "The date entered belongs to an expired period. Enter a date after "
 "{{firstValidDate}}."
 msgstr ""
+"La date saisie appartient à une période déjà écoulée. Entrez une date "
+"postérieure à {{firstValidDate}}."
 
 msgid "A value is required"
 msgstr "Une valeur est requise"
@@ -199,7 +201,7 @@ msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - Détails"
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr ""
+msgstr "{{ stageName }} - {{ sectionName }}"
 
 msgid "Assigned user"
 msgstr "Utilisateur affecté"
@@ -252,10 +254,10 @@ msgid "Completed"
 msgstr "Terminé"
 
 msgid "Please add or cancel the note before saving the event"
-msgstr ""
+msgstr "Veuillez ajouter ou annuler la note avant d'enregistrer l'événement"
 
 msgid "Please provide an valid organisation unit"
-msgstr ""
+msgstr "Veuillez fournir une unité d'organisation valide"
 
 msgid "Save and add another"
 msgstr "Sauvegarder et ajouter nouveau"
@@ -326,10 +328,10 @@ msgid "Saving a {{trackedEntityName}}"
 msgstr "Enrégistrer un {{trackedEntityName}}"
 
 msgid "without"
-msgstr "Sans"
+msgstr "sans"
 
 msgid "enrollment"
-msgstr "Enrôlement"
+msgstr "inscription"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -345,15 +347,16 @@ msgstr ""
 msgid ""
 "Would you like to complete the enrollment and all active events as well?"
 msgstr ""
+"Souhaitez-vous terminer l'inscription ainsi que tous les événements actifs ?"
 
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{{count}} événement en {{programStageName}}"
+msgstr[1] "{{count}} événements en {{programStageName}}"
+msgstr[2] "{{count}} événements en {{programStageName}}"
 
 msgid "Yes, complete enrollment and events"
-msgstr ""
+msgstr "Oui, terminer l'inscription et les événements"
 
 msgid "Complete enrollment only"
 msgstr ""
@@ -362,12 +365,12 @@ msgid "Would you like to complete the enrollment?"
 msgstr ""
 
 msgid "Complete enrollment"
-msgstr "Terminer l'enrôlement"
+msgstr "Terminer l'inscription"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
-"Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
-"plus de détails"
+"Il existe un doublon (mais il y a eu des erreurs). Voir le journal pour plus"
+" de détails)."
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -639,7 +642,7 @@ msgid "Close the notice"
 msgstr ""
 
 msgid "No feedback for this enrollment yet"
-msgstr "Aucun commentaire pour cet enrôlement pour le moment"
+msgstr "Aucun commentaire pour cette inscription pour le moment"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "Aucune sortie d'indicateur pour cet enrôlement pour le moment"
@@ -780,7 +783,7 @@ msgid ""
 msgstr ""
 
 msgid "Get started with Capture app"
-msgstr ""
+msgstr "Commencez l'utilisation de l'application Capture"
 
 msgid "Report data"
 msgstr ""
@@ -789,12 +792,14 @@ msgid ""
 "Choose a program and organisation unit to see existing data and create new "
 "records."
 msgstr ""
+"Sélectionnez un programme et une unité d'organisation pour afficher les "
+"données existantes et créer de nouveaux dossiers."
 
 msgid "Click 'Search'. For program-specific results, choose a program first."
 msgstr ""
 
 msgid "Learn more about Capture app"
-msgstr ""
+msgstr "En savoir plus sur l'application Capture"
 
 msgid "Please select {{category}}."
 msgstr "Veuillez sélectionner {{category}}."
@@ -953,7 +958,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Critères de recherche manquants"
 
 msgid "Back to search"
 msgstr " Retour à l'écran de recherche"
@@ -968,7 +973,7 @@ msgid "Loading"
 msgstr "Chargement"
 
 msgid "An error occurred while loading the form"
-msgstr ""
+msgstr "Une erreur s'est produite lors du chargement du formulaire"
 
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
@@ -989,7 +994,7 @@ msgid "No results found for "
 msgstr "Aucun résultat trouvé pour"
 
 msgid "Choose an organisation unit in the form below"
-msgstr ""
+msgstr "Choisissez une unité d'organisation dans le formulaire ci-dessous"
 
 msgid "None selected"
 msgstr "Aucune sélection"
@@ -1101,11 +1106,15 @@ msgstr "Listes sauvegardées dans ce programme"
 
 msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
+"Les listes sauvegardées permettent d'accéder rapidement aux vues les plus "
+"utilisées dans un programme."
 
 msgid ""
 "There are no saved lists in this program yet, create one using the button "
 "below."
 msgstr ""
+"Il n'y a pas encore de listes sauvegardées dans ce programme, créez-en une "
+"en utilisant le bouton ci-dessous."
 
 msgid "Create saved list"
 msgstr ""
@@ -1120,7 +1129,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
 
 msgid "No tracked entity types available"
-msgstr ""
+msgstr "Aucun type d'entité suivie n'est disponible"
 
 msgid "Assigned to"
 msgstr "Attribue"
@@ -1150,9 +1159,11 @@ msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
 msgstr ""
+"Décrivez la raison pour laquelle vous vérifiez les inscriptions à ce "
+"programme protégé."
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "Vérifier les inscriptions"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
@@ -1487,16 +1498,16 @@ msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
-msgstr ""
+msgstr "{{ linkableStageLabel }} ne peut avoir qu'un seul événement"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr ""
+msgstr "{{ linkableStageLabel }} n'a pas d'événements pouvant être liés"
 
 msgid "Actions - {{relationshipName}}"
 msgstr "Actions - {{relationshipName}}"
 
 msgid "Ambiguous relationships, contact system administrator"
-msgstr ""
+msgstr "Relations ambiguës, contacter l'administrateur du système"
 
 msgid "Enter details"
 msgstr ""
@@ -1649,16 +1660,16 @@ msgid "Date"
 msgstr "Date"
 
 msgid "Sort by date"
-msgstr ""
+msgstr "Trier par date"
 
 msgid "User"
 msgstr "Utilisateur"
 
 msgid "Sort by username"
-msgstr ""
+msgstr "Trier par nom d'utilisateur"
 
 msgid "Sort by data item"
-msgstr ""
+msgstr "Trier par élément de données"
 
 msgid "Change"
 msgstr "Modifier"
@@ -1679,7 +1690,7 @@ msgid "Missing implementation step"
 msgstr ""
 
 msgid "Go back without saving relationship"
-msgstr ""
+msgstr "Revenir en arrière sans sauvegarder la relation"
 
 msgid "New Relationship"
 msgstr "Nouvelle relation"
@@ -1706,13 +1717,15 @@ msgid ""
 msgstr ""
 
 msgid "Yes, delete relationship"
-msgstr ""
+msgstr "Oui, supprimer la relation"
 
 msgid "An error occurred while deleting the relationship."
 msgstr "Une erreur s'est produite lors de la suppression de la relation."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
+"Pour ouvrir cette relation, veuillez patienter jusqu'à ce que "
+"l'enregistrement soit terminé."
 
 msgid "Type"
 msgstr "Type"
@@ -1735,8 +1748,11 @@ msgstr "une erreur est survenue lors du chargement des listes de tâches"
 msgid "You do not have access to complete events"
 msgstr ""
 
-msgid "Complete events"
+msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
+
+msgid "Complete events"
+msgstr "Événements terminés"
 
 msgid "Are you sure you want to complete all active events in selection?"
 msgstr ""
@@ -1748,22 +1764,22 @@ msgid "Error completing events"
 msgstr ""
 
 msgid "There was an error completing the events."
-msgstr ""
+msgstr "Une erreur s'est produite lors de la finalisation des événements."
 
 msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Une erreur inconnue s'est produite."
 
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
-msgstr ""
-
 msgid "You do not have access to delete events"
-msgstr ""
+msgstr "Vous n'avez pas accès à la suppression des événements"
+
+msgid "An error occurred while deleting the events"
+msgstr "Une erreur s'est produite lors de la suppression des événements"
 
 msgid "Delete events"
 msgstr "Supprimer des événements"
@@ -1771,6 +1787,8 @@ msgstr "Supprimer des événements"
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr ""
+"Cette opération ne peut être annulée. Êtes-vous sûr de vouloir supprimer les"
+" événements sélectionnés ?"
 
 msgid "Owner organisation unit"
 msgstr ""
@@ -1790,6 +1808,9 @@ msgstr "Suivi"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choisir un stade de programme pour filtrer par {{label}}"
 
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
 "completing the rest. Please see the details below."
@@ -1804,6 +1825,8 @@ msgid ""
 "An unexpected error occurred while fetching the enrollments. Please try "
 "again."
 msgstr ""
+"Une erreur inattendue s'est produite lors de la récupération des "
+"inscriptions. Veuillez réessayer."
 
 msgid ""
 "There are currently no active enrollments in the selection. All enrollments "
@@ -1826,9 +1849,6 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1856,10 +1876,10 @@ msgid "You do not have access to delete enrollments"
 msgstr ""
 
 msgid "Delete enrollments"
-msgstr ""
+msgstr "Supprimer des inscriptions"
 
 msgid "Delete selected enrollments"
-msgstr ""
+msgstr "Supprimer les inscriptions sélectionnées"
 
 msgid ""
 "An error occurred while loading the selected enrollments. Please try again."
@@ -1872,21 +1892,21 @@ msgstr ""
 
 msgid "Active enrollments ({{count}})"
 msgid_plural "Active enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Inscriptions actives ({{count}})"
+msgstr[1] "Inscriptions actives ({{count}})"
+msgstr[2] "Inscriptions actives ({{count}})"
 
 msgid "Completed enrollments ({{count}})"
 msgid_plural "Completed enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Inscriptions terminées ({{count}})"
+msgstr[1] "Inscriptions terminées ({{count}})"
+msgstr[2] "Inscriptions terminées ({{count}})"
 
 msgid "Cancelled enrollments ({{count}})"
 msgid_plural "Cancelled enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Inscriptions annulées ({{count}})"
+msgstr[1] "Inscriptions annulées ({{count}})"
+msgstr[2] "Inscriptions annulées ({{count}})"
 
 msgid "Delete {{count}} enrollment"
 msgid_plural "Delete {{count}} enrollment"
@@ -1895,21 +1915,24 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "An error occurred when deleting enrollments"
-msgstr ""
+msgstr "Une erreur s'est produite lors de la suppression des inscriptions."
 
 msgid "Delete {{ trackedEntityName }} with all enrollments"
-msgstr ""
+msgstr "Supprimer {{ trackedEntityName }} avec toutes les inscriptions"
 
 msgid "Delete {{count}} {{ trackedEntityName }}"
 msgid_plural "Delete {{count}} {{ trackedEntityName }}"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Supprimer {{count}} {{ trackedEntityName }}"
+msgstr[1] "Supprimer {{count}} {{ trackedEntityName }}"
+msgstr[2] "Supprimer {{count}} {{ trackedEntityName }}"
 
 msgid ""
 "Deleting records will also delete any associated enrollments and events. "
 "This cannot be undone. Are you sure you want to delete?"
 msgstr ""
+"La suppression d'enregistrements entraînera également la suppression de "
+"toutes les inscriptions et événements associés. Cette opération est "
+"irréversible. Êtes-vous sûr de vouloir supprimer ?"
 
 msgid "An error occurred while deleting the records"
 msgstr ""
@@ -1919,20 +1942,6 @@ msgstr "La liste de travail n'a pas pu être mise à jour"
 
 msgid "an error occurred loading the working lists"
 msgstr ""
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-"une erreur s'est produite lors du chargement des listes d'instances "
-"d'entités suivies"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} sélectionné"
-msgstr[1] "{{count}} sélectionnés"
-msgstr[2] "{{count}} sélectionnés"
-
-msgid "Deselect all"
-msgstr "Desélectionner tout"
 
 msgid "Update view"
 msgstr "Mettre à jour la vue"
@@ -1966,6 +1975,30 @@ msgstr "Afficher moins"
 
 msgid "Show All"
 msgstr "Afficher tout"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} sélectionné"
+msgstr[1] "{{count}} sélectionnés"
+msgstr[2] "{{count}} sélectionnés"
+
+msgid "Deselect all"
+msgstr "Desélectionner tout"
 
 msgid "Download as JSON"
 msgstr "Télécharger en JSON"
@@ -2090,7 +2123,7 @@ msgid "Checking..."
 msgstr "Vérification..."
 
 msgid "Please provide a valid positive integer"
-msgstr ""
+msgstr "Veuillez indiquer un nombre entier positif valide"
 
 msgid "Please enter a valid time"
 msgstr ""

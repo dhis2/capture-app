@@ -1,4 +1,5 @@
 import type { RenderFoundation } from '../../metaData';
+import type { CurrentSearchTerms } from './SearchForm/SearchForm.types';
 
 export type SearchGroups = Array<{
     searchForm: RenderFoundation;
@@ -20,7 +21,7 @@ export type AvailableSearchOption = {
 export type ComponentProps = Readonly<{
     cleanSearchRelatedInfo: () => void;
     showInitialSearchBox: () => void;
-    navigateToRegisterTrackedEntity: () => void;
+    navigateToRegisterTrackedEntity: (currentSearchTerms: CurrentSearchTerms) => void;
     trackedEntityTypeId: string;
     preselectedProgramId: SelectedSearchScopeId;
     minAttributesRequiredToSearch: number;
