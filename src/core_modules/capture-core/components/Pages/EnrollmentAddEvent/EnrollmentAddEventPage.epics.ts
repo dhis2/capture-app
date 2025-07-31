@@ -1,7 +1,7 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
+import type { EpicAction, ReduxStore, ApiUtils } from '../../../../capture-core-utils/types';
 import {
     addEnrollmentEventPageDefaultActionTypes,
 } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
@@ -32,22 +32,22 @@ const shouldNavigateWithRelatedStage = ({
     return {};
 };
 
-export const saveNewEventSucceededEpic = (action$: InputObservable, state: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventSucceededEpic = (action$: EpicAction<any>, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS,
         ),
-        map((action) => {
-            const actions = [];
-            const { enrollmentDomain } = state.value;
+        map((action: any) => {
+            const actions: any[] = [];
+            const { enrollmentDomain } = store.value;
             const eventsFromApi = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
             const { serverData: { events, enrollments } } = action.meta;
             const serverDataEvents = events ?? enrollments[0].events;
-            const enrollmentEvents = enrollmentDomain.enrollment.events;
+            const enrollmentEvents = enrollmentDomain?.enrollment?.events;
 
             const { eventsToCommit, eventsToAdd } = serverDataEvents.reduce((acc, event) => {
-                const eventFromRedux = enrollmentEvents.find(e => e.event === event.event);
+                const eventFromRedux = enrollmentEvents?.find(e => e.event === event.event);
 
                 if (!eventFromRedux) {
                     acc.eventsToAdd.push(event);
@@ -70,13 +70,13 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
                 );
             }
 
-            if (enrollmentDomain.eventSaveInProgress) {
+            if (enrollmentDomain?.eventSaveInProgress) {
                 const {
                     linkMode,
                     requestEventId,
                     linkedEventId,
                     linkedOrgUnitId,
-                } = enrollmentDomain.eventSaveInProgress;
+                } = enrollmentDomain?.eventSaveInProgress;
                 const requestEvent = eventsFromApi.find(event => event.uid === requestEventId);
 
                 if (requestEvent) {
@@ -95,13 +95,13 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
         }),
     );
 
-export const saveNewEventFailedEpic = (action$: InputObservable) =>
+export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
         ),
-        map((action) => {
+        map((action: any) => {
             const { serverData: { events, enrollments } } = action.meta;
             const rollbackEvents = events ?? enrollments[0].events;
 

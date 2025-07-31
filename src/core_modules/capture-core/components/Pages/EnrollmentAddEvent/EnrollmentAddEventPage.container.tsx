@@ -1,8 +1,8 @@
-// @flow
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import type { ComponentType } from 'react';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import {
@@ -12,7 +12,7 @@ import {
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import { type Props } from './EnrollmentAddEventPage.types';
+import type { Props } from './EnrollmentAddEventPage.types';
 import {
     useEnrollmentPageLayout,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
@@ -41,8 +41,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         defaultPageLayout: DefaultPageLayout,
     });
 
-    // $FlowFixMe
-    const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageIsInvalid = (!loading && !Object.values(validIds)?.every((Id: any) => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
         if (!programId || !enrollmentId || !teiId) {
             return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
@@ -80,7 +79,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
                 // $FlowFixMe - Business logic dictates that pageLayout is defined
                 pageLayout={pageLayout}
                 enrollment={enrollment}
-                attributeValues={attributeValues}
+                attributeValues={attributeValues as Record<string, unknown> | null | undefined}
                 commonDataError={Boolean(commonDataError)}
             />
         );
@@ -108,4 +107,4 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     );
 };
 
-export const EnrollmentAddEventPage = withStyles(styles)(EnrollmentAddEventPagePlain);
+export const EnrollmentAddEventPage: ComponentType<Props> = withStyles(styles)(EnrollmentAddEventPagePlain) as ComponentType<Props>;
