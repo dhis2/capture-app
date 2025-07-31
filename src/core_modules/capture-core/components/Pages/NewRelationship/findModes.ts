@@ -1,10 +1,9 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 
 export const findModes = {
     TEI_SEARCH: 'TEI_SEARCH',
     TEI_REGISTER: 'TEI_REGISTER',
-};
+} as const;
 
 export const findModeDisplayNames = {
     [findModes.TEI_SEARCH]: i18n.t('Search'),

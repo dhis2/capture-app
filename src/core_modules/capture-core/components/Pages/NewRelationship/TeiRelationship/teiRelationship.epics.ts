@@ -1,5 +1,3 @@
-// @flow
-
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
@@ -28,10 +26,10 @@ import { getSearchGroups } from '../../../TeiSearch/getSearchGroups';
 
 const searchId = 'relationshipTeiSearch';
 
-export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openRelationshipTeiSearchEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(newRelationshipActionTypes.SELECT_FIND_MODE),
-        filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
+        filter((action: any) => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
         map(() => {
             const state = store.value;
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
@@ -42,7 +40,7 @@ export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: R
             const searchGroups = getSearchGroups(trackedEntityTypeId, programId);
 
 
-            const addFormDataActions = searchGroups ? searchGroups.map((sg, i) => {
+            const addFormDataActions = searchGroups ? searchGroups.map((sg: any, i: number) => {
                 const key = getSearchFormId(searchId, contextId, i.toString());
                 return addFormData(key, {});
             }) : [];
@@ -53,17 +51,17 @@ export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: R
             ], batchActionTypes.BATCH_OPEN_TEI_SEARCH);
         }));
 
-export const requestRelationshipTeiSearchEpic = (action$: InputObservable) =>
+export const requestRelationshipTeiSearchEpic = (action$: any) =>
     action$.pipe(
         ofType(teiSearchActionTypes.REQUEST_SEARCH_TEI),
-        filter(action => action.payload.searchId && action.payload.searchId === searchId),
+        filter((action: any) => action.payload.searchId && action.payload.searchId === searchId),
         map(() => setSearching()));
 
-export const TeiRelationshipNewOrEditSearchEpic = (action$: InputObservable) =>
+export const TeiRelationshipNewOrEditSearchEpic = (action$: any) =>
     action$.pipe(
         ofType(
             teiSearchActionTypes.TEI_NEW_SEARCH,
             teiSearchActionTypes.TEI_EDIT_SEARCH,
         ),
-        filter(action => action.payload.searchId && action.payload.searchId === searchId),
+        filter((action: any) => action.payload.searchId && action.payload.searchId === searchId),
         map(() => unsetSearching()));

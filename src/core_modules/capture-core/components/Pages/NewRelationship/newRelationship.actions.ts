@@ -1,7 +1,6 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import type { SelectedRelationshipType } from './newRelationship.types';
-import { typeof findModes } from './findModes';
+import { findModes } from './findModes';
 
 export const actionTypes = {
     INITIALIZE_NEW_RELATIONSHIP: 'InitializeNewRelationship',
@@ -22,7 +21,7 @@ export const selectRelationshipType = (selectedRelationshipType: SelectedRelatio
 export const deselectRelationshipType = () =>
     actionCreator(actionTypes.DESELECT_RELATIONSHIP_TYPE)({ });
 
-export const selectFindMode = (findMode: $Values<findModes>) =>
+export const selectFindMode = (findMode: typeof findModes[keyof typeof findModes]) =>
     actionCreator(actionTypes.SELECT_FIND_MODE)({ findMode });
 
 export const setSearching = () =>

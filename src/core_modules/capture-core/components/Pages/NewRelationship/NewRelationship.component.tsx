@@ -1,20 +1,24 @@
-// @flow
 import * as React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector.component';
 import { TeiRelationship } from './TeiRelationship/TeiRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';
 import { RelationshipNavigation } from './RelationshipNavigation/RelationshipNavigation.container';
+import { findModes } from './findModes';
 
+type OwnProps = {
+    onAddRelationship: (relationshipType: { id: string; name: string }, entity: any, entityType: string) => void;
+    onCancel: () => void;
+    selectedRelationshipType?: SelectedRelationshipType;
+    onInitializeNewRelationship: () => void;
+    onSelectRelationshipType: (selectedRelationshipType: SelectedRelationshipType) => void;
+    onDeselectRelationshipType: () => void;
+    onSelectFindMode: (findMode: typeof findModes[keyof typeof findModes]) => void;
+    header: any;
+    relationshipTypes?: Array<any>;
+};
 
-type Props = {
-    onAddRelationship: (relationshipType: { id: string, name: string }, entity: Object, entityType: string) => void,
-    onCancel: () => {},
-    classes: {
-        container: string,
-    },
-    selectedRelationshipType: ?SelectedRelationshipType,
-}
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
 const getStyles = () => ({
     container: {
@@ -27,7 +31,16 @@ const relationshipComponentByEntityType = {
 };
 
 class NewRelationshipPlain extends React.Component<Props> {
-    renderRelationship = (selectedRelationshipType: SelectedRelationshipType, props: Object) => {
+    handleAddRelationship = (entity: any) => {
+        const relationshipType = this.props.selectedRelationshipType;
+        if (!relationshipType) {
+            return;
+        }
+
+        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.name }, entity, relationshipType.to.entity);
+    }
+
+    renderRelationship = (selectedRelationshipType: SelectedRelationshipType, props: any) => {
         const RelationshipComponent = relationshipComponentByEntityType[selectedRelationshipType.to.entity];
         return (
             <RelationshipComponent
@@ -35,15 +48,6 @@ class NewRelationshipPlain extends React.Component<Props> {
                 {...props}
             />
         );
-    }
-
-    handleAddRelationship = (entity: Object) => {
-        const relationshipType = this.props.selectedRelationshipType;
-        if (!relationshipType) {
-            return;
-        }
-
-        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.name }, entity, relationshipType.to.entity);
     }
 
     render() {

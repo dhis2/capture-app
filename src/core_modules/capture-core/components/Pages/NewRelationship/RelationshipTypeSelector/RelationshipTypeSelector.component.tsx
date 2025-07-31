@@ -1,33 +1,27 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import { IconCross16 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import type { RelationshipType } from '../../../../metaData';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 
-type Props = {
-    relationshipTypes: ?Array<RelationshipType>,
-    selectedRelationshipType?: ?SelectedRelationshipType,
-    onSelectRelationshipType: (relationshipType: SelectedRelationshipType) => void,
-    onDeselectRelationshipType: () => void,
-    classes: {
-        relationshipType: string,
-        relationshipTypeSelected: string,
-        relationshipTypeSelectable: string,
-        container: string,
-        relationshipTypeSelectedText: string,
-    }
-}
+type OwnProps = {
+    relationshipTypes?: Array<RelationshipType>;
+    selectedRelationshipType?: SelectedRelationshipType;
+    onSelectRelationshipType: (relationshipType: SelectedRelationshipType) => void;
+    onDeselectRelationshipType: () => void;
+};
 
-const getStyles = theme => ({
+type Props = OwnProps & WithStyles<typeof getStyles>;
+
+const getStyles = (theme: Theme) => ({
     relationshipType: {
         display: 'flex',
         padding: theme.typography.pxToRem(10),
-        border: `1px solid ${theme.palette.grey.light}`,
+        border: `1px solid ${theme.palette.grey[300]}`,
         borderRadius: theme.typography.pxToRem(4),
         margin: theme.typography.pxToRem(10),
-
     },
     relationshipTypeSelectable: {
         cursor: 'pointer',
@@ -52,8 +46,18 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
         this.props.onSelectRelationshipType({
             id: rt.id,
             name: rt.name,
-            from: { ...rt.from },
-            to: { ...rt.to },
+            from: {
+                entity: rt.from.entity,
+                programId: rt.from.programId || undefined,
+                programStageId: rt.from.programStageId || undefined,
+                trackedEntityTypeId: rt.from.trackedEntityTypeId,
+            },
+            to: {
+                entity: rt.to.entity,
+                programId: rt.to.programId || undefined,
+                programStageId: rt.to.programStageId || undefined,
+                trackedEntityTypeId: rt.to.trackedEntityTypeId,
+            },
         });
     }
     renderRelationshipTypes = () => {
@@ -64,7 +68,7 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
                 data-test={`relationship-type-selector-button-${rt.id}`}
                 className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)}
                 role="button"
-                tabIndex="0"
+                tabIndex={0}
                 onClick={() => this.onSelectRelationshipType(rt)}
             >
                 {rt.name}
@@ -76,7 +80,7 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
         const { classes, onDeselectRelationshipType } = this.props;
         return (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>
-                <div className={classes.relationshipTypeSelectedText} onClick={onDeselectRelationshipType} role="button" tabIndex="0">
+                <div className={classes.relationshipTypeSelectedText} onClick={onDeselectRelationshipType} role="button" tabIndex={0}>
                     <div>{selectedRelationshipType.name}</div>
                     <IconCross16 />
                 </div>

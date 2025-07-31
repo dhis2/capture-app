@@ -1,7 +1,7 @@
-// @flow
 import { connect } from 'react-redux';
 import { NewRelationshipComponent } from './NewRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';
+import { findModes } from './findModes';
 import {
     selectRelationshipType,
     deselectRelationshipType,
@@ -9,12 +9,12 @@ import {
     initializeNewRelationship,
 } from './newRelationship.actions';
 
-const mapStateToProps = (state: ReduxState) => ({
+const mapStateToProps = (state: any) => ({
     selectedRelationshipType: state.newRelationship.selectedRelationshipType,
     findMode: state.newRelationship.findMode,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onInitializeNewRelationship: () => {
         dispatch(initializeNewRelationship());
     },
@@ -24,10 +24,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onDeselectRelationshipType: () => {
         dispatch(deselectRelationshipType());
     },
-    onSelectFindMode: (findMode: string) => {
+    onSelectFindMode: (findMode: typeof findModes[keyof typeof findModes]) => {
         dispatch(selectFindMode(findMode));
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const NewRelationship = connect(mapStateToProps, mapDispatchToProps)(NewRelationshipComponent);
