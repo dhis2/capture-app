@@ -31,7 +31,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     if (selectedProgram && selectedProgram.categoryCombination) {
         const categories = Array.from(selectedProgram.categoryCombination.categories.values());
 
-        if (categories.some((category: any) => !state.categories || !state.categories[category.id])) {
+        if (categories.some((category: any) => !state.categories?.[category.id])) {
             return false;
         }
     }
