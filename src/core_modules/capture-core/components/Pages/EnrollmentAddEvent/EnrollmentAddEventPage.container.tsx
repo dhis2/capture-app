@@ -12,12 +12,15 @@ import {
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import type { Props } from './EnrollmentAddEventPage.types';
 import {
     useEnrollmentPageLayout,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
 import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
+
+type Props = {
+    classes: Record<string, string>;
+};
 
 const styles = {
     informativeMessage: {
