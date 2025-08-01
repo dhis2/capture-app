@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { ProgramStageSelector } from '../../EnrollmentAddEvent/ProgramStageSelector';
 import { NewEventWorkspace } from '../../EnrollmentAddEvent/NewEventWorkspace';

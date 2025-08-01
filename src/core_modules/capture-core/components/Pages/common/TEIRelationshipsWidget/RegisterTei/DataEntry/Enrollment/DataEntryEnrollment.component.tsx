@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withTheme } from '@material-ui/core/styles';
@@ -36,7 +35,7 @@ const NewEnrollmentRelationshipPlain =
                 selectedScopeId={programId}
                 orgUnitId={orgUnitId}
                 fieldOptions={fieldOptions}
-                saveButtonText={(trackedEntityTypeName: string) => i18n.t('Save new {{trackedEntityTypeName}} and link', {
+                saveButtonText={trackedEntityTypeName => i18n.t('Save new {{trackedEntityTypeName}} and link', {
                     trackedEntityTypeName,
                     interpolation: { escapeValue: false },
                 })}
