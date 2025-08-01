@@ -13,7 +13,7 @@ const headerText = i18n.t('Feedback');
 
 const getStyles = (theme: Theme) => ({
     badge: {
-        backgroundColor: theme.palette.grey[500],
+        backgroundColor: theme.palette.grey[300],
     },
     feedback: {
         marginTop: theme.typography.pxToRem(5),
