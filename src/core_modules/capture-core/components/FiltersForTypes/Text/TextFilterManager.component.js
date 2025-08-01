@@ -1,8 +1,7 @@
 // @flow
-import React, { useState, useCallback } from 'react';
+import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
-import { NoValueFilter } from '../common';
 
 type Props = {
     filter: ?TextFilterData,
@@ -10,30 +9,40 @@ type Props = {
     handleCommitValue: () => void,
 };
 
-const calculateDefaultValue = (filter: ?TextFilterData): ?string =>
-    (filter && filter.value ? filter.value : undefined);
+type State = {
+    value: ?string,
+};
 
-export const TextFilterManager = (props: Props) => {
-    const { filter, filterTypeRef, handleCommitValue, ...passOnProps } = props;
-    const [value, setValue] = useState<?string>(() => calculateDefaultValue(filter));
+export class TextFilterManager extends React.Component<Props, State> {
+    static calculateDefaultState(filter: ?TextFilterData) {
+        return {
+            value: (filter && filter.value ? filter.value : undefined),
+        };
+    }
 
-    const handleCommitValueLocal = useCallback((newValue: ?string) => {
-        setValue(newValue);
-        handleCommitValue && handleCommitValue();
-    }, [handleCommitValue]);
+    constructor(props: Props) {
+        super(props);
+        this.state = TextFilterManager.calculateDefaultState(this.props.filter);
+    }
 
-    return (
-        <>
-            <NoValueFilter
-                value={value}
-                onCommitValue={handleCommitValueLocal}
-            />
-            {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+    handleCommitValue = (value: ?string) => {
+        this.setState({
+            value,
+        });
+        this.props.handleCommitValue && this.props.handleCommitValue();
+    }
+
+    render() {
+        const { filter, filterTypeRef, ...passOnProps } = this.props;
+
+        return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextFilter
-                value={value}
-                onCommitValue={handleCommitValueLocal}
+                value={this.state.value}
+                ref={filterTypeRef}
+                onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />
-        </>
-    );
-};
+        );
+    }
+}
