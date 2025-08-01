@@ -3,7 +3,7 @@ import { escapeString } from '../../../../../../utils/escapeString';
 import type { TextFilterData } from '../../../../../FiltersForTypes/Text/types';
 
 export function convertText({ sourceValue, unique }: { sourceValue: TextFilterData, unique?: boolean }): string {
-    if (sourceValue.isNoValue) {
+    if (sourceValue.isEmpty) {
         return 'null';
     }
 

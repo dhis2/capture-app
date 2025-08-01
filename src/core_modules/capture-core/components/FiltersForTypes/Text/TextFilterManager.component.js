@@ -19,10 +19,11 @@ export class TextFilterManager extends React.Component<Props, State> {
             return { value: undefined };
         }
 
-        // When the filter represents an "Empty / no value" choice we keep the
-        // internal value as null so that the checkbox is shown as checked and the
-        // input rendered empty.
-        if (filter.isNoValue) {
+        if (filter.isEmpty) {
+            return { value: null };
+        }
+
+        if (filter.isNotEmpty) {
             return { value: null };
         }
 

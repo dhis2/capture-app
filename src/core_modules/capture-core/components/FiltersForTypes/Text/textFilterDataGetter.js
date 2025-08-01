@@ -7,7 +7,7 @@ export function getTextFilterData(value: ?string): ?TextFilterData {
     if (value === EMPTY_FILTER_VALUE) {
         return {
             value: i18n.t('Is empty'),
-            isNoValue: true,
+            isEmpty: true,
         };
     }
 

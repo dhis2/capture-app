@@ -1,6 +1,6 @@
 // @flow
 export type TextFilterData = {|
     value: string,
-    isNoValue?: boolean,
+    isEmpty?: boolean,
     isNotEmpty?: boolean,
 |};
