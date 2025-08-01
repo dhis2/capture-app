@@ -6,13 +6,16 @@ const programIdSelector = (state: any) => state.newRelationshipRegisterTei.progr
 export const makeEnrollmentMetadataSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
-        let program: any;
-        try {
-            program = getProgramFromProgramIdThrowIfNotFound(programId);
-        } catch (error) {
+        if (!programId) {
             return null;
         }
 
-        return program.enrollment;
+        try {
+            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            return program.enrollment;
+        } catch (error) {
+            console.warn(`Failed to get program metadata for programId: ${programId}`, error);
+            return null;
+        }
     },
 );
