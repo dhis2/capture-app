@@ -1,15 +1,13 @@
-// @flow
-
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconSearch24, IconAdd24, spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import { RegisterTei } from '../RegisterTei';
 import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
 import { TeiRelationshipSearchResults } from './SearchResults/TeiRelationshipSearchResults.component';
 import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
-import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
 import { getDisplayName } from '../../../../trackedEntityInstances/getDisplayName';
 import { ResultsPageSizeContext } from '../../shared-contexts';
@@ -17,24 +15,22 @@ import type { EnrollmentPayload } from
     '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
 import type { TeiPayload } from
     '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TrackedEntityType } from '../../../../metaData';
 
-type Props = {
-    findMode?: ?$Values<typeof findModes>,
-    onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
-    onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
-    onAddRelationship: (entity: Object) => void,
-    onCancel: () => void,
-    selectedRelationshipType: SelectedRelationshipType,
-    classes: {
-        container: string,
-        button: string,
-        buttonIcon: string,
-        modeSelectionsContainer: string,
-    },
-    onGetUnsavedAttributeValues?: ?Function,
-}
+type OwnProps = {
+    findMode?: typeof findModes[keyof typeof findModes];
+    onOpenSearch: (trackedEntityTypeId: string, programId?: string) => void;
+    onSelectFindMode: (findMode: typeof findModes[keyof typeof findModes]) => void;
+    onAddRelationship: (entity: any) => void;
+    onCancel: () => void;
+    selectedRelationshipType: SelectedRelationshipType;
+    onGetUnsavedAttributeValues?: (() => Record<string, unknown>) | null;
+};
 
-const getStyles = theme => ({
+type Props = OwnProps & WithStyles<typeof getStyles>;
+
+const getStyles = (theme: Theme) => ({
+    container: {},
     modeSelectionsContainer: {
         display: 'flex',
     },
@@ -45,21 +41,21 @@ const getStyles = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        backgroundColor: theme.palette.grey.lighter,
+        backgroundColor: theme.palette.grey[500],
     },
     buttonIcon: {
         marginRight: spacersNum.dp8,
     },
-});
+}) as const;
 
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
 class TeiRelationshipPlain extends React.Component<Props> {
-    trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
     constructor(props: Props) {
         super(props);
         this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
     }
+
     getTrackedEntityTypeName = () => {
         const trackedEntityType = this.trackedEntityTypeSelector(this.props);
         if (!trackedEntityType) {
@@ -68,8 +64,10 @@ class TeiRelationshipPlain extends React.Component<Props> {
         return trackedEntityType.name;
     }
 
+    trackedEntityTypeSelector: (props: any) => TrackedEntityType;
 
-    handleAddRelationship = (teiId: string, values: Object) => {
+
+    handleAddRelationship = (teiId: string, values: any) => {
         const trackedEntityType = this.trackedEntityTypeSelector(this.props);
         this.props.onAddRelationship({
             id: teiId,
@@ -129,7 +127,7 @@ class TeiRelationshipPlain extends React.Component<Props> {
         );
     }
 
-    renderSearch = (props: Object) => {
+    renderSearch = (props: any) => {
         const { selectedRelationshipType, onAddRelationship, ...passOnProps } = props;
         const trackedEntityTypeName = this.getTrackedEntityTypeName();
         return (
@@ -159,7 +157,7 @@ class TeiRelationshipPlain extends React.Component<Props> {
         </ResultsPageSizeContext.Provider>
     );
 
-    renderByMode = (findMode, props) => {
+    renderByMode = (findMode: any, props: any) => {
         if (findMode === findModes.TEI_SEARCH) {
             return this.renderSearch(props);
         }
@@ -184,4 +182,3 @@ class TeiRelationshipPlain extends React.Component<Props> {
 }
 
 export const TeiRelationship = withStyles(getStyles)(TeiRelationshipPlain);
-
