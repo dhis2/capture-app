@@ -1,11 +1,8 @@
-// @flow
 import { connect } from 'react-redux';
 import { IndicatorsSectionComponent } from './IndicatorsSection.component';
 
-const mapStateToProps = (state: ReduxState, props: Object) => ({
+const mapStateToProps = (state: any, props: any) => ({
     indicators: state.rulesEffectsIndicators[props.dataEntryKey],
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const IndicatorsSection = connect(mapStateToProps, () => ({}))(IndicatorsSectionComponent);

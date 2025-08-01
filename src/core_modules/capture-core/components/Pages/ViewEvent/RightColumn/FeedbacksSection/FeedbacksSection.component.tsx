@@ -1,29 +1,25 @@
-// @flow
-
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
+import type { PlainProps } from './FeedbacksSection.types';
 
-type Props = {
-    classes: Object,
-    feedbacks: ?{ displayTexts: ?Array<string>, displayKeyValuePairs: ?Array<{ key: string, value: string }>},
-}
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const headerText = i18n.t('Feedback');
 
 const getStyles = (theme: Theme) => ({
     badge: {
-        backgroundColor: theme.palette.grey.light,
+        backgroundColor: theme.palette.grey[300],
     },
     feedback: {
         marginTop: theme.typography.pxToRem(5),
         marginBottom: theme.typography.pxToRem(5),
         borderRadius: theme.typography.pxToRem(4),
-        backgroundColor: theme.palette.grey.lighter,
+        backgroundColor: theme.palette.grey[100],
         display: 'flex',
     },
     textFeedback: {
@@ -39,6 +35,8 @@ const getStyles = (theme: Theme) => ({
 });
 
 class FeedbacksSectionPlain extends React.Component<Props> {
+    getFeedbacks = () => this.props.feedbacks || {};
+
     renderHeader = (count: number) => {
         const classes = this.props.classes;
         return (
@@ -51,7 +49,7 @@ class FeedbacksSectionPlain extends React.Component<Props> {
         );
     }
 
-    renderTextItems = (displayTexts: Array<any>, classes: Object) => displayTexts.map(displayText => (
+    renderTextItems = (displayTexts: Array<any>, classes: any) => displayTexts.map(displayText => (
         <div
             className={classNames(classes.feedback, classes.textFeedback)}
             key={displayText.id}
@@ -60,14 +58,12 @@ class FeedbacksSectionPlain extends React.Component<Props> {
         </div>
     ))
 
-    renderKeyValueItems = (keyValuePairs: Array<any>, classes: Object) => keyValuePairs.map(pair => (
+    renderKeyValueItems = (keyValuePairs: Array<any>, classes: any) => keyValuePairs.map(pair => (
         <div className={classNames(classes.feedback, classes.keyValueFeedback)} key={pair.id}>
             <div className={classes.keyValueFeedbackItem}>{pair.key}</div>
             <div className={classes.keyValueFeedbackItem}>{pair.value}</div>
         </div>
     ))
-
-    getFeedbacks = () => this.props.feedbacks || {};
 
     render() {
         const classes = this.props.classes;

@@ -1,11 +1,8 @@
-// @flow
 import { connect } from 'react-redux';
 import { FeedbacksSectionComponent } from './FeedbacksSection.component';
 
-const mapStateToProps = (state: ReduxState, props: Object) => ({
+const mapStateToProps = (state: any, props: any) => ({
     feedbacks: state.rulesEffectsFeedback[props.dataEntryKey],
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const FeedbacksSection = connect(mapStateToProps, () => ({}))(FeedbacksSectionComponent);

@@ -1,17 +1,12 @@
-// @flow
-
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconErrorFilled24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
+import type { PlainProps } from './ErrorsSection.types';
 
-
-type Props = {
-    classes: Object,
-    errors: ?Array<any>,
-}
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const headerText = i18n.t('Errors');
 
@@ -25,7 +20,7 @@ const getStyles = (theme: Theme) => ({
         marginBottom: theme.typography.pxToRem(5),
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(4),
-        backgroundColor: theme.palette.error.lighter,
+        backgroundColor: theme.palette.error.light,
     },
 });
 
@@ -66,4 +61,3 @@ class ErrorsSectionPlain extends React.Component<Props> {
 }
 
 export const ErrorsSectionComponent = withStyles(getStyles)(ErrorsSectionPlain);
-
