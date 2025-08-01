@@ -13,7 +13,7 @@ const headerText = i18n.t('Indicators');
 
 const getStyles = (theme: Theme) => ({
     badge: {
-        backgroundColor: theme.palette.grey[300],
+        backgroundColor: theme.palette.grey[500],
     },
     indicator: {
         marginTop: theme.typography.pxToRem(5),
