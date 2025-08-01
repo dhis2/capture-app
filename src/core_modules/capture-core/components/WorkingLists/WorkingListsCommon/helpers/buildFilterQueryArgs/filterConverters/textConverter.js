@@ -7,6 +7,10 @@ export function convertText({ sourceValue, unique }: { sourceValue: TextFilterDa
         return 'null';
     }
 
+    if (sourceValue.isNotEmpty) {
+        return '!null';
+    }
+
     const operator = unique ? 'eq' : 'like';
     return `${operator}:${escapeString(sourceValue.value)}`;
 }

@@ -4,6 +4,7 @@ import { Checkbox, MenuDivider } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
+import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from './constants';
 import type { UpdatableFilterContent } from '../types';
 
 type Value = ?string;
@@ -23,7 +24,7 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
     }
 
     handleEnterKey = (value: ?string) => {
-        this.props.onUpdate(value || null);
+        this.props.onUpdate(value || '');
     };
 
     handleBlur = (value: string) => {
@@ -34,8 +35,12 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
         this.props.onCommitValue(value);
     };
 
-    handleCheckboxChange = ({ checked }: {| checked: boolean |}) => {
-        this.props.onCommitValue(checked ? null : '');
+    handleEmptyCheckboxChange = ({ checked }: {| checked: boolean |}) => {
+        this.props.onCommitValue(checked ? EMPTY_FILTER_VALUE : '');
+    };
+
+    handleNotEmptyCheckboxChange = ({ checked }: {| checked: boolean |}) => {
+        this.props.onCommitValue(checked ? NOT_EMPTY_FILTER_VALUE : '');
     };
 
     render() {
@@ -46,8 +51,13 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
                 <div>
                     <Checkbox
                         label={i18n.t('Is empty')}
-                        checked={value === null}
-                        onChange={this.handleCheckboxChange}
+                        checked={value === EMPTY_FILTER_VALUE}
+                        onChange={this.handleEmptyCheckboxChange}
+                    />
+                    <Checkbox
+                        label={i18n.t('Is not empty')}
+                        checked={value === NOT_EMPTY_FILTER_VALUE}
+                        onChange={this.handleNotEmptyCheckboxChange}
                     />
                     <MenuDivider />
                 </div>
@@ -56,7 +66,7 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
                     onChange={this.handleInputChange}
                     onBlur={this.handleBlur}
                     onEnterKey={this.handleEnterKey}
-                    value={value ?? ''}
+                    value={value && value !== NOT_EMPTY_FILTER_VALUE && value !== EMPTY_FILTER_VALUE ? value : ''}
                 />
             </>
         );

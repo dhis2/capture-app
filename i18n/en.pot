@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-01T10:36:42.227Z\n"
-"PO-Revision-Date: 2025-08-01T10:36:42.227Z\n"
+"POT-Creation-Date: 2025-08-01T11:01:32.038Z\n"
+"PO-Revision-Date: 2025-08-01T11:01:32.038Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -485,6 +485,9 @@ msgstr "Contains text"
 
 msgid "Is empty"
 msgstr "Is empty"
+
+msgid "Is not empty"
+msgstr "Is not empty"
 
 msgid "Yes"
 msgstr "Yes"
