@@ -15,9 +15,18 @@ type State = {
 
 export class TextFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: ?TextFilterData) {
-        return {
-            value: (filter && filter.value ? filter.value : undefined),
-        };
+        if (!filter) {
+            return { value: undefined };
+        }
+
+        // When the filter represents an "Empty / no value" choice we keep the
+        // internal value as null so that the checkbox is shown as checked and the
+        // input rendered empty.
+        if (filter.isNoValue) {
+            return { value: null };
+        }
+
+        return { value: filter.value || undefined };
     }
 
     constructor(props: Props) {

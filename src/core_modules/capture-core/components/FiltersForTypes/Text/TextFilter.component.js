@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import { Checkbox, MenuDivider } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
@@ -12,42 +14,51 @@ type Props = {
     value: ?string,
 };
 
-// $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
 export class TextFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
-
-        if (!value) {
-            return null;
-        }
 
         return getTextFilterData(value);
     }
 
     handleEnterKey = (value: ?string) => {
         this.props.onUpdate(value || null);
-    }
+    };
 
     handleBlur = (value: string) => {
         this.props.onCommitValue(value);
-    }
+    };
 
-    handleChange = (value: string) => {
+    handleInputChange = (value: string) => {
         this.props.onCommitValue(value);
-    }
+    };
+
+    handleCheckboxChange = ({ checked }: {| checked: boolean |}) => {
+        this.props.onCommitValue(checked ? null : '');
+    };
 
     render() {
         const { value } = this.props;
+
         return (
-            /* $FlowSuppress: Flow not working 100% with HOCs */
-            // $FlowFixMe[prop-missing] automated comment
-            <Input
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-                onEnterKey={this.handleEnterKey}
-                value={value}
-            />
+            <>
+                <div>
+                    <Checkbox
+                        label={i18n.t('Is empty')}
+                        checked={value === null}
+                        onChange={this.handleCheckboxChange}
+                    />
+                    <MenuDivider />
+                </div>
+
+                <Input
+                    onChange={this.handleInputChange}
+                    onBlur={this.handleBlur}
+                    onEnterKey={this.handleEnterKey}
+                    value={value ?? ''}
+                />
+            </>
         );
     }
 }
