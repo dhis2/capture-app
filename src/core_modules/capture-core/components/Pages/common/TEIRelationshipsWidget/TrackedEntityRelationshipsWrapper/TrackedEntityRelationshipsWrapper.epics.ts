@@ -78,7 +78,7 @@ export const openRelationshipTeiRegisterWidgetEpic = (action$: EpicAction<any>) 
             }
 
             if (!orgUnit) {
-                return Promise.resolve(initializeRegisterTei(trackerProgram && trackerProgram.id));
+                return Promise.resolve(initializeRegisterTei(trackerProgram?.id));
             }
 
             return of(initializeRegisterTei(programId, orgUnit));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { selectFindMode } from './TrackedEntityRelationshipsWrapper.actions';
@@ -31,6 +31,15 @@ export const TrackedEntityRelationshipsWrapper = ({
     const { orgUnit } = useCoreOrgUnit(orgUnitId);
     const initialOrgUnit = orgUnit ? { id: orgUnitId, name: orgUnit.name, path: orgUnit.path } : null;
 
+    const resultsPageSizeValue = useMemo(() => ({ resultsPageSize: 5 }), []);
+
+    const getResultsView = useMemo(() => (onLinkToTrackedEntityFromSearch: any) => (viewProps: any) => (
+        <TeiRelationshipSearchResults
+            onAddRelationship={onLinkToTrackedEntityFromSearch}
+            {...viewProps}
+        />
+    ), []);
+
     const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
         dispatch(selectFindMode({
             findMode,
@@ -52,55 +61,48 @@ export const TrackedEntityRelationshipsWrapper = ({
     }
 
     return (
-        <>
-            <WidgetTrackedEntityRelationship
-                programId={programId}
-                trackedEntityTypeId={trackedEntityTypeId}
-                teiId={teiId}
-                orgUnitId={orgUnitId}
-                onLinkedRecordClick={onLinkedRecordClick}
-                addRelationshipRenderElement={addRelationshipRenderElement}
-                onOpenAddRelationship={onOpenAddRelationship}
-                onCloseAddRelationship={onCloseAddRelationship}
-                onSelectFindMode={onSelectFindMode}
-                relationshipTypes={relationshipTypes}
-                renderTrackedEntityRegistration={(
-                    selectedTrackedEntityTypeId,
-                    suggestedProgramId,
-                    onLinkToTrackedEntityFromRegistration,
-                    onLinkToTrackedEntityFromSearch,
-                    onCancel,
-                ) => (
-                    <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-                        <RegisterTei
-                            suggestedProgramId={suggestedProgramId}
-                            onLink={onLinkToTrackedEntityFromSearch}
-                            onSave={onLinkToTrackedEntityFromRegistration}
-                            teiId={teiId}
-                            onGetUnsavedAttributeValues={() => console.log('get unsaved')}
-                            trackedEntityTypeId={selectedTrackedEntityTypeId}
-                            onCancel={onCancel}
-                        />
-                    </ResultsPageSizeContext.Provider>
-                )}
-                renderTrackedEntitySearch={(
-                    searchTrackedEntityTypeId,
-                    searchProgramId,
-                    onLinkToTrackedEntityFromSearch,
-                ) => (
-                    <TeiSearch
-                        resultsPageSize={5}
-                        id="relationshipTeiSearchWidget"
-                        selectedTrackedEntityTypeId={searchTrackedEntityTypeId}
-                        getResultsView={viewProps => (
-                            <TeiRelationshipSearchResults
-                                onAddRelationship={onLinkToTrackedEntityFromSearch}
-                                {...viewProps}
-                            />
-                        )}
+        <WidgetTrackedEntityRelationship
+            programId={programId}
+            trackedEntityTypeId={trackedEntityTypeId}
+            teiId={teiId}
+            orgUnitId={orgUnitId}
+            onLinkedRecordClick={onLinkedRecordClick}
+            addRelationshipRenderElement={addRelationshipRenderElement}
+            onOpenAddRelationship={onOpenAddRelationship}
+            onCloseAddRelationship={onCloseAddRelationship}
+            onSelectFindMode={onSelectFindMode}
+            relationshipTypes={relationshipTypes}
+            renderTrackedEntityRegistration={(
+                selectedTrackedEntityTypeId,
+                suggestedProgramId,
+                onLinkToTrackedEntityFromRegistration,
+                onLinkToTrackedEntityFromSearch,
+                onCancel,
+            ) => (
+                <ResultsPageSizeContext.Provider value={resultsPageSizeValue}>
+                    <RegisterTei
+                        suggestedProgramId={suggestedProgramId}
+                        onLink={onLinkToTrackedEntityFromSearch}
+                        onSave={onLinkToTrackedEntityFromRegistration}
+                        teiId={teiId}
+                        onGetUnsavedAttributeValues={() => console.log('get unsaved')}
+                        trackedEntityTypeId={selectedTrackedEntityTypeId}
+                        onCancel={onCancel}
                     />
-                )}
-            />
-        </>
+                </ResultsPageSizeContext.Provider>
+            )}
+            renderTrackedEntitySearch={(
+                searchTrackedEntityTypeId,
+                searchProgramId,
+                onLinkToTrackedEntityFromSearch,
+            ) => (
+                <TeiSearch
+                    resultsPageSize={5}
+                    id="relationshipTeiSearchWidget"
+                    selectedTrackedEntityTypeId={searchTrackedEntityTypeId}
+                    getResultsView={getResultsView(onLinkToTrackedEntityFromSearch)}
+                />
+            )}
+        />
     );
 };
