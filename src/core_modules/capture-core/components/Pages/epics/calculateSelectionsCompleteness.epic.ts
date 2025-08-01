@@ -1,4 +1,3 @@
-// @flow
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
 import { filter, map } from 'rxjs/operators';
@@ -11,13 +10,15 @@ import { newPageActionTypes } from '../New/NewPage.actions';
 import { viewEventPageActionTypes } from '../ViewEvent/ViewEventPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
+import type { ReduxStore, EpicAction } from '../../../../capture-core-utils/types';
 
 type CurrentSelectionsState = {
-    programId?: ?string,
-    orgUnitId?: ?string,
-    showaccesible: boolean,
-    categories?: ?Object,
-    categoryCheckInProgress?: ?boolean,
+    programId?: string | null;
+    orgUnitId?: string | null;
+    showaccesible?: boolean;
+    categories?: any;
+    categoryCheckInProgress?: boolean | null;
+    complete?: boolean;
 };
 
 const calculateCompleteStatus = (state: CurrentSelectionsState) => {
@@ -27,17 +28,17 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 
     const selectedProgram = state.programId && programCollection.get(state.programId);
 
-    if (selectedProgram && selectedProgram.categoryCombination) {
+    if (selectedProgram?.categoryCombination) {
         const categories = Array.from(selectedProgram.categoryCombination.categories.values());
 
-        if (categories.some(category => !state.categories || !state.categories[category.id])) {
+        if (categories.some((category: any) => !state.categories?.[category.id])) {
             return false;
         }
     }
     return true;
 };
 
-export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
+export const calculateSelectionsCompletenessEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(
             mainPageActionTypes.CATEGORY_OPTION_SET,
@@ -52,10 +53,10 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             const pathname = getLocationPathname();
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
-        map((action) => {
+        map((action: any) => {
             const isComplete = calculateCompleteStatus(store.value.currentSelections);
             return calculateSelectionsCompleteness(
                 isComplete,
-                (action.payload && action.payload.triggeringActionType) || action.type,
+                (action.payload?.triggeringActionType) || action.type,
             );
         }));
