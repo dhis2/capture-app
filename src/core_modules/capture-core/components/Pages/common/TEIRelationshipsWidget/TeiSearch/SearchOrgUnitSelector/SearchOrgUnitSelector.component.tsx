@@ -23,7 +23,7 @@ type Props = {
     treeSearchText?: string;
     onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => void;
     onSetOrgUnit: (searchId: string, orgUnit?: Record<string, unknown>) => void;
-    onFilterOrgUnits: (searchId: string, searchText?: string) => void;
+    onFilterOrgUnits: (searchId: string, searchText: string) => void;
     searchAttempted?: boolean;
 };
 
@@ -102,7 +102,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
     }
 
     handleFilterOrgUnits = (searchText?: string) => {
-        this.props.onFilterOrgUnits(this.props.searchId, searchText);
+        this.props.onFilterOrgUnits(this.props.searchId, searchText || '');
     }
 
     renderOrgUnitScopeSelector = () => {

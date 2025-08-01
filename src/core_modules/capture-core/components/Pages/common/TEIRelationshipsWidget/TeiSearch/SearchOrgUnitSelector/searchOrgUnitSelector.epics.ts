@@ -14,13 +14,6 @@ import {
     filteredOrgUnitsRetrieved,
 } from './searchOrgUnitSelector.actions';
 
-type InputObservable = any;
-type ReduxStore = any;
-type ApiUtils = {
-    querySingleResource: any;
-};
-
-
 const RETRIEVE_ERROR = 'Could not retrieve organisation unit list';
 
 
@@ -40,7 +33,7 @@ const cancelActionFilter = (action: any, searchId: string) => {
     return isInitializeTeiSearch(action, searchId) || isRequestFilterOrgUnits(action, searchId);
 };
 
-export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const teiSearchFilterOrgUnitsEpic = (action$: any, store: any, { querySingleResource }: { querySingleResource: any }) =>
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
         concatMap((action: any) => {
