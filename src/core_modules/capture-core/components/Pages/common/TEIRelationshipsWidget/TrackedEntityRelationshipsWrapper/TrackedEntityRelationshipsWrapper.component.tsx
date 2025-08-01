@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
@@ -63,7 +62,6 @@ export const TrackedEntityRelationshipsWrapper = ({
                 addRelationshipRenderElement={addRelationshipRenderElement}
                 onOpenAddRelationship={onOpenAddRelationship}
                 onCloseAddRelationship={onCloseAddRelationship}
-                // optional props
                 onSelectFindMode={onSelectFindMode}
                 relationshipTypes={relationshipTypes}
                 renderTrackedEntityRegistration={(
