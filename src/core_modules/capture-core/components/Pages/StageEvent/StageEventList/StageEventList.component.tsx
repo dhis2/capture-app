@@ -1,10 +1,8 @@
-// @flow
-import React from 'react';
-import type { ComponentType } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 import { Widget } from '../../../Widget';
-import type { Props } from './StageEventList.types';
+import type { PlainProps } from './StageEventList.types';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
 import { TrackerWorkingLists } from '../../../WorkingLists/TrackerWorkingLists';
@@ -12,13 +10,16 @@ import { TrackerWorkingLists } from '../../../WorkingLists/TrackerWorkingLists';
 const getStyles = () => ({});
 
 const storeId = 'stageEvents';
-const StageEventListPlain = ({ stage, programId, ...passOnProps }) => {
+
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
+const StageEventListPlain = ({ stage, programId, ...passOnProps }: Props) => {
     const { programType } = useProgramInfo(programId);
 
     const workingListProps = {
         storeId,
         programId,
-        programStageId: stage.id,
+        programStageId: stage?.id,
         ...passOnProps,
     };
     return (<>
@@ -42,6 +43,6 @@ const StageEventListPlain = ({ stage, programId, ...passOnProps }) => {
     </>);
 };
 
-export const StageEventList: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+export const StageEventList = withStyles(
     getStyles,
-)(StageEventListPlain);
+)(StageEventListPlain) as ComponentType<PlainProps>;

@@ -1,11 +1,9 @@
-// @flow
-import React from 'react';
-import type { ComponentType } from 'react';
+import React, { type ComponentType } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
-import type { Props } from './StageEventHeader.types';
+import type { PlainProps } from './StageEventHeader.types';
 
 const getStyles = () => ({
     wrapper: {
@@ -21,7 +19,9 @@ const getStyles = () => ({
     },
 });
 
-const StageEventHeaderPlain = ({ icon, title, events, classes }) => (<>
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
+const StageEventHeaderPlain = ({ icon, title, events, classes }: Props) => (<>
     <div data-test="stage-event-header" className={classes.wrapper}>
         <div className={classes.icon}>{
             icon && (
@@ -44,6 +44,6 @@ const StageEventHeaderPlain = ({ icon, title, events, classes }) => (<>
     </div>
 </>);
 
-export const StageEventHeader: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+export const StageEventHeader = withStyles(
     getStyles,
-)(StageEventHeaderPlain);
+)(StageEventHeaderPlain) as ComponentType<PlainProps>;
