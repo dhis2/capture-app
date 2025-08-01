@@ -1,8 +1,6 @@
-// @flow
 import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-// $FlowFixMe
 import { useProgramInfo } from 'capture-core/hooks/useProgramInfo';
 import { StageEventListPageComponent } from './StageEventListPage.component';
 import { useLocationQuery } from '../../../utils/routing';
