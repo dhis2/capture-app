@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProgramStageSelector } from '../../EnrollmentAddEvent/ProgramStageSelector';
 import { NewEventWorkspace } from '../../EnrollmentAddEvent/NewEventWorkspace';
-import type { Props } from '../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
+import type { WrapperProps } from '../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
 
 export const NewEventWorkspaceWrapper = ({
     stageId,
@@ -9,8 +9,13 @@ export const NewEventWorkspaceWrapper = ({
     orgUnitId,
     teiId,
     enrollmentId,
+    dataEntryHasChanges = false,
+    widgetReducerName = '',
+    rulesExecutionDependencies = {},
+    onSave = () => undefined,
+    onCancel = () => undefined,
     ...passOnProps
-}: Props) => {
+}: WrapperProps) => {
     if (!stageId) {
         return (
             <ProgramStageSelector
@@ -29,6 +34,11 @@ export const NewEventWorkspaceWrapper = ({
             orgUnitId={orgUnitId}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            dataEntryHasChanges={dataEntryHasChanges}
+            widgetReducerName={widgetReducerName}
+            rulesExecutionDependencies={rulesExecutionDependencies}
+            onSave={onSave}
+            onCancel={onCancel}
             {...passOnProps}
         />
     );
