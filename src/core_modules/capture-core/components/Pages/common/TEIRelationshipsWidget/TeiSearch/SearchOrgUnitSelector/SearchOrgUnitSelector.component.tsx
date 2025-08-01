@@ -81,6 +81,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
 
     isValid = () => this.props.selectedOrgUnitScope === 'ACCESSIBLE' || this.props.selectedOrgUnit
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     validateAndScrollToIfFailed() {
         const isValid = this.isValid();
         if (!isValid) {
