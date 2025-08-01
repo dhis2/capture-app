@@ -49,10 +49,10 @@ const getStyles = (theme: Theme) => ({
     },
     topSection: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
         marginRight: 0,
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.grey[500],
         maxWidth: theme.typography.pxToRem(600),
     },
     topSectionValuesContainer: {
@@ -64,7 +64,7 @@ const getStyles = (theme: Theme) => ({
         borderRadius: 0,
         border: `1px solid ${theme.palette.primary.dark}`,
     },
-});
+}) as const;
 
 const getLinkedEntityFormFoundation = (selectedProgramId?: string, selectedTrackedEntityTypeId?: string) => {
     if (selectedProgramId) {
@@ -89,7 +89,7 @@ const CardListButton = ({ handleOnClick, teiId }: CardListButtonProps) => (
         dataTest={`relationship-tei-link-${teiId}`}
         onClick={handleOnClick}
     >
-        {String(i18n.t('Link'))}
+        {i18n.t('Link')}
     </Button>
 );
 
@@ -137,9 +137,9 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
                     currentProgramId={selectedProgramId}
                     items={teis}
                     dataElements={attributes}
-                    noItemsText={String(i18n.t('No {{trackedEntityTypeName}} found.', {
+                    noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', {
                         trackedEntityTypeName, interpolation: { escapeValue: false },
-                    }))}
+                    })}
                     renderCustomCardActions={({ item }: any) =>
                         <CardListButton teiId={item.id} handleOnClick={() => this.onAddRelationship(item)} />
                     }
@@ -156,10 +156,10 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
                 <SearchResultsHeader currentSearchTerms={this.getSearchValues()} />
                 <div>
                     <Button className={classes.actionButton} onClick={onNewSearch}>
-                        {String(i18n.t('New search'))}
+                        {i18n.t('New search')}
                     </Button>
                     <Button className={classes.actionButton} onClick={onEditSearch}>
-                        {String(i18n.t('Edit search'))}
+                        {i18n.t('Edit search')}
                     </Button>
                 </div>
             </div>

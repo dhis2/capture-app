@@ -4,13 +4,6 @@ import { getTrackerProgramThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound }
 const trackedEntityTypeIdSelector = (props: any) => props.selectedTrackedEntityTypeId;
 const programIdSelector = (props: any) => props.selectedProgramId;
 
-const searchIdSelector = () => 'relationshipTeiSearch';
-
-export const makeSearchIdSelector = () => createSelector(
-    [searchIdSelector],
-    searchId => searchId,
-);
-
 export const makeAttributesSelector = () => createSelector(
     programIdSelector,
     trackedEntityTypeIdSelector,

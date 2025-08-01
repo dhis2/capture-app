@@ -19,7 +19,7 @@ const getStyles = (theme: Theme) => ({
     relationshipType: {
         display: 'flex',
         padding: theme.typography.pxToRem(10),
-        border: `1px solid ${theme.palette.grey[300]}`,
+        border: `1px solid ${theme.palette.grey[500]}`,
         borderRadius: theme.typography.pxToRem(4),
         margin: theme.typography.pxToRem(10),
     },

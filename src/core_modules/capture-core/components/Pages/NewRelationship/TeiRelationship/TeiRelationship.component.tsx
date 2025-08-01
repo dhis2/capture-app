@@ -15,6 +15,7 @@ import type { EnrollmentPayload } from
     '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
 import type { TeiPayload } from
     '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TrackedEntityType } from '../../../../metaData';
 
 type OwnProps = {
     findMode?: typeof findModes[keyof typeof findModes];
@@ -37,15 +38,15 @@ const getStyles = (theme: Theme) => ({
         margin: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         alignItems: 'center',
-        textAlign: 'center' as const,
-        backgroundColor: theme.palette.grey[100],
+        textAlign: 'center',
+        backgroundColor: theme.palette.grey[500],
     },
     buttonIcon: {
         marginRight: spacersNum.dp8,
     },
-});
+}) as const;
 
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
@@ -63,7 +64,7 @@ class TeiRelationshipPlain extends React.Component<Props> {
         return trackedEntityType.name;
     }
 
-    trackedEntityTypeSelector: any;
+    trackedEntityTypeSelector: (props: any) => TrackedEntityType;
 
 
     handleAddRelationship = (teiId: string, values: any) => {
@@ -102,10 +103,10 @@ class TeiRelationshipPlain extends React.Component<Props> {
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
                     >
                         <span className={classes.buttonIcon}> <IconSearch24 /> </span>
-                        {String(i18n.t(
+                        {i18n.t(
                             'Link to an existing {{trackedEntityType}}',
                             { trackedEntityType: trackedEntityTypeName },
-                        ))}
+                        )}
                     </Button>
                 </div>
                 <div className={classes.button}>
@@ -116,9 +117,9 @@ class TeiRelationshipPlain extends React.Component<Props> {
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
                     >
                         <span className={classes.buttonIcon}> <IconAdd24 /> </span>
-                        {String(i18n.t('Create new {{trackedEntityType}}', {
+                        {i18n.t('Create new {{trackedEntityType}}', {
                             trackedEntityType: trackedEntityTypeName, interpolation: { escapeValue: false },
-                        }))}
+                        })}
                     </Button>
                 </div>
             </div>
