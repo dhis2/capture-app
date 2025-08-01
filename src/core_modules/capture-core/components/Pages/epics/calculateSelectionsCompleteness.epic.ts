@@ -16,7 +16,7 @@ type CurrentSelectionsState = {
     programId?: string | null;
     orgUnitId?: string | null;
     showaccesible?: boolean;
-    categories?: any | null;
+    categories?: any;
     categoryCheckInProgress?: boolean | null;
     complete?: boolean;
 };
@@ -28,10 +28,10 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 
     const selectedProgram = state.programId && programCollection.get(state.programId);
 
-    if (selectedProgram && selectedProgram.categoryCombination) {
+    if (selectedProgram?.categoryCombination) {
         const categories = Array.from(selectedProgram.categoryCombination.categories.values());
 
-        if (categories.some((category: any) => !state.categories || !state.categories[category.id])) {
+        if (categories.some((category: any) => !state.categories?.[category.id])) {
             return false;
         }
     }
@@ -57,6 +57,6 @@ export const calculateSelectionsCompletenessEpic = (action$: EpicAction<any>, st
             const isComplete = calculateCompleteStatus(store.value.currentSelections);
             return calculateSelectionsCompleteness(
                 isComplete,
-                (action.payload && action.payload.triggeringActionType) || action.type,
+                (action.payload?.triggeringActionType) || action.type,
             );
         }));

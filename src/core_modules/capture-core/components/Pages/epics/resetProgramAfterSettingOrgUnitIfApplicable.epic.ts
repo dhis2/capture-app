@@ -17,7 +17,7 @@ const programShouldReset = (orgUnitId: string, currentlySelectedProgramId: strin
         return true;
     }
 
-    if (program.organisationUnits && program.organisationUnits[orgUnitId]) {
+    if (program.organisationUnits?.[orgUnitId]) {
         return false;
     }
 
