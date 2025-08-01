@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 type Props = {
-    captureEl: React.RefObject<HTMLDivElement>;
+    captureEl: React.RefObject<HTMLDivElement | null>;
     children: (height: number) => React.ReactNode;
     extraTriggers: Array<any>;
 };
@@ -11,7 +11,7 @@ export const CaptureScrollHeight = (props: Props) => {
     const [height, setHeight] = React.useState(0);
 
     const updateHeight = React.useCallback(() => {
-        setHeight(captureEl.current?.scrollHeight);
+        captureEl?.current?.scrollHeight && setHeight(captureEl.current.scrollHeight);
     }, [captureEl]);
 
     React.useLayoutEffect(() => {

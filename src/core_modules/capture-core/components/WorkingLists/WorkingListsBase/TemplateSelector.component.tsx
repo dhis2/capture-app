@@ -70,7 +70,7 @@ const TemplateSelectorPlain = (props: Props) => {
         classes,
     } = props;
 
-    const containerEl = React.useRef<HTMLDivElement>(null!);
+    const containerEl = React.useRef<HTMLDivElement | null>(null);
     const [isExpanded, setExpandedStatus] = React.useState(false);
 
     const customTemplates = React.useMemo(() => templates
