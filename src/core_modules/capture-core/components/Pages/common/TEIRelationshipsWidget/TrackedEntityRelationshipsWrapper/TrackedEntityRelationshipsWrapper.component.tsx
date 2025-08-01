@@ -16,6 +16,13 @@ import { ResultsPageSizeContext } from '../../../shared-contexts';
 import { RegisterTei } from '../RegisterTei';
 import { useCoreOrgUnit } from '../../../../../metadataRetrieval/coreOrgUnit';
 
+const createResultsView = (onLinkToTrackedEntityFromSearch: any) => (viewProps: any) => (
+    <TeiRelationshipSearchResults
+        onAddRelationship={onLinkToTrackedEntityFromSearch}
+        {...viewProps}
+    />
+);
+
 export const TrackedEntityRelationshipsWrapper = ({
     trackedEntityTypeId,
     teiId,
@@ -33,12 +40,7 @@ export const TrackedEntityRelationshipsWrapper = ({
 
     const resultsPageSizeValue = useMemo(() => ({ resultsPageSize: 5 }), []);
 
-    const getResultsView = useMemo(() => (onLinkToTrackedEntityFromSearch: any) => (viewProps: any) => (
-        <TeiRelationshipSearchResults
-            onAddRelationship={onLinkToTrackedEntityFromSearch}
-            {...viewProps}
-        />
-    ), []);
+    const getResultsView = useMemo(() => createResultsView, []);
 
     const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
         dispatch(selectFindMode({
