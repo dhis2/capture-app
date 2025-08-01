@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -22,13 +21,14 @@ const programFieldStyles = {
 };
 
 type Props = {
-    searchId: string,
-    selectedProgramId: ?string,
-    onSetProgram: (searchId: string, programId: ?string) => void,
-    programOptions: Array<VirtualizedOptionConfig>,
-}
+    searchId: string;
+    selectedProgramId?: string;
+    onSetProgram: (searchId: string, programId?: string) => void;
+    programOptions: Array<VirtualizedOptionConfig>;
+};
+
 export class SearchProgramSelectorComponent extends React.Component<Props> {
-    onSelectProgram = (programId: ?string) => {
+    onSelectProgram = (programId?: string) => {
         this.props.onSetProgram(this.props.searchId, programId);
     }
     render() {
