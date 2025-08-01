@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from './constants';
+import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from '../../common/filters';
 import type { TextFilterData } from './types';
 
 export function getTextFilterData(value: ?string): ?TextFilterData {

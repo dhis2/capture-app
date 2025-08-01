@@ -6,6 +6,16 @@ export { BooleanFilter } from './Boolean';
 export { DateFilter } from './Date';
 export { OptionSetFilter } from './OptionSet';
 export { AssigneeFilter, modeKeys as assigneeFilterModeKeys } from './Assignee';
+// Re-export common filter functionality
+export { 
+    EmptyValueFilterCheckboxes,
+    EMPTY_FILTER_VALUE, 
+    NOT_EMPTY_FILTER_VALUE,
+    createEmptyValueCheckboxHandler, 
+    createNotEmptyValueCheckboxHandler, 
+    isEmptyValueFilter, 
+    shouldShowMainInputForEmptyValueFilter 
+} from '../common/filters';
 
 export { assigneeFilterModes } from './Assignee/constants';
 export { dateFilterTypes } from './Date/constants';
@@ -18,5 +28,6 @@ export type { OptionSetFilterData } from './OptionSet/types';
 export type { TextFilterData } from './Text/types';
 export type { TrueOnlyFilterData } from './TrueOnly/types';
 export type { UpdatableFilterContent, FilterData, FilterDataInput } from './types';
+export type { EmptyValueFilterChangeHandler } from '../common/filters';
 
 export type { Options } from '../FormFields/Options/SelectBoxes';
