@@ -1,8 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconErrorFilled24 } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import type { PlainProps } from './ErrorsSection.types';
