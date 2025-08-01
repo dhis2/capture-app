@@ -153,11 +153,12 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
 
     return (
         <React.Fragment>
-            {/* @ts-expect-error - I'll look at this in the next PR when more of the WLs functionality is migrated. Currently, it's missing & { programId: string; } and is incorrectly expecting currentViewHasTemplateChanges and templateSharingType. */}
             <ListViewLoader
                 {...passOnProps}
                 currentTemplate={currentTemplate}
                 customListViewMenuContents={customListViewMenuContentsExtended}
+                currentViewHasTemplateChanges={currentViewHasTemplateChanges}
+                templateSharingType={templateSharingType}
             />
             <TemplateMaintenance
                 ref={templateMaintenanceInstance}

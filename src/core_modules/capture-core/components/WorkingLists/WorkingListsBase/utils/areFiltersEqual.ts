@@ -1,7 +1,6 @@
-// @flow
 import { isEqual } from 'lodash';
 
-export function areFiltersEqual(prevFilters: Object, newFilters: Object) {
+export function areFiltersEqual(prevFilters: any, newFilters: any) {
     if (prevFilters === newFilters) {
         return true;
     }

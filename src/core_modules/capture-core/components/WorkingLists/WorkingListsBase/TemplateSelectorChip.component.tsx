@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { Chip } from '@dhis2/ui';
 import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
@@ -6,16 +5,15 @@ import type { WorkingListTemplate } from './workingListsBase.types';
 import { TooltipForChip } from '../../Tooltips/TooltipForChip';
 
 type PassOnProps = {
-    currentListIsModified: boolean,
+    currentListIsModified: boolean;
 };
 
-type Props = {
-    ...PassOnProps,
-    template: WorkingListTemplate,
-    currentTemplateId: string,
-    onSelectTemplate: Function,
-    maxCharacters?: number,
-    disabled?: boolean,
+type Props = PassOnProps & {
+    template: WorkingListTemplate;
+    currentTemplateId: string;
+    onSelectTemplate: (template: any) => void;
+    maxCharacters?: number;
+    disabled?: boolean;
 };
 
 export const TemplateSelectorChip = (props: Props) => {
@@ -61,10 +59,8 @@ export const TemplateSelectorChip = (props: Props) => {
                     text={name}
                     maxCharacters={maxCharacters}
                     isSelectedTemplate={id === currentTemplateId}
-                    disabled={disabled}
                 />
             </Chip>
         </TooltipForChip>
     );
 };
-

@@ -11,4 +11,5 @@ export type Props = RestProps & ExtractedProps;
 
 export type ListViewConfigOutputProps = RestProps & {
     currentViewHasTemplateChanges: boolean;
+    programId: string;
 };

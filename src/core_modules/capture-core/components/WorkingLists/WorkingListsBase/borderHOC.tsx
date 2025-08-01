@@ -1,8 +1,9 @@
-// @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import type { WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 
-const getBorder = (theme: Theme) => {
+const getBorder = (theme: any) => {
     const color = theme.palette.dividerLighter;
     return `${theme.typography.pxToRem(1)} solid ${color}`;
 };
@@ -14,13 +15,10 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    classes: {
-        container: string,
-    },
 };
 
 export const withBorder = () => (InnerComponent: React.ComponentType<any>) =>
-    withStyles(getStyles)(class BorderHOC extends React.Component<Props> {
+    withStyles(getStyles)(class BorderHOC extends React.Component<Props & WithStyles<typeof getStyles>> {
         render() {
             const { classes, ...passOnProps } = this.props;
             return (

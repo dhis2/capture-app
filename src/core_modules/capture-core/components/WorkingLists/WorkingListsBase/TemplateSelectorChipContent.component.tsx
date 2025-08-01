@@ -1,10 +1,8 @@
-// @flow
-
 type Props = {
-    currentListIsModified: boolean,
-    maxCharacters: number,
-    text: string,
-    isSelectedTemplate: boolean,
+    currentListIsModified: boolean;
+    maxCharacters: number;
+    text: string;
+    isSelectedTemplate: boolean;
 };
 
 export const TemplateSelectorChipContent = (props: Props) => {
