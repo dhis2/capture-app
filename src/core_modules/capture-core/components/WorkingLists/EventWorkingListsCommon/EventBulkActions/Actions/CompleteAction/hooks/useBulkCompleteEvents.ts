@@ -1,4 +1,3 @@
-// @flow
 import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
@@ -7,13 +6,13 @@ import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
 
-type Props = {|
-    selectedRows: { [key: string]: boolean },
-    isCompleteDialogOpen: boolean,
-    setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void,
-    onUpdateList: (disableClearSelection?: boolean) => void,
-    removeRowsFromSelection: (rows: Array<string>) => void,
-|}
+type Props = {
+    selectedRows: { [key: string]: boolean };
+    isCompleteDialogOpen: boolean;
+    setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+};
 
 export const useBulkCompleteEvents = ({
     selectedRows,
@@ -69,8 +68,8 @@ export const useBulkCompleteEvents = ({
         data: validationError,
         error,
         reset: resetCompleteEvents,
-    } = useMutation<any>(
-        ({ payload }: any) => dataEngine.mutate({
+    } = useMutation<any, unknown, { payload: any }>(
+        ({ payload }: { payload: any }) => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
             type: 'create',
             data: {
