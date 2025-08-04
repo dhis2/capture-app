@@ -133,7 +133,7 @@ function convertRelativeDate(
     isInit: boolean,
 ) {
     let requestData: string[] = [];
-    if (areRelativeRangeValuesSupported(sourceValue.startBuffer ?? null, sourceValue.endBuffer ?? null)) {
+    if (areRelativeRangeValuesSupported(sourceValue.startBuffer, sourceValue.endBuffer)) {
         requestData = convertCustomRelativeDate(sourceValue);
         return requestData?.join(':');
     }

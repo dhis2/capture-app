@@ -14,7 +14,7 @@ import {
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
 
-const mappersForTypes: Record<string, (args: any) => any> = {
+const mappersForTypes: Record<keyof typeof dataElementTypes, (args: any) => any> = {
     [filterTypesObject.TEXT]: convertText,
     [filterTypesObject.NUMBER]: convertNumeric,
     [filterTypesObject.INTEGER]: convertNumeric,
@@ -40,7 +40,7 @@ function convertFilter(
     if (sourceValue && sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type as string] ? mappersForTypes[type as string]({ sourceValue, meta, unique }) : sourceValue;
+    return mappersForTypes[type] ? mappersForTypes[type]({ sourceValue, meta, unique }) : sourceValue;
 }
 export const buildFilterQueryArgs = (
     filters: FiltersData, {
