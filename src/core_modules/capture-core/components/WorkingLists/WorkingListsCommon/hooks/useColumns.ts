@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import type { CustomColumnOrder } from '..';
 
 export const useColumns = <TColumnConfigs extends Array<{ id: string, visible: boolean, [key: string]: any }>>(
+    customColumnOrder: CustomColumnOrder | undefined,
     defaultColumns: TColumnConfigs,
-    customColumnOrder?: CustomColumnOrder,
 ): TColumnConfigs => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
