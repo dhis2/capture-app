@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { areFiltersEqual } from '../../../WorkingListsBase';
 import type { Input, InitialViewConfigComputed, CurrentViewConfig } from './useViewHasTemplateChanges.types';
@@ -67,7 +66,6 @@ export const useViewHasTemplateChanges = ({
             return undefined;
         }
 
-        // $FlowFixMe If calculatedInitialViewConfig is set, the Redux State logic ensures filters, columns, sortById and sortByDirection are all defined.
         return isCurrentViewModified({ filters, columns, sortById, sortByDirection }, calculatedInitialViewConfig);
     }, [
         filters,

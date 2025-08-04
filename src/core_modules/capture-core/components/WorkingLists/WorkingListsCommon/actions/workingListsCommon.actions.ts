@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../actions/actions.utils';
 import type {
     SharingSettings,
@@ -58,7 +57,7 @@ export const fetchTemplates = ({
     storeId: string,
     workingListsType: string,
     selectedTemplateId?: string,
-    mainViewConfig?: Object,
+    mainViewConfig?: any,
 }) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({
         programId,
@@ -80,29 +79,29 @@ export const fetchTemplatesCancel = (storeId: string) =>
 export const selectTemplate = (templateId: string, storeId: string, programStageId?: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_SELECT)({ templateId, storeId, programStageId });
 
-export const updateTemplate = (template: Object, criteria: Object, data: Object) =>
+export const updateTemplate = (template: any, criteria: any, data: any) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE)({ template, criteria, ...data });
 
-export const updateTemplateSuccess = (templateId: string, criteria: Object, data: Object) =>
+export const updateTemplateSuccess = (templateId: string, criteria: any, data: any) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS)({ templateId, criteria, ...data });
 
-export const updateTemplateError = (templateId: string, criteria: Object, data: Object) =>
+export const updateTemplateError = (templateId: string, criteria: any, data: any) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, criteria, ...data });
 
-export const addTemplate = (name: string, criteria: Object, data: Object, callBacks?: Object) =>
+export const addTemplate = (name: string, criteria: any, data: any, callBacks?: any) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, criteria, ...data, callBacks });
 
-export const addTemplateSuccess = (templateId: string, clientId: Object, data: Object) =>
+export const addTemplateSuccess = (templateId: string, clientId: any, data: any) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS)({ templateId, clientId, ...data });
 
-export const addTemplateError = (clientId: Object, data: Object) =>
+export const addTemplateError = (clientId: any, data: any) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_ERROR)({ clientId, ...data });
 
 export const deleteTemplate = (
-    template: Object,
+    template: any,
     programId: string,
     { storeId, workingListsType, programStageId }: { storeId: string, workingListsType: string, programStageId?: string },
-    callBacks?: Object,
+    callBacks?: any,
 ) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE)({
         template,
@@ -113,16 +112,16 @@ export const deleteTemplate = (
         programStageId,
     });
 
-export const deleteTemplateSuccess = (template: Object, storeId: string) =>
+export const deleteTemplateSuccess = (template: any, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE_SUCCESS)({ template, storeId });
 
-export const deleteTemplateError = (template: Object, storeId: string) =>
+export const deleteTemplateError = (template: any, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DELETE_ERROR)({ template, storeId });
 
-export const initListView = (selectedTemplate: Object, context: Object, meta: Object) =>
+export const initListView = (selectedTemplate: any, context: any, meta: any) =>
     actionCreator(workingListsCommonActionTypes.LIST_VIEW_INIT)({ ...meta, selectedTemplate, context });
 
-export const initListViewSuccess = (storeId: string, data: Object) =>
+export const initListViewSuccess = (storeId: string, data: any) =>
     actionCreator(workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS)({ ...data, storeId });
 
 export const initListViewError = (storeId: string, errorMessage: string) =>
@@ -131,10 +130,10 @@ export const initListViewError = (storeId: string, errorMessage: string) =>
 export const initListViewCancel =
     (storeId: string) => actionCreator(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL)({ storeId });
 
-export const updateList = (queryArgs: Object, meta: Object) =>
+export const updateList = (queryArgs: any, meta: any) =>
     actionCreator(workingListsCommonActionTypes.LIST_UPDATE)({ queryArgs, ...meta });
 
-export const updateListSuccess = (storeId: string, data: Object) =>
+export const updateListSuccess = (storeId: string, data: any) =>
     actionCreator(workingListsCommonActionTypes.LIST_UPDATE_SUCCESS)({ ...data, storeId });
 
 export const updateListError = (storeId: string, errorMessage: string) =>
@@ -149,16 +148,16 @@ export const unloadingContext = (storeId: string) =>
 export const sortList = (id: string, direction: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.LIST_SORT)({ id, direction, storeId });
 
-export const setListColumnOrder = (columns: Array<Object>, storeId: string) =>
+export const setListColumnOrder = (columns: Array<any>, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET)({ columns, storeId }, { skipLogging: ['columns'] });
 
 export const resetListColumnOrder = (storeId: string) =>
     actionCreator(workingListsCommonActionTypes.LIST_COLUMN_ORDER_RESET)({ storeId }, { skipLogging: ['columns'] });
 
-export const setFilter = (filter: Object, itemId: string, storeId: string) =>
+export const setFilter = (filter: any, itemId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_SET)({ filter, itemId, storeId });
 
-export const removeFilter = (itemId: string, includeFilters: Object, storeId: string) =>
+export const removeFilter = (itemId: string, includeFilters: any, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_REMOVE)({ itemId, includeFilters, storeId });
 
 export const clearFilter = (itemId: string, storeId: string) =>
@@ -170,7 +169,7 @@ export const clearFilters = (filtersList: Array<string>, storeId: string) =>
 export const selectRestMenuItem = (id: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECT)({ id, storeId });
 
-export const setStickyFiltersAfterColumnSorting = (includeFilters: Object, storeId: string) =>
+export const setStickyFiltersAfterColumnSorting = (includeFilters: any, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.STICKY_FILTERS_AFTER_COLUMN_SORTING_SET)({ includeFilters, storeId });
 
 export const changePage = (pageNumber: number, storeId: string) =>
@@ -182,5 +181,5 @@ export const changeRowsPerPage = (rowsPerPage: number, storeId: string) =>
 export const setTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_SHARING_SETTINGS_SET)({ sharingSettings, templateId, storeId });
 
-export const updateDefaultTemplate = (defaultTemplate: Object, storeId: string) =>
+export const updateDefaultTemplate = (defaultTemplate: any, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_DEFAULT_UPDATE)({ defaultTemplate, storeId });

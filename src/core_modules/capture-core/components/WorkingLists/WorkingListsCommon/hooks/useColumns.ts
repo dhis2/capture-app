@@ -1,9 +1,8 @@
-// @flow
 import { useMemo } from 'react';
 import type { CustomColumnOrder } from '..';
 
-export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean, [string]: any }>>(
-    customColumnOrder?: CustomColumnOrder, // eslint-disable-line
+export const useColumns = <TColumnConfigs extends Array<{ id: string, visible: boolean, [key: string]: any }>>(
+    customColumnOrder: CustomColumnOrder | undefined,
     defaultColumns: TColumnConfigs,
 ): TColumnConfigs => {
     const defaultColumnsAsObject = useMemo(() =>
@@ -11,7 +10,6 @@ export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean,
             .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
     [defaultColumns]);
 
-    // $FlowFixMe Based on the business logic the customColumOrder id should exists as a key in defaultColumnsAsObject
     return useMemo(() => {
         if (!customColumnOrder) {
             return defaultColumns;
