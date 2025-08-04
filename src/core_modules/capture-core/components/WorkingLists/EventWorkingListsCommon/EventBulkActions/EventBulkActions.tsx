@@ -1,19 +1,7 @@
-// @flow
 import React from 'react';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
 import { CompleteAction, DeleteAction } from './Actions';
-import type { ProgramStage } from '../../../../metaData';
-
-type Props = {|
-    selectedRows: { [key: string]: boolean },
-    onClearSelection: () => void,
-    stage: ProgramStage,
-    onUpdateList: (disableClearSelection?: boolean) => void,
-    removeRowsFromSelection: (rows: Array<string>) => void,
-    programId?: string,
-    onOpenBulkDataEntryPlugin?: () => void,
-    bulkDataEntryIsActive?: boolean,
-|}
+import type { Props } from './EventBulkActions.types';
 
 export const EventBulkActions = ({
     selectedRows,

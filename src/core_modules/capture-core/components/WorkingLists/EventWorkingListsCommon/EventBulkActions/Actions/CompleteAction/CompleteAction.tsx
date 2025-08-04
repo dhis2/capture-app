@@ -1,21 +1,13 @@
-// @flow
 import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
+import type { Props } from './CompleteAction.types';
 
-type Props = {|
-    selectedRows: { [key: string]: boolean },
-    stageDataWriteAccess?: boolean,
-    bulkDataEntryIsActive?: boolean,
-    onUpdateList: (disableClearSelections?: boolean) => void,
-    removeRowsFromSelection: (rows: Array<string>) => void,
-|}
-
-const styles = {
+const styles: Readonly<any> = {
     container: {
         fontSize: '14px',
         lineHeight: '19px',
@@ -46,11 +38,11 @@ const CompleteActionPlain = ({
     removeRowsFromSelection,
     onUpdateList,
     classes,
-}: Props & CssClasses) => {
+}: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = !stageDataWriteAccess || bulkDataEntryIsActive;
+    const disabled = !stageDataWriteAccess || !!bulkDataEntryIsActive;
     const {
         eventCounts,
         isLoading,
@@ -180,4 +172,4 @@ const CompleteActionPlain = ({
     );
 };
 
-export const CompleteAction: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(CompleteActionPlain);
+export const CompleteAction = withStyles(styles)(CompleteActionPlain) as ComponentType<Props>;

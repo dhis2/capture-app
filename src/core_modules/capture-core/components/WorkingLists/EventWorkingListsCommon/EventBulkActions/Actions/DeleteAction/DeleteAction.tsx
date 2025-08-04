@@ -1,5 +1,3 @@
-// @flow
-
 import React, { useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -8,13 +6,7 @@ import { useMutation } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from '../../../../../../../capture-core-utils';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-
-type Props = {
-    selectedRows: { [id: string]: boolean },
-    stageDataWriteAccess?: boolean,
-    onUpdateList: () => void,
-    bulkDataEntryIsActive?: boolean,
-}
+import type { Props } from './DeleteAction.types';
 
 const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
     if (!stageDataWriteAccess) {
@@ -40,7 +32,7 @@ export const DeleteAction = ({
     );
 
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = !stageDataWriteAccess || bulkDataEntryIsActive;
+    const disabled = !stageDataWriteAccess || !!bulkDataEntryIsActive;
 
     const { mutate: deleteEvents, isLoading } = useMutation(
         () => dataEngine.mutate({
@@ -103,7 +95,7 @@ export const DeleteAction = ({
                             </Button>
                             <Button
                                 destructive
-                                onClick={deleteEvents}
+                                onClick={() => deleteEvents()}
                                 loading={isLoading}
                             >
                                 {i18n.t('Delete')}
