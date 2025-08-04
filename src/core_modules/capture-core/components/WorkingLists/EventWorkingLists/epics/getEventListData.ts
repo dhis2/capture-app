@@ -1,4 +1,3 @@
-// @flow
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -27,14 +26,14 @@ export const getMainColumns = (columnsMetaForDataFetching: ColumnsMetaForDataFet
 
 const getFilter = (filterContainer: any) => filterContainer;
 
-const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: Object}) => {
+const getApiFilterQueryArgument = (filters: { [id: string]: string} | null, mainColumns: { [id: string]: any}) => {
     const filterQueries =
         filters ?
             Object
                 .keys(filters)
 
                 .filter(key => filters[key] != null && !mainColumns[key])
-                .reduce((accFilterQueries, filterKey) => {
+                .reduce((accFilterQueries: string[], filterKey) => {
                     const filter = getFilter(filters[filterKey]);
                     if (Array.isArray(filter)) {
                         const filtersFromArray = filter
@@ -52,7 +51,7 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
 };
 
 const getEventDateQueryArgs = (filter: string) => {
-    const eventDateQueryArgs = {};
+    const eventDateQueryArgs: any = {};
     const filterParts = filter.split(':');
     const indexGe = filterParts.indexOf('ge');
     const indexLe = filterParts.indexOf('le');
@@ -73,7 +72,7 @@ const getStatusQueryArgs = (filter: string) => {
     return statusQueryArgs;
 };
 
-const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: Object}) => {
+const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null, mainColumns: { [id: string]: any}) => {
     const mainFilterQueryArgs =
         filters ?
             Object
@@ -100,7 +99,7 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
     return mainFilterQueryArgs;
 };
 
-const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, categoryCombinationId?: ?string) => {
+const getApiCategoriesQueryArgument = (categories: { [id: string]: string} | null, categoryCombinationId?: string | null) => {
     if (!categories || !categoryCombinationId) {
         return null;
     }
@@ -126,7 +125,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, cat
     };
 };
 
-const getApiOrderById = (sortById: string, mainColumns: Object) => {
+const getApiOrderById = (sortById: string, mainColumns: any) => {
     if (mainColumns[sortById]) {
         const columnSpec = mainColumns[sortById];
         if (columnSpec.apiName) {
@@ -136,13 +135,13 @@ const getApiOrderById = (sortById: string, mainColumns: Object) => {
     return sortById;
 };
 
-const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, mainColumns: Object) => {
+const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, mainColumns: any) => {
     const apiId = getApiOrderById(sortById, mainColumns);
     return `${apiId}:${sortByDirection}`;
 };
 
 // eslint-disable-next-line complexity
-export const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationId?: ?string) => {
+export const createApiQueryArgs = (queryArgs: any, mainColumns: any, categoryCombinationId?: string | null) => {
     let apiQueryArgs = {
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
@@ -191,7 +190,7 @@ export const getEventListData = async ({
 }: {
     queryArgs: InputQueryArgs,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationId?: ?string,
+    categoryCombinationId: string | null | undefined,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
 }) => {
@@ -202,7 +201,7 @@ export const getEventListData = async ({
         querySingleResource,
     );
     const columnKeys = [...columnsMetaForDataFetching.keys()];
-    const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
+    const columnFilteredEventContainers: Array<{ id: string, record: any }> = eventContainers
         .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))
         .map(({ id, record }) => ({
             id,

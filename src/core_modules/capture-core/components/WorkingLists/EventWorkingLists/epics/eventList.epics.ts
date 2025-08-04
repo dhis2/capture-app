@@ -1,9 +1,9 @@
-// @flow
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import log from 'loglevel';
 import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import type { EpicAction, ReduxStore } from '../../../../../capture-core-utils/types/global';
 import {
     actionTypes,
     deleteEventError,
@@ -15,9 +15,9 @@ import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
 export const initEventListEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { absoluteApiPath, querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
@@ -37,7 +37,7 @@ export const initEventListEpic = (
                 ...(selectedTemplate.nextCriteria || selectedTemplate.criteria),
                 ...lockedFilters,
             };
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+            const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';
             const initialPromise =
@@ -62,22 +62,22 @@ export const initEventListEpic = (
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
         }));
 
 export const updateEventListEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { absoluteApiPath, querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+            const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';
             const {
@@ -107,22 +107,21 @@ export const updateEventListEpic = (
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.LIST_UPDATE_CANCEL),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ));
         }));
 
-// TODO: --------------------------------- REFACTOR -----------------------------------
 export const requestDeleteEventEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { mutate }: ApiUtils,
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { mutate }: any,
 ) =>
     action$.pipe(
         ofType(actionTypes.EVENT_REQUEST_DELETE),
@@ -145,7 +144,7 @@ export const requestDeleteEventEpic = (
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ));
         }),

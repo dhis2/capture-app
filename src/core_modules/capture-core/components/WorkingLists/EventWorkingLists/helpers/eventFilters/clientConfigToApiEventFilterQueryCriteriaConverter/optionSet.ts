@@ -1,13 +1,6 @@
-// @flow
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
-
-import type {
-    ApiDataFilterOptionSet,
-} from '../../../types';
-import type {
-    OptionSetFilterData,
-} from '../../../../WorkingListsBase';
+import type { OptionSetFilterData } from '../../../../../ListView';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 
@@ -17,7 +10,7 @@ const convertDate = (rawValue: string): string => {
     return momentDate.format('YYYY-MM-DD');
 };
 
-const converterByType = {
+const converterByType: any = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
     [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
@@ -28,10 +21,9 @@ const converterByType = {
     [dataElementTypes.TRUE_ONLY]: () => 'true',
 };
 
-export const getApiOptionSetFilter =
-    (filter: OptionSetFilterData, type: $Keys<typeof dataElementTypes>): ApiDataFilterOptionSet => ({
-        in: filter
-            .values
-            // $FlowFixMe dataElementTypes flow error
-            .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
-    });
+export const getOptionSetFilter = (filter: OptionSetFilterData, type: keyof typeof dataElementTypes) => ({
+    in: filter
+        .values
+        .map(value => (converterByType[type] ? converterByType[type](value) : value.toString()))
+        .filter(value => value !== null),
+});

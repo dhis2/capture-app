@@ -1,4 +1,3 @@
-// @flow
 export const apiAssigneeFilterModes = Object.freeze({
     PROVIDED: 'PROVIDED',
     CURRENT: 'CURRENT',

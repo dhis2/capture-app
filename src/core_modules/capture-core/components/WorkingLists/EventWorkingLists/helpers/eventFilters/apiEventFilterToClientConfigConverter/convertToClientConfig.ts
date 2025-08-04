@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import moment from 'moment';
@@ -37,19 +36,19 @@ const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
-    ge: filter.ge ? Number(filter.ge) : undefined,
-    le: filter.le ? Number(filter.le) : undefined,
+    ge: filter.ge ? Number(filter.ge) : null,
+    le: filter.le ? Number(filter.le) : null,
 });
 
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
     values: filter.in.map(value => value === 'true'),
 });
 
-const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({
+const getTrueOnlyFilter = (): TrueOnlyFilterData => ({
     value: true,
 });
 
-const getDateFilter = ({ dateFilter }: ApiDataFilterDate): ?DateFilterData => {
+const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null => {
     if (dateFilter.type === apiDateFilterTypes.RELATIVE) {
         if (dateFilter.period) {
             return {
@@ -57,14 +56,14 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): ?DateFilterData => {
                 period: dateFilter.period,
             };
         }
-        if (areRelativeRangeValuesSupported(dateFilter.startBuffer, dateFilter.endBuffer)) {
+        if (areRelativeRangeValuesSupported(dateFilter.startBuffer ?? null, dateFilter.endBuffer ?? null)) {
             return {
                 type: dateFilter.type,
                 startBuffer: dateFilter.startBuffer,
                 endBuffer: dateFilter.endBuffer,
             };
         }
-        return undefined;
+        return null;
     }
     if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
         return {
@@ -73,7 +72,7 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): ?DateFilterData => {
             le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
         };
     }
-    return undefined;
+    return null;
 };
 
 const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
@@ -90,21 +89,20 @@ const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
             return null;
         });
 
-// eslint-disable-next-line complexity
 const getAssigneeFilter = async (
-    assignedUserMode: $Values<typeof apiAssigneeFilterModes>,
-    assignedUsers: ?Array<string>,
+    assignedUserMode: typeof apiAssigneeFilterModes[keyof typeof apiAssigneeFilterModes],
+    assignedUsers: Array<string> | null,
     querySingleResource: QuerySingleResource,
-): Promise<?AssigneeFilterData> => {
+): Promise<AssigneeFilterData | null> => {
     if (assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
         const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
         if (!assignedUserId) {
-            return undefined;
+            return null;
         }
 
         const user = await getUser(assignedUserId, querySingleResource);
         if (!user) {
-            return undefined;
+            return null;
         }
 
         return {
@@ -130,7 +128,7 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) => {
+const isOptionSetFilter = (type: any, filter: any) => {
     if ([
         filterTypesObject.BOOLEAN,
     ].includes(type)) {
@@ -142,7 +140,7 @@ const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) =
 };
 
 const getSortOrder = (
-    order: ?string,
+    order: string | null,
     columnsMetaForDataFetching?: ColumnsMetaForDataFetching,
 ) => {
     const [sortById, sortByDirection] = order?.split(':') ?? [];
@@ -165,29 +163,25 @@ const getSortOrder = (
 };
 
 const getDataElementFilters = (
-    filters: ?Array<ApiDataFilter>,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching): Array<Object> => {
+    filters: Array<ApiDataFilter> | null,
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching): any[] => {
     if (!filters) {
         return [];
     }
 
     return filters.map((serverFilter) => {
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return null;
         }
 
-        // $FlowFixMe If previous test doesn't return, element.type is a key in filterTypesObject
         if (isOptionSetFilter(element.type, serverFilter)) {
             return {
-                // $FlowFixMe
-                ...getOptionSetFilter(serverFilter, element.type),
+                ...getOptionSetFilter(serverFilter as any, element.type),
                 id: serverFilter.dataItem,
             };
         }
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
-        const dataValue = (getFilterByType[element.type](serverFilter, element));
+        const dataValue = (getFilterByType[element.type](serverFilter as any));
 
         return dataValue && {
             id: serverFilter.dataItem,
@@ -196,9 +190,8 @@ const getDataElementFilters = (
     }).filter(clientFilter => clientFilter);
 };
 
-// eslint-disable-next-line complexity
 const getMainDataFilters = async (
-    eventQueryCriteria: ?ApiEventQueryCriteria,
+    eventQueryCriteria: ApiEventQueryCriteria | null,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
 ) => {
@@ -207,20 +200,22 @@ const getMainDataFilters = async (
     }
 
     const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
-    const filters = [];
+    const filters: any[] = [];
     if (status) {
-        // $FlowFixMe
-        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status').type), id: 'status' });
+        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type), id: 'status' });
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
-        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: occurredAt.lockedAll });
+        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: (occurredAt as any).lockedAll });
     }
     if (assignedUserMode) {
-        filters.push({
-            ...(await getAssigneeFilter(assignedUserMode, assignedUsers, querySingleResource)),
-            id: 'assignee',
-        });
+        const assigneeFilter = await getAssigneeFilter(assignedUserMode, assignedUsers ?? null, querySingleResource);
+        if (assigneeFilter) {
+            filters.push({
+                ...assigneeFilter,
+                id: 'assignee',
+            });
+        }
     }
     return filters;
 };
@@ -231,13 +226,13 @@ const listConfigDefaults = {
 };
 
 export async function convertToClientConfig(
-    eventQueryCriteria: ?ApiEventQueryCriteria,
+    eventQueryCriteria: ApiEventQueryCriteria | null,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
 ): Promise<ClientConfig> {
-    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria && eventQueryCriteria.order, columnsMetaForDataFetching);
+    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria?.order ?? null, columnsMetaForDataFetching);
     const filters = [
-        ...getDataElementFilters(eventQueryCriteria && eventQueryCriteria.dataFilters, columnsMetaForDataFetching),
+        ...getDataElementFilters(eventQueryCriteria?.dataFilters ?? null, columnsMetaForDataFetching),
         ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching, querySingleResource)),
     ].reduce((acc, filter) => {
         const { id, ...filterData } = filter;
@@ -246,7 +241,7 @@ export async function convertToClientConfig(
     }, {});
 
     const customColumnOrder =
-        getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching);
+        getCustomColumnsConfiguration(columnsMetaForDataFetching, eventQueryCriteria?.displayColumnOrder ?? null) || undefined;
 
 
     return {

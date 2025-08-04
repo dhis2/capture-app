@@ -20,7 +20,6 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
         return {
             templates: [...apiEventFilters, defaultEventFilter]
                 .map(({ eventQueryCriteria, ...eventFilter }) => {
-                    // $FlowFixMe
                     const { displayColumnOrder, order, eventDate, ...criteria } = eventQueryCriteria;
                     const convertedEventQueryCriteria = {
                         ...criteria,

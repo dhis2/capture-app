@@ -1,10 +1,9 @@
-// @flow
-import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
-import { ofType } from 'redux-observable';
-import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { takeUntil, filter, concatMap } from 'rxjs/operators';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import type { EpicAction, ReduxStore } from '../../../../../capture-core-utils/types/global';
 import {
     workingListsCommonActionTypes,
     fetchTemplatesSuccess,
@@ -20,39 +19,39 @@ import { getTemplates } from './getTemplates';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
 export const retrieveTemplatesEpic = (
-    action$: InputObservable,
-    store: ReduxStore, {
-        querySingleResource,
-    }: ApiUtils) =>
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { querySingleResource }: any,
+) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { storeId, programId, mainViewConfig } }) => {
-            const promise = getTemplates(programId, querySingleResource, mainViewConfig)
+        concatMap(({ payload: { storeId, programId } }: any) => {
+            const promise = getTemplates(programId, querySingleResource)
                 .then(({ templates, defaultTemplateId }) =>
-                    fetchTemplatesSuccess(templates, defaultTemplateId, storeId))
+                    fetchTemplatesSuccess(templates, defaultTemplateId || '', storeId))
                 .catch((error) => {
                     log.error(
                         errorCreator(error)({ epic: 'retrieveTemplatesEpic' }),
                     );
-                    return fetchTemplatesError(i18n.t('an error occurred loading working lists'), storeId);
+                    return fetchTemplatesError('an error occurred loading working lists', storeId);
                 });
 
             return from(promise).pipe(
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH_CANCEL),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
         }));
 
 export const updateTemplateEpic = (
-    action$: InputObservable,
-    store: ReduxStore, {
-        mutate,
-    }: ApiUtils) =>
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { mutate }: any,
+) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -69,7 +68,7 @@ export const updateTemplateEpic = (
             criteria: eventQueryCriteria,
             programId,
             storeId,
-        } }) => {
+        } }: any) => {
             const eventFilterData = {
                 name,
                 program: programId,
@@ -118,27 +117,27 @@ export const updateTemplateEpic = (
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
-                        filter(cancelAction => cancelAction.payload.template.id === id),
+                        filter((cancelAction: any) => cancelAction.payload.template.id === id),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
         }));
 
 export const addTemplateEpic = (
-    action$: InputObservable,
-    store: ReduxStore, {
-        mutate,
-    }: ApiUtils) =>
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { mutate }: any,
+) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_ADD),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap((action) => {
+        concatMap((action: any) => {
             const {
                 name,
                 criteria: eventQueryCriteria,
@@ -177,21 +176,21 @@ export const addTemplateEpic = (
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
         }));
 
 export const deleteTemplateEpic = (
-    action$: InputObservable,
-    store: ReduxStore, {
-        mutate,
-    }: ApiUtils) =>
+    action$: EpicAction<any>,
+    store: ReduxStore,
+    { mutate }: any,
+) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { template, storeId } }) => {
+        concatMap(({ payload: { template, storeId } }: any) => {
             const requestPromise = mutate({
                 resource: 'eventFilters',
                 id: template.id,
@@ -211,13 +210,13 @@ export const deleteTemplateEpic = (
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
-                        filter(cancelAction => cancelAction.payload.template.id === template.id),
+                        filter((cancelAction: any) => cancelAction.payload.template.id === template.id),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                        filter((cancelAction: any) => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
