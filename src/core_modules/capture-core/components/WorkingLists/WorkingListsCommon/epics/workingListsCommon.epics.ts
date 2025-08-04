@@ -1,14 +1,13 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { workingListsCommonActionTypes, setStickyFiltersAfterColumnSorting } from '../actions';
 
-export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
+export const includeFiltersWithValueAfterColumnSortingEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET),
         // eslint-disable-next-line complexity
-        map((action) => {
-            const state = store.value;
+        map((action: any) => {
+            const state = store.value as any;
             const { storeId } = action.payload;
 
             const appliedFilters = (

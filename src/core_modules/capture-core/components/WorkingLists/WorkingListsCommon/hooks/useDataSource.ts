@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -26,15 +25,15 @@ const createDataElement = (column) => {
 };
 
 export const useDataSource = (
-    records?: { [string]: any },
-    recordsOrder?: Array<string>,
     columns: Array<{
         id: string,
-        options?: ?Array<{ text: string, value: any }>,
-        type: $Values<typeof dataElementTypes>,
+        options?: Array<{ text: string, value: any }> | null,
+        type: keyof typeof dataElementTypes,
         visible: boolean,
-        [string]: any,
+        [key: string]: any,
     }>,
+    records?: { [key: string]: any },
+    recordsOrder?: Array<string>,
 ): DataSource | void => {
     const eventRecordsArray = useMemo(() =>
         recordsOrder && records && recordsOrder
