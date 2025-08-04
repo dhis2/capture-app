@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { EventWorkingListsReduxOffline } from './Redux';
 import type { Props } from './EventWorkingListsOffline.types';

@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { useColumns } from '../../WorkingListsCommon';
 import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
