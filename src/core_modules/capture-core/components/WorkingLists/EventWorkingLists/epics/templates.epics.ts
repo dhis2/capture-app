@@ -27,7 +27,13 @@ export const retrieveTemplatesEpic = (
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap(({ payload: { storeId, programId } }: any) => {
-            const promise = getTemplates(programId, querySingleResource)
+            const promise = getTemplates(programId, querySingleResource, {
+                eventDate: {
+                    type: 'RELATIVE',
+                    startBuffer: 0,
+                    endBuffer: 0,
+                },
+            })
                 .then(({ templates, defaultTemplateId }) =>
                     fetchTemplatesSuccess(templates, defaultTemplateId || '', storeId))
                 .catch((error) => {

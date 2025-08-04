@@ -44,13 +44,13 @@ export const initEventWorkingListAsync = async (
         ...commonQueryData,
     };
 
-    return getEventListData(rawQueryArgs, {
-        commonQueryData,
+    return getEventListData({
+        queryArgs: rawQueryArgs,
         columnsMetaForDataFetching,
         categoryCombinationId,
-        storeId,
-        lastTransaction,
-    }, absoluteApiPath, querySingleResource)
+        absoluteApiPath,
+        querySingleResource,
+    })
         .then(({ eventContainers, pagingData, request }) =>
             initListViewSuccess(storeId, {
                 recordContainers: eventContainers,

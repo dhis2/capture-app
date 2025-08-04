@@ -39,12 +39,13 @@ export const updateEventWorkingListAsync = (
         ...commonQueryData,
     };
 
-    return getEventListData(rawQueryArgs, {
-        commonQueryData,
+    return getEventListData({
+        queryArgs: rawQueryArgs,
         columnsMetaForDataFetching,
         categoryCombinationId,
-        storeId,
-    }, absoluteApiPath, querySingleResource)
+        absoluteApiPath,
+        querySingleResource,
+    })
         .then(({ eventContainers, pagingData, request }) =>
             updateListSuccess(storeId, {
                 recordContainers: eventContainers,

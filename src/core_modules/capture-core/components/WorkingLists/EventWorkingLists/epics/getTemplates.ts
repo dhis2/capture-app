@@ -1,4 +1,3 @@
-// @flow
 import { getApiEventFilters } from '../helpers/eventFilters';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import type { EventWorkingListsTemplates, MainViewConfig } from '../types';
