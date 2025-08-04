@@ -7,7 +7,7 @@ export type EventRecords = { [eventId: string]: EventRecord };
 export type ColumnConfigBase = {
     id: string;
     visible: boolean;
-    type: keyof typeof dataElementTypes;
+    type: typeof dataElementTypes[keyof typeof dataElementTypes];
     header: string;
     options?: Array<{text: string; value: any}>;
     multiValueFilter?: boolean;

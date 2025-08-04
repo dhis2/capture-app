@@ -32,9 +32,9 @@ export const DeleteAction = ({
     );
 
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = !stageDataWriteAccess || !!bulkDataEntryIsActive;
+    const disabled = Boolean(!stageDataWriteAccess || !!bulkDataEntryIsActive);
 
-    const { mutate: deleteEvents, isLoading } = useMutation(
+    const { mutate: deleteEvents, isLoading }: { mutate: any, isLoading: boolean } = useMutation(
         () => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
@@ -95,7 +95,7 @@ export const DeleteAction = ({
                             </Button>
                             <Button
                                 destructive
-                                onClick={() => deleteEvents()}
+                                onClick={deleteEvents}
                                 loading={isLoading}
                             >
                                 {i18n.t('Delete')}

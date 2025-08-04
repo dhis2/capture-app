@@ -42,7 +42,7 @@ const CompleteActionPlain = ({
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = !stageDataWriteAccess || !!bulkDataEntryIsActive;
+    const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {
         eventCounts,
         isLoading,
