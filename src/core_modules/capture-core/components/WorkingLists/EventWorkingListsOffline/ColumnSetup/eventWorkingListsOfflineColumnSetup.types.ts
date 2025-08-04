@@ -8,8 +8,11 @@ type ExtractedProps = {
     customColumnOrder?: CustomColumnOrder;
 };
 
-type RestProps = Omit<EventWorkingListsReduxOfflineOutputProps & { customColumnOrder: CustomColumnOrder },
-    keyof (ExtractedProps & { customColumnOrder: CustomColumnOrder })>;
+type OptionalExtractedProps = {
+    customColumnOrder: CustomColumnOrder
+}
+
+type RestProps = EventWorkingListsReduxOfflineOutputProps & OptionalExtractedProps | ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

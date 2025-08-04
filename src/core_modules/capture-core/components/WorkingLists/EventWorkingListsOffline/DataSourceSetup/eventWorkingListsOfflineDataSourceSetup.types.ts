@@ -13,8 +13,7 @@ type OptionalExtractedProps = {
     recordsOrder: Array<string>;
 };
 
-type RestProps = Omit<EventWorkingListsOfflineColumnSetupOutputProps & OptionalExtractedProps,
-keyof (ExtractedProps & OptionalExtractedProps)>;
+type RestProps = EventWorkingListsOfflineColumnSetupOutputProps & OptionalExtractedProps | ExtractedProps;
 
 export type Props = RestProps & ExtractedProps;
 

@@ -3,14 +3,7 @@ import { useDataSource } from '../../WorkingListsCommon';
 import { createOfflineListWrapper } from '../../../List'; // TODO: Refactor list
 import type { Props } from './eventWorkingListsOfflineDataSourceSetup.types';
 
-const OfflineListWrapper = createOfflineListWrapper() as React.ComponentType<{
-    hasData: boolean;
-    dataSource?: any;
-    columns: any;
-    rowIdKey: string;
-    noItemsText?: string;
-    [key: string]: any;
-}>;
+const OfflineListWrapper = createOfflineListWrapper();
 
 export const EventWorkingListsOfflineDataSourceSetup = ({
     eventRecords,
