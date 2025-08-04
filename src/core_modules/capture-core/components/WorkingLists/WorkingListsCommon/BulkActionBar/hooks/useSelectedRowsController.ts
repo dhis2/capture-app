@@ -1,12 +1,11 @@
-// @flow
 import { useCallback, useMemo, useState } from 'react';
 
 type Props = {
-    recordIds: ?Array<string>,
-}
+    recordIds?: Array<string>;
+};
 
 export const useSelectedRowsController = ({ recordIds }: Props) => {
-    const [selectedRows, setSelectedRows] = useState({});
+    const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
     const allRowsAreSelected = useMemo(
         () => recordIds && recordIds.length > 0 && recordIds.every(rowId => selectedRows[rowId]),
@@ -33,7 +32,7 @@ export const useSelectedRowsController = ({ recordIds }: Props) => {
         setSelectedRows(rows.reduce((acc, rowId) => {
             acc[rowId] = true;
             return acc;
-        }, {}));
+        }, {} as Record<string, boolean>));
     }, [allRowsAreSelected]);
 
     const clearSelection = useCallback(() => {

@@ -1,11 +1,10 @@
-// @flow
-import React, { useState, useCallback, type ComponentType } from 'react';
+import React, { useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { DropdownButton, MenuItem, MenuSectionHeader, FlyoutMenu, colors } from '@dhis2/ui';
 import { useBulkDataEntryConfigurations } from '../../../../../common/bulkDataEntry';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         backgroundColor: `${colors.grey100} !important`,
         border: `1px solid ${colors.grey500} !important`,
@@ -16,23 +15,25 @@ const styles = {
 };
 
 type Props = {
-    programId: string,
-    onOpenBulkDataEntryPlugin: () => void,
-    selectionInProgress: boolean,
+    programId: string;
+    onOpenBulkDataEntryPlugin: () => void;
+    selectionInProgress: boolean;
 };
+
+type ComponentProps = Props & WithStyles<typeof styles>;
 
 const BulkDataEntryActionDropdownButtonPlain = ({
     programId,
     onOpenBulkDataEntryPlugin,
     selectionInProgress,
     classes,
-}: Props & CssClasses) => {
+}: ComponentProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const { setActiveList, bulkDataEntryConfigurations, isLoading, isError } =
         useBulkDataEntryConfigurations(programId);
 
     const onSelectConfiguration = useCallback(
-        async (configKey) => {
+        async (configKey: string) => {
             await setActiveList(configKey);
             onOpenBulkDataEntryPlugin();
         },
@@ -60,6 +61,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
                                 key={config.dataKey}
                                 label={config.title}
                                 value={config.dataKey}
+                                suffix=""
                                 onClick={() => {
                                     setIsOpen(prev => !prev);
                                     onSelectConfiguration(config.configKey);
@@ -75,6 +77,6 @@ const BulkDataEntryActionDropdownButtonPlain = ({
     );
 };
 
-export const BulkDataEntryActionDropdownButton: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(
+export const BulkDataEntryActionDropdownButton = withStyles(styles)(
     BulkDataEntryActionDropdownButtonPlain,
 );

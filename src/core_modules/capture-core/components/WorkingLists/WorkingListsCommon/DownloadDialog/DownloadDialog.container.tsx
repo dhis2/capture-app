@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useConfig } from '@dhis2/app-runtime';
 import { buildUrl } from 'capture-core-utils';

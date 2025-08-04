@@ -1,11 +1,10 @@
-// @flow
 import React from 'react';
 import { Button, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
-import type { ComponentProps } from './BulkActionBar.types';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { ContainerProps } from './BulkActionBar.types';
 
-const styles = {
+export const styles: Readonly<any> = {
     container: {
         background: colors.teal100,
         height: '60px',
@@ -20,12 +19,14 @@ const styles = {
     },
 };
 
+type Props = ContainerProps & WithStyles<typeof styles>;
+
 export const BulkActionBarComponentPlain = ({
     selectedRowsCount,
     onClearSelection,
     children,
     classes,
-}: ComponentProps) => (
+}: Props) => (
     <div
         className={classes.container}
         data-test="bulk-action-bar"
