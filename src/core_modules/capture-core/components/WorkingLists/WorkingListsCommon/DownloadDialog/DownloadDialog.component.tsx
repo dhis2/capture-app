@@ -1,12 +1,11 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import type { PlainProps } from './DownloadDialog.types';
 
-const getStyles = () => ({
+const getStyles: Readonly<any> = {
     downloadLink: {
         textDecoration: 'none',
         outline: 'none',
@@ -19,15 +18,17 @@ const getStyles = () => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
-});
+};
 
-const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, classes }: PlainProps) => {
-    const getUrlEncodedParamsString = (params: Object) => {
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
+const DownloadDialogPlain = ({ open, onClose, request, absoluteApiPath, classes }: Props) => {
+    const getUrlEncodedParamsString = (params: any) => {
         const { filter, ...restParams } = params;
         const searchParams = new URLSearchParams(restParams);
 
         if (filter) {
-            filter.forEach((filterItem) => {
+            filter.forEach((filterItem: string) => {
                 searchParams.append('filter', filterItem);
             });
         }
@@ -36,6 +37,7 @@ const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, cla
     };
 
     const renderButtons = () => {
+        if (!request?.url) return null;
         const url = `${absoluteApiPath}/${request.url}`;
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
@@ -75,7 +77,7 @@ const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, cla
     }
 
     return (
-        <Modal hide={!open} onClose={onClose} position={'center'} dataTest="working-lists-download-dialog">
+        <Modal hide={!open} onClose={onClose} position="middle" dataTest="working-lists-download-dialog">
             <ModalTitle>{i18n.t('Download with current filters')}</ModalTitle>
             <ModalContent>{renderButtons()}</ModalContent>
             <ModalActions>

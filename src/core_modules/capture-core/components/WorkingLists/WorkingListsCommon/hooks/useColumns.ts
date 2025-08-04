@@ -7,7 +7,7 @@ export const useColumns = <TColumnConfigs extends Array<{ id: string, visible: b
 ): TColumnConfigs => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
-            .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
+            .reduce((acc, column) => ({ ...acc, [column.id]: column }), {} as Record<string, any>),
     [defaultColumns]);
 
     return useMemo(() => {
@@ -15,7 +15,7 @@ export const useColumns = <TColumnConfigs extends Array<{ id: string, visible: b
             return defaultColumns;
         }
 
-        return customColumnOrder.reduce((acc, { id, visible }) => {
+        const result = customColumnOrder.reduce((acc: any[], { id, visible }) => {
             if (defaultColumnsAsObject[id]) {
                 return [
                     ...acc,
@@ -27,5 +27,7 @@ export const useColumns = <TColumnConfigs extends Array<{ id: string, visible: b
             }
             return acc;
         }, []);
+
+        return result as TColumnConfigs;
     }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
 };

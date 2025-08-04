@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { BulkActionBarComponent } from './BulkActionBar.component';
 import type { ContainerProps } from './BulkActionBar.types';
