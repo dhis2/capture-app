@@ -25,15 +25,15 @@ const createDataElement = (column) => {
 };
 
 export const useDataSource = (
+    records: { [key: string]: any } | undefined,
+    recordsOrder: Array<string> | undefined,
     columns: Array<{
         id: string,
         options?: Array<{ text: string, value: any }> | null,
-        type: keyof typeof dataElementTypes,
+        type: typeof dataElementTypes[keyof typeof dataElementTypes],
         visible: boolean,
         [key: string]: any,
     }>,
-    records?: { [key: string]: any },
-    recordsOrder?: Array<string>,
 ): DataSource | void => {
     const eventRecordsArray = useMemo(() =>
         recordsOrder && records && recordsOrder

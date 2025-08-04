@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 import { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import type { ReduxDispatch } from 'capture-core/components/App/withAppUrlSync.types';
 import {
     selectTemplate,
     addTemplate,
@@ -26,12 +27,33 @@ import {
     setTemplateSharingSettings,
     updateDefaultTemplate,
 } from '../actions';
-import type { ReduxDispatch } from 'capture-core/components/App/withAppUrlSync.types';
-import type {
-    SharingSettings,
-} from '../../WorkingListsBase';
 import type { Program } from '../../../../metaData';
 import type {
+    CancelLoadTemplates,
+    CancelLoadView,
+    CancelUpdateList,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    ClearFilters,
+    RemoveFilter,
+    LoadTemplates,
+    SelectRestMenuItem,
+    SelectTemplate,
+    SetColumnOrder,
+    ResetColumnOrder,
+    SetTemplateSharingSettings,
+    SharingSettings,
+    Sort,
+    UpdateFilter,
+} from '../../WorkingListsBase';
+import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateDefaultTemplate,
+    UpdateList,
+    LoadView,
     Callbacks,
 } from '..';
 
@@ -54,7 +76,14 @@ const useTemplates = (
         };
     }, shallowEqual);
 
-    const templateDispatch = useMemo(() => ({
+    const templateDispatch = useMemo((): {
+            onSelectTemplate: SelectTemplate;
+            onLoadTemplates: LoadTemplates;
+            onCancelLoadTemplates: CancelLoadTemplates;
+            onAddTemplate: AddTemplate;
+            onUpdateTemplate: UpdateTemplate;
+            onDeleteTemplate: DeleteTemplate;
+            onSetTemplateSharingSettings: SetTemplateSharingSettings; } => ({
         onSelectTemplate: (templateId, programStageIdArg) => {
             const selectedTemplate = templateState.templates?.find(templete => templete.id === templateId);
             const programStageId = programStageIdArg || selectedTemplate?.criteria?.programStage;
@@ -99,8 +128,8 @@ const useTemplates = (
 
 const useView = (
     dispatch: ReduxDispatch,
-    { storeId, workingListsType }: { storeId: string, workingListsType: string },
-    categoryCombinationId?: string | null) => {
+    categoryCombinationId: string | null | undefined,
+    { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
     const viewState = useSelector(({
         workingLists,
         workingListsUI,
@@ -169,7 +198,22 @@ const useView = (
         nextFilters,
     ]);
 
-    const viewDispatch = useMemo(() => ({
+    const viewDispatch = useMemo((): {
+            onLoadView: LoadView;
+            onUpdateList: UpdateList;
+            onCancelLoadView: CancelLoadView;
+            onCancelUpdateList: CancelUpdateList;
+            onSortList: Sort;
+            onSetListColumnOrder: SetColumnOrder;
+            onResetListColumnOrder: ResetColumnOrder;
+            onUpdateFilter: UpdateFilter;
+            onClearFilter: ClearFilter;
+            onRemoveFilter: RemoveFilter;
+            onClearFilters: ClearFilters;
+            onSelectRestMenuItem: SelectRestMenuItem;
+            onChangePage: ChangePage;
+            onChangeRowsPerPage: ChangeRowsPerPage;
+            onUpdateDefaultTemplate: UpdateDefaultTemplate;} => ({
         onLoadView: (selectedTemplate: any, context: any, meta: any) =>
             dispatch(initListView(
                 selectedTemplate,
@@ -181,7 +225,7 @@ const useView = (
                 },
             )),
         onUpdateList: (data: any, meta: any) => {
-            const { resetMode, ...queryArgs } = data as any;
+            const { resetMode, ...queryArgs } = data;
             dispatch(updateList(
                 queryArgs, {
                     ...meta,
@@ -247,8 +291,10 @@ export const useWorkingListsCommonStateManagement = (
     const templates = useTemplates(dispatch, { storeId, workingListsType, mainViewConfig });
     const view = useView(
         dispatch,
-        { storeId, workingListsType },
-        program.categoryCombination && program.categoryCombination.id);
+        program.categoryCombination && program.categoryCombination.id, {
+            storeId,
+            workingListsType,
+        });
 
     return {
         ...templates,
