@@ -1,4 +1,3 @@
-// @flow
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import type { AssigneeFilterData } from '../../../../../ListView';
 

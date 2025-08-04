@@ -1,8 +1,7 @@
-// @flow
 import type { NumericFilterData } from '../../../../../ListView';
 
 export function convertNumeric({ sourceValue }: { sourceValue: NumericFilterData }) {
-    const requestData = [];
+    const requestData: string[] = [];
 
     if (sourceValue.ge || sourceValue.ge === 0) {
         requestData.push(`ge:${sourceValue.ge}`);

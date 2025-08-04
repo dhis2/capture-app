@@ -1,4 +1,3 @@
-// @flow
 export { clearMemoization, convertDate } from './dateConverter';
 export { convertOptionSet } from './optionSet/optionSetConverter';
 export { convertAssignee } from './assigneeConverter';
