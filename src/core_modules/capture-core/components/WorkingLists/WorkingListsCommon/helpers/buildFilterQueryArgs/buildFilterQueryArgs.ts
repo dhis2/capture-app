@@ -1,8 +1,8 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { typeof dataElementTypes } from '../../../../../metaData';
-import { filterTypesObject, type FiltersData } from '../../../WorkingListsBase';
+import { dataElementTypes } from '../../../../../metaData';
+import { filterTypesObject } from '../../../WorkingListsBase';
+import type { FiltersData } from '../../../WorkingListsBase';
 import {
     convertText,
     convertDate,
@@ -14,7 +14,7 @@ import {
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
 
-const mappersForTypes: { [string]: Function } = {
+const mappersForTypes: Record<keyof typeof dataElementTypes, (args: any) => any> = {
     [filterTypesObject.TEXT]: convertText,
     [filterTypesObject.NUMBER]: convertNumeric,
     [filterTypesObject.INTEGER]: convertNumeric,
@@ -29,11 +29,11 @@ const mappersForTypes: { [string]: Function } = {
 
 function convertFilter(
     sourceValue: any,
-    type: $Keys<dataElementTypes>,
+    type: keyof typeof dataElementTypes,
     meta: {
-        key: string,
-        storeId: string,
-        isInit: boolean,
+        key: string;
+        storeId: string;
+        isInit: boolean;
     },
     unique?: boolean,
 ) {

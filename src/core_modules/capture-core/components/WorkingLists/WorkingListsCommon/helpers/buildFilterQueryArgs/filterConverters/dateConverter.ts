@@ -1,4 +1,3 @@
-// @flow
 import { createSelector } from 'reselect';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
@@ -98,8 +97,8 @@ function getSelector(key: string, storeId: string, isInit: boolean) {
     const listSelectors = selectors[storeId];
     if (!listSelectors[key]) {
         listSelectors[key] = createSelector(
-            sourceValue => sourceValue,
-            sourceValue =>
+            (sourceValue: any) => sourceValue,
+            (sourceValue: any) =>
                 relativeConvertersForPeriods[sourceValue.period] && relativeConvertersForPeriods[sourceValue.period](),
         );
     }
@@ -111,7 +110,7 @@ function getSelector(key: string, storeId: string, isInit: boolean) {
 
 function convertCustomRelativeDate(sourceValue: RelativeDateFilterData) {
     const { startBuffer, endBuffer } = sourceValue;
-    const requestData = [];
+    const requestData: string[] = [];
 
     if (startBuffer || startBuffer === 0) {
         const startDate = moment().add(startBuffer, 'days');
@@ -133,7 +132,7 @@ function convertRelativeDate(
     storeId: string,
     isInit: boolean,
 ) {
-    let requestData = [];
+    let requestData: string[] = [];
     if (areRelativeRangeValuesSupported(sourceValue.startBuffer, sourceValue.endBuffer)) {
         requestData = convertCustomRelativeDate(sourceValue);
         return requestData?.join(':');
@@ -146,7 +145,7 @@ function convertRelativeDate(
 }
 
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
-    const requestData = [];
+    const requestData: string[] = [];
     if (sourceValue.ge) {
         const fromFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.ge));
         requestData.push(`ge:${fromFilterRequest}`);
@@ -163,8 +162,8 @@ export function convertDate({
     sourceValue,
     meta: { key, storeId, isInit },
 }: {
-    sourceValue: DateFilterData,
-    meta: { key: string, storeId: string, isInit: boolean },
+    sourceValue: DateFilterData;
+    meta: { key: string; storeId: string; isInit: boolean };
 }) {
     if (sourceValue.type === 'ABSOLUTE') {
         return convertAbsoluteDate(sourceValue);

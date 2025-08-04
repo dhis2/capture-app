@@ -1,13 +1,12 @@
-// @flow
 import { pipe } from 'capture-core-utils';
 import { convertDataTypeValueToRequest } from './basicDataTypeConverters';
-import { typeof dataElementTypes } from '../../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../../metaData';
 import type { OptionSetFilterData } from '../../../../../../ListView';
 import { escapeString } from '../../../../../../../utils/escapeString';
 
 export function convertOptionSet(
     sourceValue: OptionSetFilterData,
-    type: $Keys<dataElementTypes>,
+    type: keyof typeof dataElementTypes,
 ) {
     return pipe(
         values => values.map(filterValue => escapeString(convertDataTypeValueToRequest(filterValue, type))),
