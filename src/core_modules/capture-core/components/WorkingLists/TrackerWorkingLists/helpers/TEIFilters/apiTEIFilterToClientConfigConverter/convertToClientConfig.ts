@@ -1,4 +1,3 @@
-// @flow
 import type { TeiColumnsMetaForDataFetching, TrackerWorkingListsTemplate } from '../../../types';
 import type { QuerySingleResource } from '../../../../../../utils/api';
 import { getCustomColumnsConfiguration } from './getCustomColumnsConfiguration';
@@ -15,15 +14,15 @@ export const convertToClientConfig = async (
         columnsMetaForDataFetching,
     );
     const customColumnOrder = getCustomColumnsConfiguration(
-        selectedTemplate?.criteria?.displayColumnOrder,
         columnsMetaForDataFetching,
+        selectedTemplate?.criteria?.displayColumnOrder,
     );
     const rowsPerPage = 15;
     const currentPage = 1;
     const filters = await convertToClientFilters(
-        selectedTemplate.criteria,
         columnsMetaForDataFetching,
         querySingleResource,
+        selectedTemplate.criteria,
     );
     return {
         filters,

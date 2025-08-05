@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
@@ -9,10 +8,10 @@ export const convertToEventFilterQuery = ({
     dataElementsValueFilters,
     mainFilters,
 }: {
-    filters: Object,
-    dataElementsValueFilters: Array<any>,
-    mainFilters: Array<{ id: string, type: string }>,
-}): Array<any> =>
+    filters: any;
+    dataElementsValueFilters: any[];
+    mainFilters: Array<{ id: string; type: string }>;
+}): any[] =>
     Object.keys(filters)
         .map((key) => {
             const filter = filters[key];
@@ -24,7 +23,6 @@ export const convertToEventFilterQuery = ({
                 return null;
             }
 
-            // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
             if (!getFilterByType[element.type]) {
                 log.error(
                     errorCreator(
@@ -46,8 +44,7 @@ export const convertToEventFilterQuery = ({
             }
 
             return {
-                // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
-                ...getFilterByType[element.type](filter),
+                ...(getFilterByType[element.type](filter) as any),
                 dataItem: key,
             };
         })

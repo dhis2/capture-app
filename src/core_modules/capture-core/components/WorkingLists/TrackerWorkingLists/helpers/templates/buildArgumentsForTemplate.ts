@@ -1,4 +1,3 @@
-// @flow
 import { v4 as uuid } from 'uuid';
 import {
     convertMainFilters,
@@ -16,11 +15,11 @@ const buildArguments = ({
     programStageId,
     mainFiltersConverted,
 }: {
-    filters?: FiltersData,
-    programStageFiltersOnly: Array<{ id: string, type: string }>,
-    columns: TrackerWorkingListsColumnConfigs,
-    programStageId?: string,
-    mainFiltersConverted: Object,
+    filters?: FiltersData;
+    programStageFiltersOnly: Array<{ id: string; type: string }>;
+    columns: TrackerWorkingListsColumnConfigs;
+    programStageId?: string;
+    mainFiltersConverted: any;
 }) => {
     if (!programStageId) {
         return {
@@ -64,14 +63,14 @@ export const buildArgumentsForTemplate = ({
     programId,
     programStageId,
 }: {
-    filters?: FiltersData,
-    filtersOnly: Array<{ id: string, type: string }>,
-    programStageFiltersOnly: Array<{ id: string, type: string }>,
-    columns?: TrackerWorkingListsColumnConfigs,
-    sortById: string,
-    sortByDirection: string,
-    programId: string,
-    programStageId?: string,
+    filters?: FiltersData;
+    filtersOnly: Array<{ id: string; type: string }>;
+    programStageFiltersOnly: Array<{ id: string; type: string }>;
+    columns?: TrackerWorkingListsColumnConfigs;
+    sortById: string;
+    sortByDirection: string;
+    programId: string;
+    programStageId?: string;
 }) => {
     const mainFiltersConverted = convertMainFilters({
         filters,
@@ -100,12 +99,10 @@ export const buildArgumentsForTemplate = ({
         attributeValueFilters,
         dataFilters,
         order: getOrderQueryArgs({
-            // $FlowFixMe Destructuring of union types is not handled properly by Flow.
-            sortById: columns.find(({ id }) => id === sortById)?.apiViewName || sortById,
+            sortById: (columns.find(({ id }) => id === sortById) as any)?.apiViewName || sortById,
             sortByDirection,
         }),
-        // $FlowFixMe Destructuring of union types is not handled properly by Flow.
-        displayColumnOrder: columns.filter(({ visible }) => visible).map(({ id, apiViewName }) => apiViewName || id),
+        displayColumnOrder: columns.filter(({ visible }) => visible).map(({ id, apiViewName }: any) => apiViewName || id),
         programStage: programStageId,
     };
     const data = {
@@ -115,7 +112,6 @@ export const buildArgumentsForTemplate = ({
         sortById,
         sortByDirection,
         filters,
-        // $FlowFixMe Destructuring of union types is not handled properly by Flow.
         visibleColumnIds: columns.filter(({ visible }) => visible).map(({ id }) => id),
     };
     return { data, criteria };
