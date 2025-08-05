@@ -1,3 +1,10 @@
+## [103.2.4](https://github.com/dhis2/capture-app/compare/v103.2.3...v103.2.4) (2025-08-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19905] TEI search fails for integer range types ([#4248](https://github.com/dhis2/capture-app/issues/4248)) ([237a7d1](https://github.com/dhis2/capture-app/commit/237a7d1db33742f65e8fe4f9e1ee06df82ce929e))
+
 ## [103.2.3](https://github.com/dhis2/capture-app/compare/v103.2.2...v103.2.3) (2025-08-04)
 
 
