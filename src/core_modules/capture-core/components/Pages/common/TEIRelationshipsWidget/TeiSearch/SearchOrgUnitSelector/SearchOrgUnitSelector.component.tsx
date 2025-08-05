@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -15,18 +14,18 @@ const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefau
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
 
 type Props = {
-    searchId: string,
-    selectedOrgUnit?: ?any,
-    selectedOrgUnitScope?: ?string,
-    treeRoots: ?Array<any>,
-    treeReady: ?boolean,
-    treeKey: ?string,
-    treeSearchText?: ?string,
-    onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => void,
-    onSetOrgUnit: (searchId: string, orgUnit: ?Object) => void,
-    onFilterOrgUnits: (searchId: string, searchText: ?string) => void,
-    searchAttempted: ?boolean,
-}
+    searchId: string;
+    selectedOrgUnit?: any;
+    selectedOrgUnitScope?: string;
+    treeRoots?: Array<any>;
+    treeReady?: boolean;
+    treeKey?: string;
+    treeSearchText?: string;
+    onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => void;
+    onSetOrgUnit: (searchId: string, orgUnit?: Record<string, unknown>) => void;
+    onFilterOrgUnits: (searchId: string, searchText: string) => void;
+    searchAttempted?: boolean;
+};
 
 const orgUnitFieldStyles = {
     labelContainerStyle: {
@@ -62,31 +61,27 @@ const options = [
 const errorMessage = 'Please select an organisation unit';
 
 export class SearchOrgUnitSelector extends React.Component<Props> {
-    gotoInstance: any;
-
     onSelectOrgUnitScope = (value: any) => {
         if (value) {
             this.props.onSelectOrgUnitScope(this.props.searchId, value);
         }
     }
-    onSetOrgUnit = (orgUnit: ?Object) => {
+    onSetOrgUnit = (orgUnit?: Record<string, unknown>) => {
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
     }
-    renderOrgUnitScopeSelector = () => {
-        const { selectedOrgUnitScope } = this.props;
-        return (
-            <TeiSearchSelectionBoxes
-                options={options}
-                label="Organisation unit scope"
-                styles={selectionBoxesStyles}
-                onSelect={this.onSelectOrgUnitScope}
-                value={selectedOrgUnitScope}
-            />
-        );
+
+    getErrorMessage = () => {
+        if (!this.isValid() && this.props.searchAttempted) {
+            return i18n.t(errorMessage);
+        }
+        return null;
     }
+
+    gotoInstance: any;
 
     isValid = () => this.props.selectedOrgUnitScope === 'ACCESSIBLE' || this.props.selectedOrgUnit
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     validateAndScrollToIfFailed() {
         const isValid = this.isValid();
         if (!isValid) {
@@ -102,21 +97,26 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
 
             const scrolledY = window.scrollY;
             if (scrolledY) {
-                // TODO: Set the modifier some other way (caused be the fixed header)
                 window.scroll(0, scrolledY - 48);
             }
         }
     }
 
-    getErrorMessage = () => {
-        if (!this.isValid() && this.props.searchAttempted) {
-            return i18n.t(errorMessage);
-        }
-        return null;
+    handleFilterOrgUnits = (searchText?: string) => {
+        this.props.onFilterOrgUnits(this.props.searchId, searchText || '');
     }
 
-    handleFilterOrgUnits = (searchText: ?string) => {
-        this.props.onFilterOrgUnits(this.props.searchId, searchText);
+    renderOrgUnitScopeSelector = () => {
+        const { selectedOrgUnitScope } = this.props;
+        return (
+            <TeiSearchSelectionBoxes
+                options={options}
+                label="Organisation unit scope"
+                styles={selectionBoxesStyles}
+                onSelect={this.onSelectOrgUnitScope}
+                value={selectedOrgUnitScope}
+            />
+        );
     }
 
     renderOrgUnitField = () => {
