@@ -1,16 +1,9 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
-
-type Props = {
-    selectedRows: { [id: string]: boolean },
-    selectedRowsCount: number,
-    trackedEntityName: string,
-    onUpdateList: () => void,
-}
+import type { PlainProps } from './DeleteTeiAction.types';
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 
@@ -21,7 +14,7 @@ export const DeleteTeiAction = ({
     selectedRowsCount,
     trackedEntityName,
     onUpdateList,
-}: Props) => {
+}: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
     const { deleteTeis, isLoading } = useCascadeDeleteTei({
@@ -73,7 +66,7 @@ export const DeleteTeiAction = ({
                             </Button>
                             <Button
                                 destructive
-                                onClick={deleteTeis}
+                                onClick={() => deleteTeis()}
                                 loading={isLoading}
                             >
                                 {i18n.t('Delete')}

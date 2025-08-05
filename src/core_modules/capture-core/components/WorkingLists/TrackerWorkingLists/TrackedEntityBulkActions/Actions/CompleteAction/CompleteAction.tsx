@@ -1,8 +1,6 @@
-// @flow
-
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
-import React, { type ComponentType, useState } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import React, { useState } from 'react';
 import {
     Button,
     ButtonStrip,
@@ -17,19 +15,9 @@ import {
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
-import type { ProgramStage } from '../../../../../../metaData';
+import type { PlainProps } from './CompleteAction.types';
 
-type Props = {
-    selectedRows: { [id: string]: any },
-    programId: string,
-    stages: Map<string, ProgramStage>,
-    programDataWriteAccess: boolean,
-    onUpdateList: (disableClearSelections?: boolean) => void,
-    removeRowsFromSelection: (rows: Array<string>) => void,
-    bulkDataEntryIsActive: boolean,
-};
-
-const styles = {
+const styles: Readonly<any> = {
     container: {
         fontSize: '14px',
         lineHeight: '19px',
@@ -67,7 +55,7 @@ const CompleteActionPlain = ({
     removeRowsFromSelection,
     bulkDataEntryIsActive,
     classes,
-}: Props & CssClasses) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
@@ -102,7 +90,7 @@ const CompleteActionPlain = ({
 
         // If there was an error importing the data, show an error message
         if (validationError) {
-            const errors = (validationError: any)?.details?.validationReport?.errorReports;
+            const errors = (validationError as any)?.details?.validationReport?.errorReports;
             return (
                 <div className={classes.container}>
                     <span>
@@ -202,7 +190,6 @@ const CompleteActionPlain = ({
             {modalIsOpen && (
                 <Modal
                     onClose={() => setModalIsOpen(false)}
-                    loading={isLoading}
                     dataTest={'bulk-complete-enrollments-dialog'}
                 >
                     <ModalTitle>
@@ -250,4 +237,4 @@ const CompleteActionPlain = ({
     );
 };
 
-export const CompleteAction: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(CompleteActionPlain);
+export const CompleteAction = withStyles(styles)(CompleteActionPlain);

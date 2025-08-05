@@ -1,5 +1,3 @@
-// @flow
-
 import { useEffect, useMemo } from 'react';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
@@ -11,13 +9,13 @@ import { errorCreator, FEATURES, featureAvailable } from '../../../../../../../.
 import type { ProgramStage } from '../../../../../../../metaData';
 
 type Props = {
-    selectedRows: { [id: string]: any },
-    programId: string,
-    stages: Map<string, ProgramStage>,
-    modalIsOpen: boolean,
-    onUpdateList: (disableClearSelections?: boolean) => void,
-    removeRowsFromSelection: (rows: Array<string>) => void,
-}
+    selectedRows: Record<string, any>;
+    programId: string;
+    stages: Map<string, ProgramStage>;
+    modalIsOpen: boolean;
+    onUpdateList: (disableClearSelections?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+};
 
 const validateEnrollments = async ({ dataEngine, enrollments }) => dataEngine.mutate({
     resource: 'tracker?async=false&importStrategy=UPDATE&importMode=VALIDATE',
@@ -118,7 +116,7 @@ export const useCompleteBulkEnrollments = ({
             resource: 'tracker/trackedEntities',
             params: () => {
                 const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
-                const filterQueryParam: string = supportForFeature ? 'trackedEntities' : 'trackedEntity';
+                const filterQueryParam = supportForFeature ? 'trackedEntities' : 'trackedEntity';
 
                 return ({
                     program: programId,
@@ -213,10 +211,10 @@ export const useCompleteBulkEnrollments = ({
             enrollments,
         }),
         {
-            onSuccess: (serverResponse: any, { enrollments }: any) => {
-                importEnrollments({ enrollments });
+            onSuccess: () => {
+                importEnrollments();
             },
-            onError: (serverResponse: any, { enrollments }: any) => {
+            onError: (serverResponse: any) => {
                 const errors = serverResponse?.details?.validationReport?.errorReports;
                 if (!errors) {
                     log.error(
@@ -251,8 +249,8 @@ export const useCompleteBulkEnrollments = ({
     }, [modalIsOpen, resetCompleteEnrollments]);
 
     const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
-        const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
-        onValidateEnrollments({ completeEvents, enrollments });
+        formatServerPayload(trackedEntities, completeEvents, stages);
+        onValidateEnrollments();
     };
 
     return {

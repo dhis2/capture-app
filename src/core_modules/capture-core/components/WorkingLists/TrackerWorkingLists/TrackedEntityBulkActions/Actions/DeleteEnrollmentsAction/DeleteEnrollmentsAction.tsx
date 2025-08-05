@@ -1,18 +1,10 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-
-type Props = {
-    selectedRows: { [id: string]: boolean },
-    programDataWriteAccess: boolean,
-    programId: string,
-    onUpdateList: () => void,
-    bulkDataEntryIsActive: boolean,
-}
+import type { PlainProps } from './DeleteEnrollmentsAction.types';
 
 const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
     if (!programDataWriteAccess) {
@@ -32,7 +24,7 @@ export const DeleteEnrollmentsAction = ({
     programId,
     onUpdateList,
     bulkDataEntryIsActive,
-}: Props) => {
+}: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);

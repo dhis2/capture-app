@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
 import { CompleteAction, DeleteEnrollmentsAction } from './Actions';

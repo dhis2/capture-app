@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
@@ -6,10 +5,10 @@ import { useMutation } from 'react-query';
 import { errorCreator } from '../../../../../../../../capture-core-utils';
 
 type Props = {
-    selectedRows: { [id: string]: boolean },
-    setIsDeleteDialogOpen: (open: boolean) => void,
-    onUpdateList: () => void,
-}
+    selectedRows: Record<string, boolean>;
+    setIsDeleteDialogOpen: (open: boolean) => void;
+    onUpdateList: () => void;
+};
 
 export const useCascadeDeleteTei = ({
     selectedRows,

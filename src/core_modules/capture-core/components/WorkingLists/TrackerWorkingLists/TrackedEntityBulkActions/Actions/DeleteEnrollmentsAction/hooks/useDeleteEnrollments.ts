@@ -1,4 +1,3 @@
-// @flow
 import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -9,11 +8,11 @@ import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../ut
 import { errorCreator, FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
 
 type Props = {
-    selectedRows: { [id: string]: boolean },
-    programId: string,
-    onUpdateList: () => void,
-    setIsDeleteDialogOpen: (open: boolean) => void,
-}
+    selectedRows: Record<string, boolean>;
+    programId: string;
+    onUpdateList: () => void;
+    setIsDeleteDialogOpen: (open: boolean) => void;
+};
 
 const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities'];
 
@@ -52,7 +51,7 @@ export const useDeleteEnrollments = ({
             resource: 'tracker/trackedEntities',
             params: () => {
                 const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
-                const filterQueryParam: string = supportForFeature ? 'trackedEntities' : 'trackedEntity';
+                const filterQueryParam = supportForFeature ? 'trackedEntities' : 'trackedEntity';
 
                 return ({
                     fields: 'trackedEntity,enrollments[enrollment,program,status]',
