@@ -33,7 +33,7 @@ const buildCustomColumnsConfiguration = (
 
     const hiddenColumns = [...columnsMetaForDataFetching.values()]
         .filter(({ id }) => !visibleColumnsAsMap.has(id))
-        .map(({ id }) => ({ id: id || '', visible: false }));
+        .map(({ id }) => ({ id, visible: false }));
 
     return [...visibleColumnsAsMap.values(), ...hiddenColumns] as CustomColumnOrder;
 };

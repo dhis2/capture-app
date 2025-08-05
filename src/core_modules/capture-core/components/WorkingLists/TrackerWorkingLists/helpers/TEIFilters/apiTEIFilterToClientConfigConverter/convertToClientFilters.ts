@@ -158,15 +158,15 @@ const convertDataElementFilters = (
     filters: ApiDataFilter[] | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
 ): any =>
-    filters?.reduce((acc, serverFilter: ApiDataFilter) => {
+    filters?.reduce((acc, serverFilter: any) => {
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
 
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        const value = isOptionSetFilter(element.type, serverFilter as any)
-            ? getOptionSetFilter(serverFilter as unknown as ApiDataFilterOptionSet, element.type)
-            : getFilterByType[element.type](serverFilter as any);
+        const value = isOptionSetFilter(element.type, serverFilter)
+            ? getOptionSetFilter(serverFilter, element.type)
+            : getFilterByType[element.type](serverFilter);
 
         return value ? { ...acc, [serverFilter.dataItem]: value } : acc;
     }, {});
@@ -175,15 +175,15 @@ const convertAttributeFilters = (
     filters: ApiDataFilter[] | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
 ): any =>
-    filters?.reduce((acc, serverFilter: ApiDataFilter) => {
+    filters?.reduce((acc, serverFilter: any) => {
         const element = columnsMetaForDataFetching.get(serverFilter.attribute);
 
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        const value = isOptionSetFilter(element.type, serverFilter as any)
-            ? getOptionSetFilter(serverFilter as unknown as ApiDataFilterOptionSet, element.type)
-            : getFilterByType[element.type](serverFilter as any, element);
+        const value = isOptionSetFilter(element.type, serverFilter)
+            ? getOptionSetFilter(serverFilter, element.type)
+            : getFilterByType[element.type](serverFilter, element);
 
         return value ? { ...acc, [serverFilter.attribute]: value } : acc;
     }, {});
