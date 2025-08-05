@@ -1,2 +1,2 @@
 // @flow
-export type { TextFilterData } from './text.types';
+export { TextFilterData } from './text.types';
