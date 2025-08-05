@@ -1,9 +1,15 @@
 // @flow
-import { getEmptyValueResult, getNotEmptyValueResult } from '../../../common/filters/EmptyValueFilter/emptyValueFilterResults';
+import {
+    API_FILTER_NULL,
+    API_FILTER_NOT_NULL,
+} from '../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
+import {
+    getEmptyValueResult,
+    getNotEmptyValueResult,
+} from '../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
 import type { TextFilterData } from '../index';
 
-export const API_FILTER_NULL: 'null' = 'null';
-export const API_FILTER_NOT_NULL: '!null' = '!null';
+export { API_FILTER_NULL, API_FILTER_NOT_NULL } from '../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 export const getEmptyOrNotEmptyTextFilterData = (
     filter: any,
