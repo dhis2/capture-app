@@ -2,7 +2,6 @@ import { Program, ProgramStage } from '../../../../metaData';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsReduxOutputProps } from '../ReduxProvider';
-// import { type ButtonEventHandler } from '@dhis2/ui';
 
 type ExtractedProps = {
     program: Program,
@@ -11,10 +10,6 @@ type ExtractedProps = {
     onLoadView: any,
     onUpdateList: any,
 };
-
-// type OptionalExtractedProps = {
-//     customColumnOrder: CustomColumnOrder,
-// }
 
 // had to add customColumnOrder as a non optional type or else it would not be removed. Also, if customColumnOrder is
 // added as non optional to the ExtractedProps only (and not to EventWorkingListsReduxOutputProps),
