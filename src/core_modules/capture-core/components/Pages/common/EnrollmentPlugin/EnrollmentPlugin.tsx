@@ -1,26 +1,25 @@
-// @flow
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { useNavigate } from 'capture-core/utils/routing';
 
-type EnrollmentPluginProps = {|
-    enrollmentId: string,
-    programId?: string,
-    teiId: string,
-    orgUnitId: string,
-    pluginSource: string,
-    programStageId?: string,
-    eventId?: string,
-|};
+type EnrollmentPluginProps = {
+    enrollmentId: string;
+    programId?: string;
+    teiId: string;
+    orgUnitId: string;
+    pluginSource: string;
+    programStageId?: string;
+    eventId?: string;
+};
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {
-    const [pluginWidth, setPluginWidth] = useState(undefined);
+    const [pluginWidth, setPluginWidth] = useState<number | undefined>(undefined);
     const { navigate } = useNavigate();
-    const containerRef = useRef<?HTMLDivElement>();
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const { current: container } = containerRef;
-        if (!container) return () => {};
+        if (!container) return undefined;
 
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach(entry => setPluginWidth(entry.contentRect.width));
@@ -28,7 +27,6 @@ export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPlu
 
         resizeObserver.observe(container);
 
-        // Cleanup function
         return () => {
             resizeObserver.unobserve(container);
             resizeObserver.disconnect();
