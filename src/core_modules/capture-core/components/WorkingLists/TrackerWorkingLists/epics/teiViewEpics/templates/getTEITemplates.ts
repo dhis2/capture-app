@@ -63,7 +63,7 @@ export const getTEITemplates = (
                             userAccesses,
                             userGroupAccesses,
                         };
-                    })
+                    }),
             ],
             defaultTemplateId: defaultTemplate.id,
             id: TRACKER_WORKING_LISTS,

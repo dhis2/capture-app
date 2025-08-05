@@ -39,7 +39,7 @@ const buildTEIRecord = ({
 }: {
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
     apiTEI: ApiTei,
-    attributeValuesById: Object,
+    attributeValuesById: any,
     trackedEntity: string,
     programId: string,
 }) =>
@@ -76,7 +76,7 @@ const buildEventRecord = ({
 }: {
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
     apiEvent: ApiEvent,
-    dataValuesById: Object,
+    dataValuesById: any,
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
         const isStatus = mainProperty && id === ADDITIONAL_FILTERS.status;

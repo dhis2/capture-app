@@ -2,7 +2,7 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../../metaData';
 
 const buildTEAUrlByElementType: {
-    [key: string]: Function;
+    [key: string]: any;
 } = {
     [dataElementTypes.FILE_RESOURCE]: ({
         trackedEntity,
@@ -38,7 +38,7 @@ const buildTEAUrlByElementType: {
 };
 
 const buildDataElementUrlByElementType: {
-    [key: string]: Function;
+    [key: string]: any;
 } = {
     [dataElementTypes.FILE_RESOURCE]: ({ event, id }: { event: string, id: string }) =>
         (featureAvailable(FEATURES.trackerFileEndpoint)

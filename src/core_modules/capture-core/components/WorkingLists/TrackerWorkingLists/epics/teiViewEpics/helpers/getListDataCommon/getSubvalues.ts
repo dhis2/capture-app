@@ -5,7 +5,6 @@ import { dataElementTypes } from '../../../../../../../metaData';
 import type {
     SubvalueKeysByType,
     SubvaluesByType,
-    GetTeisWithSubvaluesPlainInner,
     ClientData,
 } from './getSubvalues.types';
 import type { TeiColumnMetaForDataFetching } from '../../../../types';

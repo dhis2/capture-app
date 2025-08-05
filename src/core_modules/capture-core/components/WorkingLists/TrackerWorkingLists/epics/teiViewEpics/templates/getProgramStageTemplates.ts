@@ -67,7 +67,7 @@ export const getProgramStageTemplates = (
                             userAccesses,
                             userGroupAccesses,
                         };
-                    })
+                    }),
             ],
             defaultTemplateId: defaultTemplate.id,
             id: PROGRAM_STAGE_WORKING_LISTS,
