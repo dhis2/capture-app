@@ -18,6 +18,10 @@ function convertRange(value: RangeValue, elementId: string) {
 const valueConvertersForType = {
     [dataElementTypes.TEXT]: like,
     [dataElementTypes.NUMBER_RANGE]: convertRange,
+    [dataElementTypes.INTEGER_RANGE]: convertRange,
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: convertRange,
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: convertRange,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: convertRange,
     [dataElementTypes.DATE_RANGE]: convertRange,
     [dataElementTypes.DATETIME_RANGE]: convertRange,
     [dataElementTypes.TIME_RANGE]: convertRange,
