@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useDataSource } from '../../WorkingListsCommon';
 import { EventWorkingListsTemplateSetup } from '../TemplateSetup';

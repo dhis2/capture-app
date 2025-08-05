@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -24,9 +23,7 @@ export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitI
         <div data-test="event-working-lists">
             <EventWorkingListsReduxProvider
                 storeId={storeId}
-                // $FlowFixMe
                 program={program}
-                // $FlowFixMe
                 programStage={programStage}
                 orgUnitId={orgUnitId}
                 mainViewConfig={mainViewConfig}

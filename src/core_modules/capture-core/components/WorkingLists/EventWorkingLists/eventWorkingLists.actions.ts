@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -15,7 +14,7 @@ export const deleteEventSuccess =
 export const deleteEventError =
     () => actionCreator(actionTypes.EVENT_DELETE_ERROR)();
 
-export const openViewEventPage = (eventId: string, contextOrgUnitId: ?string) =>
+export const openViewEventPage = (eventId: string, contextOrgUnitId: string | null | undefined) =>
     actionCreator(actionTypes.VIEW_EVENT_PAGE_OPEN)({ eventId, orgUnitId: contextOrgUnitId });
 
 export const requestDeleteEvent = (eventId: string, storeId: string) =>

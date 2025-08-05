@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 import { convertToEventFilterEventQueryCriteria } from '../helpers/eventFilters';
@@ -26,7 +25,6 @@ export const EventWorkingListsTemplateSetup = ({
     ...passOnProps
 }: Props) => {
     const injectArgumentsForUpdateTemplate = React.useCallback((template) => {
-        // $FlowFixMe For columns: fixing this will create really ugly code. SortById, sortByDirection: Rather complex logic results in sortById and sortByDirection always having a value here.
         const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
         onUpdateTemplate(template, eventQueryCriteria, {
             filters,
@@ -40,7 +38,6 @@ export const EventWorkingListsTemplateSetup = ({
     }, [onUpdateTemplate, filters, columns, sortById, sortByDirection, program.id]);
 
     const injectArgumentsForAddTemplate = React.useCallback((name) => {
-        // $FlowFixMe For columns: fixing this will create really ugly code. SortById, sortByDirection: Rather complex logic results in sortById and sortByDirection always having a value here.
         const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
         onAddTemplate(name, eventQueryCriteria, {
             filters,

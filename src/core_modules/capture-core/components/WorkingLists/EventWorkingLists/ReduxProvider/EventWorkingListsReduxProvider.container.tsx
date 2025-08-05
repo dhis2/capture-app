@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
@@ -49,7 +48,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         dispatch(requestDeleteEvent(eventId, storeId));
     }, [dispatch, storeId]);
 
-    const getLockedFilters = useCallback((selectedTemplate: Object) => {
+    const getLockedFilters = useCallback((selectedTemplate: any) => {
         if (!selectedTemplate.isDefault) {
             const { criteria } = templates.find(({ isDefault }) => isDefault);
             const lockedFilters = Object.keys(criteria).reduce((acc, key) => {
@@ -67,7 +66,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     }, [templates]);
 
     const handleLoadView = useCallback(
-        async (selectedTemplate: Object, context: Object, meta: Object) => {
+        async (selectedTemplate: any, context: any, meta: any) => {
             const eventQueryCriteria = selectedTemplate?.nextCriteria || selectedTemplate?.criteria;
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const clientConfig = await convertToClientConfig(eventQueryCriteria, meta?.columnsMetaForDataFetching, querySingleResource);
@@ -94,7 +93,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     );
 
     const injectDownloadRequestToUpdateList = useCallback(
-        (queryArgs: Object, meta: Object) => {
+        (queryArgs: any, meta: any) => {
             const { lastTransaction, columnsMetaForDataFetching } = meta;
             const currentRequest = computeDownloadRequest({
                 clientConfig: queryArgs,

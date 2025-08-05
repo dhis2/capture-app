@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import { EventWorkingListsDataSourceSetup } from '../DataSourceSetup';

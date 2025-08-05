@@ -1,0 +1,27 @@
+import type { Program } from '../../../../metaData';
+import type { EventWorkingListsTemplateSetupOutputProps } from '../TemplateSetup';
+import type { CustomMenuContents } from '../../WorkingListsBase';
+
+type ExtractedProps = {
+    downloadRequest: { url: string; queryParams: any | null | undefined };
+    program: Program;
+    programStageId: string;
+    lastIdDeleted?: string;
+};
+
+type RestProps = Omit<EventWorkingListsTemplateSetupOutputProps, keyof ExtractedProps>;
+
+export type Props = RestProps & ExtractedProps;
+
+export type EventWorkingListsViewMenuSetupOutputProps = RestProps & {
+    programId: string;
+    programStageId: string;
+    customListViewMenuContents: CustomMenuContents;
+    allRowsAreSelected?: boolean;
+    customUpdateTrigger?: string | null | undefined;
+    onRowSelect: (id: string) => void;
+    onSelectAll: (rows: Array<string>) => void;
+    selectionInProgress: boolean;
+    selectedRows: { [key: string]: boolean };
+    bulkActionBarComponent: React.ReactElement<any>;
+};

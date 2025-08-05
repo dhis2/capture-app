@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useColumns } from '../../WorkingListsCommon';
 import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
@@ -7,20 +6,18 @@ import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
 
 const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
-    useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
+    useCallback((selectedTemplate: any, context: any, meta: any) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
-                // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
         onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
     }, [onLoadView, defaultColumns]);
 
 const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
-    useCallback((queryArgs: Object, lastTransaction: number) => {
+    useCallback((queryArgs: any, lastTransaction: number) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
-                // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
         onUpdateList(queryArgs, { columnsMetaForDataFetching, lastTransaction });
