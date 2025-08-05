@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import { parseNumber } from 'capture-core-utils/parsers';
 import { dataElementTypes } from '../../../../../../metaData';
@@ -23,10 +22,9 @@ const converterByType = {
 };
 
 export const getOptionSetFilter =
-    (filter: ApiDataFilterOptionSet, type: $Keys<typeof dataElementTypes>): OptionSetFilterData => ({
+    (filter: ApiDataFilterOptionSet, type: keyof typeof dataElementTypes): OptionSetFilterData => ({
         usingOptionSet: true,
         values: filter
             .in
-            // $FlowFixMe dataElementTypes flow error
             .map(value => (converterByType[type] ? converterByType[type](value) : value)),
     });

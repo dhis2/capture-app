@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import type { CustomColumnOrder } from '../../../WorkingListsCommon';
@@ -14,7 +13,7 @@ const buildCustomColumnsConfiguration = (
     );
 
     const visibleColumnsAsMap = new Map(customApiOrder
-        .map((id: string) => {
+        .map((id) => {
             if (columnsMetaForDataFetching.has(id)) {
                 return id;
             }
@@ -35,15 +34,14 @@ const buildCustomColumnsConfiguration = (
         .filter(({ id }) => !visibleColumnsAsMap.has(id))
         .map(({ id }) => ({ id, visible: false }));
 
-    // $FlowFixMe
     return [
         ...visibleColumnsAsMap.values(),
         ...hiddenColumns,
-    ];
+    ] as any;
 };
 
 export const getCustomColumnsConfiguration = (
-    customApiOrder?: ?Array<string>,
+    customApiOrder: Array<string> | null | undefined,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
 ): CustomColumnOrder | void => {
     if (customApiOrder && customApiOrder.length > 0) {

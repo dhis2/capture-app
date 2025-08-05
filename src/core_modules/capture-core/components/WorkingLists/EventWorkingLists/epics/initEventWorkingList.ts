@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -17,17 +16,17 @@ const errorMessages = {
 };
 
 export const initEventWorkingListAsync = async (
-    config: ?ApiEventQueryCriteria,
+    config: ApiEventQueryCriteria | null,
     meta: {
-        commonQueryData: CommonQueryData,
-        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-        categoryCombinationId?: ?string,
-        storeId: string,
-        lastTransaction: number,
+        commonQueryData: CommonQueryData;
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching;
+        categoryCombinationId?: string | null;
+        storeId: string;
+        lastTransaction: number;
     },
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
-): Promise<ReduxAction<any, any>> => {
+): Promise<any> => {
     const { commonQueryData, columnsMetaForDataFetching, categoryCombinationId, storeId, lastTransaction } = meta;
     const clientConfig: ClientConfig = await convertToClientConfig(
         config,

@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getEventListData } from './getEventListData';
@@ -15,21 +14,21 @@ const errorMessages = {
 };
 
 export const updateEventWorkingListAsync = (
-    queryArgsSource: Object,
+    queryArgsSource: any,
     {
         columnsMetaForDataFetching,
         categoryCombinationId,
         storeId,
         commonQueryData,
     }: {
-        commonQueryData: CommonQueryData,
-        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-        categoryCombinationId?: ?string,
-        storeId: string,
+        commonQueryData: CommonQueryData;
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching;
+        categoryCombinationId?: string | null;
+        storeId: string;
     },
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
-): Promise<ReduxAction<any, any>> => {
+): Promise<any> => {
     const rawQueryArgs = {
         ...queryArgsSource,
         fields: 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser',

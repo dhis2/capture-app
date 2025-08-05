@@ -1,9 +1,8 @@
-// @flow
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 type ApiConfig = {
-    eventFilters: Array<Object>,
-    pager: Object,
+    eventFilters: any[];
+    pager: any;
 };
 
 export const getApiEventFilters = async (programId: string, querySingleResource: QuerySingleResource) => {
@@ -16,7 +15,7 @@ export const getApiEventFilters = async (programId: string, querySingleResource:
     });
 
     const configs = apiRes && apiRes.eventFilters ? apiRes.eventFilters : [];
-    const processedConfigs: Array<Object> = configs
+    const processedConfigs: any[] = configs
         .map(({
             id,
             displayName: name,

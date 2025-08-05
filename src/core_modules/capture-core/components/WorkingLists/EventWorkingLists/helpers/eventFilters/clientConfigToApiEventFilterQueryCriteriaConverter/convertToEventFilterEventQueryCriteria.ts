@@ -1,8 +1,7 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
-import { typeof dataElementTypes } from '../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import {
@@ -24,20 +23,17 @@ import type {
     ApiEventQueryCriteria,
 } from '../../../types';
 
-type ColumnForConverterBase = {|
+type ColumnForConverterBase = {
     id: string,
-    type: $Values<dataElementTypes>,
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
     visible: boolean,
-|};
-type MetadataColumnForConverter = {|
-    ...ColumnForConverterBase,
-|};
+};
+type MetadataColumnForConverter = ColumnForConverterBase;
 
-type MainColumnForConverter = {|
-    ...ColumnForConverterBase,
+type MainColumnForConverter = ColumnForConverterBase & {
     isMainProperty: true,
     apiName?: string,
-|};
+};
 
 type ColumnForConverter = MetadataColumnForConverter | MainColumnForConverter;
 
@@ -102,7 +98,7 @@ const getFilterByType = {
     [filterTypesObject.ASSIGNEE]: getAssigneeFilter,
 };
 
-const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Object
+const typeConvertFilters = (filters: any, columns: ColumnsForConverter) => Object
     .keys(filters)
     .map((key) => {
         const filter = filters[key];
@@ -110,7 +106,6 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
             return null;
         }
         const element = columns.get(key);
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             log.error(
                 errorCreator(
@@ -130,14 +125,13 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
         }
 
         return {
-            // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
             ...getFilterByType[element.type](filter),
             dataItem: key,
         };
     })
     .filter(value => value != null);
 
-const getMainFilter = (filter: Object): Object => {
+const getMainFilter = (filter: any): any => {
     let mainValue;
     const { dataItem, ...filterValues } = filter;
     switch (dataItem) {
@@ -161,12 +155,11 @@ const getMainFilter = (filter: Object): Object => {
     return mainValue;
 };
 
-const structureFilters = (apiFilters: Array<Object>, columns: ColumnsForConverter) => apiFilters
+const structureFilters = (apiFilters: Array<any>, columns: ColumnsForConverter) => apiFilters
     .reduce((acc, filter) => {
         const element = columns.get(filter.dataItem);
 
-        // $FlowFixMe[incompatible-type] automated comment
-        if (element.isMainProperty) {
+        if (element && 'isMainProperty' in element && element.isMainProperty) {
             const mainFilter = getMainFilter(filter);
             const filters = {
                 ...acc,
@@ -183,7 +176,7 @@ const structureFilters = (apiFilters: Array<Object>, columns: ColumnsForConverte
 
 const getApiSortById = (sortById: string, columns: ColumnsForConverter) => {
     const column = columns.get(sortById);
-    if (column?.isMainProperty) {
+    if (column && 'isMainProperty' in column && column.isMainProperty) {
         return column.apiName ?? sortById;
     }
     return sortById;
@@ -194,19 +187,19 @@ const getSortOrder = (sortById: string, sortByDirection: string) => `${sortById}
 const getColumnsOrder = (columns: Array<ColumnForConverter>) =>
     columns
         .filter(column => column.visible)
-        .map(column => column.apiName || column.id);
+        .map(column => ('apiName' in column ? column.apiName : column.id));
 
 export const convertToEventFilterEventQueryCriteria = ({
     filters,
     sortById,
     sortByDirection,
     columns,
-}: {|
-    filters: Object,
+}: {
+    filters: any,
     sortById: string,
     sortByDirection: string,
     columns: ColumnsForConverter,
-|}): ApiEventQueryCriteria => {
+}): ApiEventQueryCriteria => {
     const apiSortById = getApiSortById(sortById, columns);
     const sortOrderCriteria = getSortOrder(apiSortById, sortByDirection);
     const filtersCriteria = pipe(

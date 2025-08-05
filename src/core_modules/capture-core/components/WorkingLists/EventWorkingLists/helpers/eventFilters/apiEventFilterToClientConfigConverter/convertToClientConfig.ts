@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import moment from 'moment';
@@ -49,7 +48,7 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
     value: true,
 });
 
-const getDateFilter = ({ dateFilter }: ApiDataFilterDate): ?DateFilterData => {
+const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null | undefined => {
     if (dateFilter.type === apiDateFilterTypes.RELATIVE) {
         if (dateFilter.period) {
             return {
@@ -90,12 +89,11 @@ const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
             return null;
         });
 
-// eslint-disable-next-line complexity
 const getAssigneeFilter = async (
-    assignedUserMode: $Values<typeof apiAssigneeFilterModes>,
-    assignedUsers: ?Array<string>,
+    assignedUserMode: typeof apiAssigneeFilterModes[keyof typeof apiAssigneeFilterModes],
+    assignedUsers: Array<string> | null | undefined,
     querySingleResource: QuerySingleResource,
-): Promise<?AssigneeFilterData> => {
+): Promise<AssigneeFilterData | null | undefined> => {
     if (assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
         const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
         if (!assignedUserId) {
@@ -130,7 +128,7 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) => {
+const isOptionSetFilter = (type: typeof filterTypesObject, filter: any) => {
     if ([
         filterTypesObject.BOOLEAN,
     ].includes(type)) {
@@ -142,7 +140,7 @@ const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) =
 };
 
 const getSortOrder = (
-    order: ?string,
+    order?: string | null,
     columnsMetaForDataFetching?: ColumnsMetaForDataFetching,
 ) => {
     const [sortById, sortByDirection] = order?.split(':') ?? [];
@@ -165,28 +163,25 @@ const getSortOrder = (
 };
 
 const getDataElementFilters = (
-    filters: ?Array<ApiDataFilter>,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching): Array<Object> => {
+    filters: Array<ApiDataFilter> | null | undefined,
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching): any[] => {
     if (!filters) {
         return [];
     }
 
     return filters.map((serverFilter) => {
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return null;
         }
 
-        // $FlowFixMe If previous test doesn't return, element.type is a key in filterTypesObject
         if (isOptionSetFilter(element.type, serverFilter)) {
             return {
-                // $FlowFixMe
-                ...getOptionSetFilter(serverFilter, element.type),
+                ...getOptionSetFilter(serverFilter as any, element.type),
                 id: serverFilter.dataItem,
             };
         }
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
+        // @ts-expect-error - keeping original functionality as before ts rewrite
         const dataValue = (getFilterByType[element.type](serverFilter, element));
 
         return dataValue && {
@@ -196,9 +191,8 @@ const getDataElementFilters = (
     }).filter(clientFilter => clientFilter);
 };
 
-// eslint-disable-next-line complexity
 const getMainDataFilters = async (
-    eventQueryCriteria: ?ApiEventQueryCriteria,
+    eventQueryCriteria: ApiEventQueryCriteria | null,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
 ) => {
@@ -207,10 +201,9 @@ const getMainDataFilters = async (
     }
 
     const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
-    const filters = [];
+    const filters: any[] = [];
     if (status) {
-        // $FlowFixMe
-        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status').type), id: 'status' });
+        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type), id: 'status' });
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
@@ -231,13 +224,13 @@ const listConfigDefaults = {
 };
 
 export async function convertToClientConfig(
-    eventQueryCriteria: ?ApiEventQueryCriteria,
+    eventQueryCriteria: ApiEventQueryCriteria | null,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
 ): Promise<ClientConfig> {
-    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria && eventQueryCriteria.order, columnsMetaForDataFetching);
+    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria?.order, columnsMetaForDataFetching);
     const filters = [
-        ...getDataElementFilters(eventQueryCriteria && eventQueryCriteria.dataFilters, columnsMetaForDataFetching),
+        ...getDataElementFilters(eventQueryCriteria?.dataFilters, columnsMetaForDataFetching),
         ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching, querySingleResource)),
     ].reduce((acc, filter) => {
         const { id, ...filterData } = filter;
@@ -245,9 +238,7 @@ export async function convertToClientConfig(
         return acc;
     }, {});
 
-    const customColumnOrder =
-        getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching);
-
+    const customColumnOrder = getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching) || undefined;
 
     return {
         filters,

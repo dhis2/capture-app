@@ -1,4 +1,3 @@
-// @flow
 import { getApiEventFilters } from '../helpers/eventFilters';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import type { EventWorkingListsTemplates, MainViewConfig } from '../types';
@@ -20,7 +19,6 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
         return {
             templates: [...apiEventFilters, defaultEventFilter]
                 .map(({ eventQueryCriteria, ...eventFilter }) => {
-                    // $FlowFixMe
                     const { displayColumnOrder, order, eventDate, ...criteria } = eventQueryCriteria;
                     const convertedEventQueryCriteria = {
                         ...criteria,
