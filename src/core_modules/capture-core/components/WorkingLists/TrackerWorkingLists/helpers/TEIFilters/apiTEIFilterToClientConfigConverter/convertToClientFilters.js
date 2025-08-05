@@ -2,6 +2,7 @@
 import moment from 'moment';
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
+import { getEmptyOrNotEmptyTextFilterData } from '../../../../WorkingListsBase/utils';
 import {
     filterTypesObject,
     type TrueOnlyFilterData,
@@ -30,9 +31,7 @@ const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
     dataElement?: DataElement,
 ): ?TextFilterData => {
-    const value = dataElement?.unique
-        ? filter.eq ?? filter.like
-        : filter.like;
+    const value = dataElement?.unique ? (filter.eq ?? filter.like) : filter.like;
     return value ? { value } : undefined;
 };
 
@@ -166,6 +165,12 @@ const convertDataElementFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
+        // Generic empty/not-empty handling
+        const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
+        if (emptyValueFilter) {
+            return { ...acc, [serverFilter.dataItem]: emptyValueFilter };
+        }
+
         // $FlowFixMe
         const value = isOptionSetFilter(element.type, serverFilter)
             ? // $FlowFixMe
@@ -187,6 +192,12 @@ const convertAttributeFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
+        // Generic empty/not-empty handling
+        const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
+        if (emptyValueFilter) {
+            return { ...acc, [serverFilter.attribute]: emptyValueFilter };
+        }
+
         // $FlowFixMe
         const value = isOptionSetFilter(element.type, serverFilter)
             ? // $FlowFixMe

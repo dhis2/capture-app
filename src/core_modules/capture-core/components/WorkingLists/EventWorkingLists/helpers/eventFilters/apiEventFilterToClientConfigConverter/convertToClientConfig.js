@@ -7,6 +7,7 @@ import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 
+import { getEmptyOrNotEmptyTextFilterData } from '../../../../WorkingListsBase/utils';
 import {
     filterTypesObject,
     type AssigneeFilterData,
@@ -29,11 +30,9 @@ import type {
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
-const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
+const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     const value = filter.like;
-    return {
-        value,
-    };
+    return value ? { value } : undefined;
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
@@ -176,6 +175,15 @@ const getDataElementFilters = (
         // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return null;
+        }
+
+        // Generic empty/not-empty filter handling
+        const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
+        if (emptyValueFilter) {
+            return {
+                id: serverFilter.dataItem,
+                ...emptyValueFilter,
+            };
         }
 
         // $FlowFixMe If previous test doesn't return, element.type is a key in filterTypesObject
