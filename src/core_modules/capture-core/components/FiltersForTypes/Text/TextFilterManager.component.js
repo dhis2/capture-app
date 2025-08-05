@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
-import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from '../../common/filters';
 import type { TextFilterData } from './types';
+import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 type Props = {
     filter: ?TextFilterData,

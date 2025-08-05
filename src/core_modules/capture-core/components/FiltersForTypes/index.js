@@ -18,6 +18,5 @@ export type { OptionSetFilterData } from './OptionSet/types';
 export type { TextFilterData } from './Text/types';
 export type { TrueOnlyFilterData } from './TrueOnly/types';
 export type { UpdatableFilterContent, FilterData, FilterDataInput } from './types';
-export type { EmptyValueFilterChangeHandler } from '../common/filters';
 
 export type { Options } from '../FormFields/Options/SelectBoxes';

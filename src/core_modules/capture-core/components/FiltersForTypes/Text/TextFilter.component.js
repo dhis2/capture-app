@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
+import type { UpdatableFilterContent } from '../types';
 import {
-    EmptyValueFilterCheckboxes,
     createEmptyValueCheckboxHandler,
     createNotEmptyValueCheckboxHandler,
     shouldShowMainInputForEmptyValueFilter,
-} from '../../common/filters';
-import type { UpdatableFilterContent } from '../types';
+} from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
+import { EmptyValueFilterCheckboxes } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 
 type Value = ?string;
 

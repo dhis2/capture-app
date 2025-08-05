@@ -13,6 +13,7 @@ import {
     convertTrueOnly,
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
+import { API_FILTER_NOT_NULL } from './EmptyValueFilter/constants';
 
 const mappersForTypes: { [string]: Function } = {
     [filterTypesObject.TEXT]: convertText,
@@ -38,10 +39,10 @@ function convertFilter(
     unique?: boolean,
 ) {
     if (sourceValue?.isEmpty) {
-        return 'null';
+        return API_FILTER_NOT_NULL;
     }
     if (sourceValue?.isNotEmpty) {
-        return '!null';
+        return API_FILTER_NOT_NULL;
     }
 
     if (sourceValue && sourceValue.usingOptionSet) {
