@@ -44,7 +44,7 @@ const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
     values: filter.in.map(value => value === 'true'),
 });
 
-const getTrueOnlyFilter = (): TrueOnlyFilterData => ({
+const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({
     value: true,
 });
 
@@ -56,7 +56,7 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null
                 period: dateFilter.period,
             };
         }
-        if (areRelativeRangeValuesSupported(dateFilter.startBuffer ?? null, dateFilter.endBuffer ?? null)) {
+        if (areRelativeRangeValuesSupported(dateFilter.startBuffer, dateFilter.endBuffer)) {
             return {
                 type: dateFilter.type,
                 startBuffer: dateFilter.startBuffer,
@@ -91,7 +91,7 @@ const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
 
 const getAssigneeFilter = async (
     assignedUserMode: typeof apiAssigneeFilterModes[keyof typeof apiAssigneeFilterModes],
-    assignedUsers: Array<string> | null,
+    assignedUsers: Array<string> | null | undefined,
     querySingleResource: QuerySingleResource,
 ): Promise<AssigneeFilterData | null | undefined> => {
     if (assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
@@ -128,7 +128,7 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: any, filter: any) => {
+const isOptionSetFilter = (type: typeof filterTypesObject, filter: any) => {
     if ([
         filterTypesObject.BOOLEAN,
     ].includes(type)) {
@@ -140,7 +140,7 @@ const isOptionSetFilter = (type: any, filter: any) => {
 };
 
 const getSortOrder = (
-    order: string | null,
+    order?: string | null,
     columnsMetaForDataFetching?: ColumnsMetaForDataFetching,
 ) => {
     const [sortById, sortByDirection] = order?.split(':') ?? [];
@@ -163,7 +163,7 @@ const getSortOrder = (
 };
 
 const getDataElementFilters = (
-    filters: Array<ApiDataFilter> | null,
+    filters: Array<ApiDataFilter> | null | undefined,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching): any[] => {
     if (!filters) {
         return [];
@@ -207,16 +207,13 @@ const getMainDataFilters = async (
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
-        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: (occurredAt as any).lockedAll });
+        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: occurredAt.lockedAll });
     }
     if (assignedUserMode) {
-        const assigneeFilter = await getAssigneeFilter(assignedUserMode, assignedUsers ?? null, querySingleResource);
-        if (assigneeFilter) {
-            filters.push({
-                ...assigneeFilter,
-                id: 'assignee',
-            });
-        }
+        filters.push({
+            ...(await getAssigneeFilter(assignedUserMode, assignedUsers, querySingleResource)),
+            id: 'assignee',
+        });
     }
     return filters;
 };
@@ -231,9 +228,9 @@ export async function convertToClientConfig(
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
 ): Promise<ClientConfig> {
-    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria?.order ?? null, columnsMetaForDataFetching);
+    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria?.order, columnsMetaForDataFetching);
     const filters = [
-        ...getDataElementFilters(eventQueryCriteria?.dataFilters ?? null, columnsMetaForDataFetching),
+        ...getDataElementFilters(eventQueryCriteria?.dataFilters, columnsMetaForDataFetching),
         ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching, querySingleResource)),
     ].reduce((acc, filter) => {
         const { id, ...filterData } = filter;
