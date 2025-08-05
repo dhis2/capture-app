@@ -165,7 +165,6 @@ const convertDataElementFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        // Generic empty/not-empty handling
         const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
         if (emptyValueFilter) {
             return { ...acc, [serverFilter.dataItem]: emptyValueFilter };
@@ -192,7 +191,6 @@ const convertAttributeFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        // Generic empty/not-empty handling
         const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
         if (emptyValueFilter) {
             return { ...acc, [serverFilter.attribute]: emptyValueFilter };

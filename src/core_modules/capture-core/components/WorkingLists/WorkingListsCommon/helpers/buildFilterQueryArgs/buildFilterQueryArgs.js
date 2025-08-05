@@ -37,10 +37,20 @@ function convertFilter(
     },
     unique?: boolean,
 ) {
+    if (sourceValue?.isEmpty) {
+        return 'null';
+    }
+    if (sourceValue?.isNotEmpty) {
+        return '!null';
+    }
+
     if (sourceValue && sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type] ? mappersForTypes[type]({ sourceValue, meta, unique }) : sourceValue;
+
+    return mappersForTypes[type]
+        ? mappersForTypes[type]({ sourceValue, meta, unique })
+        : sourceValue;
 }
 export const buildFilterQueryArgs = (
     filters: FiltersData, {
