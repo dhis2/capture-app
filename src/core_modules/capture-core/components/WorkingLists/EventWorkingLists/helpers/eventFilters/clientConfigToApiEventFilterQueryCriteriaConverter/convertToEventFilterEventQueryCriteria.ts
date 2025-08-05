@@ -1,79 +1,91 @@
+import log from 'loglevel';
+import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
-import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
-import type { ClientConfig, ColumnsMetaForDataFetching, ApiEventQueryCriteria } from '../../../types';
+import { dataElementTypes } from '../../../../../../metaData';
+import { getApiOptionSetFilter } from './optionSet';
+
 import {
     filterTypesObject,
+    dateFilterTypes,
     type AssigneeFilterData,
     type DateFilterData,
     type BooleanFilterData,
     type TextFilterData,
     type NumericFilterData,
 } from '../../../../WorkingListsBase';
+import type {
+    ApiDataFilterNumeric,
+    ApiDataFilterText,
+    ApiDataFilterBoolean,
+    ApiDataFilterTrueOnly,
+    ApiDataFilterDate,
+    ApiDataFilterAssignee,
+    ApiEventQueryCriteria,
+} from '../../../types';
 
-const getTextFilter = (filter: TextFilterData) => ({
+type ColumnForConverterBase = {
+    id: string,
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
+    visible: boolean,
+};
+type MetadataColumnForConverter = ColumnForConverterBase;
+
+type MainColumnForConverter = ColumnForConverterBase & {
+    isMainProperty: true,
+    apiName?: string,
+};
+
+type ColumnForConverter = MetadataColumnForConverter | MainColumnForConverter;
+
+
+type ColumnsForConverter = Map<string, ColumnForConverter>;
+
+const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
     like: filter.value,
 });
 
-const getNumericFilter = (filter: NumericFilterData) => {
-    const numericFilter: any = {};
-    if (filter.ge || filter.ge === 0) {
-        numericFilter.ge = filter.ge.toString();
-    }
-    if (filter.le || filter.le === 0) {
-        numericFilter.le = filter.le.toString();
-    }
-    return numericFilter;
-};
-
-const getBooleanFilter = (filter: BooleanFilterData) => ({
-    in: filter.values.map(value => value.toString()),
+const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
+    ge: filter.ge ? filter.ge.toString() : undefined,
+    le: filter.le ? filter.le.toString() : undefined,
 });
 
-const getTrueOnlyFilter = () => ({
+const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
+    in: filter.values.map(value => (value ? 'true' : 'false')),
+});
+
+const getTrueOnlyFilter = (): ApiDataFilterTrueOnly => ({
     eq: 'true',
 });
 
-const getDateFilter = (filter: DateFilterData) => {
-    if (filter.type === apiDateFilterTypes.RELATIVE) {
-        if (filter.period) {
-            return {
-                type: filter.type,
-                period: filter.period,
-            };
-        }
-        return {
-            type: filter.type,
-            startBuffer: filter.startBuffer,
-            endBuffer: filter.endBuffer,
-        };
-    }
-    if (filter.type === apiDateFilterTypes.ABSOLUTE) {
-        const dateFilter: any = { type: filter.type };
-        if (filter.ge) {
-            dateFilter.startDate = moment(filter.ge).format('YYYY-MM-DD');
-        }
-        if (filter.le) {
-            dateFilter.endDate = moment(filter.le).format('YYYY-MM-DD');
-        }
-        return dateFilter;
-    }
-    return {};
+const convertDate = (rawValue: string): string => {
+    const momentDate = moment(rawValue);
+    momentDate.locale('en');
+    return momentDate.format('YYYY-MM-DD');
 };
 
-const getAssigneeFilter = (filter: AssigneeFilterData) => {
-    if (filter.assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
-        return {
-            assignedUserMode: filter.assignedUserMode,
-            assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : [],
-        };
-    }
+const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
+    const apiDateFilterContents = dateFilter.type === dateFilterTypes.RELATIVE ? {
+        type: dateFilter.type,
+        period: dateFilter.period,
+        startBuffer: dateFilter.startBuffer,
+        endBuffer: dateFilter.endBuffer,
+    } : {
+        type: dateFilter.type,
+        startDate: dateFilter.ge ? convertDate(dateFilter.ge) : undefined,
+        endDate: dateFilter.le ? convertDate(dateFilter.le) : undefined,
+    };
 
     return {
-        assignedUserMode: filter.assignedUserMode,
+        dateFilter: apiDateFilterContents,
     };
 };
 
-const getFilterByType: any = {
+const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
+    assignedUserMode: filter.assignedUserMode,
+    assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
+});
+
+const getFilterByType = {
     [filterTypesObject.TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
     [filterTypesObject.INTEGER]: getNumericFilter,
@@ -86,66 +98,119 @@ const getFilterByType: any = {
     [filterTypesObject.ASSIGNEE]: getAssigneeFilter,
 };
 
-const getDataElementFilters = (
-    filters: { [id: string]: any },
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-) =>
-    Object
-        .keys(filters)
-        .map((key) => {
-            const element = columnsMetaForDataFetching.get(key);
-            if (!element) {
-                return null;
-            }
+const typeConvertFilters = (filters: any, columns: ColumnsForConverter) => Object
+    .keys(filters)
+    .map((key) => {
+        const filter = filters[key];
+        if (filter == null) {
+            return null;
+        }
+        const element = columns.get(key);
+        if (!element || !getFilterByType[element.type]) {
+            log.error(
+                errorCreator(
+                    'tried to convert a filter to api value, but there was no filter converter or specification found')({
+                    filter,
+                    element,
+                }),
+            );
+            return null;
+        }
 
-            if (!getFilterByType[element.type]) {
-                return null;
-            }
-
-            const filterData = getFilterByType[element.type](filters[key]);
-
+        if (filter.usingOptionSet) {
             return {
+                ...getApiOptionSetFilter(filter, element.type),
                 dataItem: key,
-                ...filterData,
             };
-        })
-        .filter(filter => filter);
+        }
 
-const getSortOrder = (
-    sortById: string,
-    sortByDirection: string,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-) => {
-    const element = columnsMetaForDataFetching.get(sortById);
-    if (!element) {
-        return `${sortById}:${sortByDirection}`;
+        return {
+            ...getFilterByType[element.type](filter),
+            dataItem: key,
+        };
+    })
+    .filter(value => value != null);
+
+const getMainFilter = (filter: any): any => {
+    let mainValue;
+    const { dataItem, ...filterValues } = filter;
+    switch (dataItem) {
+    case 'status':
+        mainValue = {
+            status: filterValues.in[0],
+        };
+        break;
+    case 'occurredAt':
+        mainValue = {
+            eventDate: filterValues.dateFilter,
+        };
+        break;
+    case 'assignee':
+        mainValue = filterValues;
+        break;
+    default:
+        mainValue = null;
+        break;
     }
-
-    return `${element.apiName || element.id}:${sortByDirection}`;
+    return mainValue;
 };
 
-export const convertToEventFilterEventQueryCriteria = (
-    clientConfig: ClientConfig,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-): ApiEventQueryCriteria => {
-    const { filters, sortById, sortByDirection, customColumnOrder } = clientConfig;
+const structureFilters = (apiFilters: Array<any>, columns: ColumnsForConverter) => apiFilters
+    .reduce((acc, filter) => {
+        const element = columns.get(filter.dataItem);
 
-    const dataFilters = getDataElementFilters(filters, columnsMetaForDataFetching);
-    const order = getSortOrder(sortById, sortByDirection, columnsMetaForDataFetching);
+        if (element && 'isMainProperty' in element && element.isMainProperty) {
+            const mainFilter = getMainFilter(filter);
+            const filters = {
+                ...acc,
+                ...mainFilter,
+            };
+            return filters;
+        }
 
-    const eventQueryCriteria: any = {
-        dataFilters,
-        order,
-    };
+        acc.dataFilters.push(filter);
+        return acc;
+    }, {
+        dataFilters: [],
+    });
 
-    if (customColumnOrder) {
-        eventQueryCriteria.displayColumnOrder = customColumnOrder
-            .filter(({ visible }: any) => visible)
-            .map(({ id }: any) => {
-                const element = columnsMetaForDataFetching.get(id);
-                return element?.apiName || id;
-            });
+const getApiSortById = (sortById: string, columns: ColumnsForConverter) => {
+    const column = columns.get(sortById);
+    if (column && 'isMainProperty' in column && column.isMainProperty) {
+        return column.apiName ?? sortById;
     }
+    return sortById;
+};
 
-    return eventQueryCriteria;
+const getSortOrder = (sortById: string, sortByDirection: string) => `${sortById}:${sortByDirection}`;
+
+const getColumnsOrder = (columns: Array<ColumnForConverter>) =>
+    columns
+        .filter(column => column.visible)
+        .map(column => ('apiName' in column ? column.apiName : column.id));
+
+export const convertToEventFilterEventQueryCriteria = ({
+    filters,
+    sortById,
+    sortByDirection,
+    columns,
+}: {
+    filters: any,
+    sortById: string,
+    sortByDirection: string,
+    columns: ColumnsForConverter,
+}): ApiEventQueryCriteria => {
+    const apiSortById = getApiSortById(sortById, columns);
+    const sortOrderCriteria = getSortOrder(apiSortById, sortByDirection);
+    const filtersCriteria = pipe(
+        () => typeConvertFilters(filters, columns),
+        convertedFilters => structureFilters(convertedFilters, columns),
+    )();
+    const displayColumnOrderCriteria = getColumnsOrder([...columns.values()]);
+
+    return {
+        ...filtersCriteria,
+        order: sortOrderCriteria,
+        displayColumnOrder: displayColumnOrderCriteria,
+    };
 };

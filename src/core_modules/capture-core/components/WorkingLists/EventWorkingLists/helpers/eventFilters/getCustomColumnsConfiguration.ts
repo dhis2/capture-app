@@ -35,14 +35,14 @@ const buildCustomColumnsConfiguration = (
         .map(({ id }) => ({ id, visible: false }));
 
     return [
-        ...Array.from(visibleColumnsAsMap.values()),
+        ...visibleColumnsAsMap.values(),
         ...hiddenColumns,
     ] as any;
 };
 
 export const getCustomColumnsConfiguration = (
+    customApiOrder: Array<string> | null | undefined,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    customApiOrder?: Array<string> | null,
 ): CustomColumnOrder | void => {
     if (customApiOrder && customApiOrder.length > 0) {
         return buildCustomColumnsConfiguration(customApiOrder, columnsMetaForDataFetching);

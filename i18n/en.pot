@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-04T14:57:08.665Z\n"
-"PO-Revision-Date: 2025-08-04T14:57:08.665Z\n"
+"POT-Creation-Date: 2025-08-05T07:45:15.757Z\n"
+"PO-Revision-Date: 2025-08-05T07:45:15.757Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1715,6 +1715,9 @@ msgstr "Working list could not be loaded"
 
 msgid "Download data..."
 msgstr "Download data..."
+
+msgid "an error occurred loading working lists"
+msgstr "an error occurred loading working lists"
 
 msgid "You do not have access to complete events"
 msgstr "You do not have access to complete events"

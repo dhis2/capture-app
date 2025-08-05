@@ -83,9 +83,16 @@ export type ReduxAction<T = any, M = any> = {
 };
 
 export type ApiUtils = {
+    absoluteApiPath: string;
     querySingleResource: (params: { resource: string; params?: Record<string, unknown> }) => Promise<any>;
     fromClientDate: (date: string) => { getServerZonedISOString: () => string };
     navigate: (url: string) => void;
+    mutate: (params: {
+        resource: string;
+        id?: string;
+        data?: any;
+        type?: 'create' | 'replace' | 'update' | 'delete';
+    }) => Promise<any>;
 };
 
 /**

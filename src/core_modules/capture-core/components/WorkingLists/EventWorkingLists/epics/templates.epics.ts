@@ -1,9 +1,10 @@
-import { from } from 'rxjs';
-import { ofType } from 'redux-observable';
-import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import type { EpicAction, ReduxStore } from '../../../../../capture-core-utils/types/global';
+import { ofType } from 'redux-observable';
+import { concatMap, filter, takeUntil } from 'rxjs/operators';
+import { from } from 'rxjs';
+import type { EpicAction, ReduxStore, ApiUtils } from '../../../../../capture-core-utils/types/global';
 import {
     workingListsCommonActionTypes,
     fetchTemplatesSuccess,
@@ -20,9 +21,9 @@ import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
 export const retrieveTemplatesEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { querySingleResource }: any,
-) =>
+    store: ReduxStore, {
+        querySingleResource,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -40,7 +41,7 @@ export const retrieveTemplatesEpic = (
                     log.error(
                         errorCreator(error)({ epic: 'retrieveTemplatesEpic' }),
                     );
-                    return fetchTemplatesError('an error occurred loading working lists', storeId);
+                    return fetchTemplatesError(i18n.t('an error occurred loading working lists'), storeId);
                 });
 
             return from(promise).pipe(
@@ -55,9 +56,9 @@ export const retrieveTemplatesEpic = (
 
 export const updateTemplateEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { mutate }: any,
-) =>
+    store: ReduxStore, {
+        mutate,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -137,9 +138,9 @@ export const updateTemplateEpic = (
 
 export const addTemplateEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { mutate }: any,
-) =>
+    store: ReduxStore, {
+        mutate,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_ADD),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -190,9 +191,9 @@ export const addTemplateEpic = (
 
 export const deleteTemplateEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { mutate }: any,
-) =>
+    store: ReduxStore, {
+        mutate,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),

@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import log from 'loglevel';
 import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
-import type { EpicAction, ReduxStore } from '../../../../../capture-core-utils/types/global';
+import type { EpicAction, ReduxStore, ApiUtils } from '../../../../../capture-core-utils/types/global';
 import {
     actionTypes,
     deleteEventError,
@@ -16,8 +16,8 @@ import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
 export const initEventListEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { absoluteApiPath, querySingleResource }: any,
+    _: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
@@ -70,8 +70,8 @@ export const initEventListEpic = (
 
 export const updateEventListEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { absoluteApiPath, querySingleResource }: any,
+    _: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
@@ -120,8 +120,8 @@ export const updateEventListEpic = (
 
 export const requestDeleteEventEpic = (
     action$: EpicAction<any>,
-    store: ReduxStore,
-    { mutate }: any,
+    _: ReduxStore,
+    { mutate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(actionTypes.EVENT_REQUEST_DELETE),

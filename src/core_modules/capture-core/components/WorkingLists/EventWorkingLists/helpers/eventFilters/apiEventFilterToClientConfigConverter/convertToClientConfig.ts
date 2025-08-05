@@ -36,8 +36,8 @@ const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
-    ge: filter.ge ? Number(filter.ge) : null,
-    le: filter.le ? Number(filter.le) : null,
+    ge: filter.ge ? Number(filter.ge) : undefined,
+    le: filter.le ? Number(filter.le) : undefined,
 });
 
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
@@ -48,7 +48,7 @@ const getTrueOnlyFilter = (): TrueOnlyFilterData => ({
     value: true,
 });
 
-const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null => {
+const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null | undefined => {
     if (dateFilter.type === apiDateFilterTypes.RELATIVE) {
         if (dateFilter.period) {
             return {
@@ -63,7 +63,7 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null
                 endBuffer: dateFilter.endBuffer,
             };
         }
-        return null;
+        return undefined;
     }
     if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
         return {
@@ -72,7 +72,7 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null
             le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
         };
     }
-    return null;
+    return undefined;
 };
 
 const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
@@ -93,16 +93,16 @@ const getAssigneeFilter = async (
     assignedUserMode: typeof apiAssigneeFilterModes[keyof typeof apiAssigneeFilterModes],
     assignedUsers: Array<string> | null,
     querySingleResource: QuerySingleResource,
-): Promise<AssigneeFilterData | null> => {
+): Promise<AssigneeFilterData | null | undefined> => {
     if (assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
         const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
         if (!assignedUserId) {
-            return null;
+            return undefined;
         }
 
         const user = await getUser(assignedUserId, querySingleResource);
         if (!user) {
-            return null;
+            return undefined;
         }
 
         return {
@@ -181,7 +181,8 @@ const getDataElementFilters = (
                 id: serverFilter.dataItem,
             };
         }
-        const dataValue = (getFilterByType[element.type](serverFilter as any));
+        // @ts-expect-error - keeping original functionality as before ts rewrite
+        const dataValue = (getFilterByType[element.type](serverFilter, element));
 
         return dataValue && {
             id: serverFilter.dataItem,
@@ -240,9 +241,7 @@ export async function convertToClientConfig(
         return acc;
     }, {});
 
-    const customColumnOrder =
-        getCustomColumnsConfiguration(columnsMetaForDataFetching, eventQueryCriteria?.displayColumnOrder ?? null) || undefined;
-
+    const customColumnOrder = getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching) || undefined;
 
     return {
         filters,
