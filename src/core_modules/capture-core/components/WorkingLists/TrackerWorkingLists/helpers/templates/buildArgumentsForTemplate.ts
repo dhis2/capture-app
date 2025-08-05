@@ -99,10 +99,10 @@ export const buildArgumentsForTemplate = ({
         attributeValueFilters,
         dataFilters,
         order: getOrderQueryArgs({
-            sortById: (columns.find(({ id }) => id === sortById) as any)?.apiViewName || sortById,
+            sortById: (columns.find(({ id }) => id === sortById))?.apiViewName || sortById,
             sortByDirection,
         }),
-        displayColumnOrder: columns.filter(({ visible }) => visible).map(({ id, apiViewName }: any) => apiViewName || id),
+        displayColumnOrder: columns.filter(({ visible }) => visible).map(({ id, apiViewName }) => apiViewName || id),
         programStage: programStageId,
     };
     const data = {

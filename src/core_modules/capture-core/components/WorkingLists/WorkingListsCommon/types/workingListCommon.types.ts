@@ -4,7 +4,7 @@ export type Callbacks = { callBacks?: { onChangeTemplate?: (selectedTemplateId?:
 
 export type RecordsOrder = Array<string>;
 
-export type CustomColumnOrder = Array<{ id: string, visible: string }>;
+export type CustomColumnOrder = Array<{ id: string, visible: boolean }>;
 
 export type AddTemplate = (name: string, criteria: any, data: any, callBacks?: Callbacks) => void;
 

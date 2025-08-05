@@ -109,7 +109,7 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const getAssigneeFilter = async (querySingleResource: QuerySingleResource, assignedUsers?: string[]) => {
+const getAssigneeFilter = async (assignedUsers: Array<string> | null, querySingleResource: QuerySingleResource) => {
     // DHIS2-12500 - The UI element provides suport for only one user
     const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
     if (!assignedUserId) {
@@ -155,8 +155,8 @@ const mainFiltersTable = {
 };
 
 const convertDataElementFilters = (
+    filters: ApiDataFilter[] | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-    filters?: ApiDataFilter[],
 ): any =>
     filters?.reduce((acc, serverFilter: ApiDataFilter) => {
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
@@ -172,8 +172,8 @@ const convertDataElementFilters = (
     }, {});
 
 const convertAttributeFilters = (
+    filters: ApiDataFilter[] | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-    filters?: ApiDataFilter[],
 ): any =>
     filters?.reduce((acc, serverFilter: ApiDataFilter) => {
         const element = columnsMetaForDataFetching.get(serverFilter.attribute);
@@ -199,9 +199,9 @@ const convertToClientMainFilters = (TEIQueryCriteria: any) =>
     }, {});
 
 export const convertToClientFilters = async (
+    TEIQueryCriteria: ApiTrackerQueryCriteria | null | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
-    TEIQueryCriteria?: ApiTrackerQueryCriteria,
 ): Promise<{ [id: string]: any }> => {
     if (!TEIQueryCriteria) {
         return {};
@@ -213,7 +213,7 @@ export const convertToClientFilters = async (
     return {
         assignee,
         ...convertToClientMainFilters(restTEIQueryCriteria),
-        ...convertAttributeFilters(columnsMetaForDataFetching, attributeValueFilters),
-        ...convertDataElementFilters(columnsMetaForDataFetching, dataFilters),
+        ...convertAttributeFilters(attributeValueFilters, columnsMetaForDataFetching),
+        ...convertDataElementFilters(dataFilters, columnsMetaForDataFetching),
     };
 };

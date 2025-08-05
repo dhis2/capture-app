@@ -28,19 +28,19 @@ const buildCustomColumnsConfiguration = (
             return element.id;
         })
         .filter(id => id)
-        .map(id => [id, { id, visible: 'true' }]),
+        .map(id => [id, { id, visible: true }]),
     );
 
     const hiddenColumns = [...columnsMetaForDataFetching.values()]
         .filter(({ id }) => !visibleColumnsAsMap.has(id))
-        .map(({ id }) => ({ id: id || '', visible: 'false' }));
+        .map(({ id }) => ({ id: id || '', visible: false }));
 
     return [...visibleColumnsAsMap.values(), ...hiddenColumns] as CustomColumnOrder;
 };
 
 export const getCustomColumnsConfiguration = (
+    customApiOrder: string[] | null | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-    customApiOrder?: string[],
 ): CustomColumnOrder | undefined => {
     if (customApiOrder && customApiOrder.length > 0) {
         return buildCustomColumnsConfiguration(customApiOrder, columnsMetaForDataFetching);

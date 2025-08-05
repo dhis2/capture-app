@@ -14,15 +14,15 @@ export const convertToClientConfig = async (
         columnsMetaForDataFetching,
     );
     const customColumnOrder = getCustomColumnsConfiguration(
-        columnsMetaForDataFetching,
         selectedTemplate?.criteria?.displayColumnOrder,
+        columnsMetaForDataFetching,
     );
     const rowsPerPage = 15;
     const currentPage = 1;
     const filters = await convertToClientFilters(
+        selectedTemplate.criteria,
         columnsMetaForDataFetching,
         querySingleResource,
-        selectedTemplate.criteria,
     );
     return {
         filters,
