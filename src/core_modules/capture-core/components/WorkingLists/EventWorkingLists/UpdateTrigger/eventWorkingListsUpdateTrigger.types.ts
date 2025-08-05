@@ -6,7 +6,7 @@ type ExtractedProps = {
     lastIdDeleted?: string,
     listDataRefreshTimestamp?: number,
     lastTransactionOnListDataRefresh?: number,
-    onLoadView: any,
+    onLoadView: LoadView,
     onUpdateList: any,
 };
 

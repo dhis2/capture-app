@@ -4,10 +4,10 @@ import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsComm
 import type { EventWorkingListsColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = {
-    filters?: FiltersData,
+    filters: FiltersData,
     columns: EventWorkingListsColumnConfigs,
-    sortById?: string,
-    sortByDirection?: string,
+    sortById: string,
+    sortByDirection: string,
     initialViewConfig?: InitialViewConfig,
     defaultColumns: EventWorkingListsColumnConfigs,
 };

@@ -33,15 +33,15 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     const currentTemplate = currentTemplateId && templates &&
     templates.find(template => template.id === currentTemplateId);
 
-    const lastEventIdDeleted = useSelector((state: any) =>
-        state.workingListsUI?.[storeId]?.lastEventIdDeleted);
+    const lastEventIdDeleted = useSelector(({ workingListsUI }: any) =>
+        workingListsUI[storeId] && workingListsUI[storeId].lastEventIdDeleted);
 
-    const downloadRequest = useSelector((state: any) =>
-        state.workingLists?.[storeId]?.currentRequest);// TODO: Remove when DownloadDialog is rewritten
+    const downloadRequest = useSelector(({ workingLists }: any) =>
+        workingLists[storeId] && workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
-    const onClickListRow = useCallback((rowData: any) => {
+    const onClickListRow = useCallback(({ id }: any) => {
         window.scrollTo(0, 0);
-        dispatch(openViewEventPage(rowData.id, contextOrgUnitId));
+        dispatch(openViewEventPage(id, contextOrgUnitId));
     }, [dispatch, contextOrgUnitId]);
 
     const onDeleteEvent = useCallback((eventId: string) => {

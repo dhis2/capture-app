@@ -2,7 +2,7 @@ import type { EventWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup
 import type { CustomRowMenuContents } from '../../WorkingListsBase';
 
 type ExtractedProps = {
-    onDeleteEvent: any,
+    onDeleteEvent: (eventId: string) => void,
 };
 
 type RestProps = Omit<EventWorkingListsViewMenuSetupOutputProps, keyof ExtractedProps>;

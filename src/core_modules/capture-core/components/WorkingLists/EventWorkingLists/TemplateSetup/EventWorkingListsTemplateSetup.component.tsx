@@ -25,7 +25,8 @@ export const EventWorkingListsTemplateSetup = ({
     ...passOnProps
 }: Props) => {
     const injectArgumentsForUpdateTemplate = React.useCallback((template) => {
-        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById: sortById || '', sortByDirection: sortByDirection || '' });
+        // @ts-expect-error - keeping original functionality as before ts rewrite
+        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
         onUpdateTemplate(template, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
@@ -38,7 +39,8 @@ export const EventWorkingListsTemplateSetup = ({
     }, [onUpdateTemplate, filters, columns, sortById, sortByDirection, program.id]);
 
     const injectArgumentsForAddTemplate = React.useCallback((name) => {
-        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById: sortById || '', sortByDirection: sortByDirection || '' });
+        // @ts-expect-error - keeping original functionality as before ts rewrite
+        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
         onAddTemplate(name, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
