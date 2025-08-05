@@ -25,26 +25,26 @@ export const EventWorkingListsTemplateSetup = ({
     ...passOnProps
 }: Props) => {
     const injectArgumentsForUpdateTemplate = React.useCallback((template) => {
-        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
+        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById: sortById || '', sortByDirection: sortByDirection || '' });
         onUpdateTemplate(template, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
                 .filter(({ visible }) => visible)
                 .map(({ id }) => id),
-            sortById: columns.find(({ id }) => id === sortById)?.apiName || sortById,
+            sortById: (columns.find(({ id }) => id === sortById) as any)?.apiName || sortById,
             sortByDirection,
             programId: program.id,
         });
     }, [onUpdateTemplate, filters, columns, sortById, sortByDirection, program.id]);
 
     const injectArgumentsForAddTemplate = React.useCallback((name) => {
-        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
+        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById: sortById || '', sortByDirection: sortByDirection || '' });
         onAddTemplate(name, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
                 .filter(({ visible }) => visible)
                 .map(({ id }) => id),
-            sortById: columns.find(({ id }) => id === sortById)?.apiName || sortById,
+            sortById: (columns.find(({ id }) => id === sortById) as any)?.apiName || sortById,
             sortByDirection,
             clientId: uuid(),
             programId: program.id,

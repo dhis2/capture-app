@@ -15,8 +15,8 @@ export const EventWorkingListsViewMenuSetup = ({
     ...passOnProps
 }: Props) => {
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
-    const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
-    const lastProcessedDeletedIdRef = useRef(null);
+    const [customUpdateTrigger, setCustomUpdateTrigger] = useState<string>();
+    const lastProcessedDeletedIdRef = useRef<string | null>(null);
 
     const {
         selectedRows,

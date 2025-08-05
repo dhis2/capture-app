@@ -16,8 +16,8 @@ export const EventWorkingListsUpdateTrigger = ({
     const forceUpdateOnMount = moment().diff(moment(listDataRefreshTimestamp || 0), 'minutes') > 5 ||
         lastTransaction !== lastTransactionOnListDataRefresh;
 
-    const injectCustomUpdateContextToLoadList = useCallback((selectedTemplate: any, context: any, meta: any) =>
-        onLoadView(selectedTemplate, { ...context, lastTransaction }, meta),
+    const injectCustomUpdateContextToLoadList = useCallback((selectedTemplate: any, context: any) =>
+        onLoadView(selectedTemplate, { ...context, lastTransaction }),
     [onLoadView, lastTransaction]);
 
     const injectCustomUpdateContextToUpdateList = useCallback((queryArgs: any) =>
@@ -31,6 +31,7 @@ export const EventWorkingListsUpdateTrigger = ({
             forceUpdateOnMount={forceUpdateOnMount}
             onLoadView={injectCustomUpdateContextToLoadList}
             onUpdateList={injectCustomUpdateContextToUpdateList}
+            allRowsAreSelected={passOnProps.allRowsAreSelected || false}
         />
     );
 };

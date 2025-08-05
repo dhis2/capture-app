@@ -11,7 +11,7 @@ export const EventWorkingListsDataSourceSetup = ({
 }: Props) => (
     <EventWorkingListsTemplateSetup
         {...passOnProps}
-        dataSource={useDataSource(records, recordsOrder, columns)}
+        dataSource={useDataSource(records, recordsOrder, columns) || undefined}
         columns={columns}
         rowIdKey="id"
     />

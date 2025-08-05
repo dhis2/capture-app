@@ -15,11 +15,11 @@ export const CurrentViewChangesResolver = ({
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
         defaultColumns,
-        filters,
+        filters: filters || new Map(),
         columns,
-        sortById,
-        sortByDirection,
-    });
+        sortById: sortById || '',
+        sortByDirection: sortByDirection || '',
+    } as any);
 
     return (
         <EventWorkingListsDataSourceSetup
