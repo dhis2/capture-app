@@ -78,20 +78,23 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`),
     [navigate, programId, orgUnitId, teiId, enrollmentId]);
 
-    useEffect(() => {
-        if (Array.isArray(programStages) && programStages.length) {
-            const availableStages = programStages.filter((stage) => {
-                const isStageDisabled = !stage.dataAccess.write ||
-                    (!stage.repeatable && stage.eventCount > 0) ||
-                    stage.hiddenProgramStage;
-                return !isStageDisabled;
-            });
-
-            if (availableStages.length === 1) {
-                onSelectProgramStage(availableStages[0].id);
-            }
+    const availableStages = useMemo(() => {
+        if (!Array.isArray(programStages) || !programStages.length) {
+            return [];
         }
-    }, [programStages, onSelectProgramStage]);
+        return programStages.filter((stage) => {
+            const isStageDisabled = !stage.dataAccess.write ||
+                (!stage.repeatable && stage.eventCount > 0) ||
+                stage.hiddenProgramStage;
+            return !isStageDisabled;
+        });
+    }, [programStages]);
+
+    useEffect(() => {
+        if (availableStages.length === 1) {
+            onSelectProgramStage(availableStages[0].id);
+        }
+    }, [availableStages, onSelectProgramStage]);
 
     return (
         <>
@@ -101,7 +104,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent
-                        programStages={programStages || []}
+                        programStages={availableStages}
                         onSelectProgramStage={onSelectProgramStage}
                         onCancel={onCancel}
                     />
