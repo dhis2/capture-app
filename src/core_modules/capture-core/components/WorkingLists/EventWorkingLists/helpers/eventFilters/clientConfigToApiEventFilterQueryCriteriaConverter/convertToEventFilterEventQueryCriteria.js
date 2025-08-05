@@ -23,6 +23,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
+import { API_FILTER_NOT_NULL, API_FILTER_NULL } from '../../../../WorkingListsBase/utils';
 
 type ColumnForConverterBase = {|
     id: string,
@@ -120,6 +121,14 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
                 }),
             );
             return null;
+        }
+
+        if (filter.isEmpty) {
+            return { [API_FILTER_NULL]: true, dataItem: key };
+        }
+
+        if (filter.isNotEmpty) {
+            return { [API_FILTER_NOT_NULL]: true, dataItem: key };
         }
 
         if (filter.usingOptionSet) {

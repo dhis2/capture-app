@@ -6,7 +6,6 @@ import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration'
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-
 import { getEmptyOrNotEmptyTextFilterData } from '../../../../WorkingListsBase/utils';
 import {
     filterTypesObject,
@@ -30,9 +29,11 @@ import type {
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
-const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
+const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
-    return value ? { value } : undefined;
+    return {
+        value,
+    };
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
@@ -177,7 +178,6 @@ const getDataElementFilters = (
             return null;
         }
 
-        // Generic empty/not-empty filter handling
         const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
         if (emptyValueFilter) {
             return {

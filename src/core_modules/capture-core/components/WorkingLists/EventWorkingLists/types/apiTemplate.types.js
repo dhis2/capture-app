@@ -2,9 +2,7 @@
 import { typeof apiAssigneeFilterModes } from '../constants';
 
 export type ApiDataFilterText = {|
-    like?: string,
-    'null'?: boolean,
-    '!null'?: boolean,
+    like: string,
 |};
 
 export type ApiDataFilterNumeric = {|

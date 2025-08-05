@@ -31,7 +31,9 @@ const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
     dataElement?: DataElement,
 ): ?TextFilterData => {
-    const value = dataElement?.unique ? (filter.eq ?? filter.like) : filter.like;
+    const value = dataElement?.unique
+        ? filter.eq ?? filter.like
+        : filter.like;
     return value ? { value } : undefined;
 };
 
@@ -165,6 +167,7 @@ const convertDataElementFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
+
         const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
         if (emptyValueFilter) {
             return { ...acc, [serverFilter.dataItem]: emptyValueFilter };

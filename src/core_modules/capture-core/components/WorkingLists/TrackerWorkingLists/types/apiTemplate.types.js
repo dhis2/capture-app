@@ -1,14 +1,10 @@
 // @flow
 export type ApiDataFilterText = {|
-    like?: string,
-    'null'?: boolean,
-    '!null'?: boolean,
+    like: string,
 |};
 
 export type ApiDataFilterTextUnique = {|
-    eq?: string,
-    'null'?: boolean,
-    '!null'?: boolean,
+    eq: string,
 |};
 
 export type ApiDataFilterNumeric = {|

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-01T13:20:36.315Z\n"
-"PO-Revision-Date: 2025-08-01T13:20:36.315Z\n"
+"POT-Creation-Date: 2025-08-05T12:39:45.839Z\n"
+"PO-Revision-Date: 2025-08-05T12:39:45.839Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -482,12 +482,6 @@ msgstr "Min"
 
 msgid "Contains text"
 msgstr "Contains text"
-
-msgid "Is empty"
-msgstr "Is empty"
-
-msgid "Is not empty"
-msgstr "Is not empty"
 
 msgid "Yes"
 msgstr "Yes"
@@ -1970,6 +1964,12 @@ msgstr "Download as CSV"
 
 msgid "Download with current filters"
 msgstr "Download with current filters"
+
+msgid "Is empty"
+msgstr "Is empty"
+
+msgid "Is not empty"
+msgstr "Is not empty"
 
 msgid "An error has occured. See log for details"
 msgstr "An error has occured. See log for details"

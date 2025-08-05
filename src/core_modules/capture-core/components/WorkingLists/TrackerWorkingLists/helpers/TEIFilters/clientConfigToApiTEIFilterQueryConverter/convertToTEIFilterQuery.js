@@ -3,6 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { getFilterByType } from './convertors';
+import { API_FILTER_NOT_NULL, API_FILTER_NULL } from '../../../../WorkingListsBase/utils';
 
 export const convertToTEIFilterAttributes = ({
     filters,
@@ -31,6 +32,14 @@ export const convertToTEIFilterAttributes = ({
                     }),
                 );
                 return null;
+            }
+
+            if (filter.isEmpty) {
+                return { [API_FILTER_NULL]: true, attribute: key };
+            }
+
+            if (filter.isNotEmpty) {
+                return { [API_FILTER_NOT_NULL]: true, attribute: key };
             }
 
             if (filter.usingOptionSet) {
