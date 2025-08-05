@@ -1,5 +1,3 @@
-// @flow
-
 export const getDefaultTemplate = (programId: string) => ({
     id: `${programId}-default`,
     isDefault: true,

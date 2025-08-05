@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
@@ -29,14 +28,14 @@ import { type DataElement } from '../../../../../../metaData';
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
     dataElement?: DataElement,
-): ?TextFilterData => {
+): TextFilterData | undefined => {
     const value = dataElement?.unique
         ? filter.eq ?? filter.like
         : filter.like;
     return value ? { value } : undefined;
 };
 
-const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
+const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | undefined => {
     if (filter.ge || filter.le) {
         return {
             ge: Number(filter.ge),
@@ -110,7 +109,7 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const getAssigneeFilter = async (assignedUsers: ?Array<string>, querySingleResource: QuerySingleResource) => {
+const getAssigneeFilter = async (assignedUsers: Array<string> | null, querySingleResource: QuerySingleResource) => {
     // DHIS2-12500 - The UI element provides suport for only one user
     const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
     if (!assignedUserId) {
@@ -156,63 +155,54 @@ const mainFiltersTable = {
 };
 
 const convertDataElementFilters = (
-    filters?: ?Array<ApiDataFilter>,
+    filters: ApiDataFilter[] | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-): Object =>
-    filters?.reduce((acc, serverFilter: ApiDataFilter) => {
+): any =>
+    filters?.reduce((acc, serverFilter: any) => {
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
 
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        // $FlowFixMe
         const value = isOptionSetFilter(element.type, serverFilter)
-            ? // $FlowFixMe
-            getOptionSetFilter(serverFilter, element.type)
-            : // $FlowFixMe
-            getFilterByType[element.type](serverFilter);
+            ? getOptionSetFilter(serverFilter, element.type)
+            : getFilterByType[element.type](serverFilter);
 
         return value ? { ...acc, [serverFilter.dataItem]: value } : acc;
     }, {});
 
 const convertAttributeFilters = (
-    filters?: ?Array<ApiDataFilter>,
+    filters: ApiDataFilter[] | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-): Object =>
-    filters?.reduce((acc, serverFilter: ApiDataFilter) => {
+): any =>
+    filters?.reduce((acc, serverFilter: any) => {
         const element = columnsMetaForDataFetching.get(serverFilter.attribute);
 
-        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        // $FlowFixMe
         const value = isOptionSetFilter(element.type, serverFilter)
-            ? // $FlowFixMe
-            getOptionSetFilter(serverFilter, element.type)
-            : // $FlowFixMe
-            getFilterByType[element.type](serverFilter, element);
+            ? getOptionSetFilter(serverFilter, element.type)
+            : getFilterByType[element.type](serverFilter, element);
 
         return value ? { ...acc, [serverFilter.attribute]: value } : acc;
     }, {});
 
-const convertToClientMainFilters = TEIQueryCriteria =>
+const convertToClientMainFilters = (TEIQueryCriteria: any) =>
     Object.entries(TEIQueryCriteria).reduce((acc, [key, value]) => {
-        // $FlowFixMe I accept that not every filter type is listed, thats why I'm doing this test
         if (!mainFiltersTable[key] || value === undefined) {
             return acc;
         }
 
-        const mainValue = mainFiltersTable[key](value);
+        const mainValue = mainFiltersTable[key](value as any);
         return mainValue ? { ...acc, [key]: mainValue } : acc;
     }, {});
 
 export const convertToClientFilters = async (
-    TEIQueryCriteria: ?ApiTrackerQueryCriteria,
+    TEIQueryCriteria: ApiTrackerQueryCriteria | null | undefined,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
-): { [id: string]: any } => {
+): Promise<{ [id: string]: any }> => {
     if (!TEIQueryCriteria) {
         return {};
     }

@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { ApiDataFilterOptionSet } from '../../../types';
@@ -23,8 +22,7 @@ const converterByType = {
     [dataElementTypes.TRUE_ONLY]: () => 'true',
 };
 
-export const convertValue = (filter: OptionSetFilterData, type: $Keys<typeof dataElementTypes>): ApiDataFilterOptionSet => ({
+export const convertValue = (filter: OptionSetFilterData, type: keyof typeof dataElementTypes): ApiDataFilterOptionSet => ({
     in: filter.values
-        // $FlowFixMe dataElementTypes flow error
         .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
 });

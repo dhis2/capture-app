@@ -1,4 +1,3 @@
-// @flow
 import type { TeiColumnsMetaForDataFetching, TrackerWorkingListsTemplate } from '../../../types';
 import type { QuerySingleResource } from '../../../../../../utils/api';
 import { getCustomColumnsConfiguration } from './getCustomColumnsConfiguration';

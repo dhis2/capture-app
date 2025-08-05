@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import {
     type BooleanFilterData,
@@ -30,7 +29,7 @@ const getTrueOnlyFilter = () => ({
     eq: 'true',
 });
 
-const getAssigneeFilter = filter => ({
+const getAssigneeFilter = (filter: any) => ({
     assignedUserMode: filter.assignedUserMode,
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
 });
@@ -88,18 +87,18 @@ export const convertMainFilters = ({
     filters,
     mainFilters,
 }: {
-    filters: Object,
-    mainFilters: Array<{ id: string, type: string }>,
+    filters: any;
+    mainFilters: Array<{ id: string; type: string }>;
 }): {
-    programStatus?: ?string,
-    occurredAt?: ?ApiDataFilterDateContents,
-    enrolledAt?: ?ApiDataFilterDateContents,
-    status?: ?string,
-    followUp?: ?boolean,
-    eventOccurredAt?: ?ApiDataFilterDateContents,
-    scheduledAt?: ?ApiDataFilterDateContents,
-    assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
-    assignedUsers?: Array<string>,
+    programStatus?: string;
+    occurredAt?: ApiDataFilterDateContents;
+    enrolledAt?: ApiDataFilterDateContents;
+    status?: string;
+    followUp?: boolean;
+    eventOccurredAt?: ApiDataFilterDateContents;
+    scheduledAt?: ApiDataFilterDateContents;
+    assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY';
+    assignedUsers?: string[];
 } =>
     Object.keys(filters).reduce((acc, key) => {
         const filter = filters[key];

@@ -1,15 +1,14 @@
-// @flow
-import { typeof dataElementTypes } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
 import type { Categories } from '../../WorkingListsBase';
 import type { ApiTrackerQueryCriteria } from './apiTemplate.types';
 
-type TeiRecord = {| [id: string]: any |};
+type TeiRecord = { [id: string]: any };
 
-export type TeiRecords = {| [teiId: string]: TeiRecord |};
+export type TeiRecords = { [teiId: string]: TeiRecord };
 
 export type TrackerWorkingListsTemplate = {
     id: string,
-    isDefault?: ?boolean,
+    isDefault?: boolean,
     name: string,
     access: {
         update: boolean,
@@ -25,36 +24,34 @@ export type TrackerWorkingListsTemplate = {
     isAltered?: boolean,
 };
 
-export type TrackerWorkingListsTemplates = Array<TrackerWorkingListsTemplate>;
+export type TrackerWorkingListsTemplates = TrackerWorkingListsTemplate[];
 
-export type ColumnConfigBase = {|
+export type ColumnConfigBase = {
     id: string,
     visible: boolean,
-    type: $Values<dataElementTypes>,
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
     header: string,
-    options?: ?Array<{text: string, value: any}>,
+    options?: Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
     filterHidden?: boolean,
     additionalColumn?: boolean,
     unique?: boolean,
-|};
-export type MetadataColumnConfig = {
-    ...ColumnConfigBase,
+    apiViewName?: string,
 };
+export type MetadataColumnConfig = ColumnConfigBase;
 
-export type MainColumnConfig = {
-    ...ColumnConfigBase,
+export type MainColumnConfig = ColumnConfigBase & {
     mainProperty: true,
     apiViewName?: string,
 };
 
 export type TrackerWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
 
-export type TrackerWorkingListsColumnConfigs = Array<TrackerWorkingListsColumnConfig>;
+export type TrackerWorkingListsColumnConfigs = TrackerWorkingListsColumnConfig[];
 
 export type TeiColumnMetaForDataFetching = {
     id: string,
-    type: $Values<dataElementTypes>,
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
     mainProperty?: boolean,
     visible: boolean,
     apiViewName?: string,
@@ -64,24 +61,24 @@ export type TeiColumnsMetaForDataFetching = Map<string, TeiColumnMetaForDataFetc
 
 export type TeiFilterOnlyMetaForDataFetching = {
     id: string,
-    type: $Values<dataElementTypes>,
-    transformRecordsFilter: (rawFilter: any) => Object,
+     type: typeof dataElementTypes[keyof typeof dataElementTypes],
+    transformRecordsFilter: (rawFilter: any) => any,
 };
 
 export type TeiFiltersOnlyMetaForDataFetching = Map<string, TeiFilterOnlyMetaForDataFetching>;
 
 export type LoadTeiView = (
     template: TrackerWorkingListsTemplate,
-    context: {|
+    context: {
         programId: string,
         orgUnitId: string,
         categories?: Categories,
         programStageId?: string,
         currentRequest?: string,
-    |},
-    meta: {|
+    },
+    meta: {
         columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
-    |},
+    },
 ) => Promise<void> | void;
 
