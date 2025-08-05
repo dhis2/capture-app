@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { of } from 'rxjs';
@@ -15,12 +14,12 @@ import type { TrackerProgram } from '../../../../../metaData';
 import { initializeRegisterTei, initializeRegisterTeiFailed } from '../RegisterTei/registerTei.actions';
 import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData';
 import { errorCreator } from '../../../../../../capture-core-utils';
+import type { EpicAction } from '../../../../../../capture-core-utils/types';
 
 const searchId = 'relationshipTeiSearchWidget';
 
-// get tracker program if the suggested program id is valid for the current context
 function getTrackerProgram(suggestedProgramId: string) {
-    let trackerProgram: ?TrackerProgram;
+    let trackerProgram: TrackerProgram | null = null;
     try {
         const program = getTrackerProgramThrowIfNotFound(suggestedProgramId);
         if (program.access.data.write) {
@@ -36,11 +35,11 @@ function getTrackerProgram(suggestedProgramId: string) {
 }
 
 export const openRelationshipTeiSearchWidgetEpic =
-    (action$: InputObservable) =>
+    (action$: EpicAction<any>) =>
         action$.pipe(
             ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
-            filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
-            map((action) => {
+            filter((action: any) => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
+            map((action: any) => {
                 const { relationshipConstraint } = action.payload;
                 const { trackedEntityTypeId, programId } = relationshipConstraint;
 
@@ -61,15 +60,15 @@ export const openRelationshipTeiSearchWidgetEpic =
             }),
         );
 
-export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable) =>
+export const openRelationshipTeiRegisterWidgetEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
-        filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
-        switchMap((action) => {
+        filter((action: any) => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
+        switchMap((action: any) => {
             const { relationshipConstraint, orgUnit } = action.payload;
             const { programId } = relationshipConstraint;
 
-            let trackerProgram: ?TrackerProgram;
+            let trackerProgram: TrackerProgram | null = null;
             if (programId) {
                 try {
                     trackerProgram = getTrackerProgram(programId);
@@ -78,9 +77,8 @@ export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable) 
                 }
             }
 
-            // can't run rules when no valid organisation unit is specified, i.e. only the registration section will be visible
             if (!orgUnit) {
-                return Promise.resolve(initializeRegisterTei(trackerProgram && trackerProgram.id));
+                return Promise.resolve(initializeRegisterTei(trackerProgram?.id));
             }
 
             return of(initializeRegisterTei(programId, orgUnit));
