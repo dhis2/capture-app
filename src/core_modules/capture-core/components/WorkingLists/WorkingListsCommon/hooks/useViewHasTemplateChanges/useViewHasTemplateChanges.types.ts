@@ -30,5 +30,5 @@ export type Input = {
     columns: Columns,
     sortById: string,
     sortByDirection: string,
-    isDefaultTemplateAltered: boolean,
+    isDefaultTemplateAltered?: boolean,
 };

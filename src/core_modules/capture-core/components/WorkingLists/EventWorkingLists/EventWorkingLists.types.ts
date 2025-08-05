@@ -1,11 +1,9 @@
-// @flow
 import type { MainViewConfig } from './types';
 
-
-export type Props = {|
+export type Props = {
     storeId: string,
     orgUnitId: string,
     programId?: string,
     programStageId?: string,
     mainViewConfig?: MainViewConfig,
-|};
+};

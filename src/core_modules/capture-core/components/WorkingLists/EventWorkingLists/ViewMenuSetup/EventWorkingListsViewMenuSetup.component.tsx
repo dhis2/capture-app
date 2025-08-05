@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { v4 as uuid } from 'uuid';
@@ -16,8 +15,8 @@ export const EventWorkingListsViewMenuSetup = ({
     ...passOnProps
 }: Props) => {
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
-    const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
-    const lastProcessedDeletedIdRef = useRef(null);
+    const [customUpdateTrigger, setCustomUpdateTrigger] = useState<string>();
+    const lastProcessedDeletedIdRef = useRef<string | null>(null);
 
     const {
         selectedRows,
@@ -56,7 +55,6 @@ export const EventWorkingListsViewMenuSetup = ({
     const eventBulkActions = (
         <EventBulkActions
             selectedRows={selectedRows}
-            // $FlowFixMe - program.stage should be available on EventPrograms
             stage={program.stage}
             onClearSelection={clearSelection}
             onUpdateList={onUpdateList}

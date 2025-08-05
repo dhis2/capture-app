@@ -3,7 +3,6 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../metaData';
 import { convertClientToList } from '../../../../converters';
-import type { DataSource } from '../../WorkingListsBase';
 
 const createDataElement = (column) => {
     const dataElement = new DataElement((o) => {
@@ -34,7 +33,7 @@ export const useDataSource = (
         visible: boolean,
         [key: string]: any,
     }>,
-): DataSource | void => {
+) => {
     const eventRecordsArray = useMemo(() =>
         recordsOrder && records && recordsOrder
             .map(id => ({

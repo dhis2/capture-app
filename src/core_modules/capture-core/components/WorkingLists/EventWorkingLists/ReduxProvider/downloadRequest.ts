@@ -1,4 +1,3 @@
-// @flow
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import type { Program } from '../../../../metaData';
 import { buildFilterQueryArgs } from '../../WorkingListsCommon';
@@ -11,21 +10,21 @@ export const computeDownloadRequest = ({
     meta: { columnsMetaForDataFetching },
 }: {
     clientConfig: {
-        currentPage: number,
-        rowsPerPage: number,
-        sortById: string,
-        sortByDirection: string,
-        filters: Object,
-    },
+        currentPage: number;
+        rowsPerPage: number;
+        sortById: string;
+        sortByDirection: string;
+        filters: any;
+    };
     context: {
-        programId: string,
-        categories: Object,
-        programStageId: string,
-        orgUnitId: string,
-        storeId: string,
-        program: Program,
-    },
-    meta: { columnsMetaForDataFetching: ColumnsMetaForDataFetching },
+        programId: string;
+        categories: any;
+        programStageId: string;
+        orgUnitId: string;
+        storeId: string;
+        program: Program;
+    };
+    meta: { columnsMetaForDataFetching: ColumnsMetaForDataFetching };
 }) => {
     const categoryCombinationId = program.categoryCombination && program.categoryCombination.id;
     const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)

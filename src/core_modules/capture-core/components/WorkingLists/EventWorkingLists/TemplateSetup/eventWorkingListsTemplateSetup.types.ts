@@ -1,4 +1,3 @@
-// @flow
 import type { Program } from '../../../../metaData';
 import type {
     FiltersData,
@@ -11,27 +10,23 @@ import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsComm
 import type { EventWorkingListsTemplates } from '../types';
 import type { EventWorkingListsDataSourceSetupOutputProps } from '../DataSourceSetup';
 
-type ExtractedProps = $ReadOnly<{|
+type ExtractedProps = {
     filters?: FiltersData,
     columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
     program: Program,
-    onAddTemplate: Function,
-    onUpdateTemplate: Function,
-    onDeleteTemplate: Function,
+    onAddTemplate: any,
+    onUpdateTemplate: any,
+    onDeleteTemplate: any,
     templates?: EventWorkingListsTemplates,
-|}>;
+};
 
-type RestProps = $Rest<EventWorkingListsDataSourceSetupOutputProps, ExtractedProps>;
+type RestProps = Omit<EventWorkingListsDataSourceSetupOutputProps, keyof ExtractedProps>;
 
-export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
-|};
+export type Props = RestProps & ExtractedProps;
 
-export type EventWorkingListsTemplateSetupOutputProps = {|
-    ...RestProps,
+export type EventWorkingListsTemplateSetupOutputProps = RestProps & {
     filters?: FiltersData,
     columns: EventWorkingListsColumnConfigs,
     sortById?: string,
@@ -42,4 +37,4 @@ export type EventWorkingListsTemplateSetupOutputProps = {|
     onDeleteTemplate: DeleteTemplate,
     templates?: WorkingListTemplates,
     templateSharingType: string,
-|};
+};

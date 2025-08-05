@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 import { convertToEventFilterEventQueryCriteria } from '../helpers/eventFilters';
@@ -26,28 +25,28 @@ export const EventWorkingListsTemplateSetup = ({
     ...passOnProps
 }: Props) => {
     const injectArgumentsForUpdateTemplate = React.useCallback((template) => {
-        // $FlowFixMe For columns: fixing this will create really ugly code. SortById, sortByDirection: Rather complex logic results in sortById and sortByDirection always having a value here.
+        // @ts-expect-error - keeping original functionality as before ts rewrite
         const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
         onUpdateTemplate(template, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
                 .filter(({ visible }) => visible)
                 .map(({ id }) => id),
-            sortById: columns.find(({ id }) => id === sortById)?.apiName || sortById,
+            sortById: (columns.find(({ id }) => id === sortById) as any)?.apiName || sortById,
             sortByDirection,
             programId: program.id,
         });
     }, [onUpdateTemplate, filters, columns, sortById, sortByDirection, program.id]);
 
     const injectArgumentsForAddTemplate = React.useCallback((name) => {
-        // $FlowFixMe For columns: fixing this will create really ugly code. SortById, sortByDirection: Rather complex logic results in sortById and sortByDirection always having a value here.
+        // @ts-expect-error - keeping original functionality as before ts rewrite
         const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
         onAddTemplate(name, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
                 .filter(({ visible }) => visible)
                 .map(({ id }) => id),
-            sortById: columns.find(({ id }) => id === sortById)?.apiName || sortById,
+            sortById: (columns.find(({ id }) => id === sortById) as any)?.apiName || sortById,
             sortByDirection,
             clientId: uuid(),
             programId: program.id,

@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconDelete24, colors } from '@dhis2/ui';

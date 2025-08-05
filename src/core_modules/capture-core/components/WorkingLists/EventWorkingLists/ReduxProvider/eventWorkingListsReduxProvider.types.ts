@@ -1,4 +1,3 @@
-// @flow
 import type { Program, ProgramStage } from '../../../../metaData';
 import type {
     CancelLoadTemplates,
@@ -41,15 +40,15 @@ import type {
     MainViewConfig,
 } from '../types';
 
-export type Props = $ReadOnly<{|
+export type Props = {
     storeId: string,
     program: Program,
     programStage: ProgramStage,
     orgUnitId: string,
     mainViewConfig?: MainViewConfig,
-|}>;
+};
 
-export type EventWorkingListsReduxOutputProps = {|
+export type EventWorkingListsReduxOutputProps = {
     categories?: Categories,
     currentPage?: number,
     currentTemplate?: WorkingListTemplate,
@@ -57,9 +56,9 @@ export type EventWorkingListsReduxOutputProps = {|
     customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    downloadRequest: { url: string, queryParams: ?Object },
+    downloadRequest: { url: string, queryParams: any | null | undefined },
     records?: EventRecords,
-    filters?: FiltersData,
+    filters: FiltersData,
     initialViewConfig?: InitialViewConfig,
     lastIdDeleted?: string,
     lastTransaction: number,
@@ -77,7 +76,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
     onRemoveFilter: RemoveFilter,
-    onDeleteEvent: Function,
+    onDeleteEvent: (eventId: string) => void,
     onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
@@ -96,8 +95,8 @@ export type EventWorkingListsReduxOutputProps = {|
     programStage: ProgramStage,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
-    sortByDirection?: string,
-    sortById?: string,
+    sortByDirection: string,
+    sortById: string,
     stickyFilters?: StickyFilters,
     templates?: EventWorkingListsTemplates,
     templatesLoading: boolean,
@@ -105,4 +104,4 @@ export type EventWorkingListsReduxOutputProps = {|
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     templateSharingType: string,
-|};
+};
