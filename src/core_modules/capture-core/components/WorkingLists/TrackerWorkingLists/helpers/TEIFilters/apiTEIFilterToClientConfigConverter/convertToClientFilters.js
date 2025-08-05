@@ -2,7 +2,7 @@
 import moment from 'moment';
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
-import { getEmptyOrNotEmptyTextFilterData } from '../../../../WorkingListsBase/utils';
+import { emptyValueFilterResults } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
 import {
     filterTypesObject,
     type TrueOnlyFilterData,
@@ -168,7 +168,7 @@ const convertDataElementFilters = (
             return acc;
         }
 
-        const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
+        const emptyValueFilter = emptyValueFilterResults(serverFilter);
         if (emptyValueFilter) {
             return { ...acc, [serverFilter.dataItem]: emptyValueFilter };
         }
@@ -194,7 +194,7 @@ const convertAttributeFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
-        const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
+        const emptyValueFilter = emptyValueFilterResults(serverFilter);
         if (emptyValueFilter) {
             return { ...acc, [serverFilter.attribute]: emptyValueFilter };
         }

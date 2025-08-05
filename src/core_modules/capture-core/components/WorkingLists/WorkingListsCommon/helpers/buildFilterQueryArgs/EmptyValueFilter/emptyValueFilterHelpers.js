@@ -1,6 +1,11 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from './constants';
+import {
+    EMPTY_FILTER_VALUE,
+    NOT_EMPTY_FILTER_VALUE,
+    API_FILTER_NULL,
+    API_FILTER_NOT_NULL,
+} from './constants';
 import type { TextFilterData } from '../../../../../FiltersForTypes/Text/types';
 
 export type EmptyValueFilterChangeHandler = (value: ?string) => void;
@@ -33,8 +38,21 @@ const RESULT_MAP: { [key: string]: TextFilterData } = {
     },
 };
 
-export const emptyValueFilterResults = (value: ?string): ?TextFilterData => (value ? RESULT_MAP[value] : null);
+export const emptyValueFilterResults = (filter: any): ?TextFilterData => {
+    if (!filter) {
+        return null;
+    }
 
-export const getEmptyValueResult = (): TextFilterData => RESULT_MAP[EMPTY_FILTER_VALUE];
+    if (typeof filter === 'string') {
+        return RESULT_MAP[filter] || null;
+    }
 
-export const getNotEmptyValueResult = (): TextFilterData => RESULT_MAP[NOT_EMPTY_FILTER_VALUE];
+    if (filter[API_FILTER_NULL]) {
+        return RESULT_MAP[EMPTY_FILTER_VALUE];
+    }
+    if (filter[API_FILTER_NOT_NULL]) {
+        return RESULT_MAP[NOT_EMPTY_FILTER_VALUE];
+    }
+
+    return null;
+};

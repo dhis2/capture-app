@@ -6,7 +6,7 @@ import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration'
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-import { getEmptyOrNotEmptyTextFilterData } from '../../../../WorkingListsBase/utils';
+import { emptyValueFilterResults } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
 import {
     filterTypesObject,
     type AssigneeFilterData,
@@ -178,7 +178,7 @@ const getDataElementFilters = (
             return null;
         }
 
-        const emptyValueFilter = getEmptyOrNotEmptyTextFilterData(serverFilter);
+        const emptyValueFilter = emptyValueFilterResults(serverFilter);
         if (emptyValueFilter) {
             return {
                 id: serverFilter.dataItem,

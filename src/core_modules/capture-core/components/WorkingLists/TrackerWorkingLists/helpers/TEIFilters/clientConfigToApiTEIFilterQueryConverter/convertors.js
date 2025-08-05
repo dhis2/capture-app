@@ -1,6 +1,5 @@
 // @flow
 import moment from 'moment';
-import { API_FILTER_NULL, API_FILTER_NOT_NULL } from '../../../../WorkingListsBase/utils';
 import {
     type BooleanFilterData,
     type DateFilterData,
@@ -13,6 +12,7 @@ import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../t
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
+import { API_FILTER_NOT_NULL, API_FILTER_NULL } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
     dataElement?.unique ? { eq: filter.value } : { like: filter.value }
