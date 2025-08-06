@@ -1,5 +1,5 @@
 // @flow
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type {
@@ -22,9 +22,10 @@ import {
     useGeometryValues,
 } from './index';
 import type { Geometry } from '../helpers/types';
-import { getRulesActionsForTEI } from '../ProgramRules';
+import { getRulesActionsForTEIAsync } from '../ProgramRules';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
 import type { EnrollmentData } from '../Types';
+import type { QuerySingleResource } from '../../../../utils/api';
 
 export const useLifecycle = ({
     programAPI,
@@ -35,6 +36,8 @@ export const useLifecycle = ({
     itemId,
     geometry,
     dataEntryFormConfig,
+    querySingleResource,
+    onGetValidationContext,
 }: {
     programAPI: any,
     orgUnitId: string,
@@ -44,6 +47,8 @@ export const useLifecycle = ({
     itemId: string,
     geometry: ?Geometry,
     dataEntryFormConfig: ?DataEntryFormConfig,
+    querySingleResource: QuerySingleResource,
+    onGetValidationContext: () => Object,
 }) => {
     const dispatch = useDispatch();
     // TODO: Getting the entire state object is bad and this needs to be refactored.
@@ -80,30 +85,35 @@ export const useLifecycle = ({
         };
     }, [dispatch, formValues, formGeometryValues, dataEntryId, itemId]);
 
+    const [awaitingInitialRulesExecution, setAwaitingInitialRulesExecution] = useState(true);
     useEffect(() => {
         if (
+            awaitingInitialRulesExecution &&
             orgUnit &&
             Object.entries(orgUnit).length > 0 &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
-            dispatch(
-                getRulesActionsForTEI({
-                    foundation: formFoundation,
-                    formId: `${dataEntryId}-${itemId}`,
-                    orgUnit,
-                    trackedEntityAttributes: programTrackedEntityAttributes,
-                    teiValues: { ...clientValues, ...clientGeometryValues },
-                    optionSets,
-                    rulesContainer,
-                    otherEvents,
-                    dataElements,
-                    enrollmentData: enrollment,
-                    userRoles,
-                    programName: programAPI.displayName,
-                }),
-            );
+            setAwaitingInitialRulesExecution(false);
+            getRulesActionsForTEIAsync({
+                foundation: formFoundation,
+                formId: `${dataEntryId}-${itemId}`,
+                orgUnit,
+                trackedEntityAttributes: programTrackedEntityAttributes,
+                teiValues: { ...clientValues, ...clientGeometryValues },
+                optionSets,
+                rulesContainer,
+                otherEvents,
+                dataElements,
+                enrollmentData: enrollment,
+                userRoles,
+                programName: programAPI.displayName,
+                querySingleResource,
+                onGetValidationContext,
+            }).then((action) => {
+                dispatch(action);
+            });
         }
     }, [
         dispatch,
@@ -122,6 +132,10 @@ export const useLifecycle = ({
         clientGeometryValues,
         userRoles,
         programAPI,
+        querySingleResource,
+        onGetValidationContext,
+        awaitingInitialRulesExecution,
+        setAwaitingInitialRulesExecution,
     ]);
 
     return {

@@ -53,6 +53,8 @@ export const DataEntry = ({
         itemId,
         geometry,
         dataEntryFormConfig,
+        querySingleResource,
+        onGetValidationContext,
     });
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
