@@ -24,8 +24,8 @@ import type {
     ApiEventQueryCriteria,
 } from '../../../types';
 import {
-    API_FILTER_NOT_NULL,
-    API_FILTER_NULL,
+    API_EMPTY_VALUE_FILTER,
+    API_NOT_EMPTY_VALUE_FILTER,
 } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 type ColumnForConverterBase = {|
@@ -127,11 +127,11 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
         }
 
         if (filter.isEmpty) {
-            return { [API_FILTER_NULL]: true, dataItem: key };
+            return { [API_EMPTY_VALUE_FILTER]: true, dataItem: key };
         }
 
         if (filter.isNotEmpty) {
-            return { [API_FILTER_NOT_NULL]: true, dataItem: key };
+            return { [API_NOT_EMPTY_VALUE_FILTER]: true, dataItem: key };
         }
 
         if (filter.usingOptionSet) {

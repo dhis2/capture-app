@@ -13,8 +13,8 @@ import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
 import {
-    API_FILTER_NOT_NULL,
-    API_FILTER_NULL,
+    API_NOT_EMPTY_VALUE_FILTER,
+    API_EMPTY_VALUE_FILTER,
 } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
@@ -115,10 +115,10 @@ export const convertMainFilters = ({
         const mainValue = mainFiltersTable[key](filter);
 
         if (filter.isEmpty) {
-            return { [API_FILTER_NULL]: true, [key]: mainValue };
+            return { [API_EMPTY_VALUE_FILTER]: true, [key]: mainValue };
         }
         if (filter.isNotEmpty) {
-            return { [API_FILTER_NOT_NULL]: true, [key]: mainValue };
+            return { [API_NOT_EMPTY_VALUE_FILTER]: true, [key]: mainValue };
         }
 
         if (mainValue !== undefined) {

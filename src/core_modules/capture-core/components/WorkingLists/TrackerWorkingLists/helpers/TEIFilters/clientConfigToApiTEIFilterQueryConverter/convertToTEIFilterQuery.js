@@ -4,8 +4,8 @@ import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { getFilterByType } from './convertors';
 import {
-    API_FILTER_NOT_NULL,
-    API_FILTER_NULL,
+    API_NOT_EMPTY_VALUE_FILTER,
+    API_EMPTY_VALUE_FILTER,
 } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 export const convertToTEIFilterAttributes = ({
@@ -38,11 +38,11 @@ export const convertToTEIFilterAttributes = ({
             }
 
             if (filter.isEmpty) {
-                return { [API_FILTER_NULL]: true, attribute: key };
+                return { [API_EMPTY_VALUE_FILTER]: true, attribute: key };
             }
 
             if (filter.isNotEmpty) {
-                return { [API_FILTER_NOT_NULL]: true, attribute: key };
+                return { [API_NOT_EMPTY_VALUE_FILTER]: true, attribute: key };
             }
 
             if (filter.usingOptionSet) {

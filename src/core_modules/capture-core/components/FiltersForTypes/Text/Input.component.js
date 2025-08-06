@@ -11,7 +11,6 @@ type Props = {
 
 class InputPlain extends React.Component<Props> {
     handleKeyDown = (payload: any, event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-        // 'event' is the native keyboard event, 'payload' contains value & name
         if (event && event.key === 'Enter') {
             this.props.onEnterKey(this.props.value);
         }

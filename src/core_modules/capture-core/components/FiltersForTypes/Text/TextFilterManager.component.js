@@ -3,8 +3,8 @@ import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
 import {
-    EMPTY_FILTER_VALUE,
-    NOT_EMPTY_FILTER_VALUE,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
 } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 type Props = {
@@ -19,19 +19,15 @@ type State = {
 
 export class TextFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: ?TextFilterData) {
-        if (!filter) {
-            return { value: undefined };
+        if (filter?.isEmpty) {
+            return { value: EMPTY_VALUE_FILTER };
         }
 
-        if (filter.isEmpty) {
-            return { value: EMPTY_FILTER_VALUE };
+        if (filter?.isNotEmpty) {
+            return { value: NOT_EMPTY_VALUE_FILTER };
         }
 
-        if (filter.isNotEmpty) {
-            return { value: NOT_EMPTY_FILTER_VALUE };
-        }
-
-        return { value: filter.value || undefined };
+        return { value: filter?.value || undefined };
     }
 
     constructor(props: Props) {

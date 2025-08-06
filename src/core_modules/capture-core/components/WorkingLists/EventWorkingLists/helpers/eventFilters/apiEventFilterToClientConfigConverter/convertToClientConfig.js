@@ -179,6 +179,7 @@ const getDataElementFilters = (
         }
 
         const emptyValueFilter = emptyValueFilterResults(serverFilter);
+        console.log('emptyValueFilter', emptyValueFilter);
         if (emptyValueFilter) {
             return {
                 id: serverFilter.dataItem,
