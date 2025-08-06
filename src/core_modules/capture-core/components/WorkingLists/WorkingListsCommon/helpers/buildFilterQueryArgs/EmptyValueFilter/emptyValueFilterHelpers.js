@@ -7,23 +7,16 @@ export const NOT_EMPTY_VALUE_FILTER = 'NOT_EMPTY_VALUE_FILTER';
 export const API_EMPTY_VALUE_FILTER = 'null';
 export const API_NOT_EMPTY_VALUE_FILTER = '!null';
 
-export type NullValueFilterData = {|
+export const EMPTY_VALUE_FILTER_LABEL = i18n.t('Is empty');
+export const NOT_EMPTY_VALUE_FILTER_LABEL = i18n.t('Is not empty');
+
+type NullValueFilterData = {|
     isEmpty?: boolean,
     isNotEmpty?: boolean,
 |};
 
 export const isEmptyValueFilter = (value: ?string) =>
     value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
-
-export const getLabelForEmptyValueFilter = (filterData: NullValueFilterData) => {
-    if (filterData.isEmpty) {
-        return i18n.t('Is empty');
-    }
-    if (filterData.isNotEmpty) {
-        return i18n.t('Is not empty');
-    }
-    return undefined;
-};
 
 export const makeCheckboxHandler =
     (flag: string) =>

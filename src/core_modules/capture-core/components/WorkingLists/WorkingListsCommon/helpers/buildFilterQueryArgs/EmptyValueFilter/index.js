@@ -1,3 +1,3 @@
 // @flow
-export { EmptyValueFilterCheckboxes } from './EmptyValueFilterCheckboxes';
+export { EmptyValueFilterCheckboxes } from './EmptyValueFilterCheckboxes/EmptyValueFilterCheckboxes.component';
 export * from './emptyValueFilterHelpers';
