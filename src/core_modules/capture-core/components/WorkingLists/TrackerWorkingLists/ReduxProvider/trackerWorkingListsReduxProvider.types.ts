@@ -1,4 +1,3 @@
-// @flow
 import type { TrackerProgram } from '../../../../metaData';
 import type {
     CancelLoadTemplates,
@@ -35,16 +34,16 @@ import type {
 } from '../../WorkingListsCommon';
 import type { TrackerWorkingListsTemplates, TeiRecords, ApiTrackerQueryCriteria } from '../types';
 
-export type Props = $ReadOnly<{|
-    storeId: string,
-    programId: string,
-    orgUnitId: string,
-    selectedTemplateId?: string,
-    onChangeTemplate?: (selectedTemplateId?: string) => void,
-    onOpenBulkDataEntryPlugin: (trackedEntities: Array<string>) => void,
-|}>;
+export type Props = {
+    storeId: string;
+    programId: string;
+    orgUnitId: string;
+    selectedTemplateId?: string;
+    onChangeTemplate?: (selectedTemplateId?: string) => void;
+    onOpenBulkDataEntryPlugin: (trackedEntities: string[]) => void;
+};
 
-export type TrackerWorkingListsReduxOutputProps = {|
+export type TrackerWorkingListsReduxOutputProps = {
     categories?: Categories,
     currentPage?: number,
     currentTemplateId?: string,
@@ -93,4 +92,4 @@ export type TrackerWorkingListsReduxOutputProps = {|
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void
-|};
+};

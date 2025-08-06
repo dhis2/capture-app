@@ -1,4 +1,3 @@
-// @flow
 import type { TrackerProgram } from '../../../../metaData';
 import type { TrackerWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type {
@@ -14,7 +13,7 @@ import type { FiltersData, WorkingListTemplates, SetTemplateSharingSettings } fr
 import type { LoadTeiView, TeiRecords } from '../types';
 import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup/trackerWorkingListsViewMenuSetup.types';
 
-type ExtractedProps = $ReadOnly<{|
+type ExtractedProps = Readonly<{
     customColumnOrder?: CustomColumnOrder,
     onLoadView: LoadTeiView,
     onAddTemplate: AddTemplate,
@@ -33,14 +32,8 @@ type ExtractedProps = $ReadOnly<{|
     templateSharingType: string,
     apiTemplates: WorkingListTemplates,
     forceUpdateOnMount?: boolean,
-|}>;
+}>;
 
-export type Props = $ReadOnly<{|
-    ...TrackerWorkingListsViewMenuSetupOutputProps,
-    ...ExtractedProps,
-|}>;
+export type Props = Readonly<TrackerWorkingListsViewMenuSetupOutputProps & ExtractedProps>;
 
-export type TrackerWorkingListsSetupOutputProps = $ReadOnly<{|
-    ...TrackerWorkingListsReduxOutputProps,
-    ...ExtractedProps,
-|}>;
+export type TrackerWorkingListsSetupOutputProps = Readonly<TrackerWorkingListsReduxOutputProps & ExtractedProps>;

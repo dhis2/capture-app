@@ -1,12 +1,11 @@
-// @flow
 import { colors, spacers } from '@dhis2/ui';
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { TrackerWorkingListsReduxProvider } from './ReduxProvider';
 import type { Props } from './trackerWorkingLists.types';
 import { TRACKER_WORKING_LISTS_STORE_ID } from './constants';
 
-const getStyles = () => ({
+const styles = {
     listContainer: {
         width: '100%',
         height: 'fit-content',
@@ -16,7 +15,9 @@ const getStyles = () => ({
         borderColor: colors.grey400,
         borderRadius: 3,
     },
-});
+};
+
+type OwnProps = Omit<Props, keyof WithStyles<typeof styles>>;
 
 const TrackerWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Props) => (
     <div className={listContainer} data-test="tracker-working-lists">
@@ -27,4 +28,4 @@ const TrackerWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }
     </div>
 );
 
-export const TrackerWorkingLists: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TrackerWorkingListsPlain);
+export const TrackerWorkingLists = withStyles(styles)(TrackerWorkingListsPlain) as ComponentType<OwnProps>;

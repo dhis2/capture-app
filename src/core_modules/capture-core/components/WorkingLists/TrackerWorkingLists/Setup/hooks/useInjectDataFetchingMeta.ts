@@ -1,4 +1,3 @@
-// @flow
 import { useCallback } from 'react';
 import type {
     TeiColumnsMetaForDataFetching,

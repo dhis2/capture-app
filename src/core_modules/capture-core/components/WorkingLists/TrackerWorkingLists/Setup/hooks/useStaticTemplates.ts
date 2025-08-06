@@ -1,9 +1,8 @@
-// @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
 
-export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate, defaultTemplateId: string) =>
+export const useStaticTemplates = (defaultTemplateId: string, defaultAlteredTemplate?: WorkingListTemplate) =>
     useMemo(
         () => [
             defaultAlteredTemplate || {

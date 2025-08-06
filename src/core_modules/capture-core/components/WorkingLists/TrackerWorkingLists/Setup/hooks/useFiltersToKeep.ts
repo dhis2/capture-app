@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import type { TrackerWorkingListsColumnConfigs } from '../../types';
 import type { FiltersOnly } from '../../../../ListView';

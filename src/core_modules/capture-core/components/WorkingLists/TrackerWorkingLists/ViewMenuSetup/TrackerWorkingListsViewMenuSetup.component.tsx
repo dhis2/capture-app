@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useSelector } from 'react-redux';
@@ -25,7 +24,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     onOpenBulkDataEntryPlugin,
     ...passOnProps
 }: Props) => {
-    const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
+    const [customUpdateTrigger, setCustomUpdateTrigger] = useState<string>();
     const {
         selectedRows,
         clearSelection,
@@ -36,7 +35,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
         removeRowsFromSelection,
     } = useSelectedRowsController({ recordIds: recordsOrder });
     const downloadRequest = useSelector(
-        ({ workingLists }) => workingLists[storeId] && workingLists[storeId].currentRequest,
+        ({ workingLists }: any) => workingLists[storeId] && workingLists[storeId].currentRequest,
     );
     const dataEngine = useDataEngine();
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
@@ -59,7 +58,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     }, [setDownloadDialogOpenStatus]);
 
     const injectDownloadRequestToLoadView = useCallback(
-        async (selectedTemplate: Object, context: Object, meta: Object) => {
+        async (selectedTemplate: any, context: any, meta: any) => {
             const { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching } = meta;
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const clientConfig = await convertToClientConfig(
@@ -84,7 +83,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     );
 
     const injectDownloadRequestToUpdateList = useCallback(
-        (queryArgs: Object, meta: Object) => {
+        (queryArgs: any, meta: any) => {
             const { lastTransaction, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching } = meta;
             const currentRequest = computeDownloadRequest({
                 clientConfig: queryArgs,

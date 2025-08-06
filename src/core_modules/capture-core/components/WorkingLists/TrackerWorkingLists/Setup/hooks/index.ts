@@ -1,4 +1,3 @@
-// @flow
 export { useDefaultColumnConfig } from './useDefaultColumnConfig';
 export { useStaticTemplates } from './useStaticTemplates';
 export { useFiltersOnly } from './useFiltersOnly';
