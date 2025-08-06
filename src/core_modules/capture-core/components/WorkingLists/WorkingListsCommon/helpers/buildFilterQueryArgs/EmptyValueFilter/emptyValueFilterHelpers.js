@@ -1,43 +1,52 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import {
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    API_EMPTY_VALUE_FILTER,
-    API_NOT_EMPTY_VALUE_FILTER,
-} from './constants';
-import type { TextFilterData } from '../../../../../FiltersForTypes/Text/types';
 
-const checkboxHandler = (flag: string) => (onCommit: (value: ?string) => void) => ({
-    checked,
-}: {| checked: boolean |}) => onCommit(checked ? flag : '');
+export const EMPTY_VALUE_FILTER = 'EMPTY_VALUE_FILTER';
+export const NOT_EMPTY_VALUE_FILTER = 'NOT_EMPTY_VALUE_FILTER';
 
-const FILTER_EMPTY_VALUE_MAP: { [string]: TextFilterData } = {
-    [EMPTY_VALUE_FILTER]: {
-        value: i18n.t('Is empty'),
-        isEmpty: true,
-    },
-    [NOT_EMPTY_VALUE_FILTER]: {
-        value: i18n.t('Is not empty'),
-        isNotEmpty: true,
-    },
-};
+export const API_EMPTY_VALUE_FILTER = 'null';
+export const API_NOT_EMPTY_VALUE_FILTER = '!null';
 
-export const createEmptyValueCheckboxHandler = checkboxHandler(EMPTY_VALUE_FILTER);
-export const createNotEmptyValueCheckboxHandler = checkboxHandler(NOT_EMPTY_VALUE_FILTER);
+export type NullValueFilterData = {|
+    isEmpty?: boolean,
+    isNotEmpty?: boolean,
+|};
 
-export const isEmptyValueFilter = (value: ?string): boolean =>
-    value != null && Boolean(FILTER_EMPTY_VALUE_MAP[value]);
+export const isEmptyValueFilter = (value: ?string) =>
+    value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
 
-export const emptyValueFilterSelect = (filter: any): ?TextFilterData => {
-    if (typeof filter === 'string') {
-        return FILTER_EMPTY_VALUE_MAP[filter] ?? null;
+export const getLabelForEmptyValueFilter = (filterData: NullValueFilterData) => {
+    if (filterData.isEmpty) {
+        return i18n.t('Is empty');
     }
-    if (filter[API_EMPTY_VALUE_FILTER]) {
-        return FILTER_EMPTY_VALUE_MAP[EMPTY_VALUE_FILTER];
-    }
-    if (filter[API_NOT_EMPTY_VALUE_FILTER]) {
-        return FILTER_EMPTY_VALUE_MAP[NOT_EMPTY_VALUE_FILTER];
+    if (filterData.isNotEmpty) {
+        return i18n.t('Is not empty');
     }
     return undefined;
+};
+
+export const makeCheckboxHandler =
+    (flag: string) =>
+        (onCommit: (?string) => void) =>
+            ({ checked }: {| checked: boolean |}) =>
+                onCommit(checked ? flag : '');
+
+export const fromApiEmptyValueFilter = (filter: Object): ?NullValueFilterData => {
+    if (filter?.[API_EMPTY_VALUE_FILTER]) {
+        return { isEmpty: true };
+    }
+    if (filter?.[API_NOT_EMPTY_VALUE_FILTER]) {
+        return { isNotEmpty: true };
+    }
+    return undefined;
+};
+
+export const toApiEmptyValueFilter = (data: NullValueFilterData) => {
+    if (data.isEmpty) {
+        return { [API_EMPTY_VALUE_FILTER]: true };
+    }
+    if (data.isNotEmpty) {
+        return { [API_NOT_EMPTY_VALUE_FILTER]: true };
+    }
+    throw new Error('nullValueFilter: invalid data');
 };

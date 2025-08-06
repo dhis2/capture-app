@@ -4,10 +4,11 @@ import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import {
-    createEmptyValueCheckboxHandler,
-    createNotEmptyValueCheckboxHandler,
+    makeCheckboxHandler,
     isEmptyValueFilter,
     EmptyValueFilterCheckboxes,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
 } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 
 type Value = ?string;
@@ -42,8 +43,8 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
         this.props.onCommitValue(value);
     };
 
-    handleEmptyValueCheckboxChange = createEmptyValueCheckboxHandler(this.props.onUpdate);
-    handleNotEmptyValueCheckboxChange = createNotEmptyValueCheckboxHandler(this.props.onUpdate);
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onUpdate);
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onUpdate);
 
     render() {
         const { value } = this.props;

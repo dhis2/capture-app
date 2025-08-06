@@ -3,10 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { getFilterByType } from './convertors';
-import {
-    API_NOT_EMPTY_VALUE_FILTER,
-    API_EMPTY_VALUE_FILTER,
-} from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
+import { toApiEmptyValueFilter } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 
 export const convertToEventFilterQuery = ({
     filters,
@@ -42,12 +39,8 @@ export const convertToEventFilterQuery = ({
                 return null;
             }
 
-            if (filter.isEmpty) {
-                return { [API_EMPTY_VALUE_FILTER]: true, dataItem: key };
-            }
-
-            if (filter.isNotEmpty) {
-                return { [API_NOT_EMPTY_VALUE_FILTER]: true, dataItem: key };
+            if (filter.isEmpty || filter.isNotEmpty) {
+                return { ...toApiEmptyValueFilter(filter), dataItem: key };
             }
 
             if (filter.usingOptionSet) {

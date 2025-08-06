@@ -3,7 +3,7 @@ import React from 'react';
 import { Checkbox, MenuDivider } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../constants';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../emptyValueFilterHelpers';
 
 type Props = {
     value: ?string,

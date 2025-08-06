@@ -12,10 +12,7 @@ import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../t
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
-import {
-    API_NOT_EMPTY_VALUE_FILTER,
-    API_EMPTY_VALUE_FILTER,
-} from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
+import { toApiEmptyValueFilter } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 
 const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
     dataElement?.unique ? { eq: filter.value } : { like: filter.value }
@@ -114,11 +111,8 @@ export const convertMainFilters = ({
 
         const mainValue = mainFiltersTable[key](filter);
 
-        if (filter.isEmpty) {
-            return { [API_EMPTY_VALUE_FILTER]: true, [key]: mainValue };
-        }
-        if (filter.isNotEmpty) {
-            return { [API_NOT_EMPTY_VALUE_FILTER]: true, [key]: mainValue };
+        if (filter.isEmpty || filter.isNotEmpty) {
+            return { ...toApiEmptyValueFilter(filter), [key]: mainValue };
         }
 
         if (mainValue !== undefined) {

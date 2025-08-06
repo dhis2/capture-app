@@ -3,10 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { getFilterByType } from './convertors';
-import {
-    API_NOT_EMPTY_VALUE_FILTER,
-    API_EMPTY_VALUE_FILTER,
-} from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
+import { toApiEmptyValueFilter } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 
 export const convertToTEIFilterAttributes = ({
     filters,
@@ -37,12 +34,8 @@ export const convertToTEIFilterAttributes = ({
                 return null;
             }
 
-            if (filter.isEmpty) {
-                return { [API_EMPTY_VALUE_FILTER]: true, attribute: key };
-            }
-
-            if (filter.isNotEmpty) {
-                return { [API_NOT_EMPTY_VALUE_FILTER]: true, attribute: key };
+            if (filter.isEmpty || filter.isNotEmpty) {
+                return { ...toApiEmptyValueFilter(filter), attribute: key };
             }
 
             if (filter.usingOptionSet) {
