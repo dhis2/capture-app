@@ -1,3 +1,24 @@
+## [103.2.4](https://github.com/dhis2/capture-app/compare/v103.2.3...v103.2.4) (2025-08-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19905] TEI search fails for integer range types ([#4248](https://github.com/dhis2/capture-app/issues/4248)) ([237a7d1](https://github.com/dhis2/capture-app/commit/237a7d1db33742f65e8fe4f9e1ee06df82ce929e))
+
+## [103.2.3](https://github.com/dhis2/capture-app/compare/v103.2.2...v103.2.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* [DHIS2-19784] send ISO-formatted enrollment date to rule engine ([#4171](https://github.com/dhis2/capture-app/issues/4171)) ([c0e45af](https://github.com/dhis2/capture-app/commit/c0e45afc6fb6103fc72ba1484a045c70a525fb1f))
+
+## [103.2.2](https://github.com/dhis2/capture-app/compare/v103.2.1...v103.2.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4277](https://github.com/dhis2/capture-app/issues/4277)) ([bd61500](https://github.com/dhis2/capture-app/commit/bd61500ac4adad6ac0e1d1490eb73c44ae6e0d2a))
+
 ## [103.2.1](https://github.com/dhis2/capture-app/compare/v103.2.0...v103.2.1) (2025-07-30)
 
 
