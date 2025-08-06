@@ -72,13 +72,13 @@ export const TrackerWorkingListsSetup = ({
     const programStageFiltersOnly = useProgramStageFilters(program, programStageId);
     const staticTemplates = useStaticTemplates(
         storedTemplates?.find(storedTemplate => storedTemplate.isDefault && storedTemplate.isAltered),
-        `${program.id}-default`,
+        { id: `${program.id}-default`, name: 'Default', access: {} } as any,
     );
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
         defaultColumns,
-        filters,
+        filters: filters || {},
         columns,
         sortById,
         sortByDirection,
@@ -203,29 +203,50 @@ export const TrackerWorkingListsSetup = ({
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
-            additionalFilters={programStageFiltersOnly}
+            additionalFilters={programStageFiltersOnly as any}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(
                 defaultColumns,
                 filtersOnly,
-                programStageFiltersOnly,
+                programStageFiltersOnly as any,
                 onLoadView,
             )}
             onUpdateList={useInjectDataFetchingMetaToUpdateList(
                 defaultColumns,
                 filtersOnly,
-                programStageFiltersOnly,
+                programStageFiltersOnly as any,
                 onUpdateList,
             )}
             programId={program.id}
             programStageId={programStageId}
             rowIdKey="id"
-            orgUnitId={orgUnitId}
+            orgUnitId={orgUnitId || ''}
             currentViewHasTemplateChanges={viewHasChanges}
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
             bulkActionBarComponent={bulkActionBarComponent}
+            loading={false}
+            onChangePage={() => {}}
+            onChangeRowsPerPage={() => {}}
+            onClearFilter={() => {}}
+            onRemoveFilter={() => {}}
+            onClickListRow={() => {}}
+            onSelectRestMenuItem={() => {}}
+            onSetListColumnOrder={() => {}}
+            onSortList={() => {}}
+            onUpdateFilter={() => {}}
+            templatesLoading={false}
+            updating={false}
+            updatingWithDialog={false}
+            templateSharingType=""
+            allRowsAreSelected={passOnProps.allRowsAreSelected || false}
+            onRowSelect={passOnProps.onRowSelect || (() => {})}
+            onSelectAll={passOnProps.onSelectAll || (() => {})}
+            selectionInProgress={passOnProps.selectionInProgress || false}
+            selectedRows={passOnProps.selectedRows || {}}
+            onSelectTemplate={() => {}}
+            onLoadTemplates={() => {}}
         />
     );
 };

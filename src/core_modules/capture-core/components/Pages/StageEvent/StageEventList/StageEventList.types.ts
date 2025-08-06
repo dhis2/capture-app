@@ -4,4 +4,5 @@ export type PlainProps = {
   stage: ProgramStage | null | undefined;
   programId: string;
   orgUnitId: string;
+  onOpenBulkDataEntryPlugin?: (trackedEntityIds: string[]) => void;
 };

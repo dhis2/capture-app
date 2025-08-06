@@ -88,12 +88,12 @@ export const TrackerWorkingListsReduxProvider = ({
     }, [onChangeTemplate, onSelectTemplate, onUpdateDefaultTemplate, defaultTemplate]);
 
     const injectCallbacksForAddTemplate = useCallback((name: string, criteria: any, data: any) =>
-        onAddTemplate(name, criteria, data, { onChangeTemplate }),
+        onAddTemplate(name, criteria, data, { onChangeTemplate } as any),
     [onAddTemplate, onChangeTemplate]);
 
     const injectCallbacksForDeleteTemplate = useCallback(
         (template: any, programIdArg: string, programStageArg?: string) =>
-            onDeleteTemplate(template, programIdArg, programStageArg, { onChangeTemplate }),
+            onDeleteTemplate(template, programIdArg, programStageArg, { onChangeTemplate } as any),
         [onDeleteTemplate, onChangeTemplate],
     );
     const templateSharingType = programStage
@@ -114,7 +114,6 @@ export const TrackerWorkingListsReduxProvider = ({
             records={records}
             orgUnitId={orgUnitId}
             apiTemplates={apiTemplates}
-            onSelectTemplate={handleOnSelectTemplate}
             onPreserveCurrentViewState={handlePreserveCurrentViewState}
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}

@@ -9,7 +9,11 @@ type ExtractedProps = Readonly<{
     storeId: string,
 }>;
 
-export type Props = TrackerWorkingListsTopBarActionsSetupOutputProps & ExtractedProps;
+export type Props = TrackerWorkingListsTopBarActionsSetupOutputProps & ExtractedProps & {
+    programStageId?: string;
+    orgUnitId: string;
+    records?: any;
+};
 
 export type TrackerWorkingListsViewMenuSetupOutputProps = TrackerWorkingListsTopBarActionsSetupOutputProps & {
     onLoadView: LoadTeiView,

@@ -21,8 +21,8 @@ export const useInjectDataFetchingMetaToLoadList = (
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     // $FlowFixMe Destructuring of union types is not handled properly by Flow.
                     const { id, type, visible, apiViewName, unique } = defaultColumn;
-                    const mainProperty = defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
-                        ? defaultColumn.mainProperty
+                    const mainProperty = (defaultColumn as any).mainProperty && typeof (defaultColumn as any).mainProperty === 'boolean'
+                        ? (defaultColumn as any).mainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn
                         ? defaultColumn.additionalColumn
@@ -52,10 +52,10 @@ export const useInjectDataFetchingMetaToLoadList = (
             );
 
             const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-                transformFiltersOnly.concat(transformProgramStageFiltersOnly),
+                transformFiltersOnly.concat(transformProgramStageFiltersOnly) as any,
             );
 
-            onLoadView(selectedTemplate, context, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
+            onLoadView(selectedTemplate as any, context as any, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
         },
         [defaultColumns, filtersOnly, programStageFiltersOnly, onLoadView],
     );
@@ -71,8 +71,8 @@ export const useInjectDataFetchingMetaToUpdateList = (
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     const { id, type, visible, unique } = defaultColumn;
-                    const mainProperty = defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
-                        ? defaultColumn.mainProperty
+                    const mainProperty = (defaultColumn as any).mainProperty && typeof (defaultColumn as any).mainProperty === 'boolean'
+                        ? (defaultColumn as any).mainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn
                         ? defaultColumn.additionalColumn
@@ -101,7 +101,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
             );
 
             const filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching = new Map(
-                transformFiltersOnly.concat(transformProgramStageFiltersOnly),
+                transformFiltersOnly.concat(transformProgramStageFiltersOnly) as any,
             );
 
             onUpdateList(queryArgs, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching }, 0);

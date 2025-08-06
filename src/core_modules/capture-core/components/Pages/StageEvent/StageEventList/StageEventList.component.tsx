@@ -37,6 +37,7 @@ const StageEventListPlain = ({ stage, programId, ...passOnProps }: Props) => {
                 />}
                 {programType === programTypes.TRACKER_PROGRAM && <TrackerWorkingLists
                     {...workingListProps}
+                    onOpenBulkDataEntryPlugin={passOnProps.onOpenBulkDataEntryPlugin || (() => {})}
                 />}
             </Widget>
         </div>

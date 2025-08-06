@@ -9,6 +9,8 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
     onOpenBulkDataEntryPlugin,
     selectionInProgress,
     recordsOrder,
+    onLoadView,
+    onUpdateList,
     ...passOnProps
 }: Props) => {
     const customTopBarActions: CustomTopBarActions = useMemo(
@@ -19,7 +21,7 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
                     <BulkDataEntryAction
                         key="bulkDataEntryAction"
                         programId={program?.id}
-                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin(recordsOrder)}
+                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin([])}
                         selectionInProgress={selectionInProgress}
                     />
                 ),
@@ -35,6 +37,9 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
             recordsOrder={recordsOrder}
             selectionInProgress={selectionInProgress}
             customTopBarActions={customTopBarActions}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+            onLoadView={onLoadView}
+            onUpdateList={onUpdateList}
         />
     );
 };
