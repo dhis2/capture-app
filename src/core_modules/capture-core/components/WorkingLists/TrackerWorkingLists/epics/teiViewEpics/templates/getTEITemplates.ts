@@ -30,40 +30,50 @@ export const getTEITemplates = (
             templates: [
                 defaultTemplate,
                 ...apiTEIFilters.map(
-                    (template: any) => {
-                        const displayName = template.displayName;
-                        const sortOrder = template.sortOrder;
-                        const id = template.id;
-                        const access = template.access;
-                        const criteria = template.entityQueryCriteria || {};
-                        const externalAccess = template.externalAccess;
-                        const publicAccess = template.publicAccess;
-                        const user = template.user;
-                        const userAccesses = template.userAccesses;
-                        const userGroupAccesses = template.userGroupAccesses;
-                        return {
-                            id,
-                            name: displayName,
-                            order: sortOrder,
-                            criteria: {
-                                programStatus: criteria.enrollmentStatus,
-                                enrolledAt: criteria.enrollmentCreatedDate,
-                                occurredAt: criteria.enrollmentIncidentDate,
-                                followUp: criteria.followUp,
-                                order: criteria.order,
-                                displayColumnOrder: criteria.displayColumnOrder,
-                                assignedUserMode: criteria.assignedUserMode,
-                                assignedUsers: criteria.assignedUsers,
-                                attributeValueFilters: criteria.attributeValueFilters,
-                            },
-                            access,
-                            externalAccess,
-                            publicAccess,
-                            user,
-                            userAccesses,
-                            userGroupAccesses,
-                        };
+                    ({
+                        displayName,
+                        sortOrder,
+                        id,
+                        access,
+                        entityQueryCriteria: {
+                            enrollmentStatus,
+                            enrollmentCreatedDate,
+                            enrollmentIncidentDate,
+                            order,
+                            attributeValueFilters,
+                            followUp,
+                            displayColumnOrder,
+                            assignedUserMode,
+                            assignedUsers,
+                        } = {},
+                        externalAccess,
+                        publicAccess,
+                        user,
+                        userAccesses,
+                        userGroupAccesses,
+                    }: any) => ({
+                        id,
+                        name: displayName,
+                        order: sortOrder,
+                        criteria: {
+                            programStatus: enrollmentStatus,
+                            enrolledAt: enrollmentCreatedDate,
+                            occurredAt: enrollmentIncidentDate,
+                            followUp,
+                            order,
+                            displayColumnOrder,
+                            assignedUserMode,
+                            assignedUsers,
+                            attributeValueFilters,
+                        },
+                        access,
+                        externalAccess,
+                        publicAccess,
+                        user,
+                        userAccesses,
+                        userGroupAccesses,
                     }),
+                ),
             ],
             defaultTemplateId: defaultTemplate.id,
             id: TRACKER_WORKING_LISTS,
