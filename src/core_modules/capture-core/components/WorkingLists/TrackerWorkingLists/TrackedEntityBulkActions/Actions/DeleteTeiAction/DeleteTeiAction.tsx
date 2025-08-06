@@ -66,7 +66,8 @@ export const DeleteTeiAction = ({
                             </Button>
                             <Button
                                 destructive
-                                onClick={() => deleteTeis()}
+                                // @ts-expect-error - keeping original functionality as before ts rewrite
+                                onClick={deleteTeis}
                                 loading={isLoading}
                             >
                                 {i18n.t('Delete')}

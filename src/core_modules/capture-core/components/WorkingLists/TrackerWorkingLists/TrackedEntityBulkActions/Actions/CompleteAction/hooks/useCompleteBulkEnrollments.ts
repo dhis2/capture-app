@@ -211,10 +211,10 @@ export const useCompleteBulkEnrollments = ({
             enrollments,
         }),
         {
-            onSuccess: () => {
-                importEnrollments();
+            onSuccess: (serverResponse: any, { enrollments }: any) => {
+                importEnrollments({ enrollments } as any);
             },
-            onError: (serverResponse: any) => {
+            onError: (serverResponse: any, { enrollments }: any) => {
                 const errors = serverResponse?.details?.validationReport?.errorReports;
                 if (!errors) {
                     log.error(
@@ -249,8 +249,8 @@ export const useCompleteBulkEnrollments = ({
     }, [modalIsOpen, resetCompleteEnrollments]);
 
     const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
-        formatServerPayload(trackedEntities, completeEvents, stages);
-        onValidateEnrollments();
+        const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
+        onValidateEnrollments({ completeEvents, enrollments } as any);
     };
 
     return {
