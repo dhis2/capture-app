@@ -20,9 +20,9 @@ export const EmptyValueFilterCheckboxes = ({
     onEmptyChange,
     onNotEmptyChange,
 }: Props) => {
-    const nullValueFiltersSupported = useFeature(FEATURES.nullValueFilters);
+    const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
 
-    if (!nullValueFiltersSupported) {
+    if (!emptyValueFilterSupported) {
         return null;
     }
 

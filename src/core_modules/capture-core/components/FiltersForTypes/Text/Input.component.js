@@ -12,7 +12,9 @@ type Props = {
 class InputPlain extends React.Component<Props> {
     handleKeyDown = (payload: any, event: SyntheticKeyboardEvent<HTMLInputElement>) => {
         if (event && event.key === 'Enter') {
-            this.props.onEnterKey(this.props.value);
+            if (payload.value) {
+                this.props.onEnterKey(payload.value);
+            }
         }
     };
 

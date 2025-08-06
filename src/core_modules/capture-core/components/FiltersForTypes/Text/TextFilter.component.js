@@ -24,10 +24,6 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
 
-        if (!value) {
-            return null;
-        }
-
         return getTextFilterData(value);
     }
 
@@ -36,7 +32,9 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
     };
 
     handleBlur = (value: string) => {
-        this.props.onCommitValue(value);
+        if (value) {
+            this.props.onCommitValue(value);
+        }
     };
 
     handleInputChange = (value: string) => {

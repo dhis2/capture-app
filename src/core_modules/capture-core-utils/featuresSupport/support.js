@@ -18,7 +18,7 @@ export const FEATURES = Object.freeze({
     kotlinRuleEngine: 'kotlinRuleEngine',
     orgUnitReplaceOuQueryParam: 'orgUnitReplaceOuQueryParam',
     enrollmentStatusReplaceProgramStatusQueryParam: 'enrollmentStatusReplaceProgramStatusQueryParam',
-    nullValueFilters: 'nullValueFilters',
+    emptyValueFilter: 'emptyValueFilter',
 });
 
 // The first minor version that supports the feature
@@ -41,7 +41,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.kotlinRuleEngine]: 42,
     [FEATURES.orgUnitReplaceOuQueryParam]: 42,
     [FEATURES.enrollmentStatusReplaceProgramStatusQueryParam]: 42,
-    [FEATURES.nullValueFilters]: 42,
+    [FEATURES.emptyValueFilter]: 42,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>
