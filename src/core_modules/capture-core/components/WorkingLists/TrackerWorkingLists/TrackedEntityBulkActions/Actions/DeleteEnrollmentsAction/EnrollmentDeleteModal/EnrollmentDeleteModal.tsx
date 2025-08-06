@@ -1,20 +1,12 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
+import type { PlainProps } from './EnrollmentDeleteModal.types';
 
-type Props = {
-    selectedRows: { [id: string]: boolean },
-    programId: string,
-    onUpdateList: () => void,
-    setIsDeleteDialogOpen: (open: boolean) => void,
-    classes: Object,
-}
-
-const styles = {
+const styles: Readonly<any> = {
     modalContent: {
         display: 'flex',
         flexDirection: 'column',
@@ -33,7 +25,7 @@ const EnrollmentDeleteModalPlain = ({
     onUpdateList,
     setIsDeleteDialogOpen,
     classes,
-}: Props) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const {
         deleteEnrollments,
         isDeletingEnrollments,
@@ -170,6 +162,7 @@ const EnrollmentDeleteModalPlain = ({
 
                     <Button
                         destructive
+                        // @ts-expect-error - keeping original functionality as before ts rewrite
                         onClick={deleteEnrollments}
                         disabled={isDeletingEnrollments || numberOfEnrollmentsToDelete === 0}
                     >

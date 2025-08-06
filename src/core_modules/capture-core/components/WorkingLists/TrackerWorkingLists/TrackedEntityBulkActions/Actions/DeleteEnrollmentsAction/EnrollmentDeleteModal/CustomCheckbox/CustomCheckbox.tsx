@@ -1,20 +1,10 @@
-// @flow
-import type { ComponentType } from 'react';
 import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Checkbox } from '@dhis2/ui';
+import type { PlainProps } from './CustomCheckbox.types';
 
-type Props = {
-    label: string,
-    checked: boolean,
-    disabled?: boolean,
-    id: string,
-    onChange: (status: string) => void,
-    dataTest?: string,
-}
-
-const styles = {
+const styles: Readonly<any> = {
     checkboxButton: {
         // Reset default browser styles
         appearance: 'none',
@@ -56,7 +46,7 @@ const CustomCheckboxPlain = ({
     disabled,
     dataTest,
     classes,
-}) => (
+}: PlainProps & WithStyles<typeof styles>) => (
     <button
         type="button"
         onClick={() => onChange(id)}
@@ -77,4 +67,4 @@ const CustomCheckboxPlain = ({
     </button>
 );
 
-export const CustomCheckbox: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(CustomCheckboxPlain);
+export const CustomCheckbox = withStyles(styles)(CustomCheckboxPlain);

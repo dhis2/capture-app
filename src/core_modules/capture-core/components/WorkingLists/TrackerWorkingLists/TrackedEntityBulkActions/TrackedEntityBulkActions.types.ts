@@ -1,10 +1,9 @@
-// @flow
 import type { ProgramStage } from '../../../../metaData';
 import type { RecordsOrder } from '../../WorkingListsCommon';
 
-type BaseProps = {|
+type BaseProps = {
     recordsOrder?: RecordsOrder,
-    selectedRows: { [key: string]: boolean },
+    selectedRows: Record<string, boolean>,
     programId: string,
     stages: Map<string, ProgramStage>,
     onClearSelection: () => void,
@@ -12,15 +11,13 @@ type BaseProps = {|
     onUpdateList: () => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
     onOpenBulkDataEntryPlugin: (trackedEntityIds: Array<string>) => void,
-|}
+};
 
-export type Props = {|
-    ...BaseProps,
+export type Props = BaseProps & {
     onOpenBulkDataEntryPlugin: () => void,
     bulkDataEntryIsActive: boolean,
-|}
+};
 
-export type ContainerProps = {|
-    ...BaseProps,
-    programStageId: ?string,
-|}
+export type ContainerProps = BaseProps & {
+    programStageId?: string,
+};

@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
