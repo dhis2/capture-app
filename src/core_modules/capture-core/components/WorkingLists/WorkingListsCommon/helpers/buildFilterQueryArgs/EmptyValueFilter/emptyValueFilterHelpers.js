@@ -29,7 +29,7 @@ export const createNotEmptyValueCheckboxHandler = checkboxHandler(NOT_EMPTY_VALU
 export const isEmptyValueFilter = (value: ?string): boolean =>
     value != null && Boolean(FILTER_EMPTY_VALUE_MAP[value]);
 
-export const emptyValueFilterResults = (filter: any): ?TextFilterData => {
+export const emptyValueFilterSelect = (filter: any): ?TextFilterData => {
     if (typeof filter === 'string') {
         return FILTER_EMPTY_VALUE_MAP[filter] ?? null;
     }
