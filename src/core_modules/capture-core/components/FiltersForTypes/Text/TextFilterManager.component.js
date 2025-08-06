@@ -2,7 +2,10 @@
 import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
-import { EMPTY_FILTER_VALUE, NOT_EMPTY_FILTER_VALUE } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
+import {
+    EMPTY_FILTER_VALUE,
+    NOT_EMPTY_FILTER_VALUE,
+} from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 type Props = {
     filter: ?TextFilterData,

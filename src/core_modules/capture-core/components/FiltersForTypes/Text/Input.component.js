@@ -10,18 +10,19 @@ type Props = {
 };
 
 class InputPlain extends React.Component<Props> {
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === 'Enter') {
+    handleKeyDown = (payload: any, event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        // 'event' is the native keyboard event, 'payload' contains value & name
+        if (event && event.key === 'Enter') {
             this.props.onEnterKey(this.props.value);
         }
-    }
+    };
 
     render() {
         const { onEnterKey, ...passOnProps } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2TextField
-                onKeyPress={this.handleKeyPress}
+                onKeyDown={this.handleKeyDown}
                 fullWidth
                 placeholder={i18n.t('Contains text')}
                 {...passOnProps}

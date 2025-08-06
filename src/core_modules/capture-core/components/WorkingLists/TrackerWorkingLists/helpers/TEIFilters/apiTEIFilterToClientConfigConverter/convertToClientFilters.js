@@ -2,7 +2,7 @@
 import moment from 'moment';
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
-import { emptyValueFilterResults } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
+import { emptyValueFilterResults } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 import {
     filterTypesObject,
     type TrueOnlyFilterData,

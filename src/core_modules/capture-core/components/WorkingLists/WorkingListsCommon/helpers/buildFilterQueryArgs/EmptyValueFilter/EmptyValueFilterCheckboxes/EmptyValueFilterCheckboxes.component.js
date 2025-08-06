@@ -9,14 +9,12 @@ type Props = {
     value: ?string,
     onEmptyChange: ({| checked: boolean |}) => void,
     onNotEmptyChange: ({| checked: boolean |}) => void,
-    showDivider?: boolean,
 };
 
 export const EmptyValueFilterCheckboxes = ({
     value,
     onEmptyChange,
     onNotEmptyChange,
-    showDivider = true,
 }: Props) => {
     const nullValueFiltersSupported = useFeature(FEATURES.nullValueFilters);
 
@@ -36,7 +34,7 @@ export const EmptyValueFilterCheckboxes = ({
                 checked={value === NOT_EMPTY_FILTER_VALUE}
                 onChange={onNotEmptyChange}
             />
-            {showDivider && <MenuDivider />}
+            <MenuDivider />
         </div>
     );
 };

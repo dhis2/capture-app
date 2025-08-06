@@ -1,6 +1,8 @@
 // @flow
 
-import { emptyValueFilterResults } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
+import {
+    emptyValueFilterResults,
+} from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 import type { TextFilterData } from './types';
 
 export function getTextFilterData(value: ?string): ?TextFilterData {

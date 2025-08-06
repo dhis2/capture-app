@@ -12,7 +12,10 @@ import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../t
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
-import { API_FILTER_NOT_NULL, API_FILTER_NULL } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
+import {
+    API_FILTER_NOT_NULL,
+    API_FILTER_NULL,
+} from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/constants';
 
 const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
     dataElement?.unique ? { eq: filter.value } : { like: filter.value }

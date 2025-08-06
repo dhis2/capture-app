@@ -8,26 +8,11 @@ import {
 } from './constants';
 import type { TextFilterData } from '../../../../../FiltersForTypes/Text/types';
 
-export type EmptyValueFilterChangeHandler = (value: ?string) => void;
+const checkboxHandler = (flag: string) => (onCommit: (value: ?string) => void) => ({
+    checked,
+}: {| checked: boolean |}) => onCommit(checked ? flag : '');
 
-export const createEmptyValueCheckboxHandler = (onCommitValue: EmptyValueFilterChangeHandler) =>
-    ({ checked }: {| checked: boolean |}) => {
-        onCommitValue(checked ? EMPTY_FILTER_VALUE : '');
-    };
-
-export const createNotEmptyValueCheckboxHandler = (onCommitValue: EmptyValueFilterChangeHandler) =>
-    ({ checked }: {| checked: boolean |}) => {
-        onCommitValue(checked ? NOT_EMPTY_FILTER_VALUE : '');
-    };
-
-export const isEmptyValueFilter = (value: ?string): boolean =>
-    value === EMPTY_FILTER_VALUE || value === NOT_EMPTY_FILTER_VALUE;
-
-export const shouldShowMainInputForEmptyValueFilter = (value: ?string): boolean =>
-    Boolean(value && !isEmptyValueFilter(value));
-
-
-const RESULT_MAP: { [key: string]: TextFilterData } = {
+const EMPTY_VALUE_RESULT_MAP: { [string]: TextFilterData } = {
     [EMPTY_FILTER_VALUE]: {
         value: i18n.t('Is empty'),
         isEmpty: true,
@@ -38,21 +23,21 @@ const RESULT_MAP: { [key: string]: TextFilterData } = {
     },
 };
 
+export const createEmptyValueCheckboxHandler = checkboxHandler(EMPTY_FILTER_VALUE);
+export const createNotEmptyValueCheckboxHandler = checkboxHandler(NOT_EMPTY_FILTER_VALUE);
+
+export const isEmptyValueFilter = (value: ?string): boolean =>
+    value != null && Boolean(EMPTY_VALUE_RESULT_MAP[value]);
+
 export const emptyValueFilterResults = (filter: any): ?TextFilterData => {
-    if (!filter) {
-        return null;
-    }
-
     if (typeof filter === 'string') {
-        return RESULT_MAP[filter] || null;
+        return EMPTY_VALUE_RESULT_MAP[filter] ?? null;
     }
-
     if (filter[API_FILTER_NULL]) {
-        return RESULT_MAP[EMPTY_FILTER_VALUE];
+        return EMPTY_VALUE_RESULT_MAP[EMPTY_FILTER_VALUE];
     }
     if (filter[API_FILTER_NOT_NULL]) {
-        return RESULT_MAP[NOT_EMPTY_FILTER_VALUE];
+        return EMPTY_VALUE_RESULT_MAP[NOT_EMPTY_FILTER_VALUE];
     }
-
-    return null;
+    return undefined;
 };

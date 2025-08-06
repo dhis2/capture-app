@@ -6,9 +6,9 @@ import type { UpdatableFilterContent } from '../types';
 import {
     createEmptyValueCheckboxHandler,
     createNotEmptyValueCheckboxHandler,
-    shouldShowMainInputForEmptyValueFilter,
-} from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter/emptyValueFilterHelpers';
-import { EmptyValueFilterCheckboxes } from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
+    isEmptyValueFilter,
+    EmptyValueFilterCheckboxes,
+} from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 
 type Value = ?string;
 
@@ -42,9 +42,8 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
         this.props.onCommitValue(value);
     };
 
-    handleEmptyValueCheckboxChange = createEmptyValueCheckboxHandler(this.props.onCommitValue);
-
-    handleNotEmptyValueCheckboxChange = createNotEmptyValueCheckboxHandler(this.props.onCommitValue);
+    handleEmptyValueCheckboxChange = createEmptyValueCheckboxHandler(this.props.onUpdate);
+    handleNotEmptyValueCheckboxChange = createNotEmptyValueCheckboxHandler(this.props.onUpdate);
 
     render() {
         const { value } = this.props;
@@ -61,7 +60,7 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
                     onChange={this.handleInputChange}
                     onBlur={this.handleBlur}
                     onEnterKey={this.handleEnterKey}
-                    value={shouldShowMainInputForEmptyValueFilter(value) ? value : ''}
+                    value={!isEmptyValueFilter(value) ? value : ''}
                 />
             </>
         );
