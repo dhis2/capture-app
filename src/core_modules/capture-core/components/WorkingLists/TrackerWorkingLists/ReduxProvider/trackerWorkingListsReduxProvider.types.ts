@@ -37,7 +37,7 @@ import type { TrackerWorkingListsTemplates, TeiRecords, ApiTrackerQueryCriteria 
 export type Props = {
     storeId: string;
     programId: string;
-    orgUnitId: string;
+    orgUnitId?: string;
     selectedTemplateId?: string;
     onChangeTemplate?: (selectedTemplateId?: string) => void;
     onOpenBulkDataEntryPlugin: (trackedEntities: string[]) => void;

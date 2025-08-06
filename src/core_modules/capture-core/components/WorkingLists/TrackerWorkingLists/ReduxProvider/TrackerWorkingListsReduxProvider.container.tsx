@@ -112,13 +112,19 @@ export const TrackerWorkingListsReduxProvider = ({
             program={program}
             programStageId={programStage}
             records={records}
-            orgUnitId={orgUnitId}
+            orgUnitId={orgUnitId || ''}
             apiTemplates={apiTemplates}
             onPreserveCurrentViewState={handlePreserveCurrentViewState}
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
             storeId={storeId}
             onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+            selectionInProgress={false}
+            allRowsAreSelected={false}
+            selectedRows={{}}
+            onRowSelect={() => {}}
+            onSelectAll={() => {}}
+            bulkActionBarComponent={<div />}
         />
     );
 };
