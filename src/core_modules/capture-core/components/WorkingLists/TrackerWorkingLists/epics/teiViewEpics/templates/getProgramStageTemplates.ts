@@ -30,44 +30,58 @@ export const getProgramStageTemplates = (
             templates: [
                 defaultTemplate,
                 ...apiTEIFilters.map(
-                    (template: any) => {
-                        const displayName = template.displayName;
-                        const id = template.id;
-                        const access = template.access;
-                        const programStage = template.programStage?.id;
-                        const criteria = template.programStageQueryCriteria || {};
-                        const externalAccess = template.externalAccess;
-                        const publicAccess = template.publicAccess;
-                        const user = template.user;
-                        const userAccesses = template.userAccesses;
-                        const userGroupAccesses = template.userGroupAccesses;
-                        return {
-                            id,
-                            name: displayName,
-                            criteria: {
-                                programStatus: criteria.enrollmentStatus,
-                                enrolledAt: criteria.enrolledAt,
-                                occurredAt: criteria.enrollmentOccurredAt,
-                                programStage,
-                                eventOccurredAt: criteria.eventOccurredAt,
-                                followUp: criteria.followUp,
-                                status: criteria.eventStatus,
-                                scheduledAt: criteria.eventScheduledAt,
-                                dataFilters: criteria.dataFilters,
-                                order: criteria.order,
-                                displayColumnOrder: criteria.displayColumnOrder,
-                                assignedUserMode: criteria.assignedUserMode,
-                                assignedUsers: criteria.assignedUsers,
-                                attributeValueFilters: criteria.attributeValueFilters,
-                            },
-                            access,
-                            externalAccess,
-                            publicAccess,
-                            user,
-                            userAccesses,
-                            userGroupAccesses,
-                        };
+                    ({
+                        displayName,
+                        id,
+                        access,
+                        programStage: { id: programStage },
+                        programStageQueryCriteria: {
+                            enrollmentStatus,
+                            enrolledAt,
+                            enrollmentOccurredAt,
+                            eventStatus,
+                            eventScheduledAt,
+                            eventOccurredAt,
+                            followUp,
+                            order,
+                            attributeValueFilters,
+                            dataFilters,
+                            displayColumnOrder,
+                            assignedUserMode,
+                            assignedUsers,
+                        } = {},
+                        externalAccess,
+                        publicAccess,
+                        user,
+                        userAccesses,
+                        userGroupAccesses,
+                    }: any) => ({
+                        id,
+                        name: displayName,
+                        criteria: {
+                            programStatus: enrollmentStatus,
+                            enrolledAt,
+                            occurredAt: enrollmentOccurredAt,
+                            programStage,
+                            eventOccurredAt,
+                            followUp,
+                            status: eventStatus,
+                            scheduledAt: eventScheduledAt,
+                            dataFilters,
+                            order,
+                            displayColumnOrder,
+                            assignedUserMode,
+                            assignedUsers,
+                            attributeValueFilters,
+                        },
+                        access,
+                        externalAccess,
+                        publicAccess,
+                        user,
+                        userAccesses,
+                        userGroupAccesses,
                     }),
+                ),
             ],
             defaultTemplateId: defaultTemplate.id,
             id: PROGRAM_STAGE_WORKING_LISTS,

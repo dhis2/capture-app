@@ -109,7 +109,7 @@ export const getEventListData = async (
 
     const columnsMetaForDataFetchingArray = getColumnsQueryArgs(columnsMetaForDataFetching);
     const clientEvents = convertToClientEvents(addTEIsData(apiEvents, apiTrackedEntities), columnsMetaForDataFetchingArray);
-    const clientWithSubvalues = await (getSubvalues as any)(querySingleResource, absoluteApiPath)(
+    const clientWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(
         clientEvents,
         columnsMetaForDataFetchingArray,
     );

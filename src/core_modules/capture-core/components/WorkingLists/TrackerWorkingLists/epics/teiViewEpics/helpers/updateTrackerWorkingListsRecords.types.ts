@@ -3,17 +3,17 @@ import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching }
 import type { QuerySingleResource } from '../../../../../../utils/api';
 
 export type Input = {
-    page: number;
-    pageSize: number;
-    programId: string;
-    programStageId?: string;
-    orgUnitId: string;
-    filters: FiltersData;
-    sortById: string;
-    sortByDirection: string;
-    storeId: string;
-    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching;
-    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching;
-    querySingleResource: QuerySingleResource;
-    absoluteApiPath: string;
+    page: number,
+    pageSize: number,
+    programId: string,
+    programStageId?: string,
+    orgUnitId: string,
+    filters: FiltersData,
+    sortById: string,
+    sortByDirection: string,
+    storeId: string,
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
+    querySingleResource: QuerySingleResource,
+    absoluteApiPath: string,
 };

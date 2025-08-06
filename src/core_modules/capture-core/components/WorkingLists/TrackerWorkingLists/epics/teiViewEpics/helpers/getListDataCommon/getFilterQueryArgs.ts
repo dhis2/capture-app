@@ -26,7 +26,7 @@ export const splitFilters = (
 ) =>
     Object.keys(rawFilters).reduce(
         (acc, filterKey) => {
-            if ((columnsMetaForDataFetching.get(filterKey) as any)?.additionalColumn) {
+            if (columnsMetaForDataFetching.get(filterKey)?.additionalColumn) {
                 acc.filters[filterKey] = rawFilters[filterKey];
             } else {
                 acc.filterAttributes[filterKey] = rawFilters[filterKey];

@@ -3,6 +3,6 @@ import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-ut
 import { statusTypes } from 'capture-core/events/statusTypes';
 
 export const getScheduledDateQueryArgs = (queryArgs: any) =>
-    ((queryArgs as any).status === statusTypes.SCHEDULE && !queryArgs.hasOwnProperty('scheduledAfter')
+    (queryArgs.status === statusTypes.SCHEDULE && !queryArgs.hasOwnProperty('scheduledAfter')
         ? { ...queryArgs, scheduledAfter: getFormattedStringFromMomentUsingEuropeanGlyphs(moment()) }
         : queryArgs);

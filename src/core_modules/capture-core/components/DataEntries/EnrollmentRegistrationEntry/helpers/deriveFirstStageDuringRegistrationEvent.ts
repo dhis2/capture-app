@@ -1,4 +1,3 @@
-// @flow
 import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { dataElementTypes, ProgramStage } from '../../../../metaData';

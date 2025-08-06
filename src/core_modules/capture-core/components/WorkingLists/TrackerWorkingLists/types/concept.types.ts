@@ -55,6 +55,7 @@ export type TeiColumnMetaForDataFetching = {
     mainProperty?: boolean,
     visible: boolean,
     apiViewName?: string,
+    additionalColumn?: boolean,
 };
 
 export type TeiColumnsMetaForDataFetching = Map<string, TeiColumnMetaForDataFetching>;

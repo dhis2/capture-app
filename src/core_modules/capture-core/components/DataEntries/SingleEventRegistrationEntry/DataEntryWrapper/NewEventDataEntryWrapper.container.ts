@@ -1,4 +1,3 @@
-// @flow
 import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { NewEventDataEntryWrapperComponent } from './NewEventDataEntryWrapper.component';
