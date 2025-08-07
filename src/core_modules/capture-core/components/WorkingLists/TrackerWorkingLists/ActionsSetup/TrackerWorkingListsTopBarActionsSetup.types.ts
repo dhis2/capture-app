@@ -1,42 +1,11 @@
-import type { TrackerProgram } from '../../../../metaData';
-import type { RecordsOrder } from '../../WorkingListsCommon';
+import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup';
 
-export type TrackerWorkingListsTopBarActionsSetupOutputProps = {
-    onOpenBulkDataEntryPlugin: (trackedEntityIds: string[]) => void;
-    program: TrackerProgram;
-    selectionInProgress: boolean;
-    recordsOrder?: RecordsOrder;
-    customUpdateTrigger?: string;
-    customTopBarActions?: any;
-    customListViewMenuContents?: any;
-    onLoadView: any;
-    onUpdateList: any;
-    allRowsAreSelected: boolean;
-    selectedRows: { [key: string]: boolean };
-    onRowSelect: (id: string) => void;
-    onSelectAll: (rows: string[]) => void;
-    bulkActionBarComponent: any;
-    orgUnitId: string;
-    programStageId?: string;
-    onAddTemplate: any;
-    onDeleteTemplate: any;
-    onUpdateTemplate: any;
-    onSetTemplateSharingSettings: any;
-    onClearFilters?: any;
-    onResetListColumnOrder?: any;
-    onPreserveCurrentViewState?: any;
-    templates?: any;
-    forceUpdateOnMount?: boolean;
-    currentTemplateId?: any;
-    viewPreloaded?: any;
-    templateSharingType: any;
-    onClickListRow?: any;
-    onLoadTemplates?: any;
-    initialViewConfig: any;
-    sortById?: any;
-    sortByDirection?: any;
-    apiTemplates?: any;
-    records?: any;
+type ExtractedProps = {
+    onOpenBulkDataEntryPlugin: (trackedEntityIds?: Array<string>) => void,
 };
 
-export type Props = TrackerWorkingListsTopBarActionsSetupOutputProps;
+type RestProps = Omit<TrackerWorkingListsViewMenuSetupOutputProps, keyof ExtractedProps>;
+
+export type Props = RestProps & ExtractedProps;
+
+export type TrackerWorkingListsTopBarActionsSetupOutputProps = RestProps & ExtractedProps;

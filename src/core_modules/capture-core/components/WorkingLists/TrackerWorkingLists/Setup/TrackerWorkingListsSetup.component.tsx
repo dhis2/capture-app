@@ -72,7 +72,7 @@ export const TrackerWorkingListsSetup = ({
     const programStageFiltersOnly = useProgramStageFilters(program, programStageId);
     const staticTemplates = useStaticTemplates(
         storedTemplates?.find(storedTemplate => storedTemplate.isDefault && storedTemplate.isAltered),
-        { id: `${program.id}-default`, name: 'Default', access: {} } as any,
+        `${program.id}-default`,
     );
     const templates = apiTemplates?.length > DEFAULT_TEMPLATES_LENGTH ? apiTemplates : staticTemplates;
     const viewHasChanges = useViewHasTemplateChanges({
@@ -226,27 +226,6 @@ export const TrackerWorkingListsSetup = ({
             sortById={sortById}
             sortByDirection={sortByDirection}
             bulkActionBarComponent={bulkActionBarComponent}
-            loading={false}
-            onChangePage={() => {}}
-            onChangeRowsPerPage={() => {}}
-            onClearFilter={() => {}}
-            onRemoveFilter={() => {}}
-            onClickListRow={() => {}}
-            onSelectRestMenuItem={() => {}}
-            onSetListColumnOrder={() => {}}
-            onSortList={() => {}}
-            onUpdateFilter={() => {}}
-            templatesLoading={false}
-            updating={false}
-            updatingWithDialog={false}
-            templateSharingType=""
-            allRowsAreSelected={passOnProps.allRowsAreSelected || false}
-            onRowSelect={passOnProps.onRowSelect || (() => {})}
-            onSelectAll={passOnProps.onSelectAll || (() => {})}
-            selectionInProgress={passOnProps.selectionInProgress || false}
-            selectedRows={passOnProps.selectedRows || {}}
-            onSelectTemplate={() => {}}
-            onLoadTemplates={() => {}}
         />
     );
 };

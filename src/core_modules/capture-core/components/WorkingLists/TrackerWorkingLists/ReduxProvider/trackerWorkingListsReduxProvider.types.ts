@@ -40,7 +40,7 @@ export type Props = {
     orgUnitId?: string;
     selectedTemplateId?: string;
     onChangeTemplate?: (selectedTemplateId?: string) => void;
-    onOpenBulkDataEntryPlugin: (trackedEntities: string[]) => void;
+    onOpenBulkDataEntryPlugin?: (trackedEntities?: string[]) => void;
 };
 
 export type TrackerWorkingListsReduxOutputProps = {
@@ -92,4 +92,5 @@ export type TrackerWorkingListsReduxOutputProps = {
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void
+    onOpenBulkDataEntryPlugin: (trackedEntities?: string[]) => void;
 };

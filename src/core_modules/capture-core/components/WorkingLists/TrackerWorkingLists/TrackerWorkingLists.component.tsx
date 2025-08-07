@@ -17,9 +17,7 @@ const styles = {
     },
 };
 
-type OwnProps = Omit<Props, keyof WithStyles<typeof styles>>;
-
-const TrackerWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Props) => (
+const TrackerWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Props & WithStyles<typeof styles>) => (
     <div className={listContainer} data-test="tracker-working-lists">
         <TrackerWorkingListsReduxProvider
             storeId={TRACKER_WORKING_LISTS_STORE_ID}
@@ -28,4 +26,4 @@ const TrackerWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }
     </div>
 );
 
-export const TrackerWorkingLists = withStyles(styles)(TrackerWorkingListsPlain) as ComponentType<OwnProps>;
+export const TrackerWorkingLists = withStyles(styles)(TrackerWorkingListsPlain) as ComponentType<Props>;

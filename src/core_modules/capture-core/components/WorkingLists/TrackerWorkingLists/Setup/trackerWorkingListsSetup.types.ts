@@ -1,5 +1,4 @@
 import type { TrackerProgram } from '../../../../metaData';
-import type { TrackerWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type {
     CustomColumnOrder,
     RecordsOrder,
@@ -11,7 +10,7 @@ import type {
 } from '../../WorkingListsCommon';
 import type { FiltersData, WorkingListTemplates, SetTemplateSharingSettings } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
-import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup/trackerWorkingListsViewMenuSetup.types';
+import type { TrackerWorkingListsTopBarActionsSetupOutputProps } from '../ActionsSetup';
 
 type ExtractedProps = Readonly<{
     customColumnOrder?: CustomColumnOrder,
@@ -34,6 +33,6 @@ type ExtractedProps = Readonly<{
     forceUpdateOnMount?: boolean,
 }>;
 
-export type Props = Readonly<TrackerWorkingListsViewMenuSetupOutputProps & ExtractedProps>;
+export type Props = Readonly<TrackerWorkingListsTopBarActionsSetupOutputProps & ExtractedProps>;
 
-export type TrackerWorkingListsSetupOutputProps = Readonly<TrackerWorkingListsReduxOutputProps & ExtractedProps>;
+// export type TrackerWorkingListsSetupOutputProps = Readonly<TrackerWorkingListsReduxOutputProps & ExtractedProps>;

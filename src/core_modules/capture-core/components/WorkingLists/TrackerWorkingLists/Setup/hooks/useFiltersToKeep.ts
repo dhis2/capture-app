@@ -4,7 +4,7 @@ import type { FiltersOnly } from '../../../../ListView';
 
 export const useFiltersToKeep = (
     columns: TrackerWorkingListsColumnConfigs,
-    filters: Object,
+    filters: any,
     filtersOnly: FiltersOnly,
     programStageFiltersOnly: FiltersOnly,
 ) =>

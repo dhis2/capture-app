@@ -1,7 +1,7 @@
-import type { TrackerWorkingListsTopBarActionsSetupOutputProps } from '../ActionsSetup';
+import type { ReactElement } from 'react';
+import type { TrackerWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type { UpdateList } from '../../WorkingListsCommon';
 import type { LoadTeiView } from '../types';
-import type { ReactElement } from 'react';
 
 type ExtractedProps = Readonly<{
     onLoadView: LoadTeiView,
@@ -9,13 +9,11 @@ type ExtractedProps = Readonly<{
     storeId: string,
 }>;
 
-export type Props = TrackerWorkingListsTopBarActionsSetupOutputProps & ExtractedProps & {
-    programStageId?: string;
-    orgUnitId: string;
-    records?: any;
-};
+type RestProps = Omit<TrackerWorkingListsReduxOutputProps, keyof ExtractedProps>;
 
-export type TrackerWorkingListsViewMenuSetupOutputProps = TrackerWorkingListsTopBarActionsSetupOutputProps & {
+export type Props = RestProps & ExtractedProps;
+
+export type TrackerWorkingListsViewMenuSetupOutputProps = RestProps & {
     onLoadView: LoadTeiView,
     onUpdateList: UpdateList
     customUpdateTrigger?: string,
@@ -26,3 +24,4 @@ export type TrackerWorkingListsViewMenuSetupOutputProps = TrackerWorkingListsTop
     selectionInProgress: boolean,
     bulkActionBarComponent: ReactElement<any>,
 };
+

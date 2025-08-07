@@ -16,13 +16,12 @@ export const useInjectDataFetchingMetaToLoadList = (
     onLoadView: LoadTeiView,
 ) =>
     useCallback(
-        (selectedTemplate: Object, context: Object) => {
+        (selectedTemplate: any, context: any) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
-                    // $FlowFixMe Destructuring of union types is not handled properly by Flow.
                     const { id, type, visible, apiViewName, unique } = defaultColumn;
-                    const mainProperty = (defaultColumn as any).mainProperty && typeof (defaultColumn as any).mainProperty === 'boolean'
-                        ? (defaultColumn as any).mainProperty
+                    const mainProperty = 'mainProperty' in defaultColumn && defaultColumn.mainProperty && typeof (defaultColumn as any).mainProperty === 'boolean'
+                        ? defaultColumn.mainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn
                         ? defaultColumn.additionalColumn
@@ -55,7 +54,7 @@ export const useInjectDataFetchingMetaToLoadList = (
                 transformFiltersOnly.concat(transformProgramStageFiltersOnly) as any,
             );
 
-            onLoadView(selectedTemplate as any, context as any, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
+            onLoadView(selectedTemplate, context, { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching });
         },
         [defaultColumns, filtersOnly, programStageFiltersOnly, onLoadView],
     );
@@ -67,12 +66,12 @@ export const useInjectDataFetchingMetaToUpdateList = (
     onUpdateList: UpdateList,
 ) =>
     useCallback(
-        (queryArgs: Object) => {
+        (queryArgs: any) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     const { id, type, visible, unique } = defaultColumn;
-                    const mainProperty = (defaultColumn as any).mainProperty && typeof (defaultColumn as any).mainProperty === 'boolean'
-                        ? (defaultColumn as any).mainProperty
+                    const mainProperty = 'mainProperty' in defaultColumn && defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
+                        ? defaultColumn.mainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn
                         ? defaultColumn.additionalColumn

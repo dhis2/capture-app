@@ -60,7 +60,7 @@ export const TrackerWorkingListsReduxProvider = ({
         }
     }, [selectedTemplateId, viewPreloaded, currentTemplateId, onSelectTemplate]);
 
-    const onClickListRow = useCallback(({ id }: { id: string }) => {
+    const onClickListRow = useCallback(({ id }: any) => {
         const record = records[id];
         const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwnerId;
 
@@ -112,19 +112,14 @@ export const TrackerWorkingListsReduxProvider = ({
             program={program}
             programStageId={programStage}
             records={records}
-            orgUnitId={orgUnitId || ''}
+            orgUnitId={orgUnitId}
             apiTemplates={apiTemplates}
+            onSelectTemplate={handleOnSelectTemplate}
             onPreserveCurrentViewState={handlePreserveCurrentViewState}
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
             storeId={storeId}
             onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
-            selectionInProgress={false}
-            allRowsAreSelected={false}
-            selectedRows={{}}
-            onRowSelect={() => {}}
-            onSelectAll={() => {}}
-            bulkActionBarComponent={<div />}
         />
     );
 };
