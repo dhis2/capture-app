@@ -1,6 +1,4 @@
-// @flow
 import type { TrackerProgram } from '../../../../metaData';
-import type { TrackerWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type {
     CustomColumnOrder,
     RecordsOrder,
@@ -12,9 +10,9 @@ import type {
 } from '../../WorkingListsCommon';
 import type { FiltersData, WorkingListTemplates, SetTemplateSharingSettings } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
-import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup/trackerWorkingListsViewMenuSetup.types';
+import type { TrackerWorkingListsTopBarActionsSetupOutputProps } from '../ActionsSetup';
 
-type ExtractedProps = $ReadOnly<{|
+type ExtractedProps = Readonly<{
     customColumnOrder?: CustomColumnOrder,
     onLoadView: LoadTeiView,
     onAddTemplate: AddTemplate,
@@ -33,14 +31,8 @@ type ExtractedProps = $ReadOnly<{|
     templateSharingType: string,
     apiTemplates: WorkingListTemplates,
     forceUpdateOnMount?: boolean,
-|}>;
+}>;
 
-export type Props = $ReadOnly<{|
-    ...TrackerWorkingListsViewMenuSetupOutputProps,
-    ...ExtractedProps,
-|}>;
+type RestProps = Omit<TrackerWorkingListsTopBarActionsSetupOutputProps, keyof ExtractedProps>;
 
-export type TrackerWorkingListsSetupOutputProps = $ReadOnly<{|
-    ...TrackerWorkingListsReduxOutputProps,
-    ...ExtractedProps,
-|}>;
+export type Props = RestProps & ExtractedProps;

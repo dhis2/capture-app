@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
@@ -11,7 +10,7 @@ export const useFiltersOnly = (
 ) =>
     useMemo(() => {
         const enableUserAssignment =
-            !programStageId && Array.from(stages.values()).find(stage => stage.enableUserAssignment);
+            !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);
         return [
             {
                 id: MAIN_FILTERS.PROGRAM_STATUS,
@@ -35,7 +34,7 @@ export const useFiltersOnly = (
                 type: dataElementTypes.DATE,
                 header: enrollmentDateLabel,
                 transformRecordsFilter: (filter: string) => {
-                    const queryArgs = {};
+                    const queryArgs: any = {};
                     const filterParts = filter.split(':');
                     const indexGe = filterParts.indexOf('ge');
                     const indexLe = filterParts.indexOf('le');
@@ -55,7 +54,7 @@ export const useFiltersOnly = (
                         type: dataElementTypes.DATE,
                         header: incidentDateLabel,
                         transformRecordsFilter: (filter: string) => {
-                            const queryArgs = {};
+                            const queryArgs: any = {};
                             const filterParts = filter.split(':');
                             const indexGe = filterParts.indexOf('ge');
                             const indexLe = filterParts.indexOf('le');
@@ -86,7 +85,7 @@ export const useFiltersOnly = (
                         id: MAIN_FILTERS.ASSIGNEE,
                         type: dataElementTypes.ASSIGNEE,
                         header: i18n.t('Assigned to'),
-                        transformRecordsFilter: (rawFilter: Object) => {
+                        transformRecordsFilter: (rawFilter: any) => {
                             const { assignedUserMode } = rawFilter;
                             const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
                                 ? 'assignedUsers'

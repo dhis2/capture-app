@@ -1,4 +1,3 @@
-// @flow
 import { buildFilterQueryArgs } from '../../WorkingListsCommon';
 import { createApiTrackedEntitiesQueryArgs } from '../epics';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
@@ -10,19 +9,19 @@ export const computeDownloadRequest = ({
     filtersOnlyMetaForDataFetching,
 }: {
     clientConfig: {
-        currentPage: number,
-        rowsPerPage: number,
-        sortById: string,
-        sortByDirection: string,
-        filters: Object,
-    },
+        currentPage: number;
+        rowsPerPage: number;
+        sortById: string;
+        sortByDirection: string;
+        filters: any;
+    };
     context: {
-        programId: string,
-        orgUnitId: string,
-        storeId: string,
-    },
-    meta: { columnsMetaForDataFetching: TeiColumnsMetaForDataFetching },
-    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
+        programId: string;
+        orgUnitId: string;
+        storeId: string;
+    };
+    meta: { columnsMetaForDataFetching: TeiColumnsMetaForDataFetching };
+    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching;
 }) => {
     const apiFilters = buildFilterQueryArgs(filters, {
         columns: columnsMetaForDataFetching,

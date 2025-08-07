@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
@@ -90,7 +89,7 @@ const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     return getDataValuesMetaDataConfig(dataElements);
 };
 
-const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): Array<MetadataColumnConfig> =>
+const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
     attributes.map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique }) => ({
         id,
         visible: displayInReports,
@@ -115,8 +114,8 @@ const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> 
 
 export const useDefaultColumnConfig = (
     program: TrackerProgram,
-    orgUnitId: ?string,
-    programStageId: ?string,
+    orgUnitId: string | null | undefined,
+    programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs =>
     useMemo(() => {
         const { attributes, stages } = program;

@@ -10,11 +10,11 @@ type BaseProps = {
     programDataWriteAccess: boolean,
     onUpdateList: () => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
-    onOpenBulkDataEntryPlugin: (trackedEntityIds: Array<string>) => void,
+    onOpenBulkDataEntryPlugin?: (trackedEntityIds: Array<string>) => void,
 };
 
 export type Props = BaseProps & {
-    onOpenBulkDataEntryPlugin: () => void,
+    onOpenBulkDataEntryPlugin?: () => void,
     bulkDataEntryIsActive: boolean,
 };
 

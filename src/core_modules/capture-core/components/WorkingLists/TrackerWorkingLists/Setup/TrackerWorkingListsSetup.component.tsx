@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import type { Props } from './trackerWorkingListsSetup.types';
 import { WorkingListsBase } from '../../WorkingListsBase';
@@ -22,13 +21,19 @@ const shouldPreserveViewState = ({
     defaultTemplateId,
     programStageId,
     prevProgramStageId,
+}: {
+    currentTemplateId?: string;
+    prevTemplateId: React.MutableRefObject<string | undefined>;
+    defaultTemplateId: string;
+    programStageId?: string;
+    prevProgramStageId: React.MutableRefObject<string | undefined>;
 }) =>
     currentTemplateId !== defaultTemplateId &&
     currentTemplateId === prevTemplateId.current &&
     ((programStageId && prevProgramStageId.current === undefined) ||
         (programStageId === undefined && prevProgramStageId.current));
 
-const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
+const useCurrentTemplate = (templates: any[], currentTemplateId?: string) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
 
@@ -128,7 +133,7 @@ export const TrackerWorkingListsSetup = ({
     ]);
 
     const injectArgumentsForAddTemplate = useCallback(
-        (name) => {
+        (name: string) => {
             const { criteria, data } = buildArgumentsForTemplate({
                 filters,
                 filtersOnly,
@@ -155,7 +160,7 @@ export const TrackerWorkingListsSetup = ({
     );
 
     const injectArgumentsForUpdateTemplate = useCallback(
-        (template) => {
+        (template: any) => {
             const { criteria, data } = buildArgumentsForTemplate({
                 filters,
                 filtersOnly,
@@ -182,7 +187,7 @@ export const TrackerWorkingListsSetup = ({
     );
 
     const injectArgumentsForDeleteTemplate = useCallback(
-        template => onDeleteTemplate(template, program.id, programStageId),
+        (template: any) => onDeleteTemplate(template, program.id, programStageId),
         [onDeleteTemplate, program.id, programStageId],
     );
 

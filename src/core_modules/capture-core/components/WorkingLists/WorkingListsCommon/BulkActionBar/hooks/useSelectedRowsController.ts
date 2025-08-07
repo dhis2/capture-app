@@ -7,8 +7,8 @@ type Props = {
 export const useSelectedRowsController = ({ recordIds }: Props) => {
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
-    const allRowsAreSelected = useMemo(
-        () => recordIds && recordIds.length > 0 && recordIds.every(rowId => selectedRows[rowId]),
+    const allRowsAreSelected: boolean = useMemo(
+        () => Boolean(recordIds && recordIds.length > 0 && recordIds.every(rowId => selectedRows[rowId])),
         [recordIds, selectedRows]);
 
     const toggleRowSelected = useCallback((rowId: string) => {

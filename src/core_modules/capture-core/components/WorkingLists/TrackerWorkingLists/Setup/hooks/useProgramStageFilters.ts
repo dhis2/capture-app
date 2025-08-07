@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
@@ -63,7 +62,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                     interpolation: { escapeValue: false },
                 }),
                 transformRecordsFilter: (filter: string) => {
-                    const queryArgs = {};
+                    const queryArgs: any = {};
                     const filterParts = filter.split(':');
                     const indexGe = filterParts.indexOf('ge');
                     const indexLe = filterParts.indexOf('le');
@@ -108,7 +107,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                             interpolation: { escapeValue: false },
                         }),
                         transformRecordsFilter: (filter: string) => {
-                            const queryArgs = {};
+                            const queryArgs: any = {};
                             const filterParts = filter.split(':');
                             const indexGe = filterParts.indexOf('ge');
                             const indexLe = filterParts.indexOf('le');
@@ -129,7 +128,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                         id: ADDITIONAL_FILTERS.assignedUser,
                         type: dataElementTypes.ASSIGNEE,
                         header: ADDITIONAL_FILTERS_LABELS.assignee,
-                        transformRecordsFilter: (rawFilter: Object) => {
+                        transformRecordsFilter: (rawFilter: any) => {
                             const { assignedUserMode } = rawFilter;
                             const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
                                 ? 'assignedUsers'

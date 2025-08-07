@@ -123,7 +123,7 @@ export type ListViewLoaderContextData = {
     loadViewError?: string,
     onUpdateList: UpdateList,
     onCancelLoadView?: CancelLoadView,
-    orgUnitId: string,
+    orgUnitId?: string,
     categories?: Categories,
     dirtyView: boolean,
     loadedViewContext: LoadedViewContext,
@@ -161,7 +161,7 @@ export type ListViewBuilderContextData = {
     onSelectAll: (rows: Array<string>) => void,
     selectedRows: { [key: string]: boolean },
     selectionInProgress?: boolean,
-    allRowsAreSelected?: boolean,
+    allRowsAreSelected: boolean,
     bulkActionBarComponent: ReactElement<any>,
 };
 
@@ -221,7 +221,7 @@ export type InterfaceProps = Readonly<{
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
     onUpdateTemplate?: UpdateTemplate,
-    orgUnitId: string,
+    orgUnitId?: string,
     programId: string,
     rowIdKey: string,
     rowsPerPage?: number,

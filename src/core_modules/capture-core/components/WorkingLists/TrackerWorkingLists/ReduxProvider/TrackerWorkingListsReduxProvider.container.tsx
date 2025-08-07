@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +11,7 @@ import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
 import { getDefaultTemplate } from '../helpers';
 
 const useApiTemplate = () => {
-    const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
+    const workingListsTemplatesTEI = useSelector(({ workingListsTemplates }: any) => workingListsTemplates.teiList);
     return workingListsTemplatesTEI && workingListsTemplatesTEI.templates;
 };
 
@@ -52,7 +51,6 @@ export const TrackerWorkingListsReduxProvider = ({
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
     useEffect(() => {
-        // This hook should only fire when you navigate from the search page to the main page with a working list selected
         if (selectedTemplateId &&
             selectedTemplateId !== currentTemplateId &&
             !viewPreloaded &&
@@ -62,7 +60,7 @@ export const TrackerWorkingListsReduxProvider = ({
         }
     }, [selectedTemplateId, viewPreloaded, currentTemplateId, onSelectTemplate]);
 
-    const onClickListRow = useCallback(({ id }) => {
+    const onClickListRow = useCallback(({ id }: any) => {
         const record = records[id];
         const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwnerId;
 
@@ -77,24 +75,24 @@ export const TrackerWorkingListsReduxProvider = ({
             }));
     }, [dispatch, orgUnitId, programId, records, programStage, navigate]);
 
-    const handlePreserveCurrentViewState = useCallback((templateId, criteria) => {
+    const handlePreserveCurrentViewState = useCallback((templateId: string, criteria: any) => {
         onUpdateDefaultTemplate({ ...defaultTemplate, criteria, isAltered: true });
         onSelectTemplate(templateId, criteria?.programStage);
         templateId && onChangeTemplate && onChangeTemplate(templateId);
     }, [onChangeTemplate, onSelectTemplate, onUpdateDefaultTemplate, defaultTemplate]);
 
-    const handleOnSelectTemplate = useCallback((templateId) => {
+    const handleOnSelectTemplate = useCallback((templateId: string) => {
         onUpdateDefaultTemplate(defaultTemplate);
         onSelectTemplate(templateId);
         templateId && onChangeTemplate && onChangeTemplate(templateId);
     }, [onChangeTemplate, onSelectTemplate, onUpdateDefaultTemplate, defaultTemplate]);
 
-    const injectCallbacksForAddTemplate = useCallback((name: string, criteria: Object, data: Object) =>
+    const injectCallbacksForAddTemplate = useCallback((name: string, criteria: any, data: any) =>
         onAddTemplate(name, criteria, data, { onChangeTemplate }),
     [onAddTemplate, onChangeTemplate]);
 
     const injectCallbacksForDeleteTemplate = useCallback(
-        (template: Object, programIdArg: string, programStageArg?: string) =>
+        (template: any, programIdArg: string, programStageArg?: string) =>
             onDeleteTemplate(template, programIdArg, programStageArg, { onChangeTemplate }),
         [onDeleteTemplate, onChangeTemplate],
     );

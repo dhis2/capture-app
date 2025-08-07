@@ -1,6 +1,6 @@
 import type { FiltersData, Categories } from '../../WorkingListsBase';
 
-export type Callbacks = { callBacks?: { onChangeTemplate?: (selectedTemplateId?: string) => void };}
+export type Callbacks = { onChangeTemplate?: (selectedTemplateId?: string) => void };
 
 export type RecordsOrder = Array<string>;
 

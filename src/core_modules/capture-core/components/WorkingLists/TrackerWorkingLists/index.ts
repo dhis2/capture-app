@@ -1,4 +1,3 @@
-// @flow
 export { TrackerWorkingLists } from './TrackerWorkingLists.component';
 export {
     initTeiViewEpic,

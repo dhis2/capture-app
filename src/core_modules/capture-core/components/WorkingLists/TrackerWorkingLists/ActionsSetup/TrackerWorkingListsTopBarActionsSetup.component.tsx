@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { TrackerWorkingListsSetup } from '../Setup';
 import type { CustomTopBarActions } from '../../WorkingListsBase';
@@ -20,7 +19,7 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
                     <BulkDataEntryAction
                         key="bulkDataEntryAction"
                         programId={program?.id}
-                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin(recordsOrder)}
+                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin && onOpenBulkDataEntryPlugin(recordsOrder)}
                         selectionInProgress={selectionInProgress}
                     />
                 ),
