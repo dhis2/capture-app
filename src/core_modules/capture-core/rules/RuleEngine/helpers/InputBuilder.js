@@ -256,7 +256,7 @@ export class InputBuilder {
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
-            .filter(key => eventData[key] ?? false)
+            .filter(key => (eventData[key] ?? null) !== null)
             .map(key =>
                 new RuleDataValue(
                     key,
@@ -340,7 +340,7 @@ export class InputBuilder {
 
         const attributeValues = selectedEntity ? Object
             .keys(selectedEntity)
-            .filter(key => selectedEntity[key] ?? false)
+            .filter(key => (selectedEntity[key] ?? null) !== null)
             .map(key => new RuleAttributeValue(
                 key,
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
