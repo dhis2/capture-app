@@ -48,7 +48,7 @@ export type Props = {
     onOpenBulkDataEntryPlugin?: (trackedEntities?: string[]) => void,
 };
 
-export type TrackerWorkingListsReduxOutputProps = {
+export type TrackerWorkingListsReduxProviderOutputProps = {
     categories?: Categories,
     currentPage?: number,
     currentTemplateId?: string,

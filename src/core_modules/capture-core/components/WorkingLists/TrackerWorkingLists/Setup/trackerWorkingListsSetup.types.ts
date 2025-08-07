@@ -33,4 +33,6 @@ type ExtractedProps = Readonly<{
     forceUpdateOnMount?: boolean,
 }>;
 
-export type Props = Readonly<TrackerWorkingListsTopBarActionsSetupOutputProps & ExtractedProps>;
+type RestProps = Omit<TrackerWorkingListsTopBarActionsSetupOutputProps, keyof ExtractedProps>;
+
+export type Props = RestProps & ExtractedProps;

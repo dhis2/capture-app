@@ -17,7 +17,7 @@ export type InitialViewConfigComputed = {
 };
 
 export type CurrentViewConfig = {
-    filters: FiltersData,
+    filters?: FiltersData,
     columns: Columns,
     sortById: string,
     sortByDirection: string,
@@ -26,7 +26,7 @@ export type CurrentViewConfig = {
 export type Input = {
     initialViewConfig?: InitialViewConfig,
     defaultColumns: Columns,
-    filters: FiltersData,
+    filters?: FiltersData,
     columns: Columns,
     sortById: string,
     sortByDirection: string,

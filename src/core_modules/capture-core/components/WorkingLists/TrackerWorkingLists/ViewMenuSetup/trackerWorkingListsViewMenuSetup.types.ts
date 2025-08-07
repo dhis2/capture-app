@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { TrackerWorkingListsReduxOutputProps } from '../ReduxProvider';
+import type { TrackerWorkingListsReduxProviderOutputProps } from '../ReduxProvider';
 import type { UpdateList } from '../../WorkingListsCommon';
 import type { LoadTeiView } from '../types';
 
@@ -9,7 +9,7 @@ type ExtractedProps = {
     storeId: string,
 };
 
-type RestProps = Omit<TrackerWorkingListsReduxOutputProps, keyof ExtractedProps>;
+type RestProps = Omit<TrackerWorkingListsReduxProviderOutputProps, keyof ExtractedProps>;
 
 export type Props = RestProps & ExtractedProps;
 

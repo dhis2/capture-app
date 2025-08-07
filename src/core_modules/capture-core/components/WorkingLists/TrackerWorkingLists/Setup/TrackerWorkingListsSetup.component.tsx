@@ -78,7 +78,7 @@ export const TrackerWorkingListsSetup = ({
     const viewHasChanges = useViewHasTemplateChanges({
         initialViewConfig,
         defaultColumns,
-        filters: filters || {},
+        filters,
         columns,
         sortById,
         sortByDirection,

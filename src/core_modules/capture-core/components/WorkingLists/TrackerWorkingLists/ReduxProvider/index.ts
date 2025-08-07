@@ -1,2 +1,2 @@
 export { TrackerWorkingListsReduxProvider } from './TrackerWorkingListsReduxProvider.container';
-export type { TrackerWorkingListsReduxOutputProps } from './trackerWorkingListsReduxProvider.types';
+export type { TrackerWorkingListsReduxProviderOutputProps } from './trackerWorkingListsReduxProvider.types';
