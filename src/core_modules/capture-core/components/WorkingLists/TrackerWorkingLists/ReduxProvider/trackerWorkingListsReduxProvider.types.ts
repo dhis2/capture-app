@@ -25,22 +25,27 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
+    WorkingListTemplates,
+    SetTemplateSharingSettings,
 } from '../../WorkingListsBase';
 import type {
     CustomColumnOrder,
     RecordsOrder,
     UpdateList,
     InitialViewConfig,
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
 } from '../../WorkingListsCommon';
 import type { TrackerWorkingListsTemplates, TeiRecords, ApiTrackerQueryCriteria } from '../types';
 
 export type Props = {
-    storeId: string;
-    programId: string;
-    orgUnitId?: string;
-    selectedTemplateId?: string;
-    onChangeTemplate?: (selectedTemplateId?: string) => void;
-    onOpenBulkDataEntryPlugin?: (trackedEntities?: string[]) => void;
+    storeId: string,
+    programId: string,
+    orgUnitId?: string,
+    selectedTemplateId?: string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
+    onOpenBulkDataEntryPlugin?: (trackedEntities?: string[]) => void,
 };
 
 export type TrackerWorkingListsReduxOutputProps = {
@@ -53,7 +58,7 @@ export type TrackerWorkingListsReduxOutputProps = {
     customRowMenuContents?: CustomRowMenuContents,
     customTopBarActions?: CustomTopBarActions,
     filters?: FiltersData,
-    initialViewConfig?: InitialViewConfig,
+    initialViewConfig: InitialViewConfig,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
@@ -77,14 +82,14 @@ export type TrackerWorkingListsReduxOutputProps = {
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
-    orgUnitId: string,
+    orgUnitId?: string,
     program: TrackerProgram,
     programStageId?: string,
     records?: TeiRecords,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
-    sortByDirection?: string,
-    sortById?: string,
+    sortByDirection: string,
+    sortById: string,
     stickyFilters?: StickyFilters,
     templates?: TrackerWorkingListsTemplates,
     templatesLoading: boolean,
@@ -92,5 +97,12 @@ export type TrackerWorkingListsReduxOutputProps = {
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void
-    onOpenBulkDataEntryPlugin: (trackedEntities?: string[]) => void;
+    onOpenBulkDataEntryPlugin?: (trackedEntities?: string[]) => void;
+    forceUpdateOnMount?: boolean,
+    templateSharingType: string,
+    apiTemplates: WorkingListTemplates,
+    onAddTemplate: AddTemplate,
+    onDeleteTemplate: DeleteTemplate,
+    onUpdateTemplate: UpdateTemplate,
+    onSetTemplateSharingSettings: SetTemplateSharingSettings,
 };

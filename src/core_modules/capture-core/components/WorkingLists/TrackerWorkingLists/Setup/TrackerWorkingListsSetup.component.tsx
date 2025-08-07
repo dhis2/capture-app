@@ -203,24 +203,24 @@ export const TrackerWorkingListsSetup = ({
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
             filtersOnly={filtersOnly}
-            additionalFilters={programStageFiltersOnly as any}
+            additionalFilters={programStageFiltersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectDataFetchingMetaToLoadList(
                 defaultColumns,
                 filtersOnly,
-                programStageFiltersOnly as any,
+                programStageFiltersOnly,
                 onLoadView,
             )}
             onUpdateList={useInjectDataFetchingMetaToUpdateList(
                 defaultColumns,
                 filtersOnly,
-                programStageFiltersOnly as any,
+                programStageFiltersOnly,
                 onUpdateList,
             )}
             programId={program.id}
             programStageId={programStageId}
             rowIdKey="id"
-            orgUnitId={orgUnitId || ''}
+            orgUnitId={orgUnitId}
             currentViewHasTemplateChanges={viewHasChanges}
             filters={filters}
             sortById={sortById}

@@ -25,7 +25,7 @@ export type FilterOnly = {
     tooltipContent?: string;
     disabled?: boolean;
     showInMoreFilters?: boolean;
-    transformRecordsFilter: (rawFilter: any) => Record<string, unknown>;
+    transformRecordsFilter: (rawFilter: any) => any;
 };
 
 export type AdditionalFilter = FilterOnly & {
@@ -122,7 +122,7 @@ export type InterfaceProps = {
     programStageId?: string;
     selectedRows: { [key: string]: boolean };
     onSelectAll: (rows: Array<string>) => void;
-    allRowsAreSelected?: boolean;
+    allRowsAreSelected: boolean;
     selectionInProgress?: boolean;
     bulkActionBarComponent: ReactElement<any>;
 };

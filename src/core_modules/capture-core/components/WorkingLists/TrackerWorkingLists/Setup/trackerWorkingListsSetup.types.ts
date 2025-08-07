@@ -34,5 +34,3 @@ type ExtractedProps = Readonly<{
 }>;
 
 export type Props = Readonly<TrackerWorkingListsTopBarActionsSetupOutputProps & ExtractedProps>;
-
-// export type TrackerWorkingListsSetupOutputProps = Readonly<TrackerWorkingListsReduxOutputProps & ExtractedProps>;

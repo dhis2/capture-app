@@ -17,7 +17,7 @@ export type EventWorkingListsViewMenuSetupOutputProps = RestProps & {
     programId: string,
     programStageId: string,
     customListViewMenuContents: CustomMenuContents,
-    allRowsAreSelected?: boolean,
+    allRowsAreSelected: boolean,
     customUpdateTrigger?: string | null,
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,

@@ -21,7 +21,7 @@ export type Props = Readonly<{
     loadViewError?: string,
     onUpdateList: UpdateList,
     onCancelLoadView?: CancelLoadView,
-    orgUnitId: string,
+    orgUnitId?: string,
     categories?: Categories,
     dirtyView: boolean,
     loadedViewContext: LoadedViewContext,

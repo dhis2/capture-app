@@ -3,11 +3,11 @@ import type { TrackerWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type { UpdateList } from '../../WorkingListsCommon';
 import type { LoadTeiView } from '../types';
 
-type ExtractedProps = Readonly<{
+type ExtractedProps = {
     onLoadView: LoadTeiView,
     onUpdateList: UpdateList,
     storeId: string,
-}>;
+};
 
 type RestProps = Omit<TrackerWorkingListsReduxOutputProps, keyof ExtractedProps>;
 

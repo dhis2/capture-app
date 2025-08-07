@@ -13,8 +13,7 @@ export const useFiltersToKeep = (
             const filtersListToKeep = [
                 ...columns,
                 ...filtersOnly,
-                // $FlowFixMe[prop-missing]
-                ...programStageFiltersOnly.filter((filterOnly: any) => filterOnly.mainButton),
+                ...programStageFiltersOnly.filter(filterOnly => 'mainButton' in filterOnly && filterOnly.mainButton),
             ].map(({ id }) => id);
 
             const filtersObjectToKeep = Object.entries(filters).reduce(

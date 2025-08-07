@@ -19,7 +19,7 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
                     <BulkDataEntryAction
                         key="bulkDataEntryAction"
                         programId={program?.id}
-                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin(recordsOrder)}
+                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin && onOpenBulkDataEntryPlugin(recordsOrder)}
                         selectionInProgress={selectionInProgress}
                     />
                 ),

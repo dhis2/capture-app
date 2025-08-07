@@ -88,12 +88,12 @@ export const TrackerWorkingListsReduxProvider = ({
     }, [onChangeTemplate, onSelectTemplate, onUpdateDefaultTemplate, defaultTemplate]);
 
     const injectCallbacksForAddTemplate = useCallback((name: string, criteria: any, data: any) =>
-        onAddTemplate(name, criteria, data, { onChangeTemplate } as any),
+        onAddTemplate(name, criteria, data, { onChangeTemplate }),
     [onAddTemplate, onChangeTemplate]);
 
     const injectCallbacksForDeleteTemplate = useCallback(
         (template: any, programIdArg: string, programStageArg?: string) =>
-            onDeleteTemplate(template, programIdArg, programStageArg, { onChangeTemplate } as any),
+            onDeleteTemplate(template, programIdArg, programStageArg, { onChangeTemplate }),
         [onDeleteTemplate, onChangeTemplate],
     );
     const templateSharingType = programStage
