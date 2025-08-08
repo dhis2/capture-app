@@ -1,5 +1,5 @@
 // @flow
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type {
@@ -85,17 +85,17 @@ export const useLifecycle = ({
         };
     }, [dispatch, formValues, formGeometryValues, dataEntryId, itemId]);
 
-    const [awaitingInitialRulesExecution, setAwaitingInitialRulesExecution] = useState(true);
+    const awaitingInitialRulesExecution = useRef(true);
     useEffect(() => {
         if (
-            awaitingInitialRulesExecution &&
+            awaitingInitialRulesExecution.current &&
             orgUnit &&
             Object.entries(orgUnit).length > 0 &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
-            setAwaitingInitialRulesExecution(false);
+            awaitingInitialRulesExecution.current = false;
             getRulesActionsForTEIAsync({
                 foundation: formFoundation,
                 formId: `${dataEntryId}-${itemId}`,
