@@ -135,7 +135,6 @@ export const useLifecycle = ({
         querySingleResource,
         onGetValidationContext,
         awaitingInitialRulesExecution,
-        setAwaitingInitialRulesExecution,
     ]);
 
     return {
