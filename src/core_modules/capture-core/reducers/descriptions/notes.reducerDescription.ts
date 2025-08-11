@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux';
 import {
     actionTypes as notesActionTypes,

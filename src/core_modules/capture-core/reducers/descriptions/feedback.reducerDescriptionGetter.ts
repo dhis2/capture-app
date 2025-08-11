@@ -1,5 +1,4 @@
-// @flow
-import type { Node } from 'react';
+import type { ReactNode } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import isString from 'd2-utilizr/lib/isString';
@@ -38,11 +37,11 @@ const alertVariants = {
 
 type ErrorFeedbackInput = {
     message: string,
-    variant?: $Keys<typeof alertVariants>,
-    action?: Node,
+    variant?: keyof typeof alertVariants,
+    action?: ReactNode,
 };
 
-function addErrorFeedback(state: ReduxState, { message, variant = alertVariants.critical, action }: ErrorFeedbackInput) {
+function addErrorFeedback(state: any, { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput) {
     return [
         ...state,
         {
@@ -54,7 +53,7 @@ function addErrorFeedback(state: ReduxState, { message, variant = alertVariants.
     ];
 }
 
-function getErrorFeedback({ message, variant = alertVariants.critical, action }: ErrorFeedbackInput) {
+function getErrorFeedback({ message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput) {
     return {
         message,
         action,

@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventPageUrlActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 

@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import { workingListsCommonActionTypes } from '../../../components/WorkingLists/WorkingListsCommon';

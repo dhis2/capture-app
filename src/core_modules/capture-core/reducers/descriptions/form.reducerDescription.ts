@@ -1,4 +1,3 @@
-// @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { AssignOutputEffectWithValidations } from '../../rules';
 import { createReducerDescription } from '../../trackerRedux';
@@ -17,7 +16,6 @@ const removeFormData = (state, { payload: { formId } }) => {
     return remainingKeys.reduce((acc, key) => ({ ...acc, [key]: state[key] }), {});
 };
 
-// cleans up data entries that _start with_ dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
         (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),

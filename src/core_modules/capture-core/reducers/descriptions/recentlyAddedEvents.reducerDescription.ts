@@ -1,5 +1,3 @@
-// @flow
-
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import {
     recentlyAddedEventsActionTypes,

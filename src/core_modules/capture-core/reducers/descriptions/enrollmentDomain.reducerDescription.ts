@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 import { actionTypes as enrollmentNoteActionTypes }

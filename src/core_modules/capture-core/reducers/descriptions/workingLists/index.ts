@@ -1,4 +1,3 @@
-// @flow
 export { workingListsMetaDesc } from './meta/meta.reducerDescription';
 export {
     workingListsListRecordsDesc,
