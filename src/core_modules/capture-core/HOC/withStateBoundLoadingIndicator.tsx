@@ -8,7 +8,7 @@ type Props = {
     InnerComponent: React.ComponentType<any>;
 };
 
-const getLoadingIndicator = (getContainerStylesFn?: ((props: any) => any) | null | undefined, fullPage?: boolean | null | undefined) => (props: Props) => {
+const getLoadingIndicator = (getContainerStylesFn?: ((props: any) => any) | null, fullPage?: boolean | null) => (props: Props) => {
     const { ready, InnerComponent, ...other } = props;
 
     if (!ready) {

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 type Props = {
-    [key: string]: any;
 };
 
 export const withTransformPropName =

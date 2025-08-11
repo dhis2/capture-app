@@ -4,7 +4,6 @@ import { LoadingMaskElementCenter } from '../components/LoadingMasks';
 
 type Props = {
     ready?: boolean | null | undefined;
-    [key: string]: any;
 };
 
 export const withLoadingIndicator =
