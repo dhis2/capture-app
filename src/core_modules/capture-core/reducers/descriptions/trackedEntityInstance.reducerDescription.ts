@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { dataEntryActionTypes } from '../../components/WidgetProfile/DataEntry';
 

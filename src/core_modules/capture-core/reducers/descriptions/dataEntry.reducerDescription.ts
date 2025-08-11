@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
 import {
@@ -9,7 +8,6 @@ import {
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 
-// cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
         (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),

@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes } from '../../components/NetworkStatusBadge/NetworkStatusBadge.actions';
 

@@ -1,4 +1,3 @@
-// @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
@@ -23,7 +22,7 @@ import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewE
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
 const setCategoryOption = (
-    state: Object,
+    state: any,
     categoryId: string,
     categoryOption: { id: string, name: string, writeAccess: boolean }) => {
     const categories = {
@@ -55,7 +54,7 @@ const deleteKeyFromObject = (key, object) =>
         return acc;
     }, {});
 
-const resetCategoryOption = (state: Object, categoryId: string) => {
+const resetCategoryOption = (state: any, categoryId: string) => {
     const { categoriesMeta, categories } = state;
 
     const newCategories = deleteKeyFromObject(categoryId, categories);

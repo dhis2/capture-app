@@ -1,4 +1,3 @@
-// @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { AssignOutputEffectWithValidations } from '../../rules';
 import { createReducerDescription } from '../../trackerRedux';
@@ -17,7 +16,6 @@ const removeFormData = (state, { payload: { formId } }) => {
     return remainingKeys.reduce((acc, key) => ({ ...acc, [key]: state[key] }), {});
 };
 
-// cleans up data entries that _start with_ dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
         (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),
@@ -36,9 +34,8 @@ export const formsValuesDesc = createReducerDescription({
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        // todo (eslint)
-        // eslint-disable-next-line no-multi-assign
-        const formValues = newState[payload.formId] = { ...newState[payload.formId] };
+        newState[payload.formId] = { ...newState[payload.formId] };
+        const formValues = newState[payload.formId];
         formValues[payload.elementId] = payload.value;
         return newState;
     },
@@ -55,9 +52,8 @@ export const formsValuesDesc = createReducerDescription({
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        // todo (eslint)
-        // eslint-disable-next-line no-multi-assign
-        const formValues = newState[payload.formId] = { ...newState[payload.formId] };
+        newState[payload.formId] = { ...newState[payload.formId] };
+        const formValues = newState[payload.formId];
         formValues[payload.elementId] = payload.value;
         return newState;
     },
