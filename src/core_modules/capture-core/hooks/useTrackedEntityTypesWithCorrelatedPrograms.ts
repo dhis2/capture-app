@@ -1,25 +1,27 @@
-// @flow
 import { useMemo } from 'react';
 import { programCollection } from '../metaDataMemoryStores';
 import { type Access, TrackerProgram } from '../metaData';
 
-type TrackedEntityTypesWithCorrelatedPrograms = $Exact<$ReadOnly<{
-    [elementId: string]: {|
-        +trackedEntityTypeId: string,
-        +trackedEntityTypeAccess: Access,
-        +trackedEntityTypeName: string,
-        +programs: Array<{|
-            +programName: string,
-            +programId: string,
-        |}>
-    |}
-}>
->
+type TrackedEntityTypesWithCorrelatedPrograms = Readonly<{
+    [elementId: string]: {
+        trackedEntityTypeId: string;
+        trackedEntityTypeAccess: Access;
+        trackedEntityTypeName: string;
+        trackedEntityTypeSearchGroups: any;
+        trackedEntityTypeTeiRegistration: any;
+        programs: Array<{
+            programName: string;
+            programId: string;
+            searchGroups: any;
+            enrollment: any;
+        }>;
+    };
+}>;
+
 export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCorrelatedPrograms =>
     useMemo(() =>
         [...programCollection.values()]
             .filter(program => program instanceof TrackerProgram)
-            // $FlowFixMe
             .reduce((acc, {
                 id: programId,
                 name: programName,

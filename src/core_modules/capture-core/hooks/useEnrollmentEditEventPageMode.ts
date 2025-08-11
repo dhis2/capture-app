@@ -1,4 +1,3 @@
-// @flow
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
@@ -6,7 +5,7 @@ import { statusTypes } from '../events/statusTypes';
 import { useLocationQuery } from '../utils/routing';
 
 export const useEnrollmentEditEventPageMode = (eventStatus?: string) => {
-    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
+    const showEditEvent = useSelector(({ viewEventPage }: any) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const { initMode } = useLocationQuery();
 
     return useMemo(() => {

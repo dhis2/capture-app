@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { getTrackerProgramThrowIfNotFound } from '../metaData';
 
