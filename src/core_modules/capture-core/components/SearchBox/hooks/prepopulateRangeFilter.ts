@@ -1,4 +1,3 @@
-// @flow
 import { dataElementTypes } from '../../../metaData';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 
@@ -26,7 +25,7 @@ export const isEqualRangeValue = (value: any, type: string): boolean => {
 };
 
 
-export const filteredRangeForPrepopulation = (currentSearchTerms: ?CurrentSearchTerms): CurrentSearchTerms => {
+export const filteredRangeForPrepopulation = (currentSearchTerms: CurrentSearchTerms | null): CurrentSearchTerms => {
     if (!currentSearchTerms) {
         return [];
     }
