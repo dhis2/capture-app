@@ -43,7 +43,7 @@ const getOuQueryArgs = (orgUnit: any | null, orgUnitScope: string) => {
         ? 'orgUnits'
         : 'orgUnit';
 
-    return ['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope || '')
+    return ['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope)
         ? { [orgUnitModeQueryParam]: orgUnitScope }
         : { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope };
 };

@@ -10,20 +10,20 @@ import { Section, SectionHeaderSimple } from '../Section';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import type { Props } from './TeiSearch.types';
 
-const styles: Readonly<any> = {
+const styles: Readonly<any> = (theme: any) => ({
     container: {
-        margin: 10,
+        margin: theme.typography.pxToRem(10),
     },
     programSection: {
         backgroundColor: 'white',
-        maxWidth: 900,
-        marginBottom: 20,
+        maxWidth: theme.typography.pxToRem(900),
+        marginBottom: theme.typography.pxToRem(20),
     },
     formContainerSection: {
-        maxWidth: 900,
-        marginBottom: 20,
+        maxWidth: theme.typography.pxToRem(900),
+        marginBottom: theme.typography.pxToRem(20),
     },
-};
+});
 
 type State = {
     programSectionOpen: boolean;
