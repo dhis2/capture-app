@@ -6,7 +6,7 @@ import type {
     SearchGroup,
 } from '../../metaData';
 
-export function getSearchGroups(trackedEntityTypeId: string, programId?: string): Array<SearchGroup> {
+export function getSearchGroups(trackedEntityTypeId: string, programId: string | null): Array<SearchGroup> {
     if (programId) {
         const program = getTrackerProgramThrowIfNotFound(programId);
         return program.searchGroups;

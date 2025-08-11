@@ -19,7 +19,7 @@ export const actionTypes = {
     SEARCH_TE_IN_TET_SCOPE: 'SearchTrackedEntityInTETScope',
 };
 
-export const initializeTeiSearch = (searchId: string, programId?: string, trackedEntityTypeId?: string) =>
+export const initializeTeiSearch = (searchId: string, programId: string | null, trackedEntityTypeId: string | null) =>
     actionCreator(actionTypes.INITIALIZE_TEI_SEARCH)({ searchId, programId, trackedEntityTypeId });
 
 export const requestSearchTei = (
@@ -66,7 +66,7 @@ export const searchTeiResultRetrieved = (
 ) =>
     actionCreator(actionTypes.SEARCH_TEI_RESULT_RETRIEVED)({ data, formId, searchGroupId, searchId });
 
-export const setProgramAndTrackedEntityType = (searchId: string, programId?: string, trackedEntityTypeId?: string) =>
+export const setProgramAndTrackedEntityType = (searchId: string, programId: string | null, trackedEntityTypeId: string | null) =>
     actionCreator(actionTypes.SET_TEI_SEARCH_PROGRAM_AND_TET)({ searchId, programId, trackedEntityTypeId });
 
 export const searchFormValidationFailed = (
@@ -85,5 +85,5 @@ export const teiEditSearch = (searchId: string) =>
 export const teiSearchResultsChangePage = (searchId: string, pageNumber: number, resultsPageSize: number) =>
     actionCreator(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)({ searchId, pageNumber, resultsPageSize });
 
-export const setOpenSearchGroupSection = (searchId: string, searchGroupId?: string) =>
+export const setOpenSearchGroupSection = (searchId: string, searchGroupId: string | null) =>
     actionCreator(actionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION)({ searchId, searchGroupId });

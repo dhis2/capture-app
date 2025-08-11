@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch: any, ownProps: OwnProps) => ({
     onEditSearch: (searchId: string) => {
         dispatch(teiEditSearch(searchId));
     },
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId?: string) => {
+    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: string | null) => {
         dispatch(setOpenSearchGroupSection(searchId, searchGroupId));
     },
 });

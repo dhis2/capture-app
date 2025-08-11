@@ -11,7 +11,7 @@ type PropsFromRedux = {
 type DispatchersFromRedux = {
     onSearch: any;
     onSearchValidationFailed: any;
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId?: string) => void;
+    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: string | null) => void;
     onSearchResultsChangePage: (searchId: string, pageNumber: number) => void;
     onNewSearch: (searchId: string) => void;
     onEditSearch: (searchId: string) => void;
@@ -23,4 +23,4 @@ export type OwnProps = {
     resultsPageSize: number;
 };
 
-export type Props = OwnProps & DispatchersFromRedux & PropsFromRedux & any;
+export type Props = OwnProps & DispatchersFromRedux & PropsFromRedux;

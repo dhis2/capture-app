@@ -16,27 +16,30 @@ import {
 import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { Props } from './TeiSearchForm.types';
+import { withGotoInterface } from '../../FormFields/New';
 
-const styles: Readonly<any> = {
+const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
+
+const styles: Readonly<any> = (theme: any) => ({
     orgUnitSection: {
         backgroundColor: 'white',
-        padding: 8,
-        maxWidth: 892,
+        padding: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(892),
     },
     searchButtonContainer: {
-        padding: 10,
+        padding: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
     },
     minAttributesRequired: {
         flexGrow: 1,
         textAlign: 'right',
-        fontSize: 14,
+        fontSize: theme.typography.pxToRem(14),
     },
     minAttribtuesRequiredInvalid: {
-        color: '#d32f2f',
+        color: theme.palette.error.main,
     },
-};
+});
 
 type State = {
     showMissingSearchCriteriaModal: boolean;
@@ -112,12 +115,14 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     }
 
     renderOrgUnitSelector = () => (
-        <div className={this.props.classes.orgUnitSection}>
-            <SearchOrgUnitSelector
-                searchId={this.props.searchId}
-                searchAttempted={this.props.searchAttempted}
-            />
-        </div>
+        <TeiSearchOrgUnitSelector
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            innerRef={(instance) => {
+                this.orgUnitSelectorInstance = instance;
+            }}
+            searchId={this.props.searchId}
+            searchAttempted={this.props.searchAttempted}
+        />
     );
 
     renderMinAttributesRequired = () => {
@@ -136,7 +141,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
                         count: searchGroup.minAttributesRequiredToSearch,
                         defaultValue: 'Fill in at least {{count}} attribute to search',
                         defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    }) as string
+                    })
                 }
             </div>
         );
@@ -154,11 +159,11 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         return (
             <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
-                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`) as string}</ModalContent>
+                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`)}</ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={() => this.setState({ showMissingSearchCriteriaModal: false })} primary>
-                            {i18n.t('Back to search') as string}
+                            {i18n.t('Back to search')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>

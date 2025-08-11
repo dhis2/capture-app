@@ -23,6 +23,8 @@ import {
 } from '../SearchProgramSelector/searchProgramSelector.actions';
 import { getSearchGroups } from '../getSearchGroups';
 import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
+import type { QuerySingleResource } from '../../../utils/api/api.types';
+import type { ApiUtils, ReduxStore } from '../../../../capture-core-utils/types';
 
 import {
     addFormData,
@@ -33,7 +35,7 @@ import {
 } from '../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
 
-const getOuQueryArgs = (orgUnit?: any, orgUnitScope?: string) => {
+const getOuQueryArgs = (orgUnit: any | null, orgUnitScope: string) => {
     const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
         ? 'orgUnitMode'
         : 'ouMode';
@@ -46,15 +48,15 @@ const getOuQueryArgs = (orgUnit?: any, orgUnitScope?: string) => {
         : { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope };
 };
 
-const getContextQueryArgs = (programId?: string, trackedEntityTypeId?: string) =>
+const getContextQueryArgs = (programId: string | null, trackedEntityTypeId?: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });
 
-const getPagingQueryArgs = (pageNumber?: number) => ({ page: pageNumber || 1, pageSize: 5 });
+const getPagingQueryArgs = (pageNumber: number | null) => ({ page: pageNumber || 1, pageSize: 5 });
 
 export const searchTeiByTETIdEpic = (
     action$: any,
-    store: any,
-    { absoluteApiPath, querySingleResource }: any,
+    store: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(actionTypes.SEARCH_TE_IN_TET_SCOPE),
@@ -92,10 +94,10 @@ const searchTei = ({
     searchId: string;
     formId: string;
     searchGroupId: any;
-    pageNumber?: number;
+    pageNumber: number | null;
     resultsPageSize: number;
     absoluteApiPath: string;
-    querySingleResource: any;
+    querySingleResource: QuerySingleResource;
 }) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
@@ -156,7 +158,7 @@ const searchTei = ({
     );
 };
 
-export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiPath, querySingleResource }: any) =>
+export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiPath, querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
         switchMap((action: any) => {
@@ -187,7 +189,7 @@ export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiP
             );
         }));
 
-export const teiSearchEpic = (action$: any, store: any, { absoluteApiPath, querySingleResource }: any) =>
+export const teiSearchEpic = (action$: any, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action: any) => {

@@ -10,10 +10,4 @@ export type Props = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
-    classes: {
-        searchButtonContainer: string;
-        orgUnitSection: string;
-        minAttributesRequired: string;
-        minAttribtuesRequiredInvalid: string;
-    };
 };

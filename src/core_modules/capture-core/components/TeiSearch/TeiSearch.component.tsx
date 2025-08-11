@@ -93,7 +93,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
 
     onChangeSectionCollapseState = (id: string) => {
         if (this.props.openSearchGroupSection === id) {
-            this.props.onSetOpenSearchGroupSection(this.props.id, undefined);
+            this.props.onSetOpenSearchGroupSection(this.props.id, null);
             return;
         }
         this.props.onSetOpenSearchGroupSection(this.props.id, id);
@@ -138,10 +138,10 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
             searchGroups,
             getResultsView,
         } = this.props;
-        const TeiSearchResultsComponent = TeiSearchResults as any;
+
         return (
             <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-                <TeiSearchResultsComponent
+                <TeiSearchResults
                     id={id}
                     onChangePage={this.handleSearchResultsChangePage}
                     onNewSearch={this.handleNewSearch}
