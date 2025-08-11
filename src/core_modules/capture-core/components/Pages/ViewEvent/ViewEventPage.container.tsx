@@ -1,11 +1,10 @@
-// @flow
 import { connect } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { ViewEventPageComponent } from './ViewEventPage.component';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     const isUserInteractionInProgress =
       (state.currentSelections.complete && eventDetailsSection.showEditEvent)
@@ -22,6 +21,4 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-// $FlowFixMe[missing-annot] automated comment
 export const ViewEventPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventPageComponent)));
-

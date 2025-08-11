@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -16,12 +15,12 @@ import {
 import { TopBarActions } from '../../TopBarActions';
 
 type TopBarProps = {
-    isUserInteractionInProgress: boolean,
-    programId?: string,
-    orgUnitId?: string,
-    selectedCategories?: any,
-    editEventMode?: boolean,
-    formIsOpen: boolean,
+    isUserInteractionInProgress: boolean;
+    programId?: string;
+    orgUnitId?: string;
+    selectedCategories?: any;
+    editEventMode?: boolean;
+    formIsOpen: boolean;
 };
 
 export const TopBar = ({
@@ -38,7 +37,7 @@ export const TopBar = ({
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { reset } = useReset();
     const dispatchOnSetCategoryOption = useCallback(
-        (categoryOption: Object, categoryId: string) => {
+        (categoryOption: any, categoryId: string) => {
             dispatch(setCategoryOption(categoryId, categoryOption));
         },
         [dispatch],

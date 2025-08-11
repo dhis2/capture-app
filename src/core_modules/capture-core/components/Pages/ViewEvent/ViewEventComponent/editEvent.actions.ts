@@ -1,6 +1,6 @@
-// @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+
+type OrgUnit = any;
 
 export const actionTypes = {
     EDIT_EVENT_FROM_URL: 'EditEventFromUrl',
@@ -14,13 +14,13 @@ export const actionTypes = {
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)(message);
 
-export const eventFromUrlRetrieved = (eventContainer: Object, orgUnit: OrgUnit, prevProgramId: ?string) =>
+export const eventFromUrlRetrieved = (eventContainer: any, orgUnit: OrgUnit, prevProgramId?: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, orgUnit, prevProgramId });
 
-export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: Object) =>
+export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: any) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE)({ eventContainer });
 
-export const addEventNote = (eventId: string, note: Object) =>
+export const addEventNote = (eventId: string, note: any) =>
     actionCreator(actionTypes.ADD_EVENT_NOTE)({ eventId, note });
 
 export const removeEventNote = (eventId: string, noteClientId: string) =>

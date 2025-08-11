@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
@@ -20,8 +19,7 @@ const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
     const assignedUserContextSelector = makeAssignedUserContextSelector();
 
-    // $FlowFixMe[not-an-object] automated comment
-    return (state: ReduxState) => {
+    return (state: any) => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
         const currentDataEntryKey = eventDetailsSection.showEditEvent
             ? getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.EDIT)
@@ -41,7 +39,7 @@ const makeMapStateToProps = () => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onBackToViewEvent: () => {
         dispatch(batchActions([
             cancelEditEventDataEntry(),
@@ -51,12 +49,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     dispatch,
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
+const mergeProps = (stateProps: any, dispatchProps: any, ownProps: any) => {
     const mergedProps = {
-        onSaveAssignee: (newAssignee) => {
+        onSaveAssignee: (newAssignee: any) => {
             dispatchProps.dispatch(setAssignee(newAssignee, stateProps.eventId));
         },
-        onSaveAssigneeError: (prevAssignee) => {
+        onSaveAssigneeError: (prevAssignee: any) => {
             dispatchProps.dispatch(rollbackAssignee(prevAssignee, stateProps.eventId));
         },
     };
@@ -64,8 +62,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return Object.assign({}, ownProps, stateProps, dispatchProps, mergedProps);
 };
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const ViewEvent = connect(
     makeMapStateToProps,
     mapDispatchToProps,

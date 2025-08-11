@@ -1,10 +1,8 @@
-
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import { Chip, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 
 const getStyles = (theme: Theme) => ({
     headerContainer: {
@@ -25,16 +23,15 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    icon: React.ComponentType<any>,
-    text: string,
-    badgeCount: number,
-}
-
+    icon: React.ComponentType<any>;
+    text: string;
+    badgeCount: number;
+} & WithStyles<typeof getStyles>;
 
 class ViewEventSectionHeaderPlain extends React.Component<Props> {
     render() {
-        // $FlowFixMe[prop-missing] automated comment
-        const { icon: Icon, text, badgeCount, classes, badgeClass } = this.props;
+        const { icon: Icon, text, badgeCount, classes, ...passOnProps } = this.props;
+        const { badgeClass } = passOnProps as any;
         const shouldRenderBadge = !!badgeCount || badgeCount === 0;
         return (
             <div className={classes.headerContainer}>
@@ -46,7 +43,7 @@ class ViewEventSectionHeaderPlain extends React.Component<Props> {
                 </div>
                 {shouldRenderBadge &&
                     <div className={classes.headerItemContainer}>
-                        <Chip dense className={classNames(classes.badge), badgeClass}>
+                        <Chip dense className={classNames(classes.badge, badgeClass)}>
                             {badgeCount}
                         </Chip>
                     </div>
@@ -55,6 +52,5 @@ class ViewEventSectionHeaderPlain extends React.Component<Props> {
         );
     }
 }
-
 
 export const ViewEventSectionHeader = withStyles(getStyles)(ViewEventSectionHeaderPlain);

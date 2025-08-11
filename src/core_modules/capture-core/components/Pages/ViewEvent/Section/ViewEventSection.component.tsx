@@ -1,11 +1,11 @@
-// @flow
 import React, { useState, useEffect, useRef } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import cx from 'classnames';
 import { IconChevronUp24, colors, spacersNum } from '@dhis2/ui';
 
-const getStyles = theme => ({
+const getStyles = (theme: Theme) => ({
     container: {
         background: colors.white,
         border: '1px solid',
@@ -24,7 +24,7 @@ const getStyles = theme => ({
     },
     children: {
         padding: theme.typography.pxToRem(10),
-        borderTop: `1px solid ${theme.palette.grey.blueGrey}`,
+        borderTop: `1px solid ${theme.palette.divider}`,
         '&.open': {
             animation: 'slidein 200ms normal forwards ease-in-out',
             transformOrigin: '50% 0%',
@@ -72,12 +72,11 @@ const getStyles = theme => ({
 });
 
 type Props = {
-    header: React$Node,
-    children: React$Node,
-    collapsable?: ?boolean,
-    collapsed?: ?boolean,
-    classes: Object,
-};
+    header: React.ReactNode;
+    children: React.ReactNode;
+    collapsable?: boolean;
+    collapsed?: boolean;
+} & WithStyles<typeof getStyles>;
 
 const ViewEventSectionPlain = ({
     header,
@@ -89,7 +88,7 @@ const ViewEventSectionPlain = ({
     const [collapsed, setCollapsed] = useState(propsCollapsed);
     const [childrenVisible, setChildrenVisibility] = useState(!propsCollapsed);
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
-    const hideChildrenTimeoutRef = useRef(null);
+    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const initialRenderRef = useRef(true);
 
     useEffect(() => {

@@ -1,33 +1,27 @@
-// @flow
-
 import { createSelector } from 'reselect';
 import { getEventProgramEventAccess, getEventProgramThrowIfNotFound } from '../../../../metaData';
-import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
 
-const programIdSelector = state => state.currentSelections.programId;
-const categoriesMetaSelector = state => state.currentSelections.categoriesMeta;
-const eventContainerSelector = state => state.viewEventPage.loadedValues?.eventContainer;
+const programIdSelector = (state: any) => state.currentSelections.programId;
+const categoriesMetaSelector = (state: any) => state.currentSelections.categoriesMeta;
+const eventContainerSelector = (state: any) => state.viewEventPage.loadedValues?.eventContainer;
 
-// $FlowFixMe[missing-annot] automated comment
 export const makeProgramStageSelector = () => createSelector(
     programIdSelector,
     (programId: string) => getEventProgramThrowIfNotFound(programId).stage);
 
-// $FlowFixMe[missing-annot] automated comment
 export const makeEventAccessSelector = () => createSelector(
     programIdSelector,
     categoriesMetaSelector,
-    (programId: string, categoriesMeta: ?Object) => getEventProgramEventAccess(programId, categoriesMeta));
+    (programId: string, categoriesMeta?: any) => getEventProgramEventAccess(programId, categoriesMeta));
 
 export const makeAssignedUserContextSelector = () =>
-    // $FlowFixMe[missing-annot]
-    createSelector(eventContainerSelector, (eventContainer) => {
+    createSelector(eventContainerSelector, (eventContainer: any) => {
         const { event: clientMainValues, values: clientValues } = eventContainer;
         const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
         const formFoundation = program.stage.stageForm;
-        const formServerValues = formFoundation.convertValues(clientValues, convertToServerValue);
-        const mainDataServerValues: Object = convertMainEventClientToServer(clientMainValues);
+        const formServerValues = formFoundation.convertValues(clientValues);
+        const mainDataServerValues: any = convertMainEventClientToServer(clientMainValues);
 
         const event =
             {

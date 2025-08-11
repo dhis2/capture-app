@@ -1,18 +1,19 @@
-// @flow
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
 import type { UserFormField } from '../../../FormFields/UserField';
+import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: any = (theme: Theme) => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -28,7 +29,7 @@ const getStyles = (theme: Theme) => ({
         ...theme.typography.title,
         fontSize: 18,
         padding: theme.typography.pxToRem(10),
-        borderBottom: `1px solid ${theme.palette.grey.blueGrey}`,
+        borderBottom: `1px solid ${theme.palette.divider}`,
     },
     contentContainer: {
         display: 'flex',
@@ -38,25 +39,18 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    programId: string,
-    currentDataEntryKey: string,
-    programStage: ProgramStage,
-    eventAccess: { read: boolean, write: boolean },
-    isUserInteractionInProgress: boolean,
-    showEditEvent: boolean,
-    onBackToViewEvent: () => void,
-    classes: {
-        container: string,
-        contentContainer: string,
-        dataEntryPaper: string,
-        header: string,
-        showAllEvents: string,
-    },
-    assignee: UserFormField,
-    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
-    onSaveAssignee: (newAssignee: UserFormField) => void,
-    onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
-};
+    programId: string;
+    currentDataEntryKey: string;
+    programStage: ProgramStage;
+    eventAccess: { read: boolean; write: boolean };
+    isUserInteractionInProgress: boolean;
+    showEditEvent: boolean;
+    onBackToViewEvent: () => void;
+    assignee: UserFormField;
+    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent };
+    onSaveAssignee: (newAssignee: UserFormField) => void;
+    onSaveAssigneeError: (prevAssignee: UserFormField | null) => void;
+} & WithStyles<any>;
 
 export const ViewEventPlain = (props: Props) => {
     const {
@@ -90,12 +84,7 @@ export const ViewEventPlain = (props: Props) => {
                 onBackToMainPage={onBackToAllEvents}
             />
             <div className={classes.contentContainer}>
-                <EventDetails
-                    eventAccess={eventAccess}
-                    programStage={programStage}
-                    onBackToViewEvent={onBackToViewEvent}
-                    onBackToAllEvents={onBackToAllEvents}
-                />
+                <EventDetails />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
                     programStage={programStage}
@@ -110,4 +99,4 @@ export const ViewEventPlain = (props: Props) => {
     );
 };
 
-export const ViewEventComponent = withStyles(getStyles)(ViewEventPlain);
+export const ViewEventComponent = withStyles(getStyles as any)(ViewEventPlain);
