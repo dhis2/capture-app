@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { D2SectionContainer } from './D2Section.container';
 import type { Props, PropsForPureComponent } from './D2Form.types';
-import { Section } from '../../metaData';
+import type { Section } from '../../metaData';
 
 class D2Form extends React.PureComponent<PropsForPureComponent> {
     name: string;
@@ -121,9 +121,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             getCustomContent,
             ...passOnProps
         } = this.props;
-        const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries())
-            .map(entry => entry[1])
-            .filter(section => section.id !== Section.LEFTOVERS_SECTION_ID);
+        const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
         const sections = metaDataSectionsAsArray.map(section => (
             passOnProps.formHorizontal
