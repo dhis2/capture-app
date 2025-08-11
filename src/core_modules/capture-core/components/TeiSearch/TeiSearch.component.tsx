@@ -1,7 +1,7 @@
-// @flow
-import React, { type ComponentType } from 'react';
+/* eslint-disable react/sort-comp */
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { SearchGroup } from '../../metaData';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -10,7 +10,7 @@ import { Section, SectionHeaderSimple } from '../Section';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import type { Props } from './TeiSearch.types';
 
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: any) => ({
     container: {
         margin: theme.typography.pxToRem(10),
     },
@@ -26,15 +26,14 @@ const getStyles = (theme: Theme) => ({
 });
 
 type State = {
-    programSectionOpen: boolean,
-}
+    programSectionOpen: boolean;
+};
 
-class TeiSearchPlain extends React.Component<Props, State> {
-    constructor(props) {
+class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, State> {
+    constructor(props: Props & WithStyles<typeof styles>) {
         super(props);
         this.state = { programSectionOpen: true };
     }
-
 
     getFormId = (searchGroupId: string) => {
         const contextId = this.props.selectedProgramId || this.props.selectedTrackedEntityTypeId || '';
@@ -58,7 +57,7 @@ class TeiSearchPlain extends React.Component<Props, State> {
         this.props.onEditSearch(this.props.id);
     }
 
-    handleSearchValidationFailed = (...args) => {
+    handleSearchValidationFailed = (...args: any[]) => {
         const { id } = this.props;
         this.props.onSearchValidationFailed(...args, id);
     }
@@ -92,7 +91,7 @@ class TeiSearchPlain extends React.Component<Props, State> {
         );
     }
 
-    onChangeSectionCollapseState = (id) => {
+    onChangeSectionCollapseState = (id: string) => {
         if (this.props.openSearchGroupSection === id) {
             this.props.onSetOpenSearchGroupSection(this.props.id, null);
             return;
@@ -139,6 +138,7 @@ class TeiSearchPlain extends React.Component<Props, State> {
             searchGroups,
             getResultsView,
         } = this.props;
+
         return (
             <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
                 <TeiSearchResults
@@ -164,4 +164,4 @@ class TeiSearchPlain extends React.Component<Props, State> {
     }
 }
 
-export const TeiSearchComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiSearchPlain);
+export const TeiSearchComponent = withStyles(styles)(TeiSearchPlain);
