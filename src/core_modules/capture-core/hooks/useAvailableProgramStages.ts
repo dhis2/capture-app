@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { useCommonEnrollmentDomainData } from '../components/Pages/common/EnrollmentOverviewDomain';
