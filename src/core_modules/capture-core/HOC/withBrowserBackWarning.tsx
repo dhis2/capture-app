@@ -1,35 +1,30 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'; //eslint-disable-line
 import { DiscardDialog } from '../components/Dialogs/DiscardDialog.component';
 
 type Props = {
-    dataEntryHasChanges: boolean,
-    history: Object,
-    inEffect: boolean,
-    location: any,
-    match: any,
-    staticContext: any,
+    dataEntryHasChanges?: boolean;
+    history: any;
+    inEffect: boolean;
+    location: any;
+    match: any;
+    staticContext: any;
 };
 
 type State = {
-    dialogOpen: boolean,
+    dialogOpen: boolean;
 };
 
 type DialogConfig = {
-    header: string,
-    text: string,
-    destructiveText: string,
-    cancelText: string,
-}
+    header: string;
+    text: string;
+    destructiveText: string;
+    cancelText: string;
+};
 
 const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig: DialogConfig) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
-        unblock: () => void;
-        Dialog: React.Element<any>;
-        historyLength: number;
-
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -40,7 +35,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
         componentDidMount() {
             const { history } = this.props;
             this.historyLength = window.history.length;
-            this.unblock = history.block((nextLocation, method) => {
+            this.unblock = history.block((nextLocation: any, method: string) => {
                 const { inEffect } = this.props;
                 const isBack = window.history.length === this.historyLength;
                 if (method === 'POP' && inEffect && isBack) {
@@ -56,6 +51,10 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
         componentWillUnmount() {
             this.unblock && this.unblock();
         }
+
+        Dialog!: React.ReactElement<any>;
+        historyLength!: number;
+        unblock!: () => void;
 
         handleDialogConfirm = () => {
             this.setState({
@@ -89,9 +88,9 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
         }
     };
 
-type InEffectFn = (state: ReduxState, props: Object) => boolean;
+type InEffectFn = (state: any, props: any) => boolean;
 
-const getMapStateToProps = (inEffectFn: InEffectFn) => (state: ReduxState, props: { id: string }) => {
+const getMapStateToProps = (inEffectFn: InEffectFn) => (state: any, props: any) => {
     const inEffect = inEffectFn(state, props);
     return {
         inEffect,
@@ -102,8 +101,5 @@ const mapDispatchToProps = () => ({});
 
 export const withBrowserBackWarning = (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-
-        // $FlowFixMe[missing-annot] automated comment
         connect(
-            // $FlowFixMe[missing-annot] automated comment
             getMapStateToProps(inEffect), mapDispatchToProps)(withRouter(getEventListener(InnerComponent, dialogConfig)));

@@ -1,14 +1,14 @@
-// @flow
 import * as React from 'react';
 
 import { LoadingMaskElementCenter } from '../components/LoadingMasks';
 
 type Props = {
-    ready?: ?boolean,
+    ready?: boolean | null | undefined;
+    [key: string]: any;
 };
 
 export const withLoadingIndicator =
-    (getContainerStylesFn?: ?(props: any) => Object, getIndicatorProps?: ?(props: any) => Object, readyFn?: (props: any) => boolean) =>
+    (getContainerStylesFn?: ((props: any) => any) | null | undefined, getIndicatorProps?: ((props: any) => any) | null | undefined, readyFn?: (props: any) => boolean | undefined) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {
                 const { ready, ...other } = props;

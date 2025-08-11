@@ -1,12 +1,11 @@
-// @flow
 import * as React from 'react';
 import { LoadingMaskForPage } from '../components/LoadingMasks';
 
 type Props = {
-    ready: boolean,
+    ready: boolean;
 };
 
-export const withLoadingIndicator =
+export const withFullPageLoadingIndicator =
     (readyFn?: (props: any) => boolean) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {
