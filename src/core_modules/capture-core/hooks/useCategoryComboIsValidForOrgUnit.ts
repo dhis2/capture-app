@@ -1,13 +1,11 @@
-// @flow
 import { useMemo } from 'react';
-// $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 import { useIndexedDBQuery } from '../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../storageControllers';
 
 type Props = {
-    selectedOrgUnitId: string,
-}
+    selectedOrgUnitId: string;
+};
 
 const getSelectedCategoryOption = (selectedCategories: Array<string>) => {
     const storageController = getUserMetadataStorageController();
@@ -19,7 +17,7 @@ const getSelectedCategoryOption = (selectedCategories: Array<string>) => {
 export const useCategoryOptionIsValidForOrgUnit = ({
     selectedOrgUnitId,
 }: Props) => {
-    const { categories, complete } = useSelector(({ currentSelections }) => ({
+    const { categories, complete } = useSelector(({ currentSelections }: any) => ({
         categories: currentSelections.categories,
         complete: currentSelections.complete,
     }), shallowEqual);

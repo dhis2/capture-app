@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../metaData';
 import { programTypes } from './programTypes.const';

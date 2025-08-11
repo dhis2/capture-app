@@ -1,9 +1,8 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { scopeTypes } from '../metaData';
 import { useScopeInfo } from './useScopeInfo';
 
-export const useScopeTitleText = (scopeId: ?string) => {
+export const useScopeTitleText = (scopeId: string | null) => {
     const { trackedEntityName, programName, scopeType } = useScopeInfo(scopeId);
 
     const text = {

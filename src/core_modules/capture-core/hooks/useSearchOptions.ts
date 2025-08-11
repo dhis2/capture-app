@@ -1,24 +1,23 @@
-// @flow
 import { useMemo } from 'react';
 import type { RenderFoundation } from '../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityTypesWithCorrelatedPrograms';
 import type { AvailableSearchOption } from '../components/SearchBox';
 
-type SearchGroups = Array<{|
-    +searchForm: RenderFoundation,
-    +unique: boolean,
-    +formId: string,
-    +searchScope: string,
-    +minAttributesRequiredToSearch: number,
-|}>;
+type SearchGroups = Array<{
+    searchForm: RenderFoundation;
+    unique: boolean;
+    formId: string;
+    searchScope: string;
+    minAttributesRequiredToSearch: number;
+}>;
 
-type AvailableSearchOptions = $ReadOnly<{
-    [elementId: string]: {|
-        +searchOptionId: string,
-        +searchOptionName: string,
-        +TETypeName: ?string,
-        +searchGroups: SearchGroups,
-    |},
+type AvailableSearchOptions = Readonly<{
+    [elementId: string]: {
+        searchOptionId: string;
+        searchOptionName: string;
+        TETypeName: string | null | undefined;
+        searchGroups: SearchGroups;
+    };
 }>;
 
 const searchScopes = {
@@ -32,7 +31,6 @@ export const buildSearchOption =
             searchOptionId: id,
             searchOptionName: name,
             TETypeName: type,
-            // $FlowFixMe
             searchGroups: [...searchGroups.values()]
                 .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
                     unique,
@@ -53,7 +51,6 @@ export const useSearchOptions = (): AvailableSearchOptions => {
     return useMemo(
         () => Object.values(trackedEntityTypesWithCorrelatedPrograms)
             .reduce(
-                // $FlowFixMe https://github.com/facebook/flow/issues/2221
                 (acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
                     ...acc,
                     [trackedEntityTypeId]: buildSearchOption(

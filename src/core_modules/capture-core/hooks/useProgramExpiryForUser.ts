@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { serverToClientExpiryPeriod } from '../converters/serverToClientExpiryPeriod';
 import { useAuthorities } from '../utils/authority/useAuthorities';
