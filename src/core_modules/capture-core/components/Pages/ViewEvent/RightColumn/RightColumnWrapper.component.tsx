@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { spacers } from '@dhis2/ui';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
@@ -8,18 +9,18 @@ import { RelationshipsSection } from './RelationshipsSection/RelationshipsSectio
 import { NotesSection } from './NotesSection/NotesSection.container';
 import { AssigneeSection } from './AssigneeSection';
 
-const styles: Readonly<any> = {
+const getStyles = (theme: Theme): Readonly<any> => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        flexBasis: 0,
+        flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
-        minWidth: 300,
-        gap: '16px',
+        minWidth: theme.typography.pxToRem(300),
+        gap: spacers.dp16,
     },
-};
+});
 
-type Props = WithStyles<typeof styles>;
+type Props = WithStyles<typeof getStyles>;
 
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
@@ -46,4 +47,4 @@ class RightColumnWrapperPlain extends React.Component<Props> {
     }
 }
 
-export const RightColumnWrapper = withStyles(styles)(RightColumnWrapperPlain);
+export const RightColumnWrapper = withStyles(getStyles)(RightColumnWrapperPlain);
