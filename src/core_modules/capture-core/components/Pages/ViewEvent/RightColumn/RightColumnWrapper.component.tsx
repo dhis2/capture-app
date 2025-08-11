@@ -1,8 +1,5 @@
-
-// @flow
 import * as React from 'react';
-import { spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
@@ -11,22 +8,18 @@ import { RelationshipsSection } from './RelationshipsSection/RelationshipsSectio
 import { NotesSection } from './NotesSection/NotesSection.container';
 import { AssigneeSection } from './AssigneeSection';
 
-type Props = {
-    classes: {
-        container: string,
-    }
-};
-
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         flexDirection: 'column',
-        flexBasis: theme.typography.pxToRem(0),
+        flexBasis: 0,
         flexGrow: 1,
-        minWidth: theme.typography.pxToRem(300),
-        gap: spacers.dp16,
+        minWidth: 300,
+        gap: '16px',
     },
-});
+};
+
+type Props = WithStyles<typeof styles>;
 
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
@@ -39,7 +32,7 @@ const componentContainers = [
 ];
 
 class RightColumnWrapperPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => (
         <container.Component key={container.id} {...props} />
     )
 
@@ -53,4 +46,4 @@ class RightColumnWrapperPlain extends React.Component<Props> {
     }
 }
 
-export const RightColumnWrapper = withStyles(getStyles)(RightColumnWrapperPlain);
+export const RightColumnWrapper = withStyles(styles)(RightColumnWrapperPlain);
