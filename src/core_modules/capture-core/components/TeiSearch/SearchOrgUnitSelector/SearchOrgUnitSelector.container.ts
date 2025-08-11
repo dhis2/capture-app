@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import {
     setOrgUnitScope,
@@ -9,7 +8,7 @@ import {
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
+const mapStateToProps = (state: any, props: any) => {
     const searchId = props.searchId;
 
     const filteredRoots = getOrgUnitRoots(searchId);
@@ -25,14 +24,14 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onFilterOrgUnits: (searchId: string, searchText: string) => {
+const mapDispatchToProps = (dispatch: any) => ({
+    onFilterOrgUnits: (searchId: string, searchText?: string) => {
         const action = searchText ?
             requestFilterOrgUnits(searchId, searchText) :
             clearOrgUnitsFilter(searchId);
         dispatch(action);
     },
-    onSetOrgUnit: (searchId: string, orgUnit: ?any) => {
+    onSetOrgUnit: (searchId: string, orgUnit?: any) => {
         dispatch(setOrgUnit(searchId, orgUnit));
     },
     onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => {
@@ -40,7 +39,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps)(
     SearchOrgUnitSelectorRefHandler,
 );
