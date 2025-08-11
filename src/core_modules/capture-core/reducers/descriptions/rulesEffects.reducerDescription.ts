@@ -92,9 +92,9 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
         const newState = { ...state };
 
         const errorEffects: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
-        const warningEffects: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
+        const warningEffects: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
         const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
-        const warningEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
+        const warningEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
 
         const messageEffectsArray = [errorEffects, warningEffects, errorEffectsOnComplete, warningEffectsOnComplete];
         newState[action.payload.formId] = messageEffectsArray.reduce((accMessagesById, effects) => {
@@ -204,8 +204,8 @@ export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
 export const rulesEffectsDisabledFieldsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
-        const assignEffects: { [id: string]: Array<any> } =
-            action.payload.rulesEffects && action.OutputEffect.rulesEffects[effectActions.ASSIGN_VALUE];
+        const assignEffects: { [id: string]: Array<OutputEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         newState[action.payload.formId] = assignEffects ?
             Object.keys(assignEffects).reduce((accState, key) => {
                 accState[key] = true;

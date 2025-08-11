@@ -53,7 +53,6 @@ export const formsValuesDesc = createReducerDescription({
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        newState[payload.formId] = { ...newState[payload.formId] };
         // todo (eslint)
         // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
