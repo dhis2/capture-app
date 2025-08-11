@@ -1,5 +1,3 @@
-// @flow
-import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { TeiSearchComponent } from './TeiSearch.component';
 import {
@@ -11,12 +9,12 @@ import {
     setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
 import { makeSearchGroupsSelector } from './teiSearch.selectors';
-import type { Props, OwnProps } from './TeiSearch.types';
+import type { OwnProps } from './TeiSearch.types';
 
 const makeMapStateToProps = () => {
     const searchGroupsSelector = makeSearchGroupsSelector();
 
-    const mapStateToProps = (state: ReduxState, props: OwnProps) => {
+    const mapStateToProps = (state: any, props: OwnProps) => {
         const searchGroups = searchGroupsSelector(state, props);
         const currentTeiSearch = state.teiSearch[props.id];
         return {
@@ -28,11 +26,10 @@ const makeMapStateToProps = () => {
         };
     };
 
-    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps) => ({
+const mapDispatchToProps = (dispatch: any, ownProps: OwnProps) => ({
     onSearch: (formId: string, searchGroupId: string, searchId: string) => {
         dispatch(requestSearchTei(formId, searchGroupId, searchId, ownProps.resultsPageSize));
     },
@@ -48,10 +45,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps) => ({
     onEditSearch: (searchId: string) => {
         dispatch(teiEditSearch(searchId));
     },
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => {
+    onSetOpenSearchGroupSection: (searchId: string, searchGroupId?: string) => {
         dispatch(setOpenSearchGroupSection(searchId, searchGroupId));
     },
 });
 
-export const TeiSearch: ComponentType<OwnProps> =
-  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps)(TeiSearchComponent);
+export const TeiSearch = connect(makeMapStateToProps, mapDispatchToProps)(TeiSearchComponent);

@@ -1,12 +1,9 @@
-// @flow
-import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { TeiSearchResultsComponent } from './TeiSearchResults.component';
 import { withLoadingIndicator } from '../../../HOC';
-import type { OwnProps, Props } from './TeiSearchResults.types';
+import type { OwnProps } from './TeiSearchResults.types';
 
-const mapStateToProps = (state: ReduxState, props: OwnProps) => {
+const mapStateToProps = (state: any, props: OwnProps) => {
     const currentTeiSearch = state.teiSearch[props.id] || {};
     const searchResults = currentTeiSearch.searchResults || {};
     const searchValues = state.formsValues[searchResults.formId];
@@ -24,8 +21,6 @@ const mapStateToProps = (state: ReduxState, props: OwnProps) => {
 
 const mapDispatchToProps = () => ({});
 
-export const TeiSearchResults: ComponentType<OwnProps> =
-  compose(
-      connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps),
-      withLoadingIndicator(() => ({ padding: '100px 0' }), null, props => (!props.resultsLoading)),
-  )(TeiSearchResultsComponent);
+export const TeiSearchResults = connect(mapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: any) => (!props.resultsLoading))(TeiSearchResultsComponent),
+);
