@@ -70,5 +70,5 @@ export const teiSearchFilterOrgUnitsEpic = (action$: any, store: any, { querySin
                     path: unit.path,
                     displayName: unit.displayName,
                 }));
-            return filteredOrgUnitsRetrieved(resultContainer.searchId, resultContainer.searchText, regUnits);
+            return filteredOrgUnitsRetrieved(resultContainer.searchId, regUnits, resultContainer.searchText);
         }));

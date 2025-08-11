@@ -18,7 +18,7 @@ export const setOrgUnit = (searchId: string, orgUnit?: any) =>
 export const requestFilterOrgUnits = (searchId: string, searchText: string) =>
     actionCreator(actionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS)({ searchId, searchText });
 
-export const filteredOrgUnitsRetrieved = (searchId: string, searchText: string, roots?: Array<any>) =>
+export const filteredOrgUnitsRetrieved = (searchId: string, roots: Array<any> | null, searchText: string) =>
     actionCreator(actionTypes.TEI_SEARCH_FILTERED_ORG_UNITS_RETRIEVED)({ searchId, roots, searchText });
 
 export const filterOrgUnitsFailed = (searchId: string, error: any) =>

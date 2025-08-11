@@ -11,33 +11,3 @@ export type SearchOrgUnitSelectorProps = {
     onFilterOrgUnits: (searchId: string, searchText?: string) => void;
     searchAttempted?: boolean;
 };
-
-export type SetOrgUnitScopePayload = {
-    searchId: string;
-    orgUnitScope: string;
-};
-
-export type SetOrgUnitPayload = {
-    searchId: string;
-    orgUnit?: any;
-};
-
-export type RequestFilterOrgUnitsPayload = {
-    searchId: string;
-    searchText: string;
-};
-
-export type FilteredOrgUnitsRetrievedPayload = {
-    searchId: string;
-    searchText: string;
-    roots?: Array<any>;
-};
-
-export type FilterOrgUnitsFailedPayload = {
-    searchId: string;
-    error: any;
-};
-
-export type ClearOrgUnitsFilterPayload = {
-    searchId: string;
-};
