@@ -34,12 +34,10 @@ export async function cacheSystemSettings(
         },
         {
             id: 'captureScope',
-            // $FlowFixMe
             value: userSettings.captureScope.map(orgUnit => orgUnit.id),
         },
         {
             id: 'searchScope',
-            // $FlowFixMe
             value: userSettings.searchScope.map(orgUnit => orgUnit.id),
         },
         {

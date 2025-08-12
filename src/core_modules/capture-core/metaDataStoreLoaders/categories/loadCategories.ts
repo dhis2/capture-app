@@ -68,13 +68,13 @@ function buildCacheCategoryOptions(
     categoryOptions: Array<any>,
 ) {
     return categoryOptions
-        .map((co) => {
-            const organisationUnitsObject = (co as any).organisationUnits && (co as any).organisationUnits.length > 0 ?
-                (co as any).organisationUnits.reduce((acc: any, orgUnitId: any) => {
+        .map((co: any) => {
+            const organisationUnitsObject = co.organisationUnits && co.organisationUnits.length > 0 ?
+                co.organisationUnits.reduce((acc: any, orgUnitId: any) => {
                     acc[orgUnitId] = true;
                     return acc;
                 }, {}) : null;
-            (co as any).organisationUnits = organisationUnitsObject;
+            co.organisationUnits = organisationUnitsObject;
             return co;
         });
 }
@@ -150,6 +150,5 @@ export async function loadCategories(
     const uniqueCategoryIds = uniqueCategories.map(uc => uc.id);
     const categoryIdBatches = chunk(uniqueCategoryIds, 50);
     await categoryIdBatches
-        // $FlowFixMe[prop-missing] automated comment
         .asyncForEach(idBatch => loadCategoryOptionsInBatchesAsync(idBatch));
 }

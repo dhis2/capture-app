@@ -1,7 +1,5 @@
+import type { ResourceQuery, QueryVariables } from 'capture-core-utils/types/app-runtime';
 import { getContext } from '../context';
-
-type ResourceQuery = any;
-type QueryVariables = any;
 
 export const query = (
     resourceQuery: ResourceQuery,

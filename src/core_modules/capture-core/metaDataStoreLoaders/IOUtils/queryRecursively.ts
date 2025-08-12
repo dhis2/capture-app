@@ -1,12 +1,10 @@
+import type { QueryParameters, QueryVariables } from 'capture-core-utils/types/app-runtime';
 import { query } from './query';
 import type {
     ApiQuery,
     ConvertQueryResponseFn,
     QueryRecursivelyOptions,
 } from './IOUtils.types';
-
-type QueryParameters = any;
-type QueryVariables = any;
 
 type Variables = {
     page: number;
@@ -21,7 +19,6 @@ const executeRecursiveQuery = (
     convertQueryResponse?: ConvertQueryResponseFn,
 ) => {
     const next = async (page = 1) => {
-        // $FlowFixMe union type problem
         const response = await query(recursiveQuery, { page });
         const convertedData = convertQueryResponse ? convertQueryResponse(response) : response;
         const done = !(response && response.pager && response.pager.nextPage);

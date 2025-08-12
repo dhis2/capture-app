@@ -46,6 +46,12 @@ type apiProgramUserRoles = {
     displayName: string,
 };
 
+type apiProgramStageSections = {
+    id: string,
+    displayName: string,
+    sortOrder: number,
+    dataElements?: Array<{ id: string }> | null,
+};
 
 type apiTranslation = {
     property: string,
@@ -103,7 +109,7 @@ export type apiProgramStage = {
     validationStrategy: string,
     enableUserAssignment: boolean,
     dataEntryForm?: apiDataEntryForm | null,
-    programStageSections?: Array<any> | null
+    programStageSections?: Array<apiProgramStageSections> | null
     programStageDataElements?: Array<apiProgramStageDataElement> | null,
     hideDueDate?: boolean,
     repeatable?: boolean

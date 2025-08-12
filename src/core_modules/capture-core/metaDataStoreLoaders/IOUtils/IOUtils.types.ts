@@ -1,4 +1,4 @@
-type ResourceQuery = any;
+import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
 
 export type ApiQuery = {
     resource: string,

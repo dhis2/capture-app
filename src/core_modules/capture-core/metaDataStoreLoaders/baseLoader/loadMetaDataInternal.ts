@@ -58,7 +58,7 @@ export const loadMetaDataInternal = async () => {
     await loadOptionSets([
         ...optionSetsOutlineFromPrograms,
         ...optionSetsOutlineFromTrackedEntityTypes,
-    ] as any);
+    ]);
 
     // set program version to cache to confirm loading of programs and their dependencies
     await confirmLoadingSequence(stalePrograms);

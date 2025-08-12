@@ -1,7 +1,7 @@
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
 import type { CachedProgramStageDataElement } from '../../../storageControllers';
-import type { ApiProgramsResponse } from './types';
+import type { apiProgramsResponse } from './types';
 
 const convert = (() => {
     const sort = (arr: Array<any>, sortBy = 'sortOrder') => {
@@ -63,7 +63,7 @@ const convert = (() => {
             .filter(({ trackedEntityAttribute }) => trackedEntityAttribute?.id)
             .map(programAttribute => getProgramTrackedEntityAttribute(programAttribute));
 
-    return (response: ApiProgramsResponse) => {
+    return (response: apiProgramsResponse) => {
         const apiPrograms = (response && response.programs) || [];
 
         return apiPrograms
