@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
@@ -6,21 +5,21 @@ import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
 
 type DateTimeFormValue = {
-    date: string,
-    time: string
+    date: string;
+    time: string;
 };
 
 type AgeFormValue = {
-    date?: ?string,
-    years?: ?string,
-    months?: ?string,
-    days?: ?string,
-}
+    date?: string | null;
+    years?: string | null;
+    months?: string | null;
+    days?: string | null;
+};
 
 type RangeValue = {
-    from?: ?string,
-    to?: ?string
-}
+    from?: string | null;
+    to?: string | null;
+};
 
 function convertDateForEdit(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
@@ -96,10 +95,9 @@ const valueConvertersForType = {
     [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForEdit, value),
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    // $FlowFixMe dataElementTypes flow error
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }

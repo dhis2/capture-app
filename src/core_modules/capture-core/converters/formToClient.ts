@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
@@ -6,16 +5,16 @@ import { dataElementTypes } from '../metaData';
 import { convertLocalToIsoCalendar } from '../utils/converters/date';
 
 type DateTimeValue = {
-    date: string,
-    time: string,
+    date: string;
+    time: string;
 };
 
 type RangeValue = {
-    from: string,
-    to: string,
-}
+    from: string;
+    to: string;
+};
 
-function convertDateTime(formValue: DateTimeValue): ?string {
+function convertDateTime(formValue: DateTimeValue): string | null {
     const editedDate = formValue.date;
     const editedTime = formValue.time;
 
@@ -51,11 +50,11 @@ function convertTime(timeValue: string) {
     return momentTime.format('HH:mm');
 }
 
-function convertAge(ageValue: Object) {
+function convertAge(ageValue: any) {
     return convertDate(ageValue.date);
 }
 
-function convertRange(parser: Function, value: RangeValue) {
+function convertRange(parser: any, value: RangeValue) {
     return {
         from: parser(value.from),
         to: parser(value.to),
@@ -85,7 +84,7 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertAge,
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes) {
     if (value == null) {
         return null;
     }
@@ -100,6 +99,5 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
         toConvertValue = value;
     }
 
-    // $FlowFixMe[prop-missing] automated comment
     return valueConvertersForType[type] ? valueConvertersForType[type](toConvertValue) : toConvertValue;
 }

@@ -1,10 +1,10 @@
-// @flow
 import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
 import { PreviewImage } from 'capture-ui';
-import { dataElementTypes, type DataElement } from '../metaData';
+import type { DataElement } from '../metaData';
+import { dataElementTypes } from '../metaData';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates, PolygonCoordinates } from '../components/Coordinates';
@@ -22,14 +22,13 @@ function convertDateTimeForListDisplay(rawValue: string): string {
 }
 
 type FileClientValue = {
-    name: string,
-    url: string,
-    value: string,
+    name: string;
+    url: string;
+    value: string;
 };
 
-type ImageClientValue = {
-    ...FileClientValue,
-    previewUrl: string,
+type ImageClientValue = FileClientValue & {
+    previewUrl: string;
 };
 
 function convertFileForDisplay(clientValue: FileClientValue) {
@@ -72,7 +71,7 @@ function convertNumberRangeForDisplay(clientValue) {
     );
 }
 
-function convertStatusForDisplay(clientValue: Object) {
+function convertStatusForDisplay(clientValue: any) {
     const { isNegative, isPositive, text } = clientValue;
     return (
         <Tag negative={isNegative} positive={isPositive}>
@@ -88,13 +87,13 @@ function convertOrgUnitForDisplay(clientValue: string | { id: string }) {
     );
 }
 
-function convertPolygonForDisplay(clientValue: Object) {
+function convertPolygonForDisplay(clientValue: any) {
     return <PolygonCoordinates coordinates={clientValue} />;
 }
 
 const valueConvertersForType = {
     [dataElementTypes.AGE]: convertDateForListDisplay,
-    [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
+    [dataElementTypes.ASSIGNEE]: (rawValue: any) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.DATE]: convertDateForListDisplay,
@@ -121,7 +120,7 @@ const valueConvertersForType = {
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes, dataElement?: DataElement | null) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
@@ -133,7 +132,6 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
         return dataElement.optionSet.getOptionText(value);
     }
 
-    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
 
@@ -141,8 +139,8 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
 // This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
 export function convert(
     value: any,
-    type: $Keys<typeof dataElementTypes>,
-    options: ?Array<{ code: string, name: string }>,
+    type: keyof typeof dataElementTypes,
+    options: Array<{ code: string; name: string }> | null,
 ) {
     if (!value && value !== 0 && value !== false) {
         return value;
@@ -160,6 +158,5 @@ export function convert(
             ?.name ?? value;
     }
 
-    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
