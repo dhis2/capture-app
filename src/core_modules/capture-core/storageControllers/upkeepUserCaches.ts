@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
@@ -46,7 +45,7 @@ async function removeMetadataCaches(
     if (history.length > keepCount) {
         const historyPartToRemove = history.slice(keepCount);
         let remainingHistory = history.slice(0, keepCount);
-        // $FlowFixMe
+        // @ts-expect-error - keeping original functionality as before ts rewrite
         await historyPartToRemove.asyncForEach(async (storageName) => {
             const controllerForStorageToRemove =
                 new StorageController(storageName, 1, { Adapters: [currentAdapterType] });

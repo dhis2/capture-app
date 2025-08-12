@@ -1,4 +1,3 @@
-// @flow
 import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
 import { USER_METADATA_STORES } from './constants';
 import type { Input } from './userMetadataStorageController.types';

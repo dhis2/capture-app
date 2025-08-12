@@ -7,7 +7,7 @@ import type { CachedTrackedEntityType } from '../../../../../../storageControlle
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
-    trackedEntityType: CachedTrackedEntityType | null;
+    trackedEntityType: CachedTrackedEntityType;
     optionSets: Array<OptionSet> | null;
     dataEntryFormConfig: DataEntryFormConfig | null;
     configIsFetched: boolean;

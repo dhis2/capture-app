@@ -1,6 +1,4 @@
-// @flow
-
-import { type Access } from '../../metaData/Access';
+import type { Access } from '../../metaData/Access';
 
 type Translation = {
     property: string,
@@ -28,9 +26,9 @@ export type CachedTrackedEntityAttribute = {
     optionSetValue: boolean,
     inherit: boolean,
     optionSet: { id: string },
-    unique: ?boolean,
-    orgunitScope: ?boolean,
-    pattern: ?string,
+    unique?: boolean | null,
+    orgunitScope?: boolean | null,
+    pattern?: string | null,
     attributeValues: Array<CachedAttributeValue>
 }
 
@@ -39,8 +37,8 @@ export type CachedProgramTrackedEntityAttribute = {
     displayInList: boolean,
     searchable: boolean,
     mandatory: boolean,
-    renderOptionsAsRadio: ?boolean,
-    allowFutureDate?: ?boolean,
+    renderOptionsAsRadio?: boolean | null,
+    allowFutureDate?: boolean | null,
 };
 
 export type CachedDataElementTranslation = {
@@ -50,8 +48,8 @@ export type CachedDataElementTranslation = {
 };
 
 export type CachedStyle = {
-    color?: ?string,
-    icon?: ?string,
+    color?: string | null,
+    icon?: string | null,
 };
 
 export type CachedDataElement = {
@@ -72,9 +70,9 @@ export type CachedDataElement = {
 
 export type CachedProgramStageDataElement = {
     compulsory: boolean,
-    allowFutureDate?: ?boolean,
+    allowFutureDate?: boolean | null,
     displayInReports: boolean,
-    renderOptionsAsRadio?: ?boolean,
+    renderOptionsAsRadio?: boolean | null,
     renderType: {
         DESKTOP: {
             type: string,
@@ -91,7 +89,7 @@ export type CachedProgramStageSection = {
     id: string,
     displayName: string,
     displayDescription: string,
-    dataElements: ?Array<CachedSectionDataElements>
+    dataElements?: Array<CachedSectionDataElements> | null
 };
 
 export type CachedDataEntryForm = {
@@ -101,37 +99,37 @@ export type CachedDataEntryForm = {
 
 export type CachedProgramStage = {
     id: string,
-    access: Object,
+    access: any,
     blockEntryForm: boolean,
     name: string,
     displayName: string,
-    description: ?string,
-    displayExecutionDateLabel?: ?string,
-    displayDueDateLabel?: ?string,
-    programStageSections: ?Array<CachedProgramStageSection>,
+    description?: string | null,
+    displayExecutionDateLabel?: string | null,
+    displayDueDateLabel?: string | null,
+    programStageSections?: Array<CachedProgramStageSection> | null,
     programStageDataElements: Array<CachedProgramStageDataElement>,
     formType: string,
-    dataEntryForm: ?CachedDataEntryForm,
-    featureType: ?string,
+    dataEntryForm?: CachedDataEntryForm | null,
+    featureType?: string | null,
     validationStrategy: string,
-    enableUserAssignment?: ?boolean,
-    autoGenerateEvent?: ?boolean,
-    allowGenerateNextVisit?: ?boolean,
-    remindCompleted?: ?boolean,
-    openAfterEnrollment?: ?boolean,
-    generatedByEnrollmentDate?: ?boolean,
-    hideDueDate?: ?boolean,
+    enableUserAssignment?: boolean | null,
+    autoGenerateEvent?: boolean | null,
+    allowGenerateNextVisit?: boolean | null,
+    remindCompleted?: boolean | null,
+    openAfterEnrollment?: boolean | null,
+    generatedByEnrollmentDate?: boolean | null,
+    hideDueDate?: boolean | null,
     reportDateToUse: string,
     repeatable: boolean,
     minDaysFromStart: number,
-    style?: ?CachedStyle,
+    style?: CachedStyle | null,
 };
 
 export type CachedCategoryOption = {
     id: string,
     displayName: string,
-    organisationUnitIds: ?Array<string>,
-    access: Object,
+    organisationUnitIds?: Array<string> | null,
+    access: any,
 };
 
 export type CachedCategory = {
@@ -151,7 +149,7 @@ export type ProgramCachedCategory = {
 export type ProgramCachedCategoryCombo = {
     id: string,
     displayName: string,
-    categories: ?Array<ProgramCachedCategory>,
+    categories?: Array<ProgramCachedCategory> | null,
     isDefault: boolean,
 };
 
@@ -160,7 +158,7 @@ export type CachedTrackedEntityTypeAttribute = {
     displayInList: boolean,
     mandatory: boolean,
     searchable: boolean,
-    renderOptionsAsRadio: ?boolean,
+    renderOptionsAsRadio?: boolean | null,
 };
 
 export type CachedTrackedEntityTypeTranslation = {
@@ -180,10 +178,10 @@ export type CachedTrackedEntityType = {
     id: string,
     access: Access,
     displayName: string,
-    trackedEntityTypeAttributes: ?Array<CachedTrackedEntityTypeAttribute>,
+    trackedEntityTypeAttributes?: Array<CachedTrackedEntityTypeAttribute> | null,
     translations: Array<CachedTrackedEntityTypeTranslation>,
     minAttributesRequiredToSearch: number,
-    featureType: ?string,
+    featureType?: string | null,
 }
 
 export type CachedProgram = {
@@ -191,21 +189,22 @@ export type CachedProgram = {
     access: Access,
     displayName: string,
     displayShortName: string,
-    organisationUnits: Object,
-    programSections: ?Array<CachedProgramSection>,
+    organisationUnits: any,
+    programSections?: Array<CachedProgramSection> | null,
     programStages: Array<CachedProgramStage>,
     programType: string,
-    categoryCombo: ?ProgramCachedCategoryCombo,
-    style?: ?CachedStyle,
+    categoryCombo?: ProgramCachedCategoryCombo | null,
+    style?: CachedStyle | null,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
-    trackedEntityTypeId: ?string,
-    incidentDateLabel: ?string,
-    enrollmentDateLabel: ?string,
+    trackedEntityTypeAttributes: Array<any>,
+    trackedEntityTypeId?: string | null,
+    incidentDateLabel?: string | null,
+    enrollmentDateLabel?: string | null,
     displayEnrollmentDateLabel: string,
     displayIncidentDateLabel: string,
-    dataEntryForm: ?CachedDataEntryForm,
-    featureType: ?string,
+    dataEntryForm?: CachedDataEntryForm | null,
+    featureType?: string | null,
     selectEnrollmentDatesInFuture: boolean,
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,
@@ -222,7 +221,7 @@ export type CachedOption = {
     id: string,
     code: string,
     displayName: string,
-    style?: ?CachedStyle,
+    style?: CachedStyle | null,
     translations: Array<CachedOptionTranslation>,
     attributeValues: Array<CachedAttributeValue>,
 };
@@ -246,15 +245,15 @@ export type CachedOptionSet = {
 
 export type CachedRelationshipConstraint = {
     relationshipEntity: string,
-    trackedEntityType?: ?{ id: string },
-    program?: ?{ id: string },
-    programStage?: ?{ id: string },
+    trackedEntityType?: { id: string } | null,
+    program?: { id: string } | null,
+    programStage?: { id: string } | null,
 }
 
 export type CachedRelationshipType = {
     id: string,
     displayName: string,
-    access: Object,
+    access: any,
     fromConstraint: CachedRelationshipConstraint,
     toConstraint: CachedRelationshipConstraint,
 }
