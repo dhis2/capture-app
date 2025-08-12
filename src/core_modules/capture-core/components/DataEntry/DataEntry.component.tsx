@@ -82,7 +82,7 @@ const styles: Readonly<any> = (theme: any) => ({
 
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements];
-    name: string;
+    name?: string;
     beforeSectionId?: string;
 };
 
@@ -102,10 +102,8 @@ type DirectionClasses = {
     formInnerContainer?: string;
 };
 
-type PlainProps = {
+export type DataEntryOutputProps = {
     id: string,
-    itemId: string,
-    ready: boolean,
     formFoundation: RenderFoundation,
     completeButton?: ReactElement<any>,
     mainButton?: ReactElement<any>,
@@ -136,13 +134,20 @@ type PlainProps = {
         itemId: string,
     ) => void,
     dataEntrySections?: { [key: string]: DataEntrySection },
-    dataEntryFieldRef: any,
+    dataEntryFieldRef?: (instance: any, key: string) => void;
     onAddNote?: (...args: any[]) => void,
     onOpenAddRelationship?: (...args: any[]) => void,
     onUpdateDataEntryField?: (...args: any[]) => void,
+    onGetValidationContext?: () => any,
+    orgUnit?: { id?: string },
 };
 
-type Props = PlainProps & WithStyles<typeof styles>;
+type OwnProps = DataEntryOutputProps & {
+    itemId: string,
+    ready: boolean,
+}
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const fieldHorizontalFilter = (placement: typeof placements[keyof typeof placements]) =>
     (fieldContainer: FieldContainer) =>

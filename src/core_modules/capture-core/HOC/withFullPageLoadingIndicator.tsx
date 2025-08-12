@@ -5,7 +5,7 @@ type Props = {
     ready: boolean;
 };
 
-export const withFullPageLoadingIndicator =
+export const withLoadingIndicator =
     (readyFn?: (props: any) => boolean) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {

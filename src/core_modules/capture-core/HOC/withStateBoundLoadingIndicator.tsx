@@ -35,8 +35,8 @@ const getLoadingIndicator = (getContainerStylesFn?: ((props: any) => any) | null
 
 export const withStateBoundLoadingIndicator = (
     isReadyFn: (state: any, props: any) => boolean,
-    getContainerStylesFn?: ((props: any) => any) | null | undefined,
-    fullPage?: boolean | null | undefined,
+    getContainerStylesFn?: ((props: any) => any) | null,
+    fullPage?: boolean | null,
 ) =>
     (InnerComponent: React.ComponentType<any>) => {
         const mapStateToProps = (state: any, props: any) => ({

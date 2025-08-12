@@ -3,11 +3,11 @@ import * as React from 'react';
 import { LoadingMaskElementCenter } from '../components/LoadingMasks';
 
 type Props = {
-    ready?: boolean | null | undefined;
+    ready?: boolean | null;
 };
 
 export const withLoadingIndicator =
-    (getContainerStylesFn?: ((props: any) => any) | null | undefined, getIndicatorProps?: ((props: any) => any) | null | undefined, readyFn?: (props: any) => boolean | undefined) =>
+    (getContainerStylesFn?: ((props: any) => any) | null, getIndicatorProps?: ((props: any) => any) | null, readyFn?: (props: any) => boolean | undefined) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {
                 const { ready, ...other } = props;

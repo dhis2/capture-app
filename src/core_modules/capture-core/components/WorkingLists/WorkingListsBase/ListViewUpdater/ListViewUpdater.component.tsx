@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef, useContext, type ComponentType } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { withLoadingIndicator } from '../../../../HOC';
@@ -7,7 +7,7 @@ import { ListViewBuilder } from '../ListViewBuilder';
 import { areFiltersEqual } from '../utils';
 import type { Props } from './listViewUpdater.types';
 
-const ListViewBuilderWithLoadingIndicator = withLoadingIndicator(() => ({ margin: 10, height: 60 }))(ListViewBuilder);
+const ListViewBuilderWithLoadingIndicator = withLoadingIndicator(() => ({ margin: 10, height: 60 }))(ListViewBuilder) as ComponentType<any>;
 
 
 const useUpdateListMemoize = (value) => {

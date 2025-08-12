@@ -1,7 +1,9 @@
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { DataEntryComponent } from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 import { withLoadingIndicator } from '../../HOC';
+import type { DataEntryOutputProps } from './DataEntry.component';
 
 type OwnProps = {
     id: string;
@@ -45,4 +47,4 @@ const mapDispatchToProps = (dispatch: any) => ({
 
 export const DataEntry = connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator(() => ({ height: '350px' }))(DataEntryComponent),
-);
+) as ComponentType<OwnProps & DataEntryOutputProps>;
