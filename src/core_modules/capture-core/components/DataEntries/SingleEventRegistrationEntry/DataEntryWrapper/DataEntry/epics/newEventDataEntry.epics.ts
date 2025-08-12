@@ -62,9 +62,6 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
         }),
         filter((action) => {
             const { programId } = store.value.currentSelections;
-            if (!programId) {
-                return false;
-            }
             const program = programCollection.get(programId);
             if (!(program instanceof EventProgram)) {
                 return false;

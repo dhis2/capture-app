@@ -3,14 +3,16 @@ import { catchError, mergeMap, concatMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { actionTypes, orgUnitFetched } from './coreOrgUnit.actions';
 import { fetchCoreOrgUnit } from './fetchCoreOrgUnit';
+import type { FetchOrgUnitPayload } from './coreOrgUnit.types';
+import type { ReduxStore, ApiUtils, ReduxAction } from '../../../capture-core-utils/types';
 
 export const getCoreOrgUnitEpic = (
     action$: any,
-    store: any,
-    { querySingleResource }: any,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
 ) => action$.pipe(
     ofType(actionTypes.GET_ORGUNIT),
-    concatMap((action: any) => {
+    concatMap((action: ReduxAction<FetchOrgUnitPayload, void>) => {
         const { organisationUnits } = store.value;
         const payload = action.payload;
         if (organisationUnits[payload.orgUnitId]) {

@@ -1,7 +1,7 @@
-import { getUserMetadataStorageController } from '../storageControllers';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../storageControllers';
 
 export const getCachedSingleResourceFromKeyAsync = (
-    store: any,
+    store: typeof USER_METADATA_STORES[keyof typeof USER_METADATA_STORES],
     key: string,
     propsToPass: any = {},
 ) => {

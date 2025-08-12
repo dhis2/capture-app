@@ -93,7 +93,7 @@ const getAncestors = (orgUnitId: any, property: any) => {
 // Works best with memoized input arrays.
 export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     loading: boolean,
-    orgUnitNames?: OrgUnitNames,
+    orgUnitNames: OrgUnitNames | null,
     error: any,
 } => {
     const [fetching, setFetching] = useState(false);
@@ -231,4 +231,4 @@ export const getAncestorIds = async (orgUnitId: string, querySingleResource: Que
     return getAncestors(displayNameCache[orgUnitId].ancestor, 'id');
 };
 
-export const getCachedOrgUnitName = (orgUnitId: string): string | undefined => displayNameCache[orgUnitId]?.displayName;
+export const getCachedOrgUnitName = (orgUnitId: string): string | null => displayNameCache[orgUnitId]?.displayName;

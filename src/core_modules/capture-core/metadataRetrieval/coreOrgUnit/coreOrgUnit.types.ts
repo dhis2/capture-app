@@ -1,4 +1,5 @@
 import type { OrgUnitGroup } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from '../../../capture-core-utils/types';
 
 // Make sure rules engine OrgUnit is a subset of this!
 export type CoreOrgUnit = {
@@ -10,7 +11,7 @@ export type CoreOrgUnit = {
 };
 
 
-type ActionCreator<T> = (payload: T) => any;
+type ActionCreator<T> = (payload: T) => ReduxAction<any, any>;
 
 export type FetchOrgUnitPayload = {
     orgUnitId: string,

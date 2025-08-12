@@ -4,14 +4,14 @@ import type { Program, ProgramStage } from '../../../metaData';
 
 type ErrorResult = {
     error: string,
-    program: undefined,
-    programStage: undefined,
+    program?: string,
+    programStage?: string,
 };
 
 type Result = {
     program: Program,
     programStage: ProgramStage,
-    error: undefined,
+    error?: string,
 };
 
 

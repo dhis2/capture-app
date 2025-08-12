@@ -7,7 +7,7 @@ type Constant = {
 };
 
 class ConstantStore {
-    _constants?: Array<Constant>;
+    _constants!: Array<Constant> | null;
 
     set(constants: Array<Constant>) {
         this._constants = constants;
