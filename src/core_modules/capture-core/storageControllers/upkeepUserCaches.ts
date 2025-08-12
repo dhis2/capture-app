@@ -45,7 +45,8 @@ async function removeMetadataCaches(
     if (history.length > keepCount) {
         const historyPartToRemove = history.slice(keepCount);
         let remainingHistory = history.slice(0, keepCount);
-        await Promise.all(historyPartToRemove.map(async (storageName) => {
+        // @ts-expect-error - keeping original functionality as before ts rewrite
+        await historyPartToRemove.asyncForEach(async (storageName) => {
             const controllerForStorageToRemove =
                 new StorageController(storageName, 1, { Adapters: [currentAdapterType] });
             try {
@@ -54,7 +55,7 @@ async function removeMetadataCaches(
                 remainingHistory = [...remainingHistory, storageName];
                 log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache: storageName, error }));
             }
-        }));
+        });
         await mainStorageController.set(MAIN_STORES.USER_CACHES, {
             id: ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_METADATA,
             values: remainingHistory,
