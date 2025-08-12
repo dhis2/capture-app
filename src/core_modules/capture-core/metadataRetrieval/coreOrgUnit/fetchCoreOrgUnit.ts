@@ -1,4 +1,3 @@
-// @flow
 import { getAssociatedOrgUnitGroups } from 'capture-core/MetaDataStoreUtils/getAssociatedOrgUnitGroups';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
 import type { QuerySingleResource } from '../../utils/api/api.types';

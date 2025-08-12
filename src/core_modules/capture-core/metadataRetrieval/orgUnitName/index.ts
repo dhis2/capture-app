@@ -1,4 +1,3 @@
-// @flow
 export {
     useOrgUnitNameWithAncestors,
     useOrgUnitNames,

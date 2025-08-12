@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import type { SystemSettings } from '../../metaData';
 

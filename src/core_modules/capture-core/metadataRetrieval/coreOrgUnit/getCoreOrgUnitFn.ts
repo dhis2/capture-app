@@ -1,10 +1,9 @@
-// @flow
 import { fetchCoreOrgUnit } from './fetchCoreOrgUnit';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
 import type { QuerySingleResource } from '../../utils/api';
 
 export const getCoreOrgUnitFn = (querySingleResource: QuerySingleResource) =>
-    async (orgUnitId?: string, cachedOrgUnitsCore: { [orgUnitId: string]: CoreOrgUnit }) => {
+    async (orgUnitId: string | undefined, cachedOrgUnitsCore: { [orgUnitId: string]: CoreOrgUnit }) => {
         if (!orgUnitId) {
             return { coreOrgUnit: null, cached: false };
         }
