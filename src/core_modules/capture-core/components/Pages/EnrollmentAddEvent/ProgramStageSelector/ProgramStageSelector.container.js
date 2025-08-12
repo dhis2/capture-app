@@ -91,10 +91,13 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     }, [programStages]);
 
     useEffect(() => {
+        if (programStages && !availableStages.length) {
+            onCancel();
+        }
         if (availableStages.length === 1) {
             onSelectProgramStage(availableStages[0].id);
         }
-    }, [availableStages, onSelectProgramStage]);
+    }, [availableStages, onSelectProgramStage, onCancel, programStages]);
 
     return (
         <>
