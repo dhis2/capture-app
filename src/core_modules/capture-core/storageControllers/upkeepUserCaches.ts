@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
@@ -13,7 +12,7 @@ const errorMessages = {
 };
 
 async function addCacheRecordToAccessHistory(
-    mainStorageController: typeof StorageController,
+    mainStorageController: any,
     accessHistoryKey: string,
     currentStorageName: string,
 ) {
@@ -36,7 +35,7 @@ async function addCacheRecordToAccessHistory(
 
 async function removeMetadataCaches(
     history: Array<string>,
-    mainStorageController: typeof StorageController,
+    mainStorageController: any,
 ) {
     const currentAdapterType = mainStorageController.adapterType;
     const keepCount = currentAdapterType === DomLocalStorageAdapter
@@ -46,17 +45,16 @@ async function removeMetadataCaches(
     if (history.length > keepCount) {
         const historyPartToRemove = history.slice(keepCount);
         let remainingHistory = history.slice(0, keepCount);
-        // $FlowFixMe
-        await historyPartToRemove.asyncForEach(async (storageName) => {
+        await Promise.all(historyPartToRemove.map(async (storageName) => {
             const controllerForStorageToRemove =
-                new StorageController(storageName, 1, { Adapters: [currentAdapterType] });
+                new StorageController(storageName, 1, { Adapters: [currentAdapterType], objectStores: [], onCacheExpired: null });
             try {
                 await controllerForStorageToRemove.destroy();
             } catch (error) {
                 remainingHistory = [...remainingHistory, storageName];
                 log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache: storageName, error }));
             }
-        });
+        }));
         await mainStorageController.set(MAIN_STORES.USER_CACHES, {
             id: ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_METADATA,
             values: remainingHistory,
@@ -65,7 +63,7 @@ async function removeMetadataCaches(
 }
 
 export const upkeepUserCaches = async (
-    mainStorageController: typeof StorageController,
+    mainStorageController: any,
     userMetadataStorageName: string,
     userDataStorageName: string,
 ) => {

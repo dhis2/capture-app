@@ -1,4 +1,3 @@
-// @flow
 import { StorageController } from 'capture-core-utils/storage/StorageController';
 import { hashSHA256 } from 'capture-core-utils/hash';
 import { ACCESS_HISTORY_KEYS, MAIN_STORES } from './constants';
@@ -52,7 +51,7 @@ export const initMainController = async ({
         onCacheExpired,
         serverVersion,
     });
-    const upgradeTempData = {};
+    const upgradeTempData: any = {};
     await mainStorageController.open({
         onBeforeUpgrade: async ({ get }) => {
             upgradeTempData.accessHistoryMetadata =
@@ -65,6 +64,7 @@ export const initMainController = async ({
                 await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryMetadata);
             upgradeTempData.accessHistoryData && await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
         },
+        onCreateObjectStore: null,
     });
 
     return mainStorageController;

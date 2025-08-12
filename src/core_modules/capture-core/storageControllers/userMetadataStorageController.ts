@@ -1,4 +1,3 @@
-// @flow
 import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
 import { USER_METADATA_STORES } from './constants';
 import type { Input } from './userMetadataStorageController.types';
@@ -13,6 +12,7 @@ const createStorageController = ({
     {
         Adapters: adapterTypes,
         objectStores: Object.values(USER_METADATA_STORES),
+        onCacheExpired: null,
     },
 );
 
@@ -44,6 +44,8 @@ export const initUserMetadataController = async ({
 
     await userStorageController
         .open({
+            onBeforeUpgrade: null,
+            onAfterUpgrade: null,
             onCreateObjectStore: (objectStore, adapter) => {
                 if (adapter === IndexedDBAdapter) {
                     storeSpecificCreateActions[objectStore.name] &&

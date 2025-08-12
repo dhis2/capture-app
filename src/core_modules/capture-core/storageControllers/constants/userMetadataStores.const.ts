@@ -1,5 +1,3 @@
-// @flow
-
 export const USER_METADATA_STORES = {
     CONSTANTS: 'constants',
     ORGANISATION_UNIT_LEVELS: 'organisationUnitLevels',

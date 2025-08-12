@@ -1,5 +1,3 @@
-// @flow
-import { typeof StorageController } from 'capture-core-utils/storage';
 import { availableAdapters } from 'capture-core-utils/storage/availableAdapters';
 import { initMainController } from './mainStorageController';
 import { initUserMetadataController } from './userMetadataStorageController';
@@ -8,15 +6,15 @@ import { upkeepUserCaches } from './upkeepUserCaches';
 import type { ServerVersion } from './types';
 
 
-const adapterTypes = [availableAdapters.INDEXED_DB];
-const storageControllers: { [key: string]: StorageController } = {};
+const adapterTypes: any = [availableAdapters.INDEXED_DB];
+const storageControllers: { [key: string]: any } = {};
 
 export const initStorageControllers = async ({
     onCacheExpired,
     currentUserId,
     serverVersion,
     baseUrl,
-}: { onCacheExpired: Function, currentUserId: string, serverVersion: ServerVersion, baseUrl: string }) => {
+}: { onCacheExpired: any; currentUserId: string; serverVersion: ServerVersion; baseUrl: string }) => {
     storageControllers.main = await initMainController({ adapterTypes, onCacheExpired, serverVersion, baseUrl });
 
     const userMetadataStorageName = `${storageControllers.main.name}-${currentUserId}-metadata`;

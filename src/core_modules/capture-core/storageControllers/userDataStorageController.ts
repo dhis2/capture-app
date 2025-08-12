@@ -1,4 +1,3 @@
-// @flow
 import { StorageController } from 'capture-core-utils/storage';
 import { USER_DATA_STORES } from './constants';
 import type { Input } from './userDataStorageController.types';
@@ -13,6 +12,7 @@ const createStorageController = ({
         {
             Adapters: adapterTypes,
             objectStores: Object.values(USER_DATA_STORES),
+            onCacheExpired: null,
         },
     );
     return storageController;
