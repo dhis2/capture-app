@@ -1,7 +1,7 @@
-// @flow
 import moment from 'moment';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { dataElementTypes } from '../metaData';
+import type { ApiAssignedUser } from '../../capture-core-utils/types/api-types';
 
 function convertTime(d2Value: string) {
     const parseData = parseTime(d2Value);
@@ -34,12 +34,11 @@ const optionSetConvertersForType = {
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
 };
 
-export function convertOptionSetValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertOptionSetValue(value: any, type: keyof typeof dataElementTypes) {
     if (value == null) {
         return null;
     }
 
-    // $FlowFixMe dataElementTypes flow error
     return optionSetConvertersForType[type] ? optionSetConvertersForType[type](value) : value;
 }
 
@@ -53,7 +52,7 @@ function convertCoordinateToClient(value: any) {
 function convertPolygonToClient(value: any) {
     if (typeof value === 'string') {
         const coordinates = value.replace(/[()]/g, '').split(',').map(Number);
-        const coordinatesArray = [];
+        const coordinatesArray: number[][] = [];
         for (let i = 0; i < coordinates.length; i += 2) {
             coordinatesArray.push([coordinates[i], coordinates[i + 1]]);
         }
@@ -78,11 +77,10 @@ const valueConvertersForType = {
     [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes) {
     if (value == null) {
         return null;
     }
 
-    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

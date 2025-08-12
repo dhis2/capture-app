@@ -1,4 +1,3 @@
-// @flow
 const PERIOD_TYPE_MAP: { [apiName: string]: string } = {
     Daily: 'DAILY',
 

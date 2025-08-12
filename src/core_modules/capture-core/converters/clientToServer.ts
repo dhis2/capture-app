@@ -1,21 +1,21 @@
-// @flow
 import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
 import { FEATURES, featureAvailable } from '../../capture-core-utils';
+import type { ApiAssignedUser } from '../../capture-core-utils/types/api-types';
 
 type RangeValue = {
-    from: number,
-    to: number,
-}
+    from: number;
+    to: number;
+};
 
 type Assignee = {
-    id: string,
-    username: string,
-    name: string,
-    firstName: string,
-    surname: string,
-}
+    id: string;
+    username: string;
+    name: string;
+    firstName: string;
+    surname: string;
+};
 
 function convertDate(rawValue: string): string {
     const editedDate = rawValue;
@@ -58,19 +58,18 @@ const valueConvertersForType = {
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [dataElementTypes.TRUE_ONLY]: () => 'true',
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
-    [dataElementTypes.FILE_RESOURCE]: (rawValue: Object) => rawValue.value,
-    [dataElementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
-    [dataElementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
-    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
-    [dataElementTypes.AGE]: (rawValue: Object) => convertDate(rawValue),
+    [dataElementTypes.FILE_RESOURCE]: (rawValue: any) => rawValue.value,
+    [dataElementTypes.IMAGE]: (rawValue: any) => rawValue.value,
+    [dataElementTypes.COORDINATE]: (rawValue: any) => `[${rawValue.longitude},${rawValue.latitude}]`,
+    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: any) => rawValue.id,
+    [dataElementTypes.AGE]: (rawValue: any) => convertDate(rawValue),
     [dataElementTypes.ASSIGNEE]: convertAssigneeToServer,
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    // $FlowFixMe dataElementTypes flow error
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }
 
@@ -78,10 +77,10 @@ export function convertCategoryOptionsToServer(
     value: {[categoryId: string]: string} | string,
 ) {
     if (typeof value === 'object') {
-        const categoryObject: Object = value;
-        return Object.keys(categoryObject).reduce((acc, categoryId) => {
-            if (value[categoryId]) {
-                acc.push(value[categoryId]);
+        const categoryObject: any = value;
+        return Object.keys(categoryObject).reduce((acc: string[], categoryId) => {
+            if (categoryObject[categoryId]) {
+                acc.push(categoryObject[categoryId]);
             }
             return acc;
         }, []).join(featureAvailable(FEATURES.newUIDsSeparator) ? ',' : ';');

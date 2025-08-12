@@ -1,9 +1,9 @@
-// @flow
 import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
-import { dataElementTypes, type DataElement } from '../metaData';
+import type { DataElement } from '../metaData';
+import { dataElementTypes } from '../metaData';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/Coordinates';
@@ -22,13 +22,12 @@ function convertDateTimeForView(rawValue: string): string {
 }
 
 type FileClientValue = {
-    name: string,
-    url: string,
-    value: string,
+    name: string;
+    url: string;
+    value: string;
 };
-type ImageClientValue = {
-    ...FileClientValue,
-    previewUrl: string,
+type ImageClientValue = FileClientValue & {
+    previewUrl: string;
 };
 
 
@@ -73,7 +72,7 @@ const valueConvertersForType = {
     [dataElementTypes.POLYGON]: () => 'Polygon',
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes, dataElement?: DataElement | null) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
@@ -83,10 +82,9 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
         }
         return dataElement.optionSet.getOptionText(value);
     }
-    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
-export function convertDateWithTimeForView(rawValue?: ?string): string {
+export function convertDateWithTimeForView(rawValue?: string | null): string {
     if (!rawValue) { return ''; }
     if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
         return convertDateForView(rawValue);

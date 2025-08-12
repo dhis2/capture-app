@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -11,12 +10,12 @@ const errorMessages = {
     STAGE_NOT_FOUND: 'Stage not found',
 };
 
-export function convertFormValuesToClient(formValues: ?Object, stage: RenderFoundation) {
+export function convertFormValuesToClient(formValues: any | null, stage: RenderFoundation) {
     const convertedValues = stage.convertValues(formValues, convertValue);
     return convertedValues;
 }
 
-export function convertStateFormValuesToClient(eventId: string, state: Object) {
+export function convertStateFormValuesToClient(eventId: string, state: any) {
     const event = state.events[eventId];
     const formValues = state.formsValues[eventId];
 
@@ -32,7 +31,6 @@ export function convertStateFormValuesToClient(eventId: string, state: Object) {
         return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };
     }
 
-    // $FlowFixMe[incompatible-call] automated comment
     const convertedValues = convertFormValuesToClient(formValues, stage);
 
     return { values: convertedValues, error: null, stage };
