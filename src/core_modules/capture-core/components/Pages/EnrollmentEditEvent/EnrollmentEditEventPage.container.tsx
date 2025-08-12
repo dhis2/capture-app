@@ -51,13 +51,13 @@ import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import type { UserFormField } from '../../FormFields/UserField';
 
-const getEventDate = (event: Record<string, unknown>) => {
+const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
 };
 
-const getEventScheduleDate = (event: Record<string, unknown>) => {
+const getEventScheduleDate = (event) => {
     if (!event?.scheduledAt) { return undefined; }
     const eventDataConvertValue = convertIsoToLocalCalendar(event?.scheduledAt);
     return eventDataConvertValue?.toString();

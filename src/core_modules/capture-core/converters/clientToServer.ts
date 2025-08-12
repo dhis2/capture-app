@@ -79,8 +79,8 @@ export function convertCategoryOptionsToServer(
     if (typeof value === 'object') {
         const categoryObject: any = value;
         return Object.keys(categoryObject).reduce((acc: string[], categoryId) => {
-            if (categoryObject[categoryId]) {
-                acc.push(categoryObject[categoryId]);
+            if (value[categoryId]) {
+                acc.push(value[categoryId]);
             }
             return acc;
         }, []).join(featureAvailable(FEATURES.newUIDsSeparator) ? ',' : ';');
