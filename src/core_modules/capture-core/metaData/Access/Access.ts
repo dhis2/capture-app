@@ -1,4 +1,3 @@
-// @flow
 export type Access = {
     delete: boolean,
     manage: boolean,

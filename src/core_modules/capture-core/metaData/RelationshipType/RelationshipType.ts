@@ -1,26 +1,25 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { Access } from '../Access';
 
 type RelationshipConstraint = {
     entity: string,
-    programId?: ?string,
-    programStageId?: ?string,
+    programId?: string | undefined,
+    programStageId?: string | undefined,
     trackedEntityTypeId: string,
 }
 
 export class RelationshipType {
-    _id: string;
-    _name: string;
-    _referral: boolean;
-    _fromToName: string;
-    _toFromName: string;
-    _access: Access;
-    _from: RelationshipConstraint;
-    _to: RelationshipConstraint;
+    _id!: string;
+    _name!: string;
+    _referral!: boolean;
+    _fromToName!: string;
+    _toFromName!: string;
+    _access!: Access;
+    _from!: RelationshipConstraint;
+    _to!: RelationshipConstraint;
 
-    constructor(initFn: ?(_this: RelationshipType) => void) {
+    constructor(initFn?: (_this: RelationshipType) => void) {
         initFn && isFunction(initFn) && initFn(this);
     }
 

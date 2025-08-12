@@ -1,14 +1,13 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 
-type Constant = {|
+type Constant = {
     id: string,
     displayName: string,
     value: any,
-|};
+};
 
 class ConstantStore {
-    _constants: ?Array<Constant>;
+    _constants!: Array<Constant> | null;
 
     set(constants: Array<Constant>) {
         this._constants = constants;

@@ -1,13 +1,13 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { catchError, mergeMap, concatMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { actionTypes, orgUnitFetched } from './coreOrgUnit.actions';
 import { fetchCoreOrgUnit } from './fetchCoreOrgUnit';
 import type { FetchOrgUnitPayload } from './coreOrgUnit.types';
+import type { ReduxStore, ApiUtils, ReduxAction } from '../../../capture-core-utils/types';
 
 export const getCoreOrgUnitEpic = (
-    action$: InputObservable,
+    action$: any,
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) => action$.pipe(

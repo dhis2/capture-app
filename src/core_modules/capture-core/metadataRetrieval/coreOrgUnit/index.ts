@@ -1,4 +1,3 @@
-// @flow
 export { useCoreOrgUnit } from './useCoreOrgUnit';
 export { getCoreOrgUnit, orgUnitFetched } from './coreOrgUnit.actions';
 export { getCoreOrgUnitEpic } from './getCoreOrgUnit.epics';

@@ -5,7 +5,7 @@ export type ReduxStore = {
     value: {
         dataEntries: Record<string, { eventId: string }>;
         currentSelections: {
-            programId?: string;
+            programId: string;
             orgUnitId?: string;
             complete?: boolean;
         };
@@ -57,7 +57,7 @@ export type ReduxStore = {
         dataEntriesFieldsValue: Record<string, unknown>;
         dataEntriesFieldsMeta: Record<string, unknown>;
         formsValues: Record<string, unknown>;
-        organisationUnits: any[];
+        organisationUnits: {[orgUnitId: string]: any};
         app: {
             page: string;
         };

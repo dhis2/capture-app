@@ -1,4 +1,3 @@
-// @flow
 export { programCollection } from './programCollection/programCollection';
 export { trackedEntityTypesCollection } from './trackedEntityTypeCollection/trackedEntityTypeCollection';
 export { optionSetStore } from './optionSets/optionSets.store';
