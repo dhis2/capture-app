@@ -1,18 +1,16 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { catchError, mergeMap, concatMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { actionTypes, orgUnitFetched } from './coreOrgUnit.actions';
 import { fetchCoreOrgUnit } from './fetchCoreOrgUnit';
-import type { FetchOrgUnitPayload } from './coreOrgUnit.types';
 
 export const getCoreOrgUnitEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils,
+    action$: any,
+    store: any,
+    { querySingleResource }: any,
 ) => action$.pipe(
     ofType(actionTypes.GET_ORGUNIT),
-    concatMap((action: ReduxAction<FetchOrgUnitPayload, void>) => {
+    concatMap((action: any) => {
         const { organisationUnits } = store.value;
         const payload = action.payload;
         if (organisationUnits[payload.orgUnitId]) {

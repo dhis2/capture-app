@@ -1,19 +1,18 @@
-// @flow
 import { useMemo } from 'react';
 import { programCollection } from '../programCollection';
 import type { Program, ProgramStage } from '../../../metaData';
 
-type ErrorResult = {|
+type ErrorResult = {
     error: string,
-    program: void,
-    programStage: void,
-|};
+    program: undefined,
+    programStage: undefined,
+};
 
-type Result = {|
+type Result = {
     program: Program,
     programStage: ProgramStage,
-    error: void,
-|};
+    error: undefined,
+};
 
 
 const createErrorResult = (error: string): ErrorResult => ({
@@ -30,7 +29,7 @@ const createResult = (program: Program, programStage: ProgramStage): Result => (
 
 export const useProgramStageInfo = (programStageId?: string, programId?: string) =>
     useMemo((): Result | ErrorResult => {
-        let programStageInfo;
+        let programStageInfo: Result | ErrorResult | undefined;
         [
             () => {
                 if (!programId && !programStageId) {
@@ -62,9 +61,8 @@ export const useProgramStageInfo = (programStageId?: string, programId?: string)
                 );
             },
             () => {
-                let result;
+                let result: Result | undefined;
                 [...programCollection.values()].some((program) => {
-                    // $FlowFixMe
                     const programStage = program.stages.get(programStageId);
                     if (programStage) {
                         result = createResult(
@@ -80,6 +78,5 @@ export const useProgramStageInfo = (programStageId?: string, programId?: string)
             programStageInfo = compute();
             return Boolean(programStageInfo);
         });
-        // $FlowFixMe
-        return programStageInfo;
+        return programStageInfo as Result | ErrorResult;
     }, [programId, programStageId]);

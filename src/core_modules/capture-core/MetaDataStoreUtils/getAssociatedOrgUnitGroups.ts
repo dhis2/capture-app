@@ -1,7 +1,6 @@
-// @flow
 import { getUserMetadataStorageController } from '../storageControllers';
 
-export async function getAssociatedOrgUnitGroups(orgUnitId: string): any {
+export async function getAssociatedOrgUnitGroups(orgUnitId: string): Promise<any> {
     const storageController = getUserMetadataStorageController();
     const orgUnitGroups = await storageController.getAll(
         'organisationUnitGroups', {
