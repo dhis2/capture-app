@@ -41,8 +41,8 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
         this.props.onCommitValue(value);
     };
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onUpdate);
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onUpdate);
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue);
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
 
     render() {
         const { value } = this.props;
