@@ -9,7 +9,7 @@ import type { DataEntryFormConfig } from '../types';
 type Props = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedOptionSets: Map<string, CachedOptionSet>;
-    cachedTrackedEntityType: CachedTrackedEntityType | null;
+    cachedTrackedEntityType: CachedTrackedEntityType;
     dataEntryFormConfig: DataEntryFormConfig | null;
     locale: string;
     minorServerVersion?: number;
@@ -23,9 +23,6 @@ export const buildTrackedEntityTypeCollection = async ({
     locale,
     minorServerVersion,
 }: Props) => {
-    if (!cachedTrackedEntityType) {
-        return null;
-    }
     const trackedEntityTypeFactory = new TrackedEntityTypeFactory({
         cachedTrackedEntityAttributes,
         cachedOptionSets,

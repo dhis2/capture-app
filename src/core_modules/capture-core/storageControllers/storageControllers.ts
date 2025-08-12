@@ -1,3 +1,4 @@
+import type { StorageController } from 'capture-core-utils/storage';
 import { availableAdapters } from 'capture-core-utils/storage/availableAdapters';
 import { initMainController } from './mainStorageController';
 import { initUserMetadataController } from './userMetadataStorageController';
@@ -7,7 +8,7 @@ import type { ServerVersion } from './types';
 
 
 const adapterTypes: any = [availableAdapters.INDEXED_DB];
-const storageControllers: { [key: string]: any } = {};
+const storageControllers: { [key: string]: StorageController } = {};
 
 export const initStorageControllers = async ({
     onCacheExpired,

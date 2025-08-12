@@ -64,7 +64,6 @@ export const initMainController = async ({
                 await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryMetadata);
             upgradeTempData.accessHistoryData && await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
         },
-        onCreateObjectStore: null,
     });
 
     return mainStorageController;

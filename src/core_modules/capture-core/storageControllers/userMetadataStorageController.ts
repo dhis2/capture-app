@@ -12,7 +12,6 @@ const createStorageController = ({
     {
         Adapters: adapterTypes,
         objectStores: Object.values(USER_METADATA_STORES),
-        onCacheExpired: null,
     },
 );
 
@@ -44,8 +43,6 @@ export const initUserMetadataController = async ({
 
     await userStorageController
         .open({
-            onBeforeUpgrade: null,
-            onAfterUpgrade: null,
             onCreateObjectStore: (objectStore, adapter) => {
                 if (adapter === IndexedDBAdapter) {
                     storeSpecificCreateActions[objectStore.name] &&
