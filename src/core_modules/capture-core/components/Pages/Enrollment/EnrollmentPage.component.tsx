@@ -20,4 +20,4 @@ const EnrollmentPagePlain = ({ enrollmentPageStatus }: { enrollmentPageStatus: a
 
 export const EnrollmentPageComponent: ComponentType<Omit<Props, 'classes'>> = compose(
     withErrorMessageHandler(),
-)(EnrollmentPagePlain);
+)(EnrollmentPagePlain) as ComponentType<Omit<Props, 'classes'>>;

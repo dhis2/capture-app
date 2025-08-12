@@ -1,6 +1,5 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { NoticeBox } from '@dhis2/ui';
 
 const getStyles = () => ({
@@ -10,15 +9,12 @@ const getStyles = () => ({
 });
 
 type Props = {
-    error?: ?string,
-    classes: {
-        errorContainer: string,
-    }
+    error?: string | null | undefined;
 };
 
 export const withErrorMessageHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        withStyles(getStyles)((props: Props) => {
+        withStyles(getStyles)((props: Props & WithStyles<typeof getStyles>) => {
             const { error, classes, ...passOnProps } = props;
 
             if (error) {

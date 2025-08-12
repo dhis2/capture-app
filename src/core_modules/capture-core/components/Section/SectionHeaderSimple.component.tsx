@@ -28,7 +28,7 @@ const styles = () => ({
 });
 
 type OwnProps = {
-    title: string | ReactElement;
+    title?: string | ReactElement;
     children?: ReactElement;
     secondary?: boolean;
     titleStyle?: Record<string, any>;

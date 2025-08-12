@@ -11,6 +11,8 @@ import type { TeiRegistration, RenderFoundation } from '../../../metaData';
 type FinalTeiDataEntryProps = {
     orgUnitId: string;
     teiRegistrationMetadata: TeiRegistration;
+    id: string;
+    onUpdateFormFieldAsync: (...args: any[]) => any;
 };
 
 class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {

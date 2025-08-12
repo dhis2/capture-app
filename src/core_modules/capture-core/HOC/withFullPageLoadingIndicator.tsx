@@ -1,9 +1,8 @@
-// @flow
 import * as React from 'react';
 import { LoadingMaskForPage } from '../components/LoadingMasks';
 
 type Props = {
-    ready: boolean,
+    ready: boolean;
 };
 
 export const withLoadingIndicator =

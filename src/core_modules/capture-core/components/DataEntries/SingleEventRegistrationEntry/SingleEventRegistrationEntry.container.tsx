@@ -63,4 +63,4 @@ export const SingleEventRegistrationEntry: React.ComponentType<ContainerProps> =
         connect(makeMapStateToProps, mapDispatchToProps, mergeProps),
         withLoadingIndicator(),
         withBrowserBackWarning(dialogConfig, inEffect),
-    )(SingleEventRegistrationEntryComponent);
+    )(SingleEventRegistrationEntryComponent) as React.ComponentType<ContainerProps>;
