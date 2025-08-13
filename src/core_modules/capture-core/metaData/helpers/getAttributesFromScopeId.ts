@@ -1,4 +1,3 @@
-// @flow
 import { TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
 import type { DataElement } from '../DataElement';

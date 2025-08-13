@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -20,8 +19,7 @@ export function getProgramAndStageForProgram(programId: string, programStageId: 
     }
 
 
-    // $FlowFixMe[prop-missing] automated comment
-    const stage = program instanceof EventProgram ? program.stage : program.getStage(programStageId);
+    const stage = program instanceof EventProgram ? (program as any).stage : program.getStage(programStageId);
 
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ program, programId }));

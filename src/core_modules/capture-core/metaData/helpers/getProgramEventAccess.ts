@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getProgramFromProgramIdThrowIfNotFound } from './getProgramFromProgramIdThrowIfNotFound';
@@ -6,8 +5,8 @@ import { EventProgram } from '../Program';
 
 export function getProgramEventAccess(
     programId: string,
-    programStageId: ?string,
-    categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } },
+    programStageId: string | null | undefined,
+    categoriesMeta?: { [categoryId: string]: { writeAccess: boolean } } | null | undefined,
 ) {
     const program = getProgramFromProgramIdThrowIfNotFound(programId);
     let stage;

@@ -1,4 +1,3 @@
-// @flow
 import { programTypes } from './programTypes.const';
 
 export const scopeTypes = {
