@@ -21,7 +21,7 @@ export class CustomForm {
     _id!: string;
     _data!: Data;
 
-    constructor(initFn?: (_this: CustomForm) => void) {
+    constructor(initFn: ((_this: CustomForm) => void) | null) {
         this._id = '';
         initFn && initFn(this);
     }

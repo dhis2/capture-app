@@ -15,7 +15,7 @@ export class Option {
     _attributeValues?: CachedAttributeValue[];
     _icon?: Icon | undefined;
 
-    constructor(initFn?: (_this: Option) => void) {
+    constructor(initFn: ((_this: Option) => void) | null) {
         if (initFn && isFunction(initFn)) {
             initFn(this);
         }

@@ -4,8 +4,8 @@ import type { Access } from '../Access';
 
 type RelationshipConstraint = {
     entity: string,
-    programId?: string | undefined,
-    programStageId?: string | undefined,
+    programId?: string | null,
+    programStageId?: string | null,
     trackedEntityTypeId: string,
 }
 
@@ -19,7 +19,7 @@ export class RelationshipType {
     _from!: RelationshipConstraint;
     _to!: RelationshipConstraint;
 
-    constructor(initFn?: (_this: RelationshipType) => void) {
+    constructor(initFn: ((_this: RelationshipType) => void) | null) {
         initFn && isFunction(initFn) && initFn(this);
     }
 

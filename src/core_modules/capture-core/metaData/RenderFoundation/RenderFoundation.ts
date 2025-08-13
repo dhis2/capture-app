@@ -19,14 +19,14 @@ export class RenderFoundation {
     _id!: string;
     _access!: Access;
     _name!: string;
-    _description!: string | undefined;
+    _description!: string | null;
     _programId!: string;
     _sections!: Map<string, Section>;
     _labels!: { [key: string]: string };
     _featureType!: string;
     _validationStrategy!: typeof validationStrategies[keyof typeof validationStrategies];
 
-    constructor(initFn?: (_this: RenderFoundation) => void) {
+    constructor(initFn: ((_this: RenderFoundation) => void) | null) {
         this._sections = new Map();
         this._labels = {};
         this._validationStrategy = validationStrategies.ON_UPDATE_AND_INSERT;
@@ -54,10 +54,10 @@ export class RenderFoundation {
         return this._name;
     }
 
-    set description(description: string | undefined) {
+    set description(description: string | null) {
         this._description = description;
     }
-    get description(): string | undefined {
+    get description(): string | null {
         return this._description;
     }
 

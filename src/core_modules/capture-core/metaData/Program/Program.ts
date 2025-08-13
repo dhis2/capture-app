@@ -19,7 +19,7 @@ export class Program {
     _shortName!: string;
     _stages!: Map<string, ProgramStage>;
     _organisationUnits!: any;
-    _categoryCombination!: CategoryCombination | undefined;
+    _categoryCombination!: CategoryCombination | null;
     _programRules!: Array<ProgramRule>;
     _programRuleVariables!: Array<ProgramRuleVariable>;
     _icon!: Icon | undefined;
@@ -77,10 +77,10 @@ export class Program {
         return this._organisationUnits;
     }
 
-    set categoryCombination(categoryCombination: CategoryCombination | undefined) {
+    set categoryCombination(categoryCombination: CategoryCombination | null) {
         this._categoryCombination = categoryCombination;
     }
-    get categoryCombination(): CategoryCombination | undefined {
+    get categoryCombination(): CategoryCombination | null {
         return this._categoryCombination;
     }
 

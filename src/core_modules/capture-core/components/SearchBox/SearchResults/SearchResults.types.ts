@@ -6,7 +6,7 @@ import type { ListItem } from '../../CardList/CardList.types';
 
 export type CardDataElementsInformation = Array<Pick<DataElement, 'id' | 'name' | 'type'| 'optionSet'>>;
 
-export type CardProfileImageElementInformation = Pick<DataElement, 'id' | 'name'| 'type'| 'optionSet'>;
+export type CardProfileImageElementInformation = Pick<DataElement, 'id' | 'name'| 'type'>;
 
 export type PropsFromRedux = {
     currentPage: number;

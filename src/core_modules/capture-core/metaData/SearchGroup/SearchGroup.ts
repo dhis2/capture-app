@@ -9,7 +9,7 @@ export class SearchGroup {
     _searchForm!: RenderFoundation;
     _unique!: boolean;
 
-    constructor(initFn?: (_this: SearchGroup) => void) {
+    constructor(initFn: ((_this: SearchGroup) => void) | null) {
         this._minAttributesRequiredToSearch = 0;
         this._unique = false;
         initFn && isFunction(initFn) && initFn(this);

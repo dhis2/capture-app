@@ -13,7 +13,7 @@ export class TrackedEntityType {
     _attributes!: Array<DataElement>;
     _searchGroups!: Array<SearchGroup>;
 
-    constructor(initFn?: (_this: TrackedEntityType) => void) {
+    constructor(initFn: ((_this: TrackedEntityType) => void) | null) {
         this._attributes = [];
         initFn && isFunction(initFn) && initFn(this);
     }

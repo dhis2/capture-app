@@ -12,8 +12,8 @@ const RANGE_TYPES = [
     dataElementTypes.TIME_RANGE,
 ];
 
-export const isEqualRangeValue = (value: any, type: string): boolean => {
-    if (!RANGE_TYPES.includes(type as any)) {
+export const isEqualRangeValue = (value: any, type: any): boolean => {
+    if (!RANGE_TYPES.includes(type)) {
         return true;
     }
 

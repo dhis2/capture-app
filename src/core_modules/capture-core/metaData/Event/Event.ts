@@ -12,7 +12,7 @@ export class Event {
     _orgUnitName!: string;
     _occurredAt!: string | Date;
 
-    constructor(initFn?: (_this: Event) => void) {
+    constructor(initFn: ((_this: Event) => void) | null) {
         initFn && isFunction(initFn) && initFn(this);
     }
 

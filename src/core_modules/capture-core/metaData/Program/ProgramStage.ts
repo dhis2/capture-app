@@ -28,7 +28,7 @@ export class ProgramStage {
     _icon!: Icon | undefined;
     _programRules!: Array<ProgramRule>;
 
-    constructor(initFn?: (_this: ProgramStage) => void) {
+    constructor(initFn: ((_this: ProgramStage) => void) | null) {
         this.programRules = [];
         initFn && isFunction(initFn) && initFn(this);
     }

@@ -15,10 +15,10 @@ export class Enrollment {
     _labels!: { [key: typeof labelKeys[keyof typeof labelKeys]]: string };
     _optionFlags!: OptionFlags;
     _enrollmentForm!: RenderFoundation;
-    _inputSearchGroups!: Array<InputSearchGroup> | undefined;
+    _inputSearchGroups!: Array<InputSearchGroup> | null;
     _trackedEntityType!: TrackedEntityType;
 
-    constructor(initFn?: (_this: Enrollment) => void) {
+    constructor(initFn: ((_this: Enrollment) => void) | null) {
         this._labels = {
             [labelKeys.OCCURRED_AT]: defaultLabelValues.OCCURRED_AT,
             [labelKeys.ENROLLED_AT]: defaultLabelValues.ENROLLED_AT,
@@ -78,7 +78,7 @@ export class Enrollment {
     set inputSearchGroups(searchGroups: Array<InputSearchGroup>) {
         this._inputSearchGroups = searchGroups;
     }
-    get inputSearchGroups(): Array<InputSearchGroup> | undefined {
+    get inputSearchGroups(): Array<InputSearchGroup> | null {
         return this._inputSearchGroups;
     }
 

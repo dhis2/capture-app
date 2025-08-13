@@ -6,10 +6,10 @@ import type { TrackedEntityType } from '../../TrackedEntityType';
 
 export class TeiRegistration {
     _form!: RenderFoundation;
-    _inputSearchGroups!: Array<InputSearchGroup> | undefined;
+    _inputSearchGroups!: Array<InputSearchGroup> | null;
     _trackedEntityType!: TrackedEntityType;
 
-    constructor(initFn?: (_this: TeiRegistration) => void) {
+    constructor(initFn: ((_this: TeiRegistration) => void) | null) {
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -23,7 +23,7 @@ export class TeiRegistration {
     set inputSearchGroups(searchGroups: Array<InputSearchGroup>) {
         this._inputSearchGroups = searchGroups;
     }
-    get inputSearchGroups(): Array<InputSearchGroup> | undefined {
+    get inputSearchGroups(): Array<InputSearchGroup> | null {
         return this._inputSearchGroups;
     }
 

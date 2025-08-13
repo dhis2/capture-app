@@ -10,7 +10,7 @@ export class InputSearchGroup {
     _searchFoundation!: RenderFoundation;
     _onSearch!: Searcher;
 
-    constructor(initFn?: (_this: InputSearchGroup) => void) {
+    constructor(initFn: ((_this: InputSearchGroup) => void) | null) {
         this._minAttributesRequiredToSearch = 0;
         initFn && isFunction(initFn) && initFn(this);
     }

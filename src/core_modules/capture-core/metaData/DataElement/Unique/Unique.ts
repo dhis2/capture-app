@@ -11,7 +11,7 @@ export class Unique {
     _scope!: typeof scopes[keyof typeof scopes];
     _onValidate!: Validator;
 
-    constructor(initFn?: (_this: Unique) => void) {
+    constructor(initFn: ((_this: Unique) => void) | null) {
         this._scope = scopes.ENTIRE_SYSTEM;
         this._generatable = false;
         initFn && initFn(this);

@@ -9,7 +9,7 @@ export class Category {
         CATEGORY_OPTION_NOT_FOUND: 'Category option was not found',
     };
 
-    constructor(initFn?: (_this: Category) => void) {
+    constructor(initFn: ((_this: Category) => void) | null) {
         this.name = '';
         this.id = '';
         initFn && isFunction(initFn) && initFn(this);

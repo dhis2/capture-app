@@ -28,7 +28,7 @@ export class Section {
     _collapsible!: boolean;
     _elements!: Map<string, DataElement | FormFieldPluginConfig>;
     _showContainer!: boolean;
-    _customForm!: CustomForm | undefined;
+    _customForm!: CustomForm | null;
     _group!: string;
 
     constructor(initFn: (_this: Section) => void) {
@@ -61,14 +61,14 @@ export class Section {
         return this._displayDescription;
     }
 
-    set open(open: boolean | undefined) {
+    set open(open: boolean | null) {
         this._open = isDefined(open) ? open! : true;
     }
     get open(): boolean {
         return this._open;
     }
 
-    set visible(visible: boolean | undefined) {
+    set visible(visible: boolean | null) {
         this._visible = isDefined(visible) ? visible! : true;
     }
     get visible(): boolean {
@@ -78,11 +78,11 @@ export class Section {
     set customForm(customForm: CustomForm) {
         this._customForm = customForm;
     }
-    get customForm(): CustomForm | undefined {
+    get customForm(): CustomForm | null {
         return this._customForm;
     }
 
-    set showContainer(showContainer: boolean | undefined) {
+    set showContainer(showContainer: boolean | null) {
         this._showContainer = isDefined(showContainer) ? showContainer! : true;
     }
     get showContainer(): boolean {

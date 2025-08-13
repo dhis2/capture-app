@@ -12,7 +12,7 @@ export class CategoryCombination {
         CATEGORY_NOT_FOUND: 'Category was not found',
     };
 
-    constructor(initFn?: (_this: CategoryCombination) => void) {
+    constructor(initFn: ((_this: CategoryCombination) => void) | null) {
         this.name = '';
         this.id = '';
         this.categories = new Map();
