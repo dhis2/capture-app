@@ -303,7 +303,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
 
                     if (!minAttributesRequiredToSearch && !searchableValuesCount) {
                         return of(showFallbackNotEnoughAttributesOnSearchBox({
-                            searchableFields, minAttributesRequiredToSearch: 1,
+                            searchableFields: searchableFields as any, minAttributesRequiredToSearch: 1,
                         }));
                     }
 
@@ -312,7 +312,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
                     }
 
                     return of(showFallbackNotEnoughAttributesOnSearchBox({
-                        searchableFields, minAttributesRequiredToSearch,
+                        searchableFields: searchableFields as any, minAttributesRequiredToSearch,
                     }));
                 }
                 return of(showErrorViewOnSearchBox());

@@ -35,7 +35,7 @@ export const useLifecycle = (
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
     const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
-        program,
+        program: program as any,
         trackedEntityInstanceAttributes,
         orgUnit,
         formFoundation,

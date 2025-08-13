@@ -8,7 +8,11 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export function getProgramFromProgramIdThrowIfNotFound(programId: string) {
+export function getProgramFromProgramIdThrowIfNotFound(programId: string | null | undefined) {
+    if (!programId) {
+        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
+        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+    }
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));

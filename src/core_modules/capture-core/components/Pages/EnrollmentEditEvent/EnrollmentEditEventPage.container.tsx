@@ -39,7 +39,7 @@ import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
-import { getProgramEventAccess } from '../../../metaData';
+import { getProgramEventAccess, TrackerProgram } from '../../../metaData';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer } from '../../../converters';
 import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
@@ -146,7 +146,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch]);
 
     const { program } = useProgramInfo(programId);
-    const programStage = [...program?.stages?.values() ?? []].find((item: Record<string, unknown>) => item.id === stageId);
+    const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
@@ -247,7 +247,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    const trackedEntityType = (program as Record<string, unknown>)?.trackedEntityType as { name: string; id: string } | undefined;
+    const trackedEntityType = (program && program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const { name: trackedEntityName = '', id: trackedEntityTypeId = '' } = trackedEntityType ?? {};
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);
@@ -265,7 +265,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         enrollmentSite,
         teiDisplayName,
         trackedEntityName,
-        programStage,
+        programStage: programStage as any,
         event,
         isLoading,
     });

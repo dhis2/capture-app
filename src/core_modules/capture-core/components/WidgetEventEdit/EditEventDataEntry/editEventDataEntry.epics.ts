@@ -56,7 +56,7 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             }
 
             const program = metadataContainer.program;
-            const foundation = metadataContainer.stage.stageForm;
+            const foundation = metadataContainer.stage?.stageForm;
             const { orgUnit, programCategory } = action.payload;
             const enrollment = state.enrollmentDomain?.enrollment;
             const attributeValues = state.enrollmentDomain?.attributeValues;
@@ -66,8 +66,8 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                 ...openEventForEditInDataEntry({
                     loadedValues,
                     orgUnit,
-                    foundation,
-                    program,
+                    foundation: foundation as any,
+                    program: program as any,
                     enrollment,
                     attributeValues,
                     dataEntryId: getDataEntryId(eventContainer.event),
