@@ -2,7 +2,7 @@ export const inputTypes = {
     DROPDOWN: 'dropdown',
     VERTICAL_RADIOBUTTONS: 'verticalRadiobuttons',
     HORIZONTAL_RADIOBUTTONS: 'horizontalRadiobuttons',
-} as const;
+};
 
 export type InputType = typeof inputTypes[keyof typeof inputTypes];
 
@@ -13,6 +13,6 @@ export const inputTypesAsArray: InputType[] = Object
 export const viewTypes = {
     ICON: 'ICON',
     ICON_WITH_COLOR: 'ICON_WITH_COLOR',
-} as const;
+};
 
 export type ViewType = typeof viewTypes[keyof typeof viewTypes];

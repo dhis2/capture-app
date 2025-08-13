@@ -27,6 +27,7 @@ import type {
 } from '../../../types';
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
+import { dataElementTypes } from '../../../../../../metaData';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
@@ -128,10 +129,8 @@ const getFilterByType = {
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: typeof filterTypesObject, filter: any) => {
-    if ([
-        filterTypesObject.BOOLEAN,
-    ].includes(type)) {
+const isOptionSetFilter = (type: keyof typeof dataElementTypes, filter: any) => {
+    if (filterTypesObject.BOOLEAN === type) {
         const validBooleanValues = ['true', 'false'];
         return filter.in.some(value => !validBooleanValues.includes[value]);
     }
@@ -181,7 +180,6 @@ const getDataElementFilters = (
                 id: serverFilter.dataItem,
             };
         }
-        // @ts-expect-error - keeping original functionality as before ts rewrite
         const dataValue = (getFilterByType[element.type](serverFilter, element));
 
         return dataValue && {

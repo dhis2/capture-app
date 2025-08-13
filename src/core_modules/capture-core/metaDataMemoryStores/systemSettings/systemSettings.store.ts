@@ -2,7 +2,7 @@
 import type { SystemSettings } from '../../metaData';
 
 class SystemSettingsStore {
-    _systemSettings: SystemSettings;
+    _systemSettings!: SystemSettings;
 
     set(settings: SystemSettings) {
         this._systemSettings = settings;

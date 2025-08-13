@@ -10,7 +10,11 @@ export const getMultiOptionSetFieldConfig = (
     options: any,
     querySingleResource: QuerySingleResource,
 ) => {
-    const optionSet: OptionSet = metaData.optionSet;
+    const optionSet: OptionSet | undefined = metaData.optionSet;
+
+    if (!optionSet) {
+        return null;
+    }
 
     const props = createProps(
         {

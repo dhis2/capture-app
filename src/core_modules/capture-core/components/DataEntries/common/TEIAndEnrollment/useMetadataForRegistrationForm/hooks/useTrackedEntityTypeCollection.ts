@@ -1,14 +1,14 @@
 import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildTrackedEntityTypeCollection } from '../buildFunctions/buildTrackedEntityTypeCollection';
-import type { OptionSet, TrackedEntityType } from '../../../../../../metaData';
+import type { TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityAttributes } from '../getFunctions/getTrackedEntityAttributes';
-import type { CachedTrackedEntityType } from '../../../../../../storageControllers';
+import type { CachedTrackedEntityType, CachedOptionSet } from '../../../../../../storageControllers';
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
     trackedEntityType: CachedTrackedEntityType;
-    optionSets: Array<OptionSet> | null;
+    optionSets: Array<CachedOptionSet> | null;
     dataEntryFormConfig: DataEntryFormConfig | null;
     configIsFetched: boolean;
     locale: string;

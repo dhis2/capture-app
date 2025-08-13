@@ -15,7 +15,7 @@ export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitI
         }
     }, [error, programId, programStageId]);
 
-    if (error) {
+    if (error || program === undefined || programStage === undefined) {
         return i18n.t('Working list could not be loaded');
     }
 

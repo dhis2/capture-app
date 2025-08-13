@@ -1,0 +1,1 @@
+export { RelationshipType } from './RelationshipType';

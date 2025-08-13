@@ -1,18 +1,12 @@
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 import { searchScopes } from '../SearchBox.constants';
-import { dataElementTypes, OptionSet } from '../../../metaData';
+import { DataElement } from '../../../metaData';
 import type { AvailableSearchOption } from '../SearchBox.types';
 import type { ListItem } from '../../CardList/CardList.types';
 
-export type CardDataElementsInformation = Array<{
-    id: string;
-    name: string;
-    type: typeof dataElementTypes[keyof typeof dataElementTypes];
-    optionSet?: OptionSet | null;
-}>;
+export type CardDataElementsInformation = Array<Pick<DataElement, 'id' | 'name' | 'type'| 'optionSet'>>;
 
-
-export type CardProfileImageElementInformation = Readonly<{ id: string; name: string; type: 'IMAGE' }>;
+export type CardProfileImageElementInformation = Pick<DataElement, 'id' | 'name'| 'type'>;
 
 export type PropsFromRedux = {
     currentPage: number;

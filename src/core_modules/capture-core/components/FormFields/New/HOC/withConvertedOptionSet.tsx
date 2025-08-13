@@ -16,7 +16,7 @@ export const withConvertedOptionSet = () =>
                 this.formOptionSet = this.buildFormOptionSet();
             }
 
-            formOptionSet: OptionSet;
+            formOptionSet: OptionSet | undefined | null;
 
             static errorMessages = {
                 DATAELEMENT_MISSING: 'DataElement missing',

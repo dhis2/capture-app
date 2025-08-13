@@ -26,7 +26,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
         return false;
     }
 
-    const selectedProgram = state.programId && programCollection.get(state.programId);
+    const selectedProgram = state?.programId ? programCollection.get(state.programId) : undefined;
 
     if (selectedProgram?.categoryCombination) {
         const categories = Array.from(selectedProgram.categoryCombination.categories.values());

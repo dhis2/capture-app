@@ -28,7 +28,10 @@ const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
         } : null,
     }));
 
-export const getOptionsForSelect = (clientOptionSet: OptionSet) => {
+export const getOptionsForSelect = (clientOptionSet?: OptionSet) => {
+    if (!clientOptionSet) {
+        return null;
+    }
     const getOptionSet = pipe(
         buildFormOptionSet,
         flattenOptionSetForSelect,

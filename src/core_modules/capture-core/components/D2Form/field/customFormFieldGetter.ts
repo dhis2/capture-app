@@ -25,7 +25,7 @@ const errorMessages = {
     NO_FORMFIELD_FOR_TYPE: 'Formfield component not specified for type',
 };
 
-const fieldForTypes = {
+const fieldForTypes: any = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
     [dataElementTypes.TEXT]: getTextFieldConfig,
     [dataElementTypes.MULTI_TEXT]: getMultiOptionSetFieldConfig,

@@ -2,22 +2,14 @@
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { errorCreator } from 'capture-core-utils';
+import type { Icon } from '../Icon/Icon';
 import { OptionSet } from '../OptionSet';
 import { dataElementTypes } from './dataElementTypes';
-// import type { CachedAttributeValue } from '../../storageControllers';
-// import type { Section } from '../RenderFoundation';
-// import type { Unique } from './Unique';
+import type { CachedAttributeValue } from '../../storageControllers';
+import type { Section } from '../RenderFoundation';
+import type { Unique } from './Unique';
 
-// TODO: Replace these placeholders with actual imported types
-// For now, using 'any' to unblock conversion. Define these properly later.
-type IconType = any;
-type UniqueType = any;
-type CachedAttributeValueType = any;
-type SectionType = any;
-
-type DataElementTypeKey = keyof typeof dataElementTypes;
-
-export type ConvertFn = (value: any, type: DataElementTypeKey, element: DataElement) => any;
+export type ConvertFn = (value: any, type: keyof typeof dataElementTypes, element: DataElement) => any;
 
 export class DataElement {
     static errorMessages = {
@@ -36,13 +28,13 @@ export class DataElement {
     _optionSet?: OptionSet;
     _displayInForms = true;
     _displayInReports = true;
-    _icon?: IconType;
-    _unique?: UniqueType;
+    _icon?: Icon;
+    _unique?: Unique;
     _inherit?: boolean;
     _searchable?: boolean;
     _url?: string;
-    _attributeValues?: CachedAttributeValueType[];
-    _section?: SectionType;
+    _attributeValues?: CachedAttributeValue[];
+    _section?: Section;
 
     // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
@@ -71,10 +63,10 @@ export class DataElement {
         return this._name;
     }
 
-    set section(section: SectionType | undefined) {
+    set section(section: Section | undefined) {
         this._section = section;
     }
-    get section(): SectionType | undefined {
+    get section(): Section | undefined {
         return this._section;
     }
 
@@ -157,17 +149,17 @@ export class DataElement {
         return this._optionSet;
     }
 
-    set icon(icon: IconType | undefined) {
+    set icon(icon: Icon | undefined) {
         this._icon = icon;
     }
-    get icon(): IconType | undefined {
+    get icon(): Icon | undefined {
         return this._icon;
     }
 
-    set unique(unique: UniqueType | undefined) {
+    set unique(unique: Unique | undefined) {
         this._unique = unique;
     }
-    get unique(): UniqueType | undefined {
+    get unique(): Unique | undefined {
         return this._unique;
     }
 
@@ -195,11 +187,11 @@ export class DataElement {
         return this._url;
     }
 
-    get attributeValues(): CachedAttributeValueType[] | undefined {
+    get attributeValues(): CachedAttributeValue[] | undefined {
         return this._attributeValues;
     }
 
-    set attributeValues(value: CachedAttributeValueType[]) {
+    set attributeValues(value: CachedAttributeValue[]) {
         this._attributeValues = value;
     }
 

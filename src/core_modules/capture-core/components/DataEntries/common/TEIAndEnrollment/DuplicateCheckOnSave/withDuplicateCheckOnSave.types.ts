@@ -6,8 +6,8 @@ export type Props = {
     id: string;
     selectedScopeId: string;
     onSave: () => void;
-    enrollmentMetadata?: Enrollment;
-    teiRegistrationMetadata?: TeiRegistration;
+    enrollmentMetadata: Enrollment;
+    teiRegistrationMetadata: TeiRegistration;
     duplicatesReviewPageSize: number;
     renderDuplicatesCardActions?: RenderCustomCardActions;
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: () => void) => ReactNode;

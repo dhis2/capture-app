@@ -52,6 +52,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }: any) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
 
+    if (!formFoundation) {
+        return null;
+    }
 
     if (error) {
         return error.errorComponent;

@@ -39,7 +39,7 @@ type InputForm = {
     program: InputProgramData;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
     orgUnit: OrgUnit | null;
-    formFoundation: RenderFoundation;
+    formFoundation: RenderFoundation | null;
     teiId?: string;
     searchTerms: Array<{[key: string]: string}> | null;
 };
@@ -64,7 +64,7 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes?
                     if (subValueGetterByElementType[type]) {
                         value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
                     } else {
-                        value = convertServerToClient(foundAttribute.value, type);
+                        value = convertServerToClient(foundAttribute.value, type as any);
                     }
                 }
 

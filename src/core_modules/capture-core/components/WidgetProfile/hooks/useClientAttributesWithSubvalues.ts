@@ -42,7 +42,7 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
                             querySingleResource,
                         });
                     } else {
-                        value = convertServerToClient(foundAttribute.value, valueType);
+                        value = convertServerToClient(foundAttribute.value, valueType as any);
                     }
                 }
 

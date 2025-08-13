@@ -8,7 +8,7 @@ import type { DataEntryFormConfig } from '../types';
 
 type Props = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    cachedOptionSets: Map<string, CachedOptionSet>;
+    cachedOptionSets: Map<string | undefined, CachedOptionSet>;
     cachedTrackedEntityType: CachedTrackedEntityType;
     dataEntryFormConfig: DataEntryFormConfig | null;
     locale: string;

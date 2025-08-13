@@ -37,7 +37,7 @@ const CardListIndex: React.FC<Props> = (props) => {
         currentSearchScopeType,
     } = props;
 
-    const { profileImageDataElement, dataElementsExceptProfileImage } = makeElementsContainerSelector()(dataElements);
+    const { profileImageDataElement, dataElementsExceptProfileImage } = makeElementsContainerSelector()(dataElements as any);
     return (
         <div data-test="search-results-list">
             {

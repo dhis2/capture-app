@@ -5,6 +5,6 @@ export type Input = {
     hasDuplicate: boolean | null;
     onResetPossibleDuplicates: () => void;
     onReviewDuplicates: (duplicatesReviewPageSize: number) => void;
-    searchGroup: InputSearchGroup | null;
+    searchGroup?: InputSearchGroup | null;
     duplicatesReviewPageSize: number;
 };

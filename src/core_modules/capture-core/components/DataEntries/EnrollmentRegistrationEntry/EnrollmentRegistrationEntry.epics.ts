@@ -35,6 +35,10 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
                     return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
 
+                if (!trackerProgram) {
+                    return empty();
+                }
+
                 const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync({
                     program: trackerProgram,
                     orgUnit: selectedOrgUnit,

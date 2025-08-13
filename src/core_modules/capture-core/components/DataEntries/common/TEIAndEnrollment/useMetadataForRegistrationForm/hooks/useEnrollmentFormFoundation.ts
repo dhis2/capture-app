@@ -1,17 +1,17 @@
 import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
-import type { TrackedEntityType, Program } from '../../../../../../metaData';
+import type { TrackedEntityType } from '../../../../../../metaData';
 import { scopeTypes } from '../../../../../../metaData';
-import type { CachedOptionSet, CachedTrackedEntityAttribute } from '../../../../../../storageControllers';
+import type { CachedOptionSet, CachedTrackedEntityAttribute, CachedProgram, CachedTrackedEntityType } from '../../../../../../storageControllers';
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
     scopeType: typeof scopeTypes[keyof typeof scopeTypes];
     optionSets: Array<CachedOptionSet>;
-    trackedEntityType: TrackedEntityType;
-    trackedEntityTypeCollection: TrackedEntityType;
-    program: Program;
+    trackedEntityType: CachedTrackedEntityType;
+    trackedEntityTypeCollection: TrackedEntityType | null;
+    program: CachedProgram;
     cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
     dataEntryFormConfig: DataEntryFormConfig | null;
     configIsFetched: boolean;
@@ -36,6 +36,7 @@ export const useEnrollmentFormFoundation = ({
         () => buildEnrollmentForm({
             cachedProgram: program,
             cachedTrackedEntityType: trackedEntityType,
+            // @ts-expect-error - Typescript does not understand that null values are removed in enabled checksks
             trackedEntityTypeCollection,
             cachedTrackedEntityAttributes,
             cachedOptionSets: optionSets,

@@ -5,7 +5,7 @@ import type { FilterData, Options } from '../../FiltersForTypes';
 export type Column = {
     id: string;
     visible: boolean;
-    type: dataElementTypes[keyof dataElementTypes];
+    type: typeof dataElementTypes[keyof typeof dataElementTypes];
     header: string;
     options?: Options;
     multiValueFilter?: boolean;
@@ -18,7 +18,7 @@ export type Columns = Array<Column>;
 
 export type FilterOnly = {
     id: string;
-    type: dataElementTypes[keyof dataElementTypes];
+    type: typeof dataElementTypes[keyof typeof dataElementTypes];
     header: string;
     options?: Options;
     multiValueFilter?: boolean;

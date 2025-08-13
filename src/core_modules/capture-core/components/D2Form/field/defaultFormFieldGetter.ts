@@ -29,12 +29,12 @@ const errorMessages = {
 };
 
 type FieldForTypes = {
-    [type: keyof typeof dataElementTypes]: (
+  [type: string]: (
         metaData: DataElement,
         options: any,
         querySingleResource: QuerySingleResource,
-    ) => any,
-}
+    ) => any;
+};
 
 const fieldForTypes: FieldForTypes = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
