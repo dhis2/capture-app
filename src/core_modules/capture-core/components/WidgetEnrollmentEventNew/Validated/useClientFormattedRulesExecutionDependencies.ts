@@ -11,7 +11,9 @@ const prepareAttributesForRulesEngine =
     (attributeValues: any, program: TrackerProgram): AttributeValuesClientFormatted => attributeValues
         .reduce((accAttributeValues: any, { id, value }: any) => {
             const { type } = program.attributes.find(({ id: metadataId }: any) => id === metadataId) || {};
-            accAttributeValues[id] = convertServerToClient(value, type);
+            if (type) {
+                accAttributeValues[id] = convertServerToClient(value, type);
+            }
             return accAttributeValues;
         }, {});
 

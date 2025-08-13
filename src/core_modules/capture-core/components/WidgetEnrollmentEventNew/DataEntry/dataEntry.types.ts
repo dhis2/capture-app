@@ -1,4 +1,5 @@
-import type { OrgUnit, ProgramStage, RenderFoundation } from '../../../metaData';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 
 export type ContainerProps = {

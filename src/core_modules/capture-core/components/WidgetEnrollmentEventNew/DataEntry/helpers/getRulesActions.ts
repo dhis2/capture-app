@@ -1,4 +1,5 @@
-import type { OrgUnit, RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getCurrentClientValues,

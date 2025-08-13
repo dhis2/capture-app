@@ -92,12 +92,12 @@ export class ProgramStage {
         return this._relationshipTypes;
     }
 
-    get relationshipTypesWhereStageIsFrom(): Array<RelationshipType> {
-        return this._relationshipTypes ? this._relationshipTypes.filter(r => r.from.programStageId && r.from.programStageId === this.id) : [];
-    }
-
     set relationshipTypes(relationshipTypes: Array<RelationshipType>) {
         this._relationshipTypes = relationshipTypes;
+    }
+
+    get relationshipTypesWhereStageIsFrom(): Array<RelationshipType> {
+        return this._relationshipTypes ? this._relationshipTypes.filter(r => r.from.programStageId && r.from.programStageId === this.id) : [];
     }
 
     get enableUserAssignment(): boolean {

@@ -53,7 +53,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
 
 
-    if (error) {
+    if (error || !formFoundation) {
         return error.errorComponent;
     }
 

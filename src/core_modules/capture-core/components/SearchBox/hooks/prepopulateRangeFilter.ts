@@ -13,7 +13,7 @@ const RANGE_TYPES = [
 ];
 
 export const isEqualRangeValue = (value: any, type: string): boolean => {
-    if (!RANGE_TYPES.includes(type)) {
+    if (!RANGE_TYPES.includes(type as any)) {
         return true;
     }
 

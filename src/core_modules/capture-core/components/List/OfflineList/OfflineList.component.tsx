@@ -42,7 +42,7 @@ class Index extends Component<Props> {
     renderHeaderRow(visibleColumns: Column[]) {
         const { classes } = this.props;
 
-        const headerCells = visibleColumns.map(column => (
+        const headerCells = visibleColumns.map((column: any) => (
             <DataTableColumnHeader
                 key={column.id}
                 className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
@@ -68,7 +68,7 @@ class Index extends Component<Props> {
         }
 
         return dataSource.map((row) => {
-            const cells = visibleColumns.map(column => (
+            const cells = visibleColumns.map((column: any) => (
                 <DataTableCell
                     key={column.id}
                     align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}

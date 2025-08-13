@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { RegistrationFormMetadata } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
+import type { TeiRegistration } from '../../../metaData';
 import type { RenderCustomCardActions } from '../../CardList';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type {
@@ -25,7 +25,7 @@ export type OwnProps = {
 
 type ContainerProps = {
     orgUnitId: string;
-    teiRegistrationMetadata: RegistrationFormMetadata;
+    teiRegistrationMetadata: TeiRegistration;
     ready: boolean;
     trackedEntityName: string;
     isUserInteractionInProgress: boolean;

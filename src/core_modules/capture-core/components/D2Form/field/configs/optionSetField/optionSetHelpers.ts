@@ -37,7 +37,10 @@ const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
     }));
 
 
-export const getOptionsForRadioButtons = (clientOptionSet: OptionSet) => {
+export const getOptionsForRadioButtons = (clientOptionSet?: OptionSet) => {
+    if (!clientOptionSet) {
+        return null;
+    }
     const getOptionSet = pipe(
         buildFormOptionSet,
         flattenOptionSetForRadioButtons,
@@ -45,7 +48,10 @@ export const getOptionsForRadioButtons = (clientOptionSet: OptionSet) => {
     return getOptionSet(clientOptionSet);
 };
 
-export const getOptionsForSelect = (clientOptionSet: OptionSet) => {
+export const getOptionsForSelect = (clientOptionSet?: OptionSet) => {
+    if (!clientOptionSet) {
+        return null;
+    }
     const getOptionSet = pipe(
         buildFormOptionSet,
         flattenOptionSetForSelect,

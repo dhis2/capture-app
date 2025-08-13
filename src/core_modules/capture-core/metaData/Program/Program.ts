@@ -36,8 +36,6 @@ export class Program {
         initFn && isFunction(initFn) && initFn(this);
     }
 
-
-    // $FlowFixMe[unsupported-syntax] automated comment
     * [Symbol.iterator](): Iterator<ProgramStage> {
         for (const stage of this._stages.values()) {
             yield stage;

@@ -55,8 +55,8 @@ export class D2Date extends React.Component<Props, State> {
             ...passOnProps
         } = this.props;
 
-        const calendarType = systemSettingsStore.get().calendar || 'gregory';
-        const format = systemSettingsStore.get().dateFormat;
+        const calendarType: any = systemSettingsStore.get().calendar || 'gregory';
+        const format: any = systemSettingsStore.get().dateFormat;
 
         return (
             <div>

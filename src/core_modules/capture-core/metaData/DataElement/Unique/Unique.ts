@@ -8,7 +8,7 @@ type Validator = (value: any, contextProps: any, querySingleResource: QuerySingl
 
 export class Unique {
     _generatable!: boolean;
-    _scope!: string;
+    _scope!: typeof scopes[keyof typeof scopes];
     _onValidate!: Validator;
 
     constructor(initFn?: (_this: Unique) => void) {
@@ -24,10 +24,10 @@ export class Unique {
         return this._generatable;
     }
 
-    set scope(scope: string) {
+    set scope(scope: typeof scopes[keyof typeof scopes]) {
         this._scope = scope;
     }
-    get scope(): string {
+    get scope(): typeof scopes[keyof typeof scopes] {
         return this._scope;
     }
 

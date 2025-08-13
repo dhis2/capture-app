@@ -4,14 +4,14 @@ import type { Program, ProgramStage } from '../../../metaData';
 
 type ErrorResult = {
     error: string,
-    program?: string,
-    programStage?: string,
+    program: undefined,
+    programStage: undefined,
 };
 
 type Result = {
     program: Program,
     programStage: ProgramStage,
-    error?: string,
+    error: undefined,
 };
 
 
@@ -63,7 +63,7 @@ export const useProgramStageInfo = (programStageId?: string, programId?: string)
             () => {
                 let result: Result | undefined;
                 [...programCollection.values()].some((program) => {
-                    const programStage = program.stages.get(programStageId);
+                    const programStage = programStageId ? program.stages.get(programStageId) : undefined;
                     if (programStage) {
                         result = createResult(
                             program,

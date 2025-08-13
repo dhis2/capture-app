@@ -1,5 +1,5 @@
-import type { Stage } from '../../../../../metaData';
+import type { ProgramStage } from '../../../../../metaData';
 
 export type Props = {
-    stage: Stage;
+    stage: ProgramStage;
 };

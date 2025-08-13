@@ -24,7 +24,7 @@ export class RenderFoundation {
     _sections!: Map<string, Section>;
     _labels!: { [key: string]: string };
     _featureType!: string;
-    _validationStrategy!: string;
+    _validationStrategy!: typeof validationStrategies[keyof typeof validationStrategies];
 
     constructor(initFn?: (_this: RenderFoundation) => void) {
         this._sections = new Map();
@@ -93,7 +93,7 @@ export class RenderFoundation {
 
         this._validationStrategy = strategy;
     }
-    get validationStrategy(): string {
+    get validationStrategy(): typeof validationStrategies[keyof typeof validationStrategies] {
         return this._validationStrategy;
     }
 

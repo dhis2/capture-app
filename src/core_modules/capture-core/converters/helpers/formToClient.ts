@@ -25,7 +25,7 @@ export function convertStateFormValuesToClient(eventId: string, state: any) {
         return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };
     }
 
-    const stage = program.getStage(event.programStageId);
+    const stage = program.getStage(event.programStageId) as unknown as RenderFoundation;
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ eventId, event }));
         return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };

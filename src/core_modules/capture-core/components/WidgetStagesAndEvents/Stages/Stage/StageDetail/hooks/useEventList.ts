@@ -29,7 +29,7 @@ const basedFieldTypes = [
     { type: dataElementTypes.ORGANISATION_UNIT },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertNoteForView },
-];
+] as any;
 const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },

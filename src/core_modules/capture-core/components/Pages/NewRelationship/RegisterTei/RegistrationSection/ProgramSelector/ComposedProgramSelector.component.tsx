@@ -61,7 +61,10 @@ class ProgramSelector extends React.Component<Props> {
                 iconLeft: this.getProgramIcon(program),
             }));
 
-    getProgramIcon({ icon = {}, name: programName }: Program) {
+    getProgramIcon({ icon, name: programName }: Program) {
+        if (!icon) {
+            return null;
+        }
         const { color, name } = icon;
         const { classes } = this.props;
 

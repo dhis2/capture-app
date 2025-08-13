@@ -46,7 +46,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
         return [
             {
                 id: ADDITIONAL_FILTERS.programStage,
-                type: 'TEXT',
+                type: dataElementTypes.TEXT,
                 header: i18n.t(ADDITIONAL_FILTERS_LABELS.programStage),
                 options,
                 mainButton: true,
@@ -54,7 +54,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
             },
             {
                 id: ADDITIONAL_FILTERS.occurredAt,
-                type: 'DATE',
+                type: dataElementTypes.DATE,
                 header: occurredAtLabel,
                 disabled: !programStageId,
                 tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
@@ -77,7 +77,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
             },
             {
                 id: ADDITIONAL_FILTERS.status,
-                type: 'TEXT',
+                type: dataElementTypes.TEXT,
                 header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
                 options: [
                     { text: translatedStatus.ACTIVE, value: statusTypes.ACTIVE },
@@ -99,7 +99,7 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                 ? [
                     {
                         id: ADDITIONAL_FILTERS.scheduledAt,
-                        type: 'DATE',
+                        type: dataElementTypes.DATE,
                         header: scheduledAtLabel,
                         disabled: !programStageId,
                         tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {

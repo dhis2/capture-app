@@ -21,7 +21,11 @@ const RelationshipTrackedEntityInstancePlain =
         const orgUnitId = useCurrentOrgUnitId();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
         const { trackedEntityType } = teiRegistrationMetadata ?? {};
-        const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
+        const trackedEntityTypeNameLC = trackedEntityType?.name?.toLocaleLowerCase();
+
+        if (!teiRegistrationMetadata?.form?.id) {
+            return null;
+        }
 
         return (
             <TeiRegistrationEntry

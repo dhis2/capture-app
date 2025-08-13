@@ -15,7 +15,7 @@ export const EventBulkActions = ({
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
-    if (!selectedRowsCount) {
+    if (!selectedRowsCount || !stage) {
         return null;
     }
 

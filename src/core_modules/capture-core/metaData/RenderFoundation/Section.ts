@@ -62,7 +62,6 @@ export class Section {
     }
 
     set open(open: boolean | undefined) {
-        // $FlowFixMe[incompatible-type] automated comment
         this._open = isDefined(open) ? open! : true;
     }
     get open(): boolean {
@@ -70,7 +69,6 @@ export class Section {
     }
 
     set visible(visible: boolean | undefined) {
-        // $FlowFixMe[incompatible-type] automated comment
         this._visible = isDefined(visible) ? visible! : true;
     }
     get visible(): boolean {
@@ -85,7 +83,6 @@ export class Section {
     }
 
     set showContainer(showContainer: boolean | undefined) {
-        // $FlowFixMe[incompatible-type] automated comment
         this._showContainer = isDefined(showContainer) ? showContainer! : true;
     }
     get showContainer(): boolean {
@@ -119,9 +116,8 @@ export class Section {
         }
     }
 
-    copyPropertiesTo(object: {}) {
+    copyPropertiesTo(object: any) {
         for (const propName of this.getPropertyNames()) {
-            // $FlowFixMe[prop-missing] automated comment
             object[propName] = this[propName];
         }
         return object;

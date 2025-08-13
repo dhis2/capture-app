@@ -28,7 +28,10 @@ const mapInputTypeToComponent = {
 };
 
 export const getOptionSetFieldConfigForCustomForm = (metaData: DataElement, options: any, querySingleResource: QuerySingleResource) => {
-    const optionSet: OptionSet = metaData.optionSet;
+    const optionSet: OptionSet | undefined = metaData.optionSet;
+    if (!optionSet) {
+        return null;
+    }
     const inputType = optionSet.inputType;
     const inputTypeProps = mapInputTypeToPropsGetterFn[inputType](metaData);
 

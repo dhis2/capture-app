@@ -37,7 +37,7 @@ type ColumnOrderFromState = {
     visible: boolean;
     isMainProperty?: boolean;
     header?: string;
-    type?: keyof typeof dataElementTypes;
+    type: keyof typeof dataElementTypes;
     options?: Array<{text: string; value: string}>;
 };
 

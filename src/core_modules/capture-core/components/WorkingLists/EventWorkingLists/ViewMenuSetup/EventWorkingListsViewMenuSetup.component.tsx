@@ -55,7 +55,7 @@ export const EventWorkingListsViewMenuSetup = ({
     const eventBulkActions = (
         <EventBulkActions
             selectedRows={selectedRows}
-            stage={program.stage}
+            stage={program.getStage(passOnProps.programStageId)}
             onClearSelection={clearSelection}
             onUpdateList={onUpdateList}
             removeRowsFromSelection={removeRowsFromSelection}

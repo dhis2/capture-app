@@ -12,7 +12,7 @@ type OptionFlags = {
 };
 
 export class Enrollment {
-    _labels!: { [key: string]: string };
+    _labels!: { [key: typeof labelKeys[keyof typeof labelKeys]]: string };
     _optionFlags!: OptionFlags;
     _enrollmentForm!: RenderFoundation;
     _inputSearchGroups!: Array<InputSearchGroup> | undefined;

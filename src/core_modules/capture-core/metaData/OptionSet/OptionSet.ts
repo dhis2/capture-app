@@ -3,7 +3,7 @@ import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
 import type { OptionGroup } from './OptionGroup';
-import { viewTypes, inputTypes, inputTypesAsArray, InputType } from './optionSet.const';
+import { viewTypes, inputTypes, inputTypesAsArray, InputType, ViewType } from './optionSet.const';
 import type { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Option, Value } from './Option';
@@ -27,17 +27,17 @@ export class OptionSet {
     _attributeValues: CachedAttributeValue[];
     _options: Option[];
     _optionGroups: Map<string, OptionGroup>;
-    _viewType: keyof typeof viewTypes | undefined;
-    _inputType: keyof typeof inputTypes;
+    _viewType!: InputType;
+    _inputType: ViewType;
     _dataElement?: DataElement;
 
     constructor(
-        id?: string | undefined,
-        options?: Option[] | undefined,
-        optionGroups?: Map<string, OptionGroup> | undefined,
-        dataElement?: DataElement | undefined,
-        onConvert?: ConvertFn | undefined,
-        attributeValues?: CachedAttributeValue[] | undefined,
+        id?: string,
+        options?: Option[],
+        optionGroups?: Map<string, OptionGroup> | null,
+        dataElement?: DataElement,
+        onConvert?: ConvertFn,
+        attributeValues?: CachedAttributeValue[],
     ) {
         this._options = !options ? [] : options.reduce((accOptions: Option[], currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
@@ -56,7 +56,7 @@ export class OptionSet {
         this._id = id;
         this._dataElement = dataElement;
         this._attributeValues = attributeValues || [];
-        this._inputType = inputTypes.DROPDOWN as keyof typeof inputTypes;
+        this._inputType = inputTypes.DROPDOWN;
     }
 
     set id(id: string) {
@@ -72,13 +72,13 @@ export class OptionSet {
         }
 
         if (inputTypesAsArray.includes(inputType as InputType)) {
-            this._inputType = inputType as keyof typeof inputTypes;
+            this._inputType = inputType as InputType;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));
         }
     }
 
-    get inputType(): keyof typeof inputTypes {
+    get inputType(): InputType {
         return this._inputType;
     }
 
@@ -88,12 +88,12 @@ export class OptionSet {
         }
 
         if (viewTypes[viewType]) {
-            this._viewType = viewType as keyof typeof viewTypes;
+            this._viewType = viewType as ViewType;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_VIEWTYPE)({ optionSet: this, viewType }));
         }
     }
-    get viewType(): keyof typeof viewTypes | undefined {
+    get viewType(): ViewType {
         return this._viewType;
     }
 

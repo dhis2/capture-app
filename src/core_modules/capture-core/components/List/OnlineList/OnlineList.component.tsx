@@ -104,7 +104,7 @@ class Index extends React.Component<Props> {
             return sortById === column.id ? (sortByDirection as 'asc' | 'desc') : 'default';
         };
 
-        const headerCells = visibleColumns.map(column => (
+        const headerCells = visibleColumns.map((column: any) => (
             <DataTableColumnHeader
                 dataTest={`table-row-${sortById === column.id ? sortByDirection : 'default'}`}
                 onSortIconClick={this.getSortHandler(column.id)}
@@ -160,7 +160,7 @@ class Index extends React.Component<Props> {
         }
 
         return dataSource.map((row) => {
-            const cells = visibleColumns.map(column => (
+            const cells = visibleColumns.map((column: any) => (
                 <DataTableCell
                     key={column.id}
                     align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}

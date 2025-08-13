@@ -7,7 +7,7 @@ type Data = {
     elements: Array<ReactNode>,
 };
 
-type TransformFunction = (node: any, index: number, nodeToElementFn: (node: any, index: number)
+type TransformFunction = (node: any, index: number, nodeToElementFn: (n: any, i: number)
     => ReactElement<'FormField'>)
     => void | ReactElement<'FormField'>;
 

@@ -27,7 +27,7 @@ type OwnProps = {
     currentProgramId?: string,
     currentSearchScopeType?: string,
     renderCustomCardActions?: RenderCustomCardActions,
-    profileImageDataElement: CardProfileImageElementInformation | null,
+    profileImageDataElement?: CardProfileImageElementInformation,
     dataElements: CardDataElementsInformation,
 };
 
@@ -158,7 +158,7 @@ const CardListItemIndex = ({
         : undefined;
     const { fromServerDate } = useTimeZoneConversion();
 
-    const renderImageDataElement = (imageElement: CardProfileImageElementInformation | null): React.ReactNode => {
+    const renderImageDataElement = (imageElement?: CardProfileImageElementInformation): React.ReactNode => {
         if (!imageElement) { return null; }
         const imageValue = item.values[imageElement.id] as { url: string } | undefined;
         return (
@@ -229,15 +229,15 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map((dataElement: { id: string, name: string, type: string, optionSet?: OptionSet }) => {
+                            .map((dataElement: { id: string, name: string, type: keyof typeof dataElementTypes, optionSet?: OptionSet | null }) => {
                                 const { id, name, type, optionSet } = dataElement;
                                 return (
                                     <ListEntry
                                         key={id}
                                         name={name}
                                         value={item.values[id] as string | undefined}
-                                        type={type as keyof typeof dataElementTypes}
-                                        dataElement={{ optionSet, type }}
+                                        type={type}
+                                        dataElement={{ optionSet, type } as any}
                                     />
                                 );
                             })

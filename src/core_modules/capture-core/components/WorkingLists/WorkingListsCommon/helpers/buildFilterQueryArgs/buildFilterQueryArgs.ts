@@ -14,7 +14,7 @@ import {
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
 
-const mappersForTypes: Record<keyof typeof dataElementTypes, (args: any) => any> = {
+const mappersForTypes = {
     [filterTypesObject.TEXT]: convertText,
     [filterTypesObject.NUMBER]: convertNumeric,
     [filterTypesObject.INTEGER]: convertNumeric,

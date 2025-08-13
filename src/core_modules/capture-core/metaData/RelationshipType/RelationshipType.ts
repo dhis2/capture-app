@@ -43,16 +43,16 @@ export class RelationshipType {
         this._access = access;
     }
 
+    get access(): Access {
+        return this._access;
+    }
+
     set referral(value: boolean) {
         this._referral = value;
     }
 
     get referral(): boolean {
         return this._referral;
-    }
-
-    get access(): Access {
-        return this._access;
     }
 
     set from(from: RelationshipConstraint) {
