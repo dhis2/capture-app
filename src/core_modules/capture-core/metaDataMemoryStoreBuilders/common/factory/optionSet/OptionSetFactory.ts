@@ -4,6 +4,7 @@ import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCase
 import { errorCreator } from 'capture-core-utils';
 import type {
     CachedOptionSet,
+    CachedOptionGroup,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
 } from '../../../../storageControllers';
@@ -27,6 +28,7 @@ export class OptionSetFactory {
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
+    cachedOptionGroups!: Array<CachedOptionGroup>;
     locale?: string;
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -87,7 +89,6 @@ export class OptionSetFactory {
             o.id = group.id;
             o.optionIds = new Map(group.options.map(option => [option, option]));
         })]));
-
 
         const optionSet = new OptionSet(
             cachedOptionSet.id,

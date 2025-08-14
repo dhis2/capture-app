@@ -89,7 +89,7 @@ export class SearchGroupFactory {
               || displayName;
 
             o.shortName =
-               this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
+              this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
               || displayShortName;
 
             o.formName =
@@ -97,7 +97,7 @@ export class SearchGroupFactory {
               || displayFormName;
 
             o.description =
-               this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
+              this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
               || description;
 
             o.displayInForms = true;
