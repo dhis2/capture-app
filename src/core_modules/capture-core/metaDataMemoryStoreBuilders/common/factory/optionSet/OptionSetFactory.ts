@@ -29,10 +29,10 @@ export class OptionSetFactory {
 
     cachedOptionSets: Map<string, CachedOptionSet>;
     cachedOptionGroups!: Array<CachedOptionGroup>;
-    locale?: string;
+    locale: string | null;
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale?: string,
+        locale: string | null,
     ) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;
@@ -61,7 +61,7 @@ export class OptionSetFactory {
             log.warn(
                 errorCreator(OptionSetFactory.OPTION_SET_NOT_FOUND)({ id: optionSetId }),
             );
-            return undefined;
+            return null;
         }
 
         dataElement.type = onGetDataElementType(dataElement.type || cachedOptionSet.valueType);

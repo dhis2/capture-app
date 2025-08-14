@@ -1,4 +1,3 @@
-// @flow
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import type {
     CachedOptionSet,

@@ -25,16 +25,16 @@ export class DataElement {
     _compulsory = false;
     _description!: string;
     _type!: keyof typeof dataElementTypes;
-    _optionSet?: OptionSet;
+    _optionSet!: OptionSet | null;
     _displayInForms = true;
     _displayInReports = true;
     _icon?: Icon;
-    _unique?: Unique;
-    _inherit?: boolean;
-    _searchable?: boolean;
-    _url?: string;
-    _attributeValues?: CachedAttributeValue[];
-    _section?: Section;
+    _unique!: Unique | null;
+    _inherit!: boolean;
+    _searchable!: boolean | null;
+    _url!: string | null;
+    _attributeValues!: CachedAttributeValue[];
+    _section!: Section | null;
 
     // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
@@ -63,10 +63,10 @@ export class DataElement {
         return this._name;
     }
 
-    set section(section: Section | undefined) {
+    set section(section: Section | null) {
         this._section = section;
     }
-    get section(): Section | undefined {
+    get section(): Section | null {
         return this._section;
     }
 
@@ -142,10 +142,10 @@ export class DataElement {
         return this._type;
     }
 
-    set optionSet(optionSet: OptionSet | undefined) {
+    set optionSet(optionSet: OptionSet | null) {
         this._optionSet = optionSet;
     }
-    get optionSet(): OptionSet | undefined {
+    get optionSet(): OptionSet | null {
         return this._optionSet;
     }
 
@@ -156,14 +156,14 @@ export class DataElement {
         return this._icon;
     }
 
-    set unique(unique: Unique | undefined) {
+    set unique(unique: Unique | null) {
         this._unique = unique;
     }
-    get unique(): Unique | undefined {
+    get unique(): Unique | null {
         return this._unique;
     }
 
-    get inherit(): boolean | undefined {
+    get inherit(): boolean | null {
         return this._inherit;
     }
 
@@ -171,23 +171,23 @@ export class DataElement {
         this._inherit = value;
     }
 
-    set searchable(searchable: boolean | undefined) {
+    set searchable(searchable: boolean | null) {
         this._searchable = searchable;
     }
 
-    get searchable(): boolean | undefined {
+    get searchable(): boolean | null {
         return this._searchable;
     }
 
-    set url(url: string | undefined) {
+    set url(url: string | null) {
         this._url = url;
     }
 
-    get url(): string | undefined {
+    get url(): string | null {
         return this._url;
     }
 
-    get attributeValues(): CachedAttributeValue[] | undefined {
+    get attributeValues(): CachedAttributeValue[] | null {
         return this._attributeValues;
     }
 
@@ -214,7 +214,7 @@ export class DataElement {
     }
 
 
-    getConvertedOptionSet(onConvert?: ConvertFn): OptionSet | undefined {
+    getConvertedOptionSet(onConvert?: ConvertFn): OptionSet | null {
         if (this.optionSet) {
             const currentOptions = this.optionSet.options.map(option => option.clone());
 
@@ -238,7 +238,7 @@ export class DataElement {
             return convertedOptionSet;
         }
 
-        return undefined;
+        return null;
     }
 
     convertValue(rawValue: any, onConvert: ConvertFn): any {

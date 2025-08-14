@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
@@ -45,7 +44,7 @@ export class DataElementFactory {
         dataElementUnique: DataElementUnique,
         dataElement: DataElement,
         serverValue: any,
-        contextProps: Object = {},
+        contextProps: any = {},
         querySingleResource: QuerySingleResource,
     ) {
         let requestPromise;
@@ -123,7 +122,7 @@ export class DataElementFactory {
                 dataElementUniqueScope.ORGANISATION_UNIT :
                 dataElementUniqueScope.ENTIRE_SYSTEM;
 
-            o.onValidate = (value: any, contextProps: Object = {}, querySingleResource: QuerySingleResource) => {
+            o.onValidate = (value: any, contextProps: any = {}, querySingleResource: QuerySingleResource) => {
                 const serverValue = pipe(
                     convertFormToClient,
                     convertClientToServer,
@@ -205,7 +204,7 @@ export class DataElementFactory {
         });
     }
 
-    locale: ?string;
+    locale: string | null;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     minorServerVersion: number;
@@ -226,7 +225,7 @@ export class DataElementFactory {
 
     _getAttributeTranslation(
         translations: Array<CachedAttributeTranslation>,
-        property: $Values<typeof DataElementFactory.translationPropertyNames>,
+        property: typeof DataElementFactory.translationPropertyNames[keyof typeof DataElementFactory.translationPropertyNames],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -290,7 +289,7 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        section?: Section,
+        section: Section | null,
     ) {
         const dataElement = new DataElement();
         dataElement.section = section;
@@ -306,7 +305,7 @@ export class DataElementFactory {
     async _buildDateDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        section?: Section,
+        section: Section | null,
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
@@ -338,7 +337,7 @@ export class DataElementFactory {
         }
 
         return cachedTrackedEntityAttribute.valueType === dataElementTypes.DATE ?
-            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section) :
-            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section);
+            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section ?? null) :
+            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section ?? null);
     }
 }

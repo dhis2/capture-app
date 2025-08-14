@@ -17,7 +17,7 @@ type Props = {
     cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
     dataEntryFormConfig: DataEntryFormConfig | null;
     locale: string;
-    minorServerVersion?: number;
+    minorServerVersion: number;
 };
 
 export const buildEnrollmentForm = async ({

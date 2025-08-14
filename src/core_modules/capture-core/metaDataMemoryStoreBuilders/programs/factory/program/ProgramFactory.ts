@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
@@ -49,7 +48,7 @@ export class ProgramFactory {
         cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
         cachedCategories: {[categoryId: string]: CachedCategory},
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-        locale: ?string,
+        locale: string | null,
         minorServerVersion: number,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
@@ -84,10 +83,10 @@ export class ProgramFactory {
     }
 
     _buildCategories(
-        cachedProgramCategories: Array<ProgramCachedCategory>): Map<string, Category> {
+        cachedProgramCategories: Array<ProgramCachedCategory> | null): Map<string, Category> {
         return new Map(
             cachedProgramCategories
-                .map(cachedProgramCategory => ([
+                ?.map(cachedProgramCategory => ([
                     cachedProgramCategory.id,
                     this.categoryFactory.build(cachedProgramCategory),
                 ])),
@@ -95,7 +94,7 @@ export class ProgramFactory {
     }
 
     _buildCategoryCombination(
-        cachedCategoryCombination: ?ProgramCachedCategoryCombo,
+        cachedCategoryCombination: ProgramCachedCategoryCombo | null,
     ) {
         if (!(
             cachedCategoryCombination &&
@@ -110,21 +109,18 @@ export class ProgramFactory {
             o.name = cachedCategoryCombination.displayName;
             o.id = cachedCategoryCombination.id;
             o.categories =
-            // $FlowFixMe
-                this._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
+                this._buildCategories(cachedCategoryCombination.categories);
         });
     }
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
-            // $FlowFixMe[incompatible-call] automated comment
             const dataElement = await this.dataElementFactory.build(ptea);
             return dataElement;
         });
 
         const attributes = await Promise.all(attributePromises);
 
-        // $FlowFixMe[missing-annot]
         return attributes.filter(attribute => attribute);
     }
 
@@ -158,8 +154,7 @@ export class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                // $FlowFixMe
-                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
+                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId!) as TrackedEntityType;
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
@@ -168,11 +163,10 @@ export class ProgramFactory {
                     cachedProgram.minAttributesRequiredToSearch,
                 );
 
-                // $FlowFixMe
                 program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
             }
 
-            // $FlowFixMe
+            // @ts-expect-error - keeping original functionality as before ts rewrite
             await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
                 program.addStage(
                     await this.programStageFactory.build(

@@ -44,7 +44,7 @@ export class SearchGroupFactory {
     }
 
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    locale?: string;
+    locale: string | null;
     optionSetFactory: OptionSetFactory;
     constructor({
         cachedTrackedEntityAttributes,

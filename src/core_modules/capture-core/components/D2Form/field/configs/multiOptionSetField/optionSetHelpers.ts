@@ -28,7 +28,7 @@ const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
         } : null,
     }));
 
-export const getOptionsForSelect = (clientOptionSet?: OptionSet) => {
+export const getOptionsForSelect = (clientOptionSet: OptionSet | null) => {
     if (!clientOptionSet) {
         return null;
     }

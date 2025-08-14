@@ -46,18 +46,8 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
         this.props.onSelectRelationshipType({
             id: rt.id,
             name: rt.name,
-            from: {
-                entity: rt.from.entity,
-                programId: rt.from.programId || undefined,
-                programStageId: rt.from.programStageId || undefined,
-                trackedEntityTypeId: rt.from.trackedEntityTypeId,
-            },
-            to: {
-                entity: rt.to.entity,
-                programId: rt.to.programId || undefined,
-                programStageId: rt.to.programStageId || undefined,
-                trackedEntityTypeId: rt.to.trackedEntityTypeId,
-            },
+            from: { ...rt.from },
+            to: { ...rt.to },
         });
     }
     renderRelationshipTypes = () => {

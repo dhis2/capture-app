@@ -38,7 +38,7 @@ export type CachedProgramTrackedEntityAttribute = {
     searchable: boolean,
     mandatory: boolean,
     renderOptionsAsRadio?: boolean | null,
-    allowFutureDate?: boolean | null,
+    allowFutureDate?: boolean,
 };
 
 export type CachedDataElementTranslation = {
@@ -70,7 +70,7 @@ export type CachedDataElement = {
 
 export type CachedProgramStageDataElement = {
     compulsory: boolean,
-    allowFutureDate?: boolean | null,
+    allowFutureDate?: boolean,
     displayInReports: boolean,
     renderOptionsAsRadio?: boolean | null,
     renderType: {
@@ -89,7 +89,7 @@ export type CachedProgramStageSection = {
     id: string,
     displayName: string,
     displayDescription: string,
-    dataElements?: Array<CachedSectionDataElements> | null
+    dataElements: Array<CachedSectionDataElements> | null
 };
 
 export type CachedDataEntryForm = {
@@ -103,14 +103,14 @@ export type CachedProgramStage = {
     blockEntryForm: boolean,
     name: string,
     displayName: string,
-    description?: string | null,
+    description: string | null,
     displayExecutionDateLabel?: string | null,
     displayDueDateLabel?: string | null,
     programStageSections?: Array<CachedProgramStageSection> | null,
     programStageDataElements: Array<CachedProgramStageDataElement>,
     formType: string,
     dataEntryForm?: CachedDataEntryForm | null,
-    featureType?: string | null,
+    featureType?: 'POINT' | 'POLYGON' | null,
     validationStrategy: string,
     enableUserAssignment?: boolean | null,
     autoGenerateEvent?: boolean | null,
@@ -149,7 +149,7 @@ export type ProgramCachedCategory = {
 export type ProgramCachedCategoryCombo = {
     id: string,
     displayName: string,
-    categories?: Array<ProgramCachedCategory> | null,
+    categories: Array<ProgramCachedCategory> | null,
     isDefault: boolean,
 };
 
@@ -181,7 +181,7 @@ export type CachedTrackedEntityType = {
     trackedEntityTypeAttributes?: Array<CachedTrackedEntityTypeAttribute> | null,
     translations: Array<CachedTrackedEntityTypeTranslation>,
     minAttributesRequiredToSearch: number,
-    featureType?: string | null,
+    featureType: 'POINT' | 'POLYGON' | null,
 }
 
 export type CachedProgram = {
@@ -193,7 +193,7 @@ export type CachedProgram = {
     programSections?: Array<CachedProgramSection> | null,
     programStages: Array<CachedProgramStage>,
     programType: string,
-    categoryCombo?: ProgramCachedCategoryCombo | null,
+    categoryCombo: ProgramCachedCategoryCombo | null,
     style?: CachedStyle | null,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
@@ -204,7 +204,7 @@ export type CachedProgram = {
     displayEnrollmentDateLabel: string,
     displayIncidentDateLabel: string,
     dataEntryForm?: CachedDataEntryForm | null,
-    featureType?: string | null,
+    featureType: 'POINT' | 'POLYGON' | null,
     selectEnrollmentDatesInFuture: boolean,
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,

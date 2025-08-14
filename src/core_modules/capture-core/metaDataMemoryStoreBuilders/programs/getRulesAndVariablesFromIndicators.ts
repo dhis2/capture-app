@@ -1,4 +1,3 @@
-// @flow
 import isString from 'd2-utilizr/lib/isString';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -11,25 +10,25 @@ import {
 } from '../../rules';
 
 export type CachedProgramIndicator = {
-    id: string,
-    code: string,
-    name: string,
-    displayName: string,
-    description?: ?string,
-    expression: string,
-    filter?: ?string,
-    programId: string,
-    shortName: string,
-    style?: ?{ color?: ?string },
+    id: string;
+    code: string;
+    name: string;
+    displayName: string;
+    description?: string | null | undefined;
+    expression: string;
+    filter?: string | null | undefined;
+    programId: string;
+    shortName: string;
+    style?: { color?: string | null | undefined } | null | undefined;
 };
 
 type ValueTypeReference = { [id: string]: { valueType: string } };
 
-type ProgramData = {|
-    programId: string,
-    dataElements: ValueTypeReference,
-    attributes: ValueTypeReference,
-|};
+type ProgramData = {
+    programId: string;
+    dataElements: ValueTypeReference;
+    attributes: ValueTypeReference;
+};
 
 const staticReplacements = [
     { regExp: new RegExp('([^\\w\\d])(and)([^\\w\\d])', 'gi'), replacement: '$1&&$3' },
@@ -87,9 +86,8 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
     return newVariableObject;
 }
 
-function getVariables(action, rule, programData) {
+function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInCondition = getVariablesFromExpression(rule.condition);
-    // $FlowFixMe[incompatible-call] automated comment
     const variablesInData = getVariablesFromExpression(action.data);
 
     const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programData));
@@ -102,13 +100,12 @@ function getVariables(action, rule, programData) {
     };
 }
 
-function isValueCountPresent(rule, action) {
-    // $FlowFixMe[incompatible-use] automated comment
+function isValueCountPresent(rule: any, action: any) {
     return rule.condition.indexOf('V{value_count}') >= 0 || action.data.indexOf('V{value_count}') >= 0;
 }
 
-function replaceValueCount(rule, action, variableObjectsCurrentExpression) {
-    let valueCountText = variableObjectsCurrentExpression.reduce((accValueCountText, variableCurrentRule, index) => {
+function replaceValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
+    let valueCountText = variableObjectsCurrentExpression.reduce((accValueCountText: string, variableCurrentRule: any, index: number) => {
         const currentText = `d2:count('${variableCurrentRule.displayName}')`;
         accValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
         return accValueCountText;
@@ -118,26 +115,24 @@ function replaceValueCount(rule, action, variableObjectsCurrentExpression) {
 
     // Replace all occurrences of value counts in both the data and expression
     rule.condition = rule.condition.replace(new RegExp('V{value_count}', 'g'), valueCountText);
-    // $FlowFixMe[incompatible-use] automated comment
     action.data = action.data.replace(new RegExp('V{value_count}', 'g'), valueCountText);
 
     return { rule, action };
 }
 
-function replaceValueCountIfPresent(rule, action, variableObjectsCurrentExpression) {
+function replaceValueCountIfPresent(rule: any, action: any, variableObjectsCurrentExpression: any) {
     const valueCountPresent = isValueCountPresent(rule, action);
     if (valueCountPresent) {
         replaceValueCount(rule, action, variableObjectsCurrentExpression);
     }
 }
 
-function isPositiveValueCountPresent(rule, action) {
-    // $FlowFixMe[incompatible-use] automated comment
+function isPositiveValueCountPresent(rule: any, action: any) {
     return rule.condition.indexOf('V{zero_pos_value_count}') >= 0 || action.data.indexOf('V{zero_pos_value_count}') >= 0;
 }
 
-function replacePositiveValueCount(rule, action, variableObjectsCurrentExpression) {
-    let positiveValueCountText = variableObjectsCurrentExpression.reduce((accPositiveValueCountText, variableCurrentRule, index) => {
+function replacePositiveValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
+    let positiveValueCountText = variableObjectsCurrentExpression.reduce((accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
         const currentText = `d2:countifzeropos('${variableCurrentRule.displayName}')`;
         accPositiveValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
         return accPositiveValueCountText;
@@ -147,11 +142,10 @@ function replacePositiveValueCount(rule, action, variableObjectsCurrentExpressio
 
     // Replace all occurrences of value counts in both the data and expression
     rule.condition = rule.condition.replace(new RegExp('V{zero_pos_value_count}', 'g'), positiveValueCountText);
-    // $FlowFixMe[incompatible-use] automated comment
     action.data = action.data.replace(new RegExp('V{zero_pos_value_count}', 'g'), positiveValueCountText);
 }
 
-function replacePositiveValueCountIfPresent(rule, action, variableObjectsCurrentExpression) {
+function replacePositiveValueCountIfPresent(rule: any, action: any, variableObjectsCurrentExpression: any) {
     const valueCountPresent = isPositiveValueCountPresent(rule, action);
     if (valueCountPresent) {
         replacePositiveValueCount(rule, action, variableObjectsCurrentExpression);
@@ -162,7 +156,6 @@ function buildIndicatorRuleAndVariables(
     programIndicator: CachedProgramIndicator,
     programData: ProgramData,
 ) {
-    // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
         content: programIndicator.name,
@@ -173,7 +166,6 @@ function buildIndicatorRuleAndVariables(
         style: programIndicator.style || null,
     };
 
-    // $FlowFixMe[prop-missing] automated comment
     const newRule: ProgramRule = {
         id: programIndicator.id,
         condition: programIndicator.filter ? programIndicator.filter : 'true',
@@ -190,7 +182,6 @@ function buildIndicatorRuleAndVariables(
     replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
     replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
 
-    // $FlowFixMe[incompatible-call] automated comment
     newAction.data = performStaticReplacements(newAction.data);
     newRule.condition = performStaticReplacements(newRule.condition);
 
@@ -233,14 +224,10 @@ export function getRulesAndVariablesFromProgramIndicators(
     return validProgramIndicators
         .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
         .filter(container => container)
-        .reduce((accOneLevelContainer, container) => {
-            // $FlowFixMe[incompatible-type] automated comment
+        .reduce((accOneLevelContainer: any, container) => {
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
-            // $FlowFixMe[incompatible-use] automated comment
             accOneLevelContainer.rules.push(container.rule);
 
-            // $FlowFixMe[incompatible-type] automated comment
-            // $FlowFixMe[incompatible-use] automated comment
             accOneLevelContainer.variables = accOneLevelContainer.variables ? [...accOneLevelContainer.variables, ...container.variables] : container.variables;
             return accOneLevelContainer;
         }, { rules: null, variables: null });

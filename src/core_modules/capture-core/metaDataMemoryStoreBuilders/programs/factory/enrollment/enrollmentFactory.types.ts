@@ -1,21 +1,19 @@
 import type {
+    TrackedEntityType,
+} from '../../../../metaData';
+
+import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
+    CachedTrackedEntityType,
 } from '../../../../storageControllers';
 
 export type ConstructorInput = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedOptionSets: Map<string, CachedOptionSet>;
+    cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
     locale: string | null;
-};
-
-export type InputSearchAttribute = {
-    trackedEntityAttributeId: string;
-    searchable: boolean;
-    displayInList: boolean;
-    renderOptionsAsRadio?: boolean | null;
-};
-
-export type SearchAttribute = InputSearchAttribute & {
-    trackedEntityAttribute: CachedTrackedEntityAttribute;
+    trackedEntityTypeCollection: Map<string, TrackedEntityType>;
+    dataEntryFormConfig?: any;
+    minorServerVersion: number;
 };

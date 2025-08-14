@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 
 import log from 'loglevel';
@@ -31,11 +30,11 @@ export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
     cachedOptionSets: Map<string, CachedOptionSet>;
-    locale: ?string;
+    locale: string | null;
     dataElementFactory: DataElementFactory;
-    cachedDataElements: ?Map<string, CachedDataElement>;
+    cachedDataElements?: Map<string, CachedDataElement> | null;
     relationshipTypesFactory: RelationshipTypesFactory;
-    dataEntryFormConfig: ?DataEntryFormConfig;
+    dataEntryFormConfig?: DataEntryFormConfig | null;
 
     constructor({
         cachedOptionSets,
@@ -69,7 +68,7 @@ export class ProgramStageFactory {
         });
 
         if (sectionSpecs.dataElements) {
-            // $FlowFixMe
+            // @ts-expect-error - keeping original functionality as before ts rewrite
             await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement) => {
                 if (sectionDataElement.type === FormFieldTypes.PLUGIN) {
                     const attributes = sectionDataElement.fieldMap
@@ -133,7 +132,7 @@ export class ProgramStageFactory {
     }
 
     async _addDataElementsToSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
-        // $FlowFixMe
+        // @ts-expect-error - keeping original functionality as before ts rewrite
         await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
             const cachedDataElementDefinition = this
                 .cachedDataElements
@@ -148,7 +147,7 @@ export class ProgramStageFactory {
         }));
     }
 
-    async _buildMainSection(cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+    async _buildMainSection(cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
@@ -160,7 +159,7 @@ export class ProgramStageFactory {
         return section;
     }
 
-    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined) {
         if (!cachedProgramStageDataElements) return;
 
         // Check if there exist data elements which are not assigned to a section
@@ -184,7 +183,7 @@ export class ProgramStageFactory {
     }
 
     static _convertProgramStageDataElementsToObject(
-        cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>): CachedProgramStageDataElementsAsObject {
+        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined): CachedProgramStageDataElementsAsObject {
         if (!cachedProgramStageDataElements) {
             return {};
         }
@@ -250,14 +249,11 @@ export class ProgramStageFactory {
             const dataEntryForm = cachedProgramStage.dataEntryForm;
             try {
                 section.customForm = new CustomForm((o) => {
-                    // $FlowFixMe
                     o.id = dataEntryForm.id;
                 });
-                // $FlowFixMe : Require input from class
-                section.customForm.setData(dataEntryForm.htmlCode, transformEventNode);
+                section.customForm.setData(dataEntryForm.htmlCode, transformEventNode as any);
             } catch (error) {
                 log.error(errorCreator(ProgramStageFactory.CUSTOM_FORM_TEMPLATE_ERROR)(
-                    // $FlowFixMe
                     { template: dataEntryForm.htmlCode, error }));
             }
         } else if (this.dataEntryFormConfig) {
@@ -266,7 +262,7 @@ export class ProgramStageFactory {
                 return acc;
             }, {});
 
-            // $FlowFixMe
+            // @ts-expect-error - keeping original functionality as before ts rewrite
             await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                 const formElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
@@ -323,8 +319,7 @@ export class ProgramStageFactory {
                     cachedProgramStage.programStageDataElements,
                 );
 
-            // $FlowFixMe[prop-missing] automated comment
-            // $FlowFixMe[incompatible-use] automated comment
+            // @ts-expect-error - keeping original functionality as before ts rewrite
             await cachedProgramStage.programStageSections.asyncForEach(async (section: CachedProgramStageSection) => {
                 stageForm.addSection(await this._buildSection(cachedProgramStageDataElementsAsObject, {
                     id: section.id,

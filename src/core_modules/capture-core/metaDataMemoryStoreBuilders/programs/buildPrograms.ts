@@ -1,5 +1,4 @@
-// @flow
-import { typeof StorageController } from 'capture-core-utils/storage';
+import type { StorageController } from 'capture-core-utils/storage';
 import type { ProgramRule, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import { ProgramFactory } from './factory';
 import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
@@ -18,23 +17,23 @@ import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicator
 import type { BuildProgramsInput } from './buildPrograms.types';
 
 
-function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getPrograms(storageController: StorageController, storeName: string): Promise<Array<any>> {
     return storageController.getAll(storeName);
 }
 
-function getProgramRulesVariables(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getProgramRulesVariables(storageController: StorageController, storeName: string): Promise<Array<any>> {
     return storageController.getAll(storeName);
 }
 
-function getProgramRules(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getProgramRules(storageController: StorageController, storeName: string): Promise<Array<any>> {
     return storageController.getAll(storeName);
 }
 
-function getProgramIndicators(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getProgramIndicators(storageController: StorageController, storeName: string): Promise<Array<any>> {
     return storageController.getAll(storeName);
 }
 
-function getRelationshipTypes(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getRelationshipTypes(storageController: StorageController, storeName: string): Promise<Array<any>> {
     return storageController.getAll(storeName);
 }
 
@@ -162,7 +161,7 @@ function getBuiltPrograms(
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
     cachedCategories: {[categoryId: string]: CachedCategory},
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-    locale: ?string,
+    locale: string | null,
     minorServerVersion: number,
 ) {
     const programFactory = new ProgramFactory(
@@ -197,15 +196,14 @@ function getBuiltPrograms(
         .map(cachedProgram => programFactory.build(cachedProgram));
 
     return Promise.all(promisePrograms)
-        // $FlowFixMe
         .then(programs => programs.filter(Boolean));
 }
 
 function postProcessPrograms(
-    programs: ?Array<EventProgram | TrackerProgram>,
-    cachedProgramRulesVariables: ?Array<ProgramRuleVariable>,
-    cachedProgramRules: ?Array<ProgramRule>,
-    cachedProgramIndicators: ?Array<CachedProgramIndicator>,
+    programs: Array<EventProgram | TrackerProgram> | null,
+    cachedProgramRulesVariables: Array<ProgramRuleVariable> | null,
+    cachedProgramRules: Array<ProgramRule> | null,
+    cachedProgramIndicators: Array<CachedProgramIndicator> | null,
 ) {
     if (programs == null) return;
 

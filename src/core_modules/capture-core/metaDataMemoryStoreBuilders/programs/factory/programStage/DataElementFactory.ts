@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -35,13 +34,13 @@ export class DataElementFactory {
         return converters[cachedValueType] || cachedValueType;
     }
 
-    locale: ?string;
+    locale: string | null;
     minorServerVersion: number;
     optionSetFactory: OptionSetFactory;
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
+        locale: string | null,
         minorServerVersion: number,
     ) {
         this.locale = locale;
@@ -54,7 +53,7 @@ export class DataElementFactory {
 
     _getDataElementTranslation(
         cachedDataElement: CachedDataElement,
-        property: $Values<typeof DataElementFactory.propertyNames>): ?string {
+        property: typeof DataElementFactory.propertyNames[keyof typeof DataElementFactory.propertyNames]): string | null {
         return this.locale &&
             cachedDataElement.translations[this.locale] &&
             cachedDataElement.translations[this.locale][property];
@@ -102,8 +101,8 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
         cachedDataElement: CachedDataElement,
-        dataElementType: $Keys<typeof dataElementTypes>,
-        section: ?Section,
+        dataElementType: keyof typeof dataElementTypes,
+        section: Section | null,
     ) {
         const dataElement = new DataElement();
         dataElement.section = section;
@@ -126,9 +125,9 @@ export class DataElementFactory {
 
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
-        section: ?Section,
+        section: Section | null,
         cachedDataElementDefinition?: CachedDataElement,
-    ): Promise<?DataElement> {
+    ): Promise<DataElement | null> {
         const cachedDataElement = cachedDataElementDefinition ||
             await getUserMetadataStorageController().get(USER_METADATA_STORES.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
 

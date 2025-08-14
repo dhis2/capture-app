@@ -217,7 +217,7 @@ const setBaseProperties = async ({
             optionSets,
             trackedEntityAttribute.optionSet.id,
             programTrackedEntityAttribute.renderOptionsAsRadio,
-        ) || undefined;
+        );
     }
 };
 
