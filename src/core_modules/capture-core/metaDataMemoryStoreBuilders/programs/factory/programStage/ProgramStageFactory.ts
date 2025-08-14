@@ -310,7 +310,7 @@ export class ProgramStageFactory {
                         },
                     );
 
-                    section && stageForm.addSection(section);
+                    stageForm.addSection(section);
                 }
             });
         } else if (isNonEmptyArray(cachedProgramStage.programStageSections)) {
