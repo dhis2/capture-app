@@ -7,12 +7,12 @@ async function getSystemSettingsFromStore() {
     return storageController.getAll(MAIN_STORES.SYSTEM_SETTINGS);
 }
 
-export async function buildSystemSettingsAsync(cacheData?: any[]) {
+export async function buildSystemSettingsAsync(cacheData?: any[] | null) {
     const loadedCacheData = cacheData || await getSystemSettingsFromStore();
 
     const systemSettings = new SystemSettings();
     loadedCacheData.forEach((setting) => {
-        (systemSettings as any)[setting.id] = setting.value;
+        systemSettings[setting.id] = setting.value;
     });
 
     systemSettings.trackerAppRelativePath = 'dhis-web-tracker-capture';

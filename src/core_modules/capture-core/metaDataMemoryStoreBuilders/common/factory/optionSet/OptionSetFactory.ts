@@ -12,7 +12,6 @@ import type { DataElement } from '../../../../metaData';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
-import type { OptionSetFactoryTranslationPropertyNames } from './OptionSetFactory.types';
 
 export class OptionSetFactory {
     static OPTION_SET_NOT_FOUND = 'Optionset not found';
@@ -23,7 +22,7 @@ export class OptionSetFactory {
         SHORT_NAME: 'SHORT_NAME',
     };
 
-    static getRenderType(renderType?: string) {
+    static getRenderType(renderType: string | null) {
         return renderType && camelCaseUppercaseString(renderType);
     }
 
@@ -39,7 +38,7 @@ export class OptionSetFactory {
 
     _getTranslation(
         translations: CachedOptionSetTranslation[] | CachedOptionTranslation[],
-        property: keyof OptionSetFactoryTranslationPropertyNames,
+        property: typeof OptionSetFactory.translationPropertyNames[keyof typeof OptionSetFactory.translationPropertyNames],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -51,23 +50,23 @@ export class OptionSetFactory {
     async build(
         dataElement: DataElement,
         optionSetId: string,
-        renderOptionsAsRadio?: boolean,
-        renderType?: string,
-        onGetDataElementType?: (valueType: string) => string,
+        renderOptionsAsRadio: boolean | null | undefined,
+        renderType: string | null,
+        onGetDataElementType: (valueType: string) => string,
     ) {
         const cachedOptionSet = this.cachedOptionSets.get(optionSetId);
         if (!cachedOptionSet) {
             log.warn(
                 errorCreator(OptionSetFactory.OPTION_SET_NOT_FOUND)({ id: optionSetId }),
             );
-            return null;
+            return undefined;
         }
 
-        dataElement.type = onGetDataElementType ? onGetDataElementType(dataElement.type || cachedOptionSet.valueType) : (dataElement.type || cachedOptionSet.valueType);
+        dataElement.type = onGetDataElementType(dataElement.type || cachedOptionSet.valueType);
         const optionsPromises = cachedOptionSet
             .options
             .map(async (cachedOption) => {
-                const icon = buildIcon(cachedOption.style || undefined);
+                const icon = buildIcon(cachedOption.style);
                 return new Option((o) => {
                     o.id = cachedOption.id;
                     o.value = cachedOption.code;
@@ -76,7 +75,7 @@ export class OptionSetFactory {
                     o.text =
                         this._getTranslation(
                             cachedOption.translations,
-                            'NAME') ||
+                            OptionSetFactory.translationPropertyNames.NAME) ||
                         cachedOption.displayName;
                     o.icon = icon;
                 });
@@ -84,9 +83,9 @@ export class OptionSetFactory {
 
         const options = await Promise.all(optionsPromises);
 
-        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup(function (this: any) {
-            this.id = group.id;
-            this.optionIds = new Map(group.options.map(option => [option, option]));
+        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup((o) => {
+            o.id = group.id;
+            o.optionIds = new Map(group.options.map(option => [option, option]));
         })]));
 
 

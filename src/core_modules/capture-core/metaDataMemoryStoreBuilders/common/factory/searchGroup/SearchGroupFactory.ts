@@ -38,7 +38,7 @@ export class SearchGroupFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
     };
-    static _getSearchAttributeValueType(valueType: string, isUnique?: boolean) {
+    static _getSearchAttributeValueType(valueType: string, isUnique?: boolean | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
         return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
     }
@@ -61,7 +61,7 @@ export class SearchGroupFactory {
 
     _getAttributeTranslation(
         translations: CachedAttributeTranslation[],
-        property: keyof typeof translationPropertyNames,
+        property: typeof translationPropertyNames[keyof typeof translationPropertyNames],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -85,25 +85,25 @@ export class SearchGroupFactory {
 
             o.id = id;
             o.name =
-              this._getAttributeTranslation(translations, 'NAME')
+              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
               || displayName;
 
             o.shortName =
-               this._getAttributeTranslation(translations, 'SHORT_NAME')
+               this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
               || displayShortName;
 
             o.formName =
-              this._getAttributeTranslation(translations, 'NAME')
+              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
               || displayFormName;
 
             o.description =
-               this._getAttributeTranslation(translations, 'DESCRIPTION')
+               this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
               || description;
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
             o.disabled = false;
-            o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique || undefined);
+            o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });
 
         const { optionSetValue, optionSet } = searchAttribute.trackedEntityAttribute;
@@ -112,31 +112,31 @@ export class SearchGroupFactory {
             element.optionSet = await this.optionSetFactory.build(
                 element,
                 optionSet.id,
-                searchAttribute.renderOptionsAsRadio || undefined,
-                undefined,
+                searchAttribute.renderOptionsAsRadio,
+                null,
                 value => value,
-            ) || undefined;
+            );
         }
 
         return element;
     }
 
-    async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
+    async _buildSection(searchGroupAttributes) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
             o.showContainer = false;
         });
 
-        const elements = await Promise.all(
-            searchGroupAttributes.map(programAttribute => this._buildElement(programAttribute)),
-        );
-        elements.forEach(element => element && section.addElement(element));
+        await searchGroupAttributes.asyncForEach(async (programAttribute) => {
+            const element = await this._buildElement(programAttribute);
+            element && section.addElement(element);
+        });
         return section;
     }
 
 
     async _buildRenderFoundation(searchGroupAttributes: Array<SearchAttribute>) {
-        const renderFoundation = new RenderFoundation(null);
+        const renderFoundation = new RenderFoundation();
         renderFoundation.addSection(await this._buildSection(searchGroupAttributes));
         return renderFoundation;
     }
@@ -146,7 +146,7 @@ export class SearchGroupFactory {
         searchGroupAttributes: Array<SearchAttribute>,
         minAttributesRequiredToSearch: number,
     ) {
-        const searchGroup = new SearchGroup(null);
+        const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
         if (key === 'main') {
             searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
@@ -159,7 +159,7 @@ export class SearchGroupFactory {
         return searchGroup;
     }
 
-    getTrackedEntityAttribute(attribute: InputSearchAttribute): CachedTrackedEntityAttribute | null {
+    getTrackedEntityAttribute(attribute: InputSearchAttribute): CachedTrackedEntityAttribute | null | undefined {
         const id = attribute.trackedEntityAttributeId;
         const trackedEntityAttribute = id ? this.cachedTrackedEntityAttributes.get(id) : null;
         if (!trackedEntityAttribute) {
@@ -169,7 +169,7 @@ export class SearchGroupFactory {
                     { attribute }),
             );
         }
-        return trackedEntityAttribute || null;
+        return trackedEntityAttribute;
     }
 
     build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {

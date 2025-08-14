@@ -275,7 +275,7 @@ const buildOptionSet = async (
     dataElement.type = optionSetAPI.valueType;
 
     const optionsPromises = optionSetAPI.options.map(async (optionSetOption) => {
-        const icon = buildIcon(optionSetOption.style || undefined);
+        const icon = buildIcon(optionSetOption.style);
         return new Option((option) => {
             option.id = optionSetOption.id;
             option.value = optionSetOption.code;

@@ -8,10 +8,8 @@ export class OptionGroup {
     private _id!: string;
     private _optionIds!: Map<string, string>;
 
-    constructor(initFn?: (this: OptionGroup) => void) {
-        if (initFn && isFunction(initFn)) {
-            initFn.call(this);
-        }
+    constructor(initFn?: (_this: OptionGroup) => void) {
+        initFn && isFunction(initFn) && initFn(this);
     }
 
     set id(id: string) {
