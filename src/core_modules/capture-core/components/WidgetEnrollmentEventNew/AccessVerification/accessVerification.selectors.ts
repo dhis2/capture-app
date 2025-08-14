@@ -7,5 +7,5 @@ const programStageIdSelector = (state: any, { stageId }: any) => stageId;
 export const makeEventAccessSelector = () => createSelector(
     programIdSelector,
     programStageIdSelector,
-    (programId: string, programStageId?: string | null) =>
+    (programId: string, programStageId: string | null) =>
         programId && getProgramEventAccess(programId, programStageId));

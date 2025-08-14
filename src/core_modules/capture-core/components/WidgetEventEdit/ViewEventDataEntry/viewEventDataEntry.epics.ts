@@ -74,10 +74,13 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             if (metadataContainer.error) {
                 return of(prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error));
             }
-            const foundation = metadataContainer.stage.stageForm;
+            const foundation = metadataContainer.stage?.stageForm;
             const program = metadataContainer.program;
             const enrollment = state.enrollmentDomain?.enrollment;
             const attributeValues = state.enrollmentDomain?.attributeValues;
+            if (!program || !foundation) {
+                return of(prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error));
+            }
 
             const args = {
                 eventContainer,

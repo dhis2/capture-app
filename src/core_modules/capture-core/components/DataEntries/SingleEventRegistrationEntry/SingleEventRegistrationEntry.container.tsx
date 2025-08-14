@@ -22,7 +22,7 @@ const makeMapStateToProps = (): MapStateToProps => {
     return (state: any, { id }: ContainerProps): StateProps => ({
         ready: state.dataEntries[id]?.itemId === itemId,
         showAddRelationship: !!state.newEventPage.showAddRelationship,
-        eventAccess: eventAccessSelector(state),
+        eventAccess: eventAccessSelector(state) || { read: false, write: false },
     });
 };
 

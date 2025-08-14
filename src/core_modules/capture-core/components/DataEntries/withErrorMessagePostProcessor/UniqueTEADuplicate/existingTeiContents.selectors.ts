@@ -17,7 +17,7 @@ export const makeDataElementsSelector = () => createSelector(
     programIdSelector,
     tetAttributesOnlySelector,
     tetIdSelector,
-    (programId: string | null, tetAttributesOnly: boolean, tetId: string) => {
+    (programId: string, tetAttributesOnly: boolean, tetId: string) => {
         if (tetAttributesOnly) {
             let teType;
             try {

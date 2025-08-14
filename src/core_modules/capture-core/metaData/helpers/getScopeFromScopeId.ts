@@ -1,11 +1,10 @@
-// @flow
 import { EventProgram, TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
 import { programCollection, trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 
 export type Scope = (EventProgram | TrackerProgram | TrackedEntityType)
 
-export function getScopeFromScopeId(scopeId: ?string): ?Scope {
+export function getScopeFromScopeId(scopeId: string | null | undefined): Scope | null {
     if (!scopeId) {
         return null;
     }

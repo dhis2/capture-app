@@ -26,6 +26,7 @@ import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
+import { TrackerProgram } from '../../../../metaData';
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -112,7 +113,7 @@ export const EnrollmentAddEventPageDefault = ({
     const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
-    const trackedEntityName = program?.trackedEntityType?.name ?? '';
+    const trackedEntityName = (program instanceof TrackerProgram) ? program.trackedEntityType?.name ?? '' : '';
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,

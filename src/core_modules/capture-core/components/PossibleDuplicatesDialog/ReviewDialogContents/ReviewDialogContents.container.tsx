@@ -8,7 +8,6 @@ import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../HOC/withErrorMessageHandler';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
 import type { OwnProps, PropsFromRedux } from './ReviewDialogContents.types';
-import { OptionSet } from '../../../metaData';
 
 type StateProps = PropsFromRedux;
 
@@ -20,7 +19,7 @@ const buildDataElements = (scopeId: string) => {
 
     return currentSearchScopeDataElements
         .filter(({ displayInReports }: { displayInReports: boolean }) => displayInReports)
-        .map(({ id, name, type, optionSet }: { id: string, name: string, type: string, optionSet: OptionSet }) => ({ id, name, type, optionSet }));
+        .map(({ id, name, type, optionSet }: any) => ({ id, name, type, optionSet }));
 };
 
 const mapStateToProps = (

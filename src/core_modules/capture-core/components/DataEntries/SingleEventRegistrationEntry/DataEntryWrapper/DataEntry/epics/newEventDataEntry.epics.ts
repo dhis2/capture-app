@@ -121,6 +121,9 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Epi
             const state = store.value;
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
             const stageContainer = getStageForEventProgram(state.currentSelections.programId);
+            if (!stageContainer || !stageContainer.stage) {
+                return false;
+            }
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         }));

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
+import { getTrackerProgramThrowIfNotFound } from '../../../../../../../metaData';
 
 const programIdSelector = (state: any) => state.newRelationshipRegisterTei.programId;
 
@@ -11,7 +11,7 @@ export const makeEnrollmentMetadataSelector = () => createSelector(
         }
 
         try {
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            const program = getTrackerProgramThrowIfNotFound(programId);
             return program.enrollment;
         } catch (error) {
             console.warn(`Failed to get program metadata for programId: ${programId}`, error);

@@ -68,7 +68,7 @@ export const makeColumnsSelector = () => createSelector(
     columnsOrderStateSelector,
     (programId: string, columnsOrderFromState: ColumnsOrderFromState) => {
         const stageContainer = getStageForEventProgram(programId);
-        if (stageContainer.error) {
+        if (stageContainer.error || !stageContainer || !stageContainer.stage) {
             return columnsOrderFromState;
         }
 

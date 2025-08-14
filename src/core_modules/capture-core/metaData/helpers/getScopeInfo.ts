@@ -1,16 +1,15 @@
-// @flow
 import { EventProgram, TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
 import { getScopeFromScopeId } from './getScopeFromScopeId';
 import { scopeTypes } from './constants';
 import type { Scope } from './getScopeFromScopeId';
 
-export const getScopeInfo = (scopeId: ?string) => {
+export const getScopeInfo = (scopeId: string | null) => {
     const scope = getScopeFromScopeId(scopeId);
     return deriveInfoFromScope(scope);
 };
 
-export const deriveInfoFromScope = (scope: ?Scope) => {
+export const deriveInfoFromScope = (scope: Scope | null) => {
     if (scope instanceof EventProgram) {
         const trackedEntityName = '';
         const programName = scope.name;

@@ -9,7 +9,7 @@ import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
-import { TrackedEntityType } from '../../../metaData';
+import { TrackerProgram } from '../../../metaData';
 
 type ReduxState = {
     activePage: {
@@ -176,7 +176,7 @@ const MainPageContainer = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
 
     const selectedProgram = programCollection.get(programId);
-    const trackedEntityType = selectedProgram && 'trackedEntityType' in selectedProgram ? selectedProgram.trackedEntityType as TrackedEntityType : undefined;
+    const trackedEntityType = (selectedProgram && selectedProgram instanceof TrackerProgram) ? selectedProgram.trackedEntityType : undefined;
     const trackedEntityTypeId = trackedEntityType?.id;
     const displayFrontPageList = Boolean(trackedEntityTypeId && selectedProgram?.displayFrontPageList);
     const MainPageStatus = useMainPageStatus({

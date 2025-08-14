@@ -39,7 +39,7 @@ import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
-import { getProgramEventAccess } from '../../../metaData';
+import { getProgramEventAccess, TrackerProgram } from '../../../metaData';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer } from '../../../converters';
 import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
@@ -50,6 +50,7 @@ import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import type { UserFormField } from '../../FormFields/UserField';
+import type { ProgramStage } from '../../../metaData';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
@@ -68,7 +69,7 @@ type PageStatusParams = {
     enrollmentSite: Record<string, unknown>;
     teiDisplayName: string;
     trackedEntityName: string;
-    programStage: Record<string, unknown>;
+    programStage?: ProgramStage | null;
     isLoading: boolean;
     event: Record<string, unknown>;
 };
@@ -146,7 +147,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch]);
 
     const { program } = useProgramInfo(programId);
-    const programStage = [...program?.stages?.values() ?? []].find((item: Record<string, unknown>) => item.id === stageId);
+    const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
@@ -247,7 +248,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    const trackedEntityType = (program as Record<string, unknown>)?.trackedEntityType as { name: string; id: string } | undefined;
+    const trackedEntityType = (program && program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const { name: trackedEntityName = '', id: trackedEntityTypeId = '' } = trackedEntityType ?? {};
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);

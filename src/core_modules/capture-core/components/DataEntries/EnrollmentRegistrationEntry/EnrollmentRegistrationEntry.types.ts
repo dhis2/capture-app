@@ -64,7 +64,7 @@ export type OwnProps = {
     skipDuplicateCheck?: boolean;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
     saveButtonText: (trackedEntityName: string) => string;
-    firstStageMetaData?: { stage: ProgramStage };
+    firstStageMetaData?: { stage: ProgramStage } | null;
     relatedStageRef?: { current: RelatedStageRefPayload | null };
     relatedStageActionsOptions?: {
         [key in keyof typeof relatedStageActions]?: {

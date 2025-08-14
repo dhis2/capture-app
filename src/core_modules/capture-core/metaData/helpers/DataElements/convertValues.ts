@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import isObject from 'd2-utilizr/lib/isObject';
@@ -12,8 +11,7 @@ const errorMessages = {
     CONVERT_VALUES_STRUCTURE: 'Values can not be converted, data is neither an array or an object',
 };
 
-function getElementsById(dataElements: Array<DataElement>) {
-    // $FlowFixMe
+function getElementsById(dataElements) {
     return dataElements.toHashMap('id');
 }
 
@@ -31,11 +29,10 @@ function convertArrayValues(
     elementsById: { [id: string]: DataElement },
     onConvert: ConvertFn,
 ) {
-    // $FlowFixMe[prop-missing] automated comment
-    return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, elementsById, onConvert));
+    return arrayOfValues.map((values: ValuesType) => convertObjectValues(values, elementsById, onConvert));
 }
 
-export function convertValues<T: ?ValuesType | Array<ValuesType>>(
+export function convertValues<T extends ValuesType | Array<ValuesType> | null | undefined>(
     values: T,
     dataElements: Array<DataElement>,
     onConvert: ConvertFn,
@@ -43,13 +40,9 @@ export function convertValues<T: ?ValuesType | Array<ValuesType>>(
     if (values) {
         const elementsById = getElementsById(dataElements);
         if (isArray(values)) {
-            // $FlowFixMe[incompatible-return] automated comment
-            // $FlowFixMe[incompatible-call] automated comment
-            return convertArrayValues(values, elementsById, onConvert);
+            return convertArrayValues(values as Array<ValuesType>, elementsById, onConvert) as T;
         } else if (isObject(values)) {
-            // $FlowFixMe[incompatible-return] automated comment
-            // $FlowFixMe[incompatible-call] automated comment
-            return convertObjectValues(values, elementsById, onConvert);
+            return convertObjectValues(values as ValuesType, elementsById, onConvert) as T;
         }
 
         log.error(errorCreator(errorMessages.CONVERT_VALUES_STRUCTURE)({ values }));

@@ -1,4 +1,4 @@
-import type { Program, ProgramStage } from '../../../../metaData';
+import type { EventProgram, ProgramStage } from '../../../../metaData';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -42,7 +42,7 @@ import type {
 
 export type Props = {
     storeId: string,
-    program: Program,
+    program: EventProgram,
     programStage: ProgramStage,
     orgUnitId: string,
     mainViewConfig?: MainViewConfig,
@@ -91,7 +91,7 @@ export type EventWorkingListsReduxOutputProps = {
     onUpdateList: UpdateList,
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
-    program: Program,
+    program: EventProgram,
     programStage: ProgramStage,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
