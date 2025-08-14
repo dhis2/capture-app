@@ -38,7 +38,7 @@ export const buildEnrollmentForm = async ({
         trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
         locale,
         dataEntryFormConfig,
-        minorServerVersion,
+        minorServerVersion: minorServerVersion ?? 0,
     });
 
     return enrollmentFactory.build(cachedProgram, searchGroups);
