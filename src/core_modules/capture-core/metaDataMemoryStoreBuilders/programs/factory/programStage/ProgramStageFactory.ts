@@ -30,7 +30,7 @@ export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
     cachedOptionSets: Map<string, CachedOptionSet>;
-    locale: string | null | undefined;
+    locale: string | null;
     dataElementFactory: DataElementFactory;
     cachedDataElements: Map<string, CachedDataElement> | null | undefined;
     relationshipTypesFactory: RelationshipTypesFactory;
@@ -52,7 +52,7 @@ export class ProgramStageFactory {
         this.cachedDataElements = cachedDataElements;
         this.dataElementFactory = new DataElementFactory(
             cachedOptionSets,
-            locale ?? undefined,
+            locale,
             minorServerVersion,
         );
         this.dataEntryFormConfig = dataEntryFormConfig;

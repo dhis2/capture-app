@@ -50,7 +50,7 @@ export class DataElementFactory {
         return dataElement;
     }
 
-    locale?: string;
+    locale: string | null;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     minorServerVersion: number;
@@ -61,10 +61,10 @@ export class DataElementFactory {
         minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
-        this.locale = locale ?? undefined;
+        this.locale = locale;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
-            locale ?? undefined,
+            locale,
         );
         this.minorServerVersion = minorServerVersion;
     }

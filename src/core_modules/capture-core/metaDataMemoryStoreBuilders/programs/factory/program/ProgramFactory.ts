@@ -48,7 +48,7 @@ export class ProgramFactory {
         cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
         cachedCategories: {[categoryId: string]: CachedCategory},
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-        locale: string | null | undefined,
+        locale: string | null,
         minorServerVersion: number,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
@@ -69,7 +69,7 @@ export class ProgramFactory {
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
-            locale: locale ?? undefined,
+            locale,
         });
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,

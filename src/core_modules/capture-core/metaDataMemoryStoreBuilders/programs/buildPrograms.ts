@@ -161,7 +161,7 @@ function getBuiltPrograms(
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
     cachedCategories: {[categoryId: string]: CachedCategory},
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-    locale: string | null | undefined,
+    locale: string | null,
     minorServerVersion: number,
 ) {
     const programFactory = new ProgramFactory(

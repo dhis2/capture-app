@@ -21,7 +21,7 @@ export class TrackedEntityTypeFactory {
         DESCRIPTION: 'DESCRIPTION',
     };
 
-    locale?: string;
+    locale: string | null;
     dataElementFactory: DataElementFactory;
     searchGroupFactory: SearchGroupFactory;
     teiRegistrationFactory: TeiRegistrationFactory;
@@ -33,7 +33,7 @@ export class TrackedEntityTypeFactory {
         dataEntryFormConfig,
         minorServerVersion,
     }: ConstructorInput) {
-        this.locale = locale ?? undefined;
+        this.locale = locale;
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
@@ -43,7 +43,7 @@ export class TrackedEntityTypeFactory {
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
-            locale: locale ?? undefined,
+            locale,
         });
         this.teiRegistrationFactory = new TeiRegistrationFactory({
             cachedTrackedEntityAttributes,

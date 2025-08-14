@@ -13,7 +13,7 @@ export type ConstructorInput = {
     cachedDataElements?: Map<string, CachedDataElement>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
     dataEntryFormConfig?: DataEntryFormConfig | null,
-    locale?: string | null,
+    locale: string | null,
     minorServerVersion: number,
 };
 

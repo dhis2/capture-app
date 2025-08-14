@@ -34,20 +34,20 @@ export class DataElementFactory {
         return converters[cachedValueType] || cachedValueType;
     }
 
-    locale: string | undefined;
+    locale: string | null;
     minorServerVersion: number;
     optionSetFactory: OptionSetFactory;
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: string | undefined,
+        locale: string | null,
         minorServerVersion: number,
     ) {
         this.locale = locale;
         this.minorServerVersion = minorServerVersion;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
-            locale ?? undefined,
+            locale,
         );
     }
 

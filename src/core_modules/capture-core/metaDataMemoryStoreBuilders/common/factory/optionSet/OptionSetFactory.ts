@@ -29,10 +29,10 @@ export class OptionSetFactory {
 
     cachedOptionSets: Map<string, CachedOptionSet>;
     cachedOptionGroups!: Array<CachedOptionGroup>;
-    locale?: string;
+    locale: string | null;
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale?: string,
+        locale: string | null,
     ) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;

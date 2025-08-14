@@ -6,7 +6,7 @@ import type {
 export type ConstructorInput = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedOptionSets: Map<string, CachedOptionSet>;
-    locale?: string;
+    locale: string | null;
 };
 
 export type InputSearchAttribute = {

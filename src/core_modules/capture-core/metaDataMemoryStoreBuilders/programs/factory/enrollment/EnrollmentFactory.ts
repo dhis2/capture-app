@@ -52,7 +52,7 @@ export class EnrollmentFactory {
             'None';
     }
 
-    locale: string | null | undefined;
+    locale: string | null;
     dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
