@@ -9,7 +9,7 @@ export async function buildMetaDataAsync(locale: string, minorServerVersion: num
     const commonPrerequisites = await getCommonPrerequisitesAsync(
         stores.TRACKED_ENTITY_ATTRIBUTES as keyof typeof stores,
         stores.OPTION_SETS as keyof typeof stores,
-        stores.TRACKED_ENTITY_TYPES as keyof typeof stores
+        stores.TRACKED_ENTITY_TYPES as keyof typeof stores,
     );
     const cachedTrackedEntityTypes = commonPrerequisites[stores.TRACKED_ENTITY_TYPES];
     const cachedTrackedEntityAttributes = commonPrerequisites[stores.TRACKED_ENTITY_ATTRIBUTES];

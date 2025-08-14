@@ -1,8 +1,6 @@
 import type {
     CachedOptionSet,
     CachedOptionGroup,
-    CachedOptionSetTranslation,
-    CachedOptionTranslation,
 } from '../../../../storageControllers';
 import type { DataElement } from '../../../../metaData';
 

@@ -127,10 +127,10 @@ export class SearchGroupFactory {
             o.showContainer = false;
         });
 
-        for (const programAttribute of searchGroupAttributes) {
-            const element = await this._buildElement(programAttribute);
-            element && section.addElement(element);
-        }
+        const elements = await Promise.all(
+            searchGroupAttributes.map(programAttribute => this._buildElement(programAttribute)),
+        );
+        elements.forEach(element => element && section.addElement(element));
         return section;
     }
 
