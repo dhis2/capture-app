@@ -1,4 +1,3 @@
-// @flow
 import { buildPrograms } from '../programs/buildPrograms';
 import { buildConstants } from '../constants/constantsBuilder';
 import { buildOptionSets } from '../optionSets/optionSetsBuilder';

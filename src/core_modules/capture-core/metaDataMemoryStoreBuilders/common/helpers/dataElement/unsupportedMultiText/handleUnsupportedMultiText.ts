@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { isMultiTextWithoutOptionset } from './isMultiTextWithoutOptionset';

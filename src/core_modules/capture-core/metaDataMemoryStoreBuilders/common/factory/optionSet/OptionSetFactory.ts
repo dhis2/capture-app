@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
@@ -24,24 +23,24 @@ export class OptionSetFactory {
         SHORT_NAME: 'SHORT_NAME',
     };
 
-    static getRenderType(renderType: ?string) {
+    static getRenderType(renderType: string | null) {
         return renderType && camelCaseUppercaseString(renderType);
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
-    cachedOptionGroups: Array<CachedOptionGroup>;
-    locale: ?string;
+    cachedOptionGroups!: Array<CachedOptionGroup>;
+    locale?: string;
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
+        locale?: string,
     ) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;
     }
 
     _getTranslation(
-        translations: Array<CachedOptionSetTranslation> | Array<CachedOptionTranslation>,
-        property: $Values<typeof OptionSetFactory.translationPropertyNames>,
+        translations: CachedOptionSetTranslation[] | CachedOptionTranslation[],
+        property: typeof OptionSetFactory.translationPropertyNames[keyof typeof OptionSetFactory.translationPropertyNames],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -53,8 +52,8 @@ export class OptionSetFactory {
     async build(
         dataElement: DataElement,
         optionSetId: string,
-        renderOptionsAsRadio: ?boolean,
-        renderType: ?string,
+        renderOptionsAsRadio: boolean | null | undefined,
+        renderType: string | null,
         onGetDataElementType: (valueType: string) => string,
     ) {
         const cachedOptionSet = this.cachedOptionSets.get(optionSetId);
@@ -62,7 +61,7 @@ export class OptionSetFactory {
             log.warn(
                 errorCreator(OptionSetFactory.OPTION_SET_NOT_FOUND)({ id: optionSetId }),
             );
-            return null;
+            return undefined;
         }
 
         dataElement.type = onGetDataElementType(dataElement.type || cachedOptionSet.valueType);

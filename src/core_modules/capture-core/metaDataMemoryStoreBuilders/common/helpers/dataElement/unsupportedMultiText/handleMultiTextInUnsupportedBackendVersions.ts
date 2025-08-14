@@ -1,9 +1,9 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
-import { dataElementTypes, DataElement } from '../../../../../metaData';
+import { dataElementTypes } from '../../../../../metaData';
+import type { DataElement } from '../../../../../metaData';
 
-const isMultiTextInUnsupportedBackendVersion = type =>
+const isMultiTextInUnsupportedBackendVersion = (type: string) =>
     type === dataElementTypes.MULTI_TEXT && !featureAvailable(FEATURES.multiText);
 
 export const handleMultiTextInUnsupportedBackendVersions = (dataElement: DataElement, minorServerVersion: number) => {

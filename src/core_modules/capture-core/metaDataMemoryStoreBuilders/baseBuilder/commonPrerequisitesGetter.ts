@@ -1,14 +1,13 @@
-// @flow
-import { getUserMetadataStorageController, typeof USER_METADATA_STORES } from '../../storageControllers';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../storageControllers';
 
-function arrayToMap(array: Array<Object>) {
+function arrayToMap(array: any[]) {
     return array.reduce((accMap, item) => {
         accMap.set(item.id, item);
         return accMap;
     }, new Map());
 }
 
-export function getCommonPrerequisitesAsync(...stores: Array<$Values<USER_METADATA_STORES>>): { [$Values<USER_METADATA_STORES>]: Map<string, any> } {
+export function getCommonPrerequisitesAsync(...stores: Array<typeof USER_METADATA_STORES[keyof typeof USER_METADATA_STORES]>): Promise<any> {
     const storageController = getUserMetadataStorageController();
     const storePromises = stores
         .map(store => storageController.getAll(store));

@@ -26,7 +26,7 @@ export class RenderFoundation {
     _featureType!: string;
     _validationStrategy!: typeof validationStrategies[keyof typeof validationStrategies];
 
-    constructor(initFn: ((_this: RenderFoundation) => void) | null) {
+    constructor(initFn?: (_this: RenderFoundation) => void) {
         this._sections = new Map();
         this._labels = {};
         this._validationStrategy = validationStrategies.ON_UPDATE_AND_INSERT;

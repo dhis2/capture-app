@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -39,13 +38,13 @@ export class SearchGroupFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
     };
-    static _getSearchAttributeValueType(valueType: string, isUnique: ?boolean) {
+    static _getSearchAttributeValueType(valueType: string, isUnique?: boolean | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
         return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
     }
 
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    locale: ?string;
+    locale?: string;
     optionSetFactory: OptionSetFactory;
     constructor({
         cachedTrackedEntityAttributes,
@@ -61,8 +60,8 @@ export class SearchGroupFactory {
     }
 
     _getAttributeTranslation(
-        translations: Array<CachedAttributeTranslation>,
-        property: $Values<typeof translationPropertyNames>,
+        translations: CachedAttributeTranslation[],
+        property: typeof translationPropertyNames[keyof typeof translationPropertyNames],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -122,13 +121,12 @@ export class SearchGroupFactory {
         return element;
     }
 
-    async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
+    async _buildSection(searchGroupAttributes) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
             o.showContainer = false;
         });
 
-        // $FlowFixMe
         await searchGroupAttributes.asyncForEach(async (programAttribute) => {
             const element = await this._buildElement(programAttribute);
             element && section.addElement(element);
@@ -161,7 +159,7 @@ export class SearchGroupFactory {
         return searchGroup;
     }
 
-    getTrackedEntityAttribute(attribute: InputSearchAttribute): ?CachedTrackedEntityAttribute {
+    getTrackedEntityAttribute(attribute: InputSearchAttribute): CachedTrackedEntityAttribute | null | undefined {
         const id = attribute.trackedEntityAttributeId;
         const trackedEntityAttribute = id ? this.cachedTrackedEntityAttributes.get(id) : null;
         if (!trackedEntityAttribute) {
@@ -174,7 +172,7 @@ export class SearchGroupFactory {
         return trackedEntityAttribute;
     }
 
-    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<Array<SearchGroup>> {
+    build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
@@ -182,11 +180,9 @@ export class SearchGroupFactory {
             }))
             .filter(attribute =>
                 attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
-            .reduce((accGroups, attribute) => {
-                // $FlowFixMe
-                if (attribute.trackedEntityAttribute.unique) {
-                    // $FlowFixMe
-                    accGroups[attribute.trackedEntityAttribute.id] = [attribute];
+            .reduce((accGroups: any, attribute) => {
+                if (attribute.trackedEntityAttribute!.unique) {
+                    accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
                 } else {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
                 }
