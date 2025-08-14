@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
@@ -25,7 +24,7 @@ import {
 } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export class TeiRegistrationFactory {
-    static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
+    static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: any) {
         const element = new DataElement((o) => {
             o.id = searchGroupElement.id;
             o.name = searchGroupElement.name;
@@ -50,13 +49,12 @@ export class TeiRegistrationFactory {
             return null;
         }
 
-        // $FlowFixMe
-        return DataElementFactory.buildtetFeatureType(featureType);
+        return DataElementFactory.buildtetFeatureType(featureType as 'POINT' | 'POLYGON');
     }
 
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    dataEntryFormConfig: ?DataEntryFormConfig;
+    dataEntryFormConfig?: DataEntryFormConfig;
 
     constructor({
         cachedTrackedEntityAttributes,
@@ -72,7 +70,7 @@ export class TeiRegistrationFactory {
             locale,
             minorServerVersion,
         });
-        this.dataEntryFormConfig = dataEntryFormConfig;
+        this.dataEntryFormConfig = dataEntryFormConfig ?? undefined;
     }
 
     async _buildSection(
@@ -101,7 +99,7 @@ export class TeiRegistrationFactory {
                     return acc;
                 }, {});
 
-            // $FlowFixMe
+            // @ts-expect-error - keeping original functionality as before ts rewrite
             await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                 const fieldElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
@@ -159,11 +157,10 @@ export class TeiRegistrationFactory {
         }
 
         if (cachedTrackedEntityTypeAttributes && cachedTrackedEntityTypeAttributes.length > 0) {
-            // $FlowFixMe
-            await cachedTrackedEntityTypeAttributes.asyncForEach(async (trackedEntityAttribute) => {
+            for (const trackedEntityAttribute of cachedTrackedEntityTypeAttributes) {
                 const element = await this.dataElementFactory.build(trackedEntityAttribute);
                 element && section.addElement(element);
-            });
+            }
         }
 
         return section;
@@ -210,17 +207,15 @@ export class TeiRegistrationFactory {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
-        Array.from(
-            searchGroupFoundation
-                .getSection(Section.MAIN_SECTION_ID)
-                // $FlowFixMe : there should be one
-                .elements
-                .entries())
-            .map(entry => entry[1])
-            .forEach((e) => {
-                const element = TeiRegistrationFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
-                element && section.addElement(element);
-            });
+        const mainSection = searchGroupFoundation?.getSection(Section.MAIN_SECTION_ID);
+        if (mainSection) {
+            Array.from(mainSection.elements.entries())
+                .map(entry => entry[1])
+                .forEach((e) => {
+                    const element = TeiRegistrationFactory._buildSearchGroupElement(e as DataElement, teiAttributesAsObject[e.id]);
+                    element && section.addElement(element);
+                });
+        }
         foundation.addSection(section);
         return foundation;
     }

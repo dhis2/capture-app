@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
@@ -45,7 +44,7 @@ export class DataElementFactory {
         dataElementUnique: DataElementUnique,
         dataElement: DataElement,
         serverValue: any,
-        contextProps: Object = {},
+        contextProps: any = {},
         querySingleResource: QuerySingleResource,
     ) {
         let requestPromise;
@@ -123,7 +122,7 @@ export class DataElementFactory {
                 dataElementUniqueScope.ORGANISATION_UNIT :
                 dataElementUniqueScope.ENTIRE_SYSTEM;
 
-            o.onValidate = (value: any, contextProps: Object = {}, querySingleResource: QuerySingleResource) => {
+            o.onValidate = (value: any, contextProps: any = {}, querySingleResource: QuerySingleResource) => {
                 const serverValue = pipe(
                     convertFormToClient,
                     convertClientToServer,
@@ -205,7 +204,7 @@ export class DataElementFactory {
         });
     }
 
-    locale: ?string;
+    locale?: string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     minorServerVersion: number;
@@ -216,17 +215,17 @@ export class DataElementFactory {
         minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
-        this.locale = locale;
+        this.locale = locale ?? undefined;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
-            locale,
+            locale ?? undefined,
         );
         this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
         translations: Array<CachedAttributeTranslation>,
-        property: $Values<typeof DataElementFactory.translationPropertyNames>,
+        property: string,
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -310,7 +309,7 @@ export class DataElementFactory {
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
-        dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate;
+        dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate ?? undefined;
         dateDataElement.section = section;
         await this._setBaseProperties(
             dateDataElement,

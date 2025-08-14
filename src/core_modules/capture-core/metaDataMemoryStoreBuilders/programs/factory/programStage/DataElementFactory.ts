@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -35,26 +34,26 @@ export class DataElementFactory {
         return converters[cachedValueType] || cachedValueType;
     }
 
-    locale: ?string;
+    locale: string | undefined;
     minorServerVersion: number;
     optionSetFactory: OptionSetFactory;
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
+        locale: string | undefined,
         minorServerVersion: number,
     ) {
         this.locale = locale;
         this.minorServerVersion = minorServerVersion;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
-            locale,
+            locale ?? undefined,
         );
     }
 
     _getDataElementTranslation(
         cachedDataElement: CachedDataElement,
-        property: $Values<typeof DataElementFactory.propertyNames>): ?string {
+        property: string): string | null | undefined {
         return this.locale &&
             cachedDataElement.translations[this.locale] &&
             cachedDataElement.translations[this.locale][property];
@@ -102,11 +101,11 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
         cachedDataElement: CachedDataElement,
-        dataElementType: $Keys<typeof dataElementTypes>,
-        section: ?Section,
+        dataElementType: string,
+        section?: Section,
     ) {
         const dataElement = new DataElement();
-        dataElement.section = section;
+        dataElement.section = section ?? undefined;
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
 
@@ -119,16 +118,16 @@ export class DataElementFactory {
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
-        dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate;
+        dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate ?? undefined;
         await this._setBaseProperties(dateDataElement, cachedProgramStageDataElement, cachedDataElement);
         return dateDataElement;
     }
 
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
-        section: ?Section,
+        section: Section | undefined,
         cachedDataElementDefinition?: CachedDataElement,
-    ): Promise<?DataElement> {
+    ): Promise<DataElement | null | undefined> {
         const cachedDataElement = cachedDataElementDefinition ||
             await getUserMetadataStorageController().get(USER_METADATA_STORES.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
 

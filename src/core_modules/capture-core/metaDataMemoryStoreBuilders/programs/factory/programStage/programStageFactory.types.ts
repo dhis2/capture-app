@@ -1,4 +1,3 @@
-// @flow
 import type {
     CachedDataElement,
     CachedOptionSet,
@@ -9,18 +8,18 @@ import type {
     DataEntryFormConfig,
 } from '../../../../components/DataEntries/common/TEIAndEnrollment';
 
-export type ConstructorInput = {|
+export type ConstructorInput = {
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedDataElements?: Map<string, CachedDataElement>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
-    dataEntryFormConfig?: ?DataEntryFormConfig,
-    locale: ?string,
+    dataEntryFormConfig?: DataEntryFormConfig | null,
+    locale?: string | null,
     minorServerVersion: number,
-|};
+};
 
-export type SectionSpecs = {|
+export type SectionSpecs = {
     id: string,
     displayName: string,
     displayDescription: string,
-    dataElements: ?Array<CachedSectionDataElements>,
-|};
+    dataElements?: Array<CachedSectionDataElements> | null,
+};

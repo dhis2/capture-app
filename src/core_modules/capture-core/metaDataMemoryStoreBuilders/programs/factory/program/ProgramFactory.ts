@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
@@ -49,7 +48,7 @@ export class ProgramFactory {
         cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
         cachedCategories: {[categoryId: string]: CachedCategory},
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-        locale: ?string,
+        locale: string | null | undefined,
         minorServerVersion: number,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
@@ -70,7 +69,7 @@ export class ProgramFactory {
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
-            locale,
+            locale: locale ?? undefined,
         });
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
@@ -95,7 +94,7 @@ export class ProgramFactory {
     }
 
     _buildCategoryCombination(
-        cachedCategoryCombination: ?ProgramCachedCategoryCombo,
+        cachedCategoryCombination: ProgramCachedCategoryCombo | null | undefined,
     ) {
         if (!(
             cachedCategoryCombination &&
@@ -110,21 +109,18 @@ export class ProgramFactory {
             o.name = cachedCategoryCombination.displayName;
             o.id = cachedCategoryCombination.id;
             o.categories =
-            // $FlowFixMe
-                this._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
+                this._buildCategories(cachedCategoryCombination.categories!);
         });
     }
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
-            // $FlowFixMe[incompatible-call] automated comment
             const dataElement = await this.dataElementFactory.build(ptea);
             return dataElement;
         });
 
         const attributes = await Promise.all(attributePromises);
 
-        // $FlowFixMe[missing-annot]
         return attributes.filter(attribute => attribute);
     }
 
@@ -158,8 +154,7 @@ export class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                // $FlowFixMe
-                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
+                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId!) as TrackedEntityType;
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
@@ -168,19 +163,17 @@ export class ProgramFactory {
                     cachedProgram.minAttributesRequiredToSearch,
                 );
 
-                // $FlowFixMe
                 program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
             }
 
-            // $FlowFixMe
-            await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
+            for (const cachedProgramStage of cachedProgram.programStages) {
                 program.addStage(
                     await this.programStageFactory.build(
                         cachedProgramStage,
                         program.id,
                     ),
                 );
-            });
+            }
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }

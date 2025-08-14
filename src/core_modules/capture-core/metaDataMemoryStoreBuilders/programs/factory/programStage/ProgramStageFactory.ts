@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 
 import log from 'loglevel';
@@ -31,11 +30,11 @@ export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
     cachedOptionSets: Map<string, CachedOptionSet>;
-    locale: ?string;
+    locale: string | null | undefined;
     dataElementFactory: DataElementFactory;
-    cachedDataElements: ?Map<string, CachedDataElement>;
+    cachedDataElements: Map<string, CachedDataElement> | null | undefined;
     relationshipTypesFactory: RelationshipTypesFactory;
-    dataEntryFormConfig: ?DataEntryFormConfig;
+    dataEntryFormConfig: DataEntryFormConfig | null | undefined;
 
     constructor({
         cachedOptionSets,
@@ -53,7 +52,7 @@ export class ProgramStageFactory {
         this.cachedDataElements = cachedDataElements;
         this.dataElementFactory = new DataElementFactory(
             cachedOptionSets,
-            locale,
+            locale ?? undefined,
             minorServerVersion,
         );
         this.dataEntryFormConfig = dataEntryFormConfig;
@@ -69,10 +68,9 @@ export class ProgramStageFactory {
         });
 
         if (sectionSpecs.dataElements) {
-            // $FlowFixMe
-            await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement) => {
-                if (sectionDataElement.type === FormFieldTypes.PLUGIN) {
-                    const attributes = sectionDataElement.fieldMap
+            await (sectionSpecs.dataElements as any).asyncForEach(async (sectionDataElement) => {
+                if ((sectionDataElement as any).type === FormFieldTypes.PLUGIN) {
+                    const attributes = (sectionDataElement as any).fieldMap
                         .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
                         .reduce((acc, attribute) => {
                             acc[attribute.IdFromApp] = attribute;
@@ -81,13 +79,13 @@ export class ProgramStageFactory {
 
                     const element = new FormFieldPluginConfig((o) => {
                         o.id = sectionDataElement.id;
-                        o.name = sectionDataElement.name;
-                        o.pluginSource = sectionDataElement.pluginSource;
+                        o.name = (sectionDataElement as any).name;
+                        o.pluginSource = (sectionDataElement as any).pluginSource;
                         o.fields = new Map();
                         o.customAttributes = attributes;
                     });
 
-                    await sectionDataElement.fieldMap.asyncForEach(async (field) => {
+                    await ((sectionDataElement as any).fieldMap as any).asyncForEach(async (field) => {
                         if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                             const id = field.dataElementId;
                             const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
@@ -133,8 +131,7 @@ export class ProgramStageFactory {
     }
 
     async _addDataElementsToSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
-        // $FlowFixMe
-        await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
+        await (cachedProgramStageDataElements as any).asyncForEach(async (cachedProgramStageDataElement) => {
             const cachedDataElementDefinition = this
                 .cachedDataElements
                 ?.get(cachedProgramStageDataElement.dataElementId);
@@ -145,10 +142,10 @@ export class ProgramStageFactory {
                 cachedDataElementDefinition,
             );
             element && section.addElement(element);
-        }));
+        });
     }
 
-    async _buildMainSection(cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+    async _buildMainSection(cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
@@ -160,7 +157,7 @@ export class ProgramStageFactory {
         return section;
     }
 
-    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined) {
         if (!cachedProgramStageDataElements) return;
 
         // Check if there exist data elements which are not assigned to a section
@@ -184,7 +181,7 @@ export class ProgramStageFactory {
     }
 
     static _convertProgramStageDataElementsToObject(
-        cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>): CachedProgramStageDataElementsAsObject {
+        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined): CachedProgramStageDataElementsAsObject {
         if (!cachedProgramStageDataElements) {
             return {};
         }
@@ -229,7 +226,7 @@ export class ProgramStageFactory {
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;
                 _form.name = cachedProgramStage.displayName;
-                _form.description = cachedProgramStage.description;
+                _form.description = cachedProgramStage.description ?? null;
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
                 _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.displayExecutionDateLabel || 'Report date' });
@@ -250,14 +247,11 @@ export class ProgramStageFactory {
             const dataEntryForm = cachedProgramStage.dataEntryForm;
             try {
                 section.customForm = new CustomForm((o) => {
-                    // $FlowFixMe
                     o.id = dataEntryForm.id;
                 });
-                // $FlowFixMe : Require input from class
-                section.customForm.setData(dataEntryForm.htmlCode, transformEventNode);
+                section.customForm.setData(dataEntryForm.htmlCode, transformEventNode as any);
             } catch (error) {
                 log.error(errorCreator(ProgramStageFactory.CUSTOM_FORM_TEMPLATE_ERROR)(
-                    // $FlowFixMe
                     { template: dataEntryForm.htmlCode, error }));
             }
         } else if (this.dataEntryFormConfig) {
@@ -266,8 +260,7 @@ export class ProgramStageFactory {
                 return acc;
             }, {});
 
-            // $FlowFixMe
-            await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+            await (this.dataEntryFormConfig as any).asyncForEach(async (formConfigSection) => {
                 const formElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
                         const fieldMap = element
@@ -314,7 +307,7 @@ export class ProgramStageFactory {
                         },
                     );
 
-                    stageForm.addSection(section);
+                    section && stageForm.addSection(section);
                 }
             });
         } else if (isNonEmptyArray(cachedProgramStage.programStageSections)) {
@@ -323,15 +316,14 @@ export class ProgramStageFactory {
                     cachedProgramStage.programStageDataElements,
                 );
 
-            // $FlowFixMe[prop-missing] automated comment
-            // $FlowFixMe[incompatible-use] automated comment
-            await cachedProgramStage.programStageSections.asyncForEach(async (section: CachedProgramStageSection) => {
-                stageForm.addSection(await this._buildSection(cachedProgramStageDataElementsAsObject, {
+            await (cachedProgramStage.programStageSections as any).asyncForEach(async (section: CachedProgramStageSection) => {
+                const builtSection = await this._buildSection(cachedProgramStageDataElementsAsObject, {
                     id: section.id,
                     displayName: section.displayName,
                     displayDescription: section.displayDescription,
                     dataElements: section.dataElements,
-                }));
+                });
+                builtSection && stageForm.addSection(builtSection);
             });
         } else {
             stageForm.addSection(await this._buildMainSection(cachedProgramStage.programStageDataElements));

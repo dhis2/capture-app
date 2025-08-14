@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 import type {
@@ -11,8 +10,8 @@ export class RelationshipTypesFactory {
     static RELATIONSHIP_ENTITY_NAME = 'PROGRAM_STAGE_INSTANCE';
     cachedRelationshipTypes: Array<CachedRelationshipType>;
 
-    currentProgramId: string;
-    currentProgramStageId: string;
+    currentProgramId!: string;
+    currentProgramStageId!: string;
 
     constructor(
         cachedRelationshipTypes: Array<CachedRelationshipType>,
@@ -54,9 +53,8 @@ export class RelationshipTypesFactory {
         return new RelationshipType((o) => {
             o.id = cachedRelationshipType.id;
             o.name = cachedRelationshipType.displayName;
-            // $FlowFixMe[incompatible-type] automated comment
-            o.from = this._convertConstraint(cachedRelationshipType.fromConstraint);
-            o.to = this._convertConstraint(cachedRelationshipType.toConstraint);
+            o.from = this._convertConstraint(cachedRelationshipType.fromConstraint) as any;
+            o.to = this._convertConstraint(cachedRelationshipType.toConstraint) as any;
             o.access = cachedRelationshipType.access;
         });
     }

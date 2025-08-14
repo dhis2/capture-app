@@ -1,10 +1,9 @@
-// @flow
 /* eslint-disable no-await-in-loop */
 import { MemoryAdapter } from 'capture-core-utils/storage';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 
-type Predicate = (categoryOption: Object) => boolean;
-type Project = (caegoryOption: Object) => any;
+type Predicate = (categoryOption: any) => boolean;
+type Project = (caegoryOption: any) => any;
 
 async function getCategoryOptionIds(categoryId: string) {
     const storageController = getUserMetadataStorageController();
@@ -17,7 +16,7 @@ async function getCategoryOptionsThroughCursor(
     categoryOptionIds,
     { predicate, project, onIsAborted },
 ) {
-    const internalPredicate = (categoryOption: Object) => {
+    const internalPredicate = (categoryOption: any) => {
         const isOptionForCategory = categoryOptionIds[categoryOption.id];
         if (!isOptionForCategory) {
             return false;
@@ -32,14 +31,13 @@ async function getCategoryOptionsThroughCursor(
         onIsAborted,
         onIDBGetRequest: source => source
             .index('categoryId')
-            // $FlowFixMe[prop-missing] automated comment
-            .openCursor(IDBKeyRange.only(categoryId)),
+                .openCursor(IDBKeyRange.only(categoryId)),
     });
     return mappedOptions;
 }
 
 function getCategoryOptionsFromMemoryAdapterAsync(
-    categoryOptionIds: Object,
+    categoryOptionIds: any,
     predicate: Predicate,
     project: Project,
 ) {

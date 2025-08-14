@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import {
     TrackedEntityType,
@@ -22,7 +21,7 @@ export class TrackedEntityTypeFactory {
         DESCRIPTION: 'DESCRIPTION',
     };
 
-    locale: ?string;
+    locale?: string;
     dataElementFactory: DataElementFactory;
     searchGroupFactory: SearchGroupFactory;
     teiRegistrationFactory: TeiRegistrationFactory;
@@ -34,7 +33,7 @@ export class TrackedEntityTypeFactory {
         dataEntryFormConfig,
         minorServerVersion,
     }: ConstructorInput) {
-        this.locale = locale;
+        this.locale = locale ?? undefined;
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
@@ -44,7 +43,7 @@ export class TrackedEntityTypeFactory {
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
-            locale,
+            locale: locale ?? undefined,
         });
         this.teiRegistrationFactory = new TeiRegistrationFactory({
             cachedTrackedEntityAttributes,
@@ -57,7 +56,7 @@ export class TrackedEntityTypeFactory {
 
     _getTranslation(
         translations: Array<CachedTrackedEntityTypeTranslation>,
-        property: $Values<typeof TrackedEntityTypeFactory.translationPropertyNames>,
+        property: string,
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -75,8 +74,7 @@ export class TrackedEntityTypeFactory {
         const attributes: Array<DataElement | null> = await Promise.all(attributePromises);
 
         return attributes
-            // $FlowFixMe
-            .filter<DataElement>(attribute => attribute);
+            .filter((attribute): attribute is DataElement => Boolean(attribute));
     }
 
     async build(cachedType: CachedTrackedEntityType) {
@@ -93,7 +91,6 @@ export class TrackedEntityTypeFactory {
                 cachedType.trackedEntityTypeAttributes,
                 cachedType.minAttributesRequiredToSearch,
             );
-            // $FlowFixMe
             trackedEntityType.attributes = await this._buildAttributes(cachedType.trackedEntityTypeAttributes);
         }
 

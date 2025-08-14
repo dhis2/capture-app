@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -45,19 +44,19 @@ export class EnrollmentFactory {
         enrollment.showIncidentDate = cachedProgram.displayIncidentDate;
     }
 
-    static _getFeatureType(cachedFeatureType: ?string) {
+    static _getFeatureType(cachedFeatureType?: string | null) {
         return cachedFeatureType ?
             capitalizeFirstLetter(cachedFeatureType.toLowerCase())
             :
             'None';
     }
 
-    locale: ?string;
+    locale: string | null | undefined;
     dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
-    dataEntryFormConfig: ?DataEntryFormConfig;
+    dataEntryFormConfig: DataEntryFormConfig | null | undefined;
 
     constructor({
         cachedTrackedEntityAttributes,
@@ -81,7 +80,7 @@ export class EnrollmentFactory {
         });
     }
 
-    _buildTetFeatureTypeField(trackedEntityTypeId: ?string, section: Section) {
+    _buildTetFeatureTypeField(trackedEntityTypeId: string | null | undefined, section: Section) {
         const teType = trackedEntityTypeId && this.cachedTrackedEntityTypes.get(trackedEntityTypeId);
         if (!teType) {
             return null;
@@ -92,8 +91,7 @@ export class EnrollmentFactory {
             return null;
         }
 
-        // $FlowFixMe
-        return DataElementFactory.buildtetFeatureType(featureType, section);
+        return DataElementFactory.buildtetFeatureType(featureType as 'POINT' | 'POLYGON', section);
     }
 
     async _buildTetFeatureTypeSection(
@@ -117,8 +115,8 @@ export class EnrollmentFactory {
     }
 
     async _buildMainSection(
-        cachedProgramTrackedEntityAttributes?: ?Array<CachedProgramTrackedEntityAttribute>,
-        cachedProgramTrackedEntityTypeId?: ?string,
+        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityTypeId?: string,
     ) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
@@ -138,47 +136,48 @@ export class EnrollmentFactory {
     }
 
     async _buildElementsForSection(
-        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
         section: Section,
     ) {
-        // $FlowFixMe
-        await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
-            if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
-                const attributes = trackedEntityAttribute.fieldMap
-                    .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
-                    .reduce((acc, attribute) => {
+        if (!cachedProgramTrackedEntityAttributes) return section;
+        
+        for (const trackedEntityAttribute of cachedProgramTrackedEntityAttributes) {
+            if ((trackedEntityAttribute as any)?.type === FormFieldTypes.PLUGIN) {
+                const attributes = (trackedEntityAttribute as any).fieldMap
+                    .filter((attributeField: any) => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
+                    .reduce((acc: any, attribute: any) => {
                         acc[attribute.IdFromApp] = attribute;
                         return acc;
                     }, {});
 
                 const element = new FormFieldPluginConfig((o) => {
-                    o.id = trackedEntityAttribute.id;
-                    o.name = trackedEntityAttribute.name;
-                    o.pluginSource = trackedEntityAttribute.pluginSource;
+                    o.id = (trackedEntityAttribute as any).id;
+                    o.name = (trackedEntityAttribute as any).name;
+                    o.pluginSource = (trackedEntityAttribute as any).pluginSource;
                     o.fields = new Map();
                     o.customAttributes = attributes;
                 });
 
-                await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
+                for (const field of (trackedEntityAttribute as any).fieldMap) {
                     if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                         const fieldElement = await this.dataElementFactory.build(field, section);
                         if (!fieldElement) return;
 
                         element.addField(field.IdFromPlugin, fieldElement);
                     }
-                });
+                }
 
                 element && section.addElement(element);
             } else {
                 const element = await this.dataElementFactory.build(trackedEntityAttribute, section);
                 element && section.addElement(element);
             }
-        });
+        }
         return section;
     }
 
     async _buildSection(
-        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute> | undefined,
         cachedSectionCustomLabel: string,
         cachedSectionCustomId: string,
         description: string,
@@ -201,7 +200,7 @@ export class EnrollmentFactory {
     async _buildCustomEnrollmentForm(
         enrollmentForm: RenderFoundation,
         dataEntryForm: CachedDataEntryForm,
-        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
     ) {
         if (!cachedProgramTrackedEntityAttributes) { return null; }
 
@@ -212,13 +211,15 @@ export class EnrollmentFactory {
 
         section.showContainer = false;
 
-        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        const updatedSection = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        if (!updatedSection) return null;
+        section = updatedSection;
         section && enrollmentForm.addSection(section);
         try {
             section.customForm = new CustomForm((o) => {
                 o.id = dataEntryForm.id;
             });
-            section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode);
+            section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode as any);
         } catch (error) {
             log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
                 template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
@@ -228,7 +229,7 @@ export class EnrollmentFactory {
 
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
-        cachedProgramSections: ?Array<CachedProgramSection>,
+        cachedProgramSections?: Array<CachedProgramSection>,
     ) {
         const cachedProgramTrackedEntityAttributes = cachedProgram?.programTrackedEntityAttributes;
 
@@ -265,8 +266,7 @@ export class EnrollmentFactory {
                     }, {});
 
                 if (this.dataEntryFormConfig) {
-                    // $FlowFixMe
-                    await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                    await (this.dataEntryFormConfig as any).asyncForEach(async (formConfigSection) => {
                         const attributes = formConfigSection.elements.reduce((acc, element) => {
                             if (element.type === FormFieldTypes.PLUGIN) {
                                 const fieldMap = element
@@ -309,8 +309,7 @@ export class EnrollmentFactory {
                         section && enrollmentForm.addSection(section);
                     });
                 } else if (cachedProgramSections) {
-                    // $FlowFixMe
-                    await cachedProgramSections.asyncForEach(async (programSection) => {
+                    await (cachedProgramSections as any).asyncForEach(async (programSection) => {
                         section = await this._buildSection(
                             programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
                             programSection.displayFormName,
@@ -324,14 +323,14 @@ export class EnrollmentFactory {
         } else {
             section = await this._buildMainSection(
                 cachedProgramTrackedEntityAttributes,
-                cachedProgram.trackedEntityTypeId,
+                cachedProgram.trackedEntityTypeId ?? undefined,
             );
             section && enrollmentForm.addSection(section);
         }
         return enrollmentForm;
     }
 
-    static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
+    static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: any) {
         const element = new DataElement((o) => {
             o.id = searchGroupElement.id;
             o.name = searchGroupElement.name;
@@ -376,17 +375,16 @@ export class EnrollmentFactory {
             oSection.id = Section.MAIN_SECTION_ID;
             oSection.group = Section.groups.ENROLLMENT;
         });
-        Array.from(
-            searchGroupFoundation
-                .getSection(Section.MAIN_SECTION_ID)
-                // $FlowFixMe : there should be one
-                .elements
-                .entries())
-            .map(entry => entry[1])
-            .forEach((e) => {
-                const element = EnrollmentFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
-                element && section.addElement(element);
-            });
+        
+        const mainSection = searchGroupFoundation?.getSection(Section.MAIN_SECTION_ID);
+        if (mainSection) {
+            Array.from(mainSection.elements.entries())
+                .map(entry => entry[1])
+                .forEach((e) => {
+                    const element = EnrollmentFactory._buildSearchGroupElement(e as DataElement, teiAttributesAsObject[e.id]);
+                    element && section.addElement(element);
+                });
+        }
         foundation.addSection(section);
         return foundation;
     }
@@ -421,7 +419,7 @@ export class EnrollmentFactory {
             o.inputSearchGroups = this._buildInputSearchGroups(cachedProgram, programSearchGroups);
         });
 
-        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections);
+        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections ?? undefined);
         return enrollment;
     }
 }

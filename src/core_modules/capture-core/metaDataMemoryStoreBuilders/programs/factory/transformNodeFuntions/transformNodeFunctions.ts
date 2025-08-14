@@ -1,10 +1,9 @@
-// @flow
-import React, { type Element } from 'react';
+import React, { type ReactElement } from 'react';
 
 export const transformTrackerNode = (
-    node: Object,
+    node: any,
     index: number,
-    nodeToElementFn: (node: Object, index: number) => Element<'FormField'>,
+    nodeToElementFn: (node: any, index: number) => ReactElement<'FormField'>,
 ) => {
     if (node.name === 'input') {
         const htmlElementId = node.attribs?.attributeid;
@@ -12,8 +11,8 @@ export const transformTrackerNode = (
         if (htmlElementId) {
             const inputElement = nodeToElementFn(node, index);
 
-            const style = inputElement.props?.style;
-            const className = inputElement.props?.className;
+            const style = (inputElement as any).props?.style;
+            const className = (inputElement as any).props?.className;
 
             const customFormElementProps = {
                 id: htmlElementId,
@@ -33,9 +32,9 @@ export const transformTrackerNode = (
 };
 
 export const transformEventNode = (
-    node: Object,
+    node: any,
     index: number,
-    nodeToElementFn: (node: Object, index: number) => Element<'FormField'>,
+    nodeToElementFn: (node: any, index: number) => ReactElement<'FormField'>,
 ) => {
     if (node.name === 'input') {
         const htmlElementId = node.attribs && node.attribs.id;
@@ -45,8 +44,8 @@ export const transformEventNode = (
             const id = matchResult[0].replace('-', '');
             const inputElement = nodeToElementFn(node, index);
 
-            const style = inputElement.props?.style;
-            const className = inputElement.props?.className;
+            const style = (inputElement as any).props?.style;
+            const className = (inputElement as any).props?.className;
 
             const customFormElementProps = {
                 id: htmlElementId,

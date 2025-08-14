@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
@@ -51,7 +50,7 @@ export class DataElementFactory {
         return dataElement;
     }
 
-    locale: ?string;
+    locale?: string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     minorServerVersion: number;
@@ -62,17 +61,17 @@ export class DataElementFactory {
         minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
-        this.locale = locale;
+        this.locale = locale ?? undefined;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
-            locale,
+            locale ?? undefined,
         );
         this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
         translations: Array<CachedAttributeTranslation>,
-        property: $Values<typeof DataElementFactory.translationPropertyNames>,
+        property: string,
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -130,7 +129,7 @@ export class DataElementFactory {
                     dataElementUniqueScope.ORGANISATION_UNIT :
                     dataElementUniqueScope.ENTIRE_SYSTEM;
 
-                o.onValidate = (value: any, contextProps: Object = {}, querySingleResource: QuerySingleResource) => {
+                o.onValidate = (value: any, contextProps: any = {}, querySingleResource: QuerySingleResource) => {
                     const serverValue = pipe(
                         convertFormToClient,
                         convertClientToServer,
