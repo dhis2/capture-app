@@ -61,7 +61,7 @@ export class OptionSetFactory {
             log.warn(
                 errorCreator(OptionSetFactory.OPTION_SET_NOT_FOUND)({ id: optionSetId }),
             );
-            return undefined;
+            return null;
         }
 
         dataElement.type = onGetDataElementType(dataElement.type || cachedOptionSet.valueType);

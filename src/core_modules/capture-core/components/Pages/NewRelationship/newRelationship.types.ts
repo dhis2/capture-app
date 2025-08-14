@@ -11,14 +11,14 @@ export type SelectedRelationshipType = {
     name: string;
     from: {
         entity: string;
-        programId?: string;
-        programStageId?: string;
-        trackedEntityTypeId: string;
+        programId?: string | null;
+        programStageId?: string | null;
+        trackedEntityTypeId: string | null;
     };
     to: {
         entity: string;
-        programId?: string;
-        programStageId?: string;
-        trackedEntityTypeId: string;
+        programId?: string | null;
+        programStageId?: string | null;
+        trackedEntityTypeId: string | null;
     };
 };

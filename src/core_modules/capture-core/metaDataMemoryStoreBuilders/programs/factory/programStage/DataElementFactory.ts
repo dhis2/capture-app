@@ -53,7 +53,7 @@ export class DataElementFactory {
 
     _getDataElementTranslation(
         cachedDataElement: CachedDataElement,
-        property: string): string | null | undefined {
+        property: typeof DataElementFactory.propertyNames[keyof typeof DataElementFactory.propertyNames]): string | null {
         return this.locale &&
             cachedDataElement.translations[this.locale] &&
             cachedDataElement.translations[this.locale][property];
@@ -101,11 +101,11 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
         cachedDataElement: CachedDataElement,
-        dataElementType: string,
-        section?: Section,
+        dataElementType: keyof typeof dataElementTypes,
+        section: Section | null,
     ) {
         const dataElement = new DataElement();
-        dataElement.section = section ?? undefined;
+        dataElement.section = section;
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
 
@@ -118,16 +118,16 @@ export class DataElementFactory {
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
-        dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate ?? undefined;
+        dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate;
         await this._setBaseProperties(dateDataElement, cachedProgramStageDataElement, cachedDataElement);
         return dateDataElement;
     }
 
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
-        section: Section | undefined,
+        section: Section | null,
         cachedDataElementDefinition?: CachedDataElement,
-    ): Promise<DataElement | null | undefined> {
+    ): Promise<DataElement | null> {
         const cachedDataElement = cachedDataElementDefinition ||
             await getUserMetadataStorageController().get(USER_METADATA_STORES.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
 

@@ -22,6 +22,7 @@ import { CategoryFactory } from '../category';
 
 import type
 {
+    CachedProgramStage,
     ProgramCachedCategoryCombo,
     CachedProgram,
     ProgramCachedCategory,
@@ -83,10 +84,10 @@ export class ProgramFactory {
     }
 
     _buildCategories(
-        cachedProgramCategories: Array<ProgramCachedCategory>): Map<string, Category> {
+        cachedProgramCategories: Array<ProgramCachedCategory> | null): Map<string, Category> {
         return new Map(
             cachedProgramCategories
-                .map(cachedProgramCategory => ([
+                ?.map(cachedProgramCategory => ([
                     cachedProgramCategory.id,
                     this.categoryFactory.build(cachedProgramCategory),
                 ])),
@@ -94,7 +95,7 @@ export class ProgramFactory {
     }
 
     _buildCategoryCombination(
-        cachedCategoryCombination: ProgramCachedCategoryCombo | null | undefined,
+        cachedCategoryCombination: ProgramCachedCategoryCombo | null,
     ) {
         if (!(
             cachedCategoryCombination &&
@@ -109,7 +110,7 @@ export class ProgramFactory {
             o.name = cachedCategoryCombination.displayName;
             o.id = cachedCategoryCombination.id;
             o.categories =
-                this._buildCategories(cachedCategoryCombination.categories!);
+                this._buildCategories(cachedCategoryCombination.categories);
         });
     }
 
@@ -166,14 +167,15 @@ export class ProgramFactory {
                 program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
             }
 
-            for (const cachedProgramStage of cachedProgram.programStages) {
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
                 program.addStage(
                     await this.programStageFactory.build(
                         cachedProgramStage,
                         program.id,
                     ),
                 );
-            }
+            });
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }

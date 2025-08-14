@@ -200,10 +200,10 @@ function getBuiltPrograms(
 }
 
 function postProcessPrograms(
-    programs: Array<EventProgram | TrackerProgram> | null | undefined,
-    cachedProgramRulesVariables: Array<ProgramRuleVariable> | null | undefined,
-    cachedProgramRules: Array<ProgramRule> | null | undefined,
-    cachedProgramIndicators: Array<CachedProgramIndicator> | null | undefined,
+    programs: Array<EventProgram | TrackerProgram> | null,
+    cachedProgramRulesVariables: Array<ProgramRuleVariable> | null,
+    cachedProgramRules: Array<ProgramRule> | null,
+    cachedProgramIndicators: Array<CachedProgramIndicator> | null,
 ) {
     if (programs == null) return;
 

@@ -225,7 +225,7 @@ export class DataElementFactory {
 
     _getAttributeTranslation(
         translations: Array<CachedAttributeTranslation>,
-        property: string,
+        property: typeof DataElementFactory.translationPropertyNames[keyof typeof DataElementFactory.translationPropertyNames],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -289,7 +289,7 @@ export class DataElementFactory {
     async _buildBaseDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        section?: Section,
+        section: Section | null,
     ) {
         const dataElement = new DataElement();
         dataElement.section = section;
@@ -305,11 +305,11 @@ export class DataElementFactory {
     async _buildDateDataElement(
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
-        section?: Section,
+        section: Section | null,
     ) {
         const dateDataElement = new DateDataElement();
         dateDataElement.type = dataElementTypes.DATE;
-        dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate ?? undefined;
+        dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate;
         dateDataElement.section = section;
         await this._setBaseProperties(
             dateDataElement,
@@ -337,7 +337,7 @@ export class DataElementFactory {
         }
 
         return cachedTrackedEntityAttribute.valueType === dataElementTypes.DATE ?
-            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section) :
-            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section);
+            this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section ?? null) :
+            this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute, section ?? null);
     }
 }

@@ -30,7 +30,7 @@ export const useEnrollmentFormFoundation = ({
     locale,
 }: Props) => {
     const { serverVersion } = useConfig();
-    const minorServerVersion = serverVersion?.minor;
+    const minorServerVersion = serverVersion?.minor || 0;
     const { data: enrollment, isLoading, error } = useIndexedDBQuery(
         ['enrollmentForm', program?.id],
         () => buildEnrollmentForm({

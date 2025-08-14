@@ -53,8 +53,8 @@ export class RelationshipTypesFactory {
         return new RelationshipType((o) => {
             o.id = cachedRelationshipType.id;
             o.name = cachedRelationshipType.displayName;
-            o.from = this._convertConstraint(cachedRelationshipType.fromConstraint) as any;
-            o.to = this._convertConstraint(cachedRelationshipType.toConstraint) as any;
+            o.from = this._convertConstraint(cachedRelationshipType.fromConstraint);
+            o.to = this._convertConstraint(cachedRelationshipType.toConstraint);
             o.access = cachedRelationshipType.access;
         });
     }

@@ -6,7 +6,7 @@ type RelationshipConstraint = {
     entity: string,
     programId?: string | null,
     programStageId?: string | null,
-    trackedEntityTypeId: string,
+    trackedEntityTypeId: string | null,
 }
 
 export class RelationshipType {

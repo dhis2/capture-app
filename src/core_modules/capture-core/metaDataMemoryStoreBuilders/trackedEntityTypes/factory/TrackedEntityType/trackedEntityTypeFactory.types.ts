@@ -10,6 +10,6 @@ export type ConstructorInput = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedOptionSets: Map<string, CachedOptionSet>;
     locale: string | null;
-    dataEntryFormConfig?: DataEntryFormConfig | null | undefined;
+    dataEntryFormConfig?: DataEntryFormConfig | null;
     minorServerVersion: number;
 };

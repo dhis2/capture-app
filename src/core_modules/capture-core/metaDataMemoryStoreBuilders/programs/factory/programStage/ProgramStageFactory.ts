@@ -32,9 +32,9 @@ export class ProgramStageFactory {
     cachedOptionSets: Map<string, CachedOptionSet>;
     locale: string | null;
     dataElementFactory: DataElementFactory;
-    cachedDataElements: Map<string, CachedDataElement> | null | undefined;
+    cachedDataElements?: Map<string, CachedDataElement> | null;
     relationshipTypesFactory: RelationshipTypesFactory;
-    dataEntryFormConfig: DataEntryFormConfig | null | undefined;
+    dataEntryFormConfig?: DataEntryFormConfig | null;
 
     constructor({
         cachedOptionSets,

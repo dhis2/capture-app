@@ -17,10 +17,11 @@ export async function buildTrackedEntityTypes({
         minorServerVersion,
     });
 
-    for (const cachedType of [...cachedTrackedEntityTypes.values()]) {
+    // @ts-expect-error - keeping original functionality as before ts rewrite
+    await [...cachedTrackedEntityTypes.values()].asyncForEach(async (cachedType) => {
         const trackedEntityType = await trackedEntityTypeFactory.build(cachedType);
         trackedEntityTypesCollection.set(trackedEntityType.id, trackedEntityType);
-    }
+    });
 
     return trackedEntityTypesCollection;
 }

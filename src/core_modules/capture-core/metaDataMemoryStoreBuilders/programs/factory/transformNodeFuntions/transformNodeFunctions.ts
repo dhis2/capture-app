@@ -9,10 +9,10 @@ export const transformTrackerNode = (
         const htmlElementId = node.attribs?.attributeid;
 
         if (htmlElementId) {
-            const inputElement = nodeToElementFn(node, index);
+            const inputElement: any = nodeToElementFn(node, index);
 
-            const style = (inputElement as any).props?.style;
-            const className = (inputElement as any).props?.className;
+            const style = inputElement.props?.style;
+            const className = inputElement.props?.className;
 
             const customFormElementProps = {
                 id: htmlElementId,
@@ -42,10 +42,10 @@ export const transformEventNode = (
         const matchResult = htmlElementId && findAttributeID.exec(htmlElementId);
         if (matchResult) {
             const id = matchResult[0].replace('-', '');
-            const inputElement = nodeToElementFn(node, index);
+            const inputElement: any = nodeToElementFn(node, index);
 
-            const style = (inputElement as any).props?.style;
-            const className = (inputElement as any).props?.className;
+            const style = inputElement.props?.style;
+            const className = inputElement.props?.className;
 
             const customFormElementProps = {
                 id: htmlElementId,

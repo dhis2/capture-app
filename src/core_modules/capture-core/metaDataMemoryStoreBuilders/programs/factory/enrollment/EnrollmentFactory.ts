@@ -57,7 +57,7 @@ export class EnrollmentFactory {
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
-    dataEntryFormConfig: DataEntryFormConfig | null | undefined;
+    dataEntryFormConfig: DataEntryFormConfig | null;
 
     constructor({
         cachedTrackedEntityAttributes,
@@ -81,7 +81,7 @@ export class EnrollmentFactory {
         });
     }
 
-    _buildTetFeatureTypeField(trackedEntityTypeId: string | null | undefined, section: Section) {
+    _buildTetFeatureTypeField(trackedEntityTypeId: string | null, section: Section) {
         const teType = trackedEntityTypeId && this.cachedTrackedEntityTypes.get(trackedEntityTypeId);
         if (!teType) {
             return null;
@@ -116,8 +116,8 @@ export class EnrollmentFactory {
     }
 
     async _buildMainSection(
-        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
-        cachedProgramTrackedEntityTypeId?: string,
+        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute> | null,
+        cachedProgramTrackedEntityTypeId?: string | null,
     ) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
@@ -200,7 +200,7 @@ export class EnrollmentFactory {
     async _buildCustomEnrollmentForm(
         enrollmentForm: RenderFoundation,
         dataEntryForm: CachedDataEntryForm,
-        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute> | null,
     ) {
         if (!cachedProgramTrackedEntityAttributes) { return null; }
 
@@ -229,7 +229,7 @@ export class EnrollmentFactory {
 
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
-        cachedProgramSections?: Array<CachedProgramSection>,
+        cachedProgramSections?: Array<CachedProgramSection> | null,
     ) {
         const cachedProgramTrackedEntityAttributes = cachedProgram?.programTrackedEntityAttributes;
 
@@ -323,7 +323,7 @@ export class EnrollmentFactory {
         } else {
             section = await this._buildMainSection(
                 cachedProgramTrackedEntityAttributes,
-                cachedProgram.trackedEntityTypeId ?? undefined,
+                cachedProgram.trackedEntityTypeId,
             );
             section && enrollmentForm.addSection(section);
         }
@@ -418,7 +418,7 @@ export class EnrollmentFactory {
             o.inputSearchGroups = this._buildInputSearchGroups(cachedProgram, programSearchGroups);
         });
 
-        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections ?? undefined);
+        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections);
         return enrollment;
     }
 }

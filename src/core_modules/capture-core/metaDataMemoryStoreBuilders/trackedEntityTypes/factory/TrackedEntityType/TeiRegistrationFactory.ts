@@ -50,12 +50,12 @@ export class TeiRegistrationFactory {
             return null;
         }
 
-        return DataElementFactory.buildtetFeatureType(featureType as 'POINT' | 'POLYGON');
+        return DataElementFactory.buildtetFeatureType(featureType);
     }
 
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    dataEntryFormConfig?: DataEntryFormConfig;
+    dataEntryFormConfig?: DataEntryFormConfig | null;
 
     constructor({
         cachedTrackedEntityAttributes,
@@ -71,7 +71,7 @@ export class TeiRegistrationFactory {
             locale,
             minorServerVersion,
         });
-        this.dataEntryFormConfig = dataEntryFormConfig ?? undefined;
+        this.dataEntryFormConfig = dataEntryFormConfig;
     }
 
     async _buildSection(
@@ -158,10 +158,11 @@ export class TeiRegistrationFactory {
         }
 
         if (cachedTrackedEntityTypeAttributes && cachedTrackedEntityTypeAttributes.length > 0) {
-            for (const trackedEntityAttribute of cachedTrackedEntityTypeAttributes) {
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            await cachedTrackedEntityTypeAttributes.asyncForEach(async (trackedEntityAttribute) => {
                 const element = await this.dataElementFactory.build(trackedEntityAttribute);
                 element && section.addElement(element);
-            }
+            });
         }
 
         return section;
@@ -210,10 +211,14 @@ export class TeiRegistrationFactory {
         });
         const mainSection = searchGroupFoundation?.getSection(Section.MAIN_SECTION_ID);
         if (mainSection) {
-            Array.from(mainSection.elements.entries())
+            Array.from(
+                // @ts-expect-error - keeping original functionality as before ts rewrite
+                searchGroupFoundation.getSection(Section.MAIN_SECTION_ID)
+                    .elements
+                    .entries())
                 .map(entry => entry[1])
                 .forEach((e) => {
-                    const element = TeiRegistrationFactory._buildSearchGroupElement(e as DataElement, teiAttributesAsObject[e.id]);
+                    const element = TeiRegistrationFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
                     element && section.addElement(element);
                 });
         }

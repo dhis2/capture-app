@@ -40,7 +40,7 @@ export const useTrackedEntityTypeCollection = ({
     );
 
     const { serverVersion } = useConfig();
-    const minorServerVersion = serverVersion?.minor;
+    const minorServerVersion = serverVersion?.minor || 0;
 
     const { data: trackedEntityTypeCollection } = useIndexedDBQuery(
         ['trackedEntityTypeCollection', trackedEntityType?.id],
