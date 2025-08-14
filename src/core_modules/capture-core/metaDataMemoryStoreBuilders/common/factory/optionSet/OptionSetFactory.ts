@@ -1,11 +1,9 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import { errorCreator } from 'capture-core-utils';
 import type {
     CachedOptionSet,
-    CachedOptionGroup,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
 } from '../../../../storageControllers';
@@ -14,6 +12,7 @@ import type { DataElement } from '../../../../metaData';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
+import type { OptionSetFactoryTranslationPropertyNames } from './OptionSetFactory.types';
 
 export class OptionSetFactory {
     static OPTION_SET_NOT_FOUND = 'Optionset not found';
@@ -24,24 +23,23 @@ export class OptionSetFactory {
         SHORT_NAME: 'SHORT_NAME',
     };
 
-    static getRenderType(renderType: ?string) {
+    static getRenderType(renderType?: string) {
         return renderType && camelCaseUppercaseString(renderType);
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
-    cachedOptionGroups: Array<CachedOptionGroup>;
-    locale: ?string;
+    locale?: string;
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
+        locale?: string,
     ) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;
     }
 
     _getTranslation(
-        translations: Array<CachedOptionSetTranslation> | Array<CachedOptionTranslation>,
-        property: $Values<typeof OptionSetFactory.translationPropertyNames>,
+        translations: CachedOptionSetTranslation[] | CachedOptionTranslation[],
+        property: keyof OptionSetFactoryTranslationPropertyNames,
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);
@@ -53,9 +51,9 @@ export class OptionSetFactory {
     async build(
         dataElement: DataElement,
         optionSetId: string,
-        renderOptionsAsRadio: ?boolean,
-        renderType: ?string,
-        onGetDataElementType: (valueType: string) => string,
+        renderOptionsAsRadio?: boolean,
+        renderType?: string,
+        onGetDataElementType?: (valueType: string) => string,
     ) {
         const cachedOptionSet = this.cachedOptionSets.get(optionSetId);
         if (!cachedOptionSet) {
@@ -65,11 +63,11 @@ export class OptionSetFactory {
             return null;
         }
 
-        dataElement.type = onGetDataElementType(dataElement.type || cachedOptionSet.valueType);
+        dataElement.type = onGetDataElementType ? onGetDataElementType(dataElement.type || cachedOptionSet.valueType) : (dataElement.type || cachedOptionSet.valueType);
         const optionsPromises = cachedOptionSet
             .options
             .map(async (cachedOption) => {
-                const icon = buildIcon(cachedOption.style);
+                const icon = buildIcon(cachedOption.style || undefined);
                 return new Option((o) => {
                     o.id = cachedOption.id;
                     o.value = cachedOption.code;
@@ -78,7 +76,7 @@ export class OptionSetFactory {
                     o.text =
                         this._getTranslation(
                             cachedOption.translations,
-                            OptionSetFactory.translationPropertyNames.NAME) ||
+                            'NAME') ||
                         cachedOption.displayName;
                     o.icon = icon;
                 });
@@ -86,9 +84,9 @@ export class OptionSetFactory {
 
         const options = await Promise.all(optionsPromises);
 
-        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup((o) => {
-            o.id = group.id;
-            o.optionIds = new Map(group.options.map(option => [option, option]));
+        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup(function(this: any) {
+            this.id = group.id;
+            this.optionIds = new Map(group.options.map(option => [option, option]));
         })]));
 
         const optionSet = new OptionSet(

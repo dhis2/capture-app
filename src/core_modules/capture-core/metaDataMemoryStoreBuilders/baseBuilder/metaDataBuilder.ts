@@ -1,4 +1,3 @@
-// @flow
 import { buildPrograms } from '../programs/buildPrograms';
 import { buildConstants } from '../constants/constantsBuilder';
 import { buildOptionSets } from '../optionSets/optionSetsBuilder';
@@ -7,11 +6,14 @@ import { getCommonPrerequisitesAsync } from './commonPrerequisitesGetter';
 import { USER_METADATA_STORES as stores } from '../../storageControllers';
 
 export async function buildMetaDataAsync(locale: string, minorServerVersion: number) {
-    const {
-        [stores.TRACKED_ENTITY_TYPES]: cachedTrackedEntityTypes,
-        [stores.TRACKED_ENTITY_ATTRIBUTES]: cachedTrackedEntityAttributes,
-        [stores.OPTION_SETS]: cachedOptionSets,
-    } = await getCommonPrerequisitesAsync(stores.TRACKED_ENTITY_ATTRIBUTES, stores.OPTION_SETS, stores.TRACKED_ENTITY_TYPES);
+    const commonPrerequisites = await getCommonPrerequisitesAsync(
+        stores.TRACKED_ENTITY_ATTRIBUTES as keyof typeof stores,
+        stores.OPTION_SETS as keyof typeof stores,
+        stores.TRACKED_ENTITY_TYPES as keyof typeof stores
+    );
+    const cachedTrackedEntityTypes = commonPrerequisites[stores.TRACKED_ENTITY_TYPES];
+    const cachedTrackedEntityAttributes = commonPrerequisites[stores.TRACKED_ENTITY_ATTRIBUTES];
+    const cachedOptionSets = commonPrerequisites[stores.OPTION_SETS];
 
     const trackedEntityTypeCollection =
         await buildTrackedEntityTypes({

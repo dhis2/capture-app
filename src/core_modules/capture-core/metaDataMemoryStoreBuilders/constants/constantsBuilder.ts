@@ -1,4 +1,3 @@
-// @flow
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { getUserMetadataStorageController } from '../../storageControllers';
 
