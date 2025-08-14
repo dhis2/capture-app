@@ -13,7 +13,7 @@ export function convertGeometryOut(dataEntryValue: any, foundation: RenderFounda
     };
 }
 
-export function getConvertGeometryIn(foundation: RenderFoundation | null) {
+export function getConvertGeometryIn(foundation?: RenderFoundation | null) {
     return (value: any) => {
         if (!value || !foundation || value.type !== foundation.featureType) {
             return null;

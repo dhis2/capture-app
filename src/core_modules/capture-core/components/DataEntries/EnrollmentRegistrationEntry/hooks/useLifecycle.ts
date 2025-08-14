@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
-import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
+import { scopeTypes, getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
@@ -20,7 +20,7 @@ export const useLifecycle = (
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
-    const program = selectedScopeId && getProgramThrowIfNotFound(selectedScopeId);
+    const program = getTrackerProgramThrowIfNotFound(selectedScopeId);
     const ready =
         useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
     const searchTerms = useSelector(({ newPage }: any) => newPage.prepopulatedData);
@@ -35,7 +35,7 @@ export const useLifecycle = (
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
     const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
-        program: program as any,
+        program,
         trackedEntityInstanceAttributes,
         orgUnit,
         formFoundation,

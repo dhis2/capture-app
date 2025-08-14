@@ -50,6 +50,7 @@ import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import type { UserFormField } from '../../FormFields/UserField';
+import type { ProgramStage } from '../../../metaData';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
@@ -68,7 +69,7 @@ type PageStatusParams = {
     enrollmentSite: Record<string, unknown>;
     teiDisplayName: string;
     trackedEntityName: string;
-    programStage: Record<string, unknown>;
+    programStage?: ProgramStage | null;
     isLoading: boolean;
     event: Record<string, unknown>;
 };
@@ -265,7 +266,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         enrollmentSite,
         teiDisplayName,
         trackedEntityName,
-        programStage: programStage as any,
+        programStage,
         event,
         isLoading,
     });

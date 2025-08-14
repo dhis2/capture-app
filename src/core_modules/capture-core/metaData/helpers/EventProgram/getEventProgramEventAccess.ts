@@ -2,7 +2,7 @@ import { getEventProgramThrowIfNotFound } from './getEventProgramThrowIfNotFound
 
 export function getEventProgramEventAccess(
     programId: string,
-    categoriesMeta: { [categoryId: string]: { writeAccess: boolean } } | null | undefined,
+    categoriesMeta: { [categoryId: string]: { writeAccess: boolean } } | null,
 ) {
     const program = getEventProgramThrowIfNotFound(programId);
     const stage = program.stage;

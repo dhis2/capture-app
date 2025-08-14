@@ -109,7 +109,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, ev
 };
 
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, enableUserAssignment: boolean, formFoundation: { getLabel: (key: string) => string }) => {
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, enableUserAssignment: boolean, formFoundation?: { getLabel: (key: string) => string }) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;

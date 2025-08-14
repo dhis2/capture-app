@@ -78,6 +78,9 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             const program = metadataContainer.program;
             const enrollment = state.enrollmentDomain?.enrollment;
             const attributeValues = state.enrollmentDomain?.attributeValues;
+            if (!program || !foundation) {
+                return of(prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error));
+            }
 
             const args = {
                 eventContainer,
@@ -100,7 +103,7 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                     switchMap(({ payload }) => {
                         args.enrollment = payload.enrollment;
                         args.attributeValues = payload.attributeValues;
-                        return from(loadViewEventDataEntry({ ...args, program: program as any, foundation: foundation as any }))
+                        return from(loadViewEventDataEntry({ ...args, program, foundation }))
                             .pipe(
                                 map(item => batchActions(item)),
                             );
@@ -108,7 +111,7 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                 );
             }
 
-            return from(loadViewEventDataEntry({ ...args, program: program as any, foundation: foundation as any }))
+            return from(loadViewEventDataEntry({ ...args, program, foundation }))
                 .pipe(
                     map(item => batchActions(item)),
                 );

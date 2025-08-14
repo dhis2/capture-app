@@ -66,8 +66,8 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                 ...openEventForEditInDataEntry({
                     loadedValues,
                     orgUnit,
-                    foundation: foundation as any,
-                    program: program as any,
+                    foundation,
+                    program,
                     enrollment,
                     attributeValues,
                     dataEntryId: getDataEntryId(eventContainer.event),

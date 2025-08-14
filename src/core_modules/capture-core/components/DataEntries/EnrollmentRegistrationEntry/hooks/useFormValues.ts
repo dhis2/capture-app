@@ -7,23 +7,7 @@ import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
 import { subValueGetterByElementType } from './getSubValueForTei';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
-import { dataElementTypes } from '../../../../metaData';
-
-type InputProgramData = {
-    attributes: Array<{
-        id: string;
-        formName?: string;
-        optionSet?: {
-            id: string;
-            options?: Array<{
-                code: string;
-                name: string;
-            }>;
-        };
-        type: string;
-        unique: boolean;
-    }>;
-};
+import { dataElementTypes, TrackerProgram } from '../../../../metaData';
 
 export type InputAttribute = {
     attribute: string;
@@ -36,7 +20,7 @@ export type InputAttribute = {
 };
 
 type InputForm = {
-    program: InputProgramData;
+    program: TrackerProgram;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
     orgUnit: OrgUnit | null;
     formFoundation: RenderFoundation | null;
@@ -48,7 +32,7 @@ type StaticPatternValues = {
     orgUnitCode: string;
 };
 
-const useClientAttributesWithSubvalues = (program: InputProgramData, attributes?: Array<InputAttribute>) => {
+const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
     const [listAttributes, setListAttributes] = useState<any>(null);
 

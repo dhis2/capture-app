@@ -49,6 +49,10 @@ const NewEventWorkspacePlain = ({
         }
     };
 
+    if (!stage) {
+        return null;
+    }
+
     return (
         <>
             <Widget

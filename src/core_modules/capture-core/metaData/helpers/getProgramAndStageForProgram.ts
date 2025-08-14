@@ -19,7 +19,7 @@ export function getProgramAndStageForProgram(programId: string, programStageId: 
     }
 
 
-    const stage = program instanceof EventProgram ? (program as any).stage : program.getStage(programStageId);
+    const stage = program instanceof EventProgram ? program.stage : program.getStage(programStageId);
 
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ program, programId }));

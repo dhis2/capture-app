@@ -70,7 +70,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         <EnrollmentRegistrationEntryComponent
             {...passOnProps}
             relatedStageRef={relatedStageRef}
-            firstStageMetaData={firstStageMetaData as any}
+            firstStageMetaData={firstStageMetaData}
             selectedScopeId={selectedScopeId}
             formId={formId}
             formFoundation={formFoundation}

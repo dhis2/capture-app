@@ -1,4 +1,4 @@
-import type { Program } from '../../../../metaData';
+import type { EventProgram } from '../../../../metaData';
 import type {
     FiltersData,
     AddTemplate,
@@ -15,7 +15,7 @@ type ExtractedProps = {
     columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
-    program: Program,
+    program: EventProgram,
     onAddTemplate: any,
     onUpdateTemplate: any,
     onDeleteTemplate: any,
@@ -31,7 +31,7 @@ export type EventWorkingListsTemplateSetupOutputProps = RestProps & {
     columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
-    program: Program,
+    program: EventProgram,
     onAddTemplate: AddTemplate,
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,

@@ -11,8 +11,8 @@ const errorMessages = {
     CONVERT_VALUES_STRUCTURE: 'Values can not be converted, data is neither an array or an object',
 };
 
-function getElementsById(dataElements: Array<DataElement>) {
-    return (dataElements as any).toHashMap('id');
+function getElementsById(dataElements) {
+    return dataElements.toHashMap('id');
 }
 
 function convertObjectValues(values: ValuesType, elementsById: { [id: string]: DataElement }, onConvert: ConvertFn) {

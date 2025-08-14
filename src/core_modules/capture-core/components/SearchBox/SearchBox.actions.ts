@@ -1,4 +1,5 @@
 import { actionCreator } from '../../actions/actions.utils';
+import { DataElement } from '../../metaData';
 
 export const searchBoxActionTypes = {
     VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaUniqueIdOnScopeProgram',
@@ -114,7 +115,7 @@ export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }: {
     actionCreator(searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED)({ orgUnitId, trackedEntityTypeId, values });
 
 export const showFallbackNotEnoughAttributesOnSearchBox = ({ searchableFields, minAttributesRequiredToSearch }: {
-    searchableFields: Array<Record<string, unknown>>;
+    searchableFields: Array<DataElement>;
     minAttributesRequiredToSearch: number;
 }) =>
     actionCreator(searchBoxActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES)({ searchableFields, minAttributesRequiredToSearch });

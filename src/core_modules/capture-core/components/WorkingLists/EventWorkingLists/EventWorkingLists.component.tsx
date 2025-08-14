@@ -5,6 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 import { EventWorkingListsReduxProvider } from './ReduxProvider';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
 import type { Props } from './EventWorkingLists.types';
+import { EventProgram } from '../../../metaData';
 
 export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitId, mainViewConfig }: Props) => {
     const { program, programStage, error } = useProgramStageInfo(programStageId, programId);
@@ -15,7 +16,7 @@ export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitI
         }
     }, [error, programId, programStageId]);
 
-    if (error || program === undefined || programStage === undefined) {
+    if (error || program === undefined || programStage === undefined || !(program instanceof EventProgram)) {
         return i18n.t('Working list could not be loaded');
     }
 

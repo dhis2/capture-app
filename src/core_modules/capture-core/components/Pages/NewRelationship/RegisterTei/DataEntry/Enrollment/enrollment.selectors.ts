@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
+import { getTrackerProgramThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
 const programIdSelector = (state: ReduxState) => state.newRelationshipRegisterTei.programId;
@@ -7,15 +7,15 @@ const programIdSelector = (state: ReduxState) => state.newRelationshipRegisterTe
 export const makeEnrollmentMetadataSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
+        let program: TrackerProgram;
         try {
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            if (program instanceof TrackerProgram) {
-                return program.enrollment;
-            }
+            program = getTrackerProgramThrowIfNotFound(programId);
             return null;
         } catch (error) {
             console.error('Could not get program for id:', programId, error);
             return null;
         }
+
+        return program.enrollment;
     },
 );

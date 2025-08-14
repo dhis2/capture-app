@@ -1,10 +1,10 @@
-import { Program, ProgramStage } from '../../../../metaData';
+import { EventProgram, ProgramStage } from '../../../../metaData';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsReduxOutputProps } from '../ReduxProvider';
 
 type ExtractedProps = {
-    program: Program,
+    program: EventProgram,
     programStage: ProgramStage,
     customColumnOrder?: CustomColumnOrder,
     onLoadView: any,
@@ -21,7 +21,7 @@ type RestProps = Omit<EventWorkingListsReduxOutputProps & { customColumnOrder: C
 export type Props = RestProps & ExtractedProps;
 
 export type EventWorkingListsColumnSetupOutputProps = RestProps & {
-    program: Program,
+    program: EventProgram,
     programStageId: string,
     columns: EventWorkingListsColumnConfigs,
     defaultColumns: EventWorkingListsColumnConfigs,

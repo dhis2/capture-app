@@ -22,7 +22,7 @@ export const useBuildFirstStageRegistration = (programId: string, skip = false) 
         return null;
     }, [program, isLoading]);
 
-    const firstStageMetaData = useMemo(
+    const firstStageMetaData: any = useMemo(
         () => (firstStage && programId ? getProgramAndStageForProgram(programId, firstStage) : null),
         [firstStage, programId],
     );

@@ -2,6 +2,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 
 import { errorCreator } from 'capture-core-utils';
+import type { CaptureClientEvent } from 'capture-core-utils';
 import { programCollection } from '../../metaDataMemoryStores/programCollection/programCollection';
 
 const errorMessages = {
@@ -10,7 +11,7 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export function getStageFromEvent(event: any) {
+export function getStageFromEvent(event: CaptureClientEvent) {
     const eventId = event.eventId;
     const program = programCollection.get(event.programId);
     if (!program) {

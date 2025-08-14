@@ -104,3 +104,18 @@ export type ApiUtils = {
 export type EpicAction<PayloadType, MetaType = Record<string, unknown>> = Observable<
     Action & { payload: PayloadType; meta: MetaType }
 >;
+
+export type CaptureClientEvent = {
+    eventId: string,
+    programId: string,
+    programStageId: string,
+    orgUnitId: string,
+    trackedEntityInstanceId?: string,
+    enrollmentId?: string,
+    enrollmentStatus?: string,
+    status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
+    occurredAt: string,
+    scheduledAt: string,
+    completedAt: string,
+    attributeCategoryOptions?: string,
+};

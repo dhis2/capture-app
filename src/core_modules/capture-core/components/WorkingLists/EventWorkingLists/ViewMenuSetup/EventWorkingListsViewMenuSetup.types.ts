@@ -1,10 +1,10 @@
-import type { Program } from '../../../../metaData';
+import type { EventProgram } from '../../../../metaData';
 import type { EventWorkingListsTemplateSetupOutputProps } from '../TemplateSetup';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 
 type ExtractedProps = {
     downloadRequest: { url: string; queryParams: any | null | undefined },
-    program: Program,
+    program: EventProgram,
     programStageId: string,
     lastIdDeleted?: string,
 };

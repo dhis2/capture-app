@@ -343,7 +343,7 @@ type FinalTeiDataEntryProps = {
     onUpdateDataEntryField: (...args: any[]) => any;
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
-    firstStageMetaData?: { stage: ProgramStage };
+    firstStageMetaData?: { stage: ProgramStage } | null;
     relatedStageRef?: { current: RelatedStageRefPayload | null },
     formFoundation: RenderFoundation;
 };

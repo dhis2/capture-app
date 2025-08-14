@@ -52,7 +52,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     });
     const { trackedEntityAttributes, loading: isTrackedEntityAttributesLoading } =
         useTrackedEntityAttributes(teiId, programId);
-    const trackedEntityType = program && 'trackedEntityType' in program ? program.trackedEntityType as TrackedEntityType : undefined;
+    const trackedEntityType = (program && program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const teiDisplayName =
     trackedEntityAttributes &&
         deriveTeiName(trackedEntityAttributes, trackedEntityType?.id || '', teiId);

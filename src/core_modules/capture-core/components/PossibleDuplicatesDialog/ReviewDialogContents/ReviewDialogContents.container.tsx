@@ -30,7 +30,7 @@ const mapStateToProps = (
     isUpdating: possibleDuplicates.isUpdating,
     error: possibleDuplicates.loadError ? i18n.t('An error occurred loading possible duplicates') : undefined,
     teis: possibleDuplicates.teis,
-    dataElements: buildDataElements(selectedScopeId) as any,
+    dataElements: buildDataElements(selectedScopeId),
 });
 
 const mapDispatchToProps = (): DispatchProps => ({
