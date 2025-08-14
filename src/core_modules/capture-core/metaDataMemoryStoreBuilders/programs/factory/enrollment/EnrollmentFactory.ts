@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-await-in-loop */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
@@ -140,7 +141,6 @@ export class EnrollmentFactory {
         section: Section,
     ) {
         if (!cachedProgramTrackedEntityAttributes) return section;
-        
         for (const trackedEntityAttribute of cachedProgramTrackedEntityAttributes) {
             if ((trackedEntityAttribute as any)?.type === FormFieldTypes.PLUGIN) {
                 const attributes = (trackedEntityAttribute as any).fieldMap
@@ -375,7 +375,6 @@ export class EnrollmentFactory {
             oSection.id = Section.MAIN_SECTION_ID;
             oSection.group = Section.groups.ENROLLMENT;
         });
-        
         const mainSection = searchGroupFoundation?.getSection(Section.MAIN_SECTION_ID);
         if (mainSection) {
             Array.from(mainSection.elements.entries())

@@ -31,7 +31,7 @@ async function getCategoryOptionsThroughCursor(
         onIsAborted,
         onIDBGetRequest: source => source
             .index('categoryId')
-                .openCursor(IDBKeyRange.only(categoryId)),
+            .openCursor(IDBKeyRange.only(categoryId)),
     });
     return mappedOptions;
 }
@@ -60,7 +60,7 @@ async function getCategoryOptions(
     callbacks: {
         predicate: Predicate,
         project: Project,
-        onIsAborted: Function,
+        onIsAborted: any,
     },
 ) {
     const { predicate, project } = callbacks;
@@ -76,7 +76,7 @@ export async function buildCategoryOptionsAsync(
     callbacks: {
         predicate: Predicate,
         project: Project,
-        onIsAborted: Function,
+        onIsAborted: any,
     },
 ) {
     const categoryOptionIds = await getCategoryOptionIds(categoryId);

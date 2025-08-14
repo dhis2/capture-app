@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 import { TrackedEntityTypeFactory } from './factory';
 import type { BuildTrackedEntityTypesInput } from './trackedEntityTypesBuilder.types';
