@@ -103,7 +103,7 @@ export type CachedProgramStage = {
     blockEntryForm: boolean,
     name: string,
     displayName: string,
-    description?: string | null,
+    description: string | null,
     displayExecutionDateLabel?: string | null,
     displayDueDateLabel?: string | null,
     programStageSections?: Array<CachedProgramStageSection> | null,
@@ -181,7 +181,7 @@ export type CachedTrackedEntityType = {
     trackedEntityTypeAttributes?: Array<CachedTrackedEntityTypeAttribute> | null,
     translations: Array<CachedTrackedEntityTypeTranslation>,
     minAttributesRequiredToSearch: number,
-    featureType?: 'POINT' | 'POLYGON' | null,
+    featureType: 'POINT' | 'POLYGON' | null,
 }
 
 export type CachedProgram = {
@@ -204,7 +204,7 @@ export type CachedProgram = {
     displayEnrollmentDateLabel: string,
     displayIncidentDateLabel: string,
     dataEntryForm?: CachedDataEntryForm | null,
-    featureType?: 'POINT' | 'POLYGON' | null,
+    featureType: 'POINT' | 'POLYGON' | null,
     selectEnrollmentDatesInFuture: boolean,
     displayFrontPageList: boolean,
     selectIncidentDatesInFuture: boolean,

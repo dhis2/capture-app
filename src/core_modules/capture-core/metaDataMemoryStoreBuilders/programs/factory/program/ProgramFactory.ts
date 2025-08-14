@@ -1,6 +1,5 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-await-in-loop */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {

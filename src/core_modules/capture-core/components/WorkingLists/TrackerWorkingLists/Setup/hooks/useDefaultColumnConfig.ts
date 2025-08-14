@@ -89,7 +89,7 @@ const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     return getDataValuesMetaDataConfig(dataElements);
 };
 
-const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
+const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
     attributes.map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique }) => ({
         id,
         visible: displayInReports,

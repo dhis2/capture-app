@@ -45,7 +45,7 @@ export class EnrollmentFactory {
         enrollment.showIncidentDate = cachedProgram.displayIncidentDate;
     }
 
-    static _getFeatureType(cachedFeatureType?: string | null) {
+    static _getFeatureType(cachedFeatureType: string | null) {
         return cachedFeatureType ?
             capitalizeFirstLetter(cachedFeatureType.toLowerCase())
             :
@@ -92,7 +92,7 @@ export class EnrollmentFactory {
             return null;
         }
 
-        return DataElementFactory.buildtetFeatureType(featureType as 'POINT' | 'POLYGON', section);
+        return DataElementFactory.buildtetFeatureType(featureType, section);
     }
 
     async _buildTetFeatureTypeSection(
@@ -140,39 +140,39 @@ export class EnrollmentFactory {
         cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
         section: Section,
     ) {
-        if (!cachedProgramTrackedEntityAttributes) return section;
-        for (const trackedEntityAttribute of cachedProgramTrackedEntityAttributes) {
-            if ((trackedEntityAttribute as any)?.type === FormFieldTypes.PLUGIN) {
-                const attributes = (trackedEntityAttribute as any).fieldMap
-                    .filter((attributeField: any) => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
-                    .reduce((acc: any, attribute: any) => {
+        // @ts-expect-error - keeping original functionality as before ts rewrite
+        await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
+            if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
+                const attributes = trackedEntityAttribute.fieldMap
+                    .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
+                    .reduce((acc, attribute) => {
                         acc[attribute.IdFromApp] = attribute;
                         return acc;
                     }, {});
 
                 const element = new FormFieldPluginConfig((o) => {
-                    o.id = (trackedEntityAttribute as any).id;
-                    o.name = (trackedEntityAttribute as any).name;
-                    o.pluginSource = (trackedEntityAttribute as any).pluginSource;
+                    o.id = trackedEntityAttribute.id;
+                    o.name = trackedEntityAttribute.name;
+                    o.pluginSource = trackedEntityAttribute.pluginSource;
                     o.fields = new Map();
                     o.customAttributes = attributes;
                 });
 
-                for (const field of (trackedEntityAttribute as any).fieldMap) {
+                await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
                     if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                         const fieldElement = await this.dataElementFactory.build(field, section);
-                        if (fieldElement) {
-                            element.addField(field.IdFromPlugin, fieldElement);
-                        }
+                        if (!fieldElement) return;
+
+                        element.addField(field.IdFromPlugin, fieldElement);
                     }
-                }
+                });
 
                 element && section.addElement(element);
             } else {
                 const element = await this.dataElementFactory.build(trackedEntityAttribute, section);
                 element && section.addElement(element);
             }
-        }
+        });
         return section;
     }
 
@@ -211,9 +211,8 @@ export class EnrollmentFactory {
 
         section.showContainer = false;
 
-        const updatedSection = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
-        if (!updatedSection) return null;
-        section = updatedSection;
+        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+
         section && enrollmentForm.addSection(section);
         try {
             section.customForm = new CustomForm((o) => {
@@ -266,7 +265,8 @@ export class EnrollmentFactory {
                     }, {});
 
                 if (this.dataEntryFormConfig) {
-                    await (this.dataEntryFormConfig as any).asyncForEach(async (formConfigSection) => {
+                    // @ts-expect-error - keeping original functionality as before ts rewrite
+                    await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                         const attributes = formConfigSection.elements.reduce((acc, element) => {
                             if (element.type === FormFieldTypes.PLUGIN) {
                                 const fieldMap = element
@@ -309,7 +309,8 @@ export class EnrollmentFactory {
                         section && enrollmentForm.addSection(section);
                     });
                 } else if (cachedProgramSections) {
-                    await (cachedProgramSections as any).asyncForEach(async (programSection) => {
+                    // @ts-expect-error - keeping original functionality as before ts rewrite
+                    await cachedProgramSections.asyncForEach(async (programSection) => {
                         section = await this._buildSection(
                             programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
                             programSection.displayFormName,
@@ -375,15 +376,16 @@ export class EnrollmentFactory {
             oSection.id = Section.MAIN_SECTION_ID;
             oSection.group = Section.groups.ENROLLMENT;
         });
-        const mainSection = searchGroupFoundation?.getSection(Section.MAIN_SECTION_ID);
-        if (mainSection) {
-            Array.from(mainSection.elements.entries())
-                .map(entry => entry[1])
-                .forEach((e) => {
-                    const element = EnrollmentFactory._buildSearchGroupElement(e as DataElement, teiAttributesAsObject[e.id]);
-                    element && section.addElement(element);
-                });
-        }
+        Array.from(
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            searchGroupFoundation.getSection(Section.MAIN_SECTION_ID)
+                .elements
+                .entries())
+            .map(entry => entry[1])
+            .forEach((e: any) => {
+                const element = EnrollmentFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
+                element && section.addElement(element);
+            });
         foundation.addSection(section);
         return foundation;
     }

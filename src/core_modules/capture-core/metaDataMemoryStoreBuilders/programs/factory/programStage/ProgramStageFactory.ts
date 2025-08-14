@@ -68,9 +68,10 @@ export class ProgramStageFactory {
         });
 
         if (sectionSpecs.dataElements) {
-            await (sectionSpecs.dataElements as any).asyncForEach(async (sectionDataElement) => {
-                if ((sectionDataElement as any).type === FormFieldTypes.PLUGIN) {
-                    const attributes = (sectionDataElement as any).fieldMap
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement) => {
+                if (sectionDataElement.type === FormFieldTypes.PLUGIN) {
+                    const attributes = sectionDataElement.fieldMap
                         .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
                         .reduce((acc, attribute) => {
                             acc[attribute.IdFromApp] = attribute;
@@ -79,13 +80,13 @@ export class ProgramStageFactory {
 
                     const element = new FormFieldPluginConfig((o) => {
                         o.id = sectionDataElement.id;
-                        o.name = (sectionDataElement as any).name;
-                        o.pluginSource = (sectionDataElement as any).pluginSource;
+                        o.name = sectionDataElement.name;
+                        o.pluginSource = sectionDataElement.pluginSource;
                         o.fields = new Map();
                         o.customAttributes = attributes;
                     });
 
-                    await ((sectionDataElement as any).fieldMap as any).asyncForEach(async (field) => {
+                    await sectionDataElement.fieldMap.asyncForEach(async (field) => {
                         if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                             const id = field.dataElementId;
                             const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
@@ -131,7 +132,8 @@ export class ProgramStageFactory {
     }
 
     async _addDataElementsToSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
-        await (cachedProgramStageDataElements as any).asyncForEach(async (cachedProgramStageDataElement) => {
+        // @ts-expect-error - keeping original functionality as before ts rewrite
+        await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
             const cachedDataElementDefinition = this
                 .cachedDataElements
                 ?.get(cachedProgramStageDataElement.dataElementId);
@@ -142,7 +144,7 @@ export class ProgramStageFactory {
                 cachedDataElementDefinition,
             );
             element && section.addElement(element);
-        });
+        }));
     }
 
     async _buildMainSection(cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined) {
@@ -226,7 +228,7 @@ export class ProgramStageFactory {
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;
                 _form.name = cachedProgramStage.displayName;
-                _form.description = cachedProgramStage.description ?? null;
+                _form.description = cachedProgramStage.description;
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
                 _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.displayExecutionDateLabel || 'Report date' });
@@ -260,7 +262,8 @@ export class ProgramStageFactory {
                 return acc;
             }, {});
 
-            await (this.dataEntryFormConfig as any).asyncForEach(async (formConfigSection) => {
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                 const formElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
                         const fieldMap = element
@@ -316,14 +319,14 @@ export class ProgramStageFactory {
                     cachedProgramStage.programStageDataElements,
                 );
 
-            await (cachedProgramStage.programStageSections as any).asyncForEach(async (section: CachedProgramStageSection) => {
-                const builtSection = await this._buildSection(cachedProgramStageDataElementsAsObject, {
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            await cachedProgramStage.programStageSections.asyncForEach(async (section: CachedProgramStageSection) => {
+                stageForm.addSection(await this._buildSection(cachedProgramStageDataElementsAsObject, {
                     id: section.id,
                     displayName: section.displayName,
                     displayDescription: section.displayDescription,
                     dataElements: section.dataElements,
-                });
-                builtSection && stageForm.addSection(builtSection);
+                }));
             });
         } else {
             stageForm.addSection(await this._buildMainSection(cachedProgramStage.programStageDataElements));

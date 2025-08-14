@@ -164,7 +164,7 @@ function buildIndicatorRuleAndVariables(
         programRuleActionType: 'DISPLAYKEYVALUEPAIR',
         location: 'indicators',
         style: programIndicator.style || null,
-    } as any;
+    };
 
     const newRule: ProgramRule = {
         id: programIndicator.id,
@@ -174,7 +174,7 @@ function buildIndicatorRuleAndVariables(
         displayName: programIndicator.displayName,
         programId: programIndicator.programId,
         programRuleActions: [newAction],
-    } as any;
+    };
 
     const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
 

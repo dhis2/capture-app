@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-await-in-loop */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -209,19 +208,16 @@ export class TeiRegistrationFactory {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
-        const mainSection = searchGroupFoundation?.getSection(Section.MAIN_SECTION_ID);
-        if (mainSection) {
-            Array.from(
-                // @ts-expect-error - keeping original functionality as before ts rewrite
-                searchGroupFoundation.getSection(Section.MAIN_SECTION_ID)
-                    .elements
-                    .entries())
-                .map(entry => entry[1])
-                .forEach((e) => {
-                    const element = TeiRegistrationFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
-                    element && section.addElement(element);
-                });
-        }
+        Array.from(
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            searchGroupFoundation.getSection(Section.MAIN_SECTION_ID)
+                .elements
+                .entries())
+            .map(entry => entry[1])
+            .forEach((e: any) => {
+                const element = TeiRegistrationFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
+                element && section.addElement(element);
+            });
         foundation.addSection(section);
         return foundation;
     }
