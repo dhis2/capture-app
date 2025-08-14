@@ -161,7 +161,7 @@ export class EnrollmentFactory {
                 for (const field of (trackedEntityAttribute as any).fieldMap) {
                     if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                         const fieldElement = await this.dataElementFactory.build(field, section);
-                        if (!fieldElement) return;
+                        if (!fieldElement) continue;
 
                         element.addField(field.IdFromPlugin, fieldElement);
                     }

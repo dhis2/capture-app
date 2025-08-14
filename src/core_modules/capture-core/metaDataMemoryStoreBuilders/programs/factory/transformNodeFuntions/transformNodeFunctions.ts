@@ -3,7 +3,7 @@ import React, { type ReactElement } from 'react';
 export const transformTrackerNode = (
     node: any,
     index: number,
-    nodeToElementFn: (node: any, index: number) => ReactElement<'FormField'>,
+    nodeToElementFn: (nodeParam: any, indexParam: number) => ReactElement<'FormField'>,
 ) => {
     if (node.name === 'input') {
         const htmlElementId = node.attribs?.attributeid;
@@ -34,7 +34,7 @@ export const transformTrackerNode = (
 export const transformEventNode = (
     node: any,
     index: number,
-    nodeToElementFn: (node: any, index: number) => ReactElement<'FormField'>,
+    nodeToElementFn: (nodeParam: any, indexParam: number) => ReactElement<'FormField'>,
 ) => {
     if (node.name === 'input') {
         const htmlElementId = node.attribs && node.attribs.id;
