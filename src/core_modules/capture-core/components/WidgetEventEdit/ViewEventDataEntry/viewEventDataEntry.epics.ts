@@ -103,7 +103,7 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                     switchMap(({ payload }) => {
                         args.enrollment = payload.enrollment;
                         args.attributeValues = payload.attributeValues;
-                        return from(loadViewEventDataEntry({ ...args, program, foundation }))
+                        return from(loadViewEventDataEntry(args))
                             .pipe(
                                 map(item => batchActions(item)),
                             );
@@ -111,7 +111,7 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                 );
             }
 
-            return from(loadViewEventDataEntry({ ...args, program, foundation }))
+            return from(loadViewEventDataEntry(args))
                 .pipe(
                     map(item => batchActions(item)),
                 );
