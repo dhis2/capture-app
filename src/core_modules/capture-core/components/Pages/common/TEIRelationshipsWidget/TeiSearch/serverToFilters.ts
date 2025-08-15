@@ -1,10 +1,9 @@
-// @flow
 import { type DataElement, dataElementTypes } from '../../../../../metaData';
 import { escapeString } from '../../../../../utils/escapeString';
 
 type RangeValue = {
-    from: number,
-    to: number,
+    from: number;
+    to: number;
 }
 
 const equals = (value: any, elementId: string) => `${elementId}:eq:${escapeString(value)}`;
@@ -27,15 +26,14 @@ const valueConvertersForType = {
     [dataElementTypes.TIME_RANGE]: convertRange,
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, metaElement: DataElement) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes, metaElement: DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value, metaElement.id) : equals(value, metaElement.id);
 }
 
-export function convertValueToEqual(value: any, type: $Keys<typeof dataElementTypes>, metaElement: DataElement) {
+export function convertValueToEqual(value: any, type: keyof typeof dataElementTypes, metaElement: DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

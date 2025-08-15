@@ -1,6 +1,4 @@
-// @flow
 import { useCallback } from 'react';
-import type { NavigationArgs } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import { EventProgram, getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 
@@ -8,7 +6,7 @@ export const useLinkedRecordClick = () => {
     const { navigate } = useNavigate();
     const { orgUnitId } = useLocationQuery();
 
-    const onLinkedRecordClick = useCallback((navigationArgs: NavigationArgs) => {
+    const onLinkedRecordClick = useCallback((navigationArgs: any) => {
         let url;
         if (navigationArgs.eventId) {
             const { eventId, programId } = navigationArgs;
