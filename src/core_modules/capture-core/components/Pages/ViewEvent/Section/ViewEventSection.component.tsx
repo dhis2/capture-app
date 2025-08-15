@@ -25,7 +25,7 @@ const getStyles = (theme: Theme) => ({
     },
     children: {
         padding: theme.typography.pxToRem(10),
-        borderTop: `1px solid ${(theme.palette.grey as any).blueGrey}`,
+        borderTop: `1px solid ${theme.palette.grey[400]}`,
         '&.open': {
             animation: 'slidein 200ms normal forwards ease-in-out',
             transformOrigin: '50% 0%',
@@ -70,7 +70,7 @@ const getStyles = (theme: Theme) => ({
         from: { transform: 'rotateX(0)' },
         to: { transform: 'rotateX(180deg)' },
     },
-});
+}) as const;
 
 type Props = {
     header: ReactNode,

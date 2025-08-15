@@ -16,7 +16,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         gap: spacers.dp12,
         padding: theme.typography.pxToRem(24),
         paddingTop: theme.typography.pxToRem(10),
@@ -29,14 +29,14 @@ const getStyles = (theme: Theme) => ({
         ...theme.typography.title,
         fontSize: 18,
         padding: theme.typography.pxToRem(10),
-        borderBottom: `1px solid ${(theme.palette.grey as any).blueGrey}`,
+        borderBottom: `1px solid ${theme.palette.grey[400]}`,
     },
     contentContainer: {
         display: 'flex',
-        flexWrap: 'wrap' as const,
+        flexWrap: 'wrap',
         gap: spacers.dp16,
     },
-});
+}) as const;
 
 type Props = {
     programId: string,

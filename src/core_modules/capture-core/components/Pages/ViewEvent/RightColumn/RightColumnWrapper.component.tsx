@@ -19,13 +19,13 @@ type Props = {
 const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
         minWidth: theme.typography.pxToRem(300),
         gap: spacers.dp16,
     },
-});
+}) as const;
 
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
