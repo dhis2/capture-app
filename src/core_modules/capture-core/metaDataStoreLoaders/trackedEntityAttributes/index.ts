@@ -1,0 +1,2 @@
+
+export { loadTrackedEntityAttributes } from './loadTrackedEntityAttributes';

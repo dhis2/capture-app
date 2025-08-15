@@ -1,0 +1,38 @@
+import React, { type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { UserField } from '../../FormFields/UserField/UserField.component';
+import type { PlainProps } from './Assignee.types';
+
+const getStyles = () => ({
+    container: {
+        display: 'flex',
+        alignItems: 'baseline',
+        padding: '8px 8px 8px 12px',
+    },
+    label: {
+        fontSize: 14,
+        flexBasis: 200,
+        color: '#212934',
+    },
+    field: {
+        flexBasis: 150,
+        flexGrow: 1,
+    },
+});
+
+type Props = PlainProps & WithStyles<typeof getStyles>;
+
+const AssigneePlain = (props: Props) => {
+    const { classes, assignee, onSetAssignee } = props;
+    return (
+        <div className={classes.container}>
+            <div className={classes.label}>{i18n.t('Assignee')}</div>
+            <div className={classes.field}>
+                <UserField inputPlaceholderText={i18n.t('Search for user')} value={assignee} onSet={onSetAssignee} />
+            </div>
+        </div>
+    );
+};
+
+export const Assignee = withStyles(getStyles)(AssigneePlain) as ComponentType<PlainProps>;

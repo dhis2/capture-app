@@ -1,0 +1,26 @@
+import type { DataSource } from '../../../List';
+import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
+import type { EventWorkingListsOfflineColumnSetupOutputProps } from '../ColumnSetup';
+
+type ExtractedProps = {
+    eventRecords?: EventRecords;
+    columns: EventWorkingListsColumnConfigs;
+    recordsOrder?: Array<string>;
+};
+
+type OptionalExtractedProps = {
+    eventRecords: EventRecords;
+    recordsOrder: Array<string>;
+};
+
+type RestProps = EventWorkingListsOfflineColumnSetupOutputProps & OptionalExtractedProps | ExtractedProps;
+
+export type Props = RestProps & ExtractedProps;
+
+export type EventWorkingListsOfflineDataSourceSetupOutputProps = RestProps & {
+    hasData: boolean;
+    dataSource?: DataSource;
+    columns: EventWorkingListsColumnConfigs;
+    rowIdKey: string;
+    noItemsText?: string;
+};
