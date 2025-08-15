@@ -16,11 +16,11 @@ type State = {
 
 export class TextFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: ?TextFilterData) {
-        if (filter?.isEmpty) {
+        if (filter?.isEmpty === true) {
             return { value: EMPTY_VALUE_FILTER };
         }
 
-        if (filter?.isNotEmpty) {
+        if (filter?.isEmpty === false) {
             return { value: NOT_EMPTY_VALUE_FILTER };
         }
 

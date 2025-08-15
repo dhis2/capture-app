@@ -11,7 +11,7 @@ export const getTextFilterData = (value: ?string): ?TextFilterData => {
     if (isEmptyValueFilter(value)) {
         return value === EMPTY_VALUE_FILTER
             ? { value: EMPTY_VALUE_FILTER_LABEL, isEmpty: true }
-            : { value: NOT_EMPTY_VALUE_FILTER_LABEL, isNotEmpty: true };
+            : { value: NOT_EMPTY_VALUE_FILTER_LABEL, isEmpty: false };
     }
     return value ? { value } : null;
 };

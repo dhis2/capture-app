@@ -13,7 +13,6 @@ export const NOT_EMPTY_VALUE_FILTER_LABEL = i18n.t('Is not empty');
 type EmptyValueFilterData = {|
     value: string,
     isEmpty?: boolean,
-    isNotEmpty?: boolean,
 |};
 
 export const isEmptyValueFilter = (value: ?string) =>
@@ -26,22 +25,29 @@ export const makeCheckboxHandler =
                 onCommit(checked ? flag : '');
 
 export const fromApiEmptyValueFilter = (filter: Object): ?EmptyValueFilterData => {
+    if (typeof filter?.[API_EMPTY_VALUE_FILTER] === 'boolean') {
+        return {
+            isEmpty: filter[API_EMPTY_VALUE_FILTER],
+            value: filter[API_EMPTY_VALUE_FILTER] ? EMPTY_VALUE_FILTER_LABEL : NOT_EMPTY_VALUE_FILTER_LABEL,
+        };
+    }
+
     if (filter?.[API_EMPTY_VALUE_FILTER]) {
         return { isEmpty: true, value: EMPTY_VALUE_FILTER_LABEL };
     }
     if (filter?.[API_NOT_EMPTY_VALUE_FILTER]) {
-        return { isNotEmpty: true, value: NOT_EMPTY_VALUE_FILTER_LABEL };
+        return { isEmpty: false, value: NOT_EMPTY_VALUE_FILTER_LABEL };
     }
     return undefined;
 };
 
 
 export const toApiEmptyValueFilter = (filter: EmptyValueFilterData) => {
-    if (filter.isEmpty) {
+    if (filter.isEmpty === true) {
         return { [API_EMPTY_VALUE_FILTER]: true };
     }
-    if (filter.isNotEmpty) {
-        return { [API_NOT_EMPTY_VALUE_FILTER]: true };
+    if (filter.isEmpty === false) {
+        return { [API_EMPTY_VALUE_FILTER]: false };
     }
     return undefined;
 };

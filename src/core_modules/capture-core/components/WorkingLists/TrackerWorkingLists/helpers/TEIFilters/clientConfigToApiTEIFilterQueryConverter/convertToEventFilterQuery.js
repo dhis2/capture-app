@@ -39,7 +39,7 @@ export const convertToEventFilterQuery = ({
                 return null;
             }
 
-            if (filter.isEmpty || filter.isNotEmpty) {
+            if (filter.isEmpty === true || filter.isEmpty === false) {
                 return { ...toApiEmptyValueFilter(filter), dataItem: key };
             }
 

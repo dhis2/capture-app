@@ -38,11 +38,8 @@ function convertFilter(
     },
     unique?: boolean,
 ) {
-    if (sourceValue?.isEmpty) {
-        return API_EMPTY_VALUE_FILTER;
-    }
-    if (sourceValue?.isNotEmpty) {
-        return API_NOT_EMPTY_VALUE_FILTER;
+    if (sourceValue && (sourceValue.isEmpty === true || sourceValue.isEmpty === false)) {
+        return sourceValue.isEmpty ? API_EMPTY_VALUE_FILTER : API_NOT_EMPTY_VALUE_FILTER;
     }
     if (sourceValue && sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);

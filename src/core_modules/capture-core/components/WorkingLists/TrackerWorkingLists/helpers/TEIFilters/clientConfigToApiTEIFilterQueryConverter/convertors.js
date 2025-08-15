@@ -111,7 +111,7 @@ export const convertMainFilters = ({
 
         const mainValue = mainFiltersTable[key](filter);
 
-        if (filter.isEmpty || filter.isNotEmpty) {
+        if (filter.isEmpty === true || filter.isEmpty === false) {
             return { ...toApiEmptyValueFilter(filter), [key]: mainValue };
         }
 
