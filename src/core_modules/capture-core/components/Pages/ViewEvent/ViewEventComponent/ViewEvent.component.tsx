@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';

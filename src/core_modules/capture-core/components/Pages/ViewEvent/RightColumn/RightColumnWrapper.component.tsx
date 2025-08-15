@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';

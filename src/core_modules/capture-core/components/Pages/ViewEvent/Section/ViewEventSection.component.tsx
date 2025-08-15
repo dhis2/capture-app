@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import cx from 'classnames';
 import { IconChevronUp24, colors, spacersNum } from '@dhis2/ui';

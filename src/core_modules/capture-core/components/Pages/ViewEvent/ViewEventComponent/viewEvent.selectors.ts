@@ -14,7 +14,7 @@ export const makeProgramStageSelector = () => createSelector(
 export const makeEventAccessSelector = () => createSelector(
     programIdSelector,
     categoriesMetaSelector,
-    (programId: string, categoriesMeta: any | null) => getEventProgramEventAccess(programId, categoriesMeta));
+    (programId: string, categoriesMeta: any) => getEventProgramEventAccess(programId, categoriesMeta));
 
 export const makeAssignedUserContextSelector = () =>
     createSelector(eventContainerSelector, (eventContainer: any) => {
