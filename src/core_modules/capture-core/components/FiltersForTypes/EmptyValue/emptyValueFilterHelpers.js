@@ -31,13 +31,6 @@ export const fromApiEmptyValueFilter = (filter: Object): ?EmptyValueFilterData =
             value: filter[API_EMPTY_VALUE_FILTER] ? EMPTY_VALUE_FILTER_LABEL : NOT_EMPTY_VALUE_FILTER_LABEL,
         };
     }
-
-    if (filter?.[API_EMPTY_VALUE_FILTER]) {
-        return { isEmpty: true, value: EMPTY_VALUE_FILTER_LABEL };
-    }
-    if (filter?.[API_NOT_EMPTY_VALUE_FILTER]) {
-        return { isEmpty: false, value: NOT_EMPTY_VALUE_FILTER_LABEL };
-    }
     return undefined;
 };
 

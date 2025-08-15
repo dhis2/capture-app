@@ -123,7 +123,7 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
             return null;
         }
 
-        if (filter.isEmpty === true || filter.isEmpty === false) {
+        if (typeof filter.isEmpty === 'boolean') {
             return { ...toApiEmptyValueFilter(filter), dataItem: key };
         }
 
