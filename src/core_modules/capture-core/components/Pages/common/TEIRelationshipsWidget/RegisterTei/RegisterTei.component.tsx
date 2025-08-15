@@ -28,7 +28,7 @@ const CardListButton = (({ teiId, values, handleOnClick }) => (
         dataTest="view-dashboard-button"
         onClick={() => { handleOnClick(teiId, values); }}
     >
-        {i18n.t('Link') as string}
+        {i18n.t('Link')}
     </Button>
 ));
 
@@ -38,7 +38,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
             onClick={onCancel}
             secondary
         >
-            {i18n.t('Cancel') as string}
+            {i18n.t('Cancel')}
         </Button>
         <div style={{ marginLeft: 16 }}>
             <Button
@@ -48,7 +48,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
             >
                 {i18n.t('Save as new {{trackedEntityName}}', {
                     trackedEntityName, interpolation: { escapeValue: false },
-                }) as string}
+                })}
             </Button>
         </div>
     </>
@@ -93,7 +93,7 @@ const RegisterTeiPlain = ({
             primary
             onClick={() => { onLink(teiId, attributeValues); }}
         >
-            {i18n.t('Link') as string}
+            {i18n.t('Link')}
         </Button>
     ), [onLink]);
 
