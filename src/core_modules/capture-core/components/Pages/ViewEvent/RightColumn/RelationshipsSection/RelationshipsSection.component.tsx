@@ -1,73 +1,58 @@
-// @flow
-
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
+import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
-import { type ProgramStage } from '../../../../../metaData';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
+import type { PlainProps } from './RelationshipsSection.types';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
-
-type Props = {
-    classes: Object,
-    relationships: ?Array<any>,
-    onOpenAddRelationship: () => void,
-    onDeleteRelationship: (clientId: string) => void,
-    eventId: string,
-    programStage: ProgramStage,
-    ready: boolean,
-    eventAccess: any,
-    orgUnitId: string,
-}
-
-const loadingIndicatorStyle = {
-    height: 36,
-    width: 36,
-};
 
 const headerText = i18n.t('Relationships');
 
 const getStyles = (theme: Theme) => ({
     badge: {
-        backgroundColor: theme.palette.grey.light,
+        backgroundColor: theme.palette.grey[200],
     },
     relationship: {
         marginTop: theme.typography.pxToRem(5),
         marginBottom: theme.typography.pxToRem(5),
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(4),
-        backgroundColor: theme.palette.grey.lighter,
+        backgroundColor: theme.palette.grey[100],
     },
 });
 
-class RelationshipsSectionPlain extends React.Component<Props> {
-    renderHeader = () => {
-        const { classes, relationships, ready } = this.props;
-        let count = relationships ? relationships.length : 0;
-        count = ready ? count : null;
-        return (
-            <ViewEventSectionHeader
-                icon={IconLink24}
-                text={headerText}
-                badgeClass={classes.badge}
-                badgeCount={count}
-            />
-        );
-    }
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
+class RelationshipsSectionPlain extends React.Component<Props> {
     handleOpenAddRelationship = () => {
         this.props.onOpenAddRelationship();
     }
 
     handleRemoveRelationship = (clientId: string) => {
         this.props.onDeleteRelationship(clientId);
+    }
+
+    renderHeader = () => {
+        const { classes, relationships, ready } = this.props;
+        const count = relationships ? relationships.length : 0;
+        const badgeCount = ready ? count : undefined;
+        return (
+            <ViewEventSectionHeader
+                icon={IconLink24}
+                text={headerText}
+                badgeClass={classes.badge}
+                badgeCount={badgeCount}
+            />
+        );
     }
 
     renderItems = (relationships: Array<any>) => relationships.map(relationship => (
@@ -77,10 +62,12 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     renderConnectedEntity = (entity: Entity) => {
         const { orgUnitId } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ConnectedEntity
+                type={entity.type}
+                name={entity.name}
+                id={entity.id}
                 orgUnitId={orgUnitId}
-                {...entity}
+                linkProgramId={(entity as any).linkProgramId}
             />
         );
     }
@@ -98,21 +85,20 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                 collapsable
                 header={this.renderHeader()}
             >
-                <LoadingRelationships
-                    loadingIndicatorStyle={loadingIndicatorStyle}
-                    ready={ready}
-                    relationships={relationships}
-                    writableRelationshipTypes={writableRelationshipTypes}
-                    onOpenAddRelationship={this.handleOpenAddRelationship}
-                    onRemoveRelationship={this.handleRemoveRelationship}
-                    currentEntityId={eventId}
-                    entityAccess={eventAccess}
-                    smallMainButton
-                    onRenderConnectedEntity={this.renderConnectedEntity}
-                />
+                {React.createElement(LoadingRelationships as any, {
+                    ready,
+                    relationships,
+                    writableRelationshipTypes,
+                    onOpenAddRelationship: this.handleOpenAddRelationship,
+                    onRemoveRelationship: this.handleRemoveRelationship,
+                    currentEntityId: eventId,
+                    entityAccess: eventAccess,
+                    smallMainButton: true,
+                    onRenderConnectedEntity: this.renderConnectedEntity,
+                })}
             </ViewEventSection>
         );
     }
 }
 
-export const RelationshipsSectionComponent = withStyles(getStyles)(RelationshipsSectionPlain);
+export const RelationshipsSectionComponent = withStyles(getStyles)(RelationshipsSectionPlain) as ComponentType<PlainProps>;

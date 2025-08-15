@@ -1,10 +1,9 @@
-// @flow
 import { connect } from 'react-redux';
 import { RelationshipsSectionComponent } from './RelationshipsSection.component';
 import { openAddRelationship } from '../../ViewEventComponent/viewEvent.actions';
 import { requestDeleteEventRelationship } from '../../Relationship/ViewEventRelationships.actions';
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: any) => {
     const relationshipsSection = state.viewEventPage.relationshipsSection || {};
     return {
         eventId: state.viewEventPage.eventId,
@@ -14,7 +13,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onOpenAddRelationship: () => {
         dispatch(openAddRelationship());
     },
@@ -23,6 +22,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const RelationshipsSection = connect(mapStateToProps, mapDispatchToProps)(RelationshipsSectionComponent);

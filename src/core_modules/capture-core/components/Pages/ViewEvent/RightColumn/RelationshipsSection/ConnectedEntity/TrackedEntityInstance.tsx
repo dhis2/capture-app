@@ -1,21 +1,20 @@
-// @flow
 import React, { useCallback } from 'react';
 import { buildUrlQueryString } from '../../../../../../utils/routing';
 
 type Props = {
-    name: string,
-    id: string,
-    orgUnitId: string,
-    linkProgramId?: ?string,
+    name: string;
+    id?: string;
+    orgUnitId?: string;
+    linkProgramId?: string;
 };
 
 export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Props) => {
     const getUrl = useCallback(
         () =>
             `#/enrollment?${buildUrlQueryString({
-                teiId: id,
+                teiId: id || '',
                 programId: linkProgramId,
-                orgUnitId,
+                orgUnitId: orgUnitId || '',
                 enrollmentId: 'AUTO',
             })}`,
         [id, orgUnitId, linkProgramId],

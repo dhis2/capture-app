@@ -1,59 +1,45 @@
-// @flow
-
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconMessages24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
+import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import type { ProgramStage } from '../../../../../metaData';
+import type { PlainProps } from './NotesSection.types';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
-
-type Props = {
-    classes: Object,
-    notes: ?Array<any>,
-    onAddNote: () => void,
-    onUpdateNoteField: (value: string) => void,
-    fieldValue: ?string,
-    ready: boolean,
-    programStage: ProgramStage,
-    eventAccess: any,
-}
-
-const loadingIndicatorStyle = {
-    height: 36,
-    width: 36,
-};
 
 const headerText = i18n.t('Notes');
 
 const getStyles = (theme: Theme) => ({
     badge: {
-        backgroundColor: theme.palette.grey.light,
+        backgroundColor: theme.palette.grey[200],
     },
     note: {
         marginTop: theme.typography.pxToRem(5),
         marginBottom: theme.typography.pxToRem(5),
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(4),
-        backgroundColor: theme.palette.grey.lighter,
+        backgroundColor: theme.palette.grey[100],
     },
 });
+
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
         const { classes, notes, ready } = this.props;
-        let count = notes ? notes.length : 0;
-        count = ready ? count : null;
+        const count = notes ? notes.length : 0;
+        const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
                 text={headerText}
                 badgeClass={classes.badge}
-                badgeCount={count}
+                badgeCount={badgeCount}
             />
         );
     }
@@ -65,20 +51,19 @@ class NotesSectionPlain extends React.Component<Props> {
                 collapsable
                 header={this.renderHeader()}
             >
-                <LoadingNotes
-                    loadingIndicatorStyle={loadingIndicatorStyle}
-                    ready={ready}
-                    notes={notes}
-                    entityAccess={eventAccess}
-                    addNotAllowed={!programStage.stageForm.access.data.write}
-                    onAddNote={onAddNote}
-                    onBlur={this.props.onUpdateNoteField}
-                    value={fieldValue}
-                    smallMainButton
-                />
+                {React.createElement(LoadingNotes as any, {
+                    ready,
+                    notes,
+                    entityAccess: eventAccess,
+                    addNotAllowed: !programStage.stageForm.access.data.write,
+                    onAddNote,
+                    onBlur: this.props.onUpdateNoteField,
+                    value: fieldValue,
+                    smallMainButton: true,
+                })}
             </ViewEventSection>
         );
     }
 }
 
-export const NotesSectionComponent = withStyles(getStyles)(NotesSectionPlain);
+export const NotesSectionComponent = withStyles(getStyles)(NotesSectionPlain) as ComponentType<PlainProps>;
