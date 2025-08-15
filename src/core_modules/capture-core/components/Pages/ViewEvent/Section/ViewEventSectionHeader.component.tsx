@@ -1,9 +1,8 @@
-
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import { Chip, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 
 
 const getStyles = (theme: Theme) => ({
@@ -31,10 +30,9 @@ type Props = {
 }
 
 
-class ViewEventSectionHeaderPlain extends React.Component<Props> {
+class ViewEventSectionHeaderPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     render() {
-        // $FlowFixMe[prop-missing] automated comment
-        const { icon: Icon, text, badgeCount, classes, badgeClass } = this.props;
+        const { icon: Icon, text, badgeCount, classes, badgeClass } = this.props as any;
         const shouldRenderBadge = !!badgeCount || badgeCount === 0;
         return (
             <div className={classes.headerContainer}>
@@ -46,7 +44,7 @@ class ViewEventSectionHeaderPlain extends React.Component<Props> {
                 </div>
                 {shouldRenderBadge &&
                     <div className={classes.headerItemContainer}>
-                        <Chip dense className={classNames(classes.badge), badgeClass}>
+                        <Chip dense className={classNames(classes.badge, badgeClass)}>
                             {badgeCount}
                         </Chip>
                     </div>

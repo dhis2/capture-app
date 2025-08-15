@@ -1,8 +1,7 @@
-
-// @flow
 import * as React from 'react';
 import { spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
@@ -20,7 +19,7 @@ type Props = {
 const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as const,
         flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
         minWidth: theme.typography.pxToRem(300),
@@ -38,8 +37,8 @@ const componentContainers = [
     { id: 'NotesSection', Component: NotesSection },
 ];
 
-class RightColumnWrapperPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
+class RightColumnWrapperPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => (
         <container.Component key={container.id} {...props} />
     )
 
