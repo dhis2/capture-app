@@ -7,25 +7,7 @@ import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
-type CaptureClientEvent = {
-    eventId: string;
-    programId: string;
-    programStageId: string;
-    orgUnitId: string;
-    trackedEntityId?: string;
-    enrollmentId?: string;
-    status: string;
-    occurredAt?: string;
-    scheduledAt?: string;
-    completedAt?: string;
-    createdAt?: string;
-    assignee?: {
-        id: string;
-        username: string;
-        name: string;
-    };
-    [key: string]: any;
-};
+import type { CaptureClientEvent } from './prepareEnrollmentEvents';
 
 type ApiDataValue = {
     dataElement: string,

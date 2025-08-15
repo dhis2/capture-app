@@ -1,13 +1,13 @@
 export function convertMainEvent(
     event: any,
-    keyMap: any = {},
     onConvert: (key: string, value: any) => any,
     keysToSkip?: {[keyId: string]: string},
+    keyMap: any = {},
 ) {
     return Object
         .keys(event)
         .reduce((accConvertedEvent, key) => {
-            if (keysToSkip && keysToSkip[key]) {
+            if (keysToSkip?.[key]) {
                 return accConvertedEvent;
             }
             const convertedValue = onConvert(key, event[key]);

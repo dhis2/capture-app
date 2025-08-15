@@ -20,7 +20,7 @@ export function convertMainEventClientToServer(event: any) {
     };
     event = convertEventAttributeOptions(event);
     // eslint-disable-next-line complexity
-    return convertMainEvent(event, mapClientKeyToServerKey, (key, value) => {
+    return convertMainEvent(event, (key, value) => {
         let convertedValue;
 
         switch (key) {
@@ -37,5 +37,5 @@ export function convertMainEventClientToServer(event: any) {
         }
 
         return convertedValue;
-    }, keysToSkip);
+    }, keysToSkip, mapClientKeyToServerKey);
 }

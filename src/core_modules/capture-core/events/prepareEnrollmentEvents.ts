@@ -26,7 +26,7 @@ type EventData = {
 
 type EventsData = Array<EventData>;
 
-type CaptureClientEvent = {
+export type CaptureClientEvent = {
     eventId: string;
     programId: string;
     programStageId: string;
@@ -38,6 +38,11 @@ type CaptureClientEvent = {
     scheduledAt?: string;
     completedAt?: string;
     createdAt?: string;
+    assignee?: {
+        id: string;
+        username: string;
+        name: string;
+    };
     [key: string]: any;
 };
 
@@ -102,7 +107,7 @@ function convertDataValues(apiEvent: ApiEnrollmentEvent) {
     }
 
     const dataValuesById = getValuesById(apiEvent.dataValues);
-    const convertedDataValues = stageForm.convertValues && stageForm.convertValues(dataValuesById, convertValue);
+    const convertedDataValues = stageForm.convertValues?.(dataValuesById, convertValue);
     return convertedDataValues;
 }
 
