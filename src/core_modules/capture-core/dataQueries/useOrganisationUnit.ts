@@ -46,9 +46,10 @@ export const useOrganisationUnit = (orgUnitId: string | null | undefined, fields
         if (fetchingInProgress && !loading) {
             setFetchingInProgress(false);
             if (orgUnitId === requestedOrgUnitId && !error && data?.organisationUnits) {
-                setOrgUnit(Object.assign({
+                setOrgUnit({
                     id: orgUnitId,
-                }, data.organisationUnits));
+                    ...data.organisationUnits as Record<string, any>,
+                });
             }
         }
     }, [data, loading, error, fetchingInProgress, setFetchingInProgress, orgUnitId, requestedOrgUnitId]);
