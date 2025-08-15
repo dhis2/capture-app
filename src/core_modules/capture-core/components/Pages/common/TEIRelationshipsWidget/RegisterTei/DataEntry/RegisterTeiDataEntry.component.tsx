@@ -1,14 +1,7 @@
-// @flow
 import * as React from 'react';
 import { DataEntryEnrollment } from './Enrollment';
 import { DataEntryTrackedEntityInstance } from './TrackedEntityInstance';
-
-type Props = {
-    showDataEntry: boolean,
-    programId: string,
-    onSaveWithoutEnrollment: () => void,
-    onSaveWithEnrollment: () => void,
-};
+import type { Props } from './RegisterTeiDataEntry.types';
 
 export class RegisterTeiDataEntryComponent extends React.Component<Props> {
     render() {
