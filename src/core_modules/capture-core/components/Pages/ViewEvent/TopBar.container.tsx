@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -38,7 +37,7 @@ export const TopBar = ({
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { reset } = useReset();
     const dispatchOnSetCategoryOption = useCallback(
-        (categoryOption: Object, categoryId: string) => {
+        (categoryOption: any, categoryId: string) => {
             dispatch(setCategoryOption(categoryId, categoryOption));
         },
         [dispatch],

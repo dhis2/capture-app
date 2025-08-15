@@ -1,4 +1,3 @@
-// @flow
 import { createContext } from 'react';
 
 type InitialValueOfResultsPageSizeContext = { resultsPageSize: number }

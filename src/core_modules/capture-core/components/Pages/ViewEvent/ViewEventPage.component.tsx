@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect } from 'react';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import { useSelector } from 'react-redux';
@@ -10,16 +9,16 @@ import { useLocationQuery } from '../../../utils/routing';
 
 type Props = {
     isUserInteractionInProgress: boolean,
-    eventDetailsSection: Object,
+    eventDetailsSection: any,
     showAddRelationship: boolean,
 };
 
 export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetailsSection, showAddRelationship }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const { orgUnitId } = useLocationQuery();
-    const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
-        selectedCategories: currentSelections.categoriesMeta,
-        programId: currentSelections.programId,
+    const { selectedCategories, programId } = useSelector((state: any) => ({
+        selectedCategories: state.currentSelections.categoriesMeta,
+        programId: state.currentSelections.programId,
     }));
 
     return (
