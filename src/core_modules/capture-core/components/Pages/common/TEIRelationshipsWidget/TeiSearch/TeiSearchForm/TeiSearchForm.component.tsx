@@ -32,13 +32,13 @@ const getStyles = (theme: Theme) => ({
     },
     minAttributesRequired: {
         flexGrow: 1,
-        textAlign: 'right' as const,
+        textAlign: 'right',
         fontSize: theme.typography.pxToRem(14),
     },
     minAttribtuesRequiredInvalid: {
         color: theme.palette.error.main,
     },
-});
+}) as const;
 
 type State = {
     showMissingSearchCriteriaModal: boolean;
