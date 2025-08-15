@@ -6,13 +6,9 @@ import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
 import type { QuerySingleResource } from '../utils/api/api.types';
+import type { CaptureClientEvent } from '../../capture-core-utils/types/global';
+import type { ApiDataValue } from '../../capture-core-utils/types/api-types';
 
-import type { CaptureClientEvent } from './prepareEnrollmentEvents';
-
-type ApiDataValue = {
-    dataElement: string,
-    value: any
-};
 
 type ApiTEIEvent = {
     event: string,

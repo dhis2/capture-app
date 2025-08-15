@@ -3,69 +3,9 @@ import { errorCreator } from 'capture-core-utils';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
-
-type EventData = {
-    eventId?: string;
-    programId: string;
-    programStageId: string;
-    orgUnitId: string;
-    trackedEntityInstanceId: string;
-    enrollmentId: string;
-    enrollmentStatus: string;
-    status: 'COMPLETED' | 'ACTIVE' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-    eventDate?: string;
-    dueDate?: string;
-    lastUpdated: string;
-    occurredAt?: string;
-    scheduledAt?: string;
-    completedAt?: string;
-    createdAt?: string;
-    notes?: Array<Record<string, unknown>>;
-    [key: string]: any;
-};
-
-type EventsData = Array<EventData>;
-
-export type CaptureClientEvent = {
-    eventId: string;
-    programId: string;
-    programStageId: string;
-    orgUnitId: string;
-    trackedEntityId?: string;
-    enrollmentId?: string;
-    status: string;
-    occurredAt?: string;
-    scheduledAt?: string;
-    completedAt?: string;
-    createdAt?: string;
-    assignee?: {
-        id: string;
-        username: string;
-        name: string;
-    };
-    [key: string]: any;
-};
-
-type ApiDataValue = {
-    dataElement: string,
-    value: any
-};
-
-type ApiEnrollmentEvent = {
-    event: string,
-    program: string,
-    programStage: string,
-    orgUnit: string,
-    trackedEntity?: string,
-    enrollment?: string,
-    enrollmentStatus?: string,
-    status: string,
-    occurredAt: string,
-    scheduledAt?: string,
-    completedAt?: string,
-    createdAt?: string,
-    dataValues: Array<ApiDataValue>,
-};
+import type { CaptureClientEvent } from '../../capture-core-utils/types/global';
+import type { EventData, EventsData } from '../rules/RuleEngine/types/ruleEngine.types';
+import type { ApiEnrollmentEvent, ApiDataValue } from '../../capture-core-utils/types/api-types';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',

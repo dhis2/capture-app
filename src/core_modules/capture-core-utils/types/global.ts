@@ -118,4 +118,10 @@ export type CaptureClientEvent = {
     scheduledAt: string,
     completedAt: string,
     attributeCategoryOptions?: string,
+    assignee?: {
+        id: string;
+        username: string;
+        name: string;
+    };
+    [key: string]: any;
 };
