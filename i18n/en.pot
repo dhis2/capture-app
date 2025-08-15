@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-05T07:45:15.757Z\n"
-"PO-Revision-Date: 2025-08-05T07:45:15.757Z\n"
+"POT-Creation-Date: 2025-08-15T10:21:16.458Z\n"
+"PO-Revision-Date: 2025-08-15T10:21:16.458Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -624,9 +624,6 @@ msgstr "No indicator output for this enrollment yet"
 msgid "Quick actions"
 msgstr "Quick actions"
 
-msgid "New Event"
-msgstr "New Event"
-
 msgid "Schedule an event"
 msgstr "Schedule an event"
 
@@ -728,6 +725,9 @@ msgstr "Schedule"
 
 msgid "Refer"
 msgstr "Refer"
+
+msgid "New Event"
+msgstr "New Event"
 
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"

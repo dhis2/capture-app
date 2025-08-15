@@ -75,7 +75,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                 >
                     <QuickActionButton
                         icon={<IconAdd24 color={colors.grey700} />}
-                        label={i18n.t('New Event')}
+                        label={i18n.t('New event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
                         disabled={noStageAvailable}

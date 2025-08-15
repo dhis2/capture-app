@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
@@ -15,7 +15,11 @@ import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
     const { tab } = useLocationQuery();
-    const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
+        teiId,
+        enrollmentId,
+        programId,
+    );
     const {
         program,
         isLoading: programLoading,
@@ -59,7 +63,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         return accStage;
     }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
 
-    const onSelectProgramStage = (newStageId: string) =>
+    const onSelectProgramStage = useCallback((newStageId: string) =>
         navigate(`enrollmentEventNew?${buildUrlQueryString({
             programId,
             orgUnitId,
@@ -67,10 +71,32 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
             enrollmentId,
             stageId: newStageId,
             tab,
-        })}`);
+        })}`), [navigate, programId, orgUnitId, teiId, enrollmentId, tab]);
 
-    const onCancel = () =>
-        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    const onCancel = useCallback(() =>
+        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`),
+    [navigate, programId, orgUnitId, teiId, enrollmentId]);
+
+    const availableStages = useMemo(() => {
+        if (!Array.isArray(programStages) || !programStages.length) {
+            return [];
+        }
+        return programStages.filter((stage) => {
+            const isStageDisabled = !stage.dataAccess.write ||
+                (!stage.repeatable && stage.eventCount > 0) ||
+                stage.hiddenProgramStage;
+            return !isStageDisabled;
+        });
+    }, [programStages]);
+
+    useEffect(() => {
+        if (programStages && !availableStages.length) {
+            onCancel();
+        }
+        if (availableStages.length === 1) {
+            onSelectProgramStage(availableStages[0].id);
+        }
+    }, [availableStages, onSelectProgramStage, onCancel, programStages]);
 
     return (
         <>
@@ -80,7 +106,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent
-                        programStages={programStages || []}
+                        programStages={availableStages}
                         onSelectProgramStage={onSelectProgramStage}
                         onCancel={onCancel}
                     />
