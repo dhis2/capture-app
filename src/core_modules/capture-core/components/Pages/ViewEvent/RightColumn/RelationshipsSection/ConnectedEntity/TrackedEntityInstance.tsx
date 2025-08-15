@@ -14,7 +14,7 @@ export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Pr
             `#/enrollment?${buildUrlQueryString({
                 teiId: id || '',
                 programId: linkProgramId,
-                orgUnitId: orgUnitId || '',
+                orgUnitId,
                 enrollmentId: 'AUTO',
             })}`,
         [id, orgUnitId, linkProgramId],
