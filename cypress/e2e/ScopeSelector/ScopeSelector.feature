@@ -220,12 +220,12 @@ Feature: User uses the ScopeSelector to navigate
     Then you see message explaining you need to select an enrollment
 
   Scenario: Enrollment event new page > resetting the event
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&stageId=EPEcjy3FWmI&tab=REPORT&teiId=eUTmQGull6H
     When you reset the stage selection
     Then you see the enrollment event New page but there is no stage id in the url
 
   Scenario: Enrollment event new page > resetting the stage
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&stageId=EPEcjy3FWmI&tab=REPORT&teiId=eUTmQGull6H
     When you reset the event selection
     Then you see the enrollment event New page but there is no stage id in the url
 

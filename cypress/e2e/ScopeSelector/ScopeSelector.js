@@ -286,7 +286,7 @@ And('you see the enrollment event Edit page but there is no org unit id in the u
 });
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=eUTmQGull6H`);
     cy.contains('Choose a stage for a new event');
 });
 

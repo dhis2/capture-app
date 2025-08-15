@@ -54,5 +54,5 @@ Then('the Postpartum care visit button is disabled in the enrollmentEventNew pag
 
     cy.get('[data-test=profile-widget]').contains('Person profile');
     cy.get('[data-test="enrollment-newEvent-page"]').contains('Choose a stage for a new event').should('exist');
-    cy.get('[data-test="program-stage-selector-button"]').contains('Postpartum care visit').should('be.disabled');
+    cy.get('[data-test="program-stage-selector-button"]').contains('Postpartum care visit').should('not.exist');
 });
