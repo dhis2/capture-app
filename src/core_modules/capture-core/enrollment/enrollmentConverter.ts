@@ -1,18 +1,17 @@
-// @flow
 import { dataElementTypes } from '../metaData';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
 
-type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
+type ConverterFn = (value: any, type: keyof typeof dataElementTypes) => any;
 
 type InputCompareKeys = {
-    enrolledAt?: ?string,
-    occurredAt?: ?string,
+    enrolledAt?: string | null;
+    occurredAt?: string | null;
 };
 
 type CompareKeys = {
-    enrolledAt: string,
-    occurredAt: string,
+    enrolledAt: string;
+    occurredAt: string;
 };
 
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
@@ -26,9 +25,9 @@ function getConvertedValue(valueToConvert: any, key: string, onConvertValue: Con
 }
 
 export function convertEnrollment(
-    enrollment: Object,
+    enrollment: any,
     onConvertValue: ConverterFn,
-    keyMap: Object = {},
+    keyMap: any = {},
     compareKeysMapFromDefault: InputCompareKeys = {}) {
     const calculatedCompareKeys: CompareKeys = {
         enrolledAt: compareKeysMapFromDefault.enrolledAt || 'enrolledAt',
@@ -52,7 +51,7 @@ const mapEnrollmentClientKeyToServerKey = {
     orgUnitId: 'orgUnit',
 };
 
-export function convertEnrollmentClientToServerWithKeysMap(enrollment: Object) {
+export function convertEnrollmentClientToServerWithKeysMap(enrollment: any) {
     return convertEnrollment(enrollment, convertToServerValue, mapEnrollmentClientKeyToServerKey);
 }
 
@@ -63,6 +62,6 @@ const mapEnrollmentServerKeyToClientKey = {
     orgUnit: 'orgUnitId',
 };
 
-export function convertEnrollmentServerToClientWithKeysMap(enrollment: Object) {
+export function convertEnrollmentServerToClientWithKeysMap(enrollment: any) {
     return convertEnrollment(enrollment, convertToClientValue, mapEnrollmentServerKeyToClientKey);
 }
