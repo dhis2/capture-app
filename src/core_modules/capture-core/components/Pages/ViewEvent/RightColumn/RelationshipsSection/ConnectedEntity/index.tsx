@@ -1,14 +1,16 @@
-// @flow
 import * as React from 'react';
 import { TrackedEntityInstance } from './TrackedEntityInstance';
 
 const types = {
     TRACKED_ENTITY_INSTANCE: 'TRACKED_ENTITY_INSTANCE',
-};
+} as const;
 
 type Props = {
-    type: $Values<typeof types>,
-    name: string,
+    type: string;
+    name: string;
+    id?: string;
+    orgUnitId?: string;
+    linkProgramId?: string;
 };
 
 /**
@@ -26,9 +28,8 @@ export const ConnectedEntity = (props: Props) => {
         );
     }
     return (
-        // $FlowFixMe[prop-missing] automated comment
         <TrackedEntityInstance
-            {...passOnProps}
+            {...(passOnProps as any)}
         />
     );
 };

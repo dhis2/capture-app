@@ -1,9 +1,8 @@
-// @flow
 import { connect } from 'react-redux';
 import { NotesSectionComponent } from './NotesSection.component';
 import { requestSaveEventNote, updateEventNoteField } from '../../Notes/viewEventNotes.actions';
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: any) => {
     const notesSection = state.viewEventPage.notesSection || {};
     return {
         notes: state.notes.viewEvent || [],
@@ -12,8 +11,7 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onAddNote: (note: string) => {
         dispatch(requestSaveEventNote(note));
     },
@@ -22,6 +20,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const NotesSection = connect(mapStateToProps, mapDispatchToProps)(NotesSectionComponent);
