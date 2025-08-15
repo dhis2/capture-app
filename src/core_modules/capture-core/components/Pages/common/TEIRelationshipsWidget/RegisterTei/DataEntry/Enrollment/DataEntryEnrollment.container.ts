@@ -17,4 +17,4 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-export const DataEntryEnrollment = connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship as any);
+export const DataEntryEnrollment = connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship);

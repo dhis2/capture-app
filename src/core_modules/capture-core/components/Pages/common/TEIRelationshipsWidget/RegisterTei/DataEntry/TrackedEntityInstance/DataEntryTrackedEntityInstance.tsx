@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withTheme } from '@material-ui/core';
@@ -25,19 +24,17 @@ const RelationshipTrackedEntityInstancePlain =
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
         const teiRegistrationMetadata = getTeiRegistrationMetadata(trackedEntityTypeId);
         const { trackedEntityType } = teiRegistrationMetadata || {};
-        const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
+        const trackedEntityTypeNameLC = trackedEntityType?.name?.toLocaleLowerCase() ?? '';
 
-        if (!teiRegistrationMetadata && !teiRegistrationMetadata?.form) {
+        if (!teiRegistrationMetadata || !teiRegistrationMetadata.form) {
             return null;
         }
 
         return (
-            // $FlowFixMe - flow error will be resolved when rewriting relationship metadata fetching
             <TeiRegistrationEntry
                 id={DATA_ENTRY_ID}
                 orgUnitId={orgUnitId}
-                teiRegistrationMetadata={teiRegistrationMetadata}
-                selectedScopeId={teiRegistrationMetadata.form.id}
+                selectedScopeId={trackedEntityTypeId}
                 inheritedAttributes={inheritedAttributes}
                 onCancel={onCancel}
                 saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
@@ -49,7 +46,6 @@ const RelationshipTrackedEntityInstancePlain =
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-                orgUnit={{ id: orgUnitId }}
             />
         );
     };
