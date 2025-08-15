@@ -1,5 +1,3 @@
-// @flow
-
 import { actionCreator } from '../../../../../../actions/actions.utils';
 
 export const batchActionTypes = {
@@ -22,7 +20,7 @@ export const actionTypes = {
 };
 
 
-export const initializeTeiSearch = (searchId: string, programId: ?string, trackedEntityTypeId: ?string) =>
+export const initializeTeiSearch = (searchId: string, programId?: string, trackedEntityTypeId?: string) =>
     actionCreator(actionTypes.INITIALIZE_TEI_SEARCH)({ searchId, programId, trackedEntityTypeId });
 
 export const requestSearchTei = (
@@ -40,11 +38,11 @@ export const searchViaUniqueIdOnScopeTrackedEntityType = ({
     selectedProgramId,
     programQueryArgs,
 }: {
-    formId: string,
-    searchGroupId: string,
-    searchId: string,
-    selectedProgramId: string,
-    programQueryArgs: any,
+    formId: string;
+    searchGroupId: string;
+    searchId: string;
+    selectedProgramId: string;
+    programQueryArgs: any;
 }) =>
     actionCreator(actionTypes.SEARCH_TE_IN_TET_SCOPE)({
         formId,
@@ -69,7 +67,7 @@ export const searchTeiResultRetrieved = (
 ) =>
     actionCreator(actionTypes.SEARCH_TEI_RESULT_RETRIEVED)({ data, formId, searchGroupId, searchId });
 
-export const setProgramAndTrackedEntityType = (searchId: string, programId: ?string, trackedEntityTypeId: ?string) =>
+export const setProgramAndTrackedEntityType = (searchId: string, programId?: string, trackedEntityTypeId?: string) =>
     actionCreator(actionTypes.SET_TEI_SEARCH_PROGRAM_AND_TET)({ searchId, programId, trackedEntityTypeId });
 
 export const searchFormValidationFailed = (
@@ -88,5 +86,5 @@ export const teiEditSearch = (searchId: string) =>
 export const teiSearchResultsChangePage = (searchId: string, pageNumber: number, resultsPageSize: number) =>
     actionCreator(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)({ searchId, pageNumber, resultsPageSize });
 
-export const setOpenSearchGroupSection = (searchId: string, searchGroupId: ?string) =>
+export const setOpenSearchGroupSection = (searchId: string, searchGroupId?: string) =>
     actionCreator(actionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION)({ searchId, searchGroupId });

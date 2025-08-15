@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType, useContext, useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
@@ -11,7 +10,7 @@ import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { ComponentProps } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../../HOC';
 
-const getStyles = () => ({
+const getStyles = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -21,7 +20,7 @@ const getStyles = () => ({
         flexBasis: 0,
         margin: 8,
     },
-});
+};
 
 const CardListButton = (({ teiId, values, handleOnClick }) => (
     <Button
@@ -55,6 +54,8 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
     </>
 );
 
+type PlainProps = ComponentProps & WithStyles<any>;
+
 const RegisterTeiPlain = ({
     dataEntryId,
     onLink,
@@ -67,8 +68,8 @@ const RegisterTeiPlain = ({
     selectedScopeId,
     inheritedAttributes,
     classes,
-}: ComponentProps) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+}: PlainProps) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
 
     const renderDuplicatesCardActions = useCallback(({ item }) => (
         <CardListButton
@@ -127,8 +128,7 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent: ComponentType<$Diff<ComponentProps, CssClasses>> =
-  compose(
-      withErrorMessageHandler(),
-      withStyles(getStyles),
-  )(RegisterTeiPlain);
+export const RegisterTeiComponent = compose(
+    withErrorMessageHandler(),
+    withStyles(getStyles as any),
+)(RegisterTeiPlain);

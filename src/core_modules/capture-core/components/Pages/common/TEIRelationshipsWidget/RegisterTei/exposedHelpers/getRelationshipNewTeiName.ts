@@ -1,4 +1,3 @@
-// @flow
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
@@ -26,17 +25,17 @@ function getTETMetadata(tetId: string) {
     };
 }
 
-function getMetadata(programId: ?string, tetId: string) {
+function getMetadata(programId: string | undefined, tetId: string) {
     return programId ? getTrackerProgramMetadata(programId) : getTETMetadata(tetId);
 }
 
 
-function getClientValuesForFormData(formValues: Object, formFoundation: RenderFoundation) {
+function getClientValuesForFormData(formValues: any, formFoundation: RenderFoundation) {
     const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
     return clientValues;
 }
 
-export function getRelationshipNewTeiName(dataEntryId: string, itemId: string, state: ReduxState) {
+export function getRelationshipNewTeiName(dataEntryId: string, itemId: string, state: any) {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
     const formValues = state.formsValues[dataEntryKey];
     const { programId } = state.newRelationshipRegisterTei;
@@ -46,6 +45,5 @@ export function getRelationshipNewTeiName(dataEntryId: string, itemId: string, s
     const clientValuesForFormData = getClientValuesForFormData(formValues, formFoundation);
     const displayName = getDisplayName(clientValuesForFormData, metaDataAttributes, tetName);
 
-    // $FlowFixM
     return displayName;
 }

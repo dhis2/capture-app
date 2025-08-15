@@ -73,7 +73,7 @@ export const openRelationshipTeiRegisterWidgetEpic = (action$: EpicAction<any>) 
                 try {
                     trackerProgram = getTrackerProgram(programId);
                 } catch (error) {
-                    return Promise.resolve(initializeRegisterTeiFailed(error));
+                    return Promise.resolve(initializeRegisterTeiFailed(String(error)));
                 }
             }
 

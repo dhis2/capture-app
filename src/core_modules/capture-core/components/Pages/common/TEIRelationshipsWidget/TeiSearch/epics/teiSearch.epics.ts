@@ -1,4 +1,3 @@
-// @flow
 import isArray from 'd2-utilizr/src/isArray';
 import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
@@ -33,9 +32,8 @@ import {
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
-import type { QuerySingleResource } from '../../../../../../utils/api';
 
-const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
+const getOuQueryArgs = (orgUnit: any, orgUnitScope: string) => {
     const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
         ? 'orgUnitMode'
         : 'ouMode';
@@ -47,19 +45,19 @@ const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
         { [orgUnitModeQueryParam]: orgUnitScope };
 };
 
-const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
+const getContextQueryArgs = (programId: string | undefined, trackedEntityTypeId: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });
 
-const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
+const getPagingQueryArgs = (pageNumber?: number) => ({ page: pageNumber ?? 1, pageSize: 5 });
 
 export const searchTeiByTETIdEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$: any,
+    store: any,
+    { absoluteApiPath, querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(actionTypes.SEARCH_TE_IN_TET_SCOPE),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const { selectedProgramId, searchId, formId, searchGroupId, programQueryArgs } = action.payload;
             const { attributes, trackedEntityType } = getTrackerProgram(selectedProgramId);
             const { program, ...restQueryArgs } = programQueryArgs;
@@ -89,14 +87,14 @@ const searchTei = ({
     absoluteApiPath,
     querySingleResource,
 }: {
-    state: ReduxState,
-    searchId: string,
-    formId: string,
-    searchGroupId: any,
-    pageNumber?: ?number,
-    resultsPageSize: number,
-    absoluteApiPath: string,
-    querySingleResource: QuerySingleResource
+    state: any;
+    searchId: string;
+    formId: string;
+    searchGroupId: any;
+    pageNumber?: number;
+    resultsPageSize: number;
+    absoluteApiPath: string;
+    querySingleResource: any;
 }) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
@@ -113,10 +111,10 @@ const searchTei = ({
     const filterConverter = searchGroup.unique ? convertToUniqueFilters : convertToFilters;
 
     const filterValues = searchGroup.searchForm.convertValues(formValues,
-        (value, type, element) =>
+        (value: any, type: any, element: any) =>
             filterConverter(convertToServer(convertToClient(value, type), type), type, element));
 
-    const filters = Object.keys(filterValues).reduce((accFilters, key) => {
+    const filters = Object.keys(filterValues).reduce((accFilters: any[], key) => {
         const value = filterValues[key];
         return isArray(value) ? [...accFilters, ...value] : [...accFilters, value];
     }, []).filter(f => f !== null && f !== undefined);
@@ -125,7 +123,6 @@ const searchTei = ({
         filter: filters,
         fields: 'attributes,enrollments,trackedEntity,orgUnit',
         ...getOuQueryArgs(selectedOrgUnit, selectedOrgUnitScope),
-        // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
         ...getPagingQueryArgs(pageNumber),
         pageSize: resultsPageSize,
@@ -158,10 +155,10 @@ const searchTei = ({
     );
 };
 
-export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
+export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiPath, querySingleResource }: any) =>
     action$.pipe(
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const state = store.value;
             const { pageNumber, searchId, resultsPageSize } = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
@@ -184,15 +181,15 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
                     ))),
                 takeUntil(
                     action$.pipe(
-                        filter(ab =>
-                            isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
+                        filter((ab: any) =>
+                            isArray(ab.payload) && ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
             );
         }));
 
-export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
+export const teiSearchEpic = (action$: any, store: any, { absoluteApiPath, querySingleResource }: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const state = store.value;
             const { formId, searchGroupId, searchId, resultsPageSize } = action.payload;
             const searchTeiStream = searchTei({
@@ -213,14 +210,14 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { abs
                     ))),
                 takeUntil(
                     action$.pipe(
-                        filter(ab =>
-                            isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
+                        filter((ab: any) =>
+                            isArray(ab.payload) && ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
         }));
 
-export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiSearchSetProgramEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM),
-        map((action) => {
+        map((action: any) => {
             const state = store.value;
             const searchId = action.payload.searchId;
             const programId = action.payload.programId;
@@ -230,12 +227,12 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
                 const program = getTrackerProgram(programId);
                 trackedEntityTypeId = program.trackedEntityType.id;
             }
-            let searchGroups = [];
+            let searchGroups: any[] = [];
             if (trackedEntityTypeId) {
                 searchGroups = getSearchGroups(trackedEntityTypeId, programId);
             }
 
-            const addFormDataActions = searchGroups ? searchGroups.map((sg, i) => {
+            const addFormDataActions = searchGroups ? searchGroups.map((sg: any, i: number) => {
                 const key = getSearchFormId(searchId, contextId, i.toString());
                 return addFormData(key, {});
             }) : [];
@@ -246,10 +243,10 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
             ], batchActionTypes.BATCH_SET_TEI_SEARCH_PROGRAM_AND_TET);
         }));
 
-export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiNewSearchEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(actionTypes.TEI_NEW_SEARCH),
-        map((action) => {
+        map((action: any) => {
             const state = store.value;
             const searchId = action.payload.searchId;
             const currentTeiSearch = state.teiSearch[searchId];
@@ -258,7 +255,7 @@ export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
 
             const searchGroups = getSearchGroups(currentTeiSearch.selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
 
-            const addFormDataActions = searchGroups ? searchGroups.map((sg, i) => {
+            const addFormDataActions = searchGroups ? searchGroups.map((sg: any, i: number) => {
                 const key = getSearchFormId(searchId, contextId, i.toString());
                 return addFormData(key, {});
             }) : [];
