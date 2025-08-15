@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
 import type { UserFormField } from '../../../FormFields/UserField';
 
@@ -22,7 +21,7 @@ export const actionTypes = {
     ASSIGNEE_SAVE_FAILED: 'SingleEvent.AssigneeSaveFailed',
 };
 
-export const viewEventFromUrl = (data: Object) =>
+export const viewEventFromUrl = (data: any) =>
     actionCreator(actionTypes.VIEW_EVENT_FROM_URL)({
         eventId: data.nextProps.viewEventId || data.nextProps.eventId,
         page: data.nextPage,
@@ -34,25 +33,25 @@ export const changeEventFromUrl = (eventId: string, page: string) =>
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)({ error: message });
 
-export const eventFromUrlRetrieved = (eventContainer: Object, prevProgramId: ?string, categoriesData: ?Array<Object>) =>
+export const eventFromUrlRetrieved = (eventContainer: any, prevProgramId: string | null, categoriesData: Array<any> | null) =>
     actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId, categoriesData });
 
-export const orgUnitRetrievedOnUrlUpdate = (orgUnit: Object, eventContainer: Object) =>
+export const orgUnitRetrievedOnUrlUpdate = (orgUnit: any, eventContainer: any) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE)({ orgUnit, eventContainer });
 
-export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: Object) =>
+export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: any) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE)({ eventContainer });
 
-export const startOpenEventForView = (eventContainer: Object, orgUnit: Object) =>
+export const startOpenEventForView = (eventContainer: any, orgUnit: any) =>
     actionCreator(actionTypes.START_OPEN_EVENT_FOR_VIEW)({ eventContainer, orgUnit });
 
-export const addEventNote = (eventId: string, note: Object) =>
+export const addEventNote = (eventId: string, note: any) =>
     actionCreator(actionTypes.ADD_EVENT_NOTE)({ eventId, note });
 
 export const removeEventNote = (eventId: string, noteClientId: string) =>
     actionCreator(actionTypes.REMOVE_EVENT_NOTE)({ eventId, noteClientId });
 
-export const startGoBackToMainPage = (orgUnitId: ?string) =>
+export const startGoBackToMainPage = (orgUnitId: string | null) =>
     actionCreator(actionTypes.START_GO_BACK_TO_MAIN_PAGE)({ orgUnitId });
 
 export const noWorkingListUpdateNeededOnBackToMainPage = () =>
@@ -78,4 +77,3 @@ export const setAssignee = (assignee: UserFormField, eventId: string) =>
 
 export const rollbackAssignee = (assignee: UserFormField, eventId: string) =>
     actionCreator(actionTypes.ASSIGNEE_SAVE_FAILED)({ assignee, eventId });
-

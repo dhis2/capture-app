@@ -1,12 +1,12 @@
-// @flow
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
 import type { UserFormField } from '../../../FormFields/UserField';
+import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { startGoBackToMainPage } from './viewEvent.actions';
@@ -28,14 +28,14 @@ const getStyles = (theme: Theme) => ({
         ...theme.typography.title,
         fontSize: 18,
         padding: theme.typography.pxToRem(10),
-        borderBottom: `1px solid ${theme.palette.grey.blueGrey}`,
+        borderBottom: `1px solid ${theme.palette.grey[400]}`,
     },
     contentContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         gap: spacers.dp16,
     },
-});
+}) as const;
 
 type Props = {
     programId: string,
@@ -45,20 +45,13 @@ type Props = {
     isUserInteractionInProgress: boolean,
     showEditEvent: boolean,
     onBackToViewEvent: () => void,
-    classes: {
-        container: string,
-        contentContainer: string,
-        dataEntryPaper: string,
-        header: string,
-        showAllEvents: string,
-    },
     assignee: UserFormField,
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
 };
 
-export const ViewEventPlain = (props: Props) => {
+export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const {
         classes,
         programId,
@@ -90,12 +83,7 @@ export const ViewEventPlain = (props: Props) => {
                 onBackToMainPage={onBackToAllEvents}
             />
             <div className={classes.contentContainer}>
-                <EventDetails
-                    eventAccess={eventAccess}
-                    programStage={programStage}
-                    onBackToViewEvent={onBackToViewEvent}
-                    onBackToAllEvents={onBackToAllEvents}
-                />
+                <EventDetails eventAccess={eventAccess} onBackToAllEvents={onBackToAllEvents} />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
                     programStage={programStage}

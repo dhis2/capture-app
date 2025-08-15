@@ -1,8 +1,6 @@
-
-// @flow
 import * as React from 'react';
 import { spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
@@ -26,7 +24,7 @@ const getStyles = (theme: Theme) => ({
         minWidth: theme.typography.pxToRem(300),
         gap: spacers.dp16,
     },
-});
+}) as const;
 
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
@@ -38,8 +36,8 @@ const componentContainers = [
     { id: 'NotesSection', Component: NotesSection },
 ];
 
-class RightColumnWrapperPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
+class RightColumnWrapperPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => (
         <container.Component key={container.id} {...props} />
     )
 

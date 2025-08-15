@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
@@ -14,13 +13,13 @@ import {
 } from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
+import type { ReduxState, ReduxDispatch } from '../../../App/withAppUrlSync.types';
 
 const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
     const assignedUserContextSelector = makeAssignedUserContextSelector();
 
-    // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
         const currentDataEntryKey = eventDetailsSection.showEditEvent
@@ -33,7 +32,7 @@ const makeMapStateToProps = () => {
             error: state.viewEventPage.loadError,
             currentDataEntryKey,
             isUserInteractionInProgress,
-            assignee: state.viewEventPage.loadedValues?.eventContainer.event.assignee,
+            assignee: state.viewEventPage.loadedValues?.eventContainer?.event?.assignee,
             getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
             showEditEvent: eventDetailsSection.showEditEvent,
@@ -51,12 +50,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     dispatch,
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
+const mergeProps = (stateProps: any, dispatchProps: any, ownProps: any) => {
     const mergedProps = {
-        onSaveAssignee: (newAssignee) => {
+        onSaveAssignee: (newAssignee: any) => {
             dispatchProps.dispatch(setAssignee(newAssignee, stateProps.eventId));
         },
-        onSaveAssigneeError: (prevAssignee) => {
+        onSaveAssigneeError: (prevAssignee: any) => {
             dispatchProps.dispatch(rollbackAssignee(prevAssignee, stateProps.eventId));
         },
     };
@@ -64,8 +63,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return Object.assign({}, ownProps, stateProps, dispatchProps, mergedProps);
 };
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
 export const ViewEvent = connect(
     makeMapStateToProps,
     mapDispatchToProps,
