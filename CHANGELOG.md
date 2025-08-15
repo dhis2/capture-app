@@ -1,3 +1,10 @@
+## [103.2.6](https://github.com/dhis2/capture-app/compare/v103.2.5...v103.2.6) (2025-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-16364] Stage selection still shown with only one available stage ([#4262](https://github.com/dhis2/capture-app/issues/4262)) ([4e40f07](https://github.com/dhis2/capture-app/commit/4e40f07110046c5aa1b4386f951de6ab89f890cc))
+
 ## [103.2.5](https://github.com/dhis2/capture-app/compare/v103.2.4...v103.2.5) (2025-08-11)
 
 
