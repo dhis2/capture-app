@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { errorCreator } from 'capture-core-utils';
@@ -7,11 +6,9 @@ import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
 import type { QuerySingleResource } from '../utils/api/api.types';
+import type { CaptureClientEvent } from '../../capture-core-utils/types/global';
+import type { ApiDataValue } from '../../capture-core-utils/types/api-types';
 
-type ApiDataValue = {
-    dataElement: string,
-    value: any
-};
 
 type ApiTEIEvent = {
     event: string,
@@ -26,12 +23,12 @@ type ApiTEIEvent = {
     dueDate: string,
     completedDate: string,
     dataValues: Array<ApiDataValue>,
-    assignedUser?: ?{|
+    assignedUser?: {
         uid: string,
         username: string,
         firstName: string,
         surname: string,
-    |},
+    } | null,
 };
 
 export type ClientEventContainer = {
@@ -99,7 +96,7 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
 
     return Object
         .keys(apiEvent)
-        .reduce((accEvent, inputKey) => {
+        .reduce((accEvent: any, inputKey) => {
             if (inputKey === 'assignedUser') {
                 const assignee = getAssignee(apiEvent);
                 if (assignee) {
@@ -109,10 +106,8 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
 
-                // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
 
-                // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }
             return accEvent;
@@ -161,7 +156,7 @@ export async function getEvent(
     eventId: string,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
-): Promise<?ClientEventContainer> {
+): Promise<ClientEventContainer | null> {
     const apiRes = await querySingleResource({
         resource: `tracker/events/${eventId}`,
     });
@@ -170,7 +165,7 @@ export async function getEvent(
 }
 
 export async function getEvents(
-    queryParams: Object,
+    queryParams: any,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
 ) {
@@ -184,7 +179,7 @@ export async function getEvents(
     });
 
     const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, apiResponse);
-    const eventContainers: Array<Object> = await apiEvents.reduce(async (accEventsPromise, apiEvent) => {
+    const eventContainers: Array<any> = await apiEvents.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
         const eventContainer = await convertToClientEvent(apiEvent, absoluteApiPath, querySingleResource);
         if (eventContainer) {

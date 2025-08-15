@@ -1,14 +1,13 @@
-// @flow
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
-import { type RenderFoundation, dataElementTypes } from '../metaData';
+import { dataElementTypes } from '../metaData';
+import type { RenderFoundation } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
-    // todo (report lgmt)
     [dataElementTypes.FILE_RESOURCE]: (
         {
             value,
@@ -100,7 +99,7 @@ export async function getSubValues({
 }: {
     eventId: string,
     programStage: RenderFoundation,
-    values?: ?Object,
+    values?: any,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
 }) {
@@ -116,7 +115,6 @@ export async function getSubValues({
         const value = values[metaElementId];
         const metaElement = elementsById[metaElementId];
         if (isDefined(value) && value !== null && metaElement) {
-            // $FlowFixMe dataElementTypes flow error
             const subValueGetter = subValueGetterByElementType[metaElement.type];
             if (subValueGetter) {
                 const subValue = await subValueGetter({

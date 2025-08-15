@@ -577,7 +577,7 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
 
     render() {
         const { eventStatus } = this.props;
-        const isScheduleOrOverdue = [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
+        const isScheduleOrOverdue = eventStatus && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
 
         return isScheduleOrOverdue ? this.renderScheduleView() : this.renderDataEntry();
     }

@@ -1,4 +1,3 @@
-// @flow
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
@@ -9,7 +8,7 @@ const keysToSkip = {
     completedBy: 'completedBy',
 };
 
-export function convertMainEventClientToServer(event: Object) {
+export function convertMainEventClientToServer(event: any) {
     const mapClientKeyToServerKey = {
         eventId: 'event',
         programId: 'program',
@@ -21,7 +20,7 @@ export function convertMainEventClientToServer(event: Object) {
     };
     event = convertEventAttributeOptions(event);
     // eslint-disable-next-line complexity
-    return convertMainEvent(event, mapClientKeyToServerKey, (key, value) => {
+    return convertMainEvent(event, (key, value) => {
         let convertedValue;
 
         switch (key) {
@@ -38,5 +37,5 @@ export function convertMainEventClientToServer(event: Object) {
         }
 
         return convertedValue;
-    }, keysToSkip);
+    }, keysToSkip, mapClientKeyToServerKey);
 }
