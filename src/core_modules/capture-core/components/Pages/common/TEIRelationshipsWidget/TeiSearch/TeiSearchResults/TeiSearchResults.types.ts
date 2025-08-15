@@ -7,7 +7,7 @@ export type OwnProps = {
     onNewSearch: any;
     onEditSearch: any;
     getResultsView: any;
-    selectedProgramId?: string | null | undefined;
+    selectedProgramId?: string;
     selectedTrackedEntityTypeId: string;
     trackedEntityTypeName: string;
 };
