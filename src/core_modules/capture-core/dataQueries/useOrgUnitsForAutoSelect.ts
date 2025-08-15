@@ -1,7 +1,6 @@
-// @flow
 import { useApiMetadataQuery } from '../utils/reactQueryHelpers';
 
-export const useOrgUnitAutoSelect = (customQueryOptions: Object) => {
+export const useOrgUnitAutoSelect = (customQueryOptions: any = {}) => {
     const queryKey = ['organisationUnits'];
     const queryFn = {
         resource: 'organisationUnits',

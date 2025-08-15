@@ -1,16 +1,14 @@
-// @flow
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import { errorCreator } from '../../capture-core-utils';
 
-// Skips fetching if orgUnitId is falsy
-export const useOrganisationUnit = (orgUnitId: string, fields?: string): {
+export const useOrganisationUnit = (orgUnitId: string | null | undefined, fields?: string): {
     orgUnit: any,
     error: any,
 } => {
-    const [orgUnit, setOrgUnit] = useState();
-    const [requestedOrgUnitId, setRequestedOrgUnitId] = useState();
+    const [orgUnit, setOrgUnit] = useState<any>();
+    const [requestedOrgUnitId, setRequestedOrgUnitId] = useState<string>();
     const [fetchingInProgress, setFetchingInProgress] = useState(false);
     const { error, data, loading, refetch } = useDataQuery(
         useMemo(
@@ -47,10 +45,10 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string): {
     useEffect(() => {
         if (fetchingInProgress && !loading) {
             setFetchingInProgress(false);
-            if (orgUnitId === requestedOrgUnitId && !error) {
+            if (orgUnitId === requestedOrgUnitId && !error && data?.organisationUnits) {
                 setOrgUnit({
                     id: orgUnitId,
-                    ...data.organisationUnits,
+                    ...data.organisationUnits as Record<string, any>,
                 });
             }
         }
@@ -59,5 +57,5 @@ export const useOrganisationUnit = (orgUnitId: string, fields?: string): {
     return (orgUnitId && orgUnitId === requestedOrgUnitId) ? {
         error,
         orgUnit,
-    } : {};
+    } : { orgUnit: undefined, error: undefined };
 };
