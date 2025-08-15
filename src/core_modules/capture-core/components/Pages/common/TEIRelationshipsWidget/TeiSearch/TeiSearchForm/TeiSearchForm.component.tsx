@@ -1,6 +1,6 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
@@ -15,7 +15,28 @@ import {
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { Props, State } from './TeiSearchForm.types';
-import { getStyles } from './TeiSearchForm.types';
+
+const getStyles = (theme: Theme) => ({
+    container: {},
+    orgUnitSection: {
+        backgroundColor: 'white',
+        padding: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(892),
+    },
+    searchButtonContainer: {
+        padding: theme.typography.pxToRem(10),
+        display: 'flex',
+        alignItems: 'center',
+    },
+    minAttributesRequired: {
+        flexGrow: 1,
+        textAlign: 'right' as const,
+        fontSize: theme.typography.pxToRem(14),
+    },
+    minAttribtuesRequiredInvalid: {
+        color: theme.palette.error.main,
+    },
+});
 
 class SearchFormPlain extends React.Component<Props, State> {
     constructor(props: Props) {
