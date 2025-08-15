@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const viewEventPageActionTypes = {
@@ -7,7 +6,7 @@ export const viewEventPageActionTypes = {
     ALL_CATEGORY_OPTIONS_RESET: 'ViewEventPage.AllCategoryOptionsReset',
 };
 
-export const setCategoryOption = (categoryId: string, categoryOption: Object) =>
+export const setCategoryOption = (categoryId: string, categoryOption: any) =>
     actionCreator(viewEventPageActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
 export const resetCategoryOption = (categoryId: string) =>
