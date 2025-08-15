@@ -1,7 +1,6 @@
-// @flow
 import React, { type ComponentType, useCallback, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
@@ -24,7 +23,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const TeiSearchPlain = (props) => {
+const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const [programSectionOpen, setProgramSectionOpen] = useState(true);
 
     const getFormId = useCallback((searchGroupId) => {
@@ -78,7 +77,7 @@ const TeiSearchPlain = (props) => {
             >
                 <SearchProgramSelector
                     searchId={props.id}
-                    selectedProgramId={props.selectedProgramId}
+                    selectedProgramId={props.selectedProgramId || undefined}
                     selectedTrackedEntityTypeId={props.selectedTrackedEntityTypeId}
                 />
             </Section>
@@ -164,4 +163,4 @@ const TeiSearchPlain = (props) => {
     return searchGroups ? renderSearchForms(searchGroups) : (<div />);
 };
 
-export const TeiSearchComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiSearchPlain);
+export const TeiSearchComponent = withStyles(getStyles)(TeiSearchPlain) as ComponentType<Props>;

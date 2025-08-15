@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import type { InputAttribute } from '../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
@@ -10,16 +9,16 @@ import {
 } from '../../../../metaData';
 
 type Props = {
-    teiId: string,
-    trackedEntityTypeId: string,
+    teiId: string;
+    trackedEntityTypeId: string;
 };
 
 type Return = {
-    inheritedAttributes: Array<InputAttribute>,
-    isLoading: boolean,
+    inheritedAttributes: Array<InputAttribute>;
+    isLoading: boolean;
 };
 export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
-    const programId = useSelector(({ newRelationshipRegisterTei }) => newRelationshipRegisterTei.programId);
+    const programId = useSelector((state: any) => state.newRelationshipRegisterTei.programId);
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set();
 
@@ -56,12 +55,12 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
             },
         }, {
             enabled: !!teiId,
-            select: (response) => {
+            select: (response: any) => {
                 const attributes = response.attributes || [];
                 return attributes
-                    .filter(attribute => inheritedAttributeIds.has(attribute.attribute));
+                    .filter((attribute: any) => inheritedAttributeIds.has(attribute.attribute));
             },
-        });
+        }) as any;
 
     return {
         inheritedAttributes: data ?? [],

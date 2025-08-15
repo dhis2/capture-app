@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
@@ -9,9 +8,7 @@ import {
 } from '../../../WidgetsRelationship';
 import { errorCreator } from '../../../../../capture-core-utils';
 
-// map through arrays of either dataElements or attributes and fetch optionSet values for each element if they have a optionSet
-const getOptionSetValuesForElement = async (elements: Array<Object>, userStorageController: Object) => {
-    // should be an object with keys of the element ids and value true
+const getOptionSetValuesForElement = async (elements: Array<any>, userStorageController: any) => {
     const optionSetIds = elements
         .reduce((acc, { optionSet }) => {
             if (optionSet) {
@@ -83,8 +80,8 @@ const getRelationshipTypes = async (): Promise<RelationshipTypes> => {
 };
 
 export const useTEIRelationshipsWidgetMetadata = (): {
-    relationshipTypes: ?RelationshipTypes,
-    isError: boolean,
+    relationshipTypes: RelationshipTypes | null | undefined;
+    isError: boolean;
 } => {
     const { data: relationshipTypes, isError } =
     useIndexedDBQuery<RelationshipTypes>(
