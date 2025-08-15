@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 
 export const statusTypes = {
@@ -27,4 +26,3 @@ export const translatedStatusTypes = (options?: string) => ({
     [statusTypes.SKIPPED]: i18n.t('Skipped'),
     [statusTypes.VISITED]: i18n.t('Visited'),
 });
-

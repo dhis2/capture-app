@@ -1,10 +1,66 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { EventsData, EventData } from '@dhis2/rules-engine-javascript';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
+
+type EventData = {
+    eventId?: string;
+    programId: string;
+    programStageId: string;
+    orgUnitId: string;
+    trackedEntityInstanceId: string;
+    enrollmentId: string;
+    enrollmentStatus: string;
+    status: 'COMPLETED' | 'ACTIVE' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    eventDate?: string;
+    dueDate?: string;
+    lastUpdated: string;
+    occurredAt?: string;
+    scheduledAt?: string;
+    completedAt?: string;
+    createdAt?: string;
+    notes?: Array<Record<string, unknown>>;
+    [key: string]: any;
+};
+
+type EventsData = Array<EventData>;
+
+type CaptureClientEvent = {
+    eventId: string;
+    programId: string;
+    programStageId: string;
+    orgUnitId: string;
+    trackedEntityId?: string;
+    enrollmentId?: string;
+    status: string;
+    occurredAt?: string;
+    scheduledAt?: string;
+    completedAt?: string;
+    createdAt?: string;
+    [key: string]: any;
+};
+
+type ApiDataValue = {
+    dataElement: string,
+    value: any
+};
+
+type ApiEnrollmentEvent = {
+    event: string,
+    program: string,
+    programStage: string,
+    orgUnit: string,
+    trackedEntity?: string,
+    enrollment?: string,
+    enrollmentStatus?: string,
+    status: string,
+    occurredAt: string,
+    scheduledAt?: string,
+    completedAt?: string,
+    createdAt?: string,
+    dataValues: Array<ApiDataValue>,
+};
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
@@ -53,9 +109,8 @@ function convertDataValues(apiEvent: ApiEnrollmentEvent) {
 function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEvent & EventData) {
     return Object
         .keys(apiEvent)
-        .reduce((accEvent, inputKey) => {
+        .reduce((accEvent: any, inputKey) => {
             if (inputKey !== 'dataValues') {
-                // $FlowFixMe[prop-missing] automated comment
                 const valueToConvert = apiEvent[inputKey];
                 let convertedValue;
                 if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
@@ -67,10 +122,8 @@ function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEven
                 }
 
 
-                // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
 
-                // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }
             return accEvent;
@@ -78,7 +131,7 @@ function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEven
 }
 
 export const prepareEnrollmentEventsForRulesEngine =
-    (apiEvents?: Array<ApiEnrollmentEvent> = [], currentEvent?: EventData): EventsData =>
+    (apiEvents: Array<ApiEnrollmentEvent> = [], currentEvent?: EventData): EventsData =>
         apiEvents
             .map(apiEvent => (currentEvent && currentEvent.eventId === apiEvent.event
                 ? currentEvent

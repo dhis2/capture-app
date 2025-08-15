@@ -1,7 +1,6 @@
-// @flow
 export function convertMainEvent(
-    event: Object,
-    keyMap: Object = {},
+    event: any,
+    keyMap: any = {},
     onConvert: (key: string, value: any) => any,
     keysToSkip?: {[keyId: string]: string},
 ) {

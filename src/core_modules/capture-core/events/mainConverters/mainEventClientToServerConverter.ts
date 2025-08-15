@@ -1,4 +1,3 @@
-// @flow
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
@@ -9,7 +8,7 @@ const keysToSkip = {
     completedBy: 'completedBy',
 };
 
-export function convertMainEventClientToServer(event: Object) {
+export function convertMainEventClientToServer(event: any) {
     const mapClientKeyToServerKey = {
         eventId: 'event',
         programId: 'program',
