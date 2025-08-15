@@ -117,7 +117,6 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector
-            // @ts-expect-error - keeping original functionality as before ts rewrite
             innerRef={(instance) => {
                 this.orgUnitSelectorInstance = instance;
             }}

@@ -70,6 +70,37 @@ class SearchFormPlain extends React.Component<Props, State> {
         };
     }
 
+    getUniqueSearchButtonText = (searchForm: any) => {
+        const attributeName = searchForm.getElements()[0].formName;
+        return `${i18n.t('Search')} ${attributeName}`;
+    }
+
+    handleSearchAttempt = () => {
+        const isFormValid = this.validateForm();
+        if (!isFormValid) {
+            this.props.onSearchValidationFailed(this.props.id, this.props.searchGroupId);
+            return;
+        }
+
+        if (!this.validNumberOfAttributes()) {
+            this.setState({ showMissingSearchCriteriaModal: true });
+            return;
+        }
+
+        this.props.onSearch(this.props.id, this.props.searchGroupId);
+    }
+
+    isSearchViaUniqueIdValid = () => {
+        const searchTerms = this.props.formsValues;
+        return Object.values(searchTerms).some(value => value !== undefined && value !== '');
+    }
+
+    validNumberOfAttributes = () => {
+        const attributesWithValuesCount = this.props.attributesWithValuesCount;
+        const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
+        return attributesWithValuesCount >= minAttributesRequiredToSearch;
+    }
+
     validateForm() {
         if (!this.formInstance) {
             log.error(errorCreator(SearchFormPlain.errorMessages.SEARCH_FORM_MISSING)({ SearchFormPlain }));
@@ -92,37 +123,6 @@ class SearchFormPlain extends React.Component<Props, State> {
         }
 
         return true;
-    }
-
-    validNumberOfAttributes = () => {
-        const attributesWithValuesCount = this.props.attributesWithValuesCount;
-        const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
-        return attributesWithValuesCount >= minAttributesRequiredToSearch;
-    }
-
-    isSearchViaUniqueIdValid = () => {
-        const searchTerms = this.props.formsValues;
-        return Object.values(searchTerms).some(value => value !== undefined && value !== '');
-    }
-
-    handleSearchAttempt = () => {
-        const isFormValid = this.validateForm();
-        if (!isFormValid) {
-            this.props.onSearchValidationFailed(this.props.id, this.props.searchGroupId);
-            return;
-        }
-
-        if (!this.validNumberOfAttributes()) {
-            this.setState({ showMissingSearchCriteriaModal: true });
-            return;
-        }
-
-        this.props.onSearch(this.props.id, this.props.searchGroupId);
-    }
-
-    getUniqueSearchButtonText = (searchForm: any) => {
-        const attributeName = searchForm.getElements()[0].formName;
-        return `${i18n.t('Search')} ${attributeName}`;
     }
 
     static errorMessages = {
