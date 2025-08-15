@@ -2,7 +2,6 @@
 import moment from 'moment';
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
-import { fromApiEmptyValueFilter } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
 import {
     filterTypesObject,
     type TrueOnlyFilterData,
@@ -26,6 +25,7 @@ import { areRelativeRangeValuesSupported }
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,

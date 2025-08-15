@@ -6,7 +6,7 @@ import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration'
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-import { fromApiEmptyValueFilter } from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 import {
     filterTypesObject,
     type AssigneeFilterData,

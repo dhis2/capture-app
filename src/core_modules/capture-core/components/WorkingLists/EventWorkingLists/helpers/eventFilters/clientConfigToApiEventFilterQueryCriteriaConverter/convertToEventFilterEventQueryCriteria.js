@@ -23,10 +23,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
-import {
-    toApiEmptyValueFilter,
-} from '../../../../WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
-
+import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 type ColumnForConverterBase = {|
     id: string,

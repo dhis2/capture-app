@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-06T11:28:43.797Z\n"
-"PO-Revision-Date: 2025-08-06T11:28:43.797Z\n"
+"POT-Creation-Date: 2025-08-15T09:40:35.611Z\n"
+"PO-Revision-Date: 2025-08-15T09:40:35.611Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -473,6 +473,12 @@ msgstr "Absolute range"
 
 msgid "Relative range"
 msgstr "Relative range"
+
+msgid "Is empty"
+msgstr "Is empty"
+
+msgid "Is not empty"
+msgstr "Is not empty"
 
 msgid "Max"
 msgstr "Max"
@@ -1964,12 +1970,6 @@ msgstr "Download as CSV"
 
 msgid "Download with current filters"
 msgstr "Download with current filters"
-
-msgid "Is empty"
-msgstr "Is empty"
-
-msgid "Is not empty"
-msgstr "Is not empty"
 
 msgid "An error has occured. See log for details"
 msgstr "An error has occured. See log for details"

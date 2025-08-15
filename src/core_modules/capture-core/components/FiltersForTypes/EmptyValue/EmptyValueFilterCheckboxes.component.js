@@ -7,7 +7,7 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EMPTY_VALUE_FILTER_LABEL,
     NOT_EMPTY_VALUE_FILTER_LABEL,
-} from '../emptyValueFilterHelpers';
+} from './emptyValueFilterHelpers';
 
 type Props = {
     value: ?string,

@@ -6,10 +6,10 @@ import type { UpdatableFilterContent } from '../types';
 import {
     makeCheckboxHandler,
     isEmptyValueFilter,
-    EmptyValueFilterCheckboxes,
     EMPTY_VALUE_FILTER,
     NOT_EMPTY_VALUE_FILTER,
-} from '../../WorkingLists/WorkingListsCommon/helpers/buildFilterQueryArgs/EmptyValueFilter';
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 type Value = ?string;
 
