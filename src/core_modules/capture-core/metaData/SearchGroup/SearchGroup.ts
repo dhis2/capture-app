@@ -8,6 +8,7 @@ export class SearchGroup {
     _minAttributesRequiredToSearch!: number;
     _searchForm!: RenderFoundation;
     _unique!: boolean;
+    trackedEntityType?: { name: string; id: string };
 
     constructor(initFn?: (_this: SearchGroup) => void) {
         this._minAttributesRequiredToSearch = 0;

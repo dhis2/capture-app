@@ -42,12 +42,12 @@ const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, clas
     const { program, programType } = useProgramInfo(programId);
     const IncompleteSelectionMessage = useMemo(() => (programType === programTypes.TRACKER_PROGRAM ? (
         i18n.t('Or see all records accessible to you in {{program}} ', {
-            program: program?.name,
+            program: (program && program.name) || '',
             interpolation: { escapeValue: false },
         })
     ) : i18n.t('Or see all events accessible to you in {{program}}',
-        { program: program?.name, interpolation: { escapeValue: false } })),
-    [program?.name, programType]);
+        { program: (program && program.name) || '', interpolation: { escapeValue: false } })),
+    [program, programType]);
 
     return (
         <div

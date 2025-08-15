@@ -102,7 +102,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             return i18n.t(
                 '{{occurredAt}} belongs to an expired period. Event cannot be edited',
                 {
-                    occurredAt: eventData?.dataEntryValues?.occurredAt,
+                    occurredAt: (eventData && eventData.dataEntryValues && eventData.dataEntryValues.occurredAt) || '',
                     interpolation: { escapeValue: false },
                 },
             );
@@ -111,7 +111,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     }, [
         eventAccess.write,
         isWithinValidPeriod,
-        eventData?.dataEntryValues?.occurredAt,
+        eventData,
     ]);
 
     if (error) {

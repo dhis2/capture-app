@@ -156,7 +156,7 @@ class SearchFormPlain extends React.Component<Props, State> {
             <div>
                 <div className={classes.title}>
                     {i18n.t('Search for a {{trackedEntityTypeName}}', {
-                        trackedEntityTypeName: (this.props.searchGroup as any).trackedEntityType.name,
+                        trackedEntityTypeName: (this.props.searchGroup.trackedEntityType && this.props.searchGroup.trackedEntityType.name) || '',
                         interpolation: { escapeValue: false },
                     })}
                 </div>

@@ -15,13 +15,14 @@ const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
     const filteredRoots = getOrgUnitRoots(searchId);
     const roots = filteredRoots || getOrgUnitRoots('searchRoots');
 
+    const teiSearchState = (state as any).teiSearch?.[searchId] || {};
     return {
-        selectedOrgUnit: (state as any).teiSearch[searchId].selectedOrgUnit,
-        selectedOrgUnitScope: (state as any).teiSearch[searchId].selectedOrgUnitScope,
+        selectedOrgUnit: teiSearchState.selectedOrgUnit,
+        selectedOrgUnitScope: teiSearchState.selectedOrgUnitScope,
         treeRoots: roots,
-        treeSearchText: (state as any).teiSearch[searchId].orgUnitsSearchText,
-        treeReady: !(state as any).teiSearch[searchId].orgUnitsLoading,
-        treeKey: (state as any).teiSearch[searchId].orgUnitsSearchText || 'initial',
+        treeSearchText: teiSearchState.orgUnitsSearchText,
+        treeReady: !teiSearchState.orgUnitsLoading,
+        treeKey: teiSearchState.orgUnitsSearchText || 'initial',
     };
 };
 
