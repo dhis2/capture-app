@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-15T10:21:16.458Z\n"
-"PO-Revision-Date: 2025-08-15T10:21:16.458Z\n"
+"POT-Creation-Date: 2025-08-15T10:46:34.069Z\n"
+"PO-Revision-Date: 2025-08-15T10:46:34.069Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -925,16 +925,24 @@ msgstr "Search {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Search by attributes"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "Fill in at least {{count}} attribute to search"
-msgstr[1] "Fill in at least {{count}} attributes to search"
+msgid "Search without criteria"
+msgstr "Search without criteria"
 
-msgid "Missing search criteria"
-msgstr "Missing search criteria"
+msgid ""
+"You are about to search without any criteria. This may return a lot of "
+"results. Are you sure you want to continue?"
+msgstr ""
+"You are about to search without any criteria. This may return a lot of "
+"results. Are you sure you want to continue?"
 
-msgid "Back to search"
-msgstr "Back to search"
+msgid "Yes, search without criteria"
+msgstr "Yes, search without criteria"
+
+msgid "Search for a {{trackedEntityTypeName}}"
+msgstr "Search for a {{trackedEntityTypeName}}"
+
+msgid "Clear search"
+msgstr "Clear search"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
@@ -1005,6 +1013,11 @@ msgstr "You can also choose a program from the top bar and search in that progra
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
 msgid "Search {{name}}"
 msgstr "Search {{name}}"
 
@@ -1053,6 +1066,9 @@ msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 
+msgid "Back to search"
+msgstr "Back to search"
+
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
@@ -1061,6 +1077,9 @@ msgstr "Too many results"
 
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
+
+msgid "Missing search criteria"
+msgstr "Missing search criteria"
 
 msgid "Results found"
 msgstr "Results found"
