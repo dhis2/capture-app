@@ -1,4 +1,3 @@
-// @flow
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { getProgramThrowIfNotFound, EventProgram } from '../metaData';
 import type { RelationshipType } from '../metaData';
@@ -7,7 +6,7 @@ import type { QuerySingleResource } from '../utils/api/api.types';
 import { convertServerRelationshipToClient } from './convertServerToClient';
 
 async function getRelationships(
-    queryParams: Object,
+    queryParams: any,
     relationshipTypes: Array<RelationshipType>,
     querySingleResource: QuerySingleResource,
 ) {
@@ -16,8 +15,7 @@ async function getRelationships(
         params: queryParams,
     });
     const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
-    // $FlowFixMe[missing-annot]
-    return apiRelationships.map(rel => convertServerRelationshipToClient(rel, relationshipTypes));
+    return apiRelationships.map((rel: any) => convertServerRelationshipToClient(rel, relationshipTypes));
 }
 
 export function getRelationshipsForEvent(

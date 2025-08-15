@@ -1,14 +1,13 @@
-// @flow
 import type { RelationshipType } from '../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../metaData';
 import { programCollection } from '../metaDataMemoryStores';
 import { getDisplayName } from '../trackedEntityInstances/getDisplayName';
 
 const getClientConstraintByType = {
-    TRACKED_ENTITY_INSTANCE: (constraint, relationshipConstraint) => {
+    TRACKED_ENTITY_INSTANCE: (constraint: any, relationshipConstraint: any) => {
         const tei = constraint.trackedEntity;
         const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(tei.trackedEntityType);
-        const values = tei.attributes.reduce((accValues, attr) => {
+        const values = tei.attributes.reduce((accValues: any, attr: any) => {
             accValues[attr.attribute] = attr.value;
             return accValues;
         }, {});
@@ -19,7 +18,7 @@ const getClientConstraintByType = {
             linkProgramId: relationshipConstraint.programId,
         };
     },
-    PROGRAM_STAGE_INSTANCE: (constraint) => {
+    PROGRAM_STAGE_INSTANCE: (constraint: any) => {
         const event = constraint.event;
         const program = programCollection.get(event.program);
         if (!program) {
@@ -39,7 +38,7 @@ const getClientConstraintByType = {
     },
 };
 
-export function convertServerRelationshipToClient(serverRelationship: Object, relationshipTypes: Array<RelationshipType>) {
+export function convertServerRelationshipToClient(serverRelationship: any, relationshipTypes: Array<RelationshipType>) {
     const relationshipType = relationshipTypes.find(r => r.id === serverRelationship.relationshipType);
     if (!relationshipType) {
         return null;

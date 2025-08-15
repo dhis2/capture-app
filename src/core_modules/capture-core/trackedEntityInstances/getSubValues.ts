@@ -1,4 +1,3 @@
-// @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
 import { featureAvailable, FEATURES, errorCreator } from 'capture-core-utils';
@@ -12,10 +11,10 @@ const subValueGetterByElementType = {
         absoluteApiPath,
         programId,
     }: {
-        teiId: string,
-        attributeId: string,
-        absoluteApiPath: string,
-        programId: ?string,
+        teiId: string;
+        attributeId: string;
+        absoluteApiPath: string;
+        programId?: string | null;
     }) => {
         const url = featureAvailable(FEATURES.trackerImageEndpoint)
             ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`
@@ -35,15 +34,15 @@ const subValueGetterByElementType = {
         querySingleResource,
         programId,
     }: {
-        value: string,
-        teiId: string,
-        attributeId: string,
-        absoluteApiPath: string,
-        querySingleResource: QuerySingleResource,
-        programId: ?string,
+        value: string;
+        teiId: string;
+        attributeId: string;
+        absoluteApiPath: string;
+        querySingleResource: QuerySingleResource;
+        programId?: string | null;
     }) =>
         querySingleResource({ resource: `fileResources/${value}` })
-            .then((res) => {
+            .then((res: any) => {
                 const fileUrl = featureAvailable(FEATURES.trackerFileEndpoint)
                     ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file`
                     : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/file`;
@@ -68,18 +67,17 @@ export async function getSubValues({
     querySingleResource,
     programId,
 }: {
-    teiId: string,
-    attributes: Array<DataElement>,
-    values?: ?Object,
-    absoluteApiPath: string,
-    querySingleResource: QuerySingleResource,
-    programId: ?string,
+    teiId: string;
+    attributes: Array<DataElement>;
+    values?: any | null;
+    absoluteApiPath: string;
+    querySingleResource: QuerySingleResource;
+    programId?: string | null;
 }) {
     if (!values) {
         return null;
     }
-    // $FlowFixMe
-    const attributesById = attributes.toHashMap('id');
+    const attributesById = (attributes as any).toHashMap('id');
 
     return Object.keys(values).reduce(async (accValuesPromise, attributeId) => {
         const accValues = await accValuesPromise;

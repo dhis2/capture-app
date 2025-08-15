@@ -1,4 +1,3 @@
-// @flow
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { type DataElement, convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
@@ -6,15 +5,15 @@ import { getSubValues } from './getSubValues';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
 type ApiTeiAttribute = {
-    attribute: any,
-    value: any
+    attribute: any;
+    value: any;
 };
 
 type ApiTrackedEntityInstance = {
-    trackedEntity: string,
-    trackedEntityType: string,
-    orgUnit: string,
-    attributes: Array<ApiTeiAttribute>
+    trackedEntity: string;
+    trackedEntityType: string;
+    orgUnit: string;
+    attributes: Array<ApiTeiAttribute>;
 };
 
 function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
@@ -22,7 +21,7 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
         return apiAttributeValues;
     }
 
-    return apiAttributeValues.reduce((accValues, attrValue) => {
+    return apiAttributeValues.reduce((accValues: any, attrValue) => {
         accValues[attrValue.attribute] = attrValue.value;
         return accValues;
     }, {});
@@ -30,11 +29,10 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
 
 async function convertToClientTei(
     apiTei: ApiTrackedEntityInstance,
-    // $FlowFixMe[cannot-resolve-name] automated comment
     attributes: Array<DataElement>,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
-    programId: ?string,
+    programId?: string | null,
 ) {
     const attributeValuesById = getValuesById(apiTei.attributes);
     const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
@@ -55,17 +53,17 @@ async function convertToClientTei(
     };
 }
 
-type TrackedEntityInstancesPromise = Promise<{|
-    trackedEntityInstanceContainers: any,
-    pagingData: any
-|}>
+type TrackedEntityInstancesPromise = Promise<{
+    trackedEntityInstanceContainers: any;
+    pagingData: any;
+}>;
 
 export async function getTrackedEntityInstances(
-    queryParams: Object,
+    queryParams: any,
     attributes: Array<DataElement>,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
-    selectedProgramId: ?string,
+    selectedProgramId?: string | null,
 ): TrackedEntityInstancesPromise {
     const apiResponse = await querySingleResource({
         resource: 'tracker/trackedEntities',
@@ -73,7 +71,7 @@ export async function getTrackedEntityInstances(
     });
     const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiResponse);
 
-    const trackedEntityInstanceContainers = await apiTrackedEntities.reduce(async (accTeiPromise, apiTei) => {
+    const trackedEntityInstanceContainers = await apiTrackedEntities.reduce(async (accTeiPromise: any, apiTei: any) => {
         const accTeis = await accTeiPromise;
         const teiContainer = await convertToClientTei(
             apiTei,

@@ -1,4 +1,3 @@
-// @flow
 export { getEffectReconciler } from './getEffectReconciler';
 export { queueConfig } from './queueConfig';
 export { shouldDiscard } from './shouldDiscard';

@@ -1,9 +1,7 @@
-// @flow
 import defaultQueue from '@redux-offline/redux-offline/lib/defaults/queue';
 import { effectMethods } from './trackerOffline.const';
 
 /* eslint-disable no-new-func */
-// $FlowFixMe
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
 function getEffect(action: any) {

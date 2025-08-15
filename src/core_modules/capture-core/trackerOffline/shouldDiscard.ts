@@ -1,5 +1,4 @@
-// @flow
-import type { ApiError } from '@dhis2/app-runtime';
+type ApiError = any;
 
 const errorTypes = {
     NETWORK: 'network',
@@ -7,9 +6,9 @@ const errorTypes = {
     UNKNOWN: 'unknown',
 };
 
-const shouldDiscardRequestWithAccessError = ({ details: { httpStatusCode } }) => httpStatusCode !== 401;
+const shouldDiscardRequestWithAccessError = ({ details: { httpStatusCode } }: any) => httpStatusCode !== 401;
 
-const shouldDiscardRequestWithUnknownError = ({ message }) => {
+const shouldDiscardRequestWithUnknownError = ({ message }: any) => {
     const statusCodeSearchResult = message.match(/\(\d*\)$/);
     if (statusCodeSearchResult) {
         const statusCode = statusCodeSearchResult[0].replace(/[()]/g, '');
