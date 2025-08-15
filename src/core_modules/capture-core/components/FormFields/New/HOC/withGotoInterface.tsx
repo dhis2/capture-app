@@ -1,11 +1,8 @@
 import * as React from 'react';
 
-type Props = {
-};
-
 export const withGotoInterface = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        class GotoFieldInterface extends React.Component<Props> {
+        class GotoFieldInterface extends React.Component<any> {
             gotoInstance: any;
 
             goto() {

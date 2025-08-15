@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.constants';
@@ -7,10 +6,9 @@ import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
-type WidgetProps = {|
-    pageStatus: string,
-    ...Props,
-|}
+type WidgetProps = {
+    pageStatus: string;
+} & Props;
 
 export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetProps) => {
     const {
