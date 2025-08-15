@@ -1,3 +1,45 @@
+## [103.2.6](https://github.com/dhis2/capture-app/compare/v103.2.5...v103.2.6) (2025-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-16364] Stage selection still shown with only one available stage ([#4262](https://github.com/dhis2/capture-app/issues/4262)) ([4e40f07](https://github.com/dhis2/capture-app/commit/4e40f07110046c5aa1b4386f951de6ab89f890cc))
+
+## [103.2.5](https://github.com/dhis2/capture-app/compare/v103.2.4...v103.2.5) (2025-08-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4291](https://github.com/dhis2/capture-app/issues/4291)) ([338a671](https://github.com/dhis2/capture-app/commit/338a6714283fdc421c57c0ec73e5a96b47839041))
+
+## [103.2.4](https://github.com/dhis2/capture-app/compare/v103.2.3...v103.2.4) (2025-08-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19905] TEI search fails for integer range types ([#4248](https://github.com/dhis2/capture-app/issues/4248)) ([237a7d1](https://github.com/dhis2/capture-app/commit/237a7d1db33742f65e8fe4f9e1ee06df82ce929e))
+
+## [103.2.3](https://github.com/dhis2/capture-app/compare/v103.2.2...v103.2.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* [DHIS2-19784] send ISO-formatted enrollment date to rule engine ([#4171](https://github.com/dhis2/capture-app/issues/4171)) ([c0e45af](https://github.com/dhis2/capture-app/commit/c0e45afc6fb6103fc72ba1484a045c70a525fb1f))
+
+## [103.2.2](https://github.com/dhis2/capture-app/compare/v103.2.1...v103.2.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4277](https://github.com/dhis2/capture-app/issues/4277)) ([bd61500](https://github.com/dhis2/capture-app/commit/bd61500ac4adad6ac0e1d1490eb73c44ae6e0d2a))
+
+## [103.2.1](https://github.com/dhis2/capture-app/compare/v103.2.0...v103.2.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15155] Filter Range Search Values before Prepopulation ([#4245](https://github.com/dhis2/capture-app/issues/4245)) ([4b27128](https://github.com/dhis2/capture-app/commit/4b27128dbb3c975f13fa82ce28aa1c5789f26d51))
+
 # [103.2.0](https://github.com/dhis2/capture-app/compare/v103.1.3...v103.2.0) (2025-07-30)
 
 

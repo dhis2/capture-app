@@ -627,9 +627,6 @@ msgstr "No indicator output for this enrollment yet"
 msgid "Quick actions"
 msgstr "Quick actions"
 
-msgid "New Event"
-msgstr "New Event"
-
 msgid "Schedule an event"
 msgstr "Schedule an event"
 

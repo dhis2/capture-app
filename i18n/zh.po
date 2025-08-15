@@ -862,6 +862,9 @@ msgstr "事件"
 msgid "You don't have access to edit this event"
 msgstr "您无权编辑此事件"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr "{{occurredAt}} 属于过期时间。事件不可编辑"
+
 msgid "View changelog"
 msgstr "查看变更日志"
 
@@ -1460,6 +1463,9 @@ msgstr "这个阶段只能有一个事件"
 
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} 属于过期时段。事件无法删除"
 
 msgid "An error occurred while deleting the event"
 msgstr "删除事件时发生错误"
