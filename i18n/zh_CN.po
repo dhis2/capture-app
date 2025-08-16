@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-07-31T10:50:59.068Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -614,9 +614,6 @@ msgstr "此报名尚无指标输出"
 msgid "Quick actions"
 msgstr "快速行动"
 
-msgid "New Event"
-msgstr "新事件"
-
 msgid "Schedule an event"
 msgstr "安排事件"
 
@@ -860,6 +857,9 @@ msgstr "事件"
 
 msgid "You don't have access to edit this event"
 msgstr "您无权编辑此事件"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
 
 msgid "View changelog"
 msgstr "查看变更日志"
@@ -1459,6 +1459,9 @@ msgstr "这个阶段只能有一个事件"
 
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "删除事件时发生错误"

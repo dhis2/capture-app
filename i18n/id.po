@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-31T10:50:59.068Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -631,9 +631,6 @@ msgstr "Belum ada indikator keluaran untuk pendaftran ini"
 msgid "Quick actions"
 msgstr "Aksi cepat"
 
-msgid "New Event"
-msgstr "Acara baru"
-
 msgid "Schedule an event"
 msgstr "Jadwalkan sebuah acara"
 
@@ -881,6 +878,9 @@ msgid "event"
 msgstr "acara/peristiwa"
 
 msgid "You don't have access to edit this event"
+msgstr ""
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
 msgstr ""
 
 msgid "View changelog"
@@ -1488,6 +1488,9 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr ""
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
@@ -1683,6 +1686,9 @@ msgstr "terjadi kesalahan saat memuat daftar kerja"
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1707,10 +1713,10 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1736,6 +1742,9 @@ msgid "Follow up"
 msgstr "Tindak lanjut"
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid ""
@@ -1770,9 +1779,6 @@ msgid_plural ""
 msgstr[0] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1852,16 +1858,6 @@ msgstr "Daftar kerja tidak dapat diperbarui"
 msgid "an error occurred loading the working lists"
 msgstr ""
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} terpilih"
-
-msgid "Deselect all"
-msgstr "Batal pilih semua"
-
 msgid "Update view"
 msgstr "Perbarui tampilan"
 
@@ -1894,6 +1890,28 @@ msgstr "Tampilkan Lebih Sedikit"
 
 msgid "Show All"
 msgstr "Tunjukkan semua"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} terpilih"
+
+msgid "Deselect all"
+msgstr "Batal pilih semua"
 
 msgid "Download as JSON"
 msgstr "Download dalam bentuk JSON"
