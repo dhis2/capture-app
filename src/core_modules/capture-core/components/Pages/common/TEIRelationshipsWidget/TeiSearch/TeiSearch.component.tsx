@@ -77,7 +77,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
             >
                 <SearchProgramSelector
                     searchId={props.id}
-                    selectedProgramId={props.selectedProgramId ?? undefined}
+                    selectedProgramId={props.selectedProgramId || undefined}
                     selectedTrackedEntityTypeId={props.selectedTrackedEntityTypeId}
                 />
             </Section>

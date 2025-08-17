@@ -15,13 +15,15 @@ type Props = {
 };
 
 export const App = ({ store }: Props) => (
-    <Provider
-        store={store}
-    >
-        <MetadataAutoSelectInitializer>
-            <RulesEngineVerboseInitializer>
-                <AppContents />
-            </RulesEngineVerboseInitializer>
-        </MetadataAutoSelectInitializer>
-    </Provider>
+    <React.Fragment>
+        <Provider
+            store={store}
+        >
+            <MetadataAutoSelectInitializer>
+                <RulesEngineVerboseInitializer>
+                    <AppContents />
+                </RulesEngineVerboseInitializer>
+            </MetadataAutoSelectInitializer>
+        </Provider>
+    </React.Fragment>
 );
