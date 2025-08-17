@@ -1,12 +1,11 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
 
 type Props = {
-    allowMultiple?: boolean,
-    useRealBooleanValues?: ?boolean, // instead of string as option values
+    allowMultiple?: boolean;
+    useRealBooleanValues?: boolean;
 };
 
 export class BooleanField extends Component<Props> {
@@ -26,18 +25,17 @@ export class BooleanField extends Component<Props> {
         ];
     }
 
-    options: Array<OptionRendererInputData>;
-
     constructor(props: Props) {
         super(props);
         this.options = BooleanField.getOptions(!!this.props.useRealBooleanValues);
     }
 
+    options: Array<OptionRendererInputData>;
+
     render() {
         const { allowMultiple, useRealBooleanValues, ...passOnProps } = this.props;
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <SelectionBoxes
                     options={this.options}
                     multiSelect={allowMultiple}

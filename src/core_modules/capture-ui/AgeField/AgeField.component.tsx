@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 import {
@@ -18,53 +17,62 @@ import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
 import { stringToTemporal, temporalToString, mapDhis2CalendarToTemporal, isCalendarSupported } from '../../capture-core-utils/date';
 
 type AgeValues = {
-    date?: ?string,
-    years?: ?string,
-    months?: ?string,
-    days?: ?string,
+    date?: string | null;
+    years?: string | null;
+    months?: string | null;
+    days?: string | null;
 }
 
 type InputMessageClasses = {
-    error?: ?string,
-    warning?: ?string,
-    info?: ?string,
-    validating?: ?string,
+    error?: string | null;
+    warning?: string | null;
+    info?: string | null;
+    validating?: string | null;
 }
 
 type ValidationOptions = {
-    error?: ?string,
-    errorCode?: ?string,
+    error?: string | null;
+    errorCode?: string | null;
 };
 
 type Props = {
-    value: ?AgeValues,
-    onBlur: (value: ?AgeValues, options: ?ValidationOptions) => void,
-    onChange: (value: ?AgeValues) => void,
-    onRemoveFocus: () => void,
-    orientation: $Values<typeof orientations>,
-    innerMessage?: ?any,
-    classes: Object,
-    inputMessageClasses: ?InputMessageClasses,
-    inFocus?: ?boolean,
-    shrinkDisabled?: ?boolean,
-    dateCalendarTheme: Object,
-    dateCalendarWidth?: ?any,
-    datePopupAnchorPosition?: ?string,
-    dateCalendarLocale: Object,
-    dateCalendarOnConvertValueIn: (inputValue: ?string) => Date,
-    dateCalendarOnConvertValueOut: (value: string) => string,
-    datePlaceholder?: ?string,
-    disabled?: ?boolean,
-    dateFormat: ?string,
-    calendarType: ?string,
-    locale?: string,
+    value: AgeValues | null;
+    onBlur: (value: AgeValues | null, options?: ValidationOptions | null) => void;
+    onChange: (value: AgeValues | null) => void;
+    onRemoveFocus: () => void;
+    orientation: keyof typeof orientations;
+    innerMessage?: any | null;
+    classes: any;
+    inputMessageClasses: InputMessageClasses | null;
+    inFocus?: boolean | null;
+    shrinkDisabled?: boolean | null;
+    dateCalendarTheme: any;
+    dateCalendarWidth?: any | null;
+    datePopupAnchorPosition?: string | null;
+    dateCalendarLocale: any;
+    dateCalendarOnConvertValueIn: (inputValue: string | null) => Date;
+    dateCalendarOnConvertValueOut: (value: string) => string;
+    datePlaceholder?: string | null;
+    disabled?: boolean | null;
+    dateFormat: string | null;
+    calendarType: string | null;
+    locale?: string;
 };
 
-function getCalculatedValues(dateValue: ?string, calendarType: string, dateFormat: string): AgeValues {
+function getCalculatedValues(dateValue: string | null, calendarType: string, dateFormat: string): AgeValues {
+    if (!dateValue) {
+        return {
+            date: dateValue,
+            years: '',
+            months: '',
+            days: '',
+        };
+    }
+
     if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendarType])) {
         const nowIso = Temporal.Now.plainDateISO();
 
-        const ageIso = convertToIso8601(dateValue, calendarType);
+        const ageIso = convertToIso8601(dateValue, calendarType as any);
 
         const diff = nowIso.since(ageIso, {
             largestUnit: 'years',
@@ -106,7 +114,7 @@ function getCalculatedValues(dateValue: ?string, calendarType: string, dateForma
         };
     }
 
-    const diff = now.since(age, {
+    const diff = now.since(age as any, {
         largestUnit: 'years',
         smallestUnit: 'days',
     });
@@ -141,8 +149,8 @@ class D2AgeFieldPlain extends Component<Props> {
             D2AgeFieldPlain.isPositiveOrZeroNumber(values.days || '0');
     }
 
-    static getNumberOrZero(value: ?string) {
-        return value || 0;
+    static getNumberOrZero(value: string | null) {
+        return Number(value) || 0;
     }
 
     onClear = () => {
@@ -167,12 +175,12 @@ class D2AgeFieldPlain extends Component<Props> {
         if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendar])) {
             const nowIso = Temporal.Now.plainDateISO();
             const calculatedDateIso = nowIso.subtract({
-                years: D2AgeFieldPlain.getNumberOrZero(values.years),
-                months: D2AgeFieldPlain.getNumberOrZero(values.months),
-                days: D2AgeFieldPlain.getNumberOrZero(values.days),
+                years: D2AgeFieldPlain.getNumberOrZero(values.years ?? null),
+                months: D2AgeFieldPlain.getNumberOrZero(values.months ?? null),
+                days: D2AgeFieldPlain.getNumberOrZero(values.days ?? null),
             });
 
-            const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendar);
+            const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendar as any);
             const dateString = temporalToString(localCalculatedDate, format);
             const calculatedValues = getCalculatedValues(dateString, calendar, format);
             this.props.onBlur(calculatedValues);
@@ -181,16 +189,16 @@ class D2AgeFieldPlain extends Component<Props> {
 
         const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendar]);
         const calculatedDate = now.subtract({
-            years: D2AgeFieldPlain.getNumberOrZero(values.years),
-            months: D2AgeFieldPlain.getNumberOrZero(values.months),
-            days: D2AgeFieldPlain.getNumberOrZero(values.days),
+            years: D2AgeFieldPlain.getNumberOrZero(values.years ?? null),
+            months: D2AgeFieldPlain.getNumberOrZero(values.months ?? null),
+            days: D2AgeFieldPlain.getNumberOrZero(values.days ?? null),
         });
         const dateString = temporalToString(calculatedDate, format);
         const calculatedValues = getCalculatedValues(dateString, calendar, format);
         this.props.onBlur(calculatedValues);
     }
 
-    handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
+    handleDateBlur = (date: string | null, options?: ValidationOptions | null) => {
         const { onRemoveFocus, calendarType, dateFormat } = this.props;
         const calendar = calendarType || 'iso8601';
         const format = dateFormat || 'YYYY-MM-DD';
@@ -218,13 +226,13 @@ class D2AgeFieldPlain extends Component<Props> {
         const { classes, innerMessage: messageContainer } = this.props;
         if (messageContainer) {
             const message = messageContainer.message && messageContainer.message[key];
-            const className = (classes && classes[messageTypeClass[messageContainer.messageType]]) || '';
+            const className = (classes && classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
             return message && (<div className={className}>{message}</div>);
         }
         return null;
     }
 
-    renderNumberInput = (currentValues: AgeValues, key: string, label: string) => {
+    renderNumberInput = (currentValues: AgeValues, key: keyof AgeValues, label: string) => {
         const {
             innerMessage,
             onChange,
@@ -240,7 +248,6 @@ class D2AgeFieldPlain extends Component<Props> {
             ...passOnProps } = this.props;
         return (
             <div className={defaultClasses.ageNumberInputContainer}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <AgeNumberInput
                     label={i18n.t(label)}
                     value={currentValues[key]}
@@ -270,7 +277,6 @@ class D2AgeFieldPlain extends Component<Props> {
         );
         return (
             <div className={dateInputContainerClass}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <AgeDateInput
                     onBlur={this.handleDateBlur}
                     value={currentValues.date}
@@ -290,7 +296,7 @@ class D2AgeFieldPlain extends Component<Props> {
         const currentValues = value || {};
         const isVertical = orientation === orientations.VERTICAL;
         const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
-        const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : null;
+        const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : undefined;
         return (
             <div className={containerClass}>
                 {this.renderDateInput(currentValues, isVertical)}
