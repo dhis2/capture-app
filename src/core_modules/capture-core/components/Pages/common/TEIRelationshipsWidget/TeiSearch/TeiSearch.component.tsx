@@ -146,7 +146,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     onEditSearch={handleEditSearch}
                     getResultsView={getResultsView}
                     searchGroups={searchGroups}
-                    selectedProgramId={selectedProgramId}
+                    selectedProgramId={selectedProgramId || undefined}
                     selectedTrackedEntityTypeId={selectedTrackedEntityTypeId}
                     trackedEntityTypeName={trackedEntityTypeName}
                 />
