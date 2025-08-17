@@ -3,14 +3,12 @@ import { map } from 'rxjs/operators';
 import { loadCore, actionTypes as coreActionTypes } from 'capture-core/init';
 import { loadAppSuccess, appStartActionTypes } from './appStart.actions';
 
-type InputObservable = any;
-
-export const triggerLoadCoreEpic = (action$: InputObservable) =>
+export const triggerLoadCoreEpic = (action$: any) =>
     action$.pipe(
         ofType(appStartActionTypes.APP_LOAD),
         map(() => loadCore()));
 
-export const loadAppEpic = (action$: InputObservable) =>
+export const loadAppEpic = (action$: any) =>
     action$.pipe(
         ofType(coreActionTypes.CORE_LOAD),
         map(() => loadAppSuccess({

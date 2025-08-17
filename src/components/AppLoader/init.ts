@@ -2,25 +2,13 @@ import log from 'loglevel';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
+import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 import i18n from '@dhis2/d2-i18n';
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
-
-type LocaleDataType = {
-    dateFnsLocale: any;
-    weekDays: any;
-    weekDaysShort: any;
-    calendarFormatHeaderLong: string;
-    calendarFormatHeaderShort: string;
-    selectDatesText: string;
-    selectDateText: string;
-    todayLabelShort: string;
-    todayLabelLong: string;
-    weekStartsOn: number;
-};
 
 function setLogLevel() {
     const levels = {
