@@ -9,7 +9,7 @@ import { AddLocationIcon } from '../Icons';
 import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
 import { orientations } from '../constants/orientations.const';
-import type { PlainProps, State, Coordinate } from './CoordinateField.types';
+import type { PlainProps, State } from './CoordinateField.types';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
@@ -19,8 +19,6 @@ const coordinateKeys = {
 };
 
 export class CoordinateField extends React.Component<PlainProps, State> {
-    mapInstance: any | null;
-
     constructor(props: PlainProps) {
         super(props);
 
@@ -34,6 +32,48 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         if (this.mapInstance && this.state.showMap) {
             this.mapInstance.leafletElement.invalidateSize();
         }
+    }
+
+    onMapPositionChange = (mapCoordinates: any) => {
+        const { lat, lng } = mapCoordinates.latlng;
+        this.setMapPosition([this.toSixDecimal(lat), this.toSixDecimal(lng)], mapCoordinates.target.getZoom());
+    }
+
+    onSetCoordinate = () => {
+        const position = this.state.position;
+        const value = position && position.length === 2 ? {
+            latitude: position[0],
+            longitude: position[1],
+        } : null;
+        this.props.onBlur(value);
+        this.setState({ showMap: false });
+    }
+
+    setMapPosition = (position: Array<any>, zoom: number) => {
+        this.setState({ position, zoom });
+    }
+
+    getPosition = (): Array<number> | null => {
+        const { value } = this.props;
+        let convertedValue: Array<number> | null = null;
+        if (value && value.latitude && value.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
+            convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
+        }
+        return convertedValue;
+    }
+
+    setMapInstance = (mapInstance: any) => {
+        this.mapInstance = mapInstance;
+    }
+
+    openMap = () => {
+        this.props.onOpenMap?.(Boolean(this.props.value));
+        this.setState({ showMap: true, position: this.getPosition() });
+    }
+
+    closeMap = () => {
+        this.props.onCloseMap?.();
+        this.setState({ showMap: false });
     }
 
     toSixDecimal = (value: string) => (parseFloat(value) ? parseFloat(value).toFixed(6) : null)
@@ -55,42 +95,29 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         this.props.onBlur(null);
     }
 
-    getPosition = (): Array<number> | null => {
-        const { value } = this.props;
-        let convertedValue: Array<number> | null = null;
-        if (value && value.latitude && value.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
-            convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
-        }
-        return convertedValue;
+    mapInstance: any | null;
+
+    search = (position: any) => {
+        const zoom = this.mapInstance && this.mapInstance.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
+        this.setMapPosition([...position], zoom);
     }
 
-    closeMap = () => {
-        this.props.onCloseMap?.();
-        this.setState({ showMap: false });
-    }
+    renderMapDialog = () => {
+        const clonedDialog = React.cloneElement(
 
-    openMap = () => {
-        this.props.onOpenMap?.(Boolean(this.props.value));
-        this.setState({ showMap: true, position: this.getPosition() });
-    }
+            this.props.mapDialog,
+            { hide: !this.state.showMap, onClose: this.closeMap },
 
-    onMapPositionChange = (mapCoordinates: any) => {
-        const { lat, lng } = mapCoordinates.latlng;
-        this.setMapPosition([this.toSixDecimal(lat), this.toSixDecimal(lng)], mapCoordinates.target.getZoom());
-    }
-
-    setMapPosition = (position: Array<any>, zoom: number) => {
-        this.setState({ position, zoom });
-    }
-
-    onSetCoordinate = () => {
-        const position = this.state.position;
-        const value = position && position.length === 2 ? {
-            latitude: position[0],
-            longitude: position[1],
-        } : null;
-        this.props.onBlur(value);
-        this.setState({ showMap: false });
+            [...React.Children.toArray(this.props.mapDialog.props.children), (
+                <>
+                    <ModalContent className={defaultClasses.dialogContent} key="dialogContent">
+                        {this.renderMap()}
+                    </ModalContent>
+                    {this.renderDialogActions()}
+                </>
+            )],
+        );
+        return clonedDialog;
     }
 
     renderMapIcon = () => {
@@ -116,33 +143,6 @@ export class CoordinateField extends React.Component<PlainProps, State> {
 
             </div>
         );
-    }
-
-    renderMapDialog = () => {
-        const clonedDialog = React.cloneElement(
-
-            this.props.mapDialog,
-            { hide: !this.state.showMap, onClose: this.closeMap },
-
-            [...React.Children.toArray(this.props.mapDialog.props.children), (
-                <>
-                    <ModalContent className={defaultClasses.dialogContent} key="dialogContent">
-                        {this.renderMap()}
-                    </ModalContent>
-                    {this.renderDialogActions()}
-                </>
-            )],
-        );
-        return clonedDialog;
-    }
-
-    setMapInstance = (mapInstance: any) => {
-        this.mapInstance = mapInstance;
-    }
-
-    search = (position: any) => {
-        const zoom = this.mapInstance && this.mapInstance.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
-        this.setMapPosition([...position], zoom);
     }
 
     renderMap = () => {
