@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 
 import { MultiSelectionsBoxes } from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
 import { SingleSelectionBoxes } from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
@@ -8,7 +7,8 @@ import { withKeyboardNavigation } from '../internal/SelectionBoxes/withKeyboardN
 import { orientations } from '../constants/orientations.const';
 
 type Props = {
-    multiSelect?: ?boolean,
+    multiSelect?: boolean | null;
+    [key: string]: any;
 };
 
 const SelectionBoxesPlain = (props: Props) => {
@@ -16,7 +16,6 @@ const SelectionBoxesPlain = (props: Props) => {
 
     if (multiSelect) {
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <MultiSelectionsBoxes
                 orientation={orientations.HORIZONTAL}
                 {...passOnProps}
@@ -25,7 +24,6 @@ const SelectionBoxesPlain = (props: Props) => {
     }
 
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
         <SingleSelectionBoxes
             orientation={orientations.HORIZONTAL}
             {...passOnProps}

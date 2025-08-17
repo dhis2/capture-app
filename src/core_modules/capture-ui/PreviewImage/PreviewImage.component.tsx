@@ -1,11 +1,10 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
 const width = 120;
 const height = 80;
 
-const getStyles = () => ({
+const getStyles: Readonly<any> = {
     container: {
         width,
         height,
@@ -35,20 +34,15 @@ const getStyles = () => ({
         cursor: 'pointer',
         visibility: 'hidden',
     },
-});
+};
 
-const PreviewImagePlain = (props: {
-    url: string,
-    previewUrl: string,
-    alignLeft?: boolean,
-    classes: {
-        container: string,
-        imageContainer: string,
-        image: string,
-        icon: string,
-    },
-}) => {
-    const { url, previewUrl, alignLeft, classes } = props;
+type Props = {
+    url: string;
+    previewUrl: string;
+    alignLeft?: boolean;
+};
+
+const PreviewImagePlain = ({ url, previewUrl, alignLeft, classes }: Props & WithStyles<any>) => {
     const imageWidth = alignLeft ? undefined : width;
 
     return (
