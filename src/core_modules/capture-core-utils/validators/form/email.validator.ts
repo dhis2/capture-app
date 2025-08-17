@@ -6,4 +6,5 @@
  */
 const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-export const isValidEmail = (value: string) => emailRegExp.test(value);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidEmail = (value: string, _internalComponentError?: {error?: string, errorCode?: string}) => emailRegExp.test(value);

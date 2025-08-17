@@ -4,7 +4,8 @@
  * @param {string} value
  * @returns {boolean}
  */
-export const isValidNegativeInteger = (value: string) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidNegativeInteger = (value: string, _internalComponentError?: {error?: string, errorCode?: string}) => {
     if (isNaN(value as any)) {
         return false;
     }

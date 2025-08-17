@@ -6,7 +6,7 @@ import { dataElementTypes } from '../../../../../../metaData';
 
 const preValidateDate = (
     value?: string,
-    internalComponentError?: {error: string | null, errorCode: string | null} | null,
+    internalComponentError?: {error?: string, errorCode?: string},
 ) => {
     if (!value) {
         return true;

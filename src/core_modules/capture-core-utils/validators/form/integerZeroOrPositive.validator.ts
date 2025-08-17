@@ -6,9 +6,10 @@ import { isValidPositiveInteger } from './integerPositive.validator';
  * @param {string} value
  * @returns {boolean}
  */
-export const isValidZeroOrPositiveInteger = (value: string) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidZeroOrPositiveInteger = (value: string, _internalComponentError?: {error?: string, errorCode?: string}) => {
     if (value === '0') {
         return true;
     }
-    return isValidPositiveInteger(value);
+    return isValidPositiveInteger(value, _internalComponentError);
 };

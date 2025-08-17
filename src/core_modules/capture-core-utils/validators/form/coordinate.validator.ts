@@ -19,7 +19,8 @@ function isNumValid(num: any) {
  * @param { Object } value
  * @returns { boolean }
  */
-export const isValidCoordinate = (value: Location) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidCoordinate = (value: Location, _internalComponentError?: {error?: string, errorCode?: string}) => {
     if (!value) {
         return false;
     }

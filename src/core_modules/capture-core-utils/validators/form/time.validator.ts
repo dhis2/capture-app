@@ -6,7 +6,8 @@ import { parseTime } from '../../parsers';
  * @param {string} value
  * @returns {boolean}
  */
-export function isValidTime(value: string) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function isValidTime(value: string, _internalComponentError?: {error?: string, errorCode?: string}) {
     const momentTime = parseTime(value);
     return momentTime.isValid;
 }

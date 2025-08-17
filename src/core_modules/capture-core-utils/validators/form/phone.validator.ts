@@ -4,4 +4,5 @@
  * @param {string} value
  * @returns {boolean}
  */
-export const isValidPhoneNumber = (value: string) => /^[^a-zA-Z]+$/.test(value);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidPhoneNumber = (value: string, _internalComponentError?: {error?: string, errorCode?: string}) => /^[^a-zA-Z]+$/.test(value);
