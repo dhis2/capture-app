@@ -90,7 +90,7 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
                     })
                     .catch(() => {
                         log.error(`could not get the fallback date-fns locale for ${locale}`);
-                        reject();
+                        reject(new Error(`could not get the fallback date-fns locale for ${locale}`));
                     });
             });
     });
