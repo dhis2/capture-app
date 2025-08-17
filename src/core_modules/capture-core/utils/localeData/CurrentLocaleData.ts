@@ -12,7 +12,7 @@ export type LocaleDataType = {
 }
 
 export class CurrentLocaleData {
-    static currentData: LocaleDataType;
+    private static currentData: LocaleDataType;
 
     static set(data: LocaleDataType) {
         CurrentLocaleData.currentData = data;
