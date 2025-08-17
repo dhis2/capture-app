@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import log from 'loglevel';
 import { useDataEngine } from '@dhis2/app-runtime';
 import type { QueryFunction, UseQueryOptions } from 'react-query';
-import type { ResourceQuery } from '../../../../capture-core-utils/types/app-runtime';
+import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace, IndexedDBNamespace } from '../reactQueryHelpers.const';
