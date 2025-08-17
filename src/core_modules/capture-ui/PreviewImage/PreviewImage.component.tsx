@@ -56,6 +56,7 @@ const PreviewImagePlain = ({ url, previewUrl, alignLeft, classes }: Props & With
                 >
                     <img
                         src={previewUrl}
+                        alt="Preview"
                         className={classes.image}
                         width={imageWidth}
                     />

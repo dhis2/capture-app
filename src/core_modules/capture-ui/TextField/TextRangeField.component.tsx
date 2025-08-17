@@ -21,11 +21,11 @@ type TextRangeValue = {
 }
 
 type Props = {
-    classes?: any | null;
-    innerMessage?: any | null;
+    classes?: any;
+    innerMessage?: any;
     value: TextRangeValue;
     onChange: (value: TextRangeValue | null) => void;
-    onBlur: (value: TextRangeValue | null, opts?: any | null) => void;
+    onBlur: (value: TextRangeValue | null, opts?: any) => void;
     [key: string]: any;
 }
 
@@ -36,17 +36,6 @@ export class TextRangeField extends React.Component<Props> {
     }
 
     getValue = () => this.props.value || {};
-
-    getNewValue = (key: string, newValue: any) => {
-        const value = {
-            ...this.getValue(),
-            [key]: newValue,
-        };
-        if (!value.from && !value.to) {
-            return null;
-        }
-        return value;
-    }
 
     getInnerMessage = (key: string) => {
         const { classes, innerMessage } = this.props;
@@ -109,8 +98,8 @@ export class TextRangeField extends React.Component<Props> {
 
     render() {
         const { value, onChange, onBlur, ...passOnProps } = this.props;
-        const fromValue = value && value.from ? value.from : '';
-        const toValue = value && value.to ? value.to : '';
+        const fromValue = value?.from ?? '';
+        const toValue = value?.to ?? '';
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.inputContainer}>
