@@ -10,11 +10,13 @@ export type Validations = {
 export const validateValue = async ({
     validators,
     value,
+    validationContext,
     postProcessAsyncValidatonInitiation,
     commitOptions,
 }: {
     validators?: Array<ValidatorContainer>;
     value: any;
+    validationContext?: any | null;
     postProcessAsyncValidatonInitiation?: any;
     commitOptions?: any | null;
 }): Promise<Validations> => {

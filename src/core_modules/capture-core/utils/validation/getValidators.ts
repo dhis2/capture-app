@@ -274,7 +274,7 @@ function buildUniqueValidator(
         [];
 }
 
-export const getValidators = (metaData: DataElement | DateDataElement): Array<ValidatorContainer> => [
+export const getValidators = (metaData: DataElement | DateDataElement, querySingleResource?: any): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
