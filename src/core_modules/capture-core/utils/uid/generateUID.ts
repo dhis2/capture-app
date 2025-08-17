@@ -1,5 +1,3 @@
-// @flow
-
 export const generateUID = (): string => {
     const letters = 'abcdefghijklmnopqrstuvwxyz' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const allowedChars = `0123456789${letters}`;
