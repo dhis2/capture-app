@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import {
     convertToIso8601,
@@ -12,14 +11,14 @@ import { padWithZeros } from '../../../../capture-core-utils/date';
  * @param {string} localDate - date in local calendar format
  * @returns {string}
  */
-export function convertLocalToIsoCalendar(localDate: ?string): string {
+export function convertLocalToIsoCalendar(localDate: string | null | undefined): string {
     if (!localDate) {
         return '';
     }
 
     const calendar = systemSettingsStore.get().calendar;
 
-    const { year, month, day } = convertToIso8601(localDate, calendar);
+    const { year, month, day } = convertToIso8601(localDate, calendar as any);
     const dateString = `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
     const parsedMoment = moment(dateString);
 
