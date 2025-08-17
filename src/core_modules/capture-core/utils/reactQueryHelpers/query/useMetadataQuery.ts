@@ -2,7 +2,6 @@ import { useQuery } from 'react-query';
 import log from 'loglevel';
 import { useDataEngine } from '@dhis2/app-runtime';
 import type { QueryFunction, UseQueryOptions } from 'react-query';
-import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace, IndexedDBNamespace } from '../reactQueryHelpers.const';
@@ -19,7 +18,7 @@ const throwErrorForIndexedDB = (error: any) => {
 };
 
 const useAsyncMetadata = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | void>,
     queryFn: QueryFunction<TResultData>,
     queryOptions: UseQueryOptions<TResultData>,
 ): Result<TResultData> => useQuery<TResultData>([ReactQueryAppNamespace, ...queryKey], queryFn, {
@@ -28,7 +27,7 @@ const useAsyncMetadata = <TResultData>(
 });
 
 export const useCustomMetadataQuery = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | void>,
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
@@ -39,7 +38,7 @@ export const useCustomMetadataQuery = <TResultData>(
 
 
 export const useIndexedDBQuery = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | void>,
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
@@ -53,16 +52,28 @@ export const useIndexedDBQuery = <TResultData>(
         });
 
 export const useApiMetadataQuery = <TResultData>(
-    queryKey: Array<string | number>,
-    queryObject: ResourceQuery,
+    queryKey: Array<string | number | any | null | void>,
+    queryObject: any,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
-    const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
-        .then(response => response.theQuerykey as TResultData);
+    const queryFn: QueryFunction<TResultData> = () => {
+        if (!queryObject) {
+            throw new Error('Query object is required');
+        }
+
+        const processedQuery = { ...queryObject };
+        if (typeof queryObject.id === 'function') {
+            processedQuery.id = queryObject.id();
+        }
+
+        return dataEngine.query({ theQuerykey: processedQuery })
+            .then(response => response.theQuerykey as TResultData);
+    };
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
+        enabled: !!queryObject,
         ...queryOptions,
     });
 };
