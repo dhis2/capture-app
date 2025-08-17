@@ -1,8 +1,7 @@
-// @flow
 export type LocaleDataType = {
-    dateFnsLocale: Object,
-    weekDaysShort: Array<string>,
-    weekDays: Array<string>,
+    dateFnsLocale: any,
+    weekDaysShort: string[],
+    weekDays: string[],
     selectDatesText: string,
     selectDateText: string,
     calendarFormatHeaderLong: string,
@@ -13,8 +12,7 @@ export type LocaleDataType = {
 }
 
 export class CurrentLocaleData {
-    // $FlowFixMe[missing-annot] automated comment
-    static currentData;
+    private static currentData: LocaleDataType;
 
     static set(data: LocaleDataType) {
         CurrentLocaleData.currentData = data;
