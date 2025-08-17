@@ -1,4 +1,3 @@
-// @flow
 export const actionTypes = {
     START_ENROLLMENT_LOAD: 'StartEnrollmentLoad',
     ENROLLMENT_LOADED: 'EnrollmentLoaded',

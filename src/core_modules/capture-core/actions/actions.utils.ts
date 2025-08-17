@@ -1,4 +1,3 @@
-// @flow
 /**
  * @module actionUtils
  */
@@ -9,7 +8,7 @@
  * @returns {function} a function accepting payload, meta and error -> returning an FSA-compliant action
  */
 export function actionCreator(type: string) {
-    return (payload: any, meta: any, error: any) => ({
+    return (payload?: any, meta?: any, error?: any) => ({
         type,
         payload,
         meta,
@@ -17,8 +16,8 @@ export function actionCreator(type: string) {
     });
 }
 
-export function actionPayloadAppender(action: ReduxAction<Object, any>) {
-    return (payload: Object) => ({
+export function actionPayloadAppender(action: any) {
+    return (payload: any) => ({
         ...action,
         payload: {
             ...action.payload,

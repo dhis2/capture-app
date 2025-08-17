@@ -1,5 +1,3 @@
-// @flow
-
 import { actionCreator } from '../actions.utils';
 import type { NavigateToEnrollmentOverviewProps } from './navigateToEnrollmentOverview.types';
 
