@@ -77,7 +77,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
             >
                 <SearchProgramSelector
                     searchId={props.id}
-                    selectedProgramId={props.selectedProgramId || undefined}
+                    selectedProgramId={props.selectedProgramId ?? undefined}
                     selectedTrackedEntityTypeId={props.selectedTrackedEntityTypeId}
                 />
             </Section>
@@ -146,7 +146,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     onEditSearch={handleEditSearch}
                     getResultsView={getResultsView}
                     searchGroups={searchGroups}
-                    selectedProgramId={selectedProgramId || undefined}
+                    selectedProgramId={selectedProgramId ?? undefined}
                     selectedTrackedEntityTypeId={selectedTrackedEntityTypeId}
                     trackedEntityTypeName={trackedEntityTypeName}
                 />
