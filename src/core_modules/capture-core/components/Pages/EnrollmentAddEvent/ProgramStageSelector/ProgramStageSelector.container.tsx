@@ -104,6 +104,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                 <Widget
                     header={i18n.t('Choose a stage for a new event')}
                     noncollapsible
+                    data-test="enrollment-newEvent-page"
                 >
                     <ProgramStageSelectorComponent
                         programStages={availableStages}
