@@ -1,8 +1,7 @@
-// @flow
 import React from 'react';
 
 type Props = {
-  className?: string,
+  className?: string;
 };
 
 export function ChevronDown({ className }: Props) {

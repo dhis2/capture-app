@@ -1,9 +1,8 @@
-// @flow
 import React from 'react';
 import { SvgIcon } from '../internal/SvgIcon/SvgIcon.component';
 
 type Props = {
-
+    className?: string;
 };
 
 export const SingleSelectionUncheckedIcon = (props: Props) => (
