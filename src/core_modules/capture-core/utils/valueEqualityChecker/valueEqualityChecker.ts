@@ -1,5 +1,4 @@
 
-// @flow
 /* eslint-disable complexity */
 
 export function isEqual(a: any, b: any) {

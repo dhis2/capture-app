@@ -1,21 +1,20 @@
-// @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
 import { getLocationQuery } from './routing';
 
 export type Url = {
-    programId?: string,
-    orgUnitId?: string,
-    trackedEntityTypeId?: string,
-    teiId?: string,
-    enrollmentId?: string,
-    stageId?: string,
-    eventId?: string,
-    tab?: string,
-    viewEventId?: string,
-    selectedTemplateId?: string,
+    programId?: string;
+    orgUnitId?: string;
+    trackedEntityTypeId?: string;
+    teiId?: string;
+    enrollmentId?: string;
+    stageId?: string;
+    eventId?: string;
+    tab?: string;
+    viewEventId?: string;
+    selectedTemplateId?: string;
 }
 
-export const deriveUrlQueries = (state: Object) => {
+export const deriveUrlQueries = (state: any) => {
     const {
         currentSelections: {
             programId: selectedProgramId,
@@ -53,9 +52,8 @@ export const getLocationPathname = () => {
     }
 };
 
-// TODO - This will be removed when the link to tracker capture is removed
 export const getLocationSearch = () => window.location.search;
 
 
-export const pageFetchesOrgUnitUsingTheOldWay = (page: string, pages: Object = pageKeys): boolean =>
-    Object.values(pages).includes(page);
+export const pageFetchesOrgUnitUsingTheOldWay = (page: string | undefined, pages: any = pageKeys): boolean =>
+    (page ? Object.values(pages).includes(page) : false);

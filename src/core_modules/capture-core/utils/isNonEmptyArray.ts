@@ -1,4 +1,3 @@
-// @flow
 import isArray from 'd2-utilizr/src/isArray';
 
 export function isNonEmptyArray(toCheck: any) {
