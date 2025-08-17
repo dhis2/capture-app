@@ -72,7 +72,7 @@ export const AppLoader = (props: Props) => {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {
                 logError((error as any).innerError);
-                message += ` ${error instanceof Error ? error.message : String(error)}`;
+                message += ` ${error.toString()}`;
             } else {
                 logError(error);
                 if (process.env.NODE_ENV !== environments.prod) {
