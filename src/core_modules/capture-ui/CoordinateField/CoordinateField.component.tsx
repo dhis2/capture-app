@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
@@ -10,42 +9,19 @@ import { AddLocationIcon } from '../Icons';
 import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
 import { orientations } from '../constants/orientations.const';
+import type { PlainProps, State, Coordinate } from './CoordinateField.types';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
-
-type Coordinate = {
-    latitude?: ?string,
-    longitude?: ?string,
-}
-
-type Props = {
-  onBlur: (value: any) => void,
-  onOpenMap?: (hasValue: boolean) => void,
-  onCloseMap?: () => void,
-  orientation: $Values<typeof orientations>,
-  center?: ?Array<number>,
-  onChange?: ?(value: any) => void,
-  value?: ?Coordinate,
-  shrinkDisabled?: ?boolean,
-  classes?: ?Object,
-  mapDialog: React.Element<any>,
-  disabled?: ?boolean,
-};
-type State = {
-    showMap: ?boolean,
-    position?: ?Array<number>,
-    zoom: number,
-}
 
 const coordinateKeys = {
     LATITUDE: 'latitude',
     LONGITUDE: 'longitude',
 };
 
-export class CoordinateField extends React.Component<Props, State> {
-    mapInstance: ?any;
+export class CoordinateField extends React.Component<PlainProps, State> {
+    mapInstance: any | null;
 
-    constructor(props: Props) {
+    constructor(props: PlainProps) {
         super(props);
 
         this.state = {
@@ -55,7 +31,6 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     componentDidUpdate() {
-        // Invalidate map size to fix rendering bug
         if (this.mapInstance && this.state.showMap) {
             this.mapInstance.leafletElement.invalidateSize();
         }
@@ -80,9 +55,9 @@ export class CoordinateField extends React.Component<Props, State> {
         this.props.onBlur(null);
     }
 
-    getPosition = () => {
+    getPosition = (): Array<number> | null => {
         const { value } = this.props;
-        let convertedValue = null;
+        let convertedValue: Array<number> | null = null;
         if (value && value.latitude && value.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
             convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
         }
@@ -198,16 +173,14 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     renderDialogActions = () => (
-        <ModalActions className={defaultClasses.dialogActionOuterContainer}>
+        <ModalActions>
             <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="basic" onClick={this.closeMap}>
+                <Button secondary onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="primary" onClick={this.onSetCoordinate}>
+                <Button primary onClick={this.onSetCoordinate}>
                     {i18n.t('Set coordinate')}
                 </Button>
             </div>
@@ -218,7 +191,6 @@ export class CoordinateField extends React.Component<Props, State> {
         const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Latitude"
@@ -237,7 +209,6 @@ export class CoordinateField extends React.Component<Props, State> {
         const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Longitude"
