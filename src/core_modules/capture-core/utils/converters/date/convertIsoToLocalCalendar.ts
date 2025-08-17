@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import {
     convertFromIso8601,
@@ -13,7 +12,7 @@ import { padWithZeros } from '../../../../capture-core-utils/date';
  * @returns {string}
  */
 
-export function convertIsoToLocalCalendar(isoDate: ?string): string {
+export function convertIsoToLocalCalendar(isoDate: string | null | undefined): string {
     if (!isoDate) {
         return '';
     }
@@ -28,10 +27,10 @@ export function convertIsoToLocalCalendar(isoDate: ?string): string {
     const calendar = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;
 
-    const { year, eraYear, month, day } = convertFromIso8601(formattedIsoDate, calendar);
+    const { year, eraYear, month, day } = convertFromIso8601(formattedIsoDate, calendar as any);
     const localYear = calendar === 'ethiopian' ? eraYear : year;
 
     return dateFormat === 'DD-MM-YYYY'
-        ? `${padWithZeros(day, 2)}-${padWithZeros(month, 2)}-${padWithZeros(localYear, 4)}`
-        : `${padWithZeros(localYear, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
+        ? `${padWithZeros(day ?? 0, 2)}-${padWithZeros(month ?? 0, 2)}-${padWithZeros(localYear ?? 0, 4)}`
+        : `${padWithZeros(localYear ?? 0, 4)}-${padWithZeros(month ?? 0, 2)}-${padWithZeros(day ?? 0, 2)}`;
 }

@@ -1,4 +1,3 @@
-// @flow
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 /**

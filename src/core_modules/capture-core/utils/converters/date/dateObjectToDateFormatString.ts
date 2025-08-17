@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
 
@@ -8,7 +7,7 @@ import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
  * @param {Date} dateValue: the date instance
  * @returns {string}
  */
-export function convertDateObjectToDateFormatString(dateValue: Date | moment$Moment) {
+export function convertDateObjectToDateFormatString(dateValue: Date | any) {
     const momentDate = moment(dateValue);
     const dateString = momentDate.format('YYYY-MM-DD');
     return convertIsoToLocalCalendar(dateString);
