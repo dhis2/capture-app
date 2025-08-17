@@ -1,13 +1,12 @@
-// @flow
 import { useMemo, useRef, useState } from 'react';
 import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
 
 export const useSystemSettingsFromIndexedDB = (
     key: string,
-): {| [key: string]: string, loading: boolean, error?: boolean |} => {
+): { loading: boolean; error?: any; [key: string]: any } => {
     const [cachedSystemSettings, setCachedSystemSettings] = useState({ });
     const [loading, setLoading] = useState(true);
-    const error = useRef();
+    const error = useRef<any>(undefined);
     const storageController = getMainStorageController();
 
     useMemo(() => {

@@ -1,8 +1,7 @@
-// @flow
-import type { Query, ResourceQuery, QueryVariables } from '@dhis2/app-runtime';
+import type { ResourceQuery, QueryVariables } from 'capture-core-utils/types/app-runtime';
 
-export const makeQuerySingleResource = (query: Query) =>
-    async (resourceQuery: ResourceQuery, variables?: QueryVariables = {}) => {
+export const makeQuerySingleResource = (query: any) =>
+    async (resourceQuery: ResourceQuery, variables: QueryVariables = {}) => {
         const resourceQueries = {
             [resourceQuery.resource]: resourceQuery,
         };
