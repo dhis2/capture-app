@@ -1,4 +1,3 @@
-// @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
@@ -6,49 +5,43 @@ import type { Reducer } from 'redux';
 
 import { environments } from '../constants/environments';
 
-type Action = {
-    type: string,
-    [props: string]: any
-}
+type Action = any;
 
 type ActionOnReducerData = (state: any, action: Action) => void;
 
 type ReducerWrapper = (reducer: Reducer<any, Action>) => Reducer<any, Action>;
 
 type ReducerDescription = {
-    initValue: any,
-    name: string,
-    updaters: Object,
-    reducerWrappers: ?ReducerWrapper | Array<ReducerWrapper>
+    initValue: any;
+    name: string;
+    updaters: any;
+    reducerWrappers?: ReducerWrapper | Array<ReducerWrapper>;
 };
 
-type Updater = (state: ReduxState, action: Action) => ReduxState;
+type Updater = (state: any, action: Action) => any;
 export type Updaters = { [type: string]: Updater };
 
 function updateStatePartInProduction<T>(
-    state: ?T,
+    state: T | null | undefined,
     action: Action,
-    updatersForActionTypes: {[actionType: string]: () => T},
+    updatersForActionTypes: {[actionType: string]: (currentState: T, currentAction: Action) => T},
     initValue: T): T {
     if (!isDefined(state) || state === null) {
         state = initValue;
     }
 
     if (updatersForActionTypes[action.type]) {
-        // $FlowFixMe[extra-arg] automated comment
-        const newState = updatersForActionTypes[action.type](state, action);
+        const newState = updatersForActionTypes[action.type](state!, action);
         return newState;
     }
 
-
-    // $FlowFixMe[incompatible-return] automated comment
-    return state;
+    return state!;
 }
 
 function updateStatePartInDevelopment<T>(
-    state: ?T,
+    state: T | null | undefined,
     action: Action,
-    updatersForActionTypes: {[actionType: string]: () => T},
+    updatersForActionTypes: {[actionType: string]: (currentState: T, currentAction: Action) => T},
     initValue: T,
     onUpdaterFound: ActionOnReducerData,
     onUpdaterExecuted: ActionOnReducerData): T {
@@ -59,15 +52,12 @@ function updateStatePartInDevelopment<T>(
     if (updatersForActionTypes[action.type]) {
         onUpdaterFound(state, action);
 
-        // $FlowFixMe[extra-arg] automated comment
-        const newState = updatersForActionTypes[action.type](state, action);
+        const newState = updatersForActionTypes[action.type](state!, action);
         onUpdaterExecuted(state, action);
         return newState;
     }
 
-
-    // $FlowFixMe[incompatible-return] automated comment
-    return state;
+    return state!;
 }
 
 const getUpdaterFoundFn =
@@ -93,7 +83,7 @@ const getProductionReducer =
             updateStatePartInProduction(state, action, reducerDescription.updaters, reducerDescription.initValue);
 
 const createLogAction = (action: Action) => {
-    const payloadOverride = action.meta && action.meta.skipLogging && action.meta.skipLogging.reduce((accSkipLogging, item) => {
+    const payloadOverride = action.meta && action.meta.skipLogging && action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
         accSkipLogging[item] = null;
         return accSkipLogging;
     }, {});
@@ -124,13 +114,10 @@ const getDevelopmentReducer = (reducerDescription: ReducerDescription) => {
 
 function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWrapper | Array<ReducerWrapper>) {
     if (isArray(reducerWrappers)) {
-        // $FlowFixMe[prop-missing] automated comment
-        return reducerWrappers.reduceRight((prevReducer, currentReducer) => currentReducer(prevReducer), reducer);
+        return (reducerWrappers as Array<ReducerWrapper>).reduceRight((prevReducer, currentReducer) => currentReducer(prevReducer), reducer);
     }
 
-
-    // $FlowFixMe[not-a-function] automated comment
-    return reducerWrappers(reducer);
+    return (reducerWrappers as ReducerWrapper)(reducer);
 }
 
 function buildReducer(reducerDescription: ReducerDescription) {
@@ -159,7 +146,7 @@ export function createReducerDescription(
     updaters: Updaters,
     name: string,
     initValue: any = {},
-    reducerWrappers?: ?ReducerWrapper | Array<ReducerWrapper>): ReducerDescription {
+    reducerWrappers?: ReducerWrapper | Array<ReducerWrapper>): ReducerDescription {
     return {
         initValue,
         name,
