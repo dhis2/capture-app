@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
 
 export const actionTypes = {
