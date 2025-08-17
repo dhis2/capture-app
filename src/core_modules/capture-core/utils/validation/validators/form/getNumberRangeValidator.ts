@@ -20,5 +20,7 @@ export const getNumberRangeValidator = (validatorContainer: any) =>
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }
-        return parseNumber(value.from) <= parseNumber(value.to);
+        const fromNumber = parseNumber(value.from);
+        const toNumber = parseNumber(value.to);
+        return fromNumber !== null && toNumber !== null && fromNumber <= toNumber;
     };
