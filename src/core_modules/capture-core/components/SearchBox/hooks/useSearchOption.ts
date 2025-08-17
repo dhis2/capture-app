@@ -3,7 +3,7 @@ import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgr
 import { buildSearchOption } from '../../../hooks/useSearchOptions';
 import { useTrackedEntityTypeFromIndexedDB } from '../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
 import { useUserLocale } from '../../../utils/localeData/useUserLocale';
-import type { AvailableSearchOption, SearchGroups } from '../SearchBox.types';
+import type { AvailableSearchOption } from '../SearchBox.types';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { buildSearchGroup } from './index';
 
