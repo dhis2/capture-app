@@ -1,4 +1,3 @@
-// @flow
 import { formatterOptions } from './format.const';
 import { capitalize } from './capitalize';
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
@@ -10,6 +9,6 @@ const mapOptionsToFormatters = {
     [formatterOptions.CAPITALIZE_FIRST_LETTER_IN_WORDS]: capitalizeFirstLetterInWords,
 };
 
-export function format(text: string, formatterOption: $Values<typeof formatterOptions>) {
+export function format(text: string, formatterOption: keyof typeof formatterOptions) {
     return mapOptionsToFormatters[formatterOption] ? mapOptionsToFormatters[formatterOption](text) : text;
 }

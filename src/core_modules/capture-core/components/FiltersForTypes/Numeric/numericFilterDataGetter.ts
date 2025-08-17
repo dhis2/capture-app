@@ -11,7 +11,7 @@ export function getNumericFilterData(value: Value): NumericFilterData {
     const max = value.max || undefined;
 
     return {
-        ge: min && parseNumber(min),
-        le: max && parseNumber(max),
+        ge: min ? parseNumber(min) : undefined,
+        le: max ? parseNumber(max) : undefined,
     };
 }

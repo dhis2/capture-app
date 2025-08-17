@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 
 export function parseTime(value: string) {

@@ -99,7 +99,7 @@ export class OptionSetFactory {
             cachedOptionSet.attributeValues,
         );
         optionSet.inputType = OptionSetFactory.getRenderType(renderType) ||
-            (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
+            (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : undefined);
         return optionSet;
     }
 }

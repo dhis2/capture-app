@@ -1,5 +1,3 @@
-// @flow
-
 export function capitalizeFirstLetterInWords(text: string) {
     return text
         .split(' ')
