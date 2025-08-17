@@ -1,4 +1,3 @@
-// @flow
 import { isValidPositiveInteger } from './integerPositive.validator';
 
 /**

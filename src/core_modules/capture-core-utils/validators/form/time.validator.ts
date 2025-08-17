@@ -1,4 +1,3 @@
-// @flow
 import { parseTime } from '../../parsers';
 
 /**

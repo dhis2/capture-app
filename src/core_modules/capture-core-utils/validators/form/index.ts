@@ -1,4 +1,3 @@
-// @flow
 export { hasValue } from './compulsory.validator';
 export { isValidEmail } from './email.validator';
 export { isValidInteger } from './integer.validator';

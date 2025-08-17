@@ -1,4 +1,3 @@
-// @flow
 /**
  *
  * @export
@@ -6,7 +5,7 @@
  * @returns {boolean}
  */
 export const isValidNegativeInteger = (value: string) => {
-    if (isNaN(value)) {
+    if (isNaN(value as any)) {
         return false;
     }
 
