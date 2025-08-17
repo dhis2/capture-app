@@ -1,4 +1,3 @@
-// @flow
 export { isValidDate } from './dateValidator';
 export { isValidDateTime } from './dateTimeValidator';
 export { isValidAge } from './ageValidator';

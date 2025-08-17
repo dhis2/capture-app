@@ -1,20 +1,19 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { isValidTime } from 'capture-core-utils/validators/form';
 import { isValidDate } from './dateValidator';
 
 type DateTimeValue = {
-    date?: ?string,
-    time?: ?string,
+    date?: string | null;
+    time?: string | null;
 };
 
 type ValidationResult = {
-    valid: boolean,
+    valid: boolean;
     errorMessage?: {
-        timeError?: ?string,
-        dateError?: ?string
-    },
-    data?: any,
+        timeError?: string | null;
+        dateError?: string | null;
+    };
+    data?: any;
 };
 
 const CUSTOM_VALIDATION_MESSAGES = {
@@ -23,8 +22,8 @@ const CUSTOM_VALIDATION_MESSAGES = {
     MISSING_DATE: i18n.t('Please enter a date'),
 };
 
-export function isValidDateTime(value: ?DateTimeValue,
-    internalComponentError?: ?{error: ?string, errorCode: ?string}): ValidationResult {
+export function isValidDateTime(value: DateTimeValue | null | undefined,
+    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined): ValidationResult {
     if (!value) {
         return { valid: true };
     }
@@ -40,7 +39,7 @@ export function isValidDateTime(value: ?DateTimeValue,
     } else {
         const dateValidation = isValidDate(date, internalComponentError);
         if (!dateValidation.valid) {
-            dateError = dateValidation?.errorMessage;
+            dateError = dateValidation?.errorMessage || '';
             isValid = false;
         }
     }

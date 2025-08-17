@@ -1,6 +1,4 @@
-// @flow
-
-export const areRelativeRangeValuesSupported = (startBuffer: ?number, endBuffer: ?number) =>
+export const areRelativeRangeValuesSupported = (startBuffer: number | null | undefined, endBuffer: number | null | undefined) =>
     startBuffer !== undefined &&
     startBuffer !== null &&
     Number.isInteger(startBuffer) &&

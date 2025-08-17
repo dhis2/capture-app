@@ -1,14 +1,7 @@
-// @flow
 import { isValidTime } from 'capture-core-utils/validators/form';
 import moment from 'moment';
-/**
- *
- * @export
- * @param {string} value
- * @returns {boolean}
- */
 
-function isValidTimeWithEmptyCheck(value: ?string) {
+function isValidTimeWithEmptyCheck(value: string | null | undefined) {
     return value && isValidTime(value);
 }
 
@@ -25,16 +18,14 @@ const convertTimeToMoment = (value: string, baseDate: any) => {
         minutes = value.substring(3, 4);
     }
     const momentDateTime = moment(baseDate);
-    // $FlowFixMe
     momentDateTime.hour(hour);
-    // $FlowFixMe
     momentDateTime.minute(minutes);
     return momentDateTime;
 };
 
 export const getTimeRangeValidator = (invalidTimeMessage: string) =>
-    (value: { from?: ?string, to?: ?string}) => {
-        const errorResult = [];
+    (value: { from?: string | null, to?: string | null}) => {
+        const errorResult: any[] = [];
         if (!isValidTimeWithEmptyCheck(value.from)) {
             errorResult.push({ from: invalidTimeMessage });
         }
@@ -46,16 +37,12 @@ export const getTimeRangeValidator = (invalidTimeMessage: string) =>
         if (errorResult.length > 0) {
             return {
                 valid: false,
-                // $FlowFixMe[exponential-spread] automated comment
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }
         const baseDate = moment();
 
-        // $FlowFixMe
-        const fromParsed = convertTimeToMoment(value.from, baseDate);
-        // $FlowFixMe
-        const toParsed = convertTimeToMoment(value.to, baseDate);
-        // $FlowFixMe
+        const fromParsed = convertTimeToMoment(value.from || '', baseDate);
+        const toParsed = convertTimeToMoment(value.to || '', baseDate);
         return fromParsed <= toParsed;
     };

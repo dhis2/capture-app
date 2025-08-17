@@ -1,13 +1,12 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
 import { isValidDate } from './dateValidator';
 
 type AgeValues = {
-    date?: ?string,
-    years?: ?string,
-    months?: ?string,
-    days?: ?string,
+    date?: string | null;
+    years?: string | null;
+    months?: string | null;
+    days?: string | null;
 }
 
 const errorMessages = {
@@ -18,12 +17,12 @@ const errorMessages = {
 
 };
 
-function isValidNumberPart(value: ?string) {
+function isValidNumberPart(value: string | null | undefined) {
     return !value || isValidZeroOrPositiveInteger(value);
 }
 
-function validateNumbers(years: ?string, months: ?string, days: ?string) {
-    const errorResult = [];
+function validateNumbers(years: string | null | undefined, months: string | null | undefined, days: string | null | undefined) {
+    const errorResult: any[] = [];
 
     if (!isValidNumberPart(years)) {
         errorResult.push({ years: errorMessages.years });
@@ -38,14 +37,13 @@ function validateNumbers(years: ?string, months: ?string, days: ?string) {
     if (errorResult.length > 0) {
         return {
             valid: false,
-            // $FlowFixMe[exponential-spread] automated comment
             errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
         };
     }
     return { valid: true };
 }
 
-function validateDate(date: ?string, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
+function validateDate(date: string | null | undefined, internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
     const { valid } = isValidDate(date, internalComponentError);
     return valid ?
         { valid: true } :
@@ -57,7 +55,7 @@ function isAllEmpty(value: AgeValues) {
 }
 
 
-export function isValidAge(value: Object, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
+export function isValidAge(value: any, internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
     if (isAllEmpty(value)) {
         return false;
     }
