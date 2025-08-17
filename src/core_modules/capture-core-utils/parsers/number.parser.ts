@@ -1,4 +1,3 @@
-// @flow
 export function parseNumber(stringValue: string) {
     stringValue = stringValue.replace(/[ ]/g, '');
     stringValue = stringValue.replace(',', '.');

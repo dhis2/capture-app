@@ -1,5 +1,3 @@
-// @flow
-
 export const formatterOptions = {
     CAPITALIZE: 'capitalize',
     CAPITALIZE_FIRST_LETTER: 'capitalizeFirstLetter',
