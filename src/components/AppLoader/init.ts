@@ -1,18 +1,26 @@
-// @flow
-/* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import type { ServerVersion } from '@dhis2/app-runtime';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
 import i18n from '@dhis2/d2-i18n';
-import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
-
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+
+type LocaleDataType = {
+    dateFnsLocale: any;
+    weekDays: any;
+    weekDaysShort: any;
+    calendarFormatHeaderLong: string;
+    calendarFormatHeaderShort: string;
+    selectDatesText: string;
+    selectDateText: string;
+    todayLabelShort: string;
+    todayLabelLong: string;
+    weekStartsOn: number;
+};
 
 function setLogLevel() {
     const levels = {
@@ -22,7 +30,7 @@ function setLogLevel() {
         [environments.prod]: log.levels.ERROR,
     };
 
-    let level = levels[process.env.NODE_ENV];
+    let level = levels[process.env.NODE_ENV as keyof typeof levels];
     if (!level && level !== 0) {
         level = log.levels.ERROR;
     }
@@ -36,8 +44,7 @@ function setMomentLocaleAsync(locale: string) {
         return Promise.resolve();
     }
 
-    return new Promise((resolve) => {
-        // $FlowFixMe[unsupported-syntax] automated comment
+    return new Promise<void>((resolve) => {
         import(`moment/locale/${locale}`)
             .then(() => {
                 moment.locale(locale);
@@ -45,7 +52,6 @@ function setMomentLocaleAsync(locale: string) {
                 resolve();
             })
             .catch(() => {
-                // fallback to english
                 moment.locale('en');
                 log.error(`could not get moment locale config for ${locale}`);
                 resolve();
@@ -54,8 +60,7 @@ function setMomentLocaleAsync(locale: string) {
 }
 
 function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
-    return new Promise((resolve, reject) => {
-        // $FlowFixMe[unsupported-syntax] automated comment
+    return new Promise<void>((resolve, reject) => {
         import(`date-fns/locale/${locale}/index.js`)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
@@ -77,7 +82,7 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
             }).catch(() => {
                 log.error(`could not get date-fns locale config for ${locale}, fallback to en`);
 
-                import('date-fns/locale/en/index.js') // eslint-disable-line
+                import('date-fns/locale/en')
                     .then((dateFnLocale) => {
                         const localeData: LocaleDataType = {
                             dateFnsLocale: dateFnLocale,
@@ -103,29 +108,28 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
     });
 }
 
-function changeI18nLocale(locale) {
-    i18n.changeLanguage(locale);
+function changeI18nLocale(locale: string) {
+    (i18n as any).changeLanguage(locale);
 }
 
-function initI18n(locale) {
+function initI18n(locale: string) {
     changeI18nLocale(locale);
-    i18n.setDefaultNamespace('default');
+    (i18n as any).setDefaultNamespace('default');
 }
 
-async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
+async function setLocaleDataAsync(uiLocale: string) {
     const locale = uiLocale;
     await setMomentLocaleAsync(locale);
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
 
-    // $FlowFixMe[prop-missing] automated comment
-    const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
+    const firstDayOfWeek = (moment.localeData() as any).week.dow;
 
     await setDateFnLocaleAsync(locale, weekdays, weekdaysShort, firstDayOfWeek);
     initI18n(locale);
 }
 
-async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function, minorServerVersion: number) {
+async function initializeMetaDataAsync(dbLocale: string, onQueryApi: any, minorServerVersion: number) {
     await loadMetaData(onQueryApi);
     await buildMetaDataAsync(dbLocale, minorServerVersion);
 }
@@ -144,9 +148,9 @@ export async function initializeAsync({
     serverVersion,
     baseUrl,
 }: {
-    onCacheExpired: Function,
-    querySingleResource: Function,
-    serverVersion: ServerVersion,
+    onCacheExpired: () => void,
+    querySingleResource: any,
+    serverVersion: any,
     baseUrl: string,
 }) {
     setLogLevel();
@@ -171,7 +175,6 @@ export async function initializeAsync({
         },
     });
 
-    // initialize rule engine
     let ruleEngineSettings;
     try {
         ruleEngineSettings = await querySingleResource({
@@ -182,7 +185,6 @@ export async function initializeAsync({
     }
     initRulesEngine(ruleEngineSettings.version, userRoles);
 
-    // initialize storage controllers
     try {
         await initStorageControllers({
             onCacheExpired,
@@ -196,13 +198,10 @@ export async function initializeAsync({
         ), error);
     }
 
-    // set locale data
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
     await setLocaleDataAsync(uiLocale);
-    // initialize system settings
     await initializeSystemSettingsAsync({ ...systemSettings, baseUrl }, { uiLocale, captureScope, searchScope });
 
-    // initialize metadata
     await initializeMetaDataAsync(dbLocale, querySingleResource, serverVersion.minor);
 }

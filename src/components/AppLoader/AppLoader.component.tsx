@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { useDataEngine, useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -12,9 +11,14 @@ import { initFeatureAvailability } from 'capture-core-utils/featuresSupport';
 import { initializeAsync } from './init';
 import { getStore } from '../../store/getStore';
 
+type PlainReduxStore = {
+    dispatch: (action: any) => void;
+    getState: () => any;
+};
+
 type Props = {
-    onRunApp: (store: PlainReduxStore) => void,
-    onCacheExpired: Function,
+    onRunApp: (store: PlainReduxStore) => void;
+    onCacheExpired: () => void;
 };
 
 const useApiUtils = () => {
@@ -24,7 +28,7 @@ const useApiUtils = () => {
     return useMemo(() => ({
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
-        absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
+        absoluteApiPath: buildUrl((dataEngine as any).link.config.baseUrl, (dataEngine as any).link.versionedApiPath),
         serverVersion,
         baseUrl,
         fromClientDate,
@@ -33,7 +37,7 @@ const useApiUtils = () => {
 
 export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
-    const [loadError, setLoadError] = React.useState(null);
+    const [loadError, setLoadError] = React.useState<string | null>(null);
     const { querySingleResource, mutate, absoluteApiPath, serverVersion, baseUrl, fromClientDate } = useApiUtils();
 
     const { navigate } = useNavigate();
@@ -52,7 +56,7 @@ export const AppLoader = (props: Props) => {
             await initializeAsync({
                 onCacheExpired,
                 querySingleResource,
-                serverVersion,
+                serverVersion: serverVersion as any,
                 baseUrl,
             });
             const store = await getStore(
@@ -67,7 +71,7 @@ export const AppLoader = (props: Props) => {
         } catch (error) {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {
-                logError(error.innerError);
+                logError((error as any).innerError);
                 message += ` ${error.toString()}`;
             } else {
                 logError(error);
