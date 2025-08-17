@@ -1,8 +1,8 @@
 import React from 'react';
 
-type Props = {
+type Props = Readonly<{
   className?: string;
-};
+}>;
 
 export function ChevronDown({ className }: Props) {
     return (

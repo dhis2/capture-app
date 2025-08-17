@@ -47,8 +47,8 @@ const styles: Readonly<any> = {
 };
 
 const ChevronIconPlain = ({ open, onOpen, onClose, dataTest, disabled, classes }: ChevronIconProps & WithStyles<typeof styles>) => {
-    const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
-    const [animationsReady, setAnimationsReadyStatus] = useState(false);
+    const [postEffectOpen, setPostEffectOpen] = useState(open);
+    const [animationsReady, setAnimationsReady] = useState(false);
 
     const handleClick = () => {
         if (disabled) {
@@ -59,10 +59,10 @@ const ChevronIconPlain = ({ open, onOpen, onClose, dataTest, disabled, classes }
 
     useEffect(() => {
         if (!animationsReady) {
-            setAnimationsReadyStatus(true);
+            setAnimationsReady(true);
         }
 
-        setPostEffectOpenStatus(open);
+        setPostEffectOpen(open);
     }, [open, animationsReady]);
 
     return (
