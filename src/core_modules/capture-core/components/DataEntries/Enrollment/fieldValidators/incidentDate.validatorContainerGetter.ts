@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidNonFutureDate } from '../../../../utils/validation/validators/form';
 
-const isValidIncidentDate = (value: string, internalComponentError?: {error: string| null, errorCode: string | null}| null) => {
+const isValidIncidentDate = (value: string, internalComponentError?: {error?: string, errorCode?: string}) => {
     if (!value) {
         return true;
     }

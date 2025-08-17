@@ -1,11 +1,9 @@
-// @flow
-
 type Location = {
     longitude: number,
     latitude: number,
 };
 
-function isNumValid(num) {
+function isNumValid(num: any) {
     if (typeof num === 'number') {
         return true;
     } else if (typeof num === 'string') {
@@ -21,7 +19,8 @@ function isNumValid(num) {
  * @param { Object } value
  * @returns { boolean }
  */
-export const isValidCoordinate = (value: Location) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidCoordinate = (value: Location, _internalComponentError?: {error?: string, errorCode?: string}) => {
     if (!value) {
         return false;
     }
@@ -31,8 +30,8 @@ export const isValidCoordinate = (value: Location) => {
         return false;
     }
 
-    const ld = parseInt(longitude, 10);
-    const lt = parseInt(latitude, 10);
+    const ld = parseInt(longitude.toString(), 10);
+    const lt = parseInt(latitude.toString(), 10);
 
     return ld >= -180 && ld <= 180 && lt >= -90 && lt <= 90;
 };
