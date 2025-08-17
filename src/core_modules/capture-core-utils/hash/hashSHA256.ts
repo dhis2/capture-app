@@ -1,5 +1,4 @@
-// @flow
-export const hashSHA256 = async (input: string) => {
+export const hashSHA256 = async (input: string): Promise<string> => {
     const inputUint8 = new TextEncoder().encode(input);
     const hashBuffer = await window.crypto.subtle.digest('SHA-256', inputUint8);
     const hashArray = Array.from(new Uint8Array(hashBuffer));

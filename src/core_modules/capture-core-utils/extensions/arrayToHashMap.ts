@@ -1,6 +1,4 @@
-// @flow
 /* eslint-disable */
-// $FlowFixMe
 Object.defineProperty(Array.prototype, 'toHashMap', {
     enumerable: false,
     value: function(key: string) {

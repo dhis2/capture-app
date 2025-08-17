@@ -1,6 +1,4 @@
-// @flow
 /* eslint-disable */
-// $FlowFixMe
 Object.defineProperty(Array.prototype, 'asyncForEach', {
     enumerable: false,
     value: async function(callback, a, b) {
