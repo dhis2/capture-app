@@ -4,7 +4,7 @@ import type { QueryFunction, UseQueryOptions } from 'react-query';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
-export const useApiDataQuery = <TResultData>(
+export const useApiDataQuery = <TResultData = unknown>(
     queryKey: Array<string | number | any | null | void>,
     queryObject: any,
     queryOptions: UseQueryOptions<TResultData>,

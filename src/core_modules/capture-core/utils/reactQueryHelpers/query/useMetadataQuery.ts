@@ -51,7 +51,7 @@ export const useIndexedDBQuery = <TResultData>(
             },
         });
 
-export const useApiMetadataQuery = <TResultData>(
+export const useApiMetadataQuery = <TResultData = unknown>(
     queryKey: Array<string | number | any | null | void>,
     queryObject: any,
     queryOptions?: UseQueryOptions<TResultData>,
