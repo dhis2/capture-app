@@ -1,7 +1,12 @@
 import { useDataEngine } from '@dhis2/app-runtime';
 import { useQuery } from 'react-query';
 
-export const useUserLocale = () => {
+export const useUserLocale = (): {
+    locale: any;
+    isLoading: boolean;
+    isError: boolean;
+    error: unknown;
+} => {
     const dataEngine = useDataEngine();
 
     const { data, isLoading, isError, error } = useQuery(
@@ -16,7 +21,7 @@ export const useUserLocale = () => {
         }));
 
     return {
-        locale: data?.userSettings?.settings?.keyUiLocale,
+        locale: (data as any)?.userSettings?.settings?.keyUiLocale,
         isLoading,
         isError,
         error,
