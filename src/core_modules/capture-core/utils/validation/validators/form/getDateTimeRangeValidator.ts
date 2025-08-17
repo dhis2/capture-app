@@ -1,13 +1,12 @@
-// @flow
 import { Temporal } from '@js-temporal/polyfill';
 import { convertLocalToIsoCalendar } from 'capture-core/utils/converters/date';
 import { isValidDateTime } from './dateTimeValidator';
 
-function isValidDateTimeWithEmptyCheck(value: ?{date?: ?string, time?: ?string}, internalError?: ?{error: ?string, errorCode: ?string}) {
+function isValidDateTimeWithEmptyCheck(value: {date?: string | null, time?: string | null} | null | undefined, internalError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
     return isValidDateTime(value, internalError);
 }
-/* eslint-disable complexity */
-const convertDateTimeToIsoTemporal = (value: ?Object) => {
+
+const convertDateTimeToIsoTemporal = (value: any | null | undefined) => {
     if (!value || !value.date || !value.time) {
         return null;
     }
@@ -46,15 +45,14 @@ const convertDateTimeToIsoTemporal = (value: ?Object) => {
 };
 
 export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
-    // eslint-disable-next-line complexity
-    (value: { from?: ?Object, to?: ?Object }, internalComponentError?: ?{fromDateError: ?{error: ?string, errorCode: ?string}, toDateError: ?{error: ?string, errorCode: ?string}}) => {
+    (value: { from?: any | null, to?: any | null }, internalComponentError?: {fromDateError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined, toDateError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined} | null | undefined) => {
         if (!value?.from && value?.to) {
             return {
                 valid: false,
                 errorMessage: { from: invalidDateTimeMessage, to: invalidDateTimeMessage },
             };
         }
-        const errorResult = [];
+        const errorResult: any[] = [];
         if (!isValidDateTimeWithEmptyCheck(value?.from, internalComponentError?.fromDateError).valid) {
             errorResult.push({ from: invalidDateTimeMessage });
         }
@@ -66,7 +64,6 @@ export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
         if (errorResult.length > 0) {
             return {
                 valid: false,
-                // $FlowFixMe[exponential-spread] automated comment
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }

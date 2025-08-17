@@ -1,4 +1,3 @@
-// @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
 import { convertClientToServer, convertClientToView } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
@@ -6,10 +5,10 @@ import { dateUtils } from '../../../../rules/converters';
 
 export const isValidPeriod = (
     reportDate: string,
-    expiryPeriod?: ?{
-        expiryPeriodType: ?string,
-        expiryDays: ?number,
-    },
+    expiryPeriod?: {
+        expiryPeriodType?: string | null | undefined;
+        expiryDays?: number | null | undefined;
+    } | null | undefined,
 ) => {
     if (!expiryPeriod) {
         return { isWithinValidPeriod: true, firstValidDate: undefined };
@@ -21,7 +20,7 @@ export const isValidPeriod = (
         return { isWithinValidPeriod: true, firstValidDate: undefined };
     }
 
-    const reportDateServer = ((convertClientToServer(reportDate, dataElementTypes.DATE): any): string);
+    const reportDateServer = convertClientToServer(reportDate, dataElementTypes.DATE) as string;
     const today = dateUtils.getToday();
 
     const threshold = expiryDays
@@ -29,9 +28,9 @@ export const isValidPeriod = (
         : today;
 
     const thresholdPeriod = getFixedPeriodByDate({
-        periodType: expiryPeriodType,
+        periodType: expiryPeriodType as any,
         date: threshold,
-        calendar: 'gregorian',
+        calendar: 'gregorian' as any,
     });
 
     const firstValidDateServer = thresholdPeriod.startDate;
