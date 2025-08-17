@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { DateField } from '../DateField/Date.component';
@@ -6,37 +5,16 @@ import { withFocusSaver } from '../../HOC/withFocusSaver';
 import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 import defaultClasses from './dateRangeField.module.css';
 import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
-
+import type { Props, State, DateRangeValue } from './DateRangeField.types';
 
 const RangeInputField = withFocusSaver()(withShrinkLabel()(DateField));
-
-type DateRangeValue = {
-    from?: ?string,
-    to?: ?string,
-}
-
-type State = {
-    fromError: { error: ?string, errorCode: ?string },
-    toError: { error: ?string, errorCode: ?string },
-};
-
-type Props = {
-    value: DateRangeValue,
-    onBlur: (value: ?DateRangeValue, opts: any) => void,
-    onChange: (value: ?DateRangeValue) => void,
-    classes: Object,
-    innerMessage?: ?Object,
-    locale?: string,
-}
 
 const inputKeys = {
     FROM: 'from',
     TO: 'to',
 };
 
-
 export class DateRangeField extends React.Component<Props, State> {
-    touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
@@ -44,6 +22,17 @@ export class DateRangeField extends React.Component<Props, State> {
             fromError: { error: null, errorCode: null },
             toError: { error: null, errorCode: null },
         };
+    }
+
+    getInnerMessage = (key: string) => {
+        const { classes, innerMessage } = this.props;
+        return (
+            <InnerMessage
+                classes={classes}
+                innerMessage={innerMessage}
+                messageKey={key}
+            />
+        );
     }
 
     getValue = () => this.props.value || {};
@@ -62,7 +51,7 @@ export class DateRangeField extends React.Component<Props, State> {
         });
     }
 
-    handleFromBlur = (value: string, options: ?Object) => {
+    handleFromBlur = (value: string, options: any | null | undefined) => {
         this.touchedFields.add('fromTouched');
         this.setState(() => ({
             fromError: { error: options?.error, errorCode: options?.errorCode },
@@ -79,7 +68,7 @@ export class DateRangeField extends React.Component<Props, State> {
         });
     }
 
-    handleToBlur = (value: string, options: ?Object) => {
+    handleToBlur = (value: string, options: any | null | undefined) => {
         this.touchedFields.add('toTouched');
         this.setState(() => ({
             toError: { error: options?.error, errorCode: options?.errorCode },
@@ -96,7 +85,7 @@ export class DateRangeField extends React.Component<Props, State> {
         });
     }
 
-    handleBlur = (value: DateRangeValue, options: ?Object) => {
+    handleBlur = (value: DateRangeValue, options: any | null | undefined) => {
         const touched = this.touchedFields.size === 2;
         if (!value.from && !value.to) {
             this.props.onBlur(undefined, {
@@ -111,16 +100,7 @@ export class DateRangeField extends React.Component<Props, State> {
         });
     }
 
-    getInnerMessage = (key: string) => {
-        const { classes, innerMessage } = this.props;
-        return (
-            <InnerMessage
-                classes={classes}
-                innerMessage={innerMessage}
-                messageKey={key}
-            />
-        );
-    }
+    touchedFields: Set<string>;
 
     render() {
         const { onBlur, onChange, value, innerMessage, ...passOnProps } = this.props;
@@ -128,7 +108,6 @@ export class DateRangeField extends React.Component<Props, State> {
         const toValue = value && value.to ? value.to : '';
         return (
             <div className={defaultClasses.container}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <RangeInputField
                     label={i18n.t('From')}
                     value={fromValue}
@@ -137,7 +116,6 @@ export class DateRangeField extends React.Component<Props, State> {
                     {...passOnProps}
                 />
                 {this.getInnerMessage(inputKeys.FROM)}
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <RangeInputField
                     label={i18n.t('To')}
                     value={toValue}

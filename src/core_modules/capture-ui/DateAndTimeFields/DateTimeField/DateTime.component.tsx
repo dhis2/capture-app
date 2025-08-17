@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useRef, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton } from 'capture-ui';
@@ -9,25 +8,7 @@ import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
 import defaultClasses from './dateTime.module.css';
-
-type Value = {
-    date?: ?string,
-    time?: ?string,
-};
-
-type Props = {
-    onBlur: (value: ?Value, options: Object, internalError: Object) => void,
-    onChange: (value: ?Value) => void,
-    value: Value,
-    orientation: $Values<typeof orientations>,
-    classes: Object,
-    dateLabel?: string,
-    timeLabel?: string,
-    innerMessage: Object,
-    locale?: string,
-    shrinkDisabled: boolean,
-    disabled: boolean,
-};
+import type { Props, Value } from './DateTime.types';
 
 const DateTimeFieldPlain = (props: Props) => {
     const {
@@ -66,7 +47,7 @@ const DateTimeFieldPlain = (props: Props) => {
         });
     }, [onChange, value]);
 
-    const handleBlur = (newValue: Value, otherFieldHasValue: Object) => {
+    const handleBlur = (newValue: Value, otherFieldHasValue: any) => {
         const touched = touchedFields.current.size === 2;
 
         if (!newValue.date && !newValue.time) {
@@ -98,7 +79,7 @@ const DateTimeFieldPlain = (props: Props) => {
         );
     };
 
-    const handleDateBlur = (dateValue: string, options: ?Object) => {
+    const handleDateBlur = (dateValue: string, options: any | null | undefined) => {
         touchedFields.current.add('dateTouched');
         setDateError({
             error: options?.error,
@@ -136,7 +117,6 @@ const DateTimeFieldPlain = (props: Props) => {
             })}
         >
             <div className={defaultClasses.inputContainer}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <DateTimeDate
                     value={currentValue.date}
                     onChange={handleDateChange}
@@ -144,7 +124,7 @@ const DateTimeFieldPlain = (props: Props) => {
                     label={dateLabel}
                     classes={classes}
                     innerMessage={innerMessage}
-                    {...passOnProps}
+                    {...passOnProps as any}
                 />
                 {innerMessage?.message?.dateError && (
                     <div className={classes?.innerInputError}>
@@ -153,7 +133,6 @@ const DateTimeFieldPlain = (props: Props) => {
                 )}
             </div>
             <div className={defaultClasses.inputContainer}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <DateTimeTime
                     value={currentValue.time}
                     onChange={handleTimeChange}
@@ -161,7 +140,7 @@ const DateTimeFieldPlain = (props: Props) => {
                     label={timeLabel}
                     classes={classes}
                     innerMessage={innerMessage}
-                    {...passOnProps}
+                    {...passOnProps as any}
                 />
                 {innerMessage?.message?.timeError && (
                     <div className={classes?.innerInputError}>
@@ -174,4 +153,4 @@ const DateTimeFieldPlain = (props: Props) => {
     );
 };
 
-export const DateTimeField = withStyles()(DateTimeFieldPlain);
+export const DateTimeField = withStyles({})(DateTimeFieldPlain);

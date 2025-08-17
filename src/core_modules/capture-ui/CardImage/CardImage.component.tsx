@@ -1,6 +1,6 @@
-// @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import type { Props } from './CardImage.types';
 
 const sizes = {
     extrasmall: {
@@ -25,20 +25,12 @@ const sizes = {
     },
 };
 
-const styles = {
+const styles: Readonly<any> = {
     img: {
         borderRadius: '50%',
         objectFit: 'cover',
     },
     ...sizes,
-};
-
-type Props = {
-    imageUrl: string,
-    dataTest: string,
-    classes: Object,
-    className: Object,
-    size: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge',
 };
 
 const CardImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props) => (
@@ -51,6 +43,5 @@ const CardImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props)
         />
     </div>
 );
-
 
 export const CardImage = withStyles(styles)(CardImagePlain);

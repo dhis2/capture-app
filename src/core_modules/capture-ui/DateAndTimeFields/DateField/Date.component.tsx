@@ -1,58 +1,15 @@
-// @flow
 import React from 'react';
 import { CalendarInput } from '@dhis2/ui';
-
-type ValidationOptions = {
-    error?: ?string,
-    errorCode?: ?string,
-};
-
-type ValidationProps = {|
-    error: boolean,
-    validationText: string,
-|};
-
-type Props = {
-    value: ?Object,
-    width: number,
-    maxWidth?: ?string,
-    calendarWidth?: ?string,
-    inputWidth?: ?string,
-    disabled?: ?boolean,
-    onBlur: (value: Object, options: ValidationOptions) => void,
-    onFocus?: ?() => void,
-    onDateSelectedFromCalendar?: () => void,
-    placeholder?: string,
-    label?: string,
-    calendarMax?: any,
-    innerMessage?: any,
-    dateFormat: ?string,
-    calendarType: ?string,
-    locale?: string,
-    validation?: ?ValidationProps,
-};
-
-type Validation = {|
-    validationCode: ?string,
-    validationText: ?string,
-    error?: boolean,
-    valid: boolean,
-|};
-
-type State = {
-    calendarError: ?Validation,
-};
+import type { Props, State, Validation } from './Date.types';
 
 export class DateField extends React.Component<Props, State> {
-    handleDateSelected: (value: {calendarDateString: string}) => void;
-
     constructor(props: Props) {
         super(props);
 
         this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
-    handleDateSelected(value: { calendarDateString: string, validation: Validation}) {
+    handleDateSelected = (value: { calendarDateString: string, validation: Validation}) => {
         const { calendarDateString: date, validation } = value || {};
         this.props.onBlur(
             date, {
@@ -69,7 +26,6 @@ export class DateField extends React.Component<Props, State> {
             maxWidth,
             calendarWidth,
             inputWidth,
-            calendarMax,
             value,
             innerMessage,
             calendarType,
@@ -90,23 +46,22 @@ export class DateField extends React.Component<Props, State> {
             <div
                 style={{
                     width,
-                    maxWidth,
+                    maxWidth: maxWidth || undefined,
                 }}
             >
                 <CalendarInput
                     label=""
                     placeholder={this.props.placeholder}
-                    format={format}
-                    onDateSelect={this.handleDateSelected}
-                    calendar={calendar}
+                    format={format as any}
+                    onDateSelect={this.handleDateSelected as any}
+                    calendar={calendar as any}
                     date={value}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
-                    onFocus={this.props.onFocus}
-                    disabled={this.props.disabled}
-                    {...errorProps}
-                    maxDate={calendarMax}
+                    onFocus={this.props.onFocus as any}
+                    disabled={!!this.props.disabled}
                     locale={locale}
+                    {...errorProps}
                 />
             </div>
         );
