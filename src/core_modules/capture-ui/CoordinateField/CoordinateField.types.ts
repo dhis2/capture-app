@@ -15,7 +15,7 @@ export type PlainProps = {
     onChange?: (value: any) => void | null;
     value?: Coordinate | null;
     shrinkDisabled?: boolean | null;
-    classes?: any | null;
+    classes?: any;
     mapDialog: ReactElement<any>;
     disabled?: boolean | null;
 };

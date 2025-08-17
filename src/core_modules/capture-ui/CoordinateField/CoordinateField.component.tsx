@@ -56,7 +56,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     getPosition = (): Array<number> | null => {
         const { value } = this.props;
         let convertedValue: Array<number> | null = null;
-        if (value && value.latitude && value.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
+        if (value?.latitude && value?.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
             convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
         }
         return convertedValue;
@@ -88,17 +88,17 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     handleChange = (key: string, value: any) => {
-        this.props.onChange && this.props.onChange({ ...this.props.value, [key]: value });
+        this.props.onChange?.({ ...this.props.value, [key]: value });
     }
 
     handleClear = () => {
         this.props.onBlur(null);
     }
 
-    mapInstance: any | null;
+    mapInstance: any;
 
     search = (position: any) => {
-        const zoom = this.mapInstance && this.mapInstance.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
+        const zoom = this.mapInstance?.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
         this.setMapPosition([...position], zoom);
     }
 
@@ -194,7 +194,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Latitude"
-                value={value && value.latitude}
+                value={value?.latitude}
                 classes={passOnClasses}
                 className={defaultClasses.latitudeTextInput}
                 onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
@@ -212,7 +212,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Longitude"
-                value={value && value.longitude}
+                value={value?.longitude}
                 className={defaultClasses.longitudeTextInput}
                 classes={passOnClasses}
                 onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
