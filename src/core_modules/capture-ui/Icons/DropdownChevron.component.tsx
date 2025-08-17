@@ -1,11 +1,10 @@
-// @flow
 import React from 'react';
 
-type Props = {
-  className?: string,
-};
+type Props = Readonly<{
+  className?: string;
+}>;
 
-export function ChevronDown({ className }: Props) {
+export function ChevronDown({ className }: Readonly<Props>) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +17,7 @@ export function ChevronDown({ className }: Props) {
     );
 }
 
-export function ChevronUp({ className }: Props) {
+export function ChevronUp({ className }: Readonly<Props>) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
