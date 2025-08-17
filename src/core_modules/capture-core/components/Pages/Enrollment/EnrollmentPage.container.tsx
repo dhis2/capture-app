@@ -62,7 +62,7 @@ const useComponentLifecycle = () => {
         enrollmentProgramId,
     ]);
 
-    useEffect(() => () => dispatch(closeEnrollmentPage()), [dispatch]);
+    useEffect(() => () => { dispatch(closeEnrollmentPage()); }, [dispatch]);
 };
 
 const useComputedEnrollmentPageStatus = () => {
