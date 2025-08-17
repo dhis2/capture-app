@@ -1,15 +1,14 @@
-// @flow
 import * as React from 'react';
 import { debounce } from 'lodash';
 import { TextInput } from '../internal/TextInput/TextInput.component';
 
 type Props = {
-    onDebounced: (event: SyntheticEvent<HTMLInputElement>) => void,
-    value: ?string,
+    onDebounced: (event: React.SyntheticEvent<HTMLInputElement>) => void;
+    value?: string | null;
 };
 
 type State = {
-    value: string,
+    value: string;
 };
 
 /**
@@ -17,7 +16,6 @@ type State = {
  * @class DebounceField
  */
 export class DebounceField extends React.Component<Props, State> {
-    debouncer: Function;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -39,11 +37,13 @@ export class DebounceField extends React.Component<Props, State> {
         this.debouncer.cancel();
     }
 
-    handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
+    debouncer: any;
+
+    handleDebounced = (event: React.SyntheticEvent<HTMLInputElement>) => {
         this.props.onDebounced(event);
     }
 
-    handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         this.setState({
             value: event.currentTarget.value,
         });
@@ -54,7 +54,6 @@ export class DebounceField extends React.Component<Props, State> {
         const { onDebounced, value, ...passOnProps } = this.props;
         const { value: stateValue } = this.state;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 onChange={this.handleChange}
                 value={stateValue}

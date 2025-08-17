@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './divider.module.css';
 
 type Props = {
-    className?: ?string,
+    className?: string;
 };
 
 export const DividerHorizontal = (props: Props) => {
@@ -12,7 +11,6 @@ export const DividerHorizontal = (props: Props) => {
     const calculatedClassNames = classNames(defaultClasses.horizontal, props.className);
 
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
         <div
             className={calculatedClassNames}
             {...passOnProps}

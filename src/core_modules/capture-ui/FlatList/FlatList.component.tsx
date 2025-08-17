@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
 import { colors, spacersNum } from '@dhis2/ui';
@@ -10,7 +9,7 @@ const itemStyles = {
     wordWrap: 'break-word',
     textOverflow: 'ellipsis',
     hyphens: 'auto',
-};
+} as any;
 
 const styles = {
     itemRow: {
@@ -34,11 +33,11 @@ const styles = {
         flex: 1,
         ...itemStyles,
     },
-};
+} as any;
 
 const FlatListPlain = ({ list, classes, dataTest }: Props) => {
     const lastItemKey = list[list.length - 1]?.reactKey;
-    const renderItem = item => (
+    const renderItem = (item: any) => (
         <div
             key={item.reactKey}
             className={cx(classes.itemRow, { isLastItem: item.reactKey === lastItemKey })}
@@ -55,4 +54,4 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
     );
 };
 
-export const FlatList: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(FlatListPlain);
+export const FlatList: ComponentType<any> = withStyles(styles)(FlatListPlain) as any;
