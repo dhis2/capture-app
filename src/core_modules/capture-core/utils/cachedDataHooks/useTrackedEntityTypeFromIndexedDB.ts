@@ -1,14 +1,12 @@
-// @flow
 import type { UseQueryOptions } from 'react-query';
 import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 
 
-export const useTrackedEntityTypeFromIndexedDB = (trackedEntityTypeId: ?string, { enabled }: UseQueryOptions<>) => {
+export const useTrackedEntityTypeFromIndexedDB = (trackedEntityTypeId: string | null | undefined, { enabled }: UseQueryOptions<any>) => {
     const storageController = getUserMetadataStorageController();
 
     const { data, isLoading, isError } = useIndexedDBQuery(
-        // $FlowFixMe - only gets called when programId is defined because of enabled
         ['trackedEntityType', trackedEntityTypeId],
         () => storageController.get(USER_METADATA_STORES.TRACKED_ENTITY_TYPES, trackedEntityTypeId),
         {

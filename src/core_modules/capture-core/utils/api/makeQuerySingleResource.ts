@@ -1,8 +1,5 @@
-// @flow
-import type { Query, ResourceQuery, QueryVariables } from '@dhis2/app-runtime';
-
-export const makeQuerySingleResource = (query: Query) =>
-    async (resourceQuery: ResourceQuery, variables?: QueryVariables = {}) => {
+export const makeQuerySingleResource = (query: any) =>
+    async (resourceQuery: any, variables: any = {}) => {
         const resourceQueries = {
             [resourceQuery.resource]: resourceQuery,
         };
