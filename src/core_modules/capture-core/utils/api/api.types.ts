@@ -1,2 +1,4 @@
+import type { ResourceQuery, QueryVariables } from 'capture-core-utils/types/app-runtime';
+
 export type QuerySingleResource =
-    (resourceQuery: any, variables?: any) => Promise<any>;
+    (resourceQuery: ResourceQuery, variables?: QueryVariables) => Promise<any>;
