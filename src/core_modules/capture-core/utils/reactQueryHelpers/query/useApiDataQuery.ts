@@ -4,22 +4,22 @@ import type { QueryFunction, UseQueryOptions } from 'react-query';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
-export const useApiDataQuery = <TResultData = unknown>(
+export const useApiDataQuery = <TQueryData = unknown, TError = unknown, TData = TQueryData>(
     queryKey: Array<string | number | any | null | void>,
     queryObject: any,
-    queryOptions: UseQueryOptions<TResultData>,
-): Result<TResultData> => {
+    queryOptions: UseQueryOptions<TQueryData, TError, TData>,
+): Result<TData> => {
     const dataEngine = useDataEngine();
-    const queryFn: QueryFunction<TResultData> = () => {
+    const queryFn: QueryFunction<TQueryData> = () => {
         const processedQuery = { ...queryObject };
         if (typeof queryObject.id === 'function') {
             processedQuery.id = queryObject.id();
         }
 
         return dataEngine.query({ theQuerykey: processedQuery })
-            .then(response => response.theQuerykey as TResultData);
+            .then(response => response.theQuerykey as TQueryData);
     };
-    return useQuery<TResultData>(
+    return useQuery<TQueryData, TError, TData>(
         [ReactQueryAppNamespace, ...queryKey],
         queryFn,
         {

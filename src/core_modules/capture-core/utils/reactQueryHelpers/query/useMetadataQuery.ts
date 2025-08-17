@@ -17,31 +17,31 @@ const throwErrorForIndexedDB = (error: any) => {
     throw Error('There was an error fetching metadata');
 };
 
-const useAsyncMetadata = <TResultData>(
+const useAsyncMetadata = <TQueryData = unknown, TError = unknown, TData = TQueryData>(
     queryKey: Array<string | number | any | null | void>,
-    queryFn: QueryFunction<TResultData>,
-    queryOptions: UseQueryOptions<TResultData>,
-): Result<TResultData> => useQuery<TResultData>([ReactQueryAppNamespace, ...queryKey], queryFn, {
+    queryFn: QueryFunction<TQueryData>,
+    queryOptions: UseQueryOptions<TQueryData, TError, TData>,
+): Result<TData> => useQuery<TQueryData, TError, TData>([ReactQueryAppNamespace, ...queryKey], queryFn, {
     staleTime: Infinity,
     ...queryOptions,
 });
 
-export const useCustomMetadataQuery = <TResultData>(
+export const useCustomMetadataQuery = <TQueryData = unknown, TError = unknown, TData = TQueryData>(
     queryKey: Array<string | number | any | null | void>,
-    queryFn: QueryFunction<TResultData>,
-    queryOptions?: UseQueryOptions<TResultData>,
-): Result<TResultData> =>
+    queryFn: QueryFunction<TQueryData>,
+    queryOptions?: UseQueryOptions<TQueryData, TError, TData>,
+): Result<TData> =>
         useAsyncMetadata(queryKey, queryFn, {
             cacheTime: 5,
             ...queryOptions,
         });
 
 
-export const useIndexedDBQuery = <TResultData>(
+export const useIndexedDBQuery = <TQueryData = unknown, TError = unknown, TData = TQueryData>(
     queryKey: Array<string | number | any | null | void>,
-    queryFn: QueryFunction<TResultData>,
-    queryOptions?: UseQueryOptions<TResultData>,
-): Result<TResultData> =>
+    queryFn: QueryFunction<TQueryData>,
+    queryOptions?: UseQueryOptions<TQueryData, TError, TData>,
+): Result<TData> =>
         useAsyncMetadata([IndexedDBNamespace, ...queryKey], queryFn, {
             cacheTime: 0,
             ...queryOptions,
@@ -51,13 +51,13 @@ export const useIndexedDBQuery = <TResultData>(
             },
         });
 
-export const useApiMetadataQuery = <TResultData = unknown>(
+export const useApiMetadataQuery = <TQueryData = unknown, TError = unknown, TData = TQueryData>(
     queryKey: Array<string | number | any | null | void>,
     queryObject: any,
-    queryOptions?: UseQueryOptions<TResultData>,
-): Result<TResultData> => {
+    queryOptions?: UseQueryOptions<TQueryData, TError, TData>,
+): Result<TData> => {
     const dataEngine = useDataEngine();
-    const queryFn: QueryFunction<TResultData> = () => {
+    const queryFn: QueryFunction<TQueryData> = () => {
         if (!queryObject) {
             throw new Error('Query object is required');
         }
@@ -68,7 +68,7 @@ export const useApiMetadataQuery = <TResultData = unknown>(
         }
 
         return dataEngine.query({ theQuerykey: processedQuery })
-            .then(response => response.theQuerykey as TResultData);
+            .then(response => response.theQuerykey as TQueryData);
     };
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,

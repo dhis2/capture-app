@@ -44,12 +44,12 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data, isLoading, isError } = useIndexedDBQuery<AvailableSearchOption | undefined>(
+    const { data, isLoading, isError } = useIndexedDBQuery<any, unknown, AvailableSearchOption | undefined>(
         ['searchGroup', searchId],
         () => buildSearchGroup(searchData, locale),
         {
             enabled: !!(searchId && locale && searchData),
-            select: (searchGroups?: SearchGroups) => {
+            select: (searchGroups?: any) => {
                 if (!searchName || !searchGroups || !searchScope) {
                     return undefined;
                 }
