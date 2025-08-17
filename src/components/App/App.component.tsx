@@ -1,19 +1,17 @@
-// @flow
 /* eslint-disable import/first */
 import './app.css';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { AppContents } from './AppContents.component';
 import {
     RulesEngineVerboseInitializer,
 } from '../../core_modules/capture-core/components/RulesEngineVerboseInitializer';
 import {
     MetadataAutoSelectInitializer,
 } from '../../core_modules/capture-core/components/MetadataAutoSelectInitializer';
-
+import { AppContents } from './AppContents.component';
 
 type Props = {
-    store: ReduxStore,
+    store: any;
 };
 
 export const App = ({ store }: Props) => (
