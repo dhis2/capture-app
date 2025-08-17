@@ -1,2 +1,2 @@
-export { createReducer, createReducerDescription } from './trackerReducer';
-export type { Updaters } from './trackerReducer';
+export { createReducerDescription } from './trackerReducer';
+
