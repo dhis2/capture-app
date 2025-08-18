@@ -1,11 +1,10 @@
-// @flow
 import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
-import type { Props } from './iconButton.types';
+import type { PlainProps } from './iconButton.types';
 
-const styles = {
+const styles: Readonly<any> = {
     button: {
         cursor: 'pointer',
         borderRadius: '3px',
@@ -32,7 +31,7 @@ const styles = {
     },
 };
 
-const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: Props) => (
+const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: PlainProps & WithStyles<typeof styles>) => (
     <button
         {...passOnProps}
         onClick={onClick}
@@ -40,7 +39,7 @@ const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, cla
         data-test={dataTest}
         className={cx(classes.button, { disabled, ...(className ? { [className]: true } : {}) })}
         type="button"
-        tabIndex="0"
+        tabIndex={0}
     >
         {children}
     </button>
