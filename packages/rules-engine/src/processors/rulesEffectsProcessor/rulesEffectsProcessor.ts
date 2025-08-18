@@ -169,7 +169,7 @@ export function getRulesEffectsProcessor(
                 content: effect.content,
             }),
         );
-        return getOutputEffectsWithPreviousValueCheck({
+        const result = getOutputEffectsWithPreviousValueCheck({
             outputEffects,
             formValues,
             dataElementId: effect.dataElementId,
@@ -178,6 +178,7 @@ export function getRulesEffectsProcessor(
             trackedEntityAttributes,
             onProcessValue,
         });
+        return Array.isArray(result) ? result : [result as any];
     }
 
     function processShowError(effect: ProgramRuleEffect): ErrorEffect {
