@@ -1,4 +1,3 @@
-// @flow
 import { typeKeys } from '../../../constants';
 import { eventStatuses } from '../constants';
 import type {

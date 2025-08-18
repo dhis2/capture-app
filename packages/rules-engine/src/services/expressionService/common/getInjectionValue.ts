@@ -1,5 +1,3 @@
-// @flow
-
 const passOnTypes = ['number', 'boolean'];
 
 /*

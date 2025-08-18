@@ -7,7 +7,7 @@ import type {
 export type D2FunctionsInput = Readonly<{
     dateUtils: IDateUtils,
     variablesHash: RuleVariables,
-    selectedOrgUnit: OrgUnit | null | undefined,
+    selectedOrgUnit: OrgUnit | null,
     selectedUserRoles: Array<string>,
 }>;
 

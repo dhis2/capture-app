@@ -1,4 +1,3 @@
-// @flow
 export { VariableService, variableSourceTypes } from './VariableService';
 export type {
     ProgramRuleVariable,

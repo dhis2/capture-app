@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { getInjectionValue } from './common';
 import type { RuleVariables } from '../../rulesEngine.types';

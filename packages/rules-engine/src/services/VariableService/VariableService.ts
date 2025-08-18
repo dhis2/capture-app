@@ -58,16 +58,16 @@ export const variableSourceTypes = {
 
 export class VariableService {
     static dateUtils: IDateUtils;
-    environment: keyof typeof environmentTypes;
+    environment: typeof environmentTypes[keyof typeof environmentTypes];
 
-    onProcessValue: (value: any, type: keyof typeof typeKeys) => any;
+    onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => RuleVariable | null };
     defaultValues: any;
     structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer;
     constructor(
-        onProcessValue: (value: any, type: keyof typeof typeKeys) => any,
+        onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any,
         dateUtils: IDateUtils,
-        environment: keyof typeof environmentTypes,
+        environment: typeof environmentTypes[keyof typeof environmentTypes],
     ) {
         this.environment = environment;
         this.onProcessValue = onProcessValue;

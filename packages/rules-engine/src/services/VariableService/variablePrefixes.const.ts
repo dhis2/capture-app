@@ -1,5 +1,3 @@
-// @flow
-
 export const variablePrefixes = {
     DATAELEMENT: '#',
     TRACKED_ENTITY_ATTRIBUTE: 'A',

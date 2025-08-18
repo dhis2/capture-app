@@ -1,4 +1,3 @@
-// @flow
 import { typeKeys } from '../../constants';
 
 export const defaultValues = {
