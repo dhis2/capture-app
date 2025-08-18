@@ -1,17 +1,16 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import defaultClasses from './table.module.css';
 
 type Props = {
-    currentPage: number,
-    rowsCountSelector?: ?React.Node,
-    rowsCountSelectorLabel?: ?string,
-    navigationElements: React.Node,
+    currentPage: number;
+    rowsCountSelector?: React.ReactNode | null | undefined;
+    rowsCountSelectorLabel?: string | null | undefined;
+    navigationElements: React.ReactNode;
 };
 
 export class Pagination extends React.Component<Props> {
-    static getRowsCountElement(rowsCountSelectorLabel?: ?string, rowsCountSelector?: ?React.Node) {
+    static getRowsCountElement(rowsCountSelectorLabel?: string | null | undefined, rowsCountSelector?: React.ReactNode | null | undefined) {
         if (!rowsCountSelector) {
             return null;
         }
@@ -49,7 +48,7 @@ export class Pagination extends React.Component<Props> {
                 {
                     currentPage &&
                     <div className={defaultClasses.paginationDisplayRowsContainer}>
-                        {i18n.t('Page {{currentPage}}', { currentPage })}
+                        {i18n.t('Page {{currentPage}}', { currentPage }) as React.ReactNode}
                     </div>
                 }
                 {navigationElements}

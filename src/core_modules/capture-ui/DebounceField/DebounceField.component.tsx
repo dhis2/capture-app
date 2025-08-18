@@ -5,6 +5,7 @@ import { TextInput } from '../internal/TextInput/TextInput.component';
 type Props = {
     onDebounced: (event: React.SyntheticEvent<HTMLInputElement>) => void;
     value?: string | null;
+    [key: string]: any;
 };
 
 type State = {
