@@ -111,11 +111,6 @@ export class PolygonField extends React.Component<Props, State> {
         this.setState({ mapCoordinates: null });
     };
 
-    openMap = () => {
-        this.props.onOpenMap(Boolean(this.props.value));
-        this.setState({ showMap: true, mapCoordinates: this.props.value });
-    }
-
     onSetPolygon = () => {
         this.props.onBlur(this.state.mapCoordinates);
         this.closeMap();
@@ -134,6 +129,11 @@ export class PolygonField extends React.Component<Props, State> {
 
     setMapInstance = (mapInstance: any) => {
         this.mapInstance = mapInstance;
+    }
+
+    openMap = () => {
+        this.props.onOpenMap(Boolean(this.props.value));
+        this.setState({ showMap: true, mapCoordinates: this.props.value });
     }
 
     closeMap = () => {
