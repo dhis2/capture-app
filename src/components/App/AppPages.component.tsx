@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ViewEventPage } from 'capture-core/components/Pages/ViewEvent';
