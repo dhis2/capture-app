@@ -1,13 +1,12 @@
-// @flow
 import { useQuery } from 'react-query';
 import log from 'loglevel';
-import { useDataEngine, type ResourceQuery } from '@dhis2/app-runtime';
+import { useDataEngine } from '@dhis2/app-runtime';
 import type { QueryFunction, UseQueryOptions } from 'react-query';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace, IndexedDBNamespace } from '../reactQueryHelpers.const';
 
-const throwErrorForIndexedDB = (error) => {
+const throwErrorForIndexedDB = (error: any) => {
     if (error instanceof IndexedDBError) {
         log.error(error.error);
     } else if (error instanceof Error) {
@@ -54,12 +53,12 @@ export const useIndexedDBQuery = <TResultData>(
 
 export const useApiMetadataQuery = <TResultData>(
     queryKey: Array<string | number>,
-    queryObject: ResourceQuery,
+    queryObject: any,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
-        .then(response => response.theQuerykey);
+        .then(response => response.theQuerykey as TResultData);
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,

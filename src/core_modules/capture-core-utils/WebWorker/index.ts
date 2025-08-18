@@ -1,4 +1,3 @@
-// @flow
 export class WebWorker {
     constructor(worker: string) {
         const code = worker.toString();

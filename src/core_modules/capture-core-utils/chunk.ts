@@ -1,16 +1,14 @@
-// @flow
 function sliceArrayIntoGroups(chunks: number, array: Array<any>, size: number) {
-    const groups = [];
+    const groups: Array<any> = [];
 
     for (let i = 0, j = 0; i < chunks; i += 1, j += size) {
-        // $FlowFixMe[missing-annot] automated comment
         groups[i] = array.slice(j, j + size);
     }
 
     return groups;
 }
 
-export function chunk(array: ?Array<any>, size: number) {
+export function chunk(array: Array<any> | null | undefined, size: number) {
     if (!array || array.length === 0) {
         return [];
     }
