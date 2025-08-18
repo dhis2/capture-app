@@ -2,6 +2,12 @@ import { convertFormValuesToClient } from '../converters/helpers/formToClient';
 import type { RenderFoundation } from '../metaData';
 import { convertDataEntryValuesToClientValues } from '../components/DataEntry/common/convertDataEntryValuesToClientValues';
 
+export type FieldData = {
+    elementId: string;
+    value: any;
+    valid: boolean;
+};
+
 function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolean }}) {
     return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
         accValidations[key] = dataEntryMeta[key].isValid;
@@ -51,7 +57,7 @@ export function getCurrentClientValues(
     state: any,
     foundation: RenderFoundation,
     formId: string,
-    updatedEventField?: any | null) {
+    updatedEventField?: FieldData | null) {
     const currentFormData = state.formsValues[formId] || {};
     const updatedCurrentFormData = updatedEventField ?
         { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :
