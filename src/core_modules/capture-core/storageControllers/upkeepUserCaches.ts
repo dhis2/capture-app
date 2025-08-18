@@ -12,7 +12,7 @@ const errorMessages = {
 };
 
 async function addCacheRecordToAccessHistory(
-    mainStorageController: typeof StorageController,
+    mainStorageController: StorageController,
     accessHistoryKey: string,
     currentStorageName: string,
 ) {
@@ -35,7 +35,7 @@ async function addCacheRecordToAccessHistory(
 
 async function removeMetadataCaches(
     history: Array<string>,
-    mainStorageController: typeof StorageController,
+    mainStorageController: StorageController,
 ) {
     const currentAdapterType = mainStorageController.adapterType;
     const keepCount = currentAdapterType === DomLocalStorageAdapter
@@ -64,7 +64,7 @@ async function removeMetadataCaches(
 }
 
 export const upkeepUserCaches = async (
-    mainStorageController: typeof StorageController,
+    mainStorageController: StorageController,
     userMetadataStorageName: string,
     userDataStorageName: string,
 ) => {

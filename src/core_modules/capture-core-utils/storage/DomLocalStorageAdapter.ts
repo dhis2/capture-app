@@ -1,7 +1,10 @@
 import { errorCreator } from '../errorCreator';
 
 class Indexer {
-    constructor(name, objectStore, storage) {
+    key: any;
+    storage: any;
+
+    constructor(name: any, objectStore: any, storage: any) {
         this.key = `${name}.${objectStore}.**index**`;
         this.storage = storage;
     }
@@ -24,13 +27,13 @@ class Indexer {
         return JSON.parse(this.storage.getItem(this.key));
     }
 
-    add(key) {
+    add(key: any) {
         const keyData = this.all();
         keyData.push(key);
         this.storage.setItem(this.key, JSON.stringify(keyData));
     }
 
-    remove(key) {
+    remove(key: any) {
         const keyData = this.all();
         if (keyData.includes(key)) {
             keyData.splice(keyData.indexOf(key), 1);
@@ -38,12 +41,12 @@ class Indexer {
         }
     }
 
-    find(key) {
+    find(key: any) {
         const keyData = this.all();
         return keyData.indexOf(key);
     }
 
-    exists(key) {
+    exists(key: any) {
         const keyData = this.all();
         return keyData.indexOf(key) !== -1;
     }
@@ -54,6 +57,13 @@ class Indexer {
 }
 
 export class DomLocalStorageAdapter {
+    name: any;
+    version: any;
+    objectStoreNames: any;
+    keyPath: any;
+    indexer: any;
+    opened: any;
+
     static storage = window.localStorage;
     static adapterName = 'DomLocalStorageAdapter';
     static CACHEVERSIONKEY = '__VERSION__';
@@ -70,7 +80,7 @@ export class DomLocalStorageAdapter {
         STORAGE_NOT_OPENED: 'Please call open first in the DomLocalStorageAdapter',
     };
 
-    constructor(options) {
+    constructor(options: any) {
         this.name = options.name;
         this.version = options.version || 1;
         this.objectStoreNames = options.objectStores;
@@ -82,7 +92,7 @@ export class DomLocalStorageAdapter {
         onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from Local Storage
         onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in Local Storage
     */
-    open(onBeforeUpgrade, onAfterUpgrade) {
+    open(onBeforeUpgrade?: any, onAfterUpgrade?: any) {
         this.indexer = this.objectStoreNames
             .reduce((accIndexers, store) => {
                 accIndexers[store] = new Indexer(this.name, store, DomLocalStorageAdapter.storage);
@@ -94,7 +104,7 @@ export class DomLocalStorageAdapter {
         this.opened = true;
 
         if (this.version !== inUseVersion) {
-            return Promise.resolve()
+            return Promise.resolve(undefined)
                 .then(() => onBeforeUpgrade
                     && onBeforeUpgrade({
                         get: this.get.bind(this),
@@ -104,16 +114,16 @@ export class DomLocalStorageAdapter {
                     // eslint-disable-next-line no-underscore-dangle
                     this._executeDestroy();
                     DomLocalStorageAdapter.storage.setItem(versionKey, JSON.stringify(this.version));
-                    return Promise.resolve();
+                    return Promise.resolve(undefined);
                 })
                 .then(() => onAfterUpgrade && onAfterUpgrade({
                     set: this.set.bind(this),
                 }));
         }
-        return Promise.resolve();
+        return Promise.resolve(undefined);
     }
 
-    _executeSet(store, dataObject) {
+    _executeSet(store: any, dataObject: any) {
         const storeObject = JSON.parse(JSON.stringify(dataObject));
         const key = storeObject[this.keyPath];
         delete storeObject[this.keyPath];
@@ -126,31 +136,31 @@ export class DomLocalStorageAdapter {
         DomLocalStorageAdapter.storage.setItem(storeKey, JSON.stringify(storeObject));
     }
 
-    set(store, dataObject) {
+    set(store: any, dataObject: any) {
         return new Promise((resolve, reject) => {
             try {
                 // eslint-disable-next-line no-underscore-dangle
                 this._executeSet(store, dataObject);
-                resolve();
+                resolve(undefined);
             } catch (error) {
                 reject(errorCreator(DomLocalStorageAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
             }
         });
     }
 
-    setAll(store, dataArray) {
+    setAll(store: any, dataArray: any) {
         try {
             dataArray.forEach((dataObject) => {
                 // eslint-disable-next-line no-underscore-dangle
                 this._executeSet(store, dataObject);
             });
-            return Promise.resolve();
+            return Promise.resolve(undefined);
         } catch (error) {
             return Promise.reject(error);
         }
     }
 
-    get(store, key) {
+    get(store: any, key: any) {
         return new Promise((resolve) => {
             const storeObject = DomLocalStorageAdapter.storage.getItem(this.getStoreKey(store, key));
             let responseObject;
@@ -162,7 +172,7 @@ export class DomLocalStorageAdapter {
         });
     }
 
-    getAll(store, options) {
+    getAll(store: any, options?: any) {
         const { predicate, project } = options || {};
         const keys = this.indexer[store].all();
 
@@ -184,30 +194,30 @@ export class DomLocalStorageAdapter {
         return Promise.resolve(responseObjects);
     }
 
-    _executeGetKeys(store) {
+    _executeGetKeys(store: any) {
         const keys = this.indexer[store].all();
         return keys
             .map(key => this.mainKeyFromStoreKey(key, store));
     }
 
-    getKeys(store) {
+    getKeys(store: any) {
         // eslint-disable-next-line no-underscore-dangle
         return Promise.resolve(this._executeGetKeys(store));
     }
 
-    _executeRemove(store, key) {
+    _executeRemove(store: any, key: any) {
         const storeKey = this.getStoreKey(store, key);
         this.indexer[store].remove(storeKey);
         DomLocalStorageAdapter.storage.removeItem(storeKey);
     }
 
-    remove(store, key) {
+    remove(store: any, key: any) {
         // eslint-disable-next-line no-underscore-dangle
         this._executeRemove(store, key);
-        return Promise.resolve();
+        return Promise.resolve(undefined);
     }
 
-    _executeRemoveAll(store) {
+    _executeRemoveAll(store: any) {
         // eslint-disable-next-line no-underscore-dangle
         const keys = this._executeGetKeys(store);
         keys.forEach((key) => {
@@ -216,17 +226,17 @@ export class DomLocalStorageAdapter {
         });
     }
 
-    removeAll(store) {
+    removeAll(store: any) {
         // eslint-disable-next-line no-underscore-dangle
         return Promise.resolve(this._executeRemoveAll(store));
     }
 
-    contains(store, key) {
+    contains(store: any, key: any) {
         const storeKey = this.getStoreKey(store, key);
         return Promise.resolve(this.indexer[store].exists(storeKey));
     }
 
-    count(store, key) {
+    count(store: any, key?: any) {
         if (key) {
             Promise.reject(
                 errorCreator(DomLocalStorageAdapter.errorMessages.KEY_BASED_COUNT_IS_NOT_SUPPORTED)({ adapter: this }));
@@ -237,7 +247,7 @@ export class DomLocalStorageAdapter {
 
     close() {
         this.opened = false;
-        return Promise.resolve();
+        return Promise.resolve(undefined);
     }
 
     _executeDestroy() {
@@ -251,18 +261,18 @@ export class DomLocalStorageAdapter {
         this.opened = false;
         // eslint-disable-next-line no-underscore-dangle
         this._executeDestroy();
-        return Promise.resolve();
+        return Promise.resolve(undefined);
     }
 
     isOpen() {
         return this.opened;
     }
 
-    getStoreKey(store, key) {
+    getStoreKey(store: any, key: any) {
         return `${this.name}.${store}.${key}`;
     }
 
-    mainKeyFromStoreKey(storeKey, store) {
+    mainKeyFromStoreKey(storeKey: any, store?: any) {
         return storeKey.replace(`${this.name}.${store}.`, '');
     }
 }

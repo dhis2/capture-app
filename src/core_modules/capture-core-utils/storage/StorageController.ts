@@ -6,6 +6,13 @@ import { errorCreator } from '../errorCreator';
 import { IndexedDBError } from './IndexedDBError/IndexedDBError';
 
 export class StorageController {
+    name: any;
+    version: any;
+    Adapters: any;
+    AvailableAdapters: any;
+    adapter: any;
+    adapterType: any;
+
     static errorMessages = {
         INVALID_NAME: 'A valid database name must be provided',
         NO_OBJECTSTORES_DEFINED: 'no objectStores defined',
@@ -23,7 +30,7 @@ export class StorageController {
         SET_ALL_FAILED: 'Could not save all to cache',
     };
 
-    static isAdapterValid(Adapter) {
+    static isAdapterValid(Adapter: any) {
         const staticAdapterMethods = 'isSupported'.split(' ');
         const staticMethodsAvailable = staticAdapterMethods.every(method => Adapter[method]);
         if (!staticMethodsAvailable) {
@@ -33,13 +40,13 @@ export class StorageController {
         return adapterMethods.every(method => Adapter.prototype[method]);
     }
 
-    constructor(name, version, { Adapters, objectStores, onCacheExpired }) {
+    constructor(name: any, version: any, { Adapters, objectStores, onCacheExpired }: any) {
         if (!name) {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
 
         if (!Adapters || !isArray(Adapters) || Adapters.length === 0) {
-            throw new Error(StorageController.errorMessages.NO_ADAPTERS_DEFINED);
+            throw new Error(StorageController.errorMessages.NO_ADAPTERS_PROVIDED);
         }
 
         const ValidAdapters = Adapters
@@ -81,7 +88,7 @@ export class StorageController {
         }
     }
 
-    throwIfStoreNotFound(store, caller) {
+    throwIfStoreNotFound(store: any, caller: any) {
         if (!store || !this.adapter.objectStoreNames.includes(store)) {
             throw new IndexedDBError(
                 errorCreator(
@@ -99,7 +106,7 @@ export class StorageController {
         }
     }
 
-    throwIfDataArrayError(dataArray) {
+    throwIfDataArrayError(dataArray: any) {
         if (!dataArray) {
             throw new IndexedDBError(
                 errorCreator(StorageController.errorMessages.INVALID_STORAGE_ARRAY)({ adapter: this.adapter }),
@@ -110,7 +117,7 @@ export class StorageController {
             .forEach(this.throwIfDataObjectError);
     }
 
-    async _openFallbackAdapter(...args) {
+    async _openFallbackAdapter(...args: any[]) {
         const currentAdapterIndex = this.AvailableAdapters.findIndex(AA => AA === this.adapterType);
         const nextAdapterIndex = currentAdapterIndex + 1;
         if (this.AvailableAdapters.length <= nextAdapterIndex) {
@@ -130,7 +137,7 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async open({ onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore } = {}) {
+    async open({ onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore }: any = {}) {
         if (this.adapter.isOpen()) {
             throw new IndexedDBError(
                 errorCreator(StorageController.errorMessages.STORAGE_ALREADY_OPEN)({ adapter: this.adapter }),
@@ -148,7 +155,7 @@ export class StorageController {
         }
     }
 
-    async setWithoutFallback(store, dataObject) {
+    async setWithoutFallback(store: any, dataObject: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'set');
         this.throwIfDataObjectError(dataObject);
@@ -156,7 +163,7 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async set(store, dataObject) {
+    async set(store: any, dataObject: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'set');
         this.throwIfDataObjectError(dataObject);
@@ -172,7 +179,7 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async setAll(store, dataArray) {
+    async setAll(store: any, dataArray: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'setAll');
         this.throwIfDataArrayError(dataArray);
@@ -188,7 +195,7 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async get(store, key, options) {
+    async get(store: any, key: any, options?: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'get');
 
@@ -204,21 +211,21 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async getAll(store, options) {
+    async getAll(store: any, options?: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'getAll');
         return this.adapter.getAll(store, options);
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async getKeys(store) {
+    async getKeys(store: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'getKeys');
         return this.adapter.getKeys(store);
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async remove(store, key) {
+    async remove(store: any, key: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'remove');
 
@@ -234,14 +241,14 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async removeAll(store) {
+    async removeAll(store: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'removeAll');
         return this.adapter.removeAll(store);
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async contains(store, key) {
+    async contains(store: any, key: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'contains');
 
@@ -257,19 +264,19 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async count(store, key) {
+    async count(store: any, key?: any) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'count');
         return this.adapter.count(store, key);
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async close(...args) {
+    async close(...args: any[]) {
         return this.adapter.close(...args);
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async destroy(...args) {
+    async destroy(...args: any[]) {
         return this.adapter.destroy(...args);
     }
 }

@@ -1,5 +1,7 @@
 export class IndexedDBError extends Error {
-    constructor(error) {
+    error: any;
+
+    constructor(error: any) {
         super(error.message);
         this.error = error;
     }
