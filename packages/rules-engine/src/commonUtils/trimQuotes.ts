@@ -1,5 +1,3 @@
-// @flow
-
 import isString from 'd2-utilizr/lib/isString';
 
 export function trimQuotes(input: any) {

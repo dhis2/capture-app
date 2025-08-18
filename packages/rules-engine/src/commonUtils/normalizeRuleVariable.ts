@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../constants';
