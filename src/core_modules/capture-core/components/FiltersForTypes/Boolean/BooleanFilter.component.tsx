@@ -62,7 +62,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
                     allowMultiple={this.props.allowMultiple}
                     value={value}
                     onBlur={onCommitValue}
-                    orientation={orientations.VERTICAL}
+                    orientation={'VERTICAL'}
                 />
             </div>
         );
