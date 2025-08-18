@@ -6,7 +6,7 @@ import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration'
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 import {
     filterTypesObject,
     type AssigneeFilterData,
@@ -176,6 +176,11 @@ const getDataElementFilters = (
         // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return null;
+        }
+
+        const emptyValueFilter = fromApiEmptyValueFilter(serverFilter);
+        if (emptyValueFilter) {
+            return { id: serverFilter.dataItem, ...emptyValueFilter };
         }
 
         // $FlowFixMe If previous test doesn't return, element.type is a key in filterTypesObject
