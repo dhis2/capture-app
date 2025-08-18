@@ -1,6 +1,8 @@
 import React from 'react';
 
-type Props = Record<string, never>;
+type Props = {
+    [key: string]: any;
+};
 
 export class MultiSelectionsBoxes extends React.Component<Props> {
     render() {
