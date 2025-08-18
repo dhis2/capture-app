@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 const messageTypeClass = {
@@ -9,9 +8,9 @@ const messageTypeClass = {
 };
 
 type Props = {
-    innerMessage?: ?Object,
-    messageKey: string,
-    classes?: ?Object,
+    innerMessage?: any;
+    messageKey: string;
+    classes?: any;
 }
 
 export function InnerMessage(props: Props) {

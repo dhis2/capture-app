@@ -1,16 +1,16 @@
-// @flow
 import React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './svgIcon.module.css';
 
 type Props = {
-    className?: ?string,
+    className?: string | null;
+    children?: React.ReactNode;
+    [key: string]: any;
 };
 
 export const SvgIcon = (props: Props) => {
     const { className, ...passOnProps } = props;
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
         <svg
             className={classNames(defaultClasses.icon, props.className)}
             {...passOnProps}

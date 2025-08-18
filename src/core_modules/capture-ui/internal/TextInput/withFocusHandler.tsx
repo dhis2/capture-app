@@ -1,23 +1,24 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './textInput.module.css';
 
 type Props = {
-    onSetFocus: () => void,
-    onRemoveFocus: () => void,
-    inFocus: boolean,
-    onBlur?: ?(event: SyntheticEvent<HTMLInputElement>, rest?: ?Object) => void,
-    onFocus: () => void,
+    onSetFocus: () => void;
+    onRemoveFocus: () => void;
+    inFocus: boolean;
+    onBlur?: ((event: React.SyntheticEvent<HTMLInputElement>, rest?: any) => void) | null;
+    onFocus: () => void;
     classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-    }
+        inputWrapperFocused: string;
+        inputWrapperUnfocused: string;
+    };
+    label?: any;
+    [key: string]: any;
 };
 
 export const withTextFieldFocusHandler = () => (InnerCompnent: React.ComponentType<any>) =>
     class FocusHandlerHOC extends React.Component<Props> {
-        handleBlur = (event: SyntheticEvent<HTMLInputElement>, rest?: ?Object) => {
+        handleBlur = (event: React.SyntheticEvent<HTMLInputElement>, rest?: any) => {
             this.props.onRemoveFocus();
             this.props.onBlur && this.props.onBlur(event, rest);
         }
@@ -35,7 +36,6 @@ export const withTextFieldFocusHandler = () => (InnerCompnent: React.ComponentTy
                 <div
                     className={classNames(defaultClasses.inputWrapper, inputWrapper)}
                 >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerCompnent
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}

@@ -1,17 +1,16 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './label.module.css';
 
 type Classes = {
-    label?: ?string,
+    label?: string | null;
 };
 
 type Props = {
-    children: React.Node,
-    classes: Classes,
-    labelRef?: ?(ref: any) => void,
-    useVerticalOrientation: ?boolean,
+    children: React.ReactNode;
+    classes: Classes;
+    labelRef?: ((ref: any) => void) | null;
+    useVerticalOrientation?: boolean | null;
 };
 
 export class Label extends React.PureComponent<Props> {
@@ -21,7 +20,6 @@ export class Label extends React.PureComponent<Props> {
             useVerticalOrientation ? defaultClasses.labelContainerVertical : defaultClasses.labelContainer;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <div
                 ref={labelRef}
                 className={classNames(labelContainerDefault, classes.label)}

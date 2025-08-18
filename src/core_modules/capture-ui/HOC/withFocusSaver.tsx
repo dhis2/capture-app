@@ -4,6 +4,8 @@ type Props = {
     inFocus?: boolean;
     onSetFocus?: () => void;
     onRemoveFocus?: () => void;
+    label?: any;
+    [key: string]: any;
 };
 
 type State = {

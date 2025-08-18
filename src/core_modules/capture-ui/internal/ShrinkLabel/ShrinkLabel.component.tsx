@@ -1,10 +1,15 @@
-// @inheritedComponent FormLabel
+
 
 import React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './shrinkLabel.module.css';
 
-export function ShrinkLabel(props) {
+type Props = {
+    children: React.ReactNode;
+    shrink?: boolean;
+};
+
+export function ShrinkLabel(props: Props) {
     const {
         children,
         shrink,
