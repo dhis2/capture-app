@@ -40,7 +40,7 @@ type Props = {
     onBlur: (value: AgeValues | null, options?: ValidationOptions | null) => void;
     onChange: (value: AgeValues | null) => void;
     onRemoveFocus: () => void;
-    orientation: keyof typeof orientations;
+    orientation: typeof orientations[keyof typeof orientations];
     innerMessage?: any | null;
     classes: any;
     inputMessageClasses: InputMessageClasses | null;
