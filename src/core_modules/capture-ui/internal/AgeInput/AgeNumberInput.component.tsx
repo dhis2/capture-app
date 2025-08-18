@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { TextInput } from '../TextInput/TextInput.component';
 import { withShrinkLabel } from '../../HOC/withShrinkLabel';
@@ -7,30 +6,27 @@ import { withTextFieldFocusHandler } from '../../internal/TextInput/withFocusHan
 
 
 type Props = {
-    label: string,
-    value: ?string,
-    onBlur: (value: string) => void,
-    onChange?: ?((value: string) => void),
-    classes?: ?any,
+    value?: string | null;
+    onBlur: (value: string) => void;
+    onChange?: (value: string) => void;
+    classes?: any;
+    label?: string;
+    shrinkDisabled?: boolean;
 }
 
 class AgeNumberInputPlain extends Component<Props> {
-    handleBlur = (event) => {
+    handleBlur = (event: any) => {
         this.props.onBlur(event.currentTarget.value);
     }
-    handleChange = (event) => {
+    handleChange = (event: any) => {
         this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
-    handleFocus = () => {}
     render() {
         const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
-                classes={{}}
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
-                onFocus={this.handleFocus}
                 value={value || ''}
                 {...passOnProps}
             />
