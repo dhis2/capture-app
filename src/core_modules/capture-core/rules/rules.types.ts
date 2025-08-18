@@ -1,4 +1,3 @@
-// @flow
 import type {
     EventData,
     EventsData,
@@ -11,25 +10,25 @@ import type {
 } from './RuleEngine';
 import type { ProgramStage, TrackerProgram, EventProgram, RenderFoundation } from '../metaData';
 
-export type GetApplicableRuleEffectsForTrackerProgramInput = {|
+export type GetApplicableRuleEffectsForTrackerProgramInput = {
     program: TrackerProgram,
     stage?: ProgramStage,
-    orgUnit: ?OrgUnit,
+    orgUnit: OrgUnit | null,
     currentEvent?: EventData,
     otherEvents?: EventsData,
     attributeValues?: TEIValues,
     enrollmentData?: Enrollment,
     formFoundation?: RenderFoundation,
-|};
+};
 
-export type GetApplicableRuleEffectsForEventProgramInput = {|
+export type GetApplicableRuleEffectsForEventProgramInput = {
     program: EventProgram,
-    orgUnit: ?OrgUnit,
+    orgUnit: OrgUnit | null,
     currentEvent?: EventData,
-|};
+};
 
-export type GetApplicableRuleEffectsInput = {|
-    orgUnit: ?OrgUnit,
+export type GetApplicableRuleEffectsInput = {
+    orgUnit: OrgUnit | null,
     currentEvent?: EventData,
     otherEvents?: EventsData,
     attributeValues?: TEIValues,
@@ -39,4 +38,4 @@ export type GetApplicableRuleEffectsInput = {|
     programRuleVariables: Array<ProgramRuleVariable>,
     trackedEntityAttributes?: TrackedEntityAttributes,
     foundationForPostProcessing: RenderFoundation,
-|};
+};

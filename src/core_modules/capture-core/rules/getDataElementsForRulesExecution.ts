@@ -1,4 +1,3 @@
-// @flow
 import type { ProgramStage } from '../metaData';
 
 export const getDataElementsForRulesExecution = (stages: Map<string, ProgramStage>) =>

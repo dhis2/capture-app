@@ -1,4 +1,3 @@
-// @flow
 import type { DataElement } from '../metaData';
 
 export const getTrackedEntityAttributesForRulesExecution = (attributes: Array<DataElement>) =>

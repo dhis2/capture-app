@@ -1,4 +1,3 @@
-// @flow
 import { errorCreator } from 'capture-core-utils';
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import log from 'loglevel';
@@ -20,11 +19,11 @@ export const validateAssignEffects = async ({
     onGetValidationContext,
 }: {
     dataElements: Array<DataElement>,
-    effects: Object,
+    effects: any,
     querySingleResource: QuerySingleResource,
-    onGetValidationContext?: () => Object,
-}): Promise<?AssignOutputEffectWithValidations> => {
-    const assignEffects: {| [metaDataId: string]: Array<AssignOutputEffect> |} = effects[effectActions.ASSIGN_VALUE];
+    onGetValidationContext?: () => any,
+}): Promise<AssignOutputEffectWithValidations | null | undefined> => {
+    const assignEffects: { [metaDataId: string]: Array<AssignOutputEffect> } = effects[effectActions.ASSIGN_VALUE];
     if (!assignEffects) {
         return effects;
     }

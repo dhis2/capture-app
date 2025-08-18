@@ -1,4 +1,3 @@
-// @flow
 import type { OutputEffects } from '@dhis2/rules-engine-javascript';
 import { ruleEngine } from './rulesEngine';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';
@@ -54,7 +53,7 @@ export const getApplicableRuleEffectsForTrackerProgram = ({
     enrollmentData,
     formFoundation,
 }: GetApplicableRuleEffectsForTrackerProgramInput,
-flattenedResult: boolean = false,
+flattenedResult = false,
 ) => {
     const { programRules, programRuleVariables } = getRulesMetadata(
         program.programRuleVariables,
@@ -70,7 +69,7 @@ flattenedResult: boolean = false,
         if (!currentEvent.programStageId && stage) {
             currentEvent.programStageId = stage.id;
         }
-        currentEvent.programStageName = program.stages.get(currentEvent.programStageId)?.untranslatedName;
+        currentEvent.programStageName = program.stages.get(currentEvent.programStageId as string)?.untranslatedName;
     }
 
     const effects = getApplicableRuleEffects({
