@@ -213,7 +213,7 @@ const SearchResultsIndex = ({
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
                     content={i18n.t('No searchable attributes for {{trackedEntityName}}', {
-                        trackedEntityName, interpolation: false,
+                        trackedEntityName, interpolation: { escapeValue: false },
                     })}
                 >
                     <Button
@@ -230,7 +230,7 @@ const SearchResultsIndex = ({
         <div className={classes.bottom}>
             <div className={classes.bottomText}>
                 {i18n.t('If none of search results match, you can create a new {{trackedEntityName}}', {
-                    trackedEntityName, interpolation: false,
+                    trackedEntityName, interpolation: { escapeValue: false },
                 })}
             </div>
 
