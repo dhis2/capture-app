@@ -1,4 +1,3 @@
-// @flow
 export { effectActions } from './effectActions.const';
 export { rulesEngineEffectTargetDataTypes } from './targetDataTypes.const';
 export { idNames } from './idNames.const';

@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { VariableService } from './services/VariableService';
 import { ValueProcessor } from './processors/ValueProcessor';
@@ -13,7 +12,7 @@ import type {
     Flag,
 } from './rulesEngine.types';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
-import { effectActions, typeof environmentTypes } from './constants';
+import { effectActions, environmentTypes } from './constants';
 
 export class RulesEngine {
     inputConverter: IConvertInputRulesValue;
@@ -28,7 +27,7 @@ export class RulesEngine {
         inputConverter: IConvertInputRulesValue,
         outputConverter: IConvertOutputRulesEffectsValue,
         dateUtils: IDateUtils,
-        environment: $Values<environmentTypes>,
+        environment: keyof typeof environmentTypes,
         flags?: Flag,
     ) {
         this.inputConverter = inputConverter;

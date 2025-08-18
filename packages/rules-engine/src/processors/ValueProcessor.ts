@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 // TODO: add some kind of errorcreator to d2 before moving
 import { errorCreator } from '../errorCreator';
@@ -12,14 +11,14 @@ export class ValueProcessor {
     };
 
     converterObject: IConvertInputRulesValue;
-    processValue: (value: any, type: $Values<typeof typeKeys>) => any;
+    processValue: (value: any, type: keyof typeof typeKeys) => any;
 
     constructor(converterObject: IConvertInputRulesValue) {
         this.converterObject = converterObject;
         this.processValue = this.processValue.bind(this);
     }
 
-    processValue(value: any, type: $Values<typeof typeKeys>): any {
+    processValue(value: any, type: keyof typeof typeKeys): any {
         if (!typeKeys[type]) {
             log.warn(ValueProcessor.errorMessages.TYPE_NOT_SUPPORTED);
             return '';

@@ -1,4 +1,3 @@
-// @flow
 import { typeKeys } from './typeKeys.const';
 
 export const mapTypeToInterfaceFnName = {

@@ -1,4 +1,3 @@
-// @flow
 import { injectVariableValues } from './injectVariableValues';
 import { getInjectionValue } from './common';
 import type { D2Parameters } from '../../d2Functions/getD2Functions.types';
@@ -24,7 +23,7 @@ function evaluate(code) {
  * @param parameters
  * @returns {boolean}
  */
-const isFunctionSignatureBroken = (dhisFunctionParameters: ?D2Parameters, parameters: Array<any>) => {
+const isFunctionSignatureBroken = (dhisFunctionParameters: D2Parameters | null, parameters: Array<any>) => {
     if (dhisFunctionParameters) {
         // But we are only checking parameters where the dhisFunction actually has
         // a defined set of parameters(concatenate, for example, does not have a fixed number);

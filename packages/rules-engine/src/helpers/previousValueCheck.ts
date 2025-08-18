@@ -1,4 +1,3 @@
-// @flow
 import { rulesEngineEffectTargetDataTypes, typeKeys } from '../constants';
 import type { DataElements, TrackedEntityAttributes, HideOutputEffect } from '../rulesEngine.types';
 
@@ -6,8 +5,8 @@ const processDataElementValue = ({
     dataElementId,
     dataElements,
 }: {
-    dataElementId: ?string,
-    dataElements: ?DataElements,
+    dataElementId: string | null,
+    dataElements: DataElements | null,
 }) => {
     if (dataElementId && dataElements && dataElements[dataElementId]) {
         const dataElement = dataElements[dataElementId];
@@ -23,8 +22,8 @@ const processTEAValue = ({
     trackedEntityAttributeId,
     trackedEntityAttributes,
 }: {
-    trackedEntityAttributeId: ?string,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
+    trackedEntityAttributeId: string | null,
+    trackedEntityAttributes: TrackedEntityAttributes | null,
 }) => {
     if (trackedEntityAttributeId && trackedEntityAttributes && trackedEntityAttributes[trackedEntityAttributeId]) {
         const attribute = trackedEntityAttributes[trackedEntityAttributeId];
@@ -51,12 +50,12 @@ export const getOutputEffectsWithPreviousValueCheck = ({
     onProcessValue,
 }: {
     outputEffects: Array<HideOutputEffect>,
-    dataElementId: ?string,
-    trackedEntityAttributeId: ?string,
-    dataElements: ?DataElements,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    formValues?: ?{ [key: string]: any },
-    onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+    dataElementId: string | null,
+    trackedEntityAttributeId: string | null,
+    dataElements: DataElements | null,
+    trackedEntityAttributes: TrackedEntityAttributes | null,
+    formValues?: { [key: string]: any } | null,
+    onProcessValue: (value: any, type: keyof typeof typeKeys) => any,
 }) =>
     outputEffects.reduce((acc, outputEffect) => {
         if (formValues && Object.keys(formValues).length !== 0 && outputEffect.targetDataType) {

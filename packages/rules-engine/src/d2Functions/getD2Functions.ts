@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';

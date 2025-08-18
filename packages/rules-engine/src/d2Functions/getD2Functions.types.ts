@@ -1,29 +1,28 @@
-// @flow
 import type {
     RuleVariables,
     IDateUtils,
     OrgUnit,
 } from '../rulesEngine.types';
 
-export type D2FunctionsInput = $ReadOnly<{|
+export type D2FunctionsInput = Readonly<{
     dateUtils: IDateUtils,
     variablesHash: RuleVariables,
-    selectedOrgUnit: ?OrgUnit,
+    selectedOrgUnit: OrgUnit | null | undefined,
     selectedUserRoles: Array<string>,
-|}>;
+}>;
 
-type D2ParameterRange = {|
+type D2ParameterRange = {
     min: number,
     max: number,
-|}
+}
 
 export type D2Parameters = number | D2ParameterRange;
 
-export type D2FunctionConfig = {|
+export type D2FunctionConfig = {
     parameters?: D2Parameters,
     execute: (params: Array<any>) => any,
-|}
-export type D2Functions = $ReadOnly<{|
+}
+export type D2Functions = Readonly<{
     ceil: D2FunctionConfig,
     floor: D2FunctionConfig,
     round: D2FunctionConfig,
@@ -57,4 +56,4 @@ export type D2Functions = $ReadOnly<{|
     checkControlDigits: D2FunctionConfig,
     multiTextContains: D2FunctionConfig,
     condition: D2FunctionConfig,
-|}>;
+}>;

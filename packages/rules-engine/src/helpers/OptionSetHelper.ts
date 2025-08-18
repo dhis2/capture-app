@@ -1,4 +1,3 @@
-// @flow
 import { typeKeys } from '../constants';
 import type { Option } from '../services/VariableService';
 

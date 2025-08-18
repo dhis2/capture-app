@@ -1,7 +1,6 @@
-// @flow
 import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
-import { typeKeys, typeof environmentTypes } from '../../constants';
+import { typeKeys, environmentTypes } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getStructureEvents } from './helpers';
 import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
@@ -30,14 +29,14 @@ import type {
 } from '../../rulesEngine.types';
 
 type SourceData = {
-    executingEvent: ?EventData,
-    eventsContainer: ?EventsDataContainer,
-    dataElements: ?DataElements,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    selectedEntity: ?TEIValues,
-    selectedEnrollment: ?Enrollment,
+    executingEvent: EventData | null,
+    eventsContainer: EventsDataContainer | null,
+    dataElements: DataElements | null,
+    trackedEntityAttributes: TrackedEntityAttributes | null,
+    selectedEntity: TEIValues | null,
+    selectedEnrollment: Enrollment | null,
     optionSets: OptionSets,
-    selectedOrgUnit: ?OrgUnit,
+    selectedOrgUnit: OrgUnit | null,
 };
 
 const variableSourceTypesDataElementSpecific = {
@@ -59,16 +58,16 @@ export const variableSourceTypes = {
 
 export class VariableService {
     static dateUtils: IDateUtils;
-    environment: $Values<environmentTypes>;
+    environment: keyof typeof environmentTypes;
 
-    onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
-    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
+    onProcessValue: (value: any, type: keyof typeof typeKeys) => any;
+    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => RuleVariable | null };
     defaultValues: any;
     structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer;
     constructor(
-        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        onProcessValue: (value: any, type: keyof typeof typeKeys) => any,
         dateUtils: IDateUtils,
-        environment: $Values<environmentTypes>,
+        environment: keyof typeof environmentTypes,
     ) {
         this.environment = environment;
         this.onProcessValue = onProcessValue;

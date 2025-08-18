@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from '../../errorCreator';
 import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes, typeKeys } from '../../constants';
@@ -32,7 +31,7 @@ const sanitiseFalsy = (value) => {
     return '';
 };
 
-type BaseValueType = number | ?string | boolean;
+type BaseValueType = number | string | null | boolean;
 type WarningEffect = Array<MessageEffect> | GeneralWarningEffect;
 type ErrorEffect = Array<MessageEffect> | GeneralErrorEffect;
 
@@ -60,7 +59,7 @@ export function getRulesEffectsProcessor(
 
     function createErrorDetectionEffect(
         effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): any {
+        type: keyof typeof effectActions): any {
         const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
             type,
             message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
@@ -73,7 +72,7 @@ export function getRulesEffectsProcessor(
 
     function createWarningEffect(
         effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): WarningEffect {
+        type: keyof typeof effectActions): WarningEffect {
         const result = createErrorDetectionEffect(effect, type);
         if (Array.isArray(result)) {
             return result;
@@ -87,7 +86,7 @@ export function getRulesEffectsProcessor(
 
     function createErrorEffect(
         effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): ErrorEffect {
+        type: keyof typeof effectActions): ErrorEffect {
         const result = createErrorDetectionEffect(effect, type);
         if (Array.isArray(result)) {
             return result;
@@ -119,13 +118,13 @@ export function getRulesEffectsProcessor(
     function createAssignValueEffect(
         effect: ProgramRuleEffect,
         element: DataElement | TrackedEntityAttribute,
-        targetDataType: $Values<typeof rulesEngineEffectTargetDataTypes>,
+        targetDataType: keyof typeof rulesEngineEffectTargetDataTypes,
     ): AssignOutputEffect {
         const normalizedValue = normalizeRuleVariable(effect.data, element.valueType);
         const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
 
         return {
-            type: effectActions.ASSIGN_VALUE,
+            type: effectActions.ASSIGN_VALUE as any,
             id: element.id,
             value: outputValue,
             targetDataType,
@@ -134,14 +133,14 @@ export function getRulesEffectsProcessor(
 
     function processAssignValue(
         effect: ProgramRuleEffect,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): Array<AssignOutputEffect> {
-        const effects = [];
+        dataElements: DataElements | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null): Array<AssignOutputEffect> {
+        const effects: AssignOutputEffect[] = [];
         if (dataElements && effect.dataElementId && dataElements[effect.dataElementId]) {
             effects.push(createAssignValueEffect(
                 effect,
                 dataElements[effect.dataElementId],
-                rulesEngineEffectTargetDataTypes.DATA_ELEMENT),
+                'DATA_ELEMENT' as keyof typeof rulesEngineEffectTargetDataTypes),
             );
         }
         if (trackedEntityAttributes &&
@@ -150,7 +149,7 @@ export function getRulesEffectsProcessor(
             effects.push(createAssignValueEffect(
                 effect,
                 trackedEntityAttributes[effect.trackedEntityAttributeId],
-                rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE),
+                'TRACKED_ENTITY_ATTRIBUTE' as keyof typeof rulesEngineEffectTargetDataTypes),
             );
         }
         return effects;
@@ -158,15 +157,15 @@ export function getRulesEffectsProcessor(
 
     function processHideField(
         effect: ProgramRuleEffect,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        formValues?: ?{[key: string]: any},
-        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        dataElements: DataElements | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null,
+        formValues?: {[key: string]: any} | null,
+        onProcessValue?: (value: any, type: keyof typeof typeKeys) => any,
     ): Array<HideOutputEffect> {
         const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
             () => ({
-                type: effectActions.HIDE_FIELD,
+                type: effectActions.HIDE_FIELD as any,
                 content: effect.content,
             }),
         );
@@ -182,53 +181,53 @@ export function getRulesEffectsProcessor(
     }
 
     function processShowError(effect: ProgramRuleEffect): ErrorEffect {
-        return createErrorEffect(effect, effectActions.SHOW_ERROR);
+        return createErrorEffect(effect, effectActions.SHOW_ERROR as any);
     }
 
     function processShowWarning(effect: ProgramRuleEffect): WarningEffect {
-        return createWarningEffect(effect, effectActions.SHOW_WARNING);
+        return createWarningEffect(effect, effectActions.SHOW_WARNING as any);
     }
 
     function processShowErrorOnComplete(effect: ProgramRuleEffect): ErrorEffect {
-        return createErrorEffect(effect, effectActions.SHOW_ERROR_ONCOMPLETE);
+        return createErrorEffect(effect, effectActions.SHOW_ERROR_ONCOMPLETE as any);
     }
 
     function processShowWarningOnComplete(effect: ProgramRuleEffect): WarningEffect {
-        return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE);
+        return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE as any);
     }
 
-    function processHideSection(effect: ProgramRuleEffect): ?HideOutputEffect {
+    function processHideSection(effect: ProgramRuleEffect): HideOutputEffect | null {
         if (!effect.programStageSectionId) {
             return null;
         }
 
         return {
-            type: effectActions.HIDE_SECTION,
+            type: effectActions.HIDE_SECTION as any,
             id: effect.programStageSectionId,
         };
     }
 
-    function processHideProgramStage(effect: ProgramRuleEffect): ?HideProgramStageEffect {
+    function processHideProgramStage(effect: ProgramRuleEffect): HideProgramStageEffect | null {
         if (!effect.programStageId) {
             return null;
         }
 
         return {
-            type: effectActions.HIDE_PROGRAM_STAGE,
+            type: effectActions.HIDE_PROGRAM_STAGE as any,
             id: effect.programStageId,
         };
     }
 
     function processMakeCompulsory(effect: ProgramRuleEffect): Array<CompulsoryEffect> {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.MAKE_COMPULSORY,
+            type: effectActions.MAKE_COMPULSORY as any,
         }));
     }
 
     function processDisplayText(effect: ProgramRuleEffect): any {
         const message = effect.displayContent || '';
         return {
-            type: effectActions.DISPLAY_TEXT,
+            type: effectActions.DISPLAY_TEXT as any,
             id: effect.location,
             displayText: {
                 id: effect.id,
@@ -242,7 +241,7 @@ export function getRulesEffectsProcessor(
         const data = effect.data !== undefined ? effect.data : '';
 
         return {
-            type: effectActions.DISPLAY_KEY_VALUE_PAIR,
+            type: effectActions.DISPLAY_KEY_VALUE_PAIR as any,
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
@@ -255,21 +254,21 @@ export function getRulesEffectsProcessor(
 
     function processHideOptionGroup(effect: ProgramRuleEffect): any {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_OPTION_GROUP,
+            type: effectActions.HIDE_OPTION_GROUP as any,
             optionGroupId: effect.optionGroupId,
         }));
     }
 
     function processHideOption(effect: ProgramRuleEffect): any {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_OPTION,
+            type: effectActions.HIDE_OPTION as any,
             optionId: effect.optionId,
         }));
     }
 
     function processShowOptionGroup(effect: ProgramRuleEffect): any {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.SHOW_OPTION_GROUP,
+            type: effectActions.SHOW_OPTION_GROUP as any,
             optionGroupId: effect.optionGroupId,
         }));
     }
@@ -299,10 +298,10 @@ export function getRulesEffectsProcessor(
         onProcessValue,
     }: {
         effects: Array<ProgramRuleEffect>,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        formValues?: ?{ [key: string]: any },
-        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        dataElements: DataElements | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null,
+        formValues?: { [key: string]: any } | null,
+        onProcessValue?: (value: any, type: keyof typeof typeKeys) => any,
     }): OutputEffects {
         return effects
             .filter(({ action }) => mapActionsToProcessor[action])
