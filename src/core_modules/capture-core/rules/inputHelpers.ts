@@ -51,7 +51,7 @@ export function getCurrentClientValues(
     state: any,
     foundation: RenderFoundation,
     formId: string,
-    updatedEventField?: any | null | undefined) {
+    updatedEventField?: any | null) {
     const currentFormData = state.formsValues[formId] || {};
     const updatedCurrentFormData = updatedEventField ?
         { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :

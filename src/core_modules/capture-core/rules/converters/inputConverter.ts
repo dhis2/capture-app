@@ -5,9 +5,9 @@ import type { IConvertInputRulesValue } from '@dhis2/rules-engine-javascript';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
-const convertStringValue = (value: string | null | undefined): string | null => (value || null);
+const convertStringValue = (value: string | null): string | null => (value || null);
 const convertNumericValue = (value: any): number | null => (typeof value === 'number' ? value : null);
-const convertObjectToString = (value: { name: string } | null | undefined) => (value ? value.name : null);
+const convertObjectToString = (value: { name: string } | null) => (value ? value.name : null);
 
 export const inputConverter: IConvertInputRulesValue = {
     convertText: convertStringValue,
@@ -16,8 +16,8 @@ export const inputConverter: IConvertInputRulesValue = {
     convertLetter: convertStringValue,
     convertPhoneNumber: convertStringValue,
     convertEmail: convertStringValue,
-    convertBoolean: (value: boolean | null | undefined): boolean | null => ((value || value === false) ? value : null),
-    convertTrueOnly: (value: boolean | null | undefined): boolean | null => (value || null),
+    convertBoolean: (value: boolean | null): boolean | null => ((value || value === false) ? value : null),
+    convertTrueOnly: (value: boolean | null): boolean | null => (value || null),
     convertDate: (value: any): string | null => {
         if (!value) {
             return null;

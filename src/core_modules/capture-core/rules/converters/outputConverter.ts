@@ -11,7 +11,7 @@ const dateMomentFormat = 'YYYY-MM-DD';
 
 export const outputConverter: IConvertOutputRulesEffectsValue = {
     convertText: (value: string): string => value,
-    convertMultiText: (value: string): string => Array.from(new Set(value.split(','))).join(','),
+    convertMultiText: (value: string): string => [...new Set(value.split(','))].join(','),
     convertLongText: (value: string): string => value,
     convertLetter: (value: string): string => value,
     convertPhoneNumber: (value: string): string => value,

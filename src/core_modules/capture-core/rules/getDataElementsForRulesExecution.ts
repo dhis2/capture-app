@@ -1,7 +1,7 @@
 import type { ProgramStage } from '../metaData';
 
 export const getDataElementsForRulesExecution = (stages: Map<string, ProgramStage>) =>
-    Array.from(stages.values())
+    [...stages.values()]
         .flatMap(stage => stage.stageForm.getElements())
         .reduce((accRulesDataElements, dataElement) => {
             accRulesDataElements[dataElement.id] = {

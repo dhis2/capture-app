@@ -23,7 +23,7 @@ const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) 
 
 const deduplicateEffectArray = (effectArray: Array<OutputEffect>) => {
     const dedupedEffectsAsMap = new Map(effectArray.map(effect => [effect.id, effect]));
-    return Array.from(dedupedEffectsAsMap.values());
+    return [...dedupedEffectsAsMap.values()];
 };
 
 const postProcessAssignEffects = ({
@@ -65,7 +65,7 @@ const postProcessHideSectionEffects = (
         return [];
     }
 
-    return Array.from(section.elements.values())
+    return [...section.elements.values()]
         .map(({ id }) => ({
             id,
             type: effectActions.HIDE_FIELD,
