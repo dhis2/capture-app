@@ -98,8 +98,6 @@ export class PolygonField extends React.Component<Props, State> {
         }
     };
 
-    mapInstance: any | null | undefined;
-
     getCenter = (featureCollection: FeatureCollection | null | undefined) => {
         if (!featureCollection) {
             return this.props.center;
@@ -110,7 +108,6 @@ export class PolygonField extends React.Component<Props, State> {
     }
 
     getFeatureCollection = (coordinates: any) => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null)
-
 
     closeMap = () => {
         this.setState({ showMap: false });
@@ -142,6 +139,8 @@ export class PolygonField extends React.Component<Props, State> {
     setMapInstance = (mapInstance: any) => {
         this.mapInstance = mapInstance;
     }
+
+    mapInstance: any | null | undefined;
 
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
