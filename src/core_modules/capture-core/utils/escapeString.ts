@@ -1,5 +1,3 @@
-// @flow
-
 const valueToEscape = Object.freeze({
     COLON: ':',
     COMMA: ',',
@@ -12,4 +10,3 @@ export const escapeString = (value: string): string =>
         .replace(new RegExp(valueToEscape.SLASH, 'g'), `${escape}${valueToEscape.SLASH}`)
         .replace(new RegExp(valueToEscape.COLON, 'g'), `${escape}${valueToEscape.COLON}`)
         .replace(new RegExp(valueToEscape.COMMA, 'g'), `${escape}${valueToEscape.COMMA}`);
-
