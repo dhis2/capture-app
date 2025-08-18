@@ -9,13 +9,14 @@ export type QueryParameters = {
     page?: number
     fields?: string | string[]
     filter?: string | string[]
+    [key: string]: any
 }
 export type QueryVariables = any;
 
 export type ResourceQuery = {
-    resource: string
-    id?: string | (() => string) | (() => string | null)
-    data?: any
-    params?: any
+    resource: string;
+    id?: any;
+    data?: any;
+    params?: any;
 };
 
