@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconCheckmark16, IconLocation16, colors, Button, ModalContent, ModalActions } from '@dhis2/ui';
@@ -13,40 +12,40 @@ import { DeleteControl } from './DeleteControl.component';
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 type Props = {
-  onBlur: (value: any) => void,
-  onOpenMap: (hasValue: boolean) => void,
-  value?: ?any,
-  center?: ?Array<number>,
-  mapDialog?: ?React.Element<any>,
+  onBlur: (value: any) => void;
+  onOpenMap: (hasValue: boolean) => void;
+  value?: any | null | undefined;
+  center?: Array<number> | null | undefined;
+  mapDialog?: any;
 };
 
 type State = {
-    showMap: ?boolean,
-    mapCoordinates?: ?Array<any>,
-    zoom: number,
-    bounds?: ?any,
+    showMap: boolean | null | undefined;
+    mapCoordinates?: Array<any> | null | undefined;
+    zoom: number;
+    bounds?: any | null | undefined;
 }
 
 type Feature = {
-    type: string,
-    properties: Object,
+    type: string;
+    properties: any;
     geometry: {
-        type: string,
-        coordinates: Array<Array<Array<Number>>>,
-    },
+        type: string;
+        coordinates: Array<Array<Array<number>>>;
+    };
 }
 
 type FeatureCollection = {
-    type: string,
-    features: Array<Feature>,
+    type: string;
+    features: Array<Feature>;
 };
 
-function coordsToFeatureCollection(coordinates): ?FeatureCollection {
+function coordsToFeatureCollection(coordinates: any): FeatureCollection | null | undefined {
     if (!coordinates) {
         return null;
     }
 
-    const list = coordinates[0].map(c => [...c, 0]);
+    const list = coordinates[0].map((c: any) => [...c, 0]);
     return {
         type: 'FeatureCollection',
         features: [
@@ -63,8 +62,6 @@ function coordsToFeatureCollection(coordinates): ?FeatureCollection {
 }
 
 export class PolygonField extends React.Component<Props, State> {
-    mapInstance: ?any;
-
     constructor(props: Props) {
         super(props);
 
@@ -75,13 +72,12 @@ export class PolygonField extends React.Component<Props, State> {
     }
 
     componentDidUpdate() {
-        // Invalidate map size to fix rendering bug
         if (this.mapInstance && this.state.showMap) {
             this.mapInstance.leafletElement.invalidateSize();
         }
     }
 
-    onFeatureGroupReady = (reactFGref: any, featureCollection: ?FeatureCollection) => {
+    onFeatureGroupReady = (reactFGref: any, featureCollection: FeatureCollection | null | undefined) => {
         if (featureCollection) {
             const leafletGeoJSON = new L.GeoJSON(featureCollection);
             if (reactFGref) {
@@ -102,7 +98,9 @@ export class PolygonField extends React.Component<Props, State> {
         }
     };
 
-    getCenter = (featureCollection: ?FeatureCollection) => {
+    mapInstance: any | null | undefined;
+
+    getCenter = (featureCollection: FeatureCollection | null | undefined) => {
         if (!featureCollection) {
             return this.props.center;
         }
@@ -148,12 +146,10 @@ export class PolygonField extends React.Component<Props, State> {
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
 
-            // $FlowFixMe[incompatible-type] automated comment
             this.props.mapDialog,
             { hide: !this.state.showMap, onClose: this.closeMap },
 
-            // $FlowFixMe[incompatible-use] automated comment
-            [...React.Children.toArray(this.props.mapDialog.props.children), (
+            [...React.Children.toArray(this.props.mapDialog?.props?.children || []), (
                 <>
                     <ModalContent className={defaultClasses.dialogContent} key="dialogContent">
                         {this.renderMap()}
@@ -209,19 +205,13 @@ export class PolygonField extends React.Component<Props, State> {
     }
 
     renderDialogActions = () => (
-        <ModalActions className={defaultClasses.dialogActionOuterContainer}>
-            <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button secondary onClick={this.closeMap}>
-                    {i18n.t('Cancel')}
-                </Button>
-            </div>
-            <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button primary onClick={this.onSetPolygon}>
-                    {i18n.t('Set area')}
-                </Button>
-            </div>
+        <ModalActions>
+            <Button secondary onClick={this.closeMap}>
+                {i18n.t('Cancel') as React.ReactNode}
+            </Button>
+            <Button primary onClick={this.onSetPolygon}>
+                {i18n.t('Set area') as React.ReactNode}
+            </Button>
         </ModalActions>
     );
 
@@ -236,7 +226,7 @@ export class PolygonField extends React.Component<Props, State> {
                                 <IconCheckmark16 color={colors.blue600} />
                             </span>
                             <div className={defaultClasses.statusText}>
-                                {i18n.t('Area on map saved')}
+                                {i18n.t('Area on map saved') as React.ReactNode}
                             </div>
                         </>
                     )

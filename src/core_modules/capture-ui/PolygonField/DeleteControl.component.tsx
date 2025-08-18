@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
@@ -7,13 +6,20 @@ import L from 'leaflet';
 import { MapControl, withLeaflet } from 'react-leaflet';
 
 type Props = {
-    position?: any,
-    onClick: () => void,
-    disabled?: ?boolean,
+    position?: any;
+    onClick: () => void;
+    disabled?: boolean | null | undefined;
 }
 
-// $FlowFixMe[prop-missing] automated comment
 class DeleteControlPlain extends MapControl<any, Props> {
+    leafletElement: any;
+    private componentProps: Props;
+
+    constructor(props: Props) {
+        super(props);
+        this.componentProps = props;
+    }
+
     UNSAFE_componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
@@ -21,11 +27,11 @@ class DeleteControlPlain extends MapControl<any, Props> {
             <div className="leaflet-draw-toolbar leaflet-bar">
                 {/* eslint-disable-next-line */}
                 <a
-                    className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.props.disabled })}
+                    className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.componentProps.disabled })}
                     onClick={this.onClick}
                     title={text}
                     role="button"
-                    tabIndex="0"
+                    tabIndex={0}
                 />
             </div>
         );
@@ -39,8 +45,8 @@ class DeleteControlPlain extends MapControl<any, Props> {
     }
 
     onClick = () => {
-        if (!this.props.disabled) {
-            this.props.onClick();
+        if (!this.componentProps.disabled) {
+            this.componentProps.onClick();
         }
     }
 
@@ -49,6 +55,7 @@ class DeleteControlPlain extends MapControl<any, Props> {
     }
 
     updateLeafletElement(fromProps: Props, toProps: Props): void {
+        this.componentProps = toProps;
         if (toProps.position !== fromProps.position) {
             this.leafletElement.setPosition(toProps.position);
         }
@@ -61,5 +68,4 @@ class DeleteControlPlain extends MapControl<any, Props> {
     }
 }
 
-// $FlowFixMe[incompatible-call] automated comment
 export const DeleteControl = withLeaflet(DeleteControlPlain);
