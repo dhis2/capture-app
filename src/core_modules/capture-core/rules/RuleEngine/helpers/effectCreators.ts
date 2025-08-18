@@ -14,6 +14,9 @@ import type {
     OutputEffects,
 } from '../types/ruleEngine.types';
 
+
+// Effects with targetDataType
+
 const createDataElementEffect = (
     effect: ProgramRuleEffect,
     type: typeof effectActions[keyof typeof effectActions],
@@ -45,7 +48,10 @@ export const createEffectsForConfiguredDataTypes = (
 ): OutputEffects =>
     effectForConfiguredDataTypeCreators
         .map(creator => creator(effect, type))
-        .filter((outputEffect): outputEffect is OutputEffect => outputEffect !== null);
+        .filter(outputEffect => outputEffect !== null);
+
+
+// Errors & Warnings
 
 const createGeneralWarningEffect = (
     id: string,

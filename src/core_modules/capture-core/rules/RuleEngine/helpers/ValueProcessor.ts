@@ -24,8 +24,8 @@ export class ValueProcessor {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;
         }
-        const outputConverter = this.converterObject[convertFnName];
-        const convertedValue = outputConverter ? outputConverter(value) : value;
+
+        const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
         return convertedValue ?? null;
     };
 

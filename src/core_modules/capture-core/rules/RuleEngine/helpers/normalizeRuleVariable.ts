@@ -22,6 +22,9 @@ const convertBoolean = (value: any) => {
 
 const convertString = (stringRepresentation: number | string): string => stringRepresentation.toString();
 
+// Turns the internal representation of a program rule variable into its "canonical" format
+// (e.g. numbers represented as strings get converted to numbers)
+// Used to preprocess a computed value before assigning it to a calculated program rule variable
 export const normalizeRuleVariable = (data: any, valueType: string) => {
     const ruleEffectDataConvertersByType = {
         [typeKeys.BOOLEAN]: convertBoolean,

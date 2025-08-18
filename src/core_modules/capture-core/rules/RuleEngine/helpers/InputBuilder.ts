@@ -59,11 +59,11 @@ export const variableSourceTypes = {
 };
 
 const programRuleVariableSourceIdExtractor = {
-    [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: (variable: ProgramRuleVariable) => variable.dataElementId,
-    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM]: (variable: ProgramRuleVariable) => variable.dataElementId,
-    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE]: (variable: ProgramRuleVariable) => variable.dataElementId,
-    [variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT]: (variable: ProgramRuleVariable) => variable.dataElementId,
-    [variableSourceTypes.TEI_ATTRIBUTE]: (variable: ProgramRuleVariable) => variable.trackedEntityAttributeId,
+    [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: variable => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM]: variable => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE]: variable => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT]: variable => variable.dataElementId,
+    [variableSourceTypes.TEI_ATTRIBUTE]: variable => variable.trackedEntityAttributeId,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     [variableSourceTypes.CALCULATED_VALUE]: (_: ProgramRuleVariable) => '',
 };
@@ -186,7 +186,7 @@ const buildSupplementaryData = ({
     selectedUserRoles,
 }: {
     selectedOrgUnit: OrgUnit;
-    selectedUserRoles: Array<string> | null;
+    selectedUserRoles?: Array<string> | null;
 }) => {
     const orgUnitId = selectedOrgUnit.id;
     const supplementaryData = selectedOrgUnit.groups.reduce(
@@ -215,7 +215,7 @@ export class InputBuilder {
     constructor(
         inputConverter: IConvertInputRulesValue,
         dataElements: DataElements | null,
-        trackedEntityAttributes: TrackedEntityAttributes | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null | undefined,
         optionSets: OptionSets,
         selectedOrgUnit: OrgUnit,
     ) {
@@ -227,7 +227,7 @@ export class InputBuilder {
         this.selectedOrgUnit = selectedOrgUnit;
     }
 
-    toLocalDate = (dateString: string | null, defaultValue: any = null) =>
+    toLocalDate = (dateString?: string | null, defaultValue: any = null) =>
         (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
 
     convertDataElementValue = (id: string, rawValue: any) =>
@@ -270,15 +270,15 @@ export class InputBuilder {
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
             createdDate,
-            this.toLocalDate(dueDate || null),
-            this.toLocalDate(completedDate || null),
+            this.toLocalDate(dueDate),
+            this.toLocalDate(completedDate),
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
             dataValues,
         );
     };
 
-    convertOptionSet(optionSetId: string | null): KotlinOptionSet {
+    convertOptionSet(optionSetId?: string | null): KotlinOptionSet {
         if (!optionSetId || !this.optionSets[optionSetId]) {
             return [];
         }
@@ -291,9 +291,9 @@ export class InputBuilder {
 
     getOptionSet(field: string, type: string): KotlinOptionSet {
         if (variableSourceTypesDataElementSpecific[type]) {
-            return this.convertOptionSet(this.dataElements[field]?.optionSetId || null);
+            return this.convertOptionSet(this.dataElements[field]?.optionSetId);
         } else if (variableSourceTypesTrackedEntitySpecific[type]) {
-            return this.convertOptionSet(this.trackedEntityAttributes[field]?.optionSetId || null);
+            return this.convertOptionSet(this.trackedEntityAttributes[field]?.optionSetId);
         }
         return [];
     }
@@ -316,8 +316,8 @@ export class InputBuilder {
             RuleVariableType[type],
             name,
             !useNameForOptionSet,
-            this.getOptionSet(field || '', type),
-            field || '',
+            this.getOptionSet(field, type),
+            field,
             ruleValueTypeMap[fieldType] || RuleValueType.TEXT,
             programStage,
         );
@@ -328,7 +328,7 @@ export class InputBuilder {
         selectedEntity,
     }: {
         selectedEnrollment: Enrollment;
-        selectedEntity: TEIValues | null;
+        selectedEntity?: TEIValues | null;
     }) => {
         const {
             enrollmentId: enrollment,
@@ -346,13 +346,13 @@ export class InputBuilder {
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
             )) : [];
 
-        const convertDate = (dateString: string | null) => this.toLocalDate(dateString, LocalDate.now());
+        const convertDate = (dateString?: string | null) => this.toLocalDate(dateString, LocalDate.now());
 
         return new RuleEnrollmentJs(
-            enrollment || '',
+            enrollment!,
             programName || '',
-            convertDate(incidentDate || null),
-            convertDate(enrollmentDate || null),
+            convertDate(incidentDate),
+            convertDate(enrollmentDate),
             enrollmentStatus ? RuleEnrollmentStatus[enrollmentStatus] : RuleEnrollmentStatus.ACTIVE,
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
@@ -365,7 +365,7 @@ export class InputBuilder {
         selectedUserRoles,
     }: {
         programRulesContainer: ProgramRulesContainer;
-        selectedUserRoles: Array<string> | null;
+        selectedUserRoles?: Array<string> | null;
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 

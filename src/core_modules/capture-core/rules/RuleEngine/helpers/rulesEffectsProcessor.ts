@@ -104,8 +104,8 @@ export function getRulesEffectsProcessor(
         effect: ProgramRuleEffect,
         dataElements: DataElements | null,
         trackedEntityAttributes: TrackedEntityAttributes | null,
+        formValues: { [key: string]: any } | null | undefined,
         onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any,
-        formValues?: { [key: string]: any } | null,
     ): Array<HideOutputEffect> {
         const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
@@ -245,7 +245,7 @@ export function getRulesEffectsProcessor(
     }: {
         effects: Array<ProgramRuleEffect>;
         dataElements: DataElements | null;
-        trackedEntityAttributes: TrackedEntityAttributes | null;
+        trackedEntityAttributes?: TrackedEntityAttributes | null;
         formValues?: { [key: string]: any } | null;
         onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
     }): OutputEffects {
@@ -258,6 +258,7 @@ export function getRulesEffectsProcessor(
                 formValues,
                 onProcessValue,
             ))
+            // when mapActionsToProcessor function returns `null` we filter those values out.
             .filter(Boolean);
     }
 

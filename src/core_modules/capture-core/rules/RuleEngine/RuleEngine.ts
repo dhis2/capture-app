@@ -10,13 +10,14 @@ import type {
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     Flag,
+    ProgramRuleEffect,
 } from './types/ruleEngine.types';
 
 export class RuleEngine {
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
     valueProcessor: ValueProcessor;
-    userRoles: Array<string> = [];
+    userRoles!: Array<string>;
     flags: Flag;
 
     constructor(
@@ -49,18 +50,18 @@ export class RuleEngine {
         const inputBuilder = new InputBuilder(
             this.inputConverter,
             dataElements,
-            trackedEntityAttributes || null,
+            trackedEntityAttributes,
             optionSets,
             selectedOrgUnit,
         );
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
-            selectedUserRoles: selectedUserRoles || null,
+            selectedUserRoles,
         });
         const enrollment = selectedEnrollment ?
             inputBuilder.buildEnrollment({
                 selectedEnrollment,
-                selectedEntity: selectedEntity || null,
+                selectedEntity,
             }) : null;
 
         const events = otherEvents ?
@@ -84,13 +85,13 @@ export class RuleEngine {
                 ...Object.fromEntries(effect.ruleAction.values),
                 action: effect.ruleAction.type,
                 data: effect.data,
-            }));
+            })) as Array<ProgramRuleEffect>;
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects({
-            effects: effects as any,
+            effects,
             dataElements,
-            trackedEntityAttributes: trackedEntityAttributes || null,
+            trackedEntityAttributes,
             formValues: { ...selectedEntity, ...currentEvent },
             onProcessValue: this.valueProcessor.processValue,
         });

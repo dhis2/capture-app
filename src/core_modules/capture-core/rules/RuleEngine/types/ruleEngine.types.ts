@@ -125,15 +125,15 @@ type ValidationMessage = {
 };
 
 export type GeneralErrorEffect = OutputEffect & {
-    error: ValidationMessage,
+    error: ValidationMessage
 };
 
 export type GeneralWarningEffect = OutputEffect & {
-    warning: ValidationMessage,
+    warning: ValidationMessage
 };
 
 export type MessageEffect = OutputEffect & {
-    message: string,
+    message: string
 };
 
 export type WarningEffects = Array<MessageEffect> | Array<GeneralWarningEffect>;
