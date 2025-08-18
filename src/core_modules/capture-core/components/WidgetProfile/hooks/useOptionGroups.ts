@@ -66,7 +66,7 @@ export const useOptionGroups = (program: any) => {
         enabled: Boolean(program),
         select: createOptionSetToOptionGroupDictionary,
     };
-    const { data, isLoading, error } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data, isLoading, error } = useApiMetadataQuery(queryKey, queryFn, queryOptions as any);
 
     return {
         optionGroups: program ? data : null,

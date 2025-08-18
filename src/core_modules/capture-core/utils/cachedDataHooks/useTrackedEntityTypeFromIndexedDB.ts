@@ -7,7 +7,7 @@ export const useTrackedEntityTypeFromIndexedDB = (trackedEntityTypeId: string | 
     const storageController = getUserMetadataStorageController();
 
     const { data, isLoading, isError } = useIndexedDBQuery(
-        ['trackedEntityType', trackedEntityTypeId],
+        ['trackedEntityType', trackedEntityTypeId ?? ''],
         () => storageController.get(USER_METADATA_STORES.TRACKED_ENTITY_TYPES, trackedEntityTypeId),
         {
             enabled,

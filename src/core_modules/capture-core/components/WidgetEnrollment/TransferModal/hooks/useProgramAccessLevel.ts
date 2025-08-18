@@ -27,7 +27,7 @@ export const useProgramAccessLevel = ({ programId }: Props) => {
     );
 
     return {
-        accessLevel: program?.accessLevel,
+        accessLevel: (program as any)?.accessLevel,
         isLoading,
     };
 };

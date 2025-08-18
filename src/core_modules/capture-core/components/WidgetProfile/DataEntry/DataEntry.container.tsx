@@ -51,7 +51,7 @@ export const DataEntry = ({
         dataEntryId,
         itemId,
         geometry: geometry ?? null,
-        dataEntryFormConfig,
+        dataEntryFormConfig: dataEntryFormConfig as any,
     });
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);

@@ -54,7 +54,7 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
     const { trackedEntityTypeCollection } = useTrackedEntityTypeCollection({
         trackedEntityType,
         optionSets,
-        dataEntryFormConfig,
+        dataEntryFormConfig: dataEntryFormConfig as any,
         configIsFetched,
         locale,
     });
@@ -66,7 +66,7 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
         trackedEntityType,
         trackedEntityTypeCollection,
         cachedTrackedEntityAttributes,
-        dataEntryFormConfig,
+        dataEntryFormConfig: dataEntryFormConfig as any,
         configIsFetched,
         locale,
     });

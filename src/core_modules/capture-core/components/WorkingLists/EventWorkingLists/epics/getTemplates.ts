@@ -22,7 +22,7 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
                     const { displayColumnOrder, order, eventDate, ...criteria } = eventQueryCriteria;
                     const convertedEventQueryCriteria = {
                         ...criteria,
-                        displayColumnOrder: displayColumnOrder?.map(columnId => (columnId === 'eventDate' ? 'occurredAt' : columnId)),
+                        displayColumnOrder: (displayColumnOrder as string[])?.map(columnId => (columnId === 'eventDate' ? 'occurredAt' : columnId)),
                         order: order?.includes('eventDate') ? order.replace('eventDate', 'occurredAt') : order,
                         occurredAt: eventDate,
                     };
