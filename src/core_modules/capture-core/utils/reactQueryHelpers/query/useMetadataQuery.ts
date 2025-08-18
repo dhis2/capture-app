@@ -59,13 +59,21 @@ export const useApiMetadataQuery = <TResultData>(
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => {
-        return dataEngine.query({ theQuerykey: queryObject! })
+        if (!queryObject) {
+            return Promise.resolve(undefined as TResultData);
+        }
+        return dataEngine.query({ theQuerykey: queryObject })
             .then(response => response.theQuerykey as TResultData);
     };
+    
+    const modifiedQueryOptions = queryObject ? queryOptions : {
+        ...queryOptions,
+        select: undefined, // Remove select function when query is disabled to prevent errors
+    };
+    
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
-        enabled: !!queryObject,
         ...queryOptions,
     });
 };
