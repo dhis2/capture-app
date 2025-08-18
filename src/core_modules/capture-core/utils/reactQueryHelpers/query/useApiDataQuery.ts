@@ -19,11 +19,6 @@ export const useApiDataQuery = <TResultData>(
             .then(response => response.theQuerykey as TResultData);
     };
     
-    const modifiedQueryOptions = queryObject ? queryOptions : {
-        ...queryOptions,
-        select: undefined,
-    };
-    
     return useQuery<TResultData>(
         [ReactQueryAppNamespace, ...queryKey],
         queryFn,
@@ -33,7 +28,6 @@ export const useApiDataQuery = <TResultData>(
             refetchOnReconnect: false,
             staleTime: 2 * 60 * 1000,
             cacheTime: 5 * 60 * 1000,
-            enabled: !!queryObject,
-            ...modifiedQueryOptions,
+            ...queryOptions,
         });
 };

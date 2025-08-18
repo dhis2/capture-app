@@ -66,15 +66,9 @@ export const useApiMetadataQuery = <TResultData>(
             .then(response => response.theQuerykey as TResultData);
     };
     
-    const modifiedQueryOptions = queryObject ? queryOptions : {
-        ...queryOptions,
-        select: undefined, // Remove select function when query is disabled to prevent errors
-    };
-    
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
-        enabled: !!queryObject,
-        ...modifiedQueryOptions,
+        ...queryOptions,
     });
 };
