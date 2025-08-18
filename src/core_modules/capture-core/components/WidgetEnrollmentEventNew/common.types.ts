@@ -1,5 +1,6 @@
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../metaData';
 import type { ApiEnrollmentEvent } from '../../../capture-core-utils/types/api-types';
+import type { EventsData } from '../../rules/RuleEngine/types/ruleEngine.types';
 
 export type ExternalSaveHandler = (eventServerValues: Record<string, unknown>, uid: string) => void;
 
@@ -43,7 +44,7 @@ export type AttributeValuesClientFormatted = {
 };
 
 export type RulesExecutionDependenciesClientFormatted = {
-    events: Array<EnrollmentEvent>;
+    events: EventsData;
     attributeValues: AttributeValuesClientFormatted;
     enrollmentData: EnrollmentData;
 };

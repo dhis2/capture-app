@@ -17,6 +17,7 @@ export const getCategoryOptionsValidatorContainers = (props?: any, fieldId?: str
         {
             validator: (value?: string | null) => validateCategories(value, props, fieldId),
             message: '',
+            errorMessage: '',
         },
     ];
     return validatorContainers;

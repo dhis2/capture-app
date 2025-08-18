@@ -12,12 +12,13 @@ type Props = {
     inputRef?: ((ref: any) => void) | null;
     style?: any;
     disabled?: boolean;
+    label?: any;
     [key: string]: any;
 };
 
 export const TextInput = (props: Props) => {
     const { multiLine, classes = {}, inputRef, style, disabled, ...passOnProps } = props;
-
+  
     return (
         <React.Fragment>
             {
