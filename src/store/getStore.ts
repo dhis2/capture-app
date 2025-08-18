@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
@@ -49,11 +49,11 @@ export async function getStore(
     const store = createStore(
         enableBatching(offlineEnhanceReducer(rootReducer)),
         composeWithDevTools(
-            (offlineEnhanceStore as any)(applyMiddleware(...middleware)),
+            compose(offlineEnhanceStore, applyMiddleware(...middleware)) as any,
         ),
     );
 
-    epicMiddleware.run(epics as any);
+    epicMiddleware.run(epics);
 
     return store;
 }
