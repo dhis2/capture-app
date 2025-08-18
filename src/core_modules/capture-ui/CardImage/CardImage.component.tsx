@@ -1,6 +1,6 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { PlainProps } from './CardImage.types';
 
 const sizes = {
     extrasmall: {
@@ -25,7 +25,7 @@ const sizes = {
     },
 };
 
-const styles = {
+const styles: Readonly<any> = {
     img: {
         borderRadius: '50%',
         objectFit: 'cover',
@@ -33,13 +33,7 @@ const styles = {
     ...sizes,
 };
 
-type Props = {
-    imageUrl: string,
-    dataTest: string,
-    classes: Object,
-    className: Object,
-    size: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge',
-};
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const CardImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props) => (
     <div className={className}>
@@ -47,10 +41,9 @@ const CardImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props)
             src={imageUrl}
             alt="user avatar"
             data-test={dataTest}
-            className={`${classes.img} ${classes[size]} className`}
+            className={`${classes.img} ${classes[size]}`}
         />
     </div>
 );
-
 
 export const CardImage = withStyles(styles)(CardImagePlain);
