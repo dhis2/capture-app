@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-07-31T10:50:59.068Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Shelsea Chumaio, 2025\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -645,9 +645,6 @@ msgstr "Ainda não há saída de indicador para esta inscrição"
 msgid "Quick actions"
 msgstr "Ações rápidas"
 
-msgid "New Event"
-msgstr "Novo evento"
-
 msgid "Schedule an event"
 msgstr "Novo evento"
 
@@ -905,6 +902,9 @@ msgstr "evento"
 
 msgid "You don't have access to edit this event"
 msgstr "Não tem acesso para editar este evento"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
 
 msgid "View changelog"
 msgstr "Ver registo de alterações"
@@ -1550,6 +1550,9 @@ msgstr "Esta etapa só pode ter um evento"
 
 msgid "New {{ eventName }} event"
 msgstr "Novo evento de {{ eventName }}"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Ocorreu um erro ao apagar o evento"
