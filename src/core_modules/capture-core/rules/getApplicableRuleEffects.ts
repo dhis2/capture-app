@@ -53,7 +53,7 @@ export const getApplicableRuleEffectsForTrackerProgram = ({
     enrollmentData,
     formFoundation,
 }: GetApplicableRuleEffectsForTrackerProgramInput,
-flattenedResult: boolean = false,
+flattenedResult = false,
 ) => {
     const { programRules, programRuleVariables } = getRulesMetadata(
         program.programRuleVariables,

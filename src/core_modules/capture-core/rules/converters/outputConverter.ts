@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
-const moment = require('moment');
+import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
 import { convertMomentToDateFormatString } from '../../utils/converters/date';
 

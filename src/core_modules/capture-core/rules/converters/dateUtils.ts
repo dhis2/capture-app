@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-const moment = require('moment');
+import moment from 'moment';
 import type { IDateUtils } from '@dhis2/rules-engine-javascript';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
