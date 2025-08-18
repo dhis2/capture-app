@@ -1,14 +1,13 @@
-// @flow
 import * as React from 'react';
 
 type Props = {
-    inFocus?: ?boolean,
-    onSetFocus?: ?() => void,
-    onRemoveFocus?: ?() => void,
+    inFocus?: boolean;
+    onSetFocus?: () => void;
+    onRemoveFocus?: () => void;
 };
 
 type State = {
-    inFocus: boolean,
+    inFocus: boolean;
 };
 
 export const withFocusSaver = () =>
@@ -39,7 +38,6 @@ export const withFocusSaver = () =>
                 const { inFocus } = this.state;
                 const { inFocus: inFocusProp, onSetFocus, onRemoveFocus, ...passOnProps } = this.props;
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         inFocus={inFocus}
                         onSetFocus={this.setFocus}

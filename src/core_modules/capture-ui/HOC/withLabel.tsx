@@ -1,48 +1,50 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import { Label } from '../internal/Label/Label.component';
 import defaultClasses from './withLabel.module.css';
 
 type LabelHOCClasses = {
-    labelContainerClass?: ?string,
+    labelContainerClass?: string;
 };
 
 type LabelClasses = {
-    label?: ?string,
+    label?: string;
 };
 
 type SpiltClasses = LabelHOCClasses & {
-    labelClasses?: ?LabelClasses,
-    passOnClasses?: ?Object,
+    labelClasses?: LabelClasses;
+    passOnClasses?: any;
 };
 
 type Styles = {
-    labelContainerStyle?: ?Object,
-    inputContainerStyle?: ?Object,
+    labelContainerStyle?: any;
+    inputContainerStyle?: any;
 };
 
 type Props = {
-    classes: ?Object,
-    label?: ?string | ?React.Element<any>,
-    labelRef?: ?(ref: any) => void,
-    styles?: ?Styles,
+    classes?: any;
+    label?: string | React.ReactElement;
+    labelRef?: (ref: any) => void;
+    styles?: Styles;
 };
 
-type OnSplitClasses = (classes: Object, props: Props) => SpiltClasses;
-type onGetUseVerticalOrientation = (props: Props) => ?boolean
+type OnSplitClasses = (classes: any, props: Props) => SpiltClasses;
+type onGetUseVerticalOrientation = (props: Props) => boolean;
 
 type HOCParamsContainer = {
-    onSplitClasses?: ?OnSplitClasses,
-    onGetUseVerticalOrientation?: ?onGetUseVerticalOrientation,
+    onSplitClasses?: OnSplitClasses;
+    onGetUseVerticalOrientation?: onGetUseVerticalOrientation;
 };
 
-export const withLabel = (hocParams: ?HOCParamsContainer) =>
+export const withLabel = (hocParams?: HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
         (class LabelHOC extends React.Component<Props> {
-            labelContainerClass: ?string;
-            labelClasses: ?LabelClasses;
-            passOnClasses: ?Object;
+            // eslint-disable-next-line react/sort-comp
+            labelContainerClass?: string;
+            // eslint-disable-next-line react/sort-comp
+            labelClasses?: LabelClasses;
+            // eslint-disable-next-line react/sort-comp
+            passOnClasses?: any;
 
             constructor(props: Props) {
                 super(props);
@@ -64,7 +66,7 @@ export const withLabel = (hocParams: ?HOCParamsContainer) =>
                 }
             }
 
-            setClasses(inputClasses: ?Object) {
+            setClasses(inputClasses?: any) {
                 if (!inputClasses) {
                     return;
                 }
@@ -80,17 +82,13 @@ export const withLabel = (hocParams: ?HOCParamsContainer) =>
                 this.passOnClasses = splitClasses.passOnClasses;
             }
 
-            getLabelElement(label: ?string | React.Element<any>, labelRef: ?(ref: any) => void, useVerticalOrientation: ?boolean) {
+            getLabelElement(label?: string | React.ReactElement, labelRef?: (ref: any) => void) {
                 return (
                     <Label
                         labelRef={labelRef}
                         classes={this.labelClasses || {}}
-                        useVerticalOrientation={useVerticalOrientation}
                     >
-                        {
-                            // $FlowFixMe[incompatible-type] automated comment
-                            label
-                        }
+                        {label}
                     </Label>
                 );
             }
@@ -106,7 +104,7 @@ export const withLabel = (hocParams: ?HOCParamsContainer) =>
                 const useVerticalOrientation =
                     hocParams && hocParams.onGetUseVerticalOrientation &&
                     hocParams.onGetUseVerticalOrientation(this.props);
-                const labelElement = this.getLabelElement(label, labelRef, useVerticalOrientation);
+                const labelElement = this.getLabelElement(label, labelRef);
 
                 const labelContainerClass =
                     useVerticalOrientation ? defaultClasses.labelContainerVertical : defaultClasses.labelContainer;
