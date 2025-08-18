@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-07-31T10:50:59.068Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -637,9 +637,6 @@ msgstr "Индикаторов для данной регистрационно�
 msgid "Quick actions"
 msgstr "Быстрые действия"
 
-msgid "New Event"
-msgstr "Новое событие"
-
 msgid "Schedule an event"
 msgstr "Запланировать событие"
 
@@ -897,6 +894,9 @@ msgstr "событие"
 
 msgid "You don't have access to edit this event"
 msgstr "У вас нет доступа к редактированию этого события"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
 
 msgid "View changelog"
 msgstr "Посмотреть лог изменений"
@@ -1547,6 +1547,9 @@ msgstr "Данный этап позволяет создать только о�
 
 msgid "New {{ eventName }} event"
 msgstr "Новое событие {{ eventName }} "
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr ""
