@@ -40,7 +40,7 @@ type Props = {
     onBlur: (value: AgeValues | null, options?: ValidationOptions | null) => void;
     onChange: (value: AgeValues | null) => void;
     onRemoveFocus: () => void;
-    orientation: keyof typeof orientations;
+    orientation: typeof orientations[keyof typeof orientations];
     innerMessage?: any | null;
     classes: any;
     inputMessageClasses: InputMessageClasses | null;
@@ -294,7 +294,7 @@ class D2AgeFieldPlain extends Component<Props> {
     render() {
         const { value, orientation, disabled } = this.props;
         const currentValues = value || {};
-        const isVertical = orientation === orientations.VERTICAL;
+        const isVertical = orientation === 'VERTICAL';
         const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
         const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : undefined;
         return (
