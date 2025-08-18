@@ -208,7 +208,7 @@ const SearchResultsIndex = ({
             currentSearchScopeType === searchScopes.PROGRAM && otherResults === undefined &&
             <div className={classes.bottom}>
                 <div className={classes.bottomText}>
-                    {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
+                    {i18n.t('Not finding the results you were looking for? Try searching in all programs')}.
                 </div>
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
@@ -229,7 +229,9 @@ const SearchResultsIndex = ({
         }
         <div className={classes.bottom}>
             <div className={classes.bottomText}>
-                {i18n.t('If none of search results match, you can create a new ')}&quot;{trackedEntityName}&quot;.
+                {i18n.t('If none of search results match, you can create a new {{trackedEntityName}}', {
+                    trackedEntityName, interpolation: false,
+                })}
             </div>
 
             <Button
