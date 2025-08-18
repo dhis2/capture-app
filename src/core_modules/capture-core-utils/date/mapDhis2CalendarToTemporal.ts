@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * A mapping of DHIS2 calendar system names to Temporal API calendar names.
  *
