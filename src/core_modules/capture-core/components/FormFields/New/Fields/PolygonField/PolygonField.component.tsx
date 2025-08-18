@@ -47,7 +47,7 @@ class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getSty
                         <ModalTitle key="title">{dialogLabel}</ModalTitle>
                     </Modal>
                 }
-                onOpenMap={onOpenMap || (() => {})}
+                onOpenMap={onOpenMap || (() => undefined)}
                 {...passOnProps}
             />
         );

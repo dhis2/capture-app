@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
-import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
 import {
     getMultiSelectBooleanFilterData,
@@ -62,7 +61,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
                     allowMultiple={this.props.allowMultiple}
                     value={value}
                     onBlur={onCommitValue}
-                    orientation={'VERTICAL'}
+                    orientation={'vertical'}
                 />
             </div>
         );

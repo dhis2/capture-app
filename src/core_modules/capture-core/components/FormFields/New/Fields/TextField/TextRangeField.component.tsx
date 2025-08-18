@@ -35,7 +35,7 @@ const TextRangeFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const { onChange, ...passOnProps } = props;
     return (
         <UITextRangeField
-            onChange={onChange || (() => {})}
+            onChange={onChange || (() => undefined)}
             {...passOnProps}
         />
     );
