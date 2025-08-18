@@ -1,4 +1,3 @@
-// @flow
 import { getCustomStorage } from './storage/customStorageGetter';
 
 export async function getPersistOptions() {

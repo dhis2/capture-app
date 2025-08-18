@@ -1,4 +1,3 @@
-// @flow
 import { getUserDataStorageController, USER_DATA_STORES } from 'capture-core/storageControllers';
 
 export async function getCustomStorage() {
@@ -10,7 +9,7 @@ export async function getCustomStorage() {
             id: key,
             value,
         }),
-        getItem: (key: string, onRetrieved: (err: ?string, item: ?Object) => void) => {
+        getItem: (key: string, onRetrieved: (err: string | null, item: any | null) => void) => {
             storageController
                 .get(store, key)
                 .then((item) => {
@@ -21,7 +20,7 @@ export async function getCustomStorage() {
                 });
         },
         removeItem: (key: string) => storageController.remove(store, key),
-        getAllKeys: (onRetrieved: (err: ?string, keys: ?Array<string>) => void) => {
+        getAllKeys: (onRetrieved: (err: string | null, keys: Array<string> | null) => void) => {
             storageController
                 .getKeys(store)
                 .then((keys) => {
@@ -33,4 +32,3 @@ export async function getCustomStorage() {
         },
     };
 }
-

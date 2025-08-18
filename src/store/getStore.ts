@@ -1,5 +1,4 @@
-// @flow
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
@@ -16,7 +15,7 @@ import { epics } from '../epics/trackerCapture.epics';
 
 export async function getStore(
     navigate: (path: string, scrollToTop?: boolean) => void,
-    apiUtils: ApiUtilsWithoutHistory,
+    apiUtils: any,
     onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
@@ -24,7 +23,6 @@ export async function getStore(
         ...reducersFromDescriptions,
     });
 
-    // https://github.com/redux-offline/redux-offline/blob/32e4c98ec782672347b42a7936631df5c6340b77/docs/api/config.md
     const {
         middleware: offlineMiddleware,
         enhanceReducer: offlineEnhanceReducer,
@@ -48,15 +46,14 @@ export async function getStore(
         middleware.push(createLogger({ collapsed: true, diff: true }));
     }
 
-    // $FlowFixMe[missing-annot] automated comment
     const store = createStore(
         enableBatching(offlineEnhanceReducer(rootReducer)),
         composeWithDevTools(
-            compose(offlineEnhanceStore, applyMiddleware(...middleware)),
+            (offlineEnhanceStore as any)(applyMiddleware(...middleware)),
         ),
     );
 
-    epicMiddleware.run(epics);
+    epicMiddleware.run(epics as any);
 
     return store;
 }
