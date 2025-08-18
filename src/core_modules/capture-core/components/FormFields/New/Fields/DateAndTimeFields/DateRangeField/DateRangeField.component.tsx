@@ -29,12 +29,16 @@ const getStyles = (theme: any) => ({
 type Props = {
     value?: any | null,
     onBlur: (value: any) => void,
+    onChange?: (value: any) => void,
 }
 
 const DateRangeFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
-    const { ...passOnProps } = props;
+    const { value, onBlur, onChange, ...passOnProps } = props;
     return (
         <UIDateRangeField
+            value={value || { from: null, to: null }}
+            onBlur={onBlur}
+            onChange={onChange || (() => {})}
             {...passOnProps}
             locale={systemSettingsStore.get().uiLocale}
         />

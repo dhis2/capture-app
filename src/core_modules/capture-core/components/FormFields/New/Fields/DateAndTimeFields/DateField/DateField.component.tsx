@@ -23,8 +23,9 @@ const getStyles = () => ({
 type Props = {
     value?: any,
     disabled?: boolean,
-    onBlur?: (value: any) => void,
+    onBlur?: (value: any, options?: any) => void,
     orientation: string,
+    width?: number,
 };
 
 const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
@@ -34,11 +35,12 @@ const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
         disabled,
         orientation,
         classes,
+        width = 350,
         ...passOnProps
     } = props;
 
     const handleClear = () => {
-        onBlur && onBlur(null);
+        onBlur && onBlur(null, {});
     };
 
     const isVertical = orientation === orientations.VERTICAL;
@@ -63,8 +65,9 @@ const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 locale={systemSettingsStore.get().uiLocale}
                 value={value}
-                onBlur={onBlur}
+                onBlur={(value: any, options: any) => onBlur && onBlur(value, options)}
                 disabled={disabled}
+                width={width}
                 {...passOnProps}
             />
             {renderClearButton()}

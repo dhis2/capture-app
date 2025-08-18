@@ -37,9 +37,16 @@ export const Selected = (props: Props) => {
                 onKeyDown={handleKeyDown}
             >
                 <TextField
-                    classes={defaultClasses}
+                    classes={{
+                        inputWrapperFocused: '',
+                        inputWrapperUnfocused: '',
+                    }}
                     value={''}
                     disabled
+                    onSetFocus={() => {}}
+                    onRemoveFocus={() => {}}
+                    inFocus={false}
+                    onFocus={() => {}}
                 />
             </div>
             <div

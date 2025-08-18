@@ -28,13 +28,19 @@ const getStyles = (theme: any) => ({
 
 type Props = {
     theme: any,
+    value?: any,
+    onBlur?: (value: any, options?: any) => void,
+    onChange?: (value: any) => void,
 }
 
 class DateTimeRangeFieldPlain extends React.Component<Props> {
     render() {
-        const { ...passOnProps } = this.props;
+        const { value, onBlur, onChange, ...passOnProps } = this.props;
         return (
             <UIDateTimeRangeField
+                value={value || { from: null, to: null }}
+                onBlur={onBlur || (() => {})}
+                onChange={onChange || (() => {})}
                 {...passOnProps}
                 locale={systemSettingsStore.get().uiLocale}
             />
