@@ -17,7 +17,7 @@ export class DateField extends React.Component<Props, State> {
                 errorCode: validation?.validationCode,
             });
 
-        this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
+        this.props.onDateSelectedFromCalendar?.();
     }
 
     render() {

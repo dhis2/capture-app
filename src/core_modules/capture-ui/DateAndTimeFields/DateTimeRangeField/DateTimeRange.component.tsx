@@ -25,18 +25,6 @@ export class DateTimeRangeField extends React.Component<Props, State> {
 
     getValue = () => this.props.value || {};
 
-    getNewValue = (key: string, newValue: any) => {
-        const currentValue = this.getValue();
-        const value = {
-            ...currentValue,
-            [key]: newValue,
-        };
-        if (!value.from && !value.to) {
-            return null;
-        }
-        return value;
-    }
-
     getInnerMessage = (key: string) => {
         const { classes, innerMessage } = this.props;
         return (
@@ -127,8 +115,8 @@ export class DateTimeRangeField extends React.Component<Props, State> {
 
     render() {
         const { onBlur, onChange, value, ...passOnProps } = this.props;
-        const fromValue = value && value.from ? value.from : '';
-        const toValue = value && value.to ? value.to : '';
+        const fromValue = value?.from ?? '';
+        const toValue = value?.to ?? '';
 
         return (
             <div className={defaultClasses.container}>
