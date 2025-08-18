@@ -9,11 +9,11 @@ export async function getCustomStorage() {
             id: key,
             value,
         }),
-        getItem: (key: string, onRetrieved: (err: string | null, item: any | null) => void) => {
+        getItem: (key: string, onRetrieved: (err: string | null, item: unknown | null) => void) => {
             storageController
                 .get(store, key)
                 .then((item) => {
-                    onRetrieved(null, item && item.value);
+                    onRetrieved(null, item?.value);
                 })
                 .catch((error) => {
                     onRetrieved(error, null);
