@@ -39,8 +39,8 @@ class DateTimeRangeFieldPlain extends React.Component<Props> {
         return (
             <UIDateTimeRangeField
                 value={value || { from: null, to: null }}
-                onBlur={onBlur || (() => {})}
-                onChange={onChange || (() => {})}
+                onBlur={onBlur || (() => { /* no-op */ })}
+                onChange={onChange || (() => { /* no-op */ })}
                 {...passOnProps}
                 locale={systemSettingsStore.get().uiLocale}
             />

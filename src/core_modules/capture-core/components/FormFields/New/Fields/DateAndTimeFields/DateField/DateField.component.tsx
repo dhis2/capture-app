@@ -65,7 +65,7 @@ const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 locale={systemSettingsStore.get().uiLocale}
                 value={value}
-                onBlur={(value: any, options: any) => onBlur && onBlur(value, options)}
+                onBlur={(val: any, options: any) => onBlur && onBlur(val, options)}
                 disabled={disabled}
                 width={width}
                 {...passOnProps}

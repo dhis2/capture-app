@@ -37,10 +37,10 @@ class TextFieldPlain extends Component<Props & WithStyles<typeof getStyles>> {
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
                 classes={classes}
-                onSetFocus={() => {}}
-                onRemoveFocus={() => {}}
+                onSetFocus={() => { /* no-op */ }}
+                onRemoveFocus={() => { /* no-op */ }}
                 inFocus={false}
-                onFocus={() => {}}
+                onFocus={() => { /* no-op */ }}
                 {...passOnProps}
             />
         );

@@ -38,7 +38,7 @@ const DateRangeFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
         <UIDateRangeField
             value={value || { from: null, to: null }}
             onBlur={onBlur}
-            onChange={onChange || (() => {})}
+            onChange={onChange || (() => { /* no-op */ })}
             {...passOnProps}
             locale={systemSettingsStore.get().uiLocale}
         />

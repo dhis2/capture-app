@@ -43,10 +43,10 @@ export const Selected = (props: Props) => {
                     }}
                     value={''}
                     disabled
-                    onSetFocus={() => {}}
-                    onRemoveFocus={() => {}}
+                    onSetFocus={() => { /* no-op */ }}
+                    onRemoveFocus={() => { /* no-op */ }}
                     inFocus={false}
-                    onFocus={() => {}}
+                    onFocus={() => { /* no-op */ }}
                 />
             </div>
             <div
