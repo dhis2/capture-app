@@ -56,4 +56,4 @@ export const getLocationSearch = () => window.location.search;
 
 
 export const pageFetchesOrgUnitUsingTheOldWay = (page: string | undefined, pages: any = pageKeys): boolean =>
-    (page ? Object.values(pages).includes(page) : false);
+    Object.values(pages).includes(page);
