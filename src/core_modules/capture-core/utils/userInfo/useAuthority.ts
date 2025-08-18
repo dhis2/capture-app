@@ -1,10 +1,8 @@
-// @flow
-
 import { useApiMetadataQuery } from '../reactQueryHelpers';
 
 type Props = {
-    authority: string,
-}
+    authority: string;
+};
 
 export const useAuthority = ({ authority }: Props) => {
     const queryKey = ['authorities'];
@@ -15,7 +13,7 @@ export const useAuthority = ({ authority }: Props) => {
         },
     };
     const queryOptions = {
-        select: ({ authorities }) =>
+        select: ({ authorities }: { authorities: string[] }) =>
             authorities &&
             authorities.some(apiAuthority => apiAuthority === 'ALL' || apiAuthority === authority),
     };

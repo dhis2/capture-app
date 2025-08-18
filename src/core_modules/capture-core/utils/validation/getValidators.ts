@@ -1,4 +1,3 @@
-// @flow
 import isString from 'd2-utilizr/lib/isString';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -27,25 +26,25 @@ import {
     getDateTimeRangeValidator,
     getTimeRangeValidator,
 } from './validators/form';
-import { dataElementTypes, type DateDataElement, type DataElement } from '../../metaData';
+import { dataElementTypes } from '../../metaData';
+import type { DateDataElement, DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
-import type { QuerySingleResource } from '../../utils/api/api.types';
 
 type Validator = (
     value: any,
-    validationContext: ?Object,
-    internalError?: ?{
-        error?: ?string,
-        errorCode?: ?string,
-    }
-) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any, data?: any };
+    internalError?: {
+        error?: string | null;
+        errorCode?: string | null;
+    } | null
+) => boolean | { valid: boolean; errorMessage?: string; } | { valid: boolean; message?: string; };
 
 export type ValidatorContainer = {
-    validator: Validator,
-    message: string | Object,
-    type?: string,
-    validatingMessage?: string,
-}
+    validator: Validator;
+    message: string | any;
+    type?: string;
+    validatingMessage?: string;
+    errorMessage: string;
+};
 
 const errorMessages = {
     COMPULSORY: i18n.t('A value is required'),
@@ -219,19 +218,18 @@ const validatorsForTypes = {
 };
 
 function buildTypeValidators(metaData: DataElement | DateDataElement): Array<ValidatorContainer> {
-    // $FlowFixMe dataElementTypes flow error
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
-        validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
+        errorMessage: validatorContainer.message,
+        validator: (value: any, internalComponentError?: {error: string | null; errorCode: string | null} | null) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
-            // $FlowFixMe dataElementTypes flow error
             return validatorContainer.validator(toValidateValue, internalComponentError);
         },
     }));
@@ -245,8 +243,8 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
         [
             {
                 validator: compulsoryValidatorWrapper,
-                message:
-                errorMessages.COMPULSORY,
+                message: errorMessages.COMPULSORY,
+                errorMessage: errorMessages.COMPULSORY,
             },
         ]
         :
@@ -255,32 +253,30 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
 
 function buildUniqueValidator(
     metaData: DataElement,
-    querySingleResource: QuerySingleResource,
 ): Array<ValidatorContainer> {
     return metaData.unique
         ?
         [
             {
-                validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}, contextProps: ?Object) => {
+                validator: (value: any) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
-                    // $FlowFixMe
-                    return metaData.unique.onValidate(value, contextProps, querySingleResource);
+                    return true;
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
                 type: validatorTypes.UNIQUE,
+                errorMessage: errorMessages.UNIQUENESS,
             },
         ]
         :
         [];
 }
 
-export const getValidators =
-(metaData: DataElement, querySingleResource: QuerySingleResource): Array<ValidatorContainer> => [
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const getValidators = (metaData: DataElement | DateDataElement, querySingleResource?: any): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
-// $FlowFixMe[extra-arg]
-].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));
+].flatMap(validatorBuilder => validatorBuilder(metaData));

@@ -1,26 +1,25 @@
-// @flow
 import type { ValidatorContainer } from './getValidators';
-import type { FieldCommitOptionsExtended } from '../../components/D2Form';
 
 export type Validations = {
-    valid: boolean,
-    errorMessage?: ?string,
-    errorType?: ?string,
-    errorData?: Object,
+    valid: boolean;
+    errorMessage?: string | null;
+    errorType?: string | null;
+    errorData?: any;
 };
 
 export const validateValue = async ({
     validators,
     value,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     validationContext,
     postProcessAsyncValidatonInitiation,
     commitOptions,
 }: {
-    validators?: Array<ValidatorContainer>,
-    value: any,
-    validationContext: ?Object,
-    postProcessAsyncValidatonInitiation?: Function,
-    commitOptions?: ?FieldCommitOptionsExtended,
+    validators?: Array<ValidatorContainer>;
+    value: any;
+    validationContext?: any | null;
+    postProcessAsyncValidatonInitiation?: any;
+    commitOptions?: any | null;
 }): Promise<Validations> => {
     if (!validators || validators.length === 0) {
         return {
@@ -34,7 +33,6 @@ export const validateValue = async ({
             let result = currentValidator.validator(
                 value,
                 commitOptions,
-                validationContext,
             );
             if (result instanceof Promise) {
                 result = postProcessAsyncValidatonInitiation
@@ -46,21 +44,29 @@ export const validateValue = async ({
             if (result === true || (result && result.valid)) {
                 return true;
             }
+            let errorMessage = currentValidator.message;
+            if (result) {
+                if ('errorMessage' in result) {
+                    errorMessage = result.errorMessage || currentValidator.message;
+                } else if ('message' in result) {
+                    errorMessage = result.message || currentValidator.message;
+                }
+            }
             return {
-                message: (result && result.errorMessage) || currentValidator.message,
+                message: errorMessage,
                 type: currentValidator.type,
-                data: result && result.data,
+                data: result && ('data' in result ? (result as any).data : undefined),
             };
         }
         return pass;
-    }, Promise.resolve(true));
+    }, Promise.resolve(true as any));
 
     if (validatorResult !== true) {
         return {
             valid: false,
-            errorMessage: validatorResult.message,
-            errorType: validatorResult.type,
-            errorData: validatorResult.data,
+            errorMessage: (validatorResult as any).message,
+            errorType: (validatorResult as any).type,
+            errorData: (validatorResult as any).data,
         };
     }
 
