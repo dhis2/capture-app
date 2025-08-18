@@ -3,6 +3,8 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { TextField as UITextField } from 'capture-ui';
 
 const getStyles = () => ({
+    inputWrapperFocused: {},
+    inputWrapperUnfocused: {},
 });
 
 type Props = {
@@ -35,6 +37,10 @@ class TextFieldPlain extends Component<Props & WithStyles<typeof getStyles>> {
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
                 classes={classes}
+                onSetFocus={() => { /* no-op */ }}
+                onRemoveFocus={() => { /* no-op */ }}
+                inFocus={false}
+                onFocus={() => { /* no-op */ }}
                 {...passOnProps}
             />
         );

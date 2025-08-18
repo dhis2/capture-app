@@ -1,4 +1,3 @@
-// @flow
 import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 
 export const buildEffectsHierarchy = (effects: Array<OutputEffect>) =>

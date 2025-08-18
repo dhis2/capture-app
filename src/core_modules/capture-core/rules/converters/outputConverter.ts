@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
 import moment from 'moment';
@@ -23,7 +22,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         const momentDate = moment(value, dateMomentFormat);
         return convertMomentToDateFormatString(momentDate);
     },
-    convertDateTime: (value: string): ?Object => {
+    convertDateTime: (value: string): any => {
         const momentDateTime = moment(value);
         return {
             date: convertMomentToDateFormatString(momentDateTime),
@@ -58,7 +57,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         log.warn('convertOrganisationUnit not implemented', value);
         return '';
     },
-    convertAge: (value: string): Object => {
+    convertAge: (value: string): any => {
         const now = moment();
         const age = moment(value, dateMomentFormat);
 

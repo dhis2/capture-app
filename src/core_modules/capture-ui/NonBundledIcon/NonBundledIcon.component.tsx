@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import classes from './nonBundledIcon.module.css';
 import type { Props } from './nonBundledIcon.types';
@@ -28,7 +27,6 @@ export const NonBundledIcon = ({
                         className={classes.image}
                         src={source}
                         title={alternativeText}
-                        // add empty alt to avoid screen readers reading the url
                         alt={''}
                     />
                 )

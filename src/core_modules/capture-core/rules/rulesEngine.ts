@@ -1,4 +1,3 @@
-// @flow
 import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
 import { RulesEngine, environmentTypes } from '@dhis2/rules-engine-javascript';
 import { RuleEngine } from './RuleEngine/RuleEngine';

@@ -76,7 +76,7 @@ export const withLabel = (hocParams?: HOCParams | null) => (InnerComponent: Reac
     const customTooltip = hocParams && hocParams.customTooltip;
 
     const LabelHOCWithStyles = UIWithLabel({
-        onGetUseVerticalOrientation: (props: any) => onGetUseVerticalOrientation && onGetUseVerticalOrientation(props),
+        onGetUseVerticalOrientation: (props: any) => !!(onGetUseVerticalOrientation && onGetUseVerticalOrientation(props)),
         onSplitClasses: (classes, props: any) => {
             const { label, labelVertical, ...rest } = classes;
             const useVerticalOrientation = onGetUseVerticalOrientation && onGetUseVerticalOrientation(props);

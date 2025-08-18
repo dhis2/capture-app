@@ -8,7 +8,7 @@ import { TextInput } from '../internal/TextInput/TextInput.component';
 import defaultClasses from './textRangeField.module.css';
 import { InnerMessage } from '../internal/InnerMessage/InnerMessage.component';
 
-const RangeInputField = withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(TextInput))) as any;
+const RangeInputField = withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(TextInput))) as React.ComponentType<any>;
 
 const inputKeys = {
     FROM: 'from',
@@ -23,7 +23,7 @@ type TextRangeValue = {
 type Props = {
     classes?: any;
     innerMessage?: any;
-    value: TextRangeValue;
+    value?: TextRangeValue | null;
     onChange: (value: TextRangeValue | null) => void;
     onBlur: (value: TextRangeValue | null, opts?: any) => void;
     [key: string]: any;
