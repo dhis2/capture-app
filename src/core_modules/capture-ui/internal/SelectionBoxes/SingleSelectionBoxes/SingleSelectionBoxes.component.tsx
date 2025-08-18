@@ -50,9 +50,9 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
 
     onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         if (!this.state.refList.includes(event.relatedTarget as HTMLInputElement)) {
-            this.props.keyboardManager.clear();
+            this.props.keyboardManager?.clear();
             const foundRef = this.state.refList.find(ref => ref.checked);
-            this.props.onSelect(foundRef ? foundRef.value : null);
+            this.props.onSelect?.(foundRef ? foundRef.value : null);
         }
     }
 
@@ -144,7 +144,7 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
 
     getSelectionOptions() {
         const { options, onGetOptionData, value } = this.props;
-        return options
+        return (options || [])
             .map((option, index) => {
                 const optionData = onGetOptionData ? onGetOptionData(option) : option;
                 const isSelected = optionData.value === value;
