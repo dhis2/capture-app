@@ -18,6 +18,7 @@ type Props = {
     onBlur: (value: any) => void,
     orientation: typeof orientations[keyof typeof orientations],
     dialogLabel: string,
+    onOpenMap?: (hasValue: boolean) => void,
 }
 
 class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
@@ -35,7 +36,7 @@ class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getSty
     passOnClasses: any;
 
     render() {
-        const { classes, dialogLabel, ...passOnProps } = this.props;
+        const { classes, dialogLabel, onOpenMap, ...passOnProps } = this.props;
         return (
             <UIPolygonField
                 mapDialog={
@@ -46,6 +47,7 @@ class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getSty
                         <ModalTitle key="title">{dialogLabel}</ModalTitle>
                     </Modal>
                 }
+                onOpenMap={onOpenMap || (() => {})}
                 {...passOnProps}
             />
         );
