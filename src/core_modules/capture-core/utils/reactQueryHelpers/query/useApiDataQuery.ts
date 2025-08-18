@@ -12,13 +12,10 @@ export const useApiDataQuery = <TResultData>(
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => {
-        if (!queryObject) {
-            return Promise.resolve(undefined as TResultData);
-        }
-        return dataEngine.query({ theQuerykey: queryObject })
+        return dataEngine.query({ theQuerykey: queryObject! })
             .then(response => response.theQuerykey as TResultData);
     };
-    
+
     return useQuery<TResultData>(
         [ReactQueryAppNamespace, ...queryKey],
         queryFn,
@@ -28,6 +25,7 @@ export const useApiDataQuery = <TResultData>(
             refetchOnReconnect: false,
             staleTime: 2 * 60 * 1000,
             cacheTime: 5 * 60 * 1000,
+            enabled: !!queryObject,
             ...queryOptions,
         });
 };

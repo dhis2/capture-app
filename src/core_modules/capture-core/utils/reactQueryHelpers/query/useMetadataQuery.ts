@@ -59,16 +59,14 @@ export const useApiMetadataQuery = <TResultData>(
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => {
-        if (!queryObject) {
-            return Promise.resolve(undefined as TResultData);
-        }
-        return dataEngine.query({ theQuerykey: queryObject })
+        return dataEngine.query({ theQuerykey: queryObject! })
             .then(response => response.theQuerykey as TResultData);
     };
-    
+
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
+        enabled: !!queryObject,
         ...queryOptions,
     });
 };
