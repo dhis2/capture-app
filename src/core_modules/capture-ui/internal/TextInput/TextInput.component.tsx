@@ -18,7 +18,6 @@ type Props = {
 
 export const TextInput = (props: Props) => {
     const { multiLine, classes = {}, inputRef, style, disabled, ...passOnProps } = props;
-  
     return (
         <React.Fragment>
             {

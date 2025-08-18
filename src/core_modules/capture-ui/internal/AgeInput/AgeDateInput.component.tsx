@@ -18,7 +18,7 @@ class AgeDateInputPlain extends Component<Props> {
         return (
             <DateField
                 value={value || ''}
-                width="150px"
+                width={150}
                 calendarWidth="350px"
                 {...passOnProps}
             />

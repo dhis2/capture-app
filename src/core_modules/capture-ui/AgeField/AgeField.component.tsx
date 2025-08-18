@@ -294,7 +294,7 @@ class D2AgeFieldPlain extends Component<Props> {
     render() {
         const { value, orientation, disabled } = this.props;
         const currentValues = value || {};
-        const isVertical = orientation === 'VERTICAL';
+        const isVertical = orientation === 'vertical';
         const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
         const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : undefined;
         return (
