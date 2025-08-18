@@ -74,6 +74,7 @@ export const useApiMetadataQuery = <TResultData>(
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
-        ...queryOptions,
+        enabled: !!queryObject,
+        ...modifiedQueryOptions,
     });
 };
