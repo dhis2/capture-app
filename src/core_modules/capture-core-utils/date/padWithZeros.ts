@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * Pads a string or number with zeros at the start to reach a minimum length
  * @export

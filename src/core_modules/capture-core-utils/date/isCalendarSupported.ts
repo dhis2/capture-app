@@ -7,4 +7,4 @@ const supportedTemporalCalendars = ['coptic', 'gregory', 'ethiopic', 'islamic', 
  * @param {string} calendar - The calendar to check in temporal names (e.g., 'islamic')
  * @returns {boolean} - True if the calendar is supported, false otherwise.
  */
-export const isCalendarSupported = calendar => supportedTemporalCalendars.includes(calendar);
+export const isCalendarSupported = (calendar: string) => supportedTemporalCalendars.includes(calendar);

@@ -1,4 +1,3 @@
-// @flow
 import { Temporal } from '@js-temporal/polyfill';
 
 /**
@@ -11,18 +10,18 @@ import { Temporal } from '@js-temporal/polyfill';
  */
 
 type PlainDateType = {
-    year: number,
-    month: number,
-    day: number,
-    eraYear: number,
-    with: (fields: { year?: number }) => PlainDateType,
-    since: (other: PlainDateType, options: { largestUnit: string, smallestUnit: string }) =>
-        { years: number, months: number, days: number }
+    year: number;
+    month: number;
+    day: number;
+    eraYear: number;
+    with: (fields: { year?: number }) => PlainDateType;
+    since: (other: PlainDateType, options: { largestUnit: string; smallestUnit: string }) =>
+        { years: number; months: number; days: number };
 };
 
-export function stringToTemporal(dateString: ?string,
-    calendar: ?string,
-    dateFormat: ?string): PlainDateType | null {
+export function stringToTemporal(dateString: string | null,
+    calendar: string | null,
+    dateFormat: string | null): any {
     if (!dateString) {
         return null;
     }
@@ -41,7 +40,7 @@ export function stringToTemporal(dateString: ?string,
             year,
             month,
             day,
-            calendar,
+            calendar: calendar || undefined,
         });
     } catch (error) {
         return null;
