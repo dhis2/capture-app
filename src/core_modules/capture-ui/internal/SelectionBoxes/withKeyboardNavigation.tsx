@@ -1,5 +1,4 @@
-// @flow
-import React, { type ComponentType, useRef, useMemo } from 'react';
+import React, { useRef, useMemo, type ComponentType } from 'react';
 
 const managedKeys = ['Tab', ' ', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
 
