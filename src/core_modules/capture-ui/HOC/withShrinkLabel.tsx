@@ -7,6 +7,7 @@ type Props = {
     value?: any;
     label?: string;
     shrinkDisabled?: boolean;
+    [key: string]: any;
 }
 
 export const withShrinkLabel = () =>
@@ -20,7 +21,7 @@ export const withShrinkLabel = () =>
             )
 
             render() {
-                const { shrinkDisabled, ...passOnProps } = this.props;
+                const { shrinkDisabled, label, ...passOnProps } = this.props;
                 const shrink = !!this.props.inFocus || !!this.props.value;
 
                 if (shrinkDisabled) {
@@ -31,7 +32,7 @@ export const withShrinkLabel = () =>
                     <div className={defaultClasses.container}>
                         <ShrinkLabel
                             shrink={shrink}
-                        >{this.props.label}
+                        >{label}
                         </ShrinkLabel>
                         <InnerComponent
                             {...passOnProps}

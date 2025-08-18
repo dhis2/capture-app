@@ -1,15 +1,14 @@
-// @flow
 import * as React from 'react';
 import defaultClasses from './ageInput.module.css';
 
 type Props = {
-    message?: ?any,
-    value: any,
-    classes?: any,
+    message?: any;
+    value: any;
+    classes?: any;
 };
 
 type State = {
-    value: any,
+    value: any;
 };
 export const withAgeInputContainer = () =>
     (InnerComponent: React.ComponentType<any>) =>

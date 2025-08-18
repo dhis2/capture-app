@@ -17,8 +17,7 @@ type Props = {
 };
 
 export const TextInput = (props: Props) => {
-    const { multiLine, classes, inputRef, style, ...passOnProps } = props;
-
+    const { multiLine, classes = {}, inputRef, style, disabled, ...passOnProps } = props;
     return (
         <React.Fragment>
             {
@@ -26,13 +25,15 @@ export const TextInput = (props: Props) => {
                     <textarea
                         data-test="capture-ui-textarea"
                         ref={inputRef}
-                        className={classNames(defaultClasses.textArea, classes?.input)}
+                        className={classNames(defaultClasses.textArea, classes.input)}
+                        disabled={disabled}
                         {...passOnProps}
                     /> :
                     <input
                         ref={inputRef}
                         type="text"
-                        className={classNames(defaultClasses.input, classes?.input)}
+                        className={classNames(defaultClasses.input, classes.input)}
+                        disabled={disabled}
                         {...passOnProps}
                     />
             }

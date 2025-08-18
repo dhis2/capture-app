@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { TextInput } from '../TextInput/TextInput.component';
 import { withShrinkLabel } from '../../HOC/withShrinkLabel';
@@ -7,26 +6,26 @@ import { withTextFieldFocusHandler } from '../../internal/TextInput/withFocusHan
 
 
 type Props = {
-    label: string,
-    value: ?string,
-    onBlur: (value: string) => void,
-    onChange?: ?((value: string) => void),
-    classes?: ?any,
-    className: string,
+    value?: string | null;
+    onBlur: (value: string) => void;
+    onChange?: (value: string) => void;
+    classes?: any;
+    className: string;
+    label?: string;
+    shrinkDisabled?: boolean;
 }
 
 
 class CoordinateInputPlain extends Component<Props> {
-    handleBlur = (event) => {
+    handleBlur = (event: any) => {
         this.props.onBlur(event.currentTarget.value);
     }
-    handleChange = (event) => {
+    handleChange = (event: any) => {
         this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
     render() {
         const { onBlur, onChange, value, classes, className, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 classes={{ input: className }}
                 onBlur={this.handleBlur}
