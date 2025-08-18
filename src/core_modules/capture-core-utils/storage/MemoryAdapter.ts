@@ -3,6 +3,13 @@
 import { errorCreator } from '../errorCreator';
 
 export class MemoryAdapter {
+    name: any;
+    version: any;
+    objectStoreNames: any;
+    keyPath: any;
+    opened: any;
+    storage: any;
+
     static errorMessages = {
         INVALID_STORE_NAME: 'Invalid store name',
         KEY_BASED_COUNT_IS_NOT_SUPPORTED: 'Key based count is not supported by DomLocalStorageAdapter',
@@ -12,7 +19,7 @@ export class MemoryAdapter {
         return true;
     }
 
-    constructor(options) {
+    constructor(options: any) {
         this.name = options.name;
         this.version = options.version || 1;
         this.objectStoreNames = options.objectStores;
@@ -29,17 +36,17 @@ export class MemoryAdapter {
         this.opened = true;
     }
 
-    _executeSet(store, dataObject) {
+    _executeSet(store: any, dataObject: any) {
         const key = dataObject[this.keyPath];
         store.set(key, dataObject);
     }
 
-    set(storeName, dataObject) {
+    set(storeName: any, dataObject: any) {
         const store = this.storage[storeName];
         this._executeSet(store, dataObject);
     }
 
-    setAll(storeName, dataArray) {
+    setAll(storeName: any, dataArray: any) {
         const store = this.storage[storeName];
         dataArray
             .forEach((dataObject) => {
@@ -47,13 +54,13 @@ export class MemoryAdapter {
             });
     }
 
-    get(storeName, key) {
+    get(storeName: any, key: any) {
         const store = this.storage[storeName];
         const dataObject = store.get(key);
         return dataObject;
     }
 
-    getAll(storeName, options) {
+    getAll(storeName: any, options?: any) {
         const store = this.storage[storeName];
         const values = Array.from(store.values());
         const { predicate, project, onEditSource } = options || {};
@@ -63,18 +70,18 @@ export class MemoryAdapter {
         return (project ? filteredValues.map(project) : filteredValues);
     }
 
-    getKeys(storeName) {
+    getKeys(storeName: any) {
         const store = this.storage[storeName];
         const keys = Array.from(store.keys());
         return keys;
     }
 
-    contains(storeName, key) {
+    contains(storeName: any, key: any) {
         const store = this.storage[storeName];
         return store.has(key);
     }
 
-    count(storeName, key) {
+    count(storeName: any, key?: any) {
         if (key) {
             throw Error(
                 errorCreator(MemoryAdapter.errorMessages.KEY_BASED_COUNT_IS_NOT_SUPPORTED)({ adapter: this }),
@@ -84,12 +91,12 @@ export class MemoryAdapter {
         return store.size;
     }
 
-    remove(storeName, key) {
+    remove(storeName: any, key: any) {
         const store = this.storage[storeName];
         store.delete(key);
     }
 
-    removeAll(storeName) {
+    removeAll(storeName: any) {
         this.storage[storeName] = new Map();
     }
 

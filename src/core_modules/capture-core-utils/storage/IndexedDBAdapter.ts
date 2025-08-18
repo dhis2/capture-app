@@ -3,6 +3,13 @@ import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 
 export class IndexedDBAdapter {
+    name: any;
+    version: any;
+    objectStoreNames: any;
+    keyPath: any;
+    db: any;
+    onCacheExpired: any;
+
     static errorMessages = {
         OPEN_FAILED: 'open indexedDB failed',
         OPEN_BLOCKED: 'indexedDB blocked',
@@ -32,18 +39,18 @@ export class IndexedDBAdapter {
     static adapterName = 'IndexedDBAdapter';
 
     static indexedDB = window.indexedDB ||
-            window.webkitIndexedDB ||
-            window.mozIndexedDB ||
-            window.oIndexedDB ||
-            window.msIndexedDB;
+            (window as any).webkitIndexedDB ||
+            (window as any).mozIndexedDB ||
+            (window as any).oIndexedDB ||
+            (window as any).msIndexedDB;
 
     static iDBKeyRange = (() => {
-        const range = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+        const range = window.IDBKeyRange || (window as any).webkitIDBKeyRange || (window as any).msIDBKeyRange;
         return range ? range.bind(window) : null;
     })();
 
     static iDBTransaction = (() => {
-        const trans = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+        const trans = window.IDBTransaction || (window as any).webkitIDBTransaction || (window as any).msIDBTransaction;
         return trans ? trans.bind(window) : null;
     })();
 
@@ -122,7 +129,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    constructor(options) {
+    constructor(options: any) {
         this.name = options.name;
         this.version = options.version;
         this.objectStoreNames = options.objectStores;
@@ -130,7 +137,7 @@ export class IndexedDBAdapter {
         this.onCacheExpired = options.onCacheExpired;
     }
 
-    _upgrade(onCreateObjectStore) {
+    _upgrade(onCreateObjectStore?: any) {
         if (this.db.objectStoreNames) {
             const dbStoreNames = Array.from(this.db.objectStoreNames);
             dbStoreNames.forEach((name) => {
@@ -151,12 +158,12 @@ export class IndexedDBAdapter {
      * @returns Whether we are downgrading or not
      * @memberof IndexedDBAdapter
      */
-    static facilitateDowngradeIfApplicable(name, version, keyPath, onBeforeUpgrade) {
+    static facilitateDowngradeIfApplicable(name: any, version: any, keyPath: any, onBeforeUpgrade?: any) {
         const preCheckRequest = IndexedDBAdapter.indexedDB.open(name);
         return new Promise((resolve, reject) => {
             preCheckRequest.onsuccess = (event) => {
-                const foundVersion = event.target.result.version;
-                const db = event.target.result;
+                const foundVersion = (event.target as any).result.version;
+                const db = (event.target as any).result;
                 db.onversionchange = () => {
                     db.close();
                 };
@@ -212,13 +219,13 @@ export class IndexedDBAdapter {
         let wasBlocked = false;
         await new Promise((resolve, reject) => {
             request.onsuccess = (event) => {
-                this.db = event.target.result;
+                this.db = (event.target as any).result;
                 this.db.onversionchange = () => {
                     this.db.close();
                     this.db = undefined;
                     this.onCacheExpired && this.onCacheExpired();
                 };
-                resolve();
+                resolve(undefined);
             };
 
             request.onerror = (error) => {
@@ -231,13 +238,13 @@ export class IndexedDBAdapter {
             };
 
             request.onupgradeneeded = (event) => {
-                const tx = event.target.transaction;
+                const tx = (event.target as any).transaction;
                 if (wasBlocked) {
                     tx.abort();
                     return;
                 }
 
-                this.db = event.target.result;
+                this.db = (event.target as any).result;
                 this.db.onversionchange = () => {
                     this.db.close();
                     this.db = undefined;
@@ -284,7 +291,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    set(store, dataObject) {
+    set(store: any, dataObject: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -321,7 +328,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    setAll(store, dataArray) {
+    setAll(store: any, dataArray: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -333,7 +340,7 @@ export class IndexedDBAdapter {
             try {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 tx.oncomplete = () => {
-                    resolve();
+                    resolve(undefined);
                 };
                 tx.onerror = (error) => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
@@ -394,12 +401,12 @@ export class IndexedDBAdapter {
         });
     }
 
-    get(store, key, options) {
+    get(store: any, key: any, options?: any) {
         return IndexedDBAdapter.get(store, key, options, this.db, this.keyPath);
     }
 
     // eslint-disable-next-line class-methods-use-this
-    async _getAllInBatches(objectStore, options, records) {
+    async _getAllInBatches(objectStore: any, options?: any, records?: any) {
         const { predicate, project, onIDBGetRequest, batchSize } = options || {};
 
 
@@ -428,7 +435,7 @@ export class IndexedDBAdapter {
         let done = false;
         do {
             // eslint-disable-next-line no-await-in-loop
-            const { count, lastId } = await executeRequest(keyRange);
+            const { count, lastId } = await executeRequest(keyRange) as any;
             if (count < batchSize) {
                 done = true;
             } else {
@@ -437,7 +444,7 @@ export class IndexedDBAdapter {
         } while (!done);
     }
 
-    _getAllWithCursor(objectStore, options, records, abortTx) {
+    _getAllWithCursor(objectStore: any, options?: any, records?: any, abortTx?: any) {
         const { predicate, project, onIsAborted, onIDBGetRequest } = options || {};
         const request = onIDBGetRequest ?
             onIDBGetRequest(objectStore, IndexedDBAdapter) :
@@ -461,14 +468,14 @@ export class IndexedDBAdapter {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    _processGetAllItem(dbValue, predicate, project, records) {
+    _processGetAllItem(dbValue: any, predicate?: any, project?: any, records?: any) {
         if (!predicate || predicate(dbValue)) {
             const value = project ? project(dbValue) : dbValue;
             records.push(value);
         }
     }
 
-    getAll(store, options) {
+    getAll(store: any, options?: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -484,7 +491,7 @@ export class IndexedDBAdapter {
                 const objectStore = tx.objectStore(store);
                 batchSize ?
                     // eslint-disable-next-line no-underscore-dangle
-                    this._getAllInBatches(objectStore, options, records, abortTx) :
+                    this._getAllInBatches(objectStore, options, records) :
                     // eslint-disable-next-line no-underscore-dangle
                     this._getAllWithCursor(objectStore, options, records, abortTx);
 
@@ -519,7 +526,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    getKeys(store) {
+    getKeys(store: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -528,7 +535,7 @@ export class IndexedDBAdapter {
                 tx.abort();
             };
             try {
-                const keys = [];
+                const keys: any[] = [];
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 tx.oncomplete = () => {
                     resolve(keys);
@@ -548,7 +555,7 @@ export class IndexedDBAdapter {
                     const cursor = e.target.result;
 
                     if (cursor) {
-                        keys.push(cursor.key);
+                        keys.push((cursor as any).key);
                         cursor.continue();
                     }
                 };
@@ -561,7 +568,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    remove(store, keys) {
+    remove(store: any, keys: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -572,7 +579,7 @@ export class IndexedDBAdapter {
             try {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 tx.oncomplete = () => {
-                    resolve();
+                    resolve(undefined);
                 };
                 tx.onerror = (error) => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_FAILED)({ adapter: this, error }));
@@ -600,7 +607,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    removeAll(store) {
+    removeAll(store: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -611,7 +618,7 @@ export class IndexedDBAdapter {
             try {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 tx.oncomplete = () => {
-                    resolve();
+                    resolve(undefined);
                 };
                 tx.onerror = (error) => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_ALL_FAILED)({ adapter: this, error }));
@@ -632,7 +639,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    contains(store, key) {
+    contains(store: any, key: any) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -669,7 +676,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    count(store, options) {
+    count(store: any, options?: any) {
         return new Promise((resolve, reject) => {
             const { onIDBGetRequest, query } = options || {};
             let tx;
@@ -713,14 +720,14 @@ export class IndexedDBAdapter {
     close() {
         return new Promise((resolve, reject) => {
             if (!this.db) {
-                resolve();
+                resolve(undefined);
                 return;
             }
             try {
                 const db = this.db;
                 IndexedDBAdapter.closeDB(db);
                 this.db = null;
-                resolve();
+                resolve(undefined);
             } catch (error) {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.CLOSE_FAILED)({ adapter: this, error }));
             }
@@ -731,7 +738,7 @@ export class IndexedDBAdapter {
         await new Promise((resolve, reject) => {
             this.close()
                 .then(() => {
-                    resolve();
+                    resolve(undefined);
                 })
                 .catch((error) => {
                     reject(
