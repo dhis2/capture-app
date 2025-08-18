@@ -12,6 +12,7 @@ type Props = {
     inputRef?: ((ref: any) => void) | null;
     style?: any;
     disabled?: boolean;
+    label?: any;
     [key: string]: any;
 };
 

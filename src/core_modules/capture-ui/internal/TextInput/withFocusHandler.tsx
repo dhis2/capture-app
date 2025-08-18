@@ -11,7 +11,9 @@ type Props = {
     classes: {
         inputWrapperFocused: string;
         inputWrapperUnfocused: string;
-    }
+    };
+    label?: any;
+    [key: string]: any;
 };
 
 export const withTextFieldFocusHandler = () => (InnerCompnent: React.ComponentType<any>) =>
