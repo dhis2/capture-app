@@ -111,8 +111,6 @@ export class PolygonField extends React.Component<Props, State> {
         this.setState({ mapCoordinates: null });
     };
 
-    getFeatureCollection = (coordinates: any) => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null)
-
     openMap = () => {
         this.props.onOpenMap(Boolean(this.props.value));
         this.setState({ showMap: true, mapCoordinates: this.props.value });
@@ -122,6 +120,8 @@ export class PolygonField extends React.Component<Props, State> {
         this.props.onBlur(this.state.mapCoordinates);
         this.closeMap();
     }
+
+    getFeatureCollection = (coordinates: any) => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null)
 
     getCenter = (featureCollection: FeatureCollection | null | undefined) => {
         if (!featureCollection) {
