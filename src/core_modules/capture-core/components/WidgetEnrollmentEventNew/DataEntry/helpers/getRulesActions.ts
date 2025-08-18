@@ -7,7 +7,8 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
 } from '../../../../rules';
-import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
+import type { AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
+import type { EventsData } from '../../../../rules/RuleEngine/types/ruleEngine.types';
 
 export const getRulesActions = ({
     state, // temporary
@@ -28,7 +29,7 @@ export const getRulesActions = ({
     dataEntryId: string;
     itemId: string;
     orgUnit?: OrgUnit | null;
-    eventsRulesDependency: EnrollmentEvents;
+    eventsRulesDependency: EventsData;
     attributesValuesRulesDependency: AttributeValuesClientFormatted;
     enrollmentDataRulesDependency: EnrollmentData;
 }) => {
