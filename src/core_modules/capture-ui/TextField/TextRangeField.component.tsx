@@ -1,6 +1,4 @@
-// @flow
-
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 
 import { withFocusSaver } from '../HOC/withFocusSaver';
@@ -18,19 +16,20 @@ const inputKeys = {
 };
 
 type TextRangeValue = {
-    from?: ?string,
-    to?: ?string,
+    from?: string | null;
+    to?: string | null;
 }
 
 type Props = {
-    classes?: ?Object,
-    innerMessage?: ?Object,
-    value: TextRangeValue,
-    onChange: (value: ?TextRangeValue) => void,
-    onBlur: (value: ?TextRangeValue, opts?: ?Object) => void,
+    classes?: any;
+    innerMessage?: any;
+    value: TextRangeValue;
+    onChange: (value: TextRangeValue | null) => void;
+    onBlur: (value: TextRangeValue | null, opts?: any) => void;
+    [key: string]: any;
 }
+
 export class TextRangeField extends React.Component<Props> {
-    touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
@@ -38,15 +37,15 @@ export class TextRangeField extends React.Component<Props> {
 
     getValue = () => this.props.value || {};
 
-    getNewValue = (key: string, newValue: any) => {
-        const value = {
-            ...this.getValue(),
-            [key]: newValue,
-        };
-        if (!value.from && !value.to) {
-            return null;
-        }
-        return value;
+    getInnerMessage = (key: string) => {
+        const { classes, innerMessage } = this.props;
+        return (
+            <InnerMessage
+                classes={classes}
+                messageKey={key}
+                innerMessage={innerMessage}
+            />
+        );
     }
 
     handleFromChange = (event: any) => {
@@ -84,7 +83,7 @@ export class TextRangeField extends React.Component<Props> {
     handleBlur = (value: TextRangeValue, otherFieldHasValue: boolean) => {
         const touched = this.touchedFields.size === 2;
         if (!value.from && !value.to) {
-            this.props.onBlur(undefined, {
+            this.props.onBlur(null, {
                 touched,
             });
             return;
@@ -94,26 +93,16 @@ export class TextRangeField extends React.Component<Props> {
         });
     }
 
-    getInnerMessage = (key: string) => {
-        const { classes, innerMessage } = this.props;
-        return (
-            <InnerMessage
-                classes={classes}
-                messageKey={key}
-                innerMessage={innerMessage}
-            />
-        );
-    }
+    touchedFields: Set<string>;
 
 
     render() {
         const { value, onChange, onBlur, ...passOnProps } = this.props;
-        const fromValue = value && value.from ? value.from : '';
-        const toValue = value && value.to ? value.to : '';
+        const fromValue = value?.from ?? '';
+        const toValue = value?.to ?? '';
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.inputContainer}>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <RangeInputField
                         label={i18n.t('From')}
                         onChange={this.handleFromChange}
@@ -124,7 +113,6 @@ export class TextRangeField extends React.Component<Props> {
                     {this.getInnerMessage(inputKeys.FROM)}
                 </div>
                 <div className={defaultClasses.inputContainer}>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <RangeInputField
                         label={i18n.t('To')}
                         onChange={this.handleToChange}

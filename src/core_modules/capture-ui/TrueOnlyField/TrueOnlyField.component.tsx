@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
@@ -6,7 +5,8 @@ import { MultiSelectionCheckedIcon, MultiSelectionUncheckedIcon } from '../Icons
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
 
 type Props = {
-    useRealTrueValue?: ?boolean, // instead of string as option values
+    useRealTrueValue?: boolean | null;
+    [key: string]: any;
 };
 
 export class TrueOnlyField extends Component<Props> {
@@ -21,19 +21,18 @@ export class TrueOnlyField extends Component<Props> {
         ];
     }
 
-    options: Array<OptionRendererInputData>;
-
     constructor(props: Props) {
         super(props);
         this.options = TrueOnlyField.getOptions(!!this.props.useRealTrueValue);
     }
+
+    options: Array<OptionRendererInputData>;
 
     render() {
         const { useRealTrueValue, ...passOnProps } = this.props;
 
         return (
             <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <SelectionBoxes
                     options={this.options}
                     {...passOnProps}

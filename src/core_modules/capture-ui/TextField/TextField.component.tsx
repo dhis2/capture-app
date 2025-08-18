@@ -1,17 +1,17 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import defaultClasses from './textField.module.css';
 import { TextInput } from '../internal/TextInput/TextInput.component';
 import { withTextFieldFocusHandler } from '../internal/TextInput/withFocusHandler';
 
 type Classes = {
-    input?: ?string,
-    inputWrapper?: ?string,
+    input?: string | null;
+    inputWrapper?: string | null;
 };
 
 type Props = {
-    classes?: ?Classes,
-    inputRef?: ?(ref: any) => void,
+    classes?: Classes | null;
+    inputRef?: ((ref: any) => void) | null;
+    [key: string]: any;
 };
 
 class D2TextField extends React.Component<Props> {
@@ -23,7 +23,6 @@ class D2TextField extends React.Component<Props> {
             <div
                 className={defaultClasses.container}
             >
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <TextInput
                     classes={classes}
                     {...passOnProps}
