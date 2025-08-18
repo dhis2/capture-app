@@ -1,5 +1,3 @@
-// @flow
-/* eslint-disable complexity */
 import { RuleEngineJs } from '@dhis2/rule-engine';
 import {
     InputBuilder,
@@ -18,7 +16,7 @@ export class RuleEngine {
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
     valueProcessor: ValueProcessor;
-    userRoles: Array<string>;
+    userRoles: Array<string> = [];
     flags: Flag;
 
     constructor(
@@ -29,7 +27,7 @@ export class RuleEngine {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         this.valueProcessor = new ValueProcessor(inputConverter);
-        this.flags = flags ?? {};
+        this.flags = flags ?? { verbose: false };
     }
 
     getProgramRuleEffects({
@@ -51,19 +49,18 @@ export class RuleEngine {
         const inputBuilder = new InputBuilder(
             this.inputConverter,
             dataElements,
-            trackedEntityAttributes,
+            trackedEntityAttributes || null,
             optionSets,
             selectedOrgUnit,
         );
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
-            selectedUserRoles,
+            selectedUserRoles: selectedUserRoles || null,
         });
         const enrollment = selectedEnrollment ?
             inputBuilder.buildEnrollment({
                 selectedEnrollment,
-                selectedEntity,
-                selectedOrgUnit,
+                selectedEntity: selectedEntity || null,
             }) : null;
 
         const events = otherEvents ?
@@ -79,7 +76,7 @@ export class RuleEngine {
                 executionContext,
             ) :
             ruleEngine.evaluateEnrollment(
-                enrollment,
+                enrollment!,
                 events,
                 executionContext,
             ))
@@ -91,10 +88,9 @@ export class RuleEngine {
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects({
-            effects,
+            effects: effects as any,
             dataElements,
-            trackedEntityAttributes,
-            // $FlowFixMe[exponential-spread]
+            trackedEntityAttributes: trackedEntityAttributes || null,
             formValues: { ...selectedEntity, ...currentEvent },
             onProcessValue: this.valueProcessor.processValue,
         });

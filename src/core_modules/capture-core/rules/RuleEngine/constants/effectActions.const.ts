@@ -1,5 +1,3 @@
-// @flow
-
 export const effectActions = Object.freeze({
     ASSIGN_VALUE: 'ASSIGN',
     HIDE_FIELD: 'HIDEFIELD',

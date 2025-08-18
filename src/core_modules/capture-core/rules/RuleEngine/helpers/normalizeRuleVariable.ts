@@ -1,9 +1,8 @@
-// @flow
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../constants';
 
-const convertNumber = (numberRepresentation) => {
+const convertNumber = (numberRepresentation: any) => {
     if (isString(numberRepresentation)) {
         if (isNaN(numberRepresentation)) {
             log.warn(`rule execution service could not convert ${numberRepresentation} to number`);
@@ -14,7 +13,7 @@ const convertNumber = (numberRepresentation) => {
     return numberRepresentation;
 };
 
-const convertBoolean = (value) => {
+const convertBoolean = (value: any) => {
     if (isString(value)) {
         return value === 'true';
     }
@@ -23,9 +22,6 @@ const convertBoolean = (value) => {
 
 const convertString = (stringRepresentation: number | string): string => stringRepresentation.toString();
 
-// Turns the internal representation of a program rule variable into its "canonical" format
-// (e.g. numbers represented as strings get converted to numbers)
-// Used to preprocess a computed value before assigning it to a calculated program rule variable
 export const normalizeRuleVariable = (data: any, valueType: string) => {
     const ruleEffectDataConvertersByType = {
         [typeKeys.BOOLEAN]: convertBoolean,

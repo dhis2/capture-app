@@ -1,4 +1,3 @@
-// @flow
 export const sanitiseFalsy = (value: any) => {
     if (value) {
         return value;

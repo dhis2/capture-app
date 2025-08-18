@@ -1,4 +1,3 @@
-// @flow
 import { Instant, LocalDate } from '@js-joda/core';
 import {
     Option,
@@ -60,12 +59,13 @@ export const variableSourceTypes = {
 };
 
 const programRuleVariableSourceIdExtractor = {
-    [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: variable => variable.dataElementId,
-    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM]: variable => variable.dataElementId,
-    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE]: variable => variable.dataElementId,
-    [variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT]: variable => variable.dataElementId,
-    [variableSourceTypes.TEI_ATTRIBUTE]: variable => variable.trackedEntityAttributeId,
-    [variableSourceTypes.CALCULATED_VALUE]: variable => '', // eslint-disable-line
+    [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: (variable: ProgramRuleVariable) => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM]: (variable: ProgramRuleVariable) => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE]: (variable: ProgramRuleVariable) => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT]: (variable: ProgramRuleVariable) => variable.dataElementId,
+    [variableSourceTypes.TEI_ATTRIBUTE]: (variable: ProgramRuleVariable) => variable.trackedEntityAttributeId,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    [variableSourceTypes.CALCULATED_VALUE]: (_: ProgramRuleVariable) => '',
 };
 
 const eventMainKeys = new Set([
@@ -107,9 +107,9 @@ const convertAssignAction = (action: ProgramRuleAction) => {
         content,
     } = action;
 
-    const actions = [];
+    const actions: Array<RuleActionJs> = [];
 
-    const pushAction = (values) => {
+    const pushAction = (values: Map<string, string>) => {
         actions.push(new RuleActionJs(data, type, values));
     };
 
@@ -177,7 +177,7 @@ const convertConstants = (constants: Constants): Map<string, string> =>
     constants.reduce((acc, constant) => {
         acc.set(constant.displayName, constant.value);
         return acc;
-    }, new Map);
+    }, new Map());
 
 const convertOption = (option: RawOption) => new Option(option.displayName, option.code);
 
@@ -185,8 +185,8 @@ const buildSupplementaryData = ({
     selectedOrgUnit,
     selectedUserRoles,
 }: {
-    selectedOrgUnit: OrgUnit,
-    selectedUserRoles: ?Array<string>,
+    selectedOrgUnit: OrgUnit;
+    selectedUserRoles: Array<string> | null;
 }) => {
     const orgUnitId = selectedOrgUnit.id;
     const supplementaryData = selectedOrgUnit.groups.reduce(
@@ -206,7 +206,7 @@ const buildSupplementaryData = ({
 };
 
 export class InputBuilder {
-    processValue: (value: any, type: $Values<typeof typeKeys>) => any;
+    processValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
     dataElements: DataElements;
     trackedEntityAttributes: TrackedEntityAttributes;
     optionSets: OptionSets;
@@ -214,8 +214,8 @@ export class InputBuilder {
     selectedOrgUnit: OrgUnit;
     constructor(
         inputConverter: IConvertInputRulesValue,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
+        dataElements: DataElements | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null,
         optionSets: OptionSets,
         selectedOrgUnit: OrgUnit,
     ) {
@@ -227,7 +227,7 @@ export class InputBuilder {
         this.selectedOrgUnit = selectedOrgUnit;
     }
 
-    toLocalDate = (dateString: ?string, defaultValue: any = null) =>
+    toLocalDate = (dateString: string | null, defaultValue: any = null) =>
         (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
 
     convertDataElementValue = (id: string, rawValue: any) =>
@@ -236,7 +236,7 @@ export class InputBuilder {
     convertTrackedEntityAttributeValue = (id: string, rawValue: any) =>
         this.convertDataValue(rawValue, this.trackedEntityAttributes[id]?.valueType);
 
-    convertDataValue = (rawValue: any, valueType: ?string) =>
+    convertDataValue = (rawValue: any, valueType: string | null) =>
         String(valueType ? this.processValue(rawValue, valueType) : rawValue);
 
     convertEvent = (eventData: EventData) => {
@@ -270,15 +270,15 @@ export class InputBuilder {
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
             createdDate,
-            this.toLocalDate(dueDate),
-            this.toLocalDate(completedDate),
+            this.toLocalDate(dueDate || null),
+            this.toLocalDate(completedDate || null),
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
             dataValues,
         );
     };
 
-    convertOptionSet(optionSetId: ?string): KotlinOptionSet {
+    convertOptionSet(optionSetId: string | null): KotlinOptionSet {
         if (!optionSetId || !this.optionSets[optionSetId]) {
             return [];
         }
@@ -291,9 +291,9 @@ export class InputBuilder {
 
     getOptionSet(field: string, type: string): KotlinOptionSet {
         if (variableSourceTypesDataElementSpecific[type]) {
-            return this.convertOptionSet(this.dataElements[field]?.optionSetId);
+            return this.convertOptionSet(this.dataElements[field]?.optionSetId || null);
         } else if (variableSourceTypesTrackedEntitySpecific[type]) {
-            return this.convertOptionSet(this.trackedEntityAttributes[field]?.optionSetId);
+            return this.convertOptionSet(this.trackedEntityAttributes[field]?.optionSetId || null);
         }
         return [];
     }
@@ -316,8 +316,8 @@ export class InputBuilder {
             RuleVariableType[type],
             name,
             !useNameForOptionSet,
-            this.getOptionSet(field, type),
-            field,
+            this.getOptionSet(field || '', type),
+            field || '',
             ruleValueTypeMap[fieldType] || RuleValueType.TEXT,
             programStage,
         );
@@ -327,8 +327,8 @@ export class InputBuilder {
         selectedEnrollment,
         selectedEntity,
     }: {
-        selectedEnrollment: Enrollment,
-        selectedEntity: ?TEIValues,
+        selectedEnrollment: Enrollment;
+        selectedEntity: TEIValues | null;
     }) => {
         const {
             enrollmentId: enrollment,
@@ -346,13 +346,13 @@ export class InputBuilder {
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
             )) : [];
 
-        const convertDate = (dateString: ?string) => this.toLocalDate(dateString, LocalDate.now());
+        const convertDate = (dateString: string | null) => this.toLocalDate(dateString, LocalDate.now());
 
         return new RuleEnrollmentJs(
-            enrollment,
+            enrollment || '',
             programName || '',
-            convertDate(incidentDate),
-            convertDate(enrollmentDate),
+            convertDate(incidentDate || null),
+            convertDate(enrollmentDate || null),
             enrollmentStatus ? RuleEnrollmentStatus[enrollmentStatus] : RuleEnrollmentStatus.ACTIVE,
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
@@ -364,16 +364,16 @@ export class InputBuilder {
         programRulesContainer,
         selectedUserRoles,
     }: {
-        programRulesContainer: ProgramRulesContainer,
-        selectedUserRoles: ?Array<string>,
+        programRulesContainer: ProgramRulesContainer;
+        selectedUserRoles: Array<string> | null;
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
         return new RuleEngineContextJs(
-            programRules && programRules.map(convertProgramRule),
-            programRuleVariables && programRuleVariables.map(this.convertRuleVariable),
+            programRules ? programRules.map(convertProgramRule) : [],
+            programRuleVariables ? programRuleVariables.map(this.convertRuleVariable) : [],
             buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles }),
-            constants && convertConstants(constants),
+            constants ? convertConstants(constants) : new Map(),
         );
     };
 }

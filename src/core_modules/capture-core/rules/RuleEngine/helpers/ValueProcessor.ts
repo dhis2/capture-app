@@ -1,9 +1,8 @@
-// @flow
 import log from 'loglevel';
 import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
 import type { IConvertInputRulesValue } from '../types/ruleEngine.types';
 
-const errorCreator = (message: string) => (details?: ?Object) => ({
+const errorCreator = (message: string) => (details?: any) => ({
     ...details,
     message,
 });
@@ -15,7 +14,7 @@ export class ValueProcessor {
     };
 
     converterObject: IConvertInputRulesValue;
-    processValue: (value: any, type: $Values<typeof typeKeys>) => any = (value, type) => {
+    processValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any = (value, type) => {
         if (!typeKeys[type]) {
             log.warn(ValueProcessor.errorMessages.TYPE_NOT_SUPPORTED);
             return '';
@@ -25,8 +24,8 @@ export class ValueProcessor {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;
         }
-        // $FlowFixMe
-        const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
+        const outputConverter = this.converterObject[convertFnName];
+        const convertedValue = outputConverter ? outputConverter(value) : value;
         return convertedValue ?? null;
     };
 
