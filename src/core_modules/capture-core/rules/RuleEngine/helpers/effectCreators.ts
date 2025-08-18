@@ -1,4 +1,3 @@
-// @flow
 import {
     effectActions,
     rulesEngineEffectTargetDataTypes,
@@ -20,8 +19,8 @@ import type {
 
 const createDataElementEffect = (
     effect: ProgramRuleEffect,
-    type: $Values<typeof effectActions>,
-): ?OutputEffect =>
+    type: typeof effectActions[keyof typeof effectActions],
+): OutputEffect | null =>
     (effect.dataElementId ? ({
         id: effect.dataElementId,
         type,
@@ -30,14 +29,13 @@ const createDataElementEffect = (
 
 const createTrackedEntityAttributeEffect = (
     effect: ProgramRuleEffect,
-    type: $Values<typeof effectActions>,
-): ?OutputEffect =>
+    type: typeof effectActions[keyof typeof effectActions],
+): OutputEffect | null =>
     (effect.trackedEntityAttributeId ? ({
         id: effect.trackedEntityAttributeId,
         type,
         targetDataType: rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE,
     }) : null);
-
 
 const effectForConfiguredDataTypeCreators = [
     createDataElementEffect,
@@ -46,18 +44,18 @@ const effectForConfiguredDataTypeCreators = [
 
 export const createEffectsForConfiguredDataTypes = (
     effect: ProgramRuleEffect,
-    type: $Values<typeof effectActions>,
+    type: typeof effectActions[keyof typeof effectActions],
 ): OutputEffects =>
     effectForConfiguredDataTypeCreators
         .map(creator => creator(effect, type))
-        .filter(Boolean);
+        .filter(outputEffect => outputEffect !== null);
 
 
 // Errors & Warnings
 
 const createGeneralWarningEffect = (
     id: string,
-    type: $Values<typeof effectActions>,
+    type: typeof effectActions[keyof typeof effectActions],
     message: string,
 ): Array<GeneralWarningEffect> => [{
     id: 'general',
@@ -67,7 +65,7 @@ const createGeneralWarningEffect = (
 
 const createGeneralErrorEffect = (
     id: string,
-    type: $Values<typeof effectActions>,
+    type: typeof effectActions[keyof typeof effectActions],
     message: string,
 ): Array<GeneralErrorEffect> => [{
     id: 'general',
@@ -88,7 +86,7 @@ const createMessageEffects = (
 
 export const createWarningEffect = (
     effect: ProgramRuleEffect,
-    type: $Values<typeof effectActions>,
+    type: typeof effectActions[keyof typeof effectActions],
 ): WarningEffects => {
     const message = `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`;
     const result = createEffectsForConfiguredDataTypes(effect, type);
@@ -99,7 +97,7 @@ export const createWarningEffect = (
 
 export const createErrorEffect = (
     effect: ProgramRuleEffect,
-    type: $Values<typeof effectActions>,
+    type: typeof effectActions[keyof typeof effectActions],
 ): ErrorEffects => {
     const message = `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`;
     const result = createEffectsForConfiguredDataTypes(effect, type);

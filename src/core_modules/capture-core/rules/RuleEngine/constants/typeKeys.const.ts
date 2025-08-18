@@ -1,4 +1,3 @@
-// @flow
 export const typeKeys = {
     TEXT: 'TEXT',
     MULTI_TEXT: 'MULTI_TEXT',

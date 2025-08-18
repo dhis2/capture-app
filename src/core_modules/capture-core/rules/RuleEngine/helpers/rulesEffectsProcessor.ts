@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import {
     attributeTypes,
@@ -31,9 +30,9 @@ import {
     createErrorEffect,
 } from './effectCreators';
 
-type BaseValueType = number | ?string | boolean;
+type BaseValueType = number | string | null | boolean;
 
-const errorCreator = (message: string) => (details?: ?Object) => ({
+const errorCreator = (message: string) => (details?: any) => ({
     ...details,
     message,
 });
@@ -48,7 +47,6 @@ export function getRulesEffectsProcessor(
         let outputValue;
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
             const converterName: string = mapTypeToInterfaceFnName[valueType];
-            // $FlowExpectedError
             const outputConverter = outputConverters[converterName];
             if (!converterName || !outputConverter) {
                 log.warn(errorCreator('converter for valueType is missing')({ valueType }));
@@ -64,7 +62,7 @@ export function getRulesEffectsProcessor(
     function createAssignValueEffect(
         data: any,
         element: DataElement | TrackedEntityAttribute,
-        targetDataType: $Values<typeof rulesEngineEffectTargetDataTypes>,
+        targetDataType: typeof rulesEngineEffectTargetDataTypes[keyof typeof rulesEngineEffectTargetDataTypes],
     ): AssignOutputEffect {
         const normalizedValue = normalizeRuleVariable(data, element.valueType);
         const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
@@ -79,11 +77,11 @@ export function getRulesEffectsProcessor(
 
     function processAssignValue(
         effect: ProgramRuleEffect,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
+        dataElements: DataElements | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null,
     ): Array<AssignOutputEffect> {
         if (effect.attributeType === attributeTypes.DATA_ELEMENT) {
-            if (dataElements?.[effect.field]) {
+            if (effect.field && dataElements?.[effect.field]) {
                 return [createAssignValueEffect(
                     effect.data,
                     dataElements[effect.field],
@@ -91,7 +89,7 @@ export function getRulesEffectsProcessor(
                 )];
             }
         } else if (effect.attributeType === attributeTypes.TRACKED_ENTITY_ATTRIBUTE) {
-            if (trackedEntityAttributes?.[effect.field]) {
+            if (effect.field && trackedEntityAttributes?.[effect.field]) {
                 return [createAssignValueEffect(
                     effect.data,
                     trackedEntityAttributes[effect.field],
@@ -104,10 +102,10 @@ export function getRulesEffectsProcessor(
 
     function processHideField(
         effect: ProgramRuleEffect,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        formValues?: ?{[key: string]: any},
-        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        dataElements: DataElements | null,
+        trackedEntityAttributes: TrackedEntityAttributes | null,
+        formValues: { [key: string]: any } | null | undefined,
+        onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any,
     ): Array<HideOutputEffect> {
         const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
@@ -143,7 +141,7 @@ export function getRulesEffectsProcessor(
         return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE);
     }
 
-    function processHideSection(effect: ProgramRuleEffect): ?HideOutputEffect {
+    function processHideSection(effect: ProgramRuleEffect): HideOutputEffect | null {
         if (!effect.programStageSectionId) {
             return null;
         }
@@ -154,7 +152,7 @@ export function getRulesEffectsProcessor(
         };
     }
 
-    function processHideProgramStage(effect: ProgramRuleEffect): ?HideProgramStageEffect {
+    function processHideProgramStage(effect: ProgramRuleEffect): HideProgramStageEffect | null {
         if (!effect.programStageId) {
             return null;
         }
@@ -245,11 +243,11 @@ export function getRulesEffectsProcessor(
         formValues,
         onProcessValue,
     }: {
-        effects: Array<ProgramRuleEffect>,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        formValues?: ?{ [key: string]: any },
-        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        effects: Array<ProgramRuleEffect>;
+        dataElements: DataElements | null;
+        trackedEntityAttributes?: TrackedEntityAttributes | null;
+        formValues?: { [key: string]: any } | null;
+        onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
     }): OutputEffects {
         return effects
             .filter(({ action }) => mapActionsToProcessor[action])

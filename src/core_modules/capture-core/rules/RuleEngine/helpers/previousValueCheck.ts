@@ -1,4 +1,3 @@
-// @flow
 import { rulesEngineEffectTargetDataTypes, typeKeys } from '../constants';
 import type { DataElements, TrackedEntityAttributes, HideOutputEffect } from '../types/ruleEngine.types';
 
@@ -6,8 +5,8 @@ const processDataElementValue = ({
     dataElementId,
     dataElements,
 }: {
-    dataElementId: ?string,
-    dataElements: ?DataElements,
+    dataElementId: string | null;
+    dataElements: DataElements | null;
 }) => {
     const dataElement = dataElementId && dataElements?.[dataElementId];
     if (dataElement) {
@@ -23,8 +22,8 @@ const processTEAValue = ({
     trackedEntityAttributeId,
     trackedEntityAttributes,
 }: {
-    trackedEntityAttributeId: ?string,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
+    trackedEntityAttributeId: string | null;
+    trackedEntityAttributes: TrackedEntityAttributes | null;
 }) => {
     const attribute = trackedEntityAttributeId && trackedEntityAttributes?.[trackedEntityAttributeId];
     if (attribute) {
@@ -50,15 +49,15 @@ export const getOutputEffectsWithPreviousValueCheck = ({
     trackedEntityAttributes,
     onProcessValue,
 }: {
-    outputEffects: Array<HideOutputEffect>,
-    dataElementId: ?string,
-    trackedEntityAttributeId: ?string,
-    dataElements: ?DataElements,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    formValues?: ?{ [key: string]: any },
-    onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+    outputEffects: Array<HideOutputEffect>;
+    dataElementId: string | null;
+    trackedEntityAttributeId: string | null;
+    dataElements: DataElements | null;
+    trackedEntityAttributes: TrackedEntityAttributes | null;
+    formValues?: { [key: string]: any } | null;
+    onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
 }) =>
-    outputEffects.reduce((acc, outputEffect) => {
+    outputEffects.reduce((acc: Array<HideOutputEffect>, outputEffect) => {
         if (formValues && Object.keys(formValues).length !== 0 && outputEffect.targetDataType) {
             const formValue = formValues[outputEffect.id];
             const rawValue = mapByTargetDataTypes[outputEffect.targetDataType]({

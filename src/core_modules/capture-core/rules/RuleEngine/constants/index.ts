@@ -1,4 +1,3 @@
-// @flow
 export { attributeTypes } from './attributeTypes.const';
 export { effectActions } from './effectActions.const';
 export { environmentTypes } from './environmentTypes.const';

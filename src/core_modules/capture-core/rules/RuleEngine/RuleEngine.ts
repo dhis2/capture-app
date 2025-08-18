@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable complexity */
 import { RuleEngineJs } from '@dhis2/rule-engine';
 import {
@@ -12,13 +11,14 @@ import type {
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     Flag,
+    ProgramRuleEffect,
 } from './types/ruleEngine.types';
 
 export class RuleEngine {
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
     valueProcessor: ValueProcessor;
-    userRoles: Array<string>;
+    userRoles!: Array<string>;
     flags: Flag;
 
     constructor(
@@ -29,7 +29,7 @@ export class RuleEngine {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         this.valueProcessor = new ValueProcessor(inputConverter);
-        this.flags = flags ?? {};
+        this.flags = flags ?? { verbose: false };
     }
 
     getProgramRuleEffects({
@@ -63,7 +63,6 @@ export class RuleEngine {
             inputBuilder.buildEnrollment({
                 selectedEnrollment,
                 selectedEntity,
-                selectedOrgUnit,
             }) : null;
 
         const events = otherEvents ?
@@ -79,7 +78,7 @@ export class RuleEngine {
                 executionContext,
             ) :
             ruleEngine.evaluateEnrollment(
-                enrollment,
+                enrollment!,
                 events,
                 executionContext,
             ))
@@ -87,14 +86,13 @@ export class RuleEngine {
                 ...Object.fromEntries(effect.ruleAction.values),
                 action: effect.ruleAction.type,
                 data: effect.data,
-            }));
+            })) as Array<ProgramRuleEffect>;
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects({
             effects,
             dataElements,
             trackedEntityAttributes,
-            // $FlowFixMe[exponential-spread]
             formValues: { ...selectedEntity, ...currentEvent },
             onProcessValue: this.valueProcessor.processValue,
         });

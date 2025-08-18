@@ -1,5 +1,3 @@
-// @flow
-
 type apiDataAccess = {
     read: boolean,
     write: boolean,
