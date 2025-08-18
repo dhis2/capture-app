@@ -7,11 +7,11 @@ import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';
 
 export const useApiDataQuery = <TResultData>(
     queryKey: Array<string | number | any | null | undefined>,
-    queryObject: ResourceQuery,
+    queryObject: ResourceQuery | undefined,
     queryOptions: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
-    const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
+    const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject! })
         .then(response => response.theQuerykey as TResultData);
     return useQuery<TResultData>(
         [ReactQueryAppNamespace, ...queryKey],
@@ -22,6 +22,7 @@ export const useApiDataQuery = <TResultData>(
             refetchOnReconnect: false,
             staleTime: 2 * 60 * 1000,
             cacheTime: 5 * 60 * 1000,
+            enabled: !!queryObject,
             ...queryOptions,
         });
 };
