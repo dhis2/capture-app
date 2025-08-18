@@ -6,6 +6,7 @@ import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectB
 type Props = {
     allowMultiple?: boolean;
     useRealBooleanValues?: boolean;
+    onSelect?: (value: any, event: any) => void;
 };
 
 export class BooleanField extends Component<Props> {
@@ -33,12 +34,13 @@ export class BooleanField extends Component<Props> {
     options: Array<OptionRendererInputData>;
 
     render() {
-        const { allowMultiple, useRealBooleanValues, ...passOnProps } = this.props;
+        const { allowMultiple, useRealBooleanValues, onSelect, ...passOnProps } = this.props;
         return (
             <div>
                 <SelectionBoxes
                     options={this.options}
                     multiSelect={allowMultiple}
+                    onSelect={onSelect}
                     {...passOnProps}
                 />
             </div>

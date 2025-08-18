@@ -17,19 +17,19 @@ export type ProgramRuleVariable = {
 };
 
 type EventMain = {
-    readonly eventId?: string,
-    readonly programId?: string,
-    readonly programStageId?: string,
-    readonly programStageName?: string,
-    readonly orgUnitId?: string,
-    readonly trackedEntityInstanceId?: string,
-    readonly enrollmentId?: string,
-    readonly enrollmentStatus?: string,
-    readonly status?: typeof eventStatuses[keyof typeof eventStatuses],
-    readonly occurredAt?: string,
-    readonly scheduledAt?: string,
-    readonly completedAt?: string,
-    readonly createdAt?: string,
+    eventId?: string,
+    programId?: string,
+    programStageId?: string,
+    programStageName?: string,
+    orgUnitId?: string,
+    trackedEntityInstanceId?: string,
+    enrollmentId?: string,
+    enrollmentStatus?: string,
+    status?: typeof eventStatuses[keyof typeof eventStatuses],
+    occurredAt?: string,
+    scheduledAt?: string,
+    completedAt?: string,
+    createdAt?: string,
 };
 
 export type EventValues = {

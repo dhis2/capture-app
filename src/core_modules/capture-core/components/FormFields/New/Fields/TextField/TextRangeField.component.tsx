@@ -28,12 +28,14 @@ const getStyles = (theme: any) => ({
 type Props = {
     value?: any | null,
     onBlur: (value: any) => void,
+    onChange?: (value: any) => void,
 }
 
 const TextRangeFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
-    const { ...passOnProps } = props;
+    const { onChange, ...passOnProps } = props;
     return (
         <UITextRangeField
+            onChange={onChange || (() => undefined)}
             {...passOnProps}
         />
     );

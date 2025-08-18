@@ -23,7 +23,7 @@ type TextRangeValue = {
 type Props = {
     classes?: any;
     innerMessage?: any;
-    value: TextRangeValue;
+    value?: TextRangeValue | null;
     onChange: (value: TextRangeValue | null) => void;
     onBlur: (value: TextRangeValue | null, opts?: any) => void;
     [key: string]: any;
