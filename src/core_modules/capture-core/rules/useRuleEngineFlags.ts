@@ -1,4 +1,3 @@
-// @flow
 import { useLayoutEffect } from 'react';
 import { useLocationQuery } from '../utils/routing';
 import { ruleEngine } from './rulesEngine';

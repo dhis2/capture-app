@@ -1,7 +1,6 @@
-// @flow
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
-import moment from 'moment';
+const moment = require('moment');
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
 import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
@@ -12,7 +11,7 @@ const dateMomentFormat = 'YYYY-MM-DD';
 
 export const outputConverter: IConvertOutputRulesEffectsValue = {
     convertText: (value: string): string => value,
-    convertMultiText: (value: string): string => [...new Set(value.split(','))].join(','),
+    convertMultiText: (value: string): string => Array.from(new Set(value.split(','))).join(','),
     convertLongText: (value: string): string => value,
     convertLetter: (value: string): string => value,
     convertPhoneNumber: (value: string): string => value,
@@ -23,7 +22,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         const momentDate = moment(value, dateMomentFormat);
         return convertMomentToDateFormatString(momentDate);
     },
-    convertDateTime: (value: string): ?Object => {
+    convertDateTime: (value: string): any => {
         const momentDateTime = moment(value);
         return {
             date: convertMomentToDateFormatString(momentDateTime),
@@ -58,7 +57,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         log.warn('convertOrganisationUnit not implemented', value);
         return '';
     },
-    convertAge: (value: string): Object => {
+    convertAge: (value: string): any => {
         const now = moment();
         const age = moment(value, dateMomentFormat);
 

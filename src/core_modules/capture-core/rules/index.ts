@@ -1,5 +1,3 @@
-// @flow
-
 export {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
@@ -8,7 +6,7 @@ export { getCurrentClientMainData, getCurrentClientValues } from './inputHelpers
 export { getDataElementsForRulesExecution } from './getDataElementsForRulesExecution';
 export { getTrackedEntityAttributesForRulesExecution } from './getTrackedEntityAttributesForRulesExecution';
 export { updateRulesEffects, rulesEffectsActionTypes } from './rulesEngine.actions';
-export type { FieldData } from './inputHelpers';
+export type { FieldData } from './inputHelpers.types';
 export { postProcessRulesEffects } from './postProcessRulesEffects';
 export { buildEffectsHierarchy } from './buildEffectsHierarchy';
 export { filterApplicableRuleEffects } from './filterApplicableRuleEffects';

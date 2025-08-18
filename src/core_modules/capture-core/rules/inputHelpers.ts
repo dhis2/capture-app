@@ -1,13 +1,6 @@
-// @flow
 import { convertFormValuesToClient } from '../converters/helpers/formToClient';
 import type { RenderFoundation } from '../metaData';
 import { convertDataEntryValuesToClientValues } from '../components/DataEntry/common/convertDataEntryValuesToClientValues';
-
-export type FieldData = {
-    elementId: string,
-    value: any,
-    valid: boolean,
-};
 
 function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolean }}) {
     return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
@@ -37,7 +30,7 @@ function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation
         ), {});
 }
 
-function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
+function getFieldsValidationForForm(sectionsFieldsUI: any, formId: string) {
     const fieldsUIState = Object.keys(sectionsFieldsUI)
         .filter(sectionKey => sectionKey.startsWith(formId))
         .reduce((accFormElementsUIState, stateKey) => {
@@ -55,10 +48,10 @@ function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
 }
 
 export function getCurrentClientValues(
-    state: ReduxState,
+    state: any,
     foundation: RenderFoundation,
     formId: string,
-    updatedEventField?: ?FieldData) {
+    updatedEventField?: any | null | undefined) {
     const currentFormData = state.formsValues[formId] || {};
     const updatedCurrentFormData = updatedEventField ?
         { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :
@@ -76,7 +69,7 @@ export function getCurrentClientValues(
 }
 
 export function getCurrentClientMainData(
-    state: ReduxState,
+    state: any,
     itemId: string,
     dataEntryId: string,
     foundation: RenderFoundation) {

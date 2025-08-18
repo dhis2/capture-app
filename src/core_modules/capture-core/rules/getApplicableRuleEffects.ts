@@ -1,4 +1,3 @@
-// @flow
 import type { OutputEffects } from '@dhis2/rules-engine-javascript';
 import { ruleEngine } from './rulesEngine';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';
@@ -30,7 +29,7 @@ export const getApplicableRuleEffectsForEventProgram = ({
     }
 
     if (currentEvent) {
-        currentEvent.programStageName = program.stage.untranslatedName;
+        (currentEvent as any).programStageName = program.stage.untranslatedName;
     }
 
     return buildEffectsHierarchy(
@@ -68,9 +67,9 @@ flattenedResult: boolean = false,
 
     if (currentEvent) {
         if (!currentEvent.programStageId && stage) {
-            currentEvent.programStageId = stage.id;
+            (currentEvent as any).programStageId = stage.id;
         }
-        currentEvent.programStageName = program.stages.get(currentEvent.programStageId)?.untranslatedName;
+        (currentEvent as any).programStageName = program.stages.get((currentEvent as any).programStageId)?.untranslatedName;
     }
 
     const effects = getApplicableRuleEffects({

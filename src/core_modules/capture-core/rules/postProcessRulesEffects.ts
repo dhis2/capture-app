@@ -1,4 +1,3 @@
-// @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '@dhis2/rules-engine-javascript';
 import { type RenderFoundation, dataElementTypes } from '../metaData';
@@ -24,7 +23,7 @@ const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) 
 
 const deduplicateEffectArray = (effectArray: Array<OutputEffect>) => {
     const dedupedEffectsAsMap = new Map(effectArray.map(effect => [effect.id, effect]));
-    return [...dedupedEffectsAsMap.values()];
+    return Array.from(dedupedEffectsAsMap.values());
 };
 
 const postProcessAssignEffects = ({
@@ -37,8 +36,7 @@ const postProcessAssignEffects = ({
     hideFieldEffects: Array<HideOutputEffect>,
 }) => {
     const optionSets = foundation.getElements().filter(({ optionSet }) => optionSet).reduce((acc, { id, optionSet }) => {
-        // $FlowFixMe
-        acc[id] = { options: optionSet.options, dataElementType: optionSet.dataElement.type };
+        acc[id] = { options: optionSet?.options, dataElementType: optionSet?.dataElement?.type };
         return acc;
     }, {});
 
@@ -67,7 +65,7 @@ const postProcessHideSectionEffects = (
         return [];
     }
 
-    return [...section.elements.values()]
+    return Array.from(section.elements.values())
         .map(({ id }) => ({
             id,
             type: effectActions.HIDE_FIELD,
@@ -107,7 +105,6 @@ export function postProcessRulesEffects(
         .reduce((acc, effect) => {
             const { type } = effect;
             if ([effectActions.HIDE_FIELD, effectActions.HIDE_SECTION, effectActions.ASSIGN_VALUE].includes(type)) {
-                // $FlowFixMe
                 acc[type].push(effect);
             } else {
                 acc.rest.push(effect);
@@ -141,7 +138,6 @@ export function postProcessRulesEffects(
 
     const filteredAssignValueEffects = postProcessAssignEffects({
         foundation,
-        // $FlowFixMe
         assignValueEffects,
         hideFieldEffects,
     });
