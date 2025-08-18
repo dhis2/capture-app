@@ -258,7 +258,7 @@ export function getRulesEffectsProcessor(
                 formValues,
                 onProcessValue,
             ))
-            // when mapActionsToProcessor function returns `null` we filter those values out.
+        // when mapActionsToProcessor function returns `null` we filter those values out.
             .filter(Boolean);
     }
 

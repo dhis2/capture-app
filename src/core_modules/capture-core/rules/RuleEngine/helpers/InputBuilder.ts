@@ -64,8 +64,7 @@ const programRuleVariableSourceIdExtractor = {
     [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE]: variable => variable.dataElementId,
     [variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT]: variable => variable.dataElementId,
     [variableSourceTypes.TEI_ATTRIBUTE]: variable => variable.trackedEntityAttributeId,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    [variableSourceTypes.CALCULATED_VALUE]: (_: ProgramRuleVariable) => '',
+    [variableSourceTypes.CALCULATED_VALUE]: () => '',
 };
 
 const eventMainKeys = new Set([
