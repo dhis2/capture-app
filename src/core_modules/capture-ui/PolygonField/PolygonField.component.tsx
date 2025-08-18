@@ -98,26 +98,6 @@ export class PolygonField extends React.Component<Props, State> {
         }
     };
 
-    getCenter = (featureCollection: FeatureCollection | null | undefined) => {
-        if (!featureCollection) {
-            return this.props.center;
-        }
-        const coordinates = featureCollection.features[0].geometry.coordinates[0];
-        const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[0], c[1]]))).getCenter();
-        return [lng, lat];
-    }
-
-    getFeatureCollection = (coordinates: any) => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null)
-
-    closeMap = () => {
-        this.setState({ showMap: false });
-    }
-
-    openMap = () => {
-        this.props.onOpenMap(Boolean(this.props.value));
-        this.setState({ showMap: true, mapCoordinates: this.props.value });
-    }
-
     onMapPolygonCreated = (e: any) => {
         const coordinates = e.layer.toGeoJSON().geometry.coordinates;
         this.setState({ mapCoordinates: coordinates, zoom: e.target.getZoom() });
@@ -131,6 +111,22 @@ export class PolygonField extends React.Component<Props, State> {
         this.setState({ mapCoordinates: null });
     };
 
+    getCenter = (featureCollection: FeatureCollection | null | undefined) => {
+        if (!featureCollection) {
+            return this.props.center;
+        }
+        const coordinates = featureCollection.features[0].geometry.coordinates[0];
+        const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[0], c[1]]))).getCenter();
+        return [lng, lat];
+    }
+
+    getFeatureCollection = (coordinates: any) => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null)
+
+    openMap = () => {
+        this.props.onOpenMap(Boolean(this.props.value));
+        this.setState({ showMap: true, mapCoordinates: this.props.value });
+    }
+
     onSetPolygon = () => {
         this.props.onBlur(this.state.mapCoordinates);
         this.closeMap();
@@ -138,6 +134,10 @@ export class PolygonField extends React.Component<Props, State> {
 
     setMapInstance = (mapInstance: any) => {
         this.mapInstance = mapInstance;
+    }
+
+    closeMap = () => {
+        this.setState({ showMap: false });
     }
 
     mapInstance: any | null | undefined;
