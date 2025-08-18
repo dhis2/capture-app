@@ -69,7 +69,7 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => ({ orgUnitId, ...
         [fetchEnabled, orgUnitFetchId],
     );
 
-    const { data }: any = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data }: any = useApiMetadataQuery(queryKey.filter(Boolean) as any[], queryFn, queryOptions);
 
     useEffect(() => {
         if (data?.parent && !data?.geometry) {

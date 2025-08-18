@@ -1,6 +1,6 @@
 
 import log from 'loglevel';
-import { pipe, errorCreator } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import type { OptionSet } from '../../../../../metaData';
 import { convertValue } from '../../../../../converters/clientToForm';
 
@@ -41,10 +41,10 @@ export const getOptionsForRadioButtons = (clientOptionSet: OptionSet | null) => 
     if (!clientOptionSet) {
         return null;
     }
-    const getOptionSet = pipe(
-        buildFormOptionSet,
-        flattenOptionSetForRadioButtons,
-    );
+    const getOptionSet = (optionSet: OptionSet) => {
+        const formOptionSet = buildFormOptionSet(optionSet);
+        return formOptionSet ? flattenOptionSetForRadioButtons(formOptionSet) : null;
+    };
     return getOptionSet(clientOptionSet);
 };
 
@@ -52,9 +52,9 @@ export const getOptionsForSelect = (clientOptionSet: OptionSet | null) => {
     if (!clientOptionSet) {
         return null;
     }
-    const getOptionSet = pipe(
-        buildFormOptionSet,
-        flattenOptionSetForSelect,
-    );
+    const getOptionSet = (optionSet: OptionSet) => {
+        const formOptionSet = buildFormOptionSet(optionSet);
+        return formOptionSet ? flattenOptionSetForSelect(formOptionSet) : null;
+    };
     return getOptionSet(clientOptionSet);
 };

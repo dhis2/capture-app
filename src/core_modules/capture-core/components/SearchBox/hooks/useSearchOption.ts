@@ -46,10 +46,11 @@ export const useSearchOption = ({
 
     const { data, isLoading, isError } = useIndexedDBQuery<AvailableSearchOption | undefined>(
         ['searchGroup', searchId],
-        () => buildSearchGroup(searchData, locale),
+        () => buildSearchGroup(searchData, locale) as any,
         {
             enabled: !!(searchId && locale && searchData),
-            select: (searchGroups?: SearchGroups) => {
+            select: (queryData: any) => {
+                const searchGroups = queryData as SearchGroups;
                 if (!searchName || !searchGroups || !searchScope) {
                     return undefined;
                 }

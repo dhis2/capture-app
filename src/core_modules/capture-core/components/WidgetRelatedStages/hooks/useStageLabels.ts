@@ -6,7 +6,7 @@ export const useStageLabels = (programId: string, programStageId?: string) => {
     const storageController = getUserMetadataStorageController();
 
     const { data, error, isLoading } = useIndexedDBQuery(
-        ['programStageLabels', programStageId],
+        ['programStageLabels', programStageId ?? ''],
         () =>
             storageController.get(USER_METADATA_STORES.PROGRAMS, programId, {
                 project: ({ programStages }) => {

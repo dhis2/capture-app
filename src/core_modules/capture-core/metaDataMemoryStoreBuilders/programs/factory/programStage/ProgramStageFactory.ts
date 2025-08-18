@@ -256,7 +256,7 @@ export class ProgramStageFactory {
                 log.error(errorCreator(ProgramStageFactory.CUSTOM_FORM_TEMPLATE_ERROR)(
                     { template: dataEntryForm.htmlCode, error }));
             }
-        } else if (this.dataEntryFormConfig) {
+        } else if (this.dataEntryFormConfig as any) {
             const dataElementDictionary = cachedProgramStage.programStageDataElements.reduce((acc, dataElement) => {
                 acc[dataElement.dataElementId] = dataElement;
                 return acc;

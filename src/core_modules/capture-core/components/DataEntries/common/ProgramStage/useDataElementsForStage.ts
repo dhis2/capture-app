@@ -20,7 +20,7 @@ export const useDataElementsForStage = ({
     stageId,
 }: Props) => {
     const { data, isLoading } = useIndexedDBQuery(
-        [programId, 'dataElements', stageId, { dataElementIds }],
+        [programId ?? '', 'dataElements', stageId ?? '', dataElementIds.join(',')],
         () => getDataElementsForStage({
             dataElementIds,
         }),

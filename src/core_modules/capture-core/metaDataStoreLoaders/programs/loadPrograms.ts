@@ -1,4 +1,4 @@
-import { chunk, pipe } from 'capture-core-utils';
+import { chunk } from 'capture-core-utils';
 import { getContext } from '../context';
 import { queryProgramsOutline } from './queries';
 import {
@@ -124,43 +124,39 @@ const getSideEffects = (() => {
                 .flatMap(program => getProgramOptionSets(program));
     })();
 
-    const getTrackedEntityAttributeIds = stalePrograms =>
-        pipe(
-            () => stalePrograms
-                .flatMap(({ trackedEntityAttributeIds }) => trackedEntityAttributeIds),
-            attributeIds => [...new Set(attributeIds).values()],
-        )();
+    const getTrackedEntityAttributeIds = (stalePrograms: any[]) => {
+        const attributeIds = stalePrograms
+            .flatMap(({ trackedEntityAttributeIds }) => trackedEntityAttributeIds);
+        return [...new Set(attributeIds).values()];
+    };
 
-    const getDataElementIds = stalePrograms =>
-        pipe(
-            () => stalePrograms
-                .flatMap(({ dataElementIds }) => dataElementIds),
-            dataElementIds => [...new Set(dataElementIds).values()],
-        )();
+    const getDataElementIds = (stalePrograms: any[]) => {
+        const elementIds = stalePrograms
+            .flatMap(({ dataElementIds }) => dataElementIds);
+        return [...new Set(elementIds).values()];
+    };
 
-    const getCategories = stalePrograms =>
-        pipe(
-            () => stalePrograms
-                .flatMap(program =>
-                    ((program.categoryCombo &&
-                    program.categoryCombo.categories) || []),
-                ),
-            categories => [
-                ...new Map(
-                    categories.map(ic => [ic.id, ic]),
-                ).values(),
-            ],
-        )();
+    const getCategories = (stalePrograms: any[]) => {
+        const categories = stalePrograms
+            .flatMap((program: any) =>
+                ((program.categoryCombo &&
+                program.categoryCombo.categories) || []),
+            );
+        return [
+            ...new Map(
+                categories.map((ic: any) => [ic.id, ic]),
+            ).values(),
+        ];
+    };
 
-    const getTrackedEntityTypes = stalePrograms =>
-        pipe(
-            () => stalePrograms
-                .reduce((acc, program) => {
-                    program.trackedEntityTypeId && acc.add(program.trackedEntityTypeId);
-                    return acc;
-                }, new Set()),
-            trackedEntityTypeIdSet => [...trackedEntityTypeIdSet.values()],
-        )();
+    const getTrackedEntityTypes = (stalePrograms: any[]) => {
+        const trackedEntityTypeIdSet = stalePrograms
+            .reduce((acc: Set<any>, program: any) => {
+                program.trackedEntityTypeId && acc.add(program.trackedEntityTypeId);
+                return acc;
+            }, new Set());
+        return [...trackedEntityTypeIdSet.values()];
+    };
     /**
      * Builds the side effects based on the programsOutline (contains some data for all programs) and the stale programs (the programs where the version has changed).
      * The side effects are used later to determine what other metadata to load.

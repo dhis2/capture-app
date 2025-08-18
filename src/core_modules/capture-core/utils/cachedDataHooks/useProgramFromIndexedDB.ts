@@ -8,7 +8,7 @@ export const useProgramFromIndexedDB = (programId: string | null | undefined, qu
     const { enabled = true } = queryOptions ?? {};
 
     const { data, isLoading, isError } = useIndexedDBQuery(
-        ['programs', programId],
+        ['programs', programId ?? ''],
         () => storageController.get(USER_METADATA_STORES.PROGRAMS, programId),
         {
             enabled,

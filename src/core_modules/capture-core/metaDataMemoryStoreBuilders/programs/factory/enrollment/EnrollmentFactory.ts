@@ -79,6 +79,7 @@ export class EnrollmentFactory {
             locale,
             minorServerVersion,
         });
+        this.dataEntryFormConfig = dataEntryFormConfig as any;
     }
 
     _buildTetFeatureTypeField(trackedEntityTypeId: string | null, section: Section) {

@@ -47,7 +47,7 @@ export const useMetadataForProgramStage = ({
     });
 
     const { data: programStageMetadata, isIdle, isLoading, isError } = useIndexedDBQuery(
-        ['programStageMetadata', programId, stageId],
+        ['programStageMetadata', programId ?? '', stageId ?? ''],
         () => buildProgramStageMetadata({
             cachedProgramStage: programStage,
             cachedDataElements: dataElements,
@@ -55,7 +55,7 @@ export const useMetadataForProgramStage = ({
             cachedOptionSets: optionSets,
             locale,
             minorServerVersion: minor || 0,
-            dataEntryFormConfig,
+            dataEntryFormConfig: dataEntryFormConfig as any,
         }),
         {
             cacheTime: Infinity,
@@ -71,8 +71,8 @@ export const useMetadataForProgramStage = ({
     );
 
     return {
-        formFoundation: programStageMetadata?.stageForm,
-        stage: programStageMetadata,
+        formFoundation: programStageMetadata?.stageForm ?? null,
+        stage: programStageMetadata ?? null,
         isLoading: isLoading || isIdle,
         isError,
     };

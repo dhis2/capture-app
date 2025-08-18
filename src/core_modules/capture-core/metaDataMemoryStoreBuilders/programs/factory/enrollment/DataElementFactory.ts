@@ -124,8 +124,8 @@ export class DataElementFactory {
 
             o.onValidate = (value: any, contextProps: any = {}, querySingleResource: QuerySingleResource) => {
                 const serverValue = pipe(
-                    convertFormToClient,
-                    convertClientToServer,
+                    (val: any, valueType: any) => convertFormToClient(val, valueType),
+                    (val: any, valueType: any) => convertClientToServer(val, valueType),
                 )(value, cachedTrackedEntityAttribute.valueType);
 
                 if (contextProps.onGetUnsavedAttributeValues) {

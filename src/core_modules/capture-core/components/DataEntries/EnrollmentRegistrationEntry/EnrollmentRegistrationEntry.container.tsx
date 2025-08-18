@@ -37,7 +37,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         dataEntryId: id,
         orgUnitId,
         teiId,
-        trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id,
+        trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id ?? '',
     });
 
     const isUserInteractionInProgress: boolean = useSelector(
@@ -79,7 +79,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             saveButtonText={saveButtonText(trackedEntityTypeNameLC)}
             ready={ready && !!enrollmentMetadata}
             teiId={teiId}
-            enrollmentMetadata={enrollmentMetadata}
+            enrollmentMetadata={enrollmentMetadata as any}
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
