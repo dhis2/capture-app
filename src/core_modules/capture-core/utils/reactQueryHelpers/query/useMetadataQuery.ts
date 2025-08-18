@@ -54,12 +54,17 @@ export const useIndexedDBQuery = <TResultData>(
 
 export const useApiMetadataQuery = <TResultData>(
     queryKey: Array<string | number | any | null | undefined>,
-    queryObject: ResourceQuery,
+    queryObject: ResourceQuery | undefined,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
-    const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
-        .then(response => response.theQuerykey as TResultData);
+    const queryFn: QueryFunction<TResultData> = () => {
+        if (!queryObject) {
+            return Promise.resolve({} as TResultData);
+        }
+        return dataEngine.query({ theQuerykey: queryObject })
+            .then(response => response.theQuerykey as TResultData);
+    };
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
