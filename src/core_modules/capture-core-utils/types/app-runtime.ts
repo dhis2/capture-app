@@ -14,7 +14,7 @@ export type QueryVariables = any;
 
 export type ResourceQuery = {
     resource: string
-    id?: string
+    id?: string | (() => string) | (() => string | null)
     data?: any
     params?: any
 };

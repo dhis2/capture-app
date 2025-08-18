@@ -1,13 +1,13 @@
-// @flow
 import { useQuery } from 'react-query';
 import log from 'loglevel';
-import { useDataEngine, type ResourceQuery } from '@dhis2/app-runtime';
+import { useDataEngine } from '@dhis2/app-runtime';
+import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
 import type { QueryFunction, UseQueryOptions } from 'react-query';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace, IndexedDBNamespace } from '../reactQueryHelpers.const';
 
-const throwErrorForIndexedDB = (error) => {
+const throwErrorForIndexedDB = (error: any) => {
     if (error instanceof IndexedDBError) {
         log.error(error.error);
     } else if (error instanceof Error) {
@@ -19,7 +19,7 @@ const throwErrorForIndexedDB = (error) => {
 };
 
 const useAsyncMetadata = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | undefined>,
     queryFn: QueryFunction<TResultData>,
     queryOptions: UseQueryOptions<TResultData>,
 ): Result<TResultData> => useQuery<TResultData>([ReactQueryAppNamespace, ...queryKey], queryFn, {
@@ -28,7 +28,7 @@ const useAsyncMetadata = <TResultData>(
 });
 
 export const useCustomMetadataQuery = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | undefined>,
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
@@ -39,7 +39,7 @@ export const useCustomMetadataQuery = <TResultData>(
 
 
 export const useIndexedDBQuery = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | undefined>,
     queryFn: QueryFunction<TResultData>,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> =>
@@ -53,13 +53,13 @@ export const useIndexedDBQuery = <TResultData>(
         });
 
 export const useApiMetadataQuery = <TResultData>(
-    queryKey: Array<string | number>,
+    queryKey: Array<string | number | any | null | undefined>,
     queryObject: ResourceQuery,
     queryOptions?: UseQueryOptions<TResultData>,
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => dataEngine.query({ theQuerykey: queryObject })
-        .then(response => response.theQuerykey);
+        .then(response => response.theQuerykey as TResultData);
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
