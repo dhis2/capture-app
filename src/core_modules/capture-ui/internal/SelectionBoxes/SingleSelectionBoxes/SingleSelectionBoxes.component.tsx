@@ -11,12 +11,12 @@ import type { KeyboardManager } from '../../../internal/SelectionBoxes/withKeybo
 const SingleSelectBoxWrapped = withFocusHandler()(SingleSelectBox);
 
 type Props = {
-    id: string;
-    options: OptionsArray;
-    onGetOptionData: (option: any) => OptionRendererInputData;
+    id?: string;
+    options?: OptionsArray;
+    onGetOptionData?: (option: any) => OptionRendererInputData;
     children?: OptionRenderer;
-    value: any;
-    orientation: typeof orientations[keyof typeof orientations];
+    value?: any;
+    orientation?: typeof orientations[keyof typeof orientations];
     classes?: {
         iconSelected?: string;
         iconDeselected?: string;
@@ -25,10 +25,10 @@ type Props = {
         focusUnselected?: string;
         unFocus?: string;
     };
-    onSelect: (value: any) => void;
+    onSelect?: (value: any) => void;
     onSetFocus?: () => void;
     onRemoveFocus?: () => void;
-    keyboardManager: KeyboardManager;
+    keyboardManager?: KeyboardManager;
     disabled?: boolean;
 };
 
