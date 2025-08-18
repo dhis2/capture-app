@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
@@ -12,37 +11,36 @@ import type { KeyboardManager } from '../../../internal/SelectionBoxes/withKeybo
 const SingleSelectBoxWrapped = withFocusHandler()(SingleSelectBox);
 
 type Props = {
-    id: string,
-    options: OptionsArray,
-    onGetOptionData: (option: Object) => OptionRendererInputData,
-    children?: ?OptionRenderer,
-    value: any,
-    orientation: $Values<typeof orientations>,
-    classes?: ?{
-        iconSelected?: string,
-        iconDeselected?: string,
-        iconDisabled?: string,
-        focusSelected?: string,
-        focusUnselected?: string,
-        unFocus?: string,
-    },
-    onSelect: (value: any) => void,
-    onSetFocus?: () => void,
-    onRemoveFocus?: () => void,
-    keyboardManager: KeyboardManager,
-    disabled?: ?boolean,
+    id: string;
+    options: OptionsArray;
+    onGetOptionData: (option: any) => OptionRendererInputData;
+    children?: OptionRenderer;
+    value: any;
+    orientation: typeof orientations[keyof typeof orientations];
+    classes?: {
+        iconSelected?: string;
+        iconDeselected?: string;
+        iconDisabled?: string;
+        focusSelected?: string;
+        focusUnselected?: string;
+        unFocus?: string;
+    };
+    onSelect: (value: any) => void;
+    onSetFocus?: () => void;
+    onRemoveFocus?: () => void;
+    keyboardManager: KeyboardManager;
+    disabled?: boolean;
 };
 
 type State = {
-    refList: Array<HTMLInputElement>,
+    refList: Array<HTMLInputElement>;
 };
 
 export class SingleSelectionBoxes extends React.Component<Props, State> {
-    static getFocusClass(classes: Object, isSelected: boolean) {
+    static getFocusClass(classes: any, isSelected: boolean) {
         return isSelected ? classes.focusSelected : classes.focusUnselected;
     }
 
-    refList: Array<HTMLInputElement>;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -50,20 +48,20 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
         };
     }
 
-    onBlur = (event: SyntheticFocusEvent<HTMLInputElement>) => {
-        if (!this.state.refList.includes(event.relatedTarget)) {
+    onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+        if (!this.state.refList.includes(event.relatedTarget as HTMLInputElement)) {
             this.props.keyboardManager.clear();
             const foundRef = this.state.refList.find(ref => ref.checked);
             this.props.onSelect(foundRef ? foundRef.value : null);
         }
     }
 
-    getCheckedClass = (iconSelected: ?string, iconDisabled?: string, isDisabled: ?boolean) => classNames(
+    getCheckedClass = (iconSelected?: string, iconDisabled?: string, isDisabled?: boolean) => classNames(
         iconSelected,
         iconDisabled && { [iconDisabled]: isDisabled },
     );
 
-    getUncheckedClass = (iconDeselected: ?string, iconDisabled?: string, isDisabled: ?boolean) => classNames(
+    getUncheckedClass = (iconDeselected?: string, iconDisabled?: string, isDisabled?: boolean) => classNames(
         iconDeselected,
         iconDisabled && { [iconDisabled]: isDisabled },
     );
@@ -88,7 +86,7 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
         );
     }
 
-    getPostProcessedCustomIcon(customElement: React.Element<any>, isSelected: boolean) {
+    getPostProcessedCustomIcon(customElement: React.ReactElement<any>, isSelected: boolean) {
         const { classes, disabled } = this.props;
         const { iconSelected, iconDeselected, iconDisabled } = classes || {};
         return React.cloneElement(customElement, isSelected ?
@@ -123,7 +121,6 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
                 className={containerClass}
                 key={optionData.id || optionData.name}
             >
-                {/* $FlowFixMe[prop-missing] automated comment */}
                 <SingleSelectBoxWrapped
                     setInputRef={setInputRef}
                     optionData={optionData}
@@ -147,7 +144,6 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
 
     getSelectionOptions() {
         const { options, onGetOptionData, value } = this.props;
-        // $FlowFixMe[missing-annot] automated comment
         return options
             .map((option, index) => {
                 const optionData = onGetOptionData ? onGetOptionData(option) : option;
@@ -156,6 +152,7 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
                 return OptionElement;
             });
     }
+    refList: Array<HTMLInputElement> = [];
     render() {
         const { orientation } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?

@@ -1,9 +1,6 @@
-// @flow
 import React from 'react';
 
-type Props = {
-
-};
+type Props = Record<string, never>;
 
 export class MultiSelectionsBoxes extends React.Component<Props> {
     render() {

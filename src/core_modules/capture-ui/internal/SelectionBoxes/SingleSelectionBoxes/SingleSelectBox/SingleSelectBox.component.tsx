@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './singleSelectBox.module.css';
@@ -6,18 +5,18 @@ import type { OptionRendererInputData } from '../../selectBoxes.types';
 import type { KeyboardManager } from '../../../../internal/SelectionBoxes/withKeyboardNavigation';
 
 type Props = {
-    optionData: OptionRendererInputData,
-    isSelected: boolean,
-    groupId: string,
-    children: React.Node,
-    onSelect: (value: any) => void,
-    onBlur: (event: SyntheticFocusEvent<HTMLInputElement>, value: any) => void,
-    inputRef?: (instance: ?HTMLInputElement) => void,
-    inFocus?: ?boolean,
-    focusClass?: string,
-    unFocusClass?: string,
-    keyboardManager: KeyboardManager,
-    disabled?: ?boolean,
+    optionData: OptionRendererInputData;
+    isSelected: boolean;
+    groupId: string;
+    children: React.ReactNode;
+    onSelect: (value: any) => void;
+    onBlur: (event: React.FocusEvent<HTMLInputElement>, value: any) => void;
+    inputRef?: (instance: HTMLInputElement | null) => void;
+    inFocus?: boolean;
+    focusClass?: string;
+    unFocusClass?: string;
+    keyboardManager: KeyboardManager;
+    disabled?: boolean;
 };
 
 const keys = {
@@ -45,7 +44,7 @@ export class SingleSelectBox extends React.Component<Props> {
         }
     }
 
-    handleKeyDown = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const { keyboardManager } = this.props;
         if (!keyboardManager.managedKeys.includes(event.key)) {
             return;
@@ -69,11 +68,11 @@ export class SingleSelectBox extends React.Component<Props> {
         }
     }
 
-    handleKeyUp = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
         this.props.keyboardManager.keyUp(event.key);
     }
 
-    handleBlur = (event: SyntheticFocusEvent<HTMLInputElement>) => {
+    handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         const { isSelected, optionData } = this.props;
         this.props.onBlur(event, isSelected ? optionData.value : null);
     }
@@ -100,7 +99,6 @@ export class SingleSelectBox extends React.Component<Props> {
                     htmlFor={id}
                     className={classNames(defaultClasses.label, { [defaultClasses.labelDisabled]: disabled })}
                 >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <input
                         ref={inputRef}
                         type="radio"
@@ -113,7 +111,7 @@ export class SingleSelectBox extends React.Component<Props> {
                         onBlur={this.handleBlur}
                         onKeyDown={this.handleKeyDown}
                         onKeyUp={this.handleKeyUp}
-                        onChange={() => {}}
+                        onChange={() => { /* no-op */ }}
                         disabled={disabled}
                         {...passOnProps}
                     />
