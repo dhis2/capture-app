@@ -1,5 +1,5 @@
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
@@ -202,13 +202,15 @@ export const convertToEventFilterEventQueryCriteria = ({
 }): ApiEventQueryCriteria => {
     const apiSortById = getApiSortById(sortById, columns);
     const sortOrderCriteria = getSortOrder(apiSortById, sortByDirection);
-    const convertedFilters = typeConvertFilters(filters, columns);
-    const filtersCriteria = structureFilters(convertedFilters, columns);
+    const filtersCriteria = pipe(
+        () => typeConvertFilters(filters, columns),
+        convertedFilters => structureFilters(convertedFilters, columns),
+    )();
     const displayColumnOrderCriteria = getColumnsOrder([...columns.values()]);
 
     return {
         ...filtersCriteria,
         order: sortOrderCriteria,
-        displayColumnOrder: displayColumnOrderCriteria.filter(Boolean) as string[],
+        displayColumnOrder: displayColumnOrderCriteria,
     };
 };

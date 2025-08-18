@@ -51,9 +51,9 @@ export const loadMetaDataInternal = async () => {
         ...trackedEntityAttributeIdsFromTrackedEntityTypes,
     ]);
 
-    await loadDataElements(dataElementIds);
+    await loadDataElements(dataElementIds as string[]);
 
-    await loadCategories(categories);
+    await loadCategories(categories as any[]);
 
     await loadOptionSets([
         ...optionSetsOutlineFromPrograms,

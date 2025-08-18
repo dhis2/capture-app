@@ -1,3 +1,4 @@
+import { pipe } from 'capture-core-utils';
 import type { BooleanFilterData } from '../../../../../ListView';
 
 const booleanFilterValues = {
@@ -6,9 +7,13 @@ const booleanFilterValues = {
 };
 
 export function convertBoolean({ sourceValue }: { sourceValue: BooleanFilterData }) {
-    const values = (sourceValue.values as any[]).map(filterValue => booleanFilterValues[filterValue]);
-    const result = values.length > 1 ?
-        { valueString: values.join(';'), single: false } :
-        { valueString: values[0], single: true };
-    return result.single ? `eq:${result.valueString}` : `in:${result.valueString}`;
+    return pipe(
+        (values: any[]) => values.map(filterValue => booleanFilterValues[filterValue]),
+        (values: string[]) =>
+            (values.length > 1 ?
+                { valueString: values.join(';'), single: false } :
+                { valueString: values[0], single: true }
+            ),
+        ({ valueString, single }: { valueString: string; single: boolean }) => (single ? `eq:${valueString}` : `in:${valueString}`),
+    )(sourceValue.values);
 }
