@@ -123,7 +123,7 @@ export function getRulesEffectsProcessor(
         const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
 
         return {
-            type: effectActions.ASSIGN_VALUE as any,
+            type: effectActions.ASSIGN_VALUE,
             id: element.id,
             value: outputValue,
             targetDataType,
@@ -164,7 +164,7 @@ export function getRulesEffectsProcessor(
         const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
             () => ({
-                type: effectActions.HIDE_FIELD as any,
+                type: effectActions.HIDE_FIELD,
                 content: effect.content,
             }),
         );
