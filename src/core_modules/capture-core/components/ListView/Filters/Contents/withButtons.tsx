@@ -1,12 +1,11 @@
 /* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import type { UpdatableFilterContent } from '../../../FiltersForTypes';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     buttonsContainer: {
         paddingTop: theme.typography.pxToRem(8),
     },

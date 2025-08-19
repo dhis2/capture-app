@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import cx from 'classnames';
 import { IconChevronUp24, colors, spacersNum } from '@dhis2/ui';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         background: colors.white,
         border: '1px solid',

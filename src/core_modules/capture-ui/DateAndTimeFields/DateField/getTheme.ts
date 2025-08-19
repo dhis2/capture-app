@@ -1,6 +1,4 @@
-// @flow
-
-export const getTheme = (theme: Theme) => ({
+export const getTheme = (theme: any) => ({
     accentColor: theme.palette.secondary.main,
     floatingNav: {
         background: 'rgba(0, 30, 64, 0.8)',

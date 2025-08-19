@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Button, ButtonStrip, colors, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTemplateTextField } from './NewTemplateTextField.component';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     error: {
         padding: 4,
         color: colors.red500,

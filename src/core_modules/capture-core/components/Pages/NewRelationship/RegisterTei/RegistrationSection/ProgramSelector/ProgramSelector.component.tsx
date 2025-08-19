@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ComposedProgramSelector } from './ComposedProgramSelector.component';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     programLabel: {
         paddingTop: '10px',
         [theme.breakpoints.down(523)]: {

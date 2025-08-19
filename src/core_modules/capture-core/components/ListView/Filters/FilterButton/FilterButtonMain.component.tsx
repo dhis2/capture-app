@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button, Popover } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
@@ -11,7 +10,7 @@ import { LockedFilterButton } from './LockedFilterButton.component';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
 import type { FilterData, Options, FilterDataInput } from '../../../FiltersForTypes';
 
-const getStyles: Readonly<any> = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: any) => ({
     icon: {
         paddingLeft: theme.typography.pxToRem(12),
         display: 'flex',

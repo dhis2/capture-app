@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -57,7 +57,7 @@ const tabMode = Object.freeze({
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: Theme): Readonly<any> => ({
+const getStyles = (theme: any): Readonly<any> => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
@@ -437,7 +437,7 @@ type Props = {
     onCancel: () => void;
     onConfirmCreateNew: (itemId: string) => void;
     onCancelCreateNew: (itemId: string) => void;
-    theme: Theme,
+    theme: any,
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
@@ -490,7 +490,7 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
 
-    fieldOptions: { theme: Theme; fieldLabelMediaBasedClass: string };
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
     dataEntrySections: { [key: string]: DataEntrySection };
 
     renderScheduleView() {

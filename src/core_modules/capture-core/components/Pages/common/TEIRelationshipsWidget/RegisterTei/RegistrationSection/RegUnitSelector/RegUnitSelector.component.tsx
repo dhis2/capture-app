@@ -1,11 +1,11 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     label: {
         paddingTop: '10px',
         [theme.breakpoints.down(523)]: {

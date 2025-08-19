@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { SectionContents } from './SectionContents.component';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     section: {
         backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(892),

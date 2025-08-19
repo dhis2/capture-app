@@ -3,12 +3,11 @@ import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo16, Tooltip, colors, spacers } from '@dhis2/ui';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 import { withDescription } from './withDescription';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     label: {
         color: theme.palette.text.primary,
         paddingBottom: 4,

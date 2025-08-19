@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import type { Theme } from '@material-ui/core/styles';
 import type { Enrollment } from '../../../../../../metaData';
 import type { RenderCustomCardActions } from '../../../../../CardList';
 import type {
@@ -8,7 +7,7 @@ import type {
 } from '../../../../../DataEntries';
 
 export type Props = {
-    theme: Theme;
+    theme: any;
     programId: string;
     orgUnitId: string;
     enrollmentMetadata?: Enrollment;

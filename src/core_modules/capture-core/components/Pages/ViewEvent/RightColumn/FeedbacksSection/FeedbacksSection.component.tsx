@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo24 } from '@dhis2/ui';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import type { PlainProps } from './FeedbacksSection.types';
@@ -11,7 +11,7 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const headerText = i18n.t('Feedback');
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     badge: {
         backgroundColor: theme.palette.grey[300],
     },

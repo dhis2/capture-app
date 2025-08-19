@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     borderBox: {
         borderRadius: theme.typography.pxToRem(6),
         borderWidth: theme.typography.pxToRem(2),

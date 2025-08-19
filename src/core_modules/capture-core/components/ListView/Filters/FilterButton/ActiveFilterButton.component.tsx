@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import { Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
@@ -17,7 +16,7 @@ const ClearIcon = ({ className, ...props }) => (
     </svg>
 );
 
-const getStyles: Readonly<any> = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: any) => ({
     button: {
         backgroundColor: 'rgb(184, 215, 243) !important',
     },

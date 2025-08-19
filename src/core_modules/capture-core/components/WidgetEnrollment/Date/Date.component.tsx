@@ -9,7 +9,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { isValidDate, isValidNonFutureDate } from 'capture-core/utils/validation/validators/form';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
@@ -29,7 +29,7 @@ type OwnProps = {
     allowFutureDate?: boolean;
 };
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     editButton: {
         display: 'inline-flex',
         alignItems: 'center',

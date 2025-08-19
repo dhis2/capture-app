@@ -5,9 +5,8 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
-import type { Theme } from '@material-ui/core/styles';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     root: {
         flexShrink: 0,
         display: 'flex',
@@ -58,7 +57,7 @@ type Props = {
     classes: {
         root: string;
     };
-    theme: Theme;
+    theme: any;
 };
 
 const getNavigation = (InnerComponent: React.ComponentType<any>) =>

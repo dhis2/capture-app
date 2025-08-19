@@ -4,14 +4,14 @@ import i18n from '@dhis2/d2-i18n';
 import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { CoordinatesProps } from './Coordinates.types';
 import { CoordinateInput } from '../../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
 import { isEqual } from '../../../../utils/valueEqualityChecker';
 import { isValidCoordinate } from './coordinate.validator';
 import { convertCoordinatesToServer } from './converters';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     modalContent: {
         width: '100%',
     },

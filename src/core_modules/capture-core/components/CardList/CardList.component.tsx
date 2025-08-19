@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import { CardListItem } from './CardListItem.component';
 import { makeElementsContainerSelector } from './CardList.selectors';
 import { CardDataElementsInformation } from '../SearchBox';
@@ -16,7 +15,7 @@ type OwnProps = {
     renderCustomCardActions?: RenderCustomCardActions;
 };
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     noItemsContainer: {
         fontStyle: 'italic',
         padding: theme.typography.pxToRem(10),

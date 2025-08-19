@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
-import { withStyles, WithStyles, Theme } from '@material-ui/core/';
+import { withStyles, WithStyles } from '@material-ui/core/';
 import { dataEntryIds } from 'capture-core/constants';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -278,7 +278,7 @@ type Props = {
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
     onCancel: () => void;
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void;
-    theme: Theme;
+    theme: any;
     onOpenEditEvent: () => void;
     dataEntryId: string;
     programId: string;

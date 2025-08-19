@@ -2,7 +2,6 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { IconCross16 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import type { RelationshipType } from '../../../../metaData';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 
@@ -15,7 +14,7 @@ type OwnProps = {
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     relationshipType: {
         display: 'flex',
         padding: theme.typography.pxToRem(10),

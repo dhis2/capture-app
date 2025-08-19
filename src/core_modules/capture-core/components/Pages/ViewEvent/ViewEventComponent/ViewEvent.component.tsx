@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
@@ -12,7 +12,7 @@ import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         display: 'flex',
         flexDirection: 'column',

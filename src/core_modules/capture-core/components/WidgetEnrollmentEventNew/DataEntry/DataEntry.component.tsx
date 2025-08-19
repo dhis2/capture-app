@@ -1,6 +1,6 @@
 import React, { type ComponentType, Component } from 'react';
 import { compose } from 'redux';
-import type { WithStyles, Theme } from '@material-ui/core/styles';
+import type { WithStyles } from '@material-ui/core/styles';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
@@ -437,7 +437,7 @@ type Props = {
     onSave?: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void;
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void;
     onScrollToRelationships?: () => void;
-    theme: Theme;
+    theme: any;
     formHorizontal?: boolean;
     recentlyAddedRelationshipId?: string | null;
     placementDomNodeForSavingText?: HTMLElement;
@@ -507,7 +507,7 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 
     relationshipsInstance?: HTMLDivElement | null;
     dataEntrySections: { [key: string]: DataEntrySection };
-    fieldOptions: { theme: Theme; fieldLabelMediaBasedClass?: string };
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass?: string };
 
     render() {
         const {

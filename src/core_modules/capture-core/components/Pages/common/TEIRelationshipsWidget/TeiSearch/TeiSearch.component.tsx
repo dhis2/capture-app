@@ -1,6 +1,6 @@
 import React, { type ComponentType, useCallback, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
@@ -8,7 +8,7 @@ import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { Props } from './TeiSearch.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         margin: theme.typography.pxToRem(10),
     },

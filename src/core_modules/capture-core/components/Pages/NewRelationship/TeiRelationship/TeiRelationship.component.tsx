@@ -2,7 +2,6 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconSearch24, IconAdd24, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import { RegisterTei } from '../RegisterTei';
 import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
@@ -29,7 +28,7 @@ type OwnProps = {
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {},
     modeSelectionsContainer: {
         display: 'flex',
