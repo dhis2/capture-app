@@ -71,8 +71,8 @@ export const useMetadataForProgramStage = ({
     );
 
     return {
-        formFoundation: programStageMetadata?.stageForm,
-        stage: programStageMetadata,
+        formFoundation: programStageMetadata?.stageForm ?? null,
+        stage: programStageMetadata ?? null,
         isLoading: isLoading || isIdle,
         isError,
     };

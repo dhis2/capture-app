@@ -40,7 +40,7 @@ export const useMetadataAutoSelect = () => {
         if (programs && programs.length === 1) {
             paramsToAdd.programId = programs[0].id;
         }
-        if (searchOrgUnits && searchOrgUnits.length === 1) {
+        if (searchOrgUnits && (searchOrgUnits as any).length === 1) {
             paramsToAdd.orgUnitId = searchOrgUnits[0].id;
         }
 

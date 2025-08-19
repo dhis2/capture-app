@@ -66,6 +66,6 @@ export const useTrackedEntityTypeCollection = ({
     );
 
     return {
-        trackedEntityTypeCollection,
+        trackedEntityTypeCollection: trackedEntityTypeCollection || null,
     };
 };

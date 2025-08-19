@@ -3,7 +3,7 @@ import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type { InputAttribute } from './hooks/useFormValues';
-import { RenderFoundation, ProgramStage, Enrollment } from '../../../metaData';
+import { RenderFoundation, ProgramStage, Enrollment, TeiRegistration } from '../../../metaData';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
@@ -14,7 +14,7 @@ type TrackedEntityAttributes = Array<{
 
 export type EnrollmentPayload = {
     trackedEntity: string;
-    trackedEntityType: string;
+    trackedEntityType?: string;
     orgUnit: string;
     geometry: any;
     attributes: TrackedEntityAttributes;
@@ -82,8 +82,8 @@ type ContainerProps = {
     onCancel: () => void;
     isUserInteractionInProgress: boolean;
     isSavingInProgress: boolean;
-    enrollmentMetadata: Enrollment;
-    formFoundation: RenderFoundation;
+    enrollmentMetadata: Enrollment | TeiRegistration | null;
+    formFoundation: RenderFoundation | null;
     formId: string | null;
     saveButtonText: string;
 };

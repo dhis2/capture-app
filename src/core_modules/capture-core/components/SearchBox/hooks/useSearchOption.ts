@@ -3,7 +3,8 @@ import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgr
 import { buildSearchOption } from '../../../hooks/useSearchOptions';
 import { useTrackedEntityTypeFromIndexedDB } from '../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
 import { useUserLocale } from '../../../utils/localeData/useUserLocale';
-import type { AvailableSearchOption, SearchGroups } from '../SearchBox.types';
+import type { AvailableSearchOption } from '../SearchBox.types';
+import type { SearchGroup } from '../../../metaData/SearchGroup/SearchGroup';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { buildSearchGroup } from './index';
 
@@ -44,27 +45,28 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data, isLoading, isError } = useIndexedDBQuery<AvailableSearchOption | undefined>(
+    const { data: searchGroups, isLoading, isError } = useIndexedDBQuery<SearchGroup[]>(
         ['searchGroup', searchId],
         () => buildSearchGroup(searchData, locale),
         {
             enabled: !!(searchId && locale && searchData),
-            select: (searchGroups?: SearchGroups) => {
-                if (!searchName || !searchGroups || !searchScope) {
-                    return undefined;
-                }
-                return buildSearchOption(
-                    searchId,
-                    searchName,
-                    searchGroups,
-                    searchScope,
-                );
-            },
         },
     );
 
+    const searchOption = useMemo(() => {
+        if (!searchName || !searchGroups || !searchScope) {
+            return undefined;
+        }
+        return buildSearchOption(
+            searchId,
+            searchName,
+            searchGroups as any,
+            searchScope,
+        );
+    }, [searchName, searchGroups, searchScope, searchId]);
+
     return {
-        searchOption: data,
+        searchOption,
         isLoading,
         isError,
     };

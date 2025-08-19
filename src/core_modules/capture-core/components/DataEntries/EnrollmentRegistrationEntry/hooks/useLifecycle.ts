@@ -88,7 +88,7 @@ export const useLifecycle = (
         skipDuplicateCheck: !!teiId,
         firstStageMetaData,
         formId,
-        enrollmentMetadata,
+        enrollmentMetadata: scopeType === scopeTypes.TRACKER_PROGRAM ? enrollmentMetadata : null,
         formFoundation,
     };
 };

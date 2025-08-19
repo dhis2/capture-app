@@ -14,7 +14,7 @@ export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
         configQuery,
         {
             enabled: !!selectedScopeId,
-            select: dataEntryFormConfigQuery => dataEntryFormConfigQuery[selectedScopeId],
+            select: (dataEntryFormConfigQuery: any) => dataEntryFormConfigQuery[selectedScopeId],
         },
     );
 

@@ -63,7 +63,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
 
     return {
         rawRecords: data,
-        pager: data?.pager,
+        pager: (data as any)?.pager,
         setPage,
         setPageSize: handleChangePageSize,
         sortDirection,

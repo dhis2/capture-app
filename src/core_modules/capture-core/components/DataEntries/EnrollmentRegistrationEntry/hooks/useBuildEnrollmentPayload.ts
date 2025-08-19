@@ -35,7 +35,7 @@ type DataEntryReduxConverterProps = {
     itemId?: string;
     orgUnitId: string;
     teiId?: string;
-    trackedEntityTypeId: string;
+    trackedEntityTypeId?: string;
 };
 
 function getClientValuesForFormData(formValues: Record<string, unknown>, formFoundation: RenderFoundation) {
@@ -181,7 +181,7 @@ export const useBuildEnrollmentPayload = ({
             teiWithEnrollment: {
                 trackedEntity: teiId || generateUID(),
                 orgUnit: orgUnitId,
-                trackedEntityType: trackedEntityTypeId,
+                trackedEntityType: trackedEntityTypeId || undefined,
                 attributes,
                 geometry: tetGeometry,
                 enrollments: [enrollment],

@@ -16,7 +16,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         {
             enabled: !searchText,
             select: (data) => {
-                const { teiSearchOrganisationUnits, organisationUnits } = data;
+                const { teiSearchOrganisationUnits, organisationUnits } = data as any;
                 return teiSearchOrganisationUnits.length
                     ? teiSearchOrganisationUnits
                     : organisationUnits;
@@ -40,7 +40,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
             enabled: Boolean(searchText),
             cacheTime: 120 * 60 * 1000,
             select: (data) => {
-                const { organisationUnits } = data;
+                const { organisationUnits } = data as any;
                 return organisationUnits;
             },
         },

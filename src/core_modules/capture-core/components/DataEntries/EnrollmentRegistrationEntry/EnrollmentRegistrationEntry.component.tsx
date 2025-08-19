@@ -8,6 +8,7 @@ import { scopeTypes } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
+import type { Enrollment } from '../../../metaData';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
@@ -72,14 +73,14 @@ const EnrollmentRegistrationEntryPlain =
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit && enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
                   <>
                       <EnrollmentDataEntry
                           teiId={teiId}
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
-                          enrollmentMetadata={enrollmentMetadata}
+                          enrollmentMetadata={enrollmentMetadata as Enrollment}
                           id={id}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
                           onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future')}
