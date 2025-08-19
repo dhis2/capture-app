@@ -1,3 +1,10 @@
+# [103.3.0](https://github.com/dhis2/capture-app/compare/v103.2.7...v103.3.0) (2025-08-19)
+
+
+### Features
+
+* [DHIS2-15343] Text updates when searching ([#4349](https://github.com/dhis2/capture-app/issues/4349)) ([9a4d563](https://github.com/dhis2/capture-app/commit/9a4d5631c1af890e33375182f79d9e09e883835a))
+
 ## [103.2.7](https://github.com/dhis2/capture-app/compare/v103.2.6...v103.2.7) (2025-08-18)
 
 
