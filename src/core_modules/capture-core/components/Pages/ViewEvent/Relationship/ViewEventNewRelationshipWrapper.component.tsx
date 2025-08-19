@@ -2,13 +2,13 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Card } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import { NewRelationship } from '../../NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         padding: `${theme.typography.pxToRem(10)} ${theme.typography.pxToRem(24)}`,
     },

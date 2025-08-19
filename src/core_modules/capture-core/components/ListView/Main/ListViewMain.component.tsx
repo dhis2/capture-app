@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';
@@ -13,7 +13,7 @@ import type { Props } from './listViewMain.types';
 
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
-const getStyles: Readonly<any> = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: any) => ({
     topBarContainer: {
         display: 'flex',
         justifyContent: 'space-between',

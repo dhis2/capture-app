@@ -21,47 +21,47 @@ export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'QuickActions' as const,
+            name: 'QuickActions',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'StagesAndEvents' as const,
+            name: 'StagesAndEvents',
         },
     ],
     rightColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ErrorWidget' as const,
+            name: 'ErrorWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'WarningWidget' as const,
+            name: 'WarningWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentNote' as const,
+            name: 'EnrollmentNote',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'FeedbackWidget' as const,
+            name: 'FeedbackWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'IndicatorWidget' as const,
+            name: 'IndicatorWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'TrackedEntityRelationship' as const,
+            name: 'TrackedEntityRelationship',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ProfileWidget' as const,
+            name: 'ProfileWidget',
             settings: { readOnlyMode: false },
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentWidget' as const,
+            name: 'EnrollmentWidget',
             settings: { readOnlyMode: false },
         },
     ],
-};
+} as const;

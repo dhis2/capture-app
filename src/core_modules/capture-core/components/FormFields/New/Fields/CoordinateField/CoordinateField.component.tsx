@@ -7,7 +7,7 @@ import { withCenterPoint } from '../../HOC';
 
 const getStyles = (theme: any) => ({
     inputWrapperFocused: {
-        position: 'relative' as const,
+        position: 'relative',
         zIndex: 10,
     },
     innerInputError: {
@@ -41,7 +41,7 @@ const getStyles = (theme: any) => ({
         width: '75%',
         height: '75%',
     },
-});
+}) as const;
 
 type Props = {
     value?: any | null,

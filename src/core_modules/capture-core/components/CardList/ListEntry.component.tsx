@@ -1,11 +1,11 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import type { Theme, WithStyles } from '@material-ui/core/styles';
+import type { WithStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 import { convertValue } from '../../converters/clientToView';
 import { DataElement, dataElementTypes } from '../../metaData';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     elementName: {
         fontSize: theme.typography.pxToRem(13),
         color: colors.grey700,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+
 import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui';
 import { convertFormToClient } from 'capture-core/converters';
@@ -37,7 +37,7 @@ type OwnProps = {
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     itemActionsContainer: {
         paddingTop: theme.typography.pxToRem(10),
     },
@@ -52,7 +52,7 @@ const getStyles = (theme: Theme) => ({
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
         marginRight: 0,
-        backgroundColor: theme.palette.grey[500],
+        backgroundColor: theme.palette.grey.lighter,
         maxWidth: theme.typography.pxToRem(600),
     },
     topSectionValuesContainer: {

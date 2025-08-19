@@ -5,7 +5,7 @@ import React, {
     useEffect,
 } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, CircularLoader, colors } from '@dhis2/ui';
@@ -22,7 +22,7 @@ import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
 
 const SearchPagination = withNavigation()(Pagination);
 
-export const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: any) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',

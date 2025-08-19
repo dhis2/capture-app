@@ -14,14 +14,14 @@ const getStyles = (theme: any) => ({
     },
     buttonRow: {
         display: 'flex',
-        flexWrap: 'wrap' as const,
+        flexWrap: 'wrap',
         paddingTop: 10,
         marginLeft: '-8px',
     },
     buttonContainer: {
         paddingRight: theme.spacing.unit * 2,
     },
-});
+}) as const;
 
 type Props = {
     onCancel: () => void;

@@ -18,7 +18,7 @@ const FocusTextField = withFocusSaver()(TextField);
 const styles = {
     noteItem: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         alignItems: 'normal',
         cursor: 'default !important',
         padding: spacersNum.dp12,
@@ -62,7 +62,7 @@ const styles = {
     newNoteContainer: {},
     newNoteFormContainer: {},
     inputContainer: {},
-};
+} as const;
 
 type Props = {
     notes: Array<Note>;

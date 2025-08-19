@@ -1,6 +1,6 @@
 import React, { type ComponentType, Component } from 'react';
 import { compose } from 'redux';
-import type { WithStyles, Theme } from '@material-ui/core/styles';
+import type { WithStyles } from '@material-ui/core/styles';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
@@ -49,7 +49,7 @@ import {
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
-const getStyles = (theme: any): any => ({
+const getStyles = (theme: any) => ({
     savingContextContainer: {
         paddingTop: theme.typography.pxToRem(10),
         display: 'flex',
@@ -77,7 +77,7 @@ const getStyles = (theme: any): any => ({
             paddingTop: '0px !important',
         },
     },
-});
+}) as const;
 
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
@@ -85,11 +85,11 @@ const dataEntrySectionNames = {
     NOTES: 'NOTES',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
-};
+} as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
-};
+} as const;
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -98,7 +98,7 @@ const baseComponentStyles = {
     inputContainerStyle: {
         flexBasis: 150,
     },
-};
+} as const;
 const baseComponentStylesVertical = {
     labelContainerStyle: {
         width: 150,
@@ -106,7 +106,7 @@ const baseComponentStylesVertical = {
     inputContainerStyle: {
         width: 150,
     },
-};
+} as const;
 
 function defaultFilterProps(props: any) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
@@ -437,7 +437,7 @@ type Props = {
     onSave?: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void;
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void;
     onScrollToRelationships?: () => void;
-    theme: Theme;
+    theme: any;
     formHorizontal?: boolean;
     recentlyAddedRelationshipId?: string | null;
     placementDomNodeForSavingText?: HTMLElement;
@@ -507,7 +507,7 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 
     relationshipsInstance?: HTMLDivElement | null;
     dataEntrySections: { [key: string]: DataEntrySection };
-    fieldOptions: { theme: Theme; fieldLabelMediaBasedClass?: string };
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass?: string };
 
     render() {
         const {

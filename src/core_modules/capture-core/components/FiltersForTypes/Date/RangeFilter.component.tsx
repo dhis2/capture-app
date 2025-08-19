@@ -1,13 +1,13 @@
 /* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import { StartRangeFilter } from './Start.component';
 import { EndRangeFilter } from './End.component';
 import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 
-const styles: Readonly<any> = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: any) => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',

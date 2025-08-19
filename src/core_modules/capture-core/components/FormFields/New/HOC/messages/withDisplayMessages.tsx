@@ -2,11 +2,11 @@
 import * as React from 'react';
 import { CircularLoader, colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     base: {
         paddingTop: 10,
         marginLeft: 0,
@@ -39,9 +39,9 @@ const styles = (theme: Theme) => ({
         marginRight: 4,
     },
     listItem: {
-        listStylePosition: 'inside' as any,
+        listStylePosition: 'inside',
     },
-});
+}) as const;
 
 const messageTypes = {
     error: 'error',

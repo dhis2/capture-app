@@ -9,12 +9,12 @@ import { withLoadingIndicator } from '../../HOC';
 
 const styles = {
     stickyTopBar: {
-        position: 'sticky' as const,
+        position: 'sticky',
         top: 0,
         zIndex: 1000,
         width: '100%',
     },
-};
+} as const;
 
 class ScopeSelectorClass extends Component<Props & WithStyles<typeof styles>, State> {
     constructor(props: Props & WithStyles<typeof styles>) {

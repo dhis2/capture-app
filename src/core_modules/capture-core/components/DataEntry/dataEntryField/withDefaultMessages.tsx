@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import classNames from 'classnames';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     base: {
         paddingTop: 10,
     },

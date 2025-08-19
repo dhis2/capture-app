@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import cx from 'classnames';
 import { IconChevronUp24, colors, spacersNum } from '@dhis2/ui';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         background: colors.white,
         border: '1px solid',
@@ -24,7 +24,7 @@ const getStyles = (theme: Theme) => ({
     },
     children: {
         padding: theme.typography.pxToRem(10),
-        borderTop: `1px solid ${theme.palette.grey[400]}`,
+        borderTop: `1px solid ${theme.palette.grey.blueGrey}`,
         '&.open': {
             animation: 'slidein 200ms normal forwards ease-in-out',
             transformOrigin: '50% 0%',

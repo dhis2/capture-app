@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
-const styles = (theme: Theme) => ({
+
+const styles = (theme: any) => ({
     button: {
         border: 'none',
         fontSize: theme.typography.pxToRem(16),

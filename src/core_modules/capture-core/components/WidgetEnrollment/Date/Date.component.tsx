@@ -9,7 +9,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { isValidDate, isValidNonFutureDate } from 'capture-core/utils/validation/validators/form';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
@@ -29,7 +29,7 @@ type OwnProps = {
     allowFutureDate?: boolean;
 };
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     editButton: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -70,14 +70,6 @@ const styles = (theme: Theme) => ({
     error: {
         ...theme.typography.caption,
         color: theme.palette.error.main,
-    },
-    row: {
-        display: 'flex',
-        alignItems: 'center',
-        margin: `${spacersNum.dp8}px 0`,
-        fontSize: '14px',
-        color: colors.grey900,
-        gap: `${spacersNum.dp4}px`,
     },
 });
 
@@ -189,7 +181,7 @@ const DateComponentPlain = ({
             )}
         </div>
     ) : (
-        <div className={classes.row} data-test="widget-enrollment-date">
+        <div data-test="widget-enrollment-date">
             <span data-test="widget-enrollment-icon-calendar">
                 <IconCalendar16 color={colors.grey600} />
             </span>

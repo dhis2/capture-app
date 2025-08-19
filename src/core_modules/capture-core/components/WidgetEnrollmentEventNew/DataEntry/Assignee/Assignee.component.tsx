@@ -12,7 +12,7 @@ const getStyles = {
     },
     containerVertical: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         margin: 8,
     },
     label: {
@@ -24,7 +24,7 @@ const getStyles = {
         flexBasis: 150,
         flexGrow: 1,
     },
-};
+} as const;
 
 type Props = {
     orientation: string;

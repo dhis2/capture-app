@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
 import {
@@ -9,7 +9,7 @@ import {
 } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
-const getStyles: Readonly<any> = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         marginRight: theme.typography.pxToRem(-24),
     },

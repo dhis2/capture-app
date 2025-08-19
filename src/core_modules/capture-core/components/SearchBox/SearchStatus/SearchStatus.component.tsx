@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import {
     CircularLoader,
@@ -18,7 +18,7 @@ import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.red
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     informativeMessage: {
         marginLeft: theme.typography.pxToRem(10),
         marginTop: theme.typography.pxToRem(20),

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
@@ -19,7 +19,7 @@ import type { SearchGroup } from '../../../../../../metaData';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     orgUnitSection: {
         backgroundColor: 'white',
         padding: theme.typography.pxToRem(8),

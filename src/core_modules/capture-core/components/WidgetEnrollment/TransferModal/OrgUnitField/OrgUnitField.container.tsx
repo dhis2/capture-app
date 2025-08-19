@@ -20,11 +20,11 @@ const styles = {
     },
     orgUnitTreeContainer: {
         maxHeight: 300,
-        overflowY: 'auto' as const,
+        overflowY: 'auto',
         margin: '10px 0',
         padding: '0 8px',
     },
-};
+} as const;
 
 type Props = {
     selected: { id: string; path: string[] };

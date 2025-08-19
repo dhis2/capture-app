@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { PlainProps, Value } from './TrueOnly.types';
 
-export const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
         marginRight: theme.typography.pxToRem(-24),
     },

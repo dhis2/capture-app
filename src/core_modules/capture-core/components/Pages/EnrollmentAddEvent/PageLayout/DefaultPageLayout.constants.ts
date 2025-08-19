@@ -17,39 +17,39 @@ export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'NewEventWorkspace' as const,
+            name: 'NewEventWorkspace',
         },
     ],
     rightColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'TrackedEntityRelationship' as const,
+            name: 'TrackedEntityRelationship',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ErrorWidget' as const,
+            name: 'ErrorWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'WarningWidget' as const,
+            name: 'WarningWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'FeedbackWidget' as const,
+            name: 'FeedbackWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'IndicatorWidget' as const,
+            name: 'IndicatorWidget',
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ProfileWidget' as const,
+            name: 'ProfileWidget',
             settings: { readOnlyMode: true },
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentWidget' as const,
+            name: 'EnrollmentWidget',
             settings: { readOnlyMode: true },
         },
     ],
-};
+} as const;

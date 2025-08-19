@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { LinkButton } from '../../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../../ProgramFilterer';
@@ -16,7 +16,7 @@ import { NonBundledDhis2Icon } from '../../../../../../NonBundledDhis2Icon';
 import type { Program } from '../../../../../../../metaData';
 import type { ComposedProgramSelectorProps, ProgramOption } from './ProgramSelector.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -29,7 +29,7 @@ const getStyles = (theme: Theme) => ({
     },
     isFilteredContainer: {
         fontSize: 12,
-        color: theme.palette.grey[700],
+        color: theme.palette.grey.dark,
         paddingTop: 5,
     },
     isFilteredLink: {

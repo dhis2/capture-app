@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfoFilled24 } from '@dhis2/ui';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import type { PlainProps } from './IndicatorsSection.types';
@@ -11,15 +11,15 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const headerText = i18n.t('Indicators');
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     badge: {
-        backgroundColor: theme.palette.grey[300],
+        backgroundColor: theme.palette.grey.light,
     },
     indicator: {
         marginTop: theme.typography.pxToRem(5),
         marginBottom: theme.typography.pxToRem(5),
         borderRadius: theme.typography.pxToRem(4),
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.grey.lighter,
         display: 'flex',
     },
     textIndicator: {

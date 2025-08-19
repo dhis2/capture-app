@@ -32,13 +32,13 @@ type Option = {
 const styles = () => ({
     selectBarMenu: {
         maxHeight: '80vh',
-        overflow: 'auto' as const,
+        overflow: 'auto',
     },
     label: {
         display: 'flex',
         alignItems: 'center',
     },
-});
+}) as const;
 
 const getSelectedOption = (options: Option[], selectedValue: string): Partial<Option> => (
     options.find(({ value }) => value === selectedValue) || {}

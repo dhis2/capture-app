@@ -1,12 +1,12 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import { Pagination } from 'capture-ui';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import type { Props, OwnProps } from './ReviewDialogContentsPager.types';
 import { useDuplicates } from '../useDuplicates';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         display: 'flex',
         justifyContent: 'flex-end',

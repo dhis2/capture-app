@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+
 import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import { CaptureScrollHeight } from './CaptureScrollHeight.component';
@@ -16,20 +16,20 @@ const getBorder = (theme: any) => {
 
 const maxHeight = 110;
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         borderBottom: getBorder(theme),
     },
     configsContainer: {
         display: 'flex',
-        flexWrap: 'wrap' as const,
+        flexWrap: 'wrap',
         padding: `${theme.typography.pxToRem(3)} 0rem`,
         maxHeight,
-        overflow: 'hidden' as const,
+        overflow: 'hidden',
     },
     configsContainerExpanded: {
         display: 'flex',
-        flexWrap: 'wrap' as const,
+        flexWrap: 'wrap',
         padding: `${theme.typography.pxToRem(3)} 0rem`,
     },
     chipContainer: {
@@ -38,7 +38,7 @@ const getStyles = (theme: Theme) => ({
     linkButtonContainer: {
         marginBottom: 5,
         display: 'flex',
-        justifyContent: 'center' as const,
+        justifyContent: 'center',
     },
     linkButton: {
         fontSize: 10,
@@ -48,7 +48,7 @@ const getStyles = (theme: Theme) => ({
             fontWeight: 500,
         },
     },
-});
+}) as const;
 
 type OwnProps = {
     templates: WorkingListTemplates;

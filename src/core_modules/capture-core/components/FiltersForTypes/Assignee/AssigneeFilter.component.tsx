@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
@@ -8,7 +8,7 @@ import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
-const getStyles: Readonly<any> = (theme: Theme) => ({
+const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',

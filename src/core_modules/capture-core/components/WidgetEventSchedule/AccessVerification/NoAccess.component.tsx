@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 
-const getStyles: any = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -21,7 +21,7 @@ const getStyles: any = (theme: Theme) => ({
     buttonContainer: {
         paddingRight: theme.spacing.unit * 2,
     },
-});
+}) as const;
 
 type Props = {
     onCancel: () => void;

@@ -20,7 +20,7 @@ type Props = {
 const styles = {
     container: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         gap: '8px',
     },
     alert: {
@@ -37,7 +37,7 @@ const styles = {
             backgroundColor: colors.yellow100,
         },
     },
-};
+} as const;
 
 const InfoBoxesPlain = ({
     ownerOrgUnitId,

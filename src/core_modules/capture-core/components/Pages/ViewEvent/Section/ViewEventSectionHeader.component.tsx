@@ -2,11 +2,10 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Chip, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
 
 
-const getStyles = (theme: Theme) => ({
-    headerContainer: {
+const getStyles = (theme: any) => ({
+    eaderContainer: {
         display: 'flex',
         alignItems: 'center',
     },

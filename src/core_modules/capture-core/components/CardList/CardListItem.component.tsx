@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
-import { withStyles, type Theme, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { CardImage } from 'capture-ui/CardImage/CardImage.component';
@@ -33,17 +33,17 @@ type OwnProps = {
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     itemContainer: {
         maxWidth: theme.typography.pxToRem(600),
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
         padding: theme.typography.pxToRem(8),
         borderRadius: theme.typography.pxToRem(5),
         border: `1px solid ${colors.grey400}`,
         backgroundColor: colors.grey050,
-        position: 'relative' as const,
+        position: 'relative',
     },
     itemDataContainer: {
         display: 'flex',
@@ -52,7 +52,7 @@ const styles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
         paddingBottom: theme.typography.pxToRem(8),
-        position: 'absolute' as const,
+        position: 'absolute',
         top: theme.typography.pxToRem(8),
         right: theme.typography.pxToRem(8),
     },
@@ -63,7 +63,7 @@ const styles = (theme: Theme) => ({
     },
     itemValuesContainer: {
         display: 'flex',
-        flexWrap: 'wrap' as const,
+        flexWrap: 'wrap',
         flexGrow: 1,
     },
     image: {
@@ -75,10 +75,10 @@ const styles = (theme: Theme) => ({
         marginTop: theme.typography.pxToRem(8),
     },
     checkIcon: {
-        position: 'relative' as const,
+        position: 'relative',
         top: '-2px',
     },
-});
+}) as const;
 
 type Enrollment = { program: string, status: string, lastUpdated: string, orgUnit: string, enrolledAt: string };
 

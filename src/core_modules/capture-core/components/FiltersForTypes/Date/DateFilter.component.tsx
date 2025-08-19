@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
@@ -20,7 +20,7 @@ import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 
-const styles: Readonly<any> = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: any) => ({
     fromToContainer: {
         display: 'flex',
         flexWrap: 'wrap',

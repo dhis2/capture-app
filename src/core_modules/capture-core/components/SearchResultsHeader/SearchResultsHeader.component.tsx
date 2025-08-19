@@ -1,11 +1,11 @@
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import type { CurrentSearchTerms } from '../SearchBox';
 import { convertValue } from '../../converters/clientToList';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: any) => ({
     topSection: {
         marginTop: theme.typography.pxToRem(20),
         marginLeft: theme.typography.pxToRem(10),

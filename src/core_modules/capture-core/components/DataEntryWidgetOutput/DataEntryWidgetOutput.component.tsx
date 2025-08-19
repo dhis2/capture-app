@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
@@ -10,7 +10,7 @@ type OwnProps = {
     onLink: (teiId: string, values: Record<string, unknown>) => void;
 };
 
-const getStyles = (theme: Theme): Readonly<any> => ({
+const getStyles = (theme: any): Readonly<any> => ({
     stickyOnScroll: {
         position: 'relative',
         flexGrow: 1,

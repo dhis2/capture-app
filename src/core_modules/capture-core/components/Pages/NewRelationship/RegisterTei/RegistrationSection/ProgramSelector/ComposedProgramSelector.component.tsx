@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { LinkButton } from '../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../ProgramFilterer';
@@ -16,7 +15,7 @@ import {
 } from '../../../../../FormFields/New';
 import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -29,7 +28,7 @@ const getStyles = (theme: Theme) => ({
     },
     isFilteredContainer: {
         fontSize: 12,
-        color: theme.palette.grey[500],
+        color: theme.palette.grey.dark,
         paddingTop: 5,
     },
     isFilteredLink: {

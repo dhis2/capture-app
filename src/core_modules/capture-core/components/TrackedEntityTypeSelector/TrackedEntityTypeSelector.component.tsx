@@ -1,7 +1,7 @@
 import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Theme } from '@material-ui/core/styles';
+
 import {
     SingleSelectField,
     SingleSelectOption,
@@ -12,7 +12,7 @@ import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
 import { InfoIconText } from '../InfoIconText';
 
-const styles: Readonly<any> = ({ typography }: Theme) => ({
+const styles: Readonly<any> = ({ typography }: any) => ({
     searchRow: {
         maxWidth: typography.pxToRem(400),
         display: 'flex',
