@@ -1,4 +1,3 @@
-// @flow
 import { getAppReducerDesc } from 'capture-core/reducers/descriptions/app.reducerDescriptionGetter';
 import { appStartActionTypes } from '../../components/AppStart';
 

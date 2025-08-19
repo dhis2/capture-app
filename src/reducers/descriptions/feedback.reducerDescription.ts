@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { getFeedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescriptionGetter';
 import { getMainStorageController } from 'capture-core/storageControllers';

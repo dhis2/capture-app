@@ -1,4 +1,3 @@
-// @flow
 import { createMuiTheme } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 
@@ -37,10 +36,8 @@ export const theme = createMuiTheme({
             main: colors.teal600,
             dark: '#004C40',
             light: '#48A999',
-            lightest: colors.teal200,
         },
         error: {
-            red200: colors.red200,
             lighter: '#FBEAE5',
             light: colors.red300,
             main: '#E53935',
@@ -54,33 +51,49 @@ export const theme = createMuiTheme({
         },
         success: {
             main: '#3D9305',
-            green600: colors.green600,
-        },
-        green: {
-
         },
         info: {
             main: '#EAF4FF',
         },
-        grey: {
-            main: '#9E9E9E',
-            light: '#E0E0E0',
-            lighter: '#F6F6F6',
-            lightest: '#FBFBFB',
-            dark: '#494949',
-            blueGrey: '#ECEFF1',
-            snow: '#F4F6F8',
-            black: '#000000',
-        },
     },
-});
+} as any);
 
-theme.typography.formFieldTitle = {
+(theme.typography as any).formFieldTitle = {
     fontSize: theme.typography.pxToRem(12),
 };
 
-theme.palette = {
+(theme.palette as any) = {
     ...theme.palette,
+    secondary: {
+        main: colors.teal600,
+        dark: '#004C40',
+        light: '#48A999',
+        lightest: colors.teal200,
+    },
+    error: {
+        red200: colors.red200,
+        lighter: '#FBEAE5',
+        light: colors.red300,
+        main: '#E53935',
+        dark: colors.red500,
+    },
+    success: {
+        main: '#3D9305',
+        green600: colors.green600,
+    },
+    green: {
+
+    },
+    grey: {
+        main: '#9E9E9E',
+        light: '#E0E0E0',
+        lighter: '#F6F6F6',
+        lightest: '#FBFBFB',
+        dark: '#494949',
+        blueGrey: '#ECEFF1',
+        snow: '#F4F6F8',
+        black: '#000000',
+    },
     accent: {
         lighter: colors.blue100,
         light: '#BBDEFB',
