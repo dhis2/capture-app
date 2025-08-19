@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import log from 'loglevel';
 import { useDataEngine } from '@dhis2/app-runtime';
-import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
+import type { ResourceQuery } from '../../../../capture-core-utils/types/app-runtime';
 import type { QueryFunction, UseQueryOptions } from 'react-query';
 import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
@@ -59,14 +59,16 @@ export const useApiMetadataQuery = <TResultData>(
 ): Result<TResultData> => {
     const dataEngine = useDataEngine();
     const queryFn: QueryFunction<TResultData> = () => {
-        return dataEngine.query({ theQuerykey: queryObject! })
+        if (!queryObject) {
+            return Promise.resolve(undefined as TResultData);
+        }
+        return dataEngine.query({ theQuerykey: queryObject })
             .then(response => response.theQuerykey as TResultData);
     };
 
     return useAsyncMetadata(queryKey, queryFn, {
         cacheTime: Infinity,
         staleTime: Infinity,
-        enabled: !!queryObject,
         ...queryOptions,
     });
 };

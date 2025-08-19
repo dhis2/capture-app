@@ -1,5 +1,5 @@
 import type { UseQueryOptions, UseQueryResult } from 'react-query';
-import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
+import type { ResourceQuery } from '../../../../capture-core-utils/types/app-runtime';
 
 export type ApiMetadataProps<TResultData> = {
     queryKey: string | Array<string>;
