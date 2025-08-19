@@ -15,7 +15,7 @@ import { theme } from '../../styles/uiTheme';
 // Define a basic type for the Redux store
 interface ReduxStore {
     dispatch: (action: any) => void;
-    // Add other store properties as needed
+    getState: () => any;
 }
 
 export const AppStart = () => {

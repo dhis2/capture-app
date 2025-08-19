@@ -1,5 +1,9 @@
-// @flow
 import { cleanUpCommon } from 'capture-core/cleanUp/cleanUp';
+
+type PlainReduxStore = {
+    dispatch: (action: any) => void;
+    getState: () => any;
+};
 
 export function addBeforeUnloadEventListener(store: PlainReduxStore) {
     window.addEventListener('beforeunload', async (e) => {
