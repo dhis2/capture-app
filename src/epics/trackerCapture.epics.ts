@@ -1,4 +1,3 @@
-// @flow
 import { combineEpics } from 'redux-observable';
 import {
     cancelNewEventEpic,
@@ -235,7 +234,7 @@ import {
     openRelationshipTeiRegisterWidgetEpic,
 } from '../core_modules/capture-core/components/Pages/common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 
-export const epics = combineEpics(
+export const epics = (combineEpics as any)(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
