@@ -11,7 +11,7 @@ export function addBeforeUnloadEventListener(store: PlainReduxStore) {
 
         if (store.getState().offline.outbox.length > 0) {
             const msg = 'Unsaved events!';
-            e.returnValue = msg;
+            e.preventDefault();
             return msg;
         }
         return undefined;
