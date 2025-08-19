@@ -70,5 +70,6 @@ export const useApiMetadataQuery = <TResultData>(
         cacheTime: Infinity,
         staleTime: Infinity,
         ...queryOptions,
+        enabled: true,
     });
 };
