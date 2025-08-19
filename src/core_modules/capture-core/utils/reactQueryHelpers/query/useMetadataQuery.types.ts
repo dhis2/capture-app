@@ -7,4 +7,4 @@ export type ApiMetadataProps<TResultData> = {
     queryOptions?: UseQueryOptions<TResultData>;
 }
 
-export type Result<TResultData> = UseQueryResult<TResultData>;
+export type Result<TResultData> = UseQueryResult<TResultData | undefined>;
