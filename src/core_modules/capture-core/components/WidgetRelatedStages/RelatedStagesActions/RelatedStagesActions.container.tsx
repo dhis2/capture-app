@@ -52,10 +52,10 @@ const RelatedStagesActionsPlain = ({
     const expiryPeriod = useProgramExpiryForUser(programId);
 
     useEffect(() => {
-        if (!orgUnitLoading && data?.length === 1) {
+        if (!orgUnitLoading && (data as any)?.length === 1) {
             setRelatedStageDataValues(prev => ({
                 ...prev,
-                orgUnit: data[0],
+                orgUnit: (data as any)[0],
             }));
         }
     }, [data, orgUnitLoading, setRelatedStageDataValues]);

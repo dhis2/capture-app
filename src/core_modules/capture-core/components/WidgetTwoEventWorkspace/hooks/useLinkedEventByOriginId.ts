@@ -90,7 +90,7 @@ export const useLinkedEventByOriginId = ({ originEventId, skipBidirectionalCheck
         linkedEvent: dataValues ? linkedEvent : fallbackDataValues,
         relationship,
         relationshipType,
-        dataValues: dataValues || fallbackDataValues?.dataValues,
+        dataValues: dataValues || (fallbackDataValues as any)?.dataValues,
         isLoading: isLoading || isLoadingFallback,
         isError,
         error,

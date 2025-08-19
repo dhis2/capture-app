@@ -37,7 +37,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         dataEntryId: id,
         orgUnitId,
         teiId,
-        trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id,
+        trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id || undefined,
     });
 
     const isUserInteractionInProgress: boolean = useSelector(
