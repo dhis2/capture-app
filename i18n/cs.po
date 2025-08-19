@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-07-31T10:50:59.068Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -628,9 +628,6 @@ msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
 msgid "Quick actions"
 msgstr "Rychlé akce"
 
-msgid "New Event"
-msgstr "Nová událost"
-
 msgid "Schedule an event"
 msgstr "Naplánovat událost"
 
@@ -886,6 +883,9 @@ msgstr "událost"
 
 msgid "You don't have access to edit this event"
 msgstr "Nemáte přístup k úpravám této události"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
 
 msgid "View changelog"
 msgstr "Zobrazit seznam změn"
@@ -1515,6 +1515,9 @@ msgstr "Tato fáze může mít pouze jednu událost"
 
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Při mazání události došlo k chybě"
