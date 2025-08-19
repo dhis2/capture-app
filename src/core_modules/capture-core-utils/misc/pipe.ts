@@ -1,1 +1,1 @@
-export const pipe = <T>(...fns: Array<(arg: T, ...args: any[]) => T>) => (x: T, ...args: any[]): T => fns.reduce((v, fn) => fn(v, ...args), x);
+export const pipe = (...fns: Array<(arg: any, ...args: any[]) => any>) => (x?: any, ...args: any[]): any => fns.reduce((v, fn) => fn(v, ...args), x);
