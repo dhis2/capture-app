@@ -43,7 +43,7 @@ export type StageCommonProps = {
     onViewAll: (stageId: string) => void;
     onCreateNew: (stageId: string) => void;
     onEventClick: (eventId: string) => void;
-    ruleEffects?: Array<{id: string; type: effectActions[keyof effectActions]}>;
+    ruleEffects?: Array<{id: string; type: typeof effectActions[keyof typeof effectActions]}>;
 }
 
 export type DataValue = {

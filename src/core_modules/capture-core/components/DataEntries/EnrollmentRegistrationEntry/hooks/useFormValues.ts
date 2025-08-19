@@ -22,7 +22,7 @@ export type InputAttribute = {
 type InputForm = {
     program: TrackerProgram;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
-    orgUnit: OrgUnit | null;
+    orgUnit?: OrgUnit | null;
     formFoundation: RenderFoundation | null;
     teiId?: string;
     searchTerms: Array<{[key: string]: string}> | null;

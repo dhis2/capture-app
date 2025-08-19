@@ -1,100 +1,14 @@
 import type {
-    effectActions,
-    eventStatuses,
-    rulesEngineEffectTargetDataTypes,
-} from '../constants';
-
-export type ProgramRuleVariable = {
-    id: string,
-    displayName: string,
-    programRuleVariableSourceType: string,
-    valueType: string,
-    programId: string,
-    dataElementId?: string | null,
-    trackedEntityAttributeId?: string | null,
-    programStageId?: string | null,
-    useNameForOptionSet?: boolean | null,
-};
-
-type EventMain = {
-    eventId?: string,
-    programId?: string,
-    programStageId?: string,
-    programStageName?: string,
-    orgUnitId?: string,
-    trackedEntityInstanceId?: string,
-    enrollmentId?: string,
-    enrollmentStatus?: string,
-    status?: typeof eventStatuses[keyof typeof eventStatuses],
-    occurredAt?: string,
-    scheduledAt?: string,
-    completedAt?: string,
-    createdAt?: string,
-};
-
-export type EventValues = {
-    [elementId: string]: any,
-};
-
-export type EventData = EventValues & EventMain;
-
-export type EventsData = Array<EventData>;
-
-export type EventsDataContainer = {
-    all: EventsData,
-    byStage: { [stageId: string]: EventsData },
-};
-
-export type TEIValues = {
-    [attributeId: string]: any,
-};
-
-export type Enrollment = {
-    readonly enrolledAt?: string,
-    readonly occurredAt?: string,
-    readonly enrollmentId?: string,
-    readonly programName?: string,
-    readonly enrollmentStatus?: string,
-};
-
-export type Option = {
-    id: string,
-    code: string,
-    displayName: string,
-};
-
-export type OptionSet = {
-    id: string,
-    displayName: string,
-    options: Array<Option>,
-};
-
-export type OptionSets = {
-    [id: string]: OptionSet,
-};
-
-type Constant = {
-    id: string,
-    displayName: string,
-    value: any,
-};
-
-export type Constants = Array<Constant>;
-
-export type VariableServiceInput = {
-    programRuleVariables: Array<ProgramRuleVariable> | null,
-    currentEvent?: EventData,
-    otherEvents?: EventsData,
-    dataElements: DataElements | null,
-    selectedEntity: TEIValues | null,
-    trackedEntityAttributes: TrackedEntityAttributes | null,
-    selectedEnrollment: Enrollment | null,
-    selectedOrgUnit: OrgUnit,
-    optionSets: OptionSets,
-    constants?: Constants | null,
-};
-
-export type CompareDates = (firstRulesDate: string | null, secondRulesDate: string | null) => number;
+    ProgramRuleVariable,
+    EventData,
+    EventsData,
+    TEIValues,
+    Enrollment,
+    OptionSets,
+    CompareDates,
+    Constants,
+} from './services/VariableService';
+import { effectActions, rulesEngineEffectTargetDataTypes } from './constants';
 
 export type OutputEffect = {
     type: typeof effectActions[keyof typeof effectActions],
@@ -103,6 +17,14 @@ export type OutputEffect = {
     content?: string,
     name?: string,
     hadValue?: boolean,
+};
+
+export type DisplayTextEffect = OutputEffect & {
+    displayText: string,
+};
+
+export type DisplayKeyValuePairEffect = OutputEffect & {
+    displayKeyValuePair: { key: string, value: any },
 };
 
 export type OutputEffects = Array<OutputEffect>;
@@ -119,60 +41,55 @@ export type HideProgramStageEffect = OutputEffect & {
 
 };
 
-type ValidationMessage = {
-    id: string,
+export type MessageEffect = OutputEffect & {
     message: string,
 };
 
 export type GeneralErrorEffect = OutputEffect & {
-    error: ValidationMessage
+    error: { id: string, message: string },
 };
 
 export type GeneralWarningEffect = OutputEffect & {
-    warning: ValidationMessage
+    warning: { id: string, message: string },
 };
-
-export type MessageEffect = OutputEffect & {
-    message: string
-};
-
-export type WarningEffects = Array<MessageEffect> | Array<GeneralWarningEffect>;
-
-export type ErrorEffects = Array<MessageEffect> | Array<GeneralErrorEffect>;
 
 export type CompulsoryEffect = OutputEffect & {
 
 };
 
-type ProgramRuleData = {
-    name?: string,
-    location: string | null,
-    dataElementId?: string | null,
-    trackedEntityAttributeId?: string | null,
-    programStageId?: string | null,
-    programStageSectionId?: string | null,
-    optionGroupId?: string | null,
-    optionId?: string | null,
-    style?: any,
-};
-
 export type ProgramRuleEffect = {
     id: string,
+    location: string | null,
     action: string,
+    dataElementId: string | null,
+    trackedEntityAttributeId: string | null,
+    programStageId: string | null,
+    programStageSectionId: string | null,
+    optionGroupId: string | null,
+    optionId: string | null,
     content: string | null,
     displayContent: string | null,
     data: any,
-    field: string | null,
-    attributeType: string | null,
-} & ProgramRuleData;
+    style?: any,
+    name: string,
+};
 
 export type ProgramRuleAction = {
     id: string,
     content: string,
     displayContent: string,
     data: string | null,
+    location: string | null,
     programRuleActionType: string,
-} & ProgramRuleData;
+    dataElementId?: string | null,
+    programStageId?: string | null,
+    programStageSectionId?: string | null,
+    trackedEntityAttributeId?: string | null,
+    optionGroupId?: string | null,
+    optionId?: string | null,
+    style?: any,
+    name?: string,
+};
 
 export type ProgramRule = {
     id: string,
@@ -180,7 +97,7 @@ export type ProgramRule = {
     priority?: number,
     condition: string,
     description?: string | null,
-    displayName: string,
+    displayName: string, // TODO: Refactor and remove
     programId: string,
     programStageId?: string | null,
     programRuleActions: Array<ProgramRuleAction>,
@@ -206,9 +123,9 @@ export type RuleVariable = {
     useCodeForOptionSet: boolean,
     variableType: string,
     hasValue: boolean,
-    variableEventDate: string | null,
+    variableEventDate?: string | null,
     variablePrefix: string,
-    allValues: Array<any> | null,
+    allValues?: Array<any> | null,
 };
 
 export type RuleVariables = { [key: string]: RuleVariable };
@@ -299,7 +216,7 @@ export type IConvertOutputRulesEffectsValue = {
     convertLetter(value: string): any,
     convertPhoneNumber(value: string): any,
     convertEmail(value: string): any,
-    convertBoolean(value: boolean): any,  // Yes/No
+    convertBoolean(value: boolean): any,   // Yes/No
     convertTrueOnly(value: boolean): any,  // Yes Only
     convertDate(value: string): any,
     convertDateTime(value: string): any,

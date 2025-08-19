@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
+import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
@@ -148,7 +149,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const { program } = useProgramInfo(programId);
     const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
-    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
+    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules as ProgramRule[]));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);

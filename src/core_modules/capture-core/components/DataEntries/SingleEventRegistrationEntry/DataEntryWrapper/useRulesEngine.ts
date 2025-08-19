@@ -12,7 +12,7 @@ export const useRulesEngine = ({
     formFoundation,
 }: {
     programId: string;
-    orgUnitContext: OrgUnit | null;
+    orgUnitContext?: OrgUnit | null;
     formFoundation: RenderFoundation | null;
 }) => {
     const dispatch = useDispatch();
