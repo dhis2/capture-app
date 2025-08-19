@@ -102,9 +102,9 @@ export function postProcessRulesEffects(
         [effectActions.ASSIGN_VALUE]: assignValueEffects,
         rest,
     } = scopeFilteredRulesEffects
-        .reduce((acc, effect) => {
+        .reduce((acc: any, effect) => {
             const { type } = effect;
-            if ([effectActions.HIDE_FIELD, effectActions.HIDE_SECTION, effectActions.ASSIGN_VALUE].includes(type)) {
+            if ([effectActions.HIDE_FIELD, effectActions.HIDE_SECTION, effectActions.ASSIGN_VALUE].includes(type as any)) {
                 acc[type].push(effect);
             } else {
                 acc.rest.push(effect);

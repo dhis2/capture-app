@@ -44,7 +44,7 @@ const extractArgumentIndexes = (
     let index = expressionModuloStrings.indexOf('(', startIndexFunction) + 1;
     let argStart = index;
     let parenthesesCount = 1;
-    const argIndexes = [];
+    const argIndexes: number[][] = [];
 
     for (; index < expression.length; index += 1) {
         if (expressionModuloStrings[index] === '(') {
@@ -176,7 +176,7 @@ export const executeExpression = ({
     expression,
     dhisFunctions,
     variablesHash,
-    flags = {},
+    flags = { verbose: false },
     onError,
     onVerboseLog,
 }: ExecuteExpressionInput) => {
@@ -188,7 +188,6 @@ export const executeExpression = ({
             .replace(/'[^']*'|"[^"]*"/g, match => ' '.repeat(match.length));
         const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
         answer = internalExecuteExpression(
-            // $FlowExpectedError
             { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
             removeNewLinesFromNonStrings(expressionWithInjectedVariableValues, expressionModuloStrings),
             onError,
@@ -197,7 +196,7 @@ export const executeExpression = ({
         if (flags.verbose) {
             onVerboseLog(expressionWithInjectedVariableValues, answer);
         }
-    } catch (error) {
+    } catch (error: any) {
         onError(error.message, expressionWithInjectedVariableValues, answer);
     }
     return answer;

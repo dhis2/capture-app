@@ -117,8 +117,8 @@ export function getRulesEffectsProcessor(
         return getOutputEffectsWithPreviousValueCheck({
             outputEffects,
             formValues,
-            dataElementId: effect.dataElementId,
-            trackedEntityAttributeId: effect.trackedEntityAttributeId,
+            dataElementId: effect.dataElementId as string,
+            trackedEntityAttributeId: effect.trackedEntityAttributeId as string,
             dataElements,
             trackedEntityAttributes,
             onProcessValue,

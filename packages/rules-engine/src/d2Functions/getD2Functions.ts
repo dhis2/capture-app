@@ -318,7 +318,7 @@ export const getD2Functions = ({
                 dhisFunctions,
                 variablesHash,
                 onError: () => log.error(`Evaluation of d2:condition expression ${params[0]} failed`),
-                onVerboseLog: () => {},
+                onVerboseLog: () => { /* Empty function - keeping original functionality as before ts rewrite */ },
             });
             return result ? params[1] : params[2];
         },

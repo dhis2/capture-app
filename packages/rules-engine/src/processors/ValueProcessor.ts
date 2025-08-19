@@ -11,7 +11,6 @@ export class ValueProcessor {
     };
 
     converterObject: IConvertInputRulesValue;
-    processValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
 
     constructor(converterObject: IConvertInputRulesValue) {
         this.converterObject = converterObject;
@@ -28,7 +27,7 @@ export class ValueProcessor {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;
         }
-        // $FlowFixMe
+
         const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
         return convertedValue ?? null;
     }

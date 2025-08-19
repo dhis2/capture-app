@@ -182,7 +182,7 @@ function buildIndicatorRuleAndVariables(
     replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
     replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
 
-    newAction.data = performStaticReplacements(newAction.data);
+    newAction.data = performStaticReplacements(newAction.data as string);
     newRule.condition = performStaticReplacements(newRule.condition);
 
     return {

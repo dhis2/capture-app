@@ -15,7 +15,7 @@ export type DhisFunctionsInfo = Readonly<{
     applicableDhisFunctions: Array<InternalD2FunctionConfig>,
 }>;
 
-export type ErrorHandler = (error: string, expressionWithInjectedVariableValues: string, evaluationResult: any) => void;
+export type ErrorHandler = (error: string, expressionWithInjectedVariableValues: string, evaluationResult?: any) => void;
 
 export type ExecuteExpressionInput = Readonly<{
     expression: string,

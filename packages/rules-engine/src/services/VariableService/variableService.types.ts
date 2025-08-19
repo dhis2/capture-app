@@ -23,7 +23,7 @@ type EventMain = {
     readonly trackedEntityInstanceId?: string,
     readonly enrollmentId?: string,
     readonly enrollmentStatus?: string,
-    readonly status?: keyof typeof eventStatuses,
+    readonly status?: typeof eventStatuses[keyof typeof eventStatuses],
     readonly occurredAt?: string,
     readonly scheduledAt?: string,
     readonly createdAt?: string,
@@ -83,14 +83,14 @@ export type VariableServiceInput = {
     currentEvent?: EventData,
     otherEvents?: EventsData,
     dataElements: DataElements | null,
-    selectedEntity: TEIValues | null,
-    trackedEntityAttributes: TrackedEntityAttributes | null,
-    selectedEnrollment: Enrollment | null,
+    selectedEntity?: TEIValues | null,
+    trackedEntityAttributes?: TrackedEntityAttributes | null,
+    selectedEnrollment?: Enrollment | null,
     selectedOrgUnit: OrgUnit | null,
     optionSets: OptionSets,
-    constants: Constants | null,
+    constants?: Constants | null,
 };
 
 export type CompareDates = (firstRulesDate: string | null, secondRulesDate: string | null) => number;
 
-export type ProcessValue = (value: any, type: keyof typeof typeKeys) => any;
+export type ProcessValue = (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;

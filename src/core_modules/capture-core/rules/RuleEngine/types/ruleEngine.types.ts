@@ -91,7 +91,7 @@ export type VariableServiceInput = {
     selectedEnrollment: Enrollment | null,
     selectedOrgUnit: OrgUnit,
     optionSets: OptionSets,
-    constants: Constants | null,
+    constants?: Constants | null,
 };
 
 export type CompareDates = (firstRulesDate: string | null, secondRulesDate: string | null) => number;
@@ -145,14 +145,14 @@ export type CompulsoryEffect = OutputEffect & {
 };
 
 type ProgramRuleData = {
-    name: string,
+    name?: string,
     location: string | null,
-    dataElementId: string | null,
-    trackedEntityAttributeId: string | null,
-    programStageId: string | null,
-    programStageSectionId: string | null,
-    optionGroupId: string | null,
-    optionId: string | null,
+    dataElementId?: string | null,
+    trackedEntityAttributeId?: string | null,
+    programStageId?: string | null,
+    programStageSectionId?: string | null,
+    optionGroupId?: string | null,
+    optionId?: string | null,
     style?: any,
 };
 
@@ -177,7 +177,7 @@ export type ProgramRuleAction = {
 export type ProgramRule = {
     id: string,
     name: string,
-    priority: number,
+    priority?: number,
     condition: string,
     description?: string | null,
     displayName: string,

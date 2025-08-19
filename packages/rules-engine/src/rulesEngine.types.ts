@@ -11,12 +11,20 @@ import type {
 import { effectActions, rulesEngineEffectTargetDataTypes } from './constants';
 
 export type OutputEffect = {
-    type: keyof typeof effectActions,
+    type: typeof effectActions[keyof typeof effectActions],
     id: string,
-    targetDataType?: keyof typeof rulesEngineEffectTargetDataTypes,
+    targetDataType?: typeof rulesEngineEffectTargetDataTypes[keyof typeof rulesEngineEffectTargetDataTypes],
     content?: string,
     name?: string,
     hadValue?: boolean,
+};
+
+export type DisplayTextEffect = OutputEffect & {
+    displayText: string,
+};
+
+export type DisplayKeyValuePairEffect = OutputEffect & {
+    displayKeyValuePair: { key: string, value: any },
 };
 
 export type OutputEffects = Array<OutputEffect>;
@@ -77,16 +85,16 @@ export type ProgramRuleAction = {
     programStageId?: string | null,
     programStageSectionId?: string | null,
     trackedEntityAttributeId?: string | null,
-    optionGroupId: string | null,
-    optionId: string | null,
+    optionGroupId?: string | null,
+    optionId?: string | null,
     style?: any,
-    name: string,
+    name?: string,
 };
 
 export type ProgramRule = {
     id: string,
     name: string,
-    priority: number,
+    priority?: number,
     condition: string,
     description?: string | null,
     displayName: string, // TODO: Refactor and remove
@@ -115,9 +123,9 @@ export type RuleVariable = {
     useCodeForOptionSet: boolean,
     variableType: string,
     hasValue: boolean,
-    variableEventDate: string | null,
+    variableEventDate?: string | null,
     variablePrefix: string,
-    allValues: Array<any> | null,
+    allValues?: Array<any> | null,
 };
 
 export type RuleVariables = { [key: string]: RuleVariable };

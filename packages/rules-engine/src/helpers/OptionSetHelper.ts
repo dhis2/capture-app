@@ -7,7 +7,7 @@ export class OptionSetHelper {
             if (dataElementValueType === typeKeys.MULTI_TEXT) {
                 const values = key.split(',');
                 const optionsName = options.reduce(
-                    (acc, option) => (values.includes(option.code) ? acc.concat(option.displayName) : acc),
+                    (acc: any, option) => (values.includes(option.code) ? acc.concat(option.displayName) : acc),
                     [],
                 );
                 return optionsName.length !== 0 ? optionsName.join(',') : key;

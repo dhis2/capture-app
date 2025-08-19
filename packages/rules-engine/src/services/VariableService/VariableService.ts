@@ -29,12 +29,12 @@ import type {
 } from '../../rulesEngine.types';
 
 type SourceData = {
-    executingEvent: EventData | null,
+    executingEvent?: EventData | null,
     eventsContainer: EventsDataContainer | null,
     dataElements: DataElements | null,
-    trackedEntityAttributes: TrackedEntityAttributes | null,
-    selectedEntity: TEIValues | null,
-    selectedEnrollment: Enrollment | null,
+    trackedEntityAttributes?: TrackedEntityAttributes | null,
+    selectedEntity?: TEIValues | null,
+    selectedEnrollment?: Enrollment | null,
     optionSets: OptionSets,
     selectedOrgUnit: OrgUnit | null,
 };
@@ -148,8 +148,7 @@ export class VariableService {
 
             if (!variable) {
                 // run post getter
-                if (variableSourceTypesDataElementSpecific[sourceType]) {
-                    // $FlowFixMe[incompatible-call] automated comment
+                if (variableSourceTypesDataElementSpecific[sourceType] && dataElements) {
                     variable = this.postGetVariableForDataElementSpecificSourceType(programVariable, dataElements);
                 }
             }
@@ -202,9 +201,9 @@ export class VariableService {
             useNameForOptionSet = false,
         }: {
             variablePrefix: string,
-            allValues?: ?Array<any>,
-            variableEventDate?: ?string,
-            useNameForOptionSet?: ?boolean,
+            allValues?: Array<any> | null,
+            variableEventDate?: string | null,
+            useNameForOptionSet?: boolean | null,
         },
     ): RuleVariable {
         return {
@@ -218,7 +217,7 @@ export class VariableService {
         };
     }
 
-    preCheckDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: ?DataElements) {
+    preCheckDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: DataElements | null) {
         const dataElementId = programVariable.dataElementId;
         const dataElement = dataElementId && dataElements && dataElements[dataElementId];
         if (!dataElement) {
@@ -234,7 +233,7 @@ export class VariableService {
         return null;
     }
 
-    preCheckTrackedEntitySpecificSourceType(programVariable: ProgramRuleVariable, trackedEntityAttributes: ?TrackedEntityAttributes) {
+    preCheckTrackedEntitySpecificSourceType(programVariable: ProgramRuleVariable, trackedEntityAttributes?: TrackedEntityAttributes | null) {
         const attributeId = programVariable.trackedEntityAttributeId;
         const attribute = attributeId && trackedEntityAttributes && trackedEntityAttributes[attributeId];
         if (!attribute) {
@@ -251,8 +250,7 @@ export class VariableService {
     }
 
     postGetVariableForDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: DataElements) {
-        const dataElementId = programVariable.dataElementId;
-        // $FlowFixMe[incompatible-type] automated comment
+        const dataElementId = programVariable.dataElementId as string;
         const dataElement: DataElement = dataElements[dataElementId];
         return this.buildVariable(
             null,
@@ -267,8 +265,8 @@ export class VariableService {
         rawValue: any,
         valueType: string,
         dataElementId: string,
-        useNameForOptionSet: ?boolean,
-        dataElements: ?DataElements | ?TrackedEntityAttributes,
+        useNameForOptionSet: boolean | null | undefined,
+        dataElements: DataElements | TrackedEntityAttributes | null | undefined,
         optionSets: OptionSets,
     ) {
         const value = this.onProcessValue(rawValue, valueType);
@@ -277,7 +275,7 @@ export class VariableService {
             value;
     }
 
-    getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?RuleVariable {
+    getVariableForCalculatedValue(programVariable: ProgramRuleVariable): RuleVariable | null {
         return this.buildVariable(
             null,
             programVariable.valueType, {
@@ -289,11 +287,9 @@ export class VariableService {
 
     getVariableForSelectedEntityAttributes(
         programVariable: ProgramRuleVariable,
-        sourceData: SourceData): ?RuleVariable {
-        // $FlowFixMe[incompatible-type] automated comment
-        const trackedEntityAttributeId: string = programVariable.trackedEntityAttributeId;
-        // $FlowFixMe[incompatible-use] automated comment
-        const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes[trackedEntityAttributeId];
+        sourceData: SourceData): RuleVariable | null {
+        const trackedEntityAttributeId: string = programVariable.trackedEntityAttributeId as string;
+        const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes?.[trackedEntityAttributeId] as TrackedEntityAttribute;
         const attributeValue = sourceData.selectedEntity ? sourceData.selectedEntity[trackedEntityAttributeId] : null;
         const valueType = (programVariable.useNameForOptionSet && attribute.optionSetId) ? 'TEXT' : attribute.valueType;
         const value = this.getVariableValue(
@@ -314,11 +310,9 @@ export class VariableService {
         );
     }
 
-    getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
-        // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
-        // $FlowFixMe[incompatible-use] automated comment
-        const dataElement: DataElement = sourceData.dataElements[dataElementId];
+    getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): RuleVariable | null {
+        const dataElementId: string = programVariable.dataElementId as string;
+        const dataElement: DataElement = sourceData.dataElements?.[dataElementId] as DataElement;
         const executingEvent = sourceData.executingEvent;
         if (!executingEvent) {
             return null;
@@ -345,7 +339,7 @@ export class VariableService {
         );
     }
 
-    getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
+    getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): RuleVariable | null {
         const programStageId = programVariable.programStageId;
         if (!programStageId) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} does not have a programstage defined, despite that the variable has sourcetype${programVariable.programRuleVariableSourceType}`);
@@ -360,7 +354,7 @@ export class VariableService {
         return this.getVariableContainingAllValues(programVariable, sourceData, stageEvents);
     }
 
-    getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
+    getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): RuleVariable | null {
         const events = sourceData.eventsContainer && sourceData.eventsContainer.all;
         if (!events || events.length === 0) {
             return null;
@@ -369,7 +363,7 @@ export class VariableService {
         return this.getVariableContainingAllValues(programVariable, sourceData, events);
     }
 
-    getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
+    getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): RuleVariable | null {
         const events = sourceData.eventsContainer && sourceData.eventsContainer.all;
         if (!events || events.length === 0) {
             return null;
@@ -389,11 +383,9 @@ export class VariableService {
         return this.getVariableContainingAllValues(programVariable, sourceData, events.slice(0, currentEventIndex));
     }
 
-    getVariableContainingAllValues(programVariable: ProgramRuleVariable, sourceData: SourceData, events: EventsData): ?RuleVariable {
-        // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
-        // $FlowFixMe[incompatible-use] automated comment
-        const dataElement: DataElement = sourceData.dataElements[dataElementId];
+    getVariableContainingAllValues(programVariable: ProgramRuleVariable, sourceData: SourceData, events: EventsData): RuleVariable | null {
+        const dataElementId: string = programVariable.dataElementId as string;
+        const dataElement: DataElement = sourceData.dataElements?.[dataElementId] as DataElement;
 
         const valueType = (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
         const allValues = events
@@ -460,7 +452,7 @@ export class VariableService {
     }
 
     getContextVariables(sourceData: SourceData): RuleVariables {
-        let variables = {};
+        let variables: any = {};
 
         variables.environment = this.buildRawContextVariable(this.environment, typeKeys.TEXT);
         variables.current_date = this.buildRawContextVariable(VariableService.dateUtils.getToday(), typeKeys.DATE);
@@ -474,8 +466,8 @@ export class VariableService {
         return variables;
     }
 
-    getEventContextVariables(executingEvent: ?EventData, eventsContainer: ?EventsDataContainer) {
-        const variables = {};
+    getEventContextVariables(executingEvent: EventData | null | undefined, eventsContainer: EventsDataContainer | null) {
+        const variables: any = {};
 
         if (executingEvent) {
             variables.event_date = this.buildContextVariable(executingEvent.occurredAt, typeKeys.DATE);
@@ -501,8 +493,8 @@ export class VariableService {
         return variables;
     }
 
-    getEnrollmentContextVariables(selectedEnrollment: ?Enrollment) {
-        const variables = {};
+    getEnrollmentContextVariables(selectedEnrollment?: Enrollment | null) {
+        const variables: any = {};
 
         if (selectedEnrollment) {
             variables.enrollment_date = this.buildContextVariable(selectedEnrollment.enrolledAt, typeKeys.DATE);
@@ -515,13 +507,13 @@ export class VariableService {
         return variables;
     }
 
-    getOrganisationContextVariables(orgUnit: ?OrgUnit) {
-        const variables = {};
+    getOrganisationContextVariables(orgUnit: OrgUnit | null) {
+        const variables: any = {};
         variables.orgunit_code = this.buildContextVariable(orgUnit?.code, typeKeys.TEXT);
         return variables;
     }
 
-    getConstantVariables(constants: ?Constants) {
+    getConstantVariables(constants?: Constants | null) {
         const constantVariables = constants ? constants.reduce((accConstantVariables, constant) => {
             accConstantVariables[constant.id] = this.buildVariable(
                 constant.value,

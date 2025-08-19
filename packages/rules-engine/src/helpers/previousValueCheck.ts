@@ -1,5 +1,5 @@
 import { rulesEngineEffectTargetDataTypes, typeKeys } from '../constants';
-import type { DataElements, TrackedEntityAttributes, HideOutputEffect } from '../rulesEngine.types';
+import type { DataElements, TrackedEntityAttributes, HideOutputEffect, OutputEffect } from '../rulesEngine.types';
 
 const processDataElementValue = ({
     dataElementId,
@@ -55,9 +55,9 @@ export const getOutputEffectsWithPreviousValueCheck = ({
     dataElements: DataElements | null,
     trackedEntityAttributes: TrackedEntityAttributes | null,
     formValues?: { [key: string]: any } | null,
-    onProcessValue: (value: any, type: keyof typeof typeKeys) => any,
+    onProcessValue?: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any,
 }) =>
-    outputEffects.reduce((acc, outputEffect) => {
+    outputEffects.reduce((acc: OutputEffect[], outputEffect) => {
         if (formValues && Object.keys(formValues).length !== 0 && outputEffect.targetDataType) {
             const formValue = formValues[outputEffect.id];
             const rawValue = mapByTargetDataTypes[outputEffect.targetDataType]({
@@ -68,7 +68,7 @@ export const getOutputEffectsWithPreviousValueCheck = ({
             });
             if (rawValue) {
                 const { valueType, name } = rawValue;
-                const value = onProcessValue(formValue, valueType);
+                const value = onProcessValue && onProcessValue(formValue, valueType);
 
                 if (value != null) {
                     return [...acc, { ...outputEffect, hadValue: true, name }];

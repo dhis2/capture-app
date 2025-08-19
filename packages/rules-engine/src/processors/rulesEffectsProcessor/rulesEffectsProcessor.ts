@@ -59,7 +59,7 @@ export function getRulesEffectsProcessor(
 
     function createErrorDetectionEffect(
         effect: ProgramRuleEffect,
-        type: keyof typeof effectActions): any {
+        type: typeof effectActions[keyof typeof effectActions]): any {
         const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
             type,
             message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
@@ -72,7 +72,7 @@ export function getRulesEffectsProcessor(
 
     function createWarningEffect(
         effect: ProgramRuleEffect,
-        type: keyof typeof effectActions): WarningEffect {
+        type: typeof effectActions[keyof typeof effectActions]): WarningEffect {
         const result = createErrorDetectionEffect(effect, type);
         if (Array.isArray(result)) {
             return result;
@@ -86,7 +86,7 @@ export function getRulesEffectsProcessor(
 
     function createErrorEffect(
         effect: ProgramRuleEffect,
-        type: keyof typeof effectActions): ErrorEffect {
+        type: typeof effectActions[keyof typeof effectActions]): ErrorEffect {
         const result = createErrorDetectionEffect(effect, type);
         if (Array.isArray(result)) {
             return result;
@@ -102,7 +102,6 @@ export function getRulesEffectsProcessor(
         let outputValue;
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
             const converterName: string = mapTypeToInterfaceFnName[valueType];
-            // $FlowExpectedError
             const outputConverter = outputConverters[converterName];
             if (!converterName || !outputConverter) {
                 log.warn(errorCreator('converter for valueType is missing')({ valueType }));
@@ -118,7 +117,7 @@ export function getRulesEffectsProcessor(
     function createAssignValueEffect(
         effect: ProgramRuleEffect,
         element: DataElement | TrackedEntityAttribute,
-        targetDataType: keyof typeof rulesEngineEffectTargetDataTypes,
+        targetDataType: typeof rulesEngineEffectTargetDataTypes[keyof typeof rulesEngineEffectTargetDataTypes],
     ): AssignOutputEffect {
         const normalizedValue = normalizeRuleVariable(effect.data, element.valueType);
         const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
@@ -140,7 +139,7 @@ export function getRulesEffectsProcessor(
             effects.push(createAssignValueEffect(
                 effect,
                 dataElements[effect.dataElementId],
-                'DATA_ELEMENT' as keyof typeof rulesEngineEffectTargetDataTypes),
+                rulesEngineEffectTargetDataTypes.DATA_ELEMENT),
             );
         }
         if (trackedEntityAttributes &&
@@ -149,7 +148,7 @@ export function getRulesEffectsProcessor(
             effects.push(createAssignValueEffect(
                 effect,
                 trackedEntityAttributes[effect.trackedEntityAttributeId],
-                'TRACKED_ENTITY_ATTRIBUTE' as keyof typeof rulesEngineEffectTargetDataTypes),
+                rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE),
             );
         }
         return effects;
@@ -160,7 +159,7 @@ export function getRulesEffectsProcessor(
         dataElements: DataElements | null,
         trackedEntityAttributes: TrackedEntityAttributes | null,
         formValues?: {[key: string]: any} | null,
-        onProcessValue?: (value: any, type: keyof typeof typeKeys) => any,
+        onProcessValue?: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any,
     ): Array<HideOutputEffect> {
         const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
@@ -169,32 +168,31 @@ export function getRulesEffectsProcessor(
                 content: effect.content,
             }),
         );
-        const result = getOutputEffectsWithPreviousValueCheck({
+        return getOutputEffectsWithPreviousValueCheck({
             outputEffects,
             formValues,
-            dataElementId: effect.dataElementId,
-            trackedEntityAttributeId: effect.trackedEntityAttributeId,
+            dataElementId: effect.dataElementId as string,
+            trackedEntityAttributeId: effect.trackedEntityAttributeId as string,
             dataElements,
             trackedEntityAttributes,
             onProcessValue,
         });
-        return Array.isArray(result) ? result : [result as any];
     }
 
     function processShowError(effect: ProgramRuleEffect): ErrorEffect {
-        return createErrorEffect(effect, effectActions.SHOW_ERROR as any);
+        return createErrorEffect(effect, effectActions.SHOW_ERROR);
     }
 
     function processShowWarning(effect: ProgramRuleEffect): WarningEffect {
-        return createWarningEffect(effect, effectActions.SHOW_WARNING as any);
+        return createWarningEffect(effect, effectActions.SHOW_WARNING);
     }
 
     function processShowErrorOnComplete(effect: ProgramRuleEffect): ErrorEffect {
-        return createErrorEffect(effect, effectActions.SHOW_ERROR_ONCOMPLETE as any);
+        return createErrorEffect(effect, effectActions.SHOW_ERROR_ONCOMPLETE);
     }
 
     function processShowWarningOnComplete(effect: ProgramRuleEffect): WarningEffect {
-        return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE as any);
+        return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE);
     }
 
     function processHideSection(effect: ProgramRuleEffect): HideOutputEffect | null {
@@ -203,7 +201,7 @@ export function getRulesEffectsProcessor(
         }
 
         return {
-            type: effectActions.HIDE_SECTION as any,
+            type: effectActions.HIDE_SECTION,
             id: effect.programStageSectionId,
         };
     }
@@ -214,21 +212,21 @@ export function getRulesEffectsProcessor(
         }
 
         return {
-            type: effectActions.HIDE_PROGRAM_STAGE as any,
+            type: effectActions.HIDE_PROGRAM_STAGE,
             id: effect.programStageId,
         };
     }
 
     function processMakeCompulsory(effect: ProgramRuleEffect): Array<CompulsoryEffect> {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.MAKE_COMPULSORY as any,
+            type: effectActions.MAKE_COMPULSORY,
         }));
     }
 
     function processDisplayText(effect: ProgramRuleEffect): any {
         const message = effect.displayContent || '';
         return {
-            type: effectActions.DISPLAY_TEXT as any,
+            type: effectActions.DISPLAY_TEXT,
             id: effect.location,
             displayText: {
                 id: effect.id,
@@ -242,7 +240,7 @@ export function getRulesEffectsProcessor(
         const data = effect.data !== undefined ? effect.data : '';
 
         return {
-            type: effectActions.DISPLAY_KEY_VALUE_PAIR as any,
+            type: effectActions.DISPLAY_KEY_VALUE_PAIR,
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
@@ -255,21 +253,21 @@ export function getRulesEffectsProcessor(
 
     function processHideOptionGroup(effect: ProgramRuleEffect): any {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_OPTION_GROUP as any,
+            type: effectActions.HIDE_OPTION_GROUP,
             optionGroupId: effect.optionGroupId,
         }));
     }
 
     function processHideOption(effect: ProgramRuleEffect): any {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_OPTION as any,
+            type: effectActions.HIDE_OPTION,
             optionId: effect.optionId,
         }));
     }
 
     function processShowOptionGroup(effect: ProgramRuleEffect): any {
         return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.SHOW_OPTION_GROUP as any,
+            type: effectActions.SHOW_OPTION_GROUP,
             optionGroupId: effect.optionGroupId,
         }));
     }
@@ -300,9 +298,9 @@ export function getRulesEffectsProcessor(
     }: {
         effects: Array<ProgramRuleEffect>,
         dataElements: DataElements | null,
-        trackedEntityAttributes: TrackedEntityAttributes | null,
+        trackedEntityAttributes?: TrackedEntityAttributes | null,
         formValues?: { [key: string]: any } | null,
-        onProcessValue?: (value: any, type: keyof typeof typeKeys) => any,
+        onProcessValue?: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any,
     }): OutputEffects {
         return effects
             .filter(({ action }) => mapActionsToProcessor[action])

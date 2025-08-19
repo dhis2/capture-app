@@ -20,14 +20,14 @@ export class RulesEngine {
     valueProcessor: ValueProcessor;
     variableService: VariableService;
     dateUtils: IDateUtils;
-    userRoles: Array<string>;
+    userRoles!: Array<string>;
     flags: Flag;
 
     constructor(
         inputConverter: IConvertInputRulesValue,
         outputConverter: IConvertOutputRulesEffectsValue,
         dateUtils: IDateUtils,
-        environment: keyof typeof environmentTypes,
+        environment: typeof environmentTypes[keyof typeof environmentTypes],
         flags?: Flag,
     ) {
         this.inputConverter = inputConverter;
@@ -35,7 +35,7 @@ export class RulesEngine {
         this.valueProcessor = new ValueProcessor(inputConverter);
         this.variableService = new VariableService(this.valueProcessor.processValue, dateUtils, environment);
         this.dateUtils = dateUtils;
-        this.flags = flags ?? {};
+        this.flags = flags ?? { verbose: false };
     }
 
     /**
@@ -135,7 +135,7 @@ export class RulesEngine {
                         'had no condition specified. Please check rule configuration.');
                 }
 
-                let programRuleEffects = [];
+                let programRuleEffects: any[] = [];
                 if (isProgramRuleExpressionEffective) {
                     programRuleEffects = rule.programRuleActions.map((
                         {
@@ -206,7 +206,6 @@ export class RulesEngine {
             effects,
             dataElements,
             trackedEntityAttributes,
-            // $FlowFixMe[exponential-spread]
             formValues: { ...selectedEntity, ...currentEvent },
             onProcessValue: this.valueProcessor.processValue,
         });

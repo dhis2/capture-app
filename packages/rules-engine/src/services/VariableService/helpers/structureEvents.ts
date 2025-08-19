@@ -9,8 +9,9 @@ import type {
 
 const createEventsContainer = (events: EventsData) => {
     const eventsDataByStage = events.reduce((accEventsByStage, event) => {
-        accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-        accEventsByStage[event.programStageId].push(event);
+        const programStageId = event.programStageId as string;
+        accEventsByStage[programStageId] = accEventsByStage[programStageId] || [];
+        accEventsByStage[programStageId].push(event);
         return accEventsByStage;
     }, {});
 
@@ -31,7 +32,7 @@ export const getStructureEvents = (compareDates: CompareDates, processValue: Pro
     return (currentEvent: EventData = {}, otherEvents: EventsData = []) => {
         const otherEventsFiltered = otherEvents
             .filter(event => event.occurredAt &&
-                    [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status) &&
+                    [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status as any) &&
                     event.eventId !== currentEvent.eventId,
             );
         const events = Object.keys(currentEvent).length ?

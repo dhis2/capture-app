@@ -29,7 +29,7 @@ export const isValidPeriod = (
 
     const thresholdPeriod = getFixedPeriodByDate({
         periodType: expiryPeriodType as any,
-        date: threshold,
+        date: threshold as string,
         calendar: 'gregorian' as any,
     });
 
