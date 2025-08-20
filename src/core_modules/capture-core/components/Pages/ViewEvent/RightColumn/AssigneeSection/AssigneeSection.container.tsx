@@ -2,7 +2,7 @@ import React from 'react';
 import { WidgetAssignee } from '../../../../WidgetAssignee';
 import type { ProgramStage } from '../../../../../metaData';
 import type { UserFormField } from '../../../../FormFields/UserField';
-import type { ApiEnrollmentEvent } from '../../../../../flow/apiTypes';
+import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
     assignee: UserFormField | null;

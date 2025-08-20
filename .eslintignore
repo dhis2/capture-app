@@ -1,6 +1,4 @@
 /src/locales/index.js
-/flow-typed/**
-**/flow/**
 **/build/**
 
 #libs

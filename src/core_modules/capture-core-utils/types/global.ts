@@ -73,6 +73,9 @@ export type ReduxStore = {
         };
         workingListsContext: Record<string, any>;
         recentlyAddedEvents: Record<string, any>;
+        searchDomain: {
+            currentSearchInfo: { currentSearchTerms : Record<string, any> };
+        }
     };
 };
 

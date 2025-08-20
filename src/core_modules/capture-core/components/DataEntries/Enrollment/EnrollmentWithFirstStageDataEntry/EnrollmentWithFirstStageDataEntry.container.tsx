@@ -14,7 +14,6 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
     const {
         stage: { stageForm: firstStageFormFoundation, name: stageName },
     } = firstStageMetaData;
-    // $FlowFixMe[incompatible-type]
     const [[firstSectionId]] = firstStageFormFoundation.sections;
     const beforeSectionId = getSectionId(firstSectionId);
     const dataEntrySections = useDataEntrySections(stageName, beforeSectionId);

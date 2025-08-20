@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import type { InputObservable, ReduxStore, ApiUtils } from '../../../flow/typeDeclarations';
+import type { ApiUtils, EpicAction, ReduxStore } from '../../../../capture-core-utils/types';
 import {
     searchBoxActionTypes,
     fallbackSearch,
@@ -143,7 +143,7 @@ const searchViaAttributesStream = ({
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     store: ReduxStore,
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
@@ -178,7 +178,7 @@ export const searchViaUniqueIdOnScopeProgramEpic = (
     );
 
 export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     store: ReduxStore,
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
@@ -212,7 +212,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
     );
 
 export const searchViaAttributesOnScopeProgramEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     store: ReduxStore,
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
@@ -245,7 +245,7 @@ export const searchViaAttributesOnScopeProgramEpic = (
     );
 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     store: ReduxStore,
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
@@ -275,7 +275,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
         }),
     );
 
-export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+export const startFallbackSearchEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH_START),
         flatMap(({ payload: { programId, pageSize, page } }: any) => {
@@ -323,7 +323,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
     );
 
 export const fallbackSearchEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     _: ReduxStore,
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
@@ -356,7 +356,7 @@ export const fallbackSearchEpic = (
         }),
     );
 
-export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { navigate }: ApiUtils) =>
+export const fallbackPushPageEpic = (action$: EpicAction<any>, _: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }: any) => {
