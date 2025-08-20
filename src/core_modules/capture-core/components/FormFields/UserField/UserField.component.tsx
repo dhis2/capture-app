@@ -10,7 +10,6 @@ const getStyles = () => ({
 type Props = {
     value: User | string | null;
     onSet: (user?: User | string) => void;
-    classes: any;
     useUpwardSuggestions?: boolean | null;
     focusOnMount?: boolean | null;
     inputPlaceholderText?: string | null;

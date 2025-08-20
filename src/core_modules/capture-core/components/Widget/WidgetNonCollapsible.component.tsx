@@ -1,8 +1,8 @@
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from '@material-ui/core';
 import { colors, spacersNum } from '@dhis2/ui';
 import cx from 'classnames';
-import type { WidgetNonCollapsibleProps, WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
+import type { WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
 
 const styles = {
     container: {
@@ -24,13 +24,15 @@ const styles = {
     },
 };
 
+type Props = WidgetNonCollapsiblePropsPlain & WithStyles<typeof styles>;
+
 const WidgetNonCollapsiblePlain = ({
     header,
     children,
     color = colors.white,
     borderless = false,
     classes,
-}: WidgetNonCollapsiblePropsPlain) => (
+}: Props) => (
     <div
         className={cx(classes.container, { borderless })}
         style={{ backgroundColor: color }}
@@ -49,4 +51,4 @@ const WidgetNonCollapsiblePlain = ({
     </div>
 );
 
-export const WidgetNonCollapsible = withStyles(styles)(WidgetNonCollapsiblePlain) as ComponentType<WidgetNonCollapsibleProps>;
+export const WidgetNonCollapsible = withStyles(styles)(WidgetNonCollapsiblePlain) as ComponentType<WidgetNonCollapsiblePropsPlain>;

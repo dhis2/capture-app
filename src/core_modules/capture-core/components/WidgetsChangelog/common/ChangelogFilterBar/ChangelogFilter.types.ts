@@ -15,7 +15,6 @@ export type DataItemDefinitions = {
 };
 
 export type ChangelogFilterProps = {
-    classes: { container: string };
     filterValue: FilterValueType;
     setFilterValue: (value: FilterValueType) => void;
     attributeToFilterBy: string | null;

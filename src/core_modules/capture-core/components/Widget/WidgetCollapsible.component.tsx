@@ -1,9 +1,9 @@
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
-import { withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
-import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
+import type { WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
 const styles = {
     headerContainer: {
@@ -87,6 +87,8 @@ const styles = {
     },
 };
 
+type Props = WidgetCollapsiblePropsPlain & WithStyles<typeof styles>;
+
 const WidgetCollapsiblePlain = ({
     header,
     open,
@@ -96,7 +98,7 @@ const WidgetCollapsiblePlain = ({
     borderless = false,
     children,
     classes,
-}: WidgetCollapsiblePropsPlain) => {
+}: Props) => {
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
@@ -165,4 +167,4 @@ const WidgetCollapsiblePlain = ({
     );
 };
 
-export const WidgetCollapsible = withStyles(styles)(WidgetCollapsiblePlain) as ComponentType<WidgetCollapsibleProps>;
+export const WidgetCollapsible = withStyles(styles)(WidgetCollapsiblePlain) as ComponentType<WidgetCollapsiblePropsPlain>;

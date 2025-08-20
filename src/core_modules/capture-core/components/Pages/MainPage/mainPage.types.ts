@@ -13,7 +13,3 @@ export type ContainerProps = {
     onCloseBulkDataEntryPlugin: () => void;
     bulkDataEntryTrackedEntityIds?: Array<string>;
 };
-
-export type Props = ContainerProps & {
-    classes: Record<string, string>;
-};

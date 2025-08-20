@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import type { ComponentType } from 'react';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
@@ -18,9 +18,7 @@ import {
 import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 
-type Props = {
-    classes: Record<string, string>;
-};
+type Props = WithStyles<typeof styles>;
 
 const styles = {
     informativeMessage: {
@@ -29,7 +27,7 @@ const styles = {
         marginRight: spacersNum.dp16,
     },
 };
-const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
+const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => {
     const { navigate } = useNavigate();
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
     const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });

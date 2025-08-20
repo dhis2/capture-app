@@ -7,6 +7,4 @@ export type Props = {
     onDeleteSuccess?: () => void;
 };
 
-export type PlainProps = Props & {
-    classes: Record<string, string>;
-};
+export type PlainProps = Props;

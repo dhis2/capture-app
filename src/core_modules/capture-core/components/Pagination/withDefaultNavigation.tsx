@@ -2,7 +2,7 @@
  * @namespace Pagination
  */
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 
@@ -55,11 +55,8 @@ type Props = {
     currentPage: number;
     onChangePage: (pageNumber: number) => void;
     disabled?: boolean;
-    classes: {
-        root: string;
-    };
     theme: any;
-};
+} & WithStyles<typeof styles>;
 
 const getNavigation = (InnerComponent: React.ComponentType<any>) =>
     class PaginationNavigation extends React.Component<Props> {
