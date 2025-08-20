@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React from 'react';
 import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { Tree } from './Tree';

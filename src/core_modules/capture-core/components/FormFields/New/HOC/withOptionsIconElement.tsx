@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const getStyles = () => ({
@@ -23,11 +23,7 @@ type Icon = {
 type Props = {
     options: Array<{icon?: Icon}>;
     label?: string | null;
-    classes: {
-        iconContainer: string;
-        icon: string;
-    };
-};
+} & WithStyles<typeof getStyles>;
 
 /**
  * Converts icon objects in options to React nodes, with property key icon.
@@ -35,6 +31,7 @@ type Props = {
 export const withOptionsIconElement = () =>
     (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
         class CreateOptionsIconElementHOC extends React.Component<Props> {
+            options: Array<{icon: React.ReactNode}>;
             constructor(props: Props) {
                 super(props);
                 this.options = this.getOptions();
@@ -68,8 +65,6 @@ export const withOptionsIconElement = () =>
                         icon: this.getIcon(option.icon),
                     }));
             }
-
-            options: Array<{icon: React.ReactNode}>;
 
             render() {
                 const { options, classes, ...passOnProps } = this.props;

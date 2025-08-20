@@ -22,7 +22,6 @@ export const useFiltersOnly = (
                     { text: i18n.t('Cancelled'), value: 'CANCELLED' },
                 ],
                 transformRecordsFilter: (rawFilter: string) => ({
-                    // $FlowFixMe This should work even though flow complains
                     [featureAvailable(FEATURES.enrollmentStatusReplaceProgramStatusQueryParam)
                         ? 'enrollmentStatus'
                         : 'programStatus'

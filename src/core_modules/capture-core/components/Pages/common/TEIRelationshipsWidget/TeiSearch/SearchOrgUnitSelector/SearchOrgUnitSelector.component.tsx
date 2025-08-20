@@ -61,6 +61,7 @@ const options = [
 const errorMessage = 'Please select an organisation unit';
 
 export class SearchOrgUnitSelector extends React.Component<Props> {
+    gotoInstance: any;
     onSelectOrgUnitScope = (value: any) => {
         if (value) {
             this.props.onSelectOrgUnitScope(this.props.searchId, value);
@@ -76,8 +77,6 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
         }
         return null;
     }
-
-    gotoInstance: any;
 
     isValid = () => this.props.selectedOrgUnitScope === 'ACCESSIBLE' || this.props.selectedOrgUnit
 

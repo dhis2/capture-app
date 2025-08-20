@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
@@ -45,9 +44,7 @@ const exitBehaviours = {
 };
 
 class UserSearchPlain extends React.Component<Props, State> {
-    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null = null;
     suggestionElements: Map<string, HTMLElement>;
-    inputDomElement: HTMLInputElement | null = null;
     domNames: any;
 
     constructor(props: Props) {
@@ -76,6 +73,8 @@ class UserSearchPlain extends React.Component<Props, State> {
     componentWillUnmount() {
         this.cancelablePromise && this.cancelablePromise.cancel();
     }
+    cancelablePromise: {cancel: () => void; promise: Promise<any>} | null = null;
+    inputDomElement: HTMLInputElement | null = null;
 
     clearInput() {
         const currentKey = this.state.inputKey;

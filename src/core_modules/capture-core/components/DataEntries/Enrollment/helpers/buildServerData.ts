@@ -32,7 +32,6 @@ function getTEIServerData(
     return {
         orgUnit: selections.orgUnitId,
         trackedEntityType,
-        // $FlowFixMe
         attributes: Object
             .keys(formServerValues)
             .map(key => ({

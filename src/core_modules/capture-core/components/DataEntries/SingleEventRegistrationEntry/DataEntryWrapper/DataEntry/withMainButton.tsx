@@ -56,6 +56,7 @@ const buttonDefinitions = {
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
+        innerInstance: any;
         getButtonDefinition = (type: typeof buttonTypes[keyof typeof buttonTypes]) => buttonDefinitions[type](this.props)
 
         getFormHorizontalButtons = (dataEntryHasChanges: boolean | null, hasRecentlyAddedEvents: boolean | null) => {
@@ -80,8 +81,6 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 buttons :
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
-
-        innerInstance: any;
 
         renderMultiButton = (buttons: any, hasWriteAccess: boolean | null) => {
             const primary = buttons[0];

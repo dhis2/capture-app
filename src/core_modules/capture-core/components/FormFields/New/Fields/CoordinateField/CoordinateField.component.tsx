@@ -51,6 +51,8 @@ type Props = {
 }
 
 class CoordinateFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
+    dialogClasses: any;
+    passOnClasses: any;
     constructor(props) {
         super(props);
 
@@ -60,8 +62,6 @@ class CoordinateFieldPlain extends React.Component<Props & WithStyles<typeof get
             paper: props.classes.dialogPaper,
         };
     }
-    dialogClasses: any;
-    passOnClasses: any;
 
     render() {
         const { classes, dialogLabel, ...passOnProps } = this.props;

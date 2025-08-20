@@ -17,6 +17,7 @@ type State = {
  * @class DebounceField
  */
 export class DebounceField extends React.Component<Props, State> {
+    debouncer: any;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -37,8 +38,6 @@ export class DebounceField extends React.Component<Props, State> {
     componentWillUnmount() {
         this.debouncer.cancel();
     }
-
-    debouncer: any;
 
     handleDebounced = (event: React.SyntheticEvent<HTMLInputElement>) => {
         this.props.onDebounced(event);

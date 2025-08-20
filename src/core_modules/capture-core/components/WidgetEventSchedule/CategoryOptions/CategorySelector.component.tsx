@@ -66,6 +66,8 @@ export class CategorySelector extends React.Component<Props, State> {
         return null;
     }
 
+    cancelablePromise?: any;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -87,8 +89,6 @@ export class CategorySelector extends React.Component<Props, State> {
         this.cancelablePromise?.cancel();
         this.cancelablePromise = null;
     }
-
-    cancelablePromise?: any;
 
     loadCagoryOptions(props: Props) {
         const { category, selectedOrgUnitId } = props;

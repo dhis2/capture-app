@@ -16,16 +16,14 @@ type OptionsFn = (props: Props) => Options;
 
 const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: OptionsFn | null) =>
     class CancelButtonHOC extends React.Component<Props> {
-        getWrappedInstance = () => this.innerInstance;
-
         innerInstance: any;
+        getWrappedInstance = () => this.innerInstance;
 
         render() {
             const { onCancel, cancelButtonIsDisabled, cancelButtonRef, ...passOnProps } = this.props;
             const options = (optionsFn && optionsFn(this.props)) || {};
 
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
                     cancelButton={

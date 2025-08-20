@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React from 'react';
 import { Button, Popover } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';

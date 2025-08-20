@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryIdle.types';
@@ -30,11 +30,13 @@ const styles: Readonly<any> = {
     },
 };
 
+type Props = PlainProps & WithStyles< typeof styles>;
+
 const BulkDataEntryIdleComponenetPlain = ({
     bulkDataEntryConfigurations,
     onSelectConfiguration,
     classes,
-}: PlainProps) => (
+}: Props) => (
     <div className={classes.container} data-test="widget-bulk-data-entry-idle">
         <Widget header={i18n.t('Bulk data entry')} noncollapsible>
             <DataTable className={classes.table} dataTest="bulk-data-entry-table">
@@ -64,4 +66,4 @@ const BulkDataEntryIdleComponenetPlain = ({
     </div>
 );
 
-export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain) as ComponentType<Omit<PlainProps, 'classes'>>;
+export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain) as ComponentType<PlainProps>;

@@ -47,7 +47,6 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
         const appliedTextFrom = convertIsoToLocalCalendar(fromValue);
         appliedText = i18n.t('after or equal to {{date}}', { date: appliedTextFrom });
     } else {
-        // $FlowFixMe[incompatible-call] automated comment
         const appliedTextTo = convertIsoToLocalCalendar(toValue);
         appliedText = i18n.t('before or equal to {{date}}', { date: appliedTextTo });
     }

@@ -62,6 +62,7 @@ function coordsToFeatureCollection(coordinates: any): FeatureCollection | null |
 }
 
 export class PolygonField extends React.Component<Props, State> {
+    mapInstance: any | null | undefined;
     constructor(props: Props) {
         super(props);
 
@@ -139,8 +140,6 @@ export class PolygonField extends React.Component<Props, State> {
     closeMap = () => {
         this.setState({ showMap: false });
     }
-
-    mapInstance: any | null | undefined;
 
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(

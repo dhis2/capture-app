@@ -103,7 +103,6 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <NewRelationship
                         header={i18n.t('New event relationship')}
                         onGetUnsavedAttributeValues={this.onGetUnsavedAttributeValues}

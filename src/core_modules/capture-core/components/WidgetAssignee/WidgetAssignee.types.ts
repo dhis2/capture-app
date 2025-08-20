@@ -20,5 +20,4 @@ export type PlainProps = {
     writeAccess: boolean;
     onSet: (user: Assignee | null) => void;
     avatarId?: string;
-    classes: Record<string, string>;
 };

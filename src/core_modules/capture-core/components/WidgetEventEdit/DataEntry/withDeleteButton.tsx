@@ -5,6 +5,7 @@ import type { Props, State } from './withDeleteButton.types';
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
     class DeleteButtonHOC extends React.Component<Props, State> {
+        innerInstance: any;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -15,8 +16,6 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
-
-        innerInstance: any;
 
         renderDeleteButton = (hasDeleteButton?: boolean) => (
             hasDeleteButton ? (<div>

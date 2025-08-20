@@ -24,9 +24,3 @@ export type ContainerProps = {
   onSaveWithoutEnrollment: (teiPayload: any) => void;
   onSaveWithEnrollment: (enrollmentPayload: any, redirect: any) => void;
 };
-
-type ContainerPropsWithClasses = ContainerProps & {
-  classes: Record<string, string>;
-};
-
-export type Props = OwnProps & ContainerPropsWithClasses;

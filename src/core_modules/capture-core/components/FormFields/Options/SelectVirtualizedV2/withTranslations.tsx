@@ -15,12 +15,11 @@ function buildTranslations() {
 export const withTranslations = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class TranslationBuilder extends React.Component<Props> {
+            translations: any;
             constructor(props: Props) {
                 super(props);
                 this.translations = buildTranslations();
             }
-
-            translations: any;
 
             render() {
                 const { ...passOnProps } = this.props;

@@ -10,7 +10,6 @@ export type Props = {
     onChange: (value?: Value | null) => void;
     value: Value;
     orientation: typeof orientations[keyof typeof orientations];
-    classes: any;
     dateLabel?: string;
     timeLabel?: string;
     innerMessage: any;

@@ -90,7 +90,6 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null,
                         queryArgsForCurrentMain = filter;
                     }
                     return {
-                        // $FlowFixMe[exponential-spread] automated comment
                         ...accMainQueryArgs,
                         ...queryArgsForCurrentMain,
                     };
@@ -146,7 +145,6 @@ export const createApiQueryArgs = (queryArgs: any, mainColumns: any, categoryCom
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
-        // $FlowFixMe[exponential-spread] automated comment
         ...getMainApiFilterQueryArguments(queryArgs.filters, mainColumns),
         ...getApiCategoriesQueryArgument(queryArgs.categories, categoryCombinationId),
     };

@@ -19,11 +19,11 @@ type GetTrackedEntityTypeName = (props: Props) => string;
 
 export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrackedEntityTypeName) => (InnerComponent: ComponentType<any>) =>
     class ErrorMessagePostProcessorHOC extends React.Component<Props> {
+        cache: CacheItem | Record<string, never>;
         constructor(props: Props) {
             super(props);
             this.cache = {};
         }
-        cache: CacheItem | Record<string, never>;
 
         postProcessErrorMessage = ({
             errorMessage,

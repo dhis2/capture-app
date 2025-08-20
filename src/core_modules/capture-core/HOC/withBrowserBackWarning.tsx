@@ -25,6 +25,10 @@ type DialogConfig = {
 
 const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig: DialogConfig) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
+        unblock!: () => void;
+        Dialog!: React.ReactElement<any>;
+        historyLength!: number;
+
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -51,10 +55,6 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
         componentWillUnmount() {
             this.unblock && this.unblock();
         }
-
-        Dialog!: React.ReactElement<any>;
-        historyLength!: number;
-        unblock!: () => void;
 
         handleDialogConfirm = () => {
             this.setState({

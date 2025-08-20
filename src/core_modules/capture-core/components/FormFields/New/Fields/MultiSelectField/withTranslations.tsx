@@ -11,12 +11,11 @@ function buildTranslations() {
 export const withSelectMultiTranslations = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class TranslationBuilder extends React.Component<any> {
+            translations: any;
             constructor(props) {
                 super(props);
                 this.translations = buildTranslations();
             }
-
-            translations: any;
 
             render() {
                 const { ...passOnProps } = this.props;

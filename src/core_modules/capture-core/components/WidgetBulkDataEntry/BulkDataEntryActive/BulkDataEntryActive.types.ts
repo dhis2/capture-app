@@ -3,11 +3,7 @@ export type Props = {
     onOpenBulkDataEntryPlugin: () => void;
 };
 
-type CssClasses = {
-    classes: Record<string, string>;
-};
-
 export type PlainProps = {
     title: string;
     onBackToBulkDataEntry: () => void;
-} & CssClasses;
+};

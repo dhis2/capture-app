@@ -35,7 +35,3 @@ export type ContainerProps = {
   teiDisplayName?: string;
   trackedEntityInstanceAttributes?: Array<InputAttribute>;
 };
-
-export type Props = ContainerProps & {
-  classes: Record<string, string>;
-};

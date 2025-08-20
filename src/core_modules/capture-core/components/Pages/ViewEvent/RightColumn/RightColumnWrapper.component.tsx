@@ -10,9 +10,6 @@ import { NotesSection } from './NotesSection/NotesSection.container';
 import { AssigneeSection } from './AssigneeSection';
 
 type Props = {
-    classes: {
-        container: string,
-    }
 };
 
 const getStyles = (theme: any) => ({

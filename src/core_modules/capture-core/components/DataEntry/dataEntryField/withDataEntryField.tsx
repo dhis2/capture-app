@@ -10,7 +10,7 @@ import type { Props, Settings, FieldContainer } from './withDataEntryField.types
 
 const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
-        // eslint-disable-next-line react/sort-comp
+        dataEntryFieldInstance?: any;
         reselectComponentProps: (componentProps?: Record<string, any>) => Record<string, any>;
 
         constructor(props: Props) {
@@ -67,8 +67,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             }
             this.dataEntryFieldInstance.handleSet(value);
         }
-
-        dataEntryFieldInstance?: any;
 
         getFields() {
             const fields = this.props.fields;

@@ -11,12 +11,11 @@ type Props = {
 export const withConvertedOptionSet = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OptionSetConverter extends React.Component<Props> {
+            formOptionSet: OptionSet | undefined | null;
             constructor(props: Props) {
                 super(props);
                 this.formOptionSet = this.buildFormOptionSet();
             }
-
-            formOptionSet: OptionSet | undefined | null;
 
             static errorMessages = {
                 DATAELEMENT_MISSING: 'DataElement missing',

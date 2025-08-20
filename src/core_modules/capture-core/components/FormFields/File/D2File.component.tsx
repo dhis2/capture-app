@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import { IconCheckmark24, colors, CircularLoader, Button } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';

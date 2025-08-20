@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, Button, Tag } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryActive.types';
@@ -32,7 +32,9 @@ const styles: Readonly<any> = {
     },
 };
 
-const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => (
+type Props = PlainProps & WithStyles<typeof styles>;
+
+const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: Props) => (
     <div className={classes.container} data-test="widget-bulk-data-entry-active">
         <Widget header={i18n.t('Bulk data entry')} noncollapsible borderless>
             <div className={classes.content}>
@@ -48,4 +50,4 @@ const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, class
     </div>
 );
 
-export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as ComponentType<Omit<PlainProps, 'classes'>>;
+export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as ComponentType<PlainProps>;

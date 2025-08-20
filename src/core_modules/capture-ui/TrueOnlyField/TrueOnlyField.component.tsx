@@ -21,12 +21,12 @@ export class TrueOnlyField extends Component<Props> {
         ];
     }
 
+    options: Array<OptionRendererInputData>;
+
     constructor(props: Props) {
         super(props);
         this.options = TrueOnlyField.getOptions(!!this.props.useRealTrueValue);
     }
-
-    options: Array<OptionRendererInputData>;
 
     render() {
         const { useRealTrueValue, ...passOnProps } = this.props;

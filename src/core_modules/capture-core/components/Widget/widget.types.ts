@@ -1,11 +1,11 @@
-import { WidgetCollapsibleProps } from './widgetCollapsible.types';
-import { WidgetNonCollapsibleProps } from './widgetNonCollapsible.types';
+import { WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
+import { WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
 
-type CollapsibleProps = WidgetCollapsibleProps & {
+type CollapsibleProps = WidgetCollapsiblePropsPlain & {
     noncollapsible?: false;
 };
 
-type NonCollapsibleProps = WidgetNonCollapsibleProps & {
+type NonCollapsibleProps = WidgetNonCollapsiblePropsPlain & {
     noncollapsible: true;
 };
 

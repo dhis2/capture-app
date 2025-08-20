@@ -6,7 +6,3 @@ export type Props = {
     onUpdateTeiAttributeValues?: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void;
     onDeleteSuccess?: () => void;
 };
-
-export type PlainProps = Props & {
-    classes: Record<string, string>;
-};

@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';

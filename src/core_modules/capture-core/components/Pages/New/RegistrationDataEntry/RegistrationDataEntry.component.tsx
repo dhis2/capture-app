@@ -2,8 +2,8 @@ import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import type { Props, OwnProps, ContainerProps } from './RegistrationDataEntry.types';
+import { WithStyles, withStyles } from '@material-ui/core';
+import type { OwnProps, ContainerProps } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
@@ -55,6 +55,8 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         minWidth: '300px',
     },
 });
+
+export type Props = ContainerProps & OwnProps & WithStyles<typeof styles>;
 
 const DialogButtons = ({ onCancel, onSave }) => (
     <>

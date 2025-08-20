@@ -56,10 +56,11 @@ const updaterForPages = {
  */
 export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     class AppUrlSyncer extends React.Component<Props> {
-        setPageAndParams() {
-            const { location } = this.props;
-            this.page = location.pathname.substring(1);
-            this.params = queryString.parse(location?.search);
+        params?: ParsedQuery;
+        page = '';
+
+        handleUpdate = (updateData: UpdateDataContainer) => {
+            this.props.onUpdateFromUrl(this.page, updateData);
         }
 
         getSyncSpecification() {
@@ -67,12 +68,12 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
             return specificationForPages[page] || [];
         }
 
-        handleUpdate = (updateData: UpdateDataContainer) => {
-            this.props.onUpdateFromUrl(this.page, updateData);
+        setPageAndParams() {
+            const { location } = this.props;
+            this.page = location.pathname.substring(1);
+            this.params = queryString.parse(location?.search);
         }
 
-        params?: ParsedQuery;
-        page = '';
 
         render() {
             const {

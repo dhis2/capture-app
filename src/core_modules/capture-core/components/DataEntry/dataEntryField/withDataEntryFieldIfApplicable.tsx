@@ -10,7 +10,6 @@ type Settings = BaseSettings & {
 
 const getDataEntryFieldIfApplicable = (settings: Settings, InnerComponent: React.ComponentType<any>) =>
     class DataEntryFieldIfApplicableHOC extends React.Component<Props> {
-        // eslint-disable-next-line react/sort-comp
         Component: React.ComponentType<any>;
 
         constructor(props: Props) {

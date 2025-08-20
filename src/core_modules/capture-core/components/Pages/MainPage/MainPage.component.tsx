@@ -1,8 +1,8 @@
 import React, { useMemo, type ComponentType } from 'react';
 import { colors, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
-import type { Props, ContainerProps } from './mainPage.types';
+import type { ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
@@ -44,6 +44,8 @@ const styles: Readonly<any> = {
         borderRadius: 3,
     },
 };
+
+type Props = ContainerProps & WithStyles<typeof styles>;
 
 const MainPagePlain = ({
     programId,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
@@ -44,7 +44,7 @@ type State = {
     showMissingSearchCriteriaModal: boolean;
 };
 
-type Props = {
+type OwnProps = {
     id: string;
     searchGroupId: string;
     onSearch: (formId: string, searchGroupId: string) => void;
@@ -54,15 +54,14 @@ type Props = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
-    classes: {
-        searchButtonContainer: string;
-        orgUnitSection: string;
-        minAttributesRequired: string;
-        minAttribtuesRequiredInvalid: string;
-    };
 };
 
+type Props = OwnProps & WithStyles<typeof getStyles>;
+
 class SearchFormPlain extends React.Component<Props, State> {
+    formInstance: any;
+    orgUnitSelectorInstance: any;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -129,10 +128,6 @@ class SearchFormPlain extends React.Component<Props, State> {
         NO_ITEM_SELECTED: 'No item selected',
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
     };
-
-    formInstance: any;
-    orgUnitSelectorInstance: any;
-
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector

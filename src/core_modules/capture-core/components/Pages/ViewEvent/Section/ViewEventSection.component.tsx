@@ -76,7 +76,6 @@ type Props = {
     children: ReactNode,
     collapsable?: boolean,
     collapsed?: boolean,
-    classes: any,
 };
 
 const ViewEventSectionPlain = ({

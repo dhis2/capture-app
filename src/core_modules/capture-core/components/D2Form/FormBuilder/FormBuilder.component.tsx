@@ -1,5 +1,4 @@
 /* eslint-disable complexity */
-/* eslint-disable react/sort-comp */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { v4 as uuid } from 'uuid';
@@ -214,7 +213,6 @@ export class FormBuilder extends React.Component<Props> {
     fieldInstances: Map<string, any>;
     asyncUIState: { [id: string]: FieldUI };
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
-    validateAllCancelablePromise: CancelablePromise<any> | null = null;
     commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
 
     constructor(props: Props) {
@@ -241,6 +239,7 @@ export class FormBuilder extends React.Component<Props> {
                 FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
         }
     }
+    validateAllCancelablePromise: CancelablePromise<any> | null = null;
 
     getCleanUpData() {
         const remainingCompleteUids: Array<string> = Object

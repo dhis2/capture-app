@@ -79,7 +79,6 @@ export async function getSubValues(item: any, querySingleResource: QuerySingleRe
         const accValues = await accValuesPromise;
 
         if (type) {
-            // $FlowFixMe dataElementTypes flow error
             const subValueGetter = subValueGetterByElementType[type];
             if (subValueGetter) {
                 const subValue = await subValueGetter(values, querySingleResource, eventId, absoluteApiPath);

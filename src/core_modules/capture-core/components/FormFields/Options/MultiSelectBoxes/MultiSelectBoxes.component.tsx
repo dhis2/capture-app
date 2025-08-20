@@ -25,6 +25,10 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class MultiSelectBoxesPlain extends Component<Props> {
+    checkedValues!: Set<any> | null;
+    labelClasses: any;
+    materialUIContainerInstance: any;
+
     constructor(props: Props) {
         super(props);
         this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -56,12 +60,6 @@ class MultiSelectBoxesPlain extends Component<Props> {
             this.checkedValues = null;
         }
     }
-
-    checkedValues!: Set<any> | null;
-
-    labelClasses: any;
-
-    materialUIContainerInstance: any;
 
     buildLabelClasses() {
         return {

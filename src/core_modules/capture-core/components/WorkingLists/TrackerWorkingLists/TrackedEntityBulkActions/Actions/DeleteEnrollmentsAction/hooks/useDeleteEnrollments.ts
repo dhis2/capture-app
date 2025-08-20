@@ -79,7 +79,6 @@ export const useDeleteEnrollments = ({
             type: 'create',
             data: {
                 enrollments: enrollments
-                    // $FlowFixMe - business logic dictates that enrollments is not undefined at this point
                     .filter(({ status }) => status && statusToDelete[status.toLowerCase()])
                     .map(({ enrollment }) => ({ enrollment })),
             },

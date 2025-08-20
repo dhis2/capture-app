@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type WidgetCollapsibleProps = {
+export type WidgetCollapsiblePropsPlain = {
     header?: ReactNode;
     children: ReactNode;
     open: boolean;
@@ -8,13 +8,4 @@ export type WidgetCollapsibleProps = {
     onClose: () => void;
     color?: string;
     borderless?: boolean;
-};
-
-export type WidgetCollapsiblePropsPlain = WidgetCollapsibleProps & {
-    classes: {
-        headerContainer: string;
-        header: string;
-        children: string;
-        toggleButton: string;
-    };
 };

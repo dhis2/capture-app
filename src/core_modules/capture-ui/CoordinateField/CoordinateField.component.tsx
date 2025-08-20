@@ -19,6 +19,7 @@ const coordinateKeys = {
 };
 
 export class CoordinateField extends React.Component<PlainProps, State> {
+    mapInstance: any;
     constructor(props: PlainProps) {
         super(props);
 
@@ -94,8 +95,6 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     handleClear = () => {
         this.props.onBlur(null);
     }
-
-    mapInstance: any;
 
     search = (position: any) => {
         const zoom = this.mapInstance?.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;

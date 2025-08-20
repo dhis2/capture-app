@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tooltip } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import type { VirtualizedOptionConfig } from './OptionsSelectVirtualized.component';
 
 const getStyles = () => ({
@@ -17,13 +17,9 @@ type Props = {
     style: any;
     onSelect: (selectedOption: VirtualizedOptionConfig) => void;
     currentlySelectedValues: Array<VirtualizedOptionConfig> | null;
-    classes: {
-        popper: string;
-        iconContainer: string;
-    };
     inFocus: boolean | null;
     onFocusOption: (option: VirtualizedOptionConfig) => void;
-};
+} & WithStyles<typeof getStyles>;
 
 class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
     static defaultContainerStyle: any = {

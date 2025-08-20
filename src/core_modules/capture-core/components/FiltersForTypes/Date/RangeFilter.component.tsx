@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 

@@ -15,6 +15,7 @@ const inputKeys = {
 };
 
 export class DateRangeField extends React.Component<Props, State> {
+    touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
@@ -99,8 +100,6 @@ export class DateRangeField extends React.Component<Props, State> {
             to: value,
         });
     }
-
-    touchedFields: Set<string>;
 
     render() {
         const { onBlur, onChange, value, innerMessage, ...passOnProps } = this.props;

@@ -12,6 +12,7 @@ type Props = {
 
 const getErrorOutput = () =>
     class ErrorOutputBuilder extends React.Component<Props> {
+        name: string;
         constructor(props: Props) {
             super(props);
             this.name = 'ErrorOutputBuilder';
@@ -30,8 +31,6 @@ const getErrorOutput = () =>
 
             return errorItems || [];
         }
-
-        name: string;
 
         render = () => {
             const visibleItems = this.getVisibleErrorItems();

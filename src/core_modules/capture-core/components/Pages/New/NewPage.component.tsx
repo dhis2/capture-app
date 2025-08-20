@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import type { ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 
-import type { ContainerProps, Props } from './NewPage.types';
+import type { ContainerProps } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
@@ -20,6 +20,8 @@ const styles: Readonly<any> = {
         padding: '24px 24px 16px 24px',
     },
 };
+
+type Props = ContainerProps & WithStyles<typeof styles>;
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,

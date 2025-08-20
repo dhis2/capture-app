@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconUser24, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from '@material-ui/core/styles';
 import type { PlainProps } from './WidgetAssignee.types';
 import { Widget } from '../Widget';
 import { DisplayMode } from './DisplayMode.component';
@@ -17,7 +17,9 @@ const styles = () => ({
     },
 });
 
-const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }: PlainProps) => {
+type Props = PlainProps & WithStyles<typeof styles> ;
+
+const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }: Props) => {
     const [open, setOpen] = useState(true);
     const [editMode, setEditMode] = useState(false);
 
