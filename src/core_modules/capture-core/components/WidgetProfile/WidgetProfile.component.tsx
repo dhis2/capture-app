@@ -11,7 +11,7 @@ import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
-import type { PlainProps } from './widgetProfile.types';
+import type { Props } from './widgetProfile.types';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -47,8 +47,6 @@ const styles: Readonly<any> = {
 const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string, program: any) =>
     !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && Boolean(program?.id);
 
-type Props = PlainProps & WithStyles<typeof styles>;
-
 const WidgetProfilePlain = ({
     teiId,
     programId,
@@ -57,7 +55,7 @@ const WidgetProfilePlain = ({
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
@@ -208,4 +206,4 @@ const WidgetProfilePlain = ({
     );
 };
 
-export const WidgetProfile = withStyles(styles)(WidgetProfilePlain) as ComponentType<PlainProps>;
+export const WidgetProfile = withStyles(styles)(WidgetProfilePlain) as ComponentType<Props>;
