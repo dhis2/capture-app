@@ -20,6 +20,8 @@ type State = {
 };
 
 class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
+    cancelablePromise: any;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -33,8 +35,6 @@ class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
     componentWillUnmount() {
         this.cancelablePromise && this.cancelablePromise.cancel();
     }
-
-    cancelablePromise: any;
 
     requestTeiWithoutProgram() {
         const { errorData, querySingleResource } = this.props;

@@ -28,11 +28,8 @@ const styles: Readonly<any> = {
 };
 
 class StickyOnScrollPlain extends React.Component<Props> {
-    // eslint-disable-next-line react/sort-comp
     stickyContainer: any;
-    // eslint-disable-next-line react/sort-comp
     scrollTimer: any;
-    // eslint-disable-next-line react/sort-comp
     resizeTimer: any;
 
     static readonly defaultProps = {

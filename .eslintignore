@@ -1,5 +1,9 @@
 /src/locales/index.js
 **/build/**
+/cypress**
+/scripts/**
+/jest*
+**/__tests__/**
 
 #libs
 /packages/**

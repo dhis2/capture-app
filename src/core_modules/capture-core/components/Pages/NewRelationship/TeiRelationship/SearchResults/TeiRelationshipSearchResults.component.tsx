@@ -94,6 +94,7 @@ const CardListButton = ({ handleOnClick, teiId }: CardListButtonProps) => (
 );
 
 class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
+    getAttributes: any;
     constructor(props: Props) {
         super(props);
         this.getAttributes = makeAttributesSelector();
@@ -111,8 +112,6 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
             this.props.onAddRelationship(item.id, item.values);
         }
     }
-
-    getAttributes: any;
 
     getSearchValues = (): CurrentSearchTerms => {
         const { searchValues, searchGroup } = this.props;

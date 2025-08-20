@@ -6,6 +6,8 @@ type Props = {
 
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
     class DataEntryOutputBuilder extends React.Component<Props> {
+        name: string;
+        innerInstance: any;
         constructor(props: Props) {
             super(props);
             this.name = 'DataEntryOutputBuilder';
@@ -24,8 +26,6 @@ const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: Re
                 />
             </div>
         )
-        name: string;
-        innerInstance: any;
 
         render = () => {
             const { dataEntryOutputs, ...passOnProps } = this.props;

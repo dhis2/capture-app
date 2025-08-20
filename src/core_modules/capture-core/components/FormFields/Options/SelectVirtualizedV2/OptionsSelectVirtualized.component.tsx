@@ -67,6 +67,7 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         return (options && options.filter(o => o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1)) || [];
     }
 
+    materialUIContainerInstance: any;
 
     static defaultProps = {
         translations: {
@@ -112,8 +113,6 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
     prevFilterValue: string | null = null;
     prevFilteredOptions: Array<VirtualizedOptionConfig> = [];
     isUnmounted = false;
-
-    materialUIContainerInstance: any;
 
     static defaultSelectStyle = {
     };

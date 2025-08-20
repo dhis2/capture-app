@@ -54,6 +54,7 @@ type State = {
 export const withDescription = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(getStylesLabel)(class DataElementDescription extends React.Component<any, State> {
+            iconRef: any;
             constructor(props: any) {
                 super(props);
                 this.iconRef = React.createRef();
@@ -62,7 +63,6 @@ export const withDescription = () =>
                 };
             }
 
-            iconRef: any;
             renderDescription(description, url) {
                 const { classes } = this.props;
                 return (<div>

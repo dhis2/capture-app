@@ -9,6 +9,8 @@ export class ProgramFilterer extends React.Component<ProgramFiltererProps> {
         return basePrograms.length !== filteredPrograms.length;
     }
 
+    programs: Array<Program>;
+
     constructor(props: ProgramFiltererProps) {
         super(props);
         this.programs = Array.from(programCollection.values());
@@ -34,8 +36,6 @@ export class ProgramFilterer extends React.Component<ProgramFiltererProps> {
                 (!orgUnitIds || orgUnitIds.some(id => program.organisationUnits[id])),
             );
     }
-
-    programs: Array<Program>;
 
     render() {
         const { orgUnitIds, baselineFilter, children, ...passOnProps } = this.props;

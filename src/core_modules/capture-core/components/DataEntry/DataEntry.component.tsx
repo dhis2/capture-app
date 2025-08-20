@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import { spacers } from '@dhis2/ui';
 import * as React from 'react';
 import type { ReactElement } from 'react';

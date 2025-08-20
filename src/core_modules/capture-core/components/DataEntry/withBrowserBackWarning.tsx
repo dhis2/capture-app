@@ -20,6 +20,7 @@ type State = {
 
 const getEventListener = (InnerComponent: React.ComponentType<any>) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
+        unblock!: () => void;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -46,8 +47,6 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
                 this.unblock();
             }
         }
-
-        unblock!: () => void;
 
         handleDialogConfirm = () => {
             this.setState({

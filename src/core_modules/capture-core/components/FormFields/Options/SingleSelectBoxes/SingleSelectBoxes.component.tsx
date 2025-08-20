@@ -24,6 +24,10 @@ const styles = ({ typography, palette }: any) => ({
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class SingleSelectBoxesPlain extends Component<Props> {
+    checkedValues!: Set<any> | null;
+    labelClasses: any;
+    materialUIContainerInstance: any;
+
     constructor(props: Props) {
         super(props);
         this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -55,12 +59,6 @@ class SingleSelectBoxesPlain extends Component<Props> {
             this.checkedValues = null;
         }
     }
-
-    checkedValues!: Set<any> | null;
-
-    labelClasses: any;
-
-    materialUIContainerInstance: any;
 
     buildLabelClasses() {
         return {

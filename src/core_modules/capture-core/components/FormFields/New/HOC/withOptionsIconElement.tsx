@@ -35,6 +35,7 @@ type Props = {
 export const withOptionsIconElement = () =>
     (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
         class CreateOptionsIconElementHOC extends React.Component<Props> {
+            options: Array<{icon: React.ReactNode}>;
             constructor(props: Props) {
                 super(props);
                 this.options = this.getOptions();
@@ -68,8 +69,6 @@ export const withOptionsIconElement = () =>
                         icon: this.getIcon(option.icon),
                     }));
             }
-
-            options: Array<{icon: React.ReactNode}>;
 
             render() {
                 const { options, classes, ...passOnProps } = this.props;

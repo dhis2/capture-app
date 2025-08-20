@@ -310,6 +310,9 @@ const dataEntrySectionDefinitions = {
 };
 
 class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
+    dataEntrySections: { [key: string]: DataEntrySection };
+
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
@@ -318,9 +321,6 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
-
-    fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
-    dataEntrySections: { [key: string]: DataEntrySection };
 
     render() {
         const {

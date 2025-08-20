@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import * as React from 'react';
 import { CircularLoader, colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from '@material-ui/core/styles';

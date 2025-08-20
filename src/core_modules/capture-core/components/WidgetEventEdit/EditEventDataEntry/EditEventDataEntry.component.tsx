@@ -477,6 +477,8 @@ const dataEntrySectionDefinitions = {
 };
 
 class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>, State> {
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
+    dataEntrySections: { [key: string]: DataEntrySection };
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
@@ -489,9 +491,6 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     }
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
-
-    fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
-    dataEntrySections: { [key: string]: DataEntrySection };
 
     renderScheduleView() {
         const {

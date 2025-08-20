@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import { withStyles, WithStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -576,7 +575,6 @@ const dataEntrySectionDefinitions = {
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any };
     dataEntrySections: { [key: string]: DataEntrySection };
-    relationshipsInstance: HTMLDivElement | null = null;
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
@@ -599,6 +597,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+    relationshipsInstance: HTMLDivElement | null = null;
 
     setRelationshipsInstance = (instance: HTMLDivElement | null) => {
         this.relationshipsInstance = instance;

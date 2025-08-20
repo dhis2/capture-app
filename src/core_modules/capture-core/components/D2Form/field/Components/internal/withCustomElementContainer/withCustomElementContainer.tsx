@@ -13,11 +13,11 @@ type OnGetContainerClass = (props: any) => string | null;
 export const withCustomElementContainer = (onGetContainerClass?: OnGetContainerClass) =>
     (InnerComponent: React.ComponentType<any>) =>
         class CustomElementContainerHOC extends React.Component<Props> {
+            defaultClass?: string | null;
             constructor(props: Props) {
                 super(props);
                 this.defaultClass = onGetContainerClass && onGetContainerClass(this.props);
             }
-            defaultClass?: string | null;
 
             render() {
                 const { customFormElementProps, ...passOnProps } = this.props;

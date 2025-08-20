@@ -36,6 +36,7 @@ type State = {
 };
 
 class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
+    modeOptions: Array<any>;
     constructor(props: Props) {
         super(props);
         this.modeOptions = getModeOptions();
@@ -59,8 +60,6 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         }
         return true;
     }
-
-    modeOptions: Array<any>;
 
     handleModeSelect = (value: string) => {
         this.setState({

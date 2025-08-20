@@ -26,12 +26,12 @@ export class BooleanField extends Component<Props> {
         ];
     }
 
+    options: Array<OptionRendererInputData>;
+
     constructor(props: Props) {
         super(props);
         this.options = BooleanField.getOptions(!!this.props.useRealBooleanValues);
     }
-
-    options: Array<OptionRendererInputData>;
 
     render() {
         const { allowMultiple, useRealBooleanValues, onSelect, ...passOnProps } = this.props;

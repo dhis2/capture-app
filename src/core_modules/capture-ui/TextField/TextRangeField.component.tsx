@@ -30,6 +30,7 @@ type Props = {
 }
 
 export class TextRangeField extends React.Component<Props> {
+    touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
@@ -92,9 +93,6 @@ export class TextRangeField extends React.Component<Props> {
             touched: touched || otherFieldHasValue,
         });
     }
-
-    touchedFields: Set<string>;
-
 
     render() {
         const { value, onChange, onBlur, ...passOnProps } = this.props;

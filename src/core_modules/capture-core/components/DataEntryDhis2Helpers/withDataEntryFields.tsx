@@ -8,6 +8,7 @@ import type { Props, Settings } from './withDataEntryFields.types';
 
 const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
+        reselectComponentProps: (props?: any) => any;
         constructor(props: Props) {
             super(props);
             this.reselectComponentProps = makeReselectComponentProps();
@@ -74,8 +75,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             const otherFields = fieldIds ? [...fieldIds.map((fieldId: any) => this.getFieldElementFromProps(fieldId))] : [];
             return fields ? [...otherFields, ...fields] : [...otherFields];
         }
-
-        reselectComponentProps: (props?: any) => any;
 
         render() {
             const { fields, ...passOnProps } = this.props;

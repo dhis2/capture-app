@@ -477,6 +477,9 @@ const dataEntrySectionDefinitions = {
     },
 };
 class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
+    relationshipsInstance?: HTMLDivElement | null;
+    dataEntrySections: { [key: string]: DataEntrySection };
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass?: string };
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
@@ -504,10 +507,6 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     setRelationshipsInstance = (instance?: HTMLDivElement | null) => {
         this.relationshipsInstance = instance;
     }
-
-    relationshipsInstance?: HTMLDivElement | null;
-    dataEntrySections: { [key: string]: DataEntrySection };
-    fieldOptions: { theme: any; fieldLabelMediaBasedClass?: string };
 
     render() {
         const {

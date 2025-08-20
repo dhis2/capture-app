@@ -15,6 +15,7 @@ export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
         const InternalFilterHandlerHOC = withApiUtils(withInternalFilterHandler()(InnerComponent));
 
         class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props & P> {
+            defaultRoots: Array<any>;
             constructor(props: Props & P) {
                 super(props);
                 const { scope } = this.props;
@@ -26,8 +27,6 @@ export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
                 [orgUnitFieldScopes.USER_CAPTURE]: 'captureRoots',
                 [orgUnitFieldScopes.USER_SEARCH]: 'search',
             };
-
-            defaultRoots: Array<any>;
 
             render() {
                 const { ...passOnProps } = this.props;

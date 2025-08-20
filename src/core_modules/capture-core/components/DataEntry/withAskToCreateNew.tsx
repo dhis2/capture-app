@@ -21,6 +21,7 @@ type State = {
 
 const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
     class AskToCreateNewHOC extends React.Component<Props, State> {
+        innerInstance: any;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -32,8 +33,6 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
-
-        innerInstance: any;
 
         handleOnSave(eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) {
             if (this.props.allowGenerateNextVisit &&

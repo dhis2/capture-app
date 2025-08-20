@@ -14,14 +14,15 @@ const inputKeys = {
 };
 
 export class DateTimeRangeField extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.touchedFields = new Set();
-        this.state = {
-            fromDateError: { error: null, errorCode: null },
-            toDateError: { error: null, errorCode: null },
-        };
-    }
+        touchedFields: Set<string>;
+        constructor(props: Props) {
+            super(props);
+            this.touchedFields = new Set();
+            this.state = {
+                fromDateError: { error: null, errorCode: null },
+                toDateError: { error: null, errorCode: null },
+            };
+        }
 
     getValue = () => this.props.value || {};
 
@@ -110,8 +111,6 @@ export class DateTimeRangeField extends React.Component<Props, State> {
             to: value,
         });
     }
-
-    touchedFields: Set<string>;
 
     render() {
         const { onBlur, onChange, value, ...passOnProps } = this.props;

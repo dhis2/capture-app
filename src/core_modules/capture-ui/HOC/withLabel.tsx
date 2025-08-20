@@ -39,11 +39,8 @@ type HOCParamsContainer = {
 export const withLabel = (hocParams?: HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
         (class LabelHOC extends React.Component<Props> {
-            // eslint-disable-next-line react/sort-comp
             labelContainerClass?: string;
-            // eslint-disable-next-line react/sort-comp
             labelClasses?: LabelClasses;
-            // eslint-disable-next-line react/sort-comp
             passOnClasses?: any;
 
             constructor(props: Props) {

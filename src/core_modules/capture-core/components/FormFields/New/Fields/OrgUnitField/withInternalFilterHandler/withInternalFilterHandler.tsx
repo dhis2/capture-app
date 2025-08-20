@@ -24,6 +24,7 @@ type State = {
 export const withInternalFilterHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OrgUnitInternalFilterHandlerHOC extends React.Component<Props, State> {
+            cancelablePromise: any;
             constructor(props: Props) {
                 super(props);
                 this.state = {
@@ -42,8 +43,6 @@ export const withInternalFilterHandler = () =>
             }
 
             static INITIAL_TREE_KEY = 'initial';
-
-            cancelablePromise: any;
 
             filterOrgUnits(filterText: string) {
                 const { scope, onSearchError, querySingleResource } = this.props;

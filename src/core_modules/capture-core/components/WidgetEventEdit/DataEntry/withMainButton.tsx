@@ -7,11 +7,10 @@ import type { Props } from './withMainButton.types';
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
+        innerInstance: any;
         getWrappedInstance() {
             return this.innerInstance;
         }
-
-        innerInstance: any;
 
         renderMainButton = (hasWriteAccess: boolean) => (
             <ConditionalTooltip

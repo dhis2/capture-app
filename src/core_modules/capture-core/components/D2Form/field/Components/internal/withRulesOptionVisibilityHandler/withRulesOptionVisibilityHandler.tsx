@@ -51,6 +51,8 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
                 return options.filter(option => filters.every(f => f(option)));
             }
 
+            filteredOptions: any;
+
             constructor(props: Props) {
                 super(props);
 
@@ -63,8 +65,6 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
                     this.filteredOptions = CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(newProps);
                 }
             }
-
-            filteredOptions: any;
 
             render() {
                 const { options, ...passOnProps } = this.props;

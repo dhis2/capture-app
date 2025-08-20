@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -111,7 +110,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
         return formBuilderInstance.isValid([validatorTypes.TYPE_BASE]);
     }
 
-    formBuilderInstance: FormBuilder | null = null;
     formFields: Array<FieldConfig>;
     rulesCompulsoryErrors: { [elementId: string]: boolean };
 
@@ -131,6 +129,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
             this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
         }
     }
+    formBuilderInstance: FormBuilder | null = null;
 
     rulesIsValid() {
         const rulesMessages = this.props.rulesMessages;

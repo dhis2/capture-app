@@ -15,6 +15,7 @@ type State = {
 
 export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
     class FocusHandlerHOC extends React.Component<Props, State> {
+        inputInstance!: HTMLInputElement;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -67,7 +68,6 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
             this.isMouseClick = false;
         }
 
-        inputInstance!: HTMLInputElement;
         isMouseClick = false;
 
         render() {

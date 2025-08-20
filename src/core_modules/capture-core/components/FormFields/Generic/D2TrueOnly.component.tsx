@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import { Checkbox, Switch, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
@@ -24,7 +23,6 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class D2TrueOnlyPlain extends Component<Props> {
-    materialUIContainerInstance: HTMLDivElement | null = null;
     labelClasses: any;
 
     constructor(props: Props) {
@@ -33,6 +31,7 @@ class D2TrueOnlyPlain extends Component<Props> {
 
         this.labelClasses = this.buildLabelClasses();
     }
+    materialUIContainerInstance: HTMLDivElement | null = null;
 
     buildLabelClasses() {
         return {

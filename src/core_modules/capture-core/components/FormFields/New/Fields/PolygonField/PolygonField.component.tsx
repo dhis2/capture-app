@@ -22,6 +22,8 @@ type Props = {
 }
 
 class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
+    dialogClasses: any;
+    passOnClasses: any;
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
 
@@ -31,9 +33,6 @@ class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getSty
             paper: props.classes.dialogPaper,
         };
     }
-
-    dialogClasses: any;
-    passOnClasses: any;
 
     render() {
         const { classes, dialogLabel, onOpenMap, ...passOnProps } = this.props;

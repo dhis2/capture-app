@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import { Input } from '@dhis2/ui';
 import React, { Component } from 'react';
 
@@ -12,8 +11,6 @@ type Props = {
 };
 
 export class D2TextField extends Component<Props> {
-    materialUIInstance: HTMLInputElement | null = null;
-    materialUIContainerInstance: HTMLDivElement | null = null;
     static defaultProps = {
         value: '',
     };
@@ -23,6 +20,8 @@ export class D2TextField extends Component<Props> {
         this.handleChange = this.handleChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
     }
+    materialUIInstance: HTMLInputElement | null = null;
+    materialUIContainerInstance: HTMLDivElement | null = null;
 
     handleChange = (payload: { value?: string }, event: any) => {
         this.props.onChange && this.props.onChange(payload.value || '', event);

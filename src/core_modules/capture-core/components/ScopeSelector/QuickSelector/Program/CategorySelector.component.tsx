@@ -82,6 +82,9 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         return null;
     }
 
+    onSelectSelector: (data: any) => (optionId: string) => void;
+    cancelablePromise: any;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -104,8 +107,6 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         this.cancelablePromise = null;
     }
 
-    onSelectSelector: (data: any) => (optionId: string) => void;
-    cancelablePromise: any;
 
     loadCagoryOptions(props: Props) {
         const { category, selectedOrgUnitId } = props;
