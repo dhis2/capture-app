@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -615,9 +615,6 @@ msgstr "此报名尚无指标输出"
 msgid "Quick actions"
 msgstr "快速行动"
 
-msgid "New Event"
-msgstr "新事件"
-
 msgid "Schedule an event"
 msgstr "安排事件"
 
@@ -996,9 +993,8 @@ msgid "all programs"
 msgstr "所有项目"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+"Not finding the results you were looking for? Try searching in all programs."
+msgstr ""
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr "{{trackedEntityName}}没有可搜索的属性"
@@ -1006,8 +1002,9 @@ msgstr "{{trackedEntityName}}没有可搜索的属性"
 msgid "Search in all programs"
 msgstr "搜索所有项目"
 
-msgid "If none of search results match, you can create a new "
-msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "新建"
