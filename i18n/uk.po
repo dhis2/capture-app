@@ -5,13 +5,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Éva Tamási, 2025
 # Nadiia <semchuk@aph.org.ua>, 2025
+# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2025\n"
+"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "Обов'язкове поле"
 
 msgid "Please provide a valid number"
 msgstr ""
@@ -134,7 +135,7 @@ msgid "A future date is not allowed"
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Збереження {{trackedEntityName}} в"
 
 msgid "in"
 msgstr ""
@@ -155,7 +156,7 @@ msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
-msgstr ""
+msgstr "Основна інформація"
 
 msgid "Status"
 msgstr "Статус"
@@ -405,7 +406,7 @@ msgid "Min"
 msgstr "Мін"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Містить текст"
 
 msgid "Yes"
 msgstr "Так"
@@ -471,7 +472,7 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Стовпці для відображення в таблиці"
 
 msgid "Column"
 msgstr "Стовпчик"
@@ -495,10 +496,10 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
-msgstr ""
+msgstr "Інші фільтри"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Рядків на сторінку"
 
 msgid "Could not get organisation unit"
 msgstr ""
@@ -513,13 +514,13 @@ msgid "New"
 msgstr "Нове"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Новий {{trackedEntityName}} в {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Очистити вибір"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -582,7 +583,7 @@ msgid "Show all events"
 msgstr ""
 
 msgid "Edit event"
-msgstr ""
+msgstr "Редагувати подію"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
@@ -654,7 +655,7 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
+msgstr "Завантажити дані…"
 
 msgid "Working list could not be loaded"
 msgstr ""
@@ -675,7 +676,7 @@ msgid "Registering unit"
 msgstr "Підрозділ, що реєструє"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Дата Реєстрації"
 
 msgid "Inactive"
 msgstr "Неактивне"
@@ -687,7 +688,7 @@ msgid "Update view"
 msgstr ""
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Зберегти поточний вигляд"
 
 msgid "Save current view as..."
 msgstr ""
@@ -769,7 +770,7 @@ msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Зареєструвати новий {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Реєструвати"
