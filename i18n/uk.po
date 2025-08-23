@@ -5,13 +5,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2022
 # Éva Tamási, 2025
 # Nadiia <semchuk@aph.org.ua>, 2025
+# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2025\n"
+"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "Обов'язкове поле"
 
 msgid "Please provide a valid number"
 msgstr ""
@@ -134,7 +135,7 @@ msgid "A future date is not allowed"
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Збереження {{trackedEntityName}} в"
 
 msgid "in"
 msgstr ""
@@ -155,7 +156,7 @@ msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
-msgstr ""
+msgstr "Основна інформація"
 
 msgid "Status"
 msgstr "Статус"
@@ -207,7 +208,7 @@ msgid "Finish"
 msgstr "Закінчити"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Зберегти без завершення"
 
 msgid "Complete"
 msgstr "Завершено"
@@ -408,7 +409,7 @@ msgid "Min"
 msgstr "Мін"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Містить текст"
 
 msgid "Yes"
 msgstr "Так"
@@ -477,7 +478,7 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Стовпці для відображення в таблиці"
 
 msgid "Column"
 msgstr "Стовпчик"
@@ -486,7 +487,7 @@ msgid "Update"
 msgstr "Оновити"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Скинути фільтр"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -504,10 +505,10 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
-msgstr ""
+msgstr "Інші фільтри"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Рядків на сторінку"
 
 msgid "Could not get organisation unit"
 msgstr ""
@@ -522,13 +523,13 @@ msgid "New"
 msgstr "Новий"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Новий {{trackedEntityName}} в {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Очистити вибір"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -598,10 +599,10 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Панель реєстрації"
 
 msgid "No indicator output for this enrollment yet"
-msgstr ""
+msgstr "Індикатори для цієї реєстрації ще не розраховано"
 
 msgid "No feedback for this enrollment yet"
 msgstr ""
@@ -684,13 +685,13 @@ msgid "Please select {{category}}."
 msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
-msgstr ""
+msgstr "Або перегляньте усі доступні вам записи в програмі {{program}} "
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Будь-ласка, оберіть організаційний підрозділ."
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
@@ -745,7 +746,7 @@ msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Зареєструвати новий {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Реєструвати"
@@ -830,7 +831,7 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
-msgstr ""
+msgstr "Редагувати подію"
 
 msgid "Event details"
 msgstr ""
@@ -898,7 +899,7 @@ msgid "Save comment"
 msgstr "Зберегти коментар"
 
 msgid "Enrollment actions"
-msgstr ""
+msgstr "Дії щодо реєстрації"
 
 msgid "We are processing your request."
 msgstr ""
@@ -907,10 +908,10 @@ msgid "Reactivate"
 msgstr ""
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "Позначити реєстрацію як відмінену"
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Позначити реєстрацію як незавершену"
 
 msgid "Delete enrollment"
 msgstr "Видалити реєстрацію"
@@ -945,10 +946,10 @@ msgid "Follow-up"
 msgstr "Подальші дії"
 
 msgid "Started at {{orgUnitName}}"
-msgstr ""
+msgstr "Реєстрацію розпочато в {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
+msgstr "Власник: {{ownerOrgUnit}}"
 
 msgid "Last updated {{date}}"
 msgstr ""
@@ -996,7 +997,7 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
+msgstr "Етапи і Події"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1038,7 +1039,7 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
 msgid "Stages and Events"
-msgstr ""
+msgstr "Етапи і Події"
 
 msgid "Working list could not be loaded"
 msgstr ""
@@ -1059,7 +1060,7 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
+msgstr "Завантажити дані…"
 
 msgid "an error occurred loading working lists"
 msgstr ""
@@ -1071,7 +1072,7 @@ msgid "Assigned to"
 msgstr ""
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Дата Реєстрації"
 
 msgid "Inactive"
 msgstr "Неактивно"
@@ -1083,7 +1084,7 @@ msgid "Update view"
 msgstr ""
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Зберегти поточний вигляд"
 
 msgid "Save current view as..."
 msgstr ""
