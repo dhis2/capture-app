@@ -6,8 +6,6 @@
         "buildzip",
         "coverage",
         "docs",
-        "flow",
-        "flow-typed",
         "i18n",
         "public",
         ".d2"

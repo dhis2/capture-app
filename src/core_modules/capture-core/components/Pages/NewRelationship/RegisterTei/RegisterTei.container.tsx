@@ -1,0 +1,40 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { RegisterTeiComponent } from './RegisterTei.component';
+import type { OwnProps } from './RegisterTei.types';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+
+const useNewRelationshipScopeId = (): string =>
+    useSelector(
+        ({
+            newRelationshipRegisterTei: {
+                programId,
+            },
+            newRelationship: {
+                selectedRelationshipType: { to: { trackedEntityTypeId } },
+            },
+        }: any) => (programId || trackedEntityTypeId),
+    );
+
+export const RegisterTei = ({ onLink, onSave, onCancel, onGetUnsavedAttributeValues }: OwnProps) => {
+    const dataEntryId = 'relationship';
+    const itemId = useSelector(({ dataEntries }: any) => dataEntries[dataEntryId]?.itemId);
+    const error = useSelector(({ newRelationshipRegisterTei }: any) => (newRelationshipRegisterTei.error));
+    const newRelationshipProgramId = useNewRelationshipScopeId();
+    const { trackedEntityName, tetId: trackedEntityTypeId } = useScopeInfo(newRelationshipProgramId);
+
+    return (
+        <RegisterTeiComponent
+            dataEntryId={dataEntryId}
+            itemId={itemId}
+            onLink={onLink}
+            onSave={onSave}
+            onCancel={onCancel}
+            onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+            trackedEntityName={trackedEntityName}
+            trackedEntityTypeId={trackedEntityTypeId}
+            newRelationshipProgramId={newRelationshipProgramId}
+            error={error}
+        />
+    );
+};
