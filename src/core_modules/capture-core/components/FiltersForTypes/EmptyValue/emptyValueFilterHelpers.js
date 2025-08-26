@@ -1,19 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 
-export const EMPTY_VALUE_FILTER = 'EMPTY_VALUE_FILTER';
-export const NOT_EMPTY_VALUE_FILTER = 'NOT_EMPTY_VALUE_FILTER';
-
-export const API_EMPTY_VALUE_FILTER = 'null';
-export const API_NOT_EMPTY_VALUE_FILTER = '!null';
-
-export const EMPTY_VALUE_FILTER_LABEL = i18n.t('Is empty');
-export const NOT_EMPTY_VALUE_FILTER_LABEL = i18n.t('Is not empty');
-
-type EmptyValueFilterData = {|
-    value: string,
-    isEmpty?: boolean,
-|};
+import {
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+} from './constants';
 
 export const isEmptyValueFilter = (value: ?string) =>
     value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
@@ -23,24 +13,3 @@ export const makeCheckboxHandler =
         (onCommit: (?string) => void) =>
             ({ checked }: {| checked: boolean |}) =>
                 onCommit(checked ? flag : '');
-
-export const fromApiEmptyValueFilter = (filter: Object): ?EmptyValueFilterData => {
-    if (typeof filter?.[API_EMPTY_VALUE_FILTER] === 'boolean') {
-        return {
-            isEmpty: filter[API_EMPTY_VALUE_FILTER],
-            value: filter[API_EMPTY_VALUE_FILTER] ? EMPTY_VALUE_FILTER_LABEL : NOT_EMPTY_VALUE_FILTER_LABEL,
-        };
-    }
-    return undefined;
-};
-
-
-export const toApiEmptyValueFilter = (filter: EmptyValueFilterData) => {
-    if (filter.isEmpty === true) {
-        return { [API_EMPTY_VALUE_FILTER]: true };
-    }
-    if (filter.isEmpty === false) {
-        return { [API_EMPTY_VALUE_FILTER]: false };
-    }
-    return undefined;
-};

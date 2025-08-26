@@ -7,19 +7,14 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EMPTY_VALUE_FILTER_LABEL,
     NOT_EMPTY_VALUE_FILTER_LABEL,
-} from './emptyValueFilterHelpers';
-
-type Props = {
-    value: ?string,
-    onEmptyChange: ({| checked: boolean |}) => void,
-    onNotEmptyChange: ({| checked: boolean |}) => void,
-};
+} from './constants';
+import type { EmptyValueFilterCheckboxesProps } from './types';
 
 export const EmptyValueFilterCheckboxes = ({
     value,
     onEmptyChange,
     onNotEmptyChange,
-}: Props) => {
+}: EmptyValueFilterCheckboxesProps) => {
     const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
 
     if (!emptyValueFilterSupported) {
