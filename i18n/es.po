@@ -22,7 +22,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Janeth Cruz, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -652,9 +652,6 @@ msgstr "Aún no hay resultados de indicadores para esta inscripción"
 msgid "Quick actions"
 msgstr "Acciones rápidas"
 
-msgid "New Event"
-msgstr "Nuevo evento"
-
 msgid "Schedule an event"
 msgstr "Programar un evento"
 
@@ -921,6 +918,9 @@ msgstr "evento"
 msgid "You don't have access to edit this event"
 msgstr "No tiene acceso para editar este evento"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "Ver registro de cambios"
 
@@ -1060,11 +1060,8 @@ msgid "all programs"
 msgstr "todos los programas"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
-" que usan el tipo"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1072,9 +1069,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Buscar en todos los programas"
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
-"Si ninguno de los resultados de la búsqueda coincide, puede crear una nueva"
 
 msgid "Create new"
 msgstr "Crear nuevo"
@@ -1568,6 +1565,9 @@ msgstr "Esta etapa solo puede tener un evento"
 
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Se produjo un error eliminando el evento"

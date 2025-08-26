@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rica, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -635,9 +635,6 @@ msgstr "Nog geen indicatoroutput voor deze inschrijving"
 msgid "Quick actions"
 msgstr "Snelle acties"
 
-msgid "New Event"
-msgstr "Nieuw evenement"
-
 msgid "Schedule an event"
 msgstr "Plan een evenement"
 
@@ -895,6 +892,9 @@ msgstr "evenement"
 msgid "You don't have access to edit this event"
 msgstr "Je hebt geen toegangsrechten om dit evenement te bewerken"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr ""
 
@@ -1032,11 +1032,8 @@ msgid "all programs"
 msgstr "alle programma's"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Vindt u niet de resultaten waarnaar u op zoek was? Probeer alle programma's "
-"te doorzoeken die dit type gebruiken"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1044,8 +1041,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Zoek in alle programma's"
 
-msgid "If none of search results match, you can create a new "
-msgstr "Als geen van de zoekresultaten overeenkomt, kunt u een nieuwe maken"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "Maak nieuw"
@@ -1522,6 +1520,9 @@ msgstr "Deze fase kan maar één evenement hebben"
 
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr ""

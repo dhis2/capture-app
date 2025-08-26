@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -631,9 +631,6 @@ msgstr "Ingen indikatorresultat for denne registreringen enda"
 msgid "Quick actions"
 msgstr "Snarveier"
 
-msgid "New Event"
-msgstr "Ny hendelse"
-
 msgid "Schedule an event"
 msgstr "Planlegg en hendelse"
 
@@ -892,6 +889,9 @@ msgstr "hendelse"
 msgid "You don't have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "Vis endringslogg"
 
@@ -1026,11 +1026,8 @@ msgid "all programs"
 msgstr "alle programmer"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
-" bruker type"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1038,8 +1035,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Søk i alle programmer"
 
-msgid "If none of search results match, you can create a new "
-msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "Opprett ny"
@@ -1521,6 +1519,9 @@ msgstr "Denne fasen kan bare ha en hendelse"
 
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Det oppstå en feil ved sletting av hendelsen. "

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Namwan Chanthavisouk, 2025\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -626,9 +626,6 @@ msgstr "ບໍ່ມີຕົວຊີ້ວັດຜົນໄດ້ຮັບສ
 msgid "Quick actions"
 msgstr "ການປະຕິບັດແບບໄວ"
 
-msgid "New Event"
-msgstr "ເຫດການໃໝ່"
-
 msgid "Schedule an event"
 msgstr "ຈັດຕາຕະລາງນັດໝາຍ"
 
@@ -879,6 +876,9 @@ msgstr "ເຫດການ"
 msgid "You don't have access to edit this event"
 msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃນການແກ້ໄຂເຫດການນີ້"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "ເບິ່ງບັນທຶກການປ່ຽນແປງ"
 
@@ -1010,9 +1010,8 @@ msgid "all programs"
 msgstr "ໂປແກຼມທັງໝົດ"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "ບໍ່ພົບສິ່ງທີ່ທ່ານກໍາລັງຊອກຫາບໍ່? ລອງຄົ້ນຫາໂປແກຼມທັງຫມົດໂດຍເລືອກປະເພດ"
+"Not finding the results you were looking for? Try searching in all programs."
+msgstr ""
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1020,8 +1019,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "ຄົ້ນຫາໃນທຸກໂປແກຼມ"
 
-msgid "If none of search results match, you can create a new "
-msgstr "ຖ້າບໍ່ມີຜົນການຄົ້ນຫາກົງກັນ, ທ່ານສາມາດສ້າງໃຫມ່ໄດ້"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "ສ້າງໃໝ່"
@@ -1486,6 +1486,9 @@ msgstr "ຂັ້ນຕອນນີ້ສາມາດມີເຫດການດ
 
 msgid "New {{ eventName }} event"
 msgstr "ເຫດການໃໝ່ {{ eventName }}"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງລົບເຫດການ"

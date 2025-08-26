@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -632,9 +632,6 @@ msgstr "Chưa có giá trị chỉ số cho sự kiện này"
 msgid "Quick actions"
 msgstr "Hành động nhanh"
 
-msgid "New Event"
-msgstr "Sự kiện mới"
-
 msgid "Schedule an event"
 msgstr "Đặt lịch một sự kiện"
 
@@ -894,6 +891,9 @@ msgstr "sự kiện"
 msgid "You don't have access to edit this event"
 msgstr "Bạn không có quyền chỉnh sửa sự kiện này"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "Xem những thay đổi"
 
@@ -1029,11 +1029,8 @@ msgid "all programs"
 msgstr "tất cả chương trình"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Không tìm thấy kết quả bạn đang tìm kiếm? Cố gắng tìm kiếm tất cả các chương"
-" trình sử dụng loại"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr "Không có thuộc tính có thể tìm kiếm cho {{trackedEntityName}}"
@@ -1041,8 +1038,9 @@ msgstr "Không có thuộc tính có thể tìm kiếm cho {{trackedEntityName}}
 msgid "Search in all programs"
 msgstr "Tìm kiếm trong tất cả các chương trình"
 
-msgid "If none of search results match, you can create a new "
-msgstr "Nếu không tìm thấy, bạn có thể tạo mới"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "Tạo mới"
@@ -1517,6 +1515,9 @@ msgstr "Giai đoạn này chỉ có duy nhất một sự kiện"
 
 msgid "New {{ eventName }} event"
 msgstr "Sự kiện {{ eventName }}mới"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Có lỗi xảy ra khi xóa sự kiện"
