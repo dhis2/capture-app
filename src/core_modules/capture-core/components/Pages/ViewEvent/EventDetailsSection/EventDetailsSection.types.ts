@@ -1,4 +1,4 @@
-import { ProgramStage } from "capture-core/metaData";
+import { ProgramStage } from 'capture-core/metaData';
 
 export type PlainProps = {
     showEditEvent?: boolean;
