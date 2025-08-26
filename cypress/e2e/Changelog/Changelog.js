@@ -1,16 +1,19 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
-import '../sharedSteps';
 
 const getChangelogTableBody = () =>
     cy.get('[data-test="changelog-data-table-body"]');
 
-const getOverflowButton = () =>
-    cy.get('[data-test="widget-event-edit-overflow-button"]');
+Given(/^you land on the enrollment edit event page by having typed (.*)$/, (url) => {
+    cy.visit(url);
+});
 
+Given(/^you land on the view event page by having typed (.*)$/, (url) => {
+    cy.visit(url);
+});
 
 Given('you select view changelog in the event overflow button', () => {
-    getOverflowButton().click();
-    cy.get('[data-test="event-overflow-view-changelog"] > a').click();
+    cy.get('[data-test="tracker-program-event-overflow-button"]').click();
+    cy.get('[data-test="tracker-program-event-changelog"] > a').click();
 });
 
 Then('the changelog modal should contain data', () => {
@@ -145,3 +148,24 @@ Then('the changelog data is sorted on Data item in ascending order', () => {
     });
 });
 
+When('you open the tracked entity changelog', () => {
+    cy.get('[data-test="tracked-entity-profile-overflow-button"]').should('be.visible').click();
+        cy.get('[data-test="tracked-entity-profile-overflow-menu"]').should('be.visible');
+        cy.get('[data-test="tracked-entity-profile-overflow-menu"]').within(() => {
+        cy.contains('View changelog').click();
+    });
+});
+
+When('you open the event program changelog', () => {
+    cy.get('[data-test="event-program-event-overflow-button"]').should('be.visible').click();
+    cy.get('[data-test="event-program-event-overflow-menu"]').should('be.visible');
+    cy.get('[data-test="event-program-event-overflow-menu"]').within(() => {
+    cy.contains('View changelog').click();
+    });
+});
+
+Then('the changelog modal should be visible', () => {
+    getChangelogTableBody()
+        .should('be.visible')
+        .and('contain', 'No changes to display')
+});

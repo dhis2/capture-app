@@ -34,12 +34,13 @@ export const OverflowMenuComponent = ({
                 icon={<IconMore16 />}
                 small
                 secondary
-                dataTest="widget-profile-overflow-menu"
+                dataTest="tracked-entity-profile-overflow-button"
                 component={
-                    <FlyoutMenu dense>
+                    <FlyoutMenu dense dataTest="tracked-entity-profile-overflow-menu">
                         {displayChangelog && (
                             <MenuItem
                                 label={i18n.t('View changelog')}
+                                data-test="tracked-entity-profile-changelog"
                                 onClick={() => {
                                     setChangelogIsOpen(true);
                                     setActionsIsOpen(false);
