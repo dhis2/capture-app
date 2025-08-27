@@ -105,7 +105,7 @@ export const WidgetEnrollmentPlain = ({
                             <Status status={enrollment.status} />
                         </div>
 
-                        <span data-test="widget-enrollment-enrollment-date">
+                        <div className={classes.row} data-test="widget-enrollment-enrollment-date">
                             <Date
                                 date={enrollment.enrolledAt}
                                 dateLabel={getEnrollmentDateLabel(program)}
@@ -115,10 +115,10 @@ export const WidgetEnrollmentPlain = ({
                                 onSave={updateEnrollmentDate}
                                 allowFutureDate={program.selectEnrollmentDatesInFuture}
                             />
-                        </span>
+                        </div>
 
                         {program.displayIncidentDate && (
-                            <span data-test="widget-enrollment-incident-date">
+                            <div className={classes.row} data-test="widget-enrollment-incident-date">
                                 <Date
                                     date={enrollment.occurredAt}
                                     dateLabel={getIncidentDateLabel(program)}
@@ -128,7 +128,7 @@ export const WidgetEnrollmentPlain = ({
                                     onSave={updateIncidentDate}
                                     allowFutureDate={program.selectIncidentDatesInFuture}
                                 />
-                            </span>
+                            </div>
                         )}
 
                         <div className={classes.row} data-test="widget-enrollment-orgunit">
