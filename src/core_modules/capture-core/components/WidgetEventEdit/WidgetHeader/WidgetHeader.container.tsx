@@ -126,7 +126,7 @@ const WidgetHeaderPlain = ({
                                 secondary
                                 dataTest={'tracker-program-event-overflow-button'}
                                 component={
-                                    <FlyoutMenu dense maxWidth="250px" dataTest="tracker-program-event-overflow-menu">
+                                    <FlyoutMenu dense maxWidth="250px">
                                         <MenuItem
                                             label={i18n.t('View changelog')}
                                             dataTest={'tracker-program-event-changelog'}

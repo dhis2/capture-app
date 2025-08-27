@@ -36,7 +36,7 @@ export const OverflowMenuComponent = ({
                 secondary
                 dataTest="tracked-entity-profile-overflow-button"
                 component={
-                    <FlyoutMenu dense dataTest="tracked-entity-profile-overflow-menu">
+                    <FlyoutMenu dense>
                         {displayChangelog && (
                             <MenuItem
                                 label={i18n.t('View changelog')}

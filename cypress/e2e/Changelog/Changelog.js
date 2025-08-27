@@ -163,11 +163,3 @@ When('you open the event program changelog', () => {
     cy.contains('View changelog').click();
     });
 });
-
-Then('the changelog modal should be visible', () => {
-    getChangelogTableBody()
-        .should('be.visible')
-        .and('not.contain', 'No changes to display')
-        .and('not.have.class', 'loading');
-    cy.get('[data-test="changelog-data-table-body"] tr').should('have.length.gt', 0);
-});

@@ -96,16 +96,15 @@ Feature: The user interacts with the changelog widget
     Then the changelog modal should contain data
     And the changelog data is sorted on Data item in ascending order
 
-  # Tests that need different navigation (no Background needed)
   @v>=41
   Scenario: The user can open tracked entity changelog from enrollment edit event page
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=Ni0yhZ7XhAP&orgUnitId=DiszpKrYNg8
     When you open the tracked entity changelog
-    Then the changelog modal should be visible
+    Then the changelog modal should contain data
 
   @v>=41
   Scenario: The user can open event program changelog from view event page
     Given you land on the view event page by having typed /#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=a5e67163090
     When you open the event program changelog
-    Then the changelog modal should be visible
+    Then the changelog modal should contain data
 
