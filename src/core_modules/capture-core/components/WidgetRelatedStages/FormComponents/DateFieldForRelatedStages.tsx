@@ -7,6 +7,7 @@ import {
     withLabel,
 } from '../../FormFields/New';
 import { baseInputStyles } from './commonProps';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
@@ -22,7 +23,7 @@ type Props = {
 const DateFieldForForm =
     withDefaultFieldContainer()(
         withLabel({
-            onGetCustomFieldLabeClass: () => 'dateLabel',
+            onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
         })(
             withDisplayMessages()(
                 withInternalChangeHandler()(
@@ -47,7 +48,7 @@ export const DateFieldForRelatedStages = ({
     };
     const calendarType = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;
-    const shouldShowError = (touched ?? saveAttempted);
+    const shouldShowError = (touched || saveAttempted);
     return (
         <DateFieldForForm
             label={scheduledLabel}
@@ -59,7 +60,7 @@ export const DateFieldForRelatedStages = ({
             styles={baseInputStyles}
             calendarWidth={350}
             onBlur={onBlur}
-            errorMessage={shouldShowError ? errorMessages?.scheduledAt : undefined}
+            errorMessage={shouldShowError && errorMessages?.scheduledAt}
             calendarType={calendarType}
             dateFormat={dateFormat}
         />
