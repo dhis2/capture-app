@@ -11,9 +11,25 @@ Given(/^you land on the view event page by having typed (.*)$/, (url) => {
     cy.visit(url);
 });
 
-Given('you select view changelog in the event overflow button', () => {
+When('you open the tracker program event changelog', () => {
     cy.get('[data-test="tracker-program-event-overflow-button"]').click();
-    cy.get('[data-test="tracker-program-event-changelog"] > a').click();
+    cy.get('[data-test="tracker-program-event-overflow-menu"]').within(() => {
+        cy.contains('View changelog').click();
+    });
+});
+
+When('you open the tracked entity changelog', () => {
+    cy.get('[data-test="tracked-entity-profile-overflow-button"]').click();
+        cy.get('[data-test="tracked-entity-profile-overflow-menu"]').within(() => {
+        cy.contains('View changelog').click();
+    });
+});
+
+When('you open the event program changelog', () => {
+    cy.get('[data-test="event-program-event-overflow-button"]').click();
+    cy.get('[data-test="event-program-event-overflow-menu"]').within(() => {
+    cy.contains('View changelog').click();
+    });
 });
 
 Then('the changelog modal should contain data', () => {
@@ -145,21 +161,5 @@ Then('the changelog data is sorted on Data item in ascending order', () => {
 
         const sorted = [...values].sort((a, b) => collator.compare(a, b));
         expect(values).to.deep.equal(sorted);
-    });
-});
-
-When('you open the tracked entity changelog', () => {
-    cy.get('[data-test="tracked-entity-profile-overflow-button"]').should('be.visible').click();
-        cy.get('[data-test="tracked-entity-profile-overflow-menu"]').should('be.visible');
-        cy.get('[data-test="tracked-entity-profile-overflow-menu"]').within(() => {
-        cy.contains('View changelog').click();
-    });
-});
-
-When('you open the event program changelog', () => {
-    cy.get('[data-test="event-program-event-overflow-button"]').should('be.visible').click();
-    cy.get('[data-test="event-program-event-overflow-menu"]').should('be.visible');
-    cy.get('[data-test="event-program-event-overflow-menu"]').within(() => {
-    cy.contains('View changelog').click();
     });
 });

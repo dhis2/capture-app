@@ -168,11 +168,14 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     icon={<IconMore16 />}
                     dataTest="event-program-event-overflow-button"
                     component={(
-                        <FlyoutMenu dense maxWidth="250px">
+                        <FlyoutMenu
+                            dense
+                            maxWidth="250px"
+                            dataTest="event-program-event-overflow-menu"
+                        >
                             <MenuItem
                                 label={i18n.t('View changelog')}
                                 suffix={null}
-                                data-test="event-program-event-changelog"
                                 onClick={() => {
                                     setChangeLogIsOpen(true);
                                     setActionsIsOpen(false);

@@ -36,11 +36,14 @@ export const OverflowMenuComponent = ({
                 secondary
                 dataTest="tracked-entity-profile-overflow-button"
                 component={
-                    <FlyoutMenu dense>
+                    <FlyoutMenu
+                        dense
+                        maxWidth="250px"
+                        dataTest={'tracked-entity-profile-overflow-menu'}
+                    >
                         {displayChangelog && (
                             <MenuItem
                                 label={i18n.t('View changelog')}
-                                data-test="tracked-entity-profile-changelog"
                                 onClick={() => {
                                     setChangelogIsOpen(true);
                                     setActionsIsOpen(false);

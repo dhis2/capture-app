@@ -3,14 +3,14 @@ Feature: The user interacts with the changelog widget
   @v>=41
   Scenario: The user can view an event changelog on the enrollment edit event
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     Then the number of changelog table rows should be 9
 
   @v>=41
   Scenario: The user can change the changelog page size
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you change the page size to 20
     Then the number of changelog table rows should be 19
@@ -21,7 +21,7 @@ Feature: The user interacts with the changelog widget
   @v>=41
   Scenario: The user can navigate between pages in the changelog
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you move to the next page
     Then the table footer should display page 2
@@ -31,7 +31,7 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: The user can filter the changelog by data item
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you select "Treatment card" from the data item filter flyout menu
     Then the filter pill should be visible with label "Treatment card"
@@ -40,7 +40,7 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: Only one filter can be applied at a time
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you select "HIV testing done" from the data item filter flyout menu
     Then the filter pill should be visible with label "HIV testing done"
@@ -51,7 +51,7 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: The filter remains active when sorting is applied
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you select "Disease Classification" from the data item filter flyout menu
     When you click the sort Date icon
@@ -61,7 +61,7 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: The user can remove the applied filter
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you select "Disease Classification" from the data item filter flyout menu
     Then the filter pill should be visible with label "Disease Classification"
@@ -72,7 +72,7 @@ Feature: The user interacts with the changelog widget
   @skip # Flaky test, fix in DHIS2-19814
   Scenario: The user can sort by Date
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you click the sort Date icon
     Then the changelog modal should contain data
@@ -81,7 +81,7 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: The user can sort by User
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you click the sort User icon
     Then the changelog modal should contain data
@@ -90,7 +90,7 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: The user can sort by Data item
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    And you select view changelog in the event overflow button
+    When you open the tracker program event changelog
     Then the changelog modal should contain data
     When you click the sort Data item icon
     Then the changelog modal should contain data
