@@ -3,6 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { getFilterByType } from './convertors';
+import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 export const convertToEventFilterQuery = ({
     filters,
@@ -36,6 +37,10 @@ export const convertToEventFilterQuery = ({
                     }),
                 );
                 return null;
+            }
+
+            if (typeof filter.isEmpty === 'boolean') {
+                return { ...toApiEmptyValueFilter(filter), dataItem: key };
             }
 
             if (filter.usingOptionSet) {
