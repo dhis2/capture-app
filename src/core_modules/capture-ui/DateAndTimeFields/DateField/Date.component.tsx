@@ -26,6 +26,7 @@ export class DateField extends React.Component<Props, State> {
             maxWidth,
             calendarWidth,
             inputWidth,
+            calendarMax,
             value,
             innerMessage,
             calendarType,
@@ -61,6 +62,7 @@ export class DateField extends React.Component<Props, State> {
                     onFocus={this.props.onFocus}
                     disabled={!!this.props.disabled}
                     locale={locale}
+                    maxDate={calendarMax}
                     {...errorProps as any}
                 />
             </div>
