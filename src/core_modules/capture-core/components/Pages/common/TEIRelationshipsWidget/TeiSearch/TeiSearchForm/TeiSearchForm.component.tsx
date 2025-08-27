@@ -102,26 +102,31 @@ class SearchFormPlain extends React.Component<Props, State> {
 
     validateForm() {
         if (!this.formInstance) {
-            log.error(errorCreator(SearchFormPlain.errorMessages.SEARCH_FORM_MISSING)({ SearchFormPlain }));
-            return false;
+            log.error(
+                errorCreator(
+                    SearchFormPlain.errorMessages.SEARCH_FORM_MISSING)({ Search: this }),
+            );
+            return {
+                error: true,
+                isValid: false,
+            };
         }
 
-        const isFormValid = this.formInstance.validateFormScrollToFirstFailedField({});
-        if (!isFormValid) {
-            return false;
+        let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
+
+        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance?.validateAndScrollToIfFailed();
+
+        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
+
+        if (isValid && this.props.searchGroup.unique) {
+            isValid = this.isSearchViaUniqueIdValid();
+            this.setState({ showMissingSearchCriteriaModal: !isValid });
         }
 
-        if (!this.orgUnitSelectorInstance) {
-            log.error(errorCreator(SearchFormPlain.errorMessages.NO_ITEM_SELECTED)({ SearchFormPlain }));
-            return false;
-        }
-
-        const isOrgUnitValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
-        if (!isOrgUnitValid) {
-            return false;
-        }
-
-        return true;
+        return {
+            isValid,
+            error: false,
+        };
     }
 
     static errorMessages = {
