@@ -83,7 +83,12 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 onBackToMainPage={onBackToAllEvents}
             />
             <div className={classes.contentContainer}>
-                <EventDetails eventAccess={eventAccess} onBackToAllEvents={onBackToAllEvents} />
+                <EventDetails
+                    eventAccess={eventAccess}
+                    programStage={programStage}
+                    onBackToViewEvent={onBackToViewEvent}
+                    onBackToAllEvents={onBackToAllEvents}
+                />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
                     programStage={programStage}

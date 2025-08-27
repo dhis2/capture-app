@@ -34,9 +34,13 @@ export const OverflowMenuComponent = ({
                 icon={<IconMore16 />}
                 small
                 secondary
-                dataTest="widget-profile-overflow-menu"
+                dataTest="tracked-entity-profile-overflow-button"
                 component={
-                    <FlyoutMenu dense>
+                    <FlyoutMenu
+                        dense
+                        maxWidth="250px"
+                        dataTest={'tracked-entity-profile-overflow-menu'}
+                    >
                         {displayChangelog && (
                             <MenuItem
                                 label={i18n.t('View changelog')}

@@ -124,12 +124,15 @@ const WidgetHeaderPlain = ({
                                 icon={<IconMore16 />}
                                 small
                                 secondary
-                                dataTest={'widget-event-edit-overflow-button'}
+                                dataTest={'tracker-program-event-overflow-button'}
                                 component={
-                                    <FlyoutMenu dense maxWidth="250px">
+                                    <FlyoutMenu
+                                        dense
+                                        maxWidth="250px"
+                                        dataTest={'tracker-program-event-overflow-menu'}
+                                    >
                                         <MenuItem
                                             label={i18n.t('View changelog')}
-                                            dataTest={'event-overflow-view-changelog'}
                                             suffix=""
                                             onClick={() => {
                                                 setChangeLogIsOpen(true);

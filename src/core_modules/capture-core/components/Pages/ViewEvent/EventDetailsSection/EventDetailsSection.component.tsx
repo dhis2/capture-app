@@ -166,8 +166,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     secondary
                     small
                     icon={<IconMore16 />}
+                    dataTest="event-program-event-overflow-button"
                     component={(
-                        <FlyoutMenu dense>
+                        <FlyoutMenu
+                            dense
+                            maxWidth="250px"
+                            dataTest="event-program-event-overflow-menu"
+                        >
                             <MenuItem
                                 label={i18n.t('View changelog')}
                                 suffix={null}
