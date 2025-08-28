@@ -19,22 +19,34 @@ type Props = {
 
 const useApiUtils = () => {
     const dataEngine = useDataEngine();
-    const { serverVersion, baseUrl } = useConfig();
+    // We need the ABSOLUTE base url for the instance when building the IndexedDB caches
+    // The baseUrl of the root object returned by useConfig is not reliable here as it returns a relative url for: some backend versions (v41 and below) / app-shell versions
+    // The latest app-shell will inject the backend's contextPath into the app as baseUrl for backend versions 42 and above, but since we currently need support for older backends we are grabbing the contextPath directly
+    const { serverVersion, systemInfo: { contextPath: absoluteBaseUrl } = {} } = useConfig();
     const { fromClientDate } = useTimeZoneConversion();
     return useMemo(() => ({
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
+        // UPDATE 2025.08.28: This is actually getting the RELATIVE api path in a prod enviroment. When we update app-runtime, it will probably get the absolute path for backend versions 42 and above.
+        // This is used in the epics for making api requests, so should not matter if absolute or relative, but could be good to refactor at some point.
         absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
         serverVersion,
-        baseUrl,
+        absoluteBaseUrl,
         fromClientDate,
-    }), [dataEngine, serverVersion, baseUrl, fromClientDate]);
+    }), [dataEngine, serverVersion, absoluteBaseUrl, fromClientDate]);
 };
 
 export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
-    const { querySingleResource, mutate, absoluteApiPath, serverVersion, baseUrl, fromClientDate } = useApiUtils();
+    const {
+        querySingleResource,
+        mutate,
+        absoluteApiPath,
+        serverVersion,
+        absoluteBaseUrl,
+        fromClientDate,
+    } = useApiUtils();
 
     const { navigate } = useNavigate();
 
@@ -53,7 +65,7 @@ export const AppLoader = (props: Props) => {
                 onCacheExpired,
                 querySingleResource,
                 serverVersion,
-                baseUrl,
+                baseUrl: absoluteBaseUrl,
             });
             const store = await getStore(
                 navigate, {
@@ -89,7 +101,7 @@ export const AppLoader = (props: Props) => {
         navigate,
         serverVersion,
         fromClientDate,
-        baseUrl,
+        absoluteBaseUrl,
     ]);
 
     useEffect(() => {
