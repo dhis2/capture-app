@@ -7,12 +7,12 @@ import { WidgetBreakingTheGlassComponent } from './WidgetBreakingTheGlass.compon
 const glassBreakRequest = {
     resource: 'tracker/ownership/override',
     type: 'create',
-    data: ({ teiId, teiParamKey, program, reason }: any) => ({
+    params: ({ teiId, teiParamKey, program, reason }: any) => ({
         [teiParamKey]: teiId,
         program,
         reason,
     }),
-} as const;
+} as any;
 
 export const WidgetBreakingTheGlass = ({
     teiId,
