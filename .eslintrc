@@ -1,5 +1,5 @@
 {
-    "parser": "@babel/eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2017,
         "sourceType": "module",
@@ -9,11 +9,11 @@
     },
     "extends": [
         "airbnb",
-        "plugin:flowtype/recommended",
         "plugin:react-hooks/recommended",
-        "react-app"
+        "react-app",
+        "plugin:@typescript-eslint/recommended"
     ],
-    "plugins": ["flowtype"],
+    "plugins": ["@typescript-eslint"],
     "env": {
         "browser": true,
         "jest": true
@@ -33,6 +33,18 @@
         "Cypress": true
     },
     "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": true
+            }
+        ],
+        "@typescript-eslint/no-unused-expressions": 0,
+        "@typescript-eslint/no-explicit-any": "warn",
         "indent": [2, 4],
         "max-len": [
             1,
@@ -62,7 +74,7 @@
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
         "react/prefer-es6-class": [1, "always"],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
         "react/forbid-prop-types": [0],
         "no-param-reassign": 0,
@@ -70,14 +82,6 @@
         "import/prefer-default-export": 0,
         "react/prefer-stateless-function": 0,
         "no-unused-expressions": 0,
-        "no-unused-vars": [
-            "error",
-            {
-                "vars": "all",
-                "args": "after-used",
-                "ignoreRestSiblings": true
-            }
-        ],
         "react/jsx-no-bind": 0,
         "react/require-default-props": 0,
         "import/no-extraneous-dependencies": "off",
@@ -128,13 +132,16 @@
                 ]
             }
         ],
-        "import/extensions": ["error", "never"]
+        "import/extensions": ["error", "ignorePackages", { "js": "never", "jsx": "never", "ts": "never", "tsx": "never" }]
     },
     "settings": {
         "import/resolver": {
-            "node": { "extensions": [".js", ".mjs"] },
+            "typescript": {
+                "alwaysTryTypes": true,
+                "project": "./tsconfig.json"
+            },
             "webpack": {
-                "config": "config/eslint/webpack.config.js"
+                "config": "./config/eslint/webpack.config.js"
             },
             "exports": {}
         },
