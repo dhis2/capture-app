@@ -22,7 +22,7 @@ const getStyles: Readonly<any> = {
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
 
-const DownloadDialogPlain = ({ open, onClose, request, absoluteApiPath, classes }: Props) => {
+const DownloadDialogPlain = ({ open, onClose, request = {} as any, absoluteApiPath, classes }: Props) => {
     const getUrlEncodedParamsString = (params: any) => {
         const { filter, ...restParams } = params;
         const searchParams = new URLSearchParams(restParams);
@@ -37,7 +37,6 @@ const DownloadDialogPlain = ({ open, onClose, request, absoluteApiPath, classes 
     };
 
     const renderButtons = () => {
-        if (!request?.url) return null;
         const url = `${absoluteApiPath}/${request.url}`;
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
