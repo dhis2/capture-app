@@ -23,6 +23,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
+import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 type ColumnForConverterBase = {|
     id: string,
@@ -120,6 +121,10 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
                 }),
             );
             return null;
+        }
+
+        if (typeof filter.isEmpty === 'boolean') {
+            return { ...toApiEmptyValueFilter(filter), dataItem: key };
         }
 
         if (filter.usingOptionSet) {
