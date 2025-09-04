@@ -13,7 +13,7 @@ import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { fetchEnrollments, breakTheGlassSuccess } from './EnrollmentPage.actions';
-import { useResetProgramId } from '../../ScopeSelector';
+import { useResetTeiId } from '../../ScopeSelector';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
@@ -123,7 +123,7 @@ export const MissingMessage = withStyles(getStyles)(({
         navigateToEventWorkingList,
     } = useNavigations();
     const { missingStatus } = useMissingStatus();
-    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
+    const { resetTeiId } = useResetTeiId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { programId, teiId, enrollmentId } = useLocationQuery();
 
@@ -189,7 +189,7 @@ export const MissingMessage = withStyles(getStyles)(({
                     dispatch(breakTheGlassSuccess({ teiId, programId }));
                     dispatch(fetchEnrollments());
                 }}
-                onCancel={resetProgramIdAndEnrollmentContext}
+                onCancel={() => resetTeiId('search')}
             />
         }
 
