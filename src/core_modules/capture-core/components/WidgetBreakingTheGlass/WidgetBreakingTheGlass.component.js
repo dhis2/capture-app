@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
     NoticeBox,
     TextAreaField,
@@ -37,6 +37,7 @@ const WidgetBreakingTheGlassPlain = ({
     const reasonChangeHandler = useCallback(({ value }) => {
         setReason(value);
     }, [setReason]);
+    const disabled = useMemo(() => reason.length === 0, [reason]);
 
     return (
         <div data-test="breaking-the-glass-widget" className={classes.background}>
@@ -60,10 +61,12 @@ const WidgetBreakingTheGlassPlain = ({
                         onChange={reasonChangeHandler}
                         value={reason}
                         inputWidth="680px"
+                        error={disabled}
+                        required
                     />
                     <br />
                     <ButtonStrip>
-                        <Button onClick={() => onBreakingTheGlass(reason)}>
+                        <Button onClick={() => onBreakingTheGlass(reason)} disabled={disabled} primary>
                             {i18n.t('Check for enrollments')}
                         </Button>
                         <Button secondary onClick={onCancel}>
