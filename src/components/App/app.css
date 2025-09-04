@@ -1,6 +1,10 @@
 body {
-    overflow-x: hidden;
     font-family: Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden !important /* iOS workaround. Only works for backend versions prior to 42 */
+}
+
+html {
+    overflow: hidden !important /* iOS workaround. Only works for backend versions prior to 42 */
 }
 
 textarea, input, button {

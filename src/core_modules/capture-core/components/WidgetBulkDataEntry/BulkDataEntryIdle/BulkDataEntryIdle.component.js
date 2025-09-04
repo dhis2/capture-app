@@ -8,11 +8,9 @@ import { Widget } from '../../Widget';
 
 const styles = () => ({
     container: {
-        width: '260px',
-        minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
-        overflowY: 'scroll',
+        overflowY: 'auto',
     },
     table: {
         borderWidth: '1px 0 0 0 !important',
@@ -22,6 +20,9 @@ const styles = () => ({
             cursor: 'pointer',
             textDecoration: 'underline',
         },
+    },
+    configChevronCell: {
+        textAlign: 'right',
     },
 });
 
@@ -44,7 +45,9 @@ const BulkDataEntryIdleComponenetPlain = ({
                                 {config.subtitle && <div>{config.subtitle}</div>}
                             </DataTableCell>
                             <DataTableCell>
-                                <IconChevronRight16 />
+                                <div className={classes.configChevronCell}>
+                                    <IconChevronRight16 />
+                                </div>
                             </DataTableCell>
                         </DataTableRow>
                     ))}

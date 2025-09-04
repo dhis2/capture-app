@@ -1,0 +1,17 @@
+/* 
+    Using container queries doesn't work in our material ui withStyles. 
+    Media queries could have been used instead, but they are very hard to maintain so I'm opting
+    to use container queryies in css directly.
+    Info about container queries here: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries 
+*/
+
+@container (width <= 1015px) {
+    #left-column-enrollment-page-layout {
+        min-width: 0px;
+    }
+    #right-column-enrollment-page-layout {
+        min-width: 0px;
+        max-width: none;
+        width: 100%;
+    }    
+}
