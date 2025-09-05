@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "103.3.3",
+    "version": "103.4.0",
     "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
@@ -10,7 +10,7 @@
     ],
     "dependencies": {
         "@dhis2-ui/calendar": "^10.7.6",
-        "@dhis2/rules-engine-javascript": "103.3.3",
+        "@dhis2/rules-engine-javascript": "103.4.0",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
