@@ -8,11 +8,9 @@ import { Widget } from '../../Widget';
 
 const styles = () => ({
     container: {
-        width: '260px',
-        minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
-        overflowY: 'scroll',
+        overflowY: 'auto',
         border: `2px solid ${colors.yellow200}`,
         borderRadius: '4px',
     },
