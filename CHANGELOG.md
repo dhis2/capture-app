@@ -1,3 +1,10 @@
+## [103.3.3](https://github.com/dhis2/capture-app/compare/v103.3.2...v103.3.3) (2025-09-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] prod env fix for indexedDB caching ([#4370](https://github.com/dhis2/capture-app/issues/4370)) ([d67b89c](https://github.com/dhis2/capture-app/commit/d67b89cd3a95a13b3bb13e24ea4d21033641bf8a))
+
 ## [103.3.2](https://github.com/dhis2/capture-app/compare/v103.3.1...v103.3.2) (2025-09-04)
 
 
