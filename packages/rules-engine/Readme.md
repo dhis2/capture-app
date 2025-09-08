@@ -43,14 +43,6 @@ To build or update the library, run:
 yarn build
 ```
 
-#### 3. Build the library Definition
-
-To build or update the library flow definitions, run:
-
-```
-yarn build:flow
-```
-
 ## Commits
 
 We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.4/) as convention for our commit messages.
