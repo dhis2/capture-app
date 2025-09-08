@@ -1,0 +1,1 @@
+export { convertToClientConfig } from './apiTEIFilterToClientConfigConverter';

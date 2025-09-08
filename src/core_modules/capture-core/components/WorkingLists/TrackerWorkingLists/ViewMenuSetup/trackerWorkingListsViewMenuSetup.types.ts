@@ -1,0 +1,27 @@
+import type { ReactElement } from 'react';
+import type { TrackerWorkingListsReduxProviderOutputProps } from '../ReduxProvider';
+import type { UpdateList } from '../../WorkingListsCommon';
+import type { LoadTeiView } from '../types';
+
+type ExtractedProps = {
+    onLoadView: LoadTeiView,
+    onUpdateList: UpdateList,
+    storeId: string,
+};
+
+type RestProps = Omit<TrackerWorkingListsReduxProviderOutputProps, keyof ExtractedProps>;
+
+export type Props = RestProps & ExtractedProps;
+
+export type TrackerWorkingListsViewMenuSetupOutputProps = RestProps & {
+    onLoadView: LoadTeiView,
+    onUpdateList: UpdateList
+    customUpdateTrigger?: string,
+    allRowsAreSelected: boolean,
+    selectedRows: { [key: string]: boolean },
+    onRowSelect: (id: string) => void,
+    onSelectAll: (rows: string[]) => void,
+    selectionInProgress: boolean,
+    bulkActionBarComponent: ReactElement<any>,
+};
+
