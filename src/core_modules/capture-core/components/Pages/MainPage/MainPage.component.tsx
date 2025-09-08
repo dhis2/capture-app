@@ -1,6 +1,7 @@
 import React, { useMemo, type ComponentType } from 'react';
 import { colors, spacers } from '@dhis2/ui';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 import type { ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
@@ -16,6 +17,7 @@ import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
 import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
+import './mainPage.css';
 
 const styles: Readonly<any> = {
     listContainer: {
@@ -28,12 +30,18 @@ const styles: Readonly<any> = {
         flexWrap: 'wrap',
         gap: spacers.dp16,
         padding: spacers.dp16,
+        containerType: 'inline-size',
     },
-    left: {
-        flex: 1,
+    leftColumn: {
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 740,
+        minWidth: 740,
     },
-    right: {
-        width: '260px',
+    rightColumn: {
+        flexGrow: 0,
+        flexShrink: 0,
+        width: 260,
     },
     searchBoxWrapper: {
         height: 'fit-content',
@@ -97,27 +105,31 @@ const MainPagePlain = ({
                         <WithoutCategorySelectedMessage programId={programId} />
                     )}
                     {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
-                        <div className={classes.listContainer} data-test={'main-page-working-list'}>
-                            <WorkingListsType
-                                programId={programId}
-                                orgUnitId={orgUnitId}
-                                selectedTemplateId={selectedTemplateId}
-                                onChangeTemplate={onChangeTemplate}
-                                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
-                            />
-                            <WidgetBulkDataEntry
-                                programId={programId}
-                                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
-                            />
+                        <div className={classes.container} data-test={'main-page-working-list'}>
+                            <div className={classNames(classes.leftColumn, 'left-column-main-page')}>
+                                <WorkingListsType
+                                    programId={programId}
+                                    orgUnitId={orgUnitId}
+                                    selectedTemplateId={selectedTemplateId}
+                                    onChangeTemplate={onChangeTemplate}
+                                    onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                                />
+                            </div>
+                            <div className={classNames(classes.rightColumn, 'right-column-main-page')}>
+                                <WidgetBulkDataEntry
+                                    programId={programId}
+                                    onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                                />
+                            </div>
                         </div>
                     )}
                 </>
             ) : (
                 <div className={classes.container}>
-                    <div className={`${classes.left} ${classes.searchBoxWrapper}`}>
+                    <div className={classNames(classes.leftColumn, 'left-column-main-page', classes.searchBoxWrapper)}>
                         <SearchBox programId={programId} />
                     </div>
-                    <div className={classes.right}>
+                    <div className={classNames(classes.rightColumn, 'right-column-main-page')}>
                         <TemplateSelector />
                         <br />
                         <WidgetBulkDataEntry

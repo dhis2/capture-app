@@ -9,6 +9,12 @@ const getStyles = (theme: any) => ({
         fontFamily: theme.typography.fontFamily,
         fontSize: theme.typography.pxToRem(16),
     },
+    // See https://dhis2.atlassian.net/browse/DHIS2-20078
+    iOSWorkaround: {
+        '@supports (-webkit-touch-callout: none)': {
+            height: 100,
+        },
+    },
 });
 
 type PlainProps = Record<string, never>;
@@ -16,13 +22,16 @@ type PlainProps = Record<string, never>;
 type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const Index = ({ classes }: Props) => (
-    <div
-        className={classes.app}
-        dir={systemSettingsStore.get().dir}
-    >
-        <AppPagesLoader />
-        <FeedbackBar />
-    </div>
+    <>
+        <div
+            className={classes.app}
+            dir={systemSettingsStore.get().dir}
+        >
+            <AppPagesLoader />
+            <FeedbackBar />
+        </div>
+        <div className={classes.iOSWorkaround} />
+    </>
 );
 Index.displayName = 'AppContents';
 

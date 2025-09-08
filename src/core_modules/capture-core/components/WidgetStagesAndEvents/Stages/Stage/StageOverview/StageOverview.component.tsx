@@ -15,9 +15,10 @@ import { convertValue as convertValueClientToView } from '../../../../../convert
 import { dataElementTypes } from '../../../../../metaData';
 import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
+        flexWrap: 'wrap',
         alignItems: 'center',
         padding: '0',
         justifyContent: 'space-between',
@@ -38,6 +39,7 @@ const styles = {
     },
     infoItems: {
         display: 'flex',
+        flexWrap: 'wrap',
         gap: spacers.dp12,
     },
     indicatorIcon: {
@@ -94,65 +96,66 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
 
-    return (<div className={classes.container}>
-        <div className={classes.infoTitles}>
-            {
-                icon && (
-                    <div className={classes.icon}>
-                        <NonBundledDhis2Icon
-                            name={icon.name}
-                            color={icon.color}
-                            width={32}
-                            height={32}
-                            cornerRadius={5}
-                        />
-                    </div>
-                )
-            }
-            <div />
+    return (
+        <div className={classes.container}>
+            <div className={classes.infoTitles}>
+                {
+                    icon && (
+                        <div className={classes.icon}>
+                            <NonBundledDhis2Icon
+                                name={icon.name}
+                                color={icon.color}
+                                width={32}
+                                height={32}
+                                cornerRadius={5}
+                            />
+                        </div>
+                    )
+                }
+                <div />
 
-            <div className={classes.title}>
-                {title}
+                <div className={classes.title}>
+                    {title}
+                </div>
+                {description &&
+                    <Tooltip
+                        content={description}
+                        openDelay={100}
+                    >
+                        <div className={classes.descriptionIcon}>
+                            <IconInfo16 />
+                        </div>
+                    </Tooltip>
+                }
             </div>
-            {description &&
-                <Tooltip
-                    content={description}
-                    openDelay={100}
-                >
-                    <div className={classes.descriptionIcon}>
-                        <IconInfo16 />
+            <div className={classes.infoItems}>
+                <div className={classes.indicator}>
+                    {i18n.t('{{ count }} event', {
+                        count: totalEvents,
+                        defaultValue: '{{ count }} event',
+                        defaultValue_plural: '{{count}} events',
+                    })}
+                </div>
+                {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
+                    <div className={classes.indicatorIcon}>
+                        <IconWarning16 />
                     </div>
-                </Tooltip>
-            }
-        </div>
-        <div className={classes.infoItems}>
-            <div className={classes.indicator}>
-                {i18n.t('{{ count }} event', {
-                    count: totalEvents,
-                    defaultValue: '{{ count }} event',
-                    defaultValue_plural: '{{count}} events',
-                })}
+                    {i18n.t('{{ overdueEvents }} overdue', { overdueEvents })}
+                </div> : null}
+                {scheduledEvents > 0 ? <div className={classes.indicator}>
+                    <div className={classes.indicatorIcon}>
+                        <IconCalendar16 />
+                    </div>
+                    {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
+                </div> : null}
+                {totalEvents > 0 && <div className={cx(classes.indicator)}>
+                    <div className={classes.indicatorIcon}>
+                        <IconClockHistory16 />
+                    </div>
+                    {getLastUpdatedAt(events, fromServerDate)}
+                </div>}
             </div>
-            {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
-                <div className={classes.indicatorIcon}>
-                    <IconWarning16 />
-                </div>
-                {i18n.t('{{ overdueEvents }} overdue', { overdueEvents })}
-            </div> : null}
-            {scheduledEvents > 0 ? <div className={classes.indicator}>
-                <div className={classes.indicatorIcon}>
-                    <IconCalendar16 />
-                </div>
-                {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
-            </div> : null}
-            {totalEvents > 0 && <div className={cx(classes.indicator)}>
-                <div className={classes.indicatorIcon}>
-                    <IconClockHistory16 />
-                </div>
-                {getLastUpdatedAt(events, fromServerDate)}
-            </div>}
-        </div>
-    </div>);
+        </div>);
 };
 
 export const StageOverview = withStyles(styles)(StageOverviewPlain);

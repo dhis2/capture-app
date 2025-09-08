@@ -2,6 +2,7 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
+import classNames from 'classnames';
 import type { Props } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
@@ -9,6 +10,7 @@ import { TemplateSelector } from '../../TemplateSelector';
 import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
+import './searchPage.css';
 
 const styles: Readonly<any> = {
     backButton: {
@@ -20,12 +22,18 @@ const styles: Readonly<any> = {
         flexWrap: 'wrap',
         margin: `0 ${spacers.dp16} 0`,
         gap: spacers.dp16,
+        containerType: 'inline-size',
     },
-    left: {
-        flex: 1,
+    leftColumn: {
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 740,
+        minWidth: 740,
     },
-    right: {
-        width: '260px',
+    rightColumn: {
+        flexGrow: 0,
+        flexShrink: 0,
+        width: 260,
     },
     searchBoxWrapper: {
         height: 'fit-content',
@@ -66,10 +74,16 @@ const SearchPagePlain = ({
                 </Button>
 
                 <div className={classes.container}>
-                    <div className={`${classes.left} ${classes.searchBoxWrapper}`}>
+                    <div
+                        id="left-column-search-page"
+                        className={classNames(
+                            classes.leftColumn,
+                            classes.searchBoxWrapper,
+                        )}
+                    >
                         <SearchBox programId={programId} />
                     </div>
-                    <div className={classes.right}>
+                    <div id="right-column-search-page" className={classes.rightColumn}>
                         <TemplateSelector />
                         <br />
                         <WidgetBulkDataEntry

@@ -1,3 +1,31 @@
+# [103.4.0](https://github.com/dhis2/capture-app/compare/v103.3.3...v103.4.0) (2025-09-05)
+
+
+### Features
+
+* [DHIS2-20077] Responsive layout ([#4373](https://github.com/dhis2/capture-app/issues/4373)) ([5f540a1](https://github.com/dhis2/capture-app/commit/5f540a14864d92ff79a74b54cfd6ffa570f91630))
+
+## [103.3.3](https://github.com/dhis2/capture-app/compare/v103.3.2...v103.3.3) (2025-09-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] prod env fix for indexedDB caching ([#4370](https://github.com/dhis2/capture-app/issues/4370)) ([d67b89c](https://github.com/dhis2/capture-app/commit/d67b89cd3a95a13b3bb13e24ea4d21033641bf8a))
+
+## [103.3.2](https://github.com/dhis2/capture-app/compare/v103.3.1...v103.3.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* [DHIS2-19877] filter rule engine values containing undefined ([#4290](https://github.com/dhis2/capture-app/issues/4290)) ([43d6005](https://github.com/dhis2/capture-app/commit/43d6005ad5e6ed6e7b3774bb755339341e39ad86))
+
+## [103.3.1](https://github.com/dhis2/capture-app/compare/v103.3.0...v103.3.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4363](https://github.com/dhis2/capture-app/issues/4363)) ([e53694b](https://github.com/dhis2/capture-app/commit/e53694bc24ffaa0dab05495f76bea634f806d698))
+
 # [103.3.0](https://github.com/dhis2/capture-app/compare/v103.2.7...v103.3.0) (2025-08-19)
 
 

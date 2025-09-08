@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-
 import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';
@@ -10,24 +10,28 @@ import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.componen
 import { OnlineList } from '../../List';
 import { ListViewMenu } from '../Menu';
 import type { Props } from './listViewMain.types';
+import './listViewMain.css';
 
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
 const getStyles: Readonly<any> = (theme: any) => ({
     topBarContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
-        padding: theme.typography.pxToRem(8),
+        padding: spacers.dp8,
+        gap: spacers.dp16,
     },
     topBarLeftContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
+        flexGrow: 1,
+        flexShrink: 1,
     },
     topBarRightContainer: {
+        flexGrow: 1,
+        flexShrink: 1,
+        justifyContent: 'flex-end',
         display: 'flex',
-        gap: '6px',
-        alignItems: 'center',
+        paddingTop: spacers.dp8,
+        paddingBottom: spacers.dp8,
+        gap: spacers.dp4,
     },
     paginationContainer: {
         fontSize: theme.typography.pxToRem(12),
@@ -57,6 +61,7 @@ class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof ge
 
         return (
             <div
+                id="top-bar-container-list-view-main"
                 className={classes.topBarContainer}
             >
                 <div
@@ -64,7 +69,10 @@ class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof ge
                 >
                     {filters}
                 </div>
-                <div className={classes.topBarRightContainer}>
+                <div
+                    id="top-bar-right-column-list-view-main"
+                    className={classes.topBarRightContainer}
+                >
                     <Actions customTopBarActions={customTopBarActions} />
                     <ColumnSelector
                         onSave={onSetColumnOrder}

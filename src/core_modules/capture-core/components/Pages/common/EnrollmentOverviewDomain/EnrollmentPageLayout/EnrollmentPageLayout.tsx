@@ -5,6 +5,7 @@ import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
+import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
     container: {
@@ -19,12 +20,15 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
     },
     columns: {
         display: 'flex',
+        flexWrap: 'wrap',
         gap: spacers.dp16,
+        containerType: 'inline-size',
     },
     leftColumn: {
         flexGrow: 3,
         flexShrink: 1,
-        width: 872,
+        flexBasis: 700,
+        minWidth: 700,
         display: 'flex',
         flexDirection: 'column',
         gap: spacers.dp16,
@@ -32,7 +36,9 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
     rightColumn: {
         flexGrow: 1,
         flexShrink: 1,
-        width: 360,
+        flexBasis: 300,
+        minWidth: 300,
+        maxWidth: 400,
         display: 'flex',
         flexDirection: 'column',
         gap: spacers.dp16,
@@ -123,12 +129,12 @@ const EnrollmentPageLayoutPlain = ({
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (
-                        <div className={classes.leftColumn}>
+                        <div id="left-column-enrollment-page-layout" className={classes.leftColumn}>
                             {leftColumnWidgets}
                         </div>
                     )}
                     {pageLayout.rightColumn && !!rightColumnWidgets?.length && (
-                        <div className={classes.rightColumn}>
+                        <div id="right-column-enrollment-page-layout" className={classes.rightColumn}>
                             {rightColumnWidgets}
                         </div>
                     )}

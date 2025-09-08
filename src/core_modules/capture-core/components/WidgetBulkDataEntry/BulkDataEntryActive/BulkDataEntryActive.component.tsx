@@ -7,8 +7,6 @@ import { Widget } from '../../Widget';
 
 const styles: Readonly<any> = {
     container: {
-        width: '260px',
-        minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
         overflowY: 'auto',

@@ -7,8 +7,6 @@ import { Widget } from '../../Widget';
 
 const styles: Readonly<any> = {
     container: {
-        width: '260px',
-        minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
         overflowY: 'auto',
@@ -27,6 +25,9 @@ const styles: Readonly<any> = {
             cursor: 'pointer',
             textDecoration: 'underline',
         },
+    },
+    configChevronCell: {
+        textAlign: 'right',
     },
 };
 
@@ -56,7 +57,9 @@ const BulkDataEntryIdleComponenetPlain = ({
                                 {config.subtitle && <div>{config.subtitle}</div>}
                             </DataTableCell>
                             <DataTableCell>
-                                <IconChevronRight16 />
+                                <div className={classes.configChevronCell}>
+                                    <IconChevronRight16 />
+                                </div>
                             </DataTableCell>
                         </DataTableRow>
                     ))}
