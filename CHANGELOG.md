@@ -1,3 +1,10 @@
+## [104.0.1](https://github.com/dhis2/capture-app/compare/v104.0.0...v104.0.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* [DHIS2-20009] make reason to check for enrollments mandatory when breaking the glass ([#4374](https://github.com/dhis2/capture-app/issues/4374)) ([7f79c65](https://github.com/dhis2/capture-app/commit/7f79c65bc44492ebc8f1d85a2b0a952700f37ce1))
+
 # [104.0.0](https://github.com/dhis2/capture-app/compare/v103.4.0...v104.0.0) (2025-09-08)
 
 
