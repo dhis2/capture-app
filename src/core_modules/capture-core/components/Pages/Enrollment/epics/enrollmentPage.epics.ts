@@ -255,10 +255,10 @@ export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleRes
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS),
         map(({ payload: { programOwnerId } }) => programOwnerId),
-        filter(programOwnerId => programOwnerId),
+        filter(Boolean),
         concatMap(programOwnerId => from(querySingleResource(captureScopeQuery(programOwnerId)))
             .pipe(
-                concatMap(({ organisationUnits }) => {
+                concatMap(({ organisationUnits }: any) => {
                     if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                         // Update orgUnitId in url
                         const { orgUnitId, ...restOfQueries } = getLocationQuery();
