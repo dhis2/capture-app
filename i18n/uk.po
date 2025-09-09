@@ -3,15 +3,17 @@
 # Wanda <wanda@frontlineaids.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
-# Éva Tamási, 2025
 # Nadiia <semchuk@aph.org.ua>, 2025
+# Éva Tamási, 2025
+# Nancy Espinoza, 2025
+# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2025\n"
+"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,35 +38,35 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
-msgid "Enrollment dashboard"
+msgid "Bulk data entry"
 msgstr ""
+
+msgid "Program overview"
+msgstr "Огляд програми"
+
+msgid "Active enrollments"
+msgstr "Активні реєстрації"
+
+msgid "Completed enrollments"
+msgstr "Завершені реєстрації"
+
+msgid "Cancelled enrollments"
+msgstr "Скасовані реєстрації"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Enrollment dashboard"
+msgstr "Панель реєстрації"
 
 msgid "View event"
 msgstr ""
 
 msgid "Edit event"
-msgstr ""
+msgstr "Редагувати подію"
 
 msgid "New event"
 msgstr "Нова подія"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "Пошук"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -144,8 +146,13 @@ msgstr "Реєстрація"
 msgid "Complete event"
 msgstr ""
 
-msgid "A value is required"
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
 msgstr ""
+
+msgid "A value is required"
+msgstr "Обов'язкове поле"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -193,7 +200,7 @@ msgid "Notes"
 msgstr "Примітки"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Основна інформація"
 
 msgid "Status"
 msgstr "Статус"
@@ -205,6 +212,9 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "Saving to {{programName}}"
 msgstr ""
 
 msgid ""
@@ -229,6 +239,9 @@ msgstr "Завершено"
 msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Save and add another"
 msgstr ""
 
@@ -239,7 +252,7 @@ msgid "Finish"
 msgstr "Закінчити"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Зберегти без завершення"
 
 msgid "Complete"
 msgstr "Завершене"
@@ -426,13 +439,13 @@ msgid "to"
 msgstr "до"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "Дні в майбутньому"
 
 msgid "From"
 msgstr "Від"
 
 msgid "Days in the past"
-msgstr ""
+msgstr "Дні в минулому"
 
 msgid "To"
 msgstr "До"
@@ -456,10 +469,10 @@ msgid "Last 3 months"
 msgstr "Останні 3 місяці"
 
 msgid "Absolute range"
-msgstr ""
+msgstr "Абсолютний діапазон"
 
 msgid "Relative range"
-msgstr ""
+msgstr "Відносний діапазон"
 
 msgid "Max"
 msgstr "Макс"
@@ -468,7 +481,7 @@ msgid "Min"
 msgstr "Мін"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Містить текст"
 
 msgid "Yes"
 msgstr "Так"
@@ -531,19 +544,19 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Стовпці для відображення в таблиці"
 
 msgid "Column"
 msgstr "Стовпчик"
 
 msgid "Visible"
-msgstr ""
+msgstr "Видимі колонки"
 
 msgid "Update"
 msgstr "Оновити"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Скинути фільтр"
 
 msgid "Remove filter"
 msgstr ""
@@ -564,13 +577,13 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
-msgstr ""
+msgstr "Інші фільтри"
 
 msgid "Stage filters"
 msgstr ""
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Рядків на сторінку"
 
 msgid "Could not get organisation unit"
 msgstr ""
@@ -588,7 +601,7 @@ msgid "You don't have access to write notes"
 msgstr ""
 
 msgid "Write note"
-msgstr ""
+msgstr "Створіть примітку"
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -603,16 +616,13 @@ msgid "No feedback for this enrollment yet"
 msgstr ""
 
 msgid "No indicator output for this enrollment yet"
-msgstr ""
+msgstr "Індикатори для цієї реєстрації ще не розраховано"
 
 msgid "Quick actions"
-msgstr ""
-
-msgid "New Event"
-msgstr ""
+msgstr "Швидкі дії"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Запланувати подію"
 
 msgid "Make referral"
 msgstr "Зробити направлення"
@@ -707,7 +717,7 @@ msgid "Schedule"
 msgstr "Запланувати"
 
 msgid "Refer"
-msgstr ""
+msgstr "Перенаправити"
 
 msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
@@ -716,7 +726,7 @@ msgid "Cancel without saving"
 msgstr "Скасувати без збереження"
 
 msgid "Choose a stage for a new event"
-msgstr ""
+msgstr "Обери етап для нової події"
 
 msgid "Program Stages could not be loaded"
 msgstr ""
@@ -733,33 +743,37 @@ msgid ""
 msgstr ""
 
 msgid "Get started with Capture app"
-msgstr ""
+msgstr "Почніть роботу з додатком Фіксація"
 
 msgid "Report data"
-msgstr ""
+msgstr "Робота з даними"
 
 msgid ""
 "Choose a program and organisation unit to see existing data and create new "
 "records."
 msgstr ""
+"Оберіть програму та організаційний підрозділ, щоб переглянути наявні дані та"
+" створити нові записи."
 
 msgid "Click 'Search'. For program-specific results, choose a program first."
 msgstr ""
+"Натисніть «Пошук». Щоб отримати результати, пов’язані з конкретною "
+"програмою, спершу оберіть програму."
 
 msgid "Learn more about Capture app"
-msgstr ""
+msgstr "Дізнайтеся більше про додаток Фіксація"
 
 msgid "Please select {{category}}."
 msgstr ""
 
 msgid "Or see all records accessible to you in {{program}} "
-msgstr ""
+msgstr "Або перегляньте усі доступні вам записи в програмі {{program}} "
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Будь-ласка, оберіть організаційний підрозділ."
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -813,7 +827,7 @@ msgid "Show all"
 msgstr "Показати все"
 
 msgid "Program"
-msgstr "Program"
+msgstr "Програма"
 
 msgid "Organisation Unit"
 msgstr "Організаційний підрозділ"
@@ -837,7 +851,7 @@ msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Зареєструвати новий {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Реєструвати"
@@ -852,6 +866,9 @@ msgid "event"
 msgstr "подія"
 
 msgid "You don't have access to edit this event"
+msgstr ""
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
 msgstr ""
 
 msgid "View changelog"
@@ -941,6 +958,12 @@ msgstr ""
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Немає вибраного"
+
+msgid "Choose an organisation unit"
+msgstr "Оберіть організаційний підрозділ"
+
 msgid "Clear selection"
 msgstr ""
 
@@ -952,12 +975,14 @@ msgstr ""
 
 msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
+"Частину програм відфільтровано відповідно до вибраного організаційного "
+"підрозділу"
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Показати всі програми"
 
 msgid "Choose a program"
-msgstr ""
+msgstr "Оберіть програму"
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -982,8 +1007,7 @@ msgid "all programs"
 msgstr ""
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
 
 msgid "No searchable attributes for {{trackedEntityName}}"
@@ -992,7 +1016,8 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
 
 msgid "Create new"
@@ -1089,8 +1114,14 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Enrollment actions"
+msgid "Unsaved changes"
 msgstr ""
+
+msgid "Continue data entry"
+msgstr ""
+
+msgid "Enrollment actions"
+msgstr "Дії щодо реєстрації"
 
 msgid "We are processing your request."
 msgstr ""
@@ -1105,10 +1136,10 @@ msgid "Reactivate"
 msgstr ""
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "Позначити реєстрацію як відмінену"
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Позначити реєстрацію як незавершену"
 
 msgid "You do not have access to delete this enrollment"
 msgstr ""
@@ -1211,9 +1242,6 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1227,13 +1255,13 @@ msgid "program or stage is invalid"
 msgstr ""
 
 msgid "Notes about this enrollment"
-msgstr ""
+msgstr "Примітки щодо цієї реєстрації"
 
 msgid "Write a note about this enrollment"
-msgstr ""
+msgstr "Напишіть примітку до цієї реєстрації"
 
 msgid "This enrollment doesn't have any notes"
-msgstr ""
+msgstr "Ця реєстрація не має приміток"
 
 msgid "Error"
 msgstr "Помилка"
@@ -1387,7 +1415,7 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
-msgstr ""
+msgstr "Профіль{{trackedEntityTypeName}}а"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -1449,6 +1477,9 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr ""
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
@@ -1492,7 +1523,7 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
 msgid "Stages and Events"
-msgstr ""
+msgstr "Етапи і Події"
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr ""
@@ -1639,12 +1670,15 @@ msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
+msgstr "Завантажити дані…"
 
 msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
 
 msgid "Complete events"
@@ -1671,10 +1705,10 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1685,10 +1719,10 @@ msgid ""
 msgstr ""
 
 msgid "Owner organisation unit"
-msgstr ""
+msgstr "Організаційний підрозділ - власник"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Дата Реєстрації"
 
 msgid "Inactive"
 msgstr "Неактивне"
@@ -1700,6 +1734,9 @@ msgid "Follow up"
 msgstr "Подальші дії"
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid ""
@@ -1740,9 +1777,6 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1840,24 +1874,11 @@ msgstr ""
 msgid "an error occurred loading the working lists"
 msgstr ""
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "Вибрано {{count}}"
-msgstr[1] "Вибрано {{count}}"
-msgstr[2] "Вибрано {{count}}"
-msgstr[3] "Вибрано {{count}}"
-
-msgid "Deselect all"
-msgstr "Скасувати вибір усіх"
-
 msgid "Update view"
 msgstr ""
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Зберегти поточний вигляд"
 
 msgid "Save current view as..."
 msgstr ""
@@ -1885,6 +1906,31 @@ msgstr ""
 
 msgid "Show All"
 msgstr ""
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "Вибрано {{count}}"
+msgstr[1] "Вибрано {{count}}"
+msgstr[2] "Вибрано {{count}}"
+msgstr[3] "Вибрано {{count}}"
+
+msgid "Deselect all"
+msgstr "Скасувати вибір усіх"
 
 msgid "Download as JSON"
 msgstr ""

@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Merethe Wollan Blisten, 2024
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
+# Merethe Wollan Blisten, 2025
 # Karoline Tufte Lien <karoline@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -36,6 +36,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Aktive registreringer"
+
+msgid "Completed enrollments"
+msgstr "Fullførte registreringer"
+
+msgid "Cancelled enrollments"
+msgstr "Avbrutte registreringer"
+
+msgid "Search"
+msgstr "Søk"
+
 msgid "Enrollment dashboard"
 msgstr "Registreringsdashbord"
 
@@ -47,24 +65,6 @@ msgstr "Rediger hendelse"
 
 msgid "New event"
 msgstr "Ny hendelse"
-
-msgid "Active enrollments"
-msgstr "Aktive registreringer"
-
-msgid "Completed enrollments"
-msgstr "Fullførte registreringer"
-
-msgid "Cancelled enrollments"
-msgstr "Avbrutte registreringer"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}}-liste"
-
-msgid "Search"
-msgstr "Søk"
-
-msgid "Working List"
-msgstr "Arbeidsliste"
 
 msgid "Event list"
 msgstr "Hendelsesliste"
@@ -144,6 +144,11 @@ msgstr "Registrering"
 msgid "Complete event"
 msgstr "Fullfør hendelse"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "En verdi kreves"
 
@@ -207,6 +212,9 @@ msgstr "Tildelt programbruker"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Lagrer i {{programName}} i {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -233,6 +241,9 @@ msgid "Please add or cancel the note before saving the event"
 msgstr ""
 "Du må legge til eller avbryt registreringen i notatet før hendelsen kan "
 "lagres. "
+
+msgid "Please provide an valid organisation unit"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Lagre og legg til en til"
@@ -620,9 +631,6 @@ msgstr "Ingen indikatorresultat for denne registreringen enda"
 msgid "Quick actions"
 msgstr "Snarveier"
 
-msgid "New Event"
-msgstr "Ny hendelse"
-
 msgid "Schedule an event"
 msgstr "Planlegg en hendelse"
 
@@ -881,6 +889,9 @@ msgstr "hendelse"
 msgid "You don't have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "Vis endringslogg"
 
@@ -968,6 +979,12 @@ msgstr "Ingen resultater funnet for"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Ingen valgt"
+
+msgid "Choose an organisation unit"
+msgstr "Velg en organisasjonsenhet"
+
 msgid "Clear selection"
 msgstr "Fjern valg"
 
@@ -1009,11 +1026,8 @@ msgid "all programs"
 msgstr "alle programmer"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
-" bruker type"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1021,8 +1035,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Søk i alle programmer"
 
-msgid "If none of search results match, you can create a new "
-msgstr "Hvis ingen av søkeresultatene samsvarer, kan du opprette ny"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "Opprett ny"
@@ -1127,6 +1142,12 @@ msgid ""
 msgstr ""
 "Du må oppgi en grunn for å se etter registreringer i dette beskyttede "
 "programmet. All aktivitet vil bli logget."
+
+msgid "Unsaved changes"
+msgstr "Ikke lagrede endringer"
+
+msgid "Continue data entry"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Registreringshandlinger"
@@ -1259,9 +1280,6 @@ msgstr "Legg til koordinater"
 
 msgid "Add area"
 msgstr "Legg til område"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
@@ -1502,6 +1520,9 @@ msgstr "Denne fasen kan bare ha en hendelse"
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr "Det oppstå en feil ved sletting av hendelsen. "
 
@@ -1702,6 +1723,9 @@ msgstr "en feil oppstod ved lasting av arbeidslister"
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1726,10 +1750,10 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1756,6 +1780,9 @@ msgstr "Oppfølging"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Velg en programfase å filtrere etter {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1794,9 +1821,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1882,17 +1906,6 @@ msgstr "Arbeidslisten kunne ikke oppdateres"
 msgid "an error occurred loading the working lists"
 msgstr "det oppstod en feil ved lasting av arbeidslistene"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "det oppstod en feil ved lasting av lister over sporede enheter"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} valgt"
-msgstr[1] "{{count}} valgt"
-
-msgid "Deselect all"
-msgstr "Fjern valg"
-
 msgid "Update view"
 msgstr "Oppdater visning"
 
@@ -1925,6 +1938,29 @@ msgstr "Vis mindre"
 
 msgid "Show All"
 msgstr "Vis alle"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} valgt"
+msgstr[1] "{{count}} valgt"
+
+msgid "Deselect all"
+msgstr "Fjern valg"
 
 msgid "Download as JSON"
 msgstr "Last ned i JSON format"

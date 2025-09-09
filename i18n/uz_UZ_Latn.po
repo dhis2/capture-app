@@ -1,11 +1,12 @@
 # 
 # Translators:
+# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -35,6 +36,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "Izlash"
+
 msgid "Enrollment dashboard"
 msgstr ""
 
@@ -46,24 +65,6 @@ msgstr "Hodisa/tadbirni tahrirlang"
 
 msgid "New event"
 msgstr "Yangi hodisa"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "Izlash"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -143,6 +144,11 @@ msgstr "Roʼyxatga olish"
 msgid "Complete event"
 msgstr ""
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "Qiymat talab qilinadi"
 
@@ -206,6 +212,9 @@ msgstr "Vakolat berilgan shaxs"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -230,6 +239,9 @@ msgid "Completed"
 msgstr "Toʼldirildi"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -949,6 +961,12 @@ msgstr ""
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Biror nima tanlanmagan"
+
+msgid "Choose an organisation unit"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1101,6 +1119,12 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
+msgid "Unsaved changes"
+msgstr "Saqlanmagan oʼzgartirishlar"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1221,9 +1245,6 @@ msgid "Add coordinates"
 msgstr ""
 
 msgid "Add area"
-msgstr ""
-
-msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1669,7 +1690,7 @@ msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Номаълум хатолик юз берди"
 
 msgid "An error occurred while completing events"
 msgstr ""

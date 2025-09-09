@@ -1,0 +1,1 @@
+export { SearchGroupFactory } from './SearchGroupFactory';

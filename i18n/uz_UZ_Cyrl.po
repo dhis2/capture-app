@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Sharaf Yuldashev, 2024
-# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
 # Philip Larsen Donnelly, 2025
+# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2025\n"
+"Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Фаол Қайдномалар"
+
+msgid "Completed enrollments"
+msgstr "Якунларган Қайдномалар"
+
+msgid "Cancelled enrollments"
+msgstr "Бекор қилинган Қайдномалар"
+
+msgid "Search"
+msgstr "Излаш"
+
 msgid "Enrollment dashboard"
 msgstr "Қайд этиш инфопанели"
 
@@ -47,24 +65,6 @@ msgstr "Ҳодиса/вазиятни таҳрирлаш"
 
 msgid "New event"
 msgstr "Янги ҳодиса"
-
-msgid "Active enrollments"
-msgstr "Фаол Қайдномалар"
-
-msgid "Completed enrollments"
-msgstr "Якунларган Қайдномалар"
-
-msgid "Cancelled enrollments"
-msgstr "Бекор қилинган Қайдномалар"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} рўйхати"
-
-msgid "Search"
-msgstr "Излаш"
-
-msgid "Working List"
-msgstr "Ишчи рўйхат"
 
 msgid "Event list"
 msgstr "Ҳодиса/вазиятлар рўйхати "
@@ -144,6 +144,11 @@ msgstr "Рўйхатга олиш"
 msgid "Complete event"
 msgstr "Ҳодиса/тадбирни якунлаш"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "Қиймат талаб қилинади"
 
@@ -208,6 +213,9 @@ msgstr "Ваколат берилган шахс"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Сақланади {{programName}} да {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -232,6 +240,9 @@ msgid "Completed"
 msgstr "Тўлдирилди"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -619,9 +630,6 @@ msgstr "Ушбу қайд этишда индикатор ахбороти ма�
 msgid "Quick actions"
 msgstr "Тезкор харакатлар"
 
-msgid "New Event"
-msgstr "Янги Ҳодиса/Ҳолат"
-
 msgid "Schedule an event"
 msgstr "Ҳодиса/Ҳолатни режалаш"
 
@@ -874,6 +882,9 @@ msgstr "ҳодиса/тадбир"
 msgid "You don't have access to edit this event"
 msgstr ""
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr ""
 
@@ -960,6 +971,12 @@ msgstr ""
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Бирор нима танланмаган"
+
+msgid "Choose an organisation unit"
+msgstr "Ташкилий бирликни танланг"
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1003,11 +1020,8 @@ msgid "all programs"
 msgstr ""
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Излаган натижаларни тополмадингизми? Тегишли турлардан  фойдаланадиган "
-"дастурлар ичидан қидиришга ҳаракат қилинг."
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1015,7 +1029,8 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Барча дастурларда қидириш"
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
 
 msgid "Create new"
@@ -1112,6 +1127,12 @@ msgstr ""
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr "Сақланмаган ўзгартиришлар"
+
+msgid "Continue data entry"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1235,9 +1256,6 @@ msgid "Add coordinates"
 msgstr "Координаталар ни киритиш"
 
 msgid "Add area"
-msgstr ""
-
-msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1470,6 +1488,9 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr ""
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
@@ -1665,6 +1686,9 @@ msgstr "ишчи рўйхатни юклашда хатолик юз берди"
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1689,10 +1713,10 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1718,6 +1742,9 @@ msgid "Follow up"
 msgstr "Кузатиб бориш"
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid ""
@@ -1752,9 +1779,6 @@ msgid_plural ""
 msgstr[0] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1834,16 +1858,6 @@ msgstr "Ишчи рўйхатни янгилаб бўлмади"
 msgid "an error occurred loading the working lists"
 msgstr ""
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} танланган"
-
-msgid "Deselect all"
-msgstr "Барча танланганни бекор қилиш"
-
 msgid "Update view"
 msgstr "Янгиланган кўриниш"
 
@@ -1876,6 +1890,28 @@ msgstr "Камроқ кўрсатиш"
 
 msgid "Show All"
 msgstr "Барчасини кўрсатиш"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} танланган"
+
+msgid "Deselect all"
+msgstr "Барча танланганни бекор қилиш"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"

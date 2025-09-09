@@ -34,6 +34,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "البحث"
+
 msgid "Enrollment dashboard"
 msgstr ""
 
@@ -45,24 +63,6 @@ msgstr "تعديل الحدث"
 
 msgid "New event"
 msgstr "حدث جديد"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "البحث"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -205,6 +205,9 @@ msgstr "المحال إليه"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -228,6 +231,9 @@ msgid "Completed"
 msgstr "مكتمل"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -1095,6 +1101,12 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
+msgid "Unsaved changes"
+msgstr "تعديلات لم يتم حفظها"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1215,9 +1227,6 @@ msgid "Add coordinates"
 msgstr ""
 
 msgid "Add area"
-msgstr ""
-
-msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."

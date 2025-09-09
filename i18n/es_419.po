@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -38,6 +38,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "Buscar"
+
 msgid "Enrollment dashboard"
 msgstr "Panel de inscripción"
 
@@ -49,24 +67,6 @@ msgstr "Editar evento"
 
 msgid "New event"
 msgstr "Evento nuevo"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} lista"
-
-msgid "Search"
-msgstr "Buscar"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr "Lista de eventos"
@@ -146,6 +146,11 @@ msgstr "Inscripción"
 msgid "Complete event"
 msgstr "Evento completo"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "Se requiere un valor"
 
@@ -213,6 +218,9 @@ msgstr "Asignado a"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Guardando en {{programName}} en {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -236,6 +244,9 @@ msgid "Completed"
 msgstr "Completado"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -627,9 +638,6 @@ msgstr "Aún no hay resultados de indicadores para esta inscripción"
 msgid "Quick actions"
 msgstr "Acciones rápidas"
 
-msgid "New Event"
-msgstr "Nuevo evento"
-
 msgid "Schedule an event"
 msgstr "Programar un evento"
 
@@ -885,6 +893,9 @@ msgstr "evento"
 msgid "You don't have access to edit this event"
 msgstr "No tienes acceso para editar este evento."
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr ""
 
@@ -974,6 +985,12 @@ msgstr "No se encontraron resultados para"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr ""
+
+msgid "Choose an organisation unit"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Despejar selecciones"
 
@@ -1017,10 +1034,8 @@ msgid "all programs"
 msgstr "todos los programas"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1028,7 +1043,8 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
 
 msgid "Create new"
@@ -1123,6 +1139,12 @@ msgstr ""
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr "Cambios no guardados"
+
+msgid "Continue data entry"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1245,9 +1267,6 @@ msgid "Add coordinates"
 msgstr ""
 
 msgid "Add area"
-msgstr ""
-
-msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1483,6 +1502,9 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
@@ -1680,6 +1702,9 @@ msgstr ""
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1704,10 +1729,10 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1733,6 +1758,9 @@ msgid "Follow up"
 msgstr "Seguimiento"
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid ""
@@ -1771,9 +1799,6 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1865,18 +1890,6 @@ msgstr ""
 msgid "an error occurred loading the working lists"
 msgstr ""
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "Deselect all"
-msgstr ""
-
 msgid "Update view"
 msgstr ""
 
@@ -1908,6 +1921,30 @@ msgid "Show Less"
 msgstr ""
 
 msgid "Show All"
+msgstr ""
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Deselect all"
 msgstr ""
 
 msgid "Download as JSON"

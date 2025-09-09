@@ -1,18 +1,18 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2021
-# Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
-# Yury Rogachev <yury@dhis2.org>, 2025
 # Nadiia <semchuk@aph.org.ua>, 2025
 # Ulanbek Abakirov <ulans@mail.ru>, 2025
+# Yury Rogachev <yury@dhis2.org>, 2025
+# Philip Larsen Donnelly, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2025\n"
+"Last-Translator: Philip Larsen Donnelly, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,6 +39,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Активные регистрационные записи"
+
+msgid "Completed enrollments"
+msgstr "Завершенные регистрационные записи"
+
+msgid "Cancelled enrollments"
+msgstr "Отмененные регистрационные записи"
+
+msgid "Search"
+msgstr "Поиск"
+
 msgid "Enrollment dashboard"
 msgstr "Регистрационная инфопанель"
 
@@ -50,24 +68,6 @@ msgstr "Редактировать событие"
 
 msgid "New event"
 msgstr "Новое событие"
-
-msgid "Active enrollments"
-msgstr "Активные регистрационные записи"
-
-msgid "Completed enrollments"
-msgstr "Завершенные регистрационные записи"
-
-msgid "Cancelled enrollments"
-msgstr "Отмененные регистрационные записи"
-
-msgid "{{trackedEntityName}} list"
-msgstr "Список: {{trackedEntityName}} "
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid "Working List"
-msgstr " Рабочий список"
 
 msgid "Event list"
 msgstr ""
@@ -147,6 +147,11 @@ msgstr "Регистрация"
 msgid "Complete event"
 msgstr "Завершить событие"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "Требуется значение"
 
@@ -211,6 +216,9 @@ msgstr "Назначенный пользователь"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "{{programName}}: Сохранение в {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -235,6 +243,9 @@ msgid "Completed"
 msgstr "Завершен/а/о"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -626,9 +637,6 @@ msgstr "Индикаторов для данной регистрационно�
 msgid "Quick actions"
 msgstr "Быстрые действия"
 
-msgid "New Event"
-msgstr "Новое событие"
-
 msgid "Schedule an event"
 msgstr "Запланировать событие"
 
@@ -887,6 +895,9 @@ msgstr "событие"
 msgid "You don't have access to edit this event"
 msgstr "У вас нет доступа к редактированию этого события"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "Посмотреть лог изменений"
 
@@ -975,6 +986,12 @@ msgstr "Не найдено результатов для "
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Не выбрано"
+
+msgid "Choose an organisation unit"
+msgstr "Выбрать организационную единицу"
+
 msgid "Clear selection"
 msgstr "Очистить выбор"
 
@@ -1017,11 +1034,8 @@ msgid "all programs"
 msgstr "все программы"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Нужных результаты не найдены? Попробуйте выполнить поиск по всем программам,"
-" использующим тип "
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1029,10 +1043,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Искать во всех программах"
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
-"Если ни один из результатов поиска не совпадает, вы можете создать "
-"новый/ую/ое "
 
 msgid "Create new"
 msgstr "Создать новый/ую/ое"
@@ -1137,6 +1150,12 @@ msgid ""
 msgstr ""
 "Вы должны указать причину проверки регистрационных записей в данной "
 "защищенной программе. Все действия будут регистрироваться."
+
+msgid "Unsaved changes"
+msgstr "Не сохраненные изменения"
+
+msgid "Continue data entry"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Действия с регистрационной записью"
@@ -1273,9 +1292,6 @@ msgstr "Добавить координаты"
 
 msgid "Add area"
 msgstr "Добавить участок"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1528,6 +1544,9 @@ msgstr "Данный этап позволяет создать только о�
 msgid "New {{ eventName }} event"
 msgstr "Новое событие {{ eventName }} "
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
@@ -1728,6 +1747,9 @@ msgstr "произошла ошибка во время загрузки раб�
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1752,10 +1774,10 @@ msgstr "Произошла неизвестная ошибка."
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1782,6 +1804,9 @@ msgstr "Отслеживать"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Выберите этап программы для фильтрации по {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1821,9 +1846,6 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1921,19 +1943,6 @@ msgstr "Не удалось обновить рабочий список"
 msgid "an error occurred loading the working lists"
 msgstr "произошла ошибка при загрузке рабочих списков"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "произошла ошибка при загрузке списков отслеживаемых объектов"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} выбран"
-msgstr[1] "{{count}} выбрано"
-msgstr[2] "{{count}} выбрано"
-msgstr[3] "{{count}} выбрано"
-
-msgid "Deselect all"
-msgstr "Отменить выбор всего"
-
 msgid "Update view"
 msgstr "Обновить список"
 
@@ -1966,6 +1975,31 @@ msgstr "Показать меньше"
 
 msgid "Show All"
 msgstr "Показать все"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} выбран"
+msgstr[1] "{{count}} выбрано"
+msgstr[2] "{{count}} выбрано"
+msgstr[3] "{{count}} выбрано"
+
+msgid "Deselect all"
+msgstr "Отменить выбор всего"
 
 msgid "Download as JSON"
 msgstr "Скачать в формате JSON"

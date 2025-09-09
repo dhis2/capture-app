@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -35,6 +35,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Aktivní zápisy"
+
+msgid "Completed enrollments"
+msgstr "Dokončené zápisy"
+
+msgid "Cancelled enrollments"
+msgstr "Zrušené zápisy"
+
+msgid "Search"
+msgstr "Hledat"
+
 msgid "Enrollment dashboard"
 msgstr "Ovládací panel zápisu"
 
@@ -46,24 +64,6 @@ msgstr "Upravit událost"
 
 msgid "New event"
 msgstr "Nová událost"
-
-msgid "Active enrollments"
-msgstr "Aktivní zápisy"
-
-msgid "Completed enrollments"
-msgstr "Dokončené zápisy"
-
-msgid "Cancelled enrollments"
-msgstr "Zrušené zápisy"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} seznam"
-
-msgid "Search"
-msgstr "Hledat"
-
-msgid "Working List"
-msgstr "Pracovní seznam"
 
 msgid "Event list"
 msgstr "Seznam událostí"
@@ -143,6 +143,11 @@ msgstr "Zápis"
 msgid "Complete event"
 msgstr "Dokončit událost"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "hodnota je vyžadována"
 
@@ -206,6 +211,9 @@ msgstr "Přiřazený"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Ukládání do {{programName}} v {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -229,6 +237,9 @@ msgstr "Dokončeno"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Před uložením události přidejte nebo zrušte poznámku."
+
+msgid "Please provide an valid organisation unit"
+msgstr "Uveďte prosím platnou organizační jednotku"
 
 msgid "Save and add another"
 msgstr "Uložit a přidat další"
@@ -617,9 +628,6 @@ msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
 msgid "Quick actions"
 msgstr "Rychlé akce"
 
-msgid "New Event"
-msgstr "Nová událost"
-
 msgid "Schedule an event"
 msgstr "Naplánovat událost"
 
@@ -876,6 +884,9 @@ msgstr "událost"
 msgid "You don't have access to edit this event"
 msgstr "Nemáte přístup k úpravám této události"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr "Zobrazit seznam změn"
 
@@ -965,6 +976,12 @@ msgstr "Pro dotaz nebyly nalezeny žádné výsledky"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Není vybrán žádný"
+
+msgid "Choose an organisation unit"
+msgstr "Vyberte organizační jednotku"
+
 msgid "Clear selection"
 msgstr "Vymazat výběr"
 
@@ -1006,11 +1023,8 @@ msgid "all programs"
 msgstr "všechny programy"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
-"používají typ"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1018,8 +1032,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
 
-msgid "If none of search results match, you can create a new "
-msgstr "Pokud žádný z výsledků vyhledávání neodpovídá, můžete vytvořit nový"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "Vytvořit nový"
@@ -1124,6 +1139,12 @@ msgid ""
 msgstr ""
 "Pro kontrolu zápisů v tomto chráněném programu musíte uvést důvod. Veškerá "
 "aktivita bude zaznamenána."
+
+msgid "Unsaved changes"
+msgstr "Neuložené změny"
+
+msgid "Continue data entry"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Akce zápisu"
@@ -1252,9 +1273,6 @@ msgstr "Přidat souřadnice"
 
 msgid "Add area"
 msgstr "Přidat oblast"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Uveďte prosím platnou organizační jednotku"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."
@@ -1496,6 +1514,9 @@ msgstr "Tato fáze může mít pouze jednu událost"
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr "Při mazání události došlo k chybě"
 
@@ -1700,6 +1721,9 @@ msgstr "při načítání pracovních seznamů došlo k chybě"
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1724,10 +1748,10 @@ msgstr "Nastala neznámá chyba."
 msgid "An error occurred while completing events"
 msgstr "Při dokončování událostí došlo k chybě"
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1754,6 +1778,9 @@ msgstr "Následovat"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1793,9 +1820,6 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1893,19 +1917,6 @@ msgstr "Pracovní seznam nelze aktualizovat"
 msgid "an error occurred loading the working lists"
 msgstr "došlo k chybě při načítání pracovních seznamů"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "došlo k chybě při načítání seznamů instancí trasovaných entit"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "Vybrán: {{count}}"
-msgstr[1] "Vybráno: {{count}}"
-msgstr[2] "Vybráno: {{count}}"
-msgstr[3] "Vybráno: {{count}}"
-
-msgid "Deselect all"
-msgstr "Odznačit vše"
-
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"
 
@@ -1938,6 +1949,31 @@ msgstr "Ukázat méně"
 
 msgid "Show All"
 msgstr "Ukázat vše"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "Vybrán: {{count}}"
+msgstr[1] "Vybráno: {{count}}"
+msgstr[2] "Vybráno: {{count}}"
+msgstr[3] "Vybráno: {{count}}"
+
+msgid "Deselect all"
+msgstr "Odznačit vše"
 
 msgid "Download as JSON"
 msgstr "Stáhnout jako JSON"

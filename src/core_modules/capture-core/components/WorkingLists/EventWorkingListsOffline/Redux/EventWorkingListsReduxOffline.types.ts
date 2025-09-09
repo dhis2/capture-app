@@ -1,0 +1,14 @@
+import type { EventProgram } from '../../../../metaData';
+import type { RecordsOrder, CustomColumnOrder } from '../../WorkingListsCommon';
+import type { EventRecords } from '../../EventWorkingListsCommon';
+
+export type Props = {
+    storeId: string;
+};
+
+export type EventWorkingListsReduxOfflineOutputProps = {
+    eventRecords?: EventRecords;
+    recordsOrder?: RecordsOrder;
+    customColumnOrder?: CustomColumnOrder;
+    program: EventProgram;
+};

@@ -1,0 +1,70 @@
+import { ofType } from 'redux-observable';
+import { v4 as uuid } from 'uuid';
+import { map } from 'rxjs/operators';
+import {
+    scheduleEventWidgetActionTypes,
+    scheduleEvent,
+    updateScheduledDateForEvent,
+} from './WidgetEventSchedule.actions';
+import { statusTypes } from '../../events/statusTypes';
+import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
+import { generateUID } from '../../utils/uid/generateUID';
+
+export const scheduleEnrollmentEventEpic = (action$: any, store: any) =>
+    action$.pipe(
+        ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
+        map((action: any) => {
+            const uid = uuid();
+            const {
+                scheduleDate,
+                notes,
+                programId,
+                orgUnitId,
+                stageId,
+                teiId,
+                enrollmentId,
+                eventId = generateUID(),
+                categoryOptions,
+                onSaveExternal,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
+                assignedUser,
+            } = action.payload;
+
+            const { events } = store.value;
+            const existingEnrollment = events[eventId]
+            && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
+            const attributeCategoryOptions = categoryOptions && convertCategoryOptionsToServer(categoryOptions);
+
+            let serverData: any = { events: [{
+                scheduledAt: scheduleDate,
+                dataValues: [],
+                trackedEntity: teiId,
+                event: eventId,
+                orgUnit: orgUnitId,
+                enrollment: enrollmentId,
+                program: programId,
+                programStage: stageId,
+                status: 'SCHEDULE',
+                notes: notes ?? [],
+                assignedUser,
+            }] };
+
+            if (attributeCategoryOptions) {
+                serverData = {
+                    events: [{
+                        ...serverData.events[0],
+                        attributeCategoryOptions,
+                    }],
+                };
+            }
+
+            if (existingEnrollment) {
+                onSaveExternal?.(serverData.events[0]);
+                return updateScheduledDateForEvent(serverData, eventId, onSaveSuccessActionType, onSaveErrorActionType);
+            }
+
+            onSaveExternal?.(serverData, uid);
+            return scheduleEvent(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
+        }),
+    );
