@@ -24,6 +24,9 @@ export const WidgetBreakingTheGlass = ({
     const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
 
     const performGlassBreak = useCallback(async (reason?: string) => {
+        if (!reason) {
+            return;
+        }
         await postGlassBreakRequest({
             teiId,
             teiParamKey,
