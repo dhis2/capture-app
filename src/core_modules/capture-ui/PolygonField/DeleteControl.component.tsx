@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import L from 'leaflet';
@@ -38,7 +38,8 @@ class DeleteControlPlain extends MapControl<any, Props> {
 
         deleteControl.onAdd = () => {
             const div = L.DomUtil.create('div', '');
-            ReactDOM.render(jsx, div);
+            const root = createRoot(div!);
+            root.render(jsx, div);
             return div;
         };
         this.leafletElement = deleteControl;

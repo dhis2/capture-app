@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import path from 'path';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
+// import path from 'path';
+// import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
     // Atempt to fix by resolving the aliases
