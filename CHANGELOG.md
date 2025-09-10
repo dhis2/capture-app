@@ -1,3 +1,10 @@
+# [104.1.0](https://github.com/dhis2/capture-app/compare/v104.0.1...v104.1.0) (2025-09-10)
+
+
+### Features
+
+* [DHIS2-20077] Responsive layout part 2 ([#4377](https://github.com/dhis2/capture-app/issues/4377)) ([54c19a7](https://github.com/dhis2/capture-app/commit/54c19a774cbdae586e51dd497b3a638fadc98c0a))
+
 ## [104.0.1](https://github.com/dhis2/capture-app/compare/v104.0.0...v104.0.1) (2025-09-09)
 
 
