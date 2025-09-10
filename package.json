@@ -53,6 +53,7 @@
         "redux-batched-actions": "^0.5.0",
         "redux-logger": "^3.0.6",
         "redux-observable": "^2.0.0",
+        "regenerator-runtime": "^0.14.1",
         "reselect": "^4.1.7",
         "rxjs": "^7.5.5",
         "styled-jsx": "^4",
