@@ -1,7 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 
-const viteConfig = defineConfig(async (configEnv) => {
+const viteConfig = defineConfig(async configEnv => {
     const { mode } = configEnv;
     return {
         // In dev environments, don't clear the terminal after files update
@@ -13,6 +13,9 @@ const viteConfig = defineConfig(async (configEnv) => {
                 'capture-core-utils': path.resolve(__dirname, 'src/core_modules/capture-core-utils'),
                 '@dhis2/rules-engine-javascript': path.resolve(__dirname, 'packages/rules-engine/src'),
             },
+        },
+        define: {
+            global: 'window',
         },
     };
 });
