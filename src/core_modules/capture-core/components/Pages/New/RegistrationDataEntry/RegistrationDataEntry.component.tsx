@@ -15,6 +15,7 @@ import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnro
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
+import './registrationDataEntry.css';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
@@ -40,19 +41,30 @@ const styles: Readonly<any> = ({ typography }: any) => ({
     marginBottom: {
         marginBottom: spacers.dp16,
     },
-    flexContainer: {
+    columns: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
         flexWrap: 'wrap',
+        gap: spacers.dp16,
+        containerType: 'inline-size',
     },
-    flexItem: {
-        flex: 1,
-        minWidth: '500px',
+    leftColumn: {
+        flexGrow: 3,
+        flexShrink: 1,
+        flexBasis: 700,
+        minWidth: 700,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
-    dataEntryReadyItem: {
-        minWidth: '300px',
+    rightColumn: {
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 300,
+        minWidth: 300,
+        maxWidth: 400,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
 });
 
@@ -196,8 +208,8 @@ const RegistrationDataEntryPlain = ({
                         }
                     </div>
 
-                    <div className={classes.flexContainer}>
-                        <div className={classes.flexItem}>
+                    <div className={classes.columns}>
+                        <div id="left-column-program-registration-data-entry" className={classes.leftColumn}>
                             <EnrollmentRegistrationEntryWrapper
                                 id={dataEntryId}
                                 orgUnitId={currentOrgUnitId}
@@ -219,7 +231,7 @@ const RegistrationDataEntryPlain = ({
                             />
                         </div>
                         {dataEntryIsReady && (
-                            <div className={classes.dataEntryReadyItem}>
+                            <div id="right-column-program-registration-data-entry" className={classes.rightColumn}>
                                 <DataEntryWidgetOutput
                                     selectedScopeId={selectedScopeId}
                                     dataEntryId={dataEntryId}
@@ -246,8 +258,8 @@ const RegistrationDataEntryPlain = ({
                             accessNeeded="write"
                         />
                     </div>
-                    <div className={classes.flexContainer}>
-                        <div className={classes.flexItem}>
+                    <div className={classes.columns}>
+                        <div id="left-column-tracked-entity-type-registration-data-entry" className={classes.leftColumn}>
                             <TeiRegistrationEntry
                                 id={dataEntryId}
                                 selectedScopeId={selectedScopeId}
@@ -265,7 +277,7 @@ const RegistrationDataEntryPlain = ({
                             />
                         </div>
                         {dataEntryIsReady && (
-                            <div className={classes.dataEntryReadyItem}>
+                            <div id="right-column-tracked-entity-type-registration-data-entry" className={classes.rightColumn}>
                                 <DataEntryWidgetOutput
                                     selectedScopeId={selectedScopeId}
                                     dataEntryId={dataEntryId}
