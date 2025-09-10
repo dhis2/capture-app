@@ -57,7 +57,7 @@ export class RuleEngine {
         );
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
-            selectedUserRoles,
+            selectedUserRoles: selectedUserRoles || this.userRoles,
         });
         const enrollment = selectedEnrollment ?
             inputBuilder.buildEnrollment({
