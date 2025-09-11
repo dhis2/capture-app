@@ -69,7 +69,7 @@ You will be prompted for a path to the server instance, a user name and a passwo
 The path to the server instance can also be set by supplying a `.env.development.local` file in the root folder of the project. An example of an `.env.development.local` file:
 
 ```
-REACT_APP_DHIS2_BASE_URL="http://localhost:8080"
+DHIS2_BASE_URL="http://localhost:8080"
 ```
 
 ## Local Cypress testing
