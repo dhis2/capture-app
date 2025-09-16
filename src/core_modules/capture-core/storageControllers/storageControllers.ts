@@ -8,6 +8,7 @@ import type { ServerVersion } from './types';
 
 
 const adapterTypes: any = [availableAdapters.INDEXED_DB];
+// storageControllers declaration
 const storageControllers: { [key: string]: StorageController } = {};
 
 export const initStorageControllers = async ({
@@ -22,6 +23,7 @@ export const initStorageControllers = async ({
     const userDataStorageName = `${storageControllers.main.name}-${currentUserId}-data`;
     await upkeepUserCaches(storageControllers.main, userMetadataStorageName, userDataStorageName);
 
+    // storageControllers.userMetadata value is asynchronously assigned
     storageControllers.userMetadata = await initUserMetadataController({
         storageName: userMetadataStorageName,
         version: storageControllers.main.version,
