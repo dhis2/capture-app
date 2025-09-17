@@ -1,0 +1,17 @@
+import { parseNumber } from 'capture-core-utils/parsers';
+import type { NumericFilterData } from './types';
+
+type Value = {
+    min?: string | null,
+    max?: string | null,
+}
+
+export function getNumericFilterData(value: Value): NumericFilterData {
+    const min = value.min || undefined;
+    const max = value.max || undefined;
+
+    return {
+        ge: min ? parseNumber(min) : undefined,
+        le: max ? parseNumber(max) : undefined,
+    };
+}

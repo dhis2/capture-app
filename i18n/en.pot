@@ -57,6 +57,9 @@ msgstr "Edit event"
 msgid "New event"
 msgstr "New event"
 
+msgid "Loading..."
+msgstr "Loading..."
+
 msgid "Event list"
 msgstr "Event list"
 
@@ -729,6 +732,9 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
+msgid "New Event"
+msgstr "New Event"
+
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"
 
@@ -1367,6 +1373,12 @@ msgstr "Schedule date / Due date"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Please provide a valid organisation unit"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr "Scheduling an event in {{stageName}} for {{programName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"

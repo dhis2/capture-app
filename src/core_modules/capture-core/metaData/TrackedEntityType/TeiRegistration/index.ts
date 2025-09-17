@@ -1,0 +1,1 @@
+export { TeiRegistration } from './TeiRegistration';

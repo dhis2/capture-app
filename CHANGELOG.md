@@ -1,3 +1,50 @@
+# [104.1.0](https://github.com/dhis2/capture-app/compare/v104.0.1...v104.1.0) (2025-09-10)
+
+
+### Features
+
+* [DHIS2-20077] Responsive layout part 2 ([#4377](https://github.com/dhis2/capture-app/issues/4377)) ([54c19a7](https://github.com/dhis2/capture-app/commit/54c19a774cbdae586e51dd497b3a638fadc98c0a))
+
+## [104.0.1](https://github.com/dhis2/capture-app/compare/v104.0.0...v104.0.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* [DHIS2-20009] make reason to check for enrollments mandatory when breaking the glass ([#4374](https://github.com/dhis2/capture-app/issues/4374)) ([7f79c65](https://github.com/dhis2/capture-app/commit/7f79c65bc44492ebc8f1d85a2b0a952700f37ce1))
+
+# [104.0.0](https://github.com/dhis2/capture-app/compare/v103.4.0...v104.0.0) (2025-09-08)
+
+
+### chore
+
+* **release:** migrate the codebase from flow to typescript ([#4032](https://github.com/dhis2/capture-app/issues/4032)) ([1372447](https://github.com/dhis2/capture-app/commit/1372447d6db0f975024c2e1d3ad19dbe68e33fcf))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 104.0.0.
+
+# [103.4.0](https://github.com/dhis2/capture-app/compare/v103.3.3...v103.4.0) (2025-09-05)
+
+
+### Features
+
+* [DHIS2-20077] Responsive layout ([#4373](https://github.com/dhis2/capture-app/issues/4373)) ([5f540a1](https://github.com/dhis2/capture-app/commit/5f540a14864d92ff79a74b54cfd6ffa570f91630))
+
+## [103.3.3](https://github.com/dhis2/capture-app/compare/v103.3.2...v103.3.3) (2025-09-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] prod env fix for indexedDB caching ([#4370](https://github.com/dhis2/capture-app/issues/4370)) ([d67b89c](https://github.com/dhis2/capture-app/commit/d67b89cd3a95a13b3bb13e24ea4d21033641bf8a))
+
+## [103.3.2](https://github.com/dhis2/capture-app/compare/v103.3.1...v103.3.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* [DHIS2-19877] filter rule engine values containing undefined ([#4290](https://github.com/dhis2/capture-app/issues/4290)) ([43d6005](https://github.com/dhis2/capture-app/commit/43d6005ad5e6ed6e7b3774bb755339341e39ad86))
+
 ## [103.3.1](https://github.com/dhis2/capture-app/compare/v103.3.0...v103.3.1) (2025-08-25)
 
 
