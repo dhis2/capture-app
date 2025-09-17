@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { spacers } from '@dhis2/ui';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
@@ -10,13 +11,15 @@ type OwnProps = {
     onLink: (teiId: string, values: Record<string, unknown>) => void;
 };
 
-const getStyles = (theme: any): Readonly<any> => ({
+const getStyles = (): Readonly<any> => ({
     stickyOnScroll: {
         position: 'relative',
         flexGrow: 1,
-        width: theme.typography.pxToRem(300),
-        margin: theme.typography.pxToRem(10),
-        marginTop: 0,
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
 });
 
@@ -47,7 +50,7 @@ class DataEntryWidgetOutputPlain extends React.Component<Props> {
                 minViewpointWidth={768}
                 containerClass={classes.stickyOnScroll}
             >
-                <div>
+                <div className={classes.container}>
                     {componentContainers.map(c => this.renderComponent(c, passOnProps))}
                 </div>
             </StickyOnScroll>
