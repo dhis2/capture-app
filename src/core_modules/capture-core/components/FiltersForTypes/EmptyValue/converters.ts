@@ -1,4 +1,3 @@
-// @flow
 import {
     API_EMPTY_VALUE_FILTER,
     EMPTY_VALUE_FILTER_LABEL,
@@ -6,17 +5,17 @@ import {
 } from './constants';
 import type { EmptyValueFilterData } from './types';
 
-export const fromApiEmptyValueFilter = (filter: Object): ?EmptyValueFilterData => {
+export const fromApiEmptyValueFilter = (filter: Record<string, unknown>): EmptyValueFilterData | undefined => {
     if (typeof filter?.[API_EMPTY_VALUE_FILTER] === 'boolean') {
         return {
-            isEmpty: filter[API_EMPTY_VALUE_FILTER],
+            isEmpty: filter[API_EMPTY_VALUE_FILTER] as boolean,
             value: filter[API_EMPTY_VALUE_FILTER] ? EMPTY_VALUE_FILTER_LABEL : NOT_EMPTY_VALUE_FILTER_LABEL,
         };
     }
     return undefined;
 };
 
-export const toApiEmptyValueFilter = (filter: EmptyValueFilterData) => {
+export const toApiEmptyValueFilter = (filter: EmptyValueFilterData): Record<string, boolean> | undefined => {
     if (filter.isEmpty === true) {
         return { [API_EMPTY_VALUE_FILTER]: true };
     }

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Checkbox, MenuDivider } from '@dhis2/ui';
 import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
