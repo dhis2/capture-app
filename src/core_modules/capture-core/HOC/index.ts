@@ -3,3 +3,4 @@ export { withLoadingIndicator } from './withLoadingIndicator';
 export { withErrorMessageHandler } from './withErrorMessageHandler';
 export { withStateBoundLoadingIndicator } from './withStateBoundLoadingIndicator';
 export { withApiUtils } from './withApiUtils';
+export { withStyles, type WithStyles } from './withStyles';

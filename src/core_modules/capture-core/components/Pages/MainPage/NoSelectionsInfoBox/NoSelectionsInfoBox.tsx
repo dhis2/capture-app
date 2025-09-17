@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core/HOC';
 
 const styles: Readonly<any> = {
     container: {
@@ -63,15 +63,15 @@ const EmptyStateIcon = () => (
 const documentationLink = 'https://docs.dhis2.org/en/use/user-guides/dhis-core-version-master/tracking-individual-level-data/capture.html';
 
 const NoSelectionsInfoBoxPlain = ({ classes }: Props) => (
-    <div className={classes.container}>
-        <div className={classes.innerBox}>
-            <div className={classes.iconContainer}>
+    <div css={classes.container}>
+        <div css={classes.innerBox}>
+            <div css={classes.iconContainer}>
                 <EmptyStateIcon />
             </div>
-            <h1 className={classes.headingText}>
+            <h1 css={classes.headingText}>
                 {i18n.t('Get started with Capture app')}
             </h1>
-            <div className={classes.content}>
+            <div css={classes.content}>
                 <span>
                     <strong>{i18n.t('Report data')}</strong>:{' '}
                     {i18n.t('Choose a program and organisation unit to see existing data and create new records.')}
@@ -83,7 +83,7 @@ const NoSelectionsInfoBoxPlain = ({ classes }: Props) => (
             </div>
 
             <a
-                className={classes.link}
+                css={classes.link}
                 href={documentationLink}
                 target="_blank"
                 rel="noopener noreferrer"
