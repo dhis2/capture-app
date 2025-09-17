@@ -17,6 +17,14 @@ const viteConfig = defineConfig(async configEnv => {
         define: {
             global: 'window',
         },
+        build: {
+            commonjsOptions: { transformMixedEsModules: true },
+        },
+        optimizeDeps: {
+            build: {
+                commonjsOptions: { transformMixedEsModules: true },
+            },
+        },
     };
 });
 
