@@ -5,8 +5,7 @@ import type {
     ExistingUniqueValueDialogActionsComponent,
 } from '../../../../../DataEntries';
 import type { TeiPayload } from
-    '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/' +
-    'dataEntryTrackedEntityInstance.types';
+    '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
 
 export type Props = {
     theme: any;
