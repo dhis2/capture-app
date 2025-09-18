@@ -65,7 +65,11 @@ const runRulesOnEnrollmentUpdate = ({
     const currentClientMainData = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation) || {};
     const { currentEnrollmentValues, currentEventMainData } = splitCurrentClientMainData(state, currentClientMainData);
     const currentEvent = stage
-        ? { ...currentEventValues, ...currentEventMainData, programStageId: stage.id }
+        ? { 
+            ...currentEventValues, 
+            ...currentEventMainData, 
+            programStageId: stage.id 
+        }
         : undefined;
 
     const runRulesOnUpdateFieldBatchPromise = runRulesOnUpdateFieldBatch({

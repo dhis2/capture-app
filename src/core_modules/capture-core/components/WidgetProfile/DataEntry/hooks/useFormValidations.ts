@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux';
 const prepareMessages = (rulesEffectsGeneral: any, rulesEffectsMessages: any, saveAttempted: boolean, type: string) => {
     let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
     if (saveAttempted) {
-        messages = rulesEffectsGeneral[`${type}OnComplete`] ? [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
+        messages = rulesEffectsGeneral[`${type}OnComplete`] ? 
+            [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
 
         messages = Object.values(rulesEffectsMessages).reduce(
             (acc: any, rulesEffectsMessage: any) =>

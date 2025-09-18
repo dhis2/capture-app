@@ -31,7 +31,9 @@ const getAttributesValues = (attributes: TeiAttribute[], firstId: string, second
     const firstValue = convertValue(attributes.find(({ attribute }) => attribute === firstId));
     const secondValue = convertValue(attributes.find(({ attribute }) => attribute === secondId));
 
-    return firstValue ?? secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
+    return firstValue ?? secondValue 
+        ? `${firstValue}${firstValue && ' '}${secondValue}` 
+        : '';
 };
 
 const getTetAttributesDisplayInList = (attributes: TeiAttribute[], tetAttributes: TetAttribute[]) => {

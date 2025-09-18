@@ -34,7 +34,9 @@ export const actionTypes = {
 };
 
 function getAssignee(clientAssignee: any) {
-    return clientAssignee ? convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : clientAssignee;
+    return clientAssignee ? 
+        convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : 
+        clientAssignee;
 }
 
 export const loadViewEventDataEntry =

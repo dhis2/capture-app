@@ -14,7 +14,9 @@ type Attribute = {
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
 const convertValue = (attribute?: Attribute, dataElement?: DataElement) =>
-    (attribute?.value ? convertFn(attribute.value, attribute.valueType, dataElement) : '');
+    (attribute?.value 
+        ? convertFn(attribute.value, attribute.valueType, dataElement) 
+        : '');
 
 const getAttributesValues = (attributes: Array<Attribute>, first?: DataElement, second?: DataElement) => {
     const firstValue = convertValue(attributes.find(({ attribute }) => attribute === first?.id), first);

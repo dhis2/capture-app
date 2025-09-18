@@ -46,5 +46,7 @@ export const useAvailableProgramStages = (
         ],
     );
 
-    return availableProgramStages ? availableProgramStages.filter(stage => stage.isAvailableStage) : [];
+    return availableProgramStages 
+        ? availableProgramStages.filter(stage => stage.isAvailableStage) 
+        : [];
 };

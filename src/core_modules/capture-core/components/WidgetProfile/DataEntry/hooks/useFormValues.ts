@@ -21,7 +21,10 @@ const buildFormValues = async ({
     setClientValues: (values: any) => void;
     querySingleResource: any;
 }) => {
-    const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
+    const clientValues = clientAttributesWithSubvalues?.reduce(
+        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), 
+        {}
+    );
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
         {},

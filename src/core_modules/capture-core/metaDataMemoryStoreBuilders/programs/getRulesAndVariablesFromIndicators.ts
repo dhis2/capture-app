@@ -228,7 +228,9 @@ export function getRulesAndVariablesFromProgramIndicators(
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
             accOneLevelContainer.rules.push(container.rule);
 
-            accOneLevelContainer.variables = accOneLevelContainer.variables ? [...accOneLevelContainer.variables, ...container.variables] : container.variables;
+            accOneLevelContainer.variables = accOneLevelContainer.variables 
+                ? [...accOneLevelContainer.variables, ...container.variables] 
+                : container.variables;
             return accOneLevelContainer;
         }, { rules: null, variables: null });
 }

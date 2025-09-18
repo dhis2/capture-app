@@ -100,7 +100,9 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     if (!startValue && !endValue) {
         errors = {
             ...errors,
-            bufferLogicError: submitAttempted ? i18n.t(DateFilterPlain.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
+            bufferLogicError: submitAttempted 
+                ? i18n.t(DateFilterPlain.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) 
+                : null,
         };
     }
     const { error: startValueError } = DateFilterPlain.validateRelativeRangeValue(startValue);
