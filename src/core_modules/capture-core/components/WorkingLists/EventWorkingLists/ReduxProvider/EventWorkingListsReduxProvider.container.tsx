@@ -37,7 +37,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         workingListsUI[storeId] && workingListsUI[storeId].lastEventIdDeleted);
 
     const downloadRequest = useSelector(({ workingLists }: any) =>
-        workingLists[storeId] && 
+        workingLists[storeId] &&
         workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
     const onClickListRow = useCallback(({ id }: any) => {
@@ -71,8 +71,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
             const eventQueryCriteria = selectedTemplate?.nextCriteria || selectedTemplate?.criteria;
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const clientConfig = await convertToClientConfig(
-                eventQueryCriteria, 
-                meta?.columnsMetaForDataFetching, 
+                eventQueryCriteria,
+                meta?.columnsMetaForDataFetching,
                 querySingleResource
             );
             const currentRequest = computeDownloadRequest({

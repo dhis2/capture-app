@@ -40,16 +40,16 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props): Retur
         const promises: any[] = [];
         if (programId) {
             promises.push(containsKeyInStorageAsync(
-                USER_METADATA_STORES.PROGRAMS, 
-                programId, 
+                USER_METADATA_STORES.PROGRAMS,
+                programId,
                 { id: programId, type: IdTypes.PROGRAM_ID, convert: (value: any) => value }
             ));
         }
 
         if (orgUnitId) {
             promises.push(getCachedSingleResourceFromKeyAsync(
-                USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM, 
-                programId, 
+                USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM,
+                programId,
                 { id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: (value: any) => !!value?.organisationUnits[orgUnitId] }
             ));
         }

@@ -60,11 +60,11 @@ const runRulesForEditSingleEvent = async ({
     }
 
     const foundation = stage.stageForm;
-    const currentEventValues = foundation 
-        ? getCurrentClientValues(state, foundation, formId, fieldData) 
+    const currentEventValues = foundation
+        ? getCurrentClientValues(state, foundation, formId, fieldData)
         : {};
-    const currentEventMainData = foundation 
-        ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) 
+    const currentEventMainData = foundation
+        ? getCurrentClientMainData(state, itemId, dataEntryId, foundation)
         : {};
     const currentEvent = { ...currentEventValues, ...currentEventMainData, eventId };
 
@@ -88,9 +88,9 @@ const runRulesForEditSingleEvent = async ({
             program,
             stage,
             orgUnit: coreOrgUnit,
-            currentEvent: { 
-                ...currentEvent, 
-                createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME) 
+            currentEvent: {
+                ...currentEvent,
+                createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME)
             },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
@@ -126,7 +126,7 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map((actionBatch: any) =>
-            actionBatch.payload.find((action: any) => 
+            actionBatch.payload.find((action: any) =>
                 action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         concatMap((action: any) => {
@@ -150,7 +150,7 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map((actionBatch: any) =>
-            actionBatch.payload.find((action: any) => 
+            actionBatch.payload.find((action: any) =>
                 action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         concatMap((action: any) => {

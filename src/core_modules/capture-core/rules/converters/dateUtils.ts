@@ -29,16 +29,16 @@ export const dateUtils: IDateUtils = {
         return momentToRulesDate(todayMoment);
     },
     daysBetween: (firstRulesDate: string | null, secondRulesDate: string | null): number | null =>
-        (isDate(firstRulesDate) && isDate(secondRulesDate) ? 
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ?
             between('days', firstRulesDate, secondRulesDate) : null),
     weeksBetween: (firstRulesDate: string | null, secondRulesDate: string | null): number | null =>
-        (isDate(firstRulesDate) && isDate(secondRulesDate) ? 
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ?
             between('weeks', firstRulesDate, secondRulesDate) : null),
     monthsBetween: (firstRulesDate: string | null, secondRulesDate: string | null): number | null =>
-        (isDate(firstRulesDate) && isDate(secondRulesDate) ? 
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ?
             between('months', firstRulesDate, secondRulesDate) : null),
     yearsBetween: (firstRulesDate: string | null, secondRulesDate: string | null): number | null =>
-        (isDate(firstRulesDate) && isDate(secondRulesDate) ? 
+        (isDate(firstRulesDate) && isDate(secondRulesDate) ?
             between('years', firstRulesDate, secondRulesDate) : null),
     addDays: (rulesDate: string | null, daysToAdd: number): string | null => {
         if (!isDate(rulesDate)) {

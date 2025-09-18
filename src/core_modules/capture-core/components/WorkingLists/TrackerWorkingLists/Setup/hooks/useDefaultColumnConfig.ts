@@ -95,7 +95,7 @@ const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null |
         visible: displayInReports,
         type,
         header: formName || name,
-        options: optionSet && 
+        options: optionSet &&
             optionSet.options.map(({ text, value }) => ({ text, value })),
         multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         filterHidden: !(orgUnitId || searchable || unique),
@@ -108,7 +108,7 @@ const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> 
         visible: displayInReports,
         type,
         header: formName || name,
-        options: optionSet && 
+        options: optionSet &&
             optionSet.options.map(({ text, value }) => ({ text, value })),
         multiValueFilter: !!optionSet,
         additionalColumn: true,

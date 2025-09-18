@@ -28,15 +28,15 @@ export type OwnProps = {
 
 export type DispatchersFromRedux = {
     searchViaAttributesOnScopeTrackedEntityType: (
-        { trackedEntityTypeId, formId, page, resultsPageSize }: 
+        { trackedEntityTypeId, formId, page, resultsPageSize }:
         { trackedEntityTypeId: string; formId: string; page: number; resultsPageSize: number }
     ) => void;
     startFallbackSearch: (
-        { programId, formId, resultsPageSize, page }: 
+        { programId, formId, resultsPageSize, page }:
         { programId: string; formId: string; resultsPageSize: number; page?: number }
     ) => void;
     searchViaAttributesOnScopeProgram: (
-        { programId, formId, page, resultsPageSize }: 
+        { programId, formId, page, resultsPageSize }:
         { programId: string; formId: string; page: number; resultsPageSize: number }
     ) => void;
     handleCreateNew: (currentSearchTerms: CurrentSearchTerms) => void;

@@ -5,7 +5,7 @@ import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
-import { isMultiTextWithoutOptionset } from 
+import { isMultiTextWithoutOptionset } from
     '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import type { InputProgramData, InputAttribute } from './hooks.types';
 
@@ -13,8 +13,8 @@ const MULIT_TEXT_WITH_NO_OPTIONS_SET =
     'could not create the metadata because a MULIT_TEXT without associated option sets was found';
 
 export const useClientAttributesWithSubvalues = (
-    teiId: string, 
-    program: InputProgramData, 
+    teiId: string,
+    program: InputProgramData,
     trackedEntityInstanceAttributes: boolean | Array<InputAttribute>
 ) => {
     const dataEngine = useDataEngine();

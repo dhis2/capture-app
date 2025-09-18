@@ -38,8 +38,8 @@ export const saveNewEventEpic = (action$: EpicAction<SaveEventPayload>, store: R
         }));
 
 export const saveNewEventLocationChangeEpic = (
-    action$: EpicAction<SaveEventPayload>, 
-    store: ReduxStore, 
+    action$: EpicAction<SaveEventPayload>,
+    store: ReduxStore,
     { navigate }: ApiUtils
 ) =>
     action$.pipe(

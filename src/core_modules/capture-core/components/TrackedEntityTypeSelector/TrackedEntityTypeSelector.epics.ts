@@ -5,8 +5,8 @@ import { buildUrlQueryString } from '../../utils/routing';
 import { resetLocationChange } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (
-    action$: any, 
-    store: any, 
+    action$: any,
+    store: any,
     { navigate }: { navigate: (url: string) => void }
 ) =>
     action$.pipe(

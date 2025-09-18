@@ -64,7 +64,7 @@ export const getOpenDataEntryActions = (
             id: `attributeCategoryOptions-${category.id}`,
             type: 'TEXT',
             validatorContainers: getCategoryOptionsValidatorContainers(
-                { categories: programCategory.categories }, 
+                { categories: programCategory.categories },
                 category.id
             ),
         })));

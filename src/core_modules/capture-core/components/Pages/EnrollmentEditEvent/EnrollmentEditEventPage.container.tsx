@@ -75,8 +75,8 @@ type PageStatusParams = {
     event: Record<string, unknown>;
 };
 
-const getPageStatus = ({ 
-    orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event 
+const getPageStatus = ({
+    orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event
 }: PageStatusParams) => {
     if (isLoading) {
         return pageStatuses.LOADING;
@@ -181,7 +181,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
         dispatch(commitEnrollmentAndEvents());
-        redirect && 
+        redirect &&
             navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
 
@@ -254,7 +254,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    const trackedEntityType = (program && 
+    const trackedEntityType = (program &&
         program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const { name: trackedEntityName = '', id: trackedEntityTypeId = '' } = trackedEntityType ?? {};
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);

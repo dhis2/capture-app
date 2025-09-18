@@ -4,9 +4,9 @@ import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
 const getFileResourceSubvalue = async (
-    keys: any, 
-    querySingleResource: QuerySingleResource, 
-    eventId: string, 
+    keys: any,
+    querySingleResource: QuerySingleResource,
+    eventId: string,
     absoluteApiPath: string
 ) => {
     const promises = Object.keys(keys)

@@ -97,8 +97,8 @@ export class ProgramStage {
     }
 
     get relationshipTypesWhereStageIsFrom(): Array<RelationshipType> {
-        return this._relationshipTypes 
-            ? this._relationshipTypes.filter(r => r.from.programStageId && r.from.programStageId === this.id) 
+        return this._relationshipTypes
+            ? this._relationshipTypes.filter(r => r.from.programStageId && r.from.programStageId === this.id)
             : [];
     }
 

@@ -46,7 +46,7 @@ const getDataEntryId = (event: any): string => (
 export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, 
+            eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
             widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY
         ),
         map((action: any) => {
@@ -146,9 +146,9 @@ export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
                 return batchActions([
                     updateEnrollmentEvent(eventId, serverData.events[0]),
                     startSaveEditEventDataEntry(
-                        eventId, 
-                        serverData, 
-                        enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, 
+                        eventId,
+                        serverData,
+                        enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT,
                         enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT
                     ),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
@@ -293,7 +293,7 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxSto
 
             const serverData = { enrollments: [enrollmentWithAllEvents] };
 
-            onSaveAndCompleteEnrollmentExternal && 
+            onSaveAndCompleteEnrollmentExternal &&
                 onSaveAndCompleteEnrollmentExternal(enrollmentWithAllEvents);
             return batchActions([
                 startSaveEditEventDataEntry(

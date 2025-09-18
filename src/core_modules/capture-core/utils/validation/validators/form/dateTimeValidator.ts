@@ -25,7 +25,7 @@ const CUSTOM_VALIDATION_MESSAGES = {
 export function isValidDateTime(
     value: DateTimeValue | null | undefined,
     internalComponentError?: {
-        error?: string | null | undefined, 
+        error?: string | null | undefined,
         errorCode?: string | null | undefined
     } | null | undefined
 ): ValidationResult {

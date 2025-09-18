@@ -3,11 +3,11 @@ import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { scopeTypes } from '../../../../../../metaData';
-import type { 
-    CachedOptionSet, 
-    CachedTrackedEntityAttribute, 
-    CachedProgram, 
-    CachedTrackedEntityType 
+import type {
+    CachedOptionSet,
+    CachedTrackedEntityAttribute,
+    CachedProgram,
+    CachedTrackedEntityType
 } from '../../../../../../storageControllers';
 import type { DataEntryFormConfig } from '../types';
 

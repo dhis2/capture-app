@@ -40,7 +40,7 @@ export class SearchGroupFactory {
     };
     static _getSearchAttributeValueType(valueType: string, isUnique?: boolean | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
-        return !isUnique && searchAttributeValueType ? 
+        return !isUnique && searchAttributeValueType ?
             searchAttributeValueType : valueType;
     }
 
@@ -175,7 +175,7 @@ export class SearchGroupFactory {
     }
 
     build(
-        searchAttributes: ReadonlyArray<InputSearchAttribute>, 
+        searchAttributes: ReadonlyArray<InputSearchAttribute>,
         minAttributesRequiredToSearch: number
     ): Promise<SearchGroup[]> {
         const attributesBySearchGroup = searchAttributes
@@ -184,7 +184,7 @@ export class SearchGroupFactory {
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute && 
+                attribute.trackedEntityAttribute &&
                 (attribute.searchable || attribute.trackedEntityAttribute.unique))
             .reduce((accGroups: any, attribute) => {
                 if (attribute.trackedEntityAttribute!.unique) {

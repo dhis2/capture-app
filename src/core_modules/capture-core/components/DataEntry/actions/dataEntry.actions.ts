@@ -37,10 +37,10 @@ export const completeEventError =
 
 export const completeEvent =
     (
-        clientValues: Record<string, any> | null | undefined, 
-        serverData: Record<string, any>, 
-        event: Record<string, any>, 
-        eventId: string, 
+        clientValues: Record<string, any> | null | undefined,
+        serverData: Record<string, any>,
+        event: Record<string, any>,
+        eventId: string,
         id: string
     ) =>
         actionCreator(actionTypes.COMPLETE_EVENT)({
@@ -71,10 +71,10 @@ export const saveEventError = (error: string, id: string) => actionCreator(actio
 
 export const saveEvent =
     (
-        clientValues: Record<string, any> | null | undefined, 
-        serverData: Record<string, any>, 
-        event: Record<string, any>, 
-        eventId: string, 
+        clientValues: Record<string, any> | null | undefined,
+        serverData: Record<string, any>,
+        event: Record<string, any>,
+        eventId: string,
         id: string
     ) =>
         actionCreator(actionTypes.SAVE_EVENT)({
@@ -151,9 +151,9 @@ export const removeRelationship =
 
 export const addRelationship =
     (
-        dataEntryId: string, 
-        itemId: string, 
-        relationship: Record<string, any>, 
+        dataEntryId: string,
+        itemId: string,
+        relationship: Record<string, any>,
         newToEntity: Record<string, any>
     ) =>
         actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity });

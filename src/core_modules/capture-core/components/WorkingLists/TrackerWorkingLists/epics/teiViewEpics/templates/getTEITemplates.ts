@@ -17,8 +17,8 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
                 'userAccesses,userGroupAccesses',
         },
     });
-    return apiRes && apiRes.trackedEntityInstanceFilters 
-        ? apiRes.trackedEntityInstanceFilters 
+    return apiRes && apiRes.trackedEntityInstanceFilters
+        ? apiRes.trackedEntityInstanceFilters
         : [];
 };
 

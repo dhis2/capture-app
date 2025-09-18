@@ -7,15 +7,15 @@ import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
 const deriveReadiness = (
-    lockedSelectorLoads: boolean, 
-    selectedOrgUnitId?: string | null, 
-    selectedOrgUnitName?: string, 
-    displayName?: string, 
+    lockedSelectorLoads: boolean,
+    selectedOrgUnitId?: string | null,
+    selectedOrgUnitName?: string,
+    displayName?: string,
     ouNameError?: any
 ) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
-    if (!ouNameError && selectedOrgUnitId && 
+    if (!ouNameError && selectedOrgUnitId &&
         (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
         return false;
     }
@@ -41,9 +41,9 @@ export const ScopeSelector = ({
     orgUnitTooltip,
 }: OwnProps) => {
     const dispatch = useDispatch();
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({ 
-        name: undefined, 
-        id: selectedOrgUnitId 
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({
+        name: undefined,
+        id: selectedOrgUnitId
     });
     const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 
@@ -55,7 +55,7 @@ export const ScopeSelector = ({
 
     useEffect(() => {
         if (selectedOrgUnitId && selectedOrgUnit.id !== selectedOrgUnitId) {
-            selectedOrgUnitId && 
+            selectedOrgUnitId &&
                 setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
         }
     }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);
@@ -77,7 +77,7 @@ export const ScopeSelector = ({
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
             onResetOrgUnitId={() => {
-                selectedOrgUnit && 
+                selectedOrgUnit &&
                     dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id ?? undefined));
                 return onResetOrgUnitId();
             }}

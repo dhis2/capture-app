@@ -5,7 +5,7 @@ import type { TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../../metaData';
 import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
-const trackedEntityTypeIdSelector = (state: ReduxState) => 
+const trackedEntityTypeIdSelector = (state: ReduxState) =>
     state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
 export const makeTeiRegistrationMetadataSelector = () => createSelector(

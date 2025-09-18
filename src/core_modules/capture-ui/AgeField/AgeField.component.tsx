@@ -14,11 +14,11 @@ import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
-import { 
-    stringToTemporal, 
-    temporalToString, 
-    mapDhis2CalendarToTemporal, 
-    isCalendarSupported 
+import {
+    stringToTemporal,
+    temporalToString,
+    mapDhis2CalendarToTemporal,
+    isCalendarSupported
 } from '../../capture-core-utils/date';
 
 type AgeValues = {
@@ -231,7 +231,7 @@ class D2AgeFieldPlain extends Component<Props> {
         const { classes, innerMessage: messageContainer } = this.props;
         if (messageContainer) {
             const message = messageContainer.message && messageContainer.message[key];
-            const className = (classes && 
+            const className = (classes &&
                 classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
             return message && (<div className={className}>{message}</div>);
         }
@@ -257,7 +257,7 @@ class D2AgeFieldPlain extends Component<Props> {
                 <AgeNumberInput
                     label={i18n.t(label)}
                     value={currentValues[key]}
-                    onBlur={numberValue => 
+                    onBlur={numberValue =>
                         this.handleNumberBlur({ ...currentValues, [key]: numberValue })
                     }
                     onChange={numberValue => onChange({ ...currentValues, [key]: numberValue })}
@@ -303,7 +303,7 @@ class D2AgeFieldPlain extends Component<Props> {
         const { value, orientation, disabled } = this.props;
         const currentValues = value || {};
         const isVertical = orientation === orientations.VERTICAL;
-        const containerClass = isVertical ? 
+        const containerClass = isVertical ?
             defaultClasses.containerVertical : defaultClasses.containerHorizontal;
         const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : undefined;
         return (

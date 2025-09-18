@@ -20,10 +20,10 @@ type OptionSetDict = {
     [optionSetId: string]: TransformedOptionGroup[];
 };
 
-const createOptionSetToOptionGroupDictionary = ({ 
-    optionGroups 
-}: { 
-    optionGroups: OptionGroup[] 
+const createOptionSetToOptionGroupDictionary = ({
+    optionGroups
+}: {
+    optionGroups: OptionGroup[]
 }): OptionSetDict => optionGroups.reduce(
     (acc: OptionSetDict, optionGroup: OptionGroup) => {
         const optionSetId = optionGroup.optionSet.id;

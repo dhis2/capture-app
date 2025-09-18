@@ -75,7 +75,7 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
     };
 
     const getSubvalueKeysByType = (
-        clientData: ClientData, 
+        clientData: ClientData,
         columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>
     ): SubvalueKeysByType =>
         columnsWithSubvalues
@@ -123,8 +123,8 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
     };
 
     const addSubvalues = (
-        clientData: ClientData, 
-        subvaluesByType: SubvaluesByType, 
+        clientData: ClientData,
+        subvaluesByType: SubvaluesByType,
         columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>
     ): ClientData =>
         columnsWithSubvalues

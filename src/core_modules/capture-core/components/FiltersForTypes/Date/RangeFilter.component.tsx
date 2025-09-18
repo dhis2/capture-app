@@ -67,7 +67,7 @@ class RangeFilterPlain extends Component<Props> {
     };
 
     handleFieldBlur = (value: { [key: string]: string | null }) => {
-        this.props.handleFieldBlur && 
+        this.props.handleFieldBlur &&
             this.props.handleFieldBlur(this.getUpdatedValue(value) as any);
     };
 

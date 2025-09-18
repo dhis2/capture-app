@@ -11,7 +11,7 @@ import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
-import { navigateToEnrollmentOverview } from 
+import { navigateToEnrollmentOverview } from
     '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
@@ -157,9 +157,9 @@ const RegistrationDataEntryPlain = ({
     ), []);
 
     const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }: { teiId: string }) => {
-        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks 
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks
         // -- This is valid because the callback here is a React component
-        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks 
+        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks
         // -- This is valid because the callback here is a React component
 
         return (
@@ -280,8 +280,8 @@ const RegistrationDataEntryPlain = ({
                             />
                         </div>
                         {dataEntryIsReady && (
-                            <div 
-                                id="right-column-tracked-entity-type-registration-data-entry" 
+                            <div
+                                id="right-column-tracked-entity-type-registration-data-entry"
                                 className={classes.rightColumn}
                             >
                                 <DataEntryWidgetOutput
@@ -308,5 +308,5 @@ const RegistrationDataEntryPlain = ({
     );
 };
 
-export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as 
+export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as
     ComponentType<OwnProps & ContainerProps>;

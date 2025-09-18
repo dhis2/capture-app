@@ -13,7 +13,7 @@ import { TRACKER_WORKING_LISTS_TYPE, TRACKER_WORKING_LISTS, PROGRAM_STAGE_WORKIN
 // Deduplicate default template so that only one default template is returned
 const removeDefaultTemplate = (templates: any) =>
     templates.reduce(
-        (acc: any, template: any) => (template.isDefault && 
+        (acc: any, template: any) => (template.isDefault &&
             acc.find((accItem: any) => accItem.isDefault) ? acc : [...acc, template]),
         [],
     );

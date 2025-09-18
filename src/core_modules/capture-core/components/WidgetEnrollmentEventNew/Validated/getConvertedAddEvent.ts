@@ -77,10 +77,10 @@ export const getNewEventClientValues = (state: any, dataEntryKey: string, formFo
         dataEntryValues,
         dataEntryValuesMeta,
     );
-    const mainDataClientValues = { 
-        ...prevEventMainData, 
-        ...dataEntryClientValues, 
-        notes: getDataEntriesNotes(state, dataEntryKey) 
+    const mainDataClientValues = {
+        ...prevEventMainData,
+        ...dataEntryClientValues,
+        notes: getDataEntriesNotes(state, dataEntryKey)
     };
 
     return { formClientValues, mainDataClientValues };

@@ -126,12 +126,12 @@ export const Validated = ({
 
         resolve({ success: true });
     }), [
-        buildNewEventPayload, 
-        dispatch, 
-        onSaveExternal, 
-        onSaveAndCompleteEnrollmentSuccessActionType, 
-        onSaveSuccessActionType, 
-        onSaveAndCompleteEnrollmentErrorActionType, 
+        buildNewEventPayload,
+        dispatch,
+        onSaveExternal,
+        onSaveAndCompleteEnrollmentSuccessActionType,
+        onSaveSuccessActionType,
+        onSaveAndCompleteEnrollmentErrorActionType,
         onSaveErrorActionType
     ]);
 

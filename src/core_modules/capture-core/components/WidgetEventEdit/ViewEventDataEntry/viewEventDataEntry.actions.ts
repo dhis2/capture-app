@@ -23,7 +23,7 @@ import type {
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
-import { getCachedSingleResourceFromKeyAsync } from 
+import { getCachedSingleResourceFromKeyAsync } from
     '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
 import { USER_METADATA_STORES } from '../../../storageControllers';
 import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
@@ -35,8 +35,8 @@ export const actionTypes = {
 };
 
 function getAssignee(clientAssignee: any) {
-    return clientAssignee ? 
-        convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : 
+    return clientAssignee ?
+        convertClientToForm(clientAssignee, dataElementTypes.USERNAME) :
         clientAssignee;
 }
 
@@ -102,7 +102,7 @@ export const loadViewEventDataEntry =
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {
                 const categoryOptionsPromises = optionIds.map(async (optionId) => {
                     const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(
-                        USER_METADATA_STORES.CATEGORY_OPTIONS, 
+                        USER_METADATA_STORES.CATEGORY_OPTIONS,
                         optionId
                     );
                     if (cachedCategoryOption.displayName === 'default') {

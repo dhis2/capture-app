@@ -94,7 +94,7 @@ const mapDispatchToProps = (dispatch: any) => ({
         dataEntryId: string,
         itemId: string,
         onUpdateField?: (
-            innerAction: any, 
+            innerAction: any,
             data: { value: any; valueMeta: ValueMetaUpdateOutput; fieldId: string; dataEntryId: string; itemId: string }
         ) => void,
     ) => {

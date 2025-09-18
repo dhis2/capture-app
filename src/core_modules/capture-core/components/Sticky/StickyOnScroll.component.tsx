@@ -52,7 +52,7 @@ class StickyOnScrollPlain extends React.Component<Props> {
     isAtBottomOfContainer = () => {
         const elementRect = this.stickyContainer.getBoundingClientRect();
         const parentRect = this.stickyContainer.parentElement.getBoundingClientRect();
-        return parentRect.bottom <= elementRect.bottom && 
+        return parentRect.bottom <= elementRect.bottom &&
             (this.stickyContainer.offsetTop - Math.abs(parentRect.top) < this.props.offsetTop);
     }
 

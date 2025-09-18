@@ -129,12 +129,12 @@ const useCallbackMainPage = ({
     setBulkDataEntryTrackedEntityIds: (ids?: Array<string>) => void;
 }) => {
     const onChangeTemplate = useCallback(
-        (id?: string) => handleChangeTemplateUrl({ 
-            programId: programId || '', 
-            orgUnitId, 
-            selectedTemplateId: id, 
-            showAllAccessible, 
-            navigate 
+        (id?: string) => handleChangeTemplateUrl({
+            programId: programId || '',
+            orgUnitId,
+            selectedTemplateId: id,
+            showAllAccessible,
+            navigate
         }),
         [navigate, orgUnitId, programId, showAllAccessible],
     );
@@ -182,7 +182,7 @@ const MainPageContainer = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
 
     const selectedProgram = programCollection.get(programId);
-    const trackedEntityType = (selectedProgram && 
+    const trackedEntityType = (selectedProgram &&
         selectedProgram instanceof TrackerProgram) ? selectedProgram.trackedEntityType : undefined;
     const trackedEntityTypeId = trackedEntityType?.id;
     const displayFrontPageList = Boolean(trackedEntityTypeId && selectedProgram?.displayFrontPageList);

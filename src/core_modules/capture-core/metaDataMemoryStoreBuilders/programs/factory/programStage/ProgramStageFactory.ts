@@ -87,7 +87,7 @@ export class ProgramStageFactory {
                     });
 
                     await sectionDataElement.fieldMap.asyncForEach(async (field) => {
-                        if (field.objectType && 
+                        if (field.objectType &&
                             field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                             const id = field.dataElementId;
                             const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
@@ -161,7 +161,7 @@ export class ProgramStageFactory {
     }
 
     async _addLeftoversSection(
-        stageForm: RenderFoundation, 
+        stageForm: RenderFoundation,
         cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined
     ) {
         if (!cachedProgramStageDataElements) return;

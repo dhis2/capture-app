@@ -86,7 +86,7 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
         }));
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
-    action$: EpicAction<SelectionsCompletenessPayload>, 
+    action$: EpicAction<SelectionsCompletenessPayload>,
     store: ReduxStore
 ) =>
     action$.pipe(
@@ -99,7 +99,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
             return page === 'new';
         }),
         filter((action) => {
-            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not 
+            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not
             // SET_ORG_UNIT or FROM_URL_CURRENT_SELECTIONS_VALID
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
@@ -129,7 +129,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
                 return false;
             }
             const columnConfig = [
-                ...getDefaultMainColumnConfig(stageContainer.stage), 
+                ...getDefaultMainColumnConfig(stageContainer.stage),
                 ...getColumnMetaDataConfig(stageContainer.stage.stageForm)
             ];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);

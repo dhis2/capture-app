@@ -8,5 +8,5 @@ export const scopeSelectorActionTypes = {
 export const setOrgUnitFromScopeSelector = (orgUnitId: string) =>
     actionCreator(scopeSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId });
 
-export const resetOrgUnitIdFromScopeSelector = (previousOrgUnitId?: string) => 
+export const resetOrgUnitIdFromScopeSelector = (previousOrgUnitId?: string) =>
     actionCreator(scopeSelectorActionTypes.RESET_ORG_UNIT_ID)({ previousOrgUnitId });

@@ -11,15 +11,15 @@ type ExtractedProps = {
 };
 
 type RestProps = Omit<
-    EventWorkingListsRowMenuSetupOutputProps & { 
-        lastIdDeleted: string; 
-        lastTransactionOnListDataRefresh: number; 
-        listDataRefreshTimestamp: number 
+    EventWorkingListsRowMenuSetupOutputProps & {
+        lastIdDeleted: string;
+        lastTransactionOnListDataRefresh: number;
+        listDataRefreshTimestamp: number
     },
-    keyof (ExtractedProps & { 
-        lastIdDeleted: string; 
-        lastTransactionOnListDataRefresh: number; 
-        listDataRefreshTimestamp: number 
+    keyof (ExtractedProps & {
+        lastIdDeleted: string;
+        lastTransactionOnListDataRefresh: number;
+        listDataRefreshTimestamp: number
     })
 >;
 

@@ -38,8 +38,8 @@ class NewRelationshipPlain extends React.Component<Props> {
         }
 
         this.props.onAddRelationship(
-            { id: relationshipType.id, name: relationshipType.name }, 
-            entity, 
+            { id: relationshipType.id, name: relationshipType.name },
+            entity,
             relationshipType.to.entity
         );
     }

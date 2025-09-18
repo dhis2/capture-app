@@ -101,12 +101,12 @@ const RegisterTeiPlain = ({
         />
     ), [trackedEntityName]);
 
-    const ExistingUniqueValueDialogActions = useCallback(({ 
-        teiId, 
-        attributeValues 
-    }: { 
-        teiId: string; 
-        attributeValues: any 
+    const ExistingUniqueValueDialogActions = useCallback(({
+        teiId,
+        attributeValues
+    }: {
+        teiId: string;
+        attributeValues: any
     }) => (
         <Button
             dataTest="existing-unique-value-link-tei-button"

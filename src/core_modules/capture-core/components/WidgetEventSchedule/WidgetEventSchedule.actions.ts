@@ -72,9 +72,9 @@ export const scheduleEvent = (
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: onSaveSuccessActionType && 
+            commit: onSaveSuccessActionType &&
                 { type: onSaveSuccessActionType, meta: { serverData, uid } },
-            rollback: onSaveErrorActionType && 
+            rollback: onSaveErrorActionType &&
                 { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });
@@ -91,9 +91,9 @@ export const updateScheduledDateForEvent = (
             method: effectMethods.POST,
             data: serverData,
         },
-        commit: onSaveSuccessActionType && 
+        commit: onSaveSuccessActionType &&
             { type: onSaveSuccessActionType, meta: { eventId, serverData } },
-        rollback: onSaveErrorActionType && 
+        rollback: onSaveErrorActionType &&
             { type: onSaveErrorActionType, meta: { eventId, serverData } },
     },
 });

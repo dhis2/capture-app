@@ -28,7 +28,7 @@ const isProgramTrackedEntityAttribute = (
 ): attribute is ProgramTrackedEntityAttribute =>
     !isPluginElement(attribute);
 
-const buildProgramSection = (programSection: any) => 
+const buildProgramSection = (programSection: any) =>
     programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
 
 const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
@@ -137,7 +137,7 @@ const buildElementsForSection = async ({
 
             /* eslint-disable no-await-in-loop */
             await (pluginElement.fieldMap as any).asyncForEach(async (field: any) => {
-                if (field.objectType && 
+                if (field.objectType &&
                     field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                     const fieldElement = await buildDataElement(
                         field,

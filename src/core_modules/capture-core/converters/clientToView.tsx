@@ -73,8 +73,8 @@ const valueConvertersForType = {
 };
 
 export function convertValue(
-    value: any, 
-    type: keyof typeof dataElementTypes, 
+    value: any,
+    type: keyof typeof dataElementTypes,
     dataElement?: DataElement | null
 ) {
     if (!value && value !== 0 && value !== false) {

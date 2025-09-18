@@ -79,8 +79,8 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Pro
             className={cx(classes.indicatorRow, { isLastItem })}
         >
             <div>{indicator.message}</div>
-            {indicator.color ? 
-                <div className={classes.indicatorValue}>{renderLegend(indicator.color)}</div> : 
+            {indicator.color ?
+                <div className={classes.indicatorValue}>{renderLegend(indicator.color)}</div> :
                 null
             }
         </div>

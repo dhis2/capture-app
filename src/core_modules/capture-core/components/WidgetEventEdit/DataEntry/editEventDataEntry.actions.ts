@@ -27,9 +27,9 @@ import { addFormData } from '../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
-import type { 
-    EnrollmentData, 
-    AttributeValue 
+import type {
+    EnrollmentData,
+    AttributeValue
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
@@ -141,7 +141,7 @@ export const openEventForEditInDataEntry = ({
             id: `attributeCategoryOptions-${category.id}`,
             type: 'TEXT',
             validatorContainers: getCategoryOptionsValidatorContainers(
-                { categories: programCategory.categories }, 
+                { categories: programCategory.categories },
                 category.id
             ),
         })));

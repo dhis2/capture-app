@@ -34,8 +34,8 @@ export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)({ error: message });
 
 export const eventFromUrlRetrieved = (
-    eventContainer: any, 
-    prevProgramId: string | null, 
+    eventContainer: any,
+    prevProgramId: string | null,
     categoriesData: Array<any> | null
 ) =>
     actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId, categoriesData });

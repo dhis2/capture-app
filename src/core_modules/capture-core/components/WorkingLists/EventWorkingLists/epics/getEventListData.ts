@@ -46,7 +46,7 @@ const getApiFilterQueryArgument = (filters: { [id: string]: string} | null, main
                 }, []) :
             null;
 
-    const filterArgument = filterQueries && filterQueries.length > 0 ? 
+    const filterArgument = filterQueries && filterQueries.length > 0 ?
         { filter: filterQueries } : null;
     return filterArgument;
 };
@@ -100,7 +100,7 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null,
 };
 
 const getApiCategoriesQueryArgument = (
-    categories: { [id: string]: string} | null, 
+    categories: { [id: string]: string} | null,
     categoryCombinationId?: string | null
 ) => {
     if (!categories || !categoryCombinationId) {

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FiltersRowsComponent } from './FiltersRows.component';
-import type { 
-    Column, 
-    FiltersOnly, 
-    AdditionalFilters, 
-    UpdateFilter, 
-    ClearFilter, 
-    RemoveFilter, 
-    StickyFilters 
+import type {
+    Column,
+    FiltersOnly,
+    AdditionalFilters,
+    UpdateFilter,
+    ClearFilter,
+    RemoveFilter,
+    StickyFilters
 } from '../types';
 
 type Props = {

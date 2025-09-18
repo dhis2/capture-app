@@ -102,9 +102,9 @@ const SearchFormIndex = ({
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
 
     useFormDataLifecycle(
-        searchGroupsForSelectedScope, 
-        addFormIdToReduxStore, 
-        removeFormDataFromReduxStore, 
+        searchGroupsForSelectedScope,
+        addFormIdToReduxStore,
+        removeFormDataFromReduxStore,
         keptFallbackSearchFormValues
     );
 
@@ -160,10 +160,10 @@ const SearchFormIndex = ({
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, resultsPageSize });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ 
-                        trackedEntityTypeId: searchScopeId, 
-                        formId, 
-                        resultsPageSize 
+                    searchViaAttributesOnScopeTrackedEntityType({
+                        trackedEntityTypeId: searchScopeId,
+                        formId,
+                        resultsPageSize
                     });
                     break;
                 default:

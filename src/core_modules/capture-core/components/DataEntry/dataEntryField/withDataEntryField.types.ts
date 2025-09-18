@@ -17,7 +17,7 @@ export type Props = {
     saveAttempted?: boolean;
     dataEntryFieldRef?: (instance: any, key: string) => void;
     onUpdateDataEntryField?: (
-        innerAction: any, 
+        innerAction: any,
         data: { value: any; valueMeta: any; fieldId: string; dataEntryId: string; itemId: string }
     ) => void;
 };
@@ -31,7 +31,7 @@ export type Settings = {
     getIsHidden?: (props: Record<string, any>) => boolean;
     getPassOnFieldData?: (props: Props) => boolean;
     getOnUpdateField?: (props: Record<string, any>) => (
-        innerAction: any, 
+        innerAction: any,
         data: { value: any; valueMeta: any; fieldId: string; dataEntryId: string; itemId: string }
     ) => void;
 };

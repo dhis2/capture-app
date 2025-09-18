@@ -17,7 +17,7 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
                 'user,userAccesses,userGroupAccesses',
         },
     });
-    return apiRes && apiRes.programStageWorkingLists ? 
+    return apiRes && apiRes.programStageWorkingLists ?
         apiRes.programStageWorkingLists : [];
 };
 

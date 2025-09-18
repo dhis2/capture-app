@@ -6,12 +6,12 @@ import { useDuplicateCheckerOnSave } from './useDuplicateCheckerOnSave';
 import type { Props } from './withDuplicateCheckOnSave.types';
 
 const getMetadataInfo = (
-    enrollmentMetadata: Enrollment, 
+    enrollmentMetadata: Enrollment,
     teiRegistrationMetadata: TeiRegistration
-): { 
-    metadata?: Enrollment | TeiRegistration; 
-    scopeType: string; 
-    passOnMetadata: Record<string, any> 
+): {
+    metadata?: Enrollment | TeiRegistration;
+    scopeType: string;
+    passOnMetadata: Record<string, any>
 } => {
     if (enrollmentMetadata) {
         return {

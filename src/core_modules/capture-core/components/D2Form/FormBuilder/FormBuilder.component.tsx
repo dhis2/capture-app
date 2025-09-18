@@ -68,22 +68,22 @@ type Props = {
     values: { [id: string]: any };
     fieldsUI: { [id: string]: FieldUI };
     onUpdateFieldAsync: (
-        fieldId: string, 
-        fieldLabel: string, 
-        formBuilderId: string, 
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
         callback: (...args: any[]) => any
     ) => void;
     onUpdateField: (
-        value: any, 
-        uiState: FieldUI, 
-        fieldId: string, 
-        formBuilderId: string, 
+        value: any,
+        uiState: FieldUI,
+        fieldId: string,
+        formBuilderId: string,
         promiseForIsValidating: string
     ) => void;
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void;
     onFieldsValidated?: ((
-        fieldsUI: { [id: string]: FieldUI }, 
-        formBuilderId: string, 
+        fieldsUI: { [id: string]: FieldUI },
+        formBuilderId: string,
         uidsForIsValidating: Array<string>
     ) => void) | null;
     querySingleResource: QuerySingleResource;
@@ -358,8 +358,8 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     async commitFieldUpdate(
-        { fieldId, validators, onIsEqual }: FieldCommitConfig, 
-        value: any, 
+        { fieldId, validators, onIsEqual }: FieldCommitConfig,
+        value: any,
         options?: FieldCommitOptionsExtended | null
     ) {
         const {
@@ -581,7 +581,7 @@ export class FormBuilder extends React.Component<Props> {
         const asyncProps: any = {};
 
         if (props.async) {
-            asyncProps.onCommitAsync = (callback: (...args: any[]) => any) => 
+            asyncProps.onCommitAsync = (callback: (...args: any[]) => any) =>
                 this.handleCommitAsync(field.id, props.label, callback);
             asyncProps.asyncUIState = this.asyncUIState[field.id];
         }

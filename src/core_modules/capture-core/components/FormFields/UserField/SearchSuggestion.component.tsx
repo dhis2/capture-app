@@ -90,7 +90,7 @@ export const SearchSuggestion = (props: Props) => {
     }, [onSelect, user]);
 
     const handleBlur = React.useCallback((event: any) => {
-        if (!event.relatedTarget || 
+        if (!event.relatedTarget ||
             !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
             onExitSearch();
         }
@@ -100,8 +100,8 @@ export const SearchSuggestion = (props: Props) => {
             role="button"
             tabIndex={-1}
             ref={handleRef}
-            className={useUpwardList ? 
-                classNames(defaultClasses.suggestion, defaultClasses.suggestionInUpList) : 
+            className={useUpwardList ?
+                classNames(defaultClasses.suggestion, defaultClasses.suggestionInUpList) :
                 defaultClasses.suggestion
             }
             onKeyDown={handleKeyDown}

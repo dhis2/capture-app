@@ -103,7 +103,7 @@ export class OrgUnitTree extends React.Component<Props, State> {
               const children = child.children.length > 0 ? [] : null;
               let open = children !== null && selectedPath && selectedPath.startsWith(child.path);
 
-              if (open && opening && selectedPath && 
+              if (open && opening && selectedPath &&
                   selectedPath.substr(child.path.length).indexOf('/') > -1) {
                   this.fetchNode(child.path, opening);
               } else {

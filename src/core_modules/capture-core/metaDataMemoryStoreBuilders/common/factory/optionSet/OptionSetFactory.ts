@@ -85,7 +85,7 @@ export class OptionSetFactory {
 
         const options = await Promise.all(optionsPromises);
 
-        const optionGroups = cachedOptionSet.optionGroups && 
+        const optionGroups = cachedOptionSet.optionGroups &&
             new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup((o) => {
                 o.id = group.id;
                 o.optionIds = new Map(group.options.map(option => [option, option]));

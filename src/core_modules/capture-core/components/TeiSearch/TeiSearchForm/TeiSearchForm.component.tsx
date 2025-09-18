@@ -184,8 +184,8 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
                 </div>
             );
         }
-        const searchButtonText = searchGroup.unique 
-            ? this.getUniqueSearchButtonText(searchForm) 
+        const searchButtonText = searchGroup.unique
+            ? this.getUniqueSearchButtonText(searchForm)
             : i18n.t('Search by attributes');
         return (
             <div

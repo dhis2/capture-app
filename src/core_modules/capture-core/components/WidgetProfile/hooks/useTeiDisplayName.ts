@@ -31,8 +31,8 @@ const getAttributesValues = (attributes: TeiAttribute[], firstId: string, second
     const firstValue = convertValue(attributes.find(({ attribute }) => attribute === firstId));
     const secondValue = convertValue(attributes.find(({ attribute }) => attribute === secondId));
 
-    return firstValue ?? secondValue 
-        ? `${firstValue}${firstValue && ' '}${secondValue}` 
+    return firstValue ?? secondValue
+        ? `${firstValue}${firstValue && ' '}${secondValue}`
         : '';
 };
 
@@ -49,8 +49,8 @@ const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: { id: strin
 };
 
 const deriveTeiName = (
-    tetAttributes: TetAttribute[] | { id: string }[], 
-    updatedAttributes: TeiAttribute[], 
+    tetAttributes: TetAttribute[] | { id: string }[],
+    updatedAttributes: TeiAttribute[],
     fallbackName?: string
 ) => {
     if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;

@@ -77,21 +77,21 @@ class D2TrueOnlyPlain extends Component<Props> {
                         })()
                     }
                     {useSwitch ?
-                        <Switch 
-                            checked={!!value} 
-                            label={useValueLabel ? label : ''} 
-                            onChange={this.handleChange} 
-                            value={value} 
-                            dense 
-                            className={classes.checkbox} 
+                        <Switch
+                            checked={!!value}
+                            label={useValueLabel ? label : ''}
+                            onChange={this.handleChange}
+                            value={value}
+                            dense
+                            className={classes.checkbox}
                         /> :
-                        <Checkbox 
-                            checked={!!value} 
-                            label={useValueLabel ? label : ''} 
-                            onChange={this.handleChange} 
-                            value={value} 
-                            dense 
-                            className={classes.checkbox} 
+                        <Checkbox
+                            checked={!!value}
+                            label={useValueLabel ? label : ''}
+                            onChange={this.handleChange}
+                            value={value}
+                            dense
+                            className={classes.checkbox}
                         />
                     }
                 </FieldSet>

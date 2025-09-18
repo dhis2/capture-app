@@ -36,7 +36,7 @@ const computeTargetSidesDualMatchingTET = (() => {
     };
 
     return (
-        sourceProgramIds: readonly string[] | undefined, 
+        sourceProgramIds: readonly string[] | undefined,
         fromProgramId: string | undefined, 
         toProgramId: string | undefined
     ): TargetSides[] => {

@@ -17,7 +17,7 @@ export function InnerMessage(props: Props) {
     const { innerMessage: messageContainer, messageKey: key, classes } = props;
     if (messageContainer) {
         const message = messageContainer.message && messageContainer.message[key];
-        const className = (classes && 
+        const className = (classes &&
             classes[messageTypeClass[messageContainer.messageType]]) || '';
         return message ? (<div className={className}>{message}</div>) : null;
     }

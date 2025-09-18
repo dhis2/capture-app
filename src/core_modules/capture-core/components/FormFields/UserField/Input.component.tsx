@@ -59,7 +59,7 @@ export const Input = (props: Props) => {
         }
     }, [onHighlightSuggestion, onSelectSuggestion, useUpwardList]);
     const handleBlur = React.useCallback((event: any) => {
-        if (!event.relatedTarget || 
+        if (!event.relatedTarget ||
             !isSuggestionBlurTarget(event.relatedTarget, suggestionName)) {
             onExitSearch();
         }

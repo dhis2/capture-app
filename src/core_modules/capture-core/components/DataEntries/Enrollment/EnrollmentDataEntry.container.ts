@@ -42,13 +42,13 @@ const mapDispatchToProps = (dispatch: any) => ({
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
             asyncUpdateSuccessBatch(
-                successInnerAction, 
-                dataEntryId, 
-                itemId, 
-                programId, 
-                orgUnit, 
-                stage, 
-                formFoundation, 
+                successInnerAction,
+                dataEntryId,
+                itemId,
+                programId,
+                orgUnit,
+                stage,
+                formFoundation,
                 onGetValidationContext
             );
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;

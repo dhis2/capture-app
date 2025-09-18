@@ -1,4 +1,4 @@
 import { useSelector } from 'react-redux';
 
-export const useCurrentTrackedEntityTypeId = () => 
+export const useCurrentTrackedEntityTypeId = () =>
     useSelector(({ currentSelections }: any) => currentSelections.trackedEntityTypeId);

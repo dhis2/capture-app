@@ -11,10 +11,10 @@ export const TemplateSelector = () => {
     const { programStageTemplates, loading: loadingProgramStageTemplates } = useProgramStageTemplates(programId);
 
     const onSelectTemplate = (template: WorkingListTemplate) =>
-        navigate(`/?${buildUrlQueryString({ 
-            orgUnitId, 
-            programId, 
-            selectedTemplateId: template.id 
+        navigate(`/?${buildUrlQueryString({
+            orgUnitId,
+            programId,
+            selectedTemplateId: template.id
         })}`);
 
     const onCreateTemplate = () => {

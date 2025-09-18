@@ -62,7 +62,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
             let currentRequestCancelablePromises: any;
 
             const isRequestAborted = () =>
-                (currentRequestCancelablePromises && 
+                (currentRequestCancelablePromises &&
                     cancelablePromiseRef.current !== currentRequestCancelablePromises);
 
             currentRequestCancelablePromises = makeCancelablePromise(

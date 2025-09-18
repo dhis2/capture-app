@@ -102,7 +102,7 @@ const NoteSectionPlain = ({
                     </span>}
                     <span className={classes.lastUpdated}>
                         <Tooltip content={convertClientToList(
-                            moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(), 
+                            moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(),
                             dataElementTypes.DATETIME
                         )}>
                             {moment(fromServerDate(storedAt)).fromNow()}
@@ -140,7 +140,7 @@ const NoteSectionPlain = ({
                 </Editor>
             </div>
 
-            {isEditing && 
+            {isEditing &&
                 <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
                 <Button
                     dataTest="add-note-btn"

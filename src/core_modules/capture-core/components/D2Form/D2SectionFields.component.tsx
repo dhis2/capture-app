@@ -55,18 +55,18 @@ type Props = {
     rulesCompulsoryFields: RulesCompulsoryFields,
     rulesDisabledFields: RulesDisabledFields,
     onUpdateField: (
-        value: any, 
-        uiState: any, 
-        elementId: string, 
-        formBuilderId: string, 
-        formId: string, 
+        value: any,
+        uiState: any,
+        elementId: string,
+        formBuilderId: string,
+        formId: string,
         updateCompletePromise: Promise<any> | null
     ) => void,
     onUpdateFieldAsync: (
-        fieldId: string, 
-        fieldLabel: string, 
-        formBuilderId: string, 
-        formId: string, 
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
         callback: (...args: any[]) => any
     ) => void,
     formId: string,
@@ -228,9 +228,9 @@ export class D2SectionFieldsComponent extends Component<Props> {
     }
 
     handleUpdateFieldAsync = (
-        fieldId: string, 
-        fieldLabel: string, 
-        formBuilderId: string, 
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
         callback: (...args: any[]) => any
     ) => {
         this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);

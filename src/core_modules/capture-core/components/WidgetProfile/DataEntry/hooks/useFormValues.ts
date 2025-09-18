@@ -22,13 +22,13 @@ const buildFormValues = async ({
     querySingleResource: any;
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), 
+        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }),
         {}
     );
     const formValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ 
-            ...acc, 
-            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) 
+        (acc, currentValue) => ({
+            ...acc,
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType)
         }),
         {},
     );

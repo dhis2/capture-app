@@ -10,7 +10,7 @@ export const useFiltersOnly = (
 ) =>
     useMemo(() => {
         const enableUserAssignment =
-            !programStageId && 
+            !programStageId &&
             Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);
         return [
             {

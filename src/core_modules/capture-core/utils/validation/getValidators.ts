@@ -276,7 +276,7 @@ function buildUniqueValidator(
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getValidators = (
-    metaData: DataElement | DateDataElement, 
+    metaData: DataElement | DateDataElement,
     querySingleResource?: any
 ): Array<ValidatorContainer> => [
     buildCompulsoryValidator,

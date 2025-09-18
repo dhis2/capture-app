@@ -126,7 +126,7 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            ...(assignee && 
+            ...(assignee &&
                 { assignedUser: convertClientToServer(assignee, dataElementTypes.ASSIGNEE) }),
         }));
     }, [

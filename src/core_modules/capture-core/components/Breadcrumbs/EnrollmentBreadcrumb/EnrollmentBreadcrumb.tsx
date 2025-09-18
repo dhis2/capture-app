@@ -50,7 +50,7 @@ const pageKeys = {
 } as const;
 
 const eventIsScheduled = (eventStatus?: EventStatus): boolean =>
-    !!eventStatus && 
+    !!eventStatus &&
     ([EventStatuses.SCHEDULE, EventStatuses.OVERDUE, EventStatuses.SKIPPED] as EventStatus[])
         .includes(eventStatus);
 

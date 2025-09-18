@@ -20,10 +20,10 @@ export const useResetProgramId = () => {
             teiId,
             ...restOfQueries
         } = getLocationQuery();
-        navigate(`${pageToPush}?${buildUrlQueryString({ 
-            ...restOfQueries, 
-            teiId: teiId ?? pageContext?.teiId, 
-            enrollmentId: 'AUTO' 
+        navigate(`${pageToPush}?${buildUrlQueryString({
+            ...restOfQueries,
+            teiId: teiId ?? pageContext?.teiId,
+            enrollmentId: 'AUTO'
         })}`);
     };
 

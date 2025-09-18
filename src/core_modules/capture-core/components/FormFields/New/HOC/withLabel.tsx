@@ -83,7 +83,7 @@ export const withLabel = (hocParams?: HOCParams | null) => (InnerComponent: Reac
             return {
                 labelContainer: null,
                 labelClasses: {
-                    label: useVerticalOrientation ? labelVertical : 
+                    label: useVerticalOrientation ? labelVertical :
                         classNames(label, onGetCustomFieldLabeClass && onGetCustomFieldLabeClass(props)),
                 },
                 passOnClasses: rest,

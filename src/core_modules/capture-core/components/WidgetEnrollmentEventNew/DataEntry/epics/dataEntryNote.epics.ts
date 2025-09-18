@@ -12,8 +12,8 @@ import {
 import { ApiUtils, ReduxStore } from '../../../../../capture-core-utils/types';
 
 export const addNoteForNewEnrollmentEventEpic = (
-    action$: any, 
-    store: ReduxStore, 
+    action$: any,
+    store: ReduxStore,
     { querySingleResource, fromClientDate }: ApiUtils
 ) =>
     action$.pipe(

@@ -21,20 +21,20 @@ export type Props = {
     validatorContainers?: Array<ValidatorContainer>;
     propName: string;
     onUpdateField?: (
-        innerAction: any, 
+        innerAction: any,
         data: { value: any; valueMeta: ValueMetaUpdateOutput; fieldId: string; dataEntryId: string; itemId: string }
     ) => void;
     value: any;
     valueMeta: ValueMetaInput;
     itemId: string;
     onUpdateFieldInner: (
-        value: any, 
-        valueMeta: ValueMetaUpdateOutput, 
-        fieldId: string, 
-        dataEntryId: string, 
-        itemId: string, 
+        value: any,
+        valueMeta: ValueMetaUpdateOutput,
+        fieldId: string,
+        dataEntryId: string,
+        itemId: string,
         onUpdateField?: (
-            innerAction: any, 
+            innerAction: any,
             data: { value: any; valueMeta: ValueMetaUpdateOutput; fieldId: string; dataEntryId: string; itemId: string }
         ) => void
     ) => void;

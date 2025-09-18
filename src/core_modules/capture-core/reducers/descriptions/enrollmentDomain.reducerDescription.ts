@@ -2,7 +2,7 @@ import { createReducerDescription } from '../../trackerRedux';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentNote/WidgetEnrollmentNote.actions';
-import { actionTypes as editEventActionTypes } 
+import { actionTypes as editEventActionTypes }
     from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { newEventWidgetActionTypes } from '../../components/WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
@@ -166,7 +166,7 @@ export const enrollmentDomainDesc = createReducerDescription(
         [ROLLBACK_ENROLLMENT_EVENTS]: (state, { payload: { events } }) => {
             const eventsToRollback = events.map(event => event.event);
 
-            // Iterate over the events in state.enrollment.events and rollback the ones that are in eventsToRollback. 
+            // Iterate over the events in state.enrollment.events and rollback the ones that are in eventsToRollback.
             // If the event has dataToRollback, use that, otherwise remove it from state.enrollment.events
             const enrollmentEvents = state.enrollment.events.map((event) => {
                 if (eventsToRollback.includes(event.event)) {

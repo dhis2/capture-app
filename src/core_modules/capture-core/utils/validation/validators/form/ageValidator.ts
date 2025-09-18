@@ -22,8 +22,8 @@ function isValidNumberPart(value: string | null | undefined) {
 }
 
 function validateNumbers(
-    years: string | null | undefined, 
-    months: string | null | undefined, 
+    years: string | null | undefined,
+    months: string | null | undefined,
     days: string | null | undefined
 ) {
     const errorResult: any[] = [];
@@ -48,7 +48,7 @@ function validateNumbers(
 }
 
 function validateDate(
-    date: string | null | undefined, 
+    date: string | null | undefined,
     internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
 ) {
     const { valid } = isValidDate(date, internalComponentError);
@@ -63,14 +63,14 @@ function isAllEmpty(value: AgeValues) {
 
 
 export function isValidAge(
-    value: any, 
+    value: any,
     internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
 ) {
     if (isAllEmpty(value)) {
         return false;
     }
 
-    if (internalComponentError && 
+    if (internalComponentError &&
         internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return { valid: true, errorMessage: null };
     }

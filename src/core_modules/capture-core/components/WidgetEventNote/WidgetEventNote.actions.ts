@@ -18,9 +18,9 @@ export const requestAddNoteForEvent = (itemId: string, dataEntryId: string, note
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT)({ itemId, dataEntryId, note });
 
 export const startAddNoteForEvent = (
-    eventUid: string, 
-    serverData: Record<string, unknown>, 
-    selections: Record<string, unknown>, 
+    eventUid: string,
+    serverData: Record<string, unknown>,
+    selections: Record<string, unknown>,
     context: Record<string, unknown>
 ) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_EVENT)({ selections, context }, {

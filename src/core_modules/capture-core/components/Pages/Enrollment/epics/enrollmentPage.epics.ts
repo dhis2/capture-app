@@ -85,7 +85,7 @@ const programIdReady = (store: any): boolean => {
 };
 
 const enrollmentIdLoaded = (enrollmentId: string, enrollments: Array<Record<string, unknown>> | null | undefined) =>
-    enrollments && 
+    enrollments &&
     enrollments.some((enrollment: any) => enrollment.enrollment === enrollmentId);
 
 
@@ -137,8 +137,8 @@ export const enrollmentIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) =>
-            showErrorViewOnEnrollmentPage({ 
-                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }) 
+            showErrorViewOnEnrollmentPage({
+                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId })
             })),
     );
 
@@ -193,8 +193,8 @@ export const verifyTeiFetchSuccessEpic = (action$: any, store: any) =>
 export const fetchTeiErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI_ERROR),
-        map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({ 
-            error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }) 
+        map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({
+            error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId })
         })),
     );
 
@@ -223,8 +223,8 @@ export const programIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
         map(({ payload: { programId } }) =>
-            showErrorViewOnEnrollmentPage({ 
-                error: i18n.t('Program with id "{{programId}}" does not exist', { programId }) 
+            showErrorViewOnEnrollmentPage({
+                error: i18n.t('Program with id "{{programId}}" does not exist', { programId })
             })),
     );
 
@@ -269,7 +269,7 @@ export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleRes
         map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
         concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
             .pipe(
-                map(({ programOwners }: any) => 
+                map(({ programOwners }: any) =>
                     programOwners.find((programOwner: any) => programOwner.program === programId)),
                 filter(programOwner => programOwner),
                 concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
@@ -278,9 +278,9 @@ export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleRes
                             if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                                navigate(`/enrollment?${buildUrlQueryString({ 
-                                    ...restOfQueries, 
-                                    orgUnitId: programOwner.orgUnit 
+                                navigate(`/enrollment?${buildUrlQueryString({
+                                    ...restOfQueries,
+                                    orgUnitId: programOwner.orgUnit
                                 })}`);
                             }
                             return EMPTY;

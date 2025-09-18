@@ -60,7 +60,7 @@ const useMissingStatus = () => {
             } else {
                 setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW);
             }
-        } else if (selectedProgramIsTracker && !programHasEnrollments && 
+        } else if (selectedProgramIsTracker && !programHasEnrollments &&
             enrollmentAccessLevel !== enrollmentAccessLevels.UNKNOWN_ACCESS) {
             setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
         } else if (selectedProgramIsEvent) {
@@ -95,10 +95,10 @@ const useNavigations = () => {
     const navigateToEventWorkingList = () =>
         navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
-        navigate(`/new?${buildUrlQueryString({ 
-            programId, 
-            orgUnitId, 
-            trackedEntityTypeId: tetId 
+        navigate(`/new?${buildUrlQueryString({
+            programId,
+            orgUnitId,
+            trackedEntityTypeId: tetId
         })}`);
 
     return {

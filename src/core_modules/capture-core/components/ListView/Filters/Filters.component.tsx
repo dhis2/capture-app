@@ -6,15 +6,15 @@ import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
-import type { 
-    Column, 
-    StickyFilters, 
-    FiltersOnly, 
-    AdditionalFilters, 
-    FilterOnly, 
-    UpdateFilter, 
-    ClearFilter, 
-    RemoveFilter 
+import type {
+    Column,
+    StickyFilters,
+    FiltersOnly,
+    AdditionalFilters,
+    FilterOnly,
+    UpdateFilter,
+    ClearFilter,
+    RemoveFilter
 } from '../types';
 
 const getStyles = (theme: any) => ({

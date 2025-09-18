@@ -5,7 +5,7 @@ import type {
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
 export const getAttributeValuesForRulesEngine = (
-    attributeValues: Array<AttributeValue> = [], 
+    attributeValues: Array<AttributeValue> = [],
     attributes: Array<DataElement>
 ) =>
     attributeValues.reduce((acc, { id, value }) => {

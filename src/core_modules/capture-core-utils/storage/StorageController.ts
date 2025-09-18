@@ -36,7 +36,7 @@ export class StorageController {
         if (!staticMethodsAvailable) {
             return false;
         }
-        const adapterMethods = 
+        const adapterMethods =
             'open set setAll get getAll getKeys count contains remove removeAll close destroy isOpen'.split(' ');
         return adapterMethods.every(method => Adapter.prototype[method]);
     }

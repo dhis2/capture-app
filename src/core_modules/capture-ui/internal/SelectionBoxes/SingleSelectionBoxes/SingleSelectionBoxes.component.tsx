@@ -105,12 +105,12 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
     }
 
     getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
-        const { 
-            orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled 
+        const {
+            orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled
         } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
-        const tabIndex = isSelected || 
+        const tabIndex = isSelected ||
             (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
         const IconElement = this.getIconElement(optionData, isSelected);
         const setInputRef = (element: HTMLInputElement) => {

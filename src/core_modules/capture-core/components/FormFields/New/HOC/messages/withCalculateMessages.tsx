@@ -31,9 +31,9 @@ const messageKeys = {
 const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overrideMessagesPropNames: any = {}) =>
     class CalculateMessagesHOC extends React.Component<Props> {
         static getMessage(
-            errorText: string | null, 
-            warningText: string | null, 
-            infoText: string | null, 
+            errorText: string | null,
+            warningText: string | null,
+            infoText: string | null,
             validatingText: string | null
         ) {
             let message;

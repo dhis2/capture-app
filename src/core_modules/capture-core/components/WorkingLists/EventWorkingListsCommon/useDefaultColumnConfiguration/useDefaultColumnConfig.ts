@@ -61,7 +61,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
             visible: displayInReports,
             type,
             header: formName,
-            options: optionSet && 
+            options: optionSet &&
                 optionSet.options.map(({ text, value }) => ({ text, value })),
             multiValueFilter: !!optionSet,
         })) as Array<MetadataColumnConfig>;

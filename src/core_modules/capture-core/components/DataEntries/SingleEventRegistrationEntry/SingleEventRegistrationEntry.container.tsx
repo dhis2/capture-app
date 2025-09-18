@@ -15,7 +15,7 @@ import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCate
 import { itemId } from './DataEntryWrapper/DataEntry/helpers/constants';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 
-const inEffect = (state: any) => 
+const inEffect = (state: any) =>
     dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = (): MapStateToProps => {

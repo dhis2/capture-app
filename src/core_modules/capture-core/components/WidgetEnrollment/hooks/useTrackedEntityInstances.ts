@@ -23,7 +23,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
         ownerOrgUnit:
             !loading &&
             (data as any)?.trackedEntityInstances?.programOwners[0]?.orgUnit,
-        enrollments: !loading && data?.trackedEntityInstances ? 
+        enrollments: !loading && data?.trackedEntityInstances ?
             (data as any)?.trackedEntityInstances?.enrollments : [],
     };
 };

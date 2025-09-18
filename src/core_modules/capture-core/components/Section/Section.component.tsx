@@ -37,8 +37,8 @@ class SectionPlain extends Component<Props> {
     getHeader() {
         const orgHeader = this.props.header;
 
-        if (orgHeader && React.isValidElement(orgHeader) && 
-            (orgHeader.type as any)?.name === 'SectionHeaderSimple' && 
+        if (orgHeader && React.isValidElement(orgHeader) &&
+            (orgHeader.type as any)?.name === 'SectionHeaderSimple' &&
             this.props.onChangeCollapseState) {
             const clonedHeader = React.cloneElement(orgHeader as any, {
                 onChangeCollapseState: this.props.onChangeCollapseState,

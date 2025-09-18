@@ -25,7 +25,7 @@ import type { QuerySingleResource } from '../../../../utils/api';
 import type { EnrollmentData } from '../Types';
 
 const getEnrollmentForRulesExecution = (
-    enrollment: EnrollmentData | undefined, 
+    enrollment: EnrollmentData | undefined,
     programName: string
 ): Enrollment | undefined =>
     enrollment && {

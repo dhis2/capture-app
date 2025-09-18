@@ -24,7 +24,7 @@ export const withAgeInputContainer = () =>
                         <InnerComponent
                             {...passOnProps}
                         />
-                        {message && 
+                        {message &&
                             <div className={defaultClasses[message.className]}>{message.message}</div>
                         }
                     </div>

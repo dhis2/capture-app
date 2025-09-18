@@ -41,9 +41,9 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 
 export const getOpenDataEntryActions =
     (
-        dataEntryId: string, 
-        itemId: string, 
-        programCategory?: ProgramCategory, 
+        dataEntryId: string,
+        itemId: string,
+        programCategory?: ProgramCategory,
         orgUnit?: Record<string, unknown>
     ) => {
         const defaultDataEntryValues = {
@@ -56,7 +56,7 @@ export const getOpenDataEntryActions =
                 id: `attributeCategoryOptions-${category.id}`,
                 type: 'TEXT',
                 validatorContainers: getCategoryOptionsValidatorContainers(
-                    { categories: programCategory.categories }, 
+                    { categories: programCategory.categories },
                     category.id
                 ),
             })));

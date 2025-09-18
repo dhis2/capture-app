@@ -27,9 +27,9 @@ export const convertToClientTeis = (
                     }
                     const urls = buildUrlByElementType[RECORD_TYPE.trackedEntity][type]
                         ? buildUrlByElementType[RECORD_TYPE.trackedEntity][type]({
-                            trackedEntity: tei.trackedEntity, 
-                            id, 
-                            programId 
+                            trackedEntity: tei.trackedEntity,
+                            id,
+                            programId
                         })
                         : {};
 

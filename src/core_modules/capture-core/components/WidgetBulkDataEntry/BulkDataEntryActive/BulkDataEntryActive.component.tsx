@@ -48,5 +48,5 @@ const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, class
     </div>
 );
 
-export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as 
+export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as
     ComponentType<PlainProps>;

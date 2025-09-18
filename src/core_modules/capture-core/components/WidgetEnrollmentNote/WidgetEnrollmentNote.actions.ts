@@ -19,9 +19,9 @@ export const requestAddNoteForEnrollment = (enrollmentId: string, note: string) 
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT)({ enrollmentId, note });
 
 export const startAddNoteForEnrollment = (
-    enrollmentUid: string, 
-    serverData: Record<string, unknown>, 
-    selections: Record<string, unknown>, 
+    enrollmentUid: string,
+    serverData: Record<string, unknown>,
+    selections: Record<string, unknown>,
     context: Record<string, unknown>
 ) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_ENROLLMENT)({ selections, context }, {

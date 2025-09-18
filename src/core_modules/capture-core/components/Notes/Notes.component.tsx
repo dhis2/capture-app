@@ -189,7 +189,7 @@ const NotesPlain = ({
                                     <div className={classes.noteItemDate} data-test="note-date">
                                         <span>
                                             <Tooltip content={convertClientToList(
-                                                moment(fromServerDate(n.storedAt).getClientZonedISOString()).toISOString(), 
+                                                moment(fromServerDate(n.storedAt).getClientZonedISOString()).toISOString(),
                                                 dataElementTypes.DATETIME
                                             )}>
                                                 {moment(fromServerDate(n.storedAt)).fromNow()}

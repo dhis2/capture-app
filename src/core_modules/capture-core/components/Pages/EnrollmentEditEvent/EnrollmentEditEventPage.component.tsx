@@ -81,8 +81,8 @@ export const EnrollmentEditEventPageComponent = ({
         <EnrollmentPageLayout
             pageLayout={pageLayout}
             currentPage={
-                mode === EnrollmentPageKeys.EDIT_EVENT 
-                    ? EnrollmentPageKeys.EDIT_EVENT 
+                mode === EnrollmentPageKeys.EDIT_EVENT
+                    ? EnrollmentPageKeys.EDIT_EVENT
                     : EnrollmentPageKeys.VIEW_EVENT
             }
             availableWidgets={WidgetsForEnrollmentEventEdit}

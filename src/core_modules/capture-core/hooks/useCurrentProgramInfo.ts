@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
 
-export const useCurrentProgramInfo = () => ({ 
+export const useCurrentProgramInfo = () => ({
     id: useSelector(({ currentSelections }: any) => currentSelections.programId),
 });

@@ -1,7 +1,7 @@
 import { dataElementTypes } from '../../../metaData';
 
 export const convertToClientCoordinates = (
-    coordinates: any[], 
+    coordinates: any[],
     type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON
 ) => {
     if (type === dataElementTypes.COORDINATE) {

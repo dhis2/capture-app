@@ -7,7 +7,7 @@ import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
 import { Notes } from '../../../../Notes/Notes.component';
-import { withDataEntryRelationshipsHandler } from 
+import { withDataEntryRelationshipsHandler } from
     '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from './fieldValidators';
@@ -137,7 +137,7 @@ const createComponentProps = (props: any, componentProps: any) => ({
     ...componentProps,
 });
 
-const getOrientation = (formHorizontal: boolean | null) => 
+const getOrientation = (formHorizontal: boolean | null) =>
     (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
@@ -231,7 +231,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => 
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
@@ -251,7 +251,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => 
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
@@ -357,7 +357,7 @@ const buildCategoryOptionsFieldSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && 
+                                `${props.fieldOptions &&
                                     props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
@@ -539,9 +539,9 @@ type Props = {
     onSetSaveTypes: (saveTypes: Array<typeof newEventSaveTypes[keyof typeof newEventSaveTypes]> | null) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onSaveEventInStage: (
-        eventId: string, 
-        dataEntryId: string, 
-        formFoundation: RenderFoundation, 
+        eventId: string,
+        dataEntryId: string,
+        formFoundation: RenderFoundation,
         completed?: boolean
     ) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,

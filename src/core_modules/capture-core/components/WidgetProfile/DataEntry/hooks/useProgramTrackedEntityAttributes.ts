@@ -9,5 +9,5 @@ const processProgramTrackedEntityAttributes = (programAPI: any) =>
         {},
     );
 
-export const useProgramTrackedEntityAttributes = (programAPI: any) => 
+export const useProgramTrackedEntityAttributes = (programAPI: any) =>
     useMemo(() => processProgramTrackedEntityAttributes(programAPI), [programAPI]);

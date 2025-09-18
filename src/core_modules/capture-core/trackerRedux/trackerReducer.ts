@@ -64,7 +64,7 @@ const getUpdaterFoundFn =
     (reducerDescription: ReducerDescription) =>
         (state: any, action: Action) => {
             log.trace(
-                `Updater for ${action.type} started in ${reducerDescription.name}. 
+                `Updater for ${action.type} started in ${reducerDescription.name}.
                 Starting state is: ${JSON.stringify(state)}`,
             );
         };
@@ -73,7 +73,7 @@ const getUpdaterExecutedFn =
     (reducerDescription: ReducerDescription) =>
         (state: any, action: Action) => {
             log.trace(
-                `Updater for ${action.type} executed in ${reducerDescription.name}. 
+                `Updater for ${action.type} executed in ${reducerDescription.name}.
                 New state is: ${JSON.stringify(state)}`);
         };
 
@@ -83,7 +83,7 @@ const getProductionReducer =
             updateStatePartInProduction(state, action, reducerDescription.updaters, reducerDescription.initValue);
 
 const createLogAction = (action: Action) => {
-    const payloadOverride = action.meta && action.meta.skipLogging && 
+    const payloadOverride = action.meta && action.meta.skipLogging &&
         action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
         accSkipLogging[item] = null;
         return accSkipLogging;
@@ -116,7 +116,7 @@ const getDevelopmentReducer = (reducerDescription: ReducerDescription) => {
 function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWrapper | Array<ReducerWrapper>) {
     if (isArray(reducerWrappers)) {
         return (reducerWrappers as Array<ReducerWrapper>).reduceRight(
-            (prevReducer, currentReducer) => currentReducer(prevReducer), 
+            (prevReducer, currentReducer) => currentReducer(prevReducer),
             reducer
         );
     }

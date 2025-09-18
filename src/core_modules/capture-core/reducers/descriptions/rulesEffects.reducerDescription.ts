@@ -20,7 +20,7 @@ export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && 
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.HIDE_FIELD];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
@@ -38,7 +38,7 @@ export const rulesEffectsCompulsoryFieldsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const compulsoryEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && 
+        const compulsoryEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.MAKE_COMPULSORY];
         newState[action.payload.formId] = compulsoryEffects ?
             Object.keys(compulsoryEffects).reduce((accState, key) => {
@@ -55,7 +55,7 @@ export const rulesEffectsHiddenSectionsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && 
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.HIDE_SECTION];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
@@ -72,7 +72,7 @@ export const rulesEffectsHiddenProgramStageDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && 
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.HIDE_PROGRAM_STAGE];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
@@ -97,13 +97,13 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const errorEffects: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && 
+        const errorEffects: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.SHOW_ERROR];
-        const warningEffects: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && 
+        const warningEffects: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.SHOW_WARNING];
-        const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects && 
+        const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
-        const warningEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects && 
+        const warningEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
 
         const messageEffectsArray = [errorEffects, warningEffects, errorEffectsOnComplete, warningEffectsOnComplete];
@@ -138,14 +138,14 @@ export const rulesEffectsFeedbackDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } = 
+        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
-        const displayKeyValuePairEffects: { [id: string]: Array<DisplayKeyValuePairEffect> } = action.payload.rulesEffects && 
+        const displayKeyValuePairEffects: { [id: string]: Array<DisplayKeyValuePairEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
-            displayTexts: displayTextEffects && displayTextEffects.feedback ? 
+            displayTexts: displayTextEffects && displayTextEffects.feedback ?
                 displayTextEffects.feedback.map(e => e.displayText) : null,
-            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.feedback ? 
+            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.feedback ?
                 displayKeyValuePairEffects.feedback.map(e => e.displayKeyValuePair) : null,
         };
 
@@ -157,12 +157,12 @@ export const rulesEffectsIndicatorsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } = 
+        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
-        const displayKeyValuePairEffects: { [id: string]: Array<DisplayKeyValuePairEffect> } = action.payload.rulesEffects && 
+        const displayKeyValuePairEffects: { [id: string]: Array<DisplayKeyValuePairEffect> } = action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
-            displayTexts: displayTextEffects && displayTextEffects.indicators ? 
+            displayTexts: displayTextEffects && displayTextEffects.indicators ?
                 displayTextEffects.indicators.map(e => e.displayText) : null,
             displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ? 
                 displayKeyValuePairEffects.indicators.map(e => e.displayKeyValuePair) : null,
@@ -183,7 +183,7 @@ export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
             action.payload.rulesEffects && 
             action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
 
-        const generalErrors = errorEffects && errorEffects.general ? 
+        const generalErrors = errorEffects && errorEffects.general ?
             errorEffects.general.map(e => e.error) : null;
         const generalErrorsOnComplete = errorEffectsOnComplete && errorEffectsOnComplete.general ?
             errorEffectsOnComplete.general.map(e => e.error) :

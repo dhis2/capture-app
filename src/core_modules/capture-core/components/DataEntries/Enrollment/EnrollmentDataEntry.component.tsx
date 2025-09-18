@@ -93,7 +93,7 @@ const getEnrollmentDateSettings = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && 
+                                `${props.fieldOptions &&
                                     props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -142,7 +142,7 @@ const getIncidentDateSettings = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && 
+                                `${props.fieldOptions &&
                                     props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -192,7 +192,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                     onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions && 
+                        `${props.fieldOptions &&
                             props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
@@ -213,7 +213,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                     onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions && 
+                        `${props.fieldOptions &&
                             props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
@@ -227,7 +227,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
-const getOrientation = (formHorizontal: boolean | null) => 
+const getOrientation = (formHorizontal: boolean | null) =>
     (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const getGeometrySettings = () => ({
@@ -284,7 +284,7 @@ const getCategoryOptionsSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && 
+                                `${props.fieldOptions &&
                                     props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(

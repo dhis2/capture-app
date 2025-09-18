@@ -8,8 +8,8 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
 
 export const getDateRangeFieldConfig = (
-    metaData: MetaDataElement, 
-    options: any, 
+    metaData: MetaDataElement,
+    options: any,
     querySingleResource: QuerySingleResource
 ) => {
     const props = createProps({

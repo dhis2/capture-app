@@ -53,8 +53,8 @@ export const saveNewEventStageEpic = (action$: EpicAction<SaveEventStagePayload>
         }));
 
 export const saveNewEventInStageLocationChangeEpic = (
-    action$: EpicAction<SaveEventStagePayload>, 
-    store: ReduxStore, 
+    action$: EpicAction<SaveEventStagePayload>,
+    store: ReduxStore,
     { navigate }: ApiUtils
 ) =>
     action$.pipe(

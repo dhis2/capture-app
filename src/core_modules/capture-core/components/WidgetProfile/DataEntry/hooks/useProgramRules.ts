@@ -28,13 +28,13 @@ export const useProgramRules = (programId: string) => {
         },
     );
     useEffect(() => {
-        const hasNextPage = !called || 
+        const hasNextPage = !called ||
             (!loading && (data as any)?.programRules?.pager?.nextPage);
         if (hasNextPage) {
             refetch({ variables: { page: page + 1 } });
             setPage(page + 1);
         }
-        if (data && (data as any).programRules && 
+        if (data && (data as any).programRules &&
             (data as any).programRules.pager?.total > programRules.length) {
             setProgramRules([...programRules, ...(data as any).programRules.programRules]);
         }

@@ -152,8 +152,8 @@ export class IndexedDBAdapter {
     }
 
     /**
-     * Facilitate downgrade by destroying the current database if existing database version is greater than 
-     * the requested version. Data can be preserved through the onBeforeUpgrade callback function 
+     * Facilitate downgrade by destroying the current database if existing database version is greater than
+     * the requested version. Data can be preserved through the onBeforeUpgrade callback function
      * (will be called with the isDowngrade argument)
      * @param {*} onBeforeUpgrade
      * @returns Whether we are downgrading or not
@@ -205,9 +205,9 @@ export class IndexedDBAdapter {
         });
     }
     /*
-        onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. 
+        onBeforeUpgrade: a callback method, getting an object with a "get" property as argument.
         The "get" property can be used to retrieve something from IndexedDB
-        onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. 
+        onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument.
         The "set" property can be used to set something in IndexedDB
     */
     async open(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore) {

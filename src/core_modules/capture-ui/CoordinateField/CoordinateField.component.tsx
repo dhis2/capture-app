@@ -57,7 +57,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     getPosition = (): Array<number> | null => {
         const { value } = this.props;
         let convertedValue: Array<number> | null = null;
-        if (value?.latitude && value?.longitude && 
+        if (value?.latitude && value?.longitude &&
             !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
             convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
         }
@@ -98,8 +98,8 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     search = (position: any) => {
-        const zoom = this.mapInstance?.leafletElement ? 
-            this.mapInstance.leafletElement.getZoom() : 
+        const zoom = this.mapInstance?.leafletElement ?
+            this.mapInstance.leafletElement.getZoom() :
             13;
         this.setMapPosition([...position], zoom);
     }
@@ -124,10 +124,10 @@ export class CoordinateField extends React.Component<PlainProps, State> {
 
     renderMapIcon = () => {
         const { classes, shrinkDisabled, disabled } = this.props;
-        const { 
-            mapIconContainer: mapIconContainerCustomClass, 
-            mapIcon: mapIconCustomClass, 
-            mapIconContainerDisabled: mapIconContainerDisabledCustomClass 
+        const {
+            mapIconContainer: mapIconContainerCustomClass,
+            mapIcon: mapIconCustomClass,
+            mapIconContainerDisabled: mapIconContainerDisabledCustomClass
         } = classes || {};
         const mapIconContainerClass = classNames(
             { [defaultClasses.mapIconContainer]: shrinkDisabled },
@@ -167,13 +167,13 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     key="map"
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <WrappedLeafletSearch 
-                        position="topleft" 
-                        inputPlaceholder="Search" 
-                        closeResultsOnClick 
-                        search={null} 
-                        mapStateModifier={this.search} 
-                        showMarker={false} 
+                    <WrappedLeafletSearch
+                        position="topleft"
+                        inputPlaceholder="Search"
+                        closeResultsOnClick
+                        search={null}
+                        mapStateModifier={this.search}
+                        showMarker={false}
                     />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -201,11 +201,11 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     );
 
     renderLatitude = () => {
-        const { 
-            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps 
+        const {
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps
         } = this.props;
-        const { 
-            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses 
+        const {
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses
         } = classes || {};
         return (
             <CoordinateInput
@@ -223,11 +223,11 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     renderLongitude = () => {
-        const { 
-            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps 
+        const {
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps
         } = this.props;
-        const { 
-            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses 
+        const {
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses
         } = classes || {};
         return (
             <CoordinateInput

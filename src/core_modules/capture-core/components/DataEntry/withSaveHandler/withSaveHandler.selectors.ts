@@ -3,7 +3,7 @@ import { messageStateKeys } from '../../../reducers/descriptions/rulesEffects.re
 
 const foundationSelector = (state: any, props: any, calculatedValues: any) => calculatedValues.foundation;
 
-const boundMessagesSelector = (state: any, props: any, calculatedValues: any) => 
+const boundMessagesSelector = (state: any, props: any, calculatedValues: any) =>
     state.rulesEffectsMessages[calculatedValues.key];
 const generalWarningsOnCompleteSelector = (state: any, props: any, calculatedValues: any) =>
     (state.rulesEffectsGeneralWarnings[calculatedValues.key] ?

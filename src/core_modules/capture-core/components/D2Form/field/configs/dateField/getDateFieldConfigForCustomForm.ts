@@ -8,8 +8,8 @@ import type { DateDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 export const getDateFieldConfigForCustomForm = (
-    metaData: DateDataElement, 
-    options: any, 
+    metaData: DateDataElement,
+    options: any,
     querySingleResource: QuerySingleResource
 ) => {
     const props = createProps({

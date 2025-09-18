@@ -22,8 +22,8 @@ const createServerData = (note: string, useNewEndpoint: boolean): Record<string,
 };
 
 export const addNoteForEnrollmentEpic = (
-    action$: EpicAction<AddNoteActionPayload>, 
-    store: ReduxStore, 
+    action$: EpicAction<AddNoteActionPayload>,
+    store: ReduxStore,
     { querySingleResource, fromClientDate }: ApiUtils
 ) =>
     action$.pipe(

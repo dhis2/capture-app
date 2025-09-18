@@ -105,11 +105,11 @@ const getCacheOptionSets = (optionSets: Array<ApiOptionSet>, optionGroupsByOptio
                 style: option.style,
                 translations: option.translations,
             })),
-        optionGroups: optionGroupsByOptionSet[optionSet.id] && 
+        optionGroups: optionGroupsByOptionSet[optionSet.id] &&
             optionGroupsByOptionSet[optionSet.id].map(optionGroup => ({
                 id: optionGroup.id,
                 displayName: optionGroup.displayName,
-                options: optionGroup.options && 
+                options: optionGroup.options &&
                     [...optionGroup.options.values()].map(option => option.id),
             })),
     }));

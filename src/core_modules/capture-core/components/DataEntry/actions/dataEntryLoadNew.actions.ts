@@ -18,12 +18,12 @@ export function loadNewDataEntry(
     const dataEntryValues = defaultDataEntryValues ?? {};
     const formValues = defaultFormValues ?? {};
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
-    const dataEntryUI = dataEntryPropsToInclude ? 
+    const dataEntryUI = dataEntryPropsToInclude ?
         validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
     const key = getDataEntryKey(dataEntryId, itemId);
     return [
-        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ 
-            key, itemId, dataEntryId, dataEntryMeta, dataEntryUI, dataEntryValues 
+        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({
+            key, itemId, dataEntryId, dataEntryMeta, dataEntryUI, dataEntryValues
         }),
         addFormData(key, formValues),
     ];

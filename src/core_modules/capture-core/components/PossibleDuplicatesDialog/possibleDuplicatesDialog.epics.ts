@@ -73,8 +73,8 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     return Promise.resolve(duplicatesReviewSkipped());
                 }
 
-                const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ? 
-                    { program: selectedScopeId } : 
+                const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ?
+                    { program: selectedScopeId } :
                     { trackedEntityType: selectedScopeId };
                 const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                     ? 'orgUnitMode'
@@ -93,12 +93,12 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId),
                 );
                 return stream$.pipe(
-                    map(({ 
-                        trackedEntityInstanceContainers: searchResults, 
-                        pagingData 
-                    }: { 
-                        trackedEntityInstanceContainers: any, 
-                        pagingData: any 
+                    map(({
+                        trackedEntityInstanceContainers: searchResults,
+                        pagingData
+                    }: {
+                        trackedEntityInstanceContainers: any,
+                        pagingData: any
                     }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
                     takeUntil(action$.pipe(ofType(actionTypes.DUPLICATES_RESET))),

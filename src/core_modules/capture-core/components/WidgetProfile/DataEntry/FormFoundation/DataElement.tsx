@@ -353,10 +353,10 @@ export const buildDataElement = (
     return trackedEntityAttribute.valueType === dataElementTypes.DATE
         ? buildDateDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource)
         : buildBaseDataElement(
-            optionSets, 
-            programTrackedEntityAttribute, 
-            trackedEntityAttribute, 
-            querySingleResource, 
+            optionSets,
+            programTrackedEntityAttribute,
+            trackedEntityAttribute,
+            querySingleResource,
             minorServerVersion
         );
 };

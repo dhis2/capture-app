@@ -1,7 +1,7 @@
-import type { 
-    TeiColumnsMetaForDataFetching, 
-    TeiFiltersOnlyMetaForDataFetching, 
-    TrackerWorkingListsTemplate 
+import type {
+    TeiColumnsMetaForDataFetching,
+    TeiFiltersOnlyMetaForDataFetching,
+    TrackerWorkingListsTemplate
 } from '../../../types';
 import type { QuerySingleResource } from '../../../../../../utils/api';
 

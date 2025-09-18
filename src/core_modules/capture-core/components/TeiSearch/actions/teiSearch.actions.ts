@@ -67,8 +67,8 @@ export const searchTeiResultRetrieved = (
     actionCreator(actionTypes.SEARCH_TEI_RESULT_RETRIEVED)({ data, formId, searchGroupId, searchId });
 
 export const setProgramAndTrackedEntityType = (
-    searchId: string, 
-    programId: string | null, 
+    searchId: string,
+    programId: string | null,
     trackedEntityTypeId: string | null
 ) =>
     actionCreator(actionTypes.SET_TEI_SEARCH_PROGRAM_AND_TET)({ searchId, programId, trackedEntityTypeId });

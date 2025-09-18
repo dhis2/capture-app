@@ -61,7 +61,7 @@ const isValueContainingCharacter = (value: any) => {
 };
 
 const collectCurrentSearchTerms = (
-    searchGroupsForSelectedScope: any[], 
+    searchGroupsForSelectedScope: any[],
     formsValues: Record<string, Record<string, any>>
 ): CurrentSearchTerms => {
     const { searchForm: attributeSearchForm, formId } = searchGroupsForSelectedScope
@@ -119,10 +119,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
     },
 
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, resultsPageSize }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ 
-            trackedEntityTypeId, 
-            formId, 
-            pageSize: resultsPageSize 
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({
+            trackedEntityTypeId,
+            formId,
+            pageSize: resultsPageSize
         }));
     },
     searchViaAttributesOnScopeProgram: ({ programId, formId, resultsPageSize }) => {

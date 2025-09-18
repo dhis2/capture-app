@@ -14,8 +14,8 @@ export const TemplateSelectorChipContent = (props: Props) => {
     } = props;
 
     const truncatedText = text.length > maxCharacters ? `${text.substring(0, maxCharacters - 3)}...` : text;
-    const content = isSelectedTemplate && currentListIsModified 
-        ? `${truncatedText} *` 
+    const content = isSelectedTemplate && currentListIsModified
+        ? `${truncatedText} *`
         : truncatedText;
 
     return content;

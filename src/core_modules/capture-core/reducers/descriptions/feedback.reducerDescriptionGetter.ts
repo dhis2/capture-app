@@ -42,7 +42,7 @@ type ErrorFeedbackInput = {
 };
 
 function addErrorFeedback(
-    state: any, 
+    state: any,
     { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput
 ) {
     return [

@@ -251,7 +251,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => 
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
@@ -269,7 +269,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => 
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
@@ -367,7 +367,7 @@ const getCategoryOptionsSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && 
+                                `${props.fieldOptions &&
                                     props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
@@ -579,7 +579,7 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
 
     render() {
         const { eventStatus } = this.props;
-        const isScheduleOrOverdue = eventStatus && 
+        const isScheduleOrOverdue = eventStatus &&
             [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
 
         return isScheduleOrOverdue ? this.renderScheduleView() : this.renderDataEntry();

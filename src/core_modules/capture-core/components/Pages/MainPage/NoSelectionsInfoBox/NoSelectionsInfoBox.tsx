@@ -60,7 +60,7 @@ const EmptyStateIcon = () => (
     </svg>
 );
 
-const documentationLink = 
+const documentationLink =
     'https://docs.dhis2.org/en/use/user-guides/dhis-core-version-master/tracking-individual-level-data/capture.html';
 
 const NoSelectionsInfoBoxPlain = ({ classes }: Props) => (

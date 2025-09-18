@@ -92,7 +92,7 @@ const fetchFormattedValues = async ({
             const [previousValueClient, currentValueClient] = await Promise.all([
                 change.previousValue ? getValue(change.previousValue, false) : null,
                 getValue(
-                    change.currentValue, 
+                    change.currentValue,
                     entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue
                 ),
             ]);

@@ -28,8 +28,8 @@ const mapInputTypeToComponent = {
 };
 
 export const getOptionSetFieldConfigForCustomForm = (
-    metaData: DataElement, 
-    options: any, 
+    metaData: DataElement,
+    options: any,
     querySingleResource: QuerySingleResource
 ) => {
     const optionSet: OptionSet | null = metaData.optionSet;

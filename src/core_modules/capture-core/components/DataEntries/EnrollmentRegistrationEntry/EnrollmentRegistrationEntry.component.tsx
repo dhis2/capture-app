@@ -24,9 +24,9 @@ const styles = () => ({
 });
 
 const translatedTextWithStylesForProgram = (
-    trackedEntityName: string, 
-    programName: string, 
-    orgUnitName: string, 
+    trackedEntityName: string,
+    programName: string,
+    orgUnitName: string,
     teiId?: string
 ) => (
     teiId ? <span>
@@ -78,7 +78,7 @@ const EnrollmentRegistrationEntryPlain =
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit && 
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
                   <>
                       <EnrollmentDataEntry
@@ -89,7 +89,7 @@ const EnrollmentRegistrationEntryPlain =
                           enrollmentMetadata={enrollmentMetadata as Enrollment}
                           id={id}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
-                          onGetUnsavedAttributeValues={() => 
+                          onGetUnsavedAttributeValues={() =>
                               console.log('onGetUnsavedAttributeValues will be here in the future')
                           }
                           {...rest}
@@ -120,9 +120,9 @@ const EnrollmentRegistrationEntryPlain =
 
                       <InfoIconText>
                           {translatedTextWithStylesForProgram(
-                              trackedEntityName.toLowerCase(), 
-                              programName, 
-                              orgUnit.name, 
+                              trackedEntityName.toLowerCase(),
+                              programName,
+                              orgUnit.name,
                               teiId
                           )}
                       </InfoIconText>
@@ -143,9 +143,9 @@ export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
       withErrorMessagePostProcessor((({ enrollmentMetadata }: any) => enrollmentMetadata.trackedEntityType.name)),
       withLoadingIndicator(() => ({ height: '350px' })),
       withDuplicateCheckOnSave(),
-      withSaveHandler({ 
-          onGetFormFoundation: ({ enrollmentMetadata }: any) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, 
-          onIsCompleting: () => true 
+      withSaveHandler({
+          onGetFormFoundation: ({ enrollmentMetadata }: any) => enrollmentMetadata && enrollmentMetadata.enrollmentForm,
+          onIsCompleting: () => true
       }),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain) as any;

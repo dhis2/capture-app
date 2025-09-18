@@ -19,7 +19,7 @@ export const TrackedEntityBulkActions = ({
     const { activeList } = useBulkDataEntryConfigurations(programId);
 
     const injectSelectedRowsToBulkDataEntryPlugin = useCallback(() => {
-        recordsOrder && onOpenBulkDataEntryPlugin && 
+        recordsOrder && onOpenBulkDataEntryPlugin &&
             onOpenBulkDataEntryPlugin(recordsOrder.filter(recordOrder => selectedRows[recordOrder]));
     }, [onOpenBulkDataEntryPlugin, recordsOrder, selectedRows]);
 

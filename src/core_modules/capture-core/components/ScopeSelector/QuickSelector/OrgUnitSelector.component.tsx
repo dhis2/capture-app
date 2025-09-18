@@ -17,7 +17,7 @@ const styles = () => ({
 
 type OwnProps = {
     handleClickOrgUnit?: (
-        orgUnitId: string | null | undefined, 
+        orgUnitId: string | null | undefined,
         orgUnitObject: Record<string, any> | null | undefined
     ) => void;
     onReset: () => void;

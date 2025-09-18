@@ -11,7 +11,7 @@ export const createServerData = ({
     enrollment: any;
 }) => {
     const exisitingEvents = enrollment.events.map((event: any) => (
-        (event.event === (relationship as any)?.from?.event?.event || 
+        (event.event === (relationship as any)?.from?.event?.event ||
          event.event === (relationship as any)?.to?.event?.event)
             ? { ...event, pendingApiResponse: true, relationships: [relationship], uid: event.event }
             : event
@@ -51,7 +51,7 @@ export const useBuildRelatedStageEventPayload = () => {
         if (relatedStageRef?.current?.eventHasLinkableStageRelationship()) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
 
-            if (!isValid || !relatedStageRef.current?.getLinkedStageValues || 
+            if (!isValid || !relatedStageRef.current?.getLinkedStageValues ||
                 !programStageId || !serverRequestEvent) {
                 return {
                     formHasError: true,

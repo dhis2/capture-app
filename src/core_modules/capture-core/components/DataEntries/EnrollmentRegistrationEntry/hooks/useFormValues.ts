@@ -101,19 +101,19 @@ const buildFormValues = async ({
     querySingleResource: QuerySingleResource;
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), 
+        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }),
         {}
     );
     const formValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ 
-            ...acc, 
-            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) 
+        (acc, currentValue) => ({
+            ...acc,
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType)
         }),
         {},
     );
     const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
     const searchFormValues = searchTerms?.reduce(
-        (acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), 
+        (acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }),
         {}
     );
 
@@ -123,15 +123,15 @@ const buildFormValues = async ({
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues && 
+    setFormValues &&
         setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
-    setClientValues && 
+    setClientValues &&
         setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ 
-    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms 
+export const useFormValues = ({
+    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms
 }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();

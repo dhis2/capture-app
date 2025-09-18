@@ -15,7 +15,7 @@ export function ShrinkLabel(props: Props) {
         shrink,
     } = props;
     const className = classNames(
-        defaultClasses.label, 
+        defaultClasses.label,
         shrink ? defaultClasses.labelShrinked : defaultClasses.labelUnshrinked
     );
     return (

@@ -20,7 +20,7 @@ export const useRulesEngine = ({
     const orgUnitRef = useRef<OrgUnit | undefined>(undefined);
     // TODO: Getting the entire state object is bad and this needs to be refactored.
     // The problem is the helper methods that take the entire state object.
-    // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) 
+    // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator)
     // to be more explicit with the arguments.
     const state = useSelector((stateArg: any) => stateArg);
     useEffect(() => {

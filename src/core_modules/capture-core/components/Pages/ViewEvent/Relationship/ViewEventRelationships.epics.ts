@@ -88,7 +88,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 },
                 to: {
                     ...toEntity,
-                    name: toEntity.name || 
+                    name: toEntity.name ||
                         getRelationshipNewTeiName(toEntity.dataEntryId, toEntity.itemId, state),
                     type: payload.entityType,
                 },
@@ -118,8 +118,8 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                     relationships: [convertClientRelationshipToServer(clientRelationship)],
                 };
                 saveAction = startSaveEventRelationship(
-                    serverRelationshipData, 
-                    state.currentSelections, 
+                    serverRelationshipData,
+                    state.currentSelections,
                     relationshipClientId
                 );
             }

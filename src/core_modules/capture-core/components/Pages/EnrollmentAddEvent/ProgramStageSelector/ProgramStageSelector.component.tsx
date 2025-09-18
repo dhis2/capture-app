@@ -45,11 +45,11 @@ type Props = {
 
 type ProgramStageSelectorPlainProps = Props & WithStyles<typeof styles>;
 
-const ProgramStageSelectorComponentPlain = ({ 
-    programStages, 
-    onSelectProgramStage, 
-    onCancel, 
-    classes 
+const ProgramStageSelectorComponentPlain = ({
+    programStages,
+    onSelectProgramStage,
+    onCancel,
+    classes
 }: ProgramStageSelectorPlainProps) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {

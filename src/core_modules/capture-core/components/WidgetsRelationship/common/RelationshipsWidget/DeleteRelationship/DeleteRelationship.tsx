@@ -22,10 +22,10 @@ const styles: Readonly<any> = {
     },
 };
 
-export const DeleteRelationshipPlain = ({ 
-    handleDeleteRelationship, 
-    disabled, 
-    classes 
+export const DeleteRelationshipPlain = ({
+    handleDeleteRelationship,
+    disabled,
+    classes
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     return (

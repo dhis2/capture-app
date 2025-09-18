@@ -53,8 +53,8 @@ export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }: {
 }) =>
     actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId });
 
-export const searchViaAttributesOnScopeTrackedEntityType = ({ 
-    trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom 
+export const searchViaAttributesOnScopeTrackedEntityType = ({
+    trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom
 }: {
     trackedEntityTypeId: string;
     formId: string;

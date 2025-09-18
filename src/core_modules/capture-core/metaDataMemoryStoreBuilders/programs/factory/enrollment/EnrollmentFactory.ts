@@ -159,7 +159,7 @@ export class EnrollmentFactory {
                 });
 
                 await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                    if (field.objectType && 
+                    if (field.objectType &&
                         field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                         const fieldElement = await this.dataElementFactory.build(field, section);
                         if (!fieldElement) return;

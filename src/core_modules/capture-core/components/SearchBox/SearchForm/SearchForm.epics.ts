@@ -60,8 +60,8 @@ const searchViaUniqueIdStream = ({
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
-                return of(searchViaUniqueIdOnScopeTrackedEntityType({ 
-                    trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId 
+                return of(searchViaUniqueIdOnScopeTrackedEntityType({
+                    trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId
                 }));
             }
             if (searchResults.length > 0) {

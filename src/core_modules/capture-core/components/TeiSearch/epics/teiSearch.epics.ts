@@ -187,7 +187,7 @@ export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiP
                 takeUntil(
                     action$.pipe(
                         filter((ab: any) =>
-                            isArray(ab.payload) && 
+                            isArray(ab.payload) &&
                             ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
             );
         }));
@@ -217,7 +217,7 @@ export const teiSearchEpic = (action$: any, store: ReduxStore, { absoluteApiPath
                 takeUntil(
                     action$.pipe(
                         filter((ab: any) =>
-                            isArray(ab.payload) && 
+                            isArray(ab.payload) &&
                             ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
         }));
 
@@ -261,7 +261,7 @@ export const teiNewSearchEpic = (action$: any, store: any) =>
             const contextId = currentTeiSearch.selectedProgramId || currentTeiSearch.selectedTrackedEntityTypeId;
 
             const searchGroups = getSearchGroups(
-                currentTeiSearch.selectedTrackedEntityTypeId, 
+                currentTeiSearch.selectedTrackedEntityTypeId,
                 currentTeiSearch.selectedProgramId
             );
 

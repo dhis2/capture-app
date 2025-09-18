@@ -42,7 +42,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
         defaultPageLayout: DefaultPageLayout,
     });
 
-    const pageIsInvalid = (!loading && 
+    const pageIsInvalid = (!loading &&
         !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
         if (!programId || !enrollmentId || !teiId) {

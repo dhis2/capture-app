@@ -24,7 +24,7 @@ export type Props = {
     calendarMax?: any;
     innerMessage?: any;
     dateFormat?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | null;
-    calendarType?: 'gregory' | 'iso8601' | 'hebrew' | 'islamic' | 'islamic-umalqura' | 'islamic-tbla' | 
+    calendarType?: 'gregory' | 'iso8601' | 'hebrew' | 'islamic' | 'islamic-umalqura' | 'islamic-tbla' |
         'islamic-civil' | 'islamic-rgsa' | 'persian' | 'ethiopic' | 'ethioaa' | 'coptic' | 'chinese' | null;
     locale?: string;
     validation?: ValidationProps | null;

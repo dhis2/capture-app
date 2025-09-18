@@ -227,8 +227,8 @@ export class InputBuilder {
     }
 
     toLocalDate = (dateString?: string | null, defaultValue: any = null) =>
-        (dateString 
-            ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) 
+        (dateString
+            ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE))
             : defaultValue);
 
     convertDataElementValue = (id: string, rawValue: any) =>

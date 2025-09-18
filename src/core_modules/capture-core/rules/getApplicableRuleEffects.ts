@@ -60,7 +60,7 @@ flattenedResult = false,
         program.programRules,
         stage?.programRules,
     );
-    const foundationForPostProcessing = formFoundation || 
+    const foundationForPostProcessing = formFoundation ||
         (stage ? stage.stageForm : program.enrollment.enrollmentForm);
     if (!programRules.length) {
         return [];

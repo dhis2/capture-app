@@ -8,7 +8,7 @@ import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asy
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/FormBuilder/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { rulesEffectsActionTypes } from '../../rules';
-import { actionTypes as orgUnitFormFieldActionTypes } from 
+import { actionTypes as orgUnitFormFieldActionTypes } from
     '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 

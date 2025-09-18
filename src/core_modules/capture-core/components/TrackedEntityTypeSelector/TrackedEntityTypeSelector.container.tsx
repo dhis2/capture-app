@@ -8,8 +8,8 @@ export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded = 'read', hea
     const dispatch = useDispatch();
 
     const dispatchSetTrackedEntityTypeIdOnUrl = useCallback(
-        ({ trackedEntityTypeId }: { trackedEntityTypeId: string }) => { 
-            dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId })); 
+        ({ trackedEntityTypeId }: { trackedEntityTypeId: string }) => {
+            dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId }));
         },
         [dispatch]);
 

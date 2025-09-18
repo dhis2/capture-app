@@ -77,7 +77,7 @@ const TeiRegistrationEntryPlain =
                           id={id}
                           fieldOptions={fieldOptions}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
-                          onGetUnsavedAttributeValues={() => 
+                          onGetUnsavedAttributeValues={() =>
                               console.log('similar to the withErrorMessagePostProcessor this will come in the future')
                           }
                           {...rest}

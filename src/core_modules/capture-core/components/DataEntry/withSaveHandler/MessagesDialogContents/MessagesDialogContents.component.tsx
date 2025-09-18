@@ -15,7 +15,7 @@ type Props = {
 };
 
 function isSaveAllowedWithErrors(
-    isCompleting: boolean, 
+    isCompleting: boolean,
     validationStrategy: typeof validationStrategies[keyof typeof validationStrategies]
 ) {
     if (validationStrategy === validationStrategies.NONE) {

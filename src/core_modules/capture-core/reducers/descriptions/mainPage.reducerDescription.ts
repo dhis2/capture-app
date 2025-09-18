@@ -1,5 +1,5 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as editEventPageUrlActionTypes } from 
+import { actionTypes as editEventPageUrlActionTypes } from
     '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 
 export const mainPageDesc = createReducerDescription({

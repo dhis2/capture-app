@@ -13,10 +13,10 @@ export type OwnProps = {
     readonly validationAttempted?: boolean;
     readonly onUpdateField?: (...args: any[]) => void;
     readonly onUpdateFieldAsync?: (
-        fieldId: string, 
-        fieldLabel: string, 
-        formBuilderId: string, 
-        formId: string, 
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
         callback: (...callbackArgs: any[]) => void
     ) => void;
 } & FormRef;

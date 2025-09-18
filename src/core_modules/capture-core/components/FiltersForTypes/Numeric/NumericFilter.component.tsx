@@ -70,11 +70,11 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
     }
 
     static isFilterValid(
-        minValue: string | null | undefined, 
-        maxValue: string | null | undefined, 
+        minValue: string | null | undefined,
+        maxValue: string | null | undefined,
         type: typeof dataElementTypes[keyof typeof dataElementTypes]
     ) {
-        if (!NumericFilterPlain.validateField(minValue, type).isValid || 
+        if (!NumericFilterPlain.validateField(minValue, type).isValid ||
             !NumericFilterPlain.validateField(maxValue, type).isValid) {
             return false;
         }
@@ -94,7 +94,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
     onIsValid() {
         const values = this.props.value;
-        return !values || 
+        return !values ||
             NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type);
     }
 
@@ -136,7 +136,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         // validate with updated values
         const values = this.getUpdatedValue(value);
 
-        if (values && 
+        if (values &&
             !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values);
         } else {

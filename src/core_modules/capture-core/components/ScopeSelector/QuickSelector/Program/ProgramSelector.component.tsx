@@ -82,7 +82,7 @@ const ProgramSelectorPlain = ({
             <SelectorBarItem
                 label={i18n.t('Program')}
                 noValueMessage={i18n.t('Choose a program')}
-                value={selectedProgram && 
+                value={selectedProgram &&
                     <OptionLabel icon={selectedProgram.icon} label={selectedProgram.name} />
                 }
                 open={open}

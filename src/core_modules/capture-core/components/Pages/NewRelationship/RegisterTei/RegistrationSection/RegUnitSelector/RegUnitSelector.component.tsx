@@ -47,7 +47,7 @@ class RegUnitSelectorPlain extends React.Component<Props> {
         }
 
         onUpdateSelectedOrgUnit(
-            orgUnit, 
+            orgUnit,
             program?.organisationUnits ? !program.organisationUnits[(orgUnit as any).id] : false
         );
     }

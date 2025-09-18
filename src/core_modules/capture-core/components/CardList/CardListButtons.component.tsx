@@ -105,7 +105,7 @@ const CardListButtons: FC<Props> = ({
     const buttonLists: ButtonProp[] = [{
         dataTest: 'view-dashboard-button',
         onClick: onHandleClick,
-        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS && programName 
+        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS && programName
             ? i18n.t('View {{programName}} dashboard', {
                 programName,
                 interpolation: { escapeValue: false },

@@ -3,8 +3,8 @@ import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import type { EventWorkingListsTemplates, MainViewConfig } from '../types';
 
 export const getTemplates = (
-    programId: string, 
-    querySingleResource: QuerySingleResource, 
+    programId: string,
+    querySingleResource: QuerySingleResource,
     mainViewConfig: MainViewConfig
 ): Promise<{ templates: EventWorkingListsTemplates, defaultTemplateId: string}> =>
     getApiEventFilters(programId, querySingleResource).then((apiEventFilters) => {
@@ -26,9 +26,9 @@ export const getTemplates = (
                     const { displayColumnOrder, order, eventDate, ...criteria } = eventQueryCriteria;
                     const convertedEventQueryCriteria = {
                         ...criteria,
-                        displayColumnOrder: displayColumnOrder?.map(columnId => 
+                        displayColumnOrder: displayColumnOrder?.map(columnId =>
                             (columnId === 'eventDate' ? 'occurredAt' : columnId)),
-                        order: order?.includes('eventDate') ? 
+                        order: order?.includes('eventDate') ?
                             order.replace('eventDate', 'occurredAt') : order,
                         occurredAt: eventDate,
                     };

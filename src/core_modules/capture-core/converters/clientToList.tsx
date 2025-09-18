@@ -121,8 +121,8 @@ const valueConvertersForType = {
 };
 
 export function convertValue(
-    value: any, 
-    type: keyof typeof dataElementTypes, 
+    value: any,
+    type: keyof typeof dataElementTypes,
     dataElement?: DataElement | null
 ) {
     if (!value && value !== 0 && value !== false) {
@@ -140,7 +140,7 @@ export function convertValue(
 }
 
 
-// This function will replace the convertValue function in the future 
+// This function will replace the convertValue function in the future
 // (as it should not require a dataElement class to use optionSet)
 export function convert(
     value: any,

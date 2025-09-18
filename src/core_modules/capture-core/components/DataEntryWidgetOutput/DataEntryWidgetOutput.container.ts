@@ -14,7 +14,7 @@ const mapStateToProps = (state: any, { dataEntryId }: { dataEntryId: string }) =
     const { dataEntries } = state;
     const ready = !!dataEntries[dataEntryId];
 
-    const dataEntryKey = ready ? 
+    const dataEntryKey = ready ?
         getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
     return {
         ready,
@@ -24,6 +24,6 @@ const mapStateToProps = (state: any, { dataEntryId }: { dataEntryId: string }) =
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> =
   connect(mapStateToProps, () => ({}))(
-      (props: any) => (props.ready ? 
+      (props: any) => (props.ready ?
           React.createElement(DataEntryWidgetOutputComponent, props) : null),
   );

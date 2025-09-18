@@ -5,14 +5,14 @@ const CUSTOM_VALIDATION_MESSAGES = {
 };
 
 export const isValidNonFutureAge = (
-    value: string, 
+    value: string,
     internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
 ) => {
     if (!value) {
         return true;
     }
 
-    if (internalComponentError && 
+    if (internalComponentError &&
         internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return {
             valid: false,

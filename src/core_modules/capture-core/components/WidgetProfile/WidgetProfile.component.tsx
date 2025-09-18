@@ -83,17 +83,17 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const isEditable = useMemo(() =>
-        Array.isArray(trackedEntityInstanceAttributes) && 
-        trackedEntityInstanceAttributes.length > 0 && 
-        trackedEntityTypeAccess?.data?.write && 
+        Array.isArray(trackedEntityInstanceAttributes) &&
+        trackedEntityInstanceAttributes.length > 0 &&
+        trackedEntityTypeAccess?.data?.write &&
         !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
-        teiId, 
-        program as any, 
+        teiId,
+        program as any,
         trackedEntityInstanceAttributes
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
@@ -120,7 +120,7 @@ const WidgetProfilePlain = ({
     useEffect(() => {
         if (storedAttributeValues?.length > 0) {
             setTeiModalState(TEI_MODAL_STATE.CLOSE);
-            onUpdateTeiAttributeValues && 
+            onUpdateTeiAttributeValues &&
                 onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
@@ -171,8 +171,8 @@ const WidgetProfilePlain = ({
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
                                 canWriteData={canWriteData}
-                                trackedEntity={trackedEntity ? 
-                                    { trackedEntity: trackedEntity.trackedEntity || teiId } : 
+                                trackedEntity={trackedEntity ?
+                                    { trackedEntity: trackedEntity.trackedEntity || teiId } :
                                     { trackedEntity: teiId }
                                 }
                                 onDeleteSuccess={onDeleteSuccess}
