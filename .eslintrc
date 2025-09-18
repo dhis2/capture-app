@@ -47,7 +47,7 @@
         "@typescript-eslint/no-explicit-any": "warn",
         "indent": [2, 4],
         "max-len": [
-            1,
+            2,
             120,
             4,
             {
