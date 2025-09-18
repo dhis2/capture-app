@@ -65,7 +65,8 @@ export const UnlinkAndDeleteModal = ({
             <ModalContent>
                 <p>
                     {i18n.t(
-                        'Are you sure you want to remove the link and delete the linked event? This action permanently removes the link, linked event, and all related data.',
+                        'Are you sure you want to remove the link and delete the linked event? ' +
+                        'This action permanently removes the link, linked event, and all related data.',
                     )}
                 </p>
             </ModalContent>

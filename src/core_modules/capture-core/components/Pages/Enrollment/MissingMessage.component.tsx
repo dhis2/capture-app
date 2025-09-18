@@ -234,9 +234,13 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', {
-                        teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
-                    })}
+                    {i18n.t(
+                        '{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. ' +
+                        'Choose another program that allows {{tetName}} enrollment. ',
+                        {
+                            teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
+                        }
+                    )}
                     <div>
                         <LinkButton
                             className={classes.link}

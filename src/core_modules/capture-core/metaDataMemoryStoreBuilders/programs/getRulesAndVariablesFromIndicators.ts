@@ -90,7 +90,8 @@ function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInCondition = getVariablesFromExpression(rule.condition);
     const variablesInData = getVariablesFromExpression(action.data);
 
-    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programData));
+    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => 
+        getDirectAddressedVariable(variableInCondition, programData));
     const directAddressedVariablesFromData = variablesInData.map(variableInData => 
         getDirectAddressedVariable(variableInData, programData));
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];

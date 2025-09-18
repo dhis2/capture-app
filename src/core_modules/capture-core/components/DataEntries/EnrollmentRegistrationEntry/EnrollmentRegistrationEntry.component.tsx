@@ -78,7 +78,8 @@ const EnrollmentRegistrationEntryPlain =
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit && enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit && 
+                  enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
                   <>
                       <EnrollmentDataEntry
                           teiId={teiId}

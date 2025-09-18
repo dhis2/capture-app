@@ -138,7 +138,8 @@ export const rulesEffectsFeedbackDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
+        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } = 
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
         const displayKeyValuePairEffects: { [id: string]: Array<DisplayKeyValuePairEffect> } = action.payload.rulesEffects && 
             action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
@@ -156,7 +157,8 @@ export const rulesEffectsIndicatorsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
+        const displayTextEffects: { [id: string]: Array<DisplayTextEffect> } = 
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
         const displayKeyValuePairEffects: { [id: string]: Array<DisplayKeyValuePairEffect> } = action.payload.rulesEffects && 
             action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {

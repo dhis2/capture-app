@@ -193,7 +193,9 @@ export const verifyTeiFetchSuccessEpic = (action$: any, store: any) =>
 export const fetchTeiErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI_ERROR),
-        map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({ error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }) })),
+        map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({ 
+            error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }) 
+        })),
     );
 
 // Epics for programId

@@ -180,7 +180,10 @@ export class ProgramFactory {
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }
-        program.organisationUnits = (await getUserMetadataStorageController().get(USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
+        program.organisationUnits = (await getUserMetadataStorageController().get(
+            USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM, 
+            program.id
+        ))?.organisationUnits;
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;

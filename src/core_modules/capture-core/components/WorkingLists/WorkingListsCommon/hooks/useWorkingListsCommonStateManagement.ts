@@ -117,7 +117,8 @@ const useTemplates = (
             )),
         onDeleteTemplate: (template: any, programId: string, programStageId?: string, callBacks?: Callbacks) =>
             dispatch(deleteTemplate(template, programId, { storeId, workingListsType, programStageId }, callBacks)),
-        onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
+        onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => 
+            dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
     }), [storeId, dispatch, workingListsType, templateState.templates, mainViewConfig]);
 
     return {

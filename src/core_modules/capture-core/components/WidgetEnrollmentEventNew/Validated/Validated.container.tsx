@@ -125,7 +125,15 @@ export const Validated = ({
         );
 
         resolve({ success: true });
-    }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
+    }), [
+        buildNewEventPayload, 
+        dispatch, 
+        onSaveExternal, 
+        onSaveAndCompleteEnrollmentSuccessActionType, 
+        onSaveSuccessActionType, 
+        onSaveAndCompleteEnrollmentErrorActionType, 
+        onSaveErrorActionType
+    ]);
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
         const saveResult = await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);

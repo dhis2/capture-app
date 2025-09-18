@@ -96,7 +96,9 @@ export const startCreateNewAfterCompleting = ({
     teiId: string;
     availableProgramStages: any;
 }) =>
-    actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
+    actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ 
+        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages 
+    });
 
 export const cleanUpEventSaveInProgress = () =>
     actionCreator(newEventWidgetActionTypes.CLEAN_UP_EVENT_SAVE_IN_PROGRESS)();

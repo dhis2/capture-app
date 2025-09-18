@@ -101,7 +101,9 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     renderSearchGroups = (searchGroups: Array<SearchGroup>) => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = this.getFormId(searchGroupId);
-        const header = sg.unique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
+        const header = sg.unique ? 
+            i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : 
+            i18n.t('Search by attributes');
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         return (
             <Section

@@ -7,7 +7,8 @@ const fields =
     'dataEntryForm[id,htmlCode],' +
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
     'programSections[id,displayFormName,displayDescription,sortOrder,trackedEntityAttributes],' +
-    'programRuleVariables[id,displayName,programRuleVariableSourceType,valueType,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet],' +
+    'programRuleVariables[id,displayName,programRuleVariableSourceType,valueType,program[id],' +
+        'programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet],' +
     'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,' +
         'dataEntryForm[id,htmlCode],' +
         'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +

@@ -101,7 +101,10 @@ const NoteSectionPlain = ({
                         {createdBy.firstName} {' '} {createdBy.surname}
                     </span>}
                     <span className={classes.lastUpdated}>
-                        <Tooltip content={convertClientToList(moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(), dataElementTypes.DATETIME)}>
+                        <Tooltip content={convertClientToList(
+                            moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(), 
+                            dataElementTypes.DATETIME
+                        )}>
                             {moment(fromServerDate(storedAt)).fromNow()}
                         </Tooltip>
                     </span>
