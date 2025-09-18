@@ -23,10 +23,13 @@ const getFeatureType = (featureType?: string | null): string =>
 const isPluginElement = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is PluginElement =>
     (attribute as PluginElement).type === FormFieldTypes.PLUGIN;
 
-const isProgramTrackedEntityAttribute = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is ProgramTrackedEntityAttribute =>
+const isProgramTrackedEntityAttribute = (
+    attribute: ProgramTrackedEntityAttribute | PluginElement,
+): attribute is ProgramTrackedEntityAttribute =>
     !isPluginElement(attribute);
 
-const buildProgramSection = (programSection: any) => programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
+const buildProgramSection = (programSection: any) =>
+    programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
 
 const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
     if (!trackedEntityType) {
@@ -275,7 +278,10 @@ export const buildFormFoundation = async (
 
                     if (!sectionMetadata && programSections && programSections.length > 0) {
                         log.warn(
-                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                            errorCreator(
+                                `Could not find metadata for section. This could indicate that your form
+                                configuration may be out of sync with your metadata.`,
+                            )(
                                 { sectionId: formConfigSection.id },
                             ),
                         );
@@ -300,7 +306,9 @@ export const buildFormFoundation = async (
                     const builtProgramSection = buildProgramSection(programSection);
 
                     section = await buildSection({
-                        programTrackedEntityAttributes: builtProgramSection.map((id: string) => trackedEntityAttributeDictionary[id]),
+                        programTrackedEntityAttributes: builtProgramSection.map(
+                            (id: string) => trackedEntityAttributeDictionary[id],
+                        ),
                         trackedEntityAttributes,
                         optionSets,
                         sectionCustomLabel: programSection.displayFormName,
@@ -335,6 +343,8 @@ export const build = async (
     minorServerVersion: number,
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
+    const formFoundation = (await buildFormFoundation(
+        program, querySingleResource, minorServerVersion, dataEntryFormConfig,
+    )) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

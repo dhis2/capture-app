@@ -4,9 +4,8 @@ import type { RenderCustomCardActions } from '../../../../../CardList';
 import type {
     ExistingUniqueValueDialogActionsComponent,
 } from '../../../../../DataEntries';
-import type {
-    TeiPayload,
-} from '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TeiPayload } from
+    '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance';
 
 export type Props = {
     theme: any;

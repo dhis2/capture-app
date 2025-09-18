@@ -251,7 +251,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    onGetCustomFieldLabeClass: (props: any) =>
+                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
@@ -268,7 +269,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    onGetCustomFieldLabeClass: (props: any) =>
+                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
@@ -365,7 +367,8 @@ const getCategoryOptionsSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                                `${props.fieldOptions &&
+                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -576,7 +579,8 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
 
     render() {
         const { eventStatus } = this.props;
-        const isScheduleOrOverdue = eventStatus && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
+        const isScheduleOrOverdue = eventStatus &&
+            [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
 
         return isScheduleOrOverdue ? this.renderScheduleView() : this.renderDataEntry();
     }

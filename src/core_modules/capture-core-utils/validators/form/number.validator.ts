@@ -5,4 +5,6 @@
  * @returns {boolean}
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const isValidNumber = (value: string, _internalComponentError?: {error?: string, errorCode?: string}) => !!(!isNaN(value as any) && Number(value) !== Infinity);
+export const isValidNumber = (
+    value: string,
+) => !!(!isNaN(value as any) && Number(value) !== Infinity);

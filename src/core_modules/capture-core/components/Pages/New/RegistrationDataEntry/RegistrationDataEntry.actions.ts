@@ -3,9 +3,8 @@ import { effectMethods } from '../../../../trackerOffline';
 import type {
     EnrollmentPayload,
 } from '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
-import type {
-    TeiPayload,
-} from '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TeiPayload } from
+    '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
 
 export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_SAVE_START: 'StartSavingNewTrackedEntityInstance',

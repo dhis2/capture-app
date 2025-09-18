@@ -6,5 +6,6 @@ const relationshipTypesSelector = (state: any, props: any) => props.relationship
 export const makeSelectedRelationshipTypeSelector = () => createSelector(
     relationshipTypeIdSelector,
     relationshipTypesSelector,
-    (relationshipTypeId: string, relationshipTypes: Array<any>) => relationshipTypes.find((rt: any) => rt.id === relationshipTypeId),
+    (relationshipTypeId: string, relationshipTypes: Array<any>) =>
+        relationshipTypes.find((rt: any) => rt.id === relationshipTypeId),
 );

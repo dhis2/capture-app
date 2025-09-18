@@ -154,7 +154,9 @@ export class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId!) as TrackedEntityType;
+                o.trackedEntityType = this.trackedEntityTypeCollection.get(
+                    cachedProgram.trackedEntityTypeId!,
+                ) as TrackedEntityType;
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
@@ -178,7 +180,10 @@ export class ProgramFactory {
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }
-        program.organisationUnits = (await getUserMetadataStorageController().get(USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
+        program.organisationUnits = (await getUserMetadataStorageController().get(
+            USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM,
+            program.id,
+        ))?.organisationUnits;
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;

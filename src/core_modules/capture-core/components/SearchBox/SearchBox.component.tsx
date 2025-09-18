@@ -54,7 +54,9 @@ const Index = ({
     searchableFields,
 }: Props & WithStyles<typeof getStyles>) => {
     const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(preselectedProgramId);
-    const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
+    const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(
+        preselectedProgramId ? searchScopes.PROGRAM : null,
+    );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
@@ -125,7 +127,9 @@ const Index = ({
             </div>
 
             {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
-                <IncompleteSelectionsMessage>{String(i18n.t('Choose a type to start searching'))}</IncompleteSelectionsMessage>
+                <IncompleteSelectionsMessage>
+                    {String(i18n.t('Choose a type to start searching'))}
+                </IncompleteSelectionsMessage>
             )}
         </>
     );

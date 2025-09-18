@@ -54,7 +54,8 @@ const subValueGetterByElementType = {
             } : {
                 value,
                 url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
+                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}
+                    &dimension=SMALL`,
             }
         ),
     [dataElementTypes.ORGANISATION_UNIT]: ({

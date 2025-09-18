@@ -55,7 +55,13 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                executeRulesOnUpdateForNewEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted }),
+                executeRulesOnUpdateForNewEvent({
+                    ...successInnerAction.payload,
+                    dataEntryId,
+                    itemId,
+                    uid,
+                    rulesExecutionDependenciesClientFormatted,
+                }),
             ], newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH);
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;

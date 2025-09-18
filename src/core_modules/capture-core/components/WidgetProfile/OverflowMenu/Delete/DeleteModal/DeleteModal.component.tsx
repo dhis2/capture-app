@@ -22,7 +22,8 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
             <ModalContent>
                 <p>
                     {i18n.t(
-                        'Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated enrollments and events in all programs.',
+                        `Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove 
+                            the {{trackedEntityTypeName}} and all its associated enrollments and events in all programs.`,
                         {
                             trackedEntityTypeName,
                             interpolation: { escapeValue: false },

@@ -14,7 +14,12 @@ import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
-import { stringToTemporal, temporalToString, mapDhis2CalendarToTemporal, isCalendarSupported } from '../../capture-core-utils/date';
+import {
+    stringToTemporal,
+    temporalToString,
+    mapDhis2CalendarToTemporal,
+    isCalendarSupported,
+} from '../../capture-core-utils/date';
 
 type AgeValues = {
     date?: string | null;
@@ -226,7 +231,8 @@ class D2AgeFieldPlain extends Component<Props> {
         const { classes, innerMessage: messageContainer } = this.props;
         if (messageContainer) {
             const message = messageContainer.message && messageContainer.message[key];
-            const className = (classes && classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
+            const className = (classes &&
+                classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
             return message && (<div className={className}>{message}</div>);
         }
         return null;

@@ -18,7 +18,8 @@ export const SimpleSplitButton = (props: Props) => {
             component={
                 <FlyoutMenu>
                     {dropDownItems.map(i => (
-                        // @ts-expect-error - UI apparently expects a suffix here, but that does not make sense. Remove this once the issue is fixed.
+                        // @ts-expect-error - UI apparently expects a suffix here, but that does not make sense.
+                        // Remove this once the issue is fixed.
                         <MenuItem
                             key={uuid()}
                             label={i.text}

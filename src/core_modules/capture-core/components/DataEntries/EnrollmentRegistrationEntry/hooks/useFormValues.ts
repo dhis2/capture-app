@@ -25,7 +25,7 @@ type InputForm = {
     orgUnit?: OrgUnit | null;
     formFoundation: RenderFoundation | null;
     teiId?: string;
-    searchTerms: Array<{[key: string]: string}> | null;
+    searchTerms: Array<{ [key: string]: string }> | null;
 };
 
 type StaticPatternValues = {
@@ -40,33 +40,34 @@ const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: 
         if (program && attributes) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { attributes: programTrackedEntityAttributes } = program;
-            const computedAttributes = await programTrackedEntityAttributes?.reduce(async (promisedAcc: Promise<any[]>, programTrackedEntityAttribute) => {
-                const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
-                const foundAttribute = attributes?.find(item => item.attribute === id);
-                let value;
-                if (foundAttribute) {
-                    if (subValueGetterByElementType[type]) {
-                        value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
-                    } else {
-                        value = convertServerToClient(foundAttribute.value, type as any);
+            const computedAttributes = await programTrackedEntityAttributes?.reduce(
+                async (promisedAcc: Promise<any[]>, programTrackedEntityAttribute) => {
+                    const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
+                    const foundAttribute = attributes?.find(item => item.attribute === id);
+                    let value;
+                    if (foundAttribute) {
+                        if (subValueGetterByElementType[type]) {
+                            value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
+                        } else {
+                            value = convertServerToClient(foundAttribute.value, type as any);
+                        }
                     }
-                }
 
-                const acc = await promisedAcc;
-                return value
-                    ? [
-                        ...acc,
-                        {
-                            attribute: id,
-                            key: formName,
-                            optionSet,
-                            value,
-                            unique,
-                            valueType: type,
-                        },
-                    ]
-                    : acc;
-            }, Promise.resolve([]));
+                    const acc = await promisedAcc;
+                    return value
+                        ? [
+                            ...acc,
+                            {
+                                attribute: id,
+                                key: formName,
+                                optionSet,
+                                value,
+                                unique,
+                                valueType: type,
+                            },
+                        ]
+                        : acc;
+                }, Promise.resolve([]));
             setListAttributes(computedAttributes);
         } else {
             setListAttributes([]);
@@ -96,16 +97,25 @@ const buildFormValues = async ({
     setFormValues: (values: any) => void;
     setClientValues: (values: any) => void;
     formValuesReadyRef: { current: boolean };
-    searchTerms: Array<{[key: string]: any}> | null;
+    searchTerms: Array<{ [key: string]: any }> | null;
     querySingleResource: QuerySingleResource;
 }) => {
-    const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
+    const clientValues = clientAttributesWithSubvalues?.reduce(
+        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }),
+        {},
+    );
     const formValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
+        (acc, currentValue) => ({
+            ...acc,
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType),
+        }),
         {},
     );
     const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
-    const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
+    const searchFormValues = searchTerms?.reduce(
+        (acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }),
+        {},
+    );
 
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
         foundation,
@@ -113,12 +123,16 @@ const buildFormValues = async ({
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues && setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
-    setClientValues && setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
+    setFormValues &&
+        setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
+    setClientValues &&
+        setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms }: InputForm) => {
+export const useFormValues = ({
+    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms,
+}: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();
     const formValuesReadyRef = useRef<any>(false);

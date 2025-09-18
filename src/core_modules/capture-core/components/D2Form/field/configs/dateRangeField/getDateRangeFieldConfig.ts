@@ -7,7 +7,11 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
 const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
 
-export const getDateRangeFieldConfig = (metaData: MetaDataElement, options: any, querySingleResource: QuerySingleResource) => {
+export const getDateRangeFieldConfig = (
+    metaData: MetaDataElement,
+    options: any,
+    querySingleResource: QuerySingleResource,
+) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,

@@ -44,6 +44,7 @@ export class DateFilterManager extends React.Component<Props, State> {
                     ? Math.abs(filter.startBuffer).toString()
                     : undefined,
             end: (filter.endBuffer || filter.endBuffer === 0) ? filter.endBuffer.toString() : undefined,
+
         };
     }
 

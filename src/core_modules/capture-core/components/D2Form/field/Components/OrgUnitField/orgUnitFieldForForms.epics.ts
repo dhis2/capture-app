@@ -29,7 +29,8 @@ const cancelActionFilter = (action: any, formId: string, elementId: string) => {
     if (isArray(action.payload)) {
         return action.payload.some(innerAction => isAddFormData(innerAction, formId));
     }
-    return isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
+    return isAddFormData(action, formId) ||
+        isRequestFilterFormFieldOrgUnits(action, formId, elementId);
 };
 
 export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySingleResource }: ApiUtils) =>
@@ -59,7 +60,11 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
                 log.error(errorCreator(FILTER_RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'FilterOrgUnitRootsEpic' }),
                 );
-                return filterFormFieldOrgUnitsFailed(resultContainer.formId, resultContainer.elementId, FILTER_RETRIEVE_ERROR);
+                return filterFormFieldOrgUnitsFailed(
+                    resultContainer.formId,
+                    resultContainer.elementId,
+                    FILTER_RETRIEVE_ERROR,
+                );
             }
 
             const { orgUnitArray, formId, elementId } = resultContainer;

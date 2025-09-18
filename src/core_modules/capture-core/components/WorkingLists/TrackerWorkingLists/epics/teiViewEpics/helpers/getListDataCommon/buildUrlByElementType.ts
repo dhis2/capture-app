@@ -29,7 +29,8 @@ const buildTEAUrlByElementType: {
         (featureAvailable(FEATURES.trackerImageEndpoint)
             ? {
                 imageUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
-                previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
+                previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}
+                /image?program=${programId}&dimension=small`,
             }
             : {
                 imageUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image?program=${programId}`,

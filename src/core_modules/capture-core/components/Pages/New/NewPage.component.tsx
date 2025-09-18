@@ -114,12 +114,15 @@ const NewPagePlain = ({
                         {
                             newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
                             (() => {
-                                const missingCategories = missingCategoriesInProgramSelection.reduce((acc, { name }, index) => {
-                                    if ((index + 1 === missingCategoriesInProgramSelection.length)) {
-                                        return `${acc} ${name} ${missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'}`;
-                                    }
-                                    return `${acc} ${name},`;
-                                }, '');
+                                const missingCategories = missingCategoriesInProgramSelection.reduce(
+                                    (acc, { name }, index) => {
+                                        if ((index + 1 === missingCategoriesInProgramSelection.length)) {
+                                            return `${acc} ${name} ${
+                                                missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'
+                                            }`;
+                                        }
+                                        return `${acc} ${name},`;
+                                    }, '');
 
                                 return (
                                     <IncompleteSelectionsMessage>
@@ -135,7 +138,8 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                                 <IncompleteSelectionsMessage>
                                     {i18n.t(
-                                        'The category option is not valid for the selected organisation unit. Please select a valid combination.',
+                                        `The category option is not valid for the selected organisation unit.
+                                        'Please select a valid combination.`,
                                     )}
                                 </IncompleteSelectionsMessage>
                             )

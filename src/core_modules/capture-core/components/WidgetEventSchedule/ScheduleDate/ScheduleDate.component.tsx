@@ -91,7 +91,8 @@ const ScheduleDatePlain = ({
         if (!isWithinValidPeriod) {
             return {
                 error: true,
-                validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
+                validationText: i18n.t(`The date entered belongs to an expired period.
+                     Enter a date after {{firstValidDate}}.`, {
                     firstValidDate,
                     interpolation: { escapeValue: false },
                 }),

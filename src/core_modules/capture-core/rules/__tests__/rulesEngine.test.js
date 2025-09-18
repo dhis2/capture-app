@@ -177,7 +177,8 @@ describe('Rules engine', () => {
         ]);
     });
 
-    test('HIDE_PROGRAM_STAGE program rule effect corner case. The action does not have a program stage id', () => {
+    test(`HIDE_PROGRAM_STAGE program rule effect corner case. 
+        The action does not have a program stage id`, () => {
         const programRules = [
             {
                 id: 'GC4gpdoSD4r',
@@ -205,7 +206,8 @@ describe('Rules engine', () => {
         expect(rulesEffects).toEqual([]);
     });
 
-    test('HIDE_SECTION program rule effect corner case. The action does not have a program stage section id', () => {
+    test(`HIDE_SECTION program rule effect corner case. 
+        The action does not have a program stage section id`, () => {
         const programRules = [
             {
                 id: 'GC4gpdoSD4r',

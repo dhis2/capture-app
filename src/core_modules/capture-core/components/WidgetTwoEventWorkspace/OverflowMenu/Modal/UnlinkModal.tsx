@@ -62,7 +62,12 @@ export const UnlinkModal = ({
                 {i18n.t('Unlink event')}
             </ModalTitle>
             <ModalContent>
-                <p>{i18n.t('Are you sure you want to remove the link between these events? This action removes the link itself, but the linked event will remain.')}</p>
+                <p>
+                    {i18n.t(
+                        `Are you sure you want to remove the link between these events? 
+                        This action removes the link itself, but the linked event will remain.`,
+                    )}
+                </p>
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
