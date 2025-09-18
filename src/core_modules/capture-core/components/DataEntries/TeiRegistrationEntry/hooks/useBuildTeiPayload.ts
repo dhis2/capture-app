@@ -5,7 +5,8 @@ import { convertClientToServer, convertFormToClient } from '../../../../converte
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { TeiPayload } from
-    '../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+    '../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/' +
+    'dataEntryTrackedEntityInstance.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 
 type Props = {
