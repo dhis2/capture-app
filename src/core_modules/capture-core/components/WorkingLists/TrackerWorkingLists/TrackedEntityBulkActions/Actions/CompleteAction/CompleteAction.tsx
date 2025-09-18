@@ -96,8 +96,8 @@ const CompleteActionPlain = ({
                     <span>
                         {hasPartiallyUploadedEnrollments ?
                             i18n.t(
-                                `Some enrollments were completed successfully, 
-                                but there was an error while completing the rest. Please see the details below.`,
+                                'Some enrollments were completed successfully, ' +
+                                'but there was an error while completing the rest. Please see the details below.',
                             ) :
                             i18n.t('There was an error while completing the enrollments. Please see the details below.')
                         }
