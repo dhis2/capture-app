@@ -226,7 +226,8 @@ class D2AgeFieldPlain extends Component<Props> {
         const { classes, innerMessage: messageContainer } = this.props;
         if (messageContainer) {
             const message = messageContainer.message && messageContainer.message[key];
-            const className = (classes && classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
+            const className = (classes && 
+                classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
             return message && (<div className={className}>{message}</div>);
         }
         return null;
@@ -251,7 +252,9 @@ class D2AgeFieldPlain extends Component<Props> {
                 <AgeNumberInput
                     label={i18n.t(label)}
                     value={currentValues[key]}
-                    onBlur={numberValue => this.handleNumberBlur({ ...currentValues, [key]: numberValue })}
+                    onBlur={numberValue => 
+                        this.handleNumberBlur({ ...currentValues, [key]: numberValue })
+                    }
                     onChange={numberValue => onChange({ ...currentValues, [key]: numberValue })}
                     {...passOnProps}
                 />
@@ -295,7 +298,8 @@ class D2AgeFieldPlain extends Component<Props> {
         const { value, orientation, disabled } = this.props;
         const currentValues = value || {};
         const isVertical = orientation === orientations.VERTICAL;
-        const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
+        const containerClass = isVertical ? 
+            defaultClasses.containerVertical : defaultClasses.containerHorizontal;
         const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : undefined;
         return (
             <div className={containerClass}>

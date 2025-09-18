@@ -57,7 +57,8 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     getPosition = (): Array<number> | null => {
         const { value } = this.props;
         let convertedValue: Array<number> | null = null;
-        if (value?.latitude && value?.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
+        if (value?.latitude && value?.longitude && 
+            !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
             convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
         }
         return convertedValue;
@@ -121,7 +122,11 @@ export class CoordinateField extends React.Component<PlainProps, State> {
 
     renderMapIcon = () => {
         const { classes, shrinkDisabled, disabled } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, mapIconContainerDisabled: mapIconContainerDisabledCustomClass } = classes || {};
+        const { 
+            mapIconContainer: mapIconContainerCustomClass, 
+            mapIcon: mapIconCustomClass, 
+            mapIconContainerDisabled: mapIconContainerDisabledCustomClass 
+        } = classes || {};
         const mapIconContainerClass = classNames(
             { [defaultClasses.mapIconContainer]: shrinkDisabled },
             { [defaultClasses.mapIconContainerWithMargin]: !shrinkDisabled },
