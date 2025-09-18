@@ -28,8 +28,7 @@ export const saveNewEnrollmentEventEpic = (action$: any) =>
             const events = serverData.events ?? serverData.enrollments[0].events;
             const relationships = relationship ? [relationship] : [];
 
-            onSaveExternal &&
-                onSaveExternal({ linkMode, events, relationships, ...serverData });
+            onSaveExternal && onSaveExternal({ linkMode, events, relationships, ...serverData });
             return saveEvents({
                 serverData,
                 onSaveSuccessActionType,

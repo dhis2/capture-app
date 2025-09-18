@@ -15,8 +15,7 @@ const deriveReadiness = (
 ) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
-    if (!ouNameError && selectedOrgUnitId &&
-        (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
+    if (!ouNameError && selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
         return false;
     }
     return !lockedSelectorLoads;
@@ -55,8 +54,8 @@ export const ScopeSelector = ({
 
     useEffect(() => {
         if (selectedOrgUnitId && selectedOrgUnit.id !== selectedOrgUnitId) {
-            selectedOrgUnitId &&
-                setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
+            selectedOrgUnitId && setSelectedOrgUnit(prevSelectedOrgUnit =>
+                ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
         }
     }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);
 
@@ -77,8 +76,7 @@ export const ScopeSelector = ({
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
             onResetOrgUnitId={() => {
-                selectedOrgUnit &&
-                    dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id ?? undefined));
+                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id ?? undefined));
                 return onResetOrgUnitId();
             }}
             onResetAllCategoryOptions={onResetAllCategoryOptions}

@@ -70,8 +70,7 @@ export function isValidAge(
         return false;
     }
 
-    if (internalComponentError &&
-        internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return { valid: true, errorMessage: null };
     }
 

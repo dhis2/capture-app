@@ -46,8 +46,7 @@ const getApiFilterQueryArgument = (filters: { [id: string]: string} | null, main
                 }, []) :
             null;
 
-    const filterArgument = filterQueries && filterQueries.length > 0 ?
-        { filter: filterQueries } : null;
+    const filterArgument = filterQueries && filterQueries.length > 0 ? { filter: filterQueries } : null;
     return filterArgument;
 };
 

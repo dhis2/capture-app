@@ -257,9 +257,7 @@ class D2AgeFieldPlain extends Component<Props> {
                 <AgeNumberInput
                     label={i18n.t(label)}
                     value={currentValues[key]}
-                    onBlur={numberValue =>
-                        this.handleNumberBlur({ ...currentValues, [key]: numberValue })
-                    }
+                    onBlur={numberValue => this.handleNumberBlur({ ...currentValues, [key]: numberValue })}
                     onChange={numberValue => onChange({ ...currentValues, [key]: numberValue })}
                     {...passOnProps}
                 />
@@ -303,8 +301,7 @@ class D2AgeFieldPlain extends Component<Props> {
         const { value, orientation, disabled } = this.props;
         const currentValues = value || {};
         const isVertical = orientation === orientations.VERTICAL;
-        const containerClass = isVertical ?
-            defaultClasses.containerVertical : defaultClasses.containerHorizontal;
+        const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
         const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : undefined;
         return (
             <div className={containerClass}>

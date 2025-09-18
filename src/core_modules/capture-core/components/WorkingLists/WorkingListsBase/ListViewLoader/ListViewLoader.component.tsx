@@ -23,9 +23,7 @@ const useCalculateTriggerLoad = ({
 }) => {
     const contextInSync = useIsContextInSync(programId, categories, loadedViewContext);
     let triggerLoad = false;
-    if (!contextInSync ||
-        hasTemplateChange(currentTemplate, prevTemplate, viewPreloaded) ||
-        (dirtyView && firstRun)) {
+    if (!contextInSync || hasTemplateChange(currentTemplate, prevTemplate, viewPreloaded) || (dirtyView && firstRun)) {
         triggerLoad = true;
     }
     return triggerLoad;

@@ -100,9 +100,7 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     if (!startValue && !endValue) {
         errors = {
             ...errors,
-            bufferLogicError: submitAttempted
-                ? i18n.t(DateFilterPlain.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES)
-                : null,
+            bufferLogicError: submitAttempted ? i18n.t(DateFilterPlain.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
         };
     }
     const { error: startValueError } = DateFilterPlain.validateRelativeRangeValue(startValue);
@@ -261,8 +259,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     onIsValid() {
         this.setState({ submitAttempted: true });
         const values = this.props.value;
-        return !values ||
-            DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
+        return !values || DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
     getUpdatedValue(valuePart: any) {

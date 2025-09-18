@@ -6,8 +6,7 @@ import { isSelectionsEqual } from '../../App/isSelectionsEqual';
 const mapStateToProps = (state: any, props: any) => {
     const listSelections = state.workingListsContext[props.listId];
     return {
-        hasData: !!(listSelections &&
-            isSelectionsEqual(listSelections, state.currentSelections)),
+        hasData: !!(listSelections && isSelectionsEqual(listSelections, state.currentSelections)),
     };
 };
 

@@ -12,8 +12,7 @@ export const isValidNonFutureAge = (
         return true;
     }
 
-    if (internalComponentError &&
-        internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return {
             valid: false,
             errorMessage: { date: CUSTOM_VALIDATION_MESSAGES.INVALID_DATE_MORE_THAN_MAX },

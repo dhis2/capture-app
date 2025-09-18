@@ -61,10 +61,10 @@ const InfoBoxPlain = ({
                             {i18n.t('There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.', {
                                 count: eventCountInOrgUnit,
                                 orgUnitName,
-                                defaultValue: 'There are {{count}} scheduled event in this program in ' +
-                                    '{{orgUnitName}} on this day.',
-                                defaultValue_plural: 'There are {{count}} scheduled events in this program in ' +
-                                    '{{orgUnitName}} on this day.',
+                                defaultValue: `There are {{count}} scheduled event in this 
+                                    program in {{orgUnitName}} on this day.`,
+                                defaultValue_plural: `There are {{count}} scheduled events in this 
+                                    program in {{orgUnitName}} on this day.`,
                                 interpolation: {
                                     escapeValue: false,
                                 },

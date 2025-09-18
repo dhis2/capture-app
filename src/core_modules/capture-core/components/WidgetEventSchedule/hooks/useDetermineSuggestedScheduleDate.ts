@@ -111,10 +111,8 @@ export const useDetermineSuggestedScheduleDate = ({
             }
             return undefined;
         },
-        () => nextScheduleDate?.id &&
-            getSuggestedDateByNextScheduleDate(nextScheduleDate.id, stageEvents),
-        () => standardInterval &&
-            getSuggestedDateByStandardInterval(standardInterval, stageEvents),
+        () => nextScheduleDate?.id && getSuggestedDateByNextScheduleDate(nextScheduleDate.id, stageEvents),
+        () => standardInterval && getSuggestedDateByStandardInterval(standardInterval, stageEvents),
         () => calculateSuggestedDateFromStart({
             generatedByEnrollmentDate,
             displayIncidentDate,

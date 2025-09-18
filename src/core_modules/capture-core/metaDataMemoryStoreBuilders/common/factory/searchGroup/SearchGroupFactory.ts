@@ -40,8 +40,7 @@ export class SearchGroupFactory {
     };
     static _getSearchAttributeValueType(valueType: string, isUnique?: boolean | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
-        return !isUnique && searchAttributeValueType ?
-            searchAttributeValueType : valueType;
+        return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
     }
 
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
@@ -166,8 +165,8 @@ export class SearchGroupFactory {
         if (!trackedEntityAttribute) {
             log.error(
                 errorCreator(
-                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified or ' +
-                    'the trackedEntityAttribute could not be retrieved from the cache',
+                    `Tried to create a searchAttribute where trackedEntityAttributeId was not specified or 
+                        the trackedEntityAttribute could not be retrieved from the cache`,
                 )(
                     { attribute }),
             );
@@ -185,8 +184,7 @@ export class SearchGroupFactory {
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute &&
-                (attribute.searchable || attribute.trackedEntityAttribute.unique))
+                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
             .reduce((accGroups: any, attribute) => {
                 if (attribute.trackedEntityAttribute!.unique) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];

@@ -85,11 +85,9 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
         // @ts-expect-error - keeping original functionality as before ts rewrite
-        if (isValid && !this.props.searchGroup.unique) {
-            isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
-        }
+        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
-        if (isValid && !this.props.searchGroup.unique) { isValid = this.validNumberOfAttributes(); }
+        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
 
         if (isValid && this.props.searchGroup.unique) {
             isValid = this.isSearchViaUniqueIdValid();

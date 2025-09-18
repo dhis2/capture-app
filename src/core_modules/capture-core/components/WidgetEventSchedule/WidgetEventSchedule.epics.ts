@@ -32,8 +32,8 @@ export const scheduleEnrollmentEventEpic = (action$: any, store: any) =>
             } = action.payload;
 
             const { events } = store.value;
-            const existingEnrollment = events[eventId] &&
-                [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
+            const existingEnrollment = events[eventId]
+            && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
             const attributeCategoryOptions = categoryOptions && convertCategoryOptionsToServer(categoryOptions);
 
             let serverData: any = { events: [{

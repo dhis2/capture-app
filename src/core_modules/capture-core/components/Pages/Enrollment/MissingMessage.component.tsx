@@ -95,11 +95,7 @@ const useNavigations = () => {
     const navigateToEventWorkingList = () =>
         navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
-        navigate(`/new?${buildUrlQueryString({
-            programId,
-            orgUnitId,
-            trackedEntityTypeId: tetId,
-        })}`);
+        navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
 
     return {
         navigateToTrackerProgramRegistrationPage,

@@ -79,26 +79,26 @@ const convert = (() => {
     };
 })();
 
-const fieldsParam = 'id,displayName,displayShortName,description,programType,style,displayFrontPageList,' +
-'useFirstStageDuringRegistration,onlyEnrollOnce,' +
-'displayIncidentDateLabel,displayEnrollmentDateLabel,minAttributesRequiredToSearch,' +
-'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
-'accessLevel,expiryPeriodType,expiryDays,' +
-'dataEntryForm[id,htmlCode],' +
-'access[*],' +
-'trackedEntityType[id],' +
-'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
-'userRoles[id,displayName],' +
-'programStages[id,access,autoGenerateEvent,openAfterEnrollment,hideDueDate,allowGenerateNextVisit,' +
-'remindCompleted,repeatable,generatedByEnrollmentDate,reportDateToUse,blockEntryForm,minDaysFromStart,' +
-'name,displayName,description,displayExecutionDateLabel,displayDueDateLabel,formType,featureType,' +
-'validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
-'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
-'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,' +
-'renderType[*],dataElement[id]]]' +
-'programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes],' +
-'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,' +
-'renderOptionsAsRadio,allowFutureDate]';
+const fieldsParam = `id,displayName,displayShortName,description,programType,style,displayFrontPageList,
+useFirstStageDuringRegistration,onlyEnrollOnce,
+displayIncidentDateLabel,displayEnrollmentDateLabel,minAttributesRequiredToSearch,
+featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,
+accessLevel,expiryPeriodType,expiryDays,
+dataEntryForm[id,htmlCode],
+access[*],
+trackedEntityType[id],
+categoryCombo[id,displayName,isDefault,categories[id,displayName]],
+userRoles[id,displayName],
+programStages[id,access,autoGenerateEvent,openAfterEnrollment,hideDueDate,allowGenerateNextVisit,
+remindCompleted,repeatable,generatedByEnrollmentDate,reportDateToUse,blockEntryForm,minDaysFromStart,
+name,displayName,description,displayExecutionDateLabel,displayDueDateLabel,formType,featureType,
+validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]
+programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],
+programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,
+renderType[*],dataElement[id]]]
+programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes],
+programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,
+renderOptionsAsRadio,allowFutureDate]`;
 
 export const storePrograms = (programIds: Array<string>) => {
     const query = {

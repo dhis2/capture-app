@@ -87,8 +87,7 @@ export class ProgramStageFactory {
                     });
 
                     await sectionDataElement.fieldMap.asyncForEach(async (field) => {
-                        if (field.objectType &&
-                            field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                        if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                             const id = field.dataElementId;
                             const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
                             if (!cachedProgramStageDataElement) {

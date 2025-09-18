@@ -44,8 +44,8 @@ const buildTEAUrlByElementType: {
             return {
                 id,
                 name,
-                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file` +
-                    `?program=${programId}`,
+                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file
+                    ?program=${programId}`,
             };
         } catch (error) {
             log.error(
@@ -73,10 +73,10 @@ const buildTEAUrlByElementType: {
             return {
                 id,
                 name,
-                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image` +
-                    `?program=${programId}`,
-                previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image` +
-                    `?program=${programId}&dimension=small`,
+                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image
+                    ?program=${programId}`,
+                previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image
+                    ?program=${programId}&dimension=small`,
             };
         } catch (error) {
             log.error(

@@ -10,8 +10,8 @@ export const getApiEventFilters = async (programId: string, querySingleResource:
         resource: 'eventFilters',
         params: {
             filter: `program:eq:${programId}`,
-            fields: 'id,displayName,eventQueryCriteria,access,externalAccess,publicAccess,' +
-                'user[id,username],userAccesses[id,access],userGroupAccesses[id,access]',
+            fields: `id,displayName,eventQueryCriteria,access,externalAccess,publicAccess,
+                user[id,username],userAccesses[id,access],userGroupAccesses[id,access]`,
         },
     });
 

@@ -75,25 +75,17 @@ export const TopBarActions = ({
 
     const handleOpenNewRegistrationPageWithoutProgramId = () => {
         isUserInteractionInProgress
-            ? setContext(prev => ({
-                ...prev,
-                openNewRegistrationPageWithoutProgramId: true,
-            }))
+            ? setContext(prev => ({ ...prev, openNewRegistrationPageWithoutProgramId: true }))
             : newRegistrationPageWithoutProgramId();
     };
 
     const handleOpenSearchPage = () => {
-        isUserInteractionInProgress
-            ? setContext(prev => ({ ...prev, openSearchPage: true }))
-            : searchPage();
+        isUserInteractionInProgress ? setContext(prev => ({ ...prev, openSearchPage: true })) : searchPage();
     };
 
     const handleOpenSearchPageWithoutProgramId = () => {
         isUserInteractionInProgress
-            ? setContext(prev => ({
-                ...prev,
-                openSearchPageWithoutProgramId: true,
-            }))
+            ? setContext(prev => ({ ...prev, openSearchPageWithoutProgramId: true }))
             : searchPageWithoutProgramId();
     };
 

@@ -51,8 +51,8 @@ export const DeleteRelationshipPlain = ({
                     <ModalTitle>{i18n.t('Delete relationship')}</ModalTitle>
                     <ModalContent>
                         {i18n.t(
-                            'Deleting the relationship is permanent and cannot be undone. ' +
-                            'Are you sure you want to delete this relationship?',
+                            `Deleting the relationship is permanent and cannot be undone. 
+                            Are you sure you want to delete this relationship?`,
                         )}
                     </ModalContent>
 

@@ -90,8 +90,7 @@ export const SearchSuggestion = (props: Props) => {
     }, [onSelect, user]);
 
     const handleBlur = React.useCallback((event: any) => {
-        if (!event.relatedTarget ||
-            !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
+        if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
             onExitSearch();
         }
     }, [onExitSearch, suggestionName, inputName]);

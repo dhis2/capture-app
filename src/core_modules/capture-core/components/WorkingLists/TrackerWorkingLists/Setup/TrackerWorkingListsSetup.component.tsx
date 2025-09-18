@@ -34,8 +34,7 @@ const shouldPreserveViewState = ({
         (programStageId === undefined && prevProgramStageId.current));
 
 const useCurrentTemplate = (templates: any[], currentTemplateId?: string) => useMemo(() =>
-    (currentTemplateId &&
-        templates.find(template => template.id === currentTemplateId)) || templates[0],
+    (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
 [templates, currentTemplateId]);
 
 export const TrackerWorkingListsSetup = ({

@@ -51,8 +51,7 @@ export const useBuildRelatedStageEventPayload = () => {
         if (relatedStageRef?.current?.eventHasLinkableStageRelationship()) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
 
-            if (!isValid || !relatedStageRef.current?.getLinkedStageValues ||
-                !programStageId || !serverRequestEvent) {
+            if (!isValid || !relatedStageRef.current?.getLinkedStageValues || !programStageId || !serverRequestEvent) {
                 return {
                     formHasError: true,
                     linkedEvent: null,

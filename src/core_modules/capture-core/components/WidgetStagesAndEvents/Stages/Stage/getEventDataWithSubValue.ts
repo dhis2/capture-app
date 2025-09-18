@@ -44,12 +44,12 @@ const getImageSubvalue = (keys: any, querySingleResource: QuerySingleResource, e
                     ...(featureAvailable(FEATURES.trackerImageEndpoint) ?
                         {
                             url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image`,
-                            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image` +
-                                '?dimension=small',
+                            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image
+                                ?dimension=small`,
                         } : {
                             url: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
-                            previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}` +
-                                '&dimension=SMALL',
+                            previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}
+                                &dimension=SMALL`,
                         }
                     ),
                 };

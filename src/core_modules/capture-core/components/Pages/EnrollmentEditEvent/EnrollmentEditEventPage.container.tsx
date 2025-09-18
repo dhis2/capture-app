@@ -181,8 +181,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
         dispatch(commitEnrollmentAndEvents());
-        redirect &&
-            navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
 
     const onDeleteEvent = useCallback((linkedEventId: string) => {
@@ -254,8 +253,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    const trackedEntityType = (program &&
-        program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
+    const trackedEntityType = (program && program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const { name: trackedEntityName = '', id: trackedEntityTypeId = '' } = trackedEntityType ?? {};
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);

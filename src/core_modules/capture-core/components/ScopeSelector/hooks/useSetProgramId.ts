@@ -11,9 +11,7 @@ export const useSetProgramId = () => {
     };
 
     const setProgramIdAndResetEnrollmentContext = (programId: string, pageToPush: string = pathname) => {
-        navigate(
-            `${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, enrollmentId: 'AUTO' })}`,
-        );
+        navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, enrollmentId: 'AUTO' })}`);
     };
 
     return {

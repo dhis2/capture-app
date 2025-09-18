@@ -60,12 +60,8 @@ const runRulesForEditSingleEvent = async ({
     }
 
     const foundation = stage.stageForm;
-    const currentEventValues = foundation
-        ? getCurrentClientValues(state, foundation, formId, fieldData)
-        : {};
-    const currentEventMainData = foundation
-        ? getCurrentClientMainData(state, itemId, dataEntryId, foundation)
-        : {};
+    const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
+    const currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
     const currentEvent = { ...currentEventValues, ...currentEventMainData, eventId };
 
     const { coreOrgUnit, cached } =

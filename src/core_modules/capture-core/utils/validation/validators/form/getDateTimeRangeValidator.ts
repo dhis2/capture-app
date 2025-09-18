@@ -37,9 +37,7 @@ const convertDateTimeToIsoTemporal = (value: any | null | undefined) => {
             return null;
         }
 
-        if (
-            isNaN(hour) || isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59
-        ) {
+        if (isNaN(hour) || isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59) {
             return null;
         }
 

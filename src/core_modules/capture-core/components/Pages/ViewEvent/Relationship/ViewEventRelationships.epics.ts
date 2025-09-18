@@ -88,8 +88,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 },
                 to: {
                     ...toEntity,
-                    name: toEntity.name ||
-                        getRelationshipNewTeiName(toEntity.dataEntryId, toEntity.itemId, state),
+                    name: toEntity.name || getRelationshipNewTeiName(toEntity.dataEntryId, toEntity.itemId, state),
                     type: payload.entityType,
                 },
                 relationshipType: { ...payload.relationshipType },

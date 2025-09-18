@@ -40,12 +40,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 export const getOpenDataEntryActions =
-    (
-        dataEntryId: string,
-        itemId: string,
-        programCategory?: ProgramCategory,
-        orgUnit?: Record<string, unknown>,
-    ) => {
+    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit?: Record<string, unknown>) => {
         const defaultDataEntryValues = {
             orgUnit: orgUnit
                 ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }

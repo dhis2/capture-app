@@ -28,11 +28,11 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
             resource: 'tracker/relationships',
             params: {
                 [searchMode]: entityId,
-                fields: 'relationship,relationshipType,createdAt,' +
-                    'from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],' +
-                    'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],' +
-                    'to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],' +
-                    'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
+                fields: `relationship,relationshipType,createdAt,
+                    from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],
+                    event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],
+                    to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],
+                    event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]`,
                 ...(supportForFeature
                     ? { paging: false }
                     : { skipPaging: true }),

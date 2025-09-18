@@ -141,22 +141,21 @@ const NoteSectionPlain = ({
                 </Editor>
             </div>
 
-            {isEditing &&
-                <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
-                    <Button
-                        dataTest="add-note-btn"
-                        onClick={onAddNote}
-                        primary
-                    >
-                        {i18n.t('Save note')}
-                    </Button>
-                    <Button
-                        dataTest="cancel-note-btn"
-                        onClick={onCancel}
-                    >
-                        {i18n.t('Cancel')}
-                    </Button>
-                </div>}
+            {isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+                <Button
+                    dataTest="add-note-btn"
+                    onClick={onAddNote}
+                    primary
+                >
+                    {i18n.t('Save note')}
+                </Button>
+                <Button
+                    dataTest="cancel-note-btn"
+                    onClick={onCancel}
+                >
+                    {i18n.t('Cancel')}
+                </Button>
+            </div>}
         </div>);
 };
 

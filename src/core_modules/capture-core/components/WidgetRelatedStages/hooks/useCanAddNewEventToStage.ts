@@ -14,8 +14,7 @@ export const useCanAddNewEventToStage = (programStage?: ProgramStage, existingRe
         if (isProgramStageHidden) { return false; }
 
         return programStage && existingRelatedEvents
-            ? programStage.repeatable ||
-                (!programStage.repeatable && existingRelatedEvents.length === 0)
+            ? programStage.repeatable || (!programStage.repeatable && existingRelatedEvents.length === 0)
             : false;
     }, [programStage, existingRelatedEvents, hiddenProgramStages]);
 };

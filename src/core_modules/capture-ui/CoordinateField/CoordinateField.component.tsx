@@ -98,9 +98,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     search = (position: any) => {
-        const zoom = this.mapInstance?.leafletElement ?
-            this.mapInstance.leafletElement.getZoom() :
-            13;
+        const zoom = this.mapInstance?.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
         this.setMapPosition([...position], zoom);
     }
 

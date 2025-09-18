@@ -94,8 +94,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
     onIsValid() {
         const values = this.props.value;
-        return !values ||
-            NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type);
+        return !values || NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type);
     }
 
     static errorMessages = {
@@ -136,8 +135,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         // validate with updated values
         const values = this.getUpdatedValue(value);
 
-        if (values &&
-            !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
+        if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values);
         } else {
             this.props.onUpdate(values || null);

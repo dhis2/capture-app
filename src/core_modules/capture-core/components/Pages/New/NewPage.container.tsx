@@ -54,7 +54,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
         useTrackedEntityAttributes(teiId, programId);
     const trackedEntityType = (program && program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const teiDisplayName =
-        trackedEntityAttributes &&
+    trackedEntityAttributes &&
         deriveTeiName(trackedEntityAttributes, trackedEntityType?.id || '', teiId);
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(

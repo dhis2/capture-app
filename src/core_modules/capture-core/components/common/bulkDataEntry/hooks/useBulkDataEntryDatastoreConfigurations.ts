@@ -34,8 +34,7 @@ const validateStructure = (data: any) => {
     return {
         data: success ? data : null,
         validationError: !success
-            ? error.message ||
-                'An unknown error occurred loading the bulkDataEntry Schema'
+            ? error.message || 'An unknown error occurred loading the bulkDataEntry Schema'
             : null,
     };
 };

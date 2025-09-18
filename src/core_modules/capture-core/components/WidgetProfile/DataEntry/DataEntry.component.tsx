@@ -27,8 +27,8 @@ export const DataEntryComponent = ({
         )}</ModalTitle>
         <ModalContent>
             {i18n.t(
-                'Change information about this {{trackedEntityName}} here. ' +
-                'Information about this enrollment can be edited in the Enrollment widget.',
+                `Change information about this {{trackedEntityName}} here.
+                Information about this enrollment can be edited in the Enrollment widget.`,
                 { trackedEntityName, interpolation: { escapeValue: false } },
             )}
             <DataEntry

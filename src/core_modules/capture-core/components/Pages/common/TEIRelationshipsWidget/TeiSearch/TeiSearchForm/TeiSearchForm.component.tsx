@@ -114,13 +114,9 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        if (isValid && !this.props.searchGroup.unique) {
-            isValid = this.orgUnitSelectorInstance?.validateAndScrollToIfFailed();
-        }
+        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance?.validateAndScrollToIfFailed();
 
-        if (isValid && !this.props.searchGroup.unique) {
-            isValid = this.validNumberOfAttributes();
-        }
+        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
 
         if (isValid && this.props.searchGroup.unique) {
             isValid = this.isSearchViaUniqueIdValid();

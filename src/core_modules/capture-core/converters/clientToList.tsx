@@ -120,11 +120,7 @@ const valueConvertersForType = {
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
 };
 
-export function convertValue(
-    value: any,
-    type: keyof typeof dataElementTypes,
-    dataElement?: DataElement | null,
-) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes, dataElement?: DataElement | null) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
