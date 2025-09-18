@@ -65,7 +65,9 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
     static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
         const filterValueLC = filterValue.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
         return (options && 
-            options.filter(o => o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1)) || [];
+            options.filter(o => 
+                o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1
+            )) || [];
     }
 
     materialUIContainerInstance: any;

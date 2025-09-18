@@ -91,7 +91,8 @@ function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInData = getVariablesFromExpression(action.data);
 
     const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programData));
-    const directAddressedVariablesFromData = variablesInData.map(variableInData => getDirectAddressedVariable(variableInData, programData));
+    const directAddressedVariablesFromData = variablesInData.map(variableInData => 
+        getDirectAddressedVariable(variableInData, programData));
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];
 
     return {
@@ -105,7 +106,8 @@ function isValueCountPresent(rule: any, action: any) {
 }
 
 function replaceValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
-    let valueCountText = variableObjectsCurrentExpression.reduce((accValueCountText: string, variableCurrentRule: any, index: number) => {
+    let valueCountText = variableObjectsCurrentExpression.reduce(
+        (accValueCountText: string, variableCurrentRule: any, index: number) => {
         const currentText = `d2:count('${variableCurrentRule.displayName}')`;
         accValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
         return accValueCountText;

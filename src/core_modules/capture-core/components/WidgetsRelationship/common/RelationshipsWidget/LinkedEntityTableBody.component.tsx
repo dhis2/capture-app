@@ -63,7 +63,8 @@ const LinkedEntityTableBodyPlain = ({
                                                     onClick={() => !pendingApiResponse && 
                                                         onLinkedRecordClick({ ...context.navigation, ...navigation } as any)
                                                     }
-                                                    // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
+                                                    // @ts-expect-error - UI library expects a ref prop, 
+                                                    // but it is not defined in the types
                                                     ref={(tableCell) => {
                                                         if (tableCell) {
                                                             if (pendingApiResponse) {

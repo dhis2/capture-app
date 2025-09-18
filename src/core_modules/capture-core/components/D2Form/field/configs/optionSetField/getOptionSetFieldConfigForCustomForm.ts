@@ -27,7 +27,11 @@ const mapInputTypeToComponent = {
     [inputTypes.VERTICAL_RADIOBUTTONS]: OptionSetBoxesFieldForCustomForm,
 };
 
-export const getOptionSetFieldConfigForCustomForm = (metaData: DataElement, options: any, querySingleResource: QuerySingleResource) => {
+export const getOptionSetFieldConfigForCustomForm = (
+    metaData: DataElement, 
+    options: any, 
+    querySingleResource: QuerySingleResource
+) => {
     const optionSet: OptionSet | null = metaData.optionSet;
     if (!optionSet) {
         return null;

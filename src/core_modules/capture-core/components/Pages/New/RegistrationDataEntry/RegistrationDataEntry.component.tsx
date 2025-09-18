@@ -306,4 +306,5 @@ const RegistrationDataEntryPlain = ({
     );
 };
 
-export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as ComponentType<OwnProps & ContainerProps>;
+export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as 
+    ComponentType<OwnProps & ContainerProps>;

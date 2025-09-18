@@ -3,7 +3,11 @@ import { OrgUnitFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
-export const getOrgUnitFieldConfigForCustomForm = (metaData: MetaDataElement, options: any, querySingleResource: QuerySingleResource) => {
+export const getOrgUnitFieldConfigForCustomForm = (
+    metaData: MetaDataElement, 
+    options: any, 
+    querySingleResource: QuerySingleResource
+) => {
     const props = createProps({
     }, metaData);
 

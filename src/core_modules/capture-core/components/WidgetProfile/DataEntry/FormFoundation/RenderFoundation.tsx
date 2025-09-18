@@ -23,7 +23,9 @@ const getFeatureType = (featureType?: string | null): string =>
 const isPluginElement = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is PluginElement =>
     (attribute as PluginElement).type === FormFieldTypes.PLUGIN;
 
-const isProgramTrackedEntityAttribute = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is ProgramTrackedEntityAttribute =>
+const isProgramTrackedEntityAttribute = (
+    attribute: ProgramTrackedEntityAttribute | PluginElement
+): attribute is ProgramTrackedEntityAttribute =>
     !isPluginElement(attribute);
 
 const buildProgramSection = (programSection: any) => 

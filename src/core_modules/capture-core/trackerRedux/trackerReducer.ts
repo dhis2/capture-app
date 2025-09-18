@@ -115,7 +115,10 @@ const getDevelopmentReducer = (reducerDescription: ReducerDescription) => {
 
 function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWrapper | Array<ReducerWrapper>) {
     if (isArray(reducerWrappers)) {
-        return (reducerWrappers as Array<ReducerWrapper>).reduceRight((prevReducer, currentReducer) => currentReducer(prevReducer), reducer);
+        return (reducerWrappers as Array<ReducerWrapper>).reduceRight(
+            (prevReducer, currentReducer) => currentReducer(prevReducer), 
+            reducer
+        );
     }
 
     return (reducerWrappers as ReducerWrapper)(reducer);

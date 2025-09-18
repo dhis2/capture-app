@@ -187,7 +187,8 @@ export class ProgramStageFactory {
     }
 
     static _convertProgramStageDataElementsToObject(
-        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined): CachedProgramStageDataElementsAsObject {
+        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined
+    ): CachedProgramStageDataElementsAsObject {
         if (!cachedProgramStageDataElements) {
             return {};
         }

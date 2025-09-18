@@ -23,7 +23,11 @@ export class RelationshipNavigationComponent extends React.Component<Props> {
                 {this.renderSlash()}
                 { findMode ?
                     <React.Fragment>
-                        <LinkButton onClick={() => onSelectRelationshipType(selectedRelationshipType)}>{relationshipTypeName}</LinkButton>
+                        <LinkButton 
+                            onClick={() => onSelectRelationshipType(selectedRelationshipType)}
+                        >
+                            {relationshipTypeName}
+                        </LinkButton>
                         {this.renderForFindMode(findMode)}
                     </React.Fragment> :
                     relationshipTypeName

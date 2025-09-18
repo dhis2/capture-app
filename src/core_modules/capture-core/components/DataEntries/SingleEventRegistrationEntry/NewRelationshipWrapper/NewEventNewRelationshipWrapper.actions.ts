@@ -13,7 +13,11 @@ export const batchActionTypes = {
 export const newEventCancelNewRelationship = (dataEntryId: string) =>
     actionCreator(actionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP)({ dataEntryId });
 
-export const addNewEventRelationship = (relationshipType: { id: string; name: string }, entity: Record<string, unknown>, entityType: string) =>
+export const addNewEventRelationship = (
+    relationshipType: { id: string; name: string }, 
+    entity: Record<string, unknown>, 
+    entityType: string
+) =>
     actionCreator(actionTypes.ADD_NEW_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType });
 
 export const recentlyAddedRelationship = (relationshipId: string) =>

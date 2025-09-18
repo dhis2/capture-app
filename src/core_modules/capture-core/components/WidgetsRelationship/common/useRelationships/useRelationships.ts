@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { determineLinkedEntity } from 'capture-core/components/WidgetsRelationship/common/RelationshipsWidget/useGroupedLinkedEntities';
+import { determineLinkedEntity } from 
+    'capture-core/components/WidgetsRelationship/common/RelationshipsWidget/useGroupedLinkedEntities';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import type { InputRelationshipData, RelationshipTypes } from '../Types';
 

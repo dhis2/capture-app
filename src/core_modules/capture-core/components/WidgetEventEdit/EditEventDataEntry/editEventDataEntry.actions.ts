@@ -87,8 +87,12 @@ export const startDeleteEventDataEntry = (serverData: any, eventId: string, para
     });
 
 
-export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: any) =>
-    actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
+export const startCreateNewAfterCompleting = ({ 
+    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages 
+}: any) =>
+    actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ 
+        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages 
+    });
 
 export const requestSaveAndCompleteEnrollment = ({
     itemId,

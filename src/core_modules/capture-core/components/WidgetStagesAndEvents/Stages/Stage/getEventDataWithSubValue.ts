@@ -3,7 +3,12 @@ import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
-const getFileResourceSubvalue = async (keys: any, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => {
+const getFileResourceSubvalue = async (
+    keys: any, 
+    querySingleResource: QuerySingleResource, 
+    eventId: string, 
+    absoluteApiPath: string
+) => {
     const promises = Object.keys(keys)
         .map(async (key) => {
             const value = keys[key];

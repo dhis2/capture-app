@@ -26,7 +26,8 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
         dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
 
     const handleResetProgramId = useCallback(
-        () => resetProgramIdAndEnrollmentContext('enrollment', { teiId, programId }), [resetProgramIdAndEnrollmentContext, teiId, programId],
+        () => resetProgramIdAndEnrollmentContext('enrollment', { teiId, programId }), 
+        [resetProgramIdAndEnrollmentContext, teiId, programId],
     );
     const handleResetEnrollmentId = useCallback(() => resetEnrollmentId('enrollment'), [resetEnrollmentId]);
     const handleResetTeiId = useCallback(() => resetTeiId('/'), [resetTeiId]);

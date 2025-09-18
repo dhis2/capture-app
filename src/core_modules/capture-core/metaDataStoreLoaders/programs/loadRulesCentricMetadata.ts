@@ -31,7 +31,8 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
         )).flat(1);
 
     /**
-     * Removes records (program rules, program rules variables, program indicators) from the cache that aren't available to the user anymore.
+     * Removes records (program rules, program rules variables, program indicators) from the cache that 
+     * aren't available to the user anymore.
      * A record could be unavailable because the access rights have changed or the record is deleted.
      */
     const removeUnavailableRecords = async (loadedIds, cachedIds, storeName) => {

@@ -85,7 +85,10 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
                 : cancelOpenNewEventInDataEntry();
         }));
 
-export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: EpicAction<SelectionsCompletenessPayload>, store: ReduxStore) =>
+export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
+    action$: EpicAction<SelectionsCompletenessPayload>, 
+    store: ReduxStore
+) =>
     action$.pipe(
         ofType(
             newPageActionTypes.CATEGORY_OPTION_SET,

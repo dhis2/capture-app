@@ -21,7 +21,10 @@ import {
 } from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
-const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' }];
+const baseKeys = [
+    { id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, 
+    { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' }
+];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
@@ -160,7 +163,10 @@ function getDataElement(stageDataElement: StageDataElementClient | undefined, ty
     return dataElement;
 }
 
-const formatRowForView = (row: Record<string, unknown>, dataElements: Array<StageDataElementClient>) => Object.keys(row).reduce((acc, id) => {
+const formatRowForView = (
+    row: Record<string, unknown>, 
+    dataElements: Array<StageDataElementClient>
+) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
     const stageDataElement = dataElements.find(el => el.id === id);
     const { type } = stageDataElement || {};

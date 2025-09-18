@@ -64,7 +64,10 @@ export const getTeiListData = async (
     const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiResponse);
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
     const clientTeis = convertToClientTeis(apiTrackedEntities, columnsMetaForDataFetchingArray, rawQueryArgs.programId);
-    const clientTeisWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
+    const clientTeisWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(
+        clientTeis, 
+        columnsMetaForDataFetchingArray
+    );
 
     return {
         recordContainers: clientTeisWithSubvalues,

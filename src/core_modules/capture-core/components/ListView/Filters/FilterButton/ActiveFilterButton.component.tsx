@@ -57,7 +57,9 @@ class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof 
         return `${cappedValue}...`;
     }
     static getViewValueForFilter(buttonText = ''): string {
-        const calculatedValue = buttonText.length > MAX_LENGTH_OF_VALUE ? ActiveFilterButtonPlain.getCappedValue(buttonText) : buttonText;
+        const calculatedValue = buttonText.length > MAX_LENGTH_OF_VALUE ? 
+            ActiveFilterButtonPlain.getCappedValue(buttonText) : 
+            buttonText;
         return `: ${calculatedValue}`;
     }
 

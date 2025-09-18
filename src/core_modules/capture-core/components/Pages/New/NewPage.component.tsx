@@ -117,7 +117,9 @@ const NewPagePlain = ({
                                 const missingCategories = missingCategoriesInProgramSelection.reduce(
                                     (acc, { name }, index) => {
                                     if ((index + 1 === missingCategoriesInProgramSelection.length)) {
-                                        return `${acc} ${name} ${missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'}`;
+                                        return `${acc} ${name} ${
+                                            missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'
+                                        }`;
                                     }
                                     return `${acc} ${name},`;
                                 }, '');

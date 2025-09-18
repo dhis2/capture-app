@@ -137,7 +137,9 @@ export const enrollmentIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) =>
-            showErrorViewOnEnrollmentPage({ error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }) })),
+            showErrorViewOnEnrollmentPage({ 
+                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }) 
+            })),
     );
 
 // Epics for teiId

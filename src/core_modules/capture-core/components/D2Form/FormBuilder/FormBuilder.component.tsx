@@ -81,7 +81,11 @@ type Props = {
         promiseForIsValidating: string
     ) => void;
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void;
-    onFieldsValidated?: ((fieldsUI: { [id: string]: FieldUI }, formBuilderId: string, uidsForIsValidating: Array<string>) => void) | null;
+    onFieldsValidated?: ((
+        fieldsUI: { [id: string]: FieldUI }, 
+        formBuilderId: string, 
+        uidsForIsValidating: Array<string>
+    ) => void) | null;
     querySingleResource: QuerySingleResource;
     validationAttempted?: boolean | null;
     validateIfNoUIData?: boolean | null;

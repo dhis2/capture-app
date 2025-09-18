@@ -70,7 +70,11 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         async (selectedTemplate: any, context: any, meta: any) => {
             const eventQueryCriteria = selectedTemplate?.nextCriteria || selectedTemplate?.criteria;
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
-            const clientConfig = await convertToClientConfig(eventQueryCriteria, meta?.columnsMetaForDataFetching, querySingleResource);
+            const clientConfig = await convertToClientConfig(
+                eventQueryCriteria, 
+                meta?.columnsMetaForDataFetching, 
+                querySingleResource
+            );
             const currentRequest = computeDownloadRequest({
                 clientConfig,
                 context: {

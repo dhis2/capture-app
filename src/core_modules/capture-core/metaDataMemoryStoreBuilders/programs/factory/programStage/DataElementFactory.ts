@@ -129,7 +129,10 @@ export class DataElementFactory {
         cachedDataElementDefinition?: CachedDataElement,
     ): Promise<DataElement | null> {
         const cachedDataElement = cachedDataElementDefinition ||
-            await getUserMetadataStorageController().get(USER_METADATA_STORES.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
+            await getUserMetadataStorageController().get(
+                USER_METADATA_STORES.DATA_ELEMENTS, 
+                cachedProgramStageDataElement.dataElementId
+            );
 
         if (!cachedDataElement) {
             log.error(

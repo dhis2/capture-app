@@ -41,7 +41,10 @@ export const ScopeSelector = ({
     orgUnitTooltip,
 }: OwnProps) => {
     const dispatch = useDispatch();
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({ name: undefined, id: selectedOrgUnitId });
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({ 
+        name: undefined, 
+        id: selectedOrgUnitId 
+    });
     const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 
     useEffect(() => {

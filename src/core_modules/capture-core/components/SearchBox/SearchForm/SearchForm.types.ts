@@ -30,7 +30,11 @@ export type PropsFromRedux = {
 
 export type DispatchersFromRedux = {
     searchViaUniqueIdOnScopeProgram: ({ programId, formId }: { programId: string; formId: string }) => void;
-    searchViaUniqueIdOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }: { trackedEntityTypeId: string; formId: string }) => void;
+    searchViaUniqueIdOnScopeTrackedEntityType: ({ 
+        trackedEntityTypeId, formId 
+    }: { 
+        trackedEntityTypeId: string; formId: string 
+    }) => void;
     searchViaAttributesOnScopeProgram: ({ 
         programId, formId, resultsPageSize 
     }: { 
@@ -44,7 +48,11 @@ export type DispatchersFromRedux = {
     saveCurrentFormData: ({ 
         searchScopeType, searchScopeId, formId, formsValues, searchGroupsForSelectedScope 
     }: { 
-        searchScopeType: string; searchScopeId: string; formId: string; formsValues: FormsValues; searchGroupsForSelectedScope: SearchGroups 
+        searchScopeType: string; 
+        searchScopeId: string; 
+        formId: string; 
+        formsValues: FormsValues; 
+        searchGroupsForSelectedScope: SearchGroups 
     }) => void;
     removeFormDataFromReduxStore: () => void;
     addFormIdToReduxStore: (formId: string, keptFallbackSearchFormValues: FormsValues) => void;

@@ -7,7 +7,9 @@ import { ListViewBuilder } from '../ListViewBuilder';
 import { areFiltersEqual } from '../utils';
 import type { Props } from './listViewUpdater.types';
 
-const ListViewBuilderWithLoadingIndicator = withLoadingIndicator(() => ({ margin: 10, height: 60 }))(ListViewBuilder) as ComponentType<any>;
+const ListViewBuilderWithLoadingIndicator = withLoadingIndicator(() => ({ margin: 10, height: 60 }))(
+    ListViewBuilder
+) as ComponentType<any>;
 
 
 const useUpdateListMemoize = (value) => {

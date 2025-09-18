@@ -533,7 +533,8 @@ describe('Event rules engine', () => {
         {
             id: 'L8bP6GifQXL',
             condition:
-                "!d2:hasValue( #{INFECTION_SOURCE} )  || #{INFECTION_SOURCE} == 'IMPORTED_CASE'  || #{INFECTION_SOURCE} == 'EXPOSURE_UNKNOWN'",
+                "!d2:hasValue( #{INFECTION_SOURCE} )  || #{INFECTION_SOURCE} == 'IMPORTED_CASE'  || " +
+                "#{INFECTION_SOURCE} == 'EXPOSURE_UNKNOWN'",
             description: 'Hide Case Type for Imported Cases',
             displayName: 'Hide Case Type',
             programId: 'PNClHaZARtz',
