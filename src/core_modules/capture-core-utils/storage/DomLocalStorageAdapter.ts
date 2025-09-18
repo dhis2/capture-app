@@ -89,8 +89,10 @@ export class DomLocalStorageAdapter {
     }
 
     /*
-        onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from Local Storage
-        onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in Local Storage
+        onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. 
+        The "get" property can be used to retrieve something from Local Storage
+        onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. 
+        The "set" property can be used to set something in Local Storage
     */
     open(onBeforeUpgrade?: any, onAfterUpgrade?: any) {
         this.indexer = this.objectStoreNames
