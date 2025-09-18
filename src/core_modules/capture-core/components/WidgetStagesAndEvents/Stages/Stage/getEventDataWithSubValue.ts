@@ -7,7 +7,7 @@ const getFileResourceSubvalue = async (
     keys: any,
     querySingleResource: QuerySingleResource,
     eventId: string,
-    absoluteApiPath: string
+    absoluteApiPath: string,
 ) => {
     const promises = Object.keys(keys)
         .map(async (key) => {

@@ -138,7 +138,7 @@ export const enrollmentIdErrorEpic = (action$: any) =>
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) =>
             showErrorViewOnEnrollmentPage({
-                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId })
+                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }),
             })),
     );
 
@@ -194,7 +194,7 @@ export const fetchTeiErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI_ERROR),
         map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({
-            error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId })
+            error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }),
         })),
     );
 
@@ -224,7 +224,7 @@ export const programIdErrorEpic = (action$: any) =>
         ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
         map(({ payload: { programId } }) =>
             showErrorViewOnEnrollmentPage({
-                error: i18n.t('Program with id "{{programId}}" does not exist', { programId })
+                error: i18n.t('Program with id "{{programId}}" does not exist', { programId }),
             })),
     );
 
@@ -280,7 +280,7 @@ export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleRes
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();
                                 navigate(`/enrollment?${buildUrlQueryString({
                                     ...restOfQueries,
-                                    orgUnitId: programOwner.orgUnit
+                                    orgUnitId: programOwner.orgUnit,
                                 })}`);
                             }
                             return EMPTY;

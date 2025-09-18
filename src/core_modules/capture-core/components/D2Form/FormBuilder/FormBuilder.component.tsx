@@ -360,7 +360,7 @@ export class FormBuilder extends React.Component<Props> {
     async commitFieldUpdate(
         { fieldId, validators, onIsEqual }: FieldCommitConfig,
         value: any,
-        options?: FieldCommitOptionsExtended | null
+        options?: FieldCommitOptionsExtended | null,
     ) {
         const {
             onUpdateFieldUIOnly,

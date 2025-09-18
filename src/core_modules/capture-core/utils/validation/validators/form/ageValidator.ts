@@ -24,7 +24,7 @@ function isValidNumberPart(value: string | null | undefined) {
 function validateNumbers(
     years: string | null | undefined,
     months: string | null | undefined,
-    days: string | null | undefined
+    days: string | null | undefined,
 ) {
     const errorResult: any[] = [];
 
@@ -49,7 +49,7 @@ function validateNumbers(
 
 function validateDate(
     date: string | null | undefined,
-    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined,
 ) {
     const { valid } = isValidDate(date, internalComponentError);
     return valid ?
@@ -64,7 +64,7 @@ function isAllEmpty(value: AgeValues) {
 
 export function isValidAge(
     value: any,
-    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined,
 ) {
     if (isAllEmpty(value)) {
         return false;

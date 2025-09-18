@@ -149,7 +149,7 @@ const buildReportDateSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) => 
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(

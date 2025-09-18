@@ -42,7 +42,7 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props): Retur
             promises.push(containsKeyInStorageAsync(
                 USER_METADATA_STORES.PROGRAMS,
                 programId,
-                { id: programId, type: IdTypes.PROGRAM_ID, convert: (value: any) => value }
+                { id: programId, type: IdTypes.PROGRAM_ID, convert: (value: any) => value },
             ));
         }
 
@@ -50,7 +50,7 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props): Retur
             promises.push(getCachedSingleResourceFromKeyAsync(
                 USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM,
                 programId,
-                { id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: (value: any) => !!value?.organisationUnits[orgUnitId] }
+                { id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: (value: any) => !!value?.organisationUnits[orgUnitId] },
             ));
         }
 

@@ -72,7 +72,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
     static isFilterValid(
         minValue: string | null | undefined,
         maxValue: string | null | undefined,
-        type: typeof dataElementTypes[keyof typeof dataElementTypes]
+        type: typeof dataElementTypes[keyof typeof dataElementTypes],
     ) {
         if (!NumericFilterPlain.validateField(minValue, type).isValid ||
             !NumericFilterPlain.validateField(maxValue, type).isValid) {

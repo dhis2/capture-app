@@ -95,7 +95,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 return stream$.pipe(
                     map(({
                         trackedEntityInstanceContainers: searchResults,
-                        pagingData
+                        pagingData,
                     }: {
                         trackedEntityInstanceContainers: any,
                         pagingData: any

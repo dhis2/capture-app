@@ -31,7 +31,7 @@ export const paramsSelector = createSelector(
         trackedEntityTypeId?: string,
         orgUnitId?: string,
         eventId?: string,
-        viewEventId?: string
+        viewEventId?: string,
     ) => ({
         programId,
         trackedEntityTypeId,

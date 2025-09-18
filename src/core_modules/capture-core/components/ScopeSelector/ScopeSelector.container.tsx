@@ -11,7 +11,7 @@ const deriveReadiness = (
     selectedOrgUnitId?: string | null,
     selectedOrgUnitName?: string,
     displayName?: string,
-    ouNameError?: any
+    ouNameError?: any,
 ) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
@@ -43,7 +43,7 @@ export const ScopeSelector = ({
     const dispatch = useDispatch();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({
         name: undefined,
-        id: selectedOrgUnitId
+        id: selectedOrgUnitId,
     });
     const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 

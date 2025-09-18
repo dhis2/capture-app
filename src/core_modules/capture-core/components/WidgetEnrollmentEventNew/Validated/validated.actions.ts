@@ -87,7 +87,7 @@ export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessAct
     });
 
 export const startCreateNewAfterCompleting = ({
-    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages
+    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
 }: {
     enrollmentId: string;
     isCreateNew?: boolean;
@@ -97,7 +97,7 @@ export const startCreateNewAfterCompleting = ({
     availableProgramStages: any;
 }) =>
     actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({
-        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages
+        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
     });
 
 export const cleanUpEventSaveInProgress = () =>

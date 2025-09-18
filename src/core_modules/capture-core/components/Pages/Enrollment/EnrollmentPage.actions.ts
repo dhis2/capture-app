@@ -63,7 +63,7 @@ export const fetchEnrollmentId = (enrollmentId: string) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID)({ enrollmentId });
 
 export const verifyEnrollmentIdSuccess = (
-    { enrollmentId, trackedEntity, program }: { enrollmentId: string; trackedEntity: string; program: string }
+    { enrollmentId, trackedEntity, program }: { enrollmentId: string; trackedEntity: string; program: string },
 ) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_ENROLLMENT_ID_SUCCESS)({
         enrollmentId,
@@ -88,12 +88,12 @@ export const fetchTei = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);
 
 export const verifyFetchTeiSuccess = (
-    payload: IdSuite & { teiDisplayName: string; tetId: string; programOwners: Array<{ orgUnit: string; program: string }> }
+    payload: IdSuite & { teiDisplayName: string; tetId: string; programOwners: Array<{ orgUnit: string; program: string }> },
 ) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS)(payload);
 
 export const fetchTeiSuccess = (
-    payload: IdSuite & { teiDisplayName: string; tetId: string; programOwners: Array<{ orgUnit: string; program: string }> }
+    payload: IdSuite & { teiDisplayName: string; tetId: string; programOwners: Array<{ orgUnit: string; program: string }> },
 ) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI_SUCCESS)(payload);
 

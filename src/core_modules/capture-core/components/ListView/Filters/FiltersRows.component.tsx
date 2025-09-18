@@ -10,7 +10,7 @@ import type {
     UpdateFilter,
     ClearFilter,
     RemoveFilter,
-    StickyFilters
+    StickyFilters,
 } from '../types';
 
 const getStyles: Readonly<any> = {

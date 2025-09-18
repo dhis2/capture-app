@@ -136,7 +136,7 @@ const searchTei = ({
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
     return from(getTrackedEntityInstances(
-        queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId
+        queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId,
     )).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }: any) => {
             if (searchGroup.unique && trackedEntityInstanceContainers.length === 0 && queryArgs.program) {
@@ -262,7 +262,7 @@ export const teiNewSearchEpic = (action$: any, store: any) =>
 
             const searchGroups = getSearchGroups(
                 currentTeiSearch.selectedTrackedEntityTypeId,
-                currentTeiSearch.selectedProgramId
+                currentTeiSearch.selectedProgramId,
             );
 
             const addFormDataActions = searchGroups ? searchGroups.map((sg: any, i: number) => {

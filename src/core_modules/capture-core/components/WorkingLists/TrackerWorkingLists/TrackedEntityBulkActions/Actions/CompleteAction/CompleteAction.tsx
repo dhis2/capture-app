@@ -95,8 +95,10 @@ const CompleteActionPlain = ({
                 <div className={classes.container}>
                     <span>
                         {hasPartiallyUploadedEnrollments ?
-                            i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. ' +
-                                'Please see the details below.') :
+                            i18n.t(
+                                'Some enrollments were completed successfully, but there was an error while completing the rest. ' +
+                                    'Please see the details below.',
+                            ) :
                             i18n.t('There was an error while completing the enrollments. Please see the details below.')
                         }
                     </span>
@@ -140,7 +142,7 @@ const CompleteActionPlain = ({
                 <div className={classes.container}>
                     {i18n.t(
                         'There are currently no active enrollments in the selection. ' +
-                        'All enrollments are already completed or cancelled.'
+                        'All enrollments are already completed or cancelled.',
                     )}
                 </div>
             );

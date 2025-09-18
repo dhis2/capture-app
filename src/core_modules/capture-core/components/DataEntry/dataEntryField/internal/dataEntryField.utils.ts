@@ -12,7 +12,7 @@ export type ValidatorContainer = {
 export function getValidationError(
     value: any,
     validatorContainers?: Array<ValidatorContainer>,
-    internalComponentError?: {error?: string, errorCode?: string}
+    internalComponentError?: {error?: string, errorCode?: string},
 ) {
     if (!validatorContainers) {
         return null;

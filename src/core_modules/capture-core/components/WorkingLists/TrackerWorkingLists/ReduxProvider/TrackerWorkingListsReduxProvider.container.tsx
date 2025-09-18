@@ -52,7 +52,7 @@ export const TrackerWorkingListsReduxProvider = ({
             programId,
             storeId,
             workingListsType: TRACKER_WORKING_LISTS_TYPE,
-            selectedTemplateId
+            selectedTemplateId,
         }));
     }, [dispatch, programId, storeId, selectedTemplateId]);
 

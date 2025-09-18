@@ -73,7 +73,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
             const clientConfig = await convertToClientConfig(
                 eventQueryCriteria,
                 meta?.columnsMetaForDataFetching,
-                querySingleResource
+                querySingleResource,
             );
             const currentRequest = computeDownloadRequest({
                 clientConfig,

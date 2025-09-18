@@ -30,7 +30,7 @@ export const EventWorkingListsTemplateSetup = ({
             filters,
             columns: new Map(columns.map(c => [c.id, c])),
             sortById,
-            sortByDirection
+            sortByDirection,
         });
         onUpdateTemplate(template, eventQueryCriteria, {
             filters,
@@ -49,7 +49,7 @@ export const EventWorkingListsTemplateSetup = ({
             filters,
             columns: new Map(columns.map(c => [c.id, c])),
             sortById,
-            sortByDirection
+            sortByDirection,
         });
         onAddTemplate(name, eventQueryCriteria, {
             filters,

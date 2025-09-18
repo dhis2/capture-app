@@ -28,7 +28,7 @@ export const updateTrackerWorkingListsRecords = ({
     const filters = buildFilterQueryArgs(filterSource, {
         columns: columnsMetaForDataFetching,
         filtersOnly: filtersOnlyMetaForDataFetching,
-        storeId
+        storeId,
     });
     const rawQueryArgs
     = { programId, orgUnitId, pageSize, page, filters, sortById, sortByDirection };

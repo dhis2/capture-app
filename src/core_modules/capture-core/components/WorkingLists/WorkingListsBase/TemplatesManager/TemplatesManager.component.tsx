@@ -15,7 +15,7 @@ const TemplatesManagerPlain = (props: Props) => {
         onSelectTemplate,
     } = useContext(ManagerContext) || {
         currentTemplate: undefined,
-        onSelectTemplate: undefined
+        onSelectTemplate: undefined,
     };
 
     if (!templates || !currentTemplate) {

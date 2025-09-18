@@ -14,10 +14,10 @@ const TeiSearchOrgUnitField = withFocusSaver()(
     withCalculateMessages()(
         withDefaultFieldContainer()(
             withLabel()(
-                withDisplayMessages()(SingleOrgUnitSelectField)
-            )
-        )
-    )
+                withDisplayMessages()(SingleOrgUnitSelectField),
+            ),
+        ),
+    ),
 );
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
 

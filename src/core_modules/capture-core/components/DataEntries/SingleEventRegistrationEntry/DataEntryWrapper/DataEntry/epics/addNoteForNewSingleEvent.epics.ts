@@ -20,7 +20,7 @@ type AddNotePayload = {
 export const addNoteForNewSingleEventEpic = (
     action$: EpicAction<AddNotePayload>,
     store: ReduxStore,
-    { querySingleResource, fromClientDate }: ApiUtils
+    { querySingleResource, fromClientDate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),

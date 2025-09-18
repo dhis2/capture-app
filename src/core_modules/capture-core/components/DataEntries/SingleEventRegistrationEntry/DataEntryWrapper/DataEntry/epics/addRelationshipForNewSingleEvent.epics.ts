@@ -118,7 +118,7 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
     if (relationship) {
         const teiPayload = { trackedEntities: [{ ...relationship.to.data }] };
         return startSaveTeiForNewEventRelationship(
-            teiPayload, selections, triggerAction, relationshipData, relationship.clientId
+            teiPayload, selections, triggerAction, relationshipData, relationship.clientId,
         );
     }
 
@@ -131,7 +131,7 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
 
 
 export const saveNewEventRelationshipsIfExistsEpic = (
-    action$: EpicAction<SaveRelationshipsPayload, SaveRelationshipsMeta>
+    action$: EpicAction<SaveRelationshipsPayload, SaveRelationshipsMeta>,
 ) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),

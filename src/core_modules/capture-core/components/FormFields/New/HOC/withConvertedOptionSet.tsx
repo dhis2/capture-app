@@ -25,7 +25,7 @@ export const withConvertedOptionSet = () =>
                 const optionSet = this.props.optionSet;
                 if (!optionSet.dataElement) {
                     log.error(errorCreator(OptionSetConverter.errorMessages.DATAELEMENT_MISSING)(
-                        { OptionSetConverter: this }
+                        { OptionSetConverter: this },
                     ));
                     return null;
                 }

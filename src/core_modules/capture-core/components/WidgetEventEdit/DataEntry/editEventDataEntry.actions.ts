@@ -29,7 +29,7 @@ import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../helpers';
 import type {
     EnrollmentData,
-    AttributeValue
+    AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
@@ -142,7 +142,7 @@ export const openEventForEditInDataEntry = ({
             type: 'TEXT',
             validatorContainers: getCategoryOptionsValidatorContainers(
                 { categories: programCategory.categories },
-                category.id
+                category.id,
             ),
         })));
     }

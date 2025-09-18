@@ -173,7 +173,7 @@ class RelationshipsPlain extends React.Component<Props> {
 
     render() {
         const {
-            classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton
+            classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton,
         } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (

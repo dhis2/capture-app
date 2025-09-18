@@ -74,7 +74,7 @@ class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props &
                         {
                             trackedEntityTypeName: trackedEntityTypeNameLC,
                             attributeName: attributeNameLC,
-                            interpolation: { escapeValue: false }
+                            interpolation: { escapeValue: false },
                         },
                     )}
                 </div>

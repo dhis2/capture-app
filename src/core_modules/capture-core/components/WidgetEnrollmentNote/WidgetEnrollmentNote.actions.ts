@@ -22,7 +22,7 @@ export const startAddNoteForEnrollment = (
     enrollmentUid: string,
     serverData: Record<string, unknown>,
     selections: Record<string, unknown>,
-    context: Record<string, unknown>
+    context: Record<string, unknown>,
 ) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_ENROLLMENT)({ selections, context }, {
         offline: {

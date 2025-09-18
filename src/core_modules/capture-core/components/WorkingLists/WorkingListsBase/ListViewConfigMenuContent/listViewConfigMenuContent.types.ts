@@ -3,7 +3,7 @@ import type {
     AddTemplate,
     UpdateTemplate,
     DeleteTemplate,
-    SetTemplateSharingSettings
+    SetTemplateSharingSettings,
 } from '../workingListsBase.types';
 import type { CustomMenuContents } from '../../../ListView';
 import type { ListViewConfigOutputProps } from '../ListViewConfig';

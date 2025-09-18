@@ -47,22 +47,22 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
 
     const programStages = useMemo(() => !programLoading &&
         program?.programStages?.reduce((accStage: any, currentStage: any) => {
-        accStage.push({
-            id: currentStage.id,
-            dataAccess: currentStage.access.data,
-            eventCount: (enrollment?.events
-                ?.filter((event: any) => event.programStage === currentStage.id)
-                ?.length
-            ),
-            displayName: currentStage.displayName,
-            style: currentStage.style,
-            repeatable: currentStage.repeatable,
-            hiddenProgramStage: ruleEffects?.find(
-                (ruleEffect: any) => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
-            ),
-        });
-        return accStage;
-    }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
+            accStage.push({
+                id: currentStage.id,
+                dataAccess: currentStage.access.data,
+                eventCount: (enrollment?.events
+                    ?.filter((event: any) => event.programStage === currentStage.id)
+                    ?.length
+                ),
+                displayName: currentStage.displayName,
+                style: currentStage.style,
+                repeatable: currentStage.repeatable,
+                hiddenProgramStage: ruleEffects?.find(
+                    (ruleEffect: any) => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
+                ),
+            });
+            return accStage;
+        }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
 
     const onSelectProgramStage = useCallback((newStageId: string) =>
         navigate(`enrollmentEventNew?${buildUrlQueryString({

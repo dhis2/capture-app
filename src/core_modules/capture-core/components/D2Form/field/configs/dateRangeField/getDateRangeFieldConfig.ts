@@ -10,7 +10,7 @@ const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHoriz
 export const getDateRangeFieldConfig = (
     metaData: MetaDataElement,
     options: any,
-    querySingleResource: QuerySingleResource
+    querySingleResource: QuerySingleResource,
 ) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,

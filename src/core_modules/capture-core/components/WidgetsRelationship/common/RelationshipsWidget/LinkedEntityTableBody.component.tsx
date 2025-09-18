@@ -52,7 +52,7 @@ const LinkedEntityTableBodyPlain = ({
                                         <Tooltip
                                             key={`${entityId}-${id}`}
                                             content={i18n.t(
-                                                'To open this relationship, please wait until saving is complete'
+                                                'To open this relationship, please wait until saving is complete',
                                             )}
                                             closeDelay={50}
                                         >

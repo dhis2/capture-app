@@ -98,5 +98,5 @@ const OrgUnitTreePlain = (props: Props) => {
 };
 
 export const OrgUnitTree = withStyles(getStyles)(
-    withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain)
+    withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain),
 );

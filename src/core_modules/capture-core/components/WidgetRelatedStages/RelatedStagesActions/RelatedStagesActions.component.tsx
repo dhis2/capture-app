@@ -175,7 +175,7 @@ const LinkExistingResponse = ({
 };
 
 const LinkButton = withStyles(styles)(({
-    onLink, label, dataTest, isLinking, classes
+    onLink, label, dataTest, isLinking, classes,
 }: LinkButtonProps & WithStyles<typeof styles>) => {
     if (!onLink) {
         return null;

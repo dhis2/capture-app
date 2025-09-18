@@ -7,7 +7,7 @@ export const getTextFieldConfigForCustomForm = (
     metaData: MetaDataElement,
     options: any,
     querySingleResource: QuerySingleResource,
-    extraProps?: any | null
+    extraProps?: any | null,
 ) => {
     const props = createProps({
         multiLine: extraProps && extraProps.multiLine,

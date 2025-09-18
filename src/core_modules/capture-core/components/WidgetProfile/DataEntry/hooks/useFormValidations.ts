@@ -37,7 +37,7 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
 
     const fieldsValidated = useMemo(
         () => Object.values(formsSectionsFieldsUI).every(({ valid }: any) => valid === true),
-        [formsSectionsFieldsUI]
+        [formsSectionsFieldsUI],
     );
     const rulesValidated = useMemo(
         () =>
@@ -52,7 +52,7 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
         [{ id: uuid(), message: i18n.t('Fix errors in the form to continue.') }] : [];
     errorsMessages = [
         ...errorsMessages,
-        ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error')
+        ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error'),
     ];
     const warningsMessages = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, saveAttempted, 'warning');
 

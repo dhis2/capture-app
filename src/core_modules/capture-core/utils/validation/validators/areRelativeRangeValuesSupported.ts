@@ -1,6 +1,6 @@
 export const areRelativeRangeValuesSupported = (
     startBuffer: number | null | undefined,
-    endBuffer: number | null | undefined
+    endBuffer: number | null | undefined,
 ) =>
     startBuffer !== undefined &&
     startBuffer !== null &&

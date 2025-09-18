@@ -19,7 +19,7 @@ const converterByType = {
 
 export const getOptionSetFilter = (
     filter: ApiDataFilterOptionSet,
-    type: keyof typeof dataElementTypes
+    type: keyof typeof dataElementTypes,
 ): OptionSetFilterData => ({
     usingOptionSet: true,
     values: filter.in

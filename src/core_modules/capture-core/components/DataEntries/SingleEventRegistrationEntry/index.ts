@@ -12,7 +12,7 @@ export {
 // epics
 export {
     cancelNewEventEpic,
-    cancelNewEventLocationChangeEpic
+    cancelNewEventLocationChangeEpic,
 } from './DataEntryWrapper/DataEntry/epics/cancelNewSingleEvent.epics';
 export {
     resetDataEntryForNewEventEpic,

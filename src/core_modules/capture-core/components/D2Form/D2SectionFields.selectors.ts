@@ -84,7 +84,7 @@ const createMessagesDeepEqualSelector = createSelectorCreator(
                 messageStateKeys.ERROR,
                 messageStateKeys.WARNING,
                 messageStateKeys.ERROR_ON_COMPLETE,
-                messageStateKeys.WARNING_ON_COMPLETE
+                messageStateKeys.WARNING_ON_COMPLETE,
             ].every(messageKey => currentMessagesForId[messageKey] === prevMessagesForId[messageKey]);
         }),
 );

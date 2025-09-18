@@ -7,7 +7,7 @@ import type {
     UpdateFilter,
     ClearFilter,
     RemoveFilter,
-    StickyFilters
+    StickyFilters,
 } from '../types';
 
 type Props = {

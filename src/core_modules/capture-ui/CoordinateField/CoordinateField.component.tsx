@@ -127,7 +127,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         const {
             mapIconContainer: mapIconContainerCustomClass,
             mapIcon: mapIconCustomClass,
-            mapIconContainerDisabled: mapIconContainerDisabledCustomClass
+            mapIconContainerDisabled: mapIconContainerDisabledCustomClass,
         } = classes || {};
         const mapIconContainerClass = classNames(
             { [defaultClasses.mapIconContainer]: shrinkDisabled },

@@ -7,7 +7,7 @@ import { resetLocationChange } from '../ScopeSelector/QuickSelector/actions/Quic
 export const setTrackedEntityTypeIdOnUrlEpic = (
     action$: any,
     store: any,
-    { navigate }: { navigate: (url: string) => void }
+    { navigate }: { navigate: (url: string) => void },
 ) =>
     action$.pipe(
         ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),

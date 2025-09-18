@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-18T10:30:17.597Z\n"
-"PO-Revision-Date: 2025-09-18T10:30:17.597Z\n"
+"POT-Creation-Date: 2025-09-18T11:24:50.800Z\n"
+"PO-Revision-Date: 2025-09-18T11:24:50.800Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1088,13 +1088,6 @@ msgstr ""
 msgid "Check for enrollments"
 msgstr "Check for enrollments"
 
-msgid ""
-"You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
-msgstr ""
-"You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
-
 msgid "Unsaved changes"
 msgstr "Unsaved changes"
 
@@ -1509,13 +1502,6 @@ msgstr "Yes, unlink and delete linked event"
 
 msgid "Unlink event"
 msgstr "Unlink event"
-
-msgid ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
-msgstr ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
 
 msgid "Yes, unlink event"
 msgstr "Yes, unlink event"

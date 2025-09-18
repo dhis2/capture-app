@@ -7,7 +7,7 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 export const getPolygonFieldConfigForCustomForm = (
     metaData: MetaDataElement,
     options: any,
-    querySingleResource: QuerySingleResource
+    querySingleResource: QuerySingleResource,
 ) => {
     const props = createProps({
         orientation: orientations.HORIZONTAL,

@@ -23,7 +23,7 @@ const useRegistrationOptions = (): RegistrationOptions => {
                 trackedEntityTypeId,
                 trackedEntityTypeName,
                 trackedEntityTypeTeiRegistration,
-                programs
+                programs,
             }: any) => ({
                 ...acc,
                 [trackedEntityTypeId]: {

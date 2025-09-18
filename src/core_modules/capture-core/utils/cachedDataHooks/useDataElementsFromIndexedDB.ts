@@ -6,7 +6,7 @@ import type { CachedDataElement } from '../../storageControllers/';
 export const useDataElementsFromIndexedDB = (
     queryKey: Array<string | number>,
     dataElementIds: Set<string> | null | undefined,
-    queryOptions?: UseQueryOptions<any>
+    queryOptions?: UseQueryOptions<any>,
 ): {
     dataElements: Array<CachedDataElement> | null | undefined,
     isLoading: boolean,

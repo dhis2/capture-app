@@ -134,7 +134,7 @@ const useCallbackMainPage = ({
             orgUnitId,
             selectedTemplateId: id,
             showAllAccessible,
-            navigate
+            navigate,
         }),
         [navigate, orgUnitId, programId, showAllAccessible],
     );

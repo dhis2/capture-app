@@ -36,7 +36,7 @@ const cancelActionFilter = (action: any, searchId: string) => {
 export const teiSearchFilterOrgUnitsEpic = (
     action$: any,
     store: any,
-    { querySingleResource }: { querySingleResource: any }
+    { querySingleResource }: { querySingleResource: any },
 ) =>
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),

@@ -24,7 +24,7 @@ const isPluginElement = (attribute: ProgramTrackedEntityAttribute | PluginElemen
     (attribute as PluginElement).type === FormFieldTypes.PLUGIN;
 
 const isProgramTrackedEntityAttribute = (
-    attribute: ProgramTrackedEntityAttribute | PluginElement
+    attribute: ProgramTrackedEntityAttribute | PluginElement,
 ): attribute is ProgramTrackedEntityAttribute =>
     !isPluginElement(attribute);
 
@@ -281,7 +281,7 @@ export const buildFormFoundation = async (
                         log.warn(
                             errorCreator(
                                 'Could not find metadata for section. This could indicate that your form ' +
-                                'configuration may be out of sync with your metadata.'
+                                'configuration may be out of sync with your metadata.',
                             )(
                                 { sectionId: formConfigSection.id },
                             ),
@@ -308,7 +308,7 @@ export const buildFormFoundation = async (
 
                     section = await buildSection({
                         programTrackedEntityAttributes: builtProgramSection.map(
-                            (id: string) => trackedEntityAttributeDictionary[id]
+                            (id: string) => trackedEntityAttributeDictionary[id],
                         ),
                         trackedEntityAttributes,
                         optionSets,
@@ -345,7 +345,7 @@ export const build = async (
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
     const formFoundation = (await buildFormFoundation(
-        program, querySingleResource, minorServerVersion, dataEntryFormConfig
+        program, querySingleResource, minorServerVersion, dataEntryFormConfig,
     )) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

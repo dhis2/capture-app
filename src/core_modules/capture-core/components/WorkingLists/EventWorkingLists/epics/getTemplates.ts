@@ -5,7 +5,7 @@ import type { EventWorkingListsTemplates, MainViewConfig } from '../types';
 export const getTemplates = (
     programId: string,
     querySingleResource: QuerySingleResource,
-    mainViewConfig: MainViewConfig
+    mainViewConfig: MainViewConfig,
 ): Promise<{ templates: EventWorkingListsTemplates, defaultTemplateId: string}> =>
     getApiEventFilters(programId, querySingleResource).then((apiEventFilters) => {
         const defaultEventFilter = {

@@ -44,7 +44,7 @@ export const getOpenDataEntryActions =
         dataEntryId: string,
         itemId: string,
         programCategory?: ProgramCategory,
-        orgUnit?: Record<string, unknown>
+        orgUnit?: Record<string, unknown>,
     ) => {
         const defaultDataEntryValues = {
             orgUnit: orgUnit
@@ -57,7 +57,7 @@ export const getOpenDataEntryActions =
                 type: 'TEXT',
                 validatorContainers: getCategoryOptionsValidatorContainers(
                     { categories: programCategory.categories },
-                    category.id
+                    category.id,
                 ),
             })));
         }

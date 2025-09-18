@@ -14,7 +14,7 @@ type SubValueFunctionProps = {
 };
 
 const getFileResourceSubvalue = async ({
-    dataElement, querySingleResource, eventId, absoluteApiPath
+    dataElement, querySingleResource, eventId, absoluteApiPath,
 }: SubValueFunctionProps) => {
     const { value } = dataElement;
     if (!value) return null;

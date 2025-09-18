@@ -24,7 +24,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
                 {
                     occurredAt,
                     interpolation: { escapeValue: false },
-                }
+                },
             );
         },
         tooltipEnabled: (row) => {

@@ -98,7 +98,7 @@ const useNavigations = () => {
         navigate(`/new?${buildUrlQueryString({
             programId,
             orgUnitId,
-            trackedEntityTypeId: tetId
+            trackedEntityTypeId: tetId,
         })}`);
 
     return {
@@ -206,7 +206,7 @@ const MissingMessagePlain = ({
             <IncompleteSelectionsMessage>
                 {i18n.t(
                     'You do not have permissions to access to this program, registering unit or record, ' +
-                    'contact your administrator for more information.'
+                    'contact your administrator for more information.',
                 )}
             </IncompleteSelectionsMessage>
         }
@@ -239,7 +239,7 @@ const MissingMessagePlain = ({
                         'Choose another program that allows {{tetName}} enrollment. ',
                         {
                             teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
-                        }
+                        },
                     )}
                     <div>
                         <LinkButton

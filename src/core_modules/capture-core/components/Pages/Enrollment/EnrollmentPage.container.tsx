@@ -39,7 +39,7 @@ const useComponentLifecycle = () => {
     const {
         programHasEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
-        autoEnrollmentId
+        autoEnrollmentId,
     } = useEnrollmentInfo(enrollmentId, programId, teiId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;

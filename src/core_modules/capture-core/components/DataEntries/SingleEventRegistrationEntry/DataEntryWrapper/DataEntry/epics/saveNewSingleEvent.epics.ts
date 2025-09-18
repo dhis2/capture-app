@@ -40,7 +40,7 @@ export const saveNewEventEpic = (action$: EpicAction<SaveEventPayload>, store: R
 export const saveNewEventLocationChangeEpic = (
     action$: EpicAction<SaveEventPayload>,
     store: ReduxStore,
-    { navigate }: ApiUtils
+    { navigate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),

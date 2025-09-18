@@ -26,5 +26,5 @@ const AccessVerificationWithConnect = connect(makeMapStateToProps, mapDispatchTo
 
 export const AccessVerification: ComponentType<ContainerProps> = withBrowserBackWarning(
     defaultDialogProps,
-    inEffect
+    inEffect,
 )(AccessVerificationWithConnect);

@@ -45,5 +45,5 @@ export const D2SectionFields = connect(
     makeMapStateToProps,
     mapDispatchToProps,
     mergeProps,
-    { forwardRef: true }
+    { forwardRef: true },
 )(D2SectionFieldsComponent);

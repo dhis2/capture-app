@@ -164,7 +164,7 @@ export const rulesEffectsIndicatorsDesc = createReducerDescription({
         newState[action.payload.formId] = {
             displayTexts: displayTextEffects && displayTextEffects.indicators ?
                 displayTextEffects.indicators.map(e => e.displayText) : null,
-            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ? 
+            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ?
                 displayKeyValuePairEffects.indicators.map(e => e.displayKeyValuePair) : null,
         };
 
@@ -180,7 +180,7 @@ export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
         const errorEffects: { [id: string]: Array<GeneralErrorEffect> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
         const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } =
-            action.payload.rulesEffects && 
+            action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
 
         const generalErrors = errorEffects && errorEffects.general ?
@@ -205,7 +205,7 @@ export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
         const warningsEffects: { [id: string]: Array<GeneralWarningEffect> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
         const warningsEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } =
-            action.payload.rulesEffects && 
+            action.payload.rulesEffects &&
             action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
 
         const generalWarnings = warningsEffects && warningsEffects.general ?

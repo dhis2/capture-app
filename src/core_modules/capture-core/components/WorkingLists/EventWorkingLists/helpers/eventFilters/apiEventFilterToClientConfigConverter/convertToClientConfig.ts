@@ -203,7 +203,7 @@ const getMainDataFilters = async (
     if (status) {
         filters.push({
             ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type),
-            id: 'status'
+            id: 'status',
         });
     }
     if (occurredAt) {
@@ -242,7 +242,7 @@ export async function convertToClientConfig(
 
     const customColumnOrder = getCustomColumnsConfiguration(
         eventQueryCriteria && eventQueryCriteria.displayColumnOrder,
-        columnsMetaForDataFetching
+        columnsMetaForDataFetching,
     ) || undefined;
 
     return {

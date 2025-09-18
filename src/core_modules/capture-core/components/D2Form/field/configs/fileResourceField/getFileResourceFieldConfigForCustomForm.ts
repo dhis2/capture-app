@@ -8,7 +8,7 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 export const getFileResourceFieldConfigForCustomForm = (
     metaData: MetaDataElement,
     options: any,
-    querySingleResource: QuerySingleResource
+    querySingleResource: QuerySingleResource,
 ) => {
     const props = createProps({
         async: true,

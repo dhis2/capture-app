@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch: any) => ({
                 orgUnit,
                 stage,
                 formFoundation,
-                onGetValidationContext
+                onGetValidationContext,
             );
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 

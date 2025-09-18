@@ -42,32 +42,32 @@ const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: 
             const { attributes: programTrackedEntityAttributes } = program;
             const computedAttributes = await programTrackedEntityAttributes?.reduce(
                 async (promisedAcc: Promise<any[]>, programTrackedEntityAttribute) => {
-                const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
-                const foundAttribute = attributes?.find(item => item.attribute === id);
-                let value;
-                if (foundAttribute) {
-                    if (subValueGetterByElementType[type]) {
-                        value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
-                    } else {
-                        value = convertServerToClient(foundAttribute.value, type as any);
+                    const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
+                    const foundAttribute = attributes?.find(item => item.attribute === id);
+                    let value;
+                    if (foundAttribute) {
+                        if (subValueGetterByElementType[type]) {
+                            value = await subValueGetterByElementType[type](foundAttribute.value, querySingleResource);
+                        } else {
+                            value = convertServerToClient(foundAttribute.value, type as any);
+                        }
                     }
-                }
 
-                const acc = await promisedAcc;
-                return value
-                    ? [
-                        ...acc,
-                        {
-                            attribute: id,
-                            key: formName,
-                            optionSet,
-                            value,
-                            unique,
-                            valueType: type,
-                        },
-                    ]
-                    : acc;
-            }, Promise.resolve([]));
+                    const acc = await promisedAcc;
+                    return value
+                        ? [
+                            ...acc,
+                            {
+                                attribute: id,
+                                key: formName,
+                                optionSet,
+                                value,
+                                unique,
+                                valueType: type,
+                            },
+                        ]
+                        : acc;
+                }, Promise.resolve([]));
             setListAttributes(computedAttributes);
         } else {
             setListAttributes([]);
@@ -102,19 +102,19 @@ const buildFormValues = async ({
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }),
-        {}
+        {},
     );
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({
             ...acc,
-            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType)
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType),
         }),
         {},
     );
     const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});
     const searchFormValues = searchTerms?.reduce(
         (acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }),
-        {}
+        {},
     );
 
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
@@ -131,7 +131,7 @@ const buildFormValues = async ({
 };
 
 export const useFormValues = ({
-    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms
+    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms,
 }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();

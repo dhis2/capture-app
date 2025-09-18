@@ -27,7 +27,7 @@ const translatedTextWithStylesForProgram = (
     trackedEntityName: string,
     programName: string,
     orgUnitName: string,
-    teiId?: string
+    teiId?: string,
 ) => (
     teiId ? <span>
         {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
@@ -123,7 +123,7 @@ const EnrollmentRegistrationEntryPlain =
                               trackedEntityName.toLowerCase(),
                               programName,
                               orgUnit.name,
-                              teiId
+                              teiId,
                           )}
                       </InfoIconText>
                   </>
@@ -145,7 +145,7 @@ export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
       withDuplicateCheckOnSave(),
       withSaveHandler({
           onGetFormFoundation: ({ enrollmentMetadata }: any) => enrollmentMetadata && enrollmentMetadata.enrollmentForm,
-          onIsCompleting: () => true
+          onIsCompleting: () => true,
       }),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain) as any;

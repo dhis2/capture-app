@@ -190,8 +190,9 @@ const NotesPlain = ({
                                         <span>
                                             <Tooltip content={convertClientToList(
                                                 moment(fromServerDate(n.storedAt).getClientZonedISOString()).toISOString(),
-                                                dataElementTypes.DATETIME
-                                            )}>
+                                                dataElementTypes.DATETIME,
+                                            )}
+                                            >
                                                 {moment(fromServerDate(n.storedAt)).fromNow()}
                                             </Tooltip>
                                         </span>

@@ -76,7 +76,7 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
 
     const getSubvalueKeysByType = (
         clientData: ClientData,
-        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>
+        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>,
     ): SubvalueKeysByType =>
         columnsWithSubvalues
             .map(({ id, type }) => {
@@ -125,7 +125,7 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
     const addSubvalues = (
         clientData: ClientData,
         subvaluesByType: SubvaluesByType,
-        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>
+        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>,
     ): ClientData =>
         columnsWithSubvalues
             .reduce((columns, { id: columnId, type: columnType }) => {

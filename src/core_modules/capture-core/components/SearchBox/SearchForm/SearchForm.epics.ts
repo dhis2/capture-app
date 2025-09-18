@@ -55,13 +55,13 @@ const searchViaUniqueIdStream = ({
     programTETId?: string;
 }) =>
     from(getTrackedEntityInstances(
-        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined
+        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined,
     )).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
                 return of(searchViaUniqueIdOnScopeTrackedEntityType({
-                    trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId
+                    trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId,
                 }));
             }
             if (searchResults.length > 0) {
@@ -122,7 +122,7 @@ const searchViaAttributesStream = ({
     programId?: string;
 }) =>
     from(getTrackedEntityInstances(
-        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined
+        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined,
     )).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {

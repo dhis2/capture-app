@@ -97,13 +97,13 @@ export const loadViewEventDataEntry =
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
             const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
             const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(
-                newUIDsSeparator ? ',' : ';'
+                newUIDsSeparator ? ',' : ';',
             );
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {
                 const categoryOptionsPromises = optionIds.map(async (optionId) => {
                     const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(
                         USER_METADATA_STORES.CATEGORY_OPTIONS,
-                        optionId
+                        optionId,
                     );
                     if (cachedCategoryOption.displayName === 'default') {
                         return null;

@@ -55,7 +55,7 @@ const Index = ({
 }: Props & WithStyles<typeof getStyles>) => {
     const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(
-        preselectedProgramId ? searchScopes.PROGRAM : null
+        preselectedProgramId ? searchScopes.PROGRAM : null,
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);

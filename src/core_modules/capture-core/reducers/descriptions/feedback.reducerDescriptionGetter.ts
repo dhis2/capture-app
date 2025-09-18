@@ -43,7 +43,7 @@ type ErrorFeedbackInput = {
 
 function addErrorFeedback(
     state: any,
-    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput
+    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput,
 ) {
     return [
         ...state,
@@ -57,7 +57,7 @@ function addErrorFeedback(
 }
 
 function getErrorFeedback(
-    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput
+    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput,
 ) {
     return {
         message,

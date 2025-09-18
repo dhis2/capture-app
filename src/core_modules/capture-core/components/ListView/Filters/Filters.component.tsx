@@ -14,7 +14,7 @@ import type {
     FilterOnly,
     UpdateFilter,
     ClearFilter,
-    RemoveFilter
+    RemoveFilter,
 } from '../types';
 
 const getStyles = (theme: any) => ({
@@ -273,7 +273,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
     } = props;
 
     const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(
-        props.visibleSelectorId ?? null
+        props.visibleSelectorId ?? null,
     );
     const defaultFiltersOnly = useMemo(() =>
         (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);

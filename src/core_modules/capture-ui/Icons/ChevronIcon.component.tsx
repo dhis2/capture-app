@@ -47,7 +47,7 @@ const styles: Readonly<any> = {
 };
 
 const ChevronIconPlain = ({
-    open, onOpen, onClose, dataTest, disabled, classes
+    open, onOpen, onClose, dataTest, disabled, classes,
 }: ChevronIconProps & WithStyles<typeof styles>) => {
     const [postEffectOpen, setPostEffectOpen] = useState<boolean>(open);
     const [animationsReady, setAnimationsReady] = useState<boolean>(false);

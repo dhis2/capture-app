@@ -51,7 +51,7 @@ const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: { id: strin
 const deriveTeiName = (
     tetAttributes: TetAttribute[] | { id: string }[],
     updatedAttributes: TeiAttribute[],
-    fallbackName?: string
+    fallbackName?: string,
 ) => {
     if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
 

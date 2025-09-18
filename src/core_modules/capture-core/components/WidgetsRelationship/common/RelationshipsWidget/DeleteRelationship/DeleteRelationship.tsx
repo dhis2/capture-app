@@ -25,7 +25,7 @@ const styles: Readonly<any> = {
 export const DeleteRelationshipPlain = ({
     handleDeleteRelationship,
     disabled,
-    classes
+    classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     return (
@@ -52,7 +52,7 @@ export const DeleteRelationshipPlain = ({
                     <ModalContent>
                         {i18n.t(
                             'Deleting the relationship is permanent and cannot be undone. ' +
-                            'Are you sure you want to delete this relationship?'
+                            'Are you sure you want to delete this relationship?',
                         )}
                     </ModalContent>
 

@@ -68,7 +68,7 @@ const runRulesOnEnrollmentUpdate = ({
         ? {
             ...currentEventValues,
             ...currentEventMainData,
-            programStageId: stage.id
+            programStageId: stage.id,
         }
         : undefined;
 

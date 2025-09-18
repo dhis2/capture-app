@@ -25,7 +25,7 @@ class DateTimeTimePlain extends React.Component<Props> {
         const errorProps = innerMessage
             ? {
                 error: !!innerMessage.message?.errorMessage?.timeError,
-                validationText: innerMessage.message?.errorMessage?.timeError
+                validationText: innerMessage.message?.errorMessage?.timeError,
             }
             : {};
 

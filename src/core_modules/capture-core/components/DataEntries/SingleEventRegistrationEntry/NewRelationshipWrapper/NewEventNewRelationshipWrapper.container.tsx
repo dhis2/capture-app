@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     onAddRelationship: (
         relationshipType: { id: string; name: string },
         entity: Record<string, unknown>,
-        entityType: string
+        entityType: string,
     ) => {
         dispatch(addNewEventRelationship(relationshipType, entity, entityType));
     },

@@ -29,7 +29,7 @@ export const convertToClientTeis = (
                         ? buildUrlByElementType[RECORD_TYPE.trackedEntity][type]({
                             trackedEntity: tei.trackedEntity,
                             id,
-                            programId
+                            programId,
                         })
                         : {};
 

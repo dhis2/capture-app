@@ -60,7 +60,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
                     dataEntryId,
                     itemId,
                     uid,
-                    rulesExecutionDependenciesClientFormatted
+                    rulesExecutionDependenciesClientFormatted,
                 }),
             ], newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH);
         };

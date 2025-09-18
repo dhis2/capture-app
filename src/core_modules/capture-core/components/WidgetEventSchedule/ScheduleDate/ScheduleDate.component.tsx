@@ -96,7 +96,7 @@ const ScheduleDatePlain = ({
                     {
                         firstValidDate,
                         interpolation: { escapeValue: false },
-                    }
+                    },
                 ),
             };
         }

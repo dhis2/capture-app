@@ -26,7 +26,7 @@ import type { EnrollmentData } from '../Types';
 
 const getEnrollmentForRulesExecution = (
     enrollment: EnrollmentData | undefined,
-    programName: string
+    programName: string,
 ): Enrollment | undefined =>
     enrollment && {
         enrollmentId: enrollment.enrollment,

@@ -132,7 +132,7 @@ export const Validated = ({
         onSaveAndCompleteEnrollmentSuccessActionType,
         onSaveSuccessActionType,
         onSaveAndCompleteEnrollmentErrorActionType,
-        onSaveErrorActionType
+        onSaveErrorActionType,
     ]);
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {

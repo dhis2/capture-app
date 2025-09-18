@@ -122,7 +122,7 @@ export const getUniqueValuesForAttributesWithoutValue = async (
         return {};
     }
     const uniqueDataElements = foundation.getElements().filter(
-        dataElement => dataElement.unique && dataElement.unique.generatable
+        dataElement => dataElement.unique && dataElement.unique.generatable,
     );
 
     if (uniqueDataElements && uniqueDataElements.length > 0) {

@@ -69,11 +69,11 @@ const NewTrackedEntityRelationshipPlain = ({
             const apiData = targetSide === TARGET_SIDES.TO ?
                 {
                     from: { trackedEntity: { trackedEntity: teiId } },
-                    to: { trackedEntity: { trackedEntity: linkedTrackedEntityId } }
+                    to: { trackedEntity: { trackedEntity: linkedTrackedEntityId } },
                 } :
                 {
                     from: { trackedEntity: { trackedEntity: linkedTrackedEntityId } },
-                    to: { trackedEntity: { trackedEntity: teiId } }
+                    to: { trackedEntity: { trackedEntity: teiId } },
                 };
 
             const clientData = {
@@ -117,11 +117,11 @@ const NewTrackedEntityRelationshipPlain = ({
         const relationshipData = targetSide === TARGET_SIDES.TO ?
             {
                 from: { trackedEntity: { trackedEntity: teiId } },
-                to: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } }
+                to: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } },
             } :
             {
                 from: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } },
-                to: { trackedEntity: { trackedEntity: teiId } }
+                to: { trackedEntity: { trackedEntity: teiId } },
             };
 
         const clientData = {

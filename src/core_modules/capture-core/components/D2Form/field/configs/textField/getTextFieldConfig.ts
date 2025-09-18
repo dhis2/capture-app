@@ -7,7 +7,7 @@ export const getTextFieldConfig = (
     metaData: MetaDataElement,
     options: any,
     querySingleResource: QuerySingleResource,
-    extraProps?: any | null
+    extraProps?: any | null,
 ) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,

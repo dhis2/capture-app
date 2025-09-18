@@ -85,9 +85,9 @@ const getProductionReducer =
 const createLogAction = (action: Action) => {
     const payloadOverride = action.meta && action.meta.skipLogging &&
         action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
-        accSkipLogging[item] = null;
-        return accSkipLogging;
-    }, {});
+            accSkipLogging[item] = null;
+            return accSkipLogging;
+        }, {});
 
     return { ...action, payload: { ...action.payload, ...payloadOverride } };
 };
@@ -117,7 +117,7 @@ function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWra
     if (isArray(reducerWrappers)) {
         return (reducerWrappers as Array<ReducerWrapper>).reduceRight(
             (prevReducer, currentReducer) => currentReducer(prevReducer),
-            reducer
+            reducer,
         );
     }
 

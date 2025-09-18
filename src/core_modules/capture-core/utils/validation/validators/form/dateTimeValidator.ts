@@ -27,7 +27,7 @@ export function isValidDateTime(
     internalComponentError?: {
         error?: string | null | undefined,
         errorCode?: string | null | undefined
-    } | null | undefined
+    } | null | undefined,
 ): ValidationResult {
     if (!value) {
         return { valid: true };

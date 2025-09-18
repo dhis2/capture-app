@@ -107,7 +107,7 @@ export function postProcessRulesEffects(
             if ([
                 effectActions.HIDE_FIELD,
                 effectActions.HIDE_SECTION,
-                effectActions.ASSIGN_VALUE
+                effectActions.ASSIGN_VALUE,
             ].includes(type as any)) {
                 acc[type].push(effect);
             } else {

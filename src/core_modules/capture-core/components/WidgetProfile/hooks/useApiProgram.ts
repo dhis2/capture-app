@@ -3,7 +3,8 @@ import { useDataQuery } from '@dhis2/app-runtime';
 
 const fields =
     'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,' +
-    'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
+    'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,' +
+    'selectIncidentDatesInFuture,displayIncidentDate,' +
     'access[*],' +
     'dataEntryForm[id,htmlCode],' +
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +

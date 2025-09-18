@@ -77,7 +77,7 @@ export const TopBarActions = ({
         isUserInteractionInProgress
             ? setContext(prev => ({
                 ...prev,
-                openNewRegistrationPageWithoutProgramId: true
+                openNewRegistrationPageWithoutProgramId: true,
             }))
             : newRegistrationPageWithoutProgramId();
     };
@@ -92,7 +92,7 @@ export const TopBarActions = ({
         isUserInteractionInProgress
             ? setContext(prev => ({
                 ...prev,
-                openSearchPageWithoutProgramId: true
+                openSearchPageWithoutProgramId: true,
             }))
             : searchPageWithoutProgramId();
     };

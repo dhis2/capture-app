@@ -93,7 +93,7 @@ const fetchFormattedValues = async ({
                 change.previousValue ? getValue(change.previousValue, false) : null,
                 getValue(
                     change.currentValue,
-                    entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue
+                    entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue,
                 ),
             ]);
 

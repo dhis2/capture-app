@@ -44,7 +44,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId,
     programId?: string;
 }) =>
     actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)(
-        { trackedEntityTypeId, formId, programId }
+        { trackedEntityTypeId, formId, programId },
     );
 
 export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }: {
@@ -54,7 +54,7 @@ export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }: {
     actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId });
 
 export const searchViaAttributesOnScopeTrackedEntityType = ({
-    trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom
+    trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom,
 }: {
     trackedEntityTypeId: string;
     formId: string;
@@ -63,7 +63,7 @@ export const searchViaAttributesOnScopeTrackedEntityType = ({
     triggeredFrom?: string;
 }) =>
     actionCreator(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)(
-        { trackedEntityTypeId, formId, page, pageSize, triggeredFrom }
+        { trackedEntityTypeId, formId, page, pageSize, triggeredFrom },
     );
 
 export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1, pageSize, triggeredFrom }: {
@@ -74,7 +74,7 @@ export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1,
     triggeredFrom?: string;
 }) =>
     actionCreator(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)(
-        { programId, formId, page, pageSize, triggeredFrom }
+        { programId, formId, page, pageSize, triggeredFrom },
     );
 
 export const showInitialViewOnSearchBox = () =>

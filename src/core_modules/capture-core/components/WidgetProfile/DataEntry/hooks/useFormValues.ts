@@ -23,12 +23,12 @@ const buildFormValues = async ({
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }),
-        {}
+        {},
     );
     const formValues = clientAttributesWithSubvalues?.reduce(
         (acc, currentValue) => ({
             ...acc,
-            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType)
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType),
         }),
         {},
     );

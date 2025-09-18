@@ -84,7 +84,7 @@ export const buildArgumentsForTemplate = ({
         dataFilters,
         status,
         eventOccurredAt,
-        scheduledAt
+        scheduledAt,
     } = buildArguments({
         filters,
         programStageFiltersOnly,

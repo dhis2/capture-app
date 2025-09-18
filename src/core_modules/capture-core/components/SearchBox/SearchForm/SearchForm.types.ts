@@ -31,22 +31,22 @@ export type PropsFromRedux = {
 export type DispatchersFromRedux = {
     searchViaUniqueIdOnScopeProgram: ({ programId, formId }: { programId: string; formId: string }) => void;
     searchViaUniqueIdOnScopeTrackedEntityType: ({
-        trackedEntityTypeId, formId
+        trackedEntityTypeId, formId,
     }: {
         trackedEntityTypeId: string; formId: string
     }) => void;
     searchViaAttributesOnScopeProgram: ({
-        programId, formId, resultsPageSize
+        programId, formId, resultsPageSize,
     }: {
         programId: string; formId: string; resultsPageSize: number
     }) => void;
     searchViaAttributesOnScopeTrackedEntityType: ({
-        trackedEntityTypeId, formId, resultsPageSize
+        trackedEntityTypeId, formId, resultsPageSize,
     }: {
         trackedEntityTypeId: string; formId: string; resultsPageSize: number
     }) => void;
     saveCurrentFormData: ({
-        searchScopeType, searchScopeId, formId, formsValues, searchGroupsForSelectedScope
+        searchScopeType, searchScopeId, formId, formsValues, searchGroupsForSelectedScope,
     }: {
         searchScopeType: string;
         searchScopeId: string;

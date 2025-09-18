@@ -18,7 +18,7 @@ import {
     stringToTemporal,
     temporalToString,
     mapDhis2CalendarToTemporal,
-    isCalendarSupported
+    isCalendarSupported,
 } from '../../capture-core-utils/date';
 
 type AgeValues = {

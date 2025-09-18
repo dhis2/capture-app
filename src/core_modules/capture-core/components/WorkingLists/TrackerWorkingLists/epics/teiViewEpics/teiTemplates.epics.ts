@@ -160,7 +160,7 @@ export const updateTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStor
             } = action.payload;
             const {
                 programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayColumnOrder,
-                assignedUserMode, assignedUsers, followUp
+                assignedUserMode, assignedUsers, followUp,
             } = criteria;
             const trackedEntityInstanceFilters = {
                 name,

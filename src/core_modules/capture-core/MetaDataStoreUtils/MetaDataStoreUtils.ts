@@ -12,7 +12,7 @@ export const getCachedSingleResourceFromKeyAsync = (
 export const containsKeyInStorageAsync = (
     store: typeof USER_METADATA_STORES[keyof typeof USER_METADATA_STORES],
     key: string,
-    propsToPass: any = {}
+    propsToPass: any = {},
 ) => {
     const storageController = getUserMetadataStorageController();
     return storageController.contains(store, key).then(response => ({ response, ...propsToPass }));

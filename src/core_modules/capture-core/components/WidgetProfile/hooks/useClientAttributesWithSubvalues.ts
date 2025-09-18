@@ -15,7 +15,7 @@ const MULIT_TEXT_WITH_NO_OPTIONS_SET =
 export const useClientAttributesWithSubvalues = (
     teiId: string,
     program: InputProgramData,
-    trackedEntityInstanceAttributes: boolean | Array<InputAttribute>
+    trackedEntityInstanceAttributes: boolean | Array<InputAttribute>,
 ) => {
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
@@ -29,48 +29,48 @@ export const useClientAttributesWithSubvalues = (
             const { programTrackedEntityAttributes } = program;
             const computedAttributes = await programTrackedEntityAttributes.reduce(
                 async (promisedAcc: Promise<any[]>, currentTEA) => {
-                const {
-                    displayInList,
-                    trackedEntityAttribute: { id, optionSet, valueType, unique, displayFormName },
-                } = currentTEA;
-                const foundAttribute = trackedEntityInstanceAttributes?.find(item => item.attribute === id);
-                let value;
-                if (foundAttribute) {
-                    if (subValueGetterByElementType[valueType]) {
-                        value = await subValueGetterByElementType[valueType]({
-                            attribute: {
-                                value: foundAttribute.value,
-                                id,
-                                teiId,
-                                programId: program.id,
-                                absoluteApiPath,
-                            },
-                            querySingleResource,
-                        });
-                    } else {
-                        value = convertServerToClient(foundAttribute.value, valueType as any);
-                    }
-                }
-
-                const acc = await promisedAcc;
-
-                if (isMultiTextWithoutOptionset(valueType, optionSet)) {
-                    log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ optionSet }));
-                    return acc;
-                }
-                return [
-                    ...acc,
-                    {
-                        attribute: id,
-                        key: displayFormName,
-                        optionSet,
+                    const {
                         displayInList,
-                        value,
-                        unique,
-                        valueType,
-                    },
-                ];
-            }, Promise.resolve([]));
+                        trackedEntityAttribute: { id, optionSet, valueType, unique, displayFormName },
+                    } = currentTEA;
+                    const foundAttribute = trackedEntityInstanceAttributes?.find(item => item.attribute === id);
+                    let value;
+                    if (foundAttribute) {
+                        if (subValueGetterByElementType[valueType]) {
+                            value = await subValueGetterByElementType[valueType]({
+                                attribute: {
+                                    value: foundAttribute.value,
+                                    id,
+                                    teiId,
+                                    programId: program.id,
+                                    absoluteApiPath,
+                                },
+                                querySingleResource,
+                            });
+                        } else {
+                            value = convertServerToClient(foundAttribute.value, valueType as any);
+                        }
+                    }
+
+                    const acc = await promisedAcc;
+
+                    if (isMultiTextWithoutOptionset(valueType, optionSet)) {
+                        log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ optionSet }));
+                        return acc;
+                    }
+                    return [
+                        ...acc,
+                        {
+                            attribute: id,
+                            key: displayFormName,
+                            optionSet,
+                            displayInList,
+                            value,
+                            unique,
+                            valueType,
+                        },
+                    ];
+                }, Promise.resolve([]));
 
             setListAttributes(computedAttributes);
         }

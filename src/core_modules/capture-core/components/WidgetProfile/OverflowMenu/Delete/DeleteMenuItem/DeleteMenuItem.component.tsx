@@ -23,7 +23,7 @@ export const DeleteMenuItem = ({
 }: Props) => {
     const disabled = useMemo(() =>
         !canWriteData || !canCascadeDeleteTei,
-        [canWriteData, canCascadeDeleteTei]
+    [canWriteData, canCascadeDeleteTei],
     );
     const tooltipContent = getTooltipContent(disabled, trackedEntityTypeName);
 

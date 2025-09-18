@@ -21,7 +21,7 @@ type OptionSetDict = {
 };
 
 const createOptionSetToOptionGroupDictionary = ({
-    optionGroups
+    optionGroups,
 }: {
     optionGroups: OptionGroup[]
 }): OptionSetDict => optionGroups.reduce(

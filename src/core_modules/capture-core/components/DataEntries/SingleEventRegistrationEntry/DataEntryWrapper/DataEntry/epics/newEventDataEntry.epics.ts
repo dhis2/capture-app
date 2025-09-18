@@ -87,7 +87,7 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
     action$: EpicAction<SelectionsCompletenessPayload>,
-    store: ReduxStore
+    store: ReduxStore,
 ) =>
     action$.pipe(
         ofType(
@@ -130,7 +130,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
             }
             const columnConfig = [
                 ...getDefaultMainColumnConfig(stageContainer.stage),
-                ...getColumnMetaDataConfig(stageContainer.stage.stageForm)
+                ...getColumnMetaDataConfig(stageContainer.stage.stageForm),
             ];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         }));

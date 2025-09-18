@@ -34,12 +34,12 @@ export const useProgram = (programId: string) => {
             }
             typedProgram.programTrackedEntityAttributes = typedProgram.programTrackedEntityAttributes.map(
                 (attribute: any) => {
-                const tea = attribute.trackedEntityAttribute;
-                if (tea.optionSet) {
-                    tea.optionSet.optionGroups = optionGroups[tea.optionSet.id];
-                }
-                return attribute;
-            });
+                    const tea = attribute.trackedEntityAttribute;
+                    if (tea.optionSet) {
+                        tea.optionSet.optionGroups = optionGroups[tea.optionSet.id];
+                    }
+                    return attribute;
+                });
             return typedProgram;
         }
         return null;

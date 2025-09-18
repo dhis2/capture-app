@@ -33,7 +33,7 @@ export const eventCancelNewRelationship = () =>
 export const requestAddEventRelationship = (
     relationshipType: { id: string, name: string },
     entity: any,
-    entityType: string
+    entityType: string,
 ) =>
     actionCreator(actionTypes.REQUEST_ADD_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType });
 
@@ -51,11 +51,11 @@ export const saveEventRelationshipNewTei = (clientData: any, selections: any, cl
             },
             commit: {
                 type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS,
-                meta: { clientData, selections, clientId }
+                meta: { clientData, selections, clientId },
             },
             rollback: {
                 type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED,
-                meta: { clientData, selections, clientId }
+                meta: { clientData, selections, clientId },
             },
         },
     });

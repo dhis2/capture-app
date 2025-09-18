@@ -14,7 +14,7 @@ import { ApiUtils, ReduxStore } from '../../../../../capture-core-utils/types';
 export const addNoteForNewEnrollmentEventEpic = (
     action$: any,
     store: ReduxStore,
-    { querySingleResource, fromClientDate }: ApiUtils
+    { querySingleResource, fromClientDate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),

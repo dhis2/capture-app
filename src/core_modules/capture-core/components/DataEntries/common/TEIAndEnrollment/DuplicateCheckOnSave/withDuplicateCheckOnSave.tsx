@@ -7,7 +7,7 @@ import type { Props } from './withDuplicateCheckOnSave.types';
 
 const getMetadataInfo = (
     enrollmentMetadata: Enrollment,
-    teiRegistrationMetadata: TeiRegistration
+    teiRegistrationMetadata: TeiRegistration,
 ): {
     metadata?: Enrollment | TeiRegistration;
     scopeType: string;

@@ -103,8 +103,9 @@ const NoteSectionPlain = ({
                     <span className={classes.lastUpdated}>
                         <Tooltip content={convertClientToList(
                             moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(),
-                            dataElementTypes.DATETIME
-                        )}>
+                            dataElementTypes.DATETIME,
+                        )}
+                        >
                             {moment(fromServerDate(storedAt)).fromNow()}
                         </Tooltip>
                     </span>
@@ -142,20 +143,20 @@ const NoteSectionPlain = ({
 
             {isEditing &&
                 <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
-                <Button
-                    dataTest="add-note-btn"
-                    onClick={onAddNote}
-                    primary
-                >
-                    {i18n.t('Save note')}
-                </Button>
-                <Button
-                    dataTest="cancel-note-btn"
-                    onClick={onCancel}
-                >
-                    {i18n.t('Cancel')}
-                </Button>
-            </div>}
+                    <Button
+                        dataTest="add-note-btn"
+                        onClick={onAddNote}
+                        primary
+                    >
+                        {i18n.t('Save note')}
+                    </Button>
+                    <Button
+                        dataTest="cancel-note-btn"
+                        onClick={onCancel}
+                    >
+                        {i18n.t('Cancel')}
+                    </Button>
+                </div>}
         </div>);
 };
 

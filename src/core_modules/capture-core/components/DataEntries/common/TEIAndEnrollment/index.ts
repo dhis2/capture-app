@@ -4,7 +4,7 @@ export {
     useMetadataForRegistrationForm,
     FieldElementObjectTypes,
     useDataEntryFormConfig,
-    useOptionSetsForAttributes
+    useOptionSetsForAttributes,
 } from './useMetadataForRegistrationForm';
 export { withDuplicateCheckOnSave } from './DuplicateCheckOnSave';
 export type { DataEntryFormConfig } from './useMetadataForRegistrationForm';

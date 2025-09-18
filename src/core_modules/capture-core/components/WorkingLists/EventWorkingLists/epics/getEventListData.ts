@@ -101,7 +101,7 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null,
 
 const getApiCategoriesQueryArgument = (
     categories: { [id: string]: string} | null,
-    categoryCombinationId?: string | null
+    categoryCombinationId?: string | null,
 ) => {
     if (!categories || !categoryCombinationId) {
         return null;

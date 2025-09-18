@@ -7,7 +7,7 @@ import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
     CachedProgram,
-    CachedTrackedEntityType
+    CachedTrackedEntityType,
 } from '../../../../../../storageControllers';
 import type { DataEntryFormConfig } from '../types';
 

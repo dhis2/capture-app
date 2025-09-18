@@ -49,7 +49,7 @@ const ProgramStageSelectorComponentPlain = ({
     programStages,
     onSelectProgramStage,
     onCancel,
-    classes
+    classes,
 }: ProgramStageSelectorPlainProps) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {

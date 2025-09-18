@@ -120,7 +120,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 saveAction = startSaveEventRelationship(
                     serverRelationshipData,
                     state.currentSelections,
-                    relationshipClientId
+                    relationshipClientId,
                 );
             }
 

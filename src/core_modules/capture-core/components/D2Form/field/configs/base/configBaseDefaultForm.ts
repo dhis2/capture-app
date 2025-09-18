@@ -54,7 +54,7 @@ export const createProps = (props: any | null, options: any, metaData: DataEleme
 export const createFieldConfig = (
     fieldSpecifications: FieldConfigForType,
     metaData: DataElement,
-    querySingleResource: QuerySingleResource
+    querySingleResource: QuerySingleResource,
 ): FieldConfig => ({
     ...getBaseConfigForField(metaData, querySingleResource),
     ...fieldSpecifications,

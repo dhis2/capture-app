@@ -14,7 +14,7 @@ export const TemplateSelector = () => {
         navigate(`/?${buildUrlQueryString({
             orgUnitId,
             programId,
-            selectedTemplateId: template.id
+            selectedTemplateId: template.id,
         })}`);
 
     const onCreateTemplate = () => {

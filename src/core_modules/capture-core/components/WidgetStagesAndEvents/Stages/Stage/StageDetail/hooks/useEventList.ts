@@ -23,7 +23,7 @@ import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName
 
 const baseKeys = [
     { id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' },
-    { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' }
+    { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' },
 ];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
@@ -116,7 +116,7 @@ const useComputeHeaderColumn = (
     dataElements: Array<StageDataElement>,
     hideDueDate: boolean,
     enableUserAssignment: boolean,
-    formFoundation?: { getLabel: (key: string) => string }
+    formFoundation?: { getLabel: (key: string) => string },
 ) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
@@ -134,7 +134,7 @@ const useComputeHeaderColumn = (
             ...getBaseColumns({ formFoundation })
                 .filter(col =>
                     (enableUserAssignment || col.id !== 'assignedUser') &&
-                    (!hideDueDate || col.id !== 'scheduledAt')
+                    (!hideDueDate || col.id !== 'scheduledAt'),
                 ),
             ...dataElementHeaders];
     }, [dataElements, hideDueDate, enableUserAssignment, formFoundation]);
@@ -165,7 +165,7 @@ function getDataElement(stageDataElement: StageDataElementClient | undefined, ty
 
 const formatRowForView = (
     row: Record<string, unknown>,
-    dataElements: Array<StageDataElementClient>
+    dataElements: Array<StageDataElementClient>,
 ) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
     const stageDataElement = dataElements.find(el => el.id === id);

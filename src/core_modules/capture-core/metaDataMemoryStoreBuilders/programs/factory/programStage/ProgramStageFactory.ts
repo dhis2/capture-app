@@ -162,7 +162,7 @@ export class ProgramStageFactory {
 
     async _addLeftoversSection(
         stageForm: RenderFoundation,
-        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined
+        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined,
     ) {
         if (!cachedProgramStageDataElements) return;
 
@@ -187,7 +187,7 @@ export class ProgramStageFactory {
     }
 
     static _convertProgramStageDataElementsToObject(
-        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined
+        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined,
     ): CachedProgramStageDataElementsAsObject {
         if (!cachedProgramStageDataElements) {
             return {};

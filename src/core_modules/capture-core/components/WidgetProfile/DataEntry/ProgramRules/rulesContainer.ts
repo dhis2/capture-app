@@ -4,7 +4,7 @@ import {
     getDataElementId,
     getProgramId,
     getProgramRuleActions,
-    getProgramStageId
+    getProgramStageId,
 } from '../helpers';
 
 const addProgramVariables = (program: any, programRuleVariables: any[]) => {

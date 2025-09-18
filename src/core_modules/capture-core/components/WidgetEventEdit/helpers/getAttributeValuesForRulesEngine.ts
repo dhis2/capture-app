@@ -6,7 +6,7 @@ import type {
 
 export const getAttributeValuesForRulesEngine = (
     attributeValues: Array<AttributeValue> = [],
-    attributes: Array<DataElement>
+    attributes: Array<DataElement>,
 ) =>
     attributeValues.reduce((acc, { id, value }) => {
         const dataElement = attributes.find(({ id: attributeId }) => id === attributeId);

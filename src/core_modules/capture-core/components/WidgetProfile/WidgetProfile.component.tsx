@@ -94,7 +94,7 @@ const WidgetProfilePlain = ({
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
         program as any,
-        trackedEntityInstanceAttributes
+        trackedEntityInstanceAttributes,
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;

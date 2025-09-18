@@ -63,7 +63,7 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
                 return filterFormFieldOrgUnitsFailed(
                     resultContainer.formId,
                     resultContainer.elementId,
-                    FILTER_RETRIEVE_ERROR
+                    FILTER_RETRIEVE_ERROR,
                 );
             }
 

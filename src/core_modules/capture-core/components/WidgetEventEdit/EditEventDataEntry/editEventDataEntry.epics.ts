@@ -47,7 +47,7 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(
             eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
-            widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY
+            widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
         ),
         map((action: any) => {
             const state = store.value;
@@ -149,7 +149,7 @@ export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
                         eventId,
                         serverData,
                         enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT,
-                        enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT
+                        enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT,
                     ),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }

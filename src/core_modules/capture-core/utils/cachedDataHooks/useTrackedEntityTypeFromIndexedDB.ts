@@ -5,7 +5,7 @@ import { useIndexedDBQuery } from '../reactQueryHelpers';
 
 export const useTrackedEntityTypeFromIndexedDB = (
     trackedEntityTypeId: string | null | undefined,
-    { enabled }: UseQueryOptions<any>
+    { enabled }: UseQueryOptions<any>,
 ) => {
     const storageController = getUserMetadataStorageController();
 

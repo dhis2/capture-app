@@ -106,7 +106,7 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
 
     getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
         const {
-            orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled
+            orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled,
         } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;

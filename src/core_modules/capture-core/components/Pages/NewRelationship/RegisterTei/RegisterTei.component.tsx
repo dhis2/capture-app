@@ -103,7 +103,7 @@ const RegisterTeiPlain = ({
 
     const ExistingUniqueValueDialogActions = useCallback(({
         teiId,
-        attributeValues
+        attributeValues,
     }: {
         teiId: string;
         attributeValues: any

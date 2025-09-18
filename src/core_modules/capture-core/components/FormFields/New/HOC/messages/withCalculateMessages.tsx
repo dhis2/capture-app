@@ -34,7 +34,7 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
             errorText: string | null,
             warningText: string | null,
             infoText: string | null,
-            validatingText: string | null
+            validatingText: string | null,
         ) {
             let message;
             let typeKey;

@@ -105,7 +105,7 @@ const SearchFormIndex = ({
         searchGroupsForSelectedScope,
         addFormIdToReduxStore,
         removeFormDataFromReduxStore,
-        keptFallbackSearchFormValues
+        keptFallbackSearchFormValues,
     );
 
     const [error, setError] = useState(false);
@@ -163,7 +163,7 @@ const SearchFormIndex = ({
                     searchViaAttributesOnScopeTrackedEntityType({
                         trackedEntityTypeId: searchScopeId,
                         formId,
-                        resultsPageSize
+                        resultsPageSize,
                     });
                     break;
                 default:

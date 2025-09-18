@@ -76,7 +76,7 @@ type PageStatusParams = {
 };
 
 const getPageStatus = ({
-    orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event
+    orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event,
 }: PageStatusParams) => {
     if (isLoading) {
         return pageStatuses.LOADING;
@@ -152,7 +152,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const { program } = useProgramInfo(programId);
     const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(
-        program?.programRules.concat(programStage?.programRules as ProgramRule[])
+        program?.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {

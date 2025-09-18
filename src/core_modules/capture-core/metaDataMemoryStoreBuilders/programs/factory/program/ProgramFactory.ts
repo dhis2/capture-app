@@ -155,7 +155,7 @@ export class ProgramFactory {
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(
-                    cachedProgram.trackedEntityTypeId!
+                    cachedProgram.trackedEntityTypeId!,
                 ) as TrackedEntityType;
             });
 
@@ -182,7 +182,7 @@ export class ProgramFactory {
         }
         program.organisationUnits = (await getUserMetadataStorageController().get(
             USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM,
-            program.id
+            program.id,
         ))?.organisationUnits;
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;

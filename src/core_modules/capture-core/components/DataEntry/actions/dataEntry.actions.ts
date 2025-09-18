@@ -41,7 +41,7 @@ export const completeEvent =
         serverData: Record<string, any>,
         event: Record<string, any>,
         eventId: string,
-        id: string
+        id: string,
     ) =>
         actionCreator(actionTypes.COMPLETE_EVENT)({
             clientValues,
@@ -75,7 +75,7 @@ export const saveEvent =
         serverData: Record<string, any>,
         event: Record<string, any>,
         eventId: string,
-        id: string
+        id: string,
     ) =>
         actionCreator(actionTypes.SAVE_EVENT)({
             clientValues,
@@ -154,7 +154,7 @@ export const addRelationship =
         dataEntryId: string,
         itemId: string,
         relationship: Record<string, any>,
-        newToEntity: Record<string, any>
+        newToEntity: Record<string, any>,
     ) =>
         actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity });
 

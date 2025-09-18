@@ -10,7 +10,7 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 export const getDateFieldConfigForCustomForm = (
     metaData: DateDataElement,
     options: any,
-    querySingleResource: QuerySingleResource
+    querySingleResource: QuerySingleResource,
 ) => {
     const props = createProps({
         width: 350,

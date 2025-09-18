@@ -55,7 +55,7 @@ export const DeleteTeiAction = ({
                         <span>
                             {i18n.t(
                                 'Deleting records will also delete any associated enrollments and events. ' +
-                                'This cannot be undone. Are you sure you want to delete?'
+                                'This cannot be undone. Are you sure you want to delete?',
                             )}
                         </span>
                     </ModalContent>

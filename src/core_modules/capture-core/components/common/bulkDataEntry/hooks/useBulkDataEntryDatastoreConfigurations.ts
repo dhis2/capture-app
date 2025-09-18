@@ -77,18 +77,18 @@ export const useBulkDataEntryDatastoreConfigurations = (programId: string) => {
 
                 return dataStoreConfigurationValidated?.config.reduce(
                     (acc: DataStoreConfiguration[], configuration: any) => {
-                    if (configuration.programId === programId) {
-                        const configurationWithLocale: DataStoreConfiguration = {
-                            ...configuration,
-                            title: getLocalizedString(configuration.title, locale),
-                            subtitle: configuration.subtitle
-                                ? getLocalizedString(configuration.subtitle, locale)
-                                : undefined,
-                        };
-                        acc = [...acc, configurationWithLocale];
-                    }
-                    return acc;
-                }, []);
+                        if (configuration.programId === programId) {
+                            const configurationWithLocale: DataStoreConfiguration = {
+                                ...configuration,
+                                title: getLocalizedString(configuration.title, locale),
+                                subtitle: configuration.subtitle
+                                    ? getLocalizedString(configuration.subtitle, locale)
+                                    : undefined,
+                            };
+                            acc = [...acc, configurationWithLocale];
+                        }
+                        return acc;
+                    }, []);
             },
         },
     );

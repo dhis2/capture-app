@@ -11,7 +11,7 @@ import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import {
-    addEnrollmentEventPageDefaultActionTypes
+    addEnrollmentEventPageDefaultActionTypes,
 } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { PlainProps, Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';

@@ -23,7 +23,7 @@ export const useResetProgramId = () => {
         navigate(`${pageToPush}?${buildUrlQueryString({
             ...restOfQueries,
             teiId: teiId ?? pageContext?.teiId,
-            enrollmentId: 'AUTO'
+            enrollmentId: 'AUTO',
         })}`);
     };
 
