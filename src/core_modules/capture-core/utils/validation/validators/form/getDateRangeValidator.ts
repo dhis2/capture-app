@@ -2,12 +2,21 @@ import { Temporal } from '@js-temporal/polyfill';
 import { isValidDate } from './dateValidator';
 import { convertLocalToIsoCalendar } from '../../../converters/date';
 
-function isValidDateWithEmptyCheck(value: string | null | undefined, internalError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
+function isValidDateWithEmptyCheck(
+    value: string | null | undefined,
+    internalError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined,
+) {
     return isValidDate(value, internalError);
 }
 
 export const getDateRangeValidator = (invalidDateMessage: string) =>
-    (value: { from?: string | null, to?: string | null}, internalComponentError?: {fromError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined, toError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined} | null | undefined) => {
+    (
+        value: { from?: string | null, to?: string | null},
+        internalComponentError?: {
+            fromError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined,
+            toError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+        } | null | undefined,
+    ) => {
         const errorResult: any[] = [];
         if (!isValidDateWithEmptyCheck(value.from, internalComponentError?.fromError).valid) {
             errorResult.push({ from: invalidDateMessage });

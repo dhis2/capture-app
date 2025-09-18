@@ -2,7 +2,10 @@ import { Temporal } from '@js-temporal/polyfill';
 import { convertLocalToIsoCalendar } from 'capture-core/utils/converters/date';
 import { isValidDateTime } from './dateTimeValidator';
 
-function isValidDateTimeWithEmptyCheck(value: {date?: string | null, time?: string | null} | null | undefined, internalError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
+function isValidDateTimeWithEmptyCheck(
+    value: {date?: string | null, time?: string | null} | null | undefined,
+    internalError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined,
+) {
     return isValidDateTime(value, internalError);
 }
 
@@ -34,7 +37,9 @@ const convertDateTimeToIsoTemporal = (value: any | null | undefined) => {
             return null;
         }
 
-        if (isNaN(hour) || isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59) {
+        if (
+            isNaN(hour) || isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59
+        ) {
             return null;
         }
 
@@ -45,7 +50,13 @@ const convertDateTimeToIsoTemporal = (value: any | null | undefined) => {
 };
 
 export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
-    (value: { from?: any | null, to?: any | null }, internalComponentError?: {fromDateError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined, toDateError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined} | null | undefined) => {
+    (
+        value: { from?: any | null, to?: any | null },
+        internalComponentError?: {
+            fromDateError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined,
+            toDateError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+        } | null | undefined,
+    ) => {
         if (!value?.from && value?.to) {
             return {
                 valid: false,
