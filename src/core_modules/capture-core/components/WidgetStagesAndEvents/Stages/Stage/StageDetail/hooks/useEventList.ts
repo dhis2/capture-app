@@ -129,7 +129,10 @@ const useComputeHeaderColumn = (
         }, [] as Array<{ id: string; header: string; type: keyof typeof dataElementTypes; sortDirection: string }>);
         return [
             ...getBaseColumns({ formFoundation })
-                .filter(col => (enableUserAssignment || col.id !== 'assignedUser') && (!hideDueDate || col.id !== 'scheduledAt')),
+                .filter(col => 
+                    (enableUserAssignment || col.id !== 'assignedUser') && 
+                    (!hideDueDate || col.id !== 'scheduledAt')
+                ),
             ...dataElementHeaders];
     }, [dataElements, hideDueDate, enableUserAssignment, formFoundation]);
 

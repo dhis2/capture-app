@@ -5,7 +5,8 @@ import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
-import { isMultiTextWithoutOptionset } from '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+import { isMultiTextWithoutOptionset } from 
+    '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import type { InputProgramData, InputAttribute } from './hooks.types';
 
 const MULIT_TEXT_WITH_NO_OPTIONS_SET =
@@ -26,7 +27,8 @@ export const useClientAttributesWithSubvalues = (
         if (program && trackedEntityInstanceAttributes && Array.isArray(trackedEntityInstanceAttributes)) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { programTrackedEntityAttributes } = program;
-            const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc: Promise<any[]>, currentTEA) => {
+            const computedAttributes = await programTrackedEntityAttributes.reduce(
+                async (promisedAcc: Promise<any[]>, currentTEA) => {
                 const {
                     displayInList,
                     trackedEntityAttribute: { id, optionSet, valueType, unique, displayFormName },

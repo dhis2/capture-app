@@ -57,7 +57,8 @@ export const useLifecycle = ({
         if (isLoading) { return; }
         if (delayRulesExecutionRef.current) {
             // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
-            // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
+            // The purpose of the following lines of code is to make sure the redux store is ready 
+            // before calling getRulesActions.
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
         } else {

@@ -225,7 +225,9 @@ export class DataElementFactory {
 
     _getAttributeTranslation(
         translations: Array<CachedAttributeTranslation>,
-        property: typeof DataElementFactory.translationPropertyNames[keyof typeof DataElementFactory.translationPropertyNames],
+        property: typeof DataElementFactory.translationPropertyNames[
+            keyof typeof DataElementFactory.translationPropertyNames
+        ],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);

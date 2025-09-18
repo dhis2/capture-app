@@ -6,7 +6,8 @@ import type {
 } from '../../../../../DataEntries';
 import type {
     TeiPayload,
-} from '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+} from '../../../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/' +
+    'dataEntryTrackedEntityInstance.types';
 
 export type Props = {
     theme: any;

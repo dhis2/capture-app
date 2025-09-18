@@ -173,7 +173,10 @@ export class SearchGroupFactory {
         return trackedEntityAttribute;
     }
 
-    build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
+    build(
+        searchAttributes: ReadonlyArray<InputSearchAttribute>, 
+        minAttributesRequiredToSearch: number
+    ): Promise<SearchGroup[]> {
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,

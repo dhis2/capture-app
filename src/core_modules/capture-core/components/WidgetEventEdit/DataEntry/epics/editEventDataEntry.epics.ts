@@ -88,7 +88,10 @@ const runRulesForEditSingleEvent = async ({
             program,
             stage,
             orgUnit: coreOrgUnit,
-            currentEvent: { ...currentEvent, createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME) },
+            currentEvent: { 
+                ...currentEvent, 
+                createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME) 
+            },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
@@ -123,7 +126,8 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map((actionBatch: any) =>
-            actionBatch.payload.find((action: any) => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
+            actionBatch.payload.find((action: any) => 
+                action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         concatMap((action: any) => {
             const { dataEntryId, itemId, uid, programId } = action.payload;
@@ -146,7 +150,8 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map((actionBatch: any) =>
-            actionBatch.payload.find((action: any) => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
+            actionBatch.payload.find((action: any) => 
+                action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         concatMap((action: any) => {
             const {

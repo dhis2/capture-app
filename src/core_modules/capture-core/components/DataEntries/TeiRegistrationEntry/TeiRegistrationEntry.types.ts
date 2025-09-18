@@ -4,7 +4,8 @@ import type { RenderCustomCardActions } from '../../CardList';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type {
     TeiPayload,
-} from '../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+} from '../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/' +
+    'dataEntryTrackedEntityInstance.types';
 import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 export type OwnProps = {

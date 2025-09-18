@@ -33,7 +33,11 @@ export const changeEventFromUrl = (eventId: string, page: string) =>
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)({ error: message });
 
-export const eventFromUrlRetrieved = (eventContainer: any, prevProgramId: string | null, categoriesData: Array<any> | null) =>
+export const eventFromUrlRetrieved = (
+    eventContainer: any, 
+    prevProgramId: string | null, 
+    categoriesData: Array<any> | null
+) =>
     actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId, categoriesData });
 
 export const orgUnitRetrievedOnUrlUpdate = (orgUnit: any, eventContainer: any) =>

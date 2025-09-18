@@ -106,4 +106,6 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
     );
 };
 
-export const EnrollmentAddEventPage: ComponentType<Props> = withStyles(styles)(EnrollmentAddEventPagePlain) as ComponentType<Props>;
+export const EnrollmentAddEventPage: ComponentType<Props> = withStyles(styles)(
+    EnrollmentAddEventPagePlain
+) as ComponentType<Props>;

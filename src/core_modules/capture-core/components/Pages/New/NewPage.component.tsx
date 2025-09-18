@@ -114,7 +114,8 @@ const NewPagePlain = ({
                         {
                             newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
                             (() => {
-                                const missingCategories = missingCategoriesInProgramSelection.reduce((acc, { name }, index) => {
+                                const missingCategories = missingCategoriesInProgramSelection.reduce(
+                                    (acc, { name }, index) => {
                                     if ((index + 1 === missingCategoriesInProgramSelection.length)) {
                                         return `${acc} ${name} ${missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'}`;
                                     }

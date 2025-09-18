@@ -65,7 +65,11 @@ export const fetchEnrollmentId = (enrollmentId: string) =>
 export const verifyEnrollmentIdSuccess = (
     { enrollmentId, trackedEntity, program }: { enrollmentId: string; trackedEntity: string; program: string }
 ) =>
-    actionCreator(enrollmentPageActionTypes.VERIFY_ENROLLMENT_ID_SUCCESS)({ enrollmentId, teiId: trackedEntity, programId: program });
+    actionCreator(enrollmentPageActionTypes.VERIFY_ENROLLMENT_ID_SUCCESS)({
+        enrollmentId,
+        teiId: trackedEntity,
+        programId: program,
+    });
 
 export const fetchEnrollmentIdSuccess = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS)(payload);

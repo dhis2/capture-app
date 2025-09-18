@@ -47,7 +47,10 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
 
     let errorsMessages = saveAttempted && !formValidated ? 
         [{ id: uuid(), message: i18n.t('Fix errors in the form to continue.') }] : [];
-    errorsMessages = [...errorsMessages, ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error')];
+    errorsMessages = [
+        ...errorsMessages, 
+        ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error')
+    ];
     const warningsMessages = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, saveAttempted, 'warning');
 
     return { errorsMessages, warningsMessages, formValidated };

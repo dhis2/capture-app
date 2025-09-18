@@ -11,7 +11,8 @@ import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
-import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { navigateToEnrollmentOverview } from 
+    '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
@@ -277,7 +278,10 @@ const RegistrationDataEntryPlain = ({
                             />
                         </div>
                         {dataEntryIsReady && (
-                            <div id="right-column-tracked-entity-type-registration-data-entry" className={classes.rightColumn}>
+                            <div 
+                                id="right-column-tracked-entity-type-registration-data-entry" 
+                                className={classes.rightColumn}
+                            >
                                 <DataEntryWidgetOutput
                                     selectedScopeId={selectedScopeId}
                                     dataEntryId={dataEntryId}

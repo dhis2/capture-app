@@ -5,7 +5,8 @@ import type {
 } from '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
 import type {
     TeiPayload,
-} from '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+} from '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/' +
+    'dataEntryTrackedEntityInstance.types';
 
 export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_SAVE_START: 'StartSavingNewTrackedEntityInstance',

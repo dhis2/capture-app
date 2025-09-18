@@ -22,7 +22,9 @@ export function loadNewDataEntry(
         validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
     const key = getDataEntryKey(dataEntryId, itemId);
     return [
-        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryUI, dataEntryValues }),
+        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ 
+            key, itemId, dataEntryId, dataEntryMeta, dataEntryUI, dataEntryValues 
+        }),
         addFormData(key, formValues),
     ];
 }

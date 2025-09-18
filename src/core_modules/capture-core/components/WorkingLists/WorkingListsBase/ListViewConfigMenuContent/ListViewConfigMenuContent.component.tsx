@@ -26,7 +26,9 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
         templateSharingType,
         ...passOnProps
     } = props;
-    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<'NEW' | 'REPLACE' | 'DELETE' | 'SHARING' | null>(null);
+    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<
+        'NEW' | 'REPLACE' | 'DELETE' | 'SHARING' | null
+    >(null);
     const templateMaintenanceInstance = useRef<any>(null);
 
     const handleClose = useCallback(() => {

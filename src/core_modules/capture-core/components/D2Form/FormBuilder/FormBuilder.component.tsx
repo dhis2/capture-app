@@ -67,7 +67,12 @@ type Props = {
     fields: Array<FieldConfig>;
     values: { [id: string]: any };
     fieldsUI: { [id: string]: FieldUI };
-    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => void;
+    onUpdateFieldAsync: (
+        fieldId: string, 
+        fieldLabel: string, 
+        formBuilderId: string, 
+        callback: (...args: any[]) => any
+    ) => void;
     onUpdateField: (
         value: any, 
         uiState: FieldUI, 
@@ -572,7 +577,8 @@ export class FormBuilder extends React.Component<Props> {
         const asyncProps: any = {};
 
         if (props.async) {
-            asyncProps.onCommitAsync = (callback: (...args: any[]) => any) => this.handleCommitAsync(field.id, props.label, callback);
+            asyncProps.onCommitAsync = (callback: (...args: any[]) => any) => 
+                this.handleCommitAsync(field.id, props.label, callback);
             asyncProps.asyncUIState = this.asyncUIState[field.id];
         }
 

@@ -9,6 +9,8 @@ export const makeRelationshipTypesSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
         const program = getEventProgramThrowIfNotFound(programId);
-        return program.stage.relationshipTypesWhereStageIsFrom.filter((rt: any) => rt.to.entity === 'TRACKED_ENTITY_INSTANCE');
+        return program.stage.relationshipTypesWhereStageIsFrom.filter(
+            (rt: any) => rt.to.entity === 'TRACKED_ENTITY_INSTANCE'
+        );
     },
 );

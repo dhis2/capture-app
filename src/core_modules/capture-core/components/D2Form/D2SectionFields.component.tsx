@@ -227,7 +227,12 @@ export class D2SectionFieldsComponent extends Component<Props> {
         this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
     }
 
-    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => {
+    handleUpdateFieldAsync = (
+        fieldId: string, 
+        fieldLabel: string, 
+        formBuilderId: string, 
+        callback: (...args: any[]) => any
+    ) => {
         this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
     }
 

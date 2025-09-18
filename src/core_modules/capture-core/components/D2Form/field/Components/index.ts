@@ -28,7 +28,8 @@ export { DateTimeFieldForCustomForm } from './DateTimeField/DateTimeFieldForCust
 export { FileResourceFieldForCustomForm } from './FileResourceField/FileResourceFieldForCustomForm.component';
 export { ImageFieldForCustomForm } from './ImageField/ImageFieldForCustomForm.component';
 export { OptionSetSelectFieldForCustomForm } from './OptionSetField/OptionSetSelectFieldForCustomForm.component';
-export { MultiOptionSetSelectFieldForCustomForm } from './MultiOptionSetField/MultiOptionSetSelectFieldForCustomForm.component';
+export { MultiOptionSetSelectFieldForCustomForm } from 
+    './MultiOptionSetField/MultiOptionSetSelectFieldForCustomForm.component';
 export { OptionSetBoxesFieldForCustomForm } from './OptionSetField/OptionSetBoxesFieldForCustomForm.component';
 export { OrgUnitFieldForCustomForm } from './OrgUnitField/OrgUnitFieldForCustomForm.component';
 export { PolygonFieldForCustomForm } from './PolygonField/PolygonFieldForCustomForm.component';

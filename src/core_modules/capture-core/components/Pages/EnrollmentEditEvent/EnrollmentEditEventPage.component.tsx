@@ -80,7 +80,11 @@ export const EnrollmentEditEventPageComponent = ({
         />
         <EnrollmentPageLayout
             pageLayout={pageLayout}
-            currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
+            currentPage={
+                mode === EnrollmentPageKeys.EDIT_EVENT 
+                    ? EnrollmentPageKeys.EDIT_EVENT 
+                    : EnrollmentPageKeys.VIEW_EVENT
+            }
             availableWidgets={WidgetsForEnrollmentEventEdit}
             userInteractionInProgress={userInteractionInProgress}
             onBackToMainPage={onBackToMainPage}

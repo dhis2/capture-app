@@ -10,7 +10,10 @@ export {
 } from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.actions';
 
 // epics
-export { cancelNewEventEpic, cancelNewEventLocationChangeEpic } from './DataEntryWrapper/DataEntry/epics/cancelNewSingleEvent.epics';
+export { 
+    cancelNewEventEpic, 
+    cancelNewEventLocationChangeEpic 
+} from './DataEntryWrapper/DataEntry/epics/cancelNewSingleEvent.epics';
 export {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,

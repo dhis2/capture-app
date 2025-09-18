@@ -263,7 +263,9 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         classes,
     } = props;
 
-    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(props.visibleSelectorId ?? null);
+    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(
+        props.visibleSelectorId ?? null
+    );
     const defaultFiltersOnly = useMemo(() =>
         (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);
     const defaultFiltersOnlyCount = defaultFiltersOnly.length;

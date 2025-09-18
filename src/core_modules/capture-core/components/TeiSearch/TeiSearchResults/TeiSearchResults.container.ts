@@ -22,5 +22,9 @@ const mapStateToProps = (state: any, props: OwnProps) => {
 const mapDispatchToProps = () => ({});
 
 export const TeiSearchResults = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: any) => (!props.resultsLoading))(TeiSearchResultsComponent),
+    withLoadingIndicator(
+        () => ({ padding: '100px 0' }), 
+        null, 
+        (props: any) => (!props.resultsLoading)
+    )(TeiSearchResultsComponent),
 );

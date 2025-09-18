@@ -88,7 +88,11 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, trackedEntityInstanceAttributes);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
+        teiId, 
+        program as any, 
+        trackedEntityInstanceAttributes
+    );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 

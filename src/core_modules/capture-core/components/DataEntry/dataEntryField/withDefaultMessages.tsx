@@ -36,7 +36,10 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             let messageElement;
 
             if (validationError) {
-                messageElement = FieldMessages.createMessageElement(validationError, classNames(classes.error, classes.base));
+                messageElement = FieldMessages.createMessageElement(
+                    validationError, 
+                    classNames(classes.error, classes.base)
+                );
             }
 
             return messageElement;

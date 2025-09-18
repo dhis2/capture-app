@@ -51,4 +51,5 @@ const WidgetNonCollapsiblePlain = ({
     </div>
 );
 
-export const WidgetNonCollapsible = withStyles(styles)(WidgetNonCollapsiblePlain) as ComponentType<WidgetNonCollapsiblePropsPlain>;
+export const WidgetNonCollapsible = withStyles(styles)(WidgetNonCollapsiblePlain) as 
+    ComponentType<WidgetNonCollapsiblePropsPlain>;

@@ -65,7 +65,8 @@ const createComponentProps = (props: any, componentProps: any) => ({
     ...componentProps,
 });
 
-const getOrientation = (formHorizontal: boolean | null) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getOrientation = (formHorizontal: boolean | null) => 
+    (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(

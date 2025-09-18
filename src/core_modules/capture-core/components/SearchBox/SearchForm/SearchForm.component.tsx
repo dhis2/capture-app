@@ -160,7 +160,11 @@ const SearchFormIndex = ({
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, resultsPageSize });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId, resultsPageSize });
+                    searchViaAttributesOnScopeTrackedEntityType({ 
+                        trackedEntityTypeId: searchScopeId, 
+                        formId, 
+                        resultsPageSize 
+                    });
                     break;
                 default:
                     break;

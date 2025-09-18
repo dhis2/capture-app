@@ -30,7 +30,9 @@ export function convertValue(value: any, type: keyof typeof dataElementTypes, me
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    return valueConvertersForType[type] ? valueConvertersForType[type](value, metaElement.id) : equals(value, metaElement.id);
+    return valueConvertersForType[type] ? 
+        valueConvertersForType[type](value, metaElement.id) : 
+        equals(value, metaElement.id);
 }
 
 export function convertValueToEqual(value: any, type: keyof typeof dataElementTypes, metaElement: DataElement) {

@@ -86,7 +86,9 @@ export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessAct
         },
     });
 
-export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: {
+export const startCreateNewAfterCompleting = ({ 
+    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages 
+}: {
     enrollmentId: string;
     isCreateNew?: boolean;
     orgUnitId?: string;

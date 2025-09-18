@@ -219,7 +219,9 @@ export const programIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
         map(({ payload: { programId } }) =>
-            showErrorViewOnEnrollmentPage({ error: i18n.t('Program with id "{{programId}}" does not exist', { programId }) })),
+            showErrorViewOnEnrollmentPage({ 
+                error: i18n.t('Program with id "{{programId}}" does not exist', { programId }) 
+            })),
     );
 
 // Epics for enrollments
@@ -263,7 +265,8 @@ export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleRes
         map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
         concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
             .pipe(
-                map(({ programOwners }: any) => programOwners.find((programOwner: any) => programOwner.program === programId)),
+                map(({ programOwners }: any) => 
+                    programOwners.find((programOwner: any) => programOwner.program === programId)),
                 filter(programOwner => programOwner),
                 concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
                     .pipe(
@@ -271,7 +274,10 @@ export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleRes
                             if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                                navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);
+                                navigate(`/enrollment?${buildUrlQueryString({ 
+                                    ...restOfQueries, 
+                                    orgUnitId: programOwner.orgUnit 
+                                })}`);
                             }
                             return EMPTY;
                         }),

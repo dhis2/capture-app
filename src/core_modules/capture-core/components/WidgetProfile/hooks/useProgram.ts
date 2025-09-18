@@ -32,7 +32,8 @@ export const useProgram = (programId: string) => {
                 typedProgram.trackedEntityType.changelogEnabled = typedProgram.trackedEntityType.allowAuditLog;
                 delete typedProgram.trackedEntityType.allowAuditLog;
             }
-            typedProgram.programTrackedEntityAttributes = typedProgram.programTrackedEntityAttributes.map((attribute: any) => {
+            typedProgram.programTrackedEntityAttributes = typedProgram.programTrackedEntityAttributes.map(
+                (attribute: any) => {
                 const tea = attribute.trackedEntityAttribute;
                 if (tea.optionSet) {
                     tea.optionSet.optionGroups = optionGroups[tea.optionSet.id];

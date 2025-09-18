@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-18T10:16:30.197Z\n"
-"PO-Revision-Date: 2025-09-18T10:16:30.197Z\n"
+"POT-Creation-Date: 2025-09-18T10:21:49.836Z\n"
+"PO-Revision-Date: 2025-09-18T10:21:49.836Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1025,13 +1025,6 @@ msgstr "Create new"
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
 
@@ -1155,13 +1148,6 @@ msgstr "You do not have access to delete this enrollment"
 
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
-
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
-msgstr ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
 
 msgid "Yes, delete enrollment."
 msgstr "Yes, delete enrollment."

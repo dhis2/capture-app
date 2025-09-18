@@ -30,7 +30,11 @@ export const eventRelationshipsLoaded = () =>
 export const eventCancelNewRelationship = () =>
     actionCreator(actionTypes.EVENT_CANCEL_NEW_RELATIONSHIP)({});
 
-export const requestAddEventRelationship = (relationshipType: { id: string, name: string }, entity: any, entityType: string) =>
+export const requestAddEventRelationship = (
+    relationshipType: { id: string, name: string }, 
+    entity: any, 
+    entityType: string
+) =>
     actionCreator(actionTypes.REQUEST_ADD_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType });
 
 export const eventRelationshipAlreadyExists = (message: string) =>
@@ -45,8 +49,14 @@ export const saveEventRelationshipNewTei = (clientData: any, selections: any, cl
                 data: { trackedEntities: [clientData.to.data] },
                 clientId,
             },
-            commit: { type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS, meta: { clientData, selections, clientId } },
-            rollback: { type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED, meta: { clientData, selections, clientId } },
+            commit: { 
+                type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS, 
+                meta: { clientData, selections, clientId } 
+            },
+            rollback: { 
+                type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED, 
+                meta: { clientData, selections, clientId } 
+            },
         },
     });
 

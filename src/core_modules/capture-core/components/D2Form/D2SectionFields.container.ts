@@ -35,7 +35,9 @@ const mapDispatchToProps = (dispatch: any) => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
 
-    const mergedProps = ownProps.onUpdateField ? { ...defaultMergedProps, onUpdateField: ownProps.onUpdateField } : defaultMergedProps;
+    const mergedProps = ownProps.onUpdateField ? 
+        { ...defaultMergedProps, onUpdateField: ownProps.onUpdateField } : 
+        defaultMergedProps;
     return mergedProps;
 };
 

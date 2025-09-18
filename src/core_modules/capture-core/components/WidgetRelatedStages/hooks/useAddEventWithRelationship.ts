@@ -43,7 +43,11 @@ export const useAddEventWithRelationship = ({
                 onUpdateOrAddEnrollmentEvents && 
                     onUpdateOrAddEnrollmentEvents((payload.serverData as any).events);
             },
-            onSuccess: (_, payload: { linkMode: string; eventIdToRedirectTo?: string; serverData: Record<string, unknown> }) => {
+            onSuccess: (_, payload: { 
+                linkMode: string; 
+                eventIdToRedirectTo?: string; 
+                serverData: Record<string, unknown> 
+            }) => {
                 setIsLinking(false);
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);

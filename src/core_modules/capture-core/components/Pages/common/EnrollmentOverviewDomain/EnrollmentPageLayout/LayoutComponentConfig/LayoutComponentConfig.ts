@@ -14,7 +14,8 @@ import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
 import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
 import type { Props as WidgetEnrollmentProps } from '../../../../../WidgetEnrollment/enrollment.types';
-import type { Props as NewEventWorkspaceWrapperProps } from '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
+import type { Props as NewEventWorkspaceWrapperProps } from 
+    '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
 import type { Props as WidgetEventEditProps } from '../../../../../WidgetEventEdit/widgetEventEdit.types';
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';

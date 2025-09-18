@@ -154,7 +154,9 @@ export class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId!) as TrackedEntityType;
+                o.trackedEntityType = this.trackedEntityTypeCollection.get(
+                    cachedProgram.trackedEntityTypeId!
+                ) as TrackedEntityType;
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {

@@ -1,6 +1,7 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { actionTypes as editEventDataEntryActionTypes } from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
+import { actionTypes as editEventDataEntryActionTypes } from 
+    '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 
 export const editEventPageDesc = createReducerDescription({
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {

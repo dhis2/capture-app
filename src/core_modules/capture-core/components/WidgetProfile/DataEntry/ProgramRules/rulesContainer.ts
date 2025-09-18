@@ -1,5 +1,11 @@
 import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
-import { getTrackedEntityAttributeId, getDataElementId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
+import { 
+    getTrackedEntityAttributeId, 
+    getDataElementId, 
+    getProgramId, 
+    getProgramRuleActions, 
+    getProgramStageId 
+} from '../helpers';
 
 const addProgramVariables = (program: any, programRuleVariables: any[]) => {
     program.programRuleVariables = programRuleVariables.map(programRulesVariable => ({

@@ -46,8 +46,9 @@ export const withInternalFilterHandler = () =>
 
             filterOrgUnits(filterText: string) {
                 const { scope, onSearchError, querySingleResource } = this.props;
-                const hierarchyProp =
-                    scope === orgUnitFieldScopes.USER_CAPTURE ? { withinUserHierarchy: true } : { withinUserSearchHierarchy: true };
+                const hierarchyProp = scope === orgUnitFieldScopes.USER_CAPTURE 
+                    ? { withinUserHierarchy: true } 
+                    : { withinUserSearchHierarchy: true };
                 this.setState({
                     inProgress: true,
                 });

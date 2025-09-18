@@ -3,7 +3,15 @@ import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Filters } from './Filters.component';
-import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter, StickyFilters } from '../types';
+import type { 
+    Column, 
+    FiltersOnly, 
+    AdditionalFilters, 
+    UpdateFilter, 
+    ClearFilter, 
+    RemoveFilter, 
+    StickyFilters 
+} from '../types';
 
 const getStyles: Readonly<any> = {
     filtersButtons: {

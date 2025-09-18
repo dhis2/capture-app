@@ -227,7 +227,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
-const getOrientation = (formHorizontal: boolean | null) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getOrientation = (formHorizontal: boolean | null) => 
+    (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const getGeometrySettings = () => ({
     isApplicable: (props: any) => {

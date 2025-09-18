@@ -60,7 +60,11 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
                 log.error(errorCreator(FILTER_RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'FilterOrgUnitRootsEpic' }),
                 );
-                return filterFormFieldOrgUnitsFailed(resultContainer.formId, resultContainer.elementId, FILTER_RETRIEVE_ERROR);
+                return filterFormFieldOrgUnitsFailed(
+                    resultContainer.formId, 
+                    resultContainer.elementId, 
+                    FILTER_RETRIEVE_ERROR
+                );
             }
 
             const { orgUnitArray, formId, elementId } = resultContainer;

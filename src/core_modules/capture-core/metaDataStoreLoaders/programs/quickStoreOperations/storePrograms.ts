@@ -81,7 +81,8 @@ const convert = (() => {
 
 const fieldsParam = 'id,displayName,displayShortName,description,programType,style,displayFrontPageList,useFirstStageDuringRegistration,onlyEnrollOnce,' +
 'displayIncidentDateLabel,displayEnrollmentDateLabel,minAttributesRequiredToSearch,' +
-'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,accessLevel,expiryPeriodType,expiryDays,' +
+'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
+'accessLevel,expiryPeriodType,expiryDays,' +
 'dataEntryForm[id,htmlCode],' +
 'access[*],' +
 'trackedEntityType[id],' +

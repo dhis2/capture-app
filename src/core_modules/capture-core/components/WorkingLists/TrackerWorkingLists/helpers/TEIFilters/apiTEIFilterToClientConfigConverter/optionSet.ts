@@ -17,7 +17,10 @@ const converterByType = {
     [dataElementTypes.TRUE_ONLY]: (rawValue: string) => rawValue === 'true' || null,
 };
 
-export const getOptionSetFilter = (filter: ApiDataFilterOptionSet, type: keyof typeof dataElementTypes): OptionSetFilterData => ({
+export const getOptionSetFilter = (
+    filter: ApiDataFilterOptionSet, 
+    type: keyof typeof dataElementTypes
+): OptionSetFilterData => ({
     usingOptionSet: true,
     values: filter.in
         .map(value => (converterByType[type] ? converterByType[type](value) : value)),

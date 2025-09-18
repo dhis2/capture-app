@@ -24,7 +24,9 @@ export const withConvertedOptionSet = () =>
             buildFormOptionSet() {
                 const optionSet = this.props.optionSet;
                 if (!optionSet.dataElement) {
-                    log.error(errorCreator(OptionSetConverter.errorMessages.DATAELEMENT_MISSING)({ OptionSetConverter: this }));
+                    log.error(errorCreator(OptionSetConverter.errorMessages.DATAELEMENT_MISSING)(
+                        { OptionSetConverter: this }
+                    ));
                     return null;
                 }
                 return optionSet.dataElement.getConvertedOptionSet(convertValue);

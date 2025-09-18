@@ -26,7 +26,8 @@ const isPluginElement = (attribute: ProgramTrackedEntityAttribute | PluginElemen
 const isProgramTrackedEntityAttribute = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is ProgramTrackedEntityAttribute =>
     !isPluginElement(attribute);
 
-const buildProgramSection = (programSection: any) => programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
+const buildProgramSection = (programSection: any) => 
+    programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
 
 const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
     if (!trackedEntityType) {
@@ -303,7 +304,9 @@ export const buildFormFoundation = async (
                     const builtProgramSection = buildProgramSection(programSection);
 
                     section = await buildSection({
-                        programTrackedEntityAttributes: builtProgramSection.map((id: string) => trackedEntityAttributeDictionary[id]),
+                        programTrackedEntityAttributes: builtProgramSection.map(
+                            (id: string) => trackedEntityAttributeDictionary[id]
+                        ),
                         trackedEntityAttributes,
                         optionSets,
                         sectionCustomLabel: programSection.displayFormName,
@@ -338,6 +341,8 @@ export const build = async (
     minorServerVersion: number,
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
+    const formFoundation = (await buildFormFoundation(
+        program, querySingleResource, minorServerVersion, dataEntryFormConfig
+    )) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

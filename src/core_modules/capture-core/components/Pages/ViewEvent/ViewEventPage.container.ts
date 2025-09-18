@@ -21,4 +21,6 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export const ViewEventPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventPageComponent)));
+export const ViewEventPage = connect(mapStateToProps)(
+    withLoadingIndicator()(withErrorMessageHandler()(ViewEventPageComponent))
+);

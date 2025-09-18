@@ -26,7 +26,10 @@ const buildFormValues = async ({
         {}
     );
     const formValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
+        (acc, currentValue) => ({ 
+            ...acc, 
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) 
+        }),
         {},
     );
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(

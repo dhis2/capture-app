@@ -22,7 +22,8 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     const { resetTeiId } = useResetTeiId();
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
-    const userInteractionInProgress = useSelector((state: ReduxState) => dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
+    const userInteractionInProgress = useSelector((state: ReduxState) => 
+        dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
 
     const handleResetProgramId = useCallback(
         () => resetProgramIdAndEnrollmentContext('enrollment', { teiId, programId }), [resetProgramIdAndEnrollmentContext, teiId, programId],

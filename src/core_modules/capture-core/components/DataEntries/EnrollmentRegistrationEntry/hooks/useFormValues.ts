@@ -104,7 +104,10 @@ const buildFormValues = async ({
         {}
     );
     const formValues = clientAttributesWithSubvalues?.reduce(
-        (acc, currentValue) => ({ ...acc, [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) }),
+        (acc, currentValue) => ({ 
+            ...acc, 
+            [currentValue.attribute]: convertClientToForm(currentValue.value, currentValue.valueType) 
+        }),
         {},
     );
     const searchClientValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: item.value }), {});

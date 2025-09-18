@@ -147,7 +147,10 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             this.prevFilteredOptions =
                 OptionsSelectVirtualizedPlain.getFilteredOptions(this.prevFilteredOptions, this.state.filterValue);
         }
-        this.prevFilteredOptions = OptionsSelectVirtualizedPlain.getFilteredOptions(this.props.options, this.state.filterValue);
+        this.prevFilteredOptions = OptionsSelectVirtualizedPlain.getFilteredOptions(
+            this.props.options, 
+            this.state.filterValue
+        );
         this.prevFilterValue = this.state.filterValue;
 
         return this.prevFilteredOptions;

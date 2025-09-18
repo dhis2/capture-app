@@ -37,7 +37,11 @@ class NewRelationshipPlain extends React.Component<Props> {
             return;
         }
 
-        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.name }, entity, relationshipType.to.entity);
+        this.props.onAddRelationship(
+            { id: relationshipType.id, name: relationshipType.name }, 
+            entity, 
+            relationshipType.to.entity
+        );
     }
 
     renderRelationship = (selectedRelationshipType: SelectedRelationshipType, props: any) => {

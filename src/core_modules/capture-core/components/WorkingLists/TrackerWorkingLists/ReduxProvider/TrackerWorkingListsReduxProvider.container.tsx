@@ -6,7 +6,8 @@ import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TRACKER_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './trackerWorkingListsReduxProvider.types';
-import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { navigateToEnrollmentOverview } from 
+    '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
 import { getDefaultTemplate } from '../helpers';
 

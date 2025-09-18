@@ -14,7 +14,12 @@ import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
-import { stringToTemporal, temporalToString, mapDhis2CalendarToTemporal, isCalendarSupported } from '../../capture-core-utils/date';
+import { 
+    stringToTemporal, 
+    temporalToString, 
+    mapDhis2CalendarToTemporal, 
+    isCalendarSupported 
+} from '../../capture-core-utils/date';
 
 type AgeValues = {
     date?: string | null;

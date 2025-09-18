@@ -23,7 +23,12 @@ const styles = () => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string, teiId?: string) => (
+const translatedTextWithStylesForProgram = (
+    trackedEntityName: string, 
+    programName: string, 
+    orgUnitName: string, 
+    teiId?: string
+) => (
     teiId ? <span>
         {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
             programName,
@@ -83,7 +88,9 @@ const EnrollmentRegistrationEntryPlain =
                           enrollmentMetadata={enrollmentMetadata as Enrollment}
                           id={id}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
-                          onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future')}
+                          onGetUnsavedAttributeValues={() => 
+                              console.log('onGetUnsavedAttributeValues will be here in the future')
+                          }
                           {...rest}
                       />
                       <div className={classes.actions}>
@@ -111,7 +118,12 @@ const EnrollmentRegistrationEntryPlain =
                       </div>
 
                       <InfoIconText>
-                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name, teiId)}
+                          {translatedTextWithStylesForProgram(
+                              trackedEntityName.toLowerCase(), 
+                              programName, 
+                              orgUnit.name, 
+                              teiId
+                          )}
                       </InfoIconText>
                   </>
               }

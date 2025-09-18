@@ -75,7 +75,8 @@ export const useBulkDataEntryDatastoreConfigurations = (programId: string) => {
                     return [];
                 }
 
-                return dataStoreConfigurationValidated?.config.reduce((acc: DataStoreConfiguration[], configuration: any) => {
+                return dataStoreConfigurationValidated?.config.reduce(
+                    (acc: DataStoreConfiguration[], configuration: any) => {
                     if (configuration.programId === programId) {
                         const configurationWithLocale: DataStoreConfiguration = {
                             ...configuration,

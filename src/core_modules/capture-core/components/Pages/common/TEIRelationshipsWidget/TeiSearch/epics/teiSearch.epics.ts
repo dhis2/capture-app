@@ -261,7 +261,10 @@ export const teiNewSearchEpic = (action$: any, store: any) =>
 
             const contextId = currentTeiSearch.selectedProgramId || currentTeiSearch.selectedTrackedEntityTypeId;
 
-            const searchGroups = getSearchGroups(currentTeiSearch.selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
+            const searchGroups = getSearchGroups(
+                currentTeiSearch.selectedTrackedEntityTypeId, 
+                currentTeiSearch.selectedProgramId
+            );
 
             const addFormDataActions = searchGroups ? searchGroups.map((sg: any, i: number) => {
                 const key = getSearchFormId(searchId, contextId, i.toString());

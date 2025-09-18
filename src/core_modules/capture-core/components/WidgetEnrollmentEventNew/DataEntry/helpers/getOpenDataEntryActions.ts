@@ -55,7 +55,10 @@ export const getOpenDataEntryActions =
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
                 id: `attributeCategoryOptions-${category.id}`,
                 type: 'TEXT',
-                validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+                validatorContainers: getCategoryOptionsValidatorContainers(
+                    { categories: programCategory.categories }, 
+                    category.id
+                ),
             })));
         }
         return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude, defaultDataEntryValues);
