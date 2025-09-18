@@ -72,7 +72,11 @@ const valueConvertersForType = {
     [dataElementTypes.POLYGON]: () => 'Polygon',
 };
 
-export function convertValue(value: any, type: keyof typeof dataElementTypes, dataElement?: DataElement | null) {
+export function convertValue(
+    value: any, 
+    type: keyof typeof dataElementTypes, 
+    dataElement?: DataElement | null
+) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

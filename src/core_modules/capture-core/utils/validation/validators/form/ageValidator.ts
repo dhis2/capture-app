@@ -55,7 +55,10 @@ function isAllEmpty(value: AgeValues) {
 }
 
 
-export function isValidAge(value: any, internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
+export function isValidAge(
+    value: any, 
+    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+) {
     if (isAllEmpty(value)) {
         return false;
     }

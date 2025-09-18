@@ -1,4 +1,7 @@
-export function isValidDate(value: string | null | undefined, internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
+export function isValidDate(
+    value: string | null | undefined, 
+    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+) {
     if (!value) {
         return { valid: false, errorMessage: null };
     }

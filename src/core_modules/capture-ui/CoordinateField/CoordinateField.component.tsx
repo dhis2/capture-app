@@ -192,8 +192,12 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     );
 
     renderLatitude = () => {
-        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        const { 
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps 
+        } = this.props;
+        const { 
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses 
+        } = classes || {};
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
@@ -210,8 +214,12 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     renderLongitude = () => {
-        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        const { 
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps 
+        } = this.props;
+        const { 
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses 
+        } = classes || {};
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
