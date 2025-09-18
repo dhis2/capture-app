@@ -4,8 +4,7 @@ import {
 } from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
 import {
     listId,
-} from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList/' +
-    'RecentlyAddedEventsList.const';
+} from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 
 export const recentlyAddedEventsDesc = createReducerDescription({
