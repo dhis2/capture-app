@@ -26,7 +26,8 @@ const useApiUtils = () => {
     // We need the ABSOLUTE base url for the instance when building the IndexedDB caches
     // The baseUrl of the root object returned by useConfig is not reliable here as it returns a relative url for: 
     // some backend versions (v41 and below) / app-shell versions
-    // The latest app-shell will inject the backend's contextPath into the app as baseUrl for backend versions 42 and above, but since we currently need support for older backends we are grabbing the contextPath directly
+    // The latest app-shell will inject the backend's contextPath into the app as baseUrl for backend versions 42 and above, 
+    // but since we currently need support for older backends we are grabbing the contextPath directly
     const { serverVersion, systemInfo: { contextPath: absoluteBaseUrl } = {} } = useConfig();
     const { fromClientDate } = useTimeZoneConversion();
     return useMemo(() => ({

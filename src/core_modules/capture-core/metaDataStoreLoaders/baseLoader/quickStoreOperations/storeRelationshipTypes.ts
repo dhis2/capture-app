@@ -5,7 +5,10 @@ export const storeRelationshipTypes = () => {
     const query = {
         resource: 'relationshipTypes',
         params: {
-            fields: 'id,displayName,bidirectional,fromToName,toFromName,fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name,program[id]]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name,program[id]]],access[*],referral',
+            fields: 'id,displayName,bidirectional,fromToName,toFromName,' +
+                'fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name,program[id]]],' +
+                'toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name,program[id]]],' +
+                'access[*],referral',
         },
     };
 

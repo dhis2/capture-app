@@ -166,7 +166,8 @@ export const enrollmentDomainDesc = createReducerDescription(
         [ROLLBACK_ENROLLMENT_EVENTS]: (state, { payload: { events } }) => {
             const eventsToRollback = events.map(event => event.event);
 
-            // Iterate over the events in state.enrollment.events and rollback the ones that are in eventsToRollback. If the event has dataToRollback, use that, otherwise remove it from state.enrollment.events
+            // Iterate over the events in state.enrollment.events and rollback the ones that are in eventsToRollback. 
+            // If the event has dataToRollback, use that, otherwise remove it from state.enrollment.events
             const enrollmentEvents = state.enrollment.events.map((event) => {
                 if (eventsToRollback.includes(event.event)) {
                     return event.dataToRollback ? event.dataToRollback : null;

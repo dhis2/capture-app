@@ -89,14 +89,16 @@ const fieldsParam = 'id,displayName,displayShortName,description,programType,sty
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
 'userRoles[id,displayName],' +
-// eslint-disable-next-line max-len
-'programStages[id,access,autoGenerateEvent,openAfterEnrollment,hideDueDate,allowGenerateNextVisit,remindCompleted,repeatable,generatedByEnrollmentDate,reportDateToUse,blockEntryForm,minDaysFromStart,name,displayName,description,displayExecutionDateLabel,displayDueDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
+'programStages[id,access,autoGenerateEvent,openAfterEnrollment,hideDueDate,allowGenerateNextVisit,' +
+'remindCompleted,repeatable,generatedByEnrollmentDate,reportDateToUse,blockEntryForm,minDaysFromStart,' +
+'name,displayName,description,displayExecutionDateLabel,displayDueDateLabel,formType,featureType,' +
+'validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode]' +
 'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
-// eslint-disable-next-line max-len
-'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id]]]' +
+'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,' +
+'renderType[*],dataElement[id]]]' +
 'programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes],' +
-// eslint-disable-next-line max-len
-'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate]';
+'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,' +
+'renderOptionsAsRadio,allowFutureDate]';
 
 export const storePrograms = (programIds: Array<string>) => {
     const query = {
