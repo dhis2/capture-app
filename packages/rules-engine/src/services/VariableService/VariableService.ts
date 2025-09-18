@@ -61,7 +61,9 @@ export class VariableService {
     environment: typeof environmentTypes[keyof typeof environmentTypes];
 
     onProcessValue: (value: any, type: typeof typeKeys[keyof typeof typeKeys]) => any;
-    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => RuleVariable | null };
+    mapSourceTypeToGetterFn: {
+        [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => RuleVariable | null
+    };
     defaultValues: any;
     structureEvents: (currentEvent?: EventData, events?: EventsData) => EventsDataContainer;
     constructor(
@@ -164,7 +166,10 @@ export class VariableService {
         const variablesWithContextVariables = { ...variables, ...this.getContextVariables(sourceData) };
 
         // add constant variables
-        const variablesWithContextAndConstantVariables = { ...variablesWithContextVariables, ...this.getConstantVariables(constants) };
+        const variablesWithContextAndConstantVariables = {
+            ...variablesWithContextVariables,
+            ...this.getConstantVariables(constants),
+        };
 
         return variablesWithContextAndConstantVariables;
     }
@@ -178,7 +183,9 @@ export class VariableService {
             log.warn(`Variable ${variableHashKey} was not defined.`);
         } else {
             const { variableType } = variableHash;
-            const variableValue = data === null ? this.defaultValues[variableType] : normalizeRuleVariable(data, variableType);
+            const variableValue = data === null
+                ? this.defaultValues[variableType]
+                : normalizeRuleVariable(data, variableType);
 
             variablesHash[variableHashKey] = {
                 ...variableHash,
@@ -221,7 +228,11 @@ export class VariableService {
         const dataElementId = programVariable.dataElementId;
         const dataElement = dataElementId && dataElements && dataElements[dataElementId];
         if (!dataElement) {
-            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid dataelement id (id: ${dataElementId || ''})`);
+            log.warn(
+                `Variable id:${programVariable.id} name:${
+                    programVariable.displayName
+                } contains an invalid dataelement id (id: ${dataElementId || ''})`,
+            );
             return this.buildVariable(
                 null,
                 typeKeys.TEXT, {
@@ -233,11 +244,18 @@ export class VariableService {
         return null;
     }
 
-    preCheckTrackedEntitySpecificSourceType(programVariable: ProgramRuleVariable, trackedEntityAttributes?: TrackedEntityAttributes | null) {
+    preCheckTrackedEntitySpecificSourceType(
+        programVariable: ProgramRuleVariable,
+        trackedEntityAttributes?: TrackedEntityAttributes | null,
+    ) {
         const attributeId = programVariable.trackedEntityAttributeId;
         const attribute = attributeId && trackedEntityAttributes && trackedEntityAttributes[attributeId];
         if (!attribute) {
-            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`);
+            log.warn(
+                `Variable id:${programVariable.id} name:${
+                    programVariable.displayName
+                } contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`,
+            );
             return this.buildVariable(
                 null,
                 typeKeys.TEXT, {
@@ -270,9 +288,19 @@ export class VariableService {
         optionSets: OptionSets,
     ) {
         const value = this.onProcessValue(rawValue, valueType);
-        return (value !== null && useNameForOptionSet && dataElements && dataElements[dataElementId] && dataElements[dataElementId].optionSetId) ?
-            OptionSetHelper.getName(optionSets[dataElements[dataElementId].optionSetId].options, value, dataElements[dataElementId].valueType) :
-            value;
+        return (
+            value !== null &&
+            useNameForOptionSet &&
+            dataElements &&
+            dataElements[dataElementId] &&
+            dataElements[dataElementId].optionSetId
+        )
+            ? OptionSetHelper.getName(
+                optionSets[dataElements[dataElementId].optionSetId].options,
+                value,
+                dataElements[dataElementId].valueType,
+            )
+            : value;
     }
 
     getVariableForCalculatedValue(programVariable: ProgramRuleVariable): RuleVariable | null {
@@ -289,7 +317,9 @@ export class VariableService {
         programVariable: ProgramRuleVariable,
         sourceData: SourceData): RuleVariable | null {
         const trackedEntityAttributeId: string = programVariable.trackedEntityAttributeId as string;
-        const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes?.[trackedEntityAttributeId] as TrackedEntityAttribute;
+        const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes?.[
+            trackedEntityAttributeId
+        ] as TrackedEntityAttribute;
         const attributeValue = sourceData.selectedEntity ? sourceData.selectedEntity[trackedEntityAttributeId] : null;
         const valueType = (programVariable.useNameForOptionSet && attribute.optionSetId) ? 'TEXT' : attribute.valueType;
         const value = this.getVariableValue(
@@ -339,10 +369,19 @@ export class VariableService {
         );
     }
 
-    getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): RuleVariable | null {
+    getVariableForNewestEventProgramStage(
+        programVariable: ProgramRuleVariable,
+        sourceData: SourceData,
+    ): RuleVariable | null {
         const programStageId = programVariable.programStageId;
         if (!programStageId) {
-            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} does not have a programstage defined, despite that the variable has sourcetype${programVariable.programRuleVariableSourceType}`);
+            log.warn(
+                `Variable id:${programVariable.id} name:${
+                    programVariable.displayName
+                } does not have a programstage defined, despite that the variable has sourcetype${
+                    programVariable.programRuleVariableSourceType
+                }`,
+            );
             return null;
         }
 
@@ -383,14 +422,25 @@ export class VariableService {
         return this.getVariableContainingAllValues(programVariable, sourceData, events.slice(0, currentEventIndex));
     }
 
-    getVariableContainingAllValues(programVariable: ProgramRuleVariable, sourceData: SourceData, events: EventsData): RuleVariable | null {
+    getVariableContainingAllValues(
+        programVariable: ProgramRuleVariable,
+        sourceData: SourceData,
+        events: EventsData,
+    ): RuleVariable | null {
         const dataElementId: string = programVariable.dataElementId as string;
         const dataElement: DataElement = sourceData.dataElements?.[dataElementId] as DataElement;
 
         const valueType = (programVariable.useNameForOptionSet && dataElement.optionSetId) ? 'TEXT' : dataElement.valueType;
         const allValues = events
             .map(event =>
-                this.getVariableValue(event[dataElementId], valueType, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
+                this.getVariableValue(
+                    event[dataElementId],
+                    valueType,
+                    dataElementId,
+                    programVariable.useNameForOptionSet,
+                    sourceData.dataElements,
+                    sourceData.optionSets,
+                ),
             )
             .filter(value => value !== null);
 
@@ -487,7 +537,10 @@ export class VariableService {
         }
 
         if (eventsContainer) {
-            variables.event_count = this.buildRawContextVariable((eventsContainer.all && eventsContainer.all.length) || 0, typeKeys.INTEGER);
+            variables.event_count = this.buildRawContextVariable(
+                (eventsContainer.all && eventsContainer.all.length) || 0,
+                typeKeys.INTEGER,
+            );
         }
 
         return variables;
@@ -514,15 +567,17 @@ export class VariableService {
     }
 
     getConstantVariables(constants?: Constants | null) {
-        const constantVariables = constants ? constants.reduce((accConstantVariables, constant) => {
-            accConstantVariables[constant.id] = this.buildVariable(
-                constant.value,
-                typeKeys.INTEGER, {
-                    variablePrefix: variablePrefixes.CONSTANT_VARIABLE,
-                },
-            );
-            return accConstantVariables;
-        }, {}) : {};
+        const constantVariables = constants
+            ? constants.reduce((accConstantVariables, constant) => {
+                accConstantVariables[constant.id] = this.buildVariable(
+                    constant.value,
+                    typeKeys.INTEGER, {
+                        variablePrefix: variablePrefixes.CONSTANT_VARIABLE,
+                    },
+                );
+                return accConstantVariables;
+            }, {})
+            : {};
 
         return constantVariables;
     }
