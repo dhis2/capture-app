@@ -134,7 +134,8 @@ function isPositiveValueCountPresent(rule: any, action: any) {
 }
 
 function replacePositiveValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
-    let positiveValueCountText = variableObjectsCurrentExpression.reduce((accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
+    let positiveValueCountText = variableObjectsCurrentExpression.reduce(
+        (accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
         const currentText = `d2:countifzeropos('${variableCurrentRule.displayName}')`;
         accPositiveValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
         return accPositiveValueCountText;

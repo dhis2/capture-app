@@ -70,7 +70,9 @@ export const useInjectDataFetchingMetaToUpdateList = (
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     const { id, type, visible, unique } = defaultColumn;
-                    const mainProperty = 'mainProperty' in defaultColumn && defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
+                    const mainProperty = 'mainProperty' in defaultColumn && 
+                        defaultColumn.mainProperty && 
+                        typeof defaultColumn.mainProperty === 'boolean'
                         ? defaultColumn.mainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn

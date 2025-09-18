@@ -134,7 +134,9 @@ class D2FilePlain extends Component<Props, State> {
         const fileUrl = this.getFileUrl();
         const isVertical = orientation === orientations.VERTICAL;
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
-        const selectedFileTextContainerClass = isVertical ? classes.verticalSelectedFileTextContainer : classes.horizontalSelectedFileTextContainer;
+        const selectedFileTextContainerClass = isVertical ? 
+            classes.verticalSelectedFileTextContainer : 
+            classes.horizontalSelectedFileTextContainer;
         return (
             <div onBlur={this.handleBlur}>
                 <input

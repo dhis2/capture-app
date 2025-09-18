@@ -71,7 +71,11 @@ class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props &
                 <div>
                     {i18n.t(
                         'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
-                        { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC, interpolation: { escapeValue: false } },
+                        { 
+                            trackedEntityTypeName: trackedEntityTypeNameLC, 
+                            attributeName: attributeNameLC, 
+                            interpolation: { escapeValue: false } 
+                        },
                     )}
                 </div>
                 <div>

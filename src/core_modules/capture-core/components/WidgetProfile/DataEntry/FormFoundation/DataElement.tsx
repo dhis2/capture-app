@@ -71,7 +71,9 @@ const onValidateOnScopeTrackedEntityType = (
     return requestPromise
         .then((result) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-            const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+            const otherTrackedEntityInstances = apiTrackedEntities.filter(
+                (item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId
+            );
             const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
@@ -153,7 +155,9 @@ const buildDataElementUnique = (
             }
             return requestPromise.then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(
+                    (item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId
+                );
                 if (otherTrackedEntityInstances.length === 0) {
                     return onValidateOnScopeTrackedEntityType(
                         dataEntry,

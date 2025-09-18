@@ -35,7 +35,10 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
         formsSectionsFieldsUI: store.formsSectionsFieldsUI && store.formsSectionsFieldsUI[ruleId],
     }));
 
-    const fieldsValidated = useMemo(() => Object.values(formsSectionsFieldsUI).every(({ valid }: any) => valid === true), [formsSectionsFieldsUI]);
+    const fieldsValidated = useMemo(
+        () => Object.values(formsSectionsFieldsUI).every(({ valid }: any) => valid === true), 
+        [formsSectionsFieldsUI]
+    );
     const rulesValidated = useMemo(
         () =>
             Object.values(rulesEffectsMessages).every(({ error, errorOnComplete }: any) => !error && !errorOnComplete) &&

@@ -18,7 +18,8 @@ export const useProgramStages = (program: Program, programStages?: ProgramStages
     if (program && programStages) {
         program.stages.forEach((item) => {
             const { id, name, icon, stageForm } = item;
-            const { hideDueDate, programStageDataElements, repeatable, enableUserAssignment, dataAccess } = programStages.find(p => p.id === id) || {};
+            const { hideDueDate, programStageDataElements, repeatable, enableUserAssignment, dataAccess } = 
+                programStages.find(p => p.id === id) || {};
             if (!programStageDataElements) {
                 log.error(errorCreator(i18n.t('Program stage not found'))(id));
             } else {

@@ -62,7 +62,9 @@ export const searchViaAttributesOnScopeTrackedEntityType = ({
     pageSize?: number;
     triggeredFrom?: string;
 }) =>
-    actionCreator(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, page, pageSize, triggeredFrom });
+    actionCreator(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)(
+        { trackedEntityTypeId, formId, page, pageSize, triggeredFrom }
+    );
 
 export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1, pageSize, triggeredFrom }: {
     programId: string;

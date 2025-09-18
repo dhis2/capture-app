@@ -40,7 +40,8 @@ const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: 
         if (program && attributes) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { attributes: programTrackedEntityAttributes } = program;
-            const computedAttributes = await programTrackedEntityAttributes?.reduce(async (promisedAcc: Promise<any[]>, programTrackedEntityAttribute) => {
+            const computedAttributes = await programTrackedEntityAttributes?.reduce(
+                async (promisedAcc: Promise<any[]>, programTrackedEntityAttribute) => {
                 const { id, formName, optionSet, type, unique } = programTrackedEntityAttribute;
                 const foundAttribute = attributes?.find(item => item.attribute === id);
                 let value;

@@ -83,7 +83,10 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const isEditable = useMemo(() =>
-        Array.isArray(trackedEntityInstanceAttributes) && trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
+        Array.isArray(trackedEntityInstanceAttributes) && 
+        trackedEntityInstanceAttributes.length > 0 && 
+        trackedEntityTypeAccess?.data?.write && 
+        !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
@@ -168,7 +171,10 @@ const WidgetProfilePlain = ({
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
                                 canWriteData={canWriteData}
-                                trackedEntity={trackedEntity ? { trackedEntity: trackedEntity.trackedEntity || teiId } : { trackedEntity: teiId }}
+                                trackedEntity={trackedEntity ? 
+                                    { trackedEntity: trackedEntity.trackedEntity || teiId } : 
+                                    { trackedEntity: teiId }
+                                }
                                 onDeleteSuccess={onDeleteSuccess}
                                 displayChangelog={!!displayChangelog}
                                 trackedEntityData={clientAttributesWithSubvalues}

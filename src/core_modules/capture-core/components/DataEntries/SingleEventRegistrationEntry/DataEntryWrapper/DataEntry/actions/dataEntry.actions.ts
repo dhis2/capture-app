@@ -65,7 +65,10 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: any, relati
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
+            commit: { 
+                type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, 
+                meta: { selections, relationshipData, triggerAction: actionType } 
+            },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE, meta: { selections } },
         },
     });
@@ -98,7 +101,10 @@ export const startSaveTeiForNewEventRelationship = (
                 method: effectMethods.POST,
                 data: teiPayload,
             },
-            commit: { type: actionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction, relationshipData, relationshipClientId } },
+            commit: { 
+                type: actionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED, 
+                meta: { selections, triggerAction, relationshipData, relationshipClientId } 
+            },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI, meta: { selections, triggerAction } },
         },
     });
@@ -158,7 +164,10 @@ export const startSaveNewEventAddAnother =
                 data: serverData,
                 clientId,
             },
-            commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
+            commit: { 
+                type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, 
+                meta: { selections, relationshipData, triggerAction: actionType } 
+            },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections, clientId } },
         },
     });
@@ -179,7 +188,10 @@ export const startSaveNewEventAndReturnToList =
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
+            commit: { 
+                type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, 
+                meta: { selections, relationshipData, triggerAction: actionType } 
+            },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_IN_STAGE, meta: { selections } },
         },
     });

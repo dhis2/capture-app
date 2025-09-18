@@ -251,7 +251,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    onGetCustomFieldLabeClass: (props: any) => 
+                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
@@ -268,7 +269,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    onGetCustomFieldLabeClass: (props: any) => 
+                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),

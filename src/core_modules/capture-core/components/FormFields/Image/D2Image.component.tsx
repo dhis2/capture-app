@@ -148,7 +148,9 @@ class D2ImagePlain extends Component<Props, State> {
         const imageUrl = this.getImageUrl();
         const previewUrl = this.getPreviewUrl();
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
-        const selectedImageTextContainerClass = isVertical ? classes.verticalSelectedImageTextContainer : classes.horizontalSelectedImageTextContainer;
+        const selectedImageTextContainerClass = isVertical ? 
+            classes.verticalSelectedImageTextContainer : 
+            classes.horizontalSelectedImageTextContainer;
         return (
             <div onBlur={this.handleBlur}>
                 <input

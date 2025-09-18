@@ -138,7 +138,8 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                                 <IncompleteSelectionsMessage>
                                     {i18n.t(
-                                        'The category option is not valid for the selected organisation unit. Please select a valid combination.',
+                                        'The category option is not valid for the selected organisation unit. ' +
+                                        'Please select a valid combination.',
                                     )}
                                 </IncompleteSelectionsMessage>
                             )

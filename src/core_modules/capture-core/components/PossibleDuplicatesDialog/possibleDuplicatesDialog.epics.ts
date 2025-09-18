@@ -73,7 +73,9 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     return Promise.resolve(duplicatesReviewSkipped());
                 }
 
-                const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ? { program: selectedScopeId } : { trackedEntityType: selectedScopeId };
+                const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ? 
+                    { program: selectedScopeId } : 
+                    { trackedEntityType: selectedScopeId };
                 const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                     ? 'orgUnitMode'
                     : 'ouMode';

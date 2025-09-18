@@ -35,7 +35,8 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
         },
     );
     const { mutate: onDeleteRelationship } = useMutation(
-        ({ relationshipId }: { relationshipId: string }) => dataEngine.mutate(deleteRelationshipMutation as any, { variables: { relationshipId } }),
+        ({ relationshipId }: { relationshipId: string }) => 
+            dataEngine.mutate(deleteRelationshipMutation as any, { variables: { relationshipId } }),
         {
             onMutate: ({ relationshipId }: { relationshipId: string }) => {
                 const prevRelationships = queryClient

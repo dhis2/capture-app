@@ -32,7 +32,8 @@ const useApiUtils = () => {
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
         // UPDATE 2025.08.28: This is actually getting the RELATIVE api path in a prod enviroment. When we update app-runtime, it will probably get the absolute path for backend versions 42 and above.
-        // This is used in the epics for making api requests, so should not matter if absolute or relative, but could be good to refactor at some point.
+        // This is used in the epics for making api requests, so should not matter if absolute or relative,
+        // but could be good to refactor at some point.
         // @ts-expect-error - keeping original functionality as before ts rewrite
         absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
         serverVersion,

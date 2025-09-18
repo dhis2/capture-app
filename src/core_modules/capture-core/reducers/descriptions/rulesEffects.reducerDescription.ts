@@ -20,7 +20,8 @@ export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_FIELD];
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && 
+            action.payload.rulesEffects[effectActions.HIDE_FIELD];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
                 const [value] = hideEffects[key];
@@ -54,7 +55,8 @@ export const rulesEffectsHiddenSectionsDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_SECTION];
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && 
+            action.payload.rulesEffects[effectActions.HIDE_SECTION];
         newState[action.payload.formId] = hideEffects ?
             Object.keys(hideEffects).reduce((accState, key) => {
                 accState[key] = true;

@@ -35,7 +35,8 @@ export class DataElementFactory {
     };
 
     static errorMessages = {
-        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found',
+        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 
+            'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found',
         MULIT_TEXT_WITH_NO_OPTIONS_SET:
             'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
@@ -77,7 +78,9 @@ export class DataElementFactory {
         return requestPromise
             .then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(
+                    item => item.trackedEntity !== contextProps.trackedEntityInstanceId
+                );
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
                 const data = {
                     id: trackedEntityInstance.trackedEntity,
@@ -174,7 +177,9 @@ export class DataElementFactory {
                 return requestPromise
                     .then((result) => {
                         const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                        const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                        const otherTrackedEntityInstances = apiTrackedEntities.filter(
+                            item => item.trackedEntity !== contextProps.trackedEntityInstanceId
+                        );
                         if (otherTrackedEntityInstances.length === 0) {
                             return this.onValidateOnScopeTrackedEntityType(
                                 o,

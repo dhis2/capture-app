@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-18T10:23:56.553Z\n"
-"PO-Revision-Date: 2025-09-18T10:23:56.553Z\n"
+"POT-Creation-Date: 2025-09-18T10:28:36.136Z\n"
+"PO-Revision-Date: 2025-09-18T10:28:36.136Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -400,13 +400,6 @@ msgstr "Some operations are still runnning. Please wait.."
 msgid "Operations running"
 msgstr "Operations running"
 
-msgid ""
-"This event has unsaved changes. Leaving this page without saving will lose "
-"these changes. Are you sure you want to discard unsaved changes?"
-msgstr ""
-"This event has unsaved changes. Leaving this page without saving will lose "
-"these changes. Are you sure you want to discard unsaved changes?"
-
 msgid "No events to display"
 msgstr "No events to display"
 
@@ -650,13 +643,6 @@ msgstr "There are no active enrollments."
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Add new enrollment for {{teiDisplayName}} in this program."
-
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
-msgstr ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -1369,13 +1355,6 @@ msgstr "Save note"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. Information about "
-"this enrollment can be edited in the Enrollment widget."
-msgstr ""
-"Change information about this {{trackedEntityName}} here. Information about "
-"this enrollment can be edited in the Enrollment widget."
-
 msgid " Loading..."
 msgstr " Loading..."
 
@@ -1575,13 +1554,6 @@ msgstr "You do not have access to remove the link and delete the linked event"
 
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
-
-msgid ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
-msgstr ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
 
 msgid "Scheduled"
 msgstr "Scheduled"
