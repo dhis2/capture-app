@@ -54,8 +54,21 @@ type Props = {
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
     rulesDisabledFields: RulesDisabledFields,
-    onUpdateField: (value: any, uiState: any, elementId: string, formBuilderId: string, formId: string, updateCompletePromise: Promise<any> | null) => void,
-    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: (...args: any[]) => any) => void,
+    onUpdateField: (
+        value: any, 
+        uiState: any, 
+        elementId: string, 
+        formBuilderId: string, 
+        formId: string, 
+        updateCompletePromise: Promise<any> | null
+    ) => void,
+    onUpdateFieldAsync: (
+        fieldId: string, 
+        fieldLabel: string, 
+        formBuilderId: string, 
+        formId: string, 
+        callback: (...args: any[]) => any
+    ) => void,
     formId: string,
     formBuilderId: string,
     formHorizontal: boolean,

@@ -19,8 +19,10 @@ const convertString = (formValues: string, dataElement: DataElement) => {
 
 const convertRange = (formValues: FormValues, dataElement: DataElement) => {
     const { from, to } = formValues;
-    const convertedFrom = from && (dataElement.convertValue(from, pipeD2(convertFormToClient, convertClientToServer)));
-    const convertedTo = to && (dataElement.convertValue(to, pipeD2(convertFormToClient, convertClientToServer)));
+    const convertedFrom = from && 
+        (dataElement.convertValue(from, pipeD2(convertFormToClient, convertClientToServer)));
+    const convertedTo = to && 
+        (dataElement.convertValue(to, pipeD2(convertFormToClient, convertClientToServer)));
     if (from || to) {
         return `${dataElement.id}${convertedFrom ? `:ge:${escapeString(String(convertedFrom))}`
             : ''}${convertedTo ? `:le:${escapeString(String(convertedTo))}` : ''}`;
@@ -34,7 +36,8 @@ const convertOrgUnit = (formValues: FormValues, dataElement: DataElement) => {
 };
 
 const convertAge = (formValues: FormValues, dataElement: DataElement) => {
-    const convertedAge = formValues && (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
+    const convertedAge = formValues && 
+        (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
     return `${dataElement.id}:eq:${convertedAge}`;
 };
 

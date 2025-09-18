@@ -363,7 +363,8 @@ const getCategoryOptionsSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                                `${props.fieldOptions && 
+                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(

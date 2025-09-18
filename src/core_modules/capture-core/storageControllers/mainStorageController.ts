@@ -62,7 +62,8 @@ export const initMainController = async ({
         onAfterUpgrade: async ({ set }) => {
             upgradeTempData.accessHistoryMetadata &&
                 await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryMetadata);
-            upgradeTempData.accessHistoryData && await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
+            upgradeTempData.accessHistoryData && 
+                await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
         },
     });
 

@@ -74,7 +74,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                     onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                        `${props.fieldOptions && 
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -94,7 +95,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                     onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                        `${props.fieldOptions && 
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -158,7 +160,8 @@ const getCompleteFieldSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                                `${props.fieldOptions && 
+                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -198,7 +201,8 @@ const getReportDateSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                                `${props.fieldOptions && 
+                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(

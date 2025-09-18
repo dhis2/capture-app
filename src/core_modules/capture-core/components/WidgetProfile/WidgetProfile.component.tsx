@@ -113,7 +113,8 @@ const WidgetProfilePlain = ({
     useEffect(() => {
         if (storedAttributeValues?.length > 0) {
             setTeiModalState(TEI_MODAL_STATE.CLOSE);
-            onUpdateTeiAttributeValues && onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
+            onUpdateTeiAttributeValues && 
+                onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 

@@ -37,7 +37,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         workingListsUI[storeId] && workingListsUI[storeId].lastEventIdDeleted);
 
     const downloadRequest = useSelector(({ workingLists }: any) =>
-        workingLists[storeId] && workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
+        workingLists[storeId] && 
+        workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
     const onClickListRow = useCallback(({ id }: any) => {
         window.scrollTo(0, 0);

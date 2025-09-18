@@ -34,7 +34,8 @@ export const useEnrollmentInfo = (enrollmentId: string, programId: string, teiId
     const enrollmentsOnProgramContainEnrollmentId = enrollments && enrollments
         .some(({ enrollment }: any) => enrollmentId === enrollment);
     const onlyEnrollOnce = programId && programCollection.get(programId)?.onlyEnrollOnce;
-    const enrollmentsInProgram = enrollments && enrollments.filter(({ program }: any) => program === programId);
+    const enrollmentsInProgram = enrollments && 
+        enrollments.filter(({ program }: any) => program === programId);
     const autoEnrollmentId = enrollmentId === 'AUTO' && getSuitableEnrollmentId(enrollmentsInProgram, teiId);
     return {
         programHasEnrollments,

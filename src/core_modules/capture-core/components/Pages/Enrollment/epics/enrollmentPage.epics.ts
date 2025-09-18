@@ -85,7 +85,8 @@ const programIdReady = (store: any): boolean => {
 };
 
 const enrollmentIdLoaded = (enrollmentId: string, enrollments: Array<Record<string, unknown>> | null | undefined) =>
-    enrollments && enrollments.some((enrollment: any) => enrollment.enrollment === enrollmentId);
+    enrollments && 
+    enrollments.some((enrollment: any) => enrollment.enrollment === enrollmentId);
 
 
 // The verification epics which are triggered by the completion of

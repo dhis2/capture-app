@@ -63,7 +63,8 @@ export const EnrollmentAddEventPageDefault = ({
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
         dispatch(commitEnrollmentAndEvents());
-        redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        redirect && 
+            navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(

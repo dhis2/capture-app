@@ -45,7 +45,8 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         }
     }, [enrollmentsError, programError]);
 
-    const programStages = useMemo(() => !programLoading && program?.programStages?.reduce((accStage: any, currentStage: any) => {
+    const programStages = useMemo(() => !programLoading && 
+        program?.programStages?.reduce((accStage: any, currentStage: any) => {
         accStage.push({
             id: currentStage.id,
             dataAccess: currentStage.access.data,

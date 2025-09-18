@@ -35,7 +35,11 @@ const createServerData = (eventId: string, note: string, useNewEndpoint: boolean
     return { event: eventId, notes: [{ value: note }] };
 };
 
-export const addNoteForEventEpic = (action$: EpicAction<AddNoteActionPayload>, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForEventEpic = (
+    action$: EpicAction<AddNoteActionPayload>, 
+    store: ReduxStore, 
+    { querySingleResource, fromClientDate }: ApiUtils
+) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
         switchMap((action: { payload: AddNoteActionPayload }) => {

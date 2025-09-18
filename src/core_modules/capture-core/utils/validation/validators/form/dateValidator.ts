@@ -6,7 +6,8 @@ export function isValidDate(
         return { valid: false, errorMessage: null };
     }
 
-    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+    if (internalComponentError && 
+        internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return { valid: true, errorMessage: null };
     }
 

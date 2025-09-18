@@ -85,7 +85,8 @@ class ScopeSelectorClass extends Component<Props & WithStyles<typeof styles>, St
     }
 
     handleAcceptCatCombo = () => {
-        this.props.onResetCategoryOption && this.props.onResetCategoryOption(this.state.categoryIdToReset);
+        this.props.onResetCategoryOption && 
+            this.props.onResetCategoryOption(this.state.categoryIdToReset);
         this.handleClose();
     }
 

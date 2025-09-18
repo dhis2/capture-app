@@ -261,7 +261,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     onIsValid() {
         this.setState({ submitAttempted: true });
         const values = this.props.value;
-        return !values || DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
+        return !values || 
+            DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
     getUpdatedValue(valuePart: any) {

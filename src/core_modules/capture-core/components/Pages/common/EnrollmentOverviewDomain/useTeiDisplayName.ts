@@ -22,7 +22,9 @@ const getAttributesValues = (attributes: Array<Attribute>, first?: DataElement, 
     const firstValue = convertValue(attributes.find(({ attribute }) => attribute === first?.id), first);
     const secondValue = convertValue(attributes.find(({ attribute }) => attribute === second?.id), second);
 
-    return firstValue || secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
+    return firstValue || secondValue 
+        ? `${firstValue}${firstValue && ' '}${secondValue}` 
+        : '';
 };
 
 const getTetAttributesDisplayInReports = (attributes: Array<Attribute>, tetAttributes: Array<DataElement>) => {

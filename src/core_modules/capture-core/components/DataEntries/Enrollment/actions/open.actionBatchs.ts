@@ -74,7 +74,8 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
         ...(firstStageDataEntryPropsToInclude || []),
-        ...(programCategory && programCategory.categories ? programCategory.categories.map(category => ({
+        ...(programCategory && programCategory.categories ? 
+            programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,
             type: 'TEXT',
             validatorContainers:

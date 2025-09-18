@@ -15,7 +15,11 @@ export const createProps = (props: any | null, metaData: MetaDataElement) => ({
     ...props,
 });
 
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: MetaDataElement, querySingleResource: QuerySingleResource): FieldConfig => ({
+export const createFieldConfig = (
+    fieldSpecifications: FieldConfigForType, 
+    metaData: MetaDataElement, 
+    querySingleResource: QuerySingleResource
+): FieldConfig => ({
     ...getBaseConfigForField(metaData, querySingleResource),
     ...fieldSpecifications,
 });

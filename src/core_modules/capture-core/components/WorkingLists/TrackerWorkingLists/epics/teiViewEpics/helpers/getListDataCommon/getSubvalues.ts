@@ -119,7 +119,11 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
         return Promise.all(subvaluePromises);
     };
 
-    const addSubvalues = (clientData: ClientData, subvaluesByType: SubvaluesByType, columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>): ClientData =>
+    const addSubvalues = (
+        clientData: ClientData, 
+        subvaluesByType: SubvaluesByType, 
+        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>
+    ): ClientData =>
         columnsWithSubvalues
             .reduce((columns, { id: columnId, type: columnType }) => {
                 const { subvalues = {} } = (subvaluesByType.find(({ type }) => type === columnType) || {});

@@ -25,7 +25,11 @@ export const updateTrackerWorkingListsRecords = ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const filters = buildFilterQueryArgs(filterSource, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId });
+    const filters = buildFilterQueryArgs(filterSource, { 
+        columns: columnsMetaForDataFetching, 
+        filtersOnly: filtersOnlyMetaForDataFetching, 
+        storeId 
+    });
     const rawQueryArgs
     = { programId, orgUnitId, pageSize, page, filters, sortById, sortByDirection };
     const params = { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching, querySingleResource, absoluteApiPath };

@@ -205,7 +205,8 @@ const getMainDataFilters = async (
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
-        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: occurredAt.lockedAll });
+        convertedDate && 
+            filters.push({ ...convertedDate, id: 'occurredAt', locked: occurredAt.lockedAll });
     }
     if (assignedUserMode) {
         filters.push({
@@ -236,7 +237,10 @@ export async function convertToClientConfig(
         return acc;
     }, {});
 
-    const customColumnOrder = getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching) || undefined;
+    const customColumnOrder = getCustomColumnsConfiguration(
+        eventQueryCriteria && eventQueryCriteria.displayColumnOrder, 
+        columnsMetaForDataFetching
+    ) || undefined;
 
     return {
         filters,

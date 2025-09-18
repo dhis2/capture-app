@@ -34,8 +34,14 @@ const styles: Readonly<any> = ({ typography }: any) => ({
 
 type ComponentProps = Props & WithStyles<typeof styles>;
 
-export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, headerText, footerText }: ComponentProps) => {
+export const TrackedEntityTypeSelectorPlain = ({
+    classes,
+    onSelect,
+    onSetTrackedEntityTypeIdOnUrl,
+    accessNeeded,
+    headerText,
+    footerText
+}: ComponentProps) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
       const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 

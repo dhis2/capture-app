@@ -116,7 +116,8 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
             currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
         }
 
-        if (!isDefault && !notPreserved && access.write && access.update && currentViewHasTemplateChanges && onUpdateTemplate) {
+        if (!isDefault && !notPreserved && access.write && access.update && 
+            currentViewHasTemplateChanges && onUpdateTemplate) {
             savedViewContents.push(getSaveItem());
         }
 

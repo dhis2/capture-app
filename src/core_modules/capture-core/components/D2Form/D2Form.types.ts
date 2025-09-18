@@ -12,7 +12,13 @@ export type OwnProps = {
     readonly getCustomContent?: (beforeSectionId: string) => React.ReactNode;
     readonly validationAttempted?: boolean;
     readonly onUpdateField?: (...args: any[]) => void;
-    readonly onUpdateFieldAsync?: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: (...callbackArgs: any[]) => void) => void;
+    readonly onUpdateFieldAsync?: (
+        fieldId: string, 
+        fieldLabel: string, 
+        formBuilderId: string, 
+        formId: string, 
+        callback: (...callbackArgs: any[]) => void
+    ) => void;
 } & FormRef;
 
 export type PropsFromRedux = {

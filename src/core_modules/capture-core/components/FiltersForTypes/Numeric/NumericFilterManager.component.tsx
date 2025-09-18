@@ -19,8 +19,10 @@ export class NumericFilterManager extends React.Component<Props, State> {
     // eslint-disable-next-line complexity
     static calculateDefaultState(filter: NumericFilterData | null) {
         return {
-            min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
-            max: filter && (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
+            min: filter && (filter.ge || filter.ge === 0) ? 
+                filter.ge.toString() : undefined,
+            max: filter && (filter.le || filter.le === 0) ? 
+                filter.le.toString() : undefined,
         };
     }
 

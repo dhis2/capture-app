@@ -159,7 +159,8 @@ export class EnrollmentFactory {
                 });
 
                 await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                    if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                    if (field.objectType && 
+                        field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                         const fieldElement = await this.dataElementFactory.build(field, section);
                         if (!fieldElement) return;
 
@@ -294,7 +295,9 @@ export class EnrollmentFactory {
 
                         if (!sectionMetadata && cachedProgramSections && cachedProgramSections.length > 0) {
                             log.warn(
-                                errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                errorCreator(
+                                    'Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.'
+                                )(
                                     { sectionId: formConfigSection.id },
                                 ),
                             );

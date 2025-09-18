@@ -87,7 +87,8 @@ export class ProgramStageFactory {
                     });
 
                     await sectionDataElement.fieldMap.asyncForEach(async (field) => {
-                        if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                        if (field.objectType && 
+                            field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                             const id = field.dataElementId;
                             const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
                             if (!cachedProgramStageDataElement) {
@@ -159,7 +160,10 @@ export class ProgramStageFactory {
         return section;
     }
 
-    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined) {
+    async _addLeftoversSection(
+        stageForm: RenderFoundation, 
+        cachedProgramStageDataElements: Array<CachedProgramStageDataElement> | null | undefined
+    ) {
         if (!cachedProgramStageDataElements) return;
 
         // Check if there exist data elements which are not assigned to a section

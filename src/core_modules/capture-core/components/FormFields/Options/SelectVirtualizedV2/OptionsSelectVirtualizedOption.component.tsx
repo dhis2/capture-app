@@ -52,7 +52,8 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
             {},
             OptionsSelectVirtualizedOptionPlain.defaultContainerStyle,
             style,
-            currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOptionPlain.selectedStyle : null,
+            currentlySelectedValues && currentlySelectedValues.includes(option) ? 
+                OptionsSelectVirtualizedOptionPlain.selectedStyle : null,
             inFocus ? OptionsSelectVirtualizedOptionPlain.inFocusStyle : null,
         );
         return (

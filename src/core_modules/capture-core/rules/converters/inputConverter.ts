@@ -41,7 +41,8 @@ export const inputConverter: IConvertInputRulesValue = {
     },
     convertUserName: convertStringValue,
     convertCoordinate: (value: any): string | null => (
-        (value && value.latitude && value.longitude) ? `[${value.latitude},${value.longitude}]` : null),
+        (value && value.latitude && value.longitude) ? 
+            `[${value.latitude},${value.longitude}]` : null),
     convertOrganisationUnit: convertObjectToString,
     convertAge: (value: any): string | null => inputConverter.convertDate(value),
     convertUrl: convertStringValue,

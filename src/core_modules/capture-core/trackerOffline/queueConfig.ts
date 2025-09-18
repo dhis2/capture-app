@@ -5,7 +5,8 @@ import { effectMethods } from './trackerOffline.const';
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
 function getEffect(action: any) {
-    return action && action.meta && action.meta.offline && action.meta.offline.effect ? action.meta.offline.effect : {};
+    return action && action.meta && action.meta.offline && action.meta.offline.effect ? 
+        action.meta.offline.effect : {};
 }
 export const queueConfig = {
     ...defaultQueue,

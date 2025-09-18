@@ -19,7 +19,12 @@ const useRegistrationOptions = (): RegistrationOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     return useMemo(() =>
         Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            .reduce((acc: any, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeTeiRegistration, programs }: any) => ({
+            .reduce((acc: any, { 
+                trackedEntityTypeId, 
+                trackedEntityTypeName, 
+                trackedEntityTypeTeiRegistration, 
+                programs 
+            }: any) => ({
                 ...acc,
                 [trackedEntityTypeId]: {
                     formFoundation: trackedEntityTypeTeiRegistration.form,

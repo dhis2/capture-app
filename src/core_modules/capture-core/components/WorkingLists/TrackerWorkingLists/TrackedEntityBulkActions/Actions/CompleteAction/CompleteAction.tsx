@@ -137,7 +137,9 @@ const CompleteActionPlain = ({
         if (enrollmentCounts.active === 0) {
             return (
                 <div className={classes.container}>
-                    {i18n.t('There are currently no active enrollments in the selection. All enrollments are already completed or cancelled.')}
+                    {i18n.t(
+                        'There are currently no active enrollments in the selection. All enrollments are already completed or cancelled.'
+                    )}
                 </div>
             );
         }

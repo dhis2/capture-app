@@ -11,7 +11,11 @@ import type { InputProgramData, InputAttribute } from './hooks.types';
 const MULIT_TEXT_WITH_NO_OPTIONS_SET =
     'could not create the metadata because a MULIT_TEXT without associated option sets was found';
 
-export const useClientAttributesWithSubvalues = (teiId: string, program: InputProgramData, trackedEntityInstanceAttributes: boolean | Array<InputAttribute>) => {
+export const useClientAttributesWithSubvalues = (
+    teiId: string, 
+    program: InputProgramData, 
+    trackedEntityInstanceAttributes: boolean | Array<InputAttribute>
+) => {
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);

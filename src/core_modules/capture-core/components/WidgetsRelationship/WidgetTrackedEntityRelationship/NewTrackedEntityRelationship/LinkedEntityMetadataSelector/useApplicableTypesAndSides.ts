@@ -35,7 +35,11 @@ const computeTargetSidesDualMatchingTET = (() => {
         return { programMatch: false, noProgram: false };
     };
 
-    return (sourceProgramIds: readonly string[] | undefined, fromProgramId: string | undefined, toProgramId: string | undefined): TargetSides[] => {
+    return (
+        sourceProgramIds: readonly string[] | undefined, 
+        fromProgramId: string | undefined, 
+        toProgramId: string | undefined
+    ): TargetSides[] => {
         if (!sourceProgramIds) {
             return [TARGET_SIDES.FROM, TARGET_SIDES.TO];
         }

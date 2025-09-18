@@ -16,7 +16,8 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
             fields: 'id,displayName,programStage,sortOrder,programStageQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
         },
     });
-    return apiRes && apiRes.programStageWorkingLists ? apiRes.programStageWorkingLists : [];
+    return apiRes && apiRes.programStageWorkingLists ? 
+        apiRes.programStageWorkingLists : [];
 };
 
 export const getProgramStageTemplates = (

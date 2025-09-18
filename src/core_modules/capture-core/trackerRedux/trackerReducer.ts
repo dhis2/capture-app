@@ -83,7 +83,8 @@ const getProductionReducer =
             updateStatePartInProduction(state, action, reducerDescription.updaters, reducerDescription.initValue);
 
 const createLogAction = (action: Action) => {
-    const payloadOverride = action.meta && action.meta.skipLogging && action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
+    const payloadOverride = action.meta && action.meta.skipLogging && 
+        action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
         accSkipLogging[item] = null;
         return accSkipLogging;
     }, {});

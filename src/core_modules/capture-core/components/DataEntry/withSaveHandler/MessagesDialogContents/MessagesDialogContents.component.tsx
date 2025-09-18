@@ -14,7 +14,10 @@ type Props = {
     onSave: () => void;
 };
 
-function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: typeof validationStrategies[keyof typeof validationStrategies]) {
+function isSaveAllowedWithErrors(
+    isCompleting: boolean, 
+    validationStrategy: typeof validationStrategies[keyof typeof validationStrategies]
+) {
     if (validationStrategy === validationStrategies.NONE) {
         return true;
     }

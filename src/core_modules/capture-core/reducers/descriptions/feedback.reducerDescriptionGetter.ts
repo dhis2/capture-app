@@ -41,7 +41,10 @@ type ErrorFeedbackInput = {
     action?: ReactNode,
 };
 
-function addErrorFeedback(state: any, { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput) {
+function addErrorFeedback(
+    state: any, 
+    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput
+) {
     return [
         ...state,
         {
@@ -53,7 +56,9 @@ function addErrorFeedback(state: any, { message, variant = alertVariants.critica
     ];
 }
 
-function getErrorFeedback({ message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput) {
+function getErrorFeedback(
+    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput
+) {
     return {
         message,
         action,

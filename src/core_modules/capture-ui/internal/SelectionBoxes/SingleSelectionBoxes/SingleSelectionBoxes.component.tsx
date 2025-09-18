@@ -110,7 +110,8 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
         } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
-        const tabIndex = isSelected || (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
+        const tabIndex = isSelected || 
+            (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
         const IconElement = this.getIconElement(optionData, isSelected);
         const setInputRef = (element: HTMLInputElement) => {
             this.setState((state) => {

@@ -21,7 +21,11 @@ function isValidNumberPart(value: string | null | undefined) {
     return !value || isValidZeroOrPositiveInteger(value);
 }
 
-function validateNumbers(years: string | null | undefined, months: string | null | undefined, days: string | null | undefined) {
+function validateNumbers(
+    years: string | null | undefined, 
+    months: string | null | undefined, 
+    days: string | null | undefined
+) {
     const errorResult: any[] = [];
 
     if (!isValidNumberPart(years)) {
@@ -43,7 +47,10 @@ function validateNumbers(years: string | null | undefined, months: string | null
     return { valid: true };
 }
 
-function validateDate(date: string | null | undefined, internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined) {
+function validateDate(
+    date: string | null | undefined, 
+    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined
+) {
     const { valid } = isValidDate(date, internalComponentError);
     return valid ?
         { valid: true } :
@@ -63,7 +70,8 @@ export function isValidAge(
         return false;
     }
 
-    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+    if (internalComponentError && 
+        internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return { valid: true, errorMessage: null };
     }
 

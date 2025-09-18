@@ -87,7 +87,13 @@ const buildTEAUrlByElementType: {
 const buildDataElementUrlByElementType: {
     [key: string]: (props: SubValuesDataElementProps) => Promise<any>;
 } = {
-    [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
+    [dataElementTypes.FILE_RESOURCE]: async ({
+        dataElement,
+        querySingleResource,
+        eventId,
+        absoluteApiPath,
+        latestValue,
+    }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
@@ -110,7 +116,13 @@ const buildDataElementUrlByElementType: {
             return null;
         }
     },
-    [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
+    [dataElementTypes.IMAGE]: async ({
+        dataElement,
+        querySingleResource,
+        eventId,
+        absoluteApiPath,
+        latestValue,
+    }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 

@@ -10,7 +10,13 @@ import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
 
-const useError = (errorEnrollment: any, errorProgram: any, errorOwnerOrgUnit: any, errorOrgUnit: any, errorLocale: any) =>
+const useError = (
+    errorEnrollment: any, 
+    errorProgram: any, 
+    errorOwnerOrgUnit: any, 
+    errorOrgUnit: any, 
+    errorLocale: any
+) =>
     useMemo(
         () => errorEnrollment ?? errorProgram ?? errorOwnerOrgUnit ?? errorOrgUnit ?? errorLocale,
         [errorEnrollment, errorProgram, errorOwnerOrgUnit, errorOrgUnit, errorLocale],

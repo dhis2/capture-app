@@ -100,7 +100,9 @@ export const WidgetRelatedStagesPlain = ({
         addEventWithRelationship,
     ]);
 
-    if (isLinkedEventLoading || linkedEvent || currentRelatedStagesStatus !== relatedStageStatus.LINKABLE) {
+    if (isLinkedEventLoading || 
+        linkedEvent || 
+        currentRelatedStagesStatus !== relatedStageStatus.LINKABLE) {
         return null;
     }
 

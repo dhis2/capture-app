@@ -5,12 +5,14 @@ export const isSelectionsEqual = (set1: Record<string, any>, set2: Record<string
     const set1Keys = Object
         .keys(set1)
         .filter(key =>
-            key !== COMPLETE_KEY && set1[key] && (typeof set1[key] !== 'object' || Object.keys(set1[key]).length > 0));
+            key !== COMPLETE_KEY && set1[key] && 
+            (typeof set1[key] !== 'object' || Object.keys(set1[key]).length > 0));
 
     const set2Keys = Object
         .keys(set2)
         .filter(key =>
-            key !== COMPLETE_KEY && set2[key] && (typeof set2[key] !== 'object' || Object.keys(set2[key]).length > 0));
+            key !== COMPLETE_KEY && set2[key] && 
+            (typeof set2[key] !== 'object' || Object.keys(set2[key]).length > 0));
 
     if (set1Keys.length !== set2Keys.length) {
         return false;

@@ -9,7 +9,9 @@ export function getScopeFromScopeId(scopeId: string | null | undefined): Scope |
         return null;
     }
     const scope = programCollection.get(scopeId) || trackedEntityTypesCollection.get(scopeId);
-    if (scope instanceof EventProgram || scope instanceof TrackerProgram || scope instanceof TrackedEntityType) {
+    if (scope instanceof EventProgram || 
+        scope instanceof TrackerProgram || 
+        scope instanceof TrackedEntityType) {
         return scope;
     }
     return null;

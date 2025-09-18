@@ -478,7 +478,8 @@ describe('Event rules engine', () => {
         {
             id: 'DtfaG1TgyZk',
             condition:
-                "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'No') ||\n(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && #{TEST_RESULT} == 'Inconclusive')",
+                "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'No') ||\n" +
+                "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && #{TEST_RESULT} == 'Inconclusive')",
             description: "Automation: Assign 'Probable Case' to Case Classification",
             displayName: "Assign 'Probable Case' to Case Classification",
             programId: 'PNClHaZARtz',
@@ -675,7 +676,9 @@ describe('Event rules engine', () => {
         {
             id: 'sEQsGGAQSJT',
             condition:
-                "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Unknown') ||\n(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && (#{TEST_RESULT} == 'Negative' || #{TEST_RESULT} == 'Unknown'))",
+                "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Unknown') ||\n" +
+                "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && " +
+                "(#{TEST_RESULT} == 'Negative' || #{TEST_RESULT} == 'Unknown'))",
             description: "Automation: Assign Suspected Case' to Case Classification",
             displayName: "Assign 'Suspected Case' to Case Classification",
             programId: 'PNClHaZARtz',

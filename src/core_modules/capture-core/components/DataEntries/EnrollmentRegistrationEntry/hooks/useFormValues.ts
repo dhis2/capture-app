@@ -116,12 +116,16 @@ const buildFormValues = async ({
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues && setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
-    setClientValues && setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
+    setFormValues && 
+        setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
+    setClientValues && 
+        setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 
-export const useFormValues = ({ program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms }: InputForm) => {
+export const useFormValues = ({ 
+    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms 
+}: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();
     const formValuesReadyRef = useRef<any>(false);

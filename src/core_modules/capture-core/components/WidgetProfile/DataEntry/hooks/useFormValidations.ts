@@ -4,14 +4,17 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 
 const prepareMessages = (rulesEffectsGeneral: any, rulesEffectsMessages: any, saveAttempted: boolean, type: string) => {
-    let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
+    let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? 
+        rulesEffectsGeneral[type] : [];
     if (saveAttempted) {
         messages = rulesEffectsGeneral[`${type}OnComplete`] ? 
             [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
 
         messages = Object.values(rulesEffectsMessages).reduce(
             (acc: any, rulesEffectsMessage: any) =>
-                (rulesEffectsMessage[`${type}OnComplete`] ? [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] : acc),
+                (rulesEffectsMessage[`${type}OnComplete`] ? 
+                    [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] : 
+                    acc),
             messages,
         );
     }
@@ -42,7 +45,8 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
     );
     const formValidated = fieldsValidated && rulesValidated;
 
-    let errorsMessages = saveAttempted && !formValidated ? [{ id: uuid(), message: i18n.t('Fix errors in the form to continue.') }] : [];
+    let errorsMessages = saveAttempted && !formValidated ? 
+        [{ id: uuid(), message: i18n.t('Fix errors in the form to continue.') }] : [];
     errorsMessages = [...errorsMessages, ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error')];
     const warningsMessages = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, saveAttempted, 'warning');
 

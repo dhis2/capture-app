@@ -47,7 +47,12 @@ export const TrackerWorkingListsReduxProvider = ({
         lastTransaction !== lastTransactionOnListDataRefresh;
 
     const onLoadTemplates = useCallback(() => {
-        dispatch(fetchTemplates({ programId, storeId, workingListsType: TRACKER_WORKING_LISTS_TYPE, selectedTemplateId }));
+        dispatch(fetchTemplates({ 
+            programId, 
+            storeId, 
+            workingListsType: TRACKER_WORKING_LISTS_TYPE, 
+            selectedTemplateId 
+        }));
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
     useEffect(() => {

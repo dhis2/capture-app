@@ -16,7 +16,9 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
             fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
         },
     });
-    return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];
+    return apiRes && apiRes.trackedEntityInstanceFilters 
+        ? apiRes.trackedEntityInstanceFilters 
+        : [];
 };
 
 export const getTEITemplates = (

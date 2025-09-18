@@ -46,11 +46,16 @@ const getBaseFormHorizontalProps = (options: any) => ({
 
 export const createProps = (props: any | null, options: any, metaData: DataElement) => ({
     ...getBaseProps(metaData),
-    ...(options && options.formHorizontal ? getBaseFormHorizontalProps(options) : {}),
+    ...(options && options.formHorizontal ? 
+        getBaseFormHorizontalProps(options) : {}),
     ...props,
 });
 
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: DataElement, querySingleResource: QuerySingleResource): FieldConfig => ({
+export const createFieldConfig = (
+    fieldSpecifications: FieldConfigForType, 
+    metaData: DataElement, 
+    querySingleResource: QuerySingleResource
+): FieldConfig => ({
     ...getBaseConfigForField(metaData, querySingleResource),
     ...fieldSpecifications,
 });

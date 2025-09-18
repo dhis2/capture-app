@@ -82,7 +82,9 @@ const ProgramSelectorPlain = ({
             <SelectorBarItem
                 label={i18n.t('Program')}
                 noValueMessage={i18n.t('Choose a program')}
-                value={selectedProgram && <OptionLabel icon={selectedProgram.icon} label={selectedProgram.name} />}
+                value={selectedProgram && 
+                    <OptionLabel icon={selectedProgram.icon} label={selectedProgram.name} />
+                }
                 open={open}
                 setOpen={openSelectorBarItem => (isMenuDisabled ? null : setOpen(openSelectorBarItem))}
                 displayOnly={isMenuDisabled}

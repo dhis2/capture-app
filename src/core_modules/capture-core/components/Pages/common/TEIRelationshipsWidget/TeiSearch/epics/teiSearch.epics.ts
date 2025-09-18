@@ -132,7 +132,13 @@ const searchTei = ({
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId)).pipe(
+    return from(getTrackedEntityInstances(
+        queryArgs, 
+        attributes, 
+        absoluteApiPath, 
+        querySingleResource, 
+        selectedProgramId
+    )).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }) => {
             if (searchGroup.unique && trackedEntityInstanceContainers.length === 0 && queryArgs.program) {
                 return searchViaUniqueIdOnScopeTrackedEntityType({
@@ -182,7 +188,8 @@ export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiP
                 takeUntil(
                     action$.pipe(
                         filter((ab: any) =>
-                            isArray(ab.payload) && ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
+                            isArray(ab.payload) && 
+                            ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
             );
         }));
 
@@ -211,7 +218,8 @@ export const teiSearchEpic = (action$: any, store: any, { absoluteApiPath, query
                 takeUntil(
                     action$.pipe(
                         filter((ab: any) =>
-                            isArray(ab.payload) && ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
+                            isArray(ab.payload) && 
+                            ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
         }));
 
 export const teiSearchSetProgramEpic = (action$: any, store: any) =>

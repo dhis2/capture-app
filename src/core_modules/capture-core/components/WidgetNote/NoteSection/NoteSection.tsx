@@ -137,7 +137,8 @@ const NoteSectionPlain = ({
                 </Editor>
             </div>
 
-            {isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+            {isEditing && 
+                <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
                 <Button
                     dataTest="add-note-btn"
                     onClick={onAddNote}

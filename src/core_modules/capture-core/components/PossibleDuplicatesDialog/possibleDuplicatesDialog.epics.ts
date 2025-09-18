@@ -25,11 +25,11 @@ function getGroupElementsFromScopeId(scopeId: string | null) {
     if (scope instanceof EventProgram) {
         return null;
     } else if (scope instanceof TrackerProgram) {
-        return scope.enrollment.inputSearchGroups
-          && scope.enrollment.inputSearchGroups[0].searchFoundation.getElements();
+        return scope.enrollment.inputSearchGroups &&
+            scope.enrollment.inputSearchGroups[0].searchFoundation.getElements();
     } else if (scope instanceof TrackedEntityType) {
-        return scope.teiRegistration.inputSearchGroups
-          && scope.teiRegistration.inputSearchGroups[0].searchFoundation.getElements();
+        return scope.teiRegistration.inputSearchGroups &&
+            scope.teiRegistration.inputSearchGroups[0].searchFoundation.getElements();
     }
     return null;
 }
@@ -91,7 +91,13 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId),
                 );
                 return stream$.pipe(
-                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }: { trackedEntityInstanceContainers: any, pagingData: any }) =>
+                    map(({ 
+                        trackedEntityInstanceContainers: searchResults, 
+                        pagingData 
+                    }: { 
+                        trackedEntityInstanceContainers: any, 
+                        pagingData: any 
+                    }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
                     takeUntil(action$.pipe(ofType(actionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),

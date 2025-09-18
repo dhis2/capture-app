@@ -5,7 +5,8 @@ export const useCategoryCombinations = (programId: string, disabled = false) => 
         program,
         isLoading,
     } = useProgramFromIndexedDB(programId, { enabled: !disabled });
-    const programCategory = !isLoading && !program?.categoryCombo?.isDefault ? program?.categoryCombo : undefined;
+    const programCategory = !isLoading && !program?.categoryCombo?.isDefault ? 
+        program?.categoryCombo : undefined;
 
     return { isLoading, programCategory };
 };

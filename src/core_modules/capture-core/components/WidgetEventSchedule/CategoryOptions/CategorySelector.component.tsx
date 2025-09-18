@@ -80,7 +80,8 @@ export class CategorySelector extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Props) {
-        if (!this.state.options && prevProps.selectedOrgUnitId !== this.props.selectedOrgUnitId) {
+        if (!this.state.options && 
+            prevProps.selectedOrgUnitId !== this.props.selectedOrgUnitId) {
             this.loadCagoryOptions(this.props);
         }
     }
@@ -101,7 +102,8 @@ export class CategorySelector extends React.Component<Props, State> {
         let currentRequestCancelablePromise: any;
 
         const isRequestAborted = () =>
-            (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
+            (currentRequestCancelablePromise && 
+                this.cancelablePromise !== currentRequestCancelablePromise);
 
         currentRequestCancelablePromise = makeCancelablePromise(
             CategorySelector

@@ -84,7 +84,13 @@ export const startSaveNewEventRelationships = (serverData: any, selections: any,
         },
     });
 
-export const startSaveTeiForNewEventRelationship = (teiPayload: any, selections: any, triggerAction: string, relationshipData: any, relationshipClientId: string) =>
+export const startSaveTeiForNewEventRelationship = (
+    teiPayload: any, 
+    selections: any, 
+    triggerAction: string, 
+    relationshipData: any, 
+    relationshipClientId: string
+) =>
     actionCreator(actionTypes.START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS)({ selections }, {
         offline: {
             effect: {

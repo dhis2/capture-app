@@ -134,7 +134,8 @@ const buildElementsForSection = async ({
 
             /* eslint-disable no-await-in-loop */
             await (pluginElement.fieldMap as any).asyncForEach(async (field: any) => {
-                if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                if (field.objectType && 
+                    field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                     const fieldElement = await buildDataElement(
                         field,
                         trackedEntityAttributes,
@@ -275,7 +276,9 @@ export const buildFormFoundation = async (
 
                     if (!sectionMetadata && programSections && programSections.length > 0) {
                         log.warn(
-                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                            errorCreator(
+                                'Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.'
+                            )(
                                 { sectionId: formConfigSection.id },
                             ),
                         );
