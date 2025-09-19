@@ -62,8 +62,7 @@ const createApiTEIsQueryArgs =
             pageSize,
             [filterQueryParam]: trackedEntityIds,
             fields:
-                `trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],
-                    enrollments[enrollment,status,orgUnit,enrolledAt]`,
+                'trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]',
         };
     };
 

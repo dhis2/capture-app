@@ -14,9 +14,7 @@ export const useProgram = (programId: string) => {
                     resource: `programs/${programId}`,
                     params: {
                         fields: [
-                            `displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,
-                            trackedEntityType[displayName,access],programStages[autoGenerateEvent,name,access,id],
-                            access,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture`,
+                            'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,trackedEntityType[displayName,access],programStages[autoGenerateEvent,name,access,id],access,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture',
                         ],
                     },
                 },
