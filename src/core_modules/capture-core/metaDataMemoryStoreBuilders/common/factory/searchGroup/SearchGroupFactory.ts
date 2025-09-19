@@ -165,7 +165,8 @@ export class SearchGroupFactory {
         if (!trackedEntityAttribute) {
             log.error(
                 errorCreator(
-                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified or the trackedEntityAttribute could not be retrieved from the cache')(
+                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified ' +
+                    'or the trackedEntityAttribute could not be retrieved from the cache')(
                     { attribute }),
             );
         }

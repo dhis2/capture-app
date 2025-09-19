@@ -228,7 +228,8 @@ export class VariableService {
         const dataElementId = programVariable.dataElementId;
         const dataElement = dataElementId && dataElements && dataElements[dataElementId];
         if (!dataElement) {
-            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid dataelement id (id: ${dataElementId || ''})`);
+            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains ` +
+                `an invalid dataelement id (id: ${dataElementId || ''})`);
             return this.buildVariable(
                 null,
                 typeKeys.TEXT, {
@@ -247,7 +248,8 @@ export class VariableService {
         const attributeId = programVariable.trackedEntityAttributeId;
         const attribute = attributeId && trackedEntityAttributes && trackedEntityAttributes[attributeId];
         if (!attribute) {
-            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`);
+            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} ` +
+                `contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`);
             return this.buildVariable(
                 null,
                 typeKeys.TEXT, {
@@ -367,7 +369,8 @@ export class VariableService {
     ): RuleVariable | null {
         const programStageId = programVariable.programStageId;
         if (!programStageId) {
-            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} does not have a programstage defined, despite that the variable has sourcetype${programVariable.programRuleVariableSourceType}`);
+            log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} does not have a programstage ` +
+                `defined, despite that the variable has source type ${programVariable.programRuleVariableSourceType}`);
             return null;
         }
 

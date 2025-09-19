@@ -278,7 +278,8 @@ export const buildFormFoundation = async (
 
                     if (!sectionMetadata && programSections && programSections.length > 0) {
                         log.warn(
-                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                            errorCreator('Could not find metadata for section. This could indicate that ' +
+                                'your form configuration may be out of sync with your metadata.')(
                                 { sectionId: formConfigSection.id },
                             ),
                         );
