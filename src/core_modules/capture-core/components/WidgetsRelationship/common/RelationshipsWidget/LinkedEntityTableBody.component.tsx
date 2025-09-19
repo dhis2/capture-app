@@ -51,7 +51,9 @@ const LinkedEntityTableBodyPlain = ({
                                     return (
                                         <Tooltip
                                             key={`${entityId}-${id}`}
-                                            content={i18n.t('To open this relationship, please wait until saving is complete')}
+                                            content={i18n.t(
+                                                'To open this relationship, please wait until saving is complete',
+                                            )}
                                             closeDelay={50}
                                         >
                                             {({ onMouseOver, onMouseOut, ref }) => (
@@ -94,7 +96,7 @@ const LinkedEntityTableBodyPlain = ({
                     );
                 })
         }
-    </DataTableBody>
+    </DataTableBody >
 );
 
 export const LinkedEntityTableBody = withStyles(styles)(LinkedEntityTableBodyPlain) as ComponentType<Props>;

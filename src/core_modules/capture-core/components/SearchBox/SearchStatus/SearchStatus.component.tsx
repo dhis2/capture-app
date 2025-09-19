@@ -84,9 +84,9 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-error-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('An error has occurred')} error>
-                    {i18n.t(
-                        'There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools ',
-                    )}
+                    {i18n.t('There is a problem with this search, please change the search terms or try again later.')}
+                    {' '}
+                    {i18n.t('For more details open the Console tab of the Developer tools')}
                 </NoticeBox>
             </div>
         );
@@ -96,9 +96,9 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-too-many-results-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('Too many results')} warning>
-                    {i18n.t(
-                        'This search returned too many results to show. Try changing search terms or searching by more attributes to narrow down the results.',
-                    )}
+                    {i18n.t('This search returned too many results to show.')}
+                    {' '}
+                    {i18n.t('Try changing search terms or searching by more attributes to narrow down the results.')}
                 </NoticeBox>
             </div>
         );

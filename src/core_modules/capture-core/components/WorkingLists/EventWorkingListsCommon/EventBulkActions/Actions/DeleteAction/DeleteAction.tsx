@@ -82,7 +82,9 @@ export const DeleteAction = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        {i18n.t('This cannot be undone. Are you sure you want to delete the selected events?')}
+                        {i18n.t('This cannot be undone.')}
+                        {' '}
+                        {i18n.t('Are you sure you want to delete the selected events?')}
                     </ModalContent>
 
                     <ModalActions>

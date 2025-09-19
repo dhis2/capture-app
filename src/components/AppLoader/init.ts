@@ -124,7 +124,7 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: any, minorS
 
 async function initializeSystemSettingsAsync(
     systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string },
-    userSettings: { uiLocale: string, captureScope: Array<{ id: string }>, searchScope: Array<{id: string}> },
+    userSettings: { uiLocale: string, captureScope: Array<{ id: string }>, searchScope: Array<{ id: string }> },
 ) {
     const systemSettingsCacheData = await cacheSystemSettings(systemSettings, userSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
@@ -181,9 +181,10 @@ export async function initializeAsync({
             baseUrl,
         });
     } catch (error) {
-        throw new DisplayException(i18n.t(
-            'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
-        ), error);
+        throw new DisplayException(
+            // eslint-disable-next-line max-len
+            i18n.t('A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.'),
+            error);
     }
 
     const uiLocale = userSettings.keyUiLocale;

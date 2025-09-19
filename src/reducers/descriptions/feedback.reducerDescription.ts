@@ -11,6 +11,7 @@ export const feedbackDesc = getFeedbackDesc({
                 ...state, {
                     message: {
                         title: i18n.t('Compatibility mode'),
+                        // eslint-disable-next-line max-len
                         content: i18n.t('This app is currently running in compatibility mode due to browser restrictions. For better performance, use another browser or exit private mode if this is currently in use.'),
                     },
                     feedbackType: 'ERROR',
