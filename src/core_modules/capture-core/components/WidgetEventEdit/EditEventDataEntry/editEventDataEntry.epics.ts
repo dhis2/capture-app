@@ -293,8 +293,7 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxSto
 
             const serverData = { enrollments: [enrollmentWithAllEvents] };
 
-            onSaveAndCompleteEnrollmentExternal &&
-                onSaveAndCompleteEnrollmentExternal(enrollmentWithAllEvents);
+            onSaveAndCompleteEnrollmentExternal && onSaveAndCompleteEnrollmentExternal(enrollmentWithAllEvents);
             return batchActions([
                 startSaveEditEventDataEntry(
                     eventId,

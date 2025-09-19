@@ -64,7 +64,7 @@ const getUpdaterFoundFn =
     (reducerDescription: ReducerDescription) =>
         (state: any, action: Action) => {
             log.trace(
-                `Updater for ${action.type} started in ${reducerDescription.name}.
+                `Updater for ${action.type} started in ${reducerDescription.name}. 
                 Starting state is: ${JSON.stringify(state)}`,
             );
         };
@@ -73,7 +73,7 @@ const getUpdaterExecutedFn =
     (reducerDescription: ReducerDescription) =>
         (state: any, action: Action) => {
             log.trace(
-                `Updater for ${action.type} executed in ${reducerDescription.name}.
+                `Updater for ${action.type} executed in ${reducerDescription.name}. 
                 New state is: ${JSON.stringify(state)}`);
         };
 

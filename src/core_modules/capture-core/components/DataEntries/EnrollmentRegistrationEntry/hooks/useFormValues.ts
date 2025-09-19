@@ -97,7 +97,7 @@ const buildFormValues = async ({
     setFormValues: (values: any) => void;
     setClientValues: (values: any) => void;
     formValuesReadyRef: { current: boolean };
-    searchTerms: Array<{ [key: string]: any }> | null;
+    searchTerms: Array<{[key: string]: any}> | null;
     querySingleResource: QuerySingleResource;
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce(
@@ -123,10 +123,8 @@ const buildFormValues = async ({
         staticPatternValues,
         querySingleResource,
     );
-    setFormValues &&
-        setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
-    setClientValues &&
-        setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
+    setFormValues && setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
+    setClientValues && setClientValues({ ...searchClientValues, ...clientValues, ...uniqueValues });
     formValuesReadyRef.current = true;
 };
 

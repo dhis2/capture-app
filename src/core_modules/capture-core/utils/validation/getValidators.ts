@@ -274,9 +274,10 @@ function buildUniqueValidator(
         [];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getValidators = (
     metaData: DataElement | DateDataElement,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    querySingleResource?: any,
 ): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,

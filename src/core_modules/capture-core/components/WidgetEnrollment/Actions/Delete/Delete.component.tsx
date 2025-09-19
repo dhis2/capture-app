@@ -40,8 +40,7 @@ export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Pro
                     <ModalTitle>{i18n.t('Delete enrollment')}</ModalTitle>
                     <ModalContent>
                         {i18n.t(
-                            `Are you sure you want to delete this enrollment?
-                            This will permanently remove the current enrollment.`,
+                            'Are you sure you want to delete this enrollment? This will permanently remove the current enrollment.',
                         )}
                     </ModalContent>
                     <ModalActions>

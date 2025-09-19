@@ -63,7 +63,7 @@ const createApiTEIsQueryArgs =
             [filterQueryParam]: trackedEntityIds,
             fields:
                 `trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],
-        enrollments[enrollment,status,orgUnit,enrolledAt]`,
+                    enrollments[enrollment,status,orgUnit,enrolledAt]`,
         };
     };
 

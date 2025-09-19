@@ -200,10 +200,7 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
-                {i18n.t(
-                    'You do not have permissions to access to this program, registering unit or record, ' +
-                    'contact your administrator for more information.',
-                )}
+                {i18n.t('You do not have permissions to access to this program, registering unit or record, contact your administrator for more information.')}
             </IncompleteSelectionsMessage>
         }
 
@@ -230,13 +227,9 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t(
-                        '{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. ' +
-                        'Choose another program that allows {{tetName}} enrollment. ',
-                        {
-                            teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
-                        },
-                    )}
+                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', {
+                        teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
+                    })}
                     <div>
                         <LinkButton
                             className={classes.link}
