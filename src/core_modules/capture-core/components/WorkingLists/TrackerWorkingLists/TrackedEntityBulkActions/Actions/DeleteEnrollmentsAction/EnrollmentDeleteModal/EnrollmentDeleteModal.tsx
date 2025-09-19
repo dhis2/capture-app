@@ -113,10 +113,7 @@ const EnrollmentDeleteModalPlain = ({
             <ModalContent>
                 <div className={classes.modalContent}>
                     <div>
-                        {i18n.t(
-                            'This action will permanently delete the selected enrollments, including all ' +
-                            'associated data and events.',
-                        )}
+                        {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
                     </div>
 
                     <div>
