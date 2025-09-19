@@ -25,7 +25,7 @@ type InputForm = {
     orgUnit?: OrgUnit | null;
     formFoundation: RenderFoundation | null;
     teiId?: string;
-    searchTerms: Array<{ [key: string]: string }> | null;
+    searchTerms: Array<{[key: string]: string}> | null;
 };
 
 type StaticPatternValues = {

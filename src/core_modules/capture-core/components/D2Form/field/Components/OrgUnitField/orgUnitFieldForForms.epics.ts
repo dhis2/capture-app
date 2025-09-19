@@ -29,8 +29,7 @@ const cancelActionFilter = (action: any, formId: string, elementId: string) => {
     if (isArray(action.payload)) {
         return action.payload.some(innerAction => isAddFormData(innerAction, formId));
     }
-    return isAddFormData(action, formId) ||
-        isRequestFilterFormFieldOrgUnits(action, formId, elementId);
+    return isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
 };
 
 export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySingleResource }: ApiUtils) =>
@@ -41,10 +40,8 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
             return from(querySingleResource({
                 resource: 'organisationUnits',
                 params: {
-                    fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
+                    fields: 'id,displayName,path,publicAccess,access,lastUpdated' +
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                    ].join(','),
                     paging: false,
                     withinUserSearchHierarchy: true,
                     query: searchText,
