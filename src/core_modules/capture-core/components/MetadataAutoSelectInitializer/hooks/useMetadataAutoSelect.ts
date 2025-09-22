@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from 'capture-core/storageControllers'; // Works
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
-import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
+// import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers'; // Fails
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 
 const getAllPrograms = () => {
+    // Importing from 'capture-core/storageControllers' the getUserMetadataStorageController() is defined and has the correct value set
+    // Importing '../../../storageControllers'; the getUserMetadataStorageController() is undefined
     const userStorageController = getUserMetadataStorageController();
     return userStorageController.getAll(USER_METADATA_STORES.PROGRAMS, {
         predicate: ({ access }) => access.data.read,

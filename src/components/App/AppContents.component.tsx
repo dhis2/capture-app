@@ -1,5 +1,5 @@
 import React, { memo, type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { FeedbackBar } from 'capture-core/components/FeedbackBar';
 import { AppPagesLoader } from './AppPagesLoader.component';
@@ -24,13 +24,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 const Index = ({ classes }: Props) => (
     <>
         <div
-            className={classes.app}
+            css={classes.app}
             dir={systemSettingsStore.get().dir}
         >
             <AppPagesLoader />
             <FeedbackBar />
         </div>
-        <div className={classes.iOSWorkaround} />
+        <div css={classes.iOSWorkaround} />
     </>
 );
 Index.displayName = 'AppContents';

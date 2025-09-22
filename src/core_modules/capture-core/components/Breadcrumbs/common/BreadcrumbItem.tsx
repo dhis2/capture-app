@@ -1,6 +1,5 @@
 import React, { ComponentType } from 'react';
-import cx from 'classnames';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles, composeCssArray } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 
 type OwnProps = {
@@ -30,16 +29,16 @@ const styles = {
             textDecoration: 'underline',
             color: 'black',
         },
-        '&.selected': {
-            color: 'black',
-        },
+    },
+    selected: {
+        color: 'black',
     },
 } as const;
 
 const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }: Props) => (
     <button
         type="button"
-        className={cx(classes.button, { selected })}
+        css={composeCssArray(classes, { button: true, selected })}
         onClick={onClick}
         data-test={dataTest}
     >

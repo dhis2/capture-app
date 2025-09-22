@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { filter, map, concatMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { programCollection } from 'capture-core/metaDataMemoryStores'; // Works
 import {
     lockedSelectorActionTypes,
     invalidSelectionsFromUrl,
@@ -12,7 +13,7 @@ import {
     startLoading,
     completeUrlUpdate,
 } from './LockedSelector.actions';
-import { programCollection } from '../../metaDataMemoryStores';
+// import { programCollection } from '../../metaDataMemoryStores'; // Fails
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
