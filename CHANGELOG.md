@@ -1,3 +1,10 @@
+## [104.1.1](https://github.com/dhis2/capture-app/compare/v104.1.0...v104.1.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20060] use rule engine's user roles as fallback ([#4376](https://github.com/dhis2/capture-app/issues/4376)) ([cdad149](https://github.com/dhis2/capture-app/commit/cdad14933b62afc409130e62763563dfedff9020))
+
 # [104.1.0](https://github.com/dhis2/capture-app/compare/v104.0.1...v104.1.0) (2025-09-10)
 
 
