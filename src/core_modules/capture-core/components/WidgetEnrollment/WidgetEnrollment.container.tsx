@@ -3,7 +3,7 @@ import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { WidgetEnrollment as WidgetEnrollmentNote } from './WidgetEnrollment.component';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
-import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
+import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
@@ -66,7 +66,7 @@ export const WidgetEnrollment = ({
         ownerOrgUnit,
         enrollments,
         refetch: refetchTEI,
-    } = useTrackedEntityInstances(teiId, programId);
+    } = useTrackedEntities(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrgUnitNameWithAncestors(
         typeof ownerOrgUnit === 'string' ? ownerOrgUnit : undefined,
     );
