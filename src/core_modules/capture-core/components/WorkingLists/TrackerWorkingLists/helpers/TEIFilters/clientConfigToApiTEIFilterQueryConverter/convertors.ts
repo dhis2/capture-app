@@ -11,6 +11,7 @@ import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../t
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
+import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
     dataElement?.unique ? { eq: filter.value } : { like: filter.value }
@@ -108,6 +109,11 @@ export const convertMainFilters = ({
         }
 
         const mainValue = mainFiltersTable[key](filter);
+
+        if (typeof filter.isEmpty === 'boolean') {
+            return { ...toApiEmptyValueFilter(filter), [key]: mainValue };
+        }
+
         if (mainValue !== undefined) {
             if (key === MAIN_FILTERS.ASSIGNEE) {
                 return { ...acc, ...mainValue };

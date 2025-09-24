@@ -5,7 +5,7 @@ import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration'
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 import {
     filterTypesObject,
     type AssigneeFilterData,
@@ -172,6 +172,11 @@ const getDataElementFilters = (
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
         if (!element || !getFilterByType[element.type]) {
             return null;
+        }
+
+        const emptyValueFilter = fromApiEmptyValueFilter(serverFilter);
+        if (emptyValueFilter) {
+            return { id: serverFilter.dataItem, ...emptyValueFilter };
         }
 
         if (isOptionSetFilter(element.type, serverFilter)) {

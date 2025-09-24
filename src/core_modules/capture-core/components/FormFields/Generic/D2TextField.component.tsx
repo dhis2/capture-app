@@ -8,6 +8,7 @@ type Props = {
     placeholder?: string;
     dataTest?: string;
     onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    onKeyDown?: (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export class D2TextField extends Component<Props> {

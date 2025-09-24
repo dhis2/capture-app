@@ -477,6 +477,12 @@ msgstr "Absolute range"
 msgid "Relative range"
 msgstr "Relative range"
 
+msgid "Is empty"
+msgstr "Is empty"
+
+msgid "Is not empty"
+msgstr "Is not empty"
+
 msgid "Max"
 msgstr "Max"
 

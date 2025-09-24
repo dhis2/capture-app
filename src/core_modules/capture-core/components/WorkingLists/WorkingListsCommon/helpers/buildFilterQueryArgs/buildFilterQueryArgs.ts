@@ -13,6 +13,7 @@ import {
     convertTrueOnly,
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
+import { API_NOT_EMPTY_VALUE_FILTER, API_EMPTY_VALUE_FILTER } from '../../../../FiltersForTypes/EmptyValue';
 
 const mappersForTypes = {
     [filterTypesObject.TEXT]: convertText,
@@ -37,6 +38,9 @@ function convertFilter(
     },
     unique?: boolean,
 ) {
+    if (typeof sourceValue.isEmpty === 'boolean') {
+        return sourceValue.isEmpty ? API_EMPTY_VALUE_FILTER : API_NOT_EMPTY_VALUE_FILTER;
+    }
     if (sourceValue && sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
