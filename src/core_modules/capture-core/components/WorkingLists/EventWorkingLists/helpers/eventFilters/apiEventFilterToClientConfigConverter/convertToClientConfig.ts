@@ -201,7 +201,10 @@ const getMainDataFilters = async (
     const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters: any[] = [];
     if (status) {
-        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type), id: 'status' });
+        filters.push({
+            ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type),
+            id: 'status',
+        });
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
@@ -236,7 +239,10 @@ export async function convertToClientConfig(
         return acc;
     }, {});
 
-    const customColumnOrder = getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching) || undefined;
+    const customColumnOrder = getCustomColumnsConfiguration(
+        eventQueryCriteria && eventQueryCriteria.displayColumnOrder,
+        columnsMetaForDataFetching,
+    ) || undefined;
 
     return {
         filters,

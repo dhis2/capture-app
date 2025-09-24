@@ -52,14 +52,15 @@ const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Plain
                         <div>{i18n.t('Linked event')}</div>
                     </div>
                     <div className={classes.decription}>
-                        {linkedStage?.name && stage?.name ? i18n.t(
-                            'This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
-                            {
-                                linkedStageName: linkedStage.name,
-                                stageName: stage.name,
-                                interpolation: { escapeValue: false },
-                            },
-                        ) : ''}
+                        {linkedStage?.name && stage?.name ?
+                            // eslint-disable-next-line max-len
+                            i18n.t('This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
+                                {
+                                    linkedStageName: linkedStage.name,
+                                    stageName: stage.name,
+                                    interpolation: { escapeValue: false },
+                                },
+                            ) : ''}
                     </div>
                     {widget}
                 </div>

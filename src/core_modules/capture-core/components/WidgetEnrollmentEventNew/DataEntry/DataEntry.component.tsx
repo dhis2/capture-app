@@ -135,7 +135,8 @@ const buildReportDateSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            onGetCustomFieldLabeClass: (props: any) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -178,7 +179,8 @@ const buildOrgUnitSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                            onGetCustomFieldLabeClass: (props: any) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -216,7 +218,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    onGetCustomFieldLabeClass: (props: any) =>
+                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -235,7 +238,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    onGetCustomFieldLabeClass: (props: any) =>
+                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -363,7 +367,8 @@ const getCategoryOptionsSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                                `${props.fieldOptions &&
+                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(

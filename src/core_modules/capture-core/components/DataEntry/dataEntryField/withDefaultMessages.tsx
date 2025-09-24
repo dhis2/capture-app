@@ -36,7 +36,10 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             let messageElement;
 
             if (validationError) {
-                messageElement = FieldMessages.createMessageElement(validationError, classNames(classes.error, classes.base));
+                messageElement = FieldMessages.createMessageElement(
+                    validationError,
+                    classNames(classes.error, classes.base),
+                );
             }
 
             return messageElement;
@@ -44,7 +47,8 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
 
         render() {
             const { classes, validationError, touched, validationAttempted, ...passOnProps } = this.props;
-            const messageElement = (touched || validationAttempted) ? FieldMessages.getMessageElement(validationError, classes) : null;
+            const messageElement = (touched || validationAttempted) ?
+                FieldMessages.getMessageElement(validationError, classes) : null;
 
             return (
                 <div>

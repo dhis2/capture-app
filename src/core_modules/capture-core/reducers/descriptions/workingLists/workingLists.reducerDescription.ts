@@ -2,7 +2,8 @@ import moment from 'moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import { workingListsCommonActionTypes } from '../../../components/WorkingLists/WorkingListsCommon';
 import { eventWorkingListsActionTypes } from '../../../components/WorkingLists/EventWorkingLists';
-import { recentlyAddedEventsActionTypes } from '../../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
+import { recentlyAddedEventsActionTypes } from
+    '../../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
 
 export const workingListsListRecordsDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
@@ -527,9 +528,9 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
 
 export const workingListsContextDesc = createReducerDescription({
     /*
-    Setting context on templates fetch and list view init (not on success anymore) because it makes sense for the loading effect.
-    The meaning is slightly changed though, having a context now implies that a request was done for this context,
-    not that data was successfully retrieved for this context.
+    Setting context on templates fetch and list view init (not on success anymore) because it makes sense for
+    the loading effect. The meaning is slightly changed though, having a context now implies that a request was
+    done for this context, not that data was successfully retrieved for this context.
     */
     [workingListsCommonActionTypes.TEMPLATES_FETCH]: (state, action) => {
         const { programId, storeId } = action.payload;

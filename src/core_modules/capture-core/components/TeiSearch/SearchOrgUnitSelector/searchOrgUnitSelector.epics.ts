@@ -44,10 +44,8 @@ export const teiSearchFilterOrgUnitsEpic = (action$: any, store: any, { querySin
             return from(querySingleResource({
                 resource: 'organisationUnits',
                 params: {
-                    fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
-                        'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                    ].join(','),
+                    fields: 'id,displayName,path,publicAccess,access,lastUpdated'
+                        + ',children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                     paging: true,
                     withinUserSearchHierarchy: true,
                     query: searchText,

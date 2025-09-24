@@ -45,7 +45,12 @@ type Props = {
 
 type ProgramStageSelectorPlainProps = Props & WithStyles<typeof styles>;
 
-const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }: ProgramStageSelectorPlainProps) => (
+const ProgramStageSelectorComponentPlain = ({
+    programStages,
+    onSelectProgramStage,
+    onCancel,
+    classes,
+}: ProgramStageSelectorPlainProps) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
             const disableStage =

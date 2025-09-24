@@ -5,4 +5,6 @@ export const NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS = Object.freeze({
     NEW_LINKED_ENTITY: Object.freeze({ value: 4, id: 'newLinkedEntity' }),
 });
 
-export type WizardStep = typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS[keyof typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS];
+export type WizardStep = typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS[
+    keyof typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS
+];

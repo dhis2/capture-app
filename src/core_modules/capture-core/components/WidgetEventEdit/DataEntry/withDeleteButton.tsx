@@ -34,8 +34,9 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                             {i18n.t('Delete event')}
                         </ModalTitle>
                         <ModalContent>
-                            {i18n.t('Deleting an event is permanent and cannot be undone.' + ' ' +
-                                'Are you sure you want to delete this event? ')}
+                            {i18n.t('Deleting an event is permanent and cannot be undone.')}
+                            {' '}
+                            {i18n.t('Are you sure you want to delete this event? ')}
                         </ModalContent>
                         <ModalActions>
                             <ButtonStrip end>

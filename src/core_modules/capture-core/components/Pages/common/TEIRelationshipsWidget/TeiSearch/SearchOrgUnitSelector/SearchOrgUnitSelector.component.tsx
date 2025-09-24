@@ -10,7 +10,15 @@ import {
     SingleOrgUnitSelectField,
 } from '../../../../../FormFields/New';
 
-const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(SingleOrgUnitSelectField)))));
+const TeiSearchOrgUnitField = withFocusSaver()(
+    withCalculateMessages()(
+        withDefaultFieldContainer()(
+            withLabel()(
+                withDisplayMessages()(SingleOrgUnitSelectField),
+            ),
+        ),
+    ),
+);
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
 
 type Props = {

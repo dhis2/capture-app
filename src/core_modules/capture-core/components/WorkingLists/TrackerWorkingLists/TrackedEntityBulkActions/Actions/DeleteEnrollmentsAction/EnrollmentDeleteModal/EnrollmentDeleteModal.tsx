@@ -113,6 +113,7 @@ const EnrollmentDeleteModalPlain = ({
             <ModalContent>
                 <div className={classes.modalContent}>
                     <div>
+                        {/* eslint-disable-next-line max-len */}
                         {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
                     </div>
 

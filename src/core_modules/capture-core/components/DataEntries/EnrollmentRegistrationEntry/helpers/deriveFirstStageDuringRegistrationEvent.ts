@@ -40,17 +40,21 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
-        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ? {} : { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
+        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ?
+            {} :
+            { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
         programStage: firstStageMetadata.id,
         program: programId,
         orgUnit: orgUnitId,
         ...eventAttributeCategoryOptions,
     };
 
-    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc: Array<{ dataElement: string; value: any }>, dataElement) => {
-        acc.push({ dataElement, value: currentEventValues[dataElement] });
-        return acc;
-    }, []) : undefined;
+    const dataValues = currentEventValues ?
+        Object.keys(currentEventValues).reduce((acc: Array<{ dataElement: string; value: any }>, dataElement) => {
+            acc.push({ dataElement, value: currentEventValues[dataElement] });
+            return acc;
+        }, []) :
+        undefined;
 
     if (dataValues) {
         event.dataValues = dataValues;

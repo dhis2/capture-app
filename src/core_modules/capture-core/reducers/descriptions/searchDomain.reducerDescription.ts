@@ -59,7 +59,9 @@ export const searchDomainDesc = createReducerDescription({
         searchableFields: payload.searchableFields,
         minAttributesRequiredToSearch: payload.minAttributesRequiredToSearch,
     }),
-    [searchBoxActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
+    [searchBoxActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, {
+        payload: { searchScopeType, searchScopeId, formId, currentSearchTerms },
+    }) => ({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
         otherResults: undefined,

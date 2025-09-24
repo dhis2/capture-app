@@ -131,8 +131,8 @@ const deriveProgramFromEnrollment = (
     enrollments: readonly Enrollment[],
     currentSearchScopeType?: string,
 ): TrackerProgram | undefined => {
-    // eslint-disable-next-line max-len
-    if ((currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) && enrollments?.[0]?.program) {
+    if ((currentSearchScopeType === searchScopes.ALL_PROGRAMS ||
+        currentSearchScopeType === searchScopes.PROGRAM) && enrollments?.[0]?.program) {
         const program: TrackerProgram = getTrackerProgramThrowIfNotFound(enrollments[0].program);
         return program;
     }
@@ -163,7 +163,14 @@ const CardListItemIndex = ({
         const imageValue = item.values[imageElement.id] as { url: string } | undefined;
         return (
             <div>
-                {imageValue && <CardImage dataTest={`list-item-image-${imageElement.id}`} imageUrl={imageValue.url} className={classes.image} size="medium" />}
+                {imageValue &&
+                    <CardImage
+                        dataTest={`list-item-image-${imageElement.id}`}
+                        imageUrl={imageValue.url}
+                        className={classes.image}
+                        size="medium"
+                    />
+                }
             </div>
         );
     };
@@ -229,7 +236,12 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map((dataElement: { id: string, name: string, type: keyof typeof dataElementTypes, optionSet?: OptionSet | null }) => {
+                            .map((dataElement: {
+                                id: string,
+                                name: string,
+                                type: keyof typeof dataElementTypes,
+                                optionSet?: OptionSet | null
+                            }) => {
                                 const { id, name, type, optionSet } = dataElement;
                                 return (
                                     <ListEntry

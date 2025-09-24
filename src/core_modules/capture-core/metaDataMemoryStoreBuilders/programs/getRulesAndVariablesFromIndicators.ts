@@ -90,8 +90,10 @@ function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInCondition = getVariablesFromExpression(rule.condition);
     const variablesInData = getVariablesFromExpression(action.data);
 
-    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programData));
-    const directAddressedVariablesFromData = variablesInData.map(variableInData => getDirectAddressedVariable(variableInData, programData));
+    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition =>
+        getDirectAddressedVariable(variableInCondition, programData));
+    const directAddressedVariablesFromData = variablesInData.map(variableInData =>
+        getDirectAddressedVariable(variableInData, programData));
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];
 
     return {
@@ -105,11 +107,12 @@ function isValueCountPresent(rule: any, action: any) {
 }
 
 function replaceValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
-    let valueCountText = variableObjectsCurrentExpression.reduce((accValueCountText: string, variableCurrentRule: any, index: number) => {
-        const currentText = `d2:count('${variableCurrentRule.displayName}')`;
-        accValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
-        return accValueCountText;
-    }, '');
+    let valueCountText = variableObjectsCurrentExpression.reduce(
+        (accValueCountText: string, variableCurrentRule: any, index: number) => {
+            const currentText = `d2:count('${variableCurrentRule.displayName}')`;
+            accValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
+            return accValueCountText;
+        }, '');
 
     valueCountText = `(${valueCountText})`;
 
@@ -132,11 +135,12 @@ function isPositiveValueCountPresent(rule: any, action: any) {
 }
 
 function replacePositiveValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
-    let positiveValueCountText = variableObjectsCurrentExpression.reduce((accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
-        const currentText = `d2:countifzeropos('${variableCurrentRule.displayName}')`;
-        accPositiveValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
-        return accPositiveValueCountText;
-    }, '');
+    let positiveValueCountText = variableObjectsCurrentExpression.reduce(
+        (accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
+            const currentText = `d2:countifzeropos('${variableCurrentRule.displayName}')`;
+            accPositiveValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
+            return accPositiveValueCountText;
+        }, '');
 
     positiveValueCountText = `(${positiveValueCountText})`;
 
@@ -228,7 +232,9 @@ export function getRulesAndVariablesFromProgramIndicators(
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
             accOneLevelContainer.rules.push(container.rule);
 
-            accOneLevelContainer.variables = accOneLevelContainer.variables ? [...accOneLevelContainer.variables, ...container.variables] : container.variables;
+            accOneLevelContainer.variables = accOneLevelContainer.variables
+                ? [...accOneLevelContainer.variables, ...container.variables]
+                : container.variables;
             return accOneLevelContainer;
         }, { rules: null, variables: null });
 }

@@ -53,7 +53,9 @@ const WidgetBreakingTheGlassPlain = ({
                     </div>
                     <br />
                     <NoticeBox title={noticeBoxTitle} warning>
-                        {i18n.t('You must provide a reason to check for enrollments in this protected program. All activity will be logged.')}
+                        {i18n.t('You must provide a reason to check for enrollments in this protected program.')}
+                        {' '}
+                        {i18n.t('All activity will be logged.')}
                     </NoticeBox>
                     <br />
                     <TextAreaField

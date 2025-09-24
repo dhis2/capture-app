@@ -67,10 +67,25 @@ type Props = {
     fields: Array<FieldConfig>;
     values: { [id: string]: any };
     fieldsUI: { [id: string]: FieldUI };
-    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: (...args: any[]) => any) => void;
-    onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string, promiseForIsValidating: string) => void;
+    onUpdateFieldAsync: (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        callback: (...args: any[]) => any
+    ) => void;
+    onUpdateField: (
+        value: any,
+        uiState: FieldUI,
+        fieldId: string,
+        formBuilderId: string,
+        promiseForIsValidating: string
+    ) => void;
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void;
-    onFieldsValidated?: ((fieldsUI: { [id: string]: FieldUI }, formBuilderId: string, uidsForIsValidating: Array<string>) => void) | null;
+    onFieldsValidated?: ((
+        fieldsUI: { [id: string]: FieldUI },
+        formBuilderId: string,
+        uidsForIsValidating: Array<string>
+    ) => void) | null;
     querySingleResource: QuerySingleResource;
     validationAttempted?: boolean | null;
     validateIfNoUIData?: boolean | null;
@@ -342,7 +357,11 @@ export class FormBuilder extends React.Component<Props> {
         this.commitFieldUpdate({ fieldId, validators }, value, { ...options, plugin: true });
     }
 
-    async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: FieldCommitOptionsExtended | null) {
+    async commitFieldUpdate(
+        { fieldId, validators, onIsEqual }: FieldCommitConfig,
+        value: any,
+        options?: FieldCommitOptionsExtended | null,
+    ) {
         const {
             onUpdateFieldUIOnly,
             onUpdateField,
@@ -562,7 +581,8 @@ export class FormBuilder extends React.Component<Props> {
         const asyncProps: any = {};
 
         if (props.async) {
-            asyncProps.onCommitAsync = (callback: (...args: any[]) => any) => this.handleCommitAsync(field.id, props.label, callback);
+            asyncProps.onCommitAsync = (callback: (...args: any[]) => any) =>
+                this.handleCommitAsync(field.id, props.label, callback);
             asyncProps.asyncUIState = this.asyncUIState[field.id];
         }
 

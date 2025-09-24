@@ -74,7 +74,10 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
         }),
     };
 
-    const getSubvalueKeysByType = (clientData: ClientData, columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>): SubvalueKeysByType =>
+    const getSubvalueKeysByType = (
+        clientData: ClientData,
+        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>,
+    ): SubvalueKeysByType =>
         columnsWithSubvalues
             .map(({ id, type }) => {
                 const subvalueKeys = clientData
@@ -119,7 +122,11 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
         return Promise.all(subvaluePromises);
     };
 
-    const addSubvalues = (clientData: ClientData, subvaluesByType: SubvaluesByType, columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>): ClientData =>
+    const addSubvalues = (
+        clientData: ClientData,
+        subvaluesByType: SubvaluesByType,
+        columnsWithSubvalues: Array<TeiColumnMetaForDataFetching>,
+    ): ClientData =>
         columnsWithSubvalues
             .reduce((columns, { id: columnId, type: columnType }) => {
                 const { subvalues = {} } = (subvaluesByType.find(({ type }) => type === columnType) || {});

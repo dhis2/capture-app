@@ -34,7 +34,8 @@ const convertOrgUnit = (formValues: FormValues, dataElement: DataElement) => {
 };
 
 const convertAge = (formValues: FormValues, dataElement: DataElement) => {
-    const convertedAge = formValues && (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
+    const convertedAge = formValues &&
+        (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
     return `${dataElement.id}:eq:${convertedAge}`;
 };
 

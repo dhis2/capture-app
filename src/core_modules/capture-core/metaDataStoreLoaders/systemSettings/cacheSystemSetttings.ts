@@ -23,7 +23,8 @@ export async function cacheSystemSettings(
             id: 'calendar',
             value: systemSettings.calendar !== 'julian' ? systemSettings.calendar : 'iso8601',
         },
-        // These are user settings and should be placed somewhere else. Will do this in https://dhis2.atlassian.net/browse/DHIS2-19015.
+        // These are user settings and should be placed somewhere else.
+        // Will do this in https://dhis2.atlassian.net/browse/DHIS2-19015.
         {
             id: 'uiLocale',
             value: userSettings.uiLocale,

@@ -10,7 +10,10 @@ type Props = {
 };
 
 export class Pagination extends React.Component<Props> {
-    static getRowsCountElement(rowsCountSelectorLabel?: string | null | undefined, rowsCountSelector?: React.ReactNode | null | undefined) {
+    static getRowsCountElement(
+        rowsCountSelectorLabel?: string | null | undefined,
+        rowsCountSelector?: React.ReactNode | null | undefined,
+    ) {
         if (!rowsCountSelector) {
             return null;
         }

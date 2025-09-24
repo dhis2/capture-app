@@ -61,7 +61,9 @@ const InfoBoxPlain = ({
                             {i18n.t('There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.', {
                                 count: eventCountInOrgUnit,
                                 orgUnitName,
+                                // eslint-disable-next-line max-len
                                 defaultValue: 'There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.',
+                                // eslint-disable-next-line max-len
                                 defaultValue_plural: 'There are {{count}} scheduled events in this program in {{orgUnitName}} on this day.',
                                 interpolation: {
                                     escapeValue: false,

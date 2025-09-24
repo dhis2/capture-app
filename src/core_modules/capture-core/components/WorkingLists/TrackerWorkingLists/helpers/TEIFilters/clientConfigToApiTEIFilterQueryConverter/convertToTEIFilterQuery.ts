@@ -22,7 +22,8 @@ export const convertToTEIFilterAttributes = ({
 
             if (!getFilterByType[element.type]) {
                 log.error(
-                    errorCreator('tried to convert a filter to api value, but there was no filter converter or specification found')({
+                    errorCreator('tried to convert a filter to api value, ' +
+                        'but there was no filter converter or specification found')({
                         filter,
                         element,
                         key,

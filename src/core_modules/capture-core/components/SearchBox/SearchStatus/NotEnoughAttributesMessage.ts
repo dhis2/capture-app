@@ -19,8 +19,8 @@ export const NotEnoughAttributesMessage = ({
         });
     }
     if (searchableFields.length > 1) {
-        return i18n.t(
-            'Fill in at least {{minAttributesRequiredToSearch}} of these fields to search{{escape}} {{searchableAttributes}}',
+        // eslint-disable-next-line max-len
+        return i18n.t('Fill in at least {{minAttributesRequiredToSearch}} of these fields to search{{escape}} {{searchableAttributes}}',
             {
                 escape: ':',
                 minAttributesRequiredToSearch,

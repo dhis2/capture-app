@@ -6,7 +6,11 @@ import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
-export const getDateTimeFieldConfigForCustomForm = (metaData: MetaDataElement, options: any, querySingleResource: QuerySingleResource) => {
+export const getDateTimeFieldConfigForCustomForm = (
+    metaData: MetaDataElement,
+    options: any,
+    querySingleResource: QuerySingleResource,
+) => {
     const props = createProps({
         dateWidth: '100%',
         dateMaxWidth: '350px',
