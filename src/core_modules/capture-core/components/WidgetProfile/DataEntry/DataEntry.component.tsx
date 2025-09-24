@@ -30,6 +30,7 @@ export const DataEntryComponent = ({
                 'Change information about this {{trackedEntityName}} here.',
                 { trackedEntityName, interpolation: { escapeValue: false } },
             )}
+            {' '}
             {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
             <DataEntry
                 id={dataEntryId}
