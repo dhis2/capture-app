@@ -2,6 +2,8 @@ import React, { useState, useMemo, type ComponentType } from 'react';
 import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { dataElementTypes } from '../../../metaData';

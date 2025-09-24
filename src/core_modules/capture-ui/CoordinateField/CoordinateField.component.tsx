@@ -1,6 +1,8 @@
 import React from 'react';
 import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
