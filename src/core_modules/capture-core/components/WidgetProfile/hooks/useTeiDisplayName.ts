@@ -41,18 +41,18 @@ const getTetAttributesDisplayInList = (attributes: TeiAttribute[], tetAttributes
     return getAttributesValues(attributes, firstId, secondId);
 };
 
-const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: { id: string }[]) => {
-    const [firstId, secondId] = tetAttributes.map(({ id }) => id);
+const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: TetAttribute[]) => {
+    const [firstId, secondId] = tetAttributes.map(({ trackedEntityAttribute }) => trackedEntityAttribute.id);
     return getAttributesValues(attributes, firstId, secondId);
 };
 
 const deriveTeiName = (tetAttributes: TetAttribute[] | { id: string }[], updatedAttributes: TeiAttribute[], fallbackName?: string) => {
     if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
 
-    const teiNameDisplayInReports = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);
-    if (teiNameDisplayInReports) return teiNameDisplayInReports;
+    const teiNameDisplayInList = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);
+    if (teiNameDisplayInList) return teiNameDisplayInList;
 
-    const teiName = getTetAttributes(updatedAttributes, tetAttributes as { id: string }[]);
+    const teiName = getTetAttributes(updatedAttributes, tetAttributes as TetAttribute[]);
     if (teiName) return teiName;
 
     return fallbackName ?? DEFAULT_NAME;
