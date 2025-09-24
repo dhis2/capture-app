@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { LinkButton } from '../../../../Buttons/LinkButton.component';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.const';
 import type { PlainProps } from './breadcrumbs.types';

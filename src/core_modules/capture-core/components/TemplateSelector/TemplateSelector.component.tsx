@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
-import cx from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import { Button, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { BookmarkAddIcon } from 'capture-ui/Icons';
@@ -9,7 +9,7 @@ import { Widget } from '../Widget';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
 
-const styles = createStyles({
+const styles = {
     configsContainer: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -41,7 +41,7 @@ const styles = createStyles({
         width: spacers.dp32,
         height: spacers.dp32,
     },
-});
+};
 
 type Props = {
     templates: WorkingListTemplates;

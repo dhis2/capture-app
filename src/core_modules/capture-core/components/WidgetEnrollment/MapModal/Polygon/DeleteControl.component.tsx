@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, type ComponentType } from 'react';
 import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import L, { Control } from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
 
@@ -22,7 +22,7 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
             <div className="leaflet-draw-toolbar leaflet-bar">
                 {/* eslint-disable-next-line */}
                 <a
-                    className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': disabled })}
+                    className={cx('leaflet-draw-edit-remove', { 'leaflet-disabled': disabled })}
                     onClick={onHandleClick}
                     title={text}
                     role="button"

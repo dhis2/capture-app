@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { IconMessages16 } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 type Props = {

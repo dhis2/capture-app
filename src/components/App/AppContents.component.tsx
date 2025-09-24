@@ -24,13 +24,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 const Index = ({ classes }: Props) => (
     <>
         <div
-            css={classes.app}
+            className={classes.app}
             dir={systemSettingsStore.get().dir}
         >
             <AppPagesLoader />
             <FeedbackBar />
         </div>
-        <div css={classes.iOSWorkaround} />
+        <div className={classes.iOSWorkaround} />
     </>
 );
 Index.displayName = 'AppContents';

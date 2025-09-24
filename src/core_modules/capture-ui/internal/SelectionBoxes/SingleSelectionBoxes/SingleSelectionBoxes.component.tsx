@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
 import { SingleSelectBox } from './SingleSelectBox/SingleSelectBox.component';
 import { withFocusHandler } from './SingleSelectBox/withFocusHandler';
@@ -56,12 +56,12 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
         }
     }
 
-    getCheckedClass = (iconSelected?: string, iconDisabled?: string, isDisabled?: boolean) => classNames(
+    getCheckedClass = (iconSelected?: string, iconDisabled?: string, isDisabled?: boolean) => cx(
         iconSelected,
         iconDisabled && { [iconDisabled]: isDisabled },
     );
 
-    getUncheckedClass = (iconDeselected?: string, iconDisabled?: string, isDisabled?: boolean) => classNames(
+    getUncheckedClass = (iconDeselected?: string, iconDisabled?: string, isDisabled?: boolean) => cx(
         iconDeselected,
         iconDisabled && { [iconDisabled]: isDisabled },
     );

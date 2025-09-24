@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -57,11 +57,11 @@ const tabMode = Object.freeze({
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: any): Readonly<any> => ({
+const getStyles = (): Readonly<any> => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

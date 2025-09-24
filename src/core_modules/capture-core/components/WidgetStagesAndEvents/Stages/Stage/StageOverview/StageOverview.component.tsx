@@ -1,6 +1,6 @@
 import React from 'react';
-import cx from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     colors, spacers, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip,
@@ -148,7 +148,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     </div>
                     {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
                 </div> : null}
-                {totalEvents > 0 && <div className={cx(classes.indicator)}>
+                {totalEvents > 0 && <div className={classes.indicator}>
                     <div className={classes.indicatorIcon}>
                         <IconClockHistory16 />
                     </div>

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import { withStyles } from '@material-ui/core/';
+import { withStyles } from 'capture-core-utils/styles';
 import {
     spacers,
     IconFileDocument24,

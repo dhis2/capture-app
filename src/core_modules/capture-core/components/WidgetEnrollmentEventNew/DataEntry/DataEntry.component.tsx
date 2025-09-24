@@ -1,7 +1,7 @@
 import React, { type ComponentType, Component } from 'react';
 import { compose } from 'redux';
-import type { WithStyles } from '@material-ui/core/styles';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
+import { withStyles, withTheme } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
@@ -73,7 +73,7 @@ const getStyles = (theme: any) => ({
         paddingBottom: theme.typography.pxToRem(15),
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

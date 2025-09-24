@@ -33,11 +33,11 @@ type Props = {
 const AssigneePlain = (props: Props & WithStyles<typeof getStyles>) => {
     const { classes, orientation, ...passOnProps } = props;
     return (
-        <div css={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
-            <div css={orientation === 'horizontal' ? classes.label : undefined}>
+        <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
+            <div className={orientation === 'horizontal' ? classes.label : undefined}>
                 {i18n.t('Assigned user')}
             </div>
-            <div css={orientation === 'horizontal' ? classes.field : undefined}>
+            <div className={orientation === 'horizontal' ? classes.field : undefined}>
                 <UserField inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
             </div>
         </div>);

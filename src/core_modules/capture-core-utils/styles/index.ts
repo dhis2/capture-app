@@ -1,3 +1,3 @@
 export { withStyles, type WithStyles } from './withStyles';
-export { composeCssArray } from './composeCssArray';
+export { withTheme, type WithTheme } from './withTheme';
 export { theme } from './theme';

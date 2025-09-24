@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { Checkbox, spacersNum, FieldSet, Label } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
 import { FormGroup } from '../FormGroup.component';
 
@@ -27,7 +27,7 @@ type Props = OwnProps & WithStyles<typeof styles>;
 class MultiSelectBoxesPlain extends Component<Props> {
     checkedValues!: Set<any> | null;
     labelClasses: any;
-    materialUIContainerInstance: any;
+    containerInstance: any;
 
     constructor(props: Props) {
         super(props);
@@ -126,7 +126,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
         this.setCheckedStatusForBoxes();
 
         return (
-            <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
+            <div ref={(containerInstance) => { this.containerInstance = containerInstance; }}>
                 <FieldSet>
                     {
                         (() => {
@@ -137,7 +137,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
-                                    className={this.labelClasses as any}
+                                    className={this.labelClasses.root}
                                 >
                                     {label}
                                 </Label>

@@ -1,7 +1,7 @@
 import React from 'react';
 import log from 'loglevel';
 import { colors, IconArrowRight16, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
 import { errorCreator } from '../../../../../../capture-core-utils';
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { CircularLoader, colors } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import isObject from 'd2-utilizr/lib/isObject';
 
 const styles = (theme: any) => ({
@@ -90,7 +90,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             return (
                 <ul
                     data-test="error-message"
-                    className={classNames(baseClass, messageClass)}
+                    className={cx(baseClass, messageClass)}
                 >
                     {Array.isArray(text) ? text?.map(message => (
                         <li className={listItemClass}>

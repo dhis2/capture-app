@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 
 const styles = (theme: any) => ({
     base: {
@@ -32,11 +32,11 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
-        static getMessageElement(validationError: string, classes: { base: string; error: string }) {
+        static getMessageElement(validationError: string, classes: Record<string, any>) {
             let messageElement;
 
             if (validationError) {
-                messageElement = FieldMessages.createMessageElement(validationError, classNames(classes.error, classes.base));
+                messageElement = FieldMessages.createMessageElement(validationError, cx(classes.error, classes.base));
             }
 
             return messageElement;

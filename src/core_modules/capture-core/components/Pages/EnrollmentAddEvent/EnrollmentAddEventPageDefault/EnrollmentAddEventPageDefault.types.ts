@@ -1,4 +1,3 @@
-import type { WithStyles } from '@material-ui/core';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 import type {
@@ -38,7 +37,7 @@ export type Props = {
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
-} & WithStyles<any>;
+};
 
 export type ContainerProps = {
     pageLayout: PageLayoutConfig;

@@ -1,10 +1,10 @@
 import React, { useState, useMemo, type ComponentType } from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { CoordinatesProps } from './Coordinates.types';
 import { CoordinateInput } from '../../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
 import { isEqual } from '../../../../utils/valueEqualityChecker';
@@ -239,7 +239,7 @@ const CoordinatesPlain = ({
             <ModalTitle>{i18n.t('Coordinates')}</ModalTitle>
             <ModalContent className={classes.modalContent}>
                 {renderMap()}
-                <div className={classNames({ [classes.errorContainer]: hasErrors })}>
+                <div className={cx({ [classes.errorContainer]: hasErrors })}>
                     <div className={classes.inputWrapper}>
                         <div className={classes.inputContent}>{renderLatitude()}</div>
                         <div className={classes.inputContent}>{renderLongitude()}</div>

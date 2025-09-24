@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
 
 const styles = {

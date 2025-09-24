@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, type ComponentType } from 'react';
 import moment from 'moment';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacersNum, Menu, MenuItem, Button, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';

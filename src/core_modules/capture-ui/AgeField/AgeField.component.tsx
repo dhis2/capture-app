@@ -6,7 +6,7 @@ import {
 } from '@dhis2/multi-calendar-dates';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
 import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
@@ -272,7 +272,7 @@ class D2AgeFieldPlain extends Component<Props> {
             ...passOnProps
         } = this.props;
 
-        const dateInputContainerClass = classNames(
+        const dateInputContainerClass = cx(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
         return (

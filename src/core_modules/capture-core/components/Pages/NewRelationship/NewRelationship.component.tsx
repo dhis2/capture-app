@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector.component';
 import { TeiRelationship } from './TeiRelationship/TeiRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';

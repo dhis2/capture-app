@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';

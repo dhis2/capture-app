@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
@@ -80,7 +80,7 @@ const getStyles: any = (theme: any) => ({
         paddingBottom: theme.typography.pxToRem(15),
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

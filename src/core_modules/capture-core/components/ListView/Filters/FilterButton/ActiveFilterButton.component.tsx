@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 
 const ClearIcon = ({ className, ...props }) => (
     <svg
@@ -88,7 +88,7 @@ class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof 
     render() {
         const { onChange, classes, iconClass, title, arrowIconElement, buttonText } = this.props;
         const isHovered = this.state.isHovered;
-        const buttonClasses = classNames(classes.button, { [classes.hovered]: isHovered });
+        const buttonClasses = cx(classes.button, { [classes.hovered]: isHovered });
 
         return (
             <div
@@ -110,7 +110,7 @@ class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof 
                         <ClearIcon
                             onMouseEnter={this.clearIsHovered}
                             onMouseLeave={this.setIsHovered}
-                            className={classNames(iconClass, classes.clearIcon)}
+                            className={cx(iconClass, classes.clearIcon)}
                             onClick={this.handleClearClick}
                             onMouseDown={ActiveFilterButtonPlain.stopClearPropagation}
                             onMouseUp={ActiveFilterButtonPlain.stopClearPropagation}

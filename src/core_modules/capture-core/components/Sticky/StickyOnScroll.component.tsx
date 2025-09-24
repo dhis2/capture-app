@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { type ReactNode, type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 type OwnProps = {
     offsetTop: number;

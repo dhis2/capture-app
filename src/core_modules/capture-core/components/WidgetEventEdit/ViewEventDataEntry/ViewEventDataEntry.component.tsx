@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
-import { withStyles, WithStyles } from '@material-ui/core/';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -62,7 +62,7 @@ const getStyles = (theme: any): Readonly<any> => ({
         whiteSpace: 'nowrap',
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

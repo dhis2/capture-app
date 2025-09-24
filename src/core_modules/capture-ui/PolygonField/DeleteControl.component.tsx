@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import L from 'leaflet';
 import { MapControl, withLeaflet } from 'react-leaflet';
 
@@ -27,7 +27,7 @@ class DeleteControlPlain extends MapControl<any, Props> {
             <div className="leaflet-draw-toolbar leaflet-bar">
                 {/* eslint-disable-next-line */}
                 <a
-                    className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.componentProps.disabled })}
+                    className={cx('leaflet-draw-edit-remove', { 'leaflet-disabled': this.componentProps.disabled })}
                     onClick={this.onClick}
                     title={text}
                     role="button"
@@ -63,7 +63,7 @@ class DeleteControlPlain extends MapControl<any, Props> {
         if (toProps.disabled !== fromProps.disabled) {
             const buttons = this.leafletElement.getContainer().getElementsByClassName('leaflet-draw-edit-remove');
             if (buttons && buttons.length > 0) {
-                buttons[0].className = classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': toProps.disabled });
+                buttons[0].className = cx('leaflet-draw-edit-remove', { 'leaflet-disabled': toProps.disabled });
             }
         }
     }

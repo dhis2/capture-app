@@ -12,7 +12,7 @@ import {
     colors,
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './DeleteRelationship.types';
 
 const styles: Readonly<any> = {

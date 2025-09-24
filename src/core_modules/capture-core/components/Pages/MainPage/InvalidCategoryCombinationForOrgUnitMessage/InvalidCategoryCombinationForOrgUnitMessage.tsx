@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 
 const styles: Readonly<any> = {
