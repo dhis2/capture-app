@@ -30,7 +30,7 @@ export const buildEnrollmentForm = async ({
     locale,
     minorServerVersion,
 }: Props) => {
-    const searchGroups = await buildSearchGroup(cachedProgram, locale);
+    const { searchGroups } = await buildSearchGroup(cachedProgram, locale);
     const enrollmentFactory = new EnrollmentFactory({
         cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),
         cachedOptionSets: new Map(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),

@@ -26,11 +26,19 @@ const searchScopes = {
 };
 
 export const buildSearchOption =
-    (id: string, name: string, searchGroups: SearchGroups, searchScope: string, type?: string): AvailableSearchOption =>
+    (
+        id: string,
+        name: string,
+        searchGroups: SearchGroups,
+        searchScope: string,
+        type?: string,
+        filteredUnsupportedAttributes?: Array<{ id: string; displayName: string; valueType: string }>,
+    ): AvailableSearchOption =>
         ({
             searchOptionId: id,
             searchOptionName: name,
             TETypeName: type,
+            filteredUnsupportedAttributes,
             searchGroups: [...searchGroups.values()]
                 .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
                     unique,

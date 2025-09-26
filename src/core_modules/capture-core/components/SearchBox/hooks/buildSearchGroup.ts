@@ -35,10 +35,15 @@ export const buildSearchGroup = async ({
         locale,
     });
 
-    const SearchGroup = await searchGroupFactory.build(
+    const searchGroups = await searchGroupFactory.build(
         searchAttributes,
         minAttributesRequiredToSearch,
     );
 
-    return SearchGroup;
+    const filteredUnsupportedAttributes = searchGroupFactory.getFilteredUnsupportedAttributes();
+
+    return {
+        searchGroups,
+        filteredUnsupportedAttributes,
+    };
 };

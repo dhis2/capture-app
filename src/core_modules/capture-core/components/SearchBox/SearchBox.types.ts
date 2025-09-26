@@ -16,6 +16,7 @@ export type AvailableSearchOption = {
     searchOptionName: string;
     TETypeName?: string;
     searchGroups: SearchGroups;
+    filteredUnsupportedAttributes?: Array<{ id: string; displayName: string; valueType: string }>;
 };
 
 export type ComponentProps = Readonly<{
