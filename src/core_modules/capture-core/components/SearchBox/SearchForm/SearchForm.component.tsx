@@ -8,6 +8,7 @@ import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
+import { UnsupportedAttributesNotification } from '../UnsupportedAttributesNotification';
 
 const styles: Readonly<any> = {
     searchDomainsContainer: {
@@ -91,6 +92,7 @@ const SearchFormIndex = ({
     removeFormDataFromReduxStore,
     selectedSearchScopeId,
     searchGroupsForSelectedScope,
+    filteredUnsupportedAttributes,
     classes,
     formsValues,
     searchStatus,
@@ -308,6 +310,11 @@ const SearchFormIndex = ({
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
+                                        {filteredUnsupportedAttributes && (
+                                            <UnsupportedAttributesNotification
+                                                filteredUnsupportedAttributes={filteredUnsupportedAttributes}
+                                            />
+                                        )}
                                     </div>
                                 </Section>
                             </div>
@@ -339,6 +346,7 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
+        filteredUnsupportedAttributes,
     ]);
 };
 

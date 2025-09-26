@@ -13,6 +13,7 @@ import type {
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
 import { OptionSetFactory } from '../optionSet';
+import { isSearchSupportedAttributeType } from '../../../../components/SearchBox/SearchForm/unsupportedSearchTypes.const';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
 const translationPropertyNames = {
@@ -46,6 +47,7 @@ export class SearchGroupFactory {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     locale: string | null;
     optionSetFactory: OptionSetFactory;
+    filteredUnsupportedAttributes: Array<{ id: string; displayName: string; valueType: string }>;
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
@@ -57,6 +59,7 @@ export class SearchGroupFactory {
             cachedOptionSets,
             locale,
         );
+        this.filteredUnsupportedAttributes = [];
     }
 
     _getAttributeTranslation(
@@ -85,20 +88,20 @@ export class SearchGroupFactory {
 
             o.id = id;
             o.name =
-              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayName;
+                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+                || displayName;
 
             o.shortName =
-              this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
-              || displayShortName;
+                this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
+                || displayShortName;
 
             o.formName =
-              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayFormName;
+                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+                || displayFormName;
 
             o.description =
-              this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
-              || description;
+                this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
+                || description;
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
@@ -173,6 +176,8 @@ export class SearchGroupFactory {
     }
 
     build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
+        this.filteredUnsupportedAttributes = [];
+
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
@@ -180,6 +185,19 @@ export class SearchGroupFactory {
             }))
             .filter(attribute =>
                 attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
+            .filter((attribute) => {
+                const isSupported = isSearchSupportedAttributeType(attribute.trackedEntityAttribute!.valueType);
+
+                if (!isSupported) {
+                    this.filteredUnsupportedAttributes.push({
+                        id: attribute.trackedEntityAttribute!.id,
+                        displayName: attribute.trackedEntityAttribute!.displayName,
+                        valueType: attribute.trackedEntityAttribute!.valueType,
+                    });
+                }
+
+                return isSupported;
+            })
             .reduce((accGroups: any, attribute) => {
                 if (attribute.trackedEntityAttribute!.unique) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
@@ -208,5 +226,12 @@ export class SearchGroupFactory {
             },
             ),
         );
+    }
+
+    /**
+     * Returns the list of attributes that were filtered out due to being unsupported for search
+     */
+    getFilteredUnsupportedAttributes(): Array<{ id: string; displayName: string; valueType: string }> {
+        return this.filteredUnsupportedAttributes;
     }
 }

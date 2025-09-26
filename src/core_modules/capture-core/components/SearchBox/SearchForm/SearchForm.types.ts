@@ -16,8 +16,9 @@ export type FormsValues = {
 };
 
 export type OwnProps = {
-    searchGroupsForSelectedScope: SearchGroups;
     selectedSearchScopeId?: string;
+    searchGroupsForSelectedScope: SearchGroups;
+    filteredUnsupportedAttributes?: Array<{ id: string; displayName: string; valueType: string }>;
 };
 
 export type PropsFromRedux = {

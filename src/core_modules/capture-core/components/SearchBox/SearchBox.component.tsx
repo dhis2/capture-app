@@ -75,6 +75,7 @@ const Index = ({
     }, [cleanSearchRelatedInfo, showInitialSearchBox]);
 
     const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
+    const filteredUnsupportedAttributes = availableSearchOption?.filteredUnsupportedAttributes ?? [];
 
     const handleSearchScopeSelection = (searchScopeId: string, searchType: any) => {
         showInitialSearchBox();
@@ -107,6 +108,7 @@ const Index = ({
                                     <SearchForm
                                         selectedSearchScopeId={selectedSearchScopeId ?? ''}
                                         searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                                        filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                                     />
                                 )}
                                 <SearchStatus
