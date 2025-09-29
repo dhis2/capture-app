@@ -1,1 +1,5 @@
-export { UnsupportedAttributesNotification, filterUnsupportedAttributes, type FilteredAttribute } from './UnsupportedAttributesNotification';
+export {
+    UnsupportedAttributesNotification,
+    filterUnsupportedAttributes,
+    type FilteredAttribute,
+} from './UnsupportedAttributesNotification';

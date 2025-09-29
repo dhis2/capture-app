@@ -12,7 +12,7 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui';
-import { UnsupportedAttributesNotification } from 'capture-core/utils/warnings';
+import { UnsupportedAttributesNotification, filterUnsupportedAttributes } from 'capture-core/utils/warnings';
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
@@ -55,7 +55,6 @@ type OwnProps = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
-    filteredUnsupportedAttributes?: Array<{ id: string; displayName: string; valueType: string }>;
 };
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
@@ -204,6 +203,20 @@ class SearchFormPlain extends React.Component<Props, State> {
                 </div>
             );
         }
+
+        const elements = searchGroup.searchForm.getElements().map(element => ({
+            id: element.id,
+            displayName: element.formName,
+            valueType: element.type,
+        }));
+
+        console.log('Elements from searchForm:', elements);
+        console.log('Element types:', elements.map(el => el.valueType));
+
+        const { filteredUnsupportedAttributes } = filterUnsupportedAttributes(elements);
+
+        console.log('filteredUnsupportedAttributes', filteredUnsupportedAttributes);
+
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div
@@ -227,9 +240,9 @@ class SearchFormPlain extends React.Component<Props, State> {
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
-                {!searchGroup.unique && this.props.filteredUnsupportedAttributes && (
+                {!searchGroup.unique && filteredUnsupportedAttributes && (
                     <UnsupportedAttributesNotification
-                        filteredUnsupportedAttributes={this.props.filteredUnsupportedAttributes}
+                        filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                     />
                 )}
             </div>

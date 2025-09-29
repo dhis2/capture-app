@@ -122,7 +122,6 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     searchGroup={sg}
                     onSearch={handleSearch}
                     onSearchValidationFailed={handleSearchValidationFailed}
-                    filteredUnsupportedAttributes={props.filteredUnsupportedAttributes}
                 />
             </Section>
         );

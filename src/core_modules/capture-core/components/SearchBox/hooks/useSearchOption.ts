@@ -21,7 +21,7 @@ type Props = {
 export const useSearchOption = ({
     programId,
     trackedEntityTypeId,
-}: Props): { searchOption?: AvailableSearchOption; isLoading: boolean; isError: boolean } => {
+}: Props): { searchOption?: AvailableSearchOption; filteredUnsupportedAttributes?: any[]; isLoading: boolean; isError: boolean } => {
     const { locale } = useUserLocale();
 
     const searchScope = useMemo(() => {
@@ -45,13 +45,15 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data: searchGroups, isLoading, isError } = useIndexedDBQuery<SearchGroup[]>(
+    const { data: searchGroupData, isLoading, isError } = useIndexedDBQuery<{ searchGroups: SearchGroup[]; }>(
         ['searchGroup', searchId],
         () => buildSearchGroup(searchData, locale),
         {
             enabled: !!(searchId && locale && searchData),
         },
     );
+
+    const searchGroups = searchGroupData?.searchGroups;
 
     const searchOption = useMemo(() => {
         if (!searchName || !searchGroups || !searchScope) {

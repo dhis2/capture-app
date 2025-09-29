@@ -12,17 +12,14 @@ import {
 import type { OwnProps } from './TeiSearch.types';
 import { getSearchGroups } from './getSearchGroups';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
-import { getFilteredUnsupportedAttributes } from './getFilteredUnsupportedAttributes';
 
 const mapStateToProps = (state: any, props: OwnProps) => {
     const currentTeiSearch = state.teiSearch[props.id] ?? {};
     const { selectedTrackedEntityTypeId } = props;
     const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
     const { name } = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
-    const filteredUnsupportedAttributes = getFilteredUnsupportedAttributes(searchGroups, selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
     return {
         searchGroups,
-        filteredUnsupportedAttributes,
         showResults: !!currentTeiSearch.searchResults,
         openSearchGroupSection: currentTeiSearch.openSearchGroupSection,
         trackedEntityTypeName: name.toLowerCase(),
