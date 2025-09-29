@@ -88,20 +88,20 @@ export class SearchGroupFactory {
 
             o.id = id;
             o.name =
-                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-                || displayName;
+              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+              || displayName;
 
             o.shortName =
-                this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
-                || displayShortName;
+              this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
+              || displayShortName;
 
             o.formName =
-                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-                || displayFormName;
+              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+              || displayFormName;
 
             o.description =
-                this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
-                || description;
+              this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
+              || description;
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
@@ -186,21 +186,24 @@ export class SearchGroupFactory {
             .filter(attribute =>
                 attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
             .filter((attribute) => {
-                const isSupported = isSearchSupportedAttributeType(attribute.trackedEntityAttribute!.valueType);
+                const trackedEntityAttribute = attribute.trackedEntityAttribute;
+                if (!trackedEntityAttribute) return false;
+                const isSupported = isSearchSupportedAttributeType(trackedEntityAttribute.valueType);
 
                 if (!isSupported) {
                     this.filteredUnsupportedAttributes.push({
-                        id: attribute.trackedEntityAttribute!.id,
-                        displayName: attribute.trackedEntityAttribute!.displayName,
-                        valueType: attribute.trackedEntityAttribute!.valueType,
+                        id: trackedEntityAttribute.id,
+                        displayName: trackedEntityAttribute.displayFormName,
+                        valueType: trackedEntityAttribute.valueType,
                     });
                 }
 
                 return isSupported;
             })
             .reduce((accGroups: any, attribute) => {
-                if (attribute.trackedEntityAttribute!.unique) {
-                    accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
+                const trackedEntityAttribute = attribute.trackedEntityAttribute;
+                if (trackedEntityAttribute?.unique) {
+                    accGroups[trackedEntityAttribute.id] = [attribute];
                 } else {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
                 }
