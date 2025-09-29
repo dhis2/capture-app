@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-29T12:32:49.358Z\n"
-"PO-Revision-Date: 2025-09-29T12:32:49.358Z\n"
+"POT-Creation-Date: 2025-09-29T12:57:50.447Z\n"
+"PO-Revision-Date: 2025-09-29T12:57:50.447Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -935,9 +935,6 @@ msgstr "Missing search criteria"
 
 msgid "Back to search"
 msgstr "Back to search"
-
-msgid "Search by attributes 2"
-msgstr "Search by attributes 2"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."

@@ -19,7 +19,7 @@ const mapStateToProps = (state: any, props: OwnProps) => {
     const { selectedTrackedEntityTypeId } = props;
     const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
     const { name } = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
-    const filteredUnsupportedAttributes = getFilteredUnsupportedAttributes(searchGroups);
+    const filteredUnsupportedAttributes = getFilteredUnsupportedAttributes(searchGroups, selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
     return {
         searchGroups,
         filteredUnsupportedAttributes,

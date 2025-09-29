@@ -1,31 +1,37 @@
 import type { SearchGroup } from '../../../../../metaData';
+import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../../metaData';
 import { filterUnsupportedAttributes, type FilteredAttribute } from '../../../../../utils/warnings/UnsupportedAttributesNotification';
 
-/**
- * Extracts filtered unsupported attributes from SearchGroups
- * Uses the same approach as buildSearchGroup but works with DataElements directly
- * since SearchGroups already contain the processed tracked entity attribute data
- */
-export const getFilteredUnsupportedAttributes = (searchGroups: SearchGroup[]): FilteredAttribute[] => {
-    // Extract tracked entity attributes from SearchGroup DataElements
-    // The DataElement.id corresponds to the tracked entity attribute ID
-    // and DataElement contains the processed attribute information
-    const trackedEntityAttributes: Array<{ id: string; displayName: string; valueType: string }> = [];
+export const getFilteredUnsupportedAttributes = (
+    searchGroups: SearchGroup[],
+    selectedTrackedEntityTypeId: string,
+    selectedProgramId?: string | null,
+): FilteredAttribute[] => {
+    // Get the original attributes from either the program or tracked entity type
+    let originalAttributes: Array<{ id: string; displayName: string; valueType: string }> = [];
 
-    searchGroups.forEach((searchGroup) => {
-        if (searchGroup.searchForm) {
-            const elements = searchGroup.searchForm.getElements();
-            elements.forEach((element) => {
-                trackedEntityAttributes.push({
-                    id: element.id,
-                    displayName: element.formName,
-                    valueType: element.type,
-                });
-            });
+    try {
+        if (selectedProgramId) {
+            const program = getTrackerProgramThrowIfNotFound(selectedProgramId);
+            originalAttributes = program.attributes.map(attr => ({
+                id: attr.id,
+                displayName: attr.formName,
+                valueType: attr.type,
+            }));
+        } else {
+            const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
+            originalAttributes = trackedEntityType.attributes.map(attr => ({
+                id: attr.id,
+                displayName: attr.formName,
+                valueType: attr.type,
+            }));
         }
-    });
+    } catch (error) {
+        console.error('Error getting original attributes:', error);
+        return [];
+    }
 
-    // Use the shared filtering function
-    const { filteredUnsupportedAttributes } = filterUnsupportedAttributes(trackedEntityAttributes);
+    // Use the shared filtering function to get unsupported attributes
+    const { filteredUnsupportedAttributes } = filterUnsupportedAttributes(originalAttributes);
     return filteredUnsupportedAttributes;
 };

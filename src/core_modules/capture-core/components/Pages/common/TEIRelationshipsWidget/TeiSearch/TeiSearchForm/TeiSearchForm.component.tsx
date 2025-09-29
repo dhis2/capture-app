@@ -204,7 +204,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                 </div>
             );
         }
-        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes 2');
+        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div
                 data-test="d2-form-area"
@@ -227,7 +227,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
-                {this.props.filteredUnsupportedAttributes && (
+                {!searchGroup.unique && this.props.filteredUnsupportedAttributes && (
                     <UnsupportedAttributesNotification
                         filteredUnsupportedAttributes={this.props.filteredUnsupportedAttributes}
                     />
