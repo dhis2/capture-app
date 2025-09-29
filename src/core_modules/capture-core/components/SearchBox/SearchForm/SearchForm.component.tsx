@@ -92,7 +92,6 @@ const SearchFormIndex = ({
     removeFormDataFromReduxStore,
     selectedSearchScopeId,
     searchGroupsForSelectedScope,
-    filteredUnsupportedAttributes,
     classes,
     formsValues,
     searchStatus,
@@ -185,6 +184,8 @@ const SearchFormIndex = ({
                 setTimeout(() => { buttonRef.click(); });
             }
         };
+
+        const filteredUnsupportedAttributes = [];
 
         return (<div
             tabIndex={-1}
@@ -346,7 +347,6 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
-        filteredUnsupportedAttributes,
     ]);
 };
 
