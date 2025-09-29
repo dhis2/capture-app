@@ -210,12 +210,7 @@ class SearchFormPlain extends React.Component<Props, State> {
             valueType: element.type,
         }));
 
-        console.log('Elements from searchForm:', elements);
-        console.log('Element types:', elements.map(el => el.valueType));
-
-        const { filteredUnsupportedAttributes } = filterUnsupportedAttributes(elements);
-
-        console.log('filteredUnsupportedAttributes', filteredUnsupportedAttributes);
+        const filteredUnsupportedAttributes = filterUnsupportedAttributes(elements);
 
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (

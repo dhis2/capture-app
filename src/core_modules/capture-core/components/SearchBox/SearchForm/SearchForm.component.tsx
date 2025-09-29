@@ -2,7 +2,7 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
-import { UnsupportedAttributesNotification } from 'capture-core/utils/warnings';
+import { filterUnsupportedAttributes, UnsupportedAttributesNotification } from 'capture-core/utils/warnings';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -185,7 +185,14 @@ const SearchFormIndex = ({
             }
         };
 
-        const filteredUnsupportedAttributes = [];
+        const elements = searchGroupsForSelectedScope.flatMap(searchGroup =>
+            searchGroup.searchForm.getElements().map(element => ({
+                id: element.id,
+                displayName: element.formName,
+                valueType: element.type,
+            })),
+        );
+        const filteredUnsupportedAttributes = filterUnsupportedAttributes(elements);
 
         return (<div
             tabIndex={-1}
