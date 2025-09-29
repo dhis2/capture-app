@@ -48,7 +48,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, clas
         })
     ) : i18n.t('Or see all events accessible to you in {{program}}',
         { program: programName, interpolation: { escapeValue: false } })),
-    [programName, programType, program]);
+    [programName, programType]);
 
     return (
         <div

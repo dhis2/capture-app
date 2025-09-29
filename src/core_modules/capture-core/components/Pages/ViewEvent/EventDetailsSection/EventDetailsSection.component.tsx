@@ -113,7 +113,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         eventAccess.write,
         isWithinValidPeriod,
         occurredAt,
-        eventData,
     ]);
 
     if (error) {
