@@ -1,6 +1,5 @@
 import type { RenderFoundation } from '../../metaData';
 import type { CurrentSearchTerms } from './SearchForm/SearchForm.types';
-import type { FilteredAttribute } from '../../utils/warnings/UnsupportedAttributesNotification';
 
 export type SearchGroups = Array<{
     searchForm: RenderFoundation;
@@ -17,7 +16,6 @@ export type AvailableSearchOption = {
     searchOptionName: string;
     TETypeName?: string;
     searchGroups: SearchGroups;
-    filteredUnsupportedAttributes?: FilteredAttribute[];
 };
 
 export type ComponentProps = Readonly<{

@@ -45,10 +45,7 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data: searchGroupData, isLoading, isError } = useIndexedDBQuery<{
-        searchGroups: SearchGroup[];
-        filteredUnsupportedAttributes: Array<{ id: string; displayName: string; valueType: string }>;
-    }>(
+    const { data: searchGroups, isLoading, isError } = useIndexedDBQuery<SearchGroup[]>(
         ['searchGroup', searchId],
         () => buildSearchGroup(searchData, locale),
         {
@@ -57,18 +54,16 @@ export const useSearchOption = ({
     );
 
     const searchOption = useMemo(() => {
-        if (!searchName || !searchGroupData?.searchGroups || !searchScope) {
+        if (!searchName || !searchGroups || !searchScope) {
             return undefined;
         }
         return buildSearchOption(
             searchId,
             searchName,
-            searchGroupData.searchGroups as any,
+            searchGroups as any,
             searchScope,
-            undefined,
-            searchGroupData.filteredUnsupportedAttributes,
         );
-    }, [searchName, searchGroupData, searchScope, searchId]);
+    }, [searchName, searchGroups, searchScope, searchId]);
 
     return {
         searchOption,
