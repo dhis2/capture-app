@@ -12,6 +12,7 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui';
+import { UnsupportedAttributesNotification } from 'capture-core/utils/warnings';
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
@@ -54,6 +55,7 @@ type OwnProps = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
+    filteredUnsupportedAttributes?: Array<{ id: string; displayName: string; valueType: string }>;
 };
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
@@ -202,7 +204,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                 </div>
             );
         }
-        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
+        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes 2');
         return (
             <div
                 data-test="d2-form-area"
@@ -225,6 +227,11 @@ class SearchFormPlain extends React.Component<Props, State> {
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
+                {this.props.filteredUnsupportedAttributes && (
+                    <UnsupportedAttributesNotification
+                        filteredUnsupportedAttributes={this.props.filteredUnsupportedAttributes}
+                    />
+                )}
             </div>
         );
     }

@@ -2,13 +2,13 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
+import { UnsupportedAttributesNotification } from 'capture-core/utils/warnings';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
-import { UnsupportedAttributesNotification } from '../UnsupportedAttributesNotification';
 
 const styles: Readonly<any> = {
     searchDomainsContainer: {

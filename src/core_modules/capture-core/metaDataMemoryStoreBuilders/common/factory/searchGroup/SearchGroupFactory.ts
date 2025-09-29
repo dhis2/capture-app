@@ -13,7 +13,7 @@ import type {
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
 import { OptionSetFactory } from '../optionSet';
-import { isSearchSupportedAttributeType } from '../../../../components/SearchBox/SearchForm/unsupportedSearchTypes.const';
+import { filterUnsupportedAttributes } from '../../../../utils/warnings/UnsupportedAttributesNotification';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
 const translationPropertyNames = {
@@ -178,28 +178,30 @@ export class SearchGroupFactory {
     build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
         this.filteredUnsupportedAttributes = [];
 
-        const attributesBySearchGroup = searchAttributes
+        const attributesWithTrackedEntityAttributes = searchAttributes
             .map(attribute => ({
                 ...attribute,
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
-            .filter((attribute) => {
-                const trackedEntityAttribute = attribute.trackedEntityAttribute;
-                if (!trackedEntityAttribute) return false;
-                const isSupported = isSearchSupportedAttributeType(trackedEntityAttribute.valueType);
+                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique));
 
-                if (!isSupported) {
-                    this.filteredUnsupportedAttributes.push({
-                        id: trackedEntityAttribute.id,
-                        displayName: trackedEntityAttribute.displayFormName,
-                        valueType: trackedEntityAttribute.valueType,
-                    });
-                }
+        // Extract tracked entity attributes for filtering
+        const trackedEntityAttributes = attributesWithTrackedEntityAttributes
+            .map(attr => attr.trackedEntityAttribute)
+            .filter((attr): attr is NonNullable<typeof attr> => attr != null);
 
-                return isSupported;
-            })
+        // Use the shared filtering function
+        const { supportedAttributes, filteredUnsupportedAttributes } = filterUnsupportedAttributes(trackedEntityAttributes);
+        this.filteredUnsupportedAttributes = filteredUnsupportedAttributes;
+
+        // Filter the original attributes based on supported tracked entity attributes
+        const supportedAttributeIds = new Set(supportedAttributes.map(attr => attr.id));
+        const attributesBySearchGroup = attributesWithTrackedEntityAttributes
+            .filter(attribute =>
+                attribute.trackedEntityAttribute &&
+                supportedAttributeIds.has(attribute.trackedEntityAttribute.id),
+            )
             .reduce((accGroups: any, attribute) => {
                 const trackedEntityAttribute = attribute.trackedEntityAttribute;
                 if (trackedEntityAttribute?.unique) {

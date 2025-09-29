@@ -1,5 +1,6 @@
 import type { SearchGroups } from '../SearchBox.types';
 import { dataElementTypes, OptionSet } from '../../../metaData';
+import type { FilteredAttribute } from '../../../utils/warnings/UnsupportedAttributesNotification';
 
 export type CurrentSearchTerms = Array<{
     name: string;
@@ -18,7 +19,7 @@ export type FormsValues = {
 export type OwnProps = {
     selectedSearchScopeId?: string;
     searchGroupsForSelectedScope: SearchGroups;
-    filteredUnsupportedAttributes?: Array<{ id: string; displayName: string; valueType: string }>;
+    filteredUnsupportedAttributes?: FilteredAttribute[];
 };
 
 export type PropsFromRedux = {

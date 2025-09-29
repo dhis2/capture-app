@@ -15,6 +15,7 @@ const mapStateToProps = (state: any, props: any) => {
         searchAttempted: formState.validationFailed,
         attributesWithValuesCount: getAttributesWithValuesCount(state, formId),
         formsValues: state.formsValues[formId] || {},
+        filteredUnsupportedAttributes: props.filteredUnsupportedAttributes,
     };
 };
 
