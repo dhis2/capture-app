@@ -42,6 +42,7 @@ const getStyles: Readonly<any> = {
     },
 };
 
+// eslint-disable-next-line complexity
 const Index = ({
     showInitialSearchBox,
     cleanSearchRelatedInfo,
@@ -59,6 +60,7 @@ const Index = ({
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,
+        filteredUnsupportedAttributes,
     } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
@@ -107,6 +109,7 @@ const Index = ({
                                     <SearchForm
                                         selectedSearchScopeId={selectedSearchScopeId ?? ''}
                                         searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                                        filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                                     />
                                 )}
                                 <SearchStatus

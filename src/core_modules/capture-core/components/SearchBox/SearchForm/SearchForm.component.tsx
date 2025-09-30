@@ -2,10 +2,10 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
-import { filterUnsupportedAttributes, UnsupportedAttributesNotification } from 'capture-core/utils/warnings';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
+import { UnsupportedAttributesNotification } from '../../../utils/warnings';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
@@ -92,6 +92,7 @@ const SearchFormIndex = ({
     removeFormDataFromReduxStore,
     selectedSearchScopeId,
     searchGroupsForSelectedScope,
+    filteredUnsupportedAttributes,
     classes,
     formsValues,
     searchStatus,
@@ -185,14 +186,6 @@ const SearchFormIndex = ({
             }
         };
 
-        const elements = searchGroupsForSelectedScope.flatMap(searchGroup =>
-            searchGroup.searchForm.getElements().map(element => ({
-                id: element.id,
-                displayName: element.formName,
-                valueType: element.type,
-            })),
-        );
-        const filteredUnsupportedAttributes = filterUnsupportedAttributes(elements);
 
         return (<div
             tabIndex={-1}
@@ -318,7 +311,8 @@ const SearchFormIndex = ({
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
-                                        {filteredUnsupportedAttributes && (
+                                        <br />
+                                        {filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
                                             <UnsupportedAttributesNotification
                                                 filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                                             />
@@ -354,6 +348,7 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
+        filteredUnsupportedAttributes,
     ]);
 };
 

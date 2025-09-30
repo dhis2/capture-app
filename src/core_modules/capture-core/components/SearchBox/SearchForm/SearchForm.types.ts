@@ -18,6 +18,12 @@ export type FormsValues = {
 export type OwnProps = {
     searchGroupsForSelectedScope: SearchGroups;
     selectedSearchScopeId?: string;
+    filteredUnsupportedAttributes?: Array<{
+        id: string;
+        displayName: string;
+        valueType: string;
+        searchable: boolean;
+    }>;
 };
 
 export type PropsFromRedux = {

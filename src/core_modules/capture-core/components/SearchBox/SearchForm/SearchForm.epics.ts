@@ -90,6 +90,7 @@ const getFiltersForAttributesSearchQuery = (formValues: any, attributes: any) =>
         const dataElement = attributes.find((attribute: any) => attribute.id === fieldId);
         if (formValues[fieldId] && dataElement) {
             const dataElementType = dataElementTypes[dataElement.type];
+            console.log('dataElementType', dataElementType);
             return dataElementConvertFunctions[dataElementType](formValues[fieldId], dataElement);
         }
         return null;

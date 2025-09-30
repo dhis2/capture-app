@@ -12,7 +12,8 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui';
-import { UnsupportedAttributesNotification, filterUnsupportedAttributes } from 'capture-core/utils/warnings';
+import { UnsupportedAttributesNotification } from '../../../../../../utils/warnings';
+import { filterUnsupportedAttributes } from '../../../../../../utils/warnings/UnsupportedAttributesNotification/filterUnsupportedAttributes';
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
@@ -235,7 +236,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
-                {!searchGroup.unique && filteredUnsupportedAttributes && (
+                {!searchGroup.unique && filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
                     <UnsupportedAttributesNotification
                         filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                     />

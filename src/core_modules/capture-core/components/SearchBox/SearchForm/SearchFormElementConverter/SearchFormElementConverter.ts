@@ -48,6 +48,7 @@ const convertBoolean = (formValues: boolean, dataElement: DataElement) => {
     return `${dataElement.id}:eq:${convertedBool}`;
 };
 
+// her
 const unsupportedType = () => null;
 
 export const dataElementConvertFunctions = {

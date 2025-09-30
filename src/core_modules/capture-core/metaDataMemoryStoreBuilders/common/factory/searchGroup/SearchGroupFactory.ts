@@ -13,6 +13,7 @@ import type {
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
 import { OptionSetFactory } from '../optionSet';
+import { isSearchSupportedAttributeType } from '../../../../utils/warnings/UnsupportedAttributesNotification/unsupportedSearchTypes.const';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
 const translationPropertyNames = {
@@ -179,7 +180,9 @@ export class SearchGroupFactory {
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
+                attribute.trackedEntityAttribute &&
+                (attribute.searchable || attribute.trackedEntityAttribute.unique) &&
+                isSearchSupportedAttributeType(attribute.trackedEntityAttribute.valueType))
             .reduce((accGroups: any, attribute) => {
                 if (attribute.trackedEntityAttribute!.unique) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
