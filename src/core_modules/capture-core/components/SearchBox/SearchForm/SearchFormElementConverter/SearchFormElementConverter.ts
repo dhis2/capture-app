@@ -38,17 +38,10 @@ const convertAge = (formValues: FormValues, dataElement: DataElement) => {
     return `${dataElement.id}:eq:${convertedAge}`;
 };
 
-const convertFile = (formValues: FormValues, dataElement: DataElement) => {
-    const convertedFileName = (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${escapeString(convertedFileName)}`;
-};
-
 const convertBoolean = (formValues: boolean, dataElement: DataElement) => {
     const convertedBool = (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
     return `${dataElement.id}:eq:${convertedBool}`;
 };
-
-const unsupportedType = () => null;
 
 export const dataElementConvertFunctions = {
     TEXT: convertString,
@@ -68,22 +61,15 @@ export const dataElementConvertFunctions = {
     DATE: convertRange,
     DATE_RANGE: convertRange,
     DATETIME: convertRange,
-    DATETIME_RANGE: unsupportedType,
+    DATETIME_RANGE: convertRange,
     TIME: convertRange,
     TIME_RANGE: convertRange,
     TRUE_ONLY: convertBoolean,
     BOOLEAN: convertBoolean,
     PHONE_NUMBER: convertString,
     EMAIL: convertString,
-    FILE_RESOURCE: convertFile,
-    URL: convertString,
     ORGANISATION_UNIT: convertOrgUnit,
-    IMAGE: convertFile,
     AGE: convertAge,
-    COORDINATE: unsupportedType,
-    POLYGON: unsupportedType,
-    STATUS: unsupportedType,
     USERNAME: convertString,
     ASSIGNEE: convertString,
-    UNKNOWN: unsupportedType,
 };
