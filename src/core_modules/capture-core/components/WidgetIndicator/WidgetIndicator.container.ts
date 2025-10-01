@@ -7,7 +7,7 @@ const mapStateToProps = (state: any, props: any) => ({
         ...(state.rulesEffectsIndicators[props.dataEntryKey]?.displayTexts || []),
         ...(state.rulesEffectsIndicators[props.dataEntryKey]?.displayKeyValuePairs || []),
     ],
-    emptyText: i18n.t('No indicators to display'),
+    emptyText: i18n.t('No indicator output for this enrollment yet'),
 });
 
 export const IndicatorsSection = connect(mapStateToProps, () => ({}))(WidgetIndicator);
