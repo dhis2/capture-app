@@ -10,5 +10,5 @@ const mapStateToProps = (state: any, props: any) => ({
     emptyText: i18n.t('No feedback to display'),
 });
 
-export const FeedbacksSection = connect(mapStateToProps, () => ({}))(WidgetFeedback);
+export const FeedbackSection = connect(mapStateToProps, () => ({}))(WidgetFeedback);
 

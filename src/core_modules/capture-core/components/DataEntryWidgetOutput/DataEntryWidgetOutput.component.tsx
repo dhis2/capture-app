@@ -4,7 +4,7 @@ import { spacers } from '@dhis2/ui';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
-import { FeedbacksSection } from '../WidgetFeedback';
+import { FeedbackSection } from '../WidgetFeedback';
 import { IndicatorsSection } from '../WidgetIndicator';
 
 type OwnProps = {
@@ -28,7 +28,7 @@ type Props = OwnProps & WithStyles<typeof getStyles>;
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: FeedbacksSection },
+    { id: 'FeedbacksSection', Component: FeedbackSection },
     { id: 'IndicatorsSection', Component: IndicatorsSection },
 ];
 
