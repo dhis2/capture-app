@@ -105,7 +105,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
         const isUnique = sg.unique;
         const header = isUnique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
-        const filteredUnsupportedAttributes = sg.filteredUnsupportedAttributes;
+        const unsupportedAttributes = sg.unsupportedAttributes;
         return (
             <Section
                 data-test="search-by-attributes-forms"
@@ -132,9 +132,9 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                         onSearch={this.handleSearch}
                         onSearchValidationFailed={this.handleSearchValidationFailed}
                     />
-                    {!isUnique && filteredUnsupportedAttributes.length && (
+                    {!isUnique && unsupportedAttributes.length && (
                         <UnsupportedAttributesNotification
-                            filteredUnsupportedAttributes={filteredUnsupportedAttributes}
+                            unsupportedAttributes={unsupportedAttributes}
                         />
                     )}
                 </>

@@ -8,7 +8,7 @@ export class SearchGroup {
     _minAttributesRequiredToSearch!: number;
     _searchForm!: RenderFoundation;
     _unique!: boolean;
-    _filteredUnsupportedAttributes: FilteredAttribute[] = [];
+    _unsupportedAttributes: FilteredAttribute[] = [];
 
     constructor(initFn?: (_this: SearchGroup) => void) {
         this._minAttributesRequiredToSearch = 0;
@@ -44,10 +44,10 @@ export class SearchGroup {
         return this._unique;
     }
 
-    set filteredUnsupportedAttributes(filteredAttributes: FilteredAttribute[]) {
-        this._filteredUnsupportedAttributes = filteredAttributes;
+    set unsupportedAttributes(filteredAttributes: FilteredAttribute[]) {
+        this._unsupportedAttributes = filteredAttributes;
     }
-    get filteredUnsupportedAttributes(): FilteredAttribute[] {
-        return this._filteredUnsupportedAttributes;
+    get unsupportedAttributes(): FilteredAttribute[] {
+        return this._unsupportedAttributes;
     }
 }

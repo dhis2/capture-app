@@ -153,7 +153,7 @@ export class SearchGroupFactory {
     ) {
         // Filter out unsupported attributes for display purposes
         // Only include attributes that are searchable or unique (would have been shown)
-        const filteredUnsupportedAttributes: FilteredAttribute[] = allAttributes
+        const unsupportedAttributes: FilteredAttribute[] = allAttributes
             .filter((attr) => {
                 const valueType = attr.trackedEntityAttribute?.valueType;
                 const isSearchableOrUnique = attr.searchable ||
@@ -174,7 +174,7 @@ export class SearchGroupFactory {
 
         const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
-        searchGroup.filteredUnsupportedAttributes = filteredUnsupportedAttributes;
+        searchGroup.unsupportedAttributes = unsupportedAttributes;
 
         if (key === 'main') {
             searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;

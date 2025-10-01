@@ -8,7 +8,7 @@ export type SearchGroups = Array<{
     formId: string;
     searchScope: string;
     minAttributesRequiredToSearch: number;
-    filteredUnsupportedAttributes?: FilteredAttribute[];
+    unsupportedAttributes?: FilteredAttribute[];
 }>;
 
 export type SelectedSearchScopeId = string | null | undefined;

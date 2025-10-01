@@ -5,6 +5,7 @@ import { NoticeBox, spacers } from '@dhis2/ui';
 
 const styles: Readonly<any> = (theme: any) => ({
     container: {
+        marginTop: spacers.dp16,
         marginBottom: spacers.dp16,
     },
     attributeName: {
@@ -19,20 +20,16 @@ export type FilteredAttribute = {
 };
 
 type Props = {
-    filteredUnsupportedAttributes: FilteredAttribute[];
+    unsupportedAttributes: FilteredAttribute[];
 } & WithStyles<typeof styles>;
 
 const UnsupportedAttributesNotificationPlain = ({
-    filteredUnsupportedAttributes,
+    unsupportedAttributes,
     classes,
 }: Props) => {
-    if (!filteredUnsupportedAttributes || filteredUnsupportedAttributes.length === 0) {
-        return null;
-    }
-
     const message =
         i18n.t('The following attribute type is not supported for searching and has been hidden', {
-            count: filteredUnsupportedAttributes.length,
+            count: unsupportedAttributes.length,
             defaultValue:
                 'The following attribute type is not supported for searching and has been hidden',
             defaultValue_plural:
@@ -43,10 +40,10 @@ const UnsupportedAttributesNotificationPlain = ({
         <div className={classes.container}>
             <NoticeBox title={i18n.t('Some attributes are hidden')} warning>
                 {message}{': '}
-                {filteredUnsupportedAttributes.map((attr, index) => (
+                {unsupportedAttributes.map((attr, index) => (
                     <span key={attr.id} className={classes.attributeName}>
                         {attr.displayName}
-                        {index < filteredUnsupportedAttributes.length - 1 && ', '}
+                        {index < unsupportedAttributes.length - 1 && ', '}
                     </span>
                 ))}.
             </NoticeBox>

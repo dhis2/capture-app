@@ -263,7 +263,7 @@ const SearchFormIndex = ({
                         formId,
                         searchScope,
                         minAttributesRequiredToSearch,
-                        filteredUnsupportedAttributes,
+                        unsupportedAttributes,
                     }) => {
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -315,10 +315,9 @@ const SearchFormIndex = ({
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
-                                        <br />
-                                        { filteredUnsupportedAttributes?.length && (
+                                        { unsupportedAttributes?.length && (
                                             <UnsupportedAttributesNotification
-                                                filteredUnsupportedAttributes={filteredUnsupportedAttributes}
+                                                unsupportedAttributes={unsupportedAttributes}
                                             />
                                         )}
                                     </div>

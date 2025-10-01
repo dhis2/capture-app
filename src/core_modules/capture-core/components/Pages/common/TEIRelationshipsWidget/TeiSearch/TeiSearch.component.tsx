@@ -96,12 +96,10 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const renderSearchGroups = searchGroups => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = getFormId(searchGroupId);
-        const header = sg.unique ?
-            i18n.t('Search {{uniqueAttrName}}', {
-                uniqueAttrName: sg.searchForm.getElements()[0].formName,
-            }) : i18n.t('Search by attributes');
+        const isUnique = sg.unique;
+        const header = isUnique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
         const collapsed = props.openSearchGroupSection !== searchGroupId;
-        const filteredUnsupportedAttributes = sg.filteredUnsupportedAttributes;
+        const unsupportedAttributes = sg.unsupportedAttributes;
         return (
             <Section
                 data-test="search-by-attributes-forms"
@@ -112,9 +110,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     <SectionHeaderSimple
                         containerStyle={{ alignItems: 'center' }}
                         titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
-                        onChangeCollapseState={() => {
-                            collapsed && onChangeSectionCollapseState(searchGroupId);
-                        }}
+                        onChangeCollapseState={() => { collapsed && onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
                         isCollapseButtonEnabled={collapsed}
@@ -131,9 +127,9 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                         onSearch={handleSearch}
                         onSearchValidationFailed={handleSearchValidationFailed}
                     />
-                    {filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
+                    {!isUnique && unsupportedAttributes.length && (
                         <UnsupportedAttributesNotification
-                            filteredUnsupportedAttributes={filteredUnsupportedAttributes}
+                            unsupportedAttributes={unsupportedAttributes}
                         />
                     )}
                 </div>

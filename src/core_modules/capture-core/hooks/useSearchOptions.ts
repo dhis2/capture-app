@@ -10,7 +10,7 @@ type SearchGroups = Array<{
     formId: string;
     searchScope: string;
     minAttributesRequiredToSearch: number;
-    filteredUnsupportedAttributes?: FilteredAttribute[];
+    unsupportedAttributes?: FilteredAttribute[];
 }>;
 
 type AvailableSearchOptions = Readonly<{
@@ -38,7 +38,7 @@ export const buildSearchOption =
                     unique,
                     searchForm,
                     minAttributesRequiredToSearch,
-                    filteredUnsupportedAttributes,
+                    unsupportedAttributes,
                 }, index) => ({
                     unique,
                     searchForm,
@@ -49,7 +49,7 @@ export const buildSearchOption =
                     formId: `searchDomainForm-${id}-${index}`,
                     searchScope,
                     minAttributesRequiredToSearch,
-                    filteredUnsupportedAttributes,
+                    unsupportedAttributes,
                 })),
         });
 
