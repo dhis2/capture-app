@@ -4,8 +4,8 @@ import { spacers } from '@dhis2/ui';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
-import { FeedbacksSection } from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
-import { IndicatorsSection } from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
+import { FeedbacksSection } from '../WidgetFeedback';
+import { IndicatorsSection } from '../WidgetIndicator';
 
 type OwnProps = {
     onLink: (teiId: string, values: Record<string, unknown>) => void;
