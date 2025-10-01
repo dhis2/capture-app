@@ -127,7 +127,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                         onSearch={handleSearch}
                         onSearchValidationFailed={handleSearchValidationFailed}
                     />
-                    {!isUnique && unsupportedAttributes?.length && (
+                    {!isUnique && !!unsupportedAttributes?.length && (
                         <UnsupportedAttributesNotification
                             unsupportedAttributes={unsupportedAttributes}
                         />

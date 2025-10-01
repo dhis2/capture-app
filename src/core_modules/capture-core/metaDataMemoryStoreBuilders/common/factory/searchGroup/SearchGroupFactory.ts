@@ -147,16 +147,19 @@ export class SearchGroupFactory {
         searchGroupAttributes: Array<SearchAttribute>,
         minAttributesRequiredToSearch: number,
     ) {
-        const supportedAttributes = searchGroupAttributes.filter((attr) => {
-            const valueType = attr.trackedEntityAttribute?.valueType;
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            return !valueType || !UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
-        });
-
-        const unsupportedAttributes = searchGroupAttributes.filter((attr) => {
-            const valueType = attr.trackedEntityAttribute?.valueType;
-            return valueType && UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
-        });
+        const { supportedAttributes, unsupportedAttributes } = searchGroupAttributes.reduce(
+            (acc, attr) => {
+                const valueType = attr.trackedEntityAttribute?.valueType;
+                const isUnsupported = valueType && UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
+                if (isUnsupported) {
+                    acc.unsupportedAttributes.push(attr);
+                } else {
+                    acc.supportedAttributes.push(attr);
+                }
+                return acc;
+            },
+            { supportedAttributes: [] as SearchAttribute[], unsupportedAttributes: [] as SearchAttribute[] },
+        );
 
         const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(supportedAttributes);
@@ -186,25 +189,17 @@ export class SearchGroupFactory {
         return trackedEntityAttribute;
     }
 
-    build(
-        searchAttributes: ReadonlyArray<InputSearchAttribute>,
-        minAttributesRequiredToSearch: number,
-    ): Promise<SearchGroup[]> {
+    build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute &&
-                (attribute.searchable || attribute.trackedEntityAttribute.unique))
-            .map(attribute => ({
-                ...attribute,
-                trackedEntityAttribute: attribute.trackedEntityAttribute as CachedTrackedEntityAttribute,
-            }))
-            .reduce((accGroups: Record<string, Array<SearchAttribute>>, attribute) => {
-                if (attribute.trackedEntityAttribute.unique) {
-                    accGroups[attribute.trackedEntityAttribute.id] = [attribute];
+                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
+            .reduce((accGroups: any, attribute) => {
+                if (attribute.trackedEntityAttribute!.unique) {
+                    accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
                 } else {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
                 }
