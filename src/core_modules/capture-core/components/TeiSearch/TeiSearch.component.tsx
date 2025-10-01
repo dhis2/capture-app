@@ -132,7 +132,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                         onSearch={this.handleSearch}
                         onSearchValidationFailed={this.handleSearchValidationFailed}
                     />
-                    {!isUnique && unsupportedAttributes.length && (
+                    {!isUnique && unsupportedAttributes?.length && (
                         <UnsupportedAttributesNotification
                             unsupportedAttributes={unsupportedAttributes}
                         />

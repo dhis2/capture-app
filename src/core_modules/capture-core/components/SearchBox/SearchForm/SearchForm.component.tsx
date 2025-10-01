@@ -315,7 +315,7 @@ const SearchFormIndex = ({
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
-                                        { unsupportedAttributes?.length && (
+                                        {unsupportedAttributes?.length && (
                                             <UnsupportedAttributesNotification
                                                 unsupportedAttributes={unsupportedAttributes}
                                             />
