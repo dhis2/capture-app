@@ -12,7 +12,7 @@ import type {
     CachedAttributeTranslation,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
-import { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES, type FilteredAttribute } from '../../../../utils/warnings';
+import { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES } from '../../../../utils/warnings';
 import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
@@ -147,27 +147,16 @@ export class SearchGroupFactory {
         searchGroupAttributes: Array<SearchAttribute>,
         minAttributesRequiredToSearch: number,
     ) {
-        // Separate supported from unsupported attributes
         const supportedAttributes = searchGroupAttributes.filter((attr) => {
             const valueType = attr.trackedEntityAttribute?.valueType;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return !valueType || !UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
         });
 
-        const unsupportedAttributes: FilteredAttribute[] = searchGroupAttributes
-            .filter((attr) => {
-                const valueType = attr.trackedEntityAttribute?.valueType;
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                return valueType && UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
-            })
-            .map((attr) => {
-                const tea = attr.trackedEntityAttribute;
-                return {
-                    id: tea?.id || '',
-                    displayName: tea?.displayFormName || '',
-                    valueType: tea?.valueType || '',
-                };
-            });
+        const unsupportedAttributes = searchGroupAttributes.filter((attr) => {
+            const valueType = attr.trackedEntityAttribute?.valueType;
+            return valueType && UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
+        });
 
         const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(supportedAttributes);

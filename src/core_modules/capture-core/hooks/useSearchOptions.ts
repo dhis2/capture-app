@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { RenderFoundation } from '../metaData';
-import type { FilteredAttribute } from '../utils/warnings';
+import type { SearchAttribute } from '../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityTypesWithCorrelatedPrograms';
 import type { AvailableSearchOption } from '../components/SearchBox';
 
@@ -10,7 +10,7 @@ type SearchGroups = Array<{
     formId: string;
     searchScope: string;
     minAttributesRequiredToSearch: number;
-    unsupportedAttributes?: FilteredAttribute[];
+    unsupportedAttributes?: SearchAttribute[];
 }>;
 
 type AvailableSearchOptions = Readonly<{

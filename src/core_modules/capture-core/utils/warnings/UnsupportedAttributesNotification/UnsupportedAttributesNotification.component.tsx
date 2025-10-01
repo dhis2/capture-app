@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles, WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacers } from '@dhis2/ui';
+import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 const styles: Readonly<any> = (theme: any) => ({
     container: {
@@ -13,14 +14,8 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-export type FilteredAttribute = {
-    id: string;
-    displayName: string;
-    valueType: string;
-};
-
 type Props = {
-    unsupportedAttributes: FilteredAttribute[];
+    unsupportedAttributes: SearchAttribute[];
 } & WithStyles<typeof styles>;
 
 const UnsupportedAttributesNotificationPlain = ({
@@ -41,8 +36,8 @@ const UnsupportedAttributesNotificationPlain = ({
             <NoticeBox title={i18n.t('Some attributes are hidden')} warning>
                 {message}{': '}
                 {unsupportedAttributes.map((attr, index) => (
-                    <span key={attr.id} className={classes.attributeName}>
-                        {attr.displayName}
+                    <span key={attr.trackedEntityAttribute.id} className={classes.attributeName}>
+                        {attr.trackedEntityAttribute.displayFormName}
                         {index < unsupportedAttributes.length - 1 && ', '}
                     </span>
                 ))}.
