@@ -1,5 +1,5 @@
 import type { RenderFoundation } from '../../metaData';
-import type { FilteredAttribute } from '../../metaData/SearchGroup/SearchGroup';
+import type { FilteredAttribute } from '../../utils/warnings';
 import type { CurrentSearchTerms } from './SearchForm/SearchForm.types';
 
 export type SearchGroups = Array<{

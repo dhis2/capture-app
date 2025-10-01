@@ -1,12 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { RenderFoundation } from '../RenderFoundation';
-
-export type FilteredAttribute = {
-    id: string;
-    displayName: string;
-    valueType: string;
-};
+import type { FilteredAttribute } from '../../utils/warnings';
 
 export class SearchGroup {
     _id!: string;

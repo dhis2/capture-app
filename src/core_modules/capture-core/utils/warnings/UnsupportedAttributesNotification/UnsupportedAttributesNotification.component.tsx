@@ -12,7 +12,7 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-type FilteredAttribute = {
+export type FilteredAttribute = {
     id: string;
     displayName: string;
     valueType: string;

@@ -123,7 +123,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                         extendedCollapsibility
                     />}
             >
-                <div>
+                <>
                     <TeiSearchForm
                         id={formId}
                         searchId={this.props.id}
@@ -137,7 +137,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                             filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                         />
                     )}
-                </div>
+                </>
             </Section>
         );
     })

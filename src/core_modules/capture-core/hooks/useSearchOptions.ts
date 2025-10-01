@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { RenderFoundation } from '../metaData';
-import type { FilteredAttribute } from '../metaData/SearchGroup/SearchGroup';
+import type { FilteredAttribute } from '../utils/warnings';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityTypesWithCorrelatedPrograms';
 import type { AvailableSearchOption } from '../components/SearchBox';
 
