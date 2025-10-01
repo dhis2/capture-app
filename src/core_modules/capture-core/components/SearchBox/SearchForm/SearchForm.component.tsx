@@ -2,10 +2,10 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
+import { UnsupportedAttributesNotification } from '../../../utils/warnings';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
-import { UnsupportedAttributesNotification } from '../../../utils/warnings';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
@@ -92,7 +92,6 @@ const SearchFormIndex = ({
     removeFormDataFromReduxStore,
     selectedSearchScopeId,
     searchGroupsForSelectedScope,
-    filteredUnsupportedAttributes,
     classes,
     formsValues,
     searchStatus,
@@ -186,7 +185,6 @@ const SearchFormIndex = ({
             }
         };
 
-
         return (<div
             tabIndex={-1}
             onKeyPress={handleKeyPress}
@@ -260,7 +258,13 @@ const SearchFormIndex = ({
             {
                 searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
+                    .map(({
+                        searchForm,
+                        formId,
+                        searchScope,
+                        minAttributesRequiredToSearch,
+                        filteredUnsupportedAttributes,
+                    }) => {
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
@@ -270,7 +274,11 @@ const SearchFormIndex = ({
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ alignItems: 'center' }}
-                                            titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
+                                            titleStyle={{
+                                                background: 'transparent',
+                                                paddingTop: 8,
+                                                fontSize: 16,
+                                            }}
                                             title={searchByText}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
@@ -280,41 +288,50 @@ const SearchFormIndex = ({
                                     }
                                 >
                                     <div>
-                                        <div className={classes.searchRow}>
-                                            <div className={classes.searchRowSelectElement}>
-                                                <D2Form
-                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
-                                                    formFoundation={searchForm}
-                                                    id={formId}
+                                        <div>
+                                            <div className={classes.searchRow}>
+                                                <div className={classes.searchRowSelectElement}>
+                                                    <D2Form
+                                                        formRef={(formInstance) => {
+                                                            formReference[formId] = formInstance;
+                                                        }}
+                                                        formFoundation={searchForm}
+                                                        id={formId}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div
+                                                className={classes.searchButtonContainer}
+                                                ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                            >
+                                                <Button
+                                                    disabled={searchStatus === searchBoxStatus.LOADING}
+                                                    onClick={() =>
+                                                        selectedSearchScopeId &&
+                                                        handleSearchViaAttributes(
+                                                            searchScope,
+                                                            selectedSearchScopeId,
+                                                            formId,
+                                                            minAttributesRequiredToSearch,
+                                                        )
+                                                    }
+                                                >
+                                                    {searchByText}
+                                                </Button>
+                                                <FormInformativeMessage
+                                                    minAttributesRequiredToSearch={
+                                                        minAttributesRequiredToSearch
+                                                    }
                                                 />
                                             </div>
                                         </div>
-                                        <div
-                                            className={classes.searchButtonContainer}
-                                            ref={(ref) => { containerButtonRef[formId] = ref; }}
-                                        >
-                                            <Button
-                                                disabled={searchStatus === searchBoxStatus.LOADING}
-                                                onClick={() =>
-                                                    selectedSearchScopeId &&
-                                                    handleSearchViaAttributes(
-                                                        searchScope,
-                                                        selectedSearchScopeId,
-                                                        formId,
-                                                        minAttributesRequiredToSearch,
-                                                    )
-                                                }
-                                            >
-                                                {searchByText}
-                                            </Button>
-                                            <FormInformativeMessage
-                                                minAttributesRequiredToSearch={minAttributesRequiredToSearch}
-                                            />
-                                        </div>
                                         <br />
-                                        {filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
+                                        {filteredUnsupportedAttributes &&
+                                        filteredUnsupportedAttributes.length > 0 && (
                                             <UnsupportedAttributesNotification
-                                                filteredUnsupportedAttributes={filteredUnsupportedAttributes}
+                                                filteredUnsupportedAttributes={
+                                                    filteredUnsupportedAttributes
+                                                }
                                             />
                                         )}
                                     </div>
@@ -348,7 +365,6 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
-        filteredUnsupportedAttributes,
     ]);
 };
 

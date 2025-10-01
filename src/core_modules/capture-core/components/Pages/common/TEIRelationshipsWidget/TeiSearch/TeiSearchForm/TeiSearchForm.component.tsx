@@ -12,8 +12,6 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui';
-import { UnsupportedAttributesNotification } from '../../../../../../utils/warnings';
-import { filterUnsupportedAttributes } from '../../../../../../utils/warnings/UnsupportedAttributesNotification/filterUnsupportedAttributes';
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
@@ -204,15 +202,6 @@ class SearchFormPlain extends React.Component<Props, State> {
                 </div>
             );
         }
-
-        const elements = searchGroup.searchForm.getElements().map(element => ({
-            id: element.id,
-            displayName: element.formName,
-            valueType: element.type,
-        }));
-
-        const filteredUnsupportedAttributes = filterUnsupportedAttributes(elements);
-
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div
@@ -236,11 +225,6 @@ class SearchFormPlain extends React.Component<Props, State> {
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
-                {!searchGroup.unique && filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
-                    <UnsupportedAttributesNotification
-                        filteredUnsupportedAttributes={filteredUnsupportedAttributes}
-                    />
-                )}
             </div>
         );
     }

@@ -12,9 +12,16 @@ import type {
     CachedAttributeTranslation,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
+import type { FilteredAttribute } from '../../../../metaData/SearchGroup/SearchGroup';
+import {
+    UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES,
+} from '../../../../utils/warnings/UnsupportedAttributesNotification/unsupportedSearchTypes.const';
 import { OptionSetFactory } from '../optionSet';
-import { isSearchSupportedAttributeType } from '../../../../utils/warnings/UnsupportedAttributesNotification/unsupportedSearchTypes.const';
-import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
+import type {
+    ConstructorInput,
+    InputSearchAttribute,
+    SearchAttribute,
+} from './searchGroupFactory.types';
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -146,9 +153,33 @@ export class SearchGroupFactory {
         key: string,
         searchGroupAttributes: Array<SearchAttribute>,
         minAttributesRequiredToSearch: number,
+        allAttributes: Array<SearchAttribute>,
     ) {
+        // Filter out unsupported attributes for display purposes
+        // Only include attributes that are searchable or unique (would have been shown)
+        const filteredUnsupportedAttributes: FilteredAttribute[] = allAttributes
+            .filter((attr) => {
+                const valueType = attr.trackedEntityAttribute?.valueType;
+                const isSearchableOrUnique = attr.searchable ||
+                    attr.trackedEntityAttribute?.unique;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const isUnsupported = valueType &&
+                    UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
+                return isSearchableOrUnique && isUnsupported;
+            })
+            .map((attr) => {
+                const tea = attr.trackedEntityAttribute;
+                return {
+                    id: tea?.id || '',
+                    displayName: tea?.displayFormName || '',
+                    valueType: tea?.valueType || '',
+                };
+            });
+
         const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
+        searchGroup.filteredUnsupportedAttributes = filteredUnsupportedAttributes;
+
         if (key === 'main') {
             searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
             searchGroup.id = 'main';
@@ -173,24 +204,47 @@ export class SearchGroupFactory {
         return trackedEntityAttribute;
     }
 
-    build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
-        const attributesBySearchGroup = searchAttributes
+    build(
+        searchAttributes: ReadonlyArray<InputSearchAttribute>,
+        minAttributesRequiredToSearch: number,
+    ): Promise<SearchGroup[]> {
+        // Map all attributes with their tracked entity attribute data
+        const allAttributesWithTEA = searchAttributes
             .map(attribute => ({
                 ...attribute,
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
-            .filter(attribute =>
-                attribute.trackedEntityAttribute &&
-                (attribute.searchable || attribute.trackedEntityAttribute.unique) &&
-                isSearchSupportedAttributeType(attribute.trackedEntityAttribute.valueType))
-            .reduce((accGroups: any, attribute) => {
-                if (attribute.trackedEntityAttribute!.unique) {
-                    accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
-                } else {
-                    accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
-                }
-                return accGroups;
-            }, {});
+            .filter(attribute => attribute.trackedEntityAttribute)
+            .map(attribute => ({
+                ...attribute,
+                trackedEntityAttribute: attribute.trackedEntityAttribute as CachedTrackedEntityAttribute,
+            }));
+
+        // Separate supported from unsupported attributes
+        const supportedAttributes = allAttributesWithTEA
+            .filter((attribute) => {
+                const valueType = attribute.trackedEntityAttribute?.valueType;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const isSupported = !valueType ||
+                    !UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
+                const searchableOrUnique = attribute.searchable ||
+                    attribute.trackedEntityAttribute.unique;
+                return isSupported && searchableOrUnique;
+            });
+
+        // Group supported attributes by search group (unique vs main)
+        const attributesBySearchGroup = supportedAttributes
+            .reduce(
+                (accGroups: Record<string, Array<SearchAttribute>>, attribute) => {
+                    if (attribute.trackedEntityAttribute.unique) {
+                        accGroups[attribute.trackedEntityAttribute.id] = [attribute];
+                    } else {
+                        accGroups.main = accGroups.main ?
+                            [...accGroups.main, attribute] : [attribute];
+                    }
+                    return accGroups;
+                }, {},
+            );
 
         const searchGroupPromises = Object.keys(attributesBySearchGroup)
             .map(attrByGroupKey =>
@@ -198,6 +252,7 @@ export class SearchGroupFactory {
                     attrByGroupKey,
                     attributesBySearchGroup[attrByGroupKey],
                     minAttributesRequiredToSearch,
+                    allAttributesWithTEA,
                 ));
         return Promise.all(searchGroupPromises).then(
             searchGroups => searchGroups.sort(({ unique: xBoolean }, { unique: yBoolean }) => {

@@ -2,12 +2,18 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { RenderFoundation } from '../RenderFoundation';
 
+export type FilteredAttribute = {
+    id: string;
+    displayName: string;
+    valueType: string;
+};
 
 export class SearchGroup {
     _id!: string;
     _minAttributesRequiredToSearch!: number;
     _searchForm!: RenderFoundation;
     _unique!: boolean;
+    _filteredUnsupportedAttributes: FilteredAttribute[] = [];
 
     constructor(initFn?: (_this: SearchGroup) => void) {
         this._minAttributesRequiredToSearch = 0;
@@ -41,5 +47,12 @@ export class SearchGroup {
     }
     get unique(): boolean {
         return this._unique;
+    }
+
+    set filteredUnsupportedAttributes(filteredAttributes: FilteredAttribute[]) {
+        this._filteredUnsupportedAttributes = filteredAttributes;
+    }
+    get filteredUnsupportedAttributes(): FilteredAttribute[] {
+        return this._filteredUnsupportedAttributes;
     }
 }

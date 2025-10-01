@@ -94,7 +94,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
     const isDisabled = !eventAccess.write || !isWithinValidPeriod;
 
-    const occurredAt = eventData && eventData.dataEntryValues && eventData.dataEntryValues.occurredAt;
     const tooltipContent = useMemo(() => {
         if (!eventAccess.write) {
             return i18n.t("You don't have access to edit this event");
@@ -103,7 +102,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             return i18n.t(
                 '{{occurredAt}} belongs to an expired period. Event cannot be edited',
                 {
-                    occurredAt,
+                    occurredAt: eventData?.dataEntryValues?.occurredAt,
                     interpolation: { escapeValue: false },
                 },
             );
@@ -112,7 +111,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     }, [
         eventAccess.write,
         isWithinValidPeriod,
-        occurredAt,
+        eventData?.dataEntryValues?.occurredAt,
     ]);
 
     if (error) {

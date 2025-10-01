@@ -2,6 +2,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { SearchGroup } from '../../metaData';
+import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
@@ -101,8 +102,12 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     renderSearchGroups = (searchGroups: Array<SearchGroup>) => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = this.getFormId(searchGroupId);
-        const header = sg.unique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
+        const header = sg.unique ?
+            i18n.t('Search {{uniqueAttrName}}', {
+                uniqueAttrName: sg.searchForm.getElements()[0].formName,
+            }) : i18n.t('Search by attributes');
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
+        const filteredUnsupportedAttributes = sg.filteredUnsupportedAttributes;
         return (
             <Section
                 data-test="search-by-attributes-forms"
@@ -113,21 +118,30 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                     <SectionHeaderSimple
                         containerStyle={{ alignItems: 'center' }}
                         titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
-                        onChangeCollapseState={() => { collapsed && this.onChangeSectionCollapseState(searchGroupId); }}
+                        onChangeCollapseState={() => {
+                            collapsed && this.onChangeSectionCollapseState(searchGroupId);
+                        }}
                         isCollapsed={collapsed}
                         title={header}
                         isCollapseButtonEnabled={collapsed}
                         extendedCollapsibility
                     />}
             >
-                <TeiSearchForm
-                    id={formId}
-                    searchId={this.props.id}
-                    searchGroupId={searchGroupId}
-                    searchGroup={sg}
-                    onSearch={this.handleSearch}
-                    onSearchValidationFailed={this.handleSearchValidationFailed}
-                />
+                <div>
+                    <TeiSearchForm
+                        id={formId}
+                        searchId={this.props.id}
+                        searchGroupId={searchGroupId}
+                        searchGroup={sg}
+                        onSearch={this.handleSearch}
+                        onSearchValidationFailed={this.handleSearchValidationFailed}
+                    />
+                    {filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
+                        <UnsupportedAttributesNotification
+                            filteredUnsupportedAttributes={filteredUnsupportedAttributes}
+                        />
+                    )}
+                </div>
             </Section>
         );
     })

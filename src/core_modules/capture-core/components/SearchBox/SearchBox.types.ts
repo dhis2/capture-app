@@ -1,4 +1,5 @@
 import type { RenderFoundation } from '../../metaData';
+import type { FilteredAttribute } from '../../metaData/SearchGroup/SearchGroup';
 import type { CurrentSearchTerms } from './SearchForm/SearchForm.types';
 
 export type SearchGroups = Array<{
@@ -7,6 +8,7 @@ export type SearchGroups = Array<{
     formId: string;
     searchScope: string;
     minAttributesRequiredToSearch: number;
+    filteredUnsupportedAttributes?: FilteredAttribute[];
 }>;
 
 export type SelectedSearchScopeId = string | null | undefined;

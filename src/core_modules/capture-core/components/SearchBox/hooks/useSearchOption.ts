@@ -21,17 +21,7 @@ type Props = {
 export const useSearchOption = ({
     programId,
     trackedEntityTypeId,
-}: Props): {
-    searchOption?: AvailableSearchOption;
-    filteredUnsupportedAttributes: {
-        id: string;
-        displayName: string;
-        valueType: string;
-        searchable: boolean;
-    }[];
-    isLoading: boolean;
-    isError: boolean
-} => {
+}: Props): { searchOption?: AvailableSearchOption; isLoading: boolean; isError: boolean } => {
     const { locale } = useUserLocale();
 
     const searchScope = useMemo(() => {
@@ -55,7 +45,7 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data: searchDataResult, isLoading, isError } = useIndexedDBQuery<{ searchGroups: SearchGroup[], filteredUnsupportedAttributes: any[] }>(
+    const { data: searchGroups, isLoading, isError } = useIndexedDBQuery<SearchGroup[]>(
         ['searchGroup', searchId],
         () => buildSearchGroup(searchData, locale),
         {
@@ -64,20 +54,19 @@ export const useSearchOption = ({
     );
 
     const searchOption = useMemo(() => {
-        if (!searchName || !searchDataResult?.searchGroups || !searchScope) {
+        if (!searchName || !searchGroups || !searchScope) {
             return undefined;
         }
         return buildSearchOption(
             searchId,
             searchName,
-            searchDataResult.searchGroups as any,
+            searchGroups as any,
             searchScope,
         );
-    }, [searchName, searchDataResult?.searchGroups, searchScope, searchId]);
+    }, [searchName, searchGroups, searchScope, searchId]);
 
     return {
         searchOption,
-        filteredUnsupportedAttributes: searchDataResult?.filteredUnsupportedAttributes || [],
         isLoading,
         isError,
     };

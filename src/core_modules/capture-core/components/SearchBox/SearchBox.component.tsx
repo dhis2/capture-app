@@ -60,7 +60,6 @@ const Index = ({
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,
-        filteredUnsupportedAttributes,
     } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
@@ -109,7 +108,6 @@ const Index = ({
                                     <SearchForm
                                         selectedSearchScopeId={selectedSearchScopeId ?? ''}
                                         searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                                        filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                                     />
                                 )}
                                 <SearchStatus
