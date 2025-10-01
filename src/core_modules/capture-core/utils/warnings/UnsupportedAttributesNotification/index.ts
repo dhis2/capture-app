@@ -1,2 +1,2 @@
 export { UnsupportedAttributesNotification } from './UnsupportedAttributesNotification.component';
-export { filterUnsupportedAttributes, type FilteredAttribute } from './filterUnsupportedAttributes';
+export { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES } from './unsupportedSearchTypes.const';

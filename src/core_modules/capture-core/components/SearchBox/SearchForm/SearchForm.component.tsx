@@ -274,11 +274,7 @@ const SearchFormIndex = ({
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ alignItems: 'center' }}
-                                            titleStyle={{
-                                                background: 'transparent',
-                                                paddingTop: 8,
-                                                fontSize: 16,
-                                            }}
+                                            titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                                             title={searchByText}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
@@ -288,50 +284,41 @@ const SearchFormIndex = ({
                                     }
                                 >
                                     <div>
-                                        <div>
-                                            <div className={classes.searchRow}>
-                                                <div className={classes.searchRowSelectElement}>
-                                                    <D2Form
-                                                        formRef={(formInstance) => {
-                                                            formReference[formId] = formInstance;
-                                                        }}
-                                                        formFoundation={searchForm}
-                                                        id={formId}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div
-                                                className={classes.searchButtonContainer}
-                                                ref={(ref) => { containerButtonRef[formId] = ref; }}
-                                            >
-                                                <Button
-                                                    disabled={searchStatus === searchBoxStatus.LOADING}
-                                                    onClick={() =>
-                                                        selectedSearchScopeId &&
-                                                        handleSearchViaAttributes(
-                                                            searchScope,
-                                                            selectedSearchScopeId,
-                                                            formId,
-                                                            minAttributesRequiredToSearch,
-                                                        )
-                                                    }
-                                                >
-                                                    {searchByText}
-                                                </Button>
-                                                <FormInformativeMessage
-                                                    minAttributesRequiredToSearch={
-                                                        minAttributesRequiredToSearch
-                                                    }
+                                        <div className={classes.searchRow}>
+                                            <div className={classes.searchRowSelectElement}>
+                                                <D2Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
+                                                    formFoundation={searchForm}
+                                                    id={formId}
                                                 />
                                             </div>
                                         </div>
-                                        <br />
-                                        {filteredUnsupportedAttributes &&
-                                        filteredUnsupportedAttributes.length > 0 && (
-                                            <UnsupportedAttributesNotification
-                                                filteredUnsupportedAttributes={
-                                                    filteredUnsupportedAttributes
+                                        <div
+                                            className={classes.searchButtonContainer}
+                                            ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                        >
+                                            <Button
+                                                disabled={searchStatus === searchBoxStatus.LOADING}
+                                                onClick={() =>
+                                                    selectedSearchScopeId &&
+                                                    handleSearchViaAttributes(
+                                                        searchScope,
+                                                        selectedSearchScopeId,
+                                                        formId,
+                                                        minAttributesRequiredToSearch,
+                                                    )
                                                 }
+                                            >
+                                                {searchByText}
+                                            </Button>
+                                            <FormInformativeMessage
+                                                minAttributesRequiredToSearch={minAttributesRequiredToSearch}
+                                            />
+                                        </div>
+                                        <br />
+                                        { filteredUnsupportedAttributes?.length && (
+                                            <UnsupportedAttributesNotification
+                                                filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                                             />
                                         )}
                                     </div>

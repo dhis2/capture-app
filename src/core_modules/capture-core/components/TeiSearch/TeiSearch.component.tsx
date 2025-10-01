@@ -102,10 +102,8 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     renderSearchGroups = (searchGroups: Array<SearchGroup>) => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = this.getFormId(searchGroupId);
-        const header = sg.unique ?
-            i18n.t('Search {{uniqueAttrName}}', {
-                uniqueAttrName: sg.searchForm.getElements()[0].formName,
-            }) : i18n.t('Search by attributes');
+        const isUnique = sg.unique;
+        const header = isUnique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         const filteredUnsupportedAttributes = sg.filteredUnsupportedAttributes;
         return (
@@ -118,9 +116,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                     <SectionHeaderSimple
                         containerStyle={{ alignItems: 'center' }}
                         titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
-                        onChangeCollapseState={() => {
-                            collapsed && this.onChangeSectionCollapseState(searchGroupId);
-                        }}
+                        onChangeCollapseState={() => { collapsed && this.onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
                         isCollapseButtonEnabled={collapsed}
@@ -136,7 +132,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
                         onSearch={this.handleSearch}
                         onSearchValidationFailed={this.handleSearchValidationFailed}
                     />
-                    {filteredUnsupportedAttributes && filteredUnsupportedAttributes.length > 0 && (
+                    {!isUnique && filteredUnsupportedAttributes.length && (
                         <UnsupportedAttributesNotification
                             filteredUnsupportedAttributes={filteredUnsupportedAttributes}
                         />

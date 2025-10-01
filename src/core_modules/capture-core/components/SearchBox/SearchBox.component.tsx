@@ -42,7 +42,6 @@ const getStyles: Readonly<any> = {
     },
 };
 
-// eslint-disable-next-line complexity
 const Index = ({
     showInitialSearchBox,
     cleanSearchRelatedInfo,

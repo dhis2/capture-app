@@ -1,5 +1,4 @@
 export {
     UnsupportedAttributesNotification,
-    filterUnsupportedAttributes,
-    type FilteredAttribute,
+    UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES,
 } from './UnsupportedAttributesNotification';

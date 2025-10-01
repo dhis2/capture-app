@@ -18,6 +18,3 @@ export const UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES = new Set([
     dataElementTypes.GEOJSON,
     dataElementTypes.URL,
 ] as const);
-
-export const isSearchSupportedAttributeType = (valueType: string): boolean =>
-    !UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);

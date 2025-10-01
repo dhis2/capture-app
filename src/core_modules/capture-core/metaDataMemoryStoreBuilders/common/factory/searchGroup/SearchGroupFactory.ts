@@ -13,15 +13,9 @@ import type {
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
 import type { FilteredAttribute } from '../../../../metaData/SearchGroup/SearchGroup';
-import {
-    UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES,
-} from '../../../../utils/warnings/UnsupportedAttributesNotification/unsupportedSearchTypes.const';
+import { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES } from '../../../../utils/warnings';
 import { OptionSetFactory } from '../optionSet';
-import type {
-    ConstructorInput,
-    InputSearchAttribute,
-    SearchAttribute,
-} from './searchGroupFactory.types';
+import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
 const translationPropertyNames = {
     NAME: 'NAME',
