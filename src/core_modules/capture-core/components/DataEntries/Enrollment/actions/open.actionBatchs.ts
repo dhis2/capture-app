@@ -44,7 +44,7 @@ export const batchActionTypes = {
     OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
 };
 
-export const openDataEntryForNewEnrollmentBatchAsync = async ({
+export const openDataEntryForNewEnrollmentBatch = ({
     program,
     orgUnit,
     dataEntryId,

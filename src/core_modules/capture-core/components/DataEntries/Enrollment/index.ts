@@ -3,7 +3,7 @@ export { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const
 export { actionTypes as openActionTypes } from './actions/open.actions';
 export {
     batchActionTypes as openBatchActionTypes,
-    openDataEntryForNewEnrollmentBatchAsync,
+    openDataEntryForNewEnrollmentBatch,
 } from './actions/open.actionBatchs';
 export {
     batchActionTypes as enrollmentBatchActionTypes,
