@@ -1,50 +1,82 @@
-import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
-import { RulesEngine, environmentTypes } from '@dhis2/rules-engine-javascript';
-import { RuleEngine } from './RuleEngine/RuleEngine';
-import {
-    inputConverter,
-    outputConverter,
-    dateUtils,
-} from './converters';
+import type {
+    RulesEngineInput,
+    OutputEffects,
+    Flag,
+} from '@dhis2/rules-engine-javascript';
+import { RuleExecutionManager } from './ruleExecution';
 
-let selectedRuleEngine;
+const worker = new Worker(new URL('worker/worker.js', import.meta.url));
 
-const captureRuleEngine = () => new RulesEngine(
-    inputConverter,
-    outputConverter,
-    dateUtils,
-    environmentTypes.WebClient,
-);
+const ruleExecutionManager = new RuleExecutionManager;
 
-const kotlinRuleEngine = () => new RuleEngine(
-    inputConverter,
-    outputConverter,
-);
-
-const switchToCapture = () => {
-    console.log('Using capture rule engine');
-    selectedRuleEngine = captureRuleEngine();
+worker.onmessage = (event) => {
+    const {
+        executionEnvironment,
+        executionId,
+        effects,
+    } = event.data;
+    ruleExecutionManager.resolveExecution(executionEnvironment, executionId, effects);
 };
 
-const switchToKotlin = () => {
-    console.log('Using kotlin rule engine');
-    selectedRuleEngine = kotlinRuleEngine();
-};
+class RuleEngine {
+    flags: Flag;
 
-const versions = {
-    NEW: 'new',
-    OLD: 'old',
-};
+    constructor() {
+        this.flags = { verbose: false };
+    }
+
+    static getProgramRuleEffects(rulesEngineInput: RulesEngineInput): Promise<OutputEffects> {
+        return new Promise((resolve, reject) => {
+            const executionEnvironment = rulesEngineInput.executionEnvironment || '';
+            const executionId = ruleExecutionManager.newExecution({
+                executionEnvironment,
+                resolve,
+                reject,
+            });
+
+            worker.postMessage({
+                queryMethod: 'getProgramRuleEffects',
+                queryArguments: {
+                    executionId,
+                    rulesEngineInput,
+                },
+            });
+
+            setTimeout(() => {
+                // This will do nothing if the promise is already settled
+                ruleExecutionManager.abortExecution(executionEnvironment, executionId, 'Execution of rules timed out');
+            }, 10000);
+        });
+    }
+
+    static setSelectedUserRoles(userRoles: Array<string>) {
+        worker.postMessage({
+            queryMethod: 'setSelectedUserRoles',
+            queryArguments: userRoles,
+        });
+    }
+
+    setFlags(flags: Flag) {
+        this.flags = flags;
+        worker.postMessage({
+            queryMethod: 'setFlags',
+            queryArguments: flags,
+        });
+    }
+
+    getFlags(): Flag {
+        return this.flags;
+    }
+}
 
 export const initRulesEngine = (version: string, userRoles: Array<{ id: string }>) => {
-    if (version === versions.NEW) {
-        switchToKotlin();
-    } else if (version === versions.OLD) {
-        switchToCapture();
-    } else {
-        featureAvailable(FEATURES.kotlinRuleEngine) ? switchToKotlin() : switchToCapture();
-    }
-    selectedRuleEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
+    worker.postMessage({
+        queryMethod: 'initRulesEngine',
+        queryArguments: {
+            version,
+            userRoles,
+        },
+    });
 };
 
-export const ruleEngine = () => selectedRuleEngine || kotlinRuleEngine();
+export const ruleEngine = () => new RuleEngine();
