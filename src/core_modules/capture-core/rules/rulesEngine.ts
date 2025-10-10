@@ -18,15 +18,21 @@ worker.onmessage = (event) => {
     ruleExecutionManager.resolveExecution(executionEnvironment, executionId, effects);
 };
 
-class RuleEngine {
-    flags: Flag;
+export const initRulesEngine = (version: string, userRoles: Array<{ id: string }>) => {
+    worker.postMessage({
+        queryMethod: 'initRulesEngine',
+        queryArguments: {
+            version,
+            userRoles,
+        },
+    });
+};
 
-    constructor() {
-        this.flags = { verbose: false };
-    }
+export const ruleEngine = {
+    flags: { verbose: false },
 
-    static getProgramRuleEffects(rulesEngineInput: RulesEngineInput): Promise<OutputEffects> {
-        return new Promise((resolve, reject) => {
+    getProgramRuleEffects: (rulesEngineInput: RulesEngineInput): Promise<OutputEffects> =>
+        new Promise((resolve, reject) => {
             const executionEnvironment = rulesEngineInput.executionEnvironment || '';
             const executionId = ruleExecutionManager.newExecution({
                 executionEnvironment,
@@ -46,37 +52,22 @@ class RuleEngine {
                 // This will do nothing if the promise is already settled
                 ruleExecutionManager.abortExecution(executionEnvironment, executionId, 'Execution of rules timed out');
             }, 10000);
-        });
-    }
+        }),
 
-    static setSelectedUserRoles(userRoles: Array<string>) {
+    setSelectedUserRoles: (userRoles: Array<string>) => {
         worker.postMessage({
             queryMethod: 'setSelectedUserRoles',
             queryArguments: userRoles,
         });
-    }
+    },
 
-    setFlags(flags: Flag) {
-        this.flags = flags;
+    setFlags: (flags: Flag) => {
+        ruleEngine.flags = flags;
         worker.postMessage({
             queryMethod: 'setFlags',
             queryArguments: flags,
         });
-    }
+    },
 
-    getFlags(): Flag {
-        return this.flags;
-    }
-}
-
-export const initRulesEngine = (version: string, userRoles: Array<{ id: string }>) => {
-    worker.postMessage({
-        queryMethod: 'initRulesEngine',
-        queryArguments: {
-            version,
-            userRoles,
-        },
-    });
+    getFlags: (): Flag => ruleEngine.flags,
 };
-
-export const ruleEngine = new RuleEngine();
