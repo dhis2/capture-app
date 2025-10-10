@@ -1,4 +1,3 @@
-import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
 import { RulesEngine, environmentTypes } from '@dhis2/rules-engine-javascript';
 import { RuleEngine } from '../RuleEngine/RuleEngine';
 import {
@@ -36,13 +35,13 @@ const versions = {
     OLD: 'old',
 };
 
-export const initRuleEngine = (version: string, userRoles: Array<{ id: string }>) => {
+export const initRuleEngine = (version: string, userRoles: Array<{ id: string }>, useKotlinAsFallback: boolean) => {
     if (version === versions.NEW) {
         switchToKotlin();
     } else if (version === versions.OLD) {
         switchToCapture();
     } else {
-        featureAvailable(FEATURES.kotlinRuleEngine) ? switchToKotlin() : switchToCapture();
+        useKotlinAsFallback ? switchToKotlin() : switchToCapture();
     }
     selectedRuleEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
 };

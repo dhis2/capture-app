@@ -1,9 +1,10 @@
-import { RulesEngineInput, Flag } from '@dhis2/rules-engine-javascript';
+import type { RulesEngineInput, Flag } from '@dhis2/rules-engine-javascript';
 import { initRuleEngine, ruleEngine } from './ruleEngine';
 
-type InitData = {
+type InitArgs = {
     version: string,
     userRoles: Array<{ id: string }>,
+    useKotlinAsFallback: boolean,
 };
 
 type ExecutionArgs = {
@@ -12,8 +13,8 @@ type ExecutionArgs = {
 };
 
 const handlers = {
-    initRulesEngine: ({ version, userRoles }: InitData) => {
-        initRuleEngine(version, userRoles);
+    initRulesEngine: ({ version, userRoles, useKotlinAsFallback }: InitArgs) => {
+        initRuleEngine(version, userRoles, useKotlinAsFallback);
     },
     setSelectedUserRoles: (userRoles: Array<string>) => {
         ruleEngine().setSelectedUserRoles(userRoles);

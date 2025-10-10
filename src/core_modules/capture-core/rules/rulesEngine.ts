@@ -3,9 +3,10 @@ import type {
     OutputEffects,
     Flag,
 } from '@dhis2/rules-engine-javascript';
+import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
 import { RuleExecutionManager } from './ruleExecution';
 
-const worker = new Worker(new URL('worker/worker.js', import.meta.url));
+const worker = new Worker(new URL('ruleExecution/worker.js', import.meta.url));
 
 const ruleExecutionManager = new RuleExecutionManager;
 
@@ -24,6 +25,7 @@ export const initRulesEngine = (version: string, userRoles: Array<{ id: string }
         queryArguments: {
             version,
             userRoles,
+            useKotlinAsFallback: featureAvailable(FEATURES.kotlinRuleEngine),
         },
     });
 };
@@ -32,7 +34,7 @@ export const ruleEngine = {
     flags: { verbose: false },
 
     getProgramRuleEffects: (rulesEngineInput: RulesEngineInput): Promise<OutputEffects> =>
-        new Promise((resolve, reject) => {
+        new Promise<OutputEffects>((resolve, reject) => {
             const executionEnvironment = rulesEngineInput.executionEnvironment || '';
             const executionId = ruleExecutionManager.newExecution({
                 executionEnvironment,
