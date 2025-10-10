@@ -36,8 +36,8 @@ const getEnrollmentForRulesExecution = (
         programName,
     };
 
-const getDataElementsForRulesExecution = (dataElements?: DataElements): Record<string, any> | undefined => {
-    if (!dataElements) return undefined;
+const getDataElementsForRulesExecution = (dataElements?: DataElements): Record<string, any> | null => {
+    if (!dataElements) return null;
     return Object.values(dataElements).reduce(
         (acc: Record<string, any>, dataElement: any) => ({
             ...acc,
@@ -78,7 +78,7 @@ export const getRulesActionsForTEI = ({
     userRoles: Array<string>;
     programName: string;
 }) => {
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
+    const effects: OutputEffects = ruleEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,
@@ -125,7 +125,7 @@ export const getRulesActionsForTEIAsync = async ({
     querySingleResource: QuerySingleResource;
     onGetValidationContext: () => Record<string, any>;
 }) => {
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
+    const effects: OutputEffects = ruleEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,

@@ -79,4 +79,4 @@ export const initRulesEngine = (version: string, userRoles: Array<{ id: string }
     });
 };
 
-export const ruleEngine = () => new RuleEngine();
+export const ruleEngine = new RuleEngine();

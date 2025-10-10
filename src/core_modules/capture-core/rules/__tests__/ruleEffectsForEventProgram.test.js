@@ -122,7 +122,7 @@ describe('Event Event rules engine', () => {
         ],
     ])('where value needs to >= 9 and <= 99', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -160,7 +160,7 @@ describe('Event Event rules engine', () => {
         ],
     ])('where field is hidden regarding a boolean value', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -318,7 +318,7 @@ describe('Event rules engine', () => {
         ],
     ])('where field is hidden regarding the gender of the event', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -413,7 +413,7 @@ describe('Event rules engine', () => {
         ],
     ])('where BMI is calculated', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -1636,7 +1636,7 @@ describe('Event rules engine', () => {
         ],
     ])('where different fields are hidden', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2308,7 +2308,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
     ])('where functions take place', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2396,7 +2396,7 @@ describe('Event rules engine effects with functions and effects', () => {
     describe('where z-score take place', () => {
         test('with given values', () => {
             // when
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2563,7 +2563,7 @@ describe('Event rules engine', () => {
         ],
     ])('where assign actions are triggered', (programRules, expected) => {
         test(`with given value(s): ${JSON.stringify(programRules)}`, () => {
-            const rulesEffects = ruleEngine().getProgramRuleEffects({
+            const rulesEffects = ruleEngine.getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2793,7 +2793,7 @@ describe('Assign effects', () => {
         const programRuleVariables = [];
 
         // when
-        const rulesEffects = ruleEngine().getProgramRuleEffects({
+        const rulesEffects = ruleEngine.getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,

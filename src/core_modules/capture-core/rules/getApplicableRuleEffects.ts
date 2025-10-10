@@ -105,7 +105,7 @@ const getApplicableRuleEffects = ({
     const constants = constantsStore.get();
     const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
+    const effects: OutputEffects = ruleEngine.getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         currentEvent,
         otherEvents,

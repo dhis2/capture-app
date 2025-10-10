@@ -492,7 +492,7 @@ test('expressions with d2Functions in tracker program', () => {
     };
 
     // when
-    const rulesEffects = ruleEngine().getProgramRuleEffects({
+    const rulesEffects = ruleEngine.getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         trackedEntityAttributes,
         selectedEntity: teiValues,
