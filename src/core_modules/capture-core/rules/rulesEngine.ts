@@ -49,11 +49,6 @@ export const ruleEngine = {
                     rulesEngineInput,
                 },
             });
-
-            setTimeout(() => {
-                // This will do nothing if the promise is already settled
-                ruleExecutionManager.abortExecution(executionEnvironment, executionId, 'Execution of rules timed out');
-            }, 10000);
         }),
 
     setSelectedUserRoles: (userRoles: Array<string>) => {

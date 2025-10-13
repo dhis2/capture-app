@@ -9,7 +9,7 @@ type InitArgs = {
 
 type ExecutionArgs = {
     executionId: string,
-    input: RulesEngineInput,
+    rulesEngineInput: RulesEngineInput,
 };
 
 const handlers = {
@@ -22,11 +22,12 @@ const handlers = {
     setFlags: (flags: Flag) => {
         ruleEngine().setFlags(flags);
     },
-    getProgramRuleEffects: ({ executionId, input }: ExecutionArgs) => {
+    getProgramRuleEffects: ({ executionId, rulesEngineInput }: ExecutionArgs) => {
+        const effects = ruleEngine().getProgramRuleEffects(rulesEngineInput);
         postMessage({
-            executionEnvironment: input.executionEnvironment,
+            executionEnvironment: rulesEngineInput.executionEnvironment || '',
             executionId,
-            effects: ruleEngine().getProgramRuleEffects(input),
+            effects,
         });
     },
 };
@@ -36,6 +37,5 @@ onmessage = (event) => {
         queryMethod,
         queryArguments,
     } = event.data;
-
     handlers[queryMethod](queryArguments);
 };
