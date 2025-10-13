@@ -21,7 +21,11 @@ export class RuleExecutionManager {
 
     newExecution({ executionEnvironment, resolve, reject }: NewExecutionInput): number {
         if (this.executions[executionEnvironment]) {
-            this.abortExecution(executionEnvironment, this.executions[executionEnvironment].executionId, 'Execution superseded by new execution');
+            this.abortExecution(
+                executionEnvironment,
+                this.executions[executionEnvironment].executionId,
+                `Rule execution superseded in ${executionEnvironment || '???'}`,
+            );
         }
 
         this.nextExecutionId += 1;

@@ -44,7 +44,7 @@ export const batchActionTypes = {
     OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
 };
 
-export const openDataEntryForNewEnrollmentBatch = ({
+export const openDataEntryForNewEnrollmentBatch = async ({
     program,
     orgUnit,
     dataEntryId,
@@ -91,13 +91,14 @@ export const openDataEntryForNewEnrollmentBatch = ({
                 { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
             );
 
-    const effects = getApplicableRuleEffectsForTrackerProgram({
+    const effects = await getApplicableRuleEffectsForTrackerProgram({
         program,
         orgUnit,
         stage: firstStage,
         attributeValues: clientValues,
         enrollmentData: { enrolledAt: new Date().toISOString() },
         formFoundation,
+        executionEnvironment: 'NewEnrollment',
     });
 
     return batchActions([
