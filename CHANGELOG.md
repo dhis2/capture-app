@@ -1,3 +1,10 @@
+## [104.1.2](https://github.com/dhis2/capture-app/compare/v104.1.1...v104.1.2) (2025-10-14)
+
+
+### Performance Improvements
+
+* [DHIS2-19724] optimize api-calls on enrollment dashboard ([#4132](https://github.com/dhis2/capture-app/issues/4132)) ([955556b](https://github.com/dhis2/capture-app/commit/955556b94bc6916fe79b122c384c937887d41143))
+
 ## [104.1.1](https://github.com/dhis2/capture-app/compare/v104.1.0...v104.1.1) (2025-09-22)
 
 
