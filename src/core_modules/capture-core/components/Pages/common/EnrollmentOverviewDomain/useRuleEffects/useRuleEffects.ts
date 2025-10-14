@@ -77,16 +77,18 @@ export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeVa
 
     useEffect(() => {
         if (orgUnit && attributeValues && enrollmentData && otherEvents) {
-            const effects = getApplicableRuleEffectsForTrackerProgram({
+            getApplicableRuleEffectsForTrackerProgram({
                 program,
                 orgUnit,
                 otherEvents,
                 attributeValues,
                 enrollmentData,
-            }, true);
-            if (Array.isArray(effects)) {
-                setRuleEffects(effects);
-            }
+                executionEnvironment: 'EnrollmentDashboard',
+            }, true).then((effects) => {
+                if (Array.isArray(effects)) {
+                    setRuleEffects(effects);
+                }
+            }).catch(error => console.log(error));
         }
     }, [attributeValues, enrollmentData, orgUnit, otherEvents, program]);
 
