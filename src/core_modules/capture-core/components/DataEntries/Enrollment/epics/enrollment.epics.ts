@@ -1,7 +1,7 @@
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { map, concatMap, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';

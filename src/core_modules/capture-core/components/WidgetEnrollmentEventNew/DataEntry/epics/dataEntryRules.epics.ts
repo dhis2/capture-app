@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { map, concatMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
@@ -60,29 +60,36 @@ const runRulesForNewEvent = async ({
     const { coreOrgUnit, cached } =
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        stage,
-        orgUnit: coreOrgUnit,
-        currentEvent,
-        otherEvents: events,
-        attributeValues,
-        enrollmentData,
-    });
+    try {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage,
+            orgUnit: coreOrgUnit,
+            currentEvent,
+            otherEvents: events,
+            attributeValues,
+            enrollmentData,
+            executionEnvironment: 'NewEnrollmentEvent',
+        });
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: foundation.getElements(),
-        effects,
-        querySingleResource,
-    });
+        const effectsWithValidations = await validateAssignEffects({
+            dataElements: foundation.getElements(),
+            effects,
+            querySingleResource,
+        });
 
-    return batchActions([
-        updateRulesEffects(effectsWithValidations, formId),
-        rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
-        ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
-    ],
-    newEventWidgetDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
-    );
+        return batchActions([
+            updateRulesEffects(effectsWithValidations, formId),
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
+        ], newEventWidgetDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
+    } catch (error) {
+        console.log(error);
+        return batchActions([
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
+        ]);
+    }
 };
 
 export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
@@ -95,7 +102,7 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
         map((actionBatch: any) =>
             actionBatch.payload
                 .find((action: any) => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        concatMap((action: any) => {
+        mergeMap((action: any) => {
             const { dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted } = action.payload;
             const runRulesForNewEventPromise = runRulesForNewEvent({
                 store,
@@ -118,7 +125,7 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
         map((actionBatch: any) =>
             actionBatch.payload
                 .find((action: any) => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        concatMap((action: any) => {
+        mergeMap((action: any) => {
             const {
                 dataEntryId,
                 itemId,

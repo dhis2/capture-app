@@ -10,7 +10,7 @@ import {
 import type { AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 import type { EventsData } from '../../../../rules/RuleEngine/types/ruleEngine.types';
 
-export const getRulesActions = ({
+export const getRulesActions = async ({
     state, // temporary
     program,
     stage,
@@ -39,15 +39,21 @@ export const getRulesActions = ({
     const dataEntryValuesClient = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
     const eventDataClient = { ...formValuesClient, ...dataEntryValuesClient, programStageId: formFoundation.id };
 
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        stage,
-        orgUnit,
-        currentEvent: eventDataClient,
-        otherEvents: eventsRulesDependency,
-        attributeValues: attributesValuesRulesDependency,
-        enrollmentData: enrollmentDataRulesDependency,
-    });
+    try {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage,
+            orgUnit,
+            currentEvent: eventDataClient,
+            otherEvents: eventsRulesDependency,
+            attributeValues: attributesValuesRulesDependency,
+            enrollmentData: enrollmentDataRulesDependency,
+            executionEnvironment: 'NewEnrollmentEvent',
+        });
+        return updateRulesEffects(effects, formId);
 
-    return updateRulesEffects(effects, formId);
+    } catch(error) {
+        console.log(error);
+        return updateRulesEffects([], formId);
+    }
 };
