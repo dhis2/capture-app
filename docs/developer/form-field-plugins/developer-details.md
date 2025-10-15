@@ -39,8 +39,8 @@ The `setFieldValue` function expects different value types depending on the elem
 | `AGE` | `{ date: string }` or `{ years?: number, months?: number, days?: number }` | `{ date: "1990-05-15" }` |
 | `COORDINATE` | `{ latitude: number, longitude: number }` | `{ latitude: 40.7128, longitude: -74.0060 }` |
 | `POLYGON` | `Array<Array<Array<number>>>` | `[[[30, 10], [40, 40], [20, 40], [30, 10]]]` |
-| `FILE_RESOURCE` | `{ value: string, name: string }` | `{ value: "fileId123", name: "doc.pdf" }` |
-| `IMAGE` | `{ value: string, name: string }` | `{ value: "imgId456", name: "photo.jpg" }` |
+| `FILE_RESOURCE` | `{ value: string, name: string, url?: string }` | `{ value: "fileId123", name: "doc.pdf" }` |
+| `IMAGE` | `{ value: string, name: string, url?: string, previewUrl?: string }` | `{ value: "imgId456", name: "photo.jpg" }` |
 | `ORGANISATION_UNIT` | `{ id: string }` | `{ id: "orgUnitId" }` |
 | `ASSIGNEE` | `{ id: string, username?: string, name?: string }` | `{ id: "userId" }` |
 
