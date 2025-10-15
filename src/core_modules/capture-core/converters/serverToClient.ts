@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
-import type { ApiAssignedUser } from '../../capture-core-utils/types/api-types';
 
 function convertTime(d2Value: string) {
     const parseData = parseTime(d2Value);

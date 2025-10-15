@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, filter, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,

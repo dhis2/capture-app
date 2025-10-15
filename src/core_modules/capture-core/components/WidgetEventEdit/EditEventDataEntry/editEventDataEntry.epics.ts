@@ -3,6 +3,7 @@ import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import { EMPTY } from 'rxjs';
+import type { ReduxStore } from 'capture-core-utils/types';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
@@ -35,7 +36,6 @@ import {
 import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../Pages/EnrollmentEditEvent';
-import type { ReduxStore } from '../../../../capture-core-utils/types';
 
 const getDataEntryId = (event: any): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import type { Category as CategoryMetadata } from '../../../../metaData';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
@@ -72,7 +72,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 
-    static getDerivedStateFromProps(props: Props, state: State) {
+    static getDerivedStateFromProps(props: any, state: State) {
         if (props.selectedOrgUnitId !== state.prevOrgUnitId) {
             return {
                 prevOrgUnitId: props.selectedOrgUnitId,
@@ -122,7 +122,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
 
         currentRequestCancelablePromise = makeCancelablePromise(
-            CategorySelector
+            CategorySelectorPlain
                 .getOptionsAsync(
                     category.id,
                     selectedOrgUnitId,

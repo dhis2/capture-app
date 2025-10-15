@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback, useMemo, type ComponentType } 
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from 'react-query';

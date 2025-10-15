@@ -1,7 +1,7 @@
 import * as React from 'react';
 import parse from 'autosuggest-highlight/parse';
 import { MenuItem } from '@dhis2/ui';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { SearchContext } from './Search.context';
 import defaultClasses from './searchSuggestion.module.css';
 import type { User } from './types';
@@ -99,7 +99,7 @@ export const SearchSuggestion = (props: Props) => {
             role="button"
             tabIndex={-1}
             ref={handleRef}
-            className={useUpwardList ? classNames(defaultClasses.suggestion, defaultClasses.suggestionInUpList) : defaultClasses.suggestion}
+            className={useUpwardList ? cx(defaultClasses.suggestion, defaultClasses.suggestionInUpList) : defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
             onBlur={handleBlur}

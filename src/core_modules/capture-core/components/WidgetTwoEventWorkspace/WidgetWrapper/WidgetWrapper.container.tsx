@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 

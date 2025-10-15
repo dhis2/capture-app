@@ -1,7 +1,7 @@
 import React, { type ComponentType, useState } from 'react';
 import { Chip, IconLink24, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import type { WithStyles } from '@material-ui/core';
+import { withStyles } from 'capture-core-utils/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../../Widget';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';

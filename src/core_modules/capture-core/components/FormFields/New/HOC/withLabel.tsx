@@ -1,8 +1,8 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo16, Tooltip, colors, spacers } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
 import { withLabel as UIWithLabel } from 'capture-ui';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
@@ -83,7 +83,7 @@ export const withLabel = (hocParams?: HOCParams | null) => (InnerComponent: Reac
             return {
                 labelContainer: null,
                 labelClasses: {
-                    label: useVerticalOrientation ? labelVertical : classNames(label, onGetCustomFieldLabeClass && onGetCustomFieldLabeClass(props)),
+                    label: useVerticalOrientation ? labelVertical : cx(label, onGetCustomFieldLabeClass && onGetCustomFieldLabeClass(props)),
                 },
                 passOnClasses: rest,
             };

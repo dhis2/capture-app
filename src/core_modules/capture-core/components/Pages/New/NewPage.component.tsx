@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import type { ComponentType } from 'react';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';

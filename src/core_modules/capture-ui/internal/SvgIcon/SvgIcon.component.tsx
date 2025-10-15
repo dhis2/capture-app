@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './svgIcon.module.css';
 
 type Props = {
@@ -12,7 +12,7 @@ export const SvgIcon = (props: Props) => {
     const { className, ...passOnProps } = props;
     return (
         <svg
-            className={classNames(defaultClasses.icon, props.className)}
+            className={cx(defaultClasses.icon, props.className)}
             {...passOnProps}
         />
     );

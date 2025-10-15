@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
+import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
@@ -54,7 +55,6 @@ import {
     getCategoryOptionsValidatorContainers, withAOCFieldBuilder, withDataEntryFields,
 } from '../../../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
-import type { ReduxAction } from '../../../../../../capture-core-utils/types';
 
 const getStyles: any = (theme: any) => ({
     savingContextContainer: {
@@ -80,7 +80,7 @@ const getStyles: any = (theme: any) => ({
         paddingBottom: theme.typography.pxToRem(15),
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

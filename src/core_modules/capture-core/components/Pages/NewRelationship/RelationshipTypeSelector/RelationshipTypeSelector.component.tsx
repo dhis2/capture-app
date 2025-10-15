@@ -1,7 +1,7 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { IconCross16 } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import type { RelationshipType } from '../../../../metaData';
 import type { SelectedRelationshipType } from '../newRelationship.types';
@@ -57,7 +57,7 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
             <div
                 key={rt.id}
                 data-test={`relationship-type-selector-button-${rt.id}`}
-                className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)}
+                className={cx(classes.relationshipType, classes.relationshipTypeSelectable)}
                 role="button"
                 tabIndex={0}
                 onClick={() => this.onSelectRelationshipType(rt)}
@@ -70,7 +70,7 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
     renderSelectedRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
         const { classes, onDeselectRelationshipType } = this.props;
         return (
-            <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>
+            <div className={cx(classes.relationshipType, classes.relationshipTypeSelected)}>
                 <div className={classes.relationshipTypeSelectedText} onClick={onDeselectRelationshipType} role="button" tabIndex={0}>
                     <div>{selectedRelationshipType.name}</div>
                     <IconCross16 />

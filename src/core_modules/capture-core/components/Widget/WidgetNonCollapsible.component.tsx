@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
-import { WithStyles, withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { colors, spacersNum } from '@dhis2/ui';
-import cx from 'classnames';
+import { cx } from '@emotion/css';
 import type { WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
 
 const styles = {

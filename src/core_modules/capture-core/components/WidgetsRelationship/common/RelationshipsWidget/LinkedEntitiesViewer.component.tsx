@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
-import type { WithStyles } from '@material-ui/core';
-import { withStyles } from '@material-ui/core';
+import type { WithStyles } from 'capture-core-utils/styles';
+import { withStyles } from 'capture-core-utils/styles';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { LinkedEntityTable } from './LinkedEntityTable.component';
 import type { Props } from './linkedEntitiesViewer.types';

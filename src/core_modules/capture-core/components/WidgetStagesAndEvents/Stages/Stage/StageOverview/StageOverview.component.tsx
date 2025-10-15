@@ -1,6 +1,7 @@
 import React from 'react';
-import cx from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     colors, spacers, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip,
@@ -13,7 +14,6 @@ import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
 import { dataElementTypes } from '../../../../../metaData';
-import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 const styles: Readonly<any> = {
     container: {
@@ -148,7 +148,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     </div>
                     {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
                 </div> : null}
-                {totalEvents > 0 && <div className={cx(classes.indicator)}>
+                {totalEvents > 0 && <div className={classes.indicator}>
                     <div className={classes.indicatorIcon}>
                         <IconClockHistory16 />
                     </div>

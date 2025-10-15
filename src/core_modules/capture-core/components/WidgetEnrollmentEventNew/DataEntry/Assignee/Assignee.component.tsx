@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import type { WithStyles } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
+import { withStyles } from 'capture-core-utils/styles';
 import { UserField } from '../../../FormFields/UserField/UserField.component';
 
 const getStyles = {

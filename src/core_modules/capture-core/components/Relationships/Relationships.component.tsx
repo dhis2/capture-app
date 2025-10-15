@@ -1,7 +1,7 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
@@ -132,8 +132,8 @@ class RelationshipsPlain extends React.Component<Props> {
     renderRelationship = (relationship: Relationship) => {
         const { classes, onRemoveRelationship } = this.props;
         const canDelete = this.canDelete(relationship);
-        const relationshipDetailsClass = classNames(classes.relationshipDetails, {
-            [classes.relationshipHighlight]: this.shouldHighlightRelationship(relationship),
+        const relationshipDetailsClass = cx(classes.relationshipDetails, {
+            [classes.relationshipHighlight]: Boolean(this.shouldHighlightRelationship(relationship)),
         });
         return (
             <div className={classes.relationship} key={relationship.clientId}>

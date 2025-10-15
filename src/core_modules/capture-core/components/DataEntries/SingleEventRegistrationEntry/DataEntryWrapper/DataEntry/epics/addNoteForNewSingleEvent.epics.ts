@@ -2,7 +2,7 @@ import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import moment from 'moment';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../../../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';

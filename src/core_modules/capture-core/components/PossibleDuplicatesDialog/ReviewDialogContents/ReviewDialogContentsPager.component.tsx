@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
 import { Pagination } from 'capture-ui';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
@@ -23,7 +23,7 @@ const ReviewDialogContentsPagerPlain = ({
     selectedScopeId,
     dataEntryId,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof getStyles>) => {
     const { changePageOnReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
 
     return (

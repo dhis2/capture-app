@@ -1,8 +1,8 @@
 
 import moment from 'moment';
+import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { DateFieldForCustomForm } from '../../Components';
-import { convertDateObjectToDateFormatString } from '../../../../../../capture-core/utils/converters/date';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import type { DateDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';

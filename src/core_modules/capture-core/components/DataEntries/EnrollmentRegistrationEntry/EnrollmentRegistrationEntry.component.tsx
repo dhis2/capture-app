@@ -1,7 +1,7 @@
 import React, { type ComponentType, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, WithStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';

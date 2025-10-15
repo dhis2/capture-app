@@ -1,5 +1,5 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';

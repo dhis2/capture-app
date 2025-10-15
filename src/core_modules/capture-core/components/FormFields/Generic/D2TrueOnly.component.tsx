@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Checkbox, Switch, spacersNum, FieldSet, Label } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 const styles: Readonly<any> = theme => ({
     label: theme.typography.formFieldTitle,
@@ -31,7 +31,7 @@ class D2TrueOnlyPlain extends Component<Props> {
 
         this.labelClasses = this.buildLabelClasses();
     }
-    materialUIContainerInstance: HTMLDivElement | null = null;
+    containerInstance: HTMLDivElement | null = null;
 
     buildLabelClasses() {
         return {
@@ -56,7 +56,7 @@ class D2TrueOnlyPlain extends Component<Props> {
 
         return (
             <div
-                ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
+                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
                 style={style}
             >
                 <FieldSet>
@@ -69,7 +69,7 @@ class D2TrueOnlyPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
-                                    className={this.labelClasses}
+                                    className={this.labelClasses.root}
                                 >
                                     {label}
                                 </Label>

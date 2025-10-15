@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import {
     isValidNumber,
@@ -207,7 +207,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                         />
                     </div>
                 </div>
-                <div className={classNames(classes.error, classes.logicErrorContainer)}>
+                <div className={cx(classes.error, classes.logicErrorContainer)}>
                     {logicError}
                 </div>
             </div>

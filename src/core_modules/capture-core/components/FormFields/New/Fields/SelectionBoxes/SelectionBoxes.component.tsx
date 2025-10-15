@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { SelectionBoxes as UISelectionBoxes } from 'capture-ui';
 

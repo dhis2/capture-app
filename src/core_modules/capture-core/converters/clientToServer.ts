@@ -1,8 +1,8 @@
 import moment from 'moment';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
-import { FEATURES, featureAvailable } from '../../capture-core-utils';
-import type { ApiAssignedUser } from '../../capture-core-utils/types/api-types';
 
 type RangeValue = {
     from: number;

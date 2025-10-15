@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import type { EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 
 import {
     initializeNewRelationship,

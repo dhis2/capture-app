@@ -1,8 +1,8 @@
 import { useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { useQuery } from 'react-query';
+import { buildUrl, pipe } from 'capture-core-utils';
 import type { RenderFoundation } from '../../../metaData';
 import { convertClientToView, convertServerToClient } from '../../../converters';
-import { buildUrl, pipe } from '../../../../capture-core-utils';
 import { subValueGetterByElementType } from '../utils/getSubValueForDataValue';
 import { makeQuerySingleResource } from '../../../utils/api';
 

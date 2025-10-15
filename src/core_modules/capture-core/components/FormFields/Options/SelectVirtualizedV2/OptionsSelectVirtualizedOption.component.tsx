@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tooltip } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { VirtualizedOptionConfig } from './OptionsSelectVirtualized.component';
 
 const getStyles = () => ({
