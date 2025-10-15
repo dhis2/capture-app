@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
-import type { EpicAction } from '../../../../capture-core-utils/types';
+import type { EpicAction } from 'capture-core-utils/types';
 import { actionTypes as editActionTypes } from '../../WidgetEventEdit';
 import {
     commitEnrollmentEvent,

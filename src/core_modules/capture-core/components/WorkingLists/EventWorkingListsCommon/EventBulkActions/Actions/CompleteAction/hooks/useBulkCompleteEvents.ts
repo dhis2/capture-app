@@ -2,9 +2,9 @@ import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
 
 type Props = {
     selectedRows: { [key: string]: boolean };

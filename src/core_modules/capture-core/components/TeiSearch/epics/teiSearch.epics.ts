@@ -4,6 +4,7 @@ import { ofType } from 'redux-observable';
 import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
+import type { ApiUtils, ReduxStore } from 'capture-core-utils/types';
 import { convertValue as convertToClient } from '../../../converters/formToClient';
 import { convertValue as convertToServer } from '../../../converters/clientToServer';
 import {
@@ -24,7 +25,6 @@ import {
 import { getSearchGroups } from '../getSearchGroups';
 import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
-import type { ApiUtils, ReduxStore } from '../../../../capture-core-utils/types';
 
 import {
     addFormData,

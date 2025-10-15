@@ -8,7 +8,7 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from 'capture-core/rules/rulesEngine';
 import { getDateFnLocale } from './getDateFnLocale';
 
 function setLogLevel() {

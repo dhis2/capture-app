@@ -1,5 +1,5 @@
 import { batchActions } from 'redux-batched-actions';
-import type { ReduxAction } from '../../../../../capture-core-utils/types';
+import type { ReduxAction } from 'capture-core-utils/types';
 
 export const batchActionTypes = {
     NEW_TEI_FIELD_UPDATE_BATCH: 'NewTeiFieldUpdateBatch',

@@ -1,6 +1,6 @@
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
-import { featureAvailable, FEATURES } from '../../../../capture-core-utils';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 
 type SubValueFunctionProps = {

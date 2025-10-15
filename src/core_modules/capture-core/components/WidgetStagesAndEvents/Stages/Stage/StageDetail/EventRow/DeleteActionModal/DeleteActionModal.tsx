@@ -4,9 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
+import { errorCreator } from 'capture-core-utils';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { ReactQueryAppNamespace } from '../../../../../../../utils/reactQueryHelpers';
-import { errorCreator } from '../../../../../../../../capture-core-utils';
-import type { ApiEnrollmentEvent } from '../../../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
     eventId: string;

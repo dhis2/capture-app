@@ -1,4 +1,4 @@
-import { pipe as pipeD2 } from '../../../../../capture-core-utils';
+import { pipe as pipeD2 } from 'capture-core-utils';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import type { DataElement } from '../../../../metaData';
 import { dataElementTypes } from '../../../../metaData';

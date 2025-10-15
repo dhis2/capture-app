@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/tei.actionBatches';
 import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
 import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const mapStateToProps = () => ({});
 

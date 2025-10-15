@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
+import { FEATURES, useFeature } from 'capture-core-utils';
 import {
     spacers,
     IconFileDocument24,
@@ -20,7 +21,6 @@ import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/
 import { dataElementTypes } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
-import { FEATURES, useFeature } from '../../../../../capture-core-utils';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
 import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';

@@ -2,7 +2,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
-import { errorCreator } from '../../../../../../../../capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 
 type Props = {
     selectedRows: Record<string, boolean>;

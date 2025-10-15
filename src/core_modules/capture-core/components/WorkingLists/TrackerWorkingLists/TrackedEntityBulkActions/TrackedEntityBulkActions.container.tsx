@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
 import { TrackedEntityBulkActionsComponent } from './TrackedEntityBulkActions.component';
 import type { ContainerProps } from './TrackedEntityBulkActions.types';
-import { errorCreator } from '../../../../../capture-core-utils';
 import { useBulkDataEntryConfigurations } from '../../../common/bulkDataEntry';
 
 export const TrackedEntityBulkActions = ({
