@@ -32,7 +32,7 @@ const teiQuery = id => ({
     resource: 'tracker/trackedEntities',
     id,
     params: {
-        fields: ['attributes', 'trackedEntityType', 'programOwners'],
+        fields: ['attributes', 'trackedEntityType', 'programOwners[program,orgUnit]'],
     },
 });
 
@@ -41,15 +41,6 @@ const enrollmentIdQuery = enrollmentId => ({
     id: enrollmentId,
     params: {
         fields: ['trackedEntity', 'program'],
-    },
-});
-
-const programOwnersQuery = (teiId, programId) => ({
-    resource: 'tracker/trackedEntities',
-    id: teiId,
-    params: {
-        program: programId,
-        fields: ['programOwners[program,orgUnit]'],
     },
 });
 
@@ -88,16 +79,20 @@ const enrollmentIdLoaded = (enrollmentId: string, enrollments: Array<Record<stri
     enrollments && enrollments.some((enrollment: any) => enrollment.enrollment === enrollmentId);
 
 
-// The verification epics which are triggered by the completion of
-// async requests (e.g. verifyEnrollmentIdSuccessEpic) are not subject
-// to race conditions with other async requests because the chain of
-// epics and reducers triggered by the completion is resolved
-// synchronously before moving on to the next completed request.
+// The verification epics, which are triggered by the completion of
+// async requests (e.g. verifyEnrollmentIdSuccessEpic), are not subject
+// to race conditions with other async requests because the triggered
+// chain of epics and reducers is resolved synchronously before moving
+// on to the next completed request.
 
-// Note that the reason for doing the verification in a separate epic
-// is to make sure we are using the most recent version of the redux
-// store (but we might in fact have access to the most recent state
-// using the old store object as well).
+// The reason for doing the verifications in separate epic is to make
+// sure we never use a stale version of the redux store. However,
+// this might in fact be an unnecessary precaution. Most likely the
+// store never goes stale, at least many clues points in that direction
+// (the store is a javascript object, and the reducers modifies only
+// parts of this object, hence the reference to the entire store object
+// is most likely preserved, meaning any changes to the store will show
+// up in the store object passed in the beginning of the epic).
 
 // Epics for enrollmentId
 export const changedEnrollmentIdEpic = (action$: any, store: any) =>
@@ -264,28 +259,19 @@ export const verifyFetchedEnrollmentsEpic = (action$: any, store: any) =>
 // Auto-switch orgUnit epic
 export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleResource, navigate }: any) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
-        map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
-        concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
+        ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS),
+        map(({ payload: { programOwnerId } }) => programOwnerId),
+        filter(Boolean),
+        concatMap(programOwnerId => from(querySingleResource(captureScopeQuery(programOwnerId)))
             .pipe(
-                map(({ programOwners }: any) =>
-                    programOwners.find((programOwner: any) => programOwner.program === programId)),
-                filter(programOwner => programOwner),
-                concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
-                    .pipe(
-                        concatMap(({ organisationUnits }: any) => {
-                            if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
-                                // Update orgUnitId in url
-                                const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                                navigate(`/enrollment?${buildUrlQueryString({
-                                    ...restOfQueries,
-                                    orgUnitId: programOwner.orgUnit,
-                                })}`);
-                            }
-                            return EMPTY;
-                        }),
-                        catchError(() => EMPTY),
-                    )),
+                concatMap(({ organisationUnits }: any) => {
+                    if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
+                        // Update orgUnitId in url
+                        const { orgUnitId, ...restOfQueries } = getLocationQuery();
+                        navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwnerId })}`);
+                    }
+                    return EMPTY;
+                }),
                 catchError(() => EMPTY),
             )),
     );
