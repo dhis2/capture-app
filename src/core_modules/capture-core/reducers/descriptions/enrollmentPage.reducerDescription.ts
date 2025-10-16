@@ -48,6 +48,7 @@ export const enrollmentPageDesc = createReducerDescription({
         state => ({
             ...state,
             pageOpen: false,
+            enrollmentPageStatus: null,
         }),
     [RESET_ENROLLMENT_ID]:
         ({ enrollmentId, ...state }) => ({
