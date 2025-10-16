@@ -139,6 +139,7 @@ export type DataEntryOutputProps = {
     onUpdateDataEntryField?: (...args: any[]) => void,
     onGetValidationContext?: () => any,
     orgUnit?: { id?: string },
+    pluginContext?: any,
 };
 
 type OwnProps = DataEntryOutputProps & {
