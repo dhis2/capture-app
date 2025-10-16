@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-16T08:24:17.254Z\n"
-"PO-Revision-Date: 2025-10-16T08:24:17.254Z\n"
+"POT-Creation-Date: 2025-10-16T10:20:16.852Z\n"
+"PO-Revision-Date: 2025-10-16T10:20:16.852Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -407,6 +407,12 @@ msgstr "Some operations are still runnning. Please wait.."
 msgid "Operations running"
 msgstr "Operations running"
 
+msgid "No feedback for this enrollment yet"
+msgstr "No feedback for this enrollment yet"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "No indicator output for this enrollment yet"
+
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -614,12 +620,6 @@ msgstr "Notice"
 
 msgid "Close the notice"
 msgstr "Close the notice"
-
-msgid "No feedback for this enrollment yet"
-msgstr "No feedback for this enrollment yet"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "No indicator output for this enrollment yet"
 
 msgid "Quick actions"
 msgstr "Quick actions"
@@ -915,9 +915,6 @@ msgstr "Event could not be loaded"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
-
-msgid "No feedback for this enrollment yet 1"
-msgstr "No feedback for this enrollment yet 1"
 
 msgid "Selected program"
 msgstr "Selected program"

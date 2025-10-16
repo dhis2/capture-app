@@ -6,8 +6,7 @@ const mapStateToProps = (state: any, props: any) => ({
         ...(state.rulesEffectsFeedback[props.dataEntryKey]?.displayTexts || []),
         ...(state.rulesEffectsFeedback[props.dataEntryKey]?.displayKeyValuePairs || []),
     ],
-    emptyText: props.feedbackEmptyText
-,
+    emptyText: props.feedbackEmptyText,
 });
 
 export const FeedbackSection = connect(mapStateToProps, () => ({}))(WidgetFeedback);

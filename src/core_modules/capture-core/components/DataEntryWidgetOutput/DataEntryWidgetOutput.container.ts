@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import React, { type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import type { RenderCustomCardActions } from '../CardList/CardList.types';
@@ -18,6 +19,8 @@ const mapStateToProps = (state: any, { dataEntryId }: { dataEntryId: string }) =
     return {
         ready,
         dataEntryKey,
+        feedbackEmptyText: i18n.t('No feedback for this enrollment yet'),
+        indicatorEmptyText: i18n.t('No indicator output for this enrollment yet'),
     };
 };
 
