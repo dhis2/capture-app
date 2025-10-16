@@ -7,8 +7,8 @@ import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWar
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
-import { WidgetFeedback } from '../../../../../WidgetFeedback';
-import { WidgetIndicator } from '../../../../../WidgetIndicator';
+import { WidgetFeedbackComponent } from '../../../../../WidgetFeedback';
+import { WidgetIndicatorComponent } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentNote } from '../../../../../WidgetEnrollmentNote';
 import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
@@ -106,7 +106,7 @@ export const WarningWidget: WidgetConfig = {
 };
 
 export const FeedbackWidget: WidgetConfig = {
-    Component: WidgetFeedback,
+    Component: WidgetFeedbackComponent,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
     getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
         feedback: widgetEffects?.feedbacks as any,
@@ -115,7 +115,7 @@ export const FeedbackWidget: WidgetConfig = {
 };
 
 export const IndicatorWidget: WidgetConfig = {
-    Component: WidgetIndicator,
+    Component: WidgetIndicatorComponent,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
     getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
         indicators: widgetEffects?.indicators as any,
