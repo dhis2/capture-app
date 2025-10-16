@@ -28,7 +28,7 @@ export const useEnrollmentDatesForPlugin = ({ enrollmentId }: Props): ReturnType
     }), [enrollmentId]);
 
     const { data, isLoading, isError } = useApiDataQuery<any>(
-        ['enrollmentDatesForPlugin', enrollmentId],
+        ['WidgetProfile', 'pluginContext', enrollmentId],
         enrollmentId ? query : undefined,
         {
             enabled: !!enrollmentId,
