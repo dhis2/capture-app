@@ -5,7 +5,7 @@ import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { WidgetFeedback } from '../WidgetFeedback';
-import { IndicatorsSection } from '../WidgetIndicator';
+import { WidgetIndicator } from '../WidgetIndicator';
 
 type OwnProps = {
     onLink: (teiId: string, values: Record<string, unknown>) => void;
@@ -29,7 +29,7 @@ const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
     { id: 'FeedbacksSection', Component: WidgetFeedback },
-    { id: 'IndicatorsSection', Component: IndicatorsSection },
+    { id: 'IndicatorsSection', Component: WidgetIndicator },
 ];
 
 class DataEntryWidgetOutputPlain extends React.Component<Props> {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { WidgetIndicator } from './WidgetIndicator.component';
+import { WidgetIndicatorComponent } from './WidgetIndicator.component';
 
 const mapStateToProps = (state: any, props: any) => ({
     indicators: [
@@ -9,5 +9,5 @@ const mapStateToProps = (state: any, props: any) => ({
     emptyText: props.indicatorEmptyText,
 });
 
-export const IndicatorsSection = connect(mapStateToProps, () => ({}))(WidgetIndicator);
+export const WidgetIndicator = connect(mapStateToProps, () => ({}))(WidgetIndicatorComponent);
 
