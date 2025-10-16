@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
-"PO-Revision-Date: 2025-08-19T08:14:08.696Z\n"
+"POT-Creation-Date: 2025-10-16T08:24:17.254Z\n"
+"PO-Revision-Date: 2025-10-16T08:24:17.254Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -915,6 +915,9 @@ msgstr "Event could not be loaded"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
+
+msgid "No feedback for this enrollment yet 1"
+msgstr "No feedback for this enrollment yet 1"
 
 msgid "Selected program"
 msgstr "Selected program"

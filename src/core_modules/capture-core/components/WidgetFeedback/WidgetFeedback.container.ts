@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import { WidgetFeedback } from './WidgetFeedback.component';
 
 const mapStateToProps = (state: any, props: any) => ({
@@ -7,7 +6,8 @@ const mapStateToProps = (state: any, props: any) => ({
         ...(state.rulesEffectsFeedback[props.dataEntryKey]?.displayTexts || []),
         ...(state.rulesEffectsFeedback[props.dataEntryKey]?.displayKeyValuePairs || []),
     ],
-    emptyText: i18n.t('No feedback for this enrollment yet'),
+    emptyText: props.feedbackEmptyText
+,
 });
 
 export const FeedbackSection = connect(mapStateToProps, () => ({}))(WidgetFeedback);
