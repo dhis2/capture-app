@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { WidgetFeedback } from './WidgetFeedback.component';
+import { WidgetFeedbackComponent } from './WidgetFeedback.component';
 
 const mapStateToProps = (state: any, props: any) => ({
     feedback: [
@@ -9,5 +9,5 @@ const mapStateToProps = (state: any, props: any) => ({
     emptyText: props.feedbackEmptyText,
 });
 
-export const FeedbackSection = connect(mapStateToProps, () => ({}))(WidgetFeedback);
+export const WidgetFeedback = connect(mapStateToProps, () => ({}))(WidgetFeedbackComponent);
 

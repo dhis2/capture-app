@@ -3,10 +3,8 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
-import type { RenderCustomCardActions } from '../CardList/CardList.types';
 
 type OwnProps = {
-    renderCardActions?: RenderCustomCardActions;
     dataEntryId: string;
     selectedScopeId: string;
 };

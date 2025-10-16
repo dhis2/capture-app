@@ -4,7 +4,7 @@ import { Widget } from '../Widget';
 import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
 import type { Props } from './WidgetFeedback.types';
 
-export const WidgetFeedback = ({ feedback, emptyText }: Props) => {
+export const WidgetFeedbackComponent = ({ feedback, emptyText }: Props) => {
     const [openStatus, setOpenStatus] = useState(true);
 
     return (

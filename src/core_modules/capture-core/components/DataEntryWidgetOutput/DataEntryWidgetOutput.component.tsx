@@ -4,7 +4,7 @@ import { spacers } from '@dhis2/ui';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
-import { FeedbackSection } from '../WidgetFeedback';
+import { WidgetFeedback } from '../WidgetFeedback';
 import { IndicatorsSection } from '../WidgetIndicator';
 
 type OwnProps = {
@@ -28,19 +28,12 @@ type Props = OwnProps & WithStyles<typeof getStyles>;
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: FeedbackSection },
+    { id: 'FeedbacksSection', Component: WidgetFeedback },
     { id: 'IndicatorsSection', Component: IndicatorsSection },
 ];
 
 class DataEntryWidgetOutputPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Record<string, any>) => {
-        const { renderCardActions, ...otherProps } = props;
-
-        const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
-        return (
-            <container.Component key={container.id} {...passOnProps} />
-        );
-    }
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Record<string, any>) => <container.Component key={container.id} {...props} />
 
     render() {
         const { classes, ...passOnProps } = this.props;
