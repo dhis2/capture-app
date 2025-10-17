@@ -120,9 +120,6 @@ const RegisterTeiPlain = ({
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={selectedScopeId}
-                renderCardActions={({ item }) =>
-                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
-                }
             />
         </div>
     );

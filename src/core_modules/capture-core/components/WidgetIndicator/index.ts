@@ -1,1 +1,2 @@
-export { WidgetIndicator } from './WidgetIndicator.component';
+export { WidgetIndicator } from './WidgetIndicator.container';
+export { WidgetIndicatorComponent } from './WidgetIndicator.component';
