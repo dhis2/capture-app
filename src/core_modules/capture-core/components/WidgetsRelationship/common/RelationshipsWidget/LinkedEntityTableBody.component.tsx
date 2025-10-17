@@ -96,7 +96,7 @@ const LinkedEntityTableBodyPlain = ({
                     );
                 })
         }
-    </DataTableBody >
+    </DataTableBody>
 );
 
 export const LinkedEntityTableBody = withStyles(styles)(LinkedEntityTableBodyPlain) as ComponentType<Props>;
