@@ -1,3 +1,10 @@
+# [104.2.0](https://github.com/dhis2/capture-app/compare/v104.1.2...v104.2.0) (2025-10-17)
+
+
+### Features
+
+* [18904] Working List Filter component for `null` and `not null` Values ([#4270](https://github.com/dhis2/capture-app/issues/4270)) ([aea03d7](https://github.com/dhis2/capture-app/commit/aea03d72332964e0fb2d7368233a7c528619dd8f))
+
 ## [104.1.2](https://github.com/dhis2/capture-app/compare/v104.1.1...v104.1.2) (2025-10-14)
 
 
