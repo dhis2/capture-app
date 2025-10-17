@@ -24,6 +24,7 @@ import { areRelativeRangeValuesSupported }
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { type DataElement } from '../../../../../../metaData';
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
@@ -164,6 +165,12 @@ const convertDataElementFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
+
+        const emptyValueFilter = fromApiEmptyValueFilter(serverFilter);
+        if (emptyValueFilter) {
+            return { ...acc, [serverFilter.dataItem]: emptyValueFilter };
+        }
+
         const value = isOptionSetFilter(element.type, serverFilter)
             ? getOptionSetFilter(serverFilter, element.type)
             : getFilterByType[element.type](serverFilter);
@@ -181,6 +188,12 @@ const convertAttributeFilters = (
         if (!element || !getFilterByType[element.type]) {
             return acc;
         }
+
+        const emptyValueFilter = fromApiEmptyValueFilter(serverFilter);
+        if (emptyValueFilter) {
+            return { ...acc, [serverFilter.attribute]: emptyValueFilter };
+        }
+
         const value = isOptionSetFilter(element.type, serverFilter)
             ? getOptionSetFilter(serverFilter, element.type)
             : getFilterByType[element.type](serverFilter, element);
