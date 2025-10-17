@@ -7,8 +7,6 @@ import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWar
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
-import { WidgetFeedbackComponent } from '../../../../../WidgetFeedback';
-import { WidgetIndicator } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentNote } from '../../../../../WidgetEnrollmentNote';
 import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
@@ -22,14 +20,18 @@ import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
 import { WidgetEventNote } from '../../../../../WidgetEventNote';
 import { WidgetAssignee } from '../../../../../WidgetAssignee';
 import type {
+    IndicatorProps,
     Props as WidgetFeedbackProps,
     InputFeedbackProps,
+    InputIndicatorProps,
 } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetTwoEventWorkspace } from '../../../../../WidgetTwoEventWorkspace';
 import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
 import {
     EnrollmentPageKeys,
 } from '../DefaultEnrollmentLayout.constants';
+import { WidgetFeedbackComponent } from '../../../../../WidgetFeedback';
+import { WidgetIndicatorComponent } from '../../../../../WidgetIndicator';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -113,9 +115,12 @@ export const FeedbackWidget: WidgetConfig = {
 };
 
 export const IndicatorWidget: WidgetConfig = {
-    Component: WidgetIndicator,
+    Component: WidgetIndicatorComponent,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
-    getProps: (props: any) => props,
+    getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
+        indicators: widgetEffects?.indicators as any,
+        emptyText: indicatorEmptyText,
+    }),
 };
 
 export const EnrollmentNote: WidgetConfig = {
