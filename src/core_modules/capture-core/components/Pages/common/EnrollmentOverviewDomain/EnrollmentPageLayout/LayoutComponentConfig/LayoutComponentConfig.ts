@@ -8,7 +8,7 @@ import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDef
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
 import { WidgetFeedbackComponent } from '../../../../../WidgetFeedback';
-import { WidgetIndicatorComponent } from '../../../../../WidgetIndicator';
+import { WidgetIndicator } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentNote } from '../../../../../WidgetEnrollmentNote';
 import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
@@ -22,10 +22,8 @@ import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
 import { WidgetEventNote } from '../../../../../WidgetEventNote';
 import { WidgetAssignee } from '../../../../../WidgetAssignee';
 import type {
-    IndicatorProps,
     Props as WidgetFeedbackProps,
     InputFeedbackProps,
-    InputIndicatorProps,
 } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetTwoEventWorkspace } from '../../../../../WidgetTwoEventWorkspace';
 import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
@@ -115,12 +113,9 @@ export const FeedbackWidget: WidgetConfig = {
 };
 
 export const IndicatorWidget: WidgetConfig = {
-    Component: WidgetIndicatorComponent,
+    Component: WidgetIndicator,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
-    getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
-        indicators: widgetEffects?.indicators as any,
-        emptyText: indicatorEmptyText,
-    }),
+    getProps: (props: any) => props,
 };
 
 export const EnrollmentNote: WidgetConfig = {
