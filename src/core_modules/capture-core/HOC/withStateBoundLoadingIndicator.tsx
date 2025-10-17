@@ -8,7 +8,10 @@ type Props = {
     InnerComponent: React.ComponentType<any>;
 };
 
-const getLoadingIndicator = (getContainerStylesFn?: ((props: any) => any) | null, fullPage?: boolean | null) => (props: Props) => {
+const getLoadingIndicator = (
+    getContainerStylesFn?: ((props: any) => any) | null,
+    fullPage?: boolean | null,
+) => (props: Props) => {
     const { ready, InnerComponent, ...other } = props;
 
     if (!ready) {
@@ -48,6 +51,8 @@ export const withStateBoundLoadingIndicator = (
                 InnerComponent,
             });
 
-        const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(getLoadingIndicator(getContainerStylesFn, fullPage));
+        const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(
+            getLoadingIndicator(getContainerStylesFn, fullPage),
+        );
         return LoadingIndicatorContainer;
     };

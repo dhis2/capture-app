@@ -106,7 +106,9 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     const ready = !fetching && orgUnitIds === requestedArray;
 
     const batches = useMemo(() => createBatches(orgUnitIds), [orgUnitIds]);
-    const filter = useMemo(() => (fetching ? currentBatches[completedBatches].join(',') : ''), [fetching, currentBatches, completedBatches]);
+    const filter = useMemo(() => (
+        fetching ? currentBatches[completedBatches].join(',') : ''
+    ), [fetching, currentBatches, completedBatches]);
     const result = useMemo(() => (ready ? orgUnitIds.reduce((acc: any, id) => {
         acc[id] = displayNameCache[id] ? displayNameCache[id].displayName : null;
         return acc;

@@ -32,13 +32,14 @@ export const useProgram = (programId: string) => {
                 typedProgram.trackedEntityType.changelogEnabled = typedProgram.trackedEntityType.allowAuditLog;
                 delete typedProgram.trackedEntityType.allowAuditLog;
             }
-            typedProgram.programTrackedEntityAttributes = typedProgram.programTrackedEntityAttributes.map((attribute: any) => {
-                const tea = attribute.trackedEntityAttribute;
-                if (tea.optionSet) {
-                    tea.optionSet.optionGroups = optionGroups[tea.optionSet.id];
-                }
-                return attribute;
-            });
+            typedProgram.programTrackedEntityAttributes = typedProgram.programTrackedEntityAttributes.map(
+                (attribute: any) => {
+                    const tea = attribute.trackedEntityAttribute;
+                    if (tea.optionSet) {
+                        tea.optionSet.optionGroups = optionGroups[tea.optionSet.id];
+                    }
+                    return attribute;
+                });
             return typedProgram;
         }
         return null;

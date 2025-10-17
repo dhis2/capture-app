@@ -27,7 +27,11 @@ const mapDispatchToProps = (dispatch: any) => ({
     onCancel: (dataEntryId: string) => {
         dispatch(newEventCancelNewRelationship(dataEntryId));
     },
-    onAddRelationship: (relationshipType: { id: string; name: string }, entity: Record<string, unknown>, entityType: string) => {
+    onAddRelationship: (
+        relationshipType: { id: string; name: string },
+        entity: Record<string, unknown>,
+        entityType: string,
+    ) => {
         dispatch(addNewEventRelationship(relationshipType, entity, entityType));
     },
 });

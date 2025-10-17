@@ -5,5 +5,10 @@ export type PlainProps = {
     className?: string;
     dataTest?: string;
     disabled?: boolean;
-    onClick: (event: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => void;
+    onClick: (
+        event:
+            | React.KeyboardEvent<HTMLButtonElement>
+            | React.MouseEvent<HTMLButtonElement>
+            | React.TouchEvent<HTMLButtonElement>
+    ) => void;
 };

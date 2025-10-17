@@ -221,7 +221,8 @@ export class EnrollmentFactory {
             section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode as any);
         } catch (error) {
             log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
-                template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
+                template: dataEntryForm.htmlCode, error, method: 'buildEnrollment',
+            }));
         }
         return enrollmentForm;
     }
@@ -294,7 +295,10 @@ export class EnrollmentFactory {
 
                         if (!sectionMetadata && cachedProgramSections && cachedProgramSections.length > 0) {
                             log.warn(
-                                errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                errorCreator(
+                                    `Could not find metadata for section. This could indicate that your form
+                                    configuration may be out of sync with your metadata.`,
+                                )(
                                     { sectionId: formConfigSection.id },
                                 ),
                             );

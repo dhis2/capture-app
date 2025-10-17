@@ -19,7 +19,9 @@ import { searchBoxActionTypes } from '../../components/SearchBox';
 import { mainPageActionTypes } from '../../components/Pages/MainPage/MainPage.actions';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
-import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
+import {
+    trackedEntityTypeSelectorActionTypes,
+} from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
 const setCategoryOption = (
     state: any,

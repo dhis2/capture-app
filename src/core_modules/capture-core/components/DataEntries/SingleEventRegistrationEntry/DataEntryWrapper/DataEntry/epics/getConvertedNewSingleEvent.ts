@@ -20,7 +20,12 @@ const getApiCategoriesArgument = (categories: { [id: string]: string } | null) =
     };
 };
 
-export const getNewEventServerData = (state: any, formFoundation: RenderFoundation, formClientValues: Record<string, any>, mainDataClientValues: Record<string, any>) => {
+export const getNewEventServerData = (
+    state: any,
+    formFoundation: RenderFoundation,
+    formClientValues: Record<string, any>,
+    mainDataClientValues: Record<string, any>,
+) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Record<string, any> = convertMainEventClientToServer(mainDataClientValues);
 
@@ -95,7 +100,11 @@ export const getNewEventClientValues = (state: any, dataEntryKey: string, formFo
         dataEntryValues,
         dataEntryValuesMeta,
     );
-    const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: getDataEntriesNotes(state, dataEntryKey) };
+    const mainDataClientValues = {
+        ...prevEventMainData,
+        ...dataEntryClientValues,
+        notes: getDataEntriesNotes(state, dataEntryKey),
+    };
 
     return { formClientValues, mainDataClientValues };
 };

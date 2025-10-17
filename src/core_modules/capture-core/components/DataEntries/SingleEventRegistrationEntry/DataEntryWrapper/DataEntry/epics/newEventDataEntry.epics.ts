@@ -85,7 +85,10 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
                 : cancelOpenNewEventInDataEntry();
         }));
 
-export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: EpicAction<SelectionsCompletenessPayload>, store: ReduxStore) =>
+export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (
+    action$: EpicAction<SelectionsCompletenessPayload>,
+    store: ReduxStore,
+) =>
     action$.pipe(
         ofType(
             newPageActionTypes.CATEGORY_OPTION_SET,
@@ -96,7 +99,8 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Epi
             return page === 'new';
         }),
         filter((action) => {
-            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not SET_ORG_UNIT or FROM_URL_CURRENT_SELECTIONS_VALID
+            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not
+            // SET_ORG_UNIT or FROM_URL_CURRENT_SELECTIONS_VALID
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
@@ -124,7 +128,10 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Epi
             if (!stageContainer || !stageContainer.stage) {
                 return false;
             }
-            const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
+            const columnConfig = [
+                ...getDefaultMainColumnConfig(stageContainer.stage),
+                ...getColumnMetaDataConfig(stageContainer.stage.stageForm),
+            ];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         }));
 

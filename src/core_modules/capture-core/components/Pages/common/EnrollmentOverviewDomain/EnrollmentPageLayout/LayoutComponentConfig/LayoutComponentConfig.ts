@@ -1,7 +1,8 @@
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type { Props as TrackedEntityRelationshipProps } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps } from
+    '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
@@ -14,7 +15,8 @@ import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
 import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
 import type { Props as WidgetEnrollmentProps } from '../../../../../WidgetEnrollment/enrollment.types';
-import type { Props as NewEventWorkspaceWrapperProps } from '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
+import type { Props as NewEventWorkspaceWrapperProps } from
+    '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
 import type { Props as WidgetEventEditProps } from '../../../../../WidgetEventEdit/widgetEventEdit.types';
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';

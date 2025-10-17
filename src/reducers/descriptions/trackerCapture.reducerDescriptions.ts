@@ -71,12 +71,22 @@ import { feedbackDesc } from './feedback.reducerDescription';
 import { activePageDesc } from '../../core_modules/capture-core/reducers/descriptions/activePage.reducerDescription';
 import { searchDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/searchDomain.reducerDescription';
 import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
-import { enrollmentDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
-import { breakTheGlassAccessDesc } from '../../core_modules/capture-core/reducers/descriptions/breakTheGlass.reducerDescription';
+import {
+    enrollmentDomainDesc,
+} from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
+import {
+    breakTheGlassAccessDesc,
+} from '../../core_modules/capture-core/reducers/descriptions/breakTheGlass.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
-import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
-import { trackedEntityInstanceDesc } from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
-import { widgetEnrollmentDesc } from '../../core_modules/capture-core/reducers/descriptions/widgetEnrollment.reducerDescription';
+import {
+    possibleDuplicatesDesc,
+} from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
+import {
+    trackedEntityInstanceDesc,
+} from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
+import {
+    widgetEnrollmentDesc,
+} from '../../core_modules/capture-core/reducers/descriptions/widgetEnrollment.reducerDescription';
 
 export const reducerDescriptions = [
     activePageDesc,

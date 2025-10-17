@@ -73,7 +73,8 @@ const EventRowPlain = ({
                                 dense
                                 dataTest={'overflow-menu'}
                             >
-                                {(eventDetails.status === EventStatuses.SCHEDULE || eventDetails.status === EventStatuses.SKIPPED) && (
+                                {(eventDetails.status === EventStatuses.SCHEDULE ||
+                                    eventDetails.status === EventStatuses.SKIPPED) && (
                                     <SkipAction
                                         eventId={id}
                                         eventDetails={eventDetails}

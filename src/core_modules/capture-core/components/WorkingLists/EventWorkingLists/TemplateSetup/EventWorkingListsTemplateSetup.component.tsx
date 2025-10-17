@@ -25,8 +25,14 @@ export const EventWorkingListsTemplateSetup = ({
     ...passOnProps
 }: Props) => {
     const injectArgumentsForUpdateTemplate = React.useCallback((template) => {
-        // @ts-expect-error - keeping original functionality as before ts rewrite
-        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
+        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({
+            filters,
+            columns: new Map(columns.map(c => [c.id, c])),
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            sortById,
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            sortByDirection,
+        });
         onUpdateTemplate(template, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns
@@ -39,8 +45,14 @@ export const EventWorkingListsTemplateSetup = ({
     }, [onUpdateTemplate, filters, columns, sortById, sortByDirection, program.id]);
 
     const injectArgumentsForAddTemplate = React.useCallback((name) => {
-        // @ts-expect-error - keeping original functionality as before ts rewrite
-        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({ filters, columns: new Map(columns.map(c => [c.id, c])), sortById, sortByDirection });
+        const eventQueryCriteria = convertToEventFilterEventQueryCriteria({
+            filters,
+            columns: new Map(columns.map(c => [c.id, c])),
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            sortById,
+            // @ts-expect-error - keeping original functionality as before ts rewrite
+            sortByDirection,
+        });
         onAddTemplate(name, eventQueryCriteria, {
             filters,
             visibleColumnIds: columns && columns

@@ -173,7 +173,9 @@ const WidgetEventEditPlain = ({
                                     assignee={assignee}
                                     onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
                                     onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
-                                    onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
+                                    onSaveAndCompleteEnrollmentSuccessActionType={
+                                        onSaveAndCompleteEnrollmentSuccessActionType
+                                    }
                                 />
                             </div>
                         )}

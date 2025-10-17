@@ -118,7 +118,8 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = (column: { id: string; sortDirection?: string | null }) => (column.id === columnName ? sortDirection : column.sortDirection);
+    const getSortDirection = (column: { id: string; sortDirection?: string | null }) =>
+        (column.id === columnName ? sortDirection : column.sortDirection);
     const onSortIconClick = ({ name, direction }: { name?: string; direction: any }) => {
         if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
             setSortInstructions(defaultSortState);

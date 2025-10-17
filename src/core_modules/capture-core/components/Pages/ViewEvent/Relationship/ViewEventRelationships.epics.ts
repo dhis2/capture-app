@@ -116,7 +116,11 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 const serverRelationshipData = {
                     relationships: [convertClientRelationshipToServer(clientRelationship)],
                 };
-                saveAction = startSaveEventRelationship(serverRelationshipData, state.currentSelections, relationshipClientId);
+                saveAction = startSaveEventRelationship(
+                    serverRelationshipData,
+                    state.currentSelections,
+                    relationshipClientId,
+                );
             }
 
             return batchActions([

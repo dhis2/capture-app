@@ -163,7 +163,11 @@ import {
 import {
     navigateBackToMainPageEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../core_modules/capture-core/components/WidgetProfile';
+import {
+    updateTeiEpic,
+    updateTeiSucceededEpic,
+    updateTeiFailedEpic,
+} from '../core_modules/capture-core/components/WidgetProfile';
 import {
     initTeiViewEpic,
     updateTeiListEpic,

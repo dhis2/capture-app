@@ -45,7 +45,10 @@ const getDataEntryId = (event: any): string => (
 
 export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
-        ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
+        ofType(
+            eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
+            widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
+        ),
         map((action: any) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
@@ -142,7 +145,12 @@ export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
             if (program instanceof TrackerProgram) {
                 return batchActions([
                     updateEnrollmentEvent(eventId, serverData.events[0]),
-                    startSaveEditEventDataEntry(eventId, serverData, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
+                    startSaveEditEventDataEntry(
+                        eventId,
+                        serverData,
+                        enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT,
+                        enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT,
+                    ),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([

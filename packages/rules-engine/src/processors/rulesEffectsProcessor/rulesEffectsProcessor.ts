@@ -1,6 +1,12 @@
 import log from 'loglevel';
 import { errorCreator } from '../../errorCreator';
-import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes, typeKeys } from '../../constants';
+import {
+    mapTypeToInterfaceFnName,
+    effectActions,
+    idNames,
+    rulesEngineEffectTargetDataTypes,
+    typeKeys,
+} from '../../constants';
 
 import type {
     ProgramRuleEffect,

@@ -121,7 +121,9 @@ export const getUniqueValuesForAttributesWithoutValue = async (
     if (!foundation) {
         return {};
     }
-    const uniqueDataElements = foundation.getElements().filter(dataElement => dataElement.unique && dataElement.unique.generatable);
+    const uniqueDataElements = foundation.getElements().filter(
+        dataElement => dataElement.unique && dataElement.unique.generatable,
+    );
 
     if (uniqueDataElements && uniqueDataElements.length > 0) {
         const uniqueDataElementsWithoutValue = uniqueDataElements.reduce((acc: any[], dataElement) => {

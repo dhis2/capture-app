@@ -13,7 +13,8 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'programStageWorkingLists',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,programStage,sortOrder,programStageQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
+            fields: 'id,displayName,programStage,sortOrder,programStageQueryCriteria,' +
+                'access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
         },
     });
     return apiRes && apiRes.programStageWorkingLists ? apiRes.programStageWorkingLists : [];

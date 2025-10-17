@@ -31,7 +31,15 @@ const styles: Readonly<any> = {
     },
 };
 
-const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: PlainProps & WithStyles<typeof styles>) => (
+const IconButtonPlain = ({
+    children,
+    className,
+    dataTest,
+    onClick,
+    disabled,
+    classes,
+    ...passOnProps
+}: PlainProps & WithStyles<typeof styles>) => (
     <button
         {...passOnProps}
         onClick={onClick}
