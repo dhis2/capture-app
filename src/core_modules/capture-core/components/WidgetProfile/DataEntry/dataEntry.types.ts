@@ -23,11 +23,6 @@ export type PlainProps = {
     pluginContext?: PluginContext;
 };
 
-export type EnrollmentDatesForPlugin = {
-    enrolledAt: string;
-    occurredAt: string;
-};
-
 export type Props = {
     programAPI: any;
     orgUnitId: string;
@@ -44,5 +39,4 @@ export type Props = {
     geometry?: Geometry;
     userRoles: Array<string>;
     trackedEntityName: string;
-    enrollmentDates?: EnrollmentDatesForPlugin;
 };

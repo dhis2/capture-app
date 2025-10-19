@@ -18,7 +18,6 @@ import {
     useClientAttributesWithSubvalues,
     useUserRoles,
     useTeiDisplayName,
-    useEnrollmentDatesForPlugin,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
@@ -53,7 +52,6 @@ const WidgetProfilePlain = ({
     programId,
     readOnlyMode = false,
     orgUnitId = '',
-    enrollmentId,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     classes,
@@ -63,7 +61,6 @@ const WidgetProfilePlain = ({
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { enrollmentDates } = useEnrollmentDatesForPlugin({ enrollmentId });
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
         storedGeometry: trackedEntityInstance?.geometry,
@@ -201,7 +198,6 @@ const WidgetProfilePlain = ({
                         modalState={modalState}
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
-                        enrollmentDates={enrollmentDates}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>

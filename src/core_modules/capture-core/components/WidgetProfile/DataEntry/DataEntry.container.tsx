@@ -27,7 +27,6 @@ export const DataEntry = ({
     geometry,
     trackedEntityName,
     dataEntryFormConfig,
-    enrollmentDates,
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
@@ -56,11 +55,11 @@ export const DataEntry = ({
         geometry: geometry ?? null,
         dataEntryFormConfig,
     });
-    const { formFoundation } = context;
+    const { formFoundation, enrollment } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const pluginContext: PluginContext | undefined = useMemo(() => {
-        if (!enrollmentDates) {
+        if (!enrollment?.enrolledAt || !enrollment?.occurredAt) {
             return undefined;
         }
 
@@ -69,16 +68,16 @@ export const DataEntry = ({
                 setDataEntryFieldValue: () => {
                     log.error('Cannot update enrolledAt from the profile widget. This field is read-only in this context.');
                 },
-                value: enrollmentDates.enrolledAt,
+                value: enrollment.enrolledAt,
             },
             occurredAt: {
                 setDataEntryFieldValue: () => {
                     log.error('Cannot update occurredAt from the profile widget. This field is read-only in this context.');
                 },
-                value: enrollmentDates.occurredAt,
+                value: enrollment.occurredAt,
             },
         };
-    }, [enrollmentDates]);
+    }, [enrollment]);
 
     const onUpdateFormField = useCallback(
         (innerAction: any) => {
