@@ -9,4 +9,5 @@ export type UseRuleEffectsInput = {
     program: TrackerProgram;
     apiEnrollment?: EnrollmentData;
     apiAttributeValues?: Array<AttributeValue>;
+    executionEnvironment?: string;
 };

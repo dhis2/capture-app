@@ -56,7 +56,7 @@ const useEnrollmentData = (enrollment: any) => useMemo(() => {
     };
 }, [enrollment]);
 
-export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeValues }: UseRuleEffectsInput) => {
+export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeValues, executionEnvironment }: UseRuleEffectsInput) => {
     const [ruleEffects, setRuleEffects] = useState<any>(undefined);
     const attributesObject = useMemo(() =>
         program.attributes.reduce((acc: any, attribute: any) => {
@@ -83,14 +83,14 @@ export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeVa
                 otherEvents,
                 attributeValues,
                 enrollmentData,
-                executionEnvironment: 'EnrollmentDashboard',
+                executionEnvironment,
             }, true).then((effects) => {
                 if (Array.isArray(effects)) {
                     setRuleEffects(effects);
                 }
             }).catch(error => console.log(error));
         }
-    }, [attributeValues, enrollmentData, orgUnit, otherEvents, program]);
+    }, [attributeValues, enrollmentData, orgUnit, otherEvents, program, executionEnvironment]);
 
     return ruleEffects;
 };

@@ -54,4 +54,12 @@ export class RuleExecutionManager {
             this.executions[executionEnvironment] = undefined;
         }
     }
+
+    discardExecution(executionEnvironment: string) {
+        this.executions[executionEnvironment] = undefined;
+    }
+
+    executionInProgress(executionEnvironment: string): boolean {
+        return !!this.executions[executionEnvironment];
+    }
 }

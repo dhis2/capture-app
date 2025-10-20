@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import { ruleExecutionInProgress } from 'capture-core/rules/rulesEngine';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
+import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { Widget } from '../../../Widget';
 import { errorCreator } from '../../../../../capture-core-utils';
 import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
@@ -10,7 +12,6 @@ import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/usePr
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
@@ -34,7 +35,9 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         program: programRules,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
+        executionEnvironment: 'SelectProgramStageForNewEvent',
     });
+    const rulesRunning = ruleExecutionInProgress('SelectProgramStageForNewEvent');
 
     useEffect(() => {
         if (enrollmentsError || programError) {
@@ -106,11 +109,13 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                     header={i18n.t('Choose a stage for a new event')}
                     noncollapsible
                 >
-                    <ProgramStageSelectorComponent
-                        programStages={availableStages}
-                        onSelectProgramStage={onSelectProgramStage}
-                        onCancel={onCancel}
-                    />
+                    {!rulesRunning ?
+                        <ProgramStageSelectorComponent
+                            programStages={availableStages}
+                            onSelectProgramStage={onSelectProgramStage}
+                            onCancel={onCancel}
+                        />
+                        : <LoadingMaskElementCenter />}
                 </Widget>
                 : i18n.t('Program Stages could not be loaded')}
         </>

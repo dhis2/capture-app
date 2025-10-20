@@ -5,6 +5,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { ruleExecutionInProgress } from 'capture-core/rules/rulesEngine';
 import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
@@ -90,7 +91,9 @@ export const EnrollmentPageDefault = () => {
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
+        executionEnvironment: 'EnrollmentDashboard',
     });
+    const rulesRunning = ruleExecutionInProgress('EnrollmentDashboard');
 
     const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
@@ -198,7 +201,7 @@ export const EnrollmentPageDefault = () => {
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}
-            stages={stages}
+            stages={stages && !rulesRunning ? stages : undefined}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
             onAddNew={onAddNew}

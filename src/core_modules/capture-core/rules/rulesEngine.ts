@@ -68,3 +68,10 @@ export const ruleEngine = {
 
     getFlags: (): Flag => ruleEngine.flags,
 };
+
+export const ruleExecutionInProgress = (executionEnvironment: string): boolean =>
+    ruleExecutionManager.executionInProgress(executionEnvironment);
+
+export const discardRuleExecution = (executionEnvironment: string) => {
+    ruleExecutionManager.discardExecution(executionEnvironment);
+};

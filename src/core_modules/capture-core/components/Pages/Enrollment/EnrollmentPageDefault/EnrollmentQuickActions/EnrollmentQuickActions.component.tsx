@@ -29,14 +29,14 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
-    const stagesWithEventCount = useMemo(() => stages.map((stage) => {
+    const stagesWithEventCount = useMemo(() => (stages ? stages.map((stage) => {
         const mutatedStage = { ...stage };
         mutatedStage.eventCount = (events
             ?.filter(event => event.programStage === stage.id)
             ?.length
         );
         return mutatedStage;
-    }), [events, stages]);
+    }) : []), [events, stages]);
 
     const hiddenProgramStageRuleEffects = useMemo(
         () => ruleEffects?.filter((ruleEffect: OutputEffect): boolean => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
