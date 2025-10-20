@@ -46,7 +46,7 @@ export const useMetadataForProgramStage = ({
         selectedScopeId: scopeId,
     });
 
-    const { data: programStageMetadata, isIdle, isLoading, isError } = useIndexedDBQuery(
+    const { data: programStageMetadata, isInitialLoading, isError } = useIndexedDBQuery(
         ['programStageMetadata', programId, stageId],
         () => buildProgramStageMetadata({
             cachedProgramStage: programStage,
@@ -73,7 +73,7 @@ export const useMetadataForProgramStage = ({
     return {
         formFoundation: programStageMetadata?.stageForm ?? null,
         stage: programStageMetadata ?? null,
-        isLoading: isLoading || isIdle,
+        isLoading: isInitialLoading,
         isError,
     };
 };

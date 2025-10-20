@@ -19,7 +19,7 @@ export const useMetadataAutoSelect = () => {
     const { navigate } = useNavigate();
     const urlParams = useLocationQuery();
 
-    const { data: programs, isLoading: loadingPrograms } = useIndexedDBQuery(
+    const { data: programs, isInitialLoading: loadingPrograms } = useIndexedDBQuery(
         ['programIds', 'data-read'],
         () => getAllPrograms(),
         {

@@ -1,4 +1,4 @@
-import type { UseQueryOptions, UseQueryResult } from 'react-query';
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
 
 export type ApiMetadataProps<TResultData> = {

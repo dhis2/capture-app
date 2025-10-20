@@ -8,7 +8,7 @@ export const useTrackedEntityAttributes = (teiId?: string, programId?: string) =
         data: programAttributes,
         error: programAttributesError,
         isError: programAttributesIsError,
-        isLoading: programAttributesIsLoading,
+        isInitialLoading: programAttributesIsLoading,
     } = useApiDataQuery(
         ['trackedEntities', 'attributes', teiId, programId],
         {
@@ -28,7 +28,7 @@ export const useTrackedEntityAttributes = (teiId?: string, programId?: string) =
         data: tetAttributes,
         error: tetAttributesError,
         isError: tetAttributesIsError,
-        isLoading: tetAttributesIsLoading,
+        isInitialLoading: tetAttributesIsLoading,
     } = useApiDataQuery(
         ['trackedEntities', 'attributes', teiId],
         {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'regenerator-runtime'; // To fix the 'regeneratorRuntime is not defined' error comming from react-leaflet-search-unpolyfilled
 import 'capture-core-utils/extensions/asyncForEachArray';
 import 'capture-core-utils/extensions/arrayToHashMap';

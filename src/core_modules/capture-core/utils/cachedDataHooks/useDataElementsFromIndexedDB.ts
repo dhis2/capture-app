@@ -1,4 +1,4 @@
-import type { UseQueryOptions } from 'react-query';
+import type { UseQueryOptions } from '@tanstack/react-query';
 import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 import type { CachedDataElement } from '../../storageControllers/';
@@ -11,7 +11,7 @@ export const useDataElementsFromIndexedDB = (queryKey: Array<string | number>, d
     const storageController = getUserMetadataStorageController();
     const { enabled = !!dataElementIds } = queryOptions ?? {};
 
-    const { data, isLoading, isError } = useIndexedDBQuery(
+    const { data, isInitialLoading, isError } = useIndexedDBQuery(
         ['dataElements', ...queryKey],
         () => storageController.getAll(
             USER_METADATA_STORES.DATA_ELEMENTS, {
@@ -24,7 +24,7 @@ export const useDataElementsFromIndexedDB = (queryKey: Array<string | number>, d
 
     return {
         dataElements: data,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

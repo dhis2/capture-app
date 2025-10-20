@@ -24,7 +24,7 @@ const relationshipTypesQuery = {
 };
 
 export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes) => {
-    const { data: apiRelationshipTypes, isError, isLoading } = useApiMetadataQuery<ApiRelationshipTypes>(
+    const { data: apiRelationshipTypes, isError, isInitialLoading } = useApiMetadataQuery<ApiRelationshipTypes>(
         ['relationshipTypes'],
         relationshipTypesQuery,
         {
@@ -92,6 +92,6 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
     return {
         data: relationshipTypes ?? cachedRelationshipTypes,
         isError,
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

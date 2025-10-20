@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
@@ -27,7 +27,7 @@ export const useBulkCompleteEvents = ({
         { critical: true },
     );
 
-    const { data: events, isLoading } = useApiDataQuery(
+    const { data: events, isInitialLoading } = useApiDataQuery(
         ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'Events', selectedRows],
         {
             resource: 'tracker/events',
@@ -135,6 +135,6 @@ export const useBulkCompleteEvents = ({
         validationError,
         onCompleteEvents,
         isCompletingEvents,
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

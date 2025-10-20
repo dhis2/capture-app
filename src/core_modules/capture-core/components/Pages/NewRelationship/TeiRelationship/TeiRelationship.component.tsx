@@ -41,7 +41,6 @@ const getStyles = (theme: any) => ({
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        backgroundColor: theme.palette.grey[500],
     },
     buttonIcon: {
         marginRight: spacersNum.dp8,

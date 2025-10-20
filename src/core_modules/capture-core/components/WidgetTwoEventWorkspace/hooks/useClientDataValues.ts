@@ -1,5 +1,5 @@
 import { useConfig, useDataEngine } from '@dhis2/app-runtime';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { buildUrl, pipe } from 'capture-core-utils';
 import type { RenderFoundation } from '../../../metaData';
 import { convertClientToView, convertServerToClient } from '../../../converters';
@@ -65,7 +65,7 @@ export const useClientDataValues = ({
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
     const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
-    const { data: clientValuesWithSubValues, isError, isLoading } = useQuery(
+    const { data: clientValuesWithSubValues, isError, isInitialLoading } = useQuery(
         ['formattedDataValues', linkedEventId, dataValues],
         () => formatDataValues(
             dataValues,
@@ -87,6 +87,6 @@ export const useClientDataValues = ({
     return {
         clientValuesWithSubValues,
         isError,
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

@@ -11,7 +11,7 @@ import {
     FlyoutMenu,
     MenuItem,
 } from '@dhis2/ui';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';

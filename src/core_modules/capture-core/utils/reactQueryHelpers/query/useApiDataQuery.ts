@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useDataEngine } from '@dhis2/app-runtime';
-import type { QueryFunction, UseQueryOptions } from 'react-query';
+import type { QueryFunction, UseQueryOptions } from '@tanstack/react-query';
 import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
 import type { Result } from './useMetadataQuery.types';
 import { ReactQueryAppNamespace } from '../reactQueryHelpers.const';

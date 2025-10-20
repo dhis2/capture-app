@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import type { ProgramRule } from '@dhis2/rules-engine-javascript';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';

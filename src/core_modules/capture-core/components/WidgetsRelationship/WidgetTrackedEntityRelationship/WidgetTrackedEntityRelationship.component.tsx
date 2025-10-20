@@ -26,7 +26,7 @@ export const WidgetTrackedEntityRelationship = ({
     const {
         data: relationships,
         isError,
-        isLoading: isLoadingRelationships,
+        isInitialLoading: isLoadingRelationships,
     } = useRelationships({
         entityId: teiId,
         searchMode: RelationshipSearchEntities.TRACKED_ENTITY,
