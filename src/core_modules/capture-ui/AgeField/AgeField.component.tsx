@@ -9,7 +9,12 @@ import i18n from '@dhis2/d2-i18n';
 import { cx } from '@emotion/css';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
-import { stringToTemporal, temporalToString, mapDhis2CalendarToTemporal, isCalendarSupported } from 'capture-core-utils/date';
+import {
+    stringToTemporal,
+    temporalToString,
+    mapDhis2CalendarToTemporal,
+    isCalendarSupported,
+} from 'capture-core-utils/date';
 import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
 import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
@@ -226,7 +231,8 @@ class D2AgeFieldPlain extends Component<Props> {
         const { classes, innerMessage: messageContainer } = this.props;
         if (messageContainer) {
             const message = messageContainer.message && messageContainer.message[key];
-            const className = (classes && classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
+            const className = (classes &&
+                classes[messageTypeClass[messageContainer.messageType as keyof typeof messageTypeClass]]) || '';
             return message && (<div className={className}>{message}</div>);
         }
         return null;

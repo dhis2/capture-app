@@ -21,7 +21,11 @@ const createServerData = (note: string, useNewEndpoint: boolean): Record<string,
     return { notes: [{ value: note }] };
 };
 
-export const addNoteForEnrollmentEpic = (action$: EpicAction<AddNoteActionPayload>, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForEnrollmentEpic = (
+    action$: EpicAction<AddNoteActionPayload>,
+    store: ReduxStore,
+    { querySingleResource, fromClientDate }: ApiUtils,
+) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT),
         switchMap((action: { payload: AddNoteActionPayload }) => {

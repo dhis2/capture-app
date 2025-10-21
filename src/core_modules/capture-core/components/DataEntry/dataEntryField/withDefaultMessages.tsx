@@ -44,7 +44,8 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
 
         render() {
             const { classes, validationError, touched, validationAttempted, ...passOnProps } = this.props;
-            const messageElement = (touched || validationAttempted) ? FieldMessages.getMessageElement(validationError, classes) : null;
+            const messageElement = (touched || validationAttempted) ?
+                FieldMessages.getMessageElement(validationError, classes) : null;
 
             return (
                 <div>

@@ -62,7 +62,9 @@ class Index extends Component<Props> {
             const columnsCount = visibleColumns.length;
             return (
                 <DataTableRow dataTest="table-row">
-                    <DataTableCell colSpan={columnsCount.toString()}>{noItemsText || i18n.t('No items to display')}</DataTableCell>
+                    <DataTableCell colSpan={columnsCount.toString()}>
+                        {noItemsText || i18n.t('No items to display')}
+                    </DataTableCell>
                 </DataTableRow>
             );
         }

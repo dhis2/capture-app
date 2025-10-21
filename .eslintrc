@@ -47,8 +47,8 @@
         "@typescript-eslint/no-explicit-any": "warn",
         "indent": [2, 4],
         "max-len": [
-            1,
-            120,
+            2,
+            125,
             4,
             {
                 "ignoreComments": true,

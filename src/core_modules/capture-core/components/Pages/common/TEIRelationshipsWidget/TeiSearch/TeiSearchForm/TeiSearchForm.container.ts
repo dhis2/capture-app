@@ -9,7 +9,8 @@ const getAttributesWithValuesCount = (state: any, formId: string) => {
 const mapStateToProps = (state: any, props: any) => {
     const searchId = props.searchId;
     const formId = props.id;
-    const formState = state.teiSearch[searchId] && state.teiSearch[searchId][formId] ? state.teiSearch[searchId][formId] : {};
+    const formState = state.teiSearch[searchId] && state.teiSearch[searchId][formId] ?
+        state.teiSearch[searchId][formId] : {};
 
     return {
         searchAttempted: formState.validationFailed,

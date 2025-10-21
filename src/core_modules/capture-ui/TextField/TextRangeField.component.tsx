@@ -8,7 +8,9 @@ import { TextInput } from '../internal/TextInput/TextInput.component';
 import defaultClasses from './textRangeField.module.css';
 import { InnerMessage } from '../internal/InnerMessage/InnerMessage.component';
 
-const RangeInputField = withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(TextInput))) as React.ComponentType<any>;
+const RangeInputField = withFocusSaver()(
+    withShrinkLabel()(withTextFieldFocusHandler()(TextInput)),
+) as React.ComponentType<any>;
 
 const inputKeys = {
     FROM: 'from',

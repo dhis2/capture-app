@@ -52,7 +52,8 @@ const NewTrackedEntityRelationshipPlain = ({
 }: ComponentProps & WithStyles<typeof styles>) => {
     const [currentStep, setCurrentStep] =
         useState<WizardStep>(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
-    const [selectedLinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState<LinkedEntityMetadata | undefined>(undefined);
+    const [selectedLinkedEntityMetadata, setSelectedLinkedEntityMetadata] =
+        useState<LinkedEntityMetadata | undefined>(undefined);
     const { addRelationship } = useAddRelationship({
         teiId,
         onMutate: () => onSave && onSave(),
@@ -66,8 +67,14 @@ const NewTrackedEntityRelationshipPlain = ({
             const relationshipId = generateUID();
 
             const apiData = targetSide === TARGET_SIDES.TO ?
-                { from: { trackedEntity: { trackedEntity: teiId } }, to: { trackedEntity: { trackedEntity: linkedTrackedEntityId } } } :
-                { from: { trackedEntity: { trackedEntity: linkedTrackedEntityId } }, to: { trackedEntity: { trackedEntity: teiId } } };
+                {
+                    from: { trackedEntity: { trackedEntity: teiId } },
+                    to: { trackedEntity: { trackedEntity: linkedTrackedEntityId } },
+                } :
+                {
+                    from: { trackedEntity: { trackedEntity: linkedTrackedEntityId } },
+                    to: { trackedEntity: { trackedEntity: teiId } },
+                };
 
             const clientData = {
                 createdAt: new Date().toISOString(),
@@ -108,8 +115,14 @@ const NewTrackedEntityRelationshipPlain = ({
         const relationshipId = generateUID();
 
         const relationshipData = targetSide === TARGET_SIDES.TO ?
-            { from: { trackedEntity: { trackedEntity: teiId } }, to: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } } } :
-            { from: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } }, to: { trackedEntity: { trackedEntity: teiId } } };
+            {
+                from: { trackedEntity: { trackedEntity: teiId } },
+                to: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } },
+            } :
+            {
+                from: { trackedEntity: { trackedEntity: trackedEntity.trackedEntity } },
+                to: { trackedEntity: { trackedEntity: teiId } },
+            };
 
         const clientData = {
             relationship: relationshipId,

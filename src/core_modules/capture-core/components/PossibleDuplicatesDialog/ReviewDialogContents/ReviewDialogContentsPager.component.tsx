@@ -39,4 +39,6 @@ const ReviewDialogContentsPagerPlain = ({
     );
 };
 
-export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(ReviewDialogContentsPagerPlain) as ComponentType<OwnProps>;
+export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(
+    ReviewDialogContentsPagerPlain,
+) as ComponentType<OwnProps>;

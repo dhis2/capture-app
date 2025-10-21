@@ -26,7 +26,13 @@ export const paramsSelector = createSelector(
     orgUnitIdSelector,
     eventIdSelector,
     viewEventIdSelector,
-    (programId?: string, trackedEntityTypeId?: string, orgUnitId?: string, eventId?: string, viewEventId?: string) => ({
+    (
+        programId?: string,
+        trackedEntityTypeId?: string,
+        orgUnitId?: string,
+        eventId?: string,
+        viewEventId?: string,
+    ) => ({
         programId,
         trackedEntityTypeId,
         orgUnitId,

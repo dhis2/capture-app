@@ -71,7 +71,12 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
         const { classes, onDeselectRelationshipType } = this.props;
         return (
             <div className={cx(classes.relationshipType, classes.relationshipTypeSelected)}>
-                <div className={classes.relationshipTypeSelectedText} onClick={onDeselectRelationshipType} role="button" tabIndex={0}>
+                <div
+                    className={classes.relationshipTypeSelectedText}
+                    onClick={onDeselectRelationshipType}
+                    role="button"
+                    tabIndex={0}
+                >
                     <div>{selectedRelationshipType.name}</div>
                     <IconCross16 />
                 </div>

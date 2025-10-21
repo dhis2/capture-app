@@ -44,7 +44,8 @@ const buildTEAUrlByElementType: {
             return {
                 id,
                 name,
-                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file?program=${programId}`,
+                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file` +
+                    `?program=${programId}`,
             };
         } catch (error) {
             log.error(
@@ -72,8 +73,10 @@ const buildTEAUrlByElementType: {
             return {
                 id,
                 name,
-                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}`,
-                previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`,
+                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image` +
+                    `?program=${programId}`,
+                previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image` +
+                    `?program=${programId}&dimension=small`,
             };
         } catch (error) {
             log.error(
@@ -87,7 +90,13 @@ const buildTEAUrlByElementType: {
 const buildDataElementUrlByElementType: {
     [key: string]: (props: SubValuesDataElementProps) => Promise<any>;
 } = {
-    [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
+    [dataElementTypes.FILE_RESOURCE]: async ({
+        dataElement,
+        querySingleResource,
+        eventId,
+        absoluteApiPath,
+        latestValue,
+    }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
@@ -110,7 +119,13 @@ const buildDataElementUrlByElementType: {
             return null;
         }
     },
-    [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
+    [dataElementTypes.IMAGE]: async ({
+        dataElement,
+        querySingleResource,
+        eventId,
+        absoluteApiPath,
+        latestValue,
+    }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 

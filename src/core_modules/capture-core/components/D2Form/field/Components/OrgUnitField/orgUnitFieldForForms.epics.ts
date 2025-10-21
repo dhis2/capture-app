@@ -40,10 +40,8 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
             return from(querySingleResource({
                 resource: 'organisationUnits',
                 params: {
-                    fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
+                    fields: 'id,displayName,path,publicAccess,access,lastUpdated' +
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                    ].join(','),
                     paging: false,
                     withinUserSearchHierarchy: true,
                     query: searchText,
@@ -59,7 +57,11 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
                 log.error(errorCreator(FILTER_RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'FilterOrgUnitRootsEpic' }),
                 );
-                return filterFormFieldOrgUnitsFailed(resultContainer.formId, resultContainer.elementId, FILTER_RETRIEVE_ERROR);
+                return filterFormFieldOrgUnitsFailed(
+                    resultContainer.formId,
+                    resultContainer.elementId,
+                    FILTER_RETRIEVE_ERROR,
+                );
             }
 
             const { orgUnitArray, formId, elementId } = resultContainer;

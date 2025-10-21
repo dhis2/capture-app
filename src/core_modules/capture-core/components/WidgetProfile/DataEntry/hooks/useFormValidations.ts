@@ -6,11 +6,14 @@ import { useSelector } from 'react-redux';
 const prepareMessages = (rulesEffectsGeneral: any, rulesEffectsMessages: any, saveAttempted: boolean, type: string) => {
     let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
     if (saveAttempted) {
-        messages = rulesEffectsGeneral[`${type}OnComplete`] ? [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
+        messages = rulesEffectsGeneral[`${type}OnComplete`] ?
+            [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
 
         messages = Object.values(rulesEffectsMessages).reduce(
             (acc: any, rulesEffectsMessage: any) =>
-                (rulesEffectsMessage[`${type}OnComplete`] ? [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] : acc),
+                (rulesEffectsMessage[`${type}OnComplete`] ?
+                    [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] :
+                    acc),
             messages,
         );
     }
@@ -31,7 +34,10 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
         formsSectionsFieldsUI: store.formsSectionsFieldsUI && store.formsSectionsFieldsUI[ruleId],
     }));
 
-    const fieldsValidated = useMemo(() => Object.values(formsSectionsFieldsUI).every(({ valid }: any) => valid === true), [formsSectionsFieldsUI]);
+    const fieldsValidated = useMemo(
+        () => Object.values(formsSectionsFieldsUI).every(({ valid }: any) => valid === true),
+        [formsSectionsFieldsUI],
+    );
     const rulesValidated = useMemo(
         () =>
             Object.values(rulesEffectsMessages).every(({ error, errorOnComplete }: any) => !error && !errorOnComplete) &&
@@ -41,8 +47,12 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
     );
     const formValidated = fieldsValidated && rulesValidated;
 
-    let errorsMessages = saveAttempted && !formValidated ? [{ id: uuid(), message: i18n.t('Fix errors in the form to continue.') }] : [];
-    errorsMessages = [...errorsMessages, ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error')];
+    let errorsMessages = saveAttempted && !formValidated ?
+        [{ id: uuid(), message: i18n.t('Fix errors in the form to continue.') }] : [];
+    errorsMessages = [
+        ...errorsMessages,
+        ...prepareMessages(rulesEffectsGeneralErrors, rulesEffectsMessages, saveAttempted, 'error'),
+    ];
     const warningsMessages = prepareMessages(rulesEffectsGeneralWarnings, rulesEffectsMessages, saveAttempted, 'warning');
 
     return { errorsMessages, warningsMessages, formValidated };

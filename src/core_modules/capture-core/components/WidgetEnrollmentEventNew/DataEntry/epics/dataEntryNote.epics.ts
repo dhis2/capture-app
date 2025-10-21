@@ -11,7 +11,11 @@ import {
     addNote,
 } from '../../../DataEntry/actions/dataEntry.actions';
 
-export const addNoteForNewEnrollmentEventEpic = (action$: any, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForNewEnrollmentEventEpic = (
+    action$: any,
+    store: ReduxStore,
+    { querySingleResource, fromClientDate }: ApiUtils,
+) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
         switchMap((action: any) => {

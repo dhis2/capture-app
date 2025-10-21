@@ -99,7 +99,9 @@ export const SearchSuggestion = (props: Props) => {
             role="button"
             tabIndex={-1}
             ref={handleRef}
-            className={useUpwardList ? cx(defaultClasses.suggestion, defaultClasses.suggestionInUpList) : defaultClasses.suggestion}
+            className={useUpwardList ?
+                cx(defaultClasses.suggestion, defaultClasses.suggestionInUpList) :
+                defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
             onBlur={handleBlur}

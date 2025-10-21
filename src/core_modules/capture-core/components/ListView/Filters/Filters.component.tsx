@@ -6,7 +6,16 @@ import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
-import type { Column, StickyFilters, FiltersOnly, AdditionalFilters, FilterOnly, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
+import type {
+    Column,
+    StickyFilters,
+    FiltersOnly,
+    AdditionalFilters,
+    FilterOnly,
+    UpdateFilter,
+    ClearFilter,
+    RemoveFilter,
+} from '../types';
 
 const getStyles = (theme: any) => ({
     filterButtonContainer: {
@@ -263,7 +272,9 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         classes,
     } = props;
 
-    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(props.visibleSelectorId ?? null);
+    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(
+        props.visibleSelectorId ?? null,
+    );
     const defaultFiltersOnly = useMemo(() =>
         (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);
     const defaultFiltersOnlyCount = defaultFiltersOnly.length;
