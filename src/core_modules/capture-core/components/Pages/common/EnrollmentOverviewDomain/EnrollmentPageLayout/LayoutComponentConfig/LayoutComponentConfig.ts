@@ -7,6 +7,8 @@ import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWar
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
+import { WidgetFeedback } from '../../../../../WidgetFeedback';
+import { WidgetIndicator } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentNote } from '../../../../../WidgetEnrollmentNote';
 import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
@@ -30,8 +32,6 @@ import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
 import {
     EnrollmentPageKeys,
 } from '../DefaultEnrollmentLayout.constants';
-import { WidgetFeedback } from '../../../../../WidgetFeedback';
-import { WidgetIndicator } from '../../../../../WidgetIndicator';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
