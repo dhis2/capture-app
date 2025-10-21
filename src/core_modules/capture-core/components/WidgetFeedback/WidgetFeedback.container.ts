@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { WidgetFeedbackComponent } from './WidgetFeedback.component';
 
 const mapStateToProps = (state: any, props: any) => ({
-    feedback: [
+    feedback: props.feedback || [
         ...(state.rulesEffectsFeedback[props.dataEntryKey]?.displayTexts || []),
         ...(state.rulesEffectsFeedback[props.dataEntryKey]?.displayKeyValuePairs || []),
     ],

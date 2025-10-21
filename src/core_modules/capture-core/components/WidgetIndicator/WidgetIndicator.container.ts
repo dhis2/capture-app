@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { WidgetIndicatorComponent } from './WidgetIndicator.component';
 
 const mapStateToProps = (state: any, props: any) => ({
-    indicators: [
+    indicators: props.indicators || [
         ...(state.rulesEffectsIndicators[props.dataEntryKey]?.displayTexts || []),
         ...(state.rulesEffectsIndicators[props.dataEntryKey]?.displayKeyValuePairs || []),
     ],
