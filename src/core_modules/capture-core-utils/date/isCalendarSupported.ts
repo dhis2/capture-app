@@ -1,5 +1,7 @@
-const supportedTemporalCalendars = ['coptic', 'gregory', 'ethiopic', 'islamic', 'persian', 'islamic-umalqura', 'islamic-tbla',
-    'islamic-civil', 'islamic-rgsa', 'hebrew', 'chinese', 'indian', 'buddhist', 'japanese', 'roc', 'dangi'];
+const supportedTemporalCalendars = [
+    'coptic', 'gregory', 'ethiopic', 'islamic', 'persian', 'islamic-umalqura', 'islamic-tbla',
+    'islamic-civil', 'islamic-rgsa', 'hebrew', 'chinese', 'indian', 'buddhist', 'japanese', 'roc', 'dangi',
+];
 
 /**
  * Checks if a calendar is supported by Temporal.

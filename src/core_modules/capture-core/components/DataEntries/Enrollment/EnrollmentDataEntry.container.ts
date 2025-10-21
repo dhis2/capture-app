@@ -41,7 +41,16 @@ const mapDispatchToProps = (dispatch: any) => ({
         onGetValidationContext: () => any,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
-            asyncUpdateSuccessBatch(successInnerAction, dataEntryId, itemId, programId, orgUnit, stage, formFoundation, onGetValidationContext);
+            asyncUpdateSuccessBatch(
+                successInnerAction,
+                dataEntryId,
+                itemId,
+                programId,
+                orgUnit,
+                stage,
+                formFoundation,
+                onGetValidationContext,
+            );
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEnrollment(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));

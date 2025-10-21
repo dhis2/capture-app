@@ -106,4 +106,5 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
     };
 
 
-export const withAskToCreateNew = () => (InnerComponent: React.ComponentType<any>) => askToCreateNewComponent(InnerComponent);
+export const withAskToCreateNew = () => (InnerComponent: React.ComponentType<any>) =>
+    askToCreateNewComponent(InnerComponent);

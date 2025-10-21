@@ -6,7 +6,13 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
-const deriveReadiness = (lockedSelectorLoads: boolean, selectedOrgUnitId?: string | null, selectedOrgUnitName?: string, displayName?: string, ouNameError?: any) => {
+const deriveReadiness = (
+    lockedSelectorLoads: boolean,
+    selectedOrgUnitId?: string | null,
+    selectedOrgUnitName?: string,
+    displayName?: string,
+    ouNameError?: any,
+) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
     if (!ouNameError && selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
@@ -34,7 +40,10 @@ export const ScopeSelector = ({
     orgUnitTooltip,
 }: OwnProps) => {
     const dispatch = useDispatch();
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({ name: undefined, id: selectedOrgUnitId });
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({
+        name: undefined,
+        id: selectedOrgUnitId,
+    });
     const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 
     useEffect(() => {
@@ -45,7 +54,8 @@ export const ScopeSelector = ({
 
     useEffect(() => {
         if (selectedOrgUnitId && selectedOrgUnit.id !== selectedOrgUnitId) {
-            selectedOrgUnitId && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
+            selectedOrgUnitId && setSelectedOrgUnit(prevSelectedOrgUnit =>
+                ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
         }
     }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);
 

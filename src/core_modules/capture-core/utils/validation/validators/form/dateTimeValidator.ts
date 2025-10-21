@@ -22,8 +22,13 @@ const CUSTOM_VALIDATION_MESSAGES = {
     MISSING_DATE: i18n.t('Please enter a date'),
 };
 
-export function isValidDateTime(value: DateTimeValue | null | undefined,
-    internalComponentError?: {error?: string | null | undefined, errorCode?: string | null | undefined} | null | undefined): ValidationResult {
+export function isValidDateTime(
+    value: DateTimeValue | null | undefined,
+    internalComponentError?: {
+        error?: string | null | undefined,
+        errorCode?: string | null | undefined
+    } | null | undefined,
+): ValidationResult {
     if (!value) {
         return { valid: true };
     }
