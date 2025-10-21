@@ -139,6 +139,7 @@ const Index = ({
                         interpolation: { escapeValue: false },
                     })}
                 >
+                    {/* eslint-disable-next-line max-len */}
                     {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
                 </NoticeBox>
             )}
