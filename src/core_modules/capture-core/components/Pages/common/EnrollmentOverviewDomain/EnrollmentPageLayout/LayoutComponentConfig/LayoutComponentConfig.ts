@@ -110,7 +110,7 @@ export const FeedbackWidget: WidgetConfig = {
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
     getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
         feedback: widgetEffects?.feedbacks as any,
-        emptyText: feedbackEmptyText,
+        feedbackEmptyText,
     }),
 };
 
@@ -119,7 +119,7 @@ export const IndicatorWidget: WidgetConfig = {
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
     getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
         indicators: widgetEffects?.indicators as any,
-        emptyText: indicatorEmptyText,
+        indicatorEmptyText,
     }),
 };
 

@@ -25,12 +25,12 @@ export type InputFeedbackProps = {
 
 export type Props = {
     feedback?: Array<string | FilteredText | FilteredKeyValue>;
-    emptyText: string;
+    feedbackEmptyText: string;
 }
 
 export type IndicatorProps = {
     indicators?: Array<string | FilteredText | FilteredKeyValue>;
-    emptyText: string;
+    indicatorEmptyText: string;
 }
 
 export type InputIndicatorProps = {

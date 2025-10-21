@@ -6,7 +6,7 @@ const mapStateToProps = (state: any, props: any) => ({
         ...(state.rulesEffectsIndicators[props.dataEntryKey]?.displayTexts || []),
         ...(state.rulesEffectsIndicators[props.dataEntryKey]?.displayKeyValuePairs || []),
     ],
-    emptyText: props.indicatorEmptyText,
+    indicatorEmptyText: props.indicatorEmptyText,
 });
 
 export const WidgetIndicator = connect(mapStateToProps)(WidgetIndicatorComponent);

@@ -4,7 +4,7 @@ import { Widget } from '../Widget';
 import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
 import type { Props } from './WidgetFeedback.types';
 
-export const WidgetFeedbackComponent = ({ feedback, emptyText }: Props) => {
+export const WidgetFeedbackComponent = ({ feedback, feedbackEmptyText }: Props) => {
     const [openStatus, setOpenStatus] = useState(true);
 
     return (
@@ -19,7 +19,7 @@ export const WidgetFeedbackComponent = ({ feedback, emptyText }: Props) => {
             >
                 <WidgetFeedbackContent
                     widgetData={feedback}
-                    emptyText={emptyText}
+                    emptyText={feedbackEmptyText}
                 />
             </Widget>
         </div>
