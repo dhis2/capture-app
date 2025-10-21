@@ -53,7 +53,11 @@ export const DeleteTeiAction = ({
                     </ModalTitle>
                     <ModalContent>
                         <span>
-                            {i18n.t('Deleting records will also delete any associated enrollments and events. This cannot be undone. Are you sure you want to delete?')}
+                            {i18n.t('Deleting records will also delete any associated enrollments and events.')}
+                            {' '}
+                            {i18n.t('This cannot be undone.')}
+                            {' '}
+                            {i18n.t('Are you sure you want to delete?')}
                         </span>
                     </ModalContent>
                     <ModalActions>

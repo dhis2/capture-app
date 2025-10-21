@@ -36,7 +36,13 @@ export const completeEventError =
     (error: string, id: string) => actionCreator(actionTypes.COMPLETE_EVENT_ERROR)({ error, id });
 
 export const completeEvent =
-    (clientValues: Record<string, any> | null | undefined, serverData: Record<string, any>, event: Record<string, any>, eventId: string, id: string) =>
+    (
+        clientValues: Record<string, any> | null | undefined,
+        serverData: Record<string, any>,
+        event: Record<string, any>,
+        eventId: string,
+        id: string,
+    ) =>
         actionCreator(actionTypes.COMPLETE_EVENT)({
             clientValues,
             eventId,
@@ -64,7 +70,13 @@ export const startSaveEvent =
 export const saveEventError = (error: string, id: string) => actionCreator(actionTypes.SAVE_EVENT_ERROR)({ error, id });
 
 export const saveEvent =
-    (clientValues: Record<string, any> | null | undefined, serverData: Record<string, any>, event: Record<string, any>, eventId: string, id: string) =>
+    (
+        clientValues: Record<string, any> | null | undefined,
+        serverData: Record<string, any>,
+        event: Record<string, any>,
+        eventId: string,
+        id: string,
+    ) =>
         actionCreator(actionTypes.SAVE_EVENT)({
             clientValues,
             eventId,
@@ -138,7 +150,12 @@ export const removeRelationship =
         actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
 export const addRelationship =
-    (dataEntryId: string, itemId: string, relationship: Record<string, any>, newToEntity: Record<string, any>) =>
+    (
+        dataEntryId: string,
+        itemId: string,
+        relationship: Record<string, any>,
+        newToEntity: Record<string, any>,
+    ) =>
         actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity });
 
 export const relationshipAlreadyExists =

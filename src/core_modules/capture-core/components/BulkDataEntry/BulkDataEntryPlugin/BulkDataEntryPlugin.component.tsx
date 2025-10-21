@@ -18,7 +18,10 @@ const BulkDataEntryPluginPlain = ({
     trackedEntityIds,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
-    const [pluginSize, setPluginSize] = useState<{ width?: number; height?: number }>({ width: undefined, height: undefined });
+    const [pluginSize, setPluginSize] = useState<{ width?: number; height?: number }>({
+        width: undefined,
+        height: undefined,
+    });
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {

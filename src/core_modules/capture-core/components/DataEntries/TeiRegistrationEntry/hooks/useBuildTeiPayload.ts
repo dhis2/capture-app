@@ -4,9 +4,8 @@ import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import type {
-    TeiPayload,
-} from '../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TeiPayload } from
+    '../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 
 type Props = {

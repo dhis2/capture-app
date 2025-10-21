@@ -74,12 +74,13 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
         ...(firstStageDataEntryPropsToInclude || []),
-        ...(programCategory && programCategory.categories ? programCategory.categories.map(category => ({
-            id: `attributeCategoryOptions-${category.id}`,
-            type: 'TEXT',
-            validatorContainers:
+        ...(programCategory && programCategory.categories ?
+            programCategory.categories.map(category => ({
+                id: `attributeCategoryOptions-${category.id}`,
+                type: 'TEXT',
+                validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
-        })) : []),
+            })) : []),
     ];
 
     const dataEntryActions =

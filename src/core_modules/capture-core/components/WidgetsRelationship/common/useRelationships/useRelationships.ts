@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { determineLinkedEntity } from 'capture-core/components/WidgetsRelationship/common/RelationshipsWidget/useGroupedLinkedEntities';
+import { determineLinkedEntity } from
+    'capture-core/components/WidgetsRelationship/common/RelationshipsWidget/useGroupedLinkedEntities';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import type { InputRelationshipData, RelationshipTypes } from '../Types';
 
@@ -27,7 +28,11 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
             resource: 'tracker/relationships',
             params: {
                 [searchMode]: entityId,
-                fields: 'relationship,relationshipType,createdAt,from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
+                fields: 'relationship,relationshipType,createdAt,'
+                    + 'from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],'
+                    + 'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],'
+                    + 'to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],'
+                    + 'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
                 ...(supportForFeature
                     ? { paging: false }
                     : { skipPaging: true }),

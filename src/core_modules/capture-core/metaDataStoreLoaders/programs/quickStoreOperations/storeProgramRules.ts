@@ -43,7 +43,8 @@ const convert = (() => {
         return apiProgramRules
             .map(apiProgramRule => ({
                 ...apiProgramRule,
-                // Adding the program id and program stage id directly to the main object instead of using the container object with id as the only property
+                // Adding the program id and program stage id directly to the main object instead of using
+                // the container object with id as the only property
                 // The reason being that we don't want the container object to be stored in IndexedDB.
                 program: undefined,
                 programStage: undefined,

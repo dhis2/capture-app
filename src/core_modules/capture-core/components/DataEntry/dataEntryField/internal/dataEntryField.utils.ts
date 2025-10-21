@@ -9,7 +9,11 @@ export type ValidatorContainer = {
     errorMessage: string;
 };
 
-export function getValidationError(value: any, validatorContainers?: Array<ValidatorContainer>, internalComponentError?: {error?: string, errorCode?: string}) {
+export function getValidationError(
+    value: any,
+    validatorContainers?: Array<ValidatorContainer>,
+    internalComponentError?: {error?: string, errorCode?: string},
+) {
     if (!validatorContainers) {
         return null;
     }
