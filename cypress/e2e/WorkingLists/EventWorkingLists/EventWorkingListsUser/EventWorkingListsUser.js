@@ -309,8 +309,13 @@ When('you create a copy of the working list', () => {
         .click();
 
     const id = uuid();
+
     cy.get('[data-test="view-name-content"]')
-        .type(id);
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(id)
+                .blur();
+        });
 
     cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
 
@@ -336,7 +341,7 @@ When('you change the sharing settings', () => {
         .type('Boateng');
 
     cy.contains('Kevin Boateng').click();
-    cy.contains('Select a level').click();
+    cy.contains('Choose a level').click();
     cy.get('[data-test="dhis2-uicore-select-menu-menuwrapper"]')
         .contains('View and edit').click({ force: true });
 
@@ -365,11 +370,13 @@ Then('your newly defined sharing settings should still be present', () => {
     cy.contains('Share view')
         .click();
 
-    cy.contains('Kevin Boateng')
-        .should('exist');
+    cy.get('[data-test="sharing-dialog"]').within(() => {
+            cy.contains('Kevin Boateng')
+                .should('exist');
 
-    cy.contains('Close')
-        .click();
+            cy.contains('Close')
+                .click();
+        });
 
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -418,7 +425,11 @@ When(/^you save the view as (.*)$/, (name) => {
         .click();
 
     cy.get('[data-test="view-name-content"]')
-        .type(name);
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(name)
+                .blur();
+        });
 
     cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
 
