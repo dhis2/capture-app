@@ -1,3 +1,10 @@
+# [104.3.0](https://github.com/dhis2/capture-app/compare/v104.2.0...v104.3.0) (2025-10-21)
+
+
+### Features
+
+* [DHIS2-20000] Show message when no searchable attributes exist for an entity type ([#4382](https://github.com/dhis2/capture-app/issues/4382)) ([6677824](https://github.com/dhis2/capture-app/commit/6677824a22c3b7cc4901448a76d8b544815b875f))
+
 # [104.2.0](https://github.com/dhis2/capture-app/compare/v104.1.2...v104.2.0) (2025-10-17)
 
 
