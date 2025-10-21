@@ -30,8 +30,8 @@ import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
 import {
     EnrollmentPageKeys,
 } from '../DefaultEnrollmentLayout.constants';
-import { WidgetFeedbackComponent } from '../../../../../WidgetFeedback';
-import { WidgetIndicatorComponent } from '../../../../../WidgetIndicator';
+import { WidgetFeedback } from '../../../../../WidgetFeedback';
+import { WidgetIndicator } from '../../../../../WidgetIndicator';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -106,7 +106,7 @@ export const WarningWidget: WidgetConfig = {
 };
 
 export const FeedbackWidget: WidgetConfig = {
-    Component: WidgetFeedbackComponent,
+    Component: WidgetFeedback,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
     getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
         feedback: widgetEffects?.feedbacks as any,
@@ -115,7 +115,7 @@ export const FeedbackWidget: WidgetConfig = {
 };
 
 export const IndicatorWidget: WidgetConfig = {
-    Component: WidgetIndicatorComponent,
+    Component: WidgetIndicator,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
     getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
         indicators: widgetEffects?.indicators as any,
