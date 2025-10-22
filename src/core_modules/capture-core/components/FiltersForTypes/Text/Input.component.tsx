@@ -10,17 +10,19 @@ type Props = {
 };
 
 class InputPlain extends React.Component<Props> {
-    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey(this.props.value);
+            if (payload.value) {
+                this.props.onEnterKey(payload.value);
+            }
         }
-    }
+    };
 
     render() {
         const { onEnterKey, ...passOnProps } = this.props;
         return (
             <D2TextField
-                onKeyPress={this.handleKeyPress}
+                onKeyDown={this.handleKeyDown}
                 placeholder={i18n.t('Contains text')}
                 {...passOnProps}
             />
