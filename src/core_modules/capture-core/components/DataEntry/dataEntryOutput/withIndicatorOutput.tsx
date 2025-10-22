@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
-import { WidgetIndicator } from '../../WidgetIndicator';
-import type { FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
+import {
+    WidgetIndicator,
+    type FilteredIndicatorText,
+    type FilteredIndicatorKeyValue,
+} from '../../WidgetIndicator';
 
 type Props = {
     indicatorItems: {
-        displayTexts: Array<FilteredText>;
-        displayKeyValuePairs: Array<FilteredKeyValue>;
+        displayTexts: Array<FilteredIndicatorText>;
+        displayKeyValuePairs: Array<FilteredIndicatorKeyValue>;
     };
 };
 
@@ -30,7 +33,7 @@ const getIndicatorOutput = () =>
                     {hasItems &&
                         <WidgetIndicator
                             indicators={indicators}
-                            emptyText={i18n.t('No indicator output for this event yet')}
+                            indicatorEmptyText={i18n.t('No indicator output for this event yet')}
                         />
                     }
                 </div>
