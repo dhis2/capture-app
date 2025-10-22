@@ -1,3 +1,10 @@
+# [104.4.0](https://github.com/dhis2/capture-app/compare/v104.3.0...v104.4.0) (2025-10-22)
+
+
+### Features
+
+* [DHIS2-18739] Update feedback and indicator widgets in the Registration page ([#4385](https://github.com/dhis2/capture-app/issues/4385)) ([d2713d5](https://github.com/dhis2/capture-app/commit/d2713d5c2c16cbaf214bfeee19d3415e8ad80ce6))
+
 # [104.3.0](https://github.com/dhis2/capture-app/compare/v104.2.0...v104.3.0) (2025-10-21)
 
 
