@@ -1,39 +1,25 @@
-export type FilteredText = {
+export type FilteredFeedbackText = {
     id: string;
     message: string;
     color?: string;
 }
 
-export type FilteredKeyValue = {
+export type FilteredFeedbackKeyValue = {
     id: string;
     key: string;
     value: string;
     color?: string;
 }
 
-export type WidgetData = string | FilteredText | FilteredKeyValue;
+export type FeedbackWidgetData = string | FilteredFeedbackText | FilteredFeedbackKeyValue;
 
-export type ContentType = {
-    widgetData?: Array<WidgetData>;
-    emptyText: string;
-};
-
-export type InputFeedbackProps = {
+export type FeedbackInputProps = {
     widgetEffects?: Record<string, unknown>;
     feedbackEmptyText: string;
 }
 
-export type Props = {
-    feedback?: Array<string | FilteredText | FilteredKeyValue>;
+export type FeedbackProps = {
+    feedback?: Array<FeedbackWidgetData>;
     feedbackEmptyText: string;
-}
-
-export type IndicatorProps = {
-    indicators?: Array<string | FilteredText | FilteredKeyValue>;
-    indicatorEmptyText: string;
-}
-
-export type InputIndicatorProps = {
-    widgetEffects?: Record<string, unknown>;
-    indicatorEmptyText: string;
+    dataEntryKey?: string;
 }

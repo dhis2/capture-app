@@ -4,12 +4,12 @@ import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetFeedback } from '../../WidgetFeedback';
-import type { FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
+import type { FilteredFeedbackText, FilteredFeedbackKeyValue } from '../../WidgetFeedback';
 
 type Props = {
     feedbackItems: {
-        displayTexts: Array<FilteredText>;
-        displayKeyValuePairs: Array<FilteredKeyValue>;
+        displayTexts: Array<FilteredFeedbackText>;
+        displayKeyValuePairs: Array<FilteredFeedbackKeyValue>;
     };
 };
 
@@ -28,7 +28,7 @@ const getFeedbackOutput = () =>
             return (
                 <div>
                     {hasItems &&
-                        <WidgetFeedback feedback={feedback} emptyText={i18n.t('No feedback for this event yet')} />
+                        <WidgetFeedback feedback={feedback} feedbackEmptyText={i18n.t('No feedback for this event yet')} />
                     }
                 </div>
             );

@@ -22,11 +22,13 @@ import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
 import { WidgetEventNote } from '../../../../../WidgetEventNote';
 import { WidgetAssignee } from '../../../../../WidgetAssignee';
 import type {
+    FeedbackProps,
+    FeedbackInputProps,
+} from '../../../../../WidgetFeedback';
+import type {
     IndicatorProps,
-    Props as WidgetFeedbackProps,
-    InputFeedbackProps,
-    InputIndicatorProps,
-} from '../../../../../WidgetFeedback/WidgetFeedback.types';
+    IndicatorInputProps,
+} from '../../../../../WidgetIndicator';
 import { WidgetTwoEventWorkspace } from '../../../../../WidgetTwoEventWorkspace';
 import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
 import {
@@ -108,7 +110,7 @@ export const WarningWidget: WidgetConfig = {
 export const FeedbackWidget: WidgetConfig = {
     Component: WidgetFeedback,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
-    getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
+    getProps: ({ widgetEffects, feedbackEmptyText }: FeedbackInputProps): FeedbackProps => ({
         feedback: widgetEffects?.feedbacks as any,
         feedbackEmptyText,
     }),
@@ -117,7 +119,7 @@ export const FeedbackWidget: WidgetConfig = {
 export const IndicatorWidget: WidgetConfig = {
     Component: WidgetIndicator,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
-    getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
+    getProps: ({ widgetEffects, indicatorEmptyText }: IndicatorInputProps): IndicatorProps => ({
         indicators: widgetEffects?.indicators as any,
         indicatorEmptyText,
     }),

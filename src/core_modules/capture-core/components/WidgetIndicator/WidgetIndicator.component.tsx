@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
-import type { IndicatorProps } from '../WidgetFeedback/WidgetFeedback.types';
+import type { IndicatorProps } from './WidgetIndicator.types';
 import { WidgetIndicatorContent } from './WidgetIndicatorContent/WidgetIndicatorContent';
 
 export const WidgetIndicatorComponent = ({ indicators, indicatorEmptyText }: IndicatorProps) => {
@@ -17,8 +17,8 @@ export const WidgetIndicatorComponent = ({ indicators, indicatorEmptyText }: Ind
                 onOpen={() => setOpenStatus(true)}
             >
                 <WidgetIndicatorContent
-                    widgetData={indicators}
-                    emptyText={indicatorEmptyText}
+                    indicators={indicators}
+                    indicatorEmptyText={indicatorEmptyText}
                 />
             </Widget>
         </div>

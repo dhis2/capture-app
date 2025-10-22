@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
+import type { FilteredFeedbackKeyValue, FeedbackWidgetData, FilteredFeedbackText, FeedbackProps } from '../WidgetFeedback.types';
 
 const styles = {
     container: {
@@ -28,21 +28,21 @@ const styles = {
     },
 };
 
-type Props = ContentType & WithStyles<typeof styles>;
+type Props = FeedbackProps & WithStyles<typeof styles>;
 
-const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Props) => {
-    if (!widgetData?.length) {
+const WidgetFeedbackContentComponent = ({ feedback, feedbackEmptyText, classes }: Props) => {
+    if (!feedback?.length) {
         return (
             <div
                 data-test="widget-content"
                 className={classes.container}
             >
-                <p className={classes.noFeedbackText}>{emptyText}</p>
+                <p className={classes.noFeedbackText}>{feedbackEmptyText}</p>
             </div>
         );
     }
 
-    const renderTextObject = (item: FilteredText) => (
+    const renderTextObject = (item: FilteredFeedbackText) => (
         <li
             className={classes.listItem}
             key={item.id}
@@ -51,7 +51,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
         </li>
     );
 
-    const renderKeyValue = (item: FilteredKeyValue) => (
+    const renderKeyValue = (item: FilteredFeedbackKeyValue) => (
         <li
             key={item.id}
             className={classes.listItem}
@@ -75,12 +75,12 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
             className={classes.container}
         >
             <ul className={classes.unorderedList}>
-                {widgetData.map((rule: WidgetData, index: number) => {
+                {feedback.map((rule: FeedbackWidgetData, index: number) => {
                     if (typeof rule === 'object') {
                         if ('key' in rule || 'value' in rule) {
-                            return renderKeyValue(rule as FilteredKeyValue);
+                            return renderKeyValue(rule as FilteredFeedbackKeyValue);
                         } else if ('message' in rule) {
-                            return renderTextObject(rule as FilteredText);
+                            return renderTextObject(rule as FilteredFeedbackText);
                         }
                     } else if (typeof rule === 'string') {
                         return renderString(rule, index);
@@ -93,4 +93,4 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
 };
 
 export const WidgetFeedbackContent =
-    withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<ContentType>;
+    withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<FeedbackProps>;

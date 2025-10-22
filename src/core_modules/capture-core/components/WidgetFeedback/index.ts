@@ -1,2 +1,8 @@
 export { WidgetFeedback } from './WidgetFeedback.container';
-export type { FilteredText, FilteredKeyValue } from './WidgetFeedback.types';
+export type {
+    FilteredFeedbackText,
+    FilteredFeedbackKeyValue,
+    FeedbackWidgetData,
+    FeedbackProps,
+    FeedbackInputProps,
+} from './WidgetFeedback.types';
