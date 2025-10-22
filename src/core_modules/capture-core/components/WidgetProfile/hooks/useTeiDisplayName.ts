@@ -52,9 +52,11 @@ const deriveTeiName = (
     if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
 
     const teiNameDisplayInList = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);
+    console.log('teiNameDisplayInList', teiNameDisplayInList);
     if (teiNameDisplayInList) return teiNameDisplayInList;
 
     const teiName = getTetAttributes(updatedAttributes, tetAttributes);
+    console.log('teiName', teiName);
     if (teiName) return teiName;
 
     return fallbackName ?? DEFAULT_NAME;
