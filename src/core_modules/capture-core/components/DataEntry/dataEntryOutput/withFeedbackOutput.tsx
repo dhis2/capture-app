@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
-import { WidgetFeedback } from '../../WidgetFeedback';
-import type { FilteredFeedbackText, FilteredFeedbackKeyValue } from '../../WidgetFeedback';
+import { WidgetFeedback, type FilteredFeedbackText, type FilteredFeedbackKeyValue } from '../../WidgetFeedback';
 
 type Props = {
     feedbackItems: {

@@ -1,7 +1,12 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { FilteredFeedbackKeyValue, FeedbackWidgetData, FilteredFeedbackText, FeedbackProps } from '../WidgetFeedback.types';
+import type {
+    FilteredFeedbackKeyValue,
+    FeedbackWidgetData,
+    FilteredFeedbackText,
+    FeedbackProps,
+} from '../WidgetFeedback.types';
 
 const styles = {
     container: {

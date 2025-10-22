@@ -33,7 +33,10 @@ const componentContainers = [
 ];
 
 class DataEntryWidgetOutputPlain extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Record<string, any>) => <container.Component key={container.id} {...props} />
+    renderComponent = (
+        container: { id: string, Component: React.ComponentType<any> },
+        props: Record<string, any>,
+    ) => <container.Component key={container.id} {...props} />
 
     render() {
         const { classes, ...passOnProps } = this.props;
