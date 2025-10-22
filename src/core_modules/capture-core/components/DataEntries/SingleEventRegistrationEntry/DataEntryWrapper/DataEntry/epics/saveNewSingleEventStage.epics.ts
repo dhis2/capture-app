@@ -52,7 +52,11 @@ export const saveNewEventStageEpic = (action$: EpicAction<SaveEventStagePayload>
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventInStageLocationChangeEpic = (action$: EpicAction<SaveEventStagePayload>, store: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventInStageLocationChangeEpic = (
+    action$: EpicAction<SaveEventStagePayload>,
+    store: ReduxStore,
+    { navigate }: ApiUtils,
+) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {

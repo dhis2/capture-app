@@ -1,0 +1,16 @@
+---
+title: What is the Bulk Data Entry Plugin?
+sidebar_label: Introduction
+id: introduction
+---
+
+The Bulk Data Entry Plugin is an extension point that can be accessed through the Search page or Working list page in Capture app. This extension point enables developers to create and configure plugins for custom bulk operations on tracked entities carried over from the working list page or added manually in the plugin itself.
+The main reason for developing this extension point in the DHIS2 Capture app was to support a plugin for bulk data entry in a grid form, adding new events to all tracked entities in a list, including applying same values for a column or copy and pasting values from a row to another. The aim is to reduce time spent on data entry, for example secondary from paper forms.
+
+Some plugin use cases for the extension point can include:
+
+1. Enter data for multiple tracked entities at the same time (Forthcoming core Capture plugin)
+2. Validate and update data across multiple tracked entity records simultaneously
+3. Update the status of multiple events in one go
+4. Merging or deduplicating tracked entities
+5. Any other custom bulk operations or changes your workflow might require

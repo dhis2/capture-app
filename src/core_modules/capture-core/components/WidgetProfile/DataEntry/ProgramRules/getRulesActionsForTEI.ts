@@ -24,7 +24,10 @@ import { convertServerToClient } from '../../../../converters';
 import type { QuerySingleResource } from '../../../../utils/api';
 import type { EnrollmentData } from '../Types';
 
-const getEnrollmentForRulesExecution = (enrollment: EnrollmentData | undefined, programName: string): Enrollment | undefined =>
+const getEnrollmentForRulesExecution = (
+    enrollment: EnrollmentData | undefined,
+    programName: string,
+): Enrollment | undefined =>
     enrollment && {
         enrollmentId: enrollment.enrollment,
         enrolledAt: convertServerToClient(enrollment.enrolledAt, dataElementTypes.DATE),

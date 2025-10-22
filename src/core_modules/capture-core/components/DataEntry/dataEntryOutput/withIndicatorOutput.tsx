@@ -27,7 +27,10 @@ const getIndicatorOutput = () =>
             return (
                 <div>
                     {hasItems &&
-                        <WidgetIndicator indicators={indicators} indicatorEmptyText={i18n.t('No indicator output for this event yet')} />
+                        <WidgetIndicator 
+                            indicators={indicators} 
+                            indicatorEmptyText={i18n.t('No indicator output for this event yet')} 
+                         />
                     }
                 </div>
 

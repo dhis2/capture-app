@@ -5,7 +5,7 @@ import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration'
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
-
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 import {
     filterTypesObject,
     type AssigneeFilterData,
@@ -174,6 +174,11 @@ const getDataElementFilters = (
             return null;
         }
 
+        const emptyValueFilter = fromApiEmptyValueFilter(serverFilter);
+        if (emptyValueFilter) {
+            return { id: serverFilter.dataItem, ...emptyValueFilter };
+        }
+
         if (isOptionSetFilter(element.type, serverFilter)) {
             return {
                 ...getOptionSetFilter(serverFilter as any, element.type),
@@ -201,7 +206,10 @@ const getMainDataFilters = async (
     const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters: any[] = [];
     if (status) {
-        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type), id: 'status' });
+        filters.push({
+            ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type),
+            id: 'status',
+        });
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
@@ -236,7 +244,10 @@ export async function convertToClientConfig(
         return acc;
     }, {});
 
-    const customColumnOrder = getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching) || undefined;
+    const customColumnOrder = getCustomColumnsConfiguration(
+        eventQueryCriteria && eventQueryCriteria.displayColumnOrder,
+        columnsMetaForDataFetching,
+    ) || undefined;
 
     return {
         filters,

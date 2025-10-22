@@ -32,7 +32,8 @@ export class DataElementFactory {
     };
 
     static errorMessages = {
-        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from trackedEntityTypeAttribute or trackedEntityAttribute not found',
+        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND:
+            'TrackedEntityAttributeId missing from trackedEntityTypeAttribute or trackedEntityAttribute not found',
         MULIT_TEXT_WITH_NO_OPTIONS_SET:
             'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
@@ -71,7 +72,9 @@ export class DataElementFactory {
 
     _getAttributeTranslation(
         translations: Array<CachedAttributeTranslation>,
-        property: typeof DataElementFactory.translationPropertyNames[keyof typeof DataElementFactory.translationPropertyNames],
+        property: typeof DataElementFactory.translationPropertyNames[
+            keyof typeof DataElementFactory.translationPropertyNames
+        ],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);

@@ -11,7 +11,8 @@ export const createServerData = ({
     enrollment: any;
 }) => {
     const exisitingEvents = enrollment.events.map((event: any) => (
-        (event.event === (relationship as any)?.from?.event?.event || event.event === (relationship as any)?.to?.event?.event)
+        (event.event === (relationship as any)?.from?.event?.event ||
+         event.event === (relationship as any)?.to?.event?.event)
             ? { ...event, pendingApiResponse: true, relationships: [relationship], uid: event.event }
             : event
     ));
