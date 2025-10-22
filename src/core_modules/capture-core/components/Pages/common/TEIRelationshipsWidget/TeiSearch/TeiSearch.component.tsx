@@ -95,7 +95,9 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const renderSearchGroups = searchGroups => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = getFormId(searchGroupId);
-        const header = sg.unique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
+        const header = sg.unique ?
+            i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
+            i18n.t('Search by attributes');
         const collapsed = props.openSearchGroupSection !== searchGroupId;
         return (
             <Section

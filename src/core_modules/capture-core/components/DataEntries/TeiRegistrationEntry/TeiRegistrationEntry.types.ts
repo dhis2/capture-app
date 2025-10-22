@@ -2,9 +2,8 @@ import type { ReactNode } from 'react';
 import type { TeiRegistration } from '../../../metaData';
 import type { RenderCustomCardActions } from '../../CardList';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
-import type {
-    TeiPayload,
-} from '../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TeiPayload } from
+    '../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance';
 import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 export type OwnProps = {

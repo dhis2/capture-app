@@ -11,7 +11,15 @@ import {
 } from '../../FormFields/New';
 import type { SearchOrgUnitSelectorProps } from './SearchOrgUnitSelector.types';
 
-const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(SingleOrgUnitSelectField)))));
+const TeiSearchOrgUnitField = withFocusSaver()(
+    withCalculateMessages()(
+        withDefaultFieldContainer()(
+            withLabel()(
+                withDisplayMessages()(SingleOrgUnitSelectField),
+            ),
+        ),
+    ),
+);
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
 
 const orgUnitFieldStyles = {

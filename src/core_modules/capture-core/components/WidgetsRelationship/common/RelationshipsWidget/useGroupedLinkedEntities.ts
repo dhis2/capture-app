@@ -79,7 +79,11 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
     };
 };
 
-const getEventData = ({ dataValues, event, program: programId }: any, { relationshipCreatedAt, relationshipId }: any, pendingApiResponse: any): LinkedEntityData => {
+const getEventData = (
+    { dataValues, event, program: programId }: any,
+    { relationshipCreatedAt, relationshipId }: any,
+    pendingApiResponse: any,
+): LinkedEntityData => {
     const values = dataValues.reduce((acc: any, dataValue: any) => {
         acc[dataValue.dataElement] = dataValue.value;
         return acc;
@@ -100,7 +104,11 @@ const getEventData = ({ dataValues, event, program: programId }: any, { relation
     };
 };
 
-const getTrackedEntityData = ({ attributes, trackedEntity }: any, { relationshipCreatedAt, relationshipId }: any, pendingApiResponse?: boolean): LinkedEntityData => {
+const getTrackedEntityData = (
+    { attributes, trackedEntity }: any,
+    { relationshipCreatedAt, relationshipId }: any,
+    pendingApiResponse?: boolean,
+): LinkedEntityData => {
     const values = attributes.reduce((acc: any, attribute: any) => {
         acc[attribute.attribute] = attribute.value;
         return acc;

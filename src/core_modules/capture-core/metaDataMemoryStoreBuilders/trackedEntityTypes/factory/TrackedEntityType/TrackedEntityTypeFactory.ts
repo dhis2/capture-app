@@ -56,7 +56,9 @@ export class TrackedEntityTypeFactory {
 
     _getTranslation(
         translations: Array<CachedTrackedEntityTypeTranslation>,
-        property: typeof TrackedEntityTypeFactory.translationPropertyNames[keyof typeof TrackedEntityTypeFactory.translationPropertyNames],
+        property: typeof TrackedEntityTypeFactory.translationPropertyNames[
+            keyof typeof TrackedEntityTypeFactory.translationPropertyNames
+        ],
     ) {
         if (this.locale) {
             const translation = translations.find(t => t.property === property && t.locale === this.locale);

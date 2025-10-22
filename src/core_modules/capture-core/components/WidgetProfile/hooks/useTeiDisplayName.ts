@@ -44,7 +44,11 @@ const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: TetAttribut
     return getAttributesValues(attributes, first, second);
 };
 
-const deriveTeiName = (tetAttributes: TetAttribute[], updatedAttributes: TeiAttribute[], fallbackName?: string) => {
+const deriveTeiName = (
+    tetAttributes: TetAttribute[],
+    updatedAttributes: TeiAttribute[],
+    fallbackName?: string,
+) => {
     if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
 
     const teiNameDisplayInList = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);

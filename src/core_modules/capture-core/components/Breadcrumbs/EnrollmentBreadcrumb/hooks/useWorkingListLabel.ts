@@ -49,7 +49,8 @@ export const useWorkingListLabel = ({
                 return selectedTemplate.name;
             }
 
-            if (selectedTemplateId && !selectedTemplate && DefaultFilterKeys[selectedTemplateId.toUpperCase() as keyof typeof DefaultFilterKeys]) {
+            if (selectedTemplateId && !selectedTemplate &&
+                DefaultFilterKeys[selectedTemplateId.toUpperCase() as keyof typeof DefaultFilterKeys]) {
                 return DefaultFilterLabels[selectedTemplateId as DefaultFilterKey];
             }
 
