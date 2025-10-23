@@ -9,7 +9,7 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const styles: Readonly<any> = {
+const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -39,9 +39,9 @@ const styles: Readonly<any> = {
         fontSize: '14px',
         fontWeight: 500,
         flexGrow: 1,
-        color: colors.red600,
+        color: theme.palette.error.main,
     },
-};
+});
 
 const useFormDataLifecycle = (
     searchGroupsForSelectedScope,
