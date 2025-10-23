@@ -45,28 +45,26 @@ const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: TetAttribut
 };
 
 const deriveTeiName = (
+    attributes: TeiAttribute[],
     tetAttributes: TetAttribute[],
-    updatedAttributes: TeiAttribute[],
-    fallbackName?: string,
+    teiId?: string,
 ) => {
-    if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
+    if (!attributes || !tetAttributes) return teiId ?? DEFAULT_NAME;
 
-    const teiNameDisplayInList = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);
-    console.log('teiNameDisplayInList', teiNameDisplayInList);
+    const teiNameDisplayInList = getTetAttributesDisplayInList(attributes, tetAttributes as TetAttribute[]);
     if (teiNameDisplayInList) return teiNameDisplayInList;
 
-    const teiName = getTetAttributes(updatedAttributes, tetAttributes);
-    console.log('teiName', teiName);
+    const teiName = getTetAttributes(attributes, tetAttributes);
     if (teiName) return teiName;
 
-    return fallbackName ?? DEFAULT_NAME;
+    return teiId ?? DEFAULT_NAME;
 };
 
 export const useTeiDisplayName = (
     program: any,
     storedAttributeValues: Array<{ [attrId: string]: any }>,
     attributes: Array<TeiAttribute>,
-    fallbackName?: string,
+    teiId?: string,
 ) =>
     useMemo(() => {
         const tetAttributes = program?.trackedEntityType?.trackedEntityTypeAttributes;
@@ -77,5 +75,5 @@ export const useTeiDisplayName = (
             )?.value,
         }));
 
-        return deriveTeiName(tetAttributes, updatedAttributes, fallbackName);
-    }, [program, storedAttributeValues, attributes, fallbackName]);
+        return deriveTeiName(updatedAttributes, tetAttributes, teiId);
+    }, [program, storedAttributeValues, attributes, teiId]);
