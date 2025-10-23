@@ -41,7 +41,6 @@ export const deriveTeiName = (attributes: Array<Attribute>, trackedEntityType: s
 
     if (!attributes || !tetAttributes) return teiId ?? DEFAULT_NAME;
 
-
     const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
     if (teiNameDisplayInReports) return teiNameDisplayInReports;
 
