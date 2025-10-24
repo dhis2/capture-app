@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getOpenDataEntryActions } from '../DataEntry';
@@ -30,13 +30,12 @@ export const useLifecycle = ({
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted;
 }) => {
     const dispatch = useDispatch();
-    const formReady = useSelector((state: any) => !!state?.formsSectionsFieldsUI['enrollmentEvent-newEvent']);
-
     const dataEntryReadyRef = useRef(false);
     const { programCategory, isLoading } = useCategoryCombinations(program.id);
 
     useEffect(() => {
-        if (!isLoading) {
+        if (!isLoading && !dataEntryReadyRef.current) {
+            dataEntryReadyRef.current = true;
             dispatch(batchActions([
                 ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnitContext),
                 initialRuleExecution({
@@ -51,7 +50,6 @@ export const useLifecycle = ({
                     enrollmentDataRulesDependency,
                 }),
             ], newEventBatchActionTypes.INITIALIZE_REGISTER_ENROLLMENT_PAGE));
-            dataEntryReadyRef.current = true;
         }
     }, [
         dispatch,
@@ -68,5 +66,5 @@ export const useLifecycle = ({
         enrollmentDataRulesDependency,
     ]);
 
-    return dataEntryReadyRef.current && formReady;
+    return dataEntryReadyRef.current;
 };
