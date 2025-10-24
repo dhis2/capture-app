@@ -63,22 +63,28 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
 
     if (variableNameParts.length === 2) {
         // This is a programstage and dataelement specification
+        const dataElement = programData.dataElements[variableNameParts[1]];
+        if (!dataElement) { return null; }
+
         newVariableObject = {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
-            valueType: programData.dataElements[variableNameParts[1]].valueType,
+            valueType: dataElement.valueType,
             programStageId: variableNameParts[0],
             dataElementId: variableNameParts[1],
             programId: programData.programId,
         };
     } else { // if (variableNameParts.length === 1)
         // This is an attribute
+        const attribute = programData.attributes[variableNameParts[0]];
+        if (!attribute) { return null; }
+
         newVariableObject = {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
-            valueType: programData.attributes[variableNameParts[0]].valueType,
+            valueType: attribute.valueType,
             trackedEntityAttributeId: variableNameParts[0],
             programId: programData.programId,
         };
@@ -91,9 +97,9 @@ function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInData = getVariablesFromExpression(action.data);
 
     const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition =>
-        getDirectAddressedVariable(variableInCondition, programData));
+        getDirectAddressedVariable(variableInCondition, programData)).filter(variable => variable !== null);
     const directAddressedVariablesFromData = variablesInData.map(variableInData =>
-        getDirectAddressedVariable(variableInData, programData));
+        getDirectAddressedVariable(variableInData, programData)).filter(variable => variable !== null);
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];
 
     return {
@@ -181,6 +187,20 @@ function buildIndicatorRuleAndVariables(
     };
 
     const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
+    const expectedVariables = getVariablesFromExpression(programIndicator.expression).length;
+
+    if (variables.length < expectedVariables) {
+        log.error(
+            errorCreator(`Configuration error: Program indicator '${programIndicator.name}' has invalid references ` +
+            `and will be skipped. Expected ${expectedVariables} variables, found ${variables.length}.`)(
+                {
+                    method: 'buildIndicatorRuleAndVariables',
+                    object: programIndicator,
+                },
+            ),
+        );
+        return null;
+    }
 
     // Change expression or data part of the rule to match the program rules execution model
     replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
@@ -210,7 +230,7 @@ export function getRulesAndVariablesFromProgramIndicators(
     };
 
     // Filter out program indicators without an expression
-    const validProgramIndicators = cachedProgramIndicators.filter((indicator) => {
+    const programIndicatorsWithExpression = cachedProgramIndicators.filter((indicator) => {
         if (!indicator.expression) {
             log.error(
                 errorCreator('Program indicator is missing an expression and will be skipped.')(
@@ -225,9 +245,9 @@ export function getRulesAndVariablesFromProgramIndicators(
         return true;
     });
 
-    return validProgramIndicators
+    return programIndicatorsWithExpression
         .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
-        .filter(container => container)
+        .filter(container => container !== null)
         .reduce((accOneLevelContainer: any, container) => {
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
             accOneLevelContainer.rules.push(container.rule);
