@@ -187,11 +187,18 @@ function buildIndicatorRuleAndVariables(
     };
 
     const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
-
     const expectedVariables = getVariablesFromExpression(programIndicator.expression).length;
-    if (variables.length === 0 || variables.length < expectedVariables) {
-        log.error(`Configuration error: Program indicator '${programIndicator.name}' has invalid references ` +
-            `and will be skipped. Expected ${expectedVariables} variables, found ${variables.length}.`);
+
+    if (variables.length < expectedVariables) {
+        log.error(
+            errorCreator(`Configuration error: Program indicator '${programIndicator.name}' has invalid references ` +
+            `and will be skipped. Expected ${expectedVariables} variables, found ${variables.length}.`)(
+                {
+                    method: 'buildIndicatorRuleAndVariables',
+                    object: programIndicator,
+                },
+            ),
+        );
         return null;
     }
 
@@ -223,7 +230,7 @@ export function getRulesAndVariablesFromProgramIndicators(
     };
 
     // Filter out program indicators without an expression
-    const validProgramIndicators = cachedProgramIndicators.filter((indicator) => {
+    const programIndicatorsWithExpression = cachedProgramIndicators.filter((indicator) => {
         if (!indicator.expression) {
             log.error(
                 errorCreator('Program indicator is missing an expression and will be skipped.')(
@@ -238,7 +245,7 @@ export function getRulesAndVariablesFromProgramIndicators(
         return true;
     });
 
-    return validProgramIndicators
+    return programIndicatorsWithExpression
         .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
         .filter(container => container !== null)
         .reduce((accOneLevelContainer: any, container) => {
