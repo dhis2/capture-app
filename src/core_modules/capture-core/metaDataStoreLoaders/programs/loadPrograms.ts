@@ -63,7 +63,8 @@ const getStalePrograms = (apiPrograms, cachedPrograms): StalePrograms => {
 
 /**
  * Update the cache for the program ids passed in.
- * The program ids that are passed in are ids of programs that needs updating (meaning the version retrieved from the api is different from the one in the cache)
+ * The program ids that are passed in are ids of programs that needs updating
+ * (meaning the version retrieved from the api is different from the one in the cache)
  * The returned data is needed for building the side effects.
  * The side effects data is used later when determining what other metadata to load.
  */
@@ -162,7 +163,8 @@ const getSideEffects = (() => {
             trackedEntityTypeIdSet => [...trackedEntityTypeIdSet.values()],
         )();
     /**
-     * Builds the side effects based on the programsOutline (contains some data for all programs) and the stale programs (the programs where the version has changed).
+     * Builds the side effects based on the programsOutline (contains some data for all programs)
+     * and the stale programs (the programs where the version has changed).
      * The side effects are used later to determine what other metadata to load.
      */
     return (programsOutline, stalePrograms) => ({

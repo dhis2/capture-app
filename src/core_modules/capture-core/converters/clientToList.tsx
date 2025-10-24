@@ -136,7 +136,8 @@ export function convertValue(value: any, type: keyof typeof dataElementTypes, da
 }
 
 
-// This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
+// This function will replace the convertValue function in the future
+// (as it should not require a dataElement class to use optionSet)
 export function convert(
     value: any,
     type: keyof typeof dataElementTypes,

@@ -103,7 +103,9 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
         const searchGroupId = i.toString();
         const formId = this.getFormId(searchGroupId);
         const isUnique = sg.unique;
-        const header = isUnique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
+        const header = isUnique ?
+            i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
+            i18n.t('Search by attributes');
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (

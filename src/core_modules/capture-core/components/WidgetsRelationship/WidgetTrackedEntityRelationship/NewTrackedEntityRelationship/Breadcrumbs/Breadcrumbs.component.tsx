@@ -20,7 +20,8 @@ const slashStyles = {
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
-const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyles>) => <span className={classes.slash}>/</span>);
+const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyles>) =>
+    <span className={classes.slash}>/</span>);
 
 const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName }) => {
     const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {

@@ -33,7 +33,11 @@ const cancelActionFilter = (action: any, searchId: string) => {
     return isInitializeTeiSearch(action, searchId) || isRequestFilterOrgUnits(action, searchId);
 };
 
-export const teiSearchFilterOrgUnitsEpic = (action$: any, store: any, { querySingleResource }: { querySingleResource: any }) =>
+export const teiSearchFilterOrgUnitsEpic = (
+    action$: any,
+    store: any,
+    { querySingleResource }: { querySingleResource: any },
+) =>
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
         concatMap((action: any) => {

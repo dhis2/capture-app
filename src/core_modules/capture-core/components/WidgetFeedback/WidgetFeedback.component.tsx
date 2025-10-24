@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
-import type { Props } from './WidgetFeedback.types';
+import type { FeedbackProps } from './WidgetFeedback.types';
 
-export const WidgetFeedback = ({ feedback, emptyText }: Props) => {
+export const WidgetFeedbackComponent = ({ feedback, feedbackEmptyText }: FeedbackProps) => {
     const [openStatus, setOpenStatus] = useState(true);
 
     return (
@@ -18,8 +18,8 @@ export const WidgetFeedback = ({ feedback, emptyText }: Props) => {
                 open={openStatus}
             >
                 <WidgetFeedbackContent
-                    widgetData={feedback}
-                    emptyText={emptyText}
+                    feedback={feedback}
+                    feedbackEmptyText={feedbackEmptyText}
                 />
             </Widget>
         </div>
