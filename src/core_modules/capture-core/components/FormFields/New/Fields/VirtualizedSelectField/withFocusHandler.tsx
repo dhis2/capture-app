@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './selectField.module.css';
 
 type Props = {
@@ -32,7 +32,7 @@ export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) 
             const inputWrapper = inFocus ? inputWrapperFocused : inputWrapperUnfocused;
             return (
                 <div
-                    className={classNames(defaultClasses.inputWrapper, inputWrapper)}
+                    className={cx(defaultClasses.inputWrapper, inputWrapper)}
                 >
                     <InnerCompnent
                         onFocus={this.handleFocus}

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { IconInfo16, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
-import type { WithStyles } from '@material-ui/core/styles';
+import { withStyles } from 'capture-core-utils/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './SectionDescriptionBox.types';
 
 const styles = {

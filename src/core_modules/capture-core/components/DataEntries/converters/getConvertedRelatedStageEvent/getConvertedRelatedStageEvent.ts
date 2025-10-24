@@ -1,8 +1,8 @@
 import log from 'loglevel';
+import { errorCreator, pipe } from 'capture-core-utils';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 import type { LinkedRequestEvent, ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
-import { errorCreator, pipe } from '../../../../../capture-core-utils';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 

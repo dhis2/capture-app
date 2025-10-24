@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';

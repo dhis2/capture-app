@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { OptionsSelectVirtualized } from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { withFocusHandler } from './withFocusHandler';
 

@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react';
-import cx from 'classnames';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 
 type OwnProps = {

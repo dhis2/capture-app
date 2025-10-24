@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { Label } from '../internal/Label/Label.component';
 import defaultClasses from './withLabel.module.css';
 
@@ -111,7 +111,7 @@ export const withLabel = (hocParams?: HOCParamsContainer) =>
                         className={useVerticalOrientation ? defaultClasses.containerVertical : defaultClasses.container}
                     >
                         <div
-                            className={classNames(labelContainerClass, this.labelContainerClass)}
+                            className={cx(labelContainerClass, this.labelContainerClass)}
                             style={stylesContainer.labelContainerStyle}
                         >
                             {labelElement}

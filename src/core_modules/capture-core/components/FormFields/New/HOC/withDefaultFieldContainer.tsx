@@ -1,7 +1,7 @@
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
-import classNames from 'classnames';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 
 const styles = () => ({
     container: {
@@ -32,18 +32,18 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
     class FieldContainerBuilder extends React.Component<Props & WithStyles<typeof styles>> {
         render() {
             const { classes, ...passOnProps } = this.props;
-            const containerClasses = classNames(
+            const containerClasses = cx(
                 classes.container, {
-                    [classes.activeContainer]: passOnProps.inFocus,
-                    [classes.validatingContainer]: passOnProps.validatingMessage && !passOnProps.inFocus,
+                    [classes.activeContainer]: Boolean(passOnProps.inFocus),
+                    [classes.validatingContainer]: Boolean(passOnProps.validatingMessage && !passOnProps.inFocus),
                     [classes.errorContainer]:
-                        passOnProps.errorMessage && !passOnProps.inFocus && !passOnProps.validatingMessage,
+                        Boolean(passOnProps.errorMessage && !passOnProps.inFocus && !passOnProps.validatingMessage),
                     [classes.warningContainer]:
-                        passOnProps.warningMessage && !passOnProps.inFocus &&
-                        !passOnProps.validatingMessage && !passOnProps.errorMessage,
+                        Boolean(passOnProps.warningMessage && !passOnProps.inFocus &&
+                        !passOnProps.validatingMessage && !passOnProps.errorMessage),
                     [classes.infoContainer]:
-                        passOnProps.infoMessage && !passOnProps.inFocus &&
-                        !passOnProps.validatingMessage && !passOnProps.errorMessage && !passOnProps.warningMessage,
+                        Boolean(passOnProps.infoMessage && !passOnProps.inFocus &&
+                        !passOnProps.validatingMessage && !passOnProps.errorMessage && !passOnProps.warningMessage),
                 },
             );
 

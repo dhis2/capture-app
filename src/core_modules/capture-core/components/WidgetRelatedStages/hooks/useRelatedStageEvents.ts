@@ -39,7 +39,7 @@ export const useRelatedStageEvents = ({
             fields: 'event,occurredAt,scheduledAt,status,relationships',
         },
     }), [programId, stageId, enrollmentId]);
-    const { data, isLoading, isError } = useApiDataQuery(
+    const { data, isInitialLoading, isError } = useApiDataQuery(
         ['availableRelatedStageEvents', stageId, enrollmentId, relationshipTypeId],
         query,
         {
@@ -72,7 +72,7 @@ export const useRelatedStageEvents = ({
     return {
         events: data ?? [],
         linkableEvents: data?.filter(event => event.isLinkable) ?? [],
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

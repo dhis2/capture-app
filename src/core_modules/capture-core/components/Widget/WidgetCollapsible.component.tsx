@@ -1,6 +1,7 @@
+/* eslint-disable complexity */
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
-import { WithStyles, withStyles } from '@material-ui/core';
-import cx from 'classnames';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import type { WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';

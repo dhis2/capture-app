@@ -1,4 +1,3 @@
-import type { WithStyles } from '@material-ui/core';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 
 export type Props = {
@@ -26,5 +25,3 @@ export type WrapperProps = {
     onSave?: ExternalSaveHandler;
     onCancel?: () => void;
 };
-
-export type PlainProps = Props & WithStyles<any>;

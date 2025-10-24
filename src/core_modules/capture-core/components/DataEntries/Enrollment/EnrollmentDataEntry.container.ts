@@ -1,10 +1,10 @@
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { connect } from 'react-redux';
+import type { ReduxAction } from 'capture-core-utils/types';
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const mapDispatchToProps = (dispatch: any) => ({
     onUpdateDataEntryField: (

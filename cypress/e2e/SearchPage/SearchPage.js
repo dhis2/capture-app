@@ -193,7 +193,7 @@ When('you clear the values', () => {
 Then('there should be a validation error message', () => {
     cy.get('[data-test="form-attributes"]')
         .contains('Fill in at least 1 attribute to search')
-        .shouldIncludeClass('textError');
+        .should('have.css', 'color', 'rgb(229, 57, 53)');
 });
 
 Given('you are on the search page with preselected program and org unit', () => {
@@ -320,7 +320,9 @@ When('you press enter after filling in the unique identifier field with values t
         .find('input[type="text"]')
         .first()
         .clear()
-        .type('3131112445555{enter}');
+        .type('3131112445555')
+        .blur()
+        .type('{enter}', { force: true });
 });
 
 When('you fill in the first name with value and last name with empty space', () => {

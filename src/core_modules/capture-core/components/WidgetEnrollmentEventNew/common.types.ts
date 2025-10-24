@@ -1,5 +1,5 @@
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../metaData';
-import type { ApiEnrollmentEvent } from '../../../capture-core-utils/types/api-types';
 import type { EventsData } from '../../rules/RuleEngine/types/ruleEngine.types';
 
 export type ExternalSaveHandler = (eventServerValues: Record<string, unknown>, uid: string) => void;

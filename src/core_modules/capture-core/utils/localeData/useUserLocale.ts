@@ -1,5 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export const useUserLocale = (): {
     locale: any;
@@ -9,7 +9,7 @@ export const useUserLocale = (): {
 } => {
     const dataEngine = useDataEngine();
 
-    const { data, isLoading, isError, error } = useQuery(
+    const { data, isInitialLoading, isError, error } = useQuery(
         ['userLocale'],
         () => dataEngine.query({
             userSettings: {
@@ -22,7 +22,7 @@ export const useUserLocale = (): {
 
     return {
         locale: (data as any)?.userSettings?.settings?.keyUiLocale,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
         error,
     };

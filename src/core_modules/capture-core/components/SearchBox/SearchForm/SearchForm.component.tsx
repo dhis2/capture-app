@@ -1,5 +1,5 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';
@@ -9,7 +9,7 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const styles: Readonly<any> = {
+const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -39,9 +39,9 @@ const styles: Readonly<any> = {
         fontSize: '14px',
         fontWeight: 500,
         flexGrow: 1,
-        color: colors.red600,
+        color: theme.palette.error.main,
     },
-};
+});
 
 const useFormDataLifecycle = (
     searchGroupsForSelectedScope,

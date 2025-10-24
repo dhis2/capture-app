@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../../Widget';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { Breadcrumbs } from './Breadcrumbs';

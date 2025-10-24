@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconUser24, spacers } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetAssignee.types';
 import { Widget } from '../Widget';
 import { DisplayMode } from './DisplayMode.component';

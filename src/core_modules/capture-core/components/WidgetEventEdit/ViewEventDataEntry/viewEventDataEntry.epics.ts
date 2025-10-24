@@ -6,6 +6,7 @@ import {
     filterByInnerAction,
     mapToInnerAction,
 } from 'capture-core-utils/epics';
+import type { ReduxStore } from 'capture-core-utils/types';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import {
@@ -24,7 +25,6 @@ import { enrollmentSiteActionTypes } from '../../../components/Pages/common/Enro
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { TrackerProgram } from '../../../metaData/Program';
 import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
-import type { ReduxStore } from '../../../../capture-core-utils/types';
 
 
 const getDataEntryKey = (eventStatus?: string): string => (

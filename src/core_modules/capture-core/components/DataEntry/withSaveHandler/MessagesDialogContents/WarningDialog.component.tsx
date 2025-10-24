@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 
 type Props = {
     warnings: Array<{key: string, name?: string, warning: string }>;

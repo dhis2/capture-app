@@ -4,7 +4,7 @@ import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import {
     addTemplateError,
     addTemplateSuccess,
