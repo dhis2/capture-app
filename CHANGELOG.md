@@ -1,3 +1,10 @@
+# [104.6.0](https://github.com/dhis2/capture-app/compare/v104.5.0...v104.6.0) (2025-10-24)
+
+
+### Features
+
+* [DHIS2-20001] Hide unsupported attribute types from search form in Capture ([#4383](https://github.com/dhis2/capture-app/issues/4383)) ([4bfe20d](https://github.com/dhis2/capture-app/commit/4bfe20d85f012ceda9404137b4c12c96456dc1b1))
+
 # [104.5.0](https://github.com/dhis2/capture-app/compare/v104.4.0...v104.5.0) (2025-10-23)
 
 
