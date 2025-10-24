@@ -2,6 +2,7 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
+import { UnsupportedAttributesNotification } from '../../../utils/warnings';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -266,7 +267,13 @@ const SearchFormIndex = ({
             {
                 searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
+                    .map(({
+                        searchForm,
+                        formId,
+                        searchScope,
+                        minAttributesRequiredToSearch,
+                        unsupportedAttributes,
+                    }) => {
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
@@ -317,6 +324,11 @@ const SearchFormIndex = ({
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
+                                        {!!unsupportedAttributes?.length && (
+                                            <UnsupportedAttributesNotification
+                                                unsupportedAttributes={unsupportedAttributes}
+                                            />
+                                        )}
                                     </div>
                                 </Section>
                             </div>

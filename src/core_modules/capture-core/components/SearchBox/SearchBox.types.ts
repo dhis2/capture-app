@@ -1,5 +1,6 @@
 import type { RenderFoundation } from '../../metaData';
 import type { CurrentSearchTerms } from './SearchForm/SearchForm.types';
+import type { SearchAttribute } from '../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 export type SearchGroups = Array<{
     searchForm: RenderFoundation;
@@ -7,6 +8,7 @@ export type SearchGroups = Array<{
     formId: string;
     searchScope: string;
     minAttributesRequiredToSearch: number;
+    unsupportedAttributes?: SearchAttribute[];
 }>;
 
 export type SelectedSearchScopeId = string | null | undefined;

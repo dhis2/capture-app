@@ -1,13 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { RenderFoundation } from '../RenderFoundation';
-
+import type { SearchAttribute } from '../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 export class SearchGroup {
     _id!: string;
     _minAttributesRequiredToSearch!: number;
     _searchForm!: RenderFoundation;
     _unique!: boolean;
+    _unsupportedAttributes: SearchAttribute[] = [];
 
     constructor(initFn?: (_this: SearchGroup) => void) {
         this._minAttributesRequiredToSearch = 0;
@@ -41,5 +42,12 @@ export class SearchGroup {
     }
     get unique(): boolean {
         return this._unique;
+    }
+
+    set unsupportedAttributes(attributes: SearchAttribute[]) {
+        this._unsupportedAttributes = attributes;
+    }
+    get unsupportedAttributes(): SearchAttribute[] {
+        return this._unsupportedAttributes;
     }
 }
