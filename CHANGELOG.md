@@ -1,3 +1,10 @@
+# [104.5.0](https://github.com/dhis2/capture-app/compare/v104.4.0...v104.5.0) (2025-10-23)
+
+
+### Features
+
+* pass enrollment dates to form field plugins in widget profile ([#4389](https://github.com/dhis2/capture-app/issues/4389)) ([f94a2b1](https://github.com/dhis2/capture-app/commit/f94a2b13552337ca52751ba3fc974b4a9b7eb07d))
+
 # [104.4.0](https://github.com/dhis2/capture-app/compare/v104.3.0...v104.4.0) (2025-10-22)
 
 
