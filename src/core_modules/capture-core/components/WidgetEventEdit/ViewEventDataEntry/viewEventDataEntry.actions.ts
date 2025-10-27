@@ -152,7 +152,7 @@ export const loadViewEventDataEntry =
                 throw Error(i18n.t('stage not found in rules execution'));
             }
 
-            effects = getApplicableRuleEffectsForTrackerProgram({
+            effects = await getApplicableRuleEffectsForTrackerProgram({
                 program,
                 stage,
                 orgUnit,
@@ -164,7 +164,7 @@ export const loadViewEventDataEntry =
                 attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
             });
         } else if (program instanceof EventProgram) {
-            effects = getApplicableRuleEffectsForEventProgram({
+            effects = await getApplicableRuleEffectsForEventProgram({
                 program,
                 orgUnit,
                 currentEvent,

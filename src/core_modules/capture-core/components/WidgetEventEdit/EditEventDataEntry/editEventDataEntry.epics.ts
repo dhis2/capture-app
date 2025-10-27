@@ -1,8 +1,8 @@
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap } from 'rxjs/operators';
+import { map, filter, flatMap, mergeMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
-import { EMPTY } from 'rxjs';
+import { from, of, concat, EMPTY } from 'rxjs';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
@@ -27,6 +27,7 @@ import {
 } from './editEventDataEntry.actions';
 import {
     actionTypes as widgetEventEditActionTypes,
+    loadEditEventDataEntry,
 } from '../WidgetEventEdit.actions';
 import {
     actionTypes as eventDetailsActionTypes,
@@ -49,13 +50,13 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
             widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
         ),
-        map((action: any) => {
+        mergeMap((action: any) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
+                return of(prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error));
             }
 
             const program = metadataContainer.program;
@@ -64,9 +65,9 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             const enrollment = state.enrollmentDomain?.enrollment;
             const attributeValues = state.enrollmentDomain?.attributeValues;
 
-            return batchActions([
-                showEditEventDataEntry(),
-                ...openEventForEditInDataEntry({
+            return concat(
+                of(loadEditEventDataEntry()),
+                from(openEventForEditInDataEntry({
                     loadedValues,
                     orgUnit,
                     foundation,
@@ -76,9 +77,15 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                     dataEntryId: getDataEntryId(eventContainer.event),
                     dataEntryKey: dataEntryKeys.EDIT,
                     programCategory,
-                }),
-            ]);
-        }));
+                })).pipe(
+                    map((actions: Array<any>) => batchActions([
+                        showEditEventDataEntry(),
+                        ...actions,
+                    ])),
+                ),
+            );
+        }),
+    );
 
 export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(

@@ -77,7 +77,7 @@ function getLoadActions(
     ];
 }
 
-export const openEventForEditInDataEntry = ({
+export const openEventForEditInDataEntry = async ({
     loadedValues: {
         eventContainer,
         dataEntryValues,
@@ -167,8 +167,7 @@ export const openEventForEditInDataEntry = ({
         if (!stage) {
             throw Error(i18n.t('stage not found in rules execution'));
         }
-        // TODO: Add attributeValues & enrollmentData
-        effects = getApplicableRuleEffectsForTrackerProgram({
+        effects = await getApplicableRuleEffectsForTrackerProgram({
             program,
             stage,
             orgUnit,
@@ -178,12 +177,14 @@ export const openEventForEditInDataEntry = ({
             ),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
+            executionEnvironment: 'EditEnrollmentEvent',
         });
     } else if (program instanceof EventProgram) {
-        effects = getApplicableRuleEffectsForEventProgram({
+        effects = await getApplicableRuleEffectsForEventProgram({
             program,
             orgUnit,
             currentEvent,
+            executionEnvironment: 'EditSingleEvent',
         });
     }
 

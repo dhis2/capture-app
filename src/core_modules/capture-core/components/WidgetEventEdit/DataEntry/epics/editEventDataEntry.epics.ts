@@ -80,7 +80,7 @@ const runRulesForEditSingleEvent = async ({
             return acc;
         }, { apiOtherEvents: [] });
 
-        effects = getApplicableRuleEffectsForTrackerProgram({
+        effects = await getApplicableRuleEffectsForTrackerProgram({
             program,
             stage,
             orgUnit: coreOrgUnit,
@@ -93,7 +93,7 @@ const runRulesForEditSingleEvent = async ({
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
         });
     } else {
-        effects = getApplicableRuleEffectsForEventProgram({
+        effects = await getApplicableRuleEffectsForEventProgram({
             program,
             orgUnit: coreOrgUnit,
             currentEvent,

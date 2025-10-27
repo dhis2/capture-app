@@ -94,7 +94,7 @@ const WidgetEventEditPlain = ({
     useEffect(() => inMemoryFileStore.clear, []);
 
     const supportsChangelog = useFeature(FEATURES.changelogs);
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode, isLoading } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
@@ -150,7 +150,7 @@ const WidgetEventEditPlain = ({
                                 className={classes.form}
                                 data-test={'widget-enrollment-event-edit'}
                             >
-                                <EditEventDataEntry
+                                {!isLoading ? (<EditEventDataEntry
                                     dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                                     formFoundation={formFoundation}
                                     orgUnit={orgUnit}
@@ -176,7 +176,7 @@ const WidgetEventEditPlain = ({
                                     onSaveAndCompleteEnrollmentSuccessActionType={
                                         onSaveAndCompleteEnrollmentSuccessActionType
                                     }
-                                />
+                                />) : <LoadingMaskElementCenter />}
                             </div>
                         )}
                     </div>
