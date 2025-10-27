@@ -1,3 +1,10 @@
+## [104.6.2](https://github.com/dhis2/capture-app/compare/v104.6.1...v104.6.2) (2025-10-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16869] Capture top-bar showing UID when editing attribute ([#4381](https://github.com/dhis2/capture-app/issues/4381)) ([2c52f39](https://github.com/dhis2/capture-app/commit/2c52f399fe8fd863d47989a9de270bcae0686d1b))
+
 ## [104.6.1](https://github.com/dhis2/capture-app/compare/v104.6.0...v104.6.1) (2025-10-27)
 
 
