@@ -95,7 +95,7 @@
         "@dhis2/cypress-plugins": "^10.0.3",
         "@types/node": "^22.13.13",
         "@types/react": "^19.0.12",
-        "@types/react-dom": "16.9.25",
+        "@types/react-dom": "19.0.4",
         "@types/react-router-dom": "^5.3.3",
         "@typescript-eslint/eslint-plugin": "^4.0.0",
         "@typescript-eslint/parser": "^4.0.0",
