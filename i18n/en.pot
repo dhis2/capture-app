@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-27T14:44:20.533Z\n"
-"PO-Revision-Date: 2025-10-27T14:44:20.533Z\n"
+"POT-Creation-Date: 2025-10-23T11:41:11.943Z\n"
+"PO-Revision-Date: 2025-10-23T11:41:11.943Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -921,6 +921,9 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "tracked entity instance"
+msgstr "tracked entity instance"
+
 msgid "Selected program"
 msgstr "Selected program"
 
@@ -1495,9 +1498,6 @@ msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
-
-msgid "tracked entity instance"
-msgstr "tracked entity instance"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "Choose a {{linkableStageLabel}} event"
