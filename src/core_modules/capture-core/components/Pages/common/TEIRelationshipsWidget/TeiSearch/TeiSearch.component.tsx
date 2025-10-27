@@ -1,6 +1,7 @@
 import React, { type ComponentType, useCallback, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { UnsupportedAttributesNotification } from '../../../../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
@@ -95,10 +96,12 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const renderSearchGroups = searchGroups => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = getFormId(searchGroupId);
-        const header = sg.unique ?
+        const isUnique = sg.unique;
+        const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
             i18n.t('Search by attributes');
         const collapsed = props.openSearchGroupSection !== searchGroupId;
+        const unsupportedAttributes = sg.unsupportedAttributes;
         return (
             <Section
                 data-test="search-by-attributes-forms"
@@ -117,14 +120,21 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     />
                 }
             >
-                <TeiSearchForm
-                    id={formId}
-                    searchId={props.id}
-                    searchGroupId={searchGroupId}
-                    searchGroup={sg}
-                    onSearch={handleSearch}
-                    onSearchValidationFailed={handleSearchValidationFailed}
-                />
+                <div>
+                    <TeiSearchForm
+                        id={formId}
+                        searchId={props.id}
+                        searchGroupId={searchGroupId}
+                        searchGroup={sg}
+                        onSearch={handleSearch}
+                        onSearchValidationFailed={handleSearchValidationFailed}
+                    />
+                    {!isUnique && !!unsupportedAttributes?.length && (
+                        <UnsupportedAttributesNotification
+                            unsupportedAttributes={unsupportedAttributes}
+                        />
+                    )}
+                </div>
             </Section>
         );
     });

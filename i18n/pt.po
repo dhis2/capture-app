@@ -1,10 +1,8 @@
 # 
 # Translators:
-# David Júnior <davidjr.mondlane@gmail.com>, 2021
 # Fernando Jorge Bade, 2023
 # Philip Larsen Donnelly, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
-# Sheila André <sandre@saudigitus.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
@@ -15,13 +13,15 @@
 # Ge Joao <gsimango@saudigitus.org>, 2025
 # Laurência Luís, 2025
 # Shelsea Chumaio, 2025
+# Sheila André <sandre@saudigitus.org>, 2025
+# David Júnior <davidjr.mondlane@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-08-19T08:14:08.696Z\n"
+"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Shelsea Chumaio, 2025\n"
+"Last-Translator: David Júnior <davidjr.mondlane@gmail.com>, 2025\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,6 +77,9 @@ msgstr "Editar evento"
 
 msgid "New event"
 msgstr "Novo evento"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Event list"
 msgstr "Lista de eventos"
@@ -426,6 +429,12 @@ msgstr "Algumas operações ainda estão em execução. Por favor, espere.."
 msgid "Operations running"
 msgstr "Operações em execução"
 
+msgid "No feedback for this enrollment yet"
+msgstr "Nenhum feedback para esta inscrição ainda"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Ainda não há saída de indicador para esta inscrição"
+
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -496,6 +505,12 @@ msgstr "Faixa absoluta"
 
 msgid "Relative range"
 msgstr "Faixa relativa"
+
+msgid "Is empty"
+msgstr ""
+
+msgid "Is not empty"
+msgstr ""
 
 msgid "Max"
 msgstr "Máx"
@@ -636,12 +651,6 @@ msgstr "Aviso"
 msgid "Close the notice"
 msgstr "Fechar o aviso"
 
-msgid "No feedback for this enrollment yet"
-msgstr "Nenhum feedback para esta inscrição ainda"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ainda não há saída de indicador para esta inscrição"
-
 msgid "Quick actions"
 msgstr "Ações rápidas"
 
@@ -753,6 +762,9 @@ msgstr "Cronograma"
 msgid "Refer"
 msgstr "Referir"
 
+msgid "New Event"
+msgstr "Novo evento"
+
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "Não é possível adicionar mais eventos {{ programStageName }} "
 
@@ -771,12 +783,11 @@ msgstr "Estagio"
 msgid "Registered events"
 msgstr "Eventos registrados"
 
-msgid ""
-"The category option is not valid for the selected organisation unit. Please "
-"select a valid combination."
+msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
-"A opção de categoria não é válida para a unidade organizacional selecionada."
-" Por favor, selecione uma combinação válida."
+
+msgid "Please select a valid combination."
+msgstr ""
 
 msgid "Get started with Capture app"
 msgstr ""
@@ -1028,13 +1039,20 @@ msgid "Search for"
 msgstr "Procurar"
 
 msgid ""
-"You can also choose a program from the top bar and search in that program"
+"You can also select a program from the top bar to search within that "
+"program."
 msgstr ""
-"Você também pode escolher um programa na barra superior e pesquisar nesse "
-"programa"
 
 msgid "Choose a type to start searching"
 msgstr "Escolha um tipo para começar a pesquisar"
+
+msgid "{{trackedEntityName}} has no searchable attributes"
+msgstr ""
+
+msgid ""
+"Try selecting a different tracked entity type, or try searching in a program"
+" by choosing one from the top bar."
+msgstr ""
 
 msgid "Search {{name}}"
 msgstr "Pesquise {{name}}"
@@ -1086,8 +1104,24 @@ msgstr ""
 msgid "An error has occurred"
 msgstr "Ocorreu um erro"
 
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later."
+msgstr ""
+
+msgid "For more details open the Console tab of the Developer tools"
+msgstr ""
+
 msgid "Too many results"
 msgstr "Muitos resultados"
+
+msgid "This search returned too many results to show."
+msgstr ""
+
+msgid ""
+"Try changing search terms or searching by more attributes to narrow down the"
+" results."
+msgstr ""
 
 msgid "Cannot search in all programs"
 msgstr "Não é possível pesquisar em todos os programas"
@@ -1160,10 +1194,11 @@ msgstr "Verifique as inscrições"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
+"program."
 msgstr ""
-"Deve fornecer um motivo para verificar as inscrições neste programa "
-"protegido. Todas as atividades serão registradas."
+
+msgid "All activity will be logged."
+msgstr ""
 
 msgid "Unsaved changes"
 msgstr "Alterações não salvas"
@@ -1198,12 +1233,11 @@ msgstr "Não tem acesso para apagar este registo"
 msgid "Delete enrollment"
 msgstr "Excluir inscrição"
 
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
+msgid "Are you sure you want to delete this enrollment?"
 msgstr ""
-"Tem certeza de que deseja excluir esta inscrição? Isso removerá "
-"permanentemente a inscrição atual."
+
+msgid "This will permanently remove the current enrollment."
+msgstr ""
 
 msgid "Yes, delete enrollment."
 msgstr "Sim, exclua a inscrição."
@@ -1340,6 +1374,12 @@ msgstr "estágio não encontrado na execução das regras"
 msgid "Delete event"
 msgstr "Apagar evento"
 
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this event? "
+msgstr ""
+
 msgid "Yes, delete event"
 msgstr "Sim, apagar evento"
 
@@ -1411,6 +1451,14 @@ msgstr "Data de programação / Data de vencimento"
 msgid "Please provide a valid organisation unit"
 msgstr "Forneça uma unidade organizacional válida"
 
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+"Agendar um evento em {{stageName}} para {{programName}} em {{orgUnitName}}"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr ""
+
 msgid "Schedule info"
 msgstr "Informação de programação"
 
@@ -1429,9 +1477,11 @@ msgstr "Gravar notas"
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
+msgid "Change information about this {{trackedEntityName}} here."
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. Information about "
-"this enrollment can be edited in the Enrollment widget."
+"Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1555,12 +1605,8 @@ msgstr ""
 msgid "An error occurred while deleting the event"
 msgstr "Ocorreu um erro ao apagar o evento"
 
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event?"
+msgid "Are you sure you want to delete this event?"
 msgstr ""
-"A eliminação de um evento é permanente e não pode ser anulada. Tem a certeza"
-" de que pretende apagar este evento?"
 
 msgid "An error occurred when updating event status"
 msgstr "Ocorreu um erro ao atualizar o estado do evento"
@@ -1607,13 +1653,13 @@ msgstr "Ocorreu um erro ao anular a ligação e eliminar o evento."
 msgid "Unlink and delete linked event"
 msgstr "Desvincular e eliminar um evento associado"
 
-msgid ""
-"Are you sure you want to remove the link and delete the linked event? This "
-"action permanently removes the link, linked event, and all related data."
+msgid "Are you sure you want to remove the link and delete the linked event?"
 msgstr ""
-"Tem a certeza que pretende remover a ligação e eliminar o evento associado? "
-"Esta ação remove permanentemente a ligação, o evento associado e todos os "
-"dados relacionados."
+
+msgid ""
+"This action permanently removes the link, linked event, and all related "
+"data."
+msgstr ""
 
 msgid "Yes, unlink and delete linked event"
 msgstr "Sim, anular a ligação e eliminar o evento ligado"
@@ -1621,12 +1667,11 @@ msgstr "Sim, anular a ligação e eliminar o evento ligado"
 msgid "Unlink event"
 msgstr "Evento de desvinculação"
 
-msgid ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
+msgid "Are you sure you want to remove the link between these events?"
 msgstr ""
-"Tem a certeza de que pretende remover a ligação entre estes eventos? Esta "
-"ação remove a ligação em si, mas o evento ligado permanecerá."
+
+msgid "This action removes the link itself, but the linked event will remain."
+msgstr ""
 
 msgid "Yes, unlink event"
 msgstr "Sim, desvincular evento"
@@ -1728,12 +1773,11 @@ msgstr "{{trackedEntityTypeName}} Relacionamentos"
 msgid "Delete relationship"
 msgstr "Apagar relacionamento"
 
-msgid ""
-"Deleting the relationship is permanent and cannot be undone. Are you sure "
-"you want to delete this relationship?"
+msgid "Deleting the relationship is permanent and cannot be undone."
 msgstr ""
-"A eliminação da relação é permanente e não pode ser anulada. Tem a certeza "
-"de que pretende eliminar este relacionamento?"
+
+msgid "Are you sure you want to delete this relationship?"
+msgstr ""
 
 msgid "Yes, delete relationship"
 msgstr "Sim, apagar relacionamento"
@@ -1803,11 +1847,11 @@ msgstr "Ocorreu um erro ao apagar os eventos"
 msgid "Delete events"
 msgstr "Eliminar eventos"
 
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
+msgid "This cannot be undone."
 msgstr ""
-"Esta acção não pode ser anulada. Tem a certeza de que pretende apagar os "
-"eventos selecionados?"
+
+msgid "Are you sure you want to delete the selected events?"
+msgstr ""
 
 msgid "Owner organisation unit"
 msgstr ""
@@ -1850,12 +1894,11 @@ msgstr ""
 "Ocorreu um erro inesperado ao obter as inscrições. Por favor, tente "
 "novamente."
 
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
+msgid "There are currently no active enrollments in the selection."
 msgstr ""
-"Não existem actualmente inscrições activas na seleção. Todas as inscrições "
-"já foram concluídas ou canceladas."
+
+msgid "All enrollments are already completed or cancelled."
+msgstr ""
 
 msgid ""
 "This action will complete {{count}} active enrollment in your selection."
@@ -1960,11 +2003,11 @@ msgstr[1] "Eliminar {{count}} {{ trackedEntityName }}"
 msgstr[2] "Eliminar {{count}} {{ trackedEntityName }}"
 
 msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
+"Deleting records will also delete any associated enrollments and events."
 msgstr ""
-"A eliminação de registos também elimina quaisquer inscrições e eventos "
-"associados. Isto não pode ser anulado. Tem a certeza de que pretende apagar?"
+
+msgid "Are you sure you want to delete?"
+msgstr ""
 
 msgid "An error occurred while deleting the records"
 msgstr "Ocorreu um erro ao apagar os registos"
@@ -2161,6 +2204,19 @@ msgstr "Introduzir uma hora válida"
 msgid "Please enter a time"
 msgstr "Introduzir uma hora"
 
+msgid ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgid_plural ""
+"The following attribute types is not supported for searching and has been "
+"hidden"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Some attributes are hidden"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "Definir coordenada"
 
@@ -2187,3 +2243,9 @@ msgstr "Área no mapa gravada"
 
 msgid "Compatibility mode"
 msgstr "Modo de compatibilidade"
+
+msgid ""
+"This app is currently running in compatibility mode due to browser "
+"restrictions. For better performance, use another browser or exit private "
+"mode if this is currently in use."
+msgstr ""

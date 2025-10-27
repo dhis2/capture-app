@@ -2134,6 +2134,22 @@ msgstr "Please enter a valid time"
 msgid "Please enter a time"
 msgstr "Please enter a time"
 
+msgid ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgid_plural ""
+"The following attribute types is not supported for searching and has been "
+"hidden"
+msgstr[0] ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgstr[1] ""
+"The following attribute types are not supported for searching and have been "
+"hidden"
+
+msgid "Some attributes are hidden"
+msgstr "Some attributes are hidden"
+
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
