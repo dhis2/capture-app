@@ -41,6 +41,3 @@ export const TextInput = (props: Props) => {
     );
 };
 
-TextInput.defaultProps = {
-    classes: {},
-};
