@@ -166,7 +166,7 @@ const runRulesForNewSingleEvent = async ({
     const { coreOrgUnit, cached } =
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
-    const effects = getApplicableRuleEffectsForEventProgram({
+    const effects = await getApplicableRuleEffectsForEventProgram({
         program,
         orgUnit: coreOrgUnit,
         currentEvent,

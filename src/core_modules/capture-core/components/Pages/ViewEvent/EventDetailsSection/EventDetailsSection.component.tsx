@@ -17,6 +17,7 @@ import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
+import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { dataElementTypes } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
@@ -190,7 +191,11 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     );
 
     if (!orgUnit || !formFoundation || isLoading) {
-        return null;
+        return (
+            <div className={classes.container}>
+                <LoadingMaskElementCenter />
+            </div>
+        );
     }
 
     return (

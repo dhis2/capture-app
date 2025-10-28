@@ -18,22 +18,30 @@ export const useRulesEngine = ({
     const dispatch = useDispatch();
     const program = useMemo(() => programId && getEventProgramThrowIfNotFound(programId), [programId]);
     const orgUnitRef = useRef<OrgUnit | undefined>(undefined);
-    // TODO: Getting the entire state object is bad and this needs to be refactored.
-    // The problem is the helper methods that take the entire state object.
-    // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator)
-    // to be more explicit with the arguments.
-    const state = useSelector((stateArg: any) => stateArg);
+    const state = useSelector(({
+        dataEntriesFieldsUI,
+        dataEntriesFieldsValue,
+        dataEntriesFieldsMeta,
+        formsValues,
+        formsSectionsFieldsUI,
+    }: any) => ({
+        dataEntriesFieldsUI,
+        dataEntriesFieldsValue,
+        dataEntriesFieldsMeta,
+        formsValues,
+        formsSectionsFieldsUI,
+    }));
     useEffect(() => {
         if (orgUnitContext && program && !!formFoundation) {
-            dispatch(batchActions([
-                getRulesActions({
-                    state,
-                    program,
-                    orgUnit: orgUnitContext,
-                    formFoundation,
-                }),
-            ]));
-            orgUnitRef.current = orgUnitContext;
+            getRulesActions({
+                state,
+                program,
+                orgUnit: orgUnitContext,
+                formFoundation,
+            }).then((effects) => {
+                dispatch(batchActions([effects]));
+                orgUnitRef.current = orgUnitContext;
+            });
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
     // eslint-disable-next-line react-hooks/exhaustive-deps
