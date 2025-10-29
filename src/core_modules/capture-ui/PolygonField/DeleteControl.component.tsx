@@ -40,7 +40,7 @@ class DeleteControlPlain extends MapControl<any, Props> {
 
         deleteControl.onAdd = () => {
             const div = L.DomUtil.create('div', '');
-            const root = createRoot(div!);
+            const root = createRoot(div);
             root.render(jsx);
             return div;
         };

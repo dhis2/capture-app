@@ -1,5 +1,4 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // Fix Leaflet default icon paths for production
 import L from 'leaflet';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
@@ -19,10 +18,4 @@ L.Icon.Default.mergeOptions({
     shadowUrl,
 });
 
-const queryClient = new QueryClient();
-
-export default () => (
-    <QueryClientProvider client={queryClient}>
-        <AppStart />
-    </QueryClientProvider>
-);
+export default () => <AppStart />;
