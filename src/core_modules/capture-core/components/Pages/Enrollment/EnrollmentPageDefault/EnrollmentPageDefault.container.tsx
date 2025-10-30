@@ -93,7 +93,7 @@ export const EnrollmentPageDefault = () => {
         apiAttributeValues: attributeValues,
         executionEnvironment: 'EnrollmentDashboard',
     });
-    const rulesRunning = ruleExecutionInProgress('EnrollmentDashboard');
+    const rulesRunning = !ruleEffects || ruleExecutionInProgress('EnrollmentDashboard');
 
     const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
