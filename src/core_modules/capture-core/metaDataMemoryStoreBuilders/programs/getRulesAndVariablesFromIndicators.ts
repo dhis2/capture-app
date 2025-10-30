@@ -63,6 +63,9 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
 
     if (variableNameParts.length === 2) {
         // This is a programstage and dataelement specification
+        if (!programData.dataElements[variableNameParts[1]]) {
+            throw new Error(`is missing referenced data element "${variableNameParts[1]}"`);
+        }
         newVariableObject = {
             id: variableName,
             displayName: variableName,
@@ -74,6 +77,9 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
         };
     } else { // if (variableNameParts.length === 1)
         // This is an attribute
+        if (!programData.attributes[variableNameParts[0]]) {
+            throw new Error(`is missing referenced attribute "${variableNameParts[0]}"`);
+        }
         newVariableObject = {
             id: variableName,
             displayName: variableName,
@@ -194,15 +200,9 @@ function buildIndicatorRuleAndVariables(
             rule: newRule,
             variables,
         };
-    } catch (error) {
+    } catch (error: any) {
         log.error(
-            errorCreator(
-                `Configuration error: Program indicator "${programIndicator.displayName}" ` +
-                 'has invalid references and will be skipped.',
-            )({
-                method: 'buildIndicatorRuleAndVariables',
-                object: programIndicator,
-            }),
+            `Configuration error: Program indicator "${programIndicator.displayName}" ${error.message}.`,
         );
         return null;
     }
