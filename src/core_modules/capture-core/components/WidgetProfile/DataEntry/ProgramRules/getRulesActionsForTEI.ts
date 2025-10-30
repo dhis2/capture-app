@@ -51,50 +51,7 @@ const getDataElementsForRulesExecution = (dataElements?: DataElements): Record<s
     );
 };
 
-export const getRulesActionsForTEI = ({
-    foundation,
-    formId,
-    orgUnit,
-    enrollmentData,
-    teiValues,
-    trackedEntityAttributes,
-    optionSets,
-    rulesContainer,
-    otherEvents,
-    dataElements,
-    userRoles,
-    programName,
-}: {
-    foundation: RenderFoundation;
-    formId: string;
-    orgUnit: OrgUnit;
-    enrollmentData?: EnrollmentData;
-    teiValues?: TEIValues;
-    trackedEntityAttributes?: TrackedEntityAttributes;
-    optionSets: OptionSets;
-    rulesContainer: ProgramRulesContainer;
-    otherEvents?: EventsData;
-    dataElements?: DataElements;
-    userRoles: Array<string>;
-    programName: string;
-}) => {
-    const effects: OutputEffects = ruleEngine.getProgramRuleEffects({
-        programRulesContainer: rulesContainer,
-        currentEvent: null,
-        otherEvents,
-        dataElements: getDataElementsForRulesExecution(dataElements),
-        trackedEntityAttributes,
-        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
-        selectedEntity: teiValues,
-        selectedOrgUnit: orgUnit,
-        selectedUserRoles: userRoles,
-        optionSets,
-    });
-    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
-    return updateRulesEffects(effectsHierarchy, formId);
-};
-
-export const getRulesActionsForTEIAsync = async ({
+export const getRulesActionsForTEI = async ({
     foundation,
     formId,
     orgUnit,
@@ -125,24 +82,30 @@ export const getRulesActionsForTEIAsync = async ({
     querySingleResource: QuerySingleResource;
     onGetValidationContext: () => Record<string, any>;
 }) => {
-    const effects: OutputEffects = ruleEngine.getProgramRuleEffects({
-        programRulesContainer: rulesContainer,
-        currentEvent: null,
-        otherEvents,
-        dataElements: getDataElementsForRulesExecution(dataElements),
-        trackedEntityAttributes,
-        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
-        selectedEntity: teiValues,
-        selectedOrgUnit: orgUnit,
-        selectedUserRoles: userRoles,
-        optionSets,
-    });
-    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: foundation.getElements(),
-        effects: effectsHierarchy,
-        querySingleResource,
-        onGetValidationContext,
-    });
-    return updateRulesEffects(effectsWithValidations, formId);
+    try {
+        const effects: OutputEffects = await ruleEngine.getProgramRuleEffects({
+            programRulesContainer: rulesContainer,
+            currentEvent: null,
+            otherEvents,
+            dataElements: getDataElementsForRulesExecution(dataElements),
+            trackedEntityAttributes,
+            selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
+            selectedEntity: teiValues,
+            selectedOrgUnit: orgUnit,
+            selectedUserRoles: userRoles,
+            optionSets,
+            executionEnvironment: 'ProfileWidget',
+        });
+        const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
+        const effectsWithValidations = await validateAssignEffects({
+            dataElements: foundation.getElements(),
+            effects: effectsHierarchy,
+            querySingleResource,
+            onGetValidationContext,
+        });
+        return updateRulesEffects(effectsWithValidations, formId);
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
 };
