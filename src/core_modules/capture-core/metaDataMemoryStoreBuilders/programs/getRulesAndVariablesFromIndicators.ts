@@ -63,9 +63,6 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
 
     if (variableNameParts.length === 2) {
         // This is a programstage and dataelement specification
-        const dataElement = programData.dataElements[variableNameParts[1]];
-        if (!dataElement) { return null; }
-
         newVariableObject = {
             id: variableName,
             displayName: variableName,
@@ -77,9 +74,6 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
         };
     } else { // if (variableNameParts.length === 1)
         // This is an attribute
-        const attribute = programData.attributes[variableNameParts[0]];
-        if (!attribute) { return null; }
-
         newVariableObject = {
             id: variableName,
             displayName: variableName,
