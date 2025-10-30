@@ -197,11 +197,12 @@ function buildIndicatorRuleAndVariables(
     } catch (error) {
         log.error(
             errorCreator(
-                `Configuration error: Program indicator '${programIndicator.displayName || programIndicator.name || programIndicator.id}' has invalid references and will be skipped. ${(error as any)?.message ? (error as any).message : error}`
+                `Configuration error: Program indicator "${programIndicator.displayName}" ` +
+                 'has invalid references and will be skipped.',
             )({
                 method: 'buildIndicatorRuleAndVariables',
                 object: programIndicator,
-            })
+            }),
         );
         return null;
     }
@@ -238,9 +239,11 @@ export function getRulesAndVariablesFromProgramIndicators(
     });
 
     return validProgramIndicators
-        .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
-        .filter(container => container)
-        .reduce((accOneLevelContainer: any, container) => {
+        .reduce((accOneLevelContainer: any, programIndicator: CachedProgramIndicator) => {
+            const container = buildIndicatorRuleAndVariables(programIndicator, programData);
+            if (!container) {
+                return accOneLevelContainer;
+            }
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
             accOneLevelContainer.rules.push(container.rule);
 
