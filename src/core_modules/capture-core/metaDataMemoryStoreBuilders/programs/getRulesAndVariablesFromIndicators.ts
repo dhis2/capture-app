@@ -70,7 +70,7 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
-            valueType: dataElement.valueType,
+            valueType: programData.dataElements[variableNameParts[1]].valueType,
             programStageId: variableNameParts[0],
             dataElementId: variableNameParts[1],
             programId: programData.programId,
@@ -84,7 +84,7 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
-            valueType: attribute.valueType,
+            valueType: programData.attributes[variableNameParts[0]].valueType,
             trackedEntityAttributeId: variableNameParts[0],
             programId: programData.programId,
         };
@@ -97,9 +97,9 @@ function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInData = getVariablesFromExpression(action.data);
 
     const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition =>
-        getDirectAddressedVariable(variableInCondition, programData)).filter(variable => variable !== null);
+        getDirectAddressedVariable(variableInCondition, programData));
     const directAddressedVariablesFromData = variablesInData.map(variableInData =>
-        getDirectAddressedVariable(variableInData, programData)).filter(variable => variable !== null);
+        getDirectAddressedVariable(variableInData, programData));
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];
 
     return {
@@ -186,33 +186,31 @@ function buildIndicatorRuleAndVariables(
         programRuleActions: [newAction],
     };
 
-    const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
-    const expectedVariables = getVariablesFromExpression(programIndicator.expression).length;
+    try {
+        const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
 
-    if (variables.length < expectedVariables) {
+        // Change expression or data part of the rule to match the program rules execution model
+        replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
+        replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
+
+        newAction.data = performStaticReplacements(newAction.data as string);
+        newRule.condition = performStaticReplacements(newRule.condition);
+
+        return {
+            rule: newRule,
+            variables,
+        };
+    } catch (error) {
         log.error(
-            errorCreator(`Configuration error: Program indicator '${programIndicator.name}' has invalid references ` +
-            `and will be skipped. Expected ${expectedVariables} variables, found ${variables.length}.`)(
-                {
-                    method: 'buildIndicatorRuleAndVariables',
-                    object: programIndicator,
-                },
-            ),
+            errorCreator(
+                `Configuration error: Program indicator '${programIndicator.displayName || programIndicator.name || programIndicator.id}' has invalid references and will be skipped. ${(error as any)?.message ? (error as any).message : error}`
+            )({
+                method: 'buildIndicatorRuleAndVariables',
+                object: programIndicator,
+            })
         );
         return null;
     }
-
-    // Change expression or data part of the rule to match the program rules execution model
-    replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
-    replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
-
-    newAction.data = performStaticReplacements(newAction.data as string);
-    newRule.condition = performStaticReplacements(newRule.condition);
-
-    return {
-        rule: newRule,
-        variables,
-    };
 }
 
 export function getRulesAndVariablesFromProgramIndicators(
@@ -230,7 +228,7 @@ export function getRulesAndVariablesFromProgramIndicators(
     };
 
     // Filter out program indicators without an expression
-    const programIndicatorsWithExpression = cachedProgramIndicators.filter((indicator) => {
+    const validProgramIndicators = cachedProgramIndicators.filter((indicator) => {
         if (!indicator.expression) {
             log.error(
                 errorCreator('Program indicator is missing an expression and will be skipped.')(
@@ -245,9 +243,9 @@ export function getRulesAndVariablesFromProgramIndicators(
         return true;
     });
 
-    return programIndicatorsWithExpression
+    return validProgramIndicators
         .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
-        .filter(container => container !== null)
+        .filter(container => container)
         .reduce((accOneLevelContainer: any, container) => {
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
             accOneLevelContainer.rules.push(container.rule);
