@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import type { Icon } from '../../../metaData';
 

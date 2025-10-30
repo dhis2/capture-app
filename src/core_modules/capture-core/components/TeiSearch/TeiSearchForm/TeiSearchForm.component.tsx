@@ -1,8 +1,8 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { errorCreator } from 'capture-core-utils';
 import {
     Modal,
@@ -127,7 +127,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     renderMinAttributesRequired = () => {
         const { classes, searchAttempted, searchGroup } = this.props;
         const displayInvalidNumberOfAttributes = searchAttempted && !this.validNumberOfAttributes();
-        const minAttributesRequiredClass = classNames(
+        const minAttributesRequiredClass = cx(
             classes.minAttributesRequired, {
                 [classes.minAttribtuesRequiredInvalid]: displayInvalidNumberOfAttributes,
             },

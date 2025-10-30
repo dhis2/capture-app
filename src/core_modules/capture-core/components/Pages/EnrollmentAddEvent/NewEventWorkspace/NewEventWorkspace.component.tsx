@@ -2,7 +2,7 @@ import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
@@ -13,7 +13,7 @@ import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import {
     addEnrollmentEventPageDefaultActionTypes,
 } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
-import type { PlainProps, Props } from './newEventWorkspace.types';
+import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
@@ -34,7 +34,7 @@ const NewEventWorkspacePlain = ({
     onSave,
     classes,
     ...passOnProps
-}: PlainProps) => {
+}: Props & WithStyles<typeof styles>) => {
     const { tab } = useLocationQuery();
     const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);

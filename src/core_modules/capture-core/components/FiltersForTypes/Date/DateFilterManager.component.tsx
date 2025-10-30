@@ -89,7 +89,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         return (
             <DateFilter
                 value={this.state.value}
-                innerRef={filterTypeRef}
+                ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

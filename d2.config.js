@@ -10,6 +10,8 @@ const config = {
     entryPoints: {
         app: './src/index.tsx',
     },
+
+    viteConfigExtensions: './viteConfigExtensions.mjs',
 };
 
 module.exports = config;

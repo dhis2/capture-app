@@ -19,7 +19,7 @@ export const useDataElementsForStage = ({
     programId,
     stageId,
 }: Props) => {
-    const { data, isLoading } = useIndexedDBQuery(
+    const { data, isInitialLoading } = useIndexedDBQuery(
         [programId, 'dataElements', stageId, { dataElementIds }],
         () => getDataElementsForStage({
             dataElementIds,
@@ -31,6 +31,6 @@ export const useDataElementsForStage = ({
 
     return {
         dataElements: data,
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

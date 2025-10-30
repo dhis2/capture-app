@@ -1,11 +1,11 @@
 import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { dataElementTypes, ProgramStage } from '../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
 import { convertStatusOut } from '../../../DataEntries';
 import { standardGeoJson } from './standardGeoJson';
-import type { ApiAssignedUser } from '../../../../../capture-core-utils/types/api-types';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 

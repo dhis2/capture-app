@@ -1,5 +1,5 @@
 import React from 'react';
-import cx from 'classnames';
+import { cx } from '@emotion/css';
 import './styles.css';
 
 type NodeProps = {

@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
 import { dataEntryKeys } from 'capture-core/constants';
-import type { ReduxStore, EpicAction, ApiUtils } from '../../../../../capture-core-utils/types/global';
+import type { ReduxStore, EpicAction, ApiUtils } from 'capture-core-utils/types/global';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,

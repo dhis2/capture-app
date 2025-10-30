@@ -1,5 +1,3 @@
-import type { WithStyles } from '@material-ui/core';
-
 export type OwnProps = {
     nextPageButtonDisabled: boolean;
     dataEntryId: string;
@@ -15,4 +13,4 @@ type PropsFromRedux = {
     currentPage: number;
 };
 
-export type Props = OwnProps & DispatchersFromFromRedux & PropsFromRedux & WithStyles<any>;
+export type Props = OwnProps & DispatchersFromFromRedux & PropsFromRedux;

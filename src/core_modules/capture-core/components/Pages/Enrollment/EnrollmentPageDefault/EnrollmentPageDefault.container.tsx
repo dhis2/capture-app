@@ -5,7 +5,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,

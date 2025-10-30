@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ChangelogChangeCell, ChangelogValueCell } from './ChangelogCells';
 import type { ChangelogRecord } from '../Changelog/Changelog.types';
 

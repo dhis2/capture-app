@@ -9,17 +9,19 @@ const configQuery = {
 };
 
 export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
-    const { data: dataEntryFormConfig, isFetched: configIsFetched } = useApiMetadataQuery(
+    const { data: dataEntryFormConfig, isFetched: configIsFetched, isInitialLoading } = useApiMetadataQuery(
         ['dataEntryFormConfig', selectedScopeId],
         configQuery,
         {
             enabled: !!selectedScopeId,
             select: (dataEntryFormConfigQuery: any) => dataEntryFormConfigQuery[selectedScopeId],
+            retry: false,
         },
     );
 
     return {
         dataEntryFormConfig,
         configIsFetched,
+        isLoading: isInitialLoading,
     };
 };

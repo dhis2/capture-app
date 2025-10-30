@@ -37,7 +37,7 @@ export const useCenterPoint = (orgUnitId: string, storedCenter: [number, number]
         },
     };
     const queryOptions = { enabled: !storedCenter && Boolean(orgUnitId) };
-    const { data, isLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data, isInitialLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     const center = useMemo(() => {
         if (data) {
@@ -60,6 +60,6 @@ export const useCenterPoint = (orgUnitId: string, storedCenter: [number, number]
 
     return {
         center,
-        loading: isLoading,
+        loading: isInitialLoading,
     };
 };

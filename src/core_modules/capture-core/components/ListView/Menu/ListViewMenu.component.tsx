@@ -1,7 +1,7 @@
 import React, { useState, useRef, memo, useCallback } from 'react';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu, Divider } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import type { Props } from './listViewMenu.types';
 

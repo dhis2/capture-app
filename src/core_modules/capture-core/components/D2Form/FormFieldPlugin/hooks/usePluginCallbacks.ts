@@ -1,7 +1,7 @@
 import log from 'loglevel';
 import { useCallback } from 'react';
+import { errorCreator } from 'capture-core-utils';
 import type { SetFieldValueProps, UsePluginCallbacksProps } from '../FormFieldPlugin.types';
-import { errorCreator } from '../../../../../capture-core-utils';
 import { PluginErrorMessages } from '../FormFieldPlugin.const';
 
 export const usePluginCallbacks = ({

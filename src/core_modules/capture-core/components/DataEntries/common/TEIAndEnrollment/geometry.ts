@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from '../../../../../capture-core-utils/string';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { FEATURETYPE } from '../../../../constants';
 
 const standardGeoJson = (geometry: Array<number> | { longitude: number; latitude: number }) => {

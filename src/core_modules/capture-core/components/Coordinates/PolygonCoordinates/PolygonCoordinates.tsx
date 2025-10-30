@@ -1,17 +1,11 @@
 import React, { useState, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconChevronUp16, IconChevronDown16, colors, spacers } from '@dhis2/ui';
 
 type OwnProps = {
     coordinates: Array<Array<number>>;
 };
-
-type StyleProps = {
-    buttonContainer: string;
-    viewButton: string;
-};
-
 const styles: Readonly<any> = {
     buttonContainer: {
         display: 'flex',
@@ -33,7 +27,7 @@ const styles: Readonly<any> = {
     },
 };
 
-type Props = OwnProps & WithStyles<keyof StyleProps>;
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
     const [showMore, setShowMore] = useState(false);

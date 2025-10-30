@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { setBulkDataEntry, removeBulkDataEntry } from './bulkDataEntryStorageUtils';
 import { useBulkDataEntryFromIndexedDB } from './useBulkDataEntryFromIndexedDB';
@@ -29,7 +29,7 @@ export const useBulkDataEntryConfigurations = (programId: string) => {
             await setBulkDataEntry({ id: programId, activeList: { configKey } });
             await queryClient.invalidateQueries(
                 [ReactQueryAppNamespace, 'indexedDB', 'cachedBulkDataEntry', programId],
-                { refetchInactive: false },
+                { refetchType: 'none' },
             );
         },
         [programId, queryClient],

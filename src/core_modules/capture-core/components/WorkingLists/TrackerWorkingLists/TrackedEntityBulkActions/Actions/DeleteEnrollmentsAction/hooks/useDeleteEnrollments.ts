@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { errorCreator, FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -43,7 +43,7 @@ export const useDeleteEnrollments = ({
 
     const {
         data: enrollments,
-        isLoading: isLoadingEnrollments,
+        isInitialLoading: isInitialLoadingEnrollments,
         isError: isEnrollmentsError,
     } = useApiDataQuery(
         [...QueryKey, selectedRows],
@@ -147,7 +147,7 @@ export const useDeleteEnrollments = ({
     return {
         deleteEnrollments,
         isDeletingEnrollments,
-        isLoadingEnrollments,
+        isLoadingEnrollments: isInitialLoadingEnrollments,
         isEnrollmentsError,
         enrollmentCounts,
         statusToDelete,

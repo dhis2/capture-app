@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
@@ -24,7 +25,6 @@ import {
 import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { newEventSaveTypes } from './newEventSaveTypes';
-import type { ReduxAction } from '../../../../../../capture-core-utils/types';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();

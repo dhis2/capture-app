@@ -1,11 +1,11 @@
 import React from 'react';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type {
     ColumnConfig,
     DefaultWidgetColumnConfig,
     PluginWidgetColumnConfig, WidgetConfig,
 } from '../DefaultEnrollmentLayout.types';
-import { errorCreator } from '../../../../../../../capture-core-utils';
 import { EnrollmentPlugin } from '../../../EnrollmentPlugin';
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
 

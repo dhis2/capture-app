@@ -1,5 +1,5 @@
 import React, { memo, type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { FeedbackBar } from 'capture-core/components/FeedbackBar';
 import { AppPagesLoader } from './AppPagesLoader.component';
