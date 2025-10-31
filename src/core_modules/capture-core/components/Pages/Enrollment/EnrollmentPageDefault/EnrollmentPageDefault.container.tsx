@@ -93,7 +93,7 @@ export const EnrollmentPageDefault = () => {
         apiAttributeValues: attributeValues,
         executionEnvironment: 'EnrollmentDashboard',
     });
-    const rulesRunning = !ruleEffects || ruleExecutionInProgress('EnrollmentDashboard');
+    const rulesReady = ruleEffects && !ruleExecutionInProgress('EnrollmentDashboard');
 
     const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
@@ -201,7 +201,7 @@ export const EnrollmentPageDefault = () => {
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}
-            stages={stages && !rulesRunning ? stages : undefined}
+            stages={stages && rulesReady ? stages : undefined}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
             onAddNew={onAddNew}

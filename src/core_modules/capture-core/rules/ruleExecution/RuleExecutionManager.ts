@@ -42,14 +42,14 @@ export class RuleExecutionManager {
     }
 
     resolveExecution(executionEnvironment: string, executionId: number, result: any) {
-        if (this.executions[executionEnvironment] && this.executions[executionEnvironment].executionId === executionId) {
+        if (this.executions[executionEnvironment]?.executionId === executionId) {
             this.executions[executionEnvironment].resolve(result);
             this.executions[executionEnvironment] = undefined;
         }
     }
 
     abortExecution(executionEnvironment: string, executionId: number, error: any) {
-        if (this.executions[executionEnvironment] && this.executions[executionEnvironment].executionId === executionId) {
+        if (this.executions[executionEnvironment]?.executionId === executionId) {
             this.executions[executionEnvironment].reject(error);
             this.executions[executionEnvironment] = undefined;
         }

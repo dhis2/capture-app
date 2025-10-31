@@ -37,7 +37,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         apiAttributeValues: attributeValues,
         executionEnvironment: 'SelectProgramStageForNewEvent',
     });
-    const rulesRunning = ruleExecutionInProgress('SelectProgramStageForNewEvent');
+    const rulesReady = ruleEffects && !ruleExecutionInProgress('SelectProgramStageForNewEvent');
 
     useEffect(() => {
         if (enrollmentsError || programError) {
@@ -109,7 +109,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                     header={i18n.t('Choose a stage for a new event')}
                     noncollapsible
                 >
-                    {!rulesRunning ?
+                    {rulesReady ?
                         <ProgramStageSelectorComponent
                             programStages={availableStages}
                             onSelectProgramStage={onSelectProgramStage}

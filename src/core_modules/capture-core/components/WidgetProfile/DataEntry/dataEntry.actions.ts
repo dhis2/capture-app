@@ -125,7 +125,7 @@ export const getUpdateFieldActions = async ({
             rulesActions,
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
             updateFieldUIAction,
-        ].filter(action => action),
+        ].filter(Boolean),
         dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );
 };
