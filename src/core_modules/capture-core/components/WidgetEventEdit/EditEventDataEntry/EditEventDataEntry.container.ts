@@ -97,7 +97,7 @@ const mapDispatchToProps = (dispatch: any, props: any): any => ({
     onSave: () => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         const { onSaveExternal } = props;
         window.scrollTo(0, 0);
-        onSaveExternal && onSaveExternal();
+        Promise.resolve().then(() => { onSaveExternal && onSaveExternal(); });
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation));
     },
     onSaveAndCompleteEnrollment: () => (
