@@ -19,12 +19,14 @@ export type GetApplicableRuleEffectsForTrackerProgramInput = {
     attributeValues?: TEIValues,
     enrollmentData?: Enrollment,
     formFoundation?: RenderFoundation,
+    executionEnvironment?: string,
 };
 
 export type GetApplicableRuleEffectsForEventProgramInput = {
     program: EventProgram,
     orgUnit: OrgUnit | null,
     currentEvent?: EventData,
+    executionEnvironment?: string,
 };
 
 export type GetApplicableRuleEffectsInput = {
@@ -38,4 +40,5 @@ export type GetApplicableRuleEffectsInput = {
     programRuleVariables: Array<ProgramRuleVariable>,
     trackedEntityAttributes?: TrackedEntityAttributes,
     foundationForPostProcessing: RenderFoundation,
+    executionEnvironment?: string,
 };

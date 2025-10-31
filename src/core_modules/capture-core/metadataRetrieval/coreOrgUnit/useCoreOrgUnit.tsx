@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
@@ -13,9 +13,18 @@ export function useCoreOrgUnit(orgUnitId: string): {
     const dispatch = useDispatch();
     const reduxOrgUnit = useSelector(({ organisationUnits }: any) => organisationUnits && organisationUnits[orgUnitId]);
     const fetchId = reduxOrgUnit ? undefined : orgUnitId;
-    // These hooks do no work when id is undefined
+    // These hooks do nothing when id is undefined
     const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
+
+    const coreOrgUnit = useRef(undefined);
+
+    useEffect(() => {
+        if (orgUnit && orgUnitGroups && coreOrgUnit.current) {
+            dispatch(orgUnitFetched(coreOrgUnit.current));
+            coreOrgUnit.current = undefined;
+        }
+    }, [dispatch, orgUnit, orgUnitGroups]);
 
     if (reduxOrgUnit) {
         return { orgUnit: reduxOrgUnit };
@@ -29,13 +38,11 @@ export function useCoreOrgUnit(orgUnitId: string): {
 
     if (orgUnitId && orgUnit && orgUnitGroups) {
         const { displayName, ...restOrgUnit } = orgUnit;
-        const coreOrgUnit = {
+        coreOrgUnit.current = {
             ...restOrgUnit,
             name: displayName,
             groups: orgUnitGroups,
         };
-        dispatch(orgUnitFetched(coreOrgUnit));
-        return { orgUnit: coreOrgUnit };
     }
 
     return {};

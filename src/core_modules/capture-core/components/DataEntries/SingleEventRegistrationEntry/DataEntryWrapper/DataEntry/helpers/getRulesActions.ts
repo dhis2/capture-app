@@ -7,15 +7,14 @@ import {
 } from '../../../../../../rules';
 import type { RenderFoundation, EventProgram } from '../../../../../../metaData';
 import { dataEntryId, itemId, formId } from './constants';
-import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
-export const getRulesActions = ({
-    state, // temporary
+export const getRulesActions = async ({
+    state,
     program,
     formFoundation,
     orgUnit,
 }: {
-    state: ReduxState,
+    state: any,
     program: EventProgram,
     formFoundation: RenderFoundation,
     orgUnit: OrgUnit | null,
@@ -24,7 +23,7 @@ export const getRulesActions = ({
     const dataEntryValuesClient = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
     const currentEvent = { ...formValuesClient, ...dataEntryValuesClient, programStageId: formFoundation.id };
 
-    const effects = getApplicableRuleEffectsForEventProgram({
+    const effects = await getApplicableRuleEffectsForEventProgram({
         program,
         orgUnit,
         currentEvent,

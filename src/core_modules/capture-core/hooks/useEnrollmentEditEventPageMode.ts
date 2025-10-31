@@ -5,7 +5,7 @@ import { statusTypes } from '../events/statusTypes';
 import { useLocationQuery } from '../utils/routing';
 
 export const useEnrollmentEditEventPageMode = (eventStatus?: string) => {
-    const showEditEvent = useSelector(({ viewEventPage }: any) => viewEventPage?.eventDetailsSection?.showEditEvent);
+    const { showEditEvent, loading } = useSelector(({ viewEventPage }: any) => viewEventPage?.eventDetailsSection);
     const { initMode } = useLocationQuery();
 
     return useMemo(() => {
@@ -16,6 +16,9 @@ export const useEnrollmentEditEventPageMode = (eventStatus?: string) => {
         if (eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE) {
             return { currentPageMode: dataEntryKeys.EDIT };
         }
-        return { currentPageMode: showEditEvent ? dataEntryKeys.EDIT : dataEntryKeys.VIEW };
-    }, [initMode, showEditEvent, eventStatus]);
+        return {
+            currentPageMode: showEditEvent ? dataEntryKeys.EDIT : dataEntryKeys.VIEW,
+            isLoading: loading,
+        };
+    }, [initMode, showEditEvent, loading, eventStatus]);
 };

@@ -54,28 +54,37 @@ export const runRulesOnUpdateFieldBatch = async ({
     querySingleResource: QuerySingleResource;
     onGetValidationContext: () => any;
 }) => {
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        stage,
-        orgUnit,
-        currentEvent,
-        enrollmentData,
-        attributeValues,
-        formFoundation,
-    });
+    try {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage,
+            orgUnit,
+            currentEvent,
+            enrollmentData,
+            attributeValues,
+            formFoundation,
+            executionEnvironment: 'NewEnrollment',
+        });
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: formFoundation ? formFoundation.getElements() : program.attributes,
-        effects,
-        querySingleResource,
-        onGetValidationContext,
-    });
+        const effectsWithValidations = await validateAssignEffects({
+            dataElements: formFoundation ? formFoundation.getElements() : program.attributes,
+            effects,
+            querySingleResource,
+            onGetValidationContext,
+        });
 
-    return batchActions([
-        updateRulesEffects(effectsWithValidations, formId),
-        rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
-        ...extraActions,
-    ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
+        return batchActions([
+            updateRulesEffects(effectsWithValidations, formId),
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...extraActions,
+        ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
+    } catch (error) {
+        console.log(error);
+        return batchActions([
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...extraActions,
+        ]);
+    }
 };
 
 export const updateDataEntryFieldBatch = (
