@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
@@ -17,7 +17,7 @@ export const useRulesEngine = ({
 }) => {
     const dispatch = useDispatch();
     const program = useMemo(() => programId && getEventProgramThrowIfNotFound(programId), [programId]);
-    const orgUnitRef = useRef<OrgUnit | undefined>(undefined);
+    const [orgUnit, setOrgUnit] = useState<OrgUnit | undefined>(undefined);
     const state = useSelector(({
         dataEntriesFieldsUI,
         dataEntriesFieldsValue,
@@ -40,7 +40,7 @@ export const useRulesEngine = ({
                 formFoundation,
             }).then((effects) => {
                 dispatch(batchActions([effects]));
-                orgUnitRef.current = orgUnitContext;
+                setOrgUnit(orgUnitContext);
             });
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
@@ -50,7 +50,8 @@ export const useRulesEngine = ({
         program,
         orgUnitContext,
         formFoundation,
+        setOrgUnit,
     ]);
 
-    return orgUnitRef.current === orgUnitContext;
+    return orgUnit === orgUnitContext;
 };

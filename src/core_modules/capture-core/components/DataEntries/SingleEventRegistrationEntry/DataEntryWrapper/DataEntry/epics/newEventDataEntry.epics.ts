@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { map, filter, concatMap } from 'rxjs/operators';
+import { map, filter, mergeMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
@@ -166,25 +166,32 @@ const runRulesForNewSingleEvent = async ({
     const { coreOrgUnit, cached } =
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
-    const effects = await getApplicableRuleEffectsForEventProgram({
-        program,
-        orgUnit: coreOrgUnit,
-        currentEvent,
-    });
+    try {
+        const effects = await getApplicableRuleEffectsForEventProgram({
+            program,
+            orgUnit: coreOrgUnit,
+            currentEvent,
+            executionEnvironment: 'NewSingleEvent',
+        });
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: foundation.getElements(),
-        effects,
-        querySingleResource,
-    });
+        const effectsWithValidations = await validateAssignEffects({
+            dataElements: foundation.getElements(),
+            effects,
+            querySingleResource,
+        });
 
-    return batchActions([
-        updateRulesEffects(effectsWithValidations, formId),
-        rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
-        ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
-    ],
-    batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
-    );
+        return batchActions([
+            updateRulesEffects(effectsWithValidations, formId),
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
+        ], batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
+    } catch (error) {
+        console.log(error);
+        return batchActions([
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
+        ], batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
+    }
 };
 
 export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
@@ -196,7 +203,7 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        concatMap((action) => {
+        mergeMap((action) => {
             const { dataEntryId, itemId, uid } = action.payload;
             const runRulesForNewSingleEventPromise = runRulesForNewSingleEvent({
                 store,
@@ -217,7 +224,7 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (
         ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        concatMap((action) => {
+        mergeMap((action) => {
             const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,
