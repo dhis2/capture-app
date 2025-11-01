@@ -10,13 +10,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
 # Cyrille Kabrane, 2025
+# Esther Tokouli, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Cyrille Kabrane, 2025\n"
+"Last-Translator: Esther Tokouli, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -180,7 +181,7 @@ msgid "Relationships"
 msgstr "Relations"
 
 msgid "Assignee"
-msgstr "Assignee"
+msgstr "Attributaire"
 
 msgid "Saving to"
 msgstr "Enregistrement à"
@@ -213,8 +214,7 @@ msgstr "Terminé"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
-"Veuillez ajouter ou annuler un commentaire avant avant d'enregistrer "
-"l'événement"
+"Veuillez ajouter ou annuler un commentaire avant d'enregistrer l'événement"
 
 msgid "Save and add another"
 msgstr "Enregistrer et ajouter un autre"
@@ -265,7 +265,8 @@ msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
-"En quittant cette page, vous ne pourrez plus choisir une nouvelle relation"
+"En quittant cette page, vous perdrez les sélections que vous avez effectuées"
+" pour une nouvelle relation."
 
 msgid "Yes, discard"
 msgstr "Oui, supprimer"
@@ -302,8 +303,8 @@ msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
-"Un doublon existe (mais des erreurs ont été commises). Voir le journal pour "
-"plus de détails."
+"Il existe un doublon (mais il y a eu des erreurs). Voir le journal pour plus"
+" de détails)."
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -590,7 +591,7 @@ msgid "Show all"
 msgstr "Tout afficher"
 
 msgid "Selected program"
-msgstr "Programme choisi"
+msgstr "Programme sélectionné"
 
 msgid "Some programs are being filtered."
 msgstr "Certains programmes sont en cours de filtrage."
@@ -620,7 +621,7 @@ msgid "Write comment"
 msgstr "Écrire un commentaire"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "L'entité suivie avec id \"{{teiId}}\" n'existe pas"
+msgstr "L'instance d'entité suivie avec l'id \"{{teiId}}\" n'existe pas"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
@@ -736,7 +737,7 @@ msgid "Please select an organisation unit."
 msgstr "Veuillez sélectionner une unité d'organisation."
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr "Choisir {{missingCategories}} pour commencer le rapport"
+msgstr "Choisir {{missingCategories}} pour commencer la déclaration"
 
 msgid "Save as new"
 msgstr "Enregistrer comme nouveau"
@@ -898,7 +899,8 @@ msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
-"En quittant cette page, vous ne pourrez plus choisir une nouvelle relation"
+"En quittant cette page, vous perdrez toutes les sélections que vous avez "
+"effectuées pour une nouvelle relation."
 
 msgid "No one is assigned to this event"
 msgstr "Personne n'est affecté à cet événement"
@@ -907,7 +909,7 @@ msgid "Assign"
 msgstr "Assigner"
 
 msgid "Event assigned to {{name}}"
-msgstr "Événement attribué à {{name}}"
+msgstr "Événement assigné à {{name}}"
 
 msgid "Feedbacks"
 msgstr "Réactions"
@@ -972,7 +974,7 @@ msgid "Mark as cancelled"
 msgstr "Marquer comme annulé"
 
 msgid "Mark incomplete"
-msgstr "Mark comme inachevé"
+msgstr "Marquer comme non terminé"
 
 msgid "Delete enrollment"
 msgstr "Supprimer l'inscription"
@@ -1045,7 +1047,7 @@ msgid "Error"
 msgstr "Erreur"
 
 msgid "Warning"
-msgstr "Attention"
+msgstr "Avertissement"
 
 msgid "Comments about this event"
 msgstr "Commentaires sur cet événement"
@@ -1073,7 +1075,7 @@ msgid "Person Profile"
 msgstr "Profil d'une personne"
 
 msgid "New {{ eventName }} event"
-msgstr "Nouvel événement {{ eventName }}"
+msgstr "Nouvel {{ eventName }} événement"
 
 msgid "Show {{ rest }} more"
 msgstr "Afficher {{ rest }} plus"
@@ -1115,13 +1117,13 @@ msgid "Delete event"
 msgstr "Effacer l'événement"
 
 msgid "Download as JSON"
-msgstr "Télécharger en JSON"
+msgstr "Télécharger au format JSON"
 
 msgid "Download as XML"
-msgstr "Télécharger en XML"
+msgstr "Télécharger au format XML"
 
 msgid "Download as CSV"
-msgstr "Télécharger en CSV"
+msgstr "Télécharger au format CSV"
 
 msgid "Download with current filters"
 msgstr "Télécharger avec les filtres actuels"
@@ -1232,7 +1234,7 @@ msgid "Organisation unit search failed."
 msgstr "Échec de la recherche de l'unité d'organisation"
 
 msgid "Error saving tracked entity instance"
-msgstr "Erreur lors de l'enregistrement de l'entité suivie"
+msgstr "Erreur lors de l'enregistrement de l'instance d'entité suivie"
 
 msgid "Error saving enrollment"
 msgstr "Erreur lors de l'enregistrement de l'inscription"
@@ -1280,4 +1282,4 @@ msgid "Set area"
 msgstr "Définir une zone"
 
 msgid "Compatibility mode"
-msgstr "Mode compatibilité"
+msgstr "Mode de compatibilité"
