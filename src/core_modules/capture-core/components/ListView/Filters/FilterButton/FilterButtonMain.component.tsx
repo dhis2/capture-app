@@ -141,7 +141,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
 
         return (
             <ActiveFilterButton
-                innerRef={this.refActiveFilterInstance}
+                ref={this.refActiveFilterInstance}
                 onChange={this.openFilterSelector}
                 onClear={this.handleClearFilter}
                 iconClass={classes.icon}

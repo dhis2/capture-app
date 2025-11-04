@@ -136,7 +136,7 @@ class SearchFormPlain extends React.Component<Props, State> {
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector
-            innerRef={(instance: any) => {
+            ref={(instance: any) => {
                 this.orgUnitSelectorInstance = instance;
             }}
             searchId={this.props.searchId}
