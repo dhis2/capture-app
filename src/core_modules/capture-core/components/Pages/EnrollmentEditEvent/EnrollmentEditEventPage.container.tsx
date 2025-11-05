@@ -223,7 +223,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [initMode, enrollmentId, eventId, orgUnitId, navigate]);
 
     const onGoBack = () =>
-        navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        navigate(`/enrollment?${buildUrlQueryString({ enrollmentId, orgUnitId })}`);
 
     const onNavigateToEvent = (eventIdToRedirectTo: string) => {
         navigate(
