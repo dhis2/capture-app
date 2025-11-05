@@ -90,8 +90,8 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         this.isUnmounted = false;
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.options !== this.props.options) {
+    componentDidUpdate(prevProps: Props) {
+        if (this.props.options !== prevProps.options) {
             this.prevFilterValue = null;
         }
     }

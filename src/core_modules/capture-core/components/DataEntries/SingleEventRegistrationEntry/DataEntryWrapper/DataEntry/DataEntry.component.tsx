@@ -594,11 +594,8 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
-    UNSAFE_componentWillMount() {
-        this.props.onSetSaveTypes(null);
-    }
-
     componentDidMount() {
+        this.props.onSetSaveTypes(null);
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
             this.relationshipsInstance.scrollIntoView();
             this.props.onScrollToRelationships();

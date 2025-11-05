@@ -48,9 +48,9 @@ export const withLabel = (hocParams?: HOCParamsContainer) =>
                 this.setClasses(props.classes);
             }
 
-            UNSAFE_componentWillReceiveProps(newProps: Props) {
-                const nextClasses = newProps.classes || {};
-                const prevClasses = this.props.classes || {};
+            componentDidUpdate(prevProps: Props) {
+                const nextClasses = this.props.classes || {};
+                const prevClasses = prevProps.classes || {};
 
                 if (Object.keys(nextClasses).length !== Object.keys(prevClasses).length) {
                     this.setClasses(nextClasses);

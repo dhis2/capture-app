@@ -60,9 +60,9 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
             }
 
 
-            UNSAFE_componentWillReceiveProps(newProps: Props) {
-                if (newProps.rulesOptionsVisibility !== this.props.rulesOptionsVisibility) {
-                    this.filteredOptions = CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(newProps);
+            componentDidUpdate(prevProps: Props) {
+                if (this.props.rulesOptionsVisibility !== prevProps.rulesOptionsVisibility) {
+                    this.filteredOptions = CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(this.props);
                 }
             }
 
