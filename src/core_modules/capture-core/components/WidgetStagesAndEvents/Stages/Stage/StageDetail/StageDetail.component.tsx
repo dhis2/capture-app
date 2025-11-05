@@ -40,7 +40,7 @@ const styles: Readonly<any> = {
     },
     scrollBox: {
         overflowX: 'auto',
-        overflow: 'hidden',
+        overflowY: 'hidden',
     },
     hidenButton: { display: 'none !important' },
     icon: {
