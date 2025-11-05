@@ -1,7 +1,7 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import log from 'loglevel';
-import { errorCreator } from '../../capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 
 export const useOrganisationUnit = (orgUnitId: string | null | undefined, fields?: string): {
     orgUnit: any,

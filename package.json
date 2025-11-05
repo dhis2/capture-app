@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "104.1.0",
+    "version": "104.6.3",
     "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
@@ -10,17 +10,19 @@
     ],
     "dependencies": {
         "@dhis2-ui/calendar": "^10.7.6",
+        "@dhis2/rules-engine-javascript": "104.6.3",
         "@dhis2/app-runtime": "^3.14.5",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/rule-engine": "^3.3.10",
-        "@dhis2/rules-engine-javascript": "104.1.0",
         "@dhis2/ui": "^10.9.0",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
         "@popperjs/core": "^2.11.6",
         "@react-leaflet/core": "^1.1.1",
         "@redux-offline/redux-offline": "^2.6.0",
+        "@tanstack/react-query": "4.40.0",
+        "@tanstack/react-query-devtools": "4",
         "autosuggest-highlight": "^3.3.4",
         "d2-utilizr": "^0.2.15",
         "date-fns": "^1.29.0",
@@ -41,7 +43,6 @@
         "react-leaflet-draw": "0.19.0",
         "react-leaflet-search-unpolyfilled": "^0.1.0",
         "react-popper": "^2.2.4",
-        "react-query": "3",
         "react-redux": "^7.2.8",
         "react-router-dom": "^5.3.0",
         "react-select": "^1.2.1",
@@ -64,6 +65,7 @@
         "start:forCypress": "yarn workspaces run build && node scripts/startAppForCypress.js",
         "build": "yarn verifyCacheVersion && yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
         "build:standalone": "yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",
+        "serve": "npx serve -s build/app",
         "test": "yarn workspaces run build && d2-app-scripts test",
         "test:debug": "yarn workspaces run build && react-scripts --inspect-brk test --runInBand",
         "jsdoc": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
@@ -71,6 +73,8 @@
         "tsc:check": "./node_modules/.bin/tsc --noEmit && yarn workspaces run tsc:check",
         "cy:open": "export NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://127.0.0.1:3000' && cypress open\"",
         "cy:run": "export NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://127.0.0.1:3000' && cypress run\"",
+        "cy:open:fast": "export NODE_OPTIONS=--openssl-legacy-provider && yarn build:standalone && concurrently --kill-others \"yarn serve\" \"wait-on 'http-get://127.0.0.1:3000' && cypress open\"",
+        "cy:run:fast": "export NODE_OPTIONS=--openssl-legacy-provider && yarn build:standalone && concurrently --kill-others \"yarn serve\" \"wait-on 'http-get://127.0.0.1:3000' && cypress run\"",
         "verifyCacheVersion": "node scripts/verifyCacheVersion.js",
         "postinstall": "husky install && node scripts/createSymlinkToInternalPackages.mjs",
         "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/",
@@ -93,8 +97,8 @@
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",
         "@types/node": "^22.13.13",
-        "@types/react": "^19.0.12",
-        "@types/react-dom": "16.9.25",
+        "@types/react": "18.3.1",
+        "@types/react-dom": "18.3.1",   
         "@types/react-router-dom": "^5.3.3",
         "@typescript-eslint/eslint-plugin": "^4.0.0",
         "@typescript-eslint/parser": "^4.0.0",
@@ -130,7 +134,9 @@
         "@dhis2-ui/calendar": "^10.7.6",
         "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7",
-        "i18next": "^20.5.0"
+        "i18next": "^20.5.0",
+        "@types/react": "18.3.1",
+        "@types/react-dom": "18.3.1"
     },
     "browserslist": {
         "production": [
@@ -143,5 +149,6 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    }
+    },
+    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

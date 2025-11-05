@@ -8,7 +8,6 @@ import { scopeTypes } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
-import type { Enrollment } from '../../../metaData';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
@@ -23,7 +22,12 @@ const styles = () => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string, teiId?: string) => (
+const translatedTextWithStylesForProgram = (
+    trackedEntityName: string,
+    programName: string,
+    orgUnitName: string,
+    teiId?: string,
+) => (
     teiId ? <span>
         {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
             programName,
@@ -73,17 +77,20 @@ const EnrollmentRegistrationEntryPlain =
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit && enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
+                  enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
                   <>
                       <EnrollmentDataEntry
                           teiId={teiId}
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
-                          enrollmentMetadata={enrollmentMetadata as Enrollment}
+                          enrollmentMetadata={enrollmentMetadata}
                           id={id}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
-                          onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future')}
+                          onGetUnsavedAttributeValues={() =>
+                              console.log('onGetUnsavedAttributeValues will be here in the future')
+                          }
                           {...rest}
                       />
                       <div className={classes.actions}>
@@ -111,7 +118,12 @@ const EnrollmentRegistrationEntryPlain =
                       </div>
 
                       <InfoIconText>
-                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name, teiId)}
+                          {translatedTextWithStylesForProgram(
+                              trackedEntityName.toLowerCase(),
+                              programName,
+                              orgUnit.name,
+                              teiId,
+                          )}
                       </InfoIconText>
                   </>
               }
@@ -130,6 +142,9 @@ export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
       withErrorMessagePostProcessor((({ enrollmentMetadata }: any) => enrollmentMetadata.trackedEntityType.name)),
       withLoadingIndicator(() => ({ height: '350px' })),
       withDuplicateCheckOnSave(),
-      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }: any) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true }),
+      withSaveHandler({
+          onGetFormFoundation: ({ enrollmentMetadata }: any) => enrollmentMetadata && enrollmentMetadata.enrollmentForm,
+          onIsCompleting: () => true,
+      }),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain) as any;

@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';
+import { pipe } from 'capture-core-utils';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
@@ -19,7 +20,6 @@ import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { convertFormToClient, convertClientToServer } from '../../converters';
-import { pipe } from '../../../capture-core-utils';
 import { useProgramExpiryForUser } from '../../hooks';
 
 export const WidgetEventSchedule = ({

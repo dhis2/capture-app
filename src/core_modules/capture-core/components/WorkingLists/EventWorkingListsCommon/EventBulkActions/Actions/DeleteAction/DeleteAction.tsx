@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { errorCreator } from '../../../../../../../capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { Props } from './DeleteAction.types';
 
@@ -82,7 +82,9 @@ export const DeleteAction = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        {i18n.t('This cannot be undone. Are you sure you want to delete the selected events?')}
+                        {i18n.t('This cannot be undone.')}
+                        {' '}
+                        {i18n.t('Are you sure you want to delete the selected events?')}
                     </ModalContent>
 
                     <ModalActions>

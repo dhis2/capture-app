@@ -72,7 +72,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 
-    static getDerivedStateFromProps(props: any, state: State) {
+    static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
         if (props.selectedOrgUnitId !== state.prevOrgUnitId) {
             return {
                 prevOrgUnitId: props.selectedOrgUnitId,
@@ -239,4 +239,4 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 }
-export const CategorySelector = withStyles(styles)(CategorySelectorPlain) as any;
+export const CategorySelector = withStyles(styles)(CategorySelectorPlain as React.ComponentType<Props>) as any;

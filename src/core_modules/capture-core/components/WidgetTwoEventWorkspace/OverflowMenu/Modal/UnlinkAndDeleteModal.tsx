@@ -10,7 +10,7 @@ import {
 } from '@dhis2/ui';
 import log from 'loglevel';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkAndDeleteModal.types';
 
@@ -64,9 +64,9 @@ export const UnlinkAndDeleteModal = ({
             <ModalTitle>{i18n.t('Unlink and delete linked event')}</ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t(
-                        'Are you sure you want to remove the link and delete the linked event? This action permanently removes the link, linked event, and all related data.',
-                    )}
+                    {i18n.t('Are you sure you want to remove the link and delete the linked event?')}
+                    {' '}
+                    {i18n.t('This action permanently removes the link, linked event, and all related data.')}
                 </p>
             </ModalContent>
             <ModalActions>

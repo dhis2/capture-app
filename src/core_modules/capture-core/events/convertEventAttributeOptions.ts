@@ -1,4 +1,4 @@
-import { FEATURES, featureAvailable } from '../../capture-core-utils';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 
 const attributeCategoryKey = 'attributeCategoryOptions';
 export const convertEventAttributeOptions = (event: any) => {

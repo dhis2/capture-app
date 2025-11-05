@@ -2,8 +2,8 @@ import React from 'react';
 import log from 'loglevel';
 import { colors, IconArrowRight16, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { errorCreator } from 'capture-core-utils';
 import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
-import { errorCreator } from '../../../../../../capture-core-utils';
 
 type OwnProps = {
     changeType: typeof CHANGE_TYPES[keyof typeof CHANGE_TYPES];

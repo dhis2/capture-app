@@ -4,6 +4,7 @@ import { ofType } from 'redux-observable';
 import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
+import type { ApiUtils, ReduxStore } from 'capture-core-utils/types';
 import { convertValue as convertToClient } from '../../../converters/formToClient';
 import { convertValue as convertToServer } from '../../../converters/clientToServer';
 import {
@@ -24,7 +25,6 @@ import {
 import { getSearchGroups } from '../getSearchGroups';
 import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
-import type { ApiUtils, ReduxStore } from '../../../../capture-core-utils/types';
 
 import {
     addFormData,
@@ -135,7 +135,9 @@ const searchTei = ({
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId)).pipe(
+    return from(getTrackedEntityInstances(
+        queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId,
+    )).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }: any) => {
             if (searchGroup.unique && trackedEntityInstanceContainers.length === 0 && queryArgs.program) {
                 return searchViaUniqueIdOnScopeTrackedEntityType({
@@ -185,7 +187,8 @@ export const teiSearchChangePageEpic = (action$: any, store: any, { absoluteApiP
                 takeUntil(
                     action$.pipe(
                         filter((ab: any) =>
-                            isArray(ab.payload) && ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
+                            isArray(ab.payload) &&
+                            ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
             );
         }));
 
@@ -214,7 +217,8 @@ export const teiSearchEpic = (action$: any, store: ReduxStore, { absoluteApiPath
                 takeUntil(
                     action$.pipe(
                         filter((ab: any) =>
-                            isArray(ab.payload) && ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
+                            isArray(ab.payload) &&
+                            ab.payload.some((a: any) => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
         }));
 
 export const teiSearchSetProgramEpic = (action$: any, store: any) =>
@@ -256,7 +260,10 @@ export const teiNewSearchEpic = (action$: any, store: any) =>
 
             const contextId = currentTeiSearch.selectedProgramId || currentTeiSearch.selectedTrackedEntityTypeId;
 
-            const searchGroups = getSearchGroups(currentTeiSearch.selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
+            const searchGroups = getSearchGroups(
+                currentTeiSearch.selectedTrackedEntityTypeId,
+                currentTeiSearch.selectedProgramId,
+            );
 
             const addFormDataActions = searchGroups ? searchGroups.map((sg: any, i: number) => {
                 const key = getSearchFormId(searchId, contextId, i.toString());

@@ -8,7 +8,7 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from 'capture-core/rules/rulesEngine';
 import { getDateFnLocale } from './getDateFnLocale';
 
 function setLogLevel() {
@@ -182,9 +182,10 @@ export async function initializeAsync({
             baseUrl,
         });
     } catch (error) {
-        throw new DisplayException(i18n.t(
-            'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
-        ), error);
+        throw new DisplayException(
+            // eslint-disable-next-line max-len
+            i18n.t('A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.'),
+            error);
     }
 
     const uiLocale = userSettings.keyUiLocale;

@@ -35,11 +35,13 @@ When('you set the age filter to 10-20', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input[placeholder="Min"]')
-        .type('10');
+        .type('10')
+        .blur();
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input[placeholder="Max"]')
-        .type('20');
+        .type('20')
+        .blur();
 });
 
 Then('the age filter button should show that the filter is in effect', () => {
@@ -88,7 +90,7 @@ When(/^you set the first name filter to (.*)$/, (name) => {
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
-        .find('input')
+        .find('input[placeholder="Contains text"]')
         .type(name)
         .blur();
 });

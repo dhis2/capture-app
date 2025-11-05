@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { relatedStageActions } from '../constants';
 
 const ReactQueryAppNamespace = 'capture';
@@ -42,7 +42,11 @@ export const useAddEventWithRelationship = ({
             onMutate: (payload: { serverData: Record<string, unknown> }) => {
                 onUpdateOrAddEnrollmentEvents && onUpdateOrAddEnrollmentEvents((payload.serverData as any).events);
             },
-            onSuccess: (_, payload: { linkMode: string; eventIdToRedirectTo?: string; serverData: Record<string, unknown> }) => {
+            onSuccess: (_, payload: {
+                linkMode: string;
+                eventIdToRedirectTo?: string;
+                serverData: Record<string, unknown>
+            }) => {
                 setIsLinking(false);
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);

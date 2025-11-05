@@ -16,10 +16,10 @@ export const useUserAvatar = (userId?: string) => {
         },
     };
     const queryOptions = { enabled: Boolean(userId) };
-    const { data, isLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data, isInitialLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     return {
         avatarId: (data as UserAvatarResponse)?.avatar?.id,
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

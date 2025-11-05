@@ -6,7 +6,7 @@ import { Button, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
@@ -83,12 +83,19 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const isEditable = useMemo(() =>
-        Array.isArray(trackedEntityInstanceAttributes) && trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
+        Array.isArray(trackedEntityInstanceAttributes) &&
+        trackedEntityInstanceAttributes.length > 0 &&
+        trackedEntityTypeAccess?.data?.write &&
+        !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, trackedEntityInstanceAttributes);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
+        teiId,
+        program as any,
+        trackedEntityInstanceAttributes,
+    );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
@@ -163,7 +170,10 @@ const WidgetProfilePlain = ({
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
                                 canWriteData={canWriteData}
-                                trackedEntity={trackedEntity ? { trackedEntity: trackedEntity.trackedEntity || teiId } : { trackedEntity: teiId }}
+                                trackedEntity={trackedEntity ?
+                                    { trackedEntity: trackedEntity.trackedEntity || teiId } :
+                                    { trackedEntity: teiId }
+                                }
                                 onDeleteSuccess={onDeleteSuccess}
                                 displayChangelog={!!displayChangelog}
                                 trackedEntityData={clientAttributesWithSubvalues}

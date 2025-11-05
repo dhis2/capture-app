@@ -10,7 +10,9 @@ import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
-import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
+import {
+    addEnrollmentEventPageDefaultActionTypes,
+} from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';

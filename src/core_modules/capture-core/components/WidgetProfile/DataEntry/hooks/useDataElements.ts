@@ -25,4 +25,7 @@ const getDataElementsInProgram = (program: any) =>
             {},
         );
 
-export const useDataElements = (program: any) => useMemo(() => program && program.programStages && getDataElementsInProgram(program), [program]);
+export const useDataElements = (program: any) => useMemo(
+    () => program && program.programStages && getDataElementsInProgram(program),
+    [program],
+);

@@ -2,11 +2,11 @@ import { spacers } from '@dhis2/ui';
 import * as React from 'react';
 import type { ReactElement } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
-import type { ReduxAction } from '../../../capture-core-utils/types';
-
+import type { PluginContext } from '../D2Form/FormFieldPlugin/FormFieldPlugin.types';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
@@ -139,6 +139,7 @@ export type DataEntryOutputProps = {
     onUpdateDataEntryField?: (...args: any[]) => void,
     onGetValidationContext?: () => any,
     orgUnit?: { id?: string },
+    pluginContext?: PluginContext,
 };
 
 type OwnProps = DataEntryOutputProps & {

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import type { ProgramRule } from '@dhis2/rules-engine-javascript';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
@@ -75,7 +75,9 @@ type PageStatusParams = {
     event: Record<string, unknown>;
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }: PageStatusParams) => {
+const getPageStatus = ({
+    orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event,
+}: PageStatusParams) => {
     if (isLoading) {
         return pageStatuses.LOADING;
     }
@@ -149,7 +151,9 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const { program } = useProgramInfo(programId);
     const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
-    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules as ProgramRule[]));
+    const hideWidgets = useHideWidgetByRuleLocations(
+        program?.programRules.concat(programStage?.programRules as ProgramRule[]),
+    );
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);

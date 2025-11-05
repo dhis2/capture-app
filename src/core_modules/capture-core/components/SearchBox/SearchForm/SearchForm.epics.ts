@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     searchBoxActionTypes,
     fallbackSearch,
@@ -54,11 +54,15 @@ const searchViaUniqueIdStream = ({
     formId?: string;
     programTETId?: string;
 }) =>
-    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined)).pipe(
+    from(getTrackedEntityInstances(
+        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined,
+    )).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
-                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId }));
+                return of(searchViaUniqueIdOnScopeTrackedEntityType({
+                    trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId,
+                }));
             }
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId, enrollments } } = searchResults[0];
@@ -117,7 +121,9 @@ const searchViaAttributesStream = ({
     querySingleResource: QuerySingleResource;
     programId?: string;
 }) =>
-    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined)).pipe(
+    from(getTrackedEntityInstances(
+        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined,
+    )).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return showSuccessResultsViewOnSearchBox(

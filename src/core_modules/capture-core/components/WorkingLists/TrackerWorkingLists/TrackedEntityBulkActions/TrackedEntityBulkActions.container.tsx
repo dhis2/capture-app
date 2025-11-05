@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
 import { TrackedEntityBulkActionsComponent } from './TrackedEntityBulkActions.component';
 import type { ContainerProps } from './TrackedEntityBulkActions.types';
-import { errorCreator } from '../../../../../capture-core-utils';
 import { useBulkDataEntryConfigurations } from '../../../common/bulkDataEntry';
 
 export const TrackedEntityBulkActions = ({
@@ -19,7 +19,8 @@ export const TrackedEntityBulkActions = ({
     const { activeList } = useBulkDataEntryConfigurations(programId);
 
     const injectSelectedRowsToBulkDataEntryPlugin = useCallback(() => {
-        recordsOrder && onOpenBulkDataEntryPlugin && onOpenBulkDataEntryPlugin(recordsOrder.filter(recordOrder => selectedRows[recordOrder]));
+        recordsOrder && onOpenBulkDataEntryPlugin &&
+            onOpenBulkDataEntryPlugin(recordsOrder.filter(recordOrder => selectedRows[recordOrder]));
     }, [onOpenBulkDataEntryPlugin, recordsOrder, selectedRows]);
 
     if (programStageId) {

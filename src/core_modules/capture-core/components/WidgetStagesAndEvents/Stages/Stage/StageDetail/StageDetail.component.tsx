@@ -17,6 +17,7 @@ import {
     Tooltip,
 } from '@dhis2/ui';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { sortDataFromEvent } from './hooks/sortFunctions';
 import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
@@ -24,7 +25,6 @@ import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
-import { errorCreator } from '../../../../../../capture-core-utils';
 import { useClientDataElements } from './hooks/useClientDataElements';
 
 
@@ -118,7 +118,8 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = (column: { id: string; sortDirection?: string | null }) => (column.id === columnName ? sortDirection : column.sortDirection);
+    const getSortDirection = (column: { id: string; sortDirection?: string | null }) =>
+        (column.id === columnName ? sortDirection : column.sortDirection);
     const onSortIconClick = ({ name, direction }: { name?: string; direction: any }) => {
         if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
             setSortInstructions(defaultSortState);

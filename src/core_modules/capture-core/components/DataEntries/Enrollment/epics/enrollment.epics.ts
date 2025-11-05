@@ -2,6 +2,7 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
+import type { ApiUtils } from 'capture-core-utils/types';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
@@ -11,7 +12,6 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
 import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
 import type { QuerySingleResource } from '../../../../utils/api';
-import type { ApiUtils } from '../../../../../capture-core-utils/types';
 
 type Context = {
     dataEntryId: string;
@@ -65,7 +65,11 @@ const runRulesOnEnrollmentUpdate = ({
     const currentClientMainData = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation) || {};
     const { currentEnrollmentValues, currentEventMainData } = splitCurrentClientMainData(state, currentClientMainData);
     const currentEvent = stage
-        ? { ...currentEventValues, ...currentEventMainData, programStageId: stage.id }
+        ? {
+            ...currentEventValues,
+            ...currentEventMainData,
+            programStageId: stage.id,
+        }
         : undefined;
 
     const runRulesOnUpdateFieldBatchPromise = runRulesOnUpdateFieldBatch({

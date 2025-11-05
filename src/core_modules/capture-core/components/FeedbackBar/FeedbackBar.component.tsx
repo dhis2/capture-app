@@ -53,4 +53,5 @@ const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
     );
 };
 
-export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain) as ComponentType<FeedbackBarComponentProps>;
+export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain) as
+    ComponentType<FeedbackBarComponentProps>;

@@ -64,7 +64,10 @@ type OptionContainer = {
 class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
     static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
         const filterValueLC = filterValue.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-        return (options && options.filter(o => o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1)) || [];
+        return (options &&
+            options.filter(o =>
+                o.label.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().indexOf(filterValueLC) > -1,
+            )) || [];
     }
 
     containerInstance: any;
@@ -146,7 +149,10 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             this.prevFilteredOptions =
                 OptionsSelectVirtualizedPlain.getFilteredOptions(this.prevFilteredOptions, this.state.filterValue);
         }
-        this.prevFilteredOptions = OptionsSelectVirtualizedPlain.getFilteredOptions(this.props.options, this.state.filterValue);
+        this.prevFilteredOptions = OptionsSelectVirtualizedPlain.getFilteredOptions(
+            this.props.options,
+            this.state.filterValue,
+        );
         this.prevFilterValue = this.state.filterValue;
 
         return this.prevFilteredOptions;

@@ -1,6 +1,6 @@
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
-import type { ApiAssignedUser } from '../../../capture-core-utils/types/api-types';
 
 export const scheduleEventWidgetActionTypes = {
     EVENT_SCHEDULE_REQUEST: 'ScheduleEvent.RequestScheduleEvent',

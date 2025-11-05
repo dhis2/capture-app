@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const useTrackedEntityAttributes = ({ selectedScopeId, attributeIds }: Props) => {
-    const { data: cachedTrackedEntityAttributes, isLoading, isError } = useIndexedDBQuery(
+    const { data: cachedTrackedEntityAttributes, isInitialLoading, isError } = useIndexedDBQuery(
         ['cachedTrackedEntityAttributes', selectedScopeId],
         () => getTrackedEntityAttributes(attributeIds ?? []),
         { enabled: !!attributeIds },
@@ -15,7 +15,7 @@ export const useTrackedEntityAttributes = ({ selectedScopeId, attributeIds }: Pr
 
     return {
         cachedTrackedEntityAttributes,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

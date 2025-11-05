@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
+import type { EpicAction, ReduxStore } from 'capture-core-utils/types/global';
 import { filter, map, concatMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { programCollection } from 'capture-core/metaDataMemoryStores'; // Works
 import {
     lockedSelectorActionTypes,
     invalidSelectionsFromUrl,
@@ -13,11 +13,10 @@ import {
     startLoading,
     completeUrlUpdate,
 } from './LockedSelector.actions';
-// import { programCollection } from '../../metaDataMemoryStores'; // Fails
+import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
-import type { EpicAction, ReduxStore } from '../../../capture-core-utils/types/global';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(

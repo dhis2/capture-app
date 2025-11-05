@@ -1,13 +1,20 @@
 import { v4 as uuid } from 'uuid';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
+import log from 'loglevel';
+import { pipe } from 'capture-core-utils';
+import { convertServerToClient, convertClientToView } from 'capture-core/converters';
+import { dataElementTypes } from 'capture-core/metaData';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle, useFormValidations } from './hooks';
 import { getUpdateFieldActions, updateTeiRequest, setTeiModalError } from './dataEntry.actions';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
+import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
+
+const convertFn = pipe(convertServerToClient, convertClientToView);
 
 export const DataEntry = ({
     programAPI,
@@ -53,8 +60,32 @@ export const DataEntry = ({
         geometry: geometry ?? null,
         dataEntryFormConfig,
     });
-    const { formFoundation } = context;
+    const { formFoundation, enrollment } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
+
+    const pluginContext: PluginContext | undefined = useMemo(() => {
+        const pluginContextData: any = {};
+
+        if (enrollment?.enrolledAt) {
+            pluginContextData.enrolledAt = {
+                setDataEntryFieldValue: () => {
+                    log.error('Cannot update enrolledAt from the profile widget. This field is read-only in this context.');
+                },
+                value: convertFn(enrollment.enrolledAt, dataElementTypes.DATE),
+            };
+        }
+
+        if (enrollment?.occurredAt) {
+            pluginContextData.occurredAt = {
+                setDataEntryFieldValue: () => {
+                    log.error('Cannot update occurredAt from the profile widget. This field is read-only in this context.');
+                },
+                value: convertFn(enrollment.occurredAt, dataElementTypes.DATE),
+            };
+        }
+
+        return pluginContextData;
+    }, [enrollment]);
 
     const onUpdateFormField = useCallback(
         (innerAction: any) => {
@@ -129,6 +160,7 @@ export const DataEntry = ({
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
                 orgUnit={{ id: orgUnitId }}
+                pluginContext={pluginContext}
             />
         )
     );

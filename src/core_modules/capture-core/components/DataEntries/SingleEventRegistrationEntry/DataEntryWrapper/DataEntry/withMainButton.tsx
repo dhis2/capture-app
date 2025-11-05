@@ -70,7 +70,11 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
 
-        getFormVerticalButtons = (dataEntryHasChanges: boolean | null, hasRecentlyAddedEvents: boolean | null, saveTypes: Array<string> | null) => {
+        getFormVerticalButtons = (
+            dataEntryHasChanges: boolean | null,
+            hasRecentlyAddedEvents: boolean | null,
+            saveTypes: Array<string> | null,
+        ) => {
             const buttons = saveTypes ?
                 saveTypes.map(saveType => this.getButtonDefinition(saveType)) :
                 [

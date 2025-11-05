@@ -101,7 +101,13 @@ const RegisterTeiPlain = ({
         />
     ), [trackedEntityName]);
 
-    const ExistingUniqueValueDialogActions = useCallback(({ teiId, attributeValues }: { teiId: string; attributeValues: any }) => (
+    const ExistingUniqueValueDialogActions = useCallback(({
+        teiId,
+        attributeValues,
+    }: {
+        teiId: string;
+        attributeValues: any
+    }) => (
         <Button
             dataTest="existing-unique-value-link-tei-button"
             primary
@@ -136,9 +142,6 @@ const RegisterTeiPlain = ({
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
-                renderCardActions={({ item }: { item: any }) =>
-                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
-                }
             />
         </div>
     );

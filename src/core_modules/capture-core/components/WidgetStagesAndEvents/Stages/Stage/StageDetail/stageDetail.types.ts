@@ -1,5 +1,5 @@
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { StageDataElement, StageCommonProps } from '../../../types/common.types';
-import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 type ExtractedProps = {
     events: Array<ApiEnrollmentEvent>;

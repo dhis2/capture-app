@@ -1,6 +1,6 @@
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
-import type { ApiEnrollmentEvent } from '../../../../capture-core-utils/types/api-types';
 
 export const batchActionTypes = {
     START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH: 'StartSaveEditEventDataEntryBatchForViewSingleEvent',
@@ -87,8 +87,12 @@ export const startDeleteEventDataEntry = (serverData: any, eventId: string, para
     });
 
 
-export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: any) =>
-    actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
+export const startCreateNewAfterCompleting = ({
+    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
+}: any) =>
+    actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({
+        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
+    });
 
 export const requestSaveAndCompleteEnrollment = ({
     itemId,

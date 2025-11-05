@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import type { EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 
 import {
     initializeNewRelationship,
@@ -117,7 +117,9 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
     const relationship = relationshipData.find(rd => rd.to.data);
     if (relationship) {
         const teiPayload = { trackedEntities: [{ ...relationship.to.data }] };
-        return startSaveTeiForNewEventRelationship(teiPayload, selections, triggerAction, relationshipData, relationship.clientId);
+        return startSaveTeiForNewEventRelationship(
+            teiPayload, selections, triggerAction, relationshipData, relationship.clientId,
+        );
     }
 
     const serverRelationshipData = {
@@ -128,7 +130,9 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
 };
 
 
-export const saveNewEventRelationshipsIfExistsEpic = (action$: EpicAction<SaveRelationshipsPayload, SaveRelationshipsMeta>) =>
+export const saveNewEventRelationshipsIfExistsEpic = (
+    action$: EpicAction<SaveRelationshipsPayload, SaveRelationshipsMeta>,
+) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),
         map((action) => {

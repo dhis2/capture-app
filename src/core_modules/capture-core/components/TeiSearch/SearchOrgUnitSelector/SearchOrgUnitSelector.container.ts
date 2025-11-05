@@ -6,7 +6,7 @@ import {
     clearOrgUnitsFilter,
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
+import { SearchOrgUnitSelector as SearchOrgUnitSelectorComponent } from './SearchOrgUnitSelector.component';
 
 const mapStateToProps = (state: any, props: any) => {
     const searchId = props.searchId;
@@ -39,6 +39,6 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
 });
 
-export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps)(
-    SearchOrgUnitSelectorRefHandler,
+export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(
+    SearchOrgUnitSelectorComponent,
 );

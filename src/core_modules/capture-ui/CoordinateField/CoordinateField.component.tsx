@@ -59,7 +59,8 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     getPosition = (): Array<number> | null => {
         const { value } = this.props;
         let convertedValue: Array<number> | null = null;
-        if (value?.latitude && value?.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
+        if (value?.latitude && value?.longitude &&
+            !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
             convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
         }
         return convertedValue;
@@ -123,7 +124,11 @@ export class CoordinateField extends React.Component<PlainProps, State> {
 
     renderMapIcon = () => {
         const { classes, shrinkDisabled, disabled } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, mapIconContainerDisabled: mapIconContainerDisabledCustomClass } = classes || {};
+        const {
+            mapIconContainer: mapIconContainerCustomClass,
+            mapIcon: mapIconCustomClass,
+            mapIconContainerDisabled: mapIconContainerDisabledCustomClass,
+        } = classes || {};
         const mapIconContainerClass = cx(
             { [defaultClasses.mapIconContainer]: shrinkDisabled },
             { [defaultClasses.mapIconContainerWithMargin]: !shrinkDisabled },
@@ -162,7 +167,14 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     key="map"
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
+                    <WrappedLeafletSearch
+                        position="topleft"
+                        inputPlaceholder="Search"
+                        closeResultsOnClick
+                        search={null}
+                        mapStateModifier={this.search}
+                        showMarker={false}
+                    />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -189,8 +201,12 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     );
 
     renderLatitude = () => {
-        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        const {
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps
+        } = this.props;
+        const {
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses
+        } = classes || {};
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
@@ -207,8 +223,12 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     renderLongitude = () => {
-        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        const {
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps
+        } = this.props;
+        const {
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses
+        } = classes || {};
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
+import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
@@ -30,7 +31,6 @@ import {
     getCategoryOptionsValidatorContainers,
     AOCsectionKey,
 } from '../../DataEntryDhis2Helpers';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 

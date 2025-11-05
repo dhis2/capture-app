@@ -20,7 +20,11 @@ type OptionSetDict = {
     [optionSetId: string]: TransformedOptionGroup[];
 };
 
-const createOptionSetToOptionGroupDictionary = ({ optionGroups }: { optionGroups: OptionGroup[] }): OptionSetDict => optionGroups.reduce(
+const createOptionSetToOptionGroupDictionary = ({
+    optionGroups,
+}: {
+    optionGroups: OptionGroup[]
+}): OptionSetDict => optionGroups.reduce(
     (acc: OptionSetDict, optionGroup: OptionGroup) => {
         const optionSetId = optionGroup.optionSet.id;
         const transformedOptionGroup: TransformedOptionGroup = {
@@ -66,11 +70,11 @@ export const useOptionGroups = (program: any) => {
         enabled: Boolean(program),
         select: createOptionSetToOptionGroupDictionary,
     };
-    const { data, isLoading, error } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data, isInitialLoading, error } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     return {
         optionGroups: program ? data : null,
-        loading: isLoading,
+        loading: isInitialLoading,
         error,
     };
 };

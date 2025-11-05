@@ -1,6 +1,6 @@
 import { theme as dhis2Theme, colors } from '@dhis2/ui';
 
-const HTMLFONTSIZE = 16;
+const HTMLFONTSIZE = 14;
 
 export const theme = {
     direction: 'ltr',
@@ -148,7 +148,7 @@ export const theme = {
         fontWeightRegular: 400,
         fontWeightMedium: 500,
         pxToRem(size: number) {
-            const coef = HTMLFONTSIZE / 14;
+            const coef = HTMLFONTSIZE / 16;
             return `${(size / HTMLFONTSIZE) * coef}rem`;
         },
         display4: {

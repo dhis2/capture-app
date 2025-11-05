@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import type { ReduxStore } from '../../../../../core_modules/capture-core-utils/types/global';
+import type { ReduxStore } from 'capture-core-utils/types/global';
 import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.component';
 
 type StateProps = {

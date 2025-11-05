@@ -5,7 +5,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -72,7 +72,8 @@ export const EnrollmentPageDefault = () => {
     /*
         regarding useTrackerProgram, useProgramMetadata, useProgramStages
         We should refactor this to only grab metadata from IndexedDB and build the appropriate data structures
-        needed. At the moment it is a bit chaotic and confusing because some of the metadata is retrieved from the in-memory objects
+        needed. At the moment it is a bit chaotic and confusing because some of the metadata is retrieved from the
+        in-memory objects
         (these objects remain in memory for the entire session, consuming a lot of memory and we don't want to add additional
         data here) and some is grabbed from IndexedDB.
         https://dhis2.atlassian.net/browse/DHIS2-17574

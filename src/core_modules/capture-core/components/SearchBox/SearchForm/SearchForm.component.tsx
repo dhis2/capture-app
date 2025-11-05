@@ -2,6 +2,7 @@ import React, { type ComponentType, useContext, useEffect, useMemo, useState } f
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
+import { UnsupportedAttributesNotification } from '../../../utils/warnings';
 import { D2Form } from '../../D2Form';
 import { searchScopes } from '../SearchBox.constants';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -9,7 +10,7 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const styles: Readonly<any> = {
+const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -39,9 +40,9 @@ const styles: Readonly<any> = {
         fontSize: '14px',
         fontWeight: 500,
         flexGrow: 1,
-        color: colors.red600,
+        color: theme.palette.error.main,
     },
-};
+});
 
 const useFormDataLifecycle = (
     searchGroupsForSelectedScope,
@@ -101,7 +102,12 @@ const SearchFormIndex = ({
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
 
-    useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore, keptFallbackSearchFormValues);
+    useFormDataLifecycle(
+        searchGroupsForSelectedScope,
+        addFormIdToReduxStore,
+        removeFormDataFromReduxStore,
+        keptFallbackSearchFormValues,
+    );
 
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState<string | null>(null);
@@ -155,7 +161,11 @@ const SearchFormIndex = ({
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, resultsPageSize });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId, resultsPageSize });
+                    searchViaAttributesOnScopeTrackedEntityType({
+                        trackedEntityTypeId: searchScopeId,
+                        formId,
+                        resultsPageSize,
+                    });
                     break;
                 default:
                     break;
@@ -257,7 +267,13 @@ const SearchFormIndex = ({
             {
                 searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
+                    .map(({
+                        searchForm,
+                        formId,
+                        searchScope,
+                        minAttributesRequiredToSearch,
+                        unsupportedAttributes,
+                    }) => {
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
@@ -308,6 +324,11 @@ const SearchFormIndex = ({
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
+                                        {!!unsupportedAttributes?.length && (
+                                            <UnsupportedAttributesNotification
+                                                unsupportedAttributes={unsupportedAttributes}
+                                            />
+                                        )}
                                     </div>
                                 </Section>
                             </div>

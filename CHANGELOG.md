@@ -1,3 +1,73 @@
+## [104.6.3](https://github.com/dhis2/capture-app/compare/v104.6.2...v104.6.3) (2025-11-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4397](https://github.com/dhis2/capture-app/issues/4397)) ([9ae9da8](https://github.com/dhis2/capture-app/commit/9ae9da86e9d82c849a1ed08dd590f86955179dd5))
+
+## [104.6.2](https://github.com/dhis2/capture-app/compare/v104.6.1...v104.6.2) (2025-10-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16869] Capture top-bar showing UID when editing attribute ([#4381](https://github.com/dhis2/capture-app/issues/4381)) ([2c52f39](https://github.com/dhis2/capture-app/commit/2c52f399fe8fd863d47989a9de270bcae0686d1b))
+
+## [104.6.1](https://github.com/dhis2/capture-app/compare/v104.6.0...v104.6.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4392](https://github.com/dhis2/capture-app/issues/4392)) ([334ae3e](https://github.com/dhis2/capture-app/commit/334ae3e7a4b188fa7ac1a506cf637737b7e2dde6))
+
+# [104.6.0](https://github.com/dhis2/capture-app/compare/v104.5.0...v104.6.0) (2025-10-24)
+
+
+### Features
+
+* [DHIS2-20001] Hide unsupported attribute types from search form in Capture ([#4383](https://github.com/dhis2/capture-app/issues/4383)) ([4bfe20d](https://github.com/dhis2/capture-app/commit/4bfe20d85f012ceda9404137b4c12c96456dc1b1))
+
+# [104.5.0](https://github.com/dhis2/capture-app/compare/v104.4.0...v104.5.0) (2025-10-23)
+
+
+### Features
+
+* pass enrollment dates to form field plugins in widget profile ([#4389](https://github.com/dhis2/capture-app/issues/4389)) ([f94a2b1](https://github.com/dhis2/capture-app/commit/f94a2b13552337ca52751ba3fc974b4a9b7eb07d))
+
+# [104.4.0](https://github.com/dhis2/capture-app/compare/v104.3.0...v104.4.0) (2025-10-22)
+
+
+### Features
+
+* [DHIS2-18739] Update feedback and indicator widgets in the Registration page ([#4385](https://github.com/dhis2/capture-app/issues/4385)) ([d2713d5](https://github.com/dhis2/capture-app/commit/d2713d5c2c16cbaf214bfeee19d3415e8ad80ce6))
+
+# [104.3.0](https://github.com/dhis2/capture-app/compare/v104.2.0...v104.3.0) (2025-10-21)
+
+
+### Features
+
+* [DHIS2-20000] Show message when no searchable attributes exist for an entity type ([#4382](https://github.com/dhis2/capture-app/issues/4382)) ([6677824](https://github.com/dhis2/capture-app/commit/6677824a22c3b7cc4901448a76d8b544815b875f))
+
+# [104.2.0](https://github.com/dhis2/capture-app/compare/v104.1.2...v104.2.0) (2025-10-17)
+
+
+### Features
+
+* [18904] Working List Filter component for `null` and `not null` Values ([#4270](https://github.com/dhis2/capture-app/issues/4270)) ([aea03d7](https://github.com/dhis2/capture-app/commit/aea03d72332964e0fb2d7368233a7c528619dd8f))
+
+## [104.1.2](https://github.com/dhis2/capture-app/compare/v104.1.1...v104.1.2) (2025-10-14)
+
+
+### Performance Improvements
+
+* [DHIS2-19724] optimize api-calls on enrollment dashboard ([#4132](https://github.com/dhis2/capture-app/issues/4132)) ([955556b](https://github.com/dhis2/capture-app/commit/955556b94bc6916fe79b122c384c937887d41143))
+
+## [104.1.1](https://github.com/dhis2/capture-app/compare/v104.1.0...v104.1.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20060] use rule engine's user roles as fallback ([#4376](https://github.com/dhis2/capture-app/issues/4376)) ([cdad149](https://github.com/dhis2/capture-app/commit/cdad14933b62afc409130e62763563dfedff9020))
+
 # [104.1.0](https://github.com/dhis2/capture-app/compare/v104.0.1...v104.1.0) (2025-09-10)
 
 

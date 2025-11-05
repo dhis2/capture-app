@@ -26,7 +26,9 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
         templateSharingType,
         ...passOnProps
     } = props;
-    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<'NEW' | 'REPLACE' | 'DELETE' | 'SHARING' | null>(null);
+    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = useState<
+        'NEW' | 'REPLACE' | 'DELETE' | 'SHARING' | null
+    >(null);
     const templateMaintenanceInstance = useRef<any>(null);
 
     const handleClose = useCallback(() => {
@@ -116,7 +118,8 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
             currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
         }
 
-        if (!isDefault && !notPreserved && access.write && access.update && currentViewHasTemplateChanges && onUpdateTemplate) {
+        if (!isDefault && !notPreserved && access.write && access.update &&
+            currentViewHasTemplateChanges && onUpdateTemplate) {
             savedViewContents.push(getSaveItem());
         }
 

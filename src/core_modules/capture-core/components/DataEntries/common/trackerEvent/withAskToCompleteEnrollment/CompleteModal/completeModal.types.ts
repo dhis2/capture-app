@@ -1,4 +1,4 @@
-import type { ApiEnrollment, ApiEnrollmentEvent } from '../../../../../../../capture-core-utils/types/api-types';
+import type { ApiEnrollment, ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 
 export type Props = {
     programId: string;

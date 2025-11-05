@@ -51,15 +51,20 @@ const LinkedEntityTableBodyPlain = ({
                                     return (
                                         <Tooltip
                                             key={`${entityId}-${id}`}
-                                            content={i18n.t('To open this relationship, please wait until saving is complete')}
+                                            content={i18n.t(
+                                                'To open this relationship, please wait until saving is complete',
+                                            )}
                                             closeDelay={50}
                                         >
                                             {({ onMouseOver, onMouseOut, ref }) => (
                                                 <DataTableCell
                                                     className={classes.row}
                                                     key={`${entityId}-${id}`}
-                                                    onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation } as any)}
-                                                    // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
+                                                    onClick={() => !pendingApiResponse &&
+                                                        onLinkedRecordClick({ ...context.navigation, ...navigation } as any)
+                                                    }
+                                                    // @ts-expect-error - UI library expects a ref prop,
+                                                    // but it is not defined in the types
                                                     ref={(tableCell) => {
                                                         if (tableCell) {
                                                             if (pendingApiResponse) {
@@ -81,7 +86,9 @@ const LinkedEntityTableBodyPlain = ({
                                 })}
                             {context.display.showDeleteButton ? (
                                 <DeleteRelationship
-                                    handleDeleteRelationship={() => onDeleteRelationship({ relationshipId: relationshipId! })}
+                                    handleDeleteRelationship={() =>
+                                        onDeleteRelationship({ relationshipId: relationshipId! })
+                                    }
                                     disabled={pendingApiResponse}
                                 />
                             ) : null}

@@ -4,9 +4,9 @@ import log from 'loglevel';
 import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
-import type { ApiEnrollmentEvent } from '../../../../../../../capture-core-utils/types/api-types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
@@ -21,7 +21,10 @@ import {
 } from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
-const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' }];
+const baseKeys = [
+    { id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' },
+    { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' },
+];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
@@ -109,7 +112,12 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, ev
 };
 
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, enableUserAssignment: boolean, formFoundation?: { getLabel: (key: string) => string }) => {
+const useComputeHeaderColumn = (
+    dataElements: Array<StageDataElement>,
+    hideDueDate: boolean,
+    enableUserAssignment: boolean,
+    formFoundation?: { getLabel: (key: string) => string },
+) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
@@ -124,7 +132,10 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
         }, [] as Array<{ id: string; header: string; type: keyof typeof dataElementTypes; sortDirection: string }>);
         return [
             ...getBaseColumns({ formFoundation })
-                .filter(col => (enableUserAssignment || col.id !== 'assignedUser') && (!hideDueDate || col.id !== 'scheduledAt')),
+                .filter(col =>
+                    (enableUserAssignment || col.id !== 'assignedUser') &&
+                    (!hideDueDate || col.id !== 'scheduledAt'),
+                ),
             ...dataElementHeaders];
     }, [dataElements, hideDueDate, enableUserAssignment, formFoundation]);
 
@@ -152,7 +163,10 @@ function getDataElement(stageDataElement: StageDataElementClient | undefined, ty
     return dataElement;
 }
 
-const formatRowForView = (row: Record<string, unknown>, dataElements: Array<StageDataElementClient>) => Object.keys(row).reduce((acc, id) => {
+const formatRowForView = (
+    row: Record<string, unknown>,
+    dataElements: Array<StageDataElementClient>,
+) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
     const stageDataElement = dataElements.find(el => el.id === id);
     const { type } = stageDataElement || {};

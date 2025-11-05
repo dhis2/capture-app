@@ -2,8 +2,8 @@ import moment from 'moment';
 import {
     convertFromIso8601,
 } from '@dhis2/multi-calendar-dates';
-import { systemSettingsStore } from '../../../../capture-core/metaDataMemoryStores';
-import { padWithZeros } from '../../../../capture-core-utils/date';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
+import { padWithZeros } from 'capture-core-utils/date';
 
 /**
  * Converts a date from ISO calendar to local calendar

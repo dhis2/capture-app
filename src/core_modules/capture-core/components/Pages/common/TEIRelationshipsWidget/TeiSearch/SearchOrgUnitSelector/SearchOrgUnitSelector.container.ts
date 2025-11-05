@@ -6,7 +6,7 @@ import {
     clearOrgUnitsFilter,
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
+import { SearchOrgUnitSelector as SearchOrgUnitSelectorComponent } from './SearchOrgUnitSelector.component';
 import type { ReduxState, ReduxDispatch } from '../../../../../App/withAppUrlSync.types';
 
 const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
@@ -40,6 +40,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps)(
-    SearchOrgUnitSelectorRefHandler,
+export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(
+    SearchOrgUnitSelectorComponent,
 );

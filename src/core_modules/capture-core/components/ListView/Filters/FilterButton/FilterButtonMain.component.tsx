@@ -67,7 +67,8 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
         const { itemId, onSetVisibleSelector } = this.props;
         onSetVisibleSelector(itemId);
 
-        // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
+        // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all
+        // (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
         if (this.props.filterValue) {
             this.activeFilterButtonInstance && this.activeFilterButtonInstance.clearIsHovered();
         }
@@ -140,7 +141,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
 
         return (
             <ActiveFilterButton
-                innerRef={this.refActiveFilterInstance}
+                ref={this.refActiveFilterInstance}
                 onChange={this.openFilterSelector}
                 onClear={this.handleClearFilter}
                 iconClass={classes.icon}

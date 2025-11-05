@@ -1,8 +1,8 @@
 import React, { useState, useEffect, type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { spacers, colors } from '@dhis2/ui';
-
+import { spacers, colors, NoticeBox } from '@dhis2/ui';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import type { ComponentProps, Props } from './SearchBox.types';
 import { searchBoxStatus } from '../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -54,7 +54,9 @@ const Index = ({
     searchableFields,
 }: Props & WithStyles<typeof getStyles>) => {
     const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(preselectedProgramId);
-    const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
+    const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(
+        preselectedProgramId ? searchScopes.PROGRAM : null,
+    );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
@@ -98,7 +100,7 @@ const Index = ({
                                         onSelect={handleSearchScopeSelection}
                                         headerText={i18n.t('Search for')}
                                         footerText={i18n.t(
-                                            'You can also choose a program from the top bar and search in that program',
+                                            'You can also select a program from the top bar to search within that program.',
                                         )}
                                     />
                                 )}
@@ -125,7 +127,21 @@ const Index = ({
             </div>
 
             {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
-                <IncompleteSelectionsMessage>{String(i18n.t('Choose a type to start searching'))}</IncompleteSelectionsMessage>
+                <IncompleteSelectionsMessage>
+                    {String(i18n.t('Choose a type to start searching'))}
+                </IncompleteSelectionsMessage>
+            )}
+            {selectedSearchScopeId && !searchGroupsForSelectedScope.length && (
+                <NoticeBox
+                    warning
+                    title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
+                        trackedEntityName: capitalizeFirstLetter(trackedEntityName),
+                        interpolation: { escapeValue: false },
+                    })}
+                >
+                    {/* eslint-disable-next-line max-len */}
+                    {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
+                </NoticeBox>
             )}
         </>
     );

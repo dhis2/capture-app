@@ -4,7 +4,7 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
 import type { ClientNote, FormNote, SaveContext } from './WidgetEventNote.types';
 
@@ -35,7 +35,11 @@ const createServerData = (eventId: string, note: string, useNewEndpoint: boolean
     return { event: eventId, notes: [{ value: note }] };
 };
 
-export const addNoteForEventEpic = (action$: EpicAction<AddNoteActionPayload>, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForEventEpic = (
+    action$: EpicAction<AddNoteActionPayload>,
+    store: ReduxStore,
+    { querySingleResource, fromClientDate }: ApiUtils,
+) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
         switchMap((action: { payload: AddNoteActionPayload }) => {

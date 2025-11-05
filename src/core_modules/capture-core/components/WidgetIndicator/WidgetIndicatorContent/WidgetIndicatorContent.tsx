@@ -3,11 +3,11 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacers, colors } from '@dhis2/ui';
 import { cx } from '@emotion/css';
 import type {
-    ContentType,
-    FilteredKeyValue,
-    FilteredText,
-    WidgetData,
-} from '../../WidgetFeedback/WidgetFeedback.types';
+    FilteredIndicatorKeyValue,
+    FilteredIndicatorText,
+    IndicatorWidgetData,
+    IndicatorProps,
+} from '../WidgetIndicator.types';
 import { sortIndicatorsFn } from './sortIndicatorsFn';
 
 const styles = {
@@ -49,16 +49,16 @@ const styles = {
     },
 };
 
-type Props = ContentType & WithStyles<typeof styles>;
+type Props = IndicatorProps & WithStyles<typeof styles>;
 
-const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Props) => {
-    if (!widgetData?.length) {
+const WidgetIndicatorContentComponent = ({ indicators, indicatorEmptyText, classes }: Props) => {
+    if (!indicators?.length) {
         return (
             <div className={classes.container}>
-                <p className={classes.noIndicatorText}>{emptyText}</p>
+                <p className={classes.noIndicatorText}>{indicatorEmptyText}</p>
             </div>);
     }
-    const sortedWidgetData = widgetData.sort(sortIndicatorsFn);
+    const sortedWidgetData = indicators.sort(sortIndicatorsFn);
 
     const renderLegend = (color: string) => (
         <div className={classes.legendBullet} style={{ backgroundColor: color }} />
@@ -73,7 +73,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Pro
         </div>
     );
 
-    const renderTextObject = (indicator: FilteredText, isLastItem: boolean) => (
+    const renderTextObject = (indicator: FilteredIndicatorText, isLastItem: boolean) => (
         <div
             key={indicator.id}
             className={cx(classes.indicatorRow, { isLastItem })}
@@ -83,7 +83,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Pro
         </div>
     );
 
-    const renderKeyValue = (indicator: FilteredKeyValue, isLastItem: boolean) => (
+    const renderKeyValue = (indicator: FilteredIndicatorKeyValue, isLastItem: boolean) => (
         <div
             key={indicator.id}
             className={cx(classes.indicatorRow, { isLastItem })}
@@ -101,13 +101,13 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Pro
 
     return (
         <div className={classes.container}>
-            {sortedWidgetData.map((action: WidgetData, index: number) => {
-                const isLast = (index + 1) === widgetData.length;
+            {sortedWidgetData.map((action: IndicatorWidgetData, index: number) => {
+                const isLast = (index + 1) === indicators.length;
                 if (typeof action === 'object') {
                     if ('key' in action) {
-                        return renderKeyValue(action as FilteredKeyValue, isLast);
+                        return renderKeyValue(action as FilteredIndicatorKeyValue, isLast);
                     } else if ('message' in action) {
-                        return renderTextObject(action as FilteredText, isLast);
+                        return renderTextObject(action as FilteredIndicatorText, isLast);
                     }
                 } else if (typeof action === 'string') {
                     return renderString(action, index, isLast);
@@ -119,4 +119,4 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Pro
 };
 
 export const WidgetIndicatorContent =
-    withStyles(styles)(WidgetIndicatorContentComponent) as ComponentType<ContentType>;
+    withStyles(styles)(WidgetIndicatorContentComponent) as ComponentType<IndicatorProps>;

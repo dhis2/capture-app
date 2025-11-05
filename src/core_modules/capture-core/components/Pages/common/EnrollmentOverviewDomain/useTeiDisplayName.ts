@@ -1,9 +1,12 @@
 import { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { pipe } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { getAttributesFromScopeId } from '../../../../metaData/helpers';
 import type { DataElement } from '../../../../metaData/DataElement';
 import { convertServerToClient, convertClientToView } from '../../../../converters';
+
+const DEFAULT_NAME = i18n.t('tracked entity instance');
 
 type Attribute = {
     valueType: string;
@@ -35,8 +38,10 @@ const getTetAttributes = (attributes: Array<Attribute>, tetAttributes: Array<Dat
 
 export const deriveTeiName = (attributes: Array<Attribute>, trackedEntityType: string, teiId: string) => {
     const tetAttributes = getAttributesFromScopeId(trackedEntityType);
-    const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
 
+    if (!attributes || !tetAttributes) return teiId ?? DEFAULT_NAME;
+
+    const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
     if (teiNameDisplayInReports) return teiNameDisplayInReports;
 
     const teiName = getTetAttributes(attributes, tetAttributes);

@@ -95,7 +95,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             return (
                 <>
                     <InnerComponent
-                        innerRef={(innerInstance: any) => { this.innerInstance = innerInstance; }}
+                        ref={(innerInstance: any) => { this.innerInstance = innerInstance; }}
                         onSave={this.handleOnSave}
                         {...passOnProps}
                     />
@@ -106,4 +106,5 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
     };
 
 
-export const withAskToCreateNew = () => (InnerComponent: React.ComponentType<any>) => askToCreateNewComponent(InnerComponent);
+export const withAskToCreateNew = () => (InnerComponent: React.ComponentType<any>) =>
+    askToCreateNewComponent(InnerComponent);

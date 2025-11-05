@@ -1,6 +1,7 @@
 import React from 'react';
 import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     colors, spacers, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip,
@@ -13,7 +14,6 @@ import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
 import { dataElementTypes } from '../../../../../metaData';
-import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 const styles: Readonly<any> = {
     container: {

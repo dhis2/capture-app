@@ -1,11 +1,11 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import type { CaptureClientEvent } from 'capture-core-utils/types/global';
+import type { ApiEnrollmentEvent, ApiDataValue } from 'capture-core-utils/types/api-types';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
-import type { CaptureClientEvent } from '../../capture-core-utils/types/global';
 import type { EventData, EventsData } from '../rules/RuleEngine/types/ruleEngine.types';
-import type { ApiEnrollmentEvent, ApiDataValue } from '../../capture-core-utils/types/api-types';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
