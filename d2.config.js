@@ -11,7 +11,7 @@ const config = {
         app: './src/index.tsx',
     },
 
-    viteConfigExtensions: './viteConfigExtensions.mjs',
+    viteConfigExtensions: './vite.config.mts',
 };
 
 module.exports = config;

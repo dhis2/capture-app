@@ -95,7 +95,7 @@ const viteConfig = defineConfig((configEnv) => {
                 strict: false,
             },
             watch: {
-                ignored: ['**/node_modules/**'],
+                ignored: ['**/node_modules/**', '**/.d2/**'],
             },
         },
         css: {

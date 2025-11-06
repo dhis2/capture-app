@@ -25,7 +25,6 @@ export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
     } = useApiMetadataQuery(['dataEntryFormConfig', selectedScopeId], configQuery, {
         enabled: !!configExists && !!selectedScopeId,
         select: (dataEntryFormConfigQuery: any) => dataEntryFormConfigQuery?.[selectedScopeId] ?? null,
-        retry: false,
     });
 
     if (!namespaceIsLoading && configExists === false) {

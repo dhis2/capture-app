@@ -19,7 +19,7 @@ export const withStyles =
     <S extends Record<string, unknown>, T = typeof theme>(stylesOrCreator: StylesArg<S, T>, option?: Options) =>
     /* Ideally, the correct type would be: Component: React.ComponentType<P>.
          However, Material-UI's withStyles HOC was not type-checked, and using the strict type
-         reveals many TypeScript errors that can be addressed later.
+         reveals many TypeScript errors that can be addressed in DHIS2-20412.
          Therefore, I choose to use `any` for the wrapped Component to suppress strict TS errors for now.
         */
     <P extends Record<string, unknown>>(Component: React.ComponentType<any>):
