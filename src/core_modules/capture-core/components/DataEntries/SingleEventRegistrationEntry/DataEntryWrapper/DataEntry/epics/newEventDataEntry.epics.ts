@@ -17,6 +17,7 @@ import {
     getApplicableRuleEffectsForEventProgram,
     updateRulesEffects,
     validateAssignEffects,
+    executionEnvironments,
     type FieldData,
 } from '../../../../../../rules';
 import { getOpenDataEntryActions } from '../';
@@ -171,7 +172,7 @@ const runRulesForNewSingleEvent = async ({
             program,
             orgUnit: coreOrgUnit,
             currentEvent,
-            executionEnvironment: 'NewSingleEvent',
+            executionEnvironment: executionEnvironments.NEW_SINGLE_EVENT,
         });
 
         const effectsWithValidations = await validateAssignEffects({

@@ -8,6 +8,7 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    executionEnvironments,
 } from '../../../../rules';
 import type { AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 import type { EventsData } from '../../../../rules/RuleEngine/types/ruleEngine.types';
@@ -51,7 +52,7 @@ export const getRulesActions = async ({
         otherEvents: eventsRulesDependency,
         attributeValues: attributesValuesRulesDependency,
         enrollmentData: enrollmentDataRulesDependency,
-        executionEnvironment: 'NewEnrollmentEvent',
+        executionEnvironment: executionEnvironments.NEW_ENROLLMENT_EVENT,
     });
     return updateRulesEffects(effects, formId);
 };

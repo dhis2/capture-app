@@ -6,6 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { ruleExecutionInProgress } from 'capture-core/rules/rulesEngine';
+import { executionEnvironments } from 'capture-core/rules';
 import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
@@ -91,9 +92,9 @@ export const EnrollmentPageDefault = () => {
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
-        executionEnvironment: 'EnrollmentDashboard',
+        executionEnvironment: executionEnvironments.ENROLLMENT_DASHBOARD,
     });
-    const rulesReady = ruleEffects && !ruleExecutionInProgress('EnrollmentDashboard');
+    const rulesReady = ruleEffects && !ruleExecutionInProgress(executionEnvironments.ENROLLMENT_DASHBOARD);
 
     const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);

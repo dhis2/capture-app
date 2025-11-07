@@ -17,6 +17,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
     validateAssignEffects,
+    executionEnvironments,
     type FieldData,
 } from '../../../../rules';
 import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
@@ -92,14 +93,14 @@ const runRulesForEditSingleEvent = async ({
                 otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
                 enrollmentData: getEnrollmentForRulesEngine(enrollment),
                 attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
-                executionEnvironment: 'EditEnrollmentEvent',
+                executionEnvironment: executionEnvironments.EDIT_ENROLLMENT_EVENT,
             });
         } else {
             effects = await getApplicableRuleEffectsForEventProgram({
                 program,
                 orgUnit: coreOrgUnit,
                 currentEvent,
-                executionEnvironment: 'EditSingleEvent',
+                executionEnvironment: executionEnvironments.EDIT_SINGLE_EVENT,
             });
         }
     } catch (error) {

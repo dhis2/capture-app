@@ -6,6 +6,7 @@ import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    executionEnvironments,
 } from '../../../rules';
 import { RenderFoundation, Program } from '../../../metaData';
 import {
@@ -177,14 +178,14 @@ export const openEventForEditInDataEntry = async ({
             ),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
-            executionEnvironment: 'EditEnrollmentEvent',
+            executionEnvironment: executionEnvironments.EDIT_ENROLLMENT_EVENT,
         });
     } else if (program instanceof EventProgram) {
         effects = await getApplicableRuleEffectsForEventProgram({
             program,
             orgUnit,
             currentEvent,
-            executionEnvironment: 'EditSingleEvent',
+            executionEnvironment: executionEnvironments.EDIT_SINGLE_EVENT,
         });
     }
 

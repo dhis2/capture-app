@@ -15,6 +15,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
     validateAssignEffects,
+    executionEnvironments,
     type FieldData,
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -69,7 +70,7 @@ const runRulesForNewEvent = async ({
             otherEvents: events,
             attributeValues,
             enrollmentData,
-            executionEnvironment: 'NewEnrollmentEvent',
+            executionEnvironment: executionEnvironments.NEW_ENROLLMENT_EVENT,
         });
 
         const effectsWithValidations = await validateAssignEffects({

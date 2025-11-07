@@ -1,6 +1,10 @@
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
+import {
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+    executionEnvironments,
+} from '../../../../rules';
 import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
@@ -98,7 +102,7 @@ export const openDataEntryForNewEnrollmentBatch = async ({
         attributeValues: clientValues,
         enrollmentData: { enrolledAt: new Date().toISOString() },
         formFoundation,
-        executionEnvironment: 'NewEnrollment',
+        executionEnvironment: executionEnvironments.NEW_ENROLLMENT,
     });
 
     return batchActions([

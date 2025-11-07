@@ -9,6 +9,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
     validateAssignEffects,
+    executionEnvironments,
 } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../metaData';
@@ -63,7 +64,7 @@ export const runRulesOnUpdateFieldBatch = async ({
             enrollmentData,
             attributeValues,
             formFoundation,
-            executionEnvironment: 'NewEnrollment',
+            executionEnvironment: executionEnvironments.NEW_ENROLLMENT,
         });
 
         const effectsWithValidations = await validateAssignEffects({
