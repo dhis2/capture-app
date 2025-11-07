@@ -570,7 +570,7 @@ export class FormBuilder extends React.Component<Props> {
 
         const props = field.props || {};
         const fieldUI = fieldsUI[field.id] || {};
-        const value = values[field.id];
+        const value = values && values[field.id] || undefined;
 
         const commitFieldHandler = this.commitFieldUpdateFromDataElement.bind(this, field.id);
         const commitEvent = field.commitEvent || 'onBlur';
@@ -597,31 +597,22 @@ export class FormBuilder extends React.Component<Props> {
             }) : fieldUI.errorMessage;
 
         return (
-            <div
-                key={field.id}
-                className={defaultClasses.fieldOuterContainer}
-                data-test={'form-field'}
-            >
-                <div
-                    {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
-                    data-test={`form-field-${field.id}`}
-                >
-                    <field.component
-                        ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
-                        value={value}
-                        errorMessage={errorMessage}
-                        touched={fieldUI.touched}
-                        validationAttempted={validationAttempted}
-                        validatingMessage={fieldUI.validatingMessage}
-                        {...commitPropObject}
-                        {...props}
-                        {...passOnProps}
-                        {...asyncProps}
-                    />
-                </div>
-
-                {onRenderDivider && onRenderDivider(index, fields.length, field)}
-            </div>
+            <Field
+                field={field}
+                index={index}
+                length={fields.length}
+                onGetContainerProps={onGetContainerProps}
+                onRenderDivider={onRenderDivider}
+                setFieldInstance={this.setFieldInstance.bind(this)}
+                value={value}
+                errorMessage={errorMessage}
+                fieldUI={fieldUI}
+                validationAttempted={validationAttempted}
+                commitPropObject={commitPropObject}
+                props={props}
+                passOnProps={passOnProps}
+                asyncProps={asyncProps}
+            />
         );
     }
 
@@ -650,3 +641,50 @@ export class FormBuilder extends React.Component<Props> {
         );
     }
 }
+
+const Field = React.memo(({
+    field,
+    index,
+    length,
+    onGetContainerProps,
+    onRenderDivider,
+    setFieldInstance,
+    value,
+    errorMessage,
+    fieldUI,
+    validationAttempted,
+    commitPropObject,
+    props,
+    passOnProps,
+    asyncProps,
+}: any) => {
+    console.log('Rendering field');
+
+    return (
+        <div
+            key={field.id}
+            className={defaultClasses.fieldOuterContainer}
+            data-test={'form-field'}
+        >
+            <div
+                {...onGetContainerProps && onGetContainerProps(index, length, field)}
+                data-test={`form-field-${field.id}`}
+            >
+                <field.component
+                    ref={(fieldInstance) => { setFieldInstance(fieldInstance, field.id); }}
+                    value={value}
+                    errorMessage={errorMessage}
+                    touched={fieldUI.touched}
+                    validationAttempted={validationAttempted}
+                    validatingMessage={fieldUI.validatingMessage}
+                    {...commitPropObject}
+                    {...props}
+                    {...passOnProps}
+                    {...asyncProps}
+                />
+            </div>
+
+            {onRenderDivider && onRenderDivider(index, length, field)}
+        </div>
+    );
+});
