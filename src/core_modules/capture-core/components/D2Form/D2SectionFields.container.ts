@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { D2SectionFieldsComponent } from './D2SectionFields.component';
 import { updateField } from './D2SectionFields.actions';
 import {
-    makeGetSectionValues,
     makeGetHiddenFieldsValues,
     makeGetMessages,
     makeGetCompulsory,
@@ -10,13 +9,11 @@ import {
 } from './D2SectionFields.selectors';
 
 const makeMapStateToProps = () => {
-    const getSectionValues = makeGetSectionValues();
     const getHiddenFields = makeGetHiddenFieldsValues();
     const getRulesMessages = makeGetMessages();
     const getCompulsory = makeGetCompulsory();
     const getDisabled = makeGetDisabled();
     const mapStateToProps = (state: any, props: { formId: string, fieldsMetaData: any }) => ({
-        values: getSectionValues(state, props),
         rulesHiddenFields: getHiddenFields(state, props),
         rulesMessages: getRulesMessages(state, props),
         rulesCompulsoryFields: getCompulsory(state, props),

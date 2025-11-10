@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { FieldConfig, FormBuilder } from './FormBuilder/FormBuilder.component';
+import type { FormBuilder } from './FormBuilder/FormBuilder.component';
+import type { FieldConfig } from './FormBuilder';
 import { FormBuilderContainer } from './FormBuilder/FormBuilder.container';
 import { withDivider } from './FieldDivider/withDivider';
 import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
@@ -258,6 +259,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
             ...formField,
             props: {
                 ...formField.props,
+                formId: this.props.formId,
                 hidden: this.props.rulesHiddenFields[formField.id],
                 rulesErrorMessage:
                     this.props.rulesMessages[formField.id] &&
@@ -306,7 +308,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     id={formId}
                     fields={this.getFieldConfigWithRulesEffects()}
                     dataElements={this.formFields}
-                    values={values}
                     onUpdateField={this.handleUpdateField}
                     onUpdateFieldAsync={this.handleUpdateFieldAsync}
                     validateIfNoUIData
