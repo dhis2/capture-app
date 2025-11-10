@@ -1,4 +1,4 @@
-import type { MainViewConfig } from '../../../../WorkingLists/EventWorkingLists';
+import type { MainViewConfig } from '../../../../../../WorkingLists/EventWorkingLists';
 
 export type UseMainViewConfig = () => {
     mainViewConfig?: MainViewConfig;
