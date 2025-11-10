@@ -12,7 +12,16 @@ import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 import './searchPage.css';
 
-const styles: Readonly<any> = {
+const styles = {
+    containerBulkDataEntry: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        height: 'calc(100vh - 48px)',
+        '@supports (-webkit-touch-callout: none)': {
+            height: 'calc(100vh - 148px)',
+        },
+    },
     backButton: {
         margin: spacers.dp16,
         padding: '0',
@@ -54,7 +63,11 @@ const SearchPagePlain = ({
     showBulkDataEntryPlugin,
     classes,
 }: Props & WithStyles<typeof styles>) => (
-    <>
+    <div
+        className={cx({
+            [classes.containerBulkDataEntry]: showBulkDataEntryPlugin,
+        })}
+    >
         <TopBar programId={programId} orgUnitId={orgUnitId} />
         {showBulkDataEntryPlugin ? (
             <BulkDataEntry
@@ -94,7 +107,7 @@ const SearchPagePlain = ({
                 </div>
             </>
         )}
-    </>
+    </div>
 );
 
 export const SearchPageComponent =

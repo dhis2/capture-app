@@ -9,6 +9,9 @@ import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
 const styles = () => ({
     container: {
         margin: spacers.dp16,
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
     },
 });
 
