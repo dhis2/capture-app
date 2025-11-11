@@ -126,12 +126,12 @@ const Index = ({
                 </div>
             </div>
 
-            {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
+            {!selectedSearchScopeId && (!availableSearchOption || searchStatus === searchBoxStatus.INITIAL) && (
                 <IncompleteSelectionsMessage>
                     {String(i18n.t('Choose a type to start searching'))}
                 </IncompleteSelectionsMessage>
             )}
-            {selectedSearchScopeId && !searchGroupsForSelectedScope.length && (
+            {availableSearchOption && selectedSearchScopeId && !searchGroupsForSelectedScope.length && (
                 <NoticeBox
                     warning
                     title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
