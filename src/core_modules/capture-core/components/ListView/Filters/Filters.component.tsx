@@ -351,7 +351,6 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
 
     const filterButtons = React.useMemo(() => {
         const { individualElementsArray, restElementsArray } = elementsContainer;
-        // console.log(individualElementsArray, restElementsArray);
         const individualFilterButtons = renderIndividualFilterButtons({
             individualElementsArray,
             visibleSelectorId,
