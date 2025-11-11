@@ -9,6 +9,7 @@ type Props = {
     filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void;
     onUpdate: (updatedValue: Value) => void;
+    unique: boolean;
 };
 
 type State = {
