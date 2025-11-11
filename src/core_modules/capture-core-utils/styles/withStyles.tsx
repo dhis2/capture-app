@@ -1,7 +1,7 @@
 /* Custom withStyles HOC that replicates part of Material-UI’s withStyles logic.
 This implementation takes a pragmatic approach, with the goal of removing Material-UI and migrating to Emotion as smoothly as possible.
 */
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { css } from '@emotion/css';
 import { theme } from './theme';
 
@@ -26,15 +26,17 @@ export const withStyles =
         React.ForwardRefExoticComponent<React.PropsWithoutRef<P & { theme?: T }> & React.RefAttributes<any>> => {
         const WithStylesWrapper = forwardRef<any, P & { theme?: T }>((props, ref) => {
             /* Support both the plain style object and a function that gets the theme as a argument */
-            const rawStyles = stylesOrCreator && typeof stylesOrCreator === 'function'
-                ? stylesOrCreator(theme as T)
-                : stylesOrCreator;
-
-            // Transform the raw style object with Emotion’s css() so that className={classes.label} continues to work as before
-            const classes = Object.keys(rawStyles).reduce((acc, key) => {
-                acc[key] = css(rawStyles[key] as any);
-                return acc;
-            }, {} as any);
+            const classes = useMemo(() => {
+                const rawStyles =
+                    stylesOrCreator && typeof stylesOrCreator === 'function'
+                        ? stylesOrCreator(theme as T)
+                        : stylesOrCreator;
+                // Transform the raw style object with Emotion’s css() so that className={classes.label} continues to work as before
+                return Object.keys(rawStyles).reduce((acc, key) => {
+                    acc[key] = css(rawStyles[key] as any);
+                    return acc;
+                }, {} as any);
+            }, []);
 
             return option?.withTheme
                 ? <Component ref={ref} {...props} classes={classes} theme={theme} />
