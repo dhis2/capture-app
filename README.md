@@ -95,7 +95,7 @@ This setup helps in managing Cypress Cloud credits more efficiently, ensuring re
 
 ## Built With
 
-This project was bootstrapped with [Vite](https://vite.dev/). Dependency resolution for React 18 (react and react-dom) is handled implicitly through `@dhis2/cli-app-scripts`, so they do not appear as direct dependencies in package.json.
+This project was bootstrapped with [Vite](https://vite.dev/).
 
 
 ## Commits
