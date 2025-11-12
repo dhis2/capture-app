@@ -61,6 +61,7 @@ const Index = ({
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,
+        isLoading,
     } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
@@ -126,12 +127,12 @@ const Index = ({
                 </div>
             </div>
 
-            {!selectedSearchScopeId && (!availableSearchOption || searchStatus === searchBoxStatus.INITIAL) && (
+            {!isLoading && !selectedSearchScopeId && searchStatus === searchBoxStatus.INITIAL && (
                 <IncompleteSelectionsMessage>
                     {String(i18n.t('Choose a type to start searching'))}
                 </IncompleteSelectionsMessage>
             )}
-            {availableSearchOption && selectedSearchScopeId && !searchGroupsForSelectedScope.length && (
+            {!isLoading && selectedSearchScopeId && !searchGroupsForSelectedScope.length && (
                 <NoticeBox
                     warning
                     title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
