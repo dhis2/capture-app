@@ -1,3 +1,10 @@
+## [104.6.5](https://github.com/dhis2/capture-app/compare/v104.6.4...v104.6.5) (2025-11-12)
+
+
+### Bug Fixes
+
+* [DHIS2-20352] Capture app fails to load when DE or TEA referenced in indicator is missing ([#4391](https://github.com/dhis2/capture-app/issues/4391)) ([e9fa7c2](https://github.com/dhis2/capture-app/commit/e9fa7c23f65747a192676e704a242a6ea8b5119d))
+
 ## [104.6.4](https://github.com/dhis2/capture-app/compare/v104.6.3...v104.6.4) (2025-11-10)
 
 
