@@ -5,18 +5,22 @@ import React, { forwardRef, useMemo } from 'react';
 import { css } from '@emotion/css';
 import { theme } from './theme';
 
-export type WithStyles<S extends Record<string, any> | ((t: typeof theme) => S)> = {
-    classes: Record<string, any>;
+type Style = {
+    [property: string]: string | number | Style;
 };
 
-type StylesArg<S extends Record<string, unknown>, T> = S | ((t: T) => S);
+export type WithStyles<T extends Record<string, Style> | ((t: typeof theme) => Record<string, Style>)> = {
+    classes: { [K in keyof (T extends (args: unknown) => unknown ? ReturnType<T> : T)]: string }
+}
+
+type StylesArg<S extends Record<string, Style>, T> = S | ((t: T) => S);
 
 type Options = {
     withTheme?: boolean;
 }
 
 export const withStyles =
-    <S extends Record<string, unknown>, T = typeof theme>(stylesOrCreator: StylesArg<S, T>, option?: Options) =>
+    <S extends Record<string, Style>, T = typeof theme>(stylesOrCreator: StylesArg<S, T>, option?: Options) =>
     /* Ideally, the correct type would be: Component: React.ComponentType<P>.
          However, Material-UI's withStyles HOC was not type-checked, and using the strict type
          reveals many TypeScript errors that can be addressed in DHIS2-20412.
