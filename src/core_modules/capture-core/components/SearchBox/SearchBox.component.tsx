@@ -42,6 +42,7 @@ const getStyles: Readonly<any> = {
     },
 };
 
+// eslint-disable-next-line complexity
 const Index = ({
     showInitialSearchBox,
     cleanSearchRelatedInfo,
@@ -127,7 +128,7 @@ const Index = ({
                 </div>
             </div>
 
-            {!isLoading && !selectedSearchScopeId && searchStatus === searchBoxStatus.INITIAL && (
+            {!isLoading && searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
                 <IncompleteSelectionsMessage>
                     {String(i18n.t('Choose a type to start searching'))}
                 </IncompleteSelectionsMessage>
