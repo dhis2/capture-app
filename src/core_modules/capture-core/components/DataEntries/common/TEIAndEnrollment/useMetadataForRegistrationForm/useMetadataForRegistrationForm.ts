@@ -21,9 +21,11 @@ export const FieldElementObjectTypes = Object.freeze({
 });
 
 export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
-    const { program } = useProgramFromIndexedDB(selectedScopeId, { enabled: !!selectedScopeId });
-    const { locale } = useUserLocale();
     const { scopeType, tetId } = useScopeInfo(selectedScopeId);
+    const { program } = useProgramFromIndexedDB(selectedScopeId, {
+        enabled: !!(scopeType === scopeTypes.TRACKER_PROGRAM && selectedScopeId),
+    });
+    const { locale } = useUserLocale();
     const { trackedEntityType } = useTrackedEntityTypeFromIndexedDB(tetId, { enabled: !!tetId });
 
     const cachedTrackedEntityAttributeIds = useMemo(() => {

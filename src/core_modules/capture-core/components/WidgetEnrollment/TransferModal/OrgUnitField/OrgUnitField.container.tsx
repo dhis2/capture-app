@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { DebounceField } from 'capture-ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitTreeComponent } from './OrgUnitField.component';
 import { useSearchScopeWithFallback } from './useSearchScopeWithFallback';
 

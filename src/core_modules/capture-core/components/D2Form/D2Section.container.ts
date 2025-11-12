@@ -17,4 +17,8 @@ const mapStateToProps = (state: any, props: { sectionMetaData: MetaDataSection, 
 
 const mapDispatchToProps = () => ({});
 
-export const D2SectionContainer = connect(mapStateToProps, mapDispatchToProps)(withApiUtils(D2Section));
+export const D2SectionContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    null,
+    { forwardRef: true })(withApiUtils(D2Section));

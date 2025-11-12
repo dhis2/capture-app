@@ -408,8 +408,13 @@ When('you save the list with the name My custom list', () => {
         .click();
     cy.contains('Save current view')
         .click();
+
     cy.get('[data-test="view-name-content"]')
-        .type('My custom list');
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type('My custom list')
+                .blur();
+        });
 
     cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
     cy.get('button')
@@ -423,8 +428,13 @@ When('you save the list with the name Custom Program stage list', () => {
         .click();
     cy.contains('Save current view')
         .click();
+
     cy.get('[data-test="view-name-content"]')
-        .type('Custom Program stage list');
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type('Custom Program stage list')
+                .blur();
+        });
 
     cy.intercept('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
     cy.get('button')
@@ -507,7 +517,7 @@ When('you change the sharing settings', () => {
         .type('Boateng');
 
     cy.contains('Kevin Boateng').click();
-    cy.contains('Select a level').click();
+    cy.contains('Choose a level').click();
     cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
     cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
@@ -516,11 +526,14 @@ When('you change the sharing settings', () => {
 Then('you see the new sharing settings', () => {
     cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Share view').click();
-    cy.contains('Kevin Boateng')
-        .should('exist');
+    
+    cy.get('[data-test="sharing-dialog"]').within(() => {
+        cy.contains('Kevin Boateng')
+            .should('exist');
 
-    cy.contains('Close')
-        .click();
+        cy.contains('Close')
+            .click();
+    });
 
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -541,8 +554,13 @@ When('you create a copy of the working list',
             .click();
 
         const id = uuid();
+
         cy.get('[data-test="view-name-content"]')
-            .type(id);
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(id)
+                .blur();
+        });
 
         cy.intercept('POST', '**/trackedEntityInstanceFilters**')
             .as('newTrackerFilter');
@@ -872,7 +890,7 @@ Then('the working list is empty', () => {
 });
 
 Then('the assignee column is displayed', () => {
-    cy.get('[data-test="dhis2-uicore-tablehead"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Assigned to')
         .should('exist');
 

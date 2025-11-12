@@ -36,7 +36,7 @@ export const useEnrollmentFormFoundation = ({
 }: Props) => {
     const { serverVersion } = useConfig();
     const minorServerVersion = serverVersion?.minor || 0;
-    const { data: enrollment, isLoading, error } = useIndexedDBQuery(
+    const { data: enrollment, isInitialLoading, error } = useIndexedDBQuery(
         ['enrollmentForm', program?.id],
         () => buildEnrollmentForm({
             cachedProgram: program,
@@ -63,7 +63,7 @@ export const useEnrollmentFormFoundation = ({
 
     return {
         enrollment,
-        isLoading,
+        isLoading: isInitialLoading,
         error,
     };
 };

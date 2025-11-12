@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';

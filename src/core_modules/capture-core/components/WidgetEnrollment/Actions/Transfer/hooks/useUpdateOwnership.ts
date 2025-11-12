@@ -1,7 +1,7 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';

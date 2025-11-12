@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import type { WithStyles } from '@material-ui/core';
+import type { WithStyles } from 'capture-core-utils/styles';
 
 import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';

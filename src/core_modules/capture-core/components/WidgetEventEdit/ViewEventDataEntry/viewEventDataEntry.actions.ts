@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
@@ -26,7 +27,6 @@ import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '
 import { getCachedSingleResourceFromKeyAsync } from
     '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
 import { USER_METADATA_STORES } from '../../../storageControllers';
-import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 
 
 export const actionTypes = {

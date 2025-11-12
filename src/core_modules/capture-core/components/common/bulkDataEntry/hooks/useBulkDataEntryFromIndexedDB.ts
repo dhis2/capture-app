@@ -10,7 +10,7 @@ export type CachedBulkDataEntry = {
 export const useBulkDataEntryFromIndexedDB = (programId: string) => {
     const {
         data: cachedBulkDataEntry,
-        isLoading,
+        isInitialLoading,
         isError,
     } = useIndexedDBQuery(
         ['cachedBulkDataEntry', programId],
@@ -24,7 +24,7 @@ export const useBulkDataEntryFromIndexedDB = (programId: string) => {
 
     return {
         cachedBulkDataEntry,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

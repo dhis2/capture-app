@@ -1,5 +1,5 @@
 import { batchActions } from 'redux-batched-actions';
-import type { ReduxAction } from '../../../../../capture-core-utils/types';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';

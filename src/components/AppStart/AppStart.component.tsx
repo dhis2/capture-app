@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HashRouter as Router } from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
 import { AppLoader } from '../AppLoader';
@@ -9,8 +8,6 @@ import { App } from '../App';
 import { loadApp } from './appStart.actions';
 import { addBeforeUnloadEventListener } from './unload';
 import { CacheExpired } from './CacheExpired.component';
-import { JSSProviderShell } from './JSSProviderShell.component';
-import { theme } from '../../styles/uiTheme';
 
 // Define a basic type for the Redux store
 interface ReduxStore {
@@ -19,6 +16,7 @@ interface ReduxStore {
 }
 
 export const AppStart = () => {
+    const queryClient = new QueryClient();
     const [readyStatus, setReadyStatus] = useState<boolean>(false);
     const [cacheExpired, setCacheExpired] = useState<boolean>(false);
 
@@ -45,26 +43,19 @@ export const AppStart = () => {
     }
 
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <JSSProviderShell>
-                <MuiThemeProvider
-                    theme={theme}
-                >
-                    <Router>
-                        {
-                            readyStatus ?
-                                <App
-                                    store={store.current as ReduxStore}
-                                /> :
-                                <AppLoader
-                                    onRunApp={handleRunApp}
-                                    onCacheExpired={handleCacheExpired}
-                                />
-                        }
-                    </Router>
-                </MuiThemeProvider>
-            </JSSProviderShell>
-        </React.Fragment>
+        <QueryClientProvider client={queryClient}>
+            <Router>
+                {
+                    readyStatus ?
+                        <App
+                            store={store.current as ReduxStore}
+                        /> :
+                        <AppLoader
+                            onRunApp={handleRunApp}
+                            onCacheExpired={handleCacheExpired}
+                        />
+                }
+            </Router>
+        </QueryClientProvider>
     );
 };

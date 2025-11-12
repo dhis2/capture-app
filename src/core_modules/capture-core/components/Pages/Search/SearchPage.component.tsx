@@ -1,8 +1,8 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
-import classNames from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import type { Props } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
@@ -76,7 +76,7 @@ const SearchPagePlain = ({
                 <div className={classes.container}>
                     <div
                         id="left-column-search-page"
-                        className={classNames(
+                        className={cx(
                             classes.leftColumn,
                             classes.searchBoxWrapper,
                         )}

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { debounce } from 'lodash';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import VirtualizedSelect from 'react-virtualized-select';
 
 import 'react-select/dist/react-select.css';
@@ -70,7 +70,7 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             )) || [];
     }
 
-    materialUIContainerInstance: any;
+    containerInstance: any;
 
     static defaultProps = {
         translations: {
@@ -90,8 +90,8 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         this.isUnmounted = false;
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.options !== this.props.options) {
+    componentDidUpdate(prevProps: Props) {
+        if (this.props.options !== prevProps.options) {
             this.prevFilterValue = null;
         }
     }
@@ -221,7 +221,7 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         return (
             <div
                 data-test="virtualized-select"
-                ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
+                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
             >
                 <div
                     data-test={dataTest}

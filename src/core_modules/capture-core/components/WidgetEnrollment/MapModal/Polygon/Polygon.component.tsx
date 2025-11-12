@@ -1,11 +1,13 @@
 import React, { useState, useRef, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';

@@ -1,6 +1,7 @@
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
 import { filter, map } from 'rxjs/operators';
+import type { ReduxStore, EpicAction } from 'capture-core-utils/types';
 import {
     calculateSelectionsCompleteness,
     actionTypes as crossPageActionTypes,
@@ -10,7 +11,6 @@ import { newPageActionTypes } from '../New/NewPage.actions';
 import { viewEventPageActionTypes } from '../ViewEvent/ViewEventPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
-import type { ReduxStore, EpicAction } from '../../../../capture-core-utils/types';
 
 type CurrentSelectionsState = {
     programId?: string | null;

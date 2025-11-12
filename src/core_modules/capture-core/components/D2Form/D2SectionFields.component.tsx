@@ -137,9 +137,9 @@ export class D2SectionFieldsComponent extends Component<Props> {
         this.rulesCompulsoryErrors = {};
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
+    componentDidUpdate(prevProps: Props) {
+        if (this.props.fieldsMetaData !== prevProps.fieldsMetaData) {
+            this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
         }
     }
     formBuilderInstance: FormBuilder | null = null;

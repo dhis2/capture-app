@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles, withTheme } from 'capture-core-utils/styles';
 import { DateTimeRangeField as UIDateTimeRangeField } from 'capture-ui';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 

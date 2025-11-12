@@ -28,6 +28,12 @@ declare module '*.module.css' {
     export default classes;
 }
 
+// Allow imports of image files
+declare module '*.png' {
+    const value: string;
+    export default value;
+}
+
 declare module '@dhis2/app-runtime/experimental' {
     export const Plugin: any;
 }

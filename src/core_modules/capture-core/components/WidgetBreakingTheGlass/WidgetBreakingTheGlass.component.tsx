@@ -7,7 +7,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
 

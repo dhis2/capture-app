@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
 import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
