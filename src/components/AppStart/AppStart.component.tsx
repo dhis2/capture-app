@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HashRouter as Router } from 'react-router-dom';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
@@ -16,7 +15,6 @@ interface ReduxStore {
 }
 
 export const AppStart = () => {
-    const queryClient = new QueryClient();
     const [readyStatus, setReadyStatus] = useState<boolean>(false);
     const [cacheExpired, setCacheExpired] = useState<boolean>(false);
 
@@ -43,19 +41,17 @@ export const AppStart = () => {
     }
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <Router>
-                {
-                    readyStatus ?
-                        <App
-                            store={store.current as ReduxStore}
-                        /> :
-                        <AppLoader
-                            onRunApp={handleRunApp}
-                            onCacheExpired={handleCacheExpired}
-                        />
-                }
-            </Router>
-        </QueryClientProvider>
+        <Router>
+            {
+                readyStatus ?
+                    <App
+                        store={store.current as ReduxStore}
+                    /> :
+                    <AppLoader
+                        onRunApp={handleRunApp}
+                        onCacheExpired={handleCacheExpired}
+                    />
+            }
+        </Router>
     );
 };
