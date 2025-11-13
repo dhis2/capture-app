@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import type {
     Enrollment,
     TEIValues,
@@ -105,7 +106,7 @@ export const getRulesActionsForTEI = async ({
         });
         return updateRulesEffects(effectsWithValidations, formId);
     } catch (error) {
-        console.log(error);
+        log.info(error);
         return null;
     }
 };

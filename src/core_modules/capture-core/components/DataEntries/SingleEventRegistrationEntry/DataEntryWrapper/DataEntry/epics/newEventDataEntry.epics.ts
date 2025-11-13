@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, filter, mergeMap } from 'rxjs/operators';
@@ -187,7 +188,7 @@ const runRulesForNewSingleEvent = async ({
             ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
         ], batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
     } catch (error) {
-        console.log(error);
+        log.info(error);
         return batchActions([
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
             ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),

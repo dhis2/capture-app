@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
@@ -104,7 +105,7 @@ const runRulesForEditSingleEvent = async ({
             });
         }
     } catch (error) {
-        console.log(error);
+        log.info(error);
         return batchActions([
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
             ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),

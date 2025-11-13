@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import { useEffect, useMemo, useState } from 'react';
 import { convertValue } from '../../../../../converters/serverToClient';
 import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
@@ -94,7 +95,7 @@ export const useRuleEffects = ({
                 if (Array.isArray(effects)) {
                     setRuleEffects(effects);
                 }
-            }).catch(error => console.log(error));
+            }).catch(error => log.info(error));
         }
     }, [
         attributeValues,
