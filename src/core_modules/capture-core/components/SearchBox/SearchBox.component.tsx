@@ -9,6 +9,7 @@ import { SearchForm } from './SearchForm';
 import { TrackedEntityTypeSelector } from '../TrackedEntityTypeSelector';
 import { withLoadingIndicator } from '../../HOC';
 import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
+import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
@@ -42,6 +43,7 @@ const getStyles: Readonly<any> = {
     },
 };
 
+// eslint-disable-next-line complexity
 const Index = ({
     showInitialSearchBox,
     cleanSearchRelatedInfo,
@@ -61,6 +63,7 @@ const Index = ({
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,
+        isLoading,
     } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
 
     useEffect(() => {
@@ -126,22 +129,28 @@ const Index = ({
                 </div>
             </div>
 
-            {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
-                <IncompleteSelectionsMessage>
-                    {String(i18n.t('Choose a type to start searching'))}
-                </IncompleteSelectionsMessage>
-            )}
-            {selectedSearchScopeId && !searchGroupsForSelectedScope.length && (
-                <NoticeBox
-                    warning
-                    title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
-                        trackedEntityName: capitalizeFirstLetter(trackedEntityName),
-                        interpolation: { escapeValue: false },
-                    })}
-                >
-                    {/* eslint-disable-next-line max-len */}
-                    {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
-                </NoticeBox>
+            {isLoading ? (
+                <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />
+            ) : (
+                <>
+                    {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
+                        <IncompleteSelectionsMessage>
+                            {String(i18n.t('Choose a type to start searching'))}
+                        </IncompleteSelectionsMessage>
+                    )}
+                    {selectedSearchScopeId && availableSearchOption && !searchGroupsForSelectedScope.length && (
+                        <NoticeBox
+                            warning
+                            title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
+                                trackedEntityName: capitalizeFirstLetter(trackedEntityName),
+                                interpolation: { escapeValue: false },
+                            })}
+                        >
+                            {/* eslint-disable-next-line max-len */}
+                            {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
+                        </NoticeBox>
+                    )}
+                </>
             )}
         </>
     );
