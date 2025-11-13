@@ -8,14 +8,14 @@ import {
     useResetOrgUnitId,
     useReset,
     setOrgUnitFromScopeSelector,
-} from '../../ScopeSelector';
+} from '../../../ScopeSelector';
 import {
     setCategoryOption,
     resetCategoryOption,
     resetAllCategoryOptions,
-} from './MainPage.actions';
-import { TopBarActions } from '../../TopBarActions';
-import type { TopBarProps } from './TopBar.types';
+} from '../shared/actions/mainPage.actions';
+import { TopBarActions } from '../../../TopBarActions';
+import type { TopBarProps } from './topBar.types';
 
 export const TopBar = ({ programId, orgUnitId, selectedCategories }: TopBarProps) => {
     const dispatch = useDispatch();

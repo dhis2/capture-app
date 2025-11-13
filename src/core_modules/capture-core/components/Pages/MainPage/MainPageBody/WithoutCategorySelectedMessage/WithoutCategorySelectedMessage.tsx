@@ -4,8 +4,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
+import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
 
 const styles: Readonly<any> = {
     incompleteMessageContainer: {
