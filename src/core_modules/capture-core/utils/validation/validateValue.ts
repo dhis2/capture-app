@@ -32,7 +32,7 @@ export const validateValue = async ({
         if (pass === true) {
             let result = currentValidator.validator(
                 value,
-                commitOptions,
+                validationContext,
             );
             if (result instanceof Promise) {
                 result = postProcessAsyncValidatonInitiation

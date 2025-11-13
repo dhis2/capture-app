@@ -29,6 +29,7 @@ import {
 import { dataElementTypes } from '../../metaData';
 import type { DateDataElement, DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
+import type { QuerySingleResource } from '../api';
 
 type Validator = (
     value: any,
@@ -253,16 +254,17 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
 
 function buildUniqueValidator(
     metaData: DataElement,
+    querySingleResource: QuerySingleResource,
 ): Array<ValidatorContainer> {
     return metaData.unique
         ?
         [
             {
-                validator: (value: any) => {
+                validator: (value: any, contextProps: any) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
-                    return true;
+                    return metaData.unique?.onValidate(value, contextProps, querySingleResource);;
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
@@ -282,4 +284,4 @@ export const getValidators = (
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
-].flatMap(validatorBuilder => validatorBuilder(metaData));
+].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));
