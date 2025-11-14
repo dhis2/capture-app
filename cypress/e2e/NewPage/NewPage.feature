@@ -193,6 +193,11 @@ Feature: User creates a new entries from the registration page
     # Cleanup
     And you delete the recently added malaria entity
 
+  Scenario: New person in Tracker Program > Enter non-unique value in a unique data element shows validation error
+    Given you are on the TB program registration page
+    And you enter an existing value in the National identifier field
+    Then an error message should show up saying this national identifier is already registered
+
 
 ## New enrollment of existing TEI
 
