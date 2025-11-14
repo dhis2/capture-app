@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
@@ -9,6 +10,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
     validateAssignEffects,
+    executionEnvironments,
 } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../metaData';
@@ -54,28 +56,37 @@ export const runRulesOnUpdateFieldBatch = async ({
     querySingleResource: QuerySingleResource;
     onGetValidationContext: () => any;
 }) => {
-    const effects = getApplicableRuleEffectsForTrackerProgram({
-        program,
-        stage,
-        orgUnit,
-        currentEvent,
-        enrollmentData,
-        attributeValues,
-        formFoundation,
-    });
+    try {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage,
+            orgUnit,
+            currentEvent,
+            enrollmentData,
+            attributeValues,
+            formFoundation,
+            executionEnvironment: executionEnvironments.NEW_ENROLLMENT,
+        });
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: formFoundation ? formFoundation.getElements() : program.attributes,
-        effects,
-        querySingleResource,
-        onGetValidationContext,
-    });
+        const effectsWithValidations = await validateAssignEffects({
+            dataElements: formFoundation ? formFoundation.getElements() : program.attributes,
+            effects,
+            querySingleResource,
+            onGetValidationContext,
+        });
 
-    return batchActions([
-        updateRulesEffects(effectsWithValidations, formId),
-        rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
-        ...extraActions,
-    ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
+        return batchActions([
+            updateRulesEffects(effectsWithValidations, formId),
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...extraActions,
+        ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
+    } catch (error) {
+        log.info(error);
+        return batchActions([
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...extraActions,
+        ]);
+    }
 };
 
 export const updateDataEntryFieldBatch = (

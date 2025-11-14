@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
+import { discardRuleExecution } from 'capture-core/rules/rulesEngine';
 import type {
     TrackedEntityAttributes,
     OptionSets,
@@ -24,6 +25,7 @@ import type { Geometry } from './hooks.types';
 import { getRulesActionsForTEI } from '../ProgramRules';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
 import type { EnrollmentData } from '../Types';
+import type { QuerySingleResource } from '../../../../utils/api';
 
 type UseLifecycleParams = {
     programAPI: any;
@@ -34,6 +36,8 @@ type UseLifecycleParams = {
     itemId: string;
     geometry: Geometry | null;
     dataEntryFormConfig: DataEntryFormConfig | null;
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext: () => Record<string, any>;
 };
 
 export const useLifecycle = ({
@@ -45,6 +49,8 @@ export const useLifecycle = ({
     itemId,
     geometry,
     dataEntryFormConfig,
+    querySingleResource,
+    onGetValidationContext,
 }: UseLifecycleParams) => {
     const dispatch = useDispatch();
     const state = useSelector((stateArg: any) => stateArg);
@@ -73,6 +79,7 @@ export const useLifecycle = ({
             );
         }
         return () => {
+            discardRuleExecution('ProfileWidget');
             dispatch(cleanUpDataEntry(dataEntryId));
             dispatch(cleanTeiModal());
         };
@@ -86,22 +93,26 @@ export const useLifecycle = ({
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
-            dispatch(
-                getRulesActionsForTEI({
-                    foundation: formFoundation,
-                    formId: `${dataEntryId}-${itemId}`,
-                    orgUnit,
-                    trackedEntityAttributes: programTrackedEntityAttributes,
-                    teiValues: { ...clientValues, ...clientGeometryValues },
-                    optionSets,
-                    rulesContainer,
-                    otherEvents,
-                    dataElements,
-                    enrollmentData: enrollment,
-                    userRoles,
-                    programName: programAPI.displayName,
-                }),
-            );
+            getRulesActionsForTEI({
+                foundation: formFoundation,
+                formId: `${dataEntryId}-${itemId}`,
+                orgUnit,
+                trackedEntityAttributes: programTrackedEntityAttributes,
+                teiValues: { ...clientValues, ...clientGeometryValues },
+                optionSets,
+                rulesContainer,
+                otherEvents,
+                dataElements,
+                enrollmentData: enrollment,
+                userRoles,
+                programName: programAPI.displayName,
+                querySingleResource,
+                onGetValidationContext,
+            }).then((effects) => {
+                if (effects) {
+                    dispatch(effects);
+                }
+            });
         }
     }, [
         dispatch,
@@ -120,6 +131,8 @@ export const useLifecycle = ({
         clientGeometryValues,
         userRoles,
         programAPI,
+        querySingleResource,
+        onGetValidationContext,
     ]);
 
     return {

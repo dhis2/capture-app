@@ -1,2 +1,5 @@
 export { Validated } from './Validated.container';
-export { saveNewEnrollmentEventEpic } from './validated.epics';
+export {
+    openRegisterNewEnrollmentPageEpic,
+    saveNewEnrollmentEventEpic,
+} from './validated.epics';

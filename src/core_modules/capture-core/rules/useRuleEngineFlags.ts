@@ -9,7 +9,7 @@ export const useRuleEngineFlags = () => {
     const { verbose } = useLocationQuery();
 
     const updateFlags = (flags) => {
-        const rulesEngine = ruleEngine();
+        const rulesEngine = ruleEngine;
         rulesEngine.setFlags({ ...rulesEngine.getFlags(), ...flags });
     };
 

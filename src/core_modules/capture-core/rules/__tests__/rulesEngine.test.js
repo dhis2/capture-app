@@ -1,7 +1,7 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { initRulesEngine, ruleEngine } from '../rulesEngine';
+import { initRuleEngine, ruleEngine } from '../ruleExecution/ruleEngine';
 
-initRulesEngine('', []);
+initRuleEngine('', [], true);
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
@@ -319,6 +319,7 @@ describe('Program Rule Variables corner cases', () => {
             f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'INTEGER', optionSetId: undefined },
         };
         const currentEvent = undefined;
+        const enrollmentData = { enrolledAt: '2020-05-14T22:00:00.000Z' };
         const programRuleVariables = [
             {
                 id: 'DoRHHfNPccb',
@@ -349,6 +350,7 @@ describe('Program Rule Variables corner cases', () => {
         // when
         const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
+            selectedEnrollment: enrollmentData,
             selectedOrgUnit: orgUnit,
             optionSets,
             currentEvent,
@@ -395,6 +397,7 @@ describe('Program Rule Variables corner cases', () => {
             f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'INTEGER', optionSetId: undefined },
         };
         const currentEvent = undefined;
+        const enrollmentData = { enrolledAt: '2020-05-14T22:00:00.000Z' };
         const otherEvents = [
             {
                 da1Id: 'otherEventText',
@@ -426,6 +429,7 @@ describe('Program Rule Variables corner cases', () => {
         // when
         const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
+            selectedEnrollment: enrollmentData,
             selectedOrgUnit: orgUnit,
             optionSets,
             currentEvent,
