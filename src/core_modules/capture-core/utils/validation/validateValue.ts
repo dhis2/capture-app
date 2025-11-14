@@ -10,9 +10,9 @@ export type Validations = {
 export const validateValue = async ({
     validators,
     value,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     validationContext,
     postProcessAsyncValidatonInitiation,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     commitOptions,
 }: {
     validators?: Array<ValidatorContainer>;
@@ -32,7 +32,7 @@ export const validateValue = async ({
         if (pass === true) {
             let result = currentValidator.validator(
                 value,
-                commitOptions,
+                validationContext,
             );
             if (result instanceof Promise) {
                 result = postProcessAsyncValidatonInitiation

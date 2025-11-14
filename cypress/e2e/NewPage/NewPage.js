@@ -572,6 +572,21 @@ Then('you see the enrollment event Edit page', () => {
     cy.url().should('include', '/#/enrollmentEventEdit?');
 });
 
+Given('you are on the TB program registration page', () => {
+    cy.visit('/#/new?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8');
+});
+
+And('you enter an existing value in the National identifier field', () => {
+    cy.get('input[type="text"]')
+        .eq(17)
+        .type('489533235')
+        .blur();
+});
+
+Then('an error message should show up saying this national identifier is already registered', () => {
+    cy.contains('A person with this national identifier is already registered').should('exist');
+});
+
 And('you fill in multiple Allergies options', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('Allergies').should('exist');
