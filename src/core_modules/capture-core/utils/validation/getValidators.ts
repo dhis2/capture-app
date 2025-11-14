@@ -264,7 +264,7 @@ function buildUniqueValidator(
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
-                    return metaData.unique?.onValidate(value, contextProps, querySingleResource);;
+                    return metaData.unique?.onValidate(value, contextProps, querySingleResource);
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
