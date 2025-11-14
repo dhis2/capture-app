@@ -13,6 +13,7 @@ import type {
     FieldConfig,
     FieldCommitOptions,
     FieldCommitOptionsExtended,
+    FieldUI,
 } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
 import { getValidators, validateValue, validatorTypes } from '../../../utils/validation';
@@ -23,15 +24,6 @@ import type { QuerySingleResource } from '../../../utils/api';
 type CancelablePromise<T> = {
     promise: Promise<T>;
     cancel: () => void;
-};
-
-type FieldUI = {
-    touched?: boolean | null;
-    valid?: boolean | null;
-    errorMessage?: string | null | Array<string> | Array<{[key: string]: string}>;
-    errorType?: string | null;
-    errorData?: ErrorData;
-    validatingMessage?: string | null;
 };
 
 type RenderDividerFn = (index: number, fieldsCount: number, field: FieldConfig) => React.ReactNode;
@@ -61,6 +53,7 @@ type IsValidatingFn = (
 type Props = {
     id: string;
     fields: Array<FieldConfig>;
+    values: { [id: string]: any };
     fieldsUI: { [id: string]: FieldUI };
     onUpdateFieldAsync: (
         fieldId: string,
@@ -103,39 +96,6 @@ type FieldValidatingContainer = {
 type FieldsValidatingPromiseContainer = { [fieldId: string]: FieldValidatingContainer | null };
 
 export class FormBuilder extends React.Component<Props> {
-    static getAsyncUIState(fieldsUI: { [id: string]: FieldUI }) {
-        return Object.keys(fieldsUI).reduce((accAsyncUIState, fieldId) => {
-            const fieldUI = fieldsUI[fieldId];
-            accAsyncUIState[fieldId] = FormBuilder.getFieldAsyncUIState(fieldUI);
-            return accAsyncUIState;
-        }, {});
-    }
-
-    static getFieldAsyncUIState(fieldUI: FieldUI) {
-        const ignoreKeys = ['valid', 'errorMessage', 'touched'];
-        return Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
-            if (!ignoreKeys.includes(propId)) {
-                accFieldAsyncUIState[propId] = fieldUI[propId];
-            }
-            return accFieldAsyncUIState;
-        }, {});
-    }
-
-    static updateAsyncUIState(
-        oldFieldsUI: { [id: string]: FieldUI },
-        newFieldsUI: { [id: string]: FieldUI },
-        asyncUIState: { [id: string]: any }) {
-        return Object.keys(newFieldsUI).reduce((accAsyncUIState, fieldId) => {
-            const newFieldUI = newFieldsUI[fieldId];
-            const oldFieldUI = oldFieldsUI[fieldId];
-
-            if (newFieldUI !== oldFieldUI) {
-                accAsyncUIState[fieldId] = FormBuilder.getFieldAsyncUIState(newFieldUI);
-            }
-            return accAsyncUIState;
-        }, asyncUIState);
-    }
-
     static executeValidateAllFields(
         props: Props,
         fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer,
@@ -228,14 +188,12 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     fieldInstances: Map<string, any>;
-    asyncUIState: { [id: string]: FieldUI };
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
     commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
 
     constructor(props: Props) {
         super(props);
         this.fieldInstances = new Map();
-        this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
         this.fieldsValidatingPromiseContainer = {};
         this.commitUpdateTriggeredForFields = {};
 
@@ -244,18 +202,15 @@ export class FormBuilder extends React.Component<Props> {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
-            this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
+    componentDidUpdate(prevProps: Readonly<Props>): void {
+        if (prevProps.id !== this.props.id && prevProps.loadNr !== this.props.loadNr) {
             this.commitUpdateTriggeredForFields = {};
             if (this.props.validateIfNoUIData) {
-                this.validateAllFields(newProps);
+                this.validateAllFields(this.props);
             }
-        } else {
-            this.asyncUIState =
-                FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
         }
     }
+
     validateAllCancelablePromise: CancelablePromise<any> | null = null;
 
     getCleanUpData() {
@@ -528,6 +483,7 @@ export class FormBuilder extends React.Component<Props> {
     ) => {
         const {
             fields,
+            values,
             fieldsUI,
             validationAttempted,
             id,
@@ -541,34 +497,26 @@ export class FormBuilder extends React.Component<Props> {
             onGetContainerProps: extractOnGetContainerProps,
             onIsValidating,
             onGetValidationContext,
-            loadNr,
             onPostProcessErrorMessage,
+            pluginContext,
+            loadNr,
             ...passOnProps } = this.props;
 
         const props = field.props || {};
-        const fieldUI = fieldsUI[field.id] || {};
+        const value = values[field.id];
 
-        const errorMessage = onPostProcessErrorMessage && fieldUI.errorMessage ?
-            onPostProcessErrorMessage({
-                errorMessage: fieldUI.errorMessage,
-                errorType: fieldUI.errorType,
-                errorData: fieldUI.errorData,
-                id: `${id}-${field.id}`,
-                fieldId: field.id,
-                fieldLabel: props.label,
-            }) : fieldUI.errorMessage;
 
         return (
             <FormField
                 field={field}
+                value={value}
                 index={index}
                 length={fields.length}
                 onGetContainerProps={onGetContainerProps}
                 onRenderDivider={onRenderDivider}
+                onUpdateFieldAsync={onUpdateFieldAsync}
+                onPostProcessErrorMessage={onPostProcessErrorMessage}
                 setFieldInstance={this.setFieldInstance}
-                errorMessage={errorMessage}
-                fieldUI={fieldUI}
-                asyncUIState={this.asyncUIState[field.id]}
                 validationAttempted={validationAttempted}
                 commitFieldHandler={this.commitFieldUpdateFromDataElement}
                 fieldProps={props}

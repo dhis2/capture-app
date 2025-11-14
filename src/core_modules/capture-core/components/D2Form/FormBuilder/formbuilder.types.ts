@@ -36,3 +36,12 @@ export type FieldCommitOptions = {
 export type FieldCommitOptionsExtended = {
     readonly plugin?: boolean | null;
 } & FieldCommitOptions;
+
+export type FieldUI = {
+    touched?: boolean | null;
+    valid?: boolean | null;
+    errorMessage?: string | null | Array<string> | Array<{[key: string]: string}>;
+    errorType?: string | null;
+    errorData?: ErrorData;
+    validatingMessage?: string | null;
+};

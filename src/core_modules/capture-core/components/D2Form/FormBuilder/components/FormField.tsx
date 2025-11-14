@@ -1,26 +1,50 @@
 import React, { useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import defaultClasses from './formBuilder.module.css';
-import type { FieldCommitOptions } from '../formbuilder.types';
+import type {
+    FieldCommitOptions,
+    FieldUI,
+} from '../formbuilder.types';
 
-export const FormField = ({
+const getFieldAsyncUIState = (fieldUI: FieldUI) => {
+    const ignoreKeys = ['valid', 'errorMessage', 'touched'];
+    return Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
+        if (!ignoreKeys.includes(propId)) {
+            accFieldAsyncUIState[propId] = fieldUI[propId];
+        }
+        return accFieldAsyncUIState;
+    }, {});
+}
+
+export const FormField = React.memo(({
     field,
+    value,
     index,
     length,
     onGetContainerProps,
     onRenderDivider,
     onUpdateFieldAsync,
+    onPostProcessErrorMessage,
     setFieldInstance,
-    errorMessage,
-    fieldUI,
-    asyncUIState,
     validationAttempted,
     commitFieldHandler,
     fieldProps,
     formThis,
     ...passOnProps
 }: any) => {
-    const value = useSelector((state: any) => state?.formsValues[field.props.formId][field.id]);
+    const fieldUI = useSelector(
+        (state: any) => (state.formsSectionsFieldsUI[fieldProps.formId] || {})[field.id] || {},
+        shallowEqual,
+    );
+    const errorMessage = useMemo(() => (onPostProcessErrorMessage && fieldUI.errorMessage ?
+        onPostProcessErrorMessage({
+            errorMessage: fieldUI.errorMessage,
+            errorType: fieldUI.errorType,
+            errorData: fieldUI.errorData,
+            id: `${fieldProps.formId}-${field.id}`,
+            fieldId: field.id,
+            fieldLabel: fieldProps.label,
+        }) : fieldUI.errorMessage), []);
 
     const commitFieldUpdate = useCallback(async (
         newValue: any,
@@ -28,6 +52,8 @@ export const FormField = ({
     ) => {
         commitFieldHandler.bind(formThis)(field.id, newValue, value, options);
     }, [value, commitFieldHandler, formThis, field.id]);
+
+    const asyncUIState = useMemo(() => getFieldAsyncUIState(fieldUI), [fieldUI]);
 
     const asyncProps = useMemo(() =>
         ((fieldProps.async) ? ({
@@ -68,4 +94,4 @@ export const FormField = ({
             {onRenderDivider && onRenderDivider(index, length, field)}
         </div>
     );
-};
+});

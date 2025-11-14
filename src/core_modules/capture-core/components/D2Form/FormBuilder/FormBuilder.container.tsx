@@ -14,6 +14,7 @@ const FormBuilderRefBuilder = (props: any) => {
 };
 
 const mapStateToProps = (state: any, props: { id: string }) => ({
+    values: state.formsValues[props.id] || {},
     fieldsUI: state.formsSectionsFieldsUI[props.id] || {},
 });
 
