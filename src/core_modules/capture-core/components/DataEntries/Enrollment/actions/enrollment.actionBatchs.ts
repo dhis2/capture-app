@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
@@ -80,7 +81,7 @@ export const runRulesOnUpdateFieldBatch = async ({
             ...extraActions,
         ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
     } catch (error) {
-        console.log(error);
+        log.info(error);
         return batchActions([
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
             ...extraActions,
