@@ -1,4 +1,4 @@
-import type { UseQueryOptions } from 'react-query';
+import type { UseQueryOptions } from '@tanstack/react-query';
 import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 
@@ -7,7 +7,7 @@ export const useProgramFromIndexedDB = (programId: string | null | undefined, qu
     const storageController = getUserMetadataStorageController();
     const { enabled = true } = queryOptions ?? {};
 
-    const { data, isLoading, isError } = useIndexedDBQuery(
+    const { data, isInitialLoading, isError } = useIndexedDBQuery(
         ['programs', programId],
         () => storageController.get(USER_METADATA_STORES.PROGRAMS, programId),
         {
@@ -17,7 +17,7 @@ export const useProgramFromIndexedDB = (programId: string | null | undefined, qu
 
     return {
         program: data,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

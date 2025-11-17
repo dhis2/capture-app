@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { spacers } from '@dhis2/ui';
 import { FlatList } from 'capture-ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { RenderFoundation } from '../../metaData';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 

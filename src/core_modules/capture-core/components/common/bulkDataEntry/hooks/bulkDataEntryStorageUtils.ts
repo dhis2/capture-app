@@ -9,7 +9,7 @@ export type ActiveList = {
 export const getBulkDataEntry = async (programId: string) => {
     try {
         const storageController = getUserDataStorageController();
-        return await storageController.get(USER_DATA_STORES.BULK_DATA_ENTRY, programId);
+        return await storageController.get(USER_DATA_STORES.BULK_DATA_ENTRY, programId) || null;
     } catch (error) {
         log.error(errorCreator('Could not get a bulkDataEntry value from IndexedDB ')({ error }));
         return null;

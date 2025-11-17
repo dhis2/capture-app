@@ -52,7 +52,7 @@ export const useSearchOption = ({
 
     const {
         data: searchGroups,
-        isLoading: isLoadingSearchGroups,
+        isInitialLoading: isLoadingSearchGroups,
         isError: isErrorSearchGroups,
     } = useIndexedDBQuery<SearchGroup[]>(
         ['searchGroup', searchId],

@@ -1,6 +1,6 @@
 import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, spacers } from '@dhis2/ui';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import type { PlainProps } from './ScheduleButtons.types';

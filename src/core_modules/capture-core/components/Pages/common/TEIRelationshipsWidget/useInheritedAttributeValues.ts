@@ -44,7 +44,7 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
     }, [programId, trackedEntityTypeId]);
 
 
-    const { data, isLoading } = useApiDataQuery(
+    const { data, isInitialLoading } = useApiDataQuery(
         ['inheritedAttributeValues', teiId, programId],
         {
             resource: 'tracker/trackedEntities',
@@ -64,6 +64,6 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
 
     return {
         inheritedAttributes: data ?? [],
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

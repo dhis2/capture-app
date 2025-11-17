@@ -1,14 +1,13 @@
 import React, { type ComponentType, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, WithStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
-import type { Enrollment } from '../../../metaData';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
@@ -86,7 +85,7 @@ const EnrollmentRegistrationEntryPlain =
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
-                          enrollmentMetadata={enrollmentMetadata as Enrollment}
+                          enrollmentMetadata={enrollmentMetadata}
                           id={id}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
                           onGetUnsavedAttributeValues={() =>

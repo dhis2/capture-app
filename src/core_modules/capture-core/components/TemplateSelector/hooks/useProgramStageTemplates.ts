@@ -6,7 +6,7 @@ type DataResponse = {
 };
 
 export const useProgramStageTemplates = (programId: string | undefined) => {
-    const { error, isLoading, data } = useApiDataQuery<DataResponse>(
+    const { error, isInitialLoading, data } = useApiDataQuery<DataResponse>(
         ['programStageWorkingLists', programId],
         {
             resource: 'programStageWorkingLists',
@@ -22,7 +22,7 @@ export const useProgramStageTemplates = (programId: string | undefined) => {
 
     return {
         error,
-        loading: isLoading,
+        loading: isInitialLoading,
         programStageTemplates: data?.programStageWorkingLists || [],
     };
 };

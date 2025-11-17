@@ -6,20 +6,20 @@ import {
 } from '@dhis2/multi-calendar-dates';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
-import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
-import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
-import defaultClasses from './ageField.module.css';
-import { orientations } from '../constants/orientations.const';
-import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
 import {
     stringToTemporal,
     temporalToString,
     mapDhis2CalendarToTemporal,
     isCalendarSupported,
-} from '../../capture-core-utils/date';
+} from 'capture-core-utils/date';
+import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
+import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
+import defaultClasses from './ageField.module.css';
+import { orientations } from '../constants/orientations.const';
+import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
 
 type AgeValues = {
     date?: string | null;
@@ -278,7 +278,7 @@ class D2AgeFieldPlain extends Component<Props> {
             ...passOnProps
         } = this.props;
 
-        const dateInputContainerClass = classNames(
+        const dateInputContainerClass = cx(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
         return (

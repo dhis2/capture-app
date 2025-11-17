@@ -10,7 +10,7 @@ import {
 } from '@dhis2/ui';
 import log from 'loglevel';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
 

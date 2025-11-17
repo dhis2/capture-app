@@ -10,7 +10,7 @@ export const useTrackedEntityTypeName = (tetId: string) => {
         },
     }), [tetId]);
 
-    const { data, isLoading, error } = useApiDataQuery(
+    const { data, isInitialLoading, error } = useApiDataQuery(
         ['trackedEntityTypeName', tetId],
         query,
         {
@@ -20,7 +20,7 @@ export const useTrackedEntityTypeName = (tetId: string) => {
 
     return {
         data,
-        isLoading,
+        isLoading: isInitialLoading,
         error,
     };
 };

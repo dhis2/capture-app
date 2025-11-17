@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, Button, Tag } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryActive.types';

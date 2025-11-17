@@ -4,7 +4,7 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../capture-core-utils/types/global';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types/global';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentNote.actions';
 import type { ClientNote, SaveContext } from './WidgetEnrollmentNote.types';

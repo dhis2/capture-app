@@ -1,10 +1,10 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import log from 'loglevel';
 import { useDataEngine } from '@dhis2/app-runtime';
-import type { QueryFunction, UseQueryOptions, QueryKey } from 'react-query';
-import type { ResourceQuery } from '../../../../capture-core-utils/types/app-runtime';
+import type { QueryFunction, UseQueryOptions, QueryKey } from '@tanstack/react-query';
+import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
+import { IndexedDBError } from 'capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import type { Result } from './useMetadataQuery.types';
-import { IndexedDBError } from '../../../../capture-core-utils/storage/IndexedDBError/IndexedDBError';
 import { ReactQueryAppNamespace, IndexedDBNamespace } from '../reactQueryHelpers.const';
 
 const throwErrorForIndexedDB = (error: any) => {
@@ -66,7 +66,6 @@ export const useApiMetadataQuery = <TQueryFnData, TData = TQueryFnData>(
 
     const queryFn: QueryFunction<TQueryFnData> = () => {
         if (!queryObject) {
-            // Returner "undefined" som TQueryFnData for å holde generics konsistente
             return Promise.resolve(undefined as unknown as TQueryFnData);
         }
 
@@ -79,6 +78,7 @@ export const useApiMetadataQuery = <TQueryFnData, TData = TQueryFnData>(
         cacheTime: Infinity,
         staleTime: Infinity,
         enabled: true,
+        retry: false,
         ...queryOptions,
     });
 };

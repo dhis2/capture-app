@@ -33,7 +33,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <InnerComponent
-                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={this.renderMainButton(hasWriteAccess)}
                     {...passOnProps}
                 />

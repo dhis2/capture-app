@@ -9,7 +9,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { isValidDate, isValidNonFutureDate } from 'capture-core/utils/validation/validators/form';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';

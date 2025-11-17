@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import type {
     CachedOptionSet,
-} from '../../../capture-core/storageControllers';
+} from 'capture-core/storageControllers';
 
 class OptionSetStore {
     _optionSets: { [id: string]: CachedOptionSet };

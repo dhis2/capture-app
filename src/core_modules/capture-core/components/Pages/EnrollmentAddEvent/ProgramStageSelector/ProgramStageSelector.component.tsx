@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const styles: Readonly<any> = {

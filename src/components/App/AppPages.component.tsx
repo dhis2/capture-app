@@ -8,7 +8,7 @@ import { EnrollmentPage } from 'capture-core/components/Pages/Enrollment';
 import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 import { EnrollmentEditEventPage } from 'capture-core/components/Pages/EnrollmentEditEvent';
 import { EnrollmentAddEventPage } from 'capture-core/components/Pages/EnrollmentAddEvent';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const AppPages = () => (
     <>

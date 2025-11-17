@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { Tooltip, type TooltipProps } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 type OwnProps = {
     enabled: boolean;
