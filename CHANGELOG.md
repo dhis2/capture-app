@@ -1,3 +1,24 @@
+## [104.6.7](https://github.com/dhis2/capture-app/compare/v104.6.6...v104.6.7) (2025-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-20437] User messages appears on initial load in search ([#4399](https://github.com/dhis2/capture-app/issues/4399)) ([8b357bd](https://github.com/dhis2/capture-app/commit/8b357bd44c7ddaf649a31b62d2ba7cb78ad0ef8a))
+
+## [104.6.6](https://github.com/dhis2/capture-app/compare/v104.6.5...v104.6.6) (2025-11-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4404](https://github.com/dhis2/capture-app/issues/4404)) ([d172a3c](https://github.com/dhis2/capture-app/commit/d172a3c588daf721e570278be9831f7fe3a2370b))
+
+## [104.6.5](https://github.com/dhis2/capture-app/compare/v104.6.4...v104.6.5) (2025-11-12)
+
+
+### Bug Fixes
+
+* [DHIS2-20352] Capture app fails to load when DE or TEA referenced in indicator is missing ([#4391](https://github.com/dhis2/capture-app/issues/4391)) ([e9fa7c2](https://github.com/dhis2/capture-app/commit/e9fa7c23f65747a192676e704a242a6ea8b5119d))
+
 ## [104.6.4](https://github.com/dhis2/capture-app/compare/v104.6.3...v104.6.4) (2025-11-10)
 
 
