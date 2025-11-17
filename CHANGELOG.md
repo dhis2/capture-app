@@ -1,3 +1,10 @@
+## [104.6.7](https://github.com/dhis2/capture-app/compare/v104.6.6...v104.6.7) (2025-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-20437] User messages appears on initial load in search ([#4399](https://github.com/dhis2/capture-app/issues/4399)) ([8b357bd](https://github.com/dhis2/capture-app/commit/8b357bd44c7ddaf649a31b62d2ba7cb78ad0ef8a))
+
 ## [104.6.6](https://github.com/dhis2/capture-app/compare/v104.6.5...v104.6.6) (2025-11-17)
 
 
