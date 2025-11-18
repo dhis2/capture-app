@@ -92,4 +92,4 @@ const mapDispatchToProps = () => ({});
 
 export const withBrowserBackWarning = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        connect(mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(InnerComponent))) as any;
+        connect(mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(React.memo(InnerComponent)))) as any;
