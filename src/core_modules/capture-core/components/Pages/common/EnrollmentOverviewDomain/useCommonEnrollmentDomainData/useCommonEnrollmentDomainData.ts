@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCommonEnrollmentSiteData } from '../enrollment.actions';
 import type { Output } from './useCommonEnrollmentDomainData.types';
@@ -13,6 +13,8 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         attributeValues: storedAttributeValues,
     } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain);
 
+    const awaitInitialFetch = useRef(!!(teiId && programId && enrollmentId));
+
     const { data, error } = useApiDataQuery(
         ['stages&event', 'enrollmentData', teiId, programId, enrollmentId],
         {
@@ -24,7 +26,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             },
         },
         {
-            enabled: !!teiId && !!programId && !!enrollmentId,
+            enabled: !!(teiId && programId && enrollmentId),
             staleTime: 0,
             cacheTime: 0,
         },
@@ -44,6 +46,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                 fetchedEnrollmentData.attributeValues
                     .map(({ attribute, value }: any) => ({ id: attribute, value })),
             ));
+            awaitInitialFetch.current = false;
         }
     }, [
         dispatch,
@@ -52,7 +55,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.attributeValues,
     ]);
 
-    const inEffectData = enrollmentId === storedEnrollmentId ? {
+    const inEffectData = (enrollmentId === storedEnrollmentId) && !awaitInitialFetch.current ? {
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
     } : { enrollment: undefined, attributeValues: undefined };

@@ -1,50 +1,77 @@
+import type {
+    RulesEngineInput,
+    OutputEffects,
+    Flag,
+} from '@dhis2/rules-engine-javascript';
 import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
-import { RulesEngine, environmentTypes } from '@dhis2/rules-engine-javascript';
-import { RuleEngine } from './RuleEngine/RuleEngine';
-import {
-    inputConverter,
-    outputConverter,
-    dateUtils,
-} from './converters';
+import { RuleExecutionManager } from './ruleExecution';
 
-let selectedRuleEngine;
+const worker = new Worker(new URL('ruleExecution/worker.js', import.meta.url));
 
-const captureRuleEngine = () => new RulesEngine(
-    inputConverter,
-    outputConverter,
-    dateUtils,
-    environmentTypes.WebClient,
-);
+const ruleExecutionManager = new RuleExecutionManager;
 
-const kotlinRuleEngine = () => new RuleEngine(
-    inputConverter,
-    outputConverter,
-);
-
-const switchToCapture = () => {
-    console.log('Using capture rule engine');
-    selectedRuleEngine = captureRuleEngine();
-};
-
-const switchToKotlin = () => {
-    console.log('Using kotlin rule engine');
-    selectedRuleEngine = kotlinRuleEngine();
-};
-
-const versions = {
-    NEW: 'new',
-    OLD: 'old',
+worker.onmessage = (event) => {
+    const {
+        executionEnvironment,
+        executionId,
+        effects,
+    } = event.data;
+    ruleExecutionManager.resolveExecution(executionEnvironment, executionId, effects);
 };
 
 export const initRulesEngine = (version: string, userRoles: Array<{ id: string }>) => {
-    if (version === versions.NEW) {
-        switchToKotlin();
-    } else if (version === versions.OLD) {
-        switchToCapture();
-    } else {
-        featureAvailable(FEATURES.kotlinRuleEngine) ? switchToKotlin() : switchToCapture();
-    }
-    selectedRuleEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
+    worker.postMessage({
+        queryMethod: 'initRulesEngine',
+        queryArguments: {
+            version,
+            userRoles,
+            useKotlinAsFallback: featureAvailable(FEATURES.kotlinRuleEngine),
+        },
+    });
 };
 
-export const ruleEngine = () => selectedRuleEngine || kotlinRuleEngine();
+export const ruleEngine = {
+    flags: { verbose: false },
+
+    getProgramRuleEffects: (rulesEngineInput: RulesEngineInput): Promise<OutputEffects> =>
+        new Promise<OutputEffects>((resolve, reject) => {
+            const executionEnvironment = rulesEngineInput.executionEnvironment || '';
+            const executionId = ruleExecutionManager.newExecution({
+                executionEnvironment,
+                resolve,
+                reject,
+            });
+
+            worker.postMessage({
+                queryMethod: 'getProgramRuleEffects',
+                queryArguments: {
+                    executionId,
+                    rulesEngineInput,
+                },
+            });
+        }),
+
+    setSelectedUserRoles: (userRoles: Array<string>) => {
+        worker.postMessage({
+            queryMethod: 'setSelectedUserRoles',
+            queryArguments: userRoles,
+        });
+    },
+
+    setFlags: (flags: Flag) => {
+        ruleEngine.flags = flags;
+        worker.postMessage({
+            queryMethod: 'setFlags',
+            queryArguments: flags,
+        });
+    },
+
+    getFlags: (): Flag => ruleEngine.flags,
+};
+
+export const ruleExecutionInProgress = (executionEnvironment: string): boolean =>
+    ruleExecutionManager.executionInProgress(executionEnvironment);
+
+export const discardRuleExecution = (executionEnvironment: string) => {
+    ruleExecutionManager.discardExecution(executionEnvironment);
+};

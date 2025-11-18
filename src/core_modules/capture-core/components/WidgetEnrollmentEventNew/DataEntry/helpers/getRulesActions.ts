@@ -1,18 +1,33 @@
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
+import type { ReduxState } from 'capture-core/components/App/withAppUrlSync.types';
+import type { RenderFoundation, ProgramStage } from '../../../../metaData';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    executionEnvironments,
 } from '../../../../rules';
 import type { AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 import type { EventsData } from '../../../../rules/RuleEngine/types/ruleEngine.types';
 
-export const getRulesActions = ({
-    state, // temporary
-    program,
+export type GetRulesActionsMain = {
+    programId: string,
+    stage: ProgramStage,
+    formFoundation: RenderFoundation,
+    dataEntryId: string,
+    itemId: string,
+    orgUnit?: OrgUnit | null,
+    eventsRulesDependency: EventsData,
+    attributesValuesRulesDependency: AttributeValuesClientFormatted,
+    enrollmentDataRulesDependency: EnrollmentData,
+};
+
+export const getRulesActions = async ({
+    state,
+    programId,
     stage,
     formFoundation,
     dataEntryId,
@@ -21,25 +36,15 @@ export const getRulesActions = ({
     eventsRulesDependency,
     attributesValuesRulesDependency,
     enrollmentDataRulesDependency,
-}: {
-    state: any;
-    program: TrackerProgram;
-    stage: ProgramStage;
-    formFoundation: RenderFoundation;
-    dataEntryId: string;
-    itemId: string;
-    orgUnit?: OrgUnit | null;
-    eventsRulesDependency: EventsData;
-    attributesValuesRulesDependency: AttributeValuesClientFormatted;
-    enrollmentDataRulesDependency: EnrollmentData;
-}) => {
+}: { state: ReduxState } & GetRulesActionsMain) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
 
     const formValuesClient = getCurrentClientValues(state, formFoundation, formId);
     const dataEntryValuesClient = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
     const eventDataClient = { ...formValuesClient, ...dataEntryValuesClient, programStageId: formFoundation.id };
 
-    const effects = getApplicableRuleEffectsForTrackerProgram({
+    const program = getTrackerProgramThrowIfNotFound(programId);
+    const effects = await getApplicableRuleEffectsForTrackerProgram({
         program,
         stage,
         orgUnit,
@@ -47,7 +52,7 @@ export const getRulesActions = ({
         otherEvents: eventsRulesDependency,
         attributeValues: attributesValuesRulesDependency,
         enrollmentData: enrollmentDataRulesDependency,
+        executionEnvironment: executionEnvironments.NEW_ENROLLMENT_EVENT,
     });
-
     return updateRulesEffects(effects, formId);
 };

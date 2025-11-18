@@ -1,5 +1,5 @@
 export {
-    openDataEntryForNewEnrollmentBatchAsync,
+    openDataEntryForNewEnrollmentBatch,
     runRulesOnUpdateFieldBatch,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
     enrollmentBatchActionTypes,

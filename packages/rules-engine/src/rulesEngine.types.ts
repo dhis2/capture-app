@@ -166,6 +166,7 @@ export type RulesEngineInput = {
     selectedOrgUnit: OrgUnit | null,
     selectedUserRoles?: Array<string> | null,
     optionSets: OptionSets,
+    executionEnvironment?: string,
 };
 
 export type Translator = (value: string) => string;

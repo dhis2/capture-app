@@ -18,10 +18,11 @@ const getRulesMetadata = (programRuleVariables, programRules, programStageRules)
     programRules: [...programRules, ...programStageRules || []],
 });
 
-export const getApplicableRuleEffectsForEventProgram = ({
+export const getApplicableRuleEffectsForEventProgram = async ({
     program,
     orgUnit,
     currentEvent,
+    executionEnvironment,
 }: GetApplicableRuleEffectsForEventProgramInput) => {
     const { programRules, programRuleVariables } = program;
     if (!programRules.length) {
@@ -33,17 +34,18 @@ export const getApplicableRuleEffectsForEventProgram = ({
     }
 
     return buildEffectsHierarchy(
-        getApplicableRuleEffects({
+        await getApplicableRuleEffects({
             orgUnit,
             currentEvent,
             programRules,
             programRuleVariables,
             stages: program.stages,
             foundationForPostProcessing: program.stage.stageForm,
+            executionEnvironment,
         }),
     );
 };
-export const getApplicableRuleEffectsForTrackerProgram = ({
+export const getApplicableRuleEffectsForTrackerProgram = async ({
     program,
     stage,
     orgUnit,
@@ -52,6 +54,7 @@ export const getApplicableRuleEffectsForTrackerProgram = ({
     attributeValues,
     enrollmentData,
     formFoundation,
+    executionEnvironment,
 }: GetApplicableRuleEffectsForTrackerProgramInput,
 flattenedResult = false,
 ) => {
@@ -72,7 +75,7 @@ flattenedResult = false,
         currentEvent.programStageName = program.stages.get(currentEvent.programStageId as string)?.untranslatedName;
     }
 
-    const effects = getApplicableRuleEffects({
+    const effects = await getApplicableRuleEffects({
         orgUnit,
         currentEvent,
         otherEvents,
@@ -83,12 +86,13 @@ flattenedResult = false,
         programRuleVariables,
         trackedEntityAttributes: getTrackedEntityAttributesForRulesExecution(program.attributes),
         foundationForPostProcessing,
+        executionEnvironment,
     });
 
     return flattenedResult ? effects : buildEffectsHierarchy(effects);
 };
 
-const getApplicableRuleEffects = ({
+const getApplicableRuleEffects = async ({
     orgUnit,
     currentEvent,
     otherEvents,
@@ -99,13 +103,14 @@ const getApplicableRuleEffects = ({
     programRuleVariables,
     trackedEntityAttributes,
     foundationForPostProcessing,
+    executionEnvironment,
 }: GetApplicableRuleEffectsInput) => {
     const dataElements = getDataElementsForRulesExecution(stages);
 
     const constants = constantsStore.get();
     const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
+    const effects: OutputEffects = await ruleEngine.getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         currentEvent,
         otherEvents,
@@ -113,8 +118,9 @@ const getApplicableRuleEffects = ({
         trackedEntityAttributes,
         selectedEnrollment: enrollmentData,
         selectedEntity: attributeValues,
-        selectedOrgUnit: orgUnit,
+        selectedOrgUnit: orgUnit || null,
         optionSets,
+        executionEnvironment,
     });
 
     return postProcessRulesEffects(

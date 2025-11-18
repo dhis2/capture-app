@@ -25,10 +25,8 @@ const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
 ]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
-jest.mock('../RuleEngine/RuleEngine', () => ({
-    RuleEngine: jest
-        .fn()
-        .mockImplementation(() => ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
+jest.mock('../rulesEngine', () => ({
+    ruleEngine: { getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) },
 }));
 
 jest.mock('../../metaDataMemoryStores/constants/constants.store', () => ({
@@ -190,8 +188,8 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         lZGmxYbs96q: '1995-12-17T03:24:00',
     };
 
-    test('RulesEngine called with computed arguments from getApplicableRuleEffectsForTrackerProgram', () => {
-        getApplicableRuleEffectsForTrackerProgram({
+    test('RulesEngine called with computed arguments from getApplicableRuleEffectsForTrackerProgram', async () => {
+        await getApplicableRuleEffectsForTrackerProgram({
             program,
             stage: programStage,
             orgUnit,
@@ -215,8 +213,8 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         expect(rulesEngineInput).toMatchSnapshot();
     });
 
-    test('Hierarchical result', () => {
-        const effects = getApplicableRuleEffectsForTrackerProgram({
+    test('Hierarchical result', async () => {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
             program,
             stage: programStage,
             orgUnit,
@@ -229,8 +227,8 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         expect(effects.DISPLAYTEXT).toBeDefined();
     });
 
-    test('Flat result', () => {
-        const effects = getApplicableRuleEffectsForTrackerProgram(
+    test('Flat result', async () => {
+        const effects = await getApplicableRuleEffectsForTrackerProgram(
             {
                 program,
                 stage: programStage,
@@ -246,8 +244,8 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         expect(Array.isArray(effects)).toBe(true);
     });
 
-    test('RulesEngine called without programRules', () => {
-        const effects = getApplicableRuleEffectsForTrackerProgram({
+    test('RulesEngine called without programRules', async () => {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
             program: new TrackerProgram((initProgram) => {
                 initProgram.programRules = [];
             }),
@@ -264,8 +262,8 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         expect(effects).toStrictEqual([]);
     });
 
-    test('currentEvent without a programStageId', () => {
-        const effects = getApplicableRuleEffectsForTrackerProgram({
+    test('currentEvent without a programStageId', async () => {
+        const effects = await getApplicableRuleEffectsForTrackerProgram({
             program,
             stage: programStage,
             orgUnit,
