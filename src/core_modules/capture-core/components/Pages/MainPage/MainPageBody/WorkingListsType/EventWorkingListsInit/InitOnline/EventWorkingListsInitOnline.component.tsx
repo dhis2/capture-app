@@ -1,6 +1,6 @@
 import React from 'react';
-import { withLoadingIndicator } from '../../../../../HOC';
-import { EventWorkingLists } from '../../../../WorkingLists/EventWorkingLists';
+import { withLoadingIndicator } from '../../../../../../../HOC';
+import { EventWorkingLists } from '../../../../../../WorkingLists/EventWorkingLists';
 import { useMainViewConfig } from './useMainViewConfig';
 import type { Props } from './eventWorkingListsInitOnline.types';
 

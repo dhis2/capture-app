@@ -16,7 +16,7 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { searchBoxActionTypes } from '../../components/SearchBox';
-import { mainPageActionTypes } from '../../components/Pages/MainPage/MainPage.actions';
+import { mainPageActionTypes } from '../../components/Pages/MainPage/shared/actions/mainPage.actions';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import {

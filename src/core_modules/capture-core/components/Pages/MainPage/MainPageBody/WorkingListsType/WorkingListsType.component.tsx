@@ -1,7 +1,7 @@
 import React from 'react';
-import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
-import { EventWorkingListsInit } from '../EventWorkingListsInit';
-import { TrackerWorkingLists } from '../../../WorkingLists/TrackerWorkingLists';
+import { useProgramInfo, programTypes } from '../../../../../hooks/useProgramInfo';
+import { EventWorkingListsInit } from './EventWorkingListsInit';
+import { TrackerWorkingLists } from '../../../../WorkingLists/TrackerWorkingLists';
 import type { Props } from './workingListsType.types';
 
 export const WorkingListsType = ({
