@@ -1,0 +1,67 @@
+import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import { generateUID } from '../../../../utils/uid/generateUID';
+import { dataElementTypes, ProgramStage } from '../../../../metaData';
+import { convertFormToClient, convertClientToServer } from '../../../../converters';
+import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
+import { convertStatusOut } from '../../../DataEntries';
+import { standardGeoJson } from './standardGeoJson';
+import type { ApiAssignedUser } from '../../../../../capture-core-utils/types/api-types';
+
+const convertFn = pipe(convertFormToClient, convertClientToServer);
+
+export const deriveFirstStageDuringRegistrationEvent = ({
+    firstStageMetadata,
+    programId,
+    orgUnitId,
+    currentEventValues,
+    fieldsValue,
+    attributeCategoryOptions,
+    assignee,
+}: {
+    firstStageMetadata: ProgramStage | null,
+    programId: string,
+    orgUnitId: string,
+    currentEventValues?: { [id: string]: any },
+    fieldsValue: { [id: string]: any },
+    attributeCategoryOptions: { [categoryId: string]: string } | string,
+    assignee?: ApiAssignedUser,
+}) => {
+    if (!firstStageMetadata) {
+        return null;
+    }
+    const { enrolledAt, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
+
+    const eventAttributeCategoryOptions = attributeCategoryOptions
+        ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
+        : {};
+
+    const event: any = {
+        event: generateUID(),
+        status: convertStatusOut(stageComplete),
+        geometry: standardGeoJson(stageGeometry),
+        occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
+        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ?
+            {} :
+            { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
+        programStage: firstStageMetadata.id,
+        program: programId,
+        orgUnit: orgUnitId,
+        ...eventAttributeCategoryOptions,
+    };
+
+    const dataValues = currentEventValues ?
+        Object.keys(currentEventValues).reduce((acc: Array<{ dataElement: string; value: any }>, dataElement) => {
+            acc.push({ dataElement, value: currentEventValues[dataElement] });
+            return acc;
+        }, []) :
+        undefined;
+
+    if (dataValues) {
+        event.dataValues = dataValues;
+    }
+
+    if (assignee) {
+        event.assignedUser = assignee;
+    }
+    return event;
+};

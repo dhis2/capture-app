@@ -1,0 +1,57 @@
+import * as React from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { spacers } from '@dhis2/ui';
+import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
+import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
+import { WarningsSection } from './WarningsSection/WarningsSection.container';
+import { WidgetFeedback } from '../WidgetFeedback';
+import { WidgetIndicator } from '../WidgetIndicator';
+
+type OwnProps = {
+    onLink: (teiId: string, values: Record<string, unknown>) => void;
+};
+
+const getStyles = (): Readonly<any> => ({
+    stickyOnScroll: {
+        position: 'relative',
+        flexGrow: 1,
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
+    },
+});
+
+type Props = OwnProps & WithStyles<typeof getStyles>;
+
+const componentContainers = [
+    { id: 'ErrorsSection', Component: ErrorsSection },
+    { id: 'WarningsSection', Component: WarningsSection },
+    { id: 'FeedbacksSection', Component: WidgetFeedback },
+    { id: 'IndicatorsSection', Component: WidgetIndicator },
+];
+
+class DataEntryWidgetOutputPlain extends React.Component<Props> {
+    renderComponent = (
+        container: { id: string, Component: React.ComponentType<any> },
+        props: Record<string, any>,
+    ) => <container.Component key={container.id} {...props} />
+
+    render() {
+        const { classes, ...passOnProps } = this.props;
+        return (
+            <StickyOnScroll
+                offsetTop={50}
+                minViewpointWidth={768}
+                containerClass={classes.stickyOnScroll}
+            >
+                <div className={classes.container}>
+                    {componentContainers.map(c => this.renderComponent(c, passOnProps))}
+                </div>
+            </StickyOnScroll>
+        );
+    }
+}
+
+export const DataEntryWidgetOutputComponent = withStyles(getStyles)(DataEntryWidgetOutputPlain);

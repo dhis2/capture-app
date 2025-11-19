@@ -637,7 +637,7 @@ And('you delete the recently added tracked entity', () => {
     cy.get('[data-test="profile-widget"]')
         .contains('Person profile')
         .should('exist');
-    cy.get('[data-test="widget-profile-overflow-menu"]')
+    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
         .click();
     cy.contains('Delete Person')
         .click();
@@ -656,7 +656,7 @@ And('you delete the recently added malaria entity', () => {
     cy.get('[data-test="profile-widget"]')
         .contains('Malaria Entity profile')
         .should('exist');
-    cy.get('[data-test="widget-profile-overflow-menu"]')
+    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
         .click();
     cy.contains('Delete Malaria Entity')
         .click();

@@ -1,0 +1,50 @@
+import React, { useCallback } from 'react';
+import { useColumns } from '../../WorkingListsCommon';
+import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
+import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
+import type { Props } from './eventWorkingListsColumnSetup.types';
+import type { ColumnsMetaForDataFetching } from '../types';
+
+const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
+    useCallback((selectedTemplate: any, context: any, meta: any) => {
+        const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
+            defaultColumns
+                .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
+        );
+        onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
+    }, [onLoadView, defaultColumns]);
+
+const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
+    useCallback((queryArgs: any, lastTransaction: number) => {
+        const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
+            defaultColumns
+                .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
+        );
+        onUpdateList(queryArgs, { columnsMetaForDataFetching, lastTransaction });
+    }, [onUpdateList, defaultColumns]);
+
+export const EventWorkingListsColumnSetup = ({
+    program,
+    programStage,
+    customColumnOrder,
+    onLoadView,
+    onUpdateList,
+    ...passOnProps
+}: Props) => {
+    const defaultColumns = useDefaultColumnConfig(programStage);
+    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
+    const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
+    const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
+
+    return (
+        <CurrentViewChangesResolver
+            {...passOnProps}
+            program={program}
+            programStageId={programStage.id}
+            columns={columns}
+            defaultColumns={defaultColumns}
+            onLoadView={injectColumnMetaToLoadList}
+            onUpdateList={injectColumnMetaToUpdateList}
+        />
+    );
+};

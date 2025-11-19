@@ -2,15 +2,15 @@
 # Translators:
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
-# Rica, 2025
 # Philip Larsen Donnelly, 2025
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
+# Rica, 2025
 # Charel van den Elsen <zobeadzorg@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen <zobeadzorg@gmail.com>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -68,6 +68,9 @@ msgstr "Evenement bewerken"
 
 msgid "New event"
 msgstr "Nieuw evenement"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -146,6 +149,11 @@ msgstr "Inschrijving"
 
 msgid "Complete event"
 msgstr "Compleet evenement"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "Een waarde is verplicht"
@@ -415,6 +423,12 @@ msgstr "Sommige operaties lopen nog. Even geduld aub.."
 msgid "Operations running"
 msgstr "Operaties lopen"
 
+msgid "No feedback for this enrollment yet"
+msgstr "Nog geen feedback voor deze inschrijving"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Nog geen indicatoroutput voor deze inschrijving"
+
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
@@ -482,6 +496,12 @@ msgstr "Absoluut bereik"
 
 msgid "Relative range"
 msgstr "Relatief bereik"
+
+msgid "Is empty"
+msgstr ""
+
+msgid "Is not empty"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -621,17 +641,8 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr "Nog geen feedback voor deze inschrijving"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Nog geen indicatoroutput voor deze inschrijving"
-
 msgid "Quick actions"
 msgstr "Snelle acties"
-
-msgid "New Event"
-msgstr "Nieuw evenement"
 
 msgid "Schedule an event"
 msgstr "Plan een evenement"
@@ -742,6 +753,9 @@ msgstr "Schema"
 msgid "Refer"
 msgstr "Refereren"
 
+msgid "New Event"
+msgstr "Nieuw evenement"
+
 msgid "You can't add any more {{ programStageName }} events"
 msgstr ""
 
@@ -760,9 +774,10 @@ msgstr "Stadium"
 msgid "Registered events"
 msgstr "Geregistreerde evenementen"
 
-msgid ""
-"The category option is not valid for the selected organisation unit. Please "
-"select a valid combination."
+msgid "The category option is not valid for the selected organisation unit."
+msgstr ""
+
+msgid "Please select a valid combination."
 msgstr ""
 
 msgid "Get started with Capture app"
@@ -890,6 +905,9 @@ msgstr "evenement"
 msgid "You don't have access to edit this event"
 msgstr "Je hebt geen toegangsrechten om dit evenement te bewerken"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr ""
+
 msgid "View changelog"
 msgstr ""
 
@@ -978,6 +996,12 @@ msgstr "Geen resultaten gevonden voor"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Geen geselecteerd"
+
+msgid "Choose an organisation unit"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Duidelijke selectie"
 
@@ -1003,13 +1027,20 @@ msgid "Search for"
 msgstr "Zoeken"
 
 msgid ""
-"You can also choose a program from the top bar and search in that program"
+"You can also select a program from the top bar to search within that "
+"program."
 msgstr ""
-"U kunt ook een programma uit de bovenste balk kiezen en in dat programma "
-"zoeken"
 
 msgid "Choose a type to start searching"
 msgstr "Kies een type om te beginnen met zoeken"
+
+msgid "{{trackedEntityName}} has no searchable attributes"
+msgstr ""
+
+msgid ""
+"Try selecting a different tracked entity type, or try searching in a program"
+" by choosing one from the top bar."
+msgstr ""
 
 msgid "Search {{name}}"
 msgstr "Zoek {{name}}"
@@ -1021,11 +1052,8 @@ msgid "all programs"
 msgstr "alle programma's"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
-"Vindt u niet de resultaten waarnaar u op zoek was? Probeer alle programma's "
-"te doorzoeken die dit type gebruiken"
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
@@ -1033,8 +1061,9 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Zoek in alle programma's"
 
-msgid "If none of search results match, you can create a new "
-msgstr "Als geen van de zoekresultaten overeenkomt, kunt u een nieuwe maken"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr ""
 
 msgid "Create new"
 msgstr "Maak nieuw"
@@ -1061,8 +1090,24 @@ msgstr ""
 msgid "An error has occurred"
 msgstr "er is een fout opgetreden"
 
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later."
+msgstr ""
+
+msgid "For more details open the Console tab of the Developer tools"
+msgstr ""
+
 msgid "Too many results"
 msgstr "Te veel resultaten"
+
+msgid "This search returned too many results to show."
+msgstr ""
+
+msgid ""
+"Try changing search terms or searching by more attributes to narrow down the"
+" results."
+msgstr ""
 
 msgid "Cannot search in all programs"
 msgstr "Kan niet in alle programma's zoeken"
@@ -1136,10 +1181,11 @@ msgstr "Controleer op inschrijvingen"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
+"program."
 msgstr ""
-"U moet een reden opgeven om te controleren op inschrijvingen voor dit "
-"beschermde programma. Alle activiteiten worden geregistreerd."
+
+msgid "All activity will be logged."
+msgstr ""
 
 msgid "Unsaved changes"
 msgstr "Niet-opgeslagen wijzigingen"
@@ -1175,12 +1221,11 @@ msgstr ""
 msgid "Delete enrollment"
 msgstr "Inschrijving verwijderen"
 
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
+msgid "Are you sure you want to delete this enrollment?"
 msgstr ""
-"Weet u zeker dat u deze inschrijving wilt verwijderen? Hiermee wordt de "
-"huidige inschrijving permanent verwijderd."
+
+msgid "This will permanently remove the current enrollment."
+msgstr ""
 
 msgid "Yes, delete enrollment."
 msgstr "Ja, inschrijving verwijderen."
@@ -1307,6 +1352,12 @@ msgstr "stadium niet gevonden in uitvoering van regels"
 msgid "Delete event"
 msgstr "evenement verwijderen"
 
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this event? "
+msgstr ""
+
 msgid "Yes, delete event"
 msgstr "Ja, evenement verwijderen"
 
@@ -1379,6 +1430,15 @@ msgstr "Schemadatum / Vervaldatum"
 msgid "Please provide a valid organisation unit"
 msgstr "Geef een geldige organisatie-eenheid op"
 
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+"Een evenement plannen in {{stageName}} voor {{programName}} in "
+"{{orgUnitName}}"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr ""
+
 msgid "Schedule info"
 msgstr "Schema info"
 
@@ -1397,9 +1457,11 @@ msgstr "Notitie opslaan"
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
+msgid "Change information about this {{trackedEntityName}} here."
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. Information about "
-"this enrollment can be edited in the Enrollment widget."
+"Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1512,12 +1574,13 @@ msgstr "Deze fase kan maar één evenement hebben"
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event?"
+msgid "Are you sure you want to delete this event?"
 msgstr ""
 
 msgid "An error occurred when updating event status"
@@ -1562,9 +1625,12 @@ msgstr ""
 msgid "Unlink and delete linked event"
 msgstr ""
 
+msgid "Are you sure you want to remove the link and delete the linked event?"
+msgstr ""
+
 msgid ""
-"Are you sure you want to remove the link and delete the linked event? This "
-"action permanently removes the link, linked event, and all related data."
+"This action permanently removes the link, linked event, and all related "
+"data."
 msgstr ""
 
 msgid "Yes, unlink and delete linked event"
@@ -1573,9 +1639,10 @@ msgstr ""
 msgid "Unlink event"
 msgstr ""
 
-msgid ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
+msgid "Are you sure you want to remove the link between these events?"
+msgstr ""
+
+msgid "This action removes the link itself, but the linked event will remain."
 msgstr ""
 
 msgid "Yes, unlink event"
@@ -1674,9 +1741,10 @@ msgstr ""
 msgid "Delete relationship"
 msgstr "Relatie verwijderen"
 
-msgid ""
-"Deleting the relationship is permanent and cannot be undone. Are you sure "
-"you want to delete this relationship?"
+msgid "Deleting the relationship is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this relationship?"
 msgstr ""
 
 msgid "Yes, delete relationship"
@@ -1709,6 +1777,9 @@ msgstr "er is een fout opgetreden bij het laden van werklijsten"
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1733,17 +1804,19 @@ msgstr "Een onbekende fout is opgetreden."
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
 msgstr ""
 
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
+msgid "This cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete the selected events?"
 msgstr ""
 
 msgid "Owner organisation unit"
@@ -1764,6 +1837,9 @@ msgstr "Volg op"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Kies een programmafase om op te filteren {{label}}"
 
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
 "completing the rest. Please see the details below."
@@ -1779,9 +1855,10 @@ msgid ""
 "again."
 msgstr ""
 
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
+msgid "There are currently no active enrollments in the selection."
+msgstr ""
+
+msgid "All enrollments are already completed or cancelled."
 msgstr ""
 
 msgid ""
@@ -1798,9 +1875,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1873,8 +1947,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
+"Deleting records will also delete any associated enrollments and events."
+msgstr ""
+
+msgid "Are you sure you want to delete?"
 msgstr ""
 
 msgid "An error occurred while deleting the records"
@@ -1885,19 +1961,6 @@ msgstr "Werklijst kon niet worden bijgewerkt"
 
 msgid "an error occurred loading the working lists"
 msgstr "er is een fout opgetreden bij het laden van de werklijsten"
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-"er is een fout opgetreden bij het laden van lijsten met instanties van "
-"bijgehouden entiteiten"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} geselecteerd"
-msgstr[1] "{{count}} geselecteerd"
-
-msgid "Deselect all"
-msgstr "Deselecteer alles"
 
 msgid "Update view"
 msgstr "Weergave bijwerken"
@@ -1931,6 +1994,29 @@ msgstr "Laat minder zien"
 
 msgid "Show All"
 msgstr "Toon alles"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} geselecteerd"
+msgstr[1] "{{count}} geselecteerd"
+
+msgid "Deselect all"
+msgstr "Deselecteer alles"
 
 msgid "Download as JSON"
 msgstr "Downloaden als JSON"
@@ -2063,6 +2149,18 @@ msgstr ""
 msgid "Please enter a time"
 msgstr ""
 
+msgid ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgid_plural ""
+"The following attribute types is not supported for searching and has been "
+"hidden"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Some attributes are hidden"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "Coördinaat instellen"
 
@@ -2089,3 +2187,9 @@ msgstr "Gebied op kaart opgeslagen"
 
 msgid "Compatibility mode"
 msgstr "Compatibiliteitsmodus"
+
+msgid ""
+"This app is currently running in compatibility mode due to browser "
+"restrictions. For better performance, use another browser or exit private "
+"mode if this is currently in use."
+msgstr ""
