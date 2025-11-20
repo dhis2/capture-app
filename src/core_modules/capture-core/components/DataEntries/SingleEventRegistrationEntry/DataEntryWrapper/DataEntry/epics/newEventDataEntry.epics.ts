@@ -55,7 +55,7 @@ export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>, store: R
             const orgUnit = orgUnitId && orgUnits
                 ? orgUnits[orgUnitId]
                 : undefined;
-            return batchActions(getOpenDataEntryActions(undefined, undefined, orgUnit));
+            return batchActions(getOpenDataEntryActions(orgUnit));
         }),
     );
 

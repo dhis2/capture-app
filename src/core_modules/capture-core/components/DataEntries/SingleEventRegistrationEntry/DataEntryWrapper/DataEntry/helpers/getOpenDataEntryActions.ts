@@ -49,9 +49,9 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 export const getOpenDataEntryActions = (
+    orgUnit?: CoreOrgUnit | null,
     programCategory?: ProgramCategory | null,
     selectedCategories?: { [key: string]: string } | null,
-    orgUnit?: CoreOrgUnit | null,
 ) => {
     let defaultDataEntryValues = {
         orgUnit: orgUnit
