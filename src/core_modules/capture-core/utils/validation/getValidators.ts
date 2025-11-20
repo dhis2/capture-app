@@ -37,7 +37,7 @@ type Validator = (
         error?: string | null;
         errorCode?: string | null;
     } | null,
-    validationContext?: any | null,
+    validationContext?: any,
 ) => boolean | { valid: boolean; errorMessage?: string; } | { valid: boolean; message?: string; };
 
 export type ValidatorContainer = {
@@ -264,7 +264,7 @@ function buildUniqueValidator(
                 validator: (
                     value: any,
                     internalComponentError?: {error?: string | null; errorCode?: string | null} | null,
-                    contextProps?: any | null,
+                    contextProps?: any,
                 ) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
