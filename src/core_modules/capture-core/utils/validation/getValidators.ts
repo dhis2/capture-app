@@ -36,7 +36,8 @@ type Validator = (
     internalError?: {
         error?: string | null;
         errorCode?: string | null;
-    } | null
+    } | null,
+    validationContext?: any | null,
 ) => boolean | { valid: boolean; errorMessage?: string; } | { valid: boolean; message?: string; };
 
 export type ValidatorContainer = {
@@ -260,7 +261,11 @@ function buildUniqueValidator(
         ?
         [
             {
-                validator: (value: any, contextProps: any) => {
+                validator: (
+                    value: any,
+                    internalComponentError?: {error?: string | null; errorCode?: string | null} | null,
+                    contextProps?: any | null,
+                ) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
@@ -278,7 +283,6 @@ function buildUniqueValidator(
 
 export const getValidators = (
     metaData: DataElement | DateDataElement,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     querySingleResource?: any,
 ): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
