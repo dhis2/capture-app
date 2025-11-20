@@ -44,7 +44,7 @@ export const FormField = React.memo(({
             id: `${fieldProps.formId}-${field.id}`,
             fieldId: field.id,
             fieldLabel: fieldProps.label,
-        }) : fieldUI.errorMessage), []);
+        }) : fieldUI.errorMessage), [onPostProcessErrorMessage, fieldUI, fieldProps, field]);
 
     const commitFieldUpdate = useCallback(async (
         newValue: any,
