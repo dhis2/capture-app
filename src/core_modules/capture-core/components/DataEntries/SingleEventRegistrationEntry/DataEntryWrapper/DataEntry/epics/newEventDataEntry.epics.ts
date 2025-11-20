@@ -45,10 +45,24 @@ type SelectionsCompletenessPayload = {
     triggeringActionType?: string;
 };
 
-export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>) =>
+export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
-        map(() => (batchActions(getOpenDataEntryActions()))),
+        map(() => {
+            const state = store.value;
+            const orgUnitId = state.currentSelections.orgUnitId;
+            const orgUnits = state.organisationUnits;
+            const orgUnit = orgUnitId && orgUnits && orgUnits[orgUnitId]
+                ? {
+                    id: orgUnitId,
+                    name: orgUnits[orgUnitId].name,
+                    path: orgUnits[orgUnitId].path,
+                    code: orgUnits[orgUnitId].code,
+                    groups: orgUnits[orgUnitId].groups,
+                }
+                : undefined;
+            return batchActions(getOpenDataEntryActions(undefined, undefined, orgUnit));
+        }),
     );
 
 export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsCompletenessPayload>, store: ReduxStore) =>
