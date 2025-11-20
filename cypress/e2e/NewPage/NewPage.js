@@ -587,6 +587,17 @@ Then('an error message should show up saying this national identifier is already
     cy.contains('A person with this national identifier is already registered').should('exist');
 });
 
+And('you enter an invalid date in the Age field', () => {
+    cy.get('input[type="text"]')
+        .eq(4)
+        .type('test')
+        .blur();
+});
+
+Then('an error message shows up asking the user to enter a valid date', () => {
+    cy.contains('Please provide a valid date').should('exist');
+});
+
 And('you fill in multiple Allergies options', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('Allergies').should('exist');
