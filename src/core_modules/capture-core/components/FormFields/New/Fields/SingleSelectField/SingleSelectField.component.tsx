@@ -1,11 +1,12 @@
 import React from 'react';
-import { SingleSelectField as SingleSelectFieldUI, SingleSelectOption } from '@dhis2/ui';
-import { withFocusHandler } from './withFocusHandler';
+import { SimpleSingleSelect } from '@dhis2-ui/select';
 
 type Props = {
+    id: string;
     value?: string;
     onBlur?: (value: any) => void;
     onFocus?: (value: any) => void;
+    onChange?: (value: any) => void;
     options: Array<{ value: any; label: string }>;
     disabled?: boolean;
     required?: boolean;
@@ -16,6 +17,7 @@ type Props = {
 
 const SingleSelectFieldComponentPlain = (props: Props) => {
     const {
+        id,
         value,
         onBlur,
         onFocus,
@@ -26,38 +28,27 @@ const SingleSelectFieldComponentPlain = (props: Props) => {
         filterable = true,
         clearable = true,
     } = props;
-    const selectedValue = value ?? '';
 
-    const handleBlur = () => {
-        onBlur?.(selectedValue || null);
-    };
+    console.log(props);
+    
+    const simpleOptions = options.map(option => ({
+        label: option.label,
+        value: option.value,
+    }));
 
-    const handleSelect = ({ selected }: { selected: string }) => {
-        onBlur?.(selected);
+    const onChange = (value: string) => {
+        props.onChange?.(value);
     };
+    
 
     return (
-        <SingleSelectFieldUI
-            selected={selectedValue}
-            onChange={handleSelect}
-            onFocus={onFocus}
-            onKeyDown={handleBlur}
-            onBlur={handleBlur}
-            disabled={disabled}
-            required={required}
-            placeholder={placeholder}
-            filterable={filterable}
-            clearable={clearable}
-        >
-            {options.map(option => (
-                <SingleSelectOption
-                    key={option.value}
-                    label={option.label}
-                    value={option.value}
-                />
-            ))}
-        </SingleSelectFieldUI>
+        <SimpleSingleSelect
+            idPrefix={id}
+            options={simpleOptions}
+            value={value ?? ''}
+            onChange={onChange}
+        />
     );
 };
 
-export const SingleSelectField = withFocusHandler()(SingleSelectFieldComponentPlain);
+export const SingleSelectField = (SingleSelectFieldComponentPlain);
