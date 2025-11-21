@@ -102,7 +102,7 @@ export const FormField = React.memo(({
                 />
             </div>
 
-            {onRenderDivider && onRenderDivider(index, length, field)}
+            {onRenderDivider && onRenderDivider(index, length, passOnProps.hidden)}
         </div>
     );
 });
