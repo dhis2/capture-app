@@ -14,10 +14,12 @@ const makeMapStateToProps = () => {
     const getCompulsory = makeGetCompulsory();
     const getDisabled = makeGetDisabled();
     const mapStateToProps = (state: any, props: { formId: string, fieldsMetaData: any }) => ({
-        rulesHiddenFields: getHiddenFields(state, props),
-        rulesMessages: getRulesMessages(state, props),
-        rulesCompulsoryFields: getCompulsory(state, props),
-        rulesDisabledFields: getDisabled(state, props),
+        ruleEffects: {
+            hiddenFields: getHiddenFields(state, props),
+            messages: getRulesMessages(state, props),
+            compulsoryFields: getCompulsory(state, props),
+            disabledFields: getDisabled(state, props),
+        },
         loadNr: state.forms[props.formId].loadNr,
     });
     return mapStateToProps;

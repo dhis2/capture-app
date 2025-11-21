@@ -20,6 +20,7 @@ import { getValidators, validateValue, validatorTypes } from '../../../utils/val
 import type { ValidatorContainer } from '../../../utils/validation';
 import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
+import type { RuleEffects } from '../D2Form.types';
 
 type CancelablePromise<T> = {
     promise: Promise<T>;
@@ -55,6 +56,7 @@ type Props = {
     fields: Array<FieldConfig>;
     values: { [id: string]: any };
     fieldsUI: { [id: string]: FieldUI };
+    ruleEffects: RuleEffects;
     onUpdateFieldAsync: (
         fieldId: string,
         fieldLabel: string,
@@ -487,6 +489,7 @@ export class FormBuilder extends React.Component<Props> {
             fieldsUI,
             validationAttempted,
             id,
+            ruleEffects,
             onFieldsValidated,
             onUpdateField,
             onUpdateFieldAsync,
@@ -505,13 +508,18 @@ export class FormBuilder extends React.Component<Props> {
         const props = field.props || {};
         const value = values[field.id];
 
-
         return (
             <FormField
                 field={field}
                 value={value}
+                formId={id}
                 index={index}
                 length={fields.length}
+                hidden={ruleEffects.hiddenFields[field.id]}
+                rulesMessage={ruleEffects.messages[field.id]}
+                rulesCompulsory={ruleEffects.compulsoryFields[field.id]}
+                rulesCompulsoryError={ruleEffects.compulsoryErrors[field.id]}
+                rulesDisabled={ruleEffects.disabledFields[field.id]}
                 onGetContainerProps={onGetContainerProps}
                 onRenderDivider={onRenderDivider}
                 onUpdateFieldAsync={onUpdateFieldAsync}

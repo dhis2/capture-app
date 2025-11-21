@@ -5,6 +5,7 @@ import type {
     FieldCommitOptions,
     FieldUI,
 } from '../formbuilder.types';
+import { messageStateKeys } from '../../../../reducers/descriptions/rulesEffects.reducerDescription';
 
 const getFieldAsyncUIState = (fieldUI: FieldUI) => {
     const ignoreKeys = ['valid', 'errorMessage', 'touched'];
@@ -19,8 +20,10 @@ const getFieldAsyncUIState = (fieldUI: FieldUI) => {
 export const FormField = React.memo(({
     field,
     value,
+    formId,
     index,
     length,
+    rulesMessage,
     onGetContainerProps,
     onRenderDivider,
     onUpdateFieldAsync,
@@ -33,7 +36,7 @@ export const FormField = React.memo(({
     ...passOnProps
 }: any) => {
     const fieldUI = useSelector(
-        (state: any) => (state.formsSectionsFieldsUI[fieldProps.formId] || {})[field.id] || {},
+        (state: any) => (state.formsSectionsFieldsUI[formId] || {})[field.id] || {},
         shallowEqual,
     );
     const errorMessage = useMemo(() => (onPostProcessErrorMessage && fieldUI.errorMessage ?
@@ -41,7 +44,7 @@ export const FormField = React.memo(({
             errorMessage: fieldUI.errorMessage,
             errorType: fieldUI.errorType,
             errorData: fieldUI.errorData,
-            id: `${fieldProps.formId}-${field.id}`,
+            id: `${formId}-${field.id}`,
             fieldId: field.id,
             fieldLabel: fieldProps.label,
         }) : fieldUI.errorMessage), [onPostProcessErrorMessage, fieldUI, fieldProps, field]);
@@ -67,6 +70,13 @@ export const FormField = React.memo(({
         [commitEvent]: commitFieldUpdate,
     };
 
+    const ruleMessages = rulesMessage ? {
+        rulesErrorMessage: rulesMessage[messageStateKeys.ERROR],
+        rulesWarningMessage: rulesMessage[messageStateKeys.WARNING],
+        rulesErrorMessageOnComplete: rulesMessage[messageStateKeys.ERROR_ON_COMPLETE],
+        rulesWarningMessageOnComplete: rulesMessage[messageStateKeys.WARNING_ON_COMPLETE],
+    } : {};
+
     return (
         <div
             key={field.id}
@@ -85,6 +95,7 @@ export const FormField = React.memo(({
                     validationAttempted={validationAttempted}
                     validatingMessage={fieldUI.validatingMessage}
                     {...commitPropObject}
+                    {...ruleMessages}
                     {...fieldProps}
                     {...passOnProps}
                     {...asyncProps}
