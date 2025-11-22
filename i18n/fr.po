@@ -9,15 +9,15 @@
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
-# Cyrille Kabrane, 2025
 # Esther Tokouli, 2025
+# Cyrille Kabrane, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Esther Tokouli, 2025\n"
+"Last-Translator: Cyrille Kabrane, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,8 +38,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
-"Cela peut s'expliquer par le fait que le navigateur ou le mode (par exemple,"
-" le mode privé) n'est pas pris en charge. Voir le journal pour plus de "
+"Cela peut s'expliquer par le fait que le navigateur ou le mode (par exemple "
+"le mode privé) n'est pas pris en charge. Voir le journal pour plus de "
 "détails."
 
 msgid ""
@@ -64,16 +64,16 @@ msgid "Last updated"
 msgstr "Dernière mise à jour"
 
 msgid "Enrolled"
-msgstr "Inscrit"
+msgstr "Inscrite"
 
 msgid "Previously enrolled"
-msgstr "Précédemment inscrit"
+msgstr "Précédemment inscrite"
 
 msgid "This value is validating"
 msgstr "Valeur en cours de validation"
 
 msgid "Async field update failed"
-msgstr "Echec de la mise à jour asynchrone du champ"
+msgstr "Échec de la mise à jour asynchrone du champ"
 
 msgid "A value is required"
 msgstr "Une valeur est requise"
@@ -85,7 +85,7 @@ msgid "Please provide a valid integer"
 msgstr "Veuillez saisir un nombre entier valide"
 
 msgid "Please provide a positive integer"
-msgstr "Veuillez saisir un nombre entier positif"
+msgstr "Veuillez saisir un nombre entier positif "
 
 msgid "Please provide zero or a positive integer"
 msgstr "Veuillez saisir un zéro ou un nombre entier positif valide"
@@ -109,19 +109,19 @@ msgid "Please provide an integer between 0 and 100"
 msgstr "Veuillez saisir un nombre entier compris entre 0 et 100"
 
 msgid "Please provide a valid url"
-msgstr "Veuillez saisir un URL valide"
+msgstr "Veuillez fournir un lien URL valide"
 
 msgid "Please provide a valid email address"
-msgstr "Veuillez saisir une adresse email valide"
+msgstr "Veuillez fournir une adresse email valide"
 
 msgid "Please provide a valid age"
-msgstr "Veuillez saisir un âge valide"
+msgstr "Veuillez fournir un âge valide"
 
 msgid "Please provide a valid phone number"
 msgstr "Veuillez saisir un numéro de téléphone valide"
 
 msgid "Please provide a valid organisation unit"
-msgstr "Veuillez saisir une unité d'organisation valide"
+msgstr "Veuillez fournir une unité d'organisation valide"
 
 msgid "Please provide valid coordinates"
 msgstr "Veuillez saisir des coordonnées valides"
@@ -157,7 +157,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Metadata error. see log for details"
-msgstr "Erreur de métadonnées. Voir le journal pour plus de détails"
+msgstr "Erreur de métadonnées. Voir le journal pour plus de détails."
 
 msgid "Assigned user"
 msgstr "Utilisateur assigné"
@@ -193,8 +193,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Il ne s'agit pas d'un programme d'événement ou les métadonnées sont "
-"corrompues. Voir le journal pour plus de détails."
+"Soit il ne s'agit pas d'un programme d'événements, soit les métadonnées sont"
+" corrompues. Voir le journal pour plus de détails."
 
 msgid "This event"
 msgstr "Cet événement"
@@ -1183,7 +1183,7 @@ msgid "Show All"
 msgstr "Afficher tout"
 
 msgid "An error has occured. See log for details"
-msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
+msgstr "Une erreur s'est produite. Voir le journal pour plus de détails."
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Planifiée {{ escape }} échéance {{ time }}"
