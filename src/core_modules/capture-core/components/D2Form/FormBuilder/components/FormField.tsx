@@ -6,6 +6,7 @@ import type {
     FieldUI,
 } from '../formbuilder.types';
 import { messageStateKeys } from '../../../../reducers/descriptions/rulesEffects.reducerDescription';
+import { usePropsMonitor } from 'capture-core/utils/debugging/usePropsMonitor';
 
 const getFieldAsyncUIState = (fieldUI: FieldUI) => {
     const ignoreKeys = ['valid', 'errorMessage', 'touched'];
@@ -24,7 +25,7 @@ export const FormField = React.memo(({
     index,
     length,
     rulesMessage,
-    onGetContainerProps,
+    alternatingBackgroundColor,
     onRenderDivider,
     onUpdateFieldAsync,
     onPostProcessErrorMessage,
@@ -77,6 +78,8 @@ export const FormField = React.memo(({
         rulesWarningMessageOnComplete: rulesMessage[messageStateKeys.WARNING_ON_COMPLETE],
     } : {};
 
+    const backgroundColor = alternatingBackgroundColor ? { className: alternatingBackgroundColor } : {}
+
     return (
         <div
             key={field.id}
@@ -84,7 +87,7 @@ export const FormField = React.memo(({
             data-test={'form-field'}
         >
             <div
-                {...onGetContainerProps && onGetContainerProps(index, length, field)}
+                {...backgroundColor}
                 data-test={`form-field-${field.id}`}
             >
                 <field.component

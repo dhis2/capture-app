@@ -27,8 +27,8 @@ type CancelablePromise<T> = {
     cancel: () => void;
 };
 
-type RenderDividerFn = (index: number, fieldsCount: number, field: FieldConfig) => React.ReactNode;
-type GetContainerPropsFn = (index: number, fieldsCount: number, field: FieldConfig) => any;
+type RenderDividerFn = (index: number, fieldsCount: number, hidden: boolean) => React.ReactNode;
+type GetContainerPropsFn = (index: number, fieldsCount: number, hidden: boolean) => any;
 
 type FieldCommitConfig = {
     readonly fieldId: string;
@@ -480,8 +480,6 @@ export class FormBuilder extends React.Component<Props> {
     renderField = (
         field: FieldConfig,
         index: number,
-        onRenderDivider?: RenderDividerFn | null,
-        onGetContainerProps?: GetContainerPropsFn | null,
     ) => {
         const {
             fields,
@@ -496,8 +494,8 @@ export class FormBuilder extends React.Component<Props> {
             onUpdateFieldUIOnly,
             validateIfNoUIData,
             children,
-            onRenderDivider: extractOnRenderDivider,
-            onGetContainerProps: extractOnGetContainerProps,
+            onRenderDivider,
+            onGetContainerProps,
             onIsValidating,
             onGetValidationContext,
             onPostProcessErrorMessage,
@@ -507,6 +505,8 @@ export class FormBuilder extends React.Component<Props> {
 
         const props = field.props || {};
         const value = values[field.id];
+        const hidden = ruleEffects.hiddenFields[field.id];
+        const alternatingBackgroundColor = onGetContainerProps ? onGetContainerProps(index, length, hidden) : null;
 
         return (
             <FormField
@@ -515,12 +515,12 @@ export class FormBuilder extends React.Component<Props> {
                 formId={id}
                 index={index}
                 length={fields.length}
-                hidden={ruleEffects.hiddenFields[field.id]}
+                hidden={hidden}
                 rulesMessage={ruleEffects.messages[field.id]}
                 rulesCompulsory={ruleEffects.compulsoryFields[field.id]}
                 rulesCompulsoryError={ruleEffects.compulsoryErrors[field.id]}
                 rulesDisabled={ruleEffects.disabledFields[field.id]}
-                onGetContainerProps={onGetContainerProps}
+                alternatingBackgroundColor={alternatingBackgroundColor}
                 onRenderDivider={onRenderDivider}
                 onUpdateFieldAsync={onUpdateFieldAsync}
                 onPostProcessErrorMessage={onPostProcessErrorMessage}
@@ -535,7 +535,7 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     renderFields() {
-        const { fields, children, onRenderDivider, onGetContainerProps } = this.props;
+        const { fields, children } = this.props;
 
         if (children) {
             return children(this.renderField, fields);
@@ -546,7 +546,7 @@ export class FormBuilder extends React.Component<Props> {
                     return this.renderPlugin(field);
                 }
 
-                return this.renderField(field, index, onRenderDivider, onGetContainerProps);
+                return this.renderField(field, index);
             },
         );
     }
