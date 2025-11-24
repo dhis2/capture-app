@@ -1,3 +1,10 @@
+## [104.6.9](https://github.com/dhis2/capture-app/compare/v104.6.8...v104.6.9) (2025-11-24)
+
+
+### Bug Fixes
+
+* [DHIS2-20447] Validate unique attributes after entering/editing value in form ([#4402](https://github.com/dhis2/capture-app/issues/4402)) ([e919cde](https://github.com/dhis2/capture-app/commit/e919cdec018667d5a980a8ef28bb333ea2e17f57))
+
 ## [104.6.8](https://github.com/dhis2/capture-app/compare/v104.6.7...v104.6.8) (2025-11-24)
 
 
