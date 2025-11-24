@@ -73,7 +73,6 @@ export type CachedProgramStageDataElement = {
     compulsory: boolean,
     allowFutureDate?: boolean,
     displayInReports: boolean,
-    minCharactersToSearch?: number,
     renderOptionsAsRadio?: boolean | null,
     renderType: {
         DESKTOP: {
