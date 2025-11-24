@@ -1,3 +1,10 @@
+## [104.6.10](https://github.com/dhis2/capture-app/compare/v104.6.9...v104.6.10) (2025-11-24)
+
+
+### Bug Fixes
+
+* [DHIS2-20305] change TEA unique filter text to 'Exact matches only' ([#4400](https://github.com/dhis2/capture-app/issues/4400)) ([deaba83](https://github.com/dhis2/capture-app/commit/deaba83eee89285dfa87ad031dd73b7444c17b7e))
+
 ## [104.6.9](https://github.com/dhis2/capture-app/compare/v104.6.8...v104.6.9) (2025-11-24)
 
 
