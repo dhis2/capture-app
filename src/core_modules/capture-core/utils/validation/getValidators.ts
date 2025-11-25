@@ -272,11 +272,11 @@ function buildMinCharactersToSearchValidator(metaData: DataElement): Array<Valid
 
                 const trimmedValue = value.trim();
 
-                if (trimedValue === '') {
+                if (trimmedValue === '') {
                     return true;
                 }
 
-                return minCharactersToSearch <= trimedValue.length;
+                return minCharactersToSearch <= trimmedValue.length;
             },
             message: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
             errorMessage: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
