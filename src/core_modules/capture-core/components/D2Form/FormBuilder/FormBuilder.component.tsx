@@ -192,12 +192,14 @@ export class FormBuilder extends React.Component<Props> {
     fieldInstances: Map<string, any>;
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
     commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
+    ruleMessages: { [fieldId: string]: any };
 
     constructor(props: Props) {
         super(props);
         this.fieldInstances = new Map();
         this.fieldsValidatingPromiseContainer = {};
         this.commitUpdateTriggeredForFields = {};
+        this.ruleMessages = {};
 
         if (this.props.validateIfNoUIData) {
             this.validateAllFields(this.props);
@@ -466,6 +468,37 @@ export class FormBuilder extends React.Component<Props> {
         }, [] as Array<{ prop: FieldConfig; instance: any; uiState: FieldUI }>);
     }
 
+    getRuleMessages(fieldId, ruleMessage) {
+        if (!ruleMessage) {
+            this.ruleMessages[fieldId] = null;
+            return null;
+        }
+
+        const prevRuleMessage = this.ruleMessages[fieldId];
+        if (!prevRuleMessage) {
+            this.ruleMessages[fieldId] = ruleMessage;
+            return ruleMessage;
+        }
+
+        if (Object.keys(ruleMessage).some(key => {
+            const currentMessage = ruleMessage[key];
+            const prevMessage = prevRuleMessage[key];
+            if (Array.isArray(currentMessage)) {
+                if (!Array.isArray(prevMessage) || prevMessage.length != currentMessage.length) {
+                    return false;
+                }
+                return currentMessage.some((value, index) => value !== prevMessage[index]);
+            } else {
+                return currentMessage !== prevMessage;
+            }
+        })) {
+            this.ruleMessages[fieldId] = ruleMessage;
+            return ruleMessage;
+        }
+
+        return this.ruleMessages[fieldId]
+    }
+
     renderPlugin = (
         field: FieldConfig,
     ) => (
@@ -516,7 +549,7 @@ export class FormBuilder extends React.Component<Props> {
                 index={index}
                 length={fields.length}
                 hidden={hidden}
-                rulesMessage={ruleEffects.messages[field.id]}
+                rulesMessage={this.getRuleMessages(field.id, ruleEffects.messages[field.id])}
                 rulesCompulsory={ruleEffects.compulsoryFields[field.id]}
                 rulesCompulsoryError={ruleEffects.compulsoryErrors[field.id]}
                 rulesDisabled={ruleEffects.disabledFields[field.id]}
