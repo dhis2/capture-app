@@ -155,6 +155,12 @@ const SearchFormIndex = ({
 
             if (isValid) {
                 setError(false);
+
+                const isValidForm = formReference[formId].validateFormScrollToFirstFailedField({});
+                if (!isValidForm) {
+                    return;
+                }
+
                 saveCurrentFormData({ searchScopeType, searchScopeId, formId, formsValues, searchGroupsForSelectedScope });
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:

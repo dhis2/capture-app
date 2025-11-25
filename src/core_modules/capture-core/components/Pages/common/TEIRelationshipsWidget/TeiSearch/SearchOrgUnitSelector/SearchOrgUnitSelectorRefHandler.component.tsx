@@ -13,6 +13,7 @@ export const SearchOrgUnitSelectorRefHandler = (props: Props) => {
     const { innerRef, ...passOnProps } = props;
     return (
         <SearchOrgUnitSelector
+            ref={innerRef}
             {...passOnProps}
         />
     );
