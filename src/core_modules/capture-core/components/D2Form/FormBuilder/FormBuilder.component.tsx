@@ -85,6 +85,7 @@ type Props = {
     onGetContainerProps?: GetContainerPropsFn | null;
     onGetValidationContext?: (() => any | null) | null;
     onIsValidating: IsValidatingFn | null;
+    expiryPeriod: any;
     pluginContext?: PluginContext;
     loadNr: number;
     onPostProcessErrorMessage?: PostProcessErrorMessage;
@@ -532,6 +533,7 @@ export class FormBuilder extends React.Component<Props> {
             onIsValidating,
             onGetValidationContext,
             onPostProcessErrorMessage,
+            expiryPeriod,
             pluginContext,
             loadNr,
             ...passOnProps } = this.props;
