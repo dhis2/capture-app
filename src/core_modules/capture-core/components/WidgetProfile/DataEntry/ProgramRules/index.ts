@@ -1,2 +1,2 @@
 export { buildRulesContainer } from './rulesContainer';
-export { getRulesActionsForTEI, getRulesActionsForTEIAsync } from './getRulesActionsForTEI';
+export { getRulesActionsForTEI } from './getRulesActionsForTEI';

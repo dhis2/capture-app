@@ -25,10 +25,8 @@ const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
 ]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
-jest.mock('../RuleEngine/RuleEngine', () => ({
-    RuleEngine: jest
-        .fn()
-        .mockImplementation(() => ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
+jest.mock('../rulesEngine', () => ({
+    ruleEngine: { getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) },
 }));
 
 jest.mock('../../metaDataMemoryStores/constants/constants.store', () => ({
@@ -124,8 +122,8 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
         ];
     });
 
-    test('RulesEngine called with computed arguments from getApplicableRuleEffectsForEventProgram', () => {
-        getApplicableRuleEffectsForEventProgram({
+    test('RulesEngine called with computed arguments from getApplicableRuleEffectsForEventProgram', async () => {
+        await getApplicableRuleEffectsForEventProgram({
             program,
             orgUnit,
             currentEvent,
@@ -144,8 +142,8 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
         expect(rulesEngineInput).toMatchSnapshot();
     });
 
-    test('Hierarchical result', () => {
-        const effects = getApplicableRuleEffectsForEventProgram({
+    test('Hierarchical result', async () => {
+        const effects = await getApplicableRuleEffectsForEventProgram({
             program,
             orgUnit,
             currentEvent,
@@ -154,8 +152,8 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
         expect(effects.DISPLAYTEXT).toBeDefined();
     });
 
-    test('RulesEngine called without programRules', () => {
-        const effects = getApplicableRuleEffectsForEventProgram({
+    test('RulesEngine called without programRules', async () => {
+        const effects = await getApplicableRuleEffectsForEventProgram({
             program: new EventProgram((initProgram) => {
                 initProgram.programRules = [];
             }),
