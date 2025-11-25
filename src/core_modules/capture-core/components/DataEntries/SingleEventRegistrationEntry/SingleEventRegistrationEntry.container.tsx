@@ -44,7 +44,7 @@ const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerP
             if (!isLoading && !hasRun.current) {
                 dispatch(
                     batchActions([
-                        ...getOpenDataEntryActions(orgUnit, programCategory, selectedCategories),
+                        ...getOpenDataEntryActions(programCategory, selectedCategories, orgUnit),
                     ]),
                 );
                 hasRun.current = true;

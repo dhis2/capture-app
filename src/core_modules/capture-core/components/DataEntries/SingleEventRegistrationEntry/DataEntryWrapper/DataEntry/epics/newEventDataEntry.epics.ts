@@ -50,12 +50,13 @@ export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>, store: R
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
         map(() => {
             const state = store.value;
+            const selectedCategories = state.currentSelections.categories;
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnits = state.organisationUnits;
             const orgUnit = orgUnitId && orgUnits
                 ? orgUnits[orgUnitId]
                 : undefined;
-            return batchActions(getOpenDataEntryActions(orgUnit));
+            return batchActions(getOpenDataEntryActions(undefined, selectedCategories, orgUnit));
         }),
     );
 
