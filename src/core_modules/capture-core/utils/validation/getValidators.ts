@@ -270,7 +270,7 @@ function buildMinCharactersToSearchValidator(metaData: DataElement): Array<Valid
                     return true;
                 }
 
-                const trimedValue = value.trim();
+                const trimmedValue = value.trim();
 
                 if (trimedValue === '') {
                     return true;
