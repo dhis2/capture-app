@@ -44,6 +44,7 @@ import {
 import { convertDateObjectToDateFormatString } from '../../../../capture-core/utils/converters/date';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
+import { relatedStageActions } from '../../WidgetRelatedStages';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -350,7 +351,14 @@ type FinalTeiDataEntryProps = {
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
     firstStageMetaData?: { stage: ProgramStage } | null;
-    relatedStageRef?: { current: RelatedStageRefPayload | null },
+    relatedStageRef?: { current: RelatedStageRefPayload | null };
+    relatedStageActionsOptions?: {
+        [key in keyof typeof relatedStageActions]?: {
+            hidden?: boolean;
+            disabled?: boolean;
+            disabledMessage?: string;
+        };
+    };
     formFoundation: RenderFoundation;
 };
 // final step before the generic dataEntry is inserted
@@ -370,13 +378,14 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     };
 
     render() {
-        const { enrollmentMetadata, firstStageMetaData, ...passOnProps } = this.props;
+        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, ...passOnProps } = this.props;
 
         return (
             firstStageMetaData ? (
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
                     firstStageMetaData={firstStageMetaData}
+                    relatedStageActionsOptions={relatedStageActionsOptions}
                 />
             ) : (
                 <DataEntry
