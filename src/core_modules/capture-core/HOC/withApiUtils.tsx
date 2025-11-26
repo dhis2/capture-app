@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 
-export const withApiUtils = (InnerComponent: React.ComponentType<any>) => (props: any) => {
+export const withApiUtils = (InnerComponent: React.ComponentType<any>) => forwardRef((props: any, ref) => {
     const dataEngine = useDataEngine();
     const { querySingleResource, mutate } = React.useMemo(
         () => ({
@@ -12,5 +12,5 @@ export const withApiUtils = (InnerComponent: React.ComponentType<any>) => (props
         [dataEngine],
     );
 
-    return <InnerComponent {...props} querySingleResource={querySingleResource} mutate={mutate} />;
-};
+    return <InnerComponent {...props} querySingleResource={querySingleResource} mutate={mutate} ref={ref} />;
+});

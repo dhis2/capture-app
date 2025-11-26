@@ -7,7 +7,7 @@ type Props = {
     dataStoreKey: string,
 }
 export const useEnrollmentPageLayout = ({ selectedScopeId, defaultPageLayout, dataStoreKey }: Props) => {
-    const { data, isLoading, isError } = useApiMetadataQuery(
+    const { data, isInitialLoading, isError } = useApiMetadataQuery(
         ['customEnrollmentPageLayout'],
         {
             resource: 'dataStore/capture?fields=.',
@@ -35,7 +35,7 @@ export const useEnrollmentPageLayout = ({ selectedScopeId, defaultPageLayout, da
 
     return {
         pageLayout: data,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

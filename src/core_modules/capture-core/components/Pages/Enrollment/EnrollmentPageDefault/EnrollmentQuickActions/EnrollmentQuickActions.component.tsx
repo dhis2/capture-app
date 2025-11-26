@@ -1,7 +1,7 @@
 import React, { useState, useMemo, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';

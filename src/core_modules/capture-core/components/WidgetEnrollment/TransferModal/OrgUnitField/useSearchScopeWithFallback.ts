@@ -5,7 +5,7 @@ type Props = {
 };
 
 export const useSearchScopeWithFallback = ({ searchText }: Props) => {
-    const { data: orgUnitRoots, isLoading } = useApiMetadataQuery(
+    const { data: orgUnitRoots, isInitialLoading } = useApiMetadataQuery(
         ['organisationUnits', 'userOrgUnitScope'],
         {
             resource: 'me',
@@ -24,7 +24,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         },
     );
 
-    const { data: searchOrgUnits, isLoading: isLoadingSearch } = useApiMetadataQuery(
+    const { data: searchOrgUnits, isInitialLoading: isInitialLoadingSearch } = useApiMetadataQuery(
         ['organisationUnits', 'userOrgUnitScope', 'search', searchText],
         {
             resource: 'organisationUnits',
@@ -48,6 +48,6 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
 
     return {
         orgUnitRoots: searchText?.length ? searchOrgUnits : orgUnitRoots,
-        isLoading: searchText?.length ? isLoadingSearch : isLoading,
+        isLoading: searchText?.length ? isInitialLoadingSearch : isInitialLoading,
     };
 };

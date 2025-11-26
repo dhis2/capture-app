@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton } from 'capture-ui';
-import cx from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacersNum, IconChevronUp24 } from '@dhis2/ui';
 
 type ChevronIconProps = {

@@ -2,7 +2,7 @@
  * @namespace Pagination
  */
 import * as React from 'react';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 

@@ -1,7 +1,7 @@
 import React, { useMemo, type ComponentType } from 'react';
 import { colors, spacers } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 import type { ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
@@ -106,7 +106,7 @@ const MainPagePlain = ({
                     )}
                     {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
                         <div className={classes.container} data-test={'main-page-working-list'}>
-                            <div className={classNames(classes.leftColumn, 'left-column-main-page')}>
+                            <div className={cx(classes.leftColumn, 'left-column-main-page')}>
                                 <WorkingListsType
                                     programId={programId}
                                     orgUnitId={orgUnitId}
@@ -115,7 +115,7 @@ const MainPagePlain = ({
                                     onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                                 />
                             </div>
-                            <div className={classNames(classes.rightColumn, 'right-column-main-page')}>
+                            <div className={cx(classes.rightColumn, 'right-column-main-page')}>
                                 <WidgetBulkDataEntry
                                     programId={programId}
                                     onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
@@ -126,10 +126,10 @@ const MainPagePlain = ({
                 </>
             ) : (
                 <div className={classes.container}>
-                    <div className={classNames(classes.leftColumn, 'left-column-main-page', classes.searchBoxWrapper)}>
+                    <div className={cx(classes.leftColumn, 'left-column-main-page', classes.searchBoxWrapper)}>
                         <SearchBox programId={programId} />
                     </div>
-                    <div className={classNames(classes.rightColumn, 'right-column-main-page')}>
+                    <div className={cx(classes.rightColumn, 'right-column-main-page')}>
                         <TemplateSelector />
                         <br />
                         <WidgetBulkDataEntry

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './textInput.module.css';
 
 type Props = {
@@ -8,11 +8,7 @@ type Props = {
     inFocus: boolean;
     onBlur?: (event: React.SyntheticEvent<HTMLInputElement>, rest?: any) => void;
     onFocus?: () => void;
-    classes: {
-        inputWrapperFocused: string;
-        inputWrapperUnfocused: string;
-        [key: string]: any;
-    };
+    classes: Record<string, any>;
     [key: string]: any;
 };
 
@@ -34,7 +30,7 @@ export const withTextFieldFocusHandler = () => (InnerComponent: React.ComponentT
             const inputWrapper = inFocus ? inputWrapperFocused : inputWrapperUnfocused;
             return (
                 <div
-                    className={classNames(defaultClasses.inputWrapper, inputWrapper)}
+                    className={cx(defaultClasses.inputWrapper, inputWrapper)}
                 >
                     <InnerComponent
                         onFocus={this.handleFocus}

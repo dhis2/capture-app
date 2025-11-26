@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { useCanAddNewEventToStage } from '../hooks';

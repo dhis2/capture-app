@@ -1,13 +1,13 @@
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { errorCreator } from 'capture-core-utils';
+import type { CaptureClientEvent } from 'capture-core-utils/types/global';
+import type { ApiDataValue } from 'capture-core-utils/types/api-types';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
 import type { QuerySingleResource } from '../utils/api/api.types';
-import type { CaptureClientEvent } from '../../capture-core-utils/types/global';
-import type { ApiDataValue } from '../../capture-core-utils/types/api-types';
 
 
 type ApiTEIEvent = {

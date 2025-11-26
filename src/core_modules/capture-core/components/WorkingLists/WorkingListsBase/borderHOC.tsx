@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import type { WithStyles } from '@material-ui/core';
+import { withStyles } from 'capture-core-utils/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
 
 
 const getBorder = (theme: any) => {

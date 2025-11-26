@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { type ComponentType } from 'react';
 import { compose } from 'redux';
-import type { ReduxStore } from '../../../../../core_modules/capture-core-utils/types/global';
+import type { ReduxStore } from 'capture-core-utils/types/global';
 import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../HOC/withErrorMessageHandler';

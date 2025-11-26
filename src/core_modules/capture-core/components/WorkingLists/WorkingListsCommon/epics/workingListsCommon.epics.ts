@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import type { ReduxStore } from 'capture-core-utils/types';
 import { workingListsCommonActionTypes, setStickyFiltersAfterColumnSorting } from '../actions';
-import type { ReduxStore } from '../../../../../capture-core-utils/types';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(

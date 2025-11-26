@@ -60,7 +60,7 @@ export const useBulkDataEntryDatastoreConfigurations = (programId: string) => {
         { select: (captureKeys: Array<string> | null) => captureKeys?.includes('bulkDataEntry') },
     );
 
-    const { data, isLoading, isError, error } = useApiMetadataQuery<any>(
+    const { data, isInitialLoading, isError, error } = useApiMetadataQuery<any>(
         ['bulkDataEntryConfigurations'],
         { resource: 'dataStore/capture/bulkDataEntry' },
         {
@@ -103,6 +103,6 @@ export const useBulkDataEntryDatastoreConfigurations = (programId: string) => {
 
     return {
         bulkDataEntryConfigurations: data,
-        isLoading: namespaceIsLoading || isLoading,
+        isLoading: namespaceIsLoading || isInitialLoading,
     };
 };

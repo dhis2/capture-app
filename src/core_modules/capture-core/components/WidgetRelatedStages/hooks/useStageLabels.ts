@@ -5,7 +5,7 @@ import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 export const useStageLabels = (programId: string, programStageId?: string) => {
     const storageController = getUserMetadataStorageController();
 
-    const { data, error, isLoading } = useIndexedDBQuery(
+    const { data, error, isInitialLoading } = useIndexedDBQuery(
         ['programStageLabels', programStageId],
         () =>
             storageController.get(USER_METADATA_STORES.PROGRAMS, programId, {
@@ -25,7 +25,7 @@ export const useStageLabels = (programId: string, programStageId?: string) => {
     return {
         scheduledLabel: data?.displayDueDateLabel ?? i18n.t('Scheduled date'),
         occurredLabel: data?.displayExecutionDateLabel ?? i18n.t('Report date'),
-        isLoading,
+        isLoading: isInitialLoading,
         error,
     };
 };

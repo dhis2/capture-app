@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './textInput.module.css';
 
 type Classes = {
@@ -25,14 +25,14 @@ export const TextInput = (props: Props) => {
                     <textarea
                         data-test="capture-ui-textarea"
                         ref={inputRef}
-                        className={classNames(defaultClasses.textArea, classes.input)}
+                        className={cx(defaultClasses.textArea, classes.input)}
                         disabled={disabled}
                         {...passOnProps}
                     /> :
                     <input
                         ref={inputRef}
                         type="text"
-                        className={classNames(defaultClasses.input, classes.input)}
+                        className={cx(defaultClasses.input, classes.input)}
                         disabled={disabled}
                         {...passOnProps}
                     />
@@ -41,6 +41,3 @@ export const TextInput = (props: Props) => {
     );
 };
 
-TextInput.defaultProps = {
-    classes: {},
-};

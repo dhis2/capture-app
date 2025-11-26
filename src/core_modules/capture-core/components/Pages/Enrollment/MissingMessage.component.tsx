@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';

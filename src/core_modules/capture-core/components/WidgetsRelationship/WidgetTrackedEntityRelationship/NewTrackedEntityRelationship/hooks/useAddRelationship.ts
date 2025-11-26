@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import type { Mutation } from 'capture-core-utils/types/app-runtime';
 

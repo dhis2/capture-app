@@ -2,8 +2,8 @@ import React from 'react';
 import log from 'loglevel';
 import { Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { errorCreator } from 'capture-core-utils';
 import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
-import { errorCreator } from '../../../../../../capture-core-utils';
 
 type Config = {
     label: string;
