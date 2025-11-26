@@ -266,7 +266,7 @@ function buildMinCharactersToSearchValidator(metaData: DataElement): Array<Valid
     return [
         {
             validator: (value) => {
-                if (value === undefined) {
+                if (value === undefined || typeof value !== 'string') {
                     return true;
                 }
 
