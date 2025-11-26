@@ -16,7 +16,7 @@ type Props = {
     onFocus?: (value: string | null) => void;
     options: Option[];
     disabled?: boolean;
-    // required?: boolean;
+    required?: boolean;
     placeholder?: string;
     filterable?: boolean;
     clearable?: boolean;
@@ -33,8 +33,9 @@ const SingleSelectFieldComponentPlain = ({
     onFocus,
     options,
     disabled,
+    required,
     placeholder,
-    filterable,
+    filterable = true,
     clearable = true,
     dataTest,
 }: Props) => {
@@ -74,6 +75,7 @@ const SingleSelectFieldComponentPlain = ({
             placeholder={placeholder}
             clearable={clearable}
             filterable={filterable}
+            aria-required={required}
             onChange={handleChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
