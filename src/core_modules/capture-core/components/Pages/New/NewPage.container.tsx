@@ -6,12 +6,11 @@ import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
-    showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
+    showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, EventProgram } from '../../../metaData';
-import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityAttributes } from './hooks';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
@@ -65,10 +64,6 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
         () => { dispatch(showMessageThatCategoryOptionIsInvalidForOrgUnit()); },
         [dispatch]);
 
-    const dispatchShowMessageToSelectProgramCategoryOnNewPage = useCallback(
-        () => { dispatch(showMessageToSelectProgramCategoryOnNewPage()); },
-        [dispatch]);
-
     const dispatchShowDefaultViewOnNewPage = useCallback(
         () => { dispatch(showDefaultViewOnNewPage()); },
         [dispatch]);
@@ -81,8 +76,6 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
 
     const currentScopeId: string =
         useSelector(({ currentSelections }: any) => currentSelections.programId || currentSelections.trackedEntityTypeId);
-
-    const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
     // TODO: OrgUnitSelectionIncomplete should be removed when DHIS2-19171 is implemented
     const orgUnitSelectionIncomplete: boolean = useSelector(
@@ -130,14 +123,11 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
             />
             <NewPageComponent
                 showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
-                showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
                 showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
                 showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
                 handleMainPageNavigation={handleMainPageNavigation}
                 currentScopeId={currentScopeId}
                 orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
-                programCategorySelectionIncomplete={programSelectionIsIncomplete}
-                missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
                 writeAccess={writeAccess}
                 newPageStatus={newPageStatus}

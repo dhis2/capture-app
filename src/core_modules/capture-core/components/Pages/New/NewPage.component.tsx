@@ -25,7 +25,6 @@ type Props = ContainerProps & WithStyles<typeof styles>;
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
-    showMessageToSelectProgramCategoryOnNewPage,
     showMessageThatCategoryOptionIsInvalidForOrgUnit,
     showDefaultViewOnNewPage,
     handleMainPageNavigation,
@@ -34,9 +33,7 @@ const NewPagePlain = ({
     newPageStatus,
     newPageKey,
     writeAccess,
-    programCategorySelectionIncomplete,
     categoryOptionIsInvalidForOrgUnit,
-    missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
     trackedEntityName,
     trackedEntityInstanceAttributes,
@@ -51,8 +48,6 @@ const NewPagePlain = ({
     useEffect(() => {
         if (orgUnitSelectionIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
-        } else if (programCategorySelectionIncomplete) {
-            showMessageToSelectProgramCategoryOnNewPage();
         } else if (categoryOptionIsInvalidForOrgUnit) {
             showMessageThatCategoryOptionIsInvalidForOrgUnit();
         } else {
@@ -60,10 +55,8 @@ const NewPagePlain = ({
         }
     },
     [
-        programCategorySelectionIncomplete,
         orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
-        showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
         categoryOptionIsInvalidForOrgUnit,
         showMessageThatCategoryOptionIsInvalidForOrgUnit,
@@ -109,29 +102,6 @@ const NewPagePlain = ({
                                     {i18n.t('Cancel')}
                                 </Button>
                             </>
-                        }
-
-                        {
-                            newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
-                            (() => {
-                                const missingCategories = missingCategoriesInProgramSelection.reduce(
-                                    (acc, { name }, index) => {
-                                        if ((index + 1 === missingCategoriesInProgramSelection.length)) {
-                                            return `${acc} ${name} ${
-                                                missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'
-                                            }`;
-                                        }
-                                        return `${acc} ${name},`;
-                                    }, '');
-
-                                return (
-                                    <IncompleteSelectionsMessage>
-                                        {i18n.t('Choose the {{missingCategories}} to start reporting', {
-                                            missingCategories, interpolation: { escapeValue: false },
-                                        })}
-                                    </IncompleteSelectionsMessage>
-                                );
-                            })()
                         }
 
                         {
