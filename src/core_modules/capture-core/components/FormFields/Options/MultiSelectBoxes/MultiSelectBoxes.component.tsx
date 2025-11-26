@@ -27,7 +27,6 @@ type Props = OwnProps & WithStyles<typeof styles>;
 class MultiSelectBoxesPlain extends Component<Props> {
     checkedValues!: Set<any> | null;
     labelClasses: any;
-    containerInstance: any;
 
     constructor(props: Props) {
         super(props);
@@ -126,7 +125,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
         this.setCheckedStatusForBoxes();
 
         return (
-            <div ref={(containerInstance) => { this.containerInstance = containerInstance; }}>
+            <div>
                 <FieldSet>
                     {
                         (() => {

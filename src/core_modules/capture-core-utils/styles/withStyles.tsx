@@ -19,6 +19,12 @@ type Options = {
     withTheme?: boolean;
 }
 
+// Transform the raw style object with Emotion’s css() so that className={classes.label} continues to work as before
+const cssTransform = rawStyles => Object.keys(rawStyles).reduce((acc, key) => {
+    acc[key] = css(rawStyles[key] as any);
+    return acc;
+}, {} as any);
+
 export const withStyles =
     <S extends Record<string, Style>, T = typeof theme>(stylesOrCreator: StylesArg<S, T>, option?: Options) =>
     /* Ideally, the correct type would be: Component: React.ComponentType<P>.
@@ -35,11 +41,8 @@ export const withStyles =
                     stylesOrCreator && typeof stylesOrCreator === 'function'
                         ? stylesOrCreator(theme as T)
                         : stylesOrCreator;
-                // Transform the raw style object with Emotion’s css() so that className={classes.label} continues to work as before
-                return Object.keys(rawStyles).reduce((acc, key) => {
-                    acc[key] = css(rawStyles[key] as any);
-                    return acc;
-                }, {} as any);
+
+                return cssTransform(rawStyles);
             }, []);
 
             return option?.withTheme
