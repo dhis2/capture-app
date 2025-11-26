@@ -32,7 +32,7 @@ export class D2TextField extends Component<Props> {
     }
 
     focus() {
-        this.instance && this.instance.focus();
+        this.instance?.focus();
     }
 
     render() {

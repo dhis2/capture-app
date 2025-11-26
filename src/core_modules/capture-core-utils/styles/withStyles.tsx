@@ -21,9 +21,9 @@ type Options = {
 
 // Transform the raw style object with Emotion’s css() so that className={classes.label} continues to work as before
 const cssTransform = rawStyles => Object.keys(rawStyles).reduce((acc, key) => {
-    acc[key] = css(rawStyles[key] as any);
+    acc[key] = css(rawStyles[key]);
     return acc;
-}, {} as any);
+}, {});
 
 export const withStyles =
     <S extends Record<string, Style>, T = typeof theme>(stylesOrCreator: StylesArg<S, T>, option?: Options) =>
