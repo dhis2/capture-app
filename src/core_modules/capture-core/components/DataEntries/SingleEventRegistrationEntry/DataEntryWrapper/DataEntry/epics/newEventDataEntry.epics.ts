@@ -56,7 +56,17 @@ export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>, store: R
             const orgUnit = orgUnitId && orgUnits
                 ? orgUnits[orgUnitId]
                 : undefined;
-            return batchActions(getOpenDataEntryActions(undefined, selectedCategories, orgUnit));
+            const program = getEventProgramThrowIfNotFound(state.currentSelections.programId);
+            const categoryCombination = program.categoryCombination;
+            const programCategory = categoryCombination ? {
+                displayName: categoryCombination.name,
+                id: categoryCombination.id,
+                categories: Array.from(categoryCombination.categories.values()).map(category => ({
+                    id: category.id,
+                    displayName: category.name,
+                })),
+            } : null;
+            return batchActions(getOpenDataEntryActions(programCategory, selectedCategories, orgUnit));
         }),
     );
 
