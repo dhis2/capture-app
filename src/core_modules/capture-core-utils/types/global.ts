@@ -8,6 +8,9 @@ export type ReduxStore = {
             programId: string;
             orgUnitId?: string;
             complete?: boolean;
+            trackedEntityTypeId?: string;
+            categories?: Record<string, string>;
+            categoriesMeta?: Record<string, { name: string; writeAccess: boolean }>;
         };
         possibleDuplicates: {
             isLoading: boolean;
