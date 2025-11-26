@@ -9,6 +9,7 @@ export type Props = {
     title: string;
     options?: Options | null;
     multiValueFilter?: boolean;
+    unique: boolean;
     disabled?: boolean;
     tooltipContent?: string;
     onSetVisibleSelector: (itemId?: string | null) => void;

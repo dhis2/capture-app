@@ -29,6 +29,7 @@ type Props = {
     type: string;
     options?: Options | null;
     multiValueFilter?: boolean;
+    unique: boolean;
     title: string;
     onUpdateFilter: UpdateFilter;
     onClearFilter: ClearFilter;
@@ -105,13 +106,14 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable } = this.props;
+        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable, unique } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
                 options={options}
                 multiValueFilter={multiValueFilter}
+                unique={unique}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}

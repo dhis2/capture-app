@@ -7,6 +7,7 @@ type PassOnProps = Readonly<{
     onUpdate: (value: any) => void;
     onRemove: () => void;
     isRemovable?: boolean;
+    unique: boolean;
 }>;
 
 export type Props = Readonly<{
