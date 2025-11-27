@@ -208,7 +208,7 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
-        if (prevProps.id !== this.props.id && prevProps.loadNr !== this.props.loadNr) {
+        if (prevProps.id !== this.props.id || prevProps.loadNr !== this.props.loadNr) {
             this.commitUpdateTriggeredForFields = {};
             if (this.props.validateIfNoUIData) {
                 this.validateAllFields(this.props);
