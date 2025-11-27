@@ -28,6 +28,7 @@ export class DataElement {
     _optionSet!: OptionSet | null;
     _displayInForms = true;
     _displayInReports = true;
+    _minCharactersToSearch!: number | undefined;
     _icon?: Icon;
     _unique!: Unique | null;
     _inherit!: boolean;
@@ -193,6 +194,13 @@ export class DataElement {
 
     set attributeValues(value: CachedAttributeValue[]) {
         this._attributeValues = value;
+    }
+
+    set minCharactersToSearch(minCharactersToSearch: number | undefined) {
+        this._minCharactersToSearch = minCharactersToSearch;
+    }
+    get minCharactersToSearch(): number | undefined {
+        return this._minCharactersToSearch;
     }
 
     * getPropertyNames(): Generator<string, void, void> {

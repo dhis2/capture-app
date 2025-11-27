@@ -33,6 +33,7 @@ export class TeiRegistrationFactory {
             o.description = searchGroupElement.description;
             o.displayInForms = true;
             o.displayInReports = searchGroupElement.displayInReports;
+            o.minCharactersToSearch = searchGroupElement.minCharactersToSearch;
             o.compulsory = searchGroupElement.compulsory;
             o.disabled = searchGroupElement.disabled;
             o.type = teiAttribute.valueType;
