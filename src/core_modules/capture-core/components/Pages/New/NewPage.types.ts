@@ -1,6 +1,8 @@
 import type { newPageStatuses } from './NewPage.constants';
 import { dataElementTypes } from '../../../metaData';
 
+type ProgramCategories = Array<{ name: string; id: string }>;
+
 type InputAttribute = {
   attribute: string;
   code: string;
@@ -21,7 +23,7 @@ export type ContainerProps = {
   currentScopeId: string;
   orgUnitSelectionIncomplete: boolean;
   programCategorySelectionIncomplete: boolean;
-  missingCategoriesInProgramSelection: Array<{ name: string; id: string }>;
+  missingCategoriesInProgramSelection: ProgramCategories;
   newPageStatus: keyof typeof newPageStatuses;
   writeAccess: boolean;
   error: boolean;

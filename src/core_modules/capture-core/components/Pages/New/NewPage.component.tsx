@@ -34,10 +34,10 @@ const NewPagePlain = ({
     newPageStatus,
     newPageKey,
     writeAccess,
-    categoryOptionIsInvalidForOrgUnit,
-    orgUnitSelectionIncomplete,
     programCategorySelectionIncomplete,
+    categoryOptionIsInvalidForOrgUnit,
     missingCategoriesInProgramSelection,
+    orgUnitSelectionIncomplete,
     trackedEntityName,
     trackedEntityInstanceAttributes,
 }: Props) => {
@@ -60,11 +60,13 @@ const NewPagePlain = ({
         }
     },
     [
+        programCategorySelectionIncomplete,
         orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
         showDefaultViewOnNewPage,
         programCategorySelectionIncomplete,
         showMessageToSelectProgramCategoryOnNewPage,
+        showDefaultViewOnNewPage,
         categoryOptionIsInvalidForOrgUnit,
         showMessageThatCategoryOptionIsInvalidForOrgUnit,
     ]);

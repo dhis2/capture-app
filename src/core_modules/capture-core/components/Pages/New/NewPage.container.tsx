@@ -6,19 +6,18 @@ import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
-    showMessageThatCategoryOptionIsInvalidForOrgUnit,
-    showMessageToSelectProgramCategoryOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, EventProgram } from '../../../metaData';
+import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityAttributes } from './hooks';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
-import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 
 const useUserWriteAccess = (scopeId: string) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -83,6 +82,8 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     const currentScopeId: string =
         useSelector(({ currentSelections }: any) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
+    const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
+
     // TODO: OrgUnitSelectionIncomplete should be removed when DHIS2-19171 is implemented
     const orgUnitSelectionIncomplete: boolean = useSelector(
         ({ currentSelections }: any) =>
@@ -97,11 +98,6 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     const handleMainPageNavigation = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
-
-    const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
-
-    const programCategorySelectionIncomplete: boolean =
-        (program instanceof TrackerProgram) ? programSelectionIsIncomplete : false;
 
     const writeAccess = useUserWriteAccess(currentScopeId);
 
@@ -140,7 +136,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
                 handleMainPageNavigation={handleMainPageNavigation}
                 currentScopeId={currentScopeId}
                 orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
-                programCategorySelectionIncomplete={programCategorySelectionIncomplete}
+                programCategorySelectionIncomplete={programSelectionIsIncomplete}
                 missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
                 writeAccess={writeAccess}
