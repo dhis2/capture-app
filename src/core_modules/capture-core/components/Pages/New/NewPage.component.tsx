@@ -63,8 +63,6 @@ const NewPagePlain = ({
         programCategorySelectionIncomplete,
         orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
-        showDefaultViewOnNewPage,
-        programCategorySelectionIncomplete,
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
         categoryOptionIsInvalidForOrgUnit,
