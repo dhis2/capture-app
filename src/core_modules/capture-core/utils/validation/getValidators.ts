@@ -21,6 +21,7 @@ import {
     isValidDate,
     isValidNonFutureDate,
     isValidDateTime,
+    isValidMinCharactersToSearch,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
@@ -257,27 +258,15 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
 }
 
 function buildMinCharactersToSearchValidator(metaData: DataElement): Array<ValidatorContainer> {
-    const { minCharactersToSearch, unique, optionSet } = metaData;
+    const { minCharactersToSearch } = metaData;
 
-    if (minCharactersToSearch === undefined || minCharactersToSearch === 0 || unique || optionSet) {
+    if (minCharactersToSearch === undefined || minCharactersToSearch === 0) {
         return [];
     }
 
     return [
         {
-            validator: (value) => {
-                if (value === undefined || typeof value !== 'string') {
-                    return true;
-                }
-
-                const trimmedValue = value.trim();
-
-                if (trimmedValue === '') {
-                    return true;
-                }
-
-                return minCharactersToSearch <= trimmedValue.length;
-            },
+            validator: value => isValidMinCharactersToSearch(value, minCharactersToSearch),
             message: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
             errorMessage: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
         },
