@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-26T15:08:26.416Z\n"
-"PO-Revision-Date: 2025-11-26T15:08:26.416Z\n"
+"POT-Creation-Date: 2025-11-27T08:39:25.960Z\n"
+"PO-Revision-Date: 2025-11-27T08:39:25.960Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -802,6 +802,9 @@ msgstr ""
 
 msgid "Choose an organisation unit to start reporting"
 msgstr "Choose an organisation unit to start reporting"
+
+msgid "Choose the {{missingCategories}} to start reporting"
+msgstr "Choose the {{missingCategories}} to start reporting"
 
 msgid "Save as new"
 msgstr "Save as new"

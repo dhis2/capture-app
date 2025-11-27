@@ -13,12 +13,15 @@ type InputAttribute = {
 
 export type ContainerProps = {
   showMessageToSelectOrgUnitOnNewPage: () => void;
+  showMessageToSelectProgramCategoryOnNewPage: () => void;
   showMessageThatCategoryOptionIsInvalidForOrgUnit: () => void;
   categoryOptionIsInvalidForOrgUnit: boolean;
   showDefaultViewOnNewPage: () => void;
   handleMainPageNavigation: () => void;
   currentScopeId: string;
   orgUnitSelectionIncomplete: boolean;
+  programCategorySelectionIncomplete: boolean;
+  missingCategoriesInProgramSelection: Array<{ name: string; id: string }>;
   newPageStatus: keyof typeof newPageStatuses;
   writeAccess: boolean;
   error: boolean;

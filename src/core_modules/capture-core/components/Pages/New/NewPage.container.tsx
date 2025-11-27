@@ -7,6 +7,7 @@ import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     showMessageThatCategoryOptionIsInvalidForOrgUnit,
+    showMessageToSelectProgramCategoryOnNewPage,
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
@@ -17,6 +18,7 @@ import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayN
 import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
+import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 
 const useUserWriteAccess = (scopeId: string) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -64,6 +66,10 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
         () => { dispatch(showMessageThatCategoryOptionIsInvalidForOrgUnit()); },
         [dispatch]);
 
+    const dispatchShowMessageToSelectProgramCategoryOnNewPage = useCallback(
+        () => { dispatch(showMessageToSelectProgramCategoryOnNewPage()); },
+        [dispatch]);
+
     const dispatchShowDefaultViewOnNewPage = useCallback(
         () => { dispatch(showDefaultViewOnNewPage()); },
         [dispatch]);
@@ -91,6 +97,11 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     const handleMainPageNavigation = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
+
+    const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
+
+    const programCategorySelectionIncomplete: boolean =
+        (program instanceof TrackerProgram) ? programSelectionIsIncomplete : false;
 
     const writeAccess = useUserWriteAccess(currentScopeId);
 
@@ -123,11 +134,14 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
             />
             <NewPageComponent
                 showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
+                showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
                 showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
                 showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
                 handleMainPageNavigation={handleMainPageNavigation}
                 currentScopeId={currentScopeId}
                 orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
+                programCategorySelectionIncomplete={programCategorySelectionIncomplete}
+                missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
                 writeAccess={writeAccess}
                 newPageStatus={newPageStatus}
