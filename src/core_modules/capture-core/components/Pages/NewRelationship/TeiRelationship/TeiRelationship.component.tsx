@@ -95,7 +95,6 @@ class TeiRelationshipPlain extends React.Component<Props> {
             >
                 <div className={classes.button}>
                     <Button
-                        large
                         dataTest="find-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
@@ -109,7 +108,6 @@ class TeiRelationshipPlain extends React.Component<Props> {
                 </div>
                 <div className={classes.button}>
                     <Button
-                        large
                         dataTest="create-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
