@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-23T11:41:11.943Z\n"
+"POT-Creation-Date: 2025-11-11T14:11:11.392Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -503,6 +503,9 @@ msgstr "Max"
 
 msgid "Min"
 msgstr "Min"
+
+msgid "Exact matches only"
+msgstr ""
 
 msgid "Contains text"
 msgstr "Obsahuje text"
@@ -1667,10 +1670,10 @@ msgid "View linked event"
 msgstr "Zobrazit propojenou událost"
 
 msgid "You do not have access to remove the link between these events"
-msgstr ""
+msgstr "Nemáte přístup k odstranění propojení mezi těmito událostmi"
 
 msgid "You do not have access to remove the link and delete the linked event"
-msgstr ""
+msgstr "Nemáte přístup k odstranění odkazu a odstranění propojené události"
 
 msgid "An error occurred while loading the widget."
 msgstr "Při načítání widgetu došlo k chybě."
@@ -1679,6 +1682,8 @@ msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
 msgstr ""
+"Tato událost {{stageName}} je spojena s událostí {{linkedStageName}}. Před "
+"zadáním údajů níže si prohlédněte podrobnosti o propojené události"
 
 msgid "Scheduled"
 msgstr "Naplánováno"
@@ -1705,16 +1710,16 @@ msgid "Date"
 msgstr "datum"
 
 msgid "Sort by date"
-msgstr ""
+msgstr "Seřadit podle data"
 
 msgid "User"
 msgstr "Uživatel"
 
 msgid "Sort by username"
-msgstr ""
+msgstr "Seřadit podle uživatelského jména"
 
 msgid "Sort by data item"
-msgstr ""
+msgstr "Seřadit podle datové položky"
 
 msgid "Change"
 msgstr "Změna"
@@ -1757,10 +1762,10 @@ msgid "Delete relationship"
 msgstr "Smazat vztah"
 
 msgid "Deleting the relationship is permanent and cannot be undone."
-msgstr ""
+msgstr "Odstranění vztahu je trvalé a nelze jej vrátit zpět."
 
 msgid "Are you sure you want to delete this relationship?"
-msgstr ""
+msgstr "Opravdu chcete tento vztah odstranit?"
 
 msgid "Yes, delete relationship"
 msgstr "Ano, vymazat vztah"
@@ -1790,25 +1795,25 @@ msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
 
 msgid "You do not have access to complete events"
-msgstr ""
+msgstr "Nemáte přístup ke kompletním událostem"
 
 msgid "There is a bulk data entry with unsaved changes"
-msgstr ""
+msgstr "Hromadné zadávání dat s neuloženými změnami"
 
 msgid "Complete events"
-msgstr ""
+msgstr "Kompletní události"
 
 msgid "Are you sure you want to complete all active events in selection?"
-msgstr ""
+msgstr "Jste si jisti, že chcete dokončit všechny aktivní události ve výběru?"
 
 msgid "There are no active events to complete in the current selection."
-msgstr ""
+msgstr "V aktuálním výběru nejsou žádné aktivní události k dokončení."
 
 msgid "Error completing events"
-msgstr ""
+msgstr "Chybné dokončení událostí"
 
 msgid "There was an error completing the events."
-msgstr ""
+msgstr "Při vyplňování událostí došlo k chybě."
 
 msgid "Details (Advanced)"
 msgstr "Podrobnosti (pokročilé)"
@@ -1820,22 +1825,22 @@ msgid "An error occurred while completing events"
 msgstr "Při dokončování událostí došlo k chybě"
 
 msgid "You do not have access to delete events"
-msgstr ""
+msgstr "Nemáte přístup k odstraňování událostí"
 
 msgid "An error occurred while deleting the events"
-msgstr ""
+msgstr "Při mazání událostí došlo k chybě"
 
 msgid "Delete events"
-msgstr ""
+msgstr "Odstranění událostí"
 
 msgid "This cannot be undone."
-msgstr ""
+msgstr "To nelze vzít zpět."
 
 msgid "Are you sure you want to delete the selected events?"
-msgstr ""
+msgstr "Opravdu chcete vybrané události odstranit?"
 
 msgid "Owner organisation unit"
-msgstr ""
+msgstr "Organizační jednotka vlastníka"
 
 msgid "Registration Date"
 msgstr "Datum registrace"
@@ -1853,28 +1858,31 @@ msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
 
 msgid "You do not have access to bulk complete enrollments"
-msgstr ""
+msgstr "Nemáte přístup k hromadným dokončením zápisů"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
 "completing the rest. Please see the details below."
 msgstr ""
+"Některé zápisy byly úspěšně dokončeny, ale při dokončování ostatních došlo k"
+" chybě. Podrobnosti naleznete níže."
 
 msgid ""
 "There was an error while completing the enrollments. Please see the details "
 "below."
-msgstr ""
+msgstr "Při dokončování zápisů došlo k chybě. Podrobnosti naleznete níže."
 
 msgid ""
 "An unexpected error occurred while fetching the enrollments. Please try "
 "again."
 msgstr ""
+"Při načítání zápisů došlo k neočekávané chybě. Zkuste to prosím znovu."
 
 msgid "There are currently no active enrollments in the selection."
-msgstr ""
+msgstr "V současné době nejsou ve výběru žádné aktivní přihlášky."
 
 msgid "All enrollments are already completed or cancelled."
-msgstr ""
+msgstr "Všechny zápisy jsou již ukončeny nebo zrušeny."
 
 msgid ""
 "This action will complete {{count}} active enrollment in your selection."
@@ -1894,16 +1902,16 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
+msgstr "Označit všechny události v rámci zápisů jako dokončené"
 
 msgid "Complete enrollments"
-msgstr ""
+msgstr "Dokončené zápisy"
 
 msgid "Error completing enrollments"
-msgstr ""
+msgstr "Chyba při dokončování zápisů"
 
 msgid "No active enrollments to complete"
-msgstr ""
+msgstr "Žádné aktivní zápisy k dokončení"
 
 msgid "Complete {{count}} enrollment"
 msgid_plural "Complete {{count}} enrollment"
@@ -1913,28 +1921,30 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "An error occurred when completing the enrollments"
-msgstr ""
+msgstr "Při dokončování zápisů došlo k chybě"
 
 msgid "An unknown error occurred when completing enrollments"
-msgstr ""
+msgstr "Při dokončování zápisů došlo k neznámé chybě"
 
 msgid "You do not have access to delete enrollments"
-msgstr ""
+msgstr "Nemáte přístup ke smazání zápisů"
 
 msgid "Delete enrollments"
-msgstr ""
+msgstr "Smazat zápisy"
 
 msgid "Delete selected enrollments"
-msgstr ""
+msgstr "Smazat vybrané zápisy"
 
 msgid ""
 "An error occurred while loading the selected enrollments. Please try again."
-msgstr ""
+msgstr "Při načítání vybraných zápisů došlo k chybě. Zkuste to prosím znovu."
 
 msgid ""
 "This action will permanently delete the selected enrollments, including all "
 "associated data and events."
 msgstr ""
+"Tato akce trvale odstraní vybrané zápisy včetně všech souvisejících dat a "
+"událostí."
 
 msgid "Active enrollments ({{count}})"
 msgid_plural "Active enrollments ({{count}})"
@@ -1965,7 +1975,7 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "An error occurred when deleting enrollments"
-msgstr ""
+msgstr "Při mazání zápisů došlo k chybě"
 
 msgid "Delete {{ trackedEntityName }} with all enrollments"
 msgstr ""
@@ -1980,12 +1990,13 @@ msgstr[3] ""
 msgid ""
 "Deleting records will also delete any associated enrollments and events."
 msgstr ""
+"Odstraněním záznamů se odstraní také všechny související zápisy a události."
 
 msgid "Are you sure you want to delete?"
-msgstr ""
+msgstr "Opravdu je chcete odstranit?"
 
 msgid "An error occurred while deleting the records"
-msgstr ""
+msgstr "Při mazání záznamů došlo k chybě"
 
 msgid "Working list could not be updated"
 msgstr "Pracovní seznam nelze aktualizovat"
@@ -2027,19 +2038,19 @@ msgid "Show All"
 msgstr "Ukázat vše"
 
 msgid "Add to ongoing bulk data entry"
-msgstr ""
+msgstr "Přidat k probíhajícímu hromadnému zadávání dat"
 
 msgid "Add page to ongoing bulk data entry"
-msgstr ""
+msgstr "Přidat stránku k probíhajícímu hromadnému zadávání dat"
 
 msgid "Available bulk entry forms"
-msgstr ""
+msgstr "Dostupné formuláře pro hromadné zadávání"
 
 msgid "Open in bulk data entry"
-msgstr ""
+msgstr "Otevřít při hromadném zadávání dat"
 
 msgid "Open page in bulk data entry"
-msgstr ""
+msgstr "Otevřít stránku při hromadném zadávání dat"
 
 msgid "{{count}} selected"
 msgid_plural "{{count}} selected"
@@ -2172,19 +2183,19 @@ msgid "Checking..."
 msgstr "Probíhá kontrola ..."
 
 msgid "Please provide a valid positive integer"
-msgstr ""
+msgstr "Uveďte prosím platné celé kladné číslo"
 
 msgid "Please enter a valid time"
-msgstr ""
+msgstr "Zadejte prosím platný čas"
 
 msgid "Please enter a time"
-msgstr ""
+msgstr "Zadejte prosím čas"
 
 msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""
@@ -2192,7 +2203,7 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Some attributes are hidden"
-msgstr ""
+msgstr "Některé atributy jsou skryté"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
@@ -2226,3 +2237,6 @@ msgid ""
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
 msgstr ""
+"Tato aplikace je v současné době spuštěna v režimu kompatibility z důvodu "
+"omezení prohlížeče. Pro lepší výkon použijte jiný prohlížeč nebo ukončete "
+"soukromý režim, pokud jej právě používáte."
