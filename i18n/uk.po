@@ -52,10 +52,10 @@ msgid "Last updated"
 msgstr "Останнє оновлення"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Зареєстровано"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Раніше зареєстровано"
 
 msgid "This value is validating"
 msgstr ""
@@ -151,10 +151,10 @@ msgid "Assigned user"
 msgstr "Призначений користувач"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Пошук користувача"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Завершити подію"
 
 msgid "Basic info"
 msgstr "Основна інформація"
@@ -178,9 +178,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Це не програма події або метадані пошкоджені. Дивіться журнал для отримання "
+"детальної інформації."
 
 msgid "This event"
-msgstr ""
+msgstr "Ця подія"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -227,13 +229,13 @@ msgid "No events added"
 msgstr ""
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Новий взаємозв'язок між подіями"
 
 msgid "Adding relationship to event."
 msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Повернутися до події без збереження стосунків"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -434,7 +436,7 @@ msgid "Delete"
 msgstr "Видалити"
 
 msgid "Select file"
-msgstr ""
+msgstr "Виберіть файл"
 
 msgid "No"
 msgstr "Ні"
@@ -461,7 +463,7 @@ msgid "URL"
 msgstr "URL (Інтернет-адреса)"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "почніть вводити для пошуку"
 
 msgid "suggestions could not be retrieved"
 msgstr ""
@@ -518,7 +520,7 @@ msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr "Новий {{trackedEntityName}} в {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Шукати {{trackedEntityName}} в {{programName}}"
 
 msgid "Clear selections"
 msgstr "Очистити вибір"
@@ -554,7 +556,7 @@ msgid "Selected program"
 msgstr "Обрані програми"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Деякі програми фільтруються."
 
 msgid "Select program"
 msgstr "Обрати програму"
@@ -611,6 +613,8 @@ msgstr ""
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}} має категорії. Виберіть усі категорії, щоб переглянути "
+"дашборд."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
@@ -618,7 +622,7 @@ msgid ""
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} не зареєстровано у цій програмі."
 
 msgid "Enroll {{teiDisplayName}} in this program."
 msgstr ""
@@ -635,7 +639,7 @@ msgid "{{programName}} is an event program and does not have enrollments."
 msgstr ""
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Створіть нову подію в цій програмі."
 
 msgid "View working list in this program."
 msgstr ""
@@ -644,16 +648,16 @@ msgid "Delete event"
 msgstr "Видалити подію"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Завантажити як JSON"
 
 msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Завантажити у форматі CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Завантажити з поточними фільтрами"
 
 msgid "Download data..."
 msgstr "Завантажити дані…"
@@ -728,7 +732,7 @@ msgid "Save as new"
 msgstr ""
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Переглянути інформаційну панель"
 
 msgid "Create for"
 msgstr ""
@@ -762,10 +766,10 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "Новий пошук"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Редагувати пошук"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -781,19 +785,19 @@ msgid ""
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Пошук {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Шукати по {{name}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Пошук за атрибутами"
 
 msgid "Back"
 msgstr "Назад"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Шукати {{titleText}}"
 
 msgid "Search for"
 msgstr "Шукати"
@@ -811,7 +815,7 @@ msgid ""
 msgstr ""
 
 msgid "Back to search"
-msgstr ""
+msgstr "Повернутися до пошуку"
 
 msgid "An error has occurred"
 msgstr ""
@@ -830,7 +834,7 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Виберіть тип, щоб почати пошук"
 
 msgid "View active enrollment"
 msgstr ""
@@ -844,7 +848,7 @@ msgid ""
 msgstr ""
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Пошук у всіх програмах"
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -853,7 +857,7 @@ msgid "Event details"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "Подія завершена"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -888,7 +892,7 @@ msgid "Add relationship"
 msgstr "Додати зв'язок"
 
 msgid "Results found"
-msgstr ""
+msgstr "Знайдено результати"
 
 msgid "Open"
 msgstr "Відкрити"
@@ -900,10 +904,10 @@ msgid "Organisation unit scope"
 msgstr "Охоплення організаційного підрозділу"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Пошук {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "Заповніть принаймні {{minAttributesRequired}} атрибути для пошуку"
 
 msgid "To work with the selected program,"
 msgstr ""

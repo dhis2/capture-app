@@ -92,16 +92,16 @@ msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif "
 
 msgid "Please provide a valid date"
-msgstr "Veuillez saisir une date valide"
+msgstr "Veuillez fournir une date valide"
 
 msgid "A date in the future is not allowed"
 msgstr "Date future non autorisée"
 
 msgid "Please provide a valid date and time"
-msgstr "Veuillez saisir une date et une heure valides"
+msgstr "Veuillez fournir une date et une heure valides"
 
 msgid "Please provide a valid time"
-msgstr "Veuillez saisir une heure valide"
+msgstr "Veuillez fournir une heure valide"
 
 msgid "Please provide a valid percentage"
 msgstr "Veuillez saisir un pourcentage valide"
@@ -116,13 +116,13 @@ msgid "Please provide a valid age"
 msgstr "Veuillez fournir un âge valide"
 
 msgid "Please provide a valid phone number"
-msgstr "Veuillez saisir un numéro de téléphone valide"
+msgstr "Veuillez fournir un numéro de téléphone valide"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Veuillez fournir une unité d'organisation valide"
 
 msgid "Please provide valid coordinates"
-msgstr "Veuillez saisir des coordonnées valides"
+msgstr "Veuillez fournir des coordonnées valides"
 
 msgid "This value already exists"
 msgstr "Cette valeur existe déjà"
@@ -221,7 +221,7 @@ msgid "Save and exit"
 msgstr "Enregistrer et quitter"
 
 msgid "Finish"
-msgstr "Terminer"
+msgstr "Achever"
 
 msgid "No write access"
 msgstr "Aucun accès en écriture"
@@ -233,7 +233,7 @@ msgid "Switch to form view"
 msgstr "Passer à la vue du formulaire"
 
 msgid "Switch to row view"
-msgstr "Passer à la vue des lignes"
+msgstr "Passer à la vue de ligne"
 
 msgid "events added"
 msgstr "événements ajoutés"
@@ -292,8 +292,8 @@ msgstr "inscription"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
-"Inscrivez-vous à un programme en sélectionnant un programme dans la barre "
-"supérieure."
+"L'inscription à un programme se fait en sélectionnant un programme dans la "
+"barre supérieure."
 
 msgid "An error has occurred. See log for details"
 msgstr "Une erreur s'est produite. Voir le journal pour plus de détails."
@@ -307,17 +307,17 @@ msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Un élément est déjà enregistré avec cet {{attributeName}}, mais vous n'y "
-"avez pas accès"
+"Un élément est déjà enregistré avec {{attributeName}}, mais vous n'y avez "
+"pas accès"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Vous avez déjà enregistré cet {{attributeName}}"
+msgstr "Vous avez déjà enregistré {{attributeName}}"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"Un {{trackedEntityTypeName}} avec ce {{attributeName}} est déjà enregistré"
+"Un {{trackedEntityTypeName}} avec {{attributeName}} est déjà enregistré"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "Afficher le {{trackedEntityTypeName}} enregistré"
@@ -625,7 +625,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "L'unité d'organisation n'a pas pu être chargée"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "L'entité suivie avec l'identifiant \"{{teiId}}\" n'existe pas"
+msgstr "L'instance d'entité suivie avec l'identifiant \"{{teiId}}\" n'existe pas"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
@@ -664,7 +664,7 @@ msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
-"{{teiDisplayName}} est un {{tetName}} et ne peut pas être inscrit dans "
+"{{teiDisplayName}} est un {{tetName}} et ne peut pas être inscrit à "
 "{{programName}}. Choisir un autre programme qui autorise l'inscription de "
 "{{tetName}}."
 
@@ -761,11 +761,12 @@ msgstr "Afficher tout"
 
 msgid "Choose a registering unit to start reporting"
 msgstr ""
-"Sélectionnez une unité d'enregistrement pour commencer la déclaration des "
+"Sélectionner une unité d'enregistrement pour commencer la déclaration des "
 "données"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr "Choisir {{missingCategories}} pour commencer la déclaration"
+msgstr ""
+"Choisir {{missingCategories}} pour commencer la déclaration des données"
 
 msgid "Save as new"
 msgstr "Enregistrer comme nouveau"
@@ -900,7 +901,7 @@ msgid ""
 "that use type "
 msgstr ""
 "Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
-"programmes qui utilise le type "
+"programmes qui utilise le type. "
 
 msgid "Search in all programs"
 msgstr "Rechercher dans tous les programmes"
