@@ -907,7 +907,7 @@ msgid "Mark as cancelled"
 msgstr ""
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "अपूर्ण चिह्नित करें"
 
 msgid "Delete enrollment"
 msgstr "एनरोलमेंट डिलीट"
