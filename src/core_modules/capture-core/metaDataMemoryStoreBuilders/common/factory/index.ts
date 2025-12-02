@@ -1,2 +1,2 @@
 export { OptionSetFactory } from './optionSet';
-export { SearchGroupFactory } from './searchGroup';
+export { SearchGroupFactory, DEFAULT_IS_UNIQUE_SEARCH_OPERATOR, type SearchOperator } from './searchGroup';

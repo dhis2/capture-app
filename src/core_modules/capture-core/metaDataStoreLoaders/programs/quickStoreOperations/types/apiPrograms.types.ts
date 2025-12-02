@@ -123,6 +123,8 @@ export type apiProgramTrackedEntityAttribute = {
     searchable: boolean,
     mandatory: boolean,
     renderOptionsAsRadio: boolean,
+    preferredSearchOperator?: string,
+    blockedSearchOperators?: Array<string>
 };
 
 type apiProgram = {

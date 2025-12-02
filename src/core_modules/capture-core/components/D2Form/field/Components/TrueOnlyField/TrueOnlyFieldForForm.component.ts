@@ -9,6 +9,7 @@ import {
     withLabel,
     withDisplayMessages,
     withFilterProps,
+    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -35,7 +36,9 @@ export const TrueOnlyFieldForForm = withGotoInterface()(
                                         `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                                 })(
                                     withFilterProps(getFilteredProps)(
-                                        withDisplayMessages()(TrueOnlyField),
+                                        withDisplayMessages()(
+                                            withSearchHelpMessage()(TrueOnlyField),
+                                        ),
                                     ),
                                 ),
                             ),

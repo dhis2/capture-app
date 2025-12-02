@@ -21,6 +21,8 @@ export type CachedTrackedEntityAttribute = {
     displayShortName: string,
     displayFormName: string,
     description: string,
+    preferredSearchOperator?: string,
+    blockedSearchOperators?: Array<string>,
     translations: Array<CachedAttributeTranslation>,
     valueType: string,
     optionSetValue: boolean,

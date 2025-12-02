@@ -10,6 +10,7 @@ import {
     withDisplayMessages,
     withFilterProps,
     withInternalChangeHandler,
+    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -37,9 +38,11 @@ export const UserNameFieldForForm = withGotoInterface()(
                                         `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
                                 })(
                                     withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
-                                            withTransformPropName(['onBlur', 'onSet'])(
-                                                withInternalChangeHandler()(UserField),
+                                        withSearchHelpMessage()(
+                                            withFilterProps(getFilteredProps)(
+                                                withTransformPropName(['onBlur', 'onSet'])(
+                                                    withInternalChangeHandler()(UserField),
+                                                ),
                                             ),
                                         ),
                                     ),
