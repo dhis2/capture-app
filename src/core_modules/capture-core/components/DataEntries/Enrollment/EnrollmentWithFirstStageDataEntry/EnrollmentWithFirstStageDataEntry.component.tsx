@@ -12,7 +12,6 @@ import {
     withDisplayMessages,
     withFilterProps,
     withDefaultFieldContainer,
-    withDefaultShouldUpdateInterface,
     TrueOnlyField,
     orientations,
 } from '../../../FormFields/New';
@@ -71,17 +70,15 @@ const getOrientation = (formHorizontal: boolean | null) =>
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions &&
-                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CoordinateField),
-                        ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions &&
+                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(
+                        withFilterProps(defaultFilterProps)(CoordinateField),
                     ),
                 ),
             ),
@@ -92,17 +89,15 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
 const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions &&
-                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(PolygonField),
-                        ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions &&
+                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(
+                        withFilterProps(defaultFilterProps)(PolygonField),
                     ),
                 ),
             ),
@@ -157,17 +152,15 @@ const getCompleteFieldSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions &&
-                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(TrueOnlyField),
                             ),
                         ),
                     ),
@@ -198,17 +191,15 @@ const getReportDateSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions &&
-                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(DateField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(DateField),
                             ),
                         ),
                     ),

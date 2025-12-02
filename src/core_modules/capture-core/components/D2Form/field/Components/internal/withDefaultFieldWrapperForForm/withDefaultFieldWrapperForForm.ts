@@ -2,7 +2,6 @@ import type { ComponentType } from 'react';
 import {
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -26,21 +25,19 @@ export const withDefaultFieldWrapperForForm = () =>
     (InnerComponent: ComponentType<any>) =>
         withGotoInterface()(
             withHideCompatibility()(
-                withDefaultShouldUpdateInterface()(
-                    withDisabledFieldCalculation()(
-                        withRequiredFieldCalculation()(
-                            withCalculateMessages()(
-                                withFocusSaver()(
-                                    withDefaultFieldContainer()(
-                                        withLabel({
-                                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                            onGetCustomFieldLabeClass: (props: any) =>
-                                                `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                        })(
-                                            withDisplayMessages()(
-                                                withFilterProps(getFilteredProps)(
-                                                    withInternalChangeHandler()(InnerComponent),
-                                                ),
+                withDisabledFieldCalculation()(
+                    withRequiredFieldCalculation()(
+                        withCalculateMessages()(
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                        onGetCustomFieldLabeClass: (props: any) =>
+                                            `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withFilterProps(getFilteredProps)(
+                                                withInternalChangeHandler()(InnerComponent),
                                             ),
                                         ),
                                     ),

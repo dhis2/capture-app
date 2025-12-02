@@ -2,7 +2,6 @@ import {
     AgeField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -16,16 +15,14 @@ import {
 
 export const AgeFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer()(
-                                    withInternalChangeHandler()(
-                                        AgeField,
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer()(
+                                withInternalChangeHandler()(
+                                    AgeField,
                                 ),
                             ),
                         ),

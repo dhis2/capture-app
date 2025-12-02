@@ -2,7 +2,6 @@ import {
     BooleanField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -23,20 +22,18 @@ const getFilteredProps = (props: any) => {
 
 export const BooleanFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
-                                })(
-                                    withFilterProps(getFilteredProps)(
-                                        withDisplayMessages()(BooleanField),
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
+                            })(
+                                withFilterProps(getFilteredProps)(
+                                    withDisplayMessages()(BooleanField),
                                 ),
                             ),
                         ),

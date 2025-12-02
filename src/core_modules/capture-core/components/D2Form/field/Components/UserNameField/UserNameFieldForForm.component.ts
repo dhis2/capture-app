@@ -2,7 +2,6 @@ import { withTransformPropName } from '../../../../../HOC';
 import {
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -25,22 +24,20 @@ const getFilteredProps = (props: any) => {
 
 export const UserNameFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
-                                            withTransformPropName(['onBlur', 'onSet'])(
-                                                withInternalChangeHandler()(UserField),
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withFilterProps(getFilteredProps)(
+                                        withTransformPropName(['onBlur', 'onSet'])(
+                                            withInternalChangeHandler()(UserField),
                                         ),
                                     ),
                                 ),

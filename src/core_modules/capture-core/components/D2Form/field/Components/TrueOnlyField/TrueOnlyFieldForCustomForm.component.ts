@@ -2,7 +2,6 @@ import {
     TrueOnlyField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -15,15 +14,13 @@ import {
 
 export const TrueOnlyFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer()(
-                                    TrueOnlyField,
-                                ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer()(
+                                TrueOnlyField,
                             ),
                         ),
                     ),
