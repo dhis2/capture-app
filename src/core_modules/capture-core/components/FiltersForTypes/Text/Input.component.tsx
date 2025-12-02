@@ -7,6 +7,7 @@ type Props = {
     onEnterKey: (value: string | undefined) => void;
     value: string | undefined;
     onBlur: (value: string) => void;
+    unique: boolean;
 };
 
 class InputPlain extends React.Component<Props> {
@@ -19,11 +20,11 @@ class InputPlain extends React.Component<Props> {
     };
 
     render() {
-        const { onEnterKey, ...passOnProps } = this.props;
+        const { onEnterKey, unique, ...passOnProps } = this.props;
         return (
             <D2TextField
                 onKeyDown={this.handleKeyDown}
-                placeholder={i18n.t('Contains text')}
+                placeholder={unique ? i18n.t('Exact matches only') : i18n.t('Contains text')}
                 {...passOnProps}
             />
         );

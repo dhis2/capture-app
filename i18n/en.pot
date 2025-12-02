@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-02T08:24:37.493Z\n"
-"PO-Revision-Date: 2025-12-02T08:24:37.493Z\n"
+"POT-Creation-Date: 2025-11-11T14:11:11.392Z\n"
+"PO-Revision-Date: 2025-11-11T14:11:11.392Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -494,6 +494,9 @@ msgstr "Max"
 
 msgid "Min"
 msgstr "Min"
+
+msgid "Exact matches only"
+msgstr "Exact matches only"
 
 msgid "Contains text"
 msgstr "Contains text"
