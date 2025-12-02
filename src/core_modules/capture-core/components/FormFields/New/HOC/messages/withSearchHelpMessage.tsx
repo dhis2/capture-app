@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { searchOperators } from '../../../../../metaDataMemoryStoreBuilders';
 
 const styles = (theme: any) => ({
     help: {
@@ -17,9 +18,9 @@ type Props = {
 };
 
 const helpTexts = {
-    EQ: i18n.t('Exact matches only'),
-    SW: i18n.t('Must match the start of the value'),
-    EW: i18n.t('Must match the end of the value'),
+    [searchOperators.EQ]: i18n.t('Exact matches only'),
+    [searchOperators.SW]: i18n.t('Must match the start of the value'),
+    [searchOperators.EW]: i18n.t('Must match the end of the value'),
 };
 
 const getSearchHelpMessageHOC = <P extends Record<string, any>>(InnerComponent: React.ComponentType<P>) =>
