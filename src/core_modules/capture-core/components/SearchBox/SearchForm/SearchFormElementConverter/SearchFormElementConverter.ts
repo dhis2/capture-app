@@ -1,20 +1,15 @@
 import { pipe as pipeD2 } from '../../../../../capture-core-utils';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import type { DataElement } from '../../../../metaData';
-import { dataElementTypes } from '../../../../metaData';
 import { escapeString } from '../../../../utils/escapeString';
+import type { SearchOperator } from '../../../../metaDataMemoryStoreBuilders';
 
 type FormValues = { [key: string]: any };
 
-const derivedFilterKeyword = (dataElement: any) => {
-    const hasOptionSet = dataElement.optionSet && dataElement.type !== dataElementTypes.MULTI_TEXT;
-    return hasOptionSet ? 'eq' : 'like';
-};
-
-const convertString = (formValues: string, dataElement: DataElement) => {
+const convertString = (formValues: string, dataElement: DataElement, searchOperator: SearchOperator) => {
     const sanitizedString = formValues.trim();
     const convertedString = (dataElement.convertValue(sanitizedString, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${escapeString(convertedString)}`;
+    return `${dataElement.id}:${searchOperator.toLowerCase()}:${escapeString(convertedString)}`;
 };
 
 const convertRange = (formValues: FormValues, dataElement: DataElement) => {
@@ -28,20 +23,20 @@ const convertRange = (formValues: FormValues, dataElement: DataElement) => {
     return null;
 };
 
-const convertOrgUnit = (formValues: FormValues, dataElement: DataElement) => {
+const convertOrgUnit = (formValues: FormValues, dataElement: DataElement, searchOperator: SearchOperator) => {
     const convertedId = (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedId}`;
+    return `${dataElement.id}:${searchOperator.toLowerCase()}:${convertedId}`;
 };
 
-const convertAge = (formValues: FormValues, dataElement: DataElement) => {
+const convertAge = (formValues: FormValues, dataElement: DataElement, searchOperator: SearchOperator) => {
     const convertedAge = formValues &&
         (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:eq:${convertedAge}`;
+    return `${dataElement.id}:${searchOperator.toLowerCase()}:${convertedAge}`;
 };
 
-const convertBoolean = (formValues: boolean, dataElement: DataElement) => {
+const convertBoolean = (formValues: boolean, dataElement: DataElement, searchOperator: SearchOperator) => {
     const convertedBool = (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:eq:${convertedBool}`;
+    return `${dataElement.id}:${searchOperator.toLowerCase()}:${convertedBool}`;
 };
 
 export const dataElementConvertFunctions = {
@@ -72,5 +67,4 @@ export const dataElementConvertFunctions = {
     ORGANISATION_UNIT: convertOrgUnit,
     AGE: convertAge,
     USERNAME: convertString,
-    ASSIGNEE: convertString,
 };

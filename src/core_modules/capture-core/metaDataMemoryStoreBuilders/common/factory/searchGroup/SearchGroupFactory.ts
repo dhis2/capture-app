@@ -16,6 +16,7 @@ import type {
 import { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES } from '../../../../utils/warnings';
 import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
+import { getSearchOperator } from './searchOperator';
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -83,6 +84,8 @@ export class SearchGroupFactory {
                 description,
                 unique,
                 valueType,
+                preferredSearchOperator,
+                blockedSearchOperators,
                 minCharactersToSearch,
             } = searchAttribute.trackedEntityAttribute;
 
@@ -107,6 +110,8 @@ export class SearchGroupFactory {
             o.displayInReports = searchAttribute.displayInList;
             o.minCharactersToSearch = minCharactersToSearch;
             o.disabled = false;
+            o.preferredSearchOperator = preferredSearchOperator;
+            o.blockedSearchOperators = blockedSearchOperators;
             o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });
 
@@ -121,6 +126,8 @@ export class SearchGroupFactory {
                 value => value,
             );
         }
+
+        element.searchOperator = getSearchOperator(searchAttribute.trackedEntityAttribute);
 
         return element;
     }

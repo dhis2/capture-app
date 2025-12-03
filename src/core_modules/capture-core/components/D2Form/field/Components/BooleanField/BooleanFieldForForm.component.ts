@@ -9,6 +9,7 @@ import {
     withLabel,
     withDisplayMessages,
     withFilterProps,
+    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -35,7 +36,9 @@ export const BooleanFieldForForm = withGotoInterface()(
                                         `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
                                 })(
                                     withFilterProps(getFilteredProps)(
-                                        withDisplayMessages()(BooleanField),
+                                        withDisplayMessages()(
+                                            withSearchHelpMessage()(BooleanField),
+                                        ),
                                     ),
                                 ),
                             ),
