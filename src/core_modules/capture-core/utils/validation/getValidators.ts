@@ -30,13 +30,15 @@ import {
 import { dataElementTypes } from '../../metaData';
 import type { DateDataElement, DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
+import type { QuerySingleResource } from '../api';
 
 type Validator = (
     value: any,
     internalError?: {
         error?: string | null;
         errorCode?: string | null;
-    } | null
+    } | null,
+    validationContext?: any,
 ) => boolean | { valid: boolean; errorMessage?: string; } | { valid: boolean; message?: string; };
 
 export type ValidatorContainer = {
@@ -276,16 +278,21 @@ function buildMinCharactersToSearchValidator(metaData: DataElement): Array<Valid
 
 function buildUniqueValidator(
     metaData: DataElement,
+    querySingleResource: QuerySingleResource,
 ): Array<ValidatorContainer> {
     return metaData.unique
         ?
         [
             {
-                validator: (value: any) => {
+                validator: (
+                    value: any,
+                    internalComponentError?: {error?: string | null; errorCode?: string | null} | null,
+                    contextProps?: any,
+                ) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
-                    return true;
+                    return metaData.unique?.onValidate(value, contextProps, querySingleResource);
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
@@ -299,11 +306,10 @@ function buildUniqueValidator(
 
 export const getValidators = (
     metaData: DataElement | DateDataElement,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     querySingleResource?: any,
 ): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
     buildMinCharactersToSearchValidator,
-].flatMap(validatorBuilder => validatorBuilder(metaData));
+].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));

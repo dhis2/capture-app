@@ -18,6 +18,7 @@ type Props = {
     programId?: string | null;
 };
 
+// eslint-disable-next-line complexity
 export const useSearchOption = ({
     programId,
     trackedEntityTypeId,
@@ -33,11 +34,15 @@ export const useSearchOption = ({
         return null;
     }, [programId, trackedEntityTypeId]);
 
-    const { program: programData } = useProgramFromIndexedDB(
+    const { program: programData, isLoading: isLoadingProgram, isError: isErrorProgram } = useProgramFromIndexedDB(
         programId,
         { enabled: !!(searchScope === searchScopes.PROGRAM && programId) },
     );
-    const { trackedEntityType: trackedEntityTypeData } = useTrackedEntityTypeFromIndexedDB(
+    const {
+        trackedEntityType: trackedEntityTypeData,
+        isLoading: isLoadingTrackedEntityType,
+        isError: isErrorTrackedEntityType,
+    } = useTrackedEntityTypeFromIndexedDB(
         trackedEntityTypeId,
         { enabled: !!(searchScope === searchScopes.TRACKED_ENTITY_TYPE && trackedEntityTypeId) },
     );
@@ -45,13 +50,20 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data: searchGroups, isLoading, isError } = useIndexedDBQuery<SearchGroup[]>(
+    const {
+        data: searchGroups,
+        isLoading: isLoadingSearchGroups,
+        isError: isErrorSearchGroups,
+    } = useIndexedDBQuery<SearchGroup[]>(
         ['searchGroup', searchId],
         () => buildSearchGroup(searchData, locale),
         {
             enabled: !!(searchId && locale && searchData),
         },
     );
+
+    const isLoading = isLoadingProgram || isLoadingTrackedEntityType || isLoadingSearchGroups;
+    const isError = isErrorProgram || isErrorTrackedEntityType || isErrorSearchGroups;
 
     const searchOption = useMemo(() => {
         if (!searchName || !searchGroups || !searchScope) {
