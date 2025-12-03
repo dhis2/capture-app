@@ -1,3 +1,17 @@
+## [104.6.12](https://github.com/dhis2/capture-app/compare/v104.6.11...v104.6.12) (2025-12-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20478] prevent search when there are errors in the search form fields ([#4408](https://github.com/dhis2/capture-app/issues/4408)) ([a10ffeb](https://github.com/dhis2/capture-app/commit/a10ffeb4c6cfddb2e40d3511d148f0b13191c433))
+
+## [104.6.11](https://github.com/dhis2/capture-app/compare/v104.6.10...v104.6.11) (2025-12-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4412](https://github.com/dhis2/capture-app/issues/4412)) ([27ce535](https://github.com/dhis2/capture-app/commit/27ce5356f3b57a1f24d6e808de4cc014191e2127))
+
 ## [104.6.10](https://github.com/dhis2/capture-app/compare/v104.6.9...v104.6.10) (2025-11-24)
 
 

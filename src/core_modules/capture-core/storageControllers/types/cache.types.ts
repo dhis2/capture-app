@@ -1,4 +1,4 @@
-import type { Access } from '../../metaData/Access';
+import type { Access, DataElementUnique } from '../../metaData';
 
 type Translation = {
     property: string,
@@ -28,10 +28,11 @@ export type CachedTrackedEntityAttribute = {
     optionSetValue: boolean,
     inherit: boolean,
     optionSet: { id: string },
-    unique?: boolean | null,
+    unique: DataElementUnique | null,
     orgunitScope?: boolean | null,
     pattern?: string | null,
-    attributeValues: Array<CachedAttributeValue>
+    attributeValues: Array<CachedAttributeValue>,
+    minCharactersToSearch?: number,
 }
 
 export type CachedProgramTrackedEntityAttribute = {

@@ -21,6 +21,7 @@ import {
     isValidDate,
     isValidNonFutureDate,
     isValidDateTime,
+    isValidMinCharactersToSearch,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
@@ -68,6 +69,11 @@ const errorMessages = {
     COORDINATE: i18n.t('Please provide valid coordinates'),
     UNIQUENESS: i18n.t('This value already exists'),
     RANGE: i18n.t('"From" cannot be greater than "To"'),
+    MIN_CHARACTERS_TO_SEARCH: metadata =>
+        i18n.t('Please enter at least {{minCharactersToSearch}} characters for {{formName}} to perform a search', {
+            formName: metadata.formName,
+            minCharactersToSearch: metadata.minCharactersToSearch,
+        }),
 };
 
 const validationMessages = {
@@ -253,6 +259,23 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
         [];
 }
 
+function buildMinCharactersToSearchValidator(metaData: DataElement): Array<ValidatorContainer> {
+    const { minCharactersToSearch } = metaData;
+
+    if (minCharactersToSearch === undefined || minCharactersToSearch === 0) {
+        return [];
+    }
+
+    return [
+        {
+            validator: value => isValidMinCharactersToSearch(value, minCharactersToSearch),
+            message: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
+            errorMessage: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
+        },
+    ];
+}
+
+
 function buildUniqueValidator(
     metaData: DataElement,
     querySingleResource: QuerySingleResource,
@@ -288,4 +311,5 @@ export const getValidators = (
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
+    buildMinCharactersToSearchValidator,
 ].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));

@@ -6,6 +6,7 @@ import {
     Section,
     SearchGroup,
     DataElement,
+    DataElementUnique,
     dataElementTypes,
 } from '../../../../metaData';
 import type {
@@ -40,7 +41,7 @@ export class SearchGroupFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
     };
-    static _getSearchAttributeValueType(valueType: string, isUnique?: boolean | null) {
+    static _getSearchAttributeValueType(valueType: string, isUnique: DataElementUnique | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
         return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
     }
@@ -85,6 +86,7 @@ export class SearchGroupFactory {
                 valueType,
                 preferredSearchOperator,
                 blockedSearchOperators,
+                minCharactersToSearch,
             } = searchAttribute.trackedEntityAttribute;
 
             o.id = id;
@@ -106,6 +108,7 @@ export class SearchGroupFactory {
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
+            o.minCharactersToSearch = minCharactersToSearch;
             o.disabled = false;
             o.preferredSearchOperator = preferredSearchOperator;
             o.blockedSearchOperators = blockedSearchOperators;

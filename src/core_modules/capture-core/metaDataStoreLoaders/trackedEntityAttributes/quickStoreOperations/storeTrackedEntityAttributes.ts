@@ -7,7 +7,7 @@ export const storeTrackedEntityAttributes = (ids: Array<string>) => {
         params: {
             fields: 'id,displayName,displayShortName,displayFormName,description,valueType,optionSetValue,unique,' +
             'orgunitScope,pattern,code,attributeValues,inherit,translations[property,locale,value],optionSet[id],' +
-            'preferredSearchOperator,blockedSearchOperators',
+            'minCharactersToSearch,preferredSearchOperator,blockedSearchOperators',
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
         },
