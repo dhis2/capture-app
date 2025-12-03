@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/rules-engine-javascript",
-    "version": "104.6.12",
+    "version": "104.7.0",
     "license": "BSD-3-Clause",
     "main": "./build/cjs/index.js",
     "scripts": {
