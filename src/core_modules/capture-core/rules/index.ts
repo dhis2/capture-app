@@ -11,4 +11,5 @@ export { postProcessRulesEffects } from './postProcessRulesEffects';
 export { buildEffectsHierarchy } from './buildEffectsHierarchy';
 export { filterApplicableRuleEffects } from './filterApplicableRuleEffects';
 export { validateAssignEffects } from './validateAssignEffects';
+export { executionEnvironments } from './ruleExecution/executionEnvironments.const';
 export type { AssignOutputEffectWithValidations } from './validateAssignEffects';

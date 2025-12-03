@@ -6,6 +6,7 @@ import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    executionEnvironments,
 } from '../../../rules';
 import { RenderFoundation, Program } from '../../../metaData';
 import {
@@ -77,7 +78,7 @@ function getLoadActions(
     ];
 }
 
-export const openEventForEditInDataEntry = ({
+export const openEventForEditInDataEntry = async ({
     loadedValues: {
         eventContainer,
         dataEntryValues,
@@ -167,8 +168,7 @@ export const openEventForEditInDataEntry = ({
         if (!stage) {
             throw Error(i18n.t('stage not found in rules execution'));
         }
-        // TODO: Add attributeValues & enrollmentData
-        effects = getApplicableRuleEffectsForTrackerProgram({
+        effects = await getApplicableRuleEffectsForTrackerProgram({
             program,
             stage,
             orgUnit,
@@ -178,12 +178,14 @@ export const openEventForEditInDataEntry = ({
             ),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
+            executionEnvironment: executionEnvironments.EDIT_ENROLLMENT_EVENT,
         });
     } else if (program instanceof EventProgram) {
-        effects = getApplicableRuleEffectsForEventProgram({
+        effects = await getApplicableRuleEffectsForEventProgram({
             program,
             orgUnit,
             currentEvent,
+            executionEnvironment: executionEnvironments.EDIT_SINGLE_EVENT,
         });
     }
 

@@ -1,6 +1,10 @@
 import { postProcessRulesEffects } from '../index';
 import { RenderFoundation, Section, DataElement, dataElementTypes } from '../../metaData';
 
+jest.mock('../rulesEngine', () => ({
+    ruleEngine: { getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) },
+}));
+
 test('Post process rules effects', () => {
     // given
     const rulesEffects = [

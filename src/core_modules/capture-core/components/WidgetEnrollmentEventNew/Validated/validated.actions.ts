@@ -3,8 +3,10 @@ import { effectMethods } from '../../../trackerOffline';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 import type { RequestEvent, LinkedRequestEvent } from '../../DataEntries';
 import type { ExternalSaveHandler } from '../common.types';
+import type { GetRulesActionsMain } from '../DataEntry/helpers/getRulesActions';
 
 export const newEventBatchActionTypes = {
+    INITIALIZE_REGISTER_ENROLLMENT_PAGE: 'NewEnrollment.InitializeRegistrationPage',
     REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS: 'NewEvent.RequestSaveAndSetSubmissionInProgress',
 };
 
@@ -21,6 +23,13 @@ export const newEventWidgetActionTypes = {
     EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST: 'NewEvent.EventSaveAndEnrollmentCompleteRequest',
     EVENT_SAVE_ENROLLMENT_COMPLETE: 'NewEvent.EventSaveAndEnrollmentComplete',
 };
+
+export const newEnrollmentActionTypes = {
+    NEW_ENROLLMENT_INITIAL_RULE_EXECUTION: 'NewEnrollment.InitialRuleExecution',
+};
+
+export const initialRuleExecution = (data: GetRulesActionsMain) =>
+    actionCreator(newEnrollmentActionTypes.NEW_ENROLLMENT_INITIAL_RULE_EXECUTION)(data);
 
 export const requestSaveEvent = ({
     requestEvent,

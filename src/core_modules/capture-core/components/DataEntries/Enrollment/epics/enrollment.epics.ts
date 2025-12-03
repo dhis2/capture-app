@@ -1,7 +1,7 @@
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
@@ -100,7 +100,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
         map((actionBatch: any) =>
             actionBatch.payload.find((action: any) => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
-        concatMap((action: any) => {
+        mergeMap((action: any) => {
             const {
                 uid,
                 programId,
@@ -141,7 +141,7 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (
         ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
         map((actionBatch: any) =>
             actionBatch.payload.find((action: any) => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
-        concatMap((action: any) => {
+        mergeMap((action: any) => {
             const {
                 innerPayload: payload,
                 searchActions,

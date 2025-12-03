@@ -1,5 +1,5 @@
 import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { ruleEngine } from '../rulesEngine';
+import { ruleEngine } from '../ruleExecution/ruleEngine';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
 
 const groups = [

@@ -36,7 +36,10 @@ export const DataEntry = ({
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dataEngine = useDataEngine();
-    const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+    const querySingleResource = useMemo(
+        () => makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
+        [dataEngine],
+    );
     const dispatch = useDispatch();
     const [saveAttempted, setSaveAttempted] = useState(false);
 
@@ -59,6 +62,8 @@ export const DataEntry = ({
         itemId,
         geometry: geometry ?? null,
         dataEntryFormConfig,
+        querySingleResource,
+        onGetValidationContext,
     });
     const { formFoundation, enrollment } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
@@ -96,7 +101,9 @@ export const DataEntry = ({
             getUpdateFieldActions({ context, querySingleResource, onGetValidationContext, innerAction, uid }).then(
                 (actions) => {
                     onEnable();
-                    return dispatch(actions);
+                    if (actions) {
+                        dispatch(actions);
+                    }
                 },
             );
         },

@@ -1,6 +1,10 @@
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
+import {
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+    executionEnvironments,
+} from '../../../../rules';
 import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
@@ -44,7 +48,7 @@ export const batchActionTypes = {
     OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
 };
 
-export const openDataEntryForNewEnrollmentBatchAsync = async ({
+export const openDataEntryForNewEnrollmentBatch = async ({
     program,
     orgUnit,
     dataEntryId,
@@ -91,13 +95,14 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
                 { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
             );
 
-    const effects = getApplicableRuleEffectsForTrackerProgram({
+    const effects = await getApplicableRuleEffectsForTrackerProgram({
         program,
         orgUnit,
         stage: firstStage,
         attributeValues: clientValues,
         enrollmentData: { enrolledAt: new Date().toISOString() },
         formFoundation,
+        executionEnvironment: executionEnvironments.NEW_ENROLLMENT,
     });
 
     return batchActions([

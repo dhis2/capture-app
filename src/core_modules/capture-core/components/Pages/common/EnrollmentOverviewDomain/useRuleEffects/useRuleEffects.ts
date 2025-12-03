@@ -1,3 +1,4 @@
+import log from 'loglevel';
 import { useEffect, useMemo, useState } from 'react';
 import { convertValue } from '../../../../../converters/serverToClient';
 import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
@@ -56,7 +57,13 @@ const useEnrollmentData = (enrollment: any) => useMemo(() => {
     };
 }, [enrollment]);
 
-export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeValues }: UseRuleEffectsInput) => {
+export const useRuleEffects = ({
+    orgUnit,
+    program,
+    apiEnrollment,
+    apiAttributeValues,
+    executionEnvironment,
+}: UseRuleEffectsInput) => {
     const [ruleEffects, setRuleEffects] = useState<any>(undefined);
     const attributesObject = useMemo(() =>
         program.attributes.reduce((acc: any, attribute: any) => {
@@ -77,18 +84,27 @@ export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeVa
 
     useEffect(() => {
         if (orgUnit && attributeValues && enrollmentData && otherEvents) {
-            const effects = getApplicableRuleEffectsForTrackerProgram({
+            getApplicableRuleEffectsForTrackerProgram({
                 program,
                 orgUnit,
                 otherEvents,
                 attributeValues,
                 enrollmentData,
-            }, true);
-            if (Array.isArray(effects)) {
-                setRuleEffects(effects);
-            }
+                executionEnvironment,
+            }, true).then((effects) => {
+                if (Array.isArray(effects)) {
+                    setRuleEffects(effects);
+                }
+            }).catch(error => log.info(error));
         }
-    }, [attributeValues, enrollmentData, orgUnit, otherEvents, program]);
+    }, [
+        attributeValues,
+        enrollmentData,
+        orgUnit,
+        otherEvents,
+        program,
+        executionEnvironment,
+    ]);
 
     return ruleEffects;
 };

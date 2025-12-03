@@ -4,6 +4,7 @@ import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
+import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import { RelatedStagesActions } from '../../WidgetRelatedStages';
 import { usePlacementDomNode } from '../../../utils/portal/usePlacementDomNode';
 import type { Props } from './validated.types';
@@ -40,7 +41,7 @@ const ValidatedPlain = ({
             }
         >
             <div className={classes.wrapper}>
-                {ready && (
+                {ready ? (
                     <>
                         <DataEntry
                             {...passOnProps}
@@ -64,7 +65,7 @@ const ValidatedPlain = ({
                             id={id}
                         />
                     </>
-                )}
+                ) : <LoadingMaskElementCenter />}
                 <div ref={savingTextRef} />
             </div>
         </Widget>

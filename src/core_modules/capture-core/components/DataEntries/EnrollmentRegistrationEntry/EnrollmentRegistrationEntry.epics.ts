@@ -1,11 +1,12 @@
 import { ofType } from 'redux-observable';
-import { pluck, switchMap } from 'rxjs/operators';
-import { empty, from } from 'rxjs';
+import { map, filter, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { errorCreator } from 'capture-core-utils';
+import { filterRejected } from 'capture-core-utils/epics';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { enrollmentRegistrationEntryActionTypes } from './EnrollmentRegistrationEntry.actions';
-import { openDataEntryForNewEnrollmentBatchAsync } from '../Enrollment';
+import { openDataEntryForNewEnrollmentBatch } from '../Enrollment';
 import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import type { TrackerProgram } from '../../../metaData/Program';
@@ -13,8 +14,9 @@ import type { TrackerProgram } from '../../../metaData/Program';
 export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
-        pluck('payload'),
-        switchMap(({
+        map(({ payload }) => payload),
+        filter(({ selectedOrgUnit }: any) => selectedOrgUnit),
+        mergeMap(({
             selectedOrgUnit,
             selectedScopeId: programId,
             dataEntryId,
@@ -24,35 +26,28 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
             firstStage,
             formFoundation,
         }: any) => {
-            if (selectedOrgUnit) {
-                let trackerProgram: TrackerProgram | null = null;
-                try {
-                    trackerProgram = getTrackerProgramThrowIfNotFound(programId);
-                } catch (error) {
-                    log.error(
-                        errorCreator('tracker program for id not found')({ programId, error }),
-                    );
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
-
-                if (!trackerProgram) {
-                    return empty();
-                }
-
-                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync({
-                    program: trackerProgram,
-                    orgUnit: selectedOrgUnit,
-                    dataEntryId,
-                    formValues,
-                    clientValues,
-                    firstStage,
-                    programCategory,
-                    formFoundation,
-                });
-
-                return from(openEnrollmentPromise);
+            let trackerProgram: TrackerProgram | null = null;
+            try {
+                trackerProgram = getTrackerProgramThrowIfNotFound(programId);
+            } catch (error) {
+                log.error(
+                    errorCreator('tracker program for id not found')({ programId, error }),
+                );
             }
 
-            return empty();
+            if (!trackerProgram) {
+                return of(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
+            }
+
+            return filterRejected(openDataEntryForNewEnrollmentBatch({
+                program: trackerProgram,
+                orgUnit: selectedOrgUnit,
+                dataEntryId,
+                formValues,
+                clientValues,
+                firstStage,
+                programCategory,
+                formFoundation,
+            }));
         }),
     );

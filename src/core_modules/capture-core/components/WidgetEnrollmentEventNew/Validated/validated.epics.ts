@@ -1,10 +1,32 @@
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
+import { mapToInnerAction, filterRejected } from 'capture-core-utils/epics';
 import {
     newEventBatchActionTypes,
     newEventWidgetActionTypes,
+    newEnrollmentActionTypes,
     saveEvents,
 } from './validated.actions';
+import { getRulesActions } from '../DataEntry';
+import type { GetRulesActionsMain } from '../DataEntry/helpers/getRulesActions';
+
+export const openRegisterNewEnrollmentPageEpic = (action$: any, store: any) =>
+    action$.pipe(
+        ofType(newEventBatchActionTypes.INITIALIZE_REGISTER_ENROLLMENT_PAGE),
+        map(action =>
+            mapToInnerAction(
+                action,
+                newEventBatchActionTypes.INITIALIZE_REGISTER_ENROLLMENT_PAGE,
+                newEnrollmentActionTypes.NEW_ENROLLMENT_INITIAL_RULE_EXECUTION,
+            ),
+        ),
+        mergeMap((action: { payload: GetRulesActionsMain }) =>
+            filterRejected(getRulesActions({
+                state: store.value,
+                ...action.payload,
+            })),
+        ),
+    );
 
 export const saveNewEnrollmentEventEpic = (action$: any) =>
     action$.pipe(

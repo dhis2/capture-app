@@ -127,11 +127,20 @@ export const viewEventPageDesc = createReducerDescription({
             ...state.eventDetailsSection,
         },
     }),
+    [widgetEventEditActionTypes.LOAD_EDIT_EVENT_DATA_ENTRY]: state => ({
+        ...state,
+        eventDetailsSection: {
+            ...state.eventDetailsSection,
+            showEditEvent: true,
+            loading: true,
+        },
+    }),
     [viewEventDetailsActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {
             ...state.eventDetailsSection,
             showEditEvent: true,
+            loading: false,
         },
     }),
     [editEventDataEntryActionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY]: state => ({

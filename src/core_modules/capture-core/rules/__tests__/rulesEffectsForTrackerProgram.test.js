@@ -1,5 +1,5 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { ruleEngine } from '../rulesEngine';
+import { ruleEngine } from '../ruleExecution/ruleEngine';
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },

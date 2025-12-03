@@ -94,7 +94,7 @@ const WidgetEventEditPlain = ({
     useEffect(() => inMemoryFileStore.clear, []);
 
     const supportsChangelog = useFeature(FEATURES.changelogs);
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode, isLoading } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
@@ -150,33 +150,38 @@ const WidgetEventEditPlain = ({
                                 className={classes.form}
                                 data-test={'widget-enrollment-event-edit'}
                             >
-                                <EditEventDataEntry
-                                    dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
-                                    formFoundation={formFoundation}
-                                    orgUnit={orgUnit}
-                                    programId={programId}
-                                    stageId={stageId}
-                                    teiId={teiId}
-                                    enrollmentId={enrollmentId}
-                                    expiryPeriod={expiryPeriod}
-                                    eventId={eventId}
-                                    eventStatus={eventStatus}
-                                    onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton
-                                    onHandleScheduleSave={onHandleScheduleSave}
-                                    onSaveExternal={onSaveExternal}
-                                    initialScheduleDate={initialScheduleDate}
-                                    allowGenerateNextVisit={stage.allowGenerateNextVisit}
-                                    askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
-                                    availableProgramStages={availableProgramStages}
-                                    hideDueDate={stage.hideDueDate}
-                                    assignee={assignee}
-                                    onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
-                                    onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
-                                    onSaveAndCompleteEnrollmentSuccessActionType={
-                                        onSaveAndCompleteEnrollmentSuccessActionType
-                                    }
-                                />
+                                {isLoading ?
+                                    <LoadingMaskElementCenter /> :
+                                    <EditEventDataEntry
+                                        dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                                        formFoundation={formFoundation}
+                                        orgUnit={orgUnit}
+                                        programId={programId}
+                                        stageId={stageId}
+                                        teiId={teiId}
+                                        enrollmentId={enrollmentId}
+                                        expiryPeriod={expiryPeriod}
+                                        eventId={eventId}
+                                        eventStatus={eventStatus}
+                                        onCancelEditEvent={onCancelEditEvent}
+                                        hasDeleteButton
+                                        onHandleScheduleSave={onHandleScheduleSave}
+                                        onSaveExternal={onSaveExternal}
+                                        initialScheduleDate={initialScheduleDate}
+                                        allowGenerateNextVisit={stage.allowGenerateNextVisit}
+                                        askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+                                        availableProgramStages={availableProgramStages}
+                                        hideDueDate={stage.hideDueDate}
+                                        assignee={assignee}
+                                        onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
+                                        onSaveAndCompleteEnrollmentErrorActionType={
+                                            onSaveAndCompleteEnrollmentErrorActionType
+                                        }
+                                        onSaveAndCompleteEnrollmentSuccessActionType={
+                                            onSaveAndCompleteEnrollmentSuccessActionType
+                                        }
+                                    />
+                                }
                             </div>
                         )}
                     </div>

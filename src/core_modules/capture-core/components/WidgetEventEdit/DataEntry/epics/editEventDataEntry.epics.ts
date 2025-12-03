@@ -1,7 +1,8 @@
+import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, concatMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
@@ -17,6 +18,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
     validateAssignEffects,
+    executionEnvironments,
     type FieldData,
 } from '../../../../rules';
 import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
@@ -68,36 +70,46 @@ const runRulesForEditSingleEvent = async ({
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
     let effects;
-    if (program instanceof TrackerProgram) {
-        const { enrollment, attributeValues } = state.enrollmentDomain;
+    try {
+        if (program instanceof TrackerProgram) {
+            const { enrollment, attributeValues } = state.enrollmentDomain;
 
-        const { apiOtherEvents, apiCurrentEventOriginal } = enrollment.events.reduce((acc, apiEvent) => {
-            if (apiEvent.event === currentEvent.eventId) {
-                acc.apiCurrentEventOriginal = apiEvent;
-            } else {
-                acc.apiOtherEvents.push(apiEvent);
-            }
-            return acc;
-        }, { apiOtherEvents: [] });
+            const { apiOtherEvents, apiCurrentEventOriginal } = enrollment.events.reduce((acc, apiEvent) => {
+                if (apiEvent.event === currentEvent.eventId) {
+                    acc.apiCurrentEventOriginal = apiEvent;
+                } else {
+                    acc.apiOtherEvents.push(apiEvent);
+                }
+                return acc;
+            }, { apiOtherEvents: [] });
 
-        effects = getApplicableRuleEffectsForTrackerProgram({
-            program,
-            stage,
-            orgUnit: coreOrgUnit,
-            currentEvent: {
-                ...currentEvent,
-                createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME),
-            },
-            otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
-            enrollmentData: getEnrollmentForRulesEngine(enrollment),
-            attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
-        });
-    } else {
-        effects = getApplicableRuleEffectsForEventProgram({
-            program,
-            orgUnit: coreOrgUnit,
-            currentEvent,
-        });
+            effects = await getApplicableRuleEffectsForTrackerProgram({
+                program,
+                stage,
+                orgUnit: coreOrgUnit,
+                currentEvent: {
+                    ...currentEvent,
+                    createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME),
+                },
+                otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
+                enrollmentData: getEnrollmentForRulesEngine(enrollment),
+                attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
+                executionEnvironment: executionEnvironments.EDIT_ENROLLMENT_EVENT,
+            });
+        } else {
+            effects = await getApplicableRuleEffectsForEventProgram({
+                program,
+                orgUnit: coreOrgUnit,
+                currentEvent,
+                executionEnvironment: executionEnvironments.EDIT_SINGLE_EVENT,
+            });
+        }
+    } catch (error) {
+        log.info(error);
+        return batchActions([
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
+        ]);
     }
 
     const effectsWithValidations = await validateAssignEffects({
@@ -125,7 +137,7 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
             actionBatch.payload.find((action: any) =>
                 action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        concatMap((action: any) => {
+        mergeMap((action: any) => {
             const { dataEntryId, itemId, uid, programId } = action.payload;
             const runRulesForEditSingleEventPromise = runRulesForEditSingleEvent({
                 store,
@@ -149,7 +161,7 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
             actionBatch.payload.find((action: any) =>
                 action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        concatMap((action: any) => {
+        mergeMap((action: any) => {
             const {
                 elementId,
                 value,
