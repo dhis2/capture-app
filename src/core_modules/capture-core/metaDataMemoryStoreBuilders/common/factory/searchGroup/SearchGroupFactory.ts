@@ -105,7 +105,6 @@ export class SearchGroupFactory {
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
-            o.unique = unique;
             o.minCharactersToSearch = minCharactersToSearch;
             o.disabled = false;
             o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
