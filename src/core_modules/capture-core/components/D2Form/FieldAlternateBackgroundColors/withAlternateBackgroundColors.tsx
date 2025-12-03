@@ -14,7 +14,7 @@ type Props = {
 
 export const withAlternateBackgroundColors = () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class AlternateBackgroundColorsHOC extends React.Component<Props> {
-        getContainerProps = (index: number, total: number, hidden: boolean) => {
+        getContainerProps = (index: number, hidden: boolean) => {
             if (index === 0) {
                 this.hiddenFieldsCount = 0;
             }

@@ -28,7 +28,7 @@ type CancelablePromise<T> = {
 };
 
 type RenderDividerFn = (index: number, fieldsCount: number, hidden: boolean) => React.ReactNode;
-type GetContainerPropsFn = (index: number, fieldsCount: number, hidden: boolean) => any;
+type GetContainerPropsFn = (index: number, hidden: boolean) => any;
 
 type FieldCommitConfig = {
     readonly fieldId: string;
@@ -541,7 +541,7 @@ export class FormBuilder extends React.Component<Props> {
         const props = field.props || {};
         const value = values[field.id];
         const hidden = ruleEffects.hiddenFields[field.id];
-        const alternatingBackgroundColor = onGetContainerProps ? onGetContainerProps(index, length, hidden) : null;
+        const alternatingBackgroundColor = onGetContainerProps ? onGetContainerProps(index, hidden) : null;
 
         return (
             <FormField
