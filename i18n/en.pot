@@ -2125,6 +2125,13 @@ msgstr "This value already exists"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"From\" cannot be greater than \"To\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+
 msgid "Checking..."
 msgstr "Checking..."
 
