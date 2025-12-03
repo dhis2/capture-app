@@ -67,7 +67,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
     }
 
     formFields: Array<FieldConfig>;
-    formFieldCache: { [elementId: string]: FieldConfig } = {};
     rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     static defaultProps = {
@@ -87,6 +86,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
             this.formFields = this.buildFormFields(newProps);
         }
     }
+    formFieldCache: { [elementId: string]: FieldConfig } = {};
     formBuilderInstance: FormBuilder | null = null;
 
     buildFormFields(props: Props): Array<FieldConfig> {

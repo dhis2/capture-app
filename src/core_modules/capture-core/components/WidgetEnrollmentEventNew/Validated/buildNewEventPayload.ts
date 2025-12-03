@@ -57,14 +57,16 @@ const buildRelatedStageEventPayload = (
     currentProgramStageId: string,
     buildPayloadArgs: any,
 ) => {
-    if (!(relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()))
+    if (!(relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship())) {
         return noRelatedStageEvent;
+    }
 
     const { selectedRelationshipType, relatedStageDataValues, linkMode } = relatedStageRef.current
         .getLinkedStageValues();
 
-    if (!linkMode)
+    if (!linkMode) {
         return noRelatedStageEvent;
+    }
 
     const {
         programId,

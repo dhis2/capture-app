@@ -15,10 +15,12 @@ export const saveNewEnrollmentEventEpic = (action$: any, store: any) =>
         ofType(newEventWidgetActionTypes.EVENT_SAVE_BUTTON),
         filter((action: any) => {
             const { relatedStageRef } = action.payload;
-            if (!(relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()))
+            if (!(relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship())) {
                 return true;
-            if (relatedStageRef.current.formIsValidOnSave())
+            }
+            if (relatedStageRef.current.formIsValidOnSave()) {
                 return true;
+            }
             return !!relatedStageRef.current?.getLinkedStageValues;
         }),
         map((action: any) => {

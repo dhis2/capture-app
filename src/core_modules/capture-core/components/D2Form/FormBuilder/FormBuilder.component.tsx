@@ -8,7 +8,6 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import { FormField, FormPlugin } from './components';
 import type {
-    ErrorData,
     PostProcessErrorMessage,
     FieldConfig,
     FieldCommitOptions,
@@ -481,7 +480,7 @@ export class FormBuilder extends React.Component<Props> {
             return ruleMessage;
         }
 
-        if (Object.keys(ruleMessage).some(key => {
+        if (Object.keys(ruleMessage).some((key) => {
             const currentMessage = ruleMessage[key];
             const prevMessage = prevRuleMessage[key];
             if (Array.isArray(currentMessage)) {
@@ -489,15 +488,14 @@ export class FormBuilder extends React.Component<Props> {
                     return false;
                 }
                 return currentMessage.some((value, index) => value !== prevMessage[index]);
-            } else {
-                return currentMessage !== prevMessage;
             }
+            return currentMessage !== prevMessage;
         })) {
             this.ruleMessages[fieldId] = ruleMessage;
             return ruleMessage;
         }
 
-        return this.ruleMessages[fieldId]
+        return this.ruleMessages[fieldId];
     }
 
     renderPlugin = (

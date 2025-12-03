@@ -148,7 +148,7 @@ export const Validated = ({
             buildPayloadArgs,
             relatedStageRef,
             onSaveAndCompleteEnrollmentSuccessActionType,
-            onSaveAndCompleteEnrollmentErrorActionType
+            onSaveAndCompleteEnrollmentErrorActionType,
         ],
     );
 

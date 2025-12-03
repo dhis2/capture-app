@@ -71,7 +71,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const { orgUnitId } = useLocationQuery();
     const onBackToAllEvents = useCallback(() => {
         dispatch(startGoBackToMainPage(orgUnitId));
-    }, [orgUnitId]);
+    }, [dispatch, orgUnitId]);
 
     return (
         <div className={classes.container}>
