@@ -411,14 +411,6 @@ export class FormBuilder extends React.Component<Props> {
                 }));
     }
 
-    handleUpdateAsyncState = (fieldId: string, asyncStateToAdd: any) => {
-        this.props.onUpdateFieldUIOnly(asyncStateToAdd, fieldId, this.props.id);
-    }
-
-    handleCommitAsync = (fieldId: string, fieldLabel: string, callback: (...args: any[]) => any) => {
-        this.props.onUpdateFieldAsync(fieldId, fieldLabel, this.props.id, callback);
-    }
-
     /**
      *  Retain a reference to the form field instance
     */

@@ -31,9 +31,8 @@ export type PropsForPureComponent = Omit<Props, keyof FormRef> & {
     readonly formRef?: (instance: any) => void;
 };
 
-type RulesHiddenField = boolean;
 type RulesHiddenFields = {
-    [id: string]: RulesHiddenField;
+    [id: string]: boolean;
 };
 
 type RulesCompulsoryFields = { [id: string]: boolean };

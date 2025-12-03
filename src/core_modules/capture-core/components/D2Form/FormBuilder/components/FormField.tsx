@@ -7,10 +7,11 @@ import type {
 } from '../formbuilder.types';
 import { messageStateKeys } from '../../../../reducers/descriptions/rulesEffects.reducerDescription';
 
+const ignoreKeys = new Set(['valid', 'errorMessage', 'touched']);
+
 const getFieldAsyncUIState = (fieldUI: FieldUI) => {
-    const ignoreKeys = ['valid', 'errorMessage', 'touched'];
     return Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
-        if (!ignoreKeys.includes(propId)) {
+        if (!ignoreKeys.has(propId)) {
             accFieldAsyncUIState[propId] = fieldUI[propId];
         }
         return accFieldAsyncUIState;
@@ -36,7 +37,7 @@ export const FormField = React.memo(({
     ...passOnProps
 }: any) => {
     const fieldUI = useSelector(
-        (state: any) => (state.formsSectionsFieldsUI[formId] || {})[field.id] || {},
+        (state: any) => (state.formsSectionsFieldsUI?.[formId]?.[field.id]) || {},
         shallowEqual,
     );
     const errorMessage = useMemo(() => (onPostProcessErrorMessage && fieldUI.errorMessage ?
@@ -104,7 +105,7 @@ export const FormField = React.memo(({
                 />
             </div>
 
-            {onRenderDivider && onRenderDivider(index, length, passOnProps.hidden)}
+            {onRenderDivider?.(index, length, passOnProps.hidden)}
         </div>
     );
 });
