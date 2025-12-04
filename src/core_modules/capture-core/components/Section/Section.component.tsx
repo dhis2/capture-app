@@ -1,7 +1,7 @@
 import { colors } from '@dhis2/ui';
 import React, { Component, type ReactElement, type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 
 const styles: Readonly<any> = {
     container: {
@@ -82,7 +82,7 @@ class SectionPlain extends Component<Props> {
 
     render() {
         const { style, className } = this.props;
-        const containerClass = classNames(this.props.classes.container, className);
+        const containerClass = cx(this.props.classes.container, className);
         return (
             <div className={containerClass} style={style}>
                 {this.renderContents()}

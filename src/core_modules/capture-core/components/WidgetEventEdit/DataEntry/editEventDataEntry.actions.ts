@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
@@ -33,7 +34,6 @@ import type {
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 import type { DataEntryPropToInclude } from '../../DataEntry/actions/dataEntryLoad.utils';
 
 export const batchActionTypes = {

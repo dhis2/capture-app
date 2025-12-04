@@ -8,7 +8,9 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from 'capture-core/rules/rulesEngine';
+import { getDateFnLocale } from './getDateFnLocale';
+import { getMomentLocale } from './getMomentLocale';
 
 function setLogLevel() {
     const levels = {
@@ -33,7 +35,7 @@ function setMomentLocaleAsync(locale: string) {
     }
 
     return new Promise<void>((resolve) => {
-        import(`moment/locale/${locale}`)
+        getMomentLocale(locale)
             .then(() => {
                 moment.locale(locale);
                 log.info(`got moment locale config for ${locale}`);
@@ -49,7 +51,7 @@ function setMomentLocaleAsync(locale: string) {
 
 function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
     return new Promise<void>((resolve, reject) => {
-        import(`date-fns/locale/${locale}/index.js`)
+        getDateFnLocale(locale)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
                     dateFnsLocale: dateFnLocale,

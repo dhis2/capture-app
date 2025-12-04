@@ -25,7 +25,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: O
 
             return (
                 <InnerComponent
-                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     cancelButton={
                         <CancelButton
                             id={this.props.id}

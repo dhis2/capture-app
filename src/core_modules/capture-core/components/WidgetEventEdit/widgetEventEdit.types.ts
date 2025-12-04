@@ -1,6 +1,6 @@
+import type { ApiEnrollment } from 'capture-core-utils/types/api-types';
 import type { UserFormField } from '../FormFields/UserField';
 import { ProgramStage, RenderFoundation } from '../../metaData';
-import type { ApiEnrollment } from '../../../capture-core-utils/types/api-types';
 
 export type Props = {
     eventStatus?: string,

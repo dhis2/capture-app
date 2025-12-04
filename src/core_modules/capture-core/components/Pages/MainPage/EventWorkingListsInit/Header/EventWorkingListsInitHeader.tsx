@@ -1,7 +1,8 @@
 import { colors, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import React, { type ComponentType, type ReactNode } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import React, { type ComponentType } from 'react';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { type Props } from './eventWorkingListsInitHeader.types';
 
 export const styles = () => ({
     container: {
@@ -23,12 +24,8 @@ export const styles = () => ({
     },
 });
 
-type Props = {
-    children: ReactNode;
-} & WithStyles<typeof styles>;
-
 const EventWorkingListsInitHeaderPlain =
-    ({ children, classes: { container, headerContainer, listContainer, title } }: Props) => (
+    ({ children, classes: { container, headerContainer, listContainer, title } }: Props & WithStyles<typeof styles>) => (
         <div className={container}>
             <div
                 className={headerContainer}
@@ -48,4 +45,4 @@ const EventWorkingListsInitHeaderPlain =
     );
 
 export const EventWorkingListsInitHeader =
-    withStyles(styles)(EventWorkingListsInitHeaderPlain) as ComponentType<Omit<Props, keyof WithStyles<typeof styles>>>;
+    withStyles(styles)(EventWorkingListsInitHeaderPlain) as ComponentType<Props>;

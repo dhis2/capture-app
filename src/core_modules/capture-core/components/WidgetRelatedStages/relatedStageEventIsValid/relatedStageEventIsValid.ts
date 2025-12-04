@@ -1,6 +1,6 @@
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type { RelatedStageIsValidProps } from './relatedStageEventIsValid.types';
-import { errorCreator } from '../../../../capture-core-utils';
 import { ValidationFunctionsByLinkMode } from './ValidationFunctions';
 
 

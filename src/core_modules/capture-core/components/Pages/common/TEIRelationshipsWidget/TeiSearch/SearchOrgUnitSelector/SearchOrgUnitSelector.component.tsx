@@ -25,7 +25,7 @@ type Props = {
     searchId: string;
     selectedOrgUnit?: any;
     selectedOrgUnitScope?: string;
-    treeRoots?: Array<any>;
+    treeRoots?: Array<any> | null;
     treeReady?: boolean;
     treeKey?: string;
     treeSearchText?: string;

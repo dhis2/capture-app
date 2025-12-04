@@ -2,7 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { useState, useEffect } from 'react';
 import { MultiSelectField as MultiSelectFieldUI, MultiSelectOption } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { withFocusHandler } from './withFocusHandler';
 import type { Props } from './MultiSelectField.types';
 

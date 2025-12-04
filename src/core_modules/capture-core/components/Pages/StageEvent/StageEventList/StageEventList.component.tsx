@@ -1,5 +1,4 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 import { Widget } from '../../../Widget';
 import type { PlainProps } from './StageEventList.types';
@@ -7,13 +6,9 @@ import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
 import { TrackerWorkingLists } from '../../../WorkingLists/TrackerWorkingLists';
 
-const getStyles = () => ({});
-
 const storeId = 'stageEvents';
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
-
-const StageEventListPlain = ({ stage, programId, ...passOnProps }: Props) => {
+const StageEventListPlain = ({ stage, programId, ...passOnProps }: PlainProps) => {
     const { programType } = useProgramInfo(programId);
 
     const workingListProps = {
@@ -43,6 +38,4 @@ const StageEventListPlain = ({ stage, programId, ...passOnProps }: Props) => {
     </>);
 };
 
-export const StageEventList = withStyles(
-    getStyles,
-)(StageEventListPlain) as ComponentType<PlainProps>;
+export const StageEventList = StageEventListPlain as ComponentType<PlainProps>;

@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { useMemo } from 'react';
 import { useConfig } from '@dhis2/app-runtime';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
@@ -17,7 +18,11 @@ export const useMetadataForProgramStage = ({
     const { locale } = useUserLocale();
     const { serverVersion } = useConfig();
     const minor = serverVersion?.minor;
-    const { dataEntryFormConfig, configIsFetched } = useDataEntryFormConfig({ selectedScopeId: scopeId });
+    const {
+        dataEntryFormConfig,
+        configIsFetched,
+        isLoading: isDataEntryFormConfigLoading,
+    } = useDataEntryFormConfig({ selectedScopeId: scopeId });
 
     const programStage = useMemo(() => {
         if (!stageId) {
@@ -46,7 +51,7 @@ export const useMetadataForProgramStage = ({
         selectedScopeId: scopeId,
     });
 
-    const { data: programStageMetadata, isIdle, isLoading, isError } = useIndexedDBQuery(
+    const { data: programStageMetadata, isInitialLoading, isError } = useIndexedDBQuery(
         ['programStageMetadata', programId, stageId],
         () => buildProgramStageMetadata({
             cachedProgramStage: programStage,
@@ -73,7 +78,7 @@ export const useMetadataForProgramStage = ({
     return {
         formFoundation: programStageMetadata?.stageForm ?? null,
         stage: programStageMetadata ?? null,
-        isLoading: isLoading || isIdle,
+        isLoading: isDataEntryFormConfigLoading || isInitialLoading,
         isError,
     };
 };

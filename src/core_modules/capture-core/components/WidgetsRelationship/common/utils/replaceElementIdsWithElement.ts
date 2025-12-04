@@ -1,5 +1,5 @@
 import log from 'loglevel';
-import { errorCreator } from '../../../../../capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import type { ApiRelationshipType } from '../Types';
 import {
     dataElementTypes,

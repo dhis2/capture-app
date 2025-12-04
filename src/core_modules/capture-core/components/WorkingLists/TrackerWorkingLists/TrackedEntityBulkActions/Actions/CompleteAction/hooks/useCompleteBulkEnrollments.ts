@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { errorCreator, FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
 import type { ProgramStage } from '../../../../../../../metaData';
 
 type Props = {
@@ -109,7 +109,7 @@ export const useCompleteBulkEnrollments = ({
     const {
         data: trackedEntities,
         isError: isTrackedEntitiesError,
-        isLoading: isFetchingTrackedEntities,
+        isInitialLoading: isInitialLoadingTrackedEntities,
     } = useApiDataQuery(
         ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities', selectedRows],
         {
@@ -257,7 +257,7 @@ export const useCompleteBulkEnrollments = ({
     return {
         completeEnrollments: onStartCompleteEnrollments,
         enrollmentCounts,
-        isLoading: isFetchingTrackedEntities,
+        isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,
         isCompleting: isImportingEnrollments || isImportingPartialEnrollments || isCompletingEnrollments,

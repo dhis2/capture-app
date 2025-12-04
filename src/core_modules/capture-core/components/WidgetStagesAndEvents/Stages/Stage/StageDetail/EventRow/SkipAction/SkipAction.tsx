@@ -5,11 +5,11 @@ import {
     MenuItem,
     IconArrowRight16, IconRedo16,
 } from '@dhis2/ui';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { errorCreator } from 'capture-core-utils';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { EventStatuses } from '../EventRow';
-import { errorCreator } from '../../../../../../../../capture-core-utils';
-import type { ApiEnrollmentEvent } from '../../../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
     eventId: string;

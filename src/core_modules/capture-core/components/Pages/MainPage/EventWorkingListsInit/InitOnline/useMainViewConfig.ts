@@ -20,7 +20,7 @@ export const useMainViewConfig: UseMainViewConfig = () => {
             select: (captureKeys: Array<string> | null | undefined) => captureKeys?.includes('workingLists'),
         });
 
-    const { data: mainViewConfig, isLoading, isError, error } = useApiMetadataQuery<any>(
+    const { data: mainViewConfig, isInitialLoading, isError, error } = useApiMetadataQuery<any>(
         ['dataStore', 'workingListsEvents'], {
             resource: 'dataStore/capture/workingLists',
         }, {
@@ -94,6 +94,6 @@ export const useMainViewConfig: UseMainViewConfig = () => {
 
     return {
         mainViewConfig,
-        mainViewConfigReady: !namespaceIsLoading && !isLoading,
+        mainViewConfigReady: !namespaceIsLoading && !isInitialLoading,
     };
 };
