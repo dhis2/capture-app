@@ -36,7 +36,7 @@ export const withFilters = () => <P extends Record<string, unknown>>(InnerCompon
         ...passOnProps
     }: Props & P) => (
         <InnerComponent
-            {...passOnProps as any}
+            {...passOnProps as unknown as P}
             columns={columns}
             filters={
                 <FiltersRows

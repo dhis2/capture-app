@@ -23,7 +23,7 @@ export const withSelectTranslations = () =>
                 return (
                     <InnerComponent
                         translations={this.translations}
-                        {...passOnProps as any}
+                        {...passOnProps}
                     />
                 );
             }

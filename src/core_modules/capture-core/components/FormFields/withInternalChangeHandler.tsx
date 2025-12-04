@@ -42,7 +42,7 @@ export const withInternalChangeHandler = () =>
                     <InnerComponent
                         onChange={this.handleChange}
                         value={stateValue}
-                        {...passOnProps as any}
+                        {...passOnProps as unknown as P}
                     />
                 );
             }
