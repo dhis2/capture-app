@@ -75,6 +75,10 @@ export const saveNewEnrollmentEventEpic = (action$: any, store: any) =>
                 ...(onSaveSuccessAction ? [onSaveSuccessAction] : []),
             ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS);
         }),
+    );
+
+export const handleRequestSaveNewEnrollmentEpic = (action$: any) =>
+    action$.pipe(
         ofType(
             newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS,
         ),
