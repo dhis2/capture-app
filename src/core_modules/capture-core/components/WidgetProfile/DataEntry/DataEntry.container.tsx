@@ -159,7 +159,7 @@ export const DataEntry = ({
                 onGetValidationContext={onGetValidationContext}
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
-                orgUnit={{ id: orgUnitId }}
+                orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
             />
         )

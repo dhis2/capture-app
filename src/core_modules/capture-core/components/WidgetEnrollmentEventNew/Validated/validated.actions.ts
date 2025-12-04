@@ -10,10 +10,9 @@ export const newEventBatchActionTypes = {
 
 export const newEventWidgetActionTypes = {
     RULES_ON_UPDATE_EXECUTE: 'NewEvent.ExecuteRulesOnUpdate',
+    EVENT_SAVE_BUTTON: 'NewEvent.HandleSaveButton',
     EVENT_SAVE_REQUEST: 'NewEvent.RequestSaveEvent',
     EVENT_SAVE: 'NewEvent.SaveEvent',
-    EVENT_SAVE_SUCCESS: 'NewEvent.SaveEventSuccess',  // TEMPORARY - pass in success action name to the widget
-    EVENT_SAVE_ERROR: 'NewEvent.SaveEventError', // TEMPORARY - pass in error action name to the widget
     EVENT_NOTE_ADD: 'NewEvent.AddEventNote',
     START_CREATE_NEW_AFTER_COMPLETING: 'NewEvent.StartCreateNewAfterCompleting',
     SET_SAVE_ENROLLMENT_EVENT_IN_PROGRESS: 'NewEvent.SetSaveEnrollmentEventInProgress',
@@ -21,6 +20,27 @@ export const newEventWidgetActionTypes = {
     EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST: 'NewEvent.EventSaveAndEnrollmentCompleteRequest',
     EVENT_SAVE_ENROLLMENT_COMPLETE: 'NewEvent.EventSaveAndEnrollmentComplete',
 };
+
+export const handleSaveButton = ({
+    saveType,
+    enrollment,
+    buildPayloadArgs,
+    relatedStageRef,
+    onSaveExternal,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
+    onSaveSuccessAction,
+}: any) =>
+    actionCreator(newEventWidgetActionTypes.EVENT_SAVE_BUTTON)({
+        saveType,
+        enrollment,
+        buildPayloadArgs,
+        relatedStageRef,
+        onSaveExternal,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+        onSaveSuccessAction,
+    });
 
 export const requestSaveEvent = ({
     requestEvent,

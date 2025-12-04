@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
@@ -84,11 +84,11 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
 
-    const onSaveExternal = () => {
+    const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
         onBackToAllEvents();
-    };
+    }, [eventId, queryClient, onBackToAllEvents]);
 
     const occurredAtClient = convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);

@@ -19,7 +19,7 @@ export const DataEntryComponent = ({
     onGetValidationContext,
     errorsMessages,
     warningsMessages,
-    orgUnit,
+    orgUnitId,
     pluginContext,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
@@ -40,7 +40,7 @@ export const DataEntryComponent = ({
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 onGetValidationContext={onGetValidationContext}
-                orgUnit={orgUnit}
+                orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
             />
             <NoticeBoxes

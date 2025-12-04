@@ -67,6 +67,7 @@ const RegisterTeiPlain = ({
     trackedEntityTypeId,
     selectedScopeId,
     inheritedAttributes,
+    isLoadingAttributes,
     classes,
 }: PlainProps) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
@@ -103,7 +104,7 @@ const RegisterTeiPlain = ({
                 <RegistrationSection
                     trackedEntityTypeId={trackedEntityTypeId}
                 />
-                <RegisterTeiDataEntry
+                {!isLoadingAttributes && <RegisterTeiDataEntry
                     onLink={onLink}
                     onCancel={onCancel}
                     onSaveWithoutEnrollment={onSaveWithoutEnrollment}
@@ -115,7 +116,7 @@ const RegisterTeiPlain = ({
                     renderDuplicatesCardActions={renderDuplicatesCardActions}
                     ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                     inheritedAttributes={inheritedAttributes}
-                />
+                />}
             </div>
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}

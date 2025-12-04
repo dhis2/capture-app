@@ -139,7 +139,7 @@ export type DataEntryOutputProps = {
     onOpenAddRelationship?: (...args: any[]) => void,
     onUpdateDataEntryField?: (...args: any[]) => void,
     onGetValidationContext?: () => any,
-    orgUnit?: { id?: string },
+    orgUnitId?: string,
     pluginContext?: PluginContext,
 };
 

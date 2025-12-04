@@ -2,7 +2,6 @@ import {
     PolygonField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -19,16 +18,14 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const PolygonFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer(getContainerClass)(
-                                    withInternalChangeHandler()(
-                                        PolygonField,
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer(getContainerClass)(
+                                withInternalChangeHandler()(
+                                    PolygonField,
                                 ),
                             ),
                         ),

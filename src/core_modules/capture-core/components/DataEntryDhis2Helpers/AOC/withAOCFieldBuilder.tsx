@@ -56,7 +56,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         };
 
         const loadCagoryOptions = useCallback(() => {
-            setCategories([]);
+            setCategories(undefined);
             cancelablePromiseRef.current?.cancel();
 
             let currentRequestCancelablePromises: any;
