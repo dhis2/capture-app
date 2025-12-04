@@ -9,14 +9,13 @@ import { messageStateKeys } from '../../../../reducers/descriptions/rulesEffects
 
 const ignoreKeys = new Set(['valid', 'errorMessage', 'touched']);
 
-const getFieldAsyncUIState = (fieldUI: FieldUI) => {
-    return Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
+const getFieldAsyncUIState = (fieldUI: FieldUI) =>
+    Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
         if (!ignoreKeys.has(propId)) {
             accFieldAsyncUIState[propId] = fieldUI[propId];
         }
         return accFieldAsyncUIState;
     }, {});
-};
 
 export const FormField = React.memo(({
     field,
