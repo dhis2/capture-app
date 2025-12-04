@@ -22,7 +22,6 @@ export class D2TextField extends Component<Props> {
         this.handleBlur = this.handleBlur.bind(this);
     }
     instance: HTMLInputElement | null = null;
-    containerInstance: HTMLDivElement | null = null;
 
     handleChange = (payload: { value?: string }, event: any) => {
         this.props.onChange && this.props.onChange(payload.value || '', event);
@@ -33,14 +32,14 @@ export class D2TextField extends Component<Props> {
     }
 
     focus() {
-        this.instance && this.instance.focus();
+        this.instance?.focus();
     }
 
     render() {
         const { onChange, onBlur, value, ...passOnProps } = this.props;
 
         return (
-            <div ref={(containerInstance) => { this.containerInstance = containerInstance; }}>
+            <div>
                 <Input
                     ref={(inst: any) => { this.instance = inst; }}
                     value={value || ''}

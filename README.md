@@ -54,7 +54,15 @@ yarn
 
 Read about cross-site cookies and DHIS2 applications [here](https://dhis2.nu/docs/guides/debug-instance/#disable-samesite-by-default-cookies)
 
-#### 4. Run the application
+#### 4. Build the application
+
+To build the application locally run:
+
+```
+yarn build
+```
+
+#### 5. Run the application
 
 To start the application locally and interact with it in the browser, run:
 
@@ -87,7 +95,7 @@ This setup helps in managing Cypress Cloud credits more efficiently, ensuring re
 
 ## Built With
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This project was bootstrapped with [Vite](https://vite.dev/).
 
 
 ## Commits

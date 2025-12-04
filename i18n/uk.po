@@ -7,13 +7,14 @@
 # Nancy Espinoza, 2025
 # Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025
 # Éva Tamási, 2025
+# Yury Rogachev <yury@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-23T11:41:11.943Z\n"
+"POT-Creation-Date: 2025-11-11T14:11:11.392Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Éva Tamási, 2025\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Оберіть дату..."
 
 msgid "Today"
 msgstr "Сьогодні"
@@ -60,7 +61,7 @@ msgid "Enrollment dashboard"
 msgstr "Панель реєстрації"
 
 msgid "View event"
-msgstr ""
+msgstr "Переглянути подію"
 
 msgid "Edit event"
 msgstr "Редагувати подію"
@@ -72,16 +73,16 @@ msgid "Loading..."
 msgstr "Завантаження..."
 
 msgid "Event list"
-msgstr ""
+msgstr "Список подій"
 
 msgid "More"
 msgstr "Більше"
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Переглянути інформаційну панель {{programName}} "
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Переглянути інформаційну панель"
 
 msgid "View active enrollment"
 msgstr ""
@@ -93,10 +94,10 @@ msgid "in"
 msgstr ""
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Зареєстровано"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Раніше зареєстровано"
 
 msgid "Organisation unit"
 msgstr "Організаційний підрозділ"
@@ -147,7 +148,7 @@ msgid "Enrollment"
 msgstr "Реєстрація"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Завершити подію"
 
 msgid ""
 "The date entered belongs to an expired period. Enter a date after "
@@ -176,7 +177,7 @@ msgid "A date in the future is not allowed"
 msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "Збереження нової реєстрації в {{programName}} в {{orgUnitName}}."
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -197,7 +198,7 @@ msgid "Assigned user"
 msgstr "Призначений користувач"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Пошук користувача"
 
 msgid "Notes"
 msgstr "Примітки"
@@ -224,9 +225,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Це не програма події або метадані пошкоджені. Дивіться журнал для отримання "
+"детальної інформації."
 
 msgid "This event"
-msgstr ""
+msgstr "Ця подія"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -279,13 +282,13 @@ msgid "No events added"
 msgstr ""
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Новий зв'язок між подіями"
 
 msgid "Adding relationship to event."
 msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Повернутися до події, не рятуючи зв'язок"
 
 msgid "Discard unsaved changes?"
 msgstr "Проігнорувати зміни, які не було збережено?"
@@ -331,10 +334,10 @@ msgstr ""
 
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "{{count}} подія в {{programStageName}}"
+msgstr[1] "{{count}} події в {{programStageName}}"
+msgstr[2] "{{count}} події в {{programStageName}}"
+msgstr[3] "{{count}} події в {{programStageName}}"
 
 msgid "Yes, complete enrollment and events"
 msgstr ""
@@ -380,13 +383,13 @@ msgid "No indicator output for this event yet"
 msgstr ""
 
 msgid "Generate new event"
-msgstr "Створити новий випадок"
+msgstr "Створити нову подію"
 
 msgid "Do you want to create another event?"
 msgstr "Ви хочете створити інший випадок?"
 
 msgid "Yes, create new event"
-msgstr ""
+msgstr "Так, створити нову подію"
 
 msgid "Back to form"
 msgstr ""
@@ -419,6 +422,9 @@ msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
+"Ця подія містить незбережені зміни. Якщо залишити цю сторінку без "
+"збереження, ці зміни буде втрачено. Ви впевнені, що хочете скасувати "
+"незбережені зміни?"
 
 msgid "No events to display"
 msgstr ""
@@ -495,6 +501,9 @@ msgstr "Макс"
 msgid "Min"
 msgstr "Мін"
 
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Містить текст"
 
@@ -511,7 +520,7 @@ msgid "Delete"
 msgstr "Видалити"
 
 msgid "Select file"
-msgstr ""
+msgstr "Виберіть файл"
 
 msgid "No"
 msgstr "Ні"
@@ -544,7 +553,7 @@ msgid "Icon for {{field}}"
 msgstr ""
 
 msgid "start typing to search"
-msgstr ""
+msgstr "почніть вводити для пошуку"
 
 msgid "suggestions could not be retrieved"
 msgstr ""
@@ -574,7 +583,7 @@ msgid "Reset filter"
 msgstr "Скинути фільтр"
 
 msgid "Remove filter"
-msgstr ""
+msgstr "Видалити фільтр"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -595,7 +604,7 @@ msgid "More filters"
 msgstr "Інші фільтри"
 
 msgid "Stage filters"
-msgstr ""
+msgstr "Фільтри етапу"
 
 msgid "Rows per page"
 msgstr "Рядків на сторінку"
@@ -613,7 +622,7 @@ msgid "Add note"
 msgstr "Додати нотатку"
 
 msgid "You don't have access to write notes"
-msgstr ""
+msgstr "У вас немає доступу до написання приміток"
 
 msgid "Write note"
 msgstr "Створіть примітку"
@@ -637,10 +646,10 @@ msgid "Make referral"
 msgstr "Зробити направлення"
 
 msgid "No available program stages"
-msgstr ""
+msgstr "Немає доступних етапів програми"
 
 msgid "Program stage not found"
-msgstr ""
+msgstr "Етап програми не знайдено"
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
@@ -650,18 +659,20 @@ msgstr ""
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}} має категорії. Виберіть усі категорії, щоб переглянути "
+"дашборд."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
 msgstr ""
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr ""
+msgstr "Виберіть реєстрацію, щоб переглянути інформаційну панель."
 
 msgid "There are no active enrollments."
 msgstr ""
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Додайте нову реєстрацію на {{teiDisplayName}} в цій програмі."
 
 msgid ""
 "You do not have permissions to access to this program, registering unit or "
@@ -669,7 +680,7 @@ msgid ""
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} не зареєстровано у цій програмі."
 
 msgid "Enroll {{teiDisplayName}} in this program."
 msgstr ""
@@ -686,7 +697,7 @@ msgid "{{programName}} is an event program and does not have enrollments."
 msgstr ""
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Створіть нову подію в цій програмі."
 
 msgid "View working list in this program."
 msgstr ""
@@ -717,7 +728,7 @@ msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Program stage is invalid"
-msgstr ""
+msgstr "Етап програми недійсний"
 
 msgid "Report"
 msgstr "Звіт"
@@ -741,7 +752,7 @@ msgid "Choose a stage for a new event"
 msgstr "Обери етап для нової події"
 
 msgid "Program Stages could not be loaded"
-msgstr ""
+msgstr "Не вдалося завантажити етапи програми"
 
 msgid "Stage"
 msgstr ""
@@ -813,7 +824,7 @@ msgid ""
 msgstr ""
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "Нова реєстрація в програмі {{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
@@ -834,7 +845,7 @@ msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Деякі програми фільтруються."
 
 msgid "Show all"
 msgstr "Показати все"
@@ -855,10 +866,10 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "Новий пошук"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Редагувати пошук"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -923,23 +934,23 @@ msgid "Selected program"
 msgstr "Обрані програми"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Пошук {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Пошук за атрибутами"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Для пошуку заповніть принаймні атрибут {{count}} "
+msgstr[1] "Заповніть принаймні {{count}} атрибути для пошуку"
+msgstr[2] "Заповніть принаймні {{count}} атрибути для пошуку"
+msgstr[3] "Заповніть принаймні {{count}} атрибути для пошуку"
 
 msgid "Missing search criteria"
 msgstr ""
 
 msgid "Back to search"
-msgstr ""
+msgstr "Повернутися до пошуку"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
@@ -969,7 +980,7 @@ msgid "Add relationship"
 msgstr "Додати зв'язок"
 
 msgid "No results found for "
-msgstr ""
+msgstr "Не знайдено результатів для "
 
 msgid "Choose an organisation unit in the form below"
 msgstr ""
@@ -987,7 +998,7 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Search for a program"
-msgstr ""
+msgstr "Пошук програми"
 
 msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
@@ -1001,18 +1012,20 @@ msgid "Choose a program"
 msgstr "Оберіть програму"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Шукати {{titleText}}"
 
 msgid "Search for"
-msgstr "Шукати"
+msgstr "Шукати..."
 
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
 msgstr ""
+"Ви також можете вибрати програму у верхній панелі, щоб здійснити пошук у цій"
+" програмі."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Виберіть тип, щоб почати пошук"
 
 msgid "{{trackedEntityName}} has no searchable attributes"
 msgstr ""
@@ -1023,10 +1036,10 @@ msgid ""
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Пошук {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr " Пошук за {{name}}"
 
 msgid "all programs"
 msgstr ""
@@ -1034,30 +1047,35 @@ msgstr ""
 msgid ""
 "Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
+"Не знайшли потрібних результатів? Спробуйте пошукати у всіх програмах."
 
 msgid "No searchable attributes for {{trackedEntityName}}"
 msgstr ""
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Пошук у всіх програмах"
 
 msgid ""
 "If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
+"Якщо жоден з результатів пошуку не підходить, ви можете створити новий "
+"об'єкт {{trackedEntityName}}."
 
 msgid "Create new"
 msgstr "Створити новий"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr ""
+msgstr "Заповніть ці поля для пошуку{{escape}} {{ searchableAttributes }}"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
+"Заповніть принаймні {{minAttributesRequiredToSearch}} з цих полів, щоб "
+"здійснити пошук на{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr ""
+msgstr "Заповніть це поле для пошуку{{escape}} {{searchableAttributes}}"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -1085,12 +1103,14 @@ msgid ""
 "Try changing search terms or searching by more attributes to narrow down the"
 " results."
 msgstr ""
+"Спробуйте змінити пошукові запити або шукати за більшою кількістю атрибутів,"
+" щоб звузити результати."
 
 msgid "Cannot search in all programs"
-msgstr ""
+msgstr "Неможливо здійснити пошук у всіх програмах"
 
 msgid "Results found"
-msgstr ""
+msgstr "Знайдено результати"
 
 msgid "Saved lists in this program"
 msgstr ""
@@ -1107,13 +1127,13 @@ msgid "Create saved list"
 msgstr ""
 
 msgid "Create new in another program"
-msgstr ""
+msgstr "Створити нове в іншій програмі"
 
 msgid "Create new event"
 msgstr "Створити нову подію"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Шукати {{trackedEntityName}} в {{programName}}"
 
 msgid "No tracked entity types available"
 msgstr ""
@@ -1186,7 +1206,7 @@ msgid "Mark incomplete"
 msgstr "Позначити реєстрацію як незавершену"
 
 msgid "You do not have access to delete this enrollment"
-msgstr ""
+msgstr "У вас немає доступу для видалення цієї реєстрації"
 
 msgid "Delete enrollment"
 msgstr "Видалити реєстрацію"
@@ -1207,7 +1227,7 @@ msgid "Mark for follow-up"
 msgstr "Позначте для подальших дій"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Перевести"
 
 msgid "An error occurred while transferring ownership"
 msgstr ""
@@ -1273,10 +1293,10 @@ msgid "Follow-up"
 msgstr "Подальші дії"
 
 msgid "Started at{{escape}}"
-msgstr ""
+msgstr " Зареєстровано в: {{escape}}"
 
 msgid "Owned by{{escape}}"
-msgstr ""
+msgstr "Належить: {{escape}}"
 
 msgid "Cancelled"
 msgstr "Скасовано"
@@ -1297,7 +1317,7 @@ msgid "Saving to {{stageName}} for {{programName}}"
 msgstr ""
 
 msgid "program or stage is invalid"
-msgstr ""
+msgstr "програма або етап є недійсними"
 
 msgid "Notes about this enrollment"
 msgstr "Примітки щодо цієї реєстрації"
@@ -1342,19 +1362,19 @@ msgid "Geometry (Coordinate)"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "Подія завершена"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
+msgstr "Подія не може бути відредагована після її завершення"
 
 msgid "Notes about this event"
-msgstr ""
+msgstr "Примітки про цю подію"
 
 msgid "Write a note about this event"
 msgstr ""
 
 msgid "This event doesn't have any notes"
-msgstr ""
+msgstr "Ця подія не має приміток"
 
 msgid "after"
 msgstr ""
@@ -1363,14 +1383,16 @@ msgid "before"
 msgstr ""
 
 msgid "Schedule date info"
-msgstr ""
+msgstr "Інформація про дату нагадування"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr ""
+msgstr "Заплановано автоматично на {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
+"Запланована дата відповідає запропонованій даті, але її можна змінити за "
+"потреби."
 
 msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
@@ -1387,12 +1409,16 @@ msgid_plural ""
 "There are {{count}} scheduled event in this program in {{orgUnitName}} on "
 "this day."
 msgstr[0] ""
+"У програмі на цей день заплановані {{count}} події в {{orgUnitName}}."
 msgstr[1] ""
+"У цій програмі на цей день заплановані {{count}} події в {{orgUnitName}}."
 msgstr[2] ""
+"У цій програмі на цей день заплановані {{count}} події в {{orgUnitName}}."
 msgstr[3] ""
+"У цій програмі на цей день заплановані {{count}} події в {{orgUnitName}}."
 
 msgid "Schedule date / Due date"
-msgstr ""
+msgstr "Дата нагадування / виконання"
 
 msgid "Please provide a valid organisation unit"
 msgstr ""
@@ -1400,21 +1426,22 @@ msgstr ""
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
+"Запланувати подію в {{stageName}} для {{programName}} в {{orgUnitName}}"
 
 msgid "Scheduling an event in {{stageName}} for {{programName}}"
-msgstr ""
+msgstr "Запланувати подію в {{stageName}} для {{programName}}"
 
 msgid "Schedule info"
-msgstr ""
+msgstr "Інформація про нагадування"
 
 msgid "Event notes"
-msgstr ""
+msgstr "Примітки про подію"
 
 msgid "Write a note about this scheduled event"
 msgstr ""
 
 msgid "Program or stage is invalid"
-msgstr ""
+msgstr "Програма або етап є недійсними"
 
 msgid "Save note"
 msgstr "Зберегти нотатку"
@@ -1442,7 +1469,7 @@ msgid "There is a problem with this form"
 msgstr ""
 
 msgid "There are warnings in this form"
-msgstr ""
+msgstr "Існують попередження в такій формі"
 
 msgid "There was a problem saving changes"
 msgstr ""
@@ -1454,7 +1481,7 @@ msgid "Fix errors in the form to continue."
 msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "У вас немає доступу для видалення цього {{trackedEntityTypeName}}"
 
 msgid "Delete {{trackedEntityTypeName}}"
 msgstr "Видалити {{trackedEntityTypeName}}"
@@ -1514,7 +1541,7 @@ msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
-msgstr "Запланована дата"
+msgstr " Дата нагадування"
 
 msgid "Report date"
 msgstr "Дата звіту"
@@ -1532,7 +1559,7 @@ msgid "This stage can only have one event"
 msgstr ""
 
 msgid "New {{ eventName }} event"
-msgstr ""
+msgstr "Нова подія {{ eventName }} "
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr ""
@@ -1610,7 +1637,7 @@ msgid "Yes, unlink event"
 msgstr ""
 
 msgid "View linked event"
-msgstr ""
+msgstr "Переглянути пов'язану подію"
 
 msgid "You do not have access to remove the link between these events"
 msgstr ""
@@ -1681,7 +1708,7 @@ msgid "Missing implementation step"
 msgstr ""
 
 msgid "Go back without saving relationship"
-msgstr ""
+msgstr "Повертайтеся, не рятуючи зв'язок"
 
 msgid "New Relationship"
 msgstr ""
@@ -1742,13 +1769,13 @@ msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
 
 msgid "Complete events"
-msgstr ""
+msgstr "Завершити події"
 
 msgid "Are you sure you want to complete all active events in selection?"
 msgstr ""
 
 msgid "There are no active events to complete in the current selection."
-msgstr ""
+msgstr "У поточному виборі немає активних подій для завершення."
 
 msgid "Error completing events"
 msgstr ""
@@ -1998,13 +2025,13 @@ msgid "Deselect all"
 msgstr "Скасувати вибір усіх"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Завантажити як JSON"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Завантажити у форматі CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Завантажити з поточними фільтрами"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -2130,7 +2157,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

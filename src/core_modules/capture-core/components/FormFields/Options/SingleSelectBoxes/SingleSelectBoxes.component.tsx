@@ -26,7 +26,6 @@ type Props = OwnProps & WithStyles<typeof styles>;
 class SingleSelectBoxesPlain extends Component<Props> {
     checkedValues!: Set<any> | null;
     labelClasses: any;
-    containerInstance: any;
 
     constructor(props: Props) {
         super(props);
@@ -110,7 +109,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
         this.setCheckedStatusForBoxes();
 
         return (
-            <div ref={(containerInstance) => { this.containerInstance = containerInstance; }}>
+            <div>
                 <FieldSet>
                     {
                         (() => {

@@ -36,7 +36,7 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
 
     render() {
-        const { value } = this.props;
+        const { value, unique } = this.props;
 
         return (
             <>
@@ -51,6 +51,7 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
                     onBlur={this.handleBlur}
                     onEnterKey={this.handleEnterKey}
                     value={!isEmptyValueFilter(value) ? value : ''}
+                    unique={unique}
                 />
             </>
         );

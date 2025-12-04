@@ -70,8 +70,6 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
             )) || [];
     }
 
-    containerInstance: any;
-
     static defaultProps = {
         translations: {
             clearText: '',
@@ -90,8 +88,8 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         this.isUnmounted = false;
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.options !== this.props.options) {
+    componentDidUpdate(prevProps: Props) {
+        if (this.props.options !== prevProps.options) {
             this.prevFilterValue = null;
         }
     }
@@ -221,7 +219,6 @@ class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
         return (
             <div
                 data-test="virtualized-select"
-                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
             >
                 <div
                     data-test={dataTest}

@@ -37,3 +37,8 @@ declare module '*.png' {
 declare module '@dhis2/app-runtime/experimental' {
     export const Plugin: any;
 }
+
+declare module 'moment/dist/locale/*' {
+    const locale: any;
+    export default locale;
+}

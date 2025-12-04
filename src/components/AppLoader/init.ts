@@ -10,6 +10,7 @@ import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from 'capture-core/rules/rulesEngine';
 import { getDateFnLocale } from './getDateFnLocale';
+import { getMomentLocale } from './getMomentLocale';
 
 function setLogLevel() {
     const levels = {
@@ -34,7 +35,7 @@ function setMomentLocaleAsync(locale: string) {
     }
 
     return new Promise<void>((resolve) => {
-        import(`moment/dist/locale/${locale}`)
+        getMomentLocale(locale)
             .then(() => {
                 moment.locale(locale);
                 log.info(`got moment locale config for ${locale}`);

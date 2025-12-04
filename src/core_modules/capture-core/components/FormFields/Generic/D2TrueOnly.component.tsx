@@ -31,7 +31,6 @@ class D2TrueOnlyPlain extends Component<Props> {
 
         this.labelClasses = this.buildLabelClasses();
     }
-    containerInstance: HTMLDivElement | null = null;
 
     buildLabelClasses() {
         return {
@@ -56,7 +55,6 @@ class D2TrueOnlyPlain extends Component<Props> {
 
         return (
             <div
-                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
                 style={style}
             >
                 <FieldSet>

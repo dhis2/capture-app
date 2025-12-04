@@ -1,36 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback, type ComponentType } from 'react';
 import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
 import { cx } from '@emotion/css';
-import L from 'leaflet';
+import L, { Control } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { MapControl, withLeaflet } from 'react-leaflet';
+import { withLeaflet } from 'react-leaflet';
 
 type Props = {
-    position?: any;
     onClick: () => void;
-    disabled?: boolean | null | undefined;
-}
+    disabled?: boolean | null;
+    leaflet: typeof Control;
+};
 
-class DeleteControlPlain extends MapControl<any, Props> {
-    leafletElement: any;
-    private componentProps: Props;
+const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
+    const [leafletElement, setLeafletElement] = useState<any>();
+    const onHandleClick = useCallback(() => !disabled && onClick(), [disabled, onClick]);
 
-    constructor(props: Props) {
-        super(props);
-        this.componentProps = props;
-    }
-
-    UNSAFE_componentWillMount() {
+    useEffect(() => {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
         const jsx = (
             <div className="leaflet-draw-toolbar leaflet-bar">
                 {/* eslint-disable-next-line */}
                 <a
-                    className={cx('leaflet-draw-edit-remove', { 'leaflet-disabled': this.componentProps.disabled })}
-                    onClick={this.onClick}
+                    className={cx('leaflet-draw-edit-remove', { 'leaflet-disabled': disabled })}
+                    onClick={onHandleClick}
                     title={text}
                     role="button"
                     tabIndex={0}
@@ -44,31 +39,16 @@ class DeleteControlPlain extends MapControl<any, Props> {
             root.render(jsx);
             return div;
         };
-        this.leafletElement = deleteControl;
-    }
+        setLeafletElement(deleteControl);
+    }, [onHandleClick, disabled]);
 
-    onClick = () => {
-        if (!this.componentProps.disabled) {
-            this.componentProps.onClick();
-        }
-    }
+    useEffect(() => {
+        leafletElement?.addTo(leaflet.map);
+    }, [leafletElement, leaflet.map]);
 
-    createLeafletElement() {
-        return this.leafletElement;
-    }
+    useEffect(() => () => leafletElement?.remove(), [leafletElement]);
 
-    updateLeafletElement(fromProps: Props, toProps: Props): void {
-        this.componentProps = toProps;
-        if (toProps.position !== fromProps.position) {
-            this.leafletElement.setPosition(toProps.position);
-        }
-        if (toProps.disabled !== fromProps.disabled) {
-            const buttons = this.leafletElement.getContainer().getElementsByClassName('leaflet-draw-edit-remove');
-            if (buttons && buttons.length > 0) {
-                buttons[0].className = cx('leaflet-draw-edit-remove', { 'leaflet-disabled': toProps.disabled });
-            }
-        }
-    }
-}
+    return null;
+};
 
-export const DeleteControl = withLeaflet(DeleteControlPlain);
+export const DeleteControl = withLeaflet(DeleteControlPlain) as ComponentType<Omit<Props, 'leaflet'>>;

@@ -18,7 +18,7 @@ const config = {
         },
     ],
 
-    viteConfigExtensions: './viteConfigExtensions.mjs',
+    viteConfigExtensions: './vite.config.mts',
 };
 
 module.exports = config;

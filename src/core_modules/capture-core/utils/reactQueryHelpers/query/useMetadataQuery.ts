@@ -78,6 +78,7 @@ export const useApiMetadataQuery = <TQueryFnData, TData = TQueryFnData>(
         cacheTime: Infinity,
         staleTime: Infinity,
         enabled: true,
+        retry: false,
         ...queryOptions,
     });
 };

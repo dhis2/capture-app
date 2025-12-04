@@ -43,19 +43,17 @@ export const AppStart = () => {
     }
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <Router>
-                {
-                    readyStatus ?
-                        <App
-                            store={store.current as ReduxStore}
-                        /> :
-                        <AppLoader
-                            onRunApp={handleRunApp}
-                            onCacheExpired={handleCacheExpired}
-                        />
-                }
-            </Router>
-        </QueryClientProvider>
+        <Router>
+            {
+                readyStatus ?
+                    <App
+                        store={store.current as ReduxStore}
+                    /> :
+                    <AppLoader
+                        onRunApp={handleRunApp}
+                        onCacheExpired={handleCacheExpired}
+                    />
+            }
+        </Router>
     );
 };
