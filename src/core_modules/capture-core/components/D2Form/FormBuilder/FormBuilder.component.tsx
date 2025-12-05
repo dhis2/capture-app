@@ -476,8 +476,8 @@ export class FormBuilder extends React.Component<Props> {
             const currentMessage = ruleMessage[key];
             const prevMessage = prevRuleMessage[key];
             if (Array.isArray(currentMessage)) {
-                if (!Array.isArray(prevMessage) || prevMessage.length != currentMessage.length) {
-                    return false;
+                if (!Array.isArray(prevMessage) || prevMessage.length !== currentMessage.length) {
+                    return true;
                 }
                 return currentMessage.some((value, index) => value !== prevMessage[index]);
             }
