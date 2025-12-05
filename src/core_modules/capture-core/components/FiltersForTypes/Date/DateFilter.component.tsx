@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
@@ -394,8 +393,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         handleFieldBlur={this.handleFieldBlur}
                     />
                 </div>
-                <div className={classNames(classes.error, classes.logicErrorContainer)}>{dateLogicError}</div>
-                <div className={classNames(classes.error, classes.logicErrorContainer)}>{bufferLogicError}</div>
+                <div className={cx(classes.error, classes.logicErrorContainer)}>{dateLogicError}</div>
+                <div className={cx(classes.error, classes.logicErrorContainer)}>{bufferLogicError}</div>
             </div>
         );
     }

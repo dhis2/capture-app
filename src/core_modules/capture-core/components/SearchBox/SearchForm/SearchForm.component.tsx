@@ -1,5 +1,5 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { UnsupportedAttributesNotification } from '../../../utils/warnings';
@@ -10,7 +10,7 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const styles: Readonly<any> = {
+const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -40,9 +40,9 @@ const styles: Readonly<any> = {
         fontSize: '14px',
         fontWeight: 500,
         flexGrow: 1,
-        color: colors.red600,
+        color: theme.palette.error.main,
     },
-};
+});
 
 const useFormDataLifecycle = (
     searchGroupsForSelectedScope,
@@ -155,6 +155,12 @@ const SearchFormIndex = ({
 
             if (isValid) {
                 setError(false);
+
+                const isValidForm = formReference[formId].validateFormScrollToFirstFailedField({});
+                if (!isValidForm) {
+                    return;
+                }
+
                 saveCurrentFormData({ searchScopeType, searchScopeId, formId, formsValues, searchGroupsForSelectedScope });
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:

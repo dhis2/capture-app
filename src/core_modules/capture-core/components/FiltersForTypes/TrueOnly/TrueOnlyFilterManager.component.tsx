@@ -37,7 +37,7 @@ export class TrueOnlyFilterManager extends React.Component<Props, State> {
         return (
             <TrueOnlyFilter
                 value={this.state.value}
-                innerRef={filterTypeRef}
+                ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

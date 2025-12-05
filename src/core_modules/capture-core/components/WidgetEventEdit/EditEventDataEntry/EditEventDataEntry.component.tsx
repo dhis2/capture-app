@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
 import type { RenderFoundation } from '../../../metaData';
@@ -49,18 +50,17 @@ import {
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
 import type { UserFormField } from '../../FormFields/UserField';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: any): Readonly<any> => ({
+const getStyles = (): Readonly<any> => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

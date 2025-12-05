@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './BulkDataEntryPlugin.types';
 
 const styles = () => ({

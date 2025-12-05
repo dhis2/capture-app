@@ -1,7 +1,7 @@
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
-import type { ReduxAction } from '../../../../../capture-core-utils/types';
 
 export const actionTypes = {
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForNewEnrollment',

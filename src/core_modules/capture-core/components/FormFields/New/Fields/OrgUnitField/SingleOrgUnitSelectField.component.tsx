@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Chip, colors } from '@dhis2/ui';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';

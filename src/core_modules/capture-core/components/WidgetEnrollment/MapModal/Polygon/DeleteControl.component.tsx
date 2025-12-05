@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback, type ComponentType } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import L, { Control } from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
 
@@ -22,7 +24,7 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
             <div className="leaflet-draw-toolbar leaflet-bar">
                 {/* eslint-disable-next-line */}
                 <a
-                    className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': disabled })}
+                    className={cx('leaflet-draw-edit-remove', { 'leaflet-disabled': disabled })}
                     onClick={onHandleClick}
                     title={text}
                     role="button"
@@ -33,7 +35,8 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
 
         deleteControl.onAdd = () => {
             const div = L.DomUtil.create('div', '');
-            ReactDOM.render(jsx, div);
+            const root = createRoot(div);
+            root.render(jsx);
             return div;
         };
         setLeafletElement(deleteControl);

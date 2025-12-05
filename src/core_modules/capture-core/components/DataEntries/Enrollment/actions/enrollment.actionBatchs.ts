@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
+import type { ReduxAction } from 'capture-core-utils/types';
 import type {
     Enrollment,
     TEIValues,
@@ -15,7 +16,6 @@ import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../meta
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
 import type { QuerySingleResource } from '../../../../utils/api';
-import type { ReduxAction } from '../../../../../capture-core-utils/types';
 
 export const batchActionTypes = {
     RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT: 'RulesExecutedPostUpdateFieldForEnrollment',

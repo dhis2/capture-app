@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacers, colors } from '@dhis2/ui';
-import cx from 'classnames';
+import { cx } from '@emotion/css';
 import type {
     FilteredIndicatorKeyValue,
     FilteredIndicatorText,

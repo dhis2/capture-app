@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Popover } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
@@ -143,7 +143,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
 
         return (
             <ActiveFilterButton
-                innerRef={this.refActiveFilterInstance}
+                ref={this.refActiveFilterInstance}
                 onChange={this.openFilterSelector}
                 onClear={this.handleClearFilter}
                 iconClass={classes.icon}

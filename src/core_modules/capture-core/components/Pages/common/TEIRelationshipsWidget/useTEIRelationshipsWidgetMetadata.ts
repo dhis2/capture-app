@@ -1,4 +1,5 @@
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import type { RelationshipTypes } from '../../../WidgetsRelationship';
@@ -6,7 +7,6 @@ import {
     extractElementIdsFromRelationshipTypes,
     formatRelationshipTypes,
 } from '../../../WidgetsRelationship';
-import { errorCreator } from '../../../../../capture-core-utils';
 
 const getOptionSetValuesForElement = async (elements: Array<any>, userStorageController: any) => {
     const optionSetIds = elements

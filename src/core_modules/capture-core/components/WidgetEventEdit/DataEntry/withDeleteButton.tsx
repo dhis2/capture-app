@@ -69,7 +69,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <InnerComponent
-                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     deleteButton={this.renderDeleteButton(hasDeleteButton)}
                     {...passOnProps}
                 />

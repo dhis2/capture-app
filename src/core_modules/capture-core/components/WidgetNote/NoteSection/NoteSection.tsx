@@ -1,6 +1,6 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import { Button, Tooltip, colors, spacersNum } from '@dhis2/ui';

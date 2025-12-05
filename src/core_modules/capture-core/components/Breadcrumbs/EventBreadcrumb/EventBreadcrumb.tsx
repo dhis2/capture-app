@@ -1,7 +1,7 @@
 import React, { ComponentType, useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';

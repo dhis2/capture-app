@@ -84,7 +84,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     renderHorizontal = (section: Section, passOnProps: any) => (
         <D2SectionContainer
             key={section.id}
-            innerRef={(sectionInstance) => {
+            ref={(sectionInstance) => {
                 this.setSectionInstance(sectionInstance, section.id);
             }}
             sectionMetaData={section}
@@ -100,7 +100,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     renderVertical = (section: Section, passOnProps: any) => (
         <D2SectionContainer
             key={section.id}
-            innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+            ref={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
             sectionMetaData={section}
             validationStrategy={this.props.formFoundation.validationStrategy}
             formId={this.getFormId()}

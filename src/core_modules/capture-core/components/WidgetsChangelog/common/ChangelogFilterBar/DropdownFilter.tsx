@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { DropdownButton, FlyoutMenu, MenuItem, Divider, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { FilterValueType } from './ChangelogFilter.types';
 

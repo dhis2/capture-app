@@ -81,9 +81,9 @@ export class D2SectionFieldsComponent extends Component<Props> {
         this.rulesCompulsoryErrors = {};
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (this.formFieldCache && newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            this.formFields = this.buildFormFields(newProps);
+    componentDidUpdate(prevProps: Props) {
+        if (this.formFieldCache && prevProps.fieldsMetaData !== this.props.fieldsMetaData) {
+            this.formFields = this.buildFormFields(this.props);
         }
     }
     formFieldCache: { [elementId: string]: FieldConfig } = {};

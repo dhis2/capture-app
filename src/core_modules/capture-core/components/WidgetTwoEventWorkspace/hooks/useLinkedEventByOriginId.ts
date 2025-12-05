@@ -50,7 +50,7 @@ export const useLinkedEventByOriginId = ({ originEventId, skipBidirectionalCheck
         },
     }), [originEventId]);
 
-    const { data, isLoading, isError, error } = useApiDataQuery(
+    const { data, isInitialLoading, isError, error } = useApiDataQuery(
         ['linkedEventByOriginEvent', originEventId],
         eventByIdQuery,
         {
@@ -74,7 +74,7 @@ export const useLinkedEventByOriginId = ({ originEventId, skipBidirectionalCheck
         };
     }, [data, skipBidirectionalChecks]);
 
-    const { data: fallbackDataValues, isLoading: isLoadingFallback } = useApiDataQuery(
+    const { data: fallbackDataValues, isInitialLoading: isInitialLoadingFallback } = useApiDataQuery(
         ['linkedEventDataValuesFallback', linkedEvent?.event],
         {
             resource: 'tracker/events',
@@ -91,7 +91,7 @@ export const useLinkedEventByOriginId = ({ originEventId, skipBidirectionalCheck
         relationship,
         relationshipType,
         dataValues: dataValues || (fallbackDataValues as any)?.dataValues,
-        isLoading: isLoading || isLoadingFallback,
+        isLoading: isInitialLoading || isInitialLoadingFallback,
         isError,
         error,
     };

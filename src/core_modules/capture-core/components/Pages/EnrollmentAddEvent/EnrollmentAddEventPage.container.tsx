@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { ComponentType } from 'react';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';

@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';

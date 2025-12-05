@@ -3,6 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
+import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
 import {
     DataEntry,
     placements,
@@ -40,7 +41,6 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
-import { convertDateObjectToDateFormatString } from '../../../../capture-core/utils/converters/date';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';

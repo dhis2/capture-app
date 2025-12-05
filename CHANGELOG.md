@@ -1,3 +1,29 @@
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-04)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [104.7.0](https://github.com/dhis2/capture-app/compare/v104.6.12...v104.7.0) (2025-12-03)
+
+
+### Features
+
+* [DHIS2-20430] add minCharactersToSearch validation ([#4409](https://github.com/dhis2/capture-app/issues/4409)) ([b89fd5e](https://github.com/dhis2/capture-app/commit/b89fd5ea5881d867b84f400a127c5330d56a77a6))
+
+## [104.6.12](https://github.com/dhis2/capture-app/compare/v104.6.11...v104.6.12) (2025-12-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20478] prevent search when there are errors in the search form fields ([#4408](https://github.com/dhis2/capture-app/issues/4408)) ([a10ffeb](https://github.com/dhis2/capture-app/commit/a10ffeb4c6cfddb2e40d3511d148f0b13191c433))
+
 ## [104.6.11](https://github.com/dhis2/capture-app/compare/v104.6.10...v104.6.11) (2025-12-02)
 
 

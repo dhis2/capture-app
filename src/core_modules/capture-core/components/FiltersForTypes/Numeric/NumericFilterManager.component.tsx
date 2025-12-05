@@ -44,7 +44,7 @@ export class NumericFilterManager extends React.Component<Props, State> {
         return (
             <NumericFilter
                 value={this.state.value}
-                innerRef={filterTypeRef}
+                ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

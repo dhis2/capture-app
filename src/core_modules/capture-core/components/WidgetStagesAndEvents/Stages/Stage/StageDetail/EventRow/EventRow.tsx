@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     DataTableCell,
     DataTableRow,

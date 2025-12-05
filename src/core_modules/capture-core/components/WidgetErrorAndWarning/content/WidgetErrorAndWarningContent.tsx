@@ -1,7 +1,7 @@
 import React from 'react';
 import { spacers, colors, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
-import cx from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import type { contentTypes, ObjectType, StringType, Message } from './WidgetErrorAndWarningContent.types';
 import { widgetTypes } from './WidgetTypes';
 
