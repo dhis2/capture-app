@@ -132,13 +132,19 @@ export const Validated = ({
     const confirmCreateNew = useCallback(() => { handleCreateNew(true); }, [handleCreateNew]);
 
     const handleSaveAndCompleteEnrollment = useCallback(
-        (enrollment: Record<string, unknown>) => {
+        (
+            dataEntryItemId: string,
+            dataEntryIdArgument: string,
+            formFoundationArgument: RenderFoundation,
+            enrollment: Record<string, unknown>,
+        ) => {
             window.scrollTo(0, 0);
             dispatch(handleSaveButton({
                 saveType: addEventSaveTypes.COMPLETE,
                 enrollment,
                 buildPayloadArgs,
                 relatedStageRef,
+                onSaveExternal,
                 onSaveSuccessActionType: onSaveAndCompleteEnrollmentSuccessActionType,
                 onSaveErrorActionType: onSaveAndCompleteEnrollmentErrorActionType,
             }));
@@ -147,6 +153,7 @@ export const Validated = ({
             dispatch,
             buildPayloadArgs,
             relatedStageRef,
+            onSaveExternal,
             onSaveAndCompleteEnrollmentSuccessActionType,
             onSaveAndCompleteEnrollmentErrorActionType,
         ],
