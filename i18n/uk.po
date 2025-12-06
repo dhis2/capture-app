@@ -715,7 +715,7 @@ msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
-msgstr ""
+msgstr "Ви також можете вибрати програму на верхній панелі і створювати в ній"
 
 msgid "Save new"
 msgstr ""
