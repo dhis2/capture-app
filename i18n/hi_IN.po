@@ -964,7 +964,7 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "तारीख"
 
 msgid "Time"
 msgstr "समय"
