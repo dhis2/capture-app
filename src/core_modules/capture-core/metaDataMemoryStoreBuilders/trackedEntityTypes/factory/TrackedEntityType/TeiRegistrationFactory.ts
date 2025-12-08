@@ -38,8 +38,6 @@ export class TeiRegistrationFactory {
             o.disabled = searchGroupElement.disabled;
             o.type = teiAttribute.valueType;
             o.optionSet = searchGroupElement.optionSet;
-            o.preferredSearchOperator = searchGroupElement.preferredSearchOperator;
-            o.blockedSearchOperators = searchGroupElement.blockedSearchOperators;
             o.searchOperator = searchGroupElement.searchOperator;
         });
         return element;

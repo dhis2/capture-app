@@ -84,8 +84,6 @@ export class SearchGroupFactory {
                 description,
                 unique,
                 valueType,
-                preferredSearchOperator,
-                blockedSearchOperators,
                 minCharactersToSearch,
             } = searchAttribute.trackedEntityAttribute;
 
@@ -110,8 +108,6 @@ export class SearchGroupFactory {
             o.displayInReports = searchAttribute.displayInList;
             o.minCharactersToSearch = minCharactersToSearch;
             o.disabled = false;
-            o.preferredSearchOperator = preferredSearchOperator;
-            o.blockedSearchOperators = blockedSearchOperators;
             o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });
 

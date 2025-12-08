@@ -20,8 +20,7 @@ export const storeProgramIndicators = async (programIds: Array<string>) => {
         resource: 'programIndicators',
         params: {
             fields: fieldsParam,
-            // TODO temporary fix for the bug bash
-            filter: [`program.id:in:[${programIds.join(',')}]`],
+            filter: ['displayInForm:eq:true', `program.id:in:[${programIds.join(',')}]`],
         },
     };
 

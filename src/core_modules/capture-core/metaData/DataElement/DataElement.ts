@@ -37,8 +37,6 @@ export class DataElement {
     _url!: string | null;
     _attributeValues!: CachedAttributeValue[];
     _section!: Section | null;
-    _preferredSearchOperator!: string | undefined;
-    _blockedSearchOperators!: Array<string> | undefined;
     _searchOperator!: SearchOperator;
 
     // eslint-disable-next-line complexity
@@ -88,20 +86,6 @@ export class DataElement {
     }
     get shortName(): string {
         return this._shortName;
-    }
-
-    set preferredSearchOperator(preferredSearchOperator: string | undefined) {
-        this._preferredSearchOperator = preferredSearchOperator;
-    }
-    get preferredSearchOperator(): string | undefined {
-        return this._preferredSearchOperator;
-    }
-
-    set blockedSearchOperators(blockedSearchOperators: Array<string> | undefined) {
-        this._blockedSearchOperators = blockedSearchOperators;
-    }
-    get blockedSearchOperators(): Array<string> | undefined {
-        return this._blockedSearchOperators;
     }
 
     set searchOperator(searchOperator: SearchOperator) {

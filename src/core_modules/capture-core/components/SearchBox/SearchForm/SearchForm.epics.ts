@@ -19,7 +19,6 @@ import {
     getTrackedEntityInstances,
 } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
-    dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
     type DataElement,
@@ -29,7 +28,7 @@ import { buildUrlQueryString } from '../../../utils/routing';
 import {
     navigateToEnrollmentOverview,
 } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
+import { convertSearchFormToServer } from '../../../converters';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
 import { escapeString } from '../../../utils/escapeString';
 import { DEFAULT_IS_UNIQUE_SEARCH_OPERATOR } from '../../../metaDataMemoryStoreBuilders';
@@ -97,9 +96,9 @@ const getFiltersForAttributesSearchQuery =
         const dataElement = attributes.find((attribute: any) => attribute.id === fieldId);
         const searchGroupElement = searchGroupElements?.find((element: any) => element.id === fieldId);
         if (formValues[fieldId] && dataElement && searchGroupElement) {
-            const dataElementType = dataElementTypes[dataElement.type];
             const searchOperator = searchGroupElement.searchOperator;
-            return dataElementConvertFunctions[dataElementType](formValues[fieldId], dataElement, searchOperator);
+
+            return convertSearchFormToServer(formValues[fieldId], dataElement, searchOperator);
         }
         return null;
     });
