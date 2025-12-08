@@ -52,9 +52,9 @@ const env = Object
     }, { BROWSER: 'none' });
 
 exec({
-    cmd: 'yarn',
-    args: ['run', 'start'],
+    cmd: 'serve',
+    args: ['-s build/app'],
     cwd: '.',
     env,
-    pipe: true,
+    pipe: false,
 });
