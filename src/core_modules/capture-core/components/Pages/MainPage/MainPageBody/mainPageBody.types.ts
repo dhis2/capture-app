@@ -1,14 +1,13 @@
-export type MainPageComponentProps = {
+export type ContainerProps = {
     programId: string;
     orgUnitId?: string;
-    selectedCategories: any
     selectedTemplateId?: string;
     trackedEntityTypeId?: string;
     displayFrontPageList?: boolean;
     onChangeTemplate?: (selectedTemplateId?: string) => void;
-    onSetShowAccessible: () => void;
+    setShowAccessible: () => void;
     mainPageStatus: string;
-    error?: boolean;
+    error: boolean;
     ready: boolean;
     onOpenBulkDataEntryPlugin: (trackedEntityIds?: Array<string>) => void;
     onCloseBulkDataEntryPlugin: () => void;
