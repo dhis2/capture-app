@@ -1,5 +1,6 @@
 import { ofType } from 'redux-observable';
-import { map, filter } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, filter, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { createServerData, buildNewEventPayload } from './buildNewEventPayload';
 import {
@@ -61,6 +62,7 @@ export const saveNewEnrollmentEventEpic = (action$: any, store: any) =>
                     serverData,
                     linkMode,
                     onSaveExternal,
+                    onSaveSuccessAction,
                     onSaveSuccessActionType,
                     onSaveErrorActionType,
                 }),
@@ -72,7 +74,6 @@ export const saveNewEnrollmentEventEpic = (action$: any, store: any) =>
                     linkedOrgUnitId: linkedEvent?.orgUnit,
                     linkMode,
                 }),
-                ...(onSaveSuccessAction ? [onSaveSuccessAction] : []),
             ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS);
         }),
     );
@@ -87,12 +88,13 @@ export const handleRequestSaveNewEnrollmentEpic = (action$: any) =>
                 .payload
                 .find((action: any) => action.type === newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
         ),
-        map((action: any) => {
+        concatMap((action: any) => {
             const {
                 relationship,
                 serverData,
                 linkMode,
                 onSaveExternal,
+                onSaveSuccessAction,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
@@ -100,11 +102,14 @@ export const handleRequestSaveNewEnrollmentEpic = (action$: any) =>
             const relationships = relationship ? [relationship] : [];
 
             onSaveExternal && onSaveExternal({ linkMode, events, relationships, ...serverData });
-            return saveEvents({
-                serverData,
-                onSaveSuccessActionType,
-                onSaveErrorActionType,
-                ...action.payload,
-            });
+            return of(
+                saveEvents({
+                    serverData,
+                    onSaveSuccessActionType,
+                    onSaveErrorActionType,
+                    ...action.payload,
+                }),
+                ...(onSaveSuccessAction ? [onSaveSuccessAction] : []),
+            );
         }),
     );

@@ -1,3 +1,4 @@
+import { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 import { relatedStageActions } from '../../WidgetRelatedStages';
@@ -49,6 +50,7 @@ export const requestSaveEvent = ({
     serverData,
     linkMode,
     onSaveExternal,
+    onSaveSuccessAction,
     onSaveSuccessActionType,
     onSaveErrorActionType,
 }: {
@@ -58,6 +60,7 @@ export const requestSaveEvent = ({
     serverData: Record<string, unknown>;
     linkMode?: keyof typeof relatedStageActions;
     onSaveExternal?: ExternalSaveHandler;
+    onSaveSuccessAction?: ReduxAction,
     onSaveSuccessActionType?: string;
     onSaveErrorActionType?: string;
 }) =>
@@ -68,6 +71,7 @@ export const requestSaveEvent = ({
         serverData,
         linkMode,
         onSaveExternal,
+        onSaveSuccessAction,
         onSaveSuccessActionType,
         onSaveErrorActionType,
     }, { skipLogging: ['formFoundation'] });
