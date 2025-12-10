@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-23T11:41:11.943Z\n"
+"POT-Creation-Date: 2025-12-04T10:33:38.238Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -488,6 +488,9 @@ msgstr "最大"
 
 msgid "Min"
 msgstr "最小"
+
+msgid "Exact matches only"
+msgstr ""
 
 msgid "Contains text"
 msgstr "包含文本"
@@ -2068,6 +2071,11 @@ msgstr "值已经存在"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "自不能大于至"
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "检查"
 
@@ -2084,9 +2092,9 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
-msgstr[0] "以下属性类型不支持搜索，已被隐藏"
+msgstr[0] ""
 
 msgid "Some attributes are hidden"
 msgstr "某些属性是隐藏的"

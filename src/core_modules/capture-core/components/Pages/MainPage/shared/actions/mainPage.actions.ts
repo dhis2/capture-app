@@ -1,4 +1,4 @@
-import { actionCreator } from '../../../actions/actions.utils';
+import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const mainPageActionTypes = {
     CATEGORY_OPTION_SET: 'MainPage.CategoryOptionSet',

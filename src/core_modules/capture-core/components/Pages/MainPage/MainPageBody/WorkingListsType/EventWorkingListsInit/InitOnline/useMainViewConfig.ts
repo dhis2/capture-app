@@ -4,7 +4,7 @@ import isObject from 'lodash/isObject';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
-import { useApiMetadataQuery } from '../../../../../utils/reactQueryHelpers';
+import { useApiMetadataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import type { DataStoreWorkingLists, UseMainViewConfig } from './useMainViewConfig.types';
 
 export const useMainViewConfig: UseMainViewConfig = () => {

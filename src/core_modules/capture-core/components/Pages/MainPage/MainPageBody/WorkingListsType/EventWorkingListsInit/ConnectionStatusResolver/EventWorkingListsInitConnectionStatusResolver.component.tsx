@@ -1,6 +1,6 @@
 import React from 'react';
 import { EventWorkingListsInitHeader } from '../Header';
-import { EventWorkingListsOffline } from '../../../../WorkingLists/EventWorkingListsOffline';
+import { EventWorkingListsOffline } from '../../../../../../WorkingLists/EventWorkingListsOffline';
 import { EventWorkingListsInitOnline } from '../InitOnline';
 import type { Props } from './eventWorkingListsInitConnectionStatusResolver.types';
 

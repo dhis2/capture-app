@@ -6,7 +6,7 @@ import {
     calculateSelectionsCompleteness,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
-import { mainPageActionTypes } from '../MainPage/MainPage.actions';
+import { mainPageActionTypes } from '../MainPage/shared/actions/mainPage.actions';
 import { newPageActionTypes } from '../New/NewPage.actions';
 import { viewEventPageActionTypes } from '../ViewEvent/ViewEventPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';

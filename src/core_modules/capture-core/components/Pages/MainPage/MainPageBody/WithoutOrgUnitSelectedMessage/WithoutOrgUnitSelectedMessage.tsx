@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
-import { programTypes } from '../../../../metaData';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
+import { programTypes } from '../../../../../metaData';
+import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
 
 const styles: Readonly<any> = {
     incompleteMessageContainer: {
