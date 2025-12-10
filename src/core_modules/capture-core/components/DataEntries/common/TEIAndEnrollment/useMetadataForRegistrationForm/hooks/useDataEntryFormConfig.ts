@@ -1,3 +1,6 @@
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import { useEffect } from 'react';
 import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
 type Props = {
@@ -11,32 +14,39 @@ const configQuery = {
 export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
     const {
         data: configExists,
-        isLoading: namespaceIsLoading,
+        isError: namespaceIsError,
+        isFetched: namespaceIsFetched,
+        error: namespaceError,
     } = useApiMetadataQuery<any>(
         ['dataStore', 'capture'],
         { resource: 'dataStore/capture' },
-        { select: (captureKeys: Array<string> | null) => captureKeys?.includes('dataEntryForms') },
+        {
+            select: (captureKeys: Array<string> | null | undefined) => captureKeys?.includes('dataEntryForms'),
+        },
     );
 
     const {
         data: dataEntryFormConfig,
-        isFetched: configIsFetched,
-        isInitialLoading,
-    } = useApiMetadataQuery(['dataEntryFormConfig', selectedScopeId], configQuery, {
+        isFetched,
+        isError,
+        error,
+    } = useApiMetadataQuery(['dataStore', 'capture', 'dataEntryForms', selectedScopeId], configQuery, {
         enabled: !!configExists && !!selectedScopeId,
         select: (dataEntryFormConfigQuery: any) => dataEntryFormConfigQuery?.[selectedScopeId] ?? null,
     });
 
-    if (!namespaceIsLoading && configExists === false) {
-        return {
-            dataEntryFormConfig: null,
-            configIsFetched: true,
-        };
-    }
+    useEffect(() => {
+        if (namespaceIsError) {
+            log.error(errorCreator('capture namespace could not be fetched from the datastore')({ namespaceError }));
+        }
+        if (isError) {
+            log.error(errorCreator('dataEntryForms namespace could not be fetched from the datastore')({ error }));
+        }
+    }, [isError, error, namespaceIsError, namespaceError]);
 
-    return {
-        dataEntryFormConfig,
-        configIsFetched,
-        isLoading: isInitialLoading,
-    };
+    const configIsFetched = (namespaceIsFetched && !configExists) || isFetched;
+
+    return namespaceIsError || isError
+        ? { dataEntryFormConfig: null, configIsFetched: true, isLoading: false }
+        : { dataEntryFormConfig, configIsFetched, isLoading: !configIsFetched };
 };
