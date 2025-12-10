@@ -20,9 +20,7 @@ export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
     } = useApiMetadataQuery<any>(
         ['dataStore', 'capture'],
         { resource: 'dataStore/capture' },
-        {
-            select: (captureKeys: Array<string> | null | undefined) => captureKeys?.includes('dataEntryForms'),
-        },
+        { select: (captureKeys: Array<string> | null) => captureKeys?.includes('dataEntryForms') },
     );
 
     const {
@@ -30,7 +28,7 @@ export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
         isFetched,
         isError,
         error,
-    } = useApiMetadataQuery(['dataStore', 'capture', 'dataEntryForms', selectedScopeId], configQuery, {
+    } = useApiMetadataQuery(['dataEntryFormConfig', selectedScopeId], configQuery, {
         enabled: !!configExists && !!selectedScopeId,
         select: (dataEntryFormConfigQuery: any) => dataEntryFormConfigQuery?.[selectedScopeId] ?? null,
     });
@@ -47,6 +45,13 @@ export const useDataEntryFormConfig = ({ selectedScopeId }: Props) => {
     const configIsFetched = (namespaceIsFetched && !configExists) || isFetched;
 
     return namespaceIsError || isError
-        ? { dataEntryFormConfig: null, configIsFetched: true, isLoading: false }
-        : { dataEntryFormConfig, configIsFetched, isLoading: !configIsFetched };
+        ? {
+            dataEntryFormConfig: null,
+            configIsFetched: true,
+            isLoading: false,
+        }
+        : { dataEntryFormConfig,
+            configIsFetched,
+            isLoading: !configIsFetched,
+        };
 };
