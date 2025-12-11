@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "105.0.0",
+    "version": "105.1.0",
     "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
@@ -10,7 +10,7 @@
     ],
     "dependencies": {
         "@dhis2-ui/calendar": "^10.7.6",
-        "@dhis2/rules-engine-javascript": "105.0.0",
+        "@dhis2/rules-engine-javascript": "105.1.0",
         "@dhis2/app-runtime": "^3.14.5",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
@@ -64,10 +64,10 @@
     },
     "scripts": {
         "start": "yarn verifyCacheVersion && concurrently --kill-others \"yarn workspaces run build:watch\" \"d2-app-scripts start\"",
-        "start:forCypress": "yarn workspaces run build && node scripts/startAppForCypress.js",
+        "start:prod": "yarn build:standalone && serve -s build/app",
+        "start:forCypress": "yarn build:standalone && node scripts/startAppForCypress.js",
         "build": "yarn verifyCacheVersion && yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
-        "build:standalone": "yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",
-        "serve": "npx serve -s build/app",
+        "build:standalone": "yarn verifyCacheVersion && yarn workspaces run build && GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",
         "test": "yarn workspaces run build && d2-app-scripts test",
         "test:debug": "yarn workspaces run build && react-scripts --inspect-brk test --runInBand",
         "jsdoc": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
@@ -75,8 +75,6 @@
         "tsc:check": "./node_modules/.bin/tsc --noEmit && yarn workspaces run tsc:check",
         "cy:open": "export NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://127.0.0.1:3000' && cypress open\"",
         "cy:run": "export NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://127.0.0.1:3000' && cypress run\"",
-        "cy:open:fast": "export NODE_OPTIONS=--openssl-legacy-provider && yarn build:standalone && concurrently --kill-others \"yarn serve\" \"wait-on 'http-get://127.0.0.1:3000' && cypress open\"",
-        "cy:run:fast": "export NODE_OPTIONS=--openssl-legacy-provider && yarn build:standalone && concurrently --kill-others \"yarn serve\" \"wait-on 'http-get://127.0.0.1:3000' && cypress run\"",
         "verifyCacheVersion": "node scripts/verifyCacheVersion.js",
         "postinstall": "husky install && node scripts/createSymlinkToInternalPackages.mjs",
         "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/",
@@ -128,6 +126,7 @@
         "jsdoc-babel": "^0.5.0",
         "jsdoc-export-default-interop": "^0.3.1",
         "redux-devtools-extension": "^2.13.9",
+        "serve": "^14.2.5",
         "typescript": "^5.8.2",
         "wait-on": "^8.0.1"
     },
