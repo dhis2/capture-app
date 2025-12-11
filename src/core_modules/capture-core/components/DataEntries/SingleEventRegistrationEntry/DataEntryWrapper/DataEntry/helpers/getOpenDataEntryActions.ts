@@ -1,4 +1,4 @@
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import { CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
 import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../index';
@@ -51,7 +51,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 export const getOpenDataEntryActions = (
     programCategory?: ProgramCategory | null,
     selectedCategories?: { [key: string]: string } | null,
-    orgUnit?: OrgUnit & { path: string } | null,
+    orgUnit?: CoreOrgUnit | null,
 ) => {
     let defaultDataEntryValues = {
         orgUnit: orgUnit
