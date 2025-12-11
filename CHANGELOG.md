@@ -1,3 +1,10 @@
+# [105.2.0](https://github.com/dhis2/capture-app/compare/v105.1.0...v105.2.0) (2025-12-11)
+
+
+### Features
+
+* [DHIS2-20086] add command palette shortcuts ([#4386](https://github.com/dhis2/capture-app/issues/4386)) ([35285e4](https://github.com/dhis2/capture-app/commit/35285e4658edf919d17847c5de8de401ac8e4d1b))
+
 # [105.1.0](https://github.com/dhis2/capture-app/compare/v105.0.1...v105.1.0) (2025-12-08)
 
 
