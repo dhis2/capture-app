@@ -1,3 +1,10 @@
+## [105.2.2](https://github.com/dhis2/capture-app/compare/v105.2.1...v105.2.2) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20646] handle missing capture namespace in DataStore ([#4418](https://github.com/dhis2/capture-app/issues/4418)) ([6352214](https://github.com/dhis2/capture-app/commit/6352214e4130145b661b0cc6d960c714b0b95f7d))
+
 ## [105.2.1](https://github.com/dhis2/capture-app/compare/v105.2.0...v105.2.1) (2025-12-11)
 
 
