@@ -30,3 +30,29 @@ export type Props = OwnProps & PropsFromRedux;
 export type PropsForPureComponent = Omit<Props, keyof FormRef> & {
     readonly formRef?: (instance: any) => void;
 };
+
+type RulesHiddenFields = {
+    [id: string]: boolean;
+};
+
+type RulesCompulsoryFields = { [id: string]: boolean };
+type RulesCompulsoryErrors = { [id: string]: string };
+type RulesDisabledFields = { [id: string]: boolean };
+
+type RulesMessage = {
+    error?: string | null;
+    warning?: string | null;
+    errorOnComplete?: string | null;
+    warningOnComplete?: string | null;
+};
+type RulesMessages = {
+    [id: string]: RulesMessage | null;
+};
+
+export type RuleEffects = {
+    messages: RulesMessages;
+    hiddenFields: RulesHiddenFields;
+    compulsoryFields: RulesCompulsoryFields;
+    compulsoryErrors: RulesCompulsoryErrors;
+    disabledFields: RulesDisabledFields;
+};

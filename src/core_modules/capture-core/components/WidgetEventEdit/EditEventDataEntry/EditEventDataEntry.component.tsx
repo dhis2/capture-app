@@ -31,7 +31,6 @@ import {
     withCalculateMessages,
     withDisplayMessages,
     withDefaultFieldContainer,
-    withDefaultShouldUpdateInterface,
     VirtualizedSelectField,
     SingleOrgUnitSelectField,
 } from '../../FormFields/New';
@@ -119,15 +118,13 @@ const buildReportDateSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
-                            ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
                         ),
                     ),
                 ),
@@ -159,24 +156,22 @@ const buildScheduleDateSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                            customTooltip: () => {
-                                const isScheduleableStatus =
-                                [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        customTooltip: () => {
+                            const isScheduleableStatus =
+                            [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
 
-                                return isScheduleableStatus ?
-                                    i18n.t('Go to “Schedule” tab to reschedule this event') :
-                                    i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
-                                        { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
-                            },
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
-                            ),
+                            return isScheduleableStatus ?
+                                i18n.t('Go to “Schedule” tab to reschedule this event') :
+                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
+                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
+                        },
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
                         ),
                     ),
                 ),
@@ -209,16 +204,14 @@ const buildOrgUnitSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
                             ),
                         ),
                     ),
@@ -248,15 +241,13 @@ const buildOrgUnitSettingsFn = () => {
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
-                    ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
                 ),
             ),
         ),
@@ -266,15 +257,13 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
 const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
-                    ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
                 ),
             ),
         ),
@@ -326,15 +315,13 @@ const buildCompleteFieldSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(TrueOnlyField),
-                            ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(TrueOnlyField),
                         ),
                     ),
                 ),
@@ -363,17 +350,15 @@ const getCategoryOptionsSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions &&
-                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
                             ),
                         ),
                     ),

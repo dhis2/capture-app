@@ -2,7 +2,6 @@ import {
     PolygonField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -25,22 +24,20 @@ const getFilteredProps = (props: any) => {
 
 export const PolygonFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withStyledContainer(() => ({ paddingTop: 10, paddingBottom: 10 }))(
-                                    withLabel({
-                                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                        onGetCustomFieldLabeClass: (props: any) =>
-                                            `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
-                                    })(
-                                        withDisplayMessages()(
-                                            withFilterProps(getFilteredProps)(
-                                                withInternalChangeHandler()(PolygonField),
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDefaultFieldContainer()(
+                            withStyledContainer(() => ({ paddingTop: 10, paddingBottom: 10 }))(
+                                withLabel({
+                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                    onGetCustomFieldLabeClass: (props: any) =>
+                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withFilterProps(getFilteredProps)(
+                                            withInternalChangeHandler()(PolygonField),
                                         ),
                                     ),
                                 ),

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import {
-    withDefaultShouldUpdateInterface,
     withDefaultFieldContainer,
     withLabel,
     withInternalChangeHandler,
@@ -33,20 +32,18 @@ class OrgUnitFieldWrapper extends React.Component<Props> {
 }
 
 export const ComposedRegUnitSelector =
-    withDefaultShouldUpdateInterface()(
-        withDefaultFieldContainer()(
-            withLabel({
-                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                onGetCustomFieldLabeClass: (props: any) =>
-                    props.labelClass,
+    withDefaultFieldContainer()(
+        withLabel({
+            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+            onGetCustomFieldLabeClass: (props: any) =>
+                props.labelClass,
+        })(
+            withFilterProps((props: any) => {
+                const { labelClass, ...passOnProps } = props;
+                return passOnProps;
             })(
-                withFilterProps((props: any) => {
-                    const { labelClass, ...passOnProps } = props;
-                    return passOnProps;
-                })(
-                    withInternalChangeHandler()(
-                        OrgUnitFieldWrapper,
-                    ),
+                withInternalChangeHandler()(
+                    OrgUnitFieldWrapper,
                 ),
             ),
         ),

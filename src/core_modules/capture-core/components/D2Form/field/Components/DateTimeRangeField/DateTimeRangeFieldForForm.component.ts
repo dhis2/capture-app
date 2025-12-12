@@ -2,7 +2,6 @@ import {
     DateTimeRangeField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -24,27 +23,25 @@ const getFilteredProps = (props: any) => {
 
 export const DateTimeRangeFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.dateTimeLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
-                                            withInternalChangeHandler()(DateTimeRangeField),
-                                        ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.dateTimeLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withFilterProps(getFilteredProps)(
+                                        withInternalChangeHandler()(DateTimeRangeField),
                                     ),
                                 ),
                             ),
                         ),
-
                     ),
+
                 ),
             ),
         ),

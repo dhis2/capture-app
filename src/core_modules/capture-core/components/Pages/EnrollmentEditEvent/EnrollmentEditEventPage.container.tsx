@@ -213,6 +213,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const onAddNew = () => {
         navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
+
     const onCancelEditEvent = useCallback((isScheduled: boolean) => {
         if (isScheduled) {
             navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
@@ -236,16 +237,16 @@ const EnrollmentEditEventPageWithContextPlain = ({
         );
     };
 
-    const onHandleScheduleSave = (eventData: Record<string, unknown>) => {
+    const onHandleScheduleSave = useCallback((eventData: Record<string, unknown>) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
         navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    };
+    }, [dispatch, navigate, enrollmentId, eventId]);
 
-    const onSaveExternal = () => {
+    const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
         navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    };
+    }, [navigate, enrollmentId, eventId, queryClient]);
 
     const onBackToViewEvent = () => {
         dispatch(cancelEditEventDataEntry());

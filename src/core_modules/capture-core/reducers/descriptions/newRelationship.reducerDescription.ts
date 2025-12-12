@@ -52,7 +52,7 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
         const { programId } = action.payload;
         return {
             ...state,
-            programId,
+            programId: programId || undefined,
         };
     },
     [registrationSectionActionTypes.ORG_UNIT_CHANGE]: (state, action) => {
@@ -95,7 +95,7 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
         const { programId } = action.payload;
         return {
             ...state,
-            programId,
+            programId: programId || undefined,
         };
     },
     [registrationSectionActionTypesRelationshipsWidget.ORG_UNIT_CHANGE]: (state, action) => {

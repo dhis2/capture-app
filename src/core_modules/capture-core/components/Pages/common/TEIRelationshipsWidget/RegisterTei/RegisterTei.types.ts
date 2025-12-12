@@ -19,6 +19,7 @@ export type ComponentProps = {
     dataEntryId: string;
     trackedEntityName?: string;
     inheritedAttributes: Array<InputAttribute>;
+    isLoadingAttributes: boolean;
     onSaveWithEnrollment: () => void;
     onSaveWithoutEnrollment: () => void;
 } & SharedProps;

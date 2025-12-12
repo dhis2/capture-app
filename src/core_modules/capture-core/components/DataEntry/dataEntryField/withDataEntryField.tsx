@@ -91,6 +91,8 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                 ...passOnProps
             } = this.props;
             const key = settings.getPropName(this.props);
+            const valueKey = `${key}DataEntryFieldValue`;
+            delete passOnProps[valueKey];
 
             return (
                 <div>
@@ -99,7 +101,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                         pluginContext={{
                             [key]: {
                                 setDataEntryFieldValue: this.setField.bind(this),
-                                value: this.props[`${key}DataEntryFieldValue`],
+                                value: this.props[valueKey],
                             },
                             ...pluginContext,
                         }}
