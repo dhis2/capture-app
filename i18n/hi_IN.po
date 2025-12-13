@@ -414,10 +414,10 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "वर्ष"
 
 msgid "Months"
-msgstr ""
+msgstr "महीने"
 
 msgid "Days"
 msgstr "दिन"
