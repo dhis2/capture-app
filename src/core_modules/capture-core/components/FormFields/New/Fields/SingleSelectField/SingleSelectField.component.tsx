@@ -23,8 +23,6 @@ type Props = {
     dataTest?: string;
 };
 
-const SimpleSelect = SimpleSingleSelect as React.ComponentType<Record<string, any>>;
-
 const SingleSelectFieldComponentPlain = ({
     id,
     value,
@@ -35,7 +33,7 @@ const SingleSelectFieldComponentPlain = ({
     disabled,
     required,
     placeholder,
-    filterable = true,
+    filterable = false,
     clearable = true,
     dataTest,
 }: Props) => {
@@ -68,9 +66,10 @@ const SingleSelectFieldComponentPlain = ({
     };
 
     return (
-        <SimpleSelect
+        <SimpleSingleSelect
             name={fieldName}
             options={options}
+            // @ts-expect-error - selected is not typed correctly
             selected={selectedOption}
             placeholder={placeholder}
             clearable={clearable}
@@ -87,4 +86,3 @@ const SingleSelectFieldComponentPlain = ({
 };
 
 export const SingleSelectField = withFocusHandler()(withSelectSingleTranslations()(SingleSelectFieldComponentPlain));
-
