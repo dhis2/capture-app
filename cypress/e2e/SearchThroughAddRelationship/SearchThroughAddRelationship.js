@@ -4,7 +4,7 @@ And('you select search scope TB program', () => {
     cy.get('[data-test="dhis2-simplesingleselect"]')
         .click();
 
-    cy.get('[data-test="dhis2-simplesingleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselect-option"]')
         .contains('TB prog')
         .click();
 });

@@ -15,7 +15,7 @@ When('you add data to the form', () => {
         .eq(0)
         .click();
 
-    cy.get('[data-test="dhis2-simplesingleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselect-option"]')
         .contains('Male')
         .click();
 });
@@ -47,7 +47,7 @@ When('you fill in the registration details', () => {
     cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
         .type('Provider');
 
-    cy.get('[data-test="dhis2-simplesingleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselect-option"]')
         .contains('Provider Follow-up and Support Tool')
         .click();
 

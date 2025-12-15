@@ -102,7 +102,7 @@ When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
         .eq(eq)
         .click();
 
-    cy.get('[data-test="dhis2-simplesingleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselect-option"]')
         .contains(value)
         .click();
 });
