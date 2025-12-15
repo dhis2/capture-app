@@ -11,11 +11,11 @@ When('you add data to the form', () => {
         .find('input')
         .type('25');
 
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .eq(0)
         .click();
 
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselectoption"]')
         .contains('Male')
         .click();
 });
@@ -41,13 +41,13 @@ Then('the event should be sent to the server successfully', () => {
 
 
 When('you fill in the registration details', () => {
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .click();
 
-    cy.get('[data-test="dhis2-uicore-singleselect-filterinput"]')
+    cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
         .type('Provider');
 
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselectoption"]')
         .contains('Provider Follow-up and Support Tool')
         .click();
 

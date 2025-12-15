@@ -11,12 +11,12 @@ const cleanUpEvent = () => {
 
     cy.get('[data-test="dataEntrySection-categorycombo"]')
         .within(() => {
-            cy.get('[data-test="dhis2-uicore-singleselect"]')
+            cy.get('[data-test="dhis2-simplesingleselect"]')
                 .eq(0)
                 .click();
         });
 
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselectoption"]')
         .contains('CARE International')
         .click({ force: true });
 
@@ -86,15 +86,15 @@ And('you enable edit mode', () => {
 When('you change the category combination and save', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
         .within(() => {
-            cy.get('[data-test="dhis2-uicore-singleselect"]')
+            cy.get('[data-test="dhis2-simplesingleselect"]')
                 .eq(0)
                 .click();
         });
 
-    cy.get('[data-test="dhis2-uicore-singleselect-filterinput"]')
+    cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
         .type('APHIAp');
 
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselectoption"]')
         .contains('APHIAplus')
         .click({ force: true });
 
@@ -151,12 +151,12 @@ Then('the relationship is deleted', () => {
 });
 
 And('you select the TB Program', () => {
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .click();
-    cy.get('[data-test="dhis2-uicore-singleselect-filterinput"]')
+    cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
         .type('TB');
 
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselectoption"]')
         .contains('TB program')
         .click();
 });

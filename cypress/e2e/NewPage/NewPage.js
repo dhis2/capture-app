@@ -19,7 +19,7 @@ And('there should be informative message explaining you need to select an organi
 And('you select tracked entity type person', () => {
     cy.get('[data-test="dhis2-uicore-select"]')
         .click();
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselectoption"]')
         .contains('Person')
         .click();
 });
@@ -694,7 +694,7 @@ When('the form is prefilled with the selected category combination', () => {
 
 When('you deselect the category from the form', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
-        .find('[data-test="dhis2-uicore-singleselect-clear"]')
+        .find('[data-test="dhis2-simplesingleselect-clear"]')
         .click();
 });
 
