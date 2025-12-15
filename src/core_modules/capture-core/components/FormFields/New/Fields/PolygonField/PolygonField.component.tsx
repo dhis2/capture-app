@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
 import { orientations } from '../../../New';
@@ -40,7 +40,7 @@ class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getSty
             <UIPolygonField
                 mapDialog={
                     <Modal
-                        className={this.dialogClasses}
+                        className={this.dialogClasses.dialogPaper}
                         large
                     >
                         <ModalTitle key="title">{dialogLabel}</ModalTitle>

@@ -12,7 +12,7 @@ export const ProgramAccessLevels = Object.freeze({
 });
 
 export const useProgramAccessLevel = ({ programId }: Props) => {
-    const { data: program, isLoading } = useApiMetadataQuery(
+    const { data: program, isInitialLoading } = useApiMetadataQuery(
         ['programProtectionLevel', programId],
         {
             resource: 'programs',
@@ -28,6 +28,6 @@ export const useProgramAccessLevel = ({ programId }: Props) => {
 
     return {
         accessLevel: (program as any)?.accessLevel,
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

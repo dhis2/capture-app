@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { searchOperators } from '../../../../../metaDataMemoryStoreBuilders';
 
 const styles = (theme: any) => ({

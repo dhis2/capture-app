@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, filter, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
@@ -45,10 +45,29 @@ type SelectionsCompletenessPayload = {
     triggeringActionType?: string;
 };
 
-export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>) =>
+export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
-        map(() => (batchActions(getOpenDataEntryActions()))),
+        map(() => {
+            const state = store.value;
+            const selectedCategories = state.currentSelections.categories;
+            const orgUnitId = state.currentSelections.orgUnitId;
+            const orgUnits = state.organisationUnits;
+            const orgUnit = orgUnitId && orgUnits
+                ? orgUnits[orgUnitId]
+                : undefined;
+            const program = getEventProgramThrowIfNotFound(state.currentSelections.programId);
+            const categoryCombination = program.categoryCombination;
+            const programCategory = categoryCombination ? {
+                displayName: categoryCombination.name,
+                id: categoryCombination.id,
+                categories: Array.from(categoryCombination.categories.values()).map(category => ({
+                    id: category.id,
+                    displayName: category.name,
+                })),
+            } : null;
+            return batchActions(getOpenDataEntryActions(programCategory, selectedCategories, orgUnit));
+        }),
     );
 
 export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsCompletenessPayload>, store: ReduxStore) =>

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-
+import { cx } from '@emotion/css';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
 const styles = (theme: any) => ({
     button: {
@@ -29,7 +28,7 @@ const LinkButtonPlain = React.forwardRef<HTMLButtonElement, Props>((props, ref) 
     return (
         <button
             ref={ref}
-            className={classNames(classes.button, className)}
+            className={cx(classes.button, className)}
             {...passOnProps}
         >
             {children}

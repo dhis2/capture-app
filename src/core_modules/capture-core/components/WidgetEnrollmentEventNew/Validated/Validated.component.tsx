@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';

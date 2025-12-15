@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { CardImage } from 'capture-ui/CardImage/CardImage.component';

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './BulkDataEntryPlugin.types';
 
 const styles = () => ({
     container: {
-        height: 'calc(100vh - 250px)',
+        flex: 1,
     },
 });
 
@@ -30,7 +30,8 @@ const BulkDataEntryPluginPlain = ({
 
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach(entry =>
-                setPluginSize({ width: entry.contentRect.width, height: entry.contentRect.height }),
+                // Subtracting 10 from the height; if nothing is subtracted, the plugin will infinitely expand its height when using flex grow.
+                setPluginSize({ width: entry.contentRect.width, height: entry.contentRect.height - 10 }),
             );
         });
 

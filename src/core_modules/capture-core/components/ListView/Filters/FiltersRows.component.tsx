@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Filters } from './Filters.component';
 import type {
     Column,

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-11-11T14:11:11.392Z\n"
+"POT-Creation-Date: 2025-12-11T07:56:27.475Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rohit Wadhwani, 2025\n"
 "Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
@@ -742,9 +742,6 @@ msgstr "प्रोग्राम स्टेज लोड नहीं ह�
 msgid "Stage"
 msgstr "स्टेज"
 
-msgid "Registered events"
-msgstr ""
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -778,6 +775,9 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
 
 msgid "Please select an organisation unit."
+msgstr ""
+
+msgid "Registered events"
 msgstr ""
 
 msgid ""
@@ -1632,7 +1632,7 @@ msgid "Deleted"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "तारीख"
 
 msgid "Sort by date"
 msgstr ""
@@ -1650,7 +1650,7 @@ msgid "Change"
 msgstr "बदलें"
 
 msgid "Value"
-msgstr ""
+msgstr "वैल्यू"
 
 msgid "File"
 msgstr ""
@@ -2000,7 +2000,7 @@ msgid "Program is not a tracker program"
 msgstr "प्रोग्राम एक ट्रैकर प्रोग्राम नहीं है"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "इवेंट सेव नहीं किया जा सका"
 
 msgid "Could not save event"
 msgstr "इवेंट सेव नहीं किया जा सका"
@@ -2079,6 +2079,11 @@ msgstr "यह मान पहले से मौजूद है"
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"से\" \"तक\" से बड़ा नहीं हो सकता"
+
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
 
 msgid "Checking..."
 msgstr "चेकिंग"

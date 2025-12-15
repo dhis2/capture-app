@@ -64,29 +64,19 @@ import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationsh
 import {
     generatedUniqueValuesCacheDesc,
 } from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
+import { activePageDesc } from 'capture-core/reducers/descriptions/activePage.reducerDescription';
+import { searchDomainDesc } from 'capture-core/reducers/descriptions/searchDomain.reducerDescription';
+import { enrollmentPageDesc } from 'capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
+import { enrollmentDomainDesc } from 'capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
+import { breakTheGlassAccessDesc } from 'capture-core/reducers/descriptions/breakTheGlass.reducerDescription';
+import { newPageDesc } from 'capture-core/reducers/descriptions/newPage.reducerDescription';
+import { possibleDuplicatesDesc } from 'capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
+import { trackedEntityInstanceDesc } from 'capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
+import { widgetEnrollmentDesc } from 'capture-core/reducers/descriptions/widgetEnrollment.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 import { feedbackDesc } from './feedback.reducerDescription';
-import { activePageDesc } from '../../core_modules/capture-core/reducers/descriptions/activePage.reducerDescription';
-import { searchDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/searchDomain.reducerDescription';
-import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
-import {
-    enrollmentDomainDesc,
-} from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
-import {
-    breakTheGlassAccessDesc,
-} from '../../core_modules/capture-core/reducers/descriptions/breakTheGlass.reducerDescription';
-import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
-import {
-    possibleDuplicatesDesc,
-} from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
-import {
-    trackedEntityInstanceDesc,
-} from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
-import {
-    widgetEnrollmentDesc,
-} from '../../core_modules/capture-core/reducers/descriptions/widgetEnrollment.reducerDescription';
 
 export const reducerDescriptions = [
     activePageDesc,

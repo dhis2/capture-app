@@ -1,9 +1,9 @@
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
 import type { RenderFoundation } from '../../../../../../metaData';
 import { getLocationQuery } from '../../../../../../utils/routing';
-import { FEATURES, featureAvailable } from '../../../../../../../capture-core-utils';
 
 const getApiCategoriesArgument = (categories: { [id: string]: string } | null) => {
     if (!categories) {

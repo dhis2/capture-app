@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     searchBoxActionTypes,
     fallbackSearch,

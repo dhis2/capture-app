@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './label.module.css';
 
 type Classes = {
@@ -22,7 +22,7 @@ export class Label extends React.PureComponent<Props> {
         return (
             <div
                 ref={labelRef}
-                className={classNames(labelContainerDefault, classes.label)}
+                className={cx(labelContainerDefault, classes.label)}
                 {...passOnProps}
             >
                 {children}

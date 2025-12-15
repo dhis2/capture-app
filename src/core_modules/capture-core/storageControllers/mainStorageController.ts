@@ -17,7 +17,7 @@ const computeServerCacheVersion = ({ minor, patch, tag }) =>
     computeTagVersionPart(tag);
 
 const computeAppCacheVersion = () => {
-    const appCacheVersionAsString = process.env.REACT_APP_CACHE_VERSION;
+    const appCacheVersionAsString = process.env.DHIS2_CACHE_VERSION;
     const appCacheVersion = Number(appCacheVersionAsString);
     return compute4DigitVersionString(appCacheVersion);
 };

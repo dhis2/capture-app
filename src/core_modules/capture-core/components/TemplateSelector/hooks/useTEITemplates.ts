@@ -6,7 +6,7 @@ type DataResponse = {
 };
 
 export const useTEITemplates = (programId: string | undefined) => {
-    const { error, isLoading, data } = useApiDataQuery<DataResponse>(
+    const { error, isInitialLoading, data } = useApiDataQuery<DataResponse>(
         ['trackedEntityInstanceFilters', programId],
         {
             resource: 'trackedEntityInstanceFilters',
@@ -22,7 +22,7 @@ export const useTEITemplates = (programId: string | undefined) => {
 
     return {
         error,
-        loading: isLoading,
+        loading: isInitialLoading,
         TEITemplates: data?.trackedEntityInstanceFilters || [],
     };
 };

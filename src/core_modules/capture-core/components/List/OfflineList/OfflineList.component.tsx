@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { DataTableHead, DataTable, DataTableBody, DataTableRow, DataTableCell, DataTableColumnHeader } from '@dhis2/ui';
 import { dataElementTypes } from '../../../metaData';
@@ -45,7 +45,7 @@ class Index extends Component<Props> {
         const headerCells = visibleColumns.map((column: any) => (
             <DataTableColumnHeader
                 key={column.id}
-                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
+                className={cx({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
                 align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
             >
                 {column.header}

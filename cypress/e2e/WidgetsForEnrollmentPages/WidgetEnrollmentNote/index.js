@@ -8,7 +8,7 @@ Then('the stages and events should be loaded', () => {
 
 When(/^you fill in the note: (.*)$/, (note) => {
     cy.get('[data-test="enrollment-note-widget"]').within(() => {
-        cy.get('[data-test="note-textfield"]').type(`${note}-${timeStamp}`);
+        cy.get('[data-test="note-textfield"]').type(`${note}-${timeStamp}`).blur();
         cy.wait(100);
 
         cy.get('[data-test="add-note-btn"]').should('exist');

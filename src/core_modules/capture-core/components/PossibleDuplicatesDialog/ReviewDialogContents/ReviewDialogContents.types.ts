@@ -1,4 +1,3 @@
-import type { WithStyles } from '@material-ui/core';
 import type { CardDataElementsInformation } from '../../SearchBox';
 import type { ListItem, RenderCustomCardActions } from '../../CardList/CardList.types';
 
@@ -16,4 +15,4 @@ export type PropsFromRedux = {
     dataElements: CardDataElementsInformation;
 };
 
-export type Props = OwnProps & PropsFromRedux & WithStyles<any>;
+export type Props = OwnProps & PropsFromRedux;

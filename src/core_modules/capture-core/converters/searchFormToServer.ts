@@ -1,4 +1,4 @@
-import { pipe as pipeD2 } from '../../capture-core-utils';
+import { pipe as pipeD2 } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
 import { escapeString } from '../utils/escapeString';
 import type { SearchOperator } from '../metaDataMemoryStoreBuilders';

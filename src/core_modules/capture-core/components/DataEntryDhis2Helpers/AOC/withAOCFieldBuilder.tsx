@@ -1,6 +1,6 @@
 import React, { type ComponentType, useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import log from 'loglevel';
-import { makeCancelablePromise, errorCreator } from '../../../../capture-core-utils';
+import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import { useCategoryCombinations } from './useCategoryCombinations';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';

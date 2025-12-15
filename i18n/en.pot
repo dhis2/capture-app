@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-03T08:28:58.516Z\n"
-"PO-Revision-Date: 2025-12-03T08:28:58.516Z\n"
+"POT-Creation-Date: 2025-12-15T10:25:10.215Z\n"
+"PO-Revision-Date: 2025-12-15T10:25:10.215Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -537,9 +537,6 @@ msgstr "Clear"
 msgid "No results"
 msgstr "No results"
 
-msgid "LIKE - todo delete"
-msgstr "LIKE - todo delete"
-
 msgid "Must match the start of the value"
 msgstr "Must match the start of the value"
 
@@ -762,9 +759,6 @@ msgstr "Program Stages could not be loaded"
 msgid "Stage"
 msgstr "Stage"
 
-msgid "Registered events"
-msgstr "Registered events"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "The category option is not valid for the selected organisation unit."
 
@@ -801,6 +795,9 @@ msgstr "Or see all events accessible to you in {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
+
+msgid "Registered events"
+msgstr "Registered events"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "

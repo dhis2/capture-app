@@ -10,7 +10,7 @@ type Props = {
 const getSelectedCategoryOption = (selectedCategories: Array<string>) => {
     const storageController = getUserMetadataStorageController();
     return storageController.getAll(USER_METADATA_STORES.CATEGORY_OPTIONS, {
-        predicate: ({ id, organisationUnits }) => selectedCategories.includes(id) && organisationUnits,
+        predicate: ({ id, organisationUnits }) => selectedCategories?.includes(id) && organisationUnits,
     });
 };
 
@@ -24,7 +24,7 @@ export const useCategoryOptionIsValidForOrgUnit = ({
 
     const categoryOptionIds = categories && Object.values(categories);
 
-    const { data, isLoading, isError } = useIndexedDBQuery(
+    const { data, isInitialLoading, isError } = useIndexedDBQuery(
         ['categoryOptions', categoryOptionIds],
         () => getSelectedCategoryOption(categoryOptionIds),
         {
@@ -42,7 +42,7 @@ export const useCategoryOptionIsValidForOrgUnit = ({
 
     return {
         categoryOptionIsInvalidForOrgUnit,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';

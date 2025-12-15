@@ -1,6 +1,8 @@
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
@@ -127,7 +129,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             mapIcon: mapIconCustomClass,
             mapIconContainerDisabled: mapIconContainerDisabledCustomClass,
         } = classes || {};
-        const mapIconContainerClass = classNames(
+        const mapIconContainerClass = cx(
             { [defaultClasses.mapIconContainer]: shrinkDisabled },
             { [defaultClasses.mapIconContainerWithMargin]: !shrinkDisabled },
             mapIconContainerCustomClass,
@@ -139,7 +141,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     disabled={!!disabled}
                     dataTest="mapIconButton"
                     style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }}
-                    className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
+                    className={cx(defaultClasses.mapIcon, mapIconCustomClass)}
                     onClick={this.openMap}
                 >
                     <AddLocationIcon />

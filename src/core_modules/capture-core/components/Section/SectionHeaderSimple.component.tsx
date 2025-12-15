@@ -1,6 +1,6 @@
 import { colors } from '@dhis2/ui';
 import React, { Component, type ReactElement, type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ChevronIcon } from 'capture-ui';
 
 const styles = () => ({

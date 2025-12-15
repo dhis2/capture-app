@@ -1,4 +1,4 @@
-import type { UseQueryOptions } from 'react-query';
+import type { UseQueryOptions } from '@tanstack/react-query';
 import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 import type { CachedOptionSet } from '../../storageControllers/';
@@ -15,7 +15,7 @@ export const useOptionSetsFromIndexedDB = (
     const storageController = getUserMetadataStorageController();
     const { enabled = !!optionSetIds } = queryOptions ?? {};
 
-    const { data, isLoading, isError } = useIndexedDBQuery(
+    const { data, isInitialLoading, isError } = useIndexedDBQuery(
         ['optionSets', ...queryKey],
         () => storageController.getAll(
             USER_METADATA_STORES.OPTION_SETS, {
@@ -28,7 +28,7 @@ export const useOptionSetsFromIndexedDB = (
 
     return {
         optionSets: data,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };
