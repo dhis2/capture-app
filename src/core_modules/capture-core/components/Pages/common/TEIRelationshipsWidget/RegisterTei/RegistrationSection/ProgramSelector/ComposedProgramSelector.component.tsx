@@ -5,7 +5,7 @@ import { LinkButton } from '../../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../../ProgramFilterer';
 import { TrackerProgram } from '../../../../../../../metaData';
 import {
-    SingleSelectField,
+    NewSingleSelectField,
     withSelectSingleTranslations,
     withFocusSaver,
     withDefaultFieldContainer,
@@ -108,7 +108,7 @@ class ProgramSelector extends React.Component<Props> {
                 {
                     (programs: Program[], isFiltered: boolean) => (
                         <div>
-                            <SingleSelectField
+                            <NewSingleSelectField
                                 options={this.getOptionsFromPrograms(programs)}
                                 required={false}
                                 onBlur={onUpdateSelectedProgram}

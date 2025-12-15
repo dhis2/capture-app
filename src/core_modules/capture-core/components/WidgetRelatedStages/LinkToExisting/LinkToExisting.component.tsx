@@ -1,7 +1,8 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
+import { spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
+import { NewSingleSelectField } from '../../FormFields/New';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
 const styles: Readonly<any> = {
@@ -31,12 +32,20 @@ export const LinkToExistingPlain = ({
     saveAttempted,
     classes,
 }: Props) => {
-    const onChange = (value: string) => {
+    errorMessages;
+    saveAttempted;
+
+    const onChange = (value: string | null) => {
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
-            linkedEventId: value,
+            linkedEventId: value || '',
         });
     };
+
+    const options = linkableEvents.map(event => ({
+        value: event.id,
+        label: event.label,
+    }));
 
     return (
         <div className={classes.searchRow}>
@@ -45,27 +54,18 @@ export const LinkToExistingPlain = ({
                     linkableStageLabel,
                 })}
             </p>
-            <SingleSelectField
-                selected={relatedStagesDataValues.linkedEventId}
-                onChange={({ selected }) => onChange(selected)}
-                placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
-                    linkableStageLabel,
-                })}
-                className={classes.singleSelectField}
-                error={saveAttempted && !!errorMessages.linkedEventId}
-                validationText={saveAttempted ? errorMessages.linkedEventId : undefined}
-                dataTest="related-stages-existing-response-list"
-            >
-                {linkableEvents
-                    .map(event => (
-                        <SingleSelectOption
-                            key={event.id}
-                            value={event.id}
-                            label={event.label}
-                        />
-                    ))
-                }
-            </SingleSelectField>
+            <div className={classes.singleSelectField}>
+                {/* @ts-expect-error - focus handler HOC injects focus props */}
+                <NewSingleSelectField
+                    value={relatedStagesDataValues.linkedEventId}
+                    onChange={onChange}
+                    placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
+                        linkableStageLabel,
+                    })}
+                    dataTest="related-stages-existing-response-list"
+                    options={options}
+                />
+            </div>
         </div>
     );
 };

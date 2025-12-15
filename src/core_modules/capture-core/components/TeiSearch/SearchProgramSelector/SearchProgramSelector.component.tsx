@@ -1,10 +1,9 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui';
-import { withDefaultFieldContainer, withLabel } from '../../FormFields/New';
+import { NewSingleSelectField, withDefaultFieldContainer, withLabel } from '../../FormFields/New';
 import type { SearchProgramSelectorProps } from './SearchProgramSelector.types';
 
-const SearchProgramField = withDefaultFieldContainer()(withLabel()(SingleSelectField));
+const SearchProgramField = withDefaultFieldContainer()(withLabel()(NewSingleSelectField));
 
 const programFieldStyles = {
     labelContainerStyle: {
@@ -25,20 +24,13 @@ export class SearchProgramSelectorComponent extends React.Component<SearchProgra
         return (
             <SearchProgramField
                 styles={programFieldStyles}
-                selected={selectedProgramId}
-                onChange={this.onSelectProgram}
+                value={selectedProgramId}
+                onChange={value => this.onSelectProgram({ selected: value || '' })}
                 label={i18n.t('Selected program')}
                 clearable
                 filterable
-            >
-                {programOptions.map(option => (
-                    <SingleSelectOption
-                        key={option.value}
-                        label={option.label}
-                        value={option.value}
-                    />
-                ))}
-            </SearchProgramField>
+                options={programOptions}
+            />
         );
     }
 }

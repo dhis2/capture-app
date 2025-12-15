@@ -31,7 +31,7 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-    SingleSelectField,
+    NewSingleSelectField,
     SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
@@ -372,7 +372,7 @@ const getCategoryOptionsSettingsFn = () => {
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(SingleSelectField),
+                                    withFilterProps(defaultFilterProps)(NewSingleSelectField),
                                 ),
                             ),
                         ),

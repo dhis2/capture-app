@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SimpleSingleSelect } from '@dhis2-ui/select';
 import { withFocusHandler } from './withFocusHandler';
 import { withSelectSingleTranslations } from './withTranslations';
@@ -23,7 +23,7 @@ type Props = {
     dataTest?: string;
 };
 
-const SingleSelectFieldComponentPlain = ({
+const NewSingleSelectFieldComponentPlain = ({
     id,
     value,
     onChange,
@@ -37,6 +37,7 @@ const SingleSelectFieldComponentPlain = ({
     clearable = true,
     dataTest,
 }: Props) => {
+    const selectRef = useRef<HTMLDivElement | null>(null);
     const fieldName = id ?? 'single-select-field';
 
     const selectedOption = value != null
@@ -65,24 +66,46 @@ const SingleSelectFieldComponentPlain = ({
         onBlur?.(null);
     };
 
+    useEffect(() => {
+        const element = selectRef.current;
+        if (!element) {
+            return undefined;
+        }
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Backspace' && value != null) {
+                onChange?.(null);
+                onBlur?.(null);
+            }
+        };
+
+        element.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            element.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onBlur, onChange, value]);
+
     return (
-        <SimpleSingleSelect
-            name={fieldName}
-            options={options}
-            // @ts-expect-error - selected is not typed correctly
-            selected={selectedOption}
-            placeholder={placeholder}
-            clearable={clearable}
-            filterable={filterable}
-            aria-required={required}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            onClear={handleClear}
-            dataTest={dataTest}
-            disabled={disabled}
-        />
+        <div ref={selectRef}>
+            <SimpleSingleSelect
+                name={fieldName}
+                options={options}
+                // @ts-expect-error - selected is not typed correctly
+                selected={selectedOption}
+                placeholder={placeholder}
+                clearable={clearable}
+                filterable={filterable}
+                aria-required={required}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+                onClear={handleClear}
+                dataTest={dataTest}
+                disabled={disabled}
+            />
+        </div>
     );
 };
 
-export const SingleSelectField = withFocusHandler()(withSelectSingleTranslations()(SingleSelectFieldComponentPlain));
+export const NewSingleSelectField = withFocusHandler()(withSelectSingleTranslations()(NewSingleSelectFieldComponentPlain));

@@ -3,7 +3,7 @@ export { TextField } from './Fields/TextField/TextField.component';
 export { BooleanField } from './Fields/BooleanField/BooleanField.component';
 export { AgeField } from './Fields/AgeField/AgeField.component';
 export { TrueOnlyField } from './Fields/TrueOnlyField/TrueOnlyField.component';
-export { SingleSelectField } from './Fields/SingleSelectField/SingleSelectField.component';
+export { NewSingleSelectField } from './Fields/SingleSelectField/SingleSelectField.component';
 export { MultiSelectField } from './Fields/MultiSelectField/MultiSelectField.component';
 export { withSelectSingleTranslations } from './Fields/SingleSelectField/withTranslations';
 export { withSelectMultiTranslations } from './Fields/MultiSelectField/withTranslations';
