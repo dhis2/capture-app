@@ -356,10 +356,10 @@ export const fallbackSearchEpic = (
             const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
 
             const filter = getFiltersForAttributesSearchQuery(
-                fallbackFormValues, // DHIS2-20530 - TODO the fallback value are not in form shape the convertars should not be applied
+                fallbackFormValues, // will be fixed in DHIS2-20530
                 attributes,
                 availableSearchGroup?.searchForm.getElements(),
-            ).filter((query: any) => query);
+            ).filter(Boolean);
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';

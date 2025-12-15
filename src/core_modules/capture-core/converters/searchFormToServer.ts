@@ -6,40 +6,41 @@ import { convertClientToServer, convertFormToClient } from './index';
 
 type FormValues = { [key: string]: any };
 
-const convertString = (formValues: string, dataElement: DataElement, searchOperator: SearchOperator) => {
-    const sanitizedString = formValues.trim();
-    const convertedString = dataElement.convertValue(
-        sanitizedString,
-        pipeD2(convertFormToClient, convertClientToServer),
-    );
+const convertValuePipe = pipeD2(convertFormToClient, convertClientToServer);
+
+const convertString = (formValue: string, dataElement: DataElement, searchOperator: SearchOperator) => {
+    const sanitizedString = formValue.trim();
+    const convertedString = dataElement.convertValue(sanitizedString, convertValuePipe);
     return `${dataElement.id}:${searchOperator.toLowerCase()}:${escapeString(convertedString)}`;
 };
 
 const convertRange = (formValues: FormValues, dataElement: DataElement) => {
     const { from, to } = formValues;
-    const convertedFrom = from && dataElement.convertValue(from, pipeD2(convertFormToClient, convertClientToServer));
-    const convertedTo = to && dataElement.convertValue(to, pipeD2(convertFormToClient, convertClientToServer));
-    if (from || to) {
-        return `${dataElement.id}${convertedFrom ? `:ge:${escapeString(String(convertedFrom))}` : ''}${
-            convertedTo ? `:le:${escapeString(String(convertedTo))}` : ''
-        }`;
+    if (!from && !to) {
+        return null;
     }
-    return null;
+
+    const convertedFrom = from && dataElement.convertValue(from, convertValuePipe);
+    const convertedTo = to && dataElement.convertValue(to, convertValuePipe);
+
+    const fromPart = convertedFrom ? `:ge:${escapeString(String(convertedFrom))}` : '';
+    const toPart = convertedTo ? `:le:${escapeString(String(convertedTo))}` : '';
+
+    return `${dataElement.id}${fromPart}${toPart}`;
 };
 
 const convertOrgUnit = (formValues: FormValues, dataElement: DataElement, searchOperator: SearchOperator) => {
-    const convertedId = dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer));
+    const convertedId = dataElement.convertValue(formValues, convertValuePipe);
     return `${dataElement.id}:${searchOperator.toLowerCase()}:${convertedId}`;
 };
 
 const convertAge = (formValues: FormValues, dataElement: DataElement, searchOperator: SearchOperator) => {
-    const convertedAge =
-        formValues && dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer));
+    const convertedAge = formValues && dataElement.convertValue(formValues, convertValuePipe);
     return `${dataElement.id}:${searchOperator.toLowerCase()}:${convertedAge}`;
 };
 
-const convertBoolean = (formValues: boolean, dataElement: DataElement, searchOperator: SearchOperator) => {
-    const convertedBool = dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer));
+const convertBoolean = (formValue: boolean, dataElement: DataElement, searchOperator: SearchOperator) => {
+    const convertedBool = dataElement.convertValue(formValue, convertValuePipe);
     return `${dataElement.id}:${searchOperator.toLowerCase()}:${convertedBool}`;
 };
 

@@ -1,5 +1,6 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { dataElementTypes } from '../../../../../metaData';
 import type { CachedTrackedEntityAttribute } from '../../../../../storageControllers';
 import {
     DEFAULT_IS_UNIQUE_SEARCH_OPERATOR,
@@ -44,7 +45,7 @@ export const getSearchOperator = (metadata: CachedTrackedEntityAttribute): Searc
     if (metadata.unique) {
         return DEFAULT_IS_UNIQUE_SEARCH_OPERATOR;
     }
-    if (metadata.optionSet) {
+    if (metadata.optionSet && metadata.valueType !== dataElementTypes.MULTI_TEXT) {
         return DEFAULT_HAS_OPTION_SET_SEARCH_OPERATOR;
     }
 
