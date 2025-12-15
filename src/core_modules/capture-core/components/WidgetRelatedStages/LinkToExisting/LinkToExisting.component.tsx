@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NewSingleSelectField } from '../../FormFields/New';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 

@@ -1,7 +1,7 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
-import type { EpicAction, ReduxStore } from '../../../capture-core-utils/types';
+import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 
 import { getEventListOnReconnect, goingOnlineExecuted, batchActionTypes } from './connectivity.actions';
 

@@ -171,7 +171,7 @@ Given(/^you land on the edit event page by having typed (.*)$/, (url) => {
 
 When(/^you fill in the note: (.*)$/, (note) => {
     cy.get('[data-test="write-note-btn"]').click();
-    cy.get('[data-test="note-textfield"]').type(`${note}-${timeStamp}`);
+    cy.get('[data-test="note-textfield"]').type(`${note}-${timeStamp}`).blur();
     cy.wait(100);
     cy.get('[data-test="add-note-btn"]').should('exist');
     cy.get('[data-test="add-note-btn"]').click();

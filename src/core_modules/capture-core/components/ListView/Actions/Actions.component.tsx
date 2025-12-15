@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './Actions.types';
 
 const styles: Readonly<any> = {

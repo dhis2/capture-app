@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { MainPageStatuses } from './MainPage.constants';
+import { MainPageStatuses } from './shared/constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
-import { TopBar } from './TopBar.container';
+import { MainPageComponent } from './MainPage.component';
 import { TrackerProgram } from '../../../metaData';
 
 type ReduxState = {
@@ -186,7 +185,7 @@ const MainPageContainer = () => {
         selectedProgram instanceof TrackerProgram) ? selectedProgram.trackedEntityType : undefined;
     const trackedEntityTypeId = trackedEntityType?.id;
     const displayFrontPageList = Boolean(trackedEntityTypeId && selectedProgram?.displayFrontPageList);
-    const MainPageStatus = useMainPageStatus({
+    const mainPageStatus = useMainPageStatus({
         programId,
         selectedProgram,
         categories,
@@ -245,16 +244,16 @@ const MainPageContainer = () => {
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
-            <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <MainPageComponent
-                MainPageStatus={MainPageStatus}
-                programId={programId || ''}
+                programId={programId}
                 orgUnitId={orgUnitId}
+                selectedCategories={selectedCategories}
+                mainPageStatus={mainPageStatus}
                 trackedEntityTypeId={trackedEntityTypeId}
                 selectedTemplateId={selectedTemplateId}
-                setShowAccessible={onSetShowAccessible}
+                onSetShowAccessible={onSetShowAccessible}
                 onChangeTemplate={onChangeTemplate}
-                error={error || false}
+                error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
                 onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}

@@ -495,6 +495,9 @@ msgstr "Max"
 msgid "Min"
 msgstr "Min"
 
+msgid "Exact matches only"
+msgstr "Exact matches only"
+
 msgid "Contains text"
 msgstr "Contains text"
 
@@ -750,9 +753,6 @@ msgstr "Program Stages could not be loaded"
 msgid "Stage"
 msgstr "Stage"
 
-msgid "Registered events"
-msgstr "Registered events"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "The category option is not valid for the selected organisation unit."
 
@@ -789,6 +789,9 @@ msgstr "Or see all events accessible to you in {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
+
+msgid "Registered events"
+msgstr "Registered events"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -2124,6 +2127,13 @@ msgstr "This value already exists"
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"From\" cannot be greater than \"To\""
+
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
 
 msgid "Checking..."
 msgstr "Checking..."

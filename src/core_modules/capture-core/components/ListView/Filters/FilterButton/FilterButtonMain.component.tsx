@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Popover } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
@@ -29,6 +29,7 @@ type Props = {
     type: string;
     options?: Options | null;
     multiValueFilter?: boolean;
+    unique: boolean;
     title: string;
     onUpdateFilter: UpdateFilter;
     onClearFilter: ClearFilter;
@@ -105,13 +106,14 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable } = this.props;
+        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable, unique } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
                 options={options}
                 multiValueFilter={multiValueFilter}
+                unique={unique}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}
@@ -141,7 +143,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
 
         return (
             <ActiveFilterButton
-                innerRef={this.refActiveFilterInstance}
+                ref={this.refActiveFilterInstance}
                 onChange={this.openFilterSelector}
                 onClear={this.handleClearFilter}
                 iconClass={classes.icon}

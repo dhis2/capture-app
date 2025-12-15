@@ -4,10 +4,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import {
     RulesEngineVerboseInitializer,
-} from '../../core_modules/capture-core/components/RulesEngineVerboseInitializer';
+} from 'capture-core/components/RulesEngineVerboseInitializer';
 import {
     MetadataAutoSelectInitializer,
-} from '../../core_modules/capture-core/components/MetadataAutoSelectInitializer';
+} from 'capture-core/components/MetadataAutoSelectInitializer';
 import { AppContents } from './AppContents.component';
 
 type Props = {

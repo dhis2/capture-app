@@ -4,6 +4,8 @@ import { of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
+import { errorCreator } from 'capture-core-utils';
+import type { EpicAction } from 'capture-core-utils/types';
 import { actionTypes, batchActionTypes } from './TrackedEntityRelationshipsWrapper.actions';
 import { getSearchGroups } from '../../../../TeiSearch/getSearchGroups';
 import { getSearchFormId } from '../../../../TeiSearch/getSearchFormId';
@@ -13,8 +15,6 @@ import { findModes } from '../../../NewRelationship/findModes';
 import type { TrackerProgram } from '../../../../../metaData';
 import { initializeRegisterTei, initializeRegisterTeiFailed } from '../RegisterTei/registerTei.actions';
 import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData';
-import { errorCreator } from '../../../../../../capture-core-utils';
-import type { EpicAction } from '../../../../../../capture-core-utils/types';
 
 const searchId = 'relationshipTeiSearchWidget';
 

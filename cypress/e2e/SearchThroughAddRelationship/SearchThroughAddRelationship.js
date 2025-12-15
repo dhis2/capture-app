@@ -44,9 +44,9 @@ And('you can see an empty page', () => {
 
 And('there should be a validation error message', () => {
     cy.contains('Fill in at least 1 attribute to search')
-        .should('exist');
-    cy.get('[data-test="d2-form-area"]')
-        .find('[class*=minAttribtuesRequiredInvalid]');
+        .should('exist')
+        .should('have.css', 'color', 'rgb(229, 57, 53)');
+
 });
 
 And('you fill the values with nothing but spaces', () => {

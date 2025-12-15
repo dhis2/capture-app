@@ -1,7 +1,7 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { Chip, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 
 const getStyles = (theme: any) => ({
@@ -43,7 +43,7 @@ class ViewEventSectionHeaderPlain extends React.Component<Props & WithStyles<typ
                 </div>
                 {shouldRenderBadge &&
                     <div className={classes.headerItemContainer}>
-                        <Chip dense className={classNames(classes.badge, badgeClass)}>
+                        <Chip dense className={cx(classes.badge, badgeClass)}>
                             {badgeCount}
                         </Chip>
                     </div>

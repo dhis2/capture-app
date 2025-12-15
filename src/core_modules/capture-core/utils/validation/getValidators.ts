@@ -21,6 +21,7 @@ import {
     isValidDate,
     isValidNonFutureDate,
     isValidDateTime,
+    isValidMinCharactersToSearch,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
@@ -29,13 +30,15 @@ import {
 import { dataElementTypes } from '../../metaData';
 import type { DateDataElement, DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
+import type { QuerySingleResource } from '../api';
 
 type Validator = (
     value: any,
     internalError?: {
         error?: string | null;
         errorCode?: string | null;
-    } | null
+    } | null,
+    validationContext?: any,
 ) => boolean | { valid: boolean; errorMessage?: string; } | { valid: boolean; message?: string; };
 
 export type ValidatorContainer = {
@@ -66,6 +69,11 @@ const errorMessages = {
     COORDINATE: i18n.t('Please provide valid coordinates'),
     UNIQUENESS: i18n.t('This value already exists'),
     RANGE: i18n.t('"From" cannot be greater than "To"'),
+    MIN_CHARACTERS_TO_SEARCH: metadata =>
+        i18n.t('Please enter at least {{minCharactersToSearch}} characters for {{formName}} to perform a search', {
+            formName: metadata.formName,
+            minCharactersToSearch: metadata.minCharactersToSearch,
+        }),
 };
 
 const validationMessages = {
@@ -251,18 +259,40 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
         [];
 }
 
+function buildMinCharactersToSearchValidator(metaData: DataElement): Array<ValidatorContainer> {
+    const { minCharactersToSearch } = metaData;
+
+    if (minCharactersToSearch === undefined || minCharactersToSearch === 0) {
+        return [];
+    }
+
+    return [
+        {
+            validator: value => isValidMinCharactersToSearch(value, minCharactersToSearch),
+            message: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
+            errorMessage: errorMessages.MIN_CHARACTERS_TO_SEARCH(metaData),
+        },
+    ];
+}
+
+
 function buildUniqueValidator(
     metaData: DataElement,
+    querySingleResource: QuerySingleResource,
 ): Array<ValidatorContainer> {
     return metaData.unique
         ?
         [
             {
-                validator: (value: any) => {
+                validator: (
+                    value: any,
+                    internalComponentError?: {error?: string | null; errorCode?: string | null} | null,
+                    contextProps?: any,
+                ) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
-                    return true;
+                    return metaData.unique?.onValidate(value, contextProps, querySingleResource);
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
@@ -276,10 +306,10 @@ function buildUniqueValidator(
 
 export const getValidators = (
     metaData: DataElement | DateDataElement,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     querySingleResource?: any,
 ): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
-].flatMap(validatorBuilder => validatorBuilder(metaData));
+    buildMinCharactersToSearchValidator,
+].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));

@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { EnrollmentPageKeys }
     from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';

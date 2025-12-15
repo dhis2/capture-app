@@ -1,4 +1,4 @@
-import type { QueryRefetchFunction } from '../../../../capture-core-utils/types';
+import type { QueryRefetchFunction } from 'capture-core-utils/types';
 import { dataElementTypes } from '../../../metaData';
 
 export type OwnProps = {

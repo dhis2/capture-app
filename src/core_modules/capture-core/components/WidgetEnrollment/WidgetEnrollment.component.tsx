@@ -10,7 +10,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';

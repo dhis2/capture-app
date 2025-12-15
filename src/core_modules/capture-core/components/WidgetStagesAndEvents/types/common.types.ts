@@ -1,7 +1,7 @@
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { Icon } from 'capture-core/metaData';
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes, Option } from '../../../metaData';
-import type { ApiAssignedUser } from '../../../../capture-core-utils/types/api-types';
 
 type StageOptions = {
     [code: string]: string;

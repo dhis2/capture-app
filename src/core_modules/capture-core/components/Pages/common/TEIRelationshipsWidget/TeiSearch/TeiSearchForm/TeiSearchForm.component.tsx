@@ -1,8 +1,8 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { errorCreator } from 'capture-core-utils';
 import {
     Modal,
@@ -75,8 +75,8 @@ class SearchFormPlain extends React.Component<Props, State> {
     }
 
     handleSearchAttempt = () => {
-        const isFormValid = this.validateForm();
-        if (!isFormValid) {
+        const { error: validateFormError, isValid: isFormValid } = this.validateForm();
+        if (validateFormError || !isFormValid) {
             this.props.onSearchValidationFailed(this.props.id, this.props.searchGroupId);
             return;
         }
@@ -114,7 +114,7 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance?.validateAndScrollToIfFailed();
+        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
         if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
 
@@ -136,7 +136,7 @@ class SearchFormPlain extends React.Component<Props, State> {
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector
-            innerRef={(instance: any) => {
+            ref={(instance: any) => {
                 this.orgUnitSelectorInstance = instance;
             }}
             searchId={this.props.searchId}
@@ -147,7 +147,7 @@ class SearchFormPlain extends React.Component<Props, State> {
     renderMinAttributesRequired = () => {
         const { classes, searchAttempted, searchGroup } = this.props;
         const displayInvalidNumberOfAttributes = searchAttempted && !this.validNumberOfAttributes();
-        const minAttributesRequiredClass = classNames(
+        const minAttributesRequiredClass = cx(
             classes.minAttributesRequired, {
                 [classes.minAttribtuesRequiredInvalid]: displayInvalidNumberOfAttributes,
             },

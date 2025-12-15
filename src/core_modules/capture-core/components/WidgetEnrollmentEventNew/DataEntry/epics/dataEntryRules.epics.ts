@@ -3,6 +3,7 @@ import { map, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
+import { ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
 import { getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
@@ -22,7 +23,6 @@ import type { RulesExecutionDependenciesClientFormatted } from '../../common.typ
 import { getLocationQuery } from '../../../../utils/routing';
 import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
 import type { QuerySingleResource } from '../../../../utils/api';
-import { ReduxStore, ApiUtils } from '../../../../../capture-core-utils/types/global';
 
 const runRulesForNewEvent = async ({
     store,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, withTheme, WithStyles } from '@material-ui/core/styles';
+import { withStyles, withTheme, WithStyles } from 'capture-core-utils/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { IconInfo24 } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import type { PlainProps } from './FeedbacksSection.types';
@@ -51,7 +51,7 @@ class FeedbacksSectionPlain extends React.Component<Props> {
 
     renderTextItems = (displayTexts: Array<any>, classes: any) => displayTexts.map(displayText => (
         <div
-            className={classNames(classes.feedback, classes.textFeedback)}
+            className={cx(classes.feedback, classes.textFeedback)}
             key={displayText.id}
         >
             {displayText.message}
@@ -59,7 +59,7 @@ class FeedbacksSectionPlain extends React.Component<Props> {
     ))
 
     renderKeyValueItems = (keyValuePairs: Array<any>, classes: any) => keyValuePairs.map(pair => (
-        <div className={classNames(classes.feedback, classes.keyValueFeedback)} key={pair.id}>
+        <div className={cx(classes.feedback, classes.keyValueFeedback)} key={pair.id}>
             <div className={classes.keyValueFeedbackItem}>{pair.key}</div>
             <div className={classes.keyValueFeedbackItem}>{pair.value}</div>
         </div>

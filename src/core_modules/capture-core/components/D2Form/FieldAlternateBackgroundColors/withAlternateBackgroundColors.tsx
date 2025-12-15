@@ -1,6 +1,6 @@
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 const getStyles: Readonly<any> = () => ({
     evenNumbers: {

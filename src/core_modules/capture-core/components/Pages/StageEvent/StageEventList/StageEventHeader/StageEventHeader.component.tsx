@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { PlainProps } from './StageEventHeader.types';
 

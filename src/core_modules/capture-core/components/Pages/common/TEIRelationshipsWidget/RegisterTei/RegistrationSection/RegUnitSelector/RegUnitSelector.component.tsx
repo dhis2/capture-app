@@ -1,14 +1,14 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 
-const getStyles = (theme: any) => ({
+const getStyles = () => ({
     label: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

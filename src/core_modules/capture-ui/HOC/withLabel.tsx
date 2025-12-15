@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { Label } from '../internal/Label/Label.component';
 import defaultClasses from './withLabel.module.css';
 
@@ -48,9 +48,9 @@ export const withLabel = (hocParams?: HOCParamsContainer) =>
                 this.setClasses(props.classes);
             }
 
-            UNSAFE_componentWillReceiveProps(newProps: Props) {
-                const nextClasses = newProps.classes || {};
-                const prevClasses = this.props.classes || {};
+            componentDidUpdate(prevProps: Props) {
+                const nextClasses = this.props.classes || {};
+                const prevClasses = prevProps.classes || {};
 
                 if (Object.keys(nextClasses).length !== Object.keys(prevClasses).length) {
                     this.setClasses(nextClasses);
@@ -111,7 +111,7 @@ export const withLabel = (hocParams?: HOCParamsContainer) =>
                         className={useVerticalOrientation ? defaultClasses.containerVertical : defaultClasses.container}
                     >
                         <div
-                            className={classNames(labelContainerClass, this.labelContainerClass)}
+                            className={cx(labelContainerClass, this.labelContainerClass)}
                             style={stylesContainer.labelContainerStyle}
                         >
                             {labelElement}

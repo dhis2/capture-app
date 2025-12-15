@@ -1,3 +1,111 @@
+## [105.2.3](https://github.com/dhis2/capture-app/compare/v105.2.2...v105.2.3) (2025-12-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4419](https://github.com/dhis2/capture-app/issues/4419)) ([a4c5508](https://github.com/dhis2/capture-app/commit/a4c5508d88ae75c44a0764775dc8ffeb6f708a6a))
+
+## [105.2.2](https://github.com/dhis2/capture-app/compare/v105.2.1...v105.2.2) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20646] handle missing capture namespace in DataStore ([#4418](https://github.com/dhis2/capture-app/issues/4418)) ([6352214](https://github.com/dhis2/capture-app/commit/6352214e4130145b661b0cc6d960c714b0b95f7d))
+
+## [105.2.1](https://github.com/dhis2/capture-app/compare/v105.2.0...v105.2.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20495] Org unit not retained after “Save and add another” event ([#4406](https://github.com/dhis2/capture-app/issues/4406)) ([b2724a6](https://github.com/dhis2/capture-app/commit/b2724a67ab44ce978e0d8e26047265705d825b85))
+
+# [105.2.0](https://github.com/dhis2/capture-app/compare/v105.1.0...v105.2.0) (2025-12-11)
+
+
+### Features
+
+* [DHIS2-20086] add command palette shortcuts ([#4386](https://github.com/dhis2/capture-app/issues/4386)) ([35285e4](https://github.com/dhis2/capture-app/commit/35285e4658edf919d17847c5de8de401ac8e4d1b))
+
+# [105.1.0](https://github.com/dhis2/capture-app/compare/v105.0.1...v105.1.0) (2025-12-08)
+
+
+### Features
+
+* [DHIS2-20467] facilitate bulk data entry plugin ([#4415](https://github.com/dhis2/capture-app/issues/4415)) ([27a0867](https://github.com/dhis2/capture-app/commit/27a086714fcf862fecd561363fb0b863d322b0d4))
+
+## [105.0.1](https://github.com/dhis2/capture-app/compare/v105.0.0...v105.0.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4416](https://github.com/dhis2/capture-app/issues/4416)) ([6c5196d](https://github.com/dhis2/capture-app/commit/6c5196debfdcf0cb78cee98417500ab9116bbdce))
+
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-08)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-04)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [104.7.0](https://github.com/dhis2/capture-app/compare/v104.6.12...v104.7.0) (2025-12-03)
+
+
+### Features
+
+* [DHIS2-20430] add minCharactersToSearch validation ([#4409](https://github.com/dhis2/capture-app/issues/4409)) ([b89fd5e](https://github.com/dhis2/capture-app/commit/b89fd5ea5881d867b84f400a127c5330d56a77a6))
+
+## [104.6.12](https://github.com/dhis2/capture-app/compare/v104.6.11...v104.6.12) (2025-12-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20478] prevent search when there are errors in the search form fields ([#4408](https://github.com/dhis2/capture-app/issues/4408)) ([a10ffeb](https://github.com/dhis2/capture-app/commit/a10ffeb4c6cfddb2e40d3511d148f0b13191c433))
+
+## [104.6.11](https://github.com/dhis2/capture-app/compare/v104.6.10...v104.6.11) (2025-12-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4412](https://github.com/dhis2/capture-app/issues/4412)) ([27ce535](https://github.com/dhis2/capture-app/commit/27ce5356f3b57a1f24d6e808de4cc014191e2127))
+
+## [104.6.10](https://github.com/dhis2/capture-app/compare/v104.6.9...v104.6.10) (2025-11-24)
+
+
+### Bug Fixes
+
+* [DHIS2-20305] change TEA unique filter text to 'Exact matches only' ([#4400](https://github.com/dhis2/capture-app/issues/4400)) ([deaba83](https://github.com/dhis2/capture-app/commit/deaba83eee89285dfa87ad031dd73b7444c17b7e))
+
+## [104.6.9](https://github.com/dhis2/capture-app/compare/v104.6.8...v104.6.9) (2025-11-24)
+
+
+### Bug Fixes
+
+* [DHIS2-20447] Validate unique attributes after entering/editing value in form ([#4402](https://github.com/dhis2/capture-app/issues/4402)) ([e919cde](https://github.com/dhis2/capture-app/commit/e919cdec018667d5a980a8ef28bb333ea2e17f57))
+
+## [104.6.8](https://github.com/dhis2/capture-app/compare/v104.6.7...v104.6.8) (2025-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4407](https://github.com/dhis2/capture-app/issues/4407)) ([f9e3931](https://github.com/dhis2/capture-app/commit/f9e39317b594bed2f55af25ba5c7436c272a284e))
+
 ## [104.6.7](https://github.com/dhis2/capture-app/compare/v104.6.6...v104.6.7) (2025-11-17)
 
 
