@@ -2756,7 +2756,7 @@
   resolved "https://registry.yarnpkg.com/@dhis2/ui-icons/-/ui-icons-10.7.7.tgz#cb0dd9b1e713bde6615b5ac2f09d12527e546cd9"
   integrity sha512-Ld+OnFAKftPxzMzjSGyRK7Gz7TNHg2FQkK9a5mztPydLiZ9eThZ218o+4uX9cUMoG2F2pBwbYJ2qg0mebVc33g==
 
-"@dhis2/ui@10.10.0", "@dhis2/ui@^10.10.0", "@dhis2/ui@^10.7.8":
+"@dhis2/ui@^10.10.0", "@dhis2/ui@^10.7.8":
   version "10.10.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui/-/ui-10.10.0.tgz#34c487d95757b17b3149241d43e968293d6d8dde"
   integrity sha512-9aX01WBf+wvwPygEmwnbrdzDcpIhYnTvQjFnieChUsntnlvy6QKrX056gtMjq4aeZzOXawPgrBEnczISYLDTOg==
