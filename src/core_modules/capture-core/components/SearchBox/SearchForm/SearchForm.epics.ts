@@ -300,7 +300,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
 export const startFallbackSearchEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH_START),
-        flatMap(({ payload: { programId, pageSize, page } }: any) => {
+        flatMap(({ payload: { programId, pageSize, page, formId } }: any) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
                 const { id: trackedEntityTypeId, searchGroups } = trackerProgram.trackedEntityType;
@@ -311,17 +311,20 @@ export const startFallbackSearchEpic = (action$: EpicAction<any>, store: ReduxSt
                         minAttributesRequiredToSearch,
                         searchForm,
                     } = availableSearchGroup;
-                    const { searchDomain } = store.value;
-                    const searchTerms = searchDomain.currentSearchInfo.currentSearchTerms;
+                    const { formsValues } = store.value;
+                    const formValues = formsValues[formId] as Record<string, unknown>;
                     const searchableFields = searchForm.getElements();
 
-                    const { searchableValuesCount, fallbackFormValues } = searchTerms.reduce((acc: any, term: any) => {
-                        if (searchableFields.find(({ id }: any) => id === term.id)) {
-                            acc.searchableValuesCount += 1;
-                        }
-                        acc.fallbackFormValues[term.id] = term.value;
-                        return acc;
-                    }, { searchableValuesCount: 0, fallbackFormValues: {} });
+                    const { searchableValuesCount, fallbackFormValues } = Object.keys(formValues).reduce(
+                        (acc: any, fieldId: string) => {
+                            if (searchableFields.find(({ id }) => id === fieldId)) {
+                                acc.searchableValuesCount += 1;
+                            }
+                            acc.fallbackFormValues[fieldId] = formValues[fieldId];
+                            return acc;
+                        },
+                        { searchableValuesCount: 0, fallbackFormValues: {} },
+                    );
 
                     if (!minAttributesRequiredToSearch && !searchableValuesCount) {
                         return of(showFallbackNotEnoughAttributesOnSearchBox({
@@ -356,10 +359,11 @@ export const fallbackSearchEpic = (
             const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
 
             const filter = getFiltersForAttributesSearchQuery(
-                fallbackFormValues, // will be fixed in DHIS2-20530
+                fallbackFormValues,
                 attributes,
                 availableSearchGroup?.searchForm.getElements(),
             ).filter(Boolean);
+
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';
