@@ -317,7 +317,7 @@ export const startFallbackSearchEpic = (action$: EpicAction<any>, store: ReduxSt
 
                     const { searchableValuesCount, fallbackFormValues } = Object.keys(formValues).reduce(
                         (acc: any, fieldId: string) => {
-                            if (searchableFields.find(({ id }) => id === fieldId)) {
+                            if (searchableFields.some(({ id }) => id === fieldId)) {
                                 acc.searchableValuesCount += 1;
                             }
                             acc.fallbackFormValues[fieldId] = formValues[fieldId];
