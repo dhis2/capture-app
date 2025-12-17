@@ -10,6 +10,7 @@ export const forcedSearchOperators: Partial<Record<string, SearchOperator>> = {
     [dataElementTypes.INTEGER_RANGE]: searchOperators.RANGE,
     [dataElementTypes.INTEGER_POSITIVE]: searchOperators.RANGE,
     [dataElementTypes.INTEGER_POSITIVE_RANGE]: searchOperators.RANGE,
+    [dataElementTypes.INTEGER_NEGATIVE]: searchOperators.RANGE,
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: searchOperators.RANGE,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: searchOperators.RANGE,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: searchOperators.RANGE,

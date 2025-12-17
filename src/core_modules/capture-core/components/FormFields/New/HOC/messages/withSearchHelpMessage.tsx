@@ -6,9 +6,10 @@ import { searchOperators } from '../../../../../metaDataMemoryStoreBuilders';
 
 const styles = (theme: any) => ({
     help: {
+        marginTop: 4,
         marginLeft: 0,
         paddingLeft: 0,
-        color: colors.grey700,
+        color: colors.grey600,
         fontSize: theme.typography.pxToRem(14),
     },
 });
