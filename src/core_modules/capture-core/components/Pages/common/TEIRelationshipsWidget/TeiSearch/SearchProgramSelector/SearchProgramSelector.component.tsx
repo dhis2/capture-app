@@ -1,14 +1,9 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import {
-    OptionsSelectVirtualized,
-} from '../../../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import type {
-    VirtualizedOptionConfig,
-} from '../../../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { NewSingleSelectField } from '../../../../../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
 import { withDefaultFieldContainer, withLabel } from '../../../../../FormFields/New';
 
-const SearchProgramField = withDefaultFieldContainer()(withLabel()(OptionsSelectVirtualized));
+const SearchProgramField = withDefaultFieldContainer()(withLabel()(NewSingleSelectField));
 
 const programFieldStyles = {
     labelContainerStyle: {
@@ -20,24 +15,30 @@ const programFieldStyles = {
     },
 };
 
+export type SelectOption = {
+    label: string;
+    value: any;
+    icon?: React.ReactNode | null;
+};
+
 type Props = {
     searchId: string;
     selectedProgramId?: string;
     onSetProgram: (searchId: string, programId?: string) => void;
-    programOptions: Array<VirtualizedOptionConfig>;
+    programOptions: Array<SelectOption>;
 };
 
 export class SearchProgramSelectorComponent extends React.Component<Props> {
-    onSelectProgram = (programId?: string) => {
-        this.props.onSetProgram(this.props.searchId, programId);
+    onSelectProgram = (programId: string | null) => {
+        this.props.onSetProgram(this.props.searchId, programId ?? undefined);
     }
     render() {
         return (
             <SearchProgramField
                 styles={programFieldStyles}
                 options={this.props.programOptions}
-                onSelect={this.onSelectProgram}
-                label={i18n.t('Selected program')}
+                onChange={this.onSelectProgram}
+                placeholder={i18n.t('Selected program')}
                 value={this.props.selectedProgramId}
             />
         );

@@ -2,8 +2,8 @@ import * as React from 'react';
 import log from 'loglevel';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
-import { OptionsSelectVirtualized } from
-    '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { NewSingleSelectField } from
+    '../../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
 
 type SelectOption = {
     label: string;
@@ -149,12 +149,15 @@ export class CategorySelector extends React.Component<Props, State> {
         const { options } = this.state;
 
         return (
-            options ? <OptionsSelectVirtualized
-                value={this.state.selectedOption?.value}
-                nullable
-                onChange={(option: any) => {
-                    this.setState({ selectedOption: option });
-                    onChange(option);
+            options ? <NewSingleSelectField
+                value={this.state.selectedOption?.value ?? null}
+                clearable
+                onChange={(value: string | null) => {
+                    const selectedOption = value != null ? options.find(opt => opt.value === value) : null;
+                    this.setState({ selectedOption });
+                    if (selectedOption) {
+                        onChange(selectedOption);
+                    }
                 }}
                 options={options}
             /> : null

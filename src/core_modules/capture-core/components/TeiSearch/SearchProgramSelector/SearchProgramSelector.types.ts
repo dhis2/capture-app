@@ -1,12 +1,14 @@
-import type {
-    VirtualizedOptionConfig,
-} from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+export type SelectOption = {
+    label: string;
+    value: any;
+    icon?: React.ReactNode | null;
+};
 
 export type SearchProgramSelectorProps = {
     searchId: string;
     selectedProgramId?: string;
     onSetProgram: (searchId: string, programId?: string) => void;
-    programOptions: Array<VirtualizedOptionConfig>;
+    programOptions: Array<SelectOption>;
 };
 
 export type StartSetProgramPayload = {

@@ -55,7 +55,6 @@ export const LinkToExistingPlain = ({
                 })}
             </p>
             <div className={classes.singleSelectField}>
-                {/* @ts-expect-error - focus handler HOC injects focus props */}
                 <NewSingleSelectField
                     value={relatedStagesDataValues.linkedEventId}
                     onChange={onChange}
