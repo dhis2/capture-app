@@ -49,9 +49,9 @@ export const getSearchOperator = (metadata: CachedTrackedEntityAttribute): Searc
         return DEFAULT_HAS_OPTION_SET_SEARCH_OPERATOR;
     }
 
-    const forcedOperator = forcedSearchOperators[metadata.valueType];
-    if (forcedOperator) {
-        return forcedOperator;
+    const ignorePreferredSearchOperator = forcedSearchOperators.includes(metadata.valueType);
+    if (ignorePreferredSearchOperator) {
+        return getFallbackSearchOperator(metadata);
     }
 
     if (metadata.preferredSearchOperator) {
