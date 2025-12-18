@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { SimpleSingleSelect } from '@dhis2-ui/select';
+import { SimpleSingleSelect } from '@dhis2/ui';
 import { withFocusHandler } from './withFocusHandler';
 import { withSelectSingleTranslations } from './withTranslations';
 
