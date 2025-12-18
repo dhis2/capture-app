@@ -23,4 +23,5 @@ export const forcedSearchOperators: Partial<Record<string, SearchOperator>> = {
     [dataElementTypes.BOOLEAN]: searchOperators.EQ,
     [dataElementTypes.TRUE_ONLY]: searchOperators.EQ,
     [dataElementTypes.AGE]: searchOperators.EQ,
+    [dataElementTypes.MULTI_TEXT]: searchOperators.LIKE,
 };
