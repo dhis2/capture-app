@@ -14,14 +14,13 @@ type Props = {
     // eslint-disable-next-line react/no-unused-prop-types
     category: { id: string; displayName: string};
     selectedOrgUnitId: string | null;
-    onChange: (option: SelectOption) => void;
+    onChange: (option: SelectOption | null) => void;
     initialValue?: SelectOption | null;
 }
 
 type State = {
     options: Array<SelectOption> | null;
     prevOrgUnitId: string | null;
-    open: boolean;
     selectedOption?: SelectOption | null;
 };
 
@@ -61,6 +60,7 @@ export class CategorySelector extends React.Component<Props, State> {
             return {
                 prevOrgUnitId: props.selectedOrgUnitId,
                 options: null,
+                selectedOption: null,
             };
         }
         return null;
@@ -73,15 +73,14 @@ export class CategorySelector extends React.Component<Props, State> {
         this.state = {
             options: null,
             prevOrgUnitId: null,
-            open: false,
             selectedOption: props.initialValue,
         };
-        this.loadCagoryOptions(this.props);
+        this.loadCategoryOptions(this.props);
     }
 
     componentDidUpdate(prevProps: Props) {
         if (!this.state.options && prevProps.selectedOrgUnitId !== this.props.selectedOrgUnitId) {
-            this.loadCagoryOptions(this.props);
+            this.loadCategoryOptions(this.props);
         }
     }
 
@@ -90,7 +89,7 @@ export class CategorySelector extends React.Component<Props, State> {
         this.cancelablePromise = null;
     }
 
-    loadCagoryOptions(props: Props) {
+    loadCategoryOptions(props: Props) {
         const { category, selectedOrgUnitId } = props;
 
         this.setState({
@@ -144,21 +143,31 @@ export class CategorySelector extends React.Component<Props, State> {
         this.cancelablePromise = currentRequestCancelablePromise;
     }
 
-    render() {
+    onSelectCategory = (value: string | null) => {
         const { onChange } = this.props;
         const { options } = this.state;
 
+        if (value === null) {
+            this.setState({ selectedOption: null });
+            onChange(null);
+            return;
+        }
+
+        const option = options?.find(opt => opt.value === value);
+        if (option) {
+            this.setState({ selectedOption: option });
+            onChange(option);
+        }
+    }
+
+    render() {
+        const { options, selectedOption } = this.state;
+
         return (
             options ? <NewSingleSelectField
-                value={this.state.selectedOption?.value ?? null}
+                value={selectedOption?.value ?? null}
                 clearable
-                onChange={(value: string | null) => {
-                    const selectedOption = value != null ? options.find(opt => opt.value === value) : null;
-                    this.setState({ selectedOption });
-                    // Match OptionsSelectVirtualized behavior: always call onChange, even when null
-                    // @ts-expect-error - onChange type doesn't accept null, but OptionsSelectVirtualized called it with null
-                    onChange(selectedOption);
-                }}
+                onChange={this.onSelectCategory}
                 options={options}
             /> : null
         );
