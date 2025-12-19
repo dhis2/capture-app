@@ -121,7 +121,7 @@ class ProgramSelector extends React.Component<Props> {
                             <NewSingleSelectField
                                 options={this.getOptionsFromPrograms(programs)}
                                 required={false}
-                                onBlur={onUpdateSelectedProgram}
+                                onChange={onUpdateSelectedProgram}
                                 {...passOnProps as any}
                             />
                             {isFiltered ? this.renderIsFilteredText() : null }
