@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacers } from '@dhis2/ui';
 // @ts-expect-error - SimpleSingleSelectField exists but types may not be available
 import { SimpleSingleSelectField } from '@dhis2-ui/select';
-import type { Props } from './TrackedEntityTypeSelector.types';
+import type { Props, SelectOption } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
 
@@ -23,7 +23,7 @@ export const TrackedEntityTypeSelectorPlain =
         const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
         const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 
-        const options = useMemo(() =>
+        const options: SelectOption[] = useMemo(() =>
             Object.values(trackedEntityTypesWithCorrelatedPrograms)
                 .filter(({ trackedEntityTypeAccess }: any) => {
                     if (accessNeeded === 'write') {
@@ -48,7 +48,7 @@ export const TrackedEntityTypeSelectorPlain =
             return options.find(opt => opt.value === selectedSearchScopeId);
         }, [selectedSearchScopeId, options]);
 
-        const handleSelectionChange = (option: { value: string; label: string }) => {
+        const handleSelectionChange = (option: SelectOption) => {
             onSelect(option.value, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
             onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: option.value });
         };

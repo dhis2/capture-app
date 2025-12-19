@@ -42,7 +42,7 @@ const NewSingleSelectFieldComponentPlain = ({
 
     const selectedOption = value != null
         ? options.find(option => option.value === value) ?? { value, label: String(value) }
-        : null;
+        : undefined;
 
     const handleChange = (nextValue: string | { value: string }) => {
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
@@ -91,7 +91,6 @@ const NewSingleSelectFieldComponentPlain = ({
             <SimpleSingleSelect
                 name={fieldName}
                 options={options}
-                // @ts-expect-error - selected is not typed correctly
                 selected={selectedOption}
                 placeholder={placeholder}
                 clearable={clearable}
