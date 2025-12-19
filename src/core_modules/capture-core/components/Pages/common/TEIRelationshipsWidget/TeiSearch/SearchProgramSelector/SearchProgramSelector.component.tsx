@@ -10,9 +10,6 @@ const programFieldStyles = {
         paddingTop: 12,
         flexBasis: 200,
     },
-    inputContainerStyle: {
-        flexBasis: 150,
-    },
 };
 
 type Props = {
@@ -32,7 +29,7 @@ export class SearchProgramSelectorComponent extends React.Component<Props> {
                 styles={programFieldStyles}
                 options={this.props.programOptions}
                 onChange={this.onSelectProgram}
-                placeholder={i18n.t('Selected program')}
+                label={i18n.t('Selected program')}
                 value={this.props.selectedProgramId}
             />
         );

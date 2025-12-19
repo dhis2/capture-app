@@ -10,26 +10,20 @@ const programFieldStyles = {
         paddingTop: 12,
         flexBasis: 200,
     },
-    inputContainerStyle: {
-        flexBasis: 150,
-    },
 };
 
 export class SearchProgramSelectorComponent extends React.Component<SearchProgramSelectorProps> {
-    onSelectProgram = ({ selected }: { selected: string }) => {
-        this.props.onSetProgram(this.props.searchId, selected);
+    onSelectProgram = (programId: string | null) => {
+        this.props.onSetProgram(this.props.searchId, programId ?? undefined);
     }
     render() {
-        const { programOptions, selectedProgramId } = this.props;
         return (
             <SearchProgramField
                 styles={programFieldStyles}
-                value={selectedProgramId}
-                onChange={value => this.onSelectProgram({ selected: value || '' })}
+                options={this.props.programOptions}
+                onChange={this.onSelectProgram}
                 label={i18n.t('Selected program')}
-                clearable
-                filterable
-                options={programOptions}
+                value={this.props.selectedProgramId}
             />
         );
     }
