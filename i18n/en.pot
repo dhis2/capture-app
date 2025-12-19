@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-18T09:03:09.491Z\n"
-"PO-Revision-Date: 2025-12-18T09:03:09.492Z\n"
+"POT-Creation-Date: 2025-12-19T18:08:41.230Z\n"
+"PO-Revision-Date: 2025-12-19T18:08:41.230Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -809,9 +809,6 @@ msgstr "Save as new"
 msgid "New"
 msgstr "New"
 
-msgid "Create for"
-msgstr "Create for"
-
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr "You can also choose a program from the top bar and create in that program"
 
@@ -1003,9 +1000,6 @@ msgstr "Choose a program"
 
 msgid "Search for {{titleText}}"
 msgstr "Search for {{titleText}}"
-
-msgid "Search for"
-msgstr "Search for"
 
 msgid ""
 "You can also select a program from the top bar to search within that "

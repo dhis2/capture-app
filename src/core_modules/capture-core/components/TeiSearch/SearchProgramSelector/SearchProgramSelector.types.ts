@@ -1,7 +1,6 @@
 export type SelectOption = {
     label: string;
-    value: any;
-    icon?: React.ReactNode | null;
+    value: string;
 };
 
 export type SearchProgramSelectorProps = {

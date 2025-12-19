@@ -155,9 +155,9 @@ export class CategorySelector extends React.Component<Props, State> {
                 onChange={(value: string | null) => {
                     const selectedOption = value != null ? options.find(opt => opt.value === value) : null;
                     this.setState({ selectedOption });
-                    if (selectedOption) {
-                        onChange(selectedOption);
-                    }
+                    // Match OptionsSelectVirtualized behavior: always call onChange, even when null
+                    // @ts-expect-error - onChange type doesn't accept null, but OptionsSelectVirtualized called it with null
+                    onChange(selectedOption);
                 }}
                 options={options}
             /> : null
