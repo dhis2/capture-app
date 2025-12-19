@@ -70,32 +70,23 @@ export class RuleEngine {
             [];
 
         const ruleEngine = new RuleEngineJs(this.flags.verbose || false);
-        // TODO: Remove this try/catch
-        let effects: Array<ProgramRuleEffect>;
-        try {
-            effects = (currentEvent ?
-                ruleEngine.evaluateEvent(
-                    inputBuilder.convertEvent(currentEvent),
-                    enrollment,
-                    events,
-                    executionContext,
-                ) :
-                ruleEngine.evaluateEnrollment(
-                    enrollment!,
-                    events,
-                    executionContext,
-                ))
-                .map(effect => ({
-                    ...Object.fromEntries(effect.ruleAction.values),
-                    action: effect.ruleAction.type,
-                    data: effect.data,
-                })) as Array<ProgramRuleEffect>;
-        } catch (error) {
-            // Temporary fix: catch rule engine errors (e.g., "Cannot read properties of undefined (reading 'length')")
-            // that can occur when switching from VirtualizedSelect to SimpleSingleSelect
-            console.warn('Rule engine evaluation error:', error);
-            effects = [];
-        }
+        const effects = (currentEvent ?
+            ruleEngine.evaluateEvent(
+                inputBuilder.convertEvent(currentEvent),
+                enrollment,
+                events,
+                executionContext,
+            ) :
+            ruleEngine.evaluateEnrollment(
+                enrollment!,
+                events,
+                executionContext,
+            ))
+            .map(effect => ({
+                ...Object.fromEntries(effect.ruleAction.values),
+                action: effect.ruleAction.type,
+                data: effect.data,
+            })) as Array<ProgramRuleEffect>;
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects({

@@ -29,6 +29,7 @@ class ProgramSelectorPlain extends React.Component<Props> {
         const { classes, ...passOnProps } = this.props;
         return (
             <ComposedProgramSelector
+                dataTest="relationship-register-tei-program-selector"
                 styles={ProgramSelectorPlain.baseComponentStyles}
                 programLabelClass={classes.programLabel}
                 label={i18n.t('Program')}
