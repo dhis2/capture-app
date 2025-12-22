@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-11T07:56:27.475Z\n"
-"PO-Revision-Date: 2025-12-11T07:56:27.475Z\n"
+"POT-Creation-Date: 2025-12-18T10:41:12.829Z\n"
+"PO-Revision-Date: 2025-12-18T10:41:12.831Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -536,6 +536,12 @@ msgstr "Clear"
 
 msgid "No results"
 msgstr "No results"
+
+msgid "Must match the start of the value"
+msgstr "Must match the start of the value"
+
+msgid "Must match the end of the value"
+msgstr "Must match the end of the value"
 
 msgid "Description"
 msgstr "Description"

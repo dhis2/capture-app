@@ -349,6 +349,7 @@ export class EnrollmentFactory {
             o.disabled = searchGroupElement.disabled;
             o.type = teiAttribute.valueType;
             o.optionSet = searchGroupElement.optionSet;
+            o.searchOperator = searchGroupElement.searchOperator;
         });
         return element;
     }

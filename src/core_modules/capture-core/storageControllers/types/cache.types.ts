@@ -1,4 +1,4 @@
-import type { Access, DataElementUnique } from '../../metaData';
+import type { Access, DataElementUnique, dataElementTypes } from '../../metaData';
 
 type Translation = {
     property: string,
@@ -21,8 +21,10 @@ export type CachedTrackedEntityAttribute = {
     displayShortName: string,
     displayFormName: string,
     description: string,
+    preferredSearchOperator?: string,
+    blockedSearchOperators?: Array<string>,
     translations: Array<CachedAttributeTranslation>,
-    valueType: string,
+    valueType: keyof typeof dataElementTypes,
     optionSetValue: boolean,
     inherit: boolean,
     optionSet: { id: string },
