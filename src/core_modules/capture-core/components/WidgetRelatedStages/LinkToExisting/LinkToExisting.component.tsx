@@ -1,24 +1,17 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
+import { spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+// @ts-expect-error - SimpleSingleSelectField exists but types may not be available
+import { SimpleSingleSelectField } from '@dhis2-ui/select';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
-const styles: Readonly<any> = {
-    searchRow: {
+const styles: Readonly<any> = ({ typography }: any) => ({
+    selectField: {
+        maxWidth: typography.pxToRem(300),
         padding: spacers.dp16,
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacers.dp16,
     },
-    label: {
-        width: '150px',
-        fontSize: '14px',
-    },
-    singleSelectField: {
-        flexGrow: 1,
-    },
-};
+});
 
 type Props = LinkToExistingProps & WithStyles<typeof styles>;
 
@@ -31,41 +24,47 @@ export const LinkToExistingPlain = ({
     saveAttempted,
     classes,
 }: Props) => {
-    const onChange = (value: string) => {
+    errorMessages;
+    saveAttempted;
+
+    const onChange = (value: string | null) => {
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
-            linkedEventId: value,
+            linkedEventId: value ?? '',
         });
     };
 
+    const handleClear = () => {
+        setRelatedStagesDataValues({
+            ...relatedStagesDataValues,
+            linkedEventId: '',
+        });
+    };
+
+    const options = linkableEvents.map(event => ({
+        value: event.id,
+        label: event.label,
+    }));
+
+    const label = i18n.t('Choose a {{linkableStageLabel}} event', {
+        linkableStageLabel,
+    });
+
+
     return (
-        <div className={classes.searchRow}>
-            <p className={classes.label}>
-                {i18n.t('Choose a {{linkableStageLabel}} event', {
-                    linkableStageLabel,
-                })}
-            </p>
-            <SingleSelectField
+        <div className={classes.selectField}>
+
+            <SimpleSingleSelectField
+                name="related-stages-existing-response-list"
                 selected={relatedStagesDataValues.linkedEventId}
-                onChange={({ selected }) => onChange(selected)}
-                placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
-                    linkableStageLabel,
-                })}
-                className={classes.singleSelectField}
-                error={saveAttempted && !!errorMessages.linkedEventId}
-                validationText={saveAttempted ? errorMessages.linkedEventId : undefined}
+                onChange={onChange}
+                onClear={handleClear}
+                placeholder={i18n.t('Select an event')}
+                label={label}
+                options={options}
+                clearable
                 dataTest="related-stages-existing-response-list"
-            >
-                {linkableEvents
-                    .map(event => (
-                        <SingleSelectOption
-                            key={event.id}
-                            value={event.id}
-                            label={event.label}
-                        />
-                    ))
-                }
-            </SingleSelectField>
+            />
         </div>
     );
 };

@@ -25,7 +25,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
-    VirtualizedSelectField,
+    NewSingleSelectField,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
@@ -289,7 +289,7 @@ const getCategoryOptionsSettingsFn = () => {
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                    withFilterProps(defaultFilterProps)(NewSingleSelectField),
                                 ),
                             ),
                         ),

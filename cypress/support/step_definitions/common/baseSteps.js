@@ -13,7 +13,7 @@ Given('you are in the main page with no selections made', () => {
 });
 
 And('you see the dropdown menu for selecting tracked entity type', () => {
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .should('exist');
     cy.contains('You can also choose a program from the top bar')
         .should('exist');
@@ -78,7 +78,7 @@ When('you have no program selection', () => {
 
 When('you click the next page button', () => {
     cy.get('[data-test="search-pagination-next-page"]')
-        .click();
+        .click({ force: true });
 });
 
 Then('you can see the second page of the results', () => {

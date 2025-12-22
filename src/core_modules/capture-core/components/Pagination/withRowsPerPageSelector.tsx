@@ -1,12 +1,13 @@
 import * as React from 'react';
 import './rowsPerPage.css';
 
-import { OptionsSelectVirtualized } from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import { withTranslations } from '../FormFields/Options/SelectVirtualized/withTranslations';
-import type { VirtualizedOptionConfig } from
-    '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { NewSingleSelectField } from '../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
 
-const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized);
+export type SelectOption = {
+    label: string;
+    value: any;
+    icon?: React.ReactNode | null;
+};
 
 type Props = {
     rowsPerPage: number;
@@ -16,7 +17,7 @@ type Props = {
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
     class RowsPerPageSelector extends React.Component<Props> {
-        static getOptions(): Array<VirtualizedOptionConfig> {
+        static getOptions(): Array<SelectOption> {
             const options =
                 [10, 15, 25, 50, 100]
                     .map(optionCount => ({
@@ -26,15 +27,17 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
             return options;
         }
 
-        options: Array<VirtualizedOptionConfig>;
+        options: Array<SelectOption>;
 
         constructor(props: Props) {
             super(props);
             this.options = RowsPerPageSelector.getOptions();
         }
 
-        handleRowsSelect = (rowsPerPage: number) => {
-            this.props.onChangeRowsPerPage(rowsPerPage);
+        handleRowsSelect = (rowsPerPage: string | null) => {
+            if (rowsPerPage != null) {
+                this.props.onChangeRowsPerPage(Number(rowsPerPage));
+            }
         }
 
         renderSelectorElement = () => {
@@ -42,14 +45,13 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <div id="rows-per-page-selector" data-test="rows-per-page-selector">
-                    <OptionsSelectWithTranslations
-                        onSelect={this.handleRowsSelect}
+                    <NewSingleSelectField
+                        onChange={this.handleRowsSelect}
                         options={this.options}
-                        value={rowsPerPage}
-                        nullable={false}
+                        value={rowsPerPage != null ? String(rowsPerPage) : null}
+                        clearable={false}
                         disabled={disabled}
-                        withoutUnderline
-                        searchable={false}
+                        filterable={false}
                     />
                 </div>
             );
