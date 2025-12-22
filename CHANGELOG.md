@@ -1,3 +1,10 @@
+## [105.2.4](https://github.com/dhis2/capture-app/compare/v105.2.3...v105.2.4) (2025-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20665] show correctly filtered option set ([#4420](https://github.com/dhis2/capture-app/issues/4420)) ([f6f6f45](https://github.com/dhis2/capture-app/commit/f6f6f4578218c63d8a35b95d38b5f5aad3a16d06))
+
 ## [105.2.3](https://github.com/dhis2/capture-app/compare/v105.2.2...v105.2.3) (2025-12-15)
 
 
