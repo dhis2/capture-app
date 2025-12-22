@@ -9,7 +9,6 @@ import {
     withInternalChangeHandler,
     withFilterProps,
     SingleOrgUnitSelectField,
-    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -37,11 +36,9 @@ export const OrgUnitFieldForForm = withGotoInterface()(
                             })(
                                 withFilterProps(getFilteredProps)(
                                     withDisplayMessages()(
-                                        withSearchHelpMessage()(
-                                            withInternalChangeHandler()(
-                                                withFormFieldOrgUnitsHandler()(
-                                                    SingleOrgUnitSelectField,
-                                                ),
+                                        withInternalChangeHandler()(
+                                            withFormFieldOrgUnitsHandler()(
+                                                SingleOrgUnitSelectField,
                                             ),
                                         ),
                                     ),

@@ -10,7 +10,6 @@ import {
     withDisplayMessages,
     withFilterProps,
     withInternalChangeHandler,
-    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -37,10 +36,8 @@ export const AgeFieldForForm = withGotoInterface()(
                                         `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.ageLabel}`,
                                 })(
                                     withDisplayMessages()(
-                                        withSearchHelpMessage()(
-                                            withFilterProps(getFilteredProps)(
-                                                withInternalChangeHandler()(AgeField),
-                                            ),
+                                        withFilterProps(getFilteredProps)(
+                                            withInternalChangeHandler()(AgeField),
                                         ),
                                     ),
                                 ),

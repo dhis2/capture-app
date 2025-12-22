@@ -2,6 +2,7 @@ import { dataElementTypes } from '../../../../../metaData';
 
 // The forcedSearchOperators take precedence over the preferredSearchOperator
 export const forcedSearchOperators: Array<keyof typeof dataElementTypes> = [
+    dataElementTypes.MULTI_TEXT,
     dataElementTypes.NUMBER,
     dataElementTypes.NUMBER_RANGE,
     dataElementTypes.INTEGER,
@@ -20,6 +21,7 @@ export const forcedSearchOperators: Array<keyof typeof dataElementTypes> = [
     dataElementTypes.TIME_RANGE,
     dataElementTypes.BOOLEAN,
     dataElementTypes.TRUE_ONLY,
+    dataElementTypes.ORGANISATION_UNIT,
     dataElementTypes.AGE,
-    dataElementTypes.MULTI_TEXT,
+    dataElementTypes.USERNAME,
 ];
