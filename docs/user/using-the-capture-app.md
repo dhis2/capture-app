@@ -646,7 +646,7 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-find-button.png)
 
-    These steps will take you to the search page. There, based on the configuration of your organisation, will see the different attributes you can search with. An example of how this looks is the following. 
+    These steps will take you to the search page. There, based on the configuration of your organisation, will see the different attributes you can search with. An example of how this looks is the following.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-0.png)
 
