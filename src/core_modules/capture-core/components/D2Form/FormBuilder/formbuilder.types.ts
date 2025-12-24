@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { ValidatorContainer } from '../../../utils/validation';
 
 export type ErrorData = {
     id?: string | null;
@@ -14,3 +15,33 @@ export type PostProcessErrorMessage = (params: {
     fieldId: string;
     fieldLabel: string;
 }) => string | Array<string> | Array<{[key: string]: string}> | ReactNode;
+
+export type FieldConfig = {
+    id: string;
+    component: React.ComponentType<any>;
+    plugin?: boolean;
+    props: any;
+    validators?: Array<ValidatorContainer>;
+    commitEvent?: string | null;
+    onIsEqual?: ((newValue: any, oldValue: any) => boolean) | null;
+};
+
+export type FieldCommitOptions = {
+    readonly touched?: boolean;
+    readonly valid?: boolean;
+    readonly error?: string | Array<string> | Array<{[key: string]: string}>;
+    readonly errorCode?: string;
+};
+
+export type FieldCommitOptionsExtended = {
+    readonly plugin?: boolean | null;
+} & FieldCommitOptions;
+
+export type FieldUI = {
+    touched?: boolean | null;
+    valid?: boolean | null;
+    errorMessage?: string | null | Array<string> | Array<{[key: string]: string}>;
+    errorType?: string | null;
+    errorData?: ErrorData;
+    validatingMessage?: string | null;
+};

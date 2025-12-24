@@ -216,6 +216,7 @@ import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    handleRequestSaveNewEnrollmentEpic,
     addNoteForNewEnrollmentEventEpic,
 } from 'capture-core/components/WidgetEnrollmentEventNew';
 import {
@@ -365,6 +366,7 @@ export const epics = (combineEpics as any)(
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    handleRequestSaveNewEnrollmentEpic,
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
     updateEventSucceededEpic,

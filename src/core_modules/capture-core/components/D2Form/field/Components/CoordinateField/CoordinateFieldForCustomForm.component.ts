@@ -2,7 +2,6 @@ import {
     CoordinateField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -19,16 +18,14 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const CoordinateFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer(getContainerClass)(
-                                    withInternalChangeHandler()(
-                                        CoordinateField,
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer(getContainerClass)(
+                                withInternalChangeHandler()(
+                                    CoordinateField,
                                 ),
                             ),
                         ),

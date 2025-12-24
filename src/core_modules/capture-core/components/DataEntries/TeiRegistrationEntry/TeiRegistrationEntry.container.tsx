@@ -4,6 +4,7 @@ import type { ComponentType } from 'react';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Enrollment, scopeTypes } from '../../../metaData';
 import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
+import { cleanUpDataEntry } from '../../DataEntry';
 import type { OwnProps } from './TeiRegistrationEntry.types';
 import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component';
 import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
@@ -44,6 +45,9 @@ const useInitialiseTeiRegistration = ({
                     },
                 ));
         }
+        return () => {
+            dispatch(cleanUpDataEntry(dataEntryId));
+        };
     }, [
         scopeType,
         dataEntryId,

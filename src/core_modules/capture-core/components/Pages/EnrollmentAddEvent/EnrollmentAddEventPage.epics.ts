@@ -105,6 +105,7 @@ export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
+            addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR,
         ),
         map((action: any) => {
             const { serverData: { events, enrollments } } = action.meta;
@@ -118,4 +119,3 @@ export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
             ]);
         }),
     );
-

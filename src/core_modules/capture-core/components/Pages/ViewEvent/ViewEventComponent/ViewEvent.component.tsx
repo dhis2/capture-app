@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
@@ -69,9 +69,9 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     const dispatch = useDispatch();
     const { orgUnitId } = useLocationQuery();
-    const onBackToAllEvents = () => {
+    const onBackToAllEvents = useCallback(() => {
         dispatch(startGoBackToMainPage(orgUnitId));
-    };
+    }, [dispatch, orgUnitId]);
 
     return (
         <div className={classes.container}>

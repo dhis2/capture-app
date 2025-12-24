@@ -23,10 +23,6 @@ export const RegisterTei = ({
         trackedEntityTypeId,
     } as any);
 
-    if (isLoadingAttributes) {
-        return null;
-    }
-
     return React.createElement(RegisterTeiComponent as any, {
         dataEntryId,
         onLink,
@@ -39,5 +35,6 @@ export const RegisterTei = ({
         error,
         trackedEntityTypeId,
         inheritedAttributes,
+        isLoadingAttributes,
     });
 };
