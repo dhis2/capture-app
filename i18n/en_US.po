@@ -1,6 +1,5 @@
 # 
 # Translators:
-# Siddharth Agarwal, 2025
 # Rohit Wadhwani, 2025
 # 
 msgid ""
@@ -9,18 +8,18 @@ msgstr ""
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Rohit Wadhwani, 2025\n"
-"Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
+"Language-Team: English (United States) (https://app.transifex.com/hisp-uio/teams/100509/en_US/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hi_IN\n"
+"Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "एक या अधिक तारीखें चुनें..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "एक तारीख चुनें..."
 
 msgid "Today"
 msgstr "आज"
@@ -41,13 +40,13 @@ msgid "Organisation unit"
 msgstr ""
 
 msgid "Date of enrollment"
-msgstr "एनरोलमेंट की तारीख"
+msgstr ""
 
 msgid "Last updated"
 msgstr "अंतिम अपडेट"
 
 msgid "Enrolled"
-msgstr "एनरोल्ड"
+msgstr ""
 
 msgid "Previously enrolled"
 msgstr ""
@@ -59,10 +58,10 @@ msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "एक वैल्यू आवश्यक है"
 
 msgid "Please provide a valid number"
-msgstr "कृपया एक मान्य संख्या दर्ज करें"
+msgstr ""
 
 msgid "Please provide a valid integer"
 msgstr ""
@@ -80,13 +79,13 @@ msgid "Please provide a valid date"
 msgstr "कृपया एक मान्य तारीख दर्ज करें"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "भविष्य की तारीख अनुमति नहीं है"
 
 msgid "Please provide a valid date and time"
-msgstr "कृपया एक मान्य तारीख और समय दर्ज करें"
+msgstr ""
 
 msgid "Please provide a valid time"
-msgstr "कृपया एक मान्य समय दर्ज करें"
+msgstr ""
 
 msgid "Please provide a valid percentage"
 msgstr ""
@@ -98,7 +97,7 @@ msgid "Please provide a valid email address"
 msgstr ""
 
 msgid "Please provide a valid age"
-msgstr "कृपया एक मान्य आयु दर्ज करें"
+msgstr ""
 
 msgid "Please provide a valid phone number"
 msgstr ""
@@ -110,13 +109,13 @@ msgid "Please provide valid coordinates"
 msgstr ""
 
 msgid "This value already exists"
-msgstr "यह मान पहले से मौजूद है"
+msgstr ""
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"से\" \"तक\" से बड़ा नहीं हो सकता"
+msgstr ""
 
 msgid "Checking..."
-msgstr "चेकिंग"
+msgstr ""
 
 msgid "Area"
 msgstr ""
@@ -137,7 +136,7 @@ msgid "in"
 msgstr "में"
 
 msgid "Cancel"
-msgstr "रद्द करें"
+msgstr "कैंसल"
 
 msgid "Metadata error. see log for details"
 msgstr ""
@@ -146,7 +145,7 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
-msgstr ""
+msgstr "यूज़र खोजें"
 
 msgid "Complete event"
 msgstr "इवेंट पूरा करें"
@@ -175,7 +174,7 @@ msgid ""
 msgstr ""
 
 msgid "This event"
-msgstr ""
+msgstr "यह इवेंट"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -195,13 +194,13 @@ msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "सेव करें और एक और जोड़ें"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "सेव करें और बाहर निकलें"
 
 msgid "Finish"
-msgstr ""
+msgstr "समाप्त करें"
 
 msgid "No write access"
 msgstr ""
@@ -216,7 +215,7 @@ msgid "Switch to row view"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "इवेंट जोड़े गए"
 
 msgid "No events added"
 msgstr ""
@@ -231,7 +230,7 @@ msgid "Go back to event without saving relationship"
 msgstr ""
 
 msgid "Unsaved changes"
-msgstr "नहीं सहेजे गए बदलाव"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -251,7 +250,7 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "सहेजें"
+msgstr "सेव"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -297,7 +296,7 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr "एरर्स"
+msgstr ""
 
 msgid "Feedback"
 msgstr ""
@@ -309,7 +308,7 @@ msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr "पूरा हुआ"
+msgstr "पूरा"
 
 msgid "Warnings found"
 msgstr ""
@@ -318,10 +317,10 @@ msgid "Abort"
 msgstr ""
 
 msgid "Back to form"
-msgstr ""
+msgstr "फॉर्म पर वापस जाएँ"
 
 msgid "Save anyway"
-msgstr "सेव करें"
+msgstr "फिर भी सेव करें"
 
 msgid "Validation errors and warnings"
 msgstr ""
@@ -348,10 +347,10 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "बंद करें"
+msgstr "बंद करे"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "कृपया यूज़र चुनें"
 
 msgid "Me"
 msgstr "मैं"
@@ -363,7 +362,7 @@ msgid "None"
 msgstr "कोई नहीं"
 
 msgid "Select user"
-msgstr ""
+msgstr "यूज़र चुनें"
 
 msgid "to"
 msgstr "तक"
@@ -372,7 +371,7 @@ msgid "From"
 msgstr "से"
 
 msgid "To"
-msgstr ""
+msgstr "तक"
 
 msgid "This week"
 msgstr ""
@@ -402,7 +401,7 @@ msgid "Min"
 msgstr ""
 
 msgid "Contains text"
-msgstr ""
+msgstr "टेक्स्ट शामिल है"
 
 msgid "Yes"
 msgstr "हाँ"
@@ -411,25 +410,25 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "वर्ष"
+msgstr ""
 
 msgid "Months"
-msgstr "महीने"
+msgstr ""
 
 msgid "Days"
-msgstr "दिन"
+msgstr ""
 
 msgid "Uploading file"
-msgstr "फ़ाइल अपलोड हो रही है"
+msgstr ""
 
 msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr "हटाएं"
+msgstr "डिलीट"
 
 msgid "Select file"
-msgstr ""
+msgstr "फ़ाइल चुनें"
 
 msgid "No"
 msgstr "नहीं"
@@ -441,13 +440,13 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "सर्च करें / खोजें"
+msgstr "खोज"
 
 msgid "Clear"
 msgstr "साफ़ करें"
 
 msgid "No results"
-msgstr "कोई परिणाम नहीं"
+msgstr ""
 
 msgid "Description"
 msgstr ""
@@ -489,7 +488,7 @@ msgid "greater than or equal to"
 msgstr ""
 
 msgid "less than or equal to"
-msgstr "इससे कम या बराबर"
+msgstr ""
 
 msgid "More filters"
 msgstr ""
@@ -501,7 +500,7 @@ msgid "Could not get organisation unit"
 msgstr ""
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "प्रोग्राम मौजूद नहीं है"
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
@@ -528,7 +527,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr "स्वीकार करें"
+msgstr ""
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -540,7 +539,7 @@ msgid "Program"
 msgstr "प्रोग्राम"
 
 msgid "No programs available."
-msgstr "कोई प्रोग्राम उपलब्ध नहीं है।"
+msgstr ""
 
 msgid "Show all"
 msgstr "सभी दिखाएँ"
@@ -564,7 +563,7 @@ msgid "Offline"
 msgstr ""
 
 msgid "Syncing"
-msgstr "सिंक हो रहा है"
+msgstr ""
 
 msgid "Add comment"
 msgstr ""
@@ -579,13 +578,13 @@ msgid "Show all events"
 msgstr ""
 
 msgid "Edit event"
-msgstr "इवेंट में बदलाव करें"
+msgstr "इवेंट संपादित करें"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "इवेंट लोड नहीं हो सका। क्या आपको यकीन है कि यह मौजूद है?"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "इवेंट लोड नहीं हो सका"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
 msgstr ""
@@ -657,7 +656,7 @@ msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr "फ़ॉर्म लोड करते समय एक एरर हुई"
+msgstr ""
 
 msgid "Registered events"
 msgstr ""
@@ -723,7 +722,7 @@ msgid "Save as new"
 msgstr "नए के रूप में सेव करें"
 
 msgid "View dashboard"
-msgstr "डैशबोर्ड देखें"
+msgstr ""
 
 msgid "Create for"
 msgstr "के लिए बनाएँ"
@@ -757,10 +756,10 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
 msgid "New search"
-msgstr "नई खोज"
+msgstr ""
 
 msgid "Edit search"
-msgstr "खोज संपादित करें"
+msgstr ""
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -776,16 +775,16 @@ msgid ""
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "खोजें {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "के द्वारा खोजें{{name}}"
 
 msgid "Search by attributes"
-msgstr "गुणों द्वारा खोजें"
+msgstr ""
 
 msgid "Back"
-msgstr "वापस जाएँ"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -798,7 +797,7 @@ msgid ""
 msgstr ""
 
 msgid "No results found"
-msgstr "कोई परिणाम नहीं मिला"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -806,10 +805,10 @@ msgid ""
 msgstr ""
 
 msgid "Back to search"
-msgstr "खोज पर वापस जाएँ"
+msgstr ""
 
 msgid "An error has occurred"
-msgstr "एक एरर हुई है"
+msgstr ""
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -817,7 +816,7 @@ msgid ""
 msgstr ""
 
 msgid "Too many results"
-msgstr ""
+msgstr "बहुत अधिक परिणाम"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
@@ -845,10 +844,10 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr "इवेंट विवरण"
+msgstr ""
 
 msgid "Event completed"
-msgstr "इवेंट कंप्लीटेड"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -868,10 +867,10 @@ msgid "Feedbacks"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr "संभावित डुप्लिकेट मिले"
+msgstr ""
 
 msgid "An error occurred loading possible duplicates"
-msgstr "संभावित डुप्लिकेट लोड करते समय एक एरर हुई"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -880,10 +879,10 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "संबंध जोड़ें"
+msgstr ""
 
 msgid "Results found"
-msgstr "परिणाम मिले"
+msgstr ""
 
 msgid "Open"
 msgstr ""
@@ -895,7 +894,7 @@ msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "खोजें {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -913,43 +912,43 @@ msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
-msgstr "प्रोग्राम नहीं मिला"
+msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr "प्रोग्राम एक ट्रैकर प्रोग्राम नहीं है"
+msgstr ""
 
 msgid "Profile"
 msgstr ""
 
 msgid "Error saving event"
-msgstr "इवेंट सेव नहीं किया जा सका"
+msgstr ""
 
 msgid "Could not save event"
-msgstr "इवेंट डिलीट नहीं किया जा सका"
+msgstr ""
 
 msgid "Could not delete event"
-msgstr "इवेंट डिलीट नहीं किया जा सका"
+msgstr ""
 
 msgid "Could not save working list"
-msgstr "वर्किंग लिस्ट सेव नहीं की जा सकी"
+msgstr ""
 
 msgid "Could not add working list"
-msgstr "वर्किंग लिस्ट जोड़ नहीं सक"
+msgstr ""
 
 msgid "Could not delete working list"
-msgstr "वर्किंग लिस्ट डिलीट नहीं की जा सकी"
+msgstr ""
 
 msgid "Organisation unit search failed."
 msgstr ""
 
 msgid "Error saving tracked entity instance"
-msgstr "ट्रैक्ड एंटिटी इंस्टेंस सेव करते समय एरर हुई"
+msgstr ""
 
 msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr "ट्रैक्ड एंटिटी इंस्टेंस"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr ""
@@ -964,28 +963,28 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "तारीख"
+msgstr ""
 
 msgid "Time"
-msgstr "समय"
+msgstr ""
 
 msgid "From date"
-msgstr "तारीख से"
+msgstr ""
 
 msgid "From time"
-msgstr "समय से"
+msgstr ""
 
 msgid "To date"
-msgstr "तारीख तक"
+msgstr ""
 
 msgid "To time"
-msgstr "समय तक"
+msgstr ""
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "फ़ील्ड वैलिडेशन के दौरान एरर आया"
 
 msgid "error"
-msgstr ""
+msgstr "एरर"
 
 msgid "Delete polygon"
 msgstr ""
