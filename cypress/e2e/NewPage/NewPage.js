@@ -19,7 +19,7 @@ And('there should be informative message explaining you need to select an organi
 And('you select tracked entity type person', () => {
     cy.get('[data-test="dhis2-uicore-select"]')
         .click();
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselect-option"]')
         .contains('Person')
         .click();
 });
@@ -602,11 +602,11 @@ And('you fill in multiple Allergies options', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('Allergies').should('exist');
     });
-    cy.get('[data-test="dhis2-uicore-select-input"]').click();
+    cy.get('[data-test="dhis2-uicore-multiselect"]').click();
     cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Penicillin and related antibiotics').click();
     cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Anticonvulsants').click();
     cy.get('[data-test="dhis2-uicore-multiselectoption"]').contains('Other').click();
-    cy.get('[data-test="dhis2-uicore-select-input"]').click({ force: true });
+    cy.get('.backdrop').click({ force: true });
 });
 
 Then('you can see the multiple selections in the form', () => {
@@ -720,7 +720,7 @@ When('the form is prefilled with the selected category combination', () => {
 
 When('you deselect the category from the form', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
-        .find('span.Select-clear-zone')
+        .find('[data-test="dhis2-simplesingleselect-clear"]')
         .click();
 });
 

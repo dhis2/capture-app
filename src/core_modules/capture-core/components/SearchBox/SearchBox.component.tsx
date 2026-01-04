@@ -101,7 +101,6 @@ const Index = ({
                                 {selectedSearchScopeType !== searchScopes.PROGRAM && (
                                     <TrackedEntityTypeSelector
                                         onSelect={handleSearchScopeSelection}
-                                        headerText={i18n.t('Search for')}
                                         footerText={i18n.t(
                                             'You can also select a program from the top bar to search within that program.',
                                         )}
