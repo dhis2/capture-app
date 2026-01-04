@@ -1,13 +1,6 @@
 import * as React from 'react';
+import { SimpleSingleSelect } from '@dhis2/ui';
 import './rowsPerPage.css';
-
-import { NewSingleSelectField } from '../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
-
-export type SelectOption = {
-    label: string;
-    value: any;
-    icon?: React.ReactNode | null;
-};
 
 type Props = {
     rowsPerPage: number;
@@ -15,45 +8,42 @@ type Props = {
     disabled?: boolean;
 };
 
+type SimpleSelectOption = {
+    label: string;
+    value: string;
+};
+
+const OPTIONS: SimpleSelectOption[] = [10, 15, 25, 50, 100].map(count => ({
+    label: count.toString(),
+    value: count.toString(),
+}));
+
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
     class RowsPerPageSelector extends React.Component<Props> {
-        static getOptions(): Array<SelectOption> {
-            const options =
-                [10, 15, 25, 50, 100]
-                    .map(optionCount => ({
-                        label: optionCount.toString(),
-                        value: optionCount,
-                    }));
-            return options;
-        }
-
-        options: Array<SelectOption>;
-
-        constructor(props: Props) {
-            super(props);
-            this.options = RowsPerPageSelector.getOptions();
-        }
-
-        handleRowsSelect = (rowsPerPage: string | null) => {
-            if (rowsPerPage != null) {
-                this.props.onChangeRowsPerPage(Number(rowsPerPage));
+        handleRowsSelect = (nextValue: any) => {
+            const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
+            if (resolvedValue) {
+                this.props.onChangeRowsPerPage(Number(resolvedValue));
             }
         }
 
         renderSelectorElement = () => {
             const { rowsPerPage, disabled } = this.props;
+            const selectedOption = OPTIONS.find(option => option.value === rowsPerPage.toString());
 
             return (
-                <div id="rows-per-page-selector" data-test="rows-per-page-selector">
-                    <NewSingleSelectField
+                <>
+                    <SimpleSingleSelect
+                        name="rows-per-page-selector"
                         onChange={this.handleRowsSelect}
-                        options={this.options}
-                        value={rowsPerPage != null ? String(rowsPerPage) : null}
+                        options={OPTIONS}
+                        selected={selectedOption}
                         clearable={false}
+                        dense
                         disabled={disabled}
-                        filterable={false}
+                        dataTest="rows-per-page-selector"
                     />
-                </div>
+                </>
             );
         }
 
