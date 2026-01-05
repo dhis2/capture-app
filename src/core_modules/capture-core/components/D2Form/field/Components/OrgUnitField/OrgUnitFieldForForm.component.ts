@@ -1,7 +1,6 @@
 import {
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withCalculateMessages,
     withDefaultFieldContainer,
     withLabel,
@@ -24,22 +23,20 @@ const getFilteredProps = (props: any) => {
 
 export const OrgUnitFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withDefaultFieldContainer()(
-                            withLabel({
-                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                onGetCustomFieldLabeClass: (props: any) =>
-                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
-                            })(
-                                withFilterProps(getFilteredProps)(
-                                    withDisplayMessages()(
-                                        withInternalChangeHandler()(
-                                            withFormFieldOrgUnitsHandler()(
-                                                SingleOrgUnitSelectField,
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withDefaultFieldContainer()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
+                                `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                        })(
+                            withFilterProps(getFilteredProps)(
+                                withDisplayMessages()(
+                                    withInternalChangeHandler()(
+                                        withFormFieldOrgUnitsHandler()(
+                                            SingleOrgUnitSelectField,
                                         ),
                                     ),
                                 ),

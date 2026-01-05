@@ -1,7 +1,6 @@
 import {
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -16,16 +15,14 @@ import { D2File } from '../../../../FormFields/File/D2File.component';
 
 export const FileResourceFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer()(
-                                    withInternalChangeHandler()(
-                                        D2File,
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer()(
+                                withInternalChangeHandler()(
+                                    D2File,
                                 ),
                             ),
                         ),

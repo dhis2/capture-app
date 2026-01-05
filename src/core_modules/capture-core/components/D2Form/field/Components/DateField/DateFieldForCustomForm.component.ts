@@ -2,7 +2,6 @@ import {
     DateField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -16,16 +15,14 @@ import {
 
 export const DateFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer()(
-                                    withInternalChangeHandler()(
-                                        DateField,
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer()(
+                                withInternalChangeHandler()(
+                                    DateField,
                                 ),
                             ),
                         ),
