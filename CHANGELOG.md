@@ -1,3 +1,10 @@
+## [105.2.5](https://github.com/dhis2/capture-app/compare/v105.2.4...v105.2.5) (2026-01-05)
+
+
+### Performance Improvements
+
+* [DHIS2-20475] improve responsiveness for large forms ([#4414](https://github.com/dhis2/capture-app/issues/4414)) ([3d5732c](https://github.com/dhis2/capture-app/commit/3d5732cf5ab234c72d028a94a995c1deb3d245f6))
+
 ## [105.2.4](https://github.com/dhis2/capture-app/compare/v105.2.3...v105.2.4) (2025-12-22)
 
 
