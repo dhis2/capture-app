@@ -1,3 +1,10 @@
+## [105.2.6](https://github.com/dhis2/capture-app/compare/v105.2.5...v105.2.6) (2026-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-20708] revert Option groups regression bug introduced by the Typescript migration ([#4428](https://github.com/dhis2/capture-app/issues/4428)) ([853dd3c](https://github.com/dhis2/capture-app/commit/853dd3cd9fa4e07b73cc92173ea444e142cc224a))
+
 ## [105.2.5](https://github.com/dhis2/capture-app/compare/v105.2.4...v105.2.5) (2026-01-05)
 
 
