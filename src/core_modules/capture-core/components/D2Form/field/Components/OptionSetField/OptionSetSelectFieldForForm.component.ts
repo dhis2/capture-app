@@ -37,7 +37,7 @@ export const OptionSetSelectFieldForForm = withGotoInterface()(
                                     `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
                             })(
                                 withDisplayMessages()(
-                                    withSearchHelpMessage(
+                                    withSearchHelpMessage()(
                                         withOptionsIconElement()(
                                             withRulesOptionVisibilityHandler()(
                                                 withFilterProps(getFilteredProps)(

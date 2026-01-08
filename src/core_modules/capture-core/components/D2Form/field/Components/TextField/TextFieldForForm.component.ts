@@ -36,7 +36,7 @@ export const TextFieldForForm = withGotoInterface()(
                             })(
                                 withFilterProps(getFilteredProps)(
                                     withDisplayMessages()(
-                                        withSearchHelpMessage(
+                                        withSearchHelpMessage()(
                                             withInternalChangeHandler()(TextField),
                                         ),
                                     ),
