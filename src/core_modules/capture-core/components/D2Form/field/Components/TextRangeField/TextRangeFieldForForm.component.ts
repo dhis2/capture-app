@@ -2,7 +2,6 @@ import {
     TextRangeField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -24,21 +23,19 @@ const getFilteredProps = (props: any) => {
 
 export const TextRangeFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.ageLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
-                                            withInternalChangeHandler()(TextRangeField),
-                                        ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.ageLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withFilterProps(getFilteredProps)(
+                                        withInternalChangeHandler()(TextRangeField),
                                     ),
                                 ),
                             ),

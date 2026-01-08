@@ -2,7 +2,6 @@ import {
     SelectionBoxes,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -24,22 +23,20 @@ const getFilteredProps = (props: any) => {
 
 export const OptionSetBoxesFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.optionSetBoxesLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
-                                            withRulesOptionVisibilityHandler()(
-                                                SelectionBoxes,
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.optionSetBoxesLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withFilterProps(getFilteredProps)(
+                                        withRulesOptionVisibilityHandler()(
+                                            SelectionBoxes,
                                         ),
                                     ),
                                 ),

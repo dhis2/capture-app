@@ -25,7 +25,6 @@ export { withConvertedOptionSet } from './HOC/withConvertedOptionSet';
 export { withDisplayMessages } from './HOC/messages/withDisplayMessages';
 export { withSearchHelpMessage } from './HOC/messages/withSearchHelpMessage';
 export { withDefaultFieldContainer } from './HOC/withDefaultFieldContainer';
-export { withDefaultShouldUpdateInterface } from './HOC/withDefaultShouldUpdateInterface';
 export { withFilterProps } from './HOC/withFilterProps';
 export { withGotoInterface } from './HOC/withGotoInterface';
 export { withHideCompatibility } from './HOC/withHideCompatibility';

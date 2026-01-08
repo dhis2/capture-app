@@ -2,7 +2,6 @@ import {
     TextField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -25,22 +24,20 @@ const getFilteredProps = (props: any) => {
 
 export const TextFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                })(
-                                    withFilterProps(getFilteredProps)(
-                                        withDisplayMessages()(
-                                            withSearchHelpMessage()(
-                                                withInternalChangeHandler()(TextField),
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                            })(
+                                withFilterProps(getFilteredProps)(
+                                    withDisplayMessages()(
+                                        withSearchHelpMessage(
+                                            withInternalChangeHandler()(TextField),
                                         ),
                                     ),
                                 ),
