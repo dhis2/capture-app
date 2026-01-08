@@ -295,9 +295,9 @@ const buildOptionSet = async (
         new Map(
             optionSetAPI.optionGroups.map(group => [
                 group.id,
-                new OptionGroup(function (this: OptionGroup) {
-                    this.id = group.id;
-                    this.optionIds = new Map(group.options.map((option: string) => [option, option]));
+                new OptionGroup((o) => {
+                    o.id = group.id;
+                    o.optionIds = new Map(group.options.map(option => [option, option]));
                 }),
             ]),
         );
