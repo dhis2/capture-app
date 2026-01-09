@@ -134,7 +134,6 @@ const NotesPlain = ({
                     dataTest="add-note-btn"
                     onClick={handleAddNote}
                     className={classes.addNoteContainer}
-                    primary
                     small
                 >
                     {i18n.t('Add note')}

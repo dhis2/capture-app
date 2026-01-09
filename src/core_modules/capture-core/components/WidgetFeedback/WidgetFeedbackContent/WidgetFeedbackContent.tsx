@@ -10,7 +10,7 @@ import type {
 
 const styles = {
     container: {
-        padding: `0px ${spacersNum.dp16}px`,
+        padding: `0px ${spacersNum.dp12}px`,
     },
     unorderedList: {
         paddingLeft: spacersNum.dp16,

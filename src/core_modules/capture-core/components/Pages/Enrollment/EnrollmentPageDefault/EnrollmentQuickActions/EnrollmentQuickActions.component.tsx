@@ -11,7 +11,7 @@ import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.typ
 
 const styles = {
     contentContainer: {
-        padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} ${spacers.dp12} ${spacers.dp12}`,
         display: 'flex',
         gap: spacers.dp8,
     },

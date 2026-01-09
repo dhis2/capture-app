@@ -39,6 +39,8 @@ const styles = (theme: any) => ({
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
+        marginLeft: theme.typography.pxToRem(12),
+        marginRight: 0,
         padding: theme.typography.pxToRem(8),
         borderRadius: theme.typography.pxToRem(5),
         border: `1px solid ${colors.grey400}`,
@@ -47,19 +49,17 @@ const styles = (theme: any) => ({
     },
     itemDataContainer: {
         display: 'flex',
+        justifyContent: 'space-between',
     },
-    smallerLetters: {
+    timestamp: {
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
-        paddingBottom: theme.typography.pxToRem(8),
-        position: 'absolute',
-        top: theme.typography.pxToRem(8),
-        right: theme.typography.pxToRem(8),
     },
-    enrolled: {
+    details: {
         display: 'flex',
-        justifyContent: 'flex-end',
-        color: colors.grey700,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        gap: '4px',
     },
     itemValuesContainer: {
         display: 'flex',
@@ -76,7 +76,6 @@ const styles = (theme: any) => ({
     },
     checkIcon: {
         position: 'relative',
-        top: '-2px',
     },
 }) as const;
 
@@ -256,23 +255,19 @@ const CardListItemIndex = ({
                         }
                         {renderEnrollmentDetails()}
                     </div>
-                    <div>
-                        <div className={classes.enrolled}>
-                            {renderTag()}
-                        </div>
-                    </div>
                 </div>
-            </div>
-            {item.tei?.updatedAt && (
-                <div className={classes.smallerLetters}>
-                    {i18n.t('Last updated')}{' '}
-                    {item.tei && (
-                        <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
-                            {moment(fromServerDate(item.tei.updatedAt)).fromNow()}
-                        </Tooltip>
+                <div className={classes.details}>
+                    {renderTag()}
+                    {item.tei && item.tei.updatedAt && (
+                        <div className={classes.timestamp}>
+                            {i18n.t('Last updated')}{' '}
+                            <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
+                                {moment(fromServerDate(item.tei.updatedAt)).fromNow()}
+                            </Tooltip>
+                        </div>
                     )}
                 </div>
-            )}
+            </div>
             {renderCustomCardActions && (
                 <div className={classes.buttonMargin}>
                     {

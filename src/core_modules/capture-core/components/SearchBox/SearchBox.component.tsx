@@ -21,6 +21,8 @@ const getStyles: Readonly<any> = {
     },
     title: {
         fontWeight: 500,
+        fontSize: 15,
+        color: colors.grey800,
         marginBottom: spacers.dp16,
     },
     container: {
