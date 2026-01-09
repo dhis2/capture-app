@@ -35,8 +35,8 @@ const slashStyles = {
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const Breadcrumblink = withStyles(breadcrumblinkStyles)(
-    ({ classes, onClick, children }: { classes: any; onClick: () => void; children: React.ReactNode },) =>
-        <button className={classes.link} onClick={onClick}>{children}</button>
+    ({ classes, onClick, children }: { classes: any; onClick: () => void; children: React.ReactNode }) =>
+        <button className={classes.link} onClick={onClick}>{children}</button>,
 );
 
 const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyles>) =>
