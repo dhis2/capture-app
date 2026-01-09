@@ -28,7 +28,9 @@ type SearchResultsHeaderProps = Props & WithStyles<typeof styles>;
 const SearchResultsHeaderPlain =
   ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderProps) =>
       (<div data-test="search-results-top" className={classes.topSection} >
-          <p className={classes.resultsTitle}>{i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}</p>
+          <p className={classes.resultsTitle}>
+              {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
+          </p>
           {currentSearchTerms && <div>
               {
                   currentSearchTerms.map(({ name, value, id, type }, index, rest) => (

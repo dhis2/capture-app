@@ -18,7 +18,7 @@ const styles = () => ({
     },
     prefix: {
         marginInlineEnd: spacers.dp4,
-    }
+    },
 });
 
 type WidgetStageHeaderPlainProps = Props & WithStyles<typeof styles>;
