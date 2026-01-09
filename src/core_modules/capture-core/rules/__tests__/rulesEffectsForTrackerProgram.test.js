@@ -66,6 +66,13 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
+                    id: 'gcp4CRVqa2B',
+                    displayContent: "d2:minutesBetween('2026-01-26', '2026-01-27') = ",
+                    data: "d2:minutesBetween('2026-01-26', '2026-01-27')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
                     id: 'Foc3PhzoAVr',
                     displayContent: 'd2:count(#{undefinedVariable}) = ',
                     data: 'd2:count(#{unknow})',
@@ -527,6 +534,14 @@ test('expressions with d2Functions in tracker program', () => {
                 id: 'FkeGdlkYAVr',
                 message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) false",
             },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'gcp4CRVqa2B',
+                message: "d2:minutesBetween('2026-01-26', '2026-01-27') =  1440"
+            }
         },
         {
             type: 'DISPLAYTEXT',
