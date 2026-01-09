@@ -48,6 +48,7 @@ const getStyles = (theme: any) => ({
             fontWeight: 500,
         },
     },
+    chipContainer: {},
 }) as const;
 
 type OwnProps = {

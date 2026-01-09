@@ -9,7 +9,7 @@ import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 
 const styles = {
-
+    header: {},
 };
 
 const RelationshipsWidgetPlain = ({
