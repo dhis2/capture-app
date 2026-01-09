@@ -2494,10 +2494,10 @@
     workbox-routing "^7.1.0"
     workbox-strategies "^7.1.0"
 
-"@dhis2/rule-engine@^3.4.1":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.4.1.tgz#5e680c31bc883ffa3dea4d9c5d7daa64ae25b2c8"
-  integrity sha512-eLWw0JpnjX3QfVoB6dV2ulE30FKz6QxXln5dWCeFJI8tuCtFXFKBCEhSsw9Y32PXurPJ4FjxPOyu5CjKQmtQwg==
+"@dhis2/rule-engine@^3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.4.2.tgz#55fe87fdccd265a224a0f12c9bf3026fac43f9f5"
+  integrity sha512-Ie/1ZuuTe8mtyjwaZ3QqfVmy3OOi9zX5QxE42DIk1FIDTES1N5biFt/2K1FdwQ4v/hegACPgEPIPKkn1/wfNWA==
   dependencies:
     "@js-joda/core" "3.2.0"
 
