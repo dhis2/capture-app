@@ -16,6 +16,7 @@ import type {
 import { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES } from '../../../../utils/warnings';
 import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
+import { getSearchOperator } from './searchOperator';
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -121,6 +122,8 @@ export class SearchGroupFactory {
                 value => value,
             );
         }
+
+        element.searchOperator = getSearchOperator(searchAttribute.trackedEntityAttribute);
 
         return element;
     }
