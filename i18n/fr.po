@@ -11,15 +11,15 @@
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Esther Tokouli, 2025
-# Cyrille Kabrane, 2025
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
+# Cyrille Kabrane, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-12-04T10:33:38.238Z\n"
+"POT-Creation-Date: 2025-12-11T07:56:27.475Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025\n"
+"Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -799,9 +799,6 @@ msgstr "Les stades de programme n'ont pas pu être chargés"
 msgid "Stage"
 msgstr "Stade"
 
-msgid "Registered events"
-msgstr "Événements enregistrés"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 "L'option de catégorie n'est pas valide pour l'unité d'organisation "
@@ -843,6 +840,9 @@ msgstr "Ou voir tous les événements auxquels vous avez accès dans {{program}}
 
 msgid "Please select an organisation unit."
 msgstr "Veuillez sélectionner une unité d'organisation."
+
+msgid "Registered events"
+msgstr "Événements enregistrés"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -922,7 +922,7 @@ msgid "New search"
 msgstr "Nouvelle recherche"
 
 msgid "Edit search"
-msgstr "Modifier la recherche"
+msgstr "Éditer la recherche"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr "Relier à un {{trackedEntityType}} existant"
