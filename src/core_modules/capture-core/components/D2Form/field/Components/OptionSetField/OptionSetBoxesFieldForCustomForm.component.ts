@@ -2,7 +2,6 @@ import {
     SelectionBoxes,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -15,15 +14,13 @@ import {
 
 export const OptionSetBoxesFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDisplayMessages()(
-                                withRulesOptionVisibilityHandler()(
-                                    SelectionBoxes,
-                                ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDisplayMessages()(
+                            withRulesOptionVisibilityHandler()(
+                                SelectionBoxes,
                             ),
                         ),
                     ),

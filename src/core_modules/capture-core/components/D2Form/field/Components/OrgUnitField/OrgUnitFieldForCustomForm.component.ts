@@ -2,7 +2,6 @@ import { OrgUnitTree } from '../../../../FormFields/OrgUnitTree/OrgUnitTree.comp
 import {
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withCalculateMessages,
     withDisplayMessages,
     withInternalChangeHandler,
@@ -15,15 +14,13 @@ import {
 
 export const OrgUnitFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withDisplayMessages()(
-                            withCustomElementContainer()(
-                                withInternalChangeHandler()(
-                                    OrgUnitTree,
-                                ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withDisplayMessages()(
+                        withCustomElementContainer()(
+                            withInternalChangeHandler()(
+                                OrgUnitTree,
                             ),
                         ),
                     ),

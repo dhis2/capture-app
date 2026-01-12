@@ -38,9 +38,13 @@ type Props = {
     rulesOptionsVisibility: {[key: typeof effectKeys[keyof typeof effectKeys]]: Array<any> },
 }
 
+type State = {
+    filteredOptions: any;
+}
+
 const getCreateRulesOptionsVisibilityHandlerHOC =
     (InnerComponent: React.ComponentType<any>) =>
-        (class CreateRulesOptionsVisibilityHandlerHOC extends React.Component<Props> {
+        (class CreateRulesOptionsVisibilityHandlerHOC extends React.Component<Props, State> {
             static getFilteredOptions = (props: Props) => {
                 const { options, rulesOptionsVisibility, optionGroups } = props;
 
@@ -51,18 +55,18 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
                 return options.filter(option => filters.every(f => f(option)));
             }
 
-            filteredOptions: any;
-
             constructor(props: Props) {
                 super(props);
-
-                this.filteredOptions = CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(props);
+                this.state = {
+                    filteredOptions: CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(this.props),
+                };
             }
-
 
             componentDidUpdate(prevProps: Props) {
                 if (this.props.rulesOptionsVisibility !== prevProps.rulesOptionsVisibility) {
-                    this.filteredOptions = CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(this.props);
+                    this.setState({
+                        filteredOptions: CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(this.props),
+                    });
                 }
             }
 
@@ -71,7 +75,7 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
 
                 return (
                     <InnerComponent
-                        options={this.filteredOptions}
+                        options={this.state.filteredOptions}
                         {...passOnProps}
                     />
                 );

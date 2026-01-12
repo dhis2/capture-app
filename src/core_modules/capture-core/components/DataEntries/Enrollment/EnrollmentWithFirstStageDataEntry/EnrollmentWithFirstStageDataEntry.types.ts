@@ -12,7 +12,7 @@ export type Props = {
     programId: string;
     relatedStageRef?: { current: RelatedStageRefPayload | null },
     relatedStageActionsOptions?: {
-        [key in keyof typeof relatedStageActions]: {
+        [key in keyof typeof relatedStageActions]?: {
             hidden?: boolean;
             disabled?: boolean;
             disabledMessage?: string;

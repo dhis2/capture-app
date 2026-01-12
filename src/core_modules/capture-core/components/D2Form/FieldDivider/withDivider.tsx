@@ -15,16 +15,10 @@ type Props = {
     formHorizontal: boolean;
 } & WithStyles<typeof getStyles>;
 
-type Field = {
-    props: {
-        hidden?: boolean;
-    };
-};
-
 export const withDivider = () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class DividerHOC extends React.Component<Props> {
-        renderDivider = (index: number, total: number, field: Field) => {
-            if ((field.props && field.props.hidden) || (index + 1) >= total) {
+        renderDivider = (index: number, total: number, hidden: boolean) => {
+            if (hidden || (index + 1) >= total) {
                 return null;
             }
 

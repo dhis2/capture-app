@@ -2494,13 +2494,12 @@
     workbox-routing "^7.1.0"
     workbox-strategies "^7.1.0"
 
-"@dhis2/rule-engine@^3.3.10":
-  version "3.3.10"
-  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.3.10.tgz#71bf2302fc4919469910cddb92f7d79ec8458e7f"
-  integrity sha512-o3thG4iVwt4VKR3goLnrcTpkz4maw67kqUctcb6t1wK9thYosbtcZg+GpEmFe/ajskJuLmckEMj96WoTBTCUhA==
+"@dhis2/rule-engine@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.4.1.tgz#5e680c31bc883ffa3dea4d9c5d7daa64ae25b2c8"
+  integrity sha512-eLWw0JpnjX3QfVoB6dV2ulE30FKz6QxXln5dWCeFJI8tuCtFXFKBCEhSsw9Y32PXurPJ4FjxPOyu5CjKQmtQwg==
   dependencies:
     "@js-joda/core" "3.2.0"
-    format-util "^1.0.5"
 
 "@dhis2/ui-constants@10.10.2":
   version "10.10.2"
@@ -8080,11 +8079,6 @@ form-data@~2.3.2:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
-
-format-util@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/format-util/-/format-util-1.0.5.tgz#1ffb450c8a03e7bccffe40643180918cc297d271"
-  integrity sha512-varLbTj0e0yVyRpqQhuWV+8hlePAgaoFRhNFj50BNjEIrw1/DphHSObtqwskVCPWNgzwPoQrZAbfa/SBiicNeg==
 
 fragment-cache@^0.2.1:
   version "0.2.1"

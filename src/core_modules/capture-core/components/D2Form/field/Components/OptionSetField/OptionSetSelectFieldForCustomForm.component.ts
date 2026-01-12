@@ -3,7 +3,6 @@ import {
     withSelectSingleTranslations,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -21,18 +20,16 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const OptionSetSelectFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDisplayMessages()(
-                                withSelectSingleTranslations()(
-                                    withCustomElementContainer(getContainerClass)(
-                                        withOptionsIconElement()(
-                                            withRulesOptionVisibilityHandler()(
-                                                NewSingleSelectField,
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDisplayMessages()(
+                            withSelectSingleTranslations()(
+                                withCustomElementContainer(getContainerClass)(
+                                    withOptionsIconElement()(
+                                        withRulesOptionVisibilityHandler()(
+                                            NewSingleSelectField,
                                         ),
                                     ),
                                 ),
