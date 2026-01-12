@@ -32,18 +32,16 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
             const selectedOption = OPTIONS.find(option => option.value === rowsPerPage.toString());
 
             return (
-                <>
-                    <SimpleSingleSelect
-                        name="rows-per-page-selector"
-                        onChange={this.handleRowsSelect}
-                        options={OPTIONS}
-                        selected={selectedOption}
-                        clearable={false}
-                        dense
-                        disabled={disabled}
-                        dataTest="rows-per-page-selector"
-                    />
-                </>
+                <SimpleSingleSelect
+                    name="rows-per-page-selector"
+                    onChange={this.handleRowsSelect}
+                    options={OPTIONS}
+                    selected={selectedOption}
+                    clearable={false}
+                    dense
+                    disabled={disabled}
+                    dataTest="rows-per-page-selector"
+                />
             );
         }
 

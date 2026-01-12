@@ -40,9 +40,9 @@ const NewSingleSelectFieldComponentPlain = ({
     const selectRef = useRef<HTMLDivElement | null>(null);
     const fieldName = id ?? 'single-select-field';
 
-    const selectedOption = value != null
-        ? options.find(option => option.value === value) ?? { value, label: String(value) }
-        : undefined;
+    const selectedOption = value == null
+        ? undefined
+        : options.find(option => option.value === value) ?? { value, label: String(value) };
 
     const handleChange = (nextValue: string | { value: string }) => {
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;

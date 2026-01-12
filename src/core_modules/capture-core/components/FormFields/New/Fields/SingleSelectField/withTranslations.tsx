@@ -11,7 +11,7 @@ type TranslationProps = {
 export const withSelectSingleTranslations = () =>
     <P extends Record<string, unknown>>(InnerComponent: React.ComponentType<P & TranslationProps>) =>
         class TranslationBuilder extends React.Component<P & TranslationProps> {
-            static defaultProps = {
+            static readonly defaultProps = {
                 translations: {
                     clearText: '',
                     noResults: '',

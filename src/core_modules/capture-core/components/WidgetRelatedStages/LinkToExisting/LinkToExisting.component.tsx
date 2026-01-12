@@ -24,9 +24,6 @@ export const LinkToExistingPlain = ({
     saveAttempted,
     classes,
 }: Props) => {
-    errorMessages;
-    saveAttempted;
-
     const onChange = (value: string | null) => {
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
@@ -50,7 +47,6 @@ export const LinkToExistingPlain = ({
         linkableStageLabel,
     });
 
-
     return (
         <div className={classes.selectField}>
 
@@ -63,6 +59,8 @@ export const LinkToExistingPlain = ({
                 label={label}
                 options={options}
                 clearable
+                error={saveAttempted && !!errorMessages.linkedEventId}
+                validationText={saveAttempted ? errorMessages.linkedEventId : undefined}
                 dataTest="related-stages-existing-response-list"
             />
         </div>
