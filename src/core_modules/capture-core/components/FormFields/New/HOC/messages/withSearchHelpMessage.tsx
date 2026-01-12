@@ -1,16 +1,18 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { colors } from '@dhis2/ui';
+import { colors, spacers } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { searchOperators } from '../../../../../metaDataMemoryStoreBuilders';
 
-const styles = (theme: any) => ({
+const styles = () => ({
     help: {
-        marginTop: 4,
+        marginTop: spacers.dp4,
+        marginRight: 0,
+        marginBottom: 0,
         marginLeft: 0,
-        paddingLeft: 0,
-        color: colors.grey600,
-        fontSize: theme.typography.pxToRem(14),
+        fontSize: 12,
+        lineHeight: '14px',
+        color: colors.grey700,
     },
 });
 
