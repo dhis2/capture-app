@@ -809,14 +809,14 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.27.1"
 
-"@babel/plugin-transform-react-display-name@^7.25.9", "@babel/plugin-transform-react-display-name@^7.28.0":
+"@babel/plugin-transform-react-display-name@^7.25.9":
   version "7.28.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.28.0.tgz#6f20a7295fea7df42eb42fed8f896813f5b934de"
   integrity sha512-D6Eujc2zMxKjfa4Zxl4GHMsmhKKZ9VpcqIchJLvwTxad9zWIYulwYItBovpDOoNLISpcZSXoDJ5gaGbQUDqViA==
   dependencies:
     "@babel/helper-plugin-utils" "^7.27.1"
 
-"@babel/plugin-transform-react-jsx-development@^7.25.9", "@babel/plugin-transform-react-jsx-development@^7.27.1":
+"@babel/plugin-transform-react-jsx-development@^7.25.9":
   version "7.27.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.27.1.tgz#47ff95940e20a3a70e68ad3d4fcb657b647f6c98"
   integrity sha512-ykDdF5yI4f1WrAolLqeF3hmYU12j9ntLQl/AOG1HAS21jxyg1Q0/J/tpREuYLfatGdGmXp/3yS0ZA76kOlVq9Q==
@@ -848,7 +848,7 @@
     "@babel/plugin-syntax-jsx" "^7.28.6"
     "@babel/types" "^7.28.6"
 
-"@babel/plugin-transform-react-pure-annotations@^7.25.9", "@babel/plugin-transform-react-pure-annotations@^7.27.1":
+"@babel/plugin-transform-react-pure-annotations@^7.25.9":
   version "7.27.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-pure-annotations/-/plugin-transform-react-pure-annotations-7.27.1.tgz#339f1ce355eae242e0649f232b1c68907c02e879"
   integrity sha512-JfuinvDOsD9FVMTHpzA/pBLisxpv1aSf+OIV8lgH3MuWrks19R27e6a6DipIg4aX1Zm9Wpb04p8wljfKrVSnPA==
@@ -14889,6 +14889,7 @@ workbox-window@7.4.0:
     workbox-core "7.4.0"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
