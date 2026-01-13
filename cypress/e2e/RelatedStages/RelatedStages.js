@@ -65,15 +65,21 @@ When('you unlink the Baby Postnatal linked event', () => {
 });
 
 And('you delete the Birth event', () => {
-    cy.get('[data-test="overflow-button"]')
-        .eq(0)
-        .click();
-    cy.get('[data-test="stages-and-events-delete"]')
-        .click();
-    cy.get('[data-test="dhis2-uicore-modal"]').within(() => {
-        cy.contains('button', 'Yes, delete event')
-            .click();
-    });
+    cy.buildApiUrl('tracker', 'enrollments/EOxeNf2MdBf?fields=events[event,programStage]')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const { events } = body;
+
+            if (events) {
+                const eventToDelete = events.find(event => event.programStage === 'A03MvHHogjR');
+                if (eventToDelete) {
+                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
+                        cy.request('POST', eventUrl, { events: [eventToDelete] });
+                        cy.reload();
+                    });
+                }
+            }
+        });
 });
 
 And('you open the Birth event edit page', () => {
@@ -214,7 +220,7 @@ And('you delete the recently added tracked entity', () => {
     cy.get('[data-test="profile-widget"]')
         .contains('Person profile')
         .should('exist');
-    cy.get('[data-test="widget-profile-overflow-menu"]')
+    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
         .click();
     cy.contains('Delete Person')
         .click();

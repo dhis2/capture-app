@@ -1,0 +1,21 @@
+/* eslint-disable no-underscore-dangle */
+
+type Constant = {
+    id: string,
+    displayName: string,
+    value: any,
+};
+
+class ConstantStore {
+    _constants!: Array<Constant> | null;
+
+    set(constants: Array<Constant>) {
+        this._constants = constants;
+    }
+
+    get() {
+        return this._constants;
+    }
+}
+
+export const constantsStore = new ConstantStore();

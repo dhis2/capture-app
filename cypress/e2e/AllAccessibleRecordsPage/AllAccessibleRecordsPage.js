@@ -57,7 +57,7 @@ When('edits and save the form', () => {
 Then('the working list should be updated', () => {
     cy.get('.app-shell-app').scrollTo('bottom');
 
-    cy.get('[data-test="select-columns-reference"]')
+    cy.get('[data-test="select-columns-reference"]').find('button')
         .click();
 
     cy.contains('WHOMCH Hemoglobin value')

@@ -1,0 +1,15 @@
+/* 
+    Using container queries doesn't work in our material ui withStyles. 
+    Media queries could have been used instead, but they are very hard to maintain so I'm opting
+    to use container queryies in css directly.
+    Info about container queries here: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries 
+*/
+
+@container (max-width: 1015px) {
+    .left-column-main-page {
+        min-width: 0px !important;
+    }
+    .right-column-main-page {
+        width: 100% !important;
+    }    
+}

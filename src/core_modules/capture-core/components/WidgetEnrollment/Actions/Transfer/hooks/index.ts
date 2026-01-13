@@ -1,0 +1,1 @@
+export { useUpdateOwnership } from './useUpdateOwnership';

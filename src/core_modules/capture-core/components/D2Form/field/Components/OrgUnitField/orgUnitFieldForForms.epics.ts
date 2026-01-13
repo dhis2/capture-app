@@ -1,0 +1,75 @@
+import log from 'loglevel';
+import { from } from 'rxjs';
+import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+import isArray from 'd2-utilizr/lib/isArray';
+import { errorCreator } from 'capture-core-utils';
+import type { ApiUtils } from 'capture-core-utils/types';
+import { actionTypes as formActionTypes } from '../../../actions/form.actions';
+
+import {
+    actionTypes,
+    filterFormFieldOrgUnitsFailed,
+    filteredFormFieldOrgUnitsRetrieved,
+} from './orgUnitFieldForForms.actions';
+
+
+const FILTER_RETRIEVE_ERROR = 'Filter form field org units failed';
+
+const isAddFormData = (action: any, formId: string) =>
+    action.type === formActionTypes.FORM_DATA_ADD && action.payload.formId === formId;
+
+const isRequestFilterFormFieldOrgUnits = (action: any, formId: string, elementId: string) =>
+    action.type === actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS &&
+    action.payload.formId === formId &&
+    action.payload.elementId === elementId;
+
+
+const cancelActionFilter = (action: any, formId: string, elementId: string) => {
+    if (isArray(action.payload)) {
+        return action.payload.some(innerAction => isAddFormData(innerAction, formId));
+    }
+    return isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
+};
+
+export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySingleResource }: ApiUtils) =>
+    action$.pipe(
+        ofType(actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS),
+        concatMap((action: any) => {
+            const { formId, elementId, searchText } = action.payload;
+            return from(querySingleResource({
+                resource: 'organisationUnits',
+                params: {
+                    fields: 'id,displayName,path,publicAccess,access,lastUpdated' +
+                        'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
+                    paging: false,
+                    withinUserSearchHierarchy: true,
+                    query: searchText,
+                },
+            })
+                .then(orgUnitCollection => ({ orgUnitArray: orgUnitCollection.toArray(), searchText, formId, elementId }))
+                .catch(error => ({ error, formId, elementId }))).pipe(
+                takeUntil(action$.pipe(filter(a => cancelActionFilter(a, formId, elementId)))),
+            );
+        }),
+        map((resultContainer: any) => {
+            if (resultContainer.error) {
+                log.error(errorCreator(FILTER_RETRIEVE_ERROR)(
+                    { error: resultContainer.error, method: 'FilterOrgUnitRootsEpic' }),
+                );
+                return filterFormFieldOrgUnitsFailed(
+                    resultContainer.formId,
+                    resultContainer.elementId,
+                    FILTER_RETRIEVE_ERROR,
+                );
+            }
+
+            const { orgUnitArray, formId, elementId } = resultContainer;
+            const orgUnits = orgUnitArray
+                .map(unit => ({
+                    id: unit.id,
+                    path: unit.path,
+                    displayName: unit.displayName,
+                }));
+            return filteredFormFieldOrgUnitsRetrieved(formId, elementId, orgUnits);
+        }));

@@ -231,7 +231,6 @@ Feature: User interacts with tei working lists
     And you apply the current filter
     Then the assignee filter button should show that None filter is in effect
 
-  @v>=40
   Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
     Given you open the main page with Ngelehun and Malaria focus investigation context
     And you filter by assigned Foci investigation & classification events
@@ -240,7 +239,6 @@ Feature: User interacts with tei working lists
     And you delete the name Custom Program stage list
     Then the Custom Program stage list is deleted
 
-  @v>=40
   Scenario: The user creates, updates and deletes a Program stage custom working list
     Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
     And you set the enrollment status filter to completed
@@ -257,7 +255,6 @@ Feature: User interacts with tei working lists
     And you delete the name Custom Program stage list
     Then the Custom Program stage list is deleted
 
-  @v>=40
   Scenario: The user can delete a Program stage working list right immediately after creating it.
     Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
     When you save the list with the name Custom Program stage list
@@ -266,14 +263,12 @@ Feature: User interacts with tei working lists
     Then the Custom Program stage list is deleted
 
   # For the program stage WL scenarios I need to create/delete my own because there are no program stage working lists in the demo database.
-  @v>=40
   Scenario: The Program stage custom working can be shared
     Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
     And you save the list with the name Custom Program stage list
     When you change the sharing settings
     Then you see the new sharing settings
 
-  @v>=40
   Scenario: The Program stage working list configuration is kept when changing the org unit
     Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
     And you save the list with the name Custom Program stage list
@@ -285,7 +280,6 @@ Feature: User interacts with tei working lists
     And you delete the name Custom Program stage list
     And the Custom Program stage list is deleted
 
-  @v>=40
   Scenario: The user can save a program stage working list, based on a TEI working list configuration
     Given you open a clean main page with Ngelehun and Malaria focus investigation context
     Then you see the custom TEI working lists
@@ -300,19 +294,11 @@ Feature: User interacts with tei working lists
     And you delete the name Custom Program stage list
     Then the Custom Program stage list is deleted
 
-  @v>=40
   Scenario: The user can download the tracked entity working list
     Given you open the main page with Ngelehun and child programe context
     And you open the menu and click the "Download data..." button
     Then the download dialog opens
     Then the CSV button exists
-    Then the JSON button exists
-
-  @v<40
-  Scenario: The user can download the tracked entity working list
-    Given you open the main page with Ngelehun and child programe context
-    And you open the menu and click the "Download data..." button
-    Then the download dialog opens
     Then the JSON button exists
 
   Scenario: The user cannot download the tracked entity working list when no orgUnit is selected

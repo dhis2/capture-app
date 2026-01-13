@@ -1,0 +1,242 @@
+import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
+// @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
+import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
+import log from 'loglevel';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
+import type { Category as CategoryMetadata } from '../../../../metaData';
+import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
+import { makeOnSelectSelector } from './categorySelector.selectors';
+import { FiltrableMenuItems } from '../FiltrableMenuItems';
+
+type SelectOption = {
+    label: string;
+    value: string;
+};
+
+type OwnProps = {
+    category: CategoryMetadata;
+    selectedOrgUnitId: string | null | undefined;
+    onSelect: (option: SelectOption) => void;
+    selectedCategoryName: string | null | undefined;
+    onClearSelectionClick: () => void;
+    disabled?: boolean;
+    displayOnly?: boolean;
+};
+
+type Props = OwnProps & WithStyles<typeof styles>;
+
+type State = {
+    options: Array<SelectOption> | null | undefined;
+    prevOrgUnitId: string | null | undefined;
+    open: boolean;
+};
+
+const styles = () => ({
+    selectBarMenu: {
+        maxHeight: '80vh',
+        overflow: 'auto',
+        paddingBottom: `${spacers.dp4}`,
+    },
+});
+
+class CategorySelectorPlain extends React.Component<Props, State> {
+    static getOptionsAsync(
+        categoryId: string,
+        selectedOrgUnitId: string | null | undefined,
+        onIsAborted: () => boolean,
+    ) {
+        const predicate = (categoryOption: Record<string, any>) => {
+            if (!selectedOrgUnitId) {
+                return true;
+            }
+
+            const orgUnits = categoryOption.organisationUnits;
+            if (!orgUnits) {
+                return true;
+            }
+
+            return !!orgUnits[selectedOrgUnitId];
+        };
+
+        const project = (categoryOption: Record<string, any>) => ({
+            label: categoryOption.displayName,
+            value: categoryOption.id,
+            writeAccess: categoryOption.access.data.write,
+        });
+
+        return buildCategoryOptionsAsync(
+            categoryId,
+            { predicate, project, onIsAborted },
+        );
+    }
+
+    static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
+        if (props.selectedOrgUnitId !== state.prevOrgUnitId) {
+            return {
+                prevOrgUnitId: props.selectedOrgUnitId,
+                options: null,
+            };
+        }
+        return null;
+    }
+
+    onSelectSelector: (data: any) => (optionId: string) => void;
+    cancelablePromise: any;
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            options: null,
+            prevOrgUnitId: null,
+            open: false,
+        };
+        this.onSelectSelector = makeOnSelectSelector();
+        this.loadCagoryOptions(this.props);
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (!this.state.options && prevProps.selectedOrgUnitId !== this.props.selectedOrgUnitId) {
+            this.loadCagoryOptions(this.props);
+        }
+    }
+
+    componentWillUnmount() {
+        this.cancelablePromise && this.cancelablePromise.cancel();
+        this.cancelablePromise = null;
+    }
+
+
+    loadCagoryOptions(props: Props) {
+        const { category, selectedOrgUnitId } = props;
+
+        this.setState({
+            options: null,
+        });
+        this.cancelablePromise && this.cancelablePromise.cancel();
+
+        let currentRequestCancelablePromise;
+
+        const isRequestAborted = () =>
+            (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
+
+        currentRequestCancelablePromise = makeCancelablePromise(
+            CategorySelectorPlain
+                .getOptionsAsync(
+                    category.id,
+                    selectedOrgUnitId,
+                    isRequestAborted,
+                ),
+        );
+
+        currentRequestCancelablePromise
+            .promise
+            .then((options) => {
+                options.sort((a, b) => {
+                    if (a.label === b.label) {
+                        return 0;
+                    }
+                    if (a.label < b.label) {
+                        return -1;
+                    }
+                    return 1;
+                });
+
+                this.setState({
+                    options,
+                });
+                this.cancelablePromise = null;
+            })
+            .catch((error) => {
+                if (!(error && (error.aborted || error.isCanceled))) {
+                    log.error(
+                        errorCreator('An error occured loading category options')({ error }),
+                    );
+                    this.setState({
+                        options: [],
+                    });
+                }
+            });
+
+        this.cancelablePromise = currentRequestCancelablePromise;
+    }
+
+    render() {
+        const {
+            selectedOrgUnitId,
+            onSelect,
+            onClearSelectionClick,
+            selectedCategoryName,
+            classes,
+            displayOnly,
+            disabled,
+            ...passOnProps
+        } = this.props;
+        const { options } = this.state;
+        const handleSelect = this.onSelectSelector({ options, onSelect });
+
+        return (
+            <SelectorBarItem
+                label={passOnProps.category.name}
+                value={selectedCategoryName}
+                noValueMessage={i18n.t(`Choose a ${passOnProps.category.name}`)}
+                open={this.state.open}
+                setOpen={(open) => {
+                    if (displayOnly) return;
+                    this.setState({ open });
+                }}
+                onClearSelectionClick={!displayOnly ? onClearSelectionClick : undefined}
+                dataTest="category-selector-container"
+                disabled={disabled}
+                displayOnly={displayOnly}
+            >
+                {options && (
+                    <div className={classes.selectBarMenu}>
+                        <Menu>
+                            {options.length > 10 ? (
+                                <FiltrableMenuItems
+                                    options={options}
+                                    onChange={(item) => {
+                                        this.setState({ open: false });
+                                        handleSelect(item.value);
+                                    }}
+                                    searchText={i18n.t(`Search for a ${passOnProps.category.name}`)}
+                                    dataTest="category"
+                                />
+                            ) : (
+                                options.map(option => (
+                                    <MenuItem
+                                        key={option.value}
+                                        label={option.label}
+                                        value={option.value}
+                                        suffix=""
+                                        onClick={(item) => {
+                                            this.setState({ open: false });
+                                            handleSelect(item.value || '');
+                                        }}
+                                    />
+                                ))
+                            )}
+                            {Boolean(selectedCategoryName) && options.length > 10 && (
+                                <>
+                                    <MenuDivider />
+                                    <MenuItem
+                                        dense
+                                        onClick={() => {
+                                            this.setState({ open: false });
+                                            onClearSelectionClick();
+                                        }}
+                                        label={i18n.t('Clear selection')}
+                                        suffix=""
+                                    />
+                                </>
+                            )}
+                        </Menu>
+                    </div>
+                )}
+            </SelectorBarItem>
+        );
+    }
+}
+export const CategorySelector = withStyles(styles)(CategorySelectorPlain as React.ComponentType<Props>) as any;
