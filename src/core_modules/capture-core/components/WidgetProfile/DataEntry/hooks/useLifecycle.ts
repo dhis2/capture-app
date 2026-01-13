@@ -37,7 +37,7 @@ type UseLifecycleParams = {
     geometry: Geometry | null;
     dataEntryFormConfig: DataEntryFormConfig | null;
     querySingleResource: QuerySingleResource;
-    onGetValidationContext: () => Object;
+    onGetValidationContext: () => Record<string, unknown>;
 };
 
 export const useLifecycle = ({

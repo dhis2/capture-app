@@ -136,7 +136,10 @@ export class EnrollmentFactory {
         return section;
     }
 
-    async _addLeftoversSection(enrollmentForm: RenderFoundation, cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>) {
+    async _addLeftoversSection(
+        enrollmentForm: RenderFoundation,
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute> | null,
+    ) {
         if (!cachedProgramTrackedEntityAttributes) return;
 
         // Check if there exist attributes which are not assigned to a section
