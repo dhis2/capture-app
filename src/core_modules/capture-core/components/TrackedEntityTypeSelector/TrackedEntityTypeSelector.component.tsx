@@ -1,7 +1,8 @@
 import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { spacers, SimpleSingleSelect, Field } from '@dhis2/ui';
+// @ts-expect-error - SimpleSingleSelectField exists but types may not be available
+import { spacers, SimpleSingleSelectField } from '@dhis2/ui';
 import type { Props, SelectOption } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
@@ -46,24 +47,22 @@ export const TrackedEntityTypeSelectorPlain =
             return options.find(opt => opt.value === selectedSearchScopeId);
         }, [selectedSearchScopeId, options]);
 
-        const handleSelectionChange = (value: string) => {
-            onSelect(value, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
-            onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: value });
+        const handleSelectionChange = (option: SelectOption) => {
+            onSelect(option.value, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
+            onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: option.value });
         };
 
         return (
             <div className={classes.searchRow}>
-                <Field helpText={footerText}>
-                    <SimpleSingleSelect
-                        name="tracked-entity-type-selector"
-                        options={options}
-                        selected={selectedOption}
-                        placeholder={i18n.t('Select tracked entity type')}
-                        onChange={handleSelectionChange}
-                        empty={i18n.t('No tracked entity types available')}
-                        dataTest="dhis2-simplesingleselect"
-                    />
-                </Field>
+                <SimpleSingleSelectField
+                    name="tracked-entity-type-selector"
+                    helpText={footerText}
+                    options={options}
+                    selected={selectedOption}
+                    placeholder={i18n.t('Select tracked entity type')}
+                    onChange={handleSelectionChange}
+                    empty={i18n.t('No tracked entity types available')}
+                />
             </div>
         );
     };
