@@ -122,8 +122,7 @@ When(/^the user sets Plurality assessed to (.*)/, (text) => {
 
     cy.get('button[role="option"]')
         .contains(text)
-        .should('be.visible')
-        .click({ force: true });
+        .click();
 });
 
 When('the user clicks switch tab to Schedule', () => {

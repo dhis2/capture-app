@@ -37,7 +37,6 @@ When('you select the first existing Baby Postnatal event in the list', () => {
         .click();
     cy.get('button[role="option"]')
         .eq(0)
-        .should('be.visible')
         .click();
 });
 

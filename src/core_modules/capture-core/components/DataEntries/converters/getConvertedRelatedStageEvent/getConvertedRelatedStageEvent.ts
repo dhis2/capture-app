@@ -78,6 +78,8 @@ const getEventDetailsByLinkMode = ({
 
     if (linkMode === relatedStageActions.LINK_EXISTING_RESPONSE) {
         const { linkedEventId } = relatedStageDataValues;
+        // Validerer at linkedEventId er tilstede for å unngå feil når vi prøver å koble til et eksisterende event
+        // Uten denne valideringen kan koden fortsette med null/undefined linkedEventId, noe som forårsaker feil senere
         if (!linkedEventId) {
             throw new Error(
                 errorCreator('Missing required data for creating related stage event')({

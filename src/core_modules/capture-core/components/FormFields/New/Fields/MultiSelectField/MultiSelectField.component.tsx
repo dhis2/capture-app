@@ -48,6 +48,8 @@ const MultiSelectFieldComponentPlain = (props: Props & WithStyles<typeof styles>
             onChange={onHandleChange}
             onFocus={onFocus}
             onKeyDown={handleBlur}
+            // Ensure blur event is properly handled when the field loses focus
+            // This ensures the current selection state is saved even when user clicks away or tabs out
             onBlur={handleBlur}
             selected={selected}
             filterable

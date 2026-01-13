@@ -6,7 +6,6 @@ And('you select search scope TB program', () => {
 
     cy.get('button[role="option"]')
         .contains('TB prog')
-        .should('be.visible')
         .click();
 });
 

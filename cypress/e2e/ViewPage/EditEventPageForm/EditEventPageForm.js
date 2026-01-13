@@ -18,7 +18,6 @@ const cleanUpEvent = () => {
 
     cy.get('button[role="option"]')
         .contains('CARE International')
-        .should('be.visible')
         .click();
 
     cy.get('[data-test="dhis2-uicore-button"]')
@@ -94,7 +93,6 @@ When('you change the category combination and save', () => {
 
     cy.get('button[role="option"]')
         .contains('APHIAplus')
-        .should('be.visible')
         .click();
 
     cy.get('[data-test="dhis2-uicore-button"]')
@@ -154,7 +152,6 @@ And('you select the TB Program', () => {
         .click();
     cy.get('button[role="option"]')
         .contains('TB program')
-        .should('be.visible')
         .click();
 });
 

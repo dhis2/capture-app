@@ -21,7 +21,6 @@ And('you select tracked entity type person', () => {
         .click();
     cy.get('button[role="option"]')
         .contains('Person')
-        .should('be.visible')
         .click();
 });
 
@@ -606,11 +605,8 @@ And('you fill in multiple Allergies options', () => {
     cy.get('[data-test="dhis2-uicore-multiselect"]')
         .should('be.visible')
         .click();
-    
-    // Wait for the menu to open before selecting options
     cy.get('[data-test="dhis2-uicore-multiselectoption"]', { timeout: 10000 })
         .should('be.visible');
-    
     cy.get('[data-test="dhis2-uicore-multiselectoption"]')
         .contains('Penicillin and related antibiotics')
         .should('be.visible')
@@ -623,8 +619,6 @@ And('you fill in multiple Allergies options', () => {
         .contains('Other')
         .should('be.visible')
         .click();
-    
-    // Close the menu by clicking outside or on the multiselect again
     cy.get('[data-test="dhis2-uicore-multiselect"]')
         .click();
 });
@@ -740,8 +734,12 @@ When('the form is prefilled with the selected category combination', () => {
 
 When('you deselect the category from the form', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
-        .find('[data-test="dhis2-simplesingleselect-clear"]')
-        .click();
+        .find('[data-test="dhis2-simplesingleselect"]')
+        .within(() => {
+            cy.get('button[aria-label*="Clear"]')
+                .should('be.visible')
+                .click();
+        });
 });
 
 Then('you see a validation error on category combination', () => {

@@ -78,7 +78,7 @@ When('you have no program selection', () => {
 
 When('you click the next page button', () => {
     cy.get('[data-test="search-pagination-next-page"]')
-        .click({ force: true });
+        .click();
 });
 
 Then('you can see the second page of the results', () => {

@@ -104,7 +104,6 @@ When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
 
     cy.get('button[role="option"]')
         .contains(value)
-        .should('be.visible')
         .click();
 });
 
