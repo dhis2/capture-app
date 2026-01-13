@@ -102,8 +102,9 @@ When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
         .eq(eq)
         .click();
 
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains(value)
+        .should('be.visible')
         .click();
 });
 

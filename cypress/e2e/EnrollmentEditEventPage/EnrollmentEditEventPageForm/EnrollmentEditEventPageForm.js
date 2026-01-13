@@ -120,8 +120,9 @@ When(/^the user sets Plurality assessed to (.*)/, (text) => {
         .eq(4)
         .click();
 
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains(text)
+        .should('be.visible')
         .click({ force: true });
 });
 

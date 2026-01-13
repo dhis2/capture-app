@@ -16,8 +16,9 @@ const cleanUpEvent = () => {
                 .click();
         });
 
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains('CARE International')
+        .should('be.visible')
         .click({ force: true });
 
     cy.get('[data-test="dhis2-uicore-button"]')
@@ -94,8 +95,9 @@ When('you change the category combination and save', () => {
     cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
         .type('APHIAp');
 
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains('APHIAplus')
+        .should('be.visible')
         .click({ force: true });
 
     cy.get('[data-test="dhis2-uicore-button"]')
@@ -156,8 +158,9 @@ And('you select the TB Program', () => {
     cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
         .type('TB');
 
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains('TB program')
+        .should('be.visible')
         .click();
 });
 

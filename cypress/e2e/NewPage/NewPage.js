@@ -19,8 +19,9 @@ And('there should be informative message explaining you need to select an organi
 And('you select tracked entity type person', () => {
     cy.get('[data-test="dhis2-uicore-select"]')
         .click();
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains('Person')
+        .should('be.visible')
         .click();
 });
 

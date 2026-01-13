@@ -37,8 +37,9 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
         .eq(6)
         .click();
 
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .contains('Termination of pregnancy')
+        .should('be.visible')
         .click();
 
     cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing').click();

@@ -35,8 +35,9 @@ And('you select the Enter details now action', () => {
 When('you select the first existing Baby Postnatal event in the list', () => {
     cy.get('[data-test="related-stages-existing-response-list-content"]')
         .click();
-    cy.get('[data-test="dhis2-simplesingleselect-option"]')
+    cy.get('button[role="option"]')
         .eq(0)
+        .should('be.visible')
         .click();
 });
 
