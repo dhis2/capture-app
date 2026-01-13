@@ -1,5 +1,5 @@
 import {
-    NewSingleSelectField,
+    SingleSelectField,
     withSelectSingleTranslations,
     withGotoInterface,
     withHideCompatibility,
@@ -29,7 +29,7 @@ export const OptionSetSelectFieldForCustomForm = withGotoInterface()(
                                 withCustomElementContainer(getContainerClass)(
                                     withOptionsIconElement()(
                                         withRulesOptionVisibilityHandler()(
-                                            NewSingleSelectField,
+                                            SingleSelectField,
                                         ),
                                     ),
                                 ),

@@ -107,4 +107,4 @@ const NewSingleSelectFieldComponentPlain = ({
     );
 };
 
-export const NewSingleSelectField = withFocusHandler()(withSelectSingleTranslations()(NewSingleSelectFieldComponentPlain));
+export const SingleSelectField = withFocusHandler()(withSelectSingleTranslations()(NewSingleSelectFieldComponentPlain));

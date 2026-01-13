@@ -2,7 +2,7 @@ import * as React from 'react';
 import log from 'loglevel';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
-import { NewSingleSelectField } from
+import { SingleSelectField } from
     '../../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
 
 type SelectOption = {
@@ -164,7 +164,7 @@ export class CategorySelector extends React.Component<Props, State> {
         const { options, selectedOption } = this.state;
 
         return (
-            options ? <NewSingleSelectField
+            options ? <SingleSelectField
                 value={selectedOption?.value ?? null}
                 clearable
                 onChange={this.onSelectCategory}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
-    NewSingleSelectField,
+    SingleSelectField,
     withDefaultFieldContainer,
     withDisplayMessages,
     withLabel,
@@ -10,12 +10,12 @@ import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css'
 import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
-const SingleSelectField = withDefaultFieldContainer()(
+const SingleSelectForForm = withDefaultFieldContainer()(
     withLabel({
         onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
     })(
         withDisplayMessages()(
-            NewSingleSelectField,
+            SingleSelectField,
         ),
     ),
 );
@@ -54,7 +54,7 @@ export const LinkToExisting = ({
     const shouldShowError = (saveAttempted || touched);
 
     return (
-        <SingleSelectField
+        <SingleSelectForForm
             label={label}
             value={relatedStagesDataValues.linkedEventId || null}
             required

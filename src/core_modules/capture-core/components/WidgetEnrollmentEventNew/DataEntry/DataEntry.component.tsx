@@ -29,7 +29,7 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     orientations,
-    NewSingleSelectField,
+    SingleSelectField,
     SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
@@ -360,7 +360,7 @@ const getCategoryOptionsSettingsFn = () => {
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(NewSingleSelectField),
+                                withFilterProps(defaultFilterProps)(SingleSelectField),
                             ),
                         ),
                     ),

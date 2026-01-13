@@ -1,9 +1,9 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { NewSingleSelectField } from '../../../../../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
+import { SingleSelectField } from '../../../../../FormFields/New/Fields/SingleSelectField/SingleSelectField.component';
 import { withDefaultFieldContainer, withLabel } from '../../../../../FormFields/New';
 
-const SearchProgramField = withDefaultFieldContainer()(withLabel()(NewSingleSelectField));
+const SearchProgramField = withDefaultFieldContainer()(withLabel()(SingleSelectField));
 
 const programFieldStyles = {
     labelContainerStyle: {
