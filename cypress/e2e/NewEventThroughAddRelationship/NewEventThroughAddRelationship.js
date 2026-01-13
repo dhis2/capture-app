@@ -42,11 +42,9 @@ Then('the event should be sent to the server successfully', () => {
 
 
 When('you fill in the registration details', () => {
-    cy.get('[data-test="dhis2-simplesingleselect"]')
+    cy.get('[data-test="relationship-register-tei-program-selector"]')
+        .should('be.visible')
         .click();
-
-    cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
-        .type('Provider');
 
     cy.get('button[role="option"]')
         .contains('Provider Follow-up and Support Tool')

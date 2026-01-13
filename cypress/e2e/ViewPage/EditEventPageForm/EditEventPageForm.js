@@ -19,11 +19,11 @@ const cleanUpEvent = () => {
     cy.get('button[role="option"]')
         .contains('CARE International')
         .should('be.visible')
-        .click({ force: true });
+        .click();
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
-        .click({ force: true });
+        .click();
 };
 
 After({ tags: '@with-event-coc-clean-up' }, cleanUpEvent);
@@ -54,7 +54,7 @@ And('you (incomplete)(complete) and save the event', () => {
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
-        .click({ force: true });
+        .click();
 });
 
 Then(/^you are redirected to the main page and the event status (.*) is displayed in the list/, (status) => {
@@ -92,13 +92,10 @@ When('you change the category combination and save', () => {
                 .click();
         });
 
-    cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
-        .type('APHIAp');
-
     cy.get('button[role="option"]')
         .contains('APHIAplus')
         .should('be.visible')
-        .click({ force: true });
+        .click();
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
@@ -155,9 +152,6 @@ Then('the relationship is deleted', () => {
 And('you select the TB Program', () => {
     cy.get('[data-test="dhis2-simplesingleselect"]')
         .click();
-    cy.get('[data-test="dhis2-simplesingleselect-filterinput"]')
-        .type('TB');
-
     cy.get('button[role="option"]')
         .contains('TB program')
         .should('be.visible')

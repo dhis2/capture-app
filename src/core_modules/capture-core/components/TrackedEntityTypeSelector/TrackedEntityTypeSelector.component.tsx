@@ -61,6 +61,7 @@ export const TrackedEntityTypeSelectorPlain =
                         placeholder={i18n.t('Select tracked entity type')}
                         onChange={handleSelectionChange}
                         empty={i18n.t('No tracked entity types available')}
+                        dataTest="dhis2-simplesingleselect"
                     />
                 </Field>
             </div>
