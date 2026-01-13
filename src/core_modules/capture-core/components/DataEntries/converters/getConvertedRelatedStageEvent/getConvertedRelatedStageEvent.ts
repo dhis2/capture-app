@@ -8,6 +8,7 @@ import { dataElementTypes } from '../../../../metaData';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
+// eslint-disable-next-line complexity
 const getEventDetailsByLinkMode = ({
     relatedStageDataValues,
     requestEventIsFromConstraint,
@@ -77,6 +78,13 @@ const getEventDetailsByLinkMode = ({
 
     if (linkMode === relatedStageActions.LINK_EXISTING_RESPONSE) {
         const { linkedEventId } = relatedStageDataValues;
+        if (!linkedEventId) {
+            throw new Error(
+                errorCreator('Missing required data for creating related stage event')({
+                    linkedEventId,
+                }),
+            );
+        }
         return {
             linkedEvent: null,
             linkedEventId,

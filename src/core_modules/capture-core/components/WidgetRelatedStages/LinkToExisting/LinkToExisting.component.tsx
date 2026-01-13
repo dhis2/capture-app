@@ -1,41 +1,45 @@
-import React, { type ComponentType } from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-// @ts-expect-error - SimpleSingleSelectField exists but types may not be available
-import { SimpleSingleSelectField } from '@dhis2-ui/select';
+import {
+    NewSingleSelectField,
+    withDefaultFieldContainer,
+    withDisplayMessages,
+    withLabel,
+} from '../../FormFields/New';
+import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css';
+import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
-const styles: Readonly<any> = ({ typography }: any) => ({
-    selectField: {
-        maxWidth: typography.pxToRem(300),
-        padding: spacers.dp16,
-    },
-});
+const SingleSelectField = withDefaultFieldContainer()(
+    withLabel({
+        onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
+    })(
+        withDisplayMessages()(
+            NewSingleSelectField,
+        ),
+    ),
+);
 
-type Props = LinkToExistingProps & WithStyles<typeof styles>;
-
-export const LinkToExistingPlain = ({
+export const LinkToExisting = ({
     relatedStagesDataValues,
     setRelatedStagesDataValues,
     linkableEvents,
     linkableStageLabel,
     errorMessages,
     saveAttempted,
-    classes,
-}: Props) => {
-    const onChange = (value: string | null) => {
+}: LinkToExistingProps) => {
+    const [touched, setTouched] = useState(false);
+
+    const handleChange = (value: string | null) => {
+        setTouched(true);
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
-            linkedEventId: value ?? '',
+            linkedEventId: value || undefined,
         });
     };
 
-    const handleClear = () => {
-        setRelatedStagesDataValues({
-            ...relatedStagesDataValues,
-            linkedEventId: '',
-        });
+    const handleBlur = () => {
+        setTouched(true);
     };
 
     const options = linkableEvents.map(event => ({
@@ -47,24 +51,21 @@ export const LinkToExistingPlain = ({
         linkableStageLabel,
     });
 
-    return (
-        <div className={classes.selectField}>
+    const shouldShowError = (saveAttempted || touched);
 
-            <SimpleSingleSelectField
-                name="related-stages-existing-response-list"
-                selected={relatedStagesDataValues.linkedEventId}
-                onChange={onChange}
-                onClear={handleClear}
-                placeholder={i18n.t('Select an event')}
-                label={label}
-                options={options}
-                clearable
-                error={saveAttempted && !!errorMessages.linkedEventId}
-                validationText={saveAttempted ? errorMessages.linkedEventId : undefined}
-                dataTest="related-stages-existing-response-list"
-            />
-        </div>
+    return (
+        <SingleSelectField
+            label={label}
+            value={relatedStagesDataValues.linkedEventId || null}
+            required
+            onChange={handleChange}
+            onBlur={handleBlur}
+            options={options}
+            placeholder={i18n.t('Select an event')}
+            clearable
+            styles={baseInputStyles}
+            errorMessage={shouldShowError ? errorMessages.linkedEventId : undefined}
+            dataTest="related-stages-existing-response-list"
+        />
     );
 };
-
-export const LinkToExisting = withStyles(styles)(LinkToExistingPlain) as ComponentType<LinkToExistingProps>;
