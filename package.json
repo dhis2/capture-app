@@ -134,7 +134,6 @@
         "@babel/preset-react": "7.26.3",
         "@dhis2-ui/calendar": "^10.7.6",
         "@js-temporal/polyfill": "0.4.3",
-        "@dhis2/ui": "^10.11.0",
         "core-js": "2.5.7",
         "i18next": "^20.5.0",
         "@types/react": "18.3.1",
