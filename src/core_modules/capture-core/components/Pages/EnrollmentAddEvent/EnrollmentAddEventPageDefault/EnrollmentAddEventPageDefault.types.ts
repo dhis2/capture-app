@@ -1,4 +1,4 @@
-import type { WithStyles } from '@material-ui/core';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 import type {
@@ -6,7 +6,6 @@ import type {
     WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import { Program } from '../../../../metaData';
-import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 
 export type Props = {
     program: Program | null | undefined;
@@ -38,7 +37,7 @@ export type Props = {
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
-} & WithStyles<any>;
+};
 
 export type ContainerProps = {
     pageLayout: PageLayoutConfig;

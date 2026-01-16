@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
-import type { EpicAction, ReduxStore, ApiUtils } from '../../../../capture-core-utils/types';
+import type { EpicAction, ReduxStore, ApiUtils } from 'capture-core-utils/types';
 import {
     addEnrollmentEventPageDefaultActionTypes,
 } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
@@ -105,6 +105,7 @@ export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
+            addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR,
         ),
         map((action: any) => {
             const { serverData: { events, enrollments } } = action.meta;
@@ -118,4 +119,3 @@ export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
             ]);
         }),
     );
-

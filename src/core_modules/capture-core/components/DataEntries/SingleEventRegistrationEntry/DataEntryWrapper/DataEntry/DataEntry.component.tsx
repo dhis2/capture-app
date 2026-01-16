@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
+import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
@@ -31,7 +32,6 @@ import {
     withDisplayMessages,
     withFilterProps,
     withDefaultFieldContainer,
-    withDefaultShouldUpdateInterface,
     orientations,
     VirtualizedSelectField,
     SingleOrgUnitSelectField,
@@ -55,7 +55,6 @@ import {
     getCategoryOptionsValidatorContainers, withAOCFieldBuilder, withDataEntryFields,
 } from '../../../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
-import type { ReduxAction } from '../../../../../../capture-core-utils/types';
 
 const getStyles: any = (theme: any) => ({
     savingContextContainer: {
@@ -81,7 +80,7 @@ const getStyles: any = (theme: any) => ({
         paddingBottom: theme.typography.pxToRem(15),
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },
@@ -146,16 +145,14 @@ const buildReportDateSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(DateField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(DateField),
                             ),
                         ),
                     ),
@@ -190,16 +187,14 @@ const buildOrgUnitSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
                             ),
                         ),
                     ),
@@ -228,16 +223,14 @@ const buildOrgUnitSettingsFn = () => {
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CoordinateField),
-                        ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(
+                        withFilterProps(defaultFilterProps)(CoordinateField),
                     ),
                 ),
             ),
@@ -248,16 +241,14 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
 const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) =>
-                        `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(PolygonField),
-                        ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(
+                        withFilterProps(defaultFilterProps)(PolygonField),
                     ),
                 ),
             ),
@@ -313,16 +304,14 @@ const buildCompleteFieldSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(TrueOnlyField),
                             ),
                         ),
                     ),
@@ -353,17 +342,15 @@ const buildCategoryOptionsFieldSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions &&
-                                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
                             ),
                         ),
                     ),
@@ -396,12 +383,10 @@ const buildNotesSettingsFn = () => {
     const noteComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(
-                                withDataEntryNotesHandler()(Notes),
-                            ),
+                withDisplayMessages()(
+                    withInternalChangeHandler()(
+                        withFilterProps(defaultFilterProps)(
+                            withDataEntryNotesHandler()(Notes),
                         ),
                     ),
                 ),
@@ -459,10 +444,8 @@ const buildRelationshipsSettingsFn = () => {
     const writableRelationshipTypesSelector = makeWritableRelationshipTypesSelector();
     const relationshipsComponent =
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withFilterProps(defaultFilterProps)(
-                    withDataEntryRelationshipsHandler()(Relationships),
-                ),
+            withFilterProps(defaultFilterProps)(
+                withDataEntryRelationshipsHandler()(Relationships),
             ),
         );
     const relationshipsSettings = {
@@ -594,11 +577,8 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
-    UNSAFE_componentWillMount() {
-        this.props.onSetSaveTypes(null);
-    }
-
     componentDidMount() {
+        this.props.onSetSaveTypes(null);
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
             this.relationshipsInstance.scrollIntoView();
             this.props.onScrollToRelationships();

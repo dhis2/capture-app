@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconSearch24, IconAdd24, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import { RegisterTei } from '../RegisterTei';
@@ -41,7 +41,6 @@ const getStyles = (theme: any) => ({
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        backgroundColor: theme.palette.grey[500],
     },
     buttonIcon: {
         marginRight: spacersNum.dp8,
@@ -95,7 +94,6 @@ class TeiRelationshipPlain extends React.Component<Props> {
             >
                 <div className={classes.button}>
                     <Button
-                        large
                         dataTest="find-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
@@ -109,7 +107,6 @@ class TeiRelationshipPlain extends React.Component<Props> {
                 </div>
                 <div className={classes.button}>
                     <Button
-                        large
                         dataTest="create-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}

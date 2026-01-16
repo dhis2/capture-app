@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, ButtonStrip, colors, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import { NewTemplateTextField } from './NewTemplateTextField.component';

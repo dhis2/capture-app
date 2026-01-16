@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useCommonEnrollmentDomainData } from '../components/Pages/common/EnrollmentOverviewDomain';
-import { errorCreator } from '../../capture-core-utils';
 import type { ProgramStage } from '../metaData';
 import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
 
@@ -36,7 +36,7 @@ export const useAvailableProgramStages = (
                     (programStage.id !== currentStage.id && eventCount === 0);
 
                 return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
-            }),
+            }).filter(stage => stage.isAvailableStage) || [],
         [
             enrollment?.events,
             program?.programStages,
@@ -46,5 +46,5 @@ export const useAvailableProgramStages = (
         ],
     );
 
-    return availableProgramStages ? availableProgramStages.filter(stage => stage.isAvailableStage) : [];
+    return availableProgramStages;
 };

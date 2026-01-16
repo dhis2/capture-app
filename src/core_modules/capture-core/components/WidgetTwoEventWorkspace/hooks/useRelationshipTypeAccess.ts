@@ -4,7 +4,7 @@ import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../..
 export const useRelationshipTypeAccess = (relationshipTypeId: string) => {
     const storageController = getUserMetadataStorageController();
 
-    const { data, error, isLoading } = useIndexedDBQuery(
+    const { data, error, isInitialLoading } = useIndexedDBQuery(
         ['relationshipTypeAccess', relationshipTypeId],
         () =>
             storageController.get(USER_METADATA_STORES.RELATIONSHIP_TYPES, relationshipTypeId, {
@@ -19,7 +19,7 @@ export const useRelationshipTypeAccess = (relationshipTypeId: string) => {
 
     return {
         relationshipTypeWriteAccess: data?.hasWriteAccess,
-        isLoading,
+        isLoading: isInitialLoading,
         error,
     };
 };

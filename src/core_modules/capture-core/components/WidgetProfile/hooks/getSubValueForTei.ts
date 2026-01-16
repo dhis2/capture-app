@@ -1,5 +1,5 @@
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { dataElementTypes } from '../../../metaData';
-import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 import type { Attribute, SubValueFunctionParams } from './hooks.types';
 

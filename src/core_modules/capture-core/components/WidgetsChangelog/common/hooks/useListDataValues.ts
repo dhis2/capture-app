@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { errorCreator, buildUrl, pipe } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
@@ -149,7 +149,7 @@ export const useListDataValues = ({
         { sortDirection, page, pageSize, programId, rawRecords },
     ];
 
-    const { data: processedRecords, isError, isLoading } = useQuery(
+    const { data: processedRecords, isError, isInitialLoading } = useQuery(
         queryKey,
         () => fetchFormattedValues({
             rawRecords,
@@ -170,5 +170,5 @@ export const useListDataValues = ({
         },
     );
 
-    return { processedRecords, isLoading, isError };
+    return { processedRecords, isLoading: isInitialLoading, isError };
 };

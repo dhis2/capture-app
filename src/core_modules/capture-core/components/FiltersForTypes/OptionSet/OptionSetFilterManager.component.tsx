@@ -42,7 +42,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         return (
             <OptionSetFilter
                 value={this.state.value}
-                innerRef={filterTypeRef}
+                ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

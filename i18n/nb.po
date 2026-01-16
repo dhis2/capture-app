@@ -2,14 +2,14 @@
 # Translators:
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
 # Merethe Wollan Blisten, 2025
-# Karoline Tufte Lien <karoline@dhis2.org>, 2025
+# Karoline Tufte Lien <karoline@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2025-12-11T07:56:27.475Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2026\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +67,7 @@ msgid "New event"
 msgstr "Ny hendelse"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Laster..."
 
 msgid "Event list"
 msgstr "Hendelsesliste"
@@ -505,6 +505,9 @@ msgstr "Max"
 msgid "Min"
 msgstr "Min"
 
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Inneholder tekst"
 
@@ -767,9 +770,6 @@ msgstr "Programfaser kunne ikke lastes inn"
 msgid "Stage"
 msgstr "Fase"
 
-msgid "Registered events"
-msgstr "Registrerte hendelser"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -804,6 +804,9 @@ msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Vennligst velg en organisasjonsenhet"
+
+msgid "Registered events"
+msgstr "Registrerte hendelser"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -936,6 +939,9 @@ msgstr "Hendelse kunne ikke lastes inn"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
+
+msgid "tracked entity instance"
+msgstr "Sporet enhetforekomst"
 
 msgid "Selected program"
 msgstr "Valgt program"
@@ -1451,7 +1457,7 @@ msgid "Save note"
 msgstr "Lagre notat"
 
 msgid "Edit {{trackedEntityName}}"
-msgstr ""
+msgstr "Rediger {{trackedEntityName}}"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
@@ -1510,9 +1516,6 @@ msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profil"
-
-msgid "tracked entity instance"
-msgstr "Sporet enhetforekomst"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
@@ -2135,6 +2138,11 @@ msgstr "Denne verdien finnes allerede"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Fra\" kan ikke være større enn \"Til\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Sjekker..."
 
@@ -2151,7 +2159,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

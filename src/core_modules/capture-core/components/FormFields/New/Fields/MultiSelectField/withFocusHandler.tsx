@@ -1,6 +1,6 @@
 import * as React from 'react';
-import classNames from 'classnames';
-import { WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { WithStyles } from 'capture-core-utils/styles';
 import defaultClasses from './selectField.module.css';
 import { styles } from './MultiSelectField.component';
 
@@ -35,7 +35,7 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
 
             return (
                 <div
-                    className={classNames(defaultClasses.inputWrapper, inputWrapper)}
+                    className={cx(defaultClasses.inputWrapper, inputWrapper)}
                 >
                     <InnerComponent
                         onFocus={this.handleFocus}

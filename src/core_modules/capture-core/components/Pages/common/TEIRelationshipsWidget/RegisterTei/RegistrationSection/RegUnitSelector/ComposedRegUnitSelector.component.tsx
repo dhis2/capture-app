@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    withDefaultShouldUpdateInterface,
     withDefaultFieldContainer,
     withLabel,
     withInternalChangeHandler,
@@ -29,20 +28,18 @@ class OrgUnitFieldWrapper extends React.Component<ComposedRegUnitSelectorProps> 
 }
 
 export const ComposedRegUnitSelector =
-    withDefaultShouldUpdateInterface()(
-        withDefaultFieldContainer()(
-            withLabel({
-                onGetUseVerticalOrientation: (props: Record<string, any>) => props.formHorizontal,
-                onGetCustomFieldLabeClass: (props: Record<string, any>) =>
-                    props.labelClass,
+    withDefaultFieldContainer()(
+        withLabel({
+            onGetUseVerticalOrientation: (props: Record<string, any>) => props.formHorizontal,
+            onGetCustomFieldLabeClass: (props: Record<string, any>) =>
+                props.labelClass,
+        })(
+            withFilterProps((props: Record<string, any>) => {
+                const { labelClass, ...passOnProps } = props;
+                return passOnProps;
             })(
-                withFilterProps((props: Record<string, any>) => {
-                    const { labelClass, ...passOnProps } = props;
-                    return passOnProps;
-                })(
-                    withInternalChangeHandler()(
-                        OrgUnitFieldWrapper,
-                    ),
+                withInternalChangeHandler()(
+                    OrgUnitFieldWrapper,
                 ),
             ),
         ),

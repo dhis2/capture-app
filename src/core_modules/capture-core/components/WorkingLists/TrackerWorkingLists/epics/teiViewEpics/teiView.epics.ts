@@ -1,7 +1,7 @@
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import { workingListsCommonActionTypes } from '../../../WorkingListsCommon';
 import { TRACKER_WORKING_LISTS_TYPE } from '../../constants';
 import { initTrackerWorkingListsViewAsync, updateTrackerWorkingListsRecords } from './helpers';

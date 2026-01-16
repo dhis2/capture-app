@@ -1,3 +1,125 @@
+## [105.2.8](https://github.com/dhis2/capture-app/compare/v105.2.7...v105.2.8) (2026-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20738] related stages validation error logic ([#4434](https://github.com/dhis2/capture-app/issues/4434)) ([3eedbb9](https://github.com/dhis2/capture-app/commit/3eedbb97ca86cf519e6b53cc41ab8e1cad0ddab7))
+
+## [105.2.7](https://github.com/dhis2/capture-app/compare/v105.2.6...v105.2.7) (2026-01-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9dc3665](https://github.com/dhis2/capture-app/commit/9dc3665efe26cba40effc07f48c93212a694f8fa))
+
+## [105.2.6](https://github.com/dhis2/capture-app/compare/v105.2.5...v105.2.6) (2026-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-20708] revert Option groups regression bug introduced by the Typescript migration ([#4428](https://github.com/dhis2/capture-app/issues/4428)) ([853dd3c](https://github.com/dhis2/capture-app/commit/853dd3cd9fa4e07b73cc92173ea444e142cc224a))
+
+## [105.2.5](https://github.com/dhis2/capture-app/compare/v105.2.4...v105.2.5) (2026-01-05)
+
+
+### Performance Improvements
+
+* [DHIS2-20475] improve responsiveness for large forms ([#4414](https://github.com/dhis2/capture-app/issues/4414)) ([3d5732c](https://github.com/dhis2/capture-app/commit/3d5732cf5ab234c72d028a94a995c1deb3d245f6))
+
+## [105.2.4](https://github.com/dhis2/capture-app/compare/v105.2.3...v105.2.4) (2025-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20665] show correctly filtered option set ([#4420](https://github.com/dhis2/capture-app/issues/4420)) ([f6f6f45](https://github.com/dhis2/capture-app/commit/f6f6f4578218c63d8a35b95d38b5f5aad3a16d06))
+
+## [105.2.3](https://github.com/dhis2/capture-app/compare/v105.2.2...v105.2.3) (2025-12-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4419](https://github.com/dhis2/capture-app/issues/4419)) ([a4c5508](https://github.com/dhis2/capture-app/commit/a4c5508d88ae75c44a0764775dc8ffeb6f708a6a))
+
+## [105.2.2](https://github.com/dhis2/capture-app/compare/v105.2.1...v105.2.2) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20646] handle missing capture namespace in DataStore ([#4418](https://github.com/dhis2/capture-app/issues/4418)) ([6352214](https://github.com/dhis2/capture-app/commit/6352214e4130145b661b0cc6d960c714b0b95f7d))
+
+## [105.2.1](https://github.com/dhis2/capture-app/compare/v105.2.0...v105.2.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20495] Org unit not retained after “Save and add another” event ([#4406](https://github.com/dhis2/capture-app/issues/4406)) ([b2724a6](https://github.com/dhis2/capture-app/commit/b2724a67ab44ce978e0d8e26047265705d825b85))
+
+# [105.2.0](https://github.com/dhis2/capture-app/compare/v105.1.0...v105.2.0) (2025-12-11)
+
+
+### Features
+
+* [DHIS2-20086] add command palette shortcuts ([#4386](https://github.com/dhis2/capture-app/issues/4386)) ([35285e4](https://github.com/dhis2/capture-app/commit/35285e4658edf919d17847c5de8de401ac8e4d1b))
+
+# [105.1.0](https://github.com/dhis2/capture-app/compare/v105.0.1...v105.1.0) (2025-12-08)
+
+
+### Features
+
+* [DHIS2-20467] facilitate bulk data entry plugin ([#4415](https://github.com/dhis2/capture-app/issues/4415)) ([27a0867](https://github.com/dhis2/capture-app/commit/27a086714fcf862fecd561363fb0b863d322b0d4))
+
+## [105.0.1](https://github.com/dhis2/capture-app/compare/v105.0.0...v105.0.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4416](https://github.com/dhis2/capture-app/issues/4416)) ([6c5196d](https://github.com/dhis2/capture-app/commit/6c5196debfdcf0cb78cee98417500ab9116bbdce))
+
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-08)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-04)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [104.7.0](https://github.com/dhis2/capture-app/compare/v104.6.12...v104.7.0) (2025-12-03)
+
+
+### Features
+
+* [DHIS2-20430] add minCharactersToSearch validation ([#4409](https://github.com/dhis2/capture-app/issues/4409)) ([b89fd5e](https://github.com/dhis2/capture-app/commit/b89fd5ea5881d867b84f400a127c5330d56a77a6))
+
+## [104.6.12](https://github.com/dhis2/capture-app/compare/v104.6.11...v104.6.12) (2025-12-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20478] prevent search when there are errors in the search form fields ([#4408](https://github.com/dhis2/capture-app/issues/4408)) ([a10ffeb](https://github.com/dhis2/capture-app/commit/a10ffeb4c6cfddb2e40d3511d148f0b13191c433))
+
+## [104.6.11](https://github.com/dhis2/capture-app/compare/v104.6.10...v104.6.11) (2025-12-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4412](https://github.com/dhis2/capture-app/issues/4412)) ([27ce535](https://github.com/dhis2/capture-app/commit/27ce5356f3b57a1f24d6e808de4cc014191e2127))
+
 ## [104.6.10](https://github.com/dhis2/capture-app/compare/v104.6.9...v104.6.10) (2025-11-24)
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';

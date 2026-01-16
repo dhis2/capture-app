@@ -54,7 +54,15 @@ yarn
 
 Read about cross-site cookies and DHIS2 applications [here](https://dhis2.nu/docs/guides/debug-instance/#disable-samesite-by-default-cookies)
 
-#### 4. Run the application
+#### 4. Build the application
+
+To build the application locally run:
+
+```
+yarn build
+```
+
+#### 5. Run the application
 
 To start the application locally and interact with it in the browser, run:
 
@@ -69,7 +77,7 @@ You will be prompted for a path to the server instance, a user name and a passwo
 The path to the server instance can also be set by supplying a `.env.development.local` file in the root folder of the project. An example of an `.env.development.local` file:
 
 ```
-REACT_APP_DHIS2_BASE_URL="http://localhost:8080"
+DHIS2_BASE_URL="http://localhost:8080"
 ```
 
 ## Local Cypress testing
@@ -87,7 +95,7 @@ This setup helps in managing Cypress Cloud credits more efficiently, ensuring re
 
 ## Built With
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This project was bootstrapped with [Vite](https://vite.dev/).
 
 
 ## Commits

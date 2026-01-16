@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { dataElementTypes } from '../../../metaData';
 import { MapModal } from '../MapModal';
 import type { OwnProps } from './MiniMap.types';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { makeCancelablePromise } from 'capture-core-utils';

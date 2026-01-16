@@ -1,9 +1,9 @@
-import { Instant, LocalDate } from '@js-joda/core';
 import {
     Option,
     RuleActionJs,
     RuleDataValue,
     RuleEngineContextJs,
+    RuleSupplementaryDataJs,
     RuleEnrollmentJs,
     RuleEventJs,
     RuleJs,
@@ -13,6 +13,8 @@ import {
     RuleEventStatus,
     RuleValueType,
     RuleVariableType,
+    RuleInstant,
+    RuleLocalDate,
 } from '@dhis2/rule-engine';
 import { ValueProcessor } from './ValueProcessor';
 import {
@@ -188,7 +190,7 @@ const buildSupplementaryData = ({
     selectedUserRoles?: Array<string> | null;
 }) => {
     const orgUnitId = selectedOrgUnit.id;
-    const supplementaryData = selectedOrgUnit.groups.reduce(
+    const orgUnitGroups = selectedOrgUnit.groups.reduce(
         (acc, group) => {
             if (group.code) {
                 acc.set(group.code, [orgUnitId]);
@@ -199,9 +201,11 @@ const buildSupplementaryData = ({
         new Map<string, Array<string>>(),
     );
 
-    supplementaryData.set('USER', selectedUserRoles || []);
-
-    return supplementaryData;
+    return new RuleSupplementaryDataJs(
+        [],
+        selectedUserRoles || [],
+        orgUnitGroups,
+    );
 };
 
 export class InputBuilder {
@@ -227,7 +231,7 @@ export class InputBuilder {
     }
 
     toLocalDate = (dateString?: string | null, defaultValue: any = null) =>
-        (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
+        (dateString ? RuleLocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
 
     convertDataElementValue = (id: string, rawValue: any) =>
         this.convertDataValue(rawValue, this.dataElements[id]?.valueType);
@@ -250,8 +254,8 @@ export class InputBuilder {
             completedAt: completedDate,
         } = eventData;
 
-        const eventDate = occurredAt ? Instant.parse(occurredAt) : null;
-        const createdDate = createdAt ? Instant.parse(createdAt) : Instant.now();
+        const eventDate = occurredAt ? RuleInstant.parse(occurredAt) : null;
+        const createdDate = createdAt ? RuleInstant.parse(createdAt) : RuleInstant.now();
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
@@ -345,7 +349,7 @@ export class InputBuilder {
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
             )) : [];
 
-        const convertDate = (dateString?: string | null) => this.toLocalDate(dateString, LocalDate.now());
+        const convertDate = (dateString?: string | null) => this.toLocalDate(dateString, RuleLocalDate.currentDate());
 
         return new RuleEnrollmentJs(
             enrollment!,

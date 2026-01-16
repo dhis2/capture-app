@@ -1,5 +1,6 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './CardImage.types';
 
 const sizes = {
@@ -41,7 +42,7 @@ const CardImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props)
             src={imageUrl}
             alt="user avatar"
             data-test={dataTest}
-            className={`${classes.img} ${classes[size]}`}
+            className={cx(classes.img, size && classes[size])}
         />
     </div>
 );

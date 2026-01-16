@@ -2,7 +2,6 @@ import {
     TextField,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -19,16 +18,14 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const TextFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDisplayMessages()(
-                                withCustomElementContainer(getContainerClass)(
-                                    withInternalChangeHandler()(
-                                        TextField,
-                                    ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDisplayMessages()(
+                            withCustomElementContainer(getContainerClass)(
+                                withInternalChangeHandler()(
+                                    TextField,
                                 ),
                             ),
                         ),

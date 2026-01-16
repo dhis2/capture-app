@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
-import cx from 'classnames';
+import { cx } from '@emotion/css';
 import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from 'capture-core-utils/styles';
 import type { Props } from './flatList.types';
 
 const itemStyles = {

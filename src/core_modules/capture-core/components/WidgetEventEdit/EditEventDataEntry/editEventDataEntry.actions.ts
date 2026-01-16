@@ -1,6 +1,6 @@
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
-import type { ApiEnrollmentEvent } from '../../../../capture-core-utils/types/api-types';
 
 export const batchActionTypes = {
     START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH: 'StartSaveEditEventDataEntryBatchForViewSingleEvent',

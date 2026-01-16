@@ -1,4 +1,4 @@
-import type { UseQueryOptions } from 'react-query';
+import type { UseQueryOptions } from '@tanstack/react-query';
 import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 
@@ -9,7 +9,7 @@ export const useTrackedEntityTypeFromIndexedDB = (
 ) => {
     const storageController = getUserMetadataStorageController();
 
-    const { data, isLoading, isError } = useIndexedDBQuery(
+    const { data, isInitialLoading, isError } = useIndexedDBQuery(
         ['trackedEntityType', trackedEntityTypeId],
         () => storageController.get(USER_METADATA_STORES.TRACKED_ENTITY_TYPES, trackedEntityTypeId),
         {
@@ -19,7 +19,7 @@ export const useTrackedEntityTypeFromIndexedDB = (
 
     return {
         trackedEntityType: data,
-        isLoading,
+        isLoading: isInitialLoading,
         isError,
     };
 };

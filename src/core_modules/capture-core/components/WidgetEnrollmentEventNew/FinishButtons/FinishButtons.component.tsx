@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, spacersNum } from '@dhis2/ui';
 import { withCancelButton } from '../../DataEntry/withCancelButton';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';

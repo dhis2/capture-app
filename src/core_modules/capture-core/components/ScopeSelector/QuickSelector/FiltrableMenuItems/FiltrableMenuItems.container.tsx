@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Input, MenuItem, spacers, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OptionLabel } from '../../OptionLabel';
 import type { Icon } from '../../../../metaData';
 

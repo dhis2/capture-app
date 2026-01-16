@@ -39,8 +39,8 @@ describe('init instance indexedDb', () => {
         const appVersion = 10;
         const serverVersion = { minor: 42, patch: 1 };
 
-        const originalCacheVersion = process.env.REACT_APP_CACHE_VERSION;
-        process.env.REACT_APP_CACHE_VERSION = appVersion;
+        const originalCacheVersion = process.env.DHIS2_CACHE_VERSION;
+        process.env.DHIS2_CACHE_VERSION = appVersion;
 
         const mainController = await initMainController({
             adapterTypes: [IndexedDBAdapter],
@@ -54,6 +54,6 @@ describe('init instance indexedDb', () => {
         expect(mainController.version).toEqual(databaseVersion);
 
         // Restore cache version
-        process.env.REACT_APP_CACHE_VERSION = originalCacheVersion;
+        process.env.DHIS2_CACHE_VERSION = originalCacheVersion;
     });
 });

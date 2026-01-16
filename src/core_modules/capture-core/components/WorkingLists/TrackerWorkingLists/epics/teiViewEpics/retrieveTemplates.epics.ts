@@ -4,7 +4,7 @@ import { from } from 'rxjs';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import { workingListsCommonActionTypes, fetchTemplatesSuccess, fetchTemplatesError } from '../../../WorkingListsCommon';
 import { getProgramStageTemplates } from './templates/getProgramStageTemplates';
 import { getTEITemplates } from './templates/getTEITemplates';
