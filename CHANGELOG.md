@@ -1,3 +1,10 @@
+## [105.2.8](https://github.com/dhis2/capture-app/compare/v105.2.7...v105.2.8) (2026-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20738] related stages validation error logic ([#4434](https://github.com/dhis2/capture-app/issues/4434)) ([3eedbb9](https://github.com/dhis2/capture-app/commit/3eedbb97ca86cf519e6b53cc41ab8e1cad0ddab7))
+
 ## [105.2.7](https://github.com/dhis2/capture-app/compare/v105.2.6...v105.2.7) (2026-01-11)
 
 
