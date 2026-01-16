@@ -3,14 +3,11 @@ import { spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
-import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
-import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
+import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetIndicator } from '../../../WidgetIndicator';
 import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
 import { NotesSection } from './NotesSection/NotesSection.container';
 import { AssigneeSection } from './AssigneeSection';
-
-type Props = {
-};
 
 const getStyles = (theme: any) => ({
     container: {
@@ -23,20 +20,24 @@ const getStyles = (theme: any) => ({
     },
 }) as const;
 
+type Props = WithStyles<typeof getStyles>;
+
 const componentContainers = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: FeedbacksSection },
-    { id: 'IndicatorsSection', Component: IndicatorsSection },
+    { id: 'FeedbacksSection', Component: WidgetFeedback },
+    { id: 'IndicatorsSection', Component: WidgetIndicator },
     { id: 'AssigneeSection', Component: AssigneeSection },
     { id: 'RelationshipsSection', Component: RelationshipsSection },
     { id: 'NotesSection', Component: NotesSection },
 ];
 
-class RightColumnWrapperPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => (
-        <container.Component key={container.id} {...props} />
-    )
+class RightColumnWrapperPlain extends React.Component<Props> {
+    renderComponent = (
+        container: { id: string, Component: React.ComponentType<any> },
+        props: Record<string, any>,
+    ) => <container.Component key={container.id} {...props} />
+
 
     render() {
         const { classes, ...passOnProps } = this.props;

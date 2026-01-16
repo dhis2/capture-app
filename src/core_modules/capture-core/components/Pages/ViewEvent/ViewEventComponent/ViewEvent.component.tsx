@@ -49,6 +49,8 @@ type Props = {
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    feedbackEmptyText: string,
+    indicatorEmptyText: string,
 };
 
 export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
@@ -65,6 +67,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         getAssignedUserSaveContext,
         onSaveAssignee,
         onSaveAssigneeError,
+        feedbackEmptyText,
+        indicatorEmptyText,
     } = props;
 
     const dispatch = useDispatch();
@@ -97,6 +101,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     getAssignedUserSaveContext={getAssignedUserSaveContext}
                     onSaveAssignee={onSaveAssignee}
                     onSaveAssigneeError={onSaveAssigneeError}
+                    feedbackEmptyText={feedbackEmptyText}
+                    indicatorEmptyText={indicatorEmptyText}
                 />
             </div>
         </div>
