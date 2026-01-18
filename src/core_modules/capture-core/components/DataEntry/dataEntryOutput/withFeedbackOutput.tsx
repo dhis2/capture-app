@@ -25,13 +25,8 @@ const getFeedbackOutput = () =>
 
         render = () => {
             const feedback = this.getItems();
-            const hasItems = feedback.length > 0;
             return (
-                <div>
-                    {hasItems &&
-                        <WidgetFeedback feedback={feedback} feedbackEmptyText={i18n.t('No feedback for this event yet')} />
-                    }
-                </div>
+                <WidgetFeedback feedback={feedback} feedbackEmptyText={i18n.t('No feedback for this event yet')} />
             );
         }
     };
