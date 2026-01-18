@@ -35,3 +35,16 @@ export const makeAssignedUserContextSelector = () =>
 
         return { event };
     });
+
+export const makeProgramRulesSelector = () =>
+    createSelector(
+        programIdSelector,
+        (programId: string) => {
+            try {
+                const program = getEventProgramThrowIfNotFound(programId);
+                return program.programRules || [];
+            } catch (error) {
+                return [];
+            }
+        },
+    );

@@ -11,6 +11,7 @@ import {
     makeAssignedUserContextSelector,
     makeEventAccessSelector,
     makeProgramStageSelector,
+    makeProgramRulesSelector,
 } from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
@@ -20,6 +21,7 @@ const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
     const assignedUserContextSelector = makeAssignedUserContextSelector();
+    const programRulesSelector = makeProgramRulesSelector();
 
     return (state: ReduxState) => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -39,6 +41,7 @@ const makeMapStateToProps = () => {
             showEditEvent: eventDetailsSection.showEditEvent,
             feedbackEmptyText: i18n.t('No feedback for this event yet'),
             indicatorEmptyText: i18n.t('No indicator output for this event yet'),
+            programRules: programRulesSelector(state),
         };
     };
 };

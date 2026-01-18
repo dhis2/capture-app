@@ -20,12 +20,23 @@ const getStyles = (theme: any) => ({
     },
 }) as const;
 
-type Props = WithStyles<typeof getStyles>;
+type Props = WithStyles<typeof getStyles> & {
+    hideWidgets?: {
+        feedback?: boolean;
+        indicator?: boolean;
+    };
+};
 
-const componentContainers = [
+type ComponentContainer = {
+    id: string;
+    Component: React.ComponentType<any>;
+    shouldHideWidget?: (props: Record<string, any>) => boolean;
+};
+
+const componentContainers: Array<ComponentContainer> = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: WidgetFeedback },
+    { id: 'FeedbacksSection', Component: WidgetFeedback, shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback },
     { id: 'IndicatorsSection', Component: WidgetIndicator },
     { id: 'AssigneeSection', Component: AssigneeSection },
     { id: 'RelationshipsSection', Component: RelationshipsSection },
@@ -34,10 +45,14 @@ const componentContainers = [
 
 class RightColumnWrapperPlain extends React.Component<Props> {
     renderComponent = (
-        container: { id: string, Component: React.ComponentType<any> },
+        container: ComponentContainer,
         props: Record<string, any>,
-    ) => <container.Component key={container.id} {...props} />
-
+    ) => {
+        const { shouldHideWidget } = container;
+        const hideWidget = shouldHideWidget && shouldHideWidget(props);
+        if (hideWidget) return null;
+        return <container.Component key={container.id} {...props} />;
+    }
 
     render() {
         const { classes, ...passOnProps } = this.props;
