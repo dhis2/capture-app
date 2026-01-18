@@ -36,8 +36,16 @@ type ComponentContainer = {
 const componentContainers: Array<ComponentContainer> = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: WidgetFeedback, shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback },
-    { id: 'IndicatorsSection', Component: WidgetIndicator },
+    {
+        id: 'FeedbacksSection',
+        Component: WidgetFeedback,
+        shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
+    },
+    {
+        id: 'IndicatorsSection',
+        Component: WidgetIndicator,
+        shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
+    },
     { id: 'AssigneeSection', Component: AssigneeSection },
     { id: 'RelationshipsSection', Component: RelationshipsSection },
     { id: 'NotesSection', Component: NotesSection },
