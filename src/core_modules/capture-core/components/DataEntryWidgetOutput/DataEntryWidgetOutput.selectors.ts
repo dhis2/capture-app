@@ -19,6 +19,8 @@ export const makeProgramRulesSelector = () =>
                 }
                 return [];
             } catch (error) {
+                // Return empty array if scope info cannot be retrieved or program not found
+                console.warn('Failed to get program rules:', error);
                 return [];
             }
         },

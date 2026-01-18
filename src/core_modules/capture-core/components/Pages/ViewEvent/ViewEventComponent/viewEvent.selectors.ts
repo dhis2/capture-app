@@ -44,6 +44,8 @@ export const makeProgramRulesSelector = () =>
                 const program = getEventProgramThrowIfNotFound(programId);
                 return program.programRules || [];
             } catch (error) {
+                // eslint-disable-next-line no-console
+                console.warn('Failed to get program rules:', error);
                 return [];
             }
         },

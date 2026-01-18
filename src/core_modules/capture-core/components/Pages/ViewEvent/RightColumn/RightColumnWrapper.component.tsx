@@ -57,7 +57,7 @@ class RightColumnWrapperPlain extends React.Component<Props> {
         props: Record<string, any>,
     ) => {
         const { shouldHideWidget } = container;
-        const hideWidget = shouldHideWidget && shouldHideWidget(props);
+        const hideWidget = shouldHideWidget?.(props);
         if (hideWidget) return null;
         return <container.Component key={container.id} {...props} />;
     }

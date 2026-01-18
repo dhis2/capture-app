@@ -60,7 +60,7 @@ const DataEntryWidgetOutputPlain = (props: Props) => {
         componentProps: Record<string, any>,
     ) => {
         const { shouldHideWidget } = container;
-        const hideWidget = shouldHideWidget && shouldHideWidget(componentProps);
+        const hideWidget = shouldHideWidget?.(componentProps);
         if (hideWidget) return null;
         return <container.Component key={container.id} {...componentProps} />;
     };
