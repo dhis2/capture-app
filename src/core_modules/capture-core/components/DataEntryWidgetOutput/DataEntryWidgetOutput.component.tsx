@@ -52,7 +52,6 @@ const componentContainers: Array<ComponentContainer> = [
 const DataEntryWidgetOutputPlain = (props: Props) => {
     const { classes, programRules, ...passOnProps } = props;
 
-    // Calculate hideWidgets from programRules (same approach as ViewEvent)
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 
     const renderComponent = (

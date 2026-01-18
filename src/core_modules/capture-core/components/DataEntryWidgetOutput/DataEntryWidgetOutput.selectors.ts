@@ -19,7 +19,7 @@ export const makeProgramRulesSelector = () =>
                 }
                 return [];
             } catch (error) {
-                // Return empty array if scope info cannot be retrieved or program not found
+                // eslint-disable-next-line no-console
                 console.warn('Failed to get program rules:', error);
                 return [];
             }
