@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import log from 'loglevel';
 import { getTrackerProgramThrowIfNotFound, scopeTypes } from '../../metaData';
 import { getScopeInfo } from '../../metaData/helpers/getScopeInfo';
 
@@ -19,8 +20,7 @@ export const makeProgramRulesSelector = () =>
                 }
                 return [];
             } catch (error) {
-                // eslint-disable-next-line no-console
-                console.warn('Failed to get program rules:', error);
+                log.warn('Failed to get program rules:', error);
                 return [];
             }
         },

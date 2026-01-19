@@ -6,7 +6,7 @@ import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
 import { WidgetFeedback } from '../WidgetFeedback';
 import { WidgetIndicator } from '../WidgetIndicator';
-import { useHideWidgetByRuleLocations } from '../Pages/Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations } from '../../hooks';
 
 type OwnProps = {
     onLink: (teiId: string, values: Record<string, unknown>) => void;
@@ -38,12 +38,12 @@ const componentContainers: Array<ComponentContainer> = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
     {
-        id: 'FeedbacksSection',
+        id: 'WidgetFeedback',
         Component: WidgetFeedback,
         shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
     },
     {
-        id: 'IndicatorsSection',
+        id: 'WidgetIndicator',
         Component: WidgetIndicator,
         shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
     },

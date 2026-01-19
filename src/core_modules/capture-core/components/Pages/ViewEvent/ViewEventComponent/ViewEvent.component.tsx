@@ -11,7 +11,7 @@ import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
-import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
 const getStyles = (theme: any) => ({
     container: {

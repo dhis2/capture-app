@@ -37,12 +37,12 @@ const componentContainers: Array<ComponentContainer> = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
     {
-        id: 'FeedbacksSection',
+        id: 'WidgetFeedback',
         Component: WidgetFeedback,
         shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
     },
     {
-        id: 'IndicatorsSection',
+        id: 'WidgetIndicator',
         Component: WidgetIndicator,
         shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
     },

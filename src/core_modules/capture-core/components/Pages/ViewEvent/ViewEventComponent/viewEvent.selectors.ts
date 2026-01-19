@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import log from 'loglevel';
 import { getEventProgramEventAccess, getEventProgramThrowIfNotFound } from '../../../../metaData';
 import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
@@ -44,8 +45,7 @@ export const makeProgramRulesSelector = () =>
                 const program = getEventProgramThrowIfNotFound(programId);
                 return program.programRules || [];
             } catch (error) {
-                // eslint-disable-next-line no-console
-                console.warn('Failed to get program rules:', error);
+                log.warn('Failed to get program rules:', error);
                 return [];
             }
         },

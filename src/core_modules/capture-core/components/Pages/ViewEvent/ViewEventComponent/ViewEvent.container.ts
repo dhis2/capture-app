@@ -11,8 +11,8 @@ import {
     makeAssignedUserContextSelector,
     makeEventAccessSelector,
     makeProgramStageSelector,
-    makeProgramRulesSelector,
 } from './viewEvent.selectors';
+import { makeProgramRulesSelector } from '../../../DataEntry/dataEntryOutput/dataEntryOutput.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
 import type { ReduxState, ReduxDispatch } from '../../../App/withAppUrlSync.types';

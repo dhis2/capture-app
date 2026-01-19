@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { useHideWidgetByRuleLocations } from '../../../hooks';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetIndicator } from '../../WidgetIndicator';
-import { makeProgramRulesSelector } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.selectors';
-import { useHideWidgetByRuleLocations } from '../../Pages/Enrollment/EnrollmentPageDefault/hooks';
+import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
 
 type Props = {
     dataEntryKey?: string;
