@@ -2,8 +2,7 @@ import * as React from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
-import { orientations } from '../../../New';
-import { withCenterPoint } from '../../HOC';
+import { orientations, withCenterPoint } from '../../../New';
 
 const getStyles = (theme: any) => ({
     inputWrapperFocused: {

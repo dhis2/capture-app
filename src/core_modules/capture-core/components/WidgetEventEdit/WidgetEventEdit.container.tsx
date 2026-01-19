@@ -18,6 +18,7 @@ import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
+import { useAuthorities } from '../../utils/authority/useAuthorities';
 
 const styles: Readonly<any> = {
     container: {
@@ -103,6 +104,7 @@ const WidgetEventEditPlain = ({
     const expiryPeriod = useProgramExpiryForUser(programId);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -161,6 +163,7 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
+                                    canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
                                     hasDeleteButton
                                     onHandleScheduleSave={onHandleScheduleSave}

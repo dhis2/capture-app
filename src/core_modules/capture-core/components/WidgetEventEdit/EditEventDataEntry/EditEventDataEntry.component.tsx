@@ -8,7 +8,6 @@ import type { ReduxAction } from 'capture-core-utils/types';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
 import type { RenderFoundation } from '../../../metaData';
-import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
     DataEntry,
@@ -33,8 +32,11 @@ import {
     withDefaultFieldContainer,
     VirtualizedSelectField,
     SingleOrgUnitSelectField,
+    withFilterProps,
+    withConditionalTooltip,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
+import { eventStatuses } from '../constants/status.const';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -311,6 +313,18 @@ const buildGeometrySettingsFn = () => ({
 });
 
 const buildCompleteFieldSettingsFn = () => {
+    const shouldDisableCompleteCheckbox = (props: any) => {
+        const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+        const canUncompleteEvent = props.canUncompleteEvent;
+        return isEventCompleted && !canUncompleteEvent;
+    };
+
+    const getTooltipContent = (props: any) => (
+        shouldDisableCompleteCheckbox(props)
+            ? i18n.t('You do not have access to uncomplete this event')
+            : undefined
+    );
+
     const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
@@ -321,18 +335,25 @@ const buildCompleteFieldSettingsFn = () => {
                             `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                     })(
                         withDisplayMessages()(
-                            withInternalChangeHandler()(TrueOnlyField),
+                            withInternalChangeHandler()(
+                                withConditionalTooltip(getTooltipContent)(TrueOnlyField),
+                            ),
                         ),
                     ),
                 ),
             ),
         );
+
     const completeSettings = {
         getComponent: () => completeComponent,
-        getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
-            id: 'complete',
-        }),
+        getComponentProps: (props: any) =>
+            createComponentProps(props, {
+                label: i18n.t('Complete event'),
+                id: 'complete',
+                disabled: shouldDisableCompleteCheckbox(props),
+                eventStatus: props.eventStatus,
+                canUncompleteEvent: props.canUncompleteEvent,
+            }),
         getPropName: () => 'complete',
         getValidatorContainers: () => [],
         getMeta: () => ({
@@ -429,6 +450,7 @@ type Props = {
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
+    canUncompleteEvent?: boolean;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;
