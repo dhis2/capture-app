@@ -272,7 +272,6 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
-
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: any) => {
         const featureType = props.formFoundation.featureType;
@@ -313,18 +312,6 @@ const buildGeometrySettingsFn = () => ({
 });
 
 const buildCompleteFieldSettingsFn = () => {
-    const shouldDisableCompleteCheckbox = (props: any) => {
-        const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
-        const canUncompleteEvent = props.canUncompleteEvent;
-        return isEventCompleted && !canUncompleteEvent;
-    };
-
-    const getTooltipContent = (props: any) => (
-        shouldDisableCompleteCheckbox(props)
-            ? i18n.t('You do not have access to uncomplete this event')
-            : undefined
-    );
-
     const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
@@ -336,7 +323,14 @@ const buildCompleteFieldSettingsFn = () => {
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
-                                withConditionalTooltip(getTooltipContent)(TrueOnlyField),
+                                withConditionalTooltip((props: any) => {
+                                    const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+                                    const canUncompleteEvent = props.canUncompleteEvent;
+                                    const shouldDisable = isEventCompleted && !canUncompleteEvent;
+                                    return shouldDisable
+                                        ? i18n.t('You do not have access to uncomplete this event')
+                                        : undefined;
+                                })(TrueOnlyField),
                             ),
                         ),
                     ),
@@ -346,14 +340,19 @@ const buildCompleteFieldSettingsFn = () => {
 
     const completeSettings = {
         getComponent: () => completeComponent,
-        getComponentProps: (props: any) =>
-            createComponentProps(props, {
+        getComponentProps: (props: any) => {
+            const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+            const canUncompleteEvent = props.canUncompleteEvent;
+            const shouldDisable = isEventCompleted && !canUncompleteEvent;
+
+            return createComponentProps(props, {
                 label: i18n.t('Complete event'),
                 id: 'complete',
-                disabled: shouldDisableCompleteCheckbox(props),
+                disabled: shouldDisable,
                 eventStatus: props.eventStatus,
                 canUncompleteEvent: props.canUncompleteEvent,
-            }),
+            });
+        },
         getPropName: () => 'complete',
         getValidatorContainers: () => [],
         getMeta: () => ({
