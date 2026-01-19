@@ -1,3 +1,10 @@
+## [105.2.9](https://github.com/dhis2/capture-app/compare/v105.2.8...v105.2.9) (2026-01-19)
+
+
+### Bug Fixes
+
+* [DHIS2-20514] New form not open without org unit selected for programs with categories  ([#4410](https://github.com/dhis2/capture-app/issues/4410)) ([224249c](https://github.com/dhis2/capture-app/commit/224249cf874e684be9230357d2c6233e6df74a36))
+
 ## [105.2.8](https://github.com/dhis2/capture-app/compare/v105.2.7...v105.2.8) (2026-01-16)
 
 
