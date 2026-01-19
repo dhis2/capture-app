@@ -2,7 +2,8 @@ import * as React from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
-import { orientations, withCenterPoint } from '../../../New';
+import { orientations } from '../../../New';
+import { withCenterPoint } from '../../HOC';
 
 const getStyles = () => ({
     dialogPaper: {
