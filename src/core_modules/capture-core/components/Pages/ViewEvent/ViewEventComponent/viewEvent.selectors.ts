@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import log from 'loglevel';
 import { getEventProgramEventAccess, getEventProgramThrowIfNotFound } from '../../../../metaData';
 import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
@@ -36,17 +35,3 @@ export const makeAssignedUserContextSelector = () =>
 
         return { event };
     });
-
-export const makeProgramRulesSelector = () =>
-    createSelector(
-        programIdSelector,
-        (programId: string) => {
-            try {
-                const program = getEventProgramThrowIfNotFound(programId);
-                return program.programRules || [];
-            } catch (error) {
-                log.warn('Failed to get program rules:', error);
-                return [];
-            }
-        },
-    );
