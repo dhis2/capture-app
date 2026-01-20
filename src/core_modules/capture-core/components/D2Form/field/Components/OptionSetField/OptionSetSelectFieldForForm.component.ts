@@ -10,6 +10,7 @@ import {
     withDisplayMessages,
     withFilterProps,
     withOptionsIconElement,
+    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -36,10 +37,12 @@ export const OptionSetSelectFieldForForm = withGotoInterface()(
                                     `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
                             })(
                                 withDisplayMessages()(
-                                    withOptionsIconElement()(
-                                        withRulesOptionVisibilityHandler()(
-                                            withFilterProps(getFilteredProps)(
-                                                withSelectTranslations()(VirtualizedSelectField),
+                                    withSearchHelpMessage()(
+                                        withOptionsIconElement()(
+                                            withRulesOptionVisibilityHandler()(
+                                                withFilterProps(getFilteredProps)(
+                                                    withSelectTranslations()(VirtualizedSelectField),
+                                                ),
                                             ),
                                         ),
                                     ),

@@ -24,13 +24,14 @@ const baseComponentStylesVertical = {
     },
 };
 
-const getBaseProps = ({ formName, compulsory, disabled, unique, icon, description, url }: DataElement) => ({
+const getBaseProps = ({ formName, compulsory, disabled, unique, icon, description, url, searchOperator }: DataElement) => ({
     description,
     url,
     styles: baseComponentStyles,
     label: formName,
     metaCompulsory: compulsory,
     metaDisabled: disabled || (unique && unique.generatable),
+    searchOperator,
     icon: icon ? {
         name: icon.name,
         color: icon.color,

@@ -537,6 +537,12 @@ msgstr "Clear"
 msgid "No results"
 msgstr "No results"
 
+msgid "Must match the start of the value"
+msgstr "Must match the start of the value"
+
+msgid "Must match the end of the value"
+msgstr "Must match the end of the value"
+
 msgid "Description"
 msgstr "Description"
 

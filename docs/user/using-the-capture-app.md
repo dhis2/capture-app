@@ -650,6 +650,10 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-0.png)
 
+    To enhance search performance, you can configure the **preferredSearchOperator** or **blockedSearchOperators** metadata in Maintenance. Tracked entity attributes with the following value types apply these settings: TEXT, LONG_TEXT, EMAIL, PHONE_NUMBER and PERCENTAGE. If preferredSearchOperator is not defined, the search falls back to the first available operator in [LIKE, SW, EQ] that is not listed in blockedSearchOperators. Attributes with other value types ignore the preferredSearchOperator. Helper text messages are displayed below the attribute search fields to guide the user.
+
+    ![](resources/images/search-by-attributes-on-scope-program-preferredSearchOperator.png)
+
     To execute a search now:
 
 1. Fill in the attributes you want to search with.
