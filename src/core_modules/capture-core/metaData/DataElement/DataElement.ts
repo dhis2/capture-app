@@ -8,6 +8,7 @@ import { dataElementTypes } from './dataElementTypes';
 import type { CachedAttributeValue } from '../../storageControllers';
 import type { Section } from '../RenderFoundation';
 import type { Unique } from './Unique';
+import type { SearchOperator } from '../../metaDataMemoryStoreBuilders';
 
 export type ConvertFn = (value: any, type: keyof typeof dataElementTypes, element: DataElement) => any;
 
@@ -36,6 +37,7 @@ export class DataElement {
     _url!: string | null;
     _attributeValues!: CachedAttributeValue[];
     _section!: Section | null;
+    _searchOperator!: SearchOperator;
 
     // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
@@ -84,6 +86,13 @@ export class DataElement {
     }
     get shortName(): string {
         return this._shortName;
+    }
+
+    set searchOperator(searchOperator: SearchOperator) {
+        this._searchOperator = searchOperator;
+    }
+    get searchOperator(): SearchOperator {
+        return this._searchOperator;
     }
 
     set formName(formName: string) {
