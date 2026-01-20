@@ -1,3 +1,10 @@
+# [105.3.0](https://github.com/dhis2/capture-app/compare/v105.2.9...v105.3.0) (2026-01-20)
+
+
+### Features
+
+* [DHIS2-20429][DHIS2-20530] use configured TEA Search Operators in the Search forms ([#4413](https://github.com/dhis2/capture-app/issues/4413)) ([2cf09bc](https://github.com/dhis2/capture-app/commit/2cf09bc1c48c7a42c52c1e17bf62d2e13499ea28))
+
 ## [105.2.9](https://github.com/dhis2/capture-app/compare/v105.2.8...v105.2.9) (2026-01-19)
 
 
