@@ -1,3 +1,10 @@
+# [105.4.0](https://github.com/dhis2/capture-app/compare/v105.3.0...v105.4.0) (2026-01-21)
+
+
+### Features
+
+* [DHIS2-18740] Update feedback and indicator widgets in View event page in Event programs ([#4435](https://github.com/dhis2/capture-app/issues/4435)) ([49e927b](https://github.com/dhis2/capture-app/commit/49e927b24725f1cc0551da94462ffa146c673659))
+
 # [105.3.0](https://github.com/dhis2/capture-app/compare/v105.2.9...v105.3.0) (2026-01-20)
 
 
