@@ -1,3 +1,10 @@
+# [105.5.0](https://github.com/dhis2/capture-app/compare/v105.4.0...v105.5.0) (2026-01-21)
+
+
+### Features
+
+* [DHIS2-17845] Improve UX when users do not have "Uncomplete events" authority ([#4438](https://github.com/dhis2/capture-app/issues/4438)) ([58b8059](https://github.com/dhis2/capture-app/commit/58b805992c77eea84e3ddeacdc0503d8a71fbb66))
+
 # [105.4.0](https://github.com/dhis2/capture-app/compare/v105.3.0...v105.4.0) (2026-01-21)
 
 
