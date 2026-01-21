@@ -8,7 +8,6 @@ import type { ReduxAction } from 'capture-core-utils/types';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
 import type { RenderFoundation } from '../../../metaData';
-import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
     DataEntry,
@@ -33,8 +32,11 @@ import {
     withDefaultFieldContainer,
     VirtualizedSelectField,
     SingleOrgUnitSelectField,
+    withFilterProps,
+    withConditionalTooltip,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
+import { eventStatuses } from '../constants/status.const';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -270,7 +272,6 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
-
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: any) => {
         const featureType = props.formFoundation.featureType;
@@ -321,18 +322,37 @@ const buildCompleteFieldSettingsFn = () => {
                             `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                     })(
                         withDisplayMessages()(
-                            withInternalChangeHandler()(TrueOnlyField),
+                            withInternalChangeHandler()(
+                                withConditionalTooltip((props: any) => {
+                                    const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+                                    const canUncompleteEvent = props.canUncompleteEvent;
+                                    const shouldDisable = isEventCompleted && !canUncompleteEvent;
+                                    return shouldDisable
+                                        ? i18n.t('You do not have access to uncomplete this event')
+                                        : undefined;
+                                })(TrueOnlyField),
+                            ),
                         ),
                     ),
                 ),
             ),
         );
+
     const completeSettings = {
         getComponent: () => completeComponent,
-        getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
-            id: 'complete',
-        }),
+        getComponentProps: (props: any) => {
+            const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+            const canUncompleteEvent = props.canUncompleteEvent;
+            const shouldDisable = isEventCompleted && !canUncompleteEvent;
+
+            return createComponentProps(props, {
+                label: i18n.t('Complete event'),
+                id: 'complete',
+                disabled: shouldDisable,
+                eventStatus: props.eventStatus,
+                canUncompleteEvent: props.canUncompleteEvent,
+            });
+        },
         getPropName: () => 'complete',
         getValidatorContainers: () => [],
         getMeta: () => ({
@@ -429,6 +449,7 @@ type Props = {
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
+    canUncompleteEvent?: boolean;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;

@@ -30,6 +30,7 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { convertFormToClient } from '../../../../converters';
+import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -83,6 +84,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -129,6 +131,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
+                    canUncompleteEvent={canUncompleteEvent}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry

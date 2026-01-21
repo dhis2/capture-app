@@ -33,6 +33,7 @@ export { withStyledContainer } from './HOC/withStyledContainer';
 export { withOptionsIconElement } from './HOC/withOptionsIconElement';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 export { withCenterPoint } from './HOC/withCenterPoint';
+export { withConditionalTooltip } from './HOC/withConditionalTooltip';
 
 // OrgUnit HOCs
 export {

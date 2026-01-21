@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-18T11:19:09.461Z\n"
-"PO-Revision-Date: 2026-01-18T11:19:09.461Z\n"
+"POT-Creation-Date: 2026-01-19T10:20:44.571Z\n"
+"PO-Revision-Date: 2026-01-19T10:20:44.571Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1360,6 +1360,9 @@ msgstr "Go to “Schedule” tab to reschedule this event"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
+
+msgid "You do not have access to uncomplete this event"
+msgstr "You do not have access to uncomplete this event"
 
 msgid "Geometry (Area)"
 msgstr "Geometry (Area)"
