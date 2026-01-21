@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import i18n from '@dhis2/d2-i18n';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { rollbackAssignee, setAssignee } from './viewEvent.actions';
 import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
@@ -11,6 +12,7 @@ import {
     makeEventAccessSelector,
     makeProgramStageSelector,
 } from './viewEvent.selectors';
+import { makeProgramRulesSelector } from '../../../DataEntry/dataEntryOutput/dataEntryOutput.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
 import type { ReduxState, ReduxDispatch } from '../../../App/withAppUrlSync.types';
@@ -19,6 +21,7 @@ const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
     const assignedUserContextSelector = makeAssignedUserContextSelector();
+    const programRulesSelector = makeProgramRulesSelector();
 
     return (state: ReduxState) => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -36,6 +39,9 @@ const makeMapStateToProps = () => {
             getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
             showEditEvent: eventDetailsSection.showEditEvent,
+            feedbackEmptyText: i18n.t('No feedback for this event yet'),
+            indicatorEmptyText: i18n.t('No indicator output for this event yet'),
+            programRules: programRulesSelector(state),
         };
     };
 };

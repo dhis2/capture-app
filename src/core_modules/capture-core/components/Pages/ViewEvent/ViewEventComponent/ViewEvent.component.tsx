@@ -11,6 +11,7 @@ import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -49,6 +50,9 @@ type Props = {
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    feedbackEmptyText: string,
+    indicatorEmptyText: string,
+    programRules: Array<any>,
 };
 
 export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
@@ -65,6 +69,9 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         getAssignedUserSaveContext,
         onSaveAssignee,
         onSaveAssigneeError,
+        feedbackEmptyText,
+        indicatorEmptyText,
+        programRules,
     } = props;
 
     const dispatch = useDispatch();
@@ -72,6 +79,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const onBackToAllEvents = useCallback(() => {
         dispatch(startGoBackToMainPage(orgUnitId));
     }, [dispatch, orgUnitId]);
+
+    const hideWidgets = useHideWidgetByRuleLocations(programRules);
 
     return (
         <div className={classes.container}>
@@ -97,6 +106,9 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     getAssignedUserSaveContext={getAssignedUserSaveContext}
                     onSaveAssignee={onSaveAssignee}
                     onSaveAssigneeError={onSaveAssigneeError}
+                    feedbackEmptyText={feedbackEmptyText}
+                    indicatorEmptyText={indicatorEmptyText}
+                    hideWidgets={hideWidgets}
                 />
             </div>
         </div>

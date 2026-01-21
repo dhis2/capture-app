@@ -12,7 +12,7 @@ import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentP
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
-import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
