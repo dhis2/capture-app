@@ -1,6 +1,6 @@
 import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
 
-function isLangRTL(code) {
+export function isLangRTL(code: string): boolean {
     const langs = ['ar', 'fa', 'ur'];
     const prefixed = langs.map(c => `${c}-`);
     return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;

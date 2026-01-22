@@ -1,7 +1,9 @@
 import React, { ComponentType, useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { colors, IconChevronRight16 } from '@dhis2/ui';
+import { colors, IconChevronRight16, IconChevronLeft16 } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
+import { isLangRTL } from 'capture-core/metaDataStoreLoaders/systemSettings/cacheSystemSetttings';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
@@ -89,6 +91,9 @@ const EventBreadcrumbPlain = ({
         page,
     ]);
 
+    const isRTL = isLangRTL(systemSettingsStore.get().uiLocale);
+    const ChevronIcon = isRTL ? IconChevronLeft16 : IconChevronRight16;
+
     return (
         <div className={classes.container}>
             {breadcrumbItems.map((button, index) => (
@@ -100,7 +105,7 @@ const EventBreadcrumbPlain = ({
                         dataTest={`event-breadcrumb-${button.key}-item`}
                     />
                     {index < (breadcrumbItems.length - 1) && (
-                        <IconChevronRight16 color={colors.grey800} />
+                        <ChevronIcon color={colors.grey800} />
                     )}
                 </React.Fragment>
             ))}
