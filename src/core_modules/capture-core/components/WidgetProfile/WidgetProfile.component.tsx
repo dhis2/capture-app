@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback, useMemo, type ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button, spacers } from '@dhis2/ui';
+import { Button, spacers, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
@@ -41,6 +41,13 @@ const styles: Readonly<any> = {
     actions: {
         display: 'flex',
         gap: '4px',
+    },
+    emptyText: {
+        color: colors.grey600,
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '19px',
+        marginTop: 0,
     },
 };
 
@@ -97,7 +104,6 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes,
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
-    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter((item: any) => item.displayInList)
@@ -129,6 +135,14 @@ const WidgetProfilePlain = ({
         [trackedEntityTypeAccess, program],
     );
 
+    const hasNoAttributes = useMemo(() =>
+        !program?.programTrackedEntityAttributes ||
+        !Array.isArray(program.programTrackedEntityAttributes) ||
+        program.programTrackedEntityAttributes.length === 0,
+    [program]);
+
+    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled && !hasNoAttributes;
+
     const renderProfile = () => {
         if (loading) {
             return <LoadingMaskElementCenter />;
@@ -137,6 +151,21 @@ const WidgetProfilePlain = ({
         if (error) {
             log.error(errorCreator('Profile widget could not be loaded')({ error }));
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
+        }
+
+        if (hasNoAttributes) {
+            return (
+                <div className={classes.container}>
+                    <p className={classes.emptyText}>
+                        {trackedEntityTypeName
+                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
+                                trackedEntityTypeName,
+                                interpolation: { escapeValue: false },
+                            })
+                            : i18n.t('No attributes configured')}
+                    </p>
+                </div>
+            );
         }
 
         return (
