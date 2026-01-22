@@ -1,3 +1,10 @@
+## [105.5.1](https://github.com/dhis2/capture-app/compare/v105.5.0...v105.5.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* [DHIS2-19820] create special section for attributes not assigned to a section ([#4289](https://github.com/dhis2/capture-app/issues/4289)) ([1451a05](https://github.com/dhis2/capture-app/commit/1451a0525860aec00286171b5460702d149af96a))
+
 # [105.5.0](https://github.com/dhis2/capture-app/compare/v105.4.0...v105.5.0) (2026-01-21)
 
 
