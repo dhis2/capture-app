@@ -136,7 +136,7 @@ const WidgetProfilePlain = ({
         [trackedEntityTypeAccess, program],
     );
 
-    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled && !hasNoAttributes;
+    const displayChangelog = supportsChangelog && program?.trackedEntityType?.changelogEnabled && !hasNoAttributes;
 
     const renderProfile = () => {
         if (loading) {
