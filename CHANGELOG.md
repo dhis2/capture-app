@@ -1,3 +1,10 @@
+## [105.5.2](https://github.com/dhis2/capture-app/compare/v105.5.1...v105.5.2) (2026-01-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20532] incorrectly formatted program fetch query ([#4439](https://github.com/dhis2/capture-app/issues/4439)) ([960e774](https://github.com/dhis2/capture-app/commit/960e774a0de317b340489313810f51ff49ea6632))
+
 ## [105.5.1](https://github.com/dhis2/capture-app/compare/v105.5.0...v105.5.1) (2026-01-22)
 
 
