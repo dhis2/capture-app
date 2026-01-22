@@ -89,12 +89,13 @@ const WidgetProfilePlain = ({
         userRoles,
     } = useUserRoles();
 
+    const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
+
     const isEditable = useMemo(() =>
-        Array.isArray(trackedEntityInstanceAttributes) &&
-        trackedEntityInstanceAttributes.length > 0 &&
+        !hasNoAttributes &&
         trackedEntityTypeAccess?.data?.write &&
         !readOnlyMode,
-    [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
+    [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
@@ -134,12 +135,6 @@ const WidgetProfilePlain = ({
         () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
         [trackedEntityTypeAccess, program],
     );
-
-    const hasNoAttributes = useMemo(() =>
-        !program?.programTrackedEntityAttributes ||
-        !Array.isArray(program.programTrackedEntityAttributes) ||
-        program.programTrackedEntityAttributes.length === 0,
-    [program]);
 
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled && !hasNoAttributes;
 
