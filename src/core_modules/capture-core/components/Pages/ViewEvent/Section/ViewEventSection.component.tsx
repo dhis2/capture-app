@@ -36,7 +36,7 @@ const getStyles = (theme: any) => ({
         },
     },
     toggleButton: {
-        margin: `0 0 0 ${spacersNum.dp4}px`,
+        marginInlineStart: spacersNum.dp4,
         height: '24px',
         borderRadius: '3px',
         color: colors.grey600,

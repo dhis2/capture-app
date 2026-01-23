@@ -50,6 +50,7 @@ const getStyles: any = () => ({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
+        gap: spacers.dp8,
     },
     actionsContainer: {
         flexShrink: 0,
@@ -58,10 +59,12 @@ const getStyles: any = () => ({
     },
     button: {
         whiteSpace: 'nowrap',
+        paddingInlineStart: spacers.dp8,
     },
     editButtonContainer: {},
 });
 
+// eslint-disable-next-line complexity
 const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,

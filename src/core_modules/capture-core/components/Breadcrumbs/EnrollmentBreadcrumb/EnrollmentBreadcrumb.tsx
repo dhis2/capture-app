@@ -1,9 +1,8 @@
 import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
-import { colors, IconChevronRight16, IconChevronLeft16 } from '@dhis2/ui';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { isLangRTL } from 'capture-core/metaDataStoreLoaders/systemSettings/cacheSystemSetttings';
+import { colors } from '@dhis2/ui';
+import { RtlChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
@@ -138,9 +137,6 @@ const BreadcrumbsPlain = ({
         onBackToViewEvent,
     ]);
 
-    const isRTL = isLangRTL(systemSettingsStore.get().uiLocale);
-    const ChevronIcon = isRTL ? IconChevronLeft16 : IconChevronRight16;
-
     return (
         <div className={classes.container}>
             {breadcrumbItems.map((button, index) => (
@@ -152,7 +148,7 @@ const BreadcrumbsPlain = ({
                         dataTest={`enrollment-breadcrumb-${button.key}-item`}
                     />
                     {index < (breadcrumbItems.length - 1) && (
-                        <ChevronIcon color={colors.grey800} />
+                        <RtlChevron color={colors.grey800} />
                     )}
                 </React.Fragment>
             ))}

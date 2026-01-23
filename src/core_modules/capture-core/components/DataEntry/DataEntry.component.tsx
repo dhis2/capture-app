@@ -30,6 +30,7 @@ const styles: Readonly<any> = (theme: any) => ({
     },
     footerLeft: {
         display: 'flex',
+        gap: spacers.dp4,
     },
     footerRight: {
         display: 'flex',

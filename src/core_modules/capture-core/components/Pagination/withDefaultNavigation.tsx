@@ -5,6 +5,7 @@ import * as React from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
+import { isLangRtl } from 'capture-core/utils/rtl';
 
 
 const styles = (theme: any) => ({
@@ -73,7 +74,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         };
 
         renderNavigationElement() {
-            const { currentPage, disabled, classes, theme, nextPageButtonDisabled } = this.props;
+            const { currentPage, disabled, classes, nextPageButtonDisabled } = this.props;
 
             return (
                 <div
@@ -85,7 +86,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={disabled || currentPage <= 1}
                         aria-label="First Page"
                     >
-                        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+                        {isLangRtl() ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
                     <IconButton
                         dataTest={'search-pagination-previous-page'}
@@ -93,7 +94,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={disabled || currentPage <= 1}
                         aria-label="Previous Page"
                     >
-                        {theme.direction === 'rtl' ? <IconChevronRight24 /> : <IconChevronLeft24 />}
+                        {isLangRtl() ? <IconChevronRight24 /> : <IconChevronLeft24 />}
                     </IconButton>
                     <IconButton
                         dataTest={'search-pagination-next-page'}
@@ -101,7 +102,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={disabled || nextPageButtonDisabled}
                         aria-label="Next Page"
                     >
-                        {theme.direction === 'rtl' ? <IconChevronLeft24 /> : <IconChevronRight24 />}
+                        {isLangRtl() ? <IconChevronLeft24 /> : <IconChevronRight24 />}
                     </IconButton>
                 </div>
             );

@@ -2,11 +2,10 @@ import type { ComponentType } from 'react';
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { colors, IconChevronRight16, IconChevronLeft16 } from '@dhis2/ui';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { isLangRTL } from 'capture-core/metaDataStoreLoaders/systemSettings/cacheSystemSetttings';
+import { colors } from '@dhis2/ui';
 import { useOriginLabel } from './hooks/useOriginLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
+import { RtlChevron } from '../../../utils/rtl';
 
 export const breadcrumbsKeys = Object.freeze({
     MAIN_PAGE: 'mainPage',
@@ -62,9 +61,6 @@ const BreadcrumbsPlain = ({
         [label, onBackToOriginPage, page],
     );
 
-    const isRTL = isLangRTL(systemSettingsStore.get().uiLocale);
-    const ChevronIcon = isRTL ? IconChevronLeft16 : IconChevronRight16;
-
     return (
         <div className={classes.container} data-test="bulkDataEntry-breadcrumb">
             {breadcrumbItems.map((button, index) => (
@@ -75,7 +71,7 @@ const BreadcrumbsPlain = ({
                         selected={button.selected}
                         dataTest={`bulkDataEntry-breadcrumb-${button.key}-item`}
                     />
-                    {index < breadcrumbItems.length - 1 && <ChevronIcon color={colors.grey800} />}
+                    {index < breadcrumbItems.length - 1 && <RtlChevron color={colors.grey800} />}
                 </React.Fragment>
             ))}
         </div>

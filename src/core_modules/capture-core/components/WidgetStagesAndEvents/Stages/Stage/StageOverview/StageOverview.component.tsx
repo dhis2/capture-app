@@ -26,7 +26,7 @@ const styles: Readonly<any> = {
         marginLeft: '-4px',
     },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp12,
     },
     descriptionIcon: {
         marginLeft: spacersNum.dp4,

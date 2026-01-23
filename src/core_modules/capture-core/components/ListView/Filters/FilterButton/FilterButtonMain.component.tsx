@@ -12,7 +12,7 @@ import type { FilterData, Options, FilterDataInput } from '../../../FiltersForTy
 
 const getStyles: Readonly<any> = (theme: any) => ({
     icon: {
-        paddingLeft: theme.typography.pxToRem(12),
+        paddingInlineStart: theme.typography.pxToRem(12),
         display: 'flex',
         alignItems: 'center',
     },

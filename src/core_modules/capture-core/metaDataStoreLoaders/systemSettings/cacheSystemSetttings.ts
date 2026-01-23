@@ -1,10 +1,5 @@
 import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
-
-export function isLangRTL(code: string): boolean {
-    const langs = ['ar', 'fa', 'ur'];
-    const prefixed = langs.map(c => `${c}-`);
-    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
-}
+import { isLangRtl } from '../../utils/rtl';
 
 export async function cacheSystemSettings(
     systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string},
@@ -31,7 +26,7 @@ export async function cacheSystemSettings(
         },
         {
             id: 'dir',
-            value: isLangRTL(userSettings.uiLocale) ? 'rtl' : 'ltr',
+            value: isLangRtl(userSettings.uiLocale) ? 'rtl' : 'ltr',
         },
         {
             id: 'captureScope',

@@ -22,10 +22,12 @@ const styles = {
         alignItems: 'center',
     },
     icon: {
-        paddingRight: spacers.dp8,
+        paddingInlineEnd: spacers.dp8,
     },
     actions: {
-        margin: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
+        marginBlockStart: 0,
+        marginBlockEnd: spacers.dp16,
+        marginInline: spacers.dp16,
     },
 };
 

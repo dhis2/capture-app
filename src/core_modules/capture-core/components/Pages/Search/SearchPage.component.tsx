@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
+import { Button, spacers, colors, IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { cx } from '@emotion/css';
 import type { Props } from './searchPage.types';
@@ -10,6 +10,7 @@ import { TemplateSelector } from '../../TemplateSelector';
 import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
+import { isLangRtl } from '../../../utils/rtl';
 import './searchPage.css';
 
 const styles = {
@@ -78,7 +79,7 @@ const SearchPagePlain = ({
         ) : (
             <>
                 <Button
-                    icon={<IconChevronLeft24 />}
+                    icon={isLangRtl() ? <IconChevronRight24 /> : <IconChevronLeft24 />}
                     dataTest="back-button"
                     className={classes.backButton}
                     onClick={onNavigateToMainPage}
