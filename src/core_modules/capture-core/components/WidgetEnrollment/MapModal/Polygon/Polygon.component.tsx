@@ -68,8 +68,6 @@ const PolygonPlain = ({
     const [center, setCenter] = useState<[number, number] | undefined>(undefined);
     const [drawingState, setDrawingState] = useState<string | undefined>(undefined);
     const prevDrawingState = useRef<string | undefined>(undefined);
-    const rtl = isLangRtl();
-    const buttonPosition = rtl ? 'topleft' : 'topright';
 
     const resetToDefaultValues = () => {
         setCenter(initialCenter ?? undefined);
@@ -111,7 +109,7 @@ const PolygonPlain = ({
             className={classes.map}
         >
             <WrappedLeafletSearch
-                position={buttonPosition}
+                position={isLangRtl() ? 'topright' : 'topleft'}
                 inputPlaceholder="Search"
                 closeResultsOnClick
                 search={null}
@@ -129,7 +127,7 @@ const PolygonPlain = ({
                 }}
             >
                 <EditControl
-                    position={buttonPosition}
+                    position={isLangRtl() ? 'topleft' : 'topright'}
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
                     onDrawStart={() => setDrawingState(drawing.STARTED)}

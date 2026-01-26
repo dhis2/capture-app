@@ -107,7 +107,7 @@ const CoordinatesPlain = ({
             onClick={onHandleMapClicked}
         >
             <WrappedLeafletSearch
-                position={isLangRtl() ? 'topleft' : 'topright'}
+                position={isLangRtl() ? 'topright' : 'topleft'}
                 inputPlaceholder="Search"
                 closeResultsOnClick
                 search={null}
