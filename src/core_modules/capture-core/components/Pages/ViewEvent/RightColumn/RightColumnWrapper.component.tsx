@@ -3,14 +3,11 @@ import { spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
-import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
-import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
+import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetIndicator } from '../../../WidgetIndicator';
 import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
 import { NotesSection } from './NotesSection/NotesSection.container';
 import { AssigneeSection } from './AssigneeSection';
-
-type Props = {
-};
 
 const getStyles = (theme: any) => ({
     container: {
@@ -23,20 +20,47 @@ const getStyles = (theme: any) => ({
     },
 }) as const;
 
-const componentContainers = [
+type Props = WithStyles<typeof getStyles> & {
+    hideWidgets?: {
+        feedback?: boolean;
+        indicator?: boolean;
+    };
+};
+
+type ComponentContainer = {
+    id: string;
+    Component: React.ComponentType<any>;
+    shouldHideWidget?: (props: Record<string, any>) => boolean;
+};
+
+const componentContainers: Array<ComponentContainer> = [
     { id: 'ErrorsSection', Component: ErrorsSection },
     { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: FeedbacksSection },
-    { id: 'IndicatorsSection', Component: IndicatorsSection },
+    {
+        id: 'WidgetFeedback',
+        Component: WidgetFeedback,
+        shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
+    },
+    {
+        id: 'WidgetIndicator',
+        Component: WidgetIndicator,
+        shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
+    },
     { id: 'AssigneeSection', Component: AssigneeSection },
     { id: 'RelationshipsSection', Component: RelationshipsSection },
     { id: 'NotesSection', Component: NotesSection },
 ];
 
-class RightColumnWrapperPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: any) => (
-        <container.Component key={container.id} {...props} />
-    )
+class RightColumnWrapperPlain extends React.Component<Props> {
+    renderComponent = (
+        container: ComponentContainer,
+        props: Record<string, any>,
+    ) => {
+        const { shouldHideWidget } = container;
+        const hideWidget = shouldHideWidget?.(props);
+        if (hideWidget) return null;
+        return <container.Component key={container.id} {...props} />;
+    }
 
     render() {
         const { classes, ...passOnProps } = this.props;

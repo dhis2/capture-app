@@ -30,6 +30,7 @@ import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
+    const eventStatus = state.viewEventPage?.loadedValues?.eventContainer?.event?.status;
 
     const dataEntryKey = `${props.dataEntryId}-${itemId}`;
     const orgUnitFieldValue = state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit;
@@ -44,6 +45,7 @@ const mapStateToProps = (state: any, props: any) => {
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
         eventData: state.enrollmentDomain?.enrollment?.events,
+        eventStatus,
     };
 };
 

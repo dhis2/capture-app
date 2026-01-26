@@ -25,7 +25,7 @@ import {
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { DataStoreKeyByPage, EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
-import { useHideWidgetByRuleLocations, useProgramMetadata, useProgramStages } from './hooks';
+import { useProgramMetadata, useProgramStages } from './hooks';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
@@ -42,6 +42,7 @@ import {
     deleteEnrollmentEvent,
     updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
 
 export const EnrollmentPageDefault = () => {

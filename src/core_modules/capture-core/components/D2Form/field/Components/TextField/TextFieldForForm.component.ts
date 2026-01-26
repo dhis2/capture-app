@@ -7,6 +7,7 @@ import {
     withDefaultFieldContainer,
     withLabel,
     withDisplayMessages,
+    withSearchHelpMessage,
     withInternalChangeHandler,
     withFilterProps,
 } from '../../../../FormFields/New';
@@ -35,7 +36,9 @@ export const TextFieldForForm = withGotoInterface()(
                             })(
                                 withFilterProps(getFilteredProps)(
                                     withDisplayMessages()(
-                                        withInternalChangeHandler()(TextField),
+                                        withSearchHelpMessage()(
+                                            withInternalChangeHandler()(TextField),
+                                        ),
                                     ),
                                 ),
                             ),

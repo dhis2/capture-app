@@ -1,47 +1,46 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { useHideWidgetByRuleLocations } from 'capture-core/hooks';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
-import {
-    WidgetFeedback,
-    type FilteredFeedbackText, type FilteredFeedbackKeyValue } from '../../WidgetFeedback';
+import { WidgetFeedback } from '../../WidgetFeedback';
+import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
 
 type Props = {
-    feedbackItems: {
-        displayTexts: Array<FilteredFeedbackText>;
-        displayKeyValuePairs: Array<FilteredFeedbackKeyValue>;
-    };
+    dataEntryKey?: string;
+    programRules?: Array<any>;
 };
 
-const getFeedbackOutput = () =>
-    class FeedbackOutputBuilder extends React.Component<Props> {
-        getItems = () => {
-            const { feedbackItems } = this.props;
-            const displayTexts = feedbackItems?.displayTexts || [];
-            const displayKeyValuePairs = feedbackItems?.displayKeyValuePairs || [];
-            return [...displayTexts, ...displayKeyValuePairs];
-        }
+const FeedbackOutputWrapper = (props: Props) => {
+    const { dataEntryKey, programRules } = props;
 
-        render = () => {
-            const feedback = this.getItems();
-            const hasItems = feedback.length > 0;
-            return (
-                <div>
-                    {hasItems &&
-                        <WidgetFeedback feedback={feedback} feedbackEmptyText={i18n.t('No feedback for this event yet')} />
-                    }
-                </div>
-            );
-        }
-    };
+    const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 
-const mapStateToProps = (state: any, props: any) => {
-    const itemId = state.dataEntries[props.id].itemId;
-    const key = getDataEntryKey(props.id, itemId);
-    return {
-        feedbackItems: state.rulesEffectsFeedback && state.rulesEffectsFeedback[key] ?
-            state.rulesEffectsFeedback[key] : null,
+    if (hideWidgets.feedback) {
+        return null;
+    }
+
+    return (
+        <WidgetFeedback
+            dataEntryKey={dataEntryKey}
+            feedbackEmptyText={i18n.t('No feedback for this event yet')}
+        />
+    );
+};
+
+const makeMapStateToProps = () => {
+    const programRulesSelector = makeProgramRulesSelector();
+
+    return (state: any, props: any) => {
+        const itemId = state.dataEntries[props.id].itemId;
+        const dataEntryKey = getDataEntryKey(props.id, itemId);
+        const programRules = programRulesSelector(state);
+
+        return {
+            dataEntryKey,
+            programRules,
+        };
     };
 };
 
@@ -51,4 +50,4 @@ export const withFeedbackOutput = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withDataEntryOutput()(
             InnerComponent,
-            connect(mapStateToProps, mapDispatchToProps)(getFeedbackOutput()));
+            connect(makeMapStateToProps, mapDispatchToProps)(FeedbackOutputWrapper));

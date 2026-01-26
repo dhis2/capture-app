@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-13T16:09:54.021Z\n"
-"PO-Revision-Date: 2026-01-13T16:09:54.021Z\n"
+"POT-Creation-Date: 2026-01-19T10:20:44.571Z\n"
+"PO-Revision-Date: 2026-01-19T10:20:44.571Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -537,6 +537,12 @@ msgstr "Clear"
 msgid "No results found"
 msgstr "No results found"
 
+msgid "Must match the start of the value"
+msgstr "Must match the start of the value"
+
+msgid "Must match the end of the value"
+msgstr "Must match the end of the value"
+
 msgid "Description"
 msgstr "Description"
 
@@ -899,12 +905,6 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Errors"
-
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Warnings"
 msgstr "Warnings"
@@ -1355,6 +1355,9 @@ msgstr "Go to “Schedule” tab to reschedule this event"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
 
+msgid "You do not have access to uncomplete this event"
+msgstr "You do not have access to uncomplete this event"
+
 msgid "Geometry (Area)"
 msgstr "Geometry (Area)"
 
@@ -1432,6 +1435,12 @@ msgstr "Write a note about this scheduled event"
 
 msgid "Program or stage is invalid"
 msgstr "Program or stage is invalid"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicators"
 
 msgid "Save note"
 msgstr "Save note"

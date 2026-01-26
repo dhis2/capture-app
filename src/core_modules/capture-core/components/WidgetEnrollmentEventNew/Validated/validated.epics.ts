@@ -19,8 +19,8 @@ export const saveNewEnrollmentEventEpic = (action$: any, store: any) =>
             if (!(relatedStageRef?.current?.eventHasLinkableStageRelationship())) {
                 return true;
             }
-            if (relatedStageRef.current.formIsValidOnSave()) {
-                return true;
+            if (!relatedStageRef.current.formIsValidOnSave()) {
+                return false;
             }
             return !!relatedStageRef.current?.getLinkedStageValues;
         }),

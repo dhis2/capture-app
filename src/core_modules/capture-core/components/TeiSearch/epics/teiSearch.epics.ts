@@ -5,12 +5,7 @@ import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import type { ApiUtils, ReduxStore } from 'capture-core-utils/types';
-import { convertValue as convertToClient } from '../../../converters/formToClient';
-import { convertValue as convertToServer } from '../../../converters/clientToServer';
-import {
-    convertValue as convertToFilters,
-    convertValueToEqual as convertToUniqueFilters,
-} from '../serverToFilters';
+import { convertSearchFormToServer } from '../../../converters';
 import {
     actionTypes,
     batchActionTypes,
@@ -109,18 +104,25 @@ const searchTei = ({
         selectedOrgUnitScope,
     } = currentTeiSearch;
 
-    const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, selectedProgramId);
+    const { searchGroups, attributes } = selectedProgramId
+        ? getTrackerProgram(selectedProgramId)
+        : getTrackedEntityType(selectedTrackedEntityTypeId);
+
+
     const searchGroup = searchGroups[searchGroupId];
-    const filterConverter = searchGroup.unique ? convertToUniqueFilters : convertToFilters;
+    const searchGroupElements = searchGroup?.searchForm?.getElements();
 
-    const filterValues = searchGroup.searchForm.convertValues(formValues,
-        (value: any, type: any, element: any) =>
-            filterConverter(convertToServer(convertToClient(value, type), type), type, element));
+    const filters = Object.keys(formValues)
+        .map((fieldId) => {
+            const dataElement = attributes.find(attribute => attribute.id === fieldId);
+            const searchGroupElement = searchGroupElements?.find(element => element.id === fieldId);
+            if (formValues[fieldId] && dataElement && searchGroupElement) {
+                const searchOperator = searchGroupElement.searchOperator;
 
-    const filters = Object.keys(filterValues).reduce((accFilters, key) => {
-        const value = filterValues[key];
-        return isArray(value) ? [...accFilters, ...value] : [...accFilters, value];
-    }, [] as any[]).filter(f => f !== null && f !== undefined);
+                return convertSearchFormToServer(formValues[fieldId], dataElement, searchOperator);
+            }
+            return null;
+        });
 
     const queryArgs = {
         filter: filters,
@@ -130,10 +132,6 @@ const searchTei = ({
         ...getPagingQueryArgs(pageNumber),
         pageSize: resultsPageSize,
     };
-
-    const attributes = selectedProgramId ?
-        getTrackerProgram(selectedProgramId).attributes :
-        getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
     return from(getTrackedEntityInstances(
         queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId,

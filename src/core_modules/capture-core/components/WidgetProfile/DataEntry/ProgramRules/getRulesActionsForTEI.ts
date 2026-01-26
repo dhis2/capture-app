@@ -51,49 +51,6 @@ const getDataElementsForRulesExecution = (dataElements?: DataElements): Record<s
     );
 };
 
-export const getRulesActionsForTEI = ({
-    foundation,
-    formId,
-    orgUnit,
-    enrollmentData,
-    teiValues,
-    trackedEntityAttributes,
-    optionSets,
-    rulesContainer,
-    otherEvents,
-    dataElements,
-    userRoles,
-    programName,
-}: {
-    foundation: RenderFoundation;
-    formId: string;
-    orgUnit: OrgUnit;
-    enrollmentData?: EnrollmentData;
-    teiValues?: TEIValues;
-    trackedEntityAttributes?: TrackedEntityAttributes;
-    optionSets: OptionSets;
-    rulesContainer: ProgramRulesContainer;
-    otherEvents?: EventsData;
-    dataElements?: DataElements;
-    userRoles: Array<string>;
-    programName: string;
-}) => {
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
-        programRulesContainer: rulesContainer,
-        currentEvent: null,
-        otherEvents,
-        dataElements: getDataElementsForRulesExecution(dataElements),
-        trackedEntityAttributes,
-        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
-        selectedEntity: teiValues,
-        selectedOrgUnit: orgUnit,
-        selectedUserRoles: userRoles,
-        optionSets,
-    });
-    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
-    return updateRulesEffects(effectsHierarchy, formId);
-};
-
 export const getRulesActionsForTEIAsync = async ({
     foundation,
     formId,

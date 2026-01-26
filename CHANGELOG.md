@@ -1,3 +1,59 @@
+## [105.5.3](https://github.com/dhis2/capture-app/compare/v105.5.2...v105.5.3) (2026-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-20777] validation of rule-mandatory fields ([#4440](https://github.com/dhis2/capture-app/issues/4440)) ([67eb62b](https://github.com/dhis2/capture-app/commit/67eb62bad4cc32f201ddeaa3b1349edfaf87ec6e))
+
+## [105.5.2](https://github.com/dhis2/capture-app/compare/v105.5.1...v105.5.2) (2026-01-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20532] incorrectly formatted program fetch query ([#4439](https://github.com/dhis2/capture-app/issues/4439)) ([960e774](https://github.com/dhis2/capture-app/commit/960e774a0de317b340489313810f51ff49ea6632))
+
+## [105.5.1](https://github.com/dhis2/capture-app/compare/v105.5.0...v105.5.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* [DHIS2-19820] create special section for attributes not assigned to a section ([#4289](https://github.com/dhis2/capture-app/issues/4289)) ([1451a05](https://github.com/dhis2/capture-app/commit/1451a0525860aec00286171b5460702d149af96a))
+
+# [105.5.0](https://github.com/dhis2/capture-app/compare/v105.4.0...v105.5.0) (2026-01-21)
+
+
+### Features
+
+* [DHIS2-17845] Improve UX when users do not have "Uncomplete events" authority ([#4438](https://github.com/dhis2/capture-app/issues/4438)) ([58b8059](https://github.com/dhis2/capture-app/commit/58b805992c77eea84e3ddeacdc0503d8a71fbb66))
+
+# [105.4.0](https://github.com/dhis2/capture-app/compare/v105.3.0...v105.4.0) (2026-01-21)
+
+
+### Features
+
+* [DHIS2-18740] Update feedback and indicator widgets in View event page in Event programs ([#4435](https://github.com/dhis2/capture-app/issues/4435)) ([49e927b](https://github.com/dhis2/capture-app/commit/49e927b24725f1cc0551da94462ffa146c673659))
+
+# [105.3.0](https://github.com/dhis2/capture-app/compare/v105.2.9...v105.3.0) (2026-01-20)
+
+
+### Features
+
+* [DHIS2-20429][DHIS2-20530] use configured TEA Search Operators in the Search forms ([#4413](https://github.com/dhis2/capture-app/issues/4413)) ([2cf09bc](https://github.com/dhis2/capture-app/commit/2cf09bc1c48c7a42c52c1e17bf62d2e13499ea28))
+
+## [105.2.9](https://github.com/dhis2/capture-app/compare/v105.2.8...v105.2.9) (2026-01-19)
+
+
+### Bug Fixes
+
+* [DHIS2-20514] New form not open without org unit selected for programs with categories  ([#4410](https://github.com/dhis2/capture-app/issues/4410)) ([224249c](https://github.com/dhis2/capture-app/commit/224249cf874e684be9230357d2c6233e6df74a36))
+
+## [105.2.8](https://github.com/dhis2/capture-app/compare/v105.2.7...v105.2.8) (2026-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20738] related stages validation error logic ([#4434](https://github.com/dhis2/capture-app/issues/4434)) ([3eedbb9](https://github.com/dhis2/capture-app/commit/3eedbb97ca86cf519e6b53cc41ab8e1cad0ddab7))
+
 ## [105.2.7](https://github.com/dhis2/capture-app/compare/v105.2.6...v105.2.7) (2026-01-11)
 
 
