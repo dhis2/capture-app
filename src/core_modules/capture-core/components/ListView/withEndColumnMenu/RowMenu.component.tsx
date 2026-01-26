@@ -3,6 +3,7 @@ import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
 import type { Props } from './rowMenu.types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
+import { isLangRtl } from '../../../utils/rtl';
 
 export const RowMenu = (props: Props) => {
     const { customRowMenuContents = [], row } = props;
@@ -63,7 +64,7 @@ export const RowMenu = (props: Props) => {
             {actionsIsOpen && anchorRef.current && (
                 <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
-                        placement="right"
+                        placement={isLangRtl() ? 'left' : 'right'}
                         reference={anchorRef.current}
                         data-test="row-menu-popper"
                     >

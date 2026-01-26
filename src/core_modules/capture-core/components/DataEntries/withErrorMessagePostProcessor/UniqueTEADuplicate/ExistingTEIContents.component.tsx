@@ -8,8 +8,7 @@ import type { Props } from './existingTeiContents.types';
 
 const styles = ({
     customDialogActions: {
-        marginLeft: 4,
-        marginRight: 4,
+        marginInline: 4,
     },
 });
 

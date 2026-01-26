@@ -21,14 +21,14 @@ const styles: Readonly<any> = {
         padding: 0,
         font: 'inherit',
         fontWeight: 'bold',
-        textAlign: 'left',
+        textAlign: 'start',
         '&:hover': {
             cursor: 'pointer',
             textDecoration: 'underline',
         },
     },
     configChevronCell: {
-        textAlign: 'right',
+        textAlign: 'end',
     },
 };
 

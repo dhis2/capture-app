@@ -20,10 +20,9 @@ import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
-        marginLeft: theme.typography.pxToRem(10),
+        marginInline: theme.typography.pxToRem(10),
         marginTop: theme.typography.pxToRem(20),
         marginBottom: theme.typography.pxToRem(28),
-        marginRight: theme.typography.pxToRem(10),
     },
     loadingMask: {
         display: 'flex',

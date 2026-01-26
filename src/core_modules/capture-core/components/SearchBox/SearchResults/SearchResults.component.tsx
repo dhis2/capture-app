@@ -26,11 +26,11 @@ export const getStyles = (theme: any) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
         width: theme.typography.pxToRem(600),
     },
     bottom: {
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
     },
     bottomText: {
         color: colors.grey800,

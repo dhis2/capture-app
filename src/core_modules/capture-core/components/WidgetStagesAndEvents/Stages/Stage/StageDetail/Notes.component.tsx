@@ -13,7 +13,7 @@ const styles = {
         alignItems: 'center',
     },
     text: {
-        paddingLeft: '2px',
+        paddingInlineStart: '2px',
     },
 };
 export const NotesPlain = ({ event, classes }: Props & WithStyles<typeof styles>) => {

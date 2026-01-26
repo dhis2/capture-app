@@ -12,7 +12,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
-        marginRight: theme.typography.pxToRem(-24),
+        marginInlineEnd: theme.typography.pxToRem(-24),
     },
     error: {
         color: theme.palette.error.main,

@@ -37,8 +37,8 @@ const styles: Readonly<any> = (theme: any) => ({
         alignItems: 'center',
     },
     arrowIcon: {
-        marginLeft: 10,
-        marginRight: 10,
+        marginInlineStart: 10,
+        marginInlineEnd: 10,
         fontSize: 15,
     },
     relationshipActions: {

@@ -22,7 +22,7 @@ const styles = () => ({
         height: 'calc(100vh - 380px)',
     },
     setAreaButton: {
-        marginLeft: '5px',
+        marginInlineStart: '5px',
     },
 });
 

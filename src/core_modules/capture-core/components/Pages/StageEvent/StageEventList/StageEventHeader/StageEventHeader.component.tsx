@@ -10,7 +10,7 @@ const getStyles = () => ({
         display: 'flex',
     },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp8,
     },
     title: {
         color: colors.grey900,

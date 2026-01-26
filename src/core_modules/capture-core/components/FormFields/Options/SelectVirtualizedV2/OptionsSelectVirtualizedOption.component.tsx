@@ -8,7 +8,7 @@ const getStyles = () => ({
         zIndex: 9999,
     },
     iconContainer: {
-        paddingLeft: 5,
+        paddingInlineStart: 5,
     },
 });
 
@@ -26,7 +26,7 @@ class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
         display: 'flex',
         alignItems: 'center',
         cursor: 'default',
-        paddingLeft: 8,
+        paddingInlineStart: 8,
         overflow: 'hidden',
         paddingTop: 4,
         paddingBottom: 2,

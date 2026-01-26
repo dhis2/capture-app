@@ -69,7 +69,7 @@ const styles = (theme: any) => ({
     image: {
         width: theme.typography.pxToRem(54),
         height: theme.typography.pxToRem(54),
-        marginRight: theme.typography.pxToRem(8),
+        marginInlineEnd: theme.typography.pxToRem(8),
     },
     buttonMargin: {
         marginTop: theme.typography.pxToRem(8),

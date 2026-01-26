@@ -20,7 +20,7 @@ const getStyles = () => ({
         alignItems: 'center',
     },
     selectedIconContainer: {
-        paddingLeft: 5,
+        paddingInlineStart: 5,
     },
 });
 

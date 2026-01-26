@@ -23,14 +23,14 @@ const styles: Readonly<any> = {
         padding: '0',
         justifyContent: 'space-between',
         width: '100%',
-        marginLeft: '-4px',
+        marginInlineStart: '-4px',
     },
     icon: {
         paddingInlineEnd: spacersNum.dp12,
     },
     descriptionIcon: {
-        marginLeft: spacersNum.dp4,
-        marginRight: spacersNum.dp8,
+        marginInlineStart: spacersNum.dp4,
+        marginInlineEnd: spacersNum.dp8,
         height: '16px',
     },
     infoTitles: {
@@ -43,7 +43,7 @@ const styles: Readonly<any> = {
         gap: spacers.dp12,
     },
     indicatorIcon: {
-        paddingRight: spacersNum.dp4,
+        paddingInlineEnd: spacersNum.dp4,
         height: '16px',
     },
     title: {

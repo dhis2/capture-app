@@ -26,7 +26,7 @@ const styles = {
         flex: '0 0 auto',
         width: '128px',
         color: colors.grey600,
-        marginRight: '20px',
+        marginInlineEnd: '20px',
         ...itemStyles,
     },
     itemValue: {

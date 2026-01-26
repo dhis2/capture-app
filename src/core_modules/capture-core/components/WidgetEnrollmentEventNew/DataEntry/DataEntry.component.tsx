@@ -57,7 +57,7 @@ const getStyles = (theme: any) => ({
         fontSize: theme.typography.pxToRem(13),
     },
     savingContextText: {
-        paddingLeft: theme.typography.pxToRem(10),
+        paddingInlineStart: theme.typography.pxToRem(10),
     },
     savingContextNames: {
         fontWeight: 'bold',

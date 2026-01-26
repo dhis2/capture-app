@@ -9,13 +9,13 @@ const styles = {
     descriptionBox: {
         display: 'flex',
         marginBottom: 8,
-        marginRight: 15,
+        marginInlineEnd: 15,
         color: colors.grey700,
     },
     icon: {
         minWidth: 16,
-        marginLeft: 10,
-        marginRight: 5,
+        marginInlineStart: 10,
+        marginInlineEnd: 5,
         marginTop: 1,
     },
     description: {

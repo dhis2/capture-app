@@ -29,10 +29,11 @@ const styles: Readonly<any> = (theme: any) => ({
         padding: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
+        gap: theme.typography.pxToRem(8),
     },
     minAttributesRequired: {
         flexGrow: 1,
-        textAlign: 'right',
+        textAlign: 'end',
         fontSize: theme.typography.pxToRem(14),
     },
     minAttribtuesRequiredInvalid: {

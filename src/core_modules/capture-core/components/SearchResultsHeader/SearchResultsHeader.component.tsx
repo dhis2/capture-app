@@ -8,8 +8,7 @@ import { convertValue } from '../../converters/clientToList';
 const styles = (theme: any) => ({
     topSection: {
         marginTop: theme.typography.pxToRem(20),
-        marginLeft: theme.typography.pxToRem(10),
-        marginRight: theme.typography.pxToRem(10),
+        marginInline: theme.typography.pxToRem(10),
         marginBottom: theme.typography.pxToRem(10),
     },
 });

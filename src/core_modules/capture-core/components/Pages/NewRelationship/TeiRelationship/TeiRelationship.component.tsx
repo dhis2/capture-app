@@ -43,7 +43,7 @@ const getStyles = (theme: any) => ({
         textAlign: 'center',
     },
     buttonIcon: {
-        marginRight: spacersNum.dp8,
+        marginInlineEnd: spacersNum.dp8,
     },
 }) as const;
 

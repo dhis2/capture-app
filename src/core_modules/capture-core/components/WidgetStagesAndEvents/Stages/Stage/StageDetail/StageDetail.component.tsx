@@ -49,7 +49,7 @@ const styles: Readonly<any> = {
         top: '1px',
     },
     label: {
-        paddingLeft: spacersNum.dp32,
+        paddingInlineStart: spacersNum.dp32,
     },
     table: {
         border: 'none !important',

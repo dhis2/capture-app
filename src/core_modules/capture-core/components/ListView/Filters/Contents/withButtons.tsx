@@ -10,7 +10,7 @@ const getStyles = (theme: any) => ({
         paddingTop: theme.typography.pxToRem(8),
     },
     buttonContainer: {
-        paddingRight: theme.typography.pxToRem(8),
+        paddingInlineEnd: theme.typography.pxToRem(8),
         display: 'inline-block',
     },
 });
