@@ -1,5 +1,4 @@
-
-import { isLangRtl } from 'capture-core/utils/rtl';
+import { isLangRtl } from '../../../../../utils/rtl';
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeRangeFieldForForm } from '../../Components';

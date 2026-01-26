@@ -5,7 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { DirectionalArrow } from 'capture-core/utils/rtl';
+import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 

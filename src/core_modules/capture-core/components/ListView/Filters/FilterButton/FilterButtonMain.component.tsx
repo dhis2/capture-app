@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
-import { isLangRtl } from 'capture-core/utils/rtl';
+import { isLangRtl } from '../../../../utils/rtl';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import { LockedFilterButton } from './LockedFilterButton.component';
