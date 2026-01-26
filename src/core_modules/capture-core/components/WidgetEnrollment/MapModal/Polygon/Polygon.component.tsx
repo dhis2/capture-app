@@ -9,6 +9,7 @@ import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
+import { isLangRtl } from '../../../../utils/rtl';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';
 import { ConditionalTooltip } from './ConditionalTooltip.component';
@@ -67,6 +68,8 @@ const PolygonPlain = ({
     const [center, setCenter] = useState<[number, number] | undefined>(undefined);
     const [drawingState, setDrawingState] = useState<string | undefined>(undefined);
     const prevDrawingState = useRef<string | undefined>(undefined);
+    const rtl = isLangRtl();
+    const buttonPosition = rtl ? 'topleft' : 'topright';
 
     const resetToDefaultValues = () => {
         setCenter(initialCenter ?? undefined);
@@ -108,7 +111,7 @@ const PolygonPlain = ({
             className={classes.map}
         >
             <WrappedLeafletSearch
-                position="topright"
+                position={buttonPosition}
                 inputPlaceholder="Search"
                 closeResultsOnClick
                 search={null}
@@ -126,7 +129,7 @@ const PolygonPlain = ({
                 }}
             >
                 <EditControl
-                    position="topright"
+                    position={buttonPosition}
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
                     onDrawStart={() => setDrawingState(drawing.STARTED)}

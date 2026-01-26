@@ -10,6 +10,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { CoordinateInput } from 'capture-ui/internal/CoordinateInput/CoordinateInput.component';
 import type { CoordinatesProps } from './Coordinates.types';
 import { isEqual } from '../../../../utils/valueEqualityChecker';
+import { isLangRtl } from '../../../../utils/rtl';
 import { isValidCoordinate } from './coordinate.validator';
 import { convertCoordinatesToServer } from './converters';
 
@@ -106,7 +107,7 @@ const CoordinatesPlain = ({
             onClick={onHandleMapClicked}
         >
             <WrappedLeafletSearch
-                position="topright"
+                position={isLangRtl() ? 'topleft' : 'topright'}
                 inputPlaceholder="Search"
                 closeResultsOnClick
                 search={null}

@@ -158,7 +158,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             return null;
         }
         const center = position || this.props.center;
-        const controlButtonPosition = isLangRtl() ? 'topright' : 'topleft';
+        const buttonPosition = isLangRtl() ? 'topright' : 'topleft';
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -170,9 +170,9 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <ZoomControl position={controlButtonPosition} />
+                    <ZoomControl position={buttonPosition} />
                     <WrappedLeafletSearch
-                        position={controlButtonPosition}
+                        position={buttonPosition}
                         inputPlaceholder="Search"
                         closeResultsOnClick
                         search={null}

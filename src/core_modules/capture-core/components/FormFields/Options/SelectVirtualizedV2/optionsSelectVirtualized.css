@@ -1,5 +1,6 @@
 .Select-control {
-    padding: 12px 4px 10px 11px;
+    padding-block: 12px 10px;
+    padding-inline: 11px 4px;
     font-size: 14px;
     width: 100%;
     border: 1px solid #a0adba;
@@ -22,17 +23,17 @@
 }
 
 .Select-input {
-    padding-left: 0px;
+    padding-inline-start: 0px;
     height: inherit;
 }
 
 .Select-placeholder {
-    padding-left: 12px!important;
+    padding-inline-start: 12px!important;
     line-height: inherit!important;
 }
 
 .Select-value {
-    padding-left: 12px!important;
+    padding-inline-start: 12px!important;
     line-height: inherit!important;
 }
 
