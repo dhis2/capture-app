@@ -128,7 +128,6 @@ const getCalendarAnchorPosition = (formHorizontal?: boolean) => {
     if (formHorizontal) {
         return 'center';
     }
-
     return isLangRtl() ? 'right' : 'left';
 };
 const getOrientation = (formHorizontal?: boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);

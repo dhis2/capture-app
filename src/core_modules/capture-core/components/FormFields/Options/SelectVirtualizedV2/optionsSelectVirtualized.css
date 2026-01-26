@@ -23,17 +23,17 @@
 }
 
 .Select-input {
-    padding-inline-start: 0px;
+    padding-left: 0px;
     height: inherit;
 }
 
 .Select-placeholder {
-    padding-inline-start: 12px!important;
+    padding-left: 12px!important;
     line-height: inherit!important;
 }
 
 .Select-value {
-    padding-inline-start: 12px!important;
+    padding-left: 12px!important;
     line-height: inherit!important;
 }
 

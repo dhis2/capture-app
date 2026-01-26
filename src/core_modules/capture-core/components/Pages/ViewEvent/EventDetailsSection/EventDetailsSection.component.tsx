@@ -64,7 +64,6 @@ const getStyles: any = () => ({
     editButtonContainer: {},
 });
 
-// eslint-disable-next-line complexity
 const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,
