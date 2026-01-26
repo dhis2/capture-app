@@ -105,6 +105,7 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes,
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter((item: any) => item.displayInList)
@@ -135,8 +136,6 @@ const WidgetProfilePlain = ({
         () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
         [trackedEntityTypeAccess, program],
     );
-
-    const displayChangelog = supportsChangelog && program?.trackedEntityType?.changelogEnabled && !hasNoAttributes;
 
     const renderProfile = () => {
         if (loading) {
