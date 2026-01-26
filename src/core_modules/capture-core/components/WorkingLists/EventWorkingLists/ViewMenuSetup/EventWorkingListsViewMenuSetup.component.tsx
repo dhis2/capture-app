@@ -59,6 +59,7 @@ export const EventWorkingListsViewMenuSetup = ({
             onClearSelection={clearSelection}
             onUpdateList={onUpdateList}
             removeRowsFromSelection={removeRowsFromSelection}
+            programId={program.id}
         />
     );
 
