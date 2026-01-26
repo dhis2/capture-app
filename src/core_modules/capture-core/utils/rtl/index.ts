@@ -1,2 +1,3 @@
 export { isLangRtl } from './isLangRtl';
-export { RtlChevron } from './getRtlChevron';
+export { DirectionalChevron } from './getDirectionalChevron';
+export { DirectionalArrow } from './getDirectionalArrow';

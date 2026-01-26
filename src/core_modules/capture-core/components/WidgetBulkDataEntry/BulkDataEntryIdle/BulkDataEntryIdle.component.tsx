@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryIdle.types';
 import { Widget } from '../../Widget';
-import { RtlChevron } from '../../../utils/rtl';
+import { DirectionalChevron } from '../../../utils/rtl';
 
 const styles: Readonly<any> = {
     container: {
@@ -59,7 +59,7 @@ const BulkDataEntryIdleComponenetPlain = ({
                             </DataTableCell>
                             <DataTableCell>
                                 <div className={classes.configChevronCell}>
-                                    <RtlChevron />
+                                    <DirectionalChevron />
                                 </div>
                             </DataTableCell>
                         </DataTableRow>

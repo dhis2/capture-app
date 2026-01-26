@@ -1,13 +1,19 @@
 
 import moment from 'moment';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { isLangRtl } from 'capture-core/utils/rtl';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import type { DateDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
-const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+    return isLangRtl() ? 'right' : 'left';
+};
 
 export const getDateFieldConfig = (metaData: DateDataElement, options: any, querySingleResource: QuerySingleResource) => {
     const props = createProps({

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { isLangRtl } from 'capture-core/utils/rtl';
 import { IconCheckmark16, IconLocation16, colors, Button, ModalContent, ModalActions } from '@dhis2/ui';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, FeatureGroup, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import defaultClasses from './polygonField.module.css';
@@ -166,6 +167,8 @@ export class PolygonField extends React.Component<Props, State> {
         const featureCollection = this.getFeatureCollection(this.state.mapCoordinates);
         const hasPosition = !!featureCollection;
         const center = this.getCenter(featureCollection);
+        const rtl = isLangRtl();
+        const buttonPosition = rtl ? 'topright' : 'topleft';
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -173,16 +176,18 @@ export class PolygonField extends React.Component<Props, State> {
                     center={center}
                     className={defaultClasses.map}
                     key="map"
+                    zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                    <ZoomControl position={buttonPosition} />
+                    <WrappedLeafletSearch position={buttonPosition} inputPlaceholder="Search" closeResultsOnClick />
                     <TileLayer
                         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     />
                     <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
                         <EditControl
-                            position="topright"
+                            position={rtl ? 'topleft' : 'topright'}
                             onEdited={this.onMapPolygonEdited}
                             onCreated={this.onMapPolygonCreated}
                             onDeleted={this.onMapPolygonDelete}

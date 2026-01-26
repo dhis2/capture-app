@@ -1,4 +1,5 @@
 
+import { isLangRtl } from 'capture-core/utils/rtl';
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeRangeFieldForForm } from '../../Components';
@@ -6,7 +7,12 @@ import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
-const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+    return isLangRtl() ? 'right' : 'left';
+};
 
 export const getDateTimeRangeFieldConfig = (
     metaData: MetaDataElement,

@@ -5,7 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { useOriginLabel } from './hooks/useOriginLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
-import { RtlChevron } from '../../../utils/rtl';
+import { DirectionalChevron } from '../../../utils/rtl';
 
 export const breadcrumbsKeys = Object.freeze({
     MAIN_PAGE: 'mainPage',
@@ -71,7 +71,7 @@ const BreadcrumbsPlain = ({
                         selected={button.selected}
                         dataTest={`bulkDataEntry-breadcrumb-${button.key}-item`}
                     />
-                    {index < breadcrumbItems.length - 1 && <RtlChevron color={colors.grey800} />}
+                    {index < breadcrumbItems.length - 1 && <DirectionalChevron color={colors.grey800} />}
                 </React.Fragment>
             ))}
         </div>

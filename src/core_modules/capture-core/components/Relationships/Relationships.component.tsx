@@ -3,8 +3,9 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
-import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
+import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { DirectionalArrow } from 'capture-core/utils/rtl';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
@@ -143,7 +144,7 @@ class RelationshipsPlain extends React.Component<Props> {
                     </div>
                     <div className={classes.relationshipEntities}>
                         {this.getEntityName(relationship.from)}
-                        <span className={classes.arrowIcon}> <IconArrowRight16 /> </span>
+                        <span className={classes.arrowIcon}> <DirectionalArrow /> </span>
                         {this.getEntityName(relationship.to)}
                     </div>
                 </div>

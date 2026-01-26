@@ -4,8 +4,7 @@
 import * as React from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
-import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
-import { isLangRtl } from 'capture-core/utils/rtl';
+import { isLangRtl, DirectionalChevron } from 'capture-core/utils/rtl';
 
 
 const styles = (theme: any) => ({
@@ -94,7 +93,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={disabled || currentPage <= 1}
                         aria-label="Previous Page"
                     >
-                        {isLangRtl() ? <IconChevronRight24 /> : <IconChevronLeft24 />}
+                        <DirectionalChevron size={24} direction="back" />
                     </IconButton>
                     <IconButton
                         dataTest={'search-pagination-next-page'}
@@ -102,7 +101,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={disabled || nextPageButtonDisabled}
                         aria-label="Next Page"
                     >
-                        {isLangRtl() ? <IconChevronLeft24 /> : <IconChevronRight24 />}
+                        <DirectionalChevron size={24} />
                     </IconButton>
                 </div>
             );

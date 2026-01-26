@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { withStyles, withTheme } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
+import { isLangRtl } from '../../../utils/rtl';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
@@ -123,7 +124,13 @@ const createComponentProps = (props: any, componentProps: any) => ({
     ...componentProps,
 });
 
-const getCalendarAnchorPosition = (formHorizontal?: boolean) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal?: boolean) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+
+    return isLangRtl() ? 'right' : 'left';
+};
 const getOrientation = (formHorizontal?: boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const buildReportDateSettingsFn = () => {

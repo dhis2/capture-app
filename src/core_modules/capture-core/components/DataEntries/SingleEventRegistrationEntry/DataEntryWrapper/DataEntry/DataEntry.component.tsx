@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
+import { isLangRtl } from 'capture-core/utils/rtl';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
@@ -139,7 +140,13 @@ const createComponentProps = (props: any, componentProps: any) => ({
 const getOrientation = (formHorizontal: boolean | null) =>
     (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
-const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+    return isLangRtl() ? 'right' : 'left';
+};
+
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
