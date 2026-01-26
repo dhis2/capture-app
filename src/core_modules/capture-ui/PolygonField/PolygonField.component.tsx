@@ -15,11 +15,11 @@ import { DeleteControl } from './DeleteControl.component';
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 type Props = {
-  onBlur: (value: any) => void;
-  onOpenMap: (hasValue: boolean) => void;
-  value?: any | null | undefined;
-  center?: Array<number> | null | undefined;
-  mapDialog?: any;
+    onBlur: (value: any) => void;
+    onOpenMap: (hasValue: boolean) => void;
+    value?: any | null | undefined;
+    center?: Array<number> | null | undefined;
+    mapDialog?: any;
 };
 
 type State = {
@@ -168,7 +168,6 @@ export class PolygonField extends React.Component<Props, State> {
         const hasPosition = !!featureCollection;
         const center = this.getCenter(featureCollection);
         const rtl = isLangRtl();
-        const buttonPosition = rtl ? 'topright' : 'topleft';
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -179,8 +178,12 @@ export class PolygonField extends React.Component<Props, State> {
                     zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <ZoomControl position={buttonPosition} />
-                    <WrappedLeafletSearch position={buttonPosition} inputPlaceholder="Search" closeResultsOnClick />
+                    <ZoomControl position={isLangRtl() ? 'topright' : 'topleft'} />
+                    <WrappedLeafletSearch
+                        position={isLangRtl() ? 'topleft' : 'topright'}
+                        inputPlaceholder="Search"
+                        closeResultsOnClick
+                    />
                     <TileLayer
                         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -225,7 +228,7 @@ export class PolygonField extends React.Component<Props, State> {
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.statusContainer}>
-                    { hasValue && (
+                    {hasValue && (
                         <>
                             <span className={defaultClasses.checkIcon}>
                                 <IconCheckmark16 color={colors.blue600} />

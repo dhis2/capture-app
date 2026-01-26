@@ -54,7 +54,7 @@ const styles = (theme: any) => ({
         paddingBottom: theme.typography.pxToRem(8),
         position: 'absolute',
         top: theme.typography.pxToRem(8),
-        right: theme.typography.pxToRem(8),
+        insetInlineEnd: theme.typography.pxToRem(8),
     },
     enrolled: {
         display: 'flex',
