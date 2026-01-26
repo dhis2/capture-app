@@ -1,7 +1,6 @@
 import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-// @ts-expect-error - SimpleSingleSelectField exists but types may not be available
 import { spacers, SimpleSingleSelectField } from '@dhis2/ui';
 import type { Props, SelectOption } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
@@ -47,18 +46,21 @@ export const TrackedEntityTypeSelectorPlain =
             return options.find(opt => opt.value === selectedSearchScopeId);
         }, [selectedSearchScopeId, options]);
 
-        const handleSelectionChange = (option: SelectOption) => {
-            onSelect(option.value, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
-            onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: option.value });
+        const handleSelectionChange = (nextValue: string | SelectOption) => {
+            const value = typeof nextValue === 'string' ? nextValue : nextValue?.value;
+
+            onSelect(value, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
+            onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: value });
         };
 
         return (
             <div className={classes.searchRow}>
                 <SimpleSingleSelectField
                     name="tracked-entity-type-selector"
+                    label=""
                     helpText={footerText}
                     options={options}
-                    selected={selectedOption}
+                    value={selectedOption?.value}
                     placeholder={i18n.t('Select tracked entity type')}
                     onChange={handleSelectionChange}
                     empty={i18n.t('No tracked entity types available')}
