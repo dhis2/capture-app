@@ -52,7 +52,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (value && value.mode === modeKeys.PROVIDED && !value.provided) {
+        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });
