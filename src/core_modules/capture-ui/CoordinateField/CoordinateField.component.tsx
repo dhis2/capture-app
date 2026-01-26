@@ -3,10 +3,11 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, Marker, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
+import { isLangRtl } from 'capture-core/utils/rtl';
 import { AddLocationIcon } from '../Icons';
 import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
@@ -157,6 +158,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             return null;
         }
         const center = position || this.props.center;
+        const buttonPosition = isLangRtl() ? 'topright' : 'topleft';
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -165,10 +167,12 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     onClick={this.onMapPositionChange}
                     className={defaultClasses.leafletContainer}
                     key="map"
+                    zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
+                    <ZoomControl position={buttonPosition} />
                     <WrappedLeafletSearch
-                        position="topleft"
+                        position={buttonPosition}
                         inputPlaceholder="Search"
                         closeResultsOnClick
                         search={null}

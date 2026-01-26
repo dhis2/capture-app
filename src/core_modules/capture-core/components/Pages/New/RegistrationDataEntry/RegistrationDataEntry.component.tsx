@@ -36,8 +36,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         marginTop: typography.pxToRem(16),
     },
     registrationContainer: {
-        marginLeft: typography.pxToRem(8),
-        marginRight: typography.pxToRem(8),
+        marginInline: typography.pxToRem(8),
     },
     marginBottom: {
         marginBottom: spacers.dp16,
@@ -78,7 +77,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
         </Button>
         {
             onSave &&
-            <div style={{ marginLeft: 8 }}>
+            <div style={{ marginInlineStart: 8 }}>
                 <Button
                     dataTest="create-as-new-person"
                     onClick={onSave}

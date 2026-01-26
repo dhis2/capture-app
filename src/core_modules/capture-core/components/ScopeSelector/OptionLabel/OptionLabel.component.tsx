@@ -7,7 +7,7 @@ const styles = () => ({
     icon: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: 5,
+        paddingInlineEnd: 5,
     },
     label: {
         display: 'flex',

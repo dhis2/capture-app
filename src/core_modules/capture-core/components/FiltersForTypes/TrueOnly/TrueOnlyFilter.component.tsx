@@ -10,7 +10,7 @@ import type { PlainProps, Value } from './TrueOnly.types';
 
 export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
-        marginRight: theme.typography.pxToRem(-24),
+        marginInlineEnd: theme.typography.pxToRem(-24),
     },
 });
 

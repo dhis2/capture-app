@@ -22,9 +22,8 @@ type Props = WithStyles<typeof styles>;
 
 const styles = {
     informativeMessage: {
-        marginLeft: spacersNum.dp16,
+        marginInline: spacersNum.dp16,
         marginTop: spacersNum.dp24,
-        marginRight: spacersNum.dp16,
     },
 };
 const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => {

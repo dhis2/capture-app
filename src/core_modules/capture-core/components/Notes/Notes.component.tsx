@@ -22,7 +22,7 @@ const styles = {
         alignItems: 'normal',
         cursor: 'default !important',
         padding: spacersNum.dp12,
-        marginRight: spacersNum.dp4,
+        marginInlineEnd: spacersNum.dp4,
         backgroundColor: '#f3f5f7 !important',
         borderRadius: '5px',
         fontSize: '14px',
@@ -55,8 +55,7 @@ const styles = {
         padding: 0,
     },
     addNoteContainer: {
-        marginRight: 5,
-        marginLeft: 2,
+        marginInline: '2px 5px',
     },
     notesContainer: {},
     newNoteContainer: {},

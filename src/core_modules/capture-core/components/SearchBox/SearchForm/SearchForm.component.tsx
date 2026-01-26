@@ -28,15 +28,16 @@ const styles: Readonly<any> = (theme: any) => ({
         padding: spacers.dp8,
         display: 'flex',
         alignItems: 'center',
+        gap: spacers.dp8,
     },
     textInfo: {
-        textAlign: 'right',
+        textAlign: 'end',
         fontSize: '14px',
         flexGrow: 1,
         color: colors.grey700,
     },
     textError: {
-        textAlign: 'right',
+        textAlign: 'end',
         fontSize: '14px',
         fontWeight: 500,
         flexGrow: 1,

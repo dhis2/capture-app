@@ -11,7 +11,7 @@ const getStyles: Readonly<any> = {
         outline: 'none',
     },
     downloadLinkContainer: {
-        paddingRight: 5,
+        paddingInlineEnd: 5,
         paddingBottom: 5,
     },
     downloadContainer: {

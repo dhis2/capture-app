@@ -9,8 +9,7 @@ import { StageCreateNewButton } from './StageCreateNewButton';
 
 const styles = {
     overview: {
-        marginLeft: spacersNum.dp16,
-        marginRight: spacersNum.dp16,
+        marginInline: spacersNum.dp16,
         marginBottom: spacersNum.dp24,
     },
     buttonContainer: {

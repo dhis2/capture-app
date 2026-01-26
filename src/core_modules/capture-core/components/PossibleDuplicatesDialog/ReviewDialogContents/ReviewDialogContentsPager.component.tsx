@@ -10,7 +10,7 @@ const getStyles = (theme: any) => ({
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
         maxWidth: theme.typography.pxToRem(600),
     },
 });

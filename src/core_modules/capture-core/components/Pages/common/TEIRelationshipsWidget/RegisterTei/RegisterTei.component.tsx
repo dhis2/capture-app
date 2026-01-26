@@ -40,7 +40,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
         >
             {i18n.t('Cancel')}
         </Button>
-        <div style={{ marginLeft: 16 }}>
+        <div style={{ marginInlineStart: 16 }}>
             <Button
                 dataTest="create-as-new-person"
                 onClick={onSave}

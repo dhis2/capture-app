@@ -13,7 +13,7 @@ const styles = () => ({
     searchContainer: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingRight: 5,
+        paddingInlineEnd: 5,
     },
     buttonContainer: {
         marginTop: spacers.dp8,

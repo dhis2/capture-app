@@ -1,18 +1,22 @@
-import * as React from 'react';
+import React from 'react';
 import { cx } from '@emotion/css';
 import { Chip, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
-
 const getStyles = (theme: any) => ({
-    eaderContainer: {
+    container: {
         display: 'flex',
         alignItems: 'center',
+        paddingInline: theme.typography.pxToRem(5),
     },
-    headerItemContainer: {
+    iconAndText: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: theme.typography.pxToRem(8),
+    },
+    badgeContainer: {
         display: 'inline-flex',
-        paddingRight: theme.typography.pxToRem(5),
-        paddingLeft: theme.typography.pxToRem(5),
+        paddingInline: theme.typography.pxToRem(5),
     },
     badge: {
         display: 'flex',
@@ -23,35 +27,32 @@ const getStyles = (theme: any) => ({
 });
 
 type Props = {
-    icon: React.ComponentType<any>,
-    text: string,
-    badgeCount: number,
-}
+    icon: React.ComponentType;
+    text: string;
+    badgeCount?: number;
+    badgeClass?: string;
+};
 
+type ComponentProps = Props & WithStyles<typeof getStyles>;
 
-class ViewEventSectionHeaderPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
-    render() {
-        const { icon: Icon, text, badgeCount, classes, badgeClass } = this.props as any;
-        const shouldRenderBadge = !!badgeCount || badgeCount === 0;
-        return (
-            <div className={classes.headerContainer}>
-                <div className={classes.headerItemContainer}>
-                    <Icon />
-                </div>
-                <div className={classes.headerItemContainer}>
-                    {text}
-                </div>
-                {shouldRenderBadge &&
-                    <div className={classes.headerItemContainer}>
-                        <Chip dense className={cx(classes.badge, badgeClass)}>
-                            {badgeCount}
-                        </Chip>
-                    </div>
-                }
+const ViewEventSectionHeaderPlain = ({ icon: Icon, text, badgeCount, classes, badgeClass }: ComponentProps) => {
+    const shouldRenderBadge = !!badgeCount || badgeCount === 0;
+
+    return (
+        <div className={classes.container}>
+            <div className={classes.iconAndText}>
+                <Icon />
+                {text}
             </div>
-        );
-    }
-}
-
+            {shouldRenderBadge && (
+                <div className={classes.badgeContainer}>
+                    <Chip dense className={cx(classes.badge, badgeClass)}>
+                        {badgeCount}
+                    </Chip>
+                </div>
+            )}
+        </div>
+    );
+};
 
 export const ViewEventSectionHeader = withStyles(getStyles)(ViewEventSectionHeaderPlain);

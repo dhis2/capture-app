@@ -26,8 +26,7 @@ const getStyles: any = (theme: any) => ({
     },
     toLabelContainer: {
         paddingTop: theme.typography.pxToRem(6),
-        paddingLeft: theme.typography.pxToRem(10),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInline: theme.typography.pxToRem(10),
         fontSize: theme.typography.body1.fontSize,
     },
     error: {

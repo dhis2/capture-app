@@ -54,7 +54,7 @@ const styles = (theme: any) => ({
         paddingBottom: theme.typography.pxToRem(8),
         position: 'absolute',
         top: theme.typography.pxToRem(8),
-        right: theme.typography.pxToRem(8),
+        insetInlineEnd: theme.typography.pxToRem(8),
     },
     enrolled: {
         display: 'flex',
@@ -69,7 +69,7 @@ const styles = (theme: any) => ({
     image: {
         width: theme.typography.pxToRem(54),
         height: theme.typography.pxToRem(54),
-        marginRight: theme.typography.pxToRem(8),
+        marginInlineEnd: theme.typography.pxToRem(8),
     },
     buttonMargin: {
         marginTop: theme.typography.pxToRem(8),

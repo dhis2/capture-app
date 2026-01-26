@@ -31,10 +31,10 @@ const getStyles = (theme: any) => ({
         backgroundColor: '#f0f9f8',
     },
     relationshipTypeSelectedText: {
-        paddingLeft: theme.typography.pxToRem(5),
+        paddingInlineStart: theme.typography.pxToRem(5),
         display: 'flex',
         alignItems: 'center',
-        borderLeft: '2px solid #4ca899',
+        borderInlineStart: '2px solid #4ca899',
     },
     container: {
         display: 'flex',

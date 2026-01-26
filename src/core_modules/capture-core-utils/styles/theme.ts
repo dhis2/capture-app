@@ -157,7 +157,7 @@ export const theme = {
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             letterSpacing: '-.04em',
             lineHeight: '1.14286em',
-            marginLeft: '-.04em',
+            marginInlineStart: '-.04em',
             color: 'rgba(0, 0, 0, 0.54)',
         },
         display3: {
@@ -166,7 +166,7 @@ export const theme = {
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             letterSpacing: '-.02em',
             lineHeight: '1.30357em',
-            marginLeft: '-.02em',
+            marginInlineStart: '-.02em',
             color: 'rgba(0, 0, 0, 0.54)',
         },
         display2: {
@@ -174,7 +174,7 @@ export const theme = {
             fontWeight: 400,
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             lineHeight: '1.13333em',
-            marginLeft: '-.02em',
+            marginInlineStart: '-.02em',
             color: 'rgba(0, 0, 0, 0.54)',
         },
         display1: {

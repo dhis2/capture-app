@@ -7,13 +7,13 @@
 .paginationRowsPerPageElementContainer {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-inline-end: 20px;
 }
 
 .paginationRowsPerPageElement {
-    margin-left: 20px;
+    margin-inline-start: 20px;
 }
 
 .paginationDisplayRowsContainer {
-    margin-right: 20px;
+    margin-inline-end: 20px;
 }

@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
+import { isLangRtl } from '../../../../utils/rtl';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {
@@ -29,7 +30,12 @@ const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
 
-const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+    return isLangRtl() ? 'right' : 'left';
+};
 
 const baseComponentStyles = {
     labelContainerStyle: {

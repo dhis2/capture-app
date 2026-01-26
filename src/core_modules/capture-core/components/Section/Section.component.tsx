@@ -13,7 +13,7 @@ const styles: Readonly<any> = {
     },
     mainActionButton: {
         position: 'absolute',
-        right: 15,
+        insetInlineEnd: 15,
         top: 30,
     },
 };

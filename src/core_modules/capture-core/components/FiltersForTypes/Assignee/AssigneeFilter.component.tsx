@@ -12,7 +12,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
-        marginRight: theme.typography.pxToRem(-24),
+        marginInlineEnd: theme.typography.pxToRem(-24),
     },
     error: {
         color: theme.palette.error.main,
@@ -52,7 +52,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (value && value.mode === modeKeys.PROVIDED && !value.provided) {
+        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });

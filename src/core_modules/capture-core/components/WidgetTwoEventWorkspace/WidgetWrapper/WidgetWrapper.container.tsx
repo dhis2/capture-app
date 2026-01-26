@@ -32,7 +32,7 @@ export const styles: Readonly<any> = {
         fontWeight: '500',
     },
     icon: {
-        marginRight: spacersNum.dp8,
+        marginInlineEnd: spacersNum.dp12,
     },
     decription: {
         margin: `${spacersNum.dp8}px 0`,
