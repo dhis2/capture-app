@@ -1,3 +1,10 @@
+## [105.5.3](https://github.com/dhis2/capture-app/compare/v105.5.2...v105.5.3) (2026-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-20777] validation of rule-mandatory fields ([#4440](https://github.com/dhis2/capture-app/issues/4440)) ([67eb62b](https://github.com/dhis2/capture-app/commit/67eb62bad4cc32f201ddeaa3b1349edfaf87ec6e))
+
 ## [105.5.2](https://github.com/dhis2/capture-app/compare/v105.5.1...v105.5.2) (2026-01-22)
 
 
