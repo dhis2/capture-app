@@ -48,9 +48,8 @@ const NewSingleSelectFieldComponentPlain = ({
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
         if (onChange) {
             onChange(resolvedValue ?? null);
-        } else {
-            onBlur?.(resolvedValue ?? null);
         }
+        onBlur?.(resolvedValue ?? null);
     };
 
     const handleBlur = () => {
