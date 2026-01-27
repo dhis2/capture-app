@@ -35,7 +35,7 @@ Given('you are in the search page with domain Person and org unit being preselec
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('[data-test="dhis2-simplesingleselect"]')
+    cy.get('[data-test="program-selector-container"]')
         .click()
         .get('[data-test="program-filterinput"]')
         .type('Malaria case diagn')

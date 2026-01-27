@@ -146,7 +146,7 @@ Then('the relationship is deleted', () => {
 });
 
 And('you select the TB Program', () => {
-    cy.get('[data-test="dhis2-simplesingleselect"]')
+    cy.get('[data-test="relationship-register-tei-program-selector"]')
         .click()
         .get('[role="option"]:visible')
         .contains('TB program')
