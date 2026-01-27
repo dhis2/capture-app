@@ -12,8 +12,8 @@ import { sortIndicatorsFn } from './sortIndicatorsFn';
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp16}`,
-        marginBottom: spacers.dp16,
+        padding: `0 ${spacers.dp12}`,
+        marginBottom: spacers.dp12,
         fontWeight: 400,
     },
     indicatorRow: {

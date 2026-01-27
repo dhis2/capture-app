@@ -7,10 +7,10 @@ import { widgetTypes } from './WidgetTypes';
 
 const styles: Readonly<any> = {
     widgetWrapper: {
-        padding: `0px ${spacersNum.dp16}px`,
+        padding: `0px ${spacersNum.dp12}px`,
     },
     unorderedList: {
-        padding: `0px ${spacers.dp16}`,
+        padding: `0px ${spacers.dp12}`,
         marginTop: '0px',
         lineHeight: '1.375',
         fontSize: spacers.dp16,

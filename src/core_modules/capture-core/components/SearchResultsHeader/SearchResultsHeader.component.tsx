@@ -7,10 +7,14 @@ import { convertValue } from '../../converters/clientToList';
 
 const styles = (theme: any) => ({
     topSection: {
-        marginTop: theme.typography.pxToRem(20),
-        marginLeft: theme.typography.pxToRem(10),
-        marginRight: theme.typography.pxToRem(10),
-        marginBottom: theme.typography.pxToRem(10),
+        marginTop: theme.typography.pxToRem(8),
+        marginLeft: 0,
+        marginRight: 0,
+        marginBottom: 0,
+    },
+    resultsTitle: {
+        marginTop: 0,
+        marginBottom: 4,
     },
 });
 
@@ -24,7 +28,9 @@ type SearchResultsHeaderProps = Props & WithStyles<typeof styles>;
 const SearchResultsHeaderPlain =
   ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderProps) =>
       (<div data-test="search-results-top" className={classes.topSection} >
-          {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
+          <p className={classes.resultsTitle}>
+              {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
+          </p>
           {currentSearchTerms && <div>
               {
                   currentSearchTerms.map(({ name, value, id, type }, index, rest) => (

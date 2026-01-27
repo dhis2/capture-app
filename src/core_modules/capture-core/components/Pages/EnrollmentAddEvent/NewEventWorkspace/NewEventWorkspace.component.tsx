@@ -19,7 +19,10 @@ import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 const styles: Readonly<any> = () => ({
     innerWrapper: {
-        padding: `0 ${spacersNum.dp16}px`,
+        padding: `0 ${spacersNum.dp12}px`,
+    },
+    tabs: {
+        marginBottom: spacersNum.dp16,
     },
 });
 
@@ -64,26 +67,28 @@ const NewEventWorkspacePlain = ({
                 }
             >
                 <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
-                    <TabBar dataTest="new-event-tab-bar">
-                        <Tab
-                            key="report-tab"
-                            selected={mode === tabMode.REPORT}
-                            onClick={() => onHandleSwitchTab(tabMode.REPORT)}
-                            dataTest="new-event-report-tab"
-                        >{i18n.t('Report')}</Tab>
-                        <Tab
-                            key="schedule-tab"
-                            selected={mode === tabMode.SCHEDULE}
-                            onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
-                            dataTest="new-event-schedule-tab"
-                        >{i18n.t('Schedule')}</Tab>
-                        {/* <Tab
+                    <div className={classes.tabs}>
+                        <TabBar dataTest="new-event-tab-bar">
+                            <Tab
+                                key="report-tab"
+                                selected={mode === tabMode.REPORT}
+                                onClick={() => onHandleSwitchTab(tabMode.REPORT)}
+                                dataTest="new-event-report-tab"
+                            >{i18n.t('Report')}</Tab>
+                            <Tab
+                                key="schedule-tab"
+                                selected={mode === tabMode.SCHEDULE}
+                                onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
+                                dataTest="new-event-schedule-tab"
+                            >{i18n.t('Schedule')}</Tab>
+                            {/* <Tab
                             key="refer-tab"
                             selected={mode === tabMode.REFER}
                             onClick={() => onHandleSwitchTab(tabMode.REFER)}
                             dataTest="new-event-refer-tab"
                         >{i18n.t('Refer')}</Tab> */}
-                    </TabBar>
+                        </TabBar>
+                    </div>
                     {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
                         programId={programId}
                         stageId={stageId}

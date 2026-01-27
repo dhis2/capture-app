@@ -24,7 +24,7 @@ import { MiniMap } from './MiniMap';
 
 const styles = {
     enrollment: {
-        padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        padding: `0 ${spacersNum.dp12}px ${spacersNum.dp12}px ${spacersNum.dp12}px`,
     },
     row: {
         display: 'flex',

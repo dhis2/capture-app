@@ -36,7 +36,7 @@ const styles: Readonly<any> = {
         overflowY: 'auto',
     },
     editor: {
-        paddingTop: spacersNum.dp16,
+        paddingTop: spacersNum.dp8,
     },
     emptyNotes: {
         fontSize: 14,
@@ -145,13 +145,15 @@ const NoteSectionPlain = ({
                 <Button
                     dataTest="add-note-btn"
                     onClick={onAddNote}
-                    primary
+                    small
                 >
                     {i18n.t('Save note')}
                 </Button>
                 <Button
                     dataTest="cancel-note-btn"
                     onClick={onCancel}
+                    secondary
+                    small
                 >
                     {i18n.t('Cancel')}
                 </Button>

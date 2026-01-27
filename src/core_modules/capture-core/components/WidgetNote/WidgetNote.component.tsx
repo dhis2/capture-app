@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { Chip } from '@dhis2/ui';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetNote.types';
 import { NoteSection } from './NoteSection/NoteSection';
@@ -11,9 +10,6 @@ export const WidgetNote = ({ title, notes, onAddNote, ...passOnProps }: Props) =
         <Widget
             header={<div>
                 <span>{title}</span>
-                {notes.length ? <Chip dense>
-                    {notes.length}
-                </Chip> : null}
             </div>}
             onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
             onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
