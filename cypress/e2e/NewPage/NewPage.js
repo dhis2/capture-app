@@ -17,9 +17,9 @@ And('there should be informative message explaining you need to select an organi
 });
 
 And('you select tracked entity type person', () => {
-    cy.get('[data-test="dhis2-uicore-select"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .click();
-    cy.get('button[role="option"]')
+    cy.get('[role="option"]:visible')
         .contains('Person')
         .click();
 });
@@ -707,9 +707,10 @@ And('you delete the recently added malaria entity', () => {
 });
 
 And(/^you select (.*) from the available tracked entity types/, (selection) => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
-        .click();
-    cy.contains(selection)
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[role="option"]:visible')
+        .contains(selection)
         .click();
 });
 

@@ -208,6 +208,7 @@ When('you change rows per page to 50', () => {
 
     cy.get('div[data-test="rows-per-page-selector"]')
         .click()
+        .get('[role="option"]:visible')
         .contains('50')
         .click();
 });

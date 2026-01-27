@@ -6,16 +6,17 @@ Given('you are on the default search page', () => {
 });
 
 Then('there should be no search domain preselected', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .should('exist');
     cy.get('[data-test="informative-paper"]')
         .should('exist');
 });
 
 When('you select the search domain Person', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
-        .click();
-    cy.contains('Person')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[role="option"]:visible')
+        .contains('Person')
         .click();
 });
 
@@ -34,7 +35,7 @@ Given('you are in the search page with domain Person and org unit being preselec
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('[data-test="program-selector-container"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .click();
     cy.get('[data-test="program-filterinput"]')
         .type('Malaria case diagn');
