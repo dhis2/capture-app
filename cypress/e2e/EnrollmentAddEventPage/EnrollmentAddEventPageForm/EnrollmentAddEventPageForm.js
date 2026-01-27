@@ -100,9 +100,8 @@ When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
         .get('[data-test="new-enrollment-event-form"]')
         .get('[data-test="dhis2-simplesingleselect"]')
         .eq(eq)
-        .click();
-
-    cy.get('button[role="option"]')
+        .click()
+        get('[role="option"]:visible')
         .contains(value)
         .click();
 });

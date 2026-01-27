@@ -118,9 +118,8 @@ When(/^the user sets Plurality assessed to (.*)/, (text) => {
         .get('[data-test="scope-selector"]')
         .get('[data-test="dhis2-simplesingleselect"]')
         .eq(4)
-        .click();
-
-    cy.get('button[role="option"]')
+        .click()
+        .get('[role="option"]:visible')
         .contains(text)
         .click();
 });

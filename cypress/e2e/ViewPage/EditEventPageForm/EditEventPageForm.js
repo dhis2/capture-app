@@ -13,12 +13,11 @@ const cleanUpEvent = () => {
         .within(() => {
             cy.get('[data-test="dhis2-simplesingleselect"]')
                 .eq(0)
+                .click()
+                .get('[role="option"]:visible')
+                .contains('CARE International')
                 .click();
         });
-
-    cy.get('button[role="option"]')
-        .contains('CARE International')
-        .click();
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
@@ -149,8 +148,8 @@ Then('the relationship is deleted', () => {
 
 And('you select the TB Program', () => {
     cy.get('[data-test="dhis2-simplesingleselect"]')
-        .click();
-    cy.get('button[role="option"]')
+        .click()
+        .get('[role="option"]:visible')
         .contains('TB program')
         .click();
 });

@@ -18,8 +18,8 @@ And('there should be informative message explaining you need to select an organi
 
 And('you select tracked entity type person', () => {
     cy.get('[data-test="dhis2-simplesingleselect"]')
-        .click();
-    cy.get('[role="option"]:visible')
+        .click()
+        .get('[role="option"]:visible')
         .contains('Person')
         .click();
 });

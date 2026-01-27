@@ -11,8 +11,8 @@ When('you add data to the form', () => {
         .type('25');
     cy.get('[data-test="dhis2-simplesingleselect"]')
         .eq(0)
-        .click();
-    cy.get('button[role="option"]')
+        .click()
+        .get('[role="option"]:visible')
         .contains('Male')
         .click();
 });
@@ -39,11 +39,9 @@ Then('the event should be sent to the server successfully', () => {
 
 When('you fill in the registration details', () => {
     cy.get('[data-test="relationship-register-tei-program-selector"]')
-        .click();
-
-    cy.get('button[role="option"]')
+        .click()
+        .get('[role="option"]:visible')
         .contains('Provider Follow-up and Support Tool')
-        .shouldbe.visible')
         .click();
 
     cy.contains('[data-test="form-field"]', 'Provider ID')
