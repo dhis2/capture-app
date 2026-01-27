@@ -38,20 +38,16 @@ And('you select the search domain Malaria Case diagnosis', () => {
     cy.get('[data-test="program-selector-container"]')
         .click()
         .get('[data-test="program-filterinput"]')
-        .type('Malaria case diagn')
-        .get('[role="option"]:visible')
-        .contains('Malaria case diagnosis')
-        .click();
+        .type('Malaria case diagn');
+    cy.contains('Malaria case diagnosis').click();
 });
 
 When('you select the search domain WHO RMNCH Tracker', () => {
     cy.get('[data-test="program-selector-container"]')
         .click();
     cy.get('[data-test="program-filterinput"]')
-        .type('WHO RMNCH')
-        .get('[role="option"]:visible')
-        .contains('WHO RMNCH Tracker')
-        .click();
+        .type('WHO RMNCH');
+    cy.contains('WHO RMNCH Tracker').click();
 });
 
 When('you fill in the unique identifier field with values that will not return a tracked entity instance', () => {
