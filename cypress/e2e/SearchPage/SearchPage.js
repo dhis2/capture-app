@@ -13,8 +13,11 @@ Then('there should be no search domain preselected', () => {
 });
 
 When('you select the search domain Person', () => {
-    cy.get('[data-test="dhis2-simplesingleselect"]').click();
-    cy.get('[role="option"]').contains('Person').click();
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[role="option"]:visible')
+        .contains('Person')
+        .click();
 });
 
 Then('there should be Person domain forms available to search with', () => {
@@ -32,17 +35,22 @@ Given('you are in the search page with domain Person and org unit being preselec
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('[data-test="dhis2-simplesingleselect"]').click();
-    cy.get('input[name="filter"]').type('Malaria case diagn');
-    cy.get('[role="option"]').contains('Malaria case diagnosis').click();
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[data-test="program-filterinput"]')
+        .type('Malaria case diagn')
+        .get('[role="option"]:visible')
+        .contains('Malaria case diagnosis')
+        .click();
 });
 
 When('you select the search domain WHO RMNCH Tracker', () => {
     cy.get('[data-test="program-selector-container"]')
         .click();
     cy.get('[data-test="program-filterinput"]')
-        .type('WHO RMNCH');
-    cy.contains('WHO RMNCH Tracker')
+        .type('WHO RMNCH')
+        .get('[role="option"]:visible')
+        .contains('WHO RMNCH Tracker')
         .click();
 });
 
@@ -341,6 +349,7 @@ When('you navigated to a search page with tracked entity id on the url', () => {
 When('you can see the domain selector with the tetype person selected', () => {
     cy.get('[data-test="dhis2-simplesingleselect"]')
         .should('contain', 'Person');
+
 });
 
 When('there is not enrollment tag', () => {
