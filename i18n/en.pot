@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-19T10:20:44.571Z\n"
-"PO-Revision-Date: 2026-01-19T10:20:44.571Z\n"
+"POT-Creation-Date: 2026-01-27T11:27:49.610Z\n"
+"PO-Revision-Date: 2026-01-27T11:27:49.610Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1124,6 +1124,9 @@ msgstr "Search for a {{trackedEntityName}} in {{programName}}"
 
 msgid "Select tracked entity type"
 msgstr "Select tracked entity type"
+
+msgid "Type to filter tracked entity types"
+msgstr "Type to filter tracked entity types"
 
 msgid "No tracked entity types available"
 msgstr "No tracked entity types available"

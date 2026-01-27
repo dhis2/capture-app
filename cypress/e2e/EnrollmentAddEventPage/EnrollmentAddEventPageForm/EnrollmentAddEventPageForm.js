@@ -101,7 +101,7 @@ When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
         .get('[data-test="dhis2-simplesingleselect"]')
         .eq(eq)
         .click()
-        get('[role="option"]:visible')
+        .get('[role="option"]:visible')
         .contains(value)
         .click();
 });
