@@ -10,14 +10,13 @@ const cleanUpEvent = () => {
         .click();
 
     cy.get('[data-test="dataEntrySection-categorycombo"]')
-        .within(() => {
-            cy.get('[data-test="dhis2-simplesingleselect"]')
-                .eq(0)
-                .click()
-                .get('[role="option"]:visible')
-                .contains('CARE International')
-                .click();
-        });
+        .find('[data-test="dhis2-simplesingleselect-selectedvalue-clear"]')
+        .click();
+    cy.get('[data-test="dataEntrySection-categorycombo"]')
+        .find('[data-test="dhis2-simplesingleselect"]')
+        .first()
+        .click();
+    cy.get('[role="option"]').contains('CARE International').click();
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
