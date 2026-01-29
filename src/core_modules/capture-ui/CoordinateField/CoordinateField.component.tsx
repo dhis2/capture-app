@@ -95,8 +95,9 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         this.props.onChange?.({ ...this.props.value, [key]: value });
     }
 
-    handleClear = () => {
+    handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.onBlur(null);
+        event.currentTarget.blur();
     }
 
     search = (position: any) => {

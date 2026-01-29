@@ -27,8 +27,9 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
     const [dateError, setDateError] = useState({ error: null, errorCode: null });
     const touchedFields = useRef(new Set());
 
-    const handleClear = () => {
+    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         onBlur(null, {}, {});
+        event.currentTarget.blur();
     };
 
     const handleTimeChange = useCallback((timeValue: string) => {
