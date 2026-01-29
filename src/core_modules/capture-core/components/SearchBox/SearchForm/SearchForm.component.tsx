@@ -194,6 +194,12 @@ const SearchFormIndex = ({
 
         const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
+                // Don't trigger search if the event is coming from a SimpleSingleSelect component
+                // Enter key press should open the dropdown, not trigger the search.
+                if ((event.target as HTMLElement).closest('.simple-single-select')) {
+                    return;
+                }
+
                 const buttonRef = (containerButtonRef[expandedFormId] as any).children[0];
                 buttonRef.focus();
                 setTimeout(() => { buttonRef.click(); });

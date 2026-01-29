@@ -1,6 +1,6 @@
 import {
-    VirtualizedSelectField,
-    withSelectTranslations,
+    SingleSelectField,
+    withSelectSingleTranslations,
     withGotoInterface,
     withHideCompatibility,
     withFocusSaver,
@@ -41,7 +41,7 @@ export const OptionSetSelectFieldForForm = withGotoInterface()(
                                         withOptionsIconElement()(
                                             withRulesOptionVisibilityHandler()(
                                                 withFilterProps(getFilteredProps)(
-                                                    withSelectTranslations()(VirtualizedSelectField),
+                                                    withSelectSingleTranslations()(SingleSelectField),
                                                 ),
                                             ),
                                         ),
