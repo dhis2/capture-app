@@ -35,7 +35,7 @@ export const withFocusHandler = () => <P extends Record<string, unknown>>(InnerC
                     <InnerComponent
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
-                        {...passOnProps as unknown as P}
+                        {...passOnProps as P}
                     />
                 </div>
             );
