@@ -1,4 +1,4 @@
-import { systemSettingsStore } from '../../metaDataMemoryStores';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 
 export function isLangRtl(code?: string): boolean {
     const locale = code || systemSettingsStore.get()?.uiLocale || 'en';

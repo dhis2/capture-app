@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { withStyles, withTheme } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { isLangRtl } from '../../../utils/rtl';
+import { isLangRtl } from 'capture-ui';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';

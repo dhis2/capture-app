@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { IconButton } from 'capture-ui';
+import { IconButton, isLangRtl } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
 import type { Props } from './rowMenu.types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
-import { isLangRtl } from '../../../utils/rtl';
 
 export const RowMenu = (props: Props) => {
     const { customRowMenuContents = [], row } = props;

@@ -1,5 +1,5 @@
+import { isLangRtl } from 'capture-ui';
 import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
-import { isLangRtl } from '../../utils/rtl';
 
 export async function cacheSystemSettings(
     systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string},

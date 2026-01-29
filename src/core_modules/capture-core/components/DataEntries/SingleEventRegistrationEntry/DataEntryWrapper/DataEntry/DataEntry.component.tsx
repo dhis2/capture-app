@@ -3,7 +3,7 @@ import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
-import { isLangRtl } from '../../../../../utils/rtl';
+import { isLangRtl } from 'capture-ui';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';

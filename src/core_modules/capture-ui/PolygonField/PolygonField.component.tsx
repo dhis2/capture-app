@@ -1,6 +1,5 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { isLangRtl } from 'capture-core/utils/rtl';
 import { IconCheckmark16, IconLocation16, colors, Button, ModalContent, ModalActions } from '@dhis2/ui';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,6 +7,7 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, FeatureGroup, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
+import { isLangRtl } from 'capture-ui';
 import defaultClasses from './polygonField.module.css';
 import './styles.css';
 import { DeleteControl } from './DeleteControl.component';

@@ -3,8 +3,8 @@
  */
 import * as React from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
-import { IconButton } from 'capture-ui';
-import { isLangRtl, DirectionalChevron } from '../../utils/rtl';
+import { IconButton, isLangRtl } from 'capture-ui';
+import { DirectionalChevron } from '../../utils/rtl';
 
 
 const styles = (theme: any) => ({

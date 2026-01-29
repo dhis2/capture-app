@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconArrowRight16, IconArrowLeft16, type IconProps } from '@dhis2/ui';
-import { isLangRtl } from './isLangRtl';
+import { isLangRtl } from 'capture-ui';
 
 export function DirectionalArrow(props: IconProps): React.ReactElement {
     const isRtl = isLangRtl();

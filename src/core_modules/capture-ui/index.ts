@@ -1,3 +1,4 @@
+export { isLangRtl } from './utils/rtl/isLangRtl';
 export { AgeField } from './AgeField/AgeField.component';
 export { BooleanField } from './BooleanField/BooleanField.component';
 export { CoordinateField } from './CoordinateField/CoordinateField.component';
@@ -29,3 +30,5 @@ export { ChevronIcon } from './Icons';
 export { NonBundledIcon } from './NonBundledIcon';
 export { FlatList } from './FlatList';
 export { PreviewImage } from './PreviewImage/PreviewImage.component';
+
+export * from './Icons';

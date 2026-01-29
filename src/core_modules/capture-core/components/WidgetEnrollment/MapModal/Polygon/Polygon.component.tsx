@@ -7,9 +7,9 @@ import { Map, TileLayer, FeatureGroup, ZoomControl, withLeaflet } from 'react-le
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
+import { isLangRtl } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
-import { isLangRtl } from '../../../../utils/rtl';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';
 import { ConditionalTooltip } from './ConditionalTooltip.component';

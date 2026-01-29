@@ -6,11 +6,11 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
+import { isLangRtl } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { CoordinateInput } from 'capture-ui/internal/CoordinateInput/CoordinateInput.component';
 import type { CoordinatesProps } from './Coordinates.types';
 import { isEqual } from '../../../../utils/valueEqualityChecker';
-import { isLangRtl } from '../../../../utils/rtl';
 import { isValidCoordinate } from './coordinate.validator';
 import { convertCoordinatesToServer } from './converters';
 

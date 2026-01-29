@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
-import { isLangRtl } from '../../../../utils/rtl';
+import { isLangRtl } from 'capture-ui';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {
