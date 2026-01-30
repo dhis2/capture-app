@@ -12,6 +12,7 @@ type Props = {
     setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
+    programId?: string;
 };
 
 export const useBulkCompleteEvents = ({
@@ -20,6 +21,7 @@ export const useBulkCompleteEvents = ({
     setIsCompleteDialogOpen,
     removeRowsFromSelection,
     onUpdateList,
+    programId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
@@ -28,22 +30,23 @@ export const useBulkCompleteEvents = ({
     );
 
     const { data: events, isInitialLoading } = useApiDataQuery(
-        ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'Events', selectedRows],
+        ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'Events', selectedRows, programId],
         {
             resource: 'tracker/events',
             params: () => {
                 const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
                 const filterQueryParam: string = supportForFeature ? 'events' : 'event';
 
-                return ({
+                return {
                     fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
                     pageSize: 100,
+                    program: programId,
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
-                });
+                };
             },
         },
         {
-            enabled: Object.keys(selectedRows).length > 0 && isCompleteDialogOpen,
+            enabled: Object.keys(selectedRows).length > 0 && isCompleteDialogOpen && !!programId,
             staleTime: 0,
             cacheTime: 0,
             select: (data: any) => {
@@ -107,10 +110,11 @@ export const useBulkCompleteEvents = ({
         const serverPayload = events.activeEvents.map(event => ({
             ...event,
             status: 'COMPLETED',
+            program: event.program || programId || event.programId,
         }));
 
         completeEvents({ payload: serverPayload });
-    }, [completeEvents, events]);
+    }, [completeEvents, events, programId]);
 
     const eventCounts = useMemo(() => {
         if (!events) {
