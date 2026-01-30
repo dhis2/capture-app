@@ -75,8 +75,6 @@ const viteConfig = defineConfig((configEnv) => {
 
                 // Form and interaction
                 'react-select',
-                'react-virtualized',
-                'react-virtualized-select',
                 'react-dnd',
                 'react-dnd-html5-backend',
 

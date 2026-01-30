@@ -17,9 +17,9 @@ And('there should be informative message explaining you need to select an organi
 });
 
 And('you select tracked entity type person', () => {
-    cy.get('[data-test="dhis2-uicore-select"]')
-        .click();
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[role="option"]:visible')
         .contains('Person')
         .click();
 });
@@ -693,9 +693,10 @@ And('you delete the recently added malaria entity', () => {
 });
 
 And(/^you select (.*) from the available tracked entity types/, (selection) => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
-        .click();
-    cy.contains(selection)
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[role="option"]:visible')
+        .contains(selection)
         .click();
 });
 
@@ -720,8 +721,12 @@ When('the form is prefilled with the selected category combination', () => {
 
 When('you deselect the category from the form', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
-        .find('span.Select-clear-zone')
-        .click();
+        .find('[data-test="dhis2-simplesingleselect"]')
+        .within(() => {
+            cy.get('button[aria-label*="Clear"]')
+                .should('be.visible')
+                .click();
+        });
 });
 
 Then('you see a validation error on category combination', () => {

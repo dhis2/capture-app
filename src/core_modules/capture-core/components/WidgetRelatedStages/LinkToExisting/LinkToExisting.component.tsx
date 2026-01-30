@@ -1,73 +1,71 @@
-import React, { type ComponentType } from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import {
+    SingleSelectField,
+    withDefaultFieldContainer,
+    withDisplayMessages,
+    withLabel,
+} from '../../FormFields/New';
+import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css';
+import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
-const styles: Readonly<any> = {
-    searchRow: {
-        padding: spacers.dp16,
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacers.dp16,
-    },
-    label: {
-        width: '150px',
-        fontSize: '14px',
-    },
-    singleSelectField: {
-        flexGrow: 1,
-    },
-};
+const SingleSelectForForm = withDefaultFieldContainer()(
+    withLabel({
+        onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
+    })(
+        withDisplayMessages()(
+            SingleSelectField,
+        ),
+    ),
+);
 
-type Props = LinkToExistingProps & WithStyles<typeof styles>;
-
-export const LinkToExistingPlain = ({
+export const LinkToExisting = ({
     relatedStagesDataValues,
     setRelatedStagesDataValues,
     linkableEvents,
     linkableStageLabel,
     errorMessages,
     saveAttempted,
-    classes,
-}: Props) => {
-    const onChange = (value: string) => {
+}: LinkToExistingProps) => {
+    const [touched, setTouched] = useState(false);
+
+    const handleChange = (value: string | null) => {
+        setTouched(true);
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
-            linkedEventId: value,
+            linkedEventId: value || undefined,
         });
     };
 
+    const handleBlur = () => {
+        setTouched(true);
+    };
+
+    const options = linkableEvents.map(event => ({
+        value: event.id,
+        label: event.label,
+    }));
+
+    const label = i18n.t('Choose a {{linkableStageLabel}} event', {
+        linkableStageLabel,
+    });
+
+    const shouldShowError = (saveAttempted || touched);
+
     return (
-        <div className={classes.searchRow}>
-            <p className={classes.label}>
-                {i18n.t('Choose a {{linkableStageLabel}} event', {
-                    linkableStageLabel,
-                })}
-            </p>
-            <SingleSelectField
-                selected={relatedStagesDataValues.linkedEventId}
-                onChange={({ selected }) => onChange(selected)}
-                placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
-                    linkableStageLabel,
-                })}
-                className={classes.singleSelectField}
-                error={saveAttempted && !!errorMessages.linkedEventId}
-                validationText={saveAttempted ? errorMessages.linkedEventId : undefined}
-                dataTest="related-stages-existing-response-list"
-            >
-                {linkableEvents
-                    .map(event => (
-                        <SingleSelectOption
-                            key={event.id}
-                            value={event.id}
-                            label={event.label}
-                        />
-                    ))
-                }
-            </SingleSelectField>
-        </div>
+        <SingleSelectForForm
+            label={label}
+            value={relatedStagesDataValues.linkedEventId || null}
+            required
+            onChange={handleChange}
+            onBlur={handleBlur}
+            options={options}
+            placeholder={i18n.t('Select an event')}
+            clearable
+            styles={baseInputStyles}
+            errorMessage={shouldShowError ? errorMessages.linkedEventId : undefined}
+            dataTest="related-stages-existing-response-list"
+        />
     );
 };
-
-export const LinkToExisting = withStyles(styles)(LinkToExistingPlain) as ComponentType<LinkToExistingProps>;

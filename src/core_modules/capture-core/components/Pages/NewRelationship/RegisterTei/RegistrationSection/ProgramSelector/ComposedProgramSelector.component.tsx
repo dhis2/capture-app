@@ -6,8 +6,8 @@ import { ProgramFilterer } from '../../../../../ProgramFilterer';
 import type { Program } from '../../../../../../metaData';
 import { TrackerProgram } from '../../../../../../metaData';
 import {
-    VirtualizedSelectField,
-    withSelectTranslations,
+    SingleSelectField,
+    withSelectSingleTranslations,
     withFocusSaver,
     withDefaultFieldContainer,
     withLabel,
@@ -118,10 +118,10 @@ class ProgramSelector extends React.Component<Props> {
                 {
                     (programs: Program[], isFiltered: boolean) => (
                         <div>
-                            <VirtualizedSelectField
+                            <SingleSelectField
                                 options={this.getOptionsFromPrograms(programs)}
                                 required={false}
-                                onSelect={onUpdateSelectedProgram}
+                                onChange={onUpdateSelectedProgram}
                                 {...passOnProps as any}
                             />
                             {isFiltered ? this.renderIsFilteredText() : null }
@@ -144,7 +144,7 @@ export const ComposedProgramSelector =
                     const { programLabelClass, ...passOnProps } = props;
                     return passOnProps;
                 })(
-                    withSelectTranslations()(
+                    withSelectSingleTranslations()(
                         withStyles(getStyles)(
                             ProgramSelector,
                         ),
