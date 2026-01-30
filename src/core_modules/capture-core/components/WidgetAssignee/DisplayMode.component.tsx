@@ -12,10 +12,10 @@ const styles = () => ({
         fontSize: 14,
     },
     editButton: {
-        marginLeft: spacers.dp12,
+        marginInlineStart: spacers.dp12,
     },
     assignButton: {
-        marginLeft: spacers.dp12,
+        marginInlineStart: spacers.dp12,
     },
     avatarWrapper: {
         display: 'flex',

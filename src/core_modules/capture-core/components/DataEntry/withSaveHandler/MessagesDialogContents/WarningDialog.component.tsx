@@ -60,7 +60,7 @@ class WarningDialogPlain extends React.Component<Props & WithStyles<typeof style
                             onClick={onSave}
                             primary
                             initialFocus
-                            className={classes.marginLeft}
+                            className={classes.button}
                         >
                             {i18n.t('Save anyway')}
                         </Button>
@@ -72,8 +72,8 @@ class WarningDialogPlain extends React.Component<Props & WithStyles<typeof style
 }
 
 const styles = () => ({
-    marginLeft: {
-        marginLeft: 8,
+    button: {
+        marginInlineStart: 8,
     },
 });
 export const WarningDialog = withStyles(styles)(WarningDialogPlain);

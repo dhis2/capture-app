@@ -9,7 +9,7 @@ const styles = {
         marginTop: '5px',
     },
     actionContainer: {
-        paddingRight: 2,
+        paddingInlineEnd: 2,
     },
 };
 

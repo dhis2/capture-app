@@ -6,7 +6,7 @@ const getStyles = () => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: 5,
+        paddingInlineEnd: 5,
     },
     icon: {
         width: 22,

@@ -17,7 +17,7 @@ const styles: Readonly<any> = {
         fontSize: 14,
         fontWeight: 'normal',
         color: colors.grey800,
-        marginLeft: 6,
+        marginInlineStart: 6,
     },
 };
 

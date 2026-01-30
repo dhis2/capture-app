@@ -23,7 +23,7 @@ type AvailableCardListButtonState = keyof typeof availableCardListButtonState;
 const buttonStyles = (theme: any) => ({
     buttonMargin: {
         '&:not(:first-child)': {
-            marginLeft: theme.typography.pxToRem(8),
+            marginInlineStart: theme.typography.pxToRem(8),
         },
     },
 });

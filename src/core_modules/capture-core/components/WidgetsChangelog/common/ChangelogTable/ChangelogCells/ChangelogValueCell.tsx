@@ -1,8 +1,9 @@
 import React from 'react';
 import log from 'loglevel';
-import { colors, IconArrowRight16, spacers } from '@dhis2/ui';
+import { colors, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { errorCreator } from 'capture-core-utils';
+import { DirectionalArrow } from '../../../../../utils/rtl';
 import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
 
 type OwnProps = {
@@ -54,7 +55,7 @@ type DeletedProps = {
 const Updated = ({ previousValue, currentValue, classes }: UpdatedProps) => (
     <div className={classes.container}>
         <div className={classes.previousValue}>{previousValue}</div>
-        <div className={classes.arrow}><IconArrowRight16 /></div>
+        <div className={classes.arrow}><DirectionalArrow /></div>
         <div className={classes.currentValue}>{currentValue}</div>
     </div>
 );

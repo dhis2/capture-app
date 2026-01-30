@@ -1,5 +1,6 @@
 .Select-control {
-    padding: 12px 4px 10px 11px;
+    padding-block: 12px 10px;
+    padding-inline: 11px 4px;
     font-size: 14px;
     width: 100%;
     border: 1px solid #a0adba;

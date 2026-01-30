@@ -43,13 +43,8 @@ const styles: Readonly<any> = {
         overflowY: 'hidden',
     },
     hidenButton: { display: 'none !important' },
-    icon: {
-        position: 'absolute',
-        left: spacersNum.dp8,
-        top: '1px',
-    },
     label: {
-        paddingLeft: spacersNum.dp32,
+        paddingInlineStart: spacersNum.dp32,
     },
     table: {
         border: 'none !important',

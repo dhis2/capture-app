@@ -21,7 +21,7 @@ const styles: Readonly<any> = {
         display: 'flex',
     },
     tag: {
-        marginLeft: spacers.dp8,
+        marginInlineStart: spacers.dp8,
         flexShrink: 0,
         backgroundColor: `${colors.yellow200} !important`,
     },

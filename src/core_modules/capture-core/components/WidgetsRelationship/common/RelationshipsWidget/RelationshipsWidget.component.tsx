@@ -15,7 +15,7 @@ const styles = {
         alignItems: 'center',
     },
     icon: {
-        paddingRight: spacers.dp8,
+        paddingInlineEnd: spacers.dp8,
     },
 };
 

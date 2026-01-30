@@ -22,7 +22,7 @@ const styles: Readonly<any> = {
         borderRadius: '6px',
         marginBottom: '8px',
         transition: 'all 0.2s',
-        textAlign: 'left',
+        textAlign: 'start',
         backgroundColor: 'white',
         '&:hover': {
             backgroundColor: '#F7FAFC',

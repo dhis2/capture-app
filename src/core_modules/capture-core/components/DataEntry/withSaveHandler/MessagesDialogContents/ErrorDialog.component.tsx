@@ -55,7 +55,7 @@ class ErrorDialogPlain extends React.Component<Props & WithStyles<typeof styles>
                         onClick={onSave}
                         primary
                         initialFocus
-                        className={classes.marginLeft}
+                        className={classes.button}
                     >
                         {i18n.t('Save anyway')}
                     </Button>) : null
@@ -82,8 +82,8 @@ class ErrorDialogPlain extends React.Component<Props & WithStyles<typeof styles>
 }
 
 const styles = () => ({
-    marginLeft: {
-        marginLeft: 8,
+    button: {
+        marginInlineStart: 8,
     },
 });
 

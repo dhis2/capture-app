@@ -20,7 +20,7 @@ const getStyles: any = (theme: any) => ({
     },
     label: {
         flexBasis: 200,
-        paddingLeft: 5,
+        paddingInlineStart: 5,
         paddingTop: 11,
     },
     field: {

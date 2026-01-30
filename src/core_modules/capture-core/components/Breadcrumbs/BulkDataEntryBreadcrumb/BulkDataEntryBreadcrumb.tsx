@@ -2,9 +2,10 @@ import type { ComponentType } from 'react';
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { colors, IconChevronRight16 } from '@dhis2/ui';
+import { colors } from '@dhis2/ui';
 import { useOriginLabel } from './hooks/useOriginLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
+import { DirectionalChevron } from '../../../utils/rtl';
 
 export const breadcrumbsKeys = Object.freeze({
     MAIN_PAGE: 'mainPage',
@@ -70,7 +71,7 @@ const BreadcrumbsPlain = ({
                         selected={button.selected}
                         dataTest={`bulkDataEntry-breadcrumb-${button.key}-item`}
                     />
-                    {index < breadcrumbItems.length - 1 && <IconChevronRight16 color={colors.grey800} />}
+                    {index < breadcrumbItems.length - 1 && <DirectionalChevron color={colors.grey800} />}
                 </React.Fragment>
             ))}
         </div>

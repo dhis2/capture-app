@@ -3,10 +3,11 @@ import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, FeatureGroup, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
+import { isLangRtl } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
 import { convertPolygonToServer } from './converters';
@@ -22,7 +23,7 @@ const styles = () => ({
         height: 'calc(100vh - 380px)',
     },
     setAreaButton: {
-        marginLeft: '5px',
+        marginInlineStart: '5px',
     },
 });
 
@@ -96,6 +97,7 @@ const PolygonPlain = ({
         <Map
             center={center ?? initialCenter}
             zoom={13}
+            zoomControl={false}
             ref={(ref) => {
                 if (ref?.leafletElement) {
                     ref.leafletElement.invalidateSize();
@@ -107,8 +109,9 @@ const PolygonPlain = ({
             }}
             className={classes.map}
         >
+            <ZoomControl position={isLangRtl() ? 'topright' : 'topleft'} />
             <WrappedLeafletSearch
-                position="topright"
+                position={isLangRtl() ? 'topleft' : 'topright'}
                 inputPlaceholder="Search"
                 closeResultsOnClick
                 search={null}
@@ -126,7 +129,7 @@ const PolygonPlain = ({
                 }}
             >
                 <EditControl
-                    position="topright"
+                    position={isLangRtl() ? 'topleft' : 'topright'}
                     onCreated={onMapPolygonCreated}
                     onDeleted={onMapPolygonDelete}
                     onDrawStart={() => setDrawingState(drawing.STARTED)}

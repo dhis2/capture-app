@@ -7,9 +7,8 @@ import { searchOperators } from '../../../../../metaDataMemoryStoreBuilders';
 const styles = () => ({
     help: {
         marginTop: spacers.dp4,
-        marginRight: 0,
+        marginInline: 0,
         marginBottom: 0,
-        marginLeft: 0,
         fontSize: 12,
         lineHeight: '14px',
         color: colors.grey700,

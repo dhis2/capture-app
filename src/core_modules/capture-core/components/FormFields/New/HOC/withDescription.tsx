@@ -7,7 +7,7 @@ const getStylesLabel = () => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: spacers.dp4,
+        marginInlineStart: spacers.dp4,
         padding: 2,
         borderRadius: 3,
         background: 'transparent',

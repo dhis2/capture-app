@@ -27,14 +27,14 @@ const getStylesLabel = (theme: any) => ({
         color: theme.palette.required,
     },
     iconContainer: {
-        paddingLeft: 5,
+        paddingInlineStart: 5,
         display: 'flex',
         alignItems: 'center',
     },
     tooltipIcon: {
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: spacers.dp8,
+        paddingInlineStart: spacers.dp8,
         cursor: 'pointer',
     },
 });

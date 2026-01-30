@@ -30,6 +30,15 @@ type OwnProps = {
 };
 
 const styles = (theme: any) => ({
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: spacersNum.dp8,
+    },
+    icon: {
+        display: 'flex',
+        alignItems: 'center',
+    },
     editButton: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -41,7 +50,7 @@ const styles = (theme: any) => ({
         background: 'transparent',
         color: colors.grey600,
         padding: 0,
-        marginLeft: '2px',
+        marginInlineStart: '2px',
         '&:focus': {
             outline: 'none',
             background: colors.grey200,
@@ -181,13 +190,15 @@ const DateComponentPlain = ({
             )}
         </div>
     ) : (
-        <div data-test="widget-enrollment-date">
-            <span data-test="widget-enrollment-icon-calendar">
+        <div className={classes.container} data-test="widget-enrollment-date">
+            <span className={classes.icon} data-test="widget-enrollment-icon-calendar">
                 <IconCalendar16 color={colors.grey600} />
             </span>
-            {dateLabel}{': '}
-            {displayDate}
-            {editEnabled &&
+            <span>
+                {dateLabel}{': '}
+                {displayDate}
+            </span>
+            {editEnabled && (
                 <button
                     className={classes.editButton}
                     data-test="widget-enrollment-icon-edit-date"
@@ -195,7 +206,7 @@ const DateComponentPlain = ({
                 >
                     <IconEdit16 />
                 </button>
-            }
+            )}
         </div>
     );
 };

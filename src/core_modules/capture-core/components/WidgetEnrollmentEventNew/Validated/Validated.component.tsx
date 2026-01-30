@@ -10,7 +10,7 @@ import type { Props } from './validated.types';
 
 const styles: Readonly<any> = {
     wrapper: {
-        paddingLeft: spacersNum.dp16,
+        paddingInlineStart: spacersNum.dp16,
     },
 };
 

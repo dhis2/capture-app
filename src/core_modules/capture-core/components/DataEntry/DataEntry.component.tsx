@@ -30,6 +30,7 @@ const styles: Readonly<any> = (theme: any) => ({
     },
     footerLeft: {
         display: 'flex',
+        gap: spacers.dp4,
     },
     footerRight: {
         display: 'flex',
@@ -66,7 +67,7 @@ const styles: Readonly<any> = (theme: any) => ({
         '& > div > div > *:not(:first-child)': {
             marginTop: '10px',
         },
-        marginRight: 0,
+        marginInlineEnd: 0,
     },
     verticalOutputsContainer: {
         '& > *': {

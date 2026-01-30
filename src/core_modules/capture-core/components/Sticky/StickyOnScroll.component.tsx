@@ -69,7 +69,7 @@ class StickyOnScrollPlain extends React.Component<Props> {
         this.setSticky();
     }
 
-    getRightMargin = () => {
+    getMarginInlineEnd = () => {
         const parentElement = this.stickyContainer.parentElement;
         const width = document.documentElement ? document.documentElement.clientWidth : 0;
         const rightParent = this.stickyContainer.parentElement.offsetLeft + parentElement.offsetWidth;
@@ -81,21 +81,21 @@ class StickyOnScrollPlain extends React.Component<Props> {
         if (this.stickyContainer && (this.stickyDisabled() || !this.isNearTop())) {
             this.stickyContainer.className = classes.stickyContainerAbsolute;
             this.stickyContainer.style.top = 'initial';
-            this.stickyContainer.style.marginRight = 'initial';
+            this.stickyContainer.style.marginInlineEnd = 'initial';
             this.stickyContainer.style.width = 'initial';
             return;
         }
         if (this.stickyContainer && this.isAtBottomOfContainer()) {
             this.stickyContainer.className = classes.stickyContainerAtBottom;
             this.stickyContainer.style.top = 'initial';
-            this.stickyContainer.style.marginRight = 'initial';
+            this.stickyContainer.style.marginInlineEnd = 'initial';
             return;
         }
         if (this.stickyContainer) {
             this.stickyContainer.className = classes.stickyContainerFixed;
             this.stickyContainer.style.top = `${this.props.offsetTop}px`;
             this.stickyContainer.style.width = `${this.stickyContainer.parentElement.clientWidth}px`;
-            this.stickyContainer.style.marginRight = `${this.getRightMargin()}px`;
+            this.stickyContainer.style.marginInlineEnd = `${this.getMarginInlineEnd()}px`;
         }
     }
 
