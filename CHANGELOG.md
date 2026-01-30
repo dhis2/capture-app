@@ -1,3 +1,10 @@
+## [105.5.4](https://github.com/dhis2/capture-app/compare/v105.5.3...v105.5.4) (2026-01-30)
+
+
+### Bug Fixes
+
+* [DHIS2-20719] Clear button stays highlighted ([#4443](https://github.com/dhis2/capture-app/issues/4443)) ([2ba7727](https://github.com/dhis2/capture-app/commit/2ba7727c414bbea70fb2bf3135148cf9c15e69c7))
+
 ## [105.5.3](https://github.com/dhis2/capture-app/compare/v105.5.2...v105.5.3) (2026-01-26)
 
 
