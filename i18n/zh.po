@@ -3,17 +3,17 @@
 # Philip Larsen Donnelly, 2024
 # 晓东 林 <13981924470@126.com>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2025
-# easylin <lin_xd@126.com>, 2025
+# easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-12-04T10:33:38.238Z\n"
+"POT-Creation-Date: 2026-01-19T10:20:44.571Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -490,7 +490,7 @@ msgid "Min"
 msgstr "最小"
 
 msgid "Exact matches only"
-msgstr ""
+msgstr "仅限完全匹配"
 
 msgid "Contains text"
 msgstr "包含文本"
@@ -530,6 +530,12 @@ msgstr "清除"
 
 msgid "No results"
 msgstr "无结果"
+
+msgid "Must match the start of the value"
+msgstr "必须与值的起始部分相匹配"
+
+msgid "Must match the end of the value"
+msgstr "必须与数值的末尾一致"
 
 msgid "Description"
 msgstr "描述"
@@ -744,9 +750,6 @@ msgstr "无法加载项目阶段"
 msgid "Stage"
 msgstr "阶段"
 
-msgid "Registered events"
-msgstr "注册的事件"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "类别选项对所选组织单位无效。"
 
@@ -781,6 +784,9 @@ msgstr "或者在{{program}}中查看您可以访问的所有事件"
 
 msgid "Please select an organisation unit."
 msgstr "请选择一个机构。"
+
+msgid "Registered events"
+msgstr "注册的事件"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -891,12 +897,6 @@ msgstr "离开该页将丢失你创建新关系的所有选择"
 
 msgid "Errors"
 msgstr "错误"
-
-msgid "Feedback"
-msgstr "反馈"
-
-msgid "Indicators"
-msgstr "指标"
 
 msgid "Warnings"
 msgstr "错误"
@@ -1326,6 +1326,9 @@ msgstr "转到`调度`选项卡以重新安排调度此事件"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
 
+msgid "You do not have access to uncomplete this event"
+msgstr "您没有权限未完成此事件"
+
 msgid "Geometry (Area)"
 msgstr "几何（面积）"
 
@@ -1400,6 +1403,12 @@ msgstr "撰写关于此预定活动的说明"
 
 msgid "Program or stage is invalid"
 msgstr "项目或活动阶段无效"
+
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Indicators"
+msgstr "指标"
 
 msgid "Save note"
 msgstr "保存笔记"
@@ -2074,7 +2083,7 @@ msgstr "自不能大于至"
 msgid ""
 "Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
 "to perform a search"
-msgstr ""
+msgstr "请输入至少{{minCharactersToSearch}} 个字符，以便{{formName}} 进行搜索"
 
 msgid "Checking..."
 msgstr "检查"
@@ -2094,7 +2103,7 @@ msgid ""
 msgid_plural ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
-msgstr[0] ""
+msgstr[0] "以下属性类型不支持搜索，已被隐藏"
 
 msgid "Some attributes are hidden"
 msgstr "某些属性是隐藏的"
