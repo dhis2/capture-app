@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { useDataEngine, useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
@@ -86,16 +87,16 @@ export const AppLoader = (props: Props) => {
                 },
                 () => onRunApp(store));
         } catch (error) {
-            let message = 'The application could not be loaded.';
+            let message = i18n.t('The application could not be loaded.');
             if (error && error instanceof DisplayException) {
                 logError((error as any).innerError);
                 message += ` ${String((error as any).message || '')}`;
             } else {
                 logError(error);
                 if (process.env.NODE_ENV !== environments.prod) {
-                    message += ' Please verify that the server is running.';
+                    message += ` ${i18n.t('Please verify that the server is running.')}`;
                 } else {
-                    message += ' Please see log for details.';
+                    message += ` ${i18n.t('Please see log for details.')}`;
                 }
             }
             setLoadError(message);

@@ -112,7 +112,7 @@ const PolygonPlain = ({
             <ZoomControl position={isLangRtl() ? 'topright' : 'topleft'} />
             <WrappedLeafletSearch
                 position={isLangRtl() ? 'topleft' : 'topright'}
-                inputPlaceholder="Search"
+                inputPlaceholder={i18n.t('Search')}
                 closeResultsOnClick
                 search={null}
                 mapStateModifier={onSearch}

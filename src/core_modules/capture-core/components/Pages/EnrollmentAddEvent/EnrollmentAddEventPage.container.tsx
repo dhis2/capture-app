@@ -87,7 +87,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
         <div className={classes.informativeMessage}>
             <NoticeBox
                 error
-                title={'An error has occurred'}
+                title={i18n.t('An error has occurred')}
             >
                 {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES && (
                     i18n.t('Page is missing required values from URL')

@@ -64,7 +64,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
         return {
             isValid,
-            error: isValid ? null : i18n.t(NumericFilterPlain.errorMessages[type]),
+            error: isValid ? null : NumericFilterPlain.errorMessages[type],
         };
     }
 
@@ -97,12 +97,12 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
     }
 
     static errorMessages = {
-        MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
-        [dataElementTypes.NUMBER]: 'Please provide a valid number',
-        [dataElementTypes.INTEGER]: 'Please provide a valid integer',
-        [dataElementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
-        [dataElementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
-        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
+        MIN_GREATER_THAN_MAX: i18n.t('Minimum value cannot be greater than maximum value'),
+        [dataElementTypes.NUMBER]: i18n.t('Please provide a valid number'),
+        [dataElementTypes.INTEGER]: i18n.t('Please provide a valid integer'),
+        [dataElementTypes.INTEGER_POSITIVE]: i18n.t('Please provide a positive integer'),
+        [dataElementTypes.INTEGER_NEGATIVE]: i18n.t('Please provide a negative integer'),
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: i18n.t('Please provide zero or a positive integer'),
     };
 
     static validatorForTypes = {
@@ -164,7 +164,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
         let logicError = null;
         if (isMinValueValid && isMaxValueValid && minValue && maxValue && Number(minValue) > Number(maxValue)) {
-            logicError = i18n.t(NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX);
+            logicError = NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX;
         }
 
         return {

@@ -56,8 +56,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     }
 
     static errorMessages = {
-        NO_ITEM_SELECTED: 'No item selected',
-        SEARCH_FORM_MISSING: 'search form is missing. see log for details',
+        SEARCH_FORM_MISSING: 'Search form is missing. See log for details',
     };
 
     validNumberOfAttributes = () => {
@@ -179,7 +178,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         if (!searchForm) {
             return (
                 <div>
-                    {SearchFormPlain.errorMessages.SEARCH_FORM_MISSING}
+                    {i18n.t('Search form is missing. See log for details')}
                 </div>
             );
         }

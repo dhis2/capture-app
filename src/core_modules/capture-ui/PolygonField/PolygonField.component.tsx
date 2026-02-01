@@ -181,7 +181,7 @@ export class PolygonField extends React.Component<Props, State> {
                     <ZoomControl position={isLangRtl() ? 'topright' : 'topleft'} />
                     <WrappedLeafletSearch
                         position={isLangRtl() ? 'topleft' : 'topright'}
-                        inputPlaceholder="Search"
+                        inputPlaceholder={i18n.t('Search')}
                         closeResultsOnClick
                     />
                     <TileLayer

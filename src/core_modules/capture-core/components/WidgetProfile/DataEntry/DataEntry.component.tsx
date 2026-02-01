@@ -56,7 +56,7 @@ export const DataEntryComponent = ({
                 </Button>
                 {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
                     <Button loading primary>
-                        {i18n.t(' Loading...')}
+                        {i18n.t('Loading...')}
                     </Button>
                 )}
 

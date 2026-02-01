@@ -2,6 +2,7 @@
  * @namespace Pagination
  */
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { IconButton, isLangRtl } from 'capture-ui';
 import { DirectionalChevron } from '../../utils/rtl';
@@ -83,7 +84,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         dataTest={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
                         disabled={disabled || currentPage <= 1}
-                        aria-label="First Page"
+                        aria-label={i18n.t('First Page')}
                     >
                         {isLangRtl() ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
@@ -91,7 +92,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         dataTest={'search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
                         disabled={disabled || currentPage <= 1}
-                        aria-label="Previous Page"
+                        aria-label={i18n.t('Previous Page')}
                     >
                         <DirectionalChevron size={24} direction="back" />
                     </IconButton>
@@ -99,7 +100,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         dataTest={'search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
                         disabled={disabled || nextPageButtonDisabled}
-                        aria-label="Next Page"
+                        aria-label={i18n.t('Next Page')}
                     >
                         <DirectionalChevron size={24} />
                     </IconButton>

@@ -193,7 +193,7 @@ const buildGeometrySettingsFn = () => ({
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
                 label: i18n.t('Area'),
-                valueConverter: value => (value ? 'Polygon captured' : 'No polygon captured'),
+                valueConverter: value => (value ? i18n.t('Polygon captured') : i18n.t('No polygon captured')),
             });
         }
         const pointDataElement = new DataElement((o) => {
@@ -202,7 +202,7 @@ const buildGeometrySettingsFn = () => ({
         });
 
         return createComponentProps(props, {
-            label: 'Coordinate',
+            label: i18n.t('Coordinate'),
             valueConverter: value => pointDataElement.convertValue(value, valueConvertFn),
         });
     },

@@ -172,7 +172,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     <ZoomControl position={buttonPosition} />
                     <WrappedLeafletSearch
                         position={buttonPosition}
-                        inputPlaceholder="Search"
+                        inputPlaceholder={i18n.t('Search')}
                         closeResultsOnClick
                         search={null}
                         mapStateModifier={this.search}
@@ -213,7 +213,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Latitude"
+                label={i18n.t('Latitude')}
                 value={value?.latitude}
                 classes={passOnClasses}
                 className={defaultClasses.latitudeTextInput}
@@ -235,7 +235,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Longitude"
+                label={i18n.t('Longitude')}
                 value={value?.longitude}
                 className={defaultClasses.longitudeTextInput}
                 classes={passOnClasses}

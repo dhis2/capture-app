@@ -108,7 +108,7 @@ const CoordinatesPlain = ({
         >
             <WrappedLeafletSearch
                 position={isLangRtl() ? 'topright' : 'topleft'}
-                inputPlaceholder="Search"
+                inputPlaceholder={i18n.t('Search')}
                 closeResultsOnClick
                 search={null}
                 mapStateModifier={onSearch}

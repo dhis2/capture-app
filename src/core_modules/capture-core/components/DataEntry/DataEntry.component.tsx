@@ -1,4 +1,5 @@
 import { spacers } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import type { ReactElement } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
@@ -160,8 +161,8 @@ const fieldVerticalFilter = (placement: typeof placements[keyof typeof placement
 
 class DataEntryPlain extends React.Component<Props> {
     static errorMessages = {
-        NO_ITEM_SELECTED: 'No item selected',
-        FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
+        NO_ITEM_SELECTED: i18n.t('No item selected'),
+        FORM_FOUNDATION_MISSING: i18n.t('Form foundation missing. See log for details'),
     };
 
     handleUpdateField = (...args: any[]) => {

@@ -11,7 +11,6 @@ import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from './types';
 import { FromDateFilter } from './From.component';
 import { ToDateFilter } from './To.component';
-import { dataElementTypes } from '../../../metaData';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
@@ -71,7 +70,7 @@ const getAbsoluteRangeErrors = (fromValue, toValue, submitAttempted) => {
     if (!fromValueString && !toValueString) {
         return {
             dateLogicError: submitAttempted
-                ? i18n.t(DateFilterPlain.errorMessages.ABSOLUTE_RANGE_WITHOUT_VALUES)
+                ? i18n.t('Please specify a range')
                 : null,
         };
     }
@@ -85,7 +84,7 @@ const getAbsoluteRangeErrors = (fromValue, toValue, submitAttempted) => {
 
     return {
         dateLogicError: hasDateLogicError
-            ? i18n.t(DateFilterPlain.errorMessages.FROM_GREATER_THAN_TO)
+            ? i18n.t("The From date can't be after the To date")
             : null,
     };
 };
@@ -99,7 +98,7 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     if (!startValue && !endValue) {
         errors = {
             ...errors,
-            bufferLogicError: submitAttempted ? i18n.t(DateFilterPlain.errorMessages.RELATIVE_RANGE_WITHOUT_VALUES) : null,
+            bufferLogicError: submitAttempted ? i18n.t('Please specify the number of days') : null,
         };
     }
     const { error: startValueError } = DateFilterPlain.validateRelativeRangeValue(startValue);
@@ -161,7 +160,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
         return {
             isValid,
-            error: isValid ? null : i18n.t(DateFilterPlain.errorMessages[dataElementTypes.INTEGER_ZERO_OR_POSITIVE]),
+            error: isValid ? null : i18n.t('Please provide zero or a positive integer'),
         };
     }
 
@@ -196,13 +195,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         super(props);
         this.state = { submitAttempted: false };
     }
-
-    static errorMessages = {
-        ABSOLUTE_RANGE_WITHOUT_VALUES: 'Please specify a range',
-        RELATIVE_RANGE_WITHOUT_VALUES: 'Please specify the number of days',
-        FROM_GREATER_THAN_TO: "The From date can't be after the To date",
-        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
-    };
 
     static mainOptionSet = new OptionSet('mainOptions', [
         new Option((_this) => {
