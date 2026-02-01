@@ -5,7 +5,7 @@ import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Bu
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
-import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, Marker, withLeaflet, ZoomControl } from 'react-leaflet';
 import { isLangRtl } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { CoordinateInput } from 'capture-ui/internal/CoordinateInput/CoordinateInput.component';
@@ -106,6 +106,7 @@ const CoordinatesPlain = ({
             className={classes.map}
             onClick={onHandleMapClicked}
         >
+            <ZoomControl position={isLangRtl() ? 'bottomleft' : 'bottomright'} />
             <WrappedLeafletSearch
                 position={isLangRtl() ? 'topright' : 'topleft'}
                 inputPlaceholder={i18n.t('Search')}

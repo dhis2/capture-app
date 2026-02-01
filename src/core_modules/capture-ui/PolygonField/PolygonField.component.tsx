@@ -178,9 +178,9 @@ export class PolygonField extends React.Component<Props, State> {
                     zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <ZoomControl position={isLangRtl() ? 'topright' : 'topleft'} />
+                    <ZoomControl position={isLangRtl() ? 'bottomleft' : 'bottomright'} />
                     <WrappedLeafletSearch
-                        position={isLangRtl() ? 'topleft' : 'topright'}
+                        position={isLangRtl() ? 'topright' : 'topleft'}
                         inputPlaceholder={i18n.t('Search')}
                         closeResultsOnClick
                     />
