@@ -12,7 +12,7 @@ export function getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId: string)
     const trackedEntityType = trackedEntityTypesCollection.get(trackedEntityTypeId);
     if (!trackedEntityType) {
         log.error(errorCreator(errorMessages.TRACKED_ENTITY_TYPE_NOT_FOUND)({ trackedEntityTypeId }));
-        throw Error(i18n.t('An error has occurred. See log for details'));
+        throw new Error(i18n.t('An error has occurred. See log for details'));
     }
     return trackedEntityType;
 }

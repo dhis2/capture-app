@@ -12,7 +12,7 @@ export function getEventProgramThrowIfNotFound(programId: string): EventProgram 
     const program = programCollection.get(programId);
     if (!program || !(program instanceof EventProgram)) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        throw Error(i18n.t('An error has occurred. See log for details'));
+        throw new Error(i18n.t('An error has occurred. See log for details'));
     }
     return program;
 }

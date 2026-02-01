@@ -13,7 +13,7 @@ export function getProgramThrowIfNotFound(programId: string): EventProgram | Tra
 
     if (!program || !(program instanceof TrackerProgram || program instanceof EventProgram)) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        throw Error(i18n.t('An error has occurred. See log for details'));
+        throw new Error(i18n.t('An error has occurred. See log for details'));
     }
 
     return program;
