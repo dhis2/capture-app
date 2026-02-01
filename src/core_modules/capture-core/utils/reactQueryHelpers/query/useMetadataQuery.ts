@@ -16,7 +16,7 @@ const throwErrorForIndexedDB = (error: any) => {
     } else {
         log.error(error);
     }
-    throw Error(i18n.t('There was an error fetching metadata'));
+    throw new Error(i18n.t('There was an error fetching metadata'));
 };
 
 // Generic over both the raw data (TQueryFnData) and the transformed data (TData)

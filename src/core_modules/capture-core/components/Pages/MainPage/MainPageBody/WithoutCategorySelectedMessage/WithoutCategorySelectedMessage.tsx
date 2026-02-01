@@ -37,7 +37,7 @@ const WithoutCategorySelectedMessagePlain = ({ programId, classes }: Props) => {
 
     if (!program?.categoryCombination) {
         log.error(errorCreator(errorMessages.MISSING_CATEGORY)({ programId }));
-        throw Error(i18n.t('An error has occurred. See log for details'));
+        throw new Error(i18n.t('An error has occurred. See log for details'));
     }
 
     const programCategories = [...program.categoryCombination.categories.values()];
