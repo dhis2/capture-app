@@ -8,14 +8,13 @@ import { EventProgram } from '../Program';
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
-    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
 export function getProgramAndStageForProgram(programId: string, programStageId: string) {
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null, program: null };
+        return { error: i18n.t('An error has occurred. See log for details'), stage: null, program: null };
     }
 
 
@@ -23,7 +22,7 @@ export function getProgramAndStageForProgram(programId: string, programStageId: 
 
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ program, programId }));
-        return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null, program: null };
+        return { error: ('An error has occurred. See log for details'), stage: null, program: null };
     }
 
     return { stage, program, error: null };

@@ -85,7 +85,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
                 .catch((error: any) => {
                     if (!(error && (error.aborted || error.isCanceled))) {
                         log.error(
-                            errorCreator('An error occured loading category options')({ error }),
+                            errorCreator('An error occurred loading category options')({ error }),
                         );
                         setCategories([]);
                     }

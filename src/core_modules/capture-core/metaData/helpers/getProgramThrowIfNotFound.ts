@@ -6,7 +6,6 @@ import { EventProgram, TrackerProgram } from '../Program';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
-    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
 export function getProgramThrowIfNotFound(programId: string): EventProgram | TrackerProgram {
@@ -14,7 +13,7 @@ export function getProgramThrowIfNotFound(programId: string): EventProgram | Tra
 
     if (!program || !(program instanceof TrackerProgram || program instanceof EventProgram)) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+        throw Error(i18n.t('An error has occurred. See log for details'));
     }
 
     return program;

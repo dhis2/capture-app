@@ -44,14 +44,14 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithSty
                                 key={`${content.key}divider`}
                                 dataTest={`subheader-divider-${content.key}`}
                                 className={classes.subHeaderDivider}
-                            />,
+                            />
                             <div
                                 key={content.key}
                                 data-test={`subheader-${content.key}`}
                                 className={classes.subHeader}
                             >
                                 {content.subHeader}
-                            </div>,
+                            </div>
                         </>
                     );
                 }
