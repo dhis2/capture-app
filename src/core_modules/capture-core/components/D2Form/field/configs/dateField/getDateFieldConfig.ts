@@ -1,7 +1,7 @@
 
 import moment from 'moment';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
-import { isLangRtl } from 'capture-ui/utils/rtl/isLangRtl';
+import { isLangRtl } from '../../../../../utils/rtl';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';

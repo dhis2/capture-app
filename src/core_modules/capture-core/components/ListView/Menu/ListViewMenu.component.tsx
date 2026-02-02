@@ -1,7 +1,8 @@
 import React, { useState, useRef, memo, useCallback } from 'react';
-import { IconButton, isLangRtl } from 'capture-ui';
+import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu, Divider } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { isLangRtl } from '../../../utils/rtl';
 
 import type { Props } from './listViewMenu.types';
 

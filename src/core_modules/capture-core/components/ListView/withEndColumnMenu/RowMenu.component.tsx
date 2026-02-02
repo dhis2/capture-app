@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { IconButton, isLangRtl } from 'capture-ui';
+import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
+import { isLangRtl } from '../../../utils/rtl';
 import type { Props } from './rowMenu.types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 

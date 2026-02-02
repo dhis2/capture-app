@@ -1,5 +1,11 @@
-import { isLangRtl } from 'capture-ui';
 import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
+
+const RTL_LOCALES = ['ar', 'ar_EG', 'ar_IQ', 'ar_SD', 'ckb', 'ps', 'prs', 'ur'];
+
+function isLangRtl(locale: string): boolean {
+    const prefixed = RTL_LOCALES.map(c => `${c}-`);
+    return RTL_LOCALES.includes(locale) || prefixed.some(c => locale.startsWith(c));
+}
 
 export async function cacheSystemSettings(
     systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string},

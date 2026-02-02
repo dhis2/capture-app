@@ -3,7 +3,8 @@ import { Button, Popover } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { ChevronDown, ChevronUp, isLangRtl } from 'capture-ui';
+import { ChevronDown, ChevronUp } from 'capture-ui';
+import { isLangRtl } from '../../../../utils/rtl';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import { LockedFilterButton } from './LockedFilterButton.component';

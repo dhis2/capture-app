@@ -22,7 +22,7 @@ export function getProgramAndStageForProgram(programId: string, programStageId: 
 
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ program, programId }));
-        return { error: ('An error has occurred. See log for details'), stage: null, program: null };
+        return { error: i18n.t('An error has occurred. See log for details'), stage: null, program: null };
     }
 
     return { stage, program, error: null };

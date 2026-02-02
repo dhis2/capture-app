@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconChevronLeft16, IconChevronRight16, IconChevronLeft24, IconChevronRight24, type IconProps } from '@dhis2/ui';
-import { isLangRtl } from 'capture-ui';
+import { isLangRtl } from './isLangRtl';
 
 type ChevronSize = 16 | 24;
 type ChevronDirection = 'forward' | 'back';

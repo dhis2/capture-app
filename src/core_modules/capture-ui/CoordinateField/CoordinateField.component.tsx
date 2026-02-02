@@ -157,7 +157,6 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             return null;
         }
         const center = position || this.props.center;
-        const searchPosition = isLangRtl() ? 'topright' : 'topleft';
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -171,7 +170,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                 >
                     <ZoomControl position={isLangRtl() ? 'bottomleft' : 'bottomright'} />
                     <WrappedLeafletSearch
-                        position={searchPosition}
+                        position={isLangRtl() ? 'topright' : 'topleft'}
                         inputPlaceholder={i18n.t('Search')}
                         closeResultsOnClick
                         search={null}

@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import L, { Control } from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
-import { isLangRtl } from 'capture-ui';
+import { isLangRtl } from '../../../../utils/rtl';
 
 type Props = {
     onClick: () => void;

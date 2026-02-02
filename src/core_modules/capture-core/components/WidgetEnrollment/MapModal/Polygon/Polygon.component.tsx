@@ -4,11 +4,11 @@ import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } fr
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, FeatureGroup, ZoomControl, withLeaflet } from 'react-leaflet';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
-import { isLangRtl } from 'capture-ui';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { isLangRtl } from '../../../../utils/rtl';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, Layer, Popper } from '@dhis2/ui';
-import { isLangRtl } from 'capture-ui';
+import { isLangRtl } from '../../utils/rtl';
 
 interface Props {
     label?: string;

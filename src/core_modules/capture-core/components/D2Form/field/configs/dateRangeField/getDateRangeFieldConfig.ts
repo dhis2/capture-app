@@ -1,4 +1,4 @@
-import { isLangRtl } from 'capture-ui';
+import { isLangRtl } from '../../../../../utils/rtl';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateRangeFieldForForm } from '../../Components';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
