@@ -1,3 +1,10 @@
+## [105.5.6](https://github.com/dhis2/capture-app/compare/v105.5.5...v105.5.6) (2026-02-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20631] "Edit" button not visible on profile widget when no data exists for Tracked Entity Type ([#4441](https://github.com/dhis2/capture-app/issues/4441)) ([0e501d1](https://github.com/dhis2/capture-app/commit/0e501d162190e8c02316fdca255f934e6d0483e8))
+
 ## [105.5.5](https://github.com/dhis2/capture-app/compare/v105.5.4...v105.5.5) (2026-02-01)
 
 
