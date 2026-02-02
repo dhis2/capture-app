@@ -279,6 +279,7 @@ const getSaveHandler = (
                 calculatedFoundation: foundation,
                 sectionsInitialised: reduxSections && Object.values(reduxSections)
                     .every(({ valid }: any) => valid !== undefined),
+                completeDataEntryFieldValue: state.dataEntriesFieldsValue[key]?.complete,
             };
         };
 

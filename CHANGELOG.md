@@ -1,3 +1,31 @@
+## [105.5.6](https://github.com/dhis2/capture-app/compare/v105.5.5...v105.5.6) (2026-02-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20631] "Edit" button not visible on profile widget when no data exists for Tracked Entity Type ([#4441](https://github.com/dhis2/capture-app/issues/4441)) ([0e501d1](https://github.com/dhis2/capture-app/commit/0e501d162190e8c02316fdca255f934e6d0483e8))
+
+## [105.5.5](https://github.com/dhis2/capture-app/compare/v105.5.4...v105.5.5) (2026-02-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2bf983a](https://github.com/dhis2/capture-app/commit/2bf983a798e2d203a5b50698f58224d1ce20f502))
+
+## [105.5.4](https://github.com/dhis2/capture-app/compare/v105.5.3...v105.5.4) (2026-01-30)
+
+
+### Bug Fixes
+
+* [DHIS2-20719] Clear button stays highlighted ([#4443](https://github.com/dhis2/capture-app/issues/4443)) ([2ba7727](https://github.com/dhis2/capture-app/commit/2ba7727c414bbea70fb2bf3135148cf9c15e69c7))
+
+## [105.5.3](https://github.com/dhis2/capture-app/compare/v105.5.2...v105.5.3) (2026-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-20777] validation of rule-mandatory fields ([#4440](https://github.com/dhis2/capture-app/issues/4440)) ([67eb62b](https://github.com/dhis2/capture-app/commit/67eb62bad4cc32f201ddeaa3b1349edfaf87ec6e))
+
 ## [105.5.2](https://github.com/dhis2/capture-app/compare/v105.5.1...v105.5.2) (2026-01-22)
 
 
