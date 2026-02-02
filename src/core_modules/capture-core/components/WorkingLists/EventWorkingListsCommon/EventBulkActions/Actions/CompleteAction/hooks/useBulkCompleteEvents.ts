@@ -36,12 +36,11 @@ export const useBulkCompleteEvents = ({
             params: () => {
                 const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
                 const filterQueryParam: string = supportForFeature ? 'events' : 'event';
-                const programQueryParamSupported = featureAvailable(FEATURES.trackerEventsProgramQueryParam);
 
                 return {
                     fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
                     pageSize: 100,
-                    ...(programQueryParamSupported && programId ? { program: programId } : {}),
+                    program: programId,
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
                 };
             },
