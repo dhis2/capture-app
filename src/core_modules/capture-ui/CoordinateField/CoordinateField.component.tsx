@@ -6,7 +6,7 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import { Map, TileLayer, Marker, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
-import { IconButton, isLangRtl } from 'capture-ui';
+import { IconButton } from 'capture-ui';
 import { AddLocationIcon } from '../Icons';
 import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
@@ -169,9 +169,9 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <ZoomControl position={isLangRtl() ? 'bottomleft' : 'bottomright'} />
+                    <ZoomControl position={this.props.rtl ? 'bottomleft' : 'bottomright'} />
                     <WrappedLeafletSearch
-                        position={isLangRtl() ? 'topright' : 'topleft'}
+                        position={this.props.rtl ? 'topright' : 'topleft'}
                         inputPlaceholder={i18n.t('Search')}
                         closeResultsOnClick
                         search={null}

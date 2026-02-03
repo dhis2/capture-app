@@ -1,3 +1,5 @@
+import { systemSettingsStore } from '../../metaDataMemoryStores/systemSettings/systemSettings.store';
+
 export function isLangRtl(): boolean {
-    return typeof document !== 'undefined' && document.documentElement?.getAttribute('dir') === 'rtl';
+    return systemSettingsStore.get()?.dir === 'rtl';
 }

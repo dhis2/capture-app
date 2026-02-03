@@ -4,6 +4,7 @@ import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
 import { orientations } from '../../../New';
 import { withCenterPoint } from '../../HOC';
+import { isLangRtl } from '../../../../../utils/rtl';
 
 const getStyles = () => ({
     dialogPaper: {
@@ -47,6 +48,7 @@ class PolygonFieldPlain extends React.Component<Props & WithStyles<typeof getSty
                     </Modal>
                 }
                 onOpenMap={onOpenMap || (() => undefined)}
+                rtl={isLangRtl()}
                 {...passOnProps}
             />
         );

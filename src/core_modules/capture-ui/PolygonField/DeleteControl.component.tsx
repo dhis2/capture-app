@@ -6,20 +6,20 @@ import L, { Control } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { withLeaflet } from 'react-leaflet';
-import { isLangRtl } from 'capture-ui';
 
 type Props = {
     onClick: () => void;
     disabled?: boolean | null;
     leaflet: typeof Control;
+    rtl?: boolean;
 };
 
-const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
+const DeleteControlPlain = ({ onClick, disabled, leaflet, rtl }: Props) => {
     const [leafletElement, setLeafletElement] = useState<any>();
     const onHandleClick = useCallback(() => !disabled && onClick(), [disabled, onClick]);
 
     useEffect(() => {
-        const deleteControl = L.control({ position: isLangRtl() ? 'topleft' : 'topright' });
+        const deleteControl = L.control({ position: rtl ? 'topleft' : 'topright' });
         const text = i18n.t('Delete polygon');
         const jsx = (
             <div className="leaflet-draw-toolbar leaflet-bar">
@@ -41,7 +41,7 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
             return div;
         };
         setLeafletElement(deleteControl);
-    }, [onHandleClick, disabled]);
+    }, [onHandleClick, disabled, rtl]);
 
     useEffect(() => {
         leafletElement?.addTo(leaflet.map);

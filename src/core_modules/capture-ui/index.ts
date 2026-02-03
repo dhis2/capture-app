@@ -1,4 +1,3 @@
-export { isLangRtl } from './utils/rtl/isLangRtl';
 export { AgeField } from './AgeField/AgeField.component';
 export { BooleanField } from './BooleanField/BooleanField.component';
 export { CoordinateField } from './CoordinateField/CoordinateField.component';
