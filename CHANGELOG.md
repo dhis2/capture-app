@@ -1,3 +1,10 @@
+## [105.5.7](https://github.com/dhis2/capture-app/compare/v105.5.6...v105.5.7) (2026-02-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20035] Cannot complete an event from a workinglist ([#4442](https://github.com/dhis2/capture-app/issues/4442)) ([3497e7a](https://github.com/dhis2/capture-app/commit/3497e7a11613568a9d46eeb1094aeb4af0ff8ebd))
+
 ## [105.5.6](https://github.com/dhis2/capture-app/compare/v105.5.5...v105.5.6) (2026-02-02)
 
 
