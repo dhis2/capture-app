@@ -23,7 +23,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
     rightColumn: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingLeft: spacersNum.dp16,
+        paddingInlineStart: spacersNum.dp16,
         width: 360,
         display: 'flex',
         flexDirection: 'column',

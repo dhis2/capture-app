@@ -3,11 +3,12 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet-draw/dist/leaflet.draw.css';
-import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
-import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { CoordinateInput } from 'capture-ui/internal/CoordinateInput/CoordinateInput.component';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
+import { Map, TileLayer, Marker, withLeaflet, ZoomControl } from 'react-leaflet';
+import { isLangRtl } from '../../../../utils/rtl';
 import type { CoordinatesProps } from './Coordinates.types';
 import { isEqual } from '../../../../utils/valueEqualityChecker';
 import { isValidCoordinate } from './coordinate.validator';
@@ -105,9 +106,10 @@ const CoordinatesPlain = ({
             className={classes.map}
             onClick={onHandleMapClicked}
         >
+            <ZoomControl position={isLangRtl() ? 'bottomleft' : 'bottomright'} />
             <WrappedLeafletSearch
-                position="topright"
-                inputPlaceholder="Search"
+                position={isLangRtl() ? 'topright' : 'topleft'}
+                inputPlaceholder={i18n.t('Search')}
                 closeResultsOnClick
                 search={null}
                 mapStateModifier={onSearch}

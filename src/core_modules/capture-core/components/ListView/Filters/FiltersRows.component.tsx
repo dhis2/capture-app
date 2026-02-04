@@ -28,7 +28,7 @@ const getStyles: Readonly<any> = {
         borderRadius: spacersNum.dp4,
         border: `1px solid ${colors.grey400}`,
         marginTop: spacersNum.dp4,
-        marginLeft: spacersNum.dp16,
+        marginInlineStart: spacersNum.dp16,
         padding: spacersNum.dp4,
         display: 'flex',
         alignItems: 'baseline',

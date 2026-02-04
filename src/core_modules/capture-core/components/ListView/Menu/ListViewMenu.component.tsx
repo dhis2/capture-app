@@ -2,15 +2,14 @@ import React, { useState, useRef, memo, useCallback } from 'react';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu, Divider } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { isLangRtl } from '../../../utils/rtl';
 
 import type { Props } from './listViewMenu.types';
 
 const getStyles = () => ({
     subHeader: {
-        paddingLeft: 16,
-        paddingRight: 16,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingInline: 16,
+        paddingBlock: 10,
         color: '#717c8b',
         fontWeight: 500,
         fontSize: 16,
@@ -46,14 +45,14 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithSty
                                 key={`${content.key}divider`}
                                 dataTest={`subheader-divider-${content.key}`}
                                 className={classes.subHeaderDivider}
-                            />,
+                            />
                             <div
                                 key={content.key}
                                 data-test={`subheader-${content.key}`}
                                 className={classes.subHeader}
                             >
                                 {content.subHeader}
-                            </div>,
+                            </div>
                         </>
                     );
                 }
@@ -88,7 +87,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithSty
             {actionsIsOpen && (
                 <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
-                        placement="bottom-end"
+                        placement={isLangRtl() ? 'bottom-start' : 'bottom-end'}
                         reference={anchorRef}
                     >
                         <FlyoutMenu>

@@ -132,7 +132,7 @@ export class CategorySelector extends React.Component<Props, State> {
             .catch((error: any) => {
                 if (!(error && (error.aborted || error.isCanceled))) {
                     log.error(
-                        errorCreator('An error occured loading category options')({ error }),
+                        errorCreator('An error occurred loading category options')({ error }),
                     );
                     this.setState({
                         options: [],

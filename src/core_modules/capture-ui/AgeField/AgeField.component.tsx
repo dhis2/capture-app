@@ -158,8 +158,9 @@ class D2AgeFieldPlain extends Component<Props> {
         return Number(value) || 0;
     }
 
-    onClear = () => {
+    onClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.onBlur(null);
+        event.currentTarget.blur();
     }
 
     handleNumberBlur = (values: AgeValues) => {

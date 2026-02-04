@@ -38,9 +38,6 @@ const searchAttributeElementTypes = {
 
 
 export class SearchGroupFactory {
-    static errorMessages = {
-        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
-    };
     static _getSearchAttributeValueType(valueType: string, isUnique: DataElementUnique | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
         return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;

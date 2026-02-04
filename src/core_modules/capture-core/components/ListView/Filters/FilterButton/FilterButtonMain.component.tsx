@@ -3,7 +3,8 @@ import { Button, Popover } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
+import { ChevronDown, ChevronUp } from 'capture-ui';
+import { isLangRtl } from '../../../../utils/rtl';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import { LockedFilterButton } from './LockedFilterButton.component';
@@ -12,7 +13,7 @@ import type { FilterData, Options, FilterDataInput } from '../../../FiltersForTy
 
 const getStyles: Readonly<any> = (theme: any) => ({
     icon: {
-        paddingLeft: theme.typography.pxToRem(12),
+        paddingInlineStart: theme.typography.pxToRem(12),
         display: 'flex',
         alignItems: 'center',
     },
@@ -209,7 +210,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
                     <Popover
                         reference={this.anchorRef.current || undefined}
                         arrow={false}
-                        placement="bottom-start"
+                        placement={isLangRtl() ? 'bottom-end' : 'bottom-start'}
                         onClickOutside={this.closeFilterSelector}
                         maxWidth={400}
                     >

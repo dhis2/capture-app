@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
+import { isLangRtl } from '../../../utils/rtl';
 import type { Props } from './rowMenu.types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
@@ -63,7 +64,7 @@ export const RowMenu = (props: Props) => {
             {actionsIsOpen && anchorRef.current && (
                 <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
-                        placement="right"
+                        placement={isLangRtl() ? 'left' : 'right'}
                         reference={anchorRef.current}
                         data-test="row-menu-popper"
                     >

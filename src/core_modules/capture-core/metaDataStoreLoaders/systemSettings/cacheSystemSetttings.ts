@@ -1,9 +1,10 @@
 import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
 
-function isLangRTL(code) {
-    const langs = ['ar', 'fa', 'ur'];
-    const prefixed = langs.map(c => `${c}-`);
-    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
+const RTL_LOCALES = ['ar', 'ar_EG', 'ar_IQ', 'ar_SD', 'ckb', 'ps', 'prs', 'ur'];
+
+function isLangRtl(locale: string): boolean {
+    const prefixed = RTL_LOCALES.map(c => `${c}-`);
+    return RTL_LOCALES.includes(locale) || prefixed.some(c => locale.startsWith(c));
 }
 
 export async function cacheSystemSettings(
@@ -31,7 +32,7 @@ export async function cacheSystemSettings(
         },
         {
             id: 'dir',
-            value: isLangRTL(userSettings.uiLocale) ? 'rtl' : 'ltr',
+            value: isLangRtl(userSettings.uiLocale) ? 'rtl' : 'ltr',
         },
         {
             id: 'captureScope',

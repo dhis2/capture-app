@@ -4,7 +4,7 @@ import { IconCheckmark16, IconLocation16, colors, Button, ModalContent, ModalAct
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, FeatureGroup, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import defaultClasses from './polygonField.module.css';
@@ -14,11 +14,12 @@ import { DeleteControl } from './DeleteControl.component';
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 type Props = {
-  onBlur: (value: any) => void;
-  onOpenMap: (hasValue: boolean) => void;
-  value?: any | null | undefined;
-  center?: Array<number> | null | undefined;
-  mapDialog?: any;
+    onBlur: (value: any) => void;
+    onOpenMap: (hasValue: boolean) => void;
+    value?: any | null | undefined;
+    center?: Array<number> | null | undefined;
+    mapDialog?: any;
+    rtl?: boolean;
 };
 
 type State = {
@@ -166,6 +167,7 @@ export class PolygonField extends React.Component<Props, State> {
         const featureCollection = this.getFeatureCollection(this.state.mapCoordinates);
         const hasPosition = !!featureCollection;
         const center = this.getCenter(featureCollection);
+        const rtl = this.props.rtl ?? false;
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -173,16 +175,22 @@ export class PolygonField extends React.Component<Props, State> {
                     center={center}
                     className={defaultClasses.map}
                     key="map"
+                    zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                    <ZoomControl position={rtl ? 'bottomleft' : 'bottomright'} />
+                    <WrappedLeafletSearch
+                        position={rtl ? 'topright' : 'topleft'}
+                        inputPlaceholder={i18n.t('Search')}
+                        closeResultsOnClick
+                    />
                     <TileLayer
                         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     />
                     <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
                         <EditControl
-                            position="topright"
+                            position={rtl ? 'topleft' : 'topright'}
                             onEdited={this.onMapPolygonEdited}
                             onCreated={this.onMapPolygonCreated}
                             onDeleted={this.onMapPolygonDelete}
@@ -197,7 +205,7 @@ export class PolygonField extends React.Component<Props, State> {
                                 remove: false,
                             }}
                         />
-                        <DeleteControl onClick={this.onMapPolygonDelete} disabled={!hasPosition} />
+                        <DeleteControl rtl={rtl} onClick={this.onMapPolygonDelete} disabled={!hasPosition} />
                     </FeatureGroup>
                 </Map>
             </div>
@@ -220,7 +228,7 @@ export class PolygonField extends React.Component<Props, State> {
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.statusContainer}>
-                    { hasValue && (
+                    {hasValue && (
                         <>
                             <span className={defaultClasses.checkIcon}>
                                 <IconCheckmark16 color={colors.blue600} />

@@ -1,3 +1,38 @@
+## [105.5.8](https://github.com/dhis2/capture-app/compare/v105.5.7...v105.5.8) (2026-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17359][DHIS2-19968][DHIS2-18680] RTL issues in Capture app ([#4444](https://github.com/dhis2/capture-app/issues/4444)) ([6964797](https://github.com/dhis2/capture-app/commit/69647971e0acb1a1cb2e00918ded168d4846060d))
+
+## [105.5.7](https://github.com/dhis2/capture-app/compare/v105.5.6...v105.5.7) (2026-02-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20035] Cannot complete an event from a workinglist ([#4442](https://github.com/dhis2/capture-app/issues/4442)) ([3497e7a](https://github.com/dhis2/capture-app/commit/3497e7a11613568a9d46eeb1094aeb4af0ff8ebd))
+
+## [105.5.6](https://github.com/dhis2/capture-app/compare/v105.5.5...v105.5.6) (2026-02-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20631] "Edit" button not visible on profile widget when no data exists for Tracked Entity Type ([#4441](https://github.com/dhis2/capture-app/issues/4441)) ([0e501d1](https://github.com/dhis2/capture-app/commit/0e501d162190e8c02316fdca255f934e6d0483e8))
+
+## [105.5.5](https://github.com/dhis2/capture-app/compare/v105.5.4...v105.5.5) (2026-02-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2bf983a](https://github.com/dhis2/capture-app/commit/2bf983a798e2d203a5b50698f58224d1ce20f502))
+
+## [105.5.4](https://github.com/dhis2/capture-app/compare/v105.5.3...v105.5.4) (2026-01-30)
+
+
+### Bug Fixes
+
+* [DHIS2-20719] Clear button stays highlighted ([#4443](https://github.com/dhis2/capture-app/issues/4443)) ([2ba7727](https://github.com/dhis2/capture-app/commit/2ba7727c414bbea70fb2bf3135148cf9c15e69c7))
+
 ## [105.5.3](https://github.com/dhis2/capture-app/compare/v105.5.2...v105.5.3) (2026-01-26)
 
 

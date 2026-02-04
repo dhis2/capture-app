@@ -17,7 +17,7 @@ const getStyles = (theme: any) => ({
         ...theme.typography.title,
         fontSize: 18,
         fontWeight: 500,
-        paddingLeft: 8,
+        paddingInlineStart: 8,
     },
     newRelationshipPaper: {
         marginBottom: theme.typography.pxToRem(10),

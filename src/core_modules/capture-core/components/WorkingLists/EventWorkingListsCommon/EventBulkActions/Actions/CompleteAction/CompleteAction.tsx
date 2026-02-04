@@ -31,12 +31,14 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
+// eslint-disable-next-line complexity
 const CompleteActionPlain = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,
     removeRowsFromSelection,
     onUpdateList,
+    programId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
@@ -55,6 +57,7 @@ const CompleteActionPlain = ({
         setIsCompleteDialogOpen,
         removeRowsFromSelection,
         onUpdateList,
+        programId,
     });
 
     return (
@@ -104,7 +107,7 @@ const CompleteActionPlain = ({
                             <Button
                                 primary
                                 onClick={onCompleteEvents}
-                                disabled={isLoading || eventCounts?.active === 0 || !eventCounts}
+                                disabled={isLoading || eventCounts?.active === 0}
                                 loading={isCompletingEvents}
                             >
                                 {i18n.t('Complete')}
@@ -154,7 +157,6 @@ const CompleteActionPlain = ({
                             </Widget>
                         </span>
                     </ModalContent>
-
 
                     <ModalActions>
                         <ButtonStrip>

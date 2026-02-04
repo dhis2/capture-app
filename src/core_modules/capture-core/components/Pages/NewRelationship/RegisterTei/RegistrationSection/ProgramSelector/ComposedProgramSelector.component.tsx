@@ -19,7 +19,7 @@ const getStyles = (theme: any) => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
-        paddingRight: 5,
+        paddingInlineEnd: 5,
     },
     icon: {
         width: 22,
@@ -32,7 +32,7 @@ const getStyles = (theme: any) => ({
         paddingTop: 5,
     },
     isFilteredLink: {
-        paddingLeft: 2,
+        paddingInlineStart: 2,
         backgroundColor: 'inherit',
     },
 });

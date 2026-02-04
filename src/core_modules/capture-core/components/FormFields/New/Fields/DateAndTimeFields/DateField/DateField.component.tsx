@@ -39,8 +39,9 @@ const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
         ...passOnProps
     } = props;
 
-    const handleClear = () => {
+    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         onBlur && onBlur(null, {});
+        event.currentTarget.blur();
     };
 
     const isVertical = orientation === orientations.VERTICAL;

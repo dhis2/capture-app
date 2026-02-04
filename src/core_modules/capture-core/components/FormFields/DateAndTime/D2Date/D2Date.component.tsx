@@ -55,8 +55,10 @@ export class D2Date extends React.Component<Props, State> {
             ...passOnProps
         } = this.props;
 
-        const calendarType: any = systemSettingsStore.get().calendar || 'gregory';
-        const format: any = systemSettingsStore.get().dateFormat;
+        const systemSettings = systemSettingsStore.get();
+        const calendarType: any = systemSettings.calendar || 'gregory';
+        const format: any = systemSettings.dateFormat;
+        const locale = systemSettings.uiLocale;
 
         return (
             <div>
@@ -71,6 +73,7 @@ export class D2Date extends React.Component<Props, State> {
                     inputWidth={inputWidth}
                     onFocus={onFocus}
                     disabled={disabled}
+                    locale={locale}
                 />
             </div>
         );

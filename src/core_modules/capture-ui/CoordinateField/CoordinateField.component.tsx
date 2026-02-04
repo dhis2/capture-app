@@ -3,7 +3,7 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, Marker, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
@@ -95,8 +95,9 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         this.props.onChange?.({ ...this.props.value, [key]: value });
     }
 
-    handleClear = () => {
+    handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.onBlur(null);
+        event.currentTarget.blur();
     }
 
     search = (position: any) => {
@@ -165,11 +166,13 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     onClick={this.onMapPositionChange}
                     className={defaultClasses.leafletContainer}
                     key="map"
+                    zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
+                    <ZoomControl position={this.props.rtl ? 'bottomleft' : 'bottomright'} />
                     <WrappedLeafletSearch
-                        position="topleft"
-                        inputPlaceholder="Search"
+                        position={this.props.rtl ? 'topright' : 'topleft'}
+                        inputPlaceholder={i18n.t('Search')}
                         closeResultsOnClick
                         search={null}
                         mapStateModifier={this.search}
@@ -210,7 +213,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Latitude"
+                label={i18n.t('Latitude')}
                 value={value?.latitude}
                 classes={passOnClasses}
                 className={defaultClasses.latitudeTextInput}
@@ -232,7 +235,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Longitude"
+                label={i18n.t('Longitude')}
                 value={value?.longitude}
                 className={defaultClasses.longitudeTextInput}
                 classes={passOnClasses}

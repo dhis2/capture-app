@@ -16,10 +16,10 @@ const getStyles: any = (theme: any) => ({
         display: 'flex',
         flexWrap: 'wrap',
         paddingTop: 10,
-        marginLeft: '-8px',
+        marginInlineStart: '-8px',
     },
     buttonContainer: {
-        paddingRight: theme.spacing.unit * 2,
+        paddingInlineEnd: theme.spacing.unit * 2,
     },
 });
 

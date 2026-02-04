@@ -37,6 +37,7 @@ export const EventBulkActions = ({
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
+                programId={programId}
             />
 
             <DeleteAction
