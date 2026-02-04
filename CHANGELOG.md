@@ -1,3 +1,10 @@
+## [105.5.9](https://github.com/dhis2/capture-app/compare/v105.5.8...v105.5.9) (2026-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-20109] Program stage visible in working list dropdown without access ([#4447](https://github.com/dhis2/capture-app/issues/4447)) ([62f0021](https://github.com/dhis2/capture-app/commit/62f0021682ae6f7bfc646980d3e4be33e78c45d1))
+
 ## [105.5.8](https://github.com/dhis2/capture-app/compare/v105.5.7...v105.5.8) (2026-02-04)
 
 
