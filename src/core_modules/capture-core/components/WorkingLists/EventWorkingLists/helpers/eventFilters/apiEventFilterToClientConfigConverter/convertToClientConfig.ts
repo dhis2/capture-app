@@ -86,7 +86,7 @@ const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
             username,
         }))
         .catch((error) => {
-            log.error(errorCreator('An error occured retrieving assignee user')({ error, userId }));
+            log.error(errorCreator('An error occurred retrieving assignee user')({ error, userId }));
             return null;
         });
 

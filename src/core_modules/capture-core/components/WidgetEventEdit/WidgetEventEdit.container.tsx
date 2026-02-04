@@ -41,7 +41,7 @@ const styles: Readonly<any> = {
         padding: spacersNum.dp8,
     },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp8,
     },
     form: {
         padding: spacersNum.dp8,

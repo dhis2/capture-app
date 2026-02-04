@@ -9,10 +9,10 @@ import { OverflowMenuComponent } from '../OverflowMenu';
 
 export const styles: Readonly<any> = {
     menu: {
-        marginLeft: 'auto',
+        marginInlineStart: 'auto',
     },
     icon: {
-        marginRight: spacersNum.dp8,
+        marginInlineEnd: spacersNum.dp8,
     },
 };
 

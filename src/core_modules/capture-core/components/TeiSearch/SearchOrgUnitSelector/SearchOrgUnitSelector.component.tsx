@@ -44,16 +44,14 @@ const selectionBoxesStyles = {
 
 const options = [
     {
-        name: 'All accessible',
+        name: i18n.t('All accessible'),
         value: 'ACCESSIBLE',
     },
     {
-        name: 'Selected',
+        name: i18n.t('Selected'),
         value: 'SELECTED',
     },
 ];
-
-const errorMessage = 'Please select an organisation unit';
 
 export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelectorProps> {
     gotoInstance: any;
@@ -71,7 +69,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
         return (
             <TeiSearchSelectionBoxes
                 options={options}
-                label="Organisation unit scope"
+                label={i18n.t('Organisation unit scope')}
                 styles={selectionBoxesStyles}
                 onSelect={this.onSelectOrgUnitScope}
                 value={selectedOrgUnitScope}
@@ -103,7 +101,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
 
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
-            return i18n.t(errorMessage);
+            return i18n.t('Please select an organisation unit.');
         }
         return null;
     }
@@ -116,7 +114,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
         const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText } = this.props;
         return (
             <TeiSearchOrgUnitField
-                label="Organisation unit"
+                label={i18n.t('Organisation unit')}
                 styles={orgUnitFieldStyles}
                 searchText={treeSearchText}
                 roots={treeRoots}

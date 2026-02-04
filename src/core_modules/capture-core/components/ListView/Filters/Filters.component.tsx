@@ -19,7 +19,7 @@ import type {
 
 const getStyles = (theme: any) => ({
     filterButtonContainer: {
-        paddingRight: theme.typography.pxToRem(theme.spacing.unit),
+        paddingInlineEnd: theme.typography.pxToRem(theme.spacing.unit),
         paddingBottom: theme.typography.pxToRem(theme.spacing.unit / 2),
         paddingTop: theme.typography.pxToRem(theme.spacing.unit / 2),
     },

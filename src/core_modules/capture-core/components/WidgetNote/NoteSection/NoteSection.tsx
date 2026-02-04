@@ -16,7 +16,7 @@ const FocusTextField = withFocusSaver()(TextField);
 const styles: Readonly<any> = {
     item: {
         padding: spacersNum.dp12,
-        marginRight: spacersNum.dp4,
+        marginInlineEnd: spacersNum.dp4,
         background: colors.grey200,
         borderRadius: '5px',
         display: 'flex',
@@ -48,7 +48,7 @@ const styles: Readonly<any> = {
     },
     lastUpdated: {
         fontSize: '12px',
-        marginLeft: '8px',
+        marginInlineStart: '8px',
         color: colors.grey700,
     },
     body: {

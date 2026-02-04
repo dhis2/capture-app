@@ -17,7 +17,7 @@ const getStyles: any = () => ({
     label: {
         flexBasis: 200,
         fontSize: 14,
-        paddingLeft: 5,
+        paddingInlineStart: 5,
         color: 'rgba(0, 0, 0, 0.87)',
     },
     field: {

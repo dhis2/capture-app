@@ -21,7 +21,7 @@ const styles: Readonly<any> = {
     fieldLabel: {
         color: colors.grey900,
         paddingTop: spacersNum.dp12,
-        paddingRight: spacersNum.dp16,
+        paddingInlineEnd: spacersNum.dp16,
         flexBasis: '200px',
     },
     fieldContent: {

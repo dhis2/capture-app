@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import i18n from '@dhis2/d2-i18n';
 import type { ProgramStages } from '../EnrollmentPageDefault.types';
 import { Program } from '../../../../../metaData';
 
@@ -21,7 +20,7 @@ export const useProgramStages = (program: Program, programStages?: ProgramStages
             const { hideDueDate, programStageDataElements, repeatable, enableUserAssignment, dataAccess } =
                 programStages.find(p => p.id === id) || {};
             if (!programStageDataElements) {
-                log.error(errorCreator(i18n.t('Program stage not found'))(id));
+                log.error(errorCreator('Program stage not found')(id));
             } else {
                 stages.push({
                     id,

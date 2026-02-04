@@ -24,7 +24,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         width: '100%',
     },
     informativeIcon: {
-        marginLeft: 8,
+        marginInlineStart: 8,
     },
     customEmpty: {
         textAlign: 'center',

@@ -10,7 +10,7 @@ const styles: Readonly<any> = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: `${spacers.dp8}`,
+        marginInlineStart: spacers.dp8,
         gap: `${spacers.dp4}`,
         height: '40px',
     },
@@ -39,7 +39,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="new-event-button"
-                    className={classes.marginRight}
                     onClick={onNewClickWithoutProgramId}
                 >
                     {i18n.t('Create new')}
@@ -49,7 +48,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="new-button"
-                    className={classes.marginRight}
                     onClick={() => { onNewClick(); }}
                     component={
                         <FlyoutMenu dense maxWidth="250px">
@@ -77,7 +75,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="find-button"
-                    className={classes.marginRight}
                     onClick={onFindClickWithoutProgramId}
                 >
                     {i18n.t('Search')}
@@ -87,7 +84,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="find-button"
-                    className={classes.marginRight}
                     open={openSearch}
                     onClick={() => setOpenSearch(prev => !prev)}
                     component={

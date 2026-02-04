@@ -29,3 +29,5 @@ export { ChevronIcon } from './Icons';
 export { NonBundledIcon } from './NonBundledIcon';
 export { FlatList } from './FlatList';
 export { PreviewImage } from './PreviewImage/PreviewImage.component';
+
+export * from './Icons';

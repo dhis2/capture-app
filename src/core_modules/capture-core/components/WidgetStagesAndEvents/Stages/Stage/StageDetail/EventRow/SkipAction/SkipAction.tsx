@@ -3,12 +3,13 @@ import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import {
     MenuItem,
-    IconArrowRight16, IconRedo16,
+    IconRedo16,
 } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { DirectionalArrow } from '../../../../../../../utils/rtl';
 import { EventStatuses } from '../EventRow';
 
 type Props = {
@@ -82,7 +83,7 @@ export const SkipAction = ({
     return (
         <MenuItem
             dense
-            icon={<IconArrowRight16 />}
+            icon={<DirectionalArrow />}
             label={i18n.t('Skip')}
             onClick={() => handleMenuItemClick(EventStatuses.SKIPPED)}
             suffix=""

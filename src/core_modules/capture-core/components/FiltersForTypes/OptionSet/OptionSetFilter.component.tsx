@@ -12,7 +12,7 @@ export const getStyles = (theme: any) => ({
         overflowY: 'auto',
     },
     selectBoxesInnerContainer: {
-        marginLeft: 12,
+        marginInlineStart: 12,
     },
 }) as const;
 

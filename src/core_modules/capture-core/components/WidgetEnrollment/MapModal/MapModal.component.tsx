@@ -1,6 +1,7 @@
 import React from 'react';
 import { dataElementTypes } from '../../../metaData';
 import type { MapModalComponentProps } from './MapModal.types';
+import './MapModal.css';
 import { Coordinates } from './Coordinates';
 import { Polygon } from './Polygon';
 

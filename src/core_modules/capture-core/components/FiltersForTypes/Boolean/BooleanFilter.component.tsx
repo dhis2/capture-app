@@ -11,7 +11,7 @@ import type { UpdatableFilterContent } from '../types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
-        marginRight: theme.typography.pxToRem(-24),
+        marginInlineEnd: theme.typography.pxToRem(-24),
     },
 });
 

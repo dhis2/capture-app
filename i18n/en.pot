@@ -5,8 +5,17 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-22T18:44:10.288Z\n"
-"PO-Revision-Date: 2026-01-22T18:44:10.288Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"PO-Revision-Date: 2026-02-01T16:00:01.022Z\n"
+
+msgid "The application could not be loaded."
+msgstr "The application could not be loaded."
+
+msgid "Please verify that the server is running."
+msgstr "Please verify that the server is running."
+
+msgid "Please see log for details."
+msgstr "Please see log for details."
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -368,6 +377,12 @@ msgstr "Show registered {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registered person"
 
+msgid "No item selected"
+msgstr "No item selected"
+
+msgid "Form foundation missing. See log for details"
+msgstr "Form foundation missing. See log for details"
+
 msgid "validation failed"
 msgstr "validation failed"
 
@@ -401,8 +416,8 @@ msgstr "Validation errors"
 msgid "Validation warnings"
 msgstr "Validation warnings"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Some operations are still runnning. Please wait.."
+msgid "Some operations are still running. Please wait."
+msgstr "Some operations are still running. Please wait."
 
 msgid "Operations running"
 msgstr "Operations running"
@@ -443,6 +458,18 @@ msgstr "None"
 
 msgid "Select user"
 msgstr "Select user"
+
+msgid "Please specify a range"
+msgstr "Please specify a range"
+
+msgid "The From date can't be after the To date"
+msgstr "The From date can't be after the To date"
+
+msgid "Please specify the number of days"
+msgstr "Please specify the number of days"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Please provide zero or a positive integer"
 
 msgid "to"
 msgstr "to"
@@ -494,6 +521,21 @@ msgstr "Max"
 
 msgid "Min"
 msgstr "Min"
+
+msgid "Minimum value cannot be greater than maximum value"
+msgstr "Minimum value cannot be greater than maximum value"
+
+msgid "Please provide a valid number"
+msgstr "Please provide a valid number"
+
+msgid "Please provide a valid integer"
+msgstr "Please provide a valid integer"
+
+msgid "Please provide a positive integer"
+msgstr "Please provide a positive integer"
+
+msgid "Please provide a negative integer"
+msgstr "Please provide a negative integer"
 
 msgid "Exact matches only"
 msgstr "Exact matches only"
@@ -648,9 +690,6 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
-msgid "Program stage not found"
-msgstr "Program stage not found"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -716,6 +755,9 @@ msgstr "Program with id \"{{programId}}\" does not exist"
 
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
+
+msgid "An error has occurred"
+msgstr "An error has occurred"
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
@@ -927,6 +969,15 @@ msgstr "Organisation unit could not be loaded"
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
+msgid "All accessible"
+msgstr "All accessible"
+
+msgid "Selected"
+msgstr "Selected"
+
+msgid "Organisation unit scope"
+msgstr "Organisation unit scope"
+
 msgid "Selected program"
 msgstr "Selected program"
 
@@ -947,6 +998,9 @@ msgstr "Missing search criteria"
 msgid "Back to search"
 msgstr "Back to search"
 
+msgid "Search form is missing. See log for details"
+msgstr "Search form is missing. See log for details"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
@@ -958,6 +1012,15 @@ msgstr "Loading"
 
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
+
+msgid "First Page"
+msgstr "First Page"
+
+msgid "Previous Page"
+msgstr "Previous Page"
+
+msgid "Next Page"
+msgstr "Next Page"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1073,9 +1136,6 @@ msgid ""
 msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
-
-msgid "An error has occurred"
-msgstr "An error has occurred"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1313,6 +1373,9 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
+msgid "Program stage not found"
+msgstr "Program stage not found"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1369,6 +1432,12 @@ msgstr "Geometry (Area)"
 
 msgid "Geometry (Coordinate)"
 msgstr "Geometry (Coordinate)"
+
+msgid "Polygon captured"
+msgstr "Polygon captured"
+
+msgid "No polygon captured"
+msgstr "No polygon captured"
 
 msgid "Event completed"
 msgstr "Event completed"
@@ -1459,9 +1528,6 @@ msgstr "Change information about this {{trackedEntityName}} here."
 
 msgid "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "Information about this enrollment can be edited in the Enrollment widget."
-
-msgid " Loading..."
-msgstr " Loading..."
 
 msgid "Save changes"
 msgstr "Save changes"
@@ -2032,9 +2098,6 @@ msgstr "Download as CSV"
 msgid "Download with current filters"
 msgstr "Download with current filters"
 
-msgid "An error has occured. See log for details"
-msgstr "An error has occured. See log for details"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Scheduled{{ escape }} due {{ time }}"
 
@@ -2058,9 +2121,6 @@ msgstr "Program not found"
 
 msgid "Program is not a tracker program"
 msgstr "Program is not a tracker program"
-
-msgid "Error saving event"
-msgstr "Error saving event"
 
 msgid "Could not save event"
 msgstr "Could not save event"
@@ -2098,20 +2158,8 @@ msgstr "Error editing the event, the changes made were not saved"
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
 
-msgid "Please provide a valid number"
-msgstr "Please provide a valid number"
-
-msgid "Please provide a valid integer"
-msgstr "Please provide a valid integer"
-
-msgid "Please provide a positive integer"
-msgstr "Please provide a positive integer"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Please provide zero or a positive integer"
-
-msgid "Please provide a negative integer"
-msgstr "Please provide a negative integer"
+msgid "There was an error fetching metadata"
+msgstr "There was an error fetching metadata"
 
 msgid "Please provide a valid date and time"
 msgstr "Please provide a valid date and time"

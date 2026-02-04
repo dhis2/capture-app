@@ -21,10 +21,10 @@ import { convertFormToClient } from '../../../converters';
 
 const styles: Readonly<any> = {
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp8,
     },
     menu: {
-        marginLeft: 'auto',
+        marginInlineStart: 'auto',
     },
     menuActions: {
         display: 'flex',
