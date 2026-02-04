@@ -1,3 +1,10 @@
+## [105.5.8](https://github.com/dhis2/capture-app/compare/v105.5.7...v105.5.8) (2026-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17359][DHIS2-19968][DHIS2-18680] RTL issues in Capture app ([#4444](https://github.com/dhis2/capture-app/issues/4444)) ([6964797](https://github.com/dhis2/capture-app/commit/69647971e0acb1a1cb2e00918ded168d4846060d))
+
 ## [105.5.7](https://github.com/dhis2/capture-app/compare/v105.5.6...v105.5.7) (2026-02-03)
 
 
