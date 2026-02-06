@@ -576,8 +576,8 @@ msgstr "No match found"
 msgid "Clear"
 msgstr "Clear"
 
-msgid "No results"
-msgstr "No results"
+msgid "No results found"
+msgstr "No results found"
 
 msgid "Must match the start of the value"
 msgstr "Must match the start of the value"
@@ -599,9 +599,6 @@ msgstr "start typing to search"
 
 msgid "suggestions could not be retrieved"
 msgstr "suggestions could not be retrieved"
-
-msgid "No results found"
-msgstr "No results found"
 
 msgid "No items to display"
 msgstr "No items to display"
@@ -860,9 +857,6 @@ msgstr "Save as new"
 msgid "New"
 msgstr "New"
 
-msgid "Create for"
-msgstr "Create for"
-
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr "You can also choose a program from the top bar and create in that program"
 
@@ -1070,9 +1064,6 @@ msgstr "Choose a program"
 msgid "Search for {{titleText}}"
 msgstr "Search for {{titleText}}"
 
-msgid "Search for"
-msgstr "Search for"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1190,6 +1181,12 @@ msgstr "Create new event"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr "Select tracked entity type"
+
+msgid "Type to filter tracked entity types"
+msgstr "Type to filter tracked entity types"
 
 msgid "No tracked entity types available"
 msgstr "No tracked entity types available"
@@ -1586,8 +1583,8 @@ msgstr "{{trackedEntityTypeName}} profile"
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "Choose a {{linkableStageLabel}} event"
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr "Select an event"
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr "{{ linkableStageLabel }} can only have one event"

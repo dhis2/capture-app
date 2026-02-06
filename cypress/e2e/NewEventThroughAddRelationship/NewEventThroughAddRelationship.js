@@ -9,9 +9,12 @@ When('you add data to the form', () => {
     cy.get('[data-test="form-field-qrur9Dvnyt5"]')
         .find('input')
         .type('25');
-    cy.get('[data-test="form-field-oZg33kd9taw"]')
-        .find('input')
-        .type('Male{enter}', { force: true });
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .eq(0)
+        .click()
+        .get('[role="option"]:visible')
+        .contains('Male')
+        .click();
 });
 
 When('you submit the form', () => {
@@ -36,9 +39,11 @@ Then('the event should be sent to the server successfully', () => {
 
 When('you fill in the registration details', () => {
     cy.get('[data-test="relationship-register-tei-program-selector"]')
-        .find('input')
-        .type('Provider', { force: true });
-    cy.contains('Provider Follow-up and Support Tool').click();
+        .click()
+        .get('[role="option"]:visible')
+        .contains('Provider Follow-up and Support Tool')
+        .click();
+
     cy.contains('[data-test="form-field"]', 'Provider ID')
         .find('input')
         .type(uuid());

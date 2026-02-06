@@ -33,10 +33,10 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
         .type(moment().format('YYYY-MM-DD'))
         .blur();
 
-    cy
-        .get('[data-test="virtualized-select"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .eq(6)
         .click()
+        .get('[role="option"]:visible')
         .contains('Termination of pregnancy')
         .click();
 

@@ -1,9 +1,13 @@
 import type { scopeTypes } from '../../metaData';
 
+export type SelectOption = {
+    label: string;
+    value: string;
+};
+
 export type OwnProps = {
     accessNeeded?: 'write' | 'read';
     onSelect: (searchScopeId: string, searchScopeType: keyof typeof scopeTypes) => void;
-    headerText: string;
     footerText: string;
 };
 

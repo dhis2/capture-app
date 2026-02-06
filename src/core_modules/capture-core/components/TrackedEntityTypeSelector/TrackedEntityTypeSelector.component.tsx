@@ -1,98 +1,82 @@
-import React, { useMemo, type ComponentType } from 'react';
+import React, { useMemo, useState, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-
-import {
-    SingleSelectField,
-    SingleSelectOption,
-    spacers,
-} from '@dhis2/ui';
-import type { Props } from './TrackedEntityTypeSelector.types';
+import { spacers, SimpleSingleSelectField } from '@dhis2/ui';
+import type { Props, SelectOption } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
-import { InfoIconText } from '../InfoIconText';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     searchRow: {
-        maxWidth: typography.pxToRem(400),
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'start',
-        marginBottom: spacers.dp8,
-    },
-    searchRowSelectElement: {
-        width: '100%',
-    },
-    informativeIcon: {
-        marginInlineStart: 8,
-    },
-    customEmpty: {
-        textAlign: 'center',
-        padding: '8px 24px',
+        maxWidth: typography.pxToRem(450),
+        marginBottom: spacers.dp24,
+
     },
 });
 
 type ComponentProps = Props & WithStyles<typeof styles>;
 
 export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, headerText, footerText }: ComponentProps) => {
-      const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
-      const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
+    ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, footerText }: ComponentProps) => {
+        const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+        const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
+        const [filterValue, setFilterValue] = useState('');
 
-      const handleSelectionChange = ({ selected }: { selected: string }) => {
-          onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
-          onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: selected });
-      };
+        const options: SelectOption[] = useMemo(() =>
+            Object.values(trackedEntityTypesWithCorrelatedPrograms)
+                .filter(({ trackedEntityTypeAccess }: any) => {
+                    if (accessNeeded === 'write') {
+                        return trackedEntityTypeAccess?.data?.write;
+                    }
+                    if (accessNeeded === 'read') {
+                        return trackedEntityTypeAccess?.data?.read;
+                    }
+                    return false;
+                })
+                .map(({ trackedEntityTypeName, trackedEntityTypeId }: any) => ({
+                    value: trackedEntityTypeId,
+                    label: trackedEntityTypeName,
+                })),
+        [accessNeeded, trackedEntityTypesWithCorrelatedPrograms],
+        );
 
-      return (<>
+        const filteredOptions = useMemo(
+            () => options.filter(({ label }) => label.toLowerCase().includes(filterValue.toLowerCase())),
+            [options, filterValue],
+        );
 
-          <div className={classes.searchRow}>
-              <div className={classes.searchRowSelectElement}>
-                  <SingleSelectField
-                      label={headerText}
-                      onChange={handleSelectionChange}
-                      selected={selectedSearchScopeId}
-                      empty={
-                          <div className={classes.customEmpty}>
-                              {i18n.t('No tracked entity types available')}
-                          </div>
-                      }
-                  >
-                      {
-                          useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                              .filter(({ trackedEntityTypeAccess }: any) => {
-                                  if (accessNeeded === 'write') {
-                                      return trackedEntityTypeAccess?.data?.write;
-                                  }
-                                  if (accessNeeded === 'read') {
-                                      return trackedEntityTypeAccess?.data?.read;
-                                  }
-                                  return false;
-                              })
-                              .map(({ trackedEntityTypeName, trackedEntityTypeId }: any) =>
-                                  (<SingleSelectOption
-                                      key={trackedEntityTypeId}
-                                      value={trackedEntityTypeId}
-                                      label={trackedEntityTypeName}
-                                  />),
-                              ), [
-                              accessNeeded,
-                              trackedEntityTypesWithCorrelatedPrograms,
-                          ])
-                      }
-                  </SingleSelectField>
-              </div>
-          </div>
-          {
-              !selectedSearchScopeId &&
-              <div className={classes.informativeIcon}>
-                  <InfoIconText>
-                      { footerText }
-                  </InfoIconText>
-              </div>
-          }
-      </>
-      );
-  };
+        const selectedOption = useMemo(() => {
+            if (!selectedSearchScopeId) {
+                return undefined;
+            }
+            return options.find(opt => opt.value === selectedSearchScopeId);
+        }, [selectedSearchScopeId, options]);
+
+        const handleSelectionChange = (nextValue: string | SelectOption) => {
+            const value = typeof nextValue === 'string' ? nextValue : nextValue?.value;
+
+            onSelect(value, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
+            onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: value });
+        };
+
+        return (
+            <div className={classes.searchRow}>
+                <SimpleSingleSelectField
+                    name="tracked-entity-type-selector"
+                    label=""
+                    helpText={footerText}
+                    options={filteredOptions}
+                    value={selectedOption?.value}
+                    placeholder={i18n.t('Select tracked entity type')}
+                    filterable
+                    filterPlaceholder={i18n.t('Type to filter tracked entity types')}
+                    filterValue={filterValue}
+                    onFilterChange={setFilterValue}
+                    onChange={handleSelectionChange}
+                    empty={i18n.t('No tracked entity types available')}
+                />
+            </div>
+        );
+    };
 
 export const TrackedEntityTypeSelectorComponent = withStyles(styles)(TrackedEntityTypeSelectorPlain) as ComponentType<Props>;

@@ -126,6 +126,7 @@ Then('rows per page should be set to 15', () => {
 When('you change rows per page to 10', () => {
     cy.get('div[data-test="rows-per-page-selector"]')
         .click()
+        .get('[role="option"]:visible')
         .contains('10')
         .click();
 });
