@@ -1,24 +1,33 @@
 # 
 # Translators:
-# Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
-# Saysamone Sibounma, 2024
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2025
-# Namwan Chanthavisouk, 2025
+# Saysamone Sibounma, 2026
+# Philip Larsen Donnelly, 2026
+# Namwan Chanthavisouk, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Namwan Chanthavisouk, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lo\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "ເລືອກວັນທີໜຶ່ງ ຫຼື ຫຼາຍກວ່ານັ້ນ..."
@@ -61,7 +70,7 @@ msgid "Enrollment dashboard"
 msgstr ""
 
 msgid "View event"
-msgstr ""
+msgstr "ເບິ່ງເຫດການ"
 
 msgid "Edit event"
 msgstr "ແກ້ໄຂເຫດການ"
@@ -70,7 +79,7 @@ msgid "New event"
 msgstr "ກໍລະນີໃໝ່"
 
 msgid "Loading..."
-msgstr ""
+msgstr "ກຳລັງໂຫລດ.."
 
 msgid "Event list"
 msgstr ""
@@ -372,6 +381,12 @@ msgstr "ສະແດງ {{trackedEntityTypeName}} ທີ່ລົງທະບຽ
 msgid "Registered person"
 msgstr "ຄົນທີ່ລົງທະບຽນ"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "ການກວດສອບລົ້ມເຫຼວ"
 
@@ -405,8 +420,8 @@ msgstr "ການກວດສອບຜິດພາດ"
 msgid "Validation warnings"
 msgstr "ຄ່າເຕືອນ"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "ການປະຕິບັດຍັງດໍາເນີນຢູ່. ກະ​ລຸ​ນາ​ລໍ​ຖ້າ.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "ກຳລັງດຳເນີນງານ"
@@ -448,6 +463,18 @@ msgstr "ບໍ່ແມນ"
 
 msgid "Select user"
 msgstr "ເລືອກຜູ້ໃຊ້"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນສູນ ຫຼື ເປັນບວກ"
 
 msgid "to"
 msgstr "ຫາ"
@@ -500,6 +527,24 @@ msgstr "ຄ່າໃຫ່ຍສຸດ"
 msgid "Min"
 msgstr "ຄ່າຕໍ່າສຸດ"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
+
+msgid "Please provide a valid integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
+
+msgid "Please provide a positive integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
+
+msgid "Please provide a negative integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນລົບ"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "ໃສ່ຂໍ້ຄວາມ"
 
@@ -536,8 +581,14 @@ msgstr "ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ"
 msgid "Clear"
 msgstr "ລຶບ"
 
-msgid "No results"
-msgstr "ບໍ່ມີຜົນຮັບ"
+msgid "No results found"
+msgstr "ບໍ່ພົບຜົນການຊອກຫາ"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "ລາຍລະອຽດ"
@@ -553,9 +604,6 @@ msgstr "ພິມເພື່ອຄົ້ນຫາ"
 
 msgid "suggestions could not be retrieved"
 msgstr "ບໍ່ສາມາດເອົາຂໍ້ມູນຄຳແນະນຳໄດ້"
-
-msgid "No results found"
-msgstr "ບໍ່ພົບຜົນການຊອກຫາ"
 
 msgid "No items to display"
 msgstr "ບໍ່ມີລາຍການໃຫ້ສະແດງ"
@@ -644,9 +692,6 @@ msgstr "ສ້າງເປັນໂຕອ້າງອີງ"
 msgid "No available program stages"
 msgstr "ບໍ່ພົບຂັ້ນໂປແກຣມ"
 
-msgid "Program stage not found"
-msgstr "ບໍ່ພົບຂັ້ນໂປແກຣມ"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -712,6 +757,9 @@ msgid ""
 msgstr ""
 "ເກີດຂໍ໊ຜິດພາດຂຶ້ນໃນຂະນະທີ່ດຶງຂໍ້ມູນການລົງທະບຽນ. ກະລຸນາໃສ່ URL ທີ່ຖືກຕ້ອງ."
 
+msgid "An error has occurred"
+msgstr "ພົບຂໍ້ຜິດພາດ"
+
 msgid "Page is missing required values from URL"
 msgstr "ບໍ່ພົບໜ້ານີ້ ຕ້ອງການຄ່າຈາກ URL"
 
@@ -754,9 +802,6 @@ msgstr "ບໍ່ສາມາດໂຫຼດຂັ້ນຕອນຂອງໂປ
 msgid "Stage"
 msgstr "ຂັ້ນຕອນ"
 
-msgid "Registered events"
-msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -792,6 +837,9 @@ msgstr "ຫຼືເບິ່ງເຫດການທັງໝົດທີ່ເ
 msgid "Please select an organisation unit."
 msgstr "ກະລຸນາເລືອກຫົວໜ່ວຍການຈັດຕັ້ງ"
 
+msgid "Registered events"
+msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -810,9 +858,6 @@ msgstr "ບັນທຶກເປັນອັນໃໝ່"
 
 msgid "New"
 msgstr "ສ້າງໃຫມ່"
-
-msgid "Create for"
-msgstr "ສ້າງສໍາລັບ"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -904,12 +949,6 @@ msgstr "ການອອກຈາກໜ້ານີ້ແມ່ນຈະຖືກ
 msgid "Errors"
 msgstr "ຜິດພາດ"
 
-msgid "Feedback"
-msgstr "ຜົນຕອບຮັບ"
-
-msgid "Indicators"
-msgstr "ຕົວຊີ້ວັດ"
-
 msgid "Warnings"
 msgstr "ແຈ້ງເຕືອນ"
 
@@ -921,6 +960,18 @@ msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້"
 
 msgid "Organisation unit could not be loaded"
 msgstr "ບໍ່ສາມາດໂຫຼດຫົວໜ່ວຍການຈັດຕັ້ງໄດ້"
+
+msgid "tracked entity instance"
+msgstr "ຕິດຕາມຕົວຢ່າງລາຍບຸກຄົນ"
+
+msgid "All accessible"
+msgstr "ເຂົ້າເຖິງໄດ້ໝົດ"
+
+msgid "Selected"
+msgstr "ເລືອກ"
+
+msgid "Organisation unit scope"
+msgstr "ຂອບເຂດຂອງໜ່ວຍງານ"
 
 msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
@@ -941,6 +992,9 @@ msgstr "ບໍ່ມີເງື່ອນໄຂການຄົ້ນຫາ"
 msgid "Back to search"
 msgstr "ກັບໄປຫາການຄົ້ນຫາ"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "ບໍ່ສາມາດດຶງຂໍ້ມູນ metadata ໄດ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ."
 
@@ -952,6 +1006,15 @@ msgstr "ກໍາລັງໂຫຼດ"
 
 msgid "An error occurred while loading the form"
 msgstr "ພົບບັນຫາໃນລະຫວ່າງການໂຫຼດຟອມ"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
@@ -1000,9 +1063,6 @@ msgstr "ເລືອກໂປແກຼມ"
 
 msgid "Search for {{titleText}}"
 msgstr "ຄົ້ນຫາ {{titleText}}"
-
-msgid "Search for"
-msgstr "ຄົ້ນຫາສໍາລັບ"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1065,9 +1125,6 @@ msgid ""
 "looking for."
 msgstr "ທ່ານສາມາດປ່ຽນຄໍາຄົ້ນຫາ ແລະ ຄົ້ນຫາອີກເທື່ອຫນຶ່ງ"
 
-msgid "An error has occurred"
-msgstr "ພົບຂໍ້ຜິດພາດ"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1116,6 +1173,12 @@ msgstr "ສ້າງເຫດການໃໝ່"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "ຊອກຫາ {{trackedEntityName}} ໃນ {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "ບໍ່ມີປະເພດບາຍບຸກຄົນທີ່ສາມາດຕິດຕາມໄດ້"
@@ -1291,6 +1354,9 @@ msgstr "ເພີ່ມຈຸດປະສານງານ"
 msgid "Add area"
 msgstr "ເພີ່ມພື້ນທີ່"
 
+msgid "Program stage not found"
+msgstr "ບໍ່ພົບຂັ້ນໂປແກຣມ"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "ບໍ່ສາມາດດຶງຂໍ້ມູນຫົວໜ່ວຍອົງການຈັດຕັ້ງໄດ້. ກະລຸນາລອງໃໝ່ພາຍຫຼັງ."
 
@@ -1339,11 +1405,20 @@ msgstr "ໄປທີ່ແຖບ \"ຕາຕະລາງ\" ເພື່ອຈັ
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "ວັນທີທີ່ກຳນົດໄວ້ບໍ່ສາມາດປ່ຽນແປງໄດ້ສຳລັບເຫດການ {{ eventStatus }}"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "ບັນທຶກຮູບຫຼາຍຫຼ່ຽມ"
+
+msgid "No polygon captured"
+msgstr "ບໍ່ມີການບັນທຶກຮູບຫຼາຍຫຼ່ຽມ"
 
 msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
@@ -1415,6 +1490,12 @@ msgstr "ຂຽນຂໍ້ຄວາມກ່ຽວກັບເຫດການທ
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "ຜົນຕອບຮັບ"
+
+msgid "Indicators"
+msgstr "ຕົວຊີ້ວັດ"
+
 msgid "Save note"
 msgstr "ບັນທຶກ"
 
@@ -1427,9 +1508,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "ກຳລັງໂຫຼດ..."
 
 msgid "Save changes"
 msgstr "ບັນທຶກ"
@@ -1476,17 +1554,20 @@ msgstr "ຕົກລົງ, ລຶບ {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "ບໍ່ສາມາດໂຫຼດລາຍການຂໍ້ມູນສ່ວນຕົວໄດ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} ລາຍລະອຽດສ່ວນຕົວ"
-
-msgid "tracked entity instance"
-msgstr "ຕິດຕາມຕົວຢ່າງລາຍບຸກຄົນ"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "ເລືອກ {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
@@ -1981,9 +2062,6 @@ msgstr "ດາວໂຫຼດເປັນ CSV"
 msgid "Download with current filters"
 msgstr "ດາວໂຫຼດດ້ວຍຕົວກອງປັດຈຸບັນ"
 
-msgid "An error has occured. See log for details"
-msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນ. ເບິ່ງລາຍລະອຽດ"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "ກຳນົດເວລາ {{ escape }} ຈົນເຖິງ {{ time }}"
 
@@ -2007,9 +2085,6 @@ msgstr "ບໍ່ພົບໂປຣແກຣມ"
 
 msgid "Program is not a tracker program"
 msgstr "ໂປແກຣມນີ້ບໍ່ແມ່ນໂປແກຣມຕິດຕາມ"
-
-msgid "Error saving event"
-msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກເຫດການ"
 
 msgid "Could not save event"
 msgstr "ບໍ່ສາມາດບັນທຶກເຫດການໄດ້"
@@ -2047,20 +2122,8 @@ msgstr "ເກີດຄວາມຜິດພາດໃນການແກ້ໄຂ
 msgid "Error updating the Assignee"
 msgstr "ເກີດຄວາມຜິດພາດໃນການອັບເດດຜູ້ຮັບຜິດຊອບ"
 
-msgid "Please provide a valid number"
-msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
-
-msgid "Please provide a valid integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide a positive integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
-
-msgid "Please provide zero or a positive integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນສູນ ຫຼື ເປັນບວກ"
-
-msgid "Please provide a negative integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນລົບ"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "ກະລຸນາລະບຸວັນທີ ແລະ ເວລາໃຫ້ຖືກຕ້ອງ"
@@ -2089,6 +2152,11 @@ msgstr "ຈຳນວນນີ້ແມ່ນມີຢູ່ແລ້ວ"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"ຈາກ\" ບໍ່ສາມາດໃຫຍ່ກວ່າ \"ເຖິງ\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "ກຳລັງກວດສອບ..."
 
@@ -2105,7 +2173,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 

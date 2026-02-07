@@ -1,21 +1,30 @@
 # 
 # Translators:
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2024
 # Merethe Wollan Blisten, 2025
 # Karoline Tufte Lien <karoline@dhis2.org>, 2026
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-12-11T07:56:27.475Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2026\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2026\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Velg en eller flere datoer"
@@ -377,6 +386,12 @@ msgstr "Vis registrert {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registrert person"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "validering mislyktes"
 
@@ -410,8 +425,8 @@ msgstr "Valideringsfeil"
 msgid "Validation warnings"
 msgstr "Valideringsadvarsler"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Operasjoner kjører"
@@ -453,6 +468,18 @@ msgstr "Ingen"
 
 msgid "Select user"
 msgstr "Velg bruker"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Oppgi null eller et positivt heltall"
 
 msgid "to"
 msgstr "til"
@@ -505,6 +532,21 @@ msgstr "Max"
 msgid "Min"
 msgstr "Min"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Oppgi et gyldig nummer"
+
+msgid "Please provide a valid integer"
+msgstr "Oppgi et gyldig heltall"
+
+msgid "Please provide a positive integer"
+msgstr "Oppgi et positivt heltall"
+
+msgid "Please provide a negative integer"
+msgstr "Oppgi et negativt heltall"
+
 msgid "Exact matches only"
 msgstr ""
 
@@ -544,8 +586,14 @@ msgstr "Ingen treff funnet"
 msgid "Clear"
 msgstr "Fjern"
 
-msgid "No results"
-msgstr "Ingen resultater"
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Beskrivelse"
@@ -561,9 +609,6 @@ msgstr "begynn å skrive for å søke"
 
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
-
-msgid "No results found"
-msgstr "Ingen resultater funnet"
 
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
@@ -652,9 +697,6 @@ msgstr "Opprett henvisning"
 msgid "No available program stages"
 msgstr "Ingen tilgjengelige programfaser"
 
-msgid "Program stage not found"
-msgstr "Programfase ikke funnet"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -727,6 +769,9 @@ msgid ""
 msgstr ""
 "Det oppsto en feil under henting av registreringer. Vennligst skriv inn en "
 "gyldig url."
+
+msgid "An error has occurred"
+msgstr "Det har oppstått en feil"
 
 msgid "Page is missing required values from URL"
 msgstr "Siden mangler nødvendige verdier fra URL"
@@ -825,9 +870,6 @@ msgstr "Lagre som ny"
 msgid "New"
 msgstr "Ny"
 
-msgid "Create for"
-msgstr "Opprett for"
-
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
@@ -922,12 +964,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Feil"
 
-msgid "Feedback"
-msgstr "Tilbakemelding"
-
-msgid "Indicators"
-msgstr "Indikatorer"
-
 msgid "Warnings"
 msgstr "Advarsler"
 
@@ -942,6 +978,15 @@ msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
+
+msgid "All accessible"
+msgstr "Alle tilgjengelige"
+
+msgid "Selected"
+msgstr "Valgt"
+
+msgid "Organisation unit scope"
+msgstr "Organisasjonsenhet-omfang"
 
 msgid "Selected program"
 msgstr "Valgt program"
@@ -963,6 +1008,9 @@ msgstr "Manglende søkekriterier"
 msgid "Back to search"
 msgstr "Tilbake til søk"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Kunne ikke hente metadata. Prøv igjen senere."
 
@@ -974,6 +1022,15 @@ msgstr "Laster"
 
 msgid "An error occurred while loading the form"
 msgstr "Det oppsto en feil ved åpning av skjemaet"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -1022,9 +1079,6 @@ msgstr "Velg et program"
 
 msgid "Search for {{titleText}}"
 msgstr "Søk etter {{titleText}}"
-
-msgid "Search for"
-msgstr "Søk etter"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1086,9 +1140,6 @@ msgid ""
 "looking for."
 msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
-msgid "An error has occurred"
-msgstr "Det har oppstått en feil"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1139,6 +1190,12 @@ msgstr "Opprett ny hendelse"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "Det er ingen sporbare enhetstyper tilgjengelig"
@@ -1323,6 +1380,9 @@ msgstr "Legg til koordinater"
 msgid "Add area"
 msgstr "Legg til område"
 
+msgid "Program stage not found"
+msgstr "Programfase ikke funnet"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
 
@@ -1371,11 +1431,20 @@ msgstr "Gå til \"Planlegg\"-fanen for å endre planlagt dato for denne hendelse
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Planlagt dato kan ikke endres for {{ eventStatus }} hendelser"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "Polygon oppfanget"
+
+msgid "No polygon captured"
+msgstr "Ingen polygon oppfanget"
 
 msgid "Event completed"
 msgstr "Hendelse fullført"
@@ -1453,6 +1522,12 @@ msgstr "Skriv et notat om denne planlagte hendelsen"
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Tilbakemelding"
+
+msgid "Indicators"
+msgstr "Indikatorer"
+
 msgid "Save note"
 msgstr "Lagre notat"
 
@@ -1465,9 +1540,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "Laster..."
 
 msgid "Save changes"
 msgstr "Lagre endringer"
@@ -1514,14 +1586,20 @@ msgstr "Ja, slett {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profil"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "Velg en {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
@@ -2030,9 +2108,6 @@ msgstr "Last ned i CSV format"
 msgid "Download with current filters"
 msgstr "Last ned med gjeldende filtre"
 
-msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Planlagt{{ escape }} forfaller {{ time }}"
 
@@ -2056,9 +2131,6 @@ msgstr "Program ble ikke funnet"
 
 msgid "Program is not a tracker program"
 msgstr "Programmet er ikke et sporingsprogram"
-
-msgid "Error saving event"
-msgstr "Feil ved lagring av hendelse"
 
 msgid "Could not save event"
 msgstr "Kunne ikke lagre hendelse"
@@ -2096,20 +2168,8 @@ msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
 msgid "Error updating the Assignee"
 msgstr "Feil under oppdatering av tildelt bruker"
 
-msgid "Please provide a valid number"
-msgstr "Oppgi et gyldig nummer"
-
-msgid "Please provide a valid integer"
-msgstr "Oppgi et gyldig heltall"
-
-msgid "Please provide a positive integer"
-msgstr "Oppgi et positivt heltall"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Oppgi null eller et positivt heltall"
-
-msgid "Please provide a negative integer"
-msgstr "Oppgi et negativt heltall"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Oppgi en gyldig dato og tid"

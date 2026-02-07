@@ -1,20 +1,29 @@
 # 
 # Translators:
 # Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
-# Yury Rogachev <yury@dhis2.org>, 2025
+# Yury Rogachev <yury@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2026\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uz@Latn\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Bir yoki bir necha sanalarni tanlang..."
@@ -377,6 +386,12 @@ msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
 msgid "Registered person"
 msgstr "Roʼyxatdan oʼtgan shaxs"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "Tasdiqlash amalga oshmadi"
 
@@ -410,8 +425,8 @@ msgstr "Tasdiqlashda xatoliklar"
 msgid "Validation warnings"
 msgstr "Tasdiqlash toʼgʼrisida ogohlantirishlar"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Baʼzi operatsiyalar hali ham bajarilmoqda. Iltimos, kuting ..."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Аmaliyotlar bajarilmoqda"
@@ -450,6 +465,18 @@ msgstr "Yoʼq"
 
 msgid "Select user"
 msgstr "Foydalanuvchini tanlang"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
 
 msgid "to"
 msgstr "ga"
@@ -502,6 +529,24 @@ msgstr "Maksimum"
 msgid "Min"
 msgstr "Minimum"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
+
+msgid "Please provide a valid integer"
+msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
+
+msgid "Please provide a positive integer"
+msgstr "Iltimos, butun musbat sonni koʼrsating"
+
+msgid "Please provide a negative integer"
+msgstr "Iltimos, butun manfiy sonni koʼrsating"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Matnni oʼz ichiga oladi"
 
@@ -538,8 +583,14 @@ msgstr ""
 msgid "Clear"
 msgstr "Tozalash"
 
-msgid "No results"
-msgstr "Natija yoʼq"
+msgid "No results found"
+msgstr "Hech qanday natija topilmadi"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Tavsif"
@@ -555,9 +606,6 @@ msgstr "qidirish uchun yozishni boshlang"
 
 msgid "suggestions could not be retrieved"
 msgstr "takliflar qabul qilinmadi"
-
-msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
 
 msgid "No items to display"
 msgstr "Koʼrsatiladigan axborot yoʼq"
@@ -646,9 +694,6 @@ msgstr "Yoʼnalish yarating"
 msgid "No available program stages"
 msgstr ""
 
-msgid "Program stage not found"
-msgstr ""
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -711,6 +756,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "An error has occurred"
+msgstr "Xatolik yuz berdi"
+
 msgid "Page is missing required values from URL"
 msgstr ""
 
@@ -753,9 +801,6 @@ msgstr ""
 msgid "Stage"
 msgstr "Босқич"
 
-msgid "Registered events"
-msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -791,6 +836,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "Registered events"
+msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -807,9 +855,6 @@ msgstr ""
 
 msgid "New"
 msgstr "Yangi"
-
-msgid "Create for"
-msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -903,12 +948,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Xatoliklar"
 
-msgid "Feedback"
-msgstr "Qayta aloqa"
-
-msgid "Indicators"
-msgstr "Indikatorlar"
-
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
@@ -921,6 +960,18 @@ msgstr "Hodisa/tadbirni yuklab boʼlmadi"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
+
+msgid "tracked entity instance"
+msgstr "kuzatilayotgan obʼekt namunasi"
+
+msgid "All accessible"
+msgstr "Barchaga kirish mumkin"
+
+msgid "Selected"
+msgstr "Tanlangan"
+
+msgid "Organisation unit scope"
+msgstr "Tashkiliy boʼlim huquq va burchlari"
 
 msgid "Selected program"
 msgstr "Tanlangan dastur"
@@ -941,6 +992,9 @@ msgstr ""
 msgid "Back to search"
 msgstr "Qidiruvga qaytish"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -951,6 +1005,15 @@ msgid "Loading"
 msgstr "Yuklanmoqda"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1000,9 +1063,6 @@ msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
-
-msgid "Search for"
-msgstr "Qidirish"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1064,9 +1124,6 @@ msgstr ""
 "Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
 "topshirishingiz mumkin."
 
-msgid "An error has occurred"
-msgstr "Xatolik yuz berdi"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1113,6 +1170,12 @@ msgid "Create new event"
 msgstr "Yangi tadbir yarating"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
 msgstr ""
 
 msgid "No tracked entity types available"
@@ -1287,6 +1350,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1335,11 +1401,20 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "Koʼpburchak ushlandi"
+
+msgid "No polygon captured"
+msgstr "Koʼpburchak ushlanmadi"
 
 msgid "Event completed"
 msgstr ""
@@ -1410,6 +1485,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Qayta aloqa"
+
+msgid "Indicators"
+msgstr "Indikatorlar"
+
 msgid "Save note"
 msgstr "Izohni saqlash"
 
@@ -1421,9 +1502,6 @@ msgstr ""
 
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
@@ -1468,16 +1546,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "{{trackedEntityTypeName}} profile"
+msgid "No attributes configured for {{trackedEntityTypeName}}"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "kuzatilayotgan obʼekt namunasi"
+msgid "No attributes configured"
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} profile"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1974,9 +2055,6 @@ msgstr "CSV sifatida yuklang"
 msgid "Download with current filters"
 msgstr "Joriy Filtrlar asosida yuklash"
 
-msgid "An error has occured. See log for details"
-msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2000,9 +2078,6 @@ msgstr "Dastur topilmadi"
 
 msgid "Program is not a tracker program"
 msgstr "Dastur kuzatuv dasturi emas"
-
-msgid "Error saving event"
-msgstr "Hodisa/tadbirni saqlashda xato"
 
 msgid "Could not save event"
 msgstr ""
@@ -2040,20 +2115,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
-
-msgid "Please provide a valid integer"
-msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
-
-msgid "Please provide a positive integer"
-msgstr "Iltimos, butun musbat sonni koʼrsating"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
-
-msgid "Please provide a negative integer"
-msgstr "Iltimos, butun manfiy sonni koʼrsating"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Iltimos, tegishli sana va vaqtni koʼrsating"
@@ -2082,6 +2145,11 @@ msgstr "Bu qiymat allaqachon mavjud"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "Sana \"gacha\" katta boʼlishi mumkin emas sana \"dan\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Tekshirilmoqda..."
 
@@ -2098,7 +2166,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 

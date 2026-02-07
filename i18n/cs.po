@@ -1,20 +1,29 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Jiří Podhorecký <jirka.p@volny.cz>, 2025
+# Jiří Podhorecký <jirka.p@volny.cz>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-11-11T14:11:11.392Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Vyberte jedno nebo více dat ..."
@@ -377,6 +386,12 @@ msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Registrovaná osoba"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "ověření selhalo"
 
@@ -410,8 +425,8 @@ msgstr "Chyby ověření"
 msgid "Validation warnings"
 msgstr "Varování ověření"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Některé operace stále běží. Prosím, čekejte.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Provoz běží"
@@ -452,6 +467,18 @@ msgstr "Žádný"
 
 msgid "Select user"
 msgstr "Vybrat uživatele"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Uveďte nulové nebo kladné celé číslo"
 
 msgid "to"
 msgstr "do"
@@ -504,6 +531,21 @@ msgstr "Max"
 msgid "Min"
 msgstr "Min"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Uveďte prosím platné číslo"
+
+msgid "Please provide a valid integer"
+msgstr "Uveďte platné celé číslo"
+
+msgid "Please provide a positive integer"
+msgstr "Zadejte kladné celé číslo"
+
+msgid "Please provide a negative integer"
+msgstr "Uveďte záporné celé číslo"
+
 msgid "Exact matches only"
 msgstr ""
 
@@ -543,8 +585,14 @@ msgstr "Žádná shoda nenalezena"
 msgid "Clear"
 msgstr "Vyčistit"
 
-msgid "No results"
-msgstr "Žádné výsledky"
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Popis"
@@ -560,9 +608,6 @@ msgstr "začněte psát pro vyhledávání"
 
 msgid "suggestions could not be retrieved"
 msgstr "návrhy nelze načíst"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
 
 msgid "No items to display"
 msgstr "Žádné položky k zobrazení"
@@ -651,9 +696,6 @@ msgstr "Proveďte doporučení"
 msgid "No available program stages"
 msgstr "Žádné dostupné fáze programu"
 
-msgid "Program stage not found"
-msgstr "Fáze programu nenalezena"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -725,6 +767,9 @@ msgid ""
 msgstr ""
 "Při načítání registrací došlo k chybě. Zadejte prosím platnou adresu URL."
 
+msgid "An error has occurred"
+msgstr "Došlo k chybě"
+
 msgid "Page is missing required values from URL"
 msgstr "Na stránce chybí požadované hodnoty z adresy URL"
 
@@ -767,9 +812,6 @@ msgstr "Program Stages nelze načíst"
 msgid "Stage"
 msgstr "Fáze"
 
-msgid "Registered events"
-msgstr "Registrované události"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "Možnost kategorie není pro vybranou organizační jednotku platná."
 
@@ -809,6 +851,9 @@ msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}
 msgid "Please select an organisation unit."
 msgstr "Vyberte organizační jednotku."
 
+msgid "Registered events"
+msgstr "Registrované události"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -827,9 +872,6 @@ msgstr "Uložit jako nové"
 
 msgid "New"
 msgstr "Nový"
-
-msgid "Create for"
-msgstr "Vytvořit pro"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -923,12 +965,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Chyby"
 
-msgid "Feedback"
-msgstr "Zpětná vazba"
-
-msgid "Indicators"
-msgstr "Indikátory"
-
 msgid "Warnings"
 msgstr "Varování"
 
@@ -943,6 +979,15 @@ msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "Vybráno"
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Vybraný program"
@@ -966,6 +1011,9 @@ msgstr "Chybí kritéria vyhledávání"
 msgid "Back to search"
 msgstr "Zpět na vyhledávání"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Nepodařilo se načíst metadata. Prosím zkuste to znovu později."
 
@@ -977,6 +1025,15 @@ msgstr "načítání"
 
 msgid "An error occurred while loading the form"
 msgstr "Při načítání formuláře došlo k chybě"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -1025,9 +1082,6 @@ msgstr "Vyberte program"
 
 msgid "Search for {{titleText}}"
 msgstr "Hledat {{titleText}}"
-
-msgid "Search for"
-msgstr "Hledat"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1097,9 +1151,6 @@ msgid ""
 msgstr ""
 "Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
-msgid "An error has occurred"
-msgstr "Došlo k chybě"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1157,6 +1208,12 @@ msgstr "Vytvořit novou událost"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "Nejsou k dispozici žádné typy trasované entity"
@@ -1334,6 +1391,9 @@ msgstr "Přidat souřadnice"
 msgid "Add area"
 msgstr "Přidat oblast"
 
+msgid "Program stage not found"
+msgstr "Fáze programu nenalezena"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."
 
@@ -1382,11 +1442,20 @@ msgstr "Chcete-li tuto událost přeplánovat, přejděte na kartu \"Plán\"."
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Naplánované datum nelze změnit pro události {{ eventStatus }}"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr "Geometrie (plocha)"
 
 msgid "Geometry (Coordinate)"
 msgstr "Geometrie (souřadnice)"
+
+msgid "Polygon captured"
+msgstr ""
+
+msgid "No polygon captured"
+msgstr "Nebyl zachycen žádný polygon"
 
 msgid "Event completed"
 msgstr "Událost dokončena"
@@ -1466,6 +1535,12 @@ msgstr "Napište poznámku o této plánované události"
 msgid "Program or stage is invalid"
 msgstr "Program nebo fáze je neplatná"
 
+msgid "Feedback"
+msgstr "Zpětná vazba"
+
+msgid "Indicators"
+msgstr "Indikátory"
+
 msgid "Save note"
 msgstr "Uložit poznámku"
 
@@ -1478,9 +1553,6 @@ msgstr "Změňte informace o této stránce {{trackedEntityName}} zde."
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "Informace o tomto zápisu lze upravit ve widgetu Zápis."
-
-msgid " Loading..."
-msgstr " Načítání..."
 
 msgid "Save changes"
 msgstr "Uložit změny"
@@ -1527,14 +1599,20 @@ msgstr "Ano, smazat {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profil"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "Vyberte si událost na {{linkableStageLabel}} "
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "Vyberte {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr "{{ linkableStageLabel }} může mít pouze jednu událost"
@@ -2071,9 +2149,6 @@ msgstr "Stáhnout jako CSV"
 msgid "Download with current filters"
 msgstr "Stáhnout s aktuálními filtry"
 
-msgid "An error has occured. See log for details"
-msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Naplánováno na {{ escape }} kvůli {{ time }}"
 
@@ -2097,9 +2172,6 @@ msgstr "Program nebyl nalezen"
 
 msgid "Program is not a tracker program"
 msgstr "Program není trasovací program"
-
-msgid "Error saving event"
-msgstr "Při ukládání události došlo k chybě"
 
 msgid "Could not save event"
 msgstr "Událost se nepodařilo uložit"
@@ -2137,20 +2209,8 @@ msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 msgid "Error updating the Assignee"
 msgstr "Chyba při aktualizaci Příjemce"
 
-msgid "Please provide a valid number"
-msgstr "Uveďte prosím platné číslo"
-
-msgid "Please provide a valid integer"
-msgstr "Uveďte platné celé číslo"
-
-msgid "Please provide a positive integer"
-msgstr "Zadejte kladné celé číslo"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Uveďte nulové nebo kladné celé číslo"
-
-msgid "Please provide a negative integer"
-msgstr "Uveďte záporné celé číslo"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Uveďte prosím platné datum a čas"
@@ -2178,6 +2238,11 @@ msgstr "„Od“ nemůže být větší než „do“..."
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "„Od“ nemůže být větší než „Do“"
+
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
 
 msgid "Checking..."
 msgstr "Probíhá kontrola ..."
