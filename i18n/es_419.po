@@ -3,20 +3,29 @@
 # Philip Larsen Donnelly, 2024
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2024
 # Pablo Del Médico, 2024
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2025\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2026\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es_419\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Elige una o más fechas..."
@@ -384,6 +393,12 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 msgid "Registered person"
 msgstr "persona registrada"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "La validación ha fallado"
 
@@ -417,8 +432,8 @@ msgstr "Errores de validación"
 msgid "Validation warnings"
 msgstr "Advertencias de validación"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Algunas operaciones aún se están ejecutando. Espere por favor.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Operaciones en ejecución"
@@ -460,6 +475,18 @@ msgstr "Ninguno"
 
 msgid "Select user"
 msgstr "Usuario seleccionado"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Proporcione cero o un número entero positivo"
 
 msgid "to"
 msgstr "a"
@@ -512,6 +539,24 @@ msgstr "Máx"
 msgid "Min"
 msgstr "Mínimo"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Proporcione un número válido"
+
+msgid "Please provide a valid integer"
+msgstr "Proporcione un número entero válido"
+
+msgid "Please provide a positive integer"
+msgstr "Proporcione un número entero positivo"
+
+msgid "Please provide a negative integer"
+msgstr "Proporcione un número entero negativo"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Contiene texto"
 
@@ -548,8 +593,14 @@ msgstr "No se han encontraron resultados"
 msgid "Clear"
 msgstr "Limpiar"
 
-msgid "No results"
-msgstr "No hay resultados"
+msgid "No results found"
+msgstr "No se han encontrado resultados"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Descripción"
@@ -565,9 +616,6 @@ msgstr "Empiece a escribir para buscar"
 
 msgid "suggestions could not be retrieved"
 msgstr "no se pudieron cargar las sugerencias"
-
-msgid "No results found"
-msgstr "No se han encontrado resultados"
 
 msgid "No items to display"
 msgstr "No hay elementos para mostrar"
@@ -656,9 +704,6 @@ msgstr "Crear una referencia"
 msgid "No available program stages"
 msgstr "No hay etapas de programa disponibles"
 
-msgid "Program stage not found"
-msgstr "Etapa del programa no encontrada"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -731,6 +776,9 @@ msgstr ""
 "Se produjo un error al obtener las inscripciones. Por favor introduzca un "
 "URL válido."
 
+msgid "An error has occurred"
+msgstr ""
+
 msgid "Page is missing required values from URL"
 msgstr "A la página le faltan los valores obligatorios de la URL"
 
@@ -756,7 +804,7 @@ msgid "Refer"
 msgstr "Referir"
 
 msgid "New Event"
-msgstr ""
+msgstr "Nuevo evento"
 
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "No se pueden agregar más eventos de {{ programStageName }}"
@@ -772,9 +820,6 @@ msgstr "No se pudieron cargar las etapas del programa"
 
 msgid "Stage"
 msgstr "Etapa"
-
-msgid "Registered events"
-msgstr "Eventos registrados"
 
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
@@ -811,6 +856,9 @@ msgstr "O vea todos los eventos accesibles para su usuario en {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Seleccione una unidad organizativa."
 
+msgid "Registered events"
+msgstr "Eventos registrados"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -827,9 +875,6 @@ msgstr "Guardar como nuevo"
 
 msgid "New"
 msgstr "Nuevo"
-
-msgid "Create for"
-msgstr "Crear para"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -925,12 +970,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Errores"
 
-msgid "Feedback"
-msgstr "Retroalimentación"
-
-msgid "Indicators"
-msgstr "Indicadores"
-
 msgid "Warnings"
 msgstr "Advertencias"
 
@@ -942,6 +981,18 @@ msgstr "No se pudo cargar el evento"
 
 msgid "Organisation unit could not be loaded"
 msgstr "No se pudo cargar la unidad organizativa"
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "Seleccionado"
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programa seleccionado"
@@ -964,6 +1015,9 @@ msgstr ""
 msgid "Back to search"
 msgstr "Volver a la búsqueda"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 "No se pudo recuperar los metadatos. Por favor, inténtelo de nuevo más tarde."
@@ -975,6 +1029,15 @@ msgid "Loading"
 msgstr ""
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1024,9 +1087,6 @@ msgstr "Elige un programa"
 
 msgid "Search for {{titleText}}"
 msgstr "Buscar por {{titleText}}"
-
-msgid "Search for"
-msgstr "Buscar por"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1086,9 +1146,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "An error has occurred"
-msgstr ""
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1135,6 +1192,12 @@ msgid "Create new event"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
 msgstr ""
 
 msgid "No tracked entity types available"
@@ -1309,6 +1372,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr "Etapa del programa no encontrada"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1357,10 +1423,19 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
+msgstr ""
+
+msgid "Polygon captured"
+msgstr ""
+
+msgid "No polygon captured"
 msgstr ""
 
 msgid "Event completed"
@@ -1436,6 +1511,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Retroalimentación"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
 msgid "Save note"
 msgstr ""
 
@@ -1447,9 +1528,6 @@ msgstr ""
 
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
@@ -1494,16 +1572,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "Perfil de {{trackedEntityTypeName}} "
-
-msgid "tracked entity instance"
-msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -2019,9 +2100,6 @@ msgstr ""
 msgid "Download with current filters"
 msgstr ""
 
-msgid "An error has occured. See log for details"
-msgstr " Ha ocurrido un error. Ver el registro para más detalles."
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2044,9 +2122,6 @@ msgid "Program not found"
 msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr ""
-
-msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event"
@@ -2085,20 +2160,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "Proporcione un número válido"
-
-msgid "Please provide a valid integer"
-msgstr "Proporcione un número entero válido"
-
-msgid "Please provide a positive integer"
-msgstr "Proporcione un número entero positivo"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Proporcione cero o un número entero positivo"
-
-msgid "Please provide a negative integer"
-msgstr "Proporcione un número entero negativo"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Proporcione una fecha y hora válidas"
@@ -2127,6 +2190,11 @@ msgstr "Este valor ya existe"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Desde\" no puede ser mayor que \"Hasta\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Verificando..."
 
@@ -2143,7 +2211,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

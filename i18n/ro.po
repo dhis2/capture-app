@@ -1,20 +1,29 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Valeriu Plesca <vplesca@gmail.com>, 2025
+# Valeriu Plesca <vplesca@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2025\n"
+"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ro\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Selectați una sau mai multe date..."
@@ -372,6 +381,12 @@ msgstr "Afișați {{trackedEntityTypeName}} înregistrat"
 msgid "Registered person"
 msgstr "Persoană înregistrată"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "validarea a eșuat"
 
@@ -405,8 +420,8 @@ msgstr "Erori de validare"
 msgid "Validation warnings"
 msgstr "Avertizări de validare"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Unele operațiuni sunt încă în desfășurare. Așteptați.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Operațiuni în derulare"
@@ -445,6 +460,18 @@ msgstr ""
 
 msgid "Select user"
 msgstr "Selectați utilizatorul"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Introduceți zero sau un număr întreg pozitiv"
 
 msgid "to"
 msgstr ""
@@ -497,6 +524,24 @@ msgstr "Max"
 msgid "Min"
 msgstr "Min"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Introduceți un număr valid"
+
+msgid "Please provide a valid integer"
+msgstr "Introduceți un număr întreg valid"
+
+msgid "Please provide a positive integer"
+msgstr "Introduceți un număr întreg pozitiv"
+
+msgid "Please provide a negative integer"
+msgstr "Introduceți un număr întreg negativ"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Conține text"
 
@@ -533,8 +578,14 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-msgid "No results"
-msgstr "Nu există rezultate"
+msgid "No results found"
+msgstr "Nu au fost găsite rezultate"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Descriere"
@@ -550,9 +601,6 @@ msgstr "începeți să tastați pentru a căuta"
 
 msgid "suggestions could not be retrieved"
 msgstr "sugestiile nu au putut fi preluate"
-
-msgid "No results found"
-msgstr "Nu au fost găsite rezultate"
 
 msgid "No items to display"
 msgstr "Nu există elemente pentru afișare"
@@ -641,9 +689,6 @@ msgstr ""
 msgid "No available program stages"
 msgstr "Nu există etape de program disponibile"
 
-msgid "Program stage not found"
-msgstr "Etapa programului nu a fost găsită"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -706,6 +751,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "An error has occurred"
+msgstr "A avut loc o eroare"
+
 msgid "Page is missing required values from URL"
 msgstr "În pagină lipsesc valorile obligatorii din URL"
 
@@ -748,9 +796,6 @@ msgstr "Etapele programului nu au putut fi încărcate"
 msgid "Stage"
 msgstr ""
 
-msgid "Registered events"
-msgstr "Evenimente înregistrate"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -786,6 +831,9 @@ msgstr "Sau vedeți toate evenimentele accesibile dvs. în {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Selectați o unitate organizațională."
 
+msgid "Registered events"
+msgstr "Evenimente înregistrate"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -802,9 +850,6 @@ msgstr "Salvare ca nou"
 
 msgid "New"
 msgstr "Nou"
-
-msgid "Create for"
-msgstr "Creare pentru"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -898,12 +943,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Erori"
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicatori"
-
 msgid "Warnings"
 msgstr "Avertizări"
 
@@ -915,6 +954,18 @@ msgstr "Evenimentul nu a putut fi încărcat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unitatea organizațională nu a putut fi încărcată"
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "Selectat"
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programul selectat"
@@ -937,6 +988,9 @@ msgstr ""
 msgid "Back to search"
 msgstr "Înapoi la căutare"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -947,6 +1001,15 @@ msgid "Loading"
 msgstr ""
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -996,9 +1059,6 @@ msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Căutare {{titleText}}"
-
-msgid "Search for"
-msgstr "Căutare"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1060,9 +1120,6 @@ msgstr ""
 "Puteți modifica termenii de căutare și căuta din nou pentru a găsi ceea ce "
 "căutați."
 
-msgid "An error has occurred"
-msgstr "A avut loc o eroare"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1110,6 +1167,12 @@ msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr ""
@@ -1283,6 +1346,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr "Etapa programului nu a fost găsită"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1331,10 +1397,19 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
+msgstr ""
+
+msgid "Polygon captured"
+msgstr ""
+
+msgid "No polygon captured"
 msgstr ""
 
 msgid "Event completed"
@@ -1410,6 +1485,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicatori"
+
 msgid "Save note"
 msgstr ""
 
@@ -1422,9 +1503,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "Încărcare..."
 
 msgid "Save changes"
 msgstr "Salvarea modificărilor"
@@ -1469,16 +1547,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "{{trackedEntityTypeName}} profile"
+msgid "No attributes configured for {{trackedEntityTypeName}}"
 msgstr ""
 
-msgid "tracked entity instance"
+msgid "No attributes configured"
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1994,9 +2075,6 @@ msgstr "Descărcare ca CSV"
 msgid "Download with current filters"
 msgstr "Descărcare cu filtrele actuale"
 
-msgid "An error has occured. See log for details"
-msgstr ""
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2020,9 +2098,6 @@ msgstr ""
 
 msgid "Program is not a tracker program"
 msgstr ""
-
-msgid "Error saving event"
-msgstr "Eroare la salvarea evenimentului"
 
 msgid "Could not save event"
 msgstr "Evenimentul nu a putut fi salvat"
@@ -2060,20 +2135,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "Introduceți un număr valid"
-
-msgid "Please provide a valid integer"
-msgstr "Introduceți un număr întreg valid"
-
-msgid "Please provide a positive integer"
-msgstr "Introduceți un număr întreg pozitiv"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Introduceți zero sau un număr întreg pozitiv"
-
-msgid "Please provide a negative integer"
-msgstr "Introduceți un număr întreg negativ"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Introduceți o dată și o oră valide"
@@ -2102,6 +2165,11 @@ msgstr "Această valoare deja există"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "„De la” nu poate fi mai mare decât „Pînă la”"
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Verificare..."
 
@@ -2118,7 +2186,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

@@ -2,22 +2,31 @@
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Philip Larsen Donnelly, 2023
-# Viktor Varland <viktor@dhis2.org>, 2025
 # Nadiia <semchuk@aph.org.ua>, 2025
-# Hamza <7amza.it@gmail.com>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
+# Hamza <7amza.it@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Hamza <7amza.it@gmail.com>, 2025\n"
+"Last-Translator: Hamza <7amza.it@gmail.com>, 2026\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "اختر تاريخًا أو أكثر ..."
@@ -69,7 +78,7 @@ msgid "New event"
 msgstr "حدث جديد"
 
 msgid "Loading..."
-msgstr ""
+msgstr "جار التحميل..."
 
 msgid "Event list"
 msgstr ""
@@ -376,6 +385,12 @@ msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
 msgid "Registered person"
 msgstr "الشخص المسجل"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
 
@@ -409,8 +424,8 @@ msgstr "أخطاء تحقق من الصحة"
 msgid "Validation warnings"
 msgstr "تحذيرات التحقق"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى الإنتظار.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
@@ -449,6 +464,18 @@ msgstr "لا شيء"
 
 msgid "Select user"
 msgstr "حدد المستخدم"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صفر"
 
 msgid "to"
 msgstr "إلى"
@@ -501,6 +528,24 @@ msgstr "الأعلى"
 msgid "Min"
 msgstr "الأدنى"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "نرجوا ادخال صيغة رقمية سليمة"
+
+msgid "Please provide a valid integer"
+msgstr "من فضلك ادخل رقماً صحيحاً سليماً، من غير كسر"
+
+msgid "Please provide a positive integer"
+msgstr "من فضلك ادخل رقماً صحيحاً موجباً"
+
+msgid "Please provide a negative integer"
+msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "يحتوي على نص"
 
@@ -537,8 +582,14 @@ msgstr ""
 msgid "Clear"
 msgstr "مسح"
 
-msgid "No results"
-msgstr "لا توجد نتائج"
+msgid "No results found"
+msgstr "لم يتم العثور على أي نتائج"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "الوصف"
@@ -554,9 +605,6 @@ msgstr "ابدأ الكتابة للبحث"
 
 msgid "suggestions could not be retrieved"
 msgstr "تعذر استرداد الاقتراحات"
-
-msgid "No results found"
-msgstr "لم يتم العثور على أي نتائج"
 
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
@@ -645,9 +693,6 @@ msgstr "إحالة"
 msgid "No available program stages"
 msgstr ""
 
-msgid "Program stage not found"
-msgstr ""
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -710,6 +755,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "An error has occurred"
+msgstr "حدث خطأ"
+
 msgid "Page is missing required values from URL"
 msgstr ""
 
@@ -752,9 +800,6 @@ msgstr ""
 msgid "Stage"
 msgstr "المرحلة"
 
-msgid "Registered events"
-msgstr "الأحداث المسجلة"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -790,6 +835,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "Registered events"
+msgstr "الأحداث المسجلة"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -806,9 +854,6 @@ msgstr ""
 
 msgid "New"
 msgstr "جديد"
-
-msgid "Create for"
-msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -900,12 +945,6 @@ msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحد
 msgid "Errors"
 msgstr "اخطاء"
 
-msgid "Feedback"
-msgstr "التغذية الراجعة"
-
-msgid "Indicators"
-msgstr "المؤشرات"
-
 msgid "Warnings"
 msgstr "تحذيرات"
 
@@ -917,6 +956,18 @@ msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
+
+msgid "tracked entity instance"
+msgstr "نموذج الكيان المتتبع"
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "البرنامج المحدد"
@@ -942,6 +993,9 @@ msgstr ""
 msgid "Back to search"
 msgstr "العودة للبحث"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -952,6 +1006,15 @@ msgid "Loading"
 msgstr "جار التحميل"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1001,9 +1064,6 @@ msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
-
-msgid "Search for"
-msgstr "ابحث عن"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1063,9 +1123,6 @@ msgid ""
 "looking for."
 msgstr "يمكنك تغيير مصطلحات البحث والبحث مرة أخرى للعثور على ما تبحث عنه."
 
-msgid "An error has occurred"
-msgstr "حدث خطأ"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1112,6 +1169,12 @@ msgid "Create new event"
 msgstr "انشئ حدثاً جديداً"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
 msgstr ""
 
 msgid "No tracked entity types available"
@@ -1286,6 +1349,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1334,11 +1400,20 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr ""
+
+msgid "No polygon captured"
+msgstr "لم يتم التقاط المضلع"
 
 msgid "Event completed"
 msgstr "الحدث مكتمل"
@@ -1419,6 +1494,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "التغذية الراجعة"
+
+msgid "Indicators"
+msgstr "المؤشرات"
+
 msgid "Save note"
 msgstr "حفظ ملاحظة"
 
@@ -1430,9 +1511,6 @@ msgstr ""
 
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
@@ -1477,16 +1555,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "{{trackedEntityTypeName}} profile"
+msgid "No attributes configured for {{trackedEntityTypeName}}"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "نموذج الكيان المتتبع"
+msgid "No attributes configured"
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} profile"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -2032,9 +2113,6 @@ msgstr "تنزيل كملف CSV"
 msgid "Download with current filters"
 msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 
-msgid "An error has occured. See log for details"
-msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2058,9 +2136,6 @@ msgstr "لم يتم ايجاد البرنامج"
 
 msgid "Program is not a tracker program"
 msgstr "البرنامج ليس برنامج تتبع"
-
-msgid "Error saving event"
-msgstr "خطأ عند حفظ الحدث"
 
 msgid "Could not save event"
 msgstr ""
@@ -2098,20 +2173,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "نرجوا ادخال صيغة رقمية سليمة"
-
-msgid "Please provide a valid integer"
-msgstr "من فضلك ادخل رقماً صحيحاً سليماً، من غير كسر"
-
-msgid "Please provide a positive integer"
-msgstr "من فضلك ادخل رقماً صحيحاً موجباً"
-
-msgid "Please provide zero or a positive integer"
-msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صفر"
-
-msgid "Please provide a negative integer"
-msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "من فضلك ادخل صيغة سليمة للتاريخ والوقت"
@@ -2140,6 +2203,11 @@ msgstr "هذه القيمة موجودة مسبقاً"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "لا يمكن ان تكون \"من\" اكبر من \"إلى\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "يتم التحقق"
 
@@ -2156,7 +2224,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

@@ -2,23 +2,32 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2021
 # Ulanbek Abakirov <ulans@mail.ru>, 2025
-# Philip Larsen Donnelly, 2025
 # Nadiia <semchuk@aph.org.ua>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2025
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Выбрать одну или несколько дат..."
@@ -386,6 +395,12 @@ msgstr "Показать зарегистрированный объект {{tra
 msgid "Registered person"
 msgstr "Зарегистрированное лицо"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "ошибка проверки"
 
@@ -419,8 +434,8 @@ msgstr "Ошибки проверки"
 msgid "Validation warnings"
 msgstr "Предупреждения проверки"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Некоторые операции еще не завершены. Ждите.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Операции в процессе..."
@@ -462,6 +477,18 @@ msgstr "Никому"
 
 msgid "Select user"
 msgstr "Выбрать пользователя"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Введите ноль или положительное целое число"
 
 msgid "to"
 msgstr "по"
@@ -514,6 +541,24 @@ msgstr "Максимум"
 msgid "Min"
 msgstr "Минимум"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Введите правильное число"
+
+msgid "Please provide a valid integer"
+msgstr "Введите целое число"
+
+msgid "Please provide a positive integer"
+msgstr "Введите положительное целое число"
+
+msgid "Please provide a negative integer"
+msgstr "Введите отрицательное целое число"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Содержит текст"
 
@@ -550,8 +595,14 @@ msgstr "Совпадения не найдены"
 msgid "Clear"
 msgstr "Очистить"
 
-msgid "No results"
-msgstr "Результатов нет"
+msgid "No results found"
+msgstr "Результаты не найдены"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Описание"
@@ -567,9 +618,6 @@ msgstr "начать ввод данных для поиска"
 
 msgid "suggestions could not be retrieved"
 msgstr "подсказки не найдены"
-
-msgid "No results found"
-msgstr "Результаты не найдены"
 
 msgid "No items to display"
 msgstr "Нет элементов для отображения"
@@ -659,9 +707,6 @@ msgstr "Создать направление"
 msgid "No available program stages"
 msgstr "Нет доступных этапов программы"
 
-msgid "Program stage not found"
-msgstr "Этап программы не найден"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -741,6 +786,9 @@ msgstr ""
 "При получении регистрационных записей произошла ошибка. Пожалуйста, введите "
 "правильный URL адрес."
 
+msgid "An error has occurred"
+msgstr "Произошла ошибка"
+
 msgid "Page is missing required values from URL"
 msgstr "Страница не содержит необходимых данных в URL адресе"
 
@@ -783,9 +831,6 @@ msgstr "Не удалось загрузить этапы программы"
 msgid "Stage"
 msgstr "Этап"
 
-msgid "Registered events"
-msgstr "Зарегистрированные события"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -823,6 +868,9 @@ msgstr "Или посмотреть все события, доступные в
 msgid "Please select an organisation unit."
 msgstr "Выберите организационную единицу."
 
+msgid "Registered events"
+msgstr "Зарегистрированные события"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -839,9 +887,6 @@ msgstr "Сохранить как нового"
 
 msgid "New"
 msgstr "Новый/ая/ое"
-
-msgid "Create for"
-msgstr "Создать для"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -934,12 +979,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Ошибки"
 
-msgid "Feedback"
-msgstr "Обратная связь"
-
-msgid "Indicators"
-msgstr "Индикаторы"
-
 msgid "Warnings"
 msgstr "Предупреждения"
 
@@ -951,6 +990,18 @@ msgstr "Событие не удалось загрузить"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Организационную единицу не удалось загрузить"
+
+msgid "tracked entity instance"
+msgstr "отслеживаемый объект"
+
+msgid "All accessible"
+msgstr "Все доступные"
+
+msgid "Selected"
+msgstr "Выбранный"
+
+msgid "Organisation unit scope"
+msgstr "Масштаб организационной единицы"
 
 msgid "Selected program"
 msgstr "Выбранная программа"
@@ -974,6 +1025,9 @@ msgstr "Критерии поиска отсутствуют"
 msgid "Back to search"
 msgstr "Назад к поиску"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Не удалось получить метаданные. Повторите попытку позже."
 
@@ -985,6 +1039,15 @@ msgstr "Загрузка"
 
 msgid "An error occurred while loading the form"
 msgstr "Произошла ошибка во время загрузки формы"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты "
@@ -1033,9 +1096,6 @@ msgstr "Выбрать программу"
 
 msgid "Search for {{titleText}}"
 msgstr "Искать {{titleText}}"
-
-msgid "Search for"
-msgstr "Искать"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1099,9 +1159,6 @@ msgid ""
 "looking for."
 msgstr "Вы можете изменить параметры и перезапустить поиск "
 
-msgid "An error has occurred"
-msgstr "Произошла ошибка"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1153,6 +1210,12 @@ msgstr "Создать новое событие"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Искать {{trackedEntityName}} в программе {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "Нет доступных отслеживаемых типов объектов"
@@ -1340,6 +1403,9 @@ msgstr "Добавить координаты"
 msgid "Add area"
 msgstr "Добавить участок"
 
+msgid "Program stage not found"
+msgstr "Этап программы не найден"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 "не удалось загрузить организационную единицу. Повторите попытку позже."
@@ -1393,11 +1459,20 @@ msgstr ""
 "Запланированная дата не может быть изменена для событий со статусом {{ "
 "eventStatus }}."
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "Полигон зафиксирован"
+
+msgid "No polygon captured"
+msgstr "Полигон не зафиксирован"
 
 msgid "Event completed"
 msgstr "Событие завершено"
@@ -1482,6 +1557,12 @@ msgstr "Напишите заметку об этом запланированн
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Обратная связь"
+
+msgid "Indicators"
+msgstr "Индикаторы"
+
 msgid "Save note"
 msgstr "Сохранить заметку"
 
@@ -1494,9 +1575,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "Загрузка..."
 
 msgid "Save changes"
 msgstr "Сохранить изменения"
@@ -1545,17 +1623,20 @@ msgstr "Да, удалить объект {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Не удалось загрузить виджет \"Профиль\". Повторите попытку позже"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "Профиль объекта {{trackedEntityTypeName}}"
-
-msgid "tracked entity instance"
-msgstr "отслеживаемый объект"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "Выберите событие {{linkableStageLabel}}."
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "Выбрать этап {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
@@ -2094,9 +2175,6 @@ msgstr "Скачать в формате CSV"
 msgid "Download with current filters"
 msgstr "Скачать с текущими фильтрами"
 
-msgid "An error has occured. See log for details"
-msgstr "Произошла ошибка. Подробности в лог-файле"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Запланировано{{ escape }} на {{ time }}"
 
@@ -2120,9 +2198,6 @@ msgstr "Программа не найдена"
 
 msgid "Program is not a tracker program"
 msgstr "Программа не является программой для отслеживания объектов"
-
-msgid "Error saving event"
-msgstr "Ошибка при сохранении события"
 
 msgid "Could not save event"
 msgstr "Невозможно сохранить событие"
@@ -2160,20 +2235,8 @@ msgstr "Ошибка редактирования события, внесенн
 msgid "Error updating the Assignee"
 msgstr "Ошибка при обновлении назначенного пользователя"
 
-msgid "Please provide a valid number"
-msgstr "Введите правильное число"
-
-msgid "Please provide a valid integer"
-msgstr "Введите целое число"
-
-msgid "Please provide a positive integer"
-msgstr "Введите положительное целое число"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Введите ноль или положительное целое число"
-
-msgid "Please provide a negative integer"
-msgstr "Введите отрицательное целое число"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Введите правильную дату и время"
@@ -2202,6 +2265,11 @@ msgstr "Данное значение уже существует"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "Значение \"От\" не может быть больше значения \"До\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Проверка..."
 
@@ -2218,7 +2286,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

@@ -3,25 +3,35 @@
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2023
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024
 # Philip Larsen Donnelly, 2025
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2025
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2025
 # Raja Fathurrahim, 2025
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Transifex Bot <>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Raja Fathurrahim, 2025\n"
+"Last-Translator: Transifex Bot <>, 2026\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Pilih satu atau beberapa tanggal..."
@@ -73,7 +83,7 @@ msgid "New event"
 msgstr "Event baru"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Memuat..."
 
 msgid "Event list"
 msgstr ""
@@ -380,6 +390,12 @@ msgstr "Tampilkan {{trackedEntityTypeName}} terdaftar"
 msgid "Registered person"
 msgstr "Orang yang terdaftar"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "validasi gagal"
 
@@ -413,8 +429,8 @@ msgstr "Kesalahan validasi"
 msgid "Validation warnings"
 msgstr "Peringatan validasi"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Beberapa operasi masih berjalan. Mohon tunggu.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Operasi berjalan"
@@ -453,6 +469,18 @@ msgstr "Tidak ada"
 
 msgid "Select user"
 msgstr "Pilih pengguna"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Harap berikan nol atau bilangan bulat positif"
 
 msgid "to"
 msgstr "untuk"
@@ -505,6 +533,24 @@ msgstr "Maksimal"
 msgid "Min"
 msgstr "minimal"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Harap berikan nomor yang valid"
+
+msgid "Please provide a valid integer"
+msgstr "Harap berikan bilangan bulat yang valid"
+
+msgid "Please provide a positive integer"
+msgstr "Berikan bilangan bulat positif positive"
+
+msgid "Please provide a negative integer"
+msgstr "Harap berikan bilangan bulat negatif"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Berisi teks"
 
@@ -541,8 +587,14 @@ msgstr "tidak ditemukan data yang sesuai"
 msgid "Clear"
 msgstr "Hapus"
 
-msgid "No results"
-msgstr "Tidak ada hasil"
+msgid "No results found"
+msgstr "Tidak ada hasil ditemukan"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Deskripsi"
@@ -558,9 +610,6 @@ msgstr "mulai mengetik untuk mencari"
 
 msgid "suggestions could not be retrieved"
 msgstr "saran tidak dapat diambil"
-
-msgid "No results found"
-msgstr "Tidak ada hasil ditemukan"
 
 msgid "No items to display"
 msgstr "Tidak ada item untuk ditampilkan"
@@ -649,9 +698,6 @@ msgstr "Membuat rujukan"
 msgid "No available program stages"
 msgstr "Tidak ada tahapan program yang tersedia"
 
-msgid "Program stage not found"
-msgstr "Tahapan program tidak ditemukan"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -719,6 +765,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "An error has occurred"
+msgstr "Sebuah kesalahan telah terjadi"
+
 msgid "Page is missing required values from URL"
 msgstr "Halaman kehilangan nilai yang diutuhkan dari URL"
 
@@ -761,9 +810,6 @@ msgstr "Tahapan program tidak dapat dimuat"
 msgid "Stage"
 msgstr "Stage"
 
-msgid "Registered events"
-msgstr "Even terdaftar"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -799,6 +845,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "Registered events"
+msgstr "Even terdaftar"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -815,9 +864,6 @@ msgstr "Simpan sebagai baru"
 
 msgid "New"
 msgstr "Baru"
-
-msgid "Create for"
-msgstr "Buat untuk"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -912,12 +958,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Kesalahan"
 
-msgid "Feedback"
-msgstr "Umpan balik"
-
-msgid "Indicators"
-msgstr "Indikator"
-
 msgid "Warnings"
 msgstr "Peringatan"
 
@@ -929,6 +969,18 @@ msgstr "Even tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
+
+msgid "tracked entity instance"
+msgstr "contoh entitas yang dilacak"
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "Terpilih"
+
+msgid "Organisation unit scope"
+msgstr "Cakupan unit organisasi"
 
 msgid "Selected program"
 msgstr "Program yang dipilih"
@@ -949,6 +1001,9 @@ msgstr ""
 msgid "Back to search"
 msgstr "Kembali ke pencarian"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -959,6 +1014,15 @@ msgid "Loading"
 msgstr "Loading"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1008,9 +1072,6 @@ msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Telusuri {{titleText}}"
-
-msgid "Search for"
-msgstr "Cari tentang"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1072,9 +1133,6 @@ msgstr ""
 "Anda dapat mengubah istilah pencarian dan mencari lagi untuk menemukan apa "
 "yang Anda cari."
 
-msgid "An error has occurred"
-msgstr "Sebuah kesalahan telah terjadi"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1122,6 +1180,12 @@ msgstr "Buat event baru"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr ""
@@ -1295,6 +1359,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr "Tahapan program tidak ditemukan"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1343,10 +1410,19 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
+msgstr ""
+
+msgid "Polygon captured"
+msgstr "Poligon ditangkap"
+
+msgid "No polygon captured"
 msgstr ""
 
 msgid "Event completed"
@@ -1418,6 +1494,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Umpan balik"
+
+msgid "Indicators"
+msgstr "Indikator"
+
 msgid "Save note"
 msgstr ""
 
@@ -1430,9 +1512,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "Memuat..."
 
 msgid "Save changes"
 msgstr "Simpan perubahan"
@@ -1476,16 +1555,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"
 
-msgid "{{trackedEntityTypeName}} profile"
+msgid "No attributes configured for {{trackedEntityTypeName}}"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "contoh entitas yang dilacak"
+msgid "No attributes configured"
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} profile"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1981,9 +2063,6 @@ msgstr "Download dalam bentuk CSV"
 msgid "Download with current filters"
 msgstr "Unduh dengan filter saat ini"
 
-msgid "An error has occured. See log for details"
-msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2007,9 +2086,6 @@ msgstr "Program tidak ditemukan"
 
 msgid "Program is not a tracker program"
 msgstr "Program bukan program pelacak"
-
-msgid "Error saving event"
-msgstr "Terjadi kesalahan saat menyimpan even"
 
 msgid "Could not save event"
 msgstr "Tidak dapat menyimpan even"
@@ -2047,20 +2123,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "Harap berikan nomor yang valid"
-
-msgid "Please provide a valid integer"
-msgstr "Harap berikan bilangan bulat yang valid"
-
-msgid "Please provide a positive integer"
-msgstr "Berikan bilangan bulat positif positive"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Harap berikan nol atau bilangan bulat positif"
-
-msgid "Please provide a negative integer"
-msgstr "Harap berikan bilangan bulat negatif"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Harap berikan tanggal dan waktu yang valid"
@@ -2089,6 +2153,11 @@ msgstr "Nilai ini sudah ada"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Dari\" tidak boleh lebih besar dari \"Ke\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Memeriksa..."
 
@@ -2105,7 +2174,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 
