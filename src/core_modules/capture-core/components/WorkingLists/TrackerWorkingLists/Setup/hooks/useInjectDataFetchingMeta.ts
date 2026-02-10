@@ -19,7 +19,7 @@ export const useInjectDataFetchingMetaToLoadList = (
         (selectedTemplate: any, context: any) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
-                    const { id, type, visible, apiViewName, unique } = defaultColumn;
+                    const { id, type, visible, apiViewName, unique, searchOperator } = defaultColumn;
                     const mainProperty = 'mainProperty' in defaultColumn &&
                         defaultColumn.mainProperty &&
                         typeof (defaultColumn as any).mainProperty === 'boolean'
@@ -39,6 +39,7 @@ export const useInjectDataFetchingMetaToLoadList = (
                             additionalColumn,
                             apiViewName,
                             unique,
+                            searchOperator,
                         },
                     ];
                 }),
@@ -71,7 +72,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
         (queryArgs: any) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
-                    const { id, type, visible, unique } = defaultColumn;
+                    const { id, type, visible, unique, searchOperator } = defaultColumn;
                     const mainProperty = 'mainProperty' in defaultColumn &&
                         defaultColumn.mainProperty &&
                         typeof defaultColumn.mainProperty === 'boolean'
@@ -90,6 +91,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
                             mainProperty,
                             additionalColumn,
                             unique,
+                            searchOperator,
                         },
                     ];
                 }),

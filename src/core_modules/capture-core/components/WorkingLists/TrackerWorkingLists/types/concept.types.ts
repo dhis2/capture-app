@@ -36,6 +36,7 @@ export type ColumnConfigBase = {
     filterHidden?: boolean,
     additionalColumn?: boolean,
     unique?: boolean,
+    searchOperator?: string,
     apiViewName?: string,
 };
 export type MetadataColumnConfig = ColumnConfigBase;
@@ -56,6 +57,7 @@ export type TeiColumnMetaForDataFetching = {
     visible: boolean,
     apiViewName?: string,
     additionalColumn?: boolean,
+    searchOperator?: string,
 };
 
 export type TeiColumnsMetaForDataFetching = Map<string, TeiColumnMetaForDataFetching>;

@@ -1,5 +1,7 @@
 export type ApiDataFilterText = {
-    like: string,
+    like?: string,
+    sw?: string,
+    ew?: string,
 };
 
 export type ApiDataFilterTextUnique = {

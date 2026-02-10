@@ -90,7 +90,7 @@ const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
 };
 
 const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
-    attributes.map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique }) => ({
+    attributes.map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique, searchOperator }) => ({
         id,
         visible: displayInReports,
         type,
@@ -99,6 +99,7 @@ const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null |
         multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         filterHidden: !(orgUnitId || searchable || unique),
         unique: Boolean(unique),
+        searchOperator,
     }));
 
 const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> =>
