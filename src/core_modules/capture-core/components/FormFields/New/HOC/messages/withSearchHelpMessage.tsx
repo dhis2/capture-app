@@ -1,17 +1,9 @@
 import * as React from 'react';
-import { colors, spacers } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
-import { searchOperatorHelpTexts } from '../../../../../constants';
+import { searchOperatorHelpTexts, helpTextStyle } from '../../../../../constants';
 
 const styles = () => ({
-    help: {
-        marginTop: spacers.dp4,
-        marginInline: 0,
-        marginBottom: 0,
-        fontSize: 12,
-        lineHeight: '14px',
-        color: colors.grey700,
-    },
+    help: helpTextStyle,
 });
 
 type Props = {

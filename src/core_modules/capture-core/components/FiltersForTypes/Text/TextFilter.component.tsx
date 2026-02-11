@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { colors, spacers } from '@dhis2/ui';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
-import { searchOperatorHelpTexts } from '../../../constants';
+import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
 import type { UpdatableFilterContent } from '../types';
 import type { TextFilterProps, Value } from './Text.types';
 import {
@@ -12,15 +11,6 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
-
-const helpStyle = {
-    marginTop: spacers.dp4,
-    marginInline: 0,
-    marginBottom: 0,
-    fontSize: 12,
-    lineHeight: '14px',
-    color: colors.grey700,
-};
 
 export class TextFilter extends Component<TextFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
@@ -65,7 +55,7 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
                     value={!isEmptyValueFilter(value) ? value : ''}
                     unique={unique}
                 />
-                {helpText && <div style={helpStyle}>{helpText}</div>}
+                {helpText && <div style={helpTextStyle}>{helpText}</div>}
             </>
         );
     }
