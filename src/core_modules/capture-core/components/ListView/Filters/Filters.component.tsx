@@ -150,7 +150,7 @@ const addAdditionalFiltersElements = (
     const mainButtonAdditionalFilters = additionalFilters && additionalFilters.find(filter => filter.mainButton);
     if (mainButtonAdditionalFilters) {
         const addToRemainingElements =
-        !filtersWithValueOnInit[mainButtonAdditionalFilters.id] && !userSelectedFilters[mainButtonAdditionalFilters.id];
+            !filtersWithValueOnInit[mainButtonAdditionalFilters.id] && !userSelectedFilters[mainButtonAdditionalFilters.id];
 
         if (addToRemainingElements) {
             const remainingElements =
@@ -220,32 +220,44 @@ const renderIndividualFilterButtons = ({
     onRemoveFilter: RemoveFilter;
     classes: any;
 }) => [...(filtersOnly || []), ...individualElementsArray]
-    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton, unique, searchOperator }: any) => (
-        <div
-            key={id}
-            data-test={`filter-button-container-${id}`}
-            className={classes.filterButtonContainer}
-        >
-            <FilterButton
-                data-test={`filter-button-${id}`}
-                itemId={id}
-                type={type}
-                title={header}
-                options={options}
-                disabled={disabled}
-                tooltipContent={tooltipContent}
-                multiValueFilter={multiValueFilter}
-                unique={unique}
-                searchOperator={searchOperator}
-                onSetVisibleSelector={onSetVisibleSelector}
-                selectorVisible={id === visibleSelectorId}
-                onUpdateFilter={onUpdateFilter}
-                onClearFilter={onClearFilter}
-                isRemovable={mainButton}
-                onRemoveFilter={onRemoveFilter}
-            />
-        </div>
-    ),
+    .map(
+        ({
+            id,
+            type,
+            header,
+            options,
+            multiValueFilter,
+            disabled,
+            tooltipContent,
+            mainButton,
+            unique,
+            searchOperator,
+        }: any) => (
+            <div
+                key={id}
+                data-test={`filter-button-container-${id}`}
+                className={classes.filterButtonContainer}
+            >
+                <FilterButton
+                    data-test={`filter-button-${id}`}
+                    itemId={id}
+                    type={type}
+                    title={header}
+                    options={options}
+                    disabled={disabled}
+                    tooltipContent={tooltipContent}
+                    multiValueFilter={multiValueFilter}
+                    unique={unique}
+                    searchOperator={searchOperator}
+                    onSetVisibleSelector={onSetVisibleSelector}
+                    selectorVisible={id === visibleSelectorId}
+                    onUpdateFilter={onUpdateFilter}
+                    onClearFilter={onClearFilter}
+                    isRemovable={mainButton}
+                    onRemoveFilter={onRemoveFilter}
+                />
+            </div>
+        ),
     );
 
 const renderRestButton = (
@@ -301,10 +313,10 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
             splitBasedOnHasValueOnInit(validElementConfigs, filtersWithValueOnInit);
 
         const { fillUpElements, remainingElements: remainingElementsAfterFillUp } =
-        fillUpIndividualElements(
-            remainingElementsAfterInitSplit,
-            initValueElements.size + defaultFiltersOnlyCount,
-        );
+            fillUpIndividualElements(
+                remainingElementsAfterInitSplit,
+                initValueElements.size + defaultFiltersOnlyCount,
+            );
 
         const { remainingElements: remainingElementsWithShowInMoreFilters } = addShowInMoreFilters(
             remainingElementsAfterFillUp,
@@ -318,7 +330,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
                 remainingElementsWithShowInMoreFilters, additionalFilters, filtersWithValueOnInit, userSelectedFilters);
 
         const { userSelectedElements, remainingElements } =
-        getUserSelectedElements(remainingElementsWithAdditionalFilters, userSelectedFilters);
+            getUserSelectedElements(remainingElementsWithAdditionalFilters, userSelectedFilters);
 
         const individualElementsArray =
             getIndividualElementsArray(
