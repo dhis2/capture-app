@@ -220,7 +220,7 @@ const renderIndividualFilterButtons = ({
     onRemoveFilter: RemoveFilter;
     classes: any;
 }) => [...(filtersOnly || []), ...individualElementsArray]
-    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton, unique }: any) => (
+    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton, unique, searchOperator }: any) => (
         <div
             key={id}
             data-test={`filter-button-container-${id}`}
@@ -236,6 +236,7 @@ const renderIndividualFilterButtons = ({
                 tooltipContent={tooltipContent}
                 multiValueFilter={multiValueFilter}
                 unique={unique}
+                searchOperator={searchOperator}
                 onSetVisibleSelector={onSetVisibleSelector}
                 selectorVisible={id === visibleSelectorId}
                 onUpdateFilter={onUpdateFilter}

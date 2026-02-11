@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
-"PO-Revision-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-11T16:12:39.958Z\n"
+"PO-Revision-Date: 2026-02-11T16:12:39.958Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -543,6 +543,12 @@ msgstr "Exact matches only"
 msgid "Contains text"
 msgstr "Contains text"
 
+msgid "Must match the start of the value"
+msgstr "Must match the start of the value"
+
+msgid "Must match the end of the value"
+msgstr "Must match the end of the value"
+
 msgid "Yes"
 msgstr "Yes"
 
@@ -578,12 +584,6 @@ msgstr "Clear"
 
 msgid "No results found"
 msgstr "No results found"
-
-msgid "Must match the start of the value"
-msgstr "Must match the start of the value"
-
-msgid "Must match the end of the value"
-msgstr "Must match the end of the value"
 
 msgid "Description"
 msgstr "Description"
