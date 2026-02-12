@@ -44,14 +44,14 @@ const getStyles = (theme: any) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
         maxWidth: theme.typography.pxToRem(600),
     },
     topSection: {
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
-        marginRight: 0,
+        marginInlineEnd: 0,
         backgroundColor: theme.palette.grey.lighter,
         maxWidth: theme.typography.pxToRem(600),
     },

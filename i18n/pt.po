@@ -4,30 +4,39 @@
 # Philip Larsen Donnelly, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
-# Helton Dias, 2025
 # David Mondlane, 2025
 # Nancy Espinoza, 2025
 # Andres Miguel Rubio, 2025
-# Ge Joao <gsimango@saudigitus.org>, 2025
 # Laurência Luís, 2025
 # Shelsea Chumaio, 2025
 # Sheila André <sandre@saudigitus.org>, 2025
-# David Júnior <davidjr.mondlane@gmail.com>, 2025
+# Ge Joao <gsimango@saudigitus.org>, 2026
+# Helton Dias, 2026
+# David Júnior <davidjr.mondlane@gmail.com>, 2026
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: David Júnior <davidjr.mondlane@gmail.com>, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Escolha uma ou mais datas ..."
@@ -79,7 +88,7 @@ msgid "New event"
 msgstr "Novo evento"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Carregando..."
 
 msgid "Event list"
 msgstr "Lista de eventos"
@@ -390,6 +399,12 @@ msgstr "Mostrar {{trackedEntityTypeName}} registrado"
 msgid "Registered person"
 msgstr "Pessoa registrada"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "falha na validação"
 
@@ -423,8 +438,8 @@ msgstr "Erros de validação"
 msgid "Validation warnings"
 msgstr "Alertas de validação"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Algumas operações ainda estão em execução. Por favor, espere.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Operações em execução"
@@ -466,6 +481,18 @@ msgstr "Nenhum"
 
 msgid "Select user"
 msgstr "Selecione o usuário"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Forneça zero ou um número inteiro positivo"
 
 msgid "to"
 msgstr "para"
@@ -518,6 +545,24 @@ msgstr "Máx"
 msgid "Min"
 msgstr "Min"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Por favor, forneça um número válido"
+
+msgid "Please provide a valid integer"
+msgstr "Forneça um número inteiro válido"
+
+msgid "Please provide a positive integer"
+msgstr "Forneça um número inteiro positivo"
+
+msgid "Please provide a negative integer"
+msgstr "Forneça um número inteiro negativo"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Contém texto"
 
@@ -554,8 +599,14 @@ msgstr "Nenhuma correspondência encontrada"
 msgid "Clear"
 msgstr "Limpar"
 
-msgid "No results"
-msgstr "Sem resultados"
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Descrição"
@@ -571,9 +622,6 @@ msgstr "comece a digitar para pesquisar"
 
 msgid "suggestions could not be retrieved"
 msgstr "sugestões não puderam ser recuperadas"
-
-msgid "No results found"
-msgstr "Nenhum resultado encontrado"
 
 msgid "No items to display"
 msgstr "Nenhum item para exibir"
@@ -663,9 +711,6 @@ msgstr "Referir"
 msgid "No available program stages"
 msgstr "Não há etapas do programa disponíveis"
 
-msgid "Program stage not found"
-msgstr "Estágio do programa não encontrado"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -738,6 +783,9 @@ msgid ""
 msgstr ""
 "Ocorreu um erro ao buscar as inscrições. Por favor, insira um URL válido."
 
+msgid "An error has occurred"
+msgstr "Ocorreu um erro"
+
 msgid "Page is missing required values from URL"
 msgstr "A página tem em falta os valores obrigatórios do URL"
 
@@ -780,9 +828,6 @@ msgstr "Não foi possível carregar as fases do programa"
 msgid "Stage"
 msgstr "Estagio"
 
-msgid "Registered events"
-msgstr "Eventos registrados"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -818,6 +863,9 @@ msgstr "Ou veja todos os eventos acessíveis a você no {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Selecione uma unidade organizacional."
 
+msgid "Registered events"
+msgstr "Eventos registrados"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -835,9 +883,6 @@ msgstr "Gravar como novo"
 
 msgid "New"
 msgstr "Novo"
-
-msgid "Create for"
-msgstr "Criar para"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -933,12 +978,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Erros"
 
-msgid "Feedback"
-msgstr "Comentários"
-
-msgid "Indicators"
-msgstr "Indicadores"
-
 msgid "Warnings"
 msgstr "Avisos"
 
@@ -950,6 +989,18 @@ msgstr "O evento não pôde ser carregado"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Não foi possível carregar a unidade organizacional"
+
+msgid "tracked entity instance"
+msgstr "instância de entidade rastreada"
+
+msgid "All accessible"
+msgstr "Todos acessíveis"
+
+msgid "Selected"
+msgstr "Selecionado"
+
+msgid "Organisation unit scope"
+msgstr "Escopo da unidade organizacional"
 
 msgid "Selected program"
 msgstr "Programa selecionado"
@@ -972,6 +1023,9 @@ msgstr "Critérios de pesquisa ausentes"
 msgid "Back to search"
 msgstr "Voltar para pesquisar"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 "Não foi possível extrair os metadados. Por favor, tente novamente mais "
@@ -985,6 +1039,15 @@ msgstr "A carregar.."
 
 msgid "An error occurred while loading the form"
 msgstr "Ocorreu um erro ao carregar o formulário"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
@@ -1034,9 +1097,6 @@ msgstr "Escolha um programa"
 
 msgid "Search for {{titleText}}"
 msgstr "Pesquise por {{titleText}}"
-
-msgid "Search for"
-msgstr "Procurar"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1101,9 +1161,6 @@ msgstr ""
 "Você pode alterar seus termos de pesquisa e pesquisar novamente para "
 "encontrar o que está procurando."
 
-msgid "An error has occurred"
-msgstr "Ocorreu um erro"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1154,6 +1211,12 @@ msgstr "Criar um novo evento"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "Não há tipos de entidades rastreadas disponíveis"
@@ -1339,6 +1402,9 @@ msgstr "Adicionar coordenadas"
 msgid "Add area"
 msgstr "Adicionar área"
 
+msgid "Program stage not found"
+msgstr "Estágio do programa não encontrado"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 "unidade de organização não pôde ser recuperada. Por favor, tente novamente "
@@ -1389,11 +1455,20 @@ msgstr "Vá para pagina “Agendar” para reagendar este evento"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "A data agendada não pode ser alterada para eventos {{ eventStatus }}"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "Polígono capturado"
+
+msgid "No polygon captured"
+msgstr "Nenhum polígono capturado"
 
 msgid "Event completed"
 msgstr "Evento concluído"
@@ -1471,6 +1546,12 @@ msgstr "Escrever uma nota sobre este evento programado"
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Comentários"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
 msgid "Save note"
 msgstr "Gravar notas"
 
@@ -1483,9 +1564,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "Carregando..."
 
 msgid "Save changes"
 msgstr "Gravar alterações"
@@ -1536,17 +1614,20 @@ msgstr ""
 "O widget de perfil não pôde ser carregado. Por favor, tente novamente mais "
 "tarde"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} perfil"
-
-msgid "tracked entity instance"
-msgstr "instância de entidade rastreada"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "Escolha um {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
@@ -2084,9 +2165,6 @@ msgstr "Baixar como CSV"
 msgid "Download with current filters"
 msgstr "Baixar com filtros atuais"
 
-msgid "An error has occured. See log for details"
-msgstr "Ocorreu um erro. Veja o log para detalhes"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Programado para {{ escape }} com prazo para {{ time }}"
 
@@ -2110,9 +2188,6 @@ msgstr "Programa não encontrado"
 
 msgid "Program is not a tracker program"
 msgstr "O programa não é um programa rastreador"
-
-msgid "Error saving event"
-msgstr "Erro ao salvar evento"
 
 msgid "Could not save event"
 msgstr "Não foi possível salvar o evento"
@@ -2150,20 +2225,8 @@ msgstr "Erro ao editar o evento, as alterações feitas não foram gravadas"
 msgid "Error updating the Assignee"
 msgstr "Erro ao atualizar o destinatário"
 
-msgid "Please provide a valid number"
-msgstr "Por favor, forneça um número válido"
-
-msgid "Please provide a valid integer"
-msgstr "Forneça um número inteiro válido"
-
-msgid "Please provide a positive integer"
-msgstr "Forneça um número inteiro positivo"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Forneça zero ou um número inteiro positivo"
-
-msgid "Please provide a negative integer"
-msgstr "Forneça um número inteiro negativo"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Forneça uma data e hora válidas"
@@ -2192,6 +2255,11 @@ msgstr "Este valor já existe"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"De\" não pode ser maior que \"Para\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Verificando ..."
 
@@ -2208,7 +2276,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

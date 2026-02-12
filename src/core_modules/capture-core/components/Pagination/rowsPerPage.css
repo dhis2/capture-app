@@ -7,12 +7,7 @@
 }
 
 #rows-per-page-selector .Select-value {
-    padding-left: 7px!important;
-}
-
-
-#rows-per-page-selector .virtualized-select-option {
-    padding-top: 10px!important;
+    padding-inline-start: 7px!important;
 }
 
 #rows-per-page-selector .Select-arrow-zone {

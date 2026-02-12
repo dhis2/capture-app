@@ -1,12 +1,6 @@
 import * as React from 'react';
+import { SimpleSingleSelect } from '@dhis2/ui';
 import './rowsPerPage.css';
-
-import { OptionsSelectVirtualized } from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import { withTranslations } from '../FormFields/Options/SelectVirtualized/withTranslations';
-import type { VirtualizedOptionConfig } from
-    '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-
-const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized);
 
 type Props = {
     rowsPerPage: number;
@@ -14,44 +8,40 @@ type Props = {
     disabled?: boolean;
 };
 
+type SimpleSelectOption = {
+    label: string;
+    value: string;
+};
+
+const OPTIONS: SimpleSelectOption[] = [10, 15, 25, 50, 100].map(count => ({
+    label: count.toString(),
+    value: count.toString(),
+}));
+
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
     class RowsPerPageSelector extends React.Component<Props> {
-        static getOptions(): Array<VirtualizedOptionConfig> {
-            const options =
-                [10, 15, 25, 50, 100]
-                    .map(optionCount => ({
-                        label: optionCount.toString(),
-                        value: optionCount,
-                    }));
-            return options;
-        }
-
-        options: Array<VirtualizedOptionConfig>;
-
-        constructor(props: Props) {
-            super(props);
-            this.options = RowsPerPageSelector.getOptions();
-        }
-
-        handleRowsSelect = (rowsPerPage: number) => {
-            this.props.onChangeRowsPerPage(rowsPerPage);
+        handleRowsSelect = (nextValue: any) => {
+            const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
+            if (resolvedValue) {
+                this.props.onChangeRowsPerPage(Number(resolvedValue));
+            }
         }
 
         renderSelectorElement = () => {
             const { rowsPerPage, disabled } = this.props;
+            const selectedOption = OPTIONS.find(option => option.value === rowsPerPage.toString());
 
             return (
-                <div id="rows-per-page-selector" data-test="rows-per-page-selector">
-                    <OptionsSelectWithTranslations
-                        onSelect={this.handleRowsSelect}
-                        options={this.options}
-                        value={rowsPerPage}
-                        nullable={false}
-                        disabled={disabled}
-                        withoutUnderline
-                        searchable={false}
-                    />
-                </div>
+                <SimpleSingleSelect
+                    name="rows-per-page-selector"
+                    onChange={this.handleRowsSelect}
+                    options={OPTIONS}
+                    selected={selectedOption}
+                    clearable={false}
+                    dense
+                    disabled={disabled}
+                    dataTest="rows-per-page-selector"
+                />
             );
         }
 

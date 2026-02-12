@@ -2,9 +2,10 @@
  * @namespace Pagination
  */
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
-import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
+import { isLangRtl, DirectionalChevron } from '../../utils/rtl';
 
 
 const styles = (theme: any) => ({
@@ -73,7 +74,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         };
 
         renderNavigationElement() {
-            const { currentPage, disabled, classes, theme, nextPageButtonDisabled } = this.props;
+            const { currentPage, disabled, classes, nextPageButtonDisabled } = this.props;
 
             return (
                 <div
@@ -83,25 +84,25 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         dataTest={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
                         disabled={disabled || currentPage <= 1}
-                        aria-label="First Page"
+                        aria-label={i18n.t('First Page')}
                     >
-                        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+                        {isLangRtl() ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
                     <IconButton
                         dataTest={'search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
                         disabled={disabled || currentPage <= 1}
-                        aria-label="Previous Page"
+                        aria-label={i18n.t('Previous Page')}
                     >
-                        {theme.direction === 'rtl' ? <IconChevronRight24 /> : <IconChevronLeft24 />}
+                        <DirectionalChevron size={24} direction="back" />
                     </IconButton>
                     <IconButton
                         dataTest={'search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
                         disabled={disabled || nextPageButtonDisabled}
-                        aria-label="Next Page"
+                        aria-label={i18n.t('Next Page')}
                     >
-                        {theme.direction === 'rtl' ? <IconChevronLeft24 /> : <IconChevronRight24 />}
+                        <DirectionalChevron size={24} />
                     </IconButton>
                 </div>
             );

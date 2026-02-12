@@ -1,7 +1,8 @@
 import React, { ComponentType, useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { colors, IconChevronRight16 } from '@dhis2/ui';
+import { colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { DirectionalChevron } from '../../../utils/rtl';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
@@ -100,7 +101,7 @@ const EventBreadcrumbPlain = ({
                         dataTest={`event-breadcrumb-${button.key}-item`}
                     />
                     {index < (breadcrumbItems.length - 1) && (
-                        <IconChevronRight16 color={colors.grey800} />
+                        <DirectionalChevron color={colors.grey800} />
                     )}
                 </React.Fragment>
             ))}

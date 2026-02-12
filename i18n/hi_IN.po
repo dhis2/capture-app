@@ -1,20 +1,29 @@
 # 
 # Translators:
 # Siddharth Agarwal, 2025
-# Rohit Wadhwani, 2025
+# Rohit Wadhwani, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-12-11T07:56:27.475Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Rohit Wadhwani, 2025\n"
+"Last-Translator: Rohit Wadhwani, 2026\n"
 "Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hi_IN\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -363,6 +372,12 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr ""
 
@@ -396,7 +411,7 @@ msgstr ""
 msgid "Validation warnings"
 msgstr ""
 
-msgid "Some operations are still runnning. Please wait.."
+msgid "Some operations are still running. Please wait."
 msgstr ""
 
 msgid "Operations running"
@@ -437,6 +452,18 @@ msgstr "कोई नहीं"
 msgid "Select user"
 msgstr ""
 
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
 msgid "to"
 msgstr "तक"
 
@@ -453,7 +480,7 @@ msgid "To"
 msgstr ""
 
 msgid "This week"
-msgstr ""
+msgstr "इस सप्ताह"
 
 msgid "This month"
 msgstr "इस महीने"
@@ -462,7 +489,7 @@ msgid "This Year"
 msgstr "इस वर्ष"
 
 msgid "Last week"
-msgstr ""
+msgstr "पिछला सप्ताह"
 
 msgid "Last month"
 msgstr "पिछला महीना"
@@ -483,9 +510,24 @@ msgid "Is not empty"
 msgstr "खाली नहीं है"
 
 msgid "Max"
-msgstr ""
+msgstr "अधिकतम"
 
 msgid "Min"
+msgstr "न्यूनतम"
+
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "कृपया एक मान्य संख्या दर्ज करें"
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
 msgstr ""
 
 msgid "Exact matches only"
@@ -527,11 +569,17 @@ msgstr ""
 msgid "Clear"
 msgstr "साफ़ करें"
 
-msgid "No results"
-msgstr "कोई परिणाम नहीं"
+msgid "No results found"
+msgstr "कोई परिणाम नहीं मिला"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
-msgstr ""
+msgstr "विवरण"
 
 msgid "URL"
 msgstr ""
@@ -544,9 +592,6 @@ msgstr "खोजने के लिए टाइप करना शुरू 
 
 msgid "suggestions could not be retrieved"
 msgstr ""
-
-msgid "No results found"
-msgstr "कोई परिणाम नहीं मिला"
 
 msgid "No items to display"
 msgstr ""
@@ -635,9 +680,6 @@ msgstr "रेफरल करें"
 msgid "No available program stages"
 msgstr "कोई उपलब्ध प्रोग्राम स्टेज नहीं है"
 
-msgid "Program stage not found"
-msgstr "प्रोग्राम स्टेज नहीं मिला"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -699,6 +741,9 @@ msgstr ""
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
+
+msgid "An error has occurred"
+msgstr "एक एरर हुई है"
 
 msgid "Page is missing required values from URL"
 msgstr ""
@@ -797,9 +842,6 @@ msgstr "नए के रूप में सेव करें"
 msgid "New"
 msgstr "नया"
 
-msgid "Create for"
-msgstr "के लिए बनाएँ"
-
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
@@ -890,12 +932,6 @@ msgstr ""
 msgid "Errors"
 msgstr "एरर्स"
 
-msgid "Feedback"
-msgstr ""
-
-msgid "Indicators"
-msgstr ""
-
 msgid "Warnings"
 msgstr ""
 
@@ -910,6 +946,15 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "ट्रैक्ड एंटिटी इंस्टेंस"
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr ""
@@ -931,6 +976,9 @@ msgstr "खोज मानदंड गायब हैं"
 msgid "Back to search"
 msgstr "खोज पर वापस जाएँ"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "मेटाडेटा प्राप्त नहीं किया जा सका। कृपया बाद में प्रयास करें।"
 
@@ -942,6 +990,15 @@ msgstr "लोड हो रहा है"
 
 msgid "An error occurred while loading the form"
 msgstr "फ़ॉर्म लोड करते समय एक एरर हुई"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "संभावित डुप्लिकेट मिले"
@@ -990,9 +1047,6 @@ msgstr "एक प्रोग्राम चुनें"
 
 msgid "Search for {{titleText}}"
 msgstr ""
-
-msgid "Search for"
-msgstr "खोजें:"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1054,9 +1108,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "An error has occurred"
-msgstr "एक एरर हुई है"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1103,6 +1154,12 @@ msgid "Create new event"
 msgstr "नया इवेंट बनाएँ"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
 msgstr ""
 
 msgid "No tracked entity types available"
@@ -1277,6 +1334,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr "प्रोग्राम स्टेज नहीं मिला"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1325,10 +1385,19 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
+msgstr ""
+
+msgid "Polygon captured"
+msgstr ""
+
+msgid "No polygon captured"
 msgstr ""
 
 msgid "Event completed"
@@ -1402,6 +1471,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
 msgid "Save note"
 msgstr ""
 
@@ -1413,9 +1488,6 @@ msgstr ""
 
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
@@ -1460,13 +1532,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1626,7 +1704,7 @@ msgid "Updated"
 msgstr ""
 
 msgid "Created"
-msgstr ""
+msgstr "बनाया गया"
 
 msgid "Deleted"
 msgstr ""
@@ -1656,7 +1734,7 @@ msgid "File"
 msgstr ""
 
 msgid "Image"
-msgstr ""
+msgstr "इमेज"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1972,9 +2050,6 @@ msgstr ""
 msgid "Download with current filters"
 msgstr ""
 
-msgid "An error has occured. See log for details"
-msgstr ""
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -1998,9 +2073,6 @@ msgstr "प्रोग्राम नहीं मिला"
 
 msgid "Program is not a tracker program"
 msgstr "प्रोग्राम एक ट्रैकर प्रोग्राम नहीं है"
-
-msgid "Error saving event"
-msgstr "इवेंट सेव नहीं किया जा सका"
 
 msgid "Could not save event"
 msgstr "इवेंट सेव नहीं किया जा सका"
@@ -2038,19 +2110,7 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "कृपया एक मान्य संख्या दर्ज करें"
-
-msgid "Please provide a valid integer"
-msgstr ""
-
-msgid "Please provide a positive integer"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "Please provide a negative integer"
+msgid "There was an error fetching metadata"
 msgstr ""
 
 msgid "Please provide a valid date and time"

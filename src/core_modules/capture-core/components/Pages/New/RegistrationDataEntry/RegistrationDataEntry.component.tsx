@@ -36,8 +36,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         marginTop: typography.pxToRem(16),
     },
     registrationContainer: {
-        marginLeft: typography.pxToRem(8),
-        marginRight: typography.pxToRem(8),
+        marginInline: typography.pxToRem(8),
     },
     marginBottom: {
         marginBottom: spacers.dp16,
@@ -78,7 +77,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
         </Button>
         {
             onSave &&
-            <div style={{ marginLeft: 8 }}>
+            <div style={{ marginInlineStart: 8 }}>
                 <Button
                     dataTest="create-as-new-person"
                     onClick={onSave}
@@ -188,7 +187,6 @@ const RegistrationDataEntryPlain = ({
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
                             onSelect={handleRegistrationScopeSelection}
-                            headerText={i18n.t('Create for')}
                             footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
                             accessNeeded="write"
                         />
@@ -256,7 +254,6 @@ const RegistrationDataEntryPlain = ({
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
                             onSelect={handleRegistrationScopeSelection}
-                            headerText={i18n.t('Create for')}
                             footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
                             accessNeeded="write"
                         />

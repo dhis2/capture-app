@@ -3,6 +3,7 @@ import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
+import { isLangRtl } from '../../../../../utils/rtl';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
@@ -33,7 +34,7 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     orientations,
-    VirtualizedSelectField,
+    SingleSelectField,
     SingleOrgUnitSelectField,
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
@@ -65,7 +66,7 @@ const getStyles: any = (theme: any) => ({
         fontSize: theme.typography.pxToRem(13),
     },
     savingContextText: {
-        paddingLeft: theme.typography.pxToRem(10),
+        paddingInlineStart: theme.typography.pxToRem(10),
     },
     savingContextNames: {
         fontWeight: 'bold',
@@ -139,7 +140,13 @@ const createComponentProps = (props: any, componentProps: any) => ({
 const getOrientation = (formHorizontal: boolean | null) =>
     (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
-const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+    return isLangRtl() ? 'right' : 'left';
+};
+
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -350,7 +357,7 @@ const buildCategoryOptionsFieldSettingsFn = () => {
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                withFilterProps(defaultFilterProps)(SingleSelectField),
                             ),
                         ),
                     ),

@@ -37,11 +37,11 @@ const styles: Readonly<any> = theme => ({
     },
     innerContainer: {
         padding: theme.typography.pxToRem(2),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInlineEnd: theme.typography.pxToRem(10),
     },
     horizontalSelectedFileTextContainer: {
         padding: theme.typography.pxToRem(2),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInlineEnd: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
         flexWrap: 'wrap',
@@ -49,7 +49,7 @@ const styles: Readonly<any> = theme => ({
     },
     verticalSelectedFileTextContainer: {
         padding: theme.typography.pxToRem(2),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInlineEnd: theme.typography.pxToRem(10),
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
@@ -65,7 +65,7 @@ const styles: Readonly<any> = theme => ({
         display: 'none',
     },
     horizontalLink: {
-        paddingRight: theme.typography.pxToRem(5),
+        paddingInlineEnd: theme.typography.pxToRem(5),
     },
 });
 

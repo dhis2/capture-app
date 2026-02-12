@@ -1,9 +1,10 @@
 import React, { type ComponentType } from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
+import { DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryIdle.types';
 import { Widget } from '../../Widget';
+import { DirectionalChevron } from '../../../utils/rtl';
 
 const styles: Readonly<any> = {
     container: {
@@ -20,14 +21,14 @@ const styles: Readonly<any> = {
         padding: 0,
         font: 'inherit',
         fontWeight: 'bold',
-        textAlign: 'left',
+        textAlign: 'start',
         '&:hover': {
             cursor: 'pointer',
             textDecoration: 'underline',
         },
     },
     configChevronCell: {
-        textAlign: 'right',
+        textAlign: 'end',
     },
 };
 
@@ -58,7 +59,7 @@ const BulkDataEntryIdleComponenetPlain = ({
                             </DataTableCell>
                             <DataTableCell>
                                 <div className={classes.configChevronCell}>
-                                    <IconChevronRight16 />
+                                    <DirectionalChevron />
                                 </div>
                             </DataTableCell>
                         </DataTableRow>

@@ -17,8 +17,8 @@ const getStyles = (theme: any) => ({
         borderRadius: theme.typography.pxToRem(4),
         padding: 5,
     },
-    marginLeft: {
-        marginLeft: 8,
+    button: {
+        marginInlineStart: 8,
     },
 });
 
@@ -116,7 +116,7 @@ class ErrorAndWarningDialogPlain extends React.Component<Props & WithStyles<type
                         onClick={onSave}
                         primary
                         initialFocus
-                        className={classes.marginLeft}
+                        className={classes.button}
                     >
                         {i18n.t('Save anyway')}
                     </Button>) : null

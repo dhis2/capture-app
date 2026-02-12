@@ -2,20 +2,29 @@
 # Translators:
 # Sharaf Yuldashev, 2024
 # Philip Larsen Donnelly, 2025
-# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
+# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025\n"
+"Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2026\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uz@Cyrl\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Бир ёки бир неча саналарни танланг..."
@@ -379,6 +388,12 @@ msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрса�
 msgid "Registered person"
 msgstr "Рўйхатдан ўтган шахс"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
 
@@ -412,8 +427,8 @@ msgstr "Тасдиқлашда хатоликлар"
 msgid "Validation warnings"
 msgstr "Тасдиқлаш тўғрисида огоҳлантиришлар"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Баъзи операциялар ҳали ҳам бажарилмоқда. Илтимос, кутинг ..."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Амалиётлар бажарилмоқда"
@@ -452,6 +467,18 @@ msgstr "Йўқ"
 
 msgid "Select user"
 msgstr "Фойдаланувчини танланг"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
 
 msgid "to"
 msgstr "га"
@@ -504,6 +531,24 @@ msgstr "Максимум"
 msgid "Min"
 msgstr "Минимум"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Илтимос, тўғри рақамни кўрсатинг"
+
+msgid "Please provide a valid integer"
+msgstr "Илтимос, тўғри бутун сонни кўрсатинг"
+
+msgid "Please provide a positive integer"
+msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
+
+msgid "Please provide a negative integer"
+msgstr "Илтимос, бутун манфий сонни кўрсатинг"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Матнни ўз ичига олади"
 
@@ -540,8 +585,14 @@ msgstr "Ҳеч нима топилмади"
 msgid "Clear"
 msgstr "Тозалаш"
 
-msgid "No results"
-msgstr "Натижа йўқ"
+msgid "No results found"
+msgstr "Ҳеч қандай натижа топилмади"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Тавсиф"
@@ -557,9 +608,6 @@ msgstr "қидириш учун ёзишни бошланг"
 
 msgid "suggestions could not be retrieved"
 msgstr "таклифлар қабул қилинмади"
-
-msgid "No results found"
-msgstr "Ҳеч қандай натижа топилмади"
 
 msgid "No items to display"
 msgstr "Кўрсатиладиган ахборот йўқ"
@@ -648,9 +696,6 @@ msgstr "Йўналиш яратинг"
 msgid "No available program stages"
 msgstr "Дастур босқичлари мавжуд эмас"
 
-msgid "Program stage not found"
-msgstr "Дастур босқичлари топилмади"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -720,6 +765,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "An error has occurred"
+msgstr "Хатолик юз берди"
+
 msgid "Page is missing required values from URL"
 msgstr "URL саҳифасида керакли қийматлар йўқ"
 
@@ -762,9 +810,6 @@ msgstr ""
 msgid "Stage"
 msgstr "Босқич"
 
-msgid "Registered events"
-msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -800,6 +845,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "Registered events"
+msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -816,9 +864,6 @@ msgstr "Янги сифатида сақлаш"
 
 msgid "New"
 msgstr "Янги"
-
-msgid "Create for"
-msgstr "Учун яратиш"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -914,12 +959,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Хатоликлар"
 
-msgid "Feedback"
-msgstr "Қайта алоқа"
-
-msgid "Indicators"
-msgstr "Индикаторлар"
-
 msgid "Warnings"
 msgstr "Огоҳлантиришлар"
 
@@ -931,6 +970,18 @@ msgstr "Ҳодиса/тадбирни юклаб бўлмади"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
+
+msgid "tracked entity instance"
+msgstr "кузатилаётган объект намунаси"
+
+msgid "All accessible"
+msgstr "Барчага кириш мумкин"
+
+msgid "Selected"
+msgstr "Танланган"
+
+msgid "Organisation unit scope"
+msgstr "Ташкилий бўлим ҳуқуқ ва бурчлари"
 
 msgid "Selected program"
 msgstr "Танланган дастур"
@@ -951,6 +1002,9 @@ msgstr ""
 msgid "Back to search"
 msgstr "Қидирувга қайтиш"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -961,6 +1015,15 @@ msgid "Loading"
 msgstr "Юкланмоқда"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1010,9 +1073,6 @@ msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr " {{titleText}} орқали қидириш"
-
-msgid "Search for"
-msgstr "Қидириш"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1074,9 +1134,6 @@ msgstr ""
 "Қидирув сўзларини ўзгартириб, қидирилаётган ахборотни қайта қидирувга "
 "топширишингиз мумкин."
 
-msgid "An error has occurred"
-msgstr "Хатолик юз берди"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1124,6 +1181,12 @@ msgstr "Янги тадбир яратинг"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "Кузатилаётган объект(муассаса) турлари мавжуд эмас"
@@ -1298,6 +1361,9 @@ msgstr "Координаталар ни киритиш"
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr "Дастур босқичлари топилмади"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1346,11 +1412,20 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "Полигон белгиланди"
+
+msgid "No polygon captured"
+msgstr "Кўпбурчак ушланмади"
 
 msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
@@ -1421,6 +1496,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Қайта алоқа"
+
+msgid "Indicators"
+msgstr "Индикаторлар"
+
 msgid "Save note"
 msgstr "Изоҳни сақлаш"
 
@@ -1432,9 +1513,6 @@ msgstr ""
 
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
@@ -1480,16 +1558,19 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "Профила виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
-msgid "{{trackedEntityTypeName}} profile"
+msgid "No attributes configured for {{trackedEntityTypeName}}"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr "кузатилаётган объект намунаси"
+msgid "No attributes configured"
+msgstr ""
+
+msgid "{{trackedEntityTypeName}} profile"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1985,9 +2066,6 @@ msgstr "CSV сифатида юкланг"
 msgid "Download with current filters"
 msgstr "Жорий фильтрлар асосида юклаш"
 
-msgid "An error has occured. See log for details"
-msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2011,9 +2089,6 @@ msgstr "Дастур топилмади"
 
 msgid "Program is not a tracker program"
 msgstr "Дастур кузатув дастури эмас"
-
-msgid "Error saving event"
-msgstr "Ҳодиса/тадбирни сақлашда хато"
 
 msgid "Could not save event"
 msgstr "Ҳодиса/тадбирни сақлаб бўлмади"
@@ -2051,20 +2126,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "Илтимос, тўғри рақамни кўрсатинг"
-
-msgid "Please provide a valid integer"
-msgstr "Илтимос, тўғри бутун сонни кўрсатинг"
-
-msgid "Please provide a positive integer"
-msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
-
-msgid "Please provide a negative integer"
-msgstr "Илтимос, бутун манфий сонни кўрсатинг"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Илтимос, тегишли сана ва вақтни кўрсатинг"
@@ -2093,6 +2156,11 @@ msgstr "Бу қиймат аллақачон мавжуд"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "Сана \"гача\" катта бўлиши мумкин эмас сана \"дан\" "
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Текширилмоқда..."
 
@@ -2109,7 +2177,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 

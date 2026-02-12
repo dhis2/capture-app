@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { useDataEngine } from '@dhis2/app-runtime';
 import type { QueryFunction, UseQueryOptions, QueryKey } from '@tanstack/react-query';
 import type { ResourceQuery } from 'capture-core-utils/types/app-runtime';
@@ -15,7 +16,7 @@ const throwErrorForIndexedDB = (error: any) => {
     } else {
         log.error(error);
     }
-    throw Error('There was an error fetching metadata');
+    throw new Error(i18n.t('There was an error fetching metadata'));
 };
 
 // Generic over both the raw data (TQueryFnData) and the transformed data (TData)

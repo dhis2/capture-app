@@ -143,7 +143,7 @@ export const EnrollmentAddEventPageDefault = ({
         return (
             <NoticeBox
                 error
-                title={'An error has occurred'}
+                title={i18n.t('An error has occurred')}
             >
                 {i18n.t('Program stage is invalid')}
             </NoticeBox>

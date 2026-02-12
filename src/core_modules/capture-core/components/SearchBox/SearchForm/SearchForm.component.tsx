@@ -28,15 +28,16 @@ const styles: Readonly<any> = (theme: any) => ({
         padding: spacers.dp8,
         display: 'flex',
         alignItems: 'center',
+        gap: spacers.dp8,
     },
     textInfo: {
-        textAlign: 'right',
+        textAlign: 'end',
         fontSize: '14px',
         flexGrow: 1,
         color: colors.grey700,
     },
     textError: {
-        textAlign: 'right',
+        textAlign: 'end',
         fontSize: '14px',
         fontWeight: 500,
         flexGrow: 1,
@@ -194,6 +195,12 @@ const SearchFormIndex = ({
 
         const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
+                // Don't trigger search if the event is coming from a SimpleSingleSelect component
+                // Enter key press should open the dropdown, not trigger the search.
+                if ((event.target as HTMLElement).closest('.simple-single-select')) {
+                    return;
+                }
+
                 const buttonRef = (containerButtonRef[expandedFormId] as any).children[0];
                 buttonRef.focus();
                 setTimeout(() => { buttonRef.click(); });

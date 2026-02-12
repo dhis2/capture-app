@@ -5,20 +5,29 @@
 # Philip Larsen Donnelly, 2025
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
 # Rica, 2025
-# Charel van den Elsen <zobeadzorg@gmail.com>, 2025
+# Charel van den Elsen <zobeadzorg@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Charel van den Elsen <zobeadzorg@gmail.com>, 2025\n"
+"Last-Translator: Charel van den Elsen <zobeadzorg@gmail.com>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Kies één of meerdere data..."
@@ -70,7 +79,7 @@ msgid "New event"
 msgstr "Nieuw evenement"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Bezig met laden..."
 
 msgid "Event list"
 msgstr ""
@@ -384,6 +393,12 @@ msgstr "Toon geregistreerde {{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "Geregistreerde persoon"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "validatie mislukt"
 
@@ -417,8 +432,8 @@ msgstr "Validatie fouten"
 msgid "Validation warnings"
 msgstr "Validatiewaarschuwingen"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Sommige operaties lopen nog. Even geduld aub.."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Operaties lopen"
@@ -457,6 +472,18 @@ msgstr "Geen"
 
 msgid "Select user"
 msgstr "Selecteer gebruiker"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Geef nul of een positief geheel getal op"
 
 msgid "to"
 msgstr "naar"
@@ -509,6 +536,24 @@ msgstr "Max"
 msgid "Min"
 msgstr "Min"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Geef een geldig nummer op"
+
+msgid "Please provide a valid integer"
+msgstr "Geef een geldig geheel getal op"
+
+msgid "Please provide a positive integer"
+msgstr "Geef een positief geheel getal op"
+
+msgid "Please provide a negative integer"
+msgstr "Geef een negatief geheel getal op"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Bevat tekst"
 
@@ -545,8 +590,14 @@ msgstr ""
 msgid "Clear"
 msgstr "Duidelijk"
 
-msgid "No results"
-msgstr "Geen resultaten"
+msgid "No results found"
+msgstr "Geen resultaten gevonden"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Beschrijving"
@@ -562,9 +613,6 @@ msgstr "begin met typen om te zoeken"
 
 msgid "suggestions could not be retrieved"
 msgstr "suggesties konden niet worden opgehaald"
-
-msgid "No results found"
-msgstr "Geen resultaten gevonden"
 
 msgid "No items to display"
 msgstr "Geen items om weer te geven"
@@ -653,9 +701,6 @@ msgstr "Doorverwijzen"
 msgid "No available program stages"
 msgstr "Geen beschikbare programmafasen"
 
-msgid "Program stage not found"
-msgstr "Programmafase niet gevonden"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -729,6 +774,9 @@ msgstr ""
 "Er is een fout opgetreden bij het ophalen van inschrijvingen. Voer een "
 "geldige URL in."
 
+msgid "An error has occurred"
+msgstr "er is een fout opgetreden"
+
 msgid "Page is missing required values from URL"
 msgstr "Pagina mist vereiste waarden van URL"
 
@@ -771,9 +819,6 @@ msgstr "Programmafasen konden niet worden geladen"
 msgid "Stage"
 msgstr "Stadium"
 
-msgid "Registered events"
-msgstr "Geregistreerde evenementen"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -810,6 +855,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr "Selecteer een organisatie-eenheid."
 
+msgid "Registered events"
+msgstr "Geregistreerde evenementen"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -826,9 +874,6 @@ msgstr "Opslaan als nieuw"
 
 msgid "New"
 msgstr "Nieuw"
-
-msgid "Create for"
-msgstr "Creëer voor"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -924,12 +969,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Fouten"
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicatoren"
-
 msgid "Warnings"
 msgstr "Waarschuwingen"
 
@@ -941,6 +980,18 @@ msgstr "Evenement kan niet worden geladen"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisatie-eenheid kan niet worden geladen"
+
+msgid "tracked entity instance"
+msgstr "gevolgd entiteitsexemplaar"
+
+msgid "All accessible"
+msgstr "Allemaal toegankelijk"
+
+msgid "Selected"
+msgstr "Geselecteerd"
+
+msgid "Organisation unit scope"
+msgstr "Bereik organisatie-eenheid"
 
 msgid "Selected program"
 msgstr "Geselecteerd programma"
@@ -962,6 +1013,9 @@ msgstr "Ontbrekende zoekcriteria"
 msgid "Back to search"
 msgstr "Terug naar zoeken"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -973,6 +1027,15 @@ msgid "Loading"
 msgstr ""
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1022,9 +1085,6 @@ msgstr "Kies een programma"
 
 msgid "Search for {{titleText}}"
 msgstr "Zoeken naar {{titleText}}"
-
-msgid "Search for"
-msgstr "Zoeken"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1087,9 +1147,6 @@ msgid ""
 msgstr ""
 "U kunt uw zoektermen wijzigen en opnieuw zoeken om te vinden wat u zoekt."
 
-msgid "An error has occurred"
-msgstr "er is een fout opgetreden"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1141,6 +1198,12 @@ msgstr "Nieuw evenement maken"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Zoek naar een {{trackedEntityName}} in {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr ""
@@ -1318,6 +1381,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr "Programmafase niet gevonden"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 "organisatie-eenheid kan niet worden opgehaald. Probeer het later opnieuw."
@@ -1368,11 +1434,20 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 "Geplande datum kan niet worden gewijzigd voor {{ eventStatus }} evenementen"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
+
+msgid "Polygon captured"
+msgstr "Polygoon vastgelegd"
+
+msgid "No polygon captured"
+msgstr "Geen polygoon vastgelegd"
 
 msgid "Event completed"
 msgstr "Evenement voltooid"
@@ -1451,6 +1526,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicatoren"
+
 msgid "Save note"
 msgstr "Notitie opslaan"
 
@@ -1463,9 +1544,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr " Bezig met laden..."
 
 msgid "Save changes"
 msgstr "Wijzigingen opslaan"
@@ -1511,16 +1589,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profielwidget kan niet worden geladen. Probeer het later opnieuw"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profiel"
-
-msgid "tracked entity instance"
-msgstr "gevolgd entiteitsexemplaar"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -2027,9 +2108,6 @@ msgstr "Downloaden als CSV"
 msgid "Download with current filters"
 msgstr "Downloaden met huidige filters"
 
-msgid "An error has occured. See log for details"
-msgstr "Er is een fout opgetreden. Zie logboek voor details"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Gepland{{ escape }} vanwege {{ time }}"
 
@@ -2053,9 +2131,6 @@ msgstr "Programma niet gevonden"
 
 msgid "Program is not a tracker program"
 msgstr "Programma is geen tracker-programma"
-
-msgid "Error saving event"
-msgstr "Fout bij opslaan van evenement"
 
 msgid "Could not save event"
 msgstr "Kon evenement niet opslaan"
@@ -2095,20 +2170,8 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr "Geef een geldig nummer op"
-
-msgid "Please provide a valid integer"
-msgstr "Geef een geldig geheel getal op"
-
-msgid "Please provide a positive integer"
-msgstr "Geef een positief geheel getal op"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Geef nul of een positief geheel getal op"
-
-msgid "Please provide a negative integer"
-msgstr "Geef een negatief geheel getal op"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Geef een geldige datum en tijd op"
@@ -2137,6 +2200,11 @@ msgstr "Deze waarde bestaat al"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Controleren..."
 
@@ -2153,7 +2221,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

@@ -1,19 +1,28 @@
 # 
 # Translators:
-# Philip Larsen Donnelly, 2025
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-23T11:41:11.943Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2025\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Persian (Afghanistan) (https://app.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fa_AF\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -362,6 +371,12 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr ""
 
@@ -395,7 +410,7 @@ msgstr ""
 msgid "Validation warnings"
 msgstr "هشدارهای اعتبارسنجی"
 
-msgid "Some operations are still runnning. Please wait.."
+msgid "Some operations are still running. Please wait."
 msgstr ""
 
 msgid "Operations running"
@@ -434,6 +449,18 @@ msgid "None"
 msgstr "هیچ‌کدام"
 
 msgid "Select user"
+msgstr ""
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "to"
@@ -487,6 +514,24 @@ msgstr "بزرگتر"
 msgid "Min"
 msgstr "کوچکتر"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr ""
 
@@ -523,7 +568,13 @@ msgstr ""
 msgid "Clear"
 msgstr "پاک کردن"
 
-msgid "No results"
+msgid "No results found"
+msgstr "هیج نتیجه ی یافت نشد"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
 msgstr ""
 
 msgid "Description"
@@ -540,9 +591,6 @@ msgstr ""
 
 msgid "suggestions could not be retrieved"
 msgstr ""
-
-msgid "No results found"
-msgstr "هیج نتیجه ی یافت نشد"
 
 msgid "No items to display"
 msgstr ""
@@ -631,9 +679,6 @@ msgstr "مراجعه ساختن"
 msgid "No available program stages"
 msgstr ""
 
-msgid "Program stage not found"
-msgstr ""
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -696,6 +741,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "An error has occurred"
+msgstr ""
+
 msgid "Page is missing required values from URL"
 msgstr ""
 
@@ -738,9 +786,6 @@ msgstr ""
 msgid "Stage"
 msgstr "مرحله"
 
-msgid "Registered events"
-msgstr "رویداد های ثبت شده"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -776,6 +821,9 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
+msgid "Registered events"
+msgstr "رویداد های ثبت شده"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -792,9 +840,6 @@ msgstr ""
 
 msgid "New"
 msgstr "جدید"
-
-msgid "Create for"
-msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -886,12 +931,6 @@ msgstr ""
 msgid "Errors"
 msgstr "خطاها"
 
-msgid "Feedback"
-msgstr "نظرات/فیدبک"
-
-msgid "Indicators"
-msgstr "شاخص ها"
-
 msgid "Warnings"
 msgstr ""
 
@@ -905,6 +944,15 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "انتخاب شده"
+
+msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Selected program"
@@ -927,6 +975,9 @@ msgstr ""
 msgid "Back to search"
 msgstr ""
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -937,6 +988,15 @@ msgid "Loading"
 msgstr "در حال بار کردن"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -986,9 +1046,6 @@ msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
-
-msgid "Search for"
-msgstr "جستجو برای"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1048,9 +1105,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "An error has occurred"
-msgstr ""
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1097,6 +1151,12 @@ msgid "Create new event"
 msgstr "ایجاد رویداد جدید"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
 msgstr ""
 
 msgid "No tracked entity types available"
@@ -1271,6 +1331,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1319,10 +1382,19 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
+msgstr ""
+
+msgid "Polygon captured"
+msgstr ""
+
+msgid "No polygon captured"
 msgstr ""
 
 msgid "Event completed"
@@ -1396,6 +1468,12 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "نظرات/فیدبک"
+
+msgid "Indicators"
+msgstr "شاخص ها"
+
 msgid "Save note"
 msgstr "نوت ذخیره"
 
@@ -1407,9 +1485,6 @@ msgstr ""
 
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
 msgstr ""
 
 msgid "Save changes"
@@ -1454,13 +1529,19 @@ msgstr ""
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1966,9 +2047,6 @@ msgstr "داونلود به فارمت سی اس وی"
 msgid "Download with current filters"
 msgstr ""
 
-msgid "An error has occured. See log for details"
-msgstr ""
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -1991,9 +2069,6 @@ msgid "Program not found"
 msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr ""
-
-msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event"
@@ -2032,19 +2107,7 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
-msgstr ""
-
-msgid "Please provide a valid integer"
-msgstr ""
-
-msgid "Please provide a positive integer"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "Please provide a negative integer"
+msgid "There was an error fetching metadata"
 msgstr ""
 
 msgid "Please provide a valid date and time"
@@ -2074,6 +2137,11 @@ msgstr ""
 msgid "\"From\" cannot be greater than \"To\""
 msgstr ""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr ""
 
@@ -2090,7 +2158,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 msgstr[1] ""

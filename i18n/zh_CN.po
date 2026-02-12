@@ -1,21 +1,30 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# 晓东 林 <13981924470@126.com>, 2025
-# easylin <lin_xd@126.com>, 2025
+# easylin <lin_xd@126.com>, 2026
+# 晓东 林 <13981924470@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "选择一个或多个日期"
@@ -363,6 +372,12 @@ msgstr "显示已注册的{{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "已注册的人"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "验证失败"
 
@@ -396,8 +411,8 @@ msgstr "验证错误"
 msgid "Validation warnings"
 msgstr "有效性警告"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "有些操作一直在运行,请等待"
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "运作中"
@@ -436,6 +451,18 @@ msgstr "无"
 
 msgid "Select user"
 msgstr "选择用户"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "0或负整数"
 
 msgid "to"
 msgstr "到"
@@ -488,6 +515,24 @@ msgstr "最大"
 msgid "Min"
 msgstr "最小"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "请提供一个有效的数字"
+
+msgid "Please provide a valid integer"
+msgstr "请提供一个整数"
+
+msgid "Please provide a positive integer"
+msgstr "提供一个正整数"
+
+msgid "Please provide a negative integer"
+msgstr "负整数"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "包含文本"
 
@@ -524,8 +569,14 @@ msgstr "未找到匹配项"
 msgid "Clear"
 msgstr "清除"
 
-msgid "No results"
-msgstr "无结果"
+msgid "No results found"
+msgstr "没有结果"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "描述"
@@ -541,9 +592,6 @@ msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
-
-msgid "No results found"
-msgstr "没有结果"
 
 msgid "No items to display"
 msgstr "无条目可显示"
@@ -632,9 +680,6 @@ msgstr "生成转诊/迁移"
 msgid "No available program stages"
 msgstr "没有可用的项目阶段"
 
-msgid "Program stage not found"
-msgstr "未找到项目阶段"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -698,6 +743,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "获取注册时出错。请输入有效网址。"
 
+msgid "An error has occurred"
+msgstr "发生了错误"
+
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
 
@@ -740,9 +788,6 @@ msgstr "无法加载项目阶段"
 msgid "Stage"
 msgstr "阶段"
 
-msgid "Registered events"
-msgstr "注册的事件"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -778,6 +823,9 @@ msgstr "或者在{{program}}中查看您可以访问的所有事件"
 msgid "Please select an organisation unit."
 msgstr "请选择一个机构。"
 
+msgid "Registered events"
+msgstr "注册的事件"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -794,9 +842,6 @@ msgstr "另存为新"
 
 msgid "New"
 msgstr "新建"
-
-msgid "Create for"
-msgstr "为创建"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -888,12 +933,6 @@ msgstr "离开该页将丢失你创建新关系的所有选择"
 msgid "Errors"
 msgstr "错误"
 
-msgid "Feedback"
-msgstr "反馈"
-
-msgid "Indicators"
-msgstr "指标"
-
 msgid "Warnings"
 msgstr "错误"
 
@@ -905,6 +944,18 @@ msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
+
+msgid "tracked entity instance"
+msgstr "跟踪的实体实例"
+
+msgid "All accessible"
+msgstr "所有可访问的"
+
+msgid "Selected"
+msgstr "选择的"
+
+msgid "Organisation unit scope"
+msgstr "机构范围"
 
 msgid "Selected program"
 msgstr "选择的项目"
@@ -925,6 +976,9 @@ msgstr "缺少搜索条件"
 msgid "Back to search"
 msgstr "返回搜寻"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "无法检索元数据。请稍后再试。"
 
@@ -936,6 +990,15 @@ msgstr "载入"
 
 msgid "An error occurred while loading the form"
 msgstr "加载表格时发生错误"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -984,9 +1047,6 @@ msgstr "选择一个项目"
 
 msgid "Search for {{titleText}}"
 msgstr "搜索{{titleText}}"
-
-msgid "Search for"
-msgstr "搜索"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1048,9 +1108,6 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
-msgid "An error has occurred"
-msgstr "发生了错误"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1098,6 +1155,12 @@ msgstr "创建新事件"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "没有可跟踪的实体类型"
@@ -1271,6 +1334,9 @@ msgstr "添加坐标"
 msgid "Add area"
 msgstr "添加区域"
 
+msgid "Program stage not found"
+msgstr "未找到项目阶段"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索机构。请稍后再试。"
 
@@ -1319,11 +1385,20 @@ msgstr "转到`调度`选项卡以重新安排调度此事件"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr "几何（面积）"
 
 msgid "Geometry (Coordinate)"
 msgstr "几何（坐标）"
+
+msgid "Polygon captured"
+msgstr "采集的多边形。"
+
+msgid "No polygon captured"
+msgstr "没有采集到多边形"
 
 msgid "Event completed"
 msgstr "事件完成"
@@ -1394,6 +1469,12 @@ msgstr "撰写关于此预定活动的说明"
 msgid "Program or stage is invalid"
 msgstr "项目或活动阶段无效"
 
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Indicators"
+msgstr "指标"
+
 msgid "Save note"
 msgstr "保存笔记"
 
@@ -1406,9 +1487,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr " 正在加载..."
 
 msgid "Save changes"
 msgstr "保存修改"
@@ -1454,17 +1532,20 @@ msgstr "是，删除 {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} 个人资料"
-
-msgid "tracked entity instance"
-msgstr "跟踪的实体实例"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "选择{{linkableStageLabel}} 活动"
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "选择 {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr "{{ linkableStageLabel }} 只能有一个事件"
@@ -1959,9 +2040,6 @@ msgstr "获取CSV格式报表"
 msgid "Download with current filters"
 msgstr "随着过滤器下载"
 
-msgid "An error has occured. See log for details"
-msgstr "发生错误。查看日志以获取详细信息"
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "调度{{ escape }}到期{{ time }}"
 
@@ -1985,9 +2063,6 @@ msgstr "没有发现项目"
 
 msgid "Program is not a tracker program"
 msgstr "项目不是跟踪随访项目"
-
-msgid "Error saving event"
-msgstr "保存事件发生错误"
 
 msgid "Could not save event"
 msgstr "无法保存事件"
@@ -2025,20 +2100,8 @@ msgstr "编辑事件时出错，所做的更改未保存"
 msgid "Error updating the Assignee"
 msgstr "更新受托人时出错"
 
-msgid "Please provide a valid number"
-msgstr "请提供一个有效的数字"
-
-msgid "Please provide a valid integer"
-msgstr "请提供一个整数"
-
-msgid "Please provide a positive integer"
-msgstr "提供一个正整数"
-
-msgid "Please provide zero or a positive integer"
-msgstr "0或负整数"
-
-msgid "Please provide a negative integer"
-msgstr "负整数"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "日期和时间"
@@ -2067,6 +2130,11 @@ msgstr "值已经存在"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "自不能大于至"
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "检查"
 
@@ -2083,7 +2151,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 

@@ -1,23 +1,32 @@
 # 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2025
 # Em Le <em.hispvietnam@gmail.com>, 2025
-# Viktor Varland <viktor@dhis2.org>, 2025
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr ""
+
+msgid "Please verify that the server is running."
+msgstr ""
+
+msgid "Please see log for details."
+msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Chọn một hoặc nhiều ngày..."
@@ -378,6 +387,12 @@ msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 msgid "Registered person"
 msgstr "Người đã đăng ký"
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr "xác thực không thành công"
 
@@ -411,8 +426,8 @@ msgstr "Lỗi xác thực"
 msgid "Validation warnings"
 msgstr "Cảnh báo tính hợp lệ"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "Một số hoạt động vẫn đang chạy. Vui lòng đợi .."
+msgid "Some operations are still running. Please wait."
+msgstr ""
 
 msgid "Operations running"
 msgstr "Hoạt động đang chạy"
@@ -454,6 +469,18 @@ msgstr "Không"
 
 msgid "Select user"
 msgstr "Chọn người dùng"
+
+msgid "Please specify a range"
+msgstr ""
+
+msgid "The From date can't be after the To date"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr "Vui lòng cung cấp số 0 hoặc số nguyên dương"
 
 msgid "to"
 msgstr "thành"
@@ -506,6 +533,24 @@ msgstr "Lớn nhất"
 msgid "Min"
 msgstr "Nhỏ nhất"
 
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Vui lòng cung cấp một số hợp lệ"
+
+msgid "Please provide a valid integer"
+msgstr "Vui lòng cung cấp một số nguyên hợp lệ"
+
+msgid "Please provide a positive integer"
+msgstr "Vui lòng cung cấp một số nguyên dương"
+
+msgid "Please provide a negative integer"
+msgstr "Vui lòng cung cấp một số nguyên âm"
+
+msgid "Exact matches only"
+msgstr ""
+
 msgid "Contains text"
 msgstr "Chứa văn bản"
 
@@ -542,8 +587,14 @@ msgstr "Không tìm thấy kết quả phù hợp"
 msgid "Clear"
 msgstr "Xóa"
 
-msgid "No results"
-msgstr "Không có kết quả"
+msgid "No results found"
+msgstr "Không tìm thấy kết quả nào"
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Description"
 msgstr "Miêu tả"
@@ -559,9 +610,6 @@ msgstr "bắt đầu nhập để tìm kiếm"
 
 msgid "suggestions could not be retrieved"
 msgstr "đề xuất không thể được truy xuất"
-
-msgid "No results found"
-msgstr "Không tìm thấy kết quả nào"
 
 msgid "No items to display"
 msgstr "Không có mục để hiển thị"
@@ -650,9 +698,6 @@ msgstr "Tạo chuyển tuyến"
 msgid "No available program stages"
 msgstr "Không có giai đoạn chương trình nào"
 
-msgid "Program stage not found"
-msgstr "Không tìm thấy giai đoạn chương trình"
-
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -722,6 +767,9 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "Có lỗi khi tải thông tin đăng ký. Hãy nhập một URL hợp lệ"
 
+msgid "An error has occurred"
+msgstr "một lỗi đã xảy ra"
+
 msgid "Page is missing required values from URL"
 msgstr "Trang này đang thiếu giá trị bắt buộc từ URL"
 
@@ -764,9 +812,6 @@ msgstr "Không thể tải giai đoạn chương trình"
 msgid "Stage"
 msgstr "Giai Đoạn Chương Trình"
 
-msgid "Registered events"
-msgstr "Sự kiện đã đăng ký"
-
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
@@ -806,6 +851,9 @@ msgstr "Hoặc xem tất cả các sự kiện bạn quyền xem trong {{program
 msgid "Please select an organisation unit."
 msgstr "Hãy chọn một đơn vị"
 
+msgid "Registered events"
+msgstr "Sự kiện đã đăng ký"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -823,9 +871,6 @@ msgstr "Lưu mới"
 
 msgid "New"
 msgstr "Mới"
-
-msgid "Create for"
-msgstr "Tạo cho"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -922,12 +967,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Lỗi"
 
-msgid "Feedback"
-msgstr "Phản hồi"
-
-msgid "Indicators"
-msgstr "Các chỉ số"
-
 msgid "Warnings"
 msgstr "Cảnh báo"
 
@@ -939,6 +978,18 @@ msgstr "Không thể tải sự kiện"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
+
+msgid "tracked entity instance"
+msgstr "thực thể được theo dõi"
+
+msgid "All accessible"
+msgstr "Tất cả có thể truy cập"
+
+msgid "Selected"
+msgstr "Danh sách đã chọn"
+
+msgid "Organisation unit scope"
+msgstr "Phạm Vi Đơn Vị"
 
 msgid "Selected program"
 msgstr "Chương trình đã chọn"
@@ -959,6 +1010,9 @@ msgstr "Tiêu chí tìm kiếm bị thiếu"
 msgid "Back to search"
 msgstr "Quay lại tìm kiếm"
 
+msgid "Search form is missing. See log for details"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Không thể lấy thông tin dữ liệu mô tả. Hãy thử lại sau."
 
@@ -970,6 +1024,15 @@ msgstr "Đang tải"
 
 msgid "An error occurred while loading the form"
 msgstr "Có lỗi khi tải biểu nhập"
+
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các dữ liệu trùng"
@@ -1018,9 +1081,6 @@ msgstr "Chọn một chương trình"
 
 msgid "Search for {{titleText}}"
 msgstr "Tìm cho {{titleText}}"
-
-msgid "Search for"
-msgstr "Tìm cho"
 
 msgid ""
 "You can also select a program from the top bar to search within that "
@@ -1088,9 +1148,6 @@ msgstr ""
 "Bạn có thể thay đổi cụm từ tìm kiếm của mình và tìm kiếm lại để tìm những gì"
 " bạn muốn."
 
-msgid "An error has occurred"
-msgstr "một lỗi đã xảy ra"
-
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1142,6 +1199,12 @@ msgstr "Tạo Sự Kiện mới"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Tìm kiếm {{trackedEntityName}} trong {{programName}}"
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
 
 msgid "No tracked entity types available"
 msgstr "Không có loại cá thể khả dụng"
@@ -1321,6 +1384,9 @@ msgstr "Thêm tọa độ"
 msgid "Add area"
 msgstr "Thêm khu vực"
 
+msgid "Program stage not found"
+msgstr "Không tìm thấy giai đoạn chương trình"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "không thể lấy lại đơn vị. Hãy thử lại sau"
 
@@ -1369,11 +1435,20 @@ msgstr "Vào tab “Lên lịch” để lên lịch lại sự kiện này"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Ngày đã lên lịch không thể thay đổi cho sự kiện {{ eventStatus }}"
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr "Hình dáng địa lý (Khu vực)"
 
 msgid "Geometry (Coordinate)"
 msgstr "Hình dáng địa lý (Tọa độ)"
+
+msgid "Polygon captured"
+msgstr "Đã thêm bản đồ ranh giới"
+
+msgid "No polygon captured"
+msgstr "Không có bản đồ ranh giới nào được thêm"
 
 msgid "Event completed"
 msgstr "Sự kiện đã hoàn tất"
@@ -1450,6 +1525,12 @@ msgstr "Viết một ghi chú cho sự kiện đã lên lịch này"
 msgid "Program or stage is invalid"
 msgstr "Chương trình hoặc giai đoạn không hợp lệ"
 
+msgid "Feedback"
+msgstr "Phản hồi"
+
+msgid "Indicators"
+msgstr "Các chỉ số"
+
 msgid "Save note"
 msgstr "Lưu ghi chú"
 
@@ -1462,9 +1543,6 @@ msgstr ""
 msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
-
-msgid " Loading..."
-msgstr "Đang tải..."
 
 msgid "Save changes"
 msgstr "Lưu các thay đổi"
@@ -1511,17 +1589,20 @@ msgstr "Có, xóa {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Không thể tải hồ sơ. Vui lòng thử lại sau"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
+msgstr ""
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "Hồ sơ {{trackedEntityTypeName}}"
-
-msgid "tracked entity instance"
-msgstr "thực thể được theo dõi"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "Chọn một sự kiện {{linkableStageLabel}}"
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "Chọn một {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr "{{ linkableStageLabel }} chỉ có thể có một sự kiện"
@@ -2033,9 +2114,6 @@ msgstr "Tải xuống với CSV"
 msgid "Download with current filters"
 msgstr "Tải xuống với các bộ lọc hiện tại"
 
-msgid "An error has occured. See log for details"
-msgstr "Có lỗi. Xem log để biết thêm chi tiết."
-
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Đã lên lịch {{ escape }}{{ time }}hẹn"
 
@@ -2059,9 +2137,6 @@ msgstr "Không tìm thấy chương trình"
 
 msgid "Program is not a tracker program"
 msgstr "Chương trình không phải là một chương trình theo dõi"
-
-msgid "Error saving event"
-msgstr "Có lỗi khi đang lưu sự kiện"
 
 msgid "Could not save event"
 msgstr "Không thể lưu sự kiện"
@@ -2099,20 +2174,8 @@ msgstr "Lỗi khi chỉnh sửa sự kiện, những thay đổi đã thực hi�
 msgid "Error updating the Assignee"
 msgstr "Lỗi khi cập nhật Người được giao"
 
-msgid "Please provide a valid number"
-msgstr "Vui lòng cung cấp một số hợp lệ"
-
-msgid "Please provide a valid integer"
-msgstr "Vui lòng cung cấp một số nguyên hợp lệ"
-
-msgid "Please provide a positive integer"
-msgstr "Vui lòng cung cấp một số nguyên dương"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Vui lòng cung cấp số 0 hoặc số nguyên dương"
-
-msgid "Please provide a negative integer"
-msgstr "Vui lòng cung cấp một số nguyên âm"
+msgid "There was an error fetching metadata"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Vui lòng cung cấp ngày và giờ hợp lệ"
@@ -2141,6 +2204,11 @@ msgstr "Giá trị này đã tồn tại"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Từ\" không được lớn hơn \"Tới\""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr "Đang kiểm tra ..."
 
@@ -2157,7 +2225,7 @@ msgid ""
 "The following attribute type is not supported for searching and has been "
 "hidden"
 msgid_plural ""
-"The following attribute types is not supported for searching and has been "
+"The following attribute type is not supported for searching and has been "
 "hidden"
 msgstr[0] ""
 

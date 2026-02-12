@@ -35,7 +35,7 @@ const styles: Readonly<any> = {
         gap: '8px',
         fontSize: '14px',
         color: colors.grey800,
-        textAlign: 'left',
+        textAlign: 'start',
     },
     link: {
         display: 'inline-block',

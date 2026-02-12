@@ -12,7 +12,7 @@ const styles = {
         marginTop: spacersNum.dp4,
     },
     button: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp8,
     },
 };
 

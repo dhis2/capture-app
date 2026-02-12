@@ -59,7 +59,6 @@ const getSaveHandler = (
         }
 
         static errorMessages = {
-            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
             FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
         };
 
@@ -185,7 +184,7 @@ const getSaveHandler = (
 
         getDialogWaitForUploadContents = () => (
             <div>
-                {i18n.t('Some operations are still runnning. Please wait..')}
+                {i18n.t('Some operations are still running. Please wait.')}
             </div>
         );
 
@@ -280,6 +279,7 @@ const getSaveHandler = (
                 calculatedFoundation: foundation,
                 sectionsInitialised: reduxSections && Object.values(reduxSections)
                     .every(({ valid }: any) => valid !== undefined),
+                completeDataEntryFieldValue: state.dataEntriesFieldsValue[key]?.complete,
             };
         };
 

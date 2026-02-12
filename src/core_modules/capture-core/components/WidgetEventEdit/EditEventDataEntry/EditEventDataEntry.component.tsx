@@ -30,7 +30,7 @@ import {
     withCalculateMessages,
     withDisplayMessages,
     withDefaultFieldContainer,
-    VirtualizedSelectField,
+    SingleSelectField,
     SingleOrgUnitSelectField,
     withFilterProps,
     withConditionalTooltip,
@@ -378,7 +378,7 @@ const getCategoryOptionsSettingsFn = () => {
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                withFilterProps(defaultFilterProps)(SingleSelectField),
                             ),
                         ),
                     ),

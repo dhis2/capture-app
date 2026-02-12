@@ -6,7 +6,7 @@ import type { Props } from './widgetStageHeader.types';
 
 const styles = () => ({
     wrapper: {
-        paddingLeft: spacersNum.dp16,
+        paddingInlineStart: spacersNum.dp16,
     },
     header: {
         display: 'flex',
@@ -14,7 +14,7 @@ const styles = () => ({
         padding: spacersNum.dp8,
     },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp8,
     },
 });
 

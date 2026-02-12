@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { isLangRtl } from '../../../utils/rtl';
 import {
     DataEntry,
     placements,
@@ -24,7 +25,7 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     orientations,
-    VirtualizedSelectField,
+    SingleSelectField,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
@@ -82,7 +83,12 @@ const createComponentProps = (props: any, componentProps: any) => ({
     ...componentProps,
 });
 
-const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => {
+    if (formHorizontal) {
+        return 'center';
+    }
+    return isLangRtl() ? 'right' : 'left';
+};
 
 const getEnrollmentDateSettings = () => {
     const reportDateComponent =
@@ -280,7 +286,7 @@ const getCategoryOptionsSettingsFn = () => {
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                withFilterProps(defaultFilterProps)(SingleSelectField),
                             ),
                         ),
                     ),

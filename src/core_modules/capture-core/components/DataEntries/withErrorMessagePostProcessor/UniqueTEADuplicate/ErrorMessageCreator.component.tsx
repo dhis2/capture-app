@@ -7,8 +7,8 @@ import { LinkButton } from '../../../Buttons/LinkButton.component';
 const getStyles = () => ({
     linkButton: {
         fontSize: 'inherit',
-        paddingLeft: 0,
-        paddingRight: 3,
+        paddingInlineStart: 0,
+        paddingInlineEnd: 3,
         backgroundColor: 'inherit',
         textDecoration: 'underline',
         cursor: 'pointer',

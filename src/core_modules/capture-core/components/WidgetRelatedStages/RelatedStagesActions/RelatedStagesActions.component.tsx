@@ -28,7 +28,7 @@ const styles: Readonly<any> = {
         flexGrow: 0,
         flexShrink: 0,
         paddingTop: spacersNum.dp16,
-        paddingRight: spacersNum.dp16,
+        paddingInlineEnd: spacersNum.dp16,
     },
     fieldContent: {
         flexGrow: 1,

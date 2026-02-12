@@ -6,16 +6,17 @@ Given('you are on the default search page', () => {
 });
 
 Then('there should be no search domain preselected', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .should('exist');
     cy.get('[data-test="informative-paper"]')
         .should('exist');
 });
 
 When('you select the search domain Person', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
-        .click();
-    cy.contains('Person')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .click()
+        .get('[role="option"]:visible')
+        .contains('Person')
         .click();
 });
 
@@ -35,11 +36,10 @@ Given('you are in the search page with domain Person and org unit being preselec
 
 And('you select the search domain Malaria Case diagnosis', () => {
     cy.get('[data-test="program-selector-container"]')
-        .click();
-    cy.get('[data-test="program-filterinput"]')
+        .click()
+        .get('[data-test="program-filterinput"]')
         .type('Malaria case diagn');
-    cy.contains('Malaria case diagnosis')
-        .click();
+    cy.contains('Malaria case diagnosis').click();
 });
 
 When('you select the search domain WHO RMNCH Tracker', () => {
@@ -47,8 +47,7 @@ When('you select the search domain WHO RMNCH Tracker', () => {
         .click();
     cy.get('[data-test="program-filterinput"]')
         .type('WHO RMNCH');
-    cy.contains('WHO RMNCH Tracker')
-        .click();
+    cy.contains('WHO RMNCH Tracker').click();
 });
 
 When('you fill in the unique identifier field with values that will not return a tracked entity instance', () => {
@@ -344,8 +343,9 @@ When('you navigated to a search page with tracked entity id on the url', () => {
 });
 
 When('you can see the domain selector with the tetype person selected', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
-        .contains('Person');
+    cy.get('[data-test="dhis2-simplesingleselect"]')
+        .should('contain', 'Person');
+
 });
 
 When('there is not enrollment tag', () => {

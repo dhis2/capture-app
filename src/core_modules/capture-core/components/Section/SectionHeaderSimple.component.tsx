@@ -23,7 +23,7 @@ const styles = () => ({
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingRight: 5,
+        paddingInlineEnd: 5,
     },
 });
 
