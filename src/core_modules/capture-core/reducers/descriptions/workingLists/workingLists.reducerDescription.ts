@@ -453,16 +453,6 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_REQUEST_DELETE]: (state, action) => {
-        const storeId = action.payload.storeId;
-        return {
-            ...state,
-            [storeId]: {
-                ...state[storeId],
-                isUpdatingWithDialog: true,
-            },
-        };
-    },
     [eventWorkingListsActionTypes.EVENT_DELETE_SUCCESS]: (state, action) => {
         const { storeId, eventId } = action.payload;
         return {
@@ -470,17 +460,6 @@ export const workingListsUIDesc = createReducerDescription({
             [storeId]: {
                 ...state[storeId],
                 lastEventIdDeleted: eventId,
-                isUpdatingWithDialog: false,
-            },
-        };
-    },
-    [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: (state, action) => {
-        const { storeId } = action.payload;
-        return {
-            ...state,
-            [storeId]: {
-                ...state[storeId],
-                isUpdatingWithDialog: false,
             },
         };
     },
