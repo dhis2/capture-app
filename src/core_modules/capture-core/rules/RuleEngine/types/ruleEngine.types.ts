@@ -172,6 +172,7 @@ export type ProgramRuleAction = {
     displayContent: string,
     data: string | null,
     programRuleActionType: string,
+    priority?: number,
 } & ProgramRuleData;
 
 export type ProgramRule = {

@@ -56,8 +56,8 @@ const convert = (() => {
 })();
 
 const fieldsParam = 'id,displayName,condition,description,program[id],programStage[id],priority,' +
-'programRuleActions[id,content,displayContent,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
-'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
+'programRuleActions[id,content,displayContent,location,data,priority,programRuleActionType,programStageSection[id],' +
+'dataElement[id],trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
 
 export const storeProgramRules = async (programIds: Array<string>) => {
     const query = {
