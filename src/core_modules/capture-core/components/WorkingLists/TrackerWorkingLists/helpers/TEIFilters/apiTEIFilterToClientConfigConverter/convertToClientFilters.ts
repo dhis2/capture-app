@@ -99,15 +99,29 @@ const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
 };
 
 const getFilterByType = {
-    [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.INTEGER]: getNumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.COORDINATE]: getTextFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.EMAIL]: getTextFilter,
+    [filterTypesObject.FILE_RESOURCE]: getTextFilter,
+    [filterTypesObject.IMAGE]: getTextFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.LONG_TEXT]: getTextFilter,
+    [filterTypesObject.MULTI_TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.PERCENTAGE]: getTextFilter,
+    [filterTypesObject.PHONE_NUMBER]: getTextFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.TIME]: getDateFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.URL]: getTextFilter,
+    [filterTypesObject.USERNAME]: getTextFilter,
 };
 
 const getAssigneeFilter = async (assignedUsers: Array<string> | null, querySingleResource: QuerySingleResource) => {

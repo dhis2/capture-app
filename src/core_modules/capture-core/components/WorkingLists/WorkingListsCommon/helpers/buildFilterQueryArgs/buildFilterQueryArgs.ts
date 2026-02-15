@@ -16,16 +16,30 @@ import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
 import { API_NOT_EMPTY_VALUE_FILTER, API_EMPTY_VALUE_FILTER } from '../../../../FiltersForTypes/EmptyValue';
 
 const mappersForTypes = {
-    [filterTypesObject.TEXT]: convertText,
-    [filterTypesObject.NUMBER]: convertNumeric,
-    [filterTypesObject.INTEGER]: convertNumeric,
-    [filterTypesObject.INTEGER_POSITIVE]: convertNumeric,
-    [filterTypesObject.INTEGER_NEGATIVE]: convertNumeric,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
-    [filterTypesObject.DATE]: convertDate,
+    [filterTypesObject.AGE]: convertDate,
     [filterTypesObject.ASSIGNEE]: convertAssignee,
     [filterTypesObject.BOOLEAN]: convertBoolean,
+    [filterTypesObject.COORDINATE]: convertText,
+    [filterTypesObject.DATE]: convertDate,
+    [filterTypesObject.DATETIME]: convertDate,
+    [filterTypesObject.EMAIL]: convertText,
+    [filterTypesObject.FILE_RESOURCE]: convertText,
+    [filterTypesObject.IMAGE]: convertText,
+    [filterTypesObject.INTEGER]: convertNumeric,
+    [filterTypesObject.INTEGER_NEGATIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_POSITIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
+    [filterTypesObject.LONG_TEXT]: convertText,
+    [filterTypesObject.MULTI_TEXT]: convertText,
+    [filterTypesObject.NUMBER]: convertNumeric,
+    [filterTypesObject.ORGANISATION_UNIT]: convertText,
+    [filterTypesObject.PERCENTAGE]: convertText,
+    [filterTypesObject.PHONE_NUMBER]: convertText,
+    [filterTypesObject.TEXT]: convertText,
+    [filterTypesObject.TIME]: convertDate,
     [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
+    [filterTypesObject.URL]: convertText,
+    [filterTypesObject.USERNAME]: convertText,
 };
 
 function convertFilter(
