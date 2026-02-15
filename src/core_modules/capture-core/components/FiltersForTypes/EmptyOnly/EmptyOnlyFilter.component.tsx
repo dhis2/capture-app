@@ -19,7 +19,7 @@ type Props = {
 
 export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getEmptyOnlyFilterData(value);
     }
 
