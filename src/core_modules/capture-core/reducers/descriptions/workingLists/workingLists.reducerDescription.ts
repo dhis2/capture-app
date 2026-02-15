@@ -459,7 +459,7 @@ export const workingListsUIDesc = createReducerDescription({
             ...state,
             [storeId]: {
                 ...state[storeId],
-                isUpdatingWithDialog: true,
+                isUpdating: true,
             },
         };
     },
@@ -470,7 +470,7 @@ export const workingListsUIDesc = createReducerDescription({
             [storeId]: {
                 ...state[storeId],
                 lastEventIdDeleted: eventId,
-                isUpdatingWithDialog: false,
+                isUpdating: false,
             },
         };
     },
@@ -480,7 +480,7 @@ export const workingListsUIDesc = createReducerDescription({
             ...state,
             [storeId]: {
                 ...state[storeId],
-                isUpdatingWithDialog: false,
+                isUpdating: false,
             },
         };
     },
