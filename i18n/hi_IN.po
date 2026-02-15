@@ -29,7 +29,7 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "दिन चुनें"
 
 msgid "Today"
 msgstr "आज"
@@ -241,7 +241,7 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
-msgstr ""
+msgstr "पूरा हुआ"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr ""
@@ -250,22 +250,22 @@ msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "सेव और एक और जोड़ें"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "सेव करें और बाहर जाएँ"
 
 msgid "Finish"
-msgstr ""
+msgstr "खत्म"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "पूरा किए बिना सेव करें"
 
 msgid "Complete"
 msgstr "पूरा हुआ"
 
 msgid "No write access"
-msgstr ""
+msgstr "राइट एक्सेस नहीं है"
 
 msgid "New {{titleText}}"
 msgstr ""
@@ -450,7 +450,7 @@ msgid "None"
 msgstr "कोई नहीं"
 
 msgid "Select user"
-msgstr ""
+msgstr "यूज़र चुनें"
 
 msgid "Please specify a range"
 msgstr ""
@@ -951,7 +951,7 @@ msgid "All accessible"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "चुनें"
 
 msgid "Organisation unit scope"
 msgstr ""
@@ -1263,10 +1263,10 @@ msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "अक्षांश"
 
 msgid "Longitude"
-msgstr ""
+msgstr "देशांतर"
 
 msgid "Set coordinates"
 msgstr ""
@@ -1475,7 +1475,7 @@ msgid "Feedback"
 msgstr ""
 
 msgid "Indicators"
-msgstr ""
+msgstr "इंडिकेटर्स"
 
 msgid "Save note"
 msgstr ""
@@ -1716,7 +1716,7 @@ msgid "Sort by date"
 msgstr ""
 
 msgid "User"
-msgstr ""
+msgstr "यूज़र"
 
 msgid "Sort by username"
 msgstr ""
@@ -1798,7 +1798,7 @@ msgid "an error occurred loading working lists"
 msgstr "फ़ॉर्म लोड करते समय एक एरर हुई"
 
 msgid "You do not have access to complete events"
-msgstr ""
+msgstr "इवेंट पूरा करें आपको अनुमति नहीं है"
 
 msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
@@ -1816,7 +1816,7 @@ msgid "Error completing events"
 msgstr "इवेंट पूरा करें समय एक एरर हुई"
 
 msgid "There was an error completing the events."
-msgstr ""
+msgstr "इवेंट पूरा करें में एक एरर हुई"
 
 msgid "Details (Advanced)"
 msgstr ""
@@ -2126,7 +2126,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "कृपया एक मान्य ईमेल पता दर्ज करें"
 
 msgid "Please provide a valid age"
 msgstr "कृपया एक मान्य आयु दर्ज करें"
