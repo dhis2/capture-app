@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
+import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
 import type { UpdatableFilterContent } from '../types';
 import type { TextFilterProps, Value } from './Text.types';
 import {
@@ -36,7 +37,8 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
 
     render() {
-        const { value, unique } = this.props;
+        const { value, unique, searchOperator } = this.props;
+        const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
 
         return (
             <>
@@ -53,6 +55,7 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
                     value={!isEmptyValueFilter(value) ? value : ''}
                     unique={unique}
                 />
+                {helpText && <div style={helpTextStyle}>{helpText}</div>}
             </>
         );
     }

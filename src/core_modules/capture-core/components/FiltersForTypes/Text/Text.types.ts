@@ -5,5 +5,6 @@ export type TextFilterProps = {
     onUpdate: (updatedValue: Value) => void;
     value: Value;
     unique: boolean;
+    searchOperator?: string;
 };
 

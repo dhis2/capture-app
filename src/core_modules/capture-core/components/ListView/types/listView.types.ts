@@ -12,6 +12,7 @@ export type Column = {
     filterHidden?: boolean;
     additionalColumn?: boolean;
     unique?: boolean;
+    searchOperator?: string;
 };
 
 export type Columns = Array<Column>;

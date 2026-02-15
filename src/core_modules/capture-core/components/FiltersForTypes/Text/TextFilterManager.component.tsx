@@ -10,6 +10,7 @@ type Props = {
     handleCommitValue: () => void;
     onUpdate: (updatedValue: Value) => void;
     unique: boolean;
+    searchOperator?: string;
 };
 
 type State = {

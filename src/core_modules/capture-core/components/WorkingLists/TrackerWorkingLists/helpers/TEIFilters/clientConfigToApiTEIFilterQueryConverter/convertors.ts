@@ -10,12 +10,12 @@ import {
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { type DataElement } from '../../../../../../metaData';
 import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
-const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
-    dataElement?.unique ? { eq: filter.value } : { like: filter.value }
-);
+const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
+    const searchOperator = element?.searchOperator?.toLowerCase() ?? 'like';
+    return { [searchOperator]: filter.value };
+};
 
 const getNumericFilter = (filter: NumericFilterData) => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
