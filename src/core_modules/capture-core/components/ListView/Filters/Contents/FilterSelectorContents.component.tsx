@@ -10,6 +10,7 @@ import {
     BooleanFilter,
     DateFilter,
     OptionSetFilter,
+    EmptyOnlyFilter,
 } from '../../../FiltersForTypes';
 import type { Props } from './filterSelectorContents.types';
 
@@ -24,16 +25,30 @@ const OptionSetFilterWithButtons = withButtons()(
 );
 
 const selectorContentsForTypes = {
-    [filterTypesObject.TEXT]: TextFilter,
-    [filterTypesObject.NUMBER]: NumericFilter,
-    [filterTypesObject.INTEGER]: NumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
-    [filterTypesObject.DATE]: DateFilter,
-    [filterTypesObject.BOOLEAN]: BooleanFilter,
-    [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+    [filterTypesObject.AGE]: DateFilter,
     [filterTypesObject.ASSIGNEE]: AssigneeFilter,
+    [filterTypesObject.BOOLEAN]: BooleanFilter,
+    [filterTypesObject.COORDINATE]: EmptyOnlyFilter,
+    [filterTypesObject.DATE]: DateFilter,
+    [filterTypesObject.DATETIME]: DateFilter,
+    [filterTypesObject.EMAIL]: TextFilter,
+    [filterTypesObject.FILE_RESOURCE]: EmptyOnlyFilter,
+    [filterTypesObject.IMAGE]: EmptyOnlyFilter,
+    [filterTypesObject.INTEGER]: NumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
+    [filterTypesObject.LONG_TEXT]: TextFilter,
+    [filterTypesObject.MULTI_TEXT]: TextFilter,
+    [filterTypesObject.NUMBER]: NumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: TextFilter,
+    [filterTypesObject.PERCENTAGE]: TextFilter,
+    [filterTypesObject.PHONE_NUMBER]: TextFilter,
+    [filterTypesObject.TEXT]: TextFilter,
+    [filterTypesObject.TIME]: DateFilter,
+    [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+    [filterTypesObject.URL]: TextFilter,
+    [filterTypesObject.USERNAME]: TextFilter,
 };
 
 const useContents = ({ filterValue, classes, type, options, multiValueFilter, isRemovable, ...passOnProps }) => {
