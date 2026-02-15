@@ -5,21 +5,21 @@
 # Edem Kossi <ekossi@hispwca.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Elise Desailly, 2024
+# Bram Piot <bram.piot@gmail.com>, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
 # Esther Tokouli, 2025
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Philip Larsen Donnelly, 2026
-# Cyrille Kabrane, 2026
-# Bram Piot <bram.piot@gmail.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Cyrille Kabrane, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -28,13 +28,13 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "The application could not be loaded."
-msgstr ""
+msgstr "L'application n'a pas pu être chargée."
 
 msgid "Please verify that the server is running."
-msgstr ""
+msgstr "Veuillez vérifier que le serveur fonctionne."
 
 msgid "Please see log for details."
-msgstr ""
+msgstr "Veuillez consulter le journal pour plus de détails."
 
 msgid "Choose one or more dates..."
 msgstr "Choisir une ou plusieurs dates..."
@@ -411,10 +411,11 @@ msgid "Registered person"
 msgstr "Personne inscrite"
 
 msgid "No item selected"
-msgstr ""
+msgstr "Aucun élément sélectionné"
 
 msgid "Form foundation missing. See log for details"
 msgstr ""
+"La base du formulaire est manquante. Voir le journal pour plus de détails."
 
 msgid "validation failed"
 msgstr "validation échouée"
@@ -450,7 +451,7 @@ msgid "Validation warnings"
 msgstr "Avertissements de validation"
 
 msgid "Some operations are still running. Please wait."
-msgstr ""
+msgstr "Certaines opérations sont encore en cours. Veuillez patienter."
 
 msgid "Operations running"
 msgstr "Opérations en cours"
@@ -494,13 +495,13 @@ msgid "Select user"
 msgstr "Sélectionner un utilisateur"
 
 msgid "Please specify a range"
-msgstr ""
+msgstr "Veuillez spécifier une fourchette"
 
 msgid "The From date can't be after the To date"
-msgstr ""
+msgstr "La date de début ne peut pas venir après la date de fin."
 
 msgid "Please specify the number of days"
-msgstr ""
+msgstr "Veuillez préciser le nombre de jours"
 
 msgid "Please provide zero or a positive integer"
 msgstr "Veuillez saisir zéro ou un nombre entier positif "
@@ -557,7 +558,7 @@ msgid "Min"
 msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
-msgstr ""
+msgstr "La valeur minimale ne peut être supérieure à la valeur maximale"
 
 msgid "Please provide a valid number"
 msgstr "Veuillez saisir un nombre valide"
@@ -1024,7 +1025,7 @@ msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Tous accessibles"
 
 msgid "Selected"
 msgstr "Sélectionné"
@@ -1055,6 +1056,8 @@ msgstr "Retour à l'écran de recherche"
 
 msgid "Search form is missing. See log for details"
 msgstr ""
+"Le formulaire de recherche est manquant. Voir le journal pour plus de "
+"détails."
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
@@ -1070,13 +1073,13 @@ msgid "An error occurred while loading the form"
 msgstr "Une erreur s'est produite lors du chargement du formulaire"
 
 msgid "First Page"
-msgstr ""
+msgstr "Première page"
 
 msgid "Previous Page"
-msgstr ""
+msgstr "Page précédente"
 
 msgid "Next Page"
-msgstr ""
+msgstr "Page suivante"
 
 msgid "Possible duplicates found"
 msgstr "Doublons potentiels détectés"
@@ -1257,7 +1260,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
 
 msgid "Select tracked entity type"
-msgstr ""
+msgstr "Sélectionner le type d'entité suivie"
 
 msgid "Type to filter tracked entity types"
 msgstr ""
@@ -1481,7 +1484,7 @@ msgid "Warning"
 msgstr "Avertissement"
 
 msgid "stage not found in rules execution"
-msgstr "étape non trouvé lors de l'exécution des règles"
+msgstr "stade non trouvé lors de l'exécution des règles"
 
 msgid "Delete event"
 msgstr "Effacer l'événement"
@@ -1514,7 +1517,7 @@ msgid "Geometry (Coordinate)"
 msgstr "Géométrie (Coordonnées)"
 
 msgid "Polygon captured"
-msgstr "Le polygône a été défini"
+msgstr "Le polygone a été défini"
 
 msgid "No polygon captured"
 msgstr "Aucun polygone défini"
@@ -1544,7 +1547,7 @@ msgid "Schedule date info"
 msgstr "Informations sur la date prévue"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
-msgstr "Planifiée automatiquement pour {{suggestedScheduleDate}}"
+msgstr "Planifié automatiquement pour {{suggestedScheduleDate}}"
 
 msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
@@ -1566,14 +1569,14 @@ msgid_plural ""
 "There are {{count}} scheduled event in this program in {{orgUnitName}} on "
 "this day."
 msgstr[0] ""
-"Il y a {{count}} prévu événement dans ce programme à {{orgUnitName}} ce "
-"jour-là."
+"Il y a {{count}} événement(s) prévu(s) dans ce programme à {{orgUnitName}} "
+"ce jour."
 msgstr[1] ""
 "Il y a {{count}} événements planifiés dans ce programme dans {{orgUnitName}}"
 " à ce jour."
 msgstr[2] ""
-"Il y a {{count}} des événements prévus dans ce programme à {{orgUnitName}} "
-"en ce jour."
+"Il y a {{count}} événements prévus dans ce programme à {{orgUnitName}} en ce"
+" jour."
 
 msgid "Schedule date / Due date"
 msgstr "Date prévue / Date d'échéance"
@@ -1600,7 +1603,7 @@ msgid "Write a note about this scheduled event"
 msgstr "Écrire une note sur cet événement planifié"
 
 msgid "Program or stage is invalid"
-msgstr "Programme ou étape non valide"
+msgstr "Programme ou stade non valide"
 
 msgid "Feedback"
 msgstr "Réaction"
@@ -1674,10 +1677,10 @@ msgstr ""
 "Le widget du profil n'a pas pu être chargé. Veuillez réessayer plus tard."
 
 msgid "No attributes configured for {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Aucun attribut configuré pour {{trackedEntityTypeName}}"
 
 msgid "No attributes configured"
-msgstr ""
+msgstr "Aucun attribut configuré"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "Profil de {{trackedEntityTypeName}}"
@@ -1686,7 +1689,7 @@ msgid "Choose a {{linkableStageLabel}} event"
 msgstr "Choisir un événement {{linkableStageLabel}}"
 
 msgid "Select an event"
-msgstr ""
+msgstr "Sélectionner un événement"
 
 msgid "{{ linkableStageLabel }} can only have one event"
 msgstr "{{ linkableStageLabel }} ne peut avoir qu'un seul événement"
@@ -1788,7 +1791,7 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} planifiés"
 
 msgid "Stages and Events"
-msgstr "Étapes et Événements"
+msgstr "Stades et événements"
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr ""
@@ -1879,7 +1882,7 @@ msgid "Sort by username"
 msgstr "Trier par nom d'utilisateur"
 
 msgid "Sort by data item"
-msgstr "Trier par élément de données"
+msgstr "Trier par item de données"
 
 msgid "Change"
 msgstr "Modifier"
@@ -1948,7 +1951,7 @@ msgid "Created date"
 msgstr "Date de création"
 
 msgid "Program stage name"
-msgstr "Nom de l'étape de programme"
+msgstr "Nom du stade de programme"
 
 msgid "Working list could not be loaded"
 msgstr "La liste des tâches n'a pas pu être chargée"
@@ -2311,7 +2314,7 @@ msgid "Error updating the Assignee"
 msgstr "Erreur lors de la de mise à jour de l'attributaire"
 
 msgid "There was an error fetching metadata"
-msgstr ""
+msgstr "Une erreur s'est produite lors de l'extraction des métadonnées."
 
 msgid "Please provide a valid date and time"
 msgstr "Veuillez fournir une date et une heure valides"
