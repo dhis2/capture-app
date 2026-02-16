@@ -4,6 +4,7 @@ import type { DateFilterData } from '../Date/types';
 import type { EmptyOnlyFilterData } from '../EmptyOnly/types';
 import type { NumericFilterData } from '../Numeric/types';
 import type { OptionSetFilterData } from '../OptionSet/types';
+import type { OrgUnitFilterData } from '../OrgUnit/types';
 import type { TextFilterData } from '../Text/types';
 import type { TrueOnlyFilterData } from '../TrueOnly/types';
 
@@ -15,6 +16,7 @@ export type FilterData =
     EmptyOnlyFilterData |
     NumericFilterData |
     OptionSetFilterData |
+    OrgUnitFilterData |
     TextFilterData |
     TrueOnlyFilterData;
 

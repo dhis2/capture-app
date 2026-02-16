@@ -116,7 +116,6 @@ const getFilterByType = {
     [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
-    [filterTypesObject.MULTI_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
     [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
     [filterTypesObject.PERCENTAGE]: getTextFilter,

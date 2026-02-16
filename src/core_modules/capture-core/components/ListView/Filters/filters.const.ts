@@ -17,7 +17,6 @@ export const filterTypesObject = {
     INTEGER_POSITIVE: dataElementTypes.INTEGER_POSITIVE,
     INTEGER_ZERO_OR_POSITIVE: dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     LONG_TEXT: dataElementTypes.LONG_TEXT,
-    MULTI_TEXT: dataElementTypes.MULTI_TEXT,
     NUMBER: dataElementTypes.NUMBER,
     ORGANISATION_UNIT: dataElementTypes.ORGANISATION_UNIT,
     PERCENTAGE: dataElementTypes.PERCENTAGE,

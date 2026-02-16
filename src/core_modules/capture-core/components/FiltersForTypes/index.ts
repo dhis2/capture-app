@@ -5,6 +5,7 @@ export { EmptyOnlyFilter } from './EmptyOnly';
 export { EmptyValueFilterCheckboxes } from './EmptyValue';
 export { NumericFilter } from './Numeric';
 export { OptionSetFilter } from './OptionSet';
+export { OrgUnitFilter } from './OrgUnit';
 export { TextFilter } from './Text';
 export { TrueOnlyFilter } from './TrueOnly';
 
@@ -17,6 +18,7 @@ export type { DateFilterData, AbsoluteDateFilterData, RelativeDateFilterData } f
 export type { EmptyOnlyFilterData } from './EmptyOnly/types';
 export type { NumericFilterData } from './Numeric/types';
 export type { OptionSetFilterData } from './OptionSet/types';
+export type { OrgUnitFilterData } from './OrgUnit/types';
 export type { TextFilterData } from './Text/types';
 export type { TrueOnlyFilterData } from './TrueOnly/types';
 export type { FilterData, FilterDataInput, UpdatableFilterContent } from './types';

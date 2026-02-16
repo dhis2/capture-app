@@ -12,6 +12,7 @@ import {
     DateFilter,
     OptionSetFilter,
     EmptyOnlyFilter,
+    OrgUnitFilter,
 } from '../../../FiltersForTypes';
 import type { Props } from './filterSelectorContents.types';
 
@@ -40,9 +41,8 @@ const selectorContentsForTypes = {
     [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
     [filterTypesObject.LONG_TEXT]: TextFilter,
-    [filterTypesObject.MULTI_TEXT]: TextFilter,
     [filterTypesObject.NUMBER]: NumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: TextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: OrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: TextFilter,
     [filterTypesObject.PHONE_NUMBER]: TextFilter,
     [filterTypesObject.TEXT]: TextFilter,
