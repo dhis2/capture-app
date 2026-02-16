@@ -136,7 +136,7 @@ const getFilterByType = {
     [filterTypesObject.PERCENTAGE]: getTextFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.TIME]: getDateFilter,
+    [filterTypesObject.TIME]: getTextFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
     [filterTypesObject.URL]: getTextFilter,
     [filterTypesObject.USERNAME]: getTextFilter,

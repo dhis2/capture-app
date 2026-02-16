@@ -46,7 +46,7 @@ const selectorContentsForTypes = {
     [filterTypesObject.PERCENTAGE]: TextFilter,
     [filterTypesObject.PHONE_NUMBER]: TextFilter,
     [filterTypesObject.TEXT]: TextFilter,
-    [filterTypesObject.TIME]: DateFilter,
+    [filterTypesObject.TIME]: TextFilter,
     [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
     [filterTypesObject.URL]: TextFilter,
     [filterTypesObject.USERNAME]: TextFilter,
