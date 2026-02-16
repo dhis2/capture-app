@@ -52,11 +52,11 @@ const selectorContentsForTypes = {
     [filterTypesObject.USERNAME]: TextFilter,
 };
 
-const EMPTY_ONLY_FILTER_TYPES = [
+const EMPTY_ONLY_FILTER_TYPES = new Set([
     filterTypesObject.COORDINATE,
     filterTypesObject.FILE_RESOURCE,
     filterTypesObject.IMAGE,
-];
+]);
 
 const useContents = ({
     filterValue,
@@ -78,7 +78,7 @@ const useContents = ({
         return [withButtons()(TypeFilter), false];
     }, [type, options]);
 
-    if (EMPTY_ONLY_FILTER_TYPES.includes(type) && !emptyValueFilterSupported) {
+    if (EMPTY_ONLY_FILTER_TYPES.has(type) && !emptyValueFilterSupported) {
         return null;
     }
 
