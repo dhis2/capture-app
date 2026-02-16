@@ -117,7 +117,6 @@ export type InterfaceProps = {
     sortByDirection: string;
     stickyFilters: StickyFilters;
     updating: boolean;
-    updatingWithDialog: boolean;
     onRowSelect: (id: string) => void;
     programStageId?: string;
     selectedRows: { [key: string]: boolean };

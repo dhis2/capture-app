@@ -404,7 +404,6 @@ const getReadyState = (oldState, more) => ({
     ...more,
     isLoading: false,
     isUpdating: false,
-    isUpdatingWithDialog: false,
 });
 
 export const workingListsUIDesc = createReducerDescription({
