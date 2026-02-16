@@ -93,7 +93,7 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterConten
 const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     if ([filterTypesObject.BOOLEAN].includes(type)) {
         const validBooleanValues = ['true', 'false'];
-        return filter.in.some(value => !validBooleanValues.includes[value]);
+        return filter.in.some(value => !validBooleanValues.includes(value));
     }
     return filter.in;
 };

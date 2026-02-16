@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Checkbox } from '@dhis2/ui';
 import { getEmptyOnlyFilterData } from './emptyOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import {
     makeCheckboxHandler,
     EMPTY_VALUE_FILTER,
     NOT_EMPTY_VALUE_FILTER,
-    EMPTY_VALUE_FILTER_LABEL,
-    NOT_EMPTY_VALUE_FILTER_LABEL,
+    EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
 
 type Value = string | null | undefined;
@@ -18,8 +16,9 @@ type Props = {
 };
 
 export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    onGetUpdateData(updatedValue?: Value) {
-        const value = updatedValue === undefined ? this.props.value : updatedValue;
+    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
+        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+
         return getEmptyOnlyFilterData(value);
     }
 
@@ -30,18 +29,13 @@ export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilter
         const { value } = this.props;
 
         return (
-            <div>
-                <Checkbox
-                    label={EMPTY_VALUE_FILTER_LABEL}
-                    checked={value === EMPTY_VALUE_FILTER}
-                    onChange={this.handleEmptyValueCheckboxChange}
+            <>
+                <EmptyValueFilterCheckboxes
+                    value={value}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
                 />
-                <Checkbox
-                    label={NOT_EMPTY_VALUE_FILTER_LABEL}
-                    checked={value === NOT_EMPTY_VALUE_FILTER}
-                    onChange={this.handleNotEmptyValueCheckboxChange}
-                />
-            </div>
+            </>
         );
     }
 }

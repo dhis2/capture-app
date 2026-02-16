@@ -119,7 +119,6 @@ const getAssigneeFilter = async (
 
 const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,
-    [filterTypesObject.ASSIGNEE]: getAssigneeFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
@@ -147,9 +146,8 @@ const getFilterByType = {
 const isOptionSetFilter = (type: keyof typeof dataElementTypes, filter: any) => {
     if (filterTypesObject.BOOLEAN === type) {
         const validBooleanValues = ['true', 'false'];
-        return filter.in.some(value => !validBooleanValues.includes[value]);
+        return filter.in.some(value => !validBooleanValues.includes(value));
     }
-
     return filter.in;
 };
 
