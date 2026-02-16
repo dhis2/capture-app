@@ -17,7 +17,7 @@ type Props = {
 
 export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
 
         return getEmptyOnlyFilterData(value);
     }
@@ -29,13 +29,12 @@ export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilter
         const { value } = this.props;
 
         return (
-            <>
-                <EmptyValueFilterCheckboxes
-                    value={value}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                />
-            </>
+            <EmptyValueFilterCheckboxes
+                value={value}
+                onEmptyChange={this.handleEmptyValueCheckboxChange}
+                onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                showDivider={false}
+            />
         );
     }
 }

@@ -143,10 +143,14 @@ const getFilterByType = {
     [filterTypesObject.USERNAME]: getTextFilter,
 };
 
+const VALID_BOOLEAN_VALUES = new Set(['true', 'false']);
+
 const isOptionSetFilter = (type: keyof typeof dataElementTypes, filter: any) => {
     if (filterTypesObject.BOOLEAN === type) {
-        const validBooleanValues = ['true', 'false'];
-        return filter.in.some(value => !validBooleanValues.includes(value));
+        const allValuesAreBoolean = filter.in.every((value: string) =>
+            VALID_BOOLEAN_VALUES.has(value),
+        );
+        return !allValuesAreBoolean;
     }
     return filter.in;
 };

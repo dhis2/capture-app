@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import { withButtons } from './withButtons';
 import {
@@ -51,7 +52,22 @@ const selectorContentsForTypes = {
     [filterTypesObject.USERNAME]: TextFilter,
 };
 
-const useContents = ({ filterValue, classes, type, options, multiValueFilter, isRemovable, ...passOnProps }) => {
+const EMPTY_ONLY_FILTER_TYPES = [
+    filterTypesObject.COORDINATE,
+    filterTypesObject.FILE_RESOURCE,
+    filterTypesObject.IMAGE,
+];
+
+const useContents = ({
+    filterValue,
+    classes,
+    type,
+    options,
+    multiValueFilter,
+    isRemovable,
+    emptyValueFilterSupported,
+    ...passOnProps
+}) => {
     const [disabledUpdate, setUpdateDisabled] = useState(true);
     const [FilterContents, ofTypeOptionSet] = useMemo(() => {
         if (options && options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
@@ -61,6 +77,10 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, is
         const TypeFilter = selectorContentsForTypes[type];
         return [withButtons()(TypeFilter), false];
     }, [type, options]);
+
+    if (EMPTY_ONLY_FILTER_TYPES.includes(type) && !emptyValueFilterSupported) {
+        return null;
+    }
 
     if (ofTypeOptionSet) {
         return (
@@ -99,8 +119,22 @@ const FilterSelectorContentsPlain = ({
     isRemovable,
     ...passOnProps
 }: Props & WithStyles<typeof getStyles>) => {
-    const contents =
-        useContents({ classes, filterValue, type, options, multiValueFilter, isRemovable, ...passOnProps });
+    const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
+    const contents = useContents({
+        classes,
+        filterValue,
+        type,
+        options,
+        multiValueFilter,
+        isRemovable,
+        emptyValueFilterSupported,
+        ...passOnProps,
+    });
+
+    if (contents === null) {
+        return null;
+    }
+
     return (
         <div className={classes.container} data-test="list-view-filter-contents">
             {contents}
