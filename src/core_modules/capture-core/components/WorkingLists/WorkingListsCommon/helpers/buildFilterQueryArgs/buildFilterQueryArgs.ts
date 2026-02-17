@@ -11,6 +11,7 @@ import {
     convertBoolean,
     convertNumeric,
     convertTrueOnly,
+    convertOrgUnit,
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
 import { API_NOT_EMPTY_VALUE_FILTER, API_EMPTY_VALUE_FILTER } from '../../../../FiltersForTypes/EmptyValue';
@@ -31,7 +32,7 @@ const mappersForTypes = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
     [filterTypesObject.LONG_TEXT]: convertText,
     [filterTypesObject.NUMBER]: convertNumeric,
-    [filterTypesObject.ORGANISATION_UNIT]: convertText,
+    [filterTypesObject.ORGANISATION_UNIT]: convertOrgUnit,
     [filterTypesObject.PERCENTAGE]: convertText,
     [filterTypesObject.PHONE_NUMBER]: convertText,
     [filterTypesObject.TEXT]: convertText,

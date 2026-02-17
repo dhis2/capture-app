@@ -4,6 +4,10 @@ export type ApiDataFilterText = {
     like: string,
 };
 
+export type ApiDataFilterOrgUnit = {
+    eq: string,
+};
+
 export type ApiDataFilterNumeric = {
     ge?: string | null,
     le?: string | null,
@@ -47,6 +51,7 @@ type ApiDataFilterCommon = {
 
 export type ApiDataFilter = (
     ApiDataFilterText |
+    ApiDataFilterOrgUnit |
     ApiDataFilterNumeric |
     ApiDataFilterBoolean |
     ApiDataFilterTrueOnly |

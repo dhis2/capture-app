@@ -12,6 +12,7 @@ export type {
     TrueOnlyFilterData,
     OptionSetFilterData,
     AssigneeFilterData,
+    OrgUnitFilterData,
     CustomRowMenuContent,
     CustomRowMenuContents,
     CustomTopBarActions,

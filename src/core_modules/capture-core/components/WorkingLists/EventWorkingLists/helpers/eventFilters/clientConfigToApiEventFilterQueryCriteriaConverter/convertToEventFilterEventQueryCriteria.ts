@@ -12,10 +12,12 @@ import {
     type BooleanFilterData,
     type TextFilterData,
     type NumericFilterData,
+    type OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,
+    ApiDataFilterOrgUnit,
     ApiDataFilterBoolean,
     ApiDataFilterTrueOnly,
     ApiDataFilterDate,
@@ -43,6 +45,10 @@ type ColumnsForConverter = Map<string, ColumnForConverter>;
 
 const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
     like: filter.value,
+});
+
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
+    eq: filter.id ?? filter.value,
 });
 
 const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
@@ -102,7 +108,7 @@ const getFilterByType = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: getTextFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,

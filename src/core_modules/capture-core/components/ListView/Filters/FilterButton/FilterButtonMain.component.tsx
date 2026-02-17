@@ -210,7 +210,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
                     <Popover
                         reference={this.anchorRef.current || undefined}
                         arrow={false}
-                        placement={isLangRtl() ? 'bottom-end' : 'bottom-start'}
+                        placement={isLangRtl() ? 'top-end' : 'top-start'}
                         onClickOutside={this.closeFilterSelector}
                         maxWidth={400}
                     >

@@ -36,4 +36,5 @@ export type {
     TrueOnlyFilterData,
     NumericFilterData,
     OptionSetFilterData,
+    OrgUnitFilterData,
 } from '../FiltersForTypes';
