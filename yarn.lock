@@ -3142,7 +3142,7 @@
   resolved "https://registry.yarnpkg.com/@dhis2/ui-icons/-/ui-icons-10.7.7.tgz#cb0dd9b1e713bde6615b5ac2f09d12527e546cd9"
   integrity sha512-Ld+OnFAKftPxzMzjSGyRK7Gz7TNHg2FQkK9a5mztPydLiZ9eThZ218o+4uX9cUMoG2F2pBwbYJ2qg0mebVc33g==
 
-"@dhis2/ui@10.13.0-alpha.1", "@dhis2/ui@^10.7.8":
+"@dhis2/ui@10.13.0-alpha.1":
   version "10.13.0-alpha.1"
   resolved "https://registry.yarnpkg.com/@dhis2/ui/-/ui-10.13.0-alpha.1.tgz#be72e91dbd4867a5015845c19a4acaecad935139"
   integrity sha512-iXOZ9p3n9wH8EFns/nc7gKTYMjAbrnhfsnHg2l6GJTEWB0aDcAaWf71CJpIzW0r97+sQUVuQz5Ze1aMyeNKPXA==
@@ -3195,6 +3195,61 @@
     "@dhis2/ui-constants" "10.13.0-alpha.1"
     "@dhis2/ui-forms" "10.13.0-alpha.1"
     "@dhis2/ui-icons" "10.13.0-alpha.1"
+    prop-types "^15.7.2"
+
+"@dhis2/ui@^10.7.8":
+  version "10.12.5"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui/-/ui-10.12.5.tgz#fb6b6fb84cd54cd0bbeb2a988b1c2c17bb84bf21"
+  integrity sha512-O+9rcvljY1L3qePecsBSkdow4s1qzAbrLl99a14usRUOLpAt17qKdvBeTq68LdowKhIWjMBnxcZaBEpgWCzSrw==
+  dependencies:
+    "@dhis2-ui/alert" "10.12.5"
+    "@dhis2-ui/box" "10.12.5"
+    "@dhis2-ui/button" "10.12.5"
+    "@dhis2-ui/calendar" "10.12.5"
+    "@dhis2-ui/card" "10.12.5"
+    "@dhis2-ui/center" "10.12.5"
+    "@dhis2-ui/checkbox" "10.12.5"
+    "@dhis2-ui/chip" "10.12.5"
+    "@dhis2-ui/cover" "10.12.5"
+    "@dhis2-ui/css" "10.12.5"
+    "@dhis2-ui/divider" "10.12.5"
+    "@dhis2-ui/field" "10.12.5"
+    "@dhis2-ui/file-input" "10.12.5"
+    "@dhis2-ui/header-bar" "10.12.5"
+    "@dhis2-ui/help" "10.12.5"
+    "@dhis2-ui/input" "10.12.5"
+    "@dhis2-ui/intersection-detector" "10.12.5"
+    "@dhis2-ui/label" "10.12.5"
+    "@dhis2-ui/layer" "10.12.5"
+    "@dhis2-ui/legend" "10.12.5"
+    "@dhis2-ui/loader" "10.12.5"
+    "@dhis2-ui/logo" "10.12.5"
+    "@dhis2-ui/menu" "10.12.5"
+    "@dhis2-ui/modal" "10.12.5"
+    "@dhis2-ui/node" "10.12.5"
+    "@dhis2-ui/notice-box" "10.12.5"
+    "@dhis2-ui/organisation-unit-tree" "10.12.5"
+    "@dhis2-ui/pagination" "10.12.5"
+    "@dhis2-ui/popover" "10.12.5"
+    "@dhis2-ui/popper" "10.12.5"
+    "@dhis2-ui/portal" "10.12.5"
+    "@dhis2-ui/radio" "10.12.5"
+    "@dhis2-ui/required" "10.12.5"
+    "@dhis2-ui/segmented-control" "10.12.5"
+    "@dhis2-ui/select" "10.12.5"
+    "@dhis2-ui/selector-bar" "10.12.5"
+    "@dhis2-ui/sharing-dialog" "10.12.5"
+    "@dhis2-ui/switch" "10.12.5"
+    "@dhis2-ui/tab" "10.12.5"
+    "@dhis2-ui/table" "10.12.5"
+    "@dhis2-ui/tag" "10.12.5"
+    "@dhis2-ui/text-area" "10.12.5"
+    "@dhis2-ui/tooltip" "10.12.5"
+    "@dhis2-ui/transfer" "10.12.5"
+    "@dhis2-ui/user-avatar" "10.12.5"
+    "@dhis2/ui-constants" "10.12.5"
+    "@dhis2/ui-forms" "10.12.5"
+    "@dhis2/ui-icons" "10.12.5"
     prop-types "^15.7.2"
 
 "@dual-bundle/import-meta-resolve@^4.1.0":
@@ -13865,7 +13920,7 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/string-natural-compare/-/string-natural-compare-3.0.1.tgz#7a42d58474454963759e8e8b7ae63d71c1e7fdf4"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0":
+"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -13890,15 +13945,6 @@ string-width@^3.0.0, string-width@^3.1.0:
     emoji-regex "^7.0.1"
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^5.1.0"
-
-string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
 
 string-width@^5.0.1, string-width@^5.1.2:
   version "5.1.2"
@@ -13991,14 +14037,7 @@ stringify-object@^3.3.0:
     is-obj "^1.0.1"
     is-regexp "^1.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
-
-strip-ansi@6.0.1, strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@6.0.1, strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -15536,7 +15575,7 @@ workbox-window@7.3.0:
     "@types/trusted-types" "^2.0.2"
     workbox-core "7.3.0"
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -15558,15 +15597,6 @@ wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"
