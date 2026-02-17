@@ -15,7 +15,7 @@
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/rule-engine": "^3.4.1",
-        "@dhis2/ui": "^10.12.4",
+        "@dhis2/ui": "10.13.0-alpha.1",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
         "@popperjs/core": "^2.11.6",
