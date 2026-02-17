@@ -8,6 +8,7 @@ export { OptionSetFilter } from './OptionSet';
 export { OrgUnitFilter } from './OrgUnit';
 export { TextFilter } from './Text';
 export { TrueOnlyFilter } from './TrueOnly';
+export { UsernameFilter } from './Username';
 
 export { assigneeFilterModes } from './Assignee/constants';
 export { dateFilterTypes } from './Date/constants';
@@ -21,6 +22,7 @@ export type { OptionSetFilterData } from './OptionSet/types';
 export type { OrgUnitFilterData } from './OrgUnit/types';
 export type { TextFilterData } from './Text/types';
 export type { TrueOnlyFilterData } from './TrueOnly/types';
+export type { UsernameFilterData } from './Username/types';
 export type { FilterData, FilterDataInput, UpdatableFilterContent } from './types';
 
 export type { Options } from '../FormFields/Options/SelectBoxes';

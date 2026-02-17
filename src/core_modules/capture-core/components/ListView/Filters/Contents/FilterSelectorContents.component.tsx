@@ -13,6 +13,7 @@ import {
     OptionSetFilter,
     EmptyOnlyFilter,
     OrgUnitFilter,
+    UsernameFilter,
 } from '../../../FiltersForTypes';
 import type { Props } from './filterSelectorContents.types';
 
@@ -49,7 +50,7 @@ const selectorContentsForTypes = {
     [filterTypesObject.TIME]: TextFilter,
     [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
     [filterTypesObject.URL]: TextFilter,
-    [filterTypesObject.USERNAME]: TextFilter,
+    [filterTypesObject.USERNAME]: UsernameFilter,
 };
 
 const EMPTY_ONLY_FILTER_TYPES = new Set([

@@ -37,4 +37,5 @@ export type {
     NumericFilterData,
     OptionSetFilterData,
     OrgUnitFilterData,
+    UsernameFilterData,
 } from '../FiltersForTypes';

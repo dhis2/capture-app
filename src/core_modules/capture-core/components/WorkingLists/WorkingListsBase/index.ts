@@ -13,6 +13,7 @@ export type {
     OptionSetFilterData,
     AssigneeFilterData,
     OrgUnitFilterData,
+    UsernameFilterData,
     CustomRowMenuContent,
     CustomRowMenuContents,
     CustomTopBarActions,
