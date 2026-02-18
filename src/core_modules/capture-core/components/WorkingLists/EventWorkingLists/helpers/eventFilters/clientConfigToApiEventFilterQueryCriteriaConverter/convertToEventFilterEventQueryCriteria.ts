@@ -48,7 +48,7 @@ const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
 });
 
 const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
-    eq: filter.id ?? filter.value,
+    eq: filter.value,
 });
 
 const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({

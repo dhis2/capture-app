@@ -18,11 +18,9 @@ export class OrgUnitFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: OrgUnitFilterData | null | undefined): State {
         if (!filter?.value) return { value: undefined };
 
-        // From API we get { value: id }. SingleOrgUnitSelectField needs { id, name, path }
-        if (filter.id && filter.value !== filter.id) {
-            return { value: { id: filter.id, name: filter.value, path: '' } };
-        }
-        return { value: { id: filter.value, name: filter.value, path: '' } };
+        const id = filter.value;
+        const name = filter.name ?? filter.value;
+        return { value: { id, name, path: '' } };
     }
 
     constructor(props: Props) {

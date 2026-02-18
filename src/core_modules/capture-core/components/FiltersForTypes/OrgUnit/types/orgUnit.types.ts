@@ -6,5 +6,5 @@ export type OrgUnitValue = {
 
 export type OrgUnitFilterData = {
     value: string;
-    id?: string;
+    name?: string;
 };
