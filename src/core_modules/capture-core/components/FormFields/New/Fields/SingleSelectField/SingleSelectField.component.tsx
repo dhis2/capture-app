@@ -21,6 +21,7 @@ type Props = {
     filterable?: boolean;
     clearable?: boolean;
     dataTest?: string;
+    onEndReached?: () => void;
 };
 
 const NewSingleSelectFieldComponentPlain = ({
@@ -36,6 +37,7 @@ const NewSingleSelectFieldComponentPlain = ({
     filterable = false,
     clearable = true,
     dataTest,
+    onEndReached,
 }: Props) => {
     const selectRef = useRef<HTMLDivElement | null>(null);
     const fieldName = id ?? 'single-select-field';
@@ -116,6 +118,7 @@ const NewSingleSelectFieldComponentPlain = ({
                 onClear={handleClear}
                 dataTest={dataTest}
                 disabled={disabled}
+                onEndReached={onEndReached}
             />
         </div>
     );
