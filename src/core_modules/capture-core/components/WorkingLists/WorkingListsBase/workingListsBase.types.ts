@@ -142,7 +142,6 @@ export type ListViewUpdaterContextData = {
 
 export type ListViewBuilderContextData = {
     updating: boolean,
-    updatingWithDialog: boolean,
     dataSource?: DataSource,
     onClickListRow: SelectRow,
     onSortList: Sort,
@@ -231,7 +230,6 @@ export type InterfaceProps = Readonly<{
     templates?: WorkingListTemplates,
     templatesLoading: boolean,
     updating: boolean,
-    updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     programStageId?: string,
     templateSharingType: string,

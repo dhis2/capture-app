@@ -404,7 +404,6 @@ const getReadyState = (oldState, more) => ({
     ...more,
     isLoading: false,
     isUpdating: false,
-    isUpdatingWithDialog: false,
 });
 
 export const workingListsUIDesc = createReducerDescription({
@@ -459,7 +458,7 @@ export const workingListsUIDesc = createReducerDescription({
             ...state,
             [storeId]: {
                 ...state[storeId],
-                isUpdatingWithDialog: true,
+                isUpdating: true,
             },
         };
     },
@@ -470,7 +469,7 @@ export const workingListsUIDesc = createReducerDescription({
             [storeId]: {
                 ...state[storeId],
                 lastEventIdDeleted: eventId,
-                isUpdatingWithDialog: false,
+                isUpdating: false,
             },
         };
     },
@@ -480,7 +479,7 @@ export const workingListsUIDesc = createReducerDescription({
             ...state,
             [storeId]: {
                 ...state[storeId],
-                isUpdatingWithDialog: false,
+                isUpdating: false,
             },
         };
     },
