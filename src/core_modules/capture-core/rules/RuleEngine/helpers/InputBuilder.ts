@@ -144,6 +144,7 @@ const convertProgramRuleAction = (action: ProgramRuleAction) => {
     const {
         data,
         programRuleActionType: type,
+        priority,
         ...rest
     } = action;
 
@@ -151,6 +152,7 @@ const convertProgramRuleAction = (action: ProgramRuleAction) => {
         data,
         type,
         new Map(Object.keys(rest).map(key => [key, rest[key]])),
+        priority || null,
     );
 };
 
