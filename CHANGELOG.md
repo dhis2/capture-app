@@ -1,3 +1,15 @@
+# [105.6.0](https://github.com/dhis2/capture-app/compare/v105.5.11...v105.6.0) (2026-02-20)
+
+
+### Bug Fixes
+
+* [DHIS2-20786] Deleting a single event from event program working list does not have confirm dialog ([#4457](https://github.com/dhis2/capture-app/issues/4457)) ([20b911e](https://github.com/dhis2/capture-app/commit/20b911e81d28e08b3330efb1642db7892cd065ee))
+
+
+### Features
+
+* [DHIS2-20930] Working lists without bulk data entry plugin should fill whole page ([#4462](https://github.com/dhis2/capture-app/issues/4462)) ([567d69d](https://github.com/dhis2/capture-app/commit/567d69d5f8e9dc99072cb816f7c2228cf406570f))
+
 ## [105.5.11](https://github.com/dhis2/capture-app/compare/v105.5.10...v105.5.11) (2026-02-15)
 
 
