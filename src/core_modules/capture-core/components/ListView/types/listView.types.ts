@@ -13,6 +13,7 @@ export type Column = {
     additionalColumn?: boolean;
     unique?: boolean;
     searchOperator?: string;
+    minCharactersToSearch?: number;
 };
 
 export type Columns = Array<Column>;

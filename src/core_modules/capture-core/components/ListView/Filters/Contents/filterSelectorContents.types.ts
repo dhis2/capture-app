@@ -9,6 +9,7 @@ type PassOnProps = Readonly<{
     isRemovable?: boolean;
     unique: boolean;
     searchOperator?: string;
+    minCharactersToSearch?: number;
 }>;
 
 export type Props = Readonly<{

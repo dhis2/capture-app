@@ -2,15 +2,11 @@ import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { Value } from './Text.types';
 
 type Props = {
     filter: TextFilterData | null | undefined;
-    filterTypeRef: (instance: any) => void;
+    filterTypeRef: (instance: unknown) => void;
     handleCommitValue: () => void;
-    onUpdate: (updatedValue: Value) => void;
-    unique: boolean;
-    searchOperator?: string;
 };
 
 type State = {
@@ -35,7 +31,7 @@ export class TextFilterManager extends React.Component<Props, State> {
             value,
         });
         this.props.handleCommitValue && this.props.handleCommitValue();
-    }
+    };
 
     render() {
         const { filter, filterTypeRef, ...passOnProps } = this.props;

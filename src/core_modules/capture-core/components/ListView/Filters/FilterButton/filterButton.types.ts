@@ -11,6 +11,7 @@ export type Props = {
     multiValueFilter?: boolean;
     unique: boolean;
     searchOperator?: string;
+    minCharactersToSearch?: number;
     disabled?: boolean;
     tooltipContent?: string;
     onSetVisibleSelector: (itemId?: string | null) => void;

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import i18n from '@dhis2/d2-i18n';
+import { cx } from '@emotion/css';
+import { isValidMinCharactersToSearch } from 'capture-core/utils/validation/validators/form/isValidMinCharactersToSearch';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
@@ -12,33 +16,79 @@ import {
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
 
-export class TextFilter extends Component<TextFilterProps> implements UpdatableFilterContent<Value> {
+const getStyles: any = (theme: any) => ({
+    error: {
+        ...theme.typography.caption,
+        color: theme.palette.error.main,
+    },
+    errorContainer: {
+        paddingTop: theme.typography.pxToRem(10),
+    },
+});
+
+class TextFilterPlain
+    extends Component<TextFilterProps & WithStyles<typeof getStyles>>
+    implements UpdatableFilterContent<Value> {
+    static validateField(value: string, minCharactersToSearch: number) {
+        const isValid = isValidMinCharactersToSearch(value, minCharactersToSearch);
+        return {
+            isValid,
+            minCharsError: isValid ? null : TextFilterPlain.errorMessages.MIN_CHARS(minCharactersToSearch),
+        };
+    }
+
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
 
+        if (!value) {
+            return null;
+        }
+
         return getTextFilterData(value);
     }
+
+    onIsValid() {
+        const { value, minCharactersToSearch } = this.props;
+        if (!value || !minCharactersToSearch) return true;
+        return TextFilterPlain.validateField(value, minCharactersToSearch).isValid;
+    }
+
+    static errorMessages = {
+        MIN_CHARS: (min: number) =>
+            i18n.t('Please enter at least {{minCharactersToSearch}} characters to search', {
+                minCharactersToSearch: min,
+            }),
+    };
 
     handleEnterKey = (value: Value) => {
         this.props.onUpdate(value || null);
     }
 
     handleBlur = (value: string) => {
-        if (value) {
-            this.props.onCommitValue(value);
-        }
+        this.props.onCommitValue(value || null);
     };
 
-    handleInputChange = (value: string) => {
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
         this.props.onCommitValue(value);
-    };
+    });
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value);
+    });
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue);
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
+    getErrors() {
+        const { value, minCharactersToSearch } = this.props;
+        if (!value || !minCharactersToSearch) return { isValid: true, minCharsError: null };
+        return TextFilterPlain.validateField(value, minCharactersToSearch);
+    }
 
     render() {
-        const { value, searchOperator } = this.props;
+        const { value, searchOperator, classes = {} } = this.props;
+        const { minCharsError } = this.getErrors();
         const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
+        const { error: errorClass, errorContainer: errorContainerClass } = classes as {
+            error?: string;
+            errorContainer?: string;
+        };
 
         return (
             <>
@@ -49,13 +99,17 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
                 />
 
                 <Input
-                    onChange={this.handleInputChange}
                     onBlur={this.handleBlur}
                     onEnterKey={this.handleEnterKey}
                     value={!isEmptyValueFilter(value) ? value : ''}
                 />
                 {helpText && <div style={helpTextStyle}>{helpText}</div>}
+                <div className={cx(errorClass, errorContainerClass)}>
+                    {minCharsError}
+                </div>
             </>
         );
     }
 }
+
+export const TextFilter = withStyles(getStyles)(TextFilterPlain);

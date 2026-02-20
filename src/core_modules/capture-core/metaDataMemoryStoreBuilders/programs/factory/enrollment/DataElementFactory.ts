@@ -294,6 +294,7 @@ export class DataElementFactory {
         }
 
         dataElement.searchOperator = getSearchOperator(cachedTrackedEntityAttribute);
+        dataElement.minCharactersToSearch = cachedTrackedEntityAttribute.minCharactersToSearch;
     }
 
     async _buildBaseDataElement(

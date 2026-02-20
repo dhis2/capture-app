@@ -6,5 +6,6 @@ export type TextFilterProps = {
     value: Value;
     unique: boolean;
     searchOperator?: string;
+    minCharactersToSearch?: number;
 };
 
