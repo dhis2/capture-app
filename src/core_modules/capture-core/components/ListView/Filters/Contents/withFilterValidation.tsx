@@ -28,6 +28,23 @@ function getMinCharsErrorMessage(min: number): string {
     });
 }
 
+function wrapFilterWithValidation(
+    instance: UpdatableFilterContent<unknown>,
+    minCharactersToSearch: number | undefined,
+    getCommittedValue: () => unknown,
+) {
+    return {
+        onGetUpdateData: (updatedValue?: unknown) => instance.onGetUpdateData(updatedValue),
+        onIsValid: () => {
+            if (instance.onIsValid && !instance.onIsValid()) return false;
+            if (minCharactersToSearch) {
+                return isValidMinCharactersToSearch(getCommittedValue(), minCharactersToSearch);
+            }
+            return true;
+        },
+    };
+}
+
 export const withFilterValidation = () => (InnerComponent: React.ComponentType<any>) => {
     const WithFilterValidationPlain = (props: any) => {
         const { filterTypeRef, minCharactersToSearch, handleCommitValue, classes, ...rest } = props;
@@ -35,29 +52,17 @@ export const withFilterValidation = () => (InnerComponent: React.ComponentType<a
         const committedValueRef = useRef<unknown>(undefined);
         const [committedValue, setCommittedValue] = useState<unknown>(undefined);
 
+        const getCommittedValue = useCallback(() => committedValueRef.current, []);
+
         const wrappedRef = useCallback(
             (instance: UpdatableFilterContent<any> | null) => {
                 innerInstanceRef.current = instance;
-                filterTypeRef(
-                    instance
-                        ? {
-                            onGetUpdateData: (updatedValue?: unknown) =>
-                                instance.onGetUpdateData(updatedValue),
-                            onIsValid: () => {
-                                if (!(instance.onIsValid?.() ?? true)) return false;
-                                if (minCharactersToSearch) {
-                                    return isValidMinCharactersToSearch(
-                                        committedValueRef.current,
-                                        minCharactersToSearch,
-                                    );
-                                }
-                                return true;
-                            },
-                        }
-                        : null,
-                );
+                const validatedFilter = instance
+                    ? wrapFilterWithValidation(instance, minCharactersToSearch, getCommittedValue)
+                    : null;
+                filterTypeRef(validatedFilter);
             },
-            [filterTypeRef, minCharactersToSearch],
+            [filterTypeRef, minCharactersToSearch, getCommittedValue],
         );
 
         const wrappedHandleCommitValue = useCallback(

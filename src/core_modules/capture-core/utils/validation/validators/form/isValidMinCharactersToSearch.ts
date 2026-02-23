@@ -26,13 +26,22 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
     return true;
 };
 
+function validateMinOrMaxField(
+    field: unknown,
+    minCharactersToSearch: number,
+): boolean {
+    if (field == null) {
+        return true;
+    }
+    if (typeof field === 'string') {
+        return isValueBiggerThanMinCharactersToSearch(field, minCharactersToSearch);
+    }
+    return true;
+}
+
 const isValidMinCharactersToSearchMinMax = (value: { min?: unknown; max?: unknown }, minCharactersToSearch: number) => {
-    const minValid = value.min != null
-        ? isValueBiggerThanMinCharactersToSearch(String(value.min), minCharactersToSearch)
-        : true;
-    const maxValid = value.max != null
-        ? isValueBiggerThanMinCharactersToSearch(String(value.max), minCharactersToSearch)
-        : true;
+    const minValid = validateMinOrMaxField(value.min, minCharactersToSearch);
+    const maxValid = validateMinOrMaxField(value.max, minCharactersToSearch);
     return minValid && maxValid;
 };
 
