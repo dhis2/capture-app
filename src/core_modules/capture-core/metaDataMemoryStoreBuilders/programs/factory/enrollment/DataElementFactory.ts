@@ -18,7 +18,6 @@ import {
     Section,
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
-import { getSearchOperator } from '../../../common/factory/searchGroup/searchOperator';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
@@ -293,7 +292,8 @@ export class DataElementFactory {
             );
         }
 
-        dataElement.searchOperator = getSearchOperator(cachedTrackedEntityAttribute);
+        dataElement.preferredSearchOperator = cachedTrackedEntityAttribute.preferredSearchOperator;
+        dataElement.blockedSearchOperators = cachedTrackedEntityAttribute.blockedSearchOperators;
         dataElement.minCharactersToSearch = cachedTrackedEntityAttribute.minCharactersToSearch;
     }
 

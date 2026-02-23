@@ -38,6 +38,8 @@ export class DataElement {
     _attributeValues!: CachedAttributeValue[];
     _section!: Section | null;
     _searchOperator!: SearchOperator;
+    _preferredSearchOperator?: string;
+    _blockedSearchOperators?: Array<string>;
 
     // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
@@ -93,6 +95,20 @@ export class DataElement {
     }
     get searchOperator(): SearchOperator {
         return this._searchOperator;
+    }
+
+    set preferredSearchOperator(value: string | undefined) {
+        this._preferredSearchOperator = value;
+    }
+    get preferredSearchOperator(): string | undefined {
+        return this._preferredSearchOperator;
+    }
+
+    set blockedSearchOperators(value: Array<string> | undefined) {
+        this._blockedSearchOperators = value;
+    }
+    get blockedSearchOperators(): Array<string> | undefined {
+        return this._blockedSearchOperators;
     }
 
     set formName(formName: string) {

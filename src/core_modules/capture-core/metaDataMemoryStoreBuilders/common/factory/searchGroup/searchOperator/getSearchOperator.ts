@@ -1,7 +1,6 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../metaData';
-import type { CachedTrackedEntityAttribute } from '../../../../../storageControllers';
 import {
     DEFAULT_IS_UNIQUE_SEARCH_OPERATOR,
     DEFAULT_HAS_OPTION_SET_SEARCH_OPERATOR,
@@ -11,7 +10,15 @@ import {
 import { forcedSearchOperators } from './forcedSearchOperators';
 import { defaultSearchOperators } from './defaultSearchOperators';
 
-const getFallbackSearchOperator = (metadata: CachedTrackedEntityAttribute): SearchOperator => {
+export type SearchOperatorMetadata = {
+    unique?: any;
+    optionSet?: any;
+    valueType: keyof typeof dataElementTypes;
+    preferredSearchOperator?: string;
+    blockedSearchOperators?: Array<string>;
+};
+
+const getFallbackSearchOperator = (metadata: SearchOperatorMetadata): SearchOperator => {
     const { valueType, blockedSearchOperators } = metadata;
     const defaultSearchOperatorList = defaultSearchOperators[valueType];
 
@@ -41,7 +48,7 @@ const getFallbackSearchOperator = (metadata: CachedTrackedEntityAttribute): Sear
     return fallbackSearchOperator;
 };
 
-export const getSearchOperator = (metadata: CachedTrackedEntityAttribute): SearchOperator => {
+export const getSearchOperator = (metadata: SearchOperatorMetadata): SearchOperator => {
     if (metadata.unique) {
         return DEFAULT_IS_UNIQUE_SEARCH_OPERATOR;
     }
