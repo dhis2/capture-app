@@ -11,6 +11,7 @@ const mapInputTypeToPropsGetterFn = {
     [inputTypes.DROPDOWN]: (metaData: DataElement) => ({
         options: getOptionsForSelect(metaData.optionSet),
         nullable: !metaData.compulsory,
+        filterable: true,
         style: {
             width: '100%',
         },

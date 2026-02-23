@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { SimpleSingleSelect } from '@dhis2/ui';
 import { withFocusHandler } from './withFocusHandler';
 import { withSelectSingleTranslations } from './withTranslations';
@@ -39,16 +39,29 @@ const NewSingleSelectFieldComponentPlain = ({
 }: Props) => {
     const selectRef = useRef<HTMLDivElement | null>(null);
     const fieldName = id ?? 'single-select-field';
+    const [filterValue, setFilterValue] = useState('');
+
+    const filteredOptions = useMemo(
+        () => (filterable && filterValue
+            ? options.filter(({ label }) => label.toLowerCase().includes(filterValue.toLowerCase()))
+            : options),
+        [options, filterValue, filterable],
+    );
 
     const selectedOption = value == null
         ? undefined
         : options.find(option => option.value === value) ?? { value, label: String(value) };
+
+    const handleFilterChange = useCallback((newFilterValue: string) => {
+        setFilterValue(newFilterValue);
+    }, []);
 
     const handleChange = (nextValue: string | { value: string }) => {
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
         if (onChange) {
             onChange(resolvedValue ?? null);
         }
+        setFilterValue('');
         onBlur?.(resolvedValue ?? null);
     };
 
@@ -89,11 +102,13 @@ const NewSingleSelectFieldComponentPlain = ({
         <div ref={selectRef}>
             <SimpleSingleSelect
                 name={fieldName}
-                options={options}
+                options={filteredOptions}
                 selected={selectedOption}
                 placeholder={placeholder}
                 clearable={clearable}
                 filterable={filterable}
+                filterValue={filterValue}
+                onFilterChange={handleFilterChange}
                 aria-required={required}
                 onChange={handleChange}
                 onBlur={handleBlur}

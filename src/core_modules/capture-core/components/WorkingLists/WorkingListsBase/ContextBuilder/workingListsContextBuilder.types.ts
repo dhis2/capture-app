@@ -73,7 +73,6 @@ type ExtractedProps = Readonly<{
     stickyFilters?: StickyFilters,
     programStageId?: string,
     updating: boolean,
-    updatingWithDialog: boolean,
     templates?: WorkingListTemplates,
     viewPreloaded?: boolean,
     bulkActionBarComponent: ReactNode,
