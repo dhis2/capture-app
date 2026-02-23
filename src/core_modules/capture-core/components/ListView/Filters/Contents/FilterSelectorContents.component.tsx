@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import { withButtons } from './withButtons';
+import { withFilterValidation } from './withFilterValidation';
 import {
     TextFilter,
     NumericFilter,
@@ -44,7 +45,7 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, is
         }
 
         const TypeFilter = selectorContentsForTypes[type];
-        return [withButtons()(TypeFilter), false];
+        return [withButtons()(withFilterValidation()(TypeFilter)), false];
     }, [type, options]);
 
     if (ofTypeOptionSet) {
@@ -68,6 +69,7 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, is
             filter={filterValue}
             type={type}
             singleSelect={!multiValueFilter}
+            onValueChange={() => setUpdateDisabled(false)}
             handleCommitValue={() => setUpdateDisabled(false)}
             disabledUpdate={disabledUpdate}
             disabledReset={filterValue === undefined}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-23T07:05:09.802Z\n"
-"PO-Revision-Date: 2026-02-23T07:05:09.802Z\n"
+"POT-Creation-Date: 2026-02-23T14:25:12.622Z\n"
+"PO-Revision-Date: 2026-02-23T14:25:12.622Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -537,11 +537,6 @@ msgstr "Please provide a positive integer"
 msgid "Please provide a negative integer"
 msgstr "Please provide a negative integer"
 
-msgid "Please enter at least {{minCharactersToSearch}} character to search"
-msgid_plural "Please enter at least {{minCharactersToSearch}} character to search"
-msgstr[0] "Please enter at least {{minCharactersToSearch}} character to search"
-msgstr[1] "Please enter at least {{minCharactersToSearch}} characters to search"
-
 msgid "Yes"
 msgstr "Yes"
 
@@ -616,6 +611,11 @@ msgstr "Reset filter"
 
 msgid "Remove filter"
 msgstr "Remove filter"
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural "Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] "Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[1] "Please enter at least {{minCharactersToSearch}} characters to filter"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"

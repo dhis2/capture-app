@@ -26,6 +26,16 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
     return true;
 };
 
+const isValidMinCharactersToSearchMinMax = (value: { min?: unknown; max?: unknown }, minCharactersToSearch: number) => {
+    const minValid = value.min != null
+        ? isValueBiggerThanMinCharactersToSearch(String(value.min), minCharactersToSearch)
+        : true;
+    const maxValid = value.max != null
+        ? isValueBiggerThanMinCharactersToSearch(String(value.max), minCharactersToSearch)
+        : true;
+    return minValid && maxValid;
+};
+
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
     if (value === undefined) {
         return true;
@@ -37,6 +47,10 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
 
     if ('from' in value && 'to' in value) {
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
+    }
+
+    if ('min' in value || 'max' in value) {
+        return isValidMinCharactersToSearchMinMax(value, minCharactersToSearch);
     }
 
     if ('date' in value) {
