@@ -32,6 +32,9 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         removeButtonInstance: HTMLButtonElement | null = null;
 
         update = (commitValue?: any) => {
+            if (!this.isValid()) {
+                return;
+            }
             const updateData = this.filterTypeInstance?.onGetUpdateData(commitValue);
             this.props.onUpdate(updateData);
         }

@@ -5,13 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-<<<<<<< hv/DHIS2-20864_TeaSearchOperatorsInWorkingListFilter
 "POT-Creation-Date: 2026-02-23T14:25:12.622Z\n"
 "PO-Revision-Date: 2026-02-23T14:25:12.622Z\n"
-=======
 "POT-Creation-Date: 2026-02-23T08:39:49.515Z\n"
 "PO-Revision-Date: 2026-02-23T08:39:49.515Z\n"
->>>>>>> master
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
