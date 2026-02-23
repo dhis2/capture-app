@@ -1,3 +1,10 @@
+# [105.7.0](https://github.com/dhis2/capture-app/compare/v105.6.1...v105.7.0) (2026-02-23)
+
+
+### Features
+
+* [DHIS2-20938] Missing search bar for Option Sets ([#4463](https://github.com/dhis2/capture-app/issues/4463)) ([ab286f9](https://github.com/dhis2/capture-app/commit/ab286f92a3e3318f6464e2425484980f060479f4))
+
 ## [105.6.1](https://github.com/dhis2/capture-app/compare/v105.6.0...v105.6.1) (2026-02-22)
 
 
