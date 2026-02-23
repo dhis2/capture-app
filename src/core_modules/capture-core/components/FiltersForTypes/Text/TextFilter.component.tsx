@@ -47,16 +47,19 @@ class TextFilterPlain
         return getTextFilterData(value);
     }
 
-    onIsValid() {
+    onIsValid() { // NOSONAR -- part of UpdatableFilterContent, called from withButtons
         const { value, minCharactersToSearch } = this.props;
         if (!value || !minCharactersToSearch) return true;
         return TextFilterPlain.validateField(value, minCharactersToSearch).isValid;
     }
 
-    static errorMessages = {
+    static readonly errorMessages = {
         MIN_CHARS: (min: number) =>
-            i18n.t('Please enter at least {{minCharactersToSearch}} characters to search', {
+            i18n.t('Please enter at least {{minCharactersToSearch}} character to search', {
                 minCharactersToSearch: min,
+                count: min,
+                defaultValue: 'Please enter at least {{minCharactersToSearch}} character to search',
+                defaultValue_plural: 'Please enter at least {{minCharactersToSearch}} characters to search',
             }),
     };
 
