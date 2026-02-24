@@ -6,6 +6,7 @@ import type { FiltersData } from '../../../WorkingListsBase';
 import {
     convertText,
     convertDate,
+    convertDateTime,
     convertAssignee,
     convertOptionSet,
     convertBoolean,
@@ -22,7 +23,7 @@ const mappersForTypes = {
     [filterTypesObject.BOOLEAN]: convertBoolean,
     [filterTypesObject.COORDINATE]: convertText,
     [filterTypesObject.DATE]: convertDate,
-    [filterTypesObject.DATETIME]: convertDate,
+    [filterTypesObject.DATETIME]: convertDateTime,
     [filterTypesObject.EMAIL]: convertText,
     [filterTypesObject.FILE_RESOURCE]: convertText,
     [filterTypesObject.IMAGE]: convertText,

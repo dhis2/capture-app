@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
-"PO-Revision-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-24T15:16:43.516Z\n"
+"PO-Revision-Date: 2026-02-24T15:16:43.516Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -509,6 +509,24 @@ msgstr "Absolute range"
 
 msgid "Relative range"
 msgstr "Relative range"
+
+msgid "Please specify a date range"
+msgstr "Please specify a date range"
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr "The \"Before\" value must be after the \"After\" value"
+
+msgid "After"
+msgstr "After"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Time"
+msgstr "Time"
+
+msgid "Before"
+msgstr "Before"
 
 msgid "Is empty"
 msgstr "Is empty"
@@ -1752,9 +1770,6 @@ msgstr "Created"
 msgid "Deleted"
 msgstr "Deleted"
 
-msgid "Date"
-msgstr "Date"
-
 msgid "Sort by date"
 msgstr "Sort by date"
 
@@ -2222,9 +2237,6 @@ msgstr "Some attributes are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "Time"
-msgstr "Time"
 
 msgid "From date"
 msgstr "From date"
