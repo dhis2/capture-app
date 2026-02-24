@@ -3,25 +3,33 @@ import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
-    onEnterKey: (value: string | undefined) => void;
-    value: string | undefined;
+    value: string;
     onBlur: (value: string) => void;
+    onEnterKey: () => void;
+    onChange?: (value: string) => void;
 };
 
 class InputPlain extends React.Component<Props> {
-    handleKeyDown = (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
+    static getValueObject(value: string) {
+        return value.trim();
+    }
+
+    handleBlur = (value: string) => {
+        this.props.onBlur(InputPlain.getValueObject(value));
+    }
+
+    handleKeyDown = (_payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            if (payload.value) {
-                this.props.onEnterKey(payload.value);
-            }
+            this.props.onEnterKey();
         }
-    };
+    }
 
     render() {
-        const { onEnterKey, ...passOnProps } = this.props;
+        const { onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <D2TextField
                 onKeyDown={this.handleKeyDown}
+                onBlur={this.handleBlur}
                 {...passOnProps}
             />
         );

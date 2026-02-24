@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
-import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
 import type { UpdatableFilterContent } from '../types';
 import type { TextFilterProps, Value } from './Text.types';
 import {
@@ -25,28 +24,27 @@ export class TextFilter
         return getTextFilterData(value);
     }
 
-    handleEnterKey = (value: Value) => {
-        this.props.onUpdate?.(value || null);
+    handleEnterKey = () => {
+        this.props.onUpdate(this.props.value || null);
     }
 
     handleBlur = (value: string) => {
-        this.props.onCommitValue(value || null);
+        this.props.onCommitValue(value, true);
     };
 
     handleChange = (value: string) => {
-        this.props.onValueChange?.(value || null);
+        this.props.onCommitValue(value);
     };
 
     handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value);
+        this.props.onCommitValue(value || null);
     });
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value);
+        this.props.onCommitValue(value || null);
     });
 
     render() {
-        const { value, searchOperator } = this.props;
-        const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
+        const { value } = this.props;
 
         return (
             <>
@@ -57,12 +55,11 @@ export class TextFilter
                 />
 
                 <Input
-                    onChange={this.handleChange}
+                    value={!isEmptyValueFilter(value) ? value : ''}
                     onBlur={this.handleBlur}
                     onEnterKey={this.handleEnterKey}
-                    value={!isEmptyValueFilter(value) ? value : ''}
+                    onChange={this.handleChange}
                 />
-                {helpText && <div style={helpTextStyle}>{helpText}</div>}
             </>
         );
     }

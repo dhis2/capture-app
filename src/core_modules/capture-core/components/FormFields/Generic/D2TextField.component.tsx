@@ -7,9 +7,14 @@ type Props = {
     value?: string;
     placeholder?: string;
     dataTest?: string;
-    onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     onKeyDown?: (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
+
+/** Ref from @dhis2/ui Input: class instance with internal inputRef, not a DOM element */
+interface D2UIInputInstance {
+    inputRef?: React.RefObject<HTMLInputElement | null>;
+    focus?(): void;
+}
 
 export class D2TextField extends Component<Props> {
     static defaultProps = {
@@ -21,7 +26,7 @@ export class D2TextField extends Component<Props> {
         this.handleChange = this.handleChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
     }
-    instance: HTMLInputElement | null = null;
+    instance: D2UIInputInstance | null = null;
 
     handleChange = (payload: { value?: string }, event: any) => {
         this.props.onChange && this.props.onChange(payload.value || '', event);
@@ -32,7 +37,7 @@ export class D2TextField extends Component<Props> {
     }
 
     focus() {
-        this.instance?.focus();
+        this.instance?.inputRef?.current?.focus();
     }
 
     render() {

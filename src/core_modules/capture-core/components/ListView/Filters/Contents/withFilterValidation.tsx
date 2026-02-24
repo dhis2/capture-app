@@ -32,6 +32,7 @@ function wrapFilterWithValidation(
     instance: UpdatableFilterContent<unknown>,
     minCharactersToSearch: number | undefined,
     getCommittedValue: () => unknown,
+    showValidationErrors: () => void,
 ) {
     return {
         onGetUpdateData: (updatedValue?: unknown) => instance.onGetUpdateData(updatedValue),
@@ -42,6 +43,7 @@ function wrapFilterWithValidation(
             }
             return true;
         },
+        showValidationErrors,
     };
 }
 
@@ -54,22 +56,28 @@ export const withFilterValidation = () => (InnerComponent: React.ComponentType<a
 
         const getCommittedValue = useCallback(() => committedValueRef.current, []);
 
+        const showValidationErrors = useCallback(() => {
+            setCommittedValue(committedValueRef.current);
+        }, []);
+
         const wrappedRef = useCallback(
             (instance: UpdatableFilterContent<any> | null) => {
                 innerInstanceRef.current = instance;
                 const validatedFilter = instance
-                    ? wrapFilterWithValidation(instance, minCharactersToSearch, getCommittedValue)
+                    ? wrapFilterWithValidation(instance, minCharactersToSearch, getCommittedValue, showValidationErrors)
                     : null;
                 filterTypeRef(validatedFilter);
             },
-            [filterTypeRef, minCharactersToSearch, getCommittedValue],
+            [filterTypeRef, minCharactersToSearch, getCommittedValue, showValidationErrors],
         );
 
         const wrappedHandleCommitValue = useCallback(
-            (value?: unknown, ...args: unknown[]) => {
+            (value?: unknown, isCommit?: boolean) => {
                 committedValueRef.current = value;
-                setCommittedValue(value);
-                handleCommitValue?.(value, ...args);
+                if (isCommit) {
+                    setCommittedValue(value);
+                }
+                handleCommitValue?.(value, isCommit);
             },
             [handleCommitValue],
         );

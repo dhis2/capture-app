@@ -6,8 +6,8 @@ import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 type Props = {
     filter: TextFilterData | null | undefined;
     filterTypeRef: (instance: unknown) => void;
-    onValueChange?: () => void;
-    handleCommitValue: (value?: string | null) => void;
+    handleCommitValue: (value?: string | null, isBlur?: boolean) => void;
+    onUpdate: (commitValue?: any) => void;
 };
 
 type State = {
@@ -27,15 +27,10 @@ export class TextFilterManager extends React.Component<Props, State> {
         this.state = TextFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleValueChange = (value: string | null | undefined) => {
+    handleCommitValue = (value: any, isCommit?: boolean) => {
         this.setState({ value });
-        this.props.onValueChange?.();
-    };
-
-    handleCommitValue = (value: string | null | undefined) => {
-        this.setState({ value });
-        this.props.handleCommitValue?.(value);
-    };
+        this.props.handleCommitValue?.(value, isCommit);
+    }
 
     render() {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
@@ -44,7 +39,6 @@ export class TextFilterManager extends React.Component<Props, State> {
             <TextFilter
                 value={this.state.value}
                 ref={filterTypeRef}
-                onValueChange={this.handleValueChange}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

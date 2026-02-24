@@ -33,6 +33,7 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
 
         update = (commitValue?: any) => {
             if (!this.isValid()) {
+                this.filterTypeInstance?.showValidationErrors?.();
                 return;
             }
             const updateData = this.filterTypeInstance?.onGetUpdateData(commitValue);

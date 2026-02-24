@@ -1,11 +1,7 @@
 export type Value = string | null | undefined;
 
 export type TextFilterProps = {
-    onValueChange?: (value: Value) => void;
-    onCommitValue: (value: Value) => void;
-    onUpdate?: (updatedValue: Value) => void;
+    onCommitValue: (value: Value, isCommit?: boolean) => void;
+    onUpdate: (commitValue?: any) => void;
     value: Value;
-    unique?: boolean;
-    searchOperator?: string;
-    minCharactersToSearch?: number;
 };

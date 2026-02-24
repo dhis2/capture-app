@@ -41,10 +41,10 @@ const getStyles: any = (theme: any) => ({
 type Value = {
     min?: string | null,
     max?: string | null,
-} | null;
+} | undefined;
 
 type Props = {
-    onCommitValue: (value: { min?: string | null, max?: string | null} | null) => void,
+    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
@@ -86,7 +86,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
         if (!value) {
-            return null;
+            return undefined;
         }
         return getNumericFilterData(value);
     }
@@ -122,12 +122,15 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         return Object
             .keys(valueObject)
             .filter(key => valueObject[key])
-            .length > 0 ? valueObject : null;
+            .length > 0 ? valueObject : undefined;
     }
 
     handleEnterKeyInMin = () => {
         // focus Max
-        this.maxD2TextFieldInstance?.focus();
+        const maxInput = this.maxD2TextFieldInstance;
+        if (maxInput) {
+            requestAnimationFrame(() => maxInput.focus());
+        }
     }
 
     handleEnterKeyInMax = (value: {[key: string]: string}) => {
@@ -137,7 +140,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values);
         } else {
-            this.props.onUpdate(values || null);
+            this.props.onUpdate(values);
         }
     }
 

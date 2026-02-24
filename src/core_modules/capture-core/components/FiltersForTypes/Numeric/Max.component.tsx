@@ -21,9 +21,9 @@ class MaxNumericFilterPlain extends Component<Props> {
         this.props.onBlur(MaxNumericFilterPlain.getValueObject(value));
     }
 
-    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(this.props.value || ''));
+            this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(payload.value ?? this.props.value ?? ''));
         }
     }
 
@@ -33,7 +33,7 @@ class MaxNumericFilterPlain extends Component<Props> {
             <div>
                 <D2TextField
                     ref={textFieldRef}
-                    onKeyPress={this.handleKeyPress}
+                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Max')}
                     {...passOnProps}

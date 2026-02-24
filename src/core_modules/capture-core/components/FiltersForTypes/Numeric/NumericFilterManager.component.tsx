@@ -1,22 +1,24 @@
 import * as React from 'react';
 import { NumericFilter } from './NumericFilter.component';
 import type { NumericFilterData } from './types';
+import { dataElementTypes } from '../../../metaData';
 
 type Props = {
     filter: NumericFilterData | null,
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any) => void,
+    handleCommitValue: (value?: any, isBlur?: boolean) => void,
+    onUpdate: (commitValue?: any) => void,
+    type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };
 
 type State = {
     value: {
         min?: string | null,
         max?: string | null,
-    },
+    } | undefined;
 };
 
 export class NumericFilterManager extends React.Component<Props, State> {
-    // eslint-disable-next-line complexity
     static calculateDefaultState(filter: NumericFilterData | null) {
         return {
             min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
