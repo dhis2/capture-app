@@ -5,7 +5,7 @@ import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHa
 type Props = {
     value: string;
     onBlur: (value: string) => void;
-    onEnterKey: () => void;
+    onEnterKey: (value: string) => void;
     onChange?: (value: string) => void;
 };
 
@@ -18,9 +18,9 @@ class InputPlain extends React.Component<Props> {
         this.props.onBlur(InputPlain.getValueObject(value));
     }
 
-    handleKeyDown = (_payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey();
+            this.props.onEnterKey(InputPlain.getValueObject(payload.value ?? this.props.value ?? ''));
         }
     }
 

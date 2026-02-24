@@ -24,8 +24,8 @@ export class TextFilter
         return getTextFilterData(value);
     }
 
-    handleEnterKey = () => {
-        this.props.onUpdate(this.props.value || null);
+    handleEnterKey = (value?: string) => {
+        this.props.onUpdate(value ?? this.props.value ?? null);
     }
 
     handleBlur = (value: string) => {
