@@ -16,10 +16,10 @@ export const mainOptionTranslatedTexts = {
     [mainOptionKeys.TODAY]: i18n.t('Today'),
     [mainOptionKeys.THIS_WEEK]: i18n.t('This week'),
     [mainOptionKeys.THIS_MONTH]: i18n.t('This month'),
-    [mainOptionKeys.THIS_YEAR]: i18n.t('This Year'),
+    [mainOptionKeys.THIS_YEAR]: i18n.t('This year'),
     [mainOptionKeys.LAST_WEEK]: i18n.t('Last week'),
     [mainOptionKeys.LAST_MONTH]: i18n.t('Last month'),
     [mainOptionKeys.LAST_3_MONTHS]: i18n.t('Last 3 months'),
-    [mainOptionKeys.ABSOLUTE_RANGE]: i18n.t('Absolute range'),
-    [mainOptionKeys.RELATIVE_RANGE]: i18n.t('Relative range'),
+    [mainOptionKeys.ABSOLUTE_RANGE]: i18n.t('Between two dates'),
+    [mainOptionKeys.RELATIVE_RANGE]: i18n.t('Days before and after today'),
 };

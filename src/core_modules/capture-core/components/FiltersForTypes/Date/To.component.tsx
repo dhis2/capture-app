@@ -33,7 +33,7 @@ class ToDateFilterPlain extends Component<Props> {
                 <D2Date
                     onBlur={this.handleBlur}
                     onDateSelectedFromCalendar={this.handleDateSelectedFromCalendar}
-                    placeholder={i18n.t('To')}
+                    placeholder={i18n.t('End date')}
                     inputWidth="150px"
                     calendarWidth="330px"
                     {...passOnProps}

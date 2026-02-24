@@ -9,7 +9,9 @@ import type { D2TextField } from '../../FormFields/Generic/D2TextField.component
 const styles: Readonly<any> = (theme: any) => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
+        alignItems: 'flex-start',
+        gap: theme.typography.pxToRem(8),
     },
     inputContainer: {
         width: '150px',

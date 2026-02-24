@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-24T15:16:43.516Z\n"
-"PO-Revision-Date: 2026-02-24T15:16:43.516Z\n"
+"POT-Creation-Date: 2026-02-24T15:59:41.964Z\n"
+"PO-Revision-Date: 2026-02-24T15:59:41.964Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -462,8 +462,8 @@ msgstr "Select user"
 msgid "Please specify a range"
 msgstr "Please specify a range"
 
-msgid "The From date can't be after the To date"
-msgstr "The From date can't be after the To date"
+msgid "Start date must be before the end date"
+msgstr "Start date must be before the end date"
 
 msgid "Please specify the number of days"
 msgstr "Please specify the number of days"
@@ -471,20 +471,32 @@ msgstr "Please specify the number of days"
 msgid "Please provide zero or a positive integer"
 msgstr "Please provide zero or a positive integer"
 
+msgid "Date filter"
+msgstr "Date filter"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "From and to date"
+msgstr "From and to date"
+
 msgid "to"
 msgstr "to"
+
+msgid "Days relative to today"
+msgstr "Days relative to today"
 
 msgid "Days in the future"
 msgstr "Days in the future"
 
-msgid "From"
-msgstr "From"
+msgid "Start date"
+msgstr "Start date"
 
 msgid "Days in the past"
 msgstr "Days in the past"
 
-msgid "To"
-msgstr "To"
+msgid "End date"
+msgstr "End date"
 
 msgid "This week"
 msgstr "This week"
@@ -492,8 +504,8 @@ msgstr "This week"
 msgid "This month"
 msgstr "This month"
 
-msgid "This Year"
-msgstr "This Year"
+msgid "This year"
+msgstr "This year"
 
 msgid "Last week"
 msgstr "Last week"
@@ -504,11 +516,11 @@ msgstr "Last month"
 msgid "Last 3 months"
 msgstr "Last 3 months"
 
-msgid "Absolute range"
-msgstr "Absolute range"
+msgid "Between two dates"
+msgstr "Between two dates"
 
-msgid "Relative range"
-msgstr "Relative range"
+msgid "Days before and after today"
+msgstr "Days before and after today"
 
 msgid "Please specify a date range"
 msgstr "Please specify a date range"
@@ -641,6 +653,12 @@ msgstr "Reset filter"
 
 msgid "Remove filter"
 msgstr "Remove filter"
+
+msgid "This Year"
+msgstr "This Year"
+
+msgid "Relative range"
+msgstr "Relative range"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
@@ -2237,6 +2255,12 @@ msgstr "Some attributes are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
+
+msgid "From"
+msgstr "From"
+
+msgid "To"
+msgstr "To"
 
 msgid "From date"
 msgstr "From date"
