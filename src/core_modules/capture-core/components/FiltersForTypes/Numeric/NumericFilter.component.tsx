@@ -43,13 +43,19 @@ type Value = {
 } | undefined;
 
 type Props = {
-    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined) => void,
+    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined, isCommit?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };
 
-class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>> implements UpdatableFilterContent<Value> {
+type State = {
+    committedValue: Value;
+};
+
+class NumericFilterPlain
+    extends Component<Props & WithStyles<typeof getStyles>, State>
+    implements UpdatableFilterContent<Value> {
     static validateField(value: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
         if (!value) {
             return {
@@ -80,10 +86,17 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
     }
 
+    constructor(props: Props & WithStyles<typeof getStyles>) {
+        super(props);
+        this.state = {
+            committedValue: props.value,
+        };
+    }
+
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
-        if (!value) {
+        if (!value || (!value.min && !value.max)) {
             return undefined;
         }
         return getNumericFilterData(value);
@@ -125,23 +138,30 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
     handleEnterKey = (value: {[key: string]: string}) => {
         const values = this.getUpdatedValue(value);
+        this.setState({ committedValue: values });
         if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
-            this.props.onCommitValue(values);
+            this.props.onCommitValue(values, true);
         } else {
             this.props.onUpdate(values);
         }
     }
 
     handleFieldBlur = (value: {[key: string]: string}) => {
-        this.props.onCommitValue(this.getUpdatedValue(value));
+        const updated = this.getUpdatedValue(value);
+        this.setState({ committedValue: updated });
+        this.props.onCommitValue(updated, true);
     }
 
-    handleFieldChange = (value: {[key: string]: string}) => {
-        this.props.onCommitValue(this.getUpdatedValue(value));
+    handleMinChange = (value: string) => {
+        this.props.onCommitValue(this.getUpdatedValue({ min: value }), false);
+    }
+
+    handleMaxChange = (value: string) => {
+        this.props.onCommitValue(this.getUpdatedValue({ max: value }), false);
     }
 
     getErrors() {
-        const values = this.props.value;
+        const values = this.state.committedValue;
         const minValue = values && values.min;
         const maxValue = values && values.max;
         const type = this.props.type;
@@ -176,7 +196,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKey}
-                            onChange={this.handleFieldChange}
+                            onChange={this.handleMinChange}
                         />
                     </div>
                     <div
@@ -193,7 +213,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKey}
-                            onChange={this.handleFieldChange}
+                            onChange={this.handleMaxChange}
                         />
                     </div>
                 </div>

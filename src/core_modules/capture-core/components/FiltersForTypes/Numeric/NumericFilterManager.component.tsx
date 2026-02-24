@@ -6,7 +6,7 @@ import { dataElementTypes } from '../../../metaData';
 type Props = {
     filter: NumericFilterData | null,
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any, isBlur?: boolean) => void,
+    handleCommitValue: (value?: any, isCommit?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };
@@ -33,9 +33,9 @@ export class NumericFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: any) => {
+    handleCommitValue = (value: any, isCommit?: boolean) => {
         this.setState({ value });
-        this.props.handleCommitValue?.(value);
+        this.props.handleCommitValue?.(value, isCommit);
     }
 
     render() {
