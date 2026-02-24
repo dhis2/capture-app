@@ -6,7 +6,7 @@ import { dataElementTypes } from '../../../metaData';
 type Props = {
     filter: NumericFilterData | null,
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any, isCommit?: boolean) => void,
+    handleCommitValue: (value?: any, isBlur?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };

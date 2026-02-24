@@ -27,9 +27,9 @@ export class TextFilterManager extends React.Component<Props, State> {
         this.state = TextFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleCommitValue = (value: any, isCommit?: boolean) => {
+    handleCommitValue = (value: any, isBlur?: boolean) => {
         this.setState({ value });
-        this.props.handleCommitValue?.(value, isCommit);
+        this.props.handleCommitValue?.(value, isBlur);
     }
 
     render() {

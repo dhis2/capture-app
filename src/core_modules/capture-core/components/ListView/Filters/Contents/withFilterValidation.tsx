@@ -31,7 +31,7 @@ function getMinCharsErrorMessage(min: number): string {
 function wrapFilterWithValidation(
     instance: UpdatableFilterContent<unknown>,
     minCharactersToSearch: number | undefined,
-    getCommittedValue: () => unknown,
+    committedValueRef: React.MutableRefObject<unknown>,
     showValidationErrors: () => void,
 ) {
     return {
@@ -39,7 +39,7 @@ function wrapFilterWithValidation(
         onIsValid: () => {
             if (instance.onIsValid && !instance.onIsValid()) return false;
             if (minCharactersToSearch) {
-                return isValidMinCharactersToSearch(getCommittedValue(), minCharactersToSearch);
+                return isValidMinCharactersToSearch(committedValueRef.current, minCharactersToSearch);
             }
             return true;
         },
@@ -50,34 +50,30 @@ function wrapFilterWithValidation(
 export const withFilterValidation = () => (InnerComponent: React.ComponentType<any>) => {
     const WithFilterValidationPlain = (props: any) => {
         const { filterTypeRef, minCharactersToSearch, handleCommitValue, classes, ...rest } = props;
-        const innerInstanceRef = useRef<UpdatableFilterContent<unknown> | null>(null);
         const committedValueRef = useRef<unknown>(undefined);
         const [committedValue, setCommittedValue] = useState<unknown>(undefined);
-
-        const getCommittedValue = useCallback(() => committedValueRef.current, []);
 
         const showValidationErrors = useCallback(() => {
             setCommittedValue(committedValueRef.current);
         }, []);
 
         const wrappedRef = useCallback(
-            (instance: UpdatableFilterContent<any> | null) => {
-                innerInstanceRef.current = instance;
+            (instance: UpdatableFilterContent<unknown> | null) => {
                 const validatedFilter = instance
-                    ? wrapFilterWithValidation(instance, minCharactersToSearch, getCommittedValue, showValidationErrors)
+                    ? wrapFilterWithValidation(instance, minCharactersToSearch, committedValueRef, showValidationErrors)
                     : null;
                 filterTypeRef(validatedFilter);
             },
-            [filterTypeRef, minCharactersToSearch, getCommittedValue, showValidationErrors],
+            [filterTypeRef, minCharactersToSearch, showValidationErrors],
         );
 
         const wrappedHandleCommitValue = useCallback(
-            (value?: unknown, isCommit?: boolean) => {
+            (value?: unknown, isBlur?: boolean) => {
                 committedValueRef.current = value;
-                if (isCommit) {
+                if (isBlur) {
                     setCommittedValue(value);
                 }
-                handleCommitValue?.(value, isCommit);
+                handleCommitValue?.(value, isBlur);
             },
             [handleCommitValue],
         );

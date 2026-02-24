@@ -43,7 +43,7 @@ type Value = {
 } | undefined;
 
 type Props = {
-    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined, isCommit?: boolean) => void,
+    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined, isBlur?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
