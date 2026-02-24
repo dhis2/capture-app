@@ -45,9 +45,11 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         handleUpdateClick = () => {
-            if (this.isValid()) {
-                this.update();
+            if (!this.isValid()) {
+                this.filterTypeInstance?.showValidationErrors?.();
+                return;
             }
+            this.update();
         }
 
         focusUpdateButton = () => {

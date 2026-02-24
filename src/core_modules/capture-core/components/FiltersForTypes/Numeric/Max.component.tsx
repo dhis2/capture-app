@@ -8,7 +8,6 @@ type Props = {
     error: string | null,
     onBlur: ({ max }: { max: string }) => void,
     onEnterKey: ({ max }: { max: string }) => void,
-    textFieldRef: (instance: any) => void,
     errorClass: string,
 };
 
@@ -28,11 +27,10 @@ class MaxNumericFilterPlain extends Component<Props> {
     }
 
     render() {
-        const { error, onBlur, onEnterKey, textFieldRef, errorClass, ...passOnProps } = this.props;
+        const { error, onBlur, onEnterKey, errorClass, ...passOnProps } = this.props;
         return (
             <div>
                 <D2TextField
-                    ref={textFieldRef}
                     onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Max')}

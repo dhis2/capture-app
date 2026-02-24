@@ -7,7 +7,7 @@ type Props = {
     value: string,
     error: string | null,
     onBlur: ({ min }: { min: string }) => void,
-    onEnterKey: () => void,
+    onEnterKey: (value: { min: string }) => void,
     errorClass: string,
 };
 
@@ -20,9 +20,9 @@ class MinNumericFilterPlain extends Component<Props> {
         this.props.onBlur(MinNumericFilterPlain.getValueObject(value));
     }
 
-    handleKeyDown = (_payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey();
+            this.props.onEnterKey(MinNumericFilterPlain.getValueObject(payload.value ?? this.props.value ?? ''));
         }
     }
 

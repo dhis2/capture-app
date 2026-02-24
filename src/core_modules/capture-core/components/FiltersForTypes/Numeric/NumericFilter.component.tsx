@@ -12,7 +12,6 @@ import {
 import { MinNumericFilter } from './Min.component';
 import { MaxNumericFilter } from './Max.component';
 import { dataElementTypes } from '../../../metaData';
-import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
@@ -81,7 +80,6 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
     }
 
-    maxD2TextFieldInstance: D2TextField | null = null;
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
@@ -125,18 +123,8 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
             .length > 0 ? valueObject : undefined;
     }
 
-    handleEnterKeyInMin = () => {
-        // focus Max
-        const maxInput = this.maxD2TextFieldInstance;
-        if (maxInput) {
-            requestAnimationFrame(() => maxInput.focus());
-        }
-    }
-
-    handleEnterKeyInMax = (value: {[key: string]: string}) => {
-        // validate with updated values
+    handleEnterKey = (value: {[key: string]: string}) => {
         const values = this.getUpdatedValue(value);
-
         if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values);
         } else {
@@ -150,10 +138,6 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
     handleFieldChange = (value: {[key: string]: string}) => {
         this.props.onCommitValue(this.getUpdatedValue(value));
-    }
-
-    setMaxD2TextFieldInstance = (instance: any) => {
-        this.maxD2TextFieldInstance = instance;
     }
 
     getErrors() {
@@ -191,7 +175,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                             error={minValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKeyInMin}
+                            onEnterKey={this.handleEnterKey}
                             onChange={this.handleFieldChange}
                         />
                     </div>
@@ -208,8 +192,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                             error={maxValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKeyInMax}
-                            textFieldRef={this.setMaxD2TextFieldInstance}
+                            onEnterKey={this.handleEnterKey}
                             onChange={this.handleFieldChange}
                         />
                     </div>

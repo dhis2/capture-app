@@ -69,7 +69,6 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, is
             filter={filterValue}
             type={type}
             singleSelect={!multiValueFilter}
-            onValueChange={() => setUpdateDisabled(false)}
             handleCommitValue={() => setUpdateDisabled(false)}
             disabledUpdate={disabledUpdate}
             disabledReset={filterValue === undefined}
