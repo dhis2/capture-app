@@ -28,7 +28,7 @@ function getMinCharsErrorMessage(min: number): string {
     });
 }
 
-function wrapFilterWithValidation(
+function wrapFilterWithMinCharsValidation(
     instance: UpdatableFilterContent<unknown>,
     minCharactersToSearch: number | undefined,
     committedValueRef: React.MutableRefObject<unknown>,
@@ -47,8 +47,8 @@ function wrapFilterWithValidation(
     };
 }
 
-export const withFilterValidation = () => (InnerComponent: React.ComponentType<any>) => {
-    const WithFilterValidationPlain = (props: any) => {
+export const withMinCharsToSearchValidation = () => (InnerComponent: React.ComponentType<any>) => {
+    const WithMinCharsToSearchValidation = (props: any) => {
         const { filterTypeRef, minCharactersToSearch, handleCommitValue, classes, ...rest } = props;
         const committedValueRef = useRef<unknown>(undefined);
         const [committedValue, setCommittedValue] = useState<unknown>(undefined);
@@ -60,7 +60,12 @@ export const withFilterValidation = () => (InnerComponent: React.ComponentType<a
         const wrappedRef = useCallback(
             (instance: UpdatableFilterContent<unknown> | null) => {
                 const validatedFilter = instance
-                    ? wrapFilterWithValidation(instance, minCharactersToSearch, committedValueRef, showValidationErrors)
+                    ? wrapFilterWithMinCharsValidation(
+                        instance,
+                        minCharactersToSearch,
+                        committedValueRef,
+                        showValidationErrors,
+                    )
                     : null;
                 filterTypeRef(validatedFilter);
             },
@@ -102,5 +107,5 @@ export const withFilterValidation = () => (InnerComponent: React.ComponentType<a
         );
     };
 
-    return withStyles(getStyles)(WithFilterValidationPlain);
+    return withStyles(getStyles)(WithMinCharsToSearchValidation);
 };
