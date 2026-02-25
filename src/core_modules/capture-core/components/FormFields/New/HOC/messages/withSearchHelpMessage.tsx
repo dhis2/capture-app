@@ -8,13 +8,14 @@ const styles = () => ({
 
 type Props = {
     searchOperator?: string;
+    showHelpText?: boolean;
 };
 
 const getSearchHelpMessageHOC = <P extends Record<string, any>>(InnerComponent: React.ComponentType<P>) =>
     class DisplayMessagesHOC extends React.Component<P & Props & WithStyles<typeof styles>> {
         render() {
-            const { classes, searchOperator, ...passOnProps } = this.props;
-            const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
+            const { classes, searchOperator, showHelpText, ...passOnProps } = this.props;
+            const helpText = showHelpText && searchOperator && searchOperatorHelpTexts[searchOperator];
 
             return (
                 <>

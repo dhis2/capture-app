@@ -5,6 +5,9 @@ import type { UpdatableFilterContent } from '../../../FiltersForTypes';
 import {
     isValidMinCharactersToSearch,
 } from '../../../../utils/validation/validators/form/isValidMinCharactersToSearch';
+import { filterTypesObject } from '../../../../components/WorkingLists/WorkingListsBase';
+import type { Value } from '../../../../components/FiltersForTypes/Date/DateFilter.component';
+import { mainOptionKeys } from '../../../../components/FiltersForTypes/Date/options';
 
 type Theme = {
     typography: { caption: Record<string, unknown>; pxToRem: (n: number) => string };
@@ -19,7 +22,13 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-function getMinCharsErrorMessage(min: number): string {
+function getMinCharsErrorMessage(min: number, type?: string, value?: Value): string {
+    const isDateType = type === filterTypesObject.DATE;
+    if (isDateType && value?.main !== mainOptionKeys.RELATIVE_RANGE) {
+        return i18n.t(
+            'This attribute\'s search settings require more characters than a date can provide.',
+        );
+    }
     return i18n.t('Please enter at least {{minCharactersToSearch}} character to filter', {
         minCharactersToSearch: min,
         count: min,
@@ -31,7 +40,7 @@ function getMinCharsErrorMessage(min: number): string {
 function wrapFilterWithMinCharsValidation(
     instance: UpdatableFilterContent<unknown>,
     minCharactersToSearch: number | undefined,
-    committedValueRef: React.MutableRefObject<unknown>,
+    committedValueRef: React.MutableRefObject<Value>,
     showValidationErrors: () => void,
 ) {
     return {
@@ -49,9 +58,9 @@ function wrapFilterWithMinCharsValidation(
 
 export const withMinCharsToSearchValidation = () => (InnerComponent: React.ComponentType<any>) => {
     const WithMinCharsToSearchValidation = (props: any) => {
-        const { filterTypeRef, minCharactersToSearch, handleCommitValue, classes, ...rest } = props;
-        const committedValueRef = useRef<unknown>(undefined);
-        const [committedValue, setCommittedValue] = useState<unknown>(undefined);
+        const { filterTypeRef, minCharactersToSearch, handleCommitValue, classes, type, ...rest } = props;
+        const committedValueRef = useRef<Value>(undefined);
+        const [committedValue, setCommittedValue] = useState<Value>(undefined);
 
         const showValidationErrors = useCallback(() => {
             setCommittedValue(committedValueRef.current);
@@ -73,7 +82,7 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
         );
 
         const wrappedHandleCommitValue = useCallback(
-            (value?: unknown, isBlur?: boolean) => {
+            (value?: Value, isBlur?: boolean) => {
                 committedValueRef.current = value;
                 if (isBlur) {
                     setCommittedValue(value);
@@ -85,8 +94,7 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
 
         const showError = Boolean(
             minCharactersToSearch
-            && committedValue != null
-            && committedValue !== ''
+            && committedValue !== undefined
             && !isValidMinCharactersToSearch(committedValue, minCharactersToSearch),
         );
 
@@ -96,11 +104,12 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
                     filterTypeRef={wrappedRef}
                     minCharactersToSearch={minCharactersToSearch}
                     handleCommitValue={wrappedHandleCommitValue}
+                    type={type}
                     {...rest}
                 />
                 {showError && (
                     <div className={classes?.errorContainer} data-test="filter-min-chars-error">
-                        {getMinCharsErrorMessage(minCharactersToSearch)}
+                        {getMinCharsErrorMessage(minCharactersToSearch, type, committedValue)}
                     </div>
                 )}
             </>

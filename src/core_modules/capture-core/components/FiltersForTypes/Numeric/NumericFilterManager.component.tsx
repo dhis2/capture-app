@@ -33,9 +33,9 @@ export class NumericFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: any, isCommit?: boolean) => {
+    handleCommitValue = (value: any, isBlur?: boolean) => {
         this.setState({ value });
-        this.props.handleCommitValue?.(value, isCommit);
+        this.props.handleCommitValue?.(value, isBlur);
     }
 
     render() {

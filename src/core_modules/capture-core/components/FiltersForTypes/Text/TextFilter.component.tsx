@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
+import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
 import type { TextFilterProps, Value } from './Text.types';
 import {
     makeCheckboxHandler,
@@ -44,7 +45,8 @@ export class TextFilter
     });
 
     render() {
-        const { value } = this.props;
+        const { value, searchOperator } = this.props;
+        const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
 
         return (
             <>
@@ -60,6 +62,7 @@ export class TextFilter
                     onEnterKey={this.handleEnterKey}
                     onChange={this.handleChange}
                 />
+                {helpText && <div style={helpTextStyle}>{helpText}</div>}
             </>
         );
     }

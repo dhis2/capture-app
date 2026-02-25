@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
-import { getSearchOperator } from '../../../../../metaDataMemoryStoreBuilders';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
 const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
@@ -100,8 +99,7 @@ const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null |
         optionSet,
         searchable,
         unique,
-        preferredSearchOperator,
-        blockedSearchOperators,
+        searchOperator,
         minCharactersToSearch }) => ({
         id,
         visible: displayInReports,
@@ -111,9 +109,7 @@ const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null |
         multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         filterHidden: !(orgUnitId || searchable || unique),
         unique: Boolean(unique),
-        searchOperator: getSearchOperator({
-            unique, optionSet, valueType: type, preferredSearchOperator, blockedSearchOperators,
-        }),
+        searchOperator,
         minCharactersToSearch,
     }));
 
