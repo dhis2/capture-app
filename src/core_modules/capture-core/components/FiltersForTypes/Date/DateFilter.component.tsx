@@ -11,6 +11,7 @@ import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from './types';
 import { FromDateFilter } from './From.component';
 import { ToDateFilter } from './To.component';
+import { SingleDateFilter } from './SingleDate.component';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
@@ -62,6 +63,7 @@ const styles: Readonly<any> = (theme: any) => ({
 export type Value = {
     from?: DateValue | null;
     to?: DateValue | null;
+    date?: DateValue | null;
     main?: string | null;
     start?: string | null;
     end?: string | null;
@@ -166,6 +168,9 @@ const isRelativeRangeFilterValid = (startValue, endValue) => {
     return true;
 };
 
+const isSingleDateFilterValid = (dateValue?: DateValue | null) =>
+    !!(dateValue?.value && dateValue?.value !== '' && dateValue?.isValid !== false);
+
 class DateFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static validateRelativeRangeValue(value?: string | null) {
         if (!value) {
@@ -189,9 +194,14 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         toValue?: DateValue | null,
         startValue?: string | null,
         endValue?: string | null,
+        dateValue?: DateValue | null,
     ) {
         if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
             return isAbsoluteRangeFilterValid(fromValue, toValue);
+        }
+
+        if (mainValue === mainOptionKeys.SINGLE_DATE) {
+            return isSingleDateFilterValid(dateValue);
         }
 
         if (mainValue === mainOptionKeys.RELATIVE_RANGE) {
@@ -245,6 +255,10 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             _this.value = mainOptionKeys.LAST_3_MONTHS;
         }),
         new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.SINGLE_DATE];
+            _this.value = mainOptionKeys.SINGLE_DATE;
+        }),
+        new Option((_this) => {
             _this.text = mainOptionTranslatedTexts[mainOptionKeys.ABSOLUTE_RANGE];
             _this.value = mainOptionKeys.ABSOLUTE_RANGE;
         }),
@@ -266,7 +280,9 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     onIsValid() {
         this.setState({ submitAttempted: true });
         const values = this.props.value;
-        return !values || DateFilterPlain.isFilterValid(values.main, values.from, values.to, values.start, values.end);
+        return !values || DateFilterPlain.isFilterValid(
+            values.main, values.from, values.to, values.start, values.end, values.date,
+        );
     }
 
     getUpdatedValue(valuePart: any) {
@@ -276,18 +292,28 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         };
         const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
         const isAbsoluteRangevalue = () => valueObject?.from || valuePart?.from || valuePart?.to;
+        const isSingleDateValue = () => valueObject?.date || valuePart?.date;
 
         if (isAbsoluteRangevalue()) {
             valueObject.main = mainOptionKeys.ABSOLUTE_RANGE;
             delete valueObject.start;
             delete valueObject.end;
+            delete valueObject.date;
         } else if (isRelativeRangeValue()) {
             valueObject.main = mainOptionKeys.RELATIVE_RANGE;
             delete valueObject.from;
             delete valueObject.to;
+            delete valueObject.date;
+        } else if (isSingleDateValue()) {
+            valueObject.main = mainOptionKeys.SINGLE_DATE;
+            delete valueObject.from;
+            delete valueObject.to;
+            delete valueObject.start;
+            delete valueObject.end;
         } else if (
             valueObject.main === mainOptionKeys.ABSOLUTE_RANGE ||
-            valueObject.main === mainOptionKeys.RELATIVE_RANGE
+            valueObject.main === mainOptionKeys.RELATIVE_RANGE ||
+            valueObject.main === mainOptionKeys.SINGLE_DATE
         ) {
             valueObject.main = null;
         }
@@ -322,6 +348,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         const mainValue = values && values.main;
         const fromValue = values && values.from;
         const toValue = values && values.to;
+        const dateValue = values && values.date;
         const startValue = values && values.start;
         const endValue = values && values.end;
         const errors = {
@@ -331,10 +358,18 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             endValueError: null,
             dateLogicError: null,
             bufferLogicError: null,
+            singleDateError: null,
         };
 
         if (mainValue === mainOptionKeys.ABSOLUTE_RANGE) {
             return { ...errors, ...getAbsoluteRangeErrors(fromValue, toValue, submitAttempted) };
+        }
+
+        if (mainValue === mainOptionKeys.SINGLE_DATE) {
+            const singleDateError = submitAttempted && (!dateValue?.value || dateValue?.isValid === false)
+                ? i18n.t('Please provide a valid date')
+                : null;
+            return { ...errors, singleDateError };
         }
 
         if (mainValue === mainOptionKeys.RELATIVE_RANGE) {
@@ -347,7 +382,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         const { value, classes, onFocusUpdateButton } = this.props;
         const fromValue = value?.from;
         const toValue = value?.to;
-        const { startValueError, endValueError, dateLogicError, bufferLogicError } =
+        const dateValue = value?.date;
+        const { startValueError, endValueError, dateLogicError, bufferLogicError, singleDateError } =
             this.getErrors();
 
         return (
@@ -414,6 +450,33 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                                                 )}
                                             >
                                                 {dateLogicError}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                                {option.value === mainOptionKeys.SINGLE_DATE &&
+                                    value?.main === mainOptionKeys.SINGLE_DATE && (
+                                    <div
+                                        className={classes.inputsUnderOption}
+                                        role="group"
+                                        aria-label={i18n.t('Single date')}
+                                    >
+                                        <SingleDateFilter
+                                            value={dateValue?.value ?? undefined}
+                                            onBlur={this.handleFieldBlur}
+                                            onEnterKey={onFocusUpdateButton}
+                                            onDateSelectedFromCalendar={onFocusUpdateButton}
+                                            error={dateValue?.error}
+                                            errorClass={classes.error}
+                                        />
+                                        {singleDateError && (
+                                            <div
+                                                className={cx(
+                                                    classes.error,
+                                                    classes.logicErrorContainer,
+                                                )}
+                                            >
+                                                {singleDateError}
                                             </div>
                                         )}
                                     </div>

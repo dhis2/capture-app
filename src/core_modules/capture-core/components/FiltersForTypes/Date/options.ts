@@ -9,6 +9,7 @@ export const mainOptionKeys = {
     LAST_MONTH: 'LAST_MONTH',
     LAST_3_MONTHS: 'LAST_3_MONTHS',
     ABSOLUTE_RANGE: 'ABSOLUTE_RANGE',
+    SINGLE_DATE: 'SINGLE_DATE',
     RELATIVE_RANGE: 'RELATIVE_RANGE',
 };
 
@@ -20,6 +21,7 @@ export const mainOptionTranslatedTexts = {
     [mainOptionKeys.LAST_WEEK]: i18n.t('Last week'),
     [mainOptionKeys.LAST_MONTH]: i18n.t('Last month'),
     [mainOptionKeys.LAST_3_MONTHS]: i18n.t('Last 3 months'),
-    [mainOptionKeys.ABSOLUTE_RANGE]: i18n.t('Between two dates'),
-    [mainOptionKeys.RELATIVE_RANGE]: i18n.t('Days before and after today'),
+    [mainOptionKeys.SINGLE_DATE]: i18n.t('Single date'),
+    [mainOptionKeys.ABSOLUTE_RANGE]: i18n.t('Absolute range'),
+    [mainOptionKeys.RELATIVE_RANGE]: i18n.t('Relative range'),
 };

@@ -11,6 +11,7 @@ import {
     BooleanFilter,
     DateFilter,
     DateTimeFilter,
+    AgeFilter,
     OptionSetFilter,
     EmptyOnlyFilter,
     OrgUnitFilter,
@@ -29,7 +30,7 @@ const OptionSetFilterWithButtons = withButtons()(
 );
 
 const selectorContentsForTypes = {
-    [filterTypesObject.AGE]: DateFilter,
+    [filterTypesObject.AGE]: AgeFilter,
     [filterTypesObject.ASSIGNEE]: AssigneeFilter,
     [filterTypesObject.BOOLEAN]: BooleanFilter,
     [filterTypesObject.COORDINATE]: EmptyOnlyFilter,

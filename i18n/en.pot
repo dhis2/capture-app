@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-24T15:59:41.964Z\n"
-"PO-Revision-Date: 2026-02-24T15:59:41.964Z\n"
+"POT-Creation-Date: 2026-02-25T11:01:22.634Z\n"
+"PO-Revision-Date: 2026-02-25T11:01:22.634Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -444,6 +444,9 @@ msgstr "Data for offline list not present"
 msgid "Close"
 msgstr "Close"
 
+msgid "Date of birth"
+msgstr "Date of birth"
+
 msgid "Please select the user"
 msgstr "Please select the user"
 
@@ -483,6 +486,9 @@ msgstr "From and to date"
 msgid "to"
 msgstr "to"
 
+msgid "Single date"
+msgstr "Single date"
+
 msgid "Days relative to today"
 msgstr "Days relative to today"
 
@@ -491,6 +497,9 @@ msgstr "Days in the future"
 
 msgid "Start date"
 msgstr "Start date"
+
+msgid "Date"
+msgstr "Date"
 
 msgid "Days in the past"
 msgstr "Days in the past"
@@ -516,11 +525,11 @@ msgstr "Last month"
 msgid "Last 3 months"
 msgstr "Last 3 months"
 
-msgid "Between two dates"
-msgstr "Between two dates"
+msgid "Absolute range"
+msgstr "Absolute range"
 
-msgid "Days before and after today"
-msgstr "Days before and after today"
+msgid "Relative range"
+msgstr "Relative range"
 
 msgid "Please specify a date range"
 msgstr "Please specify a date range"
@@ -530,9 +539,6 @@ msgstr "The \"Before\" value must be after the \"After\" value"
 
 msgid "After"
 msgstr "After"
-
-msgid "Date"
-msgstr "Date"
 
 msgid "Time"
 msgstr "Time"
@@ -656,9 +662,6 @@ msgstr "Remove filter"
 
 msgid "This Year"
 msgstr "This Year"
-
-msgid "Relative range"
-msgstr "Relative range"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"

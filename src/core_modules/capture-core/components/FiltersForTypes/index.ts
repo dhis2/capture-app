@@ -1,4 +1,5 @@
 export { AssigneeFilter, modeKeys as assigneeFilterModeKeys } from './Assignee';
+export { AgeFilter } from './Age';
 export { BooleanFilter } from './Boolean';
 export { DateFilter } from './Date';
 export { DateTimeFilter } from './DateTime';
@@ -15,6 +16,7 @@ export { assigneeFilterModes } from './Assignee/constants';
 export { dateFilterTypes } from './Date/constants';
 
 export type { AssigneeFilterData } from './Assignee/types';
+export type { AgeFilterData } from './Age/Age.types';
 export type { BooleanFilterData } from './Boolean/types';
 export type { DateFilterData, AbsoluteDateFilterData, RelativeDateFilterData } from './Date/types';
 export type { DateTimeFilterData } from './DateTime';
