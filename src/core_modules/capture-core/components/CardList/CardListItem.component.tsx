@@ -258,7 +258,7 @@ const CardListItemIndex = ({
                 </div>
                 <div className={classes.details}>
                     {renderTag()}
-                    {item.tei && item.tei.updatedAt && (
+                    {item.tei?.updatedAt && (
                         <div className={classes.timestamp}>
                             {i18n.t('Last updated')}{' '}
                             <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
