@@ -16,7 +16,7 @@ type State = {
 
 export class AgeFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: AgeFilterData | null | undefined): State {
-        if (!filter || filter.type !== 'ABSOLUTE') {
+        if (filter?.type !== 'ABSOLUTE') {
             return { value: undefined };
         }
         const rawValue = filter.ge ?? filter.le;

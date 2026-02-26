@@ -73,7 +73,7 @@ export const buildFilterQueryArgs = (
     .keys(filters)
     .filter(key => filters[key])
     .reduce((acc, key) => {
-        const { type, searchOperator } = columns.get(key) || (filtersOnly && filtersOnly.get(key)) || {};
+        const { type, searchOperator } = columns.get(key) || filtersOnly?.get(key) || {};
         if (!type) {
             log.error(errorCreator('Could not get type for key')({ key, storeId }));
         } else {

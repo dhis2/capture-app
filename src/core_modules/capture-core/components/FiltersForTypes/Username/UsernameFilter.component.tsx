@@ -7,7 +7,7 @@ import type { UsernameFilterProps, Value } from './Username.types';
 
 export class UsernameFilter extends Component<UsernameFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getUsernameFilterData(value);
     }
 
@@ -20,7 +20,7 @@ export class UsernameFilter extends Component<UsernameFilterProps> implements Up
 
     render() {
         const { value } = this.props;
-        const usernameValue = value && typeof value === 'string' ? value : null;
+        const usernameValue = value !== undefined && value !== null && typeof value === 'string' ? value : null;
 
         return (
             <UserField

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-26T12:46:28.341Z\n"
-"PO-Revision-Date: 2026-02-26T12:46:28.341Z\n"
+"POT-Creation-Date: 2026-02-26T13:16:52.560Z\n"
+"PO-Revision-Date: 2026-02-26T13:16:52.560Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -474,20 +474,11 @@ msgstr "Please specify the number of days"
 msgid "Please provide zero or a positive integer"
 msgstr "Please provide zero or a positive integer"
 
-msgid "Date filter"
-msgstr "Date filter"
-
 msgid "Period"
 msgstr "Period"
 
-msgid "From and to date"
-msgstr "From and to date"
-
 msgid "to"
 msgstr "to"
-
-msgid "Days relative to today"
-msgstr "Days relative to today"
 
 msgid "Days in the future"
 msgstr "Days in the future"

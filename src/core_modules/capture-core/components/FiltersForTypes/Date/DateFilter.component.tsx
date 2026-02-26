@@ -294,7 +294,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             valueObject.main = null;
         }
 
-        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : undefined;
+        return Object.keys(valueObject).some(key => valueObject[key]) ? valueObject : undefined;
     }
 
     handleEnterKeyInFrom = () => {
@@ -310,7 +310,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     };
 
     handleMainSelect = (value: string | null) => {
-        const valueObject = value != null ? { main: value } : undefined;
+        const valueObject = value == null ? undefined : { main: value };
         this.props.onCommitValue(valueObject, true);
     };
 
@@ -354,7 +354,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             this.getErrors();
 
         return (
-            <div id="dateFilter" role="group" aria-label={i18n.t('Date filter')}>
+            <div id="dateFilter">
                 <div className={classes.optionsSection}>
                     <span className={classes.sectionLabel}>
                         {i18n.t('Period')}
@@ -377,15 +377,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                                 />
                                 {option.value === mainOptionKeys.ABSOLUTE_RANGE &&
                                     value?.main === mainOptionKeys.ABSOLUTE_RANGE && (
-                                    <div
-                                        className={classes.inputsUnderOption}
-                                        role="group"
-                                        aria-label={i18n.t('From and to date')}
-                                    >
+                                    <div className={classes.inputsUnderOption}>
                                         <div className={classes.fromToContainer}>
                                             <div className={classes.inputContainer}>
                                                 <FromDateFilter
-                                                    value={fromValue?.value}
+                                                    value={fromValue?.value ?? undefined}
                                                     onBlur={this.handleFieldBlur}
                                                     onEnterKey={this.handleEnterKeyInFrom}
                                                     onDateSelectedFromCalendar={
@@ -400,7 +396,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                                             </div>
                                             <div className={classes.inputContainer}>
                                                 <ToDateFilter
-                                                    value={toValue?.value}
+                                                    value={toValue?.value ?? undefined}
                                                     onBlur={this.handleFieldBlur}
                                                     textFieldRef={this.setToD2DateTextFieldInstance}
                                                     onFocusUpdateButton={onFocusUpdateButton}
@@ -423,11 +419,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                                 )}
                                 {option.value === mainOptionKeys.RELATIVE_RANGE &&
                                     value?.main === mainOptionKeys.RELATIVE_RANGE && (
-                                    <div
-                                        className={classes.inputsUnderOption}
-                                        role="group"
-                                        aria-label={i18n.t('Days relative to today')}
-                                    >
+                                    <div className={classes.inputsUnderOption}>
                                         <RangeFilter
                                             value={{ start: value?.start, end: value?.end }}
                                             startValueError={startValueError}

@@ -25,7 +25,7 @@ const ISO_DATE_LENGTH = 10;
 
 function getMinCharsErrorMessage(min: number, type?: string): string {
     const isDateType = type === filterTypesObject.DATE;
-    if (isDateType && (!isDateType || min > ISO_DATE_LENGTH)) {
+    if (isDateType && min > ISO_DATE_LENGTH) {
         return i18n.t(
             'This filter requires more characters than a date can provide.',
         );

@@ -2,7 +2,7 @@ import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import type { AgeFilterData } from './Age.types';
 
 export const getAgeFilterData = (value: string | null | undefined): AgeFilterData | null => {
-    if (!value || !value.trim()) {
+    if (!value?.trim()) {
         return null;
     }
     try {

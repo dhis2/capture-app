@@ -6,8 +6,9 @@ import type { OrgUnitFilterProps, Value } from './OrgUnit.types';
 import type { OrgUnitValue } from './types';
 
 export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements UpdatableFilterContent<Value> {
+    /** Used by parent via ref when reading filter data for apply */
     onGetUpdateData(updatedValue?: Value) {
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getOrgUnitFilterData(value);
     }
 
@@ -20,7 +21,12 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
 
     render() {
         const { value } = this.props;
-        const orgUnitValue = value && typeof value === 'object' ? value as OrgUnitValue : undefined;
+        const orgUnitValue =
+            value !== undefined &&
+            value !== null &&
+            typeof value === 'object'
+                ? (value as OrgUnitValue)
+                : undefined;
 
         return (
             <SingleOrgUnitSelectField

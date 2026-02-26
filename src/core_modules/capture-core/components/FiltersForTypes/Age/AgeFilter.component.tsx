@@ -8,7 +8,7 @@ import type { DateValue } from '../Date/types';
 
 export class AgeFilter extends Component<AgeFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getAgeFilterData(value);
     }
 

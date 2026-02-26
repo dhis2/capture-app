@@ -74,8 +74,8 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 
     onGetUpdateData(updatedValue?: Value) {
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
-        if (!value) {
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
+        if (value === undefined || value === null) {
             return null;
         }
         return getDateTimeFilterData(value);
@@ -84,7 +84,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     onIsValid() {
         this.setState({ submitAttempted: true });
         const value = this.props.value;
-        if (!value) {
+        if (value === undefined || value === null) {
             return true;
         }
         const { from, to } = value;

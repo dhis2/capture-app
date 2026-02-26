@@ -62,8 +62,8 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     onGetUpdateData(updatedValue?: Value) {
-        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
-        if (!value) {
+        const value = updatedValue === undefined ? this.props.value : updatedValue;
+        if (value === undefined || value === null) {
             return null;
         }
         return getTimeFilterData(value);
@@ -72,7 +72,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
     onIsValid() {
         this.setState({ submitAttempted: true });
         const value = this.props.value;
-        if (!value) {
+        if (value === undefined || value === null) {
             return true;
         }
         const { from, to } = value;

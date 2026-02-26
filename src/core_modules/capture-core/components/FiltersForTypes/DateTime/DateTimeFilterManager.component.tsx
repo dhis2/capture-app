@@ -33,23 +33,20 @@ function extractTime(isoDatetime?: string | null): string | undefined {
 
 export class DateTimeFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter?: DateTimeFilterData | null): Value {
-        if (!filter) {
-            return null;
+        if (filter) {
+            const fromDate = extractLocalDate(filter.ge);
+            const fromTime = extractTime(filter.ge);
+            const toDate = extractLocalDate(filter.le);
+            const toTime = extractTime(filter.le);
+
+            const from = fromDate ? { date: fromDate, time: fromTime ?? null, isValid: true } : null;
+            const to = toDate ? { date: toDate, time: toTime ?? null, isValid: true } : null;
+
+            if (from || to) {
+                return { from, to };
+            }
         }
-
-        const fromDate = extractLocalDate(filter.ge);
-        const fromTime = extractTime(filter.ge);
-        const toDate = extractLocalDate(filter.le);
-        const toTime = extractTime(filter.le);
-
-        const from = fromDate ? { date: fromDate, time: fromTime ?? null, isValid: true } : null;
-        const to = toDate ? { date: toDate, time: toTime ?? null, isValid: true } : null;
-
-        if (!from && !to) {
-            return null;
-        }
-
-        return { from, to };
+        return null;
     }
 
     constructor(props: Props) {
