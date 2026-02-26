@@ -52,7 +52,7 @@ function convertFilter(
         storeId: string;
         isInit: boolean;
     },
-    unique?: boolean,
+    searchOperator?: string,
 ) {
     if (typeof sourceValue.isEmpty === 'boolean') {
         return sourceValue.isEmpty ? API_EMPTY_VALUE_FILTER : API_NOT_EMPTY_VALUE_FILTER;
@@ -60,7 +60,7 @@ function convertFilter(
     if (sourceValue && sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type] ? mappersForTypes[type]({ sourceValue, meta, unique }) : sourceValue;
+    return mappersForTypes[type] ? mappersForTypes[type]({ sourceValue, meta, searchOperator }) : sourceValue;
 }
 export const buildFilterQueryArgs = (
     filters: FiltersData, {
@@ -73,7 +73,7 @@ export const buildFilterQueryArgs = (
     .keys(filters)
     .filter(key => filters[key])
     .reduce((acc, key) => {
-        const { type, unique } = columns.get(key) || (filtersOnly && filtersOnly.get(key)) || {};
+        const { type, searchOperator } = columns.get(key) || (filtersOnly && filtersOnly.get(key)) || {};
         if (!type) {
             log.error(errorCreator('Could not get type for key')({ key, storeId }));
         } else {
@@ -86,7 +86,7 @@ export const buildFilterQueryArgs = (
                     storeId,
                     isInit,
                 },
-                unique,
+                searchOperator,
             );
             acc[key] = queryArgValue;
         }

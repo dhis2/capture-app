@@ -61,16 +61,15 @@ const styles: Readonly<any> = (theme: any) => ({
 });
 
 export type Value = {
-    from?: DateValue | null;
-    to?: DateValue | null;
-    date?: DateValue | null;
-    main?: string | null;
-    start?: string | null;
-    end?: string | null;
-} | null;
+    from?: DateValue;
+    to?: DateValue;
+    main?: string;
+    start?: string;
+    end?: string;
+} | undefined;
 
 type OwnProps = {
-    onCommitValue: (value?: { from?: string | null; to?: string | null } | null) => void;
+    onCommitValue: (value?: Value, isBlur?: boolean) => void;
     value: Value;
     onFocusUpdateButton: () => void;
 };
@@ -318,7 +317,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             valueObject.main = null;
         }
 
-        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : null;
+        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : undefined;
     }
 
     handleEnterKeyInFrom = () => {
@@ -330,12 +329,12 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     };
 
     handleFieldBlur = (value: any) => {
-        this.props.onCommitValue(this.getUpdatedValue(value));
+        this.props.onCommitValue(this.getUpdatedValue(value), true);
     };
 
-    handleMainSelect = (value: string | null) => {
-        const valueObject = value ? { main: value } : null;
-        this.props.onCommitValue(valueObject as any);
+    handleMainSelect = (value: string) => {
+        const valueObject = value ? { main: value } : undefined;
+        this.props.onCommitValue(valueObject, true);
     };
 
     setToD2DateTextFieldInstance = (instance: any) => {

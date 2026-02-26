@@ -213,6 +213,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     id={id}
+                    fieldOptions={{ showHelpText: true }}
                 />
                 {!searchGroup.unique && this.renderOrgUnitSelector()}
                 <div

@@ -24,16 +24,12 @@ import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { type DataElement } from '../../../../../../metaData';
 import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
-    dataElement?: DataElement,
 ): TextFilterData | undefined => {
-    const value = dataElement?.unique
-        ? filter.eq ?? filter.like
-        : filter.like;
+    const value = filter.like ?? filter.sw ?? filter.eq ?? filter.ew;
     return value ? { value } : undefined;
 };
 

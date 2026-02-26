@@ -11,7 +11,7 @@ import { areRelativeRangeValuesSupported } from '../../../utils/validation/valid
 type Props = {
     filter?: DateFilterData | null;
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void;
+    handleCommitValue: (value?: any, isBlur?: boolean) => void;
 };
 
 type State = {
@@ -87,6 +87,7 @@ export class DateFilterManager extends React.Component<Props, State> {
 
         return DateFilterManager.calculateAbsoluteRangeValueState(filter);
     }
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -94,9 +95,9 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value?: Value | null) => {
+    handleCommitValue = (value?: Value, isBlur?: boolean) => {
         this.setState({ value });
-        this.props.handleCommitValue && this.props.handleCommitValue();
+        this.props.handleCommitValue?.(value, isBlur);
     };
 
     render() {

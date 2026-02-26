@@ -1,4 +1,8 @@
 const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSearch: number) => {
+    if (value === undefined) {
+        return true;
+    }
+
     const trimmedValue = value.trim();
     if (trimmedValue === '') {
         return true;
@@ -6,10 +10,14 @@ const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSe
     return minCharactersToSearch <= trimmedValue.length;
 };
 
+// eslint-disable-next-line complexity
 const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCharactersToSearch: number) => {
     const { from, to } = value;
+    if (from === undefined && to === undefined) {
+        return true;
+    }
 
-    if (typeof from === 'string' && typeof to === 'string') {
+    if (typeof from === 'string' || typeof to === 'string') {
         return (
             isValueBiggerThanMinCharactersToSearch(from, minCharactersToSearch) &&
             isValueBiggerThanMinCharactersToSearch(to, minCharactersToSearch)
@@ -31,11 +39,16 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
         return true;
     }
 
+    if ('main' in value) {
+        const ISO_DATE_LENGTH = 10;
+        return minCharactersToSearch <= ISO_DATE_LENGTH;
+    }
+
     if (typeof value === 'string') {
         return isValueBiggerThanMinCharactersToSearch(value, minCharactersToSearch);
     }
 
-    if ('from' in value && 'to' in value) {
+    if ('from' in value || 'to' in value) {
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
     }
 
