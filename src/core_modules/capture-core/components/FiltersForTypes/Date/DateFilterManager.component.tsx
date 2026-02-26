@@ -72,19 +72,6 @@ export class DateFilterManager extends React.Component<Props, State> {
         return DateFilterManager.calculateAbsoluteRangeValueState(filter);
     }
 
-    // eslint-disable-next-line complexity
-    static valueForValidation(value?: Value) {
-        if (!value) return undefined;
-        const { main, from, to } = value;
-        if (main === mainOptionKeys.ABSOLUTE_RANGE) {
-            return {
-                from: from?.value ?? undefined,
-                to: to?.value ?? undefined,
-            };
-        }
-        return main ? { main } : undefined;
-    }
-
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -94,7 +81,7 @@ export class DateFilterManager extends React.Component<Props, State> {
 
     handleCommitValue = (value?: Value, isBlur?: boolean) => {
         this.setState({ value });
-        this.props.handleCommitValue?.(DateFilterManager.valueForValidation(value), isBlur);
+        this.props.handleCommitValue?.(value, isBlur);
     };
 
     render() {
