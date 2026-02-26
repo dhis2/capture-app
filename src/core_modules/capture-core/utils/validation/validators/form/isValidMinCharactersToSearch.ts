@@ -13,7 +13,6 @@ const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSe
 // eslint-disable-next-line complexity
 const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCharactersToSearch: number) => {
     const { from, to } = value;
-
     if (from === undefined && to === undefined) {
         return true;
     }
@@ -38,6 +37,11 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
     if (value === undefined) {
         return true;
+    }
+
+    if ('main' in value) {
+        const ISO_DATE_LENGTH = 10;
+        return minCharactersToSearch <= ISO_DATE_LENGTH;
     }
 
     if (typeof value === 'string') {

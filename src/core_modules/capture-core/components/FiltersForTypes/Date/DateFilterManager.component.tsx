@@ -75,21 +75,14 @@ export class DateFilterManager extends React.Component<Props, State> {
     // eslint-disable-next-line complexity
     static valueForValidation(value?: Value) {
         if (!value) return undefined;
-        const { main, from, to, start, end } = value;
+        const { main, from, to } = value;
         if (main === mainOptionKeys.ABSOLUTE_RANGE) {
             return {
                 from: from?.value ?? undefined,
                 to: to?.value ?? undefined,
             };
         }
-        if (main === mainOptionKeys.RELATIVE_RANGE) {
-            return {
-                from: start ?? undefined,
-                to: end ?? undefined,
-                main: mainOptionKeys.RELATIVE_RANGE,
-            };
-        }
-        return main ?? undefined;
+        return main ? { main } : undefined;
     }
 
     constructor(props: Props) {
