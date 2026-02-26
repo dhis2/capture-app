@@ -16,6 +16,7 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
     if (from === undefined && to === undefined) {
         return true;
     }
+    const { date } = from || to;
 
     if (typeof from === 'string' || typeof to === 'string') {
         return (
@@ -24,7 +25,7 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
         );
     }
 
-    if ('date' in from && 'date' in to) {
+    if (date) {
         return (
             isValueBiggerThanMinCharactersToSearch(from.date, minCharactersToSearch) &&
             isValueBiggerThanMinCharactersToSearch(to.date, minCharactersToSearch)
@@ -39,21 +40,19 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
         return true;
     }
 
-    if ('main' in value) {
-        const ISO_DATE_LENGTH = 10;
-        return minCharactersToSearch <= ISO_DATE_LENGTH;
-    }
+    const { main, from, to } = value;
 
     if (typeof value === 'string') {
         return isValueBiggerThanMinCharactersToSearch(value, minCharactersToSearch);
     }
 
-    if ('from' in value || 'to' in value) {
+    if (from || to) {
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
     }
 
-    if ('date' in value) {
-        return isValueBiggerThanMinCharactersToSearch(value.date, minCharactersToSearch);
+    if (main) {
+        const ISO_DATE_LENGTH = 10;
+        return minCharactersToSearch <= ISO_DATE_LENGTH;
     }
 
     return true;
