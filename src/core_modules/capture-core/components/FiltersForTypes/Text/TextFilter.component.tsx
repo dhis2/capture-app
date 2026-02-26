@@ -25,7 +25,7 @@ export class TextFilter
         return getTextFilterData(value);
     }
 
-    handleEnterKey = (value?: string) => {
+    handleEnterKey = (value?: Value) => {
         this.props.onUpdate(value ?? this.props.value ?? null);
     }
 

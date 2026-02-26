@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { NumericFilter } from './NumericFilter.component';
 import type { NumericFilterData } from './types';
-import { dataElementTypes } from '../../../metaData';
 
 type Props = {
     filter: NumericFilterData | null,
     filterTypeRef: (instance: any) => void;
     handleCommitValue: (value?: any, isBlur?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
-    type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };
 
 type State = {

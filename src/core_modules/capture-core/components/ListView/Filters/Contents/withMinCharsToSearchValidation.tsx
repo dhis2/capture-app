@@ -7,7 +7,6 @@ import {
 } from '../../../../utils/validation/validators/form/isValidMinCharactersToSearch';
 import { filterTypesObject } from '../../../../components/WorkingLists/WorkingListsBase';
 import type { Value } from '../../../../components/FiltersForTypes/Date/DateFilter.component';
-import { mainOptionKeys } from '../../../../components/FiltersForTypes/Date/options';
 
 type Theme = {
     typography: { caption: Record<string, unknown>; pxToRem: (n: number) => string };
@@ -22,11 +21,13 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-function getMinCharsErrorMessage(min: number, type?: string, value?: Value): string {
+const ISO_DATE_LENGTH = 10;
+
+function getMinCharsErrorMessage(min: number, type?: string): string {
     const isDateType = type === filterTypesObject.DATE;
-    if (isDateType && value?.main !== mainOptionKeys.RELATIVE_RANGE) {
+    if (isDateType && (!isDateType || min > ISO_DATE_LENGTH)) {
         return i18n.t(
-            'This attribute\'s search settings require more characters than a date can provide.',
+            'This filter requires more characters than a date can provide.',
         );
     }
     return i18n.t('Please enter at least {{minCharactersToSearch}} character to filter', {
@@ -42,12 +43,13 @@ function wrapFilterWithMinCharsValidation(
     minCharactersToSearch: number | undefined,
     committedValueRef: React.MutableRefObject<Value>,
     showValidationErrors: () => void,
+    type?: string,
 ) {
     return {
         onGetUpdateData: (updatedValue?: unknown) => instance.onGetUpdateData(updatedValue),
         onIsValid: () => {
             if (instance.onIsValid && !instance.onIsValid()) return false;
-            if (minCharactersToSearch) {
+            if (minCharactersToSearch && (type !== filterTypesObject.DATE || minCharactersToSearch > ISO_DATE_LENGTH)) {
                 return isValidMinCharactersToSearch(committedValueRef.current, minCharactersToSearch);
             }
             return true;
@@ -74,11 +76,12 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
                         minCharactersToSearch,
                         committedValueRef,
                         showValidationErrors,
+                        type,
                     )
                     : null;
                 filterTypeRef(validatedFilter);
             },
-            [filterTypeRef, minCharactersToSearch, showValidationErrors],
+            [filterTypeRef, minCharactersToSearch, showValidationErrors, type],
         );
 
         const wrappedHandleCommitValue = useCallback(
@@ -95,6 +98,7 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
         const showError = Boolean(
             minCharactersToSearch
             && committedValue !== undefined
+            && (type !== filterTypesObject.DATE || minCharactersToSearch > ISO_DATE_LENGTH)
             && !isValidMinCharactersToSearch(committedValue, minCharactersToSearch),
         );
 
@@ -109,7 +113,7 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
                 />
                 {showError && (
                     <div className={classes?.errorContainer} data-test="filter-min-chars-error">
-                        {getMinCharsErrorMessage(minCharactersToSearch, type, committedValue)}
+                        {getMinCharsErrorMessage(minCharactersToSearch, type)}
                     </div>
                 )}
             </>

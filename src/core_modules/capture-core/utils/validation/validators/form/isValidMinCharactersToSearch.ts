@@ -1,4 +1,8 @@
 const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSearch: number) => {
+    if (value === undefined) {
+        return true;
+    }
+
     const trimmedValue = value.trim();
     if (trimmedValue === '') {
         return true;
@@ -31,25 +35,6 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
     return true;
 };
 
-function validateMinOrMaxField(
-    field: unknown,
-    minCharactersToSearch: number,
-): boolean {
-    if (field == null) {
-        return true;
-    }
-    if (typeof field === 'string') {
-        return isValueBiggerThanMinCharactersToSearch(field, minCharactersToSearch);
-    }
-    return true;
-}
-
-const isValidMinCharactersToSearchMinMax = (value: { min?: unknown; max?: unknown }, minCharactersToSearch: number) => {
-    const minValid = validateMinOrMaxField(value.min, minCharactersToSearch);
-    const maxValid = validateMinOrMaxField(value.max, minCharactersToSearch);
-    return minValid && maxValid;
-};
-
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
     if (value === undefined) {
         return true;
@@ -61,10 +46,6 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
 
     if ('from' in value || 'to' in value) {
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
-    }
-
-    if ('min' in value || 'max' in value) {
-        return isValidMinCharactersToSearchMinMax(value, minCharactersToSearch);
     }
 
     if ('date' in value) {

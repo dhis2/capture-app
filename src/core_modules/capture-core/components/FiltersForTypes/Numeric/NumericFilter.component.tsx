@@ -153,11 +153,11 @@ class NumericFilterPlain
     }
 
     handleMinChange = (value: string) => {
-        this.props.onCommitValue(this.getUpdatedValue({ min: value }), false);
+        this.props.onCommitValue(this.getUpdatedValue({ from: value }), false);
     }
 
     handleMaxChange = (value: string) => {
-        this.props.onCommitValue(this.getUpdatedValue({ max: value }), false);
+        this.props.onCommitValue(this.getUpdatedValue({ to: value }), false);
     }
 
     getErrors() {
