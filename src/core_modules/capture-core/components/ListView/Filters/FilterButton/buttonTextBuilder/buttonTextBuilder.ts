@@ -1,6 +1,7 @@
 import {
     convertText,
     convertDate,
+    convertTime,
     convertAssignee,
     convertBoolean,
     convertNumeric,
@@ -18,6 +19,7 @@ const convertersForTypes: any = {
     [filterTypesObject.COORDINATE]: convertText,
     [filterTypesObject.DATE]: convertDate,
     [filterTypesObject.DATETIME]: convertDate,
+    [filterTypesObject.TIME]: convertTime,
     [filterTypesObject.EMAIL]: convertText,
     [filterTypesObject.FILE_RESOURCE]: convertText,
     [filterTypesObject.IMAGE]: convertText,
@@ -31,7 +33,6 @@ const convertersForTypes: any = {
     [filterTypesObject.PERCENTAGE]: convertText,
     [filterTypesObject.PHONE_NUMBER]: convertText,
     [filterTypesObject.TEXT]: convertText,
-    [filterTypesObject.TIME]: convertText,
     [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
     [filterTypesObject.URL]: convertText,
     [filterTypesObject.USERNAME]: convertText,

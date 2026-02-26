@@ -6,6 +6,7 @@ import {
     filterTypesObject,
     type NumericFilterData,
     type TextFilterData,
+    type TimeFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
@@ -20,6 +21,11 @@ const getTextFilter = (filter: TextFilterData, dataElement?: DataElement) => (
 const getNumericFilter = (filter: NumericFilterData) => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
     le: filter.le ? filter.le.toString() : undefined,
+});
+
+const getTimeFilter = (filter: TimeFilterData) => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
 });
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
@@ -80,7 +86,7 @@ export const getFilterByType = {
     [filterTypesObject.PERCENTAGE]: getTextFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.TIME]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
     [filterTypesObject.URL]: getTextFilter,
     [filterTypesObject.USERNAME]: getTextFilter,

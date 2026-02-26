@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-25T11:01:22.634Z\n"
-"PO-Revision-Date: 2026-02-25T11:01:22.634Z\n"
+"POT-Creation-Date: 2026-02-26T08:58:51.594Z\n"
+"PO-Revision-Date: 2026-02-26T08:58:51.594Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -531,8 +531,8 @@ msgstr "Absolute range"
 msgid "Relative range"
 msgstr "Relative range"
 
-msgid "Please specify a date range"
-msgstr "Please specify a date range"
+msgid "Please specify a date"
+msgstr "Please specify a date"
 
 msgid "The \"Before\" value must be after the \"After\" value"
 msgstr "The \"Before\" value must be after the \"After\" value"
@@ -578,6 +578,9 @@ msgstr "Exact matches only"
 
 msgid "Contains text"
 msgstr "Contains text"
+
+msgid "Please specify a time range"
+msgstr "Please specify a time range"
 
 msgid "Yes"
 msgstr "Yes"
@@ -677,6 +680,12 @@ msgstr "greater than or equal to"
 
 msgid "less than or equal to"
 msgstr "less than or equal to"
+
+msgid "after or equal to"
+msgstr "after or equal to"
+
+msgid "before or equal to"
+msgstr "before or equal to"
 
 msgid "More filters"
 msgstr "More filters"

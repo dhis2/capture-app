@@ -5,6 +5,7 @@ import {
     filterTypesObject,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
 } from '../../../../WorkingListsBase';
 import type {
@@ -41,6 +42,16 @@ const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | und
         return {
             ge: Number(filter.ge),
             le: Number(filter.le),
+        };
+    }
+    return undefined;
+};
+
+const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined => {
+    if (filter.ge || filter.le) {
+        return {
+            ge: filter.ge ?? undefined,
+            le: filter.le ?? undefined,
         };
     }
     return undefined;
@@ -121,7 +132,7 @@ const getFilterByType = {
     [filterTypesObject.PERCENTAGE]: getTextFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.TIME]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
     [filterTypesObject.URL]: getTextFilter,
     [filterTypesObject.USERNAME]: getTextFilter,

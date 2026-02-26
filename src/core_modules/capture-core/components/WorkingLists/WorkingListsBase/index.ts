@@ -8,6 +8,7 @@ export type {
     DateFilterData,
     BooleanFilterData,
     TextFilterData,
+    TimeFilterData,
     NumericFilterData,
     TrueOnlyFilterData,
     OptionSetFilterData,

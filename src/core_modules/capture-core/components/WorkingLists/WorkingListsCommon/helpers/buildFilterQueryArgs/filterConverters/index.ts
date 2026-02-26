@@ -1,5 +1,6 @@
 export { clearMemoization, convertDate } from './dateConverter';
 export { convertDateTime } from './dateTimeConverter';
+export { convertTime } from './timeConverter';
 export { convertOptionSet } from './optionSet/optionSetConverter';
 export { convertAssignee } from './assigneeConverter';
 export { convertBoolean } from './booleanConverter';

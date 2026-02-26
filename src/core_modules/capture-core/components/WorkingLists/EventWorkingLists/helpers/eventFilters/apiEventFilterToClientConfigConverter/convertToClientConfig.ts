@@ -13,6 +13,7 @@ import {
     type BooleanFilterData,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
 } from '../../../../WorkingListsBase';
 import type {
@@ -39,6 +40,11 @@ const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
     ge: filter.ge ? Number(filter.ge) : undefined,
     le: filter.le ? Number(filter.le) : undefined,
+});
+
+const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
 });
 
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
@@ -136,7 +142,7 @@ const getFilterByType = {
     [filterTypesObject.PERCENTAGE]: getTextFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.TIME]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
     [filterTypesObject.URL]: getTextFilter,
     [filterTypesObject.USERNAME]: getTextFilter,

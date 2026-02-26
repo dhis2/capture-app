@@ -119,15 +119,18 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         this.props.onCommitValue(updated);
     };
 
+    // eslint-disable-next-line complexity
     getDateLogicError() {
         const { value } = this.props;
         const { submitAttempted } = this.state;
-        const hasNoDates = !value?.from?.date && !value?.to?.date;
-        if (hasNoDates) {
-            return submitAttempted ? i18n.t('Please specify a date range') : null;
-        }
         const from = value?.from;
         const to = value?.to;
+        if (from?.isValid === false || to?.isValid === false) {
+            return i18n.t('Please provide a valid date');
+        }
+        if (!from?.date && !to?.date) {
+            return submitAttempted ? i18n.t('Please specify a date') : null;
+        }
         if (from?.date && to?.date && isFromAfterTo(from, to)) {
             return i18n.t('The "Before" value must be after the "After" value');
         }

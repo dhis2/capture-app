@@ -33,6 +33,7 @@ export type {
     AbsoluteDateFilterData,
     BooleanFilterData,
     TextFilterData,
+    TimeFilterData,
     TrueOnlyFilterData,
     NumericFilterData,
     OptionSetFilterData,

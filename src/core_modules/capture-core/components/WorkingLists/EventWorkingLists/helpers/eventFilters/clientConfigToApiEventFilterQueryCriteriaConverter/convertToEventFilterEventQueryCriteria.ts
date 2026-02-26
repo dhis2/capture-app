@@ -11,6 +11,7 @@ import {
     type DateFilterData,
     type BooleanFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
     type OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
@@ -54,6 +55,11 @@ const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
 const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
     le: filter.le ? filter.le.toString() : undefined,
+});
+
+const getTimeFilter = (filter: TimeFilterData): ApiDataFilterNumeric => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
 });
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
@@ -112,7 +118,7 @@ const getFilterByType = {
     [filterTypesObject.PERCENTAGE]: getTextFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.TIME]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
     [filterTypesObject.URL]: getTextFilter,
     [filterTypesObject.USERNAME]: getTextFilter,
