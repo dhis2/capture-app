@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-26T12:39:50.020Z\n"
-"PO-Revision-Date: 2026-02-26T12:39:50.020Z\n"
+"POT-Creation-Date: 2026-02-26T12:46:28.341Z\n"
+"PO-Revision-Date: 2026-02-26T12:46:28.341Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -485,9 +485,6 @@ msgstr "From and to date"
 
 msgid "to"
 msgstr "to"
-
-msgid "Single date"
-msgstr "Single date"
 
 msgid "Days relative to today"
 msgstr "Days relative to today"

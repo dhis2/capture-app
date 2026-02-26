@@ -31,12 +31,11 @@ export class DateFilterManager extends React.Component<Props, State> {
         const isSameDay = geDate && leDate && geDate === leDate;
 
         if (isSameDay && ge) {
+            const converted = DateFilterManager.convertDateForEdit(ge);
             return {
-                main: mainOptionKeys.SINGLE_DATE,
-                date: {
-                    value: DateFilterManager.convertDateForEdit(ge),
-                    isValid: true,
-                },
+                main: mainOptionKeys.ABSOLUTE_RANGE,
+                from: { value: converted, isValid: true },
+                to: { value: converted, isValid: true },
             };
         }
 

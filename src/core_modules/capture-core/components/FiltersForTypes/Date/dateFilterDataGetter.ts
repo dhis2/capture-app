@@ -8,7 +8,6 @@ type Value = {
     main: string;
     from?: DateValue | null;
     to?: DateValue | null;
-    date?: DateValue | null;
     start?: string | null;
     end?: string | null;
 };
@@ -50,10 +49,6 @@ function convertRelativeRange(value: Value) {
 }
 
 function convertSelections(value: Value) {
-    if (value.main === mainOptionKeys.SINGLE_DATE && value?.date?.value) {
-        const singleDate = value.date.value;
-        return convertAbsoluteDate(singleDate, singleDate);
-    }
     if (value.main === mainOptionKeys.ABSOLUTE_RANGE) {
         return convertAbsoluteDate(value?.from?.value, value?.to?.value);
     }
