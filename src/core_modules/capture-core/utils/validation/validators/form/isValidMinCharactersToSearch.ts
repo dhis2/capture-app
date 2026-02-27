@@ -1,3 +1,8 @@
+import {
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+} from '../../../../components/FiltersForTypes/EmptyValue';
+
 const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSearch: number) => {
     if (value === undefined) {
         return true;
@@ -36,7 +41,8 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
 };
 
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
-    if (value === undefined) {
+    console.log('value', value);
+    if (value === undefined || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER) {
         return true;
     }
 
