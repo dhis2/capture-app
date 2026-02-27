@@ -121,8 +121,10 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
 
         const limitForType = getMinCharsLimit(type);
         const showError = Boolean(
-            (limitForType && minCharactersToSearch > limitForType)
-            || !isValidMinCharactersToSearch(committedValue, minCharactersToSearch),
+            minCharactersToSearch && (
+                (limitForType && minCharactersToSearch > limitForType)
+                || !isValidMinCharactersToSearch(committedValue, minCharactersToSearch)
+            ),
         );
 
         return (
