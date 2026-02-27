@@ -23,18 +23,31 @@ const getStyles = (theme: Theme) => ({
 
 const ISO_DATE_LENGTH = 10;
 const ID_LENGTH = 11;
+const BOOLEAN_LENGTH = 4;
+const ISO_TIME_LENGTH = 5;
+const ISO_DATE_TIME_LENGTH = 26;
+const PERCENTAGE_LENGTH = 3;
+
+const MIN_CHARS_LIMIT_BY_TYPE: Partial<Record<string, number>> = {
+    [filterTypesObject.DATE]: ISO_DATE_LENGTH,
+    [filterTypesObject.ORGANISATION_UNIT]: ID_LENGTH,
+    [filterTypesObject.BOOLEAN]: BOOLEAN_LENGTH,
+    [filterTypesObject.TRUE_ONLY]: BOOLEAN_LENGTH,
+    [filterTypesObject.DATETIME]: ISO_DATE_TIME_LENGTH,
+    [filterTypesObject.TIME]: ISO_TIME_LENGTH,
+    [filterTypesObject.PERCENTAGE]: PERCENTAGE_LENGTH,
+    [filterTypesObject.AGE]: ISO_DATE_LENGTH,
+};
+
+function getMinCharsLimit(type?: string): number | undefined {
+    return type ? MIN_CHARS_LIMIT_BY_TYPE[type] : undefined;
+}
 
 function getMinCharsErrorMessage(min: number, type?: string): string {
-    const isDateType = type === filterTypesObject.DATE;
-    const isOrgUnitType = type === filterTypesObject.ORGANISATION_UNIT;
-    if (isDateType && min > ISO_DATE_LENGTH) {
+    const limitForType = getMinCharsLimit(type);
+    if (limitForType && min > limitForType) {
         return i18n.t(
-            'This filter requires more characters than a date can provide.',
-        );
-    }
-    if (isOrgUnitType && min > ID_LENGTH) {
-        return i18n.t(
-            'This filter requires too many characters to filter for an organisation unit.',
+            'Minimum characters to search is too high for this filter.',
         );
     }
     return i18n.t('Please enter at least {{minCharactersToSearch}} character to filter', {
@@ -56,7 +69,11 @@ function wrapFilterWithMinCharsValidation(
         onGetUpdateData: (updatedValue?: unknown) => instance.onGetUpdateData(updatedValue),
         onIsValid: () => {
             if (instance.onIsValid && !instance.onIsValid()) return false;
-            if (minCharactersToSearch && (type !== filterTypesObject.DATE || minCharactersToSearch > ISO_DATE_LENGTH)) {
+            const limitForType = getMinCharsLimit(type);
+            if (minCharactersToSearch && limitForType && minCharactersToSearch > limitForType) {
+                return false;
+            }
+            if (minCharactersToSearch) {
                 return isValidMinCharactersToSearch(committedValueRef.current, minCharactersToSearch);
             }
             return true;
@@ -102,11 +119,10 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
             [handleCommitValue],
         );
 
+        const limitForType = getMinCharsLimit(type);
         const showError = Boolean(
-            minCharactersToSearch
-            && committedValue !== undefined
-            && (type !== filterTypesObject.DATE || minCharactersToSearch > ISO_DATE_LENGTH)
-            && !isValidMinCharactersToSearch(committedValue, minCharactersToSearch),
+            (limitForType && minCharactersToSearch > limitForType)
+            || !isValidMinCharactersToSearch(committedValue, minCharactersToSearch),
         );
 
         return (

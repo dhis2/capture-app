@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
@@ -48,7 +48,7 @@ const selectorContentsForTypes = {
     [filterTypesObject.LONG_TEXT]: TextFilter,
     [filterTypesObject.NUMBER]: NumericFilter,
     [filterTypesObject.ORGANISATION_UNIT]: OrgUnitFilter,
-    [filterTypesObject.PERCENTAGE]: TextFilter,
+    [filterTypesObject.PERCENTAGE]: NumericFilter,
     [filterTypesObject.PHONE_NUMBER]: TextFilter,
     [filterTypesObject.TEXT]: TextFilter,
     [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
@@ -124,6 +124,15 @@ const FilterSelectorContentsPlain = ({
     ...passOnProps
 }: Props & WithStyles<typeof getStyles>) => {
     const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const frameId = requestAnimationFrame(() => {
+            containerRef.current?.focus();
+        });
+        return () => cancelAnimationFrame(frameId);
+    }, []);
+
     const contents = useContents({
         classes,
         filterValue,
@@ -140,7 +149,13 @@ const FilterSelectorContentsPlain = ({
     }
 
     return (
-        <div className={classes.container} data-test="list-view-filter-contents">
+        <div
+            ref={containerRef}
+            className={classes.container}
+            data-test="list-view-filter-contents"
+            tabIndex={-1}
+            style={{ outline: 'none' }}
+        >
             {contents}
         </div>
     );

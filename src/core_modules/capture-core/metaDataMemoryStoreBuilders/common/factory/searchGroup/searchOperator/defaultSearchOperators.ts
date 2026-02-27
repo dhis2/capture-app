@@ -15,7 +15,7 @@ export const defaultSearchOperators = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: [searchOperators.RANGE],
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: [searchOperators.RANGE],
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: [searchOperators.RANGE],
-    [dataElementTypes.PERCENTAGE]: [searchOperators.LIKE, searchOperators.SW, searchOperators.EQ],
+    [dataElementTypes.PERCENTAGE]: [searchOperators.RANGE],
     [dataElementTypes.DATE]: [searchOperators.RANGE],
     [dataElementTypes.DATE_RANGE]: [searchOperators.RANGE],
     [dataElementTypes.DATETIME]: [searchOperators.RANGE],

@@ -19,6 +19,7 @@ export const forcedSearchOperators: Array<keyof typeof dataElementTypes> = [
     dataElementTypes.DATETIME_RANGE,
     dataElementTypes.TIME,
     dataElementTypes.TIME_RANGE,
+    dataElementTypes.PERCENTAGE,
     dataElementTypes.BOOLEAN,
     dataElementTypes.TRUE_ONLY,
     dataElementTypes.ORGANISATION_UNIT,

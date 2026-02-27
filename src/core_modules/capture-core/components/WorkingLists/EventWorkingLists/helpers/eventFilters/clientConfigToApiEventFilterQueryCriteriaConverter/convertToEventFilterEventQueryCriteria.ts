@@ -115,7 +115,7 @@ const getFilterByType = {
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
     [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
-    [filterTypesObject.PERCENTAGE]: getTextFilter,
+    [filterTypesObject.PERCENTAGE]: getNumericFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
     [filterTypesObject.TIME]: getTimeFilter,

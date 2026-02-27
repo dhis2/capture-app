@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-27T11:12:41.795Z\n"
-"PO-Revision-Date: 2026-02-27T11:12:41.795Z\n"
+"POT-Creation-Date: 2026-02-27T16:49:47.722Z\n"
+"PO-Revision-Date: 2026-02-27T16:49:47.722Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -546,6 +546,9 @@ msgstr "Please provide a valid number"
 msgid "Please provide a valid integer"
 msgstr "Please provide a valid integer"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
+
 msgid "Please provide a positive integer"
 msgstr "Please provide a positive integer"
 
@@ -633,11 +636,8 @@ msgstr "Reset filter"
 msgid "Remove filter"
 msgstr "Remove filter"
 
-msgid "This filter requires more characters than a date can provide."
-msgstr "This filter requires more characters than a date can provide."
-
-msgid "This filter requires too many characters to filter for an organisation unit."
-msgstr "This filter requires too many characters to filter for an organisation unit."
+msgid "Minimum characters to search is too high for this filter."
+msgstr "Minimum characters to search is too high for this filter."
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -2198,9 +2198,6 @@ msgstr "Please provide a valid date and time"
 
 msgid "Please provide a valid time"
 msgstr "Please provide a valid time"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Please provide an integer between 0 and 100"
 
 msgid "Please provide a valid url"
 msgstr "Please provide a valid url"

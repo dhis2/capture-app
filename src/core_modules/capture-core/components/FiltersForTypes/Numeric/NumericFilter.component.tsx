@@ -4,10 +4,12 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import {
     isValidNumber,
-    isValidInteger,
+    isValidIntegerInRange,
+    isValidPercentage,
     isValidPositiveInteger,
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
+    isValidInteger,
 } from 'capture-core-utils/validators/form';
 import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
@@ -110,6 +112,7 @@ class NumericFilterPlain
         MIN_GREATER_THAN_MAX: i18n.t('Minimum value cannot be greater than maximum value'),
         [dataElementTypes.NUMBER]: i18n.t('Please provide a valid number'),
         [dataElementTypes.INTEGER]: i18n.t('Please provide a valid integer'),
+        [dataElementTypes.PERCENTAGE]: i18n.t('Please provide an integer between 0 and 100'),
         [dataElementTypes.INTEGER_POSITIVE]: i18n.t('Please provide a positive integer'),
         [dataElementTypes.INTEGER_NEGATIVE]: i18n.t('Please provide a negative integer'),
         [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: i18n.t('Please provide zero or a positive integer'),
@@ -117,10 +120,12 @@ class NumericFilterPlain
 
     static validatorForTypes = {
         [dataElementTypes.NUMBER]: isValidNumber,
-        [dataElementTypes.INTEGER]: isValidInteger,
-        [dataElementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
-        [dataElementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
-        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
+        [dataElementTypes.PERCENTAGE]: isValidPercentage,
+        [dataElementTypes.INTEGER]: (v: string) => isValidInteger(v) && isValidIntegerInRange(v),
+        [dataElementTypes.INTEGER_POSITIVE]: (v: string) => isValidIntegerInRange(v) && isValidPositiveInteger(v),
+        [dataElementTypes.INTEGER_NEGATIVE]: (v: string) => isValidIntegerInRange(v) && isValidNegativeInteger(v),
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: (v: string) =>
+            isValidIntegerInRange(v) && isValidZeroOrPositiveInteger(v),
     };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {

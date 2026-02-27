@@ -36,7 +36,7 @@ const mappersForTypes = {
     [filterTypesObject.LONG_TEXT]: convertText,
     [filterTypesObject.NUMBER]: convertNumeric,
     [filterTypesObject.ORGANISATION_UNIT]: convertOrgUnit,
-    [filterTypesObject.PERCENTAGE]: convertText,
+    [filterTypesObject.PERCENTAGE]: convertNumeric,
     [filterTypesObject.PHONE_NUMBER]: convertText,
     [filterTypesObject.TEXT]: convertText,
     [filterTypesObject.TRUE_ONLY]: convertTrueOnly,

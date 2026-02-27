@@ -6,7 +6,7 @@ import type { Value } from './Username.types';
 type Props = {
     filter: UsernameFilterData | null | undefined;
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void;
+    handleCommitValue: (value?: Value) => void;
     onUpdate: (updatedValue: Value) => void;
 };
 
@@ -27,7 +27,7 @@ export class UsernameFilterManager extends React.Component<Props, State> {
 
     handleCommitValue = (value: Value) => {
         this.setState({ value });
-        this.props.handleCommitValue?.();
+        this.props.handleCommitValue?.(value);
     };
 
     render() {

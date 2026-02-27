@@ -12,6 +12,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
             type: dataElementTypes.ORGANISATION_UNIT,
             header: i18n.t('Owner organisation unit'),
             sortDisabled: true,
+            filterHidden: true,
             apiViewName: 'programOwner',
         },
         {

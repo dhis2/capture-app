@@ -20,6 +20,7 @@ type Value = Array<any> | string | boolean | null;
 type PlainProps = {
     value?: Value;
     onCommitValue: (value: Value) => void;
+    onUpdate?: (commitValue?: Value) => void;
     allowMultiple: boolean;
 };
 
@@ -44,6 +45,12 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
         return true;
     }
 
+    handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && this.props.onUpdate) {
+            this.props.onUpdate(this.props.value);
+        }
+    };
+
     setBooleanFieldInstance = (instance: D2TrueFalse | null) => {
         this.booleanFieldInstance = instance;
     }
@@ -56,6 +63,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
         return (
             <div
                 className={classes.selectBoxesContainer}
+                onKeyDownCapture={this.handleKeyDown}
             >
                 <D2TrueFalse
                     ref={this.setBooleanFieldInstance}
