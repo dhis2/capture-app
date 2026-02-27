@@ -27,8 +27,8 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
 
     if (date) {
         return (
-            isValueBiggerThanMinCharactersToSearch(from.date, minCharactersToSearch) &&
-            isValueBiggerThanMinCharactersToSearch(to.date, minCharactersToSearch)
+            isValueBiggerThanMinCharactersToSearch(from?.date, minCharactersToSearch) &&
+            isValueBiggerThanMinCharactersToSearch(to?.date, minCharactersToSearch)
         );
     }
 

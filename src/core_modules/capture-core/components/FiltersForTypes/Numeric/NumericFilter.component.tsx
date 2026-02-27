@@ -9,8 +9,7 @@ import {
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
 } from 'capture-core-utils/validators/form';
-import { MinNumericFilter } from './Min.component';
-import { MaxNumericFilter } from './Max.component';
+import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
@@ -190,7 +189,8 @@ class NumericFilterPlain
                     <div
                         className={classes.inputContainer}
                     >
-                        <MinNumericFilter
+                        <NumericFilterInput
+                            field="min"
                             value={value && value.min}
                             error={minValueError}
                             errorClass={classes.error}
@@ -207,7 +207,8 @@ class NumericFilterPlain
                     <div
                         className={classes.inputContainer}
                     >
-                        <MaxNumericFilter
+                        <NumericFilterInput
+                            field="max"
                             value={value && value.max}
                             error={maxValueError}
                             errorClass={classes.error}

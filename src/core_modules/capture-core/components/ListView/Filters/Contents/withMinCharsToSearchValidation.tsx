@@ -22,12 +22,19 @@ const getStyles = (theme: Theme) => ({
 });
 
 const ISO_DATE_LENGTH = 10;
+const ID_LENGTH = 11;
 
 function getMinCharsErrorMessage(min: number, type?: string): string {
     const isDateType = type === filterTypesObject.DATE;
+    const isOrgUnitType = type === filterTypesObject.ORGANISATION_UNIT;
     if (isDateType && min > ISO_DATE_LENGTH) {
         return i18n.t(
             'This filter requires more characters than a date can provide.',
+        );
+    }
+    if (isOrgUnitType && min > ID_LENGTH) {
+        return i18n.t(
+            'This filter requires too many characters to filter for an organisation unit.',
         );
     }
     return i18n.t('Please enter at least {{minCharactersToSearch}} character to filter', {

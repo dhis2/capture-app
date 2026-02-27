@@ -9,8 +9,7 @@ import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from './types';
-import { FromDateFilter } from './From.component';
-import { ToDateFilter } from './To.component';
+import { DateFilterInput } from './DateFilterInput.component';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
@@ -77,6 +76,7 @@ type Props = OwnProps & WithStyles<typeof styles>;
 
 type State = {
     submitAttempted: boolean;
+    committedValue: Value;
 };
 
 // eslint-disable-next-line complexity
@@ -212,7 +212,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     constructor(props: Props) {
         super(props);
-        this.state = { submitAttempted: false };
+        this.state = { submitAttempted: false, committedValue: props.value };
     }
 
     static mainOptionSet = new OptionSet('mainOptions', [
@@ -297,10 +297,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return Object.keys(valueObject).some(key => valueObject[key]) ? valueObject : undefined;
     }
 
-    handleEnterKeyInFrom = () => {
-        this.toD2DateTextFieldInstance && this.toD2DateTextFieldInstance.focus();
-    };
-
     handleDateSelectedFromCalendarInFrom = () => {
         this.toD2DateTextFieldInstance && this.toD2DateTextFieldInstance.focus();
     };
@@ -346,12 +342,112 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return errors;
     }
 
-    render() {
+    handlePeriodRadioChange = (optionValue: string) => (e: { checked: boolean }) => {
+        const next = (e as { checked: boolean }).checked ? optionValue : null;
+        this.handleMainSelect(next);
+    };
+
+    renderAbsoluteRangeInputs() {
         const { value, classes, onFocusUpdateButton } = this.props;
         const fromValue = value?.from;
         const toValue = value?.to;
-        const { startValueError, endValueError, dateLogicError, bufferLogicError } =
-            this.getErrors();
+        const { dateLogicError } = this.getErrors();
+
+        return (
+            <div className={classes.inputsUnderOption}>
+                <div className={classes.fromToContainer}>
+                    <div className={classes.inputContainer}>
+                        <DateFilterInput
+                            field="from"
+                            value={fromValue?.value ?? undefined}
+                            onBlur={this.handleFieldBlur}
+                            onDateSelectedFromCalendar={
+                                this.handleDateSelectedFromCalendarInFrom
+                            }
+                            error={fromValue?.error}
+                            errorClass={classes.error}
+                        />
+                    </div>
+                    <div className={classes.toLabelContainer}>
+                        {i18n.t('to')}
+                    </div>
+                    <div className={classes.inputContainer}>
+                        <DateFilterInput
+                            field="to"
+                            value={toValue?.value ?? undefined}
+                            onBlur={this.handleFieldBlur}
+                            textFieldRef={this.setToD2DateTextFieldInstance}
+                            onDateSelectedFromCalendar={onFocusUpdateButton}
+                            error={toValue?.error}
+                            errorClass={classes.error}
+                        />
+                    </div>
+                </div>
+                {dateLogicError && (
+                    <div
+                        className={cx(
+                            classes.error,
+                            classes.logicErrorContainer,
+                        )}
+                    >
+                        {dateLogicError}
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    renderRelativeRangeInputs() {
+        const { value, classes } = this.props;
+        const { startValueError, endValueError, bufferLogicError } = this.getErrors();
+
+        return (
+            <div className={classes.inputsUnderOption}>
+                <RangeFilter
+                    value={{ start: value?.start, end: value?.end }}
+                    startValueError={startValueError}
+                    endValueError={endValueError}
+                    handleFieldBlur={this.handleFieldBlur}
+                />
+                {bufferLogicError && (
+                    <div
+                        className={cx(
+                            classes.error,
+                            classes.logicErrorContainer,
+                        )}
+                    >
+                        {bufferLogicError}
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    renderPeriodOption = (option: Option) => {
+        const { value, classes } = this.props;
+        const isAbsoluteRange = option.value === mainOptionKeys.ABSOLUTE_RANGE &&
+            value?.main === mainOptionKeys.ABSOLUTE_RANGE;
+        const isRelativeRange = option.value === mainOptionKeys.RELATIVE_RANGE &&
+            value?.main === mainOptionKeys.RELATIVE_RANGE;
+
+        return (
+            <div key={option.value as string} className={classes.optionRow}>
+                <Radio
+                    checked={value?.main === option.value}
+                    label={option.text}
+                    name="dateFilterMain"
+                    value={option.value as string}
+                    onChange={this.handlePeriodRadioChange(option.value as string)}
+                    dense
+                />
+                {isAbsoluteRange && this.renderAbsoluteRangeInputs()}
+                {isRelativeRange && this.renderRelativeRangeInputs()}
+            </div>
+        );
+    };
+
+    render() {
+        const { classes } = this.props;
 
         return (
             <div id="dateFilter">
@@ -360,86 +456,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {i18n.t('Period')}
                     </span>
                     <div role="radiogroup" aria-label={i18n.t('Period')}>
-                        {DateFilterPlain.mainOptionSet.options.map(option => (
-                            <div key={option.value as string} className={classes.optionRow}>
-                                <Radio
-                                    checked={value?.main === option.value}
-                                    label={option.text}
-                                    name="dateFilterMain"
-                                    value={option.value as string}
-                                    onChange={(e: { checked: boolean }) => {
-                                        const next = (e as { checked: boolean }).checked
-                                            ? (option.value as string)
-                                            : null;
-                                        this.handleMainSelect(next);
-                                    }}
-                                    dense
-                                />
-                                {option.value === mainOptionKeys.ABSOLUTE_RANGE &&
-                                    value?.main === mainOptionKeys.ABSOLUTE_RANGE && (
-                                    <div className={classes.inputsUnderOption}>
-                                        <div className={classes.fromToContainer}>
-                                            <div className={classes.inputContainer}>
-                                                <FromDateFilter
-                                                    value={fromValue?.value ?? undefined}
-                                                    onBlur={this.handleFieldBlur}
-                                                    onEnterKey={this.handleEnterKeyInFrom}
-                                                    onDateSelectedFromCalendar={
-                                                        this.handleDateSelectedFromCalendarInFrom
-                                                    }
-                                                    error={fromValue?.error}
-                                                    errorClass={classes.error}
-                                                />
-                                            </div>
-                                            <div className={classes.toLabelContainer}>
-                                                {i18n.t('to')}
-                                            </div>
-                                            <div className={classes.inputContainer}>
-                                                <ToDateFilter
-                                                    value={toValue?.value ?? undefined}
-                                                    onBlur={this.handleFieldBlur}
-                                                    textFieldRef={this.setToD2DateTextFieldInstance}
-                                                    onFocusUpdateButton={onFocusUpdateButton}
-                                                    error={toValue?.error}
-                                                    errorClass={classes.error}
-                                                />
-                                            </div>
-                                        </div>
-                                        {dateLogicError && (
-                                            <div
-                                                className={cx(
-                                                    classes.error,
-                                                    classes.logicErrorContainer,
-                                                )}
-                                            >
-                                                {dateLogicError}
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                                {option.value === mainOptionKeys.RELATIVE_RANGE &&
-                                    value?.main === mainOptionKeys.RELATIVE_RANGE && (
-                                    <div className={classes.inputsUnderOption}>
-                                        <RangeFilter
-                                            value={{ start: value?.start, end: value?.end }}
-                                            startValueError={startValueError}
-                                            endValueError={endValueError}
-                                            handleFieldBlur={this.handleFieldBlur}
-                                        />
-                                        {bufferLogicError && (
-                                            <div
-                                                className={cx(
-                                                    classes.error,
-                                                    classes.logicErrorContainer,
-                                                )}
-                                            >
-                                                {bufferLogicError}
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                        {DateFilterPlain.mainOptionSet.options.map(this.renderPeriodOption)}
                     </div>
                 </div>
             </div>

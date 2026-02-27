@@ -42,6 +42,7 @@ const styles: Readonly<any> = (theme: any) => {
 type OwnProps = {
     onCommitValue: (value: Value) => void;
     value: Value;
+    onUpdate?: (commitValue?: any) => void;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -119,6 +120,13 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         this.props.onCommitValue(updated);
     };
 
+    handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            this.props.onUpdate?.();
+        }
+    };
+
     // eslint-disable-next-line complexity
     getDateLogicError() {
         const { value } = this.props;
@@ -146,7 +154,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         const dateLogicError = this.getDateLogicError();
 
         return (
-            <div>
+            <div onKeyDownCapture={this.handleKeyDown} role="presentation">
                 <div className={classes.section}>
                     <div className={classes.sectionLabel}>{i18n.t('After')}</div>
                     <div className={classes.row}>
