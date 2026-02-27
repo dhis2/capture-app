@@ -74,7 +74,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         this.state = { submitAttempted: false };
     }
 
-    onGetUpdateData(updatedValue?: Value) {
+    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
         const value = updatedValue === undefined ? this.props.value : updatedValue;
         if (value === undefined || value === null) {
             return null;
@@ -82,7 +82,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         return getDateTimeFilterData(value);
     }
 
-    onIsValid() {
+    onIsValid() { // NOSONAR - imperative API, called externally via ref
         this.setState({ submitAttempted: true });
         const value = this.props.value;
         if (value === undefined || value === null) {
@@ -154,7 +154,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         const dateLogicError = this.getDateLogicError();
 
         return (
-            <div onKeyDownCapture={this.handleKeyDown} role="presentation">
+            <div onKeyDownCapture={this.handleKeyDown}>
                 <div className={classes.section}>
                     <div className={classes.sectionLabel}>{i18n.t('After')}</div>
                     <div className={classes.row}>

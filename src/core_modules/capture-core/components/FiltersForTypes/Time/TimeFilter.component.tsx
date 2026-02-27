@@ -83,7 +83,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         };
     }
 
-    onGetUpdateData(updatedValue?: Value) {
+    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
         const value = updatedValue === undefined ? this.props.value : updatedValue;
         if (value === undefined || value === null) {
             return null;
@@ -91,7 +91,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         return getTimeFilterData(value);
     }
 
-    onIsValid() {
+    onIsValid() { // NOSONAR - imperative API, called externally via ref
         const value = this.props.value;
         if (value === undefined || value === null) {
             return true;

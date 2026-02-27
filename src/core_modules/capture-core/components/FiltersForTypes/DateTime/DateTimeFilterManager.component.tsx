@@ -28,7 +28,7 @@ function extractTime(isoDatetime?: string | null): string | undefined {
         return undefined;
     }
     const hhmm = moment(isoDatetime).format('HH:mm');
-    return hhmm !== '00:00' ? hhmm : undefined;
+    return hhmm === '00:00' ? undefined : hhmm;
 }
 
 export class DateTimeFilterManager extends React.Component<Props, State> {

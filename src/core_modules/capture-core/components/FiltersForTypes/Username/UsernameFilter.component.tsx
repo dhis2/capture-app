@@ -6,7 +6,7 @@ import type { UpdatableFilterContent } from '../types';
 import type { UsernameFilterProps, Value } from './Username.types';
 
 export class UsernameFilter extends Component<UsernameFilterProps> implements UpdatableFilterContent<Value> {
-    onGetUpdateData(updatedValue?: Value) {
+    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
         const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getUsernameFilterData(value);
     }

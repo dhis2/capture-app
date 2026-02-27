@@ -48,20 +48,20 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class RangeFilterPlain extends Component<Props> {
-    getUpdatedValue(valuePart: { [key: string]: string | null }) {
+    getUpdatedValue(valuePart: { [key: string]: string | null }): Value {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
         };
 
         return Object.keys(valueObject).filter(key => valueObject[key]).length > 0
-            ? valueObject
+            ? (valueObject as Value)
             : { start: undefined, end: undefined };
     }
 
     handleFieldBlur = (value: ValueObject) => {
         const part = value as { start?: string; end?: string };
-        this.props.handleFieldBlur?.(this.getUpdatedValue(part) as any);
+        this.props.handleFieldBlur?.(this.getUpdatedValue(part));
     };
 
     render() {
