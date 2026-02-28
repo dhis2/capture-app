@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NumericFilter } from './NumericFilter.component';
 import type { NumericFilterData } from './types';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 
 type Props = {
     filter: NumericFilterData | null,
@@ -13,11 +14,17 @@ type State = {
     value: {
         min?: string | null,
         max?: string | null,
-    } | undefined;
+    } | string | null | undefined;
 };
 
 export class NumericFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: NumericFilterData | null) {
+        if (filter?.isEmpty === true) {
+            return EMPTY_VALUE_FILTER;
+        }
+        if (filter?.isEmpty === false) {
+            return NOT_EMPTY_VALUE_FILTER;
+        }
         return {
             min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
             max: filter && (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
