@@ -105,7 +105,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
             [side]: {
                 ...current,
                 date: dateValue.value,
-                time: current?.time ?? '00:00',
+                time: current?.time ?? (side === 'to' ? '23:59' : '00:00'),
                 error: dateValue.error,
                 isValid: dateValue.isValid,
             },

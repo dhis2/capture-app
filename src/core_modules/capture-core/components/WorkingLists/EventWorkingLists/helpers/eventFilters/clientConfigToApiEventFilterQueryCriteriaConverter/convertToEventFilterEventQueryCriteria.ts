@@ -9,6 +9,7 @@ import {
     dateFilterTypes,
     type AssigneeFilterData,
     type DateFilterData,
+    type DateTimeFilterData,
     type BooleanFilterData,
     type TextFilterData,
     type TimeFilterData,
@@ -93,6 +94,14 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     };
 };
 
+const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => ({
+    dateFilter: {
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
+
 const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
     assignedUserMode: filter.assignedUserMode,
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
@@ -104,7 +113,7 @@ const getFilterByType = {
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,

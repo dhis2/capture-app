@@ -29,6 +29,7 @@ export { dateFilterTypes, assigneeFilterModes } from '../FiltersForTypes';
 export type {
     AssigneeFilterData,
     DateFilterData,
+    DateTimeFilterData,
     RelativeDateFilterData,
     AbsoluteDateFilterData,
     BooleanFilterData,

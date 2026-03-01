@@ -2,6 +2,7 @@ import moment from 'moment';
 import {
     type BooleanFilterData,
     type DateFilterData,
+    type DateTimeFilterData,
     dateFilterTypes,
     filterTypesObject,
     type NumericFilterData,
@@ -67,12 +68,20 @@ export const getDateFilter = (dateFilter: DateFilterData) => {
     };
 };
 
+export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => ({
+    dateFilter: {
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
+
 export const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,

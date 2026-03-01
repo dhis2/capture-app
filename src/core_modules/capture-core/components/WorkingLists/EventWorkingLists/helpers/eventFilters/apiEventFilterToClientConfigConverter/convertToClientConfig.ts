@@ -82,6 +82,17 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null
     return undefined;
 };
 
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null | undefined => {
+    if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
+        return {
+            type: dateFilter.type,
+            ge: moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString(),
+            le: moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString(),
+        };
+    }
+    return undefined;
+};
+
 const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
     querySingleResource({
         resource: `userLookup/${userId}`,
@@ -128,7 +139,7 @@ const getFilterByType = {
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,
@@ -185,7 +196,8 @@ const getSortOrder = (
 
 const getDataElementFilters = (
     filters: Array<ApiDataFilter> | null | undefined,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching): any[] => {
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+): any[] => {
     if (!filters) {
         return [];
     }

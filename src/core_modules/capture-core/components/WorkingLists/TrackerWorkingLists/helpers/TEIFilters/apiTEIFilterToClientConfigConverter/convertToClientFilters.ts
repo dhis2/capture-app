@@ -97,6 +97,17 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);
 
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate) => {
+    if (dateFilter.type === DATE_TYPES.ABSOLUTE && (dateFilter.startDate || dateFilter.endDate)) {
+        return {
+            type: DATE_TYPES.ABSOLUTE,
+            ge: moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString(),
+            le: moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString(),
+        };
+    }
+    return undefined;
+};
+
 const VALID_BOOLEAN_VALUES = new Set(['true', 'false']);
 
 const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
@@ -114,7 +125,7 @@ const getFilterByType = {
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,
