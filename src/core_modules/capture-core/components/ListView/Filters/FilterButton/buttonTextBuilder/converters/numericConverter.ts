@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import type { NumericFilterData } from '../../../../../FiltersForTypes';
 
 export function convertNumeric(filter: NumericFilterData): string {
-    console.log('filter', filter);
     if (filter.value) {
         return filter.value;
     }

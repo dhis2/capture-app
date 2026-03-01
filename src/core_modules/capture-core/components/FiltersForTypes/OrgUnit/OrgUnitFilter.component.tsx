@@ -4,6 +4,12 @@ import { getOrgUnitFilterData } from './orgUnitFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { OrgUnitFilterProps, Value } from './OrgUnit.types';
 import type { OrgUnitValue } from './types';
+import {
+    makeCheckboxHandler,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
@@ -18,6 +24,14 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
         }
     };
 
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
     render() {
         const { value } = this.props;
         const orgUnitValue =
@@ -28,11 +42,19 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
                 : undefined;
 
         return (
-            <SingleOrgUnitSelectField
-                value={orgUnitValue}
-                onBlur={this.handleOrgUnitChange}
-                maxTreeHeight={280}
-            />
+            <div>
+                <EmptyValueFilterCheckboxes
+                    value={typeof value === 'string' ? value : undefined}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                />
+
+                <SingleOrgUnitSelectField
+                    value={orgUnitValue}
+                    onBlur={this.handleOrgUnitChange}
+                    maxTreeHeight={280}
+                />
+            </div>
         );
     }
 }

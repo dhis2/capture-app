@@ -13,6 +13,10 @@ const getText = (key: string): string => {
 };
 
 export function convertAssignee(filter: AssigneeFilterData): string {
+    if (filter.isEmpty !== undefined && filter.value) {
+        return filter.value;
+    }
+
     return (
         filter.assignedUserMode !== assigneeFilterModes.PROVIDED ?
             getText(filter.assignedUserMode) :

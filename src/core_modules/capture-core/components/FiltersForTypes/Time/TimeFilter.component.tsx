@@ -6,6 +6,13 @@ import type { UpdatableFilterContent } from '../types';
 import type { Value } from './Time.types';
 import { getTimeFilterData } from './timeFilterDataGetter';
 import { TimeFilterInput } from './TimeFilterInput.component';
+import {
+    makeCheckboxHandler,
+    isEmptyValueFilter,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 const getStyles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -85,6 +92,11 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
         const value = updatedValue === undefined ? this.props.value : updatedValue;
+
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return getTimeFilterData(value);
+        }
+
         if (value === undefined || value === null) {
             return null;
         }
@@ -93,7 +105,10 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onIsValid() { // NOSONAR - imperative API, called externally via ref
         const value = this.props.value;
-        if (value === undefined || value === null) {
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return true;
+        }
+        if (value === undefined || value === null || typeof value === 'string') {
             return true;
         }
         const { from, to } = value;
@@ -103,8 +118,9 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     getUpdatedValue(valuePart: ValuePart): Value {
+        const currentValue = typeof this.props.value === 'string' ? undefined : this.props.value;
         const valueObject = {
-            ...this.props.value,
+            ...currentValue,
             ...valuePart,
         };
         const hasFrom = valueObject.from !== undefined && valueObject.from !== null && valueObject.from !== '';
@@ -136,9 +152,17 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.props.onCommitValue(this.getUpdatedValue({ to: value || null }));
     };
 
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
     getTimeLogicError() {
         const values = this.state.committedValue;
-        if (values === undefined || values === null) {
+        if (values === undefined || values === null || typeof values === 'string') {
             return null;
         }
         const hasNoTimes = !values.from && !values.to;
@@ -154,17 +178,24 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     render() {
         const { value, classes } = this.props;
+        const objValue = typeof value === 'string' ? undefined : value;
         const timeLogicError = this.getTimeLogicError();
 
         return (
             <div>
+                <EmptyValueFilterCheckboxes
+                    value={typeof value === 'string' ? value : undefined}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                />
+
                 <div className={classes.container}>
                     <div className={classes.section}>
                         <div className={classes.sectionLabel}>{i18n.t('After')}</div>
                         <div className={classes.row}>
                             <TimeFilterInput
                                 field="from"
-                                value={value?.from}
+                                value={objValue?.from}
                                 onBlur={this.handleFieldBlur}
                                 onEnterKey={this.handleEnterKey}
                                 onChange={this.handleFromChange}
@@ -176,7 +207,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
                         <div className={classes.row}>
                             <TimeFilterInput
                                 field="to"
-                                value={value?.to}
+                                value={objValue?.to}
                                 onBlur={this.handleFieldBlur}
                                 onEnterKey={this.handleEnterKey}
                                 onChange={this.handleToChange}

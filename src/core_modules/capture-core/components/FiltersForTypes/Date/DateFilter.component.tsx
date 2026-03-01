@@ -15,6 +15,13 @@ import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
+import {
+    makeCheckboxHandler,
+    isEmptyValueFilter,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => ({
     sectionLabel: {
@@ -64,7 +71,7 @@ export type Value = {
     main?: string;
     start?: string;
     end?: string;
-} | undefined;
+} | string | undefined;
 
 type OwnProps = {
     onCommitValue: (value?: Value, isBlur?: boolean) => void;
@@ -257,6 +264,10 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return getDateFilterData(value);
+        }
+
         if (!value) {
             return null;
         }
@@ -264,16 +275,23 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     onIsValid() {
+        const value = this.props.value;
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return true;
+        }
         this.setState({ submitAttempted: true });
-        const values = this.props.value;
-        return !values || DateFilterPlain.isFilterValid(
-            values.main, values.from, values.to, values.start, values.end,
+        if (!value || typeof value === 'string') {
+            return true;
+        }
+        return DateFilterPlain.isFilterValid(
+            value.main, value.from, value.to, value.start, value.end,
         );
     }
 
     getUpdatedValue(valuePart: any) {
+        const currentValue = typeof this.props.value === 'string' ? undefined : this.props.value;
         const valueObject = {
-            ...this.props.value,
+            ...currentValue,
             ...valuePart,
         };
         const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
@@ -304,6 +322,14 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     handleFieldBlur = (value: any) => {
         this.props.onCommitValue(this.getUpdatedValue(value), true);
     };
+
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? undefined);
+    });
+
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? undefined);
+    });
 
     handleMainSelect = (value: string | null) => {
         const valueObject = value == null ? undefined : { main: value };
@@ -447,10 +473,16 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, value } = this.props;
 
         return (
             <div id="dateFilter">
+                <EmptyValueFilterCheckboxes
+                    value={typeof value === 'string' ? value : undefined}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                />
+
                 <div className={classes.optionsSection}>
                     <span className={classes.sectionLabel}>
                         {i18n.t('Period')}

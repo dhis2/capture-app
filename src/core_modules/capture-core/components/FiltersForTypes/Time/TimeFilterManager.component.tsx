@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { TimeFilter } from './TimeFilter.component';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { TimeFilterData } from './types/time.types';
 import type { Value } from './Time.types';
 
@@ -17,6 +18,13 @@ export class TimeFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter?: TimeFilterData | null): Value {
         if (!filter) {
             return null;
+        }
+
+        if (filter.isEmpty === true) {
+            return EMPTY_VALUE_FILTER;
+        }
+        if (filter.isEmpty === false) {
+            return NOT_EMPTY_VALUE_FILTER;
         }
 
         const from = filter.ge ?? null;

@@ -9,6 +9,13 @@ import type { DateTimeValue } from './types/dateTime.types';
 import type { Value } from './DateTime.types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
+import {
+    makeCheckboxHandler,
+    isEmptyValueFilter,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -76,6 +83,11 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
         const value = updatedValue === undefined ? this.props.value : updatedValue;
+
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return getDateTimeFilterData(value);
+        }
+
         if (value === undefined || value === null) {
             return null;
         }
@@ -83,9 +95,12 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 
     onIsValid() { // NOSONAR - imperative API, called externally via ref
-        this.setState({ submitAttempted: true });
         const value = this.props.value;
-        if (value === undefined || value === null) {
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return true;
+        }
+        this.setState({ submitAttempted: true });
+        if (value === undefined || value === null || typeof value === 'string') {
             return true;
         }
         const { from, to } = value;
@@ -96,8 +111,17 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 
     getUpdatedValue(part: { from?: DateTimeValue | null } | { to?: DateTimeValue | null }) {
-        return { ...this.props.value, ...part };
+        const currentValue = typeof this.props.value === 'string' ? undefined : this.props.value;
+        return { ...currentValue, ...part };
     }
+
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
 
     handleDateBlur = (side: DateTimeSide) => (dateValue: DateValue) => {
         const current = this.props.value?.[side];
@@ -147,14 +171,21 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     render() {
         const { value, classes } = this.props;
-        const fromDate = value?.from?.date ?? undefined;
-        const fromTime = getDisplayTime(value?.from?.date, value?.from?.time);
-        const toDate = value?.to?.date ?? undefined;
-        const toTime = getDisplayTime(value?.to?.date, value?.to?.time);
+        const objValue = typeof value === 'string' ? undefined : value;
+        const fromDate = objValue?.from?.date ?? undefined;
+        const fromTime = getDisplayTime(objValue?.from?.date, objValue?.from?.time);
+        const toDate = objValue?.to?.date ?? undefined;
+        const toTime = getDisplayTime(objValue?.to?.date, objValue?.to?.time);
         const dateLogicError = this.getDateLogicError();
 
         return (
             <div onKeyDownCapture={this.handleKeyDown}>
+                <EmptyValueFilterCheckboxes
+                    value={typeof value === 'string' ? value : undefined}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                />
+
                 <div className={classes.section}>
                     <div className={classes.sectionLabel}>{i18n.t('After')}</div>
                     <div className={classes.row}>

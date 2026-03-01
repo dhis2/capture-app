@@ -4,6 +4,7 @@ import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData } from './types';
 import type { Value } from './DateFilter.component';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
@@ -65,6 +66,10 @@ export class DateFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter?: DateFilterData | null) {
         if (!filter) {
             return undefined;
+        }
+
+        if ('isEmpty' in filter) {
+            return filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER;
         }
 
         if (filter.type === dateFilterTypes.RELATIVE) {

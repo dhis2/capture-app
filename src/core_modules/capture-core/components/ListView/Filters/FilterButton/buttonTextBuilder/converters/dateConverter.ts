@@ -54,6 +54,9 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
 }
 
 export function convertDate(filter: DateFilterData): string {
+    if ('isEmpty' in filter && filter.value) {
+        return filter.value;
+    }
     if (filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
     }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { OrgUnitFilter } from './OrgUnitFilter.component';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { OrgUnitFilterData } from './types';
 import type { Value } from './OrgUnit.types';
 
@@ -17,6 +18,13 @@ type State = {
 export class OrgUnitFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: OrgUnitFilterData | null | undefined): State {
         if (!filter?.value) return { value: undefined };
+
+        if (filter.isEmpty === true) {
+            return { value: EMPTY_VALUE_FILTER };
+        }
+        if (filter.isEmpty === false) {
+            return { value: NOT_EMPTY_VALUE_FILTER };
+        }
 
         const id = filter.value;
         const name = filter.name ?? filter.value;
