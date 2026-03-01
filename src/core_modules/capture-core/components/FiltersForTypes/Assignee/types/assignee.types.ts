@@ -7,4 +7,6 @@ export type AssigneeFilterData = {
         username: string;
         name: string;
     } | null;
+    isEmpty?: boolean;
+    value?: string;
 };

@@ -15,6 +15,13 @@ import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
+import {
+    makeCheckboxHandler,
+    isEmptyValueFilter,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 const getStyles: any = (theme: any) => ({
     container: {
@@ -41,10 +48,10 @@ const getStyles: any = (theme: any) => ({
 type Value = {
     min?: string | null,
     max?: string | null,
-} | undefined;
+} | string | null | undefined;
 
 type Props = {
-    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined, isBlur?: boolean) => void,
+    onCommitValue: (value: Value, isBlur?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
@@ -97,15 +104,25 @@ class NumericFilterPlain
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
-        if (!value || (!value.min && !value.max)) {
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return getNumericFilterData(value);
+        }
+
+        if (!value || typeof value === 'string' || (!value.min && !value.max)) {
             return undefined;
         }
         return getNumericFilterData(value);
     }
 
     onIsValid() {
-        const values = this.props.value;
-        return !values || NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type);
+        const value = this.props.value;
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return true;
+        }
+        if (!value || typeof value === 'string') {
+            return true;
+        }
+        return NumericFilterPlain.isFilterValid(value.min, value.max, this.props.type);
     }
 
     static errorMessages = {
@@ -129,8 +146,9 @@ class NumericFilterPlain
     };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
+        const currentValue = typeof this.props.value === 'string' ? undefined : this.props.value;
         const valueObject = {
-            ...this.props.value,
+            ...currentValue,
             ...valuePart,
         };
 
@@ -139,6 +157,14 @@ class NumericFilterPlain
             .filter(key => valueObject[key])
             .length > 0 ? valueObject : undefined;
     }
+
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value || null);
+    });
+
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value || null);
+    });
 
     handleEnterKey = (value: {[key: string]: string}) => {
         const values = this.getUpdatedValue(value);
@@ -165,38 +191,44 @@ class NumericFilterPlain
     }
 
     getErrors() {
-        const values = this.state.committedValue;
-        const minValue = values && values.min;
-        const maxValue = values && values.max;
-        const type = this.props.type;
-
-        const { isValid: isMinValueValid, error: minValueError } = NumericFilterPlain.validateField(minValue, type);
-        const { isValid: isMaxValueValid, error: maxValueError } = NumericFilterPlain.validateField(maxValue, type);
-
-        let logicError = null;
-        if (isMinValueValid && isMaxValueValid && minValue && maxValue && Number(minValue) > Number(maxValue)) {
-            logicError = NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX;
+        const committed = this.state.committedValue;
+        if (typeof committed === 'string') {
+            return { minValueError: null, maxValueError: null, logicError: null };
         }
 
-        return {
-            minValueError,
-            maxValueError,
-            logicError,
-        };
+        const minValue = committed && committed.min;
+        const maxValue = committed && committed.max;
+        const type = this.props.type;
+
+        const { error: minValueError, isValid: isMinValid } = NumericFilterPlain.validateField(minValue, type);
+        const { error: maxValueError, isValid: isMaxValid } = NumericFilterPlain.validateField(maxValue, type);
+        const logicError = isMinValid && isMaxValid && !NumericFilterPlain.isFilterValid(minValue, maxValue, type)
+            ? NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX
+            : null;
+
+        return { minValueError, maxValueError, logicError };
     }
 
     render() {
         const { value, classes } = this.props;
         const { minValueError, maxValueError, logicError } = this.getErrors();
+        const numericValue = typeof value === 'string' ? undefined : value;
+
         return (
             <div>
+                <EmptyValueFilterCheckboxes
+                    value={typeof value === 'string' ? value : undefined}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                />
+
                 <div className={classes.container}>
                     <div
                         className={classes.inputContainer}
                     >
                         <NumericFilterInput
                             field="min"
-                            value={value && value.min}
+                            value={numericValue && numericValue.min}
                             error={minValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
@@ -214,7 +246,7 @@ class NumericFilterPlain
                     >
                         <NumericFilterInput
                             field="max"
-                            value={value && value.max}
+                            value={numericValue && numericValue.max}
                             error={maxValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}

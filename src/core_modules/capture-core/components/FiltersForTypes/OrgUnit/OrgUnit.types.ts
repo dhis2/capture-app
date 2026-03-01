@@ -1,6 +1,6 @@
 import type { OrgUnitValue } from './types';
 
-export type Value = OrgUnitValue | null | undefined;
+export type Value = OrgUnitValue | string | null | undefined;
 
 export type OrgUnitFilterProps = {
     onCommitValue: (value: Value) => void;

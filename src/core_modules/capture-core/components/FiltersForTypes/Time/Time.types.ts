@@ -1,7 +1,7 @@
 export type Value = {
     from?: string | null;
     to?: string | null;
-} | null;
+} | string | null;
 
 export type TimeFilterProps = {
     onCommitValue: (value: Value) => void;
