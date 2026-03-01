@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
-"PO-Revision-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-02-27T16:49:47.722Z\n"
+"PO-Revision-Date: 2026-02-27T16:49:47.722Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -462,8 +462,8 @@ msgstr "Select user"
 msgid "Please specify a range"
 msgstr "Please specify a range"
 
-msgid "The From date can't be after the To date"
-msgstr "The From date can't be after the To date"
+msgid "Start date must be before the end date"
+msgstr "Start date must be before the end date"
 
 msgid "Please specify the number of days"
 msgstr "Please specify the number of days"
@@ -474,17 +474,20 @@ msgstr "Please provide zero or a positive integer"
 msgid "to"
 msgstr "to"
 
-msgid "Days in the future"
-msgstr "Days in the future"
+msgid "Period"
+msgstr "Period"
 
-msgid "From"
-msgstr "From"
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
 
 msgid "Days in the past"
 msgstr "Days in the past"
 
-msgid "To"
-msgstr "To"
+msgid "Days in the future"
+msgstr "Days in the future"
 
 msgid "This week"
 msgstr "This week"
@@ -492,8 +495,8 @@ msgstr "This week"
 msgid "This month"
 msgstr "This month"
 
-msgid "This Year"
-msgstr "This Year"
+msgid "This year"
+msgstr "This year"
 
 msgid "Last week"
 msgstr "Last week"
@@ -510,17 +513,29 @@ msgstr "Absolute range"
 msgid "Relative range"
 msgstr "Relative range"
 
+msgid "Please specify a date"
+msgstr "Please specify a date"
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr "The \"Before\" value must be after the \"After\" value"
+
+msgid "After"
+msgstr "After"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Time"
+msgstr "Time"
+
+msgid "Before"
+msgstr "Before"
+
 msgid "Is empty"
 msgstr "Is empty"
 
 msgid "Is not empty"
 msgstr "Is not empty"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr "Minimum value cannot be greater than maximum value"
@@ -531,11 +546,20 @@ msgstr "Please provide a valid number"
 msgid "Please provide a valid integer"
 msgstr "Please provide a valid integer"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
+
 msgid "Please provide a positive integer"
 msgstr "Please provide a positive integer"
 
 msgid "Please provide a negative integer"
 msgstr "Please provide a negative integer"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
 
 msgid "Yes"
 msgstr "Yes"
@@ -612,13 +636,16 @@ msgstr "Reset filter"
 msgid "Remove filter"
 msgstr "Remove filter"
 
-msgid "This filter requires more characters than a date can provide."
-msgstr "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
+msgstr "Minimum characters to search is too high for this filter."
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[1] "Please enter at least {{minCharactersToSearch}} characters to filter"
+
+msgid "This Year"
+msgstr "This Year"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
@@ -634,6 +661,12 @@ msgstr "greater than or equal to"
 
 msgid "less than or equal to"
 msgstr "less than or equal to"
+
+msgid "after or equal to"
+msgstr "after or equal to"
+
+msgid "before or equal to"
+msgstr "before or equal to"
 
 msgid "More filters"
 msgstr "More filters"
@@ -1748,9 +1781,6 @@ msgstr "Created"
 msgid "Deleted"
 msgstr "Deleted"
 
-msgid "Date"
-msgstr "Date"
-
 msgid "Sort by date"
 msgstr "Sort by date"
 
@@ -2169,9 +2199,6 @@ msgstr "Please provide a valid date and time"
 msgid "Please provide a valid time"
 msgstr "Please provide a valid time"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Please provide an integer between 0 and 100"
-
 msgid "Please provide a valid url"
 msgstr "Please provide a valid url"
 
@@ -2228,8 +2255,11 @@ msgstr "Some attributes are hidden"
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
-msgid "Time"
-msgstr "Time"
+msgid "From"
+msgstr "From"
+
+msgid "To"
+msgstr "To"
 
 msgid "From date"
 msgstr "From date"

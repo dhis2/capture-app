@@ -2,10 +2,12 @@ import moment from 'moment';
 import {
     type BooleanFilterData,
     type DateFilterData,
+    type DateTimeFilterData,
     dateFilterTypes,
     filterTypesObject,
     type NumericFilterData,
     type TextFilterData,
+    type TimeFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
@@ -20,6 +22,11 @@ const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: stri
 const getNumericFilter = (filter: NumericFilterData) => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
     le: filter.le ? filter.le.toString() : undefined,
+});
+
+const getTimeFilter = (filter: TimeFilterData) => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
 });
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
@@ -61,16 +68,37 @@ export const getDateFilter = (dateFilter: DateFilterData) => {
     };
 };
 
+export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => ({
+    dateFilter: {
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
+
 export const getFilterByType = {
-    [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.INTEGER]: getNumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.COORDINATE]: getTextFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
+    [filterTypesObject.EMAIL]: getTextFilter,
+    [filterTypesObject.FILE_RESOURCE]: getTextFilter,
+    [filterTypesObject.IMAGE]: getTextFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.LONG_TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.PERCENTAGE]: getNumericFilter,
+    [filterTypesObject.PHONE_NUMBER]: getTextFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.URL]: getTextFilter,
+    [filterTypesObject.USERNAME]: getTextFilter,
 };
 
 const mainFiltersTable = {

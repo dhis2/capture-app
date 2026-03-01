@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
-import { StartRangeFilter } from './Start.component';
-import { EndRangeFilter } from './End.component';
-import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
+import { DateFilterInput, type ValueObject } from './DateFilterInput.component';
 
 const styles: Readonly<any> = (theme: any) => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
+        alignItems: 'flex-start',
+        gap: theme.typography.pxToRem(8),
     },
     inputContainer: {
         width: '150px',
@@ -48,29 +48,20 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class RangeFilterPlain extends Component<Props> {
-    endD2TextFieldInstance: D2TextField | null = null
-
-    getUpdatedValue(valuePart: { [key: string]: string | null }) {
+    getUpdatedValue(valuePart: { [key: string]: string | null }): Value {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
         };
 
         return Object.keys(valueObject).filter(key => valueObject[key]).length > 0
-            ? valueObject
+            ? (valueObject as Value)
             : { start: undefined, end: undefined };
     }
 
-    handleEnterKeyInStart = () => {
-        this.endD2TextFieldInstance?.focus();
-    };
-
-    handleFieldBlur = (value: { [key: string]: string | null }) => {
-        this.props.handleFieldBlur && this.props.handleFieldBlur(this.getUpdatedValue(value) as any);
-    };
-
-    setEndD2TextFieldInstance = (instance: any) => {
-        this.endD2TextFieldInstance = instance;
+    handleFieldBlur = (value: ValueObject) => {
+        const part = value as { start?: string; end?: string };
+        this.props.handleFieldBlur?.(this.getUpdatedValue(part));
     };
 
     render() {
@@ -79,22 +70,22 @@ class RangeFilterPlain extends Component<Props> {
             <div>
                 <div className={classes.container}>
                     <div className={classes.inputContainer}>
-                        <StartRangeFilter
-                            value={value && value.start}
+                        <DateFilterInput
+                            field="start"
+                            value={value?.start ?? undefined}
                             error={startValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKeyInStart}
                         />
                     </div>
                     <div className={classes.toLabelContainer}>{i18n.t('to')}</div>
                     <div className={classes.inputContainer}>
-                        <EndRangeFilter
-                            value={value && value.end}
+                        <DateFilterInput
+                            field="end"
+                            value={value?.end ?? undefined}
                             error={endValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            textFieldRef={this.setEndD2TextFieldInstance}
                         />
                     </div>
                 </div>

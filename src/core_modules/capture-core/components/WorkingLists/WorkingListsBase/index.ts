@@ -6,12 +6,16 @@ export {
 } from '../../ListView';
 export type {
     DateFilterData,
+    DateTimeFilterData,
     BooleanFilterData,
     TextFilterData,
+    TimeFilterData,
     NumericFilterData,
     TrueOnlyFilterData,
     OptionSetFilterData,
     AssigneeFilterData,
+    OrgUnitFilterData,
+    UsernameFilterData,
     CustomRowMenuContent,
     CustomRowMenuContents,
     CustomTopBarActions,

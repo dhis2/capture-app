@@ -5,6 +5,7 @@ import {
     filterTypesObject,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
 } from '../../../../WorkingListsBase';
 import type {
@@ -37,6 +38,16 @@ const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | und
         return {
             ge: Number(filter.ge),
             le: Number(filter.le),
+        };
+    }
+    return undefined;
+};
+
+const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined => {
+    if (filter.ge || filter.le) {
+        return {
+            ge: filter.ge ?? undefined,
+            le: filter.le ?? undefined,
         };
     }
     return undefined;
@@ -86,24 +97,52 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);
 
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate) => {
+    if (dateFilter.type === DATE_TYPES.ABSOLUTE && (dateFilter.startDate || dateFilter.endDate)) {
+        return {
+            type: DATE_TYPES.ABSOLUTE,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+        };
+    }
+    return undefined;
+};
+
+const VALID_BOOLEAN_VALUES = new Set(['true', 'false']);
+
 const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     if ([filterTypesObject.BOOLEAN].includes(type)) {
-        const validBooleanValues = ['true', 'false'];
-        return filter.in.some(value => !validBooleanValues.includes[value]);
+        const allValuesAreBoolean = filter.in.every((value: string) =>
+            VALID_BOOLEAN_VALUES.has(value),
+        );
+        return !allValuesAreBoolean;
     }
     return filter.in;
 };
 
 const getFilterByType = {
-    [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.INTEGER]: getNumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.COORDINATE]: getTextFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
+    [filterTypesObject.EMAIL]: getTextFilter,
+    [filterTypesObject.FILE_RESOURCE]: getTextFilter,
+    [filterTypesObject.IMAGE]: getTextFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.LONG_TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.PERCENTAGE]: getNumericFilter,
+    [filterTypesObject.PHONE_NUMBER]: getTextFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.URL]: getTextFilter,
+    [filterTypesObject.USERNAME]: getTextFilter,
 };
 
 const getAssigneeFilter = async (assignedUsers: Array<string> | null, querySingleResource: QuerySingleResource) => {

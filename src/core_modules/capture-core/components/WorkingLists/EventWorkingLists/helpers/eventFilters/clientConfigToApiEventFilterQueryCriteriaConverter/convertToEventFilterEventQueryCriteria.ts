@@ -9,13 +9,17 @@ import {
     dateFilterTypes,
     type AssigneeFilterData,
     type DateFilterData,
+    type DateTimeFilterData,
     type BooleanFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
+    type OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,
+    ApiDataFilterOrgUnit,
     ApiDataFilterBoolean,
     ApiDataFilterTrueOnly,
     ApiDataFilterDate,
@@ -45,9 +49,18 @@ const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
     like: filter.value,
 });
 
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
+    eq: filter.value,
+});
+
 const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
     le: filter.le ? filter.le.toString() : undefined,
+});
+
+const getTimeFilter = (filter: TimeFilterData): ApiDataFilterNumeric => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
 });
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
@@ -81,22 +94,43 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     };
 };
 
+const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => ({
+    dateFilter: {
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
+
 const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
     assignedUserMode: filter.assignedUserMode,
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
 });
 
 const getFilterByType = {
-    [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.INTEGER]: getNumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.BOOLEAN]: getBooleanFilter,
-    [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.ASSIGNEE]: getAssigneeFilter,
+    [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.COORDINATE]: getTextFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
+    [filterTypesObject.EMAIL]: getTextFilter,
+    [filterTypesObject.FILE_RESOURCE]: getTextFilter,
+    [filterTypesObject.IMAGE]: getTextFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.LONG_TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
+    [filterTypesObject.PERCENTAGE]: getNumericFilter,
+    [filterTypesObject.PHONE_NUMBER]: getTextFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
+    [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.URL]: getTextFilter,
+    [filterTypesObject.USERNAME]: getTextFilter,
 };
 
 const typeConvertFilters = (filters: any, columns: ColumnsForConverter) => Object
