@@ -22,8 +22,12 @@ export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilter
         return getEmptyOnlyFilterData(value);
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue);
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
+    handleEmptyValueCheckboxChange = (event: { checked: boolean }) => {
+        makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue)(event);
+    };
+    handleNotEmptyValueCheckboxChange = (event: { checked: boolean }) => {
+        makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue)(event);
+    };
 
     render() {
         const { value } = this.props;

@@ -40,8 +40,11 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
     return true;
 };
 
+const shouldSkipMinCharsValidation = (value: any) =>
+    value === undefined || value === null || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
+
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
-    if (value === undefined || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER) {
+    if (shouldSkipMinCharsValidation(value)) {
         return true;
     }
 
