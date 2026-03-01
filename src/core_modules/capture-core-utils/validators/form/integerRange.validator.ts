@@ -1,6 +1,5 @@
 import { isValidInteger } from './integer.validator';
 
-/** 32-bit signed integer range (DHIS2 attribute value type INTEGER). */
 const MIN_INTEGER_32 = -2147483648;
 const MAX_INTEGER_32 = 2147483647;
 

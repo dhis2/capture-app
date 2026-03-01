@@ -86,8 +86,8 @@ const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | 
     if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
         return {
             type: dateFilter.type,
-            ge: moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString(),
-            le: moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString(),
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
         };
     }
     return undefined;
