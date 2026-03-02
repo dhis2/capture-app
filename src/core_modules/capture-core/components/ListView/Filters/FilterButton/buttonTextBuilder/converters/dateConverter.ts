@@ -53,6 +53,28 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
     return appliedText;
 }
 
+// eslint-disable-next-line complexity
+function translateRelativeRange(filter: { startBuffer?: number | null; endBuffer?: number | null }): string {
+    const hasStart = filter.startBuffer !== undefined && filter.startBuffer !== null;
+    const hasEnd = filter.endBuffer !== undefined && filter.endBuffer !== null;
+    const startDays = hasStart ? Math.abs(filter.startBuffer as number) : null;
+    const endDays = hasEnd ? (filter.endBuffer as number) : null;
+
+    if (startDays !== null && endDays !== null) {
+        return i18n.t('{{start}} days in the past to {{end}} days in the future', {
+            start: startDays,
+            end: endDays,
+        });
+    }
+    if (startDays !== null) {
+        return i18n.t('{{count}} days in the past', { count: startDays });
+    }
+    if (endDays !== null) {
+        return i18n.t('{{count}} days in the future', { count: endDays });
+    }
+    return '';
+}
+
 export function convertDate(filter: DateFilterData): string {
     if (filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
@@ -61,7 +83,7 @@ export function convertDate(filter: DateFilterData): string {
         return translatedPeriods[filter.period];
     }
     if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
-        return `${translatedPeriods[periods.RELATIVE_RANGE]} (${filter.startBuffer ?? ''} -> ${filter.endBuffer ?? ''})`;
+        return translateRelativeRange(filter);
     }
     return '';
 }

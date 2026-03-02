@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-02T13:28:52.198Z\n"
-"PO-Revision-Date: 2026-03-02T13:28:52.198Z\n"
+"POT-Creation-Date: 2026-03-02T15:55:22.576Z\n"
+"PO-Revision-Date: 2026-03-02T15:55:22.576Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -465,23 +465,23 @@ msgstr "Please specify a range"
 msgid "Start date must be before the end date"
 msgstr "Start date must be before the end date"
 
-msgid "Please specify the number of days"
-msgstr "Please specify the number of days"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Please provide zero or a positive integer"
+msgid "Start date"
+msgstr "Start date"
 
 msgid "to"
 msgstr "to"
 
+msgid "End date"
+msgstr "End date"
+
 msgid "Period"
 msgstr "Period"
 
-msgid "Start date"
-msgstr "Start date"
+msgid "Please provide zero or a positive integer"
+msgstr "Please provide zero or a positive integer"
 
-msgid "End date"
-msgstr "End date"
+msgid "Please specify the number of days"
+msgstr "Please specify the number of days"
 
 msgid "Days in the past"
 msgstr "Days in the past"
@@ -655,6 +655,19 @@ msgstr "after or equal to {{date}}"
 
 msgid "before or equal to {{date}}"
 msgstr "before or equal to {{date}}"
+
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr "{{start}} days in the past to {{end}} days in the future"
+
+msgid "{{count}} days in the past"
+msgid_plural "{{count}} days in the past"
+msgstr[0] "{{count}} days in the past"
+msgstr[1] "{{count}} days in the past"
+
+msgid "{{count}} days in the future"
+msgid_plural "{{count}} days in the future"
+msgstr[0] "{{count}} days in the future"
+msgstr[1] "{{count}} days in the future"
 
 msgid "greater than or equal to"
 msgstr "greater than or equal to"
