@@ -1,4 +1,3 @@
-# 
 # Translators:
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2021
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
@@ -17,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-23T08:39:49.515Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -1263,7 +1262,7 @@ msgid "Select tracked entity type"
 msgstr "Sélectionner le type d'entité suivie"
 
 msgid "Type to filter tracked entity types"
-msgstr ""
+msgstr "Tapez pour filtrer les types d'entité suivie"
 
 msgid "No tracked entity types available"
 msgstr "Aucun type d'entité suivie n'est disponible"

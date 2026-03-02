@@ -54,6 +54,11 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
         return isValueBiggerThanMinCharactersToSearch(value, minCharactersToSearch);
     }
 
+    if (main) {
+        const ISO_DATE_LENGTH = 10;
+        return minCharactersToSearch <= ISO_DATE_LENGTH;
+    }
+
     if (from || to) {
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
     }

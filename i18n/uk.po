@@ -1,20 +1,19 @@
-# 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Nadiia <semchuk@aph.org.ua>, 2025
 # Nancy Espinoza, 2025
-# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
 # Éva Tamási, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-23T08:39:49.515Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -225,10 +224,10 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Зберегти в {{programName}} до {{orgUnitName}}"
 
 msgid "Saving to {{programName}}"
-msgstr ""
+msgstr "Зберегти до {{programName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -261,7 +260,7 @@ msgid "Save and add another"
 msgstr ""
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Зберегти та вийти"
 
 msgid "Finish"
 msgstr "Закінчити"
@@ -395,7 +394,7 @@ msgid "No feedback for this event yet"
 msgstr ""
 
 msgid "No indicator output for this event yet"
-msgstr ""
+msgstr "Для цієї події наразі немає підрахованих індикаторів"
 
 msgid "Generate new event"
 msgstr "Створити нову подію"
@@ -544,7 +543,7 @@ msgid "Please provide a negative integer"
 msgstr ""
 
 msgid "Exact matches only"
-msgstr ""
+msgstr "Тільки точне збіги"
 
 msgid "Contains text"
 msgstr "Містить текст"
@@ -607,7 +606,7 @@ msgid "suggestions could not be retrieved"
 msgstr ""
 
 msgid "No items to display"
-msgstr ""
+msgstr "Немає елементів для показу"
 
 msgid "Select columns"
 msgstr ""
@@ -800,7 +799,7 @@ msgid "Program Stages could not be loaded"
 msgstr "Не вдалося завантажити етапи програми"
 
 msgid "Stage"
-msgstr ""
+msgstr "Етап"
 
 msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
@@ -842,7 +841,7 @@ msgid "Please select an organisation unit."
 msgstr "Будь-ласка, оберіть організаційний підрозділ."
 
 msgid "Registered events"
-msgstr ""
+msgstr "Зареєстровані події"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -938,7 +937,7 @@ msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
 msgstr ""
 
 msgid "View changelog"
-msgstr ""
+msgstr "Переглянути зміни"
 
 msgid "Event details"
 msgstr ""
@@ -992,7 +991,7 @@ msgstr[2] "Заповніть принаймні {{count}} атрибути дл
 msgstr[3] "Заповніть принаймні {{count}} атрибути для пошуку"
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Відсутні критерії пошуку"
 
 msgid "Back to search"
 msgstr "Повернутися до пошуку"
@@ -1164,7 +1163,7 @@ msgid "Results found"
 msgstr "Знайдено результати"
 
 msgid "Saved lists in this program"
-msgstr ""
+msgstr "Збережені списки в цій програмі"
 
 msgid "Saved lists offer quick access to your most used views in a program."
 msgstr ""
@@ -1173,6 +1172,8 @@ msgid ""
 "There are no saved lists in this program yet, create one using the button "
 "below."
 msgstr ""
+"У цій програмі ще немає збережених списків. Створіть список за допомогою "
+"кнопки нижче."
 
 msgid "Create saved list"
 msgstr ""
@@ -1187,7 +1188,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Шукати {{trackedEntityName}} в {{programName}}"
 
 msgid "Select tracked entity type"
-msgstr ""
+msgstr "Оберіть тип об'єкту, що відстежується"
 
 msgid "Type to filter tracked entity types"
 msgstr ""
@@ -1245,7 +1246,7 @@ msgid "Enrollment actions"
 msgstr "Дії щодо реєстрації"
 
 msgid "We are processing your request."
-msgstr ""
+msgstr "Ми обробляємо Ваш запит"
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
 msgstr ""
@@ -1330,12 +1331,12 @@ msgid ""
 msgstr ""
 
 msgid "Transfer Ownership"
-msgstr ""
+msgstr "Змінити організаційний підрозділ"
 
 msgid ""
 "Choose the organisation unit to which enrollment ownership should be "
 "transferred."
-msgstr ""
+msgstr "Оберіть новий організаційний підрозділ"
 
 msgid "Enrollment date"
 msgstr "Дата реєстрації"
@@ -1371,10 +1372,10 @@ msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Зберегти до {{stageName}} для {{programName}} в {{orgUnitName}}"
 
 msgid "Saving to {{stageName}} for {{programName}}"
-msgstr ""
+msgstr "Зберегти до {{stageName}} для {{programName}}"
 
 msgid "program or stage is invalid"
 msgstr "програма або етап є недійсними"
@@ -1440,7 +1441,7 @@ msgid "Notes about this event"
 msgstr "Примітки про цю подію"
 
 msgid "Write a note about this event"
-msgstr ""
+msgstr "Напишіть примітку щодо цієї події"
 
 msgid "This event doesn't have any notes"
 msgstr "Ця подія не має приміток"
@@ -1522,7 +1523,7 @@ msgid "Save note"
 msgstr "Зберегти нотатку"
 
 msgid "Edit {{trackedEntityName}}"
-msgstr ""
+msgstr "Відредагуйте{{trackedEntityName}}"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
@@ -1580,7 +1581,7 @@ msgid "No attributes configured"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
-msgstr "Профіль{{trackedEntityTypeName}}а"
+msgstr "Профіль {{trackedEntityTypeName}}а"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
@@ -1677,10 +1678,10 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "{{ overdueEvents }} overdue"
-msgstr ""
+msgstr "{{ overdueEvents }}  протерміновано"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr ""
+msgstr "{{ scheduledEvents }} заплановано"
 
 msgid "Stages and Events"
 msgstr "Етапи і Події"
@@ -1789,7 +1790,7 @@ msgid "Go back without saving relationship"
 msgstr "Повертайтеся, не рятуючи зв'язок"
 
 msgid "New Relationship"
-msgstr ""
+msgstr "Новий зв'язок"
 
 msgid "Link to an existing {{tetName}}"
 msgstr ""
@@ -1802,7 +1803,7 @@ msgid ""
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} relationships"
-msgstr ""
+msgstr "{{trackedEntityTypeName}} зв’язки"
 
 msgid "Delete relationship"
 msgstr "Видалити зв’язок"
@@ -2112,10 +2113,10 @@ msgid "Download with current filters"
 msgstr "Завантажити з поточними фільтрами"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "Заплановано{{ escape }} до {{ time }}"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "Протерміновано {{ escape }} на {{ time }}"
 
 msgid "Overdue"
 msgstr "Прострочене"
