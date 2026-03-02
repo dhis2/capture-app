@@ -1,3 +1,10 @@
+# [105.9.0](https://github.com/dhis2/capture-app/compare/v105.8.0...v105.9.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20919] add legend set field in program rule actions ([#4467](https://github.com/dhis2/capture-app/issues/4467)) ([12d934c](https://github.com/dhis2/capture-app/commit/12d934c2c494e1fe856f1599d9636611d1554a0a))
+
 # [105.8.0](https://github.com/dhis2/capture-app/compare/v105.7.1...v105.8.0) (2026-03-02)
 
 
