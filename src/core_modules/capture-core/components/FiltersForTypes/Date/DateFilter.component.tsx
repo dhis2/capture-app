@@ -294,7 +294,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             valueObject.main = null;
         }
 
-        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : undefined;
+        return Object.keys(valueObject).some(key => valueObject[key]) ? valueObject : undefined;
     }
 
     handleDateSelectedFromCalendarInFrom = () => {
@@ -305,8 +305,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.props.onCommitValue(this.getUpdatedValue(value), true);
     };
 
-    handleMainSelect = (value: string) => {
-        const valueObject = value ? { main: value } : undefined;
+    handleMainSelect = (value: string | null) => {
+        const valueObject = value == null ? undefined : { main: value };
         this.props.onCommitValue(valueObject, true);
     };
 
