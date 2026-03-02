@@ -97,6 +97,7 @@ type OwnProps = {
     submitAttempted?: boolean;
     onFieldBlur: (value: Partial<RelativeRangeValue>) => void;
     onFieldChange?: (value: Partial<RelativeRangeValue>) => void;
+    onKeyDown?: (e: React.KeyboardEvent) => void;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -118,6 +119,12 @@ class RelativeRangeFilterPlain extends Component<Props> {
         this.props.onFieldBlur({ end: value.trim() });
     };
 
+    handleKeyDown = (_payload: { value?: string }, e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            this.props.onKeyDown?.(e);
+        }
+    };
+
     render() {
         const { value, classes, submitAttempted = false } = this.props;
         const { startValueError, endValueError, rangeRequiredError } = getRelativeRangeErrors(
@@ -133,6 +140,7 @@ class RelativeRangeFilterPlain extends Component<Props> {
                             value={value?.start ?? ''}
                             onChange={this.handleStartChange}
                             onBlur={this.handleStartBlur}
+                            onKeyDown={this.handleKeyDown}
                             placeholder={i18n.t('Days in the past')}
                             dataTest="date-range-filter-start"
                         />
@@ -144,6 +152,7 @@ class RelativeRangeFilterPlain extends Component<Props> {
                             value={value?.end ?? ''}
                             onChange={this.handleEndChange}
                             onBlur={this.handleEndBlur}
+                            onKeyDown={this.handleKeyDown}
                             placeholder={i18n.t('Days in the future')}
                             dataTest="date-range-filter-end"
                         />

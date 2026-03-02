@@ -205,6 +205,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         submitAttempted={this.state.submitAttempted}
                         onFieldBlur={this.handleFieldBlur}
                         onFieldChange={this.handleFieldChange}
+                        onKeyDown={this.handleKeyDown}
                     />
                 )}
                 {isRelativeRange && (
@@ -213,6 +214,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         submitAttempted={this.state.submitAttempted}
                         onFieldBlur={this.handleFieldBlur}
                         onFieldChange={this.handleFieldChange}
+                        onKeyDown={this.handleKeyDown}
                     />
                 )}
             </div>
@@ -223,16 +225,17 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         const { classes } = this.props;
 
         return (
-            <div
-                id="dateFilter"
-                onKeyDown={this.handleKeyDown}
-                role="presentation"
-            >
+            <div id="dateFilter">
                 <div className={classes.optionsSection}>
                     <span className={classes.sectionLabel}>
                         {i18n.t('Period')}
                     </span>
-                    <div role="radiogroup" aria-label={i18n.t('Period')}>
+                    <div
+                        role="radiogroup"
+                        aria-label={i18n.t('Period')}
+                        tabIndex={-1}
+                        onKeyDown={this.handleKeyDown}
+                    >
                         {DateFilterPlain.mainOptionSet.options.map(this.renderPeriodOption)}
                     </div>
                 </div>

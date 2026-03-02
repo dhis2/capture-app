@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { InputField } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { Temporal } from '@js-temporal/polyfill';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
+import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from '../Date/types/date.types';
 import type { DateTimeValue } from './types/dateTime.types';
@@ -55,11 +57,17 @@ const isFromAfterTo = (from: DateTimeValue, to: DateTimeValue): boolean => {
     if (!from.date || !to.date) {
         return false;
     }
+    const fromIso = convertLocalToIsoCalendar(from.date);
+    const toIso = convertLocalToIsoCalendar(to.date);
+    const fromDate = Temporal.PlainDate.from(fromIso.split('T')[0]);
+    const toDate = Temporal.PlainDate.from(toIso.split('T')[0]);
+    const dateCompare = Temporal.PlainDate.compare(fromDate, toDate);
+    if (dateCompare !== 0) {
+        return dateCompare > 0;
+    }
     const fromTime = from.time || '00:00';
     const toTime = to.time || '00:00';
-    const fromStr = `${from.date}T${fromTime}`;
-    const toStr = `${to.date}T${toTime}`;
-    return fromStr > toStr;
+    return fromTime > toTime;
 };
 
 const getDisplayTime = (date: string | undefined | null, time: string | undefined | null): string => (

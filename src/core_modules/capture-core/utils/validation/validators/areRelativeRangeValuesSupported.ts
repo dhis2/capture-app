@@ -6,8 +6,8 @@ export const areRelativeRangeValuesSupported = (
     const hasEnd = endBuffer !== undefined && endBuffer !== null;
 
     if (!hasStart && !hasEnd) return false;
-    if (hasStart && (!Number.isInteger(startBuffer) || (startBuffer as number) > 0)) return false;
-    if (hasEnd && (!Number.isInteger(endBuffer) || (endBuffer as number) < 0)) return false;
+    if (hasStart && (!Number.isInteger(startBuffer) || startBuffer > 0)) return false;
+    if (hasEnd && (!Number.isInteger(endBuffer) || endBuffer < 0)) return false;
 
     return true;
 };
