@@ -19,7 +19,7 @@ export const useInjectDataFetchingMetaToLoadList = (
         (selectedTemplate: any, context: any) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
-                    const { id, type, visible, apiViewName, unique } = defaultColumn;
+                    const { id, type, visible, apiViewName, searchOperator, minCharactersToSearch } = defaultColumn;
                     const mainProperty = 'mainProperty' in defaultColumn &&
                         defaultColumn.mainProperty &&
                         typeof (defaultColumn as any).mainProperty === 'boolean'
@@ -38,7 +38,8 @@ export const useInjectDataFetchingMetaToLoadList = (
                             mainProperty,
                             additionalColumn,
                             apiViewName,
-                            unique,
+                            searchOperator,
+                            minCharactersToSearch,
                         },
                     ];
                 }),
@@ -71,7 +72,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
         (queryArgs: any) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
-                    const { id, type, visible, unique } = defaultColumn;
+                    const { id, type, visible, searchOperator, minCharactersToSearch } = defaultColumn;
                     const mainProperty = 'mainProperty' in defaultColumn &&
                         defaultColumn.mainProperty &&
                         typeof defaultColumn.mainProperty === 'boolean'
@@ -89,7 +90,8 @@ export const useInjectDataFetchingMetaToUpdateList = (
                             visible,
                             mainProperty,
                             additionalColumn,
-                            unique,
+                            searchOperator,
+                            minCharactersToSearch,
                         },
                     ];
                 }),

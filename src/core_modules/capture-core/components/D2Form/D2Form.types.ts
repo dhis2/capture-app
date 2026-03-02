@@ -9,6 +9,7 @@ export type OwnProps = {
     readonly formFoundation: RenderFoundation;
     readonly id: string;
     readonly formHorizontal?: boolean;
+    readonly fieldOptions?: Record<string, any>;
     readonly getCustomContent?: (beforeSectionId: string) => React.ReactNode;
     readonly validationAttempted?: boolean;
     readonly onUpdateField?: (...args: any[]) => void;

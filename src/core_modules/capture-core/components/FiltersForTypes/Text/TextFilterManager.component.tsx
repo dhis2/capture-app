@@ -2,14 +2,12 @@ import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { Value } from './Text.types';
 
 type Props = {
     filter: TextFilterData | null | undefined;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void;
-    onUpdate: (updatedValue: Value) => void;
-    unique: boolean;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: (value?: string | null, isBlur?: boolean) => void;
+    onUpdate: (commitValue?: any) => void;
 };
 
 type State = {
@@ -29,11 +27,9 @@ export class TextFilterManager extends React.Component<Props, State> {
         this.state = TextFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleCommitValue = (value: string | null | undefined) => {
-        this.setState({
-            value,
-        });
-        this.props.handleCommitValue && this.props.handleCommitValue();
+    handleCommitValue = (value: any, isBlur?: boolean) => {
+        this.setState({ value });
+        this.props.handleCommitValue?.(value, isBlur);
     }
 
     render() {

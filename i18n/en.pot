@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-23T08:39:49.515Z\n"
-"PO-Revision-Date: 2026-02-23T08:39:49.515Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"PO-Revision-Date: 2026-02-26T11:13:44.176Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -537,12 +537,6 @@ msgstr "Please provide a positive integer"
 msgid "Please provide a negative integer"
 msgstr "Please provide a negative integer"
 
-msgid "Exact matches only"
-msgstr "Exact matches only"
-
-msgid "Contains text"
-msgstr "Contains text"
-
 msgid "Yes"
 msgstr "Yes"
 
@@ -578,12 +572,6 @@ msgstr "Clear"
 
 msgid "No results found"
 msgstr "No results found"
-
-msgid "Must match the start of the value"
-msgstr "Must match the start of the value"
-
-msgid "Must match the end of the value"
-msgstr "Must match the end of the value"
 
 msgid "Description"
 msgstr "Description"
@@ -623,6 +611,14 @@ msgstr "Reset filter"
 
 msgid "Remove filter"
 msgstr "Remove filter"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr "This filter requires more characters than a date can provide."
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural "Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] "Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[1] "Please enter at least {{minCharactersToSearch}} characters to filter"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
@@ -2094,6 +2090,15 @@ msgstr "Download as CSV"
 
 msgid "Download with current filters"
 msgstr "Download with current filters"
+
+msgid "Exact matches only"
+msgstr "Exact matches only"
+
+msgid "Must match the start of the value"
+msgstr "Must match the start of the value"
+
+msgid "Must match the end of the value"
+msgstr "Must match the end of the value"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Scheduled{{ escape }} due {{ time }}"

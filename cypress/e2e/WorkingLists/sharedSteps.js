@@ -90,7 +90,7 @@ When(/^you set the first name filter to (.*)$/, (name) => {
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Contains text"]')
+        .find('input[type="text"]')
         .type(name)
         .blur();
 });

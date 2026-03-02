@@ -32,6 +32,10 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         removeButtonInstance: HTMLButtonElement | null = null;
 
         update = (commitValue?: any) => {
+            if (!this.isValid()) {
+                this.filterTypeInstance?.showValidationErrors?.();
+                return;
+            }
             const updateData = this.filterTypeInstance?.onGetUpdateData(commitValue);
             this.props.onUpdate(updateData);
         }
@@ -41,9 +45,11 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         handleUpdateClick = () => {
-            if (this.isValid()) {
-                this.update();
+            if (!this.isValid()) {
+                this.filterTypeInstance?.showValidationErrors?.();
+                return;
             }
+            this.update();
         }
 
         focusUpdateButton = () => {

@@ -12,6 +12,8 @@ export type Column = {
     filterHidden?: boolean;
     additionalColumn?: boolean;
     unique?: boolean;
+    searchOperator?: string;
+    minCharactersToSearch?: number;
 };
 
 export type Columns = Array<Column>;
