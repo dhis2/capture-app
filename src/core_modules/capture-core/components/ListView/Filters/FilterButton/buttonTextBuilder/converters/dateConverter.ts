@@ -2,8 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
-import { areRelativeRangeValuesSupported }
-    from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',
@@ -53,26 +51,13 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
     return appliedText;
 }
 
-// eslint-disable-next-line complexity
 function translateRelativeRange(filter: { startBuffer?: number | null; endBuffer?: number | null }): string {
-    const hasStart = filter.startBuffer !== undefined && filter.startBuffer !== null;
-    const hasEnd = filter.endBuffer !== undefined && filter.endBuffer !== null;
-    const startDays = hasStart ? Math.abs(filter.startBuffer as number) : null;
-    const endDays = hasEnd ? (filter.endBuffer as number) : null;
-
-    if (startDays !== null && endDays !== null) {
-        return i18n.t('{{start}} days in the past to {{end}} days in the future', {
-            start: startDays,
-            end: endDays,
-        });
-    }
-    if (startDays !== null) {
-        return i18n.t('{{count}} days in the past', { count: startDays });
-    }
-    if (endDays !== null) {
-        return i18n.t('{{count}} days in the future', { count: endDays });
-    }
-    return '';
+    const startDays = Math.abs(filter.startBuffer ?? 0);
+    const endDays = filter.endBuffer ?? 0;
+    return i18n.t('{{start}} days in the past to {{end}} days in the future', {
+        start: startDays,
+        end: endDays,
+    });
 }
 
 export function convertDate(filter: DateFilterData): string {
@@ -82,7 +67,7 @@ export function convertDate(filter: DateFilterData): string {
     if (filter.period) {
         return translatedPeriods[filter.period];
     }
-    if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
+    if (filter.startBuffer != null || filter.endBuffer != null) {
         return translateRelativeRange(filter);
     }
     return '';

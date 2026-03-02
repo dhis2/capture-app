@@ -145,11 +145,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             valueObject.main = mainOptionKeys.RELATIVE_RANGE;
             delete valueObject.from;
             delete valueObject.to;
-        } else if (
-            valueObject.main === mainOptionKeys.ABSOLUTE_RANGE ||
-            valueObject.main === mainOptionKeys.RELATIVE_RANGE
-        ) {
-            valueObject.main = null;
         }
 
         return Object.keys(valueObject).some(key => valueObject[key]) ? valueObject : undefined;

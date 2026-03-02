@@ -1,12 +1,7 @@
 import type { TimeFilterData } from '../../../../../FiltersForTypes/Time';
 import { escapeString } from '../../../../../../utils/escapeString';
 
-export function convertTime({
-    sourceValue,
-}: {
-    sourceValue: TimeFilterData;
-    meta: { key: string; storeId: string; isInit: boolean };
-}): string {
+export function convertTime({ sourceValue }: { sourceValue: TimeFilterData }): string {
     if (!sourceValue) {
         return '';
     }

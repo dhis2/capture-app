@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-02T16:15:10.109Z\n"
-"PO-Revision-Date: 2026-03-02T16:15:10.109Z\n"
+"POT-Creation-Date: 2026-03-02T17:07:10.704Z\n"
+"PO-Revision-Date: 2026-03-02T17:07:10.704Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -658,16 +658,6 @@ msgstr "before or equal to {{date}}"
 
 msgid "{{start}} days in the past to {{end}} days in the future"
 msgstr "{{start}} days in the past to {{end}} days in the future"
-
-msgid "{{count}} days in the past"
-msgid_plural "{{count}} days in the past"
-msgstr[0] "{{count}} days in the past"
-msgstr[1] "{{count}} days in the past"
-
-msgid "{{count}} days in the future"
-msgid_plural "{{count}} days in the future"
-msgstr[0] "{{count}} days in the future"
-msgstr[1] "{{count}} days in the future"
 
 msgid "greater than or equal to"
 msgstr "greater than or equal to"
