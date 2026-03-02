@@ -4,9 +4,6 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
 import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
-import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
-
-const ManagedTextField = withInternalChangeHandler()(D2TextField);
 
 function validateRelativeRangeValue(value?: string | null): { isValid: boolean; error: string | null } {
     if (!value) {
@@ -104,23 +101,23 @@ type Props = OwnProps & WithStyles<typeof styles>;
 
 class RelativeRangeFilterPlain extends Component<Props> {
     handleStartChange = (value: string) => {
-        this.props.onFieldChange?.({ start: value.trim() });
+        this.props.onFieldChange?.({ start: value?.trim() });
     };
 
     handleEndChange = (value: string) => {
-        this.props.onFieldChange?.({ end: value.trim() });
+        this.props.onFieldChange?.({ end: value?.trim() });
     };
 
     handleStartBlur = (value: string) => {
-        this.props.onFieldBlur({ start: value.trim() });
+        this.props.onFieldBlur({ start: value?.trim() });
     };
 
     handleEndBlur = (value: string) => {
-        this.props.onFieldBlur({ end: value.trim() });
+        this.props.onFieldBlur({ end: value?.trim() });
     };
 
     handleKeyDown = (_payload: { value?: string }, e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
+        if (e?.key === 'Enter') {
             this.props.onKeyDown?.(e);
         }
     };
@@ -136,7 +133,7 @@ class RelativeRangeFilterPlain extends Component<Props> {
             <div className={classes.inputsUnderOption}>
                 <div className={classes.container}>
                     <div className={classes.inputContainer}>
-                        <ManagedTextField
+                        <D2TextField
                             value={value?.start ?? ''}
                             onChange={this.handleStartChange}
                             onBlur={this.handleStartBlur}
@@ -148,7 +145,7 @@ class RelativeRangeFilterPlain extends Component<Props> {
                     </div>
                     <div className={classes.toLabelContainer}>{i18n.t('to')}</div>
                     <div className={classes.inputContainer}>
-                        <ManagedTextField
+                        <D2TextField
                             value={value?.end ?? ''}
                             onChange={this.handleEndChange}
                             onBlur={this.handleEndBlur}

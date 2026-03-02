@@ -12,7 +12,7 @@ function isFromAfterTo(valueFrom: string, valueTo: string): boolean {
     const to = convertLocalToIsoCalendar(valueTo);
     const fromIso = Temporal.PlainDate.from(from.split('T')[0]);
     const toIso = Temporal.PlainDate.from(to.split('T')[0]);
-    return fromIso > toIso;
+    return Temporal.PlainDate.compare(fromIso, toIso) > 0;
 }
 
 // eslint-disable-next-line complexity
