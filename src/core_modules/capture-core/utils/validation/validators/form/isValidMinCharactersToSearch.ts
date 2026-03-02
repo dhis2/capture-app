@@ -63,5 +63,9 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
     }
 
+    if ('date' in value) {
+        return isValueBiggerThanMinCharactersToSearch(value.date, minCharactersToSearch);
+    }
+
     return true;
 };
