@@ -127,7 +127,7 @@ class AbsoluteRangeFilterPlain extends Component<Props> {
                         <D2Date
                             value={fromValue?.value ?? undefined}
                             onBlur={this.handleFromBlur}
-                            placeholder={i18n.t('Start date')}
+                            placeholder={i18n.t('From')}
                             inputWidth="150px"
                             calendarWidth="330px"
                         />
@@ -140,7 +140,7 @@ class AbsoluteRangeFilterPlain extends Component<Props> {
                         <D2Date
                             value={toValue?.value ?? undefined}
                             onBlur={this.handleToBlur}
-                            placeholder={i18n.t('End date')}
+                            placeholder={i18n.t('to')}
                             inputWidth="150px"
                             calendarWidth="330px"
                         />

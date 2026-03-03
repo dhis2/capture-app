@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-02T17:07:10.704Z\n"
-"PO-Revision-Date: 2026-03-02T17:07:10.704Z\n"
+"POT-Creation-Date: 2026-03-03T11:46:53.147Z\n"
+"PO-Revision-Date: 2026-03-03T11:46:53.148Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -465,14 +465,11 @@ msgstr "Please specify a range"
 msgid "Start date must be before the end date"
 msgstr "Start date must be before the end date"
 
-msgid "Start date"
-msgstr "Start date"
+msgid "From"
+msgstr "From"
 
 msgid "to"
 msgstr "to"
-
-msgid "End date"
-msgstr "End date"
 
 msgid "Period"
 msgstr "Period"
@@ -2257,9 +2254,6 @@ msgstr "Some attributes are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "From"
-msgstr "From"
 
 msgid "To"
 msgstr "To"
