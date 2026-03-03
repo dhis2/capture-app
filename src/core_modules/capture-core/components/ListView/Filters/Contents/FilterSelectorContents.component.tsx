@@ -149,13 +149,7 @@ const FilterSelectorContentsPlain = ({
     }
 
     return (
-        <div
-            ref={containerRef}
-            className={classes.container}
-            data-test="list-view-filter-contents"
-            tabIndex={-1}
-            style={{ outline: 'none' }}
-        >
+        <div className={classes.container} data-test="list-view-filter-contents">
             {contents}
         </div>
     );
