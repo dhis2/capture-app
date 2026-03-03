@@ -144,9 +144,6 @@ const FilterSelectorContentsPlain = ({
         ...passOnProps,
     });
 
-    if (contents === null) {
-        return null;
-    }
 
     return (
         <div className={classes.container} data-test="list-view-filter-contents">
