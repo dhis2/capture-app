@@ -29,29 +29,36 @@ Then('the status filter button should show that the active filter is in effect',
 });
 
 When('you set the age filter to 10-20', () => {
+    const currentYear = new Date().getFullYear();
+    const fromDate = `${currentYear - 20}-01-01`;
+    const toDate = `${currentYear - 10}-12-31`;
+
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
         });
-        
+
     cy.get('[data-test="more-filters-menu"]')
         .within(() => cy.contains('Age (years)').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Min"]')
-        .type('10')
-        .blur();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Max"]')
-        .type('20')
-        .blur();
+        .within(() => {
+            cy.contains('Absolute range')
+                .click();
+            cy.get('input[placeholder="From"]')
+                .type(fromDate)
+                .blur();
+            cy.get('input[placeholder="To"]')
+                .type(toDate)
+                .blur();
+        });
 });
 
 Then('the age filter button should show that the filter is in effect', () => {
+    const currentYear = new Date().getFullYear();
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 10 to 20')
+        .contains(`Age (years): ${currentYear - 20}-01...`)
         .should('exist');
 });
 
