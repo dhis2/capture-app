@@ -181,7 +181,7 @@ const getMainFilter = (filter: any): any => {
         break;
     case 'occurredAt':
         mainValue = {
-            eventDate: filterValues.dateFilter,
+            occurredAt: filterValues.dateFilter,
         };
         break;
     case 'assignee':
