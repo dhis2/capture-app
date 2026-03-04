@@ -82,7 +82,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         this.state = { submitAttempted: false };
     }
 
-    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
+    onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
         if (value === undefined || value === null) {
             return null;
@@ -90,7 +90,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         return getDateTimeFilterData(value);
     }
 
-    onIsValid() { // NOSONAR - imperative API, called externally via ref
+    onIsValid() {
         this.setState({ submitAttempted: true });
         const value = this.props.value;
         if (value === undefined || value === null) {

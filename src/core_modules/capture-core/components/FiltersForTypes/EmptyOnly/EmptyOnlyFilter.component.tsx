@@ -16,7 +16,7 @@ type Props = {
 };
 
 export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
+    onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
 
         return getEmptyOnlyFilterData(value);

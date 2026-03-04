@@ -6,7 +6,7 @@ import type { OrgUnitFilterProps, Value } from './OrgUnit.types';
 import type { OrgUnitValue } from './types';
 
 export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements UpdatableFilterContent<Value> {
-    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
+    onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getOrgUnitFilterData(value);
     }

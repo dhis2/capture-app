@@ -25,7 +25,7 @@ const ISO_DATE_LENGTH = 10;
 const ID_LENGTH = 11;
 const BOOLEAN_LENGTH = 4;
 const ISO_TIME_LENGTH = 5;
-const ISO_DATE_TIME_LENGTH = 26;
+const ISO_DATE_TIME_LENGTH = 16;
 const PERCENTAGE_LENGTH = 3;
 
 const MIN_CHARS_LIMIT_BY_TYPE: Partial<Record<string, number>> = {
