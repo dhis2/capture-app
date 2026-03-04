@@ -462,6 +462,8 @@ Then('the admission filter should be in effect', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
+            cy.contains('Absolute range')
+                .click();
             cy.get('input[type="text"]')
                 .then(($elements) => {
                     cy.wrap($elements[0])
