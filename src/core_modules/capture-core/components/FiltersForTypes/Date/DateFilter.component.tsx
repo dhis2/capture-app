@@ -171,6 +171,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
+            event.stopPropagation();
             this.props.onUpdate?.();
         }
     };
