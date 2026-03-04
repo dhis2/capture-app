@@ -1,30 +1,11 @@
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
-import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
-
-const periods = {
-    TODAY: 'TODAY',
-    THIS_WEEK: 'THIS_WEEK',
-    THIS_MONTH: 'THIS_MONTH',
-    THIS_YEAR: 'THIS_YEAR',
-    LAST_WEEK: 'LAST_WEEK',
-    LAST_MONTH: 'LAST_MONTH',
-    LAST_3_MONTHS: 'LAST_3_MONTHS',
-    RELATIVE_RANGE: 'RELATIVE_RANGE',
-    ABSOLUTE_RANGE: 'ABSOLUTE_RANGE',
-};
-
-const translatedPeriods = {
-    [periods.TODAY]: i18n.t('Today'),
-    [periods.THIS_WEEK]: i18n.t('This week'),
-    [periods.THIS_MONTH]: i18n.t('This month'),
-    [periods.THIS_YEAR]: i18n.t('This Year'),
-    [periods.LAST_WEEK]: i18n.t('Last week'),
-    [periods.LAST_MONTH]: i18n.t('Last month'),
-    [periods.LAST_3_MONTHS]: i18n.t('Last 3 months'),
-    [periods.RELATIVE_RANGE]: i18n.t('Relative range'),
-};
+import {
+    mainOptionTranslatedTexts,
+    type DateFilterData,
+    type AbsoluteDateFilterData,
+} from '../../../../../FiltersForTypes';
 
 function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
     let appliedText = '';
@@ -65,7 +46,7 @@ export function convertDate(filter: DateFilterData): string {
         return translateAbsoluteDate(filter);
     }
     if (filter.period) {
-        return translatedPeriods[filter.period];
+        return mainOptionTranslatedTexts[filter.period];
     }
     if (filter.startBuffer != null || filter.endBuffer != null) {
         return translateRelativeRange(filter);
