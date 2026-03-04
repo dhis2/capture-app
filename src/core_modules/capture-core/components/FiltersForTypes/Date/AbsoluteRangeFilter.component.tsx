@@ -140,7 +140,7 @@ class AbsoluteRangeFilterPlain extends Component<Props> {
                         <D2Date
                             value={toValue?.value ?? undefined}
                             onBlur={this.handleToBlur}
-                            placeholder={i18n.t('to')}
+                            placeholder={i18n.t('To')}
                             inputWidth="150px"
                             calendarWidth="330px"
                         />
