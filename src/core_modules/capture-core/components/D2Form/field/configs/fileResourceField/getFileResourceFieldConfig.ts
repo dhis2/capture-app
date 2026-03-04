@@ -20,5 +20,5 @@ export const getFileResourceFieldConfig = (
     return createFieldConfig({
         component: FileResourceFieldForForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

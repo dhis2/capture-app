@@ -31,5 +31,5 @@ export const getDateRangeFieldConfig = (
     return createFieldConfig({
         component: DateRangeFieldForForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

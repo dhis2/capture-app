@@ -4,7 +4,7 @@ import {
 } from '../../../../components/FiltersForTypes/EmptyValue';
 
 const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSearch: number) => {
-    if (value === undefined) {
+    if (value === undefined || value === null) {
         return true;
     }
 
@@ -42,7 +42,7 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
 
 // eslint-disable-next-line complexity
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
-    if (value === undefined || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER) {
+    if (value === undefined || value === null || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER) {
         return true;
     }
 

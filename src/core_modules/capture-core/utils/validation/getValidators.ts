@@ -259,10 +259,10 @@ function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContain
         [];
 }
 
-function buildMinCharactersToSearchValidator(metaData: DataElement): Array<ValidatorContainer> {
+function buildMinCharactersToSearchValidator(metaData: DataElement, isSearchForm?: boolean): Array<ValidatorContainer> {
     const { minCharactersToSearch } = metaData;
 
-    if (minCharactersToSearch === undefined || minCharactersToSearch === 0) {
+    if (!isSearchForm || minCharactersToSearch === undefined || minCharactersToSearch === 0) {
         return [];
     }
 
@@ -307,9 +307,10 @@ function buildUniqueValidator(
 export const getValidators = (
     metaData: DataElement | DateDataElement,
     querySingleResource?: any,
+    options?: { isSearchForm?: boolean },
 ): Array<ValidatorContainer> => [
-    buildCompulsoryValidator,
-    buildTypeValidators,
-    buildUniqueValidator,
-    buildMinCharactersToSearchValidator,
-].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));
+    ...buildCompulsoryValidator(metaData),
+    ...buildTypeValidators(metaData),
+    ...buildUniqueValidator(metaData, querySingleResource),
+    ...buildMinCharactersToSearchValidator(metaData, options?.isSearchForm),
+];

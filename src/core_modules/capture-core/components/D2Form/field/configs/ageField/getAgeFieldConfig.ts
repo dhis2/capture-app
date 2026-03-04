@@ -32,5 +32,5 @@ export const getAgeFieldConfig = (metaData: DateDataElement, options: any, query
     return createFieldConfig({
         component: AgeFieldForForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

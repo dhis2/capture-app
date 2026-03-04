@@ -47,7 +47,7 @@ export const getOptionSetFieldConfig = (metaData: DataElement, options: any, que
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         optionGroups: optionSet.optionGroups,
-        showHelpText: options.showHelpText,
+        isSearchForm: options.isSearchForm,
         ...inputTypeProps,
     }, options, metaData);
 
@@ -55,5 +55,5 @@ export const getOptionSetFieldConfig = (metaData: DataElement, options: any, que
         component: mapInputTypeToComponent[inputType],
         props,
         commitEvent: inputType === inputTypes.DROPDOWN ? 'onBlur' : 'onSelect',
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

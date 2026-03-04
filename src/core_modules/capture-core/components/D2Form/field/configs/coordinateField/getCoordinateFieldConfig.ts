@@ -21,5 +21,5 @@ export const getCoordinateFieldConfig = (
     return createFieldConfig({
         component: CoordinateFieldForForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };
