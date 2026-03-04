@@ -98,7 +98,6 @@ type OwnProps = {
     value: AbsoluteRangeValue;
     submitAttempted?: boolean;
     onFieldBlur: (value: Partial<AbsoluteRangeValue>) => void;
-    onFieldChange?: (value: Partial<AbsoluteRangeValue>) => void;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -106,12 +105,10 @@ type Props = OwnProps & WithStyles<typeof styles>;
 class AbsoluteRangeFilterPlain extends Component<Props> {
     handleFromBlur = (dateValue: DateValue) => {
         this.props.onFieldBlur({ from: dateValue });
-        this.props.onFieldChange?.({ from: dateValue });
     };
 
     handleToBlur = (dateValue: DateValue) => {
         this.props.onFieldBlur({ to: dateValue });
-        this.props.onFieldChange?.({ to: dateValue });
     };
 
     render() {
