@@ -65,7 +65,7 @@ const styles: Readonly<any> = (theme: any) => ({
         marginBlockStart: theme.typography.pxToRem(8),
         paddingInlineStart: theme.typography.pxToRem(24),
     },
-    fromToContainer: {
+    container: {
         display: 'flex',
         flexWrap: 'nowrap',
         alignItems: 'flex-start',
@@ -119,7 +119,7 @@ class AbsoluteRangeFilterPlain extends Component<Props> {
 
         return (
             <div className={classes.inputsUnderOption}>
-                <div className={classes.fromToContainer}>
+                <div className={classes.container}>
                     <div className={classes.inputContainer} data-test="date-filter-from">
                         <D2Date
                             value={fromValue?.value ?? undefined}
@@ -127,6 +127,7 @@ class AbsoluteRangeFilterPlain extends Component<Props> {
                             placeholder={i18n.t('From')}
                             inputWidth="150px"
                             calendarWidth="330px"
+                            dense
                         />
                         <div className={classes.error}>
                             {fromValue?.error ? i18n.t('Please provide a valid date') : null}
@@ -140,6 +141,7 @@ class AbsoluteRangeFilterPlain extends Component<Props> {
                             placeholder={i18n.t('To')}
                             inputWidth="150px"
                             calendarWidth="330px"
+                            dense
                         />
                         <div className={classes.error}>
                             {toValue?.error ? i18n.t('Please provide a valid date') : null}

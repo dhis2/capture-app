@@ -26,11 +26,11 @@ const styles: Readonly<any> = (theme: any) => ({
         color: theme.palette.text.secondary,
         fontWeight: 600,
     },
-    optionsSection: {
-        marginBlockEnd: theme.typography.pxToRem(16),
-    },
-    optionRow: {
-        marginBlockEnd: theme.typography.pxToRem(16),
+    optionList: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.typography.pxToRem(14),
+        marginBlockEnd: theme.typography.pxToRem(10),
     },
 });
 
@@ -222,18 +222,17 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
         return (
             <div id="dateFilter">
-                <div className={classes.optionsSection}>
-                    <span className={classes.sectionLabel}>
-                        {i18n.t('Period')}
-                    </span>
-                    <div
-                        role="radiogroup"
-                        aria-label={i18n.t('Period')}
-                        tabIndex={-1}
-                        onKeyDown={this.handleKeyDown}
-                    >
-                        {DateFilterPlain.mainOptionSet.options.map(this.renderPeriodOption)}
-                    </div>
+                <span className={classes.sectionLabel}>
+                    {i18n.t('Period')}
+                </span>
+                <div
+                    className={classes.optionList}
+                    role="radiogroup"
+                    aria-label={i18n.t('Period')}
+                    tabIndex={-1}
+                    onKeyDown={this.handleKeyDown}
+                >
+                    {DateFilterPlain.mainOptionSet.options.map(this.renderPeriodOption)}
                 </div>
             </div>
         );

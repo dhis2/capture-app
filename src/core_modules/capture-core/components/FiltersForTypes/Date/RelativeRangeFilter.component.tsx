@@ -67,12 +67,13 @@ const styles: Readonly<any> = (theme: any) => ({
         alignItems: 'flex-start',
         gap: theme.typography.pxToRem(8),
     },
-    inputContainer: {
-        width: '150px',
-    },
+    inputContainer: {},
     toLabelContainer: {
+        width: theme.typography.pxToRem(30),
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
         paddingTop: theme.typography.pxToRem(6),
-        paddingInline: theme.typography.pxToRem(10),
         fontSize: theme.typography.body1.fontSize,
     },
     error: {
@@ -140,6 +141,7 @@ class RelativeRangeFilterPlain extends Component<Props> {
                             onKeyDown={this.handleKeyDown}
                             placeholder={i18n.t('Days in the past')}
                             dataTest="date-range-filter-start"
+                            dense
                         />
                         <div className={classes.error}>{startValueError}</div>
                     </div>
@@ -152,6 +154,7 @@ class RelativeRangeFilterPlain extends Component<Props> {
                             onKeyDown={this.handleKeyDown}
                             placeholder={i18n.t('Days in the future')}
                             dataTest="date-range-filter-end"
+                            dense
                         />
                         <div className={classes.error}>{endValueError}</div>
                     </div>
