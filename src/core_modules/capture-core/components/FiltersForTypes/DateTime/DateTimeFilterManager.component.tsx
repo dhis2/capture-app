@@ -8,7 +8,7 @@ import type { Value } from './DateTime.types';
 type Props = {
     filter?: DateTimeFilterData | null;
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void;
+    handleCommitValue: (value?: Value | null) => void;
 };
 
 type State = {
@@ -57,7 +57,7 @@ export class DateTimeFilterManager extends React.Component<Props, State> {
 
     handleCommitValue = (value?: Value | null) => {
         this.setState({ value });
-        this.props.handleCommitValue();
+        this.props.handleCommitValue(value);
     };
 
     render() {
