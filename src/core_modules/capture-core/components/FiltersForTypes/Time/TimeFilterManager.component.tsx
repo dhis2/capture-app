@@ -38,7 +38,7 @@ export class TimeFilterManager extends React.Component<Props, State> {
 
     handleCommitValue = (value?: Value | null) => {
         this.setState({ value });
-        this.props.handleCommitValue();
+        this.props.handleCommitValue(value);
     };
 
     render() {
