@@ -15,11 +15,13 @@ import {
     type TextFilterData,
     type TimeFilterData,
     type NumericFilterData,
+    type OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
     ApiDataFilterText,
+    ApiDataFilterOrgUnit,
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiEventQueryCriteria,
@@ -36,6 +38,10 @@ const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
         value,
     };
 };
+
+const getOrgUnitFilter = (filter: ApiDataFilterOrgUnit): OrgUnitFilterData => ({
+    value: filter.eq,
+});
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
     ge: filter.ge ? Number(filter.ge) : undefined,
@@ -149,7 +155,7 @@ const getFilterByType = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: getNumericFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
