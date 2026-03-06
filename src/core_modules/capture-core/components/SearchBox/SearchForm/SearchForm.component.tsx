@@ -247,7 +247,6 @@ const SearchFormIndex = ({
                                                     }
                                                     formFoundation={searchForm}
                                                     id={formId}
-                                                    fieldOptions={{ showHelpText: true }}
                                                 />
                                             </div>
                                         </div>
@@ -313,7 +312,6 @@ const SearchFormIndex = ({
                                                     formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
-                                                    fieldOptions={{ showHelpText: true }}
                                                 />
                                             </div>
                                         </div>
