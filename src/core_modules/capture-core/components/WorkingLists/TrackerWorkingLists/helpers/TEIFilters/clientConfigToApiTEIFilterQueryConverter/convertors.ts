@@ -8,11 +8,13 @@ import {
     type NumericFilterData,
     type TextFilterData,
     type TimeFilterData,
+    OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import type { ApiDataFilterOrgUnit } from '../../../../EventWorkingLists/types';
 
 const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
     const searchOperator = element?.searchOperator?.toLowerCase() ?? 'like';
@@ -68,6 +70,10 @@ export const getDateFilter = (dateFilter: DateFilterData) => {
     };
 };
 
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
+    eq: filter.value,
+});
+
 export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => ({
     dateFilter: {
         type: dateFilterTypes.ABSOLUTE,
@@ -91,7 +97,7 @@ export const getFilterByType = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: getNumericFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,

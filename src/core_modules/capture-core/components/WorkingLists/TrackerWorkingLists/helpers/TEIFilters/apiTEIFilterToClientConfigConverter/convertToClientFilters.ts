@@ -7,6 +7,7 @@ import {
     type TextFilterData,
     type TimeFilterData,
     type NumericFilterData,
+    OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
@@ -120,6 +121,10 @@ const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     return filter.in;
 };
 
+const getOrgUnitFilter = (filter: OrgUnitFilterData): OrgUnitFilterData => ({
+    value: filter.value,
+});
+
 const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
@@ -135,7 +140,7 @@ const getFilterByType = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: getNumericFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,

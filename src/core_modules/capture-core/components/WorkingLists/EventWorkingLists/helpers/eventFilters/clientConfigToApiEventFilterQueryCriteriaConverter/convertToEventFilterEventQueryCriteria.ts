@@ -200,11 +200,9 @@ const structureFilters = (apiFilters: Array<any>, columns: ColumnsForConverter) 
 
         if (element && 'isMainProperty' in element && element.isMainProperty) {
             const mainFilter = getMainFilter(filter);
-            const filters = {
-                ...acc,
-                ...mainFilter,
-            };
-            return filters;
+            if (mainFilter) {
+                return { ...acc, ...mainFilter };
+            }
         }
 
         acc.dataFilters.push(filter);
