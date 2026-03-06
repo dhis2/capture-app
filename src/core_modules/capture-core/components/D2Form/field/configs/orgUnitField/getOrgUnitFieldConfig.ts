@@ -15,5 +15,5 @@ export const getOrgUnitFieldConfig = (metaData: MetaDataElement, options: any, q
     return createFieldConfig({
         component: OrgUnitFieldForForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

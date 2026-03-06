@@ -18,12 +18,12 @@ export const getTextFieldConfig = (
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         multiLine: extraProps && extraProps.multiLine,
-        isSearchForm: options.isSearchForm,
+        showHelpText: options.showHelpText,
         ...(isLtrInputType(metaData.type) ? { dir: 'ltr' as const } : {}),
     }, options, metaData);
 
     return createFieldConfig({
         component: TextFieldForForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

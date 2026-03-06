@@ -41,6 +41,5 @@ export const getMultiOptionSetFieldConfig = (
         },
         metaData,
         querySingleResource,
-        options,
     );
 };
