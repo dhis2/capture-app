@@ -130,7 +130,9 @@ export const useDefaultColumnConfig = (
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs =>
     useMemo(() => {
-        const { attributes, stages } = program;
+        const { stages } = program;
+        const availableSearchGroup = program.searchGroups.find(group => !group.unique);
+        const attributes = availableSearchGroup?.searchForm.getElements() ?? [];
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
 
