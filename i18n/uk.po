@@ -1,20 +1,21 @@
-# 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2021
 # Philip Larsen Donnelly, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
-# Nadiia <semchuk@aph.org.ua>, 2022
 # Éva Tamási, 2025
+# Nadiia <semchuk@aph.org.ua>, 2025
+# Yury Rogachev <yury@dhis2.org>, 2025
+# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Éva Tamási, 2025\n"
+"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
@@ -23,7 +24,7 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Оберіть дату..."
 
 msgid "Today"
 msgstr "Сьогодні"
@@ -50,10 +51,10 @@ msgid "Last updated"
 msgstr "Останнє оновлення"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Зареєстровано"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Раніше зареєстровано"
 
 msgid "This value is validating"
 msgstr ""
@@ -62,7 +63,7 @@ msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "Обов'язкове поле"
 
 msgid "Please provide a valid number"
 msgstr ""
@@ -134,7 +135,7 @@ msgid "A future date is not allowed"
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Збереження {{trackedEntityName}} в"
 
 msgid "in"
 msgstr ""
@@ -149,13 +150,13 @@ msgid "Assigned user"
 msgstr "Призначений користувач"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Пошук користувача"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Завершити подію"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Основна інформація"
 
 msgid "Status"
 msgstr "Статус"
@@ -176,9 +177,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Це не програма події або метадані пошкоджені. Дивіться журнал для отримання "
+"детальної інформації."
 
 msgid "This event"
-msgstr ""
+msgstr "Ця подія"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -201,7 +204,7 @@ msgid "Save and add another"
 msgstr ""
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Зберегти та вийти"
 
 msgid "Finish"
 msgstr "Закінчити"
@@ -225,13 +228,13 @@ msgid "No events added"
 msgstr ""
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Новий взаємозв'язок між подіями"
 
 msgid "Adding relationship to event."
 msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Повернутися до події без збереження стосунків"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -405,7 +408,7 @@ msgid "Min"
 msgstr "Мін"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Містить текст"
 
 msgid "Yes"
 msgstr "Так"
@@ -432,7 +435,7 @@ msgid "Delete"
 msgstr "Видалити"
 
 msgid "Select file"
-msgstr ""
+msgstr "Виберіть файл"
 
 msgid "No"
 msgstr "Ні"
@@ -450,7 +453,7 @@ msgid "Clear"
 msgstr "Очистити"
 
 msgid "No results"
-msgstr ""
+msgstr "Немає результатів"
 
 msgid "Description"
 msgstr "Опис"
@@ -459,19 +462,19 @@ msgid "URL"
 msgstr "URL (Інтернет-адреса)"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "почніть вводити для пошуку"
 
 msgid "suggestions could not be retrieved"
 msgstr ""
 
 msgid "No items to display"
-msgstr ""
+msgstr "Немає елементів для показу"
 
 msgid "Select columns"
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Стовпці для відображення в таблиці"
 
 msgid "Column"
 msgstr "Стовпчик"
@@ -495,10 +498,10 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
-msgstr ""
+msgstr "Інші фільтри"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Рядків на сторінку"
 
 msgid "Could not get organisation unit"
 msgstr ""
@@ -513,13 +516,13 @@ msgid "New"
 msgstr "Нове"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Новий {{trackedEntityName}} в {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Шукати {{trackedEntityName}} в {{programName}}"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Очистити вибір"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -552,7 +555,7 @@ msgid "Selected program"
 msgstr "Обрані програми"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Деякі програми фільтруються."
 
 msgid "Select program"
 msgstr "Обрати програму"
@@ -582,7 +585,7 @@ msgid "Show all events"
 msgstr ""
 
 msgid "Edit event"
-msgstr ""
+msgstr "Редагувати подію"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
@@ -609,6 +612,8 @@ msgstr ""
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}} має категорії. Виберіть усі категорії, щоб переглянути "
+"дашборд."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
@@ -616,7 +621,7 @@ msgid ""
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} не зареєстровано у цій програмі."
 
 msgid "Enroll {{teiDisplayName}} in this program."
 msgstr ""
@@ -633,7 +638,7 @@ msgid "{{programName}} is an event program and does not have enrollments."
 msgstr ""
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Створіть нову подію в цій програмі."
 
 msgid "View working list in this program."
 msgstr ""
@@ -642,19 +647,19 @@ msgid "Delete event"
 msgstr "Видалити подію"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Завантажити як JSON"
 
 msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Завантажити у форматі CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Завантажити з поточними фільтрами"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Завантажити дані…"
 
 msgid "Working list could not be loaded"
 msgstr ""
@@ -663,7 +668,7 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
+msgstr "Зареєстровані події"
 
 msgid "Enrollment status"
 msgstr "Статус реєстрації"
@@ -675,7 +680,7 @@ msgid "Registering unit"
 msgstr "Підрозділ, що реєструє"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Дата Реєстрації"
 
 msgid "Inactive"
 msgstr "Неактивне"
@@ -687,7 +692,7 @@ msgid "Update view"
 msgstr ""
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Зберегти поточний вигляд"
 
 msgid "Save current view as..."
 msgstr ""
@@ -726,14 +731,14 @@ msgid "Save as new"
 msgstr ""
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Переглянути інформаційну панель"
 
 msgid "Create for"
 msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
-msgstr ""
+msgstr "Ви також можете вибрати програму на верхній панелі і створювати в ній"
 
 msgid "Save new"
 msgstr ""
@@ -760,16 +765,16 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "Новий пошук"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Редагувати пошук"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Зареєструвати новий {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Реєструвати"
@@ -779,19 +784,19 @@ msgid ""
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Пошук {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Шукати по {{name}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Пошук за атрибутами"
 
 msgid "Back"
 msgstr "Назад"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Шукати {{titleText}}"
 
 msgid "Search for"
 msgstr "Шукати"
@@ -809,7 +814,7 @@ msgid ""
 msgstr ""
 
 msgid "Back to search"
-msgstr ""
+msgstr "Повернутися до пошуку"
 
 msgid "An error has occurred"
 msgstr ""
@@ -828,7 +833,7 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Виберіть тип, щоб почати пошук"
 
 msgid "View active enrollment"
 msgstr ""
@@ -842,7 +847,7 @@ msgid ""
 msgstr ""
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Пошук у всіх програмах"
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -851,7 +856,7 @@ msgid "Event details"
 msgstr ""
 
 msgid "Event completed"
-msgstr ""
+msgstr "Подія завершена"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -886,7 +891,7 @@ msgid "Add relationship"
 msgstr "Додати зв'язок"
 
 msgid "Results found"
-msgstr ""
+msgstr "Знайдено результати"
 
 msgid "Open"
 msgstr "Відкрити"
@@ -898,10 +903,10 @@ msgid "Organisation unit scope"
 msgstr "Охоплення організаційного підрозділу"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Пошук {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "Заповніть принаймні {{minAttributesRequired}} атрибути для пошуку"
 
 msgid "To work with the selected program,"
 msgstr ""
