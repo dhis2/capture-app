@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Merethe Wollan Blisten, 2025
 # Karoline Tufte Lien <karoline@dhis2.org>, 2026
@@ -7,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2026\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -547,12 +546,6 @@ msgstr "Oppgi et positivt heltall"
 msgid "Please provide a negative integer"
 msgstr "Oppgi et negativt heltall"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "Inneholder tekst"
-
 msgid "Yes"
 msgstr "Ja"
 
@@ -588,12 +581,6 @@ msgstr "Fjern"
 
 msgid "No results found"
 msgstr "Ingen resultater funnet"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "Beskrivelse"
@@ -633,6 +620,15 @@ msgstr "Nullstill filter"
 
 msgid "Remove filter"
 msgstr "Fjern filter"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} til {{toDate}}"
@@ -2107,6 +2103,15 @@ msgstr "Last ned i CSV format"
 
 msgid "Download with current filters"
 msgstr "Last ned med gjeldende filtre"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Planlagt{{ escape }} forfaller {{ time }}"

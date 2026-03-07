@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-23T08:39:49.515Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -571,12 +571,6 @@ msgstr "Veuillez saisir un nombre entier positif "
 msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif "
 
-msgid "Exact matches only"
-msgstr "Correspondances exactes uniquement"
-
-msgid "Contains text"
-msgstr "Contient du texte"
-
 msgid "Yes"
 msgstr "Oui"
 
@@ -612,12 +606,6 @@ msgstr "Effacer"
 
 msgid "No results found"
 msgstr "Aucun résultat trouvé"
-
-msgid "Must match the start of the value"
-msgstr "Doit correspondre au début de la valeur"
-
-msgid "Must match the end of the value"
-msgstr "Doit correspondre à la fin de la valeur"
 
 msgid "Description"
 msgstr "Description"
@@ -657,6 +645,16 @@ msgstr "Réinitialiser le filtre"
 
 msgid "Remove filter"
 msgstr "Retirer le filtre"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} à {{toDate}}"
@@ -2249,6 +2247,15 @@ msgstr "Télécharger au format CSV"
 
 msgid "Download with current filters"
 msgstr "Télécharger avec les filtres actuels"
+
+msgid "Exact matches only"
+msgstr "Correspondances exactes uniquement"
+
+msgid "Must match the start of the value"
+msgstr "Doit correspondre au début de la valeur"
+
+msgid "Must match the end of the value"
+msgstr "Doit correspondre à la fin de la valeur"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Planifié {{ escape }} échéance {{ time }}"

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-23T08:39:49.515Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Saysamone Sibounma, 2026\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -541,12 +541,6 @@ msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວ
 msgid "Please provide a negative integer"
 msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນລົບ"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "ໃສ່ຂໍ້ຄວາມ"
-
 msgid "Yes"
 msgstr "ແມ່ນ"
 
@@ -582,12 +576,6 @@ msgstr "ລຶບ"
 
 msgid "No results found"
 msgstr "ບໍ່ພົບຜົນການຊອກຫາ"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "ລາຍລະອຽດ"
@@ -627,6 +615,14 @@ msgstr "ຣີເຊັດຕົວກອງ"
 
 msgid "Remove filter"
 msgstr "ເອົາຕົວກອງອອກ"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} ຫາ {{toDate}}"
@@ -2060,6 +2056,15 @@ msgstr "ດາວໂຫຼດເປັນ CSV"
 
 msgid "Download with current filters"
 msgstr "ດາວໂຫຼດດ້ວຍຕົວກອງປັດຈຸບັນ"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "ກຳນົດເວລາ {{ escape }} ຈົນເຖິງ {{ time }}"

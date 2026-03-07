@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -530,12 +530,6 @@ msgstr "提供一个正整数"
 msgid "Please provide a negative integer"
 msgstr "负整数"
 
-msgid "Exact matches only"
-msgstr "仅限完全匹配"
-
-msgid "Contains text"
-msgstr "包含文本"
-
 msgid "Yes"
 msgstr "是"
 
@@ -571,12 +565,6 @@ msgstr "清除"
 
 msgid "No results found"
 msgstr "没有结果"
-
-msgid "Must match the start of the value"
-msgstr "必须与值的起始部分相匹配"
-
-msgid "Must match the end of the value"
-msgstr "必须与数值的末尾一致"
 
 msgid "Description"
 msgstr "描述"
@@ -616,6 +604,14 @@ msgstr "重置过滤器"
 
 msgid "Remove filter"
 msgstr "移除过滤器"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -2039,6 +2035,15 @@ msgstr "获取CSV格式报表"
 
 msgid "Download with current filters"
 msgstr "随着过滤器下载"
+
+msgid "Exact matches only"
+msgstr "仅限完全匹配"
+
+msgid "Must match the start of the value"
+msgstr "必须与值的起始部分相匹配"
+
+msgid "Must match the end of the value"
+msgstr "必须与数值的末尾一致"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "调度{{ escape }}到期{{ time }}"
