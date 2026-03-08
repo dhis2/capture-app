@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2026
@@ -6,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2026\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -544,12 +543,6 @@ msgstr "Iltimos, butun musbat sonni koʼrsating"
 msgid "Please provide a negative integer"
 msgstr "Iltimos, butun manfiy sonni koʼrsating"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "Matnni oʼz ichiga oladi"
-
 msgid "Yes"
 msgstr "Ha"
 
@@ -585,12 +578,6 @@ msgstr "Tozalash"
 
 msgid "No results found"
 msgstr "Hech qanday natija topilmadi"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "Tavsif"
@@ -630,6 +617,14 @@ msgstr ""
 
 msgid "Remove filter"
 msgstr "Filtrni olib tashlash"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} dan {{toDate}} ga"
@@ -2054,6 +2049,15 @@ msgstr "CSV sifatida yuklang"
 
 msgid "Download with current filters"
 msgstr "Joriy Filtrlar asosida yuklash"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
