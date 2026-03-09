@@ -26,7 +26,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
         columns,
         loading,
         updating,
-        updatingWithDialog,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
@@ -66,7 +65,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
         .some(template => template.updating || template.notPreserved || template.deleted) : false), [allTemplates]);
     const dirtyTemplatesStateFirstRunRef = useRef(dirtyTemplates);
     const dirtyViewStateFirstRunRef = useRef(loading);
-    const dirtyListStateFirstRunRef = useRef(updating || updatingWithDialog);
+    const dirtyListStateFirstRunRef = useRef(updating);
 
     const loadedContextDefined = useMemo(() => loadedContext || {}, [
         loadedContext,
@@ -134,7 +133,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
                             allRowsAreSelected={allRowsAreSelected}
                             selectionInProgress={selectionInProgress}
                             updating={updating}
-                            updatingWithDialog={updatingWithDialog}
                             dataSource={dataSource}
                             onClickListRow={onClickListRow}
                             onRowSelect={onRowSelect}

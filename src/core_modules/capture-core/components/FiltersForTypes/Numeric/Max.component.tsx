@@ -8,7 +8,6 @@ type Props = {
     error: string | null,
     onBlur: ({ max }: { max: string }) => void,
     onEnterKey: ({ max }: { max: string }) => void,
-    textFieldRef: (instance: any) => void,
     errorClass: string,
 };
 
@@ -21,19 +20,18 @@ class MaxNumericFilterPlain extends Component<Props> {
         this.props.onBlur(MaxNumericFilterPlain.getValueObject(value));
     }
 
-    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(this.props.value || ''));
+            this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(payload.value ?? this.props.value ?? ''));
         }
     }
 
     render() {
-        const { error, onBlur, onEnterKey, textFieldRef, errorClass, ...passOnProps } = this.props;
+        const { error, onBlur, onEnterKey, errorClass, ...passOnProps } = this.props;
         return (
             <div>
                 <D2TextField
-                    ref={textFieldRef}
-                    onKeyPress={this.handleKeyPress}
+                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Max')}
                     {...passOnProps}

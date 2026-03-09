@@ -147,7 +147,6 @@ const useView = (
         const {
             isUpdating: updating,
             isLoading: loading,
-            isUpdatingWithDialog: updatingWithDialog,
             dataLoadingError: loadViewError,
         } = workingListsUI[storeId] || {};
 
@@ -174,7 +173,6 @@ const useView = (
             recordsOrder,
             updating: !!updating,
             loading: !!loading,
-            updatingWithDialog: !!updatingWithDialog,
             loadViewError,
             customColumnOrder: workingListsColumnsOrder[storeId],
             programStage: workingListsContext[storeId]?.programStageId,

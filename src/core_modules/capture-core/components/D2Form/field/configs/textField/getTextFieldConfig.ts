@@ -18,6 +18,7 @@ export const getTextFieldConfig = (
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         multiLine: extraProps && extraProps.multiLine,
+        showHelpText: options.showHelpText,
         ...(isLtrInputType(metaData.type) ? { dir: 'ltr' as const } : {}),
     }, options, metaData);
 

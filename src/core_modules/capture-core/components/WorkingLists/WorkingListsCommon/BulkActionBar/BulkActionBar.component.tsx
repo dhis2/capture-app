@@ -15,7 +15,8 @@ export const styles: Readonly<any> = {
         gap: '8px',
         display: 'flex',
         alignItems: 'center',
-        overflow: 'scroll',
+        overflowX: 'auto',
+        overflowY: 'hidden',
     },
 };
 

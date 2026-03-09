@@ -25,6 +25,7 @@ type OwnProps = {
     sectionId: string;
     formBuilderId: string;
     formId: string;
+    fieldOptions?: Record<string, any>;
     onFieldsValidated?: ((fieldsUI: any, formId: string, uidsForIsValidating: Array<string>) => void) | null;
 };
 

@@ -5,18 +5,18 @@ import type { NumericFilterData } from './types';
 type Props = {
     filter: NumericFilterData | null,
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void,
+    handleCommitValue: (value?: any, isBlur?: boolean) => void,
+    onUpdate: (commitValue?: any) => void,
 };
 
 type State = {
     value: {
         min?: string | null,
         max?: string | null,
-    },
+    } | undefined;
 };
 
 export class NumericFilterManager extends React.Component<Props, State> {
-    // eslint-disable-next-line complexity
     static calculateDefaultState(filter: NumericFilterData | null) {
         return {
             min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
@@ -31,11 +31,9 @@ export class NumericFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: any) => {
-        this.setState({
-            value,
-        });
-        this.props.handleCommitValue && this.props.handleCommitValue();
+    handleCommitValue = (value: any, isBlur?: boolean) => {
+        this.setState({ value });
+        this.props.handleCommitValue?.(value, isBlur);
     }
 
     render() {

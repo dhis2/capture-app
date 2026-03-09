@@ -17,7 +17,6 @@ import type {
 
 export type Props = Readonly<{
     updating: boolean,
-    updatingWithDialog: boolean,
     dataSource?: DataSource,
     onClickListRow: SelectRow,
     onSortList: Sort,

@@ -26,6 +26,7 @@ export const defaultSearchOperators = {
     [dataElementTypes.BOOLEAN]: [searchOperators.EQ],
     [dataElementTypes.PHONE_NUMBER]: [searchOperators.LIKE, searchOperators.SW, searchOperators.EQ],
     [dataElementTypes.EMAIL]: [searchOperators.LIKE, searchOperators.SW, searchOperators.EQ],
+    [dataElementTypes.URL]: [searchOperators.LIKE, searchOperators.SW, searchOperators.EQ],
     [dataElementTypes.ORGANISATION_UNIT]: [searchOperators.EQ],
     [dataElementTypes.AGE]: [searchOperators.EQ],
     [dataElementTypes.USERNAME]: [searchOperators.EQ],

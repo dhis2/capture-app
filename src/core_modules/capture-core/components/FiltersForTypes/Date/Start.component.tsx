@@ -20,7 +20,7 @@ class StartRangeFilterPlain extends Component<Props> {
         this.props.onBlur(StartRangeFilterPlain.getValueObject(value));
     };
 
-    handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (_payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey();
         }
@@ -31,7 +31,7 @@ class StartRangeFilterPlain extends Component<Props> {
         return (
             <div>
                 <D2TextField
-                    onKeyPress={this.handleKeyPress}
+                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Days in the past')}
                     dataTest="date-range-filter-start"

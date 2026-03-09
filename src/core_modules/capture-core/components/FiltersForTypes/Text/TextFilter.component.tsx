@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
+import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
 import type { TextFilterProps, Value } from './Text.types';
 import {
     makeCheckboxHandler,
@@ -11,32 +12,41 @@ import {
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
 
-export class TextFilter extends Component<TextFilterProps> implements UpdatableFilterContent<Value> {
+export class TextFilter
+    extends Component<TextFilterProps>
+    implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
+
+        if (!value) {
+            return null;
+        }
 
         return getTextFilterData(value);
     }
 
-    handleEnterKey = (value: Value) => {
-        this.props.onUpdate(value || null);
+    handleEnterKey = (value?: Value) => {
+        this.props.onUpdate(value ?? this.props.value ?? null);
     }
 
     handleBlur = (value: string) => {
-        if (value) {
-            this.props.onCommitValue(value);
-        }
+        this.props.onCommitValue(value, true);
     };
 
-    handleInputChange = (value: string) => {
+    handleChange = (value: string) => {
         this.props.onCommitValue(value);
     };
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue);
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value || null);
+    });
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value || null);
+    });
 
     render() {
-        const { value, unique } = this.props;
+        const { value, searchOperator } = this.props;
+        const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
 
         return (
             <>
@@ -47,12 +57,12 @@ export class TextFilter extends Component<TextFilterProps> implements UpdatableF
                 />
 
                 <Input
-                    onChange={this.handleInputChange}
+                    value={!isEmptyValueFilter(value) ? value : ''}
                     onBlur={this.handleBlur}
                     onEnterKey={this.handleEnterKey}
-                    value={!isEmptyValueFilter(value) ? value : ''}
-                    unique={unique}
+                    onChange={this.handleChange}
                 />
+                {helpText && <div style={helpTextStyle}>{helpText}</div>}
             </>
         );
     }

@@ -87,6 +87,7 @@ export type ProgramRuleAction = {
     trackedEntityAttributeId?: string | null,
     optionGroupId?: string | null,
     optionId?: string | null,
+    legendSetId?: string | null,
     style?: any,
     name?: string,
 };

@@ -1,3 +1,57 @@
+## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1290e17](https://github.com/dhis2/capture-app/commit/1290e174b8dccf9508b476772ea7add5a3ccbc59))
+
+# [105.9.0](https://github.com/dhis2/capture-app/compare/v105.8.0...v105.9.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20919] add legend set field in program rule actions ([#4467](https://github.com/dhis2/capture-app/issues/4467)) ([12d934c](https://github.com/dhis2/capture-app/commit/12d934c2c494e1fe856f1599d9636611d1554a0a))
+
+# [105.8.0](https://github.com/dhis2/capture-app/compare/v105.7.1...v105.8.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20864] use configured TEA Search Operators in Working List filter ([#4455](https://github.com/dhis2/capture-app/issues/4455)) ([9c8d199](https://github.com/dhis2/capture-app/commit/9c8d199ab39a08c281612c5110ad3858cc9780d6))
+
+## [105.7.1](https://github.com/dhis2/capture-app/compare/v105.7.0...v105.7.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([af2d17f](https://github.com/dhis2/capture-app/commit/af2d17f4f8e18e25eec2db4e1c60b08c64c0879a))
+
+# [105.7.0](https://github.com/dhis2/capture-app/compare/v105.6.1...v105.7.0) (2026-02-23)
+
+
+### Features
+
+* [DHIS2-20938] Missing search bar for Option Sets ([#4463](https://github.com/dhis2/capture-app/issues/4463)) ([ab286f9](https://github.com/dhis2/capture-app/commit/ab286f92a3e3318f6464e2425484980f060479f4))
+
+## [105.6.1](https://github.com/dhis2/capture-app/compare/v105.6.0...v105.6.1) (2026-02-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5e2d076](https://github.com/dhis2/capture-app/commit/5e2d0762f785ddb72edee3874a48a11284365bc2))
+
+# [105.6.0](https://github.com/dhis2/capture-app/compare/v105.5.11...v105.6.0) (2026-02-20)
+
+
+### Bug Fixes
+
+* [DHIS2-20786] Deleting a single event from event program working list does not have confirm dialog ([#4457](https://github.com/dhis2/capture-app/issues/4457)) ([20b911e](https://github.com/dhis2/capture-app/commit/20b911e81d28e08b3330efb1642db7892cd065ee))
+
+
+### Features
+
+* [DHIS2-20930] Working lists without bulk data entry plugin should fill whole page ([#4462](https://github.com/dhis2/capture-app/issues/4462)) ([567d69d](https://github.com/dhis2/capture-app/commit/567d69d5f8e9dc99072cb816f7c2228cf406570f))
+
 ## [105.5.11](https://github.com/dhis2/capture-app/compare/v105.5.10...v105.5.11) (2026-02-15)
 
 

@@ -6,7 +6,6 @@ import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';
 import { Actions } from '../Actions';
 import { withEndColumnMenu } from '../withEndColumnMenu';
-import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../../List';
 import { ListViewMenu } from '../Menu';
 import type { Props } from './listViewMain.types';
@@ -103,7 +102,6 @@ class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof ge
         const {
             classes,
             filters,
-            updatingWithDialog,
             onClickListRow,
             onRowSelect,
             onSelectAll,
@@ -137,7 +135,6 @@ class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof ge
                 {this.renderTopBar()}
                 {this.renderList()}
                 {this.renderPager()}
-                {this.props.updatingWithDialog && <DialogLoadingMask />}
             </div>
         );
     }

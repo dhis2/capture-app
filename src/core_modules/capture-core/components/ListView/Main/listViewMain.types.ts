@@ -17,7 +17,6 @@ type WithFilterPassOnProps = ListViewContextBuilderPassOnProps & {
 type ComponentProps = {
     columns: Columns;
     filters: ReactNode;
-    updatingWithDialog?: boolean;
     onSetColumnOrder: SetColumnOrder;
     rowIdKey: string;
     customMenuContents?: CustomMenuContents;
