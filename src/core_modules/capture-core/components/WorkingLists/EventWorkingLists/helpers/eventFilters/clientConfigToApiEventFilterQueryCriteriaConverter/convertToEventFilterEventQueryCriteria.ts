@@ -97,13 +97,18 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     };
 };
 
-const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => ({
-    dateFilter: {
-        type: dateFilterTypes.ABSOLUTE,
-        startDate: dateFilter.ge ?? undefined,
-        endDate: dateFilter.le ?? undefined,
-    },
-});
+const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
+    return {
+        dateFilter: {
+            type: dateFilterTypes.ABSOLUTE,
+            startDate: dateFilter.ge ?? undefined,
+            endDate: dateFilter.le ?? undefined,
+        },
+    };
+};
 
 const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
     assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'],

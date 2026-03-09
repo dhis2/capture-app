@@ -77,13 +77,18 @@ const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
     eq: filter.value,
 });
 
-export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => ({
-    dateFilter: {
-        type: dateFilterTypes.ABSOLUTE,
-        startDate: dateFilter.ge ?? undefined,
-        endDate: dateFilter.le ?? undefined,
-    },
-});
+export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
+    return {
+        dateFilter: {
+            type: dateFilterTypes.ABSOLUTE,
+            startDate: dateFilter.ge ?? undefined,
+            endDate: dateFilter.le ?? undefined,
+        },
+    };
+};
 
 export const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,
