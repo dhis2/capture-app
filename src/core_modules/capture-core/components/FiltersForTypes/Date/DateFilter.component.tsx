@@ -312,7 +312,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             valueObject.main = null;
         }
 
-        return Object.keys(valueObject).some(key => valueObject[key]) ? valueObject : undefined;
+        return Object.keys(valueObject).filter(key => valueObject[key]).length > 0 ? valueObject : undefined;
     }
 
     handleDateSelectedFromCalendarInFrom = () => {

@@ -1,3 +1,31 @@
+## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1290e17](https://github.com/dhis2/capture-app/commit/1290e174b8dccf9508b476772ea7add5a3ccbc59))
+
+# [105.9.0](https://github.com/dhis2/capture-app/compare/v105.8.0...v105.9.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20919] add legend set field in program rule actions ([#4467](https://github.com/dhis2/capture-app/issues/4467)) ([12d934c](https://github.com/dhis2/capture-app/commit/12d934c2c494e1fe856f1599d9636611d1554a0a))
+
+# [105.8.0](https://github.com/dhis2/capture-app/compare/v105.7.1...v105.8.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20864] use configured TEA Search Operators in Working List filter ([#4455](https://github.com/dhis2/capture-app/issues/4455)) ([9c8d199](https://github.com/dhis2/capture-app/commit/9c8d199ab39a08c281612c5110ad3858cc9780d6))
+
+## [105.7.1](https://github.com/dhis2/capture-app/compare/v105.7.0...v105.7.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([af2d17f](https://github.com/dhis2/capture-app/commit/af2d17f4f8e18e25eec2db4e1c60b08c64c0879a))
+
 # [105.7.0](https://github.com/dhis2/capture-app/compare/v105.6.1...v105.7.0) (2026-02-23)
 
 
