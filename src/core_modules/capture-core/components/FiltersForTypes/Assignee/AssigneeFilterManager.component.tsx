@@ -12,7 +12,7 @@ type Props = {
 type Value = {
     mode: string;
     provided?: any;
-} | null;
+} | string | null;
 
 type State = {
     value?: Value | null;

@@ -155,8 +155,9 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     getDateLogicError() {
         const { value } = this.props;
         const { submitAttempted } = this.state;
-        const from = value?.from;
-        const to = value?.to;
+        const objValue = typeof value === 'string' ? undefined : value;
+        const from = objValue?.from;
+        const to = objValue?.to;
         if (from?.isValid === false || to?.isValid === false) {
             return i18n.t('Please provide a valid date');
         }

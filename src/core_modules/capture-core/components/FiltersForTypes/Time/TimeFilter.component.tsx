@@ -74,7 +74,7 @@ type ValuePart = { from?: string | null } | { to?: string | null };
 
 class TimeFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static isFilterValid(value: Value): boolean {
-        if (value === undefined || value === null) {
+        if (value === undefined || value === null || typeof value === 'string') {
             return true;
         }
         const { from, to } = value;

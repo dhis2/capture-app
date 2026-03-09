@@ -54,16 +54,16 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
 }
 
 export function convertDate(filter: DateFilterData): string {
-    if ('isEmpty' in filter && filter.value) {
-        return filter.value;
+    if ('isEmpty' in filter && 'isEmpty' in filter) {
+        return String(filter.value);
     }
-    if (filter.type === 'ABSOLUTE') {
+    if ('type' in filter && filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
     }
-    if (filter.period) {
+    if ('period' in filter && filter.period) {
         return translatedPeriods[filter.period];
     }
-    if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
+    if ('startBuffer' in filter && areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
         return `${translatedPeriods[periods.RELATIVE_RANGE]} (${filter.startBuffer ?? ''} -> ${filter.endBuffer ?? ''})`;
     }
     return '';

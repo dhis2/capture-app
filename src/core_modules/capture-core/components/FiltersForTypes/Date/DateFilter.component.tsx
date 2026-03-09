@@ -343,11 +343,21 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     getErrors() {
         const values = this.props.value;
         const submitAttempted = this.state.submitAttempted;
-        const mainValue = values && values.main;
-        const fromValue = values && values.from;
-        const toValue = values && values.to;
-        const startValue = values && values.start;
-        const endValue = values && values.end;
+        if (!values || typeof values === 'string') {
+            return {
+                minValueError: null,
+                maxValueError: null,
+                startValueError: null,
+                endValueError: null,
+                dateLogicError: null,
+                bufferLogicError: null,
+            };
+        }
+        const mainValue = values.main;
+        const fromValue = values.from;
+        const toValue = values.to;
+        const startValue = values.start;
+        const endValue = values.end;
         const errors = {
             minValueError: null,
             maxValueError: null,
@@ -375,8 +385,9 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     renderAbsoluteRangeInputs() {
         const { value, classes, onFocusUpdateButton } = this.props;
-        const fromValue = value?.from;
-        const toValue = value?.to;
+        const objValue = typeof value === 'string' ? undefined : value;
+        const fromValue = objValue?.from;
+        const toValue = objValue?.to;
         const { dateLogicError } = this.getErrors();
 
         return (
@@ -425,12 +436,13 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     renderRelativeRangeInputs() {
         const { value, classes } = this.props;
+        const objValue = typeof value === 'string' ? undefined : value;
         const { startValueError, endValueError, bufferLogicError } = this.getErrors();
 
         return (
             <div className={classes.inputsUnderOption}>
                 <RangeFilter
-                    value={{ start: value?.start, end: value?.end }}
+                    value={{ start: objValue?.start, end: objValue?.end }}
                     startValueError={startValueError}
                     endValueError={endValueError}
                     handleFieldBlur={this.handleFieldBlur}
@@ -451,15 +463,16 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     renderPeriodOption = (option: Option) => {
         const { value, classes } = this.props;
+        const objValue = typeof value === 'string' ? undefined : value;
         const isAbsoluteRange = option.value === mainOptionKeys.ABSOLUTE_RANGE &&
-            value?.main === mainOptionKeys.ABSOLUTE_RANGE;
+            objValue?.main === mainOptionKeys.ABSOLUTE_RANGE;
         const isRelativeRange = option.value === mainOptionKeys.RELATIVE_RANGE &&
-            value?.main === mainOptionKeys.RELATIVE_RANGE;
+            objValue?.main === mainOptionKeys.RELATIVE_RANGE;
 
         return (
             <div key={option.value as string} className={classes.optionRow}>
                 <Radio
-                    checked={value?.main === option.value}
+                    checked={objValue?.main === option.value}
                     label={option.text}
                     name="dateFilterMain"
                     value={option.value as string}

@@ -57,7 +57,7 @@ export function buildButtonText(
     options?: Options | null,
 ): string {
     if ('isEmpty' in filter && filter.value) {
-        return filter.value;
+        return String(filter.value);
     }
 
     if ('usingOptionSet' in filter && options) {
