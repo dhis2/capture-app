@@ -48,6 +48,9 @@ const convertDate = (rawValue: string): string => {
 };
 
 export const getDateFilter = (dateFilter: DateFilterData) => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
     const apiDateFilterContents =
         dateFilter.type === dateFilterTypes.RELATIVE
             ? {

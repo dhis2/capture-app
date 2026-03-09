@@ -77,6 +77,9 @@ const convertDate = (rawValue: string): string => {
 };
 
 const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
     const apiDateFilterContents = dateFilter.type === dateFilterTypes.RELATIVE ? {
         type: dateFilter.type,
         period: dateFilter.period,
@@ -94,7 +97,7 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
 };
 
 const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
-    assignedUserMode: filter.assignedUserMode,
+    assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'],
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
 });
 

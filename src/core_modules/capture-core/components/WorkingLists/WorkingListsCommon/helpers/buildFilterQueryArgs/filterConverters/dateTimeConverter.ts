@@ -7,6 +7,9 @@ export function convertDateTime({
     sourceValue: DateTimeFilterData;
     meta: { key: string; storeId: string; isInit: boolean };
 }): string {
+    if ('isEmpty' in sourceValue) {
+        return '';
+    }
     if (sourceValue?.type !== 'ABSOLUTE') {
         return '';
     }
