@@ -115,7 +115,7 @@ const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee =>
         return { assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'] };
     }
     return {
-        assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'],
+        assignedUserMode: filter.assignedUserMode,
         assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
     };
 };
