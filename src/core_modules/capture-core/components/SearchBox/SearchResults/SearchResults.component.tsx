@@ -71,7 +71,7 @@ const SearchResultsIndex = ({
     const availableSearchGroup =
         currentSearchScopeType === searchScopes.PROGRAM
             ? getTrackerProgramThrowIfNotFound(currentSearchScopeId)
-                .trackedEntityType.searchGroups.find(group => !group.unique)
+                .trackedEntityType.searchGroups.find(group => group.id === 'main')
             : undefined;
 
     const handlePageChange = (newPage: any) => {

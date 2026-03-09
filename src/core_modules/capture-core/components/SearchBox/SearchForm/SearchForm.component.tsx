@@ -279,7 +279,7 @@ const SearchFormIndex = ({
 
             {
                 searchGroupsForSelectedScope
-                    .filter(searchGroup => !searchGroup.unique)
+                    .filter(searchGroup => searchGroup.id === 'main')
                     .map(({
                         searchForm,
                         formId,
