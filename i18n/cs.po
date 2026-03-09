@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Jiří Podhorecký <jirka.p@volny.cz>, 2026
@@ -6,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -546,12 +545,6 @@ msgstr "Zadejte kladné celé číslo"
 msgid "Please provide a negative integer"
 msgstr "Uveďte záporné celé číslo"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "Obsahuje text"
-
 msgid "Yes"
 msgstr "Ano"
 
@@ -587,12 +580,6 @@ msgstr "Vyčistit"
 
 msgid "No results found"
 msgstr "Nenalezeny žádné výsledky"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "Popis"
@@ -632,6 +619,17 @@ msgstr "Reset filtru"
 
 msgid "Remove filter"
 msgstr "Odebrat filtr"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} do {{toDate}}"
@@ -981,13 +979,13 @@ msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Všechno přístupné"
 
 msgid "Selected"
 msgstr "Vybráno"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Rozsah organizační jednotky"
 
 msgid "Selected program"
 msgstr "Vybraný program"
@@ -1452,7 +1450,7 @@ msgid "Geometry (Coordinate)"
 msgstr "Geometrie (souřadnice)"
 
 msgid "Polygon captured"
-msgstr ""
+msgstr "Polygon zaznamenán"
 
 msgid "No polygon captured"
 msgstr "Nebyl zachycen žádný polygon"
@@ -2148,6 +2146,15 @@ msgstr "Stáhnout jako CSV"
 
 msgid "Download with current filters"
 msgstr "Stáhnout s aktuálními filtry"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Naplánováno na {{ escape }} kvůli {{ time }}"

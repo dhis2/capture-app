@@ -1,3 +1,17 @@
+## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1290e17](https://github.com/dhis2/capture-app/commit/1290e174b8dccf9508b476772ea7add5a3ccbc59))
+
+# [105.9.0](https://github.com/dhis2/capture-app/compare/v105.8.0...v105.9.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20919] add legend set field in program rule actions ([#4467](https://github.com/dhis2/capture-app/issues/4467)) ([12d934c](https://github.com/dhis2/capture-app/commit/12d934c2c494e1fe856f1599d9636611d1554a0a))
+
 # [105.8.0](https://github.com/dhis2/capture-app/compare/v105.7.1...v105.8.0) (2026-03-02)
 
 

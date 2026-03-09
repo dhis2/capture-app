@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Fernando Jorge Bade, 2023
 # Philip Larsen Donnelly, 2024
@@ -19,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -560,12 +559,6 @@ msgstr "Forneça um número inteiro positivo"
 msgid "Please provide a negative integer"
 msgstr "Forneça um número inteiro negativo"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "Contém texto"
-
 msgid "Yes"
 msgstr "sim"
 
@@ -601,12 +594,6 @@ msgstr "Limpar"
 
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "Descrição"
@@ -646,6 +633,16 @@ msgstr "Reiniciar filtro"
 
 msgid "Remove filter"
 msgstr "Remover filtro "
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
@@ -2164,6 +2161,15 @@ msgstr "Baixar como CSV"
 
 msgid "Download with current filters"
 msgstr "Baixar com filtros atuais"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Programado para {{ escape }} com prazo para {{ time }}"

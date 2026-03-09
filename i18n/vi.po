@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2025
@@ -9,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -548,12 +547,6 @@ msgstr "Vui lòng cung cấp một số nguyên dương"
 msgid "Please provide a negative integer"
 msgstr "Vui lòng cung cấp một số nguyên âm"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "Chứa văn bản"
-
 msgid "Yes"
 msgstr "Có"
 
@@ -589,12 +582,6 @@ msgstr "Xóa"
 
 msgid "No results found"
 msgstr "Không tìm thấy kết quả nào"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "Miêu tả"
@@ -634,6 +621,14 @@ msgstr "Làm mới bộ lọc"
 
 msgid "Remove filter"
 msgstr "Xóa bộ lọc"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} đến {{toDate}}"
@@ -2113,6 +2108,15 @@ msgstr "Tải xuống với CSV"
 
 msgid "Download with current filters"
 msgstr "Tải xuống với các bộ lọc hiện tại"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Đã lên lịch {{ escape }}{{ time }}hẹn"
