@@ -154,7 +154,7 @@ export class SearchGroupFactory {
             (acc, attr) => {
                 const valueType = attr.trackedEntityAttribute?.valueType;
                 const isUnsupported = valueType && UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
-                if (isUnsupported) {
+                if (key === 'main' && isUnsupported) {
                     acc.unsupportedAttributes.push(attr);
                 } else {
                     acc.supportedAttributes.push(attr);
@@ -171,6 +171,8 @@ export class SearchGroupFactory {
         if (key === 'main') {
             searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
             searchGroup.id = 'main';
+        } else if (key === 'nonSearchable') {
+            searchGroup.id = 'nonSearchable';
         } else {
             searchGroup.unique = true;
             searchGroup.id = 'unique';
@@ -203,10 +205,14 @@ export class SearchGroupFactory {
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
+                attribute.trackedEntityAttribute)
             .reduce((accGroups: any, attribute) => {
                 if (attribute.trackedEntityAttribute!.unique) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
+                } else if (!attribute.searchable) {
+                    accGroups.nonSearchable = accGroups.nonSearchable
+                        ? [...accGroups.nonSearchable, attribute]
+                        : [attribute];
                 } else {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
                 }
