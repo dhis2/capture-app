@@ -9,6 +9,7 @@ import {
     dateFilterTypes,
     type AssigneeFilterData,
     type DateFilterData,
+    type DateTimeFilterData,
     type BooleanFilterData,
     type TextFilterData,
     type TimeFilterData,
@@ -96,6 +97,14 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     };
 };
 
+const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => ({
+    dateFilter: {
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
+
 const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
     assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'],
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
@@ -107,7 +116,7 @@ const getFilterByType = {
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,
@@ -175,7 +184,7 @@ const getMainFilter = (filter: any): any => {
         break;
     case 'occurredAt':
         mainValue = {
-            eventDate: filterValues.dateFilter,
+            occurredAt: filterValues.dateFilter,
         };
         break;
     case 'assignee':
@@ -194,11 +203,9 @@ const structureFilters = (apiFilters: Array<any>, columns: ColumnsForConverter) 
 
         if (element && 'isMainProperty' in element && element.isMainProperty) {
             const mainFilter = getMainFilter(filter);
-            const filters = {
-                ...acc,
-                ...mainFilter,
-            };
-            return filters;
+            if (mainFilter) {
+                return { ...acc, ...mainFilter };
+            }
         }
 
         acc.dataFilters.push(filter);

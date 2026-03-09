@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
@@ -124,38 +124,20 @@ const FilterSelectorContentsPlain = ({
     ...passOnProps
 }: Props & WithStyles<typeof getStyles>) => {
     const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const frameId = requestAnimationFrame(() => {
-            containerRef.current?.focus();
+    const contents =
+        useContents({
+            classes,
+            emptyValueFilterSupported,
+            filterValue,
+            type,
+            options,
+            multiValueFilter,
+            isRemovable,
+            ...passOnProps,
         });
-        return () => cancelAnimationFrame(frameId);
-    }, []);
-
-    const contents = useContents({
-        classes,
-        filterValue,
-        type,
-        options,
-        multiValueFilter,
-        isRemovable,
-        emptyValueFilterSupported,
-        ...passOnProps,
-    });
-
-    if (contents === null) {
-        return null;
-    }
 
     return (
-        <div
-            ref={containerRef}
-            className={classes.container}
-            data-test="list-view-filter-contents"
-            tabIndex={-1}
-            style={{ outline: 'none' }}
-        >
+        <div className={classes.container} data-test="list-view-filter-contents">
             {contents}
         </div>
     );

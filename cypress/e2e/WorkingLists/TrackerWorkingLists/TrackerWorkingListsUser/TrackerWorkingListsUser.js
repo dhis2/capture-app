@@ -164,6 +164,8 @@ When('you set the enrollment date to a relative range', () => {
     cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment date')
         .click();
+    cy.contains('Relative range')
+        .click();
     cy.get('[data-test="date-range-filter-start"]')
         .type('1000');
     cy.get('[data-test="date-range-filter-end"]')
@@ -526,7 +528,7 @@ When('you change the sharing settings', () => {
 Then('you see the new sharing settings', () => {
     cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Share view').click();
-    
+
     cy.get('[data-test="sharing-dialog"]').within(() => {
         cy.contains('Kevin Boateng')
             .should('exist');
@@ -556,11 +558,11 @@ When('you create a copy of the working list',
         const id = uuid();
 
         cy.get('[data-test="view-name-content"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .type(id)
-                .blur();
-        });
+            .within(() => {
+                cy.get('input[type="text"]')
+                    .type(id)
+                    .blur();
+            });
 
         cy.intercept('POST', '**/trackedEntityInstanceFilters**')
             .as('newTrackerFilter');

@@ -14,6 +14,7 @@ export { UsernameFilter } from './Username';
 
 export { assigneeFilterModes } from './Assignee/constants';
 export { dateFilterTypes } from './Date/constants';
+export { mainOptionTranslatedTexts } from './Date/options';
 
 export type { AssigneeFilterData } from './Assignee/types';
 export type { BooleanFilterData } from './Boolean/types';

@@ -59,6 +59,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertRange,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: convertRange,
     [dataElementTypes.PERCENTAGE]: convertString,
+    [dataElementTypes.PERCENTAGE_RANGE]: convertRange,
     [dataElementTypes.DATE]: convertRange,
     [dataElementTypes.DATE_RANGE]: convertRange,
     [dataElementTypes.DATETIME]: convertRange,

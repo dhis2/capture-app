@@ -7,6 +7,7 @@ import {
     type TextFilterData,
     type TimeFilterData,
     type NumericFilterData,
+    OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
@@ -97,6 +98,17 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);
 
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate) => {
+    if (dateFilter.type === DATE_TYPES.ABSOLUTE && (dateFilter.startDate || dateFilter.endDate)) {
+        return {
+            type: DATE_TYPES.ABSOLUTE,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+        };
+    }
+    return undefined;
+};
+
 const VALID_BOOLEAN_VALUES = new Set(['true', 'false']);
 
 const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
@@ -109,12 +121,16 @@ const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     return filter.in;
 };
 
+const getOrgUnitFilter = (filter: OrgUnitFilterData): OrgUnitFilterData => ({
+    value: filter.value,
+});
+
 const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,
@@ -124,7 +140,7 @@ const getFilterByType = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: getNumericFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,

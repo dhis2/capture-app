@@ -16,14 +16,18 @@ type Props = {
 };
 
 export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
+    onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
 
         return getEmptyOnlyFilterData(value);
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue);
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue);
+    handleEmptyValueCheckboxChange = (event: { checked: boolean }) => {
+        makeCheckboxHandler(EMPTY_VALUE_FILTER)(this.props.onCommitValue)(event);
+    };
+    handleNotEmptyValueCheckboxChange = (event: { checked: boolean }) => {
+        makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)(this.props.onCommitValue)(event);
+    };
 
     render() {
         const { value } = this.props;

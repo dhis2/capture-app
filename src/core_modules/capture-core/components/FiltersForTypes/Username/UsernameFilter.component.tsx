@@ -13,7 +13,7 @@ import {
 } from '../EmptyValue';
 
 export class UsernameFilter extends Component<UsernameFilterProps> implements UpdatableFilterContent<Value> {
-    onGetUpdateData(updatedValue?: Value) { // NOSONAR - imperative API, called externally via ref
+    onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
         return getUsernameFilterData(value);
     }

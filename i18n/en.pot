@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-09T11:12:30.971Z\n"
-"PO-Revision-Date: 2026-03-09T11:12:30.971Z\n"
+"POT-Creation-Date: 2026-03-09T11:44:29.369Z\n"
+"PO-Revision-Date: 2026-03-09T11:44:29.369Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -465,23 +465,23 @@ msgstr "Please specify a range"
 msgid "Start date must be before the end date"
 msgstr "Start date must be before the end date"
 
-msgid "Please specify the number of days"
-msgstr "Please specify the number of days"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Please provide zero or a positive integer"
+msgid "From"
+msgstr "From"
 
 msgid "to"
 msgstr "to"
 
+msgid "To"
+msgstr "To"
+
 msgid "Period"
 msgstr "Period"
 
-msgid "Start date"
-msgstr "Start date"
+msgid "Please provide zero or a positive integer"
+msgstr "Please provide zero or a positive integer"
 
-msgid "End date"
-msgstr "End date"
+msgid "Please specify the number of days"
+msgstr "Please specify the number of days"
 
 msgid "Days in the past"
 msgstr "Days in the past"
@@ -644,9 +644,6 @@ msgid_plural "Please enter at least {{minCharactersToSearch}} character to filte
 msgstr[0] "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[1] "Please enter at least {{minCharactersToSearch}} characters to filter"
 
-msgid "This Year"
-msgstr "This Year"
-
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
 
@@ -655,6 +652,9 @@ msgstr "after or equal to {{date}}"
 
 msgid "before or equal to {{date}}"
 msgstr "before or equal to {{date}}"
+
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr "{{start}} days in the past to {{end}} days in the future"
 
 msgid "greater than or equal to"
 msgstr "greater than or equal to"
@@ -2254,12 +2254,6 @@ msgstr "Some attributes are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "From"
-msgstr "From"
-
-msgid "To"
-msgstr "To"
 
 msgid "From date"
 msgstr "From date"

@@ -15,11 +15,13 @@ import {
     type TextFilterData,
     type TimeFilterData,
     type NumericFilterData,
+    type OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
     ApiDataFilterText,
+    ApiDataFilterOrgUnit,
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiEventQueryCriteria,
@@ -36,6 +38,10 @@ const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
         value,
     };
 };
+
+const getOrgUnitFilter = (filter: ApiDataFilterOrgUnit): OrgUnitFilterData => ({
+    value: filter.eq,
+});
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
     ge: filter.ge ? Number(filter.ge) : undefined,
@@ -77,6 +83,17 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null
             type: dateFilter.type,
             ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
             le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
+        };
+    }
+    return undefined;
+};
+
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null | undefined => {
+    if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
+        return {
+            type: dateFilter.type,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
         };
     }
     return undefined;
@@ -128,7 +145,7 @@ const getFilterByType = {
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
     [filterTypesObject.COORDINATE]: getTextFilter,
     [filterTypesObject.DATE]: getDateFilter,
-    [filterTypesObject.DATETIME]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
     [filterTypesObject.EMAIL]: getTextFilter,
     [filterTypesObject.FILE_RESOURCE]: getTextFilter,
     [filterTypesObject.IMAGE]: getTextFilter,
@@ -138,7 +155,7 @@ const getFilterByType = {
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
     [filterTypesObject.LONG_TEXT]: getTextFilter,
     [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.ORGANISATION_UNIT]: getTextFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
     [filterTypesObject.PERCENTAGE]: getNumericFilter,
     [filterTypesObject.PHONE_NUMBER]: getTextFilter,
     [filterTypesObject.TEXT]: getTextFilter,
@@ -185,7 +202,8 @@ const getSortOrder = (
 
 const getDataElementFilters = (
     filters: Array<ApiDataFilter> | null | undefined,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching): any[] => {
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+): any[] => {
     if (!filters) {
         return [];
     }

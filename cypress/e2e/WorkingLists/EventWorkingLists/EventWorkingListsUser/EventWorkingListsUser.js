@@ -249,6 +249,9 @@ Then('the list should display data ordered descendingly by report date', () => {
     cy.contains('button', 'Report date')
         .click();
 
+    cy.contains('Absolute range')
+        .click();
+
     cy.get('input[placeholder="From"]')
         .type(`${lastYear}-01-01`).blur();
 
@@ -371,12 +374,12 @@ Then('your newly defined sharing settings should still be present', () => {
         .click();
 
     cy.get('[data-test="sharing-dialog"]').within(() => {
-            cy.contains('Kevin Boateng')
-                .should('exist');
+        cy.contains('Kevin Boateng')
+            .should('exist');
 
-            cy.contains('Close')
-                .click();
-        });
+        cy.contains('Close')
+            .click();
+    });
 
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -403,6 +406,8 @@ When('you set the date of admission filter', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
+            cy.contains('Absolute range')
+                .click();
             cy.get('input[type="text"]')
                 .then(($elements) => {
                     cy.wrap($elements[0])
@@ -457,6 +462,8 @@ Then('the admission filter should be in effect', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
+            cy.contains('Absolute range')
+                .click();
             cy.get('input[type="text"]')
                 .then(($elements) => {
                     cy.wrap($elements[0])

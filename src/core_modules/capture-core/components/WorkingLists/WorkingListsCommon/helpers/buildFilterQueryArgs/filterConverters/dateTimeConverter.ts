@@ -1,12 +1,7 @@
 import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime';
 import { escapeString } from '../../../../../../utils/escapeString';
 
-export function convertDateTime({
-    sourceValue,
-}: {
-    sourceValue: DateTimeFilterData;
-    meta: { key: string; storeId: string; isInit: boolean };
-}): string {
+export function convertDateTime({ sourceValue }: { sourceValue: DateTimeFilterData }): string {
     if ('isEmpty' in sourceValue) {
         return '';
     }

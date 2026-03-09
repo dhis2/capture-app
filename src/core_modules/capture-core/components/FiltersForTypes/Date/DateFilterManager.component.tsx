@@ -78,8 +78,14 @@ export class DateFilterManager extends React.Component<Props, State> {
                     main: filter.period,
                 };
             }
-            if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
-                return DateFilterManager.calculateRelativeRangeValueState(filter);
+            const startBuffer = filter.startBuffer ?? 0;
+            const endBuffer = filter.endBuffer ?? 0;
+            if (areRelativeRangeValuesSupported(startBuffer, endBuffer)) {
+                return DateFilterManager.calculateRelativeRangeValueState({
+                    ...filter,
+                    startBuffer,
+                    endBuffer,
+                });
             }
             log.warn(
                 'The startBuffer and endBuffer values are not supported by the UI',

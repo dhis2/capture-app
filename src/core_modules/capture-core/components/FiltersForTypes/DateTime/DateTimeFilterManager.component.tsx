@@ -9,7 +9,7 @@ import type { Value } from './DateTime.types';
 type Props = {
     filter?: DateTimeFilterData | null;
     filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void;
+    handleCommitValue: (value?: Value | null) => void;
 };
 
 type State = {
@@ -28,8 +28,7 @@ function extractTime(isoDatetime?: string | null): string | undefined {
     if (!isoDatetime) {
         return undefined;
     }
-    const hhmm = moment(isoDatetime).format('HH:mm');
-    return hhmm === '00:00' ? undefined : hhmm;
+    return moment(isoDatetime).format('HH:mm');
 }
 
 export class DateTimeFilterManager extends React.Component<Props, State> {
@@ -64,7 +63,7 @@ export class DateTimeFilterManager extends React.Component<Props, State> {
 
     handleCommitValue = (value?: Value | null) => {
         this.setState({ value });
-        this.props.handleCommitValue();
+        this.props.handleCommitValue(value);
     };
 
     render() {
