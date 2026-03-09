@@ -209,12 +209,12 @@ export class SearchGroupFactory {
             .reduce((accGroups: any, attribute) => {
                 if (attribute.trackedEntityAttribute!.unique) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
-                } else if (!attribute.searchable) {
+                } else if (attribute.searchable) {
+                    accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
+                } else {
                     accGroups.nonSearchable = accGroups.nonSearchable
                         ? [...accGroups.nonSearchable, attribute]
                         : [attribute];
-                } else {
-                    accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
                 }
                 return accGroups;
             }, {});
