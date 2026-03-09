@@ -154,8 +154,11 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     // eslint-disable-next-line complexity
     getDateLogicError() {
         const { value } = this.props;
+        if (typeof value === 'string') {
+            return null;
+        }
         const { submitAttempted } = this.state;
-        const objValue = typeof value === 'string' ? undefined : value;
+        const objValue = value;
         const from = objValue?.from;
         const to = objValue?.to;
         if (from?.isValid === false || to?.isValid === false) {
