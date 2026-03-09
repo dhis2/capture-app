@@ -13,7 +13,7 @@ const getText = (key: string): string => {
 };
 
 export function convertAssignee(filter: AssigneeFilterData): string {
-    if (filter.isEmpty !== undefined && filter.value) {
+    if ('isEmpty' in filter) {
         return filter.value;
     }
 

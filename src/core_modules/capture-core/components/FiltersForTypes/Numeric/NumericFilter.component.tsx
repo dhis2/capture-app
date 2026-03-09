@@ -196,8 +196,8 @@ class NumericFilterPlain
             return { minValueError: null, maxValueError: null, logicError: null };
         }
 
-        const minValue = committed && committed.min;
-        const maxValue = committed && committed.max;
+        const minValue = committed?.min;
+        const maxValue = committed?.max;
         const type = this.props.type;
 
         const { error: minValueError, isValid: isMinValid } = NumericFilterPlain.validateField(minValue, type);
@@ -228,7 +228,7 @@ class NumericFilterPlain
                     >
                         <NumericFilterInput
                             field="min"
-                            value={numericValue && numericValue.min}
+                            value={numericValue?.min}
                             error={minValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
@@ -246,7 +246,7 @@ class NumericFilterPlain
                     >
                         <NumericFilterInput
                             field="max"
-                            value={numericValue && numericValue.max}
+                            value={numericValue?.max}
                             error={maxValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}

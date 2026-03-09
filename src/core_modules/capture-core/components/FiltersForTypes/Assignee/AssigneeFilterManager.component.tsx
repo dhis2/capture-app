@@ -24,11 +24,8 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
             return undefined;
         }
 
-        if (filter.isEmpty === true) {
-            return EMPTY_VALUE_FILTER;
-        }
-        if (filter.isEmpty === false) {
-            return NOT_EMPTY_VALUE_FILTER;
+        if ('isEmpty' in filter) {
+            return filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER;
         }
 
         return {
