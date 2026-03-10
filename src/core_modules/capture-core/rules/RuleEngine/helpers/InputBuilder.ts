@@ -110,9 +110,10 @@ const convertAssignAction = (action: ProgramRuleAction) => {
     } = action;
 
     const actions: Array<RuleActionJs> = [];
+    const actionPriority = priority ?? null;
 
     const pushAction = (values: Map<string, string>) => {
-        actions.push(new RuleActionJs(data, type, values, priority ?? null));
+        actions.push(new RuleActionJs(data, type, values, actionPriority));
     };
 
     if (dataElementId) {

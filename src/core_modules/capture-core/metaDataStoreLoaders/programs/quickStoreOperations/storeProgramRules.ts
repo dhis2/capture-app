@@ -27,6 +27,8 @@ const convert = (() => {
             d2ProgramRuleAction.option && d2ProgramRuleAction.option.id;
         const getLegendSetId = d2ProgramRuleAction =>
             d2ProgramRuleAction.legendSet && d2ProgramRuleAction.legendSet.id;
+        const getPriority = d2ProgramRuleAction =>
+            d2ProgramRuleAction.priority;
 
         return apiProgramRuleActions.map(apiProgramRuleAction => ({
             ...apiProgramRuleAction,
@@ -38,6 +40,7 @@ const convert = (() => {
             optionGroupId: getOptionGroupId(apiProgramRuleAction),
             optionId: getOptionId(apiProgramRuleAction),
             legendSetId: getLegendSetId(apiProgramRuleAction),
+            prioriy: getPriority(apiProgramRuleAction),
         }));
     };
 
