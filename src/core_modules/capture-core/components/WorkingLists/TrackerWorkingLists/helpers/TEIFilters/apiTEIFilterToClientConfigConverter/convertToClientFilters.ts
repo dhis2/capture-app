@@ -18,6 +18,7 @@ import type {
     ApiDataFilterDate,
     ApiDataFilterDateContents,
     ApiDataFilterOptionSet,
+    ApiDataFilterOrgUnit,
     ApiTrackerQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
@@ -121,8 +122,8 @@ const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     return filter.in;
 };
 
-const getOrgUnitFilter = (filter: OrgUnitFilterData): OrgUnitFilterData => ({
-    value: filter.value,
+const getOrgUnitFilter = (filter: ApiDataFilterOrgUnit): OrgUnitFilterData => ({
+    value: filter.eq,
 });
 
 const getFilterByType = {
