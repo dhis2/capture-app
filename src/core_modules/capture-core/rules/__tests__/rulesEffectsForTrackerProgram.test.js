@@ -353,6 +353,20 @@ test('expressions with d2Functions in tracker program', () => {
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
+                {
+                    id: 'kvaE3nM2pc2',
+                    displayContent: 'Rule action with priority 1',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                    priority: 1,
+                },
+                {
+                    id: 'rJd0rPPe3Ca',
+                    displayContent: 'Rule action with priority 0',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                    priority: 0,
+                },
                 { id: 'nKNmayYigcy', programStageId: 'PUZaKR0Jh2k', programRuleActionType: 'HIDEPROGRAMSTAGE' },
                 {
                     id: 'nKNmayYigcy',
@@ -504,6 +518,16 @@ test('expressions with d2Functions in tracker program', () => {
 
     // then
     expect(rulesEffects).toEqual([
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'rJd0rPPe3Ca', message: "Rule action with priority 0 " },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'kvaE3nM2pc2', message: "Rule action with priority 1 " },
+        },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
