@@ -7,6 +7,10 @@ Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and program with boolean and number types', () => {
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=lxAQ7Zs9VYR');
+});
+
 Then('the default working list should be displayed', () => {
     const rows = combineDataAndYear(getCurrentYear(), {
         '12-30': ['14 Male'],
@@ -548,10 +552,85 @@ When('you refresh the page', () => {
     cy.reload();
 });
 
-When('you open the dateFilterWorkingList', () => {
+When(/^you open the saved view (.+)$/, (viewName) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains('dateFilterWorkingList')
+        .contains(viewName)
         .click();
+});
+
+When('you set the WHOMCH Smoking filter to Yes', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('WHOMCH Smoking').click());
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Yes')
+        .click();
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+When('you set the WHOMCH Hemoglobin value filter to 1-100', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('WHOMCH Hemoglobin value').click());
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[placeholder="Min"]')
+        .type('1')
+        .blur();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[placeholder="Max"]')
+        .type('100')
+        .blur();
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+Then('the WHOMCH Smoking filter should show Yes in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .should('contain', 'WHOMCH Smoking')
+        .and('contain', 'Yes');
+});
+
+Then('the WHOMCH Hemoglobin value filter should show 1 to 100 in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('WHOMCH Hemoglobin value: 1 to 100')
+        .should('exist');
+});
+
+Then('the WHOMCH Smoking filter should show Yes radio checked when opened', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('WHOMCH Smoking')
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.contains('Yes')
+                .closest('label')
+                .find('input')
+                .should('be.checked');
+        });
+    cy.get('body').click(0, 0);
+});
+
+Then('the WHOMCH Hemoglobin value filter should show 1 and 100 in range fields when opened', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('WHOMCH Hemoglobin value')
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.get('input[placeholder="Min"]')
+                .should('have.attr', 'value', '1');
+            cy.get('input[placeholder="Max"]')
+                .should('have.attr', 'value', '100');
+        });
+    cy.get('body').click(0, 0);
 });
 
 Then('the list should display one record with report date matching filter', () => {
