@@ -553,7 +553,7 @@ Then('the list should display one record with report date matching filter', () =
         .find('tr')
         .eq(1)
         .find('td')
-        .first()
+        .eq(1)
         .invoke('text')
         .then((text) => {
             expect(text).to.include(String(year));
