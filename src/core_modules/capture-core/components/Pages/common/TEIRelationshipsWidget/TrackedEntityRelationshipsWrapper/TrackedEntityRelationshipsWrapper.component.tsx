@@ -84,6 +84,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                 <ResultsPageSizeContext.Provider value={resultsPageSizeValue}>
                     <RegisterTei
                         suggestedProgramId={suggestedProgramId}
+                        programId={programId}
                         onLink={onLinkToTrackedEntityFromSearch}
                         onSave={onLinkToTrackedEntityFromRegistration}
                         teiId={teiId}

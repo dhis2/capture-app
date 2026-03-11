@@ -13,6 +13,7 @@ export const RegisterTei = ({
     teiId,
     trackedEntityTypeId,
     suggestedProgramId,
+    programId,
 }: ContainerProps) => {
     const dataEntryId = 'relationship';
     const error = useSelector((state: any) => state.newRelationshipRegisterTei.error);
@@ -21,6 +22,7 @@ export const RegisterTei = ({
     const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
         teiId,
         trackedEntityTypeId,
+        programId,
     } as any);
 
     return React.createElement(RegisterTeiComponent as any, {
