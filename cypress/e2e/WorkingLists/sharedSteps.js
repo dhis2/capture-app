@@ -28,7 +28,7 @@ Then('the status filter button should show that the active filter is in effect',
         .should('exist');
 });
 
-When('you set the age filter to 10-20', () => {
+When(/^you set the age filter to (\d+)-(\d+)$/, (min, max) => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
             cy.contains('More filters')
@@ -40,45 +40,18 @@ When('you set the age filter to 10-20', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input[placeholder="Min"]')
-        .type('10')
+        .type(min)
         .blur();
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input[placeholder="Max"]')
-        .type('20')
+        .type(max)
         .blur();
 });
 
-When('you set the age filter to 20-30', () => {
+Then(/^the age filter button should show (\d+) to (\d+) in effect$/, (min, max) => {
     cy.get('[data-test="event-working-lists"]')
-        .within(() => {
-            cy.contains('More filters')
-                .click();
-        });
-
-    cy.get('[data-test="more-filters-menu"]')
-        .within(() => cy.contains('Age (years)').click());
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Min"]')
-        .type('20')
-        .blur();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Max"]')
-        .type('30')
-        .blur();
-});
-
-Then('the age filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 10 to 20')
-        .should('exist');
-});
-
-Then('the age filter button should show 20 to 30 in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 20 to 30')
+        .contains(`Age (years): ${min} to ${max}`)
         .should('exist');
 });
 

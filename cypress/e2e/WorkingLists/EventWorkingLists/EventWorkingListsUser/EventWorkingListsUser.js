@@ -507,6 +507,20 @@ When('you set the report date filter', () => {
         });
 });
 
+When('you set the Organisation unit filter to Ngelehun', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Organisation unit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.get('input[placeholder="Search"]')
+                .type('Ngelehun');
+            cy.contains('Ngelehun', { timeout: 10000 })
+                .click();
+        });
+});
+
 When(/^you save the view as (.*)$/, (name) => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -581,6 +595,15 @@ Then('the report date filter should be in effect', () => {
         });
 
     cy.get('body').click(0, 0);
+});
+
+Then('the Organisation unit filter should be in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Organisation unit')
+        .should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Ngelehun')
+        .should('exist');
 });
 
 Then('the admission filter should be in effect', () => {
