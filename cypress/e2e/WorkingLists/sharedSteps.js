@@ -49,9 +49,36 @@ When('you set the age filter to 10-20', () => {
         .blur();
 });
 
+When('you set the age filter to 20-30', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Age (years)').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[placeholder="Min"]')
+        .type('20')
+        .blur();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[placeholder="Max"]')
+        .type('30')
+        .blur();
+});
+
 Then('the age filter button should show that the filter is in effect', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains('Age (years): 10 to 20')
+        .should('exist');
+});
+
+Then('the age filter button should show 20 to 30 in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Age (years): 20 to 30')
         .should('exist');
 });
 

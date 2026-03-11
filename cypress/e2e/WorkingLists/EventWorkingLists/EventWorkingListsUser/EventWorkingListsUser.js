@@ -141,6 +141,67 @@ Then('the list should display events where age is between 10 and 20', () => {
         });
 });
 
+When('you set the Household location filter to Is empty', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Household location').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Is empty')
+        .click();
+});
+
+Then('the Household location filter button should show that the filter is in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Household location: Is empty')
+        .should('exist');
+});
+
+Then('the Household location filter should show Is empty checked', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Household location')
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.contains('Is empty')
+                .closest('label')
+                .find('input[type="checkbox"]')
+                .should('be.checked');
+        });
+    cy.get('body').click(0, 0);
+});
+
+Then('the list should display one record', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+        });
+    cy.get('[data-test="event-working-lists"]')
+        .find('tr')
+        .should('have.length', 2);
+});
+
+Then('the list should display one record with empty Household location', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+        });
+    cy.get('[data-test="event-working-lists"]')
+        .find('tr')
+        .should('have.length', 2);
+    cy.get('[data-test="event-working-lists"]')
+        .find('tr')
+        .eq(1)
+        .within(() => {
+            cy.get('td').contains('Lat:').should('not.exist');
+        });
+});
+
 When('you open the column selector', () => {
     cy.get('[data-test="select-columns-reference"]')
         .click();
@@ -422,6 +483,30 @@ When('you set the date of admission filter', () => {
         });
 });
 
+When('you set the report date filter', () => {
+    const year = getCurrentYear() - 1;
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Report date')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.contains('Absolute range')
+                .click();
+            cy.get('input[type="text"]')
+                .then(($elements) => {
+                    cy.wrap($elements[0])
+                        .type(`${year}-01-01`).blur();
+
+                    cy.wrap($elements[1])
+                        .type(`${year}-12-31`).blur();
+                });
+
+            cy.contains('Update')
+                .click();
+        });
+});
+
 When(/^you save the view as (.*)$/, (name) => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -455,6 +540,49 @@ When('you open the dateFilterWorkingList', () => {
         .click();
 });
 
+Then('the list should display one record with report date matching filter', () => {
+    const year = getCurrentYear() - 1;
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+        });
+    cy.get('[data-test="event-working-lists"]')
+        .find('tr')
+        .should('have.length', 2);
+    cy.get('[data-test="event-working-lists"]')
+        .find('tr')
+        .eq(1)
+        .find('td')
+        .first()
+        .invoke('text')
+        .then((text) => {
+            expect(text).to.include(String(year));
+        });
+});
+
+Then('the report date filter should be in effect', () => {
+    const year = getCurrentYear() - 1;
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Report date')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.contains('Absolute range')
+                .click();
+            cy.get('input[type="text"]')
+                .then(($elements) => {
+                    cy.wrap($elements[0])
+                        .should('have.attr', 'value', `${year}-01-01`);
+
+                    cy.wrap($elements[1])
+                        .should('have.attr', 'value', `${year}-12-31`);
+                });
+        });
+
+    cy.get('body').click(0, 0);
+});
+
 Then('the admission filter should be in effect', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains('Date of admission: 2018-01...')
@@ -475,6 +603,18 @@ Then('the admission filter should be in effect', () => {
         });
 
     // clean up
+    cy.get('@newEventResult')
+        .then((result) => {
+            expect(result.response.statusCode).to.equal(201);
+            const id = result.response.body.response.uid;
+            cy.buildApiUrl('eventFilters', id)
+                .then((eventFiltersUrl) => {
+                    cy.request('DELETE', eventFiltersUrl);
+                });
+        });
+});
+
+Then('the saved working list view is cleaned up', () => {
     cy.get('@newEventResult')
         .then((result) => {
             expect(result.response.statusCode).to.equal(201);

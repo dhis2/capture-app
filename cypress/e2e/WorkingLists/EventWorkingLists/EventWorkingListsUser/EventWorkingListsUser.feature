@@ -95,13 +95,22 @@ And you change the sharing settings
 And you update the working list
 Then your newly defined sharing settings should still be present
 
-Scenario: Save and load a view with a date filter
-Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
-When you set the date of admission filter
+Scenario: Save and load a view with date, integer and coordinate filters
+Given you open the main page with Ngelehun and malaria case context
+When you set the report date filter
+And you set the age filter to 20-30
+And you apply the current filter
+And you set the Household location filter to Is empty
+And you apply the current filter
 And you save the view as dateFilterWorkingList
 And you refresh the page
 And you open the dateFilterWorkingList
-Then the admission filter should be in effect
+Then the list should display one record with report date matching filter
+Then the report date filter should be in effect
+And the age filter button should show 20 to 30 in effect
+And the Household location filter button should show that the filter is in effect
+And the Household location filter should show Is empty checked
+And the saved working list view is cleaned up
 
 Scenario: User is promted with message to select Category
 Given you open the main page with Ngelehun and Contraceptives Voucher Program
