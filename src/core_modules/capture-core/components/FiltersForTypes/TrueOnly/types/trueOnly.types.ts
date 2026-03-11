@@ -1,3 +1,4 @@
 export type TrueOnlyFilterData = {
-    value: boolean;
+    value: boolean | string;
+    isEmpty?: boolean;
 };

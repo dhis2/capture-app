@@ -1,6 +1,6 @@
 import type { assigneeFilterModes } from '../constants';
 
-export type AssigneeFilterData = {
+type AssigneeFilterModeData = {
     assignedUserMode: typeof assigneeFilterModes[keyof typeof assigneeFilterModes];
     assignedUser?: {
         id: string;
@@ -8,3 +8,11 @@ export type AssigneeFilterData = {
         name: string;
     } | null;
 };
+
+type EmptyValueAssigneeFilterData = {
+    assignedUserMode: string;
+    isEmpty: boolean;
+    value: string;
+};
+
+export type AssigneeFilterData = AssigneeFilterModeData | EmptyValueAssigneeFilterData;

@@ -56,6 +56,10 @@ export function buildButtonText(
     type: typeof filterTypesObject[keyof typeof filterTypesObject],
     options?: Options | null,
 ): string {
+    if ('isEmpty' in filter && filter.value) {
+        return String(filter.value);
+    }
+
     if ('usingOptionSet' in filter && options) {
         return getOptionSetText(filter, options);
     }

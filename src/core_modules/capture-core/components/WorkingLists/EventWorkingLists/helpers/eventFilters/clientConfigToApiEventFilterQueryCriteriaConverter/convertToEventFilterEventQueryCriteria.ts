@@ -78,6 +78,9 @@ const convertDate = (rawValue: string): string => {
 };
 
 const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
     const apiDateFilterContents = dateFilter.type === dateFilterTypes.RELATIVE ? {
         type: dateFilter.type,
         period: dateFilter.period,
@@ -94,18 +97,28 @@ const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     };
 };
 
-const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => ({
-    dateFilter: {
-        type: dateFilterTypes.ABSOLUTE,
-        startDate: dateFilter.ge ?? undefined,
-        endDate: dateFilter.le ?? undefined,
-    },
-});
+const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
+    return {
+        dateFilter: {
+            type: dateFilterTypes.ABSOLUTE,
+            startDate: dateFilter.ge ?? undefined,
+            endDate: dateFilter.le ?? undefined,
+        },
+    };
+};
 
-const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
-    assignedUserMode: filter.assignedUserMode,
-    assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
-});
+const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => {
+    if ('isEmpty' in filter) {
+        return { assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'] };
+    }
+    return {
+        assignedUserMode: filter.assignedUserMode,
+        assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
+    };
+};
 
 const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,

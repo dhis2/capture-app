@@ -42,13 +42,16 @@ function translateRelativeRange(filter: { startBuffer?: number | null; endBuffer
 }
 
 export function convertDate(filter: DateFilterData): string {
-    if (filter.type === 'ABSOLUTE') {
+    if ('isEmpty' in filter) {
+        return String(filter.value);
+    }
+    if ('type' in filter && filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
     }
-    if (filter.period) {
+    if ('period' in filter && filter.period) {
         return mainOptionTranslatedTexts[filter.period];
     }
-    if (filter.startBuffer != null || filter.endBuffer != null) {
+    if ('startBuffer' in filter && (filter.startBuffer != null || filter.endBuffer != null)) {
         return translateRelativeRange(filter);
     }
     return '';

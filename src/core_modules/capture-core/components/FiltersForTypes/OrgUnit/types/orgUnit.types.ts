@@ -7,4 +7,5 @@ export type OrgUnitValue = {
 export type OrgUnitFilterData = {
     value: string;
     name?: string;
+    isEmpty?: boolean;
 };

@@ -13,6 +13,10 @@ const getText = (key: string): string => {
 };
 
 export function convertAssignee(filter: AssigneeFilterData): string {
+    if ('isEmpty' in filter) {
+        return filter.value;
+    }
+
     return (
         filter.assignedUserMode !== assigneeFilterModes.PROVIDED ?
             getText(filter.assignedUserMode) :
