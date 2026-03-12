@@ -95,37 +95,28 @@ And you change the sharing settings
 And you update the working list
 Then your newly defined sharing settings should still be present
 
-Scenario: Save and load a view with date, org unit, integer and coordinate filters
-Given you open the main page with Ngelehun and malaria case context
-When you set the report date filter
-And you set the Organisation unit filter to Ngelehun
-And you set the age filter to 20-30
-And you apply the current filter
-And you set the Household location filter to Is empty
-And you apply the current filter
-And you save the view as dateFilterWorkingList
-And you refresh the page
-And you open the saved view dateFilterWorkingList
-Then the list should display one record with report date matching filter
-Then the report date filter should be in effect
-And the Organisation unit filter should be in effect
-And the age filter button should show 20 to 30 in effect
-And the Household location filter button should show that the filter is in effect
-And the Household location filter should show Is empty checked
-And the saved working list view is cleaned up
-
-Scenario: Save and load a view with boolean and number filters
-Given you open the main page with Ngelehun and program with boolean and number types
-When you set the WHOMCH Smoking filter to Yes
-And you set the WHOMCH Hemoglobin value filter to 1-100
-And you save the view as booleanNumberFilterWorkingList
-And you refresh the page
-And you open the saved view booleanNumberFilterWorkingList
-Then the WHOMCH Smoking filter should show Yes in effect
-And the WHOMCH Hemoglobin value filter should show 1 to 100 in effect
-And the WHOMCH Smoking filter should show Yes radio checked when opened
-And the WHOMCH Hemoglobin value filter should show 1 and 100 in range fields when opened
-And the saved working list view is cleaned up
+Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, INTEGER_POSITIVE, DATE, ORGANISATION_UNIT, COORDINATE, FILE_RESOURCE
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the boolean filter
+  And you set the range filter "Age (years)" to 0-120
+  And you set the range filter "Height in cm" to 100-200
+  And you set the range filter "Weight in kg" to 1-200
+  And you set the date filter
+  And you set the organisation unit filter
+  And you set the empty-only filter "Household location" to Is empty
+  And you set the empty-only filter "Documentation" to Is empty
+  And you save the view as allValueTypesFilterWorkingList
+  And you refresh the page
+  And you open the saved view allValueTypesFilterWorkingList
+  Then the boolean filter should be in effect and show the correct value when opened
+  And the range filter "Age (years)" should be in effect and show 0 to 120 when opened
+  And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
+  And the range filter "Weight in kg" should be in effect and show 1 to 200 when opened
+  And the date filter should be in effect and show the correct value when opened
+  And the organisation unit filter should be in effect and show the correct value when opened
+  And the empty-only filter "Household location" should be in effect and show Is empty when opened
+  And the empty-only filter "Documentation" should be in effect and show Is empty when opened
+  And the saved working list view is cleaned up
 
 Scenario: User is promted with message to select Category
 Given you open the main page with Ngelehun and Contraceptives Voucher Program
@@ -142,4 +133,3 @@ When you set the date of admission filter
 And you save the view as toDeleteWorkingList
 When you delete the name toDeleteWorkingList
 Then the custom events working list is deleted
-
