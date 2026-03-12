@@ -347,6 +347,20 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
+                    id: 'Cewc02vdsAd',
+                    displayContent: "d2:inUserGroup('Kk12LkEWtXp') =",
+                    data: "d2:inUserGroup('Kk12LkEWtXp')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'dAsdv20cweC',
+                    displayContent: "d2:inUserGroup('pXtWEkL21kK') =",
+                    data: "d2:inUserGroup('pXtWEkL21kK')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
                     id: 'reT7Iyr4PT2',
                     displayContent: '#{gender} = ',
                     data: '#{gender}',
@@ -505,8 +519,11 @@ test('expressions with d2Functions in tracker program', () => {
         trackedEntityInstanceId: 'vCGpQAWG17I',
     };
 
+    const engine = ruleEngine();
+    engine.setSelectedUserGroups(['Kk12LkEWtXp']);
+
     // when
-    const rulesEffects = ruleEngine().getProgramRuleEffects({
+    const rulesEffects = engine.getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         trackedEntityAttributes,
         selectedEntity: teiValues,
@@ -706,6 +723,16 @@ test('expressions with d2Functions in tracker program', () => {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: { id: 'Eeb7Ixr4Pv6', message: 'd2:floor((5+5) / 2) =  5' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'Cewc02vdsAd', message: "d2:inUserGroup('Kk12LkEWtXp') = true" },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'dAsdv20cweC', message: "d2:inUserGroup('pXtWEkL21kK') = false" },
         },
         {
             type: 'DISPLAYTEXT',
