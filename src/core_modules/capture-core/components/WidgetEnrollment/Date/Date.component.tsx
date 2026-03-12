@@ -205,9 +205,9 @@ const DateComponentPlain = ({
             </span>
             <span>
                 <span>
-                {dateLabel}{': '}
+                    {dateLabel}{': '}
                     {displayDate}
-            </span>
+                </span>
             </span>
             {editEnabled && (
                 <button
