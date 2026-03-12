@@ -169,6 +169,12 @@ Then('the Household location filter button should show that the filter is in eff
         .should('exist');
 });
 
+Then('the age filter button should show that the filter is in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains(/Age \(years\): \d+ to \d+/)
+        .should('exist');
+});
+
 Then('the Household location filter should show Is empty checked', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains('Household location')
