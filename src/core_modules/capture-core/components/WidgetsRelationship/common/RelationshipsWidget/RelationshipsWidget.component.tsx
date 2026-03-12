@@ -1,7 +1,7 @@
 import React, { type ComponentType, useState } from 'react';
 import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
-import { Widget } from '../../../Widget';
+import { Widget, WidgetHeaderCountBadge } from '../../../Widget';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props } from './relationshipsWidget.types';
@@ -49,9 +49,11 @@ const RelationshipsWidgetPlain = ({
         >
             <Widget
                 header={(
-                    <div className={classes.header}>
+                    <div className={classes.header} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span>{title}</span>
-
+                        {(relationships?.length ?? 0) > 0 && (
+                            <WidgetHeaderCountBadge count={relationships!.length} />
+                        )}
                     </div>
                 )}
                 onOpen={() => setOpenStatus(true)}
