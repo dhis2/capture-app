@@ -11,14 +11,18 @@ import {
 type Props = {
     teiId: string;
     trackedEntityTypeId: string;
-    programId: string;
+    relationshipFromSideProgramId: string;
 };
 
 type Return = {
     inheritedAttributes: Array<InputAttribute>;
     isLoading: boolean;
 };
-export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, programId }: Props): Return => {
+export const useInheritedAttributeValues = ({
+    teiId,
+    trackedEntityTypeId,
+    relationshipFromSideProgramId,
+}: Props): Return => {
     const relationshipToSideProgramId = useSelector((state: any) => state.newRelationshipRegisterTei.programId);
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set();
@@ -46,13 +50,13 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, progra
 
 
     const { data, isInitialLoading } = useApiDataQuery(
-        ['inheritedAttributeValues', teiId, programId],
+        ['inheritedAttributeValues', teiId, relationshipFromSideProgramId],
         {
             resource: 'tracker/trackedEntities',
             id: teiId,
             params: {
                 fields: ['attributes'],
-                program: programId,
+                program: relationshipFromSideProgramId,
             },
         }, {
             enabled: !!teiId,

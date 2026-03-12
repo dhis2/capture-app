@@ -22,7 +22,7 @@ export const RegisterTei = ({
     const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
         teiId,
         trackedEntityTypeId,
-        programId,
+        relationshipFromSideProgramId: programId,
     } as any);
 
     return React.createElement(RegisterTeiComponent as any, {
