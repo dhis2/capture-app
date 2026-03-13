@@ -21,14 +21,14 @@ export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'QuickActions',
-        },
-        {
-            type: WidgetTypes.COMPONENT,
             name: 'StagesAndEvents',
         },
     ],
     rightColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'QuickActions',
+        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'ErrorWidget',

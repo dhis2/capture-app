@@ -1,3 +1,10 @@
+## [105.11.2](https://github.com/dhis2/capture-app/compare/v105.11.1...v105.11.2) (2026-03-13)
+
+
+### Bug Fixes
+
+* [UX-171] Improve information density ([#3786](https://github.com/dhis2/capture-app/issues/3786)) ([ab30fe2](https://github.com/dhis2/capture-app/commit/ab30fe29afd8f0b1895858c1569dfb3e1e3fbbc8))
+
 ## [105.11.1](https://github.com/dhis2/capture-app/compare/v105.11.0...v105.11.1) (2026-03-13)
 
 

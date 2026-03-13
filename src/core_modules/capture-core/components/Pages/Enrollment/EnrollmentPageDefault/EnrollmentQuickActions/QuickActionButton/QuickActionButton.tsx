@@ -24,6 +24,7 @@ const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disabled
             onClick={onClickAction}
             dataTest={dataTest}
             disabled={disabled}
+            small
         >
             <div className={classes.button}>
                 {icon}
