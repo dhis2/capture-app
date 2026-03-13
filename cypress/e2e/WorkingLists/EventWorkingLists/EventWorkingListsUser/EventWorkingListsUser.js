@@ -7,6 +7,7 @@ const CONTEXT_QUERIES = {
     'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
     'Inpatient morbidity and mortality context': 'programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8',
     'Contraceptives Voucher Program': 'orgUnitId=DiszpKrYNg8&programId=kla3mAPgvCH',
+    'event program text filter context': 'programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8',
 };
 
 Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
@@ -173,6 +174,30 @@ Then('the age filter button should show that the filter is in effect', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains(/Age \(years\): \d+ to \d+/)
         .should('exist');
+});
+
+When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('More filters').click();
+        });
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[type="text"]')
+        .clear()
+        .type(value)
+        .blur();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+Then(/^the text filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, value) => {
+    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
+    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.get('input[type="text"]').should('have.value', value);
+    });
+    cy.get('body').click(0, 0);
 });
 
 Then('the Household location filter should show Is empty checked', () => {
@@ -676,6 +701,12 @@ When('you set the organisation unit filter', () => {
 When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
     cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When(/^you set the active filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });

@@ -95,6 +95,20 @@ And you change the sharing settings
 And you update the working list
 Then your newly defined sharing settings should still be present
 
+Scenario: Save and load view with stored WL filters - TEXT
+  Given you open the main page with Ngelehun and event program text filter context
+  When you set the text filter "XX MAL RDT TRK - Reason for not testing" to "test"
+  And you save the view as textFilterWorkingList
+  And you refresh the page
+  And you open the saved view textFilterWorkingList
+  Then the text filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show "test" when opened
+  When you set the active filter "XX MAL RDT TRK - Reason for not testing" to Is empty
+  And you update the working list
+  And you refresh the page
+  And you open the saved view textFilterWorkingList
+  Then the empty-only filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show Is empty when opened
+  And the saved working list view is cleaned up
+
 Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, INTEGER_POSITIVE, DATE, ORGANISATION_UNIT, COORDINATE, FILE_RESOURCE
   Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
   When you set the boolean filter
