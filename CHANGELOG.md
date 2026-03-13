@@ -1,3 +1,24 @@
+## [105.11.1](https://github.com/dhis2/capture-app/compare/v105.11.0...v105.11.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21044][DHIS2-21045] Minimum Search Characters validation error ([#4473](https://github.com/dhis2/capture-app/issues/4473)) ([115ce1c](https://github.com/dhis2/capture-app/commit/115ce1c432327624a0402714548caf0f09e13fca))
+
+# [105.11.0](https://github.com/dhis2/capture-app/compare/v105.10.0...v105.11.0) (2026-03-12)
+
+
+### Features
+
+* [DHIS2-19426] support `d2:inUserGroup` ([#4477](https://github.com/dhis2/capture-app/issues/4477)) ([1e7197f](https://github.com/dhis2/capture-app/commit/1e7197f35ba31b31b983115a0d319356fe5df0ac))
+
+# [105.10.0](https://github.com/dhis2/capture-app/compare/v105.9.1...v105.10.0) (2026-03-10)
+
+
+### Features
+
+* [DHIS2-20920] send action priorities to rule engine ([#4456](https://github.com/dhis2/capture-app/issues/4456)) ([6b57b80](https://github.com/dhis2/capture-app/commit/6b57b8052a2351e9e5960c8971fd57f654a69b72))
+
 ## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
 
 

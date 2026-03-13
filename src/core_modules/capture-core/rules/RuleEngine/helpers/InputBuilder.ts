@@ -106,12 +106,14 @@ const convertAssignAction = (action: ProgramRuleAction) => {
         dataElementId,
         trackedEntityAttributeId,
         content,
+        priority,
     } = action;
 
     const actions: Array<RuleActionJs> = [];
+    const actionPriority = priority ?? null;
 
     const pushAction = (values: Map<string, string>) => {
-        actions.push(new RuleActionJs(data, type, values));
+        actions.push(new RuleActionJs(data, type, values, actionPriority));
     };
 
     if (dataElementId) {
@@ -144,6 +146,7 @@ const convertProgramRuleAction = (action: ProgramRuleAction) => {
     const {
         data,
         programRuleActionType: type,
+        priority,
         ...rest
     } = action;
 
@@ -151,6 +154,7 @@ const convertProgramRuleAction = (action: ProgramRuleAction) => {
         data,
         type,
         new Map(Object.keys(rest).map(key => [key, rest[key]])),
+        priority ?? null,
     );
 };
 
@@ -185,9 +189,11 @@ const convertOption = (option: RawOption) => new Option(option.displayName, opti
 const buildSupplementaryData = ({
     selectedOrgUnit,
     selectedUserRoles,
+    selectedUserGroups,
 }: {
     selectedOrgUnit: OrgUnit;
     selectedUserRoles?: Array<string> | null;
+    selectedUserGroups?: Array<string> | null;
 }) => {
     const orgUnitId = selectedOrgUnit.id;
     const orgUnitGroups = selectedOrgUnit.groups.reduce(
@@ -202,7 +208,7 @@ const buildSupplementaryData = ({
     );
 
     return new RuleSupplementaryDataJs(
-        [],
+        selectedUserGroups || [],
         selectedUserRoles || [],
         orgUnitGroups,
     );
@@ -366,16 +372,18 @@ export class InputBuilder {
     buildRuleEngineContext = ({
         programRulesContainer,
         selectedUserRoles,
+        selectedUserGroups,
     }: {
         programRulesContainer: ProgramRulesContainer;
         selectedUserRoles?: Array<string> | null;
+        selectedUserGroups?: Array<string> | null;
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
         return new RuleEngineContextJs(
             programRules ? programRules.map(convertProgramRule) : [],
             programRuleVariables ? programRuleVariables.map(this.convertRuleVariable) : [],
-            buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles }),
+            buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles, selectedUserGroups }),
             constants ? convertConstants(constants) : new Map(),
         );
     };

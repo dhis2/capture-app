@@ -5,6 +5,7 @@ import { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityT
 import type { AvailableSearchOption } from '../components/SearchBox';
 
 type SearchGroups = Array<{
+    id?: string;
     searchForm: RenderFoundation;
     unique: boolean;
     formId: string;
@@ -35,11 +36,13 @@ export const buildSearchOption =
             TETypeName: type,
             searchGroups: [...searchGroups.values()]
                 .map(({
+                    id: groupId,
                     unique,
                     searchForm,
                     minAttributesRequiredToSearch,
                     unsupportedAttributes,
                 }, index) => ({
+                    id: groupId,
                     unique,
                     searchForm,
                     // We adding the `formId` here for the reason that we will use it in the SearchBox component.

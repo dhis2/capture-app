@@ -66,7 +66,7 @@ const collectCurrentSearchTerms = (
 ): CurrentSearchTerms => {
     const { searchForm: attributeSearchForm, formId } = searchGroupsForSelectedScope
         .reduce((accumulated: any, searchGroup: any) => {
-            if (!searchGroup.unique) {
+            if (searchGroup.id === 'main') {
                 return { accumulated, ...searchGroup };
             }
             return accumulated;

@@ -7,10 +7,8 @@ import type {
 } from '../../metaData';
 
 export function getSearchGroups(trackedEntityTypeId: string, programId: string | null): Array<SearchGroup> {
-    if (programId) {
-        const program = getTrackerProgramThrowIfNotFound(programId);
-        return program.searchGroups;
-    }
-    const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-    return trackedEntityType.searchGroups;
+    const raw = programId
+        ? getTrackerProgramThrowIfNotFound(programId).searchGroups
+        : getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).searchGroups;
+    return raw.filter(sg => sg.id !== 'nonSearchable');
 }

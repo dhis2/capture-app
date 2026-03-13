@@ -115,9 +115,14 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+        if (
+            isValid &&
+            this.props.searchGroup.id === 'main'
+        ) {
+            isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+        }
 
-        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
+        if (isValid && this.props.searchGroup.id === 'main') isValid = this.validNumberOfAttributes();
 
         if (isValid && this.props.searchGroup.unique) {
             isValid = this.isSearchViaUniqueIdValid();
@@ -213,9 +218,8 @@ class SearchFormPlain extends React.Component<Props, State> {
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     id={id}
-                    fieldOptions={{ showHelpText: true }}
                 />
-                {!searchGroup.unique && this.renderOrgUnitSelector()}
+                {searchGroup.id === 'main' && this.renderOrgUnitSelector()}
                 <div
                     className={classes.searchButtonContainer}
                 >
@@ -225,7 +229,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                     >
                         {searchButtonText}
                     </Button>
-                    {!searchGroup.unique && this.renderMinAttributesRequired()}
+                    {searchGroup.id === 'main' && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
             </div>

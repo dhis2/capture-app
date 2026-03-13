@@ -21,6 +21,7 @@ export class RulesEngine {
     variableService: VariableService;
     dateUtils: IDateUtils;
     userRoles!: Array<string>;
+    userGroups!: Array<string>;
     flags: Flag;
 
     constructor(
@@ -213,6 +214,10 @@ export class RulesEngine {
 
     setSelectedUserRoles(userRoles: Array<string>) {
         this.userRoles = userRoles;
+    }
+
+    setSelectedUserGroups(userGroups: Array<string>) {
+        this.userGroups = userGroups;
     }
 
     setFlags(flags: Flag) {

@@ -3,6 +3,7 @@ import type { CurrentSearchTerms } from './SearchForm/SearchForm.types';
 import type { SearchAttribute } from '../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 export type SearchGroups = Array<{
+    id?: string;
     searchForm: RenderFoundation;
     unique: boolean;
     formId: string;

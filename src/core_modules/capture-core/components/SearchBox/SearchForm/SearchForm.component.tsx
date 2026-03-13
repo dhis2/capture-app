@@ -247,7 +247,6 @@ const SearchFormIndex = ({
                                                     }
                                                     formFoundation={searchForm}
                                                     id={formId}
-                                                    fieldOptions={{ showHelpText: true }}
                                                 />
                                             </div>
                                         </div>
@@ -280,7 +279,7 @@ const SearchFormIndex = ({
 
             {
                 searchGroupsForSelectedScope
-                    .filter(searchGroup => !searchGroup.unique)
+                    .filter(searchGroup => searchGroup.id === 'main')
                     .map(({
                         searchForm,
                         formId,
@@ -313,7 +312,6 @@ const SearchFormIndex = ({
                                                     formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
-                                                    fieldOptions={{ showHelpText: true }}
                                                 />
                                             </div>
                                         </div>

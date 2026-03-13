@@ -19,6 +19,7 @@ export class RuleEngine {
     outputConverter: IConvertOutputRulesEffectsValue;
     valueProcessor: ValueProcessor;
     userRoles!: Array<string>;
+    userGroups!: Array<string>;
     flags: Flag;
 
     constructor(
@@ -58,6 +59,7 @@ export class RuleEngine {
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
             selectedUserRoles: selectedUserRoles || this.userRoles,
+            selectedUserGroups: this.userGroups,
         });
         const enrollment = selectedEnrollment ?
             inputBuilder.buildEnrollment({
@@ -100,6 +102,10 @@ export class RuleEngine {
 
     setSelectedUserRoles(userRoles: Array<string>) {
         this.userRoles = userRoles;
+    }
+
+    setSelectedUserGroups(userGroups: Array<string>) {
+        this.userGroups = userGroups;
     }
 
     setFlags(flags: Flag) {
