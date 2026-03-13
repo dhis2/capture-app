@@ -1,3 +1,10 @@
+## [105.11.1](https://github.com/dhis2/capture-app/compare/v105.11.0...v105.11.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21044][DHIS2-21045] Minimum Search Characters validation error ([#4473](https://github.com/dhis2/capture-app/issues/4473)) ([115ce1c](https://github.com/dhis2/capture-app/commit/115ce1c432327624a0402714548caf0f09e13fca))
+
 # [105.11.0](https://github.com/dhis2/capture-app/compare/v105.10.0...v105.11.0) (2026-03-12)
 
 
