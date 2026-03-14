@@ -4,6 +4,21 @@ import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
+const rangeToBaseType: Record<string, string> = {
+    [dataElementTypes.NUMBER_RANGE]: dataElementTypes.NUMBER,
+    [dataElementTypes.INTEGER_RANGE]: dataElementTypes.INTEGER,
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: dataElementTypes.INTEGER_POSITIVE,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: dataElementTypes.INTEGER_NEGATIVE,
+    [dataElementTypes.DATE_RANGE]: dataElementTypes.DATE,
+    [dataElementTypes.DATETIME_RANGE]: dataElementTypes.DATETIME,
+    [dataElementTypes.TIME_RANGE]: dataElementTypes.TIME,
+    // TODO: Uncomment this when DHIS2-12881 is merged
+    // [dataElementTypes.PERCENTAGE_RANGE]: dataElementTypes.PERCENTAGE,
+};
+
+const getBaseType = (type: string): string => rangeToBaseType[type] ?? type;
+
 const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
     [
         {
@@ -89,29 +104,33 @@ const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     return getDataValuesMetaDataConfig(dataElements);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
     attributes.map(({
         id,
         displayInReports,
-        type,
+        type: searchType,
         name,
         formName,
         optionSet,
         searchable,
         unique,
         searchOperator,
-        minCharactersToSearch }) => ({
-        id,
-        visible: displayInReports,
-        type,
-        header: formName || name,
-        options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-        multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
-        filterHidden: !(orgUnitId || searchable || unique),
-        unique: Boolean(unique),
-        searchOperator,
-        minCharactersToSearch,
-    }));
+        minCharactersToSearch }) => {
+        const type = getBaseType(searchType) as typeof dataElementTypes[keyof typeof dataElementTypes];
+        return {
+            id,
+            visible: displayInReports,
+            type,
+            header: formName || name,
+            options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
+            multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
+            filterHidden: !(orgUnitId || searchable || unique),
+            unique: Boolean(unique),
+            searchOperator,
+            minCharactersToSearch,
+        };
+    });
 
 const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> =>
     dataElements.map(({ id, displayInReports, type, name, formName, optionSet }) => ({
