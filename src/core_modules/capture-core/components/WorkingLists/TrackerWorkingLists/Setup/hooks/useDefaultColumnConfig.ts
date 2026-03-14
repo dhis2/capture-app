@@ -4,21 +4,6 @@ import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
-const rangeToBaseType: Record<string, string> = {
-    [dataElementTypes.NUMBER_RANGE]: dataElementTypes.NUMBER,
-    [dataElementTypes.INTEGER_RANGE]: dataElementTypes.INTEGER,
-    [dataElementTypes.INTEGER_POSITIVE_RANGE]: dataElementTypes.INTEGER_POSITIVE,
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
-    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: dataElementTypes.INTEGER_NEGATIVE,
-    [dataElementTypes.DATE_RANGE]: dataElementTypes.DATE,
-    [dataElementTypes.DATETIME_RANGE]: dataElementTypes.DATETIME,
-    [dataElementTypes.TIME_RANGE]: dataElementTypes.TIME,
-    // TODO: Uncomment this when DHIS2-12881 is merged
-    // [dataElementTypes.PERCENTAGE_RANGE]: dataElementTypes.PERCENTAGE,
-};
-
-const getBaseType = (type: string): string => rangeToBaseType[type] ?? type;
-
 const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
     [
         {
@@ -104,31 +89,46 @@ const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     return getDataValuesMetaDataConfig(dataElements);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
-    attributes.map(({
-        id,
-        displayInReports,
-        type: searchType,
-        name,
-        formName,
-        optionSet,
-        searchable,
-        unique,
-        searchOperator,
-        minCharactersToSearch }) => {
-        const type = getBaseType(searchType) as typeof dataElementTypes[keyof typeof dataElementTypes];
+type SearchFilterMeta = { searchOperator?: string; minCharactersToSearch?: number };
+
+const buildSearchFilterMetaById = (program: TrackerProgram): Map<string, SearchFilterMeta> => {
+    const entries = program.searchGroups.flatMap(group =>
+        group.searchForm.getElements().map(el => [
+            el.id,
+            { searchOperator: el.searchOperator, minCharactersToSearch: el.minCharactersToSearch } as SearchFilterMeta,
+        ]),
+    );
+    return new Map(entries as [string, SearchFilterMeta][]);
+};
+
+const getTEIMetaDataConfig = (
+    attributes: Array<any>,
+    orgUnitId: string | null | undefined,
+    searchFilterMetaById: Map<string, SearchFilterMeta>,
+): Array<MetadataColumnConfig> =>
+    attributes.map((attribute) => {
+        const {
+            id,
+            displayInReports,
+            type,
+            name,
+            formName,
+            optionSet,
+            searchable,
+            unique,
+        } = attribute;
+        const filterMeta = searchFilterMetaById.get(id);
         return {
             id,
             visible: displayInReports,
             type,
             header: formName || name,
-            options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
+            options: optionSet?.options?.map(({ text, value }) => ({ text, value })),
             multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
             filterHidden: !(orgUnitId || searchable || unique),
             unique: Boolean(unique),
-            searchOperator,
-            minCharactersToSearch,
+            searchOperator: filterMeta?.searchOperator ?? attribute.searchOperator,
+            minCharactersToSearch: filterMeta?.minCharactersToSearch ?? attribute.minCharactersToSearch,
         };
     });
 
@@ -149,14 +149,14 @@ export const useDefaultColumnConfig = (
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs =>
     useMemo(() => {
-        const { stages } = program;
-        const attributes = program.searchGroups.flatMap(group => group.searchForm.getElements());
+        const { attributes, stages } = program;
+        const searchFilterMetaById = buildSearchFilterMetaById(program);
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
 
         const defaultColumns = [
             ...getMainConfig(hasDisplayInReportsAttributes),
-            ...getTEIMetaDataConfig(attributes, orgUnitId),
+            ...getTEIMetaDataConfig(attributes, orgUnitId, searchFilterMetaById),
         ];
 
         if (programStageId && programStage) {
