@@ -546,11 +546,10 @@ When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
-// Filters that live under STAGE FILTERS (program stage Birth): open main More filters → Program stage → Birth → Apply, then use "More filters" in STAGE FILTERS (eq(1))
-const BIRTH_STAGE_FILTER_NAMES = ['Birth certificate', 'BCG dose', 'Apgar comment'];
+const BIRTH_STAGE_FILTER_NAMES = new Set(['Birth certificate', 'BCG dose', 'Apgar comment']);
 
 function openStageFilterMenu(filterName) {
-    const isBirthStageFilter = BIRTH_STAGE_FILTER_NAMES.includes(filterName);
+    const isBirthStageFilter = BIRTH_STAGE_FILTER_NAMES.has(filterName);
     if (isBirthStageFilter) {
         const isFirstBirthStageFilter = filterName === 'Birth certificate';
         if (isFirstBirthStageFilter) {
