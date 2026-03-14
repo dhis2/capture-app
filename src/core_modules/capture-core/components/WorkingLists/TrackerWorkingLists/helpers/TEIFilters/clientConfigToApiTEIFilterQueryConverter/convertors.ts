@@ -22,8 +22,8 @@ const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: stri
 };
 
 const getNumericFilter = (filter: NumericFilterData) => ({
-    ge: filter.ge ? filter.ge.toString() : undefined,
-    le: filter.le ? filter.le.toString() : undefined,
+    ge: filter.ge?.toString() ?? undefined,
+    le: filter.le?.toString() ?? undefined,
 });
 
 const getTimeFilter = (filter: TimeFilterData) => ({

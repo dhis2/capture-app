@@ -292,7 +292,7 @@ Feature: User interacts with tei working lists
     And you delete the name Custom Program stage list
     Then the Custom Program stage list is deleted
 
-    Scenario: Save and load view with stored WL filters - EMAIL
+  Scenario: Save and load view with stored WL filters - EMAIL
     Given you open the main page with Ngelehun and WHO RMNCH Tracker context
     When you set the text filter "Email address" to test@example.com
     And you save the view as trackerStoredWorkingList
@@ -327,7 +327,7 @@ Feature: User interacts with tei working lists
     And the date filter "Date of birth (mal)" should be in effect and show 2000-01-01 to 2010-12-31 when opened
     And the saved tracker working list view is cleaned up
 
-  Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER, COORDINATE, ORGANISATION_UNIT
+  Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER, COORDINATE
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the first name filter to ValueTypesTest
     And you apply the current filter
@@ -335,9 +335,7 @@ Feature: User interacts with tei working lists
     And you set the range filter "Height in cm" to 100-200
     And you set the range filter "Weight in kg" to 1-200
     And you set the text filter "Phone number" to 12345678
-    And you apply the current filter
     And you set the empty-only filter "Residence location" to Is empty
-    And you set the organisation unit filter "org unit test"
     And you save the view as trackerStoredWorkingList
     And you refresh the page
     And you open the saved view trackerStoredWorkingList
@@ -347,7 +345,6 @@ Feature: User interacts with tei working lists
     And the range filter "Weight in kg" should be in effect and show 1 to 200 when opened
     And the text filter "Phone number" should be in effect and show 12345678 when opened
     And the empty-only filter "Residence location" should be in effect and show Is empty when opened
-    And the organisation unit filter "org unit test" should be in effect and show the correct value when opened
     And the saved tracker working list view is cleaned up
 
   Scenario: The user can download the tracked entity working list

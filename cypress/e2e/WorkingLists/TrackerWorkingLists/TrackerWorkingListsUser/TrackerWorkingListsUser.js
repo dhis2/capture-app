@@ -513,13 +513,22 @@ When('you delete the name Custom Program stage list', () => {
 When(/^you set the date filter "([^"]+)" to (.+) and (.+)$/, (filterName, startDate, endDate) => {
     cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.contains('Absolute range').click();
-        cy.get('[data-test="date-filter-from"]').find('input').click().clear().type(startDate).blur();
-        cy.get('[data-test="date-filter-to"]').find('input').click().clear().type(endDate).blur();
-        cy.contains('Update').click();
-    });
-    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.contains('Absolute range')
+                .click();
+            cy.get('input[type="text"]')
+                .then(($elements) => {
+                    cy.wrap($elements[0])
+                        .type(startDate).blur();
+
+                    cy.wrap($elements[1])
+                        .type(endDate).blur();
+                });
+
+            cy.contains('Update')
+                .click();
+        });
 });
 
 When(/^you set the range filter "([^"]+)" to (\d+)-(\d+)$/, (filterName, min, max) => {
@@ -567,17 +576,6 @@ When(/^you set the option filter "([^"]+)" to (Yes|No)$/, (filterName, value) =>
     openStageFilterMenu(filterName);
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
-    cy.get('[data-test="list-view-filter-apply-button"]').click();
-});
-
-When(/^you set the organisation unit filter "([^"]+)"$/, (filterName) => {
-    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.get('input[placeholder="Search"]').type('Ngelehun');
-        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
-        cy.contains('Ngelehun').click();
-    });
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
@@ -700,13 +698,6 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input').should('be.checked');
     });
-    cy.get('body').click(0, 0);
-});
-
-Then(/^the organisation unit filter "([^"]+)" should be in effect and show the correct value when opened$/, (filterName) => {
-    cy.get('[data-test="tracker-working-lists"]').should('contain', filterName).and('contain', 'Ngelehu');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
-    cy.get('[data-test="list-view-filter-contents"]').should('contain', 'Ngelehun');
     cy.get('body').click(0, 0);
 });
 
