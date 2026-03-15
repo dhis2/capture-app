@@ -44,8 +44,8 @@ const getOrgUnitFilter = (filter: ApiDataFilterOrgUnit): OrgUnitFilterData => ({
 });
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
-    ge: filter.ge != null ? Number(filter.ge) : undefined,
-    le: filter.le != null ? Number(filter.le) : undefined,
+    ge: filter.ge ? Number(filter.ge) : undefined,
+    le: filter.le ? Number(filter.le) : undefined,
 });
 
 const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData => ({
