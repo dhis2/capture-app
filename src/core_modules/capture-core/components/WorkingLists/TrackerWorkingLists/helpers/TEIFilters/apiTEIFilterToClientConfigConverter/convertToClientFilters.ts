@@ -35,25 +35,16 @@ const getTextFilter = (
     return value ? { value } : undefined;
 };
 
-const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | undefined => {
-    if (filter.ge || filter.le) {
-        return {
-            ge: Number(filter.ge),
-            le: Number(filter.le),
-        };
-    }
-    return undefined;
-};
+const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | undefined => ({
+    ge: Number(filter?.ge) ?? undefined,
+    le: Number(filter?.le) ?? undefined,
+});
 
-const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined => {
-    if (filter.ge || filter.le) {
-        return {
-            ge: filter.ge ?? undefined,
-            le: filter.le ?? undefined,
-        };
-    }
-    return undefined;
-};
+const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined => ({
+    ge: filter?.ge ?? undefined,
+    le: filter?.le ?? undefined,
+});
+
 
 // Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
 const getBooleanFilter = (filter: ApiDataFilterBoolean): any => {
