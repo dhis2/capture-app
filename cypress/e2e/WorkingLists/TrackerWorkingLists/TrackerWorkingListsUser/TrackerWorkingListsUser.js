@@ -581,13 +581,10 @@ const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
 function openStageFilterMenu(filterName) {
     const isBirthStageFilter = BIRTH_STAGE_FILTER_NAMES.has(filterName);
     if (isBirthStageFilter) {
-        const isFirstBirthStageFilter = filterName === 'Birth certificate';
-        if (isFirstBirthStageFilter) {
-            cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
-            cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
-            cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
-            cy.get('[data-test="list-view-filter-apply-button"]').click();
-        }
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+        cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
+        cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
+        cy.get('[data-test="list-view-filter-apply-button"]').click();
         cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
     } else {
         cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());

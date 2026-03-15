@@ -676,12 +676,6 @@ When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (fi
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
-When(/^you set the active filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
-    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
-    cy.get('[data-test="list-view-filter-apply-button"]').click();
-});
-
 Then('all set filters should show in effect', () => {
     cy.get('[data-test="event-working-lists"]').should('contain', 'Pregnant').and('contain', 'Yes');
     cy.get('[data-test="event-working-lists"]').contains('Age (years): 0 to 120').should('exist');

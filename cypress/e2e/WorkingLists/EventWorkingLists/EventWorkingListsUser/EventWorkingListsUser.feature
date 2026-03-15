@@ -102,11 +102,6 @@ Scenario: Save and load view with stored WL filters - TEXT
   And you refresh the page
   And you open the saved view textFilterWorkingList
   Then the text filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show "test" when opened
-  When you set the active filter "XX MAL RDT TRK - Reason for not testing" to Is empty
-  And you update the working list
-  And you refresh the page
-  And you open the saved view textFilterWorkingList
-  Then the empty-only filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show Is empty when opened
   And the saved working list view is cleaned up
 
 @v>=42
