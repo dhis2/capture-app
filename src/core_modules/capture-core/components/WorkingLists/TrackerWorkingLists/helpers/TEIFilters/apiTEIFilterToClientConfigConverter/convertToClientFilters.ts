@@ -36,8 +36,8 @@ const getTextFilter = (
 };
 
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | undefined => ({
-    ge: Number(filter?.ge) ?? undefined,
-    le: Number(filter?.le) ?? undefined,
+    ge: filter.ge != null ? Number(filter.ge) : undefined,
+    le: filter.le != null ? Number(filter.le) : undefined,
 });
 
 const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined => ({
