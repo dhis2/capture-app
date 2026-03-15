@@ -37,6 +37,10 @@ export type ApiDataFilterOptionSet = {
     in: string[],
 };
 
+export type ApiDataFilterOrgUnit = {
+    eq: string,
+};
+
 type ApiAttributeFilterCommon = {
     attribute: string,
 };
@@ -70,5 +74,6 @@ export type ApiDataFilter = (
     | ApiDataFilterTrueOnly
     | ApiDataFilterDate
     | ApiDataFilterOptionSet
+    | ApiDataFilterOrgUnit
 ) &
     (ApiDataFilterCommon & ApiAttributeFilterCommon);

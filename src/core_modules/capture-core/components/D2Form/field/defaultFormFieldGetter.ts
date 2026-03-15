@@ -66,6 +66,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.TIME]: getTextFieldConfig,
     [dataElementTypes.TIME_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
+    [dataElementTypes.PERCENTAGE_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.URL]: getTextFieldConfig,
     [dataElementTypes.AGE]: (metaData: any, options: any, querySingleResource: QuerySingleResource) =>
         getAgeFieldConfig(metaData, options, querySingleResource),

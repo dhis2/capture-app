@@ -32,17 +32,19 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
 
     if (date) {
         return (
-            isValueBiggerThanMinCharactersToSearch(from.date, minCharactersToSearch) &&
-            isValueBiggerThanMinCharactersToSearch(to.date, minCharactersToSearch)
+            isValueBiggerThanMinCharactersToSearch(from?.date, minCharactersToSearch) &&
+            isValueBiggerThanMinCharactersToSearch(to?.date, minCharactersToSearch)
         );
     }
 
     return true;
 };
 
-// eslint-disable-next-line complexity
+const shouldSkipMinCharsValidation = (value: any) =>
+    value === undefined || value === null || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
+
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
-    if (value === undefined || value === null || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER) {
+    if (shouldSkipMinCharsValidation(value)) {
         return true;
     }
 

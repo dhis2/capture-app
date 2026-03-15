@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import { withButtons } from './withButtons';
 import { withMinCharsToSearchValidation } from './withMinCharsToSearchValidation';
@@ -10,7 +11,12 @@ import {
     TrueOnlyFilter,
     BooleanFilter,
     DateFilter,
+    DateTimeFilter,
+    TimeFilter,
     OptionSetFilter,
+    EmptyOnlyFilter,
+    OrgUnitFilter,
+    UsernameFilter,
 } from '../../../FiltersForTypes';
 import type { Props } from './filterSelectorContents.types';
 
@@ -25,19 +31,47 @@ const OptionSetFilterWithButtons = withButtons()(
 );
 
 const selectorContentsForTypes = {
-    [filterTypesObject.TEXT]: TextFilter,
-    [filterTypesObject.NUMBER]: NumericFilter,
-    [filterTypesObject.INTEGER]: NumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
-    [filterTypesObject.DATE]: DateFilter,
-    [filterTypesObject.BOOLEAN]: BooleanFilter,
-    [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+    [filterTypesObject.AGE]: DateFilter,
     [filterTypesObject.ASSIGNEE]: AssigneeFilter,
+    [filterTypesObject.BOOLEAN]: BooleanFilter,
+    [filterTypesObject.COORDINATE]: EmptyOnlyFilter,
+    [filterTypesObject.DATE]: DateFilter,
+    [filterTypesObject.DATETIME]: DateTimeFilter,
+    [filterTypesObject.TIME]: TimeFilter,
+    [filterTypesObject.EMAIL]: TextFilter,
+    [filterTypesObject.FILE_RESOURCE]: EmptyOnlyFilter,
+    [filterTypesObject.IMAGE]: EmptyOnlyFilter,
+    [filterTypesObject.INTEGER]: NumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
+    [filterTypesObject.LONG_TEXT]: TextFilter,
+    [filterTypesObject.NUMBER]: NumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: OrgUnitFilter,
+    [filterTypesObject.PERCENTAGE]: NumericFilter,
+    [filterTypesObject.PHONE_NUMBER]: TextFilter,
+    [filterTypesObject.TEXT]: TextFilter,
+    [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+    [filterTypesObject.URL]: TextFilter,
+    [filterTypesObject.USERNAME]: UsernameFilter,
 };
 
-const useContents = ({ filterValue, classes, type, options, multiValueFilter, isRemovable, ...passOnProps }) => {
+const EMPTY_ONLY_FILTER_TYPES = new Set([
+    filterTypesObject.COORDINATE,
+    filterTypesObject.FILE_RESOURCE,
+    filterTypesObject.IMAGE,
+]);
+
+const useContents = ({
+    filterValue,
+    classes,
+    type,
+    options,
+    multiValueFilter,
+    isRemovable,
+    emptyValueFilterSupported,
+    ...passOnProps
+}) => {
     const [disabledUpdate, setUpdateDisabled] = useState(true);
     const [FilterContents, ofTypeOptionSet] = useMemo(() => {
         if (options && options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
@@ -47,6 +81,10 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, is
         const TypeFilter = selectorContentsForTypes[type];
         return [withButtons()(withMinCharsToSearchValidation()(TypeFilter)), false];
     }, [type, options]);
+
+    if (EMPTY_ONLY_FILTER_TYPES.has(type) && !emptyValueFilterSupported) {
+        return null;
+    }
 
     if (ofTypeOptionSet) {
         return (
@@ -85,8 +123,19 @@ const FilterSelectorContentsPlain = ({
     isRemovable,
     ...passOnProps
 }: Props & WithStyles<typeof getStyles>) => {
+    const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
     const contents =
-        useContents({ classes, filterValue, type, options, multiValueFilter, isRemovable, ...passOnProps });
+        useContents({
+            classes,
+            emptyValueFilterSupported,
+            filterValue,
+            type,
+            options,
+            multiValueFilter,
+            isRemovable,
+            ...passOnProps,
+        });
+
     return (
         <div className={classes.container} data-test="list-view-filter-contents">
             {contents}

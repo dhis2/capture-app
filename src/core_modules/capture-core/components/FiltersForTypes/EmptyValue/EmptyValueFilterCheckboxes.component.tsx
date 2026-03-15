@@ -13,6 +13,7 @@ export const EmptyValueFilterCheckboxes = ({
     value,
     onEmptyChange,
     onNotEmptyChange,
+    showDivider = true,
 }: EmptyValueFilterCheckboxesProps) => {
     const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
 
@@ -32,7 +33,7 @@ export const EmptyValueFilterCheckboxes = ({
                 checked={value === NOT_EMPTY_VALUE_FILTER}
                 onChange={onNotEmptyChange}
             />
-            <MenuDivider />
+            {showDivider && <MenuDivider />}
         </div>
     );
 };

@@ -108,6 +108,8 @@ const OrgUnitFieldPlain = (props: Props) => {
         }
     }, [refetchOrg, searchText]);
 
+    const selectedItems = selected ? [selected] : undefined;
+
     const renderOrgUnitTree = () => {
         if (searchText?.length) {
             return (<OrgUnitTree
@@ -115,7 +117,7 @@ const OrgUnitFieldPlain = (props: Props) => {
                 onSelectClick={onSelectClick}
                 ready={ready}
                 treeKey={key}
-                selected={selected}
+                selected={selectedItems}
             />);
         }
         return (<OrgUnitTree
@@ -123,7 +125,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             onSelectClick={onSelectClick}
             ready={ready}
             treeKey={'initial'}
-            selected={selected}
+            selected={selectedItems}
             previousOrgUnitId={previousOrgUnitId}
         />);
     };

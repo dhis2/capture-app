@@ -114,6 +114,7 @@ const valueConvertersForType = {
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
+    [dataElementTypes.PERCENTAGE_RANGE]: value => convertRangeForDisplay((v: number) => `${stringifyNumber(v)} %`, value),
     [dataElementTypes.POLYGON]: convertPolygonForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,
     [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(undefined, value),

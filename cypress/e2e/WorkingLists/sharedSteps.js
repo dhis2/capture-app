@@ -28,25 +28,30 @@ Then('the status filter button should show that the active filter is in effect',
         .should('exist');
 });
 
-When('you set the age filter to 10-20', () => {
+When(/^you set the age filter to (\d+)-(\d+)$/, (min, max) => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years)')
-        .click();
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Age (years)').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input[placeholder="Min"]')
-        .type('10')
+        .type(min)
         .blur();
 
     cy.get('[data-test="list-view-filter-contents"]')
         .find('input[placeholder="Max"]')
-        .type('20')
+        .type(max)
         .blur();
 });
 
-Then('the age filter button should show that the filter is in effect', () => {
+Then(/^the age filter button should show (\d+) to (\d+) in effect$/, (min, max) => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 10 to 20')
+        .contains(`Age (years): ${min} to ${max}`)
         .should('exist');
 });
 
@@ -212,4 +217,44 @@ When(/^you click the bulk (.*) button$/, (text) => {
         .find('[data-test="dhis2-uicore-button"]')
         .contains(text, { matchCase: false })
         .click();
+});
+
+When('you refresh the page', () => {
+    cy.reload();
+});
+
+When(/^you open the saved view (.+)$/, (viewName) => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .contains(viewName)
+        .click();
+});
+
+Then(/^you can load the view with the name ?(.*)$/, (name) => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains(name).click();
+        });
+});
+
+When('you change the sharing settings', () => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.get('[placeholder="Search"]').type('Boateng');
+    cy.contains('Kevin Boateng').click();
+    cy.contains('Choose a level').click();
+    cy.contains('View and edit').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+});
+
+Then('you see the new sharing settings', () => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.get('[data-test="sharing-dialog"]').within(() => {
+        cy.contains('Kevin Boateng').should('exist');
+        cy.contains('Close').click();
+    });
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Delete view').click();
+    cy.contains('Confirm').click();
 });
