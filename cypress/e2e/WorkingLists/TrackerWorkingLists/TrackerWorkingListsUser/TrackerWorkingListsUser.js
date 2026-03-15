@@ -60,6 +60,23 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
         .click();
 });
 
+Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context', () => {
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&selectedTemplateId=WSGAb5XwJ3Y-default');
+
+    cy.get('[data-test="tracker-working-lists"]')
+        .within(() => cy.contains('More filters').click());
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Care at birth')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
@@ -477,13 +494,6 @@ When('you update the list with the name Custom Program stage list', () => {
     cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
 });
 
-Then(/^you can load the view with the name ?(.*)/, (name) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .within(() => {
-            cy.contains(name).click();
-        });
-});
-
 When('you delete the name My custom list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -511,7 +521,11 @@ When('you delete the name Custom Program stage list', () => {
 });
 
 When(/^you set the date filter "([^"]+)" to (.+) and (.+)$/, (filterName, startDate, endDate) => {
-    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    if (CARE_AT_BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    } else {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    }
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
@@ -531,8 +545,12 @@ When(/^you set the date filter "([^"]+)" to (.+) and (.+)$/, (filterName, startD
         });
 });
 
-When(/^you set the range filter "([^"]+)" to (\d+)-(\d+)$/, (filterName, min, max) => {
-    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+When(/^you set the range filter "([^"]+)" to (-?\d+)-(-?\d+)$/, (filterName, min, max) => {
+    if (CARE_AT_BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    } else {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    }
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
     cy.get('[data-test="list-view-filter-contents"]').find('input[placeholder="Min"]').type(min).blur();
     cy.get('[data-test="list-view-filter-contents"]').find('input[placeholder="Max"]').type(max).blur();
@@ -547,6 +565,18 @@ When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
 });
 
 const BIRTH_STAGE_FILTER_NAMES = new Set(['Birth certificate', 'BCG dose', 'Apgar comment']);
+
+// Care at birth program stage data elements: INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, ORGANISATION_UNIT, DATE
+const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
+    'WHOMCH Fetal heart rate on admission',
+    'WHOMCH Estimated blood loss (ml)',
+    'WHOMCH Hospital / Birth clinic',
+    'WHOMCH Body temperature',
+    'WHOMCH Haematocrit value',
+    'WHOMCH Heart rate',
+    'WHOMCH Respiratory rate',
+    'WHOMCH Date of induction of labor',
+]);
 
 function openStageFilterMenu(filterName) {
     const isBirthStageFilter = BIRTH_STAGE_FILTER_NAMES.has(filterName);
@@ -576,6 +606,16 @@ When(/^you set the option filter "([^"]+)" to (Yes|No)$/, (filterName, value) =>
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When(/^you set the program stage organisation unit filter "([^"]+)" to "([^"]+)"$/, (filterName, searchTerm) => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.get('input[placeholder="Search"]').type(searchTerm);
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains(searchTerm).click();
+    });
 });
 
 When(/^you save the view as (.*)$/, (name) => {
@@ -624,14 +664,6 @@ When(/^you save the program stage view as (.*)$/, (name) => {
     cy.wait('@newTrackerFilterResult', { timeout: 30000 });
 });
 
-When('you refresh the page', () => {
-    cy.reload();
-});
-
-When(/^you open the saved view (.+)$/, (viewName) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]').contains(viewName).click();
-});
-
 // Program stage: chip click can navigate to default; open saved view by URL with template id from save response
 When(/^you open the saved program stage view (.+)$/, (viewName) => {
     cy.get('@newTrackerFilterResult').then((result) => {
@@ -672,7 +704,7 @@ Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when 
     cy.get('body').click(0, 0);
 });
 
-Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) when opened$/, (filterName, min, max) => {
+Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+) when opened$/, (filterName, min, max) => {
     cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${min} to ${max}`).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
@@ -697,6 +729,16 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input').should('be.checked');
     });
+    cy.get('body').click(0, 0);
+});
+
+// Chip label truncates the value (max 7 chars); assert chip shows filter name + truncated value, then verify full value when opened
+Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
+    const truncatedPrefix = expectedOrgUnitName.length > 7 ? expectedOrgUnitName.substring(0, 7) : expectedOrgUnitName;
+    const chipLabel = `${filterName}: ${truncatedPrefix}`;
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').should('contain', expectedOrgUnitName);
     cy.get('body').click(0, 0);
 });
 
@@ -726,41 +768,6 @@ Then(/^the ?(.*) is deleted/, (name) => {
         .within(() => {
             cy.contains(name).should('not.exist');
         });
-});
-
-When('you change the sharing settings', () => {
-    cy.get('[data-test="list-view-menu-button"]').click();
-    cy.contains('Share view').click();
-    cy.get('[placeholder="Search"]')
-        .type('Boateng');
-
-    cy.contains('Kevin Boateng').click();
-    cy.contains('Choose a level').click();
-    cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
-});
-
-Then('you see the new sharing settings', () => {
-    cy.get('[data-test="list-view-menu-button"]').click();
-    cy.contains('Share view').click();
-
-    cy.get('[data-test="sharing-dialog"]').within(() => {
-        cy.contains('Kevin Boateng')
-            .should('exist');
-
-        cy.contains('Close')
-            .click();
-    });
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Delete view')
-        .click();
-
-    cy.contains('Confirm')
-        .click();
 });
 
 When('you create a copy of the working list',

@@ -314,17 +314,36 @@ Feature: User interacts with tei working lists
     And the text filter "Apgar comment" should be in effect and show some long text comment when opened
     And the saved tracker working list view is cleaned up
 
-  Scenario: Save and load view with stored WL filters - INTEGER_ZERO_OR_POSITIVE, TRUE_ONLY, DATE
+  Scenario: Save and load view with stored WL filters - Care at birth INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, DATE, ORGANISATION_UNIT
+    Given you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context
+    When you set the range filter "WHOMCH Fetal heart rate on admission" to 60-180
+    And you set the range filter "WHOMCH Estimated blood loss (ml)" to 0-500
+    And you set the range filter "WHOMCH Body temperature" to 36-40
+    And you set the range filter "WHOMCH Haematocrit value" to 0-100
+    And you set the range filter "WHOMCH Heart rate" to 60-120
+    And you set the range filter "WHOMCH Respiratory rate" to -20--5
+    And you set the date filter "WHOMCH Date of induction of labor" to 2000-01-01 and 2010-12-31
+    And you set the program stage organisation unit filter "WHOMCH Hospital / Birth clinic" to "Ngelehun"
+    And you save the program stage view as trackerStoredWorkingList
+    And you refresh the page
+    And you open the saved program stage view trackerStoredWorkingList
+    Then the range filter "WHOMCH Fetal heart rate on admission" should be in effect and show 60 to 180 when opened
+    And the range filter "WHOMCH Estimated blood loss (ml)" should be in effect and show 0 to 500 when opened
+    And the range filter "WHOMCH Body temperature" should be in effect and show 36 to 40 when opened
+    And the range filter "WHOMCH Haematocrit value" should be in effect and show 0 to 100 when opened
+    And the range filter "WHOMCH Heart rate" should be in effect and show 60 to 120 when opened
+    And the range filter "WHOMCH Respiratory rate" should be in effect and show -20 to -5 when opened
+    And the date filter "WHOMCH Date of induction of labor" should be in effect and show 2000-01-01 to 2010-12-31 when opened
+    And the program stage organisation unit filter "WHOMCH Hospital / Birth clinic" should be in effect and show "Ngelehun" when opened
+    And the saved tracker working list view is cleaned up
+
+  Scenario: Save and load view with stored WL filters - TRUE_ONLY
     Given you open the main page with Ngelehun and Malaria case diagnosis default template context
-    When you set the range filter "Age (years)" to 0-120
-    And you set the option filter "Date of birth (mal) is estimated" to Yes
-    And you set the date filter "Date of birth (mal)" to 2000-01-01 and 2010-12-31
+    When you set the option filter "Date of birth (mal) is estimated" to Yes
     And you save the view as trackerStoredWorkingList
     And you refresh the page
     And you open the saved view trackerStoredWorkingList
-    Then the range filter "Age (years)" should be in effect and show 0 to 120 when opened
-    And the option filter "Date of birth (mal) is estimated" should be in effect and show Yes when opened
-    And the date filter "Date of birth (mal)" should be in effect and show 2000-01-01 to 2010-12-31 when opened
+    Then the option filter "Date of birth (mal) is estimated" should be in effect and show Yes when opened
     And the saved tracker working list view is cleaned up
 
   Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER, COORDINATE

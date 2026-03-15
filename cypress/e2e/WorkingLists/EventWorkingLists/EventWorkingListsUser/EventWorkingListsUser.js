@@ -433,25 +433,6 @@ When('you create a copy of the working list', () => {
         .click();
 });
 
-When('you change the sharing settings', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Share view')
-        .click();
-    cy.get('[placeholder="Search"]')
-        .type('Boateng');
-
-    cy.contains('Kevin Boateng').click();
-    cy.contains('Choose a level').click();
-    cy.get('[data-test="dhis2-uicore-select-menu-menuwrapper"]')
-        .contains('View and edit').click({ force: true });
-
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
-});
-
-
 When('you update the working list', () => {
     cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
         .eq(0)
@@ -576,16 +557,6 @@ When(/^you save the view as (.*)$/, (name) => {
         .click();
 
     cy.wait('@newEventFilter', { timeout: 30000 }).as('newEventResult');
-});
-
-When('you refresh the page', () => {
-    cy.reload();
-});
-
-When(/^you open the saved view (.+)$/, (viewName) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains(viewName)
-        .click();
 });
 
 When('you set the Pregnant filter to Yes', () => {

@@ -218,3 +218,43 @@ When(/^you click the bulk (.*) button$/, (text) => {
         .contains(text, { matchCase: false })
         .click();
 });
+
+When('you refresh the page', () => {
+    cy.reload();
+});
+
+When(/^you open the saved view (.+)$/, (viewName) => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .contains(viewName)
+        .click();
+});
+
+Then(/^you can load the view with the name ?(.*)$/, (name) => {
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .within(() => {
+            cy.contains(name).click();
+        });
+});
+
+When('you change the sharing settings', () => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.get('[placeholder="Search"]').type('Boateng');
+    cy.contains('Kevin Boateng').click();
+    cy.contains('Choose a level').click();
+    cy.contains('View and edit').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+});
+
+Then('you see the new sharing settings', () => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Share view').click();
+    cy.get('[data-test="sharing-dialog"]').within(() => {
+        cy.contains('Kevin Boateng').should('exist');
+        cy.contains('Close').click();
+    });
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.contains('Delete view').click();
+    cy.contains('Confirm').click();
+});
