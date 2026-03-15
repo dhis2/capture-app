@@ -207,6 +207,7 @@ const structureFilters = (apiFilters: Array<any>, columns: ColumnsForConverter) 
         }
 
         acc.dataFilters.push(filter);
+        return acc;
     }, {
         dataFilters: [],
     });

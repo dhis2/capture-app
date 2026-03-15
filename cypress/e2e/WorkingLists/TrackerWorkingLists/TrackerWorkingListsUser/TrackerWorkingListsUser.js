@@ -594,6 +594,14 @@ function openStageFilterMenu(filterName) {
     }
 }
 
+When('you open the program stage More filters menu for Birth on the tracker working list', () => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+});
+
 When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
     openStageFilterMenu(filterName);
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());

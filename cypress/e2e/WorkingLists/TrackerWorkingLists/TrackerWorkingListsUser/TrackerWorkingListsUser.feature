@@ -301,6 +301,7 @@ Feature: User interacts with tei working lists
     Then the text filter "Email address" should be in effect and show test@example.com when opened
     And the saved tracker working list view is cleaned up
 
+  @v>=42
   Scenario: Save and load view with stored WL filters - FILE_RESOURCE, BOOLEAN, LONG_TEXT
     Given you open the main page with Ngelehun and child programme default template context
     When you set the empty-only filter "Birth certificate" to Is empty
@@ -311,6 +312,18 @@ Feature: User interacts with tei working lists
     And you open the saved program stage view trackerStoredWorkingList
     Then the empty-only filter "Birth certificate" should be in effect and show Is empty when opened
     And the option filter "BCG dose" should be in effect and show Yes when opened
+    And the text filter "Apgar comment" should be in effect and show some long text comment when opened
+    And the saved tracker working list view is cleaned up
+
+  @v<42
+  Scenario: Save and load view with stored WL filters - BOOLEAN, LONG_TEXT (no empty-only types)
+    Given you open the main page with Ngelehun and child programme default template context
+    When you set the option filter "BCG dose" to Yes
+    And you set the text filter "Apgar comment" to some long text comment
+    And you save the program stage view as trackerProgramStageNoEmpty
+    And you refresh the page
+    And you open the saved program stage view trackerProgramStageNoEmpty
+    Then the option filter "BCG dose" should be in effect and show Yes when opened
     And the text filter "Apgar comment" should be in effect and show some long text comment when opened
     And the saved tracker working list view is cleaned up
 
@@ -346,6 +359,7 @@ Feature: User interacts with tei working lists
     Then the option filter "Date of birth (mal) is estimated" should be in effect and show Yes when opened
     And the saved tracker working list view is cleaned up
 
+  @v>=42
   Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER, COORDINATE
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the first name filter to ValueTypesTest
@@ -365,6 +379,34 @@ Feature: User interacts with tei working lists
     And the text filter "Phone number" should be in effect and show 12345678 when opened
     And the empty-only filter "Residence location" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
+
+  @v<42
+  Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER (no empty-only types)
+    Given you open the main page with Ngelehun and TEI value types program context
+    When you set the first name filter to ValueTypesTest
+    And you apply the current filter
+    And you set the date filter "Age" to 1990-01-01 and 2010-12-31
+    And you set the range filter "Height in cm" to 100-200
+    And you set the range filter "Weight in kg" to 1-200
+    And you set the text filter "Phone number" to 12345678
+    And you save the view as trackerValueTypesNoEmpty
+    And you refresh the page
+    And you open the saved view trackerValueTypesNoEmpty
+    Then the text filter "First name" should be in effect and show ValueTypesTest when opened
+    And the date filter "Age" should be in effect and show 1990-01-01 to 2010-12-31 when opened
+    And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
+    And the range filter "Weight in kg" should be in effect and show 1 to 200 when opened
+    And the text filter "Phone number" should be in effect and show 12345678 when opened
+    And the saved tracker working list view is cleaned up
+
+  @v<42
+  Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE) are not visible in filter list - Tracker
+    Given you open the main page with Ngelehun and child programme default template context
+    When you open the program stage More filters menu for Birth on the tracker working list
+    Then the filter option "Birth certificate" should not appear in the More filters menu
+    And you open the main page with Ngelehun and TEI value types program context
+    When you open the More filters menu on the tracker working list
+    Then the filter option "Residence location" should not appear in the More filters menu
 
   Scenario: The user can download the tracked entity working list
     Given you open the main page with Ngelehun and child programe context

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
-import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
+import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject, EMPTY_ONLY_FILTER_TYPES } from '../filters.const';
 import { withButtons } from './withButtons';
 import { withMinCharsToSearchValidation } from './withMinCharsToSearchValidation';
 import {
@@ -55,12 +55,6 @@ const selectorContentsForTypes = {
     [filterTypesObject.URL]: TextFilter,
     [filterTypesObject.USERNAME]: UsernameFilter,
 };
-
-const EMPTY_ONLY_FILTER_TYPES = new Set([
-    filterTypesObject.COORDINATE,
-    filterTypesObject.FILE_RESOURCE,
-    filterTypesObject.IMAGE,
-]);
 
 const useContents = ({
     filterValue,

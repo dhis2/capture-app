@@ -258,3 +258,12 @@ Then('you see the new sharing settings', () => {
     cy.contains('Delete view').click();
     cy.contains('Confirm').click();
 });
+
+When(/^you open the More filters menu on the (event|tracker) working list$/, (listType) => {
+    const dataTest = listType === 'event' ? 'event-working-lists' : 'tracker-working-lists';
+    cy.get(`[data-test="${dataTest}"]`).within(() => cy.contains('More filters').click());
+});
+
+Then(/^the filter option "([^"]+)" should not appear in the More filters menu$/, (filterName) => {
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).should('not.exist'));
+});
