@@ -137,9 +137,9 @@ Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, 
   And you set the range filter "Weight in kg" to 1-200
   And you set the date filter
   And you set the organisation unit filter
-  And you save the view as valueTypesFilterWorkingListNoEmpty
+  And you save the view as valueTypesNoEmpty
   And you refresh the page
-  And you open the saved view valueTypesFilterWorkingListNoEmpty
+  And you open the saved view valueTypesNoEmpty
   Then the boolean filter should be in effect and show the correct value when opened
   And the range filter "Age (years)" should be in effect and show 0 to 120 when opened
   And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
