@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-16T14:06:49.982Z\n"
-"PO-Revision-Date: 2026-03-16T14:06:49.982Z\n"
+"POT-Creation-Date: 2026-03-16T17:51:11.399Z\n"
+"PO-Revision-Date: 2026-03-16T17:51:11.399Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -988,6 +988,9 @@ msgstr "Search {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Search by attributes"
 
+msgid "Search {{attributeName}}"
+msgstr "Search {{attributeName}}"
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Fill in at least {{count}} attribute to search"
@@ -1201,14 +1204,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Create saved list"
 
-msgid "Create new in another program"
-msgstr "Create new in another program"
+msgid "Create new in another program..."
+msgstr "Create new in another program..."
 
 msgid "Create new event"
 msgstr "Create new event"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
+
+msgid "Search..."
+msgstr "Search..."
 
 msgid "Select tracked entity type"
 msgstr "Select tracked entity type"

@@ -40,10 +40,12 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
                         {i18n.t('lat{{escape}} {{latitudeValue}}', {
                             escape: ':',
                             latitudeValue: coordinatePair[1],
+                            interpolation: { escapeValue: false },
                         })}<br />
                         {i18n.t('long{{escape}} {{longitudeValue}}', {
                             escape: ':',
                             longitudeValue: coordinatePair[0],
+                            interpolation: { escapeValue: false },
                         })}
                     </div>
                 ))}

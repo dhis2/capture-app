@@ -116,7 +116,10 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
 
     getUniqueSearchButtonText = (searchForm: any) => {
         const attributeName = searchForm.getElements()[0].formName;
-        return `${i18n.t('Search')} ${attributeName}`;
+        return i18n.t('Search {{attributeName}}', {
+            attributeName,
+            interpolation: { escapeValue: false },
+        });
     }
 
     renderOrgUnitSelector = () => (

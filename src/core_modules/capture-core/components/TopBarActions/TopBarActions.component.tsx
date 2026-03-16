@@ -53,7 +53,7 @@ const ActionButtonsPlain = ({
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
                                 dataTest="new-menuitem-one"
-                                label={`${i18n.t('Create new in another program')}...`}
+                                label={i18n.t('Create new in another program...')}
                                 onClick={() => { onNewClickWithoutProgramId(); }}
                                 suffix={null}
                             />
@@ -100,7 +100,7 @@ const ActionButtonsPlain = ({
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
-                                label={`${i18n.t('Search')}...`}
+                                label={i18n.t('Search...')}
                                 onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }}
                                 suffix={null}
                             />
