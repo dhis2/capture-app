@@ -91,6 +91,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.PERCENTAGE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
     [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForEdit, value),
     [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForEdit, value),
 };

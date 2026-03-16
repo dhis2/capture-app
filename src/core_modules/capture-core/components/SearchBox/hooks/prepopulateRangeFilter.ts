@@ -10,6 +10,7 @@ const RANGE_TYPES = [
     dataElementTypes.DATE_RANGE,
     dataElementTypes.DATETIME_RANGE,
     dataElementTypes.TIME_RANGE,
+    dataElementTypes.PERCENTAGE_RANGE,
 ];
 
 export const isEqualRangeValue = (value: any, type: any): boolean => {

@@ -1,6 +1,7 @@
 export { hasValue } from './compulsory.validator';
 export { isValidEmail } from './email.validator';
 export { isValidInteger } from './integer.validator';
+export { isValidIntegerInRange } from './integerRange.validator';
 export { isValidPositiveInteger } from './integerPositive.validator';
 export { isValidNegativeInteger } from './integerNegative.validator';
 export { isValidZeroOrPositiveInteger } from './integerZeroOrPositive.validator';

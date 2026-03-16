@@ -35,11 +35,11 @@ And active events that are assigned to anyone should be retrieved from the api
 And the list should display the events retrieved from the api
 And for an event program the page navigation should show that you are on the first page
 
-Scenario: Show only events where age is between 10 and 20 using the filter
+Scenario: Show only events where age (Positive or Zero Integer) is between 10 and 20 using the filter
 Given you open the main page with Ngelehun and malaria case context
 When you set the age filter to 10-20
 And you apply the current filter on the event working list
-Then the age filter button should show that the filter is in effect
+Then the age filter button should show 10 to 20 in effect
 And events where age is between 10 and 20 should be retrieved from the api
 And the list should display the events retrieved from the api
 And for an event program the page navigation should show that you are on the first page

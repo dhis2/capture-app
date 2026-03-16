@@ -34,6 +34,7 @@ const searchAttributeElementTypes = {
     [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
     [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
     [dataElementTypes.MULTI_TEXT]: dataElementTypes.TEXT,
+    [dataElementTypes.PERCENTAGE]: dataElementTypes.PERCENTAGE_RANGE,
 };
 
 

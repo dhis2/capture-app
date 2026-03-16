@@ -10,6 +10,7 @@ type PassOnProps = Readonly<{
     unique: boolean;
     searchOperator?: string;
     minCharactersToSearch?: number;
+    onClearValue?: () => void;
 }>;
 
 export type Props = Readonly<{
