@@ -1,3 +1,10 @@
+## [105.11.5](https://github.com/dhis2/capture-app/compare/v105.11.4...v105.11.5) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-21129] Working list table use range type after switch to search groups ([#4479](https://github.com/dhis2/capture-app/issues/4479)) ([f5c5755](https://github.com/dhis2/capture-app/commit/f5c57555eb184ce89eb18706b656e9be7e59389d))
+
 ## [105.11.4](https://github.com/dhis2/capture-app/compare/v105.11.3...v105.11.4) (2026-03-16)
 
 
