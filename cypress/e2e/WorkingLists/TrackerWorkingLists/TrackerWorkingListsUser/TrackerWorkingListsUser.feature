@@ -204,10 +204,12 @@ Feature: User interacts with tei working lists
     Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
     And you set the event visit date to Today
     And you apply the current filter
-    And you set the date filter "Age" to 1990-01-01 and 2010-12-31
-    And you set the range filter "Height in cm" to 100-200
-    And you set the range filter "Weight in kg" to 1-200
-    And you set the text filter "Phone number" to 12345678
+    Then the working list is empty
+
+  Scenario: The user can filter the Foci response assigned events
+    Given you open the main page with Ngelehun and Malaria focus investigation context
+    When you open the program stage filters from the more filters dropdown menu
+    And you select the Foci response program stage
     And you apply the current filter
     And you set the assginee filter to Anyone
     And you apply the current filter
