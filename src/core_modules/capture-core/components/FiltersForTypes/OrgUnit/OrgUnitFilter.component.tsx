@@ -13,9 +13,7 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
 
     handleOrgUnitChange = (value: OrgUnitValue | null) => {
         this.props.onCommitValue(value);
-        if (value) {
-            this.props.onUpdate(value);
-        }
+        this.props.onUpdate(value);
     };
 
     render() {
