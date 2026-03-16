@@ -29,7 +29,7 @@ export class DataElement {
     _optionSet!: OptionSet | null;
     _displayInForms = true;
     _displayInReports = true;
-    _minCharactersToSearch!: number | undefined;
+    _minCharactersToSearch: number | undefined;
     _icon?: Icon;
     _unique!: Unique | null;
     _inherit!: boolean;
@@ -37,7 +37,7 @@ export class DataElement {
     _url!: string | null;
     _attributeValues!: CachedAttributeValue[];
     _section!: Section | null;
-    _searchOperator!: SearchOperator;
+    _searchOperator: SearchOperator | undefined;
 
     // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
@@ -88,10 +88,10 @@ export class DataElement {
         return this._shortName;
     }
 
-    set searchOperator(searchOperator: SearchOperator) {
+    set searchOperator(searchOperator: SearchOperator | undefined) {
         this._searchOperator = searchOperator;
     }
-    get searchOperator(): SearchOperator {
+    get searchOperator(): SearchOperator | undefined {
         return this._searchOperator;
     }
 
