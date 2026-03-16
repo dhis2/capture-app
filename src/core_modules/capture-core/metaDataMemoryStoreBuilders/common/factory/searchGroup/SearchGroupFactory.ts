@@ -164,6 +164,9 @@ export class SearchGroupFactory {
             { supportedAttributes: [] as SearchAttribute[], unsupportedAttributes: [] as SearchAttribute[] },
         );
 
+        console.log('supportedAttributes', supportedAttributes);
+        console.log('unsupportedAttributes', unsupportedAttributes);
+
         const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(supportedAttributes);
         searchGroup.unsupportedAttributes = unsupportedAttributes;
