@@ -11,6 +11,7 @@ export type ContainerProps = {
     suggestedProgramId: string;
     teiId: string;
     onSave: (teiPayload: any) => void;
+    programId: string;
 } & SharedProps;
 
 export type ComponentProps = {

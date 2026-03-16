@@ -2,18 +2,18 @@
 # Wanda <wanda@frontlineaids.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Nadiia <semchuk@aph.org.ua>, 2025
-# Nancy Espinoza, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
 # Éva Tamási, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
+# Nancy Espinoza, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026\n"
+"Last-Translator: Nancy Espinoza, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -1175,7 +1175,7 @@ msgstr ""
 "кнопки нижче."
 
 msgid "Create saved list"
-msgstr ""
+msgstr "Створити список"
 
 msgid "Create new in another program"
 msgstr "Створити нове в іншій програмі"
@@ -1671,10 +1671,10 @@ msgstr ""
 
 msgid "{{ count }} event"
 msgid_plural "{{ count }} event"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "{{ count }} подія"
+msgstr[1] "{{count}} подій"
+msgstr[2] "{{count}} подій"
+msgstr[3] "{{count}} подій"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }}  протерміновано"
