@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-16T11:27:27.666Z\n"
-"PO-Revision-Date: 2026-03-16T11:27:27.666Z\n"
+"POT-Creation-Date: 2026-03-16T14:06:49.982Z\n"
+"PO-Revision-Date: 2026-03-16T14:06:49.982Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -84,11 +84,11 @@ msgstr "View dashboard"
 msgid "View active enrollment"
 msgstr "View active enrollment"
 
+msgid "Re-enroll in {{programName}}"
+msgstr "Re-enroll in {{programName}}"
+
 msgid "Re-enroll"
 msgstr "Re-enroll"
-
-msgid "in"
-msgstr "in"
 
 msgid "Enrolled"
 msgstr "Enrolled"
@@ -111,11 +111,11 @@ msgstr "Lat"
 msgid "Long"
 msgstr "Long"
 
-msgid "lat"
-msgstr "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
+msgstr "lat{{escape}} {{latitudeValue}}"
 
-msgid "long"
-msgstr "long"
+msgid "long{{escape}} {{longitudeValue}}"
+msgstr "long{{escape}} {{longitudeValue}}"
 
 msgid "Show less"
 msgstr "Show less"
@@ -276,8 +276,10 @@ msgstr "Switch to form view"
 msgid "Switch to row view"
 msgstr "Switch to row view"
 
-msgid "events added"
-msgstr "events added"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] "{{count}} event added"
+msgstr[1] "{{count}} events added"
 
 msgid "No events added"
 msgstr "No events added"
@@ -321,6 +323,9 @@ msgstr "without"
 
 msgid "enrollment"
 msgstr "enrollment"
+
+msgid "in"
+msgstr "in"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Enroll in a program by selecting a program from the top bar."
@@ -620,6 +625,9 @@ msgid_plural "Please enter at least {{minCharactersToSearch}} character to filte
 msgstr[0] "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[1] "Please enter at least {{minCharactersToSearch}} characters to filter"
 
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr "Locked to{{escape}} {{buttonText}}"
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
 
@@ -629,11 +637,14 @@ msgstr "after or equal to {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "before or equal to {{date}}"
 
-msgid "greater than or equal to"
-msgstr "greater than or equal to"
+msgid "{{from}} to {{to}}"
+msgstr "{{from}} to {{to}}"
 
-msgid "less than or equal to"
-msgstr "less than or equal to"
+msgid "greater than or equal to {{value}}"
+msgstr "greater than or equal to {{value}}"
+
+msgid "less than or equal to {{value}}"
+msgstr "less than or equal to {{value}}"
 
 msgid "More filters"
 msgstr "More filters"
@@ -662,8 +673,8 @@ msgstr "You don't have access to write notes"
 msgid "Write note"
 msgstr "Write note"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr "{{fieldName}} was blanked out and hidden by your last action"
 
 msgid "Notice"
 msgstr "Notice"
@@ -1167,6 +1178,9 @@ msgstr ""
 
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
+
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr "Results found in {{currentSearchScopeName}}"
 
 msgid "Results found"
 msgstr "Results found"
