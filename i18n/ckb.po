@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Antonia Bezenchek <antonia@informa.pro>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2024
@@ -7,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2025\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -541,12 +540,6 @@ msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
 msgid "Please provide a negative integer"
 msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "نووسینی تێدایە"
-
 msgid "Yes"
 msgstr "بەڵێ"
 
@@ -581,12 +574,6 @@ msgid "Clear"
 msgstr "پاککردنەوە"
 
 msgid "No results found"
-msgstr ""
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
 msgstr ""
 
 msgid "Description"
@@ -627,6 +614,15 @@ msgstr ""
 
 msgid "Remove filter"
 msgstr ""
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
@@ -2060,6 +2056,15 @@ msgstr "دایبەزێنە وەکو CSV"
 
 msgid "Download with current filters"
 msgstr "دایبەزێنە لەگەڵ فیلتەرەکان"
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
