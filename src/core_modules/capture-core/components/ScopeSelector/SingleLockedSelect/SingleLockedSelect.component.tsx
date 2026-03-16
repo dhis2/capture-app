@@ -94,7 +94,12 @@ const SingleLockedSelectPlain = ({
                 displayOnly={displayOnly}
                 label={capitalizeFirstLetter(title)}
                 value={label && (<OptionLabel icon={icon} label={label} />)}
-                noValueMessage={hasMenu ? i18n.t(`Choose a ${lowerCaseFirstLetter(title)}`) : ''}
+                noValueMessage={hasMenu
+                    ? i18n.t('Choose a {{title}}', {
+                        title: lowerCaseFirstLetter(title),
+                        interpolation: { escapeValue: false },
+                    })
+                    : ''}
                 open={openSelectorBarItem}
                 setOpen={open => hasMenu && setOpenSelectorBarItem(open)}
                 onClearSelectionClick={() => handleOnClear()}
@@ -107,7 +112,10 @@ const SingleLockedSelectPlain = ({
                                 <FiltrableMenuItems
                                     options={options}
                                     onChange={handleOnChange}
-                                    searchText={i18n.t(`Search for a ${title}`)}
+                                    searchText={i18n.t('Search for a {{title}}', {
+                                        title,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     dataTest={title}
                                 />
                             ) : (

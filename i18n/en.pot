@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
-"PO-Revision-Date: 2026-03-13T08:59:53.722Z\n"
+"POT-Creation-Date: 2026-03-16T11:27:27.666Z\n"
+"PO-Revision-Date: 2026-03-16T11:27:27.666Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -985,6 +985,9 @@ msgstr[1] "Fill in at least {{count}} attributes to search"
 msgid "Missing search criteria"
 msgstr "Missing search criteria"
 
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr "Please fill in {{uniqueTEAName}} to search"
+
 msgid "Back to search"
 msgstr "Back to search"
 
@@ -1039,6 +1042,12 @@ msgstr "None selected"
 msgid "Choose an organisation unit"
 msgstr "Choose an organisation unit"
 
+msgid "Choose a {{categoryName}}"
+msgstr "Choose a {{categoryName}}"
+
+msgid "Search for a {{categoryName}}"
+msgstr "Search for a {{categoryName}}"
+
 msgid "Clear selection"
 msgstr "Clear selection"
 
@@ -1056,6 +1065,12 @@ msgstr "Show all programs"
 
 msgid "Choose a program"
 msgstr "Choose a program"
+
+msgid "Choose a {{title}}"
+msgstr "Choose a {{title}}"
+
+msgid "Search for a {{title}}"
+msgstr "Search for a {{title}}"
 
 msgid "Search for {{titleText}}"
 msgstr "Search for {{titleText}}"
@@ -1123,6 +1138,9 @@ msgid ""
 msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
+
+msgid "Create new {{trackedEntityName}}"
+msgstr "Create new {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
