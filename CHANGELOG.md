@@ -1,3 +1,10 @@
+## [105.11.4](https://github.com/dhis2/capture-app/compare/v105.11.3...v105.11.4) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20494] Inherited tracked entity attribute not populated ([#4478](https://github.com/dhis2/capture-app/issues/4478)) ([8f2d2f7](https://github.com/dhis2/capture-app/commit/8f2d2f73877be5b0ffca5f54e2879624e900f3a0))
+
 ## [105.11.3](https://github.com/dhis2/capture-app/compare/v105.11.2...v105.11.3) (2026-03-16)
 
 
