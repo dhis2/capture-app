@@ -1,3 +1,10 @@
+# [105.13.0](https://github.com/dhis2/capture-app/compare/v105.12.0...v105.13.0) (2026-03-17)
+
+
+### Features
+
+* [DHIS2-12881] Support additional value types for filters in working lists ([#4461](https://github.com/dhis2/capture-app/issues/4461)) ([01cff4f](https://github.com/dhis2/capture-app/commit/01cff4f282aa228d245ba5ee64d32f8d373e2e43))
+
 # [105.12.0](https://github.com/dhis2/capture-app/compare/v105.11.5...v105.12.0) (2026-03-17)
 
 
