@@ -1,3 +1,10 @@
+## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21133] Searching by unique attribute with unsupported type crashes ([#4484](https://github.com/dhis2/capture-app/issues/4484)) ([e8e6e5a](https://github.com/dhis2/capture-app/commit/e8e6e5acf8936a420c046a90bdc665f7b2d38af3))
+
 ## [105.13.1](https://github.com/dhis2/capture-app/compare/v105.13.0...v105.13.1) (2026-03-17)
 
 
