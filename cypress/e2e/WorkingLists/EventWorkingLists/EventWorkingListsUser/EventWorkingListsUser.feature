@@ -149,7 +149,7 @@ Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, 
   And the saved working list view is cleaned up
 
 @v<42
-Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE) are not visible in filter list - Event
+Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE, URL) are not visible in filter list - Event
   Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
   When you open the More filters menu on the event working list
   Then the filter option "Household location" should not appear in the More filters menu

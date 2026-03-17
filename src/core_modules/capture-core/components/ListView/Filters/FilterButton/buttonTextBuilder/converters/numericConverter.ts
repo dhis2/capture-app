@@ -11,12 +11,19 @@ export function convertNumeric(filter: NumericFilterData): string {
         if (filter.ge === filter.le) {
             appliedText = filter.ge!.toString();
         } else {
-            appliedText = `${filter.ge!.toString()} ${i18n.t('to')} ${filter.le!.toString()}`;
+            appliedText = i18n.t('{{from}} to {{to}}', {
+                from: filter.ge,
+                to: filter.le,
+            });
         }
     } else if (geHasValue) {
-        appliedText = `${i18n.t('greater than or equal to')} ${filter.ge!.toString()}`;
+        appliedText = i18n.t('greater than or equal to {{value}}', {
+            value: filter.ge,
+        });
     } else {
-        appliedText = `${i18n.t('less than or equal to')} ${filter.le!.toString()}`;
+        appliedText = i18n.t('less than or equal to {{value}}', {
+            value: filter.le,
+        });
     }
 
     return appliedText;

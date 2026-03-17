@@ -402,7 +402,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v<42
-  Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE) are not visible in filter list - Tracker
+  Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE, URL) are not visible in filter list - Tracker
     Given you open the main page with Ngelehun and child programme default template context
     When you open the program stage More filters menu for Birth on the tracker working list
     Then the filter option "Birth certificate" should not appear in the More filters menu
