@@ -1,6 +1,7 @@
 body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    overflow: hidden !important /* iOS workaround. Only works for backend versions prior to 42 */
+    overflow: hidden !important; /* iOS workaround. Only works for backend versions prior to 42 */
+    background-color: #F8F9FA !important; /* background color is beyond app scope, so we need to override it here until this is fixed. below color is grey100 */
 }
 
 html {

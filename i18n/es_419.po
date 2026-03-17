@@ -1,16 +1,15 @@
-# 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Jaime Bosque <jaime.bosque@dhis2.org>, 2024
 # Pablo Del Médico, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2026
+# Jaime Bosque <jaime.bosque@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2026\n"
+"Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2026\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -554,12 +553,6 @@ msgstr "Proporcione un número entero positivo"
 msgid "Please provide a negative integer"
 msgstr "Proporcione un número entero negativo"
 
-msgid "Exact matches only"
-msgstr ""
-
-msgid "Contains text"
-msgstr "Contiene texto"
-
 msgid "Yes"
 msgstr "Sí"
 
@@ -595,12 +588,6 @@ msgstr "Limpiar"
 
 msgid "No results found"
 msgstr "No se han encontrado resultados"
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
-msgstr ""
 
 msgid "Description"
 msgstr "Descripción"
@@ -640,6 +627,16 @@ msgstr "Restablecer filtro"
 
 msgid "Remove filter"
 msgstr "Remover filtro"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
@@ -1433,7 +1430,7 @@ msgid "Geometry (Coordinate)"
 msgstr ""
 
 msgid "Polygon captured"
-msgstr ""
+msgstr "Polígono guardado"
 
 msgid "No polygon captured"
 msgstr ""
@@ -2098,6 +2095,15 @@ msgid "Download as CSV"
 msgstr ""
 
 msgid "Download with current filters"
+msgstr ""
+
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
 msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"

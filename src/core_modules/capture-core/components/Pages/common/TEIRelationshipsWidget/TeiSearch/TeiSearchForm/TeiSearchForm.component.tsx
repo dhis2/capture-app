@@ -72,7 +72,10 @@ class SearchFormPlain extends React.Component<Props, State> {
 
     getUniqueSearchButtonText = (searchForm: any) => {
         const attributeName = searchForm.getElements()[0].formName;
-        return `${i18n.t('Search')} ${attributeName}`;
+        return i18n.t('Search {{attributeName}}', {
+            attributeName,
+            interpolation: { escapeValue: false },
+        });
     }
 
     handleSearchAttempt = () => {
@@ -115,9 +118,14 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+        if (
+            isValid &&
+            this.props.searchGroup.id === 'main'
+        ) {
+            isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+        }
 
-        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
+        if (isValid && this.props.searchGroup.id === 'main') isValid = this.validNumberOfAttributes();
 
         if (isValid && this.props.searchGroup.unique) {
             isValid = this.isSearchViaUniqueIdValid();
@@ -178,7 +186,12 @@ class SearchFormPlain extends React.Component<Props, State> {
         return (
             <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
-                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`)}</ModalContent>
+                <ModalContent>
+                    {i18n.t('Please fill in {{uniqueTEAName}} to search', {
+                        uniqueTEAName,
+                        interpolation: { escapeValue: false },
+                    })}
+                </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={() => this.setState({ showMissingSearchCriteriaModal: false })} primary>
@@ -213,9 +226,8 @@ class SearchFormPlain extends React.Component<Props, State> {
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     id={id}
-                    fieldOptions={{ showHelpText: true }}
                 />
-                {!searchGroup.unique && this.renderOrgUnitSelector()}
+                {searchGroup.id === 'main' && this.renderOrgUnitSelector()}
                 <div
                     className={classes.searchButtonContainer}
                 >
@@ -225,7 +237,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                     >
                         {searchButtonText}
                     </Button>
-                    {!searchGroup.unique && this.renderMinAttributesRequired()}
+                    {searchGroup.id === 'main' && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
             </div>

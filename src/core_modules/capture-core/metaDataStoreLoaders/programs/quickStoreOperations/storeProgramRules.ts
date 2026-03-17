@@ -27,6 +27,8 @@ const convert = (() => {
             d2ProgramRuleAction.option && d2ProgramRuleAction.option.id;
         const getLegendSetId = d2ProgramRuleAction =>
             d2ProgramRuleAction.legendSet && d2ProgramRuleAction.legendSet.id;
+        const getPriority = d2ProgramRuleAction =>
+            d2ProgramRuleAction.priority;
 
         return apiProgramRuleActions.map(apiProgramRuleAction => ({
             ...apiProgramRuleAction,
@@ -38,6 +40,7 @@ const convert = (() => {
             optionGroupId: getOptionGroupId(apiProgramRuleAction),
             optionId: getOptionId(apiProgramRuleAction),
             legendSetId: getLegendSetId(apiProgramRuleAction),
+            prioriy: getPriority(apiProgramRuleAction),
         }));
     };
 
@@ -60,8 +63,8 @@ const convert = (() => {
 })();
 
 const fieldsParam = 'id,displayName,condition,description,program[id],programStage[id],priority,' +
-'programRuleActions[id,content,displayContent,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
-'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id],legendSet[id]]';
+'programRuleActions[id,content,displayContent,location,data,priority,programRuleActionType,programStageSection[id],' +
+'dataElement[id],trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id],legendSet[id]]';
 
 export const storeProgramRules = async (programIds: Array<string>) => {
     const query = {

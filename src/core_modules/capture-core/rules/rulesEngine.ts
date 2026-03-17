@@ -36,7 +36,11 @@ const versions = {
     OLD: 'old',
 };
 
-export const initRulesEngine = (version: string, userRoles: Array<{ id: string }>) => {
+export const initRulesEngine = (
+    version: string,
+    userRoles: Array<{ id: string }>,
+    userGroups: Array<{ id: string }>,
+) => {
     if (version === versions.NEW) {
         switchToKotlin();
     } else if (version === versions.OLD) {
@@ -45,6 +49,7 @@ export const initRulesEngine = (version: string, userRoles: Array<{ id: string }
         featureAvailable(FEATURES.kotlinRuleEngine) ? switchToKotlin() : switchToCapture();
     }
     selectedRuleEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
+    selectedRuleEngine.setSelectedUserGroups(userGroups.map(({ id }) => id));
 };
 
 export const ruleEngine = () => selectedRuleEngine || kotlinRuleEngine();

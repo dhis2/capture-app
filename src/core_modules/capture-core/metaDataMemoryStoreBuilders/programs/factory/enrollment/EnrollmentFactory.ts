@@ -431,7 +431,7 @@ export class EnrollmentFactory {
         programSearchGroups: Array<SearchGroup> = [],
     ) {
         const inputSearchGroups: Array<InputSearchGroup> = programSearchGroups
-            .filter(searchGroup => !searchGroup.unique)
+            .filter(searchGroup => searchGroup.id === 'main')
             .map(searchGroup => new InputSearchGroup((o) => {
                 o.id = searchGroup.id;
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;

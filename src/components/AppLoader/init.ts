@@ -148,13 +148,14 @@ export async function initializeAsync({
     const {
         id: currentUserId,
         userRoles,
+        userGroups,
         organisationUnits: captureScope,
         teiSearchOrganisationUnits: searchScope,
         settings: userSettings,
     } = await querySingleResource({
         resource: 'me',
         params: {
-            fields: 'id,userRoles,organisationUnits,teiSearchOrganisationUnits,settings',
+            fields: 'id,userRoles,userGroups,organisationUnits,teiSearchOrganisationUnits,settings',
         },
     });
 
@@ -173,7 +174,7 @@ export async function initializeAsync({
     } catch {
         ruleEngineSettings = { version: 'default' };
     }
-    initRulesEngine(ruleEngineSettings.version, userRoles);
+    initRulesEngine(ruleEngineSettings.version, userRoles, userGroups);
 
     try {
         await initStorageControllers({

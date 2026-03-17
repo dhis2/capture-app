@@ -29,7 +29,11 @@ const LockedFilterButtonPlain = ({ classes, title, buttonText = '' }: Props & Wi
 
     return (
         <Tooltip
-            content={`${i18n.t('Locked to:')} ${buttonText}`}
+            content={i18n.t('Locked to{{escape}} {{buttonText}}', {
+                escape: ':',
+                buttonText,
+                interpolation: { escapeValue: false },
+            })}
             placement={'bottom'}
             openDelay={300}
         >

@@ -25,13 +25,14 @@ const styles = {
     },
     backButton: {
         margin: spacers.dp16,
+        marginBottom: spacers.dp12,
         padding: '0',
     },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
         margin: `0 ${spacers.dp16} 0`,
-        gap: spacers.dp16,
+        gap: spacers.dp12,
         containerType: 'inline-size',
     },
     leftColumn: {
@@ -47,7 +48,7 @@ const styles = {
     },
     searchBoxWrapper: {
         height: 'fit-content',
-        padding: spacers.dp16,
+        padding: spacers.dp12,
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,
@@ -83,6 +84,7 @@ const SearchPagePlain = ({
                     dataTest="back-button"
                     className={classes.backButton}
                     onClick={onNavigateToMainPage}
+                    small
                 >
                     {i18n.t('Back')}
                 </Button>
