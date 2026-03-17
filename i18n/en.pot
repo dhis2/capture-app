@@ -679,12 +679,6 @@ msgstr "after or equal to"
 msgid "before or equal to"
 msgstr "before or equal to"
 
-msgid "after or equal to"
-msgstr "after or equal to"
-
-msgid "before or equal to"
-msgstr "before or equal to"
-
 msgid "More filters"
 msgstr "More filters"
 
