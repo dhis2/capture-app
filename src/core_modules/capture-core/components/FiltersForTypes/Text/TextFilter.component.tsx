@@ -54,6 +54,7 @@ export class TextFilter
                     value={value}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <Input

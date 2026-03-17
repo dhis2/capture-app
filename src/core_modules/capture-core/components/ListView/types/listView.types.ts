@@ -14,6 +14,7 @@ export type Column = {
     unique?: boolean;
     searchOperator?: string;
     minCharactersToSearch?: number;
+    disableEmptyValueFilter?: boolean;
 };
 
 export type Columns = Array<Column>;
@@ -28,6 +29,7 @@ export type FilterOnly = {
     disabled?: boolean;
     showInMoreFilters?: boolean;
     transformRecordsFilter: (rawFilter: any) => any;
+    disableEmptyValueFilter?: boolean;
 };
 
 export type AdditionalFilter = FilterOnly & {

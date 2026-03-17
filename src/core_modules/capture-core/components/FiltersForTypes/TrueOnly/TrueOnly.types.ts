@@ -4,5 +4,6 @@ export type PlainProps = {
     value: Value;
     onCommitValue: (value: Value) => void;
     onUpdate?: (value?: Value) => void;
+    disableEmptyValueFilter?: boolean;
 };
 

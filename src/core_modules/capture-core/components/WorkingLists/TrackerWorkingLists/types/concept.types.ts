@@ -39,6 +39,7 @@ export type ColumnConfigBase = {
     searchOperator?: string,
     minCharactersToSearch?: number,
     apiViewName?: string,
+    disableEmptyValueFilter?: boolean,
 };
 export type MetadataColumnConfig = ColumnConfigBase;
 

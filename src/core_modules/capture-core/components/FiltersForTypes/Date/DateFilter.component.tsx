@@ -53,6 +53,7 @@ type OwnProps = {
     onCommitValue: (value?: Value, isBlur?: boolean) => void;
     value: Value;
     onUpdate?: () => void;
+    disableEmptyValueFilter?: boolean;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -254,6 +255,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                     value={typeof value === 'string' ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <span className={classes.sectionLabel}>

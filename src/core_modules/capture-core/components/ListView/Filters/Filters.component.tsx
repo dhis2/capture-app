@@ -234,6 +234,7 @@ const renderIndividualFilterButtons = ({
             unique,
             searchOperator,
             minCharactersToSearch,
+            disableEmptyValueFilter,
         }: any) => (
             <div
                 key={id}
@@ -252,6 +253,7 @@ const renderIndividualFilterButtons = ({
                     unique={unique}
                     searchOperator={searchOperator}
                     minCharactersToSearch={minCharactersToSearch}
+                    disableEmptyValueFilter={disableEmptyValueFilter}
                     onSetVisibleSelector={onSetVisibleSelector}
                     selectorVisible={id === visibleSelectorId}
                     onUpdateFilter={onUpdateFilter}

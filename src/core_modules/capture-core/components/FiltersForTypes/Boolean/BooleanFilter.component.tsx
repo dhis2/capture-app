@@ -29,6 +29,7 @@ type PlainProps = {
     onCommitValue: (value: Value) => void;
     onUpdate?: (commitValue?: Value) => void;
     allowMultiple: boolean;
+    disableEmptyValueFilter?: boolean;
 };
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
@@ -82,6 +83,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
                     value={typeof value === 'string' ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <div

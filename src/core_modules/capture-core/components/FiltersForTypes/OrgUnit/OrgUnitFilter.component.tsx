@@ -49,6 +49,7 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
                     value={typeof value === 'string' ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <SingleOrgUnitSelectField

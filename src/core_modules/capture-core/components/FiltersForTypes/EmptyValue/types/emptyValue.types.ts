@@ -3,6 +3,7 @@ export type EmptyValueFilterCheckboxesProps = {
     onEmptyChange: (args: { checked: boolean }) => void;
     onNotEmptyChange: (args: { checked: boolean }) => void;
     showDivider?: boolean;
+    disabled?: boolean;
 };
 
 export type EmptyValueFilterData = {

@@ -7,4 +7,5 @@ export type OrgUnitFilterProps = {
     onUpdate: (updatedValue: Value) => void;
     onClearValue?: () => void;
     value: Value;
+    disableEmptyValueFilter?: boolean;
 };

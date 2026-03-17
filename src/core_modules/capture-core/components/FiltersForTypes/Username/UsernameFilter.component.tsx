@@ -45,6 +45,7 @@ export class UsernameFilter extends Component<UsernameFilterProps> implements Up
                     value={isEmptyFilter ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <UserField

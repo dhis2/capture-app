@@ -5,4 +5,5 @@ export type TextFilterProps = {
     onUpdate: (commitValue?: Value) => void;
     value: Value;
     searchOperator?: string;
+    disableEmptyValueFilter?: boolean;
 };

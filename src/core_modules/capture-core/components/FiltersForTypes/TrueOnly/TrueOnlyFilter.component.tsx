@@ -70,6 +70,7 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
                     value={emptyValueStr}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <div

@@ -11,6 +11,7 @@ type PassOnProps = Readonly<{
     searchOperator?: string;
     minCharactersToSearch?: number;
     onClearValue?: () => void;
+    disableEmptyValueFilter?: boolean;
 }>;
 
 export type Props = Readonly<{

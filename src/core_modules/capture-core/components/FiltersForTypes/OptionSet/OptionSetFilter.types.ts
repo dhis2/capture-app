@@ -7,4 +7,5 @@ export type PlainProps = {
     value: Value;
     onCommitValue: (value: Value) => void;
     singleSelect?: boolean;
+    disableEmptyValueFilter?: boolean;
 };

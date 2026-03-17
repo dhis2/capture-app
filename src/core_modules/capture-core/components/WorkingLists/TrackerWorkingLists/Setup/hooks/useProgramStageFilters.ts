@@ -55,6 +55,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 header: i18n.t(ADDITIONAL_FILTERS_LABELS.programStage),
                 options,
                 mainButton: true,
+                disableEmptyValueFilter: true,
                 transformRecordsFilter: () => null,
             },
             {
@@ -62,6 +63,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 type: dataElementTypes.DATE,
                 header: occurredAtLabel,
                 disabled: !programStageId,
+                disableEmptyValueFilter: true,
                 tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                     label: occurredAtLabel,
                     interpolation: { escapeValue: false },
@@ -92,6 +94,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                     { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
                 ],
                 disabled: !programStageId,
+                disableEmptyValueFilter: true,
                 tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                     label: ADDITIONAL_FILTERS_LABELS.status,
                     interpolation: { escapeValue: false },
@@ -107,6 +110,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         type: dataElementTypes.DATE,
                         header: scheduledAtLabel,
                         disabled: !programStageId,
+                        disableEmptyValueFilter: true,
                         tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                             label: scheduledAtLabel,
                             interpolation: { escapeValue: false },
@@ -133,6 +137,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         id: ADDITIONAL_FILTERS.assignedUser,
                         type: dataElementTypes.ASSIGNEE,
                         header: ADDITIONAL_FILTERS_LABELS.assignee,
+                        disableEmptyValueFilter: true,
                         transformRecordsFilter: (rawFilter: any) => {
                             const { assignedUserMode } = rawFilter;
                             const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)

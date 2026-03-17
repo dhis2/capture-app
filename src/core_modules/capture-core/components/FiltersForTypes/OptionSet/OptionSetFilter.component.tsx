@@ -62,6 +62,7 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
                     value={typeof value === 'string' ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <div

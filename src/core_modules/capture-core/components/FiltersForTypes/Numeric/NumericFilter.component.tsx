@@ -55,6 +55,7 @@ type Props = {
     onUpdate: (commitValue?: any) => void,
     value: Value,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
+    disableEmptyValueFilter?: boolean,
 };
 
 type State = {
@@ -220,6 +221,7 @@ class NumericFilterPlain
                     value={typeof value === 'string' ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <div className={classes.container}>

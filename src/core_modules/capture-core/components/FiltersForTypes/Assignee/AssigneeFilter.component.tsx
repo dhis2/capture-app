@@ -34,6 +34,7 @@ type Value = {
 type PlainProps = {
     value?: Value;
     onCommitValue: (value: any) => void;
+    disableEmptyValueFilter?: boolean;
 };
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
@@ -116,6 +117,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
                     value={typeof value === 'string' ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
                 />
 
                 <div

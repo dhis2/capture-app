@@ -16,6 +16,7 @@ export const useFiltersOnly = (
                 id: MAIN_FILTERS.PROGRAM_STATUS,
                 type: dataElementTypes.TEXT,
                 header: i18n.t('Enrollment status'),
+                disableEmptyValueFilter: true,
                 options: [
                     { text: i18n.t('Active'), value: 'ACTIVE' },
                     { text: i18n.t('Completed'), value: 'COMPLETED' },
@@ -32,6 +33,7 @@ export const useFiltersOnly = (
                 id: MAIN_FILTERS.ENROLLED_AT,
                 type: dataElementTypes.DATE,
                 header: enrollmentDateLabel,
+                disableEmptyValueFilter: true,
                 transformRecordsFilter: (filter: string) => {
                     const queryArgs: any = {};
                     const filterParts = filter.split(':');
@@ -52,6 +54,7 @@ export const useFiltersOnly = (
                         id: MAIN_FILTERS.OCCURED_AT,
                         type: dataElementTypes.DATE,
                         header: incidentDateLabel,
+                        disableEmptyValueFilter: true,
                         transformRecordsFilter: (filter: string) => {
                             const queryArgs: any = {};
                             const filterParts = filter.split(':');
@@ -74,6 +77,7 @@ export const useFiltersOnly = (
                 header: i18n.t('Follow up'),
                 showInMoreFilters: true,
                 multiValueFilter: false,
+                disableEmptyValueFilter: true,
                 transformRecordsFilter: (rawFilter: string) => ({
                     followUp: rawFilter.split(':')[1],
                 }),
@@ -84,6 +88,7 @@ export const useFiltersOnly = (
                         id: MAIN_FILTERS.ASSIGNEE,
                         type: dataElementTypes.ASSIGNEE,
                         header: i18n.t('Assigned to'),
+                        disableEmptyValueFilter: true,
                         transformRecordsFilter: (rawFilter: any) => {
                             const { assignedUserMode } = rawFilter;
                             const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)

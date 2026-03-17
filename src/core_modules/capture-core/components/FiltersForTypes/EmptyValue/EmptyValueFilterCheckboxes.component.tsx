@@ -14,10 +14,11 @@ export const EmptyValueFilterCheckboxes = ({
     onEmptyChange,
     onNotEmptyChange,
     showDivider = true,
+    disabled = false,
 }: EmptyValueFilterCheckboxesProps) => {
     const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
 
-    if (!emptyValueFilterSupported) {
+    if (!emptyValueFilterSupported || disabled) {
         return null;
     }
 
