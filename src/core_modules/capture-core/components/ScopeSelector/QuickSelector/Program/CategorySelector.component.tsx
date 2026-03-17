@@ -180,7 +180,10 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             <SelectorBarItem
                 label={passOnProps.category.name}
                 value={selectedCategoryName}
-                noValueMessage={i18n.t(`Choose a ${passOnProps.category.name}`)}
+                noValueMessage={i18n.t('Choose a {{categoryName}}', {
+                    categoryName: passOnProps.category.name,
+                    interpolation: { escapeValue: false },
+                })}
                 open={this.state.open}
                 setOpen={(open) => {
                     if (displayOnly) return;
@@ -201,7 +204,10 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                                         this.setState({ open: false });
                                         handleSelect(item.value);
                                     }}
-                                    searchText={i18n.t(`Search for a ${passOnProps.category.name}`)}
+                                    searchText={i18n.t('Search for a {{categoryName}}', {
+                                        categoryName: passOnProps.category.name,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     dataTest="category"
                                 />
                             ) : (

@@ -121,7 +121,12 @@ const CardListButtons: FC<Props> = ({
     {
         dataTest: 're-enrollment-button',
         onClick: onHandleClick,
-        label: `${i18n.t('Re-enroll')} ${programName ? `${i18n.t('in')} ${programName}` : ''}`,
+        label: programName
+            ? i18n.t('Re-enroll in {{programName}}', {
+                programName,
+                interpolation: { escapeValue: false },
+            })
+            : i18n.t('Re-enroll'),
         hide: navigationButtonsState !== availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON,
     },
     ];
