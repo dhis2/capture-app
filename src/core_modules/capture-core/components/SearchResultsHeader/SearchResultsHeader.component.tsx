@@ -29,7 +29,12 @@ const SearchResultsHeaderPlain =
   ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderProps) =>
       (<div data-test="search-results-top" className={classes.topSection} >
           <p className={classes.resultsTitle}>
-              {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
+              {currentSearchScopeName
+                  ? i18n.t('Results found in {{currentSearchScopeName}}', {
+                      currentSearchScopeName,
+                      interpolation: { escapeValue: false },
+                  })
+                  : i18n.t('Results found')}
           </p>
           {currentSearchTerms && <div>
               {
