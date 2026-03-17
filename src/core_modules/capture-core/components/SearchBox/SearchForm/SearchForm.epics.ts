@@ -231,7 +231,7 @@ export const searchViaAttributesOnScopeProgramEpic = (
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }: any) => {
             const { formsValues } = store.value;
             const { searchGroups, attributes } = getTrackerProgramThrowIfNotFound(programId);
-            const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
+            const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
@@ -270,7 +270,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }: any) => {
             const { formsValues } = store.value;
             const { attributes, searchGroups } = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-            const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
+            const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
@@ -304,7 +304,7 @@ export const startFallbackSearchEpic = (action$: EpicAction<any>, store: ReduxSt
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
                 const { id: trackedEntityTypeId, searchGroups } = trackerProgram.trackedEntityType;
-                const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
+                const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
                 if (availableSearchGroup) {
                     const {
@@ -356,7 +356,7 @@ export const fallbackSearchEpic = (
         ofType(searchBoxActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }: any) => {
             const { attributes, searchGroups } = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-            const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
+            const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
             const filter = getFiltersForAttributesSearchQuery(
                 fallbackFormValues,

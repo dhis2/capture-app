@@ -27,7 +27,11 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             <div
                 className={classes.header}
             >
-                {`${eventsAdded} ${i18n.t('events added')}`}
+                {i18n.t('{{count}} event added', {
+                    count: eventsAdded,
+                    defaultValue: '{{count}} event added',
+                    defaultValue_plural: '{{count}} events added',
+                })}
             </div>
             <OfflineEventsList
                 listId={listId}

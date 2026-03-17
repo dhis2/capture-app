@@ -1,3 +1,52 @@
+## [105.11.5](https://github.com/dhis2/capture-app/compare/v105.11.4...v105.11.5) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-21129] Working list table use range type after switch to search groups ([#4479](https://github.com/dhis2/capture-app/issues/4479)) ([f5c5755](https://github.com/dhis2/capture-app/commit/f5c57555eb184ce89eb18706b656e9be7e59389d))
+
+## [105.11.4](https://github.com/dhis2/capture-app/compare/v105.11.3...v105.11.4) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20494] Inherited tracked entity attribute not populated ([#4478](https://github.com/dhis2/capture-app/issues/4478)) ([8f2d2f7](https://github.com/dhis2/capture-app/commit/8f2d2f73877be5b0ffca5f54e2879624e900f3a0))
+
+## [105.11.3](https://github.com/dhis2/capture-app/compare/v105.11.2...v105.11.3) (2026-03-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4480](https://github.com/dhis2/capture-app/issues/4480)) ([5b6cc6f](https://github.com/dhis2/capture-app/commit/5b6cc6f3746bc3c95d388db36d627ddac8bc9425))
+
+## [105.11.2](https://github.com/dhis2/capture-app/compare/v105.11.1...v105.11.2) (2026-03-13)
+
+
+### Bug Fixes
+
+* [UX-171] Improve information density ([#3786](https://github.com/dhis2/capture-app/issues/3786)) ([ab30fe2](https://github.com/dhis2/capture-app/commit/ab30fe29afd8f0b1895858c1569dfb3e1e3fbbc8))
+
+## [105.11.1](https://github.com/dhis2/capture-app/compare/v105.11.0...v105.11.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21044][DHIS2-21045] Minimum Search Characters validation error ([#4473](https://github.com/dhis2/capture-app/issues/4473)) ([115ce1c](https://github.com/dhis2/capture-app/commit/115ce1c432327624a0402714548caf0f09e13fca))
+
+# [105.11.0](https://github.com/dhis2/capture-app/compare/v105.10.0...v105.11.0) (2026-03-12)
+
+
+### Features
+
+* [DHIS2-19426] support `d2:inUserGroup` ([#4477](https://github.com/dhis2/capture-app/issues/4477)) ([1e7197f](https://github.com/dhis2/capture-app/commit/1e7197f35ba31b31b983115a0d319356fe5df0ac))
+
+# [105.10.0](https://github.com/dhis2/capture-app/compare/v105.9.1...v105.10.0) (2026-03-10)
+
+
+### Features
+
+* [DHIS2-20920] send action priorities to rule engine ([#4456](https://github.com/dhis2/capture-app/issues/4456)) ([6b57b80](https://github.com/dhis2/capture-app/commit/6b57b8052a2351e9e5960c8971fd57f654a69b72))
+
 ## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
 
 

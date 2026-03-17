@@ -10,7 +10,7 @@ const styles: Readonly<any> = {
         display: 'flex',
         flexDirection: 'column',
         gap: spacers.dp8,
-        padding: spacers.dp16,
+        padding: spacers.dp12,
         paddingTop: 0,
     },
     button: {

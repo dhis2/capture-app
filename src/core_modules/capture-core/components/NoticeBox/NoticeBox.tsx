@@ -9,7 +9,10 @@ const buildContentListToDisplay = (rulesEffectsHiddenFields: Record<string, Hidd
         if (rulesEffectsHiddenFields[key].hadValue) {
             const text =
                 rulesEffectsHiddenFields[key].content ||
-                `${rulesEffectsHiddenFields[key].name} ${i18n.t('was blanked out and hidden by your last action')}`;
+                i18n.t('{{fieldName}} was blanked out and hidden by your last action', {
+                    fieldName: rulesEffectsHiddenFields[key].name,
+                    interpolation: { escapeValue: false },
+                });
             return [...acc, { key, text }];
         }
         return acc;
