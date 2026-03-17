@@ -13,6 +13,7 @@ type Props = {
     onDateSelectedFromCalendar?: () => void;
     disabled?: boolean;
     placeholder?: string;
+    dense?: boolean;
 };
 
 type State = {

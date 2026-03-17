@@ -24,14 +24,29 @@ export class DateFilterManager extends React.Component<Props, State> {
         return localDate;
     }
     static calculateAbsoluteRangeValueState(filter: AbsoluteDateFilterData) {
+        const ge = filter.ge;
+        const le = filter.le;
+        const geDate = ge ? ge.split('T')[0] : undefined;
+        const leDate = le ? le.split('T')[0] : undefined;
+        const isSameDay = geDate && leDate && geDate === leDate;
+
+        if (isSameDay && ge) {
+            const converted = DateFilterManager.convertDateForEdit(ge);
+            return {
+                main: mainOptionKeys.ABSOLUTE_RANGE,
+                from: { value: converted, isValid: true },
+                to: { value: converted, isValid: true },
+            };
+        }
+
         return {
             main: mainOptionKeys.ABSOLUTE_RANGE,
-            from: filter.ge ? {
-                value: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
+            from: ge ? {
+                value: DateFilterManager.convertDateForEdit(ge),
                 isValid: true,
             } : undefined,
-            to: filter.le ? {
-                value: filter.le && DateFilterManager.convertDateForEdit(filter.le),
+            to: le ? {
+                value: DateFilterManager.convertDateForEdit(le),
                 isValid: true,
             } : undefined,
         };
@@ -58,8 +73,14 @@ export class DateFilterManager extends React.Component<Props, State> {
                     main: filter.period,
                 };
             }
-            if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
-                return DateFilterManager.calculateRelativeRangeValueState(filter);
+            const startBuffer = filter.startBuffer ?? 0;
+            const endBuffer = filter.endBuffer ?? 0;
+            if (areRelativeRangeValuesSupported(startBuffer, endBuffer)) {
+                return DateFilterManager.calculateRelativeRangeValueState({
+                    ...filter,
+                    startBuffer,
+                    endBuffer,
+                });
             }
             log.warn(
                 'The startBuffer and endBuffer values are not supported by the UI',

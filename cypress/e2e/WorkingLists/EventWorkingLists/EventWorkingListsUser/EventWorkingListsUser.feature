@@ -95,13 +95,65 @@ And you change the sharing settings
 And you update the working list
 Then your newly defined sharing settings should still be present
 
-Scenario: Save and load a view with a date filter
-Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
-When you set the date of admission filter
-And you save the view as dateFilterWorkingList
-And you refresh the page
-And you open the dateFilterWorkingList
-Then the admission filter should be in effect
+Scenario: Save and load view with stored WL filters - TEXT
+  Given you open the main page with Ngelehun and event program text filter context
+  When you set the text filter "XX MAL RDT TRK - Reason for not testing" to "test"
+  And you save the view as textFilterWorkingList
+  And you refresh the page
+  And you open the saved view textFilterWorkingList
+  Then the text filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show "test" when opened
+  And the saved working list view is cleaned up
+
+@v>=42
+Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, INTEGER_POSITIVE, DATE, ORGANISATION_UNIT, COORDINATE, FILE_RESOURCE
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the boolean filter
+  And you set the range filter "Age (years)" to 0-120
+  And you set the range filter "Height in cm" to 100-200
+  And you set the range filter "Weight in kg" to 1-200
+  And you set the date filter
+  And you set the organisation unit filter
+  And you set the empty-only filter "Household location" to Is empty
+  And you set the empty-only filter "Documentation" to Is empty
+  And you save the view as allValueTypesFilterWorkingList
+  And you refresh the page
+  And you open the saved view allValueTypesFilterWorkingList
+  Then the boolean filter should be in effect and show the correct value when opened
+  And the range filter "Age (years)" should be in effect and show 0 to 120 when opened
+  And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
+  And the range filter "Weight in kg" should be in effect and show 1 to 200 when opened
+  And the date filter should be in effect and show the correct value when opened
+  And the organisation unit filter should be in effect and show the correct value when opened
+  And the empty-only filter "Household location" should be in effect and show Is empty when opened
+  And the empty-only filter "Documentation" should be in effect and show Is empty when opened
+  And the saved working list view is cleaned up
+
+@v<42
+Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, INTEGER_POSITIVE, DATE, ORGANISATION_UNIT
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the boolean filter
+  And you set the range filter "Age (years)" to 0-120
+  And you set the range filter "Height in cm" to 100-200
+  And you set the range filter "Weight in kg" to 1-200
+  And you set the date filter
+  And you set the organisation unit filter
+  And you save the view as valueTypesNoEmpty
+  And you refresh the page
+  And you open the saved view valueTypesNoEmpty
+  Then the boolean filter should be in effect and show the correct value when opened
+  And the range filter "Age (years)" should be in effect and show 0 to 120 when opened
+  And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
+  And the range filter "Weight in kg" should be in effect and show 1 to 200 when opened
+  And the date filter should be in effect and show the correct value when opened
+  And the organisation unit filter should be in effect and show the correct value when opened
+  And the saved working list view is cleaned up
+
+@v<42
+Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE, URL) are not visible in filter list - Event
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you open the More filters menu on the event working list
+  Then the filter option "Household location" should not appear in the More filters menu
+  And the filter option "Documentation" should not appear in the More filters menu
 
 Scenario: User is promted with message to select Category
 Given you open the main page with Ngelehun and Contraceptives Voucher Program

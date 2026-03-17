@@ -115,6 +115,12 @@ const validatorForNumber = {
     type: validatorTypes.TYPE_BASE,
 };
 
+const validatorForPercentage = {
+    validator: isValidPercentage,
+    message: errorMessages.PERCENTAGE,
+    type: validatorTypes.TYPE_BASE,
+};
+
 const validatorsForTypes = {
     [dataElementTypes.NUMBER]: [validatorForNumber],
     [dataElementTypes.INTEGER]: [validatorForInteger],
@@ -221,7 +227,11 @@ const validatorsForTypes = {
         validator: getNumberRangeValidator(validatorForNegativeInteger),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
-
+    }],
+    [dataElementTypes.PERCENTAGE_RANGE]: [{
+        validator: getNumberRangeValidator(validatorForPercentage),
+        message: errorMessages.RANGE,
+        type: validatorTypes.TYPE_BASE,
     }],
 };
 
