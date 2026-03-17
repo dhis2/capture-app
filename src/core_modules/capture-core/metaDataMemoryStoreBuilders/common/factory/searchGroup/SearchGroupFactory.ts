@@ -209,7 +209,7 @@ export class SearchGroupFactory {
                 attribute.trackedEntityAttribute)
             .reduce((accGroups: any, attribute) => {
                 const valueType = attribute.trackedEntityAttribute!.valueType;
-                const isUnsupported = UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
+                const isUnsupported = UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType);
                 if (attribute.trackedEntityAttribute!.unique && !isUnsupported) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
                 } else if (attribute.searchable) {
