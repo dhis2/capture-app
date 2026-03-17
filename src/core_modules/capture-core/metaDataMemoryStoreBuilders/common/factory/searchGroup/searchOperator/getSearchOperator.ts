@@ -11,13 +11,12 @@ import {
 import { forcedSearchOperators } from './forcedSearchOperators';
 import { defaultSearchOperators } from './defaultSearchOperators';
 
-const getFallbackSearchOperator = (metadata: CachedTrackedEntityAttribute): SearchOperator => {
+const getFallbackSearchOperator = (metadata: CachedTrackedEntityAttribute): SearchOperator | undefined => {
     const { valueType, blockedSearchOperators } = metadata;
     const defaultSearchOperatorList = defaultSearchOperators[valueType];
 
     if (!defaultSearchOperatorList) {
-        log.error(errorCreator('missing default search operator for the valueType')({ valueType }));
-        return DEFAULT_FALLBACK_SEARCH_OPERATOR;
+        return undefined;
     }
 
     if (!blockedSearchOperators || blockedSearchOperators.length === 0) {
@@ -41,7 +40,7 @@ const getFallbackSearchOperator = (metadata: CachedTrackedEntityAttribute): Sear
     return fallbackSearchOperator;
 };
 
-export const getSearchOperator = (metadata: CachedTrackedEntityAttribute): SearchOperator => {
+export const getSearchOperator = (metadata: CachedTrackedEntityAttribute): SearchOperator | undefined => {
     if (metadata.unique) {
         return DEFAULT_IS_UNIQUE_SEARCH_OPERATOR;
     }

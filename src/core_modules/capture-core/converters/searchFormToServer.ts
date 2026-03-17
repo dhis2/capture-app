@@ -75,7 +75,7 @@ const valueConvertersForType = {
     [dataElementTypes.USERNAME]: convertString,
 };
 
-export function convertValue(value: FormValues, dataElement: DataElement, searchOperator: SearchOperator) {
+export function convertValue(value: FormValues, dataElement: DataElement, searchOperator?: SearchOperator) {
     if (value === null || value === undefined) {
         return null;
     }
