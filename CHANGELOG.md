@@ -1,3 +1,10 @@
+## [105.13.1](https://github.com/dhis2/capture-app/compare/v105.13.0...v105.13.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21131] Console error when loading working list with empty only filter attributes ([#4482](https://github.com/dhis2/capture-app/issues/4482)) ([1598b6b](https://github.com/dhis2/capture-app/commit/1598b6b428ec624de68639915c978416be4978fa))
+
 # [105.13.0](https://github.com/dhis2/capture-app/compare/v105.12.0...v105.13.0) (2026-03-17)
 
 
