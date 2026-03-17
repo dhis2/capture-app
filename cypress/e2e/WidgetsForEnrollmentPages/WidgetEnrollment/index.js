@@ -2,6 +2,7 @@ import { When, Then, After, Given } from '@badeball/cypress-cucumber-preprocesso
 import { getCurrentYear } from '../../../support/date';
 import { hasVersionSupport } from '../../../support/tagUtils';
 
+
 After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
     const teiQueryKey = hasVersionSupport('@v>=41') ? 'trackedEntity' : 'trackedEntityInstance';
     const orgUnitKey = hasVersionSupport('@v>=42') ? 'orgUnit' : 'ou';

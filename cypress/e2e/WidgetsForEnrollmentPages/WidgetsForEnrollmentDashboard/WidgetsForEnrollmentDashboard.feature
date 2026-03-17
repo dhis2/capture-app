@@ -30,6 +30,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     When the user clicks on the organisation unit with text: Njandama MCHP
     Then the user successfully transfers the enrollment
 
+
   # Scenarios linked to the enrollment dashboard
   Scenario: The profile widget can be closed on the enrollment dashboard
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
