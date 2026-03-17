@@ -32,4 +32,5 @@ export const EMPTY_ONLY_FILTER_TYPES: Set<string> = new Set([
     filterTypesObject.COORDINATE,
     filterTypesObject.FILE_RESOURCE,
     filterTypesObject.IMAGE,
+    filterTypesObject.URL,
 ]);

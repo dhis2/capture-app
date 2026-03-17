@@ -52,7 +52,7 @@ const selectorContentsForTypes = {
     [filterTypesObject.PHONE_NUMBER]: TextFilter,
     [filterTypesObject.TEXT]: TextFilter,
     [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
-    [filterTypesObject.URL]: TextFilter,
+    [filterTypesObject.URL]: EmptyOnlyFilter,
     [filterTypesObject.USERNAME]: UsernameFilter,
 };
 
