@@ -1,3 +1,10 @@
+# [105.12.0](https://github.com/dhis2/capture-app/compare/v105.11.5...v105.12.0) (2026-03-17)
+
+
+### Features
+
+* [LIBS-773] bump cli app scripts to support loading custom translations from the data store ([#4485](https://github.com/dhis2/capture-app/issues/4485)) ([15debe6](https://github.com/dhis2/capture-app/commit/15debe60bb78038bd40c5ab954efa80b1dfb4667))
+
 ## [105.11.5](https://github.com/dhis2/capture-app/compare/v105.11.4...v105.11.5) (2026-03-16)
 
 
