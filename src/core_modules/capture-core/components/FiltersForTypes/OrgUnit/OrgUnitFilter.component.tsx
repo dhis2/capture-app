@@ -27,11 +27,11 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
     };
 
     handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
+        this.props.onCommitValue(value || null);
     });
 
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
+        this.props.onCommitValue(value || null);
     });
 
     render() {

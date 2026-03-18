@@ -1,4 +1,4 @@
-export type Value = Array<any> | null | undefined;
+export type Value = Array<any> | string | null | undefined;
 
 export type PlainProps = {
     value: Value;

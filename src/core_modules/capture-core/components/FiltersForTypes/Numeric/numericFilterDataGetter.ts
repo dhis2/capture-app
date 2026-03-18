@@ -15,7 +15,7 @@ type Value = {
 } | string | null | undefined;
 
 function parseOptionalNumber(s: string | null | undefined): number | undefined {
-    if (s == null) return undefined;
+    if (s == null || s === '') return undefined;
     return parseNumber(s) ?? undefined;
 }
 

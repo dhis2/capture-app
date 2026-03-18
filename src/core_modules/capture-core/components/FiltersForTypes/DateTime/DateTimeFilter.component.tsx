@@ -125,11 +125,11 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 
     handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
+        this.props.onCommitValue(value || null);
     });
 
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
+        this.props.onCommitValue(value || null);
     });
 
     handleDateBlur = (side: DateTimeSide) => (dateValue: DateValue) => {

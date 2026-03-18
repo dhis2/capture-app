@@ -50,11 +50,11 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     }
 
     handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
+        this.props.onCommitValue(value || null);
     });
 
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
+        this.props.onCommitValue(value || null);
     });
 
     onIsValid() { //eslint-disable-line

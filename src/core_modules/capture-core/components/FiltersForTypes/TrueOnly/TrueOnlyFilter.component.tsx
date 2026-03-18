@@ -26,7 +26,6 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const value = this.props.value;
-
         if (typeof value === 'string' && isEmptyValueFilter(value)) {
             return getTrueOnlyFilterData(value);
         }
@@ -41,11 +40,11 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
     onIsValid = () => true
 
     handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ? [value] : null);
+        this.props.onCommitValue(value || null);
     });
 
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ? [value] : null);
+        this.props.onCommitValue(value || null);
     });
 
     handleKeyDown = (event: React.KeyboardEvent) => {
@@ -60,14 +59,13 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
 
     render() {
         const { value, classes } = this.props;
-        const emptyValueStr = Array.isArray(value) && value.length === 1 && isEmptyValueFilter(value[0])
-            ? value[0] : undefined;
-        const trueOnlyValue = emptyValueStr ? undefined : value;
+        const isEmptyFilter = typeof value === 'string' && isEmptyValueFilter(value);
+        const trueOnlyValue = isEmptyFilter ? undefined : value;
 
         return (
             <div>
                 <EmptyValueFilterCheckboxes
-                    value={emptyValueStr}
+                    value={isEmptyFilter ? value : undefined}
                     onEmptyChange={this.handleEmptyValueCheckboxChange}
                     onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
                     disabled={this.props.disableEmptyValueFilter}
