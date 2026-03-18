@@ -29,6 +29,12 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
 
     onIsValid = () => true
 
+    handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && this.props.onUpdate) {
+            this.props.onUpdate(this.props.value);
+        }
+    };
+
     handleTrueOnlyBlur = (value: string | null | undefined) => {
         this.props.onCommitValue(value ? [value] : null);
     }
@@ -39,6 +45,7 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
         return (
             <div
                 className={classes.selectBoxesContainer}
+                onKeyDownCapture={this.handleKeyDown}
             >
                 <D2TrueOnly
                     label={i18n.t('Yes')}

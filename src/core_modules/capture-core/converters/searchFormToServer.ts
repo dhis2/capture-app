@@ -58,7 +58,8 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: convertRange,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertRange,
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: convertRange,
-    [dataElementTypes.PERCENTAGE]: convertString,
+    [dataElementTypes.PERCENTAGE]: convertRange,
+    [dataElementTypes.PERCENTAGE_RANGE]: convertRange,
     [dataElementTypes.DATE]: convertRange,
     [dataElementTypes.DATE_RANGE]: convertRange,
     [dataElementTypes.DATETIME]: convertRange,
@@ -74,7 +75,7 @@ const valueConvertersForType = {
     [dataElementTypes.USERNAME]: convertString,
 };
 
-export function convertValue(value: FormValues, dataElement: DataElement, searchOperator: SearchOperator) {
+export function convertValue(value: FormValues, dataElement: DataElement, searchOperator?: SearchOperator) {
     if (value === null || value === undefined) {
         return null;
     }

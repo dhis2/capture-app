@@ -135,6 +135,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
                 filterValue={filterValue}
                 onRemove={this.onRemove}
                 isRemovable={isRemovable}
+                onClearValue={this.handleClearFilter}
             />
         );
     }

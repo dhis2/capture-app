@@ -34,6 +34,7 @@ const searchAttributeElementTypes = {
     [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
     [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
     [dataElementTypes.MULTI_TEXT]: dataElementTypes.TEXT,
+    [dataElementTypes.PERCENTAGE]: dataElementTypes.PERCENTAGE_RANGE,
 };
 
 
@@ -86,20 +87,20 @@ export class SearchGroupFactory {
 
             o.id = id;
             o.name =
-              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayName;
+                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+                || displayName;
 
             o.shortName =
-              this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
-              || displayShortName;
+                this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
+                || displayShortName;
 
             o.formName =
-              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayFormName;
+                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+                || displayFormName;
 
             o.description =
-              this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
-              || description;
+                this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
+                || description;
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
@@ -207,7 +208,9 @@ export class SearchGroupFactory {
             .filter(attribute =>
                 attribute.trackedEntityAttribute)
             .reduce((accGroups: any, attribute) => {
-                if (attribute.trackedEntityAttribute!.unique) {
+                const valueType = attribute.trackedEntityAttribute!.valueType;
+                const isUnsupported = UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType);
+                if (attribute.trackedEntityAttribute!.unique && !isUnsupported) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
                 } else if (attribute.searchable) {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];

@@ -1,3 +1,31 @@
+## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21133] Searching by unique attribute with unsupported type crashes ([#4484](https://github.com/dhis2/capture-app/issues/4484)) ([e8e6e5a](https://github.com/dhis2/capture-app/commit/e8e6e5acf8936a420c046a90bdc665f7b2d38af3))
+
+## [105.13.1](https://github.com/dhis2/capture-app/compare/v105.13.0...v105.13.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21131] Console error when loading working list with empty only filter attributes ([#4482](https://github.com/dhis2/capture-app/issues/4482)) ([1598b6b](https://github.com/dhis2/capture-app/commit/1598b6b428ec624de68639915c978416be4978fa))
+
+# [105.13.0](https://github.com/dhis2/capture-app/compare/v105.12.0...v105.13.0) (2026-03-17)
+
+
+### Features
+
+* [DHIS2-12881] Support additional value types for filters in working lists ([#4461](https://github.com/dhis2/capture-app/issues/4461)) ([01cff4f](https://github.com/dhis2/capture-app/commit/01cff4f282aa228d245ba5ee64d32f8d373e2e43))
+
+# [105.12.0](https://github.com/dhis2/capture-app/compare/v105.11.5...v105.12.0) (2026-03-17)
+
+
+### Features
+
+* [LIBS-773] bump cli app scripts to support loading custom translations from the data store ([#4485](https://github.com/dhis2/capture-app/issues/4485)) ([15debe6](https://github.com/dhis2/capture-app/commit/15debe60bb78038bd40c5ab954efa80b1dfb4667))
+
 ## [105.11.5](https://github.com/dhis2/capture-app/compare/v105.11.4...v105.11.5) (2026-03-16)
 
 
