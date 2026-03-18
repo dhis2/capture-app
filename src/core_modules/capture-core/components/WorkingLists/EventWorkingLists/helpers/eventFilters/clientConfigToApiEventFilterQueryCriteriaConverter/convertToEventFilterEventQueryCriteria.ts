@@ -200,6 +200,11 @@ const getMainFilter = (filter: any): any => {
     case 'assignee':
         mainValue = filterValues;
         break;
+    case 'orgUnitId':
+        mainValue = {
+            orgUnit: filterValues.eq,
+        };
+        break;
     default:
         mainValue = null;
         break;
