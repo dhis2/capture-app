@@ -38,7 +38,7 @@ type Props = {
     onClearFilter: ClearFilter;
     onRemoveFilter: RemoveFilter;
     isRemovable?: boolean;
-    disableEmptyValueFilter?: boolean;
+    transformRecordsFilter?: (rawFilter: any) => any;
     onSetVisibleSelector: (itemId?: string | null) => void;
     selectorVisible: boolean;
     filterValue?: FilterDataInput;
@@ -120,7 +120,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
             unique,
             searchOperator,
             minCharactersToSearch,
-            disableEmptyValueFilter,
+            transformRecordsFilter,
         } = this.props;
 
         return (
@@ -131,7 +131,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
                 unique={unique}
                 searchOperator={searchOperator}
                 minCharactersToSearch={minCharactersToSearch}
-                disableEmptyValueFilter={disableEmptyValueFilter}
+                transformRecordsFilter={transformRecordsFilter}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}

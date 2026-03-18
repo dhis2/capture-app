@@ -14,7 +14,7 @@ export type Props = {
     minCharactersToSearch?: number;
     disabled?: boolean;
     tooltipContent?: string;
-    disableEmptyValueFilter?: boolean;
+    transformRecordsFilter?: (rawFilter: any) => any;
     onSetVisibleSelector: (itemId?: string | null) => void;
     selectorVisible: boolean;
     onUpdateFilter: UpdateFilter;
