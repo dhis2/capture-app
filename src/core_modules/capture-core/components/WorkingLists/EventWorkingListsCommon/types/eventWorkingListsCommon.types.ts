@@ -14,7 +14,6 @@ export type ColumnConfigBase = {
     filterHidden?: boolean;
     additionalColumn?: boolean;
     unique?: boolean;
-    disableEmptyValueFilter?: boolean;
 };
 
 export type MetadataColumnConfig = ColumnConfigBase;

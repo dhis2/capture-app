@@ -10,7 +10,7 @@ type Props = {
 };
 
 type State = {
-    value?: Array<string> | null,
+    value?: Array<string> | string | null,
 };
 
 export class TrueOnlyFilterManager extends React.Component<Props, State> {

@@ -17,7 +17,6 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         visible: true,
         type: elementTypeKeys.DATE,
         header: stage.stageForm.getLabel(mainPropertyNames.OCCURRED_AT),
-        disableEmptyValueFilter: true,
     }, {
         id: mainPropertyNames.ORGANISATION_UNIT,
         visible: true,
@@ -25,7 +24,6 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         header: i18n.t('Organisation unit'),
         apiName: 'orgUnit',
         filterHidden: true,
-        disableEmptyValueFilter: true,
     }, {
         id: mainPropertyNames.EVENT_STATUS,
         visible: true,
@@ -36,7 +34,6 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
             { text: i18n.t('Completed'), value: 'COMPLETED' },
         ],
         resolveValue: translatedStatusTypes,
-        disableEmptyValueFilter: true,
     }];
 
     const optionalFields: any[] = [];
@@ -47,7 +44,6 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
             type: 'ASSIGNEE',
             header: i18n.t('Assigned to'),
             apiName: 'assignedUser',
-            disableEmptyValueFilter: true,
         });
     }
     return [...baseFields, ...optionalFields]

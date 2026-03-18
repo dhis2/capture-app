@@ -64,8 +64,8 @@ const useContents = ({
     multiValueFilter,
     isRemovable,
     emptyValueFilterSupported,
-    transformRecordsFilter,
-    isMainProperty,
+    transformRecordsFilter = undefined,
+    isMainProperty = undefined,
     ...passOnProps
 }) => {
     // main/system filters always have transformRecordsFilter (filtersOnly) or isMainProperty (columns)

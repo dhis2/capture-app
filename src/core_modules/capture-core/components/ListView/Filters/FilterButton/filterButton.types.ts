@@ -15,6 +15,7 @@ export type Props = {
     disabled?: boolean;
     tooltipContent?: string;
     transformRecordsFilter?: (rawFilter: any) => any;
+    isMainProperty?: boolean;
     onSetVisibleSelector: (itemId?: string | null) => void;
     selectorVisible: boolean;
     onUpdateFilter: UpdateFilter;
