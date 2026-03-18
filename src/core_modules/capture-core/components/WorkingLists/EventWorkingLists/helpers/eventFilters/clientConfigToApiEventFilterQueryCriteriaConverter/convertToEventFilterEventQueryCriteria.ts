@@ -110,15 +110,10 @@ const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate =>
     };
 };
 
-const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => {
-    if ('isEmpty' in filter) {
-        return { assignedUserMode: filter.assignedUserMode as ApiDataFilterAssignee['assignedUserMode'] };
-    }
-    return {
-        assignedUserMode: filter.assignedUserMode,
-        assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
-    };
-};
+const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
+    assignedUserMode: filter.assignedUserMode,
+    assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
+});
 
 const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AssigneeFilter } from './AssigneeFilter.component';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { AssigneeFilterData } from './types';
 
 type Props = {
@@ -12,7 +11,7 @@ type Props = {
 type Value = {
     mode: string;
     provided?: any;
-} | string | null;
+} | null;
 
 type State = {
     value?: Value | null;
@@ -22,10 +21,6 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter: AssigneeFilterData | null): Value | undefined {
         if (!filter) {
             return undefined;
-        }
-
-        if ('isEmpty' in filter) {
-            return filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER;
         }
 
         return {

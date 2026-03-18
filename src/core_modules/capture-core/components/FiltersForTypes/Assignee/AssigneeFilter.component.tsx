@@ -7,13 +7,6 @@ import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
@@ -29,12 +22,11 @@ const getStyles: Readonly<any> = (theme: any) => ({
 type Value = {
     mode: string;
     provided?: any;
-} | string | null;
+} | null;
 
 type PlainProps = {
     value?: Value;
     onCommitValue: (value: any) => void;
-    disableEmptyValueFilter?: boolean;
 };
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
@@ -55,18 +47,12 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData() {
         const { value } = this.props;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getAssigneeFilterData(value);
-        }
         return value && getAssigneeFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return true;
-        }
-        if (typeof value === 'object' && value?.mode === modeKeys.PROVIDED && !value?.provided) {
+        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });
@@ -74,14 +60,6 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         }
         return true;
     }
-
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value ?? null);
-    });
 
     handleModeSelect = (value: string) => {
         this.setState({
@@ -108,18 +86,10 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     render() {
         const { value, classes } = this.props;
-        const objValue = typeof value === 'string' ? null : value;
-        const { mode, provided } = objValue || {};
+        const { mode, provided } = value || {};
 
         return (
             <div>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
                 <div
                     className={classes.selectBoxesContainer}
                 >
