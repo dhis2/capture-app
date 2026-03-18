@@ -243,7 +243,7 @@ const getMainDataFilters = async (
         return [];
     }
 
-    const { occurredAt, status, orgUnit, assignedUserMode, assignedUsers } = eventQueryCriteria;
+    const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters: any[] = [];
     if (status) {
         filters.push({
@@ -254,12 +254,6 @@ const getMainDataFilters = async (
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
         convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: occurredAt.lockedAll });
-    }
-    if (orgUnit) {
-        filters.push({
-            ...getOrgUnitFilter({ eq: orgUnit }),
-            id: 'orgUnitId',
-        });
     }
     if (assignedUserMode) {
         filters.push({

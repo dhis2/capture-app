@@ -24,6 +24,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         type: elementTypeKeys.ORGANISATION_UNIT,
         header: i18n.t('Organisation unit'),
         apiName: 'orgUnit',
+        filterHidden: true,
         disableEmptyValueFilter: true,
     }, {
         id: mainPropertyNames.EVENT_STATUS,

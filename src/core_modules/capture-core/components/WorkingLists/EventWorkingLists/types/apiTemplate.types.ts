@@ -65,7 +65,6 @@ export type ApiEventQueryCriteria = {
     order?: string | null,
     occurredAt?: any | null,
     status?: string | null,
-    orgUnit?: string | null,
     displayColumnOrder?: Array<string> | null,
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
     assignedUsers?: Array<string>,
