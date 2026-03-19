@@ -2,10 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import type { TimeFilterData } from '../../../../../FiltersForTypes';
 
 export function convertTime(filter: TimeFilterData): string {
-    if (filter.isEmpty !== undefined && filter.value) {
-        return filter.value;
-    }
-
     let appliedText = '';
     const ge = filter.ge ?? '';
     const le = filter.le ?? '';
