@@ -7,6 +7,9 @@ IndexedDBAdapter.indexedDB = indexedDB;
 
 let testCnt = 0;
 beforeEach(() => {
+    if (typeof globalThis.structuredClone === 'undefined') {
+        globalThis.structuredClone = (val) => JSON.parse(JSON.stringify(val));
+    }
     options.name = `testDB${testCnt}`;
     testCnt += 1;
 });
