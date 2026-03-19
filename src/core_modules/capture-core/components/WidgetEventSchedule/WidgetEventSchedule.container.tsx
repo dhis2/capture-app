@@ -1,0 +1,237 @@
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import { useDispatch } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import moment from 'moment';
+import { pipe } from 'capture-core-utils';
+import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
+import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useLocationQuery } from '../../utils/routing';
+import type { ContainerProps } from './widgetEventSchedule.types';
+import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
+import {
+    useScheduleConfigFromProgramStage,
+    useDetermineSuggestedScheduleDate,
+    useEventsInOrgUnit,
+    useScheduleConfigFromProgram,
+    useNoteDetails,
+} from './hooks';
+import { requestScheduleEvent } from './WidgetEventSchedule.actions';
+import { NoAccess } from './AccessVerification';
+import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { convertFormToClient, convertClientToServer } from '../../converters';
+import { useProgramExpiryForUser } from '../../hooks';
+
+export const WidgetEventSchedule = ({
+    enrollmentId,
+    teiId,
+    stageId,
+    programId,
+    orgUnitId: initialOrgUnitId,
+    onSave,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
+    onCancel,
+    initialScheduleDate,
+    enableUserAssignment,
+    assignee: storedAssignee,
+    ...passOnProps
+}: ContainerProps) => {
+    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const dispatch = useDispatch();
+    const { programStageScheduleConfig }: {programStageScheduleConfig?: any} = useScheduleConfigFromProgramStage(stageId);
+    const { programConfig }: {programConfig?: any} = useScheduleConfigFromProgram(programId);
+    const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
+        programStageScheduleConfig,
+        programConfig,
+        initialScheduleDate,
+        eventData: passOnProps.eventData,
+        enrolledAt: passOnProps.enrolledAt,
+        occurredAt: passOnProps.occurredAt,
+        hideDueDate: passOnProps.hideDueDate,
+    });
+    const { fromClientDate } = useTimeZoneConversion();
+    const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
+    const { currentUser, noteId }: { currentUser: any, noteId: string } = useNoteDetails();
+    const [scheduleDate, setScheduleDate] = useState('');
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
+    const [validation, setValidation] = useState<any>();
+    const isFirstRender = useRef(true);
+    useEffect(() => {
+        if (initialOrgUnitId && orgUnitName) {
+            const orgUnit = { id: initialOrgUnitId, name: orgUnitName };
+            setScheduledOrgUnit(orgUnit);
+        }
+    }, [orgUnitName, initialOrgUnitId]);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const convertScheduleDate = (date: any, validationResult = { error: false }) => {
+        if (!date || validationResult?.error) {
+            return '';
+        }
+        return pipe(convertFormToClient, convertClientToServer)(date, dataElementTypes.DATE);
+    };
+    const serverScheduleDate = convertScheduleDate(scheduleDate, validation);
+    const serverSuggestedScheduleDate = convertScheduleDate(suggestedScheduleDate);
+    const [notes, setNotes] = useState<Array<{
+        value: string;
+        storedAt: string;
+        storedBy?: string;
+        createdBy?: any;
+        note?: string;
+    }>>([]);
+    const [assignee, setAssignee] = useState(storedAssignee);
+    const { eventId } = useLocationQuery();
+    const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
+    const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate, programId);
+    const eventCountInOrgUnit = events.length;
+    const [selectedCategories, setSelectedCategories] = useState<any>({});
+    const [categoryOptionsError, setCategoryOptionsError] = useState<any>();
+    const { programCategory } = useCategoryCombinations(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
+
+    useEffect(() => {
+        if (isFirstRender.current && !scheduleDate && suggestedScheduleDate) {
+            setScheduleDate(suggestedScheduleDate);
+            isFirstRender.current = false;
+        }
+    }, [scheduleDate, suggestedScheduleDate]);
+
+    useEffect(() => {
+        setAssignee(storedAssignee);
+    }, [storedAssignee]);
+
+    const onHandleSchedule = useCallback(() => {
+        if (!isFormValid) { return; }
+        if (programCategory?.categories &&
+            Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
+            const errors = programCategory.categories
+                .filter(({ id }: any) => !selectedCategories[id])
+                .reduce((acc: any, category: any) => {
+                    acc[category.id] = { touched: true, valid: false };
+                    return acc;
+                }, {});
+            setCategoryOptionsError(errors);
+            return;
+        }
+        dispatch(requestScheduleEvent({
+            scheduleDate: serverScheduleDate,
+            orgUnitId: selectedOrgUnitId,
+            notes,
+            programId,
+            stageId,
+            teiId,
+            enrollmentId,
+            eventId,
+            categoryOptions: selectedCategories,
+            onSaveExternal: onSave,
+            onSaveSuccessActionType,
+            onSaveErrorActionType,
+            ...(assignee && { assignedUser: convertClientToServer(assignee, dataElementTypes.ASSIGNEE) }),
+        }));
+    }, [
+        dispatch,
+        serverScheduleDate,
+        notes,
+        programId,
+        selectedOrgUnitId,
+        stageId,
+        teiId,
+        enrollmentId,
+        eventId,
+        selectedCategories,
+        onSave,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+        programCategory,
+        assignee,
+        isFormValid,
+    ]);
+
+    const onAddNote = (note: string) => {
+        if (currentUser) {
+            const newNote = {
+                storedBy: currentUser.userName,
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                value: note,
+                createdBy: {
+                    firstName: currentUser.firstName,
+                    surname: currentUser.surname,
+                },
+                note: noteId,
+            };
+            setNotes([...notes, newNote]);
+        }
+    };
+
+    const onSetAssignee = useCallback((user: any) => setAssignee(user), []);
+    const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
+        setSelectedCategories((prevCategoryOptions: any) => ({
+            ...prevCategoryOptions,
+            ...{ [categoryId]: optionId },
+        }));
+        setCategoryOptionsError((prevError: any) => ({
+            ...prevError,
+            ...{ [categoryId]: { touched: true, valid: true } },
+        }));
+    }, [setSelectedCategories]);
+
+    const onResetCategoryOption = useCallback((categoryId: string) => {
+        const newCategoryOptions = { ...selectedCategories };
+        delete newCategoryOptions[categoryId];
+        setSelectedCategories(newCategoryOptions);
+        setCategoryOptionsError((prevError: any) => ({
+            ...prevError,
+            ...{ [categoryId]: { touched: true, valid: false } },
+        }));
+    }, [setSelectedCategories, selectedCategories]);
+
+    if (!program || !stage || !(program instanceof TrackerProgram) || !programStageScheduleConfig) {
+        return (
+            <div>
+                {i18n.t('Program or stage is invalid')}
+            </div>
+        );
+    }
+
+    const eventAccess = getProgramEventAccess(programId, stageId);
+    if (!eventAccess?.write) {
+        return (
+            <NoAccess onCancel={onCancel} />
+        );
+    }
+
+    return (
+        <WidgetEventScheduleComponent
+            assignee={assignee}
+            stageId={stageId}
+            stageName={stage.name}
+            programId={programId}
+            programCategory={programCategory}
+            programName={program.name}
+            enableUserAssignment={enableUserAssignment && stage?.enableUserAssignment}
+            scheduleDate={scheduleDate}
+            serverScheduleDate={serverScheduleDate}
+            displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
+            suggestedScheduleDate={suggestedScheduleDate}
+            serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+            validation={validation}
+            onCancel={onCancel}
+            setScheduleDate={setScheduleDate}
+            setScheduledOrgUnit={setScheduledOrgUnit}
+            setIsFormValid={setIsFormValid}
+            setValidation={setValidation}
+            onSchedule={onHandleSchedule}
+            onAddNote={onAddNote}
+            eventCountInOrgUnit={eventCountInOrgUnit}
+            orgUnit={scheduledOrgUnit}
+            notes={notes}
+            selectedCategories={selectedCategories}
+            categoryOptionsError={categoryOptionsError}
+            onClickCategoryOption={onClickCategoryOption}
+            onResetCategoryOption={onResetCategoryOption}
+            onSetAssignee={onSetAssignee}
+            expiryPeriod={expiryPeriod}
+            {...passOnProps}
+        />
+    );
+};

@@ -1,0 +1,1 @@
+export { withEndColumnMenu } from './withEndColumnMenu';

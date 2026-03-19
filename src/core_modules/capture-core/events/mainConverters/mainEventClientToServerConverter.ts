@@ -1,0 +1,41 @@
+import { convertClientToServer } from '../../converters';
+import { convertMainEvent } from './mainEventConverter';
+import { dataElementTypes } from '../../metaData';
+import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
+
+const keysToSkip = {
+    completedAt: 'completedAt',
+    completedBy: 'completedBy',
+};
+
+export function convertMainEventClientToServer(event: any) {
+    const mapClientKeyToServerKey = {
+        eventId: 'event',
+        programId: 'program',
+        programStageId: 'programStage',
+        orgUnitId: 'orgUnit',
+        trackedEntityId: 'trackedEntity',
+        enrollmentId: 'enrollment',
+        assignee: 'assignedUser',
+    };
+    event = convertEventAttributeOptions(event);
+    // eslint-disable-next-line complexity
+    return convertMainEvent(event, (key, value) => {
+        let convertedValue;
+
+        switch (key) {
+        case 'occurredAt':
+        case 'scheduledAt':
+            convertedValue = convertClientToServer(value, dataElementTypes.DATE);
+            break;
+        case 'assignee':
+            convertedValue = value && convertClientToServer(value, dataElementTypes.ASSIGNEE);
+            break;
+        default:
+            convertedValue = value;
+            break;
+        }
+
+        return convertedValue;
+    }, keysToSkip, mapClientKeyToServerKey);
+}

@@ -42,9 +42,9 @@ const env = Object
                 acc[key] = allEnvVariables[key];
             }
         } else if (key.toUpperCase() === 'CYPRESS_DHIS2BASEURL') {
-            acc.REACT_APP_DHIS2_BASE_URL = allEnvVariables[key];
+            acc.DHIS2_BASE_URL = allEnvVariables[key];
         } else if (key.toUpperCase() === 'CYPRESS_DHIS2APIVERSION') {
-            acc.REACT_APP_DHIS2_API_VERSION = allEnvVariables[key];
+            acc.DHIS2_API_VERSION = allEnvVariables[key];
         } else if (key.toUpperCase() === 'NODE_OPTIONS') {
             acc[key] = allEnvVariables[key];
         }
@@ -52,9 +52,9 @@ const env = Object
     }, { BROWSER: 'none' });
 
 exec({
-    cmd: 'yarn',
-    args: ['run', 'start'],
+    cmd: 'serve',
+    args: ['-s build/app'],
     cwd: '.',
     env,
-    pipe: true,
+    pipe: false,
 });

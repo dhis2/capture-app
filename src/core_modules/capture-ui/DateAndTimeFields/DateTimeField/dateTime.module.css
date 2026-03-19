@@ -1,19 +1,26 @@
 .fieldsContainer {
+    position: relative;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .fieldsContainerVertical {
-    flex-direction: column;
-}
-
-.formControl {
-    width: 100%;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.root {
     position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.inputContainer {
+    flex-grow: 1;
+    padding: 0;
+}
+
+.clearButton {
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 0 !important;
 }

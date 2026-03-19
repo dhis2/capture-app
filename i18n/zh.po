@@ -1,22 +1,30 @@
-# 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
-# 晓东 林 <13981924470@126.com>, 2025
-# easylin <lin_xd@126.com>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
+# 晓东 林 <13981924470@126.com>, 2026
+# easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The application could not be loaded."
+msgstr "应用程序无法加载。"
+
+msgid "Please verify that the server is running."
+msgstr "请确认服务器正在运行。"
+
+msgid "Please see log for details."
+msgstr "详情请查看日志。"
 
 msgid "Choose one or more dates..."
 msgstr "选择一个或多个日期"
@@ -32,14 +40,26 @@ msgid ""
 "is not supported. See log for details."
 msgstr "造成这种情况的可能原因是不支持浏览器或模式（例如隐私模式）。有关详细信息，请参见日志。"
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
-msgstr ""
-"您在同一域中打开了另一个版本的Capture App。当前，Capture "
-"App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
+msgid "Please refresh the page (Either the server or the app version changed)"
+msgstr "请刷新页面（服务器或应用程序版本已更改）"
+
+msgid "Bulk data entry"
+msgstr "批量数据录入"
+
+msgid "Program overview"
+msgstr "项目计划概述"
+
+msgid "Active enrollments"
+msgstr "活跃的登记"
+
+msgid "Completed enrollments"
+msgstr "完成登记"
+
+msgid "Cancelled enrollments"
+msgstr "取消登记"
+
+msgid "Search"
+msgstr "搜索"
 
 msgid "Enrollment dashboard"
 msgstr "登记仪表板"
@@ -53,23 +73,8 @@ msgstr "编辑事件"
 msgid "New event"
 msgstr "新事件"
 
-msgid "Active enrollments"
-msgstr "活跃的登记"
-
-msgid "Completed enrollments"
-msgstr "完成登记"
-
-msgid "Cancelled enrollments"
-msgstr "取消登记"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} 清单"
-
-msgid "Search"
-msgstr "搜索"
-
-msgid "Working List"
-msgstr "工作列表"
+msgid "Loading..."
+msgstr "载入....."
 
 msgid "Event list"
 msgstr "事件列表"
@@ -149,6 +154,11 @@ msgstr "报名登记"
 msgid "Complete event"
 msgstr "完成事件"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr "输入的日期属于过期日期。输入{{firstValidDate}} 之后的日期。"
+
 msgid "A value is required"
 msgstr "需要一个值"
 
@@ -212,6 +222,9 @@ msgstr "分配者"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "保存到 {{orgUnitName}} 中的 {{programName}}"
 
+msgid "Saving to {{programName}}"
+msgstr "保存到{{programName}}项目"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -233,6 +246,9 @@ msgstr "已完成"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "请在保存事件前添加或取消备注"
+
+msgid "Please provide an valid organisation unit"
+msgstr "请提供有效的组织单位"
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -356,6 +372,12 @@ msgstr "显示已注册的{{trackedEntityTypeName}}"
 msgid "Registered person"
 msgstr "已注册的人"
 
+msgid "No item selected"
+msgstr "未选择项目"
+
+msgid "Form foundation missing. See log for details"
+msgstr "表单 地基丢失。详见日志"
+
 msgid "validation failed"
 msgstr "验证失败"
 
@@ -389,11 +411,17 @@ msgstr "验证错误"
 msgid "Validation warnings"
 msgstr "有效性警告"
 
-msgid "Some operations are still runnning. Please wait.."
-msgstr "有些操作一直在运行,请等待"
+msgid "Some operations are still running. Please wait."
+msgstr "某些操作仍在进行中。请稍候。"
 
 msgid "Operations running"
 msgstr "运作中"
+
+msgid "No feedback for this enrollment yet"
+msgstr "此报名尚无反馈"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "此报名尚无指标输出"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -423,6 +451,18 @@ msgstr "无"
 
 msgid "Select user"
 msgstr "选择用户"
+
+msgid "Please specify a range"
+msgstr "请指定范围"
+
+msgid "The From date can't be after the To date"
+msgstr "从日期不能在至日期之后"
+
+msgid "Please specify the number of days"
+msgstr "请注明天数"
+
+msgid "Please provide zero or a positive integer"
+msgstr "0或负整数"
 
 msgid "to"
 msgstr "到"
@@ -463,14 +503,32 @@ msgstr "绝对范围"
 msgid "Relative range"
 msgstr "相对范围"
 
+msgid "Is empty"
+msgstr "是空的"
+
+msgid "Is not empty"
+msgstr "不为空"
+
 msgid "Max"
 msgstr "最大"
 
 msgid "Min"
 msgstr "最小"
 
-msgid "Contains text"
-msgstr "包含文本"
+msgid "Minimum value cannot be greater than maximum value"
+msgstr "最小值不能大于最大值"
+
+msgid "Please provide a valid number"
+msgstr "请提供一个有效的数字"
+
+msgid "Please provide a valid integer"
+msgstr "请提供一个整数"
+
+msgid "Please provide a positive integer"
+msgstr "提供一个正整数"
+
+msgid "Please provide a negative integer"
+msgstr "负整数"
 
 msgid "Yes"
 msgstr "是"
@@ -505,8 +563,8 @@ msgstr "未找到匹配项"
 msgid "Clear"
 msgstr "清除"
 
-msgid "No results"
-msgstr "无结果"
+msgid "No results found"
+msgstr "没有结果"
 
 msgid "Description"
 msgstr "描述"
@@ -522,9 +580,6 @@ msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
-
-msgid "No results found"
-msgstr "没有结果"
 
 msgid "No items to display"
 msgstr "无条目可显示"
@@ -549,6 +604,14 @@ msgstr "重置过滤器"
 
 msgid "Remove filter"
 msgstr "移除过滤器"
+
+msgid "This filter requires more characters than a date can provide."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -601,30 +664,8 @@ msgstr "注意"
 msgid "Close the notice"
 msgstr "关闭通知"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ID为“ {{enrollmentId}}”的登记不存在"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "ID 为“{{programId}}”的程序不存在"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr "获取注册时出错。请输入有效网址。"
-
-msgid "No feedback for this enrollment yet"
-msgstr "此报名尚无反馈"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "此报名尚无指标输出"
-
 msgid "Quick actions"
 msgstr "快速行动"
-
-msgid "New Event"
-msgstr "新事件"
 
 msgid "Schedule an event"
 msgstr "安排事件"
@@ -634,9 +675,6 @@ msgstr "生成转诊/迁移"
 
 msgid "No available program stages"
 msgstr "没有可用的项目阶段"
-
-msgid "Program stage not found"
-msgstr "未找到项目阶段"
 
 msgid ""
 "Choose a program to add new or see existing enrollments for "
@@ -688,6 +726,22 @@ msgstr "在此项目中创建一个新事件。"
 msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "ID为“ {{enrollmentId}}”的登记不存在"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "ID 为“{{programId}}”的项目不存在"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "获取注册时出错。请输入有效网址。"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
 
@@ -712,6 +766,9 @@ msgstr "调度"
 msgid "Refer"
 msgstr "转诊"
 
+msgid "New Event"
+msgstr "新事件"
+
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "您无法添加更多的 {{ programStageName }} 事件"
 
@@ -727,24 +784,22 @@ msgstr "无法加载项目阶段"
 msgid "Stage"
 msgstr "阶段"
 
-msgid "Registered events"
-msgstr "注册的事件"
+msgid "The category option is not valid for the selected organisation unit."
+msgstr "类别选项对所选组织单位无效。"
 
-msgid ""
-"The category option is not valid for the selected organisation unit. Please "
-"select a valid combination."
-msgstr "类别选项对所选机构无效。请选择一个有效的组合。"
+msgid "Please select a valid combination."
+msgstr "请选择一个有效的组合。"
 
 msgid "Get started with Capture app"
 msgstr "开始使用采集应用程序"
 
 msgid "Report data"
-msgstr "报告数据"
+msgstr "报表数据"
 
 msgid ""
 "Choose a program and organisation unit to see existing data and create new "
 "records."
-msgstr "选择项目和组织机构，查看现有数据并创建新记录。"
+msgstr "选择项目和组织机构，查看现有数据和创建新记录。"
 
 msgid "Click 'Search'. For program-specific results, choose a program first."
 msgstr "点击 \"搜索\"。如需特定项目的搜索结果，请先选择一个项目。"
@@ -764,6 +819,9 @@ msgstr "或者在{{program}}中查看您可以访问的所有事件"
 msgid "Please select an organisation unit."
 msgstr "请选择一个机构。"
 
+msgid "Registered events"
+msgstr "注册的事件"
+
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
@@ -780,9 +838,6 @@ msgstr "另存为新"
 
 msgid "New"
 msgstr "新建"
-
-msgid "Create for"
-msgstr "为创建"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -857,6 +912,9 @@ msgstr "事件"
 msgid "You don't have access to edit this event"
 msgstr "您无权编辑此事件"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr "{{occurredAt}} 属于过期时间。事件不可编辑"
+
 msgid "View changelog"
 msgstr "查看变更日志"
 
@@ -871,12 +929,6 @@ msgstr "离开该页将丢失你创建新关系的所有选择"
 msgid "Errors"
 msgstr "错误"
 
-msgid "Feedback"
-msgstr "反馈"
-
-msgid "Indicators"
-msgstr "指标"
-
 msgid "Warnings"
 msgstr "错误"
 
@@ -888,6 +940,18 @@ msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
+
+msgid "tracked entity instance"
+msgstr "跟踪的实体实例"
+
+msgid "All accessible"
+msgstr "所有可访问的"
+
+msgid "Selected"
+msgstr "选择的"
+
+msgid "Organisation unit scope"
+msgstr "使用的机构范围"
 
 msgid "Selected program"
 msgstr "选择的项目"
@@ -902,6 +966,15 @@ msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "至少填写 {{count}} 属性进行搜索"
 
+msgid "Missing search criteria"
+msgstr "缺少搜索条件"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "Search form is missing. See log for details"
+msgstr "搜索表单 丢失。详见日志"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "无法检索元数据。请稍后再试。"
 
@@ -913,6 +986,15 @@ msgstr "载入"
 
 msgid "An error occurred while loading the form"
 msgstr "加载表格时发生错误"
+
+msgid "First Page"
+msgstr "第一页"
+
+msgid "Previous Page"
+msgstr "上一页"
+
+msgid "Next Page"
+msgstr "下一页"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -931,6 +1013,12 @@ msgstr "添加关系"
 
 msgid "No results found for "
 msgstr "没有找到结果"
+
+msgid "Choose an organisation unit in the form below"
+msgstr "从下面选择一个组织机构"
+
+msgid "None selected"
+msgstr "没有选择"
 
 msgid "Choose an organisation unit"
 msgstr "选择机构"
@@ -956,15 +1044,21 @@ msgstr "选择一个项目"
 msgid "Search for {{titleText}}"
 msgstr "搜索{{titleText}}"
 
-msgid "Search for"
-msgstr "搜索"
-
 msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+"You can also select a program from the top bar to search within that "
+"program."
+msgstr "您还可以从顶部栏选择一个项目计划，在该项目内进行搜索。"
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
+
+msgid "{{trackedEntityName}} has no searchable attributes"
+msgstr "{{trackedEntityName}} 没有可搜索属性"
+
+msgid ""
+"Try selecting a different tracked entity type, or try searching in a program"
+" by choosing one from the top bar."
+msgstr "尝试选择不同的跟踪实体类型，或尝试从顶部栏中选择一个项目进行搜索。"
 
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
@@ -976,15 +1070,18 @@ msgid "all programs"
 msgstr "所有项目"
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
-msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+"Not finding the results you were looking for? Try searching in all programs."
+msgstr "没有找到您想要的结果？请尝试搜索所有项目。"
+
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr "{{trackedEntityName}}没有可搜索的属性"
 
 msgid "Search in all programs"
 msgstr "搜索所有项目"
 
-msgid "If none of search results match, you can create a new "
-msgstr "如果没有匹配的搜索结果，您可以创建一个新的"
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
+msgstr "如果搜索结果都不匹配，您可以创建一个新的{{trackedEntityName}} 。"
 
 msgid "Create new"
 msgstr "新建"
@@ -1007,20 +1104,27 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
-msgid "Back to search"
-msgstr "返回搜寻"
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later."
+msgstr "此搜索有问题，请更改搜索条件或稍后再试。"
 
-msgid "An error has occurred"
-msgstr "发生了错误"
+msgid "For more details open the Console tab of the Developer tools"
+msgstr "要了解更多详情，请打开 \"开发工具 \"的 \"控制台 \"选项卡"
 
 msgid "Too many results"
 msgstr "结果太多"
 
+msgid "This search returned too many results to show."
+msgstr "搜索结果太多，无法显示。"
+
+msgid ""
+"Try changing search terms or searching by more attributes to narrow down the"
+" results."
+msgstr "尝试更改搜索条件或通过更多属性进行搜索，以缩小搜索结果的范围。"
+
 msgid "Cannot search in all programs"
 msgstr "无法在所有项目中搜索"
-
-msgid "Missing search criteria"
-msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
@@ -1040,13 +1144,19 @@ msgid "Create saved list"
 msgstr "创建保存列表"
 
 msgid "Create new in another program"
-msgstr "在另一个程序中创建新的"
+msgstr "在另一个项目中创建新的"
 
 msgid "Create new event"
 msgstr "创建新事件"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
+
+msgid "Select tracked entity type"
+msgstr "选择跟踪实体 类型"
+
+msgid "Type to filter tracked entity types"
+msgstr "筛选跟踪实体 类型"
 
 msgid "No tracked entity types available"
 msgstr "没有可跟踪的实体类型"
@@ -1085,8 +1195,17 @@ msgstr "检查登记"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
-msgstr "您必须提供一个理由来检查此受保护计划的注册情况。所有活动都将被记录。"
+"program."
+msgstr "您必须提供理由才能查询此受保护项目中的注册情况。"
+
+msgid "All activity will be logged."
+msgstr "所有活动都将记录在案。"
+
+msgid "Unsaved changes"
+msgstr "未保存的更改"
+
+msgid "Continue data entry"
+msgstr "继续输入数据"
 
 msgid "Enrollment actions"
 msgstr "登记行动"
@@ -1115,10 +1234,11 @@ msgstr "您没有删除此登记的权限"
 msgid "Delete enrollment"
 msgstr "删除报名登记"
 
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
-msgstr "您确定要删除此登记吗？这将永久删除当前登记。"
+msgid "Are you sure you want to delete this enrollment?"
+msgstr "您确定要删除此注册吗？"
+
+msgid "This will permanently remove the current enrollment."
+msgstr "这将永久删除当前注册。"
 
 msgid "Yes, delete enrollment."
 msgstr "是的，删除登记。"
@@ -1184,10 +1304,10 @@ msgid ""
 msgstr "选择登记所有权应转移到的机构。"
 
 msgid "Enrollment date"
-msgstr "加入日期"
+msgstr "登记日期"
 
 msgid "Incident date"
-msgstr "事件日期"
+msgstr "事件发生日期"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "无法加载报名的小部件。请稍后再试"
@@ -1210,8 +1330,8 @@ msgstr "添加坐标"
 msgid "Add area"
 msgstr "添加区域"
 
-msgid "Please provide an valid organisation unit"
-msgstr "请提供有效的组织单位"
+msgid "Program stage not found"
+msgstr "未找到项目阶段"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索机构。请稍后再试。"
@@ -1226,13 +1346,13 @@ msgid "program or stage is invalid"
 msgstr "项目或阶段无效"
 
 msgid "Notes about this enrollment"
-msgstr "加入须知"
+msgstr "报名登记须知"
 
 msgid "Write a note about this enrollment"
-msgstr "撰写有关此加入的说明"
+msgstr "撰写有关此报名登记的说明"
 
 msgid "This enrollment doesn't have any notes"
-msgstr "本次加入没有任何说明"
+msgstr "本次报名登记没有任何说明"
 
 msgid "Error"
 msgstr "错误"
@@ -1246,6 +1366,12 @@ msgstr "在规则执行中找不到阶段"
 msgid "Delete event"
 msgstr "删除事件"
 
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr "删除事件是永久性的，无法撤销。"
+
+msgid "Are you sure you want to delete this event? "
+msgstr "您确定要删除此事件吗？ "
+
 msgid "Yes, delete event"
 msgstr "是的，删除事件"
 
@@ -1254,6 +1380,21 @@ msgstr "转到`调度`选项卡以重新安排调度此事件"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
+
+msgid "You do not have access to uncomplete this event"
+msgstr "您没有权限未完成此事件"
+
+msgid "Geometry (Area)"
+msgstr "几何（面积）"
+
+msgid "Geometry (Coordinate)"
+msgstr "几何（坐标）"
+
+msgid "Polygon captured"
+msgstr "采集的多边形。"
+
+msgid "No polygon captured"
+msgstr "没有采集到多边形"
 
 msgid "Event completed"
 msgstr "事件完成"
@@ -1291,16 +1432,26 @@ msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] "预定日期是 {{count}} 天 {{position}} 建议的日期。"
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "这天在 {{orgUnitName}} 有 {{count}} 个预定活动。"
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] "今天在{{orgUnitName}} 有{{count}} 个本项目预定安排的事件或活动。"
 
 msgid "Schedule date / Due date"
 msgstr "计划日期/截止日期"
 
 msgid "Please provide a valid organisation unit"
 msgstr "请提供有效的机构"
+
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 在 {{stageName}} 安排活动"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr "在{{stageName}} 中为{{programName}}"
 
 msgid "Schedule info"
 msgstr "日程信息"
@@ -1312,20 +1463,26 @@ msgid "Write a note about this scheduled event"
 msgstr "撰写关于此预定活动的说明"
 
 msgid "Program or stage is invalid"
-msgstr "程序或阶段无效"
+msgstr "项目或活动阶段无效"
+
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Indicators"
+msgstr "指标"
 
 msgid "Save note"
 msgstr "保存笔记"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
-msgstr ""
-"在此处更改有关此 {{trackedEntityName}} 的信息。要更改有关此报名登记的信息，请使用此仪表板上“报名”框中的“编辑”按钮"
+msgid "Edit {{trackedEntityName}}"
+msgstr "编辑{{trackedEntityName}}"
 
-msgid " Loading..."
-msgstr " 正在加载..."
+msgid "Change information about this {{trackedEntityName}} here."
+msgstr "在此更改有关{{trackedEntityName}} 的信息。"
+
+msgid ""
+"Information about this enrollment can be edited in the Enrollment widget."
+msgstr "有关此注册的信息可在注册部件中编辑。"
 
 msgid "Save changes"
 msgstr "保存修改"
@@ -1371,20 +1528,23 @@ msgstr "是，删除 {{trackedEntityTypeName}}"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr "没有为{{trackedEntityTypeName}}"
+
+msgid "No attributes configured"
+msgstr "未配置属性"
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} 个人资料"
-
-msgid "tracked entity instance"
-msgstr "跟踪的实体实例"
 
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr "选择{{linkableStageLabel}} 活动"
 
-msgid "Choose a {{linkableStageLabel}}"
-msgstr "选择 {{linkableStageLabel}}"
+msgid "Select an event"
+msgstr "选择一个事件"
 
 msgid "{{ linkableStageLabel }} can only have one event"
-msgstr ""
+msgstr "{{ linkableStageLabel }} 只能有一个事件"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} 没有可链接的事件"
@@ -1396,7 +1556,7 @@ msgid "Ambiguous relationships, contact system administrator"
 msgstr "关系不明确，请联系系统管理员"
 
 msgid "Enter details"
-msgstr ""
+msgstr "输入详细信息"
 
 msgid "Linked event"
 msgstr "关联事件"
@@ -1408,16 +1568,16 @@ msgid "Link to an existing event"
 msgstr "链接到现有活动"
 
 msgid "The event was successfully linked"
-msgstr ""
+msgstr "活动已成功链接"
 
 msgid "An error occurred while linking the event"
-msgstr ""
+msgstr "链接事件时发生错误"
 
 msgid "Scheduled date"
 msgstr "调度日期"
 
 msgid "Report date"
-msgstr "报告日期"
+msgstr "填报日期"
 
 msgid "Please enter a date"
 msgstr "请输入日期"
@@ -1434,13 +1594,14 @@ msgstr "这个阶段只能有一个事件"
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} 属于过期时段。事件无法删除"
+
 msgid "An error occurred while deleting the event"
 msgstr "删除事件时发生错误"
 
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event?"
-msgstr "删除事件是永久性的，无法撤销。您确定要删除此事件吗？"
+msgid "Are you sure you want to delete this event?"
+msgstr "您确定要删除此事件吗？"
 
 msgid "An error occurred when updating event status"
 msgstr "更新事件状态时发生错误"
@@ -1482,10 +1643,13 @@ msgstr "在取消链接和删除事件时发生错误。"
 msgid "Unlink and delete linked event"
 msgstr "解除链接和删除链接的事件"
 
+msgid "Are you sure you want to remove the link and delete the linked event?"
+msgstr "您确定要删除链接并删除所链接的事件吗？"
+
 msgid ""
-"Are you sure you want to remove the link and delete the linked event? This "
-"action permanently removes the link, linked event, and all related data."
-msgstr "您确定要删除链接和链接事件吗？此操作会永久删除链接、链接事件和所有相关数据。"
+"This action permanently removes the link, linked event, and all related "
+"data."
+msgstr "此操作会永久删除链接、链接事件和所有相关数据。"
 
 msgid "Yes, unlink and delete linked event"
 msgstr "是，取消链接并删除链接事件"
@@ -1493,10 +1657,11 @@ msgstr "是，取消链接并删除链接事件"
 msgid "Unlink event"
 msgstr "解除链接事件"
 
-msgid ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
-msgstr "您确定要删除这些事件之间的链接吗？此操作会移除链接本身，但链接的事件会保留。"
+msgid "Are you sure you want to remove the link between these events?"
+msgstr "您确定要删除这些事件之间的联系吗？"
+
+msgid "This action removes the link itself, but the linked event will remain."
+msgstr "此操作会删除链接本身，但链接的事件会保留。"
 
 msgid "Yes, unlink event"
 msgstr "是，取消事件链接"
@@ -1527,6 +1692,9 @@ msgstr "变更日志"
 msgid "No changes to display"
 msgstr "没有显示任何变化"
 
+msgid "Data item"
+msgstr "数据条目"
+
 msgid "Updated"
 msgstr "更新"
 
@@ -1539,11 +1707,17 @@ msgstr "删除的"
 msgid "Date"
 msgstr "日期"
 
+msgid "Sort by date"
+msgstr "按日期排序"
+
 msgid "User"
 msgstr "用户"
 
-msgid "Data item"
-msgstr "数据条目"
+msgid "Sort by username"
+msgstr "按用户名排序"
+
+msgid "Sort by data item"
+msgstr "按数据项排序"
 
 msgid "Change"
 msgstr "改变"
@@ -1585,10 +1759,11 @@ msgstr "{{trackedEntityTypeName}} 关系"
 msgid "Delete relationship"
 msgstr "删除关系"
 
-msgid ""
-"Deleting the relationship is permanent and cannot be undone. Are you sure "
-"you want to delete this relationship?"
-msgstr "删除关系是永久性的且无法撤消。您确定要删除此关系吗？"
+msgid "Deleting the relationship is permanent and cannot be undone."
+msgstr "删除关系是永久性的，无法撤销。"
+
+msgid "Are you sure you want to delete this relationship?"
+msgstr "您确定要删除此关系吗？"
 
 msgid "Yes, delete relationship"
 msgstr "是的，删除关系"
@@ -1620,6 +1795,9 @@ msgstr "载入工作列表发生错误"
 msgid "You do not have access to complete events"
 msgstr "您无法访问完成的事件"
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr "批量输入数据时出现未保存的更改数据"
+
 msgid "Complete events"
 msgstr "完成事件"
 
@@ -1644,18 +1822,23 @@ msgstr "出现未知错误。"
 msgid "An error occurred while completing events"
 msgstr "完成事件时发生错误"
 
-msgid "An error occurred while deleting the events"
-msgstr "删除事件时发生错误"
-
 msgid "You do not have access to delete events"
 msgstr "您无权删除事件"
+
+msgid "An error occurred while deleting the events"
+msgstr "删除事件时发生错误"
 
 msgid "Delete events"
 msgstr "删除事件"
 
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
-msgstr "此操作无法撤销。您确定要删除所选事件吗？"
+msgid "This cannot be undone."
+msgstr "这是无法挽回的。"
+
+msgid "Are you sure you want to delete the selected events?"
+msgstr "您确定要删除所选事件吗？"
+
+msgid "Owner organisation unit"
+msgstr "业主组织机构"
 
 msgid "Registration Date"
 msgstr "登记日期"
@@ -1664,13 +1847,16 @@ msgid "Inactive"
 msgstr "闲置"
 
 msgid "Enrollment status"
-msgstr "加入状态"
+msgstr "报名登记状态"
 
 msgid "Follow up"
 msgstr "后续跟踪"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "选择要按 {{label}} 筛选的项目阶段"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "您无法批量完成加入登记"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1687,10 +1873,11 @@ msgid ""
 "again."
 msgstr "在获取加入信息时发生了意外错误。请重试。"
 
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
-msgstr "该选项中目前没有有效加入登记。所有加入登记均已完成或取消。"
+msgid "There are currently no active enrollments in the selection."
+msgstr "目前还没有人报名参加该项目。"
+
+msgid "All enrollments are already completed or cancelled."
+msgstr "所有注册均已完成或取消。"
 
 msgid ""
 "This action will complete {{count}} active enrollment in your selection."
@@ -1705,9 +1892,6 @@ msgstr[0] "{{count}} 加入登记已标记为完成将不会被更改。"
 
 msgid "Mark all events within enrollments as complete"
 msgstr "将加入登记中的所有事件标记为已完成"
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr "您无法批量完成加入登记"
 
 msgid "Complete enrollments"
 msgstr "完成登记"
@@ -1773,9 +1957,11 @@ msgid_plural "Delete {{count}} {{ trackedEntityName }}"
 msgstr[0] "删除{{count}} {{ trackedEntityName }}"
 
 msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
-msgstr "删除记录也会删除任何相关的加入登记和事件。此操作无法撤销。您确定要删除吗？"
+"Deleting records will also delete any associated enrollments and events."
+msgstr "删除记录也会删除任何相关的注册和事件。"
+
+msgid "Are you sure you want to delete?"
+msgstr "您确定要删除吗？"
 
 msgid "An error occurred while deleting the records"
 msgstr "删除记录时发生错误"
@@ -1785,16 +1971,6 @@ msgstr "工作清单无法更新"
 
 msgid "an error occurred loading the working lists"
 msgstr "加载工作列表时发生错误"
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "加载跟踪的实体实例列表时出错"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "已选择 {{count}} "
-
-msgid "Deselect all"
-msgstr "取消全选"
 
 msgid "Update view"
 msgstr "更新视图"
@@ -1829,6 +2005,28 @@ msgstr "显示较少<br>"
 msgid "Show All"
 msgstr "显示全部"
 
+msgid "Add to ongoing bulk data entry"
+msgstr "添加到正在进行的批量数据录入"
+
+msgid "Add page to ongoing bulk data entry"
+msgstr "为正在进行的批量数据录入添加页面"
+
+msgid "Available bulk entry forms"
+msgstr "可用的批量输入表格"
+
+msgid "Open in bulk data entry"
+msgstr "打开批量数据录入"
+
+msgid "Open page in bulk data entry"
+msgstr "批量输入数据时打开页面"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "已选择 {{count}} "
+
+msgid "Deselect all"
+msgstr "取消全选"
+
 msgid "Download as JSON"
 msgstr "下载为JSON"
 
@@ -1838,8 +2036,14 @@ msgstr "获取CSV格式报表"
 msgid "Download with current filters"
 msgstr "随着过滤器下载"
 
-msgid "An error has occured. See log for details"
-msgstr "发生错误。查看日志以获取详细信息"
+msgid "Exact matches only"
+msgstr "仅限完全匹配"
+
+msgid "Must match the start of the value"
+msgstr "必须与值的起始部分相匹配"
+
+msgid "Must match the end of the value"
+msgstr "必须与数值的末尾一致"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "调度{{ escape }}到期{{ time }}"
@@ -1864,9 +2068,6 @@ msgstr "没有发现项目"
 
 msgid "Program is not a tracker program"
 msgstr "项目不是跟踪随访项目"
-
-msgid "Error saving event"
-msgstr "保存事件发生错误"
 
 msgid "Could not save event"
 msgstr "无法保存事件"
@@ -1904,20 +2105,8 @@ msgstr "编辑事件时出错，所做的更改未保存"
 msgid "Error updating the Assignee"
 msgstr "更新受托人时出错"
 
-msgid "Please provide a valid number"
-msgstr "请提供一个有效的数字"
-
-msgid "Please provide a valid integer"
-msgstr "请提供一个整数"
-
-msgid "Please provide a positive integer"
-msgstr "提供一个正整数"
-
-msgid "Please provide zero or a positive integer"
-msgstr "0或负整数"
-
-msgid "Please provide a negative integer"
-msgstr "负整数"
+msgid "There was an error fetching metadata"
+msgstr "获取元数据时出现错误"
 
 msgid "Please provide a valid date and time"
 msgstr "日期和时间"
@@ -1946,6 +2135,11 @@ msgstr "值已经存在"
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "自不能大于至"
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr "请输入至少{{minCharactersToSearch}} 个字符，以便{{formName}} 进行搜索"
+
 msgid "Checking..."
 msgstr "检查"
 
@@ -1957,6 +2151,17 @@ msgstr "请输入有效时间"
 
 msgid "Please enter a time"
 msgstr "请输入时间"
+
+msgid ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgid_plural ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgstr[0] "以下属性类型不支持搜索，已被隐藏"
+
+msgid "Some attributes are hidden"
+msgstr "某些属性是隐藏的"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
@@ -1984,3 +2189,9 @@ msgstr "地图上的区域已保存"
 
 msgid "Compatibility mode"
 msgstr "兼容性模式"
+
+msgid ""
+"This app is currently running in compatibility mode due to browser "
+"restrictions. For better performance, use another browser or exit private "
+"mode if this is currently in use."
+msgstr "由于浏览器的限制，此应用程序目前在兼容模式下运行。如果当前使用的是兼容模式，请使用其他浏览器或退出隐私模式，以获得更好的性能。"

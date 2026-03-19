@@ -38,7 +38,7 @@ Feature: Related stages
         When you fill in the required values for the Baby postnatal event when entering details
         And you click the Enter details action button
         Then you can see the Birth linked event
-        And you can see the Baby postnatal new event form where you can enter details
+        And you can see the Baby postnatal new event form
 
     Scenario: New event -> User is able to link and unlink an existing event
         Given you land on a enrollment page domain by having typed #/enrollment?enrollmentId=EOxeNf2MdBf&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=QhoMgzeGuGq
@@ -76,7 +76,7 @@ Feature: Related stages
         When you fill in the required values for the Baby postnatal event when entering details
         And you click the Complete button
         Then you can see the Birth linked event
-        And you can see the Baby postnatal new event form where you can enter details
+        And you can see the Baby postnatal new event form
 
     Scenario: Enroll trackedEntity -> User is able to schedule an event in a different orgUnit
         Given you are in Child programme and Tombo Wallah CHP organization unit registration page
@@ -94,7 +94,7 @@ Feature: Related stages
         And you fill in the required values for the Baby postnatal event when entering details
         And you click the save person submit button
         Then you can see the Birth linked event
-        And you can see the Baby postnatal new event form where you can enter details
+        And you can see the Baby postnatal new event form
         And you navigate to the Enrollment dashboard
         And you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
         And you delete the recently added tracked entity

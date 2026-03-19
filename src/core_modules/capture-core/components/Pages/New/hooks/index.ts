@@ -1,0 +1,1 @@
+export { useTrackedEntityAttributes } from './useTrackedEntityAttributes';

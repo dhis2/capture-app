@@ -33,10 +33,10 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
         .type(moment().format('YYYY-MM-DD'))
         .blur();
 
-    cy
-        .get('[data-test="virtualized-select"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .eq(6)
         .click()
+        .get('[role="option"]:visible')
         .contains('Termination of pregnancy')
         .click();
 
@@ -52,5 +52,7 @@ Then('the Postpartum care visit button is disabled in the enrollmentEventNew pag
         '/#/enrollmentEventNew?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&teiId=uW8Y7AIcRKA',
     );
 
-    cy.contains('[data-test="program-stage-selector-button"]', 'Postpartum care visit').should('be.disabled');
+    cy.get('[data-test=profile-widget]').contains('Person profile');
+    cy.contains('Choose a stage for a new event').should('exist');
+    cy.get('[data-test="program-stage-selector-button"]').contains('Postpartum care visit').should('not.exist');
 });
