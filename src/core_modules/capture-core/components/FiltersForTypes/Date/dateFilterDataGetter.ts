@@ -4,9 +4,7 @@ import { dateFilterTypes } from './constants';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import {
     isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    EMPTY_VALUE_FILTER_LABEL,
-    NOT_EMPTY_VALUE_FILTER_LABEL,
+    getEmptyValueFilterData,
 } from '../EmptyValue';
 import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './types';
 
@@ -66,9 +64,7 @@ function convertSelections(value: Value) {
 
 export function getDateFilterData(value: Value | string): DateFilterData | null {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return value === EMPTY_VALUE_FILTER
-            ? { value: EMPTY_VALUE_FILTER_LABEL, isEmpty: true }
-            : { value: NOT_EMPTY_VALUE_FILTER_LABEL, isEmpty: false };
+        return getEmptyValueFilterData(value);
     }
 
     if (typeof value === 'string' || value == null) {

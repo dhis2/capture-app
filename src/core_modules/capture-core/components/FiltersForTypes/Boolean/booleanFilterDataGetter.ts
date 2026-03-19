@@ -1,8 +1,6 @@
 import {
     isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    EMPTY_VALUE_FILTER_LABEL,
-    NOT_EMPTY_VALUE_FILTER_LABEL,
+    getEmptyValueFilterData,
 } from '../EmptyValue';
 import type { BooleanFilterStringified } from './types';
 
@@ -14,22 +12,16 @@ export function getBooleanFilterData(
     };
 }
 
-export function getEmptyValueBooleanFilterData(value: string): BooleanFilterStringified {
-    return value === EMPTY_VALUE_FILTER
-        ? { values: [], value: EMPTY_VALUE_FILTER_LABEL, isEmpty: true }
-        : { values: [], value: NOT_EMPTY_VALUE_FILTER_LABEL, isEmpty: false };
-}
-
 export const getSingleSelectBooleanFilterData = (value: any) => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueBooleanFilterData(value);
+        return { values: [], ...getEmptyValueFilterData(value) };
     }
     return getBooleanFilterData([value]);
 };
 
 export const getMultiSelectBooleanFilterData = (values: any) => {
     if (typeof values === 'string' && isEmptyValueFilter(values)) {
-        return getEmptyValueBooleanFilterData(values);
+        return { values: [], ...getEmptyValueFilterData(values) };
     }
     return getBooleanFilterData(values);
 };

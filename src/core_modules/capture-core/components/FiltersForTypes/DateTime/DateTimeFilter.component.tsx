@@ -133,7 +133,8 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     });
 
     handleDateBlur = (side: DateTimeSide) => (dateValue: DateValue) => {
-        const current = this.props.value?.[side];
+        const objValue = typeof this.props.value === 'string' ? undefined : this.props.value;
+        const current = objValue?.[side];
         const updated = this.getUpdatedValue({
             [side]: {
                 ...current,
@@ -147,8 +148,9 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     };
 
     handleTimeChange = (side: DateTimeSide) => ({ value: timeValue }: { value: string | undefined }) => {
+        const objValue = typeof this.props.value === 'string' ? undefined : this.props.value;
         const updated = this.getUpdatedValue({
-            [side]: { ...this.props.value?.[side], time: timeValue || null },
+            [side]: { ...objValue?.[side], time: timeValue || null },
         });
         this.props.onCommitValue(updated);
     };
