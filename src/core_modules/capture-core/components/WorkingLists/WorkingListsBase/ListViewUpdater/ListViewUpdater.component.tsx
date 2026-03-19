@@ -39,7 +39,6 @@ const useUpdateEffect = (callback, { forceFirstRunUpdate, filters, restDependenc
     // eslint-disable-next-line
     }, useUpdateListMemoize([filters, forceFirstRunUpdate, ...restDependencies]));
 };
-// eslint-disable-next-line complexity
 export const ListViewUpdater = (props: Props) => {
     const {
         filters,

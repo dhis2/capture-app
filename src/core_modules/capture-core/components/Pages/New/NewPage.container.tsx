@@ -19,6 +19,8 @@ import { programCollection } from '../../../metaDataMemoryStores/programCollecti
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
 
+const hasWriteAccess = (access: any) => Boolean(access?.data?.write);
+
 const useUserWriteAccess = (scopeId: string) => {
     const scope = getScopeFromScopeId(scopeId);
     if (scopeId && !scope) {
@@ -27,14 +29,10 @@ const useUserWriteAccess = (scopeId: string) => {
     try {
         if (scope instanceof TrackerProgram) {
             const { access, trackedEntityType: { access: tetypeAccess } } = scope;
-            const userHasWriteAccessForTheProgram = access && access.data && access.data.write;
-            const userHasWriteAccessForTheTEType = tetypeAccess && tetypeAccess.data && tetypeAccess.data.write;
-
-            return userHasWriteAccessForTheProgram && userHasWriteAccessForTheTEType;
+            return hasWriteAccess(access) && hasWriteAccess(tetypeAccess);
         } else if (scope instanceof TrackedEntityType) {
             const { access } = scope;
-
-            return access && access.data && access.data.write;
+            return hasWriteAccess(access);
         }
         return true;
     } catch (e) {

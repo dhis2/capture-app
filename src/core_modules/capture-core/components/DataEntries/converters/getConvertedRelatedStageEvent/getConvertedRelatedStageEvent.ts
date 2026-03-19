@@ -8,7 +8,6 @@ import { dataElementTypes } from '../../../../metaData';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
-// eslint-disable-next-line complexity
 const getEventDetailsByLinkMode = ({
     relatedStageDataValues,
     requestEventIsFromConstraint,

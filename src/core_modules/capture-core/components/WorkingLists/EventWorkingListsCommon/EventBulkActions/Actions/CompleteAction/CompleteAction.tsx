@@ -31,7 +31,6 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-// eslint-disable-next-line complexity
 const CompleteActionPlain = ({
     selectedRows,
     stageDataWriteAccess,

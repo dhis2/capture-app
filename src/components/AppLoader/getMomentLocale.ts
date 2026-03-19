@@ -1,10 +1,11 @@
-/* eslint-disable complexity */
 
 // Vite struggles with dynamic import paths, and import(`moment/dist/locale/${locale}`) throws an error.
 // Additionally, behavior differs between dev and production builds.
 // For now, until dynamic imports become more reliable, I’m using a simple switch/case with static imports.
 // These imports map the locales fetched from https://{instance-url}/api/{api-version}/locales/ui
 // to their corresponding moment equivalents.
+
+// eslint-disable-next-line complexity
 export const getMomentLocale = async (locale) => {
     switch (locale) {
     case 'ar': return (await import('moment/dist/locale/ar')).default;

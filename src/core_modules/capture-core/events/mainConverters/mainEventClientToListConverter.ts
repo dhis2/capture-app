@@ -4,7 +4,6 @@ import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
 
 export function convertMainEventClientToList(event: any) {
-    // eslint-disable-next-line complexity
     return convertMainEvent(event, (key, value: any) => {
         let convertedValue;
 

@@ -39,7 +39,6 @@ export class DataElement {
     _section!: Section | null;
     _searchOperator: SearchOperator | undefined;
 
-    // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
         this.type = dataElementTypes.UNKNOWN;
         this._displayInReports = true;
