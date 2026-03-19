@@ -9,9 +9,8 @@
 }
 
 .labelContainer {
-    padding-right: 16px;
-    flex-grow: 0;
-    flex-shrink: 0;
+    padding-inline-end: 16px;
+    min-width: 40%;
 }
 
 .labelContainerVertical {

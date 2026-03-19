@@ -1,0 +1,53 @@
+import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
+
+type Props = {
+    searchText?: string;
+};
+
+export const useSearchScopeWithFallback = ({ searchText }: Props) => {
+    const { data: orgUnitRoots, isInitialLoading } = useApiMetadataQuery(
+        ['organisationUnits', 'userOrgUnitScope'],
+        {
+            resource: 'me',
+            params: {
+                fields: 'teiSearchOrganisationUnits[id,path],organisationUnits[id,path]',
+            },
+        },
+        {
+            enabled: !searchText,
+            select: (data) => {
+                const { teiSearchOrganisationUnits, organisationUnits } = data as any;
+                return teiSearchOrganisationUnits.length
+                    ? teiSearchOrganisationUnits
+                    : organisationUnits;
+            },
+        },
+    );
+
+    const { data: searchOrgUnits, isInitialLoading: isInitialLoadingSearch } = useApiMetadataQuery(
+        ['organisationUnits', 'userOrgUnitScope', 'search', searchText],
+        {
+            resource: 'organisationUnits',
+            params: {
+                fields: ['id,path'],
+                paging: true,
+                query: searchText,
+                withinUserSearchHierarchy: true,
+                pageSize: 15,
+            },
+        },
+        {
+            enabled: Boolean(searchText),
+            cacheTime: 120 * 60 * 1000,
+            select: (data) => {
+                const { organisationUnits } = data as any;
+                return organisationUnits;
+            },
+        },
+    );
+
+    return {
+        orgUnitRoots: searchText?.length ? searchOrgUnits : orgUnitRoots,
+        isLoading: searchText?.length ? isInitialLoadingSearch : isInitialLoading,
+    };
+};

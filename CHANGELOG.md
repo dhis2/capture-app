@@ -1,3 +1,988 @@
+## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21133] Searching by unique attribute with unsupported type crashes ([#4484](https://github.com/dhis2/capture-app/issues/4484)) ([e8e6e5a](https://github.com/dhis2/capture-app/commit/e8e6e5acf8936a420c046a90bdc665f7b2d38af3))
+
+## [105.13.1](https://github.com/dhis2/capture-app/compare/v105.13.0...v105.13.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21131] Console error when loading working list with empty only filter attributes ([#4482](https://github.com/dhis2/capture-app/issues/4482)) ([1598b6b](https://github.com/dhis2/capture-app/commit/1598b6b428ec624de68639915c978416be4978fa))
+
+# [105.13.0](https://github.com/dhis2/capture-app/compare/v105.12.0...v105.13.0) (2026-03-17)
+
+
+### Features
+
+* [DHIS2-12881] Support additional value types for filters in working lists ([#4461](https://github.com/dhis2/capture-app/issues/4461)) ([01cff4f](https://github.com/dhis2/capture-app/commit/01cff4f282aa228d245ba5ee64d32f8d373e2e43))
+
+# [105.12.0](https://github.com/dhis2/capture-app/compare/v105.11.5...v105.12.0) (2026-03-17)
+
+
+### Features
+
+* [LIBS-773] bump cli app scripts to support loading custom translations from the data store ([#4485](https://github.com/dhis2/capture-app/issues/4485)) ([15debe6](https://github.com/dhis2/capture-app/commit/15debe60bb78038bd40c5ab954efa80b1dfb4667))
+
+## [105.11.5](https://github.com/dhis2/capture-app/compare/v105.11.4...v105.11.5) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-21129] Working list table use range type after switch to search groups ([#4479](https://github.com/dhis2/capture-app/issues/4479)) ([f5c5755](https://github.com/dhis2/capture-app/commit/f5c57555eb184ce89eb18706b656e9be7e59389d))
+
+## [105.11.4](https://github.com/dhis2/capture-app/compare/v105.11.3...v105.11.4) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20494] Inherited tracked entity attribute not populated ([#4478](https://github.com/dhis2/capture-app/issues/4478)) ([8f2d2f7](https://github.com/dhis2/capture-app/commit/8f2d2f73877be5b0ffca5f54e2879624e900f3a0))
+
+## [105.11.3](https://github.com/dhis2/capture-app/compare/v105.11.2...v105.11.3) (2026-03-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4480](https://github.com/dhis2/capture-app/issues/4480)) ([5b6cc6f](https://github.com/dhis2/capture-app/commit/5b6cc6f3746bc3c95d388db36d627ddac8bc9425))
+
+## [105.11.2](https://github.com/dhis2/capture-app/compare/v105.11.1...v105.11.2) (2026-03-13)
+
+
+### Bug Fixes
+
+* [UX-171] Improve information density ([#3786](https://github.com/dhis2/capture-app/issues/3786)) ([ab30fe2](https://github.com/dhis2/capture-app/commit/ab30fe29afd8f0b1895858c1569dfb3e1e3fbbc8))
+
+## [105.11.1](https://github.com/dhis2/capture-app/compare/v105.11.0...v105.11.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21044][DHIS2-21045] Minimum Search Characters validation error ([#4473](https://github.com/dhis2/capture-app/issues/4473)) ([115ce1c](https://github.com/dhis2/capture-app/commit/115ce1c432327624a0402714548caf0f09e13fca))
+
+# [105.11.0](https://github.com/dhis2/capture-app/compare/v105.10.0...v105.11.0) (2026-03-12)
+
+
+### Features
+
+* [DHIS2-19426] support `d2:inUserGroup` ([#4477](https://github.com/dhis2/capture-app/issues/4477)) ([1e7197f](https://github.com/dhis2/capture-app/commit/1e7197f35ba31b31b983115a0d319356fe5df0ac))
+
+# [105.10.0](https://github.com/dhis2/capture-app/compare/v105.9.1...v105.10.0) (2026-03-10)
+
+
+### Features
+
+* [DHIS2-20920] send action priorities to rule engine ([#4456](https://github.com/dhis2/capture-app/issues/4456)) ([6b57b80](https://github.com/dhis2/capture-app/commit/6b57b8052a2351e9e5960c8971fd57f654a69b72))
+
+## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1290e17](https://github.com/dhis2/capture-app/commit/1290e174b8dccf9508b476772ea7add5a3ccbc59))
+
+# [105.9.0](https://github.com/dhis2/capture-app/compare/v105.8.0...v105.9.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20919] add legend set field in program rule actions ([#4467](https://github.com/dhis2/capture-app/issues/4467)) ([12d934c](https://github.com/dhis2/capture-app/commit/12d934c2c494e1fe856f1599d9636611d1554a0a))
+
+# [105.8.0](https://github.com/dhis2/capture-app/compare/v105.7.1...v105.8.0) (2026-03-02)
+
+
+### Features
+
+* [DHIS2-20864] use configured TEA Search Operators in Working List filter ([#4455](https://github.com/dhis2/capture-app/issues/4455)) ([9c8d199](https://github.com/dhis2/capture-app/commit/9c8d199ab39a08c281612c5110ad3858cc9780d6))
+
+## [105.7.1](https://github.com/dhis2/capture-app/compare/v105.7.0...v105.7.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([af2d17f](https://github.com/dhis2/capture-app/commit/af2d17f4f8e18e25eec2db4e1c60b08c64c0879a))
+
+# [105.7.0](https://github.com/dhis2/capture-app/compare/v105.6.1...v105.7.0) (2026-02-23)
+
+
+### Features
+
+* [DHIS2-20938] Missing search bar for Option Sets ([#4463](https://github.com/dhis2/capture-app/issues/4463)) ([ab286f9](https://github.com/dhis2/capture-app/commit/ab286f92a3e3318f6464e2425484980f060479f4))
+
+## [105.6.1](https://github.com/dhis2/capture-app/compare/v105.6.0...v105.6.1) (2026-02-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5e2d076](https://github.com/dhis2/capture-app/commit/5e2d0762f785ddb72edee3874a48a11284365bc2))
+
+# [105.6.0](https://github.com/dhis2/capture-app/compare/v105.5.11...v105.6.0) (2026-02-20)
+
+
+### Bug Fixes
+
+* [DHIS2-20786] Deleting a single event from event program working list does not have confirm dialog ([#4457](https://github.com/dhis2/capture-app/issues/4457)) ([20b911e](https://github.com/dhis2/capture-app/commit/20b911e81d28e08b3330efb1642db7892cd065ee))
+
+
+### Features
+
+* [DHIS2-20930] Working lists without bulk data entry plugin should fill whole page ([#4462](https://github.com/dhis2/capture-app/issues/4462)) ([567d69d](https://github.com/dhis2/capture-app/commit/567d69d5f8e9dc99072cb816f7c2228cf406570f))
+
+## [105.5.11](https://github.com/dhis2/capture-app/compare/v105.5.10...v105.5.11) (2026-02-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d1bea0d](https://github.com/dhis2/capture-app/commit/d1bea0dff4aa02b5b36eee0dfb53070e5fe9ecb0))
+
+## [105.5.10](https://github.com/dhis2/capture-app/compare/v105.5.9...v105.5.10) (2026-02-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d930e57](https://github.com/dhis2/capture-app/commit/d930e572ba728b70e4c2611980d86afef0a5c4b0))
+
+## [105.5.9](https://github.com/dhis2/capture-app/compare/v105.5.8...v105.5.9) (2026-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-20109] Program stage visible in working list dropdown without access ([#4447](https://github.com/dhis2/capture-app/issues/4447)) ([62f0021](https://github.com/dhis2/capture-app/commit/62f0021682ae6f7bfc646980d3e4be33e78c45d1))
+
+## [105.5.8](https://github.com/dhis2/capture-app/compare/v105.5.7...v105.5.8) (2026-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17359][DHIS2-19968][DHIS2-18680] RTL issues in Capture app ([#4444](https://github.com/dhis2/capture-app/issues/4444)) ([6964797](https://github.com/dhis2/capture-app/commit/69647971e0acb1a1cb2e00918ded168d4846060d))
+
+## [105.5.7](https://github.com/dhis2/capture-app/compare/v105.5.6...v105.5.7) (2026-02-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20035] Cannot complete an event from a workinglist ([#4442](https://github.com/dhis2/capture-app/issues/4442)) ([3497e7a](https://github.com/dhis2/capture-app/commit/3497e7a11613568a9d46eeb1094aeb4af0ff8ebd))
+
+## [105.5.6](https://github.com/dhis2/capture-app/compare/v105.5.5...v105.5.6) (2026-02-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20631] "Edit" button not visible on profile widget when no data exists for Tracked Entity Type ([#4441](https://github.com/dhis2/capture-app/issues/4441)) ([0e501d1](https://github.com/dhis2/capture-app/commit/0e501d162190e8c02316fdca255f934e6d0483e8))
+
+## [105.5.5](https://github.com/dhis2/capture-app/compare/v105.5.4...v105.5.5) (2026-02-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2bf983a](https://github.com/dhis2/capture-app/commit/2bf983a798e2d203a5b50698f58224d1ce20f502))
+
+## [105.5.4](https://github.com/dhis2/capture-app/compare/v105.5.3...v105.5.4) (2026-01-30)
+
+
+### Bug Fixes
+
+* [DHIS2-20719] Clear button stays highlighted ([#4443](https://github.com/dhis2/capture-app/issues/4443)) ([2ba7727](https://github.com/dhis2/capture-app/commit/2ba7727c414bbea70fb2bf3135148cf9c15e69c7))
+
+## [105.5.3](https://github.com/dhis2/capture-app/compare/v105.5.2...v105.5.3) (2026-01-26)
+
+
+### Bug Fixes
+
+* [DHIS2-20777] validation of rule-mandatory fields ([#4440](https://github.com/dhis2/capture-app/issues/4440)) ([67eb62b](https://github.com/dhis2/capture-app/commit/67eb62bad4cc32f201ddeaa3b1349edfaf87ec6e))
+
+## [105.5.2](https://github.com/dhis2/capture-app/compare/v105.5.1...v105.5.2) (2026-01-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20532] incorrectly formatted program fetch query ([#4439](https://github.com/dhis2/capture-app/issues/4439)) ([960e774](https://github.com/dhis2/capture-app/commit/960e774a0de317b340489313810f51ff49ea6632))
+
+## [105.5.1](https://github.com/dhis2/capture-app/compare/v105.5.0...v105.5.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* [DHIS2-19820] create special section for attributes not assigned to a section ([#4289](https://github.com/dhis2/capture-app/issues/4289)) ([1451a05](https://github.com/dhis2/capture-app/commit/1451a0525860aec00286171b5460702d149af96a))
+
+# [105.5.0](https://github.com/dhis2/capture-app/compare/v105.4.0...v105.5.0) (2026-01-21)
+
+
+### Features
+
+* [DHIS2-17845] Improve UX when users do not have "Uncomplete events" authority ([#4438](https://github.com/dhis2/capture-app/issues/4438)) ([58b8059](https://github.com/dhis2/capture-app/commit/58b805992c77eea84e3ddeacdc0503d8a71fbb66))
+
+# [105.4.0](https://github.com/dhis2/capture-app/compare/v105.3.0...v105.4.0) (2026-01-21)
+
+
+### Features
+
+* [DHIS2-18740] Update feedback and indicator widgets in View event page in Event programs ([#4435](https://github.com/dhis2/capture-app/issues/4435)) ([49e927b](https://github.com/dhis2/capture-app/commit/49e927b24725f1cc0551da94462ffa146c673659))
+
+# [105.3.0](https://github.com/dhis2/capture-app/compare/v105.2.9...v105.3.0) (2026-01-20)
+
+
+### Features
+
+* [DHIS2-20429][DHIS2-20530] use configured TEA Search Operators in the Search forms ([#4413](https://github.com/dhis2/capture-app/issues/4413)) ([2cf09bc](https://github.com/dhis2/capture-app/commit/2cf09bc1c48c7a42c52c1e17bf62d2e13499ea28))
+
+## [105.2.9](https://github.com/dhis2/capture-app/compare/v105.2.8...v105.2.9) (2026-01-19)
+
+
+### Bug Fixes
+
+* [DHIS2-20514] New form not open without org unit selected for programs with categories  ([#4410](https://github.com/dhis2/capture-app/issues/4410)) ([224249c](https://github.com/dhis2/capture-app/commit/224249cf874e684be9230357d2c6233e6df74a36))
+
+## [105.2.8](https://github.com/dhis2/capture-app/compare/v105.2.7...v105.2.8) (2026-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20738] related stages validation error logic ([#4434](https://github.com/dhis2/capture-app/issues/4434)) ([3eedbb9](https://github.com/dhis2/capture-app/commit/3eedbb97ca86cf519e6b53cc41ab8e1cad0ddab7))
+
+## [105.2.7](https://github.com/dhis2/capture-app/compare/v105.2.6...v105.2.7) (2026-01-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9dc3665](https://github.com/dhis2/capture-app/commit/9dc3665efe26cba40effc07f48c93212a694f8fa))
+
+## [105.2.6](https://github.com/dhis2/capture-app/compare/v105.2.5...v105.2.6) (2026-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-20708] revert Option groups regression bug introduced by the Typescript migration ([#4428](https://github.com/dhis2/capture-app/issues/4428)) ([853dd3c](https://github.com/dhis2/capture-app/commit/853dd3cd9fa4e07b73cc92173ea444e142cc224a))
+
+## [105.2.5](https://github.com/dhis2/capture-app/compare/v105.2.4...v105.2.5) (2026-01-05)
+
+
+### Performance Improvements
+
+* [DHIS2-20475] improve responsiveness for large forms ([#4414](https://github.com/dhis2/capture-app/issues/4414)) ([3d5732c](https://github.com/dhis2/capture-app/commit/3d5732cf5ab234c72d028a94a995c1deb3d245f6))
+
+## [105.2.4](https://github.com/dhis2/capture-app/compare/v105.2.3...v105.2.4) (2025-12-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20665] show correctly filtered option set ([#4420](https://github.com/dhis2/capture-app/issues/4420)) ([f6f6f45](https://github.com/dhis2/capture-app/commit/f6f6f4578218c63d8a35b95d38b5f5aad3a16d06))
+
+## [105.2.3](https://github.com/dhis2/capture-app/compare/v105.2.2...v105.2.3) (2025-12-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4419](https://github.com/dhis2/capture-app/issues/4419)) ([a4c5508](https://github.com/dhis2/capture-app/commit/a4c5508d88ae75c44a0764775dc8ffeb6f708a6a))
+
+## [105.2.2](https://github.com/dhis2/capture-app/compare/v105.2.1...v105.2.2) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20646] handle missing capture namespace in DataStore ([#4418](https://github.com/dhis2/capture-app/issues/4418)) ([6352214](https://github.com/dhis2/capture-app/commit/6352214e4130145b661b0cc6d960c714b0b95f7d))
+
+## [105.2.1](https://github.com/dhis2/capture-app/compare/v105.2.0...v105.2.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* [DHIS2-20495] Org unit not retained after “Save and add another” event ([#4406](https://github.com/dhis2/capture-app/issues/4406)) ([b2724a6](https://github.com/dhis2/capture-app/commit/b2724a67ab44ce978e0d8e26047265705d825b85))
+
+# [105.2.0](https://github.com/dhis2/capture-app/compare/v105.1.0...v105.2.0) (2025-12-11)
+
+
+### Features
+
+* [DHIS2-20086] add command palette shortcuts ([#4386](https://github.com/dhis2/capture-app/issues/4386)) ([35285e4](https://github.com/dhis2/capture-app/commit/35285e4658edf919d17847c5de8de401ac8e4d1b))
+
+# [105.1.0](https://github.com/dhis2/capture-app/compare/v105.0.1...v105.1.0) (2025-12-08)
+
+
+### Features
+
+* [DHIS2-20467] facilitate bulk data entry plugin ([#4415](https://github.com/dhis2/capture-app/issues/4415)) ([27a0867](https://github.com/dhis2/capture-app/commit/27a086714fcf862fecd561363fb0b863d322b0d4))
+
+## [105.0.1](https://github.com/dhis2/capture-app/compare/v105.0.0...v105.0.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4416](https://github.com/dhis2/capture-app/issues/4416)) ([6c5196d](https://github.com/dhis2/capture-app/commit/6c5196debfdcf0cb78cee98417500ab9116bbdce))
+
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-08)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [105.0.0](https://github.com/dhis2/capture-app/compare/v104.7.0...v105.0.0) (2025-12-04)
+
+
+### chore
+
+* **release:** [DHIS2-18801] migrate to Vite and React 18 ([#4375](https://github.com/dhis2/capture-app/issues/4375)) ([4d2b88c](https://github.com/dhis2/capture-app/commit/4d2b88cb06cb22fd9e12c23917616e8bc73f7717))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 105.0.0.
+
+# [104.7.0](https://github.com/dhis2/capture-app/compare/v104.6.12...v104.7.0) (2025-12-03)
+
+
+### Features
+
+* [DHIS2-20430] add minCharactersToSearch validation ([#4409](https://github.com/dhis2/capture-app/issues/4409)) ([b89fd5e](https://github.com/dhis2/capture-app/commit/b89fd5ea5881d867b84f400a127c5330d56a77a6))
+
+## [104.6.12](https://github.com/dhis2/capture-app/compare/v104.6.11...v104.6.12) (2025-12-03)
+
+
+### Bug Fixes
+
+* [DHIS2-20478] prevent search when there are errors in the search form fields ([#4408](https://github.com/dhis2/capture-app/issues/4408)) ([a10ffeb](https://github.com/dhis2/capture-app/commit/a10ffeb4c6cfddb2e40d3511d148f0b13191c433))
+
+## [104.6.11](https://github.com/dhis2/capture-app/compare/v104.6.10...v104.6.11) (2025-12-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4412](https://github.com/dhis2/capture-app/issues/4412)) ([27ce535](https://github.com/dhis2/capture-app/commit/27ce5356f3b57a1f24d6e808de4cc014191e2127))
+
+## [104.6.10](https://github.com/dhis2/capture-app/compare/v104.6.9...v104.6.10) (2025-11-24)
+
+
+### Bug Fixes
+
+* [DHIS2-20305] change TEA unique filter text to 'Exact matches only' ([#4400](https://github.com/dhis2/capture-app/issues/4400)) ([deaba83](https://github.com/dhis2/capture-app/commit/deaba83eee89285dfa87ad031dd73b7444c17b7e))
+
+## [104.6.9](https://github.com/dhis2/capture-app/compare/v104.6.8...v104.6.9) (2025-11-24)
+
+
+### Bug Fixes
+
+* [DHIS2-20447] Validate unique attributes after entering/editing value in form ([#4402](https://github.com/dhis2/capture-app/issues/4402)) ([e919cde](https://github.com/dhis2/capture-app/commit/e919cdec018667d5a980a8ef28bb333ea2e17f57))
+
+## [104.6.8](https://github.com/dhis2/capture-app/compare/v104.6.7...v104.6.8) (2025-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4407](https://github.com/dhis2/capture-app/issues/4407)) ([f9e3931](https://github.com/dhis2/capture-app/commit/f9e39317b594bed2f55af25ba5c7436c272a284e))
+
+## [104.6.7](https://github.com/dhis2/capture-app/compare/v104.6.6...v104.6.7) (2025-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-20437] User messages appears on initial load in search ([#4399](https://github.com/dhis2/capture-app/issues/4399)) ([8b357bd](https://github.com/dhis2/capture-app/commit/8b357bd44c7ddaf649a31b62d2ba7cb78ad0ef8a))
+
+## [104.6.6](https://github.com/dhis2/capture-app/compare/v104.6.5...v104.6.6) (2025-11-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4404](https://github.com/dhis2/capture-app/issues/4404)) ([d172a3c](https://github.com/dhis2/capture-app/commit/d172a3c588daf721e570278be9831f7fe3a2370b))
+
+## [104.6.5](https://github.com/dhis2/capture-app/compare/v104.6.4...v104.6.5) (2025-11-12)
+
+
+### Bug Fixes
+
+* [DHIS2-20352] Capture app fails to load when DE or TEA referenced in indicator is missing ([#4391](https://github.com/dhis2/capture-app/issues/4391)) ([e9fa7c2](https://github.com/dhis2/capture-app/commit/e9fa7c23f65747a192676e704a242a6ea8b5119d))
+
+## [104.6.4](https://github.com/dhis2/capture-app/compare/v104.6.3...v104.6.4) (2025-11-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4398](https://github.com/dhis2/capture-app/issues/4398)) ([40323ad](https://github.com/dhis2/capture-app/commit/40323ad89799ebd6b559da9a4c066a26038a6c14))
+
+## [104.6.3](https://github.com/dhis2/capture-app/compare/v104.6.2...v104.6.3) (2025-11-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4397](https://github.com/dhis2/capture-app/issues/4397)) ([9ae9da8](https://github.com/dhis2/capture-app/commit/9ae9da86e9d82c849a1ed08dd590f86955179dd5))
+
+## [104.6.2](https://github.com/dhis2/capture-app/compare/v104.6.1...v104.6.2) (2025-10-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16869] Capture top-bar showing UID when editing attribute ([#4381](https://github.com/dhis2/capture-app/issues/4381)) ([2c52f39](https://github.com/dhis2/capture-app/commit/2c52f399fe8fd863d47989a9de270bcae0686d1b))
+
+## [104.6.1](https://github.com/dhis2/capture-app/compare/v104.6.0...v104.6.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4392](https://github.com/dhis2/capture-app/issues/4392)) ([334ae3e](https://github.com/dhis2/capture-app/commit/334ae3e7a4b188fa7ac1a506cf637737b7e2dde6))
+
+# [104.6.0](https://github.com/dhis2/capture-app/compare/v104.5.0...v104.6.0) (2025-10-24)
+
+
+### Features
+
+* [DHIS2-20001] Hide unsupported attribute types from search form in Capture ([#4383](https://github.com/dhis2/capture-app/issues/4383)) ([4bfe20d](https://github.com/dhis2/capture-app/commit/4bfe20d85f012ceda9404137b4c12c96456dc1b1))
+
+# [104.5.0](https://github.com/dhis2/capture-app/compare/v104.4.0...v104.5.0) (2025-10-23)
+
+
+### Features
+
+* pass enrollment dates to form field plugins in widget profile ([#4389](https://github.com/dhis2/capture-app/issues/4389)) ([f94a2b1](https://github.com/dhis2/capture-app/commit/f94a2b13552337ca52751ba3fc974b4a9b7eb07d))
+
+# [104.4.0](https://github.com/dhis2/capture-app/compare/v104.3.0...v104.4.0) (2025-10-22)
+
+
+### Features
+
+* [DHIS2-18739] Update feedback and indicator widgets in the Registration page ([#4385](https://github.com/dhis2/capture-app/issues/4385)) ([d2713d5](https://github.com/dhis2/capture-app/commit/d2713d5c2c16cbaf214bfeee19d3415e8ad80ce6))
+
+# [104.3.0](https://github.com/dhis2/capture-app/compare/v104.2.0...v104.3.0) (2025-10-21)
+
+
+### Features
+
+* [DHIS2-20000] Show message when no searchable attributes exist for an entity type ([#4382](https://github.com/dhis2/capture-app/issues/4382)) ([6677824](https://github.com/dhis2/capture-app/commit/6677824a22c3b7cc4901448a76d8b544815b875f))
+
+# [104.2.0](https://github.com/dhis2/capture-app/compare/v104.1.2...v104.2.0) (2025-10-17)
+
+
+### Features
+
+* [18904] Working List Filter component for `null` and `not null` Values ([#4270](https://github.com/dhis2/capture-app/issues/4270)) ([aea03d7](https://github.com/dhis2/capture-app/commit/aea03d72332964e0fb2d7368233a7c528619dd8f))
+
+## [104.1.2](https://github.com/dhis2/capture-app/compare/v104.1.1...v104.1.2) (2025-10-14)
+
+
+### Performance Improvements
+
+* [DHIS2-19724] optimize api-calls on enrollment dashboard ([#4132](https://github.com/dhis2/capture-app/issues/4132)) ([955556b](https://github.com/dhis2/capture-app/commit/955556b94bc6916fe79b122c384c937887d41143))
+
+## [104.1.1](https://github.com/dhis2/capture-app/compare/v104.1.0...v104.1.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* [DHIS2-20060] use rule engine's user roles as fallback ([#4376](https://github.com/dhis2/capture-app/issues/4376)) ([cdad149](https://github.com/dhis2/capture-app/commit/cdad14933b62afc409130e62763563dfedff9020))
+
+# [104.1.0](https://github.com/dhis2/capture-app/compare/v104.0.1...v104.1.0) (2025-09-10)
+
+
+### Features
+
+* [DHIS2-20077] Responsive layout part 2 ([#4377](https://github.com/dhis2/capture-app/issues/4377)) ([54c19a7](https://github.com/dhis2/capture-app/commit/54c19a774cbdae586e51dd497b3a638fadc98c0a))
+
+## [104.0.1](https://github.com/dhis2/capture-app/compare/v104.0.0...v104.0.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* [DHIS2-20009] make reason to check for enrollments mandatory when breaking the glass ([#4374](https://github.com/dhis2/capture-app/issues/4374)) ([7f79c65](https://github.com/dhis2/capture-app/commit/7f79c65bc44492ebc8f1d85a2b0a952700f37ce1))
+
+# [104.0.0](https://github.com/dhis2/capture-app/compare/v103.4.0...v104.0.0) (2025-09-08)
+
+
+### chore
+
+* **release:** migrate the codebase from flow to typescript ([#4032](https://github.com/dhis2/capture-app/issues/4032)) ([1372447](https://github.com/dhis2/capture-app/commit/1372447d6db0f975024c2e1d3ad19dbe68e33fcf))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 104.0.0.
+
+# [103.4.0](https://github.com/dhis2/capture-app/compare/v103.3.3...v103.4.0) (2025-09-05)
+
+
+### Features
+
+* [DHIS2-20077] Responsive layout ([#4373](https://github.com/dhis2/capture-app/issues/4373)) ([5f540a1](https://github.com/dhis2/capture-app/commit/5f540a14864d92ff79a74b54cfd6ffa570f91630))
+
+## [103.3.3](https://github.com/dhis2/capture-app/compare/v103.3.2...v103.3.3) (2025-09-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] prod env fix for indexedDB caching ([#4370](https://github.com/dhis2/capture-app/issues/4370)) ([d67b89c](https://github.com/dhis2/capture-app/commit/d67b89cd3a95a13b3bb13e24ea4d21033641bf8a))
+
+## [103.3.2](https://github.com/dhis2/capture-app/compare/v103.3.1...v103.3.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* [DHIS2-19877] filter rule engine values containing undefined ([#4290](https://github.com/dhis2/capture-app/issues/4290)) ([43d6005](https://github.com/dhis2/capture-app/commit/43d6005ad5e6ed6e7b3774bb755339341e39ad86))
+
+## [103.3.1](https://github.com/dhis2/capture-app/compare/v103.3.0...v103.3.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4363](https://github.com/dhis2/capture-app/issues/4363)) ([e53694b](https://github.com/dhis2/capture-app/commit/e53694bc24ffaa0dab05495f76bea634f806d698))
+
+# [103.3.0](https://github.com/dhis2/capture-app/compare/v103.2.7...v103.3.0) (2025-08-19)
+
+
+### Features
+
+* [DHIS2-15343] Text updates when searching ([#4349](https://github.com/dhis2/capture-app/issues/4349)) ([9a4d563](https://github.com/dhis2/capture-app/commit/9a4d5631c1af890e33375182f79d9e09e883835a))
+
+## [103.2.7](https://github.com/dhis2/capture-app/compare/v103.2.6...v103.2.7) (2025-08-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4320](https://github.com/dhis2/capture-app/issues/4320)) ([0380e1c](https://github.com/dhis2/capture-app/commit/0380e1cf23c17ff2101077a744d331a147396c63))
+
+## [103.2.6](https://github.com/dhis2/capture-app/compare/v103.2.5...v103.2.6) (2025-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-16364] Stage selection still shown with only one available stage ([#4262](https://github.com/dhis2/capture-app/issues/4262)) ([4e40f07](https://github.com/dhis2/capture-app/commit/4e40f07110046c5aa1b4386f951de6ab89f890cc))
+
+## [103.2.5](https://github.com/dhis2/capture-app/compare/v103.2.4...v103.2.5) (2025-08-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4291](https://github.com/dhis2/capture-app/issues/4291)) ([338a671](https://github.com/dhis2/capture-app/commit/338a6714283fdc421c57c0ec73e5a96b47839041))
+
+## [103.2.4](https://github.com/dhis2/capture-app/compare/v103.2.3...v103.2.4) (2025-08-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19905] TEI search fails for integer range types ([#4248](https://github.com/dhis2/capture-app/issues/4248)) ([237a7d1](https://github.com/dhis2/capture-app/commit/237a7d1db33742f65e8fe4f9e1ee06df82ce929e))
+
+## [103.2.3](https://github.com/dhis2/capture-app/compare/v103.2.2...v103.2.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* [DHIS2-19784] send ISO-formatted enrollment date to rule engine ([#4171](https://github.com/dhis2/capture-app/issues/4171)) ([c0e45af](https://github.com/dhis2/capture-app/commit/c0e45afc6fb6103fc72ba1484a045c70a525fb1f))
+
+## [103.2.2](https://github.com/dhis2/capture-app/compare/v103.2.1...v103.2.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4277](https://github.com/dhis2/capture-app/issues/4277)) ([bd61500](https://github.com/dhis2/capture-app/commit/bd61500ac4adad6ac0e1d1490eb73c44ae6e0d2a))
+
+## [103.2.1](https://github.com/dhis2/capture-app/compare/v103.2.0...v103.2.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* [DHIS2-15155] Filter Range Search Values before Prepopulation ([#4245](https://github.com/dhis2/capture-app/issues/4245)) ([4b27128](https://github.com/dhis2/capture-app/commit/4b27128dbb3c975f13fa82ce28aa1c5789f26d51))
+
+# [103.2.0](https://github.com/dhis2/capture-app/compare/v103.1.3...v103.2.0) (2025-07-30)
+
+
+### Features
+
+* [DHIS2-7080] Expired Period Validation for Edit Events ([#4157](https://github.com/dhis2/capture-app/issues/4157)) ([40e8905](https://github.com/dhis2/capture-app/commit/40e8905b0ccb7f0ff85a694cc94f083d9e6ac71c))
+
+## [103.1.3](https://github.com/dhis2/capture-app/compare/v103.1.2...v103.1.3) (2025-07-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4249](https://github.com/dhis2/capture-app/issues/4249)) ([a03c0db](https://github.com/dhis2/capture-app/commit/a03c0db0deecadbf77648fedf39a3c3ae9abdd95))
+
+## [103.1.2](https://github.com/dhis2/capture-app/compare/v103.1.1...v103.1.2) (2025-07-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4221](https://github.com/dhis2/capture-app/issues/4221)) ([b93ac34](https://github.com/dhis2/capture-app/commit/b93ac34fcd7470212fd57644d28c786cc3e39810))
+
+## [103.1.1](https://github.com/dhis2/capture-app/compare/v103.1.0...v103.1.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4203](https://github.com/dhis2/capture-app/issues/4203)) ([8e2ae40](https://github.com/dhis2/capture-app/commit/8e2ae40509462f2d94bfbac7d579863c7a843e96))
+
+# [103.1.0](https://github.com/dhis2/capture-app/compare/v103.0.2...v103.1.0) (2025-07-09)
+
+
+### Features
+
+* [DHIS2-19024] Add trackedEntities from working lists to BulkDataEntryPlugin ([#4057](https://github.com/dhis2/capture-app/issues/4057)) ([1881ea6](https://github.com/dhis2/capture-app/commit/1881ea6064a1bc723751b6ea108426e66303f747))
+
+## [103.0.2](https://github.com/dhis2/capture-app/compare/v103.0.1...v103.0.2) (2025-07-08)
+
+
+### Bug Fixes
+
+* [LIBS-718] bump @dhis2-ui/calendar from 10.4.0 to 10.7.6 ([#4191](https://github.com/dhis2/capture-app/issues/4191)) ([ea207a0](https://github.com/dhis2/capture-app/commit/ea207a08d9ed9cf1b3a886c6049b8ba88a75791c))
+
+## [103.0.1](https://github.com/dhis2/capture-app/compare/v103.0.0...v103.0.1) (2025-07-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4168](https://github.com/dhis2/capture-app/issues/4168)) ([95730ec](https://github.com/dhis2/capture-app/commit/95730eceac41a6e1a2c6649ff196b1eae40b1340))
+
+# [103.0.0](https://github.com/dhis2/capture-app/compare/v102.6.15...v103.0.0) (2025-07-07)
+
+
+### chore
+
+* **release:** stop support for 2.39 ([#4131](https://github.com/dhis2/capture-app/issues/4131)) ([a5ad527](https://github.com/dhis2/capture-app/commit/a5ad527ab664b7774efab119ec5b39acdf098dce))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 103.0.0 to facilitate potential fixes for 2.39.
+
+## [102.6.15](https://github.com/dhis2/capture-app/compare/v102.6.14...v102.6.15) (2025-07-02)
+
+
+### Bug Fixes
+
+* skip flaky changelog cypress test ([#4188](https://github.com/dhis2/capture-app/issues/4188)) ([a6200ce](https://github.com/dhis2/capture-app/commit/a6200ce9ac94d0101ec5eb985334614212b29bdc))
+
+## [102.6.14](https://github.com/dhis2/capture-app/compare/v102.6.13...v102.6.14) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-19765] omit program indicators in profile widget rule execution ([#4163](https://github.com/dhis2/capture-app/issues/4163)) ([ba786d1](https://github.com/dhis2/capture-app/commit/ba786d12b33852629cb45d2f0de118fc569fd739))
+
+## [102.6.13](https://github.com/dhis2/capture-app/compare/v102.6.12...v102.6.13) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-16601] Rename TEIWorkingLists to TrackerWorkingLists ([#4136](https://github.com/dhis2/capture-app/issues/4136)) ([a37dfd8](https://github.com/dhis2/capture-app/commit/a37dfd8ec28cedea818442f7e496f64e037e7bb2))
+
+## [102.6.12](https://github.com/dhis2/capture-app/compare/v102.6.11...v102.6.12) (2025-06-25)
+
+
+### Bug Fixes
+
+* use 'en' as fallback in `localeCompareStrings` ([#4174](https://github.com/dhis2/capture-app/issues/4174)) ([2f222b6](https://github.com/dhis2/capture-app/commit/2f222b60a5cafad46d2de1b730515d0886232752))
+
+## [102.6.11](https://github.com/dhis2/capture-app/compare/v102.6.10...v102.6.11) (2025-06-25)
+
+
+### Bug Fixes
+
+* [DHIS2-19632] Search result cards display option codes instead of names/texts ([#4147](https://github.com/dhis2/capture-app/issues/4147)) ([a799279](https://github.com/dhis2/capture-app/commit/a799279dfa2ed58aa29afe8593a0893883541921))
+
+## [102.6.10](https://github.com/dhis2/capture-app/compare/v102.6.9...v102.6.10) (2025-06-24)
+
+
+### Bug Fixes
+
+* [DHIS2-19767] Translate Choose Org Unit label ([#4164](https://github.com/dhis2/capture-app/issues/4164)) ([1273d37](https://github.com/dhis2/capture-app/commit/1273d37809d3b37de00872b2500cdb6f1eda31cf))
+
+## [102.6.9](https://github.com/dhis2/capture-app/compare/v102.6.8...v102.6.9) (2025-06-24)
+
+
+### Bug Fixes
+
+* [DHIS2-19330] data element increments twice on render ([#4075](https://github.com/dhis2/capture-app/issues/4075)) ([daa09c0](https://github.com/dhis2/capture-app/commit/daa09c0229e3f1df0c22bd1a857d8a1d0b3879ba))
+
+## [102.6.8](https://github.com/dhis2/capture-app/compare/v102.6.7...v102.6.8) (2025-06-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4153](https://github.com/dhis2/capture-app/issues/4153)) ([717791b](https://github.com/dhis2/capture-app/commit/717791bec73ca44a55ff01c4782250bb5e8446d7))
+
+## [102.6.7](https://github.com/dhis2/capture-app/compare/v102.6.6...v102.6.7) (2025-06-17)
+
+
+### Bug Fixes
+
+* [DHIS2-19744] return memoized component also on first render ([#4152](https://github.com/dhis2/capture-app/issues/4152)) ([340a3aa](https://github.com/dhis2/capture-app/commit/340a3aafc3ae4444d68c3346d9fdd5f350664483))
+
+## [102.6.6](https://github.com/dhis2/capture-app/compare/v102.6.5...v102.6.6) (2025-06-17)
+
+
+### Bug Fixes
+
+* [DHIS2-19647] Breadcrumb always shows "Discard changes" warning ([#4121](https://github.com/dhis2/capture-app/issues/4121)) ([d84ff92](https://github.com/dhis2/capture-app/commit/d84ff92537704098eb7f024099c80e1d0c0ffc03))
+
+## [102.6.5](https://github.com/dhis2/capture-app/compare/v102.6.4...v102.6.5) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-7079] Frontend validation when adding new events in locked periods ([#4070](https://github.com/dhis2/capture-app/issues/4070)) ([e72917e](https://github.com/dhis2/capture-app/commit/e72917ec85b1b22c381f669a6af5e7d69516b2d2))
+
+## [102.6.4](https://github.com/dhis2/capture-app/compare/v102.6.3...v102.6.4) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-19694] use the EQ operator when filtering by unique TEA in the WLs ([#4129](https://github.com/dhis2/capture-app/issues/4129)) ([1753883](https://github.com/dhis2/capture-app/commit/175388348038a69219c7d4d333044c87ec14849d))
+
+## [102.6.3](https://github.com/dhis2/capture-app/compare/v102.6.2...v102.6.3) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11104] Translation for Unique Search ([#4133](https://github.com/dhis2/capture-app/issues/4133)) ([acf4132](https://github.com/dhis2/capture-app/commit/acf413202da668bcae2af53d3ae56988fd99eaf7))
+
+## [102.6.2](https://github.com/dhis2/capture-app/compare/v102.6.1...v102.6.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-18951] Unique attributes error handling in profile Widget ([#4148](https://github.com/dhis2/capture-app/issues/4148)) ([7233db9](https://github.com/dhis2/capture-app/commit/7233db98ca6160a06b1299fd89d34f96862bff5b))
+
+## [102.6.1](https://github.com/dhis2/capture-app/compare/v102.6.0...v102.6.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4139](https://github.com/dhis2/capture-app/issues/4139)) ([dd5ac47](https://github.com/dhis2/capture-app/commit/dd5ac4728d1d067ac7f55521805532d145bb151b))
+
+# [102.6.0](https://github.com/dhis2/capture-app/compare/v102.5.0...v102.6.0) (2025-06-07)
+
+
+### Bug Fixes
+
+* [DHIS2-19633] Adjust form width to 40/60 ([#4130](https://github.com/dhis2/capture-app/issues/4130)) ([46c69c1](https://github.com/dhis2/capture-app/commit/46c69c181e7eacd8b2db89b5935ce50b2241fb86))
+
+
+### Features
+
+* [DHIS2-18664] Add org unit field to new event from for Event programs ([#3976](https://github.com/dhis2/capture-app/issues/3976)) ([7f22b5b](https://github.com/dhis2/capture-app/commit/7f22b5be15512a0bb0fcb336da6ba171eb071ef9))
+
+# [102.5.0](https://github.com/dhis2/capture-app/compare/v102.4.8...v102.5.0) (2025-06-06)
+
+
+### Features
+
+* [DHIS2-18889] BulkDataEntryPlugin entry point ([#4000](https://github.com/dhis2/capture-app/issues/4000)) ([dbed996](https://github.com/dhis2/capture-app/commit/dbed9969068023f6e52f39682975fd16877e00ef))
+
+## [102.4.8](https://github.com/dhis2/capture-app/compare/v102.4.7...v102.4.8) (2025-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-11847] Add critical alert to post errors ([#4078](https://github.com/dhis2/capture-app/issues/4078)) ([4ae8eca](https://github.com/dhis2/capture-app/commit/4ae8eca441ebfb543f17397df9fd45ac34a59df8))
+
+## [102.4.7](https://github.com/dhis2/capture-app/compare/v102.4.6...v102.4.7) (2025-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4113](https://github.com/dhis2/capture-app/issues/4113)) ([57bca70](https://github.com/dhis2/capture-app/commit/57bca70f6f121f717b2cdd21e8ce722c4ee7852b))
+
+## [102.4.6](https://github.com/dhis2/capture-app/compare/v102.4.5...v102.4.6) (2025-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18735] deselecting static list breaks breadcrumbs ([ea74faf](https://github.com/dhis2/capture-app/commit/ea74faffe1720844d7d0fd8e9f4408a52bea5e5b))
+* [DHIS2-18951] Ignore Non-searchable attributes error when validating unique attribute ([#4043](https://github.com/dhis2/capture-app/issues/4043)) ([86559e5](https://github.com/dhis2/capture-app/commit/86559e5950400f510541c505275c6a8d3c3a1b78))
+* **translations:** sync translations from transifex (master) ([#4103](https://github.com/dhis2/capture-app/issues/4103)) ([84343d8](https://github.com/dhis2/capture-app/commit/84343d81ba5423d855e4b16d8e933445b335b585))
+
+## [102.4.5](https://github.com/dhis2/capture-app/compare/v102.4.4...v102.4.5) (2025-05-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] indexedDB caching ([#4056](https://github.com/dhis2/capture-app/issues/4056)) ([750101c](https://github.com/dhis2/capture-app/commit/750101ce5094ce245a32d92e5f2847ac7bc95d76))
+
+## [102.4.4](https://github.com/dhis2/capture-app/compare/v102.4.3...v102.4.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4093](https://github.com/dhis2/capture-app/issues/4093)) ([23fd8b8](https://github.com/dhis2/capture-app/commit/23fd8b80aecb4a282d89e85490eab7e2cb24fb6b))
+
+## [102.4.3](https://github.com/dhis2/capture-app/compare/v102.4.2...v102.4.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-19467] form inconsistencies ([#4061](https://github.com/dhis2/capture-app/issues/4061)) ([1560585](https://github.com/dhis2/capture-app/commit/1560585d62169c4648d36da8b484bdcda0727d18))
+* [DHIS2-19530] deprecated api query params ([#4063](https://github.com/dhis2/capture-app/issues/4063)) ([8400dd8](https://github.com/dhis2/capture-app/commit/8400dd8627c1674dce287392303d74bff304b20d))
+
+## [102.4.2](https://github.com/dhis2/capture-app/compare/v102.4.1...v102.4.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18839] TEA with number option set value does not show in Profile widget on Capture App ([#4076](https://github.com/dhis2/capture-app/issues/4076)) ([ed6d28d](https://github.com/dhis2/capture-app/commit/ed6d28d4f3a26cbe3a2c01a3c6aaa96737b16769))
+
+## [102.4.1](https://github.com/dhis2/capture-app/compare/v102.4.0...v102.4.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18671] Discard changes dialog not responding ([#4059](https://github.com/dhis2/capture-app/issues/4059)) ([11f9223](https://github.com/dhis2/capture-app/commit/11f92234307e04d3ae665e02b2def878741f223d))
+
+# [102.4.0](https://github.com/dhis2/capture-app/compare/v102.3.6...v102.4.0) (2025-05-08)
+
+
+### Features
+
+* [DHIS2-10134] Disable fallback search button when TET have no searchable attributes ([#4060](https://github.com/dhis2/capture-app/issues/4060)) ([107e635](https://github.com/dhis2/capture-app/commit/107e6352c6cba15e998bb45001915722a89cd0c2))
+
+## [102.3.6](https://github.com/dhis2/capture-app/compare/v102.3.5...v102.3.6) (2025-05-08)
+
+
+### Bug Fixes
+
+* [DHIS2-19172] Auto-generated events do not have report date prefilled in new event form ([#4067](https://github.com/dhis2/capture-app/issues/4067)) ([e4ca23e](https://github.com/dhis2/capture-app/commit/e4ca23e1cde4a2d4f583352de41d7cabf84c1c7e))
+
+## [102.3.5](https://github.com/dhis2/capture-app/compare/v102.3.4...v102.3.5) (2025-05-07)
+
+
+### Bug Fixes
+
+* [DHIS2-13236] Incorrect text on top of Profile widget ([#4068](https://github.com/dhis2/capture-app/issues/4068)) ([0ab5c87](https://github.com/dhis2/capture-app/commit/0ab5c878605a1ed02d50d755e3afd2a8cb6c0e03))
+
+## [102.3.4](https://github.com/dhis2/capture-app/compare/v102.3.3...v102.3.4) (2025-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-19307] load section containing a DE not contained in the PS ([#4021](https://github.com/dhis2/capture-app/issues/4021)) ([58c1959](https://github.com/dhis2/capture-app/commit/58c195927e90fcf426eaba55bd9fe42a1d77fd25))
+
+## [102.3.3](https://github.com/dhis2/capture-app/compare/v102.3.2...v102.3.3) (2025-05-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19450] format updatedAt with en locale ([#4069](https://github.com/dhis2/capture-app/issues/4069)) ([725019c](https://github.com/dhis2/capture-app/commit/725019c22427ecb54dc62579ead27f5ea9bca99e))
+
+## [102.3.2](https://github.com/dhis2/capture-app/compare/v102.3.1...v102.3.2) (2025-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19441][DHIS2-19442] Missing translation ([#4058](https://github.com/dhis2/capture-app/issues/4058)) ([e86d8cf](https://github.com/dhis2/capture-app/commit/e86d8cf97a53726bfc53d5a48575aea5ee998298))
+
+## [102.3.1](https://github.com/dhis2/capture-app/compare/v102.3.0...v102.3.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* [DHIS2-19011] Forms retain values after search ([#4045](https://github.com/dhis2/capture-app/issues/4045)) ([48ff559](https://github.com/dhis2/capture-app/commit/48ff55914adf5a778ee5a27370ba5b92164c59bc))
+
+# [102.3.0](https://github.com/dhis2/capture-app/compare/v102.2.0...v102.3.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-19190] Read Only for OrgUnit Selector ([#4013](https://github.com/dhis2/capture-app/issues/4013)) ([f6ba5c3](https://github.com/dhis2/capture-app/commit/f6ba5c3d0e937d9ee79d3a3ecf704b69cafc5d38))
+
+# [102.2.0](https://github.com/dhis2/capture-app/compare/v102.1.0...v102.2.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-18382] Replace TE org.unit with the owner org. unit in workingList ([#4015](https://github.com/dhis2/capture-app/issues/4015)) ([1f66260](https://github.com/dhis2/capture-app/commit/1f6626020c7b56a48a21eb61e0c9e6915e58d0ca))
+
+# [102.1.0](https://github.com/dhis2/capture-app/compare/v102.0.2...v102.1.0) (2025-04-30)
+
+
+### Features
+
+* [DHIS2-16991] Add clear button ([#4014](https://github.com/dhis2/capture-app/issues/4014)) ([80a7fa8](https://github.com/dhis2/capture-app/commit/80a7fa8dceb01b7fd29bd2e4e225fa8f937d8fa0))
+
+## [102.0.2](https://github.com/dhis2/capture-app/compare/v102.0.1...v102.0.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-18854] Incorrect Display of Scheduled Events Count in Schedule Info Section ([#4027](https://github.com/dhis2/capture-app/issues/4027)) ([56c0f42](https://github.com/dhis2/capture-app/commit/56c0f427d443e98edfd9c6d41eb39e710713cb69))
+* [DHIS2-18952] Form name in widgets ([#4004](https://github.com/dhis2/capture-app/issues/4004)) ([847aed3](https://github.com/dhis2/capture-app/commit/847aed3b470eaeceb3c20ac6c9cb71619b61a099))
+
+## [102.0.1](https://github.com/dhis2/capture-app/compare/v102.0.0...v102.0.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* improve error handling metadata ([#4016](https://github.com/dhis2/capture-app/issues/4016)) ([8955604](https://github.com/dhis2/capture-app/commit/89556044dd4db88768824d4186e825916aad378c))
+
+# [102.0.0](https://github.com/dhis2/capture-app/compare/v101.33.3...v102.0.0) (2025-04-29)
+
+
+### Features
+
+* [DHIS2-19144] working lists performance options ([#3989](https://github.com/dhis2/capture-app/issues/3989)) ([c2f0a8c](https://github.com/dhis2/capture-app/commit/c2f0a8c975afc6d9d7900e8d2cd8defa223de460))
+
+
+### BREAKING CHANGES
+
+* Bump version to 102.0.0 to facilitate potential fixes for the bundled app in the 2.42 release
+
+## [101.33.3](https://github.com/dhis2/capture-app/compare/v101.33.2...v101.33.3) (2025-04-08)
+
+
+### Bug Fixes
+
+* [DHIS2-19415] editing two fields simultaneously blocks saving ([#4044](https://github.com/dhis2/capture-app/issues/4044)) ([ca448d3](https://github.com/dhis2/capture-app/commit/ca448d3c5ac6bc3896aa62243c9d90a163d07f43))
+
+## [101.33.2](https://github.com/dhis2/capture-app/compare/v101.33.1...v101.33.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19336] provide empty array instead of `null` to `RuleEnrollmentJs` ([#4028](https://github.com/dhis2/capture-app/issues/4028)) ([959ffb6](https://github.com/dhis2/capture-app/commit/959ffb62cc59b201ed09c065ee2c12caf8f06697))
+* **translations:** sync translations from transifex (master) ([e973d3e](https://github.com/dhis2/capture-app/commit/e973d3e09cb4b9835f66fe2ba752b679641cbbd4))
+
+## [101.33.1](https://github.com/dhis2/capture-app/compare/v101.33.0...v101.33.1) (2025-03-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4b0bb85](https://github.com/dhis2/capture-app/commit/4b0bb85baac0c8aebb97d5851ee6935b15fcf7e5))
+
+# [101.33.0](https://github.com/dhis2/capture-app/compare/v101.32.5...v101.33.0) (2025-03-18)
+
+
+### Features
+
+* [DHIS2-16688] replace rule engine ([#3955](https://github.com/dhis2/capture-app/issues/3955)) ([83eb423](https://github.com/dhis2/capture-app/commit/83eb4230cc21b0d5d62fc39d784ea2737908ebbf))
+
+## [101.32.5](https://github.com/dhis2/capture-app/compare/v101.32.4...v101.32.5) (2025-03-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4010](https://github.com/dhis2/capture-app/issues/4010)) ([6e9605c](https://github.com/dhis2/capture-app/commit/6e9605c225cb848916cb7036bedb2fa7481a1b7b))
+
+## [101.32.4](https://github.com/dhis2/capture-app/compare/v101.32.3...v101.32.4) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-16918] Event relationship URL link is broken ([#4003](https://github.com/dhis2/capture-app/issues/4003)) ([f0a0726](https://github.com/dhis2/capture-app/commit/f0a07269f01aeb2324d3b977dd927a07eb30f3f8))
+
+## [101.32.3](https://github.com/dhis2/capture-app/compare/v101.32.2...v101.32.3) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-19221] enrollment dashboard workflows ([#4002](https://github.com/dhis2/capture-app/issues/4002)) ([94f393e](https://github.com/dhis2/capture-app/commit/94f393e62762172639da2f73ea4a174c543040f2))
+
+## [101.32.2](https://github.com/dhis2/capture-app/compare/v101.32.1...v101.32.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-19165] handle empty schedule date ([#3995](https://github.com/dhis2/capture-app/issues/3995)) ([3113224](https://github.com/dhis2/capture-app/commit/311322400c3212ce8b0fa7b4e7dc72715d77a658))
+
 ## [101.32.1](https://github.com/dhis2/capture-app/compare/v101.32.0...v101.32.1) (2025-03-16)
 
 

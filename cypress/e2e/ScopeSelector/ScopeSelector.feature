@@ -86,12 +86,6 @@ Feature: User uses the ScopeSelector to navigate
     Then new event page url is valid
     And you can see the new event page
 
-  Scenario: New event page > Selecting org unit while program is preselected
-    Given you land on a new event page with preselected program
-    When you select org unit
-    Then new event page url is valid
-    And you can see the new event page
-
   Scenario: New event page > Url with invalid program id
     Given you land on a new event page with an invalid program id
     Then you should see error message
@@ -125,12 +119,11 @@ Feature: User uses the ScopeSelector to navigate
     When you remove the program selection
     Then you should be taken to the main page with only org unit selected
 
-  Scenario: View event page > Removing the org unit selection after you navigated to the page
+  Scenario: View event page > Removing the org unit selection is not possible
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
-    And you select the first entity from the table
-    When you remove the org unit selection
-    Then you can see the view event page
+    When you select the first entity from the table
+    Then you can not remove the org unit selection
 
   Scenario: View event page > Url with invalid event id
     Given you land on a view event page with an invalid id
@@ -227,12 +220,12 @@ Feature: User uses the ScopeSelector to navigate
     Then you see message explaining you need to select an enrollment
 
   Scenario: Enrollment event new page > resetting the event
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&stageId=EPEcjy3FWmI&tab=REPORT&teiId=eUTmQGull6H
     When you reset the stage selection
     Then you see the enrollment event New page but there is no stage id in the url
 
   Scenario: Enrollment event new page > resetting the stage
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&stageId=EPEcjy3FWmI&tab=REPORT&teiId=eUTmQGull6H
     When you reset the event selection
     Then you see the enrollment event New page but there is no stage id in the url
 

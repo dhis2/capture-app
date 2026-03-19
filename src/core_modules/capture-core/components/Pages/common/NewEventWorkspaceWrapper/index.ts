@@ -1,0 +1,1 @@
+export { NewEventWorkspaceWrapper } from './NewEventWorkspaceWrapper';

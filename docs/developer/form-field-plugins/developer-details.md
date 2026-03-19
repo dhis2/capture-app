@@ -21,6 +21,61 @@ setFieldValue({
 });
 ```
 
+#### Expected value types
+
+The `setFieldValue` function expects different value types depending on the element type. Below is a reference table of the expected value formats:
+
+| Element Type | Value Type | Example |
+|-------------|------------|---------|
+| `TEXT`, `LONG_TEXT`, `MULTI_TEXT` | `string` | `"John Doe"` |
+| `NUMBER`, `INTEGER`, `PERCENTAGE` | `number \| string` | `42` |
+| `NUMBER_RANGE`, `INTEGER_RANGE` | `{ from: number, to: number }` | `{ from: 10, to: 20 }` |
+| `DATE` | `string` (ISO format) | `"2024-01-15"` |
+| `DATE_RANGE` | `{ from: string, to: string }` | `{ from: "2024-01-01", to: "2024-12-31" }` |
+| `DATETIME` | `string` (ISO format) | `"2024-01-15T10:30:00"` |
+| `TIME` | `string` (HH:mm) | `"14:30"` |
+| `BOOLEAN`, `TRUE_ONLY` | `boolean` | `true` |
+| `PHONE_NUMBER`, `EMAIL`, `URL`, `USERNAME` | `string` | `"user@example.com"` |
+| `AGE` | `{ date: string }` or `{ years?: number, months?: number, days?: number }` | `{ date: "1990-05-15" }` |
+| `COORDINATE` | `{ latitude: number, longitude: number }` | `{ latitude: 40.7128, longitude: -74.0060 }` |
+| `POLYGON` | `Array<Array<Array<number>>>` | `[[[30, 10], [40, 40], [20, 40], [30, 10]]]` |
+| `FILE_RESOURCE` | `{ value: string, name: string, url?: string }` | `{ value: "fileId123", name: "doc.pdf" }` |
+| `IMAGE` | `{ value: string, name: string, url?: string, previewUrl?: string }` | `{ value: "imgId456", name: "photo.jpg" }` |
+| `ORGANISATION_UNIT` | `{ id: string }` | `{ id: "orgUnitId" }` |
+| `ASSIGNEE` | `{ id: string, username?: string, name?: string }` | `{ id: "userId" }` |
+
+**Common examples:**
+
+```ts
+// Text field
+setFieldValue({ fieldId: 'firstName', value: 'John' });
+
+// Number field
+setFieldValue({ fieldId: 'age', value: 25 });
+
+// Date field
+setFieldValue({ fieldId: 'birthDate', value: '1990-05-15' });
+
+// Image field
+setFieldValue({
+    fieldId: 'photo',
+    value: { value: 'fileResourceId', name: 'photo.jpg' }
+});
+
+// Coordinate field
+setFieldValue({
+    fieldId: 'location',
+    value: { latitude: 40.7128, longitude: -74.0060 }
+});
+
+// With validation options
+setFieldValue({
+    fieldId: 'email',
+    value: 'user@example.com',
+    options: { valid: true, touched: true }
+});
+```
+
 ### Updating context values
 
 You can also update context values from the plugin using the `setContextFieldValue` function that is passed as a prop to the plugin.

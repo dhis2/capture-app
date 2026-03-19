@@ -1,7 +1,7 @@
 .label {
     pointer-events: none;
     position: absolute;
-    left: 12px;
+    inset-inline-start: 12px;
     top: 0;
     z-index: 11;
     transform-origin: top left;
@@ -16,5 +16,5 @@
 
 .labelShrinked {
     color: #6C7787;
-    transform: translate(0, 1.5px) scale(0.75);
+    transform: translate(0px, 2px) scale(0.55);
 }

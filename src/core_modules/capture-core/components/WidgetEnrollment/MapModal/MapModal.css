@@ -1,0 +1,5 @@
+/* RTL: move map search clear button to the left so it does not overlap the search icon */
+[dir='rtl'] .leaflet-search-control-active .leaflet-search-control-close {
+    left: 0;
+    right: auto;
+}

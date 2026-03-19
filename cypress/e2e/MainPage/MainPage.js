@@ -12,6 +12,14 @@ Given('you open the main page with Ngelehun and child programme context', () => 
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you are in the main page with Child Programme and Ngelehun CHC selected', () => {
+    cy.visit('/#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you are in the main page with MNCH PNC and Ngelehun CHC selected', () => {
+    cy.visit('/#/?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
+});
+
 And('you can load the view with the name Events assigned to me', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
@@ -32,7 +40,7 @@ Then('the icon is rendered as an svg', () => {
 });
 
 Then('the TEI working list is displayed', () => {
-    cy.get('[data-test="tei-working-lists"]').within(() => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => {
         cy.contains('Rows per page').should('exist');
         cy.contains('First name').should('exist');
         cy.contains('Last name').should('exist');

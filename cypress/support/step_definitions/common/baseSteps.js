@@ -13,7 +13,7 @@ Given('you are in the main page with no selections made', () => {
 });
 
 And('you see the dropdown menu for selecting tracked entity type', () => {
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
+    cy.get('[data-test="dhis2-simplesingleselect"]')
         .should('exist');
     cy.contains('You can also choose a program from the top bar')
         .should('exist');
@@ -138,6 +138,10 @@ And('you select the MNCH PNC program', () => {
 
 Then(/^the user clicks the element containing the text: (.*)$/, (text) => {
     cy.contains(text).click();
+});
+
+When('the user click the {string} button', (text) => {
+    cy.get('[data-test="dhis2-uicore-button"]').contains(text).click();
 });
 
 Then(/^the current url is (.*)$/, (url) => {

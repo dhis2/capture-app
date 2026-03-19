@@ -159,11 +159,6 @@ Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
 
-Given('you land on a new event page with preselected program', () => {
-    cy.visit('/#/new?programId=VBqh0ynB2wv');
-});
-
-
 Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
 });
@@ -194,9 +189,9 @@ When('you remove the program selection', () => {
         .click();
 });
 
-When('you remove the org unit selection', () => {
+When('you can not remove the org unit selection', () => {
     cy.get('[data-test="org-unit-selector-container-clear-icon"]')
-        .click();
+        .should('not.exist');
 });
 
 Then('you should be taken to the main page with only org unit selected', () => {
@@ -291,7 +286,7 @@ And('you see the enrollment event Edit page but there is no org unit id in the u
 });
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=eUTmQGull6H`);
     cy.contains('Choose a stage for a new event');
 });
 

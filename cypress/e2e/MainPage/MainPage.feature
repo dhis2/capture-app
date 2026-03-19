@@ -46,3 +46,23 @@ Feature: User interacts with Main page
         Given you are in the main page with no selections made
         When you select Child Programme
         Then the icon is rendered as a custom icon
+
+    @with-indexBD-clean
+    Scenario: BulkDataEntry widget is displayed in the main page
+        Given you are in the main page with Child Programme and Ngelehun CHC selected
+        Then the TEI working list is displayed
+        And the BulkDataEntry widget in idle mode is displayed
+        When the user selects the "Routine visit" BulkDataEntry
+        When the user navigates to "Program overview" using the breadcrumb
+        Then the TEI working list is displayed
+        And the BulkDataEntry widget in active mode is displayed
+
+    @with-indexBD-clean
+    Scenario: BulkDataEntry widget is displayed in the main page for program with displayFrontPage set to false
+        Given you are in the main page with MNCH PNC and Ngelehun CHC selected
+        Then the search form is displayed
+        And the BulkDataEntry widget in idle mode is displayed
+        When the user selects the "Case based surveillance" BulkDataEntry
+        When the user navigates to "Search" using the breadcrumb
+        Then the search form is displayed
+        And the BulkDataEntry widget in active mode is displayed
