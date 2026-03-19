@@ -1,6 +1,5 @@
 # Translators:
 # Fernando Jorge Bade, 2023
-# Philip Larsen Donnelly, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
 # David Mondlane, 2025
@@ -13,12 +12,13 @@
 # Helton Dias, 2026
 # David Júnior <davidjr.mondlane@gmail.com>, 2026
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2026
+# Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -104,11 +104,11 @@ msgstr "Ver painel de controle"
 msgid "View active enrollment"
 msgstr "Ver inscrição activa"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Reinscrever-se"
-
-msgid "in"
-msgstr "dentro"
 
 msgid "Enrolled"
 msgstr "Inscrito"
@@ -131,10 +131,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -294,8 +294,11 @@ msgstr "Mudar para a vista de formulário"
 msgid "Switch to row view"
 msgstr "Mudar para vista de linha"
 
-msgid "events added"
-msgstr "eventos adicionados"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "No events added"
 msgstr "Nenhum evento adicionado"
@@ -338,6 +341,9 @@ msgstr "sem"
 
 msgid "enrollment"
 msgstr "inscrição"
+
+msgid "in"
+msgstr "dentro"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -484,29 +490,32 @@ msgstr "Selecione o usuário"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Forneça zero ou um número inteiro positivo"
-
-msgid "to"
-msgstr "para"
-
-msgid "Days in the future"
-msgstr "Dias no futuro"
 
 msgid "From"
 msgstr "A partir de"
 
-msgid "Days in the past"
-msgstr "Dias no passado"
+msgid "to"
+msgstr "para"
 
 msgid "To"
 msgstr "Até"
+
+msgid "Period"
+msgstr "Período"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Forneça zero ou um número inteiro positivo"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr "Dias no passado"
+
+msgid "Days in the future"
+msgstr "Dias no futuro"
 
 msgid "This week"
 msgstr "Esta semana"
@@ -514,7 +523,7 @@ msgstr "Esta semana"
 msgid "This month"
 msgstr "Este mês"
 
-msgid "This Year"
+msgid "This year"
 msgstr "Este ano"
 
 msgid "Last week"
@@ -532,17 +541,29 @@ msgstr "Faixa absoluta"
 msgid "Relative range"
 msgstr "Faixa relativa"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Encontro"
+
+msgid "Time"
+msgstr "Tempo"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Máx"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -553,11 +574,20 @@ msgstr "Por favor, forneça um número válido"
 msgid "Please provide a valid integer"
 msgstr "Forneça um número inteiro válido"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Forneça um número inteiro entre 0 e 100"
+
 msgid "Please provide a positive integer"
 msgstr "Forneça um número inteiro positivo"
 
 msgid "Please provide a negative integer"
 msgstr "Forneça um número inteiro negativo"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Máx"
 
 msgid "Yes"
 msgstr "sim"
@@ -634,7 +664,7 @@ msgstr "Reiniciar filtro"
 msgid "Remove filter"
 msgstr "Remover filtro "
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -643,6 +673,9 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
@@ -653,11 +686,23 @@ msgstr "após ou igual a {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "antes ou igual a {{date}}"
 
-msgid "greater than or equal to"
-msgstr "Melhor que ou igual a"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "menos que ou igual a"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "Mais filtros"
@@ -687,8 +732,8 @@ msgstr "Não tem acesso para escrever notas"
 msgid "Write note"
 msgstr "Escrever nota"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "foi apagado e escondido pela sua última ação"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "Aviso"
@@ -1008,6 +1053,9 @@ msgstr "Pesquise {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Pesquisa por atributos"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Preencha pelo menos {{count}} atributo para pesquisar"
@@ -1016,6 +1064,9 @@ msgstr[2] "Preencha pelo menos {{count}} atributos para pesquisar"
 
 msgid "Missing search criteria"
 msgstr "Critérios de pesquisa ausentes"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Voltar para pesquisar"
@@ -1073,6 +1124,12 @@ msgstr "Nenhum seleccionado"
 msgid "Choose an organisation unit"
 msgstr "Escolha uma unidade organizacional"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Limpar seleção"
 
@@ -1091,6 +1148,12 @@ msgstr "Mostrar todos os programas"
 
 msgid "Choose a program"
 msgstr "Escolha um programa"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Pesquise por {{titleText}}"
@@ -1158,6 +1221,9 @@ msgstr ""
 "Você pode alterar seus termos de pesquisa e pesquisar novamente para "
 "encontrar o que está procurando."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1180,6 +1246,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Não é possível pesquisar em todos os programas"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Resultados encontrados"
 
@@ -1200,14 +1269,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Criar lista gravadas"
 
-msgid "Create new in another program"
-msgstr "Criar novo em outro programa"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Criar um novo evento"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1794,9 +1866,6 @@ msgstr "Criado"
 msgid "Deleted"
 msgstr "Apagado"
 
-msgid "Date"
-msgstr "Encontro"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2240,9 +2309,6 @@ msgstr "Forneça uma data e hora válidas"
 msgid "Please provide a valid time"
 msgstr "Forneça um horário válido"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Forneça um número inteiro entre 0 e 100"
-
 msgid "Please provide a valid url"
 msgstr "Forneça um url válido"
 
@@ -2293,9 +2359,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Definir coordenada"
-
-msgid "Time"
-msgstr "Tempo"
 
 msgid "From date"
 msgstr "Da data"

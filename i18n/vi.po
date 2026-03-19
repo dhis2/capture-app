@@ -1,14 +1,14 @@
 # Translators:
-# Philip Larsen Donnelly, 2024
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2025
-# Em Le <em.hispvietnam@gmail.com>, 2025
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
+# Em Le <em.hispvietnam@gmail.com>, 2026
+# Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -94,11 +94,11 @@ msgstr "Xem bảng thông tin"
 msgid "View active enrollment"
 msgstr "Xem đăng ký đang hoạt động"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Đăng ký lại"
-
-msgid "in"
-msgstr "trong"
 
 msgid "Enrolled"
 msgstr "Đã đăng ký"
@@ -121,11 +121,11 @@ msgstr "Vĩ độ"
 msgid "Long"
 msgstr "Kinh độ"
 
-msgid "lat"
-msgstr "vĩ độ"
+msgid "lat{{escape}} {{latitudeValue}}"
+msgstr ""
 
-msgid "long"
-msgstr "kinh độ"
+msgid "long{{escape}} {{longitudeValue}}"
+msgstr ""
 
 msgid "Show less"
 msgstr "Ẩn bớt"
@@ -285,8 +285,9 @@ msgstr "Chuyển sang xem biểu nhập"
 msgid "Switch to row view"
 msgstr "Chuyển sang xem dòng"
 
-msgid "events added"
-msgstr "sự kiện đã được thêm"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
 
 msgid "No events added"
 msgstr "Không có sự kiện được thêm"
@@ -330,6 +331,9 @@ msgstr "không có"
 
 msgid "enrollment"
 msgstr "đăng ký"
+
+msgid "in"
+msgstr "trong"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -472,29 +476,32 @@ msgstr "Chọn người dùng"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Vui lòng cung cấp số 0 hoặc số nguyên dương"
-
-msgid "to"
-msgstr "thành"
-
-msgid "Days in the future"
-msgstr "Ngày ở tương lai"
 
 msgid "From"
 msgstr "Từ"
 
-msgid "Days in the past"
-msgstr "Ngày trong quá khứ"
+msgid "to"
+msgstr "thành"
 
 msgid "To"
 msgstr "Đến"
+
+msgid "Period"
+msgstr "Thời điểm"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Vui lòng cung cấp số 0 hoặc số nguyên dương"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr "Ngày trong quá khứ"
+
+msgid "Days in the future"
+msgstr "Ngày ở tương lai"
 
 msgid "This week"
 msgstr "Tuần này"
@@ -502,7 +509,7 @@ msgstr "Tuần này"
 msgid "This month"
 msgstr "Tháng này"
 
-msgid "This Year"
+msgid "This year"
 msgstr "Năm nay"
 
 msgid "Last week"
@@ -520,17 +527,29 @@ msgstr "Phạm vi tuyệt đối"
 msgid "Relative range"
 msgstr "Phạm vi tương đối"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Ngày"
+
+msgid "Time"
+msgstr "Thời gian"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Lớn nhất"
-
-msgid "Min"
-msgstr "Nhỏ nhất"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -541,11 +560,20 @@ msgstr "Vui lòng cung cấp một số hợp lệ"
 msgid "Please provide a valid integer"
 msgstr "Vui lòng cung cấp một số nguyên hợp lệ"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Hãy nhập giá trị số nguyên giữa 0 và 100"
+
 msgid "Please provide a positive integer"
 msgstr "Vui lòng cung cấp một số nguyên dương"
 
 msgid "Please provide a negative integer"
 msgstr "Vui lòng cung cấp một số nguyên âm"
+
+msgid "Min"
+msgstr "Nhỏ nhất"
+
+msgid "Max"
+msgstr "Lớn nhất"
 
 msgid "Yes"
 msgstr "Có"
@@ -622,13 +650,16 @@ msgstr "Làm mới bộ lọc"
 msgid "Remove filter"
 msgstr "Xóa bộ lọc"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} đến {{toDate}}"
@@ -639,11 +670,23 @@ msgstr "sau hoặc bằng {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "trước hoặc bằng {{date}}"
 
-msgid "greater than or equal to"
-msgstr "lớn hơn hoặc bằng"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "nhỏ hơn hoặc bằng"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr "sau hoặc bằng"
+
+msgid "before or equal to"
+msgstr "trước hoặc bằng"
 
 msgid "More filters"
 msgstr "Thêm bộ lọc"
@@ -672,8 +715,8 @@ msgstr "Bạn không có quyền thêm ghi chú"
 msgid "Write note"
 msgstr "Ghi chú"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "đã bị xóa và ẩn đi bởi hành động cuối cùng của bạn"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "Thông báo"
@@ -995,12 +1038,18 @@ msgstr "Tìm kiếm {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Tìm kiếm theo thuộc tính"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Nhập vào ít nhất {{count}}thuộc tính để tìm kiếm"
 
 msgid "Missing search criteria"
 msgstr "Tiêu chí tìm kiếm bị thiếu"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Quay lại tìm kiếm"
@@ -1056,6 +1105,12 @@ msgstr "Chưa lựa chọn"
 msgid "Choose an organisation unit"
 msgstr "Chọn một đơn vị"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Bỏ chọn"
 
@@ -1073,6 +1128,12 @@ msgstr "Hiện tất cả chương trình"
 
 msgid "Choose a program"
 msgstr "Chọn một chương trình"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Tìm cho {{titleText}}"
@@ -1143,6 +1204,9 @@ msgstr ""
 "Bạn có thể thay đổi cụm từ tìm kiếm của mình và tìm kiếm lại để tìm những gì"
 " bạn muốn."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1165,6 +1229,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Không thể tìm trong tất cả chương trình"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
 
@@ -1186,14 +1253,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Tạo danh sách đã lưu"
 
-msgid "Create new in another program"
-msgstr "Tạo mới trong một chương trình khác"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Tạo Sự Kiện mới"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Tìm kiếm {{trackedEntityName}} trong {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1763,9 +1833,6 @@ msgstr "Đã tạo"
 msgid "Deleted"
 msgstr "Đã xóa"
 
-msgid "Date"
-msgstr "Ngày"
-
 msgid "Sort by date"
 msgstr "Sắp xếp theo ngày"
 
@@ -2187,9 +2254,6 @@ msgstr "Vui lòng cung cấp ngày và giờ hợp lệ"
 msgid "Please provide a valid time"
 msgstr "Vui lòng cung cấp thời gian hợp lệ"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Hãy nhập giá trị số nguyên giữa 0 và 100"
-
 msgid "Please provide a valid url"
 msgstr "Vui lòng cung cấp một url hợp lệ"
 
@@ -2238,9 +2302,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
-
-msgid "Time"
-msgstr "Thời gian"
 
 msgid "From date"
 msgstr "Từ ngày"

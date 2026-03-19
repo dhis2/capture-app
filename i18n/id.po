@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -99,11 +99,11 @@ msgstr "Lihat dasbor"
 msgid "View active enrollment"
 msgstr "Lihat pendaftaran aktif"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Daftar ulang"
-
-msgid "in"
-msgstr "dalam"
 
 msgid "Enrolled"
 msgstr "Terdaftar"
@@ -126,10 +126,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -288,8 +288,9 @@ msgstr "Beralih ke tampilan formulir"
 msgid "Switch to row view"
 msgstr "Beralih ke tampilan baris"
 
-msgid "events added"
-msgstr "Even ditambahkan"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
 
 msgid "No events added"
 msgstr "Tidak ada even yang ditambahkan"
@@ -333,6 +334,9 @@ msgstr "tanpa"
 
 msgid "enrollment"
 msgstr "pendaftaran"
+
+msgid "in"
+msgstr "dalam"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Mendaftar dalam program dengan memilih program dari bilah atas."
@@ -472,29 +476,32 @@ msgstr "Pilih pengguna"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Harap berikan nol atau bilangan bulat positif"
-
-msgid "to"
-msgstr "untuk"
-
-msgid "Days in the future"
-msgstr "Hari-hari dimasa depan"
 
 msgid "From"
 msgstr "Dari"
 
-msgid "Days in the past"
-msgstr "Hari-hari dimasa lalu"
+msgid "to"
+msgstr "untuk"
 
 msgid "To"
 msgstr "Untuk"
+
+msgid "Period"
+msgstr "Periode"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Harap berikan nol atau bilangan bulat positif"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr "Hari-hari dimasa lalu"
+
+msgid "Days in the future"
+msgstr "Hari-hari dimasa depan"
 
 msgid "This week"
 msgstr "Minggu ini"
@@ -502,8 +509,8 @@ msgstr "Minggu ini"
 msgid "This month"
 msgstr "Bulan ini"
 
-msgid "This Year"
-msgstr "Tahun ini"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "Minggu lalu"
@@ -520,17 +527,29 @@ msgstr "Jangkauan mutlak"
 msgid "Relative range"
 msgstr "Jangkauan relatif"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Tanggal"
+
+msgid "Time"
+msgstr "Waktu"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Maksimal"
-
-msgid "Min"
-msgstr "minimal"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -541,11 +560,20 @@ msgstr "Harap berikan nomor yang valid"
 msgid "Please provide a valid integer"
 msgstr "Harap berikan bilangan bulat yang valid"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr "Berikan bilangan bulat positif positive"
 
 msgid "Please provide a negative integer"
 msgstr "Harap berikan bilangan bulat negatif"
+
+msgid "Min"
+msgstr "minimal"
+
+msgid "Max"
+msgstr "Maksimal"
 
 msgid "Yes"
 msgstr "Iya"
@@ -622,13 +650,16 @@ msgstr "Setel ulang filter"
 msgid "Remove filter"
 msgstr ""
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} hingga {{toDate}}"
@@ -639,11 +670,23 @@ msgstr "setelah atau sama dengan {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "sebelum atau sama dengan {{date}}"
 
-msgid "greater than or equal to"
-msgstr "lebih dari atau sama dengan"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "kurang dari atau sama dengan"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "Lebih banyak filter"
@@ -672,7 +715,7 @@ msgstr ""
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -986,11 +1029,17 @@ msgstr "Telusuri {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Cari berdasarkan atribut"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 
 msgid "Missing search criteria"
+msgstr ""
+
+msgid "Please fill in {{uniqueTEAName}} to search"
 msgstr ""
 
 msgid "Back to search"
@@ -1047,6 +1096,12 @@ msgstr "Tidak ada yang terpilih"
 msgid "Choose an organisation unit"
 msgstr ""
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1063,6 +1118,12 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
+msgstr ""
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid "Search for {{titleText}}"
@@ -1128,6 +1189,9 @@ msgstr ""
 "Anda dapat mengubah istilah pencarian dan mencari lagi untuk menemukan apa "
 "yang Anda cari."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1150,6 +1214,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr ""
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Hasil ditemukan"
 
@@ -1167,7 +1234,7 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
@@ -1175,6 +1242,9 @@ msgstr "Buat event baru"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1726,9 +1796,6 @@ msgstr "Dibuat"
 msgid "Deleted"
 msgstr "Dihapus"
 
-msgid "Date"
-msgstr "Tanggal"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2136,9 +2203,6 @@ msgstr "Harap berikan tanggal dan waktu yang valid"
 msgid "Please provide a valid time"
 msgstr "Harap berikan waktu yang valid"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr "Harap berikan url yang valid"
 
@@ -2187,9 +2251,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
-
-msgid "Time"
-msgstr "Waktu"
 
 msgid "From date"
 msgstr "Dari tanggal"

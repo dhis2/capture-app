@@ -1,13 +1,13 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Viktor Varland <viktor@dhis2.org>, 2025
 # 晓东 林 <13981924470@126.com>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -91,11 +91,11 @@ msgstr "查看仪表盘"
 msgid "View active enrollment"
 msgstr "查看有效的登记"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "重新登记"
-
-msgid "in"
-msgstr " 在"
 
 msgid "Enrolled"
 msgstr "已登记"
@@ -118,11 +118,11 @@ msgstr "纬度"
 msgid "Long"
 msgstr "经度"
 
-msgid "lat"
-msgstr "纬度"
+msgid "lat{{escape}} {{latitudeValue}}"
+msgstr ""
 
-msgid "long"
-msgstr "经度"
+msgid "long{{escape}} {{longitudeValue}}"
+msgstr ""
 
 msgid "Show less"
 msgstr "显示较少"
@@ -277,8 +277,9 @@ msgstr "切换到表单视图"
 msgid "Switch to row view"
 msgstr "切换到行视图"
 
-msgid "events added"
-msgstr "事件已经被添加"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
 
 msgid "No events added"
 msgstr "没有事件被添加"
@@ -320,6 +321,9 @@ msgstr "没有"
 
 msgid "enrollment"
 msgstr "登记"
+
+msgid "in"
+msgstr " 在"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "通过从顶部栏中选择一个项目来登记"
@@ -455,29 +459,32 @@ msgstr "选择用户"
 msgid "Please specify a range"
 msgstr "请指定范围"
 
-msgid "The From date can't be after the To date"
-msgstr "从日期不能在至日期之后"
-
-msgid "Please specify the number of days"
-msgstr "请注明天数"
-
-msgid "Please provide zero or a positive integer"
-msgstr "0或负整数"
-
-msgid "to"
-msgstr "到"
-
-msgid "Days in the future"
-msgstr "未来的天数"
+msgid "Start date must be before the end date"
+msgstr ""
 
 msgid "From"
 msgstr "从"
 
-msgid "Days in the past"
-msgstr "过去的天数"
+msgid "to"
+msgstr "到"
 
 msgid "To"
 msgstr "至"
+
+msgid "Period"
+msgstr "期间"
+
+msgid "Please provide zero or a positive integer"
+msgstr "0或负整数"
+
+msgid "Please specify the number of days"
+msgstr "请注明天数"
+
+msgid "Days in the past"
+msgstr "过去的天数"
+
+msgid "Days in the future"
+msgstr "未来的天数"
 
 msgid "This week"
 msgstr "本周"
@@ -485,7 +492,7 @@ msgstr "本周"
 msgid "This month"
 msgstr "本月"
 
-msgid "This Year"
+msgid "This year"
 msgstr "今年"
 
 msgid "Last week"
@@ -503,17 +510,29 @@ msgstr "绝对范围"
 msgid "Relative range"
 msgstr "相对范围"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Time"
+msgstr "时间"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr "是空的"
 
 msgid "Is not empty"
 msgstr "不为空"
-
-msgid "Max"
-msgstr "最大"
-
-msgid "Min"
-msgstr "最小"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr "最小值不能大于最大值"
@@ -524,11 +543,20 @@ msgstr "请提供一个有效的数字"
 msgid "Please provide a valid integer"
 msgstr "请提供一个整数"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "请提供 0 到 100 之间的整数"
+
 msgid "Please provide a positive integer"
 msgstr "提供一个正整数"
 
 msgid "Please provide a negative integer"
 msgstr "负整数"
+
+msgid "Min"
+msgstr "最小"
+
+msgid "Max"
+msgstr "最大"
 
 msgid "Yes"
 msgstr "是"
@@ -605,13 +633,16 @@ msgstr "重置过滤器"
 msgid "Remove filter"
 msgstr "移除过滤器"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -622,11 +653,23 @@ msgstr "晚于或等于 {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "早于或等于 {{date}}"
 
-msgid "greater than or equal to"
-msgstr "大于等于"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "小于等于"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr "晚或等于"
+
+msgid "before or equal to"
+msgstr "前或等于"
 
 msgid "More filters"
 msgstr "更多过滤器"
@@ -655,8 +698,8 @@ msgstr "您无法写笔记"
 msgid "Write note"
 msgstr "编写说明"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "被你的最后一个动作清空并隐藏"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "注意"
@@ -962,12 +1005,18 @@ msgstr "搜索 {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "按属性搜索"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "至少填写 {{count}} 属性进行搜索"
 
 msgid "Missing search criteria"
 msgstr "缺少搜索条件"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "返回搜寻"
@@ -1023,6 +1072,12 @@ msgstr "没有选择"
 msgid "Choose an organisation unit"
 msgstr "选择机构"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "清空选项"
 
@@ -1040,6 +1095,12 @@ msgstr "显示所有项目"
 
 msgid "Choose a program"
 msgstr "选择一个项目"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "搜索{{titleText}}"
@@ -1104,6 +1165,9 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1126,6 +1190,9 @@ msgstr "尝试更改搜索条件或通过更多属性进行搜索，以缩小搜
 msgid "Cannot search in all programs"
 msgstr "无法在所有项目中搜索"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "找到的结果"
 
@@ -1143,14 +1210,17 @@ msgstr "此项目中还没有保存的列表，请使用下面的按钮创建一
 msgid "Create saved list"
 msgstr "创建保存列表"
 
-msgid "Create new in another program"
-msgstr "在另一个项目中创建新的"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "创建新事件"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr "选择跟踪实体 类型"
@@ -1704,9 +1774,6 @@ msgstr "已创建"
 msgid "Deleted"
 msgstr "删除的"
 
-msgid "Date"
-msgstr "日期"
-
 msgid "Sort by date"
 msgstr "按日期排序"
 
@@ -2114,9 +2181,6 @@ msgstr "日期和时间"
 msgid "Please provide a valid time"
 msgstr "有效的时间"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "请提供 0 到 100 之间的整数"
-
 msgid "Please provide a valid url"
 msgstr "请提供有效的URL"
 
@@ -2165,9 +2229,6 @@ msgstr "某些属性是隐藏的"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
-
-msgid "Time"
-msgstr "时间"
 
 msgid "From date"
 msgstr "起始日期"

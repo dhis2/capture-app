@@ -7,18 +7,18 @@
 # Bram Piot <bram.piot@gmail.com>, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
-# Esther Tokouli, 2025
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
-# Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Cyrille Kabrane, 2026
+# Esther Tokouli, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Cyrille Kabrane, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -105,11 +105,11 @@ msgstr "Afficher le tableau de bord"
 msgid "View active enrollment"
 msgstr "Afficher les inscriptions actives"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Réinscrire"
-
-msgid "in"
-msgstr "dans"
 
 msgid "Enrolled"
 msgstr "Inscrite"
@@ -132,11 +132,11 @@ msgstr "Lat"
 msgid "Long"
 msgstr "Long"
 
-msgid "lat"
-msgstr "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
+msgstr ""
 
-msgid "long"
-msgstr "long"
+msgid "long{{escape}} {{longitudeValue}}"
+msgstr ""
 
 msgid "Show less"
 msgstr "Afficher moins"
@@ -281,7 +281,7 @@ msgid "Save and exit"
 msgstr "Enregistrer et quitter"
 
 msgid "Finish"
-msgstr "Achever"
+msgstr "Terminer"
 
 msgid "Save without completing"
 msgstr "Enregistrer sans terminer"
@@ -301,8 +301,11 @@ msgstr "Passer à la vue du formulaire"
 msgid "Switch to row view"
 msgstr "Passer à la vue de ligne"
 
-msgid "events added"
-msgstr "événements ajoutés"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "No events added"
 msgstr "Aucun événement n'a été ajouté"
@@ -347,6 +350,9 @@ msgstr "sans"
 
 msgid "enrollment"
 msgstr "inscription"
+
+msgid "in"
+msgstr "dans"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -496,29 +502,32 @@ msgstr "Sélectionner un utilisateur"
 msgid "Please specify a range"
 msgstr "Veuillez spécifier une fourchette"
 
-msgid "The From date can't be after the To date"
-msgstr "La date de début ne peut pas venir après la date de fin."
-
-msgid "Please specify the number of days"
-msgstr "Veuillez préciser le nombre de jours"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Veuillez saisir zéro ou un nombre entier positif "
-
-msgid "to"
-msgstr "à"
-
-msgid "Days in the future"
-msgstr "Jours dans le futur"
+msgid "Start date must be before the end date"
+msgstr ""
 
 msgid "From"
 msgstr "De"
 
-msgid "Days in the past"
-msgstr "Jours dans le passé"
+msgid "to"
+msgstr "à"
 
 msgid "To"
 msgstr "À"
+
+msgid "Period"
+msgstr "Période"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Veuillez saisir zéro ou un nombre entier positif "
+
+msgid "Please specify the number of days"
+msgstr "Veuillez préciser le nombre de jours"
+
+msgid "Days in the past"
+msgstr "Jours dans le passé"
+
+msgid "Days in the future"
+msgstr "Jours dans le futur"
 
 msgid "This week"
 msgstr "Cette semaine"
@@ -526,8 +535,8 @@ msgstr "Cette semaine"
 msgid "This month"
 msgstr "Ce mois"
 
-msgid "This Year"
-msgstr "Cette année"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "Semaine passée"
@@ -544,17 +553,29 @@ msgstr "Plage absolue"
 msgid "Relative range"
 msgstr " Plage relative"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Time"
+msgstr "Heure"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr "Est vide"
 
 msgid "Is not empty"
 msgstr "N'est pas vide"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr "La valeur minimale ne peut être supérieure à la valeur maximale"
@@ -565,11 +586,20 @@ msgstr "Veuillez saisir un nombre valide"
 msgid "Please provide a valid integer"
 msgstr "Veuillez saisir un nombre entier valide"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Veuillez fournir un nombre entier compris entre 0 et 100"
+
 msgid "Please provide a positive integer"
 msgstr "Veuillez saisir un nombre entier positif "
 
 msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif "
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
 
 msgid "Yes"
 msgstr "Oui"
@@ -646,7 +676,7 @@ msgstr "Réinitialiser le filtre"
 msgid "Remove filter"
 msgstr "Retirer le filtre"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -655,6 +685,9 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} à {{toDate}}"
@@ -665,11 +698,23 @@ msgstr "après ou égal à {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "avant ou égal à {{date}}"
 
-msgid "greater than or equal to"
-msgstr "supérieur ou égal à"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "inférieur ou égal à"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "Filtres supplémentaires"
@@ -700,8 +745,8 @@ msgstr "Vous n'êtes pas autorisé à écrire des notes"
 msgid "Write note"
 msgstr "Écrire une note"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "a été effacé et masqué par votre dernière action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "Note"
@@ -1039,6 +1084,9 @@ msgstr "Rechercher {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Rechercher par attribut"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Remplir au moins {{count}} attribut à rechercher"
@@ -1047,6 +1095,9 @@ msgstr[2] "Renseigner au moins {{count}} attributs  à rechercher"
 
 msgid "Missing search criteria"
 msgstr "Critères de recherche manquants"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Retour à l'écran de recherche"
@@ -1105,6 +1156,12 @@ msgstr "Aucune sélection"
 msgid "Choose an organisation unit"
 msgstr "Choisir une unité d'organisation"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Effacer la sélection"
 
@@ -1122,6 +1179,12 @@ msgstr "Afficher tous les programmes"
 
 msgid "Choose a program"
 msgstr "Choisir un programme"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Rechercher {{titleText}}"
@@ -1198,6 +1261,9 @@ msgstr ""
 "Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
 "recherche pour trouver les éléments que vous recherchez."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1226,6 +1292,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Impossible d'effectuer une recherche dans tous les programmes"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Résultats trouvés"
 
@@ -1247,14 +1316,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Créer une liste de sauvegarde"
 
-msgid "Create new in another program"
-msgstr "Créer un nouvel élément dans un autre programme"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Créer un nouvel évènement"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr "Sélectionner le type d'entité suivie"
@@ -1866,9 +1938,6 @@ msgstr "Créé"
 msgid "Deleted"
 msgstr "Supprimé"
 
-msgid "Date"
-msgstr "Date"
-
 msgid "Sort by date"
 msgstr "Trier par date"
 
@@ -2328,9 +2397,6 @@ msgstr "Veuillez fournir une date et une heure valides"
 msgid "Please provide a valid time"
 msgstr "Veuillez fournir une heure valide"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Veuillez fournir un nombre entier compris entre 0 et 100"
-
 msgid "Please provide a valid url"
 msgstr "Veuillez fournir un lien URL valide"
 
@@ -2389,9 +2455,6 @@ msgstr "Certains attributs sont masqués"
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"
-
-msgid "Time"
-msgstr "Heure"
 
 msgid "From date"
 msgstr "Date de début"
