@@ -21,13 +21,14 @@ export const useMissingCategoriesInProgramSelection = (): MissingCategories => {
         const programCategories = Array.from(selectedProgram.categoryCombination.categories.values())
             .map(({ id, name }: any) => ({ id, name }));
 
+        const missingCategories = programCategories.filter(({ id }: any) =>
+            !(Object.keys(categoriesMeta)
+                .some((programCategoryId => programCategoryId === id))),
+        );
+
         return {
-            missingCategories:
-                programCategories.filter(({ id }: any) =>
-                    !(Object.keys(categoriesMeta)
-                        .some((programCategoryId => programCategoryId === id))),
-                ),
-            programSelectionIsIncomplete: true,
+            missingCategories,
+            programSelectionIsIncomplete: missingCategories.length > 0,
         };
     }
     return { missingCategories: [], programSelectionIsIncomplete: false };

@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { from } from 'rxjs';
-import type { EpicAction, ReduxStore, ApiUtils } from '../../../../../capture-core-utils/types/global';
+import type { EpicAction, ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
 import {
     workingListsCommonActionTypes,
     fetchTemplatesSuccess,
@@ -70,10 +70,14 @@ export const updateTemplateEpic = (
             programId,
             storeId,
         } }: any) => {
+            const { occurredAt, ...restCriteria } = eventQueryCriteria;
             const eventFilterData = {
                 name,
                 program: programId,
-                eventQueryCriteria,
+                eventQueryCriteria: {
+                    ...restCriteria,
+                    ...(occurredAt && { eventDate: occurredAt }),
+                },
                 externalAccess,
                 publicAccess,
                 user,
@@ -147,10 +151,14 @@ export const addTemplateEpic = (
                 storeId,
             } = action.payload;
 
+            const { occurredAt, ...restCriteria } = eventQueryCriteria;
             const eventFilterData = {
                 name,
                 program: programId,
-                eventQueryCriteria,
+                eventQueryCriteria: {
+                    ...restCriteria,
+                    ...(occurredAt && { eventDate: occurredAt }),
+                },
             };
 
             const requestPromise = mutate({

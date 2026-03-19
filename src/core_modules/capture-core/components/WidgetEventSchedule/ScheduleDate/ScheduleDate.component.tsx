@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -91,6 +91,7 @@ const ScheduleDatePlain = ({
         if (!isWithinValidPeriod) {
             return {
                 error: true,
+                // eslint-disable-next-line max-len
                 validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
                     firstValidDate,
                     interpolation: { escapeValue: false },

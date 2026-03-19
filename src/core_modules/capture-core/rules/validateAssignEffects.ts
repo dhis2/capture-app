@@ -48,7 +48,7 @@ export const validateAssignEffects = async ({
             return acc;
         } catch (error) {
             log.error(
-                errorCreator('an error occured while validating the assigned program rule effect')({
+                errorCreator('An error occurred while validating the assigned program rule effect')({
                     metaData,
                     lastIndex,
                     error,

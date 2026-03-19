@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './shrinkLabel.module.css';
 
 type Props = {
@@ -14,7 +14,7 @@ export function ShrinkLabel(props: Props) {
         children,
         shrink,
     } = props;
-    const className = classNames(defaultClasses.label, shrink ? defaultClasses.labelShrinked : defaultClasses.labelUnshrinked);
+    const className = cx(defaultClasses.label, shrink ? defaultClasses.labelShrinked : defaultClasses.labelUnshrinked);
     return (
         <div className={className}>
             {children}

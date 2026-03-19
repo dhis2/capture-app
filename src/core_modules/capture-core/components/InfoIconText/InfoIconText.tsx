@@ -1,5 +1,5 @@
 import React, { type ComponentType, type ReactNode } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconInfo16, colors } from '@dhis2/ui';
 
 const styles: Readonly<any> = {
@@ -17,7 +17,7 @@ const styles: Readonly<any> = {
         fontSize: 14,
         fontWeight: 'normal',
         color: colors.grey800,
-        marginLeft: 6,
+        marginInlineStart: 6,
     },
 };
 

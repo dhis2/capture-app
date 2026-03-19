@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter, lowerCaseFirstLetter } from 'capture-core-utils/string';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
@@ -94,7 +94,12 @@ const SingleLockedSelectPlain = ({
                 displayOnly={displayOnly}
                 label={capitalizeFirstLetter(title)}
                 value={label && (<OptionLabel icon={icon} label={label} />)}
-                noValueMessage={hasMenu ? i18n.t(`Choose a ${lowerCaseFirstLetter(title)}`) : ''}
+                noValueMessage={hasMenu
+                    ? i18n.t('Choose a {{title}}', {
+                        title: lowerCaseFirstLetter(title),
+                        interpolation: { escapeValue: false },
+                    })
+                    : ''}
                 open={openSelectorBarItem}
                 setOpen={open => hasMenu && setOpenSelectorBarItem(open)}
                 onClearSelectionClick={() => handleOnClear()}
@@ -107,7 +112,10 @@ const SingleLockedSelectPlain = ({
                                 <FiltrableMenuItems
                                     options={options}
                                     onChange={handleOnChange}
-                                    searchText={i18n.t(`Search for a ${title}`)}
+                                    searchText={i18n.t('Search for a {{title}}', {
+                                        title,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     dataTest={title}
                                 />
                             ) : (

@@ -1,8 +1,8 @@
 import moment from 'moment';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
-import { FEATURES, featureAvailable } from '../../capture-core-utils';
-import type { ApiAssignedUser } from '../../capture-core-utils/types/api-types';
 
 type RangeValue = {
     from: number;
@@ -54,6 +54,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     [dataElementTypes.PERCENTAGE]: stringifyNumber,
+    [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     [dataElementTypes.DATE]: convertDate,
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [dataElementTypes.TRUE_ONLY]: () => 'true',

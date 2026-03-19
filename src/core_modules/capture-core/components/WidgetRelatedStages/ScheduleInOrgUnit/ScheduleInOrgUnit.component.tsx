@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
@@ -20,7 +20,7 @@ const styles: Readonly<any> = {
     fieldLabel: {
         color: colors.grey900,
         paddingTop: spacersNum.dp12,
-        paddingRight: spacersNum.dp16,
+        paddingInlineEnd: spacersNum.dp16,
         flexBasis: '200px',
     },
     fieldContent: {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { useState, useEffect } from 'react';
 import { MultiSelectField as MultiSelectFieldUI, MultiSelectOption } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { withFocusHandler } from './withFocusHandler';
 import type { Props } from './MultiSelectField.types';
 
@@ -43,23 +43,22 @@ const MultiSelectFieldComponentPlain = (props: Props & WithStyles<typeof styles>
     };
 
     return (
-        <div onBlur={handleBlur}>
-            <MultiSelectFieldUI
-                dataTest="multi-select-field"
-                onChange={onHandleChange}
-                onFocus={onFocus}
-                onKeyDown={onFocus}
-                selected={selected}
-                filterable
-                filterPlaceholder={translations.filterPlaceholder}
-                noMatchText={translations.noMatchText}
-                disabled={disabled}
-            >
-                {options.map(option => (
-                    <MultiSelectOption key={option.id} label={option.label} value={option.value} />
-                ))}
-            </MultiSelectFieldUI>
-        </div>
+        <MultiSelectFieldUI
+            dataTest="multi-select-field"
+            onChange={onHandleChange}
+            onFocus={onFocus}
+            onKeyDown={handleBlur}
+            onBlur={handleBlur}
+            selected={selected}
+            filterable
+            filterPlaceholder={translations.filterPlaceholder}
+            noMatchText={translations.noMatchText}
+            disabled={disabled}
+        >
+            {options.map(option => (
+                <MultiSelectOption key={option.id} label={option.label} value={option.value} />
+            ))}
+        </MultiSelectFieldUI>
     );
 };
 

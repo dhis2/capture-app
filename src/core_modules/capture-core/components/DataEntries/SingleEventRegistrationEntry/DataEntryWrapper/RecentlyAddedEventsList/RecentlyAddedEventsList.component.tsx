@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { Card } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -27,7 +27,11 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             <div
                 className={classes.header}
             >
-                {`${eventsAdded} ${i18n.t('events added')}`}
+                {i18n.t('{{count}} event added', {
+                    count: eventsAdded,
+                    defaultValue: '{{count}} event added',
+                    defaultValue_plural: '{{count}} events added',
+                })}
             </div>
             <OfflineEventsList
                 listId={listId}

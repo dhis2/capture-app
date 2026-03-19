@@ -9,8 +9,8 @@ import {
     DataTableHead,
     DataTableRow,
 } from '@dhis2/ui';
-import classNames from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ReactNode } from 'react';
 import type { OptionSet } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData';
@@ -111,7 +111,7 @@ class Index extends React.Component<Props> {
                 sortDirection={getSortDirection(column)}
                 key={column.id}
                 align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
-                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
+                className={cx({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
             >
                 {column.header}
             </DataTableColumnHeader>

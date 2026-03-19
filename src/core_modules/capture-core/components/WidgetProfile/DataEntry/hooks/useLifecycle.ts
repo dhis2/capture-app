@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+// @flow
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type {
@@ -20,10 +21,11 @@ import {
     useProgramTrackedEntityAttributes,
     useGeometryValues,
 } from './index';
-import type { Geometry } from './hooks.types';
-import { getRulesActionsForTEI } from '../ProgramRules';
+import type { Geometry } from '../helpers/types';
+import { getRulesActionsForTEIAsync } from '../ProgramRules';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
 import type { EnrollmentData } from '../Types';
+import type { QuerySingleResource } from '../../../../utils/api';
 
 type UseLifecycleParams = {
     programAPI: any;
@@ -34,6 +36,8 @@ type UseLifecycleParams = {
     itemId: string;
     geometry: Geometry | null;
     dataEntryFormConfig: DataEntryFormConfig | null;
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext: () => Record<string, unknown>;
 };
 
 export const useLifecycle = ({
@@ -45,6 +49,8 @@ export const useLifecycle = ({
     itemId,
     geometry,
     dataEntryFormConfig,
+    querySingleResource,
+    onGetValidationContext,
 }: UseLifecycleParams) => {
     const dispatch = useDispatch();
     const state = useSelector((stateArg: any) => stateArg);
@@ -78,30 +84,35 @@ export const useLifecycle = ({
         };
     }, [dispatch, formValues, formGeometryValues, dataEntryId, itemId]);
 
+    const awaitingInitialRulesExecution = useRef(true);
     useEffect(() => {
         if (
+            awaitingInitialRulesExecution.current &&
             orgUnit &&
             Object.entries(orgUnit).length > 0 &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
-            dispatch(
-                getRulesActionsForTEI({
-                    foundation: formFoundation,
-                    formId: `${dataEntryId}-${itemId}`,
-                    orgUnit,
-                    trackedEntityAttributes: programTrackedEntityAttributes,
-                    teiValues: { ...clientValues, ...clientGeometryValues },
-                    optionSets,
-                    rulesContainer,
-                    otherEvents,
-                    dataElements,
-                    enrollmentData: enrollment,
-                    userRoles,
-                    programName: programAPI.displayName,
-                }),
-            );
+            awaitingInitialRulesExecution.current = false;
+            getRulesActionsForTEIAsync({
+                foundation: formFoundation,
+                formId: `${dataEntryId}-${itemId}`,
+                orgUnit,
+                trackedEntityAttributes: programTrackedEntityAttributes,
+                teiValues: { ...clientValues, ...clientGeometryValues },
+                optionSets,
+                rulesContainer,
+                otherEvents,
+                dataElements,
+                enrollmentData: enrollment,
+                userRoles,
+                programName: programAPI.displayName,
+                querySingleResource,
+                onGetValidationContext,
+            }).then((action) => {
+                dispatch(action);
+            });
         }
     }, [
         dispatch,
@@ -120,6 +131,9 @@ export const useLifecycle = ({
         clientGeometryValues,
         userRoles,
         programAPI,
+        querySingleResource,
+        onGetValidationContext,
+        awaitingInitialRulesExecution,
     ]);
 
     return {

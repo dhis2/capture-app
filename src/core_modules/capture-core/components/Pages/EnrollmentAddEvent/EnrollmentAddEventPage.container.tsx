@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { ComponentType } from 'react';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
@@ -22,9 +22,8 @@ type Props = WithStyles<typeof styles>;
 
 const styles = {
     informativeMessage: {
-        marginLeft: spacersNum.dp16,
+        marginInline: spacersNum.dp16,
         marginTop: spacersNum.dp24,
-        marginRight: spacersNum.dp16,
     },
 };
 const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => {
@@ -42,7 +41,8 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
         defaultPageLayout: DefaultPageLayout,
     });
 
-    const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageIsInvalid = (!loading &&
+        !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
         if (!programId || !enrollmentId || !teiId) {
             return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
@@ -87,7 +87,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
         <div className={classes.informativeMessage}>
             <NoticeBox
                 error
-                title={'An error has occurred'}
+                title={i18n.t('An error has occurred')}
             >
                 {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES && (
                     i18n.t('Page is missing required values from URL')
@@ -105,4 +105,6 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
     );
 };
 
-export const EnrollmentAddEventPage: ComponentType<Props> = withStyles(styles)(EnrollmentAddEventPagePlain) as ComponentType<Props>;
+export const EnrollmentAddEventPage: ComponentType<Props> = withStyles(styles)(
+    EnrollmentAddEventPagePlain,
+) as ComponentType<Props>;

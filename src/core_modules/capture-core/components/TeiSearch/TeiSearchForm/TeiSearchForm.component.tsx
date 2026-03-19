@@ -1,8 +1,8 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { errorCreator } from 'capture-core-utils';
 import {
     Modal,
@@ -29,10 +29,11 @@ const styles: Readonly<any> = (theme: any) => ({
         padding: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
+        gap: theme.typography.pxToRem(8),
     },
     minAttributesRequired: {
         flexGrow: 1,
-        textAlign: 'right',
+        textAlign: 'end',
         fontSize: theme.typography.pxToRem(14),
     },
     minAttribtuesRequiredInvalid: {
@@ -55,8 +56,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     }
 
     static errorMessages = {
-        NO_ITEM_SELECTED: 'No item selected',
-        SEARCH_FORM_MISSING: 'search form is missing. see log for details',
+        SEARCH_FORM_MISSING: 'Search form is missing. See log for details',
     };
 
     validNumberOfAttributes = () => {
@@ -84,10 +84,15 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        // @ts-expect-error - keeping original functionality as before ts rewrite
-        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+        if (
+            isValid &&
+            this.props.searchGroup.id === 'main'
+        ) {
+            // @ts-expect-error - keeping  functionality as before ts rewrite
+            isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+        }
 
-        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
+        if (isValid && this.props.searchGroup.id === 'main') isValid = this.validNumberOfAttributes();
 
         if (isValid && this.props.searchGroup.unique) {
             isValid = this.isSearchViaUniqueIdValid();
@@ -111,12 +116,15 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
 
     getUniqueSearchButtonText = (searchForm: any) => {
         const attributeName = searchForm.getElements()[0].formName;
-        return `${i18n.t('Search')} ${attributeName}`;
+        return i18n.t('Search {{attributeName}}', {
+            attributeName,
+            interpolation: { escapeValue: false },
+        });
     }
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector
-            innerRef={(instance) => {
+            ref={(instance: any) => {
                 this.orgUnitSelectorInstance = instance;
             }}
             searchId={this.props.searchId}
@@ -127,7 +135,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     renderMinAttributesRequired = () => {
         const { classes, searchAttempted, searchGroup } = this.props;
         const displayInvalidNumberOfAttributes = searchAttempted && !this.validNumberOfAttributes();
-        const minAttributesRequiredClass = classNames(
+        const minAttributesRequiredClass = cx(
             classes.minAttributesRequired, {
                 [classes.minAttribtuesRequiredInvalid]: displayInvalidNumberOfAttributes,
             },
@@ -158,7 +166,12 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         return (
             <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
-                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`)}</ModalContent>
+                <ModalContent>
+                    {i18n.t('Please fill in {{uniqueTEAName}} to search', {
+                        uniqueTEAName,
+                        interpolation: { escapeValue: false },
+                    })}
+                </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={() => this.setState({ showMissingSearchCriteriaModal: false })} primary>
@@ -178,11 +191,13 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         if (!searchForm) {
             return (
                 <div>
-                    {SearchFormPlain.errorMessages.SEARCH_FORM_MISSING}
+                    {i18n.t('Search form is missing. See log for details')}
                 </div>
             );
         }
-        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
+        const searchButtonText = searchGroup.unique
+            ? this.getUniqueSearchButtonText(searchForm)
+            : i18n.t('Search by attributes');
         return (
             <div
                 data-test="d2-form-area"
@@ -193,7 +208,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
                     formFoundation={searchGroup.searchForm}
                     id={id}
                 />
-                {!searchGroup.unique && this.renderOrgUnitSelector()}
+                {searchGroup.id === 'main' && this.renderOrgUnitSelector()}
                 <div
                     className={classes.searchButtonContainer}
                 >
@@ -203,7 +218,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
                     >
                         {searchButtonText}
                     </Button>
-                    {!searchGroup.unique && this.renderMinAttributesRequired()}
+                    {searchGroup.id === 'main' && this.renderMinAttributesRequired()}
                 </div>
                 {this.renderMissingSearchCriteriaModal()}
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 
@@ -32,7 +32,7 @@ export const styles: Readonly<any> = {
         fontWeight: '500',
     },
     icon: {
-        marginRight: spacersNum.dp8,
+        marginInlineEnd: spacersNum.dp12,
     },
     decription: {
         margin: `${spacersNum.dp8}px 0`,
@@ -52,14 +52,15 @@ const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Plain
                         <div>{i18n.t('Linked event')}</div>
                     </div>
                     <div className={classes.decription}>
-                        {linkedStage?.name && stage?.name ? i18n.t(
-                            'This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
-                            {
-                                linkedStageName: linkedStage.name,
-                                stageName: stage.name,
-                                interpolation: { escapeValue: false },
-                            },
-                        ) : ''}
+                        {linkedStage?.name && stage?.name ?
+                            // eslint-disable-next-line max-len
+                            i18n.t('This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
+                                {
+                                    linkedStageName: linkedStage.name,
+                                    stageName: stage.name,
+                                    interpolation: { escapeValue: false },
+                                },
+                            ) : ''}
                     </div>
                     {widget}
                 </div>

@@ -6,14 +6,13 @@ import type { TrackedEntityType } from '../../TrackedEntityType';
 
 const errorMessages = {
     TRACKED_ENTITY_TYPE_NOT_FOUND: 'Tracked entity type not found',
-    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
 export function getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId: string): TrackedEntityType {
     const trackedEntityType = trackedEntityTypesCollection.get(trackedEntityTypeId);
     if (!trackedEntityType) {
         log.error(errorCreator(errorMessages.TRACKED_ENTITY_TYPE_NOT_FOUND)({ trackedEntityTypeId }));
-        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+        throw new Error(i18n.t('An error has occurred. See log for details'));
     }
     return trackedEntityType;
 }

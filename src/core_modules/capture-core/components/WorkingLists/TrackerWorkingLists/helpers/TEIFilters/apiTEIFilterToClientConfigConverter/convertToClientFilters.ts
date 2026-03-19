@@ -5,7 +5,9 @@ import {
     filterTypesObject,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
+    OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
@@ -16,6 +18,7 @@ import type {
     ApiDataFilterDate,
     ApiDataFilterDateContents,
     ApiDataFilterOptionSet,
+    ApiDataFilterOrgUnit,
     ApiTrackerQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
@@ -23,28 +26,25 @@ import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { type DataElement } from '../../../../../../metaData';
 import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
-    dataElement?: DataElement,
 ): TextFilterData | undefined => {
-    const value = dataElement?.unique
-        ? filter.eq ?? filter.like
-        : filter.like;
+    const value = filter.like ?? filter.sw ?? filter.eq ?? filter.ew;
     return value ? { value } : undefined;
 };
 
-const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | undefined => {
-    if (filter.ge || filter.le) {
-        return {
-            ge: Number(filter.ge),
-            le: Number(filter.le),
-        };
-    }
-    return undefined;
-};
+const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData | undefined => ({
+    ge: filter.ge ? Number(filter.ge) : undefined,
+    le: filter.le ? Number(filter.le) : undefined,
+});
+
+const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined => ({
+    ge: filter?.ge ?? undefined,
+    le: filter?.le ?? undefined,
+});
+
 
 // Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
 const getBooleanFilter = (filter: ApiDataFilterBoolean): any => {
@@ -90,24 +90,56 @@ const getDateFilterContent = (dateFilter: ApiDataFilterDateContents) => {
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate) => getDateFilterContent(dateFilter);
 
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate) => {
+    if (dateFilter.type === DATE_TYPES.ABSOLUTE && (dateFilter.startDate || dateFilter.endDate)) {
+        return {
+            type: DATE_TYPES.ABSOLUTE,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+        };
+    }
+    return undefined;
+};
+
+const VALID_BOOLEAN_VALUES = new Set(['true', 'false']);
+
 const isOptionSetFilter = (type, filter: ApiDataFilterOptionSet) => {
     if ([filterTypesObject.BOOLEAN].includes(type)) {
-        const validBooleanValues = ['true', 'false'];
-        return filter.in.some(value => !validBooleanValues.includes[value]);
+        const allValuesAreBoolean = filter.in.every((value: string) =>
+            VALID_BOOLEAN_VALUES.has(value),
+        );
+        return !allValuesAreBoolean;
     }
     return filter.in;
 };
 
+const getOrgUnitFilter = (filter: ApiDataFilterOrgUnit): OrgUnitFilterData => ({
+    value: filter.eq,
+});
+
 const getFilterByType = {
-    [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.INTEGER]: getNumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.COORDINATE]: getTextFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
+    [filterTypesObject.EMAIL]: getTextFilter,
+    [filterTypesObject.FILE_RESOURCE]: getTextFilter,
+    [filterTypesObject.IMAGE]: getTextFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.LONG_TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
+    [filterTypesObject.PERCENTAGE]: getNumericFilter,
+    [filterTypesObject.PHONE_NUMBER]: getTextFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.URL]: getTextFilter,
+    [filterTypesObject.USERNAME]: getTextFilter,
 };
 
 const getAssigneeFilter = async (assignedUsers: Array<string> | null, querySingleResource: QuerySingleResource) => {

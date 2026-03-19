@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
-import type { EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,

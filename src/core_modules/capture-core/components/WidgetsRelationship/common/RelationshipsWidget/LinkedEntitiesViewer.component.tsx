@@ -1,19 +1,19 @@
 import React, { type ComponentType } from 'react';
-import type { WithStyles } from '@material-ui/core';
-import { withStyles } from '@material-ui/core';
+import type { WithStyles } from 'capture-core-utils/styles';
+import { withStyles } from 'capture-core-utils/styles';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { LinkedEntityTable } from './LinkedEntityTable.component';
 import type { Props } from './linkedEntitiesViewer.types';
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp16} ${spacers.dp12} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} 0 ${spacers.dp12}`,
     },
     title: {
         fontWeight: 500,
-        fontSize: 16,
-        color: colors.grey800,
-        paddingBottom: spacersNum.dp16,
+        fontSize: 14,
+        color: colors.grey900,
+        paddingBottom: spacersNum.dp8,
     },
     wrapper: {
         paddingBottom: spacersNum.dp16,

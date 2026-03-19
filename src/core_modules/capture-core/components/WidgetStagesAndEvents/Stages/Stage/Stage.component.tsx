@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
@@ -9,8 +9,7 @@ import { StageCreateNewButton } from './StageCreateNewButton';
 
 const styles = {
     overview: {
-        marginLeft: spacersNum.dp16,
-        marginRight: spacersNum.dp16,
+        marginInline: spacersNum.dp16,
         marginBottom: spacersNum.dp24,
     },
     buttonContainer: {
@@ -26,7 +25,9 @@ const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: strin
     Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
 );
 
-export const StagePlain = ({ stage, events, classes, onCreateNew, ruleEffects, ...passOnProps }: Props & WithStyles<typeof styles>) => {
+export const StagePlain = ({
+    stage, events, classes, onCreateNew, ruleEffects, ...passOnProps
+}: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);

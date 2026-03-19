@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import { type TrackerProgram, type ProgramStage, dataElementTypes } from '../../../../../metaData';
+import { type TrackerProgram, type ProgramStage, dataElementTypes, getProgramEventAccess } from '../../../../../metaData';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>
@@ -24,22 +24,27 @@ const useProgramStageData = (programStageId, stages) =>
         };
     }, [programStageId, stages]);
 
-const useProgramStageDropdowOptions = stages =>
+const useProgramStageDropdowOptions = (stages, programId: string) =>
     useMemo(
         () =>
-            [...stages.values()].map((stage: ProgramStage) => ({
-                text: stage.name,
-                value: stage.id,
-            })),
-        [stages],
+            [...stages.values()]
+                .filter((stage: ProgramStage) => {
+                    const access = getProgramEventAccess(programId, stage.id);
+                    return access?.read === true;
+                })
+                .map((stage: ProgramStage) => ({
+                    text: stage.name,
+                    value: stage.id,
+                })),
+        [stages, programId],
     );
 
-export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: string) => {
+export const useProgramStageFilters = (program: TrackerProgram, programStageId?: string) => {
     const { hideDueDate, occurredAtLabel, scheduledAtLabel, enableUserAssignment } = useProgramStageData(
         programStageId,
-        stages,
+        program.stages,
     );
-    const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(stages);
+    const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(program.stages, program.id);
 
     return useMemo(() => {
         const translatedStatus = translatedStatusTypes();

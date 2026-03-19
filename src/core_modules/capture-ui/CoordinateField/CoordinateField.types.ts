@@ -18,6 +18,7 @@ export type PlainProps = {
     classes?: any;
     mapDialog: ReactElement<any>;
     disabled?: boolean | null;
+    rtl?: boolean;
 };
 
 export type State = {

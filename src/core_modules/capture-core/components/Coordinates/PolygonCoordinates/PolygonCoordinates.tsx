@@ -1,17 +1,11 @@
 import React, { useState, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconChevronUp16, IconChevronDown16, colors, spacers } from '@dhis2/ui';
 
 type OwnProps = {
     coordinates: Array<Array<number>>;
 };
-
-type StyleProps = {
-    buttonContainer: string;
-    viewButton: string;
-};
-
 const styles: Readonly<any> = {
     buttonContainer: {
         display: 'flex',
@@ -33,7 +27,7 @@ const styles: Readonly<any> = {
     },
 };
 
-type Props = OwnProps & WithStyles<keyof StyleProps>;
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
     const [showMore, setShowMore] = useState(false);
@@ -43,8 +37,16 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
                 {coordinates.slice(0, showMore ? coordinates.length : 1).map((coordinatePair, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <div key={index}>
-                        {`${i18n.t('lat')}: ${coordinatePair[1]}`}<br />
-                        {`${i18n.t('long')}: ${coordinatePair[0]}`}
+                        {i18n.t('lat{{escape}} {{latitudeValue}}', {
+                            escape: ':',
+                            latitudeValue: coordinatePair[1],
+                            interpolation: { escapeValue: false },
+                        })}<br />
+                        {i18n.t('long{{escape}} {{longitudeValue}}', {
+                            escape: ':',
+                            longitudeValue: coordinatePair[0],
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
                 ))}
             </div>

@@ -1,7 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
-import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import { Map, TileLayer, Marker, ZoomControl, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
@@ -57,7 +59,8 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     getPosition = (): Array<number> | null => {
         const { value } = this.props;
         let convertedValue: Array<number> | null = null;
-        if (value?.latitude && value?.longitude && !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
+        if (value?.latitude && value?.longitude &&
+            !isNaN(parseFloat(value.latitude)) && !isNaN(parseFloat(value.longitude))) {
             convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];
         }
         return convertedValue;
@@ -92,8 +95,9 @@ export class CoordinateField extends React.Component<PlainProps, State> {
         this.props.onChange?.({ ...this.props.value, [key]: value });
     }
 
-    handleClear = () => {
+    handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.onBlur(null);
+        event.currentTarget.blur();
     }
 
     search = (position: any) => {
@@ -121,8 +125,12 @@ export class CoordinateField extends React.Component<PlainProps, State> {
 
     renderMapIcon = () => {
         const { classes, shrinkDisabled, disabled } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, mapIconContainerDisabled: mapIconContainerDisabledCustomClass } = classes || {};
-        const mapIconContainerClass = classNames(
+        const {
+            mapIconContainer: mapIconContainerCustomClass,
+            mapIcon: mapIconCustomClass,
+            mapIconContainerDisabled: mapIconContainerDisabledCustomClass,
+        } = classes || {};
+        const mapIconContainerClass = cx(
             { [defaultClasses.mapIconContainer]: shrinkDisabled },
             { [defaultClasses.mapIconContainerWithMargin]: !shrinkDisabled },
             mapIconContainerCustomClass,
@@ -134,7 +142,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     disabled={!!disabled}
                     dataTest="mapIconButton"
                     style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }}
-                    className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
+                    className={cx(defaultClasses.mapIcon, mapIconCustomClass)}
                     onClick={this.openMap}
                 >
                     <AddLocationIcon />
@@ -158,9 +166,18 @@ export class CoordinateField extends React.Component<PlainProps, State> {
                     onClick={this.onMapPositionChange}
                     className={defaultClasses.leafletContainer}
                     key="map"
+                    zoomControl={false}
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
+                    <ZoomControl position={this.props.rtl ? 'bottomleft' : 'bottomright'} />
+                    <WrappedLeafletSearch
+                        position={this.props.rtl ? 'topright' : 'topleft'}
+                        inputPlaceholder={i18n.t('Search')}
+                        closeResultsOnClick
+                        search={null}
+                        mapStateModifier={this.search}
+                        showMarker={false}
+                    />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -187,12 +204,16 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     );
 
     renderLatitude = () => {
-        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        const {
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps
+        } = this.props;
+        const {
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses
+        } = classes || {};
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Latitude"
+                label={i18n.t('Latitude')}
                 value={value?.latitude}
                 classes={passOnClasses}
                 className={defaultClasses.latitudeTextInput}
@@ -205,12 +226,16 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     renderLongitude = () => {
-        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        const {
+            center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps
+        } = this.props;
+        const {
+            mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses
+        } = classes || {};
         return (
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Longitude"
+                label={i18n.t('Longitude')}
                 value={value?.longitude}
                 className={defaultClasses.longitudeTextInput}
                 classes={passOnClasses}

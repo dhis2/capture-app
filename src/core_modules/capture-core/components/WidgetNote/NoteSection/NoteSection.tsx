@@ -1,6 +1,6 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import { Button, Tooltip, colors, spacersNum } from '@dhis2/ui';
@@ -16,7 +16,7 @@ const FocusTextField = withFocusSaver()(TextField);
 const styles: Readonly<any> = {
     item: {
         padding: spacersNum.dp12,
-        marginRight: spacersNum.dp4,
+        marginInlineEnd: spacersNum.dp4,
         background: colors.grey200,
         borderRadius: '5px',
         display: 'flex',
@@ -36,7 +36,7 @@ const styles: Readonly<any> = {
         overflowY: 'auto',
     },
     editor: {
-        paddingTop: spacersNum.dp16,
+        paddingTop: spacersNum.dp8,
     },
     emptyNotes: {
         fontSize: 14,
@@ -48,7 +48,7 @@ const styles: Readonly<any> = {
     },
     lastUpdated: {
         fontSize: '12px',
-        marginLeft: '8px',
+        marginInlineStart: '8px',
         color: colors.grey700,
     },
     body: {
@@ -101,7 +101,11 @@ const NoteSectionPlain = ({
                         {createdBy.firstName} {' '} {createdBy.surname}
                     </span>}
                     <span className={classes.lastUpdated}>
-                        <Tooltip content={convertClientToList(moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(), dataElementTypes.DATETIME)}>
+                        <Tooltip content={convertClientToList(
+                            moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(),
+                            dataElementTypes.DATETIME,
+                        )}
+                        >
                             {moment(fromServerDate(storedAt)).fromNow()}
                         </Tooltip>
                     </span>
@@ -141,13 +145,15 @@ const NoteSectionPlain = ({
                 <Button
                     dataTest="add-note-btn"
                     onClick={onAddNote}
-                    primary
+                    small
                 >
                     {i18n.t('Save note')}
                 </Button>
                 <Button
                     dataTest="cancel-note-btn"
                     onClick={onCancel}
+                    secondary
+                    small
                 >
                     {i18n.t('Cancel')}
                 </Button>

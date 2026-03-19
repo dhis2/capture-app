@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
@@ -55,7 +55,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }: DialogButtonsPro
         >
             {i18n.t('Cancel')}
         </Button>
-        <div style={{ marginLeft: 16 }}>
+        <div style={{ marginInlineStart: 16 }}>
             <Button
                 dataTest="create-as-new-person"
                 onClick={onSave}
@@ -101,7 +101,13 @@ const RegisterTeiPlain = ({
         />
     ), [trackedEntityName]);
 
-    const ExistingUniqueValueDialogActions = useCallback(({ teiId, attributeValues }: { teiId: string; attributeValues: any }) => (
+    const ExistingUniqueValueDialogActions = useCallback(({
+        teiId,
+        attributeValues,
+    }: {
+        teiId: string;
+        attributeValues: any
+    }) => (
         <Button
             dataTest="existing-unique-value-link-tei-button"
             primary
@@ -136,9 +142,6 @@ const RegisterTeiPlain = ({
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
-                renderCardActions={({ item }: { item: any }) =>
-                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
-                }
             />
         </div>
     );

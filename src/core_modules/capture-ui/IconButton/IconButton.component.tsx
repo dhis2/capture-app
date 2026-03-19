@@ -1,6 +1,6 @@
 import React from 'react';
-import cx from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import type { PlainProps } from './iconButton.types';
 
@@ -31,7 +31,15 @@ const styles: Readonly<any> = {
     },
 };
 
-const IconButtonPlain = ({ children, className, dataTest, onClick, disabled, classes, ...passOnProps }: PlainProps & WithStyles<typeof styles>) => (
+const IconButtonPlain = ({
+    children,
+    className,
+    dataTest,
+    onClick,
+    disabled,
+    classes,
+    ...passOnProps
+}: PlainProps & WithStyles<typeof styles>) => (
     <button
         {...passOnProps}
         onClick={onClick}

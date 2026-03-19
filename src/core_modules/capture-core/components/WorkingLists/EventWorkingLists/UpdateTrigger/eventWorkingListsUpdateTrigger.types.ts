@@ -10,8 +10,18 @@ type ExtractedProps = {
     onUpdateList: any,
 };
 
-type RestProps = Omit<EventWorkingListsRowMenuSetupOutputProps & { lastIdDeleted: string; lastTransactionOnListDataRefresh: number; listDataRefreshTimestamp: number },
-    keyof (ExtractedProps & { lastIdDeleted: string; lastTransactionOnListDataRefresh: number; listDataRefreshTimestamp: number })>;
+type RestProps = Omit<
+    EventWorkingListsRowMenuSetupOutputProps & {
+        lastIdDeleted: string;
+        lastTransactionOnListDataRefresh: number;
+        listDataRefreshTimestamp: number
+    },
+    keyof (ExtractedProps & {
+        lastIdDeleted: string;
+        lastTransactionOnListDataRefresh: number;
+        listDataRefreshTimestamp: number
+    })
+>;
 
 export type Props = RestProps & ExtractedProps;
 

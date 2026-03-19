@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import { withStyles } from '@material-ui/core/';
+import { withStyles } from 'capture-core-utils/styles';
+import { FEATURES, useFeature } from 'capture-core-utils';
 import {
     spacers,
     IconFileDocument24,
@@ -10,7 +11,7 @@ import {
     FlyoutMenu,
     MenuItem,
 } from '@dhis2/ui';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
@@ -20,7 +21,6 @@ import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/
 import { dataElementTypes } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
-import { FEATURES, useFeature } from '../../../../../capture-core-utils';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
 import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
@@ -30,6 +30,7 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { convertFormToClient } from '../../../../converters';
+import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -49,6 +50,7 @@ const getStyles: any = () => ({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
+        gap: spacers.dp8,
     },
     actionsContainer: {
         flexShrink: 0,
@@ -57,6 +59,7 @@ const getStyles: any = () => ({
     },
     button: {
         whiteSpace: 'nowrap',
+        paddingInlineStart: spacers.dp8,
     },
     editButtonContainer: {},
 });
@@ -83,12 +86,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
-    const onSaveExternal = () => {
+    const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
         onBackToAllEvents();
-    };
+    }, [eventId, queryClient, onBackToAllEvents]);
 
     const occurredAtClient = convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
@@ -129,6 +133,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
+                    canUncompleteEvent={canUncompleteEvent}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry

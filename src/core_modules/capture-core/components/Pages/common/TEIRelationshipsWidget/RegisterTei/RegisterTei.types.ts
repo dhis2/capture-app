@@ -11,6 +11,7 @@ export type ContainerProps = {
     suggestedProgramId: string;
     teiId: string;
     onSave: (teiPayload: any) => void;
+    programId: string;
 } & SharedProps;
 
 export type ComponentProps = {
@@ -19,6 +20,7 @@ export type ComponentProps = {
     dataEntryId: string;
     trackedEntityName?: string;
     inheritedAttributes: Array<InputAttribute>;
+    isLoadingAttributes: boolean;
     onSaveWithEnrollment: () => void;
     onSaveWithoutEnrollment: () => void;
 } & SharedProps;

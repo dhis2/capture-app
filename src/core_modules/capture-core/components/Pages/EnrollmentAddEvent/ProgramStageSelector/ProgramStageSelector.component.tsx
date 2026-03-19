@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const styles: Readonly<any> = {
@@ -10,7 +10,7 @@ const styles: Readonly<any> = {
         display: 'flex',
         flexDirection: 'column',
         gap: spacers.dp8,
-        padding: spacers.dp16,
+        padding: spacers.dp12,
         paddingTop: 0,
     },
     button: {
@@ -45,7 +45,12 @@ type Props = {
 
 type ProgramStageSelectorPlainProps = Props & WithStyles<typeof styles>;
 
-const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }: ProgramStageSelectorPlainProps) => (
+const ProgramStageSelectorComponentPlain = ({
+    programStages,
+    onSelectProgramStage,
+    onCancel,
+    classes,
+}: ProgramStageSelectorPlainProps) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
             const disableStage =

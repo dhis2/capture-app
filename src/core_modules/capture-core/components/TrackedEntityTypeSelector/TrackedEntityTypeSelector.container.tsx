@@ -4,11 +4,13 @@ import type { OwnProps } from './TrackedEntityTypeSelector.types';
 import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions';
 import { TrackedEntityTypeSelectorComponent } from './TrackedEntityTypeSelector.component';
 
-export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded = 'read', headerText, footerText }: OwnProps) => {
+export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded = 'read', footerText }: OwnProps) => {
     const dispatch = useDispatch();
 
     const dispatchSetTrackedEntityTypeIdOnUrl = useCallback(
-        ({ trackedEntityTypeId }: { trackedEntityTypeId: string }) => { dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId })); },
+        ({ trackedEntityTypeId }: { trackedEntityTypeId: string }) => {
+            dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId }));
+        },
         [dispatch]);
 
     return (
@@ -16,7 +18,6 @@ export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded = 'read', hea
             accessNeeded={accessNeeded}
             onSelect={onSelect}
             onSetTrackedEntityTypeIdOnUrl={dispatchSetTrackedEntityTypeIdOnUrl}
-            headerText={headerText}
             footerText={footerText}
         />
     );

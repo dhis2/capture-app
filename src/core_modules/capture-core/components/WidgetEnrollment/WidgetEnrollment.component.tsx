@@ -10,7 +10,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
@@ -24,7 +24,7 @@ import { MiniMap } from './MiniMap';
 
 const styles = {
     enrollment: {
-        padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        padding: `0 ${spacersNum.dp12}px ${spacersNum.dp12}px ${spacersNum.dp12}px`,
     },
     row: {
         display: 'flex',

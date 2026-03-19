@@ -1,6 +1,6 @@
 import React from 'react';
-import cx from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Checkbox } from '@dhis2/ui';
 import type { PlainProps } from './CustomCheckbox.types';
 
@@ -22,7 +22,7 @@ const styles: Readonly<any> = {
         borderRadius: '6px',
         marginBottom: '8px',
         transition: 'all 0.2s',
-        textAlign: 'left',
+        textAlign: 'start',
         backgroundColor: 'white',
         '&:hover': {
             backgroundColor: '#F7FAFC',

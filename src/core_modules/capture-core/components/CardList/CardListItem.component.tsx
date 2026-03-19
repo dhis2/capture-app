@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { CardImage } from 'capture-ui/CardImage/CardImage.component';
@@ -39,6 +39,8 @@ const styles = (theme: any) => ({
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
+        marginLeft: theme.typography.pxToRem(12),
+        marginRight: 0,
         padding: theme.typography.pxToRem(8),
         borderRadius: theme.typography.pxToRem(5),
         border: `1px solid ${colors.grey400}`,
@@ -47,19 +49,17 @@ const styles = (theme: any) => ({
     },
     itemDataContainer: {
         display: 'flex',
+        justifyContent: 'space-between',
     },
-    smallerLetters: {
+    timestamp: {
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
-        paddingBottom: theme.typography.pxToRem(8),
-        position: 'absolute',
-        top: theme.typography.pxToRem(8),
-        right: theme.typography.pxToRem(8),
     },
-    enrolled: {
+    details: {
         display: 'flex',
-        justifyContent: 'flex-end',
-        color: colors.grey700,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        gap: '4px',
     },
     itemValuesContainer: {
         display: 'flex',
@@ -69,14 +69,13 @@ const styles = (theme: any) => ({
     image: {
         width: theme.typography.pxToRem(54),
         height: theme.typography.pxToRem(54),
-        marginRight: theme.typography.pxToRem(8),
+        marginInlineEnd: theme.typography.pxToRem(8),
     },
     buttonMargin: {
         marginTop: theme.typography.pxToRem(8),
     },
     checkIcon: {
         position: 'relative',
-        top: '-2px',
     },
 }) as const;
 
@@ -131,8 +130,8 @@ const deriveProgramFromEnrollment = (
     enrollments: readonly Enrollment[],
     currentSearchScopeType?: string,
 ): TrackerProgram | undefined => {
-    // eslint-disable-next-line max-len
-    if ((currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) && enrollments?.[0]?.program) {
+    if ((currentSearchScopeType === searchScopes.ALL_PROGRAMS ||
+        currentSearchScopeType === searchScopes.PROGRAM) && enrollments?.[0]?.program) {
         const program: TrackerProgram = getTrackerProgramThrowIfNotFound(enrollments[0].program);
         return program;
     }
@@ -163,7 +162,14 @@ const CardListItemIndex = ({
         const imageValue = item.values[imageElement.id] as { url: string } | undefined;
         return (
             <div>
-                {imageValue && <CardImage dataTest={`list-item-image-${imageElement.id}`} imageUrl={imageValue.url} className={classes.image} size="medium" />}
+                {imageValue &&
+                    <CardImage
+                        dataTest={`list-item-image-${imageElement.id}`}
+                        imageUrl={imageValue.url}
+                        className={classes.image}
+                        size="medium"
+                    />
+                }
             </div>
         );
     };
@@ -229,7 +235,12 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map((dataElement: { id: string, name: string, type: keyof typeof dataElementTypes, optionSet?: OptionSet | null }) => {
+                            .map((dataElement: {
+                                id: string,
+                                name: string,
+                                type: keyof typeof dataElementTypes,
+                                optionSet?: OptionSet | null
+                            }) => {
                                 const { id, name, type, optionSet } = dataElement;
                                 return (
                                     <ListEntry
@@ -244,23 +255,19 @@ const CardListItemIndex = ({
                         }
                         {renderEnrollmentDetails()}
                     </div>
-                    <div>
-                        <div className={classes.enrolled}>
-                            {renderTag()}
-                        </div>
-                    </div>
                 </div>
-            </div>
-            {item.tei?.updatedAt && (
-                <div className={classes.smallerLetters}>
-                    {i18n.t('Last updated')}{' '}
-                    {item.tei && (
-                        <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
-                            {moment(fromServerDate(item.tei.updatedAt)).fromNow()}
-                        </Tooltip>
+                <div className={classes.details}>
+                    {renderTag()}
+                    {item.tei?.updatedAt && (
+                        <div className={classes.timestamp}>
+                            {i18n.t('Last updated')}{' '}
+                            <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
+                                {moment(fromServerDate(item.tei.updatedAt)).fromNow()}
+                            </Tooltip>
+                        </div>
                     )}
                 </div>
-            )}
+            </div>
             {renderCustomCardActions && (
                 <div className={classes.buttonMargin}>
                     {

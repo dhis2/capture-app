@@ -3,7 +3,12 @@ import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
-const getFileResourceSubvalue = async (keys: any, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => {
+const getFileResourceSubvalue = async (
+    keys: any,
+    querySingleResource: QuerySingleResource,
+    eventId: string,
+    absoluteApiPath: string,
+) => {
     const promises = Object.keys(keys)
         .map(async (key) => {
             const value = keys[key];
@@ -39,10 +44,12 @@ const getImageSubvalue = (keys: any, querySingleResource: QuerySingleResource, e
                     ...(featureAvailable(FEATURES.trackerImageEndpoint) ?
                         {
                             url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image`,
-                            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image?dimension=small`,
+                            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues` +
+                                `/${key}/image?dimension=small`,
                         } : {
                             url: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
-                            previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}&dimension=SMALL`,
+                            previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${key}` +
+                                `&eventUid=${eventId}&dimension=SMALL`,
                         }
                     ),
                 };

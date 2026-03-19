@@ -120,9 +120,12 @@ export type apiProgramTrackedEntityAttribute = {
         optionSet?: apiOptionSet | null
     },
     displayInList: boolean,
+    minCharactersToSearch?: number,
     searchable: boolean,
     mandatory: boolean,
     renderOptionsAsRadio: boolean,
+    preferredSearchOperator?: string,
+    blockedSearchOperators?: Array<string>
 };
 
 type apiProgram = {

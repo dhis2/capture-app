@@ -1,11 +1,11 @@
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
+import type { ReduxStore, EpicAction } from 'capture-core-utils/types';
 import {
     resetProgramIdBase,
 } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { scopeSelectorActionTypes } from '../../ScopeSelector';
-import type { ReduxStore, EpicAction } from '../../../../capture-core-utils/types';
 
 const programShouldReset = (orgUnitId: string, currentlySelectedProgramId: string | null | undefined) => {
     if (!currentlySelectedProgramId) {

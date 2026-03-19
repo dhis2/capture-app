@@ -15,6 +15,15 @@ They are injected directly into the form and can be used for a variety of purpos
 
 ---
 
+### Reference form field plugin implementation
+
+You can use a form field plugin to generate unique patient identifiers and implement custom business logic directly within enrollment and event forms.
+This reference implementation demonstrates how to create a plugin that automatically generates patient IDs in a specific format and provides field locking functionality to prevent accidental modifications.
+
+Check out the [Reference Form Field Plugin](https://github.com/dhis2/reference-form-field-plugin) for a complete example with Docker setup, plugin configuration, and customization guidelines.
+
+---
+
 ### Civil registry integration
 
 You can use a form field plugin to make external API calls to any existing service, such as a civil registry.

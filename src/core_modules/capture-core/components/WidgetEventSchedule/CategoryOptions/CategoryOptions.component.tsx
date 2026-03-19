@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
@@ -20,7 +20,7 @@ const getStyles: any = (theme: any) => ({
     },
     label: {
         flexBasis: 200,
-        paddingLeft: 5,
+        paddingInlineStart: 5,
         paddingTop: 11,
     },
     field: {

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import type { Category as CategoryMetadata } from '../../../../metaData';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
@@ -72,7 +72,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 
-    static getDerivedStateFromProps(props: Props, state: State) {
+    static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
         if (props.selectedOrgUnitId !== state.prevOrgUnitId) {
             return {
                 prevOrgUnitId: props.selectedOrgUnitId,
@@ -122,7 +122,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
 
         currentRequestCancelablePromise = makeCancelablePromise(
-            CategorySelector
+            CategorySelectorPlain
                 .getOptionsAsync(
                     category.id,
                     selectedOrgUnitId,
@@ -151,7 +151,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             .catch((error) => {
                 if (!(error && (error.aborted || error.isCanceled))) {
                     log.error(
-                        errorCreator('An error occured loading category options')({ error }),
+                        errorCreator('An error occurred loading category options')({ error }),
                     );
                     this.setState({
                         options: [],
@@ -180,7 +180,10 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             <SelectorBarItem
                 label={passOnProps.category.name}
                 value={selectedCategoryName}
-                noValueMessage={i18n.t(`Choose a ${passOnProps.category.name}`)}
+                noValueMessage={i18n.t('Choose a {{categoryName}}', {
+                    categoryName: passOnProps.category.name,
+                    interpolation: { escapeValue: false },
+                })}
                 open={this.state.open}
                 setOpen={(open) => {
                     if (displayOnly) return;
@@ -201,7 +204,10 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                                         this.setState({ open: false });
                                         handleSelect(item.value);
                                     }}
-                                    searchText={i18n.t(`Search for a ${passOnProps.category.name}`)}
+                                    searchText={i18n.t('Search for a {{categoryName}}', {
+                                        categoryName: passOnProps.category.name,
+                                        interpolation: { escapeValue: false },
+                                    })}
                                     dataTest="category"
                                 />
                             ) : (
@@ -239,4 +245,4 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 }
-export const CategorySelector = withStyles(styles)(CategorySelectorPlain) as any;
+export const CategorySelector = withStyles(styles)(CategorySelectorPlain as React.ComponentType<Props>) as any;

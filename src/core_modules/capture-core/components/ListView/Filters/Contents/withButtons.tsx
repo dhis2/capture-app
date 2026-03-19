@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
@@ -10,7 +10,7 @@ const getStyles = (theme: any) => ({
         paddingTop: theme.typography.pxToRem(8),
     },
     buttonContainer: {
-        paddingRight: theme.typography.pxToRem(8),
+        paddingInlineEnd: theme.typography.pxToRem(8),
         display: 'inline-block',
     },
 });
@@ -32,6 +32,10 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         removeButtonInstance: HTMLButtonElement | null = null;
 
         update = (commitValue?: any) => {
+            if (!this.isValid()) {
+                this.filterTypeInstance?.showValidationErrors?.();
+                return;
+            }
             const updateData = this.filterTypeInstance?.onGetUpdateData(commitValue);
             this.props.onUpdate(updateData);
         }
@@ -41,9 +45,11 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         handleUpdateClick = () => {
-            if (this.isValid()) {
-                this.update();
+            if (!this.isValid()) {
+                this.filterTypeInstance?.showValidationErrors?.();
+                return;
             }
+            this.update();
         }
 
         focusUpdateButton = () => {

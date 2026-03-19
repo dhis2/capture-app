@@ -1,5 +1,5 @@
 import { IconCheckmark24, colors, CircularLoader, Button } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
@@ -37,11 +37,11 @@ const styles: Readonly<any> = theme => ({
     },
     innerContainer: {
         padding: theme.typography.pxToRem(2),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInlineEnd: theme.typography.pxToRem(10),
     },
     horizontalSelectedImageTextContainer: {
         padding: theme.typography.pxToRem(2),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInlineEnd: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
         flexWrap: 'wrap',
@@ -49,7 +49,7 @@ const styles: Readonly<any> = theme => ({
     },
     verticalSelectedImageTextContainer: {
         padding: theme.typography.pxToRem(2),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInlineEnd: theme.typography.pxToRem(10),
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
@@ -148,7 +148,9 @@ class D2ImagePlain extends Component<Props, State> {
         const imageUrl = this.getImageUrl();
         const previewUrl = this.getPreviewUrl();
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
-        const selectedImageTextContainerClass = isVertical ? classes.verticalSelectedImageTextContainer : classes.horizontalSelectedImageTextContainer;
+        const selectedImageTextContainerClass = isVertical ?
+            classes.verticalSelectedImageTextContainer :
+            classes.horizontalSelectedImageTextContainer;
         return (
             <div onBlur={this.handleBlur}>
                 <input

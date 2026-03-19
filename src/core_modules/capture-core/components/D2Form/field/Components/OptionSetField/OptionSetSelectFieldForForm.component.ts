@@ -1,9 +1,8 @@
 import {
-    VirtualizedSelectField,
-    withSelectTranslations,
+    SingleSelectField,
+    withSelectSingleTranslations,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
@@ -11,6 +10,7 @@ import {
     withDisplayMessages,
     withFilterProps,
     withOptionsIconElement,
+    withSearchHelpMessage,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
@@ -26,22 +26,22 @@ const getFilteredProps = (props: any) => {
 
 export const OptionSetSelectFieldForForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: any) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                })(
-                                    withDisplayMessages()(
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: any) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withSearchHelpMessage()(
                                         withOptionsIconElement()(
                                             withRulesOptionVisibilityHandler()(
                                                 withFilterProps(getFilteredProps)(
-                                                    withSelectTranslations()(VirtualizedSelectField),
+                                                    withSelectSingleTranslations()(SingleSelectField),
                                                 ),
                                             ),
                                         ),

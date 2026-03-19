@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 
@@ -17,8 +17,8 @@ const getStyles = (theme: any) => ({
         borderRadius: theme.typography.pxToRem(4),
         padding: 5,
     },
-    marginLeft: {
-        marginLeft: 8,
+    button: {
+        marginInlineStart: 8,
     },
 });
 
@@ -116,7 +116,7 @@ class ErrorAndWarningDialogPlain extends React.Component<Props & WithStyles<type
                         onClick={onSave}
                         primary
                         initialFocus
-                        className={classes.marginLeft}
+                        className={classes.button}
                     >
                         {i18n.t('Save anyway')}
                     </Button>) : null

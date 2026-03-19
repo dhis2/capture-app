@@ -1,8 +1,9 @@
+/* eslint-disable complexity */
 import React, { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
-import cx from 'classnames';
+import { cx } from '@emotion/css';
 import { IconChevronUp24, colors, spacersNum } from '@dhis2/ui';
 
 const getStyles = (theme: any) => ({
@@ -35,7 +36,7 @@ const getStyles = (theme: any) => ({
         },
     },
     toggleButton: {
-        margin: `0 0 0 ${spacersNum.dp4}px`,
+        marginInlineStart: spacersNum.dp4,
         height: '24px',
         borderRadius: '3px',
         color: colors.grey600,

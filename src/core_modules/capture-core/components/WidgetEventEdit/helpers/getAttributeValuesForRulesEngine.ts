@@ -4,7 +4,10 @@ import type {
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 
-export const getAttributeValuesForRulesEngine = (attributeValues: Array<AttributeValue> = [], attributes: Array<DataElement>) =>
+export const getAttributeValuesForRulesEngine = (
+    attributeValues: Array<AttributeValue> = [],
+    attributes: Array<DataElement>,
+) =>
     attributeValues.reduce((acc, { id, value }) => {
         const dataElement = attributes.find(({ id: attributeId }) => id === attributeId);
         if (dataElement) {

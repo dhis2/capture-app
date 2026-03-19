@@ -1,13 +1,14 @@
 import log from 'loglevel';
+import { errorCreator, pipe } from 'capture-core-utils';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 import type { LinkedRequestEvent, ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
-import { errorCreator, pipe } from '../../../../../capture-core-utils';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
+// eslint-disable-next-line complexity
 const getEventDetailsByLinkMode = ({
     relatedStageDataValues,
     requestEventIsFromConstraint,
@@ -37,7 +38,6 @@ const getEventDetailsByLinkMode = ({
     if (linkMode === relatedStageActions.SCHEDULE_IN_ORG) {
         const { scheduledAt: linkedEventScheduledAt, orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
         if (!linkedEventScheduledAt || !linkedEventOrgUnit) {
-            // Business logic dictates that these values will not be null here
             throw new Error(
                 errorCreator('Missing required data for creating related stage event')({
                     linkedEventOrgUnit,
@@ -77,6 +77,13 @@ const getEventDetailsByLinkMode = ({
 
     if (linkMode === relatedStageActions.LINK_EXISTING_RESPONSE) {
         const { linkedEventId } = relatedStageDataValues;
+        if (!linkedEventId) {
+            throw new Error(
+                errorCreator('Missing required data for creating related stage event')({
+                    linkedEventId,
+                }),
+            );
+        }
         return {
             linkedEvent: null,
             linkedEventId,

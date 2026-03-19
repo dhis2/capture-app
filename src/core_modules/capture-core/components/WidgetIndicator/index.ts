@@ -1,1 +1,8 @@
-export { WidgetIndicator } from './WidgetIndicator.component';
+export { WidgetIndicator } from './WidgetIndicator.container';
+export type {
+    FilteredIndicatorText,
+    FilteredIndicatorKeyValue,
+    IndicatorWidgetData,
+    IndicatorProps,
+    IndicatorInputProps,
+} from './WidgetIndicator.types';

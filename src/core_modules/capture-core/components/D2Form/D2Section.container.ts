@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { D2Section } from './D2Section.component';
-import type { Section as MetaDataSection } from '../../metaData';
+import { Section as MetaDataSection } from '../../metaData';
 import { withApiUtils } from '../../HOC';
 
 const mapStateToProps = (state: any, props: { sectionMetaData: MetaDataSection, formId: string }) => {
@@ -12,9 +12,16 @@ const mapStateToProps = (state: any, props: { sectionMetaData: MetaDataSection, 
         return { isHidden: !visibleFields.length };
     }
 
-    return { isHidden: !props.sectionMetaData.elements.size };
+    return {
+        isHidden: !props.sectionMetaData.elements.size ||
+            props.sectionMetaData.id === MetaDataSection.LEFTOVERS_SECTION_ID,
+    };
 };
 
 const mapDispatchToProps = () => ({});
 
-export const D2SectionContainer = connect(mapStateToProps, mapDispatchToProps)(withApiUtils(D2Section));
+export const D2SectionContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    null,
+    { forwardRef: true })(withApiUtils(D2Section));

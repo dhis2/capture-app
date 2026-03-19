@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField, getDataEntryKey } from '../../DataEntry';
 import {
@@ -14,7 +15,6 @@ import {
 import type { AddEventSaveType } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { useProgramExpiryForUser } from '../../../hooks';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -55,7 +55,13 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                executeRulesOnUpdateForNewEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted }),
+                executeRulesOnUpdateForNewEvent({
+                    ...successInnerAction.payload,
+                    dataEntryId,
+                    itemId,
+                    uid,
+                    rulesExecutionDependenciesClientFormatted,
+                }),
             ], newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH);
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;

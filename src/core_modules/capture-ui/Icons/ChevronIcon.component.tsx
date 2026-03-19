@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton } from 'capture-ui';
-import cx from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacersNum, IconChevronUp24 } from '@dhis2/ui';
 
 type ChevronIconProps = {
@@ -14,7 +14,7 @@ type ChevronIconProps = {
 
 const styles: Readonly<any> = {
     toggleButton: {
-        margin: `0 0 0 ${spacersNum.dp4}px`,
+        marginInlineStart: spacersNum.dp4,
         height: '24px',
         borderRadius: '3px',
         color: colors.grey600,
@@ -46,7 +46,9 @@ const styles: Readonly<any> = {
     },
 };
 
-const ChevronIconPlain = ({ open, onOpen, onClose, dataTest, disabled, classes }: ChevronIconProps & WithStyles<typeof styles>) => {
+const ChevronIconPlain = ({
+    open, onOpen, onClose, dataTest, disabled, classes,
+}: ChevronIconProps & WithStyles<typeof styles>) => {
     const [postEffectOpen, setPostEffectOpen] = useState<boolean>(open);
     const [animationsReady, setAnimationsReady] = useState<boolean>(false);
 

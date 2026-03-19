@@ -16,7 +16,8 @@ export const deriveRelatedStageEvent = ({
     programId: string;
     teiId?: string;
 }) => {
-    if (relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()) {
+    if (relatedStageRef?.current &&
+        relatedStageRef.current.eventHasLinkableStageRelationship()) {
         const isValid = relatedStageRef.current.formIsValidOnSave();
         const currentProgramStageId = firstStageMetaData?.stage?.id;
         if (

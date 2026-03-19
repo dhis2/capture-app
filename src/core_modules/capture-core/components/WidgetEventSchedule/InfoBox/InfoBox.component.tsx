@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import type { PlainProps } from './InfoBox.types';
@@ -61,7 +61,9 @@ const InfoBoxPlain = ({
                             {i18n.t('There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.', {
                                 count: eventCountInOrgUnit,
                                 orgUnitName,
+                                // eslint-disable-next-line max-len
                                 defaultValue: 'There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.',
+                                // eslint-disable-next-line max-len
                                 defaultValue_plural: 'There are {{count}} scheduled events in this program in {{orgUnitName}} on this day.',
                                 interpolation: {
                                     escapeValue: false,

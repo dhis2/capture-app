@@ -27,10 +27,10 @@ export class DebounceField extends React.Component<Props, State> {
         this.debouncer = debounce(this.handleDebounced, 500);
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.value !== this.props.value) {
+    componentDidUpdate(prevProps: Props) {
+        if (this.props.value !== prevProps.value) {
             this.setState({
-                value: nextProps.value || '',
+                value: this.props.value || '',
             });
         }
     }

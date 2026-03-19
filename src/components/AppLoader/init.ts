@@ -8,7 +8,9 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from 'capture-core/rules/rulesEngine';
+import { getDateFnLocale } from './getDateFnLocale';
+import { getMomentLocale } from './getMomentLocale';
 
 function setLogLevel() {
     const levels = {
@@ -33,7 +35,7 @@ function setMomentLocaleAsync(locale: string) {
     }
 
     return new Promise<void>((resolve) => {
-        import(`moment/locale/${locale}`)
+        getMomentLocale(locale)
             .then(() => {
                 moment.locale(locale);
                 log.info(`got moment locale config for ${locale}`);
@@ -49,7 +51,7 @@ function setMomentLocaleAsync(locale: string) {
 
 function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
     return new Promise<void>((resolve, reject) => {
-        import(`date-fns/locale/${locale}/index.js`)
+        getDateFnLocale(locale)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
                     dateFnsLocale: dateFnLocale,
@@ -146,13 +148,14 @@ export async function initializeAsync({
     const {
         id: currentUserId,
         userRoles,
+        userGroups,
         organisationUnits: captureScope,
         teiSearchOrganisationUnits: searchScope,
         settings: userSettings,
     } = await querySingleResource({
         resource: 'me',
         params: {
-            fields: 'id,userRoles,organisationUnits,teiSearchOrganisationUnits,settings',
+            fields: 'id,userRoles,userGroups,organisationUnits,teiSearchOrganisationUnits,settings',
         },
     });
 
@@ -171,7 +174,7 @@ export async function initializeAsync({
     } catch {
         ruleEngineSettings = { version: 'default' };
     }
-    initRulesEngine(ruleEngineSettings.version, userRoles);
+    initRulesEngine(ruleEngineSettings.version, userRoles, userGroups);
 
     try {
         await initStorageControllers({
@@ -181,9 +184,10 @@ export async function initializeAsync({
             baseUrl,
         });
     } catch (error) {
-        throw new DisplayException(i18n.t(
-            'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
-        ), error);
+        throw new DisplayException(
+            // eslint-disable-next-line max-len
+            i18n.t('A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.'),
+            error);
     }
 
     const uiLocale = userSettings.keyUiLocale;

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Tooltip, Button } from '@dhis2/ui';
 
 const getStyles = () => ({
@@ -29,7 +29,11 @@ const LockedFilterButtonPlain = ({ classes, title, buttonText = '' }: Props & Wi
 
     return (
         <Tooltip
-            content={`${i18n.t('Locked to:')} ${buttonText}`}
+            content={i18n.t('Locked to{{escape}} {{buttonText}}', {
+                escape: ':',
+                buttonText,
+                interpolation: { escapeValue: false },
+            })}
             placement={'bottom'}
             openDelay={300}
         >

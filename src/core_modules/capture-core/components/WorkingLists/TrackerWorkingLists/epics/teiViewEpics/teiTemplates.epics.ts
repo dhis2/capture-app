@@ -4,7 +4,7 @@ import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import {
     addTemplateError,
     addTemplateSuccess,
@@ -158,8 +158,10 @@ export const updateTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStor
                 storeId,
                 criteria,
             } = action.payload;
-            const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayColumnOrder, assignedUserMode, assignedUsers, followUp } =
-                criteria;
+            const {
+                programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayColumnOrder,
+                assignedUserMode, assignedUsers, followUp,
+            } = criteria;
             const trackedEntityInstanceFilters = {
                 name,
                 program,

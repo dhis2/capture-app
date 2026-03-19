@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Popover } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
+import { ChevronDown, ChevronUp } from 'capture-ui';
+import { isLangRtl } from '../../../../utils/rtl';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import { LockedFilterButton } from './LockedFilterButton.component';
@@ -12,7 +13,7 @@ import type { FilterData, Options, FilterDataInput } from '../../../FiltersForTy
 
 const getStyles: Readonly<any> = (theme: any) => ({
     icon: {
-        paddingLeft: theme.typography.pxToRem(12),
+        paddingInlineStart: theme.typography.pxToRem(12),
         display: 'flex',
         alignItems: 'center',
     },
@@ -29,6 +30,9 @@ type Props = {
     type: string;
     options?: Options | null;
     multiValueFilter?: boolean;
+    unique: boolean;
+    searchOperator?: string;
+    minCharactersToSearch?: number;
     title: string;
     onUpdateFilter: UpdateFilter;
     onClearFilter: ClearFilter;
@@ -67,7 +71,8 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
         const { itemId, onSetVisibleSelector } = this.props;
         onSetVisibleSelector(itemId);
 
-        // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
+        // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all
+        // (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
         if (this.props.filterValue) {
             this.activeFilterButtonInstance && this.activeFilterButtonInstance.clearIsHovered();
         }
@@ -104,19 +109,33 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable } = this.props;
+        const {
+            itemId: id,
+            type,
+            options,
+            multiValueFilter,
+            filterValue,
+            isRemovable,
+            unique,
+            searchOperator,
+            minCharactersToSearch,
+        } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
                 options={options}
                 multiValueFilter={multiValueFilter}
+                unique={unique}
+                searchOperator={searchOperator}
+                minCharactersToSearch={minCharactersToSearch}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}
                 filterValue={filterValue}
                 onRemove={this.onRemove}
                 isRemovable={isRemovable}
+                onClearValue={this.handleClearFilter}
             />
         );
     }
@@ -140,7 +159,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
 
         return (
             <ActiveFilterButton
-                innerRef={this.refActiveFilterInstance}
+                ref={this.refActiveFilterInstance}
                 onChange={this.openFilterSelector}
                 onClear={this.handleClearFilter}
                 iconClass={classes.icon}
@@ -206,7 +225,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
                     <Popover
                         reference={this.anchorRef.current || undefined}
                         arrow={false}
-                        placement="bottom-start"
+                        placement={isLangRtl() ? 'bottom-end' : 'bottom-start'}
                         onClickOutside={this.closeFilterSelector}
                         maxWidth={400}
                     >

@@ -2,7 +2,7 @@ import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import moment from 'moment';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../../../../../../capture-core-utils/types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -17,7 +17,11 @@ type AddNotePayload = {
     note: string;
 };
 
-export const addNoteForNewSingleEventEpic = (action$: EpicAction<AddNotePayload>, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForNewSingleEventEpic = (
+    action$: EpicAction<AddNotePayload>,
+    store: ReduxStore,
+    { querySingleResource, fromClientDate }: ApiUtils,
+) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),
         switchMap((action) => {

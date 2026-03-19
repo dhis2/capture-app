@@ -9,7 +9,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { isValidDate, isValidNonFutureDate } from 'capture-core/utils/validation/validators/form';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
@@ -30,18 +30,26 @@ type OwnProps = {
 };
 
 const styles = (theme: any) => ({
+    dateContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: `${spacersNum.dp4}px`,
+        fontSize: '14px',
+        color: colors.grey900,
+    },
     editButton: {
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf: 'flex-start',
         flexShrink: 0,
         cursor: 'pointer',
         border: 'none',
         borderRadius: '3px',
         background: 'transparent',
         color: colors.grey600,
-        padding: 0,
-        marginLeft: '2px',
+        padding: '1px',
+        marginInlineStart: '2px',
         '&:focus': {
             outline: 'none',
             background: colors.grey200,
@@ -52,8 +60,12 @@ const styles = (theme: any) => ({
             color: colors.grey800,
         },
     },
-    calendar: {
-        paddingTop: '6px',
+    dateInputLabel: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: `${spacersNum.dp4}px`,
+        fontSize: '14px',
+        color: colors.grey900,
     },
     inputField: {
         maxWidth: '200px',
@@ -143,6 +155,12 @@ const DateComponentPlain = ({
 
     return editMode ? (
         <div data-test="widget-enrollment-date">
+            <span className={classes.dateInputLabel}>
+                <span data-test="widget-enrollment-icon-calendar">
+                    <IconCalendar16 color={colors.grey600} />
+                </span>
+                {dateLabel}
+            </span>
             <div className={classes.inputField}>
                 <DateField
                     width={200}
@@ -181,13 +199,17 @@ const DateComponentPlain = ({
             )}
         </div>
     ) : (
-        <div data-test="widget-enrollment-date">
+        <div className={classes.dateContainer} data-test="widget-enrollment-date">
             <span data-test="widget-enrollment-icon-calendar">
                 <IconCalendar16 color={colors.grey600} />
             </span>
-            {dateLabel}{': '}
-            {displayDate}
-            {editEnabled &&
+            <span>
+                <span>
+                    {dateLabel}{': '}
+                    {displayDate}
+                </span>
+            </span>
+            {editEnabled && (
                 <button
                     className={classes.editButton}
                     data-test="widget-enrollment-icon-edit-date"
@@ -195,7 +217,7 @@ const DateComponentPlain = ({
                 >
                     <IconEdit16 />
                 </button>
-            }
+            )}
         </div>
     );
 };

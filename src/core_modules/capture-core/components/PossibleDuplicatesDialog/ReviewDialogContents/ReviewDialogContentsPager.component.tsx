@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
 import { Pagination } from 'capture-ui';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
@@ -10,7 +10,7 @@ const getStyles = (theme: any) => ({
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
         maxWidth: theme.typography.pxToRem(600),
     },
 });
@@ -23,7 +23,7 @@ const ReviewDialogContentsPagerPlain = ({
     selectedScopeId,
     dataEntryId,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof getStyles>) => {
     const { changePageOnReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
 
     return (
@@ -39,4 +39,6 @@ const ReviewDialogContentsPagerPlain = ({
     );
 };
 
-export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(ReviewDialogContentsPagerPlain) as ComponentType<OwnProps>;
+export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(
+    ReviewDialogContentsPagerPlain,
+) as ComponentType<OwnProps>;

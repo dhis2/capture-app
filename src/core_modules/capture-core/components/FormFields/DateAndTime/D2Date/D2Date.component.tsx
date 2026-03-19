@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CalendarInput } from '@dhis2/ui';
-import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import type { DateValue } from '../../../FiltersForTypes/Date/types/date.types';
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
     onDateSelectedFromCalendar?: () => void;
     disabled?: boolean;
     placeholder?: string;
+    dense?: boolean;
 };
 
 type State = {
@@ -55,8 +56,10 @@ export class D2Date extends React.Component<Props, State> {
             ...passOnProps
         } = this.props;
 
-        const calendarType: any = systemSettingsStore.get().calendar || 'gregory';
-        const format: any = systemSettingsStore.get().dateFormat;
+        const systemSettings = systemSettingsStore.get();
+        const calendarType: any = systemSettings.calendar || 'gregory';
+        const format: any = systemSettings.dateFormat;
+        const locale = systemSettings.uiLocale;
 
         return (
             <div>
@@ -71,6 +74,7 @@ export class D2Date extends React.Component<Props, State> {
                     inputWidth={inputWidth}
                     onFocus={onFocus}
                     disabled={disabled}
+                    locale={locale}
                 />
             </div>
         );

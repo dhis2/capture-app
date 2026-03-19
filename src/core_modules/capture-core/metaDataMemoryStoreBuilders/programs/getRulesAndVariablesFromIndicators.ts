@@ -63,6 +63,9 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
 
     if (variableNameParts.length === 2) {
         // This is a programstage and dataelement specification
+        if (!programData.dataElements[variableNameParts[1]]) {
+            throw new Error(`is missing referenced data element "${variableNameParts[1]}"`);
+        }
         newVariableObject = {
             id: variableName,
             displayName: variableName,
@@ -74,6 +77,9 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
         };
     } else { // if (variableNameParts.length === 1)
         // This is an attribute
+        if (!programData.attributes[variableNameParts[0]]) {
+            throw new Error(`is missing referenced attribute "${variableNameParts[0]}"`);
+        }
         newVariableObject = {
             id: variableName,
             displayName: variableName,
@@ -90,8 +96,10 @@ function getVariables(action: any, rule: any, programData: ProgramData) {
     const variablesInCondition = getVariablesFromExpression(rule.condition);
     const variablesInData = getVariablesFromExpression(action.data);
 
-    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programData));
-    const directAddressedVariablesFromData = variablesInData.map(variableInData => getDirectAddressedVariable(variableInData, programData));
+    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition =>
+        getDirectAddressedVariable(variableInCondition, programData));
+    const directAddressedVariablesFromData = variablesInData.map(variableInData =>
+        getDirectAddressedVariable(variableInData, programData));
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];
 
     return {
@@ -105,11 +113,12 @@ function isValueCountPresent(rule: any, action: any) {
 }
 
 function replaceValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
-    let valueCountText = variableObjectsCurrentExpression.reduce((accValueCountText: string, variableCurrentRule: any, index: number) => {
-        const currentText = `d2:count('${variableCurrentRule.displayName}')`;
-        accValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
-        return accValueCountText;
-    }, '');
+    let valueCountText = variableObjectsCurrentExpression.reduce(
+        (accValueCountText: string, variableCurrentRule: any, index: number) => {
+            const currentText = `d2:count('${variableCurrentRule.displayName}')`;
+            accValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
+            return accValueCountText;
+        }, '');
 
     valueCountText = `(${valueCountText})`;
 
@@ -132,11 +141,12 @@ function isPositiveValueCountPresent(rule: any, action: any) {
 }
 
 function replacePositiveValueCount(rule: any, action: any, variableObjectsCurrentExpression: any) {
-    let positiveValueCountText = variableObjectsCurrentExpression.reduce((accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
-        const currentText = `d2:countifzeropos('${variableCurrentRule.displayName}')`;
-        accPositiveValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
-        return accPositiveValueCountText;
-    }, '');
+    let positiveValueCountText = variableObjectsCurrentExpression.reduce(
+        (accPositiveValueCountText: string, variableCurrentRule: any, index: number) => {
+            const currentText = `d2:countifzeropos('${variableCurrentRule.displayName}')`;
+            accPositiveValueCountText += index !== 0 ? ` + ${currentText}` : `${currentText}`;
+            return accPositiveValueCountText;
+        }, '');
 
     positiveValueCountText = `(${positiveValueCountText})`;
 
@@ -176,19 +186,26 @@ function buildIndicatorRuleAndVariables(
         programRuleActions: [newAction],
     };
 
-    const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
+    try {
+        const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
 
-    // Change expression or data part of the rule to match the program rules execution model
-    replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
-    replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
+        // Change expression or data part of the rule to match the program rules execution model
+        replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
+        replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
 
-    newAction.data = performStaticReplacements(newAction.data as string);
-    newRule.condition = performStaticReplacements(newRule.condition);
+        newAction.data = performStaticReplacements(newAction.data as string);
+        newRule.condition = performStaticReplacements(newRule.condition);
 
-    return {
-        rule: newRule,
-        variables,
-    };
+        return {
+            rule: newRule,
+            variables,
+        };
+    } catch (error: any) {
+        log.error(
+            `Configuration error: Program indicator "${programIndicator.displayName}" ${error.message}.`,
+        );
+        return null;
+    }
 }
 
 export function getRulesAndVariablesFromProgramIndicators(
@@ -222,13 +239,17 @@ export function getRulesAndVariablesFromProgramIndicators(
     });
 
     return validProgramIndicators
-        .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
-        .filter(container => container)
-        .reduce((accOneLevelContainer: any, container) => {
+        .reduce((accOneLevelContainer: any, programIndicator: CachedProgramIndicator) => {
+            const container = buildIndicatorRuleAndVariables(programIndicator, programData);
+            if (!container) {
+                return accOneLevelContainer;
+            }
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
             accOneLevelContainer.rules.push(container.rule);
 
-            accOneLevelContainer.variables = accOneLevelContainer.variables ? [...accOneLevelContainer.variables, ...container.variables] : container.variables;
+            accOneLevelContainer.variables = accOneLevelContainer.variables
+                ? [...accOneLevelContainer.variables, ...container.variables]
+                : container.variables;
             return accOneLevelContainer;
         }, { rules: null, variables: null });
 }

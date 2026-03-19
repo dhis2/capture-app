@@ -9,7 +9,6 @@ import {
 import type { TeiRegistration, RenderFoundation } from '../../../metaData';
 
 type FinalTeiDataEntryProps = {
-    orgUnitId: string;
     teiRegistrationMetadata: TeiRegistration;
     id: string;
     onUpdateFormFieldAsync: (...args: any[]) => any;
@@ -21,11 +20,10 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 
     render() {
-        const { teiRegistrationMetadata, orgUnitId, ...passOnProps } = this.props;
+        const { teiRegistrationMetadata, ...passOnProps } = this.props;
         return (
             <DataEntry
                 {...passOnProps}
-                orgUnit={{ id: orgUnitId }}
                 formFoundation={teiRegistrationMetadata.form}
             />
         );

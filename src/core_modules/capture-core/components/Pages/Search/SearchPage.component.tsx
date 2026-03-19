@@ -1,8 +1,8 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
-import classNames from 'classnames';
+import { Button, spacers, colors } from '@dhis2/ui';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import type { Props } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
@@ -10,18 +10,29 @@ import { TemplateSelector } from '../../TemplateSelector';
 import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
+import { DirectionalChevron } from '../../../utils/rtl';
 import './searchPage.css';
 
-const styles: Readonly<any> = {
+const styles = {
+    containerBulkDataEntry: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        height: 'calc(100vh - 48px)',
+        '@supports (-webkit-touch-callout: none)': {
+            height: 'calc(100vh - 148px)',
+        },
+    },
     backButton: {
         margin: spacers.dp16,
+        marginBottom: spacers.dp12,
         padding: '0',
     },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
         margin: `0 ${spacers.dp16} 0`,
-        gap: spacers.dp16,
+        gap: spacers.dp12,
         containerType: 'inline-size',
     },
     leftColumn: {
@@ -37,7 +48,7 @@ const styles: Readonly<any> = {
     },
     searchBoxWrapper: {
         height: 'fit-content',
-        padding: spacers.dp16,
+        padding: spacers.dp12,
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,
@@ -54,7 +65,11 @@ const SearchPagePlain = ({
     showBulkDataEntryPlugin,
     classes,
 }: Props & WithStyles<typeof styles>) => (
-    <>
+    <div
+        className={cx({
+            [classes.containerBulkDataEntry]: showBulkDataEntryPlugin,
+        })}
+    >
         <TopBar programId={programId} orgUnitId={orgUnitId} />
         {showBulkDataEntryPlugin ? (
             <BulkDataEntry
@@ -65,10 +80,11 @@ const SearchPagePlain = ({
         ) : (
             <>
                 <Button
-                    icon={<IconChevronLeft24 />}
+                    icon={<DirectionalChevron size={24} direction="back" />}
                     dataTest="back-button"
                     className={classes.backButton}
                     onClick={onNavigateToMainPage}
+                    small
                 >
                     {i18n.t('Back')}
                 </Button>
@@ -76,7 +92,7 @@ const SearchPagePlain = ({
                 <div className={classes.container}>
                     <div
                         id="left-column-search-page"
-                        className={classNames(
+                        className={cx(
                             classes.leftColumn,
                             classes.searchBoxWrapper,
                         )}
@@ -94,7 +110,7 @@ const SearchPagePlain = ({
                 </div>
             </>
         )}
-    </>
+    </div>
 );
 
 export const SearchPageComponent =

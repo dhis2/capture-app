@@ -1,21 +1,21 @@
 import React from 'react';
 
 import { IconInfo16, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
-import type { WithStyles } from '@material-ui/core/styles';
+import { withStyles } from 'capture-core-utils/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './SectionDescriptionBox.types';
 
 const styles = {
     descriptionBox: {
         display: 'flex',
         marginBottom: 8,
-        marginRight: 15,
+        marginInlineEnd: 15,
         color: colors.grey700,
     },
     icon: {
         minWidth: 16,
-        marginLeft: 10,
-        marginRight: 5,
+        marginInlineStart: 10,
+        marginInlineEnd: 5,
         marginTop: 1,
     },
     description: {

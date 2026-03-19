@@ -1,16 +1,26 @@
 import React, { memo, useMemo } from 'react';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { useFeature, FEATURES } from 'capture-core-utils/featuresSupport';
 
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
-import { filterTypesObject } from './filters.const';
-import type { Column, StickyFilters, FiltersOnly, AdditionalFilters, FilterOnly, UpdateFilter, ClearFilter, RemoveFilter } from '../types';
+import { filterTypesObject, EMPTY_ONLY_FILTER_TYPES } from './filters.const';
+import type {
+    Column,
+    StickyFilters,
+    FiltersOnly,
+    AdditionalFilters,
+    FilterOnly,
+    UpdateFilter,
+    ClearFilter,
+    RemoveFilter,
+} from '../types';
 
 const getStyles = (theme: any) => ({
     filterButtonContainer: {
-        paddingRight: theme.typography.pxToRem(theme.spacing.unit),
+        paddingInlineEnd: theme.typography.pxToRem(theme.spacing.unit),
         paddingBottom: theme.typography.pxToRem(theme.spacing.unit / 2),
         paddingTop: theme.typography.pxToRem(theme.spacing.unit / 2),
     },
@@ -141,7 +151,7 @@ const addAdditionalFiltersElements = (
     const mainButtonAdditionalFilters = additionalFilters && additionalFilters.find(filter => filter.mainButton);
     if (mainButtonAdditionalFilters) {
         const addToRemainingElements =
-        !filtersWithValueOnInit[mainButtonAdditionalFilters.id] && !userSelectedFilters[mainButtonAdditionalFilters.id];
+            !filtersWithValueOnInit[mainButtonAdditionalFilters.id] && !userSelectedFilters[mainButtonAdditionalFilters.id];
 
         if (addToRemainingElements) {
             const remainingElements =
@@ -211,30 +221,46 @@ const renderIndividualFilterButtons = ({
     onRemoveFilter: RemoveFilter;
     classes: any;
 }) => [...(filtersOnly || []), ...individualElementsArray]
-    .map(({ id, type, header, options, multiValueFilter, disabled, tooltipContent, mainButton }: any) => (
-        <div
-            key={id}
-            data-test={`filter-button-container-${id}`}
-            className={classes.filterButtonContainer}
-        >
-            <FilterButton
-                data-test={`filter-button-${id}`}
-                itemId={id}
-                type={type}
-                title={header}
-                options={options}
-                disabled={disabled}
-                tooltipContent={tooltipContent}
-                multiValueFilter={multiValueFilter}
-                onSetVisibleSelector={onSetVisibleSelector}
-                selectorVisible={id === visibleSelectorId}
-                onUpdateFilter={onUpdateFilter}
-                onClearFilter={onClearFilter}
-                isRemovable={mainButton}
-                onRemoveFilter={onRemoveFilter}
-            />
-        </div>
-    ),
+    .map(
+        ({
+            id,
+            type,
+            header,
+            options,
+            multiValueFilter,
+            disabled,
+            tooltipContent,
+            mainButton,
+            unique,
+            searchOperator,
+            minCharactersToSearch,
+        }: any) => (
+            <div
+                key={id}
+                data-test={`filter-button-container-${id}`}
+                className={classes.filterButtonContainer}
+            >
+                <FilterButton
+                    data-test={`filter-button-${id}`}
+                    itemId={id}
+                    type={type}
+                    title={header}
+                    options={options}
+                    disabled={disabled}
+                    tooltipContent={tooltipContent}
+                    multiValueFilter={multiValueFilter}
+                    unique={unique}
+                    searchOperator={searchOperator}
+                    minCharactersToSearch={minCharactersToSearch}
+                    onSetVisibleSelector={onSetVisibleSelector}
+                    selectorVisible={id === visibleSelectorId}
+                    onUpdateFilter={onUpdateFilter}
+                    onClearFilter={onClearFilter}
+                    isRemovable={mainButton}
+                    onRemoveFilter={onRemoveFilter}
+                />
+            </div>
+        ),
     );
 
 const renderRestButton = (
@@ -263,7 +289,10 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         classes,
     } = props;
 
-    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(props.visibleSelectorId ?? null);
+    const [visibleSelectorId, setVisibleSelector] = React.useState<string | null | undefined>(
+        props.visibleSelectorId ?? null,
+    );
+    const emptyValueFilterSupported = useFeature(FEATURES.emptyValueFilter);
     const defaultFiltersOnly = useMemo(() =>
         (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);
     const defaultFiltersOnlyCount = defaultFiltersOnly.length;
@@ -271,11 +300,17 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
 
     const elementsContainer = React.useMemo(() => {
         const notEmptyColumns = columns || [];
+        const columnsForFilterList = emptyValueFilterSupported
+            ? notEmptyColumns
+            : notEmptyColumns.filter(col => !EMPTY_ONLY_FILTER_TYPES.has(col.type));
         const filtersOnlyForShowInMoreFilters: FiltersOnly = (filtersOnly || [])
             .filter(filter => filter.showInMoreFilters);
+        const filtersOnlyForList = emptyValueFilterSupported
+            ? filtersOnlyForShowInMoreFilters
+            : filtersOnlyForShowInMoreFilters.filter(f => !EMPTY_ONLY_FILTER_TYPES.has(f.type));
 
-        const validColumnElementConfigs = getValidElementConfigsVisiblePrioritized(notEmptyColumns);
-        const validFilterConfigs = getValidFilterConfigs(filtersOnlyForShowInMoreFilters);
+        const validColumnElementConfigs = getValidElementConfigsVisiblePrioritized(columnsForFilterList);
+        const validFilterConfigs = getValidFilterConfigs(filtersOnlyForList);
 
         const validElementConfigs: Map<string, Column | FilterOnly> = new Map([
             ...validColumnElementConfigs as any,
@@ -288,14 +323,14 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
             splitBasedOnHasValueOnInit(validElementConfigs, filtersWithValueOnInit);
 
         const { fillUpElements, remainingElements: remainingElementsAfterFillUp } =
-        fillUpIndividualElements(
-            remainingElementsAfterInitSplit,
-            initValueElements.size + defaultFiltersOnlyCount,
-        );
+            fillUpIndividualElements(
+                remainingElementsAfterInitSplit,
+                initValueElements.size + defaultFiltersOnlyCount,
+            );
 
         const { remainingElements: remainingElementsWithShowInMoreFilters } = addShowInMoreFilters(
             remainingElementsAfterFillUp,
-            filtersOnlyForShowInMoreFilters,
+            filtersOnlyForList,
             filtersWithValueOnInit,
             userSelectedFilters,
         );
@@ -305,7 +340,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
                 remainingElementsWithShowInMoreFilters, additionalFilters, filtersWithValueOnInit, userSelectedFilters);
 
         const { userSelectedElements, remainingElements } =
-        getUserSelectedElements(remainingElementsWithAdditionalFilters, userSelectedFilters);
+            getUserSelectedElements(remainingElementsWithAdditionalFilters, userSelectedFilters);
 
         const individualElementsArray =
             getIndividualElementsArray(
@@ -323,6 +358,7 @@ const FiltersPlain = memo<Props & WithStyles<typeof getStyles>>((props: Props & 
         };
     }, [
         columns,
+        emptyValueFilterSupported,
         stickyFilters,
         filtersOnly,
         defaultFiltersOnlyCount,

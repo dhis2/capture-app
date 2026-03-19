@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     searchBoxActionTypes,
     fallbackSearch,
@@ -19,22 +19,23 @@ import {
     getTrackedEntityInstances,
 } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
-    dataElementTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
+    type DataElement,
 } from '../../../metaData';
 import { PAGINATION } from '../SearchBox.constants';
 import { buildUrlQueryString } from '../../../utils/routing';
 import {
     navigateToEnrollmentOverview,
 } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
+import { convertSearchFormToServer } from '../../../converters';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
 import { escapeString } from '../../../utils/escapeString';
+import { DEFAULT_IS_UNIQUE_SEARCH_OPERATOR } from '../../../metaDataMemoryStoreBuilders';
 
 const getFiltersForUniqueIdSearchQuery = (formValues: any) => {
     const fieldId = Object.keys(formValues)[0];
-    return [`${fieldId}:eq:${escapeString(formValues[fieldId])}`];
+    return [`${fieldId}:${DEFAULT_IS_UNIQUE_SEARCH_OPERATOR.toLowerCase()}:${escapeString(formValues[fieldId])}`];
 };
 
 const searchViaUniqueIdStream = ({
@@ -54,11 +55,15 @@ const searchViaUniqueIdStream = ({
     formId?: string;
     programTETId?: string;
 }) =>
-    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined)).pipe(
+    from(getTrackedEntityInstances(
+        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined,
+    )).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
-                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId }));
+                return of(searchViaUniqueIdOnScopeTrackedEntityType({
+                    trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId,
+                }));
             }
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId, enrollments } } = searchResults[0];
@@ -78,7 +83,8 @@ const searchViaUniqueIdStream = ({
         catchError(() => of(showErrorViewOnSearchBox())),
     );
 
-const getFiltersForAttributesSearchQuery = (formValues: any, attributes: any) => Object.keys(formValues)
+const getFiltersForAttributesSearchQuery =
+(formValues: any, attributes: any, searchGroupElements?: DataElement[]) => Object.keys(formValues)
     .filter(fieldId => formValues[fieldId])
     .filter((fieldId) => {
         if (typeof formValues[fieldId] === 'string') {
@@ -88,9 +94,11 @@ const getFiltersForAttributesSearchQuery = (formValues: any, attributes: any) =>
     })
     .map((fieldId) => {
         const dataElement = attributes.find((attribute: any) => attribute.id === fieldId);
-        if (formValues[fieldId] && dataElement) {
-            const dataElementType = dataElementTypes[dataElement.type];
-            return dataElementConvertFunctions[dataElementType](formValues[fieldId], dataElement);
+        const searchGroupElement = searchGroupElements?.find((element: any) => element.id === fieldId);
+        if (formValues[fieldId] && dataElement && searchGroupElement) {
+            const searchOperator = searchGroupElement.searchOperator;
+
+            return convertSearchFormToServer(formValues[fieldId], dataElement, searchOperator);
         }
         return null;
     });
@@ -117,7 +125,9 @@ const searchViaAttributesStream = ({
     querySingleResource: QuerySingleResource;
     programId?: string;
 }) =>
-    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined)).pipe(
+    from(getTrackedEntityInstances(
+        queryArgs, attributes, absoluteApiPath, querySingleResource, programId || undefined,
+    )).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return showSuccessResultsViewOnSearchBox(
@@ -220,12 +230,18 @@ export const searchViaAttributesOnScopeProgramEpic = (
         ofType(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }: any) => {
             const { formsValues } = store.value;
-            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
+            const { searchGroups, attributes } = getTrackerProgramThrowIfNotFound(programId);
+            const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
+
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';
             const queryArgs = {
-                filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
+                filter: getFiltersForAttributesSearchQuery(
+                    formsValues[formId],
+                    attributes,
+                    availableSearchGroup?.searchForm.getElements(),
+                ),
                 fields: 'attributes,enrollments,trackedEntity,orgUnit',
                 program: programId,
                 page,
@@ -253,12 +269,18 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
         ofType(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }: any) => {
             const { formsValues } = store.value;
-            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+            const { attributes, searchGroups } = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
+            const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
+
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';
             const queryArgs = {
-                filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
+                filter: getFiltersForAttributesSearchQuery(
+                    formsValues[formId],
+                    attributes,
+                    availableSearchGroup?.searchForm.getElements(),
+                ),
                 trackedEntityType: trackedEntityTypeId,
                 page,
                 pageSize: 5,
@@ -278,28 +300,31 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
 export const startFallbackSearchEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH_START),
-        flatMap(({ payload: { programId, pageSize, page } }: any) => {
+        flatMap(({ payload: { programId, pageSize, page, formId } }: any) => {
             const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             if (trackerProgram.trackedEntityType) {
                 const { id: trackedEntityTypeId, searchGroups } = trackerProgram.trackedEntityType;
-                const availableSearchGroup = searchGroups.find((group: any) => !group.unique);
+                const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
                 if (availableSearchGroup) {
                     const {
                         minAttributesRequiredToSearch,
                         searchForm,
                     } = availableSearchGroup;
-                    const { searchDomain } = store.value;
-                    const searchTerms = searchDomain.currentSearchInfo.currentSearchTerms;
+                    const { formsValues } = store.value;
+                    const formValues = formsValues[formId] as Record<string, unknown>;
                     const searchableFields = searchForm.getElements();
 
-                    const { searchableValuesCount, fallbackFormValues } = searchTerms.reduce((acc: any, term: any) => {
-                        if (searchableFields.find(({ id }: any) => id === term.id)) {
-                            acc.searchableValuesCount += 1;
-                        }
-                        acc.fallbackFormValues[term.id] = term.value;
-                        return acc;
-                    }, { searchableValuesCount: 0, fallbackFormValues: {} });
+                    const { searchableValuesCount, fallbackFormValues } = Object.keys(formValues).reduce(
+                        (acc: any, fieldId: string) => {
+                            if (searchableFields.some(({ id }) => id === fieldId)) {
+                                acc.searchableValuesCount += 1;
+                            }
+                            acc.fallbackFormValues[fieldId] = formValues[fieldId];
+                            return acc;
+                        },
+                        { searchableValuesCount: 0, fallbackFormValues: {} },
+                    );
 
                     if (!minAttributesRequiredToSearch && !searchableValuesCount) {
                         return of(showFallbackNotEnoughAttributesOnSearchBox({
@@ -330,8 +355,15 @@ export const fallbackSearchEpic = (
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }: any) => {
-            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
-            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes).filter((query: any) => query);
+            const { attributes, searchGroups } = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
+            const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
+
+            const filter = getFiltersForAttributesSearchQuery(
+                fallbackFormValues,
+                attributes,
+                availableSearchGroup?.searchForm.getElements(),
+            ).filter(Boolean);
+
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';

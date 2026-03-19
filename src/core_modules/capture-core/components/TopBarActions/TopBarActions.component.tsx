@@ -1,5 +1,5 @@
 import React, { type ComponentType, useState, useEffect } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
 import { scopeTypes } from '../../metaData';
@@ -10,7 +10,7 @@ const styles: Readonly<any> = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: `${spacers.dp8}`,
+        marginInlineStart: spacers.dp8,
         gap: `${spacers.dp4}`,
         height: '40px',
     },
@@ -39,7 +39,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="new-event-button"
-                    className={classes.marginRight}
                     onClick={onNewClickWithoutProgramId}
                 >
                     {i18n.t('Create new')}
@@ -49,13 +48,12 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="new-button"
-                    className={classes.marginRight}
                     onClick={() => { onNewClick(); }}
                     component={
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
                                 dataTest="new-menuitem-one"
-                                label={`${i18n.t('Create new in another program')}...`}
+                                label={i18n.t('Create new in another program...')}
                                 onClick={() => { onNewClickWithoutProgramId(); }}
                                 suffix={null}
                             />
@@ -77,7 +75,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="find-button"
-                    className={classes.marginRight}
                     onClick={onFindClickWithoutProgramId}
                 >
                     {i18n.t('Search')}
@@ -87,7 +84,6 @@ const ActionButtonsPlain = ({
                     small
                     secondary
                     dataTest="find-button"
-                    className={classes.marginRight}
                     open={openSearch}
                     onClick={() => setOpenSearch(prev => !prev)}
                     component={
@@ -104,7 +100,7 @@ const ActionButtonsPlain = ({
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
-                                label={`${i18n.t('Search')}...`}
+                                label={i18n.t('Search...')}
                                 onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }}
                                 suffix={null}
                             />

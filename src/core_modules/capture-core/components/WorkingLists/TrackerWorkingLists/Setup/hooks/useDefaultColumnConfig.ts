@@ -12,6 +12,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
             type: dataElementTypes.ORGANISATION_UNIT,
             header: i18n.t('Owner organisation unit'),
             sortDisabled: true,
+            filterHidden: true,
             apiViewName: 'programOwner',
         },
         {
@@ -89,17 +90,48 @@ const getEventsMetaDataConfig = (programStage): Array<MetadataColumnConfig> => {
     return getDataValuesMetaDataConfig(dataElements);
 };
 
-const getTEIMetaDataConfig = (attributes: Array<any>, orgUnitId: string | null | undefined): Array<MetadataColumnConfig> =>
-    attributes.map(({ id, displayInReports, type, name, formName, optionSet, searchable, unique }) => ({
-        id,
-        visible: displayInReports,
-        type,
-        header: formName || name,
-        options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-        multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
-        filterHidden: !(orgUnitId || searchable || unique),
-        unique: Boolean(unique),
-    }));
+type SearchFilterMeta = { searchOperator?: string; minCharactersToSearch?: number };
+
+const buildSearchFilterMetaById = (program: TrackerProgram): Map<string, SearchFilterMeta> => {
+    const entries = program.searchGroups.flatMap(group =>
+        group.searchForm.getElements().map(el => [
+            el.id,
+            { searchOperator: el.searchOperator, minCharactersToSearch: el.minCharactersToSearch } as SearchFilterMeta,
+        ]),
+    );
+    return new Map(entries as [string, SearchFilterMeta][]);
+};
+
+const getTEIMetaDataConfig = (
+    attributes: Array<any>,
+    orgUnitId: string | null | undefined,
+    searchFilterMetaById: Map<string, SearchFilterMeta>,
+): Array<MetadataColumnConfig> =>
+    attributes.map((attribute) => {
+        const {
+            id,
+            displayInReports,
+            type,
+            name,
+            formName,
+            optionSet,
+            searchable,
+            unique,
+        } = attribute;
+        const filterMeta = searchFilterMetaById.get(id);
+        return {
+            id,
+            visible: displayInReports,
+            type,
+            header: formName || name,
+            options: optionSet?.options?.map(({ text, value }) => ({ text, value })),
+            multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
+            filterHidden: !(orgUnitId || searchable || unique),
+            unique: Boolean(unique),
+            searchOperator: filterMeta?.searchOperator ?? attribute.searchOperator,
+            minCharactersToSearch: filterMeta?.minCharactersToSearch ?? attribute.minCharactersToSearch,
+        };
+    });
 
 const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> =>
     dataElements.map(({ id, displayInReports, type, name, formName, optionSet }) => ({
@@ -119,12 +151,13 @@ export const useDefaultColumnConfig = (
 ): TrackerWorkingListsColumnConfigs =>
     useMemo(() => {
         const { attributes, stages } = program;
+        const searchFilterMetaById = buildSearchFilterMetaById(program);
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
 
         const defaultColumns = [
             ...getMainConfig(hasDisplayInReportsAttributes),
-            ...getTEIMetaDataConfig(attributes, orgUnitId),
+            ...getTEIMetaDataConfig(attributes, orgUnitId, searchFilterMetaById),
         ];
 
         if (programStageId && programStage) {

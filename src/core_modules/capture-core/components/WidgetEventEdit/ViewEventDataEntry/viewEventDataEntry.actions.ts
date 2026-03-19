@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
@@ -23,9 +24,9 @@ import type {
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
-import { getCachedSingleResourceFromKeyAsync } from '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
+import { getCachedSingleResourceFromKeyAsync } from
+    '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
 import { USER_METADATA_STORES } from '../../../storageControllers';
-import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 
 
 export const actionTypes = {
@@ -34,7 +35,9 @@ export const actionTypes = {
 };
 
 function getAssignee(clientAssignee: any) {
-    return clientAssignee ? convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : clientAssignee;
+    return clientAssignee ?
+        convertClientToForm(clientAssignee, dataElementTypes.USERNAME) :
+        clientAssignee;
 }
 
 export const loadViewEventDataEntry =
@@ -93,10 +96,15 @@ export const loadViewEventDataEntry =
 
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
             const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
-            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(newUIDsSeparator ? ',' : ';');
+            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(
+                newUIDsSeparator ? ',' : ';',
+            );
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {
                 const categoryOptionsPromises = optionIds.map(async (optionId) => {
-                    const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(USER_METADATA_STORES.CATEGORY_OPTIONS, optionId);
+                    const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(
+                        USER_METADATA_STORES.CATEGORY_OPTIONS,
+                        optionId,
+                    );
                     if (cachedCategoryOption.displayName === 'default') {
                         return null;
                     }

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, Layer, Popper } from '@dhis2/ui';
+import { isLangRtl } from '../../utils/rtl';
 
 interface Props {
     label?: string;
@@ -58,7 +59,10 @@ export const OverflowButton = ({
 
             {open && (
                 <Layer onBackdropClick={toggle}>
-                    <Popper reference={anchorRef as React.RefObject<HTMLDivElement>} placement="bottom-end">
+                    <Popper
+                        reference={anchorRef as React.RefObject<HTMLDivElement>}
+                        placement={isLangRtl() ? 'bottom-start' : 'bottom-end'}
+                    >
                         {component}
                     </Popper>
                 </Layer>

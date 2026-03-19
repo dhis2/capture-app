@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
 import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
@@ -10,7 +10,7 @@ import type { PlainProps, Value } from './TrueOnly.types';
 
 export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
-        marginRight: theme.typography.pxToRem(-24),
+        marginInlineEnd: theme.typography.pxToRem(-24),
     },
 });
 
@@ -29,6 +29,12 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
 
     onIsValid = () => true
 
+    handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && this.props.onUpdate) {
+            this.props.onUpdate(this.props.value);
+        }
+    };
+
     handleTrueOnlyBlur = (value: string | null | undefined) => {
         this.props.onCommitValue(value ? [value] : null);
     }
@@ -39,6 +45,7 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
         return (
             <div
                 className={classes.selectBoxesContainer}
+                onKeyDownCapture={this.handleKeyDown}
             >
                 <D2TrueOnly
                     label={i18n.t('Yes')}

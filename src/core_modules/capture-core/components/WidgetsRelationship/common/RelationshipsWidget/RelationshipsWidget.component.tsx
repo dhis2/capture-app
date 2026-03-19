@@ -1,8 +1,7 @@
 import React, { type ComponentType, useState } from 'react';
-import { Chip, IconLink24, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import type { WithStyles } from '@material-ui/core';
-import { Widget } from '../../../Widget';
+import { withStyles } from 'capture-core-utils/styles';
+import type { WithStyles } from 'capture-core-utils/styles';
+import { Widget, WidgetHeaderCountBadge } from '../../../Widget';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props } from './relationshipsWidget.types';
@@ -10,13 +9,7 @@ import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 
 const styles = {
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    icon: {
-        paddingRight: spacers.dp8,
-    },
+    header: {},
 };
 
 const RelationshipsWidgetPlain = ({
@@ -37,11 +30,7 @@ const RelationshipsWidgetPlain = ({
         return (
             <Widget
                 header={(
-                    <div className={classes.header}>
-                        <span className={classes.icon}>
-                            <IconLink24 />
-                        </span>
-                    </div>
+                    <div className={classes.header} />
                 )}
                 onOpen={() => setOpenStatus(true)}
                 onClose={() => setOpenStatus(false)}
@@ -60,15 +49,10 @@ const RelationshipsWidgetPlain = ({
         >
             <Widget
                 header={(
-                    <div className={classes.header}>
-                        <span className={classes.icon}>
-                            <IconLink24 />
-                        </span>
+                    <div className={classes.header} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span>{title}</span>
-                        {relationships && (
-                            <Chip dense>
-                                {relationships.length}
-                            </Chip>
+                        {(relationships?.length ?? 0) > 0 && (
+                            <WidgetHeaderCountBadge count={relationships!.length} />
                         )}
                     </div>
                 )}

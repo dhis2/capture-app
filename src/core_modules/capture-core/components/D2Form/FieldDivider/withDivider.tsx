@@ -1,6 +1,6 @@
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DividerHorizontal as Divider } from 'capture-ui';
 
 const getStyles: Readonly<any> = () => ({
@@ -15,16 +15,10 @@ type Props = {
     formHorizontal: boolean;
 } & WithStyles<typeof getStyles>;
 
-type Field = {
-    props: {
-        hidden?: boolean;
-    };
-};
-
 export const withDivider = () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class DividerHOC extends React.Component<Props> {
-        renderDivider = (index: number, total: number, field: Field) => {
-            if ((field.props && field.props.hidden) || (index + 1) >= total) {
+        renderDivider = (index: number, total: number, hidden: boolean) => {
+            if (hidden || (index + 1) >= total) {
                 return null;
             }
 

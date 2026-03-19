@@ -3,7 +3,6 @@ import { UserField } from '../../../../FormFields/UserField/UserField.component'
 import {
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -20,17 +19,15 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const UserNameFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer(getContainerClass)(
-                                    withTransformPropName(['onBlur', 'onSet'])(
-                                        withInternalChangeHandler()(
-                                            UserField,
-                                        ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withCalculateMessages()(
+                    withFocusSaver()(
+                        withDisplayMessages()(
+                            withCustomElementContainer(getContainerClass)(
+                                withTransformPropName(['onBlur', 'onSet'])(
+                                    withInternalChangeHandler()(
+                                        UserField,
                                     ),
                                 ),
                             ),

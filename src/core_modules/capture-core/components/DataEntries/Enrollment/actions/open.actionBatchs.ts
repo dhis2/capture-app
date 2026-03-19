@@ -1,5 +1,6 @@
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -16,7 +17,6 @@ import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
-import type { ReduxAction } from '../../../../../capture-core-utils/types';
 
 const itemId = 'newEnrollment';
 
@@ -74,12 +74,13 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
         ...(firstStageDataEntryPropsToInclude || []),
-        ...(programCategory && programCategory.categories ? programCategory.categories.map(category => ({
-            id: `attributeCategoryOptions-${category.id}`,
-            type: 'TEXT',
-            validatorContainers:
+        ...(programCategory && programCategory.categories ?
+            programCategory.categories.map(category => ({
+                id: `attributeCategoryOptions-${category.id}`,
+                type: 'TEXT',
+                validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
-        })) : []),
+            })) : []),
     ];
 
     const dataEntryActions =

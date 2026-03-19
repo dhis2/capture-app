@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
@@ -21,7 +21,7 @@ const styles: Readonly<any> = {
     fieldLabel: {
         color: colors.grey900,
         paddingTop: spacersNum.dp12,
-        paddingRight: spacersNum.dp16,
+        paddingInlineEnd: spacersNum.dp16,
         flexBasis: '200px',
     },
     fieldContent: {

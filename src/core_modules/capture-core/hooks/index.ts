@@ -6,3 +6,4 @@ export { useAvailableProgramStages } from './useAvailableProgramStages';
 export { useScopeInfo } from './useScopeInfo';
 export { useScopeTitleText } from './useScopeTitleText';
 export { useProgramExpiryForUser } from './useProgramExpiryForUser';
+export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';

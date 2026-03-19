@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
 import type { UserFormField } from '../../../FormFields/UserField';
-import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -49,6 +50,9 @@ type Props = {
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    feedbackEmptyText: string,
+    indicatorEmptyText: string,
+    programRules: Array<any>,
 };
 
 export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
@@ -65,13 +69,18 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         getAssignedUserSaveContext,
         onSaveAssignee,
         onSaveAssigneeError,
+        feedbackEmptyText,
+        indicatorEmptyText,
+        programRules,
     } = props;
 
     const dispatch = useDispatch();
     const { orgUnitId } = useLocationQuery();
-    const onBackToAllEvents = () => {
+    const onBackToAllEvents = useCallback(() => {
         dispatch(startGoBackToMainPage(orgUnitId));
-    };
+    }, [dispatch, orgUnitId]);
+
+    const hideWidgets = useHideWidgetByRuleLocations(programRules);
 
     return (
         <div className={classes.container}>
@@ -97,6 +106,9 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     getAssignedUserSaveContext={getAssignedUserSaveContext}
                     onSaveAssignee={onSaveAssignee}
                     onSaveAssigneeError={onSaveAssigneeError}
+                    feedbackEmptyText={feedbackEmptyText}
+                    indicatorEmptyText={indicatorEmptyText}
+                    hideWidgets={hideWidgets}
                 />
             </div>
         </div>

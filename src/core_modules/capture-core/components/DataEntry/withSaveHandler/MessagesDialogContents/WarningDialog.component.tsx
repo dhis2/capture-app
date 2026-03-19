@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 
 type Props = {
     warnings: Array<{key: string, name?: string, warning: string }>;
@@ -60,7 +60,7 @@ class WarningDialogPlain extends React.Component<Props & WithStyles<typeof style
                             onClick={onSave}
                             primary
                             initialFocus
-                            className={classes.marginLeft}
+                            className={classes.button}
                         >
                             {i18n.t('Save anyway')}
                         </Button>
@@ -72,8 +72,8 @@ class WarningDialogPlain extends React.Component<Props & WithStyles<typeof style
 }
 
 const styles = () => ({
-    marginLeft: {
-        marginLeft: 8,
+    button: {
+        marginInlineStart: 8,
     },
 });
 export const WarningDialog = withStyles(styles)(WarningDialogPlain);

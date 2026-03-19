@@ -1,9 +1,9 @@
-import { Instant, LocalDate } from '@js-joda/core';
 import {
     Option,
     RuleActionJs,
     RuleDataValue,
     RuleEngineContextJs,
+    RuleSupplementaryDataJs,
     RuleEnrollmentJs,
     RuleEventJs,
     RuleJs,
@@ -13,6 +13,8 @@ import {
     RuleEventStatus,
     RuleValueType,
     RuleVariableType,
+    RuleInstant,
+    RuleLocalDate,
 } from '@dhis2/rule-engine';
 import { ValueProcessor } from './ValueProcessor';
 import {
@@ -104,12 +106,14 @@ const convertAssignAction = (action: ProgramRuleAction) => {
         dataElementId,
         trackedEntityAttributeId,
         content,
+        priority,
     } = action;
 
     const actions: Array<RuleActionJs> = [];
+    const actionPriority = priority ?? null;
 
     const pushAction = (values: Map<string, string>) => {
-        actions.push(new RuleActionJs(data, type, values));
+        actions.push(new RuleActionJs(data, type, values, actionPriority));
     };
 
     if (dataElementId) {
@@ -142,6 +146,7 @@ const convertProgramRuleAction = (action: ProgramRuleAction) => {
     const {
         data,
         programRuleActionType: type,
+        priority,
         ...rest
     } = action;
 
@@ -149,6 +154,7 @@ const convertProgramRuleAction = (action: ProgramRuleAction) => {
         data,
         type,
         new Map(Object.keys(rest).map(key => [key, rest[key]])),
+        priority ?? null,
     );
 };
 
@@ -183,12 +189,14 @@ const convertOption = (option: RawOption) => new Option(option.displayName, opti
 const buildSupplementaryData = ({
     selectedOrgUnit,
     selectedUserRoles,
+    selectedUserGroups,
 }: {
     selectedOrgUnit: OrgUnit;
     selectedUserRoles?: Array<string> | null;
+    selectedUserGroups?: Array<string> | null;
 }) => {
     const orgUnitId = selectedOrgUnit.id;
-    const supplementaryData = selectedOrgUnit.groups.reduce(
+    const orgUnitGroups = selectedOrgUnit.groups.reduce(
         (acc, group) => {
             if (group.code) {
                 acc.set(group.code, [orgUnitId]);
@@ -199,9 +207,11 @@ const buildSupplementaryData = ({
         new Map<string, Array<string>>(),
     );
 
-    supplementaryData.set('USER', selectedUserRoles || []);
-
-    return supplementaryData;
+    return new RuleSupplementaryDataJs(
+        selectedUserGroups || [],
+        selectedUserRoles || [],
+        orgUnitGroups,
+    );
 };
 
 export class InputBuilder {
@@ -227,7 +237,7 @@ export class InputBuilder {
     }
 
     toLocalDate = (dateString?: string | null, defaultValue: any = null) =>
-        (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
+        (dateString ? RuleLocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
 
     convertDataElementValue = (id: string, rawValue: any) =>
         this.convertDataValue(rawValue, this.dataElements[id]?.valueType);
@@ -250,8 +260,8 @@ export class InputBuilder {
             completedAt: completedDate,
         } = eventData;
 
-        const eventDate = occurredAt ? Instant.parse(occurredAt) : null;
-        const createdDate = createdAt ? Instant.parse(createdAt) : Instant.now();
+        const eventDate = occurredAt ? RuleInstant.parse(occurredAt) : null;
+        const createdDate = createdAt ? RuleInstant.parse(createdAt) : RuleInstant.now();
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
@@ -345,7 +355,7 @@ export class InputBuilder {
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
             )) : [];
 
-        const convertDate = (dateString?: string | null) => this.toLocalDate(dateString, LocalDate.now());
+        const convertDate = (dateString?: string | null) => this.toLocalDate(dateString, RuleLocalDate.currentDate());
 
         return new RuleEnrollmentJs(
             enrollment!,
@@ -362,16 +372,18 @@ export class InputBuilder {
     buildRuleEngineContext = ({
         programRulesContainer,
         selectedUserRoles,
+        selectedUserGroups,
     }: {
         programRulesContainer: ProgramRulesContainer;
         selectedUserRoles?: Array<string> | null;
+        selectedUserGroups?: Array<string> | null;
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
         return new RuleEngineContextJs(
             programRules ? programRules.map(convertProgramRule) : [],
             programRuleVariables ? programRuleVariables.map(this.convertRuleVariable) : [],
-            buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles }),
+            buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles, selectedUserGroups }),
             constants ? convertConstants(constants) : new Map(),
         );
     };

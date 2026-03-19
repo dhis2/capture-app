@@ -1,11 +1,16 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useCommonEnrollmentDomainData } from '../components/Pages/common/EnrollmentOverviewDomain';
-import { errorCreator } from '../../capture-core-utils';
 import type { ProgramStage } from '../metaData';
 import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
 
-export const useAvailableProgramStages = (programStage: ProgramStage, teiId: string, enrollmentId: string, programId: string) => {
+export const useAvailableProgramStages = (
+    programStage: ProgramStage,
+    teiId: string,
+    enrollmentId: string,
+    programId: string,
+) => {
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
         isLoading: programLoading,
@@ -31,7 +36,7 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
                     (programStage.id !== currentStage.id && eventCount === 0);
 
                 return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
-            }),
+            }).filter(stage => stage.isAvailableStage) || [],
         [
             enrollment?.events,
             program?.programStages,
@@ -41,5 +46,5 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
         ],
     );
 
-    return availableProgramStages ? availableProgramStages.filter(stage => stage.isAvailableStage) : [];
+    return availableProgramStages;
 };

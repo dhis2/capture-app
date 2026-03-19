@@ -41,7 +41,10 @@ type ErrorFeedbackInput = {
     action?: ReactNode,
 };
 
-function addErrorFeedback(state: any, { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput) {
+function addErrorFeedback(
+    state: any,
+    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput,
+) {
     return [
         ...state,
         {
@@ -53,7 +56,9 @@ function addErrorFeedback(state: any, { message, variant = alertVariants.critica
     ];
 }
 
-function getErrorFeedback({ message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput) {
+function getErrorFeedback(
+    { message, variant = alertVariants.critical as keyof typeof alertVariants, action }: ErrorFeedbackInput,
+) {
     return {
         message,
         action,
@@ -82,7 +87,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         const error = action.payload;
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
-        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
+        log.error(errorCreator(errorMessage || 'Error saving event')(errorObject));
         const newState = [
             ...state,
             getErrorFeedback({ message: i18n.t('Could not save event') }),
@@ -116,7 +121,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         const error = action.payload;
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
-        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
+        log.error(errorCreator(errorMessage || 'Error saving event')(errorObject));
         const newState = [
             ...state,
             getErrorFeedback({ message: i18n.t('Could not save event') }),

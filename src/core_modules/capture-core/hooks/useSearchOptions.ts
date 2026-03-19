@@ -1,14 +1,17 @@
 import { useMemo } from 'react';
 import type { RenderFoundation } from '../metaData';
+import type { SearchAttribute } from '../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from './useTrackedEntityTypesWithCorrelatedPrograms';
 import type { AvailableSearchOption } from '../components/SearchBox';
 
 type SearchGroups = Array<{
+    id?: string;
     searchForm: RenderFoundation;
     unique: boolean;
     formId: string;
     searchScope: string;
     minAttributesRequiredToSearch: number;
+    unsupportedAttributes?: SearchAttribute[];
 }>;
 
 type AvailableSearchOptions = Readonly<{
@@ -32,7 +35,14 @@ export const buildSearchOption =
             searchOptionName: name,
             TETypeName: type,
             searchGroups: [...searchGroups.values()]
-                .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
+                .map(({
+                    id: groupId,
+                    unique,
+                    searchForm,
+                    minAttributesRequiredToSearch,
+                    unsupportedAttributes,
+                }, index) => ({
+                    id: groupId,
                     unique,
                     searchForm,
                     // We adding the `formId` here for the reason that we will use it in the SearchBox component.
@@ -42,6 +52,7 @@ export const buildSearchOption =
                     formId: `searchDomainForm-${id}-${index}`,
                     searchScope,
                     minAttributesRequiredToSearch,
+                    unsupportedAttributes,
                 })),
         });
 

@@ -1,5 +1,8 @@
 export type ApiDataFilterText = {
-    like: string,
+    eq?: string,
+    sw?: string,
+    ew?: string,
+    like?: string,
 };
 
 export type ApiDataFilterTextUnique = {
@@ -32,6 +35,10 @@ export type ApiDataFilterDate = { dateFilter: ApiDataFilterDateContents };
 
 export type ApiDataFilterOptionSet = {
     in: string[],
+};
+
+export type ApiDataFilterOrgUnit = {
+    eq: string,
 };
 
 type ApiAttributeFilterCommon = {
@@ -67,5 +74,6 @@ export type ApiDataFilter = (
     | ApiDataFilterTrueOnly
     | ApiDataFilterDate
     | ApiDataFilterOptionSet
+    | ApiDataFilterOrgUnit
 ) &
     (ApiDataFilterCommon & ApiAttributeFilterCommon);

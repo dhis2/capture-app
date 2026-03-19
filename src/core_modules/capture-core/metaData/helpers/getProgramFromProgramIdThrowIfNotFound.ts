@@ -5,14 +5,13 @@ import { programCollection } from '../../metaDataMemoryStores';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
-    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
 export function getProgramFromProgramIdThrowIfNotFound(programId: string) {
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+        throw new Error(i18n.t('An error has occurred. See log for details'));
     }
     return program;
 }

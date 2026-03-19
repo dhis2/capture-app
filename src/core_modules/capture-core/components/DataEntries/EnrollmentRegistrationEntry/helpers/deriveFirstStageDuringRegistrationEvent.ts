@@ -1,11 +1,11 @@
 import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { dataElementTypes, ProgramStage } from '../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
 import { convertStatusOut } from '../../../DataEntries';
 import { standardGeoJson } from './standardGeoJson';
-import type { ApiAssignedUser } from '../../../../../capture-core-utils/types/api-types';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -40,17 +40,21 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
-        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ? {} : { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
+        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ?
+            {} :
+            { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
         programStage: firstStageMetadata.id,
         program: programId,
         orgUnit: orgUnitId,
         ...eventAttributeCategoryOptions,
     };
 
-    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc: Array<{ dataElement: string; value: any }>, dataElement) => {
-        acc.push({ dataElement, value: currentEventValues[dataElement] });
-        return acc;
-    }, []) : undefined;
+    const dataValues = currentEventValues ?
+        Object.keys(currentEventValues).reduce((acc: Array<{ dataElement: string; value: any }>, dataElement) => {
+            acc.push({ dataElement, value: currentEventValues[dataElement] });
+            return acc;
+        }, []) :
+        undefined;
 
     if (dataValues) {
         event.dataValues = dataValues;

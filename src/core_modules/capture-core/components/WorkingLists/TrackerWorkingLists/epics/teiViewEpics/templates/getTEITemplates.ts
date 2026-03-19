@@ -13,7 +13,8 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'trackedEntityInstanceFilters',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
+            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,' +
+            'user,userAccesses,userGroupAccesses',
         },
     });
     return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];

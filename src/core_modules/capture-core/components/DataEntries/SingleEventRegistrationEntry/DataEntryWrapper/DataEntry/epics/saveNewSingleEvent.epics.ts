@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
+import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
@@ -37,7 +37,11 @@ export const saveNewEventEpic = (action$: EpicAction<SaveEventPayload>, store: R
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventLocationChangeEpic = (action$: EpicAction<SaveEventPayload>, store: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventLocationChangeEpic = (
+    action$: EpicAction<SaveEventPayload>,
+    store: ReduxStore,
+    { navigate }: ApiUtils,
+) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {

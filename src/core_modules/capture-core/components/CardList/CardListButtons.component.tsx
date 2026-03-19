@@ -1,5 +1,5 @@
 import React, { type FC, useCallback } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, type ButtonEventHandler } from '@dhis2/ui';
 import { useDispatch } from 'react-redux';
@@ -23,7 +23,7 @@ type AvailableCardListButtonState = keyof typeof availableCardListButtonState;
 const buttonStyles = (theme: any) => ({
     buttonMargin: {
         '&:not(:first-child)': {
-            marginLeft: theme.typography.pxToRem(8),
+            marginInlineStart: theme.typography.pxToRem(8),
         },
     },
 });
@@ -105,10 +105,11 @@ const CardListButtons: FC<Props> = ({
     const buttonLists: ButtonProp[] = [{
         dataTest: 'view-dashboard-button',
         onClick: onHandleClick,
-        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS && programName ? i18n.t('View {{programName}} dashboard', {
-            programName,
-            interpolation: { escapeValue: false },
-        })
+        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS && programName
+            ? i18n.t('View {{programName}} dashboard', {
+                programName,
+                interpolation: { escapeValue: false },
+            })
             : i18n.t('View dashboard'),
     },
     {
@@ -120,7 +121,12 @@ const CardListButtons: FC<Props> = ({
     {
         dataTest: 're-enrollment-button',
         onClick: onHandleClick,
-        label: `${i18n.t('Re-enroll')} ${programName ? `${i18n.t('in')} ${programName}` : ''}`,
+        label: programName
+            ? i18n.t('Re-enroll in {{programName}}', {
+                programName,
+                interpolation: { escapeValue: false },
+            })
+            : i18n.t('Re-enroll'),
         hide: navigationButtonsState !== availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON,
     },
     ];

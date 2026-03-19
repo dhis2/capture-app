@@ -4,6 +4,7 @@ import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
+import type { ApiUtils } from 'capture-core-utils/types';
 import { actionTypes as formActionTypes } from '../../../actions/form.actions';
 
 import {
@@ -11,7 +12,6 @@ import {
     filterFormFieldOrgUnitsFailed,
     filteredFormFieldOrgUnitsRetrieved,
 } from './orgUnitFieldForForms.actions';
-import type { ApiUtils } from '../../../../../../capture-core-utils/types';
 
 
 const FILTER_RETRIEVE_ERROR = 'Filter form field org units failed';
@@ -40,10 +40,8 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
             return from(querySingleResource({
                 resource: 'organisationUnits',
                 params: {
-                    fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
+                    fields: 'id,displayName,path,publicAccess,access,lastUpdated' +
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                    ].join(','),
                     paging: false,
                     withinUserSearchHierarchy: true,
                     query: searchText,
@@ -59,7 +57,11 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
                 log.error(errorCreator(FILTER_RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'FilterOrgUnitRootsEpic' }),
                 );
-                return filterFormFieldOrgUnitsFailed(resultContainer.formId, resultContainer.elementId, FILTER_RETRIEVE_ERROR);
+                return filterFormFieldOrgUnitsFailed(
+                    resultContainer.formId,
+                    resultContainer.elementId,
+                    FILTER_RETRIEVE_ERROR,
+                );
             }
 
             const { orgUnitArray, formId, elementId } = resultContainer;

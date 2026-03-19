@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes, orientations } from '../../FormFields/New';
@@ -12,7 +12,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
-        marginRight: theme.typography.pxToRem(-24),
+        marginInlineEnd: theme.typography.pxToRem(-24),
     },
     error: {
         color: theme.palette.error.main,
@@ -52,7 +52,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (value && value.mode === modeKeys.PROVIDED && !value.provided) {
+        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });

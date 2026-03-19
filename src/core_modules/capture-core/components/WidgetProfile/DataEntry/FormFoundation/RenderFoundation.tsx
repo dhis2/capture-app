@@ -23,10 +23,13 @@ const getFeatureType = (featureType?: string | null): string =>
 const isPluginElement = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is PluginElement =>
     (attribute as PluginElement).type === FormFieldTypes.PLUGIN;
 
-const isProgramTrackedEntityAttribute = (attribute: ProgramTrackedEntityAttribute | PluginElement): attribute is ProgramTrackedEntityAttribute =>
+const isProgramTrackedEntityAttribute = (
+    attribute: ProgramTrackedEntityAttribute | PluginElement,
+): attribute is ProgramTrackedEntityAttribute =>
     !isPluginElement(attribute);
 
-const buildProgramSection = (programSection: any) => programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
+const buildProgramSection = (programSection: any) =>
+    programSection.trackedEntityAttributes.map(({ id }: { id: string }) => id);
 
 const buildTetFeatureTypeField = (trackedEntityType: TrackedEntityType) => {
     if (!trackedEntityType) {
@@ -96,6 +99,52 @@ const buildMainSection = async ({
         minorServerVersion,
     });
     return section;
+};
+
+const addLeftoversSection = async ({
+    renderFoundation,
+    programTrackedEntityAttributes,
+    trackedEntityAttributes,
+    optionSets,
+    querySingleResource,
+    minorServerVersion,
+}: {
+    renderFoundation: RenderFoundation,
+    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+}) => {
+    if (!programTrackedEntityAttributes) return;
+
+    // Check if there exist attributes which are not assigned to a section
+    const attributesInSection = renderFoundation.getElements().reduce((acc, attribute) => {
+        acc.add(attribute.id);
+        return acc;
+    }, new Set());
+
+    const unassignedAttributes = programTrackedEntityAttributes
+        .filter(attribute => !attributesInSection.has(attribute.trackedEntityAttributeId));
+
+    if (unassignedAttributes.length === 0) return;
+
+    // Create a special section for the unassigned attributes
+    const section = new Section((o) => {
+        o.id = Section.LEFTOVERS_SECTION_ID;
+        o.group = Section.groups.ENROLLMENT;
+    });
+
+    await buildElementsForSection({
+        // $FlowIgnore
+        programTrackedEntityAttributes: unassignedAttributes,
+        trackedEntityAttributes,
+        optionSets,
+        section,
+        querySingleResource,
+        minorServerVersion,
+    });
+    renderFoundation.addSection(section);
 };
 
 const buildElementsForSection = async ({
@@ -275,7 +324,8 @@ export const buildFormFoundation = async (
 
                     if (!sectionMetadata && programSections && programSections.length > 0) {
                         log.warn(
-                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                            errorCreator('Could not find metadata for section. This could indicate that ' +
+                                'your form configuration may be out of sync with your metadata.')(
                                 { sectionId: formConfigSection.id },
                             ),
                         );
@@ -300,7 +350,9 @@ export const buildFormFoundation = async (
                     const builtProgramSection = buildProgramSection(programSection);
 
                     section = await buildSection({
-                        programTrackedEntityAttributes: builtProgramSection.map((id: string) => trackedEntityAttributeDictionary[id]),
+                        programTrackedEntityAttributes: builtProgramSection.map(
+                            (id: string) => trackedEntityAttributeDictionary[id],
+                        ),
                         trackedEntityAttributes,
                         optionSets,
                         sectionCustomLabel: programSection.displayFormName,
@@ -325,6 +377,16 @@ export const buildFormFoundation = async (
         });
         section && renderFoundation.addSection(section);
     }
+
+    await addLeftoversSection({
+        renderFoundation,
+        programTrackedEntityAttributes,
+        trackedEntityAttributes,
+        optionSets,
+        querySingleResource,
+        minorServerVersion,
+    });
+
     return renderFoundation;
 };
 
@@ -335,6 +397,8 @@ export const build = async (
     minorServerVersion: number,
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
+    const formFoundation = (await buildFormFoundation(
+        program, querySingleResource, minorServerVersion, dataEntryFormConfig,
+    )) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

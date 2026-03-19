@@ -12,7 +12,7 @@ import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentP
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
-import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -143,7 +143,7 @@ export const EnrollmentAddEventPageDefault = ({
         return (
             <NoticeBox
                 error
-                title={'An error has occurred'}
+                title={i18n.t('An error has occurred')}
             >
                 {i18n.t('Program stage is invalid')}
             </NoticeBox>

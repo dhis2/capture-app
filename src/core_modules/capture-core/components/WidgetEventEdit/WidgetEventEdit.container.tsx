@@ -6,18 +6,19 @@ import {
     colors,
     spacers,
 } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { EventChangelogWrapper } from './EventChangelogWrapper';
-import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
+import { useAuthorities } from '../../utils/authority/useAuthorities';
 
 const styles: Readonly<any> = {
     container: {
@@ -40,7 +41,7 @@ const styles: Readonly<any> = {
         padding: spacersNum.dp8,
     },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingInlineEnd: spacersNum.dp8,
     },
     form: {
         padding: spacersNum.dp8,
@@ -103,6 +104,7 @@ const WidgetEventEditPlain = ({
     const expiryPeriod = useProgramExpiryForUser(programId);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -161,6 +163,7 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
+                                    canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
                                     hasDeleteButton
                                     onHandleScheduleSave={onHandleScheduleSave}
@@ -173,7 +176,9 @@ const WidgetEventEditPlain = ({
                                     assignee={assignee}
                                     onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
                                     onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
-                                    onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
+                                    onSaveAndCompleteEnrollmentSuccessActionType={
+                                        onSaveAndCompleteEnrollmentSuccessActionType
+                                    }
                                 />
                             </div>
                         )}

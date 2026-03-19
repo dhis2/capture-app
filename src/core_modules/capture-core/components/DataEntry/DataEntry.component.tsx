@@ -1,12 +1,13 @@
 import { spacers } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import type { ReactElement } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
-import type { ReduxAction } from '../../../capture-core-utils/types';
-
+import type { PluginContext } from '../D2Form/FormFieldPlugin/FormFieldPlugin.types';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
@@ -30,6 +31,7 @@ const styles: Readonly<any> = (theme: any) => ({
     },
     footerLeft: {
         display: 'flex',
+        gap: spacers.dp4,
     },
     footerRight: {
         display: 'flex',
@@ -66,7 +68,7 @@ const styles: Readonly<any> = (theme: any) => ({
         '& > div > div > *:not(:first-child)': {
             marginTop: '10px',
         },
-        marginRight: 0,
+        marginInlineEnd: 0,
     },
     verticalOutputsContainer: {
         '& > *': {
@@ -138,7 +140,8 @@ export type DataEntryOutputProps = {
     onOpenAddRelationship?: (...args: any[]) => void,
     onUpdateDataEntryField?: (...args: any[]) => void,
     onGetValidationContext?: () => any,
-    orgUnit?: { id?: string },
+    orgUnitId?: string,
+    pluginContext?: PluginContext,
 };
 
 type OwnProps = DataEntryOutputProps & {
@@ -158,8 +161,8 @@ const fieldVerticalFilter = (placement: typeof placements[keyof typeof placement
 
 class DataEntryPlain extends React.Component<Props> {
     static errorMessages = {
-        NO_ITEM_SELECTED: 'No item selected',
-        FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
+        NO_ITEM_SELECTED: i18n.t('No item selected'),
+        FORM_FOUNDATION_MISSING: i18n.t('Form foundation missing. See log for details'),
     };
 
     handleUpdateField = (...args: any[]) => {

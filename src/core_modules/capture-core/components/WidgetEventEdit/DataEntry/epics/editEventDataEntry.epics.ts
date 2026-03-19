@@ -3,6 +3,7 @@ import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import type { ApiUtils, EpicAction } from 'capture-core-utils/types';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
@@ -26,7 +27,6 @@ import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/prepar
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
 import type { QuerySingleResource } from '../../../../utils/api';
 import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
-import type { ApiUtils, EpicAction } from '../../../../../capture-core-utils/types';
 
 const runRulesForEditSingleEvent = async ({
     store,
@@ -84,7 +84,10 @@ const runRulesForEditSingleEvent = async ({
             program,
             stage,
             orgUnit: coreOrgUnit,
-            currentEvent: { ...currentEvent, createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME) },
+            currentEvent: {
+                ...currentEvent,
+                createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME),
+            },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
@@ -119,7 +122,8 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map((actionBatch: any) =>
-            actionBatch.payload.find((action: any) => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
+            actionBatch.payload.find((action: any) =>
+                action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         concatMap((action: any) => {
             const { dataEntryId, itemId, uid, programId } = action.payload;
@@ -142,7 +146,8 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map((actionBatch: any) =>
-            actionBatch.payload.find((action: any) => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
+            actionBatch.payload.find((action: any) =>
+                action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         concatMap((action: any) => {
             const {

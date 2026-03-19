@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
 import { orientations } from '../../../New';
 import { withCenterPoint } from '../../HOC';
+import { isLangRtl } from '../../../../../utils/rtl';
 
 const getStyles = (theme: any) => ({
     inputWrapperFocused: {
@@ -76,6 +77,7 @@ class CoordinateFieldPlain extends React.Component<Props & WithStyles<typeof get
                         <ModalTitle>{dialogLabel}</ModalTitle>
                     </Modal>
                 }
+                rtl={isLangRtl()}
                 {...passOnProps}
                 classes={this.passOnClasses}
             />

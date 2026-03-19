@@ -16,10 +16,10 @@ export const useOrgUnitAutoSelect = (customQueryOptions: any = {}) => {
 
     const queryOptions = { ...defaultQueryOptions, ...customQueryOptions };
 
-    const { data, isLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data, isInitialLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     return {
-        isLoading,
+        isLoading: isInitialLoading,
         data,
     };
 };

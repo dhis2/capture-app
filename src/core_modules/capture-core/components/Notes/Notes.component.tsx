@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, type ComponentType } from 'react';
 import moment from 'moment';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacersNum, Menu, MenuItem, Button, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -22,7 +22,7 @@ const styles = {
         alignItems: 'normal',
         cursor: 'default !important',
         padding: spacersNum.dp12,
-        marginRight: spacersNum.dp4,
+        marginInlineEnd: spacersNum.dp4,
         backgroundColor: '#f3f5f7 !important',
         borderRadius: '5px',
         fontSize: '14px',
@@ -55,8 +55,7 @@ const styles = {
         padding: 0,
     },
     addNoteContainer: {
-        marginRight: 5,
-        marginLeft: 2,
+        marginInline: '2px 5px',
     },
     notesContainer: {},
     newNoteContainer: {},
@@ -134,7 +133,6 @@ const NotesPlain = ({
                     dataTest="add-note-btn"
                     onClick={handleAddNote}
                     className={classes.addNoteContainer}
-                    primary
                     small
                 >
                     {i18n.t('Add note')}
@@ -188,7 +186,11 @@ const NotesPlain = ({
                                     </div>
                                     <div className={classes.noteItemDate} data-test="note-date">
                                         <span>
-                                            <Tooltip content={convertClientToList(moment(fromServerDate(n.storedAt).getClientZonedISOString()).toISOString(), dataElementTypes.DATETIME)}>
+                                            <Tooltip content={convertClientToList(
+                                                moment(fromServerDate(n.storedAt).getClientZonedISOString()).toISOString(),
+                                                dataElementTypes.DATETIME,
+                                            )}
+                                            >
                                                 {moment(fromServerDate(n.storedAt)).fromNow()}
                                             </Tooltip>
                                         </span>

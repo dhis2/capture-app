@@ -1,16 +1,16 @@
 import React from 'react';
 import { spacers, colors, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
-import cx from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import type { contentTypes, ObjectType, StringType, Message } from './WidgetErrorAndWarningContent.types';
 import { widgetTypes } from './WidgetTypes';
 
 const styles: Readonly<any> = {
     widgetWrapper: {
-        padding: `0px ${spacersNum.dp16}px`,
+        padding: `0px ${spacersNum.dp12}px`,
     },
     unorderedList: {
-        padding: `0px ${spacers.dp16}`,
+        padding: `0px ${spacers.dp12}`,
         marginTop: '0px',
         lineHeight: '1.375',
         fontSize: spacers.dp16,

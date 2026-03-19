@@ -131,7 +131,9 @@ export const enrollmentIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) =>
-            showErrorViewOnEnrollmentPage({ error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }) })),
+            showErrorViewOnEnrollmentPage({
+                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }),
+            })),
     );
 
 // Epics for teiId
@@ -185,7 +187,9 @@ export const verifyTeiFetchSuccessEpic = (action$: any, store: any) =>
 export const fetchTeiErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI_ERROR),
-        map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({ error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }) })),
+        map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({
+            error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }),
+        })),
     );
 
 // Epics for programId
@@ -213,7 +217,9 @@ export const programIdErrorEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
         map(({ payload: { programId } }) =>
-            showErrorViewOnEnrollmentPage({ error: i18n.t('Program with id "{{programId}}" does not exist', { programId }) })),
+            showErrorViewOnEnrollmentPage({
+                error: i18n.t('Program with id "{{programId}}" does not exist', { programId }),
+            })),
     );
 
 // Epics for enrollments

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { ErrorData } from '../../../D2Form/FormBuilder';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
@@ -7,8 +7,8 @@ import { LinkButton } from '../../../Buttons/LinkButton.component';
 const getStyles = () => ({
     linkButton: {
         fontSize: 'inherit',
-        paddingLeft: 0,
-        paddingRight: 3,
+        paddingInlineStart: 0,
+        paddingInlineEnd: 3,
         backgroundColor: 'inherit',
         textDecoration: 'underline',
         cursor: 'pointer',
@@ -71,7 +71,11 @@ class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props &
                 <div>
                     {i18n.t(
                         'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
-                        { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC, interpolation: { escapeValue: false } },
+                        {
+                            trackedEntityTypeName: trackedEntityTypeNameLC,
+                            attributeName: attributeNameLC,
+                            interpolation: { escapeValue: false },
+                        },
                     )}
                 </div>
                 <div>

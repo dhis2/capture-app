@@ -33,10 +33,12 @@ export class TeiRegistrationFactory {
             o.description = searchGroupElement.description;
             o.displayInForms = true;
             o.displayInReports = searchGroupElement.displayInReports;
+            o.minCharactersToSearch = searchGroupElement.minCharactersToSearch;
             o.compulsory = searchGroupElement.compulsory;
             o.disabled = searchGroupElement.disabled;
             o.type = teiAttribute.valueType;
             o.optionSet = searchGroupElement.optionSet;
+            o.searchOperator = searchGroupElement.searchOperator;
         });
         return element;
     }
@@ -227,7 +229,7 @@ export class TeiRegistrationFactory {
         trackedEntityTypeSearchGroups: Array<SearchGroup>,
     ) {
         const inputSearchGroups: Array<InputSearchGroup> = trackedEntityTypeSearchGroups
-            .filter(searchGroup => !searchGroup.unique)
+            .filter(searchGroup => searchGroup.id === 'main')
             .map(searchGroup => new InputSearchGroup((o) => {
                 o.id = searchGroup.id;
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;

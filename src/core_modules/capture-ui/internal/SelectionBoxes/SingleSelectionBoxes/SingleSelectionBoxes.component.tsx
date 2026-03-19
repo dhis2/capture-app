@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
 import { SingleSelectBox } from './SingleSelectBox/SingleSelectBox.component';
 import { withFocusHandler } from './SingleSelectBox/withFocusHandler';
@@ -56,12 +56,12 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
         }
     }
 
-    getCheckedClass = (iconSelected?: string, iconDisabled?: string, isDisabled?: boolean) => classNames(
+    getCheckedClass = (iconSelected?: string, iconDisabled?: string, isDisabled?: boolean) => cx(
         iconSelected,
         iconDisabled && { [iconDisabled]: isDisabled },
     );
 
-    getUncheckedClass = (iconDeselected?: string, iconDisabled?: string, isDisabled?: boolean) => classNames(
+    getUncheckedClass = (iconDeselected?: string, iconDisabled?: string, isDisabled?: boolean) => cx(
         iconDeselected,
         iconDisabled && { [iconDisabled]: isDisabled },
     );
@@ -105,10 +105,13 @@ export class SingleSelectionBoxes extends React.Component<Props, State> {
     }
 
     getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
-        const { orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled } = this.props;
+        const {
+            orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, keyboardManager, disabled,
+        } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
-        const tabIndex = isSelected || (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
+        const tabIndex = isSelected ||
+            (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
         const IconElement = this.getIconElement(optionData, isSelected);
         const setInputRef = (element: HTMLInputElement) => {
             this.setState((state) => {

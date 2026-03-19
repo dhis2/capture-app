@@ -117,7 +117,8 @@ const useTemplates = (
             )),
         onDeleteTemplate: (template: any, programId: string, programStageId?: string, callBacks?: Callbacks) =>
             dispatch(deleteTemplate(template, programId, { storeId, workingListsType, programStageId }, callBacks)),
-        onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
+        onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) =>
+            dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
     }), [storeId, dispatch, workingListsType, templateState.templates, mainViewConfig]);
 
     return {
@@ -146,7 +147,6 @@ const useView = (
         const {
             isUpdating: updating,
             isLoading: loading,
-            isUpdatingWithDialog: updatingWithDialog,
             dataLoadingError: loadViewError,
         } = workingListsUI[storeId] || {};
 
@@ -173,7 +173,6 @@ const useView = (
             recordsOrder,
             updating: !!updating,
             loading: !!loading,
-            updatingWithDialog: !!updatingWithDialog,
             loadViewError,
             customColumnOrder: workingListsColumnsOrder[storeId],
             programStage: workingListsContext[storeId]?.programStageId,

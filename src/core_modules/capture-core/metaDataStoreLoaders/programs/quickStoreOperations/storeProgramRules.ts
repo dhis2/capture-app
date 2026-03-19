@@ -10,6 +10,7 @@ const convert = (() => {
             trackedEntityAttribute: undefined,
             optionGroup: undefined,
             option: undefined,
+            legendSet: undefined,
         };
 
         const getProgramStageSectionId = d2ProgramRuleAction =>
@@ -24,6 +25,10 @@ const convert = (() => {
             d2ProgramRuleAction.optionGroup && d2ProgramRuleAction.optionGroup.id;
         const getOptionId = d2ProgramRuleAction =>
             d2ProgramRuleAction.option && d2ProgramRuleAction.option.id;
+        const getLegendSetId = d2ProgramRuleAction =>
+            d2ProgramRuleAction.legendSet && d2ProgramRuleAction.legendSet.id;
+        const getPriority = d2ProgramRuleAction =>
+            d2ProgramRuleAction.priority;
 
         return apiProgramRuleActions.map(apiProgramRuleAction => ({
             ...apiProgramRuleAction,
@@ -34,6 +39,8 @@ const convert = (() => {
             trackedEntityAttributeId: getTrackedEntityAttributeId(apiProgramRuleAction),
             optionGroupId: getOptionGroupId(apiProgramRuleAction),
             optionId: getOptionId(apiProgramRuleAction),
+            legendSetId: getLegendSetId(apiProgramRuleAction),
+            prioriy: getPriority(apiProgramRuleAction),
         }));
     };
 
@@ -43,7 +50,8 @@ const convert = (() => {
         return apiProgramRules
             .map(apiProgramRule => ({
                 ...apiProgramRule,
-                // Adding the program id and program stage id directly to the main object instead of using the container object with id as the only property
+                // Adding the program id and program stage id directly to the main object instead of using
+                // the container object with id as the only property
                 // The reason being that we don't want the container object to be stored in IndexedDB.
                 program: undefined,
                 programStage: undefined,
@@ -55,8 +63,8 @@ const convert = (() => {
 })();
 
 const fieldsParam = 'id,displayName,condition,description,program[id],programStage[id],priority,' +
-'programRuleActions[id,content,displayContent,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
-'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
+'programRuleActions[id,content,displayContent,location,data,priority,programRuleActionType,programStageSection[id],' +
+'dataElement[id],trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id],legendSet[id]]';
 
 export const storeProgramRules = async (programIds: Array<string>) => {
     const query = {

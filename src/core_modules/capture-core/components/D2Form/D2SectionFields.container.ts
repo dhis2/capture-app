@@ -17,10 +17,12 @@ const makeMapStateToProps = () => {
     const getDisabled = makeGetDisabled();
     const mapStateToProps = (state: any, props: { formId: string, fieldsMetaData: any }) => ({
         values: getSectionValues(state, props),
-        rulesHiddenFields: getHiddenFields(state, props),
-        rulesMessages: getRulesMessages(state, props),
-        rulesCompulsoryFields: getCompulsory(state, props),
-        rulesDisabledFields: getDisabled(state, props),
+        ruleEffects: {
+            hiddenFields: getHiddenFields(state, props),
+            messages: getRulesMessages(state, props),
+            compulsoryFields: getCompulsory(state, props),
+            disabledFields: getDisabled(state, props),
+        },
         loadNr: state.forms[props.formId].loadNr,
     });
     return mapStateToProps;
@@ -35,8 +37,15 @@ const mapDispatchToProps = (dispatch: any) => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
 
-    const mergedProps = ownProps.onUpdateField ? { ...defaultMergedProps, onUpdateField: ownProps.onUpdateField } : defaultMergedProps;
+    const mergedProps = ownProps.onUpdateField ?
+        { ...defaultMergedProps, onUpdateField: ownProps.onUpdateField } :
+        defaultMergedProps;
     return mergedProps;
 };
 
-export const D2SectionFields = connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })(D2SectionFieldsComponent);
+export const D2SectionFields = connect(
+    makeMapStateToProps,
+    mapDispatchToProps,
+    mergeProps,
+    { forwardRef: true },
+)(D2SectionFieldsComponent);

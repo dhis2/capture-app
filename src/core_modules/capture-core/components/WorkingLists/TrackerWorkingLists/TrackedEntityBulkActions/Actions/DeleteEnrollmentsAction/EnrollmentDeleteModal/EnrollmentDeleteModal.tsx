@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
@@ -113,6 +113,7 @@ const EnrollmentDeleteModalPlain = ({
             <ModalContent>
                 <div className={classes.modalContent}>
                     <div>
+                        {/* eslint-disable-next-line max-len */}
                         {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
                     </div>
 

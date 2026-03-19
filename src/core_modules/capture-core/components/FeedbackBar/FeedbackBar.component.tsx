@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions, AlertStack, AlertBar } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { FeedbackBarComponentProps } from './FeedbackBar.types';
@@ -9,7 +9,7 @@ const styles = {
         marginTop: '5px',
     },
     actionContainer: {
-        paddingRight: 2,
+        paddingInlineEnd: 2,
     },
 };
 
@@ -53,4 +53,5 @@ const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
     );
 };
 
-export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain) as ComponentType<FeedbackBarComponentProps>;
+export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain) as
+    ComponentType<FeedbackBarComponentProps>;

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacers } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntry.types';
 import { BulkDataEntryPlugin } from './BulkDataEntryPlugin';
@@ -9,6 +9,9 @@ import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
 const styles = () => ({
     container: {
         margin: spacers.dp16,
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
     },
 });
 

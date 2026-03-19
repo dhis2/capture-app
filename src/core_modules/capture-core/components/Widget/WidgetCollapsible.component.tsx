@@ -1,7 +1,8 @@
+/* eslint-disable complexity */
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
-import { WithStyles, withStyles } from '@material-ui/core';
-import cx from 'classnames';
-import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
+import { colors, spacers, IconChevronUp24, IconChevronDown24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import type { WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
@@ -24,9 +25,9 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: spacersNum.dp16,
+        padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp8} ${spacers.dp12}`,
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: 15,
         color: colors.grey800,
     },
     children: {
@@ -51,7 +52,7 @@ const styles = {
         },
     },
     toggleButton: {
-        margin: `0 0 0 ${spacersNum.dp4}px`,
+        marginInlineStart: spacersNum.dp4,
         height: '24px',
         borderRadius: '3px',
         color: colors.grey600,
@@ -59,14 +60,12 @@ const styles = {
             background: colors.grey200,
             color: colors.grey800,
         },
-        '&.open': {
-            animation: 'flipOpen 200ms normal forwards linear',
+        '&:focus:not(:focus-visible)': {
+            outline: 'none',
         },
-        '&.close': {
-            animation: 'flipClose 200ms normal forwards linear',
-        },
-        '&.closeinit': {
-            transform: 'rotateX(180deg)',
+        '&:focus-visible': {
+            outline: '2px solid',
+            outlineColor: colors.grey800,
         },
     },
     '@keyframes slidein': {
@@ -76,14 +75,6 @@ const styles = {
     '@keyframes slideout': {
         from: { transform: 'scaleY(1)' },
         to: { transform: 'scaleY(0)' },
-    },
-    '@keyframes flipOpen': {
-        from: { transform: 'rotateX(180deg)' },
-        to: { transform: 'rotateX(0)' },
-    },
-    '@keyframes flipClose': {
-        from: { transform: 'rotateX(0)' },
-        to: { transform: 'rotateX(180deg)' },
     },
 };
 
@@ -101,8 +92,7 @@ const WidgetCollapsiblePlain = ({
 }: Props) => {
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
-    const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
-    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const initialRenderRef = useRef(true);
 
     useEffect(() => {
@@ -114,8 +104,6 @@ const WidgetCollapsiblePlain = ({
         if (!animationsReady) {
             setAnimationsReadyStatus(true);
         }
-
-        setPostEffectOpenStatus(open);
 
         clearTimeout(hideChildrenTimeoutRef.current as ReturnType<typeof setTimeout>);
         if (open) {
@@ -139,13 +127,10 @@ const WidgetCollapsiblePlain = ({
                     {header}
                     <IconButton
                         dataTest="widget-open-close-toggle-button"
-                        className={cx(classes.toggleButton, {
-                            closeinit: !animationsReady && !postEffectOpen,
-                            open: animationsReady && postEffectOpen,
-                            close: animationsReady && !postEffectOpen })}
+                        className={classes.toggleButton}
                         onClick={open ? onClose : onOpen}
                     >
-                        <IconChevronUp24 />
+                        {open ? <IconChevronUp24 /> : <IconChevronDown24 />}
                     </IconButton>
                 </div>
             </div>

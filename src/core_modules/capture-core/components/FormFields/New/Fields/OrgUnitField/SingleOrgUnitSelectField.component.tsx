@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Chip, colors } from '@dhis2/ui';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
@@ -24,7 +24,7 @@ type OrgUnitValue = {
 };
 
 type SingleOrgUnitSelectFieldState = {
-    previousOrgUnitId: any;
+    previousOrgUnitId: string | null;
 };
 
 type SingleOrgUnitSelectFieldProps = {
@@ -52,7 +52,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     onDeselectOrgUnit = () => {
-        this.props.value && this.setState({ previousOrgUnitId: { id: this.props.value.id } });
+        this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
         this.props.onBlur(null);
     }
 

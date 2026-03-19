@@ -2,6 +2,7 @@ import type { Geometry } from './helpers/types';
 import type {
     DataEntryFormConfig,
 } from '../../DataEntries/common/TEIAndEnrollment';
+import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
 
 export type PlainProps = {
     dataEntryId: string;
@@ -18,7 +19,8 @@ export type PlainProps = {
     errorsMessages: Array<{ id: string; message: string }>;
     warningsMessages: Array<{ id: string; message: string }>;
     center?: Array<number>;
-    orgUnit: { id: string };
+    orgUnitId: string;
+    pluginContext?: PluginContext;
 };
 
 export type Props = {

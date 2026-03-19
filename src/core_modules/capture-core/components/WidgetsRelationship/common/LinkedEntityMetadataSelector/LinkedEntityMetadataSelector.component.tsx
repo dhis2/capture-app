@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps, LinkedEntityMetadata, Side } from './linkedEntityMetadataSelector.types';
 
 const styles: Readonly<any> = {

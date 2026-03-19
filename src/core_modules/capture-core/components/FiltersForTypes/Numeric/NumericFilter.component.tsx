@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import {
     isValidNumber,
-    isValidInteger,
+    isValidIntegerInRange,
+    isValidPercentage,
     isValidPositiveInteger,
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
+    isValidInteger,
 } from 'capture-core-utils/validators/form';
-import { MinNumericFilter } from './Min.component';
-import { MaxNumericFilter } from './Max.component';
+import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
-import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
@@ -26,8 +26,7 @@ const getStyles: any = (theme: any) => ({
     },
     toLabelContainer: {
         paddingTop: theme.typography.pxToRem(6),
-        paddingLeft: theme.typography.pxToRem(10),
-        paddingRight: theme.typography.pxToRem(10),
+        paddingInline: theme.typography.pxToRem(10),
         fontSize: theme.typography.body1.fontSize,
     },
     error: {
@@ -42,16 +41,22 @@ const getStyles: any = (theme: any) => ({
 type Value = {
     min?: string | null,
     max?: string | null,
-} | null;
+} | undefined;
 
 type Props = {
-    onCommitValue: (value: { min?: string | null, max?: string | null} | null) => void,
+    onCommitValue: (value: { min?: string | null, max?: string | null } | undefined, isBlur?: boolean) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
 };
 
-class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>> implements UpdatableFilterContent<Value> {
+type State = {
+    committedValue: Value;
+};
+
+class NumericFilterPlain
+    extends Component<Props & WithStyles<typeof getStyles>, State>
+    implements UpdatableFilterContent<Value> {
     static validateField(value: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
         if (!value) {
             return {
@@ -65,24 +70,35 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
         return {
             isValid,
-            error: isValid ? null : i18n.t(NumericFilterPlain.errorMessages[type]),
+            error: isValid ? null : NumericFilterPlain.errorMessages[type],
         };
     }
 
-    static isFilterValid(minValue: string | null | undefined, maxValue: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
-        if (!NumericFilterPlain.validateField(minValue, type).isValid || !NumericFilterPlain.validateField(maxValue, type).isValid) {
+    static isFilterValid(
+        minValue: string | null | undefined,
+        maxValue: string | null | undefined,
+        type: typeof dataElementTypes[keyof typeof dataElementTypes],
+    ) {
+        if (!NumericFilterPlain.validateField(minValue, type).isValid ||
+            !NumericFilterPlain.validateField(maxValue, type).isValid) {
             return false;
         }
 
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
     }
 
-    maxD2TextFieldInstance: D2TextField | null = null;
+    constructor(props: Props & WithStyles<typeof getStyles>) {
+        super(props);
+        this.state = {
+            committedValue: props.value,
+        };
+    }
+
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
-        if (!value) {
-            return null;
+        if (!value || (!value.min && !value.max)) {
+            return undefined;
         }
         return getNumericFilterData(value);
     }
@@ -93,20 +109,23 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
     }
 
     static errorMessages = {
-        MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
-        [dataElementTypes.NUMBER]: 'Please provide a valid number',
-        [dataElementTypes.INTEGER]: 'Please provide a valid integer',
-        [dataElementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
-        [dataElementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
-        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
+        MIN_GREATER_THAN_MAX: i18n.t('Minimum value cannot be greater than maximum value'),
+        [dataElementTypes.NUMBER]: i18n.t('Please provide a valid number'),
+        [dataElementTypes.INTEGER]: i18n.t('Please provide a valid integer'),
+        [dataElementTypes.PERCENTAGE]: i18n.t('Please provide an integer between 0 and 100'),
+        [dataElementTypes.INTEGER_POSITIVE]: i18n.t('Please provide a positive integer'),
+        [dataElementTypes.INTEGER_NEGATIVE]: i18n.t('Please provide a negative integer'),
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: i18n.t('Please provide zero or a positive integer'),
     };
 
     static validatorForTypes = {
         [dataElementTypes.NUMBER]: isValidNumber,
-        [dataElementTypes.INTEGER]: isValidInteger,
-        [dataElementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
-        [dataElementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
-        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
+        [dataElementTypes.PERCENTAGE]: isValidPercentage,
+        [dataElementTypes.INTEGER]: (v: string) => isValidInteger(v) && isValidIntegerInRange(v),
+        [dataElementTypes.INTEGER_POSITIVE]: (v: string) => isValidIntegerInRange(v) && isValidPositiveInteger(v),
+        [dataElementTypes.INTEGER_NEGATIVE]: (v: string) => isValidIntegerInRange(v) && isValidNegativeInteger(v),
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: (v: string) =>
+            isValidIntegerInRange(v) && isValidZeroOrPositiveInteger(v),
     };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
@@ -118,39 +137,35 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
         return Object
             .keys(valueObject)
             .filter(key => valueObject[key])
-            .length > 0 ? valueObject : null;
+            .length > 0 ? valueObject : undefined;
     }
 
-    handleEnterKeyInMin = () => {
-        // focus Max
-        this.maxD2TextFieldInstance?.focus();
-    }
-
-    handleEnterKeyInMax = (value: {[key: string]: string}) => {
-        // validate with updated values
+    handleEnterKey = (value: {[key: string]: string}) => {
         const values = this.getUpdatedValue(value);
-
+        this.setState({ committedValue: values });
         if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
-            this.props.onCommitValue(values);
+            this.props.onCommitValue(values, true);
         } else {
-            this.props.onUpdate(values || null);
+            this.props.onUpdate(values);
         }
     }
 
     handleFieldBlur = (value: {[key: string]: string}) => {
-        this.props.onCommitValue(this.getUpdatedValue(value));
+        const updated = this.getUpdatedValue(value);
+        this.setState({ committedValue: updated });
+        this.props.onCommitValue(updated, true);
     }
 
-    handleFieldChange = (value: {[key: string]: string}) => {
-        this.props.onCommitValue(this.getUpdatedValue(value));
+    handleMinChange = (value: string) => {
+        this.props.onCommitValue(this.getUpdatedValue({ from: value }), false);
     }
 
-    setMaxD2TextFieldInstance = (instance: any) => {
-        this.maxD2TextFieldInstance = instance;
+    handleMaxChange = (value: string) => {
+        this.props.onCommitValue(this.getUpdatedValue({ to: value }), false);
     }
 
     getErrors() {
-        const values = this.props.value;
+        const values = this.state.committedValue;
         const minValue = values && values.min;
         const maxValue = values && values.max;
         const type = this.props.type;
@@ -160,7 +175,7 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
 
         let logicError = null;
         if (isMinValueValid && isMaxValueValid && minValue && maxValue && Number(minValue) > Number(maxValue)) {
-            logicError = i18n.t(NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX);
+            logicError = NumericFilterPlain.errorMessages.MIN_GREATER_THAN_MAX;
         }
 
         return {
@@ -179,13 +194,14 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                     <div
                         className={classes.inputContainer}
                     >
-                        <MinNumericFilter
+                        <NumericFilterInput
+                            field="min"
                             value={value && value.min}
                             error={minValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKeyInMin}
-                            onChange={this.handleFieldChange}
+                            onEnterKey={this.handleEnterKey}
+                            onChange={this.handleMinChange}
                         />
                     </div>
                     <div
@@ -196,18 +212,18 @@ class NumericFilterPlain extends Component<Props & WithStyles<typeof getStyles>>
                     <div
                         className={classes.inputContainer}
                     >
-                        <MaxNumericFilter
+                        <NumericFilterInput
+                            field="max"
                             value={value && value.max}
                             error={maxValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKeyInMax}
-                            textFieldRef={this.setMaxD2TextFieldInstance}
-                            onChange={this.handleFieldChange}
+                            onEnterKey={this.handleEnterKey}
+                            onChange={this.handleMaxChange}
                         />
                     </div>
                 </div>
-                <div className={classNames(classes.error, classes.logicErrorContainer)}>
+                <div className={cx(classes.error, classes.logicErrorContainer)}>
                     {logicError}
                 </div>
             </div>

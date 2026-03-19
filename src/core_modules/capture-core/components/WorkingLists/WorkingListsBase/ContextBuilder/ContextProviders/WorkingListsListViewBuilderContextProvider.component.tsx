@@ -6,7 +6,6 @@ import type { Props } from './workingListsListViewBuilderContextProvider.types';
 
 export const WorkingListsListViewBuilderContextProvider = ({
     updating,
-    updatingWithDialog,
     selectedRows,
     allRowsAreSelected,
     selectionInProgress,
@@ -30,7 +29,6 @@ export const WorkingListsListViewBuilderContextProvider = ({
 }: Props) => {
     const listViewBuilderContextData = useMemo(() => ({
         updating,
-        updatingWithDialog,
         dataSource,
         selectedRows,
         allRowsAreSelected,
@@ -52,7 +50,6 @@ export const WorkingListsListViewBuilderContextProvider = ({
         bulkActionBarComponent,
     }), [
         updating,
-        updatingWithDialog,
         dataSource,
         selectedRows,
         allRowsAreSelected,

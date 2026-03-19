@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { withStyles, withTheme, WithStyles } from '@material-ui/core/styles';
+import { withStyles, withTheme, WithStyles } from 'capture-core-utils/styles';
 import { IconButton, DateField as UIDateField, orientations } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 const getStyles = () => ({
@@ -39,8 +39,9 @@ const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
         ...passOnProps
     } = props;
 
-    const handleClear = () => {
+    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         onBlur && onBlur(null, {});
+        event.currentTarget.blur();
     };
 
     const isVertical = orientation === orientations.VERTICAL;
@@ -57,7 +58,7 @@ const DateFieldPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     return (
         <div
-            className={classNames(classes.fieldsContainer, {
+            className={cx(classes.fieldsContainer, {
                 [classes.fieldsContainerVertical]: isVertical,
             })}
         >

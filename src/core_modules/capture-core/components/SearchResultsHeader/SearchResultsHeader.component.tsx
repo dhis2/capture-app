@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import type { CurrentSearchTerms } from '../SearchBox';
@@ -7,10 +7,14 @@ import { convertValue } from '../../converters/clientToList';
 
 const styles = (theme: any) => ({
     topSection: {
-        marginTop: theme.typography.pxToRem(20),
-        marginLeft: theme.typography.pxToRem(10),
-        marginRight: theme.typography.pxToRem(10),
-        marginBottom: theme.typography.pxToRem(10),
+        marginBlockStart: theme.typography.pxToRem(8),
+        marginInlineStart: 0,
+        marginInlineEnd: 0,
+        marginBlockEnd: 0,
+    },
+    resultsTitle: {
+        marginTop: 0,
+        marginBlockEnd: 4,
     },
 });
 
@@ -24,7 +28,14 @@ type SearchResultsHeaderProps = Props & WithStyles<typeof styles>;
 const SearchResultsHeaderPlain =
   ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderProps) =>
       (<div data-test="search-results-top" className={classes.topSection} >
-          {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
+          <p className={classes.resultsTitle}>
+              {currentSearchScopeName
+                  ? i18n.t('Results found in {{currentSearchScopeName}}', {
+                      currentSearchScopeName,
+                      interpolation: { escapeValue: false },
+                  })
+                  : i18n.t('Results found')}
+          </p>
           {currentSearchTerms && <div>
               {
                   currentSearchTerms.map(({ name, value, id, type }, index, rest) => (

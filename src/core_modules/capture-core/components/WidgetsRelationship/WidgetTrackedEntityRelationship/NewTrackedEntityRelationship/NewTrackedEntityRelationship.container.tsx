@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp16} ${spacers.dp24} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} ${spacers.dp12} ${spacers.dp12}`,
     },
 };
 

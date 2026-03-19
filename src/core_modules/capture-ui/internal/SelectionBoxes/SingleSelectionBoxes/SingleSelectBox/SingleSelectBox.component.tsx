@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './singleSelectBox.module.css';
 import type { OptionRendererInputData } from '../../selectBoxes.types';
 import type { KeyboardManager } from '../../../../internal/SelectionBoxes/withKeyboardNavigation';
@@ -97,7 +97,7 @@ export class SingleSelectBox extends React.Component<Props> {
             <div>
                 <label
                     htmlFor={id}
-                    className={classNames(defaultClasses.label, { [defaultClasses.labelDisabled]: disabled })}
+                    className={cx(defaultClasses.label, { [defaultClasses.labelDisabled]: disabled })}
                 >
                     <input
                         ref={inputRef}
@@ -121,8 +121,8 @@ export class SingleSelectBox extends React.Component<Props> {
                     >
                         <div
                             className={inFocus
-                                ? classNames(defaultClasses.inFocus, focusClass)
-                                : classNames(unFocusClass)
+                                ? cx(defaultClasses.inFocus, focusClass)
+                                : cx(unFocusClass)
                             }
                         />
                         <div

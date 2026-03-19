@@ -19,10 +19,10 @@ export const withInternalChangeHandler = () =>
                 this.state = { value };
             }
 
-            UNSAFE_componentWillReceiveProps(nextProps: Props & P) {
-                if (nextProps.value !== this.props.value) {
+            componentDidUpdate(prevProps: Props & P) {
+                if (this.props.value !== prevProps.value) {
                     this.setState({
-                        value: nextProps.value,
+                        value: this.props.value,
                     });
                 }
             }

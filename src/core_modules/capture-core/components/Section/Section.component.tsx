@@ -1,7 +1,7 @@
 import { colors } from '@dhis2/ui';
 import React, { Component, type ReactElement, type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { cx } from '@emotion/css';
 
 const styles: Readonly<any> = {
     container: {
@@ -13,7 +13,7 @@ const styles: Readonly<any> = {
     },
     mainActionButton: {
         position: 'absolute',
-        right: 15,
+        insetInlineEnd: 15,
         top: 30,
     },
 };
@@ -37,7 +37,9 @@ class SectionPlain extends Component<Props> {
     getHeader() {
         const orgHeader = this.props.header;
 
-        if (orgHeader && React.isValidElement(orgHeader) && (orgHeader.type as any)?.name === 'SectionHeaderSimple' && this.props.onChangeCollapseState) {
+        if (orgHeader && React.isValidElement(orgHeader) &&
+            (orgHeader.type as any)?.name === 'SectionHeaderSimple' &&
+            this.props.onChangeCollapseState) {
             const clonedHeader = React.cloneElement(orgHeader as any, {
                 onChangeCollapseState: this.props.onChangeCollapseState,
                 isCollapsed: this.props.isCollapsed,
@@ -80,7 +82,7 @@ class SectionPlain extends Component<Props> {
 
     render() {
         const { style, className } = this.props;
-        const containerClass = classNames(this.props.classes.container, className);
+        const containerClass = cx(this.props.classes.container, className);
         return (
             <div className={containerClass} style={style}>
                 {this.renderContents()}

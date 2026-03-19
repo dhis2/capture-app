@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Assignee } from './WidgetAssignee.types';
 import { UserField } from '../FormFields/UserField';
 
@@ -13,7 +13,7 @@ const styles = () => ({
     searchContainer: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingRight: 5,
+        paddingInlineEnd: 5,
     },
     buttonContainer: {
         marginTop: spacers.dp8,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
@@ -12,7 +12,7 @@ export const getStyles = (theme: any) => ({
         overflowY: 'auto',
     },
     selectBoxesInnerContainer: {
-        marginLeft: 12,
+        marginInlineStart: 12,
     },
 }) as const;
 

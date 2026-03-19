@@ -114,6 +114,7 @@ const valueConvertersForType = {
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
+    [dataElementTypes.PERCENTAGE_RANGE]: value => convertRangeForDisplay((v: number) => `${stringifyNumber(v)} %`, value),
     [dataElementTypes.POLYGON]: convertPolygonForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,
     [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(undefined, value),
@@ -136,7 +137,8 @@ export function convertValue(value: any, type: keyof typeof dataElementTypes, da
 }
 
 
-// This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
+// This function will replace the convertValue function in the future
+// (as it should not require a dataElement class to use optionSet)
 export function convert(
     value: any,
     type: keyof typeof dataElementTypes,

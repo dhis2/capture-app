@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Card } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { NewRelationship } from '../../NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
@@ -22,7 +22,7 @@ const getStyles = (theme: any) => ({
         ...theme.typography.title,
         fontSize: 18,
         fontWeight: 500,
-        paddingLeft: 8,
+        paddingInlineStart: 8,
     },
     newRelationshipPaper: {
         marginBottom: theme.typography.pxToRem(10),

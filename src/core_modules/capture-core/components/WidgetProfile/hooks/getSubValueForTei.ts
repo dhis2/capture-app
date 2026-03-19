@@ -1,5 +1,5 @@
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { dataElementTypes } from '../../../metaData';
-import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 import type { Attribute, SubValueFunctionParams } from './hooks.types';
 
@@ -32,7 +32,8 @@ const getImageResourceSubvalue = async ({ attribute }: SubValueFunctionParams) =
 
     const urls = featureAvailable(FEATURES.trackerImageEndpoint) ? {
         url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
-        previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}&dimension=small`,
+        previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image` +
+            `?program=${programId}&dimension=small`,
     } : {
         url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image?program=${programId}`,
         previewUrl: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image?program=${programId}&dimension=SMALL`,

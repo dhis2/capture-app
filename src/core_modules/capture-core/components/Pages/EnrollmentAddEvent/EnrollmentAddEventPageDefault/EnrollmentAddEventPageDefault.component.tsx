@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import {
@@ -23,7 +23,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
     rightColumn: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingLeft: spacersNum.dp16,
+        paddingInlineStart: spacersNum.dp16,
         width: 360,
         display: 'flex',
         flexDirection: 'column',
@@ -54,7 +54,7 @@ const EnrollmentAddEventPagePain = ({
     onAccessLostFromTransfer,
     classes,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     if (pageFailure) {
         return (
             <div>

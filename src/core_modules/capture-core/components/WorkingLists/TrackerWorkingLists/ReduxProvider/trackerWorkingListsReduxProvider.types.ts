@@ -94,7 +94,6 @@ export type TrackerWorkingListsReduxProviderOutputProps = {
     templates?: TrackerWorkingListsTemplates,
     templatesLoading: boolean,
     updating: boolean,
-    updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void
     onOpenBulkDataEntryPlugin?: (trackedEntities?: string[]) => void;

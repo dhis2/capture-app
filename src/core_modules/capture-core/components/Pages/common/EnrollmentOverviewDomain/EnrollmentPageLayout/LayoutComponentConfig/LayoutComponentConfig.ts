@@ -1,32 +1,36 @@
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type { Props as TrackedEntityRelationshipProps } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps } from
+    '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
-import { WidgetFeedback } from '../../../../../WidgetFeedback';
-import { WidgetIndicator } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentNote } from '../../../../../WidgetEnrollmentNote';
 import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
 import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
 import type { Props as WidgetEnrollmentProps } from '../../../../../WidgetEnrollment/enrollment.types';
-import type { Props as NewEventWorkspaceWrapperProps } from '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
+import type { Props as NewEventWorkspaceWrapperProps } from
+    '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
 import type { Props as WidgetEventEditProps } from '../../../../../WidgetEventEdit/widgetEventEdit.types';
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
 import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
 import { WidgetEventNote } from '../../../../../WidgetEventNote';
 import { WidgetAssignee } from '../../../../../WidgetAssignee';
-import type {
-    IndicatorProps,
-    Props as WidgetFeedbackProps,
-    InputFeedbackProps,
-    InputIndicatorProps,
-} from '../../../../../WidgetFeedback/WidgetFeedback.types';
+import {
+    WidgetFeedback,
+    type FeedbackProps,
+    type FeedbackInputProps,
+} from '../../../../../WidgetFeedback';
+import {
+    WidgetIndicator,
+    type IndicatorProps,
+    type IndicatorInputProps,
+} from '../../../../../WidgetIndicator';
 import { WidgetTwoEventWorkspace } from '../../../../../WidgetTwoEventWorkspace';
 import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
 import {
@@ -108,18 +112,18 @@ export const WarningWidget: WidgetConfig = {
 export const FeedbackWidget: WidgetConfig = {
     Component: WidgetFeedback,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
-    getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
+    getProps: ({ widgetEffects, feedbackEmptyText }: FeedbackInputProps): FeedbackProps => ({
         feedback: widgetEffects?.feedbacks as any,
-        emptyText: feedbackEmptyText,
+        feedbackEmptyText,
     }),
 };
 
 export const IndicatorWidget: WidgetConfig = {
     Component: WidgetIndicator,
     shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
-    getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
+    getProps: ({ widgetEffects, indicatorEmptyText }: IndicatorInputProps): IndicatorProps => ({
         indicators: widgetEffects?.indicators as any,
-        emptyText: indicatorEmptyText,
+        indicatorEmptyText,
     }),
 };
 

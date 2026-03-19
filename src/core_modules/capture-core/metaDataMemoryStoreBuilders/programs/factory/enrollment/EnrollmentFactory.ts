@@ -136,6 +136,33 @@ export class EnrollmentFactory {
         return section;
     }
 
+    async _addLeftoversSection(
+        enrollmentForm: RenderFoundation,
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute> | null,
+    ) {
+        if (!cachedProgramTrackedEntityAttributes) return;
+
+        // Check if there exist attributes which are not assigned to a section
+        const attributesInSection = enrollmentForm.getElements().reduce((acc, attribute) => {
+            acc.add(attribute.id);
+            return acc;
+        }, new Set());
+
+        const unassignedAttributes = cachedProgramTrackedEntityAttributes
+            .filter(attribute => !attributesInSection.has(attribute.trackedEntityAttributeId));
+
+        if (unassignedAttributes.length === 0) return;
+
+        // Create a special section for the unassigned attributes
+        const section = new Section((o) => {
+            o.id = Section.LEFTOVERS_SECTION_ID;
+            o.group = Section.groups.ENROLLMENT;
+        });
+
+        await this._buildElementsForSection(unassignedAttributes, section);
+        enrollmentForm.addSection(section);
+    }
+
     async _buildElementsForSection(
         cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
         section: Section,
@@ -221,7 +248,8 @@ export class EnrollmentFactory {
             section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode as any);
         } catch (error) {
             log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
-                template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
+                template: dataEntryForm.htmlCode, error, method: 'buildEnrollment',
+            }));
         }
         return enrollmentForm;
     }
@@ -294,7 +322,10 @@ export class EnrollmentFactory {
 
                         if (!sectionMetadata && cachedProgramSections && cachedProgramSections.length > 0) {
                             log.warn(
-                                errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                errorCreator(
+                                    `Could not find metadata for section. This could indicate that your form
+                                    configuration may be out of sync with your metadata.`,
+                                )(
                                     { sectionId: formConfigSection.id },
                                 ),
                             );
@@ -328,6 +359,9 @@ export class EnrollmentFactory {
             );
             section && enrollmentForm.addSection(section);
         }
+
+        await this._addLeftoversSection(enrollmentForm, cachedProgramTrackedEntityAttributes);
+
         return enrollmentForm;
     }
 
@@ -340,10 +374,12 @@ export class EnrollmentFactory {
             o.description = searchGroupElement.description;
             o.displayInForms = true;
             o.displayInReports = searchGroupElement.displayInReports;
+            o.minCharactersToSearch = searchGroupElement.minCharactersToSearch;
             o.compulsory = searchGroupElement.compulsory;
             o.disabled = searchGroupElement.disabled;
             o.type = teiAttribute.valueType;
             o.optionSet = searchGroupElement.optionSet;
+            o.searchOperator = searchGroupElement.searchOperator;
         });
         return element;
     }
@@ -395,7 +431,7 @@ export class EnrollmentFactory {
         programSearchGroups: Array<SearchGroup> = [],
     ) {
         const inputSearchGroups: Array<InputSearchGroup> = programSearchGroups
-            .filter(searchGroup => !searchGroup.unique)
+            .filter(searchGroup => searchGroup.id === 'main')
             .map(searchGroup => new InputSearchGroup((o) => {
                 o.id = searchGroup.id;
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;

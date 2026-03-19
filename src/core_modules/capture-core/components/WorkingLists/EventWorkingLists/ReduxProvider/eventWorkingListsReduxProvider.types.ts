@@ -101,7 +101,6 @@ export type EventWorkingListsReduxOutputProps = {
     templates?: EventWorkingListsTemplates,
     templatesLoading: boolean,
     updating: boolean,
-    updatingWithDialog: boolean,
     viewPreloaded?: boolean,
     templateSharingType: string,
 };

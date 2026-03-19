@@ -1,9 +1,17 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Filters } from './Filters.component';
-import type { Column, FiltersOnly, AdditionalFilters, UpdateFilter, ClearFilter, RemoveFilter, StickyFilters } from '../types';
+import type {
+    Column,
+    FiltersOnly,
+    AdditionalFilters,
+    UpdateFilter,
+    ClearFilter,
+    RemoveFilter,
+    StickyFilters,
+} from '../types';
 
 const getStyles: Readonly<any> = {
     filtersButtons: {
@@ -20,7 +28,7 @@ const getStyles: Readonly<any> = {
         borderRadius: spacersNum.dp4,
         border: `1px solid ${colors.grey400}`,
         marginTop: spacersNum.dp4,
-        marginLeft: spacersNum.dp16,
+        marginInlineStart: spacersNum.dp16,
         padding: spacersNum.dp4,
         display: 'flex',
         alignItems: 'baseline',

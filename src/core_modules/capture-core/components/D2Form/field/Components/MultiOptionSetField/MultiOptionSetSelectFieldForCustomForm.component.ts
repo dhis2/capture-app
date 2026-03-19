@@ -3,7 +3,6 @@ import {
     withSelectMultiTranslations,
     withGotoInterface,
     withHideCompatibility,
-    withDefaultShouldUpdateInterface,
     withFocusSaver,
     withCalculateMessages,
     withDisplayMessages,
@@ -21,18 +20,16 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export const MultiOptionSetSelectFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDisplayMessages()(
-                                withSelectMultiTranslations()(
-                                    withCustomElementContainer(getContainerClass)(
-                                        withOptionsIconElement()(
-                                            withRulesOptionVisibilityHandler()(
-                                                MultiSelectField,
-                                            ),
+        withDisabledFieldCalculation()(
+            withRequiredFieldCalculation()(
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDisplayMessages()(
+                            withSelectMultiTranslations()(
+                                withCustomElementContainer(getContainerClass)(
+                                    withOptionsIconElement()(
+                                        withRulesOptionVisibilityHandler()(
+                                            MultiSelectField,
                                         ),
                                     ),
                                 ),

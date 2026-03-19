@@ -72,7 +72,15 @@ const getStatusQueryArgs = (filter: string) => {
     return statusQueryArgs;
 };
 
-const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null, mainColumns: { [id: string]: any}) => {
+const getOrgUnitFilterQueryArgs = (filter: string) => {
+    const orgUnitModeKey = featureAvailable(FEATURES.newOrgUnitModeQueryParam) ? 'orgUnitMode' : 'ouMode';
+    return {
+        orgUnitId: filter.replace('eq:', ''),
+        [orgUnitModeKey]: 'SELECTED',
+    };
+};
+
+const getMainApiFilterQueryArguments = (filters: { [id: string]: any } | null, mainColumns: { [id: string]: any}) => {
     const mainFilterQueryArgs =
         filters ?
             Object
@@ -88,6 +96,8 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null,
                         queryArgsForCurrentMain = getStatusQueryArgs(filter);
                     } else if (key === 'assignee') {
                         queryArgsForCurrentMain = filter;
+                    } else if (key === 'orgUnitId') {
+                        queryArgsForCurrentMain = getOrgUnitFilterQueryArgs(filter);
                     }
                     return {
                         ...accMainQueryArgs,
@@ -98,7 +108,10 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: string} | null,
     return mainFilterQueryArgs;
 };
 
-const getApiCategoriesQueryArgument = (categories: { [id: string]: string} | null, categoryCombinationId?: string | null) => {
+const getApiCategoriesQueryArgument = (
+    categories: { [id: string]: string} | null,
+    categoryCombinationId?: string | null,
+) => {
     if (!categories || !categoryCombinationId) {
         return null;
     }
@@ -149,7 +162,7 @@ export const createApiQueryArgs = (queryArgs: any, mainColumns: any, categoryCom
         ...getApiCategoriesQueryArgument(queryArgs.categories, categoryCombinationId),
     };
 
-    apiQueryArgs.order.includes('default') && delete apiQueryArgs.order;
+    apiQueryArgs.order?.includes('default') && delete apiQueryArgs.order;
     apiQueryArgs.hasOwnProperty('categories') && delete apiQueryArgs.categories;
     apiQueryArgs.hasOwnProperty('sortById') && delete apiQueryArgs.sortById;
     apiQueryArgs.hasOwnProperty('sortByDirection') && delete apiQueryArgs.sortByDirection;

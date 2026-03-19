@@ -1,6 +1,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { UserField } from '../../../../../FormFields/UserField/UserField.component';
 
 const getStyles: any = () => ({
@@ -17,7 +17,7 @@ const getStyles: any = () => ({
     label: {
         flexBasis: 200,
         fontSize: 14,
-        paddingLeft: 5,
+        paddingInlineStart: 5,
         color: 'rgba(0, 0, 0, 0.87)',
     },
     field: {

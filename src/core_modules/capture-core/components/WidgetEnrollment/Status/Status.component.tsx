@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Tag, spacersNum } from '@dhis2/ui';
 import { plainStatus, translatedStatus } from '../constants/status.const';
 import type { Props } from './status.types';

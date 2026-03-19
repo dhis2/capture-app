@@ -12,6 +12,8 @@ export type Column = {
     filterHidden?: boolean;
     additionalColumn?: boolean;
     unique?: boolean;
+    searchOperator?: string;
+    minCharactersToSearch?: number;
 };
 
 export type Columns = Array<Column>;
@@ -117,7 +119,6 @@ export type InterfaceProps = {
     sortByDirection: string;
     stickyFilters: StickyFilters;
     updating: boolean;
-    updatingWithDialog: boolean;
     onRowSelect: (id: string) => void;
     programStageId?: string;
     selectedRows: { [key: string]: boolean };

@@ -1,10 +1,10 @@
 import { ofType } from 'redux-observable';
 import { catchError, mergeMap, concatMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
+import type { ReduxStore, ApiUtils, ReduxAction } from 'capture-core-utils/types';
 import { actionTypes, orgUnitFetched } from './coreOrgUnit.actions';
 import { fetchCoreOrgUnit } from './fetchCoreOrgUnit';
 import type { FetchOrgUnitPayload } from './coreOrgUnit.types';
-import type { ReduxStore, ApiUtils, ReduxAction } from '../../../capture-core-utils/types';
 
 export const getCoreOrgUnitEpic = (
     action$: any,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
@@ -19,14 +19,15 @@ type OrgUnitTreeProps = {
     roots: Array<Record<string, any>>;
     onSelectClick: (payload: any) => void;
     treeKey: string;
-    previousOrgUnitId?: any;
+    previousOrgUnitId?: string | null;
+    selected?: string[];
 };
 
 type Props = OrgUnitTreeProps & WithStyles<typeof getStyles>;
 
 const OrgUnitTreePlain = (props: Props) => {
-    const { roots, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
-    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
+    const { roots, classes, treeKey, previousOrgUnitId, onSelectClick, selected } = props;
+    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId ?? undefined);
     const getExpandedItems = () => {
         if (roots && roots.length === 1) {
             return [`/${roots[0].id}`];
@@ -34,13 +35,6 @@ const OrgUnitTreePlain = (props: Props) => {
             return roots.map(root => root.path);
         }
 
-        return undefined;
-    };
-
-    const getHighlightedItems = () => {
-        if (previousSelectedOrgUnit?.path) {
-            return [previousSelectedOrgUnit?.path];
-        }
         return undefined;
     };
 
@@ -90,11 +84,13 @@ const OrgUnitTreePlain = (props: Props) => {
                 handleExpand={handleExpand}
                 handleCollapse={handleCollapse}
                 singleSelection
-                selected={getHighlightedItems()}
+                selected={selected}
                 onChange={onSelectClick}
             />
         </div>
     );
 };
 
-export const OrgUnitTree = withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain));
+export const OrgUnitTree = withStyles(getStyles)(
+    withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain),
+);

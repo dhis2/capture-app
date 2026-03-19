@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import React, { useState } from 'react';
 import {
     Button,
@@ -95,6 +95,7 @@ const CompleteActionPlain = ({
                 <div className={classes.container}>
                     <span>
                         {hasPartiallyUploadedEnrollments ?
+                            // eslint-disable-next-line max-len
                             i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.') :
                             i18n.t('There was an error while completing the enrollments. Please see the details below.')
                         }
@@ -137,7 +138,9 @@ const CompleteActionPlain = ({
         if (enrollmentCounts.active === 0) {
             return (
                 <div className={classes.container}>
-                    {i18n.t('There are currently no active enrollments in the selection. All enrollments are already completed or cancelled.')}
+                    {i18n.t('There are currently no active enrollments in the selection.')}
+                    {' '}
+                    {i18n.t('All enrollments are already completed or cancelled.')}
                 </div>
             );
         }

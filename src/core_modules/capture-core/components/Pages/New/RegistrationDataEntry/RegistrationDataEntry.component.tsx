@@ -2,7 +2,7 @@ import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
-import { WithStyles, withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { OwnProps, ContainerProps } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
@@ -11,7 +11,8 @@ import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
-import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { navigateToEnrollmentOverview } from
+    '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
@@ -35,8 +36,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         marginTop: typography.pxToRem(16),
     },
     registrationContainer: {
-        marginLeft: typography.pxToRem(8),
-        marginRight: typography.pxToRem(8),
+        marginInline: typography.pxToRem(8),
     },
     marginBottom: {
         marginBottom: spacers.dp16,
@@ -77,7 +77,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
         </Button>
         {
             onSave &&
-            <div style={{ marginLeft: 8 }}>
+            <div style={{ marginInlineStart: 8 }}>
                 <Button
                     dataTest="create-as-new-person"
                     onClick={onSave}
@@ -156,8 +156,10 @@ const RegistrationDataEntryPlain = ({
     ), []);
 
     const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }: { teiId: string }) => {
-        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
-        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
+        const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks
+        // -- This is valid because the callback here is a React component
+        const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks
+        // -- This is valid because the callback here is a React component
 
         return (
             <Button
@@ -185,7 +187,6 @@ const RegistrationDataEntryPlain = ({
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
                             onSelect={handleRegistrationScopeSelection}
-                            headerText={i18n.t('Create for')}
                             footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
                             accessNeeded="write"
                         />
@@ -253,7 +254,6 @@ const RegistrationDataEntryPlain = ({
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
                             onSelect={handleRegistrationScopeSelection}
-                            headerText={i18n.t('Create for')}
                             footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
                             accessNeeded="write"
                         />
@@ -277,7 +277,10 @@ const RegistrationDataEntryPlain = ({
                             />
                         </div>
                         {dataEntryIsReady && (
-                            <div id="right-column-tracked-entity-type-registration-data-entry" className={classes.rightColumn}>
+                            <div
+                                id="right-column-tracked-entity-type-registration-data-entry"
+                                className={classes.rightColumn}
+                            >
                                 <DataEntryWidgetOutput
                                     selectedScopeId={selectedScopeId}
                                     dataEntryId={dataEntryId}
@@ -302,4 +305,5 @@ const RegistrationDataEntryPlain = ({
     );
 };
 
-export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as ComponentType<OwnProps & ContainerProps>;
+export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as
+    ComponentType<OwnProps & ContainerProps>;

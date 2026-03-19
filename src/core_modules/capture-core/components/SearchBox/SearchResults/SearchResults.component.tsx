@@ -4,7 +4,7 @@ import React, {
     useState,
     useEffect,
 } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
@@ -26,11 +26,11 @@ export const getStyles = (theme: any) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
         width: theme.typography.pxToRem(600),
     },
     bottom: {
-        marginLeft: theme.typography.pxToRem(8),
+        marginInlineStart: theme.typography.pxToRem(8),
     },
     bottomText: {
         color: colors.grey800,
@@ -71,7 +71,7 @@ const SearchResultsIndex = ({
     const availableSearchGroup =
         currentSearchScopeType === searchScopes.PROGRAM
             ? getTrackerProgramThrowIfNotFound(currentSearchScopeId)
-                .trackedEntityType.searchGroups.find(group => !group.unique)
+                .trackedEntityType.searchGroups.find(group => group.id === 'main')
             : undefined;
 
     const handlePageChange = (newPage: any) => {

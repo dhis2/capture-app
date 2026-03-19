@@ -2,7 +2,7 @@ import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
@@ -10,14 +10,19 @@ import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
-import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
-import type { PlainProps, Props } from './newEventWorkspace.types';
+import {
+    addEnrollmentEventPageDefaultActionTypes,
+} from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
+import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 const styles: Readonly<any> = () => ({
     innerWrapper: {
-        padding: `0 ${spacersNum.dp16}px`,
+        padding: `0 ${spacersNum.dp12}px`,
+    },
+    tabs: {
+        marginBottom: spacersNum.dp16,
     },
 });
 
@@ -32,7 +37,7 @@ const NewEventWorkspacePlain = ({
     onSave,
     classes,
     ...passOnProps
-}: PlainProps) => {
+}: Props & WithStyles<typeof styles>) => {
     const { tab } = useLocationQuery();
     const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
@@ -62,26 +67,28 @@ const NewEventWorkspacePlain = ({
                 }
             >
                 <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
-                    <TabBar dataTest="new-event-tab-bar">
-                        <Tab
-                            key="report-tab"
-                            selected={mode === tabMode.REPORT}
-                            onClick={() => onHandleSwitchTab(tabMode.REPORT)}
-                            dataTest="new-event-report-tab"
-                        >{i18n.t('Report')}</Tab>
-                        <Tab
-                            key="schedule-tab"
-                            selected={mode === tabMode.SCHEDULE}
-                            onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
-                            dataTest="new-event-schedule-tab"
-                        >{i18n.t('Schedule')}</Tab>
-                        {/* <Tab
+                    <div className={classes.tabs}>
+                        <TabBar dataTest="new-event-tab-bar">
+                            <Tab
+                                key="report-tab"
+                                selected={mode === tabMode.REPORT}
+                                onClick={() => onHandleSwitchTab(tabMode.REPORT)}
+                                dataTest="new-event-report-tab"
+                            >{i18n.t('Report')}</Tab>
+                            <Tab
+                                key="schedule-tab"
+                                selected={mode === tabMode.SCHEDULE}
+                                onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
+                                dataTest="new-event-schedule-tab"
+                            >{i18n.t('Schedule')}</Tab>
+                            {/* <Tab
                             key="refer-tab"
                             selected={mode === tabMode.REFER}
                             onClick={() => onHandleSwitchTab(tabMode.REFER)}
                             dataTest="new-event-refer-tab"
                         >{i18n.t('Refer')}</Tab> */}
-                    </TabBar>
+                        </TabBar>
+                    </div>
                     {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
                         programId={programId}
                         stageId={stageId}

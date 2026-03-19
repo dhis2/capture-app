@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -20,10 +20,9 @@ import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
-        marginLeft: theme.typography.pxToRem(10),
+        marginInline: theme.typography.pxToRem(10),
         marginTop: theme.typography.pxToRem(20),
         marginBottom: theme.typography.pxToRem(28),
-        marginRight: theme.typography.pxToRem(10),
     },
     loadingMask: {
         display: 'flex',
@@ -57,7 +56,10 @@ export const SearchStatusPlain = ({
                 <ModalActions>
                     <ButtonStrip end>
                         <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms as any)}>
-                            {i18n.t(`Create new ${trackedEntityName}`)}
+                            {i18n.t('Create new {{trackedEntityName}}', {
+                                trackedEntityName,
+                                interpolation: { escapeValue: false },
+                            })}
                         </Button>
                         <Button
                             disabled={searchStatus === searchBoxStatus.LOADING}
@@ -84,10 +86,9 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-error-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('An error has occurred')} error>
-                    {i18n.t(
-                        'There is a problem with this search, please change the search terms or try again later.' +
-                            'For more details open the Console tab of the Developer tools ',
-                    )}
+                    {i18n.t('There is a problem with this search, please change the search terms or try again later.')}
+                    {' '}
+                    {i18n.t('For more details open the Console tab of the Developer tools')}
                 </NoticeBox>
             </div>
         );
@@ -97,10 +98,9 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-too-many-results-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('Too many results')} warning>
-                    {i18n.t(
-                        'This search returned too many results to show. Try changing search terms or searching ' +
-                            'by more attributes to narrow down the results.',
-                    )}
+                    {i18n.t('This search returned too many results to show.')}
+                    {' '}
+                    {i18n.t('Try changing search terms or searching by more attributes to narrow down the results.')}
                 </NoticeBox>
             </div>
         );
@@ -136,7 +136,10 @@ export const SearchStatusPlain = ({
             <Modal position="middle" onClose={showInitialSearchBox}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
                 <ModalContent>
-                    {i18n.t(`Please fill in ${uniqueTEAName} to search`)}
+                    {i18n.t('Please fill in {{uniqueTEAName}} to search', {
+                        uniqueTEAName,
+                        interpolation: { escapeValue: false },
+                    })}
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>

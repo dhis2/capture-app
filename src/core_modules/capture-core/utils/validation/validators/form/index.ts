@@ -8,3 +8,4 @@ export { getDateTimeRangeValidator } from './getDateTimeRangeValidator';
 export { getNumberRangeValidator } from './getNumberRangeValidator';
 export { getTimeRangeValidator } from './getTimeRangeValidator';
 export { isValidNonFutureAge } from './isValidNonFutureAge';
+export { isValidMinCharactersToSearch } from './isValidMinCharactersToSearch';

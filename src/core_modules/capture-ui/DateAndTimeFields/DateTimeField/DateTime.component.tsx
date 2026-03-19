@@ -2,8 +2,8 @@ import React, { useState, useRef, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
-import classNames from 'classnames';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { cx } from '@emotion/css';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
@@ -27,8 +27,9 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
     const [dateError, setDateError] = useState({ error: null, errorCode: null });
     const touchedFields = useRef(new Set());
 
-    const handleClear = () => {
+    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         onBlur(null, {}, {});
+        event.currentTarget.blur();
     };
 
     const handleTimeChange = useCallback((timeValue: string) => {
@@ -112,7 +113,7 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
 
     return (
         <div
-            className={classNames(defaultClasses.fieldsContainer, {
+            className={cx(defaultClasses.fieldsContainer, {
                 [defaultClasses.fieldsContainerVertical]: isVertical,
             })}
         >
@@ -153,6 +154,12 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
     );
 };
 
-const styles = {};
+const styles = (theme: any) => ({
+    innerInputError: {
+        color: theme.palette.error.main,
+        padding: theme.typography.pxToRem(3),
+        fontSize: theme.typography.pxToRem(12),
+    },
+});
 
 export const DateTimeField = withStyles(styles)(DateTimeFieldPlain);

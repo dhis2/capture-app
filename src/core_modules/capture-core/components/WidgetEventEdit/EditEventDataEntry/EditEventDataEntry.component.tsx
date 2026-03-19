@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
 import type { RenderFoundation } from '../../../metaData';
-import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
     DataEntry,
@@ -30,11 +30,13 @@ import {
     withCalculateMessages,
     withDisplayMessages,
     withDefaultFieldContainer,
-    withDefaultShouldUpdateInterface,
-    VirtualizedSelectField,
+    SingleSelectField,
     SingleOrgUnitSelectField,
+    withFilterProps,
+    withConditionalTooltip,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
+import { eventStatuses } from '../constants/status.const';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -50,18 +52,17 @@ import {
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
 import type { UserFormField } from '../../FormFields/UserField';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: any): Readonly<any> => ({
+const getStyles = (): Readonly<any> => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },
@@ -119,15 +120,13 @@ const buildReportDateSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
-                            ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
                         ),
                     ),
                 ),
@@ -159,24 +158,22 @@ const buildScheduleDateSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                            customTooltip: () => {
-                                const isScheduleableStatus =
-                                [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        customTooltip: () => {
+                            const isScheduleableStatus =
+                            [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
 
-                                return isScheduleableStatus ?
-                                    i18n.t('Go to “Schedule” tab to reschedule this event') :
-                                    i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
-                                        { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
-                            },
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
-                            ),
+                            return isScheduleableStatus ?
+                                i18n.t('Go to “Schedule” tab to reschedule this event') :
+                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
+                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
+                        },
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
                         ),
                     ),
                 ),
@@ -209,16 +206,14 @@ const buildOrgUnitSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
                             ),
                         ),
                     ),
@@ -248,14 +243,13 @@ const buildOrgUnitSettingsFn = () => {
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
-                    ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
                 ),
             ),
         ),
@@ -265,20 +259,18 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
 const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
-                    ),
+            withLabel({
+                onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: any) =>
+                    `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+            })(
+                withDisplayMessages()(
+                    withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
                 ),
             ),
         ),
     ),
 );
-
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: any) => {
@@ -324,26 +316,43 @@ const buildCompleteFieldSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(TrueOnlyField),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withConditionalTooltip((props: any) => {
+                                    const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+                                    const canUncompleteEvent = props.canUncompleteEvent;
+                                    const shouldDisable = isEventCompleted && !canUncompleteEvent;
+                                    return shouldDisable
+                                        ? i18n.t('You do not have access to uncomplete this event')
+                                        : undefined;
+                                })(TrueOnlyField),
                             ),
                         ),
                     ),
                 ),
             ),
         );
+
     const completeSettings = {
         getComponent: () => completeComponent,
-        getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
-            id: 'complete',
-        }),
+        getComponentProps: (props: any) => {
+            const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+            const canUncompleteEvent = props.canUncompleteEvent;
+            const shouldDisable = isEventCompleted && !canUncompleteEvent;
+
+            return createComponentProps(props, {
+                label: i18n.t('Complete event'),
+                id: 'complete',
+                disabled: shouldDisable,
+                eventStatus: props.eventStatus,
+                canUncompleteEvent: props.canUncompleteEvent,
+            });
+        },
         getPropName: () => 'complete',
         getValidatorContainers: () => [],
         getMeta: () => ({
@@ -361,16 +370,15 @@ const getCategoryOptionsSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
-                                ),
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleSelectField),
                             ),
                         ),
                     ),
@@ -441,6 +449,7 @@ type Props = {
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
+    canUncompleteEvent?: boolean;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;

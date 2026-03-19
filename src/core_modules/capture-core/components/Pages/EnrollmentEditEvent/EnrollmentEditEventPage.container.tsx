@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import type { ProgramRule } from '@dhis2/rules-engine-javascript';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
@@ -24,7 +24,6 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
-import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -75,7 +74,9 @@ type PageStatusParams = {
     event: Record<string, unknown>;
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }: PageStatusParams) => {
+const getPageStatus = ({
+    orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event,
+}: PageStatusParams) => {
     if (isLoading) {
         return pageStatuses.LOADING;
     }
@@ -149,7 +150,9 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const { program } = useProgramInfo(programId);
     const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
-    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules as ProgramRule[]));
+    const hideWidgets = useHideWidgetByRuleLocations(
+        program?.programRules.concat(programStage?.programRules as ProgramRule[]),
+    );
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
@@ -209,6 +212,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const onAddNew = () => {
         navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
+
     const onCancelEditEvent = useCallback((isScheduled: boolean) => {
         if (isScheduled) {
             navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
@@ -232,16 +236,16 @@ const EnrollmentEditEventPageWithContextPlain = ({
         );
     };
 
-    const onHandleScheduleSave = (eventData: Record<string, unknown>) => {
+    const onHandleScheduleSave = useCallback((eventData: Record<string, unknown>) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
         navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    };
+    }, [dispatch, navigate, enrollmentId, eventId]);
 
-    const onSaveExternal = () => {
+    const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
         navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    };
+    }, [navigate, enrollmentId, eventId, queryClient]);
 
     const onBackToViewEvent = () => {
         dispatch(cancelEditEventDataEntry());

@@ -24,13 +24,14 @@ const baseComponentStylesVertical = {
     },
 };
 
-const getBaseProps = ({ formName, compulsory, disabled, unique, icon, description, url }: DataElement) => ({
+const getBaseProps = ({ formName, compulsory, disabled, unique, icon, description, url, searchOperator }: DataElement) => ({
     description,
     url,
     styles: baseComponentStyles,
     label: formName,
     metaCompulsory: compulsory,
     metaDisabled: disabled || (unique && unique.generatable),
+    searchOperator,
     icon: icon ? {
         name: icon.name,
         color: icon.color,
@@ -46,11 +47,16 @@ const getBaseFormHorizontalProps = (options: any) => ({
 
 export const createProps = (props: any | null, options: any, metaData: DataElement) => ({
     ...getBaseProps(metaData),
-    ...(options && options.formHorizontal ? getBaseFormHorizontalProps(options) : {}),
+    ...(options && options.formHorizontal ?
+        getBaseFormHorizontalProps(options) : {}),
     ...props,
 });
 
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: DataElement, querySingleResource: QuerySingleResource): FieldConfig => ({
+export const createFieldConfig = (
+    fieldSpecifications: FieldConfigForType,
+    metaData: DataElement,
+    querySingleResource: QuerySingleResource,
+): FieldConfig => ({
     ...getBaseConfigForField(metaData, querySingleResource),
     ...fieldSpecifications,
 });

@@ -50,7 +50,7 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
             <AssigneeFilter
                 value={this.state.value}
                 // @ts-expect-error - keeping original functionality as before ts rewrite
-                innerRef={filterTypeRef}
+                ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 {...passOnProps}
             />

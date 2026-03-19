@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector.component';
 import { TeiRelationship } from './TeiRelationship/TeiRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';
@@ -37,7 +37,11 @@ class NewRelationshipPlain extends React.Component<Props> {
             return;
         }
 
-        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.name }, entity, relationshipType.to.entity);
+        this.props.onAddRelationship(
+            { id: relationshipType.id, name: relationshipType.name },
+            entity,
+            relationshipType.to.entity,
+        );
     }
 
     renderRelationship = (selectedRelationshipType: SelectedRelationshipType, props: any) => {

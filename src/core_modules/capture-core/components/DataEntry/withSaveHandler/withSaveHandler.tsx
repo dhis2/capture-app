@@ -11,7 +11,8 @@ import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
-import { newEventSaveTypes } from '../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/newEventSaveTypes';
+import { newEventSaveTypes } from
+    '../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/newEventSaveTypes';
 import type {
     Props,
     State,
@@ -58,7 +59,6 @@ const getSaveHandler = (
         }
 
         static errorMessages = {
-            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
             FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
         };
 
@@ -174,7 +174,8 @@ const getSaveHandler = (
 
         handleSave = (saveType?: string | null) => {
             const { onSave, itemId, id, calculatedFoundation, warnings, errors } = this.props;
-            if (saveType === addEventSaveTypes.COMPLETE && ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
+            if (saveType === addEventSaveTypes.COMPLETE &&
+                ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
                 this.showMessagesPopup(saveType);
             } else {
                 onSave(itemId, id, calculatedFoundation, saveType);
@@ -183,7 +184,7 @@ const getSaveHandler = (
 
         getDialogWaitForUploadContents = () => (
             <div>
-                {i18n.t('Some operations are still runnning. Please wait..')}
+                {i18n.t('Some operations are still running. Please wait.')}
             </div>
         );
 
@@ -278,6 +279,7 @@ const getSaveHandler = (
                 calculatedFoundation: foundation,
                 sectionsInitialised: reduxSections && Object.values(reduxSections)
                     .every(({ valid }: any) => valid !== undefined),
+                completeDataEntryFieldValue: state.dataEntriesFieldsValue[key]?.complete,
             };
         };
 

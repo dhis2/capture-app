@@ -3,9 +3,9 @@ export { TextField } from './Fields/TextField/TextField.component';
 export { BooleanField } from './Fields/BooleanField/BooleanField.component';
 export { AgeField } from './Fields/AgeField/AgeField.component';
 export { TrueOnlyField } from './Fields/TrueOnlyField/TrueOnlyField.component';
-export { VirtualizedSelectField } from './Fields/VirtualizedSelectField/VirtualizedSelectField.component';
+export { SingleSelectField } from './Fields/SingleSelectField/SingleSelectField.component';
 export { MultiSelectField } from './Fields/MultiSelectField/MultiSelectField.component';
-export { withSelectTranslations } from './Fields/VirtualizedSelectField/withTranslations';
+export { withSelectSingleTranslations } from './Fields/SingleSelectField/withTranslations';
 export { withSelectMultiTranslations } from './Fields/MultiSelectField/withTranslations';
 export { SelectionBoxes } from './Fields/SelectionBoxes/SelectionBoxes.component';
 export { DateField } from './Fields/DateAndTimeFields/DateField/DateField.component';
@@ -23,8 +23,8 @@ export { DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeFiel
 export { withCalculateMessages } from './HOC/messages/withCalculateMessages';
 export { withConvertedOptionSet } from './HOC/withConvertedOptionSet';
 export { withDisplayMessages } from './HOC/messages/withDisplayMessages';
+export { withSearchHelpMessage } from './HOC/messages/withSearchHelpMessage';
 export { withDefaultFieldContainer } from './HOC/withDefaultFieldContainer';
-export { withDefaultShouldUpdateInterface } from './HOC/withDefaultShouldUpdateInterface';
 export { withFilterProps } from './HOC/withFilterProps';
 export { withGotoInterface } from './HOC/withGotoInterface';
 export { withHideCompatibility } from './HOC/withHideCompatibility';
@@ -33,6 +33,7 @@ export { withStyledContainer } from './HOC/withStyledContainer';
 export { withOptionsIconElement } from './HOC/withOptionsIconElement';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 export { withCenterPoint } from './HOC/withCenterPoint';
+export { withConditionalTooltip } from './HOC/withConditionalTooltip';
 
 // OrgUnit HOCs
 export {

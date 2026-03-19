@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DividerHorizontal as Divider } from 'capture-ui';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
@@ -17,7 +17,7 @@ import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 
 const styles = (theme: any) => ({
     wrapper: {
-        paddingLeft: spacersNum.dp16,
+        paddingInlineStart: spacersNum.dp16,
         minWidth: '300px',
     },
     evenNumbersRecords: {

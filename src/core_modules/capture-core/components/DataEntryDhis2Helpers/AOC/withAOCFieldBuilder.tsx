@@ -1,6 +1,6 @@
 import React, { type ComponentType, useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import log from 'loglevel';
-import { makeCancelablePromise, errorCreator } from '../../../../capture-core-utils';
+import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import { useCategoryCombinations } from './useCategoryCombinations';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
@@ -56,7 +56,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         };
 
         const loadCagoryOptions = useCallback(() => {
-            setCategories([]);
+            setCategories(undefined);
             cancelablePromiseRef.current?.cancel();
 
             let currentRequestCancelablePromises: any;
@@ -85,7 +85,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
                 .catch((error: any) => {
                     if (!(error && (error.aborted || error.isCanceled))) {
                         log.error(
-                            errorCreator('An error occured loading category options')({ error }),
+                            errorCreator('An error occurred loading category options')({ error }),
                         );
                         setCategories([]);
                     }

@@ -6,14 +6,17 @@ import {
     Section,
     SearchGroup,
     DataElement,
+    DataElementUnique,
     dataElementTypes,
 } from '../../../../metaData';
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers';
+import { UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES } from '../../../../utils/warnings';
 import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
+import { getSearchOperator } from './searchOperator';
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -31,14 +34,12 @@ const searchAttributeElementTypes = {
     [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
     [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
     [dataElementTypes.MULTI_TEXT]: dataElementTypes.TEXT,
+    [dataElementTypes.PERCENTAGE]: dataElementTypes.PERCENTAGE_RANGE,
 };
 
 
 export class SearchGroupFactory {
-    static errorMessages = {
-        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
-    };
-    static _getSearchAttributeValueType(valueType: string, isUnique?: boolean | null) {
+    static _getSearchAttributeValueType(valueType: string, isUnique: DataElementUnique | null) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
         return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
     }
@@ -81,27 +82,29 @@ export class SearchGroupFactory {
                 description,
                 unique,
                 valueType,
+                minCharactersToSearch,
             } = searchAttribute.trackedEntityAttribute;
 
             o.id = id;
             o.name =
-              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayName;
+                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+                || displayName;
 
             o.shortName =
-              this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
-              || displayShortName;
+                this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
+                || displayShortName;
 
             o.formName =
-              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayFormName;
+                this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+                || displayFormName;
 
             o.description =
-              this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
-              || description;
+                this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
+                || description;
 
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
+            o.minCharactersToSearch = minCharactersToSearch;
             o.disabled = false;
             o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });
@@ -117,6 +120,8 @@ export class SearchGroupFactory {
                 value => value,
             );
         }
+
+        element.searchOperator = getSearchOperator(searchAttribute.trackedEntityAttribute);
 
         return element;
     }
@@ -146,11 +151,29 @@ export class SearchGroupFactory {
         searchGroupAttributes: Array<SearchAttribute>,
         minAttributesRequiredToSearch: number,
     ) {
+        const { supportedAttributes, unsupportedAttributes } = searchGroupAttributes.reduce(
+            (acc, attr) => {
+                const valueType = attr.trackedEntityAttribute?.valueType;
+                const isUnsupported = valueType && UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType as any);
+                if (key === 'main' && isUnsupported) {
+                    acc.unsupportedAttributes.push(attr);
+                } else {
+                    acc.supportedAttributes.push(attr);
+                }
+                return acc;
+            },
+            { supportedAttributes: [] as SearchAttribute[], unsupportedAttributes: [] as SearchAttribute[] },
+        );
+
         const searchGroup = new SearchGroup();
-        searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
+        searchGroup.searchForm = await this._buildRenderFoundation(supportedAttributes);
+        searchGroup.unsupportedAttributes = unsupportedAttributes;
+
         if (key === 'main') {
             searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
             searchGroup.id = 'main';
+        } else if (key === 'nonSearchable') {
+            searchGroup.id = 'nonSearchable';
         } else {
             searchGroup.unique = true;
             searchGroup.id = 'unique';
@@ -165,26 +188,36 @@ export class SearchGroupFactory {
         if (!trackedEntityAttribute) {
             log.error(
                 errorCreator(
-                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified or the trackedEntityAttribute could not be retrieved from the cache')(
+                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified ' +
+                    'or the trackedEntityAttribute could not be retrieved from the cache')(
                     { attribute }),
             );
         }
         return trackedEntityAttribute;
     }
 
-    build(searchAttributes: ReadonlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<SearchGroup[]> {
+    build(
+        searchAttributes: ReadonlyArray<InputSearchAttribute>,
+        minAttributesRequiredToSearch: number,
+    ): Promise<SearchGroup[]> {
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
                 trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
             }))
             .filter(attribute =>
-                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
+                attribute.trackedEntityAttribute)
             .reduce((accGroups: any, attribute) => {
-                if (attribute.trackedEntityAttribute!.unique) {
+                const valueType = attribute.trackedEntityAttribute!.valueType;
+                const isUnsupported = UNSUPPORTED_SEARCH_ATTRIBUTE_TYPES.has(valueType);
+                if (attribute.trackedEntityAttribute!.unique && !isUnsupported) {
                     accGroups[attribute.trackedEntityAttribute!.id] = [attribute];
-                } else {
+                } else if (attribute.searchable) {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
+                } else {
+                    accGroups.nonSearchable = accGroups.nonSearchable
+                        ? [...accGroups.nonSearchable, attribute]
+                        : [attribute];
                 }
                 return accGroups;
             }, {});

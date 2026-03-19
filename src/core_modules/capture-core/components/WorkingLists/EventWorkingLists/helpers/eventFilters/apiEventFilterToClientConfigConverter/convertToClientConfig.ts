@@ -13,12 +13,15 @@ import {
     type BooleanFilterData,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type TimeFilterData,
     type NumericFilterData,
+    type OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
     ApiDataFilterText,
+    ApiDataFilterOrgUnit,
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiEventQueryCriteria,
@@ -36,9 +39,18 @@ const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     };
 };
 
+const getOrgUnitFilter = (filter: ApiDataFilterOrgUnit): OrgUnitFilterData => ({
+    value: filter.eq,
+});
+
 const getNumericFilter = (filter: ApiDataFilterNumeric): NumericFilterData => ({
     ge: filter.ge ? Number(filter.ge) : undefined,
     le: filter.le ? Number(filter.le) : undefined,
+});
+
+const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
 });
 
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
@@ -76,6 +88,17 @@ const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null
     return undefined;
 };
 
+const getDateTimeFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData | null | undefined => {
+    if (dateFilter.type === apiDateFilterTypes.ABSOLUTE) {
+        return {
+            type: dateFilter.type,
+            ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+            le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString() : undefined,
+        };
+    }
+    return undefined;
+};
+
 const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
     querySingleResource({
         resource: `userLookup/${userId}`,
@@ -86,7 +109,7 @@ const getUser = (userId: string, querySingleResource: QuerySingleResource) =>
             username,
         }))
         .catch((error) => {
-            log.error(errorCreator('An error occured retrieving assignee user')({ error, userId }));
+            log.error(errorCreator('An error occurred retrieving assignee user')({ error, userId }));
             return null;
         });
 
@@ -118,23 +141,39 @@ const getAssigneeFilter = async (
 };
 
 const getFilterByType = {
-    [filterTypesObject.TEXT]: getTextFilter,
-    [filterTypesObject.NUMBER]: getNumericFilter,
-    [filterTypesObject.INTEGER]: getNumericFilter,
-    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
-    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.AGE]: getDateFilter,
     [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.COORDINATE]: getTextFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.DATETIME]: getDateTimeFilter,
+    [filterTypesObject.EMAIL]: getTextFilter,
+    [filterTypesObject.FILE_RESOURCE]: getTextFilter,
+    [filterTypesObject.IMAGE]: getTextFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.LONG_TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.ORGANISATION_UNIT]: getOrgUnitFilter,
+    [filterTypesObject.PERCENTAGE]: getNumericFilter,
+    [filterTypesObject.PHONE_NUMBER]: getTextFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.TIME]: getTimeFilter,
     [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.URL]: getTextFilter,
+    [filterTypesObject.USERNAME]: getTextFilter,
 };
+
+const VALID_BOOLEAN_VALUES = new Set(['true', 'false']);
 
 const isOptionSetFilter = (type: keyof typeof dataElementTypes, filter: any) => {
     if (filterTypesObject.BOOLEAN === type) {
-        const validBooleanValues = ['true', 'false'];
-        return filter.in.some(value => !validBooleanValues.includes[value]);
+        const allValuesAreBoolean = filter.in.every((value: string) =>
+            VALID_BOOLEAN_VALUES.has(value),
+        );
+        return !allValuesAreBoolean;
     }
-
     return filter.in;
 };
 
@@ -163,7 +202,8 @@ const getSortOrder = (
 
 const getDataElementFilters = (
     filters: Array<ApiDataFilter> | null | undefined,
-    columnsMetaForDataFetching: ColumnsMetaForDataFetching): any[] => {
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+): any[] => {
     if (!filters) {
         return [];
     }
@@ -206,7 +246,10 @@ const getMainDataFilters = async (
     const { occurredAt, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters: any[] = [];
     if (status) {
-        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type), id: 'status' });
+        filters.push({
+            ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status')!.type),
+            id: 'status',
+        });
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
@@ -241,7 +284,10 @@ export async function convertToClientConfig(
         return acc;
     }, {});
 
-    const customColumnOrder = getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching) || undefined;
+    const customColumnOrder = getCustomColumnsConfiguration(
+        eventQueryCriteria && eventQueryCriteria.displayColumnOrder,
+        columnsMetaForDataFetching,
+    ) || undefined;
 
     return {
         filters,

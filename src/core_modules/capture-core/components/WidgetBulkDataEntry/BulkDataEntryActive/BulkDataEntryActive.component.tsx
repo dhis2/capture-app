@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { WithStyles, withStyles } from '@material-ui/core/styles';
+import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, Button, Tag } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryActive.types';
@@ -21,7 +21,7 @@ const styles: Readonly<any> = {
         display: 'flex',
     },
     tag: {
-        marginLeft: spacers.dp8,
+        marginInlineStart: spacers.dp8,
         flexShrink: 0,
         backgroundColor: `${colors.yellow200} !important`,
     },
@@ -48,4 +48,5 @@ const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, class
     </div>
 );
 
-export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as ComponentType<PlainProps>;
+export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as
+    ComponentType<PlainProps>;

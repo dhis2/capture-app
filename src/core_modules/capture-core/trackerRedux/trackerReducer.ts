@@ -83,10 +83,11 @@ const getProductionReducer =
             updateStatePartInProduction(state, action, reducerDescription.updaters, reducerDescription.initValue);
 
 const createLogAction = (action: Action) => {
-    const payloadOverride = action.meta && action.meta.skipLogging && action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
-        accSkipLogging[item] = null;
-        return accSkipLogging;
-    }, {});
+    const payloadOverride = action.meta && action.meta.skipLogging &&
+        action.meta.skipLogging.reduce((accSkipLogging: any, item: any) => {
+            accSkipLogging[item] = null;
+            return accSkipLogging;
+        }, {});
 
     return { ...action, payload: { ...action.payload, ...payloadOverride } };
 };
@@ -114,7 +115,10 @@ const getDevelopmentReducer = (reducerDescription: ReducerDescription) => {
 
 function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWrapper | Array<ReducerWrapper>) {
     if (isArray(reducerWrappers)) {
-        return (reducerWrappers as Array<ReducerWrapper>).reduceRight((prevReducer, currentReducer) => currentReducer(prevReducer), reducer);
+        return (reducerWrappers as Array<ReducerWrapper>).reduceRight(
+            (prevReducer, currentReducer) => currentReducer(prevReducer),
+            reducer,
+        );
     }
 
     return (reducerWrappers as ReducerWrapper)(reducer);

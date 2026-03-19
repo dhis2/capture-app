@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
@@ -40,7 +40,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
         >
             {i18n.t('Cancel')}
         </Button>
-        <div style={{ marginLeft: 16 }}>
+        <div style={{ marginInlineStart: 16 }}>
             <Button
                 dataTest="create-as-new-person"
                 onClick={onSave}
@@ -67,6 +67,7 @@ const RegisterTeiPlain = ({
     trackedEntityTypeId,
     selectedScopeId,
     inheritedAttributes,
+    isLoadingAttributes,
     classes,
 }: PlainProps) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
@@ -103,7 +104,7 @@ const RegisterTeiPlain = ({
                 <RegistrationSection
                     trackedEntityTypeId={trackedEntityTypeId}
                 />
-                <RegisterTeiDataEntry
+                {!isLoadingAttributes && <RegisterTeiDataEntry
                     onLink={onLink}
                     onCancel={onCancel}
                     onSaveWithoutEnrollment={onSaveWithoutEnrollment}
@@ -115,14 +116,11 @@ const RegisterTeiPlain = ({
                     renderDuplicatesCardActions={renderDuplicatesCardActions}
                     ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                     inheritedAttributes={inheritedAttributes}
-                />
+                />}
             </div>
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={selectedScopeId}
-                renderCardActions={({ item }) =>
-                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
-                }
             />
         </div>
     );

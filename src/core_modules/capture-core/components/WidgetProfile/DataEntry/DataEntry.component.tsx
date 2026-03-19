@@ -19,7 +19,8 @@ export const DataEntryComponent = ({
     onGetValidationContext,
     errorsMessages,
     warningsMessages,
-    orgUnit,
+    orgUnitId,
+    pluginContext,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>{i18n.t('Edit {{trackedEntityName}}',
@@ -27,9 +28,11 @@ export const DataEntryComponent = ({
         )}</ModalTitle>
         <ModalContent>
             {i18n.t(
-                'Change information about this {{trackedEntityName}} here. Information about this enrollment can be edited in the Enrollment widget.',
+                'Change information about this {{trackedEntityName}} here.',
                 { trackedEntityName, interpolation: { escapeValue: false } },
             )}
+            {' '}
+            {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
             <DataEntry
                 id={dataEntryId}
                 formFoundation={formFoundation}
@@ -37,7 +40,8 @@ export const DataEntryComponent = ({
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 onGetValidationContext={onGetValidationContext}
-                orgUnit={orgUnit}
+                orgUnitId={orgUnitId}
+                pluginContext={pluginContext}
             />
             <NoticeBoxes
                 errorsMessages={errorsMessages}
@@ -52,7 +56,7 @@ export const DataEntryComponent = ({
                 </Button>
                 {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
                     <Button loading primary>
-                        {i18n.t(' Loading...')}
+                        {i18n.t('Loading...')}
                     </Button>
                 )}
 

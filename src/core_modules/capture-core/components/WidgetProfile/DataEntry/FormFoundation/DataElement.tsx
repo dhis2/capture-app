@@ -71,7 +71,9 @@ const onValidateOnScopeTrackedEntityType = (
     return requestPromise
         .then((result) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-            const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+            const otherTrackedEntityInstances = apiTrackedEntities.filter(
+                (item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId,
+            );
             const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
@@ -153,7 +155,9 @@ const buildDataElementUnique = (
             }
             return requestPromise.then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(
+                    (item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId,
+                );
                 if (otherTrackedEntityInstances.length === 0) {
                     return onValidateOnScopeTrackedEntityType(
                         dataEntry,
@@ -291,9 +295,9 @@ const buildOptionSet = async (
         new Map(
             optionSetAPI.optionGroups.map(group => [
                 group.id,
-                new OptionGroup(function (this: OptionGroup) {
-                    this.id = group.id;
-                    this.optionIds = new Map(group.options.map((option: string) => [option, option]));
+                new OptionGroup((o) => {
+                    o.id = group.id;
+                    o.optionIds = new Map(group.options.map(option => [option, option]));
                 }),
             ]),
         );
@@ -348,5 +352,11 @@ export const buildDataElement = (
 
     return trackedEntityAttribute.valueType === dataElementTypes.DATE
         ? buildDateDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource)
-        : buildBaseDataElement(optionSets, programTrackedEntityAttribute, trackedEntityAttribute, querySingleResource, minorServerVersion);
+        : buildBaseDataElement(
+            optionSets,
+            programTrackedEntityAttribute,
+            trackedEntityAttribute,
+            querySingleResource,
+            minorServerVersion,
+        );
 };

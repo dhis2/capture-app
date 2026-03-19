@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import defaultClasses from './divider.module.css';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 export const DividerHorizontal = (props: Props) => {
     const { className, ...passOnProps } = props;
-    const calculatedClassNames = classNames(defaultClasses.horizontal, props.className);
+    const calculatedClassNames = cx(defaultClasses.horizontal, props.className);
 
     return (
         <div

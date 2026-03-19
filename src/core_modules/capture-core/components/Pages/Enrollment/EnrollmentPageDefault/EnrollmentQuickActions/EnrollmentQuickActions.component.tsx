@@ -1,7 +1,7 @@
 import React, { useState, useMemo, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core';
+import { colors, spacers, IconAdd16, IconCalendar16 } from '@dhis2/ui';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
@@ -11,9 +11,9 @@ import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.typ
 
 const styles = {
     contentContainer: {
-        padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} ${spacers.dp12} ${spacers.dp12}`,
         display: 'flex',
-        gap: spacers.dp8,
+        gap: spacers.dp4,
     },
 } as const;
 
@@ -74,7 +74,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                     data-test={'quick-action-button-container'}
                 >
                     <QuickActionButton
-                        icon={<IconAdd24 color={colors.grey700} />}
+                        icon={<IconAdd16 color={colors.grey700} />}
                         label={i18n.t('New event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
@@ -82,7 +82,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                     />
 
                     <QuickActionButton
-                        icon={<IconCalendar24 color={colors.grey700} />}
+                        icon={<IconCalendar16 color={colors.grey700} />}
                         label={i18n.t('Schedule an event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}

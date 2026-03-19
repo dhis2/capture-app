@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { CircularLoader, colors } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from 'capture-core-utils/styles';
 
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import isObject from 'd2-utilizr/lib/isObject';
 
 const styles = (theme: any) => ({
     base: {
         paddingTop: 10,
-        marginLeft: 0,
-        paddingLeft: 0,
+        marginInlineStart: 0,
+        paddingInlineStart: 0,
     },
     error: {
         color: colors.red600,
@@ -35,7 +35,7 @@ const styles = (theme: any) => ({
     validatingIndicator: {
         fontSize: 12,
         marginTop: 1,
-        marginRight: 4,
+        marginInlineEnd: 4,
     },
     listItem: {
         listStylePosition: 'inside',
@@ -90,7 +90,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             return (
                 <ul
                     data-test="error-message"
-                    className={classNames(baseClass, messageClass)}
+                    className={cx(baseClass, messageClass)}
                 >
                     {Array.isArray(text) ? text?.map(message => (
                         <li className={listItemClass}>

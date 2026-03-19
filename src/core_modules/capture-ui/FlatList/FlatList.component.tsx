@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
-import cx from 'classnames';
+import { cx } from '@emotion/css';
 import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from 'capture-core-utils/styles';
 import type { Props } from './flatList.types';
 
 const itemStyles = {
@@ -17,16 +17,18 @@ const styles = {
         display: 'flex',
         fontSize: '14px',
         lineHeight: '19px',
-        padding: `${spacersNum.dp12}px 0`,
+        padding: `${spacersNum.dp8}px 0`,
         '&.isLastItem': {
             borderBottomWidth: 0,
         },
     },
     itemKey: {
         flex: '0 0 auto',
-        width: '128px',
-        color: colors.grey600,
-        marginRight: '20px',
+        width: '110px',
+        color: colors.grey700,
+        marginInlineEnd: spacersNum.dp8,
+        fontSize: '13px',
+        lineHeight: '17px',
         ...itemStyles,
     },
     itemValue: {

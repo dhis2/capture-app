@@ -4,7 +4,7 @@ import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys } from 'capture-core/constants';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import type { ReduxAction } from '../../../../capture-core-utils/types';
+import type { ReduxAction } from 'capture-core-utils/types';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
@@ -30,6 +30,7 @@ import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
+    const eventStatus = state.viewEventPage?.loadedValues?.eventContainer?.event?.status;
 
     const dataEntryKey = `${props.dataEntryId}-${itemId}`;
     const orgUnitFieldValue = state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit;
@@ -44,6 +45,7 @@ const mapStateToProps = (state: any, props: any) => {
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
         eventData: state.enrollmentDomain?.enrollment?.events,
+        eventStatus,
     };
 };
 

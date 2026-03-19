@@ -11,19 +11,24 @@ import {
 type Props = {
     teiId: string;
     trackedEntityTypeId: string;
+    relationshipFromSideProgramId: string;
 };
 
 type Return = {
     inheritedAttributes: Array<InputAttribute>;
     isLoading: boolean;
 };
-export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
-    const programId = useSelector((state: any) => state.newRelationshipRegisterTei.programId);
+export const useInheritedAttributeValues = ({
+    teiId,
+    trackedEntityTypeId,
+    relationshipFromSideProgramId,
+}: Props): Return => {
+    const relationshipToSideProgramId = useSelector((state: any) => state.newRelationshipRegisterTei.programId);
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set();
 
-        if (programId) {
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+        if (relationshipToSideProgramId) {
+            const program = getProgramFromProgramIdThrowIfNotFound(relationshipToSideProgramId);
             if (program instanceof TrackerProgram) {
                 program.attributes.forEach((attribute) => {
                     if (attribute.inherit) {
@@ -41,17 +46,17 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
             }
         });
         return attributeIds;
-    }, [programId, trackedEntityTypeId]);
+    }, [relationshipToSideProgramId, trackedEntityTypeId]);
 
 
-    const { data, isLoading } = useApiDataQuery(
-        ['inheritedAttributeValues', teiId, programId],
+    const { data, isInitialLoading } = useApiDataQuery(
+        ['inheritedAttributeValues', teiId, relationshipFromSideProgramId],
         {
             resource: 'tracker/trackedEntities',
             id: teiId,
             params: {
                 fields: ['attributes'],
-                program: programId,
+                program: relationshipFromSideProgramId,
             },
         }, {
             enabled: !!teiId,
@@ -64,6 +69,6 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
 
     return {
         inheritedAttributes: data ?? [],
-        isLoading,
+        isLoading: isInitialLoading,
     };
 };

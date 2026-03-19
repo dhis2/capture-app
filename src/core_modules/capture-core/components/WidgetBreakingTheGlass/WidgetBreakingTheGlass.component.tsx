@@ -7,7 +7,7 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
 
@@ -19,7 +19,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         maxWidth: '1000px',
     },
     wrapper: {
-        padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        padding: `0 ${spacersNum.dp12}px ${spacersNum.dp16}px ${spacersNum.dp12}px`,
     },
 });
 
@@ -53,7 +53,9 @@ const WidgetBreakingTheGlassPlain = ({
                     </div>
                     <br />
                     <NoticeBox title={noticeBoxTitle} warning>
-                        {i18n.t('You must provide a reason to check for enrollments in this protected program. All activity will be logged.')}
+                        {i18n.t('You must provide a reason to check for enrollments in this protected program.')}
+                        {' '}
+                        {i18n.t('All activity will be logged.')}
                     </NoticeBox>
                     <br />
                     <TextAreaField

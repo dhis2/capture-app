@@ -1,4 +1,10 @@
-import type { WorkingListTemplate, AddTemplate, UpdateTemplate, DeleteTemplate, SetTemplateSharingSettings } from '../workingListsBase.types';
+import type {
+    WorkingListTemplate,
+    AddTemplate,
+    UpdateTemplate,
+    DeleteTemplate,
+    SetTemplateSharingSettings,
+} from '../workingListsBase.types';
 import type { CustomMenuContents } from '../../../ListView';
 import type { ListViewConfigOutputProps } from '../ListViewConfig';
 

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';
 import { Actions } from '../Actions';
 import { withEndColumnMenu } from '../withEndColumnMenu';
-import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../../List';
 import { ListViewMenu } from '../Menu';
 import type { Props } from './listViewMain.types';
@@ -34,6 +33,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
         gap: spacers.dp4,
     },
     paginationContainer: {
+        padding: theme.typography.pxToRem(8),
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
@@ -103,7 +103,6 @@ class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof ge
         const {
             classes,
             filters,
-            updatingWithDialog,
             onClickListRow,
             onRowSelect,
             onSelectAll,
@@ -137,7 +136,6 @@ class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof ge
                 {this.renderTopBar()}
                 {this.renderList()}
                 {this.renderPager()}
-                {this.props.updatingWithDialog && <DialogLoadingMask />}
             </div>
         );
     }

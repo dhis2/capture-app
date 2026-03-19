@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
-import { spacersNum } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
@@ -10,7 +9,7 @@ import type { Props } from './validated.types';
 
 const styles: Readonly<any> = {
     wrapper: {
-        paddingLeft: spacersNum.dp16,
+        paddingInlineStart: 0,
     },
 };
 
@@ -35,9 +34,6 @@ const ValidatedPlain = ({
         <Widget
             noncollapsible
             borderless
-            header={
-                <></>
-            }
         >
             <div className={classes.wrapper}>
                 {ready && (

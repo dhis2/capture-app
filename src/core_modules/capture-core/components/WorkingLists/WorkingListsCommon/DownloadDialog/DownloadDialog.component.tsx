@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import type { PlainProps } from './DownloadDialog.types';
@@ -11,7 +11,7 @@ const getStyles: Readonly<any> = {
         outline: 'none',
     },
     downloadLinkContainer: {
-        paddingRight: 5,
+        paddingInlineEnd: 5,
         paddingBottom: 5,
     },
     downloadContainer: {

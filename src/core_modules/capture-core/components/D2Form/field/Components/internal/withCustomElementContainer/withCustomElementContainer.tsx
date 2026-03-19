@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 
 type Props = {
     customFormElementProps: {
@@ -21,7 +21,7 @@ export const withCustomElementContainer = (onGetContainerClass?: OnGetContainerC
 
             render() {
                 const { customFormElementProps, ...passOnProps } = this.props;
-                const containerClass = classNames(customFormElementProps.className, this.defaultClass);
+                const containerClass = cx(customFormElementProps.className, this.defaultClass);
 
                 return (
                     <div

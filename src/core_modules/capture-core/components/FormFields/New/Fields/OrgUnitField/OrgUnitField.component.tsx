@@ -2,7 +2,7 @@ import { colors } from '@dhis2/ui';
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DebounceField } from 'capture-ui';
 import { OrgUnitTree } from './OrgUnitTree.component';
 
@@ -84,10 +84,9 @@ const OrgUnitFieldPlain = (props: Props) => {
                 orgUnits: {
                     resource: 'organisationUnits',
                     params: ({ variables: { searchText: currentSearchText } }) => ({
-                        fields: [
-                            'id,displayName,path,publicAccess,access,lastUpdated',
-                            'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                        ].join(','),
+                        fields:
+                            'id,displayName,path,publicAccess,access,lastUpdated'
+                            + ',children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                         paging: true,
                         query: currentSearchText,
                         withinUserSearchHierarchy: true,
@@ -109,6 +108,8 @@ const OrgUnitFieldPlain = (props: Props) => {
         }
     }, [refetchOrg, searchText]);
 
+    const selectedItems = selected ? [selected] : undefined;
+
     const renderOrgUnitTree = () => {
         if (searchText?.length) {
             return (<OrgUnitTree
@@ -116,7 +117,7 @@ const OrgUnitFieldPlain = (props: Props) => {
                 onSelectClick={onSelectClick}
                 ready={ready}
                 treeKey={key}
-                selected={selected}
+                selected={selectedItems}
             />);
         }
         return (<OrgUnitTree
@@ -124,7 +125,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             onSelectClick={onSelectClick}
             ready={ready}
             treeKey={'initial'}
-            selected={selected}
+            selected={selectedItems}
             previousOrgUnitId={previousOrgUnitId}
         />);
     };

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
-import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
+import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
@@ -37,8 +38,8 @@ const styles: Readonly<any> = (theme: any) => ({
         alignItems: 'center',
     },
     arrowIcon: {
-        marginLeft: 10,
-        marginRight: 10,
+        marginInlineStart: 10,
+        marginInlineEnd: 10,
         fontSize: 15,
     },
     relationshipActions: {
@@ -132,8 +133,8 @@ class RelationshipsPlain extends React.Component<Props> {
     renderRelationship = (relationship: Relationship) => {
         const { classes, onRemoveRelationship } = this.props;
         const canDelete = this.canDelete(relationship);
-        const relationshipDetailsClass = classNames(classes.relationshipDetails, {
-            [classes.relationshipHighlight]: this.shouldHighlightRelationship(relationship),
+        const relationshipDetailsClass = cx(classes.relationshipDetails, {
+            [classes.relationshipHighlight]: Boolean(this.shouldHighlightRelationship(relationship)),
         });
         return (
             <div className={classes.relationship} key={relationship.clientId}>
@@ -143,7 +144,7 @@ class RelationshipsPlain extends React.Component<Props> {
                     </div>
                     <div className={classes.relationshipEntities}>
                         {this.getEntityName(relationship.from)}
-                        <span className={classes.arrowIcon}> <IconArrowRight16 /> </span>
+                        <span className={classes.arrowIcon}> <DirectionalArrow /> </span>
                         {this.getEntityName(relationship.to)}
                     </div>
                 </div>
@@ -172,7 +173,9 @@ class RelationshipsPlain extends React.Component<Props> {
         this.renderRelationship(relationship))
 
     render() {
-        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton } = this.props;
+        const {
+            classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton,
+        } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (
             <div className={classes.container} ref={relationshipsRef}>
