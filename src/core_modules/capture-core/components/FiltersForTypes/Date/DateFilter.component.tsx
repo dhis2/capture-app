@@ -229,8 +229,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         value={{ from: objValue?.from, to: objValue?.to }}
                         submitAttempted={this.state.submitAttempted}
                         onFieldBlur={this.handleFieldBlur}
-                        onFieldChange={this.handleFieldChange}
-                        onKeyDown={this.handleKeyDown}
                     />
                 )}
                 {isRelativeRange && (

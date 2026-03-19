@@ -1,4 +1,3 @@
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
@@ -72,14 +71,6 @@ const getStatusQueryArgs = (filter: string) => {
     return statusQueryArgs;
 };
 
-const getOrgUnitFilterQueryArgs = (filter: string) => {
-    const orgUnitModeKey = featureAvailable(FEATURES.newOrgUnitModeQueryParam) ? 'orgUnitMode' : 'ouMode';
-    return {
-        orgUnitId: filter.replace('eq:', ''),
-        [orgUnitModeKey]: 'SELECTED',
-    };
-};
-
 const getMainApiFilterQueryArguments = (filters: { [id: string]: any } | null, mainColumns: { [id: string]: any}) => {
     const mainFilterQueryArgs =
         filters ?
@@ -96,8 +87,6 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: any } | null, m
                         queryArgsForCurrentMain = getStatusQueryArgs(filter);
                     } else if (key === 'assignee') {
                         queryArgsForCurrentMain = filter;
-                    } else if (key === 'orgUnitId') {
-                        queryArgsForCurrentMain = getOrgUnitFilterQueryArgs(filter);
                     }
                     return {
                         ...accMainQueryArgs,
