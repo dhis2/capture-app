@@ -56,7 +56,10 @@ export const SearchStatusPlain = ({
                 <ModalActions>
                     <ButtonStrip end>
                         <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms as any)}>
-                            {i18n.t(`Create new ${trackedEntityName}`)}
+                            {i18n.t('Create new {{trackedEntityName}}', {
+                                trackedEntityName,
+                                interpolation: { escapeValue: false },
+                            })}
                         </Button>
                         <Button
                             disabled={searchStatus === searchBoxStatus.LOADING}
@@ -133,7 +136,10 @@ export const SearchStatusPlain = ({
             <Modal position="middle" onClose={showInitialSearchBox}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
                 <ModalContent>
-                    {i18n.t(`Please fill in ${uniqueTEAName} to search`)}
+                    {i18n.t('Please fill in {{uniqueTEAName}} to search', {
+                        uniqueTEAName,
+                        interpolation: { escapeValue: false },
+                    })}
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>

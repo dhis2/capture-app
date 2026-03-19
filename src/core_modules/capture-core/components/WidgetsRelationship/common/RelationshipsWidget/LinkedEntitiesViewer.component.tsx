@@ -7,13 +7,13 @@ import type { Props } from './linkedEntitiesViewer.types';
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp16} ${spacers.dp12} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} 0 ${spacers.dp12}`,
     },
     title: {
         fontWeight: 500,
-        fontSize: 16,
-        color: colors.grey800,
-        paddingBottom: spacersNum.dp16,
+        fontSize: 14,
+        color: colors.grey900,
+        paddingBottom: spacersNum.dp8,
     },
     wrapper: {
         paddingBottom: spacersNum.dp16,

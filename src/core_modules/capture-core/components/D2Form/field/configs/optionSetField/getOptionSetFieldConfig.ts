@@ -47,7 +47,6 @@ export const getOptionSetFieldConfig = (metaData: DataElement, options: any, que
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         optionGroups: optionSet.optionGroups,
-        showHelpText: options.showHelpText,
         ...inputTypeProps,
     }, options, metaData);
 

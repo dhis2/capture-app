@@ -34,8 +34,8 @@ function convertRelativeRange(value: Value) {
     const rangeData: RelativeDateFilterData = {
         type: dateFilterTypes.RELATIVE,
     };
-    const startBuffer = value.start && parseNumber(value.start);
-    const endBuffer = value.end && parseNumber(value.end);
+    const startBuffer = value.start ? parseNumber(value.start) : 0;
+    const endBuffer = value.end ? parseNumber(value.end) : 0;
 
     if (startBuffer || startBuffer === 0) {
         rangeData.startBuffer = -Math.abs(startBuffer);

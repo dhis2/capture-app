@@ -9,6 +9,7 @@ type Props = {
     dataTest?: string;
     onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     onKeyDown?: (payload: { value?: string }, event: React.KeyboardEvent<HTMLInputElement>) => void;
+    dense?: boolean;
 };
 
 export class D2TextField extends Component<Props> {

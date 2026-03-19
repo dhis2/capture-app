@@ -1,3 +1,87 @@
+## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21133] Searching by unique attribute with unsupported type crashes ([#4484](https://github.com/dhis2/capture-app/issues/4484)) ([e8e6e5a](https://github.com/dhis2/capture-app/commit/e8e6e5acf8936a420c046a90bdc665f7b2d38af3))
+
+## [105.13.1](https://github.com/dhis2/capture-app/compare/v105.13.0...v105.13.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* [DHIS2-21131] Console error when loading working list with empty only filter attributes ([#4482](https://github.com/dhis2/capture-app/issues/4482)) ([1598b6b](https://github.com/dhis2/capture-app/commit/1598b6b428ec624de68639915c978416be4978fa))
+
+# [105.13.0](https://github.com/dhis2/capture-app/compare/v105.12.0...v105.13.0) (2026-03-17)
+
+
+### Features
+
+* [DHIS2-12881] Support additional value types for filters in working lists ([#4461](https://github.com/dhis2/capture-app/issues/4461)) ([01cff4f](https://github.com/dhis2/capture-app/commit/01cff4f282aa228d245ba5ee64d32f8d373e2e43))
+
+# [105.12.0](https://github.com/dhis2/capture-app/compare/v105.11.5...v105.12.0) (2026-03-17)
+
+
+### Features
+
+* [LIBS-773] bump cli app scripts to support loading custom translations from the data store ([#4485](https://github.com/dhis2/capture-app/issues/4485)) ([15debe6](https://github.com/dhis2/capture-app/commit/15debe60bb78038bd40c5ab954efa80b1dfb4667))
+
+## [105.11.5](https://github.com/dhis2/capture-app/compare/v105.11.4...v105.11.5) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-21129] Working list table use range type after switch to search groups ([#4479](https://github.com/dhis2/capture-app/issues/4479)) ([f5c5755](https://github.com/dhis2/capture-app/commit/f5c57555eb184ce89eb18706b656e9be7e59389d))
+
+## [105.11.4](https://github.com/dhis2/capture-app/compare/v105.11.3...v105.11.4) (2026-03-16)
+
+
+### Bug Fixes
+
+* [DHIS2-20494] Inherited tracked entity attribute not populated ([#4478](https://github.com/dhis2/capture-app/issues/4478)) ([8f2d2f7](https://github.com/dhis2/capture-app/commit/8f2d2f73877be5b0ffca5f54e2879624e900f3a0))
+
+## [105.11.3](https://github.com/dhis2/capture-app/compare/v105.11.2...v105.11.3) (2026-03-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4480](https://github.com/dhis2/capture-app/issues/4480)) ([5b6cc6f](https://github.com/dhis2/capture-app/commit/5b6cc6f3746bc3c95d388db36d627ddac8bc9425))
+
+## [105.11.2](https://github.com/dhis2/capture-app/compare/v105.11.1...v105.11.2) (2026-03-13)
+
+
+### Bug Fixes
+
+* [UX-171] Improve information density ([#3786](https://github.com/dhis2/capture-app/issues/3786)) ([ab30fe2](https://github.com/dhis2/capture-app/commit/ab30fe29afd8f0b1895858c1569dfb3e1e3fbbc8))
+
+## [105.11.1](https://github.com/dhis2/capture-app/compare/v105.11.0...v105.11.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21044][DHIS2-21045] Minimum Search Characters validation error ([#4473](https://github.com/dhis2/capture-app/issues/4473)) ([115ce1c](https://github.com/dhis2/capture-app/commit/115ce1c432327624a0402714548caf0f09e13fca))
+
+# [105.11.0](https://github.com/dhis2/capture-app/compare/v105.10.0...v105.11.0) (2026-03-12)
+
+
+### Features
+
+* [DHIS2-19426] support `d2:inUserGroup` ([#4477](https://github.com/dhis2/capture-app/issues/4477)) ([1e7197f](https://github.com/dhis2/capture-app/commit/1e7197f35ba31b31b983115a0d319356fe5df0ac))
+
+# [105.10.0](https://github.com/dhis2/capture-app/compare/v105.9.1...v105.10.0) (2026-03-10)
+
+
+### Features
+
+* [DHIS2-20920] send action priorities to rule engine ([#4456](https://github.com/dhis2/capture-app/issues/4456)) ([6b57b80](https://github.com/dhis2/capture-app/commit/6b57b8052a2351e9e5960c8971fd57f654a69b72))
+
+## [105.9.1](https://github.com/dhis2/capture-app/compare/v105.9.0...v105.9.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1290e17](https://github.com/dhis2/capture-app/commit/1290e174b8dccf9508b476772ea7add5a3ccbc59))
+
 # [105.9.0](https://github.com/dhis2/capture-app/compare/v105.8.0...v105.9.0) (2026-03-02)
 
 
