@@ -64,10 +64,10 @@ const useContents = ({
     multiValueFilter,
     isRemovable,
     emptyValueFilterSupported,
-    transformRecordsFilter = undefined,
-    isMainProperty = undefined,
+    transformRecordsFilter,
+    isMainProperty,
     ...passOnProps
-}) => {
+}: Record<string, any>) => {
     // main/system filters always have transformRecordsFilter (filtersOnly) or isMainProperty (columns)
     const disableEmptyValueFilter = Boolean(transformRecordsFilter) || Boolean(isMainProperty);
     const [disabledUpdate, setUpdateDisabled] = useState(true);
