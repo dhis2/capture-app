@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useApiMetadataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import type { DataStoreWorkingLists, DatastoreOccurredAt, UseMainViewConfig } from './useMainViewConfig.types';
 
-const ALLOWED_RELATIVE_PERIODS = [
+const ALLOWED_RELATIVE_PERIODS = new Set([
     'TODAY',
     'THIS_WEEK',
     'THIS_MONTH',
@@ -14,7 +14,7 @@ const ALLOWED_RELATIVE_PERIODS = [
     'LAST_WEEK',
     'LAST_MONTH',
     'LAST_3_MONTHS',
-];
+]);
 
 function getOccurredAtOrUndefined(workingLists: DataStoreWorkingLists | null | undefined) {
     // only adding support for relative event date as of now
@@ -33,7 +33,7 @@ function getOccurredAtOrUndefined(workingLists: DataStoreWorkingLists | null | u
         return undefined;
     }
 
-    return occurredAt as DatastoreOccurredAt;
+    return occurredAt;
 }
 
 function selectRelativePeriodEventDate(occurredAt: DatastoreOccurredAt) {
@@ -41,7 +41,7 @@ function selectRelativePeriodEventDate(occurredAt: DatastoreOccurredAt) {
         return undefined;
     }
 
-    if (!ALLOWED_RELATIVE_PERIODS.includes(occurredAt.period)) {
+    if (!ALLOWED_RELATIVE_PERIODS.has(occurredAt.period)) {
         return undefined;
     }
 

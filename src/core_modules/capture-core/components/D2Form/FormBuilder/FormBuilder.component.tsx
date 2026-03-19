@@ -313,10 +313,8 @@ export class FormBuilder extends React.Component<Props> {
     }
 
     private getOrCreateValidatingContainer(fieldId: string): FieldValidatingContainer {
-        if (!this.fieldsValidatingPromiseContainer[fieldId]) {
-            this.fieldsValidatingPromiseContainer[fieldId] = { validatingCompleteUid: uuid() };
-        }
-        return this.fieldsValidatingPromiseContainer[fieldId] as FieldValidatingContainer;
+        this.fieldsValidatingPromiseContainer[fieldId] ??= { validatingCompleteUid: uuid() };
+        return this.fieldsValidatingPromiseContainer[fieldId];
     }
 
     private handleValidationError(

@@ -10,7 +10,7 @@ function isValidDateTimeWithEmptyCheck(
 }
 
 const isInvalidTimeParts = (hour: number, minutes: number) =>
-    isNaN(hour) || isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59;
+    Number.isNaN(hour) || Number.isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59;
 
 const convertDateTimeToIsoTemporal = (value: any | null | undefined) => {
     if (!value || !value.date || !value.time) {
