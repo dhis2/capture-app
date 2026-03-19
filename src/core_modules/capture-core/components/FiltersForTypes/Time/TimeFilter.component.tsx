@@ -154,11 +154,15 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
     };
 
     handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
+        const committed = value || null;
+        this.setState({ committedValue: committed });
+        this.props.onCommitValue(committed);
     });
 
     handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
+        const committed = value || null;
+        this.setState({ committedValue: committed });
+        this.props.onCommitValue(committed);
     });
 
     getTimeLogicError() {
