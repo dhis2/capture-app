@@ -40,8 +40,8 @@ function convertRelativeRange(value: Value) {
     const rangeData: RelativeDateFilterData = {
         type: dateFilterTypes.RELATIVE,
     };
-    const startBuffer = value.start ? parseNumber(value.start) : undefined;
-    const endBuffer = value.end ? parseNumber(value.end) : undefined;
+    const startBuffer = value.start ? parseNumber(value.start) : 0;
+    const endBuffer = value.end ? parseNumber(value.end) : 0;
 
     if (startBuffer != null) {
         rangeData.startBuffer = -Math.abs(startBuffer);
