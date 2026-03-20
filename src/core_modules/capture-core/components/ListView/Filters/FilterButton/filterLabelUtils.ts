@@ -1,4 +1,4 @@
-const MAX_FILTER_LABEL_LENGTH = 20;
+const MAX_FILTER_LABEL_LENGTH = 35;
 
 export const buildFilterLabel = (title: string, valueLabel = ''): string =>
     (valueLabel ? `${title}: ${valueLabel}` : title);
