@@ -186,12 +186,20 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
         return this.renderActiveFilterButton();
     }
 
+    getTooltipText(title: string, isTitleTruncated: boolean, disabled?: boolean, tooltipContent?: string): string {
+        if (disabled && tooltipContent && isTitleTruncated) {
+            return `${title}\n${tooltipContent}`;
+        }
+        if (disabled && tooltipContent) {
+            return tooltipContent;
+        }
+        return title;
+    }
+
     renderWithoutAppliedFilter() {
         const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
         const isTitleTruncated = isFilterLabelTruncated(title);
-        const tooltipText = disabled && tooltipContent
-            ? (isTitleTruncated ? `${title}\n${tooltipContent}` : tooltipContent)
-            : title;
+        const tooltipText = this.getTooltipText(title, isTitleTruncated, disabled, tooltipContent);
         const isTooltipEnabled = isTitleTruncated || (disabled && !!tooltipContent);
 
         return (
