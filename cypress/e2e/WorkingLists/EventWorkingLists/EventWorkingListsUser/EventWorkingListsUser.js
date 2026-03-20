@@ -992,7 +992,7 @@ Then('the Organisation unit filter should be in effect', () => {
 
 Then('the admission filter should be in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Date of admission: 2018-01...')
+        .contains('Date of admission...')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')

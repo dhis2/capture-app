@@ -1,7 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Tooltip, Button } from '@dhis2/ui';
+import { buildFilterLabel, truncateFilterLabel } from './filterLabelUtils';
 
 const getStyles = () => ({
     button: {
@@ -11,27 +12,17 @@ const getStyles = () => ({
 
 type Props = {
     title: string;
-    buttonText?: string;
+    valueLabel?: string;
 };
 
-const MAX_LENGTH_OF_VALUE = 10;
-
-const LockedFilterButtonPlain = ({ classes, title, buttonText = '' }: Props & WithStyles<typeof getStyles>) => {
-    const getCappedValue = useCallback((value: string): string => {
-        const cappedValue = value.substring(0, MAX_LENGTH_OF_VALUE - 3).trimRight();
-        return `${cappedValue}...`;
-    }, []);
-
-    const viewValueForFiter = useMemo((): string => {
-        const calculatedValue = buttonText.length > MAX_LENGTH_OF_VALUE ? getCappedValue(buttonText) : buttonText;
-        return `: ${calculatedValue}`;
-    }, [buttonText, getCappedValue]);
+const LockedFilterButtonPlain = ({ classes, title, valueLabel = '' }: Props & WithStyles<typeof getStyles>) => {
+    const label = useMemo(() => buildFilterLabel(title, valueLabel), [title, valueLabel]);
 
     return (
         <Tooltip
             content={i18n.t('Locked to{{escape}} {{buttonText}}', {
                 escape: ':',
-                buttonText,
+                buttonText: label,
                 interpolation: { escapeValue: false },
             })}
             placement={'bottom'}
@@ -41,8 +32,7 @@ const LockedFilterButtonPlain = ({ classes, title, buttonText = '' }: Props & Wi
                 className={classes.button}
                 disabled
             >
-                {title}
-                {viewValueForFiter}
+                {truncateFilterLabel(label)}
             </Button>
         </Tooltip>
     );

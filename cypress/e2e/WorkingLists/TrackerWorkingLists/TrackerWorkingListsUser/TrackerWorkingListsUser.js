@@ -702,10 +702,10 @@ When(/^you open the saved program stage view (.+)$/, (viewName) => {
     });
 });
 
-// Chip label may truncate the value; assert the specific filter chip shows filter name + truncated value, then verify full value in input when opened
+// Chip label may truncate the full label (name + value); assert the specific chip text, then verify full value in input when opened
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
-    const truncatedPrefix = value.length > 8 ? value.substring(0, 7) : value;
-    const chipLabel = `${filterName}: ${truncatedPrefix}`;
+    const fullLabel = `${filterName}: ${value}`;
+    const chipLabel = fullLabel.length > 20 ? `${fullLabel.substring(0, 17)}...` : fullLabel;
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').invoke('attr', 'value').should('equal', value);
@@ -751,10 +751,10 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
     cy.get('body').click(0, 0);
 });
 
-// Chip label truncates the value (max 7 chars); assert chip shows filter name + truncated value, then verify full value when opened
+// Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
-    const truncatedPrefix = expectedOrgUnitName.length > 7 ? expectedOrgUnitName.substring(0, 7) : expectedOrgUnitName;
-    const chipLabel = `${filterName}: ${truncatedPrefix}`;
+    const fullLabel = `${filterName}: ${expectedOrgUnitName}`;
+    const chipLabel = fullLabel.length > 20 ? `${fullLabel.substring(0, 17)}...` : fullLabel;
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').should('contain', expectedOrgUnitName);

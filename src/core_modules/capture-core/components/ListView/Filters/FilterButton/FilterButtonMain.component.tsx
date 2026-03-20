@@ -4,6 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui';
+import { truncateFilterLabel, isFilterLabelTruncated } from './filterLabelUtils';
 import { isLangRtl } from '../../../../utils/rtl';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
@@ -41,7 +42,7 @@ type Props = {
     onSetVisibleSelector: (itemId?: string | null) => void;
     selectorVisible: boolean;
     filterValue?: FilterDataInput;
-    buttonText?: string;
+    valueLabel?: string;
     disabled?: boolean;
     tooltipContent?: string;
 };
@@ -145,7 +146,7 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
     }
 
     renderActiveFilterButton() {
-        const { selectorVisible, classes, title, buttonText } = this.props;
+        const { selectorVisible, classes, title, valueLabel } = this.props;
 
         const arrowIconElement = selectorVisible ? (
             <span className={classes.icon}>
@@ -165,19 +166,19 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
                 iconClass={classes.icon}
                 title={title}
                 arrowIconElement={arrowIconElement}
-                buttonText={buttonText}
+                valueLabel={valueLabel}
             />
         );
     }
 
     renderWithAppliedFilter() {
-        const { filterValue, title, buttonText } = this.props;
+        const { filterValue, title, valueLabel } = this.props;
 
         if (filterValue?.locked) {
             return (
                 <LockedFilterButton
                     title={title}
-                    buttonText={buttonText}
+                    valueLabel={valueLabel}
                 />
             );
         }
@@ -187,18 +188,21 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
 
     renderWithoutAppliedFilter() {
         const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
+        const isTitleTruncated = isFilterLabelTruncated(title);
+        const tooltipText = disabled ? tooltipContent : title;
+        const isTooltipEnabled = disabled ? !!tooltipContent : isTitleTruncated;
 
         return (
             <ConditionalTooltip
-                content={tooltipContent}
-                enabled={!!disabled}
+                content={tooltipText}
+                enabled={isTooltipEnabled}
                 closeDelay={50}
             >
                 <Button
                     disabled={disabled}
                     onClick={this.openFilterSelector}
                 >
-                    {title}
+                    {truncateFilterLabel(title)}
                     <span className={classes.icon}>
                         {selectorVisible ? <ChevronUp /> : <ChevronDown />}
                     </span>
