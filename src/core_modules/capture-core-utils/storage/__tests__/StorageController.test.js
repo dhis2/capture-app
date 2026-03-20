@@ -15,6 +15,9 @@ const Adapters = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE,
 let testCnt = 0;
 let storageController;
 beforeEach(() => {
+    if (!globalThis.structuredClone) {
+        globalThis.structuredClone = (val) => JSON.parse(JSON.stringify(val));
+    }
     dbName = `testDB${testCnt}`;
     testCnt += 1;
     storageController = new StorageController(dbName, 2, { Adapters, objectStores: storeNames });
