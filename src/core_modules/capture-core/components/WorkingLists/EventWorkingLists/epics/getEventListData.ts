@@ -1,3 +1,4 @@
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
