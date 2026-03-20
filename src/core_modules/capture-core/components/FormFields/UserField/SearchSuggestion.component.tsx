@@ -35,7 +35,7 @@ function match(text: string, query: string) {
 }
 
 function isInternalTarget(target: any, suggestionName: string, inputName: string) {
-    if (target.getAttribute('name') === suggestionName ||
+    if (target.getAttribute('data-suggestion-name') === suggestionName ||
         target.getAttribute('name') === inputName) {
         return true;
     }
@@ -45,7 +45,7 @@ function isInternalTarget(target: any, suggestionName: string, inputName: string
         return false;
     }
 
-    return (parentElement.getAttribute('name') === suggestionName);
+    return (parentElement.getAttribute('data-suggestion-name') === suggestionName);
 }
 
 export const SearchSuggestion = (props: Props) => {
@@ -89,6 +89,10 @@ export const SearchSuggestion = (props: Props) => {
         event.stopPropagation();
     }, [onSelect, user]);
 
+    const handleMouseDown = React.useCallback((event: any) => {
+        event.preventDefault();
+    }, []);
+
     const handleBlur = React.useCallback((event: any) => {
         if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
             onExitSearch();
@@ -98,11 +102,13 @@ export const SearchSuggestion = (props: Props) => {
         <div
             role="button"
             tabIndex={-1}
+            data-suggestion-name={suggestionName}
             ref={handleRef}
             className={useUpwardList ?
                 cx(defaultClasses.suggestion, defaultClasses.suggestionInUpList) :
                 defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
+            onMouseDown={handleMouseDown}
             onClick={handleClick}
             onBlur={handleBlur}
         >
