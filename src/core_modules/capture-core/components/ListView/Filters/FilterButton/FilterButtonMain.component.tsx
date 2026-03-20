@@ -189,8 +189,10 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
     renderWithoutAppliedFilter() {
         const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
         const isTitleTruncated = isFilterLabelTruncated(title);
-        const tooltipText = disabled ? tooltipContent : title;
-        const isTooltipEnabled = disabled ? !!tooltipContent : isTitleTruncated;
+        const tooltipText = disabled && tooltipContent
+            ? (isTitleTruncated ? `${title}\n${tooltipContent}` : tooltipContent)
+            : title;
+        const isTooltipEnabled = isTitleTruncated || (disabled && !!tooltipContent);
 
         return (
             <ConditionalTooltip
