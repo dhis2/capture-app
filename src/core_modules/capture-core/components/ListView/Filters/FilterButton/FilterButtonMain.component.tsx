@@ -51,6 +51,21 @@ type State = {
     isMounted: boolean;
 };
 
+function getTooltipText(
+    title: string,
+    isTitleTruncated: boolean,
+    disabled?: boolean,
+    tooltipContent?: string,
+): string {
+    if (disabled && tooltipContent && isTitleTruncated) {
+        return `${title}\n${tooltipContent}`;
+    }
+    if (disabled && tooltipContent) {
+        return tooltipContent;
+    }
+    return title;
+}
+
 class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof getStyles>, State> {
     activeFilterButtonInstance: any;
     anchorRef: React.RefObject<HTMLDivElement>;
@@ -186,21 +201,11 @@ class FilterButtonMainPlain extends React.Component<Props & WithStyles<typeof ge
         return this.renderActiveFilterButton();
     }
 
-    getTooltipText(title: string, isTitleTruncated: boolean, disabled?: boolean, tooltipContent?: string): string {
-        if (disabled && tooltipContent && isTitleTruncated) {
-            return `${title}\n${tooltipContent}`;
-        }
-        if (disabled && tooltipContent) {
-            return tooltipContent;
-        }
-        return title;
-    }
-
     renderWithoutAppliedFilter() {
         const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
         const isTitleTruncated = isFilterLabelTruncated(title);
-        const tooltipText = this.getTooltipText(title, isTitleTruncated, disabled, tooltipContent);
-        const isTooltipEnabled = isTitleTruncated || (disabled && !!tooltipContent);
+        const tooltipText = getTooltipText(title, isTitleTruncated, disabled, tooltipContent);
+        const isTooltipEnabled = !!(isTitleTruncated || (disabled && !!tooltipContent));
 
         return (
             <ConditionalTooltip
