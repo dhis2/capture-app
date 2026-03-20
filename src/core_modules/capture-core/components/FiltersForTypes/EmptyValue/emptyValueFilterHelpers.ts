@@ -8,10 +8,11 @@ import {
 export const isEmptyValueFilter = (value?: string | null): boolean =>
     value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
 
-export const getEmptyValueFilterData = (value: string): { value: string; isEmpty: boolean } =>
+export const getEmptyValueFilterData = (value: string): { value: string; isEmpty: boolean } => (
     value === EMPTY_VALUE_FILTER
         ? { value: EMPTY_VALUE_FILTER_LABEL, isEmpty: true }
-        : { value: NOT_EMPTY_VALUE_FILTER_LABEL, isEmpty: false };
+        : { value: NOT_EMPTY_VALUE_FILTER_LABEL, isEmpty: false }
+);
 
 export const makeCheckboxHandler =
     (flag: string) =>
