@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "105.13.2",
+    "version": "105.13.3",
     "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
@@ -14,7 +14,7 @@
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/rule-engine": "3.7.1",
-        "@dhis2/rules-engine-javascript": "105.13.2",
+        "@dhis2/rules-engine-javascript": "105.13.3",
         "@dhis2/ui": "^10.12.10",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",

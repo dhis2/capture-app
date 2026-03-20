@@ -1,3 +1,10 @@
+## [105.13.3](https://github.com/dhis2/capture-app/compare/v105.13.2...v105.13.3) (2026-03-20)
+
+
+### Bug Fixes
+
+* [DHIS2-19862][DHIS2-21115] bump rule engine to 3.7.1 ([#4487](https://github.com/dhis2/capture-app/issues/4487)) ([3a3b17d](https://github.com/dhis2/capture-app/commit/3a3b17de28d09569e0c3ab88fafe38b9119f2316))
+
 ## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
 
 
