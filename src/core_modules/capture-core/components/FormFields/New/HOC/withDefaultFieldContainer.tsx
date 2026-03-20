@@ -28,22 +28,31 @@ type Props = {
     infoMessage?: string | null;
 };
 
+type ContainerState = 'active' | 'validating' | 'error' | 'warning' | 'info' | 'default';
+
+const getContainerState = (
+    { inFocus, validatingMessage, errorMessage, warningMessage, infoMessage }: Props,
+): ContainerState => {
+    if (inFocus) return 'active';
+    if (validatingMessage) return 'validating';
+    if (errorMessage) return 'error';
+    if (warningMessage) return 'warning';
+    if (infoMessage) return 'info';
+    return 'default';
+};
+
 const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: any | null) =>
     class FieldContainerBuilder extends React.Component<Props & WithStyles<typeof styles>> {
         render() {
             const { classes, ...passOnProps } = this.props;
+            const state = getContainerState(passOnProps);
             const containerClasses = cx(
                 classes.container, {
-                    [classes.activeContainer]: Boolean(passOnProps.inFocus),
-                    [classes.validatingContainer]: Boolean(passOnProps.validatingMessage && !passOnProps.inFocus),
-                    [classes.errorContainer]:
-                        Boolean(passOnProps.errorMessage && !passOnProps.inFocus && !passOnProps.validatingMessage),
-                    [classes.warningContainer]:
-                        Boolean(passOnProps.warningMessage && !passOnProps.inFocus &&
-                        !passOnProps.validatingMessage && !passOnProps.errorMessage),
-                    [classes.infoContainer]:
-                        Boolean(passOnProps.infoMessage && !passOnProps.inFocus &&
-                        !passOnProps.validatingMessage && !passOnProps.errorMessage && !passOnProps.warningMessage),
+                    [classes.activeContainer]: state === 'active',
+                    [classes.validatingContainer]: state === 'validating',
+                    [classes.errorContainer]: state === 'error',
+                    [classes.warningContainer]: state === 'warning',
+                    [classes.infoContainer]: state === 'info',
                 },
             );
 

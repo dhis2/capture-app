@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import React, { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';

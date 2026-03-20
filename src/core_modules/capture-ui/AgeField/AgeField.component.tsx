@@ -147,7 +147,6 @@ class D2AgeFieldPlain extends Component<Props> {
     static isPositiveOrZeroNumber(value: any) {
         return isValidPositiveInteger(value) || Number(value) === 0;
     }
-    // eslint-disable-next-line complexity
     static isValidNumbers(values: AgeValues) {
         return D2AgeFieldPlain.isPositiveOrZeroNumber(values.years || '0') &&
             D2AgeFieldPlain.isPositiveOrZeroNumber(values.months || '0') &&
@@ -167,7 +166,9 @@ class D2AgeFieldPlain extends Component<Props> {
         const { onRemoveFocus, calendarType, dateFormat } = this.props;
         const calendar = calendarType || 'iso8601';
         const format = dateFormat || 'YYYY-MM-DD';
-        onRemoveFocus && onRemoveFocus();
+        if (onRemoveFocus) {
+            onRemoveFocus();
+        }
         if (D2AgeFieldPlain.isEmptyNumbers(values)) {
             this.props.onBlur(values.date ? { date: values.date } : null);
             return;
@@ -178,30 +179,7 @@ class D2AgeFieldPlain extends Component<Props> {
             return;
         }
 
-        if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendar])) {
-            const nowIso = Temporal.Now.plainDateISO();
-            const calculatedDateIso = nowIso.subtract({
-                years: D2AgeFieldPlain.getNumberOrZero(values.years ?? null),
-                months: D2AgeFieldPlain.getNumberOrZero(values.months ?? null),
-                days: D2AgeFieldPlain.getNumberOrZero(values.days ?? null),
-            });
-
-            const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendar as any);
-            const dateString = temporalToString(localCalculatedDate, format);
-            const calculatedValues = getCalculatedValues(dateString, calendar, format);
-            this.props.onBlur(calculatedValues);
-            return;
-        }
-
-        const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendar]);
-        const calculatedDate = now.subtract({
-            years: D2AgeFieldPlain.getNumberOrZero(values.years ?? null),
-            months: D2AgeFieldPlain.getNumberOrZero(values.months ?? null),
-            days: D2AgeFieldPlain.getNumberOrZero(values.days ?? null),
-        });
-        const dateString = temporalToString(calculatedDate, format);
-        const calculatedValues = getCalculatedValues(dateString, calendar, format);
-        this.props.onBlur(calculatedValues);
+        this.props.onBlur(calculatedValuesFromNumbersBlur(values, calendar, format));
     }
 
     handleDateBlur = (date: string | null, options?: ValidationOptions | null) => {
@@ -319,6 +297,25 @@ class D2AgeFieldPlain extends Component<Props> {
             </div>
         );
     }
+}
+
+function calculatedValuesFromNumbersBlur(values: AgeValues, calendar: string, format: string): AgeValues {
+    const duration = {
+        years: D2AgeFieldPlain.getNumberOrZero(values.years ?? null),
+        months: D2AgeFieldPlain.getNumberOrZero(values.months ?? null),
+        days: D2AgeFieldPlain.getNumberOrZero(values.days ?? null),
+    };
+    if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendar])) {
+        const nowIso = Temporal.Now.plainDateISO();
+        const calculatedDateIso = nowIso.subtract(duration);
+        const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendar as any);
+        const dateString = temporalToString(localCalculatedDate, format);
+        return getCalculatedValues(dateString, calendar, format);
+    }
+    const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendar]);
+    const calculatedDate = now.subtract(duration);
+    const dateString = temporalToString(calculatedDate, format);
+    return getCalculatedValues(dateString, calendar, format);
 }
 
 export const AgeField = withInternalChangeHandler()(D2AgeFieldPlain);

@@ -19,7 +19,6 @@ export function convertMainEventClientToServer(event: any) {
         assignee: 'assignedUser',
     };
     event = convertEventAttributeOptions(event);
-    // eslint-disable-next-line complexity
     return convertMainEvent(event, (key, value) => {
         let convertedValue;
 

@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { cx } from '@emotion/css';

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
-"PO-Revision-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-03-19T17:51:36.500Z\n"
+"PO-Revision-Date: 2026-03-19T17:51:36.500Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -727,6 +727,12 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Invalid enrollment id {{enrollmentId}}."
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Choose an enrollment to view the dashboard."
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -736,12 +742,6 @@ msgstr ""
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "Invalid enrollment id {{enrollmentId}}."
-
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Choose an enrollment to view the dashboard."
 
 msgid "There are no active enrollments."
 msgstr "There are no active enrollments."
@@ -1119,9 +1119,6 @@ msgstr "Choose a {{title}}"
 msgid "Search for a {{title}}"
 msgstr "Search for a {{title}}"
 
-msgid "Search for {{titleText}}"
-msgstr "Search for {{titleText}}"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1141,6 +1138,9 @@ msgid ""
 msgstr ""
 "Try selecting a different tracked entity type, or try searching in a "
 "program by choosing one from the top bar."
+
+msgid "Search for {{titleText}}"
+msgstr "Search for {{titleText}}"
 
 msgid "Search {{name}}"
 msgstr "Search {{name}}"

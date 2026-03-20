@@ -56,7 +56,7 @@
                 "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
             }
         ],
-        "complexity": [1, 8],
+        "complexity": [2, 10],
         "no-prototype-builtins": "off",
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-restricted-imports": [
