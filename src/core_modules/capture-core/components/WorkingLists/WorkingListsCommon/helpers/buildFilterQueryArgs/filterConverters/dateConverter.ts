@@ -165,9 +165,6 @@ export function convertDate({
     sourceValue: DateFilterData;
     meta: { key: string; storeId: string; isInit: boolean };
 }) {
-    if ('isEmpty' in sourceValue) {
-        return '';
-    }
     if (sourceValue.type === 'ABSOLUTE') {
         return convertAbsoluteDate(sourceValue);
     }
