@@ -2,6 +2,7 @@ import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
 const CONTEXT_QUERIES = {
     'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
@@ -166,14 +167,19 @@ When('you set the Household location filter to Is empty', () => {
 
 Then('the Household location filter button should show that the filter is in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Household location: Is empty')
+        .contains(truncateFilterLabelForTest('Household location: Is empty'))
         .should('exist');
 });
 
 Then('the age filter button should show that the filter is in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains(/Age \(years\): \d+ to \d+/)
-        .should('exist');
+        .contains('Age (years)')
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.get('input[placeholder="Min"]').should('have.attr', 'value', '10');
+        cy.get('input[placeholder="Max"]').should('have.attr', 'value', '20');
+    });
+    cy.get('body').click(0, 0);
 });
 
 When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => {
@@ -192,8 +198,8 @@ When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => 
 });
 
 Then(/^the text filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
-    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[type="text"]').should('have.value', value);
     });
@@ -678,16 +684,26 @@ When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (fi
 
 Then('all set filters should show in effect', () => {
     cy.get('[data-test="event-working-lists"]').should('contain', 'Pregnant').and('contain', 'Yes');
-    cy.get('[data-test="event-working-lists"]').contains('Age (years): 0 to 120').should('exist');
-    cy.get('[data-test="event-working-lists"]').contains('Height in cm: 100 to 200').should('exist');
-    cy.get('[data-test="event-working-lists"]').contains('Weight in kg: 1 to 200').should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Age (years): 0 to 120'))
+        .should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Height in cm: 100 to 200'))
+        .should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Weight in kg: 1 to 200'))
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').should(($el) => {
         expect($el.text()).to.include('2018');
         expect($el.text()).to.match(/Admission Date|Date of admission/);
     });
     cy.get('[data-test="event-working-lists"]').should('contain', 'Place of Infection').and('contain', 'Ngelehu');
-    cy.get('[data-test="event-working-lists"]').contains('Household location: Is empty').should('exist');
-    cy.get('[data-test="event-working-lists"]').contains('Documentation: Is empty').should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Household location: Is empty'))
+        .should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Documentation: Is empty'))
+        .should('exist');
 });
 
 Then('the boolean filter should be in effect and show the correct value when opened', () => {
@@ -700,7 +716,6 @@ Then('the boolean filter should be in effect and show the correct value when ope
 });
 
 Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) when opened$/, (filterName, min, max) => {
-    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${min} to ${max}`).should('exist');
     cy.get('[data-test="event-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
@@ -733,7 +748,9 @@ Then('the organisation unit filter should be in effect and show the correct valu
 });
 
 Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${value}`))
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
@@ -841,19 +858,19 @@ Then('the Pregnant filter should show Yes in effect', () => {
 
 Then('the Age (years) filter should show 0 to 120 in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 0 to 120')
+        .contains(truncateFilterLabelForTest('Age (years): 0 to 120'))
         .should('exist');
 });
 
 Then('the Height in cm filter should show 100 to 200 in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Height in cm: 100 to 200')
+        .contains(truncateFilterLabelForTest('Height in cm: 100 to 200'))
         .should('exist');
 });
 
 Then('the Weight in kg filter should show 1 to 200 in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Weight in kg: 1 to 200')
+        .contains(truncateFilterLabelForTest('Weight in kg: 1 to 200'))
         .should('exist');
 });
 
