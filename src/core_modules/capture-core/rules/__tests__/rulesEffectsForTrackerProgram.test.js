@@ -741,7 +741,6 @@ test('expressions with d2Functions in tracker program', () => {
         },
         { type: 'HIDEPROGRAMSTAGE', id: 'PUZaKR0Jh2k' },
         { id: 'SWfdBhglX0fk', type: 'HIDESECTION' },
-        { id: 'w75KJ2mc4zz', targetDataType: 'trackedEntityAttribute', type: 'ASSIGN', value: 'true' },
         {
             id: 'w75KJ2mc4zz',
             message: ' true',
