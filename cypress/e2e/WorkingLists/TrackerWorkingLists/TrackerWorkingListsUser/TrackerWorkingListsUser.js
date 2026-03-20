@@ -704,8 +704,7 @@ When(/^you open the saved program stage view (.+)$/, (viewName) => {
 
 // Chip label may truncate the full label (name + value); assert the specific chip text, then verify full value in input when opened
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
-    const fullLabel = `${filterName}: ${value}`;
-    const chipLabel = fullLabel.length > 20 ? `${fullLabel.substring(0, 17)}...` : fullLabel;
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').invoke('attr', 'value').should('equal', value);
