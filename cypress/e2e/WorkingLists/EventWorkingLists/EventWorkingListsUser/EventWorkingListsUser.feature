@@ -128,6 +128,38 @@ Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, 
   And the empty-only filter "Documentation" should be in effect and show Is empty when opened
   And the saved working list view is cleaned up
 
+@v>=42
+Scenario: Save and load view with isEmpty filters for BOOLEAN, NUMBER, DATE types
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the empty-only filter "Pregnant" to Is empty
+  And you set the empty-only filter "Height in cm" to Is not empty
+  And you set the empty-only filter "Weight in kg" to Is empty
+  And you set the isEmpty date filter to Is empty
+  And you save the view as eventIsEmptyWorkingList
+  And you refresh the page
+  And you open the saved view eventIsEmptyWorkingList
+  Then the empty-only filter "Pregnant" should be in effect and show Is empty when opened
+  And the empty-only filter "Height in cm" should be in effect and show Is not empty when opened
+  And the empty-only filter "Weight in kg" should be in effect and show Is empty when opened
+  And the isEmpty date filter should be in effect and show Is empty when opened
+  And the saved working list view is cleaned up
+
+@v>=42
+Scenario: Save and load view with isNotEmpty filters for BOOLEAN, NUMBER, DATE types
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the empty-only filter "Pregnant" to Is not empty
+  And you set the empty-only filter "Height in cm" to Is empty
+  And you set the empty-only filter "Weight in kg" to Is not empty
+  And you set the isEmpty date filter to Is not empty
+  And you save the view as eventIsNotEmptyWorkingList
+  And you refresh the page
+  And you open the saved view eventIsNotEmptyWorkingList
+  Then the empty-only filter "Pregnant" should be in effect and show Is not empty when opened
+  And the empty-only filter "Height in cm" should be in effect and show Is empty when opened
+  And the empty-only filter "Weight in kg" should be in effect and show Is not empty when opened
+  And the isEmpty date filter should be in effect and show Is not empty when opened
+  And the saved working list view is cleaned up
+
 @v<42
 Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, INTEGER_POSITIVE, DATE, ORGANISATION_UNIT
   Given you open the main page with Ngelehun and Inpatient morbidity and mortality context

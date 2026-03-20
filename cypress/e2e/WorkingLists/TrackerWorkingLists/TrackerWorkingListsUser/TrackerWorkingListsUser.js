@@ -620,6 +620,17 @@ When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (fi
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
+When(/^you set the isEmpty date filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    if (CARE_AT_BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    } else {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    }
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
 When(/^you set the option filter "([^"]+)" to (Yes|No)$/, (filterName, value) => {
     openStageFilterMenu(filterName);
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
@@ -734,6 +745,15 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
 });
 
 Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the isEmpty date filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
