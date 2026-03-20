@@ -22,7 +22,7 @@ const LockedFilterButtonPlain = ({ classes, title, valueLabel = '' }: Props & Wi
         <Tooltip
             content={i18n.t('Locked to{{escape}} {{buttonText}}', {
                 escape: ':',
-                buttonText: label,
+                buttonText: valueLabel,
                 interpolation: { escapeValue: false },
             })}
             placement={'bottom'}
