@@ -752,8 +752,7 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
 
 // Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
-    const fullLabel = `${filterName}: ${expectedOrgUnitName}`;
-    const chipLabel = fullLabel.length > 20 ? `${fullLabel.substring(0, 17)}...` : fullLabel;
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').should('contain', expectedOrgUnitName);
