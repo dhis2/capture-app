@@ -130,13 +130,14 @@ type SetContextFieldValueProps = {
 }
 
 export type IFormFieldPluginProps = {
+    orgUnitId: string;
     values: Record<string, any>;
     errors: Record<string, string[]>;
     warnings: Record<string, string[]>;
     fieldsMetadata: Record<string, fieldsMetadata>;
-    setFieldValue: (values: SetFieldValueProps) => void;
-    setContextFieldValue: (values: SetContextFieldValueProps) => void;
     viewMode: boolean;
     formSubmitted: boolean;
+    setFieldValue: (values: SetFieldValueProps) => void;
+    setContextFieldValue: (values: SetContextFieldValueProps) => void;
 }
 ```
