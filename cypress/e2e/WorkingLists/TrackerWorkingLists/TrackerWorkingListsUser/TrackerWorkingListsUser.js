@@ -2,6 +2,7 @@ import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { hasVersionSupport } from '../../../../support/tagUtils';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
 const cleanUpIfApplicable = (programId) => {
     cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
@@ -723,8 +724,9 @@ Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when 
 });
 
 Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+) when opened$/, (filterName, min, max) => {
-    cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${min} to ${max}`).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
         cy.get('input[placeholder="Max"]').should('have.attr', 'value', max);
@@ -733,8 +735,9 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
 });
 
 Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
