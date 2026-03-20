@@ -17,20 +17,16 @@ type Props = {
     placeholder?: string | null;
 };
 
-const hasSuggestionAttribute = (element: any, suggestionName: string) =>
-    element?.getAttribute?.('data-suggestion-name') === suggestionName;
+const hasDataSuggestionName = (element: EventTarget | null, suggestionName: string): boolean =>
+    element instanceof HTMLElement && element.dataset.suggestionName === suggestionName;
 
-const isSuggestionBlurTarget = (target: any, suggestionName: string) => {
-    if (hasSuggestionAttribute(target, suggestionName)) {
+const isSuggestionBlurTarget = (relatedTarget: EventTarget | null, suggestionName: string): boolean => {
+    if (hasDataSuggestionName(relatedTarget, suggestionName)) {
         return true;
     }
 
-    const parentElement = target?.parentElement;
-    if (!parentElement) {
-        return false;
-    }
-
-    return hasSuggestionAttribute(parentElement, suggestionName);
+    const parentElement = relatedTarget instanceof Node ? relatedTarget.parentElement : null;
+    return hasDataSuggestionName(parentElement, suggestionName);
 };
 
 export const Input = (props: Props) => {

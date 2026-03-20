@@ -34,18 +34,18 @@ function match(text: string, query: string) {
     ];
 }
 
-function isInternalTarget(target: any, suggestionName: string, inputName: string) {
-    if (target.getAttribute('data-suggestion-name') === suggestionName ||
-        target.getAttribute('name') === inputName) {
-        return true;
+function isInternalTarget(relatedTarget: EventTarget | null, suggestionName: string, inputName: string): boolean {
+    if (relatedTarget instanceof HTMLElement) {
+        if (relatedTarget.dataset.suggestionName === suggestionName) {
+            return true;
+        }
+        if (relatedTarget.getAttribute('name') === inputName) {
+            return true;
+        }
     }
 
-    const parentElement = target.parentElement;
-    if (!parentElement) {
-        return false;
-    }
-
-    return (parentElement.getAttribute('data-suggestion-name') === suggestionName);
+    const parentElement = relatedTarget instanceof Node ? relatedTarget.parentElement : null;
+    return parentElement instanceof HTMLElement && parentElement.dataset.suggestionName === suggestionName;
 }
 
 export const SearchSuggestion = (props: Props) => {
@@ -91,7 +91,9 @@ export const SearchSuggestion = (props: Props) => {
 
     const handleMouseDown = React.useCallback((event: any) => {
         event.preventDefault();
-    }, []);
+        onSelect(user);
+        event.stopPropagation();
+    }, [onSelect, user]);
 
     const handleBlur = React.useCallback((event: any) => {
         if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
