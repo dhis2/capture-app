@@ -1,4 +1,3 @@
-# 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Philip Larsen Donnelly, 2026
@@ -6,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-01T16:00:01.022Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Tetum (Tetun) (https://app.transifex.com/hisp-uio/teams/100509/tet/)\n"
@@ -90,10 +89,10 @@ msgstr ""
 msgid "View active enrollment"
 msgstr ""
 
-msgid "Re-enroll"
+msgid "Re-enroll in {{programName}}"
 msgstr ""
 
-msgid "in"
+msgid "Re-enroll"
 msgstr ""
 
 msgid "Enrolled"
@@ -117,10 +116,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -276,8 +275,9 @@ msgstr ""
 msgid "Switch to row view"
 msgstr ""
 
-msgid "events added"
-msgstr ""
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
 
 msgid "No events added"
 msgstr ""
@@ -318,6 +318,9 @@ msgid "without"
 msgstr ""
 
 msgid "enrollment"
+msgstr ""
+
+msgid "in"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
@@ -454,28 +457,31 @@ msgstr ""
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
-msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "to"
-msgstr "bá"
-
-msgid "Days in the future"
+msgid "Start date must be before the end date"
 msgstr ""
 
 msgid "From"
 msgstr ""
 
+msgid "to"
+msgstr "bá"
+
+msgid "To"
+msgstr ""
+
+msgid "Period"
+msgstr "Períodu"
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
 msgid "Days in the past"
 msgstr ""
 
-msgid "To"
+msgid "Days in the future"
 msgstr ""
 
 msgid "This week"
@@ -484,8 +490,8 @@ msgstr ""
 msgid "This month"
 msgstr ""
 
-msgid "This Year"
-msgstr ""
+msgid "This year"
+msgstr "Tina ida ne'e"
 
 msgid "Last week"
 msgstr "Semana kotuk"
@@ -502,17 +508,29 @@ msgstr ""
 msgid "Relative range"
 msgstr ""
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Time"
+msgstr ""
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -523,17 +541,20 @@ msgstr ""
 msgid "Please provide a valid integer"
 msgstr ""
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
 msgstr ""
 
-msgid "Exact matches only"
-msgstr ""
+msgid "Min"
+msgstr "Min"
 
-msgid "Contains text"
-msgstr ""
+msgid "Max"
+msgstr "Max"
 
 msgid "Yes"
 msgstr "Sim"
@@ -569,12 +590,6 @@ msgid "Clear"
 msgstr "Hamós"
 
 msgid "No results found"
-msgstr ""
-
-msgid "Must match the start of the value"
-msgstr ""
-
-msgid "Must match the end of the value"
 msgstr ""
 
 msgid "Description"
@@ -616,6 +631,17 @@ msgstr ""
 msgid "Remove filter"
 msgstr ""
 
+msgid "Minimum characters to search is too high for this filter."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -625,10 +651,22 @@ msgstr ""
 msgid "before or equal to {{date}}"
 msgstr ""
 
-msgid "greater than or equal to"
+msgid "{{start}} days in the past to {{end}} days in the future"
 msgstr ""
 
-msgid "less than or equal to"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
 msgstr ""
 
 msgid "More filters"
@@ -658,7 +696,7 @@ msgstr ""
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -964,11 +1002,17 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 
 msgid "Missing search criteria"
+msgstr ""
+
+msgid "Please fill in {{uniqueTEAName}} to search"
 msgstr ""
 
 msgid "Back to search"
@@ -1025,6 +1069,12 @@ msgstr ""
 msgid "Choose an organisation unit"
 msgstr ""
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1041,6 +1091,12 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
+msgstr ""
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid "Search for {{titleText}}"
@@ -1104,6 +1160,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1126,6 +1185,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr ""
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
@@ -1143,13 +1205,16 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search..."
 msgstr ""
 
 msgid "Select tracked entity type"
@@ -1702,9 +1767,6 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-msgid "Date"
-msgstr "Data"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2034,6 +2096,15 @@ msgstr ""
 msgid "Download with current filters"
 msgstr ""
 
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
+msgstr ""
+
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
@@ -2103,9 +2174,6 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr ""
 
@@ -2153,9 +2221,6 @@ msgid "Some attributes are hidden"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
-
-msgid "Time"
 msgstr ""
 
 msgid "From date"
