@@ -1,14 +1,14 @@
 # Translators:
 # Antonia Bezenchek <antonia@informa.pro>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2024
 # KRG HIS <antonia.bezenchek@informa.pro>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -92,11 +92,11 @@ msgstr ""
 msgid "View active enrollment"
 msgstr ""
 
-msgid "Re-enroll"
+msgid "Re-enroll in {{programName}}"
 msgstr ""
 
-msgid "in"
-msgstr "لە"
+msgid "Re-enroll"
+msgstr ""
 
 msgid "Enrolled"
 msgstr ""
@@ -119,10 +119,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -280,8 +280,10 @@ msgstr "گۆڕین بۆ پیشاندانی فۆرم"
 msgid "Switch to row view"
 msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
 
-msgid "events added"
-msgstr "حاڵەتەکان زیادکران"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "No events added"
 msgstr "هیچ حاڵەتێک زیادنەکرا"
@@ -325,6 +327,9 @@ msgstr ""
 
 msgid "enrollment"
 msgstr ""
+
+msgid "in"
+msgstr "لە"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -465,29 +470,32 @@ msgstr "بەکاربەرەکە هەڵبژێرە"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
-msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
-
-msgid "to"
-msgstr "بۆ "
-
-msgid "Days in the future"
+msgid "Start date must be before the end date"
 msgstr ""
 
 msgid "From"
 msgstr "لە"
 
-msgid "Days in the past"
-msgstr ""
+msgid "to"
+msgstr "بۆ "
 
 msgid "To"
 msgstr "لە"
+
+msgid "Period"
+msgstr "ماوة"
+
+msgid "Please provide zero or a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr ""
+
+msgid "Days in the future"
+msgstr ""
 
 msgid "This week"
 msgstr "ئەم هەفتەیە"
@@ -495,8 +503,8 @@ msgstr "ئەم هەفتەیە"
 msgid "This month"
 msgstr "ئەم مانگە"
 
-msgid "This Year"
-msgstr "ئەم ساڵە"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "هەفتەی ڕابردوو"
@@ -513,17 +521,29 @@ msgstr ""
 msgid "Relative range"
 msgstr ""
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "بەروار"
+
+msgid "Time"
+msgstr "کات"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "زیاترین"
-
-msgid "Min"
-msgstr "کەمترین"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -534,11 +554,20 @@ msgstr "تکایە ژمارەیەکی درووست بنووسە"
 msgid "Please provide a valid integer"
 msgstr "تکایە ژمارەیەکی درووست بنووسە"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
 
 msgid "Please provide a negative integer"
 msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "Min"
+msgstr "کەمترین"
+
+msgid "Max"
+msgstr "زیاترین"
 
 msgid "Yes"
 msgstr "بەڵێ"
@@ -615,7 +644,7 @@ msgstr ""
 msgid "Remove filter"
 msgstr ""
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -623,6 +652,9 @@ msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} to {{toDate}}"
@@ -633,11 +665,23 @@ msgstr " {{date}}دواتر یاخود یەکسانە بە"
 msgid "before or equal to {{date}}"
 msgstr " {{date}}پێشووتر یاخود یەکسانە بە"
 
-msgid "greater than or equal to"
-msgstr "گەورەتر لە یاخود یەکسان بە"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "بچووکتر لە یاخود یەکسان بە"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "فلتەری زیاتر"
@@ -666,7 +710,7 @@ msgstr ""
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -974,12 +1018,18 @@ msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 msgstr[1] ""
 
 msgid "Missing search criteria"
+msgstr ""
+
+msgid "Please fill in {{uniqueTEAName}} to search"
 msgstr ""
 
 msgid "Back to search"
@@ -1036,6 +1086,12 @@ msgstr ""
 msgid "Choose an organisation unit"
 msgstr ""
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1052,6 +1108,12 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
+msgstr ""
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid "Search for {{titleText}}"
@@ -1115,6 +1177,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1137,6 +1202,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr ""
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr ""
 
@@ -1154,13 +1222,16 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search..."
 msgstr ""
 
 msgid "Select tracked entity type"
@@ -1716,9 +1787,6 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-msgid "Date"
-msgstr "بەروار"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2135,9 +2203,6 @@ msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
 msgid "Please provide a valid time"
 msgstr "تکایە کاتێکی درووست بنووسە"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr "تکایە یو URLێکی درووست بنووسە"
 
@@ -2187,9 +2252,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"
-
-msgid "Time"
-msgstr "کات"
 
 msgid "From date"
 msgstr "لە بەرواری"

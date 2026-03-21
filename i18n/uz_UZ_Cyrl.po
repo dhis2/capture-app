@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2026\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -92,11 +92,11 @@ msgstr "Бошқарув панелини кўриш"
 msgid "View active enrollment"
 msgstr "Фаол рўйхатдан ўтганларни кўриш"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Қайта рўйхатдан ўтиш"
-
-msgid "in"
-msgstr "ичида"
 
 msgid "Enrolled"
 msgstr "Рўйхатга киритилган"
@@ -119,10 +119,10 @@ msgstr "Кенглик"
 msgid "Long"
 msgstr "Узунлик"
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -283,8 +283,9 @@ msgstr "Шакл кўринишига ўтиш"
 msgid "Switch to row view"
 msgstr "Жадвал кўринишига ўтиш"
 
-msgid "events added"
-msgstr "ҳодиса/тадбирлар қўшилди"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
 
 msgid "No events added"
 msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
@@ -328,6 +329,9 @@ msgstr "бирон нимасиз"
 
 msgid "enrollment"
 msgstr "қайд этиш"
+
+msgid "in"
+msgstr "ичида"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Юқори панелдан дастурни танлаб, дастур рўйхатидан ўтинг"
@@ -470,29 +474,32 @@ msgstr "Фойдаланувчини танланг"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
-msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
-
-msgid "to"
-msgstr "га"
-
-msgid "Days in the future"
+msgid "Start date must be before the end date"
 msgstr ""
 
 msgid "From"
 msgstr "Дан"
 
-msgid "Days in the past"
-msgstr ""
+msgid "to"
+msgstr "га"
 
 msgid "To"
 msgstr "Кимга"
+
+msgid "Period"
+msgstr "Давр"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr ""
+
+msgid "Days in the future"
+msgstr ""
 
 msgid "This week"
 msgstr "Ушбу ҳафта"
@@ -500,7 +507,7 @@ msgstr "Ушбу ҳафта"
 msgid "This month"
 msgstr "Ушбу ой"
 
-msgid "This Year"
+msgid "This year"
 msgstr "Ушбу йил"
 
 msgid "Last week"
@@ -518,17 +525,29 @@ msgstr ""
 msgid "Relative range"
 msgstr ""
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Сана"
+
+msgid "Time"
+msgstr "Вақт"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Максимум"
-
-msgid "Min"
-msgstr "Минимум"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -539,11 +558,20 @@ msgstr "Илтимос, тўғри рақамни кўрсатинг"
 msgid "Please provide a valid integer"
 msgstr "Илтимос, тўғри бутун сонни кўрсатинг"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
 
 msgid "Please provide a negative integer"
 msgstr "Илтимос, бутун манфий сонни кўрсатинг"
+
+msgid "Min"
+msgstr "Минимум"
+
+msgid "Max"
+msgstr "Максимум"
 
 msgid "Yes"
 msgstr "Ҳа"
@@ -620,13 +648,16 @@ msgstr "Фильтрни қайта созлаш"
 msgid "Remove filter"
 msgstr "Фильтрни олиб ташлаш"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
@@ -637,11 +668,23 @@ msgstr "{{date}} дан кейин ёки унга тенг"
 msgid "before or equal to {{date}}"
 msgstr "{{date}} дан олдин ёки унга тенг"
 
-msgid "greater than or equal to"
-msgstr "дан катта ёки тенг"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "дан кам ёки тенг"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr "... дан кейин ёки унга тенг"
+
+msgid "before or equal to"
+msgstr "... дан олдин ёки унга тенг"
 
 msgid "More filters"
 msgstr "Кўпроқ фильтр"
@@ -670,7 +713,7 @@ msgstr ""
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -987,11 +1030,17 @@ msgstr "{{uniqueAttrName}} орқали қидириш"
 msgid "Search by attributes"
 msgstr "Атрибут орқали қидириш"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 
 msgid "Missing search criteria"
+msgstr ""
+
+msgid "Please fill in {{uniqueTEAName}} to search"
 msgstr ""
 
 msgid "Back to search"
@@ -1048,6 +1097,12 @@ msgstr "Бирор нима танланмаган"
 msgid "Choose an organisation unit"
 msgstr "Ташкилий бирликни танланг"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1064,6 +1119,12 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
+msgstr ""
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid "Search for {{titleText}}"
@@ -1129,6 +1190,9 @@ msgstr ""
 "Қидирув сўзларини ўзгартириб, қидирилаётган ахборотни қайта қидирувга "
 "топширишингиз мумкин."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1151,6 +1215,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr ""
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Натижалар топилди"
 
@@ -1168,7 +1235,7 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
@@ -1176,6 +1243,9 @@ msgstr "Янги тадбир яратинг"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1729,9 +1799,6 @@ msgstr "Яратилган"
 msgid "Deleted"
 msgstr "Ўчириб ташланган"
 
-msgid "Date"
-msgstr "Сана"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2139,9 +2206,6 @@ msgstr "Илтимос, тегишли сана ва вақтни кўрсати
 msgid "Please provide a valid time"
 msgstr "Илтимос, тўғри вақтни кўрсатинг"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr "Илтимос, ҳақиқий URL манзилни кўрсатинг"
 
@@ -2190,9 +2254,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
-
-msgid "Time"
-msgstr "Вақт"
 
 msgid "From date"
 msgstr "Санадан бошлаб"
