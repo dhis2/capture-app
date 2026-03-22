@@ -58,7 +58,7 @@ function getTooltipText(
     tooltipContent?: string,
 ): string {
     if (disabled && tooltipContent && isTitleTruncated) {
-        return `${title}\n${tooltipContent}`;
+        return `${title}: ${tooltipContent}`;
     }
     if (disabled && tooltipContent) {
         return tooltipContent;

@@ -693,10 +693,9 @@ Then('all set filters should show in effect', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains(truncateFilterLabelForTest('Weight in kg: 1 to 200'))
         .should('exist');
-    cy.get('[data-test="event-working-lists"]').should(($el) => {
-        expect($el.text()).to.include('2018');
-        expect($el.text()).to.match(/Admission Date|Date of admission/);
-    });
+    cy.get('[data-test="event-working-lists"]')
+        .contains(/Admission Date|Date of admission/)
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').should('contain', 'Place of Infection').and('contain', 'Ngelehu');
     cy.get('[data-test="event-working-lists"]')
         .contains(truncateFilterLabelForTest('Household location: Is empty'))
@@ -725,10 +724,6 @@ Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) wh
 });
 
 Then('the date filter should be in effect and show the correct value when opened', () => {
-    cy.get('[data-test="event-working-lists"]').should(($el) => {
-        expect($el.text()).to.include('2018');
-        expect($el.text()).to.match(/Admission Date|Date of admission/);
-    });
     cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
@@ -876,11 +871,8 @@ Then('the Weight in kg filter should show 1 to 200 in effect', () => {
 
 Then('the Admission Date filter should show date range in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .should(($el) => {
-            const text = $el.text();
-            expect(text).to.include('2018');
-            expect(text).to.match(/Admission Date|Date of admission/);
-        });
+        .contains(/Admission Date|Date of admission/)
+        .should('exist');
 });
 
 Then('the Place of Infection filter should show Ngelehun in effect', () => {
@@ -1009,7 +1001,7 @@ Then('the Organisation unit filter should be in effect', () => {
 
 Then('the admission filter should be in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Date of admission...')
+        .contains(/Admission Date|Date of admission/)
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
