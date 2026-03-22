@@ -11,7 +11,7 @@ type Props = {
 };
 
 type State = {
-    value?: Array<any> | null,
+    value?: Array<any> | string | null,
 };
 
 export class OptionSetFilterManager extends React.Component<Props, State> {
@@ -37,7 +37,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: Array<any> | null) => {
+    handleCommitValue = (value: Array<any> | string | null) => {
         this.setState({
             value,
         });

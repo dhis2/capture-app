@@ -670,8 +670,12 @@ When('you set the organisation unit filter', () => {
 });
 
 When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    if (filterName === 'Age (years)') {
+        cy.get('[data-test="event-working-lists"]').contains('Age (years)').click();
+    } else {
+        cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+        cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    }
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
