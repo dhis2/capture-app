@@ -8,7 +8,9 @@ const cleanUpIfApplicable = (programId) => {
     cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const workingList = body.programStageWorkingLists && body.programStageWorkingLists.find(e => e.displayName === 'Custom Program stage list');
+            const workingList = body.programStageWorkingLists?.find(
+                e => e.displayName === 'Custom Program stage list',
+            );
             if (!workingList) {
                 return null;
             }
@@ -22,8 +24,9 @@ const cleanUpTeiFilterIfApplicable = (programId, filterName) => {
     cy.buildApiUrl(`trackedEntityInstanceFilters?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const filter = body.trackedEntityInstanceFilters &&
-                body.trackedEntityInstanceFilters.find(e => e.displayName === filterName);
+            const filter = body.trackedEntityInstanceFilters?.find(
+                e => e.displayName === filterName,
+            );
             if (!filter) {
                 return null;
             }
