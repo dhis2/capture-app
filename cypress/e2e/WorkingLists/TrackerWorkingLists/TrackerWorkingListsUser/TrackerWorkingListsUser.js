@@ -713,8 +713,9 @@ Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/
 });
 
 Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when opened$/, (filterName, startDate, endDate) => {
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('[data-test="date-filter-from"]').find('input').should('have.attr', 'value', startDate);
@@ -745,8 +746,9 @@ Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is
 });
 
 Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when opened$/, (filterName, value) => {
-    cy.get('[data-test="tracker-working-lists"]').should('contain', filterName).and('contain', value);
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input').should('be.checked');
     });
