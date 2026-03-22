@@ -17,6 +17,21 @@ const cleanUpIfApplicable = (programId) => {
                 .then(workingListUrl => cy.request('DELETE', workingListUrl));
         });
 };
+
+const cleanUpTeiFilterIfApplicable = (programId, filterName) => {
+    cy.buildApiUrl(`trackedEntityInstanceFilters?filter=program.id:eq:${programId}&fields=id,displayName`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const filter = body.trackedEntityInstanceFilters &&
+                body.trackedEntityInstanceFilters.find(e => e.displayName === filterName);
+            if (!filter) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('trackedEntityInstanceFilters', filter.id)
+                .then(filterUrl => cy.request('DELETE', filterUrl));
+        });
+};
 Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -79,6 +94,7 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
+    cleanUpTeiFilterIfApplicable('qDkgAbB5Jlk', 'My custom list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
