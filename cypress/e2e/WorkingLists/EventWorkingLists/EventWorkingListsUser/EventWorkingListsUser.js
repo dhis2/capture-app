@@ -171,17 +171,6 @@ Then('the Household location filter button should show that the filter is in eff
         .should('exist');
 });
 
-Then('the age filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years)')
-        .click();
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.get('input[placeholder="Min"]').should('have.attr', 'value', '10');
-        cy.get('input[placeholder="Max"]').should('have.attr', 'value', '20');
-    });
-    cy.get('body').click(0, 0);
-});
-
 When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
