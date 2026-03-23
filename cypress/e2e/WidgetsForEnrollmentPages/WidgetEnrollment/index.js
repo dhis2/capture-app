@@ -123,14 +123,6 @@ Then(/^the user sees the enrollment status is (.*)$/, status =>
     }),
 );
 
-Then(/^the user can see the enrollment is ?(.*) marked for follow up/, not =>
-    cy.get('[data-test="widget-enrollment"]').within(() => {
-        cy.get('[data-test="widget-enrollment-status"]')
-            .contains('Follow-up')
-            .should(not ? 'not.exist' : 'exist');
-    }),
-);
-
 When(/^the user clicks on the delete action/, () =>
     cy.get('[data-test="widget-enrollment-actions-delete"]').click(),
 );
