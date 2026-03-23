@@ -115,11 +115,6 @@ When('the user opens the enrollment actions menu', () => {
     }).as('putEnrollment');
 });
 
-When(/^the user changes the enrollment status to (.*)$/, (status) => {
-    cy.get(`[data-test="widget-enrollment-actions-${status}"]`).click();
-    cy.wait('@putEnrollment');
-});
-
 Then(/^the user sees the enrollment status is (.*)$/, status =>
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-status"]')
@@ -127,13 +122,6 @@ Then(/^the user sees the enrollment status is (.*)$/, status =>
             .should('exist');
     }),
 );
-
-When(/^the user (.*) the enrollment for followup/, (action) => {
-    cy.get(
-        `[data-test="widget-enrollment-actions-followup-${action}"]`,
-    ).click();
-    cy.wait('@putEnrollment');
-});
 
 Then(/^the user can see the enrollment is ?(.*) marked for follow up/, not =>
     cy.get('[data-test="widget-enrollment"]').within(() => {
