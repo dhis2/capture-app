@@ -52,13 +52,8 @@ When(/^you set the age filter to (\d+)-(\d+)$/, (min, max) => {
 
 Then(/^the age filter button should show (\d+) to (\d+) in effect$/, (min, max) => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years)')
-        .click();
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
-        cy.get('input[placeholder="Max"]').should('have.attr', 'value', max);
-    });
-    cy.get('body').click(0, 0);
+        .contains(truncateFilterLabelForTest(`Age (years): ${min} to ${max}`))
+        .should('exist');
 });
 
 Then('the pagination for the event working list should show the second page', () => {
