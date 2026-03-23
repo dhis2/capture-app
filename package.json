@@ -81,7 +81,7 @@
         "clean": "./scripts/clean.sh && yarn workspaces run clean"
     },
     "devDependencies": {
-        "@actions/core": "^1.9.1",
+        "@actions/core": "^3.0.0",
         "@babel/core": "^7.17.8",
         "@babel/eslint-parser": "^7.19.1",
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
