@@ -690,6 +690,9 @@ Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) wh
 });
 
 Then('the date filter should be in effect and show the correct value when opened', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Date of admission: 2018-01-01 to 2018-12-31'))
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
