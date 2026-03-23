@@ -14,5 +14,5 @@ export type Props = RestProps & ExtractedProps & {
     filterValue?: FilterData;
     type: typeof filterTypesObject[keyof typeof filterTypesObject];
     options?: Options | null;
-    buttonText?: string;
+    valueLabel?: string;
 };
