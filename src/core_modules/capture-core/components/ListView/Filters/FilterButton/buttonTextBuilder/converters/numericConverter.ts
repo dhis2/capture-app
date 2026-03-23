@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import type { NumericFilterData } from '../../../../../FiltersForTypes';
 
-// eslint-disable-next-line complexity
 export function convertNumeric(filter: NumericFilterData): string {
     let appliedText = '';
     const geHasValue = !!filter.ge || filter.ge === 0;
@@ -9,7 +8,7 @@ export function convertNumeric(filter: NumericFilterData): string {
 
     if (geHasValue && leHasValue) {
         if (filter.ge === filter.le) {
-            appliedText = filter.ge!.toString();
+            appliedText = String(filter.ge);
         } else {
             appliedText = i18n.t('{{from}} to {{to}}', {
                 from: filter.ge,

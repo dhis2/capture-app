@@ -1,6 +1,10 @@
 import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { padWithZeros } from 'capture-core-utils/date';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
 import type { DateTimeFilterData, DateTimeValue } from './types/dateTime.types';
 import type { Value } from './DateTime.types';
 
@@ -28,6 +32,14 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
 }
 
 export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilterData | null {
+    if (typeof value === 'string' && isEmptyValueFilter(value)) {
+        return getEmptyValueFilterData(value);
+    }
+
+    if (typeof value === 'string') {
+        return null;
+    }
+
     const filterData: DateTimeFilterData = { type: 'ABSOLUTE' };
 
     if (value.from?.date) {
@@ -38,7 +50,7 @@ export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilter
     }
 
     if (value.to?.date) {
-        const le = buildIsoDateTime(value.to, '00:00');
+        const le = buildIsoDateTime(value.to, '23:59');
         if (le) {
             filterData.le = le;
         }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { BooleanFilterStringified } from './types';
 
 type Props = {
@@ -20,6 +21,13 @@ export class BooleanFilterManager extends React.Component<Props, State> {
     ): (Array<string> | string | null | boolean | undefined) {
         if (!filter) {
             return undefined;
+        }
+
+        if (filter.isEmpty === true) {
+            return EMPTY_VALUE_FILTER;
+        }
+        if (filter.isEmpty === false) {
+            return NOT_EMPTY_VALUE_FILTER;
         }
 
         return singleSelect ? filter.values[0] : filter.values;

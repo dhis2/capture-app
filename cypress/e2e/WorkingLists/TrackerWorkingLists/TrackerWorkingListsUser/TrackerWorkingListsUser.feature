@@ -382,6 +382,96 @@ Feature: User interacts with tei working lists
     And the empty-only filter "Residence location" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
 
+  @v>=42
+  Scenario: Save and load view with isEmpty filters for TEA types - TEXT, NUMBER, AGE
+    Given you open the main page with Ngelehun and TEI value types program context
+    When you set the empty-only filter "Phone number" to Is empty
+    And you set the empty-only filter "Height in cm" to Is not empty
+    And you set the isEmpty date filter "Age" to Is empty
+    And you save the view as trackerIsEmptyWorkingList
+    And you refresh the page
+    And you open the saved view trackerIsEmptyWorkingList
+    Then the empty-only filter "Phone number" should be in effect and show Is empty when opened
+    And the empty-only filter "Height in cm" should be in effect and show Is not empty when opened
+    And the isEmpty date filter "Age" should be in effect and show Is empty when opened
+    And the saved tracker working list view is cleaned up
+
+  @v>=42
+  Scenario: Save and load view with isNotEmpty filters for TEA types - TEXT, NUMBER, AGE
+    Given you open the main page with Ngelehun and TEI value types program context
+    When you set the empty-only filter "Phone number" to Is not empty
+    And you set the empty-only filter "Height in cm" to Is empty
+    And you set the isEmpty date filter "Age" to Is not empty
+    And you save the view as trackerIsNotEmptyWorkingList
+    And you refresh the page
+    And you open the saved view trackerIsNotEmptyWorkingList
+    Then the empty-only filter "Phone number" should be in effect and show Is not empty when opened
+    And the empty-only filter "Height in cm" should be in effect and show Is empty when opened
+    And the isEmpty date filter "Age" should be in effect and show Is not empty when opened
+    And the saved tracker working list view is cleaned up
+
+  @v>=42
+  Scenario: Save and load view with isEmpty filters for program stage types - BOOLEAN, LONG_TEXT
+    Given you open the main page with Ngelehun and child programme default template context
+    When you set the empty-only filter "BCG dose" to Is empty
+    And you set the empty-only filter "Apgar comment" to Is not empty
+    And you save the program stage view as trackerPSIsEmptyWorkingList
+    And you refresh the page
+    And you open the saved program stage view trackerPSIsEmptyWorkingList
+    Then the empty-only filter "BCG dose" should be in effect and show Is empty when opened
+    And the empty-only filter "Apgar comment" should be in effect and show Is not empty when opened
+    And the saved tracker working list view is cleaned up
+
+  @v>=42
+  Scenario: Save and load view with isEmpty filters for Care at birth program stage types - INTEGER_POSITIVE, PERCENTAGE, DATE, ORGANISATION_UNIT, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE
+    Given you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context
+    When you set the empty-only filter "WHOMCH Fetal heart rate on admission" to Is empty
+    And you set the empty-only filter "WHOMCH Body temperature" to Is not empty
+    And you set the empty-only filter "WHOMCH Estimated blood loss (ml)" to Is empty
+    And you set the empty-only filter "WHOMCH Respiratory rate" to Is not empty
+    And you set the isEmpty date filter "WHOMCH Date of induction of labor" to Is empty
+    And you set the empty-only filter "WHOMCH Hospital / Birth clinic" to Is empty
+    And you save the program stage view as trackerCareIsEmptyWorkingList
+    And you refresh the page
+    And you open the saved program stage view trackerCareIsEmptyWorkingList
+    Then the empty-only filter "WHOMCH Fetal heart rate on admission" should be in effect and show Is empty when opened
+    And the empty-only filter "WHOMCH Body temperature" should be in effect and show Is not empty when opened
+    And the empty-only filter "WHOMCH Estimated blood loss (ml)" should be in effect and show Is empty when opened
+    And the empty-only filter "WHOMCH Respiratory rate" should be in effect and show Is not empty when opened
+    And the isEmpty date filter "WHOMCH Date of induction of labor" should be in effect and show Is empty when opened
+    And the empty-only filter "WHOMCH Hospital / Birth clinic" should be in effect and show Is empty when opened
+    And the saved tracker working list view is cleaned up
+
+  @v>=42
+  Scenario: Save and load view with isEmpty filters for TRUE_ONLY type
+    Given you open the main page with Ngelehun and Malaria case diagnosis default template context
+    When you set the empty-only filter "Date of birth (mal) is estimated" to Is empty
+    And you save the view as trackerTrueOnlyIsEmptyWorkingList
+    And you refresh the page
+    And you open the saved view trackerTrueOnlyIsEmptyWorkingList
+    Then the empty-only filter "Date of birth (mal) is estimated" should be in effect and show Is empty when opened
+    And the saved tracker working list view is cleaned up
+
+  @v>=42
+  Scenario: Save and load view with isEmpty filters for EMAIL type
+    Given you open the main page with Ngelehun and WHO RMNCH Tracker context
+    When you set the empty-only filter "Email address" to Is not empty
+    And you save the view as trackerEmailIsEmptyWorkingList
+    And you refresh the page
+    And you open the saved view trackerEmailIsEmptyWorkingList
+    Then the empty-only filter "Email address" should be in effect and show Is not empty when opened
+    And the saved tracker working list view is cleaned up
+
+  @v>=42
+  Scenario: Save and load view with isEmpty filters for OPTION_SET (program stage BOOLEAN with option set)
+    Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
+    When you set the empty-only filter "WHOMCH Smoking" to Is empty
+    And you save the program stage view as trackerOptionSetIsEmptyWorkingList
+    And you refresh the page
+    And you open the saved program stage view trackerOptionSetIsEmptyWorkingList
+    Then the empty-only filter "WHOMCH Smoking" should be in effect and show Is empty when opened
+    And the saved tracker working list view is cleaned up
+
   @v<42
   Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER (no empty-only types)
     Given you open the main page with Ngelehun and TEI value types program context

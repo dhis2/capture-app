@@ -2,6 +2,9 @@ export type DateTimeFilterData = {
     type: 'ABSOLUTE';
     ge?: string;
     le?: string;
+} | {
+    isEmpty: boolean;
+    value: string;
 };
 
 export type DateTimeValue = {

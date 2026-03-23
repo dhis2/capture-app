@@ -2,7 +2,11 @@ import { parseNumber } from 'capture-core-utils/parsers';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
-import type { AbsoluteDateFilterData, RelativeDateFilterData, DateValue } from './types';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
+import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './types';
 
 type Value = {
     main: string;
@@ -37,11 +41,11 @@ function convertRelativeRange(value: Value) {
     const startBuffer = value.start ? parseNumber(value.start) : 0;
     const endBuffer = value.end ? parseNumber(value.end) : 0;
 
-    if (startBuffer || startBuffer === 0) {
+    if (startBuffer != null) {
         rangeData.startBuffer = -Math.abs(startBuffer);
     }
 
-    if (endBuffer || endBuffer === 0) {
+    if (endBuffer != null) {
         rangeData.endBuffer = endBuffer;
     }
 
@@ -58,6 +62,14 @@ function convertSelections(value: Value) {
     return { type: dateFilterTypes.RELATIVE, period: value.main };
 }
 
-export function getDateFilterData(value: Value) {
+export function getDateFilterData(value: Value | string): DateFilterData | null {
+    if (typeof value === 'string' && isEmptyValueFilter(value)) {
+        return getEmptyValueFilterData(value);
+    }
+
+    if (typeof value === 'string' || value == null) {
+        return null;
+    }
+
     return convertSelections(value);
 }

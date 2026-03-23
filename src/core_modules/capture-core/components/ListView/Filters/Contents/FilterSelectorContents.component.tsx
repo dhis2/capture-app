@@ -64,8 +64,12 @@ const useContents = ({
     multiValueFilter,
     isRemovable,
     emptyValueFilterSupported,
+    transformRecordsFilter,
+    isMainProperty,
     ...passOnProps
-}) => {
+}: Record<string, any>) => {
+    // main/system filters always have transformRecordsFilter (filtersOnly) or isMainProperty (columns)
+    const disableEmptyValueFilter = Boolean(transformRecordsFilter) || Boolean(isMainProperty);
     const [disabledUpdate, setUpdateDisabled] = useState(true);
     const [FilterContents, ofTypeOptionSet] = useMemo(() => {
         if (options && options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
@@ -91,6 +95,7 @@ const useContents = ({
                 disabledUpdate={disabledUpdate}
                 disabledReset={filterValue === undefined}
                 isRemovable={isRemovable}
+                disableEmptyValueFilter={disableEmptyValueFilter}
             />
         );
     }
@@ -104,6 +109,7 @@ const useContents = ({
             handleCommitValue={() => setUpdateDisabled(false)}
             disabledUpdate={disabledUpdate}
             disabledReset={filterValue === undefined}
+            disableEmptyValueFilter={disableEmptyValueFilter}
         />
     );
 };

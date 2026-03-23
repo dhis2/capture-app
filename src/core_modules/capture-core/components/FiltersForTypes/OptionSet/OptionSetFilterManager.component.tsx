@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { OptionSetFilter } from './OptionSetFilter.component';
+import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { OptionSetFilterData } from './types';
 
 type Props = {
@@ -10,13 +11,20 @@ type Props = {
 };
 
 type State = {
-    value?: Array<any> | null,
+    value?: Array<any> | string | null,
 };
 
 export class OptionSetFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter: OptionSetFilterData | null, singleSelect: boolean) {
         if (!filter) {
             return undefined;
+        }
+
+        if (filter.isEmpty === true) {
+            return EMPTY_VALUE_FILTER;
+        }
+        if (filter.isEmpty === false) {
+            return NOT_EMPTY_VALUE_FILTER;
         }
 
         return singleSelect ? filter.values[0] : filter.values;
@@ -29,7 +37,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: Array<any> | null) => {
+    handleCommitValue = (value: Array<any> | string | null) => {
         this.setState({
             value,
         });

@@ -4,4 +4,5 @@ export type UsernameFilterProps = {
     onCommitValue: (value: Value) => void;
     onUpdate: (updatedValue: Value) => void;
     value: Value;
+    disableEmptyValueFilter?: boolean;
 };

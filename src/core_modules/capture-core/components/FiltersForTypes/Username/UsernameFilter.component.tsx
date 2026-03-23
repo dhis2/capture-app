@@ -4,6 +4,13 @@ import { UserField } from '../../FormFields/UserField';
 import { getUsernameFilterData } from './usernameFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { UsernameFilterProps, Value } from './Username.types';
+import {
+    makeCheckboxHandler,
+    isEmptyValueFilter,
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+    EmptyValueFilterCheckboxes,
+} from '../EmptyValue';
 
 export class UsernameFilter extends Component<UsernameFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
@@ -18,18 +25,37 @@ export class UsernameFilter extends Component<UsernameFilterProps> implements Up
         }
     };
 
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
+        this.props.onCommitValue(value ?? null);
+    });
+
     render() {
         const { value } = this.props;
-        const usernameValue = value !== undefined && value !== null && typeof value === 'string' ? value : null;
+        const isEmptyFilter = typeof value === 'string' && isEmptyValueFilter(value);
+        const usernameValue = !isEmptyFilter && value !== undefined
+            && value !== null && typeof value === 'string' ? value : null;
 
         return (
-            <UserField
-                value={usernameValue}
-                onSet={this.handleUserSet}
-                inputPlaceholderText={i18n.t('Search for user')}
-                focusOnMount
-                usernameOnlyMode
-            />
+            <div>
+                <EmptyValueFilterCheckboxes
+                    value={isEmptyFilter ? value : undefined}
+                    onEmptyChange={this.handleEmptyValueCheckboxChange}
+                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                    disabled={this.props.disableEmptyValueFilter}
+                />
+
+                <UserField
+                    value={usernameValue}
+                    onSet={this.handleUserSet}
+                    inputPlaceholderText={i18n.t('Search for user')}
+                    focusOnMount
+                    usernameOnlyMode
+                />
+            </div>
         );
     }
 }

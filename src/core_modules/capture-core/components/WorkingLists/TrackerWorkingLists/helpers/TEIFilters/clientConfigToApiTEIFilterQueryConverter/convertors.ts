@@ -51,6 +51,9 @@ const convertDate = (rawValue: string): string => {
 };
 
 export const getDateFilter = (dateFilter: DateFilterData) => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
     const apiDateFilterContents =
         dateFilter.type === dateFilterTypes.RELATIVE
             ? {
@@ -74,13 +77,18 @@ const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
     eq: filter.value,
 });
 
-export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => ({
-    dateFilter: {
-        type: dateFilterTypes.ABSOLUTE,
-        startDate: dateFilter.ge ?? undefined,
-        endDate: dateFilter.le ?? undefined,
-    },
-});
+export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => {
+    if ('isEmpty' in dateFilter) {
+        return { dateFilter: { type: 'ABSOLUTE' } };
+    }
+    return {
+        dateFilter: {
+            type: dateFilterTypes.ABSOLUTE,
+            startDate: dateFilter.ge ?? undefined,
+            endDate: dateFilter.le ?? undefined,
+        },
+    };
+};
 
 export const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,
@@ -142,11 +150,11 @@ export const convertMainFilters = ({
             return acc;
         }
 
-        const mainValue = mainFiltersTable[key](filter);
-
         if (typeof filter.isEmpty === 'boolean') {
-            return { ...toApiEmptyValueFilter(filter), [key]: mainValue };
+            return { ...acc, ...toApiEmptyValueFilter(filter) };
         }
+
+        const mainValue = mainFiltersTable[key](filter);
 
         if (mainValue !== undefined) {
             if (key === MAIN_FILTERS.ASSIGNEE) {
