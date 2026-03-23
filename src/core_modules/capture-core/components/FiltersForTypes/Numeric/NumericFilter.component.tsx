@@ -159,16 +159,14 @@ class NumericFilterPlain
             .length > 0 ? valueObject : undefined;
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        const committed = value || null;
-        this.setState({ committedValue: committed });
-        this.props.onCommitValue(committed);
+    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value = null) => {
+        this.setState({ committedValue: value });
+        this.props.onCommitValue(value);
     });
 
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        const committed = value || null;
-        this.setState({ committedValue: committed });
-        this.props.onCommitValue(committed);
+    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value = null) => {
+        this.setState({ committedValue: value });
+        this.props.onCommitValue(value);
     });
 
     handleEnterKey = (value: {[key: string]: string}) => {
