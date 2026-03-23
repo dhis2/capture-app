@@ -473,7 +473,7 @@ When('you set the date of admission filter', () => {
         });
 
     cy.get('[data-test="more-filters-menu"]')
-        .within(() => cy.contains(/Date of admission|Admission Date/).click());
+        .within(() => cy.contains('Date of admission').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
@@ -643,7 +643,7 @@ When('you set the boolean filter', () => {
 
 When('you set the date filter', () => {
     cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(/Date of admission|Admission Date/).click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Date of admission').click());
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('input[type="text"]').then(($inputs) => {
@@ -695,8 +695,7 @@ Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) wh
 Then('the date filter should be in effect and show the correct value when opened', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains(truncateFilterLabelForTest('Date of admission: 2018-01-01 to 2018-12-31'))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
+        .click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('input[type="text"]').then(($inputs) => {
@@ -755,7 +754,7 @@ Then('the boolean and range filters should show correct values when opened', () 
 });
 
 Then('the date and coordinate filters should show correct values when opened', () => {
-    cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
+    cy.get('[data-test="event-working-lists"]').contains('Date of admission').click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('input[type="text"]').then(($inputs) => {
@@ -800,7 +799,7 @@ Then('each filter should show correct value when opened', () => {
     });
     cy.get('body').click(0, 0);
 
-    cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
+    cy.get('[data-test="event-working-lists"]').contains('Date of admission').click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('input[type="text"]').then(($inputs) => {
@@ -899,7 +898,7 @@ Then('the Weight in kg filter should show 1 and 200 in range fields when opened'
 
 Then('the Admission Date filter should show date range when opened', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains(/Admission Date|Date of admission/)
+        .contains('Date of admission')
         .click();
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
