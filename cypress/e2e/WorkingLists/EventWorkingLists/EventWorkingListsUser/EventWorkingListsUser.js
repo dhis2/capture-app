@@ -671,29 +671,6 @@ When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (fi
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
-Then('all set filters should show in effect', () => {
-    cy.get('[data-test="event-working-lists"]').should('contain', 'Pregnant').and('contain', 'Yes');
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest('Age (years): 0 to 120'))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest('Height in cm: 100 to 200'))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest('Weight in kg: 1 to 200'))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]')
-        .contains(/Admission Date|Date of admission/)
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]').should('contain', 'Place of Infection').and('contain', 'Ngelehu');
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest('Household location: Is empty'))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest('Documentation: Is empty'))
-        .should('exist');
-});
-
 Then('the boolean filter should be in effect and show the correct value when opened', () => {
     cy.get('[data-test="event-working-lists"]').should('contain', 'Pregnant').and('contain', 'Yes');
     cy.get('[data-test="event-working-lists"]').contains('Pregnant').click();
@@ -858,12 +835,6 @@ Then('the Weight in kg filter should show 1 to 200 in effect', () => {
         .should('exist');
 });
 
-Then('the Admission Date filter should show date range in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains(/Admission Date|Date of admission/)
-        .should('exist');
-});
-
 Then('the Place of Infection filter should show Ngelehun in effect', () => {
     cy.get('[data-test="event-working-lists"]')
         .should('contain', 'Place of Infection')
@@ -977,46 +948,6 @@ Then('the report date filter should be in effect', () => {
         });
 
     cy.get('body').click(0, 0);
-});
-
-Then('the Organisation unit filter should be in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Organisation unit')
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Ngelehun')
-        .should('exist');
-});
-
-Then('the admission filter should be in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains(/Admission Date|Date of admission/)
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .within(() => {
-            cy.contains('Absolute range')
-                .click();
-            cy.get('input[type="text"]')
-                .then(($elements) => {
-                    cy.wrap($elements[0])
-                        .should('have.attr', 'value', '2018-01-01');
-
-                    cy.wrap($elements[1])
-                        .should('have.attr', 'value', '2018-12-31');
-                });
-        });
-
-    // clean up
-    cy.get('@newEventResult')
-        .then((result) => {
-            expect(result.response.statusCode).to.equal(201);
-            const id = result.response.body.response.uid;
-            cy.buildApiUrl('eventFilters', id)
-                .then((eventFiltersUrl) => {
-                    cy.request('DELETE', eventFiltersUrl);
-                });
-        });
 });
 
 Then('the saved working list view is cleaned up', () => {
