@@ -4,35 +4,17 @@ import '../sharedSteps';
 import { hasVersionSupport } from '../../../../support/tagUtils';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const cleanUpIfApplicable = (programId) => {
-    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
+const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
+    cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const workingList = body.programStageWorkingLists?.find(
-                e => e.displayName === 'Custom Program stage list',
-            );
-            if (!workingList) {
+            const match = body[resource]?.find(e => e.displayName === displayName);
+            if (!match) {
                 return null;
             }
             return cy
-                .buildApiUrl('programStageWorkingLists', workingList.id)
-                .then(workingListUrl => cy.request('DELETE', workingListUrl));
-        });
-};
-
-const cleanUpTeiFilterIfApplicable = (programId, filterName) => {
-    cy.buildApiUrl(`trackedEntityInstanceFilters?filter=program.id:eq:${programId}&fields=id,displayName`)
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            const filter = body.trackedEntityInstanceFilters?.find(
-                e => e.displayName === filterName,
-            );
-            if (!filter) {
-                return null;
-            }
-            return cy
-                .buildApiUrl('trackedEntityInstanceFilters', filter.id)
-                .then(filterUrl => cy.request('DELETE', filterUrl));
+                .buildApiUrl(resource, match.id)
+                .then(resourceUrl => cy.request('DELETE', resourceUrl));
         });
 };
 Given('you open the main page with Ngelehun and child programe context', () => {
@@ -97,7 +79,7 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
-    cleanUpTeiFilterIfApplicable('qDkgAbB5Jlk', 'My custom list');
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'My custom list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
@@ -106,7 +88,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis default t
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
-    cleanUpIfApplicable('qDkgAbB5Jlk');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'qDkgAbB5Jlk', 'Custom Program stage list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -127,7 +109,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 });
 
 Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpIfApplicable('M3xtLkYBlKI');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'M3xtLkYBlKI', 'Custom Program stage list');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
