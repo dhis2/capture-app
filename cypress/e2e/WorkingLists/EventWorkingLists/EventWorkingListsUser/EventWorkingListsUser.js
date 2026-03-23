@@ -681,6 +681,9 @@ Then('the boolean filter should be in effect and show the correct value when ope
 });
 
 Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) when opened$/, (filterName, min, max) => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`))
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
