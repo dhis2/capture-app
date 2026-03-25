@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { v4 as uuid } from 'uuid';
@@ -313,6 +312,36 @@ export class FormBuilder extends React.Component<Props> {
         this.commitFieldUpdate({ fieldId, validators }, value, oldValue, { ...options, plugin: true });
     }
 
+    private getOrCreateValidatingContainer(fieldId: string): FieldValidatingContainer {
+        this.fieldsValidatingPromiseContainer[fieldId] ??= { validatingCompleteUid: uuid() };
+        return this.fieldsValidatingPromiseContainer[fieldId];
+    }
+
+    private handleValidationError(
+        reason: any,
+        fieldId: string,
+        value: any,
+        validatingCompleteUid: string,
+    ) {
+        if (!reason || !isObject(reason) || !reason.isCanceled) {
+            const { onUpdateField, id } = this.props;
+            log.error({ reason, fieldId, value });
+            onUpdateField(
+                value,
+                {
+                    valid: false,
+                    touched: true,
+                    errorMessage: i18n.t('error encountered during field validation'),
+                    errorType: i18n.t('error'),
+                },
+                fieldId,
+                id,
+                validatingCompleteUid,
+            );
+            this.fieldsValidatingPromiseContainer[fieldId] = null;
+        }
+    }
+
     async commitFieldUpdate(
         { fieldId, validators, onIsEqual }: FieldCommitConfig,
         value: any,
@@ -334,11 +363,7 @@ export class FormBuilder extends React.Component<Props> {
             return;
         }
 
-        const fieldValidatingPromiseContainer: any = this.fieldsValidatingPromiseContainer[fieldId] || {};
-        this.fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
-        if (!fieldValidatingPromiseContainer.validatingCompleteUid) {
-            fieldValidatingPromiseContainer.validatingCompleteUid = uuid();
-        }
+        const fieldValidatingPromiseContainer: any = this.getOrCreateValidatingContainer(fieldId);
         fieldValidatingPromiseContainer.cancelableValidatingPromise &&
         fieldValidatingPromiseContainer.cancelableValidatingPromise.cancel();
 
@@ -392,22 +417,12 @@ export class FormBuilder extends React.Component<Props> {
                     updateField({ valid, errorMessage, errorType, errorData });
                 })
                 .catch((reason: any) => {
-                    if (!reason || !isObject(reason) || !reason.isCanceled) {
-                        log.error({ reason, fieldId, value });
-                        onUpdateField(
-                            value,
-                            {
-                                valid: false,
-                                touched: true,
-                                errorMessage: i18n.t('error encountered during field validation'),
-                                errorType: i18n.t('error'),
-                            },
-                            fieldId,
-                            id,
-                            fieldValidatingPromiseContainer.validatingCompleteUid,
-                        );
-                        this.fieldsValidatingPromiseContainer[fieldId] = null;
-                    }
+                    this.handleValidationError(
+                        reason,
+                        fieldId,
+                        value,
+                        fieldValidatingPromiseContainer.validatingCompleteUid,
+                    );
                 }));
     }
 

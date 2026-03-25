@@ -190,7 +190,6 @@ class UserSearchPlain extends React.Component<Props, State> {
         }
     }
 
-    // eslint-disable-next-line complexity
     handleExitSearchFromInput = () => {
         const { exitBehaviour } = this.props;
         const { suggestions } = this.state;

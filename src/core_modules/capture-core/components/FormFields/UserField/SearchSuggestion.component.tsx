@@ -67,7 +67,6 @@ export const SearchSuggestion = (props: Props) => {
     const matches = match(userText, query);
     const parts = parse(userText, matches);
 
-    // eslint-disable-next-line complexity
     const handleKeyDown = React.useCallback((event: any) => {
         if ((event.keyCode === 40 && !useUpwardList) || (event.keyCode === 38 && useUpwardList)) {
             onHighlightNext(user);

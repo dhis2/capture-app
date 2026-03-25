@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { RuleEngineJs } from '@dhis2/rule-engine';
 import {
     InputBuilder,

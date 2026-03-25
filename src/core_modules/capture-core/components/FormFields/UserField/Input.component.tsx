@@ -48,7 +48,6 @@ export const Input = (props: Props) => {
 
     const handleUpdateValue = React.useCallback((event: any) => onUpdateValue(event.currentTarget.value), [onUpdateValue]);
 
-    // eslint-disable-next-line complexity
     const handleKeyDown = React.useCallback((event: any) => {
         if ((event.keyCode === 40 && !useUpwardList) || (event.keyCode === 38 && useUpwardList)) {
             onHighlightSuggestion();
