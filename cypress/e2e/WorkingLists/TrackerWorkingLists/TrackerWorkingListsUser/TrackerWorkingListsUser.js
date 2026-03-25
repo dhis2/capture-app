@@ -689,11 +689,8 @@ When(/^you set the isEmpty date filter "([^"]+)" to (Is empty|Is not empty)$/, (
             const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
             if (match) {
                 cy.wrap(match).click();
-            } else if (CARE_AT_BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
-                cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
-                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
             } else {
-                cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+                openStageFilterMenu(filterName);
                 cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
             }
         });
