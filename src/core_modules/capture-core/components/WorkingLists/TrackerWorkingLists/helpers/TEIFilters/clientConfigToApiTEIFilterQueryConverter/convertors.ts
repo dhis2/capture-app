@@ -13,7 +13,6 @@ import {
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 import type { ApiDataFilterOrgUnit } from '../../../../EventWorkingLists/types';
 
 const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
@@ -148,10 +147,6 @@ export const convertMainFilters = ({
         const element = mainFilters.find(mainFilter => mainFilter.id === key);
         if (!filter || !element || !mainFiltersTable[key]) {
             return acc;
-        }
-
-        if (typeof filter.isEmpty === 'boolean') {
-            return { ...acc, ...toApiEmptyValueFilter(filter) };
         }
 
         const mainValue = mainFiltersTable[key](filter);

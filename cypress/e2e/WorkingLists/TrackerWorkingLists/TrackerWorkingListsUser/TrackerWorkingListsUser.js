@@ -620,9 +620,16 @@ const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
     'WHOMCH Date of induction of labor',
 ]);
 
+// All program stage data element filter names (used to pick the correct "More filters" button)
+const PROGRAM_STAGE_FILTER_NAMES = new Set([
+    ...BIRTH_STAGE_FILTER_NAMES,
+    ...CARE_AT_BIRTH_STAGE_FILTER_NAMES,
+    'WHOMCH Smoking',
+]);
+
 function openStageFilterMenu(filterName) {
-    const isBirthStageFilter = BIRTH_STAGE_FILTER_NAMES.has(filterName);
-    if (isBirthStageFilter) {
+    if (BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        // Birth stage filters may need to select the program stage first
         let needProgramStageFlow = false;
         cy.get('[data-test="tracker-working-lists"]').within(() => {
             cy.get('[data-test="more-filters"]').then(($buttons) => {
@@ -642,6 +649,8 @@ function openStageFilterMenu(filterName) {
                 cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
             }
         });
+    } else if (PROGRAM_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
     } else {
         cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
     }
