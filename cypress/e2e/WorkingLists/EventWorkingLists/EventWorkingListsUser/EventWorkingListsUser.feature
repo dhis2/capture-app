@@ -131,13 +131,20 @@ Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, 
 @v>=42
 Scenario: Save and load view with isEmpty filters for BOOLEAN, NUMBER, INTEGER, DATE, ORGANISATION_UNIT types
   Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the empty-only filter "Pregnant" to Is not empty
+  And you set the empty-only filter "Height in cm" to Is empty
+  And you set the empty-only filter "Weight in kg" to Is not empty
+  And you set the empty-only filter "Age (years)" to Is empty
+  And you set the isEmpty date filter to Is not empty
+  And you set the empty-only filter "Place of Infection" to Is not empty
+  And you save the view as eventIsEmptyWorkingList
   When you set the empty-only filter "Pregnant" to Is empty
   And you set the empty-only filter "Height in cm" to Is not empty
   And you set the empty-only filter "Weight in kg" to Is empty
   And you set the empty-only filter "Age (years)" to Is not empty
   And you set the isEmpty date filter to Is empty
   And you set the empty-only filter "Place of Infection" to Is empty
-  And you save the view as eventIsEmptyWorkingList
+  And you update the view with the name eventIsEmptyWorkingList
   And you refresh the page
   And you open the saved view eventIsEmptyWorkingList
   Then the empty-only filter "Pregnant" should be in effect and show Is empty when opened
@@ -151,13 +158,20 @@ Scenario: Save and load view with isEmpty filters for BOOLEAN, NUMBER, INTEGER, 
 @v>=42
 Scenario: Save and load view with isNotEmpty filters for BOOLEAN, NUMBER, INTEGER, DATE, ORGANISATION_UNIT types
   Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the empty-only filter "Pregnant" to Is empty
+  And you set the empty-only filter "Height in cm" to Is not empty
+  And you set the empty-only filter "Weight in kg" to Is empty
+  And you set the empty-only filter "Age (years)" to Is not empty
+  And you set the isEmpty date filter to Is empty
+  And you set the empty-only filter "Place of Infection" to Is empty
+  And you save the view as eventIsNotEmptyWorkingList
   When you set the empty-only filter "Pregnant" to Is not empty
   And you set the empty-only filter "Height in cm" to Is empty
   And you set the empty-only filter "Weight in kg" to Is not empty
   And you set the empty-only filter "Age (years)" to Is empty
   And you set the isEmpty date filter to Is not empty
   And you set the empty-only filter "Place of Infection" to Is not empty
-  And you save the view as eventIsNotEmptyWorkingList
+  And you update the view with the name eventIsNotEmptyWorkingList
   And you refresh the page
   And you open the saved view eventIsNotEmptyWorkingList
   Then the empty-only filter "Pregnant" should be in effect and show Is not empty when opened
@@ -171,8 +185,11 @@ Scenario: Save and load view with isNotEmpty filters for BOOLEAN, NUMBER, INTEGE
 @v>=42
 Scenario: Save and load view with isEmpty filters for TEXT type
   Given you open the main page with Ngelehun and event program text filter context
-  When you set the empty-only filter "XX MAL RDT TRK - Reason for not testing" to Is empty
+  When you set the empty-only filter "XX MAL RDT TRK - Reason for not testing" to Is not empty
+  Then the empty-only filter "XX MAL RDT TRK - Reason for not testing" should be in effect with value Is not empty
   And you save the view as eventTextIsEmptyWorkingList
+  When you set the empty-only filter "XX MAL RDT TRK - Reason for not testing" to Is empty
+  And you update the view with the name eventTextIsEmptyWorkingList
   And you refresh the page
   And you open the saved view eventTextIsEmptyWorkingList
   Then the empty-only filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show Is empty when opened

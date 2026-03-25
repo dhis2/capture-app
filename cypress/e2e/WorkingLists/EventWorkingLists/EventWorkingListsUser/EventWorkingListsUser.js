@@ -4,6 +4,24 @@ import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
+const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
+const EVENT_TEXT_FILTER_PROGRAM_ID = 'MoUd5BTQ3lY';
+
+const cleanUpEventFilterIfApplicable = (programId, displayName) => {
+    cy.buildApiUrl(`eventFilters?filter=program:eq:${programId}&fields=id,displayName`)
+        .then((url) => cy.request(url))
+        .then(({ body }) => {
+            const items = body.eventFilters ?? [];
+            const match = items.find((e) => e.displayName === displayName);
+            if (!match) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('eventFilters', match.id)
+                .then((deleteUrl) => cy.request('DELETE', deleteUrl));
+        });
+};
+
 const CONTEXT_QUERIES = {
     'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
     'Inpatient morbidity and mortality context': 'programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8',
@@ -12,6 +30,16 @@ const CONTEXT_QUERIES = {
 };
 
 Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
+    if (contextOrPath === 'Inpatient morbidity and mortality context') {
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'allValueTypesFilterWorkingList');
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventIsEmptyWorkingList');
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventIsNotEmptyWorkingList');
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'valueTypesNoEmpty');
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'toDeleteWorkingList');
+    }
+    if (contextOrPath === 'event program text filter context') {
+        cleanUpEventFilterIfApplicable(EVENT_TEXT_FILTER_PROGRAM_ID, 'eventTextIsEmptyWorkingList');
+    }
     const query = CONTEXT_QUERIES[contextOrPath] ?? contextOrPath;
     cy.visit(`#/?${query}`);
 });
@@ -554,6 +582,16 @@ When(/^you save the view as (.*)$/, (name) => {
     cy.wait('@newEventFilter', { timeout: 30000 }).as('newEventResult');
 });
 
+When(/^you update the view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.intercept('PUT', '**/eventFilters/**').as('updateEventFilter');
+    cy.contains('Update view')
+        .click();
+    cy.wait('@updateEventFilter', { timeout: 30000 });
+});
+
 When('you set the Pregnant filter to Yes', () => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => cy.contains('More filters').click());
@@ -665,19 +703,36 @@ When('you set the organisation unit filter', () => {
 });
 
 When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    if (filterName === 'Age (years)') {
-        cy.get('[data-test="event-working-lists"]').contains('Age (years)').click();
-    } else {
-        cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-        cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-    }
+    const labelPrefix = truncateFilterLabelForTest(filterName);
+    cy.get('[data-test="event-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
 When(/^you set the isEmpty date filter to (Is empty|Is not empty)$/, (value) => {
-    cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(/Date of admission|Admission Date/).click());
+    cy.get('[data-test="event-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const match = [...$anchors].find((node) =>
+                /Date of admission|Admission Date|Date of adm/i.test(node.innerText)
+            );
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(/Date of admission|Admission Date/).click());
+            }
+        });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
@@ -725,11 +780,15 @@ Then('the organisation unit filter should be in effect and show the correct valu
     cy.get('body').click(0, 0);
 });
 
+Then(/^the empty-only filter "([^"]+)" should be in effect with value (Is empty|Is not empty)$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
+});
+
 Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest(`${filterName}: ${value}`))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
