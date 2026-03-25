@@ -1,19 +1,19 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2024
-# Philip Larsen Donnelly, 2024
 # Nadiia <semchuk@aph.org.ua>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
 # Éva Tamási, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
 # Nancy Espinoza, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-13T08:59:53.721Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Nancy Espinoza, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -95,10 +95,10 @@ msgstr "Переглянути інформаційну панель"
 msgid "View active enrollment"
 msgstr ""
 
-msgid "Re-enroll"
+msgid "Re-enroll in {{programName}}"
 msgstr ""
 
-msgid "in"
+msgid "Re-enroll"
 msgstr ""
 
 msgid "Enrolled"
@@ -122,10 +122,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -283,8 +283,12 @@ msgstr ""
 msgid "Switch to row view"
 msgstr ""
 
-msgid "events added"
-msgstr ""
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "No events added"
 msgstr ""
@@ -325,6 +329,9 @@ msgid "without"
 msgstr ""
 
 msgid "enrollment"
+msgstr ""
+
+msgid "in"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
@@ -467,29 +474,32 @@ msgstr ""
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
+msgstr ""
+
+msgid "From"
+msgstr "Від"
+
+msgid "to"
+msgstr "до"
+
+msgid "To"
+msgstr "До"
+
+msgid "Period"
+msgstr "Період"
+
+msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please specify the number of days"
 msgstr ""
 
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "to"
-msgstr "до"
-
-msgid "Days in the future"
-msgstr "Дні в майбутньому"
-
-msgid "From"
-msgstr "Від"
-
 msgid "Days in the past"
 msgstr "Дні в минулому"
 
-msgid "To"
-msgstr "До"
+msgid "Days in the future"
+msgstr "Дні в майбутньому"
 
 msgid "This week"
 msgstr "Поточний тиждень"
@@ -497,8 +507,8 @@ msgstr "Поточний тиждень"
 msgid "This month"
 msgstr "Поточний місяць"
 
-msgid "This Year"
-msgstr "Цей рік"
+msgid "This year"
+msgstr "Поточний рік"
 
 msgid "Last week"
 msgstr "Минулий тиждень"
@@ -515,17 +525,29 @@ msgstr "Абсолютний діапазон"
 msgid "Relative range"
 msgstr "Відносний діапазон"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Time"
+msgstr ""
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Макс"
-
-msgid "Min"
-msgstr "Мін"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -536,11 +558,20 @@ msgstr ""
 msgid "Please provide a valid integer"
 msgstr ""
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
 msgstr ""
+
+msgid "Min"
+msgstr "Мін"
+
+msgid "Max"
+msgstr "Макс"
 
 msgid "Yes"
 msgstr "Так"
@@ -617,7 +648,7 @@ msgstr "Скинути фільтр"
 msgid "Remove filter"
 msgstr "Видалити фільтр"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -628,6 +659,9 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -637,10 +671,22 @@ msgstr ""
 msgid "before or equal to {{date}}"
 msgstr ""
 
-msgid "greater than or equal to"
+msgid "{{start}} days in the past to {{end}} days in the future"
 msgstr ""
 
-msgid "less than or equal to"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
 msgstr ""
 
 msgid "More filters"
@@ -670,7 +716,7 @@ msgstr "У вас немає доступу до написання приміт
 msgid "Write note"
 msgstr "Створіть примітку"
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -982,6 +1028,9 @@ msgstr "Пошук {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Пошук за атрибутами"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Для пошуку заповніть принаймні атрибут {{count}} "
@@ -991,6 +1040,9 @@ msgstr[3] "Заповніть принаймні {{count}} атрибути дл
 
 msgid "Missing search criteria"
 msgstr "Відсутні критерії пошуку"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Повернутися до пошуку"
@@ -1046,6 +1098,12 @@ msgstr "Немає вибраного"
 msgid "Choose an organisation unit"
 msgstr "Оберіть організаційний підрозділ"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1065,6 +1123,12 @@ msgstr "Показати всі програми"
 
 msgid "Choose a program"
 msgstr "Оберіть програму"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Шукати {{titleText}}"
@@ -1134,6 +1198,9 @@ msgid ""
 "looking for."
 msgstr ""
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1158,6 +1225,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Неможливо здійснити пошук у всіх програмах"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Знайдено результати"
 
@@ -1177,14 +1247,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Створити список"
 
-msgid "Create new in another program"
-msgstr "Створити нове в іншій програмі"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Створити нову подію"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Шукати {{trackedEntityName}} в {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr "Оберіть тип об'єкту, що відстежується"
@@ -1752,9 +1825,6 @@ msgstr "Створено"
 msgid "Deleted"
 msgstr ""
 
-msgid "Date"
-msgstr "Дата"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2189,9 +2259,6 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr "Вкажіть дійсну URL-адресу"
 
@@ -2243,9 +2310,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Встановити координату"
-
-msgid "Time"
-msgstr ""
 
 msgid "From date"
 msgstr ""

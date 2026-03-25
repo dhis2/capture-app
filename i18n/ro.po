@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -91,11 +91,11 @@ msgstr ""
 msgid "View active enrollment"
 msgstr "Vizualizare înrolare activă"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Re-înrolare"
-
-msgid "in"
-msgstr "în"
 
 msgid "Enrolled"
 msgstr "Înrolat"
@@ -118,10 +118,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -281,8 +281,11 @@ msgstr ""
 msgid "Switch to row view"
 msgstr ""
 
-msgid "events added"
-msgstr "evenimentele au fost adăugate"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "No events added"
 msgstr "Nu au fost adăugate evenimente"
@@ -324,6 +327,9 @@ msgstr "fără"
 
 msgid "enrollment"
 msgstr "înrolare"
+
+msgid "in"
+msgstr "în"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -463,29 +469,32 @@ msgstr "Selectați utilizatorul"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
 
-msgid "Please specify the number of days"
+msgid "From"
+msgstr "Din"
+
+msgid "to"
+msgstr ""
+
+msgid "To"
+msgstr "Pînă la"
+
+msgid "Period"
 msgstr ""
 
 msgid "Please provide zero or a positive integer"
 msgstr "Introduceți zero sau un număr întreg pozitiv"
 
-msgid "to"
+msgid "Please specify the number of days"
 msgstr ""
-
-msgid "Days in the future"
-msgstr "Zile în viitor"
-
-msgid "From"
-msgstr "Din"
 
 msgid "Days in the past"
 msgstr "Zile în trecut"
 
-msgid "To"
-msgstr "Pînă la"
+msgid "Days in the future"
+msgstr "Zile în viitor"
 
 msgid "This week"
 msgstr "Săptămâna aceasta"
@@ -493,8 +502,8 @@ msgstr "Săptămâna aceasta"
 msgid "This month"
 msgstr "Luna aceasta"
 
-msgid "This Year"
-msgstr "Anul acesta"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "Săptămâna trecută"
@@ -511,17 +520,29 @@ msgstr "Interval absolut"
 msgid "Relative range"
 msgstr "Interval relativ"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Time"
+msgstr ""
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -532,11 +553,20 @@ msgstr "Introduceți un număr valid"
 msgid "Please provide a valid integer"
 msgstr "Introduceți un număr întreg valid"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr "Introduceți un număr întreg pozitiv"
 
 msgid "Please provide a negative integer"
 msgstr "Introduceți un număr întreg negativ"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
 
 msgid "Yes"
 msgstr "Da"
@@ -613,7 +643,7 @@ msgstr "Resetare filtru"
 msgid "Remove filter"
 msgstr ""
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -622,6 +652,9 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -632,11 +665,23 @@ msgstr "după sau egal cu {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "înainte sau egal cu {{date}}"
 
-msgid "greater than or equal to"
-msgstr "mai mare sau egal cu"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "mai mic sau egal cu"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "Mai multe filtre"
@@ -665,7 +710,7 @@ msgstr ""
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -973,6 +1018,9 @@ msgstr "Căutare {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Căutare după atribute"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
@@ -980,6 +1028,9 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Missing search criteria"
+msgstr ""
+
+msgid "Please fill in {{uniqueTEAName}} to search"
 msgstr ""
 
 msgid "Back to search"
@@ -1036,6 +1087,12 @@ msgstr ""
 msgid "Choose an organisation unit"
 msgstr ""
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1052,6 +1109,12 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
+msgstr ""
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid "Search for {{titleText}}"
@@ -1117,6 +1180,9 @@ msgstr ""
 "Puteți modifica termenii de căutare și căuta din nou pentru a găsi ceea ce "
 "căutați."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1139,6 +1205,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr ""
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Rezultate găsite"
 
@@ -1156,7 +1225,7 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
@@ -1164,6 +1233,9 @@ msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1722,9 +1794,6 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-msgid "Date"
-msgstr "Data"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2150,9 +2219,6 @@ msgstr "Introduceți o dată și o oră valide"
 msgid "Please provide a valid time"
 msgstr "Introduceți o oră valabilă"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr "Introduceți o adresă URL validă"
 
@@ -2203,9 +2269,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Setarea coordonatelor"
-
-msgid "Time"
-msgstr ""
 
 msgid "From date"
 msgstr "Din data"
