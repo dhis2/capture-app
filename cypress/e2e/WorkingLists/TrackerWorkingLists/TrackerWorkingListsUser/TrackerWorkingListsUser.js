@@ -683,17 +683,14 @@ When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (fi
 
 When(/^you set the isEmpty date filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
     const labelPrefix = truncateFilterLabelForTest(filterName);
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="filter-button-popover-anchor"]')
-        .then(($anchors) => {
-            const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
-            if (match) {
-                cy.wrap(match).click();
-            } else {
-                openStageFilterMenu(filterName);
-                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-            }
-        });
+    cy.get('[data-test="tracker-working-lists"]').then(($wl) => {
+        if ($wl.text().includes(labelPrefix)) {
+            cy.get('[data-test="tracker-working-lists"]').contains(labelPrefix).click();
+        } else {
+            openStageFilterMenu(filterName);
+            cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+        }
+    });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
