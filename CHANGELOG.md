@@ -1,3 +1,10 @@
+## [105.13.5](https://github.com/dhis2/capture-app/compare/v105.13.4...v105.13.5) (2026-03-26)
+
+
+### Reverts
+
+* Revert "chore: [DHIS2-16606] Eslint - complexity rule" (#4500) ([5234add](https://github.com/dhis2/capture-app/commit/5234add2f1e0f75f8400b412577fd682bed857c7)), closes [#4500](https://github.com/dhis2/capture-app/issues/4500) [#4491](https://github.com/dhis2/capture-app/issues/4491)
+
 ## [105.13.4](https://github.com/dhis2/capture-app/compare/v105.13.3...v105.13.4) (2026-03-25)
 
 
