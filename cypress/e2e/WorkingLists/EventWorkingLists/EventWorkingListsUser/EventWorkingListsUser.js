@@ -39,6 +39,7 @@ Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
     }
     if (contextOrPath === 'event program text filter context') {
         cleanUpEventFilterIfApplicable(EVENT_TEXT_FILTER_PROGRAM_ID, 'eventTextIsEmptyWorkingList');
+        cleanUpEventFilterIfApplicable(EVENT_TEXT_FILTER_PROGRAM_ID, 'textFilterWorkingList');
     }
     const query = CONTEXT_QUERIES[contextOrPath] ?? contextOrPath;
     cy.visit(`#/?${query}`);
