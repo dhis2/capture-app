@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';

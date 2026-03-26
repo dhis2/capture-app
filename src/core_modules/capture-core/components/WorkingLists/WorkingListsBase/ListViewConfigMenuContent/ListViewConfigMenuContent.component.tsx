@@ -107,6 +107,7 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
         subHeader: viewName.length > 30 ? `${viewName.substring(0, 27)}...` : viewName,
     }), []);
 
+    // eslint-disable-next-line complexity
     const customListViewMenuContentsExtended = useMemo(() => {
         const currentViewContents: any[] = [];
         const savedViewContents: any[] = [];
@@ -117,37 +118,16 @@ const ListViewConfigMenuContentPlain = (props: PlainProps) => {
             currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
         }
 
-        const canSaveUpdatedView = [
-            !isDefault,
-            !notPreserved,
-            access.write,
-            access.update,
-            currentViewHasTemplateChanges,
-            Boolean(onUpdateTemplate),
-        ].every(Boolean);
-
-        if (canSaveUpdatedView) {
+        if (!isDefault && !notPreserved && access.write && access.update &&
+            currentViewHasTemplateChanges && onUpdateTemplate) {
             savedViewContents.push(getSaveItem());
         }
 
-        const canShareView = [
-            !isDefault,
-            !notPreserved,
-            access.manage,
-        ].every(Boolean);
-
-        if (canShareView) {
+        if (!isDefault && !notPreserved && access.manage) {
             savedViewContents.push(getShareItem());
         }
 
-        const canDeleteView = [
-            !isDefault,
-            !notPreserved,
-            access.delete,
-            Boolean(onDeleteTemplate),
-        ].every(Boolean);
-
-        if (canDeleteView) {
+        if (!isDefault && !notPreserved && access.delete && onDeleteTemplate) {
             savedViewContents.push(getDeleteItem());
         }
 

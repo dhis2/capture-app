@@ -3,7 +3,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, NoticeBox } from '@dhis2/ui';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
-import type { AvailableSearchOption, ComponentProps, Props, SearchGroups } from './SearchBox.types';
+import type { ComponentProps, Props } from './SearchBox.types';
 import { searchBoxStatus } from '../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { TrackedEntityTypeSelector } from '../TrackedEntityTypeSelector';
@@ -14,7 +14,6 @@ import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
-import { scopeTypes } from '../../metaData';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -46,88 +45,7 @@ const getStyles: Readonly<any> = {
     },
 };
 
-function getInitialSearchScopeType(preselectedProgramId: Props['preselectedProgramId']) {
-    return preselectedProgramId ? searchScopes.PROGRAM : null;
-}
-
-function renderTrackedEntityTypeSelector(args: {
-    selectedSearchScopeType: string | null;
-    handleSearchScopeSelection: (searchScopeId: string, searchType: keyof typeof scopeTypes) => void;
-}) {
-    if (args.selectedSearchScopeType === searchScopes.PROGRAM) {
-        return null;
-    }
-
-    return (
-        <TrackedEntityTypeSelector
-            onSelect={args.handleSearchScopeSelection}
-            footerText={i18n.t(
-                'You can also select a program from the top bar to search within that program.',
-            )}
-        />
-    );
-}
-
-function renderSearchForm(args: {
-    selectedSearchScopeId: string;
-    searchGroupsForSelectedScope: SearchGroups;
-}) {
-    if (!args.searchGroupsForSelectedScope) {
-        return null;
-    }
-
-    return (
-        <SearchForm
-            selectedSearchScopeId={args.selectedSearchScopeId}
-            searchGroupsForSelectedScope={args.searchGroupsForSelectedScope}
-        />
-    );
-}
-
-function renderFooterContent(args: {
-    isLoading: boolean;
-    searchStatus: string;
-    selectedSearchScopeId: string | null | undefined;
-    searchGroupsForSelectedScope: SearchGroups;
-    availableSearchOption?: AvailableSearchOption;
-    trackedEntityName: string;
-}) {
-    if (args.isLoading) {
-        return <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />;
-    }
-
-    const footerNodes: React.ReactNode[] = [];
-
-    if (args.searchStatus === searchBoxStatus.INITIAL && !args.selectedSearchScopeId) {
-        footerNodes.push(
-            <IncompleteSelectionsMessage>
-                {String(i18n.t('Choose a type to start searching'))}
-            </IncompleteSelectionsMessage>,
-        );
-    }
-
-    if (
-        args.selectedSearchScopeId
-        && args.availableSearchOption
-        && !args.searchGroupsForSelectedScope.length
-    ) {
-        footerNodes.push(
-            <NoticeBox
-                warning
-                title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
-                    trackedEntityName: capitalizeFirstLetter(args.trackedEntityName),
-                    interpolation: { escapeValue: false },
-                })}
-            >
-                {/* eslint-disable-next-line max-len */}
-                {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
-            </NoticeBox>,
-        );
-    }
-
-    return <>{footerNodes}</>;
-}
-
+// eslint-disable-next-line complexity
 const Index = ({
     showInitialSearchBox,
     cleanSearchRelatedInfo,
@@ -141,7 +59,7 @@ const Index = ({
 }: Props & WithStyles<typeof getStyles>) => {
     const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(
-        getInitialSearchScopeType(preselectedProgramId),
+        preselectedProgramId ? searchScopes.PROGRAM : null,
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
@@ -154,7 +72,8 @@ const Index = ({
         const scopeId = preselectedProgramId || trackedEntityTypeId;
         setSelectedSearchScopeId(scopeId);
 
-        setSelectedSearchScopeType(getInitialSearchScopeType(preselectedProgramId));
+        const type = preselectedProgramId ? searchScopes.PROGRAM : null;
+        setSelectedSearchScopeType(type);
     }, [trackedEntityTypeId, preselectedProgramId]);
 
     useEffect(() => {
@@ -162,9 +81,9 @@ const Index = ({
         showInitialSearchBox();
     }, [cleanSearchRelatedInfo, showInitialSearchBox]);
 
-    const searchGroupsForSelectedScope: SearchGroups = availableSearchOption?.searchGroups ?? [];
+    const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
 
-    const handleSearchScopeSelection = (searchScopeId: string, searchType: keyof typeof scopeTypes) => {
+    const handleSearchScopeSelection = (searchScopeId: string, searchType: any) => {
         showInitialSearchBox();
         cleanSearchRelatedInfo();
         setSelectedSearchScopeId(searchScopeId);
@@ -181,15 +100,21 @@ const Index = ({
                         </div>
                         <div>
                             <div className={classes.half}>
-                                {renderTrackedEntityTypeSelector({
-                                    selectedSearchScopeType,
-                                    handleSearchScopeSelection,
-                                })}
+                                {selectedSearchScopeType !== searchScopes.PROGRAM && (
+                                    <TrackedEntityTypeSelector
+                                        onSelect={handleSearchScopeSelection}
+                                        footerText={i18n.t(
+                                            'You can also select a program from the top bar to search within that program.',
+                                        )}
+                                    />
+                                )}
 
-                                {renderSearchForm({
-                                    selectedSearchScopeId: selectedSearchScopeId ?? '',
-                                    searchGroupsForSelectedScope,
-                                })}
+                                {searchGroupsForSelectedScope && (
+                                    <SearchForm
+                                        selectedSearchScopeId={selectedSearchScopeId ?? ''}
+                                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                                    />
+                                )}
                                 <SearchStatus
                                     searchStatus={searchStatus}
                                     availableSearchOption={availableSearchOption}
@@ -205,14 +130,29 @@ const Index = ({
                 </div>
             </div>
 
-            {renderFooterContent({
-                isLoading,
-                searchStatus,
-                selectedSearchScopeId,
-                searchGroupsForSelectedScope,
-                availableSearchOption,
-                trackedEntityName,
-            })}
+            {isLoading ? (
+                <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />
+            ) : (
+                <>
+                    {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
+                        <IncompleteSelectionsMessage>
+                            {String(i18n.t('Choose a type to start searching'))}
+                        </IncompleteSelectionsMessage>
+                    )}
+                    {selectedSearchScopeId && availableSearchOption && !searchGroupsForSelectedScope.length && (
+                        <NoticeBox
+                            warning
+                            title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
+                                trackedEntityName: capitalizeFirstLetter(trackedEntityName),
+                                interpolation: { escapeValue: false },
+                            })}
+                        >
+                            {/* eslint-disable-next-line max-len */}
+                            {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
+                        </NoticeBox>
+                    )}
+                </>
+            )}
         </>
     );
 };

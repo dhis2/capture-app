@@ -254,12 +254,6 @@ export class EnrollmentFactory {
         return enrollmentForm;
     }
 
-    async _addTetFeatureTypeSectionIfNeeded(enrollmentForm: RenderFoundation, trackedEntityTypeId?: string | null) {
-        if (!trackedEntityTypeId) return;
-        const section = await this._buildTetFeatureTypeSection(trackedEntityTypeId);
-        section && enrollmentForm.addSection(section);
-    }
-
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
         cachedProgramSections?: Array<CachedProgramSection> | null,
@@ -271,8 +265,12 @@ export class EnrollmentFactory {
             o.name = cachedProgram.displayName;
         });
 
+        let section;
         if (cachedProgram.dataEntryForm) {
-            await this._addTetFeatureTypeSectionIfNeeded(enrollmentForm, cachedProgram.trackedEntityTypeId);
+            if (cachedProgram.trackedEntityTypeId) {
+                section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
+                section && enrollmentForm.addSection(section);
+            }
 
             await this._buildCustomEnrollmentForm(
                 enrollmentForm,
@@ -280,7 +278,10 @@ export class EnrollmentFactory {
                 cachedProgramTrackedEntityAttributes,
             );
         } else if (cachedProgramSections?.length || this.dataEntryFormConfig) {
-            await this._addTetFeatureTypeSectionIfNeeded(enrollmentForm, cachedProgram.trackedEntityTypeId);
+            if (cachedProgram.trackedEntityTypeId) {
+                section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
+                section && enrollmentForm.addSection(section);
+            }
 
             if (cachedProgramTrackedEntityAttributes) {
                 const trackedEntityAttributeDictionary = cachedProgramTrackedEntityAttributes
@@ -330,33 +331,33 @@ export class EnrollmentFactory {
                             );
                         }
 
-                        const builtSection = await this._buildSection(
+                        section = await this._buildSection(
                             attributes,
                             formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
                             formConfigSection.id,
                             sectionMetadata?.displayDescription ?? '',
                         );
-                        builtSection && enrollmentForm.addSection(builtSection);
+                        section && enrollmentForm.addSection(section);
                     });
                 } else if (cachedProgramSections) {
                     // @ts-expect-error - keeping original functionality as before ts rewrite
                     await cachedProgramSections.asyncForEach(async (programSection) => {
-                        const builtSection = await this._buildSection(
+                        section = await this._buildSection(
                             programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
                             programSection.displayFormName,
                             programSection.id,
                             programSection.displayDescription,
                         );
-                        builtSection && enrollmentForm.addSection(builtSection);
+                        section && enrollmentForm.addSection(section);
                     });
                 }
             }
         } else {
-            const mainSection = await this._buildMainSection(
+            section = await this._buildMainSection(
                 cachedProgramTrackedEntityAttributes,
                 cachedProgram.trackedEntityTypeId,
             );
-            mainSection && enrollmentForm.addSection(mainSection);
+            section && enrollmentForm.addSection(section);
         }
 
         await this._addLeftoversSection(enrollmentForm, cachedProgramTrackedEntityAttributes);

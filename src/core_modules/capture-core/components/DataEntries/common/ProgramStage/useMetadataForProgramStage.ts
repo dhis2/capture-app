@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { useMemo } from 'react';
 import { useConfig } from '@dhis2/app-runtime';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
@@ -7,34 +8,6 @@ import { useDataElementsForStage } from './useDataElementsForStage';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import { buildProgramStageMetadata } from './buildProgramStageMetadata';
 import type { Props, ReturnType } from './useMetadataForProgramStage.types';
-
-function isProgramStageMetadataQueryEnabled({
-    program,
-    programId,
-    dataElements,
-    optionSets,
-    locale,
-    minor,
-    configIsFetched,
-}: {
-    program: unknown;
-    programId: string | undefined;
-    dataElements: unknown;
-    optionSets: unknown;
-    locale: unknown;
-    minor: number | undefined;
-    configIsFetched: boolean;
-}): boolean {
-    return [
-        program,
-        programId,
-        dataElements,
-        optionSets,
-        locale,
-        minor,
-        configIsFetched,
-    ].every(Boolean);
-}
 
 export const useMetadataForProgramStage = ({
     programId,
@@ -92,15 +65,13 @@ export const useMetadataForProgramStage = ({
         {
             cacheTime: Infinity,
             staleTime: Infinity,
-            enabled: isProgramStageMetadataQueryEnabled({
-                program,
-                programId,
-                dataElements,
-                optionSets,
-                locale,
-                minor,
-                configIsFetched,
-            }),
+            enabled: !!program
+                && !!programId
+                && !!dataElements
+                && !!optionSets
+                && !!locale
+                && !!minor
+                && configIsFetched,
         },
     );
 
