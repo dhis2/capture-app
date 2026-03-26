@@ -589,7 +589,6 @@ When(/^you set the range filter "([^"]+)" to (-?\d+)-(-?\d+)$/, (filterName, min
 });
 
 When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
-    // Active filters are chips (filter-button-popover-anchor), not listed under More filters.
     const labelPrefix = truncateFilterLabelForTest(filterName);
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
@@ -608,7 +607,6 @@ When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
 
 const BIRTH_STAGE_FILTER_NAMES = new Set(['Birth certificate', 'BCG dose', 'Apgar comment']);
 
-// Care at birth program stage data elements: INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, ORGANISATION_UNIT, DATE
 const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
     'WHOMCH Fetal heart rate on admission',
     'WHOMCH Estimated blood loss (ml)',
@@ -620,7 +618,6 @@ const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
     'WHOMCH Date of induction of labor',
 ]);
 
-// All program stage data element filter names (used to pick the correct "More filters" button)
 const PROGRAM_STAGE_FILTER_NAMES = new Set([
     ...BIRTH_STAGE_FILTER_NAMES,
     ...CARE_AT_BIRTH_STAGE_FILTER_NAMES,
@@ -629,7 +626,6 @@ const PROGRAM_STAGE_FILTER_NAMES = new Set([
 
 function openStageFilterMenu(filterName) {
     if (BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
-        // Birth stage filters may need to select the program stage first
         let needProgramStageFlow = false;
         cy.get('[data-test="tracker-working-lists"]').within(() => {
             cy.get('[data-test="more-filters"]').then(($buttons) => {
@@ -656,6 +652,21 @@ function openStageFilterMenu(filterName) {
     }
 }
 
+function openFilterChipOrMenu(filterName) {
+    const namePrefix = filterName.substring(0, 20);
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const match = [...$anchors].find((node) => node.textContent?.includes(namePrefix));
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                openStageFilterMenu(filterName);
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
+}
+
 When('you open the program stage More filters menu for Birth on the tracker working list', () => {
     cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
@@ -664,33 +675,14 @@ When('you open the program stage More filters menu for Birth on the tracker work
     cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
 });
 
-When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    const labelPrefix = truncateFilterLabelForTest(filterName);
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="filter-button-popover-anchor"]')
-        .then(($anchors) => {
-            const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
-            if (match) {
-                cy.wrap(match).click();
-            } else {
-                openStageFilterMenu(filterName);
-                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-            }
-        });
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    openFilterChipOrMenu(filterName);
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
 When(/^you set the isEmpty date filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    const labelPrefix = truncateFilterLabelForTest(filterName);
-    cy.get('[data-test="tracker-working-lists"]').then(($wl) => {
-        if ($wl.text().includes(labelPrefix)) {
-            cy.get('[data-test="tracker-working-lists"]').contains(labelPrefix).click();
-        } else {
-            openStageFilterMenu(filterName);
-            cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-        }
-    });
+    openFilterChipOrMenu(filterName);
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
@@ -806,7 +798,7 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
     cy.get('body').click(0, 0);
 });
 
-Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
@@ -836,7 +828,6 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
     cy.get('body').click(0, 0);
 });
 
-// Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');

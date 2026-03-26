@@ -702,7 +702,7 @@ When('you set the organisation unit filter', () => {
     });
 });
 
-When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
     const labelPrefix = truncateFilterLabelForTest(filterName);
     cy.get('[data-test="event-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
@@ -780,12 +780,12 @@ Then('the organisation unit filter should be in effect and show the correct valu
     cy.get('body').click(0, 0);
 });
 
-Then(/^the empty-only filter "([^"]+)" should be in effect with value (Is empty|Is not empty)$/, (filterName, value) => {
+Then(/^the isEmpty filter "([^"]+)" should be in effect with value (Is empty|Is not empty)$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
 });
 
-Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
