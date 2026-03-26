@@ -652,7 +652,15 @@ function openStageFilterMenu(filterName) {
     }
 }
 
-function openFilterChipOrMenu(filterName) {
+When('you open the program stage More filters menu for Birth on the tracker working list', () => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+});
+
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
     const namePrefix = filterName.substring(0, 20);
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
@@ -665,24 +673,6 @@ function openFilterChipOrMenu(filterName) {
                 cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
             }
         });
-}
-
-When('you open the program stage More filters menu for Birth on the tracker working list', () => {
-    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
-    cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
-    cy.get('[data-test="list-view-filter-apply-button"]').click();
-    cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
-});
-
-When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    openFilterChipOrMenu(filterName);
-    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
-    cy.get('[data-test="list-view-filter-apply-button"]').click();
-});
-
-When(/^you set the isEmpty date filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    openFilterChipOrMenu(filterName);
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
@@ -799,16 +789,6 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
 });
 
 Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
-    });
-    cy.get('body').click(0, 0);
-});
-
-Then(/^the isEmpty date filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();

@@ -385,20 +385,20 @@ Feature: User interacts with tei working lists
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the isEmpty filter "Phone number" to Is not empty
     And you set the isEmpty filter "Height in cm" to Is empty
-    And you set the isEmpty date filter "Age" to Is not empty
+    And you set the isEmpty filter "Age" to Is not empty
     And you save the view as trackerIsEmptyWorkingList
     And you refresh the page
     Then the isEmpty filter "Phone number" should be in effect and show Is not empty when opened
     And the isEmpty filter "Height in cm" should be in effect and show Is empty when opened
-    And the isEmpty date filter "Age" should be in effect and show Is not empty when opened
+    And the isEmpty filter "Age" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "Phone number" to Is empty
     And you set the isEmpty filter "Height in cm" to Is not empty
-    And you set the isEmpty date filter "Age" to Is empty
+    And you set the isEmpty filter "Age" to Is empty
     And you update the tracker tei view with the name trackerIsEmptyWorkingList
     And you refresh the page
     Then the isEmpty filter "Phone number" should be in effect and show Is empty when opened
     And the isEmpty filter "Height in cm" should be in effect and show Is not empty when opened
-    And the isEmpty date filter "Age" should be in effect and show Is empty when opened
+    And the isEmpty filter "Age" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
 
   @v>=42
@@ -406,20 +406,20 @@ Feature: User interacts with tei working lists
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the isEmpty filter "Phone number" to Is not empty
     And you set the isEmpty filter "Height in cm" to Is empty
-    And you set the isEmpty date filter "Age" to Is not empty
+    And you set the isEmpty filter "Age" to Is not empty
     And you save the view as trackerIsNotEmptyWorkingList
     And you refresh the page
     Then the isEmpty filter "Phone number" should be in effect and show Is not empty when opened
     And the isEmpty filter "Height in cm" should be in effect and show Is empty when opened
-    And the isEmpty date filter "Age" should be in effect and show Is not empty when opened
+    And the isEmpty filter "Age" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "Phone number" to Is empty
     And you set the isEmpty filter "Height in cm" to Is not empty
-    And you set the isEmpty date filter "Age" to Is empty
+    And you set the isEmpty filter "Age" to Is empty
     And you update the tracker tei view with the name trackerIsNotEmptyWorkingList
     And you refresh the page
     Then the isEmpty filter "Phone number" should be in effect and show Is empty when opened
     And the isEmpty filter "Height in cm" should be in effect and show Is not empty when opened
-    And the isEmpty date filter "Age" should be in effect and show Is empty when opened
+    And the isEmpty filter "Age" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
 
   @v>=42
@@ -446,7 +446,7 @@ Feature: User interacts with tei working lists
     And you set the isEmpty filter "WHOMCH Body temperature" to Is empty
     And you set the isEmpty filter "WHOMCH Estimated blood loss (ml)" to Is not empty
     And you set the isEmpty filter "WHOMCH Respiratory rate" to Is empty
-    And you set the isEmpty date filter "WHOMCH Date of induction of labor" to Is not empty
+    And you set the isEmpty filter "WHOMCH Date of induction of labor" to Is not empty
     And you set the isEmpty filter "WHOMCH Hospital / Birth clinic" to Is not empty
     And you save the program stage view as trackerCareIsEmptyWorkingList
     And you refresh the page
@@ -454,13 +454,13 @@ Feature: User interacts with tei working lists
     And the isEmpty filter "WHOMCH Body temperature" should be in effect and show Is empty when opened
     And the isEmpty filter "WHOMCH Estimated blood loss (ml)" should be in effect and show Is not empty when opened
     And the isEmpty filter "WHOMCH Respiratory rate" should be in effect and show Is empty when opened
-    And the isEmpty date filter "WHOMCH Date of induction of labor" should be in effect and show Is not empty when opened
+    And the isEmpty filter "WHOMCH Date of induction of labor" should be in effect and show Is not empty when opened
     And the isEmpty filter "WHOMCH Hospital / Birth clinic" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "WHOMCH Fetal heart rate on admission" to Is empty
     And you set the isEmpty filter "WHOMCH Body temperature" to Is not empty
     And you set the isEmpty filter "WHOMCH Estimated blood loss (ml)" to Is empty
     And you set the isEmpty filter "WHOMCH Respiratory rate" to Is not empty
-    And you set the isEmpty date filter "WHOMCH Date of induction of labor" to Is empty
+    And you set the isEmpty filter "WHOMCH Date of induction of labor" to Is empty
     And you set the isEmpty filter "WHOMCH Hospital / Birth clinic" to Is empty
     And you update the tracker program stage view with the name trackerCareIsEmptyWorkingList
     And you refresh the page
@@ -468,7 +468,7 @@ Feature: User interacts with tei working lists
     And the isEmpty filter "WHOMCH Body temperature" should be in effect and show Is not empty when opened
     And the isEmpty filter "WHOMCH Estimated blood loss (ml)" should be in effect and show Is empty when opened
     And the isEmpty filter "WHOMCH Respiratory rate" should be in effect and show Is not empty when opened
-    And the isEmpty date filter "WHOMCH Date of induction of labor" should be in effect and show Is empty when opened
+    And the isEmpty filter "WHOMCH Date of induction of labor" should be in effect and show Is empty when opened
     And the isEmpty filter "WHOMCH Hospital / Birth clinic" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
 
