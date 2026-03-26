@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';

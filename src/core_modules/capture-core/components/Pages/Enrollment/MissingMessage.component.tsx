@@ -14,18 +14,6 @@ import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { fetchEnrollments, breakTheGlassSuccess } from './EnrollmentPage.actions';
 import { useResetTeiId } from '../../ScopeSelector';
 
-type MissingStatusParams = {
-    selectedProgramIsTracker: string | boolean | undefined;
-    selectedProgramIsEvent: string | boolean | undefined;
-    programSelectionIsIncomplete: boolean;
-    selectedProgramIsOfDifferentTypTetype: boolean;
-    programHasEnrollments: boolean;
-    programHasActiveEnrollments: boolean;
-    enrollmentsOnProgramContainEnrollmentId: boolean;
-    onlyEnrollOnce: string | boolean | undefined;
-    enrollmentAccessLevel: string | null | undefined;
-};
-
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
     TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED: 'TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED',
@@ -36,43 +24,6 @@ export const missingStatuses = {
     MISSING_ENROLLMENT_SELECTION_ADD_NEW: 'MISSING_ENROLLMENT_SELECTION_ADD_NEW',
     MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
     MISSING_PROGRAM_SELECTION: 'MISSING_PROGRAM_SELECTION',
-};
-
-const determineTrackerProgramStatus = ({
-    programSelectionIsIncomplete,
-    selectedProgramIsOfDifferentTypTetype,
-    programHasEnrollments,
-    programHasActiveEnrollments,
-    enrollmentsOnProgramContainEnrollmentId,
-    onlyEnrollOnce,
-    enrollmentAccessLevel,
-}: MissingStatusParams): string | null => {
-    if (programSelectionIsIncomplete) return missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION;
-    if (selectedProgramIsOfDifferentTypTetype) return missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED;
-    if (programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
-        return (programHasActiveEnrollments || onlyEnrollOnce)
-            ? missingStatuses.MISSING_ENROLLMENT_SELECTION
-            : missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW;
-    }
-    if (!programHasEnrollments && enrollmentAccessLevel !== enrollmentAccessLevels.UNKNOWN_ACCESS) {
-        return missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED;
-    }
-    return null;
-};
-
-const determineMissingStatus = (params: MissingStatusParams): string => {
-    if (params.enrollmentAccessLevel === enrollmentAccessLevels.LIMITED_ACCESS) {
-        return missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS;
-    }
-    if (params.enrollmentAccessLevel === enrollmentAccessLevels.NO_ACCESS) {
-        return missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS;
-    }
-    if (params.selectedProgramIsTracker) {
-        const status = determineTrackerProgramStatus(params);
-        if (status) return status;
-    }
-    if (params.selectedProgramIsEvent) return missingStatuses.EVENT_PROGRAM_SELECTED;
-    return missingStatuses.MISSING_PROGRAM_SELECTION;
 };
 
 const useMissingStatus = () => {
@@ -91,29 +42,40 @@ const useMissingStatus = () => {
     } = useEnrollmentInfo(enrollmentId, programId, teiId);
     const { enrollmentAccessLevel } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
-    const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
-    const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
-
     useEffect(() => {
-        setStatus(determineMissingStatus({
-            selectedProgramIsTracker,
-            selectedProgramIsEvent,
-            programSelectionIsIncomplete,
-            selectedProgramIsOfDifferentTypTetype,
-            programHasEnrollments,
-            programHasActiveEnrollments,
-            enrollmentsOnProgramContainEnrollmentId,
-            onlyEnrollOnce,
-            enrollmentAccessLevel,
-        }));
+        const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
+        const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
+
+        if (enrollmentAccessLevel === enrollmentAccessLevels.LIMITED_ACCESS) {
+            setStatus(missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS);
+        } else if (enrollmentAccessLevel === enrollmentAccessLevels.NO_ACCESS) {
+            setStatus(missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS);
+        } else if (selectedProgramIsTracker && programSelectionIsIncomplete) {
+            setStatus(missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION);
+        } else if (selectedProgramIsTracker && selectedProgramIsOfDifferentTypTetype) {
+            setStatus(missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED);
+        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
+            if (programHasActiveEnrollments || onlyEnrollOnce) {
+                setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
+            } else {
+                setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW);
+            }
+        } else if (selectedProgramIsTracker && !programHasEnrollments &&
+            enrollmentAccessLevel !== enrollmentAccessLevels.UNKNOWN_ACCESS) {
+            setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
+        } else if (selectedProgramIsEvent) {
+            setStatus(missingStatuses.EVENT_PROGRAM_SELECTED);
+        } else {
+            setStatus(missingStatuses.MISSING_PROGRAM_SELECTION);
+        }
     }, [
-        selectedProgramIsTracker,
-        selectedProgramIsEvent,
+        programId,
         programSelectionIsIncomplete,
         programHasEnrollments,
         programHasActiveEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
         selectedProgramIsOfDifferentTypTetype,
+        scopeType,
         enrollmentAccessLevel,
         onlyEnrollOnce,
     ]);
@@ -150,18 +112,6 @@ const styles: Readonly<any> = {
         padding: 0,
     },
 };
-
-const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string }) => (
-    <IncompleteSelectionsMessage>
-        {enrollmentId ?
-            i18n.t('Invalid enrollment id {{enrollmentId}}.', {
-                enrollmentId,
-                interpolation: { escapeValue: false },
-            }) :
-            i18n.t('Choose an enrollment to view the dashboard.')
-        }
-    </IncompleteSelectionsMessage>
-);
 
 type PlainProps = Record<string, never>;
 
@@ -206,7 +156,15 @@ const MissingMessagePlain = ({
 
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
-            <EnrollmentSelectionMessage enrollmentId={enrollmentId} />
+            <IncompleteSelectionsMessage>
+                {enrollmentId ?
+                    i18n.t('Invalid enrollment id {{enrollmentId}}.', {
+                        enrollmentId,
+                        interpolation: { escapeValue: false },
+                    }) :
+                    i18n.t('Choose an enrollment to view the dashboard.')
+                }
+            </IncompleteSelectionsMessage>
         }
 
         {

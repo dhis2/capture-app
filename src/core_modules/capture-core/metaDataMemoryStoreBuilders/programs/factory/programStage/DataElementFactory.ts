@@ -59,6 +59,7 @@ export class DataElementFactory {
             cachedDataElement.translations[this.locale][property];
     }
 
+    // eslint-disable-next-line complexity
     async _setBaseProperties(
         dataElement: DataElement,
         cachedProgramStageDataElement: CachedProgramStageDataElement,

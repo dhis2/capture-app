@@ -241,6 +241,7 @@ export class DataElementFactory {
         return null;
     }
 
+    // eslint-disable-next-line complexity
     async _setBaseProperties(
         dataElement: DataElement,
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
