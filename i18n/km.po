@@ -1,18 +1,18 @@
-# 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
 # channara rin, 2023
+# Em Le <em.hispvietnam@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: channara rin, 2023\n"
+"Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2025\n"
 "Language-Team: Khmer (https://app.transifex.com/hisp-uio/teams/100509/km/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: km\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -24,7 +24,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "ថ្ងៃនេះ"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -249,7 +249,7 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
+msgstr "ទេ, មិនចង់ទាន់ចាកចេញទេ"
 
 msgid "New event"
 msgstr "ព្រឹត្តិការណ៏ថ្មី"
@@ -379,22 +379,22 @@ msgid "To"
 msgstr ""
 
 msgid "This week"
-msgstr ""
+msgstr "សប្តាហ៍នេះ"
 
 msgid "This month"
-msgstr ""
+msgstr "ខែនេះ"
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "សប្តាហ៍មុន"
 
 msgid "Last month"
-msgstr ""
+msgstr "ខែមុន"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "៣ខែចុងក្រោយ"
 
 msgid "Custom range"
 msgstr ""
@@ -919,7 +919,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "ទេ, បោះបង់ចោល"
 
 msgid "Yes, delete enrollment."
 msgstr ""
@@ -1096,7 +1096,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "បញ្ជាក់"
 
 msgid "Save As view"
 msgstr ""
