@@ -4,21 +4,21 @@
 # Edem Kossi <ekossi@hispwca.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Elise Desailly, 2024
-# Bram Piot <bram.piot@gmail.com>, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Philip Larsen Donnelly, 2026
+# Bram Piot <bram.piot@gmail.com>, 2026
 # Cyrille Kabrane, 2026
 # Esther Tokouli, 2026
-# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Esther Tokouli, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -106,7 +106,7 @@ msgid "View active enrollment"
 msgstr "Afficher les inscriptions actives"
 
 msgid "Re-enroll in {{programName}}"
-msgstr ""
+msgstr "Se réinscrire à {{programName}}"
 
 msgid "Re-enroll"
 msgstr "Réinscrire"
@@ -133,10 +133,10 @@ msgid "Long"
 msgstr "Long"
 
 msgid "lat{{escape}} {{latitudeValue}}"
-msgstr ""
+msgstr "lat{{escape}} {{latitudeValue}}"
 
 msgid "long{{escape}} {{longitudeValue}}"
-msgstr ""
+msgstr "long{{escape}} {{longitudeValue}}"
 
 msgid "Show less"
 msgstr "Afficher moins"
@@ -503,7 +503,7 @@ msgid "Please specify a range"
 msgstr "Veuillez spécifier une fourchette"
 
 msgid "Start date must be before the end date"
-msgstr ""
+msgstr "La date de début doit être antérieure à la date de fin"
 
 msgid "From"
 msgstr "De"
@@ -536,7 +536,7 @@ msgid "This month"
 msgstr "Ce mois"
 
 msgid "This year"
-msgstr ""
+msgstr "Cette année"
 
 msgid "Last week"
 msgstr "Semaine passée"
@@ -554,13 +554,13 @@ msgid "Relative range"
 msgstr " Plage relative"
 
 msgid "Please specify a date"
-msgstr ""
+msgstr "Veuillez spécifier une date"
 
 msgid "The \"Before\" value must be after the \"After\" value"
-msgstr ""
+msgstr "La valeur « Avant » doit être postérieure à la valeur « Après »"
 
 msgid "After"
-msgstr ""
+msgstr "Après"
 
 msgid "Date"
 msgstr "Date"
@@ -569,7 +569,7 @@ msgid "Time"
 msgstr "Heure"
 
 msgid "Before"
-msgstr ""
+msgstr "Avant"
 
 msgid "Is empty"
 msgstr "Est vide"
@@ -678,6 +678,7 @@ msgstr "Retirer le filtre"
 
 msgid "Minimum characters to search is too high for this filter."
 msgstr ""
+"Le nombre minimum de caractères à rechercher est trop élevé pour ce filtre."
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
@@ -687,7 +688,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Locked to{{escape}} {{buttonText}}"
-msgstr ""
+msgstr "Verrouillé sur{{escape}} {{buttonText}}"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} à {{toDate}}"
@@ -699,22 +700,22 @@ msgid "before or equal to {{date}}"
 msgstr "avant ou égal à {{date}}"
 
 msgid "{{start}} days in the past to {{end}} days in the future"
-msgstr ""
+msgstr "{{start}} jours dans le passé jusqu'à {{end}} jours à venir"
 
 msgid "{{from}} to {{to}}"
-msgstr ""
+msgstr "{{from}} à {{to}}"
 
 msgid "greater than or equal to {{value}}"
-msgstr ""
+msgstr "supérieur ou égal à {{value}}"
 
 msgid "less than or equal to {{value}}"
-msgstr ""
+msgstr "inférieur ou égal à {{value}}"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "après ou egal à"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "avant ou egal à"
 
 msgid "More filters"
 msgstr "Filtres supplémentaires"
@@ -746,7 +747,7 @@ msgid "Write note"
 msgstr "Écrire une note"
 
 msgid "{{fieldName}} was blanked out and hidden by your last action"
-msgstr ""
+msgstr "{{fieldName}} a été masqué et caché par votre dernière action"
 
 msgid "Notice"
 msgstr "Note"
@@ -1085,7 +1086,7 @@ msgid "Search by attributes"
 msgstr "Rechercher par attribut"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Rechercher {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1097,7 +1098,7 @@ msgid "Missing search criteria"
 msgstr "Critères de recherche manquants"
 
 msgid "Please fill in {{uniqueTEAName}} to search"
-msgstr ""
+msgstr "Veuillez remplir {{uniqueTEAName}} à rechercher"
 
 msgid "Back to search"
 msgstr "Retour à l'écran de recherche"
@@ -1157,10 +1158,10 @@ msgid "Choose an organisation unit"
 msgstr "Choisir une unité d'organisation"
 
 msgid "Choose a {{categoryName}}"
-msgstr ""
+msgstr "Choisir un {{categoryName}}"
 
 msgid "Search for a {{categoryName}}"
-msgstr ""
+msgstr "Rechercher pour un {{categoryName}}"
 
 msgid "Clear selection"
 msgstr "Effacer la sélection"
@@ -1181,10 +1182,10 @@ msgid "Choose a program"
 msgstr "Choisir un programme"
 
 msgid "Choose a {{title}}"
-msgstr ""
+msgstr "Choisir un {{title}}"
 
 msgid "Search for a {{title}}"
-msgstr ""
+msgstr "Rechercher pour un {{title}}"
 
 msgid "Search for {{titleText}}"
 msgstr "Rechercher {{titleText}}"
@@ -1262,7 +1263,7 @@ msgstr ""
 "recherche pour trouver les éléments que vous recherchez."
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Créer un nouveau {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1293,7 +1294,7 @@ msgid "Cannot search in all programs"
 msgstr "Impossible d'effectuer une recherche dans tous les programmes"
 
 msgid "Results found in {{currentSearchScopeName}}"
-msgstr ""
+msgstr "Résultats trouvés dans {{currentSearchScopeName}}"
 
 msgid "Results found"
 msgstr "Résultats trouvés"
@@ -1317,7 +1318,7 @@ msgid "Create saved list"
 msgstr "Créer une liste de sauvegarde"
 
 msgid "Create new in another program..."
-msgstr ""
+msgstr "Créer un nouvel élément dans un autre programme..."
 
 msgid "Create new event"
 msgstr "Créer un nouvel évènement"
@@ -1326,7 +1327,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
 
 msgid "Search..."
-msgstr ""
+msgstr "Rechercher..."
 
 msgid "Select tracked entity type"
 msgstr "Sélectionner le type d'entité suivie"
