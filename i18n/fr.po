@@ -151,7 +151,7 @@ msgid "error"
 msgstr "erreur"
 
 msgid "This value is validating"
-msgstr "Valeur en cours de validation"
+msgstr "Cette valeur est en cours de validation"
 
 msgid "Async field update failed"
 msgstr "Échec de la mise à jour asynchrone du champ"
@@ -225,7 +225,7 @@ msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
 msgid "Notes"
-msgstr "Notes"
+msgstr "Remarques"
 
 msgid "Basic info"
 msgstr "Informations de base"
@@ -249,8 +249,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Soit il ne s'agit pas d'un programme d'événements, soit les métadonnées sont"
-" corrompues. Voir le journal pour plus de détails."
+"Ceci n'est pas un programme d'événements ou les métadonnées sont corrompues."
+" Consultez le journal pour plus de détails."
 
 msgid "This event"
 msgstr "Cet événement"
@@ -296,10 +296,10 @@ msgid "New {{titleText}}"
 msgstr "Nouveau {{titleText}}"
 
 msgid "Switch to form view"
-msgstr "Passer à la vue du formulaire"
+msgstr "Passer à l'affichage du formulaire"
 
 msgid "Switch to row view"
-msgstr "Passer à la vue de ligne"
+msgstr "Passer à l'affichage en lignes"
 
 msgid "{{count}} event added"
 msgid_plural "{{count}} event added"
@@ -343,7 +343,7 @@ msgid "Save"
 msgstr "Enregistrer"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr "Enregistrer {{trackedEntityName}}"
+msgstr "Enregistrer un {{trackedEntityName}}"
 
 msgid "without"
 msgstr "sans"

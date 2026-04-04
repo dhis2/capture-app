@@ -92,7 +92,7 @@ msgid "View active enrollment"
 msgstr "查看有效的登记"
 
 msgid "Re-enroll in {{programName}}"
-msgstr ""
+msgstr "重新注册{{programName}}"
 
 msgid "Re-enroll"
 msgstr "重新登记"
@@ -119,10 +119,10 @@ msgid "Long"
 msgstr "经度"
 
 msgid "lat{{escape}} {{latitudeValue}}"
-msgstr ""
+msgstr "lat{{escape}} {{latitudeValue}}"
 
 msgid "long{{escape}} {{longitudeValue}}"
-msgstr ""
+msgstr "长{{escape}} {{longitudeValue}}"
 
 msgid "Show less"
 msgstr "显示较少"
@@ -279,7 +279,7 @@ msgstr "切换到行视图"
 
 msgid "{{count}} event added"
 msgid_plural "{{count}} event added"
-msgstr[0] ""
+msgstr[0] "{{count}} 新增事件"
 
 msgid "No events added"
 msgstr "没有事件被添加"
@@ -460,7 +460,7 @@ msgid "Please specify a range"
 msgstr "请指定范围"
 
 msgid "Start date must be before the end date"
-msgstr ""
+msgstr "开始日期必须在结束日期之前"
 
 msgid "From"
 msgstr "从"
@@ -511,13 +511,13 @@ msgid "Relative range"
 msgstr "相对范围"
 
 msgid "Please specify a date"
-msgstr ""
+msgstr "请注明日期"
 
 msgid "The \"Before\" value must be after the \"After\" value"
-msgstr ""
+msgstr "前 \"值必须在 \"后 \"值之后"
 
 msgid "After"
-msgstr ""
+msgstr "之后"
 
 msgid "Date"
 msgstr "日期"
@@ -526,7 +526,7 @@ msgid "Time"
 msgstr "时间"
 
 msgid "Before"
-msgstr ""
+msgstr "之前"
 
 msgid "Is empty"
 msgstr "是空的"
@@ -634,15 +634,15 @@ msgid "Remove filter"
 msgstr "移除过滤器"
 
 msgid "Minimum characters to search is too high for this filter."
-msgstr ""
+msgstr "对于此过滤器来说，搜索的最小字符数过高。"
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
-msgstr[0] ""
+msgstr[0] "请输入至少{{minCharactersToSearch}} 字符进行筛选"
 
 msgid "Locked to{{escape}} {{buttonText}}"
-msgstr ""
+msgstr "锁定{{escape}} {{buttonText}}"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -654,16 +654,16 @@ msgid "before or equal to {{date}}"
 msgstr "早于或等于 {{date}}"
 
 msgid "{{start}} days in the past to {{end}} days in the future"
-msgstr ""
+msgstr "{{start}} 过去数日至{{end}} 未来数日"
 
 msgid "{{from}} to {{to}}"
-msgstr ""
+msgstr "{{from}} 至{{to}}"
 
 msgid "greater than or equal to {{value}}"
-msgstr ""
+msgstr "大于或等于{{value}}"
 
 msgid "less than or equal to {{value}}"
-msgstr ""
+msgstr "小于或等于{{value}}"
 
 msgid "after or equal to"
 msgstr "晚或等于"
@@ -699,7 +699,7 @@ msgid "Write note"
 msgstr "编写说明"
 
 msgid "{{fieldName}} was blanked out and hidden by your last action"
-msgstr ""
+msgstr "{{fieldName}} 已被您的上一个操作清除和隐藏"
 
 msgid "Notice"
 msgstr "注意"
@@ -1006,7 +1006,7 @@ msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "搜索{{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1016,7 +1016,7 @@ msgid "Missing search criteria"
 msgstr "缺少搜索条件"
 
 msgid "Please fill in {{uniqueTEAName}} to search"
-msgstr ""
+msgstr "请填写{{uniqueTEAName}} 进行搜索"
 
 msgid "Back to search"
 msgstr "返回搜寻"
@@ -1073,10 +1073,10 @@ msgid "Choose an organisation unit"
 msgstr "选择机构"
 
 msgid "Choose a {{categoryName}}"
-msgstr ""
+msgstr "选择一个{{categoryName}}"
 
 msgid "Search for a {{categoryName}}"
-msgstr ""
+msgstr "搜索{{categoryName}}"
 
 msgid "Clear selection"
 msgstr "清空选项"
@@ -1097,10 +1097,10 @@ msgid "Choose a program"
 msgstr "选择一个项目"
 
 msgid "Choose a {{title}}"
-msgstr ""
+msgstr "选择一个{{title}}"
 
 msgid "Search for a {{title}}"
-msgstr ""
+msgstr "搜索{{title}}"
 
 msgid "Search for {{titleText}}"
 msgstr "搜索{{titleText}}"
@@ -1166,7 +1166,7 @@ msgid ""
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "创建新的{{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1191,7 +1191,7 @@ msgid "Cannot search in all programs"
 msgstr "无法在所有项目中搜索"
 
 msgid "Results found in {{currentSearchScopeName}}"
-msgstr ""
+msgstr "结果见{{currentSearchScopeName}}"
 
 msgid "Results found"
 msgstr "找到的结果"
@@ -1211,7 +1211,7 @@ msgid "Create saved list"
 msgstr "创建保存列表"
 
 msgid "Create new in another program..."
-msgstr ""
+msgstr "在另一个程序中新建..."
 
 msgid "Create new event"
 msgstr "创建新事件"
@@ -1220,7 +1220,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
 
 msgid "Search..."
-msgstr ""
+msgstr "搜索..."
 
 msgid "Select tracked entity type"
 msgstr "选择跟踪实体 类型"
