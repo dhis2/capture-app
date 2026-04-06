@@ -33,12 +33,8 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
 }
 
 export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilterData | null {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
-    }
-
     if (typeof value === 'string') {
-        return null;
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
 
     const filterData: DateTimeAbsoluteFilterData = { type: dateFilterTypes.ABSOLUTE };

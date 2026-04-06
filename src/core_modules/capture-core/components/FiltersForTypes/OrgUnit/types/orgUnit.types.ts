@@ -6,9 +6,9 @@ export type OrgUnitValue = {
     path: string;
 };
 
-export type OrgUnitIdFilterData = {
+export type OrgUnitValueFilterData = {
     value: string;
     name?: string;
 };
 
-export type OrgUnitFilterData = OrgUnitIdFilterData | EmptyValueFilterData;
+export type OrgUnitFilterData = OrgUnitValueFilterData | EmptyValueFilterData;

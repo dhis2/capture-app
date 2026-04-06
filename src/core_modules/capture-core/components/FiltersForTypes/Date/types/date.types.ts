@@ -1,3 +1,5 @@
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
 export type AbsoluteDateFilterData = {
     type: 'ABSOLUTE';
     ge?: string;
@@ -17,9 +19,4 @@ export type DateValue = {
     isValid?: boolean | null;
 };
 
-export type EmptyValueDateFilterData = {
-    isEmpty: boolean;
-    value: string;
-};
-
-export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData | EmptyValueDateFilterData;
+export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData | EmptyValueFilterData;

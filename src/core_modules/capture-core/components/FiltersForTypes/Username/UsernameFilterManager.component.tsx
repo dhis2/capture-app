@@ -21,7 +21,7 @@ export class UsernameFilterManager extends React.Component<Props, State> {
             return { value: filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER };
         }
 
-        if (!filter || !filter.value) return { value: undefined };
+        if (!filter?.value) return { value: undefined };
 
         return { value: filter.value };
     }

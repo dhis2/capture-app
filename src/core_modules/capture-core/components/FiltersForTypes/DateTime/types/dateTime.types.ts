@@ -1,8 +1,7 @@
 import type { EmptyValueFilterData } from '../../EmptyValue/types';
-import { dateFilterTypes } from '../../Date/constants';
 
 export type DateTimeAbsoluteFilterData = {
-    type: typeof dateFilterTypes.ABSOLUTE;
+    type: 'ABSOLUTE';
     ge?: string;
     le?: string;
 };

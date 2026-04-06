@@ -6,12 +6,8 @@ import type { TimeFilterData, TimeRangeFilterData } from './types/time.types';
 import type { Value } from './Time.types';
 
 export function getTimeFilterData(value: NonNullable<Value>): TimeFilterData | null {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
-    }
-
     if (typeof value === 'string') {
-        return null;
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
 
     const filterData: TimeRangeFilterData = {};
