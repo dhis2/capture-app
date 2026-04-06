@@ -1,1 +1,1 @@
-export type { NumericFilterData, NumericRangeFilterData, Value } from './numeric.types';
+export type { NumericFilterData, Value } from './numeric.types';

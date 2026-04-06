@@ -7,6 +7,7 @@ export type OptionSetValuesFilterData = {
 };
 
 export type OptionSetFilterData = OptionSetValuesFilterData | EmptyValueFilterData;
+
 export type Value = Array<string> | string | null | undefined;
 
 export type PlainProps = {

@@ -1,9 +1,5 @@
 import type { EmptyValueFilterData } from '../../EmptyValue/types';
 
-export type BooleanValuesFilterData = {
-    values: Array<boolean>,
-};
-
 export type BooleanValueFilterData = {
     values: Array<string>;
 };

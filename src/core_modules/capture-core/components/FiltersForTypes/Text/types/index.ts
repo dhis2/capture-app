@@ -1,1 +1,1 @@
-export type { TextFilterData, TextFilterProps, TextValueFilterData, Value } from './text.types';
+export type { TextFilterData, TextFilterProps, Value } from './text.types';
