@@ -6,6 +6,7 @@ export type NumericRangeFilterData = {
 };
 
 export type NumericFilterData = NumericRangeFilterData | EmptyValueFilterData;
+
 export type Value = {
     min?: string | null;
     max?: string | null;

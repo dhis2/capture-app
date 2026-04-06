@@ -10,7 +10,7 @@ import {
     filterTypesObject,
     type AssigneeFilterData,
     type DateFilterData,
-    type BooleanFilterData,
+    type BooleanValuesFilterData,
     type TrueOnlyFilterData,
     type TextFilterData,
     type TimeFilterData,
@@ -53,7 +53,7 @@ const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData => ({
     le: filter.le ?? undefined,
 });
 
-const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
+const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanValuesFilterData => ({
     values: filter.in.map(value => value === 'true'),
 });
 

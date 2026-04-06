@@ -1,3 +1,3 @@
 
 export { BooleanFilterManager as BooleanFilter } from './BooleanFilterManager.component';
-export type { BooleanFilterStringified } from './types';
+export type { BooleanFilterData } from './types';

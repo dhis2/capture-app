@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { BooleanFilterStringified } from './types';
+import type { BooleanFilterData } from './types';
 
 type Props = {
-    filter: BooleanFilterStringified | null,
+    filter: BooleanFilterData | null,
     filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
     singleSelect: boolean,
@@ -16,7 +16,7 @@ type State = {
 
 export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(
-        filter: BooleanFilterStringified | null,
+        filter: BooleanFilterData | null,
         singleSelect: boolean,
     ): (Array<string> | string | null | boolean | undefined) {
         if (!filter) {

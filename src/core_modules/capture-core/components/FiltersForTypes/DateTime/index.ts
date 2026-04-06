@@ -1,3 +1,3 @@
 export { DateTimeFilterManager as DateTimeFilter } from './DateTimeFilterManager.component';
 export { getDateTimeFilterData } from './dateTimeFilterDataGetter';
-export type { DateTimeFilterData, DateTimeAbsoluteFilterData } from './types';
+export type { DateTimeFilterData } from './types/dateTime.types';

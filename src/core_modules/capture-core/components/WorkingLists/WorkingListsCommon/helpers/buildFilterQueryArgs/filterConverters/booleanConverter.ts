@@ -1,12 +1,12 @@
 import { pipe } from 'capture-core-utils';
-import type { BooleanFilterData } from '../../../../../ListView';
+import type { BooleanValueFilterData } from '../../../../../ListView';
 
 const booleanFilterValues = {
     true: 'true',
     false: 'false',
 };
 
-export function convertBoolean({ sourceValue }: { sourceValue: BooleanFilterData }) {
+export function convertBoolean({ sourceValue }: { sourceValue: BooleanValueFilterData }) {
     return pipe(
         values => values.map(filterValue => booleanFilterValues[filterValue]),
         values =>

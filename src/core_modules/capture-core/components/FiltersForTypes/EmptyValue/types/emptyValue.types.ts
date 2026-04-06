@@ -7,6 +7,6 @@ export type EmptyValueFilterCheckboxesProps = {
 };
 
 export type EmptyValueFilterData = {
-    isEmpty: boolean;
     value: string;
+    isEmpty: boolean;
 };

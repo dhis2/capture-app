@@ -17,14 +17,14 @@ export { dateFilterTypes } from './Date/constants';
 export { mainOptionTranslatedTexts } from './Date/options';
 
 export type { AssigneeFilterData } from './Assignee/types';
-export type { BooleanFilterData } from './Boolean/types';
+export type { BooleanFilterData, BooleanValueFilterData, BooleanValuesFilterData } from './Boolean/types';
 export type { DateFilterData, AbsoluteDateFilterData, RelativeDateFilterData } from './Date/types';
 export type { DateTimeFilterData } from './DateTime';
-export type { TimeFilterData } from './Time';
+export type { TimeFilterData, TimeRangeFilterData } from './Time/types';
 export type { EmptyOnlyFilterData } from './EmptyOnly/types';
-export type { NumericFilterData } from './Numeric/types';
+export type { NumericFilterData, NumericRangeFilterData } from './Numeric/types';
 export type { OptionSetFilterData } from './OptionSet/types';
-export type { OrgUnitFilterData } from './OrgUnit/types';
+export type { OrgUnitFilterData, OrgUnitValueFilterData } from './OrgUnit/types';
 export type { TextFilterData } from './Text/types';
 export type { TrueOnlyFilterData } from './TrueOnly/types';
 export type { UsernameFilterData } from './Username/types';

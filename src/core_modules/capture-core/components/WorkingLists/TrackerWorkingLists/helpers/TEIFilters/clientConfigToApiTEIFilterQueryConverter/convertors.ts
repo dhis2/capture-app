@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {
-    type BooleanFilterData,
+    type BooleanValuesFilterData,
     type DateFilterData,
     type DateTimeFilterData,
     dateFilterTypes,
@@ -37,7 +37,7 @@ const getTimeFilter = (filter: TimeFilterData) => {
     };
 };
 
-const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
+const getBooleanFilter = (filter: BooleanValuesFilterData): ApiDataFilterBoolean => ({
     in: filter.values.map(value => (value ? 'true' : 'false')),
 });
 

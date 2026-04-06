@@ -1,7 +1,7 @@
 export type {
     BooleanFilterData,
-    BooleanFilterStringified,
-    BooleanValuesStringified,
+    BooleanValueFilterData,
+    BooleanValuesFilterData,
     PlainProps,
     Value,
 } from './boolean.types';

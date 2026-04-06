@@ -2,24 +2,24 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { BooleanFilterStringified } from './types';
+import type { BooleanFilterData } from './types';
 
 export function getBooleanFilterData(
     values: Array<string>,
-): BooleanFilterStringified {
+): BooleanFilterData {
     return {
         values: values.map(value => value),
     };
 }
 
-export const getSingleSelectBooleanFilterData = (value: any): BooleanFilterStringified => {
+export const getSingleSelectBooleanFilterData = (value: any): BooleanFilterData => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
         return getEmptyValueFilterData(value);
     }
     return getBooleanFilterData([value]);
 };
 
-export const getMultiSelectBooleanFilterData = (values: any): BooleanFilterStringified => {
+export const getMultiSelectBooleanFilterData = (values: any): BooleanFilterData => {
     if (typeof values === 'string' && isEmptyValueFilter(values)) {
         return getEmptyValueFilterData(values);
     }
