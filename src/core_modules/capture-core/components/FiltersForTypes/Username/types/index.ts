@@ -1,1 +1,6 @@
-export type { UsernameFilterData, UsernameValueFilterData } from './username.types';
+export type {
+    UsernameFilterData,
+    UsernameFilterProps,
+    UsernameValueFilterData,
+    Value,
+} from './username.types';

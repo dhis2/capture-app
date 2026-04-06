@@ -15,22 +15,13 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
+import type { PlainProps, Value } from './types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         marginInlineEnd: theme.typography.pxToRem(-24),
     },
 });
-
-type Value = Array<any> | string | boolean | null;
-
-type PlainProps = {
-    value?: Value;
-    onCommitValue: (value: Value) => void;
-    onUpdate?: (commitValue?: Value) => void;
-    allowMultiple: boolean;
-    disableEmptyValueFilter?: boolean;
-};
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
 

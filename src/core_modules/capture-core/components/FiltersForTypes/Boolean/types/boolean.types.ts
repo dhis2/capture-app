@@ -9,3 +9,13 @@ export type BooleanValuesStringified = {
 };
 
 export type BooleanFilterStringified = BooleanValuesStringified | EmptyValueFilterData;
+
+export type Value = Array<any> | string | boolean | null;
+
+export type PlainProps = {
+    value?: Value;
+    onCommitValue: (value: Value) => void;
+    onUpdate?: (commitValue?: Value) => void;
+    allowMultiple: boolean;
+    disableEmptyValueFilter?: boolean;
+};

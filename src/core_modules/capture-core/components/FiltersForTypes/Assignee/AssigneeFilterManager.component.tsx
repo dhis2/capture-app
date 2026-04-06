@@ -1,17 +1,12 @@
 import * as React from 'react';
 import { AssigneeFilter } from './AssigneeFilter.component';
-import type { AssigneeFilterData } from './types';
+import type { AssigneeFilterData, Value } from './types';
 
 type Props = {
     filter: AssigneeFilterData | null,
     filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
 };
-
-type Value = {
-    mode: string;
-    provided?: any;
-} | null;
 
 type State = {
     value?: Value | null;

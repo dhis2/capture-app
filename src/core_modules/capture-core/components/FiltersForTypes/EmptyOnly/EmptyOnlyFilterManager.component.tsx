@@ -1,8 +1,7 @@
 import React from 'react';
 import { EmptyOnlyFilter } from './EmptyOnlyFilter.component';
-import type { EmptyOnlyFilterData } from './types';
+import type { EmptyOnlyFilterData, Value } from './types';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { Value } from './EmptyOnly.types';
 
 type Props = {
     filter: EmptyOnlyFilterData | null | undefined;

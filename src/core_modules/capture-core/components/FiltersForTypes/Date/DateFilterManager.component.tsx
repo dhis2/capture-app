@@ -5,8 +5,7 @@ import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData } from './types';
-import type { Value } from './DateFilter.component';
+import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData, Value } from './types';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 type Props = {

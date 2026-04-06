@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { cx } from '@emotion/css';
 import type { UpdatableFilterContent } from '../types';
-import type { Value } from './Time.types';
+import type { Value } from './types';
 import { getTimeFilterData } from './timeFilterDataGetter';
 import { TimeFilterInput } from './TimeFilterInput.component';
 import {

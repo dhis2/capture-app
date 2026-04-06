@@ -6,3 +6,7 @@ export type TimeRangeFilterData = {
 };
 
 export type TimeFilterData = TimeRangeFilterData | EmptyValueFilterData;
+export type Value = {
+    from?: string | null;
+    to?: string | null;
+} | string | null;

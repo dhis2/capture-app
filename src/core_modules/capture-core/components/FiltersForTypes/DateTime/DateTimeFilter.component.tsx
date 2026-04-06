@@ -7,8 +7,7 @@ import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from '../Date/types/date.types';
-import type { DateTimeValue } from './types/dateTime.types';
-import type { Value } from './DateTime.types';
+import type { DateTimeValue, Value } from './types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
 import {

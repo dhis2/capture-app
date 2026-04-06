@@ -6,6 +6,7 @@ import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
+import type { PlainProps, Value } from './types';
 import type { UpdatableFilterContent } from '../types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
@@ -18,16 +19,6 @@ const getStyles: Readonly<any> = (theme: any) => ({
         color: theme.palette.error.main,
     },
 });
-
-type Value = {
-    mode: string;
-    provided?: any;
-} | null;
-
-type PlainProps = {
-    value?: Value;
-    onCommitValue: (value: any) => void;
-};
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
 

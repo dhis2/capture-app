@@ -5,7 +5,7 @@ import { Radio } from '@dhis2/ui';
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 import type { UpdatableFilterContent } from '../types';
-import type { DateValue } from './types';
+import type { DateValue, Value } from './types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
@@ -40,14 +40,6 @@ const styles: Readonly<any> = (theme: any) => ({
         marginBlockEnd: theme.typography.pxToRem(10),
     },
 });
-
-export type Value = {
-    from?: DateValue;
-    to?: DateValue;
-    main?: string;
-    start?: string;
-    end?: string;
-} | string | undefined;
 
 type OwnProps = {
     onCommitValue: (value?: Value, isBlur?: boolean) => void;

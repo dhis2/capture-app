@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { UsernameFilter } from './UsernameFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { UsernameFilterData } from './types';
-import type { Value } from './Username.types';
+import type { UsernameFilterData, Value } from './types';
 
 type Props = {
     filter: UsernameFilterData | null | undefined;

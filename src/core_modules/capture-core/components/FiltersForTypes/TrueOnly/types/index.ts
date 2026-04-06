@@ -1,1 +1,6 @@
-export type { TrueOnlyFilterData, TrueOnlyValueFilterData } from './trueOnly.types';
+export type {
+    PlainProps,
+    TrueOnlyFilterData,
+    TrueOnlyValueFilterData,
+    Value,
+} from './trueOnly.types';

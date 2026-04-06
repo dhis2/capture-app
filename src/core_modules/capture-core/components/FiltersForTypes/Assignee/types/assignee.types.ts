@@ -8,3 +8,12 @@ export type AssigneeFilterData = {
         name: string;
     } | null;
 };
+export type Value = {
+    mode: string;
+    provided?: any;
+} | null;
+
+export type PlainProps = {
+    value?: Value;
+    onCommitValue: (value: any) => void;
+};

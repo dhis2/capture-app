@@ -3,7 +3,7 @@ import {
     getEmptyValueFilterData,
 } from '../EmptyValue';
 import type { TimeFilterData, TimeRangeFilterData } from './types/time.types';
-import type { Value } from './Time.types';
+import type { Value } from './types';
 
 export function getTimeFilterData(value: NonNullable<Value>): TimeFilterData | null {
     if (typeof value === 'string') {

@@ -3,7 +3,7 @@ import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
-import type { TextFilterProps, Value } from './Text.types';
+import type { TextFilterProps, Value } from './types';
 import {
     makeCheckboxHandler,
     isEmptyValueFilter,

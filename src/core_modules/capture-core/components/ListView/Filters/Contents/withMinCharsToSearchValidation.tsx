@@ -6,7 +6,7 @@ import {
     isValidMinCharactersToSearch,
 } from '../../../../utils/validation/validators/form/isValidMinCharactersToSearch';
 import { filterTypesObject } from '../../../../components/WorkingLists/WorkingListsBase';
-import type { Value } from '../../../../components/FiltersForTypes/Date/DateFilter.component';
+import type { Value } from '../../../../components/FiltersForTypes/Date/types';
 
 type Theme = {
     typography: { caption: Record<string, unknown>; pxToRem: (n: number) => string };

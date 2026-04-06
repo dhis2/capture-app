@@ -6,8 +6,12 @@ import {
     getEmptyValueFilterData,
 } from '../EmptyValue';
 import { dateFilterTypes } from '../Date/constants';
-import type { DateTimeAbsoluteFilterData, DateTimeFilterData, DateTimeValue } from './types/dateTime.types';
-import type { Value } from './DateTime.types';
+import type {
+    DateTimeAbsoluteFilterData,
+    DateTimeFilterData,
+    DateTimeValue,
+    Value,
+} from './types';
 
 function localCalendarDateToIsoDate(localDate: string): string | null {
     try {

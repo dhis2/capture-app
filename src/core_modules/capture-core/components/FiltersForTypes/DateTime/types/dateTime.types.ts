@@ -14,3 +14,7 @@ export type DateTimeValue = {
     error?: string | null;
     isValid?: boolean | null;
 };
+export type Value = {
+    from?: DateTimeValue | null;
+    to?: DateTimeValue | null;
+} | string | null;

@@ -14,6 +14,7 @@ import {
 import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
+import type { Value } from './types';
 import type { UpdatableFilterContent } from '../types';
 import {
     makeCheckboxHandler,
@@ -44,11 +45,6 @@ const getStyles: any = (theme: any) => ({
         paddingTop: theme.typography.pxToRem(10),
     },
 });
-
-type Value = {
-    min?: string | null,
-    max?: string | null,
-} | string | null | undefined;
 
 type Props = {
     onCommitValue: (value: Value, isBlur?: boolean) => void,

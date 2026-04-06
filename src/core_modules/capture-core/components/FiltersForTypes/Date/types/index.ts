@@ -1,1 +1,7 @@
-export type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './date.types';
+export type {
+    AbsoluteDateFilterData,
+    RelativeDateFilterData,
+    DateFilterData,
+    DateValue,
+    Value,
+} from './date.types';

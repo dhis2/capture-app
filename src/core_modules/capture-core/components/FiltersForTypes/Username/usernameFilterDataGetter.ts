@@ -2,8 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { UsernameFilterData } from './types';
-import type { Value } from './Username.types';
+import type { UsernameFilterData, Value } from './types';
 
 export const getUsernameFilterData = (value: Value): UsernameFilterData | null | undefined => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {

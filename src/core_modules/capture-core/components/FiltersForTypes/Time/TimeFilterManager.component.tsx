@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TimeFilter } from './TimeFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 import type { TimeFilterData } from './types/time.types';
-import type { Value } from './Time.types';
+import type { Value } from './types';
 
 type Props = {
     filter?: TimeFilterData | null;

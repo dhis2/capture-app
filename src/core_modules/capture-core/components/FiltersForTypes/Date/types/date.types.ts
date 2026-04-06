@@ -20,3 +20,11 @@ export type DateValue = {
 };
 
 export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData | EmptyValueFilterData;
+
+export type Value = {
+    from?: DateValue;
+    to?: DateValue;
+    main?: string;
+    start?: string;
+    end?: string;
+} | string | undefined;

@@ -1,4 +1,4 @@
-import type { Value } from './EmptyOnly.types';
+import type { Value } from './types';
 import {
     EMPTY_VALUE_FILTER,
     NOT_EMPTY_VALUE_FILTER,

@@ -1,1 +1,7 @@
-export type { BooleanFilterData, BooleanFilterStringified, BooleanValuesStringified } from './boolean.types';
+export type {
+    BooleanFilterData,
+    BooleanFilterStringified,
+    BooleanValuesStringified,
+    PlainProps,
+    Value,
+} from './boolean.types';

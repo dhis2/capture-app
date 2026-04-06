@@ -1,1 +1,1 @@
-export type { AssigneeFilterData } from './assignee.types';
+export type { AssigneeFilterData, PlainProps, Value } from './assignee.types';
