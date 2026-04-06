@@ -1,6 +1,8 @@
-export type OptionSetFilterData = {
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
+export type OptionSetValuesFilterData = {
     usingOptionSet: boolean;
     values: Array<any>;
-    isEmpty?: boolean;
-    value?: string;
 };
+
+export type OptionSetFilterData = OptionSetValuesFilterData | EmptyValueFilterData;

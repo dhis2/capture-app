@@ -13,16 +13,16 @@ function getSelectOptionSetFilterData(
     };
 }
 
-export const getMultiSelectOptionSetFilterData = (values: any) => {
+export const getMultiSelectOptionSetFilterData = (values: any): OptionSetFilterData => {
     if (typeof values === 'string' && isEmptyValueFilter(values)) {
-        return { usingOptionSet: true, values: [], ...getEmptyValueFilterData(values) };
+        return getEmptyValueFilterData(values);
     }
     return getSelectOptionSetFilterData(values);
 };
 
-export const getSingleSelectOptionSetFilterData = (value: any) => {
+export const getSingleSelectOptionSetFilterData = (value: any): OptionSetFilterData => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return { usingOptionSet: true, values: [], ...getEmptyValueFilterData(value) };
+        return getEmptyValueFilterData(value);
     }
     return getSelectOptionSetFilterData([value]);
 };

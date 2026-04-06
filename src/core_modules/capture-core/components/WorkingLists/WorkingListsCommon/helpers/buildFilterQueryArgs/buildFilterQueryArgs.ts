@@ -54,7 +54,7 @@ function convertFilter(
     },
     searchOperator?: string,
 ) {
-    if (typeof sourceValue.isEmpty === 'boolean') {
+    if ('isEmpty' in sourceValue) {
         return sourceValue.isEmpty ? API_EMPTY_VALUE_FILTER : API_NOT_EMPTY_VALUE_FILTER;
     }
     if (sourceValue && sourceValue.usingOptionSet) {

@@ -1,4 +1,7 @@
-export type TrueOnlyFilterData = {
-    value: boolean | string;
-    isEmpty?: boolean;
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
+export type TrueOnlyValueFilterData = {
+    value: boolean;
 };
+
+export type TrueOnlyFilterData = TrueOnlyValueFilterData | EmptyValueFilterData;

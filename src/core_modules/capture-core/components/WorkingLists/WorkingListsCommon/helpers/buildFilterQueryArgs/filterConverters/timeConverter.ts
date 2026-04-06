@@ -2,7 +2,7 @@ import type { TimeFilterData } from '../../../../../FiltersForTypes/Time';
 import { escapeString } from '../../../../../../utils/escapeString';
 
 export function convertTime({ sourceValue }: { sourceValue: TimeFilterData }): string {
-    if (!sourceValue) {
+    if (!sourceValue || 'isEmpty' in sourceValue) {
         return '';
     }
     const requestData: string[] = [];

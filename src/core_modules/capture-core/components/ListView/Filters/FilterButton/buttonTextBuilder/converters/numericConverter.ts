@@ -2,6 +2,9 @@ import i18n from '@dhis2/d2-i18n';
 import type { NumericFilterData } from '../../../../../FiltersForTypes';
 
 export function convertNumeric(filter: NumericFilterData): string {
+    if ('isEmpty' in filter) {
+        return String(filter.value);
+    }
     let appliedText = '';
     const geHasValue = !!filter.ge || filter.ge === 0;
     const leHasValue = !!filter.le || filter.le === 0;

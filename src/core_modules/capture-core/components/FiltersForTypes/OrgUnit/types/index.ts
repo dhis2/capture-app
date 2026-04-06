@@ -1,1 +1,1 @@
-export type { OrgUnitFilterData, OrgUnitValue } from './orgUnit.types';
+export type { OrgUnitFilterData, OrgUnitIdFilterData, OrgUnitValue } from './orgUnit.types';

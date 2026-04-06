@@ -1,4 +1,7 @@
-export type UsernameFilterData = {
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
+export type UsernameValueFilterData = {
     value: string;
-    isEmpty?: boolean;
 };
+
+export type UsernameFilterData = UsernameValueFilterData | EmptyValueFilterData;

@@ -1,1 +1,1 @@
-export type { UsernameFilterData } from './username.types';
+export type { UsernameFilterData, UsernameValueFilterData } from './username.types';

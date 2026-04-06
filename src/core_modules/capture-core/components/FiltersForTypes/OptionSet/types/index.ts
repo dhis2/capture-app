@@ -1,1 +1,1 @@
-export type { OptionSetFilterData } from './optionSet.types';
+export type { OptionSetFilterData, OptionSetValuesFilterData } from './optionSet.types';

@@ -1,6 +1,9 @@
 import type { NumericFilterData } from '../../../../../ListView';
 
 export function convertNumeric({ sourceValue }: { sourceValue: NumericFilterData }) {
+    if ('isEmpty' in sourceValue) {
+        return '';
+    }
     const requestData: string[] = [];
 
     if (sourceValue.ge || sourceValue.ge === 0) {

@@ -5,7 +5,8 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { DateTimeFilterData, DateTimeValue } from './types/dateTime.types';
+import { dateFilterTypes } from '../Date/constants';
+import type { DateTimeAbsoluteFilterData, DateTimeFilterData, DateTimeValue } from './types/dateTime.types';
 import type { Value } from './DateTime.types';
 
 function localCalendarDateToIsoDate(localDate: string): string | null {
@@ -40,7 +41,7 @@ export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilter
         return null;
     }
 
-    const filterData: DateTimeFilterData = { type: 'ABSOLUTE' };
+    const filterData: DateTimeAbsoluteFilterData = { type: dateFilterTypes.ABSOLUTE };
 
     if (value.from?.date) {
         const ge = buildIsoDateTime(value.from, '00:00');

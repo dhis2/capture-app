@@ -27,8 +27,11 @@ const converterByType: any = {
 };
 
 export const getApiOptionSetFilter =
-    (filter: OptionSetFilterData, type: keyof typeof dataElementTypes): ApiDataFilterOptionSet => ({
-        in: filter
-            .values
-            .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
-    });
+    (filter: OptionSetFilterData, type: keyof typeof dataElementTypes): ApiDataFilterOptionSet | null => {
+        if ('isEmpty' in filter) return null;
+        return {
+            in: filter
+                .values
+                .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
+        };
+    };

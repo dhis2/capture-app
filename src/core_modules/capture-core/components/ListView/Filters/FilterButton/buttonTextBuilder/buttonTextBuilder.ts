@@ -39,6 +39,9 @@ const convertersForTypes: any = {
 };
 
 function getOptionSetText(filter: OptionSetFilterData, options: Options) {
+    if ('isEmpty' in filter) {
+        return String(filter.value);
+    }
     return filter
         .values
         .map((value) => {

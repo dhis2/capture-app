@@ -1,1 +1,1 @@
-export type { TimeFilterData } from './time.types';
+export type { TimeFilterData, TimeRangeFilterData } from './time.types';

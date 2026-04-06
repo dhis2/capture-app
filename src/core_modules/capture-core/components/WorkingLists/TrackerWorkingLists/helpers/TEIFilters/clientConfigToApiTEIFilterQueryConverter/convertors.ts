@@ -16,19 +16,26 @@ import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import type { ApiDataFilterOrgUnit } from '../../../../EventWorkingLists/types';
 
 const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
+    if ('isEmpty' in filter) return null;
     const searchOperator = element?.searchOperator?.toLowerCase() ?? 'like';
     return { [searchOperator]: filter.value };
 };
 
-const getNumericFilter = (filter: NumericFilterData) => ({
-    ge: filter.ge?.toString() ?? undefined,
-    le: filter.le?.toString() ?? undefined,
-});
+const getNumericFilter = (filter: NumericFilterData) => {
+    if ('isEmpty' in filter) return null;
+    return {
+        ge: filter.ge?.toString() ?? undefined,
+        le: filter.le?.toString() ?? undefined,
+    };
+};
 
-const getTimeFilter = (filter: TimeFilterData) => ({
-    ge: filter.ge ?? undefined,
-    le: filter.le ?? undefined,
-});
+const getTimeFilter = (filter: TimeFilterData) => {
+    if ('isEmpty' in filter) return null;
+    return {
+        ge: filter.ge ?? undefined,
+        le: filter.le ?? undefined,
+    };
+};
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
     in: filter.values.map(value => (value ? 'true' : 'false')),
@@ -72,9 +79,10 @@ export const getDateFilter = (dateFilter: DateFilterData) => {
     };
 };
 
-const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
-    eq: filter.value,
-});
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit | null => {
+    if ('isEmpty' in filter) return null;
+    return { eq: filter.value };
+};
 
 export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => {
     if ('isEmpty' in dateFilter) {

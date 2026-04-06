@@ -1,1 +1,1 @@
-export type { TrueOnlyFilterData } from './trueOnly.types';
+export type { TrueOnlyFilterData, TrueOnlyValueFilterData } from './trueOnly.types';

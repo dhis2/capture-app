@@ -17,9 +17,9 @@ export type DateValue = {
     isValid?: boolean | null;
 };
 
-export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData | EmptyValueDateFilterData;
-
 export type EmptyValueDateFilterData = {
     isEmpty: boolean;
     value: string;
 };
+
+export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData | EmptyValueDateFilterData;

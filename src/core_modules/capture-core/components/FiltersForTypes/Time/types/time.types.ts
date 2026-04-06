@@ -1,6 +1,8 @@
-export type TimeFilterData = {
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
+export type TimeRangeFilterData = {
     ge?: string;
     le?: string;
-    isEmpty?: boolean;
-    value?: string;
 };
+
+export type TimeFilterData = TimeRangeFilterData | EmptyValueFilterData;

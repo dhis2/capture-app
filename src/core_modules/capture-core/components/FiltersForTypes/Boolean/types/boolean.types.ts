@@ -1,9 +1,11 @@
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
 export type BooleanFilterData = {
     values: Array<boolean>,
 };
 
-export type BooleanFilterStringified = {
+export type BooleanValuesStringified = {
     values: Array<string>;
-    isEmpty?: boolean;
-    value?: string;
 };
+
+export type BooleanFilterStringified = BooleanValuesStringified | EmptyValueFilterData;

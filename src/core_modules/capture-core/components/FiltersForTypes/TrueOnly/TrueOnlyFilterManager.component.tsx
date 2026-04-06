@@ -15,11 +15,8 @@ type State = {
 
 export class TrueOnlyFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: TrueOnlyFilterData | null) {
-        if (filter?.isEmpty === true) {
-            return { value: EMPTY_VALUE_FILTER };
-        }
-        if (filter?.isEmpty === false) {
-            return { value: NOT_EMPTY_VALUE_FILTER };
+        if (filter && 'isEmpty' in filter) {
+            return { value: filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER };
         }
 
         return {

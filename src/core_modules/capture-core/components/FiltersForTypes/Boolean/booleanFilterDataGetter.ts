@@ -12,16 +12,16 @@ export function getBooleanFilterData(
     };
 }
 
-export const getSingleSelectBooleanFilterData = (value: any) => {
+export const getSingleSelectBooleanFilterData = (value: any): BooleanFilterStringified => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return { values: [], ...getEmptyValueFilterData(value) };
+        return getEmptyValueFilterData(value);
     }
     return getBooleanFilterData([value]);
 };
 
-export const getMultiSelectBooleanFilterData = (values: any) => {
+export const getMultiSelectBooleanFilterData = (values: any): BooleanFilterStringified => {
     if (typeof values === 'string' && isEmptyValueFilter(values)) {
-        return { values: [], ...getEmptyValueFilterData(values) };
+        return getEmptyValueFilterData(values);
     }
     return getBooleanFilterData(values);
 };

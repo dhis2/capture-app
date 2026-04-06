@@ -8,6 +8,9 @@ export function convertOptionSet(
     sourceValue: OptionSetFilterData,
     type: keyof typeof dataElementTypes,
 ) {
+    if ('isEmpty' in sourceValue) {
+        return '';
+    }
     return pipe(
         values => values.map(filterValue => escapeString(convertDataTypeValueToRequest(filterValue, type))),
         values => values.join(';'),

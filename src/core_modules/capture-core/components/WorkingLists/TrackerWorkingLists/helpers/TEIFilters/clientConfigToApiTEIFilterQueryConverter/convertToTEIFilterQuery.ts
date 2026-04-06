@@ -33,7 +33,7 @@ export const convertToTEIFilterAttributes = ({
                 return null;
             }
 
-            if (typeof filter.isEmpty === 'boolean') {
+            if ('isEmpty' in filter) {
                 return { ...toApiEmptyValueFilter(filter), attribute: key };
             }
 

@@ -2,7 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { TimeFilterData } from './types/time.types';
+import type { TimeFilterData, TimeRangeFilterData } from './types/time.types';
 import type { Value } from './Time.types';
 
 export function getTimeFilterData(value: NonNullable<Value>): TimeFilterData | null {
@@ -14,7 +14,7 @@ export function getTimeFilterData(value: NonNullable<Value>): TimeFilterData | n
         return null;
     }
 
-    const filterData: TimeFilterData = {};
+    const filterData: TimeRangeFilterData = {};
 
     if (value.from) {
         filterData.ge = value.from;

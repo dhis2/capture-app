@@ -1,1 +1,1 @@
-export type { BooleanFilterData, BooleanFilterStringified } from './boolean.types';
+export type { BooleanFilterData, BooleanFilterStringified, BooleanValuesStringified } from './boolean.types';

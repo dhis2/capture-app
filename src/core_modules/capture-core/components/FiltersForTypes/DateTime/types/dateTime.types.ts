@@ -1,11 +1,13 @@
-export type DateTimeFilterData = {
-    type: 'ABSOLUTE';
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+import { dateFilterTypes } from '../../Date/constants';
+
+export type DateTimeAbsoluteFilterData = {
+    type: typeof dateFilterTypes.ABSOLUTE;
     ge?: string;
     le?: string;
-} | {
-    isEmpty: boolean;
-    value: string;
 };
+
+export type DateTimeFilterData = DateTimeAbsoluteFilterData | EmptyValueFilterData;
 
 export type DateTimeValue = {
     date?: string | null;

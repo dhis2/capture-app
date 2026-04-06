@@ -17,14 +17,11 @@ type State = {
 
 export class OrgUnitFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: OrgUnitFilterData | null | undefined): State {
-        if (filter?.isEmpty === true) {
-            return { value: EMPTY_VALUE_FILTER };
-        }
-        if (filter?.isEmpty === false) {
-            return { value: NOT_EMPTY_VALUE_FILTER };
+        if (filter && 'isEmpty' in filter) {
+            return { value: filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER };
         }
 
-        if (!filter?.value) return { value: undefined };
+        if (!filter || !filter.value) return { value: undefined };
 
         const id = filter.value;
         const name = filter.name ?? filter.value;

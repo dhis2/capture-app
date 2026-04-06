@@ -45,23 +45,31 @@ type ColumnForConverter = MetadataColumnForConverter | MainColumnForConverter;
 
 type ColumnsForConverter = Map<string, ColumnForConverter>;
 
-const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
-    like: filter.value,
-});
+const getTextFilter = (filter: TextFilterData): ApiDataFilterText | null => {
+    if ('isEmpty' in filter) return null;
+    return { like: filter.value };
+};
 
-const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
-    eq: filter.value,
-});
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit | null => {
+    if ('isEmpty' in filter) return null;
+    return { eq: filter.value };
+};
 
-const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
-    ge: filter.ge?.toString() ?? undefined,
-    le: filter.le?.toString() ?? undefined,
-});
+const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric | null => {
+    if ('isEmpty' in filter) return null;
+    return {
+        ge: filter.ge?.toString() ?? undefined,
+        le: filter.le?.toString() ?? undefined,
+    };
+};
 
-const getTimeFilter = (filter: TimeFilterData): ApiDataFilterNumeric => ({
-    ge: filter.ge ?? undefined,
-    le: filter.le ?? undefined,
-});
+const getTimeFilter = (filter: TimeFilterData): ApiDataFilterNumeric | null => {
+    if ('isEmpty' in filter) return null;
+    return {
+        ge: filter.ge ?? undefined,
+        le: filter.le ?? undefined,
+    };
+};
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
     in: filter.values.map(value => (value ? 'true' : 'false')),
@@ -160,7 +168,7 @@ const typeConvertFilters = (filters: any, columns: ColumnsForConverter) => Objec
             return null;
         }
 
-        if (typeof filter.isEmpty === 'boolean') {
+        if ('isEmpty' in filter) {
             return { ...toApiEmptyValueFilter(filter), dataItem: key };
         }
 

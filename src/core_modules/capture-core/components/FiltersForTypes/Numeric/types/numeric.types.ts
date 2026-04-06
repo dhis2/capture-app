@@ -1,6 +1,8 @@
-export type NumericFilterData = {
+import type { EmptyValueFilterData } from '../../EmptyValue/types';
+
+export type NumericRangeFilterData = {
     ge?: number | null,
     le?: number | null,
-    isEmpty?: boolean,
-    value?: string,
 };
+
+export type NumericFilterData = NumericRangeFilterData | EmptyValueFilterData;
