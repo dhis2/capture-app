@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { FormFieldPluginComponent } from './FormFieldPlugin.component';
 import type { ContainerProps } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
@@ -12,7 +12,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         pluginSource,
         fieldsMetadata,
         formId,
-        onUpdateField,
+        onUpdateFieldValue,
         customAttributes,
         pluginContext,
         viewMode = false,
@@ -24,6 +24,11 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     // Plugin related functionality and feedback
     const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
+    const onUpdateField = useCallback(
+        (fieldMetadata, value, options) =>
+            onUpdateFieldValue(fieldMetadata, value, pluginValues[fieldMetadata.id], options),
+        [onUpdateFieldValue, pluginValues],
+    );
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
         configuredPluginIds,
         onUpdateField,

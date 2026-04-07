@@ -30,10 +30,10 @@ export const usePluginValues = (
             return acc;
         }, {}), [pluginContext]);
 
-    return {
-        pluginValues: {
-            ...formValues,
-            ...contextValues,
-        },
-    };
+    const pluginValues = useMemo(() => ({
+        ...formValues,
+        ...contextValues,
+    }), [formValues, contextValues]);
+
+    return { pluginValues };
 };
