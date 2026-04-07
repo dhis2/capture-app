@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -91,11 +91,11 @@ msgstr "Zobrazit ovládací panel"
 msgid "View active enrollment"
 msgstr "Zobrazit aktivní zápisy"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Znovu zapsat"
-
-msgid "in"
-msgstr "v"
 
 msgid "Enrolled"
 msgstr "Zapsáno"
@@ -118,11 +118,11 @@ msgstr "Lat"
 msgid "Long"
 msgstr "Long"
 
-msgid "lat"
-msgstr "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
+msgstr ""
 
-msgid "long"
-msgstr "long"
+msgid "long{{escape}} {{longitudeValue}}"
+msgstr ""
 
 msgid "Show less"
 msgstr "Zobrazit méně"
@@ -281,8 +281,12 @@ msgstr "Přepnout do formulářového zobrazení"
 msgid "Switch to row view"
 msgstr "Přepnout do zobrazení řádků"
 
-msgid "events added"
-msgstr "přidány události"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "No events added"
 msgstr "Nebyly přidány žádné události"
@@ -325,6 +329,9 @@ msgstr "bez"
 
 msgid "enrollment"
 msgstr "zápis"
+
+msgid "in"
+msgstr "v"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Zapište se do programu výběrem programu v horní liště."
@@ -470,29 +477,32 @@ msgstr "Vybrat uživatele"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Uveďte nulové nebo kladné celé číslo"
-
-msgid "to"
-msgstr "do"
-
-msgid "Days in the future"
-msgstr "Dny v budoucnosti"
 
 msgid "From"
 msgstr "Od"
 
-msgid "Days in the past"
-msgstr "Dny v minulosti"
+msgid "to"
+msgstr "do"
 
 msgid "To"
 msgstr "Do"
+
+msgid "Period"
+msgstr "Období"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Uveďte nulové nebo kladné celé číslo"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr "Dny v minulosti"
+
+msgid "Days in the future"
+msgstr "Dny v budoucnosti"
 
 msgid "This week"
 msgstr "Tento týden"
@@ -500,8 +510,8 @@ msgstr "Tento týden"
 msgid "This month"
 msgstr "Tento měsíc"
 
-msgid "This Year"
-msgstr "Tento rok"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "Minulý týden"
@@ -518,17 +528,29 @@ msgstr "Absolutní rozsah"
 msgid "Relative range"
 msgstr "Relativní rozsah"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "datum"
+
+msgid "Time"
+msgstr "Čas"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr "Je prázdný"
 
 msgid "Is not empty"
 msgstr "Není prázdný"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -539,11 +561,20 @@ msgstr "Uveďte prosím platné číslo"
 msgid "Please provide a valid integer"
 msgstr "Uveďte platné celé číslo"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
+
 msgid "Please provide a positive integer"
 msgstr "Zadejte kladné celé číslo"
 
 msgid "Please provide a negative integer"
 msgstr "Uveďte záporné celé číslo"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
 
 msgid "Yes"
 msgstr "Ano"
@@ -620,7 +651,7 @@ msgstr "Reset filtru"
 msgid "Remove filter"
 msgstr "Odebrat filtr"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -631,6 +662,9 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} do {{toDate}}"
 
@@ -640,11 +674,23 @@ msgstr "po, nebo rovno {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "před, nebo rovno {{date}}"
 
-msgid "greater than or equal to"
-msgstr "větší nebo rovno"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "menší nebo rovno"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "Více filtrů"
@@ -673,8 +719,8 @@ msgstr "Nemáte přístup k psaní poznámek"
 msgid "Write note"
 msgstr "Napište poznámku"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "byla vymazána a skryta vaší poslední akcí"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "Oznámení"
@@ -996,6 +1042,9 @@ msgstr "Hledat {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Vyplňte alespoň {{count}} atribut pro vyhledávání"
@@ -1005,6 +1054,9 @@ msgstr[3] "Vyplňte alespoň {{count}} atributy pro vyhledávání."
 
 msgid "Missing search criteria"
 msgstr "Chybí kritéria vyhledávání"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Zpět na vyhledávání"
@@ -1060,6 +1112,12 @@ msgstr "Není vybrán žádný"
 msgid "Choose an organisation unit"
 msgstr "Vyberte organizační jednotku"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Vymazat výběr"
 
@@ -1077,6 +1135,12 @@ msgstr "Zobrazit všechny programy"
 
 msgid "Choose a program"
 msgstr "Vyberte program"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Hledat {{titleText}}"
@@ -1149,6 +1213,9 @@ msgid ""
 msgstr ""
 "Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1177,6 +1244,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Nelze vyhledávat ve všech programech"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
@@ -1198,14 +1268,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Vytvořte uložený seznam"
 
-msgid "Create new in another program"
-msgstr "Vytvořit nový v jiném programu"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Vytvořit novou událost"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1782,9 +1855,6 @@ msgstr "Vytvořeno"
 msgid "Deleted"
 msgstr "Smazáno"
 
-msgid "Date"
-msgstr "datum"
-
 msgid "Sort by date"
 msgstr "Seřadit podle data"
 
@@ -2225,9 +2295,6 @@ msgstr "Uveďte prosím platné datum a čas"
 msgid "Please provide a valid time"
 msgstr "Uveďte platný čas"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
-
 msgid "Please provide a valid url"
 msgstr "Uveďte platnou adresu URL"
 
@@ -2279,9 +2346,6 @@ msgstr "Některé atributy jsou skryté"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
-
-msgid "Time"
-msgstr "Čas"
 
 msgid "From date"
 msgstr "Od data"

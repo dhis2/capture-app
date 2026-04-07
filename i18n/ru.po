@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -97,11 +97,11 @@ msgstr "Смотреть панель"
 msgid "View active enrollment"
 msgstr "Смотреть активную регистрацию"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Зарегистрировать заново"
-
-msgid "in"
-msgstr "в"
 
 msgid "Enrolled"
 msgstr "Зарегистрирован"
@@ -124,10 +124,10 @@ msgstr "Широта"
 msgid "Long"
 msgstr "Долгота"
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -290,8 +290,12 @@ msgstr "Включить вид формы"
 msgid "Switch to row view"
 msgstr "Включить строчный просмотр "
 
-msgid "events added"
-msgstr "событий добавлено"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "No events added"
 msgstr "События не добавлены"
@@ -334,6 +338,9 @@ msgstr "без"
 
 msgid "enrollment"
 msgstr "регистрация"
+
+msgid "in"
+msgstr "в"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Зарегистрировать в программе, выбрав ее на верхней панели."
@@ -480,29 +487,32 @@ msgstr "Выбрать пользователя"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Введите ноль или положительное целое число"
-
-msgid "to"
-msgstr "по"
-
-msgid "Days in the future"
-msgstr "Кол-во дней в будущем"
 
 msgid "From"
 msgstr "С"
 
-msgid "Days in the past"
-msgstr "Кол-во дней в прошлом"
+msgid "to"
+msgstr "по"
 
 msgid "To"
 msgstr "По"
+
+msgid "Period"
+msgstr "Период"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Введите ноль или положительное целое число"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr "Кол-во дней в прошлом"
+
+msgid "Days in the future"
+msgstr "Кол-во дней в будущем"
 
 msgid "This week"
 msgstr "Текущая неделя"
@@ -510,8 +520,8 @@ msgstr "Текущая неделя"
 msgid "This month"
 msgstr "Текущий месяц"
 
-msgid "This Year"
-msgstr "Текущий год"
+msgid "This year"
+msgstr "Этот год"
 
 msgid "Last week"
 msgstr "Прошлая неделя"
@@ -528,17 +538,29 @@ msgstr "Абсолютные периоды"
 msgid "Relative range"
 msgstr "Относительные периоды"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Time"
+msgstr "Время"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Максимум"
-
-msgid "Min"
-msgstr "Минимум"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -549,11 +571,20 @@ msgstr "Введите правильное число"
 msgid "Please provide a valid integer"
 msgstr "Введите целое число"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Введите целое число от 0 до 100"
+
 msgid "Please provide a positive integer"
 msgstr "Введите положительное целое число"
 
 msgid "Please provide a negative integer"
 msgstr "Введите отрицательное целое число"
+
+msgid "Min"
+msgstr "Минимум"
+
+msgid "Max"
+msgstr "Максимум"
 
 msgid "Yes"
 msgstr "Да"
@@ -630,7 +661,7 @@ msgstr "Сбросить фильтр"
 msgid "Remove filter"
 msgstr "Удалить фильтр"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -641,6 +672,9 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} по {{toDate}}"
 
@@ -650,11 +684,23 @@ msgstr "после или равно {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "до или равно {{date}}"
 
-msgid "greater than or equal to"
-msgstr "больше или равно"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "меньше или равно"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "Еще фильтры"
@@ -684,8 +730,8 @@ msgstr "У вас нет возможности писать заметки"
 msgid "Write note"
 msgstr "Напишите заметку"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "- удалено и скрыто вашим последним действием"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "Заметка"
@@ -1010,6 +1056,9 @@ msgstr "Искать {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Искать по атрибутам"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Заполните как минимум {{count}} атрибут для поиска."
@@ -1019,6 +1068,9 @@ msgstr[3] "Заполните как минимум {{count}} атрибутов
 
 msgid "Missing search criteria"
 msgstr "Критерии поиска отсутствуют"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Назад к поиску"
@@ -1074,6 +1126,12 @@ msgstr "Не выбрано"
 msgid "Choose an organisation unit"
 msgstr "Выбрать организационную единицу"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Очистить выбор"
 
@@ -1091,6 +1149,12 @@ msgstr "Показать все программы"
 
 msgid "Choose a program"
 msgstr "Выбрать программу"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Искать {{titleText}}"
@@ -1157,6 +1221,9 @@ msgid ""
 "looking for."
 msgstr "Вы можете изменить параметры и перезапустить поиск "
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1179,6 +1246,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Невозможно выполнить поиск во всех программах"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Найдены результаты"
 
@@ -1200,14 +1270,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Создать сохраненный список"
 
-msgid "Create new in another program"
-msgstr "Создать нового в другой программе"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Создать новое событие"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Искать {{trackedEntityName}} в программе {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1800,9 +1873,6 @@ msgstr "Создан"
 msgid "Deleted"
 msgstr "Удален"
 
-msgid "Date"
-msgstr "Дата"
-
 msgid "Sort by date"
 msgstr "Сортировать по дате"
 
@@ -2251,9 +2321,6 @@ msgstr "Введите правильную дату и время"
 msgid "Please provide a valid time"
 msgstr "Введите правильное время"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Введите целое число от 0 до 100"
-
 msgid "Please provide a valid url"
 msgstr "Введите правильный URL адрес"
 
@@ -2305,9 +2372,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Установить координату"
-
-msgid "Time"
-msgstr "Время"
 
 msgid "From date"
 msgstr "От даты"

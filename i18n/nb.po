@@ -1,14 +1,14 @@
 # Translators:
 # Merethe Wollan Blisten, 2025
-# Karoline Tufte Lien <karoline@dhis2.org>, 2026
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2026
+# Karoline Tufte Lien <karoline@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2026\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2026\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -92,11 +92,11 @@ msgstr "Vis dashbord"
 msgid "View active enrollment"
 msgstr "Vis aktiv registrering"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "Registrer på nytt"
-
-msgid "in"
-msgstr "i"
 
 msgid "Enrolled"
 msgstr "Registrert"
@@ -119,11 +119,11 @@ msgstr "Breddegrad"
 msgid "Long"
 msgstr "Lengdegrad"
 
-msgid "lat"
-msgstr "Breddegrad"
+msgid "lat{{escape}} {{latitudeValue}}"
+msgstr ""
 
-msgid "long"
-msgstr "Lengdegrad"
+msgid "long{{escape}} {{longitudeValue}}"
+msgstr ""
 
 msgid "Show less"
 msgstr "Vis mindre"
@@ -283,8 +283,10 @@ msgstr "Bytt til skjemavisning"
 msgid "Switch to row view"
 msgstr "Bytt til radvisning"
 
-msgid "events added"
-msgstr "Hendelser lagt til"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "No events added"
 msgstr "Ingen hendelser lagt til"
@@ -328,6 +330,9 @@ msgstr "uten"
 
 msgid "enrollment"
 msgstr "registrering"
+
+msgid "in"
+msgstr "i"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Registrer i et program ved å velge et program fra topplinjen."
@@ -471,29 +476,32 @@ msgstr "Velg bruker"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
+msgid "Start date must be before the end date"
 msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "Oppgi null eller et positivt heltall"
-
-msgid "to"
-msgstr "til"
-
-msgid "Days in the future"
-msgstr "Dager i fremtiden"
 
 msgid "From"
 msgstr "Fra"
 
-msgid "Days in the past"
-msgstr "Dager i fortiden"
+msgid "to"
+msgstr "til"
 
 msgid "To"
 msgstr "Til"
+
+msgid "Period"
+msgstr "Periode"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Oppgi null eller et positivt heltall"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr "Dager i fortiden"
+
+msgid "Days in the future"
+msgstr "Dager i fremtiden"
 
 msgid "This week"
 msgstr "Denne uken"
@@ -501,8 +509,8 @@ msgstr "Denne uken"
 msgid "This month"
 msgstr "Denne måneden"
 
-msgid "This Year"
-msgstr "Dette året"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "Forrige uke"
@@ -519,17 +527,29 @@ msgstr "Absolutt rekkevidde"
 msgid "Relative range"
 msgstr "Relativ rekkevidde"
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "Dato"
+
+msgid "Time"
+msgstr "Klokkeslett"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -540,11 +560,20 @@ msgstr "Oppgi et gyldig nummer"
 msgid "Please provide a valid integer"
 msgstr "Oppgi et gyldig heltall"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr "Oppgi et heltall mellom 0 og 100"
+
 msgid "Please provide a positive integer"
 msgstr "Oppgi et positivt heltall"
 
 msgid "Please provide a negative integer"
 msgstr "Oppgi et negativt heltall"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
 
 msgid "Yes"
 msgstr "Ja"
@@ -621,7 +650,7 @@ msgstr "Nullstill filter"
 msgid "Remove filter"
 msgstr "Fjern filter"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -629,6 +658,9 @@ msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} til {{toDate}}"
@@ -639,11 +671,23 @@ msgstr "etter eller lik {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "før eller lik {{date}}"
 
-msgid "greater than or equal to"
-msgstr "større enn eller lik"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "mindre enn eller lik"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr "før eller lik"
 
 msgid "More filters"
 msgstr "Flere filtre"
@@ -672,8 +716,8 @@ msgstr "Du har ikke tilgang til å skrive notater"
 msgid "Write note"
 msgstr "Skriv notat"
 
-msgid "was blanked out and hidden by your last action"
-msgstr "ble tømt og skjult av den siste handlingen din"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
+msgstr ""
 
 msgid "Notice"
 msgstr "Merknad"
@@ -993,6 +1037,9 @@ msgstr "Søk {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Søk etter attributter"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Fyll inn minst {{count}}attributt for å søke"
@@ -1000,6 +1047,9 @@ msgstr[1] "Fyll inn minst {{count}} attributter for å søke"
 
 msgid "Missing search criteria"
 msgstr "Manglende søkekriterier"
+
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
 
 msgid "Back to search"
 msgstr "Tilbake til søk"
@@ -1055,6 +1105,12 @@ msgstr "Ingen valgt"
 msgid "Choose an organisation unit"
 msgstr "Velg en organisasjonsenhet"
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr "Fjern valg"
 
@@ -1072,6 +1128,12 @@ msgstr "Vis alle programmer"
 
 msgid "Choose a program"
 msgstr "Velg et program"
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr "Søk etter {{titleText}}"
@@ -1136,6 +1198,9 @@ msgid ""
 "looking for."
 msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1158,6 +1223,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr "Kan ikke søke i alle programmer"
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "Resultater funnet"
 
@@ -1178,14 +1246,17 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Lag lagret liste"
 
-msgid "Create new in another program"
-msgstr "Opprett ny i et annet program"
+msgid "Create new in another program..."
+msgstr ""
 
 msgid "Create new event"
 msgstr "Opprett ny hendelse"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
+
+msgid "Search..."
+msgstr ""
 
 msgid "Select tracked entity type"
 msgstr ""
@@ -1760,9 +1831,6 @@ msgstr "Opprettet"
 msgid "Deleted"
 msgstr "Slettet"
 
-msgid "Date"
-msgstr "Dato"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2182,9 +2250,6 @@ msgstr "Oppgi en gyldig dato og tid"
 msgid "Please provide a valid time"
 msgstr "Oppgi en gyldig tid"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr "Oppgi et heltall mellom 0 og 100"
-
 msgid "Please provide a valid url"
 msgstr "Oppgi en gyldig url"
 
@@ -2234,9 +2299,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
-
-msgid "Time"
-msgstr "Klokkeslett"
 
 msgid "From date"
 msgstr "Fra dato"
