@@ -42,6 +42,9 @@ function translateRelativeRange(filter: { startBuffer?: number | null; endBuffer
 }
 
 export function convertDate(filter: DateFilterData): string {
+    if ('isEmpty' in filter) {
+        return String(filter.value);
+    }
     if ('type' in filter && filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
     }

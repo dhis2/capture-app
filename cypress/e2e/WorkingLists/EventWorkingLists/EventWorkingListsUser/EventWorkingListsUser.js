@@ -32,6 +32,7 @@ const CONTEXT_QUERIES = {
 Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
     if (contextOrPath === 'Inpatient morbidity and mortality context') {
         cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventStoredWorkingList');
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'allValueTypesFilterWorkingList');
     }
     if (contextOrPath === 'event program text filter context') {
         cleanUpEventFilterIfApplicable(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID, 'eventStoredWorkingList');
@@ -698,7 +699,7 @@ When('you set the organisation unit filter', () => {
     });
 });
 
-When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+const setEventWorkingListEmptyStateFilter = (filterName, value) => {
     const labelPrefix = truncateFilterLabelForTest(filterName);
     cy.get('[data-test="event-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
@@ -713,6 +714,14 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
+};
+
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    setEventWorkingListEmptyStateFilter(filterName, value);
+});
+
+When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    setEventWorkingListEmptyStateFilter(filterName, value);
 });
 
 When(/^you set the isEmpty date filter to (Is empty|Is not empty)$/, (value) => {
@@ -786,7 +795,7 @@ Then(/^the isEmpty date filter should be in effect with value (Is empty|Is not e
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
 });
 
-Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+const thenEventWorkingListEmptyFilterShowsWhenOpened = (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
@@ -794,6 +803,14 @@ Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is no
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
     cy.get('body').click(0, 0);
+};
+
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    thenEventWorkingListEmptyFilterShowsWhenOpened(filterName, value);
+});
+
+Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    thenEventWorkingListEmptyFilterShowsWhenOpened(filterName, value);
 });
 
 Then(/^the isEmpty date filter should be in effect and show (Is empty|Is not empty) when opened$/, (value) => {
