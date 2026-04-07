@@ -1,6 +1,7 @@
 import {
     convertText,
     convertDate,
+    convertDateTime,
     convertTime,
     convertAssignee,
     convertBoolean,
@@ -18,7 +19,7 @@ const convertersForTypes: any = {
     [filterTypesObject.BOOLEAN]: convertBoolean,
     [filterTypesObject.COORDINATE]: convertText,
     [filterTypesObject.DATE]: convertDate,
-    [filterTypesObject.DATETIME]: convertDate,
+    [filterTypesObject.DATETIME]: convertDateTime,
     [filterTypesObject.TIME]: convertTime,
     [filterTypesObject.EMAIL]: convertText,
     [filterTypesObject.FILE_RESOURCE]: convertText,
