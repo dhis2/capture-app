@@ -39,7 +39,7 @@ const getTimeFilter = (filter: TimeFilterData) => {
 
 const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean | null => {
     if ('isEmpty' in filter) return null;
-    return { in: filter.values };
+    return { in: filter.values.map(value => (value ? 'true' : 'false')) };
 };
 
 const getTrueOnlyFilter = () => ({
