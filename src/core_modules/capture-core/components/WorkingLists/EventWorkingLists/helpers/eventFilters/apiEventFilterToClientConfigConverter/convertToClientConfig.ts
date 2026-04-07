@@ -54,7 +54,7 @@ const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData => ({
 });
 
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => ({
-    values: filter.in.map(value => value === 'true'),
+    values: filter.in,
 });
 
 const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({
