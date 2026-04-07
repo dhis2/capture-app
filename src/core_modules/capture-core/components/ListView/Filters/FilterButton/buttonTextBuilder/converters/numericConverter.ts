@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
-import type { NumericFilterData } from '../../../../../FiltersForTypes';
+import type { NumericRangeFilterData } from '../../../../../FiltersForTypes';
 
-export function convertNumeric(filter: NumericFilterData): string {
+export function convertNumeric(filter: NumericRangeFilterData): string {
     let appliedText = '';
     const geHasValue = !!filter.ge || filter.ge === 0;
     const leHasValue = !!filter.le || filter.le === 0;
