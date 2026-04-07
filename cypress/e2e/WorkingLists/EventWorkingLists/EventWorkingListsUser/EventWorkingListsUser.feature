@@ -98,9 +98,9 @@ Then your newly defined sharing settings should still be present
 Scenario: Save and load view with stored WL filters - TEXT
   Given you open the main page with Ngelehun and event program text filter context
   When you set the text filter "XX MAL RDT TRK - Reason for not testing" to "test"
-  And you save the view as textFilterWorkingList
+  And you save the view as eventStoredWorkingList
   And you refresh the page
-  And you open the saved view textFilterWorkingList
+  And you open the saved view eventStoredWorkingList
   Then the text filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show "test" when opened
   And the saved working list view is cleaned up
 
@@ -109,14 +109,14 @@ Scenario: Save and load view with isEmpty filters for TEXT type
   Given you open the main page with Ngelehun and event program text filter context
   When you set the isEmpty filter "XX MAL RDT TRK - Reason for not testing" to Is not empty
   Then the isEmpty filter "XX MAL RDT TRK - Reason for not testing" should be in effect with value Is not empty
-  And you save the view as eventTextIsEmptyWorkingList
+  And you save the view as eventStoredWorkingList
   And you refresh the page
-  And you open the saved view eventTextIsEmptyWorkingList
+  And you open the saved view eventStoredWorkingList
   Then the isEmpty filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show Is not empty when opened
   When you set the isEmpty filter "XX MAL RDT TRK - Reason for not testing" to Is empty
-  And you update the view with the name eventTextIsEmptyWorkingList
+  And you update the view with the name eventStoredWorkingList
   And you refresh the page
-  And you open the saved view eventTextIsEmptyWorkingList
+  And you open the saved view eventStoredWorkingList
   Then the isEmpty filter "XX MAL RDT TRK - Reason for not testing" should be in effect and show Is empty when opened
   And the saved working list view is cleaned up
 
@@ -129,15 +129,56 @@ Scenario: Save and load view with stored WL filters - BOOLEAN, INTEGER, NUMBER, 
   And you set the range filter "Weight in kg" to 1-200
   And you set the date filter
   And you set the organisation unit filter
-  And you save the view as valueTypesNoEmpty
+  And you save the view as eventStoredWorkingList
   And you refresh the page
-  And you open the saved view valueTypesNoEmpty
+  And you open the saved view eventStoredWorkingList
   Then the boolean filter should be in effect and show the correct value when opened
   And the range filter "Age (years)" should be in effect and show 0 to 120 when opened
   And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
   And the range filter "Weight in kg" should be in effect and show 1 to 200 when opened
   And the date filter should be in effect and show the correct value when opened
   And the organisation unit filter should be in effect and show the correct value when opened
+  And the saved working list view is cleaned up
+
+@v>=42
+Scenario: Save and load view with isEmpty filters for BOOLEAN, NUMBER, INTEGER, DATE, ORGANISATION_UNIT types
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the isEmpty filter "Pregnant" to Is empty
+  And you set the isEmpty filter "Height in cm" to Is empty
+  And you set the isEmpty filter "Weight in kg" to Is empty
+  And you set the isEmpty filter "Age (years)" to Is empty
+  And you set the isEmpty date filter to Is empty
+  And you set the isEmpty filter "Place of Infection" to Is empty
+  Then the isEmpty filter "Pregnant" should be in effect with value Is empty
+  And the isEmpty filter "Height in cm" should be in effect with value Is empty
+  And the isEmpty filter "Weight in kg" should be in effect with value Is empty
+  And the isEmpty filter "Age (years)" should be in effect with value Is empty
+  And the isEmpty date filter should be in effect with value Is empty
+  And the isEmpty filter "Place of Infection" should be in effect with value Is empty
+  And you save the view as eventStoredWorkingList
+  And you refresh the page
+  And you open the saved view eventStoredWorkingList
+  Then the isEmpty filter "Pregnant" should be in effect and show Is empty when opened
+  And the isEmpty filter "Height in cm" should be in effect and show Is empty when opened
+  And the isEmpty filter "Weight in kg" should be in effect and show Is empty when opened
+  And the isEmpty filter "Age (years)" should be in effect and show Is empty when opened
+  And the isEmpty date filter should be in effect and show Is empty when opened
+  And the isEmpty filter "Place of Infection" should be in effect and show Is empty when opened
+  When you set the isEmpty filter "Pregnant" to Is not empty
+  And you set the isEmpty filter "Height in cm" to Is not empty
+  And you set the isEmpty filter "Weight in kg" to Is not empty
+  And you set the isEmpty filter "Age (years)" to Is not empty
+  And you set the isEmpty date filter to Is not empty
+  And you set the isEmpty filter "Place of Infection" to Is not empty
+  And you update the view with the name eventStoredWorkingList
+  And you refresh the page
+  And you open the saved view eventStoredWorkingList
+  Then the isEmpty filter "Pregnant" should be in effect and show Is not empty when opened
+  And the isEmpty filter "Height in cm" should be in effect and show Is not empty when opened
+  And the isEmpty filter "Weight in kg" should be in effect and show Is not empty when opened
+  And the isEmpty filter "Age (years)" should be in effect and show Is not empty when opened
+  And the isEmpty date filter should be in effect and show Is not empty when opened
+  And the isEmpty filter "Place of Infection" should be in effect and show Is not empty when opened
   And the saved working list view is cleaned up
 
 @v<42
@@ -159,6 +200,6 @@ Then the working list should be displayed
 Scenario: The user can delete a working list right immediately after creating it.
 Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
 When you set the date of admission filter
-And you save the view as toDeleteWorkingList
-When you delete the name toDeleteWorkingList
+And you save the view as eventStoredWorkingList
+When you delete the name eventStoredWorkingList
 Then the custom events working list is deleted

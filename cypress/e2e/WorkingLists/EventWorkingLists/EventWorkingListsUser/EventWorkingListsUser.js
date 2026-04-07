@@ -5,7 +5,8 @@ import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
 const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
-const EVENT_TEXT_FILTER_PROGRAM_ID = 'MoUd5BTQ3lY';
+/** XX MAL RDT - Case Registration */
+const XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID = 'MoUd5BTQ3lY';
 
 const cleanUpEventFilterIfApplicable = (programId, displayName) => {
     cy.buildApiUrl(`eventFilters?filter=program:eq:${programId}&fields=id,displayName`)
@@ -26,20 +27,15 @@ const CONTEXT_QUERIES = {
     'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
     'Inpatient morbidity and mortality context': 'programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8',
     'Contraceptives Voucher Program': 'orgUnitId=DiszpKrYNg8&programId=kla3mAPgvCH',
-    'event program text filter context': 'programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8',
+    'event program text filter context': `programId=${XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID}&orgUnitId=DiszpKrYNg8`,
 };
 
 Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
     if (contextOrPath === 'Inpatient morbidity and mortality context') {
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'allValueTypesFilterWorkingList');
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventIsEmptyWorkingList');
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventIsNotEmptyWorkingList');
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'valueTypesNoEmpty');
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'toDeleteWorkingList');
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventStoredWorkingList');
     }
     if (contextOrPath === 'event program text filter context') {
-        cleanUpEventFilterIfApplicable(EVENT_TEXT_FILTER_PROGRAM_ID, 'eventTextIsEmptyWorkingList');
-        cleanUpEventFilterIfApplicable(EVENT_TEXT_FILTER_PROGRAM_ID, 'textFilterWorkingList');
+        cleanUpEventFilterIfApplicable(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID, 'eventStoredWorkingList');
     }
     const query = CONTEXT_QUERIES[contextOrPath] ?? contextOrPath;
     cy.visit(`#/?${query}`);
@@ -786,6 +782,11 @@ Then(/^the isEmpty filter "([^"]+)" should be in effect with value (Is empty|Is 
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
 });
 
+Then(/^the isEmpty date filter should be in effect with value (Is empty|Is not empty)$/, (value) => {
+    const chipLabel = truncateFilterLabelForTest(`Date of admission: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
+});
+
 Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
@@ -1066,7 +1067,7 @@ Then('the working list should be displayed', () => {
         .find('tr');
 });
 
-When('you delete the name toDeleteWorkingList', () => {
+When(/^you delete the name (.+)$/, () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
@@ -1081,6 +1082,6 @@ When('you delete the name toDeleteWorkingList', () => {
 Then('the custom events working list is deleted', () => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
-            cy.contains('toDeleteWorkingList').should('not.exist');
+            cy.contains('eventStoredWorkingList').should('not.exist');
         });
 });
