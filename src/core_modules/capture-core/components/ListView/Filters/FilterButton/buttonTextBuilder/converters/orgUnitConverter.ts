@@ -1,5 +1,8 @@
-import type { OrgUnitValueFilterData } from '../../../../../FiltersForTypes';
+import type { OrgUnitFilterData } from '../../../../../FiltersForTypes';
 
-export function convertOrgUnit(filter: OrgUnitValueFilterData): string {
+export function convertOrgUnit(filter: OrgUnitFilterData): string {
+    if ('isEmpty' in filter) {
+        return String(filter.value);
+    }
     return filter.name ?? filter.value;
 }
