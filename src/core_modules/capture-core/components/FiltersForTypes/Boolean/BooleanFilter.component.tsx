@@ -8,13 +8,7 @@ import {
     getSingleSelectBooleanFilterData,
 } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 import type { PlainProps, Value } from './boolean.types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
@@ -40,14 +34,6 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
         return getMultiSelectBooleanFilterData(value);
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
     onIsValid() { //eslint-disable-line
         return true;
     }
@@ -66,30 +52,28 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
 
     render() {
         const { onCommitValue, value, classes } = this.props;
-        const booleanValue = typeof value === 'string' && isEmptyValueFilter(value) ? undefined : value;
 
         return (
-            <div>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <div
-                    className={classes.selectBoxesContainer}
-                    onKeyDownCapture={this.handleKeyDown}
-                >
-                    <D2TrueFalse
-                        ref={this.setBooleanFieldInstance}
-                        allowMultiple={this.props.allowMultiple}
-                        value={booleanValue}
-                        onBlur={onCommitValue}
-                        orientation={orientations.VERTICAL}
-                    />
-                </div>
-            </div>
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {(filteredValue) => (
+                    <div
+                        className={classes.selectBoxesContainer}
+                        onKeyDownCapture={this.handleKeyDown}
+                    >
+                        <D2TrueFalse
+                            ref={this.setBooleanFieldInstance}
+                            allowMultiple={this.props.allowMultiple}
+                            value={filteredValue}
+                            onBlur={onCommitValue}
+                            orientation={orientations.VERTICAL}
+                        />
+                    </div>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

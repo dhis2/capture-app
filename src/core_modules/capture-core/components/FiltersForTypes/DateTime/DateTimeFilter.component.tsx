@@ -10,13 +10,7 @@ import type { DateValue } from '../Date/date.types';
 import type { DateTimeValue, Value } from './dateTime.types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -123,14 +117,6 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         return { ...currentValue, ...part };
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
     handleDateBlur = (side: DateTimeSide) => (dateValue: DateValue) => {
         const objValue = typeof this.props.value === 'string' ? undefined : this.props.value;
         const current = objValue?.[side];
@@ -185,63 +171,68 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     render() {
         const { value, classes } = this.props;
-        const objValue = typeof value === 'string' ? undefined : value;
-        const fromDate = objValue?.from?.date ?? undefined;
-        const fromTime = getDisplayTime(objValue?.from?.date, objValue?.from?.time);
-        const toDate = objValue?.to?.date ?? undefined;
-        const toTime = getDisplayTime(objValue?.to?.date, objValue?.to?.time);
         const dateLogicError = this.getDateLogicError();
 
         return (
             <div onKeyDownCapture={this.handleKeyDown}>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                <WithEmptyValueFilter
+                    value={value}
+                    onCommitValue={this.props.onCommitValue}
                     disabled={this.props.disableEmptyValueFilter}
-                />
+                >
+                    {(filteredValue) => {
+                        const fromDate = filteredValue?.from?.date ?? undefined;
+                        const fromTime = getDisplayTime(filteredValue?.from?.date, filteredValue?.from?.time);
+                        const toDate = filteredValue?.to?.date ?? undefined;
+                        const toTime = getDisplayTime(filteredValue?.to?.date, filteredValue?.to?.time);
 
-                <div className={classes.section}>
-                    <div className={classes.sectionLabel}>{i18n.t('After')}</div>
-                    <div className={classes.row}>
-                        <D2Date
-                            value={fromDate}
-                            onBlur={this.handleDateBlur('from')}
-                            placeholder={i18n.t('Date')}
-                            inputWidth="150px"
-                            calendarWidth="330px"
-                        />
-                        <InputField
-                            placeholder={i18n.t('Time')}
-                            type="time"
-                            value={fromTime}
-                            onChange={this.handleTimeChange('from')}
-                        />
-                    </div>
-                </div>
+                        return (
+                            <>
+                                <div className={classes.section}>
+                                    <div className={classes.sectionLabel}>{i18n.t('After')}</div>
+                                    <div className={classes.row}>
+                                        <D2Date
+                                            value={fromDate}
+                                            onBlur={this.handleDateBlur('from')}
+                                            placeholder={i18n.t('Date')}
+                                            inputWidth="150px"
+                                            calendarWidth="330px"
+                                        />
+                                        <InputField
+                                            placeholder={i18n.t('Time')}
+                                            type="time"
+                                            value={fromTime}
+                                            onChange={this.handleTimeChange('from')}
+                                        />
+                                    </div>
+                                </div>
 
-                <div className={classes.section}>
-                    <div className={classes.sectionLabel}>{i18n.t('Before')}</div>
-                    <div className={classes.row}>
-                        <D2Date
-                            value={toDate}
-                            onBlur={this.handleDateBlur('to')}
-                            placeholder={i18n.t('Date')}
-                            inputWidth="150px"
-                            calendarWidth="330px"
-                        />
-                        <InputField
-                            type="time"
-                            value={toTime}
-                            placeholder={i18n.t('Time')}
-                            onChange={this.handleTimeChange('to')}
-                        />
-                    </div>
-                </div>
+                                <div className={classes.section}>
+                                    <div className={classes.sectionLabel}>{i18n.t('Before')}</div>
+                                    <div className={classes.row}>
+                                        <D2Date
+                                            value={toDate}
+                                            onBlur={this.handleDateBlur('to')}
+                                            placeholder={i18n.t('Date')}
+                                            inputWidth="150px"
+                                            calendarWidth="330px"
+                                        />
+                                        <InputField
+                                            type="time"
+                                            value={toTime}
+                                            placeholder={i18n.t('Time')}
+                                            onChange={this.handleTimeChange('to')}
+                                        />
+                                    </div>
+                                </div>
 
-                {dateLogicError && (
-                    <div className={classes.error}>{dateLogicError}</div>
-                )}
+                                {dateLogicError && (
+                                    <div className={classes.error}>{dateLogicError}</div>
+                                )}
+                            </>
+                        );
+                    }}
+                </WithEmptyValueFilter>
             </div>
         );
     }

@@ -16,13 +16,7 @@ import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { Value } from './numeric.types';
 import type { UpdatableFilterContent } from '../types';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
 const getStyles: any = (theme: any) => ({
     container: {
@@ -155,15 +149,10 @@ class NumericFilterPlain
             .length > 0 ? valueObject : undefined;
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value = null) => {
+    handleEmptyValueCommit = (value: any) => {
         this.setState({ committedValue: value });
         this.props.onCommitValue(value);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value = null) => {
-        this.setState({ committedValue: value });
-        this.props.onCommitValue(value);
-    });
+    };
 
     handleEnterKey = (value: {[key: string]: string}) => {
         const values = this.getUpdatedValue(value);
@@ -211,54 +200,48 @@ class NumericFilterPlain
     render() {
         const { value, classes } = this.props;
         const { minValueError, maxValueError, logicError } = this.getErrors();
-        const numericValue = typeof value === 'string' ? undefined : value;
 
         return (
-            <div>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <div className={classes.container}>
-                    <div
-                        className={classes.inputContainer}
-                    >
-                        <NumericFilterInput
-                            field="min"
-                            value={numericValue?.min}
-                            error={minValueError}
-                            errorClass={classes.error}
-                            onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKey}
-                            onChange={this.handleMinChange}
-                        />
-                    </div>
-                    <div
-                        className={classes.toLabelContainer}
-                    >
-                        { i18n.t('to') }
-                    </div>
-                    <div
-                        className={classes.inputContainer}
-                    >
-                        <NumericFilterInput
-                            field="max"
-                            value={numericValue?.max}
-                            error={maxValueError}
-                            errorClass={classes.error}
-                            onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKey}
-                            onChange={this.handleMaxChange}
-                        />
-                    </div>
-                </div>
-                <div className={cx(classes.error, classes.logicErrorContainer)}>
-                    {logicError}
-                </div>
-            </div>
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.handleEmptyValueCommit}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {(filteredValue) => (
+                    <>
+                        <div className={classes.container}>
+                            <div className={classes.inputContainer}>
+                                <NumericFilterInput
+                                    field="min"
+                                    value={filteredValue?.min}
+                                    error={minValueError}
+                                    errorClass={classes.error}
+                                    onBlur={this.handleFieldBlur}
+                                    onEnterKey={this.handleEnterKey}
+                                    onChange={this.handleMinChange}
+                                />
+                            </div>
+                            <div className={classes.toLabelContainer}>
+                                { i18n.t('to') }
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <NumericFilterInput
+                                    field="max"
+                                    value={filteredValue?.max}
+                                    error={maxValueError}
+                                    errorClass={classes.error}
+                                    onBlur={this.handleFieldBlur}
+                                    onEnterKey={this.handleEnterKey}
+                                    onChange={this.handleMaxChange}
+                                />
+                            </div>
+                        </div>
+                        <div className={cx(classes.error, classes.logicErrorContainer)}>
+                            {logicError}
+                        </div>
+                    </>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

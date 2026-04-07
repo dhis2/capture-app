@@ -3,12 +3,7 @@ import { SingleOrgUnitSelectField } from '../../FormFields/New';
 import { getOrgUnitFilterData } from './orgUnitFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { OrgUnitFilterProps, Value, OrgUnitValue } from './orgUnit.types';
-import {
-    makeCheckboxHandler,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
@@ -25,38 +20,23 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
         }
     };
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
     render() {
         const { value } = this.props;
-        const orgUnitValue =
-            value !== undefined &&
-            value !== null &&
-            typeof value === 'object'
-                ? (value as OrgUnitValue)
-                : undefined;
 
         return (
-            <div>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <SingleOrgUnitSelectField
-                    value={orgUnitValue}
-                    onBlur={this.handleOrgUnitChange}
-                    maxTreeHeight={280}
-                />
-            </div>
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.props.onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {(filteredValue) => (
+                    <SingleOrgUnitSelectField
+                        value={typeof filteredValue === 'object' ? filteredValue : undefined}
+                        onBlur={this.handleOrgUnitChange}
+                        maxTreeHeight={280}
+                    />
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

@@ -7,13 +7,7 @@ import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { PlainProps, Value } from './trueOnly.types';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
 export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
@@ -39,14 +33,6 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
 
     onIsValid = () => true
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
     handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' && this.props.onUpdate) {
             this.props.onUpdate(this.props.value);
@@ -59,31 +45,28 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
 
     render() {
         const { value, classes } = this.props;
-        const isEmptyFilter = typeof value === 'string' && isEmptyValueFilter(value);
-        const trueOnlyValue = isEmptyFilter ? undefined : value;
 
         return (
-            <div>
-                <EmptyValueFilterCheckboxes
-                    value={isEmptyFilter ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <div
-                    className={classes.selectBoxesContainer}
-                    onKeyDownCapture={this.handleKeyDown}
-                >
-                    <D2TrueOnly
-                        label={i18n.t('Yes')}
-                        useValueLabel
-                        value={trueOnlyValue}
-                        onBlur={this.handleTrueOnlyBlur}
-                        orientation={orientations.VERTICAL}
-                    />
-                </div>
-            </div>
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.props.onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {(filteredValue) => (
+                    <div
+                        className={classes.selectBoxesContainer}
+                        onKeyDownCapture={this.handleKeyDown}
+                    >
+                        <D2TrueOnly
+                            label={i18n.t('Yes')}
+                            useValueLabel
+                            value={filteredValue}
+                            onBlur={this.handleTrueOnlyBlur}
+                            orientation={orientations.VERTICAL}
+                        />
+                    </div>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

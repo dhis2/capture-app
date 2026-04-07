@@ -5,13 +5,7 @@ import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes'
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { PlainProps, Value } from './optionSet.types';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
@@ -44,42 +38,32 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
         return true;
     }
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
     render() {
         const { onCommitValue, options, value, classes, singleSelect } = this.props;
-        const optionSetValue = typeof value === 'string' && isEmptyValueFilter(value) ? undefined : value;
 
         return (
-            <div>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <div
-                    className={classes.selectBoxesContainer}
-                >
-                    <div className={classes.selectBoxesInnerContainer}>
-                        <SelectBoxes
-                            options={options}
-                            value={optionSetValue}
-                            onBlur={onCommitValue}
-                            orientation={orientations.VERTICAL}
-                            multiSelect={!singleSelect}
-                            nullable
-                        />
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {(filteredValue) => (
+                    <div
+                        className={classes.selectBoxesContainer}
+                    >
+                        <div className={classes.selectBoxesInnerContainer}>
+                            <SelectBoxes
+                                options={options}
+                                value={filteredValue}
+                                onBlur={onCommitValue}
+                                orientation={orientations.VERTICAL}
+                                multiSelect={!singleSelect}
+                                nullable
+                            />
+                        </div>
                     </div>
-                </div>
-            </div>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

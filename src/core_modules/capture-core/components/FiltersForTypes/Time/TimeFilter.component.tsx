@@ -6,13 +6,7 @@ import type { UpdatableFilterContent } from '../types';
 import type { Value } from './time.types';
 import { getTimeFilterData } from './timeFilterDataGetter';
 import { TimeFilterInput } from './TimeFilterInput.component';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
 const getStyles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -153,15 +147,10 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.props.onCommitValue(this.getUpdatedValue({ to: value || null }));
     };
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value = null) => {
+    handleEmptyValueCommit = (value: any) => {
         this.setState({ committedValue: value });
         this.props.onCommitValue(value);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value = null) => {
-        this.setState({ committedValue: value });
-        this.props.onCommitValue(value);
-    });
+    };
 
     getTimeLogicError() {
         const values = this.state.committedValue;
@@ -181,48 +170,48 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     render() {
         const { value, classes } = this.props;
-        const objValue = typeof value === 'string' ? undefined : value;
         const timeLogicError = this.getTimeLogicError();
 
         return (
-            <div>
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                    disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <div className={classes.container}>
-                    <div className={classes.section}>
-                        <div className={classes.sectionLabel}>{i18n.t('After')}</div>
-                        <div className={classes.row}>
-                            <TimeFilterInput
-                                field="from"
-                                value={objValue?.from}
-                                onBlur={this.handleFieldBlur}
-                                onEnterKey={this.handleEnterKey}
-                                onChange={this.handleFromChange}
-                            />
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.handleEmptyValueCommit}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {(filteredValue) => (
+                    <>
+                        <div className={classes.container}>
+                            <div className={classes.section}>
+                                <div className={classes.sectionLabel}>{i18n.t('After')}</div>
+                                <div className={classes.row}>
+                                    <TimeFilterInput
+                                        field="from"
+                                        value={filteredValue?.from}
+                                        onBlur={this.handleFieldBlur}
+                                        onEnterKey={this.handleEnterKey}
+                                        onChange={this.handleFromChange}
+                                    />
+                                </div>
+                            </div>
+                            <div className={classes.section}>
+                                <div className={classes.sectionLabel}>{i18n.t('Before')}</div>
+                                <div className={classes.row}>
+                                    <TimeFilterInput
+                                        field="to"
+                                        value={filteredValue?.to}
+                                        onBlur={this.handleFieldBlur}
+                                        onEnterKey={this.handleEnterKey}
+                                        onChange={this.handleToChange}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className={classes.section}>
-                        <div className={classes.sectionLabel}>{i18n.t('Before')}</div>
-                        <div className={classes.row}>
-                            <TimeFilterInput
-                                field="to"
-                                value={objValue?.to}
-                                onBlur={this.handleFieldBlur}
-                                onEnterKey={this.handleEnterKey}
-                                onChange={this.handleToChange}
-                            />
+                        <div className={cx(classes.error, classes.logicErrorContainer)}>
+                            {timeLogicError}
                         </div>
-                    </div>
-                </div>
-                <div className={cx(classes.error, classes.logicErrorContainer)}>
-                    {timeLogicError}
-                </div>
-            </div>
+                    </>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

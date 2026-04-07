@@ -17,13 +17,7 @@ import {
     RelativeRangeFilter,
     isRelativeRangeFilterValid,
 } from './RelativeRangeFilter.component';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => ({
     sectionLabel: {
@@ -170,14 +164,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.props.onCommitValue(this.getUpdatedValue(value), false);
     };
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || undefined);
-    });
-
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || undefined);
-    });
-
     handleMainSelect = (value: string | null) => {
         const valueObject = value == null ? undefined : { main: value };
         this.props.onCommitValue(valueObject, true);
@@ -241,25 +227,28 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
         return (
             <div id="dateFilter">
-                <EmptyValueFilterCheckboxes
-                    value={typeof value === 'string' ? value : undefined}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
+                <WithEmptyValueFilter
+                    value={value}
+                    onCommitValue={this.props.onCommitValue}
                     disabled={this.props.disableEmptyValueFilter}
-                />
-
-                <span className={classes.sectionLabel}>
-                    {i18n.t('Period')}
-                </span>
-                <div
-                    className={classes.optionList}
-                    role="radiogroup"
-                    aria-label={i18n.t('Period')}
-                    tabIndex={-1}
-                    onKeyDown={this.handleKeyDown}
                 >
-                    {DateFilterPlain.mainOptionSet.options.map(this.renderPeriodOption)}
-                </div>
+                    {() => (
+                        <>
+                            <span className={classes.sectionLabel}>
+                                {i18n.t('Period')}
+                            </span>
+                            <div
+                                className={classes.optionList}
+                                role="radiogroup"
+                                aria-label={i18n.t('Period')}
+                                tabIndex={-1}
+                                onKeyDown={this.handleKeyDown}
+                            >
+                                {DateFilterPlain.mainOptionSet.options.map(this.renderPeriodOption)}
+                            </div>
+                        </>
+                    )}
+                </WithEmptyValueFilter>
             </div>
         );
     }
