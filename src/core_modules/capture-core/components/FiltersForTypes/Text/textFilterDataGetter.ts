@@ -2,7 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { TextFilterData } from './types';
+import type { TextFilterData } from './text.types';
 
 export const getTextFilterData = (value: string | null | undefined): TextFilterData | null | undefined => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {

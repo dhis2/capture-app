@@ -1,5 +1,5 @@
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
-import type { OrgUnitFilterData } from './types';
+import type { OrgUnitFilterData } from './orgUnit.types';
 
 export const useOrgUnitFilterButtonText = (filter: OrgUnitFilterData | null): string | undefined => {
     const isEmptyFilter = filter != null && 'isEmpty' in filter;

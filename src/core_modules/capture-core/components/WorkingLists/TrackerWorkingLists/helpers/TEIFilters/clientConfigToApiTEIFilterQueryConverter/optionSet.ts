@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
-import type { EmptyValueFilterData } from '../../../../../FiltersForTypes/EmptyValue/types';
+import type { EmptyValueFilterData } from '../../../../../FiltersForTypes/EmptyValue/emptyValue.types';
 import type { ApiDataFilterOptionSet } from '../../../types';
 import type { OptionSetFilterData } from '../../../../WorkingListsBase';
 

@@ -1,5 +1,5 @@
-import type { EmptyValueFilterData } from '../../EmptyValue/types';
-import type { Options } from '../../../FormFields/Options/SelectBoxes';
+import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
+import type { Options } from '../../FormFields/Options/SelectBoxes';
 
 export type OptionSetValuesFilterData = {
     usingOptionSet: boolean;

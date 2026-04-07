@@ -14,7 +14,7 @@ import {
 import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
-import type { Value } from './types';
+import type { Value } from './numeric.types';
 import type { UpdatableFilterContent } from '../types';
 import {
     makeCheckboxHandler,

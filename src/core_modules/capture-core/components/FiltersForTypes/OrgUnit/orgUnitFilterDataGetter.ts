@@ -2,7 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { OrgUnitFilterData, Value } from './types';
+import type { OrgUnitFilterData, Value } from './orgUnit.types';
 
 export const getOrgUnitFilterData = (value: Value): OrgUnitFilterData | null | undefined => {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {

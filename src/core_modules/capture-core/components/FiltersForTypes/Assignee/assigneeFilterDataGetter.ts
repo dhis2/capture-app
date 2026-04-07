@@ -1,4 +1,4 @@
-import type { AssigneeFilterData } from './types';
+import type { AssigneeFilterData } from './assignee.types';
 
 export function getAssigneeFilterData(value: any): AssigneeFilterData {
     return {

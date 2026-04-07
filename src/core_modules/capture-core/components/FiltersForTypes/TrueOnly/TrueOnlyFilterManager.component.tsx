@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TrueOnlyFilter } from './TrueOnlyFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { TrueOnlyFilterData } from './types';
+import type { TrueOnlyFilterData } from './trueOnly.types';
 
 type Props = {
     filter: TrueOnlyFilterData | null,

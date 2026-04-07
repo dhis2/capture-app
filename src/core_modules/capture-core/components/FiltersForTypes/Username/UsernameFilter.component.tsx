@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { UserField } from '../../FormFields/UserField';
 import { getUsernameFilterData } from './usernameFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { UsernameFilterProps, Value } from './types';
+import type { UsernameFilterProps, Value } from './username.types';
 import {
     makeCheckboxHandler,
     isEmptyValueFilter,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { OptionSetFilter } from './OptionSetFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { OptionSetFilterData } from './types';
+import type { OptionSetFilterData } from './optionSet.types';
 
 type Props = {
     filter: OptionSetFilterData | null,

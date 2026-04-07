@@ -2,8 +2,8 @@ import {
     API_EMPTY_VALUE_FILTER,
     EMPTY_VALUE_FILTER_LABEL,
     NOT_EMPTY_VALUE_FILTER_LABEL,
-} from './constants';
-import type { EmptyValueFilterData } from './types';
+} from './emptyValue.const';
+import type { EmptyValueFilterData } from './emptyValue.types';
 
 export const fromApiEmptyValueFilter = (filter: Record<string, unknown>): EmptyValueFilterData | undefined => {
     if (typeof filter?.[API_EMPTY_VALUE_FILTER] === 'boolean') {

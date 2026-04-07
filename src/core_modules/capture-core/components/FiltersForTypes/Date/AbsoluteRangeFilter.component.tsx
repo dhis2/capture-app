@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Temporal } from '@js-temporal/polyfill';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
-import type { DateValue } from './types';
+import type { DateValue } from './date.types';
 
 function isFromAfterTo(valueFrom: string, valueTo: string): boolean {
     const from = convertLocalToIsoCalendar(valueFrom);

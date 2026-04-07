@@ -1,4 +1,4 @@
-import type { Value } from './types';
+import type { EmptyOnlyFilterData, Value } from './emptyOnly.types';
 import {
     EMPTY_VALUE_FILTER,
     NOT_EMPTY_VALUE_FILTER,
@@ -6,10 +6,6 @@ import {
     NOT_EMPTY_VALUE_FILTER_LABEL,
 } from '../EmptyValue';
 
-export type EmptyOnlyFilterData = {
-    value: string;
-    isEmpty: boolean;
-};
 
 export const getEmptyOnlyFilterData = (value?: Value): EmptyOnlyFilterData | null => {
     if (value === EMPTY_VALUE_FILTER) {

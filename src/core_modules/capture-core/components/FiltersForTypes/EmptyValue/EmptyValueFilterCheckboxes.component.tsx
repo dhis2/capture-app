@@ -6,8 +6,8 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EMPTY_VALUE_FILTER_LABEL,
     NOT_EMPTY_VALUE_FILTER_LABEL,
-} from './constants';
-import type { EmptyValueFilterCheckboxesProps } from './types';
+} from './emptyValue.const';
+import type { EmptyValueFilterCheckboxesProps } from './emptyValue.types';
 
 export const EmptyValueFilterCheckboxes = ({
     value,

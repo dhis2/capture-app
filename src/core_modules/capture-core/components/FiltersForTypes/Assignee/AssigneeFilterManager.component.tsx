@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AssigneeFilter } from './AssigneeFilter.component';
-import type { AssigneeFilterData, Value } from './types';
+import type { AssigneeFilterData, Value } from './assignee.types';
 
 type Props = {
     filter: AssigneeFilterData | null,

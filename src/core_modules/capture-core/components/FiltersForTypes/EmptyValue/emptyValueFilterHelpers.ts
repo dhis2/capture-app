@@ -3,8 +3,8 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EMPTY_VALUE_FILTER_LABEL,
     NOT_EMPTY_VALUE_FILTER_LABEL,
-} from './constants';
-import type { EmptyValueFilterData } from './types';
+} from './emptyValue.const';
+import type { EmptyValueFilterData } from './emptyValue.types';
 
 export const isEmptyValueFilter = (value?: string | null): boolean =>
     value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;

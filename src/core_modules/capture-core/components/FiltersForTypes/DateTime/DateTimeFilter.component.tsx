@@ -6,8 +6,8 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import type { UpdatableFilterContent } from '../types';
-import type { DateValue } from '../Date/types/date.types';
-import type { DateTimeValue, Value } from './types';
+import type { DateValue } from '../Date/date.types';
+import type { DateTimeValue, Value } from './dateTime.types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
 import {

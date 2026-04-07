@@ -3,7 +3,7 @@ import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateTimeFilter } from './DateTimeFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { DateTimeFilterData, Value } from './types';
+import type { DateTimeFilterData, Value } from './dateTime.types';
 
 type Props = {
     filter?: DateTimeFilterData | null;

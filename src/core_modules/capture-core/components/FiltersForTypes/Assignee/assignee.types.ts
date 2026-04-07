@@ -1,4 +1,4 @@
-import type { assigneeFilterModes } from '../constants';
+import type { assigneeFilterModes } from './assignee.const';
 
 export type AssigneeFilterData = {
     assignedUserMode: typeof assigneeFilterModes[keyof typeof assigneeFilterModes];

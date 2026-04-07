@@ -23,8 +23,6 @@ Given('you open the main page with Ngelehun and child programe context', () => {
 
 Given('you open the main page with Ngelehun and child programme default template context', () => {
     cleanUpWorkingListIfApplicable('programStageWorkingLists', 'IpHINAT79UW', 'trackerStoredWorkingList');
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'IpHINAT79UW', 'trackerPSIsEmptyWorkingList');
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'IpHINAT79UW', 'trackerProgramStageNoEmpty');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default');
 });
 
@@ -34,17 +32,12 @@ Given('you open the main page with child programe context', () => {
 
 Given('you open the main page with Ngelehun and TEI value types program context', () => {
     cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerStoredWorkingList');
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerIsEmptyWorkingList');
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerIsNotEmptyWorkingList');
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerValueTypesNoEmpty');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&selectedTemplateId=ur1Edk5Oe2n-default');
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
     cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'WSGAb5XwJ3Y', 'trackerEmailIsEmptyWorkingList');
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerCareIsEmptyWorkingList');
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerOptionSetIsEmptyWorkingList');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
@@ -53,7 +46,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerOptionSetIsEmptyWorkingList');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -74,7 +67,7 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerCareIsEmptyWorkingList');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -98,7 +91,6 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis context',
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis default template context', () => {
     cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'trackerStoredWorkingList');
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'trackerTrueOnlyIsEmptyWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default');
 });
 

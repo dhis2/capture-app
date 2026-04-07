@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { BooleanFilterData } from './types';
+import type { BooleanFilterData } from './boolean.types';
 
 type Props = {
     filter: BooleanFilterData | null,

@@ -2,7 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { BooleanFilterData } from './types';
+import type { BooleanFilterData } from './boolean.types';
 
 export function getBooleanFilterData(
     values: Array<string>,

@@ -2,8 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { TimeFilterData, TimeRangeFilterData } from './types/time.types';
-import type { Value } from './types';
+import type { TimeFilterData, TimeRangeFilterData, Value } from './time.types';
 
 export function getTimeFilterData(value: NonNullable<Value>): TimeFilterData | null {
     if (typeof value === 'string') {

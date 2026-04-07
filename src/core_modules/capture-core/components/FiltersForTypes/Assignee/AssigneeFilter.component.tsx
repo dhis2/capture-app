@@ -6,7 +6,7 @@ import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
-import type { PlainProps, Value } from './types';
+import type { PlainProps, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
 
 const getStyles: Readonly<any> = (theme: any) => ({

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SingleOrgUnitSelectField } from '../../FormFields/New';
 import { getOrgUnitFilterData } from './orgUnitFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { OrgUnitFilterProps, Value, OrgUnitValue } from './types';
+import type { OrgUnitFilterProps, Value, OrgUnitValue } from './orgUnit.types';
 import {
     makeCheckboxHandler,
     EMPTY_VALUE_FILTER,

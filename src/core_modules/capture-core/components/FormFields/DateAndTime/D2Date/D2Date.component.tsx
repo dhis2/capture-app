@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import type { DateValue } from '../../../FiltersForTypes/Date/types/date.types';
+import type { DateValue } from '../../../FiltersForTypes/Date/date.types';
 
 type Props = {
     label?: string;

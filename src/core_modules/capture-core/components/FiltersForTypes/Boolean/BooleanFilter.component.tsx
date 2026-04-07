@@ -15,7 +15,7 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
-import type { PlainProps, Value } from './types';
+import type { PlainProps, Value } from './boolean.types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {

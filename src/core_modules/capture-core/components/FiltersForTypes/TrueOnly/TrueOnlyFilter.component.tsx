@@ -6,7 +6,7 @@ import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { PlainProps, Value } from './types';
+import type { PlainProps, Value } from './trueOnly.types';
 import {
     makeCheckboxHandler,
     isEmptyValueFilter,

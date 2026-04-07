@@ -7,7 +7,7 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
-import type { Value } from './types';
+import type { Value } from './emptyOnly.types';
 
 type Props = {
     value?: Value;

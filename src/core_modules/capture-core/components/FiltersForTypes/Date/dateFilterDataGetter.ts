@@ -1,12 +1,12 @@
 import { parseNumber } from 'capture-core-utils/parsers';
 import { mainOptionKeys } from './options';
-import { dateFilterTypes } from './constants';
+import { dateFilterTypes } from './date.const';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './types';
+import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './date.types';
 
 type Value = {
     main: string;

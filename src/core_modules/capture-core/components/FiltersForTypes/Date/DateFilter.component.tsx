@@ -5,7 +5,7 @@ import { Radio } from '@dhis2/ui';
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 import type { UpdatableFilterContent } from '../types';
-import type { DateValue, Value } from './types';
+import type { DateValue, Value } from './date.types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';

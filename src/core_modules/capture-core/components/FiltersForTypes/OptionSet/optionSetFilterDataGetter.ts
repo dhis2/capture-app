@@ -2,7 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { OptionSetFilterData } from './types';
+import type { OptionSetFilterData } from './optionSet.types';
 
 function getSelectOptionSetFilterData(
     values: Array<any>,

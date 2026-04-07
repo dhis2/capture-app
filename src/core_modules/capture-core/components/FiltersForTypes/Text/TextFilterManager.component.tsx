@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
-import type { TextFilterData } from './types';
+import type { TextFilterData } from './text.types';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
 
 type Props = {

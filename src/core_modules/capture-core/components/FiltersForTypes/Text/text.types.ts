@@ -1,4 +1,4 @@
-import type { EmptyValueFilterData } from '../../EmptyValue/types';
+import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
 export type TextValueFilterData = {
     value: string,

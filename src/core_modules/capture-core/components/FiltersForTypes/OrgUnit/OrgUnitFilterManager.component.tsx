@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { OrgUnitFilter } from './OrgUnitFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { OrgUnitFilterData, Value } from './types';
+import type { OrgUnitFilterData, Value } from './orgUnit.types';
 
 type Props = {
     filter: OrgUnitFilterData | null | undefined;

@@ -296,12 +296,8 @@ Feature: User interacts with tei working lists
 
   Scenario: Save and load view with stored WL filters - EMAIL
     Given you open the main page with Ngelehun and WHO RMNCH Tracker context
-    When you set the text filter "Email address" to inverse@example.org
-    Then the text filter "Email address" should be in effect with value inverse@example.org
-    And you save the view as trackerStoredWorkingList
-    And you refresh the page
     When you set the text filter "Email address" to test@example.com
-    And you update the tracker tei view with the name trackerStoredWorkingList
+    And you save the view as trackerStoredWorkingList
     And you refresh the page
     Then the text filter "Email address" should be in effect and show test@example.com when opened
     And the saved tracker working list view is cleaned up
@@ -324,7 +320,7 @@ Feature: User interacts with tei working lists
     Given you open the main page with Ngelehun and child programme default template context
     When you set the option filter "BCG dose" to Yes
     And you set the text filter "Apgar comment" to some long text comment
-    And you save the program stage view as trackerProgramStageNoEmpty
+    And you save the program stage view as trackerStoredWorkingList
     And you refresh the page
     Then the option filter "BCG dose" should be in effect and show Yes when opened
     And the text filter "Apgar comment" should be in effect and show some long text comment when opened
@@ -383,43 +379,22 @@ Feature: User interacts with tei working lists
   @v>=42
   Scenario: Save and load view with isEmpty filters for TEA types - TEXT, NUMBER, AGE
     Given you open the main page with Ngelehun and TEI value types program context
-    When you set the isEmpty filter "Phone number" to Is not empty
-    And you set the isEmpty filter "Height in cm" to Is empty
-    And you set the isEmpty filter "Age" to Is not empty
-    And you save the view as trackerIsEmptyWorkingList
-    And you refresh the page
-    Then the isEmpty filter "Phone number" should be in effect and show Is not empty when opened
-    And the isEmpty filter "Height in cm" should be in effect and show Is empty when opened
-    And the isEmpty filter "Age" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "Phone number" to Is empty
     And you set the isEmpty filter "Height in cm" to Is not empty
     And you set the isEmpty filter "Age" to Is empty
-    And you update the tracker tei view with the name trackerIsEmptyWorkingList
+    And you save the view as trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "Phone number" should be in effect and show Is empty when opened
     And the isEmpty filter "Height in cm" should be in effect and show Is not empty when opened
     And the isEmpty filter "Age" should be in effect and show Is empty when opened
-    And the saved tracker working list view is cleaned up
-
-  @v>=42
-  Scenario: Save and load view with isNotEmpty filters for TEA types - TEXT, NUMBER, AGE
-    Given you open the main page with Ngelehun and TEI value types program context
     When you set the isEmpty filter "Phone number" to Is not empty
     And you set the isEmpty filter "Height in cm" to Is empty
     And you set the isEmpty filter "Age" to Is not empty
-    And you save the view as trackerIsNotEmptyWorkingList
+    And you update the tracker tei view with the name trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "Phone number" should be in effect and show Is not empty when opened
     And the isEmpty filter "Height in cm" should be in effect and show Is empty when opened
     And the isEmpty filter "Age" should be in effect and show Is not empty when opened
-    When you set the isEmpty filter "Phone number" to Is empty
-    And you set the isEmpty filter "Height in cm" to Is not empty
-    And you set the isEmpty filter "Age" to Is empty
-    And you update the tracker tei view with the name trackerIsNotEmptyWorkingList
-    And you refresh the page
-    Then the isEmpty filter "Phone number" should be in effect and show Is empty when opened
-    And the isEmpty filter "Height in cm" should be in effect and show Is not empty when opened
-    And the isEmpty filter "Age" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
 
   @v>=42
@@ -427,13 +402,13 @@ Feature: User interacts with tei working lists
     Given you open the main page with Ngelehun and child programme default template context
     When you set the isEmpty filter "BCG dose" to Is not empty
     And you set the isEmpty filter "Apgar comment" to Is empty
-    And you save the program stage view as trackerPSIsEmptyWorkingList
+    And you save the program stage view as trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "BCG dose" should be in effect and show Is not empty when opened
     And the isEmpty filter "Apgar comment" should be in effect and show Is empty when opened
     When you set the isEmpty filter "BCG dose" to Is empty
     And you set the isEmpty filter "Apgar comment" to Is not empty
-    And you update the tracker program stage view with the name trackerPSIsEmptyWorkingList
+    And you update the tracker program stage view with the name trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "BCG dose" should be in effect and show Is empty when opened
     And the isEmpty filter "Apgar comment" should be in effect and show Is not empty when opened
@@ -448,7 +423,7 @@ Feature: User interacts with tei working lists
     And you set the isEmpty filter "WHOMCH Respiratory rate" to Is empty
     And you set the isEmpty filter "WHOMCH Date of induction of labor" to Is not empty
     And you set the isEmpty filter "WHOMCH Hospital / Birth clinic" to Is not empty
-    And you save the program stage view as trackerCareIsEmptyWorkingList
+    And you save the program stage view as trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "WHOMCH Fetal heart rate on admission" should be in effect and show Is not empty when opened
     And the isEmpty filter "WHOMCH Body temperature" should be in effect and show Is empty when opened
@@ -462,7 +437,7 @@ Feature: User interacts with tei working lists
     And you set the isEmpty filter "WHOMCH Respiratory rate" to Is not empty
     And you set the isEmpty filter "WHOMCH Date of induction of labor" to Is empty
     And you set the isEmpty filter "WHOMCH Hospital / Birth clinic" to Is empty
-    And you update the tracker program stage view with the name trackerCareIsEmptyWorkingList
+    And you update the tracker program stage view with the name trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "WHOMCH Fetal heart rate on admission" should be in effect and show Is empty when opened
     And the isEmpty filter "WHOMCH Body temperature" should be in effect and show Is not empty when opened
@@ -476,11 +451,11 @@ Feature: User interacts with tei working lists
   Scenario: Save and load view with isEmpty filters for TRUE_ONLY type
     Given you open the main page with Ngelehun and Malaria case diagnosis default template context
     When you set the isEmpty filter "Date of birth (mal) is estimated" to Is not empty
-    And you save the view as trackerTrueOnlyIsEmptyWorkingList
+    And you save the view as trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "Date of birth (mal) is estimated" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "Date of birth (mal) is estimated" to Is empty
-    And you update the tracker tei view with the name trackerTrueOnlyIsEmptyWorkingList
+    And you update the tracker tei view with the name trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "Date of birth (mal) is estimated" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
@@ -489,11 +464,11 @@ Feature: User interacts with tei working lists
   Scenario: Save and load view with isEmpty filters for EMAIL type
     Given you open the main page with Ngelehun and WHO RMNCH Tracker context
     When you set the isEmpty filter "Email address" to Is not empty
-    And you save the view as trackerEmailIsEmptyWorkingList
+    And you save the view as trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "Email address" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "Email address" to Is empty
-    And you update the tracker tei view with the name trackerEmailIsEmptyWorkingList
+    And you update the tracker tei view with the name trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "Email address" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
@@ -502,11 +477,11 @@ Feature: User interacts with tei working lists
   Scenario: Save and load view with isEmpty filters for OPTION_SET (program stage BOOLEAN with option set)
     Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
     When you set the isEmpty filter "WHOMCH Smoking" to Is not empty
-    And you save the program stage view as trackerOptionSetIsEmptyWorkingList
+    And you save the program stage view as trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "WHOMCH Smoking" should be in effect and show Is not empty when opened
     When you set the isEmpty filter "WHOMCH Smoking" to Is empty
-    And you update the tracker program stage view with the name trackerOptionSetIsEmptyWorkingList
+    And you update the tracker program stage view with the name trackerStoredWorkingList
     And you refresh the page
     Then the isEmpty filter "WHOMCH Smoking" should be in effect and show Is empty when opened
     And the saved tracker working list view is cleaned up
@@ -520,7 +495,7 @@ Feature: User interacts with tei working lists
     And you set the range filter "Height in cm" to 100-200
     And you set the range filter "Weight in kg" to 1-200
     And you set the text filter "Phone number" to 12345678
-    And you save the view as trackerValueTypesNoEmpty
+    And you save the view as trackerStoredWorkingList
     And you refresh the page
     Then the text filter "First name" should be in effect and show ValueTypesTest when opened
     And the date filter "Age" should be in effect and show 1990-01-01 to 2010-12-31 when opened

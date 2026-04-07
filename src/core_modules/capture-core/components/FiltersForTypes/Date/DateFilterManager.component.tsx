@@ -3,9 +3,9 @@ import log from 'loglevel';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './options';
-import { dateFilterTypes } from './constants';
+import { dateFilterTypes } from './date.const';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData, Value } from './types';
+import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData, Value } from './date.types';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 type Props = {

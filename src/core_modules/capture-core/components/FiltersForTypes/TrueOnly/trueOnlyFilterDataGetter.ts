@@ -2,7 +2,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { TrueOnlyFilterData } from './types';
+import type { TrueOnlyFilterData } from './trueOnly.types';
 
 export function getTrueOnlyFilterData(value?: string): TrueOnlyFilterData {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
