@@ -1,5 +1,4 @@
 export { convertDate } from './dateConverter';
-export { convertDateTime } from './dateTimeConverter';
 export { convertTime } from './timeConverter';
 export { convertAssignee } from './assigneeConverter';
 export { convertBoolean } from './booleanConverter';
