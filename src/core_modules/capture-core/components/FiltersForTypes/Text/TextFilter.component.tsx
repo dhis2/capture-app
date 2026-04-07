@@ -41,7 +41,7 @@ export class TextFilter
                 onCommitValue={this.props.onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <>
                         <Input
                             value={filteredValue || ''}

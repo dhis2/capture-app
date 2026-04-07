@@ -29,7 +29,7 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
                 onCommitValue={this.props.onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <SingleOrgUnitSelectField
                         value={typeof filteredValue === 'object' ? filteredValue : undefined}
                         onBlur={this.handleOrgUnitChange}

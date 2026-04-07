@@ -52,7 +52,7 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
                 onCommitValue={this.props.onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <div
                         className={classes.selectBoxesContainer}
                         onKeyDownCapture={this.handleKeyDown}

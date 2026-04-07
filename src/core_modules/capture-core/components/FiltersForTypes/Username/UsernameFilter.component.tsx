@@ -28,7 +28,7 @@ export class UsernameFilter extends Component<UsernameFilterProps> implements Up
                 onCommitValue={this.props.onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <UserField
                         value={typeof filteredValue === 'string' ? filteredValue : null}
                         onSet={this.handleUserSet}

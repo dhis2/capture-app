@@ -178,7 +178,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
                 onCommitValue={this.handleEmptyValueCommit}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <>
                         <div className={classes.container}>
                             <div className={classes.section}>

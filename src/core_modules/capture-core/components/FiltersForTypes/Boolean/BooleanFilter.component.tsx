@@ -59,7 +59,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
                 onCommitValue={onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <div
                         className={classes.selectBoxesContainer}
                         onKeyDownCapture={this.handleKeyDown}

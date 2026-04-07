@@ -5,7 +5,6 @@ import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
 const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
-/** XX MAL RDT - Case Registration */
 const XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID = 'MoUd5BTQ3lY';
 
 const cleanUpEventFilterIfApplicable = (programId, displayName) => {
@@ -1067,7 +1066,7 @@ Then('the working list should be displayed', () => {
         .find('tr');
 });
 
-When(/^you delete the name (.+)$/, () => {
+When('you delete the name eventStoredWorkingList', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')

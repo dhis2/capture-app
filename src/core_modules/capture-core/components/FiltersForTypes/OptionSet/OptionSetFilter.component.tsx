@@ -47,7 +47,7 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
                 onCommitValue={onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
-                {(filteredValue) => (
+                {filteredValue => (
                     <div
                         className={classes.selectBoxesContainer}
                     >
