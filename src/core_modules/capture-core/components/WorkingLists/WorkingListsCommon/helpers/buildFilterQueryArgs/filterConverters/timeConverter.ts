@@ -1,10 +1,7 @@
-import type { TimeFilterData } from '../../../../../FiltersForTypes/Time';
+import type { TimeRangeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
 import { escapeString } from '../../../../../../utils/escapeString';
 
-export function convertTime({ sourceValue }: { sourceValue: TimeFilterData }): string {
-    if ('isEmpty' in sourceValue) {
-        return '';
-    }
+export function convertTime({ sourceValue }: { sourceValue: TimeRangeFilterData }): string {
     const requestData: string[] = [];
     if (sourceValue.ge) {
         requestData.push(`ge:${escapeString(sourceValue.ge)}`);

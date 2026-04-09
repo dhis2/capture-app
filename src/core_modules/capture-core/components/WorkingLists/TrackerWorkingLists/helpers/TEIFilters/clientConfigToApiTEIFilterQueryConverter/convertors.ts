@@ -1,46 +1,38 @@
 import moment from 'moment';
 import {
-    type BooleanFilterData,
-    type DateFilterData,
-    type DateTimeFilterData,
     dateFilterTypes,
     filterTypesObject,
-    type NumericFilterData,
-    type TextFilterData,
-    type TimeFilterData,
-    OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
+import type { TextValueFilterData } from '../../../../../FiltersForTypes/Text/text.types';
+import type { NumericRangeFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
+import type { TimeRangeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
+import type { BooleanValueFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
+import type { OrgUnitValueFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
+import type { AbsoluteDateFilterData, RelativeDateFilterData } from '../../../../../FiltersForTypes/Date/date.types';
+import type { DateTimeAbsoluteFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import type { ApiDataFilterOrgUnit } from '../../../../EventWorkingLists/types';
 
-const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
-    if ('isEmpty' in filter) return null;
+const getTextFilter = (filter: TextValueFilterData, element?: { searchOperator?: string }) => {
     const searchOperator = element?.searchOperator?.toLowerCase() ?? 'like';
     return { [searchOperator]: filter.value };
 };
 
-const getNumericFilter = (filter: NumericFilterData) => {
-    if ('isEmpty' in filter) return null;
-    return {
-        ge: filter.ge?.toString() ?? undefined,
-        le: filter.le?.toString() ?? undefined,
-    };
-};
+const getNumericFilter = (filter: NumericRangeFilterData) => ({
+    ge: filter.ge?.toString() ?? undefined,
+    le: filter.le?.toString() ?? undefined,
+});
 
-const getTimeFilter = (filter: TimeFilterData) => {
-    if ('isEmpty' in filter) return null;
-    return {
-        ge: filter.ge ?? undefined,
-        le: filter.le ?? undefined,
-    };
-};
+const getTimeFilter = (filter: TimeRangeFilterData) => ({
+    ge: filter.ge ?? undefined,
+    le: filter.le ?? undefined,
+});
 
-const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean | null => {
-    if ('isEmpty' in filter) return null;
-    return { in: filter.values.map(value => (value ? 'true' : 'false')) };
-};
+const getBooleanFilter = (filter: BooleanValueFilterData): ApiDataFilterBoolean => ({
+    in: filter.values.map(value => (value ? 'true' : 'false')),
+});
 
 const getTrueOnlyFilter = () => ({
     eq: 'true',
@@ -57,10 +49,7 @@ const convertDate = (rawValue: string): string => {
     return momentDate.format('YYYY-MM-DD');
 };
 
-export const getDateFilter = (dateFilter: DateFilterData) => {
-    if ('isEmpty' in dateFilter) {
-        return { dateFilter: { type: 'ABSOLUTE' } };
-    }
+export const getDateFilter = (dateFilter: AbsoluteDateFilterData | RelativeDateFilterData) => {
     const apiDateFilterContents =
         dateFilter.type === dateFilterTypes.RELATIVE
             ? {
@@ -80,23 +69,17 @@ export const getDateFilter = (dateFilter: DateFilterData) => {
     };
 };
 
-const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit | null => {
-    if ('isEmpty' in filter) return null;
-    return { eq: filter.value };
-};
+const getOrgUnitFilter = (filter: OrgUnitValueFilterData): ApiDataFilterOrgUnit => ({
+    eq: filter.value,
+});
 
-export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => {
-    if ('isEmpty' in dateFilter) {
-        return { dateFilter: { type: 'ABSOLUTE' } };
-    }
-    return {
-        dateFilter: {
-            type: dateFilterTypes.ABSOLUTE,
-            startDate: dateFilter.ge ?? undefined,
-            endDate: dateFilter.le ?? undefined,
-        },
-    };
-};
+export const getDateTimeFilter = (dateFilter: DateTimeAbsoluteFilterData) => ({
+    dateFilter: {
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
 
 export const getFilterByType = {
     [filterTypesObject.AGE]: getDateFilter,

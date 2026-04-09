@@ -9,7 +9,8 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
+import type { OptionSetValuesFilterData } from '../../../../FiltersForTypes/OptionSet/optionSet.types';
+import type { FilterData, Options } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes: any = {
@@ -38,10 +39,7 @@ const convertersForTypes: any = {
     [filterTypesObject.USERNAME]: convertText,
 };
 
-function getOptionSetText(filter: OptionSetFilterData, options: Options) {
-    if ('isEmpty' in filter) {
-        return String(filter.value);
-    }
+function getOptionSetText(filter: OptionSetValuesFilterData, options: Options) {
     return filter
         .values
         .map((value) => {

@@ -1,12 +1,9 @@
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
-import type { EmptyValueFilterData } from '../../../../../FiltersForTypes/EmptyValue/emptyValue.types';
 import type {
     ApiDataFilterOptionSet,
 } from '../../../types';
-import type {
-    OptionSetFilterData,
-} from '../../../../WorkingListsBase';
+import type { OptionSetValuesFilterData } from '../../../../../FiltersForTypes/OptionSet/optionSet.types';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 
@@ -28,7 +25,7 @@ const converterByType: any = {
 };
 
 export const getApiOptionSetFilter = (
-    filter: Exclude<OptionSetFilterData, EmptyValueFilterData>,
+    filter: OptionSetValuesFilterData,
     type: keyof typeof dataElementTypes,
 ): ApiDataFilterOptionSet => ({
     in: filter.values

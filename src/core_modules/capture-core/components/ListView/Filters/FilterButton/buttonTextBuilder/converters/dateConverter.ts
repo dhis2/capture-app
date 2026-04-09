@@ -1,11 +1,8 @@
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
-import {
-    mainOptionTranslatedTexts,
-    type DateFilterData,
-    type AbsoluteDateFilterData,
-} from '../../../../../FiltersForTypes';
+import { mainOptionTranslatedTexts } from '../../../../../FiltersForTypes';
+import type { AbsoluteDateFilterData, RelativeDateFilterData } from '../../../../../FiltersForTypes/Date/date.types';
 
 function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
     let appliedText = '';
@@ -41,10 +38,7 @@ function translateRelativeRange(filter: { startBuffer?: number | null; endBuffer
     });
 }
 
-export function convertDate(filter: DateFilterData): string {
-    if ('isEmpty' in filter) {
-        return String(filter.value);
-    }
+export function convertDate(filter: AbsoluteDateFilterData | RelativeDateFilterData): string {
     if ('type' in filter && filter.type === 'ABSOLUTE') {
         return translateAbsoluteDate(filter);
     }
