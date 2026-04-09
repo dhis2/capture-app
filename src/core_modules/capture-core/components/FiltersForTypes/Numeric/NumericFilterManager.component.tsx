@@ -19,12 +19,12 @@ type State = {
 
 export class NumericFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: NumericFilter | null) {
-        if (filter && isEmptyFilterData(filter)) {
-            return getEmptyValueFilterValue(filter);
-        }
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
+
         return {
-            min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
-            max: filter && (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
+            min: (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
+            max: (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
         };
     }
 

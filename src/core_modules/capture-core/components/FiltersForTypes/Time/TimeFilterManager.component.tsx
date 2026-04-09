@@ -15,13 +15,8 @@ type State = {
 
 export class TimeFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter?: TimeFilter | null): Value {
-        if (!filter) {
-            return null;
-        }
-
-        if (isEmptyFilterData(filter)) {
-            return getEmptyValueFilterValue(filter);
-        }
+        if (!filter) return null;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
 
         const from = filter.ge ?? null;
         const to = filter.le ?? null;

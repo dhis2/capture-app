@@ -63,13 +63,8 @@ export class DateFilterManager extends React.Component<Props, State> {
     }
 
     static calculateDefaultValueState(filter?: DateFilter | null) {
-        if (!filter) {
-            return undefined;
-        }
-
-        if (isEmptyFilterData(filter)) {
-            return getEmptyValueFilterValue(filter);
-        }
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
 
         if (filter.type === dateFilterTypes.RELATIVE) {
             if (filter.period) {

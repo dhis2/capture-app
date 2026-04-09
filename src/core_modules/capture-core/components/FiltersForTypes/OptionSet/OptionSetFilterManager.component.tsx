@@ -16,14 +16,8 @@ type State = {
 
 export class OptionSetFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter: OptionSetFilter | null, singleSelect: boolean) {
-        if (!filter) {
-            return undefined;
-        }
-
-        if (isEmptyFilterData(filter)) {
-            return getEmptyValueFilterValue(filter);
-        }
-
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
         return singleSelect ? filter.values[0] : filter.values;
     }
 

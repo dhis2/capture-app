@@ -19,14 +19,8 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         filter: BooleanFilter | null,
         singleSelect: boolean,
     ): Value | undefined {
-        if (!filter) {
-            return undefined;
-        }
-
-        if (isEmptyFilterData(filter)) {
-            return getEmptyValueFilterValue(filter);
-        }
-
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
         return singleSelect ? filter.values[0] : filter.values;
     }
 

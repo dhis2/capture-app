@@ -32,11 +32,10 @@ function extractTime(isoDatetime?: string | null): string | undefined {
 
 export class DateTimeFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter?: DateTimeFilter | null): Value {
-        if (filter && isEmptyFilterData(filter)) {
-            return getEmptyValueFilterValue(filter);
-        }
+        if (!filter) return null;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
 
-        if (filter && 'type' in filter) {
+        if ('type' in filter) {
             const fromDate = extractLocalDate(filter.ge);
             const fromTime = extractTime(filter.ge);
             const toDate = extractLocalDate(filter.le);

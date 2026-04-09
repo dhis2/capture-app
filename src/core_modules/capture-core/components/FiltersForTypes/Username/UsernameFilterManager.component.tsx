@@ -16,12 +16,9 @@ type State = {
 
 export class UsernameFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: UsernameFilter | null | undefined): State {
-        if (filter && isEmptyFilterData(filter)) {
-            return { value: getEmptyValueFilterValue(filter) };
-        }
-
-        if (!filter?.value) return { value: undefined };
-
+        if (!filter) return { value: undefined };
+        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
+        if (!filter.value) return { value: undefined };
         return { value: filter.value };
     }
 

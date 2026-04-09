@@ -16,15 +16,12 @@ type State = {
 
 export class OrgUnitFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: OrgUnitFilter | null | undefined): State {
-        if (filter && isEmptyFilterData(filter)) {
-            return { value: getEmptyValueFilterValue(filter) };
-        }
+        if (!filter) return { value: undefined };
+        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
 
-        if (!filter?.value) return { value: undefined };
-
-        const id = filter.value;
-        const name = filter.name ?? filter.value;
-        return { value: { id, name, path: '' } };
+        const { value, name } = filter;
+        if (!value) return { value: undefined };
+        return { value: { id: value, name: name ?? value, path: '' } };
     }
 
     constructor(props: Props) {
