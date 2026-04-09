@@ -1,4 +1,4 @@
-import type { TextFilterData } from '../../../../../FiltersForTypes';
+import type { TextFilterData } from '../../../../../ListView';
 import { escapeString } from '../../../../../../utils/escapeString';
 import type { SearchOperator } from '../../../../../../metaDataMemoryStoreBuilders';
 

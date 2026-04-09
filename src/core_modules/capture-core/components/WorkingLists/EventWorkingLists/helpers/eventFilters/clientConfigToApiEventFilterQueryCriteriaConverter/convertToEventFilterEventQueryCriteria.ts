@@ -15,7 +15,7 @@ import type {
     RelativeDateFilterData,
     TextFilterData,
     TimeFilterData,
-} from '../../../../../FiltersForTypes';
+} from '../../../../../ListView';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,

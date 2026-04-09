@@ -6,7 +6,7 @@ import type {
     AbsoluteDateFilterData,
     DateFilterData,
     RelativeDateFilterData,
-} from '../../../../../FiltersForTypes';
+} from '../../../../../ListView';
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 

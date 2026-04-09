@@ -1,5 +1,5 @@
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import type { AssigneeFilterData } from '../../../../../FiltersForTypes';
+import type { AssigneeFilterData } from '../../../../../ListView';
 
 export function convertAssignee(
     { sourceValue }: { sourceValue: AssigneeFilterData },
