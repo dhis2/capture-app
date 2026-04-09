@@ -140,7 +140,7 @@ const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> 
         type,
         header: formName || name,
         options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-        multiValueFilter: !!optionSet,
+        multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         additionalColumn: true,
     }));
 

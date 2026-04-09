@@ -20,7 +20,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     onGetUpdateData() {
         const { value } = this.props;
 
-        if (!value) {
+        if (!value && value !== false) {
             return null;
         }
 
@@ -28,7 +28,8 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
             return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
         }
 
-        return getBooleanFilterData(value);
+        const normalizedValue = Array.isArray(value) ? value : [value];
+        return getBooleanFilterData(normalizedValue);
     }
 
     onIsValid() { //eslint-disable-line

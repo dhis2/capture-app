@@ -11,12 +11,13 @@ type Props = {
 };
 
 type State = {
-    value: Value | undefined,
+    value: Value | undefined,  // boolean for single-select (e.g. FOLLOW_UP), Array<boolean> for multi-select
 };
 
 export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(
         filter: BooleanFilterData | null,
+        singleSelect: boolean,
     ): Value | undefined {
         if (!filter) {
             return undefined;
@@ -26,13 +27,13 @@ export class BooleanFilterManager extends React.Component<Props, State> {
             return filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER;
         }
 
-        return filter.values;
+        return singleSelect ? filter.values[0] : filter.values;
     }
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            value: BooleanFilterManager.calculateDefaultValueState(this.props.filter),
+            value: BooleanFilterManager.calculateDefaultValueState(this.props.filter, this.props.singleSelect),
         };
     }
 

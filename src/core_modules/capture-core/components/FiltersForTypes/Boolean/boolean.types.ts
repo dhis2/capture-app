@@ -6,7 +6,7 @@ export type BooleanValueFilterData = {
 
 export type BooleanFilterData = BooleanValueFilterData | EmptyValueFilterData;
 
-export type Value = Array<boolean> | string | null;
+export type Value = Array<boolean> | boolean | string | null;
 
 export type PlainProps = {
     value?: Value;
