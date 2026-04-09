@@ -1,9 +1,6 @@
-import type { OrgUnitFilterData } from '../../../../../ListView';
+import type { OrgUnitValueFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
 import { escapeString } from '../../../../../../utils/escapeString';
 
-export function convertOrgUnit({ sourceValue }: { sourceValue: OrgUnitFilterData }): string {
-    if ('isEmpty' in sourceValue) {
-        return '';
-    }
+export function convertOrgUnit({ sourceValue }: { sourceValue: OrgUnitValueFilterData }): string {
     return `eq:${escapeString(sourceValue.value)}`;
 }

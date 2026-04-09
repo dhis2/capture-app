@@ -1,9 +1,6 @@
-import type { NumericFilterData } from '../../../../../ListView';
+import type { NumericRangeFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
 
-export function convertNumeric({ sourceValue }: { sourceValue: NumericFilterData }) {
-    if ('isEmpty' in sourceValue) {
-        return '';
-    }
+export function convertNumeric({ sourceValue }: { sourceValue: NumericRangeFilterData }) {
     const requestData: string[] = [];
 
     if (sourceValue.ge || sourceValue.ge === 0) {

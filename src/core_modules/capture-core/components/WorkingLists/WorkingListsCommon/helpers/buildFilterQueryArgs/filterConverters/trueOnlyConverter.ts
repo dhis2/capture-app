@@ -1,8 +1,5 @@
-import type { TrueOnlyFilterData } from '../../../../../ListView';
+import type { TrueOnlyValueFilterData } from '../../../../../FiltersForTypes/TrueOnly/trueOnly.types';
 
-export function convertTrueOnly({ sourceValue }: { sourceValue: TrueOnlyFilterData }) {
-    if ('isEmpty' in sourceValue) {
-        return '';
-    }
+export function convertTrueOnly({ sourceValue }: { sourceValue: TrueOnlyValueFilterData }) {
     return `eq:${sourceValue.value}`;
 }
