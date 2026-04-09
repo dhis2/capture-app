@@ -3,7 +3,7 @@ import { dataElementTypes } from '../../../../../../metaData';
 import type {
     ApiDataFilterOptionSet,
 } from '../../../types';
-import type { OptionSetFilterData } from '../../../../../FiltersForTypes/OptionSet/optionSet.types';
+import type { OptionSetFilterData } from '../../../../../FiltersForTypes';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 

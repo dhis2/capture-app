@@ -5,14 +5,17 @@ import { dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import { filterTypesObject, dateFilterTypes } from '../../../../WorkingListsBase';
-import type { AssigneeFilterData } from '../../../../../FiltersForTypes/Assignee/assignee.types';
-import type { TextFilterData } from '../../../../../FiltersForTypes/Text/text.types';
-import type { NumericFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
-import type { TimeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
-import type { BooleanFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
-import type { OrgUnitFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
-import type { AbsoluteDateFilterData, RelativeDateFilterData } from '../../../../../FiltersForTypes/Date/date.types';
-import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
+import type {
+    AbsoluteDateFilterData,
+    AssigneeFilterData,
+    BooleanFilterData,
+    DateTimeFilterData,
+    NumericFilterData,
+    OrgUnitFilterData,
+    RelativeDateFilterData,
+    TextFilterData,
+    TimeFilterData,
+} from '../../../../../FiltersForTypes';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,

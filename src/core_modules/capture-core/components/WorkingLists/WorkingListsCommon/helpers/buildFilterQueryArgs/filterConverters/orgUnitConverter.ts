@@ -1,4 +1,4 @@
-import type { OrgUnitFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
+import type { OrgUnitFilterData } from '../../../../../FiltersForTypes';
 import { escapeString } from '../../../../../../utils/escapeString';
 
 export function convertOrgUnit({ sourceValue }: { sourceValue: OrgUnitFilterData }): string {

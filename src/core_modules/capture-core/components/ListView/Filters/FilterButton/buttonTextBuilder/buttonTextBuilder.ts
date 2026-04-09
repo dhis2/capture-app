@@ -9,8 +9,7 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData } from '../../../../FiltersForTypes/OptionSet/optionSet.types';
-import type { FilterData, Options } from '../../../../FiltersForTypes';
+import type { FilterData, OptionSetFilterData, Options } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes: any = {

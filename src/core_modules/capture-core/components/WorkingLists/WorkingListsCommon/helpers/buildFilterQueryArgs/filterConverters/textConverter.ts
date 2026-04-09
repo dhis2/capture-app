@@ -1,4 +1,4 @@
-import type { TextFilterData } from '../../../../../FiltersForTypes/Text/text.types';
+import type { TextFilterData } from '../../../../../FiltersForTypes';
 import { escapeString } from '../../../../../../utils/escapeString';
 import type { SearchOperator } from '../../../../../../metaDataMemoryStoreBuilders';
 

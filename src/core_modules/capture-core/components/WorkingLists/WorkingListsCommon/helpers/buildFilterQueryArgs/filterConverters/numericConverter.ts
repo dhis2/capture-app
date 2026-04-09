@@ -1,4 +1,4 @@
-import type { NumericFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
+import type { NumericFilterData } from '../../../../../FiltersForTypes';
 
 export function convertNumeric({ sourceValue }: { sourceValue: NumericFilterData }) {
     const requestData: string[] = [];

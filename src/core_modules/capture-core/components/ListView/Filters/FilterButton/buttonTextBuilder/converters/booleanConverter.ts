@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { pipe } from 'capture-core-utils';
-import type { BooleanFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
+import type { BooleanFilterData } from '../../../../../FiltersForTypes';
 
 const textValuesByKey: Record<string, string> = {
     true: i18n.t('Yes'),

@@ -1,4 +1,4 @@
-import type { TimeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
+import type { TimeFilterData } from '../../../../../FiltersForTypes';
 import { escapeString } from '../../../../../../utils/escapeString';
 
 export function convertTime({ sourceValue }: { sourceValue: TimeFilterData }): string {

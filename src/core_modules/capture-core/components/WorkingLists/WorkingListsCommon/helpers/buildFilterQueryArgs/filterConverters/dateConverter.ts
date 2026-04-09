@@ -3,9 +3,10 @@ import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
 import type {
-    RelativeDateFilterData,
     AbsoluteDateFilterData,
-} from '../../../../../FiltersForTypes/Date/date.types';
+    DateFilterData,
+    RelativeDateFilterData,
+} from '../../../../../FiltersForTypes';
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
@@ -161,7 +162,7 @@ export function convertDate({
     sourceValue,
     meta: { key, storeId, isInit },
 }: {
-    sourceValue: AbsoluteDateFilterData | RelativeDateFilterData;
+    sourceValue: DateFilterData;
     meta: { key: string; storeId: string; isInit: boolean };
 }) {
     if (sourceValue.type === 'ABSOLUTE') {

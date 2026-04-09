@@ -1,12 +1,11 @@
 import React, { useRef, useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from 'capture-core-utils/styles';
-import type { UpdatableFilterContent } from '../../../FiltersForTypes';
+import type { UpdatableFilterContent, Value } from '../../../FiltersForTypes';
 import {
     isValidMinCharactersToSearch,
 } from '../../../../utils/validation/validators/form/isValidMinCharactersToSearch';
 import { filterTypesObject } from '../../../../components/WorkingLists/WorkingListsBase';
-import type { Value } from '../../../../components/FiltersForTypes/Date/date.types';
 
 type Theme = {
     typography: { caption: Record<string, unknown>; pxToRem: (n: number) => string };

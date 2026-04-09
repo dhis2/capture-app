@@ -18,7 +18,13 @@ export { mainOptionTranslatedTexts } from './Date/options';
 
 export type { AssigneeFilterData } from './Assignee/assignee.types';
 export type { BooleanFilterData } from './Boolean/boolean.types';
-export type { DateFilterData, AbsoluteDateFilterData, RelativeDateFilterData } from './Date/date.types';
+export type {
+    AbsoluteDateFilterData,
+    DateFilterData,
+    DateValue,
+    RelativeDateFilterData,
+    Value,
+} from './Date/date.types';
 export type { DateTimeFilterData } from './DateTime/dateTime.types';
 export type { TimeFilterData } from './Time/time.types';
 export type { EmptyOnlyFilterData } from './EmptyOnly/emptyOnly.types';

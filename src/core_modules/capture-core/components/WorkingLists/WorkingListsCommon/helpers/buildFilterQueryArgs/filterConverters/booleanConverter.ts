@@ -1,5 +1,5 @@
 import { pipe } from 'capture-core-utils';
-import type { BooleanFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
+import type { BooleanFilterData } from '../../../../../FiltersForTypes';
 
 const booleanFilterValues = {
     true: 'true',

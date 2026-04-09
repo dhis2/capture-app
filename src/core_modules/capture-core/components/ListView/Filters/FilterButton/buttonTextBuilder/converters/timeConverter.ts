@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
-import type { TimeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
+import type { TimeFilterData } from '../../../../../FiltersForTypes';
 
 export function convertTime(filter: TimeFilterData): string {
     let appliedText = '';

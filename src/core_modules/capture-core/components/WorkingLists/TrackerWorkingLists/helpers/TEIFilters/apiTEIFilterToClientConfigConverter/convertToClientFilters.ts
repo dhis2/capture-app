@@ -5,11 +5,11 @@ import {
     filterTypesObject,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type BooleanFilterData,
     type TimeFilterData,
     type NumericFilterData,
     OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
-import type { BooleanFilterData } from '../../../../../FiltersForTypes/Boolean';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
