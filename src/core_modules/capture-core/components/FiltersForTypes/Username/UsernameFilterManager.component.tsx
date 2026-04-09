@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UsernameFilter } from './UsernameFilter.component';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
+import { getEmptyValueFilterValue } from '../EmptyValue';
 import type { UsernameFilterData, Value } from './username.types';
 
 type Props = {
@@ -17,7 +17,7 @@ type State = {
 export class UsernameFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: UsernameFilterData | null | undefined): State {
         if (filter && 'isEmpty' in filter) {
-            return { value: filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER };
+            return { value: getEmptyValueFilterValue(filter) };
         }
 
         if (!filter?.value) return { value: undefined };

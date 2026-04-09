@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './text.types';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
+import { getEmptyValueFilterValue } from '../EmptyValue';
 
 type Props = {
     filter: TextFilterData | null | undefined;
@@ -17,7 +17,7 @@ type State = {
 export class TextFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: TextFilterData | null | undefined) {
         if (filter && 'isEmpty' in filter) {
-            return { value: filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER };
+            return { value: getEmptyValueFilterValue(filter) };
         }
 
         return { value: filter?.value || undefined };

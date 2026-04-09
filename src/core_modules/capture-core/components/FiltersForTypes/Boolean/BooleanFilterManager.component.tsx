@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
+import { getEmptyValueFilterValue } from '../EmptyValue';
 import type { BooleanFilterData, Value } from './boolean.types';
 
 type Props = {
@@ -24,7 +24,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         }
 
         if ('isEmpty' in filter) {
-            return filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER;
+            return getEmptyValueFilterValue(filter);
         }
 
         return singleSelect ? filter.values[0] : filter.values;
