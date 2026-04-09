@@ -5,7 +5,7 @@ import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
 import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import { WithEmptyValueFilter, getEmptyValueFilterData, isEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 import type { PlainProps, Value } from './boolean.types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
@@ -24,12 +24,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
             return null;
         }
 
-        if (typeof value === 'string') {
-            return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
-        }
-
-        const normalizedValue = Array.isArray(value) ? value : [value];
-        return getBooleanFilterData(normalizedValue);
+        return getBooleanFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line

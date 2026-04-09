@@ -23,11 +23,11 @@ export type { DateTimeFilterData, DateTimeAbsoluteFilterData } from './DateTime'
 export type { TimeFilterData, TimeRangeFilterData } from './Time/time.types';
 export type { EmptyOnlyFilterData } from './EmptyOnly/emptyOnly.types';
 export type { NumericFilterData, NumericRangeFilterData } from './Numeric/numeric.types';
-export type { OptionSetFilterData } from './OptionSet/optionSet.types';
+export type { OptionSetFilterData, OptionSetValuesFilterData } from './OptionSet/optionSet.types';
 export type { OrgUnitFilterData, OrgUnitValueFilterData } from './OrgUnit/orgUnit.types';
 export type { TextFilterData, TextValueFilterData } from './Text/text.types';
-export type { TrueOnlyFilterData } from './TrueOnly/trueOnly.types';
-export type { UsernameFilterData } from './Username/username.types';
+export type { TrueOnlyFilterData, TrueOnlyValueFilterData } from './TrueOnly/trueOnly.types';
+export type { UsernameFilterData, UsernameValueFilterData } from './Username/username.types';
 export type { FilterData, FilterDataInput, UpdatableFilterContent } from './types';
 
 export type { Options } from '../FormFields/Options/SelectBoxes';
