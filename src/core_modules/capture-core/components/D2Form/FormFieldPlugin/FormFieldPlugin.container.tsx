@@ -22,11 +22,11 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     const { orgUnitId } = useLocationQuery();
 
     // Plugin related functionality and feedback
-    const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
+    const { pluginValues, formValuesRedux } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
     const onUpdateField = useCallback(
         (fieldMetadata, value, options) =>
-            onUpdateFieldValue(fieldMetadata, value, pluginValues[fieldMetadata.id], options),
+            onUpdateFieldValue(fieldMetadata, value, formValuesRedux[fieldMetadata.id], options),
         [onUpdateFieldValue, pluginValues],
     );
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({

@@ -35,5 +35,8 @@ export const usePluginValues = (
         ...contextValues,
     }), [formValues, contextValues]);
 
-    return { pluginValues };
+    return {
+        pluginValues,
+        formValuesRedux,
+    };
 };
