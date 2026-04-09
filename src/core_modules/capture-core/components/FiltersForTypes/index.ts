@@ -1,39 +1,25 @@
-export { AssigneeFilter, modeKeys as assigneeFilterModeKeys } from './Assignee';
-export { BooleanFilter } from './Boolean';
-export { DateFilter } from './Date';
-export { DateTimeFilter } from './DateTime';
-export { EmptyOnlyFilter } from './EmptyOnly';
-export { EmptyValueFilterCheckboxes, isEmptyFilterData } from './EmptyValue';
-export { NumericFilter } from './Numeric';
-export { OptionSetFilter } from './OptionSet';
-export { OrgUnitFilter } from './OrgUnit';
-export { TextFilter } from './Text';
-export { TimeFilter } from './Time';
-export { TrueOnlyFilter } from './TrueOnly';
-export { UsernameFilter } from './Username';
-
+export { AssigneeFilter, modeKeys as assigneeFilterModeKeys, type AssigneeFilterData } from './Assignee';
 export { assigneeFilterModes } from './Assignee/assignee.const';
+export { BooleanFilter, type BooleanFilterData } from './Boolean';
+export {
+    DateFilter,
+    type AbsoluteDateFilterData,
+    type DateFilterData,
+    type DateValue,
+    type RelativeDateFilterData,
+    type Value,
+} from './Date';
 export { dateFilterTypes } from './Date/date.const';
 export { mainOptionTranslatedTexts } from './Date/options';
-
-export type { AssigneeFilterData } from './Assignee/assignee.types';
-export type { BooleanFilterData, BooleanFilter } from './Boolean/boolean.types';
-export type {
-    AbsoluteDateFilterData,
-    DateFilterData,
-    DateValue,
-    RelativeDateFilterData,
-    Value,
-} from './Date/date.types';
-export type { DateTimeFilterData } from './DateTime/dateTime.types';
-export type { EmptyOnlyFilterData } from './EmptyOnly/emptyOnly.types';
-export type { NumericFilterData } from './Numeric/numeric.types';
-export type { OptionSetFilterData } from './OptionSet/optionSet.types';
-export type { OrgUnitFilterData } from './OrgUnit/orgUnit.types';
-export type { TextFilterData } from './Text/text.types';
-export type { TimeFilterData } from './Time/time.types';
-export type { TrueOnlyFilterData } from './TrueOnly/trueOnly.types';
-export type { UsernameFilterData } from './Username/username.types';
+export { DateTimeFilter, type DateTimeFilterData } from './DateTime';
+export { EmptyOnlyFilter, type EmptyOnlyFilterData } from './EmptyOnly';
+export { EmptyValueFilterCheckboxes, isEmptyFilterData } from './EmptyValue';
+export { NumericFilter, type NumericFilterData } from './Numeric';
+export { OptionSetFilter, type OptionSetFilterData } from './OptionSet';
+export { OrgUnitFilter, type OrgUnitFilterData } from './OrgUnit';
+export { TextFilter, type TextFilterData } from './Text';
+export { TimeFilter, type TimeFilterData } from './Time';
+export { TrueOnlyFilter, type TrueOnlyFilterData } from './TrueOnly';
+export { UsernameFilter, type UsernameFilterData } from './Username';
 export type { FilterData, FilterDataInput, UpdatableFilterContent } from './types';
-
 export type { Options } from '../FormFields/Options/SelectBoxes';
