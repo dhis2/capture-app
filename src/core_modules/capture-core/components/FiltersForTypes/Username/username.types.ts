@@ -5,6 +5,7 @@ export type UsernameValueFilterData = {
 };
 
 export type UsernameFilterData = UsernameValueFilterData | EmptyValueFilterData;
+
 export type Value = string | null | undefined;
 
 export type UsernameFilterProps = {

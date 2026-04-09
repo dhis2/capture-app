@@ -5,6 +5,7 @@ export type TrueOnlyFilterData = {
 };
 
 export type TrueOnlyFilter = TrueOnlyFilterData | EmptyValueFilterData;
+
 export type Value = Array<any> | string | null | undefined;
 
 export type PlainProps = {

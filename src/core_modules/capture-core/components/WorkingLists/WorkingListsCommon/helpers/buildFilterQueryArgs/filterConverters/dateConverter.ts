@@ -3,9 +3,9 @@ import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
 import type {
-    AbsoluteDateFilterData,
     DateFilterData,
     RelativeDateFilterData,
+    AbsoluteDateFilterData,
 } from '../../../../../ListView';
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';

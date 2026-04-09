@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { ApiDataFilterOptionSet } from '../../../types';
-import type { OptionSetFilterData } from '../../../../../ListView';
+import type { OptionSetFilterData } from '../../../../WorkingListsBase';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 

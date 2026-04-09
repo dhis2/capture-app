@@ -1,14 +1,13 @@
 import moment from 'moment';
 import {
-    type BooleanFilterData,
     dateFilterTypes,
     filterTypesObject,
+    type BooleanFilterData,
     type NumericFilterData,
     type TextFilterData,
     type TimeFilterData,
     type OrgUnitFilterData,
-    type AbsoluteDateFilterData,
-    type RelativeDateFilterData,
+    type DateFilterData,
     type DateTimeFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
@@ -50,7 +49,7 @@ const convertDate = (rawValue: string): string => {
     return momentDate.format('YYYY-MM-DD');
 };
 
-export const getDateFilter = (dateFilter: AbsoluteDateFilterData | RelativeDateFilterData) => {
+export const getDateFilter = (dateFilter: DateFilterData) => {
     const apiDateFilterContents =
         dateFilter.type === dateFilterTypes.RELATIVE
             ? {

@@ -4,18 +4,18 @@ import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
-import { filterTypesObject, dateFilterTypes } from '../../../../WorkingListsBase';
-import type {
-    AbsoluteDateFilterData,
-    AssigneeFilterData,
-    BooleanFilterData,
-    DateTimeFilterData,
-    NumericFilterData,
-    OrgUnitFilterData,
-    RelativeDateFilterData,
-    TextFilterData,
-    TimeFilterData,
-} from '../../../../../ListView';
+import {
+    dateFilterTypes,
+    filterTypesObject,
+    type AssigneeFilterData,
+    type BooleanFilterData,
+    type DateFilterData,
+    type DateTimeFilterData,
+    type NumericFilterData,
+    type OrgUnitFilterData,
+    type TextFilterData,
+    type TimeFilterData,
+} from '../../../../WorkingListsBase';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,
@@ -77,7 +77,7 @@ const convertDate = (rawValue: string): string => {
     return momentDate.format('YYYY-MM-DD');
 };
 
-const getDateFilter = (dateFilter: AbsoluteDateFilterData | RelativeDateFilterData): ApiDataFilterDate => {
+const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
     const apiDateFilterContents = dateFilter.type === dateFilterTypes.RELATIVE ? {
         type: dateFilter.type,
         period: dateFilter.period,

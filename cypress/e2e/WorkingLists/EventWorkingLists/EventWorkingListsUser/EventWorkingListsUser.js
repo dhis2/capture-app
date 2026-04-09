@@ -4,8 +4,15 @@ import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
+const NGELEHUN_ORG_UNIT_ID = 'DiszpKrYNg8';
+
+const MALARIA_CASE_PROGRAM_ID = 'VBqh0ynB2wv';
 const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
+const CONTRACEPTIVES_VOUCHER_PROGRAM_ID = 'kla3mAPgvCH';
 const XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID = 'MoUd5BTQ3lY';
+
+const programAndOrgUnitQuery = (programId) =>
+    `programId=${programId}&orgUnitId=${NGELEHUN_ORG_UNIT_ID}`;
 
 const cleanUpEventFilterIfApplicable = (programId, displayName) => {
     cy.buildApiUrl(`eventFilters?filter=program:eq:${programId}&fields=id,displayName`)
@@ -22,21 +29,32 @@ const cleanUpEventFilterIfApplicable = (programId, displayName) => {
         });
 };
 
+const cleanUpEventFiltersForProgram = (programId, displayNames) => {
+    displayNames.forEach((displayName) => {
+        cleanUpEventFilterIfApplicable(programId, displayName);
+    });
+};
+
 const CONTEXT_QUERIES = {
-    'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
-    'Inpatient morbidity and mortality context': 'programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8',
-    'Contraceptives Voucher Program': 'orgUnitId=DiszpKrYNg8&programId=kla3mAPgvCH',
-    'event program text filter context': `programId=${XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID}&orgUnitId=DiszpKrYNg8`,
+    'Contraceptives Voucher Program': programAndOrgUnitQuery(CONTRACEPTIVES_VOUCHER_PROGRAM_ID),
+    'Inpatient morbidity and mortality context': programAndOrgUnitQuery(INPATIENT_MORBIDITY_PROGRAM_ID),
+    'event program text filter context': programAndOrgUnitQuery(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID),
+    'malaria case context': programAndOrgUnitQuery(MALARIA_CASE_PROGRAM_ID),
+};
+
+const PRE_VISIT_CLEANUP_BY_CONTEXT = {
+    'Inpatient morbidity and mortality context': () =>
+        cleanUpEventFiltersForProgram(INPATIENT_MORBIDITY_PROGRAM_ID, [
+            'eventStoredWorkingList',
+            'allValueTypesFilterWorkingList',
+        ]),
+    'event program text filter context': () =>
+        cleanUpEventFiltersForProgram(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID, ['eventStoredWorkingList']),
 };
 
 Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
-    if (contextOrPath === 'Inpatient morbidity and mortality context') {
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventStoredWorkingList');
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'allValueTypesFilterWorkingList');
-    }
-    if (contextOrPath === 'event program text filter context') {
-        cleanUpEventFilterIfApplicable(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID, 'eventStoredWorkingList');
-    }
+    PRE_VISIT_CLEANUP_BY_CONTEXT[contextOrPath]?.();
+
     const query = CONTEXT_QUERIES[contextOrPath] ?? contextOrPath;
     cy.visit(`#/?${query}`);
 });
