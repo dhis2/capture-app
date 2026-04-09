@@ -1,15 +1,16 @@
 import moment from 'moment';
 import {
+    type BooleanValueFilterData,
     dateFilterTypes,
     filterTypesObject,
+    type NumericRangeFilterData,
+    type TextValueFilterData,
+    type TimeRangeFilterData,
+    type OrgUnitValueFilterData,
+    type AbsoluteDateFilterData,
+    type RelativeDateFilterData,
+    type DateTimeAbsoluteFilterData,
 } from '../../../../WorkingListsBase';
-import type { TextValueFilterData } from '../../../../../FiltersForTypes/Text/text.types';
-import type { NumericRangeFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
-import type { TimeRangeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
-import type { BooleanValueFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
-import type { OrgUnitValueFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
-import type { AbsoluteDateFilterData, RelativeDateFilterData } from '../../../../../FiltersForTypes/Date/date.types';
-import type { DateTimeAbsoluteFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
