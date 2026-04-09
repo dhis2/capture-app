@@ -93,12 +93,11 @@ const getDateFilter = (dateFilter: AbsoluteDateFilterData | RelativeDateFilterDa
 
 const getDateTimeFilter = (dateFilter: DateTimeAbsoluteFilterData): ApiDataFilterDate => ({
     dateFilter: {
-            type: dateFilterTypes.ABSOLUTE,
-            startDate: dateFilter.ge ?? undefined,
-            endDate: dateFilter.le ?? undefined,
-        },
-    };
-};
+        type: dateFilterTypes.ABSOLUTE,
+        startDate: dateFilter.ge ?? undefined,
+        endDate: dateFilter.le ?? undefined,
+    },
+});
 
 const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
     assignedUserMode: filter.assignedUserMode,
