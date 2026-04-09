@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
-import type { EmptyValueFilterData } from '../../../../../FiltersForTypes/EmptyValue/emptyValue.types';
 import type { ApiDataFilterOptionSet } from '../../../types';
 import type { OptionSetFilterData } from '../../../../WorkingListsBase';
 
@@ -24,9 +23,11 @@ const converterByType = {
 };
 
 export const convertValue = (
-    filter: Exclude<OptionSetFilterData, EmptyValueFilterData>,
+    filter: OptionSetFilterData,
     type: keyof typeof dataElementTypes,
-): ApiDataFilterOptionSet => ({
-    in: filter.values
-        .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
-});
+): ApiDataFilterOptionSet | null => {
+    if ('isEmpty' in filter) return null;
+    return {
+        in: filter.values.map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
+    };
+};
