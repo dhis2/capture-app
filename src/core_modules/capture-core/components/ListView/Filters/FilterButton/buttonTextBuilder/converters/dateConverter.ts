@@ -1,8 +1,11 @@
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
-import { mainOptionTranslatedTexts } from '../../../../../FiltersForTypes';
-import type { AbsoluteDateFilterData, DateFilterData } from '../../../../../FiltersForTypes';
+import {
+    mainOptionTranslatedTexts,
+    type DateFilterData,
+    type AbsoluteDateFilterData,
+} from '../../../../../FiltersForTypes';
 
 function translateAbsoluteDate(filter: AbsoluteDateFilterData): string {
     let appliedText = '';

@@ -42,7 +42,10 @@ export const convertToEventFilterQuery = ({
             }
 
             if (filter.usingOptionSet) {
-                return { ...getApiOptionSetFilter(filter, element.type), dataItem: key };
+                return {
+                    ...getApiOptionSetFilter(filter, element.type),
+                    dataItem: key,
+                };
             }
 
             return {

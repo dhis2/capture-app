@@ -26,10 +26,9 @@ const converterByType: any = {
     [dataElementTypes.TRUE_ONLY]: () => 'true',
 };
 
-export const getApiOptionSetFilter = (
-    filter: OptionSetFilterData,
-    type: keyof typeof dataElementTypes,
-): ApiDataFilterOptionSet => ({
-    in: filter.values
-        .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
-});
+export const getApiOptionSetFilter =
+    (filter: OptionSetFilterData, type: keyof typeof dataElementTypes): ApiDataFilterOptionSet => ({
+        in: filter
+            .values
+            .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
+    });

@@ -3,7 +3,7 @@ export { BooleanFilter } from './Boolean';
 export { DateFilter } from './Date';
 export { DateTimeFilter } from './DateTime';
 export { EmptyOnlyFilter } from './EmptyOnly';
-export { EmptyValueFilterCheckboxes } from './EmptyValue';
+export { EmptyValueFilterCheckboxes, isEmptyFilterData } from './EmptyValue';
 export { NumericFilter } from './Numeric';
 export { OptionSetFilter } from './OptionSet';
 export { OrgUnitFilter } from './OrgUnit';
@@ -17,7 +17,7 @@ export { dateFilterTypes } from './Date/date.const';
 export { mainOptionTranslatedTexts } from './Date/options';
 
 export type { AssigneeFilterData } from './Assignee/assignee.types';
-export type { BooleanFilterData } from './Boolean/boolean.types';
+export type { BooleanFilterData, BooleanFilter } from './Boolean/boolean.types';
 export type {
     AbsoluteDateFilterData,
     DateFilterData,

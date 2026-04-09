@@ -1,9 +1,5 @@
-import type { TextFilter } from '../../../../../FiltersForTypes/Text/text.types';
-import { isEmptyFilterData } from '../../../../../FiltersForTypes/EmptyValue';
+import type { TextFilterData } from '../../../../../FiltersForTypes/Text/text.types';
 
-export function convertText(filter: TextFilter): string {
-    if (isEmptyFilterData(filter)) {
-        return String(filter.value);
-    }
+export function convertText(filter: TextFilterData): string {
     return filter.value;
 }
