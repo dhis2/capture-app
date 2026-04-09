@@ -45,6 +45,7 @@ export type {
     TrueOnlyFilter,
     TrueOnlyFilterData,
     UpdateFilter,
+    UsernameFilter,
     UsernameFilterData,
 } from '../../ListView';
 export type {

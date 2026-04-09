@@ -10,6 +10,4 @@ export type NumericFilter = NumericFilterData | EmptyValueFilterData;
 export type Value = {
     min?: string | null;
     max?: string | null;
-    isEmpty?: boolean;
-    value?: string;
 } | string | null | undefined;

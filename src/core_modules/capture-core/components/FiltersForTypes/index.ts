@@ -33,7 +33,7 @@ export type { OrgUnitFilterData } from './OrgUnit/orgUnit.types';
 export type { TextFilterData } from './Text/text.types';
 export type { TimeFilterData } from './Time/time.types';
 export type { TrueOnlyFilterData } from './TrueOnly/trueOnly.types';
-export type { UsernameFilterData, UsernameValueFilterData } from './Username/username.types';
+export type { UsernameFilterData } from './Username/username.types';
 export type { FilterData, FilterDataInput, UpdatableFilterContent } from './types';
 
 export type { Options } from '../FormFields/Options/SelectBoxes';

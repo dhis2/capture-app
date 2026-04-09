@@ -1,10 +1,10 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
-export type UsernameValueFilterData = {
+export type UsernameFilterData = {
     value: string;
 };
 
-export type UsernameFilterData = UsernameValueFilterData | EmptyValueFilterData;
+export type UsernameFilter = UsernameFilterData | EmptyValueFilterData;
 
 export type Value = string | null | undefined;
 

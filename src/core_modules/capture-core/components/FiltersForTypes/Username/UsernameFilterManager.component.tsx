@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { UsernameFilter } from './UsernameFilter.component';
+import { UsernameFilter as UsernameFilterInput } from './UsernameFilter.component';
 import { getEmptyValueFilterValue } from '../EmptyValue';
-import type { UsernameFilterData, Value } from './username.types';
+import type { UsernameFilter, Value } from './username.types';
 
 type Props = {
-    filter: UsernameFilterData | null | undefined;
+    filter: UsernameFilter | null | undefined;
     filterTypeRef: (instance: any) => void;
     handleCommitValue: (value?: Value) => void;
     onUpdate: (updatedValue: Value) => void;
@@ -15,7 +15,7 @@ type State = {
 };
 
 export class UsernameFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: UsernameFilterData | null | undefined): State {
+    static calculateDefaultState(filter: UsernameFilter | null | undefined): State {
         if (filter && 'isEmpty' in filter) {
             return { value: getEmptyValueFilterValue(filter) };
         }
@@ -38,7 +38,7 @@ export class UsernameFilterManager extends React.Component<Props, State> {
     render() {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
         return (
-            <UsernameFilter
+            <UsernameFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

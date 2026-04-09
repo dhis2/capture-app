@@ -22,3 +22,4 @@ export type { OptionSetFilter } from '../FiltersForTypes/OptionSet/optionSet.typ
 export type { OrgUnitFilter } from '../FiltersForTypes/OrgUnit/orgUnit.types';
 export type { TextFilter } from '../FiltersForTypes/Text/text.types';
 export type { TrueOnlyFilter } from '../FiltersForTypes/TrueOnly/trueOnly.types';
+export type { UsernameFilter } from '../FiltersForTypes/Username/username.types';
