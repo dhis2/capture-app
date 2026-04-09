@@ -16,7 +16,11 @@ import {
     convertOrgUnit,
 } from './filterConverters';
 import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
-import { API_NOT_EMPTY_VALUE_FILTER, API_EMPTY_VALUE_FILTER } from '../../../../FiltersForTypes/EmptyValue';
+import {
+    API_NOT_EMPTY_VALUE_FILTER,
+    API_EMPTY_VALUE_FILTER,
+    isEmptyFilterData,
+} from '../../../../FiltersForTypes/EmptyValue';
 
 const mappersForTypes = {
     [filterTypesObject.AGE]: convertDate,
@@ -54,7 +58,7 @@ function convertFilter(
     },
     searchOperator?: string,
 ) {
-    if ('isEmpty' in sourceValue) {
+    if (sourceValue != null && typeof sourceValue === 'object' && isEmptyFilterData(sourceValue)) {
         return sourceValue.isEmpty ? API_EMPTY_VALUE_FILTER : API_NOT_EMPTY_VALUE_FILTER;
     }
     if (sourceValue && sourceValue.usingOptionSet) {

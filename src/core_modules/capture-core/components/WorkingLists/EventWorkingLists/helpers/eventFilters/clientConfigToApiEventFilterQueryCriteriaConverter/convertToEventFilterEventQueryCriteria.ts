@@ -26,7 +26,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
-import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import { isEmptyFilterData, toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 type ColumnForConverterBase = {
     id: string,
@@ -152,7 +152,7 @@ const typeConvertFilters = (filters: any, columns: ColumnsForConverter) => Objec
             return null;
         }
 
-        if ('isEmpty' in filter) {
+        if (isEmptyFilterData(filter)) {
             return { ...toApiEmptyValueFilter(filter), dataItem: key };
         }
 

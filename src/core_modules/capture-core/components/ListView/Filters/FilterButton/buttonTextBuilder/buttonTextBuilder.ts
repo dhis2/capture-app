@@ -10,6 +10,7 @@ import {
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
 import type { FilterData, OptionSetFilterData, Options } from '../../../../FiltersForTypes';
+import { isEmptyFilterData } from '../../../../FiltersForTypes/EmptyValue';
 import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes: any = {
@@ -54,7 +55,7 @@ export function buildButtonText(
     type: typeof filterTypesObject[keyof typeof filterTypesObject],
     options?: Options | null,
 ): string {
-    if ('isEmpty' in filter && filter.value) {
+    if (isEmptyFilterData(filter) && filter.value) {
         return String(filter.value);
     }
 

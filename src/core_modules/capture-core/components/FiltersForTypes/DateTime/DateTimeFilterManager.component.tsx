@@ -2,7 +2,7 @@ import * as React from 'react';
 import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateTimeFilter as DateTimeFilterInput } from './DateTimeFilter.component';
-import { getEmptyValueFilterValue } from '../EmptyValue';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 import type { DateTimeFilter, Value } from './dateTime.types';
 
 type Props = {
@@ -32,7 +32,7 @@ function extractTime(isoDatetime?: string | null): string | undefined {
 
 export class DateTimeFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter?: DateTimeFilter | null): Value {
-        if (filter && 'isEmpty' in filter) {
+        if (filter && isEmptyFilterData(filter)) {
             return getEmptyValueFilterValue(filter);
         }
 

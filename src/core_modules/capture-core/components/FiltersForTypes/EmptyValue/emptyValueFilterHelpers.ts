@@ -9,6 +9,9 @@ import type { EmptyValueFilterData } from './emptyValue.types';
 export const isEmptyValueFilter = (value?: string | null): boolean =>
     value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
 
+export const isEmptyFilterData = (filter: Record<string, unknown>): filter is EmptyValueFilterData =>
+    'isEmpty' in filter;
+
 export const getEmptyValueFilterValue = (filter: { isEmpty: boolean }): string => (
     filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER
 );

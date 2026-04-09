@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TrueOnlyFilter as TrueOnlyFilterInput } from './TrueOnlyFilter.component';
-import { getEmptyValueFilterValue } from '../EmptyValue';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 import type { TrueOnlyFilter } from './trueOnly.types';
 
 type Props = {
@@ -15,7 +15,7 @@ type State = {
 
 export class TrueOnlyFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: TrueOnlyFilter | null) {
-        if (filter && 'isEmpty' in filter) {
+        if (filter && isEmptyFilterData(filter)) {
             return { value: getEmptyValueFilterValue(filter) };
         }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { OptionSetFilter as OptionSetFilterInput } from './OptionSetFilter.component';
-import { getEmptyValueFilterValue } from '../EmptyValue';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 import type { OptionSetFilter } from './optionSet.types';
 
 type Props = {
@@ -20,7 +20,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
             return undefined;
         }
 
-        if ('isEmpty' in filter) {
+        if (isEmptyFilterData(filter)) {
             return getEmptyValueFilterValue(filter);
         }
 

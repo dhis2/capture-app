@@ -1,13 +1,13 @@
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
-import type { OrgUnitFilterData } from './orgUnit.types';
+import { isEmptyFilterData } from '../EmptyValue';
+import type { OrgUnitFilter } from './orgUnit.types';
 
-export const useOrgUnitFilterButtonText = (filter: OrgUnitFilterData | null): string | undefined => {
-    const isEmptyFilter = filter != null && 'isEmpty' in filter;
-    const orgUnitIdToFetch = filter && !isEmptyFilter && filter.value && !filter.name ? filter.value : null;
-    const { displayName } = useOrgUnitNameWithAncestors(orgUnitIdToFetch);
+export const useOrgUnitFilterButtonText = (filter: OrgUnitFilter | null): string | undefined => {
+    const orgUnit = filter && !isEmptyFilterData(filter) ? filter : null;
+    const { displayName } = useOrgUnitNameWithAncestors(orgUnit && !orgUnit.name ? orgUnit.value : null);
 
     if (!filter) return undefined;
-    if (isEmptyFilter) return filter.value;
+    if (isEmptyFilterData(filter)) return filter.value;
     if (filter.value == null) return undefined;
     return filter.name ?? displayName ?? filter.value;
 };

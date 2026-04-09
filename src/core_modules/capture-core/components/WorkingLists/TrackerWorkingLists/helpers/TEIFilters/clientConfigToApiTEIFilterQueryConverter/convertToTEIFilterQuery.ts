@@ -2,7 +2,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { convertValue as getApiOptionSetFilter } from './optionSet';
 import { getFilterByType } from './convertors';
-import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import { isEmptyFilterData, toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 
 export const convertToTEIFilterAttributes = ({
     filters,
@@ -33,7 +33,7 @@ export const convertToTEIFilterAttributes = ({
                 return null;
             }
 
-            if ('isEmpty' in filter) {
+            if (isEmptyFilterData(filter)) {
                 return { ...toApiEmptyValueFilter(filter), attribute: key };
             }
 
