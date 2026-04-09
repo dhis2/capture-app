@@ -7,7 +7,7 @@ import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from '../Date/date.types';
-import type { DateTimeValue, Value } from './dateTime.types';
+import type { DateTimeFilterProps, DateTimeValue, Value } from './dateTime.types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
 import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
@@ -41,14 +41,7 @@ const styles: Readonly<any> = (theme: any) => {
     };
 };
 
-type OwnProps = {
-    onCommitValue: (value: Value) => void;
-    value: Value;
-    onUpdate?: (commitValue?: any) => void;
-    disableEmptyValueFilter?: boolean;
-};
-
-type Props = OwnProps & WithStyles<typeof styles>;
+type Props = DateTimeFilterProps & WithStyles<typeof styles>;
 
 type State = {
     submitAttempted: boolean;

@@ -1,26 +1,20 @@
 import * as React from 'react';
 import { TrueOnlyFilter as TrueOnlyFilterInput } from './TrueOnlyFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import type { TrueOnlyFilter } from './trueOnly.types';
-
-type Props = {
-    filter: TrueOnlyFilter | null,
-    filterTypeRef: (instance: any) => void,
-    handleCommitValue: () => void,
-};
+import type { TrueOnlyFilter, TrueOnlyFilterManagerProps, Value } from './trueOnly.types';
 
 type State = {
-    value?: Array<string> | string | null,
+    value?: Value,
 };
 
-export class TrueOnlyFilterManager extends React.Component<Props, State> {
+export class TrueOnlyFilterManager extends React.Component<TrueOnlyFilterManagerProps, State> {
     static calculateDefaultState(filter: TrueOnlyFilter | null) {
         if (!filter) return { value: undefined };
         if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
         return { value: filter.value ? ['true'] : undefined };
     }
 
-    constructor(props: Props) {
+    constructor(props: TrueOnlyFilterManagerProps) {
         super(props);
         this.state = TrueOnlyFilterManager.calculateDefaultState(this.props.filter);
     }

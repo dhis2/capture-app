@@ -6,7 +6,7 @@ import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
 import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import { WithEmptyValueFilter, getEmptyValueFilterData, isEmptyValueFilter } from '../EmptyValue';
-import type { PlainProps, Value } from './boolean.types';
+import type { BooleanFilterProps, Value } from './boolean.types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
@@ -14,9 +14,9 @@ const getStyles: Readonly<any> = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
-
-class BooleanFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
+class BooleanFilterPlain extends Component<
+    BooleanFilterProps & WithStyles<typeof getStyles>
+> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value } = this.props;
 
@@ -76,4 +76,4 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     }
 }
 
-export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain) as React.ComponentType<PlainProps>;
+export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain) as React.ComponentType<BooleanFilterProps>;

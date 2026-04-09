@@ -6,8 +6,9 @@ import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
-import type { PlainProps, Value } from './assignee.types';
+import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
+import { getEmptyValueFilterData, isEmptyValueFilter } from '../EmptyValue';
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
@@ -20,7 +21,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type Props = AssigneeFilterProps & WithStyles<typeof getStyles>;
 
 type State = {
     error: string;
@@ -38,12 +39,27 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData() {
         const { value } = this.props;
-        return value && getAssigneeFilterData(value);
+        if (!value) {
+            return null;
+        }
+        if (typeof value === 'string' && isEmptyValueFilter(value)) {
+            return getEmptyValueFilterData(value);
+        }
+        if (typeof value === 'object' && value !== null && 'mode' in value) {
+            return getAssigneeFilterData(value);
+        }
+        return null;
     }
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
+        if (
+            typeof value === 'object' &&
+            value !== null &&
+            'mode' in value &&
+            value.mode === modeKeys.PROVIDED &&
+            !value.provided
+        ) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });
@@ -60,7 +76,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         if (!value) {
             this.props.onCommitValue(null);
         } else {
-            this.props.onCommitValue({ mode: value });
+            this.props.onCommitValue({ mode: value as AssigneeMode });
         }
     }
 
@@ -77,7 +93,10 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     render() {
         const { value, classes } = this.props;
-        const { mode, provided } = value || {};
+        const mode =
+            value && typeof value === 'object' && 'mode' in value ? value.mode : undefined;
+        const provided =
+            value && typeof value === 'object' && 'mode' in value ? value.provided : undefined;
 
         return (
             <div>
@@ -113,4 +132,4 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 }
 
-export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain) as React.ComponentType<PlainProps>;
+export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain) as React.ComponentType<AssigneeFilterProps>;

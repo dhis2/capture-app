@@ -14,7 +14,21 @@ export type DateTimeValue = {
     error?: string | null;
     isValid?: boolean | null;
 };
+
 export type Value = {
     from?: DateTimeValue | null;
     to?: DateTimeValue | null;
 } | string | null;
+
+export type DateTimeFilterProps = {
+    onCommitValue: (value: Value) => void;
+    value: Value;
+    onUpdate?: (commitValue?: Value) => void;
+    disableEmptyValueFilter?: boolean;
+};
+
+export type DateTimeFilterManagerProps = {
+    filter?: DateTimeFilter | null;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: (value?: Value | null) => void;
+};

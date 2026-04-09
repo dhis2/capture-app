@@ -14,7 +14,7 @@ import {
 import { NumericFilterInput } from './NumericFilterInput.component';
 import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
-import type { Value } from './numeric.types';
+import type { NumericFilterProps, Value } from './numeric.types';
 import type { UpdatableFilterContent } from '../types';
 import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
@@ -40,20 +40,12 @@ const getStyles: any = (theme: any) => ({
     },
 });
 
-type Props = {
-    onCommitValue: (value: Value, isBlur?: boolean) => void,
-    onUpdate: (commitValue?: any) => void,
-    value: Value,
-    type: typeof dataElementTypes[keyof typeof dataElementTypes],
-    disableEmptyValueFilter?: boolean,
-};
-
 type State = {
     committedValue: Value;
 };
 
 class NumericFilterPlain
-    extends Component<Props & WithStyles<typeof getStyles>, State>
+    extends Component<NumericFilterProps & WithStyles<typeof getStyles>, State>
     implements UpdatableFilterContent<Value> {
     static validateField(value: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
         if (!value) {
@@ -85,7 +77,7 @@ class NumericFilterPlain
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
     }
 
-    constructor(props: Props & WithStyles<typeof getStyles>) {
+    constructor(props: NumericFilterProps & WithStyles<typeof getStyles>) {
         super(props);
         this.state = {
             committedValue: props.value,

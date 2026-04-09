@@ -12,6 +12,7 @@ export type OrgUnitFilterData = {
 };
 
 export type OrgUnitFilter = OrgUnitFilterData | EmptyValueFilterData;
+
 export type Value = OrgUnitValue | string | null | undefined;
 
 export type OrgUnitFilterProps = {
@@ -20,4 +21,11 @@ export type OrgUnitFilterProps = {
     onClearValue?: () => void;
     value: Value;
     disableEmptyValueFilter?: boolean;
+};
+
+export type OrgUnitFilterManagerProps = {
+    filter: OrgUnitFilter | null | undefined;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: () => void;
+    onUpdate: (updatedValue: Value) => void;
 };

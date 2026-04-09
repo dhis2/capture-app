@@ -1,34 +1,27 @@
 import * as React from 'react';
 import { OptionSetFilter as OptionSetFilterInput } from './OptionSetFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import type { OptionSetFilter } from './optionSet.types';
-
-type Props = {
-    filter: OptionSetFilter | null,
-    filterTypeRef: (instance: any) => void,
-    singleSelect?: boolean | null,
-    handleCommitValue: () => void,
-};
+import type { OptionSetFilter, OptionSetFilterManagerProps, Value } from './optionSet.types';
 
 type State = {
-    value?: Array<any> | string | null,
+    value?: Value,
 };
 
-export class OptionSetFilterManager extends React.Component<Props, State> {
+export class OptionSetFilterManager extends React.Component<OptionSetFilterManagerProps, State> {
     static calculateDefaultValueState(filter: OptionSetFilter | null, singleSelect: boolean) {
         if (!filter) return undefined;
         if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
         return singleSelect ? filter.values[0] : filter.values;
     }
 
-    constructor(props: Props) {
+    constructor(props: OptionSetFilterManagerProps) {
         super(props);
         this.state = {
             value: OptionSetFilterManager.calculateDefaultValueState(this.props.filter, !!this.props.singleSelect),
         };
     }
 
-    handleCommitValue = (value: Array<any> | string | null) => {
+    handleCommitValue = (value: Value) => {
         this.setState({
             value,
         });

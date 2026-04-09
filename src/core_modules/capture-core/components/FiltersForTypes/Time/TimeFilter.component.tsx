@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { cx } from '@emotion/css';
 import type { UpdatableFilterContent } from '../types';
-import type { Value } from './time.types';
+import type { TimeFilterProps, Value } from './time.types';
 import { getTimeFilterData } from './timeFilterDataGetter';
 import { TimeFilterInput } from './TimeFilterInput.component';
 import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
@@ -45,14 +45,7 @@ const getStyles: Readonly<any> = (theme: any) => {
     };
 };
 
-type OwnProps = {
-    onCommitValue: (value: Value) => void;
-    value: Value;
-    onUpdate: (commitValue?: Value) => void;
-    disableEmptyValueFilter?: boolean;
-};
-
-type Props = OwnProps & WithStyles<typeof getStyles>;
+type Props = TimeFilterProps & WithStyles<typeof getStyles>;
 
 type State = {
     committedValue: Value;

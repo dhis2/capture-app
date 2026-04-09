@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { PlainProps, Value } from './optionSet.types';
+import type { OptionSetFilterProps, Value } from './optionSet.types';
 import { WithEmptyValueFilter } from '../EmptyValue';
 
 export const getStyles = (theme: any) => ({
@@ -17,7 +17,7 @@ export const getStyles = (theme: any) => ({
     },
 }) as const;
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type Props = OptionSetFilterProps & WithStyles<typeof getStyles>;
 
 class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {

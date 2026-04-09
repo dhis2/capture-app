@@ -5,20 +5,20 @@ import { DateFilter as DateFilterInput } from './DateFilter.component';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './date.const';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import type { DateFilter, RelativeDateFilterData, AbsoluteDateFilterData, Value } from './date.types';
+import type {
+    DateFilter,
+    DateFilterManagerProps,
+    RelativeDateFilterData,
+    AbsoluteDateFilterData,
+    Value,
+} from './date.types';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
-
-type Props = {
-    filter?: DateFilter | null;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any, isBlur?: boolean) => void;
-};
 
 type State = {
     value?: Value;
 };
 
-export class DateFilterManager extends React.Component<Props, State> {
+export class DateFilterManager extends React.Component<DateFilterManagerProps, State> {
     static convertDateForEdit(rawValue: string) {
         const localDate = convertIsoToLocalCalendar(rawValue);
         return localDate;
@@ -92,7 +92,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         return DateFilterManager.calculateAbsoluteRangeValueState(filter);
     }
 
-    constructor(props: Props) {
+    constructor(props: DateFilterManagerProps) {
         super(props);
         this.state = {
             value: DateFilterManager.calculateDefaultValueState(this.props.filter),

@@ -5,7 +5,7 @@ import { Radio } from '@dhis2/ui';
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
 import type { UpdatableFilterContent } from '../types';
-import type { DateValue, Value } from './date.types';
+import type { DateFilterProps, DateValue, Value } from './date.types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
@@ -35,14 +35,7 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-type OwnProps = {
-    onCommitValue: (value?: Value, isBlur?: boolean) => void;
-    value: Value;
-    onUpdate?: () => void;
-    disableEmptyValueFilter?: boolean;
-};
-
-type Props = OwnProps & WithStyles<typeof styles>;
+type Props = DateFilterProps & WithStyles<typeof styles>;
 
 type State = {
     submitAttempted: boolean;

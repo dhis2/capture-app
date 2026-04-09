@@ -1,14 +1,7 @@
 import * as React from 'react';
 import { NumericFilter as NumericFilterInput } from './NumericFilter.component';
-import type { NumericFilter } from './numeric.types';
+import type { NumericFilter, NumericFilterManagerProps } from './numeric.types';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-
-type Props = {
-    filter: NumericFilter | null,
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any, isBlur?: boolean) => void,
-    onUpdate: (commitValue?: any) => void,
-};
 
 type State = {
     value: {
@@ -17,7 +10,7 @@ type State = {
     } | string | null | undefined;
 };
 
-export class NumericFilterManager extends React.Component<Props, State> {
+export class NumericFilterManager extends React.Component<NumericFilterManagerProps, State> {
     static calculateDefaultState(filter: NumericFilter | null) {
         if (!filter) return undefined;
         if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
@@ -28,7 +21,7 @@ export class NumericFilterManager extends React.Component<Props, State> {
         };
     }
 
-    constructor(props: Props) {
+    constructor(props: NumericFilterManagerProps) {
         super(props);
         this.state = {
             value: NumericFilterManager.calculateDefaultState(this.props.filter),

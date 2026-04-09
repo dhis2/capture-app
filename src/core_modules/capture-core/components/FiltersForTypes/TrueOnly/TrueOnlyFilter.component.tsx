@@ -6,7 +6,7 @@ import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { PlainProps, Value } from './trueOnly.types';
+import type { TrueOnlyFilterProps, Value } from './trueOnly.types';
 import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
 
 export const getStyles = (theme: any) => ({
@@ -15,7 +15,7 @@ export const getStyles = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type Props = TrueOnlyFilterProps & WithStyles<typeof getStyles>;
 
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {

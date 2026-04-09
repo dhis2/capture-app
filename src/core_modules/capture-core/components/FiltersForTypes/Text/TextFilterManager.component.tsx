@@ -1,32 +1,25 @@
 import * as React from 'react';
 import { TextFilter as TextFilterInput } from './TextFilter.component';
-import type { TextFilter } from './text.types';
+import type { TextFilter, TextFilterManagerProps, Value } from './text.types';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 
-type Props = {
-    filter: TextFilter | null | undefined;
-    filterTypeRef: (instance: unknown) => void;
-    handleCommitValue: (value?: string | null, isBlur?: boolean) => void;
-    onUpdate: (commitValue?: any) => void;
-};
-
 type State = {
-    value: string | null | undefined;
+    value: Value;
 };
 
-export class TextFilterManager extends React.Component<Props, State> {
+export class TextFilterManager extends React.Component<TextFilterManagerProps, State> {
     static calculateDefaultState(filter: TextFilter | null | undefined) {
         if (!filter) return { value: undefined };
         if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
         return { value: filter.value || undefined };
     }
 
-    constructor(props: Props) {
+    constructor(props: TextFilterManagerProps) {
         super(props);
         this.state = TextFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleCommitValue = (value: any, isBlur?: boolean) => {
+    handleCommitValue = (value: Value, isBlur?: boolean) => {
         this.setState({ value });
         this.props.handleCommitValue?.(value, isBlur);
     }

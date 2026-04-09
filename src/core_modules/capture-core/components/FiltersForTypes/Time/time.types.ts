@@ -6,7 +6,21 @@ export type TimeFilterData = {
 };
 
 export type TimeFilter = TimeFilterData | EmptyValueFilterData;
+
 export type Value = {
     from?: string | null;
     to?: string | null;
 } | string | null;
+
+export type TimeFilterProps = {
+    onCommitValue: (value: Value) => void;
+    value: Value;
+    onUpdate: (commitValue?: Value) => void;
+    disableEmptyValueFilter?: boolean;
+};
+
+export type TimeFilterManagerProps = {
+    filter?: TimeFilter | null;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: (value?: Value | null) => void;
+};

@@ -30,3 +30,16 @@ export type Value = {
     start?: string;
     end?: string;
 } | string | undefined;
+
+export type DateFilterProps = {
+    onCommitValue: (value?: Value, isBlur?: boolean) => void;
+    value: Value;
+    onUpdate?: () => void;
+    disableEmptyValueFilter?: boolean;
+};
+
+export type DateFilterManagerProps = {
+    filter?: DateFilter | null;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: (value?: Value, isBlur?: boolean) => void;
+};

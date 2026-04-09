@@ -7,14 +7,9 @@ import {
     NOT_EMPTY_VALUE_FILTER,
     EmptyValueFilterCheckboxes,
 } from '../EmptyValue';
-import type { Value } from './emptyOnly.types';
+import type { EmptyOnlyFilterProps, Value } from './emptyOnly.types';
 
-type Props = {
-    value?: Value;
-    onCommitValue: (value?: Value | null) => void;
-};
-
-export class EmptyOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+export class EmptyOnlyFilter extends Component<EmptyOnlyFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
 

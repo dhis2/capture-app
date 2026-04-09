@@ -1,20 +1,13 @@
 import * as React from 'react';
 import { UsernameFilter as UsernameFilterInput } from './UsernameFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import type { UsernameFilter, Value } from './username.types';
-
-type Props = {
-    filter: UsernameFilter | null | undefined;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: Value) => void;
-    onUpdate: (updatedValue: Value) => void;
-};
+import type { UsernameFilter, UsernameFilterManagerProps, Value } from './username.types';
 
 type State = {
     value: Value;
 };
 
-export class UsernameFilterManager extends React.Component<Props, State> {
+export class UsernameFilterManager extends React.Component<UsernameFilterManagerProps, State> {
     static calculateDefaultState(filter: UsernameFilter | null | undefined): State {
         if (!filter) return { value: undefined };
         if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
@@ -22,7 +15,7 @@ export class UsernameFilterManager extends React.Component<Props, State> {
         return { value: filter.value };
     }
 
-    constructor(props: Props) {
+    constructor(props: UsernameFilterManagerProps) {
         super(props);
         this.state = UsernameFilterManager.calculateDefaultState(this.props.filter);
     }

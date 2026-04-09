@@ -3,13 +3,7 @@ import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateTimeFilter as DateTimeFilterInput } from './DateTimeFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import type { DateTimeFilter, Value } from './dateTime.types';
-
-type Props = {
-    filter?: DateTimeFilter | null;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: Value | null) => void;
-};
+import type { DateTimeFilter, DateTimeFilterManagerProps, Value } from './dateTime.types';
 
 type State = {
     value?: Value;
@@ -30,7 +24,7 @@ function extractTime(isoDatetime?: string | null): string | undefined {
     return moment(isoDatetime).format('HH:mm');
 }
 
-export class DateTimeFilterManager extends React.Component<Props, State> {
+export class DateTimeFilterManager extends React.Component<DateTimeFilterManagerProps, State> {
     static calculateDefaultState(filter?: DateTimeFilter | null): Value {
         if (!filter) return null;
         if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
@@ -52,7 +46,7 @@ export class DateTimeFilterManager extends React.Component<Props, State> {
         return null;
     }
 
-    constructor(props: Props) {
+    constructor(props: DateTimeFilterManagerProps) {
         super(props);
         this.state = {
             value: DateTimeFilterManager.calculateDefaultState(this.props.filter),

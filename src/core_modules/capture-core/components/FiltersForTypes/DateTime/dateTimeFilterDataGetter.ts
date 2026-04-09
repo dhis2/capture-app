@@ -37,8 +37,11 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
 }
 
 export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilter | null {
+    if (typeof value === 'string' && isEmptyValueFilter(value)) {
+        return getEmptyValueFilterData(value);
+    }
     if (typeof value === 'string') {
-        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
+        return null;
     }
 
     const filterData: DateTimeFilterData = { type: dateFilterTypes.ABSOLUTE };

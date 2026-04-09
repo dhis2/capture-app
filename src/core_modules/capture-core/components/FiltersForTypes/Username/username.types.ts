@@ -14,3 +14,10 @@ export type UsernameFilterProps = {
     value: Value;
     disableEmptyValueFilter?: boolean;
 };
+
+export type UsernameFilterManagerProps = {
+    filter: UsernameFilter | null | undefined;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: (value?: Value) => void;
+    onUpdate: (updatedValue: Value) => void;
+};

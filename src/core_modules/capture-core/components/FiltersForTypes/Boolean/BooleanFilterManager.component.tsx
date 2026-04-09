@@ -1,20 +1,13 @@
 import * as React from 'react';
 import { BooleanFilter as BooleanFilterInput } from './BooleanFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import type { BooleanFilter, Value } from './boolean.types';
-
-type Props = {
-    filter: BooleanFilter | null,
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void,
-    singleSelect: boolean,
-};
+import type { BooleanFilter, BooleanFilterManagerProps, Value } from './boolean.types';
 
 type State = {
-    value: Value | undefined,  // boolean for single-select (e.g. FOLLOW_UP), Array<boolean> for multi-select
+    value: Value | undefined,
 };
 
-export class BooleanFilterManager extends React.Component<Props, State> {
+export class BooleanFilterManager extends React.Component<BooleanFilterManagerProps, State> {
     static calculateDefaultValueState(
         filter: BooleanFilter | null,
         singleSelect: boolean,
@@ -24,7 +17,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         return singleSelect ? filter.values[0] : filter.values;
     }
 
-    constructor(props: Props) {
+    constructor(props: BooleanFilterManagerProps) {
         super(props);
         this.state = {
             value: BooleanFilterManager.calculateDefaultValueState(this.props.filter, this.props.singleSelect),

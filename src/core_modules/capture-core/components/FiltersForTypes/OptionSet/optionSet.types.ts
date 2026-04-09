@@ -10,10 +10,17 @@ export type OptionSetFilter = OptionSetFilterData | EmptyValueFilterData;
 
 export type Value = Array<string> | string | null | undefined;
 
-export type PlainProps = {
+export type OptionSetFilterProps = {
     options: Options;
     value: Value;
     onCommitValue: (value: Value) => void;
     singleSelect?: boolean;
     disableEmptyValueFilter?: boolean;
+};
+
+export type OptionSetFilterManagerProps = {
+    filter: OptionSetFilter | null;
+    filterTypeRef: (instance: unknown) => void;
+    handleCommitValue: () => void;
+    singleSelect: boolean;
 };
