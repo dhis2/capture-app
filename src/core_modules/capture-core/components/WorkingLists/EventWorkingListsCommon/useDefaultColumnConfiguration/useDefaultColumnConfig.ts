@@ -63,7 +63,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
             type,
             header: formName,
             options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-            multiValueFilter: !!optionSet,
+            multiValueFilter: !!optionSet || type === elementTypeKeys.BOOLEAN,
         })) as Array<MetadataColumnConfig>;
 
 export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs =>

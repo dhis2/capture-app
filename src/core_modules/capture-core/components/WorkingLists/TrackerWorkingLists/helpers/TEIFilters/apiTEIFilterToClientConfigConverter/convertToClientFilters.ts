@@ -9,6 +9,7 @@ import {
     type NumericFilterData,
     OrgUnitFilterData,
 } from '../../../../WorkingListsBase';
+import type { BooleanValueFilterData } from '../../../../../FiltersForTypes/Boolean';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
@@ -47,14 +48,11 @@ const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined
 
 
 // Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
-const getBooleanFilter = (filter: ApiDataFilterBoolean): any => {
+const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanValueFilterData => {
     if (typeof filter === 'boolean') {
         return { values: [filter] };
     }
-    if (filter.in) {
-        return { values: filter.in.map(value => value === 'true') };
-    }
-    return undefined;
+    return { values: filter.in.map(value => value === 'true') };
 };
 
 const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({

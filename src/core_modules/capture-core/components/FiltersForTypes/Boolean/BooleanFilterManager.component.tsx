@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { BooleanFilterData } from './boolean.types';
+import type { BooleanFilterData, Value } from './boolean.types';
 
 type Props = {
     filter: BooleanFilterData | null,
@@ -11,14 +11,13 @@ type Props = {
 };
 
 type State = {
-    value: Array<string> | string | boolean | null | undefined,
+    value: Value | undefined,
 };
 
 export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(
         filter: BooleanFilterData | null,
-        singleSelect: boolean,
-    ): (Array<string> | string | null | boolean | undefined) {
+    ): Value | undefined {
         if (!filter) {
             return undefined;
         }
@@ -27,17 +26,17 @@ export class BooleanFilterManager extends React.Component<Props, State> {
             return filter.isEmpty ? EMPTY_VALUE_FILTER : NOT_EMPTY_VALUE_FILTER;
         }
 
-        return singleSelect ? filter.values[0] : filter.values;
+        return filter.values;
     }
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            value: BooleanFilterManager.calculateDefaultValueState(this.props.filter, this.props.singleSelect),
+            value: BooleanFilterManager.calculateDefaultValueState(this.props.filter),
         };
     }
 
-    handleCommitValue = (value?: Array<string> | string | boolean| null) => {
+    handleCommitValue = (value: Value) => {
         this.setState({
             value,
         });

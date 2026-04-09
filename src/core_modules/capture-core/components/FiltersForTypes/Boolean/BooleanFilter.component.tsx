@@ -3,12 +3,9 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
-import {
-    getMultiSelectBooleanFilterData,
-    getSingleSelectBooleanFilterData,
-} from './booleanFilterDataGetter';
+import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import { WithEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter, getEmptyValueFilterData, isEmptyValueFilter } from '../EmptyValue';
 import type { PlainProps, Value } from './boolean.types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
@@ -21,17 +18,17 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class BooleanFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const { value, allowMultiple } = this.props;
+        const { value } = this.props;
 
-        if (!value && value !== false) {
+        if (!value) {
             return null;
         }
 
-        if (!allowMultiple) {
-            return getSingleSelectBooleanFilterData(value);
+        if (typeof value === 'string') {
+            return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
         }
 
-        return getMultiSelectBooleanFilterData(value);
+        return getBooleanFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line

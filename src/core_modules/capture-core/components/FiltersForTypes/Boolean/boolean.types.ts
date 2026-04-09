@@ -1,12 +1,12 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
 export type BooleanValueFilterData = {
-    values: Array<string>;
+    values: Array<boolean>;
 };
 
 export type BooleanFilterData = BooleanValueFilterData | EmptyValueFilterData;
 
-export type Value = Array<any> | string | boolean | null;
+export type Value = Array<boolean> | string | null;
 
 export type PlainProps = {
     value?: Value;
