@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { OptionSetFilter } from './OptionSetFilter.component';
+import { OptionSetFilter as OptionSetFilterInput } from './OptionSetFilter.component';
 import { getEmptyValueFilterValue } from '../EmptyValue';
-import type { OptionSetFilterData } from './optionSet.types';
+import type { OptionSetFilter } from './optionSet.types';
 
 type Props = {
-    filter: OptionSetFilterData | null,
+    filter: OptionSetFilter | null,
     filterTypeRef: (instance: any) => void,
     singleSelect?: boolean | null,
     handleCommitValue: () => void,
@@ -15,7 +15,7 @@ type State = {
 };
 
 export class OptionSetFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: OptionSetFilterData | null, singleSelect: boolean) {
+    static calculateDefaultValueState(filter: OptionSetFilter | null, singleSelect: boolean) {
         if (!filter) {
             return undefined;
         }
@@ -45,7 +45,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <OptionSetFilter
+            <OptionSetFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

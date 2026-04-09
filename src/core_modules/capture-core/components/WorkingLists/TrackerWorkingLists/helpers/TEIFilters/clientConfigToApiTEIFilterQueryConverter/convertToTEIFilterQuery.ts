@@ -38,9 +38,7 @@ export const convertToTEIFilterAttributes = ({
             }
 
             if (filter.usingOptionSet) {
-                const optionSetFilter = getApiOptionSetFilter(filter, element.type);
-                if (!optionSetFilter) return null;
-                return { ...optionSetFilter, attribute: key };
+                return { ...getApiOptionSetFilter(filter, element.type), attribute: key };
             }
 
             return {

@@ -2,14 +2,13 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { TrueOnlyFilterData } from './trueOnly.types';
+import type { TrueOnlyFilter, TrueOnlyFilterData } from './trueOnly.types';
 
-export function getTrueOnlyFilterData(value?: string): TrueOnlyFilterData {
+export function getTrueOnlyFilterData(value?: string): TrueOnlyFilter {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
         return getEmptyValueFilterData(value);
     }
 
-    return {
-        value: true,
-    };
+    const data: TrueOnlyFilterData = { value: true };
+    return data;
 }

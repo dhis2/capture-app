@@ -1,12 +1,12 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 import type { Options } from '../../FormFields/Options/SelectBoxes';
 
-export type OptionSetValuesFilterData = {
+export type OptionSetFilterData = {
     usingOptionSet: boolean;
     values: Array<any>;
 };
 
-export type OptionSetFilterData = OptionSetValuesFilterData | EmptyValueFilterData;
+export type OptionSetFilter = OptionSetFilterData | EmptyValueFilterData;
 
 export type Value = Array<string> | string | null | undefined;
 

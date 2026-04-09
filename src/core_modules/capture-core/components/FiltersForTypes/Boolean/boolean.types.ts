@@ -1,10 +1,10 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
-export type BooleanValueFilterData = {
+export type BooleanFilterData = {
     values: Array<boolean>;
 };
 
-export type BooleanFilterData = BooleanValueFilterData | EmptyValueFilterData;
+export type BooleanFilter = BooleanFilterData | EmptyValueFilterData;
 
 export type Value = Array<boolean> | boolean | string | null;
 

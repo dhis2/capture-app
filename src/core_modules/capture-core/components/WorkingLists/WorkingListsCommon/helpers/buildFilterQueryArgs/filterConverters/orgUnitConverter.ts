@@ -1,6 +1,6 @@
-import type { OrgUnitValueFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
+import type { OrgUnitFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
 import { escapeString } from '../../../../../../utils/escapeString';
 
-export function convertOrgUnit({ sourceValue }: { sourceValue: OrgUnitValueFilterData }): string {
+export function convertOrgUnit({ sourceValue }: { sourceValue: OrgUnitFilterData }): string {
     return `eq:${escapeString(sourceValue.value)}`;
 }

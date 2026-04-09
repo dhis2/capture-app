@@ -1,37 +1,37 @@
 import moment from 'moment';
 import {
-    type BooleanValueFilterData,
+    type BooleanFilterData,
     dateFilterTypes,
     filterTypesObject,
-    type NumericRangeFilterData,
-    type TextValueFilterData,
-    type TimeRangeFilterData,
-    type OrgUnitValueFilterData,
+    type NumericFilterData,
+    type TextFilterData,
+    type TimeFilterData,
+    type OrgUnitFilterData,
     type AbsoluteDateFilterData,
     type RelativeDateFilterData,
-    type DateTimeAbsoluteFilterData,
+    type DateTimeFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
 import type { ApiDataFilterOrgUnit } from '../../../../EventWorkingLists/types';
 
-const getTextFilter = (filter: TextValueFilterData, element?: { searchOperator?: string }) => {
+const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
     const searchOperator = element?.searchOperator?.toLowerCase() ?? 'like';
     return { [searchOperator]: filter.value };
 };
 
-const getNumericFilter = (filter: NumericRangeFilterData) => ({
+const getNumericFilter = (filter: NumericFilterData) => ({
     ge: filter.ge?.toString() ?? undefined,
     le: filter.le?.toString() ?? undefined,
 });
 
-const getTimeFilter = (filter: TimeRangeFilterData) => ({
+const getTimeFilter = (filter: TimeFilterData) => ({
     ge: filter.ge ?? undefined,
     le: filter.le ?? undefined,
 });
 
-const getBooleanFilter = (filter: BooleanValueFilterData): ApiDataFilterBoolean => ({
+const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
     in: filter.values.map(value => (value ? 'true' : 'false')),
 });
 
@@ -70,11 +70,11 @@ export const getDateFilter = (dateFilter: AbsoluteDateFilterData | RelativeDateF
     };
 };
 
-const getOrgUnitFilter = (filter: OrgUnitValueFilterData): ApiDataFilterOrgUnit => ({
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
     eq: filter.value,
 });
 
-export const getDateTimeFilter = (dateFilter: DateTimeAbsoluteFilterData) => ({
+export const getDateTimeFilter = (dateFilter: DateTimeFilterData) => ({
     dateFilter: {
         type: dateFilterTypes.ABSOLUTE,
         startDate: dateFilter.ge ?? undefined,

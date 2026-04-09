@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { TextFilter } from './TextFilter.component';
-import type { TextFilterData } from './text.types';
+import { TextFilter as TextFilterInput } from './TextFilter.component';
+import type { TextFilter } from './text.types';
 import { getEmptyValueFilterValue } from '../EmptyValue';
 
 type Props = {
-    filter: TextFilterData | null | undefined;
+    filter: TextFilter | null | undefined;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: (value?: string | null, isBlur?: boolean) => void;
     onUpdate: (commitValue?: any) => void;
@@ -15,7 +15,7 @@ type State = {
 };
 
 export class TextFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: TextFilterData | null | undefined) {
+    static calculateDefaultState(filter: TextFilter | null | undefined) {
         if (filter && 'isEmpty' in filter) {
             return { value: getEmptyValueFilterValue(filter) };
         }
@@ -37,7 +37,7 @@ export class TextFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <TextFilter
+            <TextFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

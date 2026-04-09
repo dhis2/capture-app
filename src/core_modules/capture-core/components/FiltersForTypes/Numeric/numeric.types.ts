@@ -1,11 +1,11 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
-export type NumericRangeFilterData = {
+export type NumericFilterData = {
     ge?: number | null,
     le?: number | null,
 };
 
-export type NumericFilterData = NumericRangeFilterData | EmptyValueFilterData;
+export type NumericFilter = NumericFilterData | EmptyValueFilterData;
 
 export type Value = {
     min?: string | null;

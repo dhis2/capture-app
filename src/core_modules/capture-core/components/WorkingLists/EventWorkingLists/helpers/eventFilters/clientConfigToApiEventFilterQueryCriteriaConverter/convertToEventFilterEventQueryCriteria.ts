@@ -6,13 +6,13 @@ import { getApiOptionSetFilter } from './optionSet';
 
 import { filterTypesObject, dateFilterTypes } from '../../../../WorkingListsBase';
 import type { AssigneeFilterData } from '../../../../../FiltersForTypes/Assignee/assignee.types';
-import type { TextValueFilterData } from '../../../../../FiltersForTypes/Text/text.types';
-import type { NumericRangeFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
-import type { TimeRangeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
-import type { BooleanValueFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
-import type { OrgUnitValueFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
+import type { TextFilterData } from '../../../../../FiltersForTypes/Text/text.types';
+import type { NumericFilterData } from '../../../../../FiltersForTypes/Numeric/numeric.types';
+import type { TimeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
+import type { BooleanFilterData } from '../../../../../FiltersForTypes/Boolean/boolean.types';
+import type { OrgUnitFilterData } from '../../../../../FiltersForTypes/OrgUnit/orgUnit.types';
 import type { AbsoluteDateFilterData, RelativeDateFilterData } from '../../../../../FiltersForTypes/Date/date.types';
-import type { DateTimeAbsoluteFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
+import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,
@@ -42,25 +42,25 @@ type ColumnForConverter = MetadataColumnForConverter | MainColumnForConverter;
 
 type ColumnsForConverter = Map<string, ColumnForConverter>;
 
-const getTextFilter = (filter: TextValueFilterData): ApiDataFilterText => ({
+const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
     like: filter.value,
 });
 
-const getOrgUnitFilter = (filter: OrgUnitValueFilterData): ApiDataFilterOrgUnit => ({
+const getOrgUnitFilter = (filter: OrgUnitFilterData): ApiDataFilterOrgUnit => ({
     eq: filter.value,
 });
 
-const getNumericFilter = (filter: NumericRangeFilterData): ApiDataFilterNumeric => ({
+const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
     ge: filter.ge?.toString() ?? undefined,
     le: filter.le?.toString() ?? undefined,
 });
 
-const getTimeFilter = (filter: TimeRangeFilterData): ApiDataFilterNumeric => ({
+const getTimeFilter = (filter: TimeFilterData): ApiDataFilterNumeric => ({
     ge: filter.ge ?? undefined,
     le: filter.le ?? undefined,
 });
 
-const getBooleanFilter = (filter: BooleanValueFilterData): ApiDataFilterBoolean => ({
+const getBooleanFilter = (filter: BooleanFilterData): ApiDataFilterBoolean => ({
     in: filter.values.map(value => (value ? 'true' : 'false')),
 });
 
@@ -91,7 +91,7 @@ const getDateFilter = (dateFilter: AbsoluteDateFilterData | RelativeDateFilterDa
     };
 };
 
-const getDateTimeFilter = (dateFilter: DateTimeAbsoluteFilterData): ApiDataFilterDate => ({
+const getDateTimeFilter = (dateFilter: DateTimeFilterData): ApiDataFilterDate => ({
     dateFilter: {
         type: dateFilterTypes.ABSOLUTE,
         startDate: dateFilter.ge ?? undefined,

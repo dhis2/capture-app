@@ -1,5 +1,5 @@
-import type { TrueOnlyValueFilterData } from '../../../../../FiltersForTypes/TrueOnly/trueOnly.types';
+import type { TrueOnlyFilterData } from '../../../../../FiltersForTypes/TrueOnly/trueOnly.types';
 
-export function convertTrueOnly({ sourceValue }: { sourceValue: TrueOnlyValueFilterData }) {
+export function convertTrueOnly({ sourceValue }: { sourceValue: TrueOnlyFilterData }) {
     return `eq:${sourceValue.value}`;
 }

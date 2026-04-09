@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
-import type { TimeRangeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
+import type { TimeFilterData } from '../../../../../FiltersForTypes/Time/time.types';
 
-export function convertTime(filter: TimeRangeFilterData): string {
+export function convertTime(filter: TimeFilterData): string {
     let appliedText = '';
     const ge = filter.ge ?? '';
     const le = filter.le ?? '';

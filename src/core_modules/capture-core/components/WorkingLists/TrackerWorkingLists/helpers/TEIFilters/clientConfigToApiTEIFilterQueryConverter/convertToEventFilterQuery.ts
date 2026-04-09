@@ -42,9 +42,7 @@ export const convertToEventFilterQuery = ({
             }
 
             if (filter.usingOptionSet) {
-                const optionSetFilter = getApiOptionSetFilter(filter, element.type);
-                if (!optionSetFilter) return null;
-                return { ...optionSetFilter, dataItem: key };
+                return { ...getApiOptionSetFilter(filter, element.type), dataItem: key };
             }
 
             return {

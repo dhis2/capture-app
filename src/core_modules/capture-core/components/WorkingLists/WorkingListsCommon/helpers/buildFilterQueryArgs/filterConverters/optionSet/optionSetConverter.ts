@@ -1,11 +1,11 @@
 import { pipe } from 'capture-core-utils';
 import { convertDataTypeValueToRequest } from './basicDataTypeConverters';
 import { dataElementTypes } from '../../../../../../../metaData';
-import type { OptionSetValuesFilterData } from '../../../../../../FiltersForTypes/OptionSet/optionSet.types';
+import type { OptionSetFilterData } from '../../../../../../FiltersForTypes/OptionSet/optionSet.types';
 import { escapeString } from '../../../../../../../utils/escapeString';
 
 export function convertOptionSet(
-    sourceValue: OptionSetValuesFilterData,
+    sourceValue: OptionSetFilterData,
     type: keyof typeof dataElementTypes,
 ) {
     return pipe(

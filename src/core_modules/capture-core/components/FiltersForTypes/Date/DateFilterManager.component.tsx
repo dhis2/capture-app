@@ -1,15 +1,15 @@
 import * as React from 'react';
 import log from 'loglevel';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
-import { DateFilter } from './DateFilter.component';
+import { DateFilter as DateFilterInput } from './DateFilter.component';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './date.const';
 import { getEmptyValueFilterValue } from '../EmptyValue';
-import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData, Value } from './date.types';
+import type { DateFilter, RelativeDateFilterData, AbsoluteDateFilterData, Value } from './date.types';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 type Props = {
-    filter?: DateFilterData | null;
+    filter?: DateFilter | null;
     filterTypeRef: (instance: any) => void;
     handleCommitValue: (value?: any, isBlur?: boolean) => void;
 };
@@ -62,7 +62,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    static calculateDefaultValueState(filter?: DateFilterData | null) {
+    static calculateDefaultValueState(filter?: DateFilter | null) {
         if (!filter) {
             return undefined;
         }
@@ -113,7 +113,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <DateFilter
+            <DateFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

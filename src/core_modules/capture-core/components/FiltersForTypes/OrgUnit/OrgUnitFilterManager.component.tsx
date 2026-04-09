@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { OrgUnitFilter } from './OrgUnitFilter.component';
+import { OrgUnitFilter as OrgUnitFilterInput } from './OrgUnitFilter.component';
 import { getEmptyValueFilterValue } from '../EmptyValue';
-import type { OrgUnitFilterData, Value } from './orgUnit.types';
+import type { OrgUnitFilter, Value } from './orgUnit.types';
 
 type Props = {
-    filter: OrgUnitFilterData | null | undefined;
+    filter: OrgUnitFilter | null | undefined;
     filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void;
     onUpdate: (updatedValue: Value) => void;
@@ -15,7 +15,7 @@ type State = {
 };
 
 export class OrgUnitFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: OrgUnitFilterData | null | undefined): State {
+    static calculateDefaultState(filter: OrgUnitFilter | null | undefined): State {
         if (filter && 'isEmpty' in filter) {
             return { value: getEmptyValueFilterValue(filter) };
         }
@@ -40,7 +40,7 @@ export class OrgUnitFilterManager extends React.Component<Props, State> {
     render() {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
         return (
-            <OrgUnitFilter
+            <OrgUnitFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

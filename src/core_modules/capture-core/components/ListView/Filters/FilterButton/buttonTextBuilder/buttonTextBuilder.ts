@@ -9,7 +9,7 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetValuesFilterData } from '../../../../FiltersForTypes/OptionSet/optionSet.types';
+import type { OptionSetFilterData } from '../../../../FiltersForTypes/OptionSet/optionSet.types';
 import type { FilterData, Options } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filters.const';
 
@@ -39,7 +39,7 @@ const convertersForTypes: any = {
     [filterTypesObject.USERNAME]: convertText,
 };
 
-function getOptionSetText(filter: OptionSetValuesFilterData, options: Options) {
+function getOptionSetText(filter: OptionSetFilterData, options: Options) {
     return filter
         .values
         .map((value) => {

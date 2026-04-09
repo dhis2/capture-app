@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { BooleanFilter } from './BooleanFilter.component';
+import { BooleanFilter as BooleanFilterInput } from './BooleanFilter.component';
 import { getEmptyValueFilterValue } from '../EmptyValue';
-import type { BooleanFilterData, Value } from './boolean.types';
+import type { BooleanFilter, Value } from './boolean.types';
 
 type Props = {
-    filter: BooleanFilterData | null,
+    filter: BooleanFilter | null,
     filterTypeRef: (instance: any) => void;
     handleCommitValue: () => void,
     singleSelect: boolean,
@@ -16,7 +16,7 @@ type State = {
 
 export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(
-        filter: BooleanFilterData | null,
+        filter: BooleanFilter | null,
         singleSelect: boolean,
     ): Value | undefined {
         if (!filter) {
@@ -48,9 +48,9 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, singleSelect, ...passOnProps } = this.props;
 
         return (
-            <BooleanFilter
+            <BooleanFilterInput
                 value={this.state.value}
-                // @ts-expect-error - keeping original functionality as before ts rewrite
+                // @ts-expect-error - ref not in ComponentType signature, kept for filter instance access
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 allowMultiple={!singleSelect}
@@ -59,3 +59,4 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         );
     }
 }
+

@@ -7,7 +7,7 @@ import {
 } from '../EmptyValue';
 import { dateFilterTypes } from '../Date/date.const';
 import type {
-    DateTimeAbsoluteFilterData,
+    DateTimeFilter,
     DateTimeFilterData,
     DateTimeValue,
     Value,
@@ -36,12 +36,12 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
     return new Date(localStr).toISOString();
 }
 
-export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilterData | null {
+export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilter | null {
     if (typeof value === 'string') {
         return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
 
-    const filterData: DateTimeAbsoluteFilterData = { type: dateFilterTypes.ABSOLUTE };
+    const filterData: DateTimeFilterData = { type: dateFilterTypes.ABSOLUTE };
 
     if (value.from?.date) {
         const ge = buildIsoDateTime(value.from, '00:00');

@@ -1,11 +1,11 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
-export type TimeRangeFilterData = {
+export type TimeFilterData = {
     ge?: string;
     le?: string;
 };
 
-export type TimeFilterData = TimeRangeFilterData | EmptyValueFilterData;
+export type TimeFilter = TimeFilterData | EmptyValueFilterData;
 export type Value = {
     from?: string | null;
     to?: string | null;

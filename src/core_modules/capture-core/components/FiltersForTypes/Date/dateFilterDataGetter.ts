@@ -6,7 +6,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './date.types';
+import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilter, DateValue } from './date.types';
 
 type Value = {
     main: string;
@@ -62,7 +62,7 @@ function convertSelections(value: Value) {
     return { type: dateFilterTypes.RELATIVE, period: value.main };
 }
 
-export function getDateFilterData(value: Value | string): DateFilterData | null {
+export function getDateFilterData(value: Value | string): DateFilter | null {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
         return getEmptyValueFilterData(value);
     }

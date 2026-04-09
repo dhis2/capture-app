@@ -6,12 +6,12 @@ export type OrgUnitValue = {
     path: string;
 };
 
-export type OrgUnitValueFilterData = {
+export type OrgUnitFilterData = {
     value: string;
     name?: string;
 };
 
-export type OrgUnitFilterData = OrgUnitValueFilterData | EmptyValueFilterData;
+export type OrgUnitFilter = OrgUnitFilterData | EmptyValueFilterData;
 export type Value = OrgUnitValue | string | null | undefined;
 
 export type OrgUnitFilterProps = {

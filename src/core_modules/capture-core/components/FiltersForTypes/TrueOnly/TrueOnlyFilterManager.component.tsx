@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { TrueOnlyFilter } from './TrueOnlyFilter.component';
+import { TrueOnlyFilter as TrueOnlyFilterInput } from './TrueOnlyFilter.component';
 import { getEmptyValueFilterValue } from '../EmptyValue';
-import type { TrueOnlyFilterData } from './trueOnly.types';
+import type { TrueOnlyFilter } from './trueOnly.types';
 
 type Props = {
-    filter: TrueOnlyFilterData | null,
+    filter: TrueOnlyFilter | null,
     filterTypeRef: (instance: any) => void,
     handleCommitValue: () => void,
 };
@@ -14,7 +14,7 @@ type State = {
 };
 
 export class TrueOnlyFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: TrueOnlyFilterData | null) {
+    static calculateDefaultState(filter: TrueOnlyFilter | null) {
         if (filter && 'isEmpty' in filter) {
             return { value: getEmptyValueFilterValue(filter) };
         }
@@ -40,7 +40,7 @@ export class TrueOnlyFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <TrueOnlyFilter
+            <TrueOnlyFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

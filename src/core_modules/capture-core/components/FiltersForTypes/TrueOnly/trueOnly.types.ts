@@ -1,10 +1,10 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
-export type TrueOnlyValueFilterData = {
+export type TrueOnlyFilterData = {
     value: boolean;
 };
 
-export type TrueOnlyFilterData = TrueOnlyValueFilterData | EmptyValueFilterData;
+export type TrueOnlyFilter = TrueOnlyFilterData | EmptyValueFilterData;
 export type Value = Array<any> | string | null | undefined;
 
 export type PlainProps = {
