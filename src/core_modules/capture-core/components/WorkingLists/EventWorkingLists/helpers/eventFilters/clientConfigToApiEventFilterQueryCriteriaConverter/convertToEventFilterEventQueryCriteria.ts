@@ -26,7 +26,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
-import { isEmptyFilterData, toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import { isEmptyFilterData, toApiEmptyValueFilter } from '../../../../../FiltersForTypes';
 
 type ColumnForConverterBase = {
     id: string,

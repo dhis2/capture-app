@@ -27,7 +27,7 @@ import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes';
 
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,

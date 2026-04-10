@@ -13,7 +13,12 @@ export { dateFilterTypes } from './Date/date.const';
 export { mainOptionTranslatedTexts } from './Date/options';
 export { DateTimeFilter, type DateTimeFilterData } from './DateTime';
 export { EmptyOnlyFilter, type EmptyOnlyFilterData } from './EmptyOnly';
-export { EmptyValueFilterCheckboxes, isEmptyFilterData } from './EmptyValue';
+export {
+    EmptyValueFilterCheckboxes,
+    isEmptyFilterData,
+    fromApiEmptyValueFilter,
+    toApiEmptyValueFilter,
+} from './EmptyValue';
 export { NumericFilter, type NumericFilterData } from './Numeric';
 export { OptionSetFilter, type OptionSetFilterData } from './OptionSet';
 export { OrgUnitFilter, type OrgUnitFilterData } from './OrgUnit';
