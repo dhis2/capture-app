@@ -80,9 +80,6 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
-        if (value === undefined || value === null) {
-            return null;
-        }
         return getTimeFilterData(value);
     }
 

@@ -1,6 +1,7 @@
-import type { AssigneeFilterData } from './assignee.types';
+import type { AssigneeFilterData, Value } from './assignee.types';
 
-export function getAssigneeFilterData(value: any): AssigneeFilterData {
+export function getAssigneeFilterData(value: Value): AssigneeFilterData | null {
+    if (!value) return null;
     return {
         assignedUserMode: value.mode,
         assignedUser: value.provided,

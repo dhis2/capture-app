@@ -20,8 +20,7 @@ type Props = TrueOnlyFilterProps & WithStyles<typeof getStyles>;
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value } = this.props;
-        if (!value) return null;
-        return getTrueOnlyFilterData(typeof value === 'string' ? value : undefined);
+        return getTrueOnlyFilterData(Array.isArray(value) ? value[0] : value);
     }
 
     onIsValid = () => true

@@ -86,7 +86,6 @@ class NumericFilterPlain
 
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
-        if (!value) return null;
         return getNumericFilterData(value);
     }
 

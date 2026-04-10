@@ -22,16 +22,9 @@ type Props = OptionSetFilterProps & WithStyles<typeof getStyles>;
 class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value, singleSelect } = this.props;
-
-        if (!value) {
-            return null;
-        }
-
-        if (singleSelect) {
-            return getSingleSelectOptionSetFilterData(value);
-        }
-
-        return getMultiSelectOptionSetFilterData(value);
+        return singleSelect
+            ? getSingleSelectOptionSetFilterData(value)
+            : getMultiSelectOptionSetFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line

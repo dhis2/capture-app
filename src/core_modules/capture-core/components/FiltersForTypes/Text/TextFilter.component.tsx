@@ -11,11 +11,6 @@ export class TextFilter
     implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
-
-        if (!value) {
-            return null;
-        }
-
         return getTextFilterData(value);
     }
 

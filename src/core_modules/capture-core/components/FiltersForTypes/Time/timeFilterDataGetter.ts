@@ -4,12 +4,10 @@ import {
 } from '../EmptyValue';
 import type { TimeFilter, TimeFilterData, Value } from './time.types';
 
-export function getTimeFilterData(value: NonNullable<Value>): TimeFilter | null {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
-    }
+export function getTimeFilterData(value: Value): TimeFilter | null {
+    if (value == null) return null;
     if (typeof value === 'string') {
-        return null;
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
 
     const filterData: TimeFilterData = {};

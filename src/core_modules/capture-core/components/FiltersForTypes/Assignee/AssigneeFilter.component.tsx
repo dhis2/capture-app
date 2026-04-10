@@ -39,7 +39,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData() {
         const { value } = this.props;
-        return value && getAssigneeFilterData(value);
+        return getAssigneeFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line

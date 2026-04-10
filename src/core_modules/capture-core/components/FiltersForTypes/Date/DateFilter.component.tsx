@@ -104,7 +104,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
-        if (!value) return null;
         return getDateFilterData(value);
     }
 
