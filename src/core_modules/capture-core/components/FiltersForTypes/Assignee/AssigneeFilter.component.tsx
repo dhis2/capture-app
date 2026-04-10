@@ -8,7 +8,7 @@ import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
-import { getEmptyValueFilterData, isEmptyValueFilter } from '../EmptyValue';
+
 
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
@@ -39,16 +39,10 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData() {
         const { value } = this.props;
-        if (!value) {
+        if (!value || typeof value !== 'object' || !('mode' in value)) {
             return null;
         }
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getEmptyValueFilterData(value);
-        }
-        if (typeof value === 'object' && value !== null && 'mode' in value) {
-            return getAssigneeFilterData(value);
-        }
-        return null;
+        return getAssigneeFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
