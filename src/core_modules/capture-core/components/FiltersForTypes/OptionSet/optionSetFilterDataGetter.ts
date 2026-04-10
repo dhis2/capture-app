@@ -10,16 +10,12 @@ function getSelectOptionSetFilterData(values: Array<any>): OptionSetFilterData {
 
 export function getMultiSelectOptionSetFilterData(values: any): OptionSetFilter | null {
     if (!values) return null;
-    if (typeof values === 'string') {
-        return isEmptyValueFilter(values) ? getEmptyValueFilterData(values) : null;
-    }
+    if (isEmptyValueFilter(values)) return getEmptyValueFilterData(values);
     return getSelectOptionSetFilterData(values);
 }
 
 export function getSingleSelectOptionSetFilterData(value: any): OptionSetFilter | null {
     if (!value) return null;
-    if (typeof value === 'string') {
-        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
-    }
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
     return getSelectOptionSetFilterData([value]);
 }

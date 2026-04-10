@@ -6,8 +6,7 @@ import type { OrgUnitFilter, Value } from './orgUnit.types';
 
 export function getOrgUnitFilterData(value: Value): OrgUnitFilter | null {
     if (!value) return null;
-    if (typeof value === 'string') {
-        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
-    }
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
+    if (typeof value === 'string') return null;
     return { value: value.id, name: value.name };
 }

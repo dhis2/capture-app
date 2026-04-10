@@ -64,9 +64,8 @@ function convertSelections(value: ValueWithMain) {
 
 export function getDateFilterData(value: Value): DateFilter | null {
     if (!value) return null;
-    if (typeof value === 'string') {
-        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
-    }
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
+    if (typeof value === 'string') return null;
     if (!value.main) return null;
     return convertSelections(value as ValueWithMain);
 }
