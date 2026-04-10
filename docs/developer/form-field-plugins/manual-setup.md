@@ -284,6 +284,20 @@ Here's the full configuration for the form with the plugin added:
 </details>
 
 <details>
+    <summary>
+        My form configuration is missing fields or sections after I changed the program metadata
+    </summary>
+    <div>
+        <p>
+            The form configuration stored in the data store is a snapshot of the program metadata at the time it was saved. If you have made changes to the underlying metadata (such as adding or removing tracked entity attributes, data elements, or sections), the data store configuration will not automatically update.
+        </p>
+        <p>
+            To fix this, re-open the Tracker Plugin Configurator app for the affected program and update the configuration. If you configured the form manually, you will need to manually update the JSON in the data store to include the new fields or reflect the metadata changes.
+        </p>
+    </div>
+</details>
+
+<details>
     <summary>I'm getting a CORS error when trying to load the plugin</summary>
     <div>
         <p>

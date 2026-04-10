@@ -26,3 +26,20 @@ The app is also installable from the App Management app in your DHIS2 instance.
 
 ![Form field plugin](resources/tpc-form-field-demo.png)
 
+### Important: Keeping configurations in sync with metadata
+
+The plugin configuration saved by the Tracker Plugin Configurator is stored in the DHIS2 data store (`capture` namespace). This configuration is a snapshot of your program's metadata at the time you saved it — it includes references to specific tracked entity attributes, data elements, sections, and field mappings.
+
+**If you make changes to the underlying program metadata** (for example, adding or removing attributes, changing sections, adding new program stages, or modifying data elements), **the plugin configuration in the data store will not automatically update to reflect those changes.**
+
+This means that after making metadata changes to a program that has a plugin configured, you must manually re-open the Tracker Plugin Configurator and update the configuration. Failing to do so may result in:
+
+- New fields not appearing in plugin-configured forms
+- Removed fields still being referenced in the configuration
+- Section changes not being reflected in the form layout
+- Plugins not receiving the correct field mappings
+
+:::tip
+After making any metadata changes to a program with plugins configured, always re-open the Tracker Plugin Configurator app for the affected program and re-save the configuration to ensure it stays in sync.
+:::
+
