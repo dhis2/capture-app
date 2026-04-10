@@ -6,7 +6,7 @@ import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
-import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
+import type { AssigneeFilterProps, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
 
 
@@ -39,21 +39,12 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData() {
         const { value } = this.props;
-        if (!value || typeof value !== 'object' || !('mode' in value)) {
-            return null;
-        }
-        return getAssigneeFilterData(value);
+        return value && getAssigneeFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (
-            typeof value === 'object' &&
-            value !== null &&
-            'mode' in value &&
-            value.mode === modeKeys.PROVIDED &&
-            !value.provided
-        ) {
+        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });
@@ -70,7 +61,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         if (!value) {
             this.props.onCommitValue(null);
         } else {
-            this.props.onCommitValue({ mode: value as AssigneeMode });
+            this.props.onCommitValue({ mode: value });
         }
     }
 
@@ -87,10 +78,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     render() {
         const { value, classes } = this.props;
-        const mode =
-            value && typeof value === 'object' && 'mode' in value ? value.mode : undefined;
-        const provided =
-            value && typeof value === 'object' && 'mode' in value ? value.provided : undefined;
+        const { mode, provided } = value || {};
 
         return (
             <div>
