@@ -58,7 +58,7 @@ function convertFilter(
     },
     searchOperator?: string,
 ) {
-    if (sourceValue != null && typeof sourceValue === 'object' && isEmptyFilterData(sourceValue)) {
+    if (sourceValue && typeof sourceValue === 'object' && isEmptyFilterData(sourceValue)) {
         return sourceValue.isEmpty ? API_EMPTY_VALUE_FILTER : API_NOT_EMPTY_VALUE_FILTER;
     }
     if (sourceValue && sourceValue.usingOptionSet) {
