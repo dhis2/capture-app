@@ -63,13 +63,10 @@ function convertSelections(value: ValueWithMain) {
 }
 
 export function getDateFilterData(value: Value): DateFilter | null {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
+    if (!value) return null;
+    if (typeof value === 'string') {
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
-
-    if (typeof value === 'string' || !value?.main) {
-        return null;
-    }
-
+    if (!value.main) return null;
     return convertSelections(value as ValueWithMain);
 }

@@ -11,17 +11,12 @@ function parseOptionalNumber(s: string | null | undefined): number | undefined {
 }
 
 export function getNumericFilterData(value: Value): NumericFilter | null {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
+    if (!value) return null;
+    if (typeof value === 'string') {
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
-    if (value == null || typeof value === 'string') {
-        return null;
-    }
-
     const ge = parseOptionalNumber(value.min);
     const le = parseOptionalNumber(value.max);
-    if (ge == null && le == null) {
-        return null;
-    }
+    if (ge == null && le == null) return null;
     return { ge, le };
 }

@@ -2,13 +2,7 @@ import React from 'react';
 import { EmptyValueFilterCheckboxes } from './EmptyValueFilterCheckboxes.component';
 import { isEmptyValueFilter } from './emptyValueFilterHelpers';
 import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from './emptyValue.const';
-
-type Props = {
-    value: any;
-    onCommitValue: (value: any) => void;
-    disabled?: boolean;
-    children: (filteredValue: any) => React.ReactNode;
-};
+import type { WithEmptyValueFilterProps } from './emptyValue.types';
 
 const handleCheckboxChange = (
     flag: string,
@@ -22,7 +16,7 @@ export const WithEmptyValueFilter = ({
     onCommitValue,
     disabled,
     children,
-}: Props) => {
+}: WithEmptyValueFilterProps) => {
     const isEmptyFilter = typeof value === 'string' && isEmptyValueFilter(value);
     const checkboxValue = isEmptyFilter ? value : undefined;
     const filteredValue = isEmptyFilter ? undefined : value;

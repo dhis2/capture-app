@@ -83,7 +83,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onIsValid() {
         const value = this.props.value;
-        if (value === undefined || value === null || typeof value === 'string') {
+        if (!value || typeof value === 'string') {
             return true;
         }
         this.setState({ submitAttempted: true });

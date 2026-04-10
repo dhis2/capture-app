@@ -5,11 +5,10 @@ import {
 import type { TimeFilter, TimeFilterData, Value } from './time.types';
 
 export function getTimeFilterData(value: Value): TimeFilter | null {
-    if (value == null) return null;
+    if (!value) return null;
     if (typeof value === 'string') {
         return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
-
     const filterData: TimeFilterData = {};
 
     if (value.from) {

@@ -4,11 +4,8 @@ import {
 } from '../EmptyValue';
 import type { UsernameFilter, Value } from './username.types';
 
-export const getUsernameFilterData = (value: Value): UsernameFilter | null | undefined => {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
-    }
-
+export function getUsernameFilterData(value: Value): UsernameFilter | null {
     if (!value) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
     return { value };
-};
+}

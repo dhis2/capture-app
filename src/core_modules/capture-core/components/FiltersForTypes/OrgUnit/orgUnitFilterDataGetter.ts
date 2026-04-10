@@ -2,13 +2,12 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { OrgUnitFilterData, Value } from './orgUnit.types';
+import type { OrgUnitFilter, Value } from './orgUnit.types';
 
-export const getOrgUnitFilterData = (value: Value): OrgUnitFilterData | null | undefined => {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
+export function getOrgUnitFilterData(value: Value): OrgUnitFilter | null {
+    if (!value) return null;
+    if (typeof value === 'string') {
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
-
-    if (!value || typeof value === 'string') return null;
     return { value: value.id, name: value.name };
-};
+}

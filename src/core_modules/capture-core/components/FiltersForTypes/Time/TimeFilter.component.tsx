@@ -62,7 +62,7 @@ type ValuePart = { from?: string | null } | { to?: string | null };
 
 class TimeFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static isFilterValid(value: Value): boolean {
-        if (value === undefined || value === null || typeof value === 'string') {
+        if (!value || typeof value === 'string') {
             return true;
         }
         const { from, to } = value;
@@ -85,7 +85,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onIsValid() {
         const value = this.props.value;
-        if (value === undefined || value === null || typeof value === 'string') {
+        if (!value || typeof value === 'string') {
             return true;
         }
         const { from, to } = value;
@@ -136,7 +136,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     getTimeLogicError() {
         const values = this.state.committedValue;
-        if (values === undefined || values === null || typeof values === 'string') {
+        if (!values || typeof values === 'string') {
             return null;
         }
         const hasNoTimes = !values.from && !values.to;
