@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { AssigneeFilter as AssigneeFilterComponent } from './AssigneeFilter.component';
-import type { AssigneeFilter, AssigneeFilterManagerProps, Value } from './assignee.types';
+import type { AssigneeFilterData, AssigneeFilterManagerProps, Value } from './assignee.types';
 
 type State = {
     value?: Value | null;
 };
 
 export class AssigneeFilterManager extends React.Component<AssigneeFilterManagerProps, State> {
-    static calculateDefaultValueState(filter: AssigneeFilter | null): Value | undefined {
+    static calculateDefaultValueState(filter: AssigneeFilterData | null): Value | undefined {
         if (!filter) {
             return undefined;
         }

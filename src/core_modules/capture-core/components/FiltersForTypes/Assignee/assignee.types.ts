@@ -1,4 +1,3 @@
-import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 import type { assigneeFilterModes } from './assignee.const';
 
 export type AssigneeFilterData = {
@@ -10,8 +9,6 @@ export type AssigneeFilterData = {
     } | null;
 };
 
-export type AssigneeFilter = AssigneeFilterData | EmptyValueFilterData;
-
 export type AssigneeMode = typeof assigneeFilterModes[keyof typeof assigneeFilterModes];
 
 export type Value =
@@ -19,7 +16,6 @@ export type Value =
           mode: AssigneeMode;
           provided?: AssigneeFilterData['assignedUser'];
       }
-    | string
     | null
     | undefined;
 
@@ -29,7 +25,7 @@ export type AssigneeFilterProps = {
 };
 
 export type AssigneeFilterManagerProps = {
-    filter: AssigneeFilter | null;
+    filter: AssigneeFilterData | null;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: () => void;
 };
