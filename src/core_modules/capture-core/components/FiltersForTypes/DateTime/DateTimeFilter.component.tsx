@@ -10,7 +10,7 @@ import type { DateValue } from '../Date/date.types';
 import type { DateTimeFilterProps, DateTimeValue, Value } from './dateTime.types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
-import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -78,11 +78,6 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
-
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getDateTimeFilterData(value);
-        }
-
         if (value === undefined || value === null) {
             return null;
         }
@@ -91,13 +86,10 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onIsValid() {
         const value = this.props.value;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return true;
-        }
-        this.setState({ submitAttempted: true });
         if (value === undefined || value === null || typeof value === 'string') {
             return true;
         }
+        this.setState({ submitAttempted: true });
         const { from, to } = value;
         const hasNoDates = !from?.date && !to?.date;
         const hasInvalidDate = from?.isValid === false || to?.isValid === false;

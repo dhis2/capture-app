@@ -7,7 +7,7 @@ import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import type { TrueOnlyFilterProps, Value } from './trueOnly.types';
-import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
@@ -19,16 +19,9 @@ type Props = TrueOnlyFilterProps & WithStyles<typeof getStyles>;
 
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const value = this.props.value;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getTrueOnlyFilterData(value);
-        }
-
-        if (!value) {
-            return null;
-        }
-
-        return getTrueOnlyFilterData();
+        const { value } = this.props;
+        if (!value) return null;
+        return getTrueOnlyFilterData(typeof value === 'string' ? value : undefined);
     }
 
     onIsValid = () => true

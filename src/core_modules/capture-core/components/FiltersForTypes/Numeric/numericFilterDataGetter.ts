@@ -14,13 +14,14 @@ export function getNumericFilterData(value: Value): NumericFilter | null {
     if (typeof value === 'string' && isEmptyValueFilter(value)) {
         return getEmptyValueFilterData(value);
     }
-    if (typeof value === 'string') {
+    if (value == null || typeof value === 'string') {
         return null;
     }
 
-    const data: NumericFilterData = {
-        ge: parseOptionalNumber(value?.min ?? undefined),
-        le: parseOptionalNumber(value?.max ?? undefined),
-    };
-    return data;
+    const ge = parseOptionalNumber(value.min);
+    const le = parseOptionalNumber(value.max);
+    if (ge == null && le == null) {
+        return null;
+    }
+    return { ge, le };
 }

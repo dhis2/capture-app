@@ -17,7 +17,7 @@ import {
     RelativeRangeFilter,
     isRelativeRangeFilterValid,
 } from './RelativeRangeFilter.component';
-import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => ({
     sectionLabel: {
@@ -104,24 +104,16 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
-
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getDateFilterData(value);
-        }
-
         if (!value) return null;
-        return getDateFilterData(value as any);
+        return getDateFilterData(value);
     }
 
     onIsValid() {
         const value = this.props.value;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return true;
-        }
-        this.setState({ submitAttempted: true });
         if (!value || typeof value === 'string') {
             return true;
         }
+        this.setState({ submitAttempted: true });
         return DateFilterPlain.isFilterValid(
             value.main, value.from, value.to, value.start, value.end,
         );

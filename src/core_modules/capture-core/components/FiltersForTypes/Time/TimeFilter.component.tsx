@@ -6,7 +6,7 @@ import type { UpdatableFilterContent } from '../types';
 import type { TimeFilterProps, Value } from './time.types';
 import { getTimeFilterData } from './timeFilterDataGetter';
 import { TimeFilterInput } from './TimeFilterInput.component';
-import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 const getStyles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -80,11 +80,6 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
-
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getTimeFilterData(value);
-        }
-
         if (value === undefined || value === null) {
             return null;
         }
@@ -93,9 +88,6 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     onIsValid() {
         const value = this.props.value;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return true;
-        }
         if (value === undefined || value === null || typeof value === 'string') {
             return true;
         }

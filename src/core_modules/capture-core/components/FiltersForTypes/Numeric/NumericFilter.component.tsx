@@ -16,7 +16,7 @@ import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { NumericFilterProps, Value } from './numeric.types';
 import type { UpdatableFilterContent } from '../types';
-import { isEmptyValueFilter, WithEmptyValueFilter } from '../EmptyValue';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 const getStyles: any = (theme: any) => ({
     container: {
@@ -86,22 +86,12 @@ class NumericFilterPlain
 
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
-
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return getNumericFilterData(value);
-        }
-
-        if (!value || typeof value === 'string' || (!value.min && !value.max)) {
-            return undefined;
-        }
+        if (!value) return null;
         return getNumericFilterData(value);
     }
 
     onIsValid() {
         const value = this.props.value;
-        if (typeof value === 'string' && isEmptyValueFilter(value)) {
-            return true;
-        }
         if (!value || typeof value === 'string') {
             return true;
         }
