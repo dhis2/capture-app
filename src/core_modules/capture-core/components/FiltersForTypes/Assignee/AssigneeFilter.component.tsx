@@ -9,7 +9,6 @@ import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
 
-
 const getStyles: Readonly<any> = (theme: any) => ({
     selectBoxesContainer: {
         maxHeight: theme.typography.pxToRem(250),

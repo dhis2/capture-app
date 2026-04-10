@@ -3,7 +3,7 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { NumericFilter, NumericFilterData, Value } from './numeric.types';
+import type { NumericFilter, Value } from './numeric.types';
 
 function parseOptionalNumber(s: string | null | undefined): number | undefined {
     if (s == null || s === '') return undefined;

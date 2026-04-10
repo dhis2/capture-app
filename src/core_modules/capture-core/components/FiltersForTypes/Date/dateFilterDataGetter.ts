@@ -67,7 +67,7 @@ export function getDateFilterData(value: Value): DateFilter | null {
         return getEmptyValueFilterData(value);
     }
 
-    if (typeof value === 'string' || value == null || !value.main) {
+    if (typeof value === 'string' || !value?.main) {
         return null;
     }
 

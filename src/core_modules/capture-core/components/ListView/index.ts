@@ -27,17 +27,17 @@ export type {
 
 export { dateFilterTypes, assigneeFilterModes } from '../FiltersForTypes';
 export type {
-    AbsoluteDateFilterData,
     AssigneeFilterData,
-    BooleanFilterData,
     DateFilterData,
     DateTimeFilterData,
-    NumericFilterData,
-    OptionSetFilterData,
-    OrgUnitFilterData,
     RelativeDateFilterData,
+    AbsoluteDateFilterData,
+    BooleanFilterData,
     TextFilterData,
     TimeFilterData,
     TrueOnlyFilterData,
+    NumericFilterData,
+    OptionSetFilterData,
+    OrgUnitFilterData,
     UsernameFilterData,
 } from '../FiltersForTypes';
