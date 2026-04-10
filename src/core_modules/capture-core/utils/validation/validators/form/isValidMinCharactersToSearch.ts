@@ -1,3 +1,8 @@
+import {
+    EMPTY_VALUE_FILTER,
+    NOT_EMPTY_VALUE_FILTER,
+} from '../../../../components/FiltersForTypes/EmptyValue';
+
 const isValueBiggerThanMinCharactersToSearch = (value: string, minCharactersToSearch: number) => {
     if (value === undefined) {
         return true;
@@ -26,16 +31,19 @@ const isValidMinCharactersToSearchRange = (value: { from: any; to: any }, minCha
 
     if (date) {
         return (
-            isValueBiggerThanMinCharactersToSearch(from.date, minCharactersToSearch) &&
-            isValueBiggerThanMinCharactersToSearch(to.date, minCharactersToSearch)
+            isValueBiggerThanMinCharactersToSearch(from?.date, minCharactersToSearch) &&
+            isValueBiggerThanMinCharactersToSearch(to?.date, minCharactersToSearch)
         );
     }
 
     return true;
 };
 
+const shouldSkipMinCharsValidation = (value: any) =>
+    value === undefined || value === null || value === EMPTY_VALUE_FILTER || value === NOT_EMPTY_VALUE_FILTER;
+
 export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: number) => {
-    if (value === undefined) {
+    if (shouldSkipMinCharsValidation(value)) {
         return true;
     }
 
@@ -45,13 +53,17 @@ export const isValidMinCharactersToSearch = (value: any, minCharactersToSearch: 
         return isValueBiggerThanMinCharactersToSearch(value, minCharactersToSearch);
     }
 
+    if (main) {
+        const ISO_DATE_LENGTH = 10;
+        return minCharactersToSearch <= ISO_DATE_LENGTH;
+    }
+
     if (from || to) {
         return isValidMinCharactersToSearchRange(value, minCharactersToSearch);
     }
 
-    if (main) {
-        const ISO_DATE_LENGTH = 10;
-        return minCharactersToSearch <= ISO_DATE_LENGTH;
+    if ('date' in value) {
+        return isValueBiggerThanMinCharactersToSearch(value.date, minCharactersToSearch);
     }
 
     return true;

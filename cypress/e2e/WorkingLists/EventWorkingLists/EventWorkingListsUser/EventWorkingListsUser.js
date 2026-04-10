@@ -717,7 +717,7 @@ When('you set the organisation unit filter', () => {
     });
 });
 
-const setEventWorkingListEmptyStateFilter = (filterName, value) => {
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
     const labelPrefix = truncateFilterLabelForTest(filterName);
     cy.get('[data-test="event-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
@@ -728,32 +728,6 @@ const setEventWorkingListEmptyStateFilter = (filterName, value) => {
             } else {
                 cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
                 cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-            }
-        });
-    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
-    cy.get('[data-test="list-view-filter-apply-button"]').click();
-};
-
-When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    setEventWorkingListEmptyStateFilter(filterName, value);
-});
-
-When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    setEventWorkingListEmptyStateFilter(filterName, value);
-});
-
-When(/^you set the isEmpty date filter to (Is empty|Is not empty)$/, (value) => {
-    cy.get('[data-test="event-working-lists"]')
-        .find('[data-test="filter-button-popover-anchor"]')
-        .then(($anchors) => {
-            const match = [...$anchors].find((node) =>
-                /Date of admission|Admission Date|Date of adm/i.test(node.innerText)
-            );
-            if (match) {
-                cy.wrap(match).click();
-            } else {
-                cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(/Date of admission|Admission Date/).click());
             }
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
@@ -808,11 +782,6 @@ Then(/^the isEmpty filter "([^"]+)" should be in effect with value (Is empty|Is 
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
 });
 
-Then(/^the isEmpty date filter should be in effect with value (Is empty|Is not empty)$/, (value) => {
-    const chipLabel = truncateFilterLabelForTest(`Date of admission: ${value}`);
-    cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
-});
-
 const thenEventWorkingListEmptyFilterShowsWhenOpened = (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
@@ -825,19 +794,6 @@ const thenEventWorkingListEmptyFilterShowsWhenOpened = (filterName, value) => {
 
 Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     thenEventWorkingListEmptyFilterShowsWhenOpened(filterName, value);
-});
-
-Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    thenEventWorkingListEmptyFilterShowsWhenOpened(filterName, value);
-});
-
-Then(/^the isEmpty date filter should be in effect and show (Is empty|Is not empty) when opened$/, (value) => {
-    cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).should('exist');
-    cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
-    });
-    cy.get('body').click(0, 0);
 });
 
 Then('the boolean and range filters should show correct values when opened', () => {
