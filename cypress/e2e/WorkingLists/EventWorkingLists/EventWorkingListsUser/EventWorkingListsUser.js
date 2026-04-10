@@ -6,8 +6,10 @@ import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestU
 
 const NGELEHUN_ORG_UNIT_ID = 'DiszpKrYNg8';
 
+const MALARIA_CASE_PROGRAM_ID = 'VBqh0ynB2wv';
 const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
 const CONTRACEPTIVES_VOUCHER_PROGRAM_ID = 'kla3mAPgvCH';
+const XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID = 'MoUd5BTQ3lY';
 
 const programAndOrgUnitQuery = (programId) =>
     `programId=${programId}&orgUnitId=${NGELEHUN_ORG_UNIT_ID}`;
@@ -28,8 +30,10 @@ const cleanUpEventFilterIfApplicable = (programId, displayName) => {
 };
 
 const CONTEXT_QUERIES = {
-    'Contraceptives Voucher Program': programAndOrgUnitQuery(CONTRACEPTIVES_VOUCHER_PROGRAM_ID),
+    'malaria case context': programAndOrgUnitQuery(MALARIA_CASE_PROGRAM_ID),
     'Inpatient morbidity and mortality context': programAndOrgUnitQuery(INPATIENT_MORBIDITY_PROGRAM_ID),
+    'Contraceptives Voucher Program': programAndOrgUnitQuery(CONTRACEPTIVES_VOUCHER_PROGRAM_ID),
+    'event program text filter context': programAndOrgUnitQuery(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID),
 };
 
 const PRE_VISIT_CLEANUP_BY_CONTEXT = {
