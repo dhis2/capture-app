@@ -6,10 +6,8 @@ import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestU
 
 const NGELEHUN_ORG_UNIT_ID = 'DiszpKrYNg8';
 
-const MALARIA_CASE_PROGRAM_ID = 'VBqh0ynB2wv';
 const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
 const CONTRACEPTIVES_VOUCHER_PROGRAM_ID = 'kla3mAPgvCH';
-const XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID = 'MoUd5BTQ3lY';
 
 const programAndOrgUnitQuery = (programId) =>
     `programId=${programId}&orgUnitId=${NGELEHUN_ORG_UNIT_ID}`;
@@ -29,27 +27,14 @@ const cleanUpEventFilterIfApplicable = (programId, displayName) => {
         });
 };
 
-const cleanUpEventFiltersForProgram = (programId, displayNames) => {
-    displayNames.forEach((displayName) => {
-        cleanUpEventFilterIfApplicable(programId, displayName);
-    });
-};
-
 const CONTEXT_QUERIES = {
     'Contraceptives Voucher Program': programAndOrgUnitQuery(CONTRACEPTIVES_VOUCHER_PROGRAM_ID),
     'Inpatient morbidity and mortality context': programAndOrgUnitQuery(INPATIENT_MORBIDITY_PROGRAM_ID),
-    'event program text filter context': programAndOrgUnitQuery(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID),
-    'malaria case context': programAndOrgUnitQuery(MALARIA_CASE_PROGRAM_ID),
 };
 
 const PRE_VISIT_CLEANUP_BY_CONTEXT = {
     'Inpatient morbidity and mortality context': () =>
-        cleanUpEventFiltersForProgram(INPATIENT_MORBIDITY_PROGRAM_ID, [
-            'eventStoredWorkingList',
-            'allValueTypesFilterWorkingList',
-        ]),
-    'event program text filter context': () =>
-        cleanUpEventFiltersForProgram(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID, ['eventStoredWorkingList']),
+        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventStoredWorkingList'),
 };
 
 Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
@@ -782,7 +767,7 @@ Then(/^the isEmpty filter "([^"]+)" should be in effect with value (Is empty|Is 
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
 });
 
-const thenEventWorkingListEmptyFilterShowsWhenOpened = (filterName, value) => {
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
@@ -790,10 +775,6 @@ const thenEventWorkingListEmptyFilterShowsWhenOpened = (filterName, value) => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
     cy.get('body').click(0, 0);
-};
-
-Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    thenEventWorkingListEmptyFilterShowsWhenOpened(filterName, value);
 });
 
 Then('the boolean and range filters should show correct values when opened', () => {
