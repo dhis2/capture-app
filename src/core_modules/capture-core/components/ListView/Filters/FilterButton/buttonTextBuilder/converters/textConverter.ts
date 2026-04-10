@@ -1,4 +1,4 @@
-import type { TextFilterData } from '../../../../../FiltersForTypes/Text/text.types';
+import type { TextFilterData } from '../../../../../FiltersForTypes';
 
 export function convertText(filter: TextFilterData): string {
     return filter.value;
