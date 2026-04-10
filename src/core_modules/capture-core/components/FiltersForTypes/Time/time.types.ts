@@ -10,7 +10,7 @@ export type TimeFilter = TimeFilterData | EmptyValueFilterData;
 export type Value = {
     from?: string | null;
     to?: string | null;
-} | string | null;
+} | string | null | undefined;
 
 export type TimeFilterProps = {
     onCommitValue: (value: Value) => void;
@@ -20,7 +20,7 @@ export type TimeFilterProps = {
 };
 
 export type TimeFilterManagerProps = {
-    filter?: TimeFilter | null;
+    filter: TimeFilter | null;
     filterTypeRef: (instance: unknown) => void;
-    handleCommitValue: (value?: Value | null) => void;
+    handleCommitValue: (value?: Value) => void;
 };

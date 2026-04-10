@@ -9,7 +9,7 @@ export type BooleanFilter = BooleanFilterData | EmptyValueFilterData;
 export type Value = Array<boolean> | boolean | string | null | undefined;
 
 export type BooleanFilterProps = {
-    value?: Value;
+    value: Value;
     onCommitValue: (value: Value) => void;
     onUpdate?: (commitValue?: Value) => void;
     allowMultiple: boolean;

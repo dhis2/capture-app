@@ -17,7 +17,7 @@ export type TextFilterProps = {
 };
 
 export type TextFilterManagerProps = {
-    filter: TextFilter | null | undefined;
+    filter: TextFilter | null;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: (value?: Value, isBlur?: boolean) => void;
     onUpdate: (commitValue?: Value) => void;

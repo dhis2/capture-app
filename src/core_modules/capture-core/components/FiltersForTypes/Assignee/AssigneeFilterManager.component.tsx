@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AssigneeFilter as AssigneeFilterComponent } from './AssigneeFilter.component';
+import { AssigneeFilter as AssigneeFilterInput } from './AssigneeFilter.component';
 import type { AssigneeFilterData, AssigneeFilterManagerProps, Value } from './assignee.types';
 
 type State = {
@@ -36,7 +36,7 @@ export class AssigneeFilterManager extends React.Component<AssigneeFilterManager
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <AssigneeFilterComponent
+            <AssigneeFilterInput
                 value={this.state.value}
                 // @ts-expect-error - keeping original functionality as before ts rewrite
                 ref={filterTypeRef}

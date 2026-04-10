@@ -20,7 +20,7 @@ export type Value =
     | undefined;
 
 export type AssigneeFilterProps = {
-    value?: Value;
+    value: Value;
     onCommitValue: (value: Value) => void;
 };
 

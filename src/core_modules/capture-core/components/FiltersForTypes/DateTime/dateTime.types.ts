@@ -18,7 +18,7 @@ export type DateTimeValue = {
 export type Value = {
     from?: DateTimeValue | null;
     to?: DateTimeValue | null;
-} | string | null;
+} | string | null | undefined;
 
 export type DateTimeFilterProps = {
     onCommitValue: (value: Value) => void;
@@ -28,7 +28,7 @@ export type DateTimeFilterProps = {
 };
 
 export type DateTimeFilterManagerProps = {
-    filter?: DateTimeFilter | null;
+    filter: DateTimeFilter | null;
     filterTypeRef: (instance: unknown) => void;
-    handleCommitValue: (value?: Value | null) => void;
+    handleCommitValue: (value?: Value) => void;
 };

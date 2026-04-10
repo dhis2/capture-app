@@ -24,7 +24,7 @@ export type OrgUnitFilterProps = {
 };
 
 export type OrgUnitFilterManagerProps = {
-    filter: OrgUnitFilter | null | undefined;
+    filter: OrgUnitFilter | null;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: () => void;
     onUpdate: (updatedValue: Value) => void;

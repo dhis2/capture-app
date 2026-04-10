@@ -39,7 +39,7 @@ export type DateFilterProps = {
 };
 
 export type DateFilterManagerProps = {
-    filter?: DateFilter | null;
+    filter: DateFilter | null;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: (value?: Value, isBlur?: boolean) => void;
 };

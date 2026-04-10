@@ -16,7 +16,7 @@ export type UsernameFilterProps = {
 };
 
 export type UsernameFilterManagerProps = {
-    filter: UsernameFilter | null | undefined;
+    filter: UsernameFilter | null;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: (value?: Value) => void;
     onUpdate: (updatedValue: Value) => void;
