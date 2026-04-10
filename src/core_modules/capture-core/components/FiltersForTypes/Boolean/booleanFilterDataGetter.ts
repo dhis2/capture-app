@@ -5,8 +5,8 @@ import {
 import type { BooleanFilter, Value } from './boolean.types';
 
 export const getBooleanFilterData = (value: Value): BooleanFilter | null => {
-    if (typeof value === 'string' && isEmptyValueFilter(value)) {
-        return getEmptyValueFilterData(value);
+    if (typeof value === 'string') {
+        return isEmptyValueFilter(value) ? getEmptyValueFilterData(value) : null;
     }
     if (!value && value !== false) {
         return null;

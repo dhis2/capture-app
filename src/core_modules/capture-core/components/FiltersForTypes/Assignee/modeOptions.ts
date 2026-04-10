@@ -5,7 +5,7 @@ export const modeKeys = {
     ANY: 'ANY',
     NONE: 'NONE',
     PROVIDED: 'PROVIDED',
-};
+} as const;
 
 export function getModeOptions() {
     return [

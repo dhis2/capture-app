@@ -1,4 +1,4 @@
-import type { AssigneeFilter } from '../Assignee/assignee.types';
+import type { AssigneeFilterData } from '../Assignee/assignee.types';
 import type { BooleanFilter } from '../Boolean/boolean.types';
 import type { DateFilter } from '../Date/date.types';
 import type { DateTimeFilter } from '../DateTime/dateTime.types';
@@ -13,7 +13,7 @@ import type { UsernameFilter } from '../Username/username.types';
 
 export type { UpdatableFilterContent } from './filters.types';
 export type FilterData =
-    AssigneeFilter |
+    AssigneeFilterData |
     BooleanFilter |
     DateFilter |
     EmptyOnlyFilterData |

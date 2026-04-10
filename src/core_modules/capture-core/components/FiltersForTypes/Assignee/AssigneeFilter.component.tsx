@@ -6,7 +6,7 @@ import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
-import type { AssigneeFilterProps, Value } from './assignee.types';
+import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
 
 
@@ -53,7 +53,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         return true;
     }
 
-    handleModeSelect = (value: string) => {
+    handleModeSelect = (value: AssigneeMode) => {
         this.setState({
             error: '',
         });

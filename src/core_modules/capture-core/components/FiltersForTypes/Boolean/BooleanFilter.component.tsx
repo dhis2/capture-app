@@ -19,7 +19,7 @@ class BooleanFilterPlain extends Component<
 > implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value } = this.props;
-        return getBooleanFilterData(value);
+        return getBooleanFilterData(value ?? null);
     }
 
     onIsValid() { //eslint-disable-line
