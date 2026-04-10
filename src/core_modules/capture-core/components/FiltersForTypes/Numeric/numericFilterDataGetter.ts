@@ -13,7 +13,6 @@ function parseOptionalNumber(s: string | null | undefined): number | undefined {
 export function getNumericFilterData(value: Value): NumericFilter | null {
     if (!value) return null;
     if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
-    if (typeof value === 'string') return null;
     const ge = parseOptionalNumber(value.min);
     const le = parseOptionalNumber(value.max);
     if (ge == null && le == null) return null;

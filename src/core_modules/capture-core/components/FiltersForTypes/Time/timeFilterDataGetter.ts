@@ -7,7 +7,6 @@ import type { TimeFilter, TimeFilterData, Value } from './time.types';
 export function getTimeFilterData(value: Value): TimeFilter | null {
     if (!value) return null;
     if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
-    if (typeof value === 'string') return null;
     const filterData: TimeFilterData = {};
 
     if (value.from) {
