@@ -586,7 +586,7 @@ When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
         .then(($anchors) => {
             const prefix = filterName.substring(0, 28);
             const match = [...$anchors].find((node) => {
-                const text = node.innerText.replace(/\s+/g, ' ').trim();
+                const text = node.innerText.replaceAll(/\s+/g, ' ').trim();
                 return text.includes(filterName) || text.startsWith(prefix);
             });
             if (match) {
@@ -663,7 +663,7 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
             // contains the full filterName string — check with a safe 28-char prefix instead.
             const prefix = filterName.substring(0, 28);
             const match = [...$anchors].find((node) => {
-                const text = node.innerText.replace(/\s+/g, ' ').trim();
+                const text = node.innerText.replaceAll(/\s+/g, ' ').trim();
                 return text.includes(filterName) || text.startsWith(prefix);
             });
             if (match) {
@@ -801,7 +801,7 @@ Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is no
         .find('[data-test="filter-button-popover-anchor"]')
         .then(($anchors) => {
             const match = [...$anchors].find((el) => {
-                const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+                const text = (el.textContent || '').replaceAll(/\s+/g, ' ').trim();
                 return text === chipLabel || (text.includes(filterName) && text.includes(value));
             });
             expect(match, `isEmpty chip "${filterName}"`).to.not.equal(undefined);
