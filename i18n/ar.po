@@ -1,16 +1,16 @@
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Nadiia <semchuk@aph.org.ua>, 2025
-# Philip Larsen Donnelly, 2026
 # Hamza <7amza.it@gmail.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-02-26T11:13:44.176Z\n"
+"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -94,11 +94,11 @@ msgstr "عرض لوحة المعلومات"
 msgid "View active enrollment"
 msgstr "عرض التسجيل النشط"
 
+msgid "Re-enroll in {{programName}}"
+msgstr ""
+
 msgid "Re-enroll"
 msgstr "إعادة التسجيل"
-
-msgid "in"
-msgstr "في"
 
 msgid "Enrolled"
 msgstr "مسجل"
@@ -121,10 +121,10 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -283,8 +283,14 @@ msgstr "التحويل الى العرض كنموذج"
 msgid "Switch to row view"
 msgstr "التحويل إلى العرض كصفوف"
 
-msgid "events added"
-msgstr "تمت إضافة الأحداث"
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 msgid "No events added"
 msgstr "لم تتم إضافة أحداث"
@@ -326,6 +332,9 @@ msgstr ""
 
 msgid "enrollment"
 msgstr ""
+
+msgid "in"
+msgstr "في"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -467,29 +476,32 @@ msgstr "حدد المستخدم"
 msgid "Please specify a range"
 msgstr ""
 
-msgid "The From date can't be after the To date"
-msgstr ""
-
-msgid "Please specify the number of days"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صفر"
-
-msgid "to"
-msgstr "إلى"
-
-msgid "Days in the future"
+msgid "Start date must be before the end date"
 msgstr ""
 
 msgid "From"
 msgstr "من"
 
-msgid "Days in the past"
-msgstr ""
+msgid "to"
+msgstr "إلى"
 
 msgid "To"
 msgstr "الى"
+
+msgid "Period"
+msgstr "الفترة الزمنية"
+
+msgid "Please provide zero or a positive integer"
+msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صفر"
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr ""
+
+msgid "Days in the future"
+msgstr ""
 
 msgid "This week"
 msgstr "الأسبوع الحالي"
@@ -497,8 +509,8 @@ msgstr "الأسبوع الحالي"
 msgid "This month"
 msgstr "الشهر الحالي"
 
-msgid "This Year"
-msgstr "العام الحالي"
+msgid "This year"
+msgstr ""
 
 msgid "Last week"
 msgstr "الأسبوع الماضي"
@@ -515,17 +527,29 @@ msgstr ""
 msgid "Relative range"
 msgstr ""
 
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Time"
+msgstr "الوقت"
+
+msgid "Before"
+msgstr ""
+
 msgid "Is empty"
 msgstr ""
 
 msgid "Is not empty"
 msgstr ""
-
-msgid "Max"
-msgstr "الأعلى"
-
-msgid "Min"
-msgstr "الأدنى"
 
 msgid "Minimum value cannot be greater than maximum value"
 msgstr ""
@@ -536,11 +560,20 @@ msgstr "نرجوا ادخال صيغة رقمية سليمة"
 msgid "Please provide a valid integer"
 msgstr "من فضلك ادخل رقماً صحيحاً سليماً، من غير كسر"
 
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
 msgid "Please provide a positive integer"
 msgstr "من فضلك ادخل رقماً صحيحاً موجباً"
 
 msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
+
+msgid "Min"
+msgstr "الأدنى"
+
+msgid "Max"
+msgstr "الأعلى"
 
 msgid "Yes"
 msgstr "نعم"
@@ -617,7 +650,7 @@ msgstr ""
 msgid "Remove filter"
 msgstr "إزالة عامل التصفية"
 
-msgid "This filter requires more characters than a date can provide."
+msgid "Minimum characters to search is too high for this filter."
 msgstr ""
 
 msgid "Please enter at least {{minCharactersToSearch}} character to filter"
@@ -630,6 +663,9 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} إلى {{toDate}}"
 
@@ -639,11 +675,23 @@ msgstr "من بعد أو مساوٍ لـ {{date}}"
 msgid "before or equal to {{date}}"
 msgstr "من قبل أو مساوٍ لـ {{date}}"
 
-msgid "greater than or equal to"
-msgstr "أكبر من أو يساوي"
+msgid "{{start}} days in the past to {{end}} days in the future"
+msgstr ""
 
-msgid "less than or equal to"
-msgstr "أقل من أو يساوي"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
 
 msgid "More filters"
 msgstr "عوامل تصفية أكثر"
@@ -672,7 +720,7 @@ msgstr ""
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -978,6 +1026,9 @@ msgstr "بحث {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "البحث حسب السمة"
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
@@ -988,6 +1039,9 @@ msgstr[4] ""
 msgstr[5] ""
 
 msgid "Missing search criteria"
+msgstr ""
+
+msgid "Please fill in {{uniqueTEAName}} to search"
 msgstr ""
 
 msgid "Back to search"
@@ -1044,6 +1098,12 @@ msgstr "غير محدد"
 msgid "Choose an organisation unit"
 msgstr ""
 
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
+msgstr ""
+
 msgid "Clear selection"
 msgstr ""
 
@@ -1060,6 +1120,12 @@ msgid "Show all programs"
 msgstr ""
 
 msgid "Choose a program"
+msgstr ""
+
+msgid "Choose a {{title}}"
+msgstr ""
+
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid "Search for {{titleText}}"
@@ -1123,6 +1189,9 @@ msgid ""
 "looking for."
 msgstr "يمكنك تغيير مصطلحات البحث والبحث مرة أخرى للعثور على ما تبحث عنه."
 
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later."
@@ -1145,6 +1214,9 @@ msgstr ""
 msgid "Cannot search in all programs"
 msgstr ""
 
+msgid "Results found in {{currentSearchScopeName}}"
+msgstr ""
+
 msgid "Results found"
 msgstr "العثور على نتائج"
 
@@ -1162,13 +1234,16 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
 msgstr "انشئ حدثاً جديداً"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search..."
 msgstr ""
 
 msgid "Select tracked entity type"
@@ -1736,9 +1811,6 @@ msgstr "تم الإنشاء"
 msgid "Deleted"
 msgstr "تم حذفه"
 
-msgid "Date"
-msgstr "التاريخ"
-
 msgid "Sort by date"
 msgstr ""
 
@@ -2191,9 +2263,6 @@ msgstr "من فضلك ادخل صيغة سليمة للتاريخ والوقت"
 msgid "Please provide a valid time"
 msgstr "من فضلك ادخل صيغة وقت سليمة"
 
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
 msgid "Please provide a valid url"
 msgstr "من فضلك ادخل الأرتباط التشعبي بصيغة سليمة"
 
@@ -2247,9 +2316,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
-
-msgid "Time"
-msgstr "الوقت"
 
 msgid "From date"
 msgstr "من تاريخ"
