@@ -326,20 +326,24 @@ Scenario: Save and load view with active filters for - BOOLEAN, LONG_TEXT
   And the saved tracker working list view is cleaned up
 
 @v>=42
-Scenario: Save and load view with isEmpty filtering for - BOOLEAN, LONG_TEXT
+Scenario: Save and load view with isEmpty filtering for - BOOLEAN, LONG_TEXT, FILE_RESOURCE
   Given you open the main page with Ngelehun and child programme default template context
   When you set the isEmpty filter "BCG dose" to Is empty
   And you set the isEmpty filter "Apgar comment" to Is empty
+  And you set the isEmpty filter "Birth certificate" to Is empty
   And you save the program stage view as trackerStoredWorkingList
   And you refresh the page
   Then the isEmpty filter "BCG dose" should be in effect and show Is empty when opened
   And the isEmpty filter "Apgar comment" should be in effect and show Is empty when opened
+  And the isEmpty filter "Birth certificate" should be in effect and show Is empty when opened
   When you set the isEmpty filter "BCG dose" to Is not empty
   And you set the isEmpty filter "Apgar comment" to Is not empty
+  And you set the isEmpty filter "Birth certificate" to Is not empty
   And you update the tracker program stage view with the name trackerStoredWorkingList
   And you refresh the page
   Then the isEmpty filter "BCG dose" should be in effect and show Is not empty when opened
   And the isEmpty filter "Apgar comment" should be in effect and show Is not empty when opened
+  And the isEmpty filter "Birth certificate" should be in effect and show Is not empty when opened
   And the saved tracker working list view is cleaned up
 
 Scenario: Save and load view with active filters for - INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, DATE, ORGANISATION_UNIT
