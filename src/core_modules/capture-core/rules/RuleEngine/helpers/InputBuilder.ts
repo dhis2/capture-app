@@ -81,6 +81,7 @@ const eventMainKeys = new Set([
     'status',
     'occurredAt',
     'createdAt',
+    'createdAtClient',
     'scheduledAt',
     'completedAt',
 ]);
@@ -256,12 +257,14 @@ export class InputBuilder {
             status,
             occurredAt,
             createdAt,
+            createdAtClient,
             scheduledAt: dueDate,
             completedAt: completedDate,
         } = eventData;
 
-        const eventDate = occurredAt ? RuleInstant.parse(occurredAt) : null;
+        const eventDate = occurredAt ? this.toLocalDate(occurredAt) : null;
         const createdDate = createdAt ? RuleInstant.parse(createdAt) : RuleInstant.now();
+        const createdAtClientDate = createdAtClient ? RuleInstant.parse(createdAtClient) : null;
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
@@ -279,6 +282,7 @@ export class InputBuilder {
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
             createdDate,
+            createdAtClientDate,
             this.toLocalDate(dueDate),
             this.toLocalDate(completedDate),
             this.selectedOrgUnit.id,

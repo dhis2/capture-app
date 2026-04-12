@@ -1,3 +1,24 @@
+## [105.13.5](https://github.com/dhis2/capture-app/compare/v105.13.4...v105.13.5) (2026-03-26)
+
+
+### Reverts
+
+* Revert "chore: [DHIS2-16606] Eslint - complexity rule" (#4500) ([5234add](https://github.com/dhis2/capture-app/commit/5234add2f1e0f75f8400b412577fd682bed857c7)), closes [#4500](https://github.com/dhis2/capture-app/issues/4500) [#4491](https://github.com/dhis2/capture-app/issues/4491)
+
+## [105.13.4](https://github.com/dhis2/capture-app/compare/v105.13.3...v105.13.4) (2026-03-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([32cb00c](https://github.com/dhis2/capture-app/commit/32cb00c8423cffde993b6fdc48a6bc325b98b92a))
+
+## [105.13.3](https://github.com/dhis2/capture-app/compare/v105.13.2...v105.13.3) (2026-03-20)
+
+
+### Bug Fixes
+
+* [DHIS2-19862][DHIS2-21115] bump rule engine to 3.7.1 ([#4487](https://github.com/dhis2/capture-app/issues/4487)) ([3a3b17d](https://github.com/dhis2/capture-app/commit/3a3b17de28d09569e0c3ab88fafe38b9119f2316))
+
 ## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
 
 
