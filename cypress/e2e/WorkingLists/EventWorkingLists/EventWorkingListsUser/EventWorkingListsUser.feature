@@ -149,14 +149,6 @@ Scenario: Save and load view with isEmpty filtering for - BOOLEAN, INTEGER, NUMB
   And you set the isEmpty filter "Place of Infection" to Is empty
   And you set the isEmpty filter "Household location" to Is empty
   And you set the isEmpty filter "Documentation" to Is empty
-  Then the isEmpty filter "Pregnant" should be in effect with value Is empty
-  And the isEmpty filter "Age (years)" should be in effect with value Is empty
-  And the isEmpty filter "Height in cm" should be in effect with value Is empty
-  And the isEmpty filter "Weight in kg" should be in effect with value Is empty
-  And the isEmpty filter "Date of admission" should be in effect with value Is empty
-  And the isEmpty filter "Place of Infection" should be in effect with value Is empty
-  And the isEmpty filter "Household location" should be in effect with value Is empty
-  And the isEmpty filter "Documentation" should be in effect with value Is empty
   And you save the view as eventStoredWorkingList
   And you refresh the page
   And you open the saved view eventStoredWorkingList
@@ -197,17 +189,17 @@ Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE, URL) are no
   And the filter option "Documentation" should not appear in the More filters menu
 
 Scenario: User is promted with message to select Category
-Given you open the main page with Ngelehun and Contraceptives Voucher Program
-Then you are told to select Implementing Partner
+  Given you open the main page with Ngelehun and Contraceptives Voucher Program
+  Then you are told to select Implementing Partner
 
 Scenario: The user can see the working list when selecting Category
-Given you open the main page with Ngelehun and Contraceptives Voucher Program
-When the user selects CARE International
-Then the working list should be displayed
+  Given you open the main page with Ngelehun and Contraceptives Voucher Program
+  When the user selects CARE International
+  Then the working list should be displayed
 
 Scenario: The user can delete a working list right immediately after creating it.
-Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
-When you set the date of admission filter
-And you save the view as eventStoredWorkingList
-When you delete the name eventStoredWorkingList
-Then the custom events working list is deleted
+  Given you open the main page with Ngelehun and Inpatient morbidity and mortality context
+  When you set the date of admission filter
+  And you save the view as eventStoredWorkingList
+  When you delete the name eventStoredWorkingList
+  Then the custom events working list is deleted

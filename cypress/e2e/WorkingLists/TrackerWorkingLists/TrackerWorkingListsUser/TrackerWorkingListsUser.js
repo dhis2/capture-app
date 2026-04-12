@@ -581,11 +581,14 @@ When(/^you set the range filter "([^"]+)" to (-?\d+)-(-?\d+)$/, (filterName, min
 });
 
 When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
-    const labelPrefix = truncateFilterLabelForTest(filterName);
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
         .then(($anchors) => {
-            const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
+            const prefix = filterName.substring(0, 28);
+            const match = [...$anchors].find((node) => {
+                const text = node.innerText.replace(/\s+/g, ' ').trim();
+                return text.includes(filterName) || text.startsWith(prefix);
+            });
             if (match) {
                 cy.wrap(match).click();
             } else {
@@ -653,11 +656,16 @@ When('you open the program stage More filters menu for Birth on the tracker work
 });
 
 When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    const namePrefix = filterName.substring(0, 20);
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
         .then(($anchors) => {
-            const match = [...$anchors].find((node) => node.textContent?.includes(namePrefix));
+            // When filterName is long (≥32 chars), the chip label is truncated and no longer
+            // contains the full filterName string — check with a safe 28-char prefix instead.
+            const prefix = filterName.substring(0, 28);
+            const match = [...$anchors].find((node) => {
+                const text = node.innerText.replace(/\s+/g, ' ').trim();
+                return text.includes(filterName) || text.startsWith(prefix);
+            });
             if (match) {
                 cy.wrap(match).click();
             } else {
@@ -666,6 +674,13 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
             }
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When('you set the boolean filter', () => {
+    openStageFilterMenu('BCG dose');
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('BCG dose').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Yes').click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
@@ -782,10 +797,30 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
 
 Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const match = [...$anchors].find((el) => {
+                const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+                return text === chipLabel || (text.includes(filterName) && text.includes(value));
+            });
+            expect(match, `isEmpty chip "${filterName}"`).to.not.equal(undefined);
+            cy.wrap(match).click();
+        });
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then('the boolean filter should be in effect and show the correct value when opened', () => {
+    const filterName = 'BCG dose';
+    const value = 'Yes';
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
+        cy.contains(value).closest('label').find('input').should('be.checked');
     });
     cy.get('body').click(0, 0);
 });

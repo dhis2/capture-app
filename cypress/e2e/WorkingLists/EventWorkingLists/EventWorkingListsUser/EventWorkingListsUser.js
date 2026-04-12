@@ -19,6 +19,10 @@ const cleanUpEventFilterIfApplicable = (programId, displayName) => {
         });
 };
 
+Given('you open the main page with Ngelehun and malaria case context', () => {
+    cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+});
+
 Given('you open the main page with Ngelehun and event program text filter context', () => {
     cleanUpEventFilterIfApplicable('MoUd5BTQ3lY', 'eventStoredWorkingList');
     cy.visit('#/?programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8');
