@@ -6,15 +6,9 @@ import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
 } from '../EmptyValue';
-import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilter, DateValue, Value } from './date.types';
+import type { AbsoluteDateFilterData, RelativeDateFilterData, DateFilter, Value } from './date.types';
 
-type ValueWithMain = {
-    main: string;
-    from?: DateValue;
-    to?: DateValue;
-    start?: string;
-    end?: string;
-};
+type DateObjectValue = Exclude<Value, string | undefined>;
 
 function convertAbsoluteDate(fromValue?: string | null, toValue?: string | null) {
     const rangeData: AbsoluteDateFilterData = {
@@ -34,7 +28,7 @@ function convertAbsoluteDate(fromValue?: string | null, toValue?: string | null)
     return rangeData;
 }
 
-function convertRelativeRange(value: ValueWithMain) {
+function convertRelativeRange(value: DateObjectValue) {
     const rangeData: RelativeDateFilterData = {
         type: dateFilterTypes.RELATIVE,
     };
@@ -52,7 +46,7 @@ function convertRelativeRange(value: ValueWithMain) {
     return rangeData;
 }
 
-function convertSelections(value: ValueWithMain) {
+function convertSelections(value: DateObjectValue) {
     if (value.main === mainOptionKeys.ABSOLUTE_RANGE) {
         return convertAbsoluteDate(value?.from?.value, value?.to?.value);
     }
@@ -66,5 +60,5 @@ export function getDateFilterData(value: Value): DateFilter | null {
     if (!value) return null;
     if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
     if (!value.main) return null;
-    return convertSelections(value as ValueWithMain);
+    return convertSelections(value);
 }

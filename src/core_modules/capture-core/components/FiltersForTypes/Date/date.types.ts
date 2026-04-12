@@ -26,7 +26,7 @@ export type DateFilter = DateFilterData | EmptyValueFilterData;
 export type Value = {
     from?: DateValue;
     to?: DateValue;
-    main?: string;
+    main: string;
     start?: string;
     end?: string;
 } | string | undefined;
