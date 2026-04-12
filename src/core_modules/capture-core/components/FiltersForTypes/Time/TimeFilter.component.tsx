@@ -47,10 +47,6 @@ const getStyles: Readonly<any> = (theme: any) => {
 
 type Props = TimeFilterProps & WithStyles<typeof getStyles>;
 
-type State = {
-    committedValue: Value;
-};
-
 const isFromAfterTo = (from: string | undefined | null, to: string | undefined | null): boolean => {
     if (!from || !to) {
         return false;
@@ -60,7 +56,7 @@ const isFromAfterTo = (from: string | undefined | null, to: string | undefined |
 
 type ValuePart = { from?: string | null } | { to?: string | null };
 
-class TimeFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
+class TimeFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     static isFilterValid(value: Value): boolean {
         if (!value || typeof value === 'string') {
             return true;
@@ -69,13 +65,6 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         const hasNoTimes = !from && !to;
         const isOrderInvalid = !!from && !!to && isFromAfterTo(from, to);
         return !hasNoTimes && !isOrderInvalid;
-    }
-
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            committedValue: props.value,
-        };
     }
 
     onGetUpdateData(updatedValue?: Value) {
@@ -107,13 +96,11 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     handleFieldBlur = (valuePart: ValuePart) => {
         const updated = this.getUpdatedValue(valuePart);
-        this.setState({ committedValue: updated });
         this.props.onCommitValue(updated);
     };
 
     handleEnterKey = (valuePart: ValuePart) => {
         const updated = this.getUpdatedValue(valuePart);
-        this.setState({ committedValue: updated });
         if (updated && !TimeFilterPlain.isFilterValid(updated)) {
             this.props.onCommitValue(updated);
         } else {
@@ -129,13 +116,8 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         this.props.onCommitValue(this.getUpdatedValue({ to: value || null }));
     };
 
-    handleEmptyValueCommit = (value: any) => {
-        this.setState({ committedValue: value });
-        this.props.onCommitValue(value);
-    };
-
     getTimeLogicError() {
-        const values = this.state.committedValue;
+        const values = this.props.value;
         if (!values || typeof values === 'string') {
             return null;
         }
@@ -157,7 +139,7 @@ class TimeFilterPlain extends Component<Props, State> implements UpdatableFilter
         return (
             <WithEmptyValueFilter
                 value={value}
-                onCommitValue={this.handleEmptyValueCommit}
+                onCommitValue={this.props.onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
                 {filteredValue => (

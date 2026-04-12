@@ -40,12 +40,8 @@ const getStyles: any = (theme: any) => ({
     },
 });
 
-type State = {
-    committedValue: Value;
-};
-
 class NumericFilterPlain
-    extends Component<NumericFilterProps & WithStyles<typeof getStyles>, State>
+    extends Component<NumericFilterProps & WithStyles<typeof getStyles>>
     implements UpdatableFilterContent<Value> {
     static validateField(value: string | null | undefined, type: typeof dataElementTypes[keyof typeof dataElementTypes]) {
         if (!value) {
@@ -75,13 +71,6 @@ class NumericFilterPlain
         }
 
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
-    }
-
-    constructor(props: NumericFilterProps & WithStyles<typeof getStyles>) {
-        super(props);
-        this.state = {
-            committedValue: props.value,
-        };
     }
 
     onGetUpdateData(updatedValues?: Value) {
@@ -130,14 +119,8 @@ class NumericFilterPlain
             .length > 0 ? valueObject : undefined;
     }
 
-    handleEmptyValueCommit = (value: any) => {
-        this.setState({ committedValue: value });
-        this.props.onCommitValue(value);
-    };
-
     handleEnterKey = (value: {[key: string]: string}) => {
         const values = this.getUpdatedValue(value);
-        this.setState({ committedValue: values });
         if (values && !NumericFilterPlain.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values, true);
         } else {
@@ -147,7 +130,6 @@ class NumericFilterPlain
 
     handleFieldBlur = (value: {[key: string]: string}) => {
         const updated = this.getUpdatedValue(value);
-        this.setState({ committedValue: updated });
         this.props.onCommitValue(updated, true);
     }
 
@@ -160,14 +142,13 @@ class NumericFilterPlain
     }
 
     getErrors() {
-        const committed = this.state.committedValue;
-        if (typeof committed === 'string') {
+        const { value, type } = this.props;
+        if (!value || typeof value === 'string') {
             return { minValueError: null, maxValueError: null, logicError: null };
         }
 
-        const minValue = committed?.min;
-        const maxValue = committed?.max;
-        const type = this.props.type;
+        const minValue = value.min;
+        const maxValue = value.max;
 
         const { error: minValueError, isValid: isMinValid } = NumericFilterPlain.validateField(minValue, type);
         const { error: maxValueError, isValid: isMaxValid } = NumericFilterPlain.validateField(maxValue, type);
@@ -185,7 +166,7 @@ class NumericFilterPlain
         return (
             <WithEmptyValueFilter
                 value={value}
-                onCommitValue={this.handleEmptyValueCommit}
+                onCommitValue={this.props.onCommitValue}
                 disabled={this.props.disableEmptyValueFilter}
             >
                 {filteredValue => (
