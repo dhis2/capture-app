@@ -294,7 +294,7 @@ Feature: User interacts with tei working lists
     And you delete the name Custom Program stage list
     Then the Custom Program stage list is deleted
 
-  Scenario: Save and load view with stored WL filters - EMAIL
+  Scenario: Save and load view with active filters for - EMAIL
     Given you open the main page with Ngelehun and WHO RMNCH Tracker context
     When you set the text filter "Email address" to test@example.com
     And you save the view as trackerStoredWorkingList
@@ -303,7 +303,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with stored WL filters - FILE_RESOURCE, BOOLEAN, LONG_TEXT
+  Scenario: Save and load view with active filters for - FILE_RESOURCE, BOOLEAN, LONG_TEXT
     Given you open the main page with Ngelehun and child programme default template context
     When you set the isEmpty filter "Birth certificate" to Is empty
     And you set the option filter "BCG dose" to Yes
@@ -316,7 +316,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v<42
-  Scenario: Save and load view with stored WL filters - BOOLEAN, LONG_TEXT (no empty-only types)
+  Scenario: Save and load view with active filters for - BOOLEAN, LONG_TEXT (no empty-only types)
     Given you open the main page with Ngelehun and child programme default template context
     When you set the option filter "BCG dose" to Yes
     And you set the text filter "Apgar comment" to some long text comment
@@ -326,7 +326,7 @@ Feature: User interacts with tei working lists
     And the text filter "Apgar comment" should be in effect and show some long text comment when opened
     And the saved tracker working list view is cleaned up
 
-  Scenario: Save and load view with stored WL filters - Care at birth INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, DATE, ORGANISATION_UNIT
+  Scenario: Save and load view with active filters for - Care at birth INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, DATE, ORGANISATION_UNIT
     Given you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context
     When you set the range filter "WHOMCH Fetal heart rate on admission" to 60-180
     And you set the range filter "WHOMCH Estimated blood loss (ml)" to 0-500
@@ -348,7 +348,7 @@ Feature: User interacts with tei working lists
     And the program stage organisation unit filter "WHOMCH Hospital / Birth clinic" should be in effect and show "Ngelehun" when opened
     And the saved tracker working list view is cleaned up
 
-  Scenario: Save and load view with stored WL filters - TRUE_ONLY
+  Scenario: Save and load view with active filters for - TRUE_ONLY
     Given you open the main page with Ngelehun and Malaria case diagnosis default template context
     When you set the option filter "Date of birth (mal) is estimated" to Yes
     And you save the view as trackerStoredWorkingList
@@ -357,7 +357,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER, COORDINATE
+  Scenario: Save and load view with active filters for - TEXT, AGE, NUMBER, PHONE_NUMBER, COORDINATE
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the first name filter to ValueTypesTest
     And you apply the current filter
@@ -377,7 +377,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with isEmpty filters for TEA types - TEXT, NUMBER, AGE
+  Scenario: Save and load view with isEmpty filtering for TEA types - TEXT, NUMBER, AGE
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the isEmpty filter "Phone number" to Is empty
     And you set the isEmpty filter "Height in cm" to Is not empty
@@ -398,7 +398,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with isEmpty filters for program stage types - BOOLEAN, LONG_TEXT
+  Scenario: Save and load view with isEmpty filtering for program stage types - BOOLEAN, LONG_TEXT
     Given you open the main page with Ngelehun and child programme default template context
     When you set the isEmpty filter "BCG dose" to Is not empty
     And you set the isEmpty filter "Apgar comment" to Is empty
@@ -415,7 +415,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with isEmpty filters for Care at birth program stage types - INTEGER_POSITIVE, PERCENTAGE, DATE, ORGANISATION_UNIT, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE
+  Scenario: Save and load view with isEmpty filtering for Care at birth program stage types - INTEGER_POSITIVE, PERCENTAGE, DATE, ORGANISATION_UNIT, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE
     Given you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context
     When you set the isEmpty filter "WHOMCH Fetal heart rate on admission" to Is not empty
     And you set the isEmpty filter "WHOMCH Body temperature" to Is empty
@@ -448,7 +448,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with isEmpty filters for TRUE_ONLY type
+  Scenario: Save and load view with isEmpty filtering for TRUE_ONLY type
     Given you open the main page with Ngelehun and Malaria case diagnosis default template context
     When you set the isEmpty filter "Date of birth (mal) is estimated" to Is not empty
     And you save the view as trackerStoredWorkingList
@@ -461,7 +461,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with isEmpty filters for EMAIL type
+  Scenario: Save and load view with isEmpty filtering for EMAIL type
     Given you open the main page with Ngelehun and WHO RMNCH Tracker context
     When you set the isEmpty filter "Email address" to Is not empty
     And you save the view as trackerStoredWorkingList
@@ -474,7 +474,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v>=42
-  Scenario: Save and load view with isEmpty filters for OPTION_SET (program stage BOOLEAN with option set)
+  Scenario: Save and load view with isEmpty filtering for OPTION_SET (program stage BOOLEAN with option set)
     Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
     When you set the isEmpty filter "WHOMCH Smoking" to Is not empty
     And you save the program stage view as trackerStoredWorkingList
@@ -487,7 +487,7 @@ Feature: User interacts with tei working lists
     And the saved tracker working list view is cleaned up
 
   @v<42
-  Scenario: Save and load view with stored WL filters - TEXT, AGE, NUMBER, PHONE_NUMBER (no empty-only types)
+  Scenario: Save and load view with active filters for - TEXT, AGE, NUMBER, PHONE_NUMBER (no empty-only types)
     Given you open the main page with Ngelehun and TEI value types program context
     When you set the first name filter to ValueTypesTest
     And you apply the current filter

@@ -4,16 +4,6 @@ import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const NGELEHUN_ORG_UNIT_ID = 'DiszpKrYNg8';
-
-const MALARIA_CASE_PROGRAM_ID = 'VBqh0ynB2wv';
-const INPATIENT_MORBIDITY_PROGRAM_ID = 'eBAyeGv0exc';
-const CONTRACEPTIVES_VOUCHER_PROGRAM_ID = 'kla3mAPgvCH';
-const XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID = 'MoUd5BTQ3lY';
-
-const programAndOrgUnitQuery = (programId) =>
-    `programId=${programId}&orgUnitId=${NGELEHUN_ORG_UNIT_ID}`;
-
 const cleanUpEventFilterIfApplicable = (programId, displayName) => {
     cy.buildApiUrl(`eventFilters?filter=program:eq:${programId}&fields=id,displayName`)
         .then((url) => cy.request(url))
@@ -29,23 +19,18 @@ const cleanUpEventFilterIfApplicable = (programId, displayName) => {
         });
 };
 
-const CONTEXT_QUERIES = {
-    'malaria case context': programAndOrgUnitQuery(MALARIA_CASE_PROGRAM_ID),
-    'Inpatient morbidity and mortality context': programAndOrgUnitQuery(INPATIENT_MORBIDITY_PROGRAM_ID),
-    'Contraceptives Voucher Program': programAndOrgUnitQuery(CONTRACEPTIVES_VOUCHER_PROGRAM_ID),
-    'event program text filter context': programAndOrgUnitQuery(XX_MAL_RDT_CASE_REGISTRATION_PROGRAM_ID),
-};
+Given('you open the main page with Ngelehun and event program text filter context', () => {
+    cleanUpEventFilterIfApplicable('MoUd5BTQ3lY', 'eventStoredWorkingList');
+    cy.visit('#/?programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8');
+});
 
-const PRE_VISIT_CLEANUP_BY_CONTEXT = {
-    'Inpatient morbidity and mortality context': () =>
-        cleanUpEventFilterIfApplicable(INPATIENT_MORBIDITY_PROGRAM_ID, 'eventStoredWorkingList'),
-};
+Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
+    cleanUpEventFilterIfApplicable('eBAyeGv0exc', 'eventStoredWorkingList');
+    cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
+});
 
-Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
-    PRE_VISIT_CLEANUP_BY_CONTEXT[contextOrPath]?.();
-
-    const query = CONTEXT_QUERIES[contextOrPath] ?? contextOrPath;
-    cy.visit(`#/?${query}`);
+Given('you open the main page with Ngelehun and Contraceptives Voucher Program', () => {
+    cy.visit('#/?programId=kla3mAPgvCH&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
