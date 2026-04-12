@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SingleOrgUnitSelectField } from '../../FormFields/New';
 import { getOrgUnitFilterData } from './orgUnitFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { OrgUnitFilterProps, Value, OrgUnitValue } from './orgUnit.types';
+import type { OrgUnitFilterProps, Value } from './orgUnit.types';
 import { WithEmptyValueFilter } from '../EmptyValue';
 
 export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements UpdatableFilterContent<Value> {
@@ -11,7 +11,7 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
         return getOrgUnitFilterData(value);
     }
 
-    handleOrgUnitChange = (value: OrgUnitValue | null) => {
+    handleOrgUnitChange = (value: Value | null) => {
         this.props.onCommitValue(value);
         if (value === null && this.props.onClearValue) {
             this.props.onClearValue();

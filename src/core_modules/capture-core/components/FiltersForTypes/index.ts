@@ -1,4 +1,4 @@
-export { AssigneeFilter, modeKeys as assigneeFilterModeKeys, type AssigneeFilterData } from './Assignee';
+export { AssigneeFilter, type AssigneeFilterData } from './Assignee';
 export { assigneeFilterModes } from './Assignee/assignee.const';
 export { BooleanFilter, type BooleanFilterData } from './Boolean';
 export {

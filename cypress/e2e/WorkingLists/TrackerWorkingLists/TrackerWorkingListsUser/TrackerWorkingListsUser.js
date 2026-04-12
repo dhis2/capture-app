@@ -659,8 +659,6 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
         .then(($anchors) => {
-            // When filterName is long (≥32 chars), the chip label is truncated and no longer
-            // contains the full filterName string — check with a safe 28-char prefix instead.
             const prefix = filterName.substring(0, 28);
             const match = [...$anchors].find((node) => {
                 const text = node.innerText.replaceAll(/\s+/g, ' ').trim();

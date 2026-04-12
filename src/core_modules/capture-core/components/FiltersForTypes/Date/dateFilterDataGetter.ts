@@ -59,6 +59,5 @@ function convertSelections(value: DateObjectValue) {
 export function getDateFilterData(value: Value): DateFilter | null {
     if (!value) return null;
     if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
-    if (!value.main) return null;
     return convertSelections(value);
 }

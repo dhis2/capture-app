@@ -46,8 +46,6 @@ const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined
     le: filter?.le ?? undefined,
 });
 
-
-// Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
 const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => {
     if (typeof filter === 'boolean') {
         return { values: [filter] };

@@ -11,13 +11,10 @@ export type AssigneeFilterData = {
 
 export type AssigneeMode = typeof assigneeFilterModes[keyof typeof assigneeFilterModes];
 
-export type Value =
-    | {
-          mode: AssigneeMode;
-          provided?: AssigneeFilterData['assignedUser'];
-      }
-    | null
-    | undefined;
+export type Value = {
+    mode: AssigneeMode;
+    provided?: AssigneeFilterData['assignedUser'];
+} | null | undefined;
 
 export type AssigneeFilterProps = {
     value: Value;

@@ -39,7 +39,7 @@ export class TextFilter
                 {filteredValue => (
                     <>
                         <Input
-                            value={filteredValue || ''}
+                            value={filteredValue}
                             onBlur={this.handleBlur}
                             onEnterKey={this.handleEnterKey}
                             onChange={this.handleChange}

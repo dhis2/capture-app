@@ -13,7 +13,6 @@ export class OrgUnitFilterManager extends React.Component<OrgUnitFilterManagerPr
         if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
 
         const { value, name } = filter;
-        if (!value) return { value: undefined };
         return { value: { id: value, name: name ?? value, path: '' } };
     }
 

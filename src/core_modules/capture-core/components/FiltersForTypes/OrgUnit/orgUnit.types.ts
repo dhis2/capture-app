@@ -1,11 +1,5 @@
 import type { EmptyValueFilterData } from '../EmptyValue/emptyValue.types';
 
-export type OrgUnitValue = {
-    id: string;
-    name: string;
-    path: string;
-};
-
 export type OrgUnitFilterData = {
     value: string;
     name?: string;
@@ -13,7 +7,11 @@ export type OrgUnitFilterData = {
 
 export type OrgUnitFilter = OrgUnitFilterData | EmptyValueFilterData;
 
-export type Value = OrgUnitValue | string | null | undefined;
+export type Value = {
+    id: string;
+    name: string;
+    path: string;
+} | string | null | undefined;
 
 export type OrgUnitFilterProps = {
     onCommitValue: (value: Value) => void;

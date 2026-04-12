@@ -5,16 +5,16 @@ import {
 } from '../EmptyValue';
 import type { NumericFilter, Value } from './numeric.types';
 
-function parseOptionalNumber(s: string | null | undefined): number | undefined {
-    if (s == null || s === '') return undefined;
-    return parseNumber(s) ?? undefined;
-}
 
 export function getNumericFilterData(value: Value): NumericFilter | null {
     if (!value) return null;
     if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
-    const ge = parseOptionalNumber(value.min);
-    const le = parseOptionalNumber(value.max);
-    if (ge == null && le == null) return null;
-    return { ge, le };
+
+    const min = value.min || undefined;
+    const max = value.max || undefined;
+
+    return {
+        ge: min ? parseNumber(min) : undefined,
+        le: max ? parseNumber(max) : undefined,
+    };
 }

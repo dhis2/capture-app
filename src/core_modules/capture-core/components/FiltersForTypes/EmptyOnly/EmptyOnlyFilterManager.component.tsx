@@ -1,7 +1,7 @@
 import React from 'react';
 import { EmptyOnlyFilter } from './EmptyOnlyFilter.component';
 import type { EmptyOnlyFilterData, EmptyOnlyFilterManagerProps, Value } from './emptyOnly.types';
-import { getEmptyValueFilterValue } from '../EmptyValue';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 
 type State = {
     value: Value;
@@ -9,7 +9,8 @@ type State = {
 
 export class EmptyOnlyFilterManager extends React.Component<EmptyOnlyFilterManagerProps, State> {
     static calculateDefaultState(filter: EmptyOnlyFilterData | null | undefined): State {
-        if (filter) return { value: getEmptyValueFilterValue(filter) };
+        if (!filter) return { value: undefined };
+        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
         return { value: undefined };
     }
 

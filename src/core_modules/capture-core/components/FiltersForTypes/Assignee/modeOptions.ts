@@ -1,29 +1,23 @@
 import i18n from '@dhis2/d2-i18n';
-
-export const modeKeys = {
-    CURRENT: 'CURRENT',
-    ANY: 'ANY',
-    NONE: 'NONE',
-    PROVIDED: 'PROVIDED',
-} as const;
+import { assigneeFilterModes } from './assignee.const';
 
 export function getModeOptions() {
     return [
         {
             name: i18n.t('Me'),
-            value: modeKeys.CURRENT,
+            value: assigneeFilterModes.CURRENT,
         },
         {
             name: i18n.t('Anyone'),
-            value: modeKeys.ANY,
+            value: assigneeFilterModes.ANY,
         },
         {
             name: i18n.t('None'),
-            value: modeKeys.NONE,
+            value: assigneeFilterModes.NONE,
         },
         {
             name: i18n.t('Select user'),
-            value: modeKeys.PROVIDED,
+            value: assigneeFilterModes.PROVIDED,
         },
     ];
 }

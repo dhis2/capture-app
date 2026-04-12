@@ -4,7 +4,8 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
-import { getModeOptions, modeKeys } from './modeOptions';
+import { assigneeFilterModes } from './assignee.const';
+import { getModeOptions } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
@@ -43,7 +44,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
+        if (value?.mode === assigneeFilterModes.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });
@@ -70,7 +71,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         });
 
         this.props.onCommitValue({
-            mode: modeKeys.PROVIDED,
+            mode: assigneeFilterModes.PROVIDED,
             provided: user,
         });
     }
@@ -92,7 +93,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
                         onSelect={this.handleModeSelect}
                     />
                 </div>
-                {mode === modeKeys.PROVIDED ? (
+                {mode === assigneeFilterModes.PROVIDED ? (
                     <div>
                         <UserField
                             value={provided}
