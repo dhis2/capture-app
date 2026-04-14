@@ -1,3 +1,10 @@
+## [105.13.6](https://github.com/dhis2/capture-app/compare/v105.13.5...v105.13.6) (2026-04-14)
+
+
+### Bug Fixes
+
+* [DHIS2-21224] File upload fails in program stage ([#4512](https://github.com/dhis2/capture-app/issues/4512)) ([87ead9f](https://github.com/dhis2/capture-app/commit/87ead9f53354a3fd6cccd91aa9342340360b1354))
+
 ## [105.13.5](https://github.com/dhis2/capture-app/compare/v105.13.4...v105.13.5) (2026-03-26)
 
 
