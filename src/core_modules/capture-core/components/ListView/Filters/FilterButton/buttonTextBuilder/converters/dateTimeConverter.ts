@@ -2,9 +2,9 @@ import i18n from '@dhis2/d2-i18n';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
 import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime/types/dateTime.types';
 
-function formatDateTime(localDateTime: string): string {
-    const [datePart, timePart] = localDateTime.split('T');
-    if (!datePart) return localDateTime;
+function formatDateTime(isoDatetime: string): string {
+    const [datePart, timePart] = isoDatetime.split('T');
+    if (!datePart) return isoDatetime;
     return `${convertIsoToLocalCalendar(datePart)} ${timePart?.slice(0, 5) ?? ''}`.trim();
 }
 

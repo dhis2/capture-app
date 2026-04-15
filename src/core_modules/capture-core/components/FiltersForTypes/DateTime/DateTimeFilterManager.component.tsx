@@ -14,19 +14,19 @@ type State = {
     value?: Value;
 };
 
-function extractLocalDate(localDatetime?: string | null): string | undefined {
-    if (!localDatetime) {
+function extractLocalDate(isoDatetime?: string | null): string | undefined {
+    if (!isoDatetime) {
         return undefined;
     }
-    const datePart = localDatetime.split('T')[0];
+    const datePart = isoDatetime.split('T')[0];
     return convertIsoToLocalCalendar(datePart) || undefined;
 }
 
-function extractTime(localDatetime?: string | null): string | undefined {
-    if (!localDatetime) {
+function extractTime(isoDatetime?: string | null): string | undefined {
+    if (!isoDatetime) {
         return undefined;
     }
-    return localDatetime.split('T')[1]?.slice(0, 5) ?? undefined;
+    return isoDatetime.split('T')[1]?.slice(0, 5) ?? undefined;
 }
 
 export class DateTimeFilterManager extends React.Component<Props, State> {
