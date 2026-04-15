@@ -21,12 +21,12 @@ export function convertDateTime(filter: DateTimeFilterData): string {
         if (fromText === toText) {
             appliedText = fromText;
         } else {
-            appliedText = `${fromText} ${i18n.t('to')} ${toText}`;
+            appliedText = i18n.t('{{fromDate}} to {{toDate}}', { fromDate: fromText, toDate: toText });
         }
     } else if (geHasValue) {
-        appliedText = `${i18n.t('after or equal to')} ${formatDateTime(ge)}`;
+        appliedText = i18n.t('after or equal to {{date}}', { date: formatDateTime(ge) });
     } else if (leHasValue) {
-        appliedText = `${i18n.t('before or equal to')} ${formatDateTime(le)}`;
+        appliedText = i18n.t('before or equal to {{date}}', { date: formatDateTime(le) });
     }
 
     return appliedText;
