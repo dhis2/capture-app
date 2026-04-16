@@ -1,4 +1,4 @@
-export type EmptyOnlyFilterData = {
+export type EmptyOnlyFilter = {
     value: string;
     isEmpty: boolean;
 };
@@ -11,7 +11,7 @@ export type EmptyOnlyFilterProps = {
 };
 
 export type EmptyOnlyFilterManagerProps = {
-    filter: EmptyOnlyFilterData | null | undefined;
+    filter: EmptyOnlyFilter | null | undefined;
     filterTypeRef: (instance: unknown) => void;
     handleCommitValue: () => void;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { EmptyOnlyFilter } from './EmptyOnlyFilter.component';
-import type { EmptyOnlyFilterData, EmptyOnlyFilterManagerProps, Value } from './emptyOnly.types';
+import { EmptyOnlyFilter as EmptyOnlyFilterInput } from './EmptyOnlyFilter.component';
+import type { EmptyOnlyFilter, EmptyOnlyFilterManagerProps, Value } from './emptyOnly.types';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 
 type State = {
@@ -8,7 +8,7 @@ type State = {
 };
 
 export class EmptyOnlyFilterManager extends React.Component<EmptyOnlyFilterManagerProps, State> {
-    static calculateDefaultState(filter: EmptyOnlyFilterData | null | undefined): State {
+    static calculateDefaultState(filter: EmptyOnlyFilter | null | undefined): State {
         if (!filter) return { value: undefined };
         if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
         return { value: undefined };
@@ -28,7 +28,7 @@ export class EmptyOnlyFilterManager extends React.Component<EmptyOnlyFilterManag
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <EmptyOnlyFilter
+            <EmptyOnlyFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

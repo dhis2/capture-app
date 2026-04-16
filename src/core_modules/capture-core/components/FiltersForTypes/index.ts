@@ -12,7 +12,7 @@ export {
 export { dateFilterTypes } from './Date/date.const';
 export { mainOptionTranslatedTexts } from './Date/options';
 export { DateTimeFilter, type DateTimeFilterData } from './DateTime';
-export { EmptyOnlyFilter, type EmptyOnlyFilterData } from './EmptyOnly';
+export { EmptyOnlyFilter } from './EmptyOnly';
 export {
     EmptyValueFilterCheckboxes,
     isEmptyFilterData,
