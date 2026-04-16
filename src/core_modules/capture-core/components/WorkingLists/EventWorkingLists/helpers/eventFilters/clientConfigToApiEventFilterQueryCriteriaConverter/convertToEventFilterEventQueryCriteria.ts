@@ -203,6 +203,7 @@ const structureFilters = (apiFilters: Array<any>, columns: ColumnsForConverter) 
             if (mainFilter) {
                 return { ...acc, ...mainFilter };
             }
+            return acc;
         }
 
         acc.dataFilters.push(filter);
