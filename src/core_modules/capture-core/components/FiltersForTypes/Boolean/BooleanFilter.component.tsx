@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
@@ -8,14 +7,8 @@ import type { UpdatableFilterContent } from '../types';
 import { WithEmptyValueFilter } from '../EmptyValue';
 import type { BooleanFilterProps, Value } from './boolean.types';
 
-const getStyles: Readonly<any> = (theme: any) => ({
-    selectBoxesContainer: {
-        marginInlineEnd: theme.typography.pxToRem(-24),
-    },
-});
-
-class BooleanFilterPlain extends Component<
-    BooleanFilterProps & WithStyles<typeof getStyles>
+export class BooleanFilter extends Component<
+    BooleanFilterProps
 > implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value } = this.props;
@@ -39,7 +32,7 @@ class BooleanFilterPlain extends Component<
     booleanFieldInstance: D2TrueFalse | null = null;
 
     render() {
-        const { onCommitValue, value, classes } = this.props;
+        const { onCommitValue, value } = this.props;
 
         return (
             <WithEmptyValueFilter
@@ -49,7 +42,6 @@ class BooleanFilterPlain extends Component<
             >
                 {filteredValue => (
                     <div
-                        className={classes.selectBoxesContainer}
                         onKeyDownCapture={this.handleKeyDown}
                     >
                         <D2TrueFalse
@@ -65,5 +57,3 @@ class BooleanFilterPlain extends Component<
         );
     }
 }
-
-export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain) as React.ComponentType<BooleanFilterProps>;

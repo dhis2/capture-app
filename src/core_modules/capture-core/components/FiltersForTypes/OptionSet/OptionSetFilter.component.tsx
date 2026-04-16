@@ -12,9 +12,6 @@ export const getStyles = (theme: any) => ({
         maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
     },
-    selectBoxesInnerContainer: {
-        marginInlineStart: 12,
-    },
 }) as const;
 
 type Props = OptionSetFilterProps & WithStyles<typeof getStyles>;
@@ -44,16 +41,14 @@ class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterCo
                     <div
                         className={classes.selectBoxesContainer}
                     >
-                        <div className={classes.selectBoxesInnerContainer}>
-                            <SelectBoxes
-                                options={options}
-                                value={filteredValue}
-                                onBlur={onCommitValue}
-                                orientation={orientations.VERTICAL}
-                                multiSelect={!singleSelect}
-                                nullable
-                            />
-                        </div>
+                        <SelectBoxes
+                            options={options}
+                            value={filteredValue}
+                            onBlur={onCommitValue}
+                            orientation={orientations.VERTICAL}
+                            multiSelect={!singleSelect}
+                            nullable
+                        />
                     </div>
                 )}
             </WithEmptyValueFilter>

@@ -37,7 +37,6 @@ export class BooleanFilterManager extends React.Component<BooleanFilterManagerPr
         return (
             <BooleanFilterInput
                 value={this.state.value}
-                // @ts-expect-error - keeping original functionality as before ts rewrite
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 allowMultiple={!singleSelect}

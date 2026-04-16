@@ -1,15 +1,15 @@
 import type { assigneeFilterModes } from './assignee.const';
 
+export type AssigneeMode = typeof assigneeFilterModes[keyof typeof assigneeFilterModes];
+
 export type AssigneeFilterData = {
-    assignedUserMode: typeof assigneeFilterModes[keyof typeof assigneeFilterModes];
+    assignedUserMode: AssigneeMode;
     assignedUser?: {
         id: string;
         username: string;
         name: string;
     } | null;
 };
-
-export type AssigneeMode = typeof assigneeFilterModes[keyof typeof assigneeFilterModes];
 
 export type Value = {
     mode: AssigneeMode;
