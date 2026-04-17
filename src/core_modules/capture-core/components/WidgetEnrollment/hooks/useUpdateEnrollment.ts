@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { Mutation } from 'capture-core-utils/types/app-runtime';
 import { processErrorReports } from '../processErrorReports';
@@ -27,15 +27,17 @@ export const useUpdateEnrollment = ({
     onError,
 }: UseUpdateEnrollmentProps) => {
     const { fromClientDate } = useTimeZoneConversion();
+    const prevEnrollment = useRef(enrollment);
     const [updateEnrollmentMutation] = useDataMutation(enrollmentUpdate, {
         onError: (e) => {
-            setEnrollment(enrollment);
-            updateHandler && updateHandler(enrollment[propertyName]);
+            setEnrollment(prevEnrollment.current);
+            updateHandler && updateHandler(prevEnrollment.current[propertyName]);
             onError && onError(processErrorReports(e));
         },
     });
 
     return useCallback((value: string) => {
+        prevEnrollment.current = enrollment;
         const updatedEnrollment = { ...enrollment };
         updatedEnrollment[propertyName] = value;
         updatedEnrollment.updatedAt = fromClientDate(new Date()).getServerZonedISOString();
