@@ -31,8 +31,8 @@ export const useUpdateEnrollment = ({
     const [updateEnrollmentMutation] = useDataMutation(enrollmentUpdate, {
         onError: (e) => {
             setEnrollment(prevEnrollment.current);
-            updateHandler && updateHandler(prevEnrollment.current[propertyName]);
-            onError && onError(processErrorReports(e));
+            updateHandler?.(prevEnrollment.current[propertyName]);
+            onError?.(processErrorReports(e));
         },
     });
 
@@ -43,6 +43,6 @@ export const useUpdateEnrollment = ({
         updatedEnrollment.updatedAt = fromClientDate(new Date()).getServerZonedISOString();
         setEnrollment(updatedEnrollment);
         updateEnrollmentMutation(updatedEnrollment);
-        updateHandler && updateHandler(value);
+        updateHandler?.(value);
     }, [enrollment, setEnrollment, propertyName, updateHandler, updateEnrollmentMutation, fromClientDate]);
 };
