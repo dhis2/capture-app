@@ -11,13 +11,12 @@ import { MinimalCoordinates, PolygonCoordinates } from '../components/Coordinate
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
-    return convertIsoToLocalCalendar(rawValue);
+    return moment.localeData().postformat(convertIsoToLocalCalendar(rawValue));
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue);
-    const timeString = momentDate.format('HH:mm');
-    const localDate = convertIsoToLocalCalendar(rawValue);
+    const timeString = moment(rawValue).format('HH:mm');
+    const localDate = moment.localeData().postformat(convertIsoToLocalCalendar(rawValue));
     return `${localDate} ${timeString}`;
 }
 
@@ -97,9 +96,9 @@ const valueConvertersForType = {
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.DATE]: convertDateForListDisplay,
-    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
+    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
-    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
+    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.INTEGER]: stringifyNumber,
