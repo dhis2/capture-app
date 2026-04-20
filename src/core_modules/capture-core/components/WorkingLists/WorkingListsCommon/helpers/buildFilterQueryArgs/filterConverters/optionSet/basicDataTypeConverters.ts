@@ -1,12 +1,12 @@
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../../../../../../../metaData';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 
 function convertDate(isoString: string): string {
     const momentDate = moment(isoString);
-    momentDate.locale('en');
-    return momentDate.format('YYYY-MM-DD');
+    return formatMomentEn(momentDate, 'YYYY-MM-DD');
 }
 
 const valueConvertersForType = {

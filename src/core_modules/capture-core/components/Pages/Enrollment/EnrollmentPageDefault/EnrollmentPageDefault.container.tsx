@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
@@ -147,7 +148,7 @@ export const EnrollmentPageDefault = () => {
     const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = formatMomentEn(moment(nowServer), 'YYYY-MM-DDTHH:mm:ss');
 
         dispatch(updateEnrollmentEventStatus(eventId, status, updatedAt));
     }, [dispatch, fromClientDate]);

@@ -15,7 +15,7 @@ function convertDateForListDisplay(rawValue: string): string {
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue).locale('en');
+    const momentDate = moment(rawValue);
     const timeString = momentDate.format('HH:mm');
     const localDate = convertIsoToLocalCalendar(rawValue);
     return `${localDate} ${timeString}`;

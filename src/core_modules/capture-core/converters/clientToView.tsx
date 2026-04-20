@@ -14,7 +14,7 @@ function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
 }
 function convertDateTimeForView(rawValue: string): string {
-    const momentDate = moment(rawValue).locale('en');
+    const momentDate = moment(rawValue);
     const timeString = momentDate.format('HH:mm');
 
     const localDate = convertIsoToLocalCalendar(rawValue);

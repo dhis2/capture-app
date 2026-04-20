@@ -3,7 +3,7 @@ import {
     convertFromIso8601,
 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { padWithZeros } from 'capture-core-utils/date';
+import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
 
 /**
  * Converts a date from ISO calendar to local calendar
@@ -17,12 +17,12 @@ export function convertIsoToLocalCalendar(isoDate: string | null | undefined): s
         return '';
     }
 
-    const momentDate = moment(isoDate).locale('en');
+    const momentDate = moment(isoDate);
     if (!momentDate.isValid()) {
         return '';
     }
 
-    const formattedIsoDate = momentDate.format('YYYY-MM-DD');
+    const formattedIsoDate = formatMomentEn(momentDate, 'YYYY-MM-DD');
 
     const calendar = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;

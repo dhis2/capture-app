@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
 
 /**
@@ -9,6 +10,6 @@ import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
  */
 export function convertDateObjectToDateFormatString(dateValue: Date | any) {
     const momentDate = moment(dateValue);
-    const dateString = momentDate.format('YYYY-MM-DD');
+    const dateString = formatMomentEn(momentDate, 'YYYY-MM-DD');
     return convertIsoToLocalCalendar(dateString);
 }

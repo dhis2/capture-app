@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
 
@@ -26,7 +27,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         const momentDateTime = moment(value);
         return {
             date: convertMomentToDateFormatString(momentDateTime),
-            time: momentDateTime.format('HH:mm'),
+            time: formatMomentEn(momentDateTime, 'HH:mm'),
         };
     },
     convertTime: (value: string): string => value,

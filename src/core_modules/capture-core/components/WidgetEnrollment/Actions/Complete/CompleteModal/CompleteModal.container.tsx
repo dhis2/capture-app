@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { CompleteModalComponent } from './CompleteModal.component';
 import { eventStatuses, plainStatus } from '../../../constants/status.const';
 import type { Props } from './completeModal.types';
@@ -43,7 +44,7 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
     const onHandleCompleteEnrollmentAndEvents = useCallback(() => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = formatMomentEn(moment(nowServer), 'YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc, event) => {
             const { access } = programStages.find(p => p.id === event.programStage) || {} as any;
             if (event.status === eventStatuses.ACTIVE && access.data.write) {

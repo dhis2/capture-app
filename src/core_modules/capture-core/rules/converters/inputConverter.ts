@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import moment from 'moment';
 import type { IConvertInputRulesValue } from '@dhis2/rules-engine-javascript';
+import { formatMomentEn } from 'capture-core-utils/date';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
@@ -23,8 +24,7 @@ export const inputConverter: IConvertInputRulesValue = {
             return null;
         }
         const momentObject = moment(value);
-        momentObject.locale('en');
-        return momentObject.format(dateMomentFormat);
+        return formatMomentEn(momentObject, dateMomentFormat);
     },
     convertDateTime: convertStringValue,
     convertTime: convertStringValue,

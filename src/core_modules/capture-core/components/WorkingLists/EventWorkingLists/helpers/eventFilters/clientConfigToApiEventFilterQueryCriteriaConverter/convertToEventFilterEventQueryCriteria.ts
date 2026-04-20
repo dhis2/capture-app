@@ -1,6 +1,7 @@
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
@@ -73,8 +74,7 @@ const getTrueOnlyFilter = (): ApiDataFilterTrueOnly => ({
 
 const convertDate = (rawValue: string): string => {
     const momentDate = moment(rawValue);
-    momentDate.locale('en');
-    return momentDate.format('YYYY-MM-DD');
+    return formatMomentEn(momentDate, 'YYYY-MM-DD');
 };
 
 const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {

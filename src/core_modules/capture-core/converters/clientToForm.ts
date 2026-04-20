@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
@@ -27,7 +28,7 @@ function convertDateForEdit(rawValue: string): string {
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     const dateTime = moment(rawValue);
-    const timeString = dateTime.format('HH:mm');
+    const timeString = formatMomentEn(dateTime, 'HH:mm');
     return {
         date: convertIsoToLocalCalendar(rawValue),
         time: timeString,
@@ -36,7 +37,7 @@ function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
 
 function convertTimeForEdit(rawValue: string) {
     const momentTime = moment(rawValue, 'HH:mm', true);
-    return momentTime.format('HH:mm');
+    return formatMomentEn(momentTime, 'HH:mm');
 }
 
 function convertAgeForEdit(rawValue: string): AgeFormValue {
