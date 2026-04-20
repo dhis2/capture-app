@@ -72,6 +72,9 @@ export const WidgetEnrollmentPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
+    const updatedAtDateTime: string = convertValue(
+        fromServerDate(enrollment?.updatedAt).toISOString(), dataElementTypes.DATETIME,
+    );
     const geometryType = getGeometryType(enrollment?.geometry?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
@@ -155,7 +158,7 @@ export const WidgetEnrollmentPlain = ({
                                 <IconClock16 color={colors.grey600} />
                             </span>
                             {i18n.t('Last updated')}
-                            <Tooltip content={fromServerDate(enrollment.updatedAt).toLocaleString()}>
+                            <Tooltip content={updatedAtDateTime}>
                                 {moment(fromServerDate(enrollment.updatedAt)).fromNow()}
                             </Tooltip>
                         </div>
