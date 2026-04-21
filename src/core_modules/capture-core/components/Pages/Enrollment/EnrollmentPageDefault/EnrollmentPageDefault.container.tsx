@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'moment';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { formatMomentEn } from 'capture-core-utils/date';
@@ -148,7 +147,7 @@ export const EnrollmentPageDefault = () => {
     const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = formatMomentEn(moment(nowServer), 'YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
 
         dispatch(updateEnrollmentEventStatus(eventId, status, updatedAt));
     }, [dispatch, fromClientDate]);

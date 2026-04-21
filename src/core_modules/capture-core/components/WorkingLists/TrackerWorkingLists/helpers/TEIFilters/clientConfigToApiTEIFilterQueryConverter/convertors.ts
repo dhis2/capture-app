@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { formatMomentEn } from 'capture-core-utils/date';
 import {
     type BooleanFilterData,
@@ -45,10 +44,8 @@ const getAssigneeFilter = (filter: any) => ({
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
 });
 
-const convertDate = (rawValue: string): string => {
-    const momentDate = moment(rawValue);
-    return formatMomentEn(momentDate, 'YYYY-MM-DD');
-};
+const convertDate = (rawValue: string): string =>
+    formatMomentEn(rawValue, 'YYYY-MM-DD');
 
 export const getDateFilter = (dateFilter: DateFilterData) => {
     const apiDateFilterContents =

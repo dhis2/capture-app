@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
@@ -33,7 +32,7 @@ export const getAddEventEnrollmentServerData = ({
     const mainDataServerValues: any = convertMainEventClientToServer(mainDataClientValues);
     const nowClient = fromClientDate(new Date());
     const nowServer = new Date(nowClient.getServerZonedISOString());
-    const updatedAt = formatMomentEn(moment(nowServer), 'YYYY-MM-DDTHH:mm:ss');
+    const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';

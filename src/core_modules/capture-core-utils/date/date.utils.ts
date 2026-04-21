@@ -14,8 +14,8 @@ import moment from 'moment';
  * @returns the formatted string with Western-Arabic numerals
  */
 export function formatMomentEn(
-    momentDate: moment.Moment,
+    input: moment.MomentInput,
     format = 'YYYY-MM-DD',
 ) {
-    return momentDate.clone().locale('en').format(format);
+    return moment(input).locale('en').format(format);
 }

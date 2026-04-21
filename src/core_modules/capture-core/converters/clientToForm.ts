@@ -27,11 +27,9 @@ function convertDateForEdit(rawValue: string): string {
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
-    const dateTime = moment(rawValue);
-    const timeString = formatMomentEn(dateTime, 'HH:mm');
     return {
         date: convertIsoToLocalCalendar(rawValue),
-        time: timeString,
+        time: formatMomentEn(rawValue, 'HH:mm'),
     };
 }
 

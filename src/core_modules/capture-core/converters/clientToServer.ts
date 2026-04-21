@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { formatMomentEn } from 'capture-core-utils/date';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
@@ -19,9 +18,7 @@ type Assignee = {
 };
 
 function convertDate(rawValue: string): string {
-    const editedDate = rawValue;
-    const momentDate = moment(editedDate);
-    return formatMomentEn(momentDate, 'YYYY-MM-DD');
+    return formatMomentEn(rawValue, 'YYYY-MM-DD');
 }
 
 function convertRange(parser: (value: any) => any, rangeValue: RangeValue) {

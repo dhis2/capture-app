@@ -1,5 +1,4 @@
 import React, { useMemo, useCallback } from 'react';
-import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { getTrackerProgramThrowIfNotFound } from '../../../../../../metaData';
@@ -56,7 +55,7 @@ export const CompleteModal = ({
     const onHandleCompleteEnrollmentAndEvents = useCallback(() => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = formatMomentEn(moment(nowServer), 'YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc: any, event: any) => {
             const { access } = programStages.find((p: any) => p.id === event.programStage) || {};
             const isCurrentEvent = eventId && event.event === eventId;
