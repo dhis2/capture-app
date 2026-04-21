@@ -11,11 +11,13 @@ import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 
 function convertDateForView(rawValue: string): string {
-    return moment.localeData().postformat(convertIsoToLocalCalendar(rawValue));
+    return convertIsoToLocalCalendar(rawValue);
 }
 function convertDateTimeForView(rawValue: string): string {
-    const timeString = moment(rawValue).format('HH:mm');
-    const localDate = moment.localeData().postformat(convertIsoToLocalCalendar(rawValue));
+    const momentDate = moment(rawValue).locale('en');
+    const timeString = momentDate.format('HH:mm');
+
+    const localDate = convertIsoToLocalCalendar(rawValue);
     return `${localDate} ${timeString}`;
 }
 
