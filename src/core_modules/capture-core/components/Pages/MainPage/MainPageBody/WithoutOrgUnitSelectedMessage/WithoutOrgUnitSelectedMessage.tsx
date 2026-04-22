@@ -35,7 +35,7 @@ const styles: Readonly<any> = {
         },
     },
     searchLinkButton: {
-        marginTop: '8px',
+        marginTop: '16px',
     },
 };
 
@@ -59,15 +59,15 @@ const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, clas
     );
 
     const captureScopeLabel = useMemo(() => (isTracker
-        ? i18n.t('Or see all records in your capture scope in {{program}}', {
+        ? i18n.t('Or see records you can edit in {{program}}', {
             program: programName,
             interpolation: { escapeValue: false },
         })
-        : i18n.t('Or see all events in your capture scope in {{program}}', {
+        : i18n.t('Or see events you can edit in {{program}}', {
             program: programName,
             interpolation: { escapeValue: false },
         })
-    ), [programName, isTracker]);
+    ), [isTracker, programName]);
 
     const onNavigateToSearch = useCallback(
         () => navigate(`/search?${buildUrlQueryString({ programId })}`),
@@ -93,7 +93,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, clas
                             onClick={onNavigateToSearch}
                             data-test={'go-to-search-button'}
                         >
-                            {i18n.t('Or go to search to find records outside your capture scope')}
+                            {i18n.t('You can also search for a specific record')}
                         </button>
                     )}
                 </div>
