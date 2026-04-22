@@ -1,4 +1,4 @@
-export { formatMomentEn } from './date.utils';
+export { formatMomentEn, localizeDigits } from './date.utils';
 export { padWithZeros } from './padWithZeros';
 export { temporalToString } from './temporalToString';
 export { stringToTemporal } from './stringToTemporal';
