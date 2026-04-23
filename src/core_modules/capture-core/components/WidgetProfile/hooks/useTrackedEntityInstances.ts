@@ -29,7 +29,7 @@ export const useTrackedEntityInstances = (
     const [trackedEntityInstanceAttributes, setTrackedEntityInstanceAttributes] = useState<Array<InputAttribute>>([]);
     const [geometry, setGeometry] = useState<Geometry | undefined>();
 
-    const { error, loading, data } = useDataQuery<QueryData>(
+    const { error, loading, data, refetch: refetchTEI } = useDataQuery<QueryData>(
         useMemo(
             () => ({
                 trackedEntityInstance: {
@@ -104,5 +104,6 @@ export const useTrackedEntityInstances = (
         trackedEntityTypeName: tetLoading ? undefined : (tetData?.trackedEntityType as any)?.displayName,
         trackedEntityTypeAccess: !tetLoading && (tetData?.trackedEntityType as any)?.access,
         geometry,
+        refetchTEI,
     };
 };

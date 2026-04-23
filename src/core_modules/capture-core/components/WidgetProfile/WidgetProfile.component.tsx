@@ -82,6 +82,7 @@ const WidgetProfilePlain = ({
         trackedEntityTypeName,
         trackedEntityTypeAccess,
         geometry,
+        refetchTEI,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
         loading: userRolesLoading,
@@ -90,12 +91,14 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
+    const isInactive = Boolean((trackedEntity as any)?.inactive);
 
     const isEditable = useMemo(() =>
         !hasNoAttributes &&
         trackedEntityTypeAccess?.data?.write &&
-        !readOnlyMode,
-    [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
+        !readOnlyMode &&
+        !isInactive,
+    [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess, isInactive]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
@@ -136,6 +139,15 @@ const WidgetProfilePlain = ({
         () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
         [trackedEntityTypeAccess, program],
     );
+
+    const canWriteTETData = useMemo(
+        () => Boolean(trackedEntityTypeAccess?.data?.write),
+        [trackedEntityTypeAccess],
+    );
+
+    const onStatusToggleSuccess = useCallback(() => {
+        refetchTEI && refetchTEI();
+    }, [refetchTEI]);
 
     const renderProfile = () => {
         if (loading) {
@@ -193,11 +205,14 @@ const WidgetProfilePlain = ({
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
                                 canWriteData={canWriteData}
+                                canWriteTETData={canWriteTETData}
+                                isInactive={isInactive}
                                 trackedEntity={trackedEntity ?
-                                    { trackedEntity: trackedEntity.trackedEntity || teiId } :
+                                    { ...trackedEntity, trackedEntity: trackedEntity.trackedEntity || teiId } :
                                     { trackedEntity: teiId }
                                 }
                                 onDeleteSuccess={onDeleteSuccess}
+                                onStatusToggleSuccess={onStatusToggleSuccess}
                                 displayChangelog={!!displayChangelog}
                                 trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
