@@ -97,9 +97,9 @@ export function convertValue(value: any, type: keyof typeof dataElementTypes, el
             toConvertValue = value;
         } else {
             toConvertValue = value.trim();
-            if (!toConvertValue) {
-                return null;
-            }
+        }
+        if (!toConvertValue) {
+            return null;
         }
     } else {
         toConvertValue = value;
