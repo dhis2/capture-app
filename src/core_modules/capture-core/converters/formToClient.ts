@@ -2,6 +2,7 @@ import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { dataElementTypes } from '../metaData';
+import type { DataElement } from '../metaData';
 import { convertLocalToIsoCalendar } from '../utils/converters/date';
 
 type DateTimeValue = {
@@ -85,16 +86,20 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertAge,
 };
 
-export function convertValue(value: any, type: keyof typeof dataElementTypes) {
+export function convertValue(value: any, type: keyof typeof dataElementTypes, element?: DataElement) {
     if (value == null) {
         return null;
     }
 
     let toConvertValue;
     if (isString(value)) {
-        toConvertValue = value.trim();
-        if (!toConvertValue) {
-            return null;
+        if (element?.optionSet) {
+            toConvertValue = value;
+        } else {
+            toConvertValue = value.trim();
+            if (!toConvertValue) {
+                return null;
+            }
         }
     } else {
         toConvertValue = value;
