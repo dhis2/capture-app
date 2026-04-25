@@ -10,15 +10,15 @@
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Philip Larsen Donnelly, 2026
 # Bram Piot <bram.piot@gmail.com>, 2026
-# Cyrille Kabrane, 2026
 # Esther Tokouli, 2026
+# Cyrille Kabrane, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Esther Tokouli, 2026\n"
+"Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -303,9 +303,9 @@ msgstr "Passer à l'affichage en lignes"
 
 msgid "{{count}} event added"
 msgid_plural "{{count}} event added"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{{count}} événement ajouté"
+msgstr[1] "{{count}} événements ajoutés"
+msgstr[2] "{{count}} événements ajoutés"
 
 msgid "No events added"
 msgstr "Aucun événement n'a été ajouté"
@@ -684,8 +684,12 @@ msgid "Please enter at least {{minCharactersToSearch}} character to filter"
 msgid_plural ""
 "Please enter at least {{minCharactersToSearch}} character to filter"
 msgstr[0] ""
+"Veuillez saisir au moins {{minCharactersToSearch}} caractères pour filtrer"
 msgstr[1] ""
+"Veuillez saisir au moins {{minCharactersToSearch}} caractères pour filtrer"
 msgstr[2] ""
+"Veuillez saisir au moins {{minCharactersToSearch}} caractères pour le "
+"filtrage"
 
 msgid "Locked to{{escape}} {{buttonText}}"
 msgstr "Verrouillé sur{{escape}} {{buttonText}}"
