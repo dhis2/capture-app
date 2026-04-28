@@ -17,13 +17,13 @@ import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCh
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
-const translatedTextWithStylesForTei = (trackedEntityName: string, orgUnitName?: string) =>
+const translatedTextWithStylesForTei = (trackedEntityName: string, orgUnitName?: string, hideEnrollmentHint?: boolean) =>
     (<>
         {i18n.t('Saving a {{trackedEntityName}}', {
             trackedEntityName, interpolation: { escapeValue: false } })
         } <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
         {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
-        {i18n.t('Enroll in a program by selecting a program from the top bar.')}
+        {!hideEnrollmentHint && i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
 
 const styles: Readonly<any> = {
@@ -47,6 +47,7 @@ const TeiRegistrationEntryPlain =
       isUserInteractionInProgress,
       isSavingInProgress,
       onCancel,
+      hideEnrollmentHint,
       ...rest
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
@@ -105,7 +106,7 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       </div>
                       <InfoIconText>
-                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnitName)}
+                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnitName, hideEnrollmentHint)}
                       </InfoIconText>
 
                       <DiscardDialog
