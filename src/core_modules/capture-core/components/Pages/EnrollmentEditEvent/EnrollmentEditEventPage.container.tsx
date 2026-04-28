@@ -133,7 +133,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     initMode,
     enrollmentSite,
     event,
-    readOnly,
+    readOnly: inactiveReadOnly,
 }: Props) => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
@@ -300,7 +300,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const hasProgramWrite = Boolean((program as any)?.access?.data?.write);
     const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
-    const readOnly = !hasProgramWrite || !hasTETWrite
+    const readOnly = !hasProgramWrite || !hasTETWrite || inactiveReadOnly
         ? { tooltipContent: i18n.t('You do not have access to edit this enrollment') }
         : undefined;
 
