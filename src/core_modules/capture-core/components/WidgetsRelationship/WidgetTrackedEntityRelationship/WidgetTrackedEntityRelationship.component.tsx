@@ -61,6 +61,7 @@ export const WidgetTrackedEntityRelationship = ({
             relationshipTypes={relationshipTypes}
             sourceId={teiId}
             onLinkedRecordClick={onLinkedRecordClick}
+            readOnly={readOnly}
         >
             <NewTrackedEntityRelationship
                 teiId={teiId}

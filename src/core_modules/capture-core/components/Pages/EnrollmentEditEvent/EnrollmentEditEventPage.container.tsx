@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
@@ -296,6 +297,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
     if (pageStatus === pageStatuses.LOADING) {
         return <LoadingMaskForPage />;
     }
+
+    const hasProgramWrite = Boolean((program as any)?.access?.data?.write);
+    const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
+    const readOnly = !hasProgramWrite || !hasTETWrite
+        ? { tooltipContent: i18n.t('You do not have access to edit this enrollment') }
+        : undefined;
 
     return (
         <EnrollmentEditEventPageComponent

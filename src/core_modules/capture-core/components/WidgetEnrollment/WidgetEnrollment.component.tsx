@@ -170,6 +170,7 @@ export const WidgetEnrollmentPlain = ({
                                     refetchEnrollment={refetchEnrollment}
                                     refetchTEI={refetchTEI}
                                     onError={onError}
+                                    readOnly={!editDateEnabled}
                                 />
                             </div>
                         )}

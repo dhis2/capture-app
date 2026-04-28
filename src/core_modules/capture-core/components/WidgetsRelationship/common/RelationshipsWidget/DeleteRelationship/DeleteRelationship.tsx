@@ -13,6 +13,7 @@ import {
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
 import type { Props } from './DeleteRelationship.types';
 
 const styles: Readonly<any> = {
@@ -25,21 +26,27 @@ const styles: Readonly<any> = {
 export const DeleteRelationshipPlain = ({
     handleDeleteRelationship,
     disabled,
+    tooltipContent,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     return (
         <>
             <DataTableCell className={classes.tableCell}>
-                <IconButton
-                    onClick={() => {
-                        if (disabled) return;
-                        setIsModalOpen(true);
-                    }}
-                    dataTest={'delete-relationship-button'}
+                <ConditionalTooltip
+                    content={tooltipContent}
+                    enabled={Boolean(disabled && tooltipContent)}
                 >
-                    <IconDelete16 color={colors.red600} />
-                </IconButton>
+                    <IconButton
+                        onClick={() => {
+                            if (disabled) return;
+                            setIsModalOpen(true);
+                        }}
+                        dataTest={'delete-relationship-button'}
+                    >
+                        <IconDelete16 color={colors.red600} />
+                    </IconButton>
+                </ConditionalTooltip>
             </DataTableCell>
 
             {isModalOpen && (

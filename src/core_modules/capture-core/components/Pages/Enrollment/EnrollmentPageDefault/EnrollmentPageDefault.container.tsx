@@ -67,7 +67,7 @@ export const EnrollmentPageDefault = () => {
         error: enrollmentsError,
         enrollment,
         attributeValues,
-        readOnly,
+        readOnly: inactiveReadOnly,
         refetch: refetchEnrollmentDomain,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
@@ -181,6 +181,13 @@ export const EnrollmentPageDefault = () => {
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
+
+    const hasProgramWrite = Boolean(program?.access?.data?.write);
+    const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
+    const accessReadOnly = !hasProgramWrite || !hasTETWrite
+        ? { tooltipContent: i18n.t('You do not have access to edit data in this program') }
+        : undefined;
+    const readOnly = inactiveReadOnly ?? accessReadOnly;
 
     if (isLoading) {
         return (

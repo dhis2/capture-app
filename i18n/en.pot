@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T16:49:15.503Z\n"
-"PO-Revision-Date: 2026-04-28T16:49:15.503Z\n"
+"POT-Creation-Date: 2026-04-28T18:15:57.582Z\n"
+"PO-Revision-Date: 2026-04-28T18:15:57.582Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -718,6 +718,9 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
+msgid "You do not have access to edit data in this program"
+msgstr "You do not have access to edit data in this program"
+
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -840,6 +843,9 @@ msgstr "Program Stages could not be loaded"
 
 msgid "Stage"
 msgstr "Stage"
+
+msgid "You do not have access to edit this enrollment"
+msgstr "You do not have access to edit this enrollment"
 
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "The category option is not valid for the selected organisation unit."

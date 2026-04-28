@@ -143,6 +143,7 @@ export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
     getCustomSettings: ({ readOnlyMode = true }: any, props?: any) => ({
         readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
+        readOnlyTooltipContent: props?.readOnly?.tooltipContent,
     }),
     getProps: ({
         teiId,
@@ -302,15 +303,17 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId, readOnly }: any) => ({
         dataEntryKey,
         dataEntryId,
+        readOnly,
     }),
 };
 
 export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
-    shouldHideWidget: ({ currentPage }: any) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
+    shouldHideWidget: ({ currentPage, readOnly }: any) =>
+        currentPage === EnrollmentPageKeys.EDIT_EVENT || Boolean(readOnly),
     getProps: ({
         program,
         stageId,
