@@ -27,7 +27,7 @@ export const OverflowMenuComponent = ({
     const [statusToggleModalIsOpen, setStatusToggleModalIsOpen] = useState(false);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
 
-    if (readOnlyMode && !displayChangelog) {
+    if (readOnlyMode && !displayChangelog && !isInactive) {
         return null;
     }
 
@@ -56,7 +56,7 @@ export const OverflowMenuComponent = ({
                                 suffix={null}
                             />
                         )}
-                        {!readOnlyMode && (
+                        {(!readOnlyMode || isInactive) && (
                             <>
                                 <StatusToggleMenuItem
                                     trackedEntityTypeName={trackedEntityTypeName}

@@ -20,7 +20,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             id: teiId,
             params: {
                 program: programId,
-                fields: ['enrollments[*,!attributes],attributes'],
+                fields: ['enrollments[*,!attributes],attributes,inactive'],
             },
         },
         {
@@ -59,6 +59,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
 
     return {
         error,
+        isInactive: Boolean(data?.inactive),
         ...inEffectData,
     };
 };

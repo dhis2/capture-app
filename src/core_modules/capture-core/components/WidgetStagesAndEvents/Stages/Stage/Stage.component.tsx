@@ -26,7 +26,7 @@ const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: strin
 );
 
 export const StagePlain = ({
-    stage, events, classes, onCreateNew, ruleEffects, ...passOnProps
+    stage, events, classes, onCreateNew, ruleEffects, isInactive, ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
@@ -64,6 +64,7 @@ export const StagePlain = ({
                     enableUserAssignment={enableUserAssignment}
                     onCreateNew={onCreateNew}
                     hiddenProgramStage={preventAddingNewEvents}
+                    isInactive={isInactive}
                     {...passOnProps}
                 /> : (
                     <div className={classes.buttonContainer}>
@@ -74,6 +75,7 @@ export const StagePlain = ({
                             repeatable={repeatable}
                             preventAddingEventActionInEffect={preventAddingNewEvents}
                             eventName={name}
+                            isInactive={isInactive}
                         />
                     </div>
                 )}

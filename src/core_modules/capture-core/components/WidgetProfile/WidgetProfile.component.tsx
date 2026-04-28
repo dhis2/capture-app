@@ -91,7 +91,7 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
-    const isInactive = Boolean((trackedEntity as any)?.inactive);
+    const isInactive = Boolean(trackedEntity && trackedEntity.inactive);
 
     const isEditable = useMemo(() =>
         !hasNoAttributes &&
@@ -208,7 +208,11 @@ const WidgetProfilePlain = ({
                                 canWriteTETData={canWriteTETData}
                                 isInactive={isInactive}
                                 trackedEntity={trackedEntity ?
-                                    { ...trackedEntity, trackedEntity: trackedEntity.trackedEntity || teiId } :
+                                    {
+                                        trackedEntity: trackedEntity.trackedEntity || teiId,
+                                        trackedEntityType: trackedEntity.trackedEntityType,
+                                        orgUnit: trackedEntity.orgUnit,
+                                    } :
                                     { trackedEntity: teiId }
                                 }
                                 onDeleteSuccess={onDeleteSuccess}

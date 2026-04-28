@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-23T19:29:29.050Z\n"
-"PO-Revision-Date: 2026-04-23T19:29:29.050Z\n"
+"POT-Creation-Date: 2026-04-28T14:48:30.646Z\n"
+"PO-Revision-Date: 2026-04-28T14:48:30.646Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -619,6 +619,9 @@ msgstr "suggestions could not be retrieved"
 
 msgid "No items to display"
 msgstr "No items to display"
+
+msgid "Inactive enrollments cannot be selected"
+msgstr "Inactive enrollments cannot be selected"
 
 msgid "Select columns"
 msgstr "Select columns"
@@ -1506,6 +1509,9 @@ msgstr "No polygon captured"
 msgid "Event completed"
 msgstr "Event completed"
 
+msgid "Cannot edit events while the tracked entity is inactive"
+msgstr "Cannot edit events while the tracked entity is inactive"
+
 msgid "The event cannot be edited after it has been completed"
 msgstr "The event cannot be edited after it has been completed"
 
@@ -1732,6 +1738,9 @@ msgstr "Please enter a date"
 
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
+
+msgid "Cannot add events while the tracked entity is inactive"
+msgstr "Cannot add events while the tracked entity is inactive"
 
 msgid "You do not have access to create events in this stage"
 msgstr "You do not have access to create events in this stage"

@@ -11,4 +11,5 @@ export type Props = {
         };
     }>;
     onAddNote: (note: string) => void;
+    disabled?: boolean;
 };

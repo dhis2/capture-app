@@ -44,6 +44,7 @@ const EventRowPlain = ({
     teiId,
     programId,
     enrollmentId,
+    isInactive,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
@@ -67,7 +68,7 @@ const EventRowPlain = ({
                         secondary
                         small
                         icon={<IconMore16 />}
-                        disabled={pendingApiResponse || !stageWriteAccess}
+                        disabled={pendingApiResponse || !stageWriteAccess || isInactive}
                         component={(
                             <FlyoutMenu
                                 dense

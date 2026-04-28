@@ -10,6 +10,7 @@ type Props = {
     repeatable?: boolean;
     preventAddingEventActionInEffect?: boolean;
     eventName: string;
+    isInactive?: boolean;
 };
 
 export const StageCreateNewButton = ({
@@ -19,8 +20,15 @@ export const StageCreateNewButton = ({
     repeatable,
     preventAddingEventActionInEffect,
     eventName,
+    isInactive,
 }: Props) => {
     const { isDisabled, tooltipContent } = useMemo(() => {
+        if (isInactive) {
+            return {
+                isDisabled: true,
+                tooltipContent: i18n.t('Cannot add events while the tracked entity is inactive'),
+            };
+        }
         if (!stageWriteAccess) {
             return ({
                 isDisabled: true,
@@ -49,7 +57,7 @@ export const StageCreateNewButton = ({
             isDisabled: false,
             tooltipContent: '',
         };
-    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable, stageWriteAccess]);
+    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable, stageWriteAccess, isInactive]);
 
     return (
         <ConditionalTooltip

@@ -1,5 +1,11 @@
+type TrackedEntityRef = {
+    trackedEntity: string;
+    trackedEntityType?: string;
+    orgUnit?: string;
+};
+
 export type Props = {
-    trackedEntity: { trackedEntity: string; [key: string]: any };
+    trackedEntity: TrackedEntityRef;
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
     canWriteData: boolean;
@@ -14,7 +20,7 @@ export type Props = {
 };
 
 export type PlainProps = {
-    trackedEntity: { trackedEntity: string; [key: string]: any };
+    trackedEntity: TrackedEntityRef;
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
     canWriteData: boolean;

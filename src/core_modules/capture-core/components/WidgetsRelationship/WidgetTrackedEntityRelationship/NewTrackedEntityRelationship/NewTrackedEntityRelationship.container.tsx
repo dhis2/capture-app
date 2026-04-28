@@ -24,6 +24,7 @@ export const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
     onSelectFindMode,
+    isInactive,
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
@@ -37,6 +38,10 @@ export const NewTrackedEntityRelationshipPlain = ({
         setAddWizardVisible(true);
         onOpenAddRelationship && onOpenAddRelationship();
     }, [onOpenAddRelationship]);
+
+    if (isInactive) {
+        return null;
+    }
 
     return (
         <div className={classes.container}>

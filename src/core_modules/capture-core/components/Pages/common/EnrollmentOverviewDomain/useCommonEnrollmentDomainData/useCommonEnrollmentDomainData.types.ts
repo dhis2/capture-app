@@ -36,4 +36,5 @@ export type Output = {
     error?: any;
     enrollment?: EnrollmentData;
     attributeValues?: Array<AttributeValue>;
+    isInactive?: boolean;
 };

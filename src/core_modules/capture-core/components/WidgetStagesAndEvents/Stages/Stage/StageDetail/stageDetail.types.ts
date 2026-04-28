@@ -14,6 +14,7 @@ type ExtractedProps = {
     onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
     hiddenProgramStage?: boolean;
+    isInactive?: boolean;
 };
 
 export type Props = ExtractedProps & StageCommonProps;

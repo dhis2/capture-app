@@ -5,7 +5,11 @@ import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { useLocationQuery } from '../../utils/routing';
 
-export const WidgetEnrollmentNote = () => {
+type Props = {
+    isInactive?: boolean;
+};
+
+export const WidgetEnrollmentNote = ({ isInactive }: Props) => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
@@ -23,6 +27,7 @@ export const WidgetEnrollmentNote = () => {
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
+                disabled={isInactive}
             />
         </div>
     );

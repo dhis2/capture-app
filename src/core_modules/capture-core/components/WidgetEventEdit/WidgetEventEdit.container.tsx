@@ -90,6 +90,7 @@ const WidgetEventEditPlain = ({
     onSaveAndCompleteEnrollmentErrorActionType,
     onDeleteEvent,
     onDeleteEventRelationship,
+    isInactive,
     classes,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -129,6 +130,7 @@ const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             occurredAt={occurredAt}
+                            isInactive={isInactive}
                         />
                     }
                     noncollapsible

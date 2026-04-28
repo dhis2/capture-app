@@ -60,6 +60,7 @@ export type PlainProps = {
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
+    isInactive?: boolean;
 };
 
 export type Props = {
@@ -71,4 +72,5 @@ export type Props = {
     event: any;
     enrollmentSite: any;
     initMode?: string;
+    isInactive?: boolean;
 };

@@ -6,6 +6,8 @@ type TrackedEntityInstance = {
     attributes?: Array<{ attribute: string; value: string }>;
     geometry?: Geometry;
     trackedEntityType?: string;
+    orgUnit?: string;
+    inactive?: boolean;
     [key: string]: any;
 };
 

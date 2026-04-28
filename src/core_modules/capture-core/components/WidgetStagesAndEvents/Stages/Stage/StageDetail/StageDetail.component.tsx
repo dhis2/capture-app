@@ -99,6 +99,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         onViewAll,
         onCreateNew,
         hiddenProgramStage,
+        isInactive,
         classes,
     } = props;
     const defaultSortState = {
@@ -227,6 +228,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         onDeleteEvent={onDeleteEvent}
                         onRollbackDeleteEvent={onRollbackDeleteEvent}
                         onUpdateEventStatus={onUpdateEventStatus}
+                        isInactive={isInactive}
                     />
                 );
             });
@@ -263,6 +265,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                     repeatable={repeatable}
                     stageWriteAccess={stage?.access?.data?.write}
                     eventName={eventName}
+                    isInactive={isInactive}
                 />
             </div>
         );

@@ -1,11 +1,25 @@
 import { useDataMutation } from '@dhis2/app-runtime';
 import { v4 as uuid } from 'uuid';
 
+type ToggleTrackedEntityArg = {
+    trackedEntity: {
+        trackedEntity: string;
+        trackedEntityType?: string;
+        orgUnit?: string;
+    };
+    nextInactive: boolean;
+};
+
 const trackedEntityStatusUpdate = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
     type: 'create',
-    data: ({ trackedEntity, nextInactive }: { trackedEntity: any; nextInactive: boolean }) => ({
-        trackedEntities: [{ ...trackedEntity, inactive: nextInactive }],
+    data: ({ trackedEntity, nextInactive }: ToggleTrackedEntityArg) => ({
+        trackedEntities: [{
+            trackedEntity: trackedEntity.trackedEntity,
+            trackedEntityType: trackedEntity.trackedEntityType,
+            orgUnit: trackedEntity.orgUnit,
+            inactive: nextInactive,
+        }],
     }),
 } as const;
 

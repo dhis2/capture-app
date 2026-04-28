@@ -78,6 +78,7 @@ export const useDataSource = (
                     return acc;
                 }, {});
 
+            (listRecord as any).inactive = Boolean(eventRecord.inactive);
             return {
                 ...listRecord,
                 id: eventRecord.id, // used as rowkey

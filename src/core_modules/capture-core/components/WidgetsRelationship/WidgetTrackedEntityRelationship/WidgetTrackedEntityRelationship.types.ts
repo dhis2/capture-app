@@ -44,4 +44,5 @@ export type WidgetTrackedEntityRelationshipProps = {
         programId: string,
         onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
     ) => React.ReactElement<any>;
+    isInactive?: boolean;
 };

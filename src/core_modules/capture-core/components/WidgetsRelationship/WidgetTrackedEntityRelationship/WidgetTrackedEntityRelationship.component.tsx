@@ -20,6 +20,7 @@ export const WidgetTrackedEntityRelationship = ({
     onSelectFindMode,
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
+    isInactive,
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
@@ -74,6 +75,7 @@ export const WidgetTrackedEntityRelationship = ({
                 onSelectFindMode={onSelectFindMode}
                 renderTrackedEntitySearch={renderTrackedEntitySearch}
                 renderTrackedEntityRegistration={renderTrackedEntityRegistration}
+                isInactive={isInactive}
             />
         </RelationshipsWidget>
     );
