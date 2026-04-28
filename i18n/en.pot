@@ -1311,6 +1311,9 @@ msgstr "Unsaved changes"
 msgid "Continue data entry"
 msgstr "Continue data entry"
 
+msgid "You do not have access to modify this enrollment"
+msgstr "You do not have access to modify this enrollment"
+
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
 
