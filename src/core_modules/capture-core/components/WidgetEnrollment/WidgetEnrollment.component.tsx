@@ -171,11 +171,12 @@ const WidgetEnrollmentPlain = ({
                                     refetchEnrollment={refetchEnrollment}
                                     refetchTEI={refetchTEI}
                                     onError={onError}
+                                    readOnly={readOnlyMode || !programDataWriteAccess}
                                 />
                             </div>
                         )}
                         <Actions
-                            programDataWriteAccess={programDataWriteAccess}
+                            programDataWriteAccess={programDataWriteAccess && !readOnlyMode}
                             tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
                             programStages={program.programStages}
