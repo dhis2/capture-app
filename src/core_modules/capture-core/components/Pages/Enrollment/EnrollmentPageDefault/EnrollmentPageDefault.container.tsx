@@ -68,6 +68,7 @@ export const EnrollmentPageDefault = () => {
         enrollment,
         attributeValues,
         readOnly,
+        refetch: refetchEnrollmentDomain,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
@@ -198,6 +199,7 @@ export const EnrollmentPageDefault = () => {
             availableWidgets={WidgetsForEnrollmentPageDefault}
 
             readOnly={readOnly}
+            onStatusToggleSuccess={refetchEnrollmentDomain}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

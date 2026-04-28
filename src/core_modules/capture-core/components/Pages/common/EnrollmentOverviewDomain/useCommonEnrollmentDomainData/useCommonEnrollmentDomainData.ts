@@ -14,7 +14,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         attributeValues: storedAttributeValues,
     } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain);
 
-    const { data, error } = useApiDataQuery(
+    const { data, error, refetch } = useApiDataQuery(
         ['stages&event', 'enrollmentData', teiId, programId, enrollmentId],
         {
             resource: 'tracker/trackedEntities',
@@ -65,6 +65,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
     return {
         error,
         readOnly,
+        refetch,
         ...inEffectData,
     };
 };

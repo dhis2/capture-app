@@ -61,6 +61,7 @@ const WidgetProfilePlain = ({
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
+    onStatusToggleSuccess,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
@@ -145,9 +146,10 @@ const WidgetProfilePlain = ({
         [trackedEntityTypeAccess],
     );
 
-    const onStatusToggleSuccess = useCallback(() => {
+    const handleStatusToggleSuccess = useCallback(() => {
         refetchTEI && refetchTEI();
-    }, [refetchTEI]);
+        onStatusToggleSuccess && onStatusToggleSuccess();
+    }, [refetchTEI, onStatusToggleSuccess]);
 
     const renderProfile = () => {
         if (loading) {
@@ -216,7 +218,7 @@ const WidgetProfilePlain = ({
                                     { trackedEntity: teiId }
                                 }
                                 onDeleteSuccess={onDeleteSuccess}
-                                onStatusToggleSuccess={onStatusToggleSuccess}
+                                onStatusToggleSuccess={handleStatusToggleSuccess}
                                 displayChangelog={!!displayChangelog}
                                 trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}

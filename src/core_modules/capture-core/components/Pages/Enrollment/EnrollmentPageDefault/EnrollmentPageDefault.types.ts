@@ -50,6 +50,7 @@ export type Props = {
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
     readOnly?: ReadOnlyState;
+    onStatusToggleSuccess?: () => void;
 };
 
 

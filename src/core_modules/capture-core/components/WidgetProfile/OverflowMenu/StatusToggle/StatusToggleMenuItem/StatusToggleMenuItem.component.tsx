@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconBlock16, IconCheckmarkCircle16, MenuItem } from '@dhis2/ui';
 import type { Props } from './StatusToggleMenuItem.types';
@@ -26,7 +26,7 @@ export const StatusToggleMenuItem = ({
     setActionsIsOpen,
     setStatusToggleModalIsOpen,
 }: Props) => {
-    const disabled = useMemo(() => !canWriteTETData, [canWriteTETData]);
+    const disabled = !canWriteTETData;
     const tooltipContent = getTooltipContent(disabled, isInactive, trackedEntityTypeName);
 
     const label = isInactive
