@@ -47,7 +47,7 @@ export const WidgetRelatedStagesPlain = ({
     classes,
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
-    const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { enrollment, readOnly } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus } = useRelatedStages({ programStageId, programId });
     const {
         linkedEvent,
@@ -102,7 +102,12 @@ export const WidgetRelatedStagesPlain = ({
         addEventWithRelationship,
     ]);
 
-    if (isLinkedEventLoading || linkedEvent || currentRelatedStagesStatus !== relatedStageStatus.LINKABLE) {
+    if (
+        isLinkedEventLoading ||
+        linkedEvent ||
+        currentRelatedStagesStatus !== relatedStageStatus.LINKABLE ||
+        readOnly
+    ) {
         return null;
     }
 

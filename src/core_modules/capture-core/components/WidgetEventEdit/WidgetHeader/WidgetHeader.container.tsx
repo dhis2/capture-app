@@ -46,7 +46,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     occurredAt,
-    isInactive,
+    readOnly,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -63,10 +63,10 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod || Boolean(isInactive);
+    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod || Boolean(readOnly);
     const tooltipContent = useMemo(() => {
-        if (isInactive) {
-            return i18n.t('Cannot edit events while the tracked entity is inactive');
+        if (readOnly) {
+            return readOnly.tooltipContent;
         }
         if (blockEntryForm) {
             return i18n.t('The event cannot be edited after it has been completed');
@@ -81,7 +81,7 @@ const WidgetHeaderPlain = ({
             });
         }
         return '';
-    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt, isInactive]);
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt, readOnly]);
 
     const { programCategory } = useCategoryCombinations(programId);
 

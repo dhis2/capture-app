@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 
@@ -24,7 +25,7 @@ export const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
     onSelectFindMode,
-    isInactive,
+    readOnly,
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
@@ -39,19 +40,21 @@ export const NewTrackedEntityRelationshipPlain = ({
         onOpenAddRelationship && onOpenAddRelationship();
     }, [onOpenAddRelationship]);
 
-    if (isInactive) {
-        return null;
-    }
-
     return (
         <div className={classes.container}>
-            <Button
-                onClick={openAddWizard}
-                small
-                secondary
+            <ConditionalTooltip
+                content={readOnly?.tooltipContent}
+                enabled={Boolean(readOnly)}
             >
-                {i18n.t('New Relationship')}
-            </Button>
+                <Button
+                    onClick={openAddWizard}
+                    small
+                    secondary
+                    disabled={Boolean(readOnly)}
+                >
+                    {i18n.t('New Relationship')}
+                </Button>
+            </ConditionalTooltip>
 
             {
                 addWizardVisible && (

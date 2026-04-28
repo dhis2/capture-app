@@ -14,5 +14,5 @@ export type EventRowProps = {
     teiId: string;
     programId: string;
     enrollmentId: string;
-    isInactive?: boolean;
+    readOnly?: { tooltipContent: string };
 };

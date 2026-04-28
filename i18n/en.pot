@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T14:48:30.646Z\n"
-"PO-Revision-Date: 2026-04-28T14:48:30.646Z\n"
+"POT-Creation-Date: 2026-04-28T16:49:15.503Z\n"
+"PO-Revision-Date: 2026-04-28T16:49:15.503Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -620,8 +620,8 @@ msgstr "suggestions could not be retrieved"
 msgid "No items to display"
 msgstr "No items to display"
 
-msgid "Inactive enrollments cannot be selected"
-msgstr "Inactive enrollments cannot be selected"
+msgid "Tracked entity is deactivated"
+msgstr "Tracked entity is deactivated"
 
 msgid "Select columns"
 msgstr "Select columns"
@@ -1509,9 +1509,6 @@ msgstr "No polygon captured"
 msgid "Event completed"
 msgstr "Event completed"
 
-msgid "Cannot edit events while the tracked entity is inactive"
-msgstr "Cannot edit events while the tracked entity is inactive"
-
 msgid "The event cannot be edited after it has been completed"
 msgstr "The event cannot be edited after it has been completed"
 
@@ -1739,9 +1736,6 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "Cannot add events while the tracked entity is inactive"
-msgstr "Cannot add events while the tracked entity is inactive"
-
 msgid "You do not have access to create events in this stage"
 msgstr "You do not have access to create events in this stage"
 
@@ -1759,6 +1753,9 @@ msgstr "An error occurred while deleting the event"
 
 msgid "Are you sure you want to delete this event?"
 msgstr "Are you sure you want to delete this event?"
+
+msgid "You do not have access to perform actions on this event"
+msgstr "You do not have access to perform actions on this event"
 
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"

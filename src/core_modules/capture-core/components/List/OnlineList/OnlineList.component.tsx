@@ -201,7 +201,7 @@ class Index extends React.Component<Props> {
                             width={'40px'}
                         >
                             <ConditionalTooltip
-                                content={i18n.t('Inactive enrollments cannot be selected')}
+                                content={i18n.t('Tracked entity is deactivated')}
                                 enabled={Boolean(row.inactive)}
                             >
                                 <CheckboxField

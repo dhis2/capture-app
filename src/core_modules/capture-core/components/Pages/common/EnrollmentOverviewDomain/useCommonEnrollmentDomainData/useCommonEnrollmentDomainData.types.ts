@@ -32,9 +32,11 @@ export type AttributeValue = {
     value: string;
 };
 
+export type ReadOnlyState = { tooltipContent: string } | undefined;
+
 export type Output = {
     error?: any;
     enrollment?: EnrollmentData;
     attributeValues?: Array<AttributeValue>;
-    isInactive?: boolean;
+    readOnly?: ReadOnlyState;
 };

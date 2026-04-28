@@ -33,7 +33,7 @@ export type ContainerProps = Readonly<{
     onCloseAddRelationship?: () => void;
     onOpenAddRelationship?: () => void;
     onSelectFindMode?: OnSelectFindMode;
-    isInactive?: boolean;
+    readOnly?: { tooltipContent: string };
 }>;
 
 

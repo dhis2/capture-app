@@ -16,5 +16,5 @@ export type OwnProps = {
     stages: Array<ProgramStage & EventCount>;
     events: Array<Event>;
     ruleEffects?: Array<OutputEffect>;
-    isInactive?: boolean;
+    readOnly?: { tooltipContent: string };
 };

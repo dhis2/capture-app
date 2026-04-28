@@ -23,7 +23,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     stages,
     events,
     ruleEffects,
-    isInactive,
+    readOnly,
     classes,
 }: Props) => {
     const [open, setOpen] = useState<boolean>(true);
@@ -79,7 +79,8 @@ const EnrollmentQuickActionsComponentPlain = ({
                         label={i18n.t('New event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
-                        disabled={noStageAvailable || isInactive}
+                        disabled={noStageAvailable || Boolean(readOnly)}
+                        tooltipContent={readOnly?.tooltipContent}
                     />
 
                     <QuickActionButton
@@ -87,7 +88,8 @@ const EnrollmentQuickActionsComponentPlain = ({
                         label={i18n.t('Schedule an event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
-                        disabled={noStageAvailable || isInactive}
+                        disabled={noStageAvailable || Boolean(readOnly)}
+                        tooltipContent={readOnly?.tooltipContent}
                     />
 
                     {/* DHIS2-13016: Should hide Make referral until the feature is developped

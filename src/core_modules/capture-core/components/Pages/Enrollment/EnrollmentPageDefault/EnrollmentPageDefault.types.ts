@@ -1,7 +1,7 @@
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { TrackerProgram } from 'capture-core/metaData';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
-import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
+import type { Event, ReadOnlyState } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { LinkedRecordClick } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
     PageLayoutConfig,
@@ -49,7 +49,7 @@ export type Props = {
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
-    isInactive?: boolean;
+    readOnly?: ReadOnlyState;
 };
 
 

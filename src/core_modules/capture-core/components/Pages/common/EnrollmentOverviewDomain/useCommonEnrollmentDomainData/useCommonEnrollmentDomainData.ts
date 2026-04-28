@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCommonEnrollmentSiteData } from '../enrollment.actions';
-import type { Output } from './useCommonEnrollmentDomainData.types';
+import type { Output, ReadOnlyState } from './useCommonEnrollmentDomainData.types';
 import { useApiDataQuery } from '../../../../../utils/reactQueryHelpers';
 
 export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string): Output => {
@@ -57,9 +58,13 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         attributeValues: storedAttributeValues,
     } : { enrollment: undefined, attributeValues: undefined };
 
+    const readOnly: ReadOnlyState = data?.inactive
+        ? { tooltipContent: i18n.t('Tracked entity is deactivated') }
+        : undefined;
+
     return {
         error,
-        isInactive: Boolean(data?.inactive),
+        readOnly,
         ...inEffectData,
     };
 };

@@ -97,7 +97,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const { enrollment: enrollmentSite, isInactive } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { enrollment: enrollmentSite, readOnly } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
     useEffect(() => {
@@ -118,7 +118,7 @@ export const EnrollmentEditEventPage = () => {
             initMode={initMode}
             enrollmentSite={enrollmentSite}
             event={storedEvent}
-            isInactive={isInactive}
+            readOnly={readOnly}
         />
     ) : <LoadingMaskForPage />;
 };
@@ -132,7 +132,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     initMode,
     enrollmentSite,
     event,
-    isInactive,
+    readOnly,
 }: Props) => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
@@ -348,7 +348,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
             onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
             userInteractionInProgress={userInteractionInProgress}
-            isInactive={isInactive}
+            readOnly={readOnly}
         />
     );
 };

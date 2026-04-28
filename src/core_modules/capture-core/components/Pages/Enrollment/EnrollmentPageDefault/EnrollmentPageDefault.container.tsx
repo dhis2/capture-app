@@ -67,7 +67,7 @@ export const EnrollmentPageDefault = () => {
         error: enrollmentsError,
         enrollment,
         attributeValues,
-        isInactive,
+        readOnly,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
@@ -197,7 +197,7 @@ export const EnrollmentPageDefault = () => {
             currentPage={EnrollmentPageKeys.OVERVIEW}
             availableWidgets={WidgetsForEnrollmentPageDefault}
 
-            isInactive={isInactive}
+            readOnly={readOnly}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}
