@@ -20,6 +20,7 @@ export type Props = {
     onSaveAndCompleteEnrollmentErrorActionType?: string,
     onDeleteEvent?: (eventId: string) => void,
     onDeleteEventRelationship?: (relationshipId: string) => void,
+    readOnly?: { tooltipContent: string },
 };
 
 export type ComponentProps = Props & {

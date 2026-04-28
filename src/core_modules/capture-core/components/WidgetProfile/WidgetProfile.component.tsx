@@ -11,6 +11,7 @@ import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
+import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import type { Props } from './widgetProfile.types';
 import {
     useProgram,
@@ -58,6 +59,7 @@ const WidgetProfilePlain = ({
     teiId,
     programId,
     readOnlyMode = false,
+    readOnlyTooltipContent,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
@@ -91,11 +93,12 @@ const WidgetProfilePlain = ({
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 
-    const isEditable = useMemo(() =>
+    const showEditButton = useMemo(() =>
         !hasNoAttributes &&
-        trackedEntityTypeAccess?.data?.write &&
-        !readOnlyMode,
-    [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
+        trackedEntityTypeAccess?.data?.write,
+    [hasNoAttributes, trackedEntityTypeAccess]);
+
+    const isEditable = showEditButton && !readOnlyMode;
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
@@ -185,10 +188,20 @@ const WidgetProfilePlain = ({
                                 : i18n.t('Profile')}
                         </div>
                         <div className={classes.actions}>
-                            {isEditable && (
-                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                    {i18n.t('Edit')}
-                                </Button>
+                            {showEditButton && (
+                                <ConditionalTooltip
+                                    content={readOnlyTooltipContent}
+                                    enabled={readOnlyMode && Boolean(readOnlyTooltipContent)}
+                                >
+                                    <Button
+                                        onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)}
+                                        secondary
+                                        small
+                                        disabled={readOnlyMode}
+                                    >
+                                        {i18n.t('Edit')}
+                                    </Button>
+                                </ConditionalTooltip>
                             )}
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}

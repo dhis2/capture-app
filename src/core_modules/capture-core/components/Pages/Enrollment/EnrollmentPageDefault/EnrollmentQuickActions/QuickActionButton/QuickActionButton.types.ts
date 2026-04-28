@@ -6,4 +6,5 @@ export type QuickActionButtonTypes = {
     onClickAction: () => void;
     dataTest?: string;
     disabled?: boolean;
+    tooltipContent?: string;
 };

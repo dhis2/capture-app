@@ -3,6 +3,7 @@ export type Props = {
     programId: string;
     orgUnitId: string;
     readOnlyMode?: boolean;
+    readOnlyTooltipContent?: string;
     onUpdateTeiAttributeValues?: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void;
     onDeleteSuccess?: () => void;
 };

@@ -9,4 +9,5 @@ export type Props = {
     onOpenAddRelationship: () => void;
     onCloseAddRelationship: () => void;
     onLinkedRecordClick: LinkedRecordClick;
+    readOnly?: { tooltipContent: string };
 };

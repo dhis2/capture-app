@@ -20,6 +20,7 @@ const RelationshipsWidgetPlain = ({
     relationshipTypes,
     onLinkedRecordClick,
     children,
+    readOnly,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
@@ -66,6 +67,7 @@ const RelationshipsWidgetPlain = ({
                             groupedLinkedEntities={groupedLinkedEntities}
                             onLinkedRecordClick={onLinkedRecordClick}
                             onDeleteRelationship={onDeleteRelationship}
+                            readOnly={readOnly}
                         />
                     )
                 }

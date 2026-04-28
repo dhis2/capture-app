@@ -29,6 +29,7 @@ const MiniMapPlain = ({
     refetchEnrollment,
     refetchTEI,
     onError,
+    readOnly,
     classes,
 }: Props) => {
     const [isOpenMap, setOpenMap] = useState(false);
@@ -56,6 +57,7 @@ const MiniMapPlain = ({
                     attributionControl={false}
                     key="minimap"
                     onClick={() => {
+                        if (readOnly) return;
                         setOpenMap(true);
                     }}
                 >

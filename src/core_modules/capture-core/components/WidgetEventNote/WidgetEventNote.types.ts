@@ -1,6 +1,7 @@
 export type Props = {
     dataEntryKey: string;
     dataEntryId: string;
+    readOnly?: { tooltipContent: string };
 };
 
 export type ClientNote = {

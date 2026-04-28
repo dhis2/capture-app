@@ -170,28 +170,31 @@ export const WidgetEnrollmentPlain = ({
                                     refetchEnrollment={refetchEnrollment}
                                     refetchTEI={refetchTEI}
                                     onError={onError}
+                                    readOnly={!editDateEnabled}
                                 />
                             </div>
                         )}
-                        <Actions
-                            tetName={program.trackedEntityType.displayName}
-                            onlyEnrollOnce={program.onlyEnrollOnce}
-                            programStages={program.programStages}
-                            enrollment={enrollment}
-                            events={events}
-                            ownerOrgUnitId={ownerOrgUnit.id}
-                            refetchEnrollment={refetchEnrollment}
-                            refetchTEI={refetchTEI}
-                            onDelete={onDelete}
-                            onAddNew={onAddNew}
-                            canAddNew={canAddNew}
-                            onError={onError}
-                            onSuccess={onSuccess}
-                            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
-                            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
-                            onAccessLostFromTransfer={onAccessLostFromTransfer}
-                        />
+                        {editDateEnabled && (
+                            <Actions
+                                tetName={program.trackedEntityType.displayName}
+                                onlyEnrollOnce={program.onlyEnrollOnce}
+                                programStages={program.programStages}
+                                enrollment={enrollment}
+                                events={events}
+                                ownerOrgUnitId={ownerOrgUnit.id}
+                                refetchEnrollment={refetchEnrollment}
+                                refetchTEI={refetchTEI}
+                                onDelete={onDelete}
+                                onAddNew={onAddNew}
+                                canAddNew={canAddNew}
+                                onError={onError}
+                                onSuccess={onSuccess}
+                                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                                onAccessLostFromTransfer={onAccessLostFromTransfer}
+                            />
+                        )}
                     </div>
                 )}
             </Widget>

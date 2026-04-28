@@ -180,6 +180,12 @@ export const EnrollmentPageDefault = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
 
+    const hasProgramWrite = Boolean(program?.access?.data?.write);
+    const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
+    const readOnly = !hasProgramWrite || !hasTETWrite
+        ? { tooltipContent: i18n.t('You do not have access to edit this enrollment') }
+        : undefined;
+
     if (isLoading) {
         return (
             <LoadingMaskForPage />
@@ -196,6 +202,7 @@ export const EnrollmentPageDefault = () => {
             currentPage={EnrollmentPageKeys.OVERVIEW}
             availableWidgets={WidgetsForEnrollmentPageDefault}
 
+            readOnly={readOnly}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

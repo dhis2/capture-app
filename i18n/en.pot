@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
-"PO-Revision-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-04-28T18:09:21.231Z\n"
+"PO-Revision-Date: 2026-04-28T18:09:21.231Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -714,6 +714,9 @@ msgstr "Notice"
 
 msgid "Close the notice"
 msgstr "Close the notice"
+
+msgid "You do not have access to edit this enrollment"
+msgstr "You do not have access to edit this enrollment"
 
 msgid "Quick actions"
 msgstr "Quick actions"
@@ -1712,6 +1715,9 @@ msgstr "An error occurred while deleting the event"
 
 msgid "Are you sure you want to delete this event?"
 msgstr "Are you sure you want to delete this event?"
+
+msgid "You do not have access to perform actions on this event"
+msgstr "You do not have access to perform actions on this event"
 
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"

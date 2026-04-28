@@ -46,6 +46,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     occurredAt,
+    readOnly,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -62,8 +63,11 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
+    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod || Boolean(readOnly);
     const tooltipContent = useMemo(() => {
+        if (readOnly) {
+            return readOnly.tooltipContent;
+        }
         if (blockEntryForm) {
             return i18n.t('The event cannot be edited after it has been completed');
         }
@@ -77,7 +81,7 @@ const WidgetHeaderPlain = ({
             });
         }
         return '';
-    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt, readOnly]);
 
     const { programCategory } = useCategoryCombinations(programId);
 

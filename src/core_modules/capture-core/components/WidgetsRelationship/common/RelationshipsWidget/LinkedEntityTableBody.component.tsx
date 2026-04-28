@@ -29,6 +29,7 @@ const LinkedEntityTableBodyPlain = ({
     onLinkedRecordClick,
     context,
     onDeleteRelationship,
+    readOnly,
     classes,
 }: Props & WithStyles<typeof styles>) => (
     <DataTableBody dataTest="relationship-table-body">
@@ -89,7 +90,8 @@ const LinkedEntityTableBodyPlain = ({
                                     handleDeleteRelationship={() =>
                                         onDeleteRelationship({ relationshipId: relationshipId! })
                                     }
-                                    disabled={pendingApiResponse}
+                                    disabled={pendingApiResponse || Boolean(readOnly)}
+                                    tooltipContent={readOnly?.tooltipContent}
                                 />
                             ) : null}
                         </DataTableRow>
