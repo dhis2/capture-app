@@ -93,8 +93,8 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => ({ orgUnitId, ...
         return null;
     }, [data, orgUnitFetchId]);
 
-    const onOpenMap = (hasValue) => {
-        setFetchEnabled(!hasValue);
+    const onOpenMap = () => {
+        setFetchEnabled(true);
     };
 
     const onCloseMap = () => {
