@@ -270,7 +270,7 @@ Click **Save person**. The system will start looking for possible duplicates tha
 5. The system will automatically show a list of possible duplicates if there are any. 
 ![](resources/images/duplicates-on-creation-04.png)
 
-6. You can choose to make a new enrollement by clicking **Save as new** or if you see the right person in the list - you can view the dashboard.
+6. You can choose to make a new enrollment by clicking **Save as new** or if you see the right person in the list - you can view the dashboard.
 ![](resources/images/duplicates-on-creation-05.png)
 
 > **Tip**
@@ -301,7 +301,7 @@ To see a rule being executed while enrolling a tracked entity instance you will 
 
 ## Re-enroll an existing tracked entity instance
 
-When you are on the re-enroll page, the teId will be visible in the URL parameters. The attributes of the tracked entity instance will be pre-fielded with the current values. 
+When you are on the re-enroll page, the teiID will be visible in the URL parameters. The attributes of the tracked entity instance will be pre-filled with the current values. 
 ![](resources/images/enroll-existing-tei.png)
 
 
@@ -337,7 +337,7 @@ You now have two options:
       When the unique attribute field has been filled out, click the **Search** button located right below
       the unique attribute field.
 
-    - If the **Tracked Entity Instance** or **program** has attibutes these can be used for searching by expanding the **Search by attributes** box.
+    - If the **Tracked Entity Instance** or **program** has attributes these can be used for searching by expanding the **Search by attributes** box.
       When all desired attribute fields have been filled out, click the **Search by attributes** button located at the bottom. You can also limit the search by setting the **Organisation unit scope**. If set to *All accessible* you will search for the **Tracked Entity Instance** in all organisation units you have access to. If you select *Selected*, you will be asked to select which organisation units to search within.
 
 2. After a successful search you will be presented with a list of **Tracked Entity Instances** matching the search criteria.
@@ -428,7 +428,7 @@ assigned to a program stage.
 
 > **Tip**
 >
-> You can reorganize the order of the data elements by draging and dropping them in the list.
+> You can reorganize the order of the data elements by dragging and dropping them in the list.
 
 ## Filter an event list { #capture_filter_event_list } 
 
@@ -448,7 +448,7 @@ assigned to a program stage.
 
 > **Note**
 >
-> Different data element types are fitered in different ways. A **Number** data element will for instance show a rang to filter on while a **Text** data element will ask you to enter a search query to filter on.
+> Different data element types are filtered in different ways. A **Number** data element will for instance show a range to filter on while a **Text** data element will ask you to enter a search query to filter on.
 
 ## Sort an event list { #capture_sort_event_list } 
 
@@ -672,7 +672,7 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-5.png)
 
-    b. You can view the the active enrollment of a **Tracked Entity Instance** by clicking the "View active enrollment" button
+    b. You can view the active enrollment of a **Tracked Entity Instance** by clicking the "View active enrollment" button
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-3.png)
 
@@ -741,7 +741,7 @@ The search terms that you typed in before will be prefilled in the registration 
 
 ### Too many results functionality
 
-The program or tracked entitiy type you are searching within may be configured with a limit on the number of results that are retrurned from a search. If your search results exceed this limit you will be shown a warning message like the one below.
+The program or tracked entity type you are searching within may be configured with a limit on the number of results that are returned from a search. If your search results exceed this limit you will be shown a warning message like the one below.
 
 ![](resources/images/search-by-attributes-on-scope-program-overview-too-many-results-message.png)
 
@@ -793,7 +793,7 @@ Click one of the column headers to sort the list by that column. A small arrow i
 
 You can select which columns to show in the list and also reorganize the order of the columns.
 
-Click the **gear** icon in the top right corner of the list. Tick the checkboxes for the the columns you would like to display (1) and reorgainze the columns by dragging and dropping (2).
+Click the **gear** icon in the top right corner of the list. Tick the checkboxes for the columns you would like to display (1) and reorganize the columns by dragging and dropping (2).
 
 ![](resources/images/tei_list_column_layout.png)
 
@@ -944,7 +944,7 @@ When you deselect the enrollment you see the following
 ![](resources/images/enrollment-dash-08.png)
 
 
-###Quick actions
+### Quick actions
 
 The quick actions widget offers shortcuts for frequently used actions for the current enrollment.
 
@@ -1169,7 +1169,7 @@ In the view/edit event form you can see the stage name and icon.
 
 ### Top bar context  
 
-At the top of the page you can see different informations related with the current context. You can see the program, the organization unit, the tracked entity, the enrollment date, the stage. 
+At the top of the page you can see different information related to the current context. You can see the program, the organization unit, the tracked entity, the enrollment date, the stage. 
 
 To go to Enrollment Overview page you can: 
 - deselect the stage from the top bar. 
@@ -1284,7 +1284,7 @@ You will find the assignee section near the bottom of the data entry page. Searc
 ### Schedule event widget form
 Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to compute the suggested date.
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
