@@ -143,7 +143,7 @@ export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
     getCustomSettings: ({ readOnlyMode = true }: any, props?: any) => ({
         readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
-        readOnlyTooltipContent: props?.readOnly?.tooltipContent,
+        readOnlyTooltipContent: !readOnlyMode ? props?.readOnly?.tooltipContent : undefined,
     }),
     getProps: ({
         teiId,
