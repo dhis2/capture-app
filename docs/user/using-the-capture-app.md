@@ -301,7 +301,7 @@ To see a rule being executed while enrolling a tracked entity instance you will 
 
 ## Re-enroll an existing tracked entity instance
 
-When you are on the re-enroll page, the teiID will be visible in the URL parameters. The attributes of the tracked entity instance will be pre-filled with the current values. 
+When you are on the re-enroll page, the teID will be visible in the URL parameters. The attributes of the tracked entity instance will be pre-filled with the current values. 
 ![](resources/images/enroll-existing-tei.png)
 
 
