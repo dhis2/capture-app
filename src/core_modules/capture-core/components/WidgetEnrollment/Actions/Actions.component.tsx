@@ -36,6 +36,7 @@ const ActionsPlain = ({
     tetName,
     canAddNew,
     programDataWriteAccess,
+    readOnly,
     onUpdateStatus,
     onUpdate,
     onDelete,
@@ -68,8 +69,9 @@ const ActionsPlain = ({
     return (
         <>
             <ConditionalTooltip
-                content={i18n.t('You do not have access to modify this enrollment')}
-                enabled={!programDataWriteAccess}
+                content={readOnly?.tooltipContent
+                    ?? i18n.t('You do not have access to modify this enrollment')}
+                enabled={Boolean(readOnly) || !programDataWriteAccess}
             >
                 <DropdownButton
                     dataTest="widget-enrollment-actions-button"
