@@ -46,7 +46,7 @@ const RelationshipTrackedEntityInstancePlain =
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-                hideEnrollmentHint
+                hideProgramSelectionMessage
             />
         );
     };

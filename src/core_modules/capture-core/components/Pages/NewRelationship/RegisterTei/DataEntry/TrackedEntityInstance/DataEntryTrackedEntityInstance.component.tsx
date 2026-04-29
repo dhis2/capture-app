@@ -45,7 +45,7 @@ const RelationshipTrackedEntityInstancePlain =
                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                 orgUnit={{ id: orgUnitId }}
-                hideEnrollmentHint
+                hideProgramSelectionMessage
             />
         );
     };
