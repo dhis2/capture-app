@@ -308,7 +308,7 @@ When you are on the re-enroll page, the teID will be visible in the URL paramete
 ## Adding a relationship { #capture_add_relationship } 
 
 Relationships can be added either during registration, editing or viewing of an event.
-Currently the **Capture App** only supports *Event to Tracked Entity Instance* relationships.
+The **Capture App** supports several relationship types, including *Event to Tracked Entity Instance* and *Tracked Entity Instance to Tracked Entity Instance* (e.g. Sibling, Mother-Child). The relationship types available depend on your program configuration.
 
 1. While in an event, click **Add relationship**.
 
@@ -461,11 +461,11 @@ assigned to a program stage.
 
 4. Click one of the column headers to sort the list on that data element in ascending order.
 
-    A small upward arrow is displayed next to the column to show that the list is sorted in ascending order.
+    Two arrows (up and down) are displayed next to each sortable column. When sorted ascending, the upward arrow is highlighted. Unsorted columns show both arrows greyed out.
 
 5. Click the column header again to sort the list on that data element in descending order.
 
-    A small downward arrow is displayed next to the column to show that the list is sorted in descending order.
+    When sorted descending, the downward arrow is highlighted.
 
     ![sort event](resources/images/sort_event.png)
 
@@ -577,7 +577,7 @@ You can perform bulk actions on events in the event list.
 
 ## User assignment in events programs { #capture_user_assignment } 
 
-Events can be assigned to users. This feature must be enabled per program.
+Events can be assigned to users. This feature must be enabled per program by checking **Enable user assignment of events** in the program settings in the Maintenance app.
 
 ### Assigning user to new events { #capture_user_assignment_new } 
 
@@ -668,15 +668,15 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     In this list you can see the entries that match your search. For each entry you can have a total of three options.
 
-    a. You can choose to view the dashboard for the **Tracked Entity Instance** by clicking the "View dashboard" button
+    a. You can choose to view the dashboard for the **Tracked Entity Instance** by clicking the "View dashboard" button. This opens the enrollment dashboard for the most recent enrollment across any program, and is useful when a tracked entity instance has enrollments in multiple programs.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-5.png)
 
-    b. You can view the active enrollment of a **Tracked Entity Instance** by clicking the "View active enrollment" button
+    b. You can view the active enrollment of a **Tracked Entity Instance** by clicking the "View active enrollment" button. This opens the enrollment dashboard directly for the active enrollment in the program you are currently searching within. This option is only shown when the tracked entity instance has an active enrollment in the current program.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-3.png)
 
-    c. You can re-enroll a **Tracked Entity Instance** to the current program you are searching within.
+    c. You can re-enroll a **Tracked Entity Instance** to the current program you are searching within. The re-enroll option only appears when the tracked entity instance has a completed enrollment in this program. If the current enrollment is still active, this option will not be shown.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-4.png)
 
@@ -785,7 +785,7 @@ As an example, you could filter the list to show only tracked entity instances w
 
 ### Sort the list
 
-Click one of the column headers to sort the list by that column. A small arrow is displayed next to the column header to indicate the current sort order. Click again to change between ascending and descending order.
+Click one of the column headers to sort the list by that column. Two arrows (up and down) are displayed next to each sortable column header — the active sort direction is highlighted, and unsorted columns show both arrows greyed out. Click again to toggle between ascending and descending order.
 
 ![](resources/images/tei_list_sort_order.png)
 
@@ -793,7 +793,7 @@ Click one of the column headers to sort the list by that column. A small arrow i
 
 You can select which columns to show in the list and also reorganize the order of the columns.
 
-Click the **gear** icon in the top right corner of the list. Tick the checkboxes for the columns you would like to display (1) and reorganize the columns by dragging and dropping (2).
+Click the **gear** icon in the top right corner of the list. Tick the checkboxes for the columns you would like to display (1) and reorganize the columns by dragging and dropping using the six-dot handle on the left side of each column name (2).
 
 ![](resources/images/tei_list_column_layout.png)
 
@@ -878,8 +878,7 @@ In this section we are focusing on the first use-case, where you type or paste t
 
 ![](resources/images/enrollment-dash-01.png)
 
-One way to reach the enrollment dashboard and view a specific tracked entity instance's enrollment is by using _only_ the enrollment id. For example the link .../dhis-web-capture/#/enrollment?enrollmentId=wBU0RAsYjKE will 
-take you the dashboard for the enrollment with id `wBU0RAsYjKE`. 
+One way to reach the enrollment dashboard and view a specific tracked entity instance's enrollment is by using _only_ the enrollment id. For example the link `.../capture#/enrollment?enrollmentId=wBU0RAsYjKE` will take you to the dashboard for the enrollment with id `wBU0RAsYjKE`. 
 
 The top of the dashboard defines your context. For example in the image below the context is as follows, the selected program is "Child Programme", the organisation unit is "Ngelehun CHC", the selected person is "Anna Jones" and the selected enrollment is "2017-11-16 11:38".
 
@@ -1023,6 +1022,8 @@ If the program only allows one enrollment per tracked entity instance, the **Add
 #### Transfer the enrollment to another organisation unit
 
 In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
+
+Transferring changes the **owning organisation unit** of the enrollment, which affects data visibility and access. After the transfer, the tracked entity instance will be owned by the new organisation unit, meaning users without access to that organisation unit may no longer be able to view or edit the enrollment. The transfer does not move historical event data — it only changes the ownership going forward.
 
 ![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
 
@@ -1397,11 +1398,11 @@ The **tracked entity changelog** tracks changes to attributes of a tracked entit
 3. Click **View Changelog** in the **Tracked Entity Profile** widget to open the changelog.
    ![](resources/images/open-tracked-entity-changelog.png)
 
-# Related stages and linked events for Tracker programs
-You can connect any two program stages via a relationship. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship.
+# Related stages and linked events for Tracker programs { #related-stages-and-linked-events }
+You can connect any two program stages via a relationship. This is useful for workflows where completing one stage should trigger or be linked to another — for example, linking a lab request stage to a lab result stage, or linking a referral stage to a follow-up consultation stage. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship in the Maintenance app.
 ![](resources/images/related-stages-maintenance.png)
 
-## Adding a new tracker event
+## Adding a new tracker event { #related-stages-adding-new-event }
 When opening the new event form, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
@@ -1410,7 +1411,7 @@ When opening the new event form, a widget called *Actions - ${Relationship type 
 When clicking Complete or Save without completing, the Capture app will create the current event, schedule the linked event and make sure that there is a relationship between them in the correct context.
 ![](resources/images/related-stages-new-event.png)
 
-## Editing a tracker event
+## Editing a tracker event { #related-stages-editing-event }
 ### When there isn't a linked event 
 If the event is eligible for related stages but isn’t linked yet, a widget called *Linked event* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
@@ -1429,7 +1430,7 @@ Additionally, by clicking the Menu in the top-right corner, users can:
 2. Unlink and delete the linked event.
 ![](resources/images/related-stages-linked-event-actions-menu.png)
 
-## Enrolling a tracked entity
+## Enrolling a tracked entity { #related-stages-enrolling }
 Enable the "First stage appears on registration page" flag in the Maintenance for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
