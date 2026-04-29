@@ -98,12 +98,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
 
     goto() {
         if (this.gotoInstance) {
-            this.gotoInstance.scrollIntoView();
-
-            const scrolledY = window.scrollY;
-            if (scrolledY) {
-                window.scroll(0, scrolledY - 48);
-            }
+            this.gotoInstance.scrollIntoView({ block: 'start' });
         }
     }
 
@@ -148,6 +143,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
         return (
             <div
                 ref={(gotoInstance) => { this.gotoInstance = gotoInstance; }}
+                style={{ scrollMarginTop: '80px' }}
             >
                 {this.renderOrgUnitScopeSelector()}
                 {selectedOrgUnitScope !== 'ACCESSIBLE' && this.renderOrgUnitField()}

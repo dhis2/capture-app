@@ -7,7 +7,7 @@ export const withGotoInterface = () =>
 
             goto() {
                 if (this.gotoInstance) {
-                    this.gotoInstance.scrollIntoView({ block: 'center' });
+                    this.gotoInstance.scrollIntoView({ block: 'start' });
                 }
             }
 
@@ -15,6 +15,7 @@ export const withGotoInterface = () =>
                 return (
                     <div
                         ref={(gotoInstance) => { this.gotoInstance = gotoInstance; }}
+                        style={{ scrollMarginTop: '80px' }}
                     >
                         <InnerComponent
                             {...this.props}

@@ -19,7 +19,7 @@ class DataEntryFieldPlain extends React.Component<Props> {
 
     goto() {
         if (this.gotoInstance) {
-            this.gotoInstance.scrollIntoView({ block: 'center' });
+            this.gotoInstance.scrollIntoView({ block: 'start' });
         }
     }
 
@@ -55,6 +55,7 @@ class DataEntryFieldPlain extends React.Component<Props> {
                 ref={(gotoInstance) => { this.gotoInstance = gotoInstance; }}
                 key={propName}
                 data-test={`dataentry-field-${propName}`}
+                style={{ scrollMarginTop: '80px' }}
             >
                 <Component
                     onBlur={this.handleSet}
