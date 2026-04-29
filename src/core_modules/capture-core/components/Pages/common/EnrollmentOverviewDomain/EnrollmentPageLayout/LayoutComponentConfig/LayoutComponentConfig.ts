@@ -192,6 +192,7 @@ export const EnrollmentWidget: WidgetConfig = {
     shouldHideWidget: ({ enrollmentId }: any) => enrollmentId === 'AUTO',
     getCustomSettings: ({ readOnlyMode }: any, props?: any) => ({
         readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
+        readOnly: props?.readOnly,
     }),
     getProps: ({
         teiId,
