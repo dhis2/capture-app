@@ -48,6 +48,7 @@ export class CoordinateField extends React.Component<PlainProps, State> {
             latitude: position[0],
             longitude: position[1],
         } : null;
+        this.props.onChange?.(value);
         this.props.onBlur(value);
         this.setState({ showMap: false });
     }
