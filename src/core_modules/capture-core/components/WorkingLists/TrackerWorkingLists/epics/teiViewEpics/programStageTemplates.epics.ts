@@ -172,7 +172,7 @@ export const updateProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
         ),
         concatMap((action) => {
             const {
-                template: { id, name },
+                template: { id, name, externalAccess, publicAccess, userGroupAccesses, userAccesses },
                 program,
                 programStage,
                 storeId,
@@ -198,6 +198,10 @@ export const updateProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
                 name,
                 program,
                 programStage,
+                externalAccess,
+                publicAccess,
+                userGroupAccesses,
+                userAccesses,
                 programStageQueryCriteria: {
                     displayColumnOrder,
                     order,
