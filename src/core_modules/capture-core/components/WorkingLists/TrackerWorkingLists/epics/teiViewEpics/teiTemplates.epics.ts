@@ -153,7 +153,7 @@ export const updateTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStor
         ),
         concatMap((action) => {
             const {
-                template: { id, name, externalAccess, publicAccess, user, userGroupAccesses, userAccesses },
+                template: { id, name },
                 program,
                 storeId,
                 criteria,
@@ -165,11 +165,6 @@ export const updateTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStor
             const trackedEntityInstanceFilters = {
                 name,
                 program,
-                externalAccess,
-                publicAccess,
-                user,
-                userGroupAccesses,
-                userAccesses,
                 entityQueryCriteria: {
                     displayColumnOrder,
                     order,
