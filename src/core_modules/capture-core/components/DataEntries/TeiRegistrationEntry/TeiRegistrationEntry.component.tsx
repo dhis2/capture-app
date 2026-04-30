@@ -17,7 +17,11 @@ import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCh
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
-const translatedTextWithStylesForTei = (trackedEntityName: string, orgUnitName?: string, hideProgramSelectionMessage?: boolean) =>
+const translatedTextWithStylesForTei = (
+    trackedEntityName: string,
+    orgUnitName?: string,
+    hideProgramSelectionMessage?: boolean,
+) =>
     (<>
         {i18n.t('Saving a {{trackedEntityName}}', {
             trackedEntityName, interpolation: { escapeValue: false } })
@@ -106,7 +110,9 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       </div>
                       <InfoIconText>
-                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnitName, hideProgramSelectionMessage)}
+                          {translatedTextWithStylesForTei(
+                              trackedEntityName.toLowerCase(), orgUnitName, hideProgramSelectionMessage,
+                          )}
                       </InfoIconText>
 
                       <DiscardDialog
