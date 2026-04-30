@@ -46,6 +46,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     occurredAt,
+    readOnly,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -100,22 +101,24 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        <ConditionalTooltip
-                            content={tooltipContent}
-                            enabled={disableEdit}
-                            wrapperClassName={classes.tooltip}
-                        >
-                            <Button
-                                small
-                                secondary
-                                disabled={disableEdit}
-                                icon={<IconEdit24 />}
-                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
-                                data-test="widget-enrollment-event-edit-button"
+                        {!readOnly && (
+                            <ConditionalTooltip
+                                content={tooltipContent}
+                                enabled={disableEdit}
+                                wrapperClassName={classes.tooltip}
                             >
-                                {i18n.t('Edit event')}
-                            </Button>
-                        </ConditionalTooltip>
+                                <Button
+                                    small
+                                    secondary
+                                    disabled={disableEdit}
+                                    icon={<IconEdit24 />}
+                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
+                                    data-test="widget-enrollment-event-edit-button"
+                                >
+                                    {i18n.t('Edit event')}
+                                </Button>
+                            </ConditionalTooltip>
+                        )}
 
                         {supportsChangelog && (
                             <OverflowButton

@@ -63,6 +63,7 @@ const PolygonPlain = ({
     setOpen,
     defaultValues,
     onSetCoordinates,
+    readOnly,
 }: Props) => {
     const [polygonArea, setPolygonArea] = useState<Array<Array<number>> | null>(defaultValues ?? null);
     const [center, setCenter] = useState<[number, number] | undefined>(undefined);
@@ -201,7 +202,7 @@ const PolygonPlain = ({
                         enabled={drawingState === drawing.STARTED}
                     >
                         <Button
-                            disabled={drawingState === drawing.STARTED}
+                            disabled={drawingState === drawing.STARTED || readOnly}
                             className={classes.setAreaButton}
                             onClick={() => {
                                 const clientValue = polygonArea;

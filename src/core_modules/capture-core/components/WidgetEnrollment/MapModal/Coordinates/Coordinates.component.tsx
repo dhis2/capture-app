@@ -50,6 +50,7 @@ const CoordinatesPlain = ({
     setOpen,
     defaultValues,
     onSetCoordinates,
+    readOnly,
 }: Props) => {
     const [position, setPosition] = useState<[number, number] | null>(defaultValues || null);
     const [center, setCenter] = useState<[number, number] | undefined>(undefined);
@@ -190,6 +191,7 @@ const CoordinatesPlain = ({
                 <Button
                     className={classes.fieldButton}
                     primary
+                    disabled={readOnly}
                     onClick={() => {
                         setEditing(true);
                     }}
@@ -200,6 +202,7 @@ const CoordinatesPlain = ({
                 <Button
                     className={classes.fieldButton}
                     icon={<IconCross24 />}
+                    disabled={readOnly}
                     onClick={() => {
                         setValid(true);
                         setPosition(null);
@@ -223,7 +226,7 @@ const CoordinatesPlain = ({
                 {i18n.t('Cancel')}
             </Button>
             <Button
-                disabled={hasErrors}
+                disabled={hasErrors || readOnly}
                 onClick={() => {
                     const clientValue = [position];
                     const convertedCoordinates = convertCoordinatesToServer(clientValue);

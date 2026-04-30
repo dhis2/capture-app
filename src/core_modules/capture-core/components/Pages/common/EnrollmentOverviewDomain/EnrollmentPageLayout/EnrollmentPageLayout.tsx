@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { colors, spacers, spacersNum } from '@dhis2/ui';
+import { colors, spacers, spacersNum, IconInfo16, Tag } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
@@ -49,6 +50,17 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         fontWeight: 500,
         paddingTop: spacersNum.dp8,
     },
+    breadcrumbRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    readOnlyBadge: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: spacersNum.dp4,
+        flexShrink: 0,
+    },
 });
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
@@ -66,6 +78,7 @@ const EnrollmentPageLayoutPlain = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
+    readOnly,
     classes,
     ...passOnProps
 }: Props) => {
@@ -115,7 +128,7 @@ const EnrollmentPageLayoutPlain = ({
                 className={classes.contentContainer}
                 style={!mainContentVisible ? { display: 'none' } : undefined}
             >
-                <div>
+                <div className={classes.breadcrumbRow}>
                     <EnrollmentBreadcrumb
                         page={currentPage}
                         onBackToMainPage={onBackToMainPage}
@@ -126,6 +139,11 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
+                    {readOnly && (
+                        <Tag neutral icon={<IconInfo16 color={colors.grey700} />}>
+                            {i18n.t('You can only view this enrollment')}
+                        </Tag>
+                    )}
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

@@ -25,6 +25,10 @@ export const TrackerWorkingListsViewMenuSetup = ({
     ...passOnProps
 }: Props) => {
     const [customUpdateTrigger, setCustomUpdateTrigger] = useState<string>();
+    const selectableRecordIds = useMemo(
+        () => recordsOrder?.filter(id => records?.[id]?.inactive !== true),
+        [recordsOrder, records],
+    );
     const {
         selectedRows,
         clearSelection,
@@ -33,7 +37,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
         toggleRowSelected,
         allRowsAreSelected,
         removeRowsFromSelection,
-    } = useSelectedRowsController({ recordIds: recordsOrder });
+    } = useSelectedRowsController({ recordIds: selectableRecordIds });
     const downloadRequest = useSelector(
         ({ workingLists }: any) => workingLists[storeId] && workingLists[storeId].currentRequest,
     );

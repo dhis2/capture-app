@@ -10,4 +10,5 @@ export type Props = Readonly<{
     sourceId: string;
     onLinkedRecordClick: LinkedRecordClick;
     children: ReactNode;
+    readOnly?: boolean;
 }>;

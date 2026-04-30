@@ -40,7 +40,7 @@ const renderComponent = (
         log.error(errorCreator(`Error while getting widget props for widget ${name}`)({ error, props }));
         return null;
     }
-    const customSettings = getCustomSettings && getCustomSettings(settings);
+    const customSettings = getCustomSettings && getCustomSettings(settings, props);
 
     if (!MemoizedWidgets[name]) {
         MemoizedWidgets[name] = React.memo(widgetConfig.Component);

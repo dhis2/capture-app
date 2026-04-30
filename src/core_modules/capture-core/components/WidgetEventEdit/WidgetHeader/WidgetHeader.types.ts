@@ -8,4 +8,5 @@ export type PlainProps = {
     orgUnit: OrgUnit,
     setChangeLogIsOpen: (toggle: boolean) => void,
     occurredAt: string,
+    readOnly?: boolean,
 };

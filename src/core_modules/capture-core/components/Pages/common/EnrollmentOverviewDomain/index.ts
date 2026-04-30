@@ -20,4 +20,5 @@ export {
     rollbackEnrollmentEvents,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
+export type { ReadOnlyState } from './useCommonEnrollmentDomainData';
 export { useRuleEffects } from './useRuleEffects';

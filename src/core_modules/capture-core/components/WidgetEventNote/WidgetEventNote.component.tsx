@@ -5,7 +5,7 @@ import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 
-export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
+export const WidgetEventNote = ({ dataEntryKey, dataEntryId, readOnly }: Props) => {
     const dispatch = useDispatch();
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
@@ -22,6 +22,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
                 emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
+                disabled={Boolean(readOnly)}
             />
         </div>
     );

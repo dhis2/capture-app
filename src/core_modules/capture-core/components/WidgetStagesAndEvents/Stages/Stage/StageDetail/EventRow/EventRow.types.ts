@@ -14,4 +14,5 @@ export type EventRowProps = {
     teiId: string;
     programId: string;
     enrollmentId: string;
+    readOnly?: boolean;
 };
