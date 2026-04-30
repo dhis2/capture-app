@@ -69,7 +69,7 @@ const EnrollmentQuickActionsComponentPlain = ({
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
-            {ready && (
+            {ready && !readOnly && (
                 <div
                     className={classes.contentContainer}
                     data-test={'quick-action-button-container'}
@@ -79,8 +79,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                         label={i18n.t('New event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
-                        disabled={noStageAvailable || Boolean(readOnly)}
-                        tooltipContent={readOnly?.tooltipContent}
+                        disabled={noStageAvailable}
                     />
 
                     <QuickActionButton
@@ -88,8 +87,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                         label={i18n.t('Schedule an event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
-                        disabled={noStageAvailable || Boolean(readOnly)}
-                        tooltipContent={readOnly?.tooltipContent}
+                        disabled={noStageAvailable}
                     />
 
                     {/* DHIS2-13016: Should hide Make referral until the feature is developped

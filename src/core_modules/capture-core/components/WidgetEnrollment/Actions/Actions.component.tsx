@@ -66,12 +66,15 @@ const ActionsPlain = ({
         onUpdateStatus(arg, redirect);
     };
 
+    if (readOnly) {
+        return null;
+    }
+
     return (
         <>
             <ConditionalTooltip
-                content={readOnly?.tooltipContent
-                    ?? i18n.t('You do not have access to modify this enrollment')}
-                enabled={Boolean(readOnly) || !programDataWriteAccess}
+                content={i18n.t('You do not have access to modify this enrollment')}
+                enabled={!programDataWriteAccess}
             >
                 <DropdownButton
                     dataTest="widget-enrollment-actions-button"

@@ -63,48 +63,46 @@ const EventRowPlain = ({
 
             <DataTableCell>
                 <>
-                    <ConditionalTooltip
-                        content={
-                            readOnly
-                                ? readOnly.tooltipContent
-                                : i18n.t('You do not have access to perform actions on this event')
-                        }
-                        enabled={Boolean(readOnly) || !stageWriteAccess}
-                    >
-                        <OverflowButton
-                            open={actionsOpen}
-                            onClick={() => setActionsOpen(prev => !prev)}
-                            dataTest={'overflow-button'}
-                            secondary
-                            small
-                            icon={<IconMore16 />}
-                            disabled={pendingApiResponse || !stageWriteAccess || Boolean(readOnly)}
-                            component={(
-                                <FlyoutMenu
-                                    dense
-                                    dataTest={'overflow-menu'}
-                                >
-                                    {(eventDetails.status === EventStatuses.SCHEDULE ||
-                                        eventDetails.status === EventStatuses.SKIPPED) && (
-                                        <SkipAction
-                                            eventId={id}
-                                            eventDetails={eventDetails}
-                                            setActionsOpen={setActionsOpen}
-                                            pendingApiResponse={pendingApiResponse}
-                                            onUpdateEventStatus={onUpdateEventStatus}
-                                        />
-                                    )}
+                    {!readOnly && (
+                        <ConditionalTooltip
+                            content={i18n.t('You do not have access to perform actions on this event')}
+                            enabled={!stageWriteAccess}
+                        >
+                            <OverflowButton
+                                open={actionsOpen}
+                                onClick={() => setActionsOpen(prev => !prev)}
+                                dataTest={'overflow-button'}
+                                secondary
+                                small
+                                icon={<IconMore16 />}
+                                disabled={pendingApiResponse || !stageWriteAccess}
+                                component={(
+                                    <FlyoutMenu
+                                        dense
+                                        dataTest={'overflow-menu'}
+                                    >
+                                        {(eventDetails.status === EventStatuses.SCHEDULE ||
+                                            eventDetails.status === EventStatuses.SKIPPED) && (
+                                            <SkipAction
+                                                eventId={id}
+                                                eventDetails={eventDetails}
+                                                setActionsOpen={setActionsOpen}
+                                                pendingApiResponse={pendingApiResponse}
+                                                onUpdateEventStatus={onUpdateEventStatus}
+                                            />
+                                        )}
 
-                                    <DeleteActionButton
-                                        setActionsOpen={setActionsOpen}
-                                        setDeleteModalOpen={setDeleteModalOpen}
-                                        occurredAt={eventDetails.occurredAt}
-                                        expiryPeriod={expiryPeriod}
-                                    />
-                                </FlyoutMenu>
-                            )}
-                        />
-                    </ConditionalTooltip>
+                                        <DeleteActionButton
+                                            setActionsOpen={setActionsOpen}
+                                            setDeleteModalOpen={setDeleteModalOpen}
+                                            occurredAt={eventDetails.occurredAt}
+                                            expiryPeriod={expiryPeriod}
+                                        />
+                                    </FlyoutMenu>
+                                )}
+                            />
+                        </ConditionalTooltip>
+                    )}
 
                     {deleteModalOpen && (
                         <DeleteActionModal

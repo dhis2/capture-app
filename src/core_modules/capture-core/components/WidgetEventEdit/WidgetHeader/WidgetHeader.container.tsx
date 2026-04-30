@@ -63,11 +63,8 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod || Boolean(readOnly);
+    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
     const tooltipContent = useMemo(() => {
-        if (readOnly) {
-            return readOnly.tooltipContent;
-        }
         if (blockEntryForm) {
             return i18n.t('The event cannot be edited after it has been completed');
         }
@@ -81,7 +78,7 @@ const WidgetHeaderPlain = ({
             });
         }
         return '';
-    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt, readOnly]);
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
 
     const { programCategory } = useCategoryCombinations(programId);
 
@@ -104,22 +101,24 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        <ConditionalTooltip
-                            content={tooltipContent}
-                            enabled={disableEdit}
-                            wrapperClassName={classes.tooltip}
-                        >
-                            <Button
-                                small
-                                secondary
-                                disabled={disableEdit}
-                                icon={<IconEdit24 />}
-                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
-                                data-test="widget-enrollment-event-edit-button"
+                        {!readOnly && (
+                            <ConditionalTooltip
+                                content={tooltipContent}
+                                enabled={disableEdit}
+                                wrapperClassName={classes.tooltip}
                             >
-                                {i18n.t('Edit event')}
-                            </Button>
-                        </ConditionalTooltip>
+                                <Button
+                                    small
+                                    secondary
+                                    disabled={disableEdit}
+                                    icon={<IconEdit24 />}
+                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
+                                    data-test="widget-enrollment-event-edit-button"
+                                >
+                                    {i18n.t('Edit event')}
+                                </Button>
+                            </ConditionalTooltip>
+                        )}
 
                         {supportsChangelog && (
                             <OverflowButton
