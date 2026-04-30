@@ -450,6 +450,25 @@ assigned to a program stage.
 >
 > Different data element types are fitered in different ways. A **Number** data element will for instance show a rang to filter on while a **Text** data element will ask you to enter a search query to filter on.
 
+Filters are available for all single-value data element types — text, long text, email, phone number, number / integer (and their variants), percentage, date, age, date & time, time, boolean (Yes/No), trueOnly (Yes only), organisation unit and username. Image, file and coordinate data elements can only be filtered on whether they have a value (see below). Multi-value types (such as multi-text) and range types are not filterable in the working list.
+
+#### Filter on empty or non-empty values
+
+Data element filters show two checkboxes at the top:
+
+- **Is empty** – matches events that have no value for the selected data element.
+- **Is not empty** – matches events that have any value for the selected data element.
+
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for that filter, and entering a value clears the **Is empty** / **Is not empty** selection. These selections are persisted when you save a [view](#capture_views) and restored when the view is loaded.
+
+For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
+
+> **Note**
+>
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status and assignee).
+>
+> Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
+
 ## Sort an event list { #capture_sort_event_list } 
 
 1. Open the **Capture** app.
@@ -782,6 +801,25 @@ Use the buttons above the list itself to filter it.
 As an example, you could filter the list to show only tracked entity instances where you have been assigned an event: Click the "Assigned to" filter (1), select "Me" (2) and then "Apply" the changes (3).
 
 ![](resources/images/tei_list_filter_example.png)
+
+Filters are available for all single-value tracked entity attribute types — text, long text, email, phone number, number / integer (and their variants), percentage, date, age, date & time, time, boolean (Yes/No), trueOnly (Yes only), organisation unit and username. Image, file and coordinate attributes can only be filtered on whether they have a value (see below). Multi-value types (such as multi-text) and range types are not filterable in the working list.
+
+#### Filter on empty or non-empty values
+
+Tracked entity attribute filters show **Is empty** and **Is not empty** checkboxes at the top:
+
+- **Is empty** – matches tracked entities that have no value for the selected attribute.
+- **Is not empty** – matches tracked entities that have any value for the selected attribute.
+
+These options are mutually exclusive with each other and with value-based criteria: selecting one clears the others. The selections are saved as part of a [predefined view](#capture_views) and restored when the view is loaded.
+
+For image, file and coordinate attributes, **Is empty** and **Is not empty** are the only available filter options.
+
+> **Note**
+>
+> The empty / non-empty checkboxes are not shown on the main filters (enrollment date, incident date, enrollment status, assignee and follow-up).
+>
+> Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
 
 ### Sort the list
 
