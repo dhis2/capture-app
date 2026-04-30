@@ -182,9 +182,7 @@ export const EnrollmentPageDefault = () => {
 
     const hasProgramWrite = Boolean(program?.access?.data?.write);
     const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
-    const readOnly = !hasProgramWrite || !hasTETWrite
-        ? { tooltipContent: i18n.t('You do not have access to edit this enrollment') }
-        : undefined;
+    const readOnly = !hasProgramWrite || !hasTETWrite;
 
     if (isLoading) {
         return (

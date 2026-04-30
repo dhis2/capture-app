@@ -6,7 +6,7 @@ import { WidgetNote } from '../WidgetNote';
 import { useLocationQuery } from '../../utils/routing';
 
 type Props = {
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };
 
 export const WidgetEnrollmentNote = ({ readOnly }: Props) => {

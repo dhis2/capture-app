@@ -20,7 +20,7 @@ export type Props = {
     onlyEnrollOnce: boolean;
     tetName: string;
     onAccessLostFromTransfer?: () => void;
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };
 
 export type PlainProps = {
@@ -40,5 +40,5 @@ export type PlainProps = {
     programDataWriteAccess: boolean;
     onlyEnrollOnce: boolean;
     tetName: string;
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };

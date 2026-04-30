@@ -10,7 +10,7 @@ type Props = {
     repeatable?: boolean;
     preventAddingEventActionInEffect?: boolean;
     eventName: string;
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };
 
 export const StageCreateNewButton = ({

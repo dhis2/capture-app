@@ -39,11 +39,11 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    getProps: ({ stages, events, ruleEffects, readOnly }: any) => ({
+    shouldHideWidget: ({ readOnly }: any) => Boolean(readOnly),
+    getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
         ruleEffects,
-        readOnly,
     }),
 };
 
@@ -143,7 +143,6 @@ export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
     getCustomSettings: ({ readOnlyMode = true }: any, props?: any) => ({
         readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
-        readOnlyTooltipContent: !readOnlyMode ? props?.readOnly?.tooltipContent : undefined,
     }),
     getProps: ({
         teiId,

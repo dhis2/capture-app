@@ -23,7 +23,6 @@ const EnrollmentQuickActionsComponentPlain = ({
     stages,
     events,
     ruleEffects,
-    readOnly,
     classes,
 }: Props) => {
     const [open, setOpen] = useState<boolean>(true);
@@ -69,7 +68,7 @@ const EnrollmentQuickActionsComponentPlain = ({
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
-            {ready && !readOnly && (
+            {ready && (
                 <div
                     className={classes.contentContainer}
                     data-test={'quick-action-button-container'}

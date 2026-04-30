@@ -9,7 +9,7 @@ type ExtractedProps = {
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };
 
 export type Props = ExtractedProps & StageCommonProps;

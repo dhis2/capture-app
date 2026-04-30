@@ -21,11 +21,10 @@ const QuickActionButtonPlain = ({
     onClickAction,
     dataTest,
     disabled = false,
-    tooltipContent,
     classes,
 }: Props) => (
     <ConditionalTooltip
-        content={tooltipContent ?? i18n.t('No available program stages')}
+        content={i18n.t('No available program stages')}
         enabled={disabled}
     >
         <Button

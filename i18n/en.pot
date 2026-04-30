@@ -715,9 +715,6 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
-msgid "You do not have access to edit this enrollment"
-msgstr "You do not have access to edit this enrollment"
-
 msgid "Quick actions"
 msgstr "Quick actions"
 

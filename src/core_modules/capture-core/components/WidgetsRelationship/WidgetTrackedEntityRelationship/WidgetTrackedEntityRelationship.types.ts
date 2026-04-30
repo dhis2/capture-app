@@ -44,5 +44,5 @@ export type WidgetTrackedEntityRelationshipProps = {
         programId: string,
         onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
     ) => React.ReactElement<any>;
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };
