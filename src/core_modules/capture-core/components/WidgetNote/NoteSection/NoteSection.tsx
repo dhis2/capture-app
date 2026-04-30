@@ -41,6 +41,7 @@ const styles: Readonly<any> = {
     emptyNotes: {
         fontSize: 14,
         color: colors.grey600,
+        margin: 0,
     },
     name: {
         fontSize: '13px',

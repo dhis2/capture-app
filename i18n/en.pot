@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T18:09:21.231Z\n"
-"PO-Revision-Date: 2026-04-28T18:09:21.231Z\n"
+"POT-Creation-Date: 2026-04-30T13:59:36.803Z\n"
+"PO-Revision-Date: 2026-04-30T13:59:36.803Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1647,6 +1647,9 @@ msgstr "No attributes configured for {{trackedEntityTypeName}}"
 msgid "No attributes configured"
 msgstr "No attributes configured"
 
+msgid "This profile doesn't have any values"
+msgstr "This profile doesn't have any values"
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
 
@@ -1750,6 +1753,9 @@ msgstr "{{ overdueEvents }} overdue"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
+
+msgid "No stages found in this program"
+msgstr "No stages found in this program"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
@@ -1887,6 +1893,9 @@ msgstr "Yes, delete relationship"
 
 msgid "An error occurred while deleting the relationship."
 msgstr "An error occurred while deleting the relationship."
+
+msgid "This enrollment doesn't have any relationships"
+msgstr "This enrollment doesn't have any relationships"
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"

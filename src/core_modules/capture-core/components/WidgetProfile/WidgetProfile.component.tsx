@@ -162,12 +162,23 @@ const WidgetProfilePlain = ({
             );
         }
 
+        if (displayInListAttributes.length === 0) {
+            return (
+                <div className={classes.container}>
+                    <p className={classes.emptyText}>
+                        {i18n.t('This profile doesn\'t have any values')}
+                    </p>
+                </div>
+            );
+        }
+
         return (
             <div className={classes.container}>
                 <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
             </div>
         );
     };
+
     const handleOnDisable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE), [setTeiModalState]);
     const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
 

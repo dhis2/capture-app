@@ -178,7 +178,7 @@ const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
-                            readOnly={readOnly}
+                            readOnly={isReadOnly}
                             programDataWriteAccess={programDataWriteAccess && !isReadOnly}
                             tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
