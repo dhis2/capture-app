@@ -3,34 +3,23 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 
 const styles = () => ({
-    header: {
-        flexGrow: 1,
-        fontSize: 16,
-        fontWeight: 500,
-    },
     message: {
         marginTop: 10,
     },
 });
 
 type Props = {
-    title?: string;
     message: string;
 };
 
 type PropsWithStyles = Props & WithStyles<typeof styles>;
 
-const NoWriteAccessMessagePlain = ({ title, message, classes }: PropsWithStyles) => (
-    <>
-        <div className={classes.header}>
-            {title}
-        </div>
-        <div className={classes.message}>
-            <IncompleteSelectionsMessage>
-                {message}
-            </IncompleteSelectionsMessage>
-        </div>
-    </>
+const NoWriteAccessMessagePlain = ({ message, classes }: PropsWithStyles) => (
+    <div className={classes.message}>
+        <IncompleteSelectionsMessage>
+            {message}
+        </IncompleteSelectionsMessage>
+    </div>
 );
 
 export const NoWriteAccessMessage =
