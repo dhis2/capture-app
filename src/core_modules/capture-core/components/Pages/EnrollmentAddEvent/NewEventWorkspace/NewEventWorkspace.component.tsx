@@ -4,9 +4,10 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
-import { getProgramAndStageForProgram } from '../../../../metaData';
+import { getProgramAndStageForProgram, getProgramEventAccess } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
+import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
@@ -20,6 +21,9 @@ import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 const styles: Readonly<any> = () => ({
     innerWrapper: {
         padding: `0 ${spacersNum.dp12}px`,
+    },
+    noAccessWrapper: {
+        padding: `${spacersNum.dp16}px ${spacersNum.dp12}px`,
     },
     tabs: {
         marginBottom: spacersNum.dp16,
@@ -56,6 +60,24 @@ const NewEventWorkspacePlain = ({
 
     if (!stage) {
         return null;
+    }
+
+    const eventAccess = getProgramEventAccess(programId, stageId);
+    if (!eventAccess?.write) {
+        return (
+            <Widget
+                noncollapsible
+                header={
+                    <WidgetStageHeader stage={stage} />
+                }
+            >
+                <div className={classes.noAccessWrapper}>
+                    <NoWriteAccessMessage
+                        message={i18n.t("You don't have access to create an event in the current selections")}
+                    />
+                </div>
+            </Widget>
+        );
     }
 
     return (

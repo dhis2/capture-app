@@ -5,11 +5,7 @@ import type { Props } from './accessVerification.types';
 
 export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnProps }: Props) => {
     if (!eventAccess.write) {
-        return (
-            <NoAccess
-                onCancel={onCancel}
-            />
-        );
+        return <NoAccess />;
     }
 
     return (

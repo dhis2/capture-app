@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
-"PO-Revision-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-04-30T15:30:34.612Z\n"
+"PO-Revision-Date: 2026-04-30T15:30:34.612Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -311,9 +311,6 @@ msgstr "No, cancel"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "You don't have access to create an event in the current selections"
-
-msgid "Save"
-msgstr "Save"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Saving a {{trackedEntityName}}"
@@ -625,6 +622,9 @@ msgstr "Select columns"
 
 msgid "Columns to show in table"
 msgstr "Columns to show in table"
+
+msgid "Save"
+msgstr "Save"
 
 msgid "Column"
 msgstr "Column"

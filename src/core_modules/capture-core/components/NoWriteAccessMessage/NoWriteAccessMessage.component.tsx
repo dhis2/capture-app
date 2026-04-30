@@ -20,7 +20,7 @@ type Props = {
 
 type PropsWithStyles = Props & WithStyles<typeof styles>;
 
-export const NoWriteAccessMessagePlain = ({ title, message, classes }: PropsWithStyles) => (
+const NoWriteAccessMessagePlain = ({ title, message, classes }: PropsWithStyles) => (
     <>
         <div className={classes.header}>
             {title}
