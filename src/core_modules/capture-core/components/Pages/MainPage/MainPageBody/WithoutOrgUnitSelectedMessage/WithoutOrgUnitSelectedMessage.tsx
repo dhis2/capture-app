@@ -5,10 +5,6 @@ import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
 import { programTypes, TrackerProgram } from '../../../../../metaData';
 import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
-import {
-    useProgramAccessLevel,
-    ProgramAccessLevels,
-} from '../../../../WidgetEnrollment/TransferModal/hooks/useProgramAccessLevel';
 
 const styles: Readonly<any> = {
     incompleteMessageContainer: {
@@ -56,16 +52,12 @@ const WithoutOrgUnitSelectedMessagePlain = ({
 }: Props) => {
     const { program, programType } = useProgramInfo(programId);
     const isTracker = programType === programTypes.TRACKER_PROGRAM;
-    const { accessLevel } = useProgramAccessLevel({ programId: isTracker ? programId : '' });
 
     const trackedEntityName = program instanceof TrackerProgram
         ? program.trackedEntityType?.name
         : undefined;
     const showWorkingListLink = !isTracker || Boolean(program?.displayFrontPageList);
-    const showSearchLink = isTracker && (
-        accessLevel === ProgramAccessLevels.OPEN ||
-        accessLevel === ProgramAccessLevels.AUDITED
-    );
+    const showSearchLink = isTracker;
 
     return (
         <div
