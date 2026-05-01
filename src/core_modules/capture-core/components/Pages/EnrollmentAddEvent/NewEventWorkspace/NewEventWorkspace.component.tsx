@@ -22,7 +22,7 @@ const styles: Readonly<any> = () => ({
     innerWrapper: {
         padding: `0 ${spacersNum.dp12}px`,
     },
-    noAccessWrapper: {
+    errorWrapper: {
         padding: `${spacersNum.dp16}px ${spacersNum.dp12}px`,
     },
     tabs: {
@@ -58,36 +58,35 @@ const NewEventWorkspacePlain = ({
         }
     };
 
+    const renderWidget = (content: React.ReactNode) => (
+        <Widget
+            noncollapsible
+            header={stage ? <WidgetStageHeader stage={stage} /> : null}
+        >
+            {content}
+        </Widget>
+    );
+
     if (!stage) {
-        return null;
+        return renderWidget(
+            <div className={classes.errorWrapper}>{i18n.t('Stage not found')}</div>,
+        );
     }
 
     const eventAccess = getProgramEventAccess(programId, stageId);
     if (!eventAccess?.write) {
-        return (
-            <Widget
-                noncollapsible
-                header={
-                    <WidgetStageHeader stage={stage} />
-                }
-            >
-                <div className={classes.noAccessWrapper}>
-                    <NoWriteAccessMessage
-                        message={i18n.t("You don't have access to create an event in the current selections")}
-                    />
-                </div>
-            </Widget>
+        return renderWidget(
+            <div className={classes.errorWrapper}>
+                <NoWriteAccessMessage
+                    message={i18n.t("You don't have access to create an event in the current selections")}
+                />
+            </div>,
         );
     }
 
     return (
         <>
-            <Widget
-                noncollapsible
-                header={
-                    <WidgetStageHeader stage={stage} />
-                }
-            >
+            {renderWidget(
                 <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
                     <div className={classes.tabs}>
                         <TabBar dataTest="new-event-tab-bar">
@@ -145,8 +144,8 @@ const NewEventWorkspacePlain = ({
                         hideDueDate={stage?.hideDueDate}
                         enableUserAssignment
                     />}
-                </div>
-            </Widget>
+                </div>,
+            )}
             <DiscardDialog
                 {...defaultDialogProps}
                 onDestroy={() => { setMode(tempMode.current); setWarningVisible(false); }}
