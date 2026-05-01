@@ -41,6 +41,7 @@ const styles: Readonly<any> = {
     emptyNotes: {
         fontSize: 14,
         color: colors.grey600,
+        margin: 0,
     },
     name: {
         fontSize: '13px',
@@ -70,7 +71,7 @@ const NoteSectionPlain = ({
     emptyNoteMessage,
     notes,
     handleAddNote,
-    disabled,
+    readOnly,
     classes,
 }: Props) => {
     const [isEditing, setEditing] = useState<boolean>(false);
@@ -131,7 +132,7 @@ const NoteSectionPlain = ({
                 </div>}
             </div>
 
-            {!disabled && <div className={classes.editor}>
+            {!readOnly && <div className={classes.editor}>
                 <Editor>
                     <FocusTextField
                         placeholder={placeholder}
@@ -142,7 +143,7 @@ const NoteSectionPlain = ({
                 </Editor>
             </div>}
 
-            {!disabled && isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+            {!readOnly && isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
                 <Button
                     dataTest="add-note-btn"
                     onClick={onAddNote}

@@ -6,7 +6,7 @@ import { WidgetNote } from '../WidgetNote';
 import { useLocationQuery } from '../../utils/routing';
 
 type Props = {
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 };
 
 export const WidgetEnrollmentNote = ({ readOnly }: Props) => {
@@ -27,7 +27,7 @@ export const WidgetEnrollmentNote = ({ readOnly }: Props) => {
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                disabled={Boolean(readOnly)}
+                readOnly={Boolean(readOnly)}
             />
         </div>
     );

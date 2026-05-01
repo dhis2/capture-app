@@ -5,6 +5,7 @@ import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
+import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -49,6 +50,17 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         fontWeight: 500,
         paddingTop: spacersNum.dp8,
     },
+    breadcrumbRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    readOnlyBadge: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: spacersNum.dp4,
+        flexShrink: 0,
+    },
 });
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
@@ -66,6 +78,7 @@ const EnrollmentPageLayoutPlain = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
+    readOnly,
     classes,
     ...passOnProps
 }: Props) => {
@@ -81,12 +94,14 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
+        readOnly,
     }), [
         addRelationShipContainerElement,
         currentPage,
         eventStatus,
         passOnProps,
         program,
+        readOnly,
         toggleVisibility,
     ]);
 
@@ -115,7 +130,7 @@ const EnrollmentPageLayoutPlain = ({
                 className={classes.contentContainer}
                 style={!mainContentVisible ? { display: 'none' } : undefined}
             >
-                <div>
+                <div className={classes.breadcrumbRow}>
                     <EnrollmentBreadcrumb
                         page={currentPage}
                         onBackToMainPage={onBackToMainPage}
@@ -126,6 +141,7 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
+                    <ReadOnlyBadge readOnly={readOnly} />
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

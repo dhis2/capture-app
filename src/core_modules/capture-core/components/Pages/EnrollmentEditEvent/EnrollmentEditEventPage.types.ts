@@ -1,6 +1,6 @@
 import type { ProgramStage } from '../../../metaData';
 import { Program } from '../../../metaData';
-import type { HideWidgets, WidgetEffects, ReadOnlyState } from '../common/EnrollmentOverviewDomain';
+import type { HideWidgets, WidgetEffects } from '../common/EnrollmentOverviewDomain';
 import type { UserFormField } from '../../FormFields/UserField';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
@@ -60,7 +60,7 @@ export type PlainProps = {
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
-    readOnly?: ReadOnlyState;
+    readOnly?: boolean;
 };
 
 export type Props = {

@@ -184,10 +184,7 @@ export const EnrollmentPageDefault = () => {
 
     const hasProgramWrite = Boolean(program?.access?.data?.write);
     const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
-    const accessReadOnly = !hasProgramWrite || !hasTETWrite
-        ? { tooltipContent: i18n.t('You do not have access to edit data in this program') }
-        : undefined;
-    const readOnly = inactiveReadOnly ?? accessReadOnly;
+    const readOnly = !hasProgramWrite || !hasTETWrite || inactiveReadOnly;
 
     if (isLoading) {
         return (
@@ -204,7 +201,6 @@ export const EnrollmentPageDefault = () => {
             pageLayout={pageLayout}
             currentPage={EnrollmentPageKeys.OVERVIEW}
             availableWidgets={WidgetsForEnrollmentPageDefault}
-
             readOnly={readOnly}
             onStatusToggleSuccess={refetchEnrollmentDomain}
             teiId={teiId}

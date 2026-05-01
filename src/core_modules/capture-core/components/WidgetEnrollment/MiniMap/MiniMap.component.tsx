@@ -57,7 +57,6 @@ const MiniMapPlain = ({
                     attributionControl={false}
                     key="minimap"
                     onClick={() => {
-                        if (readOnly) return;
                         setOpenMap(true);
                     }}
                 >
@@ -76,6 +75,7 @@ const MiniMapPlain = ({
                     defaultValues={clientValues}
                     onUpdate={updateMutation}
                     enrollment={enrollment}
+                    readOnly={readOnly}
                 />
             )}
         </>

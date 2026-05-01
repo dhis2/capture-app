@@ -22,7 +22,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, readOnly }: Props) 
                 emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                disabled={Boolean(readOnly)}
+                readOnly={Boolean(readOnly)}
             />
         </div>
     );

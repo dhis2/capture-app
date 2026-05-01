@@ -7,6 +7,6 @@ export type Props = Readonly<{
     onLinkedRecordClick: LinkedRecordClick;
     onDeleteRelationship: OnDeleteRelationship;
     context: Context;
-    readOnly?: { tooltipContent: string };
+    readOnly?: boolean;
 }>;
 

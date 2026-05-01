@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T18:15:57.582Z\n"
-"PO-Revision-Date: 2026-04-28T18:15:57.582Z\n"
+"POT-Creation-Date: 2026-05-01T19:36:10.603Z\n"
+"PO-Revision-Date: 2026-05-01T19:36:10.603Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -718,9 +718,6 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
-msgid "You do not have access to edit data in this program"
-msgstr "You do not have access to edit data in this program"
-
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -843,9 +840,6 @@ msgstr "Program Stages could not be loaded"
 
 msgid "Stage"
 msgstr "Stage"
-
-msgid "You do not have access to edit this enrollment"
-msgstr "You do not have access to edit this enrollment"
 
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "The category option is not valid for the selected organisation unit."
@@ -1076,6 +1070,9 @@ msgstr "Possible duplicates found"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
+
+msgid "Read only - You can only view this enrollment"
+msgstr "Read only - You can only view this enrollment"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1316,9 +1313,6 @@ msgstr "Unsaved changes"
 
 msgid "Continue data entry"
 msgstr "Continue data entry"
-
-msgid "You do not have access to modify this enrollment"
-msgstr "You do not have access to modify this enrollment"
 
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
@@ -1694,6 +1688,9 @@ msgstr "No attributes configured for {{trackedEntityTypeName}}"
 msgid "No attributes configured"
 msgstr "No attributes configured"
 
+msgid "This profile doesn't have any values"
+msgstr "This profile doesn't have any values"
+
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
 
@@ -1797,6 +1794,9 @@ msgstr "{{ overdueEvents }} overdue"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
+
+msgid "No stages found in this program"
+msgstr "No stages found in this program"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
@@ -1934,6 +1934,9 @@ msgstr "Yes, delete relationship"
 
 msgid "An error occurred while deleting the relationship."
 msgstr "An error occurred while deleting the relationship."
+
+msgid "This enrollment doesn't have any relationships"
+msgstr "This enrollment doesn't have any relationships"
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"

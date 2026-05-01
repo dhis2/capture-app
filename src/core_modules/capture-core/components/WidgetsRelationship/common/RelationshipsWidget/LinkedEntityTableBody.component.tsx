@@ -85,13 +85,12 @@ const LinkedEntityTableBodyPlain = ({
                                         </Tooltip>
                                     );
                                 })}
-                            {context.display.showDeleteButton ? (
+                            {context.display.showDeleteButton && !readOnly ? (
                                 <DeleteRelationship
                                     handleDeleteRelationship={() =>
                                         onDeleteRelationship({ relationshipId: relationshipId! })
                                     }
-                                    disabled={pendingApiResponse || Boolean(readOnly)}
-                                    tooltipContent={readOnly?.tooltipContent}
+                                    disabled={pendingApiResponse}
                                 />
                             ) : null}
                         </DataTableRow>
