@@ -256,19 +256,21 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
-        const renderCreateNewButton = () => (
-            <div className={classes.newButton}>
-                <StageCreateNewButton
-                    eventCount={events.length}
-                    onCreateNew={handleCreateNew}
-                    preventAddingEventActionInEffect={hiddenProgramStage}
-                    repeatable={repeatable}
-                    stageWriteAccess={stage?.access?.data?.write}
-                    eventName={eventName}
-                    readOnly={readOnly}
-                />
-            </div>
-        );
+        const renderCreateNewButton = () => {
+            if (readOnly) return null;
+            return (
+                <div className={classes.newButton}>
+                    <StageCreateNewButton
+                        eventCount={events.length}
+                        onCreateNew={handleCreateNew}
+                        preventAddingEventActionInEffect={hiddenProgramStage}
+                        repeatable={repeatable}
+                        stageWriteAccess={stage?.access?.data?.write}
+                        eventName={eventName}
+                    />
+                </div>
+            );
+        };
 
         return (
             <div>
