@@ -1,0 +1,1 @@
+export { ReadOnlyBadge } from './ReadOnlyBadge';

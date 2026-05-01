@@ -16,7 +16,6 @@ export type Props = {
     onError?: (message: string) => void;
     onSuccess?: () => void;
     canAddNew: boolean;
-    programDataWriteAccess: boolean;
     onlyEnrollOnce: boolean;
     tetName: string;
     onAccessLostFromTransfer?: () => void;
@@ -37,7 +36,6 @@ export type PlainProps = {
     isTransferLoading: boolean;
     loading: boolean;
     canAddNew: boolean;
-    programDataWriteAccess: boolean;
     onlyEnrollOnce: boolean;
     tetName: string;
     readOnly?: boolean;

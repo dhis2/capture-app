@@ -199,7 +199,6 @@ export const EnrollmentPageDefault = () => {
             pageLayout={pageLayout}
             currentPage={EnrollmentPageKeys.OVERVIEW}
             availableWidgets={WidgetsForEnrollmentPageDefault}
-
             readOnly={readOnly}
             teiId={teiId}
             orgUnitId={orgUnitId}

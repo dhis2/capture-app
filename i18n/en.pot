@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-01T17:38:33.516Z\n"
-"PO-Revision-Date: 2026-05-01T17:38:33.516Z\n"
+"POT-Creation-Date: 2026-05-01T19:02:41.896Z\n"
+"PO-Revision-Date: 2026-05-01T19:02:41.896Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1000,9 +1000,6 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
-msgid "Read only - You can only view this enrollment"
-msgstr "Read only - You can only view this enrollment"
-
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
@@ -1070,6 +1067,9 @@ msgstr "Possible duplicates found"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
+
+msgid "Read only - You can only view this enrollment"
+msgstr "Read only - You can only view this enrollment"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1310,9 +1310,6 @@ msgstr "Unsaved changes"
 
 msgid "Continue data entry"
 msgstr "Continue data entry"
-
-msgid "You do not have access to modify this enrollment"
-msgstr "You do not have access to modify this enrollment"
 
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
