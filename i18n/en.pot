@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-30T15:30:34.612Z\n"
-"PO-Revision-Date: 2026-04-30T15:30:34.612Z\n"
+"POT-Creation-Date: 2026-05-01T18:15:48.959Z\n"
+"PO-Revision-Date: 2026-05-01T18:15:48.959Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -697,6 +697,9 @@ msgstr "Program doesn't exist"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "Selected program is invalid for selected organisation unit"
 
+msgid "Back"
+msgstr "Back"
+
 msgid "Add note"
 msgstr "Add note"
 
@@ -956,9 +959,6 @@ msgstr "Create new {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Register"
-
-msgid "Back"
-msgstr "Back"
 
 msgid "events"
 msgstr "events"
