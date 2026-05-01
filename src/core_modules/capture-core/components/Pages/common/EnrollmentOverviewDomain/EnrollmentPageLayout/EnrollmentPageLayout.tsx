@@ -141,7 +141,7 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
-                    {readOnly && <ReadOnlyBadge />}
+                    <ReadOnlyBadge readOnly={readOnly} />
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

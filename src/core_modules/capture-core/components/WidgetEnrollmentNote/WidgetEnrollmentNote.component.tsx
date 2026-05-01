@@ -27,7 +27,7 @@ export const WidgetEnrollmentNote = ({ readOnly }: Props) => {
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                disabled={Boolean(readOnly)}
+                readOnly={Boolean(readOnly)}
             />
         </div>
     );

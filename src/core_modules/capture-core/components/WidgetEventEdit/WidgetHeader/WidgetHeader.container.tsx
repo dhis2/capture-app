@@ -10,7 +10,7 @@ import { ConditionalTooltip } from 'capture-core/components/Tooltips/Conditional
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -55,7 +55,6 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
-    const eventAccess = getProgramEventAccess(programId, stage.id);
     const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
@@ -63,13 +62,10 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
+    const disableEdit = blockEntryForm || !isWithinValidPeriod;
     const tooltipContent = useMemo(() => {
         if (blockEntryForm) {
             return i18n.t('The event cannot be edited after it has been completed');
-        }
-        if (!eventAccess?.write) {
-            return i18n.t('You don\'t have access to edit this event');
         }
         if (!isWithinValidPeriod) {
             return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
@@ -78,7 +74,7 @@ const WidgetHeaderPlain = ({
             });
         }
         return '';
-    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
+    }, [blockEntryForm, isWithinValidPeriod, occurredAt]);
 
     const { programCategory } = useCategoryCombinations(programId);
 
