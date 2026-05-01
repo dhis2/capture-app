@@ -94,12 +94,14 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
+        readOnly,
     }), [
         addRelationShipContainerElement,
         currentPage,
         eventStatus,
         passOnProps,
         program,
+        readOnly,
         toggleVisibility,
     ]);
 
@@ -140,8 +142,8 @@ const EnrollmentPageLayoutPlain = ({
                         eventStatus={eventStatus}
                     />
                     {readOnly && (
-                        <Tag neutral icon={<IconInfo16 color={colors.grey700} />}>
-                            {i18n.t('You can only view this enrollment')}
+                        <Tag maxWidth="400px" neutral icon={<IconInfo16 color={colors.grey700} />}>
+                            {i18n.t('Read only - You can only view this enrollment')}
                         </Tag>
                     )}
                 </div>

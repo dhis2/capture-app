@@ -137,7 +137,7 @@ const WidgetEventEditPlain = ({
                     borderless
                 >
                     <div className={classes.form}>
-                        {currentPageMode === dataEntryKeys.VIEW ? (
+                        {currentPageMode === dataEntryKeys.VIEW || readOnly ? (
                             <div
                                 className={classes.form}
                                 data-test={'widget-enrollment-event-view'}

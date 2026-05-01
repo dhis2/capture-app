@@ -67,17 +67,18 @@ export const StagePlain = ({
                     readOnly={readOnly}
                     {...passOnProps}
                 /> : (
-                    <div className={classes.buttonContainer}>
-                        <StageCreateNewButton
-                            onCreateNew={() => onCreateNew(id)}
-                            stageWriteAccess={stage.dataAccess.write}
-                            eventCount={events.length}
-                            repeatable={repeatable}
-                            preventAddingEventActionInEffect={preventAddingNewEvents}
-                            eventName={name}
-                            readOnly={readOnly}
-                        />
-                    </div>
+                    !readOnly && (
+                        <div className={classes.buttonContainer}>
+                            <StageCreateNewButton
+                                onCreateNew={() => onCreateNew(id)}
+                                stageWriteAccess={stage.dataAccess.write}
+                                eventCount={events.length}
+                                repeatable={repeatable}
+                                preventAddingEventActionInEffect={preventAddingNewEvents}
+                                eventName={name}
+                            />
+                        </div>
+                    )
                 )}
             </Widget>
         </div>

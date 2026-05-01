@@ -5,5 +5,4 @@ export type {
     EnrollmentData,
     AttributeValue,
     Output,
-    ReadOnlyState,
 } from './useCommonEnrollmentDomainData.types';

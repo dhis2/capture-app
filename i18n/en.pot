@@ -1000,8 +1000,8 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
-msgid "You can only view this enrollment"
-msgstr "You can only view this enrollment"
+msgid "Read only - You can only view this enrollment"
+msgstr "Read only - You can only view this enrollment"
 
 msgid "tracked entity instance"
 msgstr "tracked entity instance"

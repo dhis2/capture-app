@@ -11,6 +11,7 @@ export type Props = {
     enrollmentId: string;
     programId: string;
     readOnlyMode?: boolean;
+    readOnly?: boolean;
     externalData: { status: { value: string | null }; events?: Array<Record<string, unknown>> | null };
     onDelete: () => void;
     onAddNew: () => void;

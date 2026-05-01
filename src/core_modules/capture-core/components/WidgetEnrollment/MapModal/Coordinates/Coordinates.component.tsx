@@ -77,14 +77,13 @@ const CoordinatesPlain = ({
     };
 
     const onHandleMapClicked = (mapCoordinates: { latlng: { lat: number; lng: number } }) => {
-        if (isEditing) {
-            const { lat, lng } = mapCoordinates.latlng;
-            const newPosition: [number, number] = [lat, lng];
-            setValid(true);
-            setPosition(newPosition);
-            setTempLatitude(lat);
-            setTempLongitude(lng);
-        }
+        if (readOnly || !isEditing) return;
+        const { lat, lng } = mapCoordinates.latlng;
+        const newPosition: [number, number] = [lat, lng];
+        setValid(true);
+        setPosition(newPosition);
+        setTempLatitude(lat);
+        setTempLongitude(lng);
     };
 
     const onSearch = (searchPosition: [number, number]) => {
@@ -99,6 +98,7 @@ const CoordinatesPlain = ({
         <Map
             center={center ?? initialCenter}
             zoom={13}
+            zoomControl={false}
             ref={(ref) => {
                 if (ref?.leafletElement) {
                     ref.leafletElement.invalidateSize();

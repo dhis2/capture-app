@@ -76,6 +76,7 @@ const PolygonPlain = ({
     };
 
     const onMapPolygonCreated = (e: any) => {
+        if (readOnly) return;
         const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map((c: number[]) => [c[1], c[0]]);
         setPolygonArea(polygonCoordinates);
         setDrawingState(drawing.FINISHED);
@@ -83,6 +84,7 @@ const PolygonPlain = ({
     };
 
     const onMapPolygonDelete = () => {
+        if (readOnly) return;
         setPolygonArea(null);
         setDrawingState(drawing.FINISHED);
         prevDrawingState.current = drawing.FINISHED;
@@ -129,28 +131,32 @@ const PolygonPlain = ({
                     onFeatureGroupReady(reactFGref, getFeatureCollection());
                 }}
             >
-                <EditControl
-                    position={isLangRtl() ? 'topleft' : 'topright'}
-                    onCreated={onMapPolygonCreated}
-                    onDeleted={onMapPolygonDelete}
-                    onDrawStart={() => setDrawingState(drawing.STARTED)}
-                    onDrawStop={() => setDrawingState(prevDrawingState.current)}
-                    draw={{
-                        rectangle: false,
-                        polyline: false,
-                        circle: false,
-                        marker: false,
-                        circlemarker: false,
-                    }}
-                    edit={{
-                        remove: false,
-                        edit: false,
-                    }}
-                />
-                <DeleteControl
-                    onClick={onMapPolygonDelete}
-                    disabled={!polygonArea || drawingState === drawing.STARTED}
-                />
+                {!readOnly && (
+                    <>
+                        <EditControl
+                            position={isLangRtl() ? 'topleft' : 'topright'}
+                            onCreated={onMapPolygonCreated}
+                            onDeleted={onMapPolygonDelete}
+                            onDrawStart={() => setDrawingState(drawing.STARTED)}
+                            onDrawStop={() => setDrawingState(prevDrawingState.current)}
+                            draw={{
+                                rectangle: false,
+                                polyline: false,
+                                circle: false,
+                                marker: false,
+                                circlemarker: false,
+                            }}
+                            edit={{
+                                remove: false,
+                                edit: false,
+                            }}
+                        />
+                        <DeleteControl
+                            onClick={onMapPolygonDelete}
+                            disabled={!polygonArea || drawingState === drawing.STARTED}
+                        />
+                    </>
+                )}
             </FeatureGroup>
         </Map>
     );

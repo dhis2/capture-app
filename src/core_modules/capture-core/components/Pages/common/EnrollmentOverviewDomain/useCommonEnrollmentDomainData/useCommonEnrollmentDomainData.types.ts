@@ -32,8 +32,6 @@ export type AttributeValue = {
     value: string;
 };
 
-export type ReadOnlyState = boolean;
-
 export type Output = {
     error?: any;
     enrollment?: EnrollmentData;
