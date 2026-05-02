@@ -1,6 +1,7 @@
 import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import { convertLocalToIsoCalendar } from '../utils/converters/date';
 
@@ -46,8 +47,7 @@ function convertTime(timeValue: string) {
     const parsedTime = parseTime(timeValue);
     if (!parsedTime.isValid) return null;
     const momentTime = parsedTime.momentTime;
-    momentTime.locale('en');
-    return momentTime.format('HH:mm');
+    return formatMomentEn(momentTime, 'HH:mm');
 }
 
 function convertAge(ageValue: any) {

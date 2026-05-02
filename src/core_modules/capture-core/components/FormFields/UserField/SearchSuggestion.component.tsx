@@ -34,18 +34,19 @@ function match(text: string, query: string) {
     ];
 }
 
-function isInternalTarget(target: any, suggestionName: string, inputName: string) {
-    if (target.getAttribute('name') === suggestionName ||
-        target.getAttribute('name') === inputName) {
+const hasDataSuggestionName = (element: EventTarget | null, suggestionName: string): boolean =>
+    element instanceof HTMLElement && element.dataset.suggestionName === suggestionName;
+
+function isInternalTarget(relatedTarget: EventTarget | null, suggestionName: string, inputName: string): boolean {
+    if (hasDataSuggestionName(relatedTarget, suggestionName)) {
+        return true;
+    }
+    if (relatedTarget instanceof HTMLElement && relatedTarget.getAttribute('name') === inputName) {
         return true;
     }
 
-    const parentElement = target.parentElement;
-    if (!parentElement) {
-        return false;
-    }
-
-    return (parentElement.getAttribute('name') === suggestionName);
+    const parentElement = relatedTarget instanceof Node ? relatedTarget.parentElement : null;
+    return hasDataSuggestionName(parentElement, suggestionName);
 }
 
 export const SearchSuggestion = (props: Props) => {
@@ -89,6 +90,10 @@ export const SearchSuggestion = (props: Props) => {
         event.stopPropagation();
     }, [onSelect, user]);
 
+    const handleMouseDown = React.useCallback((event: any) => {
+        event.preventDefault();
+    }, []);
+
     const handleBlur = React.useCallback((event: any) => {
         if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
             onExitSearch();
@@ -98,11 +103,13 @@ export const SearchSuggestion = (props: Props) => {
         <div
             role="button"
             tabIndex={-1}
+            data-suggestion-name={suggestionName}
             ref={handleRef}
             className={useUpwardList ?
                 cx(defaultClasses.suggestion, defaultClasses.suggestionInUpList) :
                 defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
+            onMouseDown={handleMouseDown}
             onClick={handleClick}
             onBlur={handleBlur}
         >

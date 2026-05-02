@@ -836,19 +836,6 @@ When('you open the program stage filters from the more filters dropdown menu', (
         .within(() => cy.contains('Program stage').click());
 });
 
-Then('you see the program stages and the default events filters', () => {
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Birth');
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Baby Postnatal');
-    cy.get('[data-test="filter-button-container-programStage"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-occurredAt"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-status"]')
-        .should('exist');
-});
-
 When('you select the First antenatal care visit program stage', () => {
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('First antenatal care visit')
@@ -996,12 +983,6 @@ Then('the working list configuration was kept', () => {
     cy.get('[data-test="tracker-working-lists"]')
         .contains('Event status: Completed')
         .should('exist');
-});
-
-Then('the program stage custom working list filters are loaded', () => {
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="more-filters"]')
-        .should('have.length', 2);
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
