@@ -1,3 +1,10 @@
+## [106.0.1](https://github.com/dhis2/capture-app/compare/v106.0.0...v106.0.1) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20985] Username field selects first suggestion instead of clicked user ([#4493](https://github.com/dhis2/capture-app/issues/4493)) ([9b35dc5](https://github.com/dhis2/capture-app/commit/9b35dc51fa14364bafd84c12355f4e4756bf221f))
+
 # [106.0.0](https://github.com/dhis2/capture-app/compare/v105.13.7...v106.0.0) (2026-05-02)
 
 
