@@ -1,3 +1,15 @@
+# [106.0.0](https://github.com/dhis2/capture-app/compare/v105.13.7...v106.0.0) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-21184] Remove orphaned Cypress step definitions ([#4499](https://github.com/dhis2/capture-app/issues/4499)) ([b93221c](https://github.com/dhis2/capture-app/commit/b93221c730ccfccbc06fed917ba7774ae048989f))
+
+
+### BREAKING CHANGES
+
+* Bump version to 106.0.0.
+
 ## [105.13.7](https://github.com/dhis2/capture-app/compare/v105.13.6...v105.13.7) (2026-05-01)
 
 
