@@ -3,10 +3,7 @@ import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { hasVersionSupport } from '../../../../support/tagUtils';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
-import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
-    cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
 const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
     cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
@@ -767,7 +764,6 @@ Then(/^the text filter "([^"]+)" should be in effect with value (.*)$/, (filterN
 
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').invoke('attr', 'value').should('equal', value);
@@ -775,9 +771,6 @@ Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/
 });
 
 Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when opened$/, (filterName, startDate, endDate) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
@@ -793,9 +786,6 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
         cy.get('input[placeholder="Max"]').should('have.attr', 'value', max);
@@ -803,18 +793,10 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
     cy.get('body').click(0, 0);
 });
 
-Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="filter-button-popover-anchor"]')
-        .then(($anchors) => {
-            const match = [...$anchors].find((el) => {
-                const text = (el.textContent || '').replaceAll(/\s+/g, ' ').trim();
-                return text === chipLabel || (text.includes(filterName) && text.includes(value));
-            });
-            expect(match, `isEmpty chip "${filterName}"`).to.not.equal(undefined);
-            cy.wrap(match).click();
-        });
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
@@ -843,8 +825,8 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
     cy.get('body').click(0, 0);
 });
 
+// Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
