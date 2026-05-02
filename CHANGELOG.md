@@ -1,3 +1,12 @@
+## [106.0.2](https://github.com/dhis2/capture-app/compare/v106.0.1...v106.0.2) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-21058] Update phone number validation ([#4515](https://github.com/dhis2/capture-app/issues/4515)) ([2b5051e](https://github.com/dhis2/capture-app/commit/2b5051e5057087703c2ff63479029c9b276705cc))
+* [DHIS2-21136] disable Enrollement actions buttons on ready only access ([#4514](https://github.com/dhis2/capture-app/issues/4514)) ([4e28a89](https://github.com/dhis2/capture-app/commit/4e28a891745c9e71896ba4312559583af0c7fe43))
+* [DHIS2-21348] Console log errors if a TEA associated with a optionSet is empty ([#4521](https://github.com/dhis2/capture-app/issues/4521)) ([009b685](https://github.com/dhis2/capture-app/commit/009b6852a0da73f65fa41550da72f5f3d0efdff7))
+
 ## [106.0.1](https://github.com/dhis2/capture-app/compare/v106.0.0...v106.0.1) (2026-05-02)
 
 
