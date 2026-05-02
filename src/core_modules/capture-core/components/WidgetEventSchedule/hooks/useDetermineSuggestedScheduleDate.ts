@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { convertServerToClient, convertClientToForm } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
 
@@ -29,7 +30,7 @@ const getSuggestedDateByStandardInterval = (standardInterval: number, eventData:
         .sort(sortByMostRecentDate);
     if (!events.length) { return undefined; }
 
-    return moment(events[0].eventDate).add(standardInterval, 'days').format();
+    return formatMomentEn(moment(events[0].eventDate).add(standardInterval, 'days'), moment.defaultFormat);
 };
 
 type Props = {
@@ -67,9 +68,9 @@ const calculateSuggestedDateFromStart = ({
 }) => {
     let suggestedScheduleDate;
     if (generatedByEnrollmentDate || !displayIncidentDate) {
-        suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
+        suggestedScheduleDate = formatMomentEn(moment(enrolledAt).add(minDaysFromStart, 'days'), moment.defaultFormat);
     } else {
-        suggestedScheduleDate = moment(occurredAt).add(minDaysFromStart, 'days').format();
+        suggestedScheduleDate = formatMomentEn(moment(occurredAt).add(minDaysFromStart, 'days'), moment.defaultFormat);
     }
     return suggestedScheduleDate;
 };

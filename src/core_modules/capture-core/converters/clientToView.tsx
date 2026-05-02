@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
+import { formatMomentEn } from 'capture-core-utils/date';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
@@ -14,9 +15,7 @@ function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
 }
 function convertDateTimeForView(rawValue: string): string {
-    const momentDate = moment(rawValue).locale('en');
-    const timeString = momentDate.format('HH:mm');
-
+    const timeString = formatMomentEn(rawValue, 'HH:mm');
     const localDate = convertIsoToLocalCalendar(rawValue);
     return `${localDate} ${timeString}`;
 }
