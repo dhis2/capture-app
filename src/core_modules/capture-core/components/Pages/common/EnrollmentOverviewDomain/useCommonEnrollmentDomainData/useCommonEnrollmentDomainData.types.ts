@@ -36,6 +36,6 @@ export type Output = {
     error?: any;
     enrollment?: EnrollmentData;
     attributeValues?: Array<AttributeValue>;
-    readOnly?: ReadOnlyState;
+    readOnly?: boolean;
     refetch?: () => void;
 };

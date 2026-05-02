@@ -11,8 +11,7 @@ export const OverflowMenuComponent = ({
     trackedEntity,
     trackedEntityData,
     trackedEntityTypeName,
-    canWriteData,
-    canWriteTETData,
+    readOnly,
     canCascadeDeleteTei,
     isInactive,
     onDeleteSuccess,
@@ -61,13 +60,13 @@ export const OverflowMenuComponent = ({
                                 <StatusToggleMenuItem
                                     trackedEntityTypeName={trackedEntityTypeName}
                                     isInactive={isInactive}
-                                    canWriteTETData={canWriteTETData}
+                                    readOnly={readOnly}
                                     setActionsIsOpen={setActionsIsOpen}
                                     setStatusToggleModalIsOpen={setStatusToggleModalIsOpen}
                                 />
                                 <DeleteMenuItem
                                     trackedEntityTypeName={trackedEntityTypeName}
-                                    canWriteData={canWriteData}
+                                    readOnly={readOnly}
                                     canCascadeDeleteTei={canCascadeDeleteTei}
                                     setActionsIsOpen={setActionsIsOpen}
                                     setDeleteModalIsOpen={setDeleteModalIsOpen}

@@ -22,12 +22,11 @@ const getTooltipContent = (disabled: boolean, isInactive: boolean, trackedEntity
 export const StatusToggleMenuItem = ({
     trackedEntityTypeName,
     isInactive,
-    canWriteTETData,
+    readOnly,
     setActionsIsOpen,
     setStatusToggleModalIsOpen,
 }: Props) => {
-    const disabled = !canWriteTETData;
-    const tooltipContent = getTooltipContent(disabled, isInactive, trackedEntityTypeName);
+    const tooltipContent = getTooltipContent(readOnly, isInactive, trackedEntityTypeName);
 
     const label = isInactive
         ? i18n.t('Activate {{trackedEntityTypeName}}', {
@@ -40,7 +39,7 @@ export const StatusToggleMenuItem = ({
         });
 
     return (
-        <ConditionalTooltip content={tooltipContent} enabled={disabled}>
+        <ConditionalTooltip content={tooltipContent} enabled={readOnly}>
             <MenuItem
                 destructive={!isInactive}
                 dense
@@ -50,7 +49,7 @@ export const StatusToggleMenuItem = ({
                     setStatusToggleModalIsOpen(true);
                     setActionsIsOpen(false);
                 }}
-                disabled={disabled}
+                disabled={readOnly}
                 suffix={null}
             />
         </ConditionalTooltip>

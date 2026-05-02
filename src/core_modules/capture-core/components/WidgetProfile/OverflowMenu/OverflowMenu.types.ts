@@ -8,8 +8,7 @@ export type Props = {
     trackedEntity: TrackedEntityRef;
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
-    canWriteData: boolean;
-    canWriteTETData: boolean;
+    readOnly: boolean;
     isInactive: boolean;
     onDeleteSuccess?: () => void;
     onStatusToggleSuccess?: () => void;
@@ -23,8 +22,7 @@ export type PlainProps = {
     trackedEntity: TrackedEntityRef;
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
-    canWriteData: boolean;
-    canWriteTETData: boolean;
+    readOnly: boolean;
     canCascadeDeleteTei: boolean;
     isInactive: boolean;
     onDeleteSuccess?: () => void;

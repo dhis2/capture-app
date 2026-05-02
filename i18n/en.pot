@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-01T19:36:10.603Z\n"
-"PO-Revision-Date: 2026-05-01T19:36:10.603Z\n"
+"POT-Creation-Date: 2026-05-02T13:47:48.375Z\n"
+"PO-Revision-Date: 2026-05-02T13:47:48.375Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1622,6 +1622,9 @@ msgstr "Fix errors in the form to continue."
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
+
+msgid "Deleteee {{trackedEntityTypeName}}"
+msgstr "Deleteee {{trackedEntityTypeName}}"
 
 msgid "Delete {{trackedEntityTypeName}}"
 msgstr "Delete {{trackedEntityTypeName}}"

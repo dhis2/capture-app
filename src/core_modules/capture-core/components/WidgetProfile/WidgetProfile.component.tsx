@@ -216,8 +216,7 @@ const WidgetProfilePlain = ({
                             )}
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
-                                canWriteData={canWriteData}
-                                canWriteTETData={canWriteTETData}
+                                readOnly={!canWriteData || !canWriteTETData}
                                 isInactive={isInactive}
                                 trackedEntity={trackedEntity ?
                                     {

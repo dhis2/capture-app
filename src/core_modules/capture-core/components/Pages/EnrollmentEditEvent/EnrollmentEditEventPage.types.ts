@@ -72,5 +72,5 @@ export type Props = {
     event: any;
     enrollmentSite: any;
     initMode?: string;
-    readOnly?: ReadOnlyState;
+    readOnly?: boolean;
 };
