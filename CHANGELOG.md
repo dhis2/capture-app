@@ -1,3 +1,66 @@
+## [106.0.2](https://github.com/dhis2/capture-app/compare/v106.0.1...v106.0.2) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-21058] Update phone number validation ([#4515](https://github.com/dhis2/capture-app/issues/4515)) ([2b5051e](https://github.com/dhis2/capture-app/commit/2b5051e5057087703c2ff63479029c9b276705cc))
+* [DHIS2-21136] disable Enrollement actions buttons on ready only access ([#4514](https://github.com/dhis2/capture-app/issues/4514)) ([4e28a89](https://github.com/dhis2/capture-app/commit/4e28a891745c9e71896ba4312559583af0c7fe43))
+* [DHIS2-21348] Console log errors if a TEA associated with a optionSet is empty ([#4521](https://github.com/dhis2/capture-app/issues/4521)) ([009b685](https://github.com/dhis2/capture-app/commit/009b6852a0da73f65fa41550da72f5f3d0efdff7))
+
+## [106.0.1](https://github.com/dhis2/capture-app/compare/v106.0.0...v106.0.1) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20985] Username field selects first suggestion instead of clicked user ([#4493](https://github.com/dhis2/capture-app/issues/4493)) ([9b35dc5](https://github.com/dhis2/capture-app/commit/9b35dc51fa14364bafd84c12355f4e4756bf221f))
+
+# [106.0.0](https://github.com/dhis2/capture-app/compare/v105.13.7...v106.0.0) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-21184] Remove orphaned Cypress step definitions ([#4499](https://github.com/dhis2/capture-app/issues/4499)) ([b93221c](https://github.com/dhis2/capture-app/commit/b93221c730ccfccbc06fed917ba7774ae048989f))
+
+
+### BREAKING CHANGES
+
+* Bump version to 106.0.0.
+
+## [105.13.7](https://github.com/dhis2/capture-app/compare/v105.13.6...v105.13.7) (2026-05-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([785f8ef](https://github.com/dhis2/capture-app/commit/785f8efa7a6e0755acd8295cb4bfa3d70e02e204))
+
+## [105.13.6](https://github.com/dhis2/capture-app/compare/v105.13.5...v105.13.6) (2026-04-14)
+
+
+### Bug Fixes
+
+* [DHIS2-21224] File upload fails in program stage ([#4512](https://github.com/dhis2/capture-app/issues/4512)) ([87ead9f](https://github.com/dhis2/capture-app/commit/87ead9f53354a3fd6cccd91aa9342340360b1354))
+
+## [105.13.5](https://github.com/dhis2/capture-app/compare/v105.13.4...v105.13.5) (2026-03-26)
+
+
+### Reverts
+
+* Revert "chore: [DHIS2-16606] Eslint - complexity rule" (#4500) ([5234add](https://github.com/dhis2/capture-app/commit/5234add2f1e0f75f8400b412577fd682bed857c7)), closes [#4500](https://github.com/dhis2/capture-app/issues/4500) [#4491](https://github.com/dhis2/capture-app/issues/4491)
+
+## [105.13.4](https://github.com/dhis2/capture-app/compare/v105.13.3...v105.13.4) (2026-03-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([32cb00c](https://github.com/dhis2/capture-app/commit/32cb00c8423cffde993b6fdc48a6bc325b98b92a))
+
+## [105.13.3](https://github.com/dhis2/capture-app/compare/v105.13.2...v105.13.3) (2026-03-20)
+
+
+### Bug Fixes
+
+* [DHIS2-19862][DHIS2-21115] bump rule engine to 3.7.1 ([#4487](https://github.com/dhis2/capture-app/issues/4487)) ([3a3b17d](https://github.com/dhis2/capture-app/commit/3a3b17de28d09569e0c3ab88fafe38b9119f2316))
+
 ## [105.13.2](https://github.com/dhis2/capture-app/compare/v105.13.1...v105.13.2) (2026-03-17)
 
 

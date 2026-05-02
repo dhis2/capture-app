@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
 import type { IDateUtils } from '@dhis2/rules-engine-javascript';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+import { formatMomentEn } from 'capture-core-utils/date';
 
 const momentFormat = 'YYYY-MM-DD';
 const momentRegex = /^\d{4}-\d{2}-\d{2}$/g;
@@ -15,7 +15,7 @@ function rulesDateToMoment(rulesEngineValue: string | null): any {
     return moment(rulesEngineValue, momentFormat);
 }
 function momentToRulesDate(momentObject: any): string {
-    return getFormattedStringFromMomentUsingEuropeanGlyphs(momentObject);
+    return formatMomentEn(momentObject);
 }
 function between(unit: string, firstRulesDate: string | null, secondRulesDate: string | null): number {
     const firstDate = rulesDateToMoment(firstRulesDate);
