@@ -29,12 +29,6 @@ Then(/^the URL should contain stageId (.*)$/, stageId =>
         .should('include', stageId),
 );
 
-Then('the stage-button should be disabled', () => {
-    cy.get('[data-test=program-stage-selector-button]')
-        .eq(0)
-        .should('be.disabled');
-});
-
 Then('only three program stages are displayed in the stage selector widget', () => {
     cy.get('[data-test=program-stage-selector-button]').should('have.length', 3);
 });

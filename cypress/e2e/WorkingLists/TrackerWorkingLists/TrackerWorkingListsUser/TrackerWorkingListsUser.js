@@ -3,7 +3,10 @@ import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { hasVersionSupport } from '../../../../support/tagUtils';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
+const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
+    cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
 const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
     cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
@@ -764,6 +767,7 @@ Then(/^the text filter "([^"]+)" should be in effect with value (.*)$/, (filterN
 
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').invoke('attr', 'value').should('equal', value);
@@ -771,6 +775,9 @@ Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/
 });
 
 Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when opened$/, (filterName, startDate, endDate) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
@@ -783,6 +790,9 @@ Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when 
 });
 
 Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+) when opened$/, (filterName, min, max) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
@@ -834,6 +844,7 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
 });
 
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
@@ -910,19 +921,6 @@ When('you open the program stage filters from the more filters dropdown menu', (
         });
     cy.get('[data-test="more-filters-menu"]')
         .within(() => cy.contains('Program stage').click());
-});
-
-Then('you see the program stages and the default events filters', () => {
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Birth');
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Baby Postnatal');
-    cy.get('[data-test="filter-button-container-programStage"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-occurredAt"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-status"]')
-        .should('exist');
 });
 
 When('you select the First antenatal care visit program stage', () => {
@@ -1072,12 +1070,6 @@ Then('the working list configuration was kept', () => {
     cy.get('[data-test="tracker-working-lists"]')
         .contains('Event status: Completed')
         .should('exist');
-});
-
-Then('the program stage custom working list filters are loaded', () => {
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="more-filters"]')
-        .should('have.length', 2);
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {

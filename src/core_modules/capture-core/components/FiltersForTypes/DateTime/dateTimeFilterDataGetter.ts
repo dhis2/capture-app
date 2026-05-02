@@ -32,8 +32,7 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
         return null;
     }
     const time = dateTimeValue.time || defaultTime;
-    const localStr = `${isoDate}T${time}:00`;
-    return new Date(localStr).toISOString();
+    return `${isoDate}T${time}:00`;
 }
 
 export function getDateTimeFilterData(value: Value): DateTimeFilter | null {

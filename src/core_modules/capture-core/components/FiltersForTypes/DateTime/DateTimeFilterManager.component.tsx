@@ -1,5 +1,4 @@
 import * as React from 'react';
-import moment from 'moment';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateTimeFilter as DateTimeFilterInput } from './DateTimeFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
@@ -13,15 +12,15 @@ function extractLocalDate(isoDatetime?: string | null): string | undefined {
     if (!isoDatetime) {
         return undefined;
     }
-    const localDateStr = moment(isoDatetime).format('YYYY-MM-DD');
-    return convertIsoToLocalCalendar(localDateStr) || undefined;
+    const datePart = isoDatetime.split('T')[0];
+    return convertIsoToLocalCalendar(datePart) || undefined;
 }
 
 function extractTime(isoDatetime?: string | null): string | undefined {
     if (!isoDatetime) {
         return undefined;
     }
-    return moment(isoDatetime).format('HH:mm');
+    return isoDatetime.split('T')[1]?.slice(0, 5) ?? undefined;
 }
 
 export class DateTimeFilterManager extends React.Component<DateTimeFilterManagerProps, State> {

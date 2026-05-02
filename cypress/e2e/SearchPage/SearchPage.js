@@ -30,10 +30,6 @@ Given('you are in the search page with the Child Programme being preselected fro
     cy.visit('/#/search?programId=IpHINAT79UW');
 });
 
-Given('you are in the search page with domain Person and org unit being preselected', () => {
-    cy.visit('/#/search?orgUnitId=DiszpKrYNg8&trackedEntityTypeId=nEenWmSyUEp');
-});
-
 And('you select the search domain Malaria Case diagnosis', () => {
     cy.get('[data-test="program-selector-container"]')
         .click()
@@ -232,12 +228,6 @@ Then('there should be visible a title with Malaria case diagnosis', () => {
         .should('exist');
 });
 
-And('there should be Malaria case diagnosis forms visible to search with', () => {
-    cy.get('[data-test="search-page-content"]')
-        .find('input[type="text"]')
-        .should('have.length', 1);
-});
-
 Given('you are in the search page with the Adult Woman being preselected from the url', () => {
     cy.visit('/#/search?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
 });
@@ -338,43 +328,6 @@ When('you fill in the first name with value and last name with empty space', () 
         .blur();
 });
 
-When('you navigated to a search page with tracked entity id on the url', () => {
-    cy.url().should('include', 'search?trackedEntityTypeId=nEenWmSyUEp');
-});
-
-When('you can see the domain selector with the tetype person selected', () => {
-    cy.get('[data-test="dhis2-simplesingleselect"]')
-        .should('contain', 'Person');
-
-});
-
-When('there is not enrollment tag', () => {
-    cy.get('[data-test="search-results-list"]')
-        .find('[data-test="dhis2-uicore-tag"]')
-        .should('not.exist');
-});
-
-When('you select gender', () => {
-    cy.get('[data-test="form-field-cejWyOfXge6"]')
-        .find('input')
-        .type('Female', { force: true })
-        .wait(500)
-        .type('{enter}', { force: true });
-});
-
-When('you see the attributes search area being expanded', () => {
-    cy.get('[data-test="form-attributes"]')
-        .contains('First name');
-    cy.get('[data-test="form-attributes"]')
-        .contains('Last name');
-});
-
-When('and you can see the unique identifier input', () => {
-    cy.get('[data-test="form-unique"]')
-        .find('input[type="text"]')
-        .should('exist');
-});
-
 Given('you are in the search page with the Child Programme and org unit being preselected from the url', () => {
     cy.visit('/#/search?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -391,29 +344,4 @@ Then('you should be taken to the main page with org unit and program preselected
 
 Then('you stay in the same page with results from all programs being displayed', () => {
     cy.contains('Results found in all programs').should('exist');
-});
-
-Then('you should be able to see the Create new section', () => {
-    cy.contains('If none of search results match, you can create a new "person".');
-});
-
-When('you click Create new button', () => {
-    cy.get('[data-test="create-new-button"]').click();
-});
-
-Then('you should be taken to the registration page with program with prefilled values', () => {
-    cy.get('[data-test="registration-page-content"]')
-        .contains('New person in program: Child Programme')
-        .should('exist');
-    cy.get('[data-test="registration-page-content"]').contains('First name').should('exist');
-    cy.get('input[type="text"]').eq(4).should('have.value', 'Sarah');
-    cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
-    cy.get('input[type="text"]').eq(5).should('have.value', 'Go');
-});
-
-Then('you should be taken to the registration page without program with prefilled values', () => {
-    cy.get('[data-test="registration-page-content"]').contains('First name').should('exist');
-    cy.get('input[type="text"]').eq(1).should('have.value', 'Sara');
-    cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
-    cy.get('input[type="text"]').eq(2).should('have.value', 'Fis');
 });

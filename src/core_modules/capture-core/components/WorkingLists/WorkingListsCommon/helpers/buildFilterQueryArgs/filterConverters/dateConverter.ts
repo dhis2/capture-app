@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+import { formatMomentEn } from 'capture-core-utils/date';
 
 import type {
     DateFilterData,
@@ -29,8 +29,8 @@ const relativeConvertersForPeriods = {
         const endDate = startDate;
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
     [periods.THIS_WEEK]: () => {
@@ -38,8 +38,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().endOf('week');
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
     [periods.THIS_MONTH]: () => {
@@ -47,8 +47,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().endOf('month');
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
     [periods.THIS_YEAR]: () => {
@@ -56,8 +56,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().endOf('year');
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
     [periods.LAST_WEEK]: () => {
@@ -65,8 +65,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().subtract(1, 'weeks').endOf('week');
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
     [periods.LAST_MONTH]: () => {
@@ -74,8 +74,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().subtract(1, 'months').endOf('month');
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
     [periods.LAST_3_MONTHS]: () => {
@@ -83,8 +83,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().subtract(1, 'months').endOf('month');
 
         return [
-            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
-            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
+            `ge:${formatMomentEn(startDate)}`,
+            `le:${formatMomentEn(endDate)}`,
         ];
     },
 };
@@ -114,13 +114,13 @@ function convertCustomRelativeDate(sourceValue: RelativeDateFilterData) {
 
     if (startBuffer || startBuffer === 0) {
         const startDate = moment().add(startBuffer, 'days');
-        const startBufferFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(startDate);
+        const startBufferFilterRequest = formatMomentEn(startDate);
         requestData.push(`ge:${startBufferFilterRequest}`);
     }
 
     if (endBuffer || endBuffer === 0) {
         const endDate = moment().add(endBuffer, 'days');
-        const endBufferFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(endDate);
+        const endBufferFilterRequest = formatMomentEn(endDate);
         requestData.push(`le:${endBufferFilterRequest}`);
     }
     return requestData;
@@ -147,12 +147,12 @@ function convertRelativeDate(
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
     const requestData: string[] = [];
     if (sourceValue.ge) {
-        const fromFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.ge));
+        const fromFilterRequest = formatMomentEn(moment(sourceValue.ge));
         requestData.push(`ge:${fromFilterRequest}`);
     }
 
     if (sourceValue.le) {
-        const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.le));
+        const toFilterRequest = formatMomentEn(moment(sourceValue.le));
         requestData.push(`le:${toFilterRequest}`);
     }
     return requestData?.join(':');
