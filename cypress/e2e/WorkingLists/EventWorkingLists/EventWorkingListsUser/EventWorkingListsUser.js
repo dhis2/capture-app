@@ -2,6 +2,7 @@ import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
 const CONTEXT_QUERIES = {
     'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
@@ -171,8 +172,8 @@ When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => 
 });
 
 Then(/^the text filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
-    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[type="text"]').should('have.value', value);
     });
@@ -417,7 +418,7 @@ When('you set the date of admission filter', () => {
         });
 
     cy.get('[data-test="more-filters-menu"]')
-        .within(() => cy.contains(/Date of admission|Admission Date/).click());
+        .within(() => cy.contains('Date of admission').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
@@ -481,7 +482,7 @@ When('you set the boolean filter', () => {
 
 When('you set the date filter', () => {
     cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(/Date of admission|Admission Date/).click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Date of admission').click());
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('input[type="text"]').then(($inputs) => {
@@ -519,7 +520,9 @@ Then('the boolean filter should be in effect and show the correct value when ope
 });
 
 Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) when opened$/, (filterName, min, max) => {
-    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${min} to ${max}`).should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`))
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
@@ -529,11 +532,9 @@ Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) wh
 });
 
 Then('the date filter should be in effect and show the correct value when opened', () => {
-    cy.get('[data-test="event-working-lists"]').should(($el) => {
-        expect($el.text()).to.include('2018');
-        expect($el.text()).to.match(/Admission Date|Date of admission/);
-    });
-    cy.get('[data-test="event-working-lists"]').contains(/Admission Date|Date of admission/).click();
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Date of admission: 2018-01-01 to 2018-12-31'))
+        .click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('input[type="text"]').then(($inputs) => {
@@ -552,7 +553,9 @@ Then('the organisation unit filter should be in effect and show the correct valu
 });
 
 Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${value}`))
+        .should('exist');
     cy.get('[data-test="event-working-lists"]').contains(filterName).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');

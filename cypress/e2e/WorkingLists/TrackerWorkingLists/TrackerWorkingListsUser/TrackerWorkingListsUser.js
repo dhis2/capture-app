@@ -2,18 +2,19 @@ import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { hasVersionSupport } from '../../../../support/tagUtils';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const cleanUpIfApplicable = (programId) => {
-    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
+const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
+    cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const workingList = body.programStageWorkingLists && body.programStageWorkingLists.find(e => e.displayName === 'Custom Program stage list');
-            if (!workingList) {
+            const match = body[resource]?.find(e => e.displayName === displayName);
+            if (!match) {
                 return null;
             }
             return cy
-                .buildApiUrl('programStageWorkingLists', workingList.id)
-                .then(workingListUrl => cy.request('DELETE', workingListUrl));
+                .buildApiUrl(resource, match.id)
+                .then(resourceUrl => cy.request('DELETE', resourceUrl));
         });
 };
 Given('you open the main page with Ngelehun and child programe context', () => {
@@ -78,6 +79,7 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'My custom list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
@@ -86,7 +88,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis default t
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
-    cleanUpIfApplicable('qDkgAbB5Jlk');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'qDkgAbB5Jlk', 'Custom Program stage list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -107,7 +109,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 });
 
 Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpIfApplicable('M3xtLkYBlKI');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'M3xtLkYBlKI', 'Custom Program stage list');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
@@ -702,10 +704,9 @@ When(/^you open the saved program stage view (.+)$/, (viewName) => {
     });
 });
 
-// Chip label may truncate the value; assert the specific filter chip shows filter name + truncated value, then verify full value in input when opened
+// Chip label may truncate the full label (name + value); assert the specific chip text, then verify full value in input when opened
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
-    const truncatedPrefix = value.length > 8 ? value.substring(0, 7) : value;
-    const chipLabel = `${filterName}: ${truncatedPrefix}`;
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').invoke('attr', 'value').should('equal', value);
@@ -713,8 +714,9 @@ Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/
 });
 
 Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when opened$/, (filterName, startDate, endDate) => {
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains('Absolute range').click();
         cy.get('[data-test="date-filter-from"]').find('input').should('have.attr', 'value', startDate);
@@ -724,8 +726,9 @@ Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when 
 });
 
 Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+) when opened$/, (filterName, min, max) => {
-    cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${min} to ${max}`).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
         cy.get('input[placeholder="Max"]').should('have.attr', 'value', max);
@@ -734,8 +737,9 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
 });
 
 Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    cy.get('[data-test="tracker-working-lists"]').contains(`${filterName}: ${value}`).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
@@ -743,18 +747,18 @@ Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is
 });
 
 Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when opened$/, (filterName, value) => {
-    cy.get('[data-test="tracker-working-lists"]').should('contain', filterName).and('contain', value);
-    cy.get('[data-test="tracker-working-lists"]').contains(filterName).click();
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input').should('be.checked');
     });
     cy.get('body').click(0, 0);
 });
 
-// Chip label truncates the value (max 7 chars); assert chip shows filter name + truncated value, then verify full value when opened
+// Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
-    const truncatedPrefix = expectedOrgUnitName.length > 7 ? expectedOrgUnitName.substring(0, 7) : expectedOrgUnitName;
-    const chipLabel = `${filterName}: ${truncatedPrefix}`;
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').should('contain', expectedOrgUnitName);
