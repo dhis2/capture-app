@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import React, { useEffect, useState, useCallback, useMemo, type ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -54,6 +53,19 @@ const styles: Readonly<any> = {
 const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string, program: any) =>
     !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && Boolean(program?.id);
 
+const computeLoadingState = (
+    programsLoading: boolean,
+    trackedEntityInstancesLoading: boolean,
+    userRolesLoading: boolean,
+    configIsFetched: boolean,
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
+
+const computeError = (
+    programsError: any,
+    trackedEntityInstancesError: any,
+    userRolesError: any,
+) => programsError || trackedEntityInstancesError || userRolesError;
+
 const WidgetProfilePlain = ({
     teiId,
     programId,
@@ -97,8 +109,8 @@ const WidgetProfilePlain = ({
         !readOnlyMode,
     [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
-    const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
-    const error = programsError || trackedEntityInstancesError || userRolesError;
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
+    const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
         program as any,
@@ -202,7 +214,7 @@ const WidgetProfilePlain = ({
                                 trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
-                                readOnlyMode={readOnlyMode || false}
+                                readOnlyMode={readOnlyMode}
                             />
                         </div>
                     </div>

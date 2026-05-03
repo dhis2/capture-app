@@ -6,7 +6,6 @@ import { workingListsCommonActionTypes, setStickyFiltersAfterColumnSorting } fro
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET),
-        // eslint-disable-next-line complexity
         map((action: any) => {
             const state = store.value as any;
             const { storeId } = action.payload;
