@@ -15,14 +15,7 @@ const styles = {
 
 type Props = QuickActionButtonTypes & WithStyles<typeof styles>;
 
-const QuickActionButtonPlain = ({
-    icon,
-    label,
-    onClickAction,
-    dataTest,
-    disabled = false,
-    classes,
-}: Props) => (
+const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disabled = false, classes }: Props) => (
     <ConditionalTooltip
         content={i18n.t('No available program stages')}
         enabled={disabled}

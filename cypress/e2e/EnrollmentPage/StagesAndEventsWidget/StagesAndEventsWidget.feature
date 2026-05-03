@@ -83,6 +83,6 @@ Feature: User interacts with Stages and Events Widget
         Then the Care at birth program stage should be hidden
 
     @user:trackerAutoTestRestricted
-    Scenario: Create new event button is disabled if no data write access
+    Scenario: Create new event buttons are hidden for users with read-only access
         Given you open the enrollment page by typing #enrollment?enrollmentId=WKPoiZxZxNG&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=PgmUFEQYZdt
-        Then you should see the disabled button New Previous deliveries event
+        Then no create new event button should be visible

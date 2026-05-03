@@ -48,6 +48,7 @@ const LinkedEntityTablePlain = ({
                 <LinkedEntityTableHeader
                     columns={columns}
                     context={context}
+                    readOnly={readOnly}
                 />
                 <LinkedEntityTableBody
                     linkedEntities={visibleLinkedEntities}
