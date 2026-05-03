@@ -31,7 +31,6 @@ Scenario: Show only teis with completed enrollments using the filter
   And rows per page should be set to 15
   And for a tracker program the page navigation should show that you are on the first page
 # DHIS2-13960: /trackedEntities filter by assignee results are not consistent
-
 @skip
 Scenario: Show only teis with active enrollments and unassinged events using the filter
   Given you open the main page with Ngelehun and Malaria focus investigation context
@@ -45,7 +44,6 @@ Scenario: Show only teis with active enrollments and unassinged events using the
   And rows per page should be set to 15
   And for a tracker program the page navigation should show that you are on the first page
 Scenario: Show only teis with first name containig John using the filter
-
   Given you open the main page with Ngelehun and child programe context
   When you set the first name filter to John
   And you apply the current filter
@@ -261,7 +259,7 @@ Scenario: The user can delete a Program stage working list right immediately aft
   Then the new Custom Program stage list is created
   And you delete the name Custom Program stage list
   Then the Custom Program stage list is deleted
-  # For the program stage WL scenarios I need to create/delete my own because there are no program stage working lists in the demo database.
+# For the program stage WL scenarios I need to create/delete my own because there are no program stage working lists in the demo database.
 
 Scenario: The Program stage custom working can be shared
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context

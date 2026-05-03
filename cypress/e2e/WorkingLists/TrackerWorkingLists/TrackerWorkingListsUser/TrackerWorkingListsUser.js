@@ -745,23 +745,6 @@ When(/^you save the program stage view as (.*)$/, (name) => {
     cy.wait('@newTrackerFilterResult', { timeout: 30000 });
 });
 
-When(/^you open the saved program stage view (.+)$/, (viewName) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains(viewName)
-        .click();
-});
-
-When(/^you open the saved tracker tei view (.+)$/, (viewName) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains(viewName)
-        .click();
-});
-
-Then(/^the text filter "([^"]+)" should be in effect with value (.*)$/, (filterName, value) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
-});
-
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
@@ -793,16 +776,6 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
     cy.get('body').click(0, 0);
 });
 
-Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
-    });
-    cy.get('body').click(0, 0);
-});
-
 Then('the boolean filter should be in effect and show the correct value when opened', () => {
     const filterName = 'BCG dose';
     const value = 'Yes';
@@ -811,6 +784,16 @@ Then('the boolean filter should be in effect and show the correct value when ope
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
     cy.get('body').click(0, 0);
 });
