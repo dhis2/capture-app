@@ -217,10 +217,10 @@ And('you open the Birth stage event', () => {
         });
 });
 
-Then('the edit button should be disabled', () => {
+Then('the edit button should not be visible', () => {
     cy.get('[data-test="widget-enrollment-event"]')
         .find('[data-test="widget-enrollment-event-edit-button"]')
-        .should('be.disabled');
+        .should('not.exist');
 });
 
 And('the add event form is displayed', () => {
