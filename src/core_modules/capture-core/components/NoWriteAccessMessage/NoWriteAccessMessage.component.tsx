@@ -8,34 +8,27 @@ const styles = () => ({
     message: {
         marginTop: 10,
     },
-    backButton: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 10,
-    },
 });
 
 type Props = {
     message: string;
-    onBack?: () => void;
+    onCancel?: () => void;
 };
 
 type PropsWithStyles = Props & WithStyles<typeof styles>;
 
-const NoWriteAccessMessagePlain = ({ message, onBack, classes }: PropsWithStyles) => (
+const NoWriteAccessMessagePlain = ({ message, onCancel, classes }: PropsWithStyles) => (
     <div className={classes.message}>
         <IncompleteSelectionsMessage>
             {message}
         </IncompleteSelectionsMessage>
-        {onBack && (
-            <div className={classes.backButton}>
-                <Button
-                    dataTest="no-write-access-back-button"
-                    onClick={onBack}
-                >
-                    {i18n.t('Back')}
-                </Button>
-            </div>
+        {onCancel && (
+            <Button
+                dataTest="no-write-access-cancel-button"
+                onClick={onCancel}
+            >
+                {i18n.t('Cancel')}
+            </Button>
         )}
     </div>
 );

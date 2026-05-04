@@ -14,7 +14,7 @@ export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eve
         return (
             <NoWriteAccessMessage
                 message={i18n.t("You don't have access to create an event in the current selections")}
-                onBack={() => dispatch(cancelNewEventAndReturnToMainPage())}
+                onCancel={() => dispatch(cancelNewEventAndReturnToMainPage())}
             />
         );
     }
