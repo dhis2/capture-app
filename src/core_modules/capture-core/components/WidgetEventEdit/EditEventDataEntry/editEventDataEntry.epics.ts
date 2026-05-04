@@ -143,6 +143,7 @@ export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
             const program = metadataContainer.program;
 
             if (program instanceof TrackerProgram) {
+                console.log('saveEditedEventEpic - program is TrackerProgram', eventId, serverData.events[0]);
                 return batchActions([
                     updateEnrollmentEvent(eventId, serverData.events[0]),
                     startSaveEditEventDataEntry(

@@ -75,6 +75,8 @@ export const enrollmentDomainDesc = createReducerDescription(
                     }
                     : event),
             );
+            console.log('UPDATE_ENROLLMENT_EVENT - events', state.enrollment, { payload: { eventId, eventData } });
+            console.log({ ...state, enrollment: { ...state.enrollment, events } });
 
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
@@ -87,6 +89,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
         [COMMIT_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
+            console.log('COMMIT_ENROLLMENT_EVENT - event', state.enrollment, eventId);
             const events = state.enrollment?.events?.map((event) => {
                 if (event.event === eventId) {
                     const {
@@ -159,6 +162,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             state,
             { payload: { events } },
         ) => {
+            console.log('ADD_PERSISTED_ENROLLMENT_EVENTS - events', events, state.enrollment);
             const enrollmentEvents = [...state.enrollment.events, ...events];
 
             return { ...state, enrollment: { ...state.enrollment, events: enrollmentEvents } };
