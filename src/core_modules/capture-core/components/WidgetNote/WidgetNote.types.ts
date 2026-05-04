@@ -11,5 +11,5 @@ export type Props = {
         };
     }>;
     onAddNote: (note: string) => void;
-    readOnly?: boolean;
+    readOnly: boolean;
 };

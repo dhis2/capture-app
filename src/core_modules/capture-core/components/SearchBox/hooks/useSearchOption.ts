@@ -13,12 +13,38 @@ const searchScopes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
+function isProgramFromScopeEnabled(searchScope: string | null, programId: string | null | undefined) {
+    return searchScope === searchScopes.PROGRAM && !!programId;
+}
+
+function isTrackedEntityTypeFromScopeEnabled(
+    searchScope: string | null,
+    trackedEntityTypeId: string | null | undefined,
+) {
+    return searchScope === searchScopes.TRACKED_ENTITY_TYPE && !!trackedEntityTypeId;
+}
+
+function getIsLoading(
+    isLoadingProgram: boolean,
+    isLoadingTrackedEntityType: boolean,
+    isLoadingSearchGroups: boolean,
+) {
+    return isLoadingProgram || isLoadingTrackedEntityType || isLoadingSearchGroups;
+}
+
+function getIsError(
+    isErrorProgram: boolean,
+    isErrorTrackedEntityType: boolean,
+    isErrorSearchGroups: boolean,
+) {
+    return isErrorProgram || isErrorTrackedEntityType || isErrorSearchGroups;
+}
+
 type Props = {
     trackedEntityTypeId?: string | null;
     programId?: string | null;
 };
 
-// eslint-disable-next-line complexity
 export const useSearchOption = ({
     programId,
     trackedEntityTypeId,
@@ -36,7 +62,7 @@ export const useSearchOption = ({
 
     const { program: programData, isLoading: isLoadingProgram, isError: isErrorProgram } = useProgramFromIndexedDB(
         programId,
-        { enabled: !!(searchScope === searchScopes.PROGRAM && programId) },
+        { enabled: isProgramFromScopeEnabled(searchScope, programId) },
     );
     const {
         trackedEntityType: trackedEntityTypeData,
@@ -44,7 +70,7 @@ export const useSearchOption = ({
         isError: isErrorTrackedEntityType,
     } = useTrackedEntityTypeFromIndexedDB(
         trackedEntityTypeId,
-        { enabled: !!(searchScope === searchScopes.TRACKED_ENTITY_TYPE && trackedEntityTypeId) },
+        { enabled: isTrackedEntityTypeFromScopeEnabled(searchScope, trackedEntityTypeId) },
     );
 
     const searchData = (programData ?? trackedEntityTypeData);
@@ -62,8 +88,8 @@ export const useSearchOption = ({
         },
     );
 
-    const isLoading = isLoadingProgram || isLoadingTrackedEntityType || isLoadingSearchGroups;
-    const isError = isErrorProgram || isErrorTrackedEntityType || isErrorSearchGroups;
+    const isLoading = getIsLoading(isLoadingProgram, isLoadingTrackedEntityType, isLoadingSearchGroups);
+    const isError = getIsError(isErrorProgram, isErrorTrackedEntityType, isErrorSearchGroups);
 
     const searchOption = useMemo(() => {
         if (!searchName || !searchGroups || !searchScope) {

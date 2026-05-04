@@ -3,7 +3,19 @@ import {
     convertFromIso8601,
 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { padWithZeros } from 'capture-core-utils/date';
+import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
+
+function formatLocalDate(
+    day: number | undefined,
+    month: number | undefined,
+    localYear: number | undefined,
+    dateFormat: string,
+): string {
+    const d = padWithZeros(day ?? 0, 2);
+    const m = padWithZeros(month ?? 0, 2);
+    const y = padWithZeros(localYear ?? 0, 4);
+    return dateFormat === 'DD-MM-YYYY' ? `${d}-${m}-${y}` : `${y}-${m}-${d}`;
+}
 
 /**
  * Converts a date from ISO calendar to local calendar
@@ -17,12 +29,12 @@ export function convertIsoToLocalCalendar(isoDate: string | null | undefined): s
         return '';
     }
 
-    const momentDate = moment(isoDate).locale('en');
+    const momentDate = moment(isoDate);
     if (!momentDate.isValid()) {
         return '';
     }
 
-    const formattedIsoDate = momentDate.format('YYYY-MM-DD');
+    const formattedIsoDate = formatMomentEn(momentDate, 'YYYY-MM-DD');
 
     const calendar = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;
@@ -30,7 +42,5 @@ export function convertIsoToLocalCalendar(isoDate: string | null | undefined): s
     const { year, eraYear, month, day } = convertFromIso8601(formattedIsoDate, calendar as any);
     const localYear = calendar === 'ethiopian' ? eraYear : year;
 
-    return dateFormat === 'DD-MM-YYYY'
-        ? `${padWithZeros(day ?? 0, 2)}-${padWithZeros(month ?? 0, 2)}-${padWithZeros(localYear ?? 0, 4)}`
-        : `${padWithZeros(localYear ?? 0, 4)}-${padWithZeros(month ?? 0, 2)}-${padWithZeros(day ?? 0, 2)}`;
+    return formatLocalDate(day, month, localYear, dateFormat);
 }

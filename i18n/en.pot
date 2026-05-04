@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-04T07:13:25.754Z\n"
-"PO-Revision-Date: 2026-05-04T07:13:25.754Z\n"
+"POT-Creation-Date: 2026-05-04T12:26:17.283Z\n"
+"PO-Revision-Date: 2026-05-04T12:26:17.283Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -727,6 +727,12 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Invalid enrollment id {{enrollmentId}}."
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Choose an enrollment to view the dashboard."
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -736,12 +742,6 @@ msgstr ""
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "Invalid enrollment id {{enrollmentId}}."
-
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Choose an enrollment to view the dashboard."
 
 msgid "There are no active enrollments."
 msgstr "There are no active enrollments."
@@ -1125,9 +1125,6 @@ msgstr "Choose a {{title}}"
 msgid "Search for a {{title}}"
 msgstr "Search for a {{title}}"
 
-msgid "Search for {{titleText}}"
-msgstr "Search for {{titleText}}"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1147,6 +1144,9 @@ msgid ""
 msgstr ""
 "Try selecting a different tracked entity type, or try searching in a "
 "program by choosing one from the top bar."
+
+msgid "Search for {{titleText}}"
+msgstr "Search for {{titleText}}"
 
 msgid "Search {{name}}"
 msgstr "Search {{name}}"
@@ -1590,6 +1590,9 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
+msgid "{{trackedEntityName}} details"
+msgstr "{{trackedEntityName}} details"
+
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
@@ -1641,6 +1644,9 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
+msgid "Show details"
+msgstr "Show details"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
@@ -1649,9 +1655,6 @@ msgstr "No attributes configured for {{trackedEntityTypeName}}"
 
 msgid "No attributes configured"
 msgstr "No attributes configured"
-
-msgid "This profile doesn't have any values"
-msgstr "This profile doesn't have any values"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
@@ -1896,9 +1899,6 @@ msgstr "Yes, delete relationship"
 
 msgid "An error occurred while deleting the relationship."
 msgstr "An error occurred while deleting the relationship."
-
-msgid "This enrollment doesn't have any relationships"
-msgstr "This enrollment doesn't have any relationships"
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"

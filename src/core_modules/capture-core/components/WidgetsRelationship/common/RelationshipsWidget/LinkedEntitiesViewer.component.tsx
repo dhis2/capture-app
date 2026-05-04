@@ -1,5 +1,4 @@
 import React, { type ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { withStyles } from 'capture-core-utils/styles';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
@@ -14,18 +13,10 @@ const styles = {
         fontWeight: 500,
         fontSize: 14,
         color: colors.grey900,
-        paddingBottom: spacersNum.dp8,
+        paddingBottom: spacersNum.dp4,
     },
     wrapper: {
         paddingBottom: spacersNum.dp16,
-    },
-    emptyText: {
-        color: colors.grey600,
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '19px',
-        margin: 0,
-        marginBottom: spacersNum.dp8,
     },
 };
 
@@ -34,18 +25,12 @@ const LinkedEntitiesViewerPlain = ({
     groupedLinkedEntities,
     onLinkedRecordClick,
     onDeleteRelationship,
-    readOnly,
     classes,
 }: Props & WithStyles<typeof styles>) => (
     <div
         data-test="relationships"
         className={classes.container}
     >
-        {!groupedLinkedEntities?.length && (
-            <p className={classes.emptyText}>
-                {i18n.t('This enrollment doesn\'t have any relationships')}
-            </p>
-        )}
         {groupedLinkedEntities?.map((linkedEntityGroup) => {
             const { id, name, linkedEntities, columns, context } = linkedEntityGroup;
             return (
@@ -57,7 +42,6 @@ const LinkedEntitiesViewerPlain = ({
                         onLinkedRecordClick={onLinkedRecordClick}
                         onDeleteRelationship={onDeleteRelationship}
                         context={context}
-                        readOnly={readOnly}
                     />
                 </div>
             );

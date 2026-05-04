@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import React, { useEffect, useState, useCallback, useMemo, type ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -54,6 +53,19 @@ const styles: Readonly<any> = {
 const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string, program: any) =>
     !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && Boolean(program?.id);
 
+const computeLoadingState = (
+    programsLoading: boolean,
+    trackedEntityInstancesLoading: boolean,
+    userRolesLoading: boolean,
+    configIsFetched: boolean,
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
+
+const computeError = (
+    programsError: any,
+    trackedEntityInstancesError: any,
+    userRolesError: any,
+) => programsError || trackedEntityInstancesError || userRolesError;
+
 const WidgetProfilePlain = ({
     teiId,
     programId,
@@ -97,8 +109,15 @@ const WidgetProfilePlain = ({
         !readOnlyMode,
     [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
-    const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
-    const error = programsError || trackedEntityInstancesError || userRolesError;
+    const profileButtonLabel = useMemo(() => {
+        if (hasNoAttributes) return null;
+        if (readOnlyMode) return i18n.t('Show details');
+        if (isEditable) return i18n.t('Edit');
+        return null;
+    }, [hasNoAttributes, isEditable, readOnlyMode]);
+
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
+    const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
         program as any,
@@ -162,16 +181,6 @@ const WidgetProfilePlain = ({
             );
         }
 
-        if (displayInListAttributes.length === 0) {
-            return (
-                <div className={classes.container}>
-                    <p className={classes.emptyText}>
-                        {i18n.t('This profile doesn\'t have any values')}
-                    </p>
-                </div>
-            );
-        }
-
         return (
             <div className={classes.container}>
                 <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
@@ -181,50 +190,61 @@ const WidgetProfilePlain = ({
 
     const handleOnDisable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE), [setTeiModalState]);
     const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
+    const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
+    const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
+
+    const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
+
+    const trackedEntityProp = useMemo(() => ({
+        trackedEntity: trackedEntity ? (trackedEntity.trackedEntity || teiId) : teiId,
+    }), [trackedEntity, teiId]);
+
+    const widgetHeader = (
+        <div className={classes.header}>
+            <div>
+                {trackedEntityTypeName
+                    ? i18n.t('{{trackedEntityTypeName}} profile', {
+                        trackedEntityTypeName,
+                        interpolation: { escapeValue: false },
+                    })
+                    : i18n.t('Profile')}
+            </div>
+            <div className={classes.actions}>
+                {profileButtonLabel && (
+                    <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
+                        {profileButtonLabel}
+                    </Button>
+                )}
+                <OverflowMenu
+                    trackedEntityTypeName={trackedEntityTypeName}
+                    canWriteData={canWriteData}
+                    trackedEntity={trackedEntityProp}
+                    onDeleteSuccess={onDeleteSuccess}
+                    displayChangelog={!!displayChangelog}
+                    trackedEntityData={clientAttributesWithSubvalues}
+                    teiId={teiId}
+                    programAPI={program}
+                    readOnlyMode={readOnlyMode}
+                />
+            </div>
+        </div>
+    );
 
     return (
         <div data-test="profile-widget">
-            <Widget
-                header={
-                    <div className={classes.header}>
-                        <div>
-                            {trackedEntityTypeName
-                                ? i18n.t('{{trackedEntityTypeName}} profile', {
-                                    trackedEntityTypeName,
-                                    interpolation: { escapeValue: false },
-                                })
-                                : i18n.t('Profile')}
-                        </div>
-                        <div className={classes.actions}>
-                            {isEditable && (
-                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                    {i18n.t('Edit')}
-                                </Button>
-                            )}
-                            <OverflowMenu
-                                trackedEntityTypeName={trackedEntityTypeName}
-                                canWriteData={canWriteData}
-                                trackedEntity={trackedEntity ?
-                                    { trackedEntity: trackedEntity.trackedEntity || teiId } :
-                                    { trackedEntity: teiId }
-                                }
-                                onDeleteSuccess={onDeleteSuccess}
-                                displayChangelog={!!displayChangelog}
-                                trackedEntityData={clientAttributesWithSubvalues}
-                                teiId={teiId}
-                                programAPI={program}
-                                readOnlyMode={readOnlyMode || false}
-                            />
-                        </div>
-                    </div>
-                }
-                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
-                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
-                open={open}
-            >
-                {renderProfile()}
-            </Widget>
-            {showEditModal(loading, error, isEditable, modalState, program) && (
+            {isEmptyList ? (
+                <Widget noncollapsible header={widgetHeader} />
+            ) : (
+                <Widget
+                    header={widgetHeader}
+                    onOpen={handleOpen}
+                    onClose={handleClose}
+                    open={open}
+                >
+                    {renderProfile()}
+                </Widget>
+            )}
+            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
                 <>
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
@@ -242,6 +262,7 @@ const WidgetProfilePlain = ({
                         modalState={modalState}
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
+                        readOnly={readOnlyMode}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>

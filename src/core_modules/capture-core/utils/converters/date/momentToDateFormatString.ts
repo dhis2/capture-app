@@ -1,3 +1,4 @@
+import { formatMomentEn } from 'capture-core-utils/date';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 /**
@@ -8,6 +9,5 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  */
 export function convertMomentToDateFormatString(moment: any) {
     const dateFormat = systemSettingsStore.get().dateFormat;
-    const formattedDateString = moment.format(dateFormat);
-    return formattedDateString;
+    return formatMomentEn(moment, dateFormat);
 }

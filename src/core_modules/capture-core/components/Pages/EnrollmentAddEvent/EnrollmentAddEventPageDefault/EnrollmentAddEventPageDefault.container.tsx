@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
-import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { formatMomentEn } from 'capture-core-utils/date';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox } from '@dhis2/ui';
 import type { ReduxState } from '../../../App/withAppUrlSync.types';
@@ -72,7 +72,7 @@ export const EnrollmentAddEventPageDefault = ({
 
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
-            const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
+            const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
 
             const eventsWithUpdatedDate = events.map((event: any) => ({
                 ...convertEventAttributeOptions(event),

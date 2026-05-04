@@ -2,11 +2,7 @@ import React from 'react';
 import { colors, IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 
-type Props = {
-    readOnly?: boolean;
-};
-
-export const ReadOnlyBadge = ({ readOnly }: Props) => {
+export const ReadOnlyBadge = ({ readOnly }: { readOnly: boolean }) => {
     if (!readOnly) return null;
     return (
         <Tag maxWidth="400px" neutral icon={<IconInfo16 color={colors.grey700} />}>

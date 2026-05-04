@@ -5,11 +5,7 @@ import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { useLocationQuery } from '../../utils/routing';
 
-type Props = {
-    readOnly?: boolean;
-};
-
-export const WidgetEnrollmentNote = ({ readOnly }: Props) => {
+export const WidgetEnrollmentNote = ({ readOnly }: { readOnly: boolean }) => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
@@ -27,7 +23,7 @@ export const WidgetEnrollmentNote = ({ readOnly }: Props) => {
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                readOnly={Boolean(readOnly)}
+                readOnly={readOnly}
             />
         </div>
     );

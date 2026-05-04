@@ -21,18 +21,26 @@ export const DataEntryComponent = ({
     warningsMessages,
     orgUnitId,
     pluginContext,
+    readOnly,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
-        <ModalTitle>{i18n.t('Edit {{trackedEntityName}}',
-            { trackedEntityName, interpolation: { escapeValue: false } },
-        )}</ModalTitle>
+        <ModalTitle>
+            {readOnly
+                ? i18n.t('{{trackedEntityName}} details', { trackedEntityName, interpolation: { escapeValue: false } })
+                : i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })
+            }
+        </ModalTitle>
         <ModalContent>
-            {i18n.t(
-                'Change information about this {{trackedEntityName}} here.',
-                { trackedEntityName, interpolation: { escapeValue: false } },
+            {!readOnly && (
+                <>
+                    {i18n.t(
+                        'Change information about this {{trackedEntityName}} here.',
+                        { trackedEntityName, interpolation: { escapeValue: false } },
+                    )}
+                    {' '}
+                    {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
+                </>
             )}
-            {' '}
-            {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
             <DataEntry
                 id={dataEntryId}
                 formFoundation={formFoundation}
@@ -43,24 +51,25 @@ export const DataEntryComponent = ({
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
             />
-            <NoticeBoxes
-                errorsMessages={errorsMessages}
-                warningsMessages={warningsMessages}
-                hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
-            />
+            {!readOnly && (
+                <NoticeBoxes
+                    errorsMessages={errorsMessages}
+                    warningsMessages={warningsMessages}
+                    hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
+                />
+            )}
         </ModalContent>
         <ModalActions>
             <ButtonStrip end>
                 <Button onClick={onCancel} secondary>
-                    {i18n.t('Cancel without saving')}
+                    {readOnly ? i18n.t('Close') : i18n.t('Cancel without saving')}
                 </Button>
-                {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
+                {!readOnly && modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
                     <Button loading primary>
                         {i18n.t('Loading...')}
                     </Button>
                 )}
-
-                {(modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
+                {!readOnly && (modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
                     <Button onClick={onSave} primary>
                         {i18n.t('Save changes')}
                     </Button>
