@@ -189,9 +189,8 @@ export const NewEventWorkspace: WidgetConfig = {
 export const EnrollmentWidget: WidgetConfig = {
     Component: WidgetEnrollment,
     shouldHideWidget: ({ enrollmentId }: any) => enrollmentId === 'AUTO',
-    getCustomSettings: ({ readOnlyMode }: any, props?: any) => ({
+    getCustomSettings: ({ readOnlyMode }: any) => ({
         readOnlyMode,
-        readOnly: props?.readOnly,
     }),
     getProps: ({
         teiId,

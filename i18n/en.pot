@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-04T11:46:25.703Z\n"
-"PO-Revision-Date: 2026-05-04T11:46:25.703Z\n"
+"POT-Creation-Date: 2026-05-04T12:26:17.283Z\n"
+"PO-Revision-Date: 2026-05-04T12:26:17.283Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1896,9 +1896,6 @@ msgstr "Yes, delete relationship"
 
 msgid "An error occurred while deleting the relationship."
 msgstr "An error occurred while deleting the relationship."
-
-msgid "This enrollment doesn't have any relationships"
-msgstr "This enrollment doesn't have any relationships"
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"
