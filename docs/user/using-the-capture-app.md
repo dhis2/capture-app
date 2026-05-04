@@ -476,11 +476,11 @@ For image, file and coordinate data elements, **Is empty** and **Is not empty** 
 
 4. Click one of the column headers to sort the list on that data element in ascending order.
 
-    A small upward arrow is displayed next to the column to show that the list is sorted in ascending order.
+    A small upward arrow is displayed next to the column is marked blue to show that the list is sorted in ascending order.
 
 5. Click the column header again to sort the list on that data element in descending order.
 
-    A small downward arrow is displayed next to the column to show that the list is sorted in descending order.
+    A small downward arrow is displayed next to the column is marked blue to show that the list is sorted in descending order.
 
     ![sort event](resources/images/sort_event.png)
 
@@ -794,7 +794,7 @@ Use the buttons above the list to filter it.
 
 ![](resources/images/tei_list_filters.png)
 
-As an example, you could filter the list to show only tracked entity instances where you have been assigned an event: Click the "Assigned to" filter (1), select "Me" (2) and then "Apply" the changes (3).
+As an example, you could filter the list to show only tracked entity instances where the enrollment status is "Completed": Click the "Enrollment status" filter (1), select "Completed" (2) and then "Update" the changes (3).
 
 ![](resources/images/tei_list_filter_example.png)
 
@@ -807,6 +807,8 @@ Data element filters show two checkboxes at the top:
 
 - **Is empty** – matches events that have no value for the selected data element.
 - **Is not empty** – matches events that have any value for the selected data element.
+
+![](resources/images/tei_list_filter_isempty.png)
 
 Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
 
