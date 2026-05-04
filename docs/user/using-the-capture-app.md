@@ -442,13 +442,14 @@ assigned to a program stage.
 
     Along the top of the event list are buttons with the same names as the column headers in the list.
 
-4. Use the buttons on the top of the list to filter based on a report date or a specific data element.
+4. Use the buttons on the top of the list to filter.
 
     ![filter event](resources/images/filter_event.png)
 
 > **Note**
 >
-> Different data element types are fitered in different ways. A **Number** data element will for instance show a rang to filter on while a **Text** data element will ask you to enter a search query to filter on.
+> Each filter adapts to the data element's value type — for example, **numeric** data elements provide a range selector, **text** data elements a search input, and **date** data elements a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+
 
 Filters are available for all single-value data element types — text, long text, email, phone number, number / integer (and their variants), percentage, date, age, date & time, time, boolean (Yes/No), trueOnly (Yes only), organisation unit and username. Image, file and coordinate data elements can only be filtered on whether they have a value (see below). Multi-value types (such as multi-text) and range types are not filterable in the working list.
 
@@ -794,7 +795,7 @@ The results page shows up to five results at a time. You should try to use speci
 
 ### Filter the list
 
-Use the buttons above the list itself to filter it.
+Use the buttons above the list to filter it. Each filter adapts to the attribute's value type — for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
 
 ![](resources/images/tei_list_filters.png)
 
