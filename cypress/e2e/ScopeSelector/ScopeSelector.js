@@ -198,10 +198,6 @@ Then('you should be taken to the main page with only org unit selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 });
 
-Then('you should be taken to the main page with only program selected', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=VBqh0ynB2wv`);
-});
-
 Given('you land on a view event page with an invalid id', () => {
     cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=invalid');
 });

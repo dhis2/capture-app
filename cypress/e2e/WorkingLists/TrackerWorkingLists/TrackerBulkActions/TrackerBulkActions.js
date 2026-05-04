@@ -52,12 +52,6 @@ Then('the bulk complete enrollments modal should open', () => {
         .should('exist');
 });
 
-When('it should say there are 2 active enrollments and 1 completed enrollment', () => {
-    cy.get('[data-test="bulk-complete-enrollments-dialog"]')
-        .contains('This action will complete 2 active enrollments in your selection.' +
-            ' 1 enrollment already marked as completed will not be changed.');
-});
-
 Then('you confirm 3 active enrollments successfully', () => {
     cy.intercept({
         method: 'POST',

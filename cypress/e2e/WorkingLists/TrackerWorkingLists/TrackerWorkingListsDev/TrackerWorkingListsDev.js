@@ -46,15 +46,6 @@ Then('teis should be retrieved from the api using the default query args', () =>
     cy.get('@result').its('response.body').as('teis');
 });
 
-Then('the first page of the default tei working list should be displayed', () => {
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('tr')
-        .should('exist');
-
-    cy.contains('Page 1')
-        .should('exist');
-});
-
 When('you select the working list called Active enrollments', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .contains('Active enrollments')

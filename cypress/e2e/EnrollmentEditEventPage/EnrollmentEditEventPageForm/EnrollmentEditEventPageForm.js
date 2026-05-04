@@ -103,16 +103,6 @@ When(/^the user set the apgar score to (.*)/, score =>
         .blur(),
 );
 
-When(/^the user changes the gender to (.*)/, gender =>
-    cy
-        .get('[data-test="widget-enrollment-event"]')
-        .get('[data-test="dhis2-simplesingleselect"]')
-        .eq(0)
-        .click()
-        .contains(gender)
-        .click(),
-);
-
 When(/^the user sets Plurality assessed to (.*)/, (text) => {
     cy.get('[data-test="widget-enrollment-event"]')
         .get('[data-test="scope-selector"]')

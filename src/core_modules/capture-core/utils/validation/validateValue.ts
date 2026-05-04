@@ -1,5 +1,12 @@
 import type { ValidatorContainer } from './getValidators';
 
+const extractErrorMessage = (result: any, defaultMessage: string): string => {
+    if (!result) return defaultMessage;
+    if ('errorMessage' in result) return result.errorMessage || defaultMessage;
+    if ('message' in result) return result.message || defaultMessage;
+    return defaultMessage;
+};
+
 export type Validations = {
     valid: boolean;
     errorMessage?: string | null;
@@ -44,16 +51,8 @@ export const validateValue = async ({
             if (result === true || (result && result.valid)) {
                 return true;
             }
-            let errorMessage = currentValidator.message;
-            if (result) {
-                if ('errorMessage' in result) {
-                    errorMessage = result.errorMessage || currentValidator.message;
-                } else if ('message' in result) {
-                    errorMessage = result.message || currentValidator.message;
-                }
-            }
             return {
-                message: errorMessage,
+                message: extractErrorMessage(result, currentValidator.message),
                 type: currentValidator.type,
                 data: result && ('data' in result ? (result as any).data : undefined),
             };
