@@ -10,7 +10,6 @@ import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
-import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
 import { TransferModal } from '../TransferModal';
@@ -28,7 +27,6 @@ const styles = {
     },
 };
 
-const ActionsPlain = ({
 const ActionsPlain = ({
     enrollment = {},
     events,
