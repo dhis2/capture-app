@@ -142,7 +142,6 @@ const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, m
     return `${apiId}:${sortByDirection}`;
 };
 
-// eslint-disable-next-line complexity
 export const createApiQueryArgs = (queryArgs: any, mainColumns: any, categoryCombinationId?: string | null) => {
     let apiQueryArgs = {
         ...queryArgs,

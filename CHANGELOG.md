@@ -1,3 +1,22 @@
+## [106.1.1](https://github.com/dhis2/capture-app/compare/v106.1.0...v106.1.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4539](https://github.com/dhis2/capture-app/issues/4539)) ([875b843](https://github.com/dhis2/capture-app/commit/875b8435ce4cb0d1111b2ca5f359fd883aa75431))
+
+# [106.1.0](https://github.com/dhis2/capture-app/compare/v106.0.2...v106.1.0) (2026-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-20032] Update "Last updated" in enrollment widget on change ([#4516](https://github.com/dhis2/capture-app/issues/4516)) ([5a04af1](https://github.com/dhis2/capture-app/commit/5a04af192bcdb09a399b1f84f35022d3eec297b8))
+
+
+### Features
+
+* [DHIS2-21135] Improve truncated labels in Working List filter buttons ([#4494](https://github.com/dhis2/capture-app/issues/4494)) ([4a9d5dd](https://github.com/dhis2/capture-app/commit/4a9d5dd9746ba8cdbdbdeaca89c2833699bdf4fd)), closes [#4508](https://github.com/dhis2/capture-app/issues/4508)
+
 ## [106.0.2](https://github.com/dhis2/capture-app/compare/v106.0.1...v106.0.2) (2026-05-02)
 
 

@@ -15,7 +15,6 @@ function isFromAfterTo(valueFrom: string, valueTo: string): boolean {
     return Temporal.PlainDate.compare(fromIso, toIso) > 0;
 }
 
-// eslint-disable-next-line complexity
 export function getAbsoluteRangeErrors(
     fromValue: DateValue | undefined,
     toValue: DateValue | undefined,
@@ -43,18 +42,22 @@ export function getAbsoluteRangeErrors(
     };
 }
 
-// eslint-disable-next-line complexity
+function isDateSideValid(side: DateValue | null | undefined): boolean {
+    if (!side) return true;
+    return Boolean(side.isValid);
+}
+
 export function isAbsoluteRangeFilterValid(from?: DateValue | null, to?: DateValue | null): boolean {
     const fromValue = from?.value;
     const toValue = to?.value;
 
     if (!fromValue && !toValue) return false;
+    if (!isDateSideValid(from) || !isDateSideValid(to)) return false;
 
-    const isFromValueValid = from ? from.isValid : true;
-    const isToValueValid = to ? to.isValid : true;
+    const hasFrom = Boolean(fromValue);
+    const hasTo = Boolean(toValue);
+    if (hasFrom !== hasTo) return true;
 
-    if (!isFromValueValid || !isToValueValid) return false;
-    if ((!fromValue && toValue) || (fromValue && !toValue)) return true;
     if (!fromValue || !toValue) return false;
 
     return !isFromAfterTo(fromValue, toValue);

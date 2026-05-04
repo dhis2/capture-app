@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import type { ReduxDispatch } from 'capture-core/components/App/withAppUrlSync.types';

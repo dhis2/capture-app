@@ -18,6 +18,40 @@ import {
 import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 
+const getInvalidPageStatus = (validIds: any) => {
+    const isProgramIdInvalid = !validIds[IdTypes.PROGRAM_ID]?.valid;
+    if (!isProgramIdInvalid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
+        return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
+    }
+    if (isProgramIdInvalid) return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
+    return EnrollmentAddEventPageStatuses.PAGE_INVALID;
+};
+
+const determinePageStatus = ({
+    programId,
+    enrollmentId,
+    teiId,
+    pageIsInvalid,
+    validIds,
+    loading,
+    isLoading,
+}: {
+    programId?: string;
+    enrollmentId?: string;
+    teiId?: string;
+    pageIsInvalid: any;
+    validIds: any;
+    loading: boolean;
+    isLoading: boolean;
+}) => {
+    if (!programId || !enrollmentId || !teiId) {
+        return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
+    }
+    if (pageIsInvalid) return getInvalidPageStatus(validIds);
+    if (loading || isLoading) return EnrollmentAddEventPageStatuses.LOADING;
+    return EnrollmentAddEventPageStatuses.DEFAULT;
+};
+
 type Props = WithStyles<typeof styles>;
 
 const styles = {
@@ -43,24 +77,11 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
 
     const pageIsInvalid = (!loading &&
         !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
-    const pageStatus = useMemo(() => {
-        if (!programId || !enrollmentId || !teiId) {
-            return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
-        }
-        if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
-            return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
-        }
-        if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) {
-            return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
-        }
-        if (pageIsInvalid) {
-            return EnrollmentAddEventPageStatuses.PAGE_INVALID;
-        }
-        if (loading || isLoading) {
-            return EnrollmentAddEventPageStatuses.LOADING;
-        }
-        return EnrollmentAddEventPageStatuses.DEFAULT;
-    }, [enrollmentId, isLoading, loading, pageIsInvalid, programId, teiId, validIds]);
+
+    const pageStatus = useMemo(
+        () => determinePageStatus({ programId, enrollmentId, teiId, pageIsInvalid, validIds, loading, isLoading }),
+        [programId, enrollmentId, teiId, pageIsInvalid, validIds, loading, isLoading],
+    );
 
     useEffect(() => {
         if (pageStatus === EnrollmentAddEventPageStatuses.PROGRAM_INVALID) {
