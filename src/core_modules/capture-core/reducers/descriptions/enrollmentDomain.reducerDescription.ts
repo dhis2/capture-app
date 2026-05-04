@@ -235,6 +235,11 @@ export const enrollmentDomainDesc = createReducerDescription(
         [COMMIT_ENROLLMENT_AND_EVENTS]: (state, { payload: { eventId, uid } }) => {
             const { pendingApiResponse, dataToRollback, ...enrollmentToCommit } = state.enrollment;
             const eventsToCommit = state.enrollment.events.map((event) => {
+                console.log('COMMIT_ENROLLMENT_AND_EVENTS - event', event);
+                if (event.pendingApiResponse && event.dataToRollback?.pendingApiResponse) {
+                    console.log('COMMIT_ENROLLMENT_AND_EVENTS - event.pendingApiResponse', event);
+                    return event.dataToRollback;
+                }
                 const id = uid && event.uid === uid ? eventId : event.event;
                 const {
                     pendingApiResponse: pendingApiResponseEvent,
