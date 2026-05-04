@@ -8,5 +8,5 @@ export type OwnProps = {
     refetchTEI: QueryRefetchFunction;
     onError?: (message: string) => void;
     geometryType: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON;
-    readOnly?: boolean;
+    readOnly: boolean;
 };
