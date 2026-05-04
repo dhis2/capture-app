@@ -2,30 +2,24 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { withStyles } from 'capture-core-utils/styles';
-import { spacersNum, spacers, colors } from '@dhis2/ui';
+import { spacersNum, colors } from '@dhis2/ui';
 import { LinkedEntityTable } from './LinkedEntityTable.component';
 import type { Props } from './linkedEntitiesViewer.types';
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp12} 0 ${spacers.dp12}`,
+        padding: `0 ${spacersNum.dp12}px`,
+    },
+    section: {
+        marginBottom: spacersNum.dp16,
     },
     title: {
-        fontWeight: 500,
         fontSize: 14,
         color: colors.grey900,
-        paddingBottom: spacersNum.dp8,
-    },
-    wrapper: {
-        paddingBottom: spacersNum.dp16,
     },
     emptyText: {
         color: colors.grey600,
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '19px',
-        margin: 0,
-        marginBottom: spacersNum.dp8,
+        fontSize: 14,
     },
 };
 
@@ -42,14 +36,14 @@ const LinkedEntitiesViewerPlain = ({
         className={classes.container}
     >
         {!groupedLinkedEntities?.length && (
-            <p className={classes.emptyText}>
+            <div className={classes.emptyText}>
                 {i18n.t('This enrollment doesn\'t have any relationships')}
-            </p>
+            </div>
         )}
         {groupedLinkedEntities?.map((linkedEntityGroup) => {
             const { id, name, linkedEntities, columns, context } = linkedEntityGroup;
             return (
-                <div key={id} className={classes.wrapper}>
+                <div key={id} className={classes.section}>
                     <div className={classes.title}>{name}</div>
                     <LinkedEntityTable
                         linkedEntities={linkedEntities}

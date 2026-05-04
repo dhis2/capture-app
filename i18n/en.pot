@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-04T07:37:42.584Z\n"
-"PO-Revision-Date: 2026-05-04T07:37:42.584Z\n"
+"POT-Creation-Date: 2026-05-04T11:46:25.703Z\n"
+"PO-Revision-Date: 2026-05-04T11:46:25.703Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1587,6 +1587,9 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
+msgid "{{trackedEntityName}} details"
+msgstr "{{trackedEntityName}} details"
+
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
@@ -1638,6 +1641,9 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
+msgid "Show details"
+msgstr "Show details"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
@@ -1646,9 +1652,6 @@ msgstr "No attributes configured for {{trackedEntityTypeName}}"
 
 msgid "No attributes configured"
 msgstr "No attributes configured"
-
-msgid "This profile doesn't have any values"
-msgstr "This profile doesn't have any values"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"

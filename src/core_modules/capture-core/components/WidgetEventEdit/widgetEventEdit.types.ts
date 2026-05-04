@@ -20,7 +20,7 @@ export type Props = {
     onSaveAndCompleteEnrollmentErrorActionType?: string,
     onDeleteEvent?: (eventId: string) => void,
     onDeleteEventRelationship?: (relationshipId: string) => void,
-    readOnly?: boolean,
+    readOnly: boolean,
 };
 
 export type ComponentProps = Props & {

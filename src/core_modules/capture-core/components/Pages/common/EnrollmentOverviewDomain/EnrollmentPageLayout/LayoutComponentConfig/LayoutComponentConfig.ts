@@ -141,8 +141,8 @@ export const EnrollmentNote: WidgetConfig = {
 
 export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
-    getCustomSettings: ({ readOnlyMode = true }: any, props?: any) => ({
-        readOnlyMode: readOnlyMode || props?.readOnly,
+    getCustomSettings: ({ readOnlyMode = true }: any) => ({
+        readOnlyMode,
     }),
     getProps: ({
         teiId,
@@ -190,7 +190,7 @@ export const EnrollmentWidget: WidgetConfig = {
     Component: WidgetEnrollment,
     shouldHideWidget: ({ enrollmentId }: any) => enrollmentId === 'AUTO',
     getCustomSettings: ({ readOnlyMode }: any, props?: any) => ({
-        readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
+        readOnlyMode,
         readOnly: props?.readOnly,
     }),
     getProps: ({

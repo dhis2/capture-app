@@ -21,6 +21,7 @@ export type PlainProps = {
     center?: Array<number>;
     orgUnitId: string;
     pluginContext?: PluginContext;
+    readOnly?: boolean;
 };
 
 export type Props = {
@@ -39,4 +40,5 @@ export type Props = {
     geometry?: Geometry;
     userRoles: Array<string>;
     trackedEntityName: string;
+    readOnly?: boolean;
 };

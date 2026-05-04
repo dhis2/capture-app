@@ -126,6 +126,7 @@ const WidgetEventSchedulePlain = ({
                 >
                     <NoteSection
                         notes={notes}
+                        readOnly={false}
                         placeholder={i18n.t('Write a note about this scheduled event')}
                         emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                         handleAddNote={onAddNote}
