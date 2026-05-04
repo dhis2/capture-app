@@ -14,7 +14,7 @@
         "d2-utilizr": "^0.2.15",
         "loglevel": "^1.9.1",
         "@babel/preset-typescript": "^7.27.0",
-        "@types/node": "^22.13.13",
+        "@types/node": "^25.5.0",
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.1",
         "@types/react-router-dom": "^5.3.3",
