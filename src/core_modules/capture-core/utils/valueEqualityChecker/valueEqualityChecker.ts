@@ -1,5 +1,4 @@
 
-/* eslint-disable complexity */
 
 export function isEqual(a: any, b: any) {
     if (a === b) {

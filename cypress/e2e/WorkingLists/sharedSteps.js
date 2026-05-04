@@ -1,4 +1,5 @@
 import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { truncateFilterLabelForTest } from '../../support/filterLabelTestUtils';
 
 Then('for an event program the page navigation should show that you are on the first page', () => {
     cy.get('[data-test="event-working-lists"]')
@@ -51,7 +52,7 @@ When(/^you set the age filter to (\d+)-(\d+)$/, (min, max) => {
 
 Then(/^the age filter button should show (\d+) to (\d+) in effect$/, (min, max) => {
     cy.get('[data-test="event-working-lists"]')
-        .contains(`Age (years): ${min} to ${max}`)
+        .contains(truncateFilterLabelForTest(`Age (years): ${min} to ${max}`))
         .should('exist');
 });
 
@@ -75,7 +76,7 @@ Then('the sort arrow should indicate ascending order', () => {
 
 Then('the enrollment status filter button should show that the active filter is in effect', () => {
     cy.get('[data-test="tracker-working-lists"]')
-        .contains('Enrollment status: Active')
+        .contains(truncateFilterLabelForTest('Enrollment status: Active'))
         .should('exist');
 });
 

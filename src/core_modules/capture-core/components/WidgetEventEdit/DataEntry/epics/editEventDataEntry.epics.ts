@@ -87,6 +87,8 @@ const runRulesForEditSingleEvent = async ({
             currentEvent: {
                 ...currentEvent,
                 createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME),
+                createdAtClient: apiCurrentEventOriginal.createdAtClient ?
+                    convertValue(apiCurrentEventOriginal.createdAtClient, dataElementTypes.DATETIME) : null,
             },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
