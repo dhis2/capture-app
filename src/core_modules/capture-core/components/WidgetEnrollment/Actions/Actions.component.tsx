@@ -10,6 +10,7 @@ import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
 import { TransferModal } from '../TransferModal';
@@ -27,13 +28,14 @@ const styles = {
     },
 };
 
-export const ActionsPlain = ({
+const ActionsPlain = ({
     enrollment = {},
     events,
     programStages,
     ownerOrgUnitId,
     tetName,
     canAddNew,
+    programDataWriteAccess,
     onUpdateStatus,
     onUpdate,
     onDelete,
@@ -65,16 +67,19 @@ export const ActionsPlain = ({
 
     return (
         <>
-            <DropdownButton
-                dataTest="widget-enrollment-actions-button"
-                secondary
-                small
-                disabled={loading}
-                className={classes.actions}
-                open={isOpenActions}
-                onClick={() => setOpenActions(prev => !prev)}
-                component={
-                    loading ? undefined : (
+            <ConditionalTooltip
+                content={i18n.t('You do not have access to modify this enrollment')}
+                enabled={!programDataWriteAccess}
+            >
+                <DropdownButton
+                    dataTest="widget-enrollment-actions-button"
+                    secondary
+                    small
+                    disabled={loading || !programDataWriteAccess}
+                    className={classes.actions}
+                    open={isOpenActions}
+                    onClick={() => setOpenActions(prev => !prev)}
+                    component={
                         <FlyoutMenu dense maxWidth="250px">
                             <AddNew
                                 onlyEnrollOnce={onlyEnrollOnce}
@@ -119,13 +124,12 @@ export const ActionsPlain = ({
                                 enrollment={enrollment}
                                 onDelete={handleOnDelete}
                             />
-
                         </FlyoutMenu>
-                    )
-                }
-            >
-                {i18n.t('Enrollment actions')}
-            </DropdownButton>
+                    }
+                >
+                    {i18n.t('Enrollment actions')}
+                </DropdownButton>
+            </ConditionalTooltip>
             {loading && (
                 <div className={classes.loading}>
                     <LoadingMaskForButton />

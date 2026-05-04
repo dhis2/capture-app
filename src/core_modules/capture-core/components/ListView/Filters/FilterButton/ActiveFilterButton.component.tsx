@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
-import { Tooltip, Button } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { cx } from '@emotion/css';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { buildFilterLabel, truncateFilterLabel, isFilterLabelTruncated } from './filterLabelUtils';
 
 const ClearIcon = ({ className, ...props }) => (
     <svg
@@ -47,25 +48,12 @@ type Props = {
     iconClass: string;
     title: string;
     arrowIconElement: React.ReactNode;
-    buttonText?: string;
+    valueLabel?: string;
 };
-
-const MAX_LENGTH_OF_VALUE = 10;
 
 class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof getStyles>, State> {
     static stopClearPropagation(event: React.SyntheticEvent<any>) {
         event.stopPropagation();
-    }
-
-    static getCappedValue(value: string): string {
-        const cappedValue = value.substring(0, MAX_LENGTH_OF_VALUE - 3).trimRight();
-        return `${cappedValue}...`;
-    }
-    static getViewValueForFilter(buttonText = ''): string {
-        const calculatedValue = buttonText.length > MAX_LENGTH_OF_VALUE ?
-            ActiveFilterButtonPlain.getCappedValue(buttonText) :
-            buttonText;
-        return `: ${calculatedValue}`;
     }
 
     constructor(props: Props & WithStyles<typeof getStyles>) {
@@ -93,27 +81,28 @@ class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof 
     }
 
     render() {
-        const { onChange, classes, iconClass, title, arrowIconElement, buttonText } = this.props;
+        const { onChange, classes, iconClass, title, arrowIconElement, valueLabel } = this.props;
         const isHovered = this.state.isHovered;
         const buttonClasses = cx(classes.button, { [classes.hovered]: isHovered });
+        const label = buildFilterLabel(title, valueLabel);
 
         return (
-            <div
-                onMouseEnter={this.setIsHovered}
-                onMouseLeave={this.clearIsHovered}
+            <ConditionalTooltip
+                content={label}
+                enabled={isFilterLabelTruncated(label)}
+                openDelay={500}
+                placement={'bottom'}
             >
-                <Button
-                    className={buttonClasses}
-                    onClick={onChange}
+                <div
+                    onMouseEnter={this.setIsHovered}
+                    onMouseLeave={this.clearIsHovered}
                 >
-                    {title}
-                    {ActiveFilterButtonPlain.getViewValueForFilter(buttonText)}
-                    {arrowIconElement}
-                    <Tooltip
-                        content={i18n.t('Clear')}
-                        placement={'bottom'}
-                        openDelay={300}
+                    <Button
+                        className={buttonClasses}
+                        onClick={onChange}
                     >
+                        {truncateFilterLabel(label)}
+                        {arrowIconElement}
                         <ClearIcon
                             onMouseEnter={this.clearIsHovered}
                             onMouseLeave={this.setIsHovered}
@@ -127,9 +116,9 @@ class ActiveFilterButtonPlain extends React.Component<Props & WithStyles<typeof 
                             onKeyDown={ActiveFilterButtonPlain.stopClearPropagation}
                             onKeyUp={ActiveFilterButtonPlain.stopClearPropagation}
                         />
-                    </Tooltip>
-                </Button>
-            </div>
+                    </Button>
+                </div>
+            </ConditionalTooltip>
         );
     }
 }
