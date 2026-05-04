@@ -31,7 +31,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
         },
     ].map(field => ({
         ...field,
-        mainProperty: true,
+        isMainProperty: true,
     }));
 
 const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
@@ -79,7 +79,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             : []),
     ].map(field => ({
         ...field,
-        mainProperty: true,
+        isMainProperty: true,
         filterHidden: true,
         additionalColumn: true,
     }));

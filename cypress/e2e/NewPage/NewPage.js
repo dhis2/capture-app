@@ -407,11 +407,6 @@ And(/^you click the save (.*) submit button$/, (TEType) => {
         .click();
 });
 
-Then('you are navigated to the Tracker Capture', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&tracked_entity_type=nEenWmSyUEp');
-});
-
 Then('you see the possible duplicates modal', () => {
     cy.get('[data-test="duplicates-modal"]')
         .contains('Possible duplicates found')
@@ -483,14 +478,6 @@ And('you fill the WHO RMNCH program registration form with its required values',
         .blur();
 });
 
-And('you fill in child programme first name with value that has duplicates', () => {
-    cy.get('input[type="text"]')
-        .eq(4)
-        .type('Sarah')
-        .blur();
-});
-
-
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
     cy.get('input[type="text"]')
         .eq(1)
@@ -547,10 +534,6 @@ And('the scope selector has the TEI context', () => {
 
 Given('you are in the Malaria case diagnosis, treatment and investigation program registration page', () => {
     cy.visit('/#/new?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
-});
-
-Given('you open the main page with Ngelehun and Malaria case diagnosis, treatment and investigation context', () => {
-    cy.visit('/#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
 And('you fill the Malaria case diagnosis registration form with values', () => {

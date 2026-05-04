@@ -43,7 +43,7 @@ const buildTEIRecord = ({
     trackedEntity: string,
     programId: string,
 }) =>
-    columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
+    columnsMetaForDataFetching.map(({ id, isMainProperty, type }) => {
         if (id === 'programOwnerId') {
             return {
                 id,
@@ -51,7 +51,7 @@ const buildTEIRecord = ({
             };
         }
 
-        const value = mainProperty ? apiTEI[id] : attributeValuesById[id];
+        const value = isMainProperty ? apiTEI[id] : attributeValuesById[id];
         const urls = buildUrlByElementType[RECORD_TYPE.trackedEntity][type]
             ? buildUrlByElementType[RECORD_TYPE.trackedEntity][type]({ trackedEntity, id, programId })
             : {};
@@ -78,9 +78,9 @@ const buildEventRecord = ({
     apiEvent: ApiEvent,
     dataValuesById: any,
 }) =>
-    columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
-        const isStatus = mainProperty && id === ADDITIONAL_FILTERS.status;
-        const value = mainProperty ? apiEvent[id] : dataValuesById[id];
+    columnsMetaForDataFetching.map(({ id, isMainProperty, type }) => {
+        const isStatus = isMainProperty && id === ADDITIONAL_FILTERS.status;
+        const value = isMainProperty ? apiEvent[id] : dataValuesById[id];
         const clientValue = isStatus
             ? convertServerStatusToClient(value, apiEvent.scheduledAt)
             : convertServerToClient(value, type);

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes, ProgramStage } from '../../../../metaData';
 import { convertClientToServer } from '../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
@@ -60,7 +61,7 @@ export const deriveAutoGenerateEvents = ({
                 const scheduledAt = openAfterEnrollment
                     ? dateToUseInScheduleStatus
                     : convertClientToServer(
-                        moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
+                        formatMomentEn(moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days'), 'YYYY-MM-DD'),
                         dataElementTypes.DATE,
                     );
 

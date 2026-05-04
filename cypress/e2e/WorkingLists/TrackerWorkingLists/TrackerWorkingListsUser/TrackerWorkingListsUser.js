@@ -745,23 +745,6 @@ When(/^you save the program stage view as (.*)$/, (name) => {
     cy.wait('@newTrackerFilterResult', { timeout: 30000 });
 });
 
-When(/^you open the saved program stage view (.+)$/, (viewName) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains(viewName)
-        .click();
-});
-
-When(/^you open the saved tracker tei view (.+)$/, (viewName) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains(viewName)
-        .click();
-});
-
-Then(/^the text filter "([^"]+)" should be in effect with value (.*)$/, (filterName, value) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
-});
-
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
@@ -793,24 +776,6 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
     cy.get('body').click(0, 0);
 });
 
-Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="filter-button-popover-anchor"]')
-        .then(($anchors) => {
-            const match = [...$anchors].find((el) => {
-                const text = (el.textContent || '').replaceAll(/\s+/g, ' ').trim();
-                return text === chipLabel || (text.includes(filterName) && text.includes(value));
-            });
-            expect(match, `isEmpty chip "${filterName}"`).to.not.equal(undefined);
-            cy.wrap(match).click();
-        });
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
-    });
-    cy.get('body').click(0, 0);
-});
-
 Then('the boolean filter should be in effect and show the correct value when opened', () => {
     const filterName = 'BCG dose';
     const value = 'Yes';
@@ -819,6 +784,16 @@ Then('the boolean filter should be in effect and show the correct value when ope
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
     cy.get('body').click(0, 0);
 });
@@ -833,6 +808,7 @@ Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when op
     cy.get('body').click(0, 0);
 });
 
+// Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
 Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
@@ -910,19 +886,6 @@ When('you open the program stage filters from the more filters dropdown menu', (
         });
     cy.get('[data-test="more-filters-menu"]')
         .within(() => cy.contains('Program stage').click());
-});
-
-Then('you see the program stages and the default events filters', () => {
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Birth');
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Baby Postnatal');
-    cy.get('[data-test="filter-button-container-programStage"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-occurredAt"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-status"]')
-        .should('exist');
 });
 
 When('you select the First antenatal care visit program stage', () => {
@@ -1072,12 +1035,6 @@ Then('the working list configuration was kept', () => {
     cy.get('[data-test="tracker-working-lists"]')
         .contains('Event status: Completed')
         .should('exist');
-});
-
-Then('the program stage custom working list filters are loaded', () => {
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="more-filters"]')
-        .should('have.length', 2);
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
