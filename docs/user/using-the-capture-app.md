@@ -446,12 +446,7 @@ assigned to a program stage.
 
     ![filter event](resources/images/filter_event.png)
 
-> **Note**
->
-> Each filter adapts to the data element's value type — for example, **numeric** data elements provide a range selector, **text** data elements a search input, and **date** data elements a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
-
-
-Filters are available for all single-value data element types — text, long text, email, phone number, number / integer (and their variants), percentage, date, age, date & time, time, boolean (Yes/No), trueOnly (Yes only), organisation unit and username. Image, file and coordinate data elements can only be filtered on whether they have a value (see below). Multi-value types (such as multi-text) and range types are not filterable in the working list.
+Each filter adapts to the data element's value type — for example, **numeric** data elements provide a range selector, **text** data elements a search input, and **date** data elements a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
 
 #### Filter on empty or non-empty values
 
@@ -460,13 +455,13 @@ Data element filters show two checkboxes at the top:
 - **Is empty** – matches events that have no value for the selected data element.
 - **Is not empty** – matches events that have any value for the selected data element.
 
-Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for that filter, and entering a value clears the **Is empty** / **Is not empty** selection. These selections are persisted when you save a [view](#capture_views) and restored when the view is loaded.
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
 
 For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
 
 > **Note**
 >
-> The empty / non-empty checkboxes are not shown on the main filters (report date, status and assignee).
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status, assignee, etc.).
 >
 > Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
 
@@ -795,7 +790,7 @@ The results page shows up to five results at a time. You should try to use speci
 
 ### Filter the list
 
-Use the buttons above the list to filter it. Each filter adapts to the attribute's value type — for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+Use the buttons above the list to filter it.
 
 ![](resources/images/tei_list_filters.png)
 
@@ -803,22 +798,23 @@ As an example, you could filter the list to show only tracked entity instances w
 
 ![](resources/images/tei_list_filter_example.png)
 
-Filters are available for all single-value tracked entity attribute types — text, long text, email, phone number, number / integer (and their variants), percentage, date, age, date & time, time, boolean (Yes/No), trueOnly (Yes only), organisation unit and username. Image, file and coordinate attributes can only be filtered on whether they have a value (see below). Multi-value types (such as multi-text) and range types are not filterable in the working list.
+Each filter adapts to the attribute's value type — for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+
 
 #### Filter on empty or non-empty values
 
-Tracked entity attribute filters show **Is empty** and **Is not empty** checkboxes at the top:
+Data element filters show two checkboxes at the top:
 
-- **Is empty** – matches tracked entities that have no value for the selected attribute.
-- **Is not empty** – matches tracked entities that have any value for the selected attribute.
+- **Is empty** – matches events that have no value for the selected data element.
+- **Is not empty** – matches events that have any value for the selected data element.
 
-These options are mutually exclusive with each other and with value-based criteria: selecting one clears the others. The selections are saved as part of a [predefined view](#capture_views) and restored when the view is loaded.
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
 
-For image, file and coordinate attributes, **Is empty** and **Is not empty** are the only available filter options.
+For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
 
 > **Note**
 >
-> The empty / non-empty checkboxes are not shown on the main filters (enrollment date, incident date, enrollment status, assignee and follow-up).
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status, assignee, etc.).
 >
 > Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
 
