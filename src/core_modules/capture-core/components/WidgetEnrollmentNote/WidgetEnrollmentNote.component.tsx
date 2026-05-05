@@ -5,7 +5,7 @@ import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { useLocationQuery } from '../../utils/routing';
 
-export const WidgetEnrollmentNote = ({ readOnly }: { readOnly: boolean }) => {
+export const WidgetEnrollmentNote = ({ readOnly }: { readOnly?: boolean }) => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>

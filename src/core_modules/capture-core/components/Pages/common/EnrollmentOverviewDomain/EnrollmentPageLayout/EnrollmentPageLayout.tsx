@@ -78,7 +78,8 @@ const EnrollmentPageLayoutPlain = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
-    readOnly,
+    programWriteAccess,
+    trackedEntityTypeWriteAccess,
     classes,
     ...passOnProps
 }: Props) => {
@@ -94,14 +95,16 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
-        readOnly,
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
     }), [
         addRelationShipContainerElement,
         currentPage,
         eventStatus,
         passOnProps,
         program,
-        readOnly,
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
         toggleVisibility,
     ]);
 
@@ -141,7 +144,7 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
-                    <ReadOnlyBadge readOnly={readOnly} />
+                    <ReadOnlyBadge readOnly={!programWriteAccess || !trackedEntityTypeWriteAccess} />
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

@@ -99,7 +99,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         onViewAll,
         onCreateNew,
         hiddenProgramStage,
-        readOnly,
         classes,
     } = props;
     const defaultSortState = {
@@ -228,7 +227,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         onDeleteEvent={onDeleteEvent}
                         onRollbackDeleteEvent={onRollbackDeleteEvent}
                         onUpdateEventStatus={onUpdateEventStatus}
-                        readOnly={readOnly}
                     />
                 );
             });
@@ -256,21 +254,18 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
-        const renderCreateNewButton = () => {
-            if (readOnly) return null;
-            return (
-                <div className={classes.newButton}>
-                    <StageCreateNewButton
-                        eventCount={events.length}
-                        onCreateNew={handleCreateNew}
-                        preventAddingEventActionInEffect={hiddenProgramStage}
-                        repeatable={repeatable}
-                        stageWriteAccess={stage?.access?.data?.write}
-                        eventName={eventName}
-                    />
-                </div>
-            );
-        };
+        const renderCreateNewButton = () => (
+            <div className={classes.newButton}>
+                <StageCreateNewButton
+                    eventCount={events.length}
+                    onCreateNew={handleCreateNew}
+                    preventAddingEventActionInEffect={hiddenProgramStage}
+                    repeatable={repeatable}
+                    stageWriteAccess={stage?.access?.data?.write}
+                    eventName={eventName}
+                />
+            </div>
+        );
 
         return (
             <div>

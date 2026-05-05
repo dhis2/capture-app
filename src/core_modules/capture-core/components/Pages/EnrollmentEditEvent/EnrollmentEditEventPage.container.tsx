@@ -295,9 +295,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
         return <LoadingMaskForPage />;
     }
 
-    const hasProgramWrite = Boolean((program as any)?.access?.data?.write);
-    const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
-    const readOnly = !hasProgramWrite || !hasTETWrite;
+    const programWriteAccess = Boolean((program as any)?.access?.data?.write);
+    const trackedEntityTypeWriteAccess = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -350,7 +349,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
             onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
             userInteractionInProgress={userInteractionInProgress}
-            readOnly={readOnly}
+            programWriteAccess={programWriteAccess}
+            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
         />
     );
 };

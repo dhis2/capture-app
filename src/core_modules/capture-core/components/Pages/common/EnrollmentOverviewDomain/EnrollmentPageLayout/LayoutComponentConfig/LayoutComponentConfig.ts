@@ -39,7 +39,8 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    shouldHideWidget: ({ readOnly }: any) => Boolean(readOnly),
+    shouldHideWidget: ({ stages }: any) =>
+        !stages?.some((stage: any) => stage?.dataAccess?.write),
     getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
@@ -60,7 +61,6 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        readOnly,
     }: any): StagesAndEventProps => ({
         programId: program.id,
         stages,
@@ -72,7 +72,6 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        readOnly,
     }),
 };
 
@@ -86,7 +85,7 @@ export const TrackedEntityRelationship: WidgetConfig = {
         toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly,
+        trackedEntityTypeWriteAccess,
     }: any): TrackedEntityRelationshipProps => ({
         trackedEntityTypeId: program.trackedEntityType.id,
         programId: program.id,
@@ -96,7 +95,7 @@ export const TrackedEntityRelationship: WidgetConfig = {
         onCloseAddRelationship: toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly,
+        readOnly: !trackedEntityTypeWriteAccess,
     }),
 };
 
@@ -134,9 +133,7 @@ export const IndicatorWidget: WidgetConfig = {
 
 export const EnrollmentNote: WidgetConfig = {
     Component: WidgetEnrollmentNote,
-    getProps: ({ readOnly }: any) => ({
-        readOnly,
-    }),
+    getProps: () => ({}),
 };
 
 export const ProfileWidget: WidgetConfig = {
@@ -244,7 +241,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-        readOnly,
     }: any): WidgetEventEditProps => ({
         programId: program.id,
         stageId,
@@ -263,7 +259,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-        readOnly,
     }),
 };
 
@@ -287,12 +282,11 @@ export const AssigneeWidget: WidgetConfig = {
         eventAccess,
         onSaveAssignee,
         onSaveAssigneeError,
-        readOnly,
     }: any) => ({
         enabled: programStage?.enableUserAssignment || false,
         assignee,
         getSaveContext: getAssignedUserSaveContext,
-        writeAccess: (eventAccess?.write || false) && !readOnly,
+        writeAccess: eventAccess?.write || false,
         onSave: onSaveAssignee,
         onSaveError: onSaveAssigneeError,
     }),
@@ -300,17 +294,16 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId, readOnly }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
         dataEntryKey,
         dataEntryId,
-        readOnly,
     }),
 };
 
 export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
-    shouldHideWidget: ({ currentPage, readOnly }: any) =>
-        currentPage === EnrollmentPageKeys.EDIT_EVENT || Boolean(readOnly),
+    shouldHideWidget: ({ currentPage }: any) =>
+        currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({
         program,
         stageId,

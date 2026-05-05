@@ -10,7 +10,7 @@ import { ConditionalTooltip } from 'capture-core/components/Tooltips/Conditional
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -46,7 +46,6 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     occurredAt,
-    readOnly,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -55,6 +54,7 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
+    const eventAccess = getProgramEventAccess(programId, stage.id);
     const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
@@ -62,10 +62,13 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = blockEntryForm || !isWithinValidPeriod;
+    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
     const tooltipContent = useMemo(() => {
         if (blockEntryForm) {
             return i18n.t('The event cannot be edited after it has been completed');
+        }
+        if (!eventAccess?.write) {
+            return i18n.t('You don\'t have access to edit this event');
         }
         if (!isWithinValidPeriod) {
             return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
@@ -74,7 +77,7 @@ const WidgetHeaderPlain = ({
             });
         }
         return '';
-    }, [blockEntryForm, isWithinValidPeriod, occurredAt]);
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
 
     const { programCategory } = useCategoryCombinations(programId);
 
@@ -97,24 +100,22 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {!readOnly && (
-                            <ConditionalTooltip
-                                content={tooltipContent}
-                                enabled={disableEdit}
-                                wrapperClassName={classes.tooltip}
+                        <ConditionalTooltip
+                            content={tooltipContent}
+                            enabled={disableEdit}
+                            wrapperClassName={classes.tooltip}
+                        >
+                            <Button
+                                small
+                                secondary
+                                disabled={disableEdit}
+                                icon={<IconEdit24 />}
+                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
+                                data-test="widget-enrollment-event-edit-button"
                             >
-                                <Button
-                                    small
-                                    secondary
-                                    disabled={disableEdit}
-                                    icon={<IconEdit24 />}
-                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
-                                    data-test="widget-enrollment-event-edit-button"
-                                >
-                                    {i18n.t('Edit event')}
-                                </Button>
-                            </ConditionalTooltip>
-                        )}
+                                {i18n.t('Edit event')}
+                            </Button>
+                        </ConditionalTooltip>
 
                         {supportsChangelog && (
                             <OverflowButton

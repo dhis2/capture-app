@@ -90,7 +90,6 @@ const WidgetEventEditPlain = ({
     onSaveAndCompleteEnrollmentErrorActionType,
     onDeleteEvent,
     onDeleteEventRelationship,
-    readOnly,
     classes,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -130,14 +129,13 @@ const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             occurredAt={occurredAt}
-                            readOnly={readOnly}
                         />
                     }
                     noncollapsible
                     borderless
                 >
                     <div className={classes.form}>
-                        {currentPageMode === dataEntryKeys.VIEW || readOnly ? (
+                        {currentPageMode === dataEntryKeys.VIEW ? (
                             <div
                                 className={classes.form}
                                 data-test={'widget-enrollment-event-view'}
