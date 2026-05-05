@@ -1,3 +1,10 @@
+## [106.1.2](https://github.com/dhis2/capture-app/compare/v106.1.1...v106.1.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* [DHIS2-8814] Table in custom form overflows container with no scrollbar ([#4527](https://github.com/dhis2/capture-app/issues/4527)) ([79335e2](https://github.com/dhis2/capture-app/commit/79335e24bd0185125ecc94060a36a66e7b76f3cf))
+
 ## [106.1.1](https://github.com/dhis2/capture-app/compare/v106.1.0...v106.1.1) (2026-05-04)
 
 
