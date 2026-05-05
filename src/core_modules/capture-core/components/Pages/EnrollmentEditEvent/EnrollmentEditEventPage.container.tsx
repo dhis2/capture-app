@@ -3,7 +3,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
+import { useEnrollmentAccess, useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
@@ -291,12 +291,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
     };
 
+    const {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+    } = useEnrollmentAccess(programId);
+
     if (pageStatus === pageStatuses.LOADING) {
         return <LoadingMaskForPage />;
     }
-
-    const programWriteAccess = Boolean((program as any)?.access?.data?.write);
-    const trackedEntityTypeWriteAccess = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
 
     return (
         <EnrollmentEditEventPageComponent
@@ -351,6 +354,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             userInteractionInProgress={userInteractionInProgress}
             programWriteAccess={programWriteAccess}
             trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+            programStageWriteAccess={programStageWriteAccess}
         />
     );
 };

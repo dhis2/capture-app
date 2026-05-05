@@ -51,6 +51,7 @@ export type Props = {
     onDeleteTrackedEntitySuccess: () => void;
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
+    programStageWriteAccess: boolean;
 };
 
 

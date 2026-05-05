@@ -156,6 +156,18 @@ const WidgetProfilePlain = ({
         [trackedEntityTypeAccess, program],
     );
 
+    useEffect(() => {
+        if (!program && !trackedEntityTypeAccess) return;
+        const a = program?.access;
+        const t = trackedEntityTypeAccess;
+        const yn = (v?: boolean) => (v ? 'Yes' : 'No');
+        // eslint-disable-next-line no-console
+        console.log(
+            `Program: write=${yn(a?.data?.write)}\n` +
+            `TET:     write=${yn(t?.data?.write)}`,
+        );
+    }, [program, trackedEntityTypeAccess, canWriteData, isEditable]);
+
     const renderProfile = () => {
         if (loading) {
             return <LoadingMaskElementCenter />;

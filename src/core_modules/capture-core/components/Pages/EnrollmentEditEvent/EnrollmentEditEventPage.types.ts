@@ -62,6 +62,7 @@ export type PlainProps = {
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
+    programStageWriteAccess: boolean;
 };
 
 export type Props = {

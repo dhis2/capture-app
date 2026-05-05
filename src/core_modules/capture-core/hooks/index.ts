@@ -7,3 +7,4 @@ export { useScopeInfo } from './useScopeInfo';
 export { useScopeTitleText } from './useScopeTitleText';
 export { useProgramExpiryForUser } from './useProgramExpiryForUser';
 export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
+export { useEnrollmentAccess } from './useEnrollmentAccess';

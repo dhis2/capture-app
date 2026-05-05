@@ -42,7 +42,7 @@ import {
     deleteEnrollmentEvent,
     updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
-import { useHideWidgetByRuleLocations } from '../../../../hooks';
+import { useHideWidgetByRuleLocations, useEnrollmentAccess } from '../../../../hooks';
 
 
 export const EnrollmentPageDefault = () => {
@@ -180,8 +180,11 @@ export const EnrollmentPageDefault = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
 
-    const programWriteAccess = Boolean(program?.access?.data?.write);
-    const trackedEntityTypeWriteAccess = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
+    const {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+    } = useEnrollmentAccess(programId);
 
     if (isLoading) {
         return (
@@ -200,6 +203,7 @@ export const EnrollmentPageDefault = () => {
             availableWidgets={WidgetsForEnrollmentPageDefault}
             programWriteAccess={programWriteAccess}
             trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+            programStageWriteAccess={programStageWriteAccess}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

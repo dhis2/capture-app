@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-05T08:55:29.835Z\n"
-"PO-Revision-Date: 2026-05-05T08:55:29.835Z\n"
+"POT-Creation-Date: 2026-05-05T17:26:45.666Z\n"
+"PO-Revision-Date: 2026-05-05T17:26:45.666Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1071,6 +1071,18 @@ msgstr "An error occurred loading possible duplicates"
 msgid "Read only - You can only view this enrollment"
 msgstr "Read only - You can only view this enrollment"
 
+msgid "Read only - Cannot edit enrollment or events"
+msgstr "Read only - Cannot edit enrollment or events"
+
+msgid "Read only - Cannot edit enrollment"
+msgstr "Read only - Cannot edit enrollment"
+
+msgid "Read only - Cannot edit events"
+msgstr "Read only - Cannot edit events"
+
+msgid "person"
+msgstr "person"
+
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
 
@@ -1593,8 +1605,8 @@ msgstr "{{trackedEntityName}} profile"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
-msgid "Read only - You can only view this {{trackedEntityName}}"
-msgstr "Read only - You can only view this {{trackedEntityName}}"
+msgid "Read only - {{trackedEntityName}} profile"
+msgstr "Read only - {{trackedEntityName}} profile"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."

@@ -64,6 +64,7 @@ export const EnrollmentEditEventPageComponent = ({
     userInteractionInProgress,
     programWriteAccess,
     trackedEntityTypeWriteAccess,
+    programStageWriteAccess,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -139,6 +140,7 @@ export const EnrollmentEditEventPageComponent = ({
             onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
             programWriteAccess={programWriteAccess}
             trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+            programStageWriteAccess={programStageWriteAccess}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
     </OrgUnitFetcher>

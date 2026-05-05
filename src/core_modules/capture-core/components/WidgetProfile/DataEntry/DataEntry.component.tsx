@@ -38,7 +38,7 @@ export const DataEntryComponent = ({
                 </span>
                 <ReadOnlyBadge
                     readOnly={Boolean(readOnly)}
-                    label={i18n.t('Read only - You can only view this {{trackedEntityName}}', {
+                    label={i18n.t('Read only - {{trackedEntityName}} profile', {
                         trackedEntityName,
                         interpolation: { escapeValue: false },
                     })}
