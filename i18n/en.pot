@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-04T12:26:17.283Z\n"
-"PO-Revision-Date: 2026-05-04T12:26:17.283Z\n"
+"POT-Creation-Date: 2026-05-05T08:55:29.835Z\n"
+"PO-Revision-Date: 2026-05-05T08:55:29.835Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1587,11 +1587,14 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
-msgid "{{trackedEntityName}} details"
-msgstr "{{trackedEntityName}} details"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profile"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
+
+msgid "Read only - You can only view this {{trackedEntityName}}"
+msgstr "Read only - You can only view this {{trackedEntityName}}"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
@@ -1641,8 +1644,8 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "Show details"
-msgstr "Show details"
+msgid "Show profile"
+msgstr "Show profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"

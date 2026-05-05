@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { NoticeBoxes } from './NoticeBoxes.container';
 import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
+import { ReadOnlyBadge } from '../../ReadOnlyBadge';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
 
 export const DataEntryComponent = ({
@@ -25,10 +26,24 @@ export const DataEntryComponent = ({
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>
-            {readOnly
-                ? i18n.t('{{trackedEntityName}} details', { trackedEntityName, interpolation: { escapeValue: false } })
-                : i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })
-            }
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+                <span>
+                    {readOnly
+                        ? i18n.t(
+                            '{{trackedEntityName}} profile',
+                            { trackedEntityName, interpolation: { escapeValue: false } },
+                        )
+                        : i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })
+                    }
+                </span>
+                <ReadOnlyBadge
+                    readOnly={Boolean(readOnly)}
+                    label={i18n.t('Read only - You can only view this {{trackedEntityName}}', {
+                        trackedEntityName,
+                        interpolation: { escapeValue: false },
+                    })}
+                />
+            </div>
         </ModalTitle>
         <ModalContent>
             {!readOnly && (
@@ -50,6 +65,7 @@ export const DataEntryComponent = ({
                 onGetValidationContext={onGetValidationContext}
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
+                viewMode={readOnly}
             />
             {!readOnly && (
                 <NoticeBoxes
