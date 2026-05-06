@@ -1,3 +1,10 @@
+## [106.1.3](https://github.com/dhis2/capture-app/compare/v106.1.2...v106.1.3) (2026-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17625] Use Capture scope for working lists without org unit ([#4522](https://github.com/dhis2/capture-app/issues/4522)) ([9c30444](https://github.com/dhis2/capture-app/commit/9c30444b18b07bdcdc570155122d9ba05f963044))
+
 ## [106.1.2](https://github.com/dhis2/capture-app/compare/v106.1.1...v106.1.2) (2026-05-05)
 
 
