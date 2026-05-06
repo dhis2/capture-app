@@ -1,3 +1,10 @@
+## [106.1.5](https://github.com/dhis2/capture-app/compare/v106.1.4...v106.1.5) (2026-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-18592] Not saving an option that starts or ends with a space ([#4524](https://github.com/dhis2/capture-app/issues/4524)) ([f8d67e0](https://github.com/dhis2/capture-app/commit/f8d67e06e0ac6379ac2bde527f5bbc06af1f8a9d))
+
 ## [106.1.4](https://github.com/dhis2/capture-app/compare/v106.1.3...v106.1.4) (2026-05-06)
 
 
