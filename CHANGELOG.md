@@ -1,3 +1,10 @@
+## [106.1.4](https://github.com/dhis2/capture-app/compare/v106.1.3...v106.1.4) (2026-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-12281] Misleading text when creating new TEI through creation of relationship  ([#4528](https://github.com/dhis2/capture-app/issues/4528)) ([3be3abc](https://github.com/dhis2/capture-app/commit/3be3abc18bf95b3667045c4cd5d966b9e2d12d5c))
+
 ## [106.1.3](https://github.com/dhis2/capture-app/compare/v106.1.2...v106.1.3) (2026-05-06)
 
 
