@@ -38,7 +38,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
         page,
         pageSize,
         [orgUnitQueryParam]: orgUnitId,
-        [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
+        [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
         program,
         fields: ':all,!relationships,programOwners[orgUnit,program]',
     };
