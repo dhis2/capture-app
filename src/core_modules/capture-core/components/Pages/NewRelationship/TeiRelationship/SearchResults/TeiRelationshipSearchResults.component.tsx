@@ -124,7 +124,7 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
             .filter(key => searchValues[key] !== null)
             .map((key) => {
                 const element = searchForm.getElement(key);
-                const value = convertFormToClient(searchValues[key], element.type);
+                const value = convertFormToClient(searchValues[key], element.type, element);
                 return { name: element.formName, value, id: element.id, type: element.type };
             });
     }
