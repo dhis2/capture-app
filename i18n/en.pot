@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-06T11:24:59.790Z\n"
-"PO-Revision-Date: 2026-05-06T11:24:59.790Z\n"
+"POT-Creation-Date: 2026-05-06T12:39:03.039Z\n"
+"PO-Revision-Date: 2026-05-06T12:39:03.039Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1068,20 +1068,29 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "Read only - You can only view this enrollment"
-msgstr "Read only - You can only view this enrollment"
+msgid "program"
+msgstr "program"
 
-msgid "Read only - Cannot edit enrollment or events"
-msgstr "Read only - Cannot edit enrollment or events"
+msgid "this program stage"
+msgstr "this program stage"
 
-msgid "Read only - Cannot edit enrollment"
-msgstr "Read only - Cannot edit enrollment"
+msgid "and"
+msgstr "and"
 
-msgid "Read only - Cannot edit events"
-msgstr "Read only - Cannot edit events"
+msgid "You only have view access to {{targets}}"
+msgstr "You only have view access to {{targets}}"
+
+msgid "You only have view access to program"
+msgstr "You only have view access to program"
+
+msgid "You only have view access to this program stage"
+msgstr "You only have view access to this program stage"
 
 msgid "person"
 msgstr "person"
+
+msgid "Read only"
+msgstr "Read only"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1373,6 +1382,9 @@ msgstr "An error occurred while transferring ownership"
 
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
+
+msgid "You do not have access to edit this date"
+msgstr "You do not have access to edit this date"
 
 msgid "Latitude"
 msgstr "Latitude"
@@ -1881,6 +1893,9 @@ msgstr "Missing implementation step"
 
 msgid "Go back without saving relationship"
 msgstr "Go back without saving relationship"
+
+msgid "You do not have access to add relationships"
+msgstr "You do not have access to add relationships"
 
 msgid "New Relationship"
 msgstr "New Relationship"

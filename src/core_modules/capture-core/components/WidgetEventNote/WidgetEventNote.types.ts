@@ -1,6 +1,7 @@
 export type Props = {
     dataEntryKey: string;
     dataEntryId: string;
+    stageWriteAccess?: boolean;
 };
 
 export type ClientNote = {

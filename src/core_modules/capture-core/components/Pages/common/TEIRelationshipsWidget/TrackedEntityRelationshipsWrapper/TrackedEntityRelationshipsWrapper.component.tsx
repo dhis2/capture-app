@@ -33,6 +33,7 @@ export const TrackedEntityRelationshipsWrapper = ({
     onCloseAddRelationship,
     onLinkedRecordClick,
     readOnly,
+    hideButton,
 }: Props) => {
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
@@ -76,6 +77,7 @@ export const TrackedEntityRelationshipsWrapper = ({
             onSelectFindMode={onSelectFindMode}
             relationshipTypes={relationshipTypes}
             readOnly={readOnly}
+            hideButton={hideButton}
             renderTrackedEntityRegistration={(
                 selectedTrackedEntityTypeId,
                 suggestedProgramId,

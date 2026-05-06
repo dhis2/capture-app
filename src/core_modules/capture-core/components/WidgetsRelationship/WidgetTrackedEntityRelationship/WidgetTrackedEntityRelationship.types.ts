@@ -45,4 +45,5 @@ export type WidgetTrackedEntityRelationshipProps = {
         onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
     ) => React.ReactElement<any>;
     readOnly?: boolean;
+    hideButton?: boolean;
 };

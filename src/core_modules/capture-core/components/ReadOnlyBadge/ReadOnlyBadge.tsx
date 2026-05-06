@@ -1,6 +1,7 @@
 import React from 'react';
 import { colors, IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 
 type Props = {
     readOnly?: boolean;
@@ -20,25 +21,17 @@ const getMultiMissingLabel = (
     missingStage: boolean,
     trackedEntityName: string,
 ): string | null => {
-    if (missingProgram && missingTET && missingStage) {
-        return i18n.t('Read only - You can only view this enrollment');
-    }
-    if (missingProgram && missingTET) {
-        return interpolate(
-            'Read only - Cannot edit enrollment, {{trackedEntityName}} profile, or relationships',
-            trackedEntityName,
-        );
-    }
-    if (missingProgram && missingStage) {
-        return i18n.t('Read only - Cannot edit enrollment or events');
-    }
-    if (missingTET && missingStage) {
-        return interpolate(
-            'Read only - Cannot edit {{trackedEntityName}} profile, relationships, or events',
-            trackedEntityName,
-        );
-    }
-    return null;
+    const parts: Array<string> = [];
+    if (missingProgram) parts.push(i18n.t('program'));
+    if (missingTET) parts.push(trackedEntityName);
+    if (missingStage) parts.push(i18n.t('this program stage'));
+    if (parts.length < 2) return null;
+    const last = parts.pop() as string;
+    const joined = `${parts.join(', ')} ${i18n.t('and')} ${last}`;
+    return i18n.t('You only have view access to {{targets}}', {
+        targets: joined,
+        interpolation: { escapeValue: false },
+    });
 };
 
 const getSingleMissingLabel = (
@@ -47,14 +40,14 @@ const getSingleMissingLabel = (
     missingStage: boolean,
     trackedEntityName: string,
 ): string | null => {
-    if (missingProgram) return i18n.t('Read only - Cannot edit enrollment');
+    if (missingProgram) return i18n.t('You only have view access to program');
     if (missingTET) {
         return interpolate(
-            'Read only - Cannot edit {{trackedEntityName}} profile or relationships',
+            'You only have view access to {{trackedEntityName}}',
             trackedEntityName,
         );
     }
-    if (missingStage) return i18n.t('Read only - Cannot edit events');
+    if (missingStage) return i18n.t('You only have view access to this program stage');
     return null;
 };
 
@@ -79,22 +72,23 @@ export const ReadOnlyBadge = ({
     trackedEntityName,
     label,
 }: Props) => {
-    const isReadOnly = readOnly
-        || !programWriteAccess
-        || !trackedEntityTypeWriteAccess
-        || !programStageWriteAccess;
+    const allAccessMissing = !programWriteAccess
+        && !trackedEntityTypeWriteAccess
+        && !programStageWriteAccess;
+    const isReadOnly = readOnly || allAccessMissing;
     if (!isReadOnly) return null;
-    const text = label
+    const tooltipContent = label
         ?? getDefaultLabel(
             programWriteAccess,
             trackedEntityTypeWriteAccess,
             programStageWriteAccess,
             trackedEntityName ?? i18n.t('person'),
-        )
-        ?? i18n.t('Read only - You can only view this enrollment');
+        );
     return (
-        <Tag maxWidth="400px" neutral icon={<IconInfo16 color={colors.grey700} />}>
-            {text}
-        </Tag>
+        <ConditionalTooltip content={tooltipContent ?? ''} enabled={Boolean(tooltipContent)}>
+            <Tag neutral icon={<IconInfo16 color={colors.grey700} />}>
+                {i18n.t('Read only')}
+            </Tag>
+        </ConditionalTooltip>
     );
 };

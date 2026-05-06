@@ -12,4 +12,8 @@ export type Props = {
     }>;
     onAddNote: (note: string) => void;
     readOnly?: boolean;
+    programWriteAccess?: boolean;
+    trackedEntityTypeWriteAccess?: boolean;
+    programStageWriteAccess?: boolean;
+    trackedEntityName?: string;
 };

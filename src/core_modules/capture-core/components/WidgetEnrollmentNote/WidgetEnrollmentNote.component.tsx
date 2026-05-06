@@ -17,6 +17,8 @@ export const WidgetEnrollmentNote = () => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
     };
 
+    const programWriteAccess = Boolean(program?.access?.data?.write);
+
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
@@ -25,7 +27,8 @@ export const WidgetEnrollmentNote = () => {
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                readOnly={!program?.access?.data?.write}
+                readOnly={!programWriteAccess}
+                programWriteAccess={programWriteAccess}
             />
         </div>
     );

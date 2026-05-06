@@ -21,6 +21,7 @@ export const WidgetTrackedEntityRelationship = ({
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
     readOnly,
+    hideButton,
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
@@ -77,6 +78,7 @@ export const WidgetTrackedEntityRelationship = ({
                 renderTrackedEntitySearch={renderTrackedEntitySearch}
                 renderTrackedEntityRegistration={renderTrackedEntityRegistration}
                 readOnly={readOnly}
+                hideButton={hideButton}
             />
         </RelationshipsWidget>
     );

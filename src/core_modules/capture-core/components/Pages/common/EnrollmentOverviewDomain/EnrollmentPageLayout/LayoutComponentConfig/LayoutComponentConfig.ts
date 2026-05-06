@@ -1,8 +1,8 @@
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type { Props as TrackedEntityRelationshipProps } from
-    '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps }
+    from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
@@ -85,7 +85,9 @@ export const TrackedEntityRelationship: WidgetConfig = {
         toggleVisibility,
         teiId,
         onLinkedRecordClick,
+        programWriteAccess,
         trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
     }: any): TrackedEntityRelationshipProps => ({
         trackedEntityTypeId: program.trackedEntityType.id,
         programId: program.id,
@@ -96,6 +98,7 @@ export const TrackedEntityRelationship: WidgetConfig = {
         teiId,
         onLinkedRecordClick,
         readOnly: !trackedEntityTypeWriteAccess,
+        hideButton: !programWriteAccess && !trackedEntityTypeWriteAccess && !programStageWriteAccess,
     }),
 };
 
@@ -294,9 +297,10 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId, programStage }: any) => ({
         dataEntryKey,
         dataEntryId,
+        stageWriteAccess: Boolean(programStage?.stageForm?.access?.data?.write),
     }),
 };
 

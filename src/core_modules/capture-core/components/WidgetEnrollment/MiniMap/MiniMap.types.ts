@@ -9,4 +9,5 @@ export type OwnProps = {
     onError?: (message: string) => void;
     geometryType: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON;
     readOnly: boolean;
+    hideEdit?: boolean;
 };

@@ -4,13 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
-import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
-import { useLocationQuery } from '../../utils/routing';
 
-export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
+export const WidgetEventNote = ({ dataEntryKey, dataEntryId, stageWriteAccess = true }: Props) => {
     const dispatch = useDispatch();
-    const { programId } = useLocationQuery();
-    const { program } = useProgram(programId);
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
 
@@ -26,7 +22,8 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
                 emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                readOnly={!program?.access?.data?.write}
+                readOnly={!stageWriteAccess}
+                programStageWriteAccess={stageWriteAccess}
             />
         </div>
     );
