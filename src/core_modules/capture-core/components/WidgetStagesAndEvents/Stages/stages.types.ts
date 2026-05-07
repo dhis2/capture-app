@@ -7,7 +7,6 @@ export type PlainProps = {
     stageWriteAccessById?: Record<string, boolean>;
     stageReadAccessById?: Record<string, boolean>;
     programLoaded?: boolean;
-    hideReadOnlyBadge?: boolean;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;
@@ -20,7 +19,6 @@ export type InputProps = {
     stageWriteAccessById?: Record<string, boolean>;
     stageReadAccessById?: Record<string, boolean>;
     programLoaded?: boolean;
-    hideReadOnlyBadge?: boolean;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;

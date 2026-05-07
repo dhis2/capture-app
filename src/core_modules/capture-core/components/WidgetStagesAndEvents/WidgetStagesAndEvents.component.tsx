@@ -6,6 +6,7 @@ import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -26,11 +27,11 @@ const WidgetStagesAndEventsPlain = ({
     stages,
     events,
     programId,
-    hideReadOnlyBadge,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { program } = useProgram(programId);
+    const { hideWidgetBadge } = useEnrollmentAccessContext();
     const stageWriteAccessById = useMemo(() => {
         const map: Record<string, boolean> = {};
         (program?.programStages ?? []).forEach((stage: any) => {
@@ -57,7 +58,7 @@ const WidgetStagesAndEventsPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>{i18n.t('Stages and Events')}</span>
-                        {!hideReadOnlyBadge && (
+                        {!hideWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     readOnly={anyStageReadAccess && !anyStageWriteAccess}
@@ -80,7 +81,6 @@ const WidgetStagesAndEventsPlain = ({
                     stageWriteAccessById={stageWriteAccessById}
                     stageReadAccessById={stageReadAccessById}
                     programLoaded={Boolean(program)}
-                    hideReadOnlyBadge={hideReadOnlyBadge || !anyStageWriteAccess}
                     {...passOnProps}
                 />
             </Widget>

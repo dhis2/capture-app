@@ -22,7 +22,6 @@ export const StagesPlain = ({
     stageWriteAccessById,
     stageReadAccessById,
     programLoaded,
-    hideReadOnlyBadge,
     ...passOnProps
 }: PlainProps) => {
     const readableStages = useMemo(
@@ -72,7 +71,6 @@ export const StagesPlain = ({
                         key={stage.id}
                         stage={stage}
                         stageWriteAccess={stageWriteAccessById?.[stage.id] ?? stage.dataAccess.write}
-                        hideReadOnlyBadge={hideReadOnlyBadge}
                         {...passOnProps}
                     />
                 ))

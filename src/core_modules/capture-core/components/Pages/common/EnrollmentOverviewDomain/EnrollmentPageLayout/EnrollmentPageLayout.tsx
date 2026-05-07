@@ -109,8 +109,6 @@ const EnrollmentPageLayoutPlain = ({
         useState<HTMLDivElement | undefined>(undefined);
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
-    const access = useEnrollmentAccessContext();
-
     const allProps = useMemo(() => ({
         ...passOnProps,
         program,
@@ -118,18 +116,12 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
-        programWriteAccess: access.programWriteAccess,
-        trackedEntityTypeWriteAccess: access.trackedEntityTypeWriteAccess,
-        programStageWriteAccess: access.programStageWriteAccess,
-        programStageReadAccess: access.programStageReadAccess,
-        hideWidgetBadge: access.hideWidgetBadge,
     }), [
         addRelationShipContainerElement,
         currentPage,
         eventStatus,
         passOnProps,
         program,
-        access,
         toggleVisibility,
     ]);
 

@@ -5,7 +5,6 @@ type ExtractedProps = {
     programId: string;
     stage: Stage;
     stageWriteAccess?: boolean;
-    hideReadOnlyBadge?: boolean;
     events: Array<ApiEnrollmentEvent>;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;

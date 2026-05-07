@@ -7,5 +7,4 @@ export type Props = {
     icon?: Icon;
     description?: string | null;
     stageWriteAccess?: boolean;
-    hideReadOnlyBadge?: boolean;
 };

@@ -26,7 +26,7 @@ const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: strin
 );
 
 export const StagePlain = ({
-    stage, events, classes, onCreateNew, ruleEffects, stageWriteAccess, hideReadOnlyBadge, ...passOnProps
+    stage, events, classes, onCreateNew, ruleEffects, stageWriteAccess, ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
@@ -51,7 +51,6 @@ export const StagePlain = ({
                     description={description}
                     events={events}
                     stageWriteAccess={effectiveStageWriteAccess}
-                    hideReadOnlyBadge={hideReadOnlyBadge}
                 />}
                 onOpen={handleOpen}
                 onClose={handleClose}
