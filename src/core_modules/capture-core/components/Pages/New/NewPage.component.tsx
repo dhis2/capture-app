@@ -82,7 +82,6 @@ const NewPagePlain = ({
                                     interpolation: { escapeValue: false },
                                 },
                             )}
-                        onCancel={handleMainPageNavigation}
                     />
                     :
                     <OrgUnitFetcher orgUnitId={orgUnitId}>

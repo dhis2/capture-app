@@ -19,4 +19,4 @@ Feature: Program stage selector when navigating to EnrollmentEventNew without st
   @user:trackerAutoTestRestricted
   Scenario: Stages buttons should not be displayed when no data write access
     Given user lands on the Enrollment dashboard page by typing #/enrollmentEventNew?enrollmentId=X7g83OFRALm&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=YsKjdOcl9Cd
-    Then the New event quick action button should not be visible
+    Then the New event quick action button is disabled

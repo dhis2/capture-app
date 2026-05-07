@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
-import { OrgUnitFetcher } from './OrgUnitFetcher/OrgUnitFetcher.container';
+import { AccessVerification } from './AccessVerification';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
@@ -36,7 +36,7 @@ export const WidgetEnrollmentEventNew = ({
     }
 
     return (
-        <OrgUnitFetcher
+        <AccessVerification
             {...passOnProps}
             stage={stage}
             formFoundation={formFoundation}
