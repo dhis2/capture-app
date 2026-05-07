@@ -6,7 +6,7 @@ import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
-import { useProgram } from '../../../../WidgetEnrollment/hooks/useProgram';
+import { useEnrollmentAccessContext } from '../EnrollmentAccessContext';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -56,81 +56,40 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    readOnlyBadge: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacersNum.dp4,
-        flexShrink: 0,
-    },
 });
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-const resolveStageBadgeAccess = (
-    onEventPage: boolean,
-    currentStageWriteAccess: boolean,
-    programStageWriteAccess: boolean,
-    programStageReadAccess: boolean,
-) => (onEventPage
-    ? currentStageWriteAccess
-    : programStageWriteAccess || !programStageReadAccess);
-
-type BreadcrumbBadgeProgram = {
-    programStages?: Array<unknown>;
-    trackedEntityType?: { name?: string };
+const EnrollmentReadOnlyBadge = () => {
+    const access = useEnrollmentAccessContext();
+    const {
+        isEventPage,
+        currentStageWriteAccess,
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+        programStageReadAccess,
+        multipleStages,
+        trackedEntityTypeName,
+    } = access;
+    const stageBadgeAccess = isEventPage
+        ? currentStageWriteAccess
+        : programStageWriteAccess || !programStageReadAccess;
+    return (
+        <ReadOnlyBadge
+            readOnly={isEventPage && !currentStageWriteAccess}
+            programWriteAccess={isEventPage ? true : programWriteAccess}
+            trackedEntityTypeWriteAccess={isEventPage ? true : trackedEntityTypeWriteAccess}
+            programStageWriteAccess={stageBadgeAccess}
+            multipleStages={!isEventPage && multipleStages}
+            trackedEntityName={trackedEntityTypeName}
+            inlineLabel
+        />
+    );
 };
-
-type BreadcrumbBadgeProps = {
-    onEventPage: boolean;
-    currentStageWriteAccess: boolean;
-    programWriteAccess: boolean;
-    trackedEntityTypeWriteAccess: boolean;
-    programStageWriteAccess: boolean;
-    programStageReadAccess: boolean;
-    program: BreadcrumbBadgeProgram;
-};
-
-const BreadcrumbBadge = ({
-    onEventPage,
-    currentStageWriteAccess,
-    programWriteAccess,
-    trackedEntityTypeWriteAccess,
-    programStageWriteAccess,
-    programStageReadAccess,
-    program,
-}: BreadcrumbBadgeProps) => (
-    <ReadOnlyBadge
-        readOnly={onEventPage && !currentStageWriteAccess}
-        programWriteAccess={onEventPage ? true : programWriteAccess}
-        trackedEntityTypeWriteAccess={onEventPage ? true : trackedEntityTypeWriteAccess}
-        programStageWriteAccess={resolveStageBadgeAccess(
-            onEventPage,
-            currentStageWriteAccess,
-            programStageWriteAccess,
-            programStageReadAccess,
-        )}
-        multipleStages={!onEventPage && (program?.programStages?.length ?? 0) > 1}
-        trackedEntityName={program?.trackedEntityType?.name}
-        inlineLabel
-    />
-);
 
 type OwnProps = EnrollmentPageProps;
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
-
-const useStageAccess = (
-    programId: string,
-    currentStageId: string | undefined,
-) => {
-    const { program: liveProgram } = useProgram(programId);
-    const liveCurrentStage = currentStageId
-        ? liveProgram?.programStages?.find((s: any) => s.id === currentStageId)
-        : undefined;
-    const currentStageWriteAccess = liveCurrentStage
-        ? Boolean(liveCurrentStage?.access?.data?.write)
-        : true;
-    return { currentStageWriteAccess };
-};
 
 const EnrollmentPageLayoutPlain = ({
     pageLayout,
@@ -142,10 +101,6 @@ const EnrollmentPageLayoutPlain = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
-    programWriteAccess,
-    trackedEntityTypeWriteAccess,
-    programStageWriteAccess,
-    programStageReadAccess,
     classes,
     ...passOnProps
 }: Props) => {
@@ -154,13 +109,7 @@ const EnrollmentPageLayoutPlain = ({
         useState<HTMLDivElement | undefined>(undefined);
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
-    const currentStageId = (passOnProps as any).stageId as string | undefined;
-    const { currentStageWriteAccess } = useStageAccess(program.id, currentStageId);
-    const onEventPage = Boolean(currentStageId);
-    const allWriteAccessMissing = !programWriteAccess
-        && !trackedEntityTypeWriteAccess
-        && !programStageWriteAccess;
-    const hideWidgetReadOnlyBadge = onEventPage || allWriteAccessMissing;
+    const access = useEnrollmentAccessContext();
 
     const allProps = useMemo(() => ({
         ...passOnProps,
@@ -169,22 +118,18 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
-        programWriteAccess,
-        trackedEntityTypeWriteAccess,
-        programStageWriteAccess,
-        programStageReadAccess,
-        hideEventStageBadge: hideWidgetReadOnlyBadge,
+        programWriteAccess: access.programWriteAccess,
+        trackedEntityTypeWriteAccess: access.trackedEntityTypeWriteAccess,
+        programStageWriteAccess: access.programStageWriteAccess,
+        programStageReadAccess: access.programStageReadAccess,
+        hideWidgetBadge: access.hideWidgetBadge,
     }), [
         addRelationShipContainerElement,
         currentPage,
         eventStatus,
         passOnProps,
         program,
-        programWriteAccess,
-        trackedEntityTypeWriteAccess,
-        programStageWriteAccess,
-        programStageReadAccess,
-        hideWidgetReadOnlyBadge,
+        access,
         toggleVisibility,
     ]);
 
@@ -224,15 +169,7 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
-                    <BreadcrumbBadge
-                        onEventPage={onEventPage}
-                        currentStageWriteAccess={currentStageWriteAccess}
-                        programWriteAccess={programWriteAccess}
-                        trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
-                        programStageWriteAccess={programStageWriteAccess}
-                        programStageReadAccess={programStageReadAccess}
-                        program={program as BreadcrumbBadgeProgram}
-                    />
+                    <EnrollmentReadOnlyBadge />
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

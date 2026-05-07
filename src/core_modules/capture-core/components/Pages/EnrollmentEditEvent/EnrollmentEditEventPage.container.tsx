@@ -3,10 +3,11 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentAccess, useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
+import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
+    EnrollmentAccessProvider,
     rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
     showEnrollmentError,
@@ -291,73 +292,64 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
     };
 
-    const {
-        programWriteAccess,
-        trackedEntityTypeWriteAccess,
-        programStageWriteAccess,
-        programStageReadAccess,
-    } = useEnrollmentAccess(programId);
-
     if (pageStatus === pageStatuses.LOADING) {
         return <LoadingMaskForPage />;
     }
 
     return (
-        <EnrollmentEditEventPageComponent
-            pageLayout={pageLayout}
-            mode={currentPageMode}
-            pageStatus={pageStatus}
-            programStage={programStage}
-            onBackToMainPage={onBackToMainPage}
-            onBackToDashboard={onGoBack}
-            onBackToViewEvent={onBackToViewEvent}
-            widgetEffects={outputEffects}
-            hideWidgets={hideWidgets}
-            teiId={teiId}
-            enrollmentId={enrollmentId}
-            eventId={eventId}
-            stageId={stageId}
-            trackedEntityTypeId={trackedEntityTypeId}
-            enrollmentsAsOptions={enrollmentsAsOptions}
-            teiDisplayName={teiDisplayName}
-            trackedEntityName={trackedEntityName}
-            program={program}
-            onDelete={onDelete}
-            onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
-            onAddNew={onAddNew}
-            orgUnitId={orgUnitId}
-            eventDate={eventDate}
-            assignee={assignee}
-            onLinkedRecordClick={onLinkedRecordClick}
-            onEnrollmentError={onEnrollmentError}
-            onEnrollmentSuccess={onEnrollmentSuccess}
-            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
-            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
-            onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
-            eventStatus={event?.status}
-            eventAccess={eventAccess}
-            scheduleDate={scheduleDate}
-            onCancelEditEvent={onCancelEditEvent}
-            onHandleScheduleSave={onHandleScheduleSave}
-            onSaveExternal={onSaveExternal}
-            getAssignedUserSaveContext={getAssignedUserSaveContext}
-            onSaveAssignee={onSaveAssignee}
-            onSaveAssigneeError={onSaveAssigneeError}
-            events={enrollmentSite?.events}
-            onAccessLostFromTransfer={onAccessLostFromTransfer}
-            onNavigateToEvent={onNavigateToEvent}
-            onDeleteEvent={onDeleteEvent}
-            onDeleteEventRelationship={onDeleteEventRelationship}
-            onUpdateOrAddEnrollmentEvents={onUpdateOrAddEnrollmentEvents}
-            onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
-            onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
-            userInteractionInProgress={userInteractionInProgress}
-            programWriteAccess={programWriteAccess}
-            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
-            programStageWriteAccess={programStageWriteAccess}
-            programStageReadAccess={programStageReadAccess}
-        />
+        <EnrollmentAccessProvider programId={programId} currentStageId={stageId}>
+            <EnrollmentEditEventPageComponent
+                pageLayout={pageLayout}
+                mode={currentPageMode}
+                pageStatus={pageStatus}
+                programStage={programStage}
+                onBackToMainPage={onBackToMainPage}
+                onBackToDashboard={onGoBack}
+                onBackToViewEvent={onBackToViewEvent}
+                widgetEffects={outputEffects}
+                hideWidgets={hideWidgets}
+                teiId={teiId}
+                enrollmentId={enrollmentId}
+                eventId={eventId}
+                stageId={stageId}
+                trackedEntityTypeId={trackedEntityTypeId}
+                enrollmentsAsOptions={enrollmentsAsOptions}
+                teiDisplayName={teiDisplayName}
+                trackedEntityName={trackedEntityName}
+                program={program}
+                onDelete={onDelete}
+                onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
+                onAddNew={onAddNew}
+                orgUnitId={orgUnitId}
+                eventDate={eventDate}
+                assignee={assignee}
+                onLinkedRecordClick={onLinkedRecordClick}
+                onEnrollmentError={onEnrollmentError}
+                onEnrollmentSuccess={onEnrollmentSuccess}
+                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
+                eventStatus={event?.status}
+                eventAccess={eventAccess}
+                scheduleDate={scheduleDate}
+                onCancelEditEvent={onCancelEditEvent}
+                onHandleScheduleSave={onHandleScheduleSave}
+                onSaveExternal={onSaveExternal}
+                getAssignedUserSaveContext={getAssignedUserSaveContext}
+                onSaveAssignee={onSaveAssignee}
+                onSaveAssigneeError={onSaveAssigneeError}
+                events={enrollmentSite?.events}
+                onAccessLostFromTransfer={onAccessLostFromTransfer}
+                onNavigateToEvent={onNavigateToEvent}
+                onDeleteEvent={onDeleteEvent}
+                onDeleteEventRelationship={onDeleteEventRelationship}
+                onUpdateOrAddEnrollmentEvents={onUpdateOrAddEnrollmentEvents}
+                onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
+                onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
+                userInteractionInProgress={userInteractionInProgress}
+            />
+        </EnrollmentAccessProvider>
     );
 };
 

@@ -120,8 +120,8 @@ export const ReadOnlyBadge = ({
                 <span style={{ flexShrink: 0, display: 'inline-flex' }}>
                     <IconInfo16 color={colors.blue800} />
                 </span>
-                <span>
-                    <span style={{ fontWeight: 500 }}>{i18n.t('View only')}</span>
+                <span style={{ fontWeight: 500 }}>
+                    {i18n.t('View only')}
                     {' - '}
                     {message ?? i18n.t('You only have view access')}
                 </span>
