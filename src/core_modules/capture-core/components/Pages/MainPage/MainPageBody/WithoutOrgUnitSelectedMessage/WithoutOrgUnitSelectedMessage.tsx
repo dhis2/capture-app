@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
-import { programTypes } from '../../../../../metaData';
+import { programTypes, TrackerProgram } from '../../../../../metaData';
 import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
 
 const styles: Readonly<any> = {
@@ -13,8 +13,13 @@ const styles: Readonly<any> = {
     incompleteMessageContent: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '4px',
+        gap: '12px',
         textAlign: 'center',
+    },
+    actions: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
     },
     incompleteMessageButton: {
         background: 'none',
@@ -33,22 +38,26 @@ const styles: Readonly<any> = {
 
 type OwnProps = {
     programId: string;
-    setShowAccessible: () => void;
+    onNavigateToWorkingList: () => void;
+    onNavigateToSearch: () => void;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
-const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, classes }: Props) => {
+const WithoutOrgUnitSelectedMessagePlain = ({
+    programId,
+    onNavigateToWorkingList,
+    onNavigateToSearch,
+    classes,
+}: Props) => {
     const { program, programType } = useProgramInfo(programId);
-    const programName = program?.name;
-    const IncompleteSelectionMessage = useMemo(() => (programType === programTypes.TRACKER_PROGRAM ? (
-        i18n.t('Or see all records accessible to you in {{program}} ', {
-            program: programName,
-            interpolation: { escapeValue: false },
-        })
-    ) : i18n.t('Or see all events accessible to you in {{program}}',
-        { program: programName, interpolation: { escapeValue: false } })),
-    [programName, programType]);
+    const isTracker = programType === programTypes.TRACKER_PROGRAM;
+
+    const trackedEntityName = program instanceof TrackerProgram
+        ? program.trackedEntityType?.name
+        : undefined;
+    const showWorkingListLink = !isTracker || Boolean(program?.displayFrontPageList);
+    const showSearchLink = isTracker;
 
     return (
         <div
@@ -57,12 +66,30 @@ const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, clas
         >
             <IncompleteSelectionsMessage>
                 <div className={classes.incompleteMessageContent}>
-                    <span>{i18n.t('Please select an organisation unit.')}</span>
-                    <button
-                        className={classes.incompleteMessageButton}
-                        onClick={() => setShowAccessible()}
-                        data-test={'show-accessible-button'}
-                    >{IncompleteSelectionMessage}</button>
+                    <span>{i18n.t('Please select an organisation unit')}</span>
+                    <div className={classes.actions}>
+                        {showWorkingListLink && (
+                            <button
+                                className={classes.incompleteMessageButton}
+                                onClick={onNavigateToWorkingList}
+                                data-test={'go-to-working-list-button'}
+                            >
+                                {i18n.t('See working list without organisation unit')}
+                            </button>
+                        )}
+                        {showSearchLink && (
+                            <button
+                                className={classes.incompleteMessageButton}
+                                onClick={onNavigateToSearch}
+                                data-test={'go-to-search-button'}
+                            >
+                                {i18n.t('Search for a {{trackedEntityName}}', {
+                                    trackedEntityName,
+                                    interpolation: { escapeValue: false },
+                                })}
+                            </button>
+                        )}
+                    </div>
                 </div>
             </IncompleteSelectionsMessage>
         </div>

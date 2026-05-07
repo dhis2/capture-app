@@ -129,7 +129,7 @@ export class DataElementFactory {
                 const serverValue = pipe(
                     convertFormToClient,
                     convertClientToServer,
-                )(value, cachedTrackedEntityAttribute.valueType);
+                )(value, cachedTrackedEntityAttribute.valueType, dataElement);
 
                 if (contextProps.onGetUnsavedAttributeValues) {
                     const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElement.id);

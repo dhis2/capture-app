@@ -138,8 +138,13 @@ const useCallbackMainPage = ({
         [navigate, orgUnitId, programId, showAllAccessible],
     );
 
-    const onSetShowAccessible = useCallback(
+    const onNavigateToWorkingList = useCallback(
         () => navigate(`/?${buildUrlQueryString({ programId: programId || '' })}&all`),
+        [navigate, programId],
+    );
+
+    const onNavigateToSearch = useCallback(
+        () => navigate(`/search?${buildUrlQueryString({ programId: programId || '' })}`),
         [navigate, programId],
     );
 
@@ -155,7 +160,8 @@ const useCallbackMainPage = ({
 
     return {
         onChangeTemplate,
-        onSetShowAccessible,
+        onNavigateToWorkingList,
+        onNavigateToSearch,
         onCloseBulkDataEntryPlugin,
         onOpenBulkDataEntryPlugin,
     };
@@ -195,7 +201,13 @@ const MainPageContainer = () => {
         showBulkDataEntryPlugin,
     });
 
-    const { onChangeTemplate, onSetShowAccessible, onCloseBulkDataEntryPlugin, onOpenBulkDataEntryPlugin } =
+    const {
+        onChangeTemplate,
+        onNavigateToWorkingList,
+        onNavigateToSearch,
+        onCloseBulkDataEntryPlugin,
+        onOpenBulkDataEntryPlugin,
+    } =
         useCallbackMainPage({
             orgUnitId,
             programId,
@@ -251,7 +263,8 @@ const MainPageContainer = () => {
                 mainPageStatus={mainPageStatus}
                 trackedEntityTypeId={trackedEntityTypeId}
                 selectedTemplateId={selectedTemplateId}
-                onSetShowAccessible={onSetShowAccessible}
+                onNavigateToWorkingList={onNavigateToWorkingList}
+                onNavigateToSearch={onNavigateToSearch}
                 onChangeTemplate={onChangeTemplate}
                 error={error}
                 ready={ready}

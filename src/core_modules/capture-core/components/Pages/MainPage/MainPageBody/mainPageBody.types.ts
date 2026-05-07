@@ -5,7 +5,8 @@ export type ContainerProps = {
     trackedEntityTypeId?: string;
     displayFrontPageList?: boolean;
     onChangeTemplate?: (selectedTemplateId?: string) => void;
-    setShowAccessible: () => void;
+    onNavigateToWorkingList: () => void;
+    onNavigateToSearch: () => void;
     mainPageStatus: string;
     error: boolean;
     ready: boolean;

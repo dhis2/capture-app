@@ -869,14 +869,14 @@ msgstr "Learn more about Capture app"
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
 
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Or see all records accessible to you in {{program}} "
+msgid "Please select an organisation unit"
+msgstr "Please select an organisation unit"
 
-msgid "Or see all events accessible to you in {{program}}"
-msgstr "Or see all events accessible to you in {{program}}"
+msgid "See working list without organisation unit"
+msgstr "See working list without organisation unit"
 
-msgid "Please select an organisation unit."
-msgstr "Please select an organisation unit."
+msgid "Search for a {{trackedEntityName}}"
+msgstr "Search for a {{trackedEntityName}}"
 
 msgid "Registered events"
 msgstr "Registered events"
@@ -1011,6 +1011,9 @@ msgstr "All accessible"
 
 msgid "Selected"
 msgstr "Selected"
+
+msgid "Please select an organisation unit."
+msgstr "Please select an organisation unit."
 
 msgid "Organisation unit scope"
 msgstr "Organisation unit scope"

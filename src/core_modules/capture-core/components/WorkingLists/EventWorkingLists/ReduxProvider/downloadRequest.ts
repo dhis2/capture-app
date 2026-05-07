@@ -41,7 +41,7 @@ export const computeDownloadRequest = ({
         orgUnitId,
         categories,
         programStageId,
-        [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
+        [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
     };
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
     const queryParams = createApiQueryArgs(rawQueryArgs, mainColumns, categoryCombinationId);
