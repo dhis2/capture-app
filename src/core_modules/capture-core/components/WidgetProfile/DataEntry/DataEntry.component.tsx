@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { NoticeBoxes } from './NoticeBoxes.container';
 import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
+import { ReadOnlyBadge } from '../../ReadOnlyBadge';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
 
 export const DataEntryComponent = ({
@@ -22,13 +23,29 @@ export const DataEntryComponent = ({
     orgUnitId,
     pluginContext,
     readOnly,
+    accessReadOnly,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>
-            {readOnly
-                ? i18n.t('{{trackedEntityName}} details', { trackedEntityName, interpolation: { escapeValue: false } })
-                : i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })
-            }
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+                <span>
+                    {readOnly
+                        ? i18n.t(
+                            '{{trackedEntityName}} profile',
+                            { trackedEntityName, interpolation: { escapeValue: false } },
+                        )
+                        : i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })
+                    }
+                </span>
+                <ReadOnlyBadge
+                    readOnly={Boolean(accessReadOnly)}
+                    label={i18n.t('You only have view access to this {{trackedEntityName}}', {
+                        trackedEntityName,
+                        interpolation: { escapeValue: false },
+                    })}
+                    inlineLabel
+                />
+            </div>
         </ModalTitle>
         <ModalContent>
             {!readOnly && (
@@ -50,6 +67,7 @@ export const DataEntryComponent = ({
                 onGetValidationContext={onGetValidationContext}
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
+                viewMode={readOnly}
             />
             {!readOnly && (
                 <NoticeBoxes

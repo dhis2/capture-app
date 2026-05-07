@@ -22,6 +22,7 @@ export type PlainProps = {
     orgUnitId: string;
     pluginContext?: PluginContext;
     readOnly?: boolean;
+    accessReadOnly?: boolean;
 };
 
 export type Props = {
@@ -41,4 +42,5 @@ export type Props = {
     userRoles: Array<string>;
     trackedEntityName: string;
     readOnly?: boolean;
+    accessReadOnly?: boolean;
 };

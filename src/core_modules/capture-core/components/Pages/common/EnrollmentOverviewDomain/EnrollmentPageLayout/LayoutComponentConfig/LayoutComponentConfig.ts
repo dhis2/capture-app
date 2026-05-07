@@ -1,8 +1,8 @@
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type { Props as TrackedEntityRelationshipProps } from
-    '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps }
+    from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
@@ -39,7 +39,7 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    shouldHideWidget: ({ readOnly }: any) => Boolean(readOnly),
+    shouldHideWidget: ({ programStageWriteAccess }: any) => !programStageWriteAccess,
     getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
@@ -60,7 +60,7 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        readOnly,
+        hideEventStageBadge,
     }: any): StagesAndEventProps => ({
         programId: program.id,
         stages,
@@ -72,13 +72,16 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        readOnly,
+        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
 export const TrackedEntityRelationship: WidgetConfig = {
     Component: TrackedEntityRelationshipsWrapper,
     shouldHideWidget: ({ addRelationShipContainerElement }: any) => !addRelationShipContainerElement,
+    getCustomSettings: ({ readOnlyMode }: any) => ({
+        readOnlyMode,
+    }),
     getProps: ({
         program,
         orgUnitId,
@@ -86,7 +89,10 @@ export const TrackedEntityRelationship: WidgetConfig = {
         toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly,
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+        hideEventStageBadge,
     }: any): TrackedEntityRelationshipProps => ({
         trackedEntityTypeId: program.trackedEntityType.id,
         programId: program.id,
@@ -96,7 +102,9 @@ export const TrackedEntityRelationship: WidgetConfig = {
         onCloseAddRelationship: toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly,
+        readOnly: !trackedEntityTypeWriteAccess,
+        hideButton: !programWriteAccess && !trackedEntityTypeWriteAccess && !programStageWriteAccess,
+        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
@@ -134,8 +142,8 @@ export const IndicatorWidget: WidgetConfig = {
 
 export const EnrollmentNote: WidgetConfig = {
     Component: WidgetEnrollmentNote,
-    getProps: ({ readOnly }: any) => ({
-        readOnly,
+    getProps: ({ hideEventStageBadge }: any) => ({
+        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
@@ -207,6 +215,7 @@ export const EnrollmentWidget: WidgetConfig = {
         onUpdateEnrollmentStatusError,
         onEnrollmentError,
         onAccessLostFromTransfer,
+        hideEventStageBadge,
     }: any): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,
@@ -221,6 +230,7 @@ export const EnrollmentWidget: WidgetConfig = {
         externalData: { status: widgetEnrollmentStatus, events },
         onError: onEnrollmentError,
         onAccessLostFromTransfer,
+        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
@@ -244,7 +254,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-        readOnly,
     }: any): WidgetEventEditProps => ({
         programId: program.id,
         stageId,
@@ -263,7 +272,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-        readOnly,
     }),
 };
 
@@ -287,12 +295,11 @@ export const AssigneeWidget: WidgetConfig = {
         eventAccess,
         onSaveAssignee,
         onSaveAssigneeError,
-        readOnly,
     }: any) => ({
         enabled: programStage?.enableUserAssignment || false,
         assignee,
         getSaveContext: getAssignedUserSaveContext,
-        writeAccess: (eventAccess?.write || false) && !readOnly,
+        writeAccess: eventAccess?.write || false,
         onSave: onSaveAssignee,
         onSaveError: onSaveAssigneeError,
     }),
@@ -300,17 +307,19 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId, readOnly }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId, program, stageId, programStage, hideEventStageBadge }: any) => ({
         dataEntryKey,
         dataEntryId,
-        readOnly,
+        programId: program?.id,
+        stageId: stageId ?? programStage?.id,
+        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
 export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
-    shouldHideWidget: ({ currentPage, readOnly }: any) =>
-        currentPage === EnrollmentPageKeys.EDIT_EVENT || Boolean(readOnly),
+    shouldHideWidget: ({ currentPage }: any) =>
+        currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({
         program,
         stageId,

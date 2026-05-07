@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-04T12:26:17.283Z\n"
-"PO-Revision-Date: 2026-05-04T12:26:17.283Z\n"
+"POT-Creation-Date: 2026-05-07T15:17:32.940Z\n"
+"PO-Revision-Date: 2026-05-07T15:17:32.940Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1074,8 +1074,41 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "Read only - You can only view this enrollment"
-msgstr "Read only - You can only view this enrollment"
+msgid "these program stages"
+msgstr "these program stages"
+
+msgid "this program stage"
+msgstr "this program stage"
+
+msgid "program"
+msgstr "program"
+
+msgid "and"
+msgstr "and"
+
+msgid "You only have view access to {{targets}}"
+msgstr "You only have view access to {{targets}}"
+
+msgid "You only have view access to program"
+msgstr "You only have view access to program"
+
+msgid "You only have view access to these program stages"
+msgstr "You only have view access to these program stages"
+
+msgid "You only have view access to this program stage"
+msgstr "You only have view access to this program stage"
+
+msgid "You only have view access to enrollment"
+msgstr "You only have view access to enrollment"
+
+msgid "person"
+msgstr "person"
+
+msgid "View only"
+msgstr "View only"
+
+msgid "You only have view access"
+msgstr "You only have view access"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1368,6 +1401,9 @@ msgstr "An error occurred while transferring ownership"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
 
+msgid "You do not have access to edit this date"
+msgstr "You do not have access to edit this date"
+
 msgid "Latitude"
 msgstr "Latitude"
 
@@ -1593,11 +1629,14 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
-msgid "{{trackedEntityName}} details"
-msgstr "{{trackedEntityName}} details"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profile"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr "You only have view access to this {{trackedEntityName}}"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
@@ -1647,8 +1686,8 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "Show details"
-msgstr "Show details"
+msgid "Show profile"
+msgstr "Show profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1710,9 +1749,6 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "You do not have access to create events in this stage"
-msgstr "You do not have access to create events in this stage"
-
 msgid "This stage can only have one event"
 msgstr "This stage can only have one event"
 
@@ -1727,9 +1763,6 @@ msgstr "An error occurred while deleting the event"
 
 msgid "Are you sure you want to delete this event?"
 msgstr "Are you sure you want to delete this event?"
-
-msgid "You do not have access to perform actions on this event"
-msgstr "You do not have access to perform actions on this event"
 
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"
@@ -1905,6 +1938,9 @@ msgstr "An error occurred while deleting the relationship."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"
+
+msgid "This enrollment doesn't have any relationships"
+msgstr "This enrollment doesn't have any relationships"
 
 msgid "Type"
 msgstr "Type"

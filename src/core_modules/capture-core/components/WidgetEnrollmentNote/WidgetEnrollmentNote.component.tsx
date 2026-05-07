@@ -3,17 +3,25 @@ import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
+import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
 import { useLocationQuery } from '../../utils/routing';
 
-export const WidgetEnrollmentNote = ({ readOnly }: { readOnly: boolean }) => {
+type Props = {
+    hideReadOnlyBadge?: boolean;
+};
+
+export const WidgetEnrollmentNote = ({ hideReadOnlyBadge }: Props) => {
     const dispatch = useDispatch();
-    const { enrollmentId } = useLocationQuery();
+    const { enrollmentId, programId } = useLocationQuery();
+    const { program } = useProgram(programId);
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
         enrollmentDomain?.enrollment?.notes ?? []);
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
     };
+
+    const programWriteAccess = Boolean(program?.access?.data?.write);
 
     return (
         <div data-test="enrollment-note-widget">
@@ -23,7 +31,9 @@ export const WidgetEnrollmentNote = ({ readOnly }: { readOnly: boolean }) => {
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
-                readOnly={readOnly}
+                readOnly={!programWriteAccess}
+                programWriteAccess={programWriteAccess}
+                hideReadOnlyBadge={hideReadOnlyBadge}
             />
         </div>
     );

@@ -9,7 +9,7 @@ type ExtractedProps = {
     onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
     className?: string;
-    readOnly?: boolean;
+    hideReadOnlyBadge?: boolean;
 };
 
 export type Props = ExtractedProps & StageCommonProps;

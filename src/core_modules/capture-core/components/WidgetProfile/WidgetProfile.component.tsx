@@ -110,11 +110,11 @@ const WidgetProfilePlain = ({
     [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const profileButtonLabel = useMemo(() => {
-        if (hasNoAttributes) return null;
-        if (readOnlyMode) return i18n.t('Show details');
+        if (readOnlyMode) return null;
+        if (!isEditable) return i18n.t('Show profile');
         if (isEditable) return i18n.t('Edit');
         return null;
-    }, [hasNoAttributes, isEditable, readOnlyMode]);
+    }, [isEditable, readOnlyMode]);
 
     const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
@@ -262,7 +262,8 @@ const WidgetProfilePlain = ({
                         modalState={modalState}
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
-                        readOnly={readOnlyMode}
+                        readOnly={!isEditable}
+                        accessReadOnly={!trackedEntityTypeAccess?.data?.write}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>

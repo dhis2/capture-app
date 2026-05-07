@@ -62,7 +62,10 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
     userInteractionInProgress,
-    readOnly,
+    programWriteAccess,
+    trackedEntityTypeWriteAccess,
+    programStageWriteAccess,
+    programStageReadAccess,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -136,7 +139,10 @@ export const EnrollmentEditEventPageComponent = ({
             onUpdateOrAddEnrollmentEvents={onUpdateOrAddEnrollmentEvents}
             onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
             onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
-            readOnly={readOnly}
+            programWriteAccess={programWriteAccess}
+            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+            programStageWriteAccess={programStageWriteAccess}
+            programStageReadAccess={programStageReadAccess}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
     </OrgUnitFetcher>

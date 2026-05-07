@@ -42,7 +42,7 @@ import {
     deleteEnrollmentEvent,
     updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
-import { useHideWidgetByRuleLocations } from '../../../../hooks';
+import { useHideWidgetByRuleLocations, useEnrollmentAccess } from '../../../../hooks';
 
 
 export const EnrollmentPageDefault = () => {
@@ -180,9 +180,12 @@ export const EnrollmentPageDefault = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
 
-    const hasProgramWrite = Boolean(program?.access?.data?.write);
-    const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
-    const readOnly = !hasProgramWrite || !hasTETWrite;
+    const {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+        programStageReadAccess,
+    } = useEnrollmentAccess(programId);
 
     if (isLoading) {
         return (
@@ -199,7 +202,10 @@ export const EnrollmentPageDefault = () => {
             pageLayout={pageLayout}
             currentPage={EnrollmentPageKeys.OVERVIEW}
             availableWidgets={WidgetsForEnrollmentPageDefault}
-            readOnly={readOnly}
+            programWriteAccess={programWriteAccess}
+            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+            programStageWriteAccess={programStageWriteAccess}
+            programStageReadAccess={programStageReadAccess}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

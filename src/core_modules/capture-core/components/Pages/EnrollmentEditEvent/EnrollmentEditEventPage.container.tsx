@@ -3,7 +3,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
+import { useEnrollmentAccess, useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
@@ -291,13 +291,16 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
     };
 
+    const {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+        programStageReadAccess,
+    } = useEnrollmentAccess(programId);
+
     if (pageStatus === pageStatuses.LOADING) {
         return <LoadingMaskForPage />;
     }
-
-    const hasProgramWrite = Boolean((program as any)?.access?.data?.write);
-    const hasTETWrite = Boolean((program as any)?.trackedEntityType?.access?.data?.write);
-    const readOnly = !hasProgramWrite || !hasTETWrite;
 
     return (
         <EnrollmentEditEventPageComponent
@@ -350,7 +353,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
             onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
             userInteractionInProgress={userInteractionInProgress}
-            readOnly={readOnly}
+            programWriteAccess={programWriteAccess}
+            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+            programStageWriteAccess={programStageWriteAccess}
+            programStageReadAccess={programStageReadAccess}
         />
     );
 };

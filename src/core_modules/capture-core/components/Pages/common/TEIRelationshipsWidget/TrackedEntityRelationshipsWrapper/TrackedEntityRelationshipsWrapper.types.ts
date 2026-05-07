@@ -10,4 +10,8 @@ export type Props = {
     onCloseAddRelationship: () => void;
     onLinkedRecordClick: LinkedRecordClick;
     readOnly: boolean;
+    readOnlyMode?: boolean;
+    hideButton?: boolean;
+    accessReadOnly?: boolean;
+    hideReadOnlyBadge?: boolean;
 };

@@ -49,7 +49,10 @@ export type Props = {
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
-    readOnly: boolean;
+    programWriteAccess: boolean;
+    trackedEntityTypeWriteAccess: boolean;
+    programStageWriteAccess: boolean;
+    programStageReadAccess: boolean;
 };
 
 

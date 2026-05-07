@@ -25,6 +25,7 @@ export const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntityRegistration,
     onSelectFindMode,
     readOnly,
+    hideButton,
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
@@ -41,7 +42,7 @@ export const NewTrackedEntityRelationshipPlain = ({
 
     return (
         <div className={classes.container}>
-            {!readOnly && (
+            {!hideButton && !readOnly && (
                 <Button
                     onClick={openAddWizard}
                     small

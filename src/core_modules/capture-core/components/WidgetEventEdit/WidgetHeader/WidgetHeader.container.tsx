@@ -8,9 +8,10 @@ import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
+import { useProgram } from '../../WidgetEnrollment/hooks/useProgram';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -38,6 +39,16 @@ const styles: Readonly<any> = {
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
+const useLiveEventAccess = (programId: string, stageId: string) => {
+    const cachedEventAccess = getProgramEventAccess(programId, stageId);
+    const { program } = useProgram(programId);
+    const liveStage = program?.programStages?.find((s: any) => s.id === stageId);
+    const liveStageWriteAccess = liveStage ? Boolean(liveStage?.access?.data?.write) : undefined;
+    return liveStageWriteAccess === undefined
+        ? cachedEventAccess
+        : { ...cachedEventAccess, write: liveStageWriteAccess };
+};
+
 const WidgetHeaderPlain = ({
     eventStatus,
     stage,
@@ -46,7 +57,6 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     occurredAt,
-    readOnly,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -55,6 +65,7 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
+    const eventAccess = useLiveEventAccess(programId, stage.id);
     const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
@@ -62,10 +73,13 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = blockEntryForm || !isWithinValidPeriod;
+    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
     const tooltipContent = useMemo(() => {
         if (blockEntryForm) {
             return i18n.t('The event cannot be edited after it has been completed');
+        }
+        if (!eventAccess?.write) {
+            return i18n.t('You don\'t have access to edit this event');
         }
         if (!isWithinValidPeriod) {
             return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
@@ -74,7 +88,7 @@ const WidgetHeaderPlain = ({
             });
         }
         return '';
-    }, [blockEntryForm, isWithinValidPeriod, occurredAt]);
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
 
     const { programCategory } = useCategoryCombinations(programId);
 
@@ -97,7 +111,7 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {!readOnly && (
+                        {eventAccess?.write && (
                             <ConditionalTooltip
                                 content={tooltipContent}
                                 enabled={disableEdit}
