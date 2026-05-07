@@ -63,7 +63,8 @@ const MainPageBodyPlain = ({
     displayFrontPageList,
     selectedTemplateId,
     mainPageStatus,
-    setShowAccessible,
+    onNavigateToWorkingList,
+    onNavigateToSearch,
     classes,
     onChangeTemplate,
     onCloseBulkDataEntryPlugin,
@@ -99,7 +100,11 @@ const MainPageBodyPlain = ({
                         <NoSelectionsInfoBox />
                     )}
                     {mainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
-                        <WithoutOrgUnitSelectedMessage programId={programId} setShowAccessible={setShowAccessible} />
+                        <WithoutOrgUnitSelectedMessage
+                            programId={programId}
+                            onNavigateToWorkingList={onNavigateToWorkingList}
+                            onNavigateToSearch={onNavigateToSearch}
+                        />
                     )}
                     {mainPageStatus === MainPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                         <InvalidCategoryCombinationForOrgUnitMessage />
