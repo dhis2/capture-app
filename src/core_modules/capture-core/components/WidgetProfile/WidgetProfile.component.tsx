@@ -275,6 +275,7 @@ const WidgetProfilePlain = ({
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
                         readOnly={!isEditable}
+                        accessReadOnly={!trackedEntityTypeAccess?.data?.write}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>

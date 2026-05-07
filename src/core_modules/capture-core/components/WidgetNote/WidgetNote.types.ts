@@ -16,4 +16,5 @@ export type Props = {
     trackedEntityTypeWriteAccess?: boolean;
     programStageWriteAccess?: boolean;
     trackedEntityName?: string;
+    hideReadOnlyBadge?: boolean;
 };

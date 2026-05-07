@@ -14,6 +14,7 @@ import {
 } from './hooks';
 import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
+import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
 import type { RequestEvent } from '../DataEntries';
 
 const styles = {
@@ -49,6 +50,9 @@ export const WidgetRelatedStagesPlain = ({
     const [isLinking, setIsLinking] = useState(false);
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus } = useRelatedStages({ programStageId, programId });
+    const { program } = useProgram(programId);
+    const liveStage = program?.programStages?.find((s: any) => s.id === programStageId);
+    const stageWriteAccess = Boolean(liveStage?.access?.data?.write);
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
@@ -103,6 +107,10 @@ export const WidgetRelatedStagesPlain = ({
     ]);
 
     if (isLinkedEventLoading || linkedEvent || currentRelatedStagesStatus !== relatedStageStatus.LINKABLE) {
+        return null;
+    }
+
+    if (program && !stageWriteAccess) {
         return null;
     }
 

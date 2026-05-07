@@ -63,6 +63,7 @@ export type PlainProps = {
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
     programStageWriteAccess: boolean;
+    programStageReadAccess: boolean;
 };
 
 export type Props = {

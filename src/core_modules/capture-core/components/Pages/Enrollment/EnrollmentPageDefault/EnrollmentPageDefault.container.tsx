@@ -184,6 +184,7 @@ export const EnrollmentPageDefault = () => {
         programWriteAccess,
         trackedEntityTypeWriteAccess,
         programStageWriteAccess,
+        programStageReadAccess,
     } = useEnrollmentAccess(programId);
 
     if (isLoading) {
@@ -204,6 +205,7 @@ export const EnrollmentPageDefault = () => {
             programWriteAccess={programWriteAccess}
             trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
             programStageWriteAccess={programStageWriteAccess}
+            programStageReadAccess={programStageReadAccess}
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

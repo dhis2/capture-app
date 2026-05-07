@@ -11,6 +11,7 @@ type Result = {
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
     programStageWriteAccess: boolean;
+    programStageReadAccess: boolean;
     isLoading: boolean;
     error?: any;
 };
@@ -38,6 +39,9 @@ export const useEnrollmentAccess = (programId?: string): Result => {
         trackedEntityTypeWriteAccess: Boolean(program?.trackedEntityType?.access?.data?.write),
         programStageWriteAccess: Boolean(
             program?.programStages?.some(stage => stage?.access?.data?.write),
+        ),
+        programStageReadAccess: Boolean(
+            program?.programStages?.some(stage => stage?.access?.data?.read),
         ),
         isLoading: loading,
         error,

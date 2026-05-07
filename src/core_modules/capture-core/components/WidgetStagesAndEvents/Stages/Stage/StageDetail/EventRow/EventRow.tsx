@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     DataTableCell,
@@ -8,7 +7,6 @@ import {
     IconMore16,
 } from '@dhis2/ui';
 import { OverflowButton } from '../../../../../Buttons';
-import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton } from './DeleteActionButton';
 import { SkipAction } from './SkipAction';
@@ -61,11 +59,8 @@ const EventRowPlain = ({
             {cells}
 
             <DataTableCell>
-                <>
-                    <ConditionalTooltip
-                        content={i18n.t('You do not have access to perform actions on this event')}
-                        enabled={!stageWriteAccess}
-                    >
+                {stageWriteAccess && (
+                    <>
                         <OverflowButton
                             open={actionsOpen}
                             onClick={() => setActionsOpen(prev => !prev)}
@@ -73,7 +68,7 @@ const EventRowPlain = ({
                             secondary
                             small
                             icon={<IconMore16 />}
-                            disabled={pendingApiResponse || !stageWriteAccess}
+                            disabled={pendingApiResponse}
                             component={(
                                 <FlyoutMenu
                                     dense
@@ -99,21 +94,21 @@ const EventRowPlain = ({
                                 </FlyoutMenu>
                             )}
                         />
-                    </ConditionalTooltip>
 
-                    {deleteModalOpen && (
-                        <DeleteActionModal
-                            eventId={id}
-                            pendingApiResponse={pendingApiResponse}
-                            teiId={teiId}
-                            programId={programId}
-                            enrollmentId={enrollmentId}
-                            onDeleteEvent={onDeleteEvent}
-                            onRollbackDeleteEvent={onRollbackDeleteEvent}
-                            setDeleteModalOpen={setDeleteModalOpen}
-                        />
-                    )}
-                </>
+                        {deleteModalOpen && (
+                            <DeleteActionModal
+                                eventId={id}
+                                pendingApiResponse={pendingApiResponse}
+                                teiId={teiId}
+                                programId={programId}
+                                enrollmentId={enrollmentId}
+                                onDeleteEvent={onDeleteEvent}
+                                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                setDeleteModalOpen={setDeleteModalOpen}
+                            />
+                        )}
+                    </>
+                )}
             </DataTableCell>
         </DataTableRow>
     );

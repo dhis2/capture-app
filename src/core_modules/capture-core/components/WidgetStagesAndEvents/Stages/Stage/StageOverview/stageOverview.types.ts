@@ -6,4 +6,6 @@ export type Props = {
     events: Array<ApiEnrollmentEvent>;
     icon?: Icon;
     description?: string | null;
+    stageWriteAccess?: boolean;
+    hideReadOnlyBadge?: boolean;
 };

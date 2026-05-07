@@ -52,6 +52,7 @@ export type Props = {
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
     programStageWriteAccess: boolean;
+    programStageReadAccess: boolean;
 };
 
 

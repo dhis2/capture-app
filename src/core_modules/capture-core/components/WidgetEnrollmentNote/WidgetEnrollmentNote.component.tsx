@@ -6,7 +6,11 @@ import { WidgetNote } from '../WidgetNote';
 import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
 import { useLocationQuery } from '../../utils/routing';
 
-export const WidgetEnrollmentNote = () => {
+type Props = {
+    hideReadOnlyBadge?: boolean;
+};
+
+export const WidgetEnrollmentNote = ({ hideReadOnlyBadge }: Props) => {
     const dispatch = useDispatch();
     const { enrollmentId, programId } = useLocationQuery();
     const { program } = useProgram(programId);
@@ -29,6 +33,7 @@ export const WidgetEnrollmentNote = () => {
                 onAddNote={onAddNote}
                 readOnly={!programWriteAccess}
                 programWriteAccess={programWriteAccess}
+                hideReadOnlyBadge={hideReadOnlyBadge}
             />
         </div>
     );

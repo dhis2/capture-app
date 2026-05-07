@@ -10,6 +10,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
+import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
@@ -90,7 +91,9 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
     return null;
 };
 
-export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props & WithStyles<typeof styles>) => {
+export const StageOverviewPlain = ({
+    title, icon, description, events, stageWriteAccess = true, hideReadOnlyBadge = false, classes,
+}: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
@@ -154,6 +157,12 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     </div>
                     {getLastUpdatedAt(events, fromServerDate)}
                 </div>}
+                {!hideReadOnlyBadge && (
+                    <ReadOnlyBadge
+                        readOnly={!stageWriteAccess}
+                        programStageWriteAccess={stageWriteAccess}
+                    />
+                )}
             </div>
         </div>);
 };

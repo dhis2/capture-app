@@ -9,6 +9,7 @@ type ExtractedProps = {
     repeatable?: boolean;
     enableUserAssignment?: boolean;
     stageId: string;
+    stageWriteAccess?: boolean;
     onCreateNew: (stageId: string) => void;
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;

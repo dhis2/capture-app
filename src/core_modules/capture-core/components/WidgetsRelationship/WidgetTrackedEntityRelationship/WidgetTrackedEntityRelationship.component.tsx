@@ -22,6 +22,8 @@ export const WidgetTrackedEntityRelationship = ({
     renderTrackedEntityRegistration,
     readOnly,
     hideButton,
+    accessReadOnly,
+    hideReadOnlyBadge,
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
@@ -63,6 +65,8 @@ export const WidgetTrackedEntityRelationship = ({
             sourceId={teiId}
             onLinkedRecordClick={onLinkedRecordClick}
             readOnly={readOnly}
+            accessReadOnly={accessReadOnly}
+            hideReadOnlyBadge={hideReadOnlyBadge}
         >
             <NewTrackedEntityRelationship
                 teiId={teiId}

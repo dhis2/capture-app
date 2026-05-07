@@ -295,6 +295,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         programWriteAccess,
         trackedEntityTypeWriteAccess,
         programStageWriteAccess,
+        programStageReadAccess,
     } = useEnrollmentAccess(programId);
 
     if (pageStatus === pageStatuses.LOADING) {
@@ -355,6 +356,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             programWriteAccess={programWriteAccess}
             trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
             programStageWriteAccess={programStageWriteAccess}
+            programStageReadAccess={programStageReadAccess}
         />
     );
 };

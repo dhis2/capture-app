@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-06T12:39:03.039Z\n"
-"PO-Revision-Date: 2026-05-06T12:39:03.039Z\n"
+"POT-Creation-Date: 2026-05-07T15:17:32.940Z\n"
+"PO-Revision-Date: 2026-05-07T15:17:32.940Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1071,11 +1071,14 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "program"
-msgstr "program"
+msgid "these program stages"
+msgstr "these program stages"
 
 msgid "this program stage"
 msgstr "this program stage"
+
+msgid "program"
+msgstr "program"
 
 msgid "and"
 msgstr "and"
@@ -1086,14 +1089,23 @@ msgstr "You only have view access to {{targets}}"
 msgid "You only have view access to program"
 msgstr "You only have view access to program"
 
+msgid "You only have view access to these program stages"
+msgstr "You only have view access to these program stages"
+
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
+
+msgid "You only have view access to enrollment"
+msgstr "You only have view access to enrollment"
 
 msgid "person"
 msgstr "person"
 
-msgid "Read only"
-msgstr "Read only"
+msgid "View only"
+msgstr "View only"
+
+msgid "You only have view access"
+msgstr "You only have view access"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1620,8 +1632,8 @@ msgstr "{{trackedEntityName}} profile"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
-msgid "Read only - {{trackedEntityName}} profile"
-msgstr "Read only - {{trackedEntityName}} profile"
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr "You only have view access to this {{trackedEntityName}}"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
@@ -1734,9 +1746,6 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "You do not have access to create events in this stage"
-msgstr "You do not have access to create events in this stage"
-
 msgid "This stage can only have one event"
 msgstr "This stage can only have one event"
 
@@ -1751,9 +1760,6 @@ msgstr "An error occurred while deleting the event"
 
 msgid "Are you sure you want to delete this event?"
 msgstr "Are you sure you want to delete this event?"
-
-msgid "You do not have access to perform actions on this event"
-msgstr "You do not have access to perform actions on this event"
 
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"
@@ -1896,9 +1902,6 @@ msgstr "Missing implementation step"
 
 msgid "Go back without saving relationship"
 msgstr "Go back without saving relationship"
-
-msgid "You do not have access to add relationships"
-msgstr "You do not have access to add relationships"
 
 msgid "New Relationship"
 msgstr "New Relationship"

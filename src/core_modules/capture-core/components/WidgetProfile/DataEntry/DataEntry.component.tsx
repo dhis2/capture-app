@@ -23,6 +23,7 @@ export const DataEntryComponent = ({
     orgUnitId,
     pluginContext,
     readOnly,
+    accessReadOnly,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>
@@ -37,11 +38,12 @@ export const DataEntryComponent = ({
                     }
                 </span>
                 <ReadOnlyBadge
-                    readOnly={Boolean(readOnly)}
-                    label={i18n.t('Read only - {{trackedEntityName}} profile', {
+                    readOnly={Boolean(accessReadOnly)}
+                    label={i18n.t('You only have view access to this {{trackedEntityName}}', {
                         trackedEntityName,
                         interpolation: { escapeValue: false },
                     })}
+                    inlineLabel
                 />
             </div>
         </ModalTitle>

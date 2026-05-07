@@ -3,7 +3,6 @@ import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
-import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
@@ -43,20 +42,14 @@ export const NewTrackedEntityRelationshipPlain = ({
 
     return (
         <div className={classes.container}>
-            {!hideButton && (
-                <ConditionalTooltip
-                    content={i18n.t('You do not have access to add relationships')}
-                    enabled={Boolean(readOnly)}
+            {!hideButton && !readOnly && (
+                <Button
+                    onClick={openAddWizard}
+                    small
+                    secondary
                 >
-                    <Button
-                        onClick={openAddWizard}
-                        small
-                        secondary
-                        disabled={Boolean(readOnly)}
-                    >
-                        {i18n.t('New Relationship')}
-                    </Button>
-                </ConditionalTooltip>
+                    {i18n.t('New Relationship')}
+                </Button>
             )}
 
             {

@@ -4,6 +4,7 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { Widget, WidgetHeaderCountBadge } from '../../../Widget';
+import { ReadOnlyBadge } from '../../../ReadOnlyBadge';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props } from './relationshipsWidget.types';
@@ -29,6 +30,8 @@ const RelationshipsWidgetPlain = ({
     onLinkedRecordClick,
     children,
     readOnly,
+    accessReadOnly,
+    hideReadOnlyBadge,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
@@ -58,10 +61,15 @@ const RelationshipsWidgetPlain = ({
         >
             <Widget
                 header={(
-                    <div className={classes.header} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div className={classes.header} style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
                         <span>{title}</span>
                         {(relationships?.length ?? 0) > 0 && (
                             <WidgetHeaderCountBadge count={relationships!.length} />
+                        )}
+                        {!hideReadOnlyBadge && (
+                            <div style={{ marginInlineStart: 'auto' }}>
+                                <ReadOnlyBadge readOnly={Boolean(accessReadOnly)} />
+                            </div>
                         )}
                     </div>
                 )}

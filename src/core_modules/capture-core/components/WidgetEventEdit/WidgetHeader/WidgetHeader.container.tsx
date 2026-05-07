@@ -8,6 +8,7 @@ import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
+import { useProgram } from '../../WidgetEnrollment/hooks/useProgram';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
@@ -38,6 +39,16 @@ const styles: Readonly<any> = {
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
+const useLiveEventAccess = (programId: string, stageId: string) => {
+    const cachedEventAccess = getProgramEventAccess(programId, stageId);
+    const { program } = useProgram(programId);
+    const liveStage = program?.programStages?.find((s: any) => s.id === stageId);
+    const liveStageWriteAccess = liveStage ? Boolean(liveStage?.access?.data?.write) : undefined;
+    return liveStageWriteAccess === undefined
+        ? cachedEventAccess
+        : { ...cachedEventAccess, write: liveStageWriteAccess };
+};
+
 const WidgetHeaderPlain = ({
     eventStatus,
     stage,
@@ -54,7 +65,7 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
-    const eventAccess = getProgramEventAccess(programId, stage.id);
+    const eventAccess = useLiveEventAccess(programId, stage.id);
     const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
@@ -100,22 +111,24 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        <ConditionalTooltip
-                            content={tooltipContent}
-                            enabled={disableEdit}
-                            wrapperClassName={classes.tooltip}
-                        >
-                            <Button
-                                small
-                                secondary
-                                disabled={disableEdit}
-                                icon={<IconEdit24 />}
-                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
-                                data-test="widget-enrollment-event-edit-button"
+                        {eventAccess?.write && (
+                            <ConditionalTooltip
+                                content={tooltipContent}
+                                enabled={disableEdit}
+                                wrapperClassName={classes.tooltip}
                             >
-                                {i18n.t('Edit event')}
-                            </Button>
-                        </ConditionalTooltip>
+                                <Button
+                                    small
+                                    secondary
+                                    disabled={disableEdit}
+                                    icon={<IconEdit24 />}
+                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
+                                    data-test="widget-enrollment-event-edit-button"
+                                >
+                                    {i18n.t('Edit event')}
+                                </Button>
+                            </ConditionalTooltip>
+                        )}
 
                         {supportsChangelog && (
                             <OverflowButton

@@ -13,6 +13,7 @@ export const WidgetNote = ({
     trackedEntityTypeWriteAccess,
     programStageWriteAccess,
     trackedEntityName,
+    hideReadOnlyBadge,
     ...passOnProps
 }: Props) => {
     const [open, setOpenStatus] = useState<boolean>(true);
@@ -22,15 +23,17 @@ export const WidgetNote = ({
             header={<div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
                 <span>{title}</span>
                 {notes.length > 0 && <WidgetHeaderCountBadge count={notes.length} />}
-                <div style={{ marginInlineStart: 'auto' }}>
-                    <ReadOnlyBadge
-                        readOnly={readOnly}
-                        programWriteAccess={programWriteAccess}
-                        trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
-                        programStageWriteAccess={programStageWriteAccess}
-                        trackedEntityName={trackedEntityName}
-                    />
-                </div>
+                {!hideReadOnlyBadge && (
+                    <div style={{ marginInlineStart: 'auto' }}>
+                        <ReadOnlyBadge
+                            readOnly={readOnly}
+                            programWriteAccess={programWriteAccess}
+                            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
+                            programStageWriteAccess={programStageWriteAccess}
+                            trackedEntityName={trackedEntityName}
+                        />
+                    </div>
+                )}
             </div>}
             onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
             onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}

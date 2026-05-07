@@ -33,6 +33,7 @@ export const DataEntry = ({
     trackedEntityName,
     dataEntryFormConfig,
     readOnly,
+    accessReadOnly,
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
@@ -165,6 +166,7 @@ export const DataEntry = ({
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
                 readOnly={readOnly}
+                accessReadOnly={accessReadOnly}
             />
         )
     );
