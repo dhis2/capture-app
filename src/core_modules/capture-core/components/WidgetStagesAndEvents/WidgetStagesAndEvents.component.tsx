@@ -1,19 +1,34 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { spacersNum } from '@dhis2/ui';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
 import type { Props } from './stagesAndEvents.types';
 
-export const WidgetStagesAndEvents = ({
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: `${spacersNum.dp8}px`,
+        flex: 1,
+    },
+    badge: {
+        marginInlineStart: 'auto',
+    },
+};
+
+const WidgetStagesAndEventsPlain = ({
+    classes,
     className,
     stages,
     events,
     programId,
     hideReadOnlyBadge,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { program } = useProgram(programId);
     const stageWriteAccessById = useMemo(() => {
@@ -40,10 +55,10 @@ export const WidgetStagesAndEvents = ({
         >
             <Widget
                 header={
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                    <div className={classes.header}>
                         <span>{i18n.t('Stages and Events')}</span>
                         {!hideReadOnlyBadge && (
-                            <div style={{ marginInlineStart: 'auto' }}>
+                            <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     readOnly={anyStageReadAccess && !anyStageWriteAccess}
                                     programStageWriteAccess={anyStageWriteAccess}
@@ -72,3 +87,5 @@ export const WidgetStagesAndEvents = ({
         </div>
     );
 };
+
+export const WidgetStagesAndEvents = withStyles(styles)(WidgetStagesAndEventsPlain);

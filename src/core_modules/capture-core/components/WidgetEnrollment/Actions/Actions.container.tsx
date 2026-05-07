@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
 import { useUpdateEnrollment, useDeleteEnrollment } from '../dataMutation/dataMutation';
@@ -21,13 +21,6 @@ export const Actions = ({
     const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError, onSuccess);
     const { deleteMutation, deleteLoading } = useDeleteEnrollment(onDelete, onError, onSuccess);
     const { hasAuthority } = useAuthorities({ authorities: ['F_ENROLLMENT_CASCADE_DELETE'] });
-
-    useEffect(() => {
-        const yn = (v?: boolean) => (v ? 'Yes' : 'No');
-        // eslint-disable-next-line no-console
-        console.log(`Cascade delete enrollment: ${yn(hasAuthority)}`);
-    }, [hasAuthority]);
-
     const { updateEnrollmentOwnership, isTransferLoading } = useUpdateOwnership({
         teiId: enrollment.trackedEntity,
         programId: enrollment.program,
