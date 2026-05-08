@@ -107,8 +107,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const { canWrite } = useStageAccess(stageId);
-    const stageWriteAccess = canWrite ?? stage?.access?.data?.write;
+    const { canWrite: stageWriteAccess } = useStageAccess({ id: stageId, access: stage?.access });
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);

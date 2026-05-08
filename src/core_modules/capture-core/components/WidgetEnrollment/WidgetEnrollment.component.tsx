@@ -14,7 +14,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
-import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useWidgetEnrollmentAccess } from './useWidgetEnrollmentAccess';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
@@ -55,10 +55,6 @@ const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
-const computeEnrollmentReadOnly = (
-    readOnlyMode: boolean,
-    enrollmentAccessReadOnly: boolean,
-) => readOnlyMode || enrollmentAccessReadOnly;
 
 const WidgetEnrollmentPlain = ({
     classes,
@@ -86,11 +82,10 @@ const WidgetEnrollmentPlain = ({
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
     const {
+        readOnly: enrollmentReadOnly,
+        showBadge,
         programWriteAccess,
-        hideWidgetBadge,
-        enrollmentAccessReadOnly,
-    } = useEnrollmentAccessContext();
-    const enrollmentReadOnly = computeEnrollmentReadOnly(readOnlyMode, enrollmentAccessReadOnly);
+    } = useWidgetEnrollmentAccess(readOnlyMode);
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
@@ -109,7 +104,7 @@ const WidgetEnrollmentPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>{i18n.t('Enrollment')}</span>
-                        {!hideWidgetBadge && (
+                        {showBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programWriteAccess={programWriteAccess}

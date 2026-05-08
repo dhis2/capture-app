@@ -33,8 +33,7 @@ export const StagePlain = ({
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
     const hideProgramStage = preventAddingNewEvents && events.length === 0;
-    const { canWrite } = useStageAccess(id);
-    const effectiveStageWriteAccess = canWrite ?? stage.dataAccess.write;
+    const { canWrite: effectiveStageWriteAccess } = useStageAccess(stage);
 
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);

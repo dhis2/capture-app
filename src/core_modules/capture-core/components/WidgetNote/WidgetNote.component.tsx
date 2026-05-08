@@ -3,7 +3,7 @@ import { spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget, WidgetHeaderCountBadge } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
-import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useWidgetNoteAccess } from './useWidgetNoteAccess';
 import type { Props } from './WidgetNote.types';
 import { NoteSection } from './NoteSection/NoteSection';
 
@@ -23,29 +23,29 @@ const WidgetNotePlain = ({
     classes,
     title,
     notes,
+    scope,
     onAddNote,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState<boolean>(true);
     const {
-        isEventPage,
-        currentStageWriteAccess,
+        readOnly,
+        showBadge,
         programWriteAccess,
+        programStageWriteAccess,
         trackedEntityTypeName,
-        hideWidgetBadge,
-    } = useEnrollmentAccessContext();
-    const readOnly = isEventPage ? !currentStageWriteAccess : !programWriteAccess;
+    } = useWidgetNoteAccess(scope);
 
     return (
         <Widget
             header={<div className={classes.header}>
                 <span>{title}</span>
                 {notes.length > 0 && <WidgetHeaderCountBadge count={notes.length} />}
-                {!hideWidgetBadge && (
+                {showBadge && (
                     <div className={classes.badge}>
                         <ReadOnlyBadge
-                            programWriteAccess={isEventPage ? true : programWriteAccess}
-                            programStageWriteAccess={isEventPage ? currentStageWriteAccess : true}
+                            programWriteAccess={programWriteAccess}
+                            programStageWriteAccess={programStageWriteAccess}
                             trackedEntityName={trackedEntityTypeName}
                         />
                     </div>

@@ -3,12 +3,11 @@ import type { TrackerProgram } from '../../../../../metaData';
 import type { Access } from '../../../../../metaData/Access';
 
 export type StageAccess = {
-    canWrite?: boolean;
-    canRead?: boolean;
+    canWrite: boolean;
+    canRead: boolean;
 };
 
 export type EnrollmentAccessContextValue = {
-    // Raw — kept for the rare case a consumer needs the underlying flag.
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
     anyStageWriteAccess: boolean;
@@ -21,15 +20,6 @@ export type EnrollmentAccessContextValue = {
     isEventPage: boolean;
     multipleStages: boolean;
     allWriteAccessMissing: boolean;
-    hideWidgetBadge: boolean;
-
-    // Semantic — what widgets should consume. Each is an "access read-only" flag,
-    // separate from per-instance `readOnlyMode` (a layout/UX concern).
-    enrollmentAccessReadOnly: boolean;
-    notesAccessReadOnly: boolean;
-    relationshipsAccessReadOnly: boolean;
-    hideRelationshipNewButton: boolean;
-    quickActionsHidden: boolean;
 };
 
 // Fail-open default for renders outside a provider (tests, plugin contexts).
@@ -44,12 +34,6 @@ const fallback: EnrollmentAccessContextValue = {
     isEventPage: false,
     multipleStages: false,
     allWriteAccessMissing: false,
-    hideWidgetBadge: false,
-    enrollmentAccessReadOnly: false,
-    notesAccessReadOnly: false,
-    relationshipsAccessReadOnly: false,
-    hideRelationshipNewButton: false,
-    quickActionsHidden: false,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
@@ -97,12 +81,6 @@ export const EnrollmentAccessProvider = ({ program, currentStageId, children }: 
             isEventPage,
             multipleStages: program.stages.size > 1,
             allWriteAccessMissing,
-            hideWidgetBadge: isEventPage || allWriteAccessMissing,
-            enrollmentAccessReadOnly: !programWriteAccess,
-            notesAccessReadOnly: isEventPage ? !currentStageWriteAccess : !programWriteAccess,
-            relationshipsAccessReadOnly: !trackedEntityTypeWriteAccess,
-            hideRelationshipNewButton: !trackedEntityTypeWriteAccess || allWriteAccessMissing,
-            quickActionsHidden: !anyStageWriteAccess,
         };
     }, [program, currentStageId]);
 
@@ -111,13 +89,30 @@ export const EnrollmentAccessProvider = ({ program, currentStageId, children }: 
 
 export const useEnrollmentAccessContext = (): EnrollmentAccessContextValue => useContext(Context);
 
-export const useStageAccess = (stageId?: string): StageAccess => {
+// Resolves a stage's effective access. Falls back to the stage's own access
+// data when the provider has no entry (plugin/test renders).
+export const useStageAccess = (stage?: {
+    id: string;
+    access?: { data?: { write?: boolean; read?: boolean } };
+    dataAccess?: { write?: boolean; read?: boolean };
+}): StageAccess => {
     const { stageWriteAccessById, stageReadAccessById } = useContext(Context);
     return useMemo(() => {
-        if (!stageId) return {};
+        if (!stage) return { canWrite: true, canRead: true };
+        const fromContextWrite = stageWriteAccessById[stage.id];
+        const fromContextRead = stageReadAccessById[stage.id];
         return {
-            canWrite: stageWriteAccessById[stageId],
-            canRead: stageReadAccessById[stageId],
+            canWrite: fromContextWrite ?? Boolean(stage.access?.data?.write ?? stage.dataAccess?.write),
+            canRead: fromContextRead ?? Boolean(stage.access?.data?.read ?? stage.dataAccess?.read),
         };
-    }, [stageId, stageWriteAccessById, stageReadAccessById]);
+    }, [stage, stageWriteAccessById, stageReadAccessById]);
+};
+
+// Page-level coordination: widget-level access badges are suppressed on the
+// event page (where the page-level badge takes over) and when no write
+// access is available anywhere (where the page-level "all missing" badge
+// covers everything).
+export const useShouldShowWidgetAccessBadge = (): boolean => {
+    const { isEventPage, allWriteAccessMissing } = useContext(Context);
+    return !isEventPage && !allWriteAccessMissing;
 };

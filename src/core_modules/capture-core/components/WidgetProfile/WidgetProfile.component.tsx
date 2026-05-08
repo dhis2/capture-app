@@ -91,10 +91,10 @@ const WidgetProfilePlain = ({
         error: trackedEntityInstancesError,
         trackedEntity,
         trackedEntityInstanceAttributes,
-        trackedEntityTypeName,
-        trackedEntityTypeAccess,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
+    const trackedEntityTypeAccess = program?.trackedEntityType?.access;
+    const trackedEntityTypeName = program?.trackedEntityType?.displayName;
     const {
         loading: userRolesLoading,
         error: userRolesError,

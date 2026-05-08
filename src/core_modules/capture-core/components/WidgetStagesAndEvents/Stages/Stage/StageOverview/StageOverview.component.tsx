@@ -11,7 +11,10 @@ import moment from 'moment';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
-import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import {
+    useEnrollmentAccessContext,
+    useShouldShowWidgetAccessBadge,
+} from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
@@ -96,8 +99,9 @@ export const StageOverviewPlain = ({
     title, icon, description, events, stageWriteAccess = true, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
-    const { hideWidgetBadge, anyStageWriteAccess } = useEnrollmentAccessContext();
-    const hideStageBadge = hideWidgetBadge || !anyStageWriteAccess;
+    const { anyStageWriteAccess } = useEnrollmentAccessContext();
+    const showWidgetBadge = useShouldShowWidgetAccessBadge();
+    const showStageBadge = showWidgetBadge && anyStageWriteAccess;
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
@@ -160,7 +164,7 @@ export const StageOverviewPlain = ({
                     </div>
                     {getLastUpdatedAt(events, fromServerDate)}
                 </div>}
-                {!hideStageBadge && (
+                {showStageBadge && (
                     <ReadOnlyBadge
                         programStageWriteAccess={stageWriteAccess}
                     />

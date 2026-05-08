@@ -5,7 +5,10 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
-import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import {
+    useEnrollmentAccessContext,
+    useShouldShowWidgetAccessBadge,
+} from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -30,11 +33,11 @@ const WidgetStagesAndEventsPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const {
-        hideWidgetBadge,
         anyStageWriteAccess,
         anyStageReadAccess,
         multipleStages,
     } = useEnrollmentAccessContext();
+    const showBadge = useShouldShowWidgetAccessBadge();
 
     return (
         <div
@@ -45,7 +48,7 @@ const WidgetStagesAndEventsPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>{i18n.t('Stages and Events')}</span>
-                        {!hideWidgetBadge && (
+                        {showBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
