@@ -180,6 +180,7 @@ const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
+                            readOnly={isReadOnly}
                             programDataWriteAccess={programDataWriteAccess}
                             tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
