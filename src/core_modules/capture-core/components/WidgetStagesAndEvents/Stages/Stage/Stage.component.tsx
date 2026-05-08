@@ -6,7 +6,7 @@ import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
 import { StageDetail } from './StageDetail/StageDetail.component';
 import { StageCreateNewButton } from './StageCreateNewButton';
-import { useStageAccess } from '../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useEnrollmentAccessContext } from '../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const styles = {
     overview: {
@@ -33,7 +33,8 @@ export const StagePlain = ({
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
     const hideProgramStage = preventAddingNewEvents && events.length === 0;
-    const { canWrite: effectiveStageWriteAccess } = useStageAccess(stage);
+    const { stageWriteAccessById } = useEnrollmentAccessContext();
+    const effectiveStageWriteAccess = stageWriteAccessById[stage.id] ?? stage.dataAccess.write;
 
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);

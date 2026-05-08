@@ -88,22 +88,3 @@ export const EnrollmentAccessProvider = ({ program, currentStageId, children }: 
 };
 
 export const useEnrollmentAccessContext = (): EnrollmentAccessContextValue => useContext(Context);
-
-// Resolves a stage's effective access. Falls back to the stage's own access
-// data when the provider has no entry (plugin/test renders).
-export const useStageAccess = (stage?: {
-    id: string;
-    access?: { data?: { write?: boolean; read?: boolean } };
-    dataAccess?: { write?: boolean; read?: boolean };
-}): { canWrite: boolean; canRead: boolean } => {
-    const { stageWriteAccessById, stageReadAccessById } = useContext(Context);
-    return useMemo(() => {
-        if (!stage) return { canWrite: true, canRead: true };
-        const fromContextWrite = stageWriteAccessById[stage.id];
-        const fromContextRead = stageReadAccessById[stage.id];
-        return {
-            canWrite: fromContextWrite ?? Boolean(stage.access?.data?.write ?? stage.dataAccess?.write),
-            canRead: fromContextRead ?? Boolean(stage.access?.data?.read ?? stage.dataAccess?.read),
-        };
-    }, [stage, stageWriteAccessById, stageReadAccessById]);
-};

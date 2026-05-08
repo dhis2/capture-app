@@ -26,7 +26,7 @@ import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
-import { useStageAccess } from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 
 const styles: Readonly<any> = {
@@ -107,7 +107,8 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const { canWrite: stageWriteAccess } = useStageAccess({ id: stageId, access: stage?.access });
+    const { stageWriteAccessById } = useEnrollmentAccessContext();
+    const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);

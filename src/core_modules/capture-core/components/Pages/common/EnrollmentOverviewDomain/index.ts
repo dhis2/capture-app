@@ -24,5 +24,4 @@ export { useRuleEffects } from './useRuleEffects';
 export {
     EnrollmentAccessProvider,
     useEnrollmentAccessContext,
-    useStageAccess,
 } from './EnrollmentAccessContext';
