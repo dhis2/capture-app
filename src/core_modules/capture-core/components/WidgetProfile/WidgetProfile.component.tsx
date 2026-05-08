@@ -235,18 +235,15 @@ const WidgetProfilePlain = ({
 
     return (
         <div data-test="profile-widget">
-            {isEmptyList ? (
-                <Widget noncollapsible header={widgetHeader} />
-            ) : (
-                <Widget
-                    header={widgetHeader}
-                    onOpen={handleOpen}
-                    onClose={handleClose}
-                    open={open}
-                >
-                    {renderProfile()}
-                </Widget>
-            )}
+            <Widget
+                header={widgetHeader}
+                onOpen={handleOpen}
+                onClose={handleClose}
+                open={open}
+                noncollapsible={isEmptyList}
+            >
+                {renderProfile()}
+            </Widget>
             {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
                 <>
                     <DataEntry

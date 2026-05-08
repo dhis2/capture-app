@@ -134,6 +134,7 @@ const ActionsPlain = ({
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
+                readOnly={false}
             />}
             {isOpenTransfer && (
                 <TransferModal
