@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Widget, WidgetHeaderCountBadge } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { Props } from './WidgetNote.types';
 import { NoteSection } from './NoteSection/NoteSection';
 
@@ -8,28 +9,29 @@ export const WidgetNote = ({
     title,
     notes,
     onAddNote,
-    readOnly,
-    programWriteAccess,
-    trackedEntityTypeWriteAccess,
-    programStageWriteAccess,
-    trackedEntityName,
-    hideReadOnlyBadge,
     ...passOnProps
 }: Props) => {
     const [open, setOpenStatus] = useState<boolean>(true);
+    const {
+        isEventPage,
+        currentStageWriteAccess,
+        programWriteAccess,
+        trackedEntityTypeName,
+        hideWidgetBadge,
+    } = useEnrollmentAccessContext();
+    const readOnly = isEventPage ? !currentStageWriteAccess : !programWriteAccess;
 
     return (
         <Widget
             header={<div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
                 <span>{title}</span>
                 {notes.length > 0 && <WidgetHeaderCountBadge count={notes.length} />}
-                {!hideReadOnlyBadge && (
+                {!hideWidgetBadge && (
                     <div style={{ marginInlineStart: 'auto' }}>
                         <ReadOnlyBadge
-                            programWriteAccess={programWriteAccess}
-                            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
-                            programStageWriteAccess={programStageWriteAccess}
-                            trackedEntityName={trackedEntityName}
+                            programWriteAccess={isEventPage ? true : programWriteAccess}
+                            programStageWriteAccess={isEventPage ? currentStageWriteAccess : true}
+                            trackedEntityName={trackedEntityTypeName}
                         />
                     </div>
                 )}

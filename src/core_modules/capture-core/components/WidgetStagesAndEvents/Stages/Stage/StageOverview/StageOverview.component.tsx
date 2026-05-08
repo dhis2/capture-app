@@ -96,8 +96,8 @@ export const StageOverviewPlain = ({
     title, icon, description, events, stageWriteAccess = true, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
-    const { hideWidgetBadge, programStageWriteAccess } = useEnrollmentAccessContext();
-    const hideStageBadge = hideWidgetBadge || !programStageWriteAccess;
+    const { hideWidgetBadge, anyStageWriteAccess } = useEnrollmentAccessContext();
+    const hideStageBadge = hideWidgetBadge || !anyStageWriteAccess;
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;

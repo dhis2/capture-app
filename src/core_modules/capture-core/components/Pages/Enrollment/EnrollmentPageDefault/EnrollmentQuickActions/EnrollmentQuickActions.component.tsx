@@ -29,7 +29,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { programStageWriteAccess } = useEnrollmentAccessContext();
+    const { anyStageWriteAccess } = useEnrollmentAccessContext();
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
@@ -63,7 +63,7 @@ const EnrollmentQuickActionsComponentPlain = ({
 
     const ready: boolean = events !== undefined && stages !== undefined;
 
-    if (!programStageWriteAccess) return null;
+    if (!anyStageWriteAccess) return null;
 
     return (
         <Widget

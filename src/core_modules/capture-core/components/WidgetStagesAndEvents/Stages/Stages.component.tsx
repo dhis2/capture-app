@@ -21,16 +21,11 @@ export const StagesPlain = ({
     events,
     stageWriteAccessById,
     stageReadAccessById,
-    programLoaded,
     ...passOnProps
 }: PlainProps) => {
     const readableStages = useMemo(
-        () => stages.filter((stage) => {
-            const liveRead = stageReadAccessById?.[stage.id];
-            if (programLoaded && liveRead !== undefined) return liveRead;
-            return stage.dataAccess.read;
-        }),
-        [stages, stageReadAccessById, programLoaded],
+        () => stages.filter(stage => stageReadAccessById?.[stage.id] ?? stage.dataAccess.read),
+        [stages, stageReadAccessById],
     );
     const eventsByStage = useMemo(
         () => stages.reduce(

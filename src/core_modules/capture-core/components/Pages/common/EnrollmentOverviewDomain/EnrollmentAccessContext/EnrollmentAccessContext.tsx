@@ -1,25 +1,14 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import { useDataQuery } from '@dhis2/app-runtime';
-
-type ProgramAccess = { data?: { read?: boolean; write?: boolean } };
-
-type ProgramAccessResponse = {
-    access?: ProgramAccess;
-    trackedEntityType?: {
-        access?: ProgramAccess;
-        displayName?: string;
-        name?: string;
-    };
-    programStages?: Array<{ id?: string; access?: ProgramAccess }>;
-};
+import type { TrackerProgram } from '../../../../../metaData';
+import type { Access } from '../../../../../metaData/Access';
 
 export type EnrollmentAccessContextValue = {
-    isLoading: boolean;
-    error: any;
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
-    programStageWriteAccess: boolean;
-    programStageReadAccess: boolean;
+    anyStageWriteAccess: boolean;
+    anyStageReadAccess: boolean;
+    stageWriteAccessById: Record<string, boolean>;
+    stageReadAccessById: Record<string, boolean>;
     trackedEntityTypeName?: string;
     currentStageId?: string;
     currentStageWriteAccess: boolean;
@@ -29,13 +18,14 @@ export type EnrollmentAccessContextValue = {
     hideWidgetBadge: boolean;
 };
 
+// Fail-open default for renders outside a provider (tests, plugin contexts).
 const fallback: EnrollmentAccessContextValue = {
-    isLoading: false,
-    error: undefined,
     programWriteAccess: true,
     trackedEntityTypeWriteAccess: true,
-    programStageWriteAccess: true,
-    programStageReadAccess: true,
+    anyStageWriteAccess: true,
+    anyStageReadAccess: true,
+    stageWriteAccessById: {},
+    stageReadAccessById: {},
     currentStageWriteAccess: true,
     isEventPage: false,
     multipleStages: false,
@@ -46,58 +36,51 @@ const fallback: EnrollmentAccessContextValue = {
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
 
 type ProviderProps = {
-    programId?: string;
+    program?: TrackerProgram;
     currentStageId?: string;
     children: React.ReactNode;
 };
 
-export const EnrollmentAccessProvider = ({ programId, currentStageId, children }: ProviderProps) => {
-    const { loading, error, data } = useDataQuery(
-        useMemo(() => ({
-            program: {
-                resource: `programs/${programId}`,
-                params: {
-                    fields: ['access,trackedEntityType[access,displayName,name],programStages[id,access]'],
-                },
-            },
-        }), [programId]),
-        { lazy: !programId } as any,
-    );
-
+export const EnrollmentAccessProvider = ({ program, currentStageId, children }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(() => {
-        const program = data?.program as ProgramAccessResponse | undefined;
-        const stages = program?.programStages ?? [];
-        const programWriteAccess = Boolean(program?.access?.data?.write);
-        const trackedEntityTypeWriteAccess = Boolean(program?.trackedEntityType?.access?.data?.write);
-        const programStageWriteAccess = stages.some(s => s?.access?.data?.write);
-        const programStageReadAccess = stages.some(s => s?.access?.data?.read);
+        if (!program) return fallback;
+
+        const stages = Array.from(program.stages.values());
+        const stageWriteAccessById: Record<string, boolean> = {};
+        const stageReadAccessById: Record<string, boolean> = {};
+        for (const stage of stages) {
+            const access = stage.access as Access | undefined;
+            stageWriteAccessById[stage.id] = Boolean(access?.data?.write);
+            stageReadAccessById[stage.id] = Boolean(access?.data?.read);
+        }
+        const programWriteAccess = Boolean(program.access?.data?.write);
+        const trackedEntityTypeWriteAccess = Boolean(program.trackedEntityType?.access?.data?.write);
+        const anyStageWriteAccess = Object.values(stageWriteAccessById).some(Boolean);
+        const anyStageReadAccess = Object.values(stageReadAccessById).some(Boolean);
         const isEventPage = Boolean(currentStageId);
-        const currentStage = currentStageId
-            ? stages.find(s => s?.id === currentStageId)
-            : undefined;
-        const currentStageWriteAccess = currentStage
-            ? Boolean(currentStage.access?.data?.write)
+        const currentStageWriteAccess = currentStageId
+            ? (stageWriteAccessById[currentStageId] ?? false)
             : true;
         const allWriteAccessMissing = !programWriteAccess
             && !trackedEntityTypeWriteAccess
-            && !programStageWriteAccess;
+            && !anyStageWriteAccess;
+
         return {
-            isLoading: loading,
-            error,
             programWriteAccess,
             trackedEntityTypeWriteAccess,
-            programStageWriteAccess,
-            programStageReadAccess,
-            trackedEntityTypeName:
-                program?.trackedEntityType?.name ?? program?.trackedEntityType?.displayName,
+            anyStageWriteAccess,
+            anyStageReadAccess,
+            stageWriteAccessById,
+            stageReadAccessById,
+            trackedEntityTypeName: program.trackedEntityType?.name,
             currentStageId,
             currentStageWriteAccess,
             isEventPage,
-            multipleStages: stages.length > 1,
+            multipleStages: program.stages.size > 1,
             allWriteAccessMissing,
             hideWidgetBadge: isEventPage || allWriteAccessMissing,
         };
-    }, [loading, error, data, currentStageId]);
+    }, [program, currentStageId]);
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
 };

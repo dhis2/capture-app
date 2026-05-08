@@ -6,7 +6,6 @@ export type PlainProps = {
     events: Array<ApiEnrollmentEvent>;
     stageWriteAccessById?: Record<string, boolean>;
     stageReadAccessById?: Record<string, boolean>;
-    programLoaded?: boolean;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;
@@ -18,7 +17,6 @@ export type InputProps = {
     events?: Array<ApiEnrollmentEvent> | null;
     stageWriteAccessById?: Record<string, boolean>;
     stageReadAccessById?: Record<string, boolean>;
-    programLoaded?: boolean;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;

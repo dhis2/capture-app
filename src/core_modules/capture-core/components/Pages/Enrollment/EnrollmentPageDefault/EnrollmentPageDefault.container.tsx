@@ -192,7 +192,7 @@ export const EnrollmentPageDefault = () => {
     }
 
     return (
-        <EnrollmentAccessProvider programId={programId}>
+        <EnrollmentAccessProvider program={program}>
             <EnrollmentPageLayout
                 pageLayout={pageLayout}
                 currentPage={EnrollmentPageKeys.OVERVIEW}
