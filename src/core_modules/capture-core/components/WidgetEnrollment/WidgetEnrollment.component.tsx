@@ -40,6 +40,15 @@ const styles = {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
     },
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: `${spacersNum.dp8}px`,
+        flex: 1,
+    },
+    badge: {
+        marginInlineStart: 'auto',
+    },
 };
 
 const getGeometryType = geometryType =>
@@ -97,10 +106,10 @@ const WidgetEnrollmentPlain = ({
         <div data-test="widget-enrollment">
             <Widget
                 header={
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                    <div className={classes.header}>
                         <span>{i18n.t('Enrollment')}</span>
                         {!hideWidgetBadge && (
-                            <div style={{ marginInlineStart: 'auto' }}>
+                            <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programWriteAccess={programWriteAccess}
                                     trackedEntityName={program?.trackedEntityType?.displayName}
