@@ -55,10 +55,10 @@ const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
-const isEnrollmentReadOnly = (
+const computeEnrollmentReadOnly = (
     readOnlyMode: boolean,
-    programWriteAccess: boolean,
-) => readOnlyMode || !programWriteAccess;
+    enrollmentAccessReadOnly: boolean,
+) => readOnlyMode || enrollmentAccessReadOnly;
 
 const WidgetEnrollmentPlain = ({
     classes,
@@ -88,8 +88,9 @@ const WidgetEnrollmentPlain = ({
     const {
         programWriteAccess,
         hideWidgetBadge,
+        enrollmentAccessReadOnly,
     } = useEnrollmentAccessContext();
-    const enrollmentReadOnly = isEnrollmentReadOnly(readOnlyMode, programWriteAccess);
+    const enrollmentReadOnly = computeEnrollmentReadOnly(readOnlyMode, enrollmentAccessReadOnly);
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
@@ -210,7 +211,6 @@ const WidgetEnrollmentPlain = ({
                         )}
                         {!enrollmentReadOnly && (
                             <Actions
-                                readOnly={enrollmentReadOnly}
                                 tetName={program.trackedEntityType.displayName}
                                 onlyEnrollOnce={program.onlyEnrollOnce}
                                 programStages={program.programStages}

@@ -34,8 +34,6 @@ const WidgetStagesAndEventsPlain = ({
         anyStageWriteAccess,
         anyStageReadAccess,
         multipleStages,
-        stageWriteAccessById,
-        stageReadAccessById,
     } = useEnrollmentAccessContext();
 
     return (
@@ -66,8 +64,6 @@ const WidgetStagesAndEventsPlain = ({
                     ready={events !== undefined && stages !== undefined}
                     events={events}
                     programId={programId}
-                    stageWriteAccessById={stageWriteAccessById}
-                    stageReadAccessById={stageReadAccessById}
                     {...passOnProps}
                 />
             </Widget>

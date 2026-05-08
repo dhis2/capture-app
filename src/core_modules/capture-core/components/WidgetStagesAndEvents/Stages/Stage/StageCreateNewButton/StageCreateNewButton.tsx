@@ -5,7 +5,6 @@ import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
     onCreateNew: () => void;
-    stageWriteAccess?: boolean;
     eventCount: number;
     repeatable?: boolean;
     preventAddingEventActionInEffect?: boolean;
@@ -14,7 +13,6 @@ type Props = {
 
 export const StageCreateNewButton = ({
     onCreateNew,
-    stageWriteAccess,
     eventCount,
     repeatable,
     preventAddingEventActionInEffect,
@@ -41,10 +39,6 @@ export const StageCreateNewButton = ({
             tooltipContent: '',
         };
     }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable]);
-
-    if (!stageWriteAccess) {
-        return null;
-    }
 
     return (
         <ConditionalTooltip

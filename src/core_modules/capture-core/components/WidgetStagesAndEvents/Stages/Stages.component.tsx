@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { Stage } from './Stage';
 import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
+import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,
@@ -19,12 +20,11 @@ const emptyStateStyle = {
 export const StagesPlain = ({
     stages,
     events,
-    stageWriteAccessById,
-    stageReadAccessById,
     ...passOnProps
 }: PlainProps) => {
+    const { stageReadAccessById } = useEnrollmentAccessContext();
     const readableStages = useMemo(
-        () => stages.filter(stage => stageReadAccessById?.[stage.id] ?? stage.dataAccess.read),
+        () => stages.filter(stage => stageReadAccessById[stage.id] ?? stage.dataAccess.read),
         [stages, stageReadAccessById],
     );
     const eventsByStage = useMemo(
@@ -65,7 +65,6 @@ export const StagesPlain = ({
                         events={eventsByStage[stage.id]}
                         key={stage.id}
                         stage={stage}
-                        stageWriteAccess={stageWriteAccessById?.[stage.id] ?? stage.dataAccess.write}
                         {...passOnProps}
                     />
                 ))

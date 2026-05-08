@@ -26,6 +26,7 @@ import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
+import { useStageAccess } from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 
 const styles: Readonly<any> = {
@@ -92,7 +93,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         hideDueDate = false,
         repeatable = false,
         enableUserAssignment = false,
-        stageWriteAccess: stageWriteAccessProp,
         onEventClick,
         onDeleteEvent,
         onUpdateEventStatus,
@@ -107,7 +107,8 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const stageWriteAccess = stageWriteAccessProp ?? stage?.access?.data?.write;
+    const { canWrite } = useStageAccess(stageId);
+    const stageWriteAccess = canWrite ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
@@ -263,7 +264,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                     onCreateNew={handleCreateNew}
                     preventAddingEventActionInEffect={hiddenProgramStage}
                     repeatable={repeatable}
-                    stageWriteAccess={stageWriteAccess}
                     eventName={eventName}
                 />
             </div>
