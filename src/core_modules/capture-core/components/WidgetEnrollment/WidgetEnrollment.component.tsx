@@ -46,6 +46,10 @@ const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
+const isEnrollmentReadOnly = (
+    readOnlyMode: boolean,
+    programWriteAccess: boolean,
+) => readOnlyMode || !programWriteAccess;
 
 const WidgetEnrollmentPlain = ({
     classes,
@@ -74,10 +78,9 @@ const WidgetEnrollmentPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const {
         programWriteAccess,
-        trackedEntityTypeWriteAccess,
         hideWidgetBadge,
     } = useEnrollmentAccessContext();
-    const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
+    const enrollmentReadOnly = isEnrollmentReadOnly(readOnlyMode, programWriteAccess);
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
@@ -100,7 +103,6 @@ const WidgetEnrollmentPlain = ({
                             <div style={{ marginInlineStart: 'auto' }}>
                                 <ReadOnlyBadge
                                     programWriteAccess={programWriteAccess}
-                                    trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
                                     trackedEntityName={program?.trackedEntityType?.displayName}
                                 />
                             </div>
@@ -197,26 +199,28 @@ const WidgetEnrollmentPlain = ({
                                 />
                             </div>
                         )}
-                        <Actions
-                            readOnly={enrollmentReadOnly}
-                            tetName={program.trackedEntityType.displayName}
-                            onlyEnrollOnce={program.onlyEnrollOnce}
-                            programStages={program.programStages}
-                            enrollment={enrollment}
-                            events={events}
-                            ownerOrgUnitId={ownerOrgUnit.id}
-                            refetchEnrollment={refetchEnrollment}
-                            refetchTEI={refetchTEI}
-                            onDelete={onDelete}
-                            onAddNew={onAddNew}
-                            canAddNew={canAddNew}
-                            onError={onError}
-                            onSuccess={onSuccess}
-                            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
-                            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
-                            onAccessLostFromTransfer={onAccessLostFromTransfer}
-                        />
+                        {!enrollmentReadOnly && (
+                            <Actions
+                                readOnly={enrollmentReadOnly}
+                                tetName={program.trackedEntityType.displayName}
+                                onlyEnrollOnce={program.onlyEnrollOnce}
+                                programStages={program.programStages}
+                                enrollment={enrollment}
+                                events={events}
+                                ownerOrgUnitId={ownerOrgUnit.id}
+                                refetchEnrollment={refetchEnrollment}
+                                refetchTEI={refetchTEI}
+                                onDelete={onDelete}
+                                onAddNew={onAddNew}
+                                canAddNew={canAddNew}
+                                onError={onError}
+                                onSuccess={onSuccess}
+                                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                                onAccessLostFromTransfer={onAccessLostFromTransfer}
+                            />
+                        )}
                     </div>
                 )}
             </Widget>
