@@ -1,38 +1,30 @@
 import * as React from 'react';
-import { BooleanFilter } from './BooleanFilter.component';
-import type { BooleanFilterStringified } from './types';
-
-type Props = {
-    filter: BooleanFilterStringified | null,
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void,
-    singleSelect: boolean,
-};
+import { BooleanFilter as BooleanFilterInput } from './BooleanFilter.component';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import type { BooleanFilter, BooleanFilterManagerProps, Value } from './boolean.types';
 
 type State = {
-    value: Array<string> | string | boolean | null | undefined,
+    value: Value | undefined,
 };
 
-export class BooleanFilterManager extends React.Component<Props, State> {
+export class BooleanFilterManager extends React.Component<BooleanFilterManagerProps, State> {
     static calculateDefaultValueState(
-        filter: BooleanFilterStringified | null,
+        filter: BooleanFilter | null,
         singleSelect: boolean,
-    ): (Array<string> | string | null | boolean | undefined) {
-        if (!filter) {
-            return undefined;
-        }
-
+    ): Value | undefined {
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
         return singleSelect ? filter.values[0] : filter.values;
     }
 
-    constructor(props: Props) {
+    constructor(props: BooleanFilterManagerProps) {
         super(props);
         this.state = {
             value: BooleanFilterManager.calculateDefaultValueState(this.props.filter, this.props.singleSelect),
         };
     }
 
-    handleCommitValue = (value?: Array<string> | string | boolean| null) => {
+    handleCommitValue = (value: Value) => {
         this.setState({
             value,
         });
@@ -43,9 +35,8 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, singleSelect, ...passOnProps } = this.props;
 
         return (
-            <BooleanFilter
+            <BooleanFilterInput
                 value={this.state.value}
-                // @ts-expect-error - keeping original functionality as before ts rewrite
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
                 allowMultiple={!singleSelect}

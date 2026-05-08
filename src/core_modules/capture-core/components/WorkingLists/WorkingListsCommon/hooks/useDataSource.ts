@@ -61,15 +61,16 @@ export const useDataSource = (
                             // TODO: Need is equal comparer for types because `sourceValue` and `option` can be an object
                             // for example (for some data element types) and we can't do strict comparison.
                             const option = options.find(o => o.value === clientValue);
-                            if (!option) {
-                                log.error(
-                                    errorCreator(
-                                        'Missing value in options')(
-                                        { id, clientValue, options }),
-                                );
-                                acc[id] = convertClientToList(clientValue, type);
-                            } else {
+                            if (option) {
                                 acc[id] = option.text;
+                            } else {
+                                if (clientValue != null && clientValue !== '') {
+                                    log.error(
+                                        errorCreator('Missing value in options')(
+                                            { id, clientValue, options }),
+                                    );
+                                }
+                                acc[id] = convertClientToList(clientValue, type);
                             }
                         }
                     } else {

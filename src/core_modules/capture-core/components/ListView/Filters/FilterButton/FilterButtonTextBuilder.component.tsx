@@ -10,7 +10,7 @@ export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, options
     const orgUnitLabel = useOrgUnitFilterButtonText(
         type === filterTypesObject.ORGANISATION_UNIT ? (filterValue as OrgUnitFilterData | null) : null,
     );
-    const buttonText = useMemo(() => {
+    const valueLabel = useMemo(() => {
         if (!filterValue) {
             return filterValue;
         }
@@ -25,7 +25,7 @@ export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, options
             filterValue={filterValue}
             type={type}
             options={options}
-            buttonText={buttonText}
+            valueLabel={valueLabel}
         />
     );
 });

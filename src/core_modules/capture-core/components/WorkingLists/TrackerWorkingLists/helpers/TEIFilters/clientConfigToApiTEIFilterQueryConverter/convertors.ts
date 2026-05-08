@@ -1,19 +1,18 @@
-import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import {
-    type BooleanFilterData,
-    type DateFilterData,
-    type DateTimeFilterData,
     dateFilterTypes,
     filterTypesObject,
+    type BooleanFilterData,
     type NumericFilterData,
     type TextFilterData,
     type TimeFilterData,
-    OrgUnitFilterData,
+    type OrgUnitFilterData,
+    type DateFilterData,
+    type DateTimeFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
 import type { ApiDataFilterOrgUnit } from '../../../../EventWorkingLists/types';
 
 const getTextFilter = (filter: TextFilterData, element?: { searchOperator?: string }) => {
@@ -44,11 +43,8 @@ const getAssigneeFilter = (filter: any) => ({
     assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
 });
 
-const convertDate = (rawValue: string): string => {
-    const momentDate = moment(rawValue);
-    momentDate.locale('en');
-    return momentDate.format('YYYY-MM-DD');
-};
+const convertDate = (rawValue: string): string =>
+    formatMomentEn(rawValue, 'YYYY-MM-DD');
 
 export const getDateFilter = (dateFilter: DateFilterData) => {
     const apiDateFilterContents =
@@ -143,10 +139,6 @@ export const convertMainFilters = ({
         }
 
         const mainValue = mainFiltersTable[key](filter);
-
-        if (typeof filter.isEmpty === 'boolean') {
-            return { ...toApiEmptyValueFilter(filter), [key]: mainValue };
-        }
 
         if (mainValue !== undefined) {
             if (key === MAIN_FILTERS.ASSIGNEE) {

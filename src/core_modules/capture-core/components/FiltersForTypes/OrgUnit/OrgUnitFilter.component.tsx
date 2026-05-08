@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { SingleOrgUnitSelectField } from '../../FormFields/New';
 import { getOrgUnitFilterData } from './orgUnitFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { OrgUnitFilterProps, Value } from './OrgUnit.types';
-import type { OrgUnitValue } from './types';
+import type { OrgUnitFilterProps, Value } from './orgUnit.types';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
@@ -11,7 +11,7 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
         return getOrgUnitFilterData(value);
     }
 
-    handleOrgUnitChange = (value: OrgUnitValue | null) => {
+    handleOrgUnitChange = (value: Value | null) => {
         this.props.onCommitValue(value);
         if (value === null && this.props.onClearValue) {
             this.props.onClearValue();
@@ -22,19 +22,21 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
 
     render() {
         const { value } = this.props;
-        const orgUnitValue =
-            value !== undefined &&
-            value !== null &&
-            typeof value === 'object'
-                ? (value as OrgUnitValue)
-                : undefined;
 
         return (
-            <SingleOrgUnitSelectField
-                value={orgUnitValue}
-                onBlur={this.handleOrgUnitChange}
-                maxTreeHeight={280}
-            />
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.props.onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {filteredValue => (
+                    <SingleOrgUnitSelectField
+                        value={filteredValue != null && typeof filteredValue === 'object' ? filteredValue : undefined}
+                        onBlur={this.handleOrgUnitChange}
+                        maxTreeHeight={280}
+                    />
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }

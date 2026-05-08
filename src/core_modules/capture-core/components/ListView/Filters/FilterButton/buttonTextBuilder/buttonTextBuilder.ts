@@ -1,6 +1,7 @@
 import {
     convertText,
     convertDate,
+    convertDateTime,
     convertTime,
     convertAssignee,
     convertBoolean,
@@ -9,7 +10,12 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
+import {
+    isEmptyFilterData,
+    type FilterData,
+    type OptionSetFilterData,
+    type Options,
+} from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes: any = {
@@ -18,7 +24,7 @@ const convertersForTypes: any = {
     [filterTypesObject.BOOLEAN]: convertBoolean,
     [filterTypesObject.COORDINATE]: convertText,
     [filterTypesObject.DATE]: convertDate,
-    [filterTypesObject.DATETIME]: convertDate,
+    [filterTypesObject.DATETIME]: convertDateTime,
     [filterTypesObject.TIME]: convertTime,
     [filterTypesObject.EMAIL]: convertText,
     [filterTypesObject.FILE_RESOURCE]: convertText,
@@ -39,7 +45,7 @@ const convertersForTypes: any = {
 };
 
 function getOptionSetText(filter: OptionSetFilterData, options: Options) {
-    const optionText = filter
+    return filter
         .values
         .map((value) => {
             const option = options.find(o => isEqual(o.value, value));
@@ -47,8 +53,6 @@ function getOptionSetText(filter: OptionSetFilterData, options: Options) {
         })
         .filter(text => text)
         .join(', ');
-
-    return optionText.length > 20 ? `${optionText.substring(0, 18)}..` : optionText;
 }
 
 export function buildButtonText(
@@ -56,6 +60,10 @@ export function buildButtonText(
     type: typeof filterTypesObject[keyof typeof filterTypesObject],
     options?: Options | null,
 ): string {
+    if (isEmptyFilterData(filter)) {
+        return filter.value;
+    }
+
     if ('usingOptionSet' in filter && options) {
         return getOptionSetText(filter, options);
     }

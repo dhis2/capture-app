@@ -1,15 +1,12 @@
-import moment from 'moment';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { ApiDataFilterOptionSet } from '../../../types';
 import type { OptionSetFilterData } from '../../../../WorkingListsBase';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 
-const convertDate = (rawValue: string): string => {
-    const momentDate = moment(rawValue);
-    momentDate.locale('en');
-    return momentDate.format('YYYY-MM-DD');
-};
+const convertDate = (rawValue: string): string =>
+    formatMomentEn(rawValue, 'YYYY-MM-DD');
 
 const converterByType = {
     [dataElementTypes.NUMBER]: stringifyNumber,

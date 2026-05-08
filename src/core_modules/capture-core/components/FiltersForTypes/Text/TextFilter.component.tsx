@@ -3,25 +3,14 @@ import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 import { searchOperatorHelpTexts, helpTextStyle } from '../../../constants';
-import type { TextFilterProps, Value } from './Text.types';
-import {
-    makeCheckboxHandler,
-    isEmptyValueFilter,
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EmptyValueFilterCheckboxes,
-} from '../EmptyValue';
+import type { TextFilterProps, Value } from './text.types';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export class TextFilter
     extends Component<TextFilterProps>
     implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
-
-        if (!value) {
-            return null;
-        }
-
         return getTextFilterData(value);
     }
 
@@ -37,33 +26,28 @@ export class TextFilter
         this.props.onCommitValue(value);
     };
 
-    handleEmptyValueCheckboxChange = makeCheckboxHandler(EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-    handleNotEmptyValueCheckboxChange = makeCheckboxHandler(NOT_EMPTY_VALUE_FILTER)((value) => {
-        this.props.onCommitValue(value || null);
-    });
-
     render() {
         const { value, searchOperator } = this.props;
         const helpText = searchOperator && searchOperatorHelpTexts[searchOperator];
 
         return (
-            <>
-                <EmptyValueFilterCheckboxes
-                    value={value}
-                    onEmptyChange={this.handleEmptyValueCheckboxChange}
-                    onNotEmptyChange={this.handleNotEmptyValueCheckboxChange}
-                />
-
-                <Input
-                    value={!isEmptyValueFilter(value) ? value : ''}
-                    onBlur={this.handleBlur}
-                    onEnterKey={this.handleEnterKey}
-                    onChange={this.handleChange}
-                />
-                {helpText && <div style={helpTextStyle}>{helpText}</div>}
-            </>
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.props.onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {filteredValue => (
+                    <>
+                        <Input
+                            value={filteredValue}
+                            onBlur={this.handleBlur}
+                            onEnterKey={this.handleEnterKey}
+                            onChange={this.handleChange}
+                        />
+                        {helpText && <div style={helpTextStyle}>{helpText}</div>}
+                    </>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }
