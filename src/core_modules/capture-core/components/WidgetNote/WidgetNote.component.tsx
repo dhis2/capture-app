@@ -26,7 +26,6 @@ export const WidgetNote = ({
                 {!hideReadOnlyBadge && (
                     <div style={{ marginInlineStart: 'auto' }}>
                         <ReadOnlyBadge
-                            readOnly={readOnly}
                             programWriteAccess={programWriteAccess}
                             trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
                             programStageWriteAccess={programStageWriteAccess}

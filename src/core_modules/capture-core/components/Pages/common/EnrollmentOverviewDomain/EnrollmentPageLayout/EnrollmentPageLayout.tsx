@@ -61,7 +61,6 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
 const EnrollmentReadOnlyBadge = () => {
-    const access = useEnrollmentAccessContext();
     const {
         isEventPage,
         currentStageWriteAccess,
@@ -69,19 +68,29 @@ const EnrollmentReadOnlyBadge = () => {
         trackedEntityTypeWriteAccess,
         programStageWriteAccess,
         programStageReadAccess,
-        multipleStages,
         trackedEntityTypeName,
-    } = access;
-    const stageBadgeAccess = isEventPage
-        ? currentStageWriteAccess
-        : programStageWriteAccess || !programStageReadAccess;
+    } = useEnrollmentAccessContext();
+
+    if (isEventPage) {
+        if (currentStageWriteAccess) return null;
+        return (
+            <ReadOnlyBadge
+                programStageWriteAccess={false}
+                trackedEntityName={trackedEntityTypeName}
+                inlineLabel
+            />
+        );
+    }
+
+    const stageBadgeAccess = programStageWriteAccess || !programStageReadAccess;
+    const allMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && !stageBadgeAccess;
+    if (!allMissing) return null;
+
     return (
         <ReadOnlyBadge
-            readOnly={isEventPage && !currentStageWriteAccess}
-            programWriteAccess={isEventPage ? true : programWriteAccess}
-            trackedEntityTypeWriteAccess={isEventPage ? true : trackedEntityTypeWriteAccess}
-            programStageWriteAccess={stageBadgeAccess}
-            multipleStages={!isEventPage && multipleStages}
+            programWriteAccess={false}
+            trackedEntityTypeWriteAccess={false}
+            programStageWriteAccess={false}
             trackedEntityName={trackedEntityTypeName}
             inlineLabel
         />

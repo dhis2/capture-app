@@ -77,13 +77,14 @@ const CoordinatesPlain = ({
     };
 
     const onHandleMapClicked = (mapCoordinates: { latlng: { lat: number; lng: number } }) => {
-        if (readOnly || !isEditing) return;
-        const { lat, lng } = mapCoordinates.latlng;
-        const newPosition: [number, number] = [lat, lng];
-        setValid(true);
-        setPosition(newPosition);
-        setTempLatitude(lat);
-        setTempLongitude(lng);
+        if (isEditing) {
+            const { lat, lng } = mapCoordinates.latlng;
+            const newPosition: [number, number] = [lat, lng];
+            setValid(true);
+            setPosition(newPosition);
+            setTempLatitude(lat);
+            setTempLongitude(lng);
+        }
     };
 
     const onSearch = (searchPosition: [number, number]) => {

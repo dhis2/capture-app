@@ -61,8 +61,7 @@ const WidgetStagesAndEventsPlain = ({
                         {!hideWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
-                                    readOnly={anyStageReadAccess && !anyStageWriteAccess}
-                                    programStageWriteAccess={anyStageWriteAccess}
+                                    programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
                                     multipleStages={Object.keys(stageWriteAccessById).length > 1}
                                 />
                             </div>

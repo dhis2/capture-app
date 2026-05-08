@@ -136,7 +136,6 @@ const ActionsPlain = ({
                 </div>
             )}
             {isOpenMap && <MapModal
-                readOnly={readOnly}
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}

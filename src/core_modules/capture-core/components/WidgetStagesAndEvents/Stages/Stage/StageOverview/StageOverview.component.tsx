@@ -162,7 +162,6 @@ export const StageOverviewPlain = ({
                 </div>}
                 {!hideStageBadge && (
                     <ReadOnlyBadge
-                        readOnly={!stageWriteAccess}
                         programStageWriteAccess={stageWriteAccess}
                     />
                 )}

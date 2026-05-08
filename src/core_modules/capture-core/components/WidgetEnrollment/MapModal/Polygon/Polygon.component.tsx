@@ -76,7 +76,6 @@ const PolygonPlain = ({
     };
 
     const onMapPolygonCreated = (e: any) => {
-        if (readOnly) return;
         const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map((c: number[]) => [c[1], c[0]]);
         setPolygonArea(polygonCoordinates);
         setDrawingState(drawing.FINISHED);
@@ -84,7 +83,6 @@ const PolygonPlain = ({
     };
 
     const onMapPolygonDelete = () => {
-        if (readOnly) return;
         setPolygonArea(null);
         setDrawingState(drawing.FINISHED);
         prevDrawingState.current = drawing.FINISHED;
@@ -208,7 +206,7 @@ const PolygonPlain = ({
                         enabled={drawingState === drawing.STARTED}
                     >
                         <Button
-                            disabled={drawingState === drawing.STARTED || readOnly}
+                            disabled={drawingState === drawing.STARTED}
                             className={classes.setAreaButton}
                             onClick={() => {
                                 const clientValue = polygonArea;

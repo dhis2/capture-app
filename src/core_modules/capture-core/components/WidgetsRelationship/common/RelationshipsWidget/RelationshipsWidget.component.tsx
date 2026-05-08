@@ -32,6 +32,7 @@ const RelationshipsWidgetPlain = ({
     readOnly,
     accessReadOnly,
     hideReadOnlyBadge,
+    trackedEntityName,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
@@ -68,7 +69,10 @@ const RelationshipsWidgetPlain = ({
                         )}
                         {!hideReadOnlyBadge && (
                             <div style={{ marginInlineStart: 'auto' }}>
-                                <ReadOnlyBadge readOnly={Boolean(accessReadOnly)} />
+                                <ReadOnlyBadge
+                                    trackedEntityTypeWriteAccess={!accessReadOnly}
+                                    trackedEntityName={trackedEntityName}
+                                />
                             </div>
                         )}
                     </div>
