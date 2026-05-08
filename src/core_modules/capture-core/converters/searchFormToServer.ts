@@ -9,7 +9,7 @@ type FormValues = { [key: string]: any };
 const convertValuePipe = pipeD2(convertFormToClient, convertClientToServer);
 
 const convertString = (formValue: string, dataElement: DataElement, searchOperator: SearchOperator) => {
-    const sanitizedString = formValue.trim();
+    const sanitizedString = dataElement.optionSet ? formValue : formValue.trim();
     const convertedString = dataElement.convertValue(sanitizedString, convertValuePipe);
     return `${dataElement.id}:${searchOperator.toLowerCase()}:${escapeString(convertedString)}`;
 };

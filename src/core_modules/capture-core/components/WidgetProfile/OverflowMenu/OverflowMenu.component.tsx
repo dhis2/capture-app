@@ -3,7 +3,6 @@ import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
-import { StatusToggleMenuItem, StatusToggleModal } from './StatusToggle';
 import { OverflowButton } from '../../Buttons';
 import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
@@ -11,11 +10,9 @@ export const OverflowMenuComponent = ({
     trackedEntity,
     trackedEntityData,
     trackedEntityTypeName,
-    readOnly,
+    canWriteData,
     canCascadeDeleteTei,
-    isInactive,
     onDeleteSuccess,
-    onStatusToggleSuccess,
     displayChangelog,
     teiId,
     programAPI,
@@ -23,10 +20,9 @@ export const OverflowMenuComponent = ({
 }: PlainProps) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
-    const [statusToggleModalIsOpen, setStatusToggleModalIsOpen] = useState(false);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
 
-    if (readOnlyMode && !displayChangelog && !isInactive) {
+    if (readOnlyMode && !displayChangelog) {
         return null;
     }
 
@@ -55,23 +51,14 @@ export const OverflowMenuComponent = ({
                                 suffix={null}
                             />
                         )}
-                        {(!readOnlyMode || isInactive) && (
-                            <>
-                                <StatusToggleMenuItem
-                                    trackedEntityTypeName={trackedEntityTypeName}
-                                    isInactive={isInactive}
-                                    readOnly={readOnly}
-                                    setActionsIsOpen={setActionsIsOpen}
-                                    setStatusToggleModalIsOpen={setStatusToggleModalIsOpen}
-                                />
-                                <DeleteMenuItem
-                                    trackedEntityTypeName={trackedEntityTypeName}
-                                    readOnly={readOnly}
-                                    canCascadeDeleteTei={canCascadeDeleteTei}
-                                    setActionsIsOpen={setActionsIsOpen}
-                                    setDeleteModalIsOpen={setDeleteModalIsOpen}
-                                />
-                            </>
+                        {!readOnlyMode && (
+                            <DeleteMenuItem
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                                canCascadeDeleteTei={canCascadeDeleteTei}
+                                setActionsIsOpen={setActionsIsOpen}
+                                setDeleteModalIsOpen={setDeleteModalIsOpen}
+                            />
                         )}
                     </FlyoutMenu>
                 }
@@ -82,15 +69,6 @@ export const OverflowMenuComponent = ({
                     trackedEntity={trackedEntity}
                     setOpenModal={setDeleteModalIsOpen}
                     onDeleteSuccess={onDeleteSuccess}
-                />
-            )}
-            {statusToggleModalIsOpen && (
-                <StatusToggleModal
-                    trackedEntityTypeName={trackedEntityTypeName}
-                    trackedEntity={trackedEntity}
-                    isInactive={isInactive}
-                    setOpenModal={setStatusToggleModalIsOpen}
-                    onStatusToggleSuccess={onStatusToggleSuccess}
                 />
             )}
             {changelogIsOpen && (

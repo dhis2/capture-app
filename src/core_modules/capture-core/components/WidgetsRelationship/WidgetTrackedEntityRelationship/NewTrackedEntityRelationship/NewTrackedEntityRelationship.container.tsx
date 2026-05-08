@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, spacers } from '@dhis2/ui';
+import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
@@ -7,7 +7,7 @@ import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp12} ${spacers.dp12} ${spacers.dp12}`,
+        padding: `${spacersNum.dp8}px ${spacersNum.dp12}px ${spacersNum.dp12}px`,
     },
 };
 
@@ -25,6 +25,7 @@ export const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntityRegistration,
     onSelectFindMode,
     readOnly,
+    hideButton,
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
@@ -41,7 +42,7 @@ export const NewTrackedEntityRelationshipPlain = ({
 
     return (
         <div className={classes.container}>
-            {!readOnly && (
+            {!hideButton && !readOnly && (
                 <Button
                     onClick={openAddWizard}
                     small

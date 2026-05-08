@@ -1,7 +1,7 @@
 export type Props = {
     trackedEntityTypeName: string;
     canCascadeDeleteTei: boolean;
-    readOnly: boolean;
+    canWriteData: boolean;
     setActionsIsOpen: (toggle: boolean) => void;
     setDeleteModalIsOpen: (toggle: boolean) => void;
 };

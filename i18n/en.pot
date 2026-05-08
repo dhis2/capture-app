@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-02T13:47:48.375Z\n"
-"PO-Revision-Date: 2026-05-02T13:47:48.375Z\n"
+"POT-Creation-Date: 2026-05-08T08:50:49.040Z\n"
+"PO-Revision-Date: 2026-05-08T08:50:49.040Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -869,14 +869,14 @@ msgstr "Learn more about Capture app"
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
 
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Or see all records accessible to you in {{program}} "
+msgid "Please select an organisation unit"
+msgstr "Please select an organisation unit"
 
-msgid "Or see all events accessible to you in {{program}}"
-msgstr "Or see all events accessible to you in {{program}}"
+msgid "See working list without organisation unit"
+msgstr "See working list without organisation unit"
 
-msgid "Please select an organisation unit."
-msgstr "Please select an organisation unit."
+msgid "Search for a {{trackedEntityName}}"
+msgstr "Search for a {{trackedEntityName}}"
 
 msgid "Registered events"
 msgstr "Registered events"
@@ -1012,6 +1012,9 @@ msgstr "All accessible"
 msgid "Selected"
 msgstr "Selected"
 
+msgid "Please select an organisation unit."
+msgstr "Please select an organisation unit."
+
 msgid "Organisation unit scope"
 msgstr "Organisation unit scope"
 
@@ -1071,8 +1074,26 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "Read only - You can only view this enrollment"
-msgstr "Read only - You can only view this enrollment"
+msgid "You only have view access to enrollment"
+msgstr "You only have view access to enrollment"
+
+msgid "You only have view access to program"
+msgstr "You only have view access to program"
+
+msgid "You only have view access to {{trackedEntityName}}"
+msgstr "You only have view access to {{trackedEntityName}}"
+
+msgid "You only have view access to this tracked entity type"
+msgstr "You only have view access to this tracked entity type"
+
+msgid "You only have view access to these program stages"
+msgstr "You only have view access to these program stages"
+
+msgid "You only have view access to this program stage"
+msgstr "You only have view access to this program stage"
+
+msgid "View only"
+msgstr "View only"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1313,9 +1334,6 @@ msgstr "Unsaved changes"
 
 msgid "Continue data entry"
 msgstr "Continue data entry"
-
-msgid "You do not have access to modify this enrollment"
-msgstr "You do not have access to modify this enrollment"
 
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
@@ -1593,6 +1611,9 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profile"
+
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
@@ -1626,9 +1647,6 @@ msgstr "Fix errors in the form to continue."
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
 
-msgid "Deleteee {{trackedEntityTypeName}}"
-msgstr "Deleteee {{trackedEntityTypeName}}"
-
 msgid "Delete {{trackedEntityTypeName}}"
 msgstr "Delete {{trackedEntityTypeName}}"
 
@@ -1647,43 +1665,8 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "You do not have access to activate this {{trackedEntityTypeName}}"
-msgstr "You do not have access to activate this {{trackedEntityTypeName}}"
-
-msgid "You do not have access to deactivate this {{trackedEntityTypeName}}"
-msgstr "You do not have access to deactivate this {{trackedEntityTypeName}}"
-
-msgid "Activate {{trackedEntityTypeName}}"
-msgstr "Activate {{trackedEntityTypeName}}"
-
-msgid "Deactivate {{trackedEntityTypeName}}"
-msgstr "Deactivate {{trackedEntityTypeName}}"
-
-msgid ""
-"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
-"change its status to active and write operations will be allowed."
-msgstr ""
-"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
-"change its status to active and write operations will be allowed."
-
-msgid ""
-"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
-"will change its status to inactive and only read operations will be allowed."
-msgstr ""
-"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
-"will change its status to inactive and only read operations will be allowed."
-
-msgid "Yes, activate {{trackedEntityTypeName}}"
-msgstr "Yes, activate {{trackedEntityTypeName}}"
-
-msgid "Yes, deactivate {{trackedEntityTypeName}}"
-msgstr "Yes, deactivate {{trackedEntityTypeName}}"
-
-msgid "There was a problem activating the {{trackedEntityTypeName}}"
-msgstr "There was a problem activating the {{trackedEntityTypeName}}"
-
-msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
-msgstr "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgid "Show profile"
+msgstr "Show profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1693,9 +1676,6 @@ msgstr "No attributes configured for {{trackedEntityTypeName}}"
 
 msgid "No attributes configured"
 msgstr "No attributes configured"
-
-msgid "This profile doesn't have any values"
-msgstr "This profile doesn't have any values"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
@@ -1748,9 +1728,6 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "You do not have access to create events in this stage"
-msgstr "You do not have access to create events in this stage"
-
 msgid "This stage can only have one event"
 msgstr "This stage can only have one event"
 
@@ -1765,9 +1742,6 @@ msgstr "An error occurred while deleting the event"
 
 msgid "Are you sure you want to delete this event?"
 msgstr "Are you sure you want to delete this event?"
-
-msgid "You do not have access to perform actions on this event"
-msgstr "You do not have access to perform actions on this event"
 
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"
@@ -1941,11 +1915,11 @@ msgstr "Yes, delete relationship"
 msgid "An error occurred while deleting the relationship."
 msgstr "An error occurred while deleting the relationship."
 
-msgid "This enrollment doesn't have any relationships"
-msgstr "This enrollment doesn't have any relationships"
-
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"
+
+msgid "This enrollment doesn't have any relationships"
+msgstr "This enrollment doesn't have any relationships"
 
 msgid "Type"
 msgstr "Type"

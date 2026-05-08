@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     DataTableCell,
@@ -8,7 +7,6 @@ import {
     IconMore16,
 } from '@dhis2/ui';
 import { OverflowButton } from '../../../../../Buttons';
-import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton } from './DeleteActionButton';
 import { SkipAction } from './SkipAction';
@@ -46,7 +44,6 @@ const EventRowPlain = ({
     teiId,
     programId,
     enrollmentId,
-    readOnly,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
@@ -62,61 +59,56 @@ const EventRowPlain = ({
             {cells}
 
             <DataTableCell>
-                <>
-                    {!readOnly && (
-                        <ConditionalTooltip
-                            content={i18n.t('You do not have access to perform actions on this event')}
-                            enabled={!stageWriteAccess}
-                        >
-                            <OverflowButton
-                                open={actionsOpen}
-                                onClick={() => setActionsOpen(prev => !prev)}
-                                dataTest={'overflow-button'}
-                                secondary
-                                small
-                                icon={<IconMore16 />}
-                                disabled={pendingApiResponse || !stageWriteAccess}
-                                component={(
-                                    <FlyoutMenu
-                                        dense
-                                        dataTest={'overflow-menu'}
-                                    >
-                                        {(eventDetails.status === EventStatuses.SCHEDULE ||
-                                            eventDetails.status === EventStatuses.SKIPPED) && (
-                                            <SkipAction
-                                                eventId={id}
-                                                eventDetails={eventDetails}
-                                                setActionsOpen={setActionsOpen}
-                                                pendingApiResponse={pendingApiResponse}
-                                                onUpdateEventStatus={onUpdateEventStatus}
-                                            />
-                                        )}
-
-                                        <DeleteActionButton
+                {stageWriteAccess && (
+                    <>
+                        <OverflowButton
+                            open={actionsOpen}
+                            onClick={() => setActionsOpen(prev => !prev)}
+                            dataTest={'overflow-button'}
+                            secondary
+                            small
+                            icon={<IconMore16 />}
+                            disabled={pendingApiResponse}
+                            component={(
+                                <FlyoutMenu
+                                    dense
+                                    dataTest={'overflow-menu'}
+                                >
+                                    {(eventDetails.status === EventStatuses.SCHEDULE ||
+                                        eventDetails.status === EventStatuses.SKIPPED) && (
+                                        <SkipAction
+                                            eventId={id}
+                                            eventDetails={eventDetails}
                                             setActionsOpen={setActionsOpen}
-                                            setDeleteModalOpen={setDeleteModalOpen}
-                                            occurredAt={eventDetails.occurredAt}
-                                            expiryPeriod={expiryPeriod}
+                                            pendingApiResponse={pendingApiResponse}
+                                            onUpdateEventStatus={onUpdateEventStatus}
                                         />
-                                    </FlyoutMenu>
-                                )}
-                            />
-                        </ConditionalTooltip>
-                    )}
+                                    )}
 
-                    {deleteModalOpen && (
-                        <DeleteActionModal
-                            eventId={id}
-                            pendingApiResponse={pendingApiResponse}
-                            teiId={teiId}
-                            programId={programId}
-                            enrollmentId={enrollmentId}
-                            onDeleteEvent={onDeleteEvent}
-                            onRollbackDeleteEvent={onRollbackDeleteEvent}
-                            setDeleteModalOpen={setDeleteModalOpen}
+                                    <DeleteActionButton
+                                        setActionsOpen={setActionsOpen}
+                                        setDeleteModalOpen={setDeleteModalOpen}
+                                        occurredAt={eventDetails.occurredAt}
+                                        expiryPeriod={expiryPeriod}
+                                    />
+                                </FlyoutMenu>
+                            )}
                         />
-                    )}
-                </>
+
+                        {deleteModalOpen && (
+                            <DeleteActionModal
+                                eventId={id}
+                                pendingApiResponse={pendingApiResponse}
+                                teiId={teiId}
+                                programId={programId}
+                                enrollmentId={enrollmentId}
+                                onDeleteEvent={onDeleteEvent}
+                                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                setDeleteModalOpen={setDeleteModalOpen}
+                            />
+                        )}
+                    </>
+                )}
             </DataTableCell>
         </DataTableRow>
     );

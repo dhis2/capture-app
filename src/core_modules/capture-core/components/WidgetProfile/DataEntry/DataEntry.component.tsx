@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { NoticeBoxes } from './NoticeBoxes.container';
 import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
+import { ReadOnlyBadge } from '../../ReadOnlyBadge';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
 
 export const DataEntryComponent = ({
@@ -21,18 +22,39 @@ export const DataEntryComponent = ({
     warningsMessages,
     orgUnitId,
     pluginContext,
+    readOnly,
+    accessReadOnly,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
-        <ModalTitle>{i18n.t('Edit {{trackedEntityName}}',
-            { trackedEntityName, interpolation: { escapeValue: false } },
-        )}</ModalTitle>
+        <ModalTitle>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+                <span>
+                    {readOnly
+                        ? i18n.t(
+                            '{{trackedEntityName}} profile',
+                            { trackedEntityName, interpolation: { escapeValue: false } },
+                        )
+                        : i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })
+                    }
+                </span>
+                <ReadOnlyBadge
+                    trackedEntityTypeWriteAccess={!accessReadOnly}
+                    trackedEntityName={trackedEntityName}
+                    inlineLabel
+                />
+            </div>
+        </ModalTitle>
         <ModalContent>
-            {i18n.t(
-                'Change information about this {{trackedEntityName}} here.',
-                { trackedEntityName, interpolation: { escapeValue: false } },
+            {!readOnly && (
+                <>
+                    {i18n.t(
+                        'Change information about this {{trackedEntityName}} here.',
+                        { trackedEntityName, interpolation: { escapeValue: false } },
+                    )}
+                    {' '}
+                    {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
+                </>
             )}
-            {' '}
-            {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
             <DataEntry
                 id={dataEntryId}
                 formFoundation={formFoundation}
@@ -42,25 +64,27 @@ export const DataEntryComponent = ({
                 onGetValidationContext={onGetValidationContext}
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
+                viewMode={readOnly}
             />
-            <NoticeBoxes
-                errorsMessages={errorsMessages}
-                warningsMessages={warningsMessages}
-                hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
-            />
+            {!readOnly && (
+                <NoticeBoxes
+                    errorsMessages={errorsMessages}
+                    warningsMessages={warningsMessages}
+                    hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
+                />
+            )}
         </ModalContent>
         <ModalActions>
             <ButtonStrip end>
                 <Button onClick={onCancel} secondary>
-                    {i18n.t('Cancel without saving')}
+                    {readOnly ? i18n.t('Close') : i18n.t('Cancel without saving')}
                 </Button>
-                {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
+                {!readOnly && modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
                     <Button loading primary>
                         {i18n.t('Loading...')}
                     </Button>
                 )}
-
-                {(modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
+                {!readOnly && (modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
                     <Button onClick={onSave} primary>
                         {i18n.t('Save changes')}
                     </Button>

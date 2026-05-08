@@ -6,6 +6,7 @@ import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
+import { useEnrollmentAccessContext } from '../EnrollmentAccessContext';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -55,15 +56,48 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    readOnlyBadge: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacersNum.dp4,
-        flexShrink: 0,
-    },
 });
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
+
+const EnrollmentReadOnlyBadge = () => {
+    const {
+        isEventPage,
+        currentStageWriteAccess,
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        anyStageWriteAccess,
+        anyStageReadAccess,
+        trackedEntityTypeName,
+    } = useEnrollmentAccessContext();
+
+    if (isEventPage) {
+        if (currentStageWriteAccess) return null;
+        return (
+            <ReadOnlyBadge
+                programStageWriteAccess={false}
+                trackedEntityName={trackedEntityTypeName}
+                inlineLabel
+            />
+        );
+    }
+
+    // No read access to any stage means the user can't see stages at all,
+    // so don't claim missing stage write access in the badge.
+    const stagesEffectivelyReadOnly = !anyStageWriteAccess && anyStageReadAccess;
+    const showAllMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && stagesEffectivelyReadOnly;
+    if (!showAllMissing) return null;
+
+    return (
+        <ReadOnlyBadge
+            programWriteAccess={false}
+            trackedEntityTypeWriteAccess={false}
+            programStageWriteAccess={false}
+            trackedEntityName={trackedEntityTypeName}
+            inlineLabel
+        />
+    );
+};
 
 type OwnProps = EnrollmentPageProps;
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
@@ -78,7 +112,6 @@ const EnrollmentPageLayoutPlain = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
-    readOnly,
     classes,
     ...passOnProps
 }: Props) => {
@@ -94,14 +127,12 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
-        readOnly,
     }), [
         addRelationShipContainerElement,
         currentPage,
         eventStatus,
         passOnProps,
         program,
-        readOnly,
         toggleVisibility,
     ]);
 
@@ -141,7 +172,7 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
-                    <ReadOnlyBadge readOnly={readOnly} />
+                    <EnrollmentReadOnlyBadge />
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

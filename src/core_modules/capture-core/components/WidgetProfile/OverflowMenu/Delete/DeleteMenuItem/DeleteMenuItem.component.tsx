@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconDelete16, MenuItem } from '@dhis2/ui';
 import type { Props } from './DeleteMenuItem.types';
@@ -17,20 +17,24 @@ const getTooltipContent = (disabled: boolean, trackedEntityTypeName: string) => 
 export const DeleteMenuItem = ({
     trackedEntityTypeName,
     canCascadeDeleteTei,
-    readOnly,
+    canWriteData,
     setActionsIsOpen,
     setDeleteModalIsOpen,
 }: Props) => {
-    const disabled = readOnly || !canCascadeDeleteTei;
+    const disabled = useMemo(() => !canWriteData || !canCascadeDeleteTei, [canWriteData, canCascadeDeleteTei]);
     const tooltipContent = getTooltipContent(disabled, trackedEntityTypeName);
 
+    if (!canWriteData) {
+        return null;
+    }
+
     return (
-        <ConditionalTooltip content={tooltipContent} enabled={false}>
+        <ConditionalTooltip content={tooltipContent} enabled={disabled}>
             <MenuItem
                 destructive
                 dense
                 icon={<IconDelete16 />}
-                label={i18n.t('Deleteee {{trackedEntityTypeName}}', {
+                label={i18n.t('Delete {{trackedEntityTypeName}}', {
                     trackedEntityTypeName,
                     interpolation: { escapeValue: false },
                 })}

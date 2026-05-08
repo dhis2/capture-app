@@ -5,12 +5,10 @@ import { OverflowMenuComponent } from './OverflowMenu.component';
 
 export const OverflowMenu = ({
     trackedEntityTypeName,
-    readOnly,
-    isInactive,
+    canWriteData,
     trackedEntity,
     trackedEntityData,
     onDeleteSuccess,
-    onStatusToggleSuccess,
     displayChangelog,
     teiId,
     programAPI,
@@ -21,13 +19,11 @@ export const OverflowMenu = ({
     return (
         <OverflowMenuComponent
             trackedEntityTypeName={trackedEntityTypeName}
-            readOnly={readOnly}
+            canWriteData={canWriteData}
             canCascadeDeleteTei={hasAuthority}
-            isInactive={isInactive}
             trackedEntity={trackedEntity}
             trackedEntityData={trackedEntityData}
             onDeleteSuccess={onDeleteSuccess}
-            onStatusToggleSuccess={onStatusToggleSuccess}
             displayChangelog={displayChangelog}
             teiId={teiId}
             programAPI={programAPI}

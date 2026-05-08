@@ -60,7 +60,6 @@ export type PlainProps = {
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
-    readOnly?: boolean;
 };
 
 export type Props = {

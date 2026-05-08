@@ -1,17 +1,9 @@
-type TrackedEntityRef = {
-    trackedEntity: string;
-    trackedEntityType?: string;
-    orgUnit?: string;
-};
-
 export type Props = {
-    trackedEntity: TrackedEntityRef;
+    trackedEntity: { trackedEntity: string };
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
-    readOnly: boolean;
-    isInactive: boolean;
+    canWriteData: boolean;
     onDeleteSuccess?: () => void;
-    onStatusToggleSuccess?: () => void;
     displayChangelog: boolean;
     teiId: string;
     programAPI: any;
@@ -19,14 +11,12 @@ export type Props = {
 };
 
 export type PlainProps = {
-    trackedEntity: TrackedEntityRef;
+    trackedEntity: { trackedEntity: string };
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
-    readOnly: boolean;
+    canWriteData: boolean;
     canCascadeDeleteTei: boolean;
-    isInactive: boolean;
     onDeleteSuccess?: () => void;
-    onStatusToggleSuccess?: () => void;
     displayChangelog: boolean;
     teiId: string;
     programAPI: any;

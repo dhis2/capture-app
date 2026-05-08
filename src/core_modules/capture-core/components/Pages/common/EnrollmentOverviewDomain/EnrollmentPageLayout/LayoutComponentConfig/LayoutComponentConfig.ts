@@ -39,7 +39,6 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    shouldHideWidget: ({ readOnly }: any) => Boolean(readOnly),
     getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
@@ -60,7 +59,6 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        readOnly,
     }: any): StagesAndEventProps => ({
         programId: program.id,
         stages,
@@ -72,13 +70,15 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        readOnly,
     }),
 };
 
 export const TrackedEntityRelationship: WidgetConfig = {
     Component: TrackedEntityRelationshipsWrapper,
     shouldHideWidget: ({ addRelationShipContainerElement }: any) => !addRelationShipContainerElement,
+    getCustomSettings: ({ readOnlyMode }: any) => ({
+        readOnlyMode,
+    }),
     getProps: ({
         program,
         orgUnitId,
@@ -86,7 +86,6 @@ export const TrackedEntityRelationship: WidgetConfig = {
         toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly,
     }: any): TrackedEntityRelationshipProps => ({
         trackedEntityTypeId: program.trackedEntityType.id,
         programId: program.id,
@@ -96,7 +95,6 @@ export const TrackedEntityRelationship: WidgetConfig = {
         onCloseAddRelationship: toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly,
     }),
 };
 
@@ -134,15 +132,13 @@ export const IndicatorWidget: WidgetConfig = {
 
 export const EnrollmentNote: WidgetConfig = {
     Component: WidgetEnrollmentNote,
-    getProps: ({ readOnly }: any) => ({
-        readOnly,
-    }),
+    getProps: () => ({}),
 };
 
 export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
-    getCustomSettings: ({ readOnlyMode = true }: any, props?: any) => ({
-        readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
+    getCustomSettings: ({ readOnlyMode = true }: any) => ({
+        readOnlyMode,
     }),
     getProps: ({
         teiId,
@@ -191,9 +187,8 @@ export const NewEventWorkspace: WidgetConfig = {
 export const EnrollmentWidget: WidgetConfig = {
     Component: WidgetEnrollment,
     shouldHideWidget: ({ enrollmentId }: any) => enrollmentId === 'AUTO',
-    getCustomSettings: ({ readOnlyMode }: any, props?: any) => ({
-        readOnlyMode: readOnlyMode || Boolean(props?.readOnly),
-        readOnly: props?.readOnly,
+    getCustomSettings: ({ readOnlyMode }: any) => ({
+        readOnlyMode,
     }),
     getProps: ({
         teiId,
@@ -247,7 +242,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-        readOnly,
     }: any): WidgetEventEditProps => ({
         programId: program.id,
         stageId,
@@ -266,7 +260,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-        readOnly,
     }),
 };
 
@@ -290,12 +283,11 @@ export const AssigneeWidget: WidgetConfig = {
         eventAccess,
         onSaveAssignee,
         onSaveAssigneeError,
-        readOnly,
     }: any) => ({
         enabled: programStage?.enableUserAssignment || false,
         assignee,
         getSaveContext: getAssignedUserSaveContext,
-        writeAccess: (eventAccess?.write || false) && !readOnly,
+        writeAccess: eventAccess?.write || false,
         onSave: onSaveAssignee,
         onSaveError: onSaveAssigneeError,
     }),
@@ -303,17 +295,15 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId, readOnly }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
         dataEntryKey,
         dataEntryId,
-        readOnly,
     }),
 };
 
 export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
-    shouldHideWidget: ({ currentPage, readOnly }: any) =>
-        currentPage === EnrollmentPageKeys.EDIT_EVENT || Boolean(readOnly),
+    shouldHideWidget: ({ currentPage }: any) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({
         program,
         stageId,

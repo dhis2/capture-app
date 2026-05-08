@@ -16,8 +16,17 @@ const emptyStateStyle = {
     marginBottom: spacersNum.dp12,
 };
 
-export const StagesPlain = ({ stages, events, ...passOnProps }: PlainProps) => {
-    const readableStages = useMemo(() => stages.filter(stage => stage.dataAccess.read), [stages]);
+export const StagesPlain = ({
+    stages,
+    events,
+    stageWriteAccessById,
+    stageReadAccessById,
+    ...passOnProps
+}: PlainProps) => {
+    const readableStages = useMemo(
+        () => stages.filter(stage => stageReadAccessById?.[stage.id] ?? stage.dataAccess.read),
+        [stages, stageReadAccessById],
+    );
     const eventsByStage = useMemo(
         () => stages.reduce(
             (acc, stage) => {
@@ -56,6 +65,7 @@ export const StagesPlain = ({ stages, events, ...passOnProps }: PlainProps) => {
                         events={eventsByStage[stage.id]}
                         key={stage.id}
                         stage={stage}
+                        stageWriteAccess={stageWriteAccessById?.[stage.id] ?? stage.dataAccess.write}
                         {...passOnProps}
                     />
                 ))

@@ -109,6 +109,7 @@ const buildDataElementUnique = (
             const serverValue = pipe(convertFormToClient, convertClientToServer)(
                 value,
                 trackedEntityAttribute.valueType,
+                dataElement,
             );
 
             if (contextProps.onGetUnsavedAttributeValues) {
