@@ -25,6 +25,7 @@ import { OverflowMenu } from './OverflowMenu';
 import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const styles: Readonly<any> = {
     header: {
@@ -93,7 +94,10 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
-    const trackedEntityTypeAccess = program?.trackedEntityType?.access;
+    const {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+    } = useEnrollmentAccessContext();
     const trackedEntityTypeName = program?.trackedEntityType?.displayName;
     const {
         loading: userRolesLoading,
@@ -103,11 +107,10 @@ const WidgetProfilePlain = ({
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 
-    const isEditable = useMemo(() =>
-        !hasNoAttributes &&
-        trackedEntityTypeAccess?.data?.write &&
-        !readOnlyMode,
-    [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
+    const isEditable = useMemo(
+        () => !hasNoAttributes && trackedEntityTypeWriteAccess && !readOnlyMode,
+        [hasNoAttributes, trackedEntityTypeWriteAccess, readOnlyMode],
+    );
 
     const profileButtonLabel = useMemo(() => {
         if (readOnlyMode) return null;
@@ -152,8 +155,8 @@ const WidgetProfilePlain = ({
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
     const canWriteData = useMemo(
-        () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
-        [trackedEntityTypeAccess, program],
+        () => trackedEntityTypeWriteAccess && programWriteAccess,
+        [trackedEntityTypeWriteAccess, programWriteAccess],
     );
 
     const renderProfile = () => {
@@ -263,7 +266,7 @@ const WidgetProfilePlain = ({
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
                         readOnly={!isEditable}
-                        accessReadOnly={!trackedEntityTypeAccess?.data?.write}
+                        accessReadOnly={!trackedEntityTypeWriteAccess}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>
