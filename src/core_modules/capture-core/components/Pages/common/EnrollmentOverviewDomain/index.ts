@@ -25,5 +25,4 @@ export {
     EnrollmentAccessProvider,
     useEnrollmentAccessContext,
     useStageAccess,
-    useShouldShowWidgetAccessBadge,
 } from './EnrollmentAccessContext';

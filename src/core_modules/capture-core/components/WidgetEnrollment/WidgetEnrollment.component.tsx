@@ -14,7 +14,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
-import { useWidgetEnrollmentAccess } from './useWidgetEnrollmentAccess';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
@@ -56,6 +56,7 @@ const getGeometryType = geometryType =>
 const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
+// eslint-disable-next-line complexity
 const WidgetEnrollmentPlain = ({
     classes,
     events,
@@ -81,11 +82,8 @@ const WidgetEnrollmentPlain = ({
     onUpdateEnrollmentStatusSuccess,
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
-    const {
-        readOnly: enrollmentReadOnly,
-        showBadge,
-        programWriteAccess,
-    } = useWidgetEnrollmentAccess(readOnlyMode);
+    const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
+    const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
@@ -104,7 +102,7 @@ const WidgetEnrollmentPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>{i18n.t('Enrollment')}</span>
-                        {showBadge && (
+                        {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programWriteAccess={programWriteAccess}

@@ -2,11 +2,6 @@ import React, { createContext, useContext, useMemo } from 'react';
 import type { TrackerProgram } from '../../../../../metaData';
 import type { Access } from '../../../../../metaData/Access';
 
-export type StageAccess = {
-    canWrite: boolean;
-    canRead: boolean;
-};
-
 export type EnrollmentAccessContextValue = {
     programWriteAccess: boolean;
     trackedEntityTypeWriteAccess: boolean;
@@ -20,6 +15,9 @@ export type EnrollmentAccessContextValue = {
     isEventPage: boolean;
     multipleStages: boolean;
     allWriteAccessMissing: boolean;
+    // Widget-level access badges defer to the page-level badge on event pages
+    // and when all access is missing.
+    showWidgetBadge: boolean;
 };
 
 // Fail-open default for renders outside a provider (tests, plugin contexts).
@@ -34,6 +32,7 @@ const fallback: EnrollmentAccessContextValue = {
     isEventPage: false,
     multipleStages: false,
     allWriteAccessMissing: false,
+    showWidgetBadge: true,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
@@ -81,6 +80,7 @@ export const EnrollmentAccessProvider = ({ program, currentStageId, children }: 
             isEventPage,
             multipleStages: program.stages.size > 1,
             allWriteAccessMissing,
+            showWidgetBadge: !isEventPage && !allWriteAccessMissing,
         };
     }, [program, currentStageId]);
 
@@ -95,7 +95,7 @@ export const useStageAccess = (stage?: {
     id: string;
     access?: { data?: { write?: boolean; read?: boolean } };
     dataAccess?: { write?: boolean; read?: boolean };
-}): StageAccess => {
+}): { canWrite: boolean; canRead: boolean } => {
     const { stageWriteAccessById, stageReadAccessById } = useContext(Context);
     return useMemo(() => {
         if (!stage) return { canWrite: true, canRead: true };
@@ -106,13 +106,4 @@ export const useStageAccess = (stage?: {
             canRead: fromContextRead ?? Boolean(stage.access?.data?.read ?? stage.dataAccess?.read),
         };
     }, [stage, stageWriteAccessById, stageReadAccessById]);
-};
-
-// Page-level coordination: widget-level access badges are suppressed on the
-// event page (where the page-level badge takes over) and when no write
-// access is available anywhere (where the page-level "all missing" badge
-// covers everything).
-export const useShouldShowWidgetAccessBadge = (): boolean => {
-    const { isEventPage, allWriteAccessMissing } = useContext(Context);
-    return !isEventPage && !allWriteAccessMissing;
 };
