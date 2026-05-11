@@ -15,12 +15,9 @@ export type EnrollmentAccessContextValue = {
     isEventPage: boolean;
     multipleStages: boolean;
     allWriteAccessMissing: boolean;
-    // Widget-level access badges defer to the page-level badge on event pages
-    // and when all access is missing.
     showWidgetBadge: boolean;
 };
 
-// Fail-open default for renders outside a provider (tests, plugin contexts).
 const fallback: EnrollmentAccessContextValue = {
     programWriteAccess: true,
     trackedEntityTypeWriteAccess: true,

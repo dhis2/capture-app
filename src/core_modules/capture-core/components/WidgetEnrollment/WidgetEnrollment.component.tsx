@@ -56,7 +56,6 @@ const getGeometryType = geometryType =>
 const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
-// eslint-disable-next-line complexity
 const WidgetEnrollmentPlain = ({
     classes,
     events,
@@ -202,27 +201,26 @@ const WidgetEnrollmentPlain = ({
                                 />
                             </div>
                         )}
-                        {!enrollmentReadOnly && (
-                            <Actions
-                                tetName={program.trackedEntityType.displayName}
-                                onlyEnrollOnce={program.onlyEnrollOnce}
-                                programStages={program.programStages}
-                                enrollment={enrollment}
-                                events={events}
-                                ownerOrgUnitId={ownerOrgUnit.id}
-                                refetchEnrollment={refetchEnrollment}
-                                refetchTEI={refetchTEI}
-                                onDelete={onDelete}
-                                onAddNew={onAddNew}
-                                canAddNew={canAddNew}
-                                onError={onError}
-                                onSuccess={onSuccess}
-                                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-                                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
-                                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
-                                onAccessLostFromTransfer={onAccessLostFromTransfer}
-                            />
-                        )}
+                        <Actions
+                            readOnly={enrollmentReadOnly}
+                            tetName={program.trackedEntityType.displayName}
+                            onlyEnrollOnce={program.onlyEnrollOnce}
+                            programStages={program.programStages}
+                            enrollment={enrollment}
+                            events={events}
+                            ownerOrgUnitId={ownerOrgUnit.id}
+                            refetchEnrollment={refetchEnrollment}
+                            refetchTEI={refetchTEI}
+                            onDelete={onDelete}
+                            onAddNew={onAddNew}
+                            canAddNew={canAddNew}
+                            onError={onError}
+                            onSuccess={onSuccess}
+                            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                            onAccessLostFromTransfer={onAccessLostFromTransfer}
+                        />
                     </div>
                 )}
             </Widget>

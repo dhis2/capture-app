@@ -19,6 +19,7 @@ export type Props = {
     onlyEnrollOnce: boolean;
     tetName: string;
     onAccessLostFromTransfer?: () => void;
+    readOnly?: boolean;
 };
 
 export type PlainProps = {
