@@ -60,10 +60,6 @@ export type PlainProps = {
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
-    programWriteAccess: boolean;
-    trackedEntityTypeWriteAccess: boolean;
-    programStageWriteAccess: boolean;
-    programStageReadAccess: boolean;
 };
 
 export type Props = {

@@ -1,8 +1,8 @@
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type { Props as TrackedEntityRelationshipProps }
-    from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps } from
+    '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
@@ -39,7 +39,6 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    shouldHideWidget: ({ programStageWriteAccess }: any) => !programStageWriteAccess,
     getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
@@ -60,7 +59,6 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        hideEventStageBadge,
     }: any): StagesAndEventProps => ({
         programId: program.id,
         stages,
@@ -72,7 +70,6 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
@@ -89,10 +86,6 @@ export const TrackedEntityRelationship: WidgetConfig = {
         toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        programWriteAccess,
-        trackedEntityTypeWriteAccess,
-        programStageWriteAccess,
-        hideEventStageBadge,
     }: any): TrackedEntityRelationshipProps => ({
         trackedEntityTypeId: program.trackedEntityType.id,
         programId: program.id,
@@ -102,9 +95,6 @@ export const TrackedEntityRelationship: WidgetConfig = {
         onCloseAddRelationship: toggleVisibility,
         teiId,
         onLinkedRecordClick,
-        readOnly: !trackedEntityTypeWriteAccess,
-        hideButton: !programWriteAccess && !trackedEntityTypeWriteAccess && !programStageWriteAccess,
-        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
@@ -142,9 +132,7 @@ export const IndicatorWidget: WidgetConfig = {
 
 export const EnrollmentNote: WidgetConfig = {
     Component: WidgetEnrollmentNote,
-    getProps: ({ hideEventStageBadge }: any) => ({
-        hideReadOnlyBadge: Boolean(hideEventStageBadge),
-    }),
+    getProps: () => ({}),
 };
 
 export const ProfileWidget: WidgetConfig = {
@@ -215,7 +203,6 @@ export const EnrollmentWidget: WidgetConfig = {
         onUpdateEnrollmentStatusError,
         onEnrollmentError,
         onAccessLostFromTransfer,
-        hideEventStageBadge,
     }: any): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,
@@ -230,7 +217,6 @@ export const EnrollmentWidget: WidgetConfig = {
         externalData: { status: widgetEnrollmentStatus, events },
         onError: onEnrollmentError,
         onAccessLostFromTransfer,
-        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
@@ -307,19 +293,15 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId, program, stageId, programStage, hideEventStageBadge }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
         dataEntryKey,
         dataEntryId,
-        programId: program?.id,
-        stageId: stageId ?? programStage?.id,
-        hideReadOnlyBadge: Boolean(hideEventStageBadge),
     }),
 };
 
 export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
-    shouldHideWidget: ({ currentPage }: any) =>
-        currentPage === EnrollmentPageKeys.EDIT_EVENT,
+    shouldHideWidget: ({ currentPage }: any) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({
         program,
         stageId,

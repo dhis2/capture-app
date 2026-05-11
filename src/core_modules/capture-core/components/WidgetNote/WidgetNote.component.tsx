@@ -1,36 +1,53 @@
 import React, { useState, useCallback } from 'react';
+import { spacersNum } from '@dhis2/ui';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget, WidgetHeaderCountBadge } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { Props } from './WidgetNote.types';
 import { NoteSection } from './NoteSection/NoteSection';
 
-export const WidgetNote = ({
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: `${spacersNum.dp8}px`,
+        flex: 1,
+    },
+    badge: {
+        marginInlineStart: 'auto',
+    },
+};
+
+const WidgetNotePlain = ({
+    classes,
     title,
     notes,
+    scope,
     onAddNote,
-    readOnly,
-    programWriteAccess,
-    trackedEntityTypeWriteAccess,
-    programStageWriteAccess,
-    trackedEntityName,
-    hideReadOnlyBadge,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState<boolean>(true);
+    const {
+        programWriteAccess,
+        currentStageWriteAccess,
+        trackedEntityTypeName,
+        showWidgetBadge,
+    } = useEnrollmentAccessContext();
+    const isEventScope = scope === 'event';
+    const readOnly = isEventScope ? !currentStageWriteAccess : !programWriteAccess;
 
     return (
         <Widget
-            header={<div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+            header={<div className={classes.header}>
                 <span>{title}</span>
                 {notes.length > 0 && <WidgetHeaderCountBadge count={notes.length} />}
-                {!hideReadOnlyBadge && (
-                    <div style={{ marginInlineStart: 'auto' }}>
+                {showWidgetBadge && (
+                    <div className={classes.badge}>
                         <ReadOnlyBadge
-                            readOnly={readOnly}
-                            programWriteAccess={programWriteAccess}
-                            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
-                            programStageWriteAccess={programStageWriteAccess}
-                            trackedEntityName={trackedEntityName}
+                            programWriteAccess={isEventScope ? true : programWriteAccess}
+                            programStageWriteAccess={isEventScope ? currentStageWriteAccess : true}
+                            trackedEntityName={trackedEntityTypeName}
                         />
                     </div>
                 )}
@@ -48,3 +65,5 @@ export const WidgetNote = ({
         </Widget>
     );
 };
+
+export const WidgetNote = withStyles(styles)(WidgetNotePlain);

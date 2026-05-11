@@ -34,7 +34,6 @@ const ActionsPlain = ({
     ownerOrgUnitId,
     tetName,
     canAddNew,
-    readOnly,
     onUpdateStatus,
     onUpdate,
     onDelete,
@@ -63,10 +62,6 @@ const ActionsPlain = ({
         setOpenActions(false);
         onUpdateStatus(arg, redirect);
     };
-
-    if (readOnly) {
-        return null;
-    }
 
     return (
         <>
@@ -136,10 +131,10 @@ const ActionsPlain = ({
                 </div>
             )}
             {isOpenMap && <MapModal
-                readOnly={readOnly}
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
+                readOnly={false}
             />}
             {isOpenTransfer && (
                 <TransferModal

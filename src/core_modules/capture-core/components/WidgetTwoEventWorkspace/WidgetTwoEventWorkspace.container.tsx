@@ -10,8 +10,8 @@ import { WidgetWrapper } from './WidgetWrapper';
 import { WidgetHeader } from './WidgetHeader';
 import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
 
-const stageHasWriteAccess = (program: any, id: string | undefined) =>
-    Boolean(program?.programStages?.find((s: any) => s.id === id)?.access?.data?.write);
+const stageHasReadAccess = (program: any, id: string | undefined) =>
+    Boolean(program?.programStages?.find((s: any) => s.id === id)?.access?.data?.read);
 
 const useTwoEventWorkspaceData = (eventId: string, programId: string, fallbackStageId: string | undefined) => {
     const { program } = useProgram(programId);
@@ -35,7 +35,7 @@ const useTwoEventWorkspaceData = (eventId: string, programId: string, fallbackSt
     const isError = linkedEventQuery.isError || metadataQuery.isError || clientValuesQuery.isError;
     const missingData = !linkedEvent || !formFoundation || !linkedStage;
     const accessBlocked = Boolean(program)
-        && (!stageHasWriteAccess(program, fallbackStageId) || !stageHasWriteAccess(program, linkedEvent?.programStage));
+        && (!stageHasReadAccess(program, fallbackStageId) || !stageHasReadAccess(program, linkedEvent?.programStage));
 
     return {
         program,

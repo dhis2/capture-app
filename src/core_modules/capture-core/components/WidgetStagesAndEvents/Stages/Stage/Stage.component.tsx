@@ -6,6 +6,7 @@ import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
 import { StageDetail } from './StageDetail/StageDetail.component';
 import { StageCreateNewButton } from './StageCreateNewButton';
+import { useEnrollmentAccessContext } from '../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const styles = {
     overview: {
@@ -26,13 +27,14 @@ const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: strin
 );
 
 export const StagePlain = ({
-    stage, events, classes, onCreateNew, ruleEffects, stageWriteAccess, hideReadOnlyBadge, ...passOnProps
+    stage, events, classes, onCreateNew, ruleEffects, ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
     const hideProgramStage = preventAddingNewEvents && events.length === 0;
-    const effectiveStageWriteAccess = stageWriteAccess ?? stage.dataAccess.write;
+    const { stageWriteAccessById } = useEnrollmentAccessContext();
+    const effectiveStageWriteAccess = stageWriteAccessById[stage.id] ?? stage.dataAccess.write;
 
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
@@ -51,7 +53,6 @@ export const StagePlain = ({
                     description={description}
                     events={events}
                     stageWriteAccess={effectiveStageWriteAccess}
-                    hideReadOnlyBadge={hideReadOnlyBadge}
                 />}
                 onOpen={handleOpen}
                 onClose={handleClose}
@@ -65,7 +66,6 @@ export const StagePlain = ({
                     hideDueDate={hideDueDate}
                     repeatable={repeatable}
                     enableUserAssignment={enableUserAssignment}
-                    stageWriteAccess={effectiveStageWriteAccess}
                     onCreateNew={onCreateNew}
                     hiddenProgramStage={preventAddingNewEvents}
                     {...passOnProps}
@@ -73,7 +73,6 @@ export const StagePlain = ({
                     <div className={classes.buttonContainer}>
                         <StageCreateNewButton
                             onCreateNew={() => onCreateNew(id)}
-                            stageWriteAccess={effectiveStageWriteAccess}
                             eventCount={events.length}
                             repeatable={repeatable}
                             preventAddingEventActionInEffect={preventAddingNewEvents}

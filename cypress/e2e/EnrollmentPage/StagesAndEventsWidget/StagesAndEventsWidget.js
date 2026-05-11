@@ -186,7 +186,7 @@ Then(/^you should see the disabled button (.*)$/, (stageName) => {
         .should('be.disabled');
 });
 
-Then('no create new event button should be visible', () => {
+Then('create new event button should not be visible', () => {
     cy.get('[data-test="stages-and-events-widget"]').should('exist');
     cy.get('[data-test="create-new-button"]').should('not.exist');
 });

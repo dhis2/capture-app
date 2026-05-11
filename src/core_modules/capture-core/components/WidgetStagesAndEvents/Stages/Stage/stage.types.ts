@@ -4,8 +4,6 @@ import type { Stage, StageCommonProps } from '../../types/common.types';
 type ExtractedProps = {
     programId: string;
     stage: Stage;
-    stageWriteAccess?: boolean;
-    hideReadOnlyBadge?: boolean;
     events: Array<ApiEnrollmentEvent>;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;

@@ -67,6 +67,7 @@ export const WidgetTrackedEntityRelationship = ({
             readOnly={readOnly}
             accessReadOnly={accessReadOnly}
             hideReadOnlyBadge={hideReadOnlyBadge}
+            trackedEntityName={trackedEntityTypeName}
         >
             <NewTrackedEntityRelationship
                 teiId={teiId}

@@ -1,7 +1,10 @@
+export type NoteScope = 'enrollment' | 'event';
+
 export type Props = {
     title: string;
     placeholder: string;
     emptyNoteMessage: string;
+    scope: NoteScope;
     notes: Array<{
         value: string;
         storedAt: string;
@@ -11,10 +14,4 @@ export type Props = {
         };
     }>;
     onAddNote: (note: string) => void;
-    readOnly?: boolean;
-    programWriteAccess?: boolean;
-    trackedEntityTypeWriteAccess?: boolean;
-    programStageWriteAccess?: boolean;
-    trackedEntityName?: string;
-    hideReadOnlyBadge?: boolean;
 };

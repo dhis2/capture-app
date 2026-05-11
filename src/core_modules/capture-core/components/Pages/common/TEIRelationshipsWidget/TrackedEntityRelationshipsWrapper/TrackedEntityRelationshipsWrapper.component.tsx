@@ -15,6 +15,7 @@ import {
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import { RegisterTei } from '../RegisterTei';
 import { useCoreOrgUnit } from '../../../../../metadataRetrieval/coreOrgUnit';
+import { useEnrollmentAccessContext } from '../../EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const createResultsView = (onLinkToTrackedEntityFromSearch: any) => (viewProps: any) => (
     <TeiRelationshipSearchResults
@@ -32,12 +33,15 @@ export const TrackedEntityRelationshipsWrapper = ({
     onOpenAddRelationship,
     onCloseAddRelationship,
     onLinkedRecordClick,
-    readOnly,
-    readOnlyMode,
-    hideButton,
-    hideReadOnlyBadge,
+    readOnlyMode = false,
 }: Props) => {
-    const effectiveReadOnly = Boolean(readOnlyMode) || readOnly;
+    const {
+        trackedEntityTypeWriteAccess,
+        allWriteAccessMissing,
+        showWidgetBadge,
+    } = useEnrollmentAccessContext();
+    const accessReadOnly = !trackedEntityTypeWriteAccess;
+    const effectiveReadOnly = readOnlyMode || accessReadOnly;
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
     const { orgUnit } = useCoreOrgUnit(orgUnitId);
@@ -80,9 +84,9 @@ export const TrackedEntityRelationshipsWrapper = ({
             onSelectFindMode={onSelectFindMode}
             relationshipTypes={relationshipTypes}
             readOnly={effectiveReadOnly}
-            accessReadOnly={readOnly}
-            hideButton={hideButton}
-            hideReadOnlyBadge={hideReadOnlyBadge}
+            accessReadOnly={accessReadOnly}
+            hideButton={accessReadOnly || allWriteAccessMissing}
+            hideReadOnlyBadge={!showWidgetBadge}
             renderTrackedEntityRegistration={(
                 selectedTrackedEntityTypeId,
                 suggestedProgramId,

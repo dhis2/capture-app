@@ -4,14 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
-import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
 
-export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId, stageId, hideReadOnlyBadge }: Props) => {
+export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-    const { program } = useProgram(programId ?? '');
-    const liveStage = program?.programStages?.find((s: any) => s.id === stageId);
-    const stageWriteAccess = program ? Boolean(liveStage?.access?.data?.write) : true;
-
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
 
@@ -26,10 +21,8 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId, stageId,
                 placeholder={i18n.t('Write a note about this event')}
                 emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
+                scope="event"
                 onAddNote={onAddNote}
-                readOnly={!stageWriteAccess}
-                programStageWriteAccess={stageWriteAccess}
-                hideReadOnlyBadge={hideReadOnlyBadge}
             />
         </div>
     );

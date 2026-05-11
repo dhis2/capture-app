@@ -85,4 +85,4 @@ Feature: User interacts with Stages and Events Widget
     @user:trackerAutoTestRestricted
     Scenario: Create new event buttons are hidden for users with read-only access
         Given you open the enrollment page by typing #enrollment?enrollmentId=WKPoiZxZxNG&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=PgmUFEQYZdt
-        Then no create new event button should be visible
+        Then create new event button should not be visible

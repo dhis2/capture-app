@@ -1,9 +1,6 @@
 export type Props = {
     dataEntryKey: string;
     dataEntryId: string;
-    programId?: string;
-    stageId?: string;
-    hideReadOnlyBadge?: boolean;
 };
 
 export type ClientNote = {

@@ -30,7 +30,6 @@ const MiniMapPlain = ({
     refetchTEI,
     onError,
     readOnly,
-    hideEdit,
     classes,
 }: Props) => {
     const [isOpenMap, setOpenMap] = useState(false);
@@ -57,7 +56,7 @@ const MiniMapPlain = ({
                     zoomControl={false}
                     attributionControl={false}
                     key="minimap"
-                    onClick={hideEdit ? undefined : () => {
+                    onClick={() => {
                         setOpenMap(true);
                     }}
                 >

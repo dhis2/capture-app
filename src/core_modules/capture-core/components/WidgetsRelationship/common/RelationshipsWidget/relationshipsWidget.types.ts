@@ -13,4 +13,5 @@ export type Props = Readonly<{
     readOnly?: boolean;
     accessReadOnly?: boolean;
     hideReadOnlyBadge?: boolean;
+    trackedEntityName?: string;
 }>;

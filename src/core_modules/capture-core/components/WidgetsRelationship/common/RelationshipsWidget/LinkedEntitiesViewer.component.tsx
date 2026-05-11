@@ -25,7 +25,6 @@ const LinkedEntitiesViewerPlain = ({
     groupedLinkedEntities,
     onLinkedRecordClick,
     onDeleteRelationship,
-    readOnly,
     classes,
 }: Props & WithStyles<typeof styles>) => (
     <div
@@ -43,7 +42,6 @@ const LinkedEntitiesViewerPlain = ({
                         onLinkedRecordClick={onLinkedRecordClick}
                         onDeleteRelationship={onDeleteRelationship}
                         context={context}
-                        readOnly={readOnly}
                     />
                 </div>
             );

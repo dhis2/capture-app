@@ -29,7 +29,6 @@ const LinkedEntityTablePlain = ({
     onLinkedRecordClick,
     onDeleteRelationship,
     context,
-    readOnly,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [visibleRowsCount, setVisibleRowsCount] = useState(DEFAULT_VISIBLE_ROWS_COUNT);
@@ -48,7 +47,6 @@ const LinkedEntityTablePlain = ({
                 <LinkedEntityTableHeader
                     columns={columns}
                     context={context}
-                    readOnly={readOnly}
                 />
                 <LinkedEntityTableBody
                     linkedEntities={visibleLinkedEntities}
@@ -56,7 +54,6 @@ const LinkedEntityTablePlain = ({
                     onLinkedRecordClick={onLinkedRecordClick}
                     context={context}
                     onDeleteRelationship={onDeleteRelationship}
-                    readOnly={readOnly}
                 />
             </DataTable>
             {showMoreButtonVisible && (

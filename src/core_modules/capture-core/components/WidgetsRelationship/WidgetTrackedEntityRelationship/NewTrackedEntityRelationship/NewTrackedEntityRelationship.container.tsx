@@ -11,7 +11,7 @@ const styles = {
     },
 };
 
-export const NewTrackedEntityRelationshipPlain = ({
+const NewTrackedEntityRelationshipPlain = ({
     renderElement,
     teiId,
     orgUnitId,
