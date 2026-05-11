@@ -49,10 +49,12 @@ export const WidgetRelatedStagesPlain = ({
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-    const { currentRelatedStagesStatus } = useRelatedStages({ programStageId, programId });
+    const { currentRelatedStagesStatus, constraint } = useRelatedStages({ programStageId, programId });
     const { program } = useProgram(programId);
     const liveStage = program?.programStages?.find((s: any) => s.id === programStageId);
+    const linkedStage = program?.programStages?.find((s: any) => s.id === constraint?.programStage?.id);
     const stageWriteAccess = Boolean(liveStage?.access?.data?.write);
+    const linkedStageWriteAccess = Boolean(linkedStage?.access?.data?.write);
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
@@ -110,7 +112,7 @@ export const WidgetRelatedStagesPlain = ({
         return null;
     }
 
-    if (program && !stageWriteAccess) {
+    if (program && (!stageWriteAccess || !linkedStageWriteAccess)) {
         return null;
     }
 
