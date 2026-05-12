@@ -14,7 +14,7 @@ import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching }
 const LISTING_FIELDS =
     'trackedEntity,createdAt,inactive,attributes[attribute,value],programOwners[orgUnit,program]';
 
-const DOWNLOAD_FIELDS = '*,!relationships,programOwners[orgUnit,program]';
+const DOWNLOAD_FIELDS = ':all,!relationships,programOwners[orgUnit,program]';
 
 export const createApiQueryArgs = ({
     page,
