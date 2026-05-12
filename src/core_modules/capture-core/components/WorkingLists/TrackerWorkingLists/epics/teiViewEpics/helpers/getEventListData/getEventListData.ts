@@ -16,6 +16,12 @@ import { addTEIsData } from './addTEIsData';
 import { getColumnsQueryArgs } from './getColumnsQueryArgs';
 import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
+const LISTING_FIELDS =
+    'event,status,program,programStage,enrollment,trackedEntity,'
+    + 'occurredAt,scheduledAt,orgUnit,assignedUser,dataValues[dataElement,value]';
+
+const DOWNLOAD_FIELDS = '*';
+
 const createApiEventQueryArgs = (
     {
         page,
@@ -45,8 +51,7 @@ const createApiEventQueryArgs = (
         [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'CAPTURE',
         program,
         programStage,
-        fields: 'event,status,program,programStage,enrollment,trackedEntity,' +
-            'occurredAt,scheduledAt,orgUnit,assignedUser,dataValues[dataElement,value]',
+        fields: LISTING_FIELDS,
     };
 
     return getScheduledDateQueryArgs(queryArgs);
@@ -87,7 +92,7 @@ export const getEventListData = async (
             recordContainers: [],
             request: {
                 url: urlEvents,
-                queryParams: queryParamsEvents,
+                queryParams: { ...queryParamsEvents, fields: DOWNLOAD_FIELDS },
             },
         };
     }
@@ -119,7 +124,7 @@ export const getEventListData = async (
         recordContainers: clientWithSubvalues,
         request: {
             url: urlEvents,
-            queryParams: queryParamsEvents,
+            queryParams: { ...queryParamsEvents, fields: DOWNLOAD_FIELDS },
         },
     };
 };

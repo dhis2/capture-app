@@ -11,6 +11,11 @@ import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getTeiListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 
+const LISTING_FIELDS =
+    'trackedEntity,createdAt,inactive,attributes[attribute,value],programOwners[orgUnit,program]';
+
+const DOWNLOAD_FIELDS = '*,!relationships,programOwners[orgUnit,program]';
+
 export const createApiQueryArgs = ({
     page,
     pageSize,
@@ -40,7 +45,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
         [orgUnitQueryParam]: orgUnitId,
         [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
         program,
-        fields: 'trackedEntity,createdAt,inactive,attributes[attribute,value],programOwners[orgUnit,program]',
+        fields: LISTING_FIELDS,
     };
 };
 
@@ -73,7 +78,7 @@ export const getTeiListData = async (
         recordContainers: clientTeisWithSubvalues,
         request: {
             url,
-            queryParams,
+            queryParams: { ...queryParams, fields: DOWNLOAD_FIELDS },
         },
     };
 };
