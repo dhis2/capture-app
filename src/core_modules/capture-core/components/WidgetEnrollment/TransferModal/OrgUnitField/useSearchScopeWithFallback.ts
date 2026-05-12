@@ -1,28 +1,16 @@
+import { useMemo } from 'react';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
+import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
 
 type Props = {
     searchText?: string;
 };
 
 export const useSearchScopeWithFallback = ({ searchText }: Props) => {
-    const { data: orgUnitRoots, isInitialLoading } = useApiMetadataQuery(
-        ['organisationUnits', 'userOrgUnitScope'],
-        {
-            resource: 'me',
-            params: {
-                fields: 'teiSearchOrganisationUnits[id,path],organisationUnits[id,path]',
-            },
-        },
-        {
-            enabled: !searchText,
-            select: (data) => {
-                const { teiSearchOrganisationUnits, organisationUnits } = data as any;
-                return teiSearchOrganisationUnits.length
-                    ? teiSearchOrganisationUnits
-                    : organisationUnits;
-            },
-        },
-    );
+    const orgUnitRootsFromUser = useMemo(() => {
+        const { teiSearchOrganisationUnits, organisationUnits } = CurrentUser.get();
+        return teiSearchOrganisationUnits.length ? teiSearchOrganisationUnits : organisationUnits;
+    }, []);
 
     const { data: searchOrgUnits, isInitialLoading: isInitialLoadingSearch } = useApiMetadataQuery(
         ['organisationUnits', 'userOrgUnitScope', 'search', searchText],
@@ -47,7 +35,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
     );
 
     return {
-        orgUnitRoots: searchText?.length ? searchOrgUnits : orgUnitRoots,
-        isLoading: searchText?.length ? isInitialLoadingSearch : isInitialLoading,
+        orgUnitRoots: searchText?.length ? searchOrgUnits : orgUnitRootsFromUser,
+        isLoading: searchText?.length ? isInitialLoadingSearch : false,
     };
 };

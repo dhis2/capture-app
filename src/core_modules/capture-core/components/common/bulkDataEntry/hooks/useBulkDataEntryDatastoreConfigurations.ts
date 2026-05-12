@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
-import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
+import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
 import type { DataStoreConfiguration } from '../bulkDataEntry.types';
 
 const bulkDataEntryDatastoreSchema = z.object({
@@ -48,7 +48,7 @@ const getLocalizedString = (field: Record<string, string>, locale: string): stri
 };
 
 export const useBulkDataEntryDatastoreConfigurations = (programId: string) => {
-    const { locale } = useUserLocale();
+    const locale = CurrentUser.get().uiLocale;
     const {
         data: configExists,
         isLoading: namespaceIsLoading,

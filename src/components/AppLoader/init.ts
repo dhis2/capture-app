@@ -3,6 +3,7 @@ import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
+import { CurrentUser } from 'capture-core/utils/userInfo/CurrentUser';
 import i18n from '@dhis2/d2-i18n';
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
@@ -145,18 +146,34 @@ export async function initializeAsync({
 }) {
     setLogLevel();
 
-    const {
-        id: currentUserId,
-        userRoles,
-        userGroups,
-        organisationUnits: captureScope,
-        teiSearchOrganisationUnits: searchScope,
-        settings: userSettings,
-    } = await querySingleResource({
+    const meResponse = await querySingleResource({
         resource: 'me',
         params: {
-            fields: 'id,userRoles,userGroups,organisationUnits,teiSearchOrganisationUnits,settings',
+            fields: 'id,firstName,surname,username,userRoles,userGroups,' +
+                'organisationUnits[id,path],teiSearchOrganisationUnits[id,path],settings',
         },
+    });
+
+    const {
+        id: currentUserId,
+        firstName = '',
+        surname = '',
+        username = '',
+        userRoles,
+        userGroups,
+        organisationUnits: captureScope = [],
+        teiSearchOrganisationUnits: searchScope = [],
+        settings: userSettings,
+    } = meResponse;
+
+    CurrentUser.set({
+        id: currentUserId,
+        firstName,
+        surname,
+        username,
+        uiLocale: userSettings?.keyUiLocale ?? '',
+        organisationUnits: captureScope,
+        teiSearchOrganisationUnits: searchScope,
     });
 
     const systemSettings = await querySingleResource({

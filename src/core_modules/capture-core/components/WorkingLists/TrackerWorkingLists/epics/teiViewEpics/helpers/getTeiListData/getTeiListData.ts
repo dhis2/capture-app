@@ -40,7 +40,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
         [orgUnitQueryParam]: orgUnitId,
         [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
         program,
-        fields: ':all,!relationships,programOwners[orgUnit,program]',
+        fields: 'trackedEntity,createdAt,inactive,attributes[attribute,value],programOwners[orgUnit,program]',
     };
 };
 

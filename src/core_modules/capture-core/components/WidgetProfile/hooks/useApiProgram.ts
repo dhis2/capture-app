@@ -17,11 +17,10 @@ const fields =
         'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
         'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,' +
             'renderType[*],dataElement[id,displayName,displayShortName,displayFormName,valueType,' +
-            'translations[*],description,optionSetValue,style,optionSet[id,displayName,version,valueType,' +
-            'options[id,displayName,code,style, translations]]]]],' +
+            'translations[*],description,optionSetValue,style,optionSet[id,version]]]],' +
     'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,displayShortName,displayFormName,' +
         'displayDescription,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],' +
-        'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]]],' +
+        'optionSet[id,version]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
     'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,' +
         'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +

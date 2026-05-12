@@ -45,7 +45,8 @@ const createApiEventQueryArgs = (
         [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'CAPTURE',
         program,
         programStage,
-        fields: '*',
+        fields: 'event,status,program,programStage,enrollment,trackedEntity,' +
+            'occurredAt,scheduledAt,orgUnit,assignedUser,dataValues[dataElement,value]',
     };
 
     return getScheduledDateQueryArgs(queryArgs);
