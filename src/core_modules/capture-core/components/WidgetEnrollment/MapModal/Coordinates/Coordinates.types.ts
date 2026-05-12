@@ -3,4 +3,5 @@ export type CoordinatesProps = {
     setOpen: (open: boolean) => void;
     onSetCoordinates: (coordinates: [number, number] | Array<Array<[number, number]>> | null) => void;
     defaultValues?: [number, number] | null;
+    readOnly: boolean;
 };

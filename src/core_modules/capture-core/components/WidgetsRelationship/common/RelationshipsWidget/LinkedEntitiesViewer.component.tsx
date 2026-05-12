@@ -13,7 +13,7 @@ const styles = {
         fontWeight: 500,
         fontSize: 14,
         color: colors.grey900,
-        paddingBottom: spacersNum.dp8,
+        paddingBottom: spacersNum.dp4,
     },
     wrapper: {
         paddingBottom: spacersNum.dp16,

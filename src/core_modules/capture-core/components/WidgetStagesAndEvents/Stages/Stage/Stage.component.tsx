@@ -6,6 +6,7 @@ import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
 import { StageDetail } from './StageDetail/StageDetail.component';
 import { StageCreateNewButton } from './StageCreateNewButton';
+import { useEnrollmentAccessContext } from '../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const styles = {
     overview: {
@@ -32,6 +33,8 @@ export const StagePlain = ({
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
     const hideProgramStage = preventAddingNewEvents && events.length === 0;
+    const { stageWriteAccessById } = useEnrollmentAccessContext();
+    const effectiveStageWriteAccess = stageWriteAccessById[stage.id] ?? stage.dataAccess.write;
 
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
@@ -49,6 +52,7 @@ export const StagePlain = ({
                     icon={icon}
                     description={description}
                     events={events}
+                    stageWriteAccess={effectiveStageWriteAccess}
                 />}
                 onOpen={handleOpen}
                 onClose={handleClose}
@@ -65,11 +69,10 @@ export const StagePlain = ({
                     onCreateNew={onCreateNew}
                     hiddenProgramStage={preventAddingNewEvents}
                     {...passOnProps}
-                /> : (
+                /> : effectiveStageWriteAccess && (
                     <div className={classes.buttonContainer}>
                         <StageCreateNewButton
                             onCreateNew={() => onCreateNew(id)}
-                            stageWriteAccess={stage.dataAccess.write}
                             eventCount={events.length}
                             repeatable={repeatable}
                             preventAddingEventActionInEffect={preventAddingNewEvents}

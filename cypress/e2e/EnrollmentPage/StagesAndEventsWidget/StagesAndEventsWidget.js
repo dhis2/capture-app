@@ -186,6 +186,11 @@ Then(/^you should see the disabled button (.*)$/, (stageName) => {
         .should('be.disabled');
 });
 
+Then('create new event button should not be visible', () => {
+    cy.get('[data-test="stages-and-events-widget"]').should('exist');
+    cy.get('[data-test="create-new-button"]').should('not.exist');
+});
+
 Then('the Care at birth program stage should be hidden', () => {
     cy.contains('[data-test="stages-and-events-widget"]', 'Postpartum care visit').should('exist');
     cy.contains('[data-test="stages-and-events-widget"]', 'Care at birth').should('not.exist');
