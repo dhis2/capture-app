@@ -70,7 +70,6 @@ const NoteSectionPlain = ({
     emptyNoteMessage,
     notes,
     handleAddNote,
-    readOnly,
     classes,
 }: Props) => {
     const [isEditing, setEditing] = useState<boolean>(false);
@@ -131,7 +130,7 @@ const NoteSectionPlain = ({
                 </div>}
             </div>
 
-            {!readOnly && <div className={classes.editor}>
+            <div className={classes.editor}>
                 <Editor>
                     <FocusTextField
                         placeholder={placeholder}
@@ -140,9 +139,9 @@ const NoteSectionPlain = ({
                         data-test="note-textfield"
                     />
                 </Editor>
-            </div>}
+            </div>
 
-            {!readOnly && isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+            {isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
                 <Button
                     dataTest="add-note-btn"
                     onClick={onAddNote}

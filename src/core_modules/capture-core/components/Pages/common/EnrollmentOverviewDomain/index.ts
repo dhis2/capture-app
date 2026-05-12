@@ -21,7 +21,3 @@ export {
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
 export { useRuleEffects } from './useRuleEffects';
-export {
-    EnrollmentAccessProvider,
-    useEnrollmentAccessContext,
-} from './EnrollmentAccessContext';

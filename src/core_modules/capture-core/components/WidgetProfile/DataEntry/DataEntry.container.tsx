@@ -32,8 +32,6 @@ export const DataEntry = ({
     geometry,
     trackedEntityName,
     dataEntryFormConfig,
-    readOnly,
-    accessReadOnly,
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
@@ -165,8 +163,6 @@ export const DataEntry = ({
                 warningsMessages={warningsMessages}
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
-                readOnly={readOnly}
-                accessReadOnly={accessReadOnly}
             />
         )
     );

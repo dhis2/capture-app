@@ -33,8 +33,6 @@ export type ContainerProps = Readonly<{
     onCloseAddRelationship?: () => void;
     onOpenAddRelationship?: () => void;
     onSelectFindMode?: OnSelectFindMode;
-    readOnly?: boolean;
-    hideButton?: boolean;
 }>;
 
 

@@ -38,11 +38,12 @@ Feature: The user interacts with the widgets on the enrollment add event page
     And the user sees the owner organisation unit
     And the user sees the last update date
 
-  Scenario: The enrollment widget is in read-only mode
+  Scenario: User can open the delete modal
     Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
     Then the enrollment widget should be opened
-    And the enrollment actions button is not visible
-    And the enrollment date edit buttons are not visible
+    When the user opens the enrollment actions menu
+    And the user clicks on the delete action
+    Then the user sees the delete enrollment modal
 
   Scenario: User switch tab in add event page
     Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR

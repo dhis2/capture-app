@@ -8,56 +8,12 @@ import { WidgetTwoEventWorkspaceComponent } from './WidgetTwoEventWorkspace.comp
 import { useClientDataValues } from './hooks/useClientDataValues';
 import { WidgetWrapper } from './WidgetWrapper';
 import { WidgetHeader } from './WidgetHeader';
-import { useProgram } from '../WidgetEnrollment/hooks/useProgram';
-
-const stageHasReadAccess = (program: any, id: string | undefined) =>
-    Boolean(program?.programStages?.find((s: any) => s.id === id)?.access?.data?.read);
-
-const useTwoEventWorkspaceData = (eventId: string, programId: string, fallbackStageId: string | undefined) => {
-    const { program } = useProgram(programId);
-
-    const linkedEventQuery = useLinkedEventByOriginId({ originEventId: eventId });
-    const { linkedEvent, dataValues } = linkedEventQuery;
-
-    const metadataQuery = useMetadataForProgramStage({
-        programId,
-        stageId: linkedEvent?.programStage,
-    });
-    const { formFoundation, stage: linkedStage } = metadataQuery;
-
-    const clientValuesQuery = useClientDataValues({
-        linkedEventId: linkedEvent?.event,
-        dataValues,
-        formFoundation,
-    });
-
-    const isLoading = linkedEventQuery.isLoading || metadataQuery.isLoading || clientValuesQuery.isLoading;
-    const isError = linkedEventQuery.isError || metadataQuery.isError || clientValuesQuery.isError;
-    const missingData = !linkedEvent || !formFoundation || !linkedStage;
-    const accessBlocked = Boolean(program)
-        && (!stageHasReadAccess(program, fallbackStageId) || !stageHasReadAccess(program, linkedEvent?.programStage));
-
-    return {
-        program,
-        linkedEvent,
-        linkedStage,
-        formFoundation,
-        relationship: linkedEventQuery.relationship,
-        relationshipType: linkedEventQuery.relationshipType,
-        clientValuesWithSubValues: clientValuesQuery.clientValuesWithSubValues,
-        isLoading,
-        isError,
-        missingData,
-        accessBlocked,
-    };
-};
 
 export const WidgetTwoEventWorkspace = ({
     eventId,
     programId,
     orgUnitId,
     currentPage,
-    stageId,
     stage,
     type,
     onDeleteEvent,
@@ -65,26 +21,48 @@ export const WidgetTwoEventWorkspace = ({
 }: Props) => {
     const {
         linkedEvent,
-        linkedStage,
-        formFoundation,
+        dataValues,
         relationship,
         relationshipType,
-        clientValuesWithSubValues,
-        isLoading,
-        isError,
-        missingData,
-        accessBlocked,
-    } = useTwoEventWorkspaceData(eventId, programId, stageId ?? stage?.id);
+        isError: isLinkedEventError,
+        isLoading: isLinkedEventLoading,
+    } = useLinkedEventByOriginId({ originEventId: eventId });
 
-    if (isLoading) return null;
-    if (isError) {
+    const {
+        formFoundation,
+        stage: linkedStage,
+        isLoading: isLoadingMetadata,
+        isError: isMetadataError,
+    } = useMetadataForProgramStage({
+        programId,
+        stageId: linkedEvent?.programStage,
+    });
+
+    const {
+        clientValuesWithSubValues,
+        isLoading: isLoadingClientValues,
+        isError: isClientValuesError,
+    } = useClientDataValues({
+        linkedEventId: linkedEvent?.event,
+        dataValues,
+        formFoundation,
+    });
+
+    if (isLinkedEventLoading || isLoadingMetadata || isLoadingClientValues) {
+        return null;
+    }
+
+    if (isLinkedEventError || isMetadataError || isClientValuesError) {
         return (
             <div>
                 {i18n.t('An error occurred while loading the widget.')}
             </div>
         );
     }
-    if (missingData || accessBlocked) return null;
+
+    if (!linkedEvent || !formFoundation || !linkedStage) {
+        return null;
+    }
 
     return (
         <WidgetWrapper

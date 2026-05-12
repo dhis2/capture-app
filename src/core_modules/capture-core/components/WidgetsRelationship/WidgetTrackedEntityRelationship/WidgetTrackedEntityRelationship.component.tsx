@@ -20,10 +20,6 @@ export const WidgetTrackedEntityRelationship = ({
     onSelectFindMode,
     renderTrackedEntitySearch,
     renderTrackedEntityRegistration,
-    readOnly,
-    hideButton,
-    accessReadOnly,
-    hideReadOnlyBadge,
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
@@ -64,10 +60,6 @@ export const WidgetTrackedEntityRelationship = ({
             relationshipTypes={relationshipTypes}
             sourceId={teiId}
             onLinkedRecordClick={onLinkedRecordClick}
-            readOnly={readOnly}
-            accessReadOnly={accessReadOnly}
-            hideReadOnlyBadge={hideReadOnlyBadge}
-            trackedEntityName={trackedEntityTypeName}
         >
             <NewTrackedEntityRelationship
                 teiId={teiId}
@@ -82,8 +74,6 @@ export const WidgetTrackedEntityRelationship = ({
                 onSelectFindMode={onSelectFindMode}
                 renderTrackedEntitySearch={renderTrackedEntitySearch}
                 renderTrackedEntityRegistration={renderTrackedEntityRegistration}
-                readOnly={readOnly}
-                hideButton={hideButton}
             />
         </RelationshipsWidget>
     );

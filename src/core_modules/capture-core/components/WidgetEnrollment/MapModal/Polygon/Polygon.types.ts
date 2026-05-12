@@ -17,5 +17,4 @@ export type PolygonProps = {
     setOpen: (open: boolean) => void;
     onSetCoordinates: (coordinates: [number, number] | Array<Array<[number, number]>> | null) => void;
     defaultValues?: Array<Array<number>> | null;
-    readOnly: boolean;
 }

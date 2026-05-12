@@ -33,6 +33,6 @@ Then('only three program stages are displayed in the stage selector widget', () 
     cy.get('[data-test=program-stage-selector-button]').should('have.length', 3);
 });
 
-Then('the quick actions widget is not visible', () => {
-    cy.get('[data-test=quick-action-button-container]').should('not.exist');
+Then('the New event quick action button is disabled', () => {
+    cy.get('[data-test=quick-action-button-report]').should('be.disabled');
 });

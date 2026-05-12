@@ -16,7 +16,6 @@ export const Actions = ({
     onUpdateEnrollmentStatusSuccess,
     onSuccess,
     onAccessLostFromTransfer,
-    readOnly,
     ...passOnProps
 }: Props) => {
     const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError, onSuccess);
@@ -47,8 +46,6 @@ export const Actions = ({
         },
         [updateStatusMutation, onUpdateEnrollmentStatus, changeRedirect],
     );
-
-    if (readOnly) return null;
 
     return (
         <ActionsComponent

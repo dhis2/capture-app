@@ -68,12 +68,12 @@ export const OverflowMenuComponent = ({
                         <Divider />
                         <ConditionalTooltip
                             content={i18n.t('You do not have access to remove the link between these events')}
-                            enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
+                            enabled={!relationshipTypeWriteAccess}
                         >
                             <MenuItem
                                 label={i18n.t('Unlink event')}
                                 icon={<IconLink16 />}
-                                disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
+                                disabled={!relationshipTypeWriteAccess}
                                 dense
                                 dataTest="event-overflow-unlink-event"
                                 onClick={handleUnlinkEvent}

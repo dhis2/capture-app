@@ -142,7 +142,6 @@ export type DataEntryOutputProps = {
     onGetValidationContext?: () => any,
     orgUnitId?: string,
     pluginContext?: PluginContext,
-    viewMode?: boolean,
 };
 
 type OwnProps = DataEntryOutputProps & {

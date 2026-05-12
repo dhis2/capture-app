@@ -26,7 +26,6 @@ import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
-import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 
 const styles: Readonly<any> = {
@@ -107,8 +106,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const { stageWriteAccessById } = useEnrollmentAccessContext();
-    const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
@@ -222,7 +219,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         pendingApiResponse={row.pendingApiResponse as boolean}
                         eventDetails={eventDetails}
                         teiId={eventDetails.trackedEntity}
-                        stageWriteAccess={stageWriteAccess}
+                        stageWriteAccess={stage?.access?.data?.write}
                         programId={programId}
                         enrollmentId={eventDetails.enrollment}
                         cells={cells}
@@ -257,17 +254,18 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
-        const renderCreateNewButton = () => (stageWriteAccess ? (
+        const renderCreateNewButton = () => (
             <div className={classes.newButton}>
                 <StageCreateNewButton
                     eventCount={events.length}
                     onCreateNew={handleCreateNew}
                     preventAddingEventActionInEffect={hiddenProgramStage}
                     repeatable={repeatable}
+                    stageWriteAccess={stage?.access?.data?.write}
                     eventName={eventName}
                 />
             </div>
-        ) : null);
+        );
 
         return (
             <div>
@@ -286,10 +284,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             </div>
         );
     }
-    const showMoreVisible = Boolean(dataSource && !loading
-        && events.length > DEFAULT_NUMBER_OF_ROW
-        && displayedRowNumber < events.length);
-    const showFooter = showMoreVisible || stageWriteAccess;
     return (
         <div className={classes.container}>
             <div className={classes.scrollBox}>
@@ -304,13 +298,11 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                     </DataTableBody>
                 </DataTable>
             </div>
-            {showFooter && (
-                <DataTableToolbar className={classes.tableToolbar} position="bottom">
-                    <div className={classes.toolbarContent}>
-                        {renderFooter()}
-                    </div>
-                </DataTableToolbar>
-            )}
+            <DataTableToolbar className={classes.tableToolbar} position="bottom">
+                <div className={classes.toolbarContent}>
+                    {renderFooter()}
+                </div>
+            </DataTableToolbar>
         </div>
     );
 };

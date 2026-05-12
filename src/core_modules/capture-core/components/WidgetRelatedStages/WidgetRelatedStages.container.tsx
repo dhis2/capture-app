@@ -14,7 +14,6 @@ import {
 } from './hooks';
 import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
-import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { RequestEvent } from '../DataEntries';
 
 const styles = {
@@ -49,11 +48,7 @@ export const WidgetRelatedStagesPlain = ({
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-    const { currentRelatedStagesStatus, constraint } = useRelatedStages({ programStageId, programId });
-    const { stageWriteAccessById } = useEnrollmentAccessContext();
-    const stageWriteAccess = Boolean(stageWriteAccessById[programStageId]);
-    const linkedStageId = constraint?.programStage?.id;
-    const linkedStageWriteAccess = linkedStageId ? Boolean(stageWriteAccessById[linkedStageId]) : false;
+    const { currentRelatedStagesStatus } = useRelatedStages({ programStageId, programId });
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
@@ -108,10 +103,6 @@ export const WidgetRelatedStagesPlain = ({
     ]);
 
     if (isLinkedEventLoading || linkedEvent || currentRelatedStagesStatus !== relatedStageStatus.LINKABLE) {
-        return null;
-    }
-
-    if (!stageWriteAccess || !linkedStageWriteAccess) {
         return null;
     }
 

@@ -29,7 +29,6 @@ const MiniMapPlain = ({
     refetchEnrollment,
     refetchTEI,
     onError,
-    readOnly,
     classes,
 }: Props) => {
     const [isOpenMap, setOpenMap] = useState(false);
@@ -75,7 +74,6 @@ const MiniMapPlain = ({
                     defaultValues={clientValues}
                     onUpdate={updateMutation}
                     enrollment={enrollment}
-                    readOnly={readOnly}
                 />
             )}
         </>

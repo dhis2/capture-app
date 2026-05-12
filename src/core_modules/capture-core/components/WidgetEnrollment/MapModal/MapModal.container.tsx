@@ -10,7 +10,6 @@ export const MapModal = ({
     setOpenMap,
     defaultValues,
     center: storedCenter,
-    readOnly,
 }: MapModalProps) => {
     const { geometryType, dataElementType } = useGeometry(enrollment as { program: string });
     const { center } = useCenterPoint(enrollment.orgUnit, storedCenter);
@@ -27,7 +26,6 @@ export const MapModal = ({
             setOpen={setOpenMap}
             onSetCoordinates={onSetCoordinates}
             defaultValues={defaultValues}
-            readOnly={readOnly}
         />
     );
 };

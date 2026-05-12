@@ -14,7 +14,7 @@ Feature: User interacts with the quick actions-menu
     Then you should be navigated to the schedule tab
 
   @user:trackerAutoTestRestricted
-  Scenario: The quick actions widget is hidden for users with read-only access
+  Scenario: The create new quick actions button should be disabled if no available stages
     Given you open the enrollment page by typing #enrollment?enrollmentId=WKPoiZxZxNG&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=PgmUFEQYZdt
-    Then the quick action buttons should not be visible
+    Then the quick action buttons should be disabled
 

@@ -50,11 +50,7 @@ const getColumns = ({ relationshipEntity, trackerDataView }: any) => {
     return fields;
 };
 
-const getContext = (
-    { relationshipEntity, program, programStage, trackedEntityType }: any,
-    access: any,
-    readOnly?: boolean,
-) => {
+const getContext = ({ relationshipEntity, program, programStage, trackedEntityType }: any, access: any) => {
     if (relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
         return {
             navigation: {
@@ -62,7 +58,7 @@ const getContext = (
             },
             display: {
                 trackedEntityTypeName: trackedEntityType.name,
-                showDeleteButton: !readOnly && access.data.write,
+                showDeleteButton: access.data.write,
             },
         };
     }
@@ -72,7 +68,7 @@ const getContext = (
             navigation: {},
             display: {
                 programStageName: programStage.name,
-                showDeleteButton: false,
+                showDeleteButton: access.data.write && false,
             },
         };
     }
@@ -168,7 +164,6 @@ export const useGroupedLinkedEntities = (
     sourceId: string,
     relationshipTypes: RelationshipTypes | null | undefined,
     relationships?: Array<InputRelationshipData>,
-    readOnly?: boolean,
 ): GroupedLinkedEntities => useMemo(() => {
     if (!relationships?.length || !relationshipTypes?.length) {
         return [];
@@ -225,7 +220,7 @@ export const useGroupedLinkedEntities = (
                     { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
 
                 const columns = getColumns(constraint);
-                const context = getContext(constraint, relationshipType.access, readOnly);
+                const context = getContext(constraint, relationshipType.access);
 
                 accGroupedLinkedEntities.push({
                     id: groupId,
@@ -238,4 +233,4 @@ export const useGroupedLinkedEntities = (
 
             return accGroupedLinkedEntities;
         }, [] as any);
-}, [relationships, relationshipTypes, sourceId, readOnly]);
+}, [relationships, relationshipTypes, sourceId]);

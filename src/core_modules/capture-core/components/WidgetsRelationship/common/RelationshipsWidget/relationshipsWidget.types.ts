@@ -10,8 +10,4 @@ export type Props = Readonly<{
     sourceId: string;
     onLinkedRecordClick: LinkedRecordClick;
     children: ReactNode;
-    readOnly?: boolean;
-    accessReadOnly?: boolean;
-    hideReadOnlyBadge?: boolean;
-    trackedEntityName?: string;
 }>;

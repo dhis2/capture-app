@@ -44,8 +44,4 @@ export type WidgetTrackedEntityRelationshipProps = {
         programId: string,
         onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
     ) => React.ReactElement<any>;
-    readOnly?: boolean;
-    hideButton?: boolean;
-    accessReadOnly?: boolean;
-    hideReadOnlyBadge?: boolean;
 };

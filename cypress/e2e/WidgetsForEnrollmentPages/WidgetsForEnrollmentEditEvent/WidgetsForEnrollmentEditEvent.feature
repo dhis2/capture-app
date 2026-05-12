@@ -38,11 +38,12 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user sees the owner organisation unit
     And the user sees the last update date
 
-  Scenario: The enrollment widget is in read-only mode
+  Scenario: User can open the delete modal
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be opened
-    And the enrollment actions button is not visible
-    And the enrollment date edit buttons are not visible
+    When the user opens the enrollment actions menu
+    And the user clicks on the delete action
+    Then the user sees the delete enrollment modal
 
   Scenario: User can add note on edit event page view mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
@@ -71,11 +72,13 @@ Feature: The user interacts with the widgets on the enrollment edit event
     When you remove the assigned user
     Then the event has no assignd user
 
-  Scenario: The enrollment widget is in read-only mode on enrollment event page
+  Scenario: User can complete the enrollment and the active events
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=PyXThVzWJzL&orgUnitId=RzgSFJ9E46G
     And the enrollment widget should be opened
-    Then the enrollment actions button is not visible
-    And the enrollment date edit buttons are not visible
+    And the user sees the enrollment status and the Baby Postnatal event status is active
+    And the user opens the enrollment actions menu
+    When the user completes the enrollment and the active events
+    Then the user sees the enrollment status and the Baby Postnatal event status is completed
 
   Scenario: User can see the enrollment minimap
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=W1uHdJEjZUI&orgUnitId=DiszpKrYNg8

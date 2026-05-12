@@ -24,10 +24,6 @@ export const DeleteMenuItem = ({
     const disabled = useMemo(() => !canWriteData || !canCascadeDeleteTei, [canWriteData, canCascadeDeleteTei]);
     const tooltipContent = getTooltipContent(disabled, trackedEntityTypeName);
 
-    if (!canWriteData) {
-        return null;
-    }
-
     return (
         <ConditionalTooltip content={tooltipContent} enabled={disabled}>
             <MenuItem

@@ -8,7 +8,6 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
-    EnrollmentAccessProvider,
     rollbackEnrollmentAndEvents,
     showEnrollmentError,
     updateEnrollmentAndEvents,
@@ -192,43 +191,42 @@ export const EnrollmentPageDefault = () => {
     }
 
     return (
-        <EnrollmentAccessProvider program={program}>
-            <EnrollmentPageLayout
-                pageLayout={pageLayout}
-                currentPage={EnrollmentPageKeys.OVERVIEW}
-                availableWidgets={WidgetsForEnrollmentPageDefault}
-                teiId={teiId}
-                orgUnitId={orgUnitId}
-                program={program}
-                stages={stages}
-                events={enrollment?.events}
-                enrollmentId={enrollmentId}
-                onAddNew={onAddNew}
-                onDelete={onDelete}
-                onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
-                onViewAll={onViewAll}
-                onBackToMainPage={onBackToMainPage}
-                onCreateNew={onCreateNew}
-                widgetEffects={outputEffects}
-                hideWidgets={hideWidgets}
-                onEventClick={onEventClick}
-                onDeleteEvent={onDeleteEvent}
-                onUpdateEventStatus={onUpdateEventStatus}
-                onRollbackDeleteEvent={onRollbackDeleteEvent}
-                onLinkedRecordClick={onLinkedRecordClick}
-                onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
-                onUpdateEnrollmentDate={onUpdateEnrollmentDate}
-                onUpdateIncidentDate={onUpdateIncidentDate}
-                onEnrollmentError={onEnrollmentError}
-                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
-                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
-                ruleEffects={ruleEffects}
-                widgetEnrollmentStatus={widgetEnrollmentStatus}
-                onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={i18n.t('No feedback for this enrollment yet')}
-                indicatorEmptyText={i18n.t('No indicator output for this enrollment yet')}
-            />
-        </EnrollmentAccessProvider>
+        <EnrollmentPageLayout
+            pageLayout={pageLayout}
+            currentPage={EnrollmentPageKeys.OVERVIEW}
+            availableWidgets={WidgetsForEnrollmentPageDefault}
+
+            teiId={teiId}
+            orgUnitId={orgUnitId}
+            program={program}
+            stages={stages}
+            events={enrollment?.events}
+            enrollmentId={enrollmentId}
+            onAddNew={onAddNew}
+            onDelete={onDelete}
+            onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
+            onViewAll={onViewAll}
+            onBackToMainPage={onBackToMainPage}
+            onCreateNew={onCreateNew}
+            widgetEffects={outputEffects}
+            hideWidgets={hideWidgets}
+            onEventClick={onEventClick}
+            onDeleteEvent={onDeleteEvent}
+            onUpdateEventStatus={onUpdateEventStatus}
+            onRollbackDeleteEvent={onRollbackDeleteEvent}
+            onLinkedRecordClick={onLinkedRecordClick}
+            onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
+            onUpdateEnrollmentDate={onUpdateEnrollmentDate}
+            onUpdateIncidentDate={onUpdateIncidentDate}
+            onEnrollmentError={onEnrollmentError}
+            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+            ruleEffects={ruleEffects}
+            widgetEnrollmentStatus={widgetEnrollmentStatus}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
+            feedbackEmptyText={i18n.t('No feedback for this enrollment yet')}
+            indicatorEmptyText={i18n.t('No indicator output for this enrollment yet')}
+        />
     );
 };

@@ -5,14 +5,7 @@ import './MapModal.css';
 import { Coordinates } from './Coordinates';
 import { Polygon } from './Polygon';
 
-export const MapModal = ({
-    type,
-    center,
-    setOpen,
-    onSetCoordinates,
-    defaultValues,
-    readOnly,
-}: MapModalComponentProps) => (
+export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValues }: MapModalComponentProps) => (
     <>
         {type === dataElementTypes.COORDINATE && (
             <Coordinates
@@ -20,7 +13,6 @@ export const MapModal = ({
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues as [number, number] | null}
-                readOnly={readOnly}
             />
         )}
         {type === dataElementTypes.POLYGON && (
@@ -29,7 +21,6 @@ export const MapModal = ({
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues as number[][] | null}
-                readOnly={readOnly}
             />
         )}
     </>

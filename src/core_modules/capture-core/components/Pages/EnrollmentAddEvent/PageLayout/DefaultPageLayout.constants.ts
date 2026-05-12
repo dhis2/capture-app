@@ -24,7 +24,6 @@ export const DefaultPageLayout: PageLayoutConfig = {
         {
             type: WidgetTypes.COMPONENT,
             name: 'TrackedEntityRelationship',
-            settings: { readOnlyMode: true },
         },
         {
             type: WidgetTypes.COMPONENT,
