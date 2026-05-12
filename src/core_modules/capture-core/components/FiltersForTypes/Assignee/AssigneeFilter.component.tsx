@@ -4,8 +4,10 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
-import { getModeOptions, modeKeys } from './modeOptions';
+import { assigneeFilterModes } from './assignee.const';
+import { getModeOptions } from './modeOptions';
 import { getAssigneeFilterData } from './assigneeFilterDataGetter';
+import type { AssigneeFilterProps, AssigneeMode, Value } from './assignee.types';
 import type { UpdatableFilterContent } from '../types';
 
 const getStyles: Readonly<any> = (theme: any) => ({
@@ -19,17 +21,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
     },
 });
 
-type Value = {
-    mode: string;
-    provided?: any;
-} | null;
-
-type PlainProps = {
-    value?: Value;
-    onCommitValue: (value: any) => void;
-};
-
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type Props = AssigneeFilterProps & WithStyles<typeof getStyles>;
 
 type State = {
     error: string;
@@ -47,12 +39,12 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData() {
         const { value } = this.props;
-        return value && getAssigneeFilterData(value);
+        return getAssigneeFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
         const { value } = this.props;
-        if (value?.mode === modeKeys.PROVIDED && !value?.provided) {
+        if (value?.mode === assigneeFilterModes.PROVIDED && !value?.provided) {
             this.setState({
                 error: i18n.t('Please select the user'),
             });
@@ -61,7 +53,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         return true;
     }
 
-    handleModeSelect = (value: string) => {
+    handleModeSelect = (value: AssigneeMode) => {
         this.setState({
             error: '',
         });
@@ -79,7 +71,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
         });
 
         this.props.onCommitValue({
-            mode: modeKeys.PROVIDED,
+            mode: assigneeFilterModes.PROVIDED,
             provided: user,
         });
     }
@@ -101,7 +93,7 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
                         onSelect={this.handleModeSelect}
                     />
                 </div>
-                {mode === modeKeys.PROVIDED ? (
+                {mode === assigneeFilterModes.PROVIDED ? (
                     <div>
                         <UserField
                             value={provided}
@@ -122,4 +114,4 @@ class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 }
 
-export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain) as React.ComponentType<PlainProps>;
+export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain) as React.ComponentType<AssigneeFilterProps>;

@@ -1,8 +1,17 @@
 import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { padWithZeros } from 'capture-core-utils/date';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
-import type { DateTimeFilterData, DateTimeValue } from './types/dateTime.types';
-import type { Value } from './DateTime.types';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
+import { dateFilterTypes } from '../Date/date.const';
+import type {
+    DateTimeFilter,
+    DateTimeFilterData,
+    DateTimeValue,
+    Value,
+} from './dateTime.types';
 
 function localCalendarDateToIsoDate(localDate: string): string | null {
     try {
@@ -26,8 +35,10 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
     return `${isoDate}T${time}:00`;
 }
 
-export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilterData | null {
-    const filterData: DateTimeFilterData = { type: 'ABSOLUTE' };
+export function getDateTimeFilterData(value: Value): DateTimeFilter | null {
+    if (!value) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
+    const filterData: DateTimeFilterData = { type: dateFilterTypes.ABSOLUTE };
 
     if (value.from?.date) {
         const ge = buildIsoDateTime(value.from, '00:00');
@@ -37,7 +48,7 @@ export function getDateTimeFilterData(value: NonNullable<Value>): DateTimeFilter
     }
 
     if (value.to?.date) {
-        const le = buildIsoDateTime(value.to, '00:00');
+        const le = buildIsoDateTime(value.to, '23:59');
         if (le) {
             filterData.le = le;
         }

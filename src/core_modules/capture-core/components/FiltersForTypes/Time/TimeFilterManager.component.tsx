@@ -1,23 +1,16 @@
 import * as React from 'react';
-import { TimeFilter } from './TimeFilter.component';
-import type { TimeFilterData } from './types/time.types';
-import type { Value } from './Time.types';
-
-type Props = {
-    filter?: TimeFilterData | null;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: Value | null) => void;
-};
+import { TimeFilter as TimeFilterInput } from './TimeFilter.component';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import type { TimeFilter, TimeFilterManagerProps, Value } from './time.types';
 
 type State = {
     value?: Value;
 };
 
-export class TimeFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter?: TimeFilterData | null): Value {
-        if (!filter) {
-            return null;
-        }
+export class TimeFilterManager extends React.Component<TimeFilterManagerProps, State> {
+    static calculateDefaultState(filter?: TimeFilter | null): Value {
+        if (!filter) return null;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
 
         const from = filter.ge ?? null;
         const to = filter.le ?? null;
@@ -29,7 +22,7 @@ export class TimeFilterManager extends React.Component<Props, State> {
         return { from, to };
     }
 
-    constructor(props: Props) {
+    constructor(props: TimeFilterManagerProps) {
         super(props);
         this.state = {
             value: TimeFilterManager.calculateDefaultState(this.props.filter),
@@ -45,7 +38,7 @@ export class TimeFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, handleCommitValue, ...passOnProps } = this.props;
 
         return (
-            <TimeFilter
+            <TimeFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

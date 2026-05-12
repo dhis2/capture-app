@@ -1,13 +1,12 @@
-import type { BooleanFilterStringified } from './types';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
+import type { BooleanFilter, Value } from './boolean.types';
 
-export function getBooleanFilterData(
-    values: Array<string>,
-): BooleanFilterStringified {
-    return {
-        values: values.map(value => value),
-    };
+export function getBooleanFilterData(value: Value): BooleanFilter | null {
+    if (!value && value !== false) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
+    const values = Array.isArray(value) ? value : [value];
+    return { values };
 }
-
-export const getSingleSelectBooleanFilterData = (value: any) => getBooleanFilterData([value]);
-
-export const getMultiSelectBooleanFilterData = (values: any) => getBooleanFilterData(values);

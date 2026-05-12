@@ -1,7 +1,11 @@
-import type { UsernameFilterData } from './types';
-import type { Value } from './Username.types';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
+import type { UsernameFilter, Value } from './username.types';
 
-export const getUsernameFilterData = (value: Value): UsernameFilterData | null | undefined => {
+export function getUsernameFilterData(value: Value): UsernameFilter | null {
     if (!value) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
     return { value };
-};
+}

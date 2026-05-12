@@ -1,12 +1,15 @@
 import { parseNumber } from 'capture-core-utils/parsers';
-import type { NumericFilterData } from './types';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
+import type { NumericFilter, Value } from './numeric.types';
 
-type Value = {
-    min?: string | null,
-    max?: string | null,
-}
 
-export function getNumericFilterData(value: Value): NumericFilterData {
+export function getNumericFilterData(value: Value): NumericFilter | null {
+    if (!value) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
+
     const min = value.min || undefined;
     const max = value.max || undefined;
 

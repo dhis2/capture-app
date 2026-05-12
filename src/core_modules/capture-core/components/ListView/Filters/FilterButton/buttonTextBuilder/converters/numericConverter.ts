@@ -8,7 +8,7 @@ export function convertNumeric(filter: NumericFilterData): string {
 
     if (geHasValue && leHasValue) {
         if (filter.ge === filter.le) {
-            appliedText = filter.ge!.toString();
+            appliedText = String(filter.ge);
         } else {
             appliedText = i18n.t('{{from}} to {{to}}', {
                 from: filter.ge,

@@ -1,26 +1,21 @@
 import * as React from 'react';
-import { UsernameFilter } from './UsernameFilter.component';
-import type { UsernameFilterData } from './types';
-import type { Value } from './Username.types';
-
-type Props = {
-    filter: UsernameFilterData | null | undefined;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: Value) => void;
-    onUpdate: (updatedValue: Value) => void;
-};
+import { UsernameFilter as UsernameFilterInput } from './UsernameFilter.component';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import type { UsernameFilter, UsernameFilterManagerProps, Value } from './username.types';
 
 type State = {
     value: Value;
 };
 
-export class UsernameFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: UsernameFilterData | null | undefined): State {
-        if (!filter?.value) return { value: undefined };
+export class UsernameFilterManager extends React.Component<UsernameFilterManagerProps, State> {
+    static calculateDefaultState(filter: UsernameFilter | null | undefined): State {
+        if (!filter) return { value: undefined };
+        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
+        if (!filter.value) return { value: undefined };
         return { value: filter.value };
     }
 
-    constructor(props: Props) {
+    constructor(props: UsernameFilterManagerProps) {
         super(props);
         this.state = UsernameFilterManager.calculateDefaultState(this.props.filter);
     }
@@ -33,7 +28,7 @@ export class UsernameFilterManager extends React.Component<Props, State> {
     render() {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
         return (
-            <UsernameFilter
+            <UsernameFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
