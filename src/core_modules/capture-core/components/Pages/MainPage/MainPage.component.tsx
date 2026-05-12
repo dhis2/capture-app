@@ -25,7 +25,8 @@ const MainPageComponentPlain = ({
     mainPageStatus,
     trackedEntityTypeId,
     selectedTemplateId,
-    onSetShowAccessible,
+    onNavigateToWorkingList,
+    onNavigateToSearch,
     onChangeTemplate,
     error,
     ready,
@@ -47,7 +48,8 @@ const MainPageComponentPlain = ({
             orgUnitId={orgUnitId}
             trackedEntityTypeId={trackedEntityTypeId}
             selectedTemplateId={selectedTemplateId}
-            setShowAccessible={onSetShowAccessible}
+            onNavigateToWorkingList={onNavigateToWorkingList}
+            onNavigateToSearch={onNavigateToSearch}
             onChangeTemplate={onChangeTemplate}
             error={error || false}
             ready={ready}
