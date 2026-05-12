@@ -122,7 +122,7 @@
         "eslint-plugin-react-hooks": "4.6.2",
         "fake-indexeddb": "^6.2.5",
         "husky": "^8.0.1",
-        "jsdoc": "^3.6.11",
+        "jsdoc": "^4.0.5",
         "jsdoc-babel": "^0.5.0",
         "jsdoc-export-default-interop": "^0.3.1",
         "redux-devtools-extension": "^2.13.9",
