@@ -477,6 +477,6 @@ Scenario: The user can download the tracked entity working list
 
 Scenario: The user cannot download the tracked entity working list when no orgUnit is selected
   Given you open the main page with child programe context
-  And the user clicks the element containing the text: Or see all records accessible to you in Child Programme
+  And the user clicks the element containing the text: See working list without organisation unit
   And you open the menu
   Then the "Download data..." button is hidden

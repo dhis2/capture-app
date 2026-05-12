@@ -48,7 +48,7 @@ export const initEventListEpic = (
                             orgUnitId,
                             categories,
                             programStageId,
-                            [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
+                            [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
                         },
                         columnsMetaForDataFetching,
                         categoryCombinationId,
@@ -87,14 +87,14 @@ export const updateEventListEpic = (
                 storeId,
                 queryArgs: { programId, orgUnitId, programStageId, categories },
             } = action.payload;
-            !queryArgs?.orgUnitId && (queryArgs[orgUnitModeQueryParam] = 'ACCESSIBLE');
+            !queryArgs?.orgUnitId && (queryArgs[orgUnitModeQueryParam] = 'CAPTURE');
             const updatePromise = updateEventWorkingListAsync(queryArgs, {
                 commonQueryData: {
                     programId,
                     orgUnitId,
                     categories,
                     programStageId,
-                    [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'ACCESSIBLE',
+                    [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
                 },
                 columnsMetaForDataFetching,
                 categoryCombinationId,

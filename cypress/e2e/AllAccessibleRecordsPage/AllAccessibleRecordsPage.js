@@ -17,14 +17,14 @@ Then('the working list should be displayed', () => {
 When('the IncompleteSelections-box should be displayed', () => {
     cy.get('[data-test="without-orgunit-selected-message"]')
         .within(() => {
-            cy.contains('Please select an organisation unit.');
-            cy.get('[data-test="show-accessible-button"]')
+            cy.contains('Please select an organisation unit');
+            cy.get('[data-test="go-to-working-list-button"]')
                 .should('exist');
         });
 });
 
 When('the user clicks the show accessible button', () => {
-    cy.get('[data-test="show-accessible-button"]')
+    cy.get('[data-test="go-to-working-list-button"]')
         .click();
 });
 

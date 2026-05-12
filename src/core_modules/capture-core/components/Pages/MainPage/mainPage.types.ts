@@ -6,7 +6,8 @@ export type MainPageComponentProps = {
     trackedEntityTypeId?: string;
     displayFrontPageList?: boolean;
     onChangeTemplate?: (selectedTemplateId?: string) => void;
-    onSetShowAccessible: () => void;
+    onNavigateToWorkingList: () => void;
+    onNavigateToSearch: () => void;
     mainPageStatus: string;
     error?: boolean;
     ready: boolean;

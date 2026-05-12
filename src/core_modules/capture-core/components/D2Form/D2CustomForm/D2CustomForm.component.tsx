@@ -232,7 +232,7 @@ export class D2CustomForm extends React.Component<Props> {
     render() {
         const customFormElement = this.transform();
         return (
-            <div>
+            <div style={{ overflowX: 'auto' }}>
                 {customFormElement}
             </div>
         );

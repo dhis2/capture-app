@@ -1,3 +1,38 @@
+## [106.1.6](https://github.com/dhis2/capture-app/compare/v106.1.5...v106.1.6) (2026-05-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4552](https://github.com/dhis2/capture-app/issues/4552)) ([419c96d](https://github.com/dhis2/capture-app/commit/419c96d239f61237011a25cb781795c7f306af37))
+
+## [106.1.5](https://github.com/dhis2/capture-app/compare/v106.1.4...v106.1.5) (2026-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-18592] Not saving an option that starts or ends with a space ([#4524](https://github.com/dhis2/capture-app/issues/4524)) ([f8d67e0](https://github.com/dhis2/capture-app/commit/f8d67e06e0ac6379ac2bde527f5bbc06af1f8a9d))
+
+## [106.1.4](https://github.com/dhis2/capture-app/compare/v106.1.3...v106.1.4) (2026-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-12281] Misleading text when creating new TEI through creation of relationship  ([#4528](https://github.com/dhis2/capture-app/issues/4528)) ([3be3abc](https://github.com/dhis2/capture-app/commit/3be3abc18bf95b3667045c4cd5d966b9e2d12d5c))
+
+## [106.1.3](https://github.com/dhis2/capture-app/compare/v106.1.2...v106.1.3) (2026-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17625] Use Capture scope for working lists without org unit ([#4522](https://github.com/dhis2/capture-app/issues/4522)) ([9c30444](https://github.com/dhis2/capture-app/commit/9c30444b18b07bdcdc570155122d9ba05f963044))
+
+## [106.1.2](https://github.com/dhis2/capture-app/compare/v106.1.1...v106.1.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* [DHIS2-8814] Table in custom form overflows container with no scrollbar ([#4527](https://github.com/dhis2/capture-app/issues/4527)) ([79335e2](https://github.com/dhis2/capture-app/commit/79335e24bd0185125ecc94060a36a66e7b76f3cf))
+
 ## [106.1.1](https://github.com/dhis2/capture-app/compare/v106.1.0...v106.1.1) (2026-05-04)
 
 
