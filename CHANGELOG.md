@@ -1,3 +1,10 @@
+# [106.2.0](https://github.com/dhis2/capture-app/compare/v106.1.6...v106.2.0) (2026-05-12)
+
+
+### Features
+
+* [DHIS2-19940] Implement "No value" filtering for all filter types in working list ([#4468](https://github.com/dhis2/capture-app/issues/4468)) ([a1f9d5f](https://github.com/dhis2/capture-app/commit/a1f9d5f9c03036090b4d494f7f2f89bbf5e3a994)), closes [#4511](https://github.com/dhis2/capture-app/issues/4511)
+
 ## [106.1.6](https://github.com/dhis2/capture-app/compare/v106.1.5...v106.1.6) (2026-05-11)
 
 
