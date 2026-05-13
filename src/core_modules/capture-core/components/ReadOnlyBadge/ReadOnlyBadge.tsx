@@ -10,6 +10,11 @@ type Props = {
     multipleStages?: boolean;
     trackedEntityName?: string;
     inlineLabel?: boolean;
+    trackedEntityInactive?: boolean;
+    isEventPage?: boolean;
+    currentStageWriteAccess?: boolean;
+    anyStageWriteAccess?: boolean;
+    anyStageReadAccess?: boolean;
 };
 
 type Access = {
@@ -30,6 +35,10 @@ const getProgramStageMessage = (multipleStages: boolean): string => (multipleSta
     ? i18n.t('You only have view access to these program stages')
     : i18n.t('You only have view access to this program stage'));
 
+const getDeactivatedTeMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
+    ? i18n.t('{{trackedEntityName}} is deactivated', { trackedEntityName, interpolation: { escapeValue: false } })
+    : i18n.t('Tracked entity is deactivated'));
+
 const getMissingAccessMessage = (
     access: Access,
     trackedEntityName: string | undefined,
@@ -42,6 +51,22 @@ const getMissingAccessMessage = (
     return '';
 };
 
+const renderBadge = (message: string, inlineLabel: boolean) => {
+    const labelText = inlineLabel ? `${i18n.t('View only')} - ${message}` : i18n.t('View only');
+    const tag = (
+        <Tag maxWidth="400px" neutral icon={<IconInfo16 />}>
+            {labelText}
+        </Tag>
+    );
+    if (inlineLabel) return tag;
+    return (
+        <ConditionalTooltip content={message} enabled>
+            {tag}
+        </ConditionalTooltip>
+    );
+};
+
+// eslint-disable-next-line complexity
 export const ReadOnlyBadge = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
@@ -49,22 +74,32 @@ export const ReadOnlyBadge = ({
     multipleStages = false,
     trackedEntityName,
     inlineLabel = false,
+    trackedEntityInactive = false,
+    isEventPage = false,
+    currentStageWriteAccess,
+    anyStageWriteAccess,
+    anyStageReadAccess,
 }: Props) => {
-    if (programWriteAccess && trackedEntityTypeWriteAccess && programStageWriteAccess) return null;
+    if (trackedEntityInactive) {
+        return renderBadge(getDeactivatedTeMessage(trackedEntityName), inlineLabel);
+    }
 
+    if (isEventPage) {
+        if (currentStageWriteAccess !== false) return null;
+        return renderBadge(getProgramStageMessage(multipleStages), inlineLabel);
+    }
+
+    if (inlineLabel) {
+        const stagesReadOnly = anyStageWriteAccess === false && anyStageReadAccess !== false;
+        const showAllMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && stagesReadOnly;
+        return showAllMissing ? renderBadge(getEnrollmentMessage(), inlineLabel) : null;
+    }
+
+    if (programWriteAccess && trackedEntityTypeWriteAccess && programStageWriteAccess) return null;
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,
         programStage: programStageWriteAccess,
     };
-    const message = getMissingAccessMessage(access, trackedEntityName, multipleStages);
-    const labelText = inlineLabel && message ? `${i18n.t('View only')} - ${message}` : i18n.t('View only');
-
-    return (
-        <ConditionalTooltip content={message} enabled={Boolean(message)}>
-            <Tag maxWidth="400px" neutral icon={<IconInfo16 />}>
-                {labelText}
-            </Tag>
-        </ConditionalTooltip>
-    );
+    return renderBadge(getMissingAccessMessage(access, trackedEntityName, multipleStages), inlineLabel);
 };

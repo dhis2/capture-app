@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-13T09:36:04.839Z\n"
-"PO-Revision-Date: 2026-05-13T09:36:04.839Z\n"
+"POT-Creation-Date: 2026-05-13T10:59:20.641Z\n"
+"PO-Revision-Date: 2026-05-13T10:59:20.641Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1091,6 +1091,9 @@ msgstr "You only have view access to these program stages"
 
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
+
+msgid "{{trackedEntityName}} is deactivated"
+msgstr "{{trackedEntityName}} is deactivated"
 
 msgid "View only"
 msgstr "View only"
