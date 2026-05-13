@@ -5,16 +5,16 @@ import { dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import {
-    filterTypesObject,
     dateFilterTypes,
+    filterTypesObject,
     type AssigneeFilterData,
+    type BooleanFilterData,
     type DateFilterData,
     type DateTimeFilterData,
-    type BooleanFilterData,
-    type TextFilterData,
-    type TimeFilterData,
     type NumericFilterData,
     type OrgUnitFilterData,
+    type TextFilterData,
+    type TimeFilterData,
 } from '../../../../WorkingListsBase';
 import type {
     ApiDataFilterNumeric,
@@ -26,7 +26,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
-import { toApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import { isEmptyFilterData, toApiEmptyValueFilter } from '../../../../../FiltersForTypes';
 
 type ColumnForConverterBase = {
     id: string,
@@ -149,7 +149,7 @@ const typeConvertFilters = (filters: any, columns: ColumnsForConverter) => Objec
             return null;
         }
 
-        if (typeof filter.isEmpty === 'boolean') {
+        if (isEmptyFilterData(filter)) {
             return { ...toApiEmptyValueFilter(filter), dataItem: key };
         }
 

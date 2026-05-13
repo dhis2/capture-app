@@ -17,7 +17,7 @@ const styles = ({ typography, palette }: any) => ({
     },
     radio: {
         marginTop: spacersNum.dp8,
-        marginBottom: spacersNum.dp16,
+        marginBottom: spacersNum.dp8,
     },
 });
 
@@ -45,7 +45,6 @@ class SingleSelectBoxesPlain extends Component<Props> {
                 onChange={(e: any) => { this.handleOptionChange(e, value); }}
                 value={value}
                 className={classes.radio}
-                dense
             />
         ));
     }

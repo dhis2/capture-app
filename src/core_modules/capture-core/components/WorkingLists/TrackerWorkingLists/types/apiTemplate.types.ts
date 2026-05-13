@@ -15,7 +15,7 @@ export type ApiDataFilterNumeric = {
 };
 
 export type ApiDataFilterBoolean = {
-    in: string[],
+    in: Array<'true' | 'false'>,
 } | boolean;
 
 export type ApiDataFilterTrueOnly = {

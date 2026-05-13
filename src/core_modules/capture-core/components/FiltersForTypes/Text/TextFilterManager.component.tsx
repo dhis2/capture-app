@@ -1,33 +1,25 @@
 import * as React from 'react';
-import { TextFilter } from './TextFilter.component';
-import type { TextFilterData } from './types';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-
-type Props = {
-    filter: TextFilterData | null | undefined;
-    filterTypeRef: (instance: unknown) => void;
-    handleCommitValue: (value?: string | null, isBlur?: boolean) => void;
-    onUpdate: (commitValue?: any) => void;
-};
+import { TextFilter as TextFilterInput } from './TextFilter.component';
+import type { TextFilter, TextFilterManagerProps, Value } from './text.types';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 
 type State = {
-    value: string | null | undefined;
+    value: Value;
 };
 
-export class TextFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: TextFilterData | null | undefined) {
-        if (filter?.isEmpty === true) return { value: EMPTY_VALUE_FILTER };
-        if (filter?.isEmpty === false) return { value: NOT_EMPTY_VALUE_FILTER };
-
-        return { value: filter?.value || undefined };
+export class TextFilterManager extends React.Component<TextFilterManagerProps, State> {
+    static calculateDefaultState(filter: TextFilter | null | undefined) {
+        if (!filter) return { value: undefined };
+        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
+        return { value: filter.value || undefined };
     }
 
-    constructor(props: Props) {
+    constructor(props: TextFilterManagerProps) {
         super(props);
         this.state = TextFilterManager.calculateDefaultState(this.props.filter);
     }
 
-    handleCommitValue = (value: any, isBlur?: boolean) => {
+    handleCommitValue = (value: Value, isBlur?: boolean) => {
         this.setState({ value });
         this.props.handleCommitValue?.(value, isBlur);
     }
@@ -36,7 +28,7 @@ export class TextFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <TextFilter
+            <TextFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

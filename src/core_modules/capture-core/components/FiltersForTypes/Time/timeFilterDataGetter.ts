@@ -1,7 +1,12 @@
-import type { TimeFilterData } from './types/time.types';
-import type { Value } from './Time.types';
+import {
+    isEmptyValueFilter,
+    getEmptyValueFilterData,
+} from '../EmptyValue';
+import type { TimeFilter, TimeFilterData, Value } from './time.types';
 
-export function getTimeFilterData(value: NonNullable<Value>): TimeFilterData | null {
+export function getTimeFilterData(value: Value): TimeFilter | null {
+    if (!value) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
     const filterData: TimeFilterData = {};
 
     if (value.from) {

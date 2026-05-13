@@ -20,10 +20,10 @@ export const useInjectDataFetchingMetaToLoadList = (
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     const { id, type, visible, apiViewName, searchOperator, minCharactersToSearch } = defaultColumn;
-                    const mainProperty = 'mainProperty' in defaultColumn &&
-                        defaultColumn.mainProperty &&
-                        typeof (defaultColumn as any).mainProperty === 'boolean'
-                        ? defaultColumn.mainProperty
+                    const isMainProperty = 'isMainProperty' in defaultColumn &&
+                        defaultColumn.isMainProperty &&
+                        typeof (defaultColumn as any).isMainProperty === 'boolean'
+                        ? defaultColumn.isMainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn
                         ? defaultColumn.additionalColumn
@@ -35,7 +35,7 @@ export const useInjectDataFetchingMetaToLoadList = (
                             id,
                             type,
                             visible,
-                            mainProperty,
+                            isMainProperty,
                             additionalColumn,
                             apiViewName,
                             searchOperator,
@@ -73,10 +73,10 @@ export const useInjectDataFetchingMetaToUpdateList = (
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     const { id, type, visible, searchOperator, minCharactersToSearch } = defaultColumn;
-                    const mainProperty = 'mainProperty' in defaultColumn &&
-                        defaultColumn.mainProperty &&
-                        typeof defaultColumn.mainProperty === 'boolean'
-                        ? defaultColumn.mainProperty
+                    const isMainProperty = 'isMainProperty' in defaultColumn &&
+                        defaultColumn.isMainProperty &&
+                        typeof defaultColumn.isMainProperty === 'boolean'
+                        ? defaultColumn.isMainProperty
                         : undefined;
                     const additionalColumn = defaultColumn.additionalColumn
                         ? defaultColumn.additionalColumn
@@ -88,7 +88,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
                             id,
                             type,
                             visible,
-                            mainProperty,
+                            isMainProperty,
                             additionalColumn,
                             searchOperator,
                             minCharactersToSearch,

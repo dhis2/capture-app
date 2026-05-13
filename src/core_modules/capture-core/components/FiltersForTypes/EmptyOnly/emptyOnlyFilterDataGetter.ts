@@ -1,22 +1,9 @@
-import type { Value } from './EmptyOnly.types';
-import {
-    EMPTY_VALUE_FILTER,
-    NOT_EMPTY_VALUE_FILTER,
-    EMPTY_VALUE_FILTER_LABEL,
-    NOT_EMPTY_VALUE_FILTER_LABEL,
-} from '../EmptyValue';
+import type { EmptyOnlyFilter, Value } from './emptyOnly.types';
+import { isEmptyValueFilter, getEmptyValueFilterData } from '../EmptyValue';
 
-export type EmptyOnlyFilterData = {
-    value: string;
-    isEmpty: boolean;
-};
 
-export const getEmptyOnlyFilterData = (value?: Value): EmptyOnlyFilterData | null => {
-    if (value === EMPTY_VALUE_FILTER) {
-        return { value: EMPTY_VALUE_FILTER_LABEL, isEmpty: true };
-    }
-    if (value === NOT_EMPTY_VALUE_FILTER) {
-        return { value: NOT_EMPTY_VALUE_FILTER_LABEL, isEmpty: false };
-    }
+export const getEmptyOnlyFilterData = (value?: Value): EmptyOnlyFilter | null => {
+    if (!value) return null;
+    if (isEmptyValueFilter(value)) return getEmptyValueFilterData(value);
     return null;
 };
