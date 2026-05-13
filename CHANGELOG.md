@@ -1,3 +1,10 @@
+## [106.2.1](https://github.com/dhis2/capture-app/compare/v106.2.0...v106.2.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21475] use gregorian calendar for iso8601 to handle chrome bug ([#4560](https://github.com/dhis2/capture-app/issues/4560)) ([f29320a](https://github.com/dhis2/capture-app/commit/f29320a6e9a5c0264861b3a0a686ac40621c5885))
+
 # [106.2.0](https://github.com/dhis2/capture-app/compare/v106.1.6...v106.2.0) (2026-05-12)
 
 
