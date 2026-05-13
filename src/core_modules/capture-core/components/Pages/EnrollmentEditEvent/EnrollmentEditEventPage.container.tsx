@@ -165,12 +165,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
 
-    const onStatusToggleSuccess = useCallback(() => {
-        queryClient.invalidateQueries(
-            [ReactQueryAppNamespace, 'stages&event', 'enrollmentData', teiId, programId, enrollmentId],
-        );
-    }, [queryClient, teiId, programId, enrollmentId]);
-
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
@@ -334,7 +328,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 program={program}
                 onDelete={onDelete}
                 onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
-                onStatusToggleSuccess={onStatusToggleSuccess}
                 onAddNew={onAddNew}
                 orgUnitId={orgUnitId}
                 eventDate={eventDate}

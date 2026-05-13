@@ -54,7 +54,6 @@ export const EnrollmentEditEventPageComponent = ({
     onSaveAssignee,
     onSaveAssigneeError,
     onDeleteTrackedEntitySuccess,
-    onStatusToggleSuccess,
     onAccessLostFromTransfer,
     onNavigateToEvent,
     onDeleteEvent,
@@ -127,7 +126,6 @@ export const EnrollmentEditEventPageComponent = ({
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
             onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
-            onStatusToggleSuccess={onStatusToggleSuccess}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
             feedbackEmptyText={i18n.t('No feedback for this event yet')}
             indicatorEmptyText={i18n.t('No indicator output for this event yet')}

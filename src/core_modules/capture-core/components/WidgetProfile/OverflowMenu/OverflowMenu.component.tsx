@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, type Dispatch, type SetStateAction } from 'react';
 import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './OverflowMenu.types';
@@ -15,10 +15,10 @@ type MenuFlyoutProps = {
     trackedEntityInactive: boolean;
     canWriteData: boolean;
     canCascadeDeleteTei: boolean;
-    setActionsIsOpen: (open: boolean) => void;
-    setChangelogIsOpen: (open: boolean) => void;
-    setDeactivateModalIsOpen: (open: boolean) => void;
-    setDeleteModalIsOpen: (open: boolean) => void;
+    setActionsIsOpen: Dispatch<SetStateAction<boolean>>;
+    setChangelogIsOpen: Dispatch<SetStateAction<boolean>>;
+    setDeactivateModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const MenuFlyout = ({
@@ -65,6 +65,71 @@ const MenuFlyout = ({
     </FlyoutMenu>
 );
 
+type ModalsProps = {
+    deleteModalIsOpen: boolean;
+    deactivateModalIsOpen: boolean;
+    changelogIsOpen: boolean;
+    trackedEntity: PlainProps['trackedEntity'];
+    trackedEntityForToggle: PlainProps['trackedEntityForToggle'];
+    trackedEntityTypeName: string;
+    trackedEntityInactive: boolean;
+    trackedEntityData: PlainProps['trackedEntityData'];
+    teiId: string;
+    programAPI: PlainProps['programAPI'];
+    onDeleteSuccess?: () => void;
+    onStatusToggleSuccess?: () => void;
+    setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setDeactivateModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setChangelogIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const Modals = ({
+    deleteModalIsOpen,
+    deactivateModalIsOpen,
+    changelogIsOpen,
+    trackedEntity,
+    trackedEntityForToggle,
+    trackedEntityTypeName,
+    trackedEntityInactive,
+    trackedEntityData,
+    teiId,
+    programAPI,
+    onDeleteSuccess,
+    onStatusToggleSuccess,
+    setDeleteModalIsOpen,
+    setDeactivateModalIsOpen,
+    setChangelogIsOpen,
+}: ModalsProps) => (
+    <>
+        {deleteModalIsOpen && (
+            <DeleteModal
+                trackedEntityTypeName={trackedEntityTypeName}
+                trackedEntity={trackedEntity}
+                setOpenModal={setDeleteModalIsOpen}
+                onDeleteSuccess={onDeleteSuccess}
+            />
+        )}
+        {deactivateModalIsOpen && trackedEntityForToggle && (
+            <DeactivateModal
+                trackedEntityTypeName={trackedEntityTypeName}
+                trackedEntity={trackedEntityForToggle}
+                trackedEntityInactive={trackedEntityInactive}
+                setOpenModal={setDeactivateModalIsOpen}
+                onStatusToggleSuccess={onStatusToggleSuccess}
+            />
+        )}
+        {changelogIsOpen && (
+            <TrackedEntityChangelogWrapper
+                teiId={teiId}
+                programAPI={programAPI}
+                isOpen={changelogIsOpen}
+                setIsOpen={setChangelogIsOpen}
+                trackedEntityData={trackedEntityData}
+            />
+        )}
+    </>
+);
+
 export const OverflowMenuComponent = ({
     trackedEntity,
     trackedEntityForToggle,
@@ -86,7 +151,7 @@ export const OverflowMenuComponent = ({
     const [deactivateModalIsOpen, setDeactivateModalIsOpen] = useState(false);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
 
-    const canShowDeactivate = canToggleStatus && Boolean(trackedEntityForToggle);
+    const canShowDeactivate = !readOnlyMode && canToggleStatus && Boolean(trackedEntityForToggle);
     const canShowDelete = !readOnlyMode && canWriteData;
 
     if (!displayChangelog && !canShowDeactivate && !canShowDelete) {
@@ -118,32 +183,23 @@ export const OverflowMenuComponent = ({
                     />
                 }
             />
-            {deleteModalIsOpen && (
-                <DeleteModal
-                    trackedEntityTypeName={trackedEntityTypeName}
-                    trackedEntity={trackedEntity}
-                    setOpenModal={setDeleteModalIsOpen}
-                    onDeleteSuccess={onDeleteSuccess}
-                />
-            )}
-            {deactivateModalIsOpen && trackedEntityForToggle && (
-                <DeactivateModal
-                    trackedEntityTypeName={trackedEntityTypeName}
-                    trackedEntity={trackedEntityForToggle}
-                    trackedEntityInactive={trackedEntityInactive}
-                    setOpenModal={setDeactivateModalIsOpen}
-                    onStatusToggleSuccess={onStatusToggleSuccess}
-                />
-            )}
-            {changelogIsOpen && (
-                <TrackedEntityChangelogWrapper
-                    teiId={teiId}
-                    programAPI={programAPI}
-                    isOpen={changelogIsOpen}
-                    setIsOpen={setChangelogIsOpen}
-                    trackedEntityData={trackedEntityData}
-                />
-            )}
+            <Modals
+                deleteModalIsOpen={deleteModalIsOpen}
+                deactivateModalIsOpen={deactivateModalIsOpen}
+                changelogIsOpen={changelogIsOpen}
+                trackedEntity={trackedEntity}
+                trackedEntityForToggle={trackedEntityForToggle}
+                trackedEntityTypeName={trackedEntityTypeName}
+                trackedEntityInactive={trackedEntityInactive}
+                trackedEntityData={trackedEntityData}
+                teiId={teiId}
+                programAPI={programAPI}
+                onDeleteSuccess={onDeleteSuccess}
+                onStatusToggleSuccess={onStatusToggleSuccess}
+                setDeleteModalIsOpen={setDeleteModalIsOpen}
+                setDeactivateModalIsOpen={setDeactivateModalIsOpen}
+                setChangelogIsOpen={setChangelogIsOpen}
+            />
         </>
     );
 };
