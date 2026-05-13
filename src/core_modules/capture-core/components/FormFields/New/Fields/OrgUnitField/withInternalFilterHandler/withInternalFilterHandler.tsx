@@ -61,10 +61,7 @@ export const withInternalFilterHandler = () =>
                     querySingleResource({
                         resource: 'organisationUnits',
                         params: {
-                            fields: [
-                                'id,displayName,path,publicAccess,access,lastUpdated',
-                                'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                            ].join(','),
+                            fields: 'id,path',
                             paging: false,
                             query: filterText,
                             ...hierarchyProp,
