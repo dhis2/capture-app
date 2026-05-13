@@ -22,6 +22,7 @@ Given('you open the main page with Ngelehun and child programe context', () => {
 });
 
 Given('you open the main page with Ngelehun and child programme default template context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'IpHINAT79UW', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default');
 });
 
@@ -30,10 +31,13 @@ Given('you open the main page with child programe context', () => {
 });
 
 Given('you open the main page with Ngelehun and TEI value types program context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&selectedTemplateId=ur1Edk5Oe2n-default');
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
@@ -42,6 +46,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -62,6 +67,7 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -84,6 +90,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis context',
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis default template context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default');
 });
 
@@ -486,6 +493,20 @@ When('you update the list with the name My custom list', () => {
     cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
+When(/^you update the tracker tei view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFiltersByName');
+    cy.contains('Update view').click();
+    cy.wait('@editTrackedEntityInstanceFiltersByName', { timeout: 30000 });
+});
+
+When(/^you update the tracker program stage view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingListsByName');
+    cy.contains('Update view').click();
+    cy.wait('@editProgramStageWorkingListsByName', { timeout: 30000 });
+});
+
 When('you update the list with the name Custom Program stage list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -560,15 +581,27 @@ When(/^you set the range filter "([^"]+)" to (-?\d+)-(-?\d+)$/, (filterName, min
 });
 
 When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
-    openStageFilterMenu(filterName);
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-    cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').type(value);
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const prefix = filterName.substring(0, 28);
+            const match = [...$anchors].find((node) => {
+                const text = node.innerText.replaceAll(/\s+/g, ' ').trim();
+                return text.includes(filterName) || text.startsWith(prefix);
+            });
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                openStageFilterMenu(filterName);
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
+    cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').clear().type(value);
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
 const BIRTH_STAGE_FILTER_NAMES = new Set(['Birth certificate', 'BCG dose', 'Apgar comment']);
 
-// Care at birth program stage data elements: INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, ORGANISATION_UNIT, DATE
 const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
     'WHOMCH Fetal heart rate on admission',
     'WHOMCH Estimated blood loss (ml)',
@@ -580,9 +613,14 @@ const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
     'WHOMCH Date of induction of labor',
 ]);
 
+const PROGRAM_STAGE_FILTER_NAMES = new Set([
+    ...BIRTH_STAGE_FILTER_NAMES,
+    ...CARE_AT_BIRTH_STAGE_FILTER_NAMES,
+    'WHOMCH Smoking',
+]);
+
 function openStageFilterMenu(filterName) {
-    const isBirthStageFilter = BIRTH_STAGE_FILTER_NAMES.has(filterName);
-    if (isBirthStageFilter) {
+    if (BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
         let needProgramStageFlow = false;
         cy.get('[data-test="tracker-working-lists"]').within(() => {
             cy.get('[data-test="more-filters"]').then(($buttons) => {
@@ -602,6 +640,8 @@ function openStageFilterMenu(filterName) {
                 cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
             }
         });
+    } else if (PROGRAM_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
     } else {
         cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
     }
@@ -615,10 +655,30 @@ When('you open the program stage More filters menu for Birth on the tracker work
     cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
 });
 
-When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    openStageFilterMenu(filterName);
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const prefix = filterName.substring(0, 28);
+            const match = [...$anchors].find((node) => {
+                const text = node.innerText.replaceAll(/\s+/g, ' ').trim();
+                return text.includes(filterName) || text.startsWith(prefix);
+            });
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                openStageFilterMenu(filterName);
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When('you set the boolean filter', () => {
+    openStageFilterMenu('BCG dose');
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('BCG dose').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Yes').click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
 
@@ -685,26 +745,6 @@ When(/^you save the program stage view as (.*)$/, (name) => {
     cy.wait('@newTrackerFilterResult', { timeout: 30000 });
 });
 
-// Program stage: chip click can navigate to default; open saved view by URL with template id from save response
-When(/^you open the saved program stage view (.+)$/, (viewName) => {
-    cy.get('@newTrackerFilterResult').then((result) => {
-        expect(result.response.statusCode).to.equal(201);
-        const body = result.response?.body;
-        const templateId = body?.response?.uid ?? body?.uid;
-        expect(templateId, 'saved program stage working list id').to.be.a('string').and.not.to.be.empty;
-
-        cy.location('hash').then((hash) => {
-            const queryStart = hash.indexOf('?');
-            const queryString = queryStart >= 0 ? hash.substring(queryStart + 1) : hash.slice(1) || '';
-            const params = new URLSearchParams(queryString);
-            expect(params.get('programId'), 'programId in URL').to.be.a('string').and.not.to.be.empty;
-            params.set('selectedTemplateId', templateId);
-            cy.visit(`#/?${params.toString()}`);
-        });
-    });
-});
-
-// Chip label may truncate the full label (name + value); assert the specific chip text, then verify full value in input when opened
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
@@ -736,7 +776,19 @@ Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+
     cy.get('body').click(0, 0);
 });
 
-Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+Then('the boolean filter should be in effect and show the correct value when opened', () => {
+    const filterName = 'BCG dose';
+    const value = 'Yes';
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
