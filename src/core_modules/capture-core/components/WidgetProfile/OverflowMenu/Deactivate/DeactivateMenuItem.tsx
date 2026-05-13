@@ -1,7 +1,13 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconBlock16, IconCheckmarkCircle16, MenuItem } from '@dhis2/ui';
-import type { Props } from './DeactivateMenuItem.types';
+
+type Props = {
+    trackedEntityTypeName: string;
+    trackedEntityInactive: boolean;
+    setActionsIsOpen: (open: boolean) => void;
+    setDeactivateModalIsOpen: (open: boolean) => void;
+};
 
 export const DeactivateMenuItem = ({
     trackedEntityTypeName,
@@ -9,15 +15,10 @@ export const DeactivateMenuItem = ({
     setActionsIsOpen,
     setDeactivateModalIsOpen,
 }: Props) => {
+    const interp = { trackedEntityTypeName, interpolation: { escapeValue: false } };
     const label = trackedEntityInactive
-        ? i18n.t('Activate {{trackedEntityTypeName}}', {
-            trackedEntityTypeName,
-            interpolation: { escapeValue: false },
-        })
-        : i18n.t('Deactivate {{trackedEntityTypeName}}', {
-            trackedEntityTypeName,
-            interpolation: { escapeValue: false },
-        });
+        ? i18n.t('Activate {{trackedEntityTypeName}}', interp)
+        : i18n.t('Deactivate {{trackedEntityTypeName}}', interp);
 
     return (
         <MenuItem

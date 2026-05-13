@@ -1,13 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { colors, IconInfo16, spacers, spacersNum, Tag } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
-import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
 import { useEnrollmentAccessContext } from '../EnrollmentAccessContext';
 import './enrollmentPageLayout.css';
 
@@ -62,23 +60,6 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-const DeactivatedBadge = ({ trackedEntityTypeName }: { trackedEntityTypeName?: string }) => {
-    const message = trackedEntityTypeName
-        ? i18n.t('This {{trackedEntityTypeName}} is deactivated. Only read operations are allowed.', {
-            trackedEntityTypeName,
-            interpolation: { escapeValue: false },
-        })
-        : i18n.t('This tracked entity is deactivated. Only read operations are allowed.');
-
-    return (
-        <ConditionalTooltip content={message} enabled>
-            <Tag maxWidth="400px" neutral icon={<IconInfo16 />}>
-                {i18n.t('View only')} - {message}
-            </Tag>
-        </ConditionalTooltip>
-    );
-};
-
 const EnrollmentReadOnlyBadge = () => {
     const {
         isEventPage,
@@ -88,12 +69,7 @@ const EnrollmentReadOnlyBadge = () => {
         anyStageWriteAccess,
         anyStageReadAccess,
         trackedEntityTypeName,
-        trackedEntityInactive,
     } = useEnrollmentAccessContext();
-
-    if (trackedEntityInactive) {
-        return <DeactivatedBadge trackedEntityTypeName={trackedEntityTypeName} />;
-    }
 
     if (isEventPage) {
         if (currentStageWriteAccess) return null;

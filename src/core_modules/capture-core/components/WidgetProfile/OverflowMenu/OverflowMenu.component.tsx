@@ -3,7 +3,8 @@ import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
-import { DeactivateMenuItem, DeactivateModal } from './Deactivate';
+import { DeactivateMenuItem } from './Deactivate/DeactivateMenuItem';
+import { DeactivateModal } from './Deactivate/DeactivateModal';
 import { OverflowButton } from '../../Buttons';
 import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
