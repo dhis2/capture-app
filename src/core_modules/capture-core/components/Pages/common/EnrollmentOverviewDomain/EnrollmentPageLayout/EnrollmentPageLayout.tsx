@@ -82,8 +82,6 @@ const EnrollmentReadOnlyBadge = () => {
         );
     }
 
-    // No read access to any stage means the user can't see stages at all,
-    // so don't claim missing stage write access in the badge.
     const stagesEffectivelyReadOnly = !anyStageWriteAccess && anyStageReadAccess;
     const showAllMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && stagesEffectivelyReadOnly;
     if (!showAllMissing) return null;

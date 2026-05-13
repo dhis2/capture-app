@@ -5,6 +5,5 @@ export type Props = Readonly<{
     groupedLinkedEntities: GroupedLinkedEntities;
     onLinkedRecordClick: LinkedRecordClick;
     onDeleteRelationship: OnDeleteRelationship;
-    readOnly?: boolean;
 }>;
 

@@ -7,7 +7,6 @@ import { WidgetNote } from '../WidgetNote';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
 
@@ -22,6 +21,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
                 placeholder={i18n.t('Write a note about this event')}
                 emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
+                scope="event"
                 onAddNote={onAddNote}
             />
         </div>

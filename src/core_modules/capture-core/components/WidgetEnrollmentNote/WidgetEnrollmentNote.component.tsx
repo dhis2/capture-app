@@ -22,6 +22,7 @@ export const WidgetEnrollmentNote = () => {
                 placeholder={i18n.t('Write a note about this enrollment')}
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
+                scope="enrollment"
                 onAddNote={onAddNote}
             />
         </div>

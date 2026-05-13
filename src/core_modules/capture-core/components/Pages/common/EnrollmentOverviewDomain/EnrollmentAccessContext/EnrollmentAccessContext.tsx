@@ -15,10 +15,9 @@ export type EnrollmentAccessContextValue = {
     isEventPage: boolean;
     multipleStages: boolean;
     allWriteAccessMissing: boolean;
-    hideWidgetBadge: boolean;
+    showWidgetBadge: boolean;
 };
 
-// Fail-open default for renders outside a provider (tests, plugin contexts).
 const fallback: EnrollmentAccessContextValue = {
     programWriteAccess: true,
     trackedEntityTypeWriteAccess: true,
@@ -30,7 +29,7 @@ const fallback: EnrollmentAccessContextValue = {
     isEventPage: false,
     multipleStages: false,
     allWriteAccessMissing: false,
-    hideWidgetBadge: false,
+    showWidgetBadge: true,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
@@ -78,7 +77,7 @@ export const EnrollmentAccessProvider = ({ program, currentStageId, children }: 
             isEventPage,
             multipleStages: program.stages.size > 1,
             allWriteAccessMissing,
-            hideWidgetBadge: isEventPage || allWriteAccessMissing,
+            showWidgetBadge: !isEventPage && !allWriteAccessMissing,
         };
     }, [program, currentStageId]);
 

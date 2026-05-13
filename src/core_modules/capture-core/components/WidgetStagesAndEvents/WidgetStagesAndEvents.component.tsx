@@ -30,12 +30,10 @@ const WidgetStagesAndEventsPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const {
-        hideWidgetBadge,
         anyStageWriteAccess,
         anyStageReadAccess,
         multipleStages,
-        stageWriteAccessById,
-        stageReadAccessById,
+        showWidgetBadge,
     } = useEnrollmentAccessContext();
 
     return (
@@ -47,7 +45,7 @@ const WidgetStagesAndEventsPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>{i18n.t('Stages and Events')}</span>
-                        {!hideWidgetBadge && (
+                        {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
@@ -66,8 +64,6 @@ const WidgetStagesAndEventsPlain = ({
                     ready={events !== undefined && stages !== undefined}
                     events={events}
                     programId={programId}
-                    stageWriteAccessById={stageWriteAccessById}
-                    stageReadAccessById={stageReadAccessById}
                     {...passOnProps}
                 />
             </Widget>

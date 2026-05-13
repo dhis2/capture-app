@@ -1,13 +1,24 @@
 import React from 'react';
-import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
+import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBoxes } from './NoticeBoxes.container';
 import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
 import { ReadOnlyBadge } from '../../ReadOnlyBadge';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
 
-export const DataEntryComponent = ({
+const styles = {
+    title: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: `${spacersNum.dp8}px`,
+    },
+};
+
+const DataEntryComponentPlain = ({
+    classes,
     dataEntryId,
     onCancel,
     onSave,
@@ -24,10 +35,10 @@ export const DataEntryComponent = ({
     pluginContext,
     readOnly,
     accessReadOnly,
-}: PlainProps) => (
+}: PlainProps & WithStyles<typeof styles>) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
         <ModalTitle>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+            <div className={classes.title}>
                 <span>
                     {readOnly
                         ? i18n.t(
@@ -93,3 +104,5 @@ export const DataEntryComponent = ({
         </ModalActions>
     </Modal>
 );
+
+export const DataEntryComponent = withStyles(styles)(DataEntryComponentPlain);

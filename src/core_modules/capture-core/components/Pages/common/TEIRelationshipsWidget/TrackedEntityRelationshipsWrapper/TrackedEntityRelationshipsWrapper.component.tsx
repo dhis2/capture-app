@@ -33,11 +33,15 @@ export const TrackedEntityRelationshipsWrapper = ({
     onOpenAddRelationship,
     onCloseAddRelationship,
     onLinkedRecordClick,
-    readOnlyMode,
+    readOnlyMode = false,
 }: Props) => {
-    const { trackedEntityTypeWriteAccess, allWriteAccessMissing, hideWidgetBadge } = useEnrollmentAccessContext();
+    const {
+        trackedEntityTypeWriteAccess,
+        allWriteAccessMissing,
+        showWidgetBadge,
+    } = useEnrollmentAccessContext();
     const accessReadOnly = !trackedEntityTypeWriteAccess;
-    const effectiveReadOnly = Boolean(readOnlyMode) || accessReadOnly;
+    const effectiveReadOnly = readOnlyMode || accessReadOnly;
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
     const { orgUnit } = useCoreOrgUnit(orgUnitId);
@@ -81,8 +85,8 @@ export const TrackedEntityRelationshipsWrapper = ({
             relationshipTypes={relationshipTypes}
             readOnly={effectiveReadOnly}
             accessReadOnly={accessReadOnly}
-            hideButton={allWriteAccessMissing}
-            hideReadOnlyBadge={hideWidgetBadge}
+            hideButton={accessReadOnly || allWriteAccessMissing}
+            hideReadOnlyBadge={!showWidgetBadge}
             renderTrackedEntityRegistration={(
                 selectedTrackedEntityTypeId,
                 suggestedProgramId,

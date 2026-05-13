@@ -36,7 +36,7 @@ const RelationshipsWidgetPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
-    const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
+    const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships, readOnly);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
 
     if (isLoading) {
@@ -87,7 +87,6 @@ const RelationshipsWidgetPlain = ({
                             groupedLinkedEntities={groupedLinkedEntities}
                             onLinkedRecordClick={onLinkedRecordClick}
                             onDeleteRelationship={onDeleteRelationship}
-                            readOnly={readOnly}
                         />
                     )
                 }

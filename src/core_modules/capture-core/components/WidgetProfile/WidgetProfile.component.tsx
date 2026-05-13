@@ -25,6 +25,7 @@ import { OverflowMenu } from './OverflowMenu';
 import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 const styles: Readonly<any> = {
     header: {
@@ -91,10 +92,13 @@ const WidgetProfilePlain = ({
         error: trackedEntityInstancesError,
         trackedEntity,
         trackedEntityInstanceAttributes,
-        trackedEntityTypeName,
-        trackedEntityTypeAccess,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
+    const {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+    } = useEnrollmentAccessContext();
+    const trackedEntityTypeName = program?.trackedEntityType?.displayName;
     const {
         loading: userRolesLoading,
         error: userRolesError,
@@ -103,18 +107,17 @@ const WidgetProfilePlain = ({
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 
-    const isEditable = useMemo(() =>
-        !hasNoAttributes &&
-        trackedEntityTypeAccess?.data?.write &&
-        !readOnlyMode,
-    [hasNoAttributes, readOnlyMode, trackedEntityTypeAccess]);
+    const isEditable = useMemo(
+        () => !hasNoAttributes && trackedEntityTypeWriteAccess && !readOnlyMode,
+        [hasNoAttributes, trackedEntityTypeWriteAccess, readOnlyMode],
+    );
 
     const profileButtonLabel = useMemo(() => {
-        if (readOnlyMode) return null;
+        if (readOnlyMode || hasNoAttributes) return null;
         if (!isEditable) return i18n.t('Show profile');
         if (isEditable) return i18n.t('Edit');
         return null;
-    }, [isEditable, readOnlyMode]);
+    }, [isEditable, readOnlyMode, hasNoAttributes]);
 
     const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
@@ -152,8 +155,8 @@ const WidgetProfilePlain = ({
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
     const canWriteData = useMemo(
-        () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
-        [trackedEntityTypeAccess, program],
+        () => trackedEntityTypeWriteAccess && programWriteAccess,
+        [trackedEntityTypeWriteAccess, programWriteAccess],
     );
 
     const renderProfile = () => {
@@ -232,18 +235,15 @@ const WidgetProfilePlain = ({
 
     return (
         <div data-test="profile-widget">
-            {isEmptyList ? (
-                <Widget noncollapsible header={widgetHeader} />
-            ) : (
-                <Widget
-                    header={widgetHeader}
-                    onOpen={handleOpen}
-                    onClose={handleClose}
-                    open={open}
-                >
-                    {renderProfile()}
-                </Widget>
-            )}
+            <Widget
+                header={widgetHeader}
+                onOpen={handleOpen}
+                onClose={handleClose}
+                open={open}
+                noncollapsible={isEmptyList}
+            >
+                {renderProfile()}
+            </Widget>
             {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
                 <>
                     <DataEntry
@@ -263,7 +263,7 @@ const WidgetProfilePlain = ({
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
                         readOnly={!isEditable}
-                        accessReadOnly={!trackedEntityTypeAccess?.data?.write}
+                        accessReadOnly={!trackedEntityTypeWriteAccess}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>
