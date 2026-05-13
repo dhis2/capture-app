@@ -1,30 +1,27 @@
 import * as React from 'react';
-import { NumericFilter } from './NumericFilter.component';
-import type { NumericFilterData } from './types';
-
-type Props = {
-    filter: NumericFilterData | null,
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any, isBlur?: boolean) => void,
-    onUpdate: (commitValue?: any) => void,
-};
+import { NumericFilter as NumericFilterInput } from './NumericFilter.component';
+import type { NumericFilter, NumericFilterManagerProps } from './numeric.types';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 
 type State = {
     value: {
         min?: string | null,
         max?: string | null,
-    } | undefined;
+    } | string | null | undefined;
 };
 
-export class NumericFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: NumericFilterData | null) {
+export class NumericFilterManager extends React.Component<NumericFilterManagerProps, State> {
+    static calculateDefaultState(filter: NumericFilter | null) {
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
+
         return {
-            min: filter && (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
-            max: filter && (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
+            min: (filter.ge || filter.ge === 0) ? filter.ge.toString() : undefined,
+            max: (filter.le || filter.le === 0) ? filter.le.toString() : undefined,
         };
     }
 
-    constructor(props: Props) {
+    constructor(props: NumericFilterManagerProps) {
         super(props);
         this.state = {
             value: NumericFilterManager.calculateDefaultState(this.props.filter),
@@ -40,7 +37,7 @@ export class NumericFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <NumericFilter
+            <NumericFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

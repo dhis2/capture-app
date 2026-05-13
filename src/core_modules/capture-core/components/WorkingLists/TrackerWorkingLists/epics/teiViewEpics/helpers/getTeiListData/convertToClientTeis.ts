@@ -18,9 +18,9 @@ export const convertToClientTeis = (
         .map((tei) => {
             const attributeValuesById = getValuesById(tei.attributes);
             const record = columnsMetaForDataFetching
-                .map(({ id, mainProperty, type }) => {
+                .map(({ id, isMainProperty, type }) => {
                     let value;
-                    if (mainProperty) {
+                    if (isMainProperty) {
                         value = tei[id];
                     } else {
                         value = attributeValuesById[id];

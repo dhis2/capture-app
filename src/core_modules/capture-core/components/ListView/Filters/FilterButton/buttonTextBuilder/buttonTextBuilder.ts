@@ -10,7 +10,12 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
+import {
+    isEmptyFilterData,
+    type FilterData,
+    type OptionSetFilterData,
+    type Options,
+} from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes: any = {
@@ -55,6 +60,10 @@ export function buildButtonText(
     type: typeof filterTypesObject[keyof typeof filterTypesObject],
     options?: Options | null,
 ): string {
+    if (isEmptyFilterData(filter)) {
+        return filter.value;
+    }
+
     if ('usingOptionSet' in filter && options) {
         return getOptionSetText(filter, options);
     }

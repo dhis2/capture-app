@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
-import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime/types/dateTime.types';
+import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
 
 function formatDateTime(isoDatetime: string): string {
     const [datePart, timePart] = isoDatetime.split('T');

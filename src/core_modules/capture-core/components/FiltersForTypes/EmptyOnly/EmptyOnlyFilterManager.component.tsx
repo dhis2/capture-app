@@ -1,27 +1,20 @@
 import React from 'react';
-import { EmptyOnlyFilter } from './EmptyOnlyFilter.component';
-import type { EmptyOnlyFilterData } from './types';
-import { EMPTY_VALUE_FILTER, NOT_EMPTY_VALUE_FILTER } from '../EmptyValue';
-import type { Value } from './EmptyOnly.types';
-
-type Props = {
-    filter: EmptyOnlyFilterData | null | undefined;
-    filterTypeRef: (instance: unknown) => void;
-    handleCommitValue: () => void;
-};
+import { EmptyOnlyFilter as EmptyOnlyFilterInput } from './EmptyOnlyFilter.component';
+import type { EmptyOnlyFilter, EmptyOnlyFilterManagerProps, Value } from './emptyOnly.types';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
 
 type State = {
     value: Value;
 };
 
-export class EmptyOnlyFilterManager extends React.Component<Props, State> {
-    static calculateDefaultState(filter: EmptyOnlyFilterData | null | undefined): State {
-        if (filter?.isEmpty === true) return { value: EMPTY_VALUE_FILTER };
-        if (filter?.isEmpty === false) return { value: NOT_EMPTY_VALUE_FILTER };
+export class EmptyOnlyFilterManager extends React.Component<EmptyOnlyFilterManagerProps, State> {
+    static calculateDefaultState(filter: EmptyOnlyFilter | null | undefined): State {
+        if (!filter) return { value: undefined };
+        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
         return { value: undefined };
     }
 
-    constructor(props: Props) {
+    constructor(props: EmptyOnlyFilterManagerProps) {
         super(props);
         this.state = EmptyOnlyFilterManager.calculateDefaultState(this.props.filter);
     }
@@ -35,7 +28,7 @@ export class EmptyOnlyFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <EmptyOnlyFilter
+            <EmptyOnlyFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

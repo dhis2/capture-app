@@ -1,3 +1,24 @@
+## [106.2.1](https://github.com/dhis2/capture-app/compare/v106.2.0...v106.2.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-21475] use gregorian calendar for iso8601 to handle chrome bug ([#4560](https://github.com/dhis2/capture-app/issues/4560)) ([f29320a](https://github.com/dhis2/capture-app/commit/f29320a6e9a5c0264861b3a0a686ac40621c5885))
+
+# [106.2.0](https://github.com/dhis2/capture-app/compare/v106.1.6...v106.2.0) (2026-05-12)
+
+
+### Features
+
+* [DHIS2-19940] Implement "No value" filtering for all filter types in working list ([#4468](https://github.com/dhis2/capture-app/issues/4468)) ([a1f9d5f](https://github.com/dhis2/capture-app/commit/a1f9d5f9c03036090b4d494f7f2f89bbf5e3a994)), closes [#4511](https://github.com/dhis2/capture-app/issues/4511)
+
+## [106.1.6](https://github.com/dhis2/capture-app/compare/v106.1.5...v106.1.6) (2026-05-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4552](https://github.com/dhis2/capture-app/issues/4552)) ([419c96d](https://github.com/dhis2/capture-app/commit/419c96d239f61237011a25cb781795c7f306af37))
+
 ## [106.1.5](https://github.com/dhis2/capture-app/compare/v106.1.4...v106.1.5) (2026-05-06)
 
 
