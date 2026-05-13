@@ -146,7 +146,7 @@ const fieldsParam = [
     'expiryDays',
     'dataEntryForm[id,htmlCode]',
     'displayIncidentDate',
-    'access[*]',
+    'access[data[read,write]]',
     'trackedEntityType[id]',
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]]',
     'userRoles[id,displayName]',

@@ -18,7 +18,9 @@ import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
 const LISTING_FIELDS =
     'event,status,program,programStage,enrollment,trackedEntity,'
-    + 'occurredAt,scheduledAt,orgUnit,assignedUser,dataValues[dataElement,value]';
+    + 'occurredAt,scheduledAt,orgUnit,'
+    + 'assignedUser[uid,username,firstName,surname],'
+    + 'dataValues[dataElement,value]';
 
 const DOWNLOAD_FIELDS = '*';
 

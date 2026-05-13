@@ -62,7 +62,7 @@ const convert = (() => {
     };
 })();
 
-const fieldsParam = 'id,displayName,condition,description,program[id],programStage[id],priority,' +
+const fieldsParam = 'id,displayName,condition,program[id],programStage[id],priority,' +
 'programRuleActions[id,content,displayContent,location,data,priority,programRuleActionType,programStageSection[id],' +
 'dataElement[id],trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id],legendSet[id]]';
 

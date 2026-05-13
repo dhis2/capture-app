@@ -27,7 +27,7 @@ export const useEnrollment = ({
                     id: ({ variables: { enrollmentId: updatedEnrollmentId } }: any) => updatedEnrollmentId,
                     params: {
                         fields: 'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,' +
-                        'occurredAt,followUp,deleted,createdBy,updatedBy,updatedAt,geometry',
+                        'occurredAt,followUp,deleted,updatedAt,geometry',
                     },
                 },
             }),
