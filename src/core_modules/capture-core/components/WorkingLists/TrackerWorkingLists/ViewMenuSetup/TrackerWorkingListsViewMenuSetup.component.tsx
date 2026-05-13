@@ -37,7 +37,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
         toggleRowSelected,
         allRowsAreSelected,
         removeRowsFromSelection,
-    } = useSelectedRowsController({ recordIds: recordsOrder });
+    } = useSelectedRowsController({ recordIds: selectableRecordIds });
     const downloadRequest = useSelector(
         ({ workingLists }: any) => workingLists[storeId] && workingLists[storeId].currentRequest,
     );
