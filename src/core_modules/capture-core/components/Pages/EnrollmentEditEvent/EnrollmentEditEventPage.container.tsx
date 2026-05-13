@@ -98,7 +98,11 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+    const { enrollment: enrollmentSite, readOnly: trackedEntityInactive } = useCommonEnrollmentDomainData(
+        teiId,
+        enrollmentId,
+        programId,
+    );
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
     useEffect(() => {
@@ -119,6 +123,7 @@ export const EnrollmentEditEventPage = () => {
             initMode={initMode}
             enrollmentSite={enrollmentSite}
             event={storedEvent}
+            trackedEntityInactive={trackedEntityInactive}
         />
     ) : <LoadingMaskForPage />;
 };
@@ -132,6 +137,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     initMode,
     enrollmentSite,
     event,
+    trackedEntityInactive,
 }: Props) => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
@@ -158,6 +164,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
+
+    const onStatusToggleSuccess = useCallback(() => {
+        queryClient.invalidateQueries(
+            [ReactQueryAppNamespace, 'stages&event', 'enrollmentData', teiId, programId, enrollmentId],
+        );
+    }, [queryClient, teiId, programId, enrollmentId]);
 
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
@@ -296,7 +308,11 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }
 
     return (
-        <EnrollmentAccessProvider program={program} currentStageId={stageId}>
+        <EnrollmentAccessProvider
+            program={program}
+            currentStageId={stageId}
+            trackedEntityInactive={trackedEntityInactive}
+        >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}
                 mode={currentPageMode}
@@ -318,6 +334,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 program={program}
                 onDelete={onDelete}
                 onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
+                onStatusToggleSuccess={onStatusToggleSuccess}
                 onAddNew={onAddNew}
                 orgUnitId={orgUnitId}
                 eventDate={eventDate}

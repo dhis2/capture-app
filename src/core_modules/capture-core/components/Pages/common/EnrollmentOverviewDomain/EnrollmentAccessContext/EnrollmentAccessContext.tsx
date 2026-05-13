@@ -16,6 +16,8 @@ export type EnrollmentAccessContextValue = {
     multipleStages: boolean;
     allWriteAccessMissing: boolean;
     showWidgetBadge: boolean;
+    trackedEntityInactive: boolean;
+    canToggleTrackedEntityStatus: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -30,6 +32,8 @@ const fallback: EnrollmentAccessContextValue = {
     multipleStages: false,
     allWriteAccessMissing: false,
     showWidgetBadge: true,
+    trackedEntityInactive: false,
+    canToggleTrackedEntityStatus: false,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
@@ -37,49 +41,72 @@ const Context = createContext<EnrollmentAccessContextValue>(fallback);
 type ProviderProps = {
     program?: TrackerProgram;
     currentStageId?: string;
+    trackedEntityInactive?: boolean;
     children: React.ReactNode;
 };
 
-export const EnrollmentAccessProvider = ({ program, currentStageId, children }: ProviderProps) => {
-    const value = useMemo<EnrollmentAccessContextValue>(() => {
-        if (!program) return fallback;
+const buildStageAccessMaps = (program: TrackerProgram) => {
+    const rawStageWriteAccessById: Record<string, boolean> = {};
+    const stageReadAccessById: Record<string, boolean> = {};
+    for (const stage of program.stages.values()) {
+        const access = stage.access as Access | undefined;
+        rawStageWriteAccessById[stage.id] = Boolean(access?.data?.write);
+        stageReadAccessById[stage.id] = Boolean(access?.data?.read);
+    }
+    return { rawStageWriteAccessById, stageReadAccessById };
+};
 
-        const stages = Array.from(program.stages.values());
-        const stageWriteAccessById: Record<string, boolean> = {};
-        const stageReadAccessById: Record<string, boolean> = {};
-        for (const stage of stages) {
-            const access = stage.access as Access | undefined;
-            stageWriteAccessById[stage.id] = Boolean(access?.data?.write);
-            stageReadAccessById[stage.id] = Boolean(access?.data?.read);
-        }
-        const programWriteAccess = Boolean(program.access?.data?.write);
-        const trackedEntityTypeWriteAccess = Boolean(program.trackedEntityType?.access?.data?.write);
-        const anyStageWriteAccess = Object.values(stageWriteAccessById).some(Boolean);
-        const anyStageReadAccess = Object.values(stageReadAccessById).some(Boolean);
-        const isEventPage = Boolean(currentStageId);
-        const currentStageWriteAccess = currentStageId
-            ? (stageWriteAccessById[currentStageId] ?? false)
-            : true;
-        const allWriteAccessMissing = !programWriteAccess
-            && !trackedEntityTypeWriteAccess
-            && !anyStageWriteAccess;
+const computeContextValue = (
+    program: TrackerProgram,
+    currentStageId: string | undefined,
+    trackedEntityInactive: boolean,
+): EnrollmentAccessContextValue => {
+    const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
+    const rawProgramWriteAccess = Boolean(program.access?.data?.write);
+    const rawTrackedEntityTypeWriteAccess = Boolean(program.trackedEntityType?.access?.data?.write);
 
-        return {
-            programWriteAccess,
-            trackedEntityTypeWriteAccess,
-            anyStageWriteAccess,
-            anyStageReadAccess,
-            stageWriteAccessById,
-            stageReadAccessById,
-            trackedEntityTypeName: program.trackedEntityType?.name,
-            currentStageId,
-            currentStageWriteAccess,
-            isEventPage,
-            multipleStages: program.stages.size > 1,
-            allWriteAccessMissing,
-            showWidgetBadge: !isEventPage && !allWriteAccessMissing,
-        };
-    }, [program, currentStageId]);
+    const stageWriteAccessById = trackedEntityInactive
+        ? Object.fromEntries(Object.keys(rawStageWriteAccessById).map(id => [id, false]))
+        : rawStageWriteAccessById;
+    const programWriteAccess = !trackedEntityInactive && rawProgramWriteAccess;
+    const trackedEntityTypeWriteAccess = !trackedEntityInactive && rawTrackedEntityTypeWriteAccess;
+    const anyStageWriteAccess = Object.values(stageWriteAccessById).some(Boolean);
+    const anyStageReadAccess = Object.values(stageReadAccessById).some(Boolean);
+    const isEventPage = Boolean(currentStageId);
+    const currentStageWriteAccess = currentStageId ? (stageWriteAccessById[currentStageId] ?? false) : true;
+    const allWriteAccessMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && !anyStageWriteAccess;
+
+    return {
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        anyStageWriteAccess,
+        anyStageReadAccess,
+        stageWriteAccessById,
+        stageReadAccessById,
+        trackedEntityTypeName: program.trackedEntityType?.name,
+        currentStageId,
+        currentStageWriteAccess,
+        isEventPage,
+        multipleStages: program.stages.size > 1,
+        allWriteAccessMissing,
+        showWidgetBadge: !isEventPage && !allWriteAccessMissing,
+        trackedEntityInactive,
+        canToggleTrackedEntityStatus: rawTrackedEntityTypeWriteAccess,
+    };
+};
+
+export const EnrollmentAccessProvider = ({
+    program,
+    currentStageId,
+    trackedEntityInactive = false,
+    children,
+}: ProviderProps) => {
+    const value = useMemo<EnrollmentAccessContextValue>(
+        () => (program
+            ? computeContextValue(program, currentStageId, trackedEntityInactive)
+            : { ...fallback, trackedEntityInactive }),
+        [program, currentStageId, trackedEntityInactive],
+    );
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
 };

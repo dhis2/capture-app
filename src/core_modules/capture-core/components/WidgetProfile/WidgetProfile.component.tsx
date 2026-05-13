@@ -74,6 +74,7 @@ const WidgetProfilePlain = ({
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
+    onStatusToggleSuccess,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
@@ -97,6 +98,8 @@ const WidgetProfilePlain = ({
     const {
         programWriteAccess,
         trackedEntityTypeWriteAccess,
+        canToggleTrackedEntityStatus,
+        trackedEntityInactive,
     } = useEnrollmentAccessContext();
     const trackedEntityTypeName = program?.trackedEntityType?.displayName;
     const {
@@ -202,6 +205,17 @@ const WidgetProfilePlain = ({
         trackedEntity: trackedEntity ? (trackedEntity.trackedEntity || teiId) : teiId,
     }), [trackedEntity, teiId]);
 
+    const trackedEntityForToggle = useMemo(() => {
+        const trackedEntityTypeId = program?.trackedEntityType?.id;
+        const teiOrgUnit = (trackedEntity as any)?.orgUnit;
+        if (!trackedEntity || !trackedEntityTypeId || !teiOrgUnit) return null;
+        return {
+            trackedEntity: trackedEntity.trackedEntity || teiId,
+            trackedEntityType: trackedEntityTypeId,
+            orgUnit: teiOrgUnit,
+        };
+    }, [trackedEntity, program, teiId]);
+
     const widgetHeader = (
         <div className={classes.header}>
             <div>
@@ -221,8 +235,12 @@ const WidgetProfilePlain = ({
                 <OverflowMenu
                     trackedEntityTypeName={trackedEntityTypeName}
                     canWriteData={canWriteData}
+                    canToggleStatus={canToggleTrackedEntityStatus}
+                    trackedEntityInactive={trackedEntityInactive}
                     trackedEntity={trackedEntityProp}
+                    trackedEntityForToggle={trackedEntityForToggle}
                     onDeleteSuccess={onDeleteSuccess}
+                    onStatusToggleSuccess={onStatusToggleSuccess}
                     displayChangelog={!!displayChangelog}
                     trackedEntityData={clientAttributesWithSubvalues}
                     teiId={teiId}

@@ -54,6 +54,7 @@ export type PlainProps = {
     onSaveAssignee: (newAssignee: UserFormField) => void;
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void;
     onDeleteTrackedEntitySuccess: () => void;
+    onStatusToggleSuccess?: () => void;
     events: Array<any>;
     onDeleteEvent?: (eventId: string) => void;
     onDeleteEventRelationship?: (relationshipId: string) => void;
@@ -71,5 +72,5 @@ export type Props = {
     event: any;
     enrollmentSite: any;
     initMode?: string;
-    readOnly?: boolean;
+    trackedEntityInactive?: boolean;
 };

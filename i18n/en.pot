@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-08T08:50:49.040Z\n"
-"PO-Revision-Date: 2026-05-08T08:50:49.040Z\n"
+"POT-Creation-Date: 2026-05-13T09:07:01.274Z\n"
+"PO-Revision-Date: 2026-05-13T09:07:01.274Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1003,6 +1003,19 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid ""
+"This {{trackedEntityTypeName}} is deactivated. Only read operations are "
+"allowed."
+msgstr ""
+"This {{trackedEntityTypeName}} is deactivated. Only read operations are "
+"allowed."
+
+msgid "This tracked entity is deactivated. Only read operations are allowed."
+msgstr "This tracked entity is deactivated. Only read operations are allowed."
+
+msgid "View only"
+msgstr "View only"
+
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
@@ -1091,9 +1104,6 @@ msgstr "You only have view access to these program stages"
 
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
-
-msgid "View only"
-msgstr "View only"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1643,6 +1653,38 @@ msgstr "Try again or contact your system administrator for support"
 
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr "Activate {{trackedEntityTypeName}}"
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr "Deactivate {{trackedEntityTypeName}}"
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr "Yes, activate {{trackedEntityTypeName}}"
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr "Yes, deactivate {{trackedEntityTypeName}}"
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr "There was a problem activating the {{trackedEntityTypeName}}"
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr "There was a problem deactivating the {{trackedEntityTypeName}}"
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
