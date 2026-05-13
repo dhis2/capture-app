@@ -17,6 +17,7 @@ export type OwnProps = {
     duplicatesReviewPageSize: number;
     isSavingInProgress?: boolean;
     inheritedAttributes?: Array<InputAttribute>;
+    hideProgramSelectionMessage?: boolean;
     renderDuplicatesCardActions?: RenderCustomCardActions;
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: (payload: TeiPayload) => void) => ReactNode;
     ExistingUniqueValueDialogActions: ExistingUniqueValueDialogActionsComponent;

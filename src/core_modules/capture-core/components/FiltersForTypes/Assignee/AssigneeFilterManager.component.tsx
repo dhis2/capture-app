@@ -1,23 +1,12 @@
 import * as React from 'react';
-import { AssigneeFilter } from './AssigneeFilter.component';
-import type { AssigneeFilterData } from './types';
-
-type Props = {
-    filter: AssigneeFilterData | null,
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: () => void,
-};
-
-type Value = {
-    mode: string;
-    provided?: any;
-} | null;
+import { AssigneeFilter as AssigneeFilterInput } from './AssigneeFilter.component';
+import type { AssigneeFilterData, AssigneeFilterManagerProps, Value } from './assignee.types';
 
 type State = {
     value?: Value | null;
 };
 
-export class AssigneeFilterManager extends React.Component<Props, State> {
+export class AssigneeFilterManager extends React.Component<AssigneeFilterManagerProps, State> {
     static calculateDefaultValueState(filter: AssigneeFilterData | null): Value | undefined {
         if (!filter) {
             return undefined;
@@ -29,14 +18,14 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         };
     }
 
-    constructor(props: Props) {
+    constructor(props: AssigneeFilterManagerProps) {
         super(props);
         this.state = {
             value: AssigneeFilterManager.calculateDefaultValueState(this.props.filter),
         };
     }
 
-    handleCommitValue = (value: any | null) => {
+    handleCommitValue = (value: Value) => {
         this.setState({
             value,
         });
@@ -47,7 +36,7 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <AssigneeFilter
+            <AssigneeFilterInput
                 value={this.state.value}
                 // @ts-expect-error - keeping original functionality as before ts rewrite
                 ref={filterTypeRef}

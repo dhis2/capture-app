@@ -1,10 +1,7 @@
-import type { TimeFilterData } from '../../../../../FiltersForTypes/Time';
+import type { TimeFilterData } from '../../../../../ListView';
 import { escapeString } from '../../../../../../utils/escapeString';
 
 export function convertTime({ sourceValue }: { sourceValue: TimeFilterData }): string {
-    if (!sourceValue) {
-        return '';
-    }
     const requestData: string[] = [];
     if (sourceValue.ge) {
         requestData.push(`ge:${escapeString(sourceValue.ge)}`);

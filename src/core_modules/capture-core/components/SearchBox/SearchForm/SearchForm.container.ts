@@ -75,10 +75,11 @@ const collectCurrentSearchTerms = (
     const searchTerms = formsValues[formId] || {};
     return Object.keys(searchTerms)
         .reduce((accumulated: CurrentSearchTerms, attributeValueKey) => {
-            const { name, id, type } = attributeSearchForm.getElement(attributeValueKey);
+            const element = attributeSearchForm.getElement(attributeValueKey);
+            const { name, id, type } = element;
             const value = searchTerms[attributeValueKey];
             if (isValueContainingCharacter(value)) {
-                const convertedValue = convertFormToClient(value, type);
+                const convertedValue = convertFormToClient(value, type, element);
                 return [...accumulated, { name, value: convertedValue, id, type }];
             }
             return accumulated;

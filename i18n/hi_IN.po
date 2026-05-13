@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rohit Wadhwani, 2026\n"
 "Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
@@ -472,7 +472,7 @@ msgid "To"
 msgstr ""
 
 msgid "Period"
-msgstr ""
+msgstr "पीरियड"
 
 msgid "Please provide zero or a positive integer"
 msgstr ""
@@ -493,7 +493,7 @@ msgid "This month"
 msgstr "इस महीने"
 
 msgid "This year"
-msgstr ""
+msgstr "इस वर्ष"
 
 msgid "Last week"
 msgstr "पिछला सप्ताह"
@@ -720,6 +720,12 @@ msgstr "रेफरल करें"
 msgid "No available program stages"
 msgstr "कोई उपलब्ध प्रोग्राम स्टेज नहीं है"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr ""
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -727,12 +733,6 @@ msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
-msgstr ""
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
-
-msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "There are no active enrollments."
@@ -853,13 +853,13 @@ msgstr "कैप्चर ऐप के बारे में और जान
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Please select an organisation unit"
 msgstr ""
 
-msgid "Or see all events accessible to you in {{program}}"
+msgid "See working list without organisation unit"
 msgstr ""
 
-msgid "Please select an organisation unit."
+msgid "Search for a {{trackedEntityName}}"
 msgstr ""
 
 msgid "Registered events"
@@ -993,6 +993,9 @@ msgstr ""
 msgid "Selected"
 msgstr "चुनें"
 
+msgid "Please select an organisation unit."
+msgstr ""
+
 msgid "Organisation unit scope"
 msgstr ""
 
@@ -1103,9 +1106,6 @@ msgstr ""
 msgid "Search for a {{title}}"
 msgstr ""
 
-msgid "Search for {{titleText}}"
-msgstr ""
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1120,6 +1120,9 @@ msgstr ""
 msgid ""
 "Try selecting a different tracked entity type, or try searching in a program"
 " by choosing one from the top bar."
+msgstr ""
+
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search {{name}}"
@@ -1277,6 +1280,9 @@ msgstr "नहीं सहेजे गए बदलाव"
 
 msgid "Continue data entry"
 msgstr "डेटा प्रवेश जारी रखें"
+
+msgid "You do not have access to modify this enrollment"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr ""

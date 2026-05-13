@@ -1,0 +1,26 @@
+diff --git a/node_modules/@dhis2/multi-calendar-dates/build/cjs/constants/dhis2CalendarsMap.js b/node_modules/@dhis2/multi-calendar-dates/build/cjs/constants/dhis2CalendarsMap.js
+index 3ed2119..0f0a1b4 100644
+--- a/node_modules/@dhis2/multi-calendar-dates/build/cjs/constants/dhis2CalendarsMap.js
++++ b/node_modules/@dhis2/multi-calendar-dates/build/cjs/constants/dhis2CalendarsMap.js
+@@ -12,7 +12,7 @@ const dhis2CalendarsMap = {
+   coptic: 'coptic',
+   gregorian: 'gregory',
+   islamic: 'islamic',
+-  iso8601: 'iso8601',
++  iso8601: 'gregory',
+   // 'Julian': 'julian', // this is not supported by Temporal
+   nepali: 'nepali',
+   thai: 'buddhist',
+diff --git a/node_modules/@dhis2/multi-calendar-dates/build/es/constants/dhis2CalendarsMap.js b/node_modules/@dhis2/multi-calendar-dates/build/es/constants/dhis2CalendarsMap.js
+index 0116053..93710d2 100644
+--- a/node_modules/@dhis2/multi-calendar-dates/build/es/constants/dhis2CalendarsMap.js
++++ b/node_modules/@dhis2/multi-calendar-dates/build/es/constants/dhis2CalendarsMap.js
+@@ -6,7 +6,7 @@ export const dhis2CalendarsMap = {
+   coptic: 'coptic',
+   gregorian: 'gregory',
+   islamic: 'islamic',
+-  iso8601: 'iso8601',
++  iso8601: 'gregory',
+   // 'Julian': 'julian', // this is not supported by Temporal
+   nepali: 'nepali',
+   thai: 'buddhist',

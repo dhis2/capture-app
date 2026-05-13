@@ -1,4 +1,4 @@
-import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime';
+import type { DateTimeFilterData } from '../../../../../ListView';
 import { escapeString } from '../../../../../../utils/escapeString';
 
 export function convertDateTime({ sourceValue }: { sourceValue: DateTimeFilterData }): string {

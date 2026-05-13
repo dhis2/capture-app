@@ -6,7 +6,8 @@ import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { PlainProps, Value } from './TrueOnly.types';
+import type { TrueOnlyFilterProps, Value } from './trueOnly.types';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export const getStyles = (theme: any) => ({
     selectBoxesContainer: {
@@ -14,17 +15,12 @@ export const getStyles = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type Props = TrueOnlyFilterProps & WithStyles<typeof getStyles>;
 
 class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const value = this.props.value;
-
-        if (!value) {
-            return null;
-        }
-
-        return getTrueOnlyFilterData();
+        const { value } = this.props;
+        return getTrueOnlyFilterData(value);
     }
 
     onIsValid = () => true
@@ -43,18 +39,26 @@ class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterCon
         const { value, classes } = this.props;
 
         return (
-            <div
-                className={classes.selectBoxesContainer}
-                onKeyDownCapture={this.handleKeyDown}
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.props.onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
             >
-                <D2TrueOnly
-                    label={i18n.t('Yes')}
-                    useValueLabel
-                    value={value}
-                    onBlur={this.handleTrueOnlyBlur}
-                    orientation={orientations.VERTICAL}
-                />
-            </div>
+                {filteredValue => (
+                    <div
+                        className={classes.selectBoxesContainer}
+                        onKeyDownCapture={this.handleKeyDown}
+                    >
+                        <D2TrueOnly
+                            label={i18n.t('Yes')}
+                            useValueLabel
+                            value={filteredValue}
+                            onBlur={this.handleTrueOnlyBlur}
+                            orientation={orientations.VERTICAL}
+                        />
+                    </div>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }
