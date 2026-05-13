@@ -149,7 +149,7 @@ export async function initializeAsync({
     const meResponse = await querySingleResource({
         resource: 'me',
         params: {
-            fields: 'id,firstName,surname,username,userRoles,userGroups,' +
+            fields: 'id,firstName,surname,username,userRoles[id],userGroups[id],' +
                 'organisationUnits[id,path],teiSearchOrganisationUnits[id,path],settings',
         },
     });
@@ -159,8 +159,8 @@ export async function initializeAsync({
         firstName = '',
         surname = '',
         username = '',
-        userRoles,
-        userGroups,
+        userRoles = [],
+        userGroups = [],
         organisationUnits: captureScope = [],
         teiSearchOrganisationUnits: searchScope = [],
         settings: userSettings,
@@ -172,6 +172,7 @@ export async function initializeAsync({
         surname,
         username,
         uiLocale: userSettings?.keyUiLocale ?? '',
+        userRoles: userRoles.map((role: { id: string }) => role.id),
         organisationUnits: captureScope,
         teiSearchOrganisationUnits: searchScope,
     });

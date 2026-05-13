@@ -9,6 +9,7 @@ export type CurrentUserType = {
     surname: string;
     username: string;
     uiLocale: string;
+    userRoles: string[];
     organisationUnits: OrgUnitRef[];
     teiSearchOrganisationUnits: OrgUnitRef[];
 };
@@ -20,6 +21,7 @@ export class CurrentUser {
         surname: '',
         username: '',
         uiLocale: '',
+        userRoles: [],
         organisationUnits: [],
         teiSearchOrganisationUnits: [],
     };
