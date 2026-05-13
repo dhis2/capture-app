@@ -27,10 +27,10 @@ export const useToggleTrackedEntityStatus = (
 ) => {
     const [toggleMutation, { loading }] = useDataMutation(trackedEntityUpdate, {
         onComplete: () => {
-            onSuccess && onSuccess();
+            onSuccess?.();
         },
         onError: (e) => {
-            onError && onError(processErrorReports(e));
+            onError?.(processErrorReports(e));
         },
     });
     return { toggleMutation, loading };

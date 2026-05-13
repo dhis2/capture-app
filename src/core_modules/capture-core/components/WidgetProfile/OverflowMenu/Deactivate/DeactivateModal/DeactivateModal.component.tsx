@@ -13,7 +13,7 @@ export const DeactivateModal = ({
 }: Props) => {
     const [errorReports, setErrorReports] = useState<Array<{ message: string; uid: string }>>([]);
     const handleSuccess = () => {
-        onStatusToggleSuccess && onStatusToggleSuccess();
+        onStatusToggleSuccess?.();
         setOpenModal(false);
     };
     const { toggleMutation, loading } = useToggleTrackedEntityStatus(
