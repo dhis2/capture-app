@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DebounceField } from 'capture-ui';
-import { CurrentUser } from '../../../../../utils/userInfo/CurrentUser';
 import { OrgUnitTree } from './OrgUnitTree.component';
 
 const getStyles = () => ({
@@ -64,7 +63,20 @@ const OrgUnitFieldPlain = (props: Props) => {
     const [searchText, setSearchText] = React.useState<string | undefined>(undefined);
     const [key, setKey] = React.useState<string | undefined>(undefined);
 
-    const initialRoots = React.useMemo(() => CurrentUser.get().organisationUnits, []);
+    const { loading, data } = useDataQuery(
+        React.useMemo(
+            () => ({
+                orgUnits: {
+                    resource: 'me',
+                    params: {
+                        fields: ['organisationUnits[id,path]'],
+                    },
+
+                },
+            }),
+            [],
+        ),
+    );
 
     const { loading: searchLoading, data: searchData, refetch: refetchOrg } = useDataQuery(
         React.useMemo(
@@ -85,7 +97,7 @@ const OrgUnitFieldPlain = (props: Props) => {
         { lazy: true },
     );
 
-    const ready = searchText?.length ? !searchLoading : true;
+    const ready = searchText?.length ? !searchLoading : !loading;
 
     React.useEffect(() => {
         if (searchText?.length) {
@@ -107,7 +119,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             />);
         }
         return (<OrgUnitTree
-            roots={initialRoots}
+            roots={(data?.orgUnits as any)?.organisationUnits}
             onSelectClick={onSelectClick}
             ready={ready}
             treeKey={'initial'}
