@@ -4,9 +4,11 @@ import { spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { EnrollmentAccessProvider } from '../../common/EnrollmentOverviewDomain';
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
+import { TrackerProgram } from '../../../../metaData';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
@@ -67,28 +69,33 @@ const EnrollmentAddEventPagePain = ({
         return null;
     }
     return (
-        <div>
-            <EnrollmentPageLayout
-                {...passOnProps}
-                currentPage={EnrollmentPageKeys.NEW_EVENT}
-                program={program}
-                pageLayout={pageLayout}
-                stageId={stageId}
-                availableWidgets={availableWidgets}
-                orgUnitId={orgUnitId}
-                teiId={teiId}
-                enrollmentId={enrollmentId}
-                widgetEffects={widgetEffects}
-                hideWidgets={hideWidgets}
-                onDelete={onDelete}
-                onAddNew={onAddNew}
-                onEnrollmentError={onEnrollmentError}
-                onEnrollmentSuccess={onEnrollmentSuccess}
-                onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={i18n.t('No feedback for this event yet')}
-                indicatorEmptyText={i18n.t('No indicator output for this event yet')}
-            />
-        </div>
+        <EnrollmentAccessProvider
+            program={program instanceof TrackerProgram ? program : undefined}
+            currentStageId={stageId}
+        >
+            <div>
+                <EnrollmentPageLayout
+                    {...passOnProps}
+                    currentPage={EnrollmentPageKeys.NEW_EVENT}
+                    program={program}
+                    pageLayout={pageLayout}
+                    stageId={stageId}
+                    availableWidgets={availableWidgets}
+                    orgUnitId={orgUnitId}
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    widgetEffects={widgetEffects}
+                    hideWidgets={hideWidgets}
+                    onDelete={onDelete}
+                    onAddNew={onAddNew}
+                    onEnrollmentError={onEnrollmentError}
+                    onEnrollmentSuccess={onEnrollmentSuccess}
+                    onAccessLostFromTransfer={onAccessLostFromTransfer}
+                    feedbackEmptyText={i18n.t('No feedback for this event yet')}
+                    indicatorEmptyText={i18n.t('No indicator output for this event yet')}
+                />
+            </div>
+        </EnrollmentAccessProvider>
     );
 };
 
