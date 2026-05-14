@@ -5,15 +5,21 @@ import {
     withInternalChangeHandler,
     withFilterProps,
     SingleOrgUnitSelectField,
+    withOrgUnitFieldImplicitRootsFilterHandler,
+    orgUnitFieldScopes,
 } from '../../../../../../FormFields/New';
 import type { ComposedRegUnitSelectorProps } from './RegUnitSelector.types';
+
+const OrgUnitFieldImplicitRootsFilterHandlerHOC =
+    withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField);
 
 class OrgUnitFieldWrapper extends React.Component<ComposedRegUnitSelectorProps> {
     render() {
         const { onUpdateSelectedOrgUnit, ...passOnProps } = this.props;
         return (
-            <SingleOrgUnitSelectField
-                onBlur={onUpdateSelectedOrgUnit}
+            <OrgUnitFieldImplicitRootsFilterHandlerHOC
+                onSelect={onUpdateSelectedOrgUnit}
+                scope={orgUnitFieldScopes.USER_CAPTURE}
                 maxTreeHeight={200}
                 {...passOnProps}
             />

@@ -35,5 +35,11 @@ export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 export { withCenterPoint } from './HOC/withCenterPoint';
 export { withConditionalTooltip } from './HOC/withConditionalTooltip';
 
+// OrgUnit HOCs
+export {
+    withOrgUnitFieldImplicitRootsFilterHandler,
+} from './Fields/OrgUnitField/withInternalFilterHandler/withImplicitRootsInternalFilterHandler';
+export { orgUnitFieldScopes } from './Fields/OrgUnitField/withInternalFilterHandler/scopes.const';
+
 // Constants
 export { orientations } from 'capture-ui';
