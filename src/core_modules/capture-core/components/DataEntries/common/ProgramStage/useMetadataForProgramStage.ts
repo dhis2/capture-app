@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useConfig } from '@dhis2/app-runtime';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
-import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
+import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
 import { useDataEntryFormConfig, useOptionSetsForAttributes } from '../TEIAndEnrollment';
 import { useDataElementsForStage } from './useDataElementsForStage';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
@@ -42,7 +42,7 @@ export const useMetadataForProgramStage = ({
 }: Props): ReturnType => {
     const scopeId = stageId || programId;
     const { program } = useProgramFromIndexedDB(programId, { enabled: !!programId });
-    const locale = CurrentUser.get().uiLocale;
+    const { locale } = useUserLocale();
     const { serverVersion } = useConfig();
     const minor = serverVersion?.minor;
     const {

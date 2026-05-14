@@ -1,11 +1,10 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types/global';
-import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentNote.actions';
 import type { ClientNote, SaveContext } from './WidgetEnrollmentNote.types';
@@ -25,37 +24,44 @@ const createServerData = (note: string, useNewEndpoint: boolean): Record<string,
 export const addNoteForEnrollmentEpic = (
     action$: EpicAction<AddNoteActionPayload>,
     store: ReduxStore,
-    { fromClientDate }: ApiUtils,
+    { querySingleResource, fromClientDate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT),
-        map((action: { payload: AddNoteActionPayload }) => {
+        switchMap((action: { payload: AddNoteActionPayload }) => {
             const state = store.value;
             const { enrollmentId, note } = action.payload;
             const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
-            const { firstName, surname, username } = CurrentUser.get();
-            const clientId = uuid();
-
-            const serverData = createServerData(note, useNewEndpoint);
-
-            const clientNote: ClientNote = {
-                value: note,
-                createdBy: {
-                    firstName,
-                    surname,
-                    uid: clientId,
+            return querySingleResource({
+                resource: 'me',
+                params: {
+                    fields: 'firstName, surname, userName',
                 },
-                storedBy: username,
-                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-            };
+            }).then((user) => {
+                const { firstName, surname, userName } = user;
+                const clientId = uuid();
 
-            const saveContext: SaveContext = {
-                enrollmentId,
-                noteClientId: clientId,
-            };
+                const serverData = createServerData(note, useNewEndpoint);
 
-            return batchActions([
-                startAddNoteForEnrollment(enrollmentId, serverData, state.currentSelections, saveContext),
-                addEnrollmentNote(enrollmentId, clientNote),
-            ], batchActionTypes.ADD_NOTE_BATCH_FOR_ENROLLMENT);
+                const clientNote: ClientNote = {
+                    value: note,
+                    createdBy: {
+                        firstName,
+                        surname,
+                        uid: clientId,
+                    },
+                    storedBy: userName,
+                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                };
+
+                const saveContext: SaveContext = {
+                    enrollmentId,
+                    noteClientId: clientId,
+                };
+
+                return batchActions([
+                    startAddNoteForEnrollment(enrollmentId, serverData, state.currentSelections, saveContext),
+                    addEnrollmentNote(enrollmentId, clientNote),
+                ], batchActionTypes.ADD_NOTE_BATCH_FOR_ENROLLMENT);
+            });
         }));
