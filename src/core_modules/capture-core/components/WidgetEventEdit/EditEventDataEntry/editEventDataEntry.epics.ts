@@ -231,7 +231,8 @@ export const startCreateNewAfterCompletingEpic = (
 
             if (isCreateNew) {
                 const finalParams = availableProgramStages.length === 1 ?
-                    { ...params, stageId: availableProgramStages[0].id } : params;
+                    { ...params, stageId: availableProgramStages[0].id, tab: 'SCHEDULE' } :
+                    { ...params, tab: 'SCHEDULE' };
 
                 setTimeout(() => {
                     navigate(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
