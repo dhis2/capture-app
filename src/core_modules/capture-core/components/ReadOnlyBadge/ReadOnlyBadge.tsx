@@ -58,7 +58,9 @@ export const ReadOnlyBadge = ({
         programStage: programStageWriteAccess,
     };
     const message = getMissingAccessMessage(access, trackedEntityName, multipleStages);
-    const labelText = inlineLabel && message ? `${i18n.t('View only')} - ${message}` : i18n.t('View only');
+    const labelText = inlineLabel && message
+        ? i18n.t('View only - {{message}}', { message, escapeValue: false })
+        : i18n.t('View only');
 
     return (
         <ConditionalTooltip content={message} enabled={Boolean(message)}>
