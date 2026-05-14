@@ -14,20 +14,15 @@ export type CurrentUserType = {
 };
 
 export class CurrentUser {
-    private static currentData: CurrentUserType = {
-        firstName: '',
-        surname: '',
-        username: '',
-        uiLocale: '',
-        userRoles: [],
-        organisationUnits: [],
-        teiSearchOrganisationUnits: [],
-    };
+    private static currentData: CurrentUserType | null = null;
 
     static set(data: CurrentUserType) {
         CurrentUser.currentData = data;
     }
-    static get() {
+    static get(): CurrentUserType {
+        if (!CurrentUser.currentData) {
+            throw new Error('CurrentUser accessed before initialization');
+        }
         return CurrentUser.currentData;
     }
 }
