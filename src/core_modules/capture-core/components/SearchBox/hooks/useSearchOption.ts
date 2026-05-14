@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { buildSearchOption } from '../../../hooks/useSearchOptions';
 import { useTrackedEntityTypeFromIndexedDB } from '../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
-import { CurrentUser } from '../../../utils/userInfo/CurrentUser';
+import { useUserLocale } from '../../../utils/localeData/useUserLocale';
 import type { AvailableSearchOption } from '../SearchBox.types';
 import type { SearchGroup } from '../../../metaData/SearchGroup/SearchGroup';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
@@ -49,7 +49,7 @@ export const useSearchOption = ({
     programId,
     trackedEntityTypeId,
 }: Props): { searchOption?: AvailableSearchOption; isLoading: boolean; isError: boolean } => {
-    const locale = CurrentUser.get().uiLocale;
+    const { locale } = useUserLocale();
 
     const searchScope = useMemo(() => {
         if (programId) {
