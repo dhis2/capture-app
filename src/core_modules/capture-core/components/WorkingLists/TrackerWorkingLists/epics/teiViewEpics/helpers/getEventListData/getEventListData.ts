@@ -17,7 +17,7 @@ import { getColumnsQueryArgs } from './getColumnsQueryArgs';
 import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
 const LISTING_FIELDS =
-    'event,status,program,programStage,enrollment,trackedEntity,'
+    'event,status,program,enrollment,trackedEntity,'
     + 'occurredAt,scheduledAt,orgUnit,'
     + 'assignedUser[uid,username,firstName,surname],'
     + 'dataValues[dataElement,value]';

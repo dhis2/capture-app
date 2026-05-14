@@ -4,7 +4,6 @@ export type OrgUnitRef = {
 };
 
 export type CurrentUserType = {
-    id: string;
     firstName: string;
     surname: string;
     username: string;
@@ -16,7 +15,6 @@ export type CurrentUserType = {
 
 export class CurrentUser {
     private static currentData: CurrentUserType = {
-        id: '',
         firstName: '',
         surname: '',
         username: '',

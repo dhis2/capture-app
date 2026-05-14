@@ -167,7 +167,6 @@ export async function initializeAsync({
     } = meResponse;
 
     CurrentUser.set({
-        id: currentUserId,
         firstName,
         surname,
         username,

@@ -90,7 +90,7 @@ export class OrgUnitTree extends React.Component<Props, State> {
           params: {
               paging: false,
               filter: `id:in:[${id}]`,
-              fields: 'children[id,displayName,path,children]',
+              fields: 'children[displayName,path,children]',
 
           },
       }).then((r) => {
