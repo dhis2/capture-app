@@ -101,5 +101,16 @@ export const ReadOnlyBadge = ({
         trackedEntityType: trackedEntityTypeWriteAccess,
         programStage: programStageWriteAccess,
     };
-    return renderBadge(getMissingAccessMessage(access, trackedEntityName, multipleStages), inlineLabel);
+    const message = getMissingAccessMessage(access, trackedEntityName, multipleStages);
+    const labelText = inlineLabel && message
+        ? i18n.t('View only - {{message}}', { message, escapeValue: false })
+        : i18n.t('View only');
+
+    return (
+        <ConditionalTooltip content={message} enabled={Boolean(message)}>
+            <Tag maxWidth="400px" neutral icon={<IconInfo16 />}>
+                {labelText}
+            </Tag>
+        </ConditionalTooltip>
+    );
 };

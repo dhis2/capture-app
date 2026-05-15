@@ -2,28 +2,6 @@ import type { Geometry } from './helpers/types';
 import type {
     DataEntryFormConfig,
 } from '../../DataEntries/common/TEIAndEnrollment';
-import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
-
-export type PlainProps = {
-    dataEntryId: string;
-    itemId: string;
-    trackedEntityName: string;
-    saveAttempted: boolean;
-    formFoundation: any;
-    onCancel: () => void;
-    onSave: () => void;
-    onUpdateFormField: (innerAction: any) => void;
-    onUpdateFormFieldAsync: (innerAction: any) => void;
-    onGetValidationContext: () => Record<string, any>;
-    modalState: string;
-    errorsMessages: Array<{ id: string; message: string }>;
-    warningsMessages: Array<{ id: string; message: string }>;
-    center?: Array<number>;
-    orgUnitId: string;
-    pluginContext?: PluginContext;
-    readOnly?: boolean;
-    accessReadOnly?: boolean;
-};
 
 export type Props = {
     programAPI: any;

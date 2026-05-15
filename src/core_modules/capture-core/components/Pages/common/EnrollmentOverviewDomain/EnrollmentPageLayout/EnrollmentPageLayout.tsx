@@ -5,8 +5,7 @@ import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
-import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
-import { useEnrollmentAccessContext } from '../EnrollmentAccessContext';
+import { EnrollmentReadOnlyBadge } from './EnrollmentReadOnlyBadge';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -59,35 +58,6 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 });
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
-
-const EnrollmentReadOnlyBadge = () => {
-    const {
-        isEventPage,
-        currentStageWriteAccess,
-        programWriteAccess,
-        trackedEntityTypeWriteAccess,
-        anyStageWriteAccess,
-        anyStageReadAccess,
-        trackedEntityTypeName,
-        trackedEntityInactive,
-        multipleStages,
-    } = useEnrollmentAccessContext();
-
-    return (
-        <ReadOnlyBadge
-            inlineLabel
-            trackedEntityName={trackedEntityTypeName}
-            trackedEntityInactive={trackedEntityInactive}
-            isEventPage={isEventPage}
-            currentStageWriteAccess={currentStageWriteAccess}
-            programWriteAccess={programWriteAccess}
-            trackedEntityTypeWriteAccess={trackedEntityTypeWriteAccess}
-            anyStageWriteAccess={anyStageWriteAccess}
-            anyStageReadAccess={anyStageReadAccess}
-            multipleStages={multipleStages}
-        />
-    );
-};
 
 type OwnProps = EnrollmentPageProps;
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;

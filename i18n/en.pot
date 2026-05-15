@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-13T10:59:20.641Z\n"
-"PO-Revision-Date: 2026-05-13T10:59:20.641Z\n"
+"POT-Creation-Date: 2026-05-15T08:51:38.871Z\n"
+"PO-Revision-Date: 2026-05-15T08:51:38.871Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1098,6 +1098,9 @@ msgstr "{{trackedEntityName}} is deactivated"
 msgid "View only"
 msgstr "View only"
 
+msgid "View only - {{message}}"
+msgstr "View only - {{message}}"
+
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
 
@@ -1614,11 +1617,11 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
-msgid "{{trackedEntityName}} profile"
-msgstr "{{trackedEntityName}} profile"
-
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
+
+msgid "Save changes"
+msgstr "Save changes"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
@@ -1626,8 +1629,8 @@ msgstr "Change information about this {{trackedEntityName}} here."
 msgid "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "Information about this enrollment can be edited in the Enrollment widget."
 
-msgid "Save changes"
-msgstr "Save changes"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profile"
 
 msgid "Profile"
 msgstr "Profile"

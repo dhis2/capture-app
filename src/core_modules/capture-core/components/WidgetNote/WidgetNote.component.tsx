@@ -2,8 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget, WidgetHeaderCountBadge } from '../Widget';
-import { ReadOnlyBadge } from '../ReadOnlyBadge';
-import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { Props } from './WidgetNote.types';
 import { NoteSection } from './NoteSection/NoteSection';
 
@@ -23,32 +21,21 @@ const WidgetNotePlain = ({
     classes,
     title,
     notes,
-    scope,
+    readOnly,
+    badge,
     onAddNote,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState<boolean>(true);
-    const {
-        programWriteAccess,
-        currentStageWriteAccess,
-        trackedEntityTypeName,
-        showWidgetBadge,
-    } = useEnrollmentAccessContext();
-    const isEventScope = scope === 'event';
-    const readOnly = isEventScope ? !currentStageWriteAccess : !programWriteAccess;
 
     return (
         <Widget
             header={<div className={classes.header}>
                 <span>{title}</span>
                 {notes.length > 0 && <WidgetHeaderCountBadge count={notes.length} />}
-                {showWidgetBadge && (
+                {badge && (
                     <div className={classes.badge}>
-                        <ReadOnlyBadge
-                            programWriteAccess={isEventScope ? true : programWriteAccess}
-                            programStageWriteAccess={isEventScope ? currentStageWriteAccess : true}
-                            trackedEntityName={trackedEntityTypeName}
-                        />
+                        {badge}
                     </div>
                 )}
             </div>}
