@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
@@ -13,7 +13,6 @@ import {
 } from '@dhis2/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
-import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
@@ -96,28 +95,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
 
     const occurredAtClient = convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
-    const isDisabled = !eventAccess.write || !isWithinValidPeriod;
-
-    const occurredAtValue = eventData?.dataEntryValues?.occurredAt;
-    const tooltipContent = useMemo(() => {
-        if (!eventAccess.write) {
-            return i18n.t("You don't have access to edit this event");
-        }
-        if (!isWithinValidPeriod) {
-            return i18n.t(
-                '{{occurredAt}} belongs to an expired period. Event cannot be edited',
-                {
-                    occurredAt: occurredAtValue,
-                    interpolation: { escapeValue: false },
-                },
-            );
-        }
-        return undefined;
-    }, [
-        eventAccess.write,
-        isWithinValidPeriod,
-        occurredAtValue,
-    ]);
+    const canEdit = eventAccess.write && isWithinValidPeriod;
 
     if (error) {
         return error.errorComponent;
@@ -148,22 +126,16 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
 
     const renderActionsContainer = () => (
         <div className={classes.actionsContainer}>
-            {!showEditEvent && !isLoading &&
+            {!showEditEvent && !isLoading && canEdit &&
                 <div className={classes.editButtonContainer}>
-                    <ConditionalTooltip
-                        content={tooltipContent}
-                        enabled={isDisabled}
+                    <Button
+                        className={classes.button}
+                        onClick={() => onOpenEditEvent(orgUnit, programCategory)}
+                        secondary
+                        small
                     >
-                        <Button
-                            className={classes.button}
-                            onClick={() => onOpenEditEvent(orgUnit, programCategory)}
-                            disabled={isDisabled}
-                            secondary
-                            small
-                        >
-                            {i18n.t('Edit event')}
-                        </Button>
-                    </ConditionalTooltip>
+                        {i18n.t('Edit event')}
+                    </Button>
                 </div>}
             {supportsChangelog && (
                 <OverflowButton

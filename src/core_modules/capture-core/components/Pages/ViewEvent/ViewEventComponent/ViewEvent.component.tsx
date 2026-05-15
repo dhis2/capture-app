@@ -9,6 +9,7 @@ import type { ProgramStage } from '../../../../metaData';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
+import { ViewEventReadOnlyBadge } from '../ViewEventReadOnlyBadge';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import { useHideWidgetByRuleLocations } from '../../../../hooks';
@@ -30,6 +31,12 @@ const getStyles = (theme: any) => ({
         fontSize: 18,
         padding: theme.typography.pxToRem(10),
         borderBottom: `1px solid ${theme.palette.grey.blueGrey}`,
+    },
+    breadcrumbRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: spacers.dp8,
     },
     contentContainer: {
         display: 'flex',
@@ -84,13 +91,16 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     return (
         <div className={classes.container}>
-            <EventBreadcrumb
-                programId={programId}
-                page={showEditEvent ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
-                userInteractionInProgress={isUserInteractionInProgress}
-                onBackToViewEvent={onBackToViewEvent}
-                onBackToMainPage={onBackToAllEvents}
-            />
+            <div className={classes.breadcrumbRow}>
+                <EventBreadcrumb
+                    programId={programId}
+                    page={showEditEvent ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
+                    userInteractionInProgress={isUserInteractionInProgress}
+                    onBackToViewEvent={onBackToViewEvent}
+                    onBackToMainPage={onBackToAllEvents}
+                />
+                <ViewEventReadOnlyBadge eventAccess={eventAccess} />
+            </div>
             <div className={classes.contentContainer}>
                 <EventDetails
                     eventAccess={eventAccess}

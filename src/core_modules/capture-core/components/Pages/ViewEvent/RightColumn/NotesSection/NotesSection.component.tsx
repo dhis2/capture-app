@@ -45,7 +45,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { notes, fieldValue, onAddNote, ready, programStage, eventAccess } = this.props;
+        const { notes, fieldValue, onAddNote, ready, eventAccess } = this.props;
         return (
             <ViewEventSection
                 collapsable
@@ -54,8 +54,7 @@ class NotesSectionPlain extends React.Component<Props> {
                 {React.createElement(LoadingNotes as any, {
                     ready,
                     notes,
-                    entityAccess: eventAccess,
-                    addNotAllowed: !programStage.stageForm.access.data.write,
+                    readOnly: !eventAccess?.write,
                     onAddNote,
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,

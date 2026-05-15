@@ -92,7 +92,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     onOpenAddRelationship: this.handleOpenAddRelationship,
                     onRemoveRelationship: this.handleRemoveRelationship,
                     currentEntityId: eventId,
-                    entityAccess: eventAccess,
+                    readOnly: !eventAccess?.write,
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
                 })}

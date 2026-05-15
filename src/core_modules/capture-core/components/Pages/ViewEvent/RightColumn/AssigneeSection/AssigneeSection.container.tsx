@@ -28,7 +28,7 @@ export const AssigneeSection = ({
         enabled={programStage?.enableUserAssignment || false}
         assignee={assignee}
         getSaveContext={getAssignedUserSaveContext}
-        writeAccess={eventAccess?.write || false}
+        readOnly={!eventAccess?.write}
         onSave={onSaveAssignee}
         onSaveError={onSaveAssigneeError}
     />

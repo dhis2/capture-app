@@ -6,7 +6,7 @@ import { convertClientToServer } from './converter';
 import { useUserAvatar } from './hooks';
 
 const WidgetAssigneeWithHooks = (props: Props) => {
-    const { assignee, writeAccess, getSaveContext, onSave, onSaveError } = props;
+    const { assignee, readOnly, getSaveContext, onSave, onSaveError } = props;
     const prevAssignee = useRef(assignee);
     const { avatarId, isLoading } = useUserAvatar(assignee?.id);
 
@@ -37,7 +37,14 @@ const WidgetAssigneeWithHooks = (props: Props) => {
         return null;
     }
 
-    return <WidgetAssigneeComponent assignee={assignee} writeAccess={writeAccess} avatarId={avatarId} onSet={onSet} />;
+    return (
+        <WidgetAssigneeComponent
+            assignee={assignee}
+            readOnly={readOnly}
+            avatarId={avatarId}
+            onSet={onSet}
+        />
+    );
 };
 
 export const WidgetAssignee = (props: Props) => {

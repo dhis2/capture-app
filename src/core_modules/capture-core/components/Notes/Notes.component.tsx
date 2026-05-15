@@ -7,7 +7,6 @@ import { colors, spacersNum, Menu, MenuItem, Button, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withFocusSaver } from 'capture-ui';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { TextField } from '../FormFields/New';
 import { convertClientToList } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -68,7 +67,7 @@ type Props = {
     onAddNote: (value: string) => void;
     onBlur: (value: string | null, options: any) => void;
     value: string | null;
-    entityAccess?: { read: boolean; write: boolean };
+    readOnly?: boolean;
     smallMainButton?: boolean;
 };
 
@@ -79,7 +78,7 @@ const NotesPlain = ({
     onAddNote,
     onBlur,
     value: propValue,
-    entityAccess = { read: true, write: true },
+    readOnly = false,
     smallMainButton,
     classes,
 }: NotesProps) => {
@@ -150,21 +149,15 @@ const NotesPlain = ({
     );
 
 
-    const renderButton = (canAddNote: boolean) => (
+    const renderButton = () => (
         <div data-test="new-note-button">
-            <ConditionalTooltip
-                content={i18n.t('You don\'t have access to write notes')}
-                enabled={!canAddNote}
+            <Button
+                onClick={toggleIsOpen}
+                small={smallMainButton}
+                dataTest="write-note-btn"
             >
-                <Button
-                    onClick={toggleIsOpen}
-                    disabled={!canAddNote}
-                    small={smallMainButton}
-                    dataTest="write-note-btn"
-                >
-                    {i18n.t('Write note')}
-                </Button>
-            </ConditionalTooltip>
+                {i18n.t('Write note')}
+            </Button>
         </div>
     );
 
@@ -207,7 +200,8 @@ const NotesPlain = ({
                 )}
             </Menu>
             <div className={classes.newNoteContainer} data-test="new-note-container">
-                {addIsOpen ? renderInput() : renderButton(entityAccess.write)}
+                {addIsOpen && renderInput()}
+                {!addIsOpen && !readOnly && renderButton()}
             </div>
         </div>
     );
