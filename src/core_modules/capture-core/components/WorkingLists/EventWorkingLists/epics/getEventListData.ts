@@ -8,7 +8,7 @@ type InputQueryArgs = {
 };
 
 const LISTING_FIELDS =
-    'event,status,occurredAt,orgUnit,'
+    'event,program,programStage,status,occurredAt,orgUnit,'
     + 'assignedUser[uid,username,firstName,surname],'
     + 'dataValues[dataElement,value]';
 
