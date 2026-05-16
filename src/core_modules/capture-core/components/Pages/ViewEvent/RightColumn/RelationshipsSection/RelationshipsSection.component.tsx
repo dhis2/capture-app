@@ -1,6 +1,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconLink24 } from '@dhis2/ui';
+import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import type { ComponentType } from 'react';
@@ -27,6 +27,11 @@ const getStyles = (theme: any) => ({
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(4),
         backgroundColor: theme.palette.grey.lighter,
+    },
+    emptyMessage: {
+        fontSize: 14,
+        color: colors.grey600,
+        paddingBottom: spacersNum.dp8,
     },
 });
 
@@ -73,18 +78,25 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { programStage, eventId, relationships, ready, eventAccess } = this.props;
+        const { classes, programStage, eventId, relationships, ready, eventAccess } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
         const writableRelationshipTypes =
             programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
 
+        const isEmpty = ready && (!relationships || relationships.length === 0);
+
         return hasRelationshipTypes && (
             <ViewEventSection
                 collapsable
                 header={this.renderHeader()}
             >
+                {isEmpty && (
+                    <div className={classes.emptyMessage} data-test="relationships-empty-message">
+                        {i18n.t("This event doesn't have any relationships")}
+                    </div>
+                )}
                 {React.createElement(LoadingRelationships as any, {
                     ready,
                     relationships,

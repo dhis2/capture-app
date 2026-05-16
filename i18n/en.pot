@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-15T11:30:51.014Z\n"
-"PO-Revision-Date: 2026-05-15T11:30:51.014Z\n"
+"POT-Creation-Date: 2026-05-16T11:59:12.199Z\n"
+"PO-Revision-Date: 2026-05-16T11:59:12.199Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -979,6 +979,12 @@ msgstr ""
 msgid "Errors"
 msgstr "Errors"
 
+msgid "This event doesn't have any notes"
+msgstr "This event doesn't have any notes"
+
+msgid "This event doesn't have any relationships"
+msgstr "This event doesn't have any relationships"
+
 msgid "Warnings"
 msgstr "Warnings"
 
@@ -1526,9 +1532,6 @@ msgstr "Notes about this event"
 
 msgid "Write a note about this event"
 msgstr "Write a note about this event"
-
-msgid "This event doesn't have any notes"
-msgstr "This event doesn't have any notes"
 
 msgid "after"
 msgstr "after"

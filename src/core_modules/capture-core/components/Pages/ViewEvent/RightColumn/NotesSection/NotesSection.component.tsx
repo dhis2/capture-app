@@ -1,6 +1,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconMessages24 } from '@dhis2/ui';
+import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import type { ComponentType } from 'react';
@@ -25,6 +25,11 @@ const getStyles = (theme: any) => ({
         borderRadius: theme.typography.pxToRem(4),
         backgroundColor: theme.palette.grey.lighter,
     },
+    emptyMessage: {
+        fontSize: 14,
+        color: colors.grey600,
+        paddingBottom: spacersNum.dp8,
+    },
 });
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
@@ -45,12 +50,18 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { notes, fieldValue, onAddNote, ready, eventAccess } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, eventAccess } = this.props;
+        const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
                 collapsable
                 header={this.renderHeader()}
             >
+                {isEmpty && (
+                    <div className={classes.emptyMessage} data-test="notes-empty-message">
+                        {i18n.t("This event doesn't have any notes")}
+                    </div>
+                )}
                 {React.createElement(LoadingNotes as any, {
                     ready,
                     notes,

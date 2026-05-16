@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, spacers, UserAvatar } from '@dhis2/ui';
+import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Assignee } from './WidgetAssignee.types';
 
@@ -10,10 +10,12 @@ const styles = () => ({
         alignItems: 'center',
         fontSize: 14,
     },
-    editButton: {
-        marginInlineStart: spacers.dp12,
+    emptyMessage: {
+        fontSize: 14,
+        color: colors.grey600,
+        paddingBottom: spacersNum.dp8,
     },
-    assignButton: {
+    editButton: {
         marginInlineStart: spacers.dp12,
     },
     avatarWrapper: {
@@ -53,12 +55,13 @@ const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classe
             )}
         </div>
     ) : (
-        <div className={classes.wrapper}>
-            {i18n.t('No one is assigned to this event')}
+        <div>
+            <div className={classes.emptyMessage} data-test="widget-assignee-empty-message">
+                {i18n.t('No one is assigned to this event')}
+            </div>
             {!readOnly && (
                 <Button
                     onClick={onEdit}
-                    className={classes.assignButton}
                     dataTest="widget-assignee-assign"
                     small
                     secondary
