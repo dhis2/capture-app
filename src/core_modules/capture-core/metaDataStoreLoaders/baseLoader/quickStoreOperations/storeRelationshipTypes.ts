@@ -9,7 +9,7 @@ export const storeRelationshipTypes = () => {
                 'fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],' +
                 'program[id,name],programStage[id,name,program[id]]],' +
                 'toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],' +
-                'program[id,name],programStage[id,name,program[id]]],access[*]',
+                'program[id,name],programStage[id,name,program[id]]],access[data[read,write]]',
         },
     };
 
