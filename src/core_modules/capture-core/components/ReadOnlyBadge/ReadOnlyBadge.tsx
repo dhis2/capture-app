@@ -1,7 +1,14 @@
 import React from 'react';
 import { IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
+
+const styles = {
+    label: {
+        fontWeight: 500,
+    },
+} as const;
 
 type Props = {
     programWriteAccess?: boolean;
@@ -52,7 +59,7 @@ const getReadOnlyMessage = (
     return '';
 };
 
-export const ReadOnlyBadge = ({
+const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
     programStageWriteAccess = true,
@@ -61,7 +68,8 @@ export const ReadOnlyBadge = ({
     multipleStages = false,
     trackedEntityName,
     inlineLabel = false,
-}: Props) => {
+    classes,
+}: Props & WithStyles<typeof styles>) => {
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,
@@ -83,8 +91,10 @@ export const ReadOnlyBadge = ({
     return (
         <ConditionalTooltip content={message} enabled>
             <Tag maxWidth="400px" neutral icon={<IconInfo16 />}>
-                {labelText}
+                <span className={classes.label}>{labelText}</span>
             </Tag>
         </ConditionalTooltip>
     );
 };
+
+export const ReadOnlyBadge = withStyles(styles)(ReadOnlyBadgePlain);
