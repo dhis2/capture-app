@@ -8,6 +8,9 @@ type Option = {
     label: string;
 };
 
+const WINDOWING_THRESHOLD = 200;
+const WINDOW_PAGE_SIZE = 100;
+
 type Props = {
     id?: string;
     value?: string | null;
@@ -40,6 +43,7 @@ const NewSingleSelectFieldComponentPlain = ({
     const selectRef = useRef<HTMLDivElement | null>(null);
     const fieldName = id ?? 'single-select-field';
     const [filterValue, setFilterValue] = useState('');
+    const [visibleCount, setVisibleCount] = useState(WINDOW_PAGE_SIZE);
 
     const filteredOptions = useMemo(
         () => (filterable && filterValue
@@ -48,13 +52,25 @@ const NewSingleSelectFieldComponentPlain = ({
         [options, filterValue, filterable],
     );
 
+    const useWindowing = filteredOptions.length > WINDOWING_THRESHOLD;
+
+    const visibleOptions = useMemo(
+        () => (useWindowing ? filteredOptions.slice(0, visibleCount) : filteredOptions),
+        [filteredOptions, useWindowing, visibleCount],
+    );
+
     const selectedOption = value == null
         ? undefined
         : options.find(option => option.value === value) ?? { value, label: String(value) };
 
     const handleFilterChange = useCallback((newFilterValue: string) => {
         setFilterValue(newFilterValue);
+        setVisibleCount(WINDOW_PAGE_SIZE);
     }, []);
+
+    const handleEndReached = useCallback(() => {
+        setVisibleCount(current => Math.min(current + WINDOW_PAGE_SIZE, filteredOptions.length));
+    }, [filteredOptions.length]);
 
     const handleChange = (nextValue: string | { value: string }) => {
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
@@ -102,13 +118,14 @@ const NewSingleSelectFieldComponentPlain = ({
         <div ref={selectRef}>
             <SimpleSingleSelect
                 name={fieldName}
-                options={filteredOptions}
+                options={visibleOptions}
                 selected={selectedOption}
                 placeholder={placeholder}
                 clearable={clearable}
                 filterable={filterable}
                 filterValue={filterValue}
                 onFilterChange={handleFilterChange}
+                onEndReached={handleEndReached}
                 aria-required={required}
                 onChange={handleChange}
                 onBlur={handleBlur}
