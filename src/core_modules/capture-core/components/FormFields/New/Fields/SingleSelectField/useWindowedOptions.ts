@@ -3,13 +3,11 @@ import { useCallback, useMemo, useState } from 'react';
 const WINDOWING_THRESHOLD = 200;
 const WINDOW_PAGE_SIZE = 100;
 
-type UseWindowedOptionsResult<T> = {
-    visibleOptions: T[];
+export const useWindowedOptions = <TOption>(options: TOption[]): {
+    visibleOptions: TOption[];
     onEndReached: () => void;
     resetWindow: () => void;
-};
-
-export const useWindowedOptions = <T>(options: T[]): UseWindowedOptionsResult<T> => {
+} => {
     const [visibleCount, setVisibleCount] = useState(WINDOW_PAGE_SIZE);
     const enabled = options.length > WINDOWING_THRESHOLD;
 
