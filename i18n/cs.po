@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -511,7 +511,7 @@ msgid "This month"
 msgstr "Tento měsíc"
 
 msgid "This year"
-msgstr ""
+msgstr "Tento rok"
 
 msgid "Last week"
 msgstr "Minulý týden"
@@ -535,7 +535,7 @@ msgid "The \"Before\" value must be after the \"After\" value"
 msgstr ""
 
 msgid "After"
-msgstr ""
+msgstr "Po"
 
 msgid "Date"
 msgstr "datum"
@@ -544,7 +544,7 @@ msgid "Time"
 msgstr "Čas"
 
 msgid "Before"
-msgstr ""
+msgstr "Před"
 
 msgid "Is empty"
 msgstr "Je prázdný"
@@ -687,10 +687,10 @@ msgid "less than or equal to {{value}}"
 msgstr ""
 
 msgid "after or equal to"
-msgstr ""
+msgstr "po, nebo rovno"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "před nebo odpovídá"
 
 msgid "More filters"
 msgstr "Více filtrů"
@@ -740,6 +740,12 @@ msgstr "Proveďte doporučení"
 msgid "No available program stages"
 msgstr "Žádné dostupné fáze programu"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Neplatné id zápisu {{enrollmentId}}."
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Chcete-li zobrazit ovládací panel, vyberte zápis."
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -752,12 +758,6 @@ msgid ""
 msgstr ""
 "Program {{programName}} má kategorie. Chcete-li zobrazit ovládací panel, "
 "vyberte všechny kategorie."
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "Neplatné id zápisu {{enrollmentId}}."
-
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Chcete-li zobrazit ovládací panel, vyberte zápis."
 
 msgid "There are no active enrollments."
 msgstr "Nejsou žádné aktivní zápisy."
@@ -886,14 +886,14 @@ msgstr "Další informace o aplikaci Capture"
 msgid "Please select {{category}}."
 msgstr "Vyberte prosím {{category}}."
 
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Nebo zobrazit všechny záznamy, které máte k dispozici v {{program}}"
+msgid "Please select an organisation unit"
+msgstr "Vyberte organizační jednotku"
 
-msgid "Or see all events accessible to you in {{program}}"
-msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}"
+msgid "See working list without organisation unit"
+msgstr ""
 
-msgid "Please select an organisation unit."
-msgstr "Vyberte organizační jednotku."
+msgid "Search for a {{trackedEntityName}}"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Registrované události"
@@ -1030,6 +1030,9 @@ msgstr "Všechno přístupné"
 msgid "Selected"
 msgstr "Vybráno"
 
+msgid "Please select an organisation unit."
+msgstr "Vyberte organizační jednotku."
+
 msgid "Organisation unit scope"
 msgstr "Rozsah organizační jednotky"
 
@@ -1142,9 +1145,6 @@ msgstr ""
 msgid "Search for a {{title}}"
 msgstr ""
 
-msgid "Search for {{titleText}}"
-msgstr "Hledat {{titleText}}"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1162,6 +1162,9 @@ msgid ""
 msgstr ""
 "Zkuste vybrat jiný typ trasované entity nebo zkuste vyhledávat v programu "
 "výběrem z horní lišty."
+
+msgid "Search for {{titleText}}"
+msgstr "Hledat {{titleText}}"
 
 msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
@@ -1334,6 +1337,9 @@ msgstr "Neuložené změny"
 
 msgid "Continue data entry"
 msgstr "Pokračovat v zadávání dat"
+
+msgid "You do not have access to modify this enrollment"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Akce zápisu"
