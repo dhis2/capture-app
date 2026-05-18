@@ -2,14 +2,12 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SimpleSingleSelect } from '@dhis2/ui';
 import { withFocusHandler } from './withFocusHandler';
 import { withSelectSingleTranslations } from './withTranslations';
+import { useWindowedOptions } from './useWindowedOptions';
 
 type Option = {
     value: any;
     label: string;
 };
-
-const WINDOWING_THRESHOLD = 200;
-const WINDOW_PAGE_SIZE = 100;
 
 type Props = {
     id?: string;
@@ -43,7 +41,6 @@ const NewSingleSelectFieldComponentPlain = ({
     const selectRef = useRef<HTMLDivElement | null>(null);
     const fieldName = id ?? 'single-select-field';
     const [filterValue, setFilterValue] = useState('');
-    const [visibleCount, setVisibleCount] = useState(WINDOW_PAGE_SIZE);
 
     const filteredOptions = useMemo(
         () => (filterable && filterValue
@@ -52,12 +49,7 @@ const NewSingleSelectFieldComponentPlain = ({
         [options, filterValue, filterable],
     );
 
-    const useWindowing = filteredOptions.length > WINDOWING_THRESHOLD;
-
-    const visibleOptions = useMemo(
-        () => (useWindowing ? filteredOptions.slice(0, visibleCount) : filteredOptions),
-        [filteredOptions, useWindowing, visibleCount],
-    );
+    const { visibleOptions, onEndReached, resetWindow } = useWindowedOptions(filteredOptions);
 
     const selectedOption = value == null
         ? undefined
@@ -65,12 +57,8 @@ const NewSingleSelectFieldComponentPlain = ({
 
     const handleFilterChange = useCallback((newFilterValue: string) => {
         setFilterValue(newFilterValue);
-        setVisibleCount(WINDOW_PAGE_SIZE);
-    }, []);
-
-    const handleEndReached = useCallback(() => {
-        setVisibleCount(current => Math.min(current + WINDOW_PAGE_SIZE, filteredOptions.length));
-    }, [filteredOptions.length]);
+        resetWindow();
+    }, [resetWindow]);
 
     const handleChange = (nextValue: string | { value: string }) => {
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
@@ -78,6 +66,7 @@ const NewSingleSelectFieldComponentPlain = ({
             onChange(resolvedValue ?? null);
         }
         setFilterValue('');
+        resetWindow();
         onBlur?.(resolvedValue ?? null);
     };
 
@@ -125,7 +114,7 @@ const NewSingleSelectFieldComponentPlain = ({
                 filterable={filterable}
                 filterValue={filterValue}
                 onFilterChange={handleFilterChange}
-                onEndReached={handleEndReached}
+                onEndReached={onEndReached}
                 aria-required={required}
                 onChange={handleChange}
                 onBlur={handleBlur}
