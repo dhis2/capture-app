@@ -7,5 +7,5 @@ export type PlainProps = {
     fieldValue?: string;
     ready: boolean;
     programStage: ProgramStage;
-    eventAccess: any;
+    readOnly: boolean;
 };

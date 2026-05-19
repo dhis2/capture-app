@@ -50,7 +50,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, eventAccess } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -65,7 +65,7 @@ class NotesSectionPlain extends React.Component<Props> {
                 {React.createElement(LoadingNotes as any, {
                     ready,
                     notes,
-                    readOnly: !eventAccess?.write,
+                    readOnly,
                     onAddNote,
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,

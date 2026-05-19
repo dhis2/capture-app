@@ -22,10 +22,7 @@ const headerText = i18n.t('Assignee');
 type Props = {
     assignee: UserFormField | null;
     programStage?: ProgramStage | null;
-    eventAccess: {
-        read: boolean;
-        write: boolean;
-    } | null;
+    readOnly: boolean;
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent };
     onSaveAssignee: (newAssignee: UserFormField) => void;
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void;
@@ -35,7 +32,7 @@ const AssigneeSectionPlain = ({
     assignee,
     programStage,
     getAssignedUserSaveContext,
-    eventAccess,
+    readOnly,
     onSaveAssignee,
     onSaveAssigneeError,
     classes,
@@ -86,7 +83,7 @@ const AssigneeSectionPlain = ({
                 <DisplayMode
                     assignee={assignee}
                     onEdit={() => setEditMode(true)}
-                    readOnly={!eventAccess?.write}
+                    readOnly={readOnly}
                     avatarId={avatarId}
                 />
             )}

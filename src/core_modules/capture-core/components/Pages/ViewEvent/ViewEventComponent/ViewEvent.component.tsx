@@ -104,7 +104,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         && !canUncompleteEvent
         && eventStatus === eventStatuses.COMPLETED
     );
-    const showEditButton = !isEditEventPage && eventAccess.write && isEventWithinValidPeriod && canEditCompletedEvent;
+    const readOnly = !eventAccess.write || !isEventWithinValidPeriod || !canEditCompletedEvent;
+    const showEditButton = !isEditEventPage && !readOnly;
 
     return (
         <div className={classes.container}>
@@ -132,6 +133,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
+                    readOnly={readOnly}
                     programStage={programStage}
                     dataEntryKey={currentDataEntryKey}
                     assignee={assignee}

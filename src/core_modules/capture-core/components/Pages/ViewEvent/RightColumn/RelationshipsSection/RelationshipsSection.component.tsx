@@ -78,7 +78,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, eventId, relationships, ready, eventAccess } = this.props;
+        const { classes, programStage, eventId, relationships, ready, readOnly } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -104,7 +104,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     onOpenAddRelationship: this.handleOpenAddRelationship,
                     onRemoveRelationship: this.handleRemoveRelationship,
                     currentEntityId: eventId,
-                    readOnly: !eventAccess?.write,
+                    readOnly,
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
                 })}
