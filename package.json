@@ -10,9 +10,10 @@
     ],
     "dependencies": {
         "@dhis2-ui/calendar": "^10.7.6",
-        "@dhis2/app-runtime": "^3.14.5",
+        "@dhis2/app-runtime": "^3.17.0",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
+        "@dhis2/data-engine": "^3.17.0",
         "@dhis2/rule-engine": "3.7.1",
         "@dhis2/rules-engine-javascript": "106.2.2",
         "@dhis2/ui": "^10.13.1",
