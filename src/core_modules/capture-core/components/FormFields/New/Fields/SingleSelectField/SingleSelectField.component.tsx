@@ -71,6 +71,7 @@ const NewSingleSelectFieldComponentPlain = ({
     };
 
     const handleBlur = () => {
+        resetWindow();
         onBlur?.(value ?? null);
     };
 
