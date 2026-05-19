@@ -2555,6 +2555,11 @@
     markdown-it "^8.4.2"
     prop-types "^15.6.2"
 
+"@dhis2/data-engine@^3.17.0":
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/data-engine/-/data-engine-3.17.0.tgz#47a20f2b8d00bf8cf725ae775e9be553c033df49"
+  integrity sha512-T2TKpsKL+sBWLFIevO3grXecrz41NFMH4V79HSAtxn7KDrxkEDalHDNQACuehcgZpUBcYT3Cna1I/TeREp/p0g==
+
 "@dhis2/multi-calendar-dates@2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@dhis2/multi-calendar-dates/-/multi-calendar-dates-2.1.2.tgz#c3dd01e358c3dda4354c6722bb72e077b3ddd9b8"
