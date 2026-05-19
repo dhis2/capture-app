@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-16T11:59:12.199Z\n"
-"PO-Revision-Date: 2026-05-16T11:59:12.199Z\n"
+"POT-Creation-Date: 2026-05-19T13:44:33.550Z\n"
+"PO-Revision-Date: 2026-05-19T13:44:33.550Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1086,6 +1086,12 @@ msgstr "You only have view access to these program stages"
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
 
+msgid "This event is outside the valid period"
+msgstr "This event is outside the valid period"
+
+msgid "This event has been completed"
+msgstr "This event has been completed"
+
 msgid "View only - {{message}}"
 msgstr "View only - {{message}}"
 
@@ -1517,15 +1523,6 @@ msgstr "No polygon captured"
 
 msgid "Event completed"
 msgstr "Event completed"
-
-msgid "The event cannot be edited after it has been completed"
-msgstr "The event cannot be edited after it has been completed"
-
-msgid "You don't have access to edit this event"
-msgstr "You don't have access to edit this event"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr "{{occurredAt}} belongs to an expired period. Event cannot be edited"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"
