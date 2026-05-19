@@ -17,7 +17,6 @@ import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
-import { dataElementTypes } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
@@ -26,9 +25,7 @@ import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
 import { useProgramExpiryForUser } from '../../../../hooks';
-import { convertFormToClient } from '../../../../converters';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import type { PlainProps } from './EventDetailsSection.types';
 
@@ -69,11 +66,12 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         eventId,
         eventData,
         onOpenEditEvent,
-        showEditEvent,
+        isEditEventPage,
         programStage,
         eventAccess,
         onBackToAllEvents,
         programId,
+        showEditButton,
         ...passOnProps
     } = props;
     const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
@@ -93,17 +91,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         onBackToAllEvents();
     }, [eventId, queryClient, onBackToAllEvents]);
 
-    const occurredAtClient = convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string;
-    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
-    const canEdit = eventAccess.write && isWithinValidPeriod;
-
     if (error) {
         return error.errorComponent;
     }
 
     const renderDataEntryContainer = () => (
         <div className={classes.dataEntryContainer}>
-            {showEditEvent ?
+            {isEditEventPage ?
                 <EditEventDataEntry
                     dataEntryId={dataEntryIds.SINGLE_EVENT}
                     formFoundation={formFoundation}
@@ -126,7 +120,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
 
     const renderActionsContainer = () => (
         <div className={classes.actionsContainer}>
-            {!showEditEvent && !isLoading && canEdit &&
+            {showEditButton &&
                 <div className={classes.editButtonContainer}>
                     <Button
                         className={classes.button}
@@ -183,7 +177,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 <div className={classes.dataEntryContainer}>
                     {renderDataEntryContainer()}
                 </div>
-                {showEditEvent && (
+                {isEditEventPage && (
                     <NoticeBox
                         formId={`${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`}
                     />

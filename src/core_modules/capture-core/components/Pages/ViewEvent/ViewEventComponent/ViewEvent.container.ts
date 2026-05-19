@@ -38,7 +38,7 @@ const makeMapStateToProps = () => {
             assignee: state.viewEventPage.loadedValues?.eventContainer?.event?.assignee,
             getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
-            showEditEvent: eventDetailsSection.showEditEvent,
+            isEditEventPage: eventDetailsSection.showEditEvent,
             feedbackEmptyText: i18n.t('No feedback for this event yet'),
             indicatorEmptyText: i18n.t('No indicator output for this event yet'),
             programRules: programRulesSelector(state),
