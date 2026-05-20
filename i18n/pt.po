@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -753,6 +753,12 @@ msgstr "Referir"
 msgid "No available program stages"
 msgstr "Não há etapas do programa disponíveis"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "ID de inscrição inválido {{enrollmentId}}."
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Escolha uma inscrição para visualizar o painel."
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -765,12 +771,6 @@ msgid ""
 msgstr ""
 "{{programName}} tem categorias. Escolha todas as categorias para visualizar "
 "o painel."
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "ID de inscrição inválido {{enrollmentId}}."
-
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Escolha uma inscrição para visualizar o painel."
 
 msgid "There are no active enrollments."
 msgstr "Não há inscrições ativas."
@@ -896,14 +896,14 @@ msgstr ""
 msgid "Please select {{category}}."
 msgstr "Selecione {{category}}."
 
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Ou veja todos os registros acessíveis a você no {{program}}"
+msgid "Please select an organisation unit"
+msgstr "Por favor, seleccione uma unidade de organizacional"
 
-msgid "Or see all events accessible to you in {{program}}"
-msgstr "Ou veja todos os eventos acessíveis a você no {{program}}"
+msgid "See working list without organisation unit"
+msgstr ""
 
-msgid "Please select an organisation unit."
-msgstr "Selecione uma unidade organizacional."
+msgid "Search for a {{trackedEntityName}}"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Eventos registrados"
@@ -1041,6 +1041,9 @@ msgstr "Todos acessíveis"
 msgid "Selected"
 msgstr "Selecionado"
 
+msgid "Please select an organisation unit."
+msgstr "Selecione uma unidade organizacional."
+
 msgid "Organisation unit scope"
 msgstr "Escopo da unidade organizacional"
 
@@ -1155,9 +1158,6 @@ msgstr ""
 msgid "Search for a {{title}}"
 msgstr ""
 
-msgid "Search for {{titleText}}"
-msgstr "Pesquise por {{titleText}}"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1173,6 +1173,9 @@ msgid ""
 "Try selecting a different tracked entity type, or try searching in a program"
 " by choosing one from the top bar."
 msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr "Pesquise por {{titleText}}"
 
 msgid "Search {{name}}"
 msgstr "Pesquise {{name}}"
@@ -1336,6 +1339,9 @@ msgid "Unsaved changes"
 msgstr "Alterações não salvas"
 
 msgid "Continue data entry"
+msgstr ""
+
+msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"

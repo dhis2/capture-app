@@ -2,15 +2,15 @@
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2025
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
 # Em Le <em.hispvietnam@gmail.com>, 2026
-# Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -736,6 +736,12 @@ msgstr "Tạo chuyển tuyến"
 msgid "No available program stages"
 msgstr "Không có giai đoạn chương trình nào"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr "Đăng ký có mã id {{enrollmentId}} không hợp lệ."
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Chọn một Đăng ký để xem Bảng thông tin"
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -747,12 +753,6 @@ msgid ""
 msgstr ""
 "{{programName}} có phân tổ. Hãy chọn tất cả phân tổ để xem Bảng thông tin "
 "của chương trình này."
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "Đăng ký có mã id {{enrollmentId}} không hợp lệ."
-
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Chọn một Đăng ký để xem Bảng thông tin"
 
 msgid "There are no active enrollments."
 msgstr "Không có đăng ký nào đang hoạt động."
@@ -880,14 +880,14 @@ msgstr "Tìm hiểu thêm về ứng dụng Nhập liệu"
 msgid "Please select {{category}}."
 msgstr "Hãy chọn {{category}}"
 
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Hoặc xem tất cả các dữ liệu bạn được quyền xem trong {{program}}"
-
-msgid "Or see all events accessible to you in {{program}}"
-msgstr "Hoặc xem tất cả các sự kiện bạn quyền xem trong {{program}}"
-
-msgid "Please select an organisation unit."
+msgid "Please select an organisation unit"
 msgstr "Hãy chọn một đơn vị"
+
+msgid "See working list without organisation unit"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}}"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
@@ -1026,6 +1026,9 @@ msgstr "Tất cả có thể truy cập"
 msgid "Selected"
 msgstr "Danh sách đã chọn"
 
+msgid "Please select an organisation unit."
+msgstr "Hãy chọn một đơn vị"
+
 msgid "Organisation unit scope"
 msgstr "Phạm Vi Đơn Vị"
 
@@ -1135,9 +1138,6 @@ msgstr ""
 msgid "Search for a {{title}}"
 msgstr ""
 
-msgid "Search for {{titleText}}"
-msgstr "Tìm cho {{titleText}}"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1153,6 +1153,9 @@ msgid ""
 "Try selecting a different tracked entity type, or try searching in a program"
 " by choosing one from the top bar."
 msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr "Tìm cho {{titleText}}"
 
 msgid "Search {{name}}"
 msgstr "Tim kiêm {{name}}"
@@ -1321,6 +1324,9 @@ msgstr "Các thay đổi chưa được lưu"
 
 msgid "Continue data entry"
 msgstr "Tiếp tục nhập liệu"
+
+msgid "You do not have access to modify this enrollment"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Hành động đăng ký"
