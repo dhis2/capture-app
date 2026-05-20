@@ -18,6 +18,8 @@ export type EnrollmentAccessContextValue = {
     showWidgetBadge: boolean;
     trackedEntityInactive: boolean;
     canToggleTrackedEntityStatus: boolean;
+    isEventWithinValidPeriod?: boolean;
+    canEditCompletedEvent?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -42,6 +44,8 @@ type ProviderProps = {
     program?: TrackerProgram;
     currentStageId?: string;
     trackedEntityInactive?: boolean;
+    isEventWithinValidPeriod?: boolean;
+    canEditCompletedEvent?: boolean;
     children: React.ReactNode;
 };
 
@@ -60,6 +64,8 @@ const computeContextValue = (
     program: TrackerProgram,
     currentStageId: string | undefined,
     trackedEntityInactive: boolean,
+    isEventWithinValidPeriod?: boolean,
+    canEditCompletedEvent?: boolean,
 ): EnrollmentAccessContextValue => {
     const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
     const rawProgramWriteAccess = Boolean(program.access?.data?.write);
@@ -92,6 +98,8 @@ const computeContextValue = (
         showWidgetBadge: !isEventPage && !allWriteAccessMissing,
         trackedEntityInactive,
         canToggleTrackedEntityStatus: rawTrackedEntityTypeWriteAccess,
+        isEventWithinValidPeriod,
+        canEditCompletedEvent,
     };
 };
 
@@ -99,13 +107,17 @@ export const EnrollmentAccessProvider = ({
     program,
     currentStageId,
     trackedEntityInactive = false,
+    isEventWithinValidPeriod,
+    canEditCompletedEvent,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(
         () => (program
-            ? computeContextValue(program, currentStageId, trackedEntityInactive)
+            ? computeContextValue(
+                program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent,
+            )
             : { ...fallback, trackedEntityInactive }),
-        [program, currentStageId, trackedEntityInactive],
+        [program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent],
     );
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

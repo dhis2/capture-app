@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-15T08:51:38.871Z\n"
-"PO-Revision-Date: 2026-05-15T08:51:38.871Z\n"
+"POT-Creation-Date: 2026-05-20T14:24:45.563Z\n"
+"PO-Revision-Date: 2026-05-20T14:24:45.563Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1095,11 +1095,17 @@ msgstr "You only have view access to this program stage"
 msgid "{{trackedEntityName}} is deactivated"
 msgstr "{{trackedEntityName}} is deactivated"
 
-msgid "View only"
-msgstr "View only"
+msgid "This event is outside the valid period"
+msgstr "This event is outside the valid period"
+
+msgid "This event has been completed"
+msgstr "This event has been completed"
 
 msgid "View only - {{message}}"
 msgstr "View only - {{message}}"
+
+msgid "View only"
+msgstr "View only"
 
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
@@ -1538,9 +1544,6 @@ msgstr "No polygon captured"
 
 msgid "Event completed"
 msgstr "Event completed"
-
-msgid "The event cannot be edited after it has been completed"
-msgstr "The event cannot be edited after it has been completed"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"

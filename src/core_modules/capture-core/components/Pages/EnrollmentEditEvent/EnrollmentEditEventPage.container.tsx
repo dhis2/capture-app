@@ -3,7 +3,10 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations } from '../../../hooks';
+import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations, useProgramExpiryForUser } from '../../../hooks';
+import { isValidPeriod } from '../../../utils/validation/validators/form/expiredPeriod';
+import { useAuthorities } from '../../../utils/authority/useAuthorities';
+import { eventStatuses } from '../../WidgetEventEdit/constants/status.const';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
@@ -42,7 +45,7 @@ import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/Enrollmen
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { getProgramEventAccess } from '../../../metaData';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
-import { convertClientToServer } from '../../../converters';
+import { convertClientToServer, convertServerToClient } from '../../../converters';
 import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
 import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 import { statusTypes } from '../../../enrollment';
@@ -271,6 +274,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
     const eventAccess = getProgramEventAccess(programId, programStage?.id ?? null);
 
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const occurredAtClient = convertServerToClient(event?.occurredAt, dataElementTypes.DATE) as string;
+    const isEventWithinValidPeriod = isValidPeriod(occurredAtClient, expiryPeriod).isWithinValidPeriod;
+
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const canEditCompletedEvent = !(programStage?.blockEntryForm
+        && !canUncompleteEvent
+        && event?.status === eventStatuses.COMPLETED);
+
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -306,6 +318,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
             program={program}
             currentStageId={stageId}
             trackedEntityInactive={trackedEntityInactive}
+            isEventWithinValidPeriod={isEventWithinValidPeriod}
+            canEditCompletedEvent={canEditCompletedEvent}
         >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}
