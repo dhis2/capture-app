@@ -20,10 +20,6 @@ type Props = {
     trackedEntityName?: string;
     inlineLabel?: boolean;
     trackedEntityInactive?: boolean;
-    isEventPage?: boolean;
-    currentStageWriteAccess?: boolean;
-    anyStageWriteAccess?: boolean;
-    anyStageReadAccess?: boolean;
 };
 
 type Access = {
