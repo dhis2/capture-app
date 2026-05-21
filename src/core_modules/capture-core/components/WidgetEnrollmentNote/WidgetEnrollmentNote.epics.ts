@@ -35,7 +35,7 @@ export const addNoteForEnrollmentEpic = (
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'firstName, surname',
+                    fields: 'firstName,surname',
                 },
             }).then((user) => {
                 const { firstName, surname } = user;
