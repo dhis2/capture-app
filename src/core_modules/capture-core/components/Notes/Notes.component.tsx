@@ -200,8 +200,7 @@ const NotesPlain = ({
                 )}
             </Menu>
             <div className={classes.newNoteContainer} data-test="new-note-container">
-                {addIsOpen && renderInput()}
-                {!addIsOpen && !readOnly && renderButton()}
+                {!readOnly && (addIsOpen ? renderInput() : renderButton())}
             </div>
         </div>
     );
