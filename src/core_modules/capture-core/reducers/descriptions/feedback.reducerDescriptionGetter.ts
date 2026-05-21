@@ -27,6 +27,7 @@ import { registrationFormActionTypes } from '../../components/Pages/New/Registra
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { enrollmentNoteActionTypes } from '../../components/WidgetEnrollmentNote';
 
 const alertVariants = {
     info: 'info',
@@ -150,4 +151,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
         addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
+    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: state =>
+        addErrorFeedback(state, { message: i18n.t('Could not save note') }),
 }, 'feedbacks', []);

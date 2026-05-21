@@ -7,6 +7,7 @@ export const actionTypes = {
     START_ADD_NOTE_FOR_ENROLLMENT: 'StartAddNoteForEnrollment',
     NOTE_ADDED_FOR_ENROLLMENT: 'NoteAddedForEnrollment',
     ADD_ENROLLMENT_NOTE: 'AddEnrollmentNote',
+    REMOVE_ENROLLMENT_NOTE: 'RemoveEnrollmentNote',
     ADD_NOTE_FAILED_FOR_ENROLLMENT: 'AddNoteFailedForEnrollment',
 };
 
@@ -40,3 +41,6 @@ export const startAddNoteForEnrollment = (
 
 export const addEnrollmentNote = (enrollmentUid: string, note: Record<string, unknown>) =>
     actionCreator(actionTypes.ADD_ENROLLMENT_NOTE)({ enrollmentUid, note });
+
+export const removeEnrollmentNote = (enrollmentUid: string, noteClientId: string) =>
+    actionCreator(actionTypes.REMOVE_ENROLLMENT_NOTE)({ enrollmentUid, noteClientId });
