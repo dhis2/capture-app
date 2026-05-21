@@ -180,9 +180,7 @@ const NotesPlain = ({
                             label={<>
                                 <div className={classes.noteItemHeader}>
                                     <div className={classes.noteItemUser} data-test="note-user">
-                                        {n.createdBy ?
-                                            `${n.createdBy.firstName} ${n.createdBy.surname}`
-                                            : `${n.storedBy}` }
+                                        {n.createdBy && `${n.createdBy.firstName} ${n.createdBy.surname}`}
                                     </div>
                                     <div className={classes.noteItemDate} data-test="note-date">
                                         <span>

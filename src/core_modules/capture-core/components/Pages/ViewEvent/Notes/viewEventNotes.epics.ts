@@ -57,10 +57,10 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { querySingleR
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'userName,firstName,surname',
+                    fields: 'firstName,surname',
                 },
             }).then((user: any) => {
-                const { userName, firstName, surname } = user;
+                const { firstName, surname } = user;
                 const clientId = uuid();
                 const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
@@ -71,7 +71,6 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { querySingleR
                         surname,
                         uid: clientId,
                     },
-                    storedBy: userName,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                     clientId: uuid(),
                 };

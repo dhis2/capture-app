@@ -30,10 +30,10 @@ export const addNoteForNewSingleEventEpic = (
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'firstName,surname,userName',
+                    fields: 'firstName,surname',
                 },
             }).then((user) => {
-                const { userName, firstName, surname } = user;
+                const { firstName, surname } = user;
                 const clientId = uuid();
                 const note = {
                     value: payload.note,
@@ -42,7 +42,6 @@ export const addNoteForNewSingleEventEpic = (
                         surname,
                         uid: clientId,
                     },
-                    storedBy: userName,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                     clientId: uuid(),
                 };

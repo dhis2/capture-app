@@ -35,10 +35,10 @@ export const addNoteForEnrollmentEpic = (
             return querySingleResource({
                 resource: 'me',
                 params: {
-                    fields: 'firstName, surname, userName',
+                    fields: 'firstName, surname',
                 },
             }).then((user) => {
-                const { firstName, surname, userName } = user;
+                const { firstName, surname } = user;
                 const clientId = uuid();
 
                 const serverData = createServerData(note, useNewEndpoint);
@@ -50,7 +50,6 @@ export const addNoteForEnrollmentEpic = (
                         surname,
                         uid: clientId,
                     },
-                    storedBy: userName,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 };
 

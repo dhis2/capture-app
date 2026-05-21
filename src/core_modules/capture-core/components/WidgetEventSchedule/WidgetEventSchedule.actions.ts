@@ -27,7 +27,6 @@ export const requestScheduleEvent = ({
     notes: Array<{
         value: string;
         storedAt?: string;
-        storedBy?: string;
         createdBy?: any;
         note?: string;
     }>;
