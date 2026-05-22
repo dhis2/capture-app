@@ -6,7 +6,11 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
-import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
+import {
+    useEnrollmentEditEventPageMode,
+    useProgramExpiryForUser,
+    useCompleteEventsExpiryForUser,
+} from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
@@ -15,7 +19,7 @@ import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from '../constants/status.const';
 import type { PlainProps } from './WidgetHeader.types';
-import { isValidPeriod } from '../../../utils/validation/validators/form';
+import { isValidPeriod, isWithinCompleteEventsExpiry } from '../../../utils/validation/validators/form';
 import { convertFormToClient } from '../../../converters';
 
 const styles: Readonly<any> = {
@@ -42,6 +46,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     occurredAt,
+    completedAt,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -55,10 +60,15 @@ const WidgetHeaderPlain = ({
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
+    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAt, completeEventsExpiryDays);
 
-    const showEditButton = eventAccess?.write && isWithinValidPeriod && !blockEntryForm;
+    const showEditButton = eventAccess?.write
+        && isWithinValidPeriod
+        && !blockEntryForm
+        && isWithinCompleteExpiry;
 
     const { programCategory } = useCategoryCombinations(programId);
 

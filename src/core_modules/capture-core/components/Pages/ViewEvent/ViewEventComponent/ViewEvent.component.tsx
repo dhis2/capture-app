@@ -12,9 +12,14 @@ import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { ViewEventReadOnlyBadge } from '../ViewEventReadOnlyBadge';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
-import { useHideWidgetByRuleLocations, useProgramExpiryForUser } from '../../../../hooks';
+import {
+    useHideWidgetByRuleLocations,
+    useProgramExpiryForUser,
+    useCompleteEventsExpiryForUser,
+} from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
+import { isWithinCompleteEventsExpiry } from '../../../../utils/validation/validators/form/completeEventsExpiry';
 import { convertFormToClient } from '../../../../converters';
 import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
 
@@ -94,17 +99,23 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const hideWidgets = useHideWidgetByRuleLocations(programRules);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.dataEntryValues?.occurredAt);
     const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
+    const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
+    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAt, completeEventsExpiryDays);
     const canEditCompletedEvent = !(
         programStage?.blockEntryForm
         && !canUncompleteEvent
         && eventStatus === eventStatuses.COMPLETED
     );
-    const readOnly = !eventAccess.write || !isEventWithinValidPeriod || !canEditCompletedEvent;
+    const readOnly = !eventAccess.write
+        || !isEventWithinValidPeriod
+        || !canEditCompletedEvent
+        || !isWithinCompleteExpiry;
     const showEditButton = !isEditEventPage && !readOnly;
 
     return (
@@ -121,6 +132,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     eventAccess={eventAccess}
                     isEventWithinValidPeriod={isEventWithinValidPeriod}
                     canEditCompletedEvent={canEditCompletedEvent}
+                    isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
                 />
             </div>
             <div className={classes.contentContainer}>

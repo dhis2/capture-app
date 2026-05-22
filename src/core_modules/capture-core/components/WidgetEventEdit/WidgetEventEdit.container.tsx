@@ -101,6 +101,7 @@ const WidgetEventEditPlain = ({
     const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
+    const completedAt = loadedValues?.eventContainer?.event?.completedAt;
     const expiryPeriod = useProgramExpiryForUser(programId);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
@@ -129,6 +130,7 @@ const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             occurredAt={occurredAt}
+                            completedAt={completedAt}
                         />
                     }
                     noncollapsible

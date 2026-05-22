@@ -16,6 +16,7 @@ type Props = {
     programStageWriteAccess?: boolean;
     eventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
+    withinCompleteEventsExpiry?: boolean;
     multipleStages?: boolean;
     trackedEntityName?: string;
     inlineLabel?: boolean;
@@ -43,19 +44,33 @@ const getExpiredPeriodMessage = (): string => i18n.t('This event is outside the 
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 
-const getReadOnlyMessage = (
-    access: Access,
-    trackedEntityName: string | undefined,
-    multipleStages: boolean,
-    eventWithinValidPeriod: boolean,
-    canEditCompletedEvent: boolean,
-): string => {
+const getCompleteEventsExpiryMessage = (): string =>
+    i18n.t('This event can no longer be edited after the completion expiry');
+
+type ReadOnlyMessageInput = {
+    access: Access;
+    trackedEntityName: string | undefined;
+    multipleStages: boolean;
+    eventWithinValidPeriod: boolean;
+    canEditCompletedEvent: boolean;
+    withinCompleteEventsExpiry: boolean;
+};
+
+const getReadOnlyMessage = ({
+    access,
+    trackedEntityName,
+    multipleStages,
+    eventWithinValidPeriod,
+    canEditCompletedEvent,
+    withinCompleteEventsExpiry,
+}: ReadOnlyMessageInput): string => {
     if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages);
     if (!eventWithinValidPeriod) return getExpiredPeriodMessage();
     if (!canEditCompletedEvent) return getCompletedEventMessage();
+    if (!withinCompleteEventsExpiry) return getCompleteEventsExpiryMessage();
     return '';
 };
 
@@ -65,6 +80,7 @@ const ReadOnlyBadgePlain = ({
     programStageWriteAccess = true,
     eventWithinValidPeriod = true,
     canEditCompletedEvent = true,
+    withinCompleteEventsExpiry = true,
     multipleStages = false,
     trackedEntityName,
     inlineLabel = false,
@@ -75,13 +91,14 @@ const ReadOnlyBadgePlain = ({
         trackedEntityType: trackedEntityTypeWriteAccess,
         programStage: programStageWriteAccess,
     };
-    const message = getReadOnlyMessage(
+    const message = getReadOnlyMessage({
         access,
         trackedEntityName,
         multipleStages,
         eventWithinValidPeriod,
         canEditCompletedEvent,
-    );
+        withinCompleteEventsExpiry,
+    });
     if (!message) return null;
 
     const labelText = inlineLabel

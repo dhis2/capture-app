@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-19T13:44:33.550Z\n"
-"PO-Revision-Date: 2026-05-19T13:44:33.550Z\n"
+"POT-Creation-Date: 2026-05-22T14:08:07.172Z\n"
+"PO-Revision-Date: 2026-05-22T14:08:07.172Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1091,6 +1091,9 @@ msgstr "This event is outside the valid period"
 
 msgid "This event has been completed"
 msgstr "This event has been completed"
+
+msgid "This event can no longer be edited after the completion expiry"
+msgstr "This event can no longer be edited after the completion expiry"
 
 msgid "View only - {{message}}"
 msgstr "View only - {{message}}"
