@@ -77,7 +77,7 @@ const NoteSectionPlain = ({
     const { fromServerDate } = useTimeZoneConversion();
 
     const handleChange = useCallback((value: string) => {
-        setEditing(true);
+        setEditing(!!value.trim());
         setNewNoteValue(value);
     }, []);
 
@@ -141,23 +141,26 @@ const NoteSectionPlain = ({
                 </Editor>
             </div>
 
-            {isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
-                <Button
-                    dataTest="add-note-btn"
-                    onClick={onAddNote}
-                    small
-                >
-                    {i18n.t('Save note')}
-                </Button>
-                <Button
-                    dataTest="cancel-note-btn"
-                    onClick={onCancel}
-                    secondary
-                    small
-                >
-                    {i18n.t('Cancel')}
-                </Button>
-            </div>}
+            {isEditing && (
+                <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+                    <Button
+                        dataTest="add-note-btn"
+                        onClick={onAddNote}
+                        primary
+                        small
+                    >
+                        {i18n.t('Save note')}
+                    </Button>
+                    <Button
+                        dataTest="cancel-note-btn"
+                        onClick={onCancel}
+                        secondary
+                        small
+                    >
+                        {i18n.t('Cancel')}
+                    </Button>
+                </div>
+            )}
         </div>);
 };
 
