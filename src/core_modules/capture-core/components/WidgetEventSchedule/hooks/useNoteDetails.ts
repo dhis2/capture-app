@@ -8,7 +8,7 @@ export const useNoteDetails = () => {
             resource: 'me',
             params: {
                 fields:
-                ['firstName,surname,username'],
+                ['firstName,surname'],
             },
         },
     }), []));
