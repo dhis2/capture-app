@@ -27,19 +27,19 @@ type Access = {
     programStage: boolean;
 };
 
-const getEnrollmentMessage = (): string => i18n.t('You only have view access to enrollment');
+const getEnrollmentMessage = (): string => i18n.t('You only have view access to this enrollment');
 
-const getProgramMessage = (): string => i18n.t('You only have view access to program');
+const getProgramMessage = (): string => i18n.t('You only have view access to this program');
 
 const getTrackedEntityMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
-    ? i18n.t('You only have view access to {{trackedEntityName}}', { trackedEntityName, escapeValue: false })
+    ? i18n.t('You only have view access to this {{trackedEntityName}}', { trackedEntityName, escapeValue: false })
     : i18n.t('You only have view access to this tracked entity type'));
 
 const getProgramStageMessage = (multipleStages: boolean): string => (multipleStages
     ? i18n.t('You only have view access to these program stages')
     : i18n.t('You only have view access to this program stage'));
 
-const getExpiredPeriodMessage = (): string => i18n.t('This event is outside the valid period');
+const getExpiredPeriodMessage = (): string => i18n.t('This event is outside the valid editing period');
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 
