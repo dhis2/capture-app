@@ -5,22 +5,16 @@ import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, space
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
-import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import {
     useEnrollmentEditEventPageMode,
-    useProgramExpiryForUser,
-    useCompleteEventsExpiryForUser,
+    useEventEditPermissions,
 } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
-import { eventStatuses } from '../constants/status.const';
 import type { PlainProps } from './WidgetHeader.types';
-import { isValidPeriod, isWithinCompleteEventsExpiry } from '../../../utils/validation/validators/form';
-import { convertFormToClient } from '../../../converters';
 
 const styles: Readonly<any> = {
     icon: {
@@ -55,22 +49,14 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
-    const eventAccess = getProgramEventAccess(programId, stage.id);
-    const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
-
-    const expiryPeriod = useProgramExpiryForUser(programId);
-    const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
-    const isWithinValidPeriod = isValidPeriod(occurredAtClient, expiryPeriod).isWithinValidPeriod;
-
-    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
-    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAt, completeEventsExpiryDays);
-
-    const showEditButton = eventAccess?.write
-        && isWithinValidPeriod
-        && !blockEntryForm
-        && isWithinCompleteExpiry;
-
+    const { readOnly } = useEventEditPermissions({
+        programId,
+        stage,
+        eventStatus,
+        occurredAt,
+        completedAt,
+    });
+    const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
 
     const { icon, name } = stage;

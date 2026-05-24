@@ -5,7 +5,7 @@ import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
-import { dataElementTypes, type ProgramStage } from '../../../../metaData';
+import { type ProgramStage } from '../../../../metaData';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
@@ -14,14 +14,8 @@ import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import {
     useHideWidgetByRuleLocations,
-    useProgramExpiryForUser,
-    useCompleteEventsExpiryForUser,
+    useEventEditPermissions,
 } from '../../../../hooks';
-import { useAuthorities } from '../../../../utils/authority/useAuthorities';
-import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
-import { isWithinCompleteEventsExpiry } from '../../../../utils/validation/validators/form/completeEventsExpiry';
-import { convertFormToClient } from '../../../../converters';
-import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -98,24 +92,22 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules);
 
-    const expiryPeriod = useProgramExpiryForUser(programId);
-    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.dataEntryValues?.occurredAt);
     const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
     const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
-    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
-    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAt, completeEventsExpiryDays);
-    const canEditCompletedEvent = !(
-        programStage?.blockEntryForm
-        && !canUncompleteEvent
-        && eventStatus === eventStatuses.COMPLETED
-    );
-    const readOnly = !eventAccess.write
-        || !isEventWithinValidPeriod
-        || !canEditCompletedEvent
-        || !isWithinCompleteExpiry;
+
+    const {
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
+        readOnly,
+    } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus,
+        occurredAt,
+        completedAt,
+    });
     const showEditButton = !isEditEventPage && !readOnly;
 
     return (
