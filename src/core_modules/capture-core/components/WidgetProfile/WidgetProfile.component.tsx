@@ -114,7 +114,7 @@ const WidgetProfilePlain = ({
 
     const profileButtonLabel = useMemo(() => {
         if (readOnlyMode || hasNoAttributes) return null;
-        if (!isEditable) return i18n.t('Show profile');
+        if (!isEditable) return i18n.t('View profile');
         if (isEditable) return i18n.t('Edit');
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
