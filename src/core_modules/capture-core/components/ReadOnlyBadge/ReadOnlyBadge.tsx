@@ -3,30 +3,13 @@ import { IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
+import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
 
 const styles = {
     label: {
         fontWeight: 500,
     },
 } as const;
-
-type Props = {
-    programWriteAccess?: boolean;
-    trackedEntityTypeWriteAccess?: boolean;
-    programStageWriteAccess?: boolean;
-    eventWithinValidPeriod?: boolean;
-    canEditCompletedEvent?: boolean;
-    withinCompleteEventsExpiry?: boolean;
-    multipleStages?: boolean;
-    trackedEntityName?: string;
-    inlineLabel?: boolean;
-};
-
-type Access = {
-    program: boolean;
-    trackedEntityType: boolean;
-    programStage: boolean;
-};
 
 const getEnrollmentMessage = (): string => i18n.t('You only have view access to enrollment');
 
@@ -40,21 +23,9 @@ const getProgramStageMessage = (multipleStages: boolean): string => (multipleSta
     ? i18n.t('You only have view access to these program stages')
     : i18n.t('You only have view access to this program stage'));
 
-const getExpiredPeriodMessage = (): string => i18n.t('This event is outside the valid period');
+const getExpiredMessage = (): string => i18n.t('This event is outside the edit period');
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
-
-const getCompleteEventsExpiryMessage = (): string =>
-    i18n.t('This event can no longer be edited after the completion expiry');
-
-type ReadOnlyMessageInput = {
-    access: Access;
-    trackedEntityName: string | undefined;
-    multipleStages: boolean;
-    eventWithinValidPeriod: boolean;
-    canEditCompletedEvent: boolean;
-    withinCompleteEventsExpiry: boolean;
-};
 
 const getReadOnlyMessage = ({
     access,
@@ -68,9 +39,9 @@ const getReadOnlyMessage = ({
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages);
-    if (!eventWithinValidPeriod) return getExpiredPeriodMessage();
+    if (!eventWithinValidPeriod) return getExpiredMessage();
     if (!canEditCompletedEvent) return getCompletedEventMessage();
-    if (!withinCompleteEventsExpiry) return getCompleteEventsExpiryMessage();
+    if (!withinCompleteEventsExpiry) return getExpiredMessage();
     return '';
 };
 

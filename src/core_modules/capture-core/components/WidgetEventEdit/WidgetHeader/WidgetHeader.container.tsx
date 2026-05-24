@@ -60,9 +60,10 @@ const WidgetHeaderPlain = ({
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
-    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
+    const isWithinValidPeriod = isValidPeriod(occurredAtClient, expiryPeriod).isWithinValidPeriod;
+
+    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAt, completeEventsExpiryDays);
 
     const showEditButton = eventAccess?.write
