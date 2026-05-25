@@ -1,15 +1,15 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
 # 晓东 林 <13981924470@126.com>, 2026
-# easylin <lin_xd@126.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-05-19T07:38:15.345Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -857,10 +857,10 @@ msgid "Please select an organisation unit"
 msgstr "请选择一个组织机构"
 
 msgid "See working list without organisation unit"
-msgstr ""
+msgstr "参见不含组织机构的工作清单"
 
 msgid "Search for a {{trackedEntityName}}"
-msgstr ""
+msgstr "搜索{{trackedEntityName}}"
 
 msgid "Registered events"
 msgstr "注册的事件"
@@ -1281,7 +1281,7 @@ msgid "Continue data entry"
 msgstr "继续输入数据"
 
 msgid "You do not have access to modify this enrollment"
-msgstr ""
+msgstr "您没有权限修改此注册"
 
 msgid "Enrollment actions"
 msgstr "登记行动"
