@@ -77,8 +77,14 @@ const NoteSectionPlain = ({
     const { fromServerDate } = useTimeZoneConversion();
 
     const handleChange = useCallback((value: string) => {
-        setEditing(!!value.trim());
+        setEditing(true);
         setNewNoteValue(value);
+    }, []);
+
+    const handleBlur = useCallback((value: string) => {
+        if (!value.trim()) {
+            setEditing(false);
+        }
     }, []);
 
     const onCancel = useCallback(() => {
@@ -135,6 +141,7 @@ const NoteSectionPlain = ({
                     <FocusTextField
                         placeholder={placeholder}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         value={newNoteValue}
                         data-test="note-textfield"
                     />
@@ -146,6 +153,7 @@ const NoteSectionPlain = ({
                     <Button
                         dataTest="add-note-btn"
                         onClick={onAddNote}
+                        disabled={!newNoteValue.trim()}
                         primary
                         small
                     >
