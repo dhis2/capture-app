@@ -31,7 +31,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
         },
     ].map(field => ({
         ...field,
-        mainProperty: true,
+        isMainProperty: true,
     }));
 
 const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
@@ -79,7 +79,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             : []),
     ].map(field => ({
         ...field,
-        mainProperty: true,
+        isMainProperty: true,
         filterHidden: true,
         additionalColumn: true,
     }));
@@ -140,7 +140,7 @@ const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> 
         type,
         header: formName || name,
         options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-        multiValueFilter: !!optionSet,
+        multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         additionalColumn: true,
     }));
 

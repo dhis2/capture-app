@@ -6,11 +6,11 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import type { UpdatableFilterContent } from '../types';
-import type { DateValue } from '../Date/types/date.types';
-import type { DateTimeValue } from './types/dateTime.types';
-import type { Value } from './DateTime.types';
+import type { DateValue } from '../Date/date.types';
+import type { DateTimeFilterProps, DateTimeValue, Value } from './dateTime.types';
 import { getDateTimeFilterData } from './dateTimeFilterDataGetter';
 import '../Date/calendarFilterStyles.css';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 const styles: Readonly<any> = (theme: any) => {
     const rem = (px: number) => theme.typography.pxToRem(px);
@@ -41,13 +41,7 @@ const styles: Readonly<any> = (theme: any) => {
     };
 };
 
-type OwnProps = {
-    onCommitValue: (value: Value) => void;
-    value: Value;
-    onUpdate?: (commitValue?: any) => void;
-};
-
-type Props = OwnProps & WithStyles<typeof styles>;
+type Props = DateTimeFilterProps & WithStyles<typeof styles>;
 
 type State = {
     submitAttempted: boolean;
@@ -84,18 +78,15 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     onGetUpdateData(updatedValue?: Value) {
         const value = updatedValue === undefined ? this.props.value : updatedValue;
-        if (value === undefined || value === null) {
-            return null;
-        }
         return getDateTimeFilterData(value);
     }
 
     onIsValid() {
-        this.setState({ submitAttempted: true });
         const value = this.props.value;
-        if (value === undefined || value === null) {
+        if (!value || typeof value === 'string') {
             return true;
         }
+        this.setState({ submitAttempted: true });
         const { from, to } = value;
         const hasNoDates = !from?.date && !to?.date;
         const hasInvalidDate = from?.isValid === false || to?.isValid === false;
@@ -104,11 +95,13 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     }
 
     getUpdatedValue(part: { from?: DateTimeValue | null } | { to?: DateTimeValue | null }) {
-        return { ...this.props.value, ...part };
+        const currentValue = typeof this.props.value === 'string' ? undefined : this.props.value;
+        return { ...currentValue, ...part };
     }
 
     handleDateBlur = (side: DateTimeSide) => (dateValue: DateValue) => {
-        const current = this.props.value?.[side];
+        const objValue = typeof this.props.value === 'string' ? undefined : this.props.value;
+        const current = objValue?.[side];
         const updated = this.getUpdatedValue({
             [side]: {
                 ...current,
@@ -122,8 +115,9 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
     };
 
     handleTimeChange = (side: DateTimeSide) => ({ value: timeValue }: { value: string | undefined }) => {
+        const objValue = typeof this.props.value === 'string' ? undefined : this.props.value;
         const updated = this.getUpdatedValue({
-            [side]: { ...this.props.value?.[side], time: timeValue || null },
+            [side]: { ...objValue?.[side], time: timeValue || null },
         });
         this.props.onCommitValue(updated);
     };
@@ -137,9 +131,13 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     getDateLogicError() {
         const { value } = this.props;
+        if (typeof value === 'string') {
+            return null;
+        }
         const { submitAttempted } = this.state;
-        const from = value?.from;
-        const to = value?.to;
+        const objValue = value;
+        const from = objValue?.from;
+        const to = objValue?.to;
         if (from?.isValid === false || to?.isValid === false) {
             return i18n.t('Please provide a valid date');
         }
@@ -154,55 +152,68 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
 
     render() {
         const { value, classes } = this.props;
-        const fromDate = value?.from?.date ?? undefined;
-        const fromTime = getDisplayTime(value?.from?.date, value?.from?.time);
-        const toDate = value?.to?.date ?? undefined;
-        const toTime = getDisplayTime(value?.to?.date, value?.to?.time);
         const dateLogicError = this.getDateLogicError();
 
         return (
             <div onKeyDownCapture={this.handleKeyDown}>
-                <div className={classes.section}>
-                    <div className={classes.sectionLabel}>{i18n.t('After')}</div>
-                    <div className={classes.row}>
-                        <D2Date
-                            value={fromDate}
-                            onBlur={this.handleDateBlur('from')}
-                            placeholder={i18n.t('Date')}
-                            inputWidth="150px"
-                            calendarWidth="330px"
-                        />
-                        <InputField
-                            placeholder={i18n.t('Time')}
-                            type="time"
-                            value={fromTime}
-                            onChange={this.handleTimeChange('from')}
-                        />
-                    </div>
-                </div>
+                <WithEmptyValueFilter
+                    value={value}
+                    onCommitValue={this.props.onCommitValue}
+                    disabled={this.props.disableEmptyValueFilter}
+                >
+                    {(filteredValue) => {
+                        const fromDate = filteredValue?.from?.date ?? undefined;
+                        const fromTime = getDisplayTime(filteredValue?.from?.date, filteredValue?.from?.time);
+                        const toDate = filteredValue?.to?.date ?? undefined;
+                        const toTime = getDisplayTime(filteredValue?.to?.date, filteredValue?.to?.time);
 
-                <div className={classes.section}>
-                    <div className={classes.sectionLabel}>{i18n.t('Before')}</div>
-                    <div className={classes.row}>
-                        <D2Date
-                            value={toDate}
-                            onBlur={this.handleDateBlur('to')}
-                            placeholder={i18n.t('Date')}
-                            inputWidth="150px"
-                            calendarWidth="330px"
-                        />
-                        <InputField
-                            type="time"
-                            value={toTime}
-                            placeholder={i18n.t('Time')}
-                            onChange={this.handleTimeChange('to')}
-                        />
-                    </div>
-                </div>
+                        return (
+                            <>
+                                <div className={classes.section}>
+                                    <div className={classes.sectionLabel}>{i18n.t('After')}</div>
+                                    <div className={classes.row}>
+                                        <D2Date
+                                            value={fromDate}
+                                            onBlur={this.handleDateBlur('from')}
+                                            placeholder={i18n.t('Date')}
+                                            inputWidth="150px"
+                                            calendarWidth="330px"
+                                        />
+                                        <InputField
+                                            placeholder={i18n.t('Time')}
+                                            type="time"
+                                            value={fromTime}
+                                            onChange={this.handleTimeChange('from')}
+                                        />
+                                    </div>
+                                </div>
 
-                {dateLogicError && (
-                    <div className={classes.error}>{dateLogicError}</div>
-                )}
+                                <div className={classes.section}>
+                                    <div className={classes.sectionLabel}>{i18n.t('Before')}</div>
+                                    <div className={classes.row}>
+                                        <D2Date
+                                            value={toDate}
+                                            onBlur={this.handleDateBlur('to')}
+                                            placeholder={i18n.t('Date')}
+                                            inputWidth="150px"
+                                            calendarWidth="330px"
+                                        />
+                                        <InputField
+                                            type="time"
+                                            value={toTime}
+                                            placeholder={i18n.t('Time')}
+                                            onChange={this.handleTimeChange('to')}
+                                        />
+                                    </div>
+                                </div>
+
+                                {dateLogicError && (
+                                    <div className={classes.error}>{dateLogicError}</div>
+                                )}
+                            </>
+                        );
+                    }}
+                </WithEmptyValueFilter>
             </div>
         );
     }

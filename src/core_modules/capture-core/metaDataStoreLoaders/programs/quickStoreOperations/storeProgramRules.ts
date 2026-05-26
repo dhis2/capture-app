@@ -40,7 +40,7 @@ const convert = (() => {
             optionGroupId: getOptionGroupId(apiProgramRuleAction),
             optionId: getOptionId(apiProgramRuleAction),
             legendSetId: getLegendSetId(apiProgramRuleAction),
-            prioriy: getPriority(apiProgramRuleAction),
+            priority: getPriority(apiProgramRuleAction),
         }));
     };
 

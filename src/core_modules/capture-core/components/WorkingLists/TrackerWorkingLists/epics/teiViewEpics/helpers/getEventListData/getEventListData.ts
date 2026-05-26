@@ -42,7 +42,7 @@ const createApiEventQueryArgs = (
         page,
         pageSize,
         orgUnit,
-        [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
+        [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'CAPTURE',
         program,
         programStage,
         fields: '*',

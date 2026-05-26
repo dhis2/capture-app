@@ -5,6 +5,7 @@ import {
     filterTypesObject,
     type TrueOnlyFilterData,
     type TextFilterData,
+    type BooleanFilterData,
     type TimeFilterData,
     type NumericFilterData,
     OrgUnitFilterData,
@@ -26,7 +27,7 @@ import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../eventFilters';
-import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes/EmptyValue';
+import { fromApiEmptyValueFilter } from '../../../../../FiltersForTypes';
 
 const getTextFilter = (
     filter: ApiDataFilterText & ApiDataFilterTextUnique,
@@ -45,16 +46,11 @@ const getTimeFilter = (filter: ApiDataFilterNumeric): TimeFilterData | undefined
     le: filter?.le ?? undefined,
 });
 
-
-// Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
-const getBooleanFilter = (filter: ApiDataFilterBoolean): any => {
+const getBooleanFilter = (filter: ApiDataFilterBoolean): BooleanFilterData => {
     if (typeof filter === 'boolean') {
         return { values: [filter] };
     }
-    if (filter.in) {
-        return { values: filter.in.map(value => value === 'true') };
-    }
-    return undefined;
+    return { values: filter.in.map(value => value === 'true') };
 };
 
 const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterData => ({

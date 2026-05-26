@@ -1,4 +1,2 @@
 export { AssigneeFilterManager as AssigneeFilter } from './AssigneeFilterManager.component';
-export { getAssigneeFilterData } from './assigneeFilterDataGetter';
-export { modeKeys } from './modeOptions';
-export type { AssigneeFilterData } from './types';
+export type { AssigneeFilterData } from './assignee.types';

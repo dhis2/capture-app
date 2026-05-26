@@ -3,7 +3,8 @@ import i18n from '@dhis2/d2-i18n';
 import { UserField } from '../../FormFields/UserField';
 import { getUsernameFilterData } from './usernameFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
-import type { UsernameFilterProps, Value } from './Username.types';
+import type { UsernameFilterProps, Value } from './username.types';
+import { WithEmptyValueFilter } from '../EmptyValue';
 
 export class UsernameFilter extends Component<UsernameFilterProps> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
@@ -20,16 +21,23 @@ export class UsernameFilter extends Component<UsernameFilterProps> implements Up
 
     render() {
         const { value } = this.props;
-        const usernameValue = value !== undefined && value !== null && typeof value === 'string' ? value : null;
 
         return (
-            <UserField
-                value={usernameValue}
-                onSet={this.handleUserSet}
-                inputPlaceholderText={i18n.t('Search for user')}
-                focusOnMount
-                usernameOnlyMode
-            />
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={this.props.onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
+            >
+                {filteredValue => (
+                    <UserField
+                        value={typeof filteredValue === 'string' ? filteredValue : null}
+                        onSet={this.handleUserSet}
+                        inputPlaceholderText={i18n.t('Search for user')}
+                        focusOnMount
+                        usernameOnlyMode
+                    />
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }
