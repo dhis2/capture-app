@@ -1,3 +1,10 @@
+## [106.2.6](https://github.com/dhis2/capture-app/compare/v106.2.5...v106.2.6) (2026-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-21508] Fix priority typo in storeProgramRules ([#4564](https://github.com/dhis2/capture-app/issues/4564)) ([88b6111](https://github.com/dhis2/capture-app/commit/88b611195ec5f334805ee4c5c885918e3fbe530b))
+
 ## [106.2.5](https://github.com/dhis2/capture-app/compare/v106.2.4...v106.2.5) (2026-05-25)
 
 
