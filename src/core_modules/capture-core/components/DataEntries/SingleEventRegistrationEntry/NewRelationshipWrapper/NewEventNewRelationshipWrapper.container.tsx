@@ -1,4 +1,3 @@
-import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { newEventCancelNewRelationship, addNewEventRelationship } from './NewEventNewRelationshipWrapper.actions';
 import { NewRelationshipWrapperComponent } from './NewEventNewRelationshipWrapper.component';
@@ -36,5 +35,5 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
 });
 
-export const NewRelationshipWrapper: ComponentType<Record<string, never>> =
+export const NewRelationshipWrapper =
   connect(makeMapStateToProps, mapDispatchToProps)(NewRelationshipWrapperComponent);

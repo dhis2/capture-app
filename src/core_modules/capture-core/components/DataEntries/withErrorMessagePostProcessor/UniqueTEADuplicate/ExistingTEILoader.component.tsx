@@ -11,6 +11,7 @@ type Props = {
     programId: string | null,
     errorData: ErrorData,
     querySingleResource: QuerySingleResource,
+    onCancel: () => void,
 };
 
 type State = {
