@@ -1,3 +1,17 @@
+## [106.2.4](https://github.com/dhis2/capture-app/compare/v106.2.3...v106.2.4) (2026-05-21)
+
+
+### Bug Fixes
+
+* [DHIS2-21475] revert patch for gregorian calendar for iso8601 to handle chrome bug ([#4573](https://github.com/dhis2/capture-app/issues/4573)) ([d20178f](https://github.com/dhis2/capture-app/commit/d20178f45582ee099beb0cd8b29afc60b5cc9f8d))
+
+## [106.2.3](https://github.com/dhis2/capture-app/compare/v106.2.2...v106.2.3) (2026-05-20)
+
+
+### Bug Fixes
+
+* [DHIS2-21359] bump rule engine version 3.7.1 -> 3.8.1 ([#4547](https://github.com/dhis2/capture-app/issues/4547)) ([553ca8c](https://github.com/dhis2/capture-app/commit/553ca8cdf26aae629cad1e0c807c09feb03e55bb))
+
 ## [106.2.2](https://github.com/dhis2/capture-app/compare/v106.2.1...v106.2.2) (2026-05-18)
 
 
