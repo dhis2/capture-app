@@ -67,6 +67,7 @@ export const addNoteForEventEpic = (
                     },
                     storedBy: userName,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                    clientId,
                 };
                 const formNote: FormNote = {
                     ...clientNote,

@@ -28,6 +28,8 @@ import { enrollmentSiteActionTypes } from '../../components/Pages/common/Enrollm
 import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { enrollmentNoteActionTypes } from '../../components/WidgetEnrollmentNote';
+import { eventNoteActionTypes } from '../../components/WidgetEventNote';
+import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 
 const alertVariants = {
     info: 'info',
@@ -152,5 +154,9 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
         addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
     [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: state =>
+        addErrorFeedback(state, { message: i18n.t('Could not save note') }),
+    [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: state =>
+        addErrorFeedback(state, { message: i18n.t('Could not save note') }),
+    [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: state =>
         addErrorFeedback(state, { message: i18n.t('Could not save note') }),
 }, 'feedbacks', []);

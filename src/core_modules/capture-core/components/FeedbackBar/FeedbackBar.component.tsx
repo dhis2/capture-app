@@ -33,7 +33,7 @@ const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
         <>
             <AlertStack>
                 {isAlertBarOpen && (
-                    <AlertBar {...alertVariant} duration={5000}>
+                    <AlertBar {...alertVariant} duration={5000} onHidden={onClose}>
                         {message}
                     </AlertBar>
                 )}

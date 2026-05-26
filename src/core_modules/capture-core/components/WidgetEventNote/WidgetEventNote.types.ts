@@ -12,6 +12,7 @@ export type ClientNote = {
     };
     storedBy: string;
     storedAt: string;
+    clientId: string;
 };
 
 export type FormNote = ClientNote & {
