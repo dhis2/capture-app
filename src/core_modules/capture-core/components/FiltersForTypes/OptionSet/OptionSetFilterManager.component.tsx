@@ -1,35 +1,27 @@
 import * as React from 'react';
-import { OptionSetFilter } from './OptionSetFilter.component';
-import type { OptionSetFilterData } from './types';
-
-type Props = {
-    filter: OptionSetFilterData | null,
-    filterTypeRef: (instance: any) => void,
-    singleSelect?: boolean | null,
-    handleCommitValue: () => void,
-};
+import { OptionSetFilter as OptionSetFilterInput } from './OptionSetFilter.component';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import type { OptionSetFilter, OptionSetFilterManagerProps, Value } from './optionSet.types';
 
 type State = {
-    value?: Array<any> | null,
+    value?: Value,
 };
 
-export class OptionSetFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: OptionSetFilterData | null, singleSelect: boolean) {
-        if (!filter) {
-            return undefined;
-        }
-
+export class OptionSetFilterManager extends React.Component<OptionSetFilterManagerProps, State> {
+    static calculateDefaultValueState(filter: OptionSetFilter | null, singleSelect: boolean) {
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
         return singleSelect ? filter.values[0] : filter.values;
     }
 
-    constructor(props: Props) {
+    constructor(props: OptionSetFilterManagerProps) {
         super(props);
         this.state = {
             value: OptionSetFilterManager.calculateDefaultValueState(this.props.filter, !!this.props.singleSelect),
         };
     }
 
-    handleCommitValue = (value: Array<any> | null) => {
+    handleCommitValue = (value: Value) => {
         this.setState({
             value,
         });
@@ -40,7 +32,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <OptionSetFilter
+            <OptionSetFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}

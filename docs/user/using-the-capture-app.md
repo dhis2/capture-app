@@ -446,10 +446,24 @@ assigned to a program stage.
 
     ![filter event](resources/images/filter_event.png)
 
+Each filter adapts to the data element's value type — for example, **numeric** data elements provide a range selector, **text** data elements a search input, and **date** data elements a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+
+#### Filter on empty or non-empty values
+
+Data element filters show two checkboxes at the top:
+
+- **Is empty** – matches events that have no value for the selected data element.
+- **Is not empty** – matches events that have any value for the selected data element.
+
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
+
+For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
+
 > **Note**
 >
-> Each filter adapts to the data element's value type — for example, **numeric** data elements provide a range selector, **text** data elements a search input, and **date** data elements a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
-
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status, assignee, etc.).
+>
+> Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
 
 ## Sort an event list { #capture_sort_event_list } 
 
@@ -462,11 +476,11 @@ assigned to a program stage.
 
 4. Click one of the column headers to sort the list on that data element in ascending order.
 
-    A small upward arrow is displayed next to the column to show that the list is sorted in ascending order.
+    A small upward arrow is displayed next to the column is marked blue to show that the list is sorted in ascending order.
 
 5. Click the column header again to sort the list on that data element in descending order.
 
-    A small downward arrow is displayed next to the column to show that the list is sorted in descending order.
+    A small downward arrow is displayed next to the column is marked blue to show that the list is sorted in descending order.
 
     ![sort event](resources/images/sort_event.png)
 
@@ -776,13 +790,35 @@ The results page shows up to five results at a time. You should try to use speci
 
 ### Filter the list
 
-Use the buttons above the list to filter it. Each filter adapts to the attribute's value type — for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+Use the buttons above the list to filter it.
 
 ![](resources/images/tei_list_filters.png)
 
-As an example, you could filter the list to show only tracked entity instances where you have been assigned an event: Click the "Assigned to" filter (1), select "Me" (2) and then "Apply" the changes (3).
+As an example, you could filter the list to show only tracked entity instances where the enrollment status is "Completed": Click the "Enrollment status" filter (1), select "Completed" (2) and then "Update" the changes (3).
 
 ![](resources/images/tei_list_filter_example.png)
+
+Each filter adapts to the attribute's value type — for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+
+
+#### Filter on empty or non-empty values
+
+Data element filters show two checkboxes at the top:
+
+- **Is empty** – matches events that have no value for the selected data element.
+- **Is not empty** – matches events that have any value for the selected data element.
+
+![](resources/images/tei_list_filter_isempty.png)
+
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
+
+For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
+
+> **Note**
+>
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status, assignee, etc.).
+>
+> Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
 
 ### Sort the list
 

@@ -1,44 +1,18 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { orientations } from '../../FormFields/Options/SelectBoxes';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
-import {
-    getMultiSelectBooleanFilterData,
-    getSingleSelectBooleanFilterData,
-} from './booleanFilterDataGetter';
+import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
+import { WithEmptyValueFilter } from '../EmptyValue';
+import type { BooleanFilterProps, Value } from './boolean.types';
 
-const getStyles: Readonly<any> = (theme: any) => ({
-    selectBoxesContainer: {
-        marginInlineEnd: theme.typography.pxToRem(-24),
-    },
-});
-
-type Value = Array<any> | string | boolean | null;
-
-type PlainProps = {
-    value?: Value;
-    onCommitValue: (value: Value) => void;
-    onUpdate?: (commitValue?: Value) => void;
-    allowMultiple: boolean;
-};
-
-type Props = PlainProps & WithStyles<typeof getStyles>;
-
-class BooleanFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
+export class BooleanFilter extends Component<
+    BooleanFilterProps
+> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const { value, allowMultiple } = this.props;
-
-        if (!value && value !== false) {
-            return null;
-        }
-
-        if (!allowMultiple) {
-            return getSingleSelectBooleanFilterData(value);
-        }
-
-        return getMultiSelectBooleanFilterData(value);
+        const { value } = this.props;
+        return getBooleanFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
@@ -58,23 +32,28 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     booleanFieldInstance: D2TrueFalse | null = null;
 
     render() {
-        const { onCommitValue, value, classes } = this.props;
+        const { onCommitValue, value } = this.props;
 
         return (
-            <div
-                className={classes.selectBoxesContainer}
-                onKeyDownCapture={this.handleKeyDown}
+            <WithEmptyValueFilter
+                value={value}
+                onCommitValue={onCommitValue}
+                disabled={this.props.disableEmptyValueFilter}
             >
-                <D2TrueFalse
-                    ref={this.setBooleanFieldInstance}
-                    allowMultiple={this.props.allowMultiple}
-                    value={value}
-                    onBlur={onCommitValue}
-                    orientation={orientations.VERTICAL}
-                />
-            </div>
+                {filteredValue => (
+                    <div
+                        onKeyDownCapture={this.handleKeyDown}
+                    >
+                        <D2TrueFalse
+                            ref={this.setBooleanFieldInstance}
+                            allowMultiple={this.props.allowMultiple}
+                            value={filteredValue}
+                            onBlur={onCommitValue}
+                            orientation={orientations.VERTICAL}
+                        />
+                    </div>
+                )}
+            </WithEmptyValueFilter>
         );
     }
 }
-
-export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain) as React.ComponentType<PlainProps>;

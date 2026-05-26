@@ -1,24 +1,24 @@
 import * as React from 'react';
 import log from 'loglevel';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
-import { DateFilter } from './DateFilter.component';
+import { DateFilter as DateFilterInput } from './DateFilter.component';
 import { mainOptionKeys } from './options';
-import { dateFilterTypes } from './constants';
-import type { DateFilterData, RelativeDateFilterData, AbsoluteDateFilterData } from './types';
-import type { Value } from './DateFilter.component';
+import { dateFilterTypes } from './date.const';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import type {
+    DateFilter,
+    DateFilterManagerProps,
+    RelativeDateFilterData,
+    AbsoluteDateFilterData,
+    Value,
+} from './date.types';
 import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
-
-type Props = {
-    filter?: DateFilterData | null;
-    filterTypeRef: (instance: any) => void;
-    handleCommitValue: (value?: any, isBlur?: boolean) => void;
-};
 
 type State = {
     value?: Value;
 };
 
-export class DateFilterManager extends React.Component<Props, State> {
+export class DateFilterManager extends React.Component<DateFilterManagerProps, State> {
     static convertDateForEdit(rawValue: string) {
         const localDate = convertIsoToLocalCalendar(rawValue);
         return localDate;
@@ -62,10 +62,9 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    static calculateDefaultValueState(filter?: DateFilterData | null) {
-        if (!filter) {
-            return undefined;
-        }
+    static calculateDefaultValueState(filter?: DateFilter | null) {
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
 
         if (filter.type === dateFilterTypes.RELATIVE) {
             if (filter.period) {
@@ -93,7 +92,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         return DateFilterManager.calculateAbsoluteRangeValueState(filter);
     }
 
-    constructor(props: Props) {
+    constructor(props: DateFilterManagerProps) {
         super(props);
         this.state = {
             value: DateFilterManager.calculateDefaultValueState(this.props.filter),
@@ -109,7 +108,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
-            <DateFilter
+            <DateFilterInput
                 value={this.state.value}
                 ref={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
