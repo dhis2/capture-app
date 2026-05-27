@@ -1,10 +1,11 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
+import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
 import type { ClientNote, FormNote, SaveContext } from './WidgetEventNote.types';
 
@@ -38,25 +39,19 @@ const createServerData = (eventId: string, note: string, useNewEndpoint: boolean
 export const addNoteForEventEpic = (
     action$: EpicAction<AddNoteActionPayload>,
     store: ReduxStore,
-    { querySingleResource, fromClientDate }: ApiUtils,
+    { fromClientDate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
-        switchMap((action: { payload: AddNoteActionPayload }) => {
+        map((action: { payload: AddNoteActionPayload }) => {
             const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
             const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
-            return querySingleResource({
-                resource: 'me',
-                params: {
-                    fields: 'firstName, surname, userName',
-                },
-            }).then((user) => {
-                const { firstName, surname, userName } = user;
-                const clientId = uuid();
+            const { firstName, surname, username } = CurrentUser.get();
+            const clientId = uuid();
 
-                const serverData = createServerData(eventId, payload.note, useNewEndpoint);
+            const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
                 const clientNote: ClientNote = {
                     value: payload.note,
@@ -65,7 +60,7 @@ export const addNoteForEventEpic = (
                         surname,
                         uid: clientId,
                     },
-                    storedBy: userName,
+                    storedBy: username,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                     clientId,
                 };
@@ -85,12 +80,11 @@ export const addNoteForEventEpic = (
                     noteClientId: clientId,
                 };
 
-                return batchActions([
-                    startAddNoteForEvent(eventId, serverData, state.currentSelections, saveContext),
-                    addNote(payload.dataEntryId, payload.itemId, formNote),
-                    addEventNote(eventId, clientNote),
-                ], batchActionTypes.ADD_NOTE_BATCH_FOR_EVENT);
-            });
+            return batchActions([
+                startAddNoteForEvent(eventId, serverData, state.currentSelections, saveContext),
+                addNote(payload.dataEntryId, payload.itemId, formNote),
+                addEventNote(eventId, clientNote),
+            ], batchActionTypes.ADD_NOTE_BATCH_FOR_EVENT);
         }));
 
 export const removeNoteForEventEpic = (action$: EpicAction<any, RemoveNoteActionMeta>) =>

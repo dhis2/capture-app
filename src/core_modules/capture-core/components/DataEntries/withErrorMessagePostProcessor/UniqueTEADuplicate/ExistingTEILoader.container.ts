@@ -5,4 +5,4 @@ const mapStateToProps = (state: any) => ({
     programId: state.newRelationshipRegisterTei.programId,
 });
 
-export const ExistingTEILoader = connect(mapStateToProps, () => ({}))(ExistingTEILoaderComponent as any);
+export const ExistingTEILoader = connect(mapStateToProps, () => ({}))(ExistingTEILoaderComponent);
