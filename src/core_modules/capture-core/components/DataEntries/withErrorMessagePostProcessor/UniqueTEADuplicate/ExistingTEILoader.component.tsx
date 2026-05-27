@@ -85,7 +85,7 @@ class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
                     resource: `tracker/trackedEntities/${id}`,
                     params: {
                         program: programId,
-                        fields: '*',
+                        fields: 'attributes[attribute,value]',
                     },
                 }),
             );
