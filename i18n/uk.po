@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-17T09:58:03.655Z\n"
+"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
@@ -737,6 +737,12 @@ msgstr "Зробити направлення"
 msgid "No available program stages"
 msgstr "Немає доступних етапів програми"
 
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
+msgid "Choose an enrollment to view the dashboard."
+msgstr "Виберіть реєстрацію, щоб переглянути інформаційну панель."
+
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
@@ -747,12 +753,6 @@ msgid ""
 msgstr ""
 "{{programName}} має категорії. Виберіть усі категорії, щоб переглянути "
 "дашборд."
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
-
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Виберіть реєстрацію, щоб переглянути інформаційну панель."
 
 msgid "There are no active enrollments."
 msgstr ""
@@ -876,14 +876,14 @@ msgstr "Дізнайтеся більше про додаток Фіксація
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
-msgstr "Або перегляньте усі доступні вам записи в програмі {{program}} "
-
-msgid "Or see all events accessible to you in {{program}}"
+msgid "Please select an organisation unit"
 msgstr ""
 
-msgid "Please select an organisation unit."
-msgstr "Будь-ласка, оберіть організаційний підрозділ."
+msgid "See working list without organisation unit"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}}"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Зареєстровані події"
@@ -1016,6 +1016,9 @@ msgstr "Все доступне"
 msgid "Selected"
 msgstr "Вибране"
 
+msgid "Please select an organisation unit."
+msgstr "Будь-ласка, оберіть організаційний підрозділ."
+
 msgid "Organisation unit scope"
 msgstr "Охоплення організаційного підрозділу"
 
@@ -1130,9 +1133,6 @@ msgstr ""
 msgid "Search for a {{title}}"
 msgstr ""
 
-msgid "Search for {{titleText}}"
-msgstr "Шукати {{titleText}}"
-
 msgid ""
 "You can also select a program from the top bar to search within that "
 "program."
@@ -1150,6 +1150,9 @@ msgid ""
 "Try selecting a different tracked entity type, or try searching in a program"
 " by choosing one from the top bar."
 msgstr ""
+
+msgid "Search for {{titleText}}"
+msgstr "Шукати {{titleText}}"
 
 msgid "Search {{name}}"
 msgstr "Пошук {{name}}"
@@ -1312,6 +1315,9 @@ msgid "Unsaved changes"
 msgstr ""
 
 msgid "Continue data entry"
+msgstr ""
+
+msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
