@@ -7,6 +7,8 @@ import { pipe } from 'capture-core-utils';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
+import { CurrentUser } from '../../utils/userInfo/CurrentUser';
+import { generateUID } from '../../utils/uid/generateUID';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
 import {
@@ -14,7 +16,6 @@ import {
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
-    useNoteDetails,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
@@ -52,7 +53,6 @@ export const WidgetEventSchedule = ({
     });
     const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
-    const { currentUser, noteId }: { currentUser: any, noteId: string } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
     const [validation, setValidation] = useState<any>();
@@ -147,18 +147,14 @@ export const WidgetEventSchedule = ({
     ]);
 
     const onAddNote = (note: string) => {
-        if (currentUser) {
-            const newNote = {
-                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-                value: note,
-                createdBy: {
-                    firstName: currentUser.firstName,
-                    surname: currentUser.surname,
-                },
-                note: noteId,
-            };
-            setNotes([...notes, newNote]);
-        }
+        const { firstName, surname } = CurrentUser.get();
+        const newNote = {
+            storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+            value: note,
+            createdBy: { firstName, surname },
+            note: generateUID(),
+        };
+        setNotes([...notes, newNote]);
     };
 
     const onSetAssignee = useCallback((user: any) => setAssignee(user), []);

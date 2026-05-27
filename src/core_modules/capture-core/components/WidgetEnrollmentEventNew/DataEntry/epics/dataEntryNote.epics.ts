@@ -1,8 +1,9 @@
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
-import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import moment from 'moment';
 import { ApiUtils, ReduxStore } from 'capture-core-utils/types';
+import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
 import {
     newEventWidgetDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -14,32 +15,24 @@ import {
 export const addNoteForNewEnrollmentEventEpic = (
     action$: any,
     store: ReduxStore,
-    { querySingleResource, fromClientDate }: ApiUtils,
+    { fromClientDate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
-        switchMap((action: any) => {
+        map((action: any) => {
             const payload = action.payload;
-
-            return querySingleResource({
-                resource: 'me',
-                params: {
-                    fields: 'firstName,surname',
+            const { firstName, surname } = CurrentUser.get();
+            const clientId = uuid();
+            const note = {
+                value: payload.note,
+                createdBy: {
+                    firstName,
+                    surname,
+                    uid: clientId,
                 },
-            }).then((user: any) => {
-                const { firstName, surname } = user;
-                const clientId = uuid();
-                const note = {
-                    value: payload.note,
-                    createdBy: {
-                        firstName,
-                        surname,
-                        uid: clientId,
-                    },
-                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-                    clientId: uuid(),
-                };
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                clientId: uuid(),
+            };
 
-                return addNote(payload.dataEntryId, payload.itemId, note);
-            });
+            return addNote(payload.dataEntryId, payload.itemId, note);
         }));
