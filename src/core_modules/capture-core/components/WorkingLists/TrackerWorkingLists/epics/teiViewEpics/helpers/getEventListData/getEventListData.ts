@@ -16,6 +16,14 @@ import { addTEIsData } from './addTEIsData';
 import { getColumnsQueryArgs } from './getColumnsQueryArgs';
 import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
+const LISTING_FIELDS =
+    'event,status,program,enrollment,trackedEntity,'
+    + 'occurredAt,scheduledAt,orgUnit,'
+    + 'assignedUser[uid,username,firstName,surname],'
+    + 'dataValues[dataElement,value]';
+
+const DOWNLOAD_FIELDS = '*';
+
 const createApiEventQueryArgs = (
     {
         page,
@@ -45,7 +53,7 @@ const createApiEventQueryArgs = (
         [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'CAPTURE',
         program,
         programStage,
-        fields: '*',
+        fields: LISTING_FIELDS,
     };
 
     return getScheduledDateQueryArgs(queryArgs);
@@ -63,7 +71,7 @@ const createApiTEIsQueryArgs =
             [filterQueryParam]: trackedEntityIds,
             fields:
                 'trackedEntity,createdAt,attributes[attribute,value],' +
-                'programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]',
+                'programOwners[orgUnit],enrollments[enrollment]',
         };
     };
 
@@ -86,7 +94,7 @@ export const getEventListData = async (
             recordContainers: [],
             request: {
                 url: urlEvents,
-                queryParams: queryParamsEvents,
+                queryParams: { ...queryParamsEvents, fields: DOWNLOAD_FIELDS },
             },
         };
     }
@@ -118,7 +126,7 @@ export const getEventListData = async (
         recordContainers: clientWithSubvalues,
         request: {
             url: urlEvents,
-            queryParams: queryParamsEvents,
+            queryParams: { ...queryParamsEvents, fields: DOWNLOAD_FIELDS },
         },
     };
 };

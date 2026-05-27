@@ -1,3 +1,24 @@
+## [106.2.7](https://github.com/dhis2/capture-app/compare/v106.2.6...v106.2.7) (2026-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-21152] enrollment dashboard shows old information  ([#4546](https://github.com/dhis2/capture-app/issues/4546)) ([3a7eb23](https://github.com/dhis2/capture-app/commit/3a7eb2378f718008d596a41356ad3657ed8e727c))
+
+## [106.2.6](https://github.com/dhis2/capture-app/compare/v106.2.5...v106.2.6) (2026-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-21508] Fix priority typo in storeProgramRules ([#4564](https://github.com/dhis2/capture-app/issues/4564)) ([88b6111](https://github.com/dhis2/capture-app/commit/88b611195ec5f334805ee4c5c885918e3fbe530b))
+
+## [106.2.5](https://github.com/dhis2/capture-app/compare/v106.2.4...v106.2.5) (2026-05-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4580](https://github.com/dhis2/capture-app/issues/4580)) ([355b823](https://github.com/dhis2/capture-app/commit/355b823d4255971d33753c3364a7afa3fc1cef27))
+
 ## [106.2.4](https://github.com/dhis2/capture-app/compare/v106.2.3...v106.2.4) (2026-05-21)
 
 
