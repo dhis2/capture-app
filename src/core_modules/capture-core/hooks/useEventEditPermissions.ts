@@ -1,16 +1,17 @@
 import { useProgramExpiryForUser } from './useProgramExpiryForUser';
 import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
-import { dataElementTypes, getProgramEventAccess, ProgramStage } from '../metaData';
-import { convertFormToClient } from '../converters';
+import { getProgramEventAccess, ProgramStage } from '../metaData';
 import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
 import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
 
+// occurredAtClient/completedAtClient are expected in client format. Callers that hold form values
+// must run convertFormToClient first, callers that hold server values convertServerToClient.
 type Input = {
     programId: string,
-    stage: ProgramStage,
+    stage?: ProgramStage | null,
     eventStatus?: string,
-    occurredAt?: string,
-    completedAt?: string,
+    occurredAtClient?: string,
+    completedAtClient?: string,
 };
 
 type Output = {
@@ -34,18 +35,17 @@ export const useEventEditPermissions = ({
     programId,
     stage,
     eventStatus,
-    occurredAt,
-    completedAt,
+    occurredAtClient,
+    completedAtClient,
 }: Input): Output => {
-    const eventAccess = getProgramEventAccess(programId, stage.id);
+    const eventAccess = getProgramEventAccess(programId, stage?.id ?? null);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
 
-    const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
-    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
-    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAt, completeEventsExpiryDays);
+    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
+    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
 
-    const canEditCompletedEvent = !(stage.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
+    const canEditCompletedEvent = !(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
 
     const readOnly = !eventAccess?.write
         || !isEventWithinValidPeriod

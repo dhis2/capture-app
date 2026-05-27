@@ -8,6 +8,7 @@ import {
 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { FEATURES, useFeature } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
 import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -17,8 +18,15 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
-import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
+import {
+    useProgramExpiryForUser,
+    useEnrollmentEditEventPageMode,
+    useAvailableProgramStages,
+    useEventEditPermissions,
+} from '../../hooks';
 import { useAuthorities } from '../../utils/authority/useAuthorities';
+import { convertFormToClient } from '../../converters';
+import { dataElementTypes } from '../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -107,6 +115,29 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
+    const {
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
+        readOnly,
+    } = useEventEditPermissions({
+        programId,
+        stage,
+        eventStatus,
+        occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: completedAt,
+    });
+
+    const getDeleteDisabledMessage = () => {
+        if (!isEventWithinValidPeriod || !isWithinCompleteExpiry) {
+            return i18n.t('This event is outside the edit period');
+        }
+        if (!canEditCompletedEvent) {
+            return i18n.t('This event has been completed');
+        }
+        return undefined;
+    };
+
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
             <WidgetTwoEventWorkspace
@@ -129,8 +160,7 @@ const WidgetEventEditPlain = ({
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            occurredAt={occurredAt}
-                            completedAt={completedAt}
+                            readOnly={readOnly}
                         />
                     }
                     noncollapsible
@@ -168,6 +198,8 @@ const WidgetEventEditPlain = ({
                                     canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
                                     hasDeleteButton
+                                    deleteDisabled={readOnly}
+                                    deleteDisabledMessage={getDeleteDisabledMessage()}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}

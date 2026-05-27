@@ -5,7 +5,8 @@ import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
-import { type ProgramStage } from '../../../../metaData';
+import { dataElementTypes, type ProgramStage } from '../../../../metaData';
+import { convertFormToClient } from '../../../../converters';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
@@ -105,8 +106,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         programId,
         stage: programStage,
         eventStatus,
-        occurredAt,
-        completedAt,
+        occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: completedAt,
     });
     const showEditButton = !isEditEventPage && !readOnly;
 

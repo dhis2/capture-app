@@ -5,10 +5,7 @@ import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, space
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
-import {
-    useEnrollmentEditEventPageMode,
-    useEventEditPermissions,
-} from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -39,8 +36,7 @@ const WidgetHeaderPlain = ({
     orgUnit,
     setChangeLogIsOpen,
     classes,
-    occurredAt,
-    completedAt,
+    readOnly,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -49,13 +45,6 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
-    const { readOnly } = useEventEditPermissions({
-        programId,
-        stage,
-        eventStatus,
-        occurredAt,
-        completedAt,
-    });
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
 

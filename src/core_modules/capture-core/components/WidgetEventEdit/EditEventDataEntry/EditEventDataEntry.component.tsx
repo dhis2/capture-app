@@ -450,6 +450,8 @@ type Props = {
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
     canUncompleteEvent?: boolean;
+    deleteDisabled?: boolean;
+    deleteDisabledMessage?: string;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;

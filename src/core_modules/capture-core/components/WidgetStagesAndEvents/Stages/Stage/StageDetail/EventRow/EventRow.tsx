@@ -11,7 +11,7 @@ import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton } from './DeleteActionButton';
 import { SkipAction } from './SkipAction';
 import { DeleteActionModal } from './DeleteActionModal';
-import { useProgramExpiryForUser } from '../../../../../../hooks';
+import { useProgramExpiryForUser, useCompleteEventsExpiryForUser } from '../../../../../../hooks';
 
 const styles: Readonly<any> = {
     row: {
@@ -38,6 +38,7 @@ const EventRowPlain = ({
     eventDetails,
     cells,
     stageWriteAccess,
+    blockEntryForm,
     onDeleteEvent,
     onRollbackDeleteEvent,
     onUpdateEventStatus,
@@ -50,6 +51,7 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
 
     return (
         <DataTableRow
@@ -89,7 +91,11 @@ const EventRowPlain = ({
                                         setActionsOpen={setActionsOpen}
                                         setDeleteModalOpen={setDeleteModalOpen}
                                         occurredAt={eventDetails.occurredAt}
+                                        completedAt={eventDetails.completedAt}
+                                        eventStatus={eventDetails.status}
+                                        blockEntryForm={blockEntryForm}
                                         expiryPeriod={expiryPeriod}
+                                        completeEventsExpiryDays={completeEventsExpiryDays}
                                     />
                                 </FlyoutMenu>
                             )}
