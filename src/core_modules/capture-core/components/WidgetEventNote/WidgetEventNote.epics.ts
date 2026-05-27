@@ -53,32 +53,32 @@ export const addNoteForEventEpic = (
 
             const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
-                const clientNote: ClientNote = {
-                    value: payload.note,
-                    lastUpdatedBy: {
-                        firstName,
-                        surname,
-                        uid: clientId,
-                    },
-                    storedBy: username,
-                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-                    clientId,
-                };
-                const formNote: FormNote = {
-                    ...clientNote,
-                    storedAt: clientNote.storedAt,
-                    createdBy: {
-                        firstName,
-                        surname,
-                        uid: clientId,
-                    },
-                };
-                const saveContext: SaveContext = {
-                    dataEntryId: payload.dataEntryId,
-                    itemId: payload.itemId,
-                    eventId,
-                    noteClientId: clientId,
-                };
+            const clientNote: ClientNote = {
+                value: payload.note,
+                lastUpdatedBy: {
+                    firstName,
+                    surname,
+                    uid: clientId,
+                },
+                storedBy: username,
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                clientId,
+            };
+            const formNote: FormNote = {
+                ...clientNote,
+                storedAt: clientNote.storedAt,
+                createdBy: {
+                    firstName,
+                    surname,
+                    uid: clientId,
+                },
+            };
+            const saveContext: SaveContext = {
+                dataEntryId: payload.dataEntryId,
+                itemId: payload.itemId,
+                eventId,
+                noteClientId: clientId,
+            };
 
             return batchActions([
                 startAddNoteForEvent(eventId, serverData, state.currentSelections, saveContext),
