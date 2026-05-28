@@ -13,7 +13,6 @@ export const actionTypes = {
 
 export const batchActionTypes = {
     ADD_NOTE_BATCH_FOR_ENROLLMENT: 'AddNoteBatchForEnrollment',
-    REMOVE_NOTE_BATCH_FOR_ENROLLMENT: 'RemoveNoteBatchForEnrollment',
 };
 
 export const requestAddNoteForEnrollment = (enrollmentId: string, note: string) =>

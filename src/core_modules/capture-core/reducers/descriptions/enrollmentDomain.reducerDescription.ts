@@ -265,7 +265,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             ...state,
             enrollment: {
                 ...state.enrollment,
-                notes: state.enrollment.notes.filter((n: any) => n?.createdBy?.uid !== noteClientId),
+                notes: state.enrollment.notes.filter((n: any) => n?.clientId !== noteClientId),
             },
         }),
         [editEventActionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY]: (state, { payload: { eventId } }) => {

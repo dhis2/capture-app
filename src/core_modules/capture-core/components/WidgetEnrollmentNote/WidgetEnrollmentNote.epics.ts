@@ -47,6 +47,7 @@ export const addNoteForEnrollmentEpic = (
                 },
                 storedBy: username,
                 storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                clientId,
             };
 
             const saveContext: SaveContext = {
