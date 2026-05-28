@@ -206,7 +206,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 [orgUnitModeQueryParam]: 'ACCESSIBLE',
-                fields: 'trackedEntity,trackedEntityType,orgUnit,attributes,enrollments',
+                fields: 'trackedEntity,orgUnit,attributes,enrollments',
             };
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
@@ -373,7 +373,7 @@ export const fallbackSearchEpic = (
                 page,
                 pageSize,
                 [orgUnitModeQueryParam]: 'ACCESSIBLE',
-                fields: 'trackedEntity,trackedEntityType,orgUnit,attributes,enrollments,',
+                fields: 'trackedEntity,orgUnit,attributes,enrollments',
             };
 
             return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(

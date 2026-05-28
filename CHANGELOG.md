@@ -1,3 +1,10 @@
+## [106.2.7](https://github.com/dhis2/capture-app/compare/v106.2.6...v106.2.7) (2026-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-21152] enrollment dashboard shows old information  ([#4546](https://github.com/dhis2/capture-app/issues/4546)) ([3a7eb23](https://github.com/dhis2/capture-app/commit/3a7eb2378f718008d596a41356ad3657ed8e727c))
+
 ## [106.2.6](https://github.com/dhis2/capture-app/compare/v106.2.5...v106.2.6) (2026-05-26)
 
 

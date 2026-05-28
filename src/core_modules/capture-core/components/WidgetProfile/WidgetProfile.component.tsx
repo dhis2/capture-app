@@ -15,9 +15,9 @@ import {
     useProgram,
     useTrackedEntityInstances,
     useClientAttributesWithSubvalues,
-    useUserRoles,
     useTeiDisplayName,
 } from './hooks';
+import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
@@ -57,15 +57,13 @@ const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalSta
 const computeLoadingState = (
     programsLoading: boolean,
     trackedEntityInstancesLoading: boolean,
-    userRolesLoading: boolean,
     configIsFetched: boolean,
-) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
+) => programsLoading || trackedEntityInstancesLoading || !configIsFetched;
 
 const computeError = (
     programsError: any,
     trackedEntityInstancesError: any,
-    userRolesError: any,
-) => programsError || trackedEntityInstancesError || userRolesError;
+) => programsError || trackedEntityInstancesError;
 
 const WidgetProfilePlain = ({
     teiId,
@@ -99,11 +97,7 @@ const WidgetProfilePlain = ({
         trackedEntityTypeWriteAccess,
     } = useEnrollmentAccessContext();
     const trackedEntityTypeName = program?.trackedEntityType?.displayName;
-    const {
-        loading: userRolesLoading,
-        error: userRolesError,
-        userRoles,
-    } = useUserRoles();
+    const userRoles = CurrentUser.get().userRoles;
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 
@@ -119,8 +113,8 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
-    const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, configIsFetched);
+    const error = computeError(programsError, trackedEntityInstancesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
         program as any,
