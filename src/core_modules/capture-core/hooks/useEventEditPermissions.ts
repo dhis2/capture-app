@@ -4,8 +4,6 @@ import { getProgramEventAccess, ProgramStage } from '../metaData';
 import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
 import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
 
-// occurredAtClient/completedAtClient are expected in client format. Callers that hold form values
-// must run convertFormToClient first, callers that hold server values convertServerToClient.
 type Input = {
     programId: string,
     stage?: ProgramStage | null,

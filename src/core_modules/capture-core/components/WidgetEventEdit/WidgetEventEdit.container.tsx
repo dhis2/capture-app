@@ -8,7 +8,6 @@ import {
 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { FEATURES, useFeature } from 'capture-core-utils';
-import i18n from '@dhis2/d2-i18n';
 import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -115,28 +114,13 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
-    const {
-        isEventWithinValidPeriod,
-        isWithinCompleteExpiry,
-        canEditCompletedEvent,
-        readOnly,
-    } = useEventEditPermissions({
+    const { readOnly } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-
-    const getDeleteDisabledMessage = () => {
-        if (!isEventWithinValidPeriod || !isWithinCompleteExpiry) {
-            return i18n.t('This event is outside the edit period');
-        }
-        if (!canEditCompletedEvent) {
-            return i18n.t('This event has been completed');
-        }
-        return undefined;
-    };
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -197,9 +181,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton
-                                    deleteDisabled={readOnly}
-                                    deleteDisabledMessage={getDeleteDisabledMessage()}
+                                    hasDeleteButton={!readOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}

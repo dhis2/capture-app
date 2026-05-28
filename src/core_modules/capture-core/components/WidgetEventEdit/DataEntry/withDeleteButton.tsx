@@ -1,7 +1,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import type { Props, State } from './withDeleteButton.types';
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
@@ -18,22 +17,15 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
             return this.innerInstance;
         }
 
-        renderDeleteButton = (hasDeleteButton?: boolean) => {
-            const { deleteDisabled, deleteDisabledMessage } = this.props;
-            const disabled = !this.props.formFoundation.access.data.write || Boolean(deleteDisabled);
-            return hasDeleteButton ? (<div>
-                <ConditionalTooltip
-                    content={deleteDisabledMessage}
-                    enabled={Boolean(deleteDisabled && deleteDisabledMessage)}
+        renderDeleteButton = (hasDeleteButton?: boolean) => (
+            hasDeleteButton ? (<div>
+                <Button
+                    onClick={() => { this.setState({ isOpen: true }); }}
+                    disabled={!this.props.formFoundation.access.data.write}
+                    destructive
                 >
-                    <Button
-                        onClick={() => { this.setState({ isOpen: true }); }}
-                        disabled={disabled}
-                        destructive
-                    >
-                        {i18n.t('Delete')}
-                    </Button>
-                </ConditionalTooltip>
+                    {i18n.t('Delete')}
+                </Button>
                 {this.state.isOpen && (
                     <Modal
                         hide={!this.state.isOpen}
@@ -69,11 +61,11 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                         </ModalActions>
                     </Modal>
                 )}
-            </div>) : null;
-        };
+            </div>) : null
+        );
 
         render() {
-            const { onDelete, hasDeleteButton, deleteDisabled, deleteDisabledMessage, ...passOnProps } = this.props;
+            const { onDelete, hasDeleteButton, ...passOnProps } = this.props;
 
             return (
                 <InnerComponent
