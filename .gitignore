@@ -40,3 +40,6 @@ src/locales/
 # Cursor
 .cursorrules
 .cursor
+
+# local devcontainer overrides
+.devcontainer/docker-compose.override.yml
