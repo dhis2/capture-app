@@ -28,11 +28,20 @@ jobs:
       - uses: actions/cache@v4
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install safe-chain
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.5.3/install-safe-chain.sh | sh -s -- --ci
 
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
+        env:
+          SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 120
+          SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@dhis2/*"
         run: yarn install --frozen-lockfile
 
   lint:
@@ -48,8 +57,10 @@ jobs:
       - uses: actions/cache@v4
         id: yarn-cache
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
 
       - name: Lint
         run: yarn linter:check
@@ -67,8 +78,10 @@ jobs:
       - uses: actions/cache@v4
         id: yarn-cache
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
 
       - name: TypeScript
         run: yarn tsc:check
@@ -86,8 +99,10 @@ jobs:
       - uses: actions/cache@v4
         id: yarn-cache
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
 
       - name: Unit tests
         run: yarn test
@@ -150,9 +165,18 @@ jobs:
           echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
           echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
 
+      - uses: actions/cache@v4
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          install: false
           record: ${{ env.SHOULD_RECORD }}
           parallel: ${{ env.SHOULD_RECORD }}
           group: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}
@@ -188,8 +212,10 @@ jobs:
       - uses: actions/cache@v4
         id: yarn-cache
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
 
       - name: Build
         run: yarn build
@@ -222,8 +248,10 @@ jobs:
       - uses: actions/cache@v4
         id: yarn-cache
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
 
       - uses: dhis2/action-semantic-release@use-yarn-version-prepare
         with:
