@@ -154,9 +154,9 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
         addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
     [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: state =>
-        addErrorFeedback(state, { message: i18n.t('Could not save note') }),
+        addErrorFeedback(state, { message: i18n.t('Could not save enrollment note') }),
     [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: state =>
-        addErrorFeedback(state, { message: i18n.t('Could not save note') }),
+        addErrorFeedback(state, { message: i18n.t('Could not save event note') }),
     [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: state =>
-        addErrorFeedback(state, { message: i18n.t('Could not save note') }),
+        addErrorFeedback(state, { message: i18n.t('Could not save event note') }),
 }, 'feedbacks', []);
