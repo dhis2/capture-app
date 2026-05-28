@@ -59,7 +59,7 @@
         "regenerator-runtime": "^0.14.1",
         "reselect": "^4.1.7",
         "rxjs": "^7.8.2",
-        "typeface-roboto": "^0.0.75",
+        "typeface-roboto": "^1.1.13",
         "uuid": "^9.0.0",
         "zod": "^3.24.4"
     },
