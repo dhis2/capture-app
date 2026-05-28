@@ -67,7 +67,7 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDa
                 },
                 storedBy: username,
                 storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-                clientId,
+                clientId: uuid(),
             };
             return batchActions([
                 startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),

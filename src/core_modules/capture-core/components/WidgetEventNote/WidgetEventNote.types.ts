@@ -3,16 +3,23 @@ export type Props = {
     dataEntryId: string;
 };
 
-export type FormNote = {
+export type ClientNote = {
     value: string;
-    createdBy: {
+    lastUpdatedBy: {
         firstName: string;
         surname: string;
         uid: string;
     };
     storedBy: string;
     storedAt: string;
-    clientId: string;
+};
+
+export type FormNote = ClientNote & {
+    createdBy: {
+        firstName: string;
+        surname: string;
+        uid: string;
+    };
 };
 
 export type SaveContext = {

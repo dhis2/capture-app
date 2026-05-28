@@ -11,6 +11,7 @@ export const actionTypes = {
 
 export const batchActionTypes = {
     ADD_NOTE_BATCH_FOR_EVENT: 'AddNoteBatchForEvent',
+    REMOVE_NOTE_BATCH_FOR_EVENT: 'RemoveNoteBatchForEvent',
 };
 
 export const requestAddNoteForEvent = (itemId: string, dataEntryId: string, note: string) =>

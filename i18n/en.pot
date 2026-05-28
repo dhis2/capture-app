@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-28T07:31:16.181Z\n"
-"PO-Revision-Date: 2026-05-28T07:31:16.181Z\n"
+"POT-Creation-Date: 2026-05-28T13:24:01.386Z\n"
+"PO-Revision-Date: 2026-05-28T13:24:01.386Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2233,12 +2233,6 @@ msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
-
-msgid "Could not save enrollment note"
-msgstr "Could not save enrollment note"
-
-msgid "Could not save event note"
-msgstr "Could not save event note"
 
 msgid "There was an error fetching metadata"
 msgstr "There was an error fetching metadata"
