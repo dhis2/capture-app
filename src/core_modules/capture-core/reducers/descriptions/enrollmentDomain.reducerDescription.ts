@@ -1,7 +1,6 @@
 import { createReducerDescription } from '../../trackerRedux';
 import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
-import { actionTypes as enrollmentNoteActionTypes }
-    from '../../components/WidgetEnrollmentNote/WidgetEnrollmentNote.actions';
+import { enrollmentNoteActionTypes } from '../../components/WidgetEnrollmentNote';
 import { actionTypes as editEventActionTypes }
     from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { newEventWidgetActionTypes } from '../../components/WidgetEnrollmentEventNew/Validated/validated.actions';

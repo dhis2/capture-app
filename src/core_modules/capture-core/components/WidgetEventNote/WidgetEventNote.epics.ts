@@ -50,11 +50,6 @@ export const addNoteForEventEpic = (
 
             const formNote: FormNote = {
                 value: payload.note,
-                lastUpdatedBy: {
-                    firstName,
-                    surname,
-                    uid: clientId,
-                },
                 createdBy: {
                     firstName,
                     surname,

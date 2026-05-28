@@ -5,11 +5,6 @@ export type Props = {
 
 export type FormNote = {
     value: string;
-    lastUpdatedBy: {
-        firstName: string;
-        surname: string;
-        uid: string;
-    };
     createdBy: {
         firstName: string;
         surname: string;
