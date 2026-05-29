@@ -71,7 +71,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (_state, action) =>
         addErrorFeedback(action.payload),
     [workingListsCommonActionTypes.LIST_VIEW_INIT_ERROR]: (_state, action) =>
-        addErrorFeedback(action.payload.errorMessage),
+        addErrorFeedback({ message: action.payload.errorMessage }),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (_state, action) => {
         const error = action.payload;
         const errorMessage = isString(error) ? error : error.message;
