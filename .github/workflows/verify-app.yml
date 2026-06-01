@@ -20,47 +20,24 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install safe-chain
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.5.3/install-safe-chain.sh | sh -s -- --ci
-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        env:
-          SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 120
-          SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@dhis2/*"
-        run: yarn install --frozen-lockfile
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
   lint:
     runs-on: ubuntu-latest
     needs: install
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - name: Lint
         run: yarn linter:check
@@ -70,18 +47,12 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     needs: install
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - name: TypeScript
         run: yarn tsc:check
@@ -91,18 +62,12 @@ jobs:
     needs: install
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - name: Unit tests
         run: yarn test
@@ -127,7 +92,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.specs }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Generate test matrix
         id: set-matrix
         run: |
@@ -144,10 +109,10 @@ jobs:
     env:
       SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
       - name: Set Cypress Environment Variables
         run: |
@@ -165,13 +130,7 @@ jobs:
           echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
           echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -204,23 +163,17 @@ jobs:
     needs: [lint, typescript, unit-tests]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - name: Build
         run: yarn build
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: app-build
           path: |
@@ -233,25 +186,19 @@ jobs:
     needs: build
     if: "!github.event.push.repository.fork && !contains(github.event.head_commit.message, '[skip ci]') && github.actor != 'dependabot[bot]'"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           token: ${{ env.GH_TOKEN }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           name: app-build
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node_modules-cypress-${{ hashFiles('**/yarn.lock') }}
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - uses: dhis2/action-semantic-release@use-yarn-version-prepare
         with:
