@@ -33,4 +33,4 @@ runs:
       env:
         SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 120
         SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@dhis2/*"
-      run: yarn install --frozen-lockfile --safe-chain-logging=verbose
+      run: yarn install --frozen-lockfile
