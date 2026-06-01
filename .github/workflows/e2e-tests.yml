@@ -122,7 +122,7 @@ jobs:
             - uses: ./.github/actions/safe-yarn-install-using-cache
             
             - name: Cypress run
-              uses: cypress-io/github-action@v6
+              uses: cypress-io/github-action@v7
               with:
                   install: false
                   record: ${{ env.SHOULD_RECORD }}
