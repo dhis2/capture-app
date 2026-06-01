@@ -82,8 +82,8 @@ const WidgetFeedbackContentComponent = ({ feedback, feedbackEmptyText, classes }
         if (!legendSetId) return undefined;
         const legends = legendSetsById[legendSetId];
         if (!legends?.length) return undefined;
-        const numeric = parseFloat(value);
-        if (isNaN(numeric)) return undefined;
+        const numeric = Number.parseFloat(value);
+        if (Number.isNaN(numeric)) return undefined;
         return legends.find(l => numeric >= l.startValue && numeric < l.endValue)?.color;
     };
 
