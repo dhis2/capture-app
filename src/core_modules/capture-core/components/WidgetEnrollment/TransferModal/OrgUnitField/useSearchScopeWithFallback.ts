@@ -4,8 +4,15 @@ type Props = {
     searchText?: string;
 };
 
+type OrgUnit = { id: string; path: string };
+type MeOrgUnitScope = {
+    teiSearchOrganisationUnits: Array<OrgUnit>;
+    organisationUnits: Array<OrgUnit>;
+};
+type OrgUnitsResponse = { organisationUnits: Array<OrgUnit> };
+
 export const useSearchScopeWithFallback = ({ searchText }: Props) => {
-    const { data: orgUnitRoots, isInitialLoading } = useApiMetadataQuery(
+    const { data: orgUnitRoots, isInitialLoading } = useApiMetadataQuery<MeOrgUnitScope, Array<OrgUnit>>(
         ['organisationUnits', 'userOrgUnitScope'],
         {
             resource: 'me',
@@ -15,16 +22,15 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         },
         {
             enabled: !searchText,
-            select: (data) => {
-                const { teiSearchOrganisationUnits, organisationUnits } = data as any;
-                return teiSearchOrganisationUnits.length
-                    ? teiSearchOrganisationUnits
-                    : organisationUnits;
-            },
+            select: ({ teiSearchOrganisationUnits, organisationUnits }) =>
+                (teiSearchOrganisationUnits.length ? teiSearchOrganisationUnits : organisationUnits),
         },
     );
 
-    const { data: searchOrgUnits, isInitialLoading: isInitialLoadingSearch } = useApiMetadataQuery(
+    const {
+        data: searchOrgUnits,
+        isInitialLoading: isInitialLoadingSearch,
+    } = useApiMetadataQuery<OrgUnitsResponse, Array<OrgUnit>>(
         ['organisationUnits', 'userOrgUnitScope', 'search', searchText],
         {
             resource: 'organisationUnits',
@@ -39,10 +45,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         {
             enabled: Boolean(searchText),
             cacheTime: 120 * 60 * 1000,
-            select: (data) => {
-                const { organisationUnits } = data as any;
-                return organisationUnits;
-            },
+            select: ({ organisationUnits }) => organisationUnits,
         },
     );
 
