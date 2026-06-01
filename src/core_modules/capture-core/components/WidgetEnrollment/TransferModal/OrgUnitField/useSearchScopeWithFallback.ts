@@ -1,18 +1,36 @@
-import { useMemo } from 'react';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
-import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
 
 type Props = {
     searchText?: string;
 };
 
-export const useSearchScopeWithFallback = ({ searchText }: Props) => {
-    const orgUnitRootsFromUser = useMemo(() => {
-        const { teiSearchOrganisationUnits, organisationUnits } = CurrentUser.get();
-        return teiSearchOrganisationUnits.length ? teiSearchOrganisationUnits : organisationUnits;
-    }, []);
+type OrgUnit = { id: string; path: string };
+type MeOrgUnitScope = {
+    teiSearchOrganisationUnits: Array<OrgUnit>;
+    organisationUnits: Array<OrgUnit>;
+};
+type OrgUnitsResponse = { organisationUnits: Array<OrgUnit> };
 
-    const { data: searchOrgUnits, isInitialLoading: isInitialLoadingSearch } = useApiMetadataQuery(
+export const useSearchScopeWithFallback = ({ searchText }: Props) => {
+    const { data: orgUnitRoots, isInitialLoading } = useApiMetadataQuery<MeOrgUnitScope, Array<OrgUnit>>(
+        ['organisationUnits', 'userOrgUnitScope'],
+        {
+            resource: 'me',
+            params: {
+                fields: 'teiSearchOrganisationUnits[id,path],organisationUnits[id,path]',
+            },
+        },
+        {
+            enabled: !searchText,
+            select: ({ teiSearchOrganisationUnits, organisationUnits }) =>
+                (teiSearchOrganisationUnits.length ? teiSearchOrganisationUnits : organisationUnits),
+        },
+    );
+
+    const {
+        data: searchOrgUnits,
+        isInitialLoading: isInitialLoadingSearch,
+    } = useApiMetadataQuery<OrgUnitsResponse, Array<OrgUnit>>(
         ['organisationUnits', 'userOrgUnitScope', 'search', searchText],
         {
             resource: 'organisationUnits',
@@ -27,15 +45,12 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         {
             enabled: Boolean(searchText),
             cacheTime: 120 * 60 * 1000,
-            select: (data) => {
-                const { organisationUnits } = data as any;
-                return organisationUnits;
-            },
+            select: ({ organisationUnits }) => organisationUnits,
         },
     );
 
     return {
-        orgUnitRoots: searchText?.length ? searchOrgUnits : orgUnitRootsFromUser,
-        isLoading: searchText?.length ? isInitialLoadingSearch : false,
+        orgUnitRoots: searchText?.length ? searchOrgUnits : orgUnitRoots,
+        isLoading: searchText?.length ? isInitialLoadingSearch : isInitialLoading,
     };
 };
