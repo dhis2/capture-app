@@ -59,43 +59,6 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-const EnrollmentReadOnlyBadge = () => {
-    const {
-        isEventPage,
-        currentStageWriteAccess,
-        programWriteAccess,
-        trackedEntityTypeWriteAccess,
-        anyStageWriteAccess,
-        anyStageReadAccess,
-        trackedEntityTypeName,
-    } = useEnrollmentAccessContext();
-
-    if (isEventPage) {
-        if (currentStageWriteAccess) return null;
-        return (
-            <ReadOnlyBadge
-                programStageWriteAccess={false}
-                trackedEntityName={trackedEntityTypeName}
-                inlineLabel
-            />
-        );
-    }
-
-    const stagesEffectivelyReadOnly = !anyStageWriteAccess && anyStageReadAccess;
-    const showAllMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && stagesEffectivelyReadOnly;
-    if (!showAllMissing) return null;
-
-    return (
-        <ReadOnlyBadge
-            programWriteAccess={false}
-            trackedEntityTypeWriteAccess={false}
-            programStageWriteAccess={false}
-            trackedEntityName={trackedEntityTypeName}
-            inlineLabel
-        />
-    );
-};
-
 type OwnProps = EnrollmentPageProps;
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
 

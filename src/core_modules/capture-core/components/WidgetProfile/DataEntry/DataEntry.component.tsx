@@ -1,24 +1,13 @@
 import React from 'react';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBoxes } from './NoticeBoxes.container';
 import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
 import { DataEntryModalWrapper } from './DataEntryModalWrapper.component';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
 
-const styles = {
-    title: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: `${spacersNum.dp8}px`,
-    },
-};
-
-const DataEntryComponentPlain = ({
-    classes,
+export const DataEntryComponent = ({
     dataEntryId,
     onCancel,
     onSave,
@@ -81,5 +70,3 @@ const DataEntryComponentPlain = ({
         />
     </DataEntryModalWrapper>
 );
-
-export const DataEntryComponent = withStyles(styles)(DataEntryComponentPlain);
