@@ -15,8 +15,8 @@ import {
     useProgram,
     useTrackedEntityInstances,
     useClientAttributesWithSubvalues,
-    useTeiDisplayName,
     useUserRoles,
+    useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
