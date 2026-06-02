@@ -24,7 +24,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             },
         },
         {
-            enabled: !!teiId && !!programId && !!enrollmentId,
+            enabled: !!teiId && !!programId && !!enrollmentId && storedEnrollmentId !== enrollmentId,
             staleTime: 0,
             cacheTime: 0,
         },

@@ -12,8 +12,8 @@ const convert = (response) => {
         }));
 };
 
-const fieldsParam = 'id,name,displayName,code,shortName,style,expression,' +
-'displayDescription,description,filter,program[id]';
+const fieldsParam = 'id,name,displayName,style,expression,' +
+'description,filter,program[id]';
 
 export const storeProgramIndicators = async (programIds: Array<string>) => {
     const query = {

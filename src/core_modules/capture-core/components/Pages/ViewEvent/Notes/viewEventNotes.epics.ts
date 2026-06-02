@@ -1,9 +1,10 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
+import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
 import {
     actionTypes as viewEventNotesActionTypes,
     batchActionTypes as viewEventNotesBatchActionTypes,
@@ -45,41 +46,33 @@ export const loadNotesForViewEventEpic = (action$: any) =>
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         }));
 
-export const addNoteForViewEventEpic = (action$: any, store: any, { querySingleResource, fromClientDate }: any) =>
+export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDate }: any) =>
     action$.pipe(
         ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
-        switchMap((action: any) => {
+        map((action: any) => {
             const state = store.value;
             const payload = action.payload;
             const eventId = state.viewEventPage.eventId;
             const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
+            const { firstName, surname, username } = CurrentUser.get();
+            const clientId = uuid();
+            const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
-            return querySingleResource({
-                resource: 'me',
-                params: {
-                    fields: 'userName,firstName,surname',
+            const clientNote = {
+                value: payload.note,
+                createdBy: {
+                    firstName,
+                    surname,
+                    uid: clientId,
                 },
-            }).then((user: any) => {
-                const { userName, firstName, surname } = user;
-                const clientId = uuid();
-                const serverData = createServerData(eventId, payload.note, useNewEndpoint);
-
-                const clientNote = {
-                    value: payload.note,
-                    createdBy: {
-                        firstName,
-                        surname,
-                        uid: clientId,
-                    },
-                    storedBy: userName,
-                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-                    clientId: uuid(),
-                };
-                return batchActions([
-                    startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
-                    addNote(noteKey, clientNote),
-                ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
-            });
+                storedBy: username,
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                clientId: uuid(),
+            };
+            return batchActions([
+                startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
+                addNote(noteKey, clientNote),
+            ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
         }));
 
 export const saveNoteForViewEventFailedEpic = (action$: any) =>

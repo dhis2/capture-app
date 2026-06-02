@@ -98,12 +98,12 @@ const WidgetProfilePlain = ({
         programWriteAccess,
         trackedEntityTypeWriteAccess,
     } = useEnrollmentAccessContext();
-    const trackedEntityTypeName = program?.trackedEntityType?.displayName;
     const {
         loading: userRolesLoading,
         error: userRolesError,
         userRoles,
     } = useUserRoles();
+    const trackedEntityTypeName = program?.trackedEntityType?.displayName;
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 

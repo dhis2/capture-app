@@ -66,6 +66,20 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
+                    id: 'Fke2dMkojHU',
+                    displayContent: "d2:validatePattern('Ivan',\"[a-zA-Z0-9À-ȕ\\'\\-\\‘\\`\\’ ]*\")",
+                    data: "d2:validatePattern('Ivan',\"[a-zA-Z0-9À-ȕ\\'\\-\\‘\\`\\’ ]*\")",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'A03MvHHogjR',
+                    displayContent: "d2:validatePattern('Иван',\"[a-zA-Z0-9À-ȕ\\'\\-\\‘\\`\\’ ]*\")",
+                    data: "d2:validatePattern('Иван',\"[a-zA-Z0-9À-ȕ\\'\\-\\‘\\`\\’ ]*\")",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
                     id: 'Foc3PhzoAVr',
                     displayContent: 'd2:count(#{undefinedVariable}) = ',
                     data: 'd2:count(#{unknow})',
@@ -568,6 +582,22 @@ test('expressions with d2Functions in tracker program', () => {
                 id: 'FkeGdlkYAVr',
                 message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) false",
             },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'Fke2dMkojHU',
+                message: "d2:validatePattern('Ivan',\"[a-zA-Z0-9À-ȕ\\'\\-\\‘\\`\\’ ]*\") true",
+            }
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: {
+                id: 'A03MvHHogjR',
+                message: "d2:validatePattern('Иван',\"[a-zA-Z0-9À-ȕ\\'\\-\\‘\\`\\’ ]*\") false",
+            }
         },
         {
             type: 'DISPLAYTEXT',
