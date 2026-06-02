@@ -9,7 +9,7 @@ export type Assignee = {
 export type Props = {
     assignee: Assignee | null;
     enabled: boolean;
-    writeAccess: boolean;
+    readOnly: boolean;
     getSaveContext: () => { event: Record<string, unknown> };
     onSave: (newAssignee: Assignee) => void;
     onSaveError: (prevAssignee: Assignee | null) => void;
@@ -17,7 +17,7 @@ export type Props = {
 
 export type PlainProps = {
     assignee: Assignee | null;
-    writeAccess: boolean;
+    readOnly: boolean;
     onSet: (user: Assignee | null) => void;
     avatarId?: string;
 };

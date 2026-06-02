@@ -7,10 +7,7 @@ import type { UserFormField } from '../../../../FormFields/UserField';
 type Props = {
     assignee: UserFormField | null;
     programStage?: ProgramStage | null;
-    eventAccess: {
-        read: boolean;
-        write: boolean;
-    } | null;
+    readOnly: boolean;
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent };
     onSaveAssignee: (newAssignee: UserFormField) => void;
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void;
@@ -20,7 +17,7 @@ export const AssigneeSection = ({
     assignee,
     programStage,
     getAssignedUserSaveContext,
-    eventAccess,
+    readOnly,
     onSaveAssignee,
     onSaveAssigneeError,
 }: Props) => (
@@ -28,7 +25,7 @@ export const AssigneeSection = ({
         enabled={programStage?.enableUserAssignment || false}
         assignee={assignee}
         getSaveContext={getAssignedUserSaveContext}
-        writeAccess={eventAccess?.write || false}
+        readOnly={readOnly}
         onSave={onSaveAssignee}
         onSaveError={onSaveAssigneeError}
     />

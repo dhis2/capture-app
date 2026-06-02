@@ -7,6 +7,6 @@ export type PlainProps = {
     eventId: string;
     programStage: ProgramStage;
     ready: boolean;
-    eventAccess: any;
+    readOnly: boolean;
     orgUnitId: string;
 };

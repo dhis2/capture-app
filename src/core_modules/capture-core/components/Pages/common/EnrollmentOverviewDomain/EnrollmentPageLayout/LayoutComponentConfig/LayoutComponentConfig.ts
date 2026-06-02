@@ -285,7 +285,7 @@ export const AssigneeWidget: WidgetConfig = {
         enabled: programStage?.enableUserAssignment || false,
         assignee,
         getSaveContext: getAssignedUserSaveContext,
-        writeAccess: eventAccess?.write || false,
+        readOnly: !eventAccess?.write,
         onSave: onSaveAssignee,
         onSaveError: onSaveAssigneeError,
     }),
