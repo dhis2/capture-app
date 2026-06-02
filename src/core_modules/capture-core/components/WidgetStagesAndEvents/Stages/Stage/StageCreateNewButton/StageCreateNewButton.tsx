@@ -5,7 +5,6 @@ import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
     onCreateNew: () => void;
-    stageWriteAccess?: boolean;
     eventCount: number;
     repeatable?: boolean;
     preventAddingEventActionInEffect?: boolean;
@@ -14,22 +13,12 @@ type Props = {
 
 export const StageCreateNewButton = ({
     onCreateNew,
-    stageWriteAccess,
     eventCount,
     repeatable,
     preventAddingEventActionInEffect,
     eventName,
 }: Props) => {
     const { isDisabled, tooltipContent } = useMemo(() => {
-        if (!stageWriteAccess) {
-            return ({
-                isDisabled: true,
-                tooltipContent: i18n.t('You do not have access to create events in this stage', {
-                    programStageName: eventName,
-                    interpolation: { escapeValue: false },
-                }),
-            });
-        }
         if (preventAddingEventActionInEffect) {
             return {
                 isDisabled: true,
@@ -49,7 +38,7 @@ export const StageCreateNewButton = ({
             isDisabled: false,
             tooltipContent: '',
         };
-    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable, stageWriteAccess]);
+    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable]);
 
     return (
         <ConditionalTooltip

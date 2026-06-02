@@ -7,6 +7,7 @@ import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
+import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
 
 const styles = {
@@ -28,6 +29,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
+    const { anyStageWriteAccess } = useEnrollmentAccessContext();
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
@@ -60,6 +62,8 @@ const EnrollmentQuickActionsComponentPlain = ({
     };
 
     const ready: boolean = events !== undefined && stages !== undefined;
+
+    if (!anyStageWriteAccess) return null;
 
     return (
         <Widget

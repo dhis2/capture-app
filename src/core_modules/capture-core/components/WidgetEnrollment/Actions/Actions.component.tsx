@@ -10,7 +10,6 @@ import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
-import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
 import { TransferModal } from '../TransferModal';
@@ -35,7 +34,6 @@ const ActionsPlain = ({
     ownerOrgUnitId,
     tetName,
     canAddNew,
-    programDataWriteAccess,
     onUpdateStatus,
     onUpdate,
     onDelete,
@@ -67,69 +65,64 @@ const ActionsPlain = ({
 
     return (
         <>
-            <ConditionalTooltip
-                content={i18n.t('You do not have access to modify this enrollment')}
-                enabled={!programDataWriteAccess}
+            <DropdownButton
+                dataTest="widget-enrollment-actions-button"
+                secondary
+                small
+                disabled={loading}
+                className={classes.actions}
+                open={isOpenActions}
+                onClick={() => setOpenActions(prev => !prev)}
+                component={
+                    <FlyoutMenu dense maxWidth="250px">
+                        <AddNew
+                            onlyEnrollOnce={onlyEnrollOnce}
+                            tetName={tetName}
+                            canAddNew={canAddNew}
+                            onAddNew={onAddNew}
+                        />
+                        <Complete
+                            enrollment={enrollment}
+                            events={events}
+                            onUpdate={handleOnUpdateStatus}
+                            setOpenCompleteModal={(modalState) => {
+                                setOpenCompleteModal(modalState);
+                                setOpenActions(!modalState);
+                            }}
+                        />
+                        <Followup
+                            enrollment={enrollment}
+                            onUpdate={handleOnUpdate}
+                        />
+                        <Transfer
+                            enrollment={enrollment}
+                            setOpenTransfer={() => {
+                                setOpenTransfer(true);
+                                setOpenActions(false);
+                            }}
+                        />
+                        <AddLocation
+                            enrollment={enrollment}
+                            setOpenMap={() => {
+                                setOpenMap(true);
+                                setOpenActions(false);
+                            }}
+                        />
+                        <MenuDivider />
+                        <Cancel
+                            enrollment={enrollment}
+                            onUpdate={handleOnUpdateStatus}
+                        />
+                        <Delete
+                            canCascadeDeleteEnrollment={canCascadeDeleteEnrollment}
+                            enrollment={enrollment}
+                            onDelete={handleOnDelete}
+                        />
+                    </FlyoutMenu>
+                }
             >
-                <DropdownButton
-                    dataTest="widget-enrollment-actions-button"
-                    secondary
-                    small
-                    disabled={loading || !programDataWriteAccess}
-                    className={classes.actions}
-                    open={isOpenActions}
-                    onClick={() => setOpenActions(prev => !prev)}
-                    component={
-                        <FlyoutMenu dense maxWidth="250px">
-                            <AddNew
-                                onlyEnrollOnce={onlyEnrollOnce}
-                                tetName={tetName}
-                                canAddNew={canAddNew}
-                                onAddNew={onAddNew}
-                            />
-                            <Complete
-                                enrollment={enrollment}
-                                events={events}
-                                onUpdate={handleOnUpdateStatus}
-                                setOpenCompleteModal={(modalState) => {
-                                    setOpenCompleteModal(modalState);
-                                    setOpenActions(!modalState);
-                                }}
-                            />
-                            <Followup
-                                enrollment={enrollment}
-                                onUpdate={handleOnUpdate}
-                            />
-                            <Transfer
-                                enrollment={enrollment}
-                                setOpenTransfer={() => {
-                                    setOpenTransfer(true);
-                                    setOpenActions(false);
-                                }}
-                            />
-                            <AddLocation
-                                enrollment={enrollment}
-                                setOpenMap={() => {
-                                    setOpenMap(true);
-                                    setOpenActions(false);
-                                }}
-                            />
-                            <MenuDivider />
-                            <Cancel
-                                enrollment={enrollment}
-                                onUpdate={handleOnUpdateStatus}
-                            />
-                            <Delete
-                                canCascadeDeleteEnrollment={canCascadeDeleteEnrollment}
-                                enrollment={enrollment}
-                                onDelete={handleOnDelete}
-                            />
-                        </FlyoutMenu>
-                    }
-                >
-                    {i18n.t('Enrollment actions')}
-                </DropdownButton>
-            </ConditionalTooltip>
+                {i18n.t('Enrollment actions')}
+            </DropdownButton>
             {loading && (
                 <div className={classes.loading}>
                     <LoadingMaskForButton />
@@ -141,6 +134,7 @@ const ActionsPlain = ({
                 enrollment={enrollment}
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
+                readOnly={false}
             />}
             {isOpenTransfer && (
                 <TransferModal

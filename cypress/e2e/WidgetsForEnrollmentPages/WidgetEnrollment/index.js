@@ -60,6 +60,18 @@ Then('the enrollment widget should be opened', () => {
     });
 });
 
+Then('the enrollment actions button is not visible', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-actions-button"]').should('not.exist');
+    });
+});
+
+Then('the enrollment date edit buttons are not visible', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-icon-edit-date"]').should('not.exist');
+    });
+});
+
 Then('the user sees the enrollment date', () => {
     cy.get('[data-test="widget-enrollment-enrollment-date"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-calendar"]').should('exist');

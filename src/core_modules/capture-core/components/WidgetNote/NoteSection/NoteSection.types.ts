@@ -13,4 +13,5 @@ export type OwnProps = {
     handleAddNote: (text: string) => void;
     placeholder: string;
     emptyNoteMessage: string;
+    readOnly?: boolean;
 };
