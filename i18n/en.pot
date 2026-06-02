@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-08T06:27:13.394Z\n"
-"PO-Revision-Date: 2026-05-08T06:27:13.394Z\n"
+"POT-Creation-Date: 2026-06-02T14:51:02.458Z\n"
+"PO-Revision-Date: 2026-06-02T14:51:02.458Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1074,14 +1074,14 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "You only have view access to enrollment"
-msgstr "You only have view access to enrollment"
+msgid "You only have view access to this enrollment"
+msgstr "You only have view access to this enrollment"
 
-msgid "You only have view access to program"
-msgstr "You only have view access to program"
+msgid "You only have view access to this program"
+msgstr "You only have view access to this program"
 
-msgid "You only have view access to {{trackedEntityName}}"
-msgstr "You only have view access to {{trackedEntityName}}"
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr "You only have view access to this {{trackedEntityName}}"
 
 msgid "You only have view access to this tracked entity type"
 msgstr "You only have view access to this tracked entity type"
@@ -1091,6 +1091,15 @@ msgstr "You only have view access to these program stages"
 
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
+
+msgid "This event is outside the valid editing period"
+msgstr "This event is outside the valid editing period"
+
+msgid "This event has been completed"
+msgstr "This event has been completed"
+
+msgid "View only - {{message}}"
+msgstr "View only - {{message}}"
 
 msgid "View only"
 msgstr "View only"
@@ -1533,9 +1542,6 @@ msgstr "No polygon captured"
 msgid "Event completed"
 msgstr "Event completed"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "The event cannot be edited after it has been completed"
-
 msgid "Notes about this event"
 msgstr "Notes about this event"
 
@@ -1611,11 +1617,11 @@ msgstr "Indicators"
 msgid "Save note"
 msgstr "Save note"
 
-msgid "{{trackedEntityName}} profile"
-msgstr "{{trackedEntityName}} profile"
-
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
+
+msgid "Save changes"
+msgstr "Save changes"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
@@ -1623,8 +1629,8 @@ msgstr "Change information about this {{trackedEntityName}} here."
 msgid "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "Information about this enrollment can be edited in the Enrollment widget."
 
-msgid "Save changes"
-msgstr "Save changes"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profile"
 
 msgid "Profile"
 msgstr "Profile"
@@ -1665,8 +1671,8 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "Show profile"
-msgstr "Show profile"
+msgid "View profile"
+msgstr "View profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"

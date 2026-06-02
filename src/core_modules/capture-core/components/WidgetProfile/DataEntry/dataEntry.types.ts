@@ -6,7 +6,6 @@ import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin
 
 export type PlainProps = {
     dataEntryId: string;
-    itemId: string;
     trackedEntityName: string;
     saveAttempted: boolean;
     formFoundation: any;
@@ -18,10 +17,22 @@ export type PlainProps = {
     modalState: string;
     errorsMessages: Array<{ id: string; message: string }>;
     warningsMessages: Array<{ id: string; message: string }>;
-    center?: Array<number>;
     orgUnitId: string;
     pluginContext?: PluginContext;
-    readOnly?: boolean;
+    accessReadOnly?: boolean;
+};
+
+export type ReadOnlyPlainProps = {
+    dataEntryId: string;
+    trackedEntityName: string;
+    saveAttempted: boolean;
+    formFoundation: any;
+    onCancel: () => void;
+    onUpdateFormField: (innerAction: any) => void;
+    onUpdateFormFieldAsync: (innerAction: any) => void;
+    onGetValidationContext: () => Record<string, any>;
+    orgUnitId: string;
+    pluginContext?: PluginContext;
     accessReadOnly?: boolean;
 };
 

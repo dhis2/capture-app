@@ -5,8 +5,7 @@ import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
-import { ReadOnlyBadge } from '../../../../ReadOnlyBadge';
-import { useEnrollmentAccessContext } from '../EnrollmentAccessContext';
+import { EnrollmentReadOnlyBadge } from './EnrollmentReadOnlyBadge';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({

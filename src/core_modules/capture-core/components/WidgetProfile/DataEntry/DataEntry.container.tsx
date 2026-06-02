@@ -9,6 +9,7 @@ import { dataElementTypes } from 'capture-core/metaData';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
+import { DataEntryReadOnlyComponent } from './DataEntryReadOnly.component';
 import { useLifecycle, useFormValidations } from './hooks';
 import { getUpdateFieldActions, updateTeiRequest, setTeiModalError } from './dataEntry.actions';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
@@ -147,27 +148,45 @@ export const DataEntry = ({
         onDisable,
     ]);
 
-    return (
-        Object.entries(formFoundation).length > 0 && (
-            <DataEntryComponent
+    if (Object.entries(formFoundation).length === 0) {
+        return null;
+    }
+
+    if (readOnly) {
+        return (
+            <DataEntryReadOnlyComponent
                 dataEntryId={dataEntryId}
-                itemId={itemId}
                 onCancel={onCancel}
-                onSave={onSave}
                 saveAttempted={saveAttempted}
                 trackedEntityName={trackedEntityName}
                 formFoundation={formFoundation}
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
-                modalState={modalState}
                 onGetValidationContext={onGetValidationContext}
-                errorsMessages={errorsMessages}
-                warningsMessages={warningsMessages}
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
-                readOnly={readOnly}
                 accessReadOnly={accessReadOnly}
             />
-        )
+        );
+    }
+
+    return (
+        <DataEntryComponent
+            dataEntryId={dataEntryId}
+            onCancel={onCancel}
+            onSave={onSave}
+            saveAttempted={saveAttempted}
+            trackedEntityName={trackedEntityName}
+            formFoundation={formFoundation}
+            onUpdateFormField={onUpdateFormField}
+            onUpdateFormFieldAsync={onUpdateFormFieldAsync}
+            modalState={modalState}
+            onGetValidationContext={onGetValidationContext}
+            errorsMessages={errorsMessages}
+            warningsMessages={warningsMessages}
+            orgUnitId={orgUnitId}
+            pluginContext={pluginContext}
+            accessReadOnly={accessReadOnly}
+        />
     );
 };

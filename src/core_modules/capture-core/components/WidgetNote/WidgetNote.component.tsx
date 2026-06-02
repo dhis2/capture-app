@@ -23,7 +23,8 @@ const WidgetNotePlain = ({
     classes,
     title,
     notes,
-    scope,
+    readOnly,
+    badge,
     onAddNote,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
@@ -42,13 +43,9 @@ const WidgetNotePlain = ({
             header={<div className={classes.header}>
                 <span>{title}</span>
                 {notes.length > 0 && <WidgetHeaderCountBadge count={notes.length} />}
-                {showWidgetBadge && (
+                {badge && (
                     <div className={classes.badge}>
-                        <ReadOnlyBadge
-                            programWriteAccess={isEventScope ? true : programWriteAccess}
-                            programStageWriteAccess={isEventScope ? currentStageWriteAccess : true}
-                            trackedEntityName={trackedEntityTypeName}
-                        />
+                        {badge}
                     </div>
                 )}
             </div>}

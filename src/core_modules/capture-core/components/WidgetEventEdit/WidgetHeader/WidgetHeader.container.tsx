@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
@@ -6,7 +6,6 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
@@ -30,9 +29,6 @@ const styles: Readonly<any> = {
         display: 'flex',
         alignItems: 'center',
         gap: spacers.dp4,
-    },
-    tooltip: {
-        display: 'inline-flex',
     },
 };
 
@@ -62,22 +58,7 @@ const WidgetHeaderPlain = ({
     const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
-    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
-    const tooltipContent = useMemo(() => {
-        if (blockEntryForm) {
-            return i18n.t('The event cannot be edited after it has been completed');
-        }
-        if (!eventAccess?.write) {
-            return i18n.t('You don\'t have access to edit this event');
-        }
-        if (!isWithinValidPeriod) {
-            return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
-                occurredAt,
-                interpolation: { escapeValue: false },
-            });
-        }
-        return '';
-    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
+    const showEditButton = eventAccess?.write && isWithinValidPeriod && !blockEntryForm;
 
     const { programCategory } = useCategoryCombinations(programId);
 
@@ -100,23 +81,16 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {eventAccess?.write && (
-                            <ConditionalTooltip
-                                content={tooltipContent}
-                                enabled={disableEdit}
-                                wrapperClassName={classes.tooltip}
+                        {showEditButton && (
+                            <Button
+                                small
+                                secondary
+                                icon={<IconEdit24 />}
+                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
+                                data-test="widget-enrollment-event-edit-button"
                             >
-                                <Button
-                                    small
-                                    secondary
-                                    disabled={disableEdit}
-                                    icon={<IconEdit24 />}
-                                    onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
-                                    data-test="widget-enrollment-event-edit-button"
-                                >
-                                    {i18n.t('Edit event')}
-                                </Button>
-                            </ConditionalTooltip>
+                                {i18n.t('Edit event')}
+                            </Button>
                         )}
 
                         {supportsChangelog && (
