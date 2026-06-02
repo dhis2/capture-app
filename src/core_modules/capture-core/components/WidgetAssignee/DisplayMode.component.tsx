@@ -1,8 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, spacers, UserAvatar } from '@dhis2/ui';
+import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { Assignee } from './WidgetAssignee.types';
 
 const styles = () => ({
@@ -11,10 +10,12 @@ const styles = () => ({
         alignItems: 'center',
         fontSize: 14,
     },
-    editButton: {
-        marginInlineStart: spacers.dp12,
+    emptyMessage: {
+        fontSize: 14,
+        color: colors.grey600,
+        paddingBottom: spacersNum.dp8,
     },
-    assignButton: {
+    editButton: {
         marginInlineStart: spacers.dp12,
     },
     avatarWrapper: {
@@ -29,11 +30,11 @@ const styles = () => ({
 type Props = {
     assignee: Assignee | null;
     onEdit: () => void;
-    writeAccess: boolean;
+    readOnly?: boolean;
     avatarId?: string;
 } & WithStyles<typeof styles>;
 
-const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: Props) => (
+const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classes }: Props) => (
     assignee ? (
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
@@ -41,40 +42,33 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                 <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} small />
                 {assignee.name}
             </div>
-            <ConditionalTooltip
-                content={i18n.t("You don't have access to edit the assigned user")}
-                enabled={!writeAccess}
-            >
+            {!readOnly && (
                 <Button
                     onClick={onEdit}
                     className={classes.editButton}
                     dataTest="widget-assignee-edit"
-                    disabled={!writeAccess}
                     secondary
                     small
                 >
                     {i18n.t('Edit')}
                 </Button>
-            </ConditionalTooltip>
+            )}
         </div>
     ) : (
-        <div className={classes.wrapper}>
-            {i18n.t('No one is assigned to this event')}
-            <ConditionalTooltip
-                content={i18n.t("You don't have access to assign a user to this event")}
-                enabled={!writeAccess}
-            >
+        <div>
+            <div className={classes.emptyMessage} data-test="widget-assignee-empty-message">
+                {i18n.t('No one is assigned to this event')}
+            </div>
+            {!readOnly && (
                 <Button
                     onClick={onEdit}
-                    className={classes.assignButton}
                     dataTest="widget-assignee-assign"
                     small
                     secondary
-                    disabled={!writeAccess}
                 >
                     {i18n.t('Assign')}
                 </Button>
-            </ConditionalTooltip>
+            )}
         </div>
     )
 );

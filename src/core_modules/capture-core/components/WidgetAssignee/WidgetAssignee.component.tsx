@@ -19,7 +19,7 @@ const styles = () => ({
 
 type Props = PlainProps & WithStyles<typeof styles> ;
 
-const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }: Props) => {
+const WidgetAssigneePlain = ({ assignee, readOnly, onSet, avatarId, classes }: Props) => {
     const [open, setOpen] = useState(true);
     const [editMode, setEditMode] = useState(false);
 
@@ -50,7 +50,7 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }
                         <DisplayMode
                             assignee={assignee}
                             onEdit={() => setEditMode(true)}
-                            writeAccess={writeAccess}
+                            readOnly={readOnly}
                             avatarId={avatarId}
                         />
                     )}

@@ -1,43 +1,25 @@
-import React, { useCallback, useRef } from 'react';
-import { useDataMutation } from '@dhis2/app-runtime';
-import type { Props, Assignee } from './WidgetAssignee.types';
+import React from 'react';
+import type { Props } from './WidgetAssignee.types';
 import { WidgetAssigneeComponent } from './WidgetAssignee.component';
-import { convertClientToServer } from './converter';
-import { useUserAvatar } from './hooks';
+import { useUserAvatar, useAssigneeMutation } from './hooks';
 
 const WidgetAssigneeWithHooks = (props: Props) => {
-    const { assignee, writeAccess, getSaveContext, onSave, onSaveError } = props;
-    const prevAssignee = useRef(assignee);
+    const { assignee, readOnly, getSaveContext, onSave, onSaveError } = props;
     const { avatarId, isLoading } = useUserAvatar(assignee?.id);
-
-    const [updateMutation] = useDataMutation(
-        {
-            resource: 'tracker?async=false&importStrategy=UPDATE',
-            type: 'create',
-            data: event => ({ events: [event] }),
-        },
-        {
-            onError: () => {
-                onSaveError(prevAssignee.current);
-            },
-        },
-    );
-
-    const onSet = useCallback(
-        async (newAssignee: Assignee) => {
-            const { event } = getSaveContext();
-            prevAssignee.current = assignee;
-            onSave(newAssignee);
-            await updateMutation({ ...event, assignedUser: convertClientToServer(newAssignee) });
-        },
-        [updateMutation, getSaveContext, onSave, assignee],
-    );
+    const onSet = useAssigneeMutation({ assignee, getSaveContext, onSave, onSaveError });
 
     if (isLoading) {
         return null;
     }
 
-    return <WidgetAssigneeComponent assignee={assignee} writeAccess={writeAccess} avatarId={avatarId} onSet={onSet} />;
+    return (
+        <WidgetAssigneeComponent
+            assignee={assignee}
+            readOnly={readOnly}
+            avatarId={avatarId}
+            onSet={onSet}
+        />
+    );
 };
 
 export const WidgetAssignee = (props: Props) => {
