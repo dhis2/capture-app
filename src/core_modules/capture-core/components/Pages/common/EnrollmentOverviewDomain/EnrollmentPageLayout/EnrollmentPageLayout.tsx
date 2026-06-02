@@ -5,6 +5,7 @@ import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
+import { EnrollmentReadOnlyBadge } from './EnrollmentReadOnlyBadge';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -48,6 +49,11 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         color: colors.grey900,
         fontWeight: 500,
         paddingTop: spacersNum.dp8,
+    },
+    breadcrumbRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 });
 
@@ -115,7 +121,7 @@ const EnrollmentPageLayoutPlain = ({
                 className={classes.contentContainer}
                 style={!mainContentVisible ? { display: 'none' } : undefined}
             >
-                <div>
+                <div className={classes.breadcrumbRow}>
                     <EnrollmentBreadcrumb
                         page={currentPage}
                         onBackToMainPage={onBackToMainPage}
@@ -126,6 +132,7 @@ const EnrollmentPageLayoutPlain = ({
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
                     />
+                    <EnrollmentReadOnlyBadge />
                 </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (

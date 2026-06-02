@@ -53,7 +53,7 @@ function getCategoryOptionQuery(categoryIds: Array<string>) {
     return {
         resource: 'categoryOptions',
         params: (variables: QueryVariables) => ({
-            fields: 'id,displayName,categories~pluck, organisationUnits~pluck, access[*]',
+            fields: 'id,displayName,categories~pluck,organisationUnits~pluck,access[data[write]]',
             filter: [
                 `categories.id:in:[${categoryIds.join(',')}]`,
                 'access.data.read:in:[true]',

@@ -3,6 +3,8 @@ import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
+import { ReadOnlyBadge } from '../ReadOnlyBadge';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
 
 export const WidgetEnrollmentNote = () => {
@@ -10,6 +12,11 @@ export const WidgetEnrollmentNote = () => {
     const { enrollmentId } = useLocationQuery();
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
         enrollmentDomain?.enrollment?.notes ?? []);
+    const {
+        programWriteAccess,
+        trackedEntityTypeName,
+        showWidgetBadge,
+    } = useEnrollmentAccessContext();
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
@@ -22,6 +29,13 @@ export const WidgetEnrollmentNote = () => {
                 placeholder={i18n.t('Write a note about this enrollment')}
                 emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
+                readOnly={!programWriteAccess}
+                badge={showWidgetBadge ? (
+                    <ReadOnlyBadge
+                        programWriteAccess={programWriteAccess}
+                        trackedEntityName={trackedEntityTypeName}
+                    />
+                ) : null}
                 onAddNote={onAddNote}
             />
         </div>

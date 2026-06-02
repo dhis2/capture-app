@@ -59,54 +59,56 @@ const EventRowPlain = ({
             {cells}
 
             <DataTableCell>
-                <>
-                    <OverflowButton
-                        open={actionsOpen}
-                        onClick={() => setActionsOpen(prev => !prev)}
-                        dataTest={'overflow-button'}
-                        secondary
-                        small
-                        icon={<IconMore16 />}
-                        disabled={pendingApiResponse || !stageWriteAccess}
-                        component={(
-                            <FlyoutMenu
-                                dense
-                                dataTest={'overflow-menu'}
-                            >
-                                {(eventDetails.status === EventStatuses.SCHEDULE ||
-                                    eventDetails.status === EventStatuses.SKIPPED) && (
-                                    <SkipAction
-                                        eventId={id}
-                                        eventDetails={eventDetails}
+                {stageWriteAccess && (
+                    <>
+                        <OverflowButton
+                            open={actionsOpen}
+                            onClick={() => setActionsOpen(prev => !prev)}
+                            dataTest={'overflow-button'}
+                            secondary
+                            small
+                            icon={<IconMore16 />}
+                            disabled={pendingApiResponse}
+                            component={(
+                                <FlyoutMenu
+                                    dense
+                                    dataTest={'overflow-menu'}
+                                >
+                                    {(eventDetails.status === EventStatuses.SCHEDULE ||
+                                        eventDetails.status === EventStatuses.SKIPPED) && (
+                                        <SkipAction
+                                            eventId={id}
+                                            eventDetails={eventDetails}
+                                            setActionsOpen={setActionsOpen}
+                                            pendingApiResponse={pendingApiResponse}
+                                            onUpdateEventStatus={onUpdateEventStatus}
+                                        />
+                                    )}
+
+                                    <DeleteActionButton
                                         setActionsOpen={setActionsOpen}
-                                        pendingApiResponse={pendingApiResponse}
-                                        onUpdateEventStatus={onUpdateEventStatus}
+                                        setDeleteModalOpen={setDeleteModalOpen}
+                                        occurredAt={eventDetails.occurredAt}
+                                        expiryPeriod={expiryPeriod}
                                     />
-                                )}
-
-                                <DeleteActionButton
-                                    setActionsOpen={setActionsOpen}
-                                    setDeleteModalOpen={setDeleteModalOpen}
-                                    occurredAt={eventDetails.occurredAt}
-                                    expiryPeriod={expiryPeriod}
-                                />
-                            </FlyoutMenu>
-                        )}
-                    />
-
-                    {deleteModalOpen && (
-                        <DeleteActionModal
-                            eventId={id}
-                            pendingApiResponse={pendingApiResponse}
-                            teiId={teiId}
-                            programId={programId}
-                            enrollmentId={enrollmentId}
-                            onDeleteEvent={onDeleteEvent}
-                            onRollbackDeleteEvent={onRollbackDeleteEvent}
-                            setDeleteModalOpen={setDeleteModalOpen}
+                                </FlyoutMenu>
+                            )}
                         />
-                    )}
-                </>
+
+                        {deleteModalOpen && (
+                            <DeleteActionModal
+                                eventId={id}
+                                pendingApiResponse={pendingApiResponse}
+                                teiId={teiId}
+                                programId={programId}
+                                enrollmentId={enrollmentId}
+                                onDeleteEvent={onDeleteEvent}
+                                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                setDeleteModalOpen={setDeleteModalOpen}
+                            />
+                        )}
+                    </>
+                )}
             </DataTableCell>
         </DataTableRow>
     );

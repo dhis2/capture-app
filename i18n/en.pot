@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-19T07:38:15.345Z\n"
-"PO-Revision-Date: 2026-05-19T07:38:15.345Z\n"
+"POT-Creation-Date: 2026-05-24T11:43:30.545Z\n"
+"PO-Revision-Date: 2026-05-24T11:43:30.545Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1071,6 +1071,36 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
+msgid "You only have view access to this enrollment"
+msgstr "You only have view access to this enrollment"
+
+msgid "You only have view access to this program"
+msgstr "You only have view access to this program"
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr "You only have view access to this {{trackedEntityName}}"
+
+msgid "You only have view access to this tracked entity type"
+msgstr "You only have view access to this tracked entity type"
+
+msgid "You only have view access to these program stages"
+msgstr "You only have view access to these program stages"
+
+msgid "You only have view access to this program stage"
+msgstr "You only have view access to this program stage"
+
+msgid "This event is outside the valid editing period"
+msgstr "This event is outside the valid editing period"
+
+msgid "This event has been completed"
+msgstr "This event has been completed"
+
+msgid "View only - {{message}}"
+msgstr "View only - {{message}}"
+
+msgid "View only"
+msgstr "View only"
+
 msgid "You don't have access to delete this relationship"
 msgstr "You don't have access to delete this relationship"
 
@@ -1311,9 +1341,6 @@ msgstr "Unsaved changes"
 msgid "Continue data entry"
 msgstr "Continue data entry"
 
-msgid "You do not have access to modify this enrollment"
-msgstr "You do not have access to modify this enrollment"
-
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
 
@@ -1512,9 +1539,6 @@ msgstr "No polygon captured"
 msgid "Event completed"
 msgstr "Event completed"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "The event cannot be edited after it has been completed"
-
 msgid "Notes about this event"
 msgstr "Notes about this event"
 
@@ -1593,14 +1617,17 @@ msgstr "Save note"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "Save changes"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
 
 msgid "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "Information about this enrollment can be edited in the Enrollment widget."
 
-msgid "Save changes"
-msgstr "Save changes"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profile"
 
 msgid "Profile"
 msgstr "Profile"
@@ -1640,6 +1667,9 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "View profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1701,9 +1731,6 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "You do not have access to create events in this stage"
-msgstr "You do not have access to create events in this stage"
-
 msgid "This stage can only have one event"
 msgstr "This stage can only have one event"
 
@@ -1750,6 +1777,9 @@ msgstr "{{ overdueEvents }} overdue"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
+
+msgid "No stages found in this program"
+msgstr "No stages found in this program"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
@@ -1890,6 +1920,9 @@ msgstr "An error occurred while deleting the relationship."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"
+
+msgid "This enrollment doesn't have any relationships"
+msgstr "This enrollment doesn't have any relationships"
 
 msgid "Type"
 msgstr "Type"

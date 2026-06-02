@@ -6,7 +6,7 @@ const getCategoryOptionsAsync = async (optionIds: string, querySingleResource: a
     querySingleResource({
         resource: 'categoryOptions',
         params: {
-            fields: 'id,displayName,categories~pluck,access',
+            fields: 'id,displayName,categories~pluck,access[data[write]]',
             filter: `id:in:[${optionIds}]`,
         },
     }).then((response: any) => response?.categoryOptions);

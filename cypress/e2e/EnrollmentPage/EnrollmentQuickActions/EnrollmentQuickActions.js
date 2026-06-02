@@ -34,8 +34,7 @@ Then('the buttons should be disabled', () => {
         });
 });
 
-Then('the quick action buttons should be disabled', () => {
-    cy.get('[data-test="quick-action-button-container"]')
-        .find('button')
-        .should('be.disabled');
+Then('the quick action buttons should not be visible', () => {
+    cy.get('[data-test="enrollment-overview-page"]').should('exist');
+    cy.get('[data-test="quick-action-button-container"]').should('not.exist');
 });

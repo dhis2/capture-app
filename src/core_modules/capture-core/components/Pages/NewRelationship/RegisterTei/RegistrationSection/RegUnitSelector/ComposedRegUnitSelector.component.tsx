@@ -6,12 +6,7 @@ import {
     withInternalChangeHandler,
     withFilterProps,
     SingleOrgUnitSelectField,
-    withOrgUnitFieldImplicitRootsFilterHandler,
-    orgUnitFieldScopes,
 } from '../../../../../FormFields/New';
-
-const OrgUnitFieldImplicitRootsFilterHandlerHOC =
-    withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField);
 
 type Props = {
     onUpdateSelectedOrgUnit: (orgUnit?: OrgUnit | null) => void;
@@ -21,9 +16,8 @@ class OrgUnitFieldWrapper extends React.Component<Props> {
     render() {
         const { onUpdateSelectedOrgUnit, ...passOnProps } = this.props;
         return (
-            <OrgUnitFieldImplicitRootsFilterHandlerHOC
-                onSelect={onUpdateSelectedOrgUnit}
-                scope={orgUnitFieldScopes.USER_CAPTURE}
+            <SingleOrgUnitSelectField
+                onBlur={onUpdateSelectedOrgUnit}
                 maxTreeHeight={200}
                 {...passOnProps as any}
             />

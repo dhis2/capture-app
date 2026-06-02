@@ -1,6 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { Access } from '../Access';
+
+type RelationshipTypeAccess = {
+    data: {
+        read: boolean,
+        write: boolean,
+    },
+};
 
 type RelationshipConstraint = {
     entity: string,
@@ -15,7 +21,7 @@ export class RelationshipType {
     _referral!: boolean;
     _fromToName!: string;
     _toFromName!: string;
-    _access!: Access;
+    _access!: RelationshipTypeAccess;
     _from!: RelationshipConstraint;
     _to!: RelationshipConstraint;
 
@@ -39,11 +45,11 @@ export class RelationshipType {
         return this._name;
     }
 
-    set access(access: Access) {
+    set access(access: RelationshipTypeAccess) {
         this._access = access;
     }
 
-    get access(): Access {
+    get access(): RelationshipTypeAccess {
         return this._access;
     }
 
