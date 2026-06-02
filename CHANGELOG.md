@@ -1,3 +1,10 @@
+# [106.3.0](https://github.com/dhis2/capture-app/compare/v106.2.8...v106.3.0) (2026-06-02)
+
+
+### Features
+
+* [DHIS2-21371] Read-only enrollment dashboard ([#4529](https://github.com/dhis2/capture-app/issues/4529)) ([55e0def](https://github.com/dhis2/capture-app/commit/55e0def7f2ae4ffd0dd2d3602afbba0f7e8c03da))
+
 ## [106.2.8](https://github.com/dhis2/capture-app/compare/v106.2.7...v106.2.8) (2026-06-01)
 
 
