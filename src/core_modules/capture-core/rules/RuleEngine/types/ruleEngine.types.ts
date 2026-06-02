@@ -165,6 +165,8 @@ export type ProgramRuleEffect = {
     data: any,
     field: string | null,
     attributeType: string | null,
+    priority?: number,
+    legendSetId?: string,
 } & ProgramRuleData;
 
 export type ProgramRuleAction = {
@@ -174,6 +176,7 @@ export type ProgramRuleAction = {
     data: string | null,
     programRuleActionType: string,
     priority?: number,
+    legendSetId?: string,
 } & ProgramRuleData;
 
 export type ProgramRule = {
