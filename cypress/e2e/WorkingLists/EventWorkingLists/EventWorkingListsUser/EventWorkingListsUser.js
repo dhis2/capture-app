@@ -4,16 +4,37 @@ import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const CONTEXT_QUERIES = {
-    'malaria case context': 'programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8',
-    'Inpatient morbidity and mortality context': 'programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8',
-    'Contraceptives Voucher Program': 'orgUnitId=DiszpKrYNg8&programId=kla3mAPgvCH',
-    'event program text filter context': 'programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8',
+const cleanUpEventFilterIfApplicable = (programId, displayName) => {
+    cy.buildApiUrl(`eventFilters?filter=program:eq:${programId}&fields=id,displayName`)
+        .then((url) => cy.request(url))
+        .then(({ body }) => {
+            const items = body.eventFilters ?? [];
+            const match = items.find((e) => e.displayName === displayName);
+            if (!match) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('eventFilters', match.id)
+                .then((deleteUrl) => cy.request('DELETE', deleteUrl));
+        });
 };
 
-Given(/^you open the main page with Ngelehun and (.+)$/, (contextOrPath) => {
-    const query = CONTEXT_QUERIES[contextOrPath] ?? contextOrPath;
-    cy.visit(`#/?${query}`);
+Given('you open the main page with Ngelehun and malaria case context', () => {
+    cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and event program text filter context', () => {
+    cleanUpEventFilterIfApplicable('MoUd5BTQ3lY', 'eventStoredWorkingList');
+    cy.visit('#/?programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
+    cleanUpEventFilterIfApplicable('eBAyeGv0exc', 'eventStoredWorkingList');
+    cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Contraceptives Voucher Program', () => {
+    cy.visit('#/?programId=kla3mAPgvCH&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
@@ -148,12 +169,6 @@ Then('the list should display events where age is between 10 and 20', () => {
                     .should('exist');
             }
         });
-});
-
-Then('the age filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains(/Age \(years\): \d+ to \d+/)
-        .should('exist');
 });
 
 When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => {
@@ -461,6 +476,16 @@ When(/^you save the view as (.*)$/, (name) => {
     cy.wait('@newEventFilter', { timeout: 30000 }).as('newEventResult');
 });
 
+When(/^you update the view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.intercept('PUT', '**/eventFilters/**').as('updateEventFilter');
+    cy.contains('Update view')
+        .click();
+    cy.wait('@updateEventFilter', { timeout: 30000 });
+});
+
 When(/^you set the range filter "([^"]+)" to (\d+)-(\d+)$/, (filterName, min, max) => {
     if (filterName === 'Age (years)') {
         cy.get('[data-test="event-working-lists"]').contains('Age (years)').click();
@@ -503,9 +528,19 @@ When('you set the organisation unit filter', () => {
     });
 });
 
-When(/^you set the empty-only filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
-    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    const labelPrefix = truncateFilterLabelForTest(filterName);
+    cy.get('[data-test="event-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
 });
@@ -552,11 +587,10 @@ Then('the organisation unit filter should be in effect and show the correct valu
     cy.get('body').click(0, 0);
 });
 
-Then(/^the empty-only filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains(truncateFilterLabelForTest(`${filterName}: ${value}`))
-        .should('exist');
-    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
     cy.get('[data-test="list-view-filter-contents"]').within(() => {
         cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
     });
@@ -593,7 +627,7 @@ Then('the working list should be displayed', () => {
         .find('tr');
 });
 
-When('you delete the name toDeleteWorkingList', () => {
+When('you delete the name eventStoredWorkingList', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
@@ -608,6 +642,6 @@ When('you delete the name toDeleteWorkingList', () => {
 Then('the custom events working list is deleted', () => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
-            cy.contains('toDeleteWorkingList').should('not.exist');
+            cy.contains('eventStoredWorkingList').should('not.exist');
         });
 });

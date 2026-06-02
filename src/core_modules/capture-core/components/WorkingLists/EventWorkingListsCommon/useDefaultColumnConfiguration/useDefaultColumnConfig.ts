@@ -23,6 +23,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         type: elementTypeKeys.ORGANISATION_UNIT,
         header: i18n.t('Organisation unit'),
         apiName: 'orgUnit',
+        filterHidden: true,
     }, {
         id: mainPropertyNames.EVENT_STATUS,
         visible: true,
@@ -62,7 +63,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
             type,
             header: formName,
             options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-            multiValueFilter: !!optionSet,
+            multiValueFilter: !!optionSet || type === elementTypeKeys.BOOLEAN,
         })) as Array<MetadataColumnConfig>;
 
 export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs =>

@@ -45,7 +45,7 @@ export const useLinkedEventByOriginId = ({ originEventId, skipBidirectionalCheck
         params: {
             fields: 'event,relationships[relationship,relationshipType,relationshipName,bidirectional,' +
                         'from[event[event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program]],' +
-                        'to[event[event,dataValues,*,occurredAt,scheduledAt,status,orgUnit,programStage,program]]' +
+                        'to[event[event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program]]' +
                     ']',
         },
     }), [originEventId]);

@@ -6,7 +6,7 @@ import { useScopeInfo } from '../../../../../hooks/useScopeInfo';
 import { useTrackedEntityTypeCollection } from './hooks/useTrackedEntityTypeCollection';
 import { useEnrollmentFormFoundation } from './hooks/useEnrollmentFormFoundation';
 import { useTrackedEntityTypeFromIndexedDB } from '../../../../../utils/cachedDataHooks/useTrackedEntityTypeFromIndexedDB';
-import { useUserLocale } from '../../../../../utils/localeData/useUserLocale';
+import { CurrentUser } from '../../../../../utils/userInfo/CurrentUser';
 import { useTrackedEntityAttributes } from './hooks/useTrackedEntityAttributes';
 import { useDataEntryFormConfig } from './hooks/useDataEntryFormConfig';
 
@@ -25,7 +25,7 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
     const { program } = useProgramFromIndexedDB(selectedScopeId, {
         enabled: !!(scopeType === scopeTypes.TRACKER_PROGRAM && selectedScopeId),
     });
-    const { locale } = useUserLocale();
+    const locale = CurrentUser.get().uiLocale;
     const { trackedEntityType } = useTrackedEntityTypeFromIndexedDB(tetId, { enabled: !!tetId });
 
     const cachedTrackedEntityAttributeIds = useMemo(() => {

@@ -43,7 +43,7 @@ export type ColumnConfigBase = {
 export type MetadataColumnConfig = ColumnConfigBase;
 
 export type MainColumnConfig = ColumnConfigBase & {
-    mainProperty: true,
+    isMainProperty: true,
     apiViewName?: string,
 };
 
@@ -54,7 +54,7 @@ export type TrackerWorkingListsColumnConfigs = TrackerWorkingListsColumnConfig[]
 export type TeiColumnMetaForDataFetching = {
     id: string,
     type: typeof dataElementTypes[keyof typeof dataElementTypes],
-    mainProperty?: boolean,
+    isMainProperty?: boolean,
     visible: boolean,
     apiViewName?: string,
     additionalColumn?: boolean,

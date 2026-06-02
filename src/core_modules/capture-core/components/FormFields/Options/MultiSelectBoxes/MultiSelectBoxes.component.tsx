@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import { Checkbox, spacersNum, FieldSet, Label } from '@dhis2/ui';
+import { Checkbox, FieldSet, Label, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
 import { FormGroup } from '../FormGroup.component';
@@ -8,8 +8,8 @@ import { FormGroup } from '../FormGroup.component';
 const styles = (theme: any) => ({
     label: theme.typography.formFieldTitle,
     checkbox: {
-        marginTop: spacersNum.dp8,
-        marginBottom: spacersNum.dp16,
+        marginTop: spacersNum.dp4,
+        marginBottom: spacersNum.dp8,
     },
 });
 
@@ -46,7 +46,6 @@ class MultiSelectBoxesPlain extends Component<Props> {
                 onChange={(e: any) => { this.handleOptionChange(e, value); }}
                 value={value}
                 className={classes.checkbox}
-                dense
             />
         ));
     }

@@ -7,6 +7,13 @@ type InputQueryArgs = {
     [key: string]: any,
 };
 
+const LISTING_FIELDS =
+    'event,program,programStage,status,occurredAt,orgUnit,'
+    + 'assignedUser[uid,username,firstName,surname],'
+    + 'dataValues[dataElement,value]';
+
+const DOWNLOAD_FIELDS = 'dataValues,occurredAt,event,status,orgUnit,program,programType,updatedAt,createdAt,assignedUser';
+
 const mapArgumentNameFromClientToServer = {
     programId: 'program',
     programStageId: 'programStage',
@@ -72,14 +79,6 @@ const getStatusQueryArgs = (filter: string) => {
     return statusQueryArgs;
 };
 
-const getOrgUnitFilterQueryArgs = (filter: string) => {
-    const orgUnitModeKey = featureAvailable(FEATURES.newOrgUnitModeQueryParam) ? 'orgUnitMode' : 'ouMode';
-    return {
-        orgUnitId: filter.replace('eq:', ''),
-        [orgUnitModeKey]: 'SELECTED',
-    };
-};
-
 const getMainApiFilterQueryArguments = (filters: { [id: string]: any } | null, mainColumns: { [id: string]: any}) => {
     const mainFilterQueryArgs =
         filters ?
@@ -96,8 +95,6 @@ const getMainApiFilterQueryArguments = (filters: { [id: string]: any } | null, m
                         queryArgsForCurrentMain = getStatusQueryArgs(filter);
                     } else if (key === 'assignee') {
                         queryArgsForCurrentMain = filter;
-                    } else if (key === 'orgUnitId') {
-                        queryArgsForCurrentMain = getOrgUnitFilterQueryArgs(filter);
                     }
                     return {
                         ...accMainQueryArgs,
@@ -205,8 +202,9 @@ export const getEventListData = async ({
     querySingleResource: QuerySingleResource,
 }) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
+    const apiQueryArgs = createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId);
     const { eventContainers, pagingData, request } = await getEvents(
-        createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId),
+        { ...apiQueryArgs, fields: LISTING_FIELDS },
         absoluteApiPath,
         querySingleResource,
     );
@@ -224,6 +222,9 @@ export const getEventListData = async ({
     return {
         eventContainers: columnFilteredEventContainers,
         pagingData,
-        request,
+        request: {
+            ...request,
+            queryParams: { ...request.queryParams, fields: DOWNLOAD_FIELDS },
+        },
     };
 };
