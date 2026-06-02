@@ -1,3 +1,10 @@
+# [106.4.0](https://github.com/dhis2/capture-app/compare/v106.3.0...v106.4.0) (2026-06-02)
+
+
+### Features
+
+* [DHIS2-21394] Implement read-only mode for event program view event ([#4566](https://github.com/dhis2/capture-app/issues/4566)) ([a90e6a7](https://github.com/dhis2/capture-app/commit/a90e6a73e76c8de071bb8a65c72ea3cb0ed3c0d2))
+
 # [106.3.0](https://github.com/dhis2/capture-app/compare/v106.2.8...v106.3.0) (2026-06-02)
 
 
