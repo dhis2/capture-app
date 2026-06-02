@@ -4,6 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { EnrollmentPageKeys }
     from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
+import { ReadOnlyBadge } from '../../ReadOnlyBadge';
 import type { PlainProps } from './WidgetHeader.types';
 import { OverflowMenuComponent } from '../OverflowMenu';
 
@@ -13,6 +14,9 @@ export const styles: Readonly<any> = {
     },
     icon: {
         marginInlineEnd: spacersNum.dp8,
+    },
+    badge: {
+        marginInlineStart: spacersNum.dp8,
     },
 };
 
@@ -30,6 +34,7 @@ const WidgetHeaderPlain = ({
     onDeleteEventRelationship,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { icon } = linkedStage;
+    const linkedStageWriteAccess = Boolean(linkedStage?.access?.data?.write);
     return (
         <>
             {icon && (
@@ -44,6 +49,11 @@ const WidgetHeaderPlain = ({
                 </div>
             )}
             <span> {linkedStage.name} </span>
+            {!linkedStageWriteAccess && (
+                <div className={classes.badge}>
+                    <ReadOnlyBadge programStageWriteAccess={false} />
+                </div>
+            )}
             {currentPage === EnrollmentPageKeys.VIEW_EVENT && (
                 <div className={classes.menu}>
                     <OverflowMenuComponent

@@ -76,6 +76,9 @@ export const StagesAndEvents: WidgetConfig = {
 export const TrackedEntityRelationship: WidgetConfig = {
     Component: TrackedEntityRelationshipsWrapper,
     shouldHideWidget: ({ addRelationShipContainerElement }: any) => !addRelationShipContainerElement,
+    getCustomSettings: ({ readOnlyMode }: any) => ({
+        readOnlyMode,
+    }),
     getProps: ({
         program,
         orgUnitId,

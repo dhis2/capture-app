@@ -1,9 +1,10 @@
 import React from 'react';
-import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
+import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBoxes } from './NoticeBoxes.container';
 import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
+import { DataEntryModalWrapper } from './DataEntryModalWrapper.component';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
 
 export const DataEntryComponent = ({
@@ -21,36 +22,15 @@ export const DataEntryComponent = ({
     warningsMessages,
     orgUnitId,
     pluginContext,
+    accessReadOnly,
 }: PlainProps) => (
-    <Modal large onClose={onCancel} dataTest="modal-edit-profile">
-        <ModalTitle>{i18n.t('Edit {{trackedEntityName}}',
-            { trackedEntityName, interpolation: { escapeValue: false } },
-        )}</ModalTitle>
-        <ModalContent>
-            {i18n.t(
-                'Change information about this {{trackedEntityName}} here.',
-                { trackedEntityName, interpolation: { escapeValue: false } },
-            )}
-            {' '}
-            {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
-            <DataEntry
-                id={dataEntryId}
-                formFoundation={formFoundation}
-                saveAttempted={saveAttempted}
-                onUpdateFormField={onUpdateFormField}
-                onUpdateFormFieldAsync={onUpdateFormFieldAsync}
-                onGetValidationContext={onGetValidationContext}
-                orgUnitId={orgUnitId}
-                pluginContext={pluginContext}
-            />
-            <NoticeBoxes
-                errorsMessages={errorsMessages}
-                warningsMessages={warningsMessages}
-                hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
-            />
-        </ModalContent>
-        <ModalActions>
-            <ButtonStrip end>
+    <DataEntryModalWrapper
+        onClose={onCancel}
+        trackedEntityName={trackedEntityName}
+        accessReadOnly={accessReadOnly}
+        title={i18n.t('Edit {{trackedEntityName}}', { trackedEntityName, interpolation: { escapeValue: false } })}
+        actions={
+            <>
                 <Button onClick={onCancel} secondary>
                     {i18n.t('Cancel without saving')}
                 </Button>
@@ -59,13 +39,34 @@ export const DataEntryComponent = ({
                         {i18n.t('Loading...')}
                     </Button>
                 )}
-
                 {(modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
                     <Button onClick={onSave} primary>
                         {i18n.t('Save changes')}
                     </Button>
                 )}
-            </ButtonStrip>
-        </ModalActions>
-    </Modal>
+            </>
+        }
+    >
+        {i18n.t(
+            'Change information about this {{trackedEntityName}} here.',
+            { trackedEntityName, interpolation: { escapeValue: false } },
+        )}
+        {' '}
+        {i18n.t('Information about this enrollment can be edited in the Enrollment widget.')}
+        <DataEntry
+            id={dataEntryId}
+            formFoundation={formFoundation}
+            saveAttempted={saveAttempted}
+            onUpdateFormField={onUpdateFormField}
+            onUpdateFormFieldAsync={onUpdateFormFieldAsync}
+            onGetValidationContext={onGetValidationContext}
+            orgUnitId={orgUnitId}
+            pluginContext={pluginContext}
+        />
+        <NoticeBoxes
+            errorsMessages={errorsMessages}
+            warningsMessages={warningsMessages}
+            hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
+        />
+    </DataEntryModalWrapper>
 );
