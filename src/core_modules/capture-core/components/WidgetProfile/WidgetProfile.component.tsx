@@ -15,7 +15,6 @@ import {
     useProgram,
     useTrackedEntityInstances,
     useClientAttributesWithSubvalues,
-    useUserRoles,
     useTeiDisplayName,
     useUserRoles,
 } from './hooks';
