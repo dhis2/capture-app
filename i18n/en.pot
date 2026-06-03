@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-24T11:43:30.545Z\n"
-"PO-Revision-Date: 2026-05-24T11:43:30.545Z\n"
+"POT-Creation-Date: 2026-06-02T14:51:02.458Z\n"
+"PO-Revision-Date: 2026-06-02T14:51:02.458Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -311,9 +311,6 @@ msgstr "No, cancel"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "You don't have access to create an event in the current selections"
-
-msgid "Save"
-msgstr "Save"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Saving a {{trackedEntityName}}"
@@ -626,6 +623,9 @@ msgstr "Select columns"
 msgid "Columns to show in table"
 msgstr "Columns to show in table"
 
+msgid "Save"
+msgstr "Save"
+
 msgid "Column"
 msgstr "Column"
 
@@ -807,6 +807,9 @@ msgstr "There was an error loading the page"
 
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
+
+msgid "Stage not found"
+msgstr "Stage not found"
 
 msgid "Report"
 msgstr "Report"

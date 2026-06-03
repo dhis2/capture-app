@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';
 import { pipe } from 'capture-core-utils';
-import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, dataElementTypes } from '../../metaData';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
@@ -18,7 +18,6 @@ import {
     useScheduleConfigFromProgram,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
-import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { useProgramExpiryForUser } from '../../hooks';
@@ -186,13 +185,6 @@ export const WidgetEventSchedule = ({
             <div>
                 {i18n.t('Program or stage is invalid')}
             </div>
-        );
-    }
-
-    const eventAccess = getProgramEventAccess(programId, stageId);
-    if (!eventAccess?.write) {
-        return (
-            <NoAccess onCancel={onCancel} />
         );
     }
 
