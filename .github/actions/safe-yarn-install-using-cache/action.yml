@@ -1,0 +1,36 @@
+name: 'Safe yarn install using cache'
+description: 'Restore yarn/Cypress cache, install safe-chain, and run yarn install'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v5
+      with:
+        path: |
+          ~/.cache/yarn
+          ~/.cache/Cypress
+        key: ${{ runner.os }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
+
+    - uses: actions/cache@v5
+      id: safe-chain-cache
+      with:
+        path: ~/tmp/safe-chain
+        key: ${{ runner.os }}-safe-chain-1.5.3
+
+    - name: Download safe-chain script
+      if: steps.safe-chain-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        mkdir -p ~/tmp/safe-chain
+        curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.5.3/install-safe-chain.sh -o ~/tmp/safe-chain/install-safe-chain.sh
+
+    - name: Install safe-chain
+      shell: bash
+      run: sh ~/tmp/safe-chain/install-safe-chain.sh --ci
+
+    - name: Install
+      shell: bash
+      env:
+        SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 120
+        SAFE_CHAIN_MINIMUM_PACKAGE_AGE_EXCLUSIONS: "@dhis2/*"
+      run: yarn install --frozen-lockfile
