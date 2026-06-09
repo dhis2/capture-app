@@ -1,3 +1,10 @@
+## [106.4.1](https://github.com/dhis2/capture-app/compare/v106.4.0...v106.4.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* [DHIS2-21392] Form elements visible when no form access ([#4549](https://github.com/dhis2/capture-app/issues/4549)) ([06319b2](https://github.com/dhis2/capture-app/commit/06319b2674d9cbd17cfbefc744808803e11b6da0))
+
 # [106.4.0](https://github.com/dhis2/capture-app/compare/v106.3.0...v106.4.0) (2026-06-02)
 
 
