@@ -37,7 +37,7 @@ const styles: Readonly<any> = {
     },
     fieldWrapper: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
     },
     fieldLabel: {
         color: colors.grey900,
