@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-09T17:38:47.343Z\n"
-"PO-Revision-Date: 2026-06-09T17:38:47.344Z\n"
+"POT-Creation-Date: 2026-06-09T18:00:22.538Z\n"
+"PO-Revision-Date: 2026-06-09T18:00:22.539Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1538,9 +1538,6 @@ msgstr "after"
 
 msgid "before"
 msgstr "before"
-
-msgid "Schedule date info"
-msgstr "Schedule date info"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Scheduled automatically for {{suggestedScheduleDate}}"

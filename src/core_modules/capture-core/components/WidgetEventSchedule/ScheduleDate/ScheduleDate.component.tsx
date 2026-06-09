@@ -39,10 +39,19 @@ const styles: Readonly<any> = {
         display: 'flex',
         flexDirection: 'column',
     },
+    autoScheduledWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+    },
     fieldLabel: {
         color: colors.grey900,
         padding: `${spacers.dp16} ${spacers.dp24} 0 ${spacers.dp16}`,
         fontSize: '14px',
+        flexBasis: 200,
+        minWidth: '40%',
+        boxSizing: 'border-box',
     },
 };
 
@@ -105,7 +114,7 @@ const ScheduleDatePlain = ({
         };
     };
     return (
-        <div className={classes.fieldWrapper}>
+        <div className={hideDueDate ? classes.autoScheduledWrapper : classes.fieldWrapper}>
             {!hideDueDate ?
                 <ScheduleDateField
                     label={i18n.t('Schedule date / Due date')}
