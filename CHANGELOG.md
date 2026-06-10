@@ -1,3 +1,10 @@
+## [106.4.2](https://github.com/dhis2/capture-app/compare/v106.4.1...v106.4.2) (2026-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21592] undefined program rule condition ([#4596](https://github.com/dhis2/capture-app/issues/4596)) ([e1c9758](https://github.com/dhis2/capture-app/commit/e1c9758546e18bfbc25a833eabf0fe7acc0a4241))
+
 ## [106.4.1](https://github.com/dhis2/capture-app/compare/v106.4.0...v106.4.1) (2026-06-09)
 
 

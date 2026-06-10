@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-02T14:51:02.458Z\n"
-"PO-Revision-Date: 2026-06-02T14:51:02.458Z\n"
+"POT-Creation-Date: 2026-06-10T13:04:43.537Z\n"
+"PO-Revision-Date: 2026-06-10T13:04:43.537Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1076,9 +1076,6 @@ msgstr "You only have view access to this enrollment"
 
 msgid "You only have view access to this program"
 msgstr "You only have view access to this program"
-
-msgid "You don't have access to delete this relationship"
-msgstr "You don't have access to delete this relationship"
 
 msgid "You only have view access to this {{trackedEntityName}}"
 msgstr "You only have view access to this {{trackedEntityName}}"
