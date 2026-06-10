@@ -117,16 +117,16 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error deleting the enrollment event') }),
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error editing the event, the changes made were not saved') }),
-    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: () =>
-        addErrorFeedback({ message: i18n.t('Could not save enrollment note') }),
-    [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: () =>
-        addErrorFeedback({ message: i18n.t('Could not save event note') }),
-    [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: () =>
-        addErrorFeedback({ message: i18n.t('Could not save event note') }),
     [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (_state, action) =>
         addErrorFeedback({ message: i18n.t(action.payload.message) }),
     [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
+    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: () =>
+        addErrorFeedback({ message: i18n.t('Could not save enrollment note') }),
+    [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: () =>
+        addErrorFeedback({ message: i18n.t('Could not save event note') }),
+    [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: () =>
+        addErrorFeedback({ message: i18n.t('Could not save event note') }),
 }, 'feedbacks', []);
