@@ -1,9 +1,20 @@
+type TrackedEntityRef = { trackedEntity: string };
+type TrackedEntityForToggle = {
+    trackedEntity: string;
+    trackedEntityType: string;
+    orgUnit: string;
+};
+
 export type Props = {
-    trackedEntity: { trackedEntity: string };
+    trackedEntity: TrackedEntityRef;
+    trackedEntityForToggle?: TrackedEntityForToggle | null;
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
     canWriteData: boolean;
+    canToggleStatus: boolean;
+    trackedEntityInactive: boolean;
     onDeleteSuccess?: () => void;
+    onStatusToggleSuccess?: () => void;
     displayChangelog: boolean;
     teiId: string;
     programAPI: any;
@@ -11,12 +22,16 @@ export type Props = {
 };
 
 export type PlainProps = {
-    trackedEntity: { trackedEntity: string };
+    trackedEntity: TrackedEntityRef;
+    trackedEntityForToggle?: TrackedEntityForToggle | null;
     trackedEntityTypeName: string;
     trackedEntityData: Record<string, any>;
     canWriteData: boolean;
     canCascadeDeleteTei: boolean;
+    canToggleStatus: boolean;
+    trackedEntityInactive: boolean;
     onDeleteSuccess?: () => void;
+    onStatusToggleSuccess?: () => void;
     displayChangelog: boolean;
     teiId: string;
     programAPI: any;
