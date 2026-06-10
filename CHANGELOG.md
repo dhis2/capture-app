@@ -1,3 +1,10 @@
+## [106.4.4](https://github.com/dhis2/capture-app/compare/v106.4.3...v106.4.4) (2026-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21580] Sequential errors are not shown in the FeedbackBar ([#4591](https://github.com/dhis2/capture-app/issues/4591)) ([0c4716d](https://github.com/dhis2/capture-app/commit/0c4716d77c706e76fc2cf042d31b1b3300a1ccec))
+
 ## [106.4.3](https://github.com/dhis2/capture-app/compare/v106.4.2...v106.4.3) (2026-06-10)
 
 
