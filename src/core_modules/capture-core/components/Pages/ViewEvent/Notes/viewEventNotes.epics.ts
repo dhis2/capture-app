@@ -54,7 +54,7 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDa
             const payload = action.payload;
             const eventId = state.viewEventPage.eventId;
             const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
-            const { firstName, surname, username } = CurrentUser.get();
+            const { firstName, surname } = CurrentUser.get();
             const clientId = uuid();
             const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
@@ -65,7 +65,6 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDa
                     surname,
                     uid: clientId,
                 },
-                storedBy: username,
                 storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 clientId: uuid(),
             };

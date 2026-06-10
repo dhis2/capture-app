@@ -58,7 +58,6 @@ export type Props = {
    notes: Array<{
       value: string;
       storedAt: string;
-      storedBy?: string;
       createdBy?: any;
       note?: string;
    }>;
