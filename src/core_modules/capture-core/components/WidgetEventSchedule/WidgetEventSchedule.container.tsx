@@ -74,7 +74,6 @@ export const WidgetEventSchedule = ({
     const [notes, setNotes] = useState<Array<{
         value: string;
         storedAt: string;
-        storedBy?: string;
         createdBy?: any;
         note?: string;
     }>>([]);
@@ -147,9 +146,8 @@ export const WidgetEventSchedule = ({
     ]);
 
     const onAddNote = (note: string) => {
-        const { username, firstName, surname } = CurrentUser.get();
+        const { firstName, surname } = CurrentUser.get();
         const newNote = {
-            storedBy: username,
             storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
             value: note,
             createdBy: { firstName, surname },
