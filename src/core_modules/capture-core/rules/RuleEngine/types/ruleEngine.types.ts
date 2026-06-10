@@ -180,7 +180,7 @@ export type ProgramRule = {
     id: string,
     name: string,
     priority?: number,
-    condition: string,
+    condition?: string,
     description?: string | null,
     displayName: string,
     programId: string,
