@@ -9,20 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event.label.name == 'preview' || github.event.label.name == 'testing') && !github.event.push.repository.fork && github.actor != 'dependabot[bot]'
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          cache: ''
 
-      - uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+      - uses: ./.github/actions/safe-yarn-install-using-cache
 
       - name: Build
         run: yarn build:standalone
