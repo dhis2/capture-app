@@ -1,3 +1,10 @@
+## [106.4.3](https://github.com/dhis2/capture-app/compare/v106.4.2...v106.4.3) (2026-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21546] User can save empty note ([#4579](https://github.com/dhis2/capture-app/issues/4579)) ([f95106f](https://github.com/dhis2/capture-app/commit/f95106f26532bfe29a87b35726f3ca020c4ea409))
+
 ## [106.4.2](https://github.com/dhis2/capture-app/compare/v106.4.1...v106.4.2) (2026-06-10)
 
 
