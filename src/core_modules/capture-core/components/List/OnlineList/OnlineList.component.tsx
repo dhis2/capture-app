@@ -175,9 +175,10 @@ class Index extends React.Component<Props> {
                 <DataTableCell
                     key={column.id}
                     align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
-                    style={{ cursor: this.props.isSelectionInProgress ? 'pointer' : 'default' }}
+                    style={{ cursor: this.props.isSelectionInProgress && !row.inactive ? 'pointer' : 'default' }}
                     onClick={() => {
                         if (this.props.isSelectionInProgress) {
+                            if (row.inactive) return;
                             onRowSelect(row[rowIdKey]);
                             return;
                         }

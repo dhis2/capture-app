@@ -125,6 +125,7 @@ export const EnrollmentAccessProvider = ({
                     anyStageWriteAccess: false,
                     currentStageWriteAccess: false,
                     allWriteAccessMissing: true,
+                    showWidgetBadge: false,
                 }),
             }),
         [program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent],
