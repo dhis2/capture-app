@@ -98,12 +98,12 @@ const WidgetProfilePlain = ({
         programWriteAccess,
         trackedEntityTypeWriteAccess,
     } = useEnrollmentAccessContext();
-    const trackedEntityTypeName = program?.trackedEntityType?.displayName;
     const {
         loading: userRolesLoading,
         error: userRolesError,
         userRoles,
     } = useUserRoles();
+    const trackedEntityTypeName = program?.trackedEntityType?.displayName;
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 
@@ -114,7 +114,7 @@ const WidgetProfilePlain = ({
 
     const profileButtonLabel = useMemo(() => {
         if (readOnlyMode || hasNoAttributes) return null;
-        if (!isEditable) return i18n.t('Show profile');
+        if (!isEditable) return i18n.t('View profile');
         if (isEditable) return i18n.t('Edit');
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);

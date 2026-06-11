@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-19T13:44:33.550Z\n"
-"PO-Revision-Date: 2026-05-19T13:44:33.550Z\n"
+"POT-Creation-Date: 2026-06-11T13:53:26.319Z\n"
+"PO-Revision-Date: 2026-06-11T13:53:26.320Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -311,9 +311,6 @@ msgstr "No, cancel"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "You don't have access to create an event in the current selections"
-
-msgid "Save"
-msgstr "Save"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Saving a {{trackedEntityName}}"
@@ -626,6 +623,9 @@ msgstr "Select columns"
 msgid "Columns to show in table"
 msgstr "Columns to show in table"
 
+msgid "Save"
+msgstr "Save"
+
 msgid "Column"
 msgstr "Column"
 
@@ -807,6 +807,9 @@ msgstr "There was an error loading the page"
 
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
+
+msgid "Stage not found"
+msgstr "Stage not found"
 
 msgid "Report"
 msgstr "Report"
@@ -1068,14 +1071,14 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "You only have view access to enrollment"
-msgstr "You only have view access to enrollment"
+msgid "You only have view access to this enrollment"
+msgstr "You only have view access to this enrollment"
 
-msgid "You only have view access to program"
-msgstr "You only have view access to program"
+msgid "You only have view access to this program"
+msgstr "You only have view access to this program"
 
-msgid "You only have view access to {{trackedEntityName}}"
-msgstr "You only have view access to {{trackedEntityName}}"
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr "You only have view access to this {{trackedEntityName}}"
 
 msgid "You only have view access to this tracked entity type"
 msgstr "You only have view access to this tracked entity type"
@@ -1086,8 +1089,8 @@ msgstr "You only have view access to these program stages"
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
 
-msgid "This event is outside the edit period"
-msgstr "This event is outside the edit period"
+msgid "This event is outside the valid editing period"
+msgstr "This event is outside the valid editing period"
 
 msgid "This event has been completed"
 msgstr "This event has been completed"
@@ -1650,8 +1653,8 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "Show profile"
-msgstr "Show profile"
+msgid "View profile"
+msgstr "View profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
@@ -1721,6 +1724,9 @@ msgstr "New {{ eventName }} event"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+
+msgid "This event is outside the edit period"
+msgstr "This event is outside the edit period"
 
 msgid "An error occurred while deleting the event"
 msgstr "An error occurred while deleting the event"

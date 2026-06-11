@@ -40,8 +40,7 @@ export const filterFormFieldOrgUnitsEpic = (action$: any, store: any, { querySin
             return from(querySingleResource({
                 resource: 'organisationUnits',
                 params: {
-                    fields: 'id,displayName,path,publicAccess,access,lastUpdated' +
-                        'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
+                    fields: 'id,displayName,path',
                     paging: false,
                     withinUserSearchHierarchy: true,
                     query: searchText,

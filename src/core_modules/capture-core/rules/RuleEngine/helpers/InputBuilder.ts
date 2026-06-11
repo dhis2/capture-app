@@ -170,7 +170,7 @@ const convertProgramRule = (rule: ProgramRule) => {
     } = rule;
 
     return new RuleJs(
-        condition,
+        condition || '',
         programRuleActions.flatMap(convertProgramRuleAction),
         uid,
         name,

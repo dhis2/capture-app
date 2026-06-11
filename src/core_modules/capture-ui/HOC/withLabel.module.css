@@ -11,6 +11,7 @@
 .labelContainer {
     padding-inline-end: 16px;
     min-width: 40%;
+    word-break: break-word;
 }
 
 .labelContainerVertical {
@@ -19,5 +20,7 @@
 
 .inputContainer {
     flex-grow: 1;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    word-break: break-word;
 }

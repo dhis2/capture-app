@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SimpleSingleSelect } from '@dhis2/ui';
 import { withFocusHandler } from './withFocusHandler';
 import { withSelectSingleTranslations } from './withTranslations';
+import { useWindowedOptions } from './useWindowedOptions';
 
 type Option = {
     value: any;
@@ -48,13 +49,16 @@ const NewSingleSelectFieldComponentPlain = ({
         [options, filterValue, filterable],
     );
 
+    const { visibleOptions, onEndReached, resetWindow } = useWindowedOptions(filteredOptions);
+
     const selectedOption = value == null
         ? undefined
         : options.find(option => option.value === value) ?? { value, label: String(value) };
 
     const handleFilterChange = useCallback((newFilterValue: string) => {
         setFilterValue(newFilterValue);
-    }, []);
+        resetWindow();
+    }, [resetWindow]);
 
     const handleChange = (nextValue: string | { value: string }) => {
         const resolvedValue = typeof nextValue === 'string' ? nextValue : nextValue?.value;
@@ -62,10 +66,12 @@ const NewSingleSelectFieldComponentPlain = ({
             onChange(resolvedValue ?? null);
         }
         setFilterValue('');
+        resetWindow();
         onBlur?.(resolvedValue ?? null);
     };
 
     const handleBlur = () => {
+        resetWindow();
         onBlur?.(value ?? null);
     };
 
@@ -102,13 +108,14 @@ const NewSingleSelectFieldComponentPlain = ({
         <div ref={selectRef}>
             <SimpleSingleSelect
                 name={fieldName}
-                options={filteredOptions}
+                options={visibleOptions}
                 selected={selectedOption}
                 placeholder={placeholder}
                 clearable={clearable}
                 filterable={filterable}
                 filterValue={filterValue}
                 onFilterChange={handleFilterChange}
+                onEndReached={onEndReached}
                 aria-required={required}
                 onChange={handleChange}
                 onBlur={handleBlur}

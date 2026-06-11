@@ -3,4 +3,4 @@
 echo " - Removing generated project folders..."
 rm -rf .d2
 rm -rf build
-rm -rf node_modules
+rm -rf node_modules/* node_modules/.[!.]* node_modules/..?*

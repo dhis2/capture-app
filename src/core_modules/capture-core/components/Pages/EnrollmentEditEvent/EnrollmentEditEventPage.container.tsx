@@ -276,7 +276,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
         completedAtClient: convertServerToClient(event?.completedAt, dataElementTypes.DATE) as string,
     });
 
-
     const pageStatus = getPageStatus({
         orgUnitId,
         enrollmentSite,
