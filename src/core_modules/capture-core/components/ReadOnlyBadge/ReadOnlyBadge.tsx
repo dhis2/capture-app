@@ -23,7 +23,7 @@ const getProgramStageMessage = (multipleStages: boolean): string => (multipleSta
     ? i18n.t('You only have view access to these program stages')
     : i18n.t('You only have view access to this program stage'));
 
-const getExpiredMessage = (): string => i18n.t('This event is outside the valid editing period');
+const getExpiredMessage = (): string => i18n.t('This event is outside the editing period');
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 

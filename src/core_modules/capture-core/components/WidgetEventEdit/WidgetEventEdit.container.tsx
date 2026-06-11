@@ -18,12 +18,10 @@ import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 import {
-    useProgramExpiryForUser,
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
     useEventEditPermissions,
 } from '../../hooks';
-import { useAuthorities } from '../../utils/authority/useAuthorities';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
 
@@ -109,12 +107,10 @@ const WidgetEventEditPlain = ({
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const completedAt = loadedValues?.eventContainer?.event?.completedAt;
-    const expiryPeriod = useProgramExpiryForUser(programId);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
-    const { readOnly } = useEventEditPermissions({
+    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,

@@ -18,6 +18,8 @@ type Output = {
     isEventWithinValidPeriod: boolean,
     isWithinCompleteExpiry: boolean,
     canEditCompletedEvent: boolean,
+    canUncompleteEvent: boolean,
+    expiryPeriod: ReturnType<typeof useProgramExpiryForUser>,
     readOnly: boolean,
 };
 
@@ -61,6 +63,8 @@ export const useEventEditPermissions = ({
         isEventWithinValidPeriod,
         isWithinCompleteExpiry,
         canEditCompletedEvent,
+        canUncompleteEvent,
+        expiryPeriod,
         readOnly,
     };
 };
