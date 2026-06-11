@@ -11,6 +11,7 @@ import { isValidPeriod, isWithinCompleteEventsExpiry } from '../../../../../../.
 import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
 import { dataElementTypes } from '../../../../../../../metaData';
 import { eventStatuses } from '../../../../../../WidgetEventEdit/constants/status.const';
+import { useAuthorities } from '../../../../../../../utils/authority/useAuthorities';
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 type Props = {
@@ -37,14 +38,14 @@ export const DeleteActionButton = ({
     expiryPeriod,
     completeEventsExpiryDays,
 }: Props) => {
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
     const occurredAtClientView = convertFn(occurredAt, dataElementTypes.DATE);
 
     const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
-    const canEditCompletedEvent = !(blockEntryForm && eventStatus === eventStatuses.COMPLETED);
+    const canEditCompletedEvent = !(blockEntryForm && !canUncompleteEvent && eventStatus === eventStatuses.COMPLETED);
 
-    // Delete mirrors the read-only rules: an event that can no longer be edited cannot be deleted either.
     const canDelete = isWithinValidPeriod && isWithinCompleteExpiry && canEditCompletedEvent;
 
     const getDisabledMessage = (): string => {
