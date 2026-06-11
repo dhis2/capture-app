@@ -20,7 +20,6 @@ export type EnrollmentData = {
     orgUnit?: string;
     program?: string;
     status?: string;
-    storedBy?: string;
     scheduledAt?: string;
     trackedEntity?: string;
     trackedEntityType?: string;
