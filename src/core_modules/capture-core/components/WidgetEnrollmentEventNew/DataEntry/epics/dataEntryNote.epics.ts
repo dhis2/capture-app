@@ -21,7 +21,7 @@ export const addNoteForNewEnrollmentEventEpic = (
         ofType(newEventWidgetDataEntryActionTypes.EVENT_NOTE_ADD),
         map((action: any) => {
             const payload = action.payload;
-            const { firstName, surname, username } = CurrentUser.get();
+            const { firstName, surname } = CurrentUser.get();
             const clientId = uuid();
             const note = {
                 value: payload.note,
@@ -30,7 +30,6 @@ export const addNoteForNewEnrollmentEventEpic = (
                     surname,
                     uid: clientId,
                 },
-                storedBy: username,
                 storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 clientId: uuid(),
             };

@@ -10,7 +10,6 @@ export type ClientNote = {
         surname: string;
         uid: string;
     };
-    storedBy: string;
     storedAt: string;
 };
 
