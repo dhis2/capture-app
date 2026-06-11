@@ -1,17 +1,22 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
-import type { ProgramStage } from '../../../../metaData';
+import { dataElementTypes, type ProgramStage } from '../../../../metaData';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
+import { ViewEventReadOnlyBadge } from '../ViewEventReadOnlyBadge';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
-import { useHideWidgetByRuleLocations } from '../../../../hooks';
+import { useHideWidgetByRuleLocations, useProgramExpiryForUser } from '../../../../hooks';
+import { useAuthorities } from '../../../../utils/authority/useAuthorities';
+import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
+import { convertFormToClient } from '../../../../converters';
+import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -31,6 +36,12 @@ const getStyles = (theme: any) => ({
         padding: theme.typography.pxToRem(10),
         borderBottom: `1px solid ${theme.palette.grey.blueGrey}`,
     },
+    breadcrumbRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: spacers.dp8,
+    },
     contentContainer: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -44,7 +55,7 @@ type Props = {
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
     isUserInteractionInProgress: boolean,
-    showEditEvent: boolean,
+    isEditEventPage: boolean,
     onBackToViewEvent: () => void,
     assignee: UserFormField,
     getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
@@ -60,7 +71,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         classes,
         programId,
         programStage,
-        showEditEvent,
+        isEditEventPage,
         onBackToViewEvent,
         isUserInteractionInProgress,
         currentDataEntryKey,
@@ -82,24 +93,47 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules);
 
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.dataEntryValues?.occurredAt);
+    const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
+    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
+    const canEditCompletedEvent = !(
+        programStage?.blockEntryForm
+        && !canUncompleteEvent
+        && eventStatus === eventStatuses.COMPLETED
+    );
+    const readOnly = !eventAccess.write || !isEventWithinValidPeriod || !canEditCompletedEvent;
+    const showEditButton = !isEditEventPage && !readOnly;
+
     return (
         <div className={classes.container}>
-            <EventBreadcrumb
-                programId={programId}
-                page={showEditEvent ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
-                userInteractionInProgress={isUserInteractionInProgress}
-                onBackToViewEvent={onBackToViewEvent}
-                onBackToMainPage={onBackToAllEvents}
-            />
+            <div className={classes.breadcrumbRow}>
+                <EventBreadcrumb
+                    programId={programId}
+                    page={isEditEventPage ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
+                    userInteractionInProgress={isUserInteractionInProgress}
+                    onBackToViewEvent={onBackToViewEvent}
+                    onBackToMainPage={onBackToAllEvents}
+                />
+                <ViewEventReadOnlyBadge
+                    eventAccess={eventAccess}
+                    isEventWithinValidPeriod={isEventWithinValidPeriod}
+                    canEditCompletedEvent={canEditCompletedEvent}
+                />
+            </div>
             <div className={classes.contentContainer}>
                 <EventDetails
                     eventAccess={eventAccess}
                     programStage={programStage}
                     onBackToViewEvent={onBackToViewEvent}
                     onBackToAllEvents={onBackToAllEvents}
+                    showEditButton={showEditButton}
                 />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
+                    readOnly={readOnly}
                     programStage={programStage}
                     dataEntryKey={currentDataEntryKey}
                     assignee={assignee}

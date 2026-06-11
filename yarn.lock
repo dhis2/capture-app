@@ -90,10 +90,10 @@
     json5 "^2.2.3"
     semver "^6.3.1"
 
-"@babel/eslint-parser@^7.19.1":
-  version "7.28.0"
-  resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.28.0.tgz#c1b3fbba070f5bac32e3d02f244201add4afdd6e"
-  integrity sha512-N4ntErOlKvcbTt01rr5wj3y55xnIdx1ymrfIr8C2WnM1Y9glFgWaGDEULJIazOX3XM9NRzhfJ6zZnQ1sBNWU+w==
+"@babel/eslint-parser@^7.28.6":
+  version "7.28.6"
+  resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.28.6.tgz#6a294a4add732ebe7ded8a8d2792dd03dd81dc3f"
+  integrity sha512-QGmsKi2PBO/MHSQk+AAgA9R6OHQr+VqnniFE0eMWZcVcfBZoA2dKn2hUsl3Csg/Plt9opRUWdY7//VXsrIlEiA==
   dependencies:
     "@nicolo-ribaudo/eslint-scope-5-internals" "5.1.1-v1"
     eslint-visitor-keys "^2.1.0"
@@ -2313,12 +2313,12 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2/app-adapter@12.11.0":
-  version "12.11.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-adapter/-/app-adapter-12.11.0.tgz#bc76fd317c0b95b9a1498f4bc717622a8dd5be6a"
-  integrity sha512-XwAVGJtBMIq1tf3yIGYbsgUVn08W4021jo3E5mkIuTsds20q5hk3pt6KEQK21dlWIMPM0OYYvNdhFTTuXj9d2A==
+"@dhis2/app-adapter@12.11.1":
+  version "12.11.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-adapter/-/app-adapter-12.11.1.tgz#f12f3e2ed6eb4c572997ff04d6d8bfce61e24912"
+  integrity sha512-xPc/SfnQ4AsDknCoH6eEyzHW+cwLHA6fJmuvbBSjOs8rFUw0T/ZMOOSh9kcAb+/qmFpcFTRlnCQXwEnLkadgtg==
   dependencies:
-    "@dhis2/pwa" "12.11.0"
+    "@dhis2/pwa" "12.11.1"
     moment "^2.24.0"
 
 "@dhis2/app-runtime@^3.14.3", "@dhis2/app-runtime@^3.17.0":
@@ -2379,15 +2379,15 @@
   dependencies:
     prop-types "^15.7.2"
 
-"@dhis2/app-shell@12.11.0":
-  version "12.11.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-shell/-/app-shell-12.11.0.tgz#7535240ee60d5ba179989d10aaf2d8fe16b36ed3"
-  integrity sha512-b1wm7nC5cMpoprRfrC8/OOrDTe1+1im50cxwQwNIL2Q/8v0fwd14NSJzWbyxGL0To8S9tbK5ruZL+QllrWtGfg==
+"@dhis2/app-shell@12.11.1":
+  version "12.11.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-shell/-/app-shell-12.11.1.tgz#9b6e3ed97e1a2c1b7617e42fd5bc82eeb9480510"
+  integrity sha512-8Vbms2pE1GFCgJOuAafSZuLrOPOmpiqt5lcFvDlhBzXOLx2VDzM9BwTtGi8bm+kX4jrTFkDCTkxkvelRNonjvQ==
   dependencies:
-    "@dhis2/app-adapter" "12.11.0"
+    "@dhis2/app-adapter" "12.11.1"
     "@dhis2/app-runtime" "^3.14.3"
     "@dhis2/d2-i18n" "^1.2.0"
-    "@dhis2/pwa" "12.11.0"
+    "@dhis2/pwa" "12.11.1"
     "@dhis2/ui" "^10.9.2"
     classnames "^2.2.6"
     moment "^2.29.1"
@@ -2398,10 +2398,10 @@
     styled-jsx "^4.0.1"
     typeface-roboto "^0.0.75"
 
-"@dhis2/cli-app-scripts@^12.11.0":
-  version "12.11.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-app-scripts/-/cli-app-scripts-12.11.0.tgz#cddecb6c6c3e2c40cdfbf6250ab3e0ecae7e3fb7"
-  integrity sha512-dBbnNS4tOzez1QIBoYfpS2wotWWTig29VSOT09zruqILyIpT6uQ8kWx2kF97Iq0tSfdIq5I5x8U4/yxdzO9Vfg==
+"@dhis2/cli-app-scripts@^12.11.1":
+  version "12.11.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-app-scripts/-/cli-app-scripts-12.11.1.tgz#ca33d006a8743c35366864c8ac22e488680324e7"
+  integrity sha512-zgyiqR3UTo9bK2yDUFRDusNGPX1gKNShSIjou63RbWLKJ3tfPgxpXR9pX6D+wqeBwKYu/S+zuZziCjgyX6U0dA==
   dependencies:
     "@babel/core" "^7.27.4"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
@@ -2414,7 +2414,7 @@
     "@babel/preset-env" "^7.27.2"
     "@babel/preset-react" "^7.0.0"
     "@babel/preset-typescript" "^7.27.1"
-    "@dhis2/app-shell" "12.11.0"
+    "@dhis2/app-shell" "12.11.1"
     "@dhis2/cli-helpers-engine" "^3.2.2"
     "@jest/core" "^27.0.6"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.5.4"
@@ -2574,10 +2574,10 @@
   resolved "https://registry.yarnpkg.com/@dhis2/prop-types/-/prop-types-3.1.2.tgz#65b8ad2da8cd2f72bc8b951049a6c9d1b97af3e9"
   integrity sha512-eM0jjLOWvtXWqSFp5YC4DHFpkP8Y1D2eUwGV7MBWjni+o27oesVan+oT7WHeOeLdlAd4acRJrnaaAyB4Ck1wGQ==
 
-"@dhis2/pwa@12.11.0":
-  version "12.11.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/pwa/-/pwa-12.11.0.tgz#6600c91d2d9595fdf35243dce0ef714c6e414e15"
-  integrity sha512-ZcWHMBLzqW4TzvKQxsX+NALyKH9IEc/QvIIf5tR5pSdhIUPhy0WBtRdczgBfuUcBMtyNR+i9iORgnsUHA4Iefg==
+"@dhis2/pwa@12.11.1":
+  version "12.11.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/pwa/-/pwa-12.11.1.tgz#76448bbcbf0b2a347a04fe5524ac627bca1aa550"
+  integrity sha512-q1bIYrvF2R/peQp/bu8AZ6LsEOAYNHliJEGSr/0lczrrke61oHAk4WcYFATYRaUDlvRA1vxstRSSVsUWtB0qRA==
   dependencies:
     idb "^6.0.0"
     workbox-precaching "^7.1.0"
@@ -11882,10 +11882,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
   integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
-query-string@^9.3.1:
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-9.3.1.tgz#d0c93e6c7fb7c17bdf04aa09e382114580ede270"
-  integrity sha512-5fBfMOcDi5SA9qj5jZhWAcTtDfKF5WFdd2uD9nVNlbxVv1baq65aALy6qofpNEGELHvisjjasxQp7BlM9gvMzw==
+query-string@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-9.4.0.tgz#4f2cd518680e087dd781dd605f75dcb18c7f7a53"
+  integrity sha512-ivvWyHqU9K1Log4hJFhqVIIMoEi0nzmlRhvk2pPcTuQH/Y0K5iTTMxEx7R0PRHD2Z1hMVbWnjfsEWbIKIK+3IA==
   dependencies:
     decode-uri-component "^0.4.1"
     filter-obj "^5.1.0"
@@ -12971,9 +12971,9 @@ shebang-regex@^3.0.0:
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
 shell-quote@^1.8.1:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.3.tgz#55e40ef33cf5c689902353a3d8cd1a6725f08b4b"
-  integrity sha512-ObmnIF4hXNg1BqhnHmgbDETF8dLPCggZWBjkQfhZpbszZnYur5DUljTcCHii5LC3J5E0yeO/1LIMyH+UvHQgyw==
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.4.tgz#2edd9a4dcefc96649e2e2cb12f637b1f1d92a190"
+  integrity sha512-VsC6n6vz1ihYYyZZwX7YZSF5l5x36ca17OC+a69h94YqB7X6XLwf+5MOgynYir2SLFUbl8gIYvBo8K8RoNQ6bQ==
 
 side-channel-list@^1.0.0:
   version "1.0.0"
@@ -14139,6 +14139,11 @@ typeface-roboto@^0.0.75:
   version "0.0.75"
   resolved "https://registry.yarnpkg.com/typeface-roboto/-/typeface-roboto-0.0.75.tgz#98d5ba35ec234bbc7172374c8297277099cc712b"
   integrity sha512-VrR/IiH00Z1tFP4vDGfwZ1esNqTiDMchBEXYY9kilT6wRGgFoCAlgkEUMHb1E3mB0FsfZhv756IF0+R+SFPfdg==
+
+typeface-roboto@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-roboto/-/typeface-roboto-1.1.13.tgz#9c4517cb91e311706c74823e857b4bac9a764ae5"
+  integrity sha512-YXvbd3a1QTREoD+FJoEkl0VQNJoEjewR2H11IjVv4bp6ahuIcw0yyw/3udC4vJkHw3T3cUh85FTg8eWef3pSaw==
 
 typescript@^5.6.3, typescript@^5.8.2:
   version "5.8.3"

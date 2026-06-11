@@ -33,7 +33,7 @@ export const addNoteForEnrollmentEpic = (
             const state = store.value;
             const { enrollmentId, note } = action.payload;
             const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
-            const { firstName, surname, username } = CurrentUser.get();
+            const { firstName, surname } = CurrentUser.get();
             const clientId = uuid();
 
             const serverData = createServerData(note, useNewEndpoint);
@@ -45,7 +45,6 @@ export const addNoteForEnrollmentEpic = (
                     surname,
                     uid: clientId,
                 },
-                storedBy: username,
                 storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 clientId,
             };

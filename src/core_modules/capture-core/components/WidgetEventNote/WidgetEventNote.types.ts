@@ -10,7 +10,6 @@ export type FormNote = {
         surname: string;
         uid: string;
     };
-    storedBy: string;
     storedAt: string;
     clientId: string;
 };

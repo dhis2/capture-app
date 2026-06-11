@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
@@ -62,10 +61,6 @@ const styles: Readonly<any> = (theme: any) => ({
     relationshipHighlight: {
         animation: 'background-fade 2.5s forwards',
     },
-    tooltip: {
-        display: 'inline-flex',
-        borderRadius: '100%',
-    },
 });
 
 const fromNames = {
@@ -76,7 +71,7 @@ type PlainProps = {
     relationships: Array<Relationship>;
     highlightRelationshipId?: string;
     writableRelationshipTypes: Array<RelationshipType>;
-    entityAccess: { read: boolean; write: boolean };
+    readOnly?: boolean;
     onRemoveRelationship: (relationshipClientId: string) => void;
     onOpenAddRelationship: () => void;
     onRenderConnectedEntity: (entity: Entity) => React.ReactNode;
@@ -89,7 +84,7 @@ type Props = PlainProps & WithStyles<typeof styles>;
 
 class RelationshipsPlain extends React.Component<Props> {
     static defaultProps = {
-        entityAccess: { read: true, write: true },
+        readOnly: false,
     }
 
     shouldComponentUpdate(nextProps: Props) {
@@ -122,10 +117,10 @@ class RelationshipsPlain extends React.Component<Props> {
     }
 
     canDelete = (relationship: Relationship) => {
-        const { entityAccess, writableRelationshipTypes } = this.props;
+        const { readOnly, writableRelationshipTypes } = this.props;
         return (
+            !readOnly &&
             relationship.from.id === this.props.currentEntityId &&
-            entityAccess.write &&
             writableRelationshipTypes.some(rt => rt.id === relationship.relationshipType.id && rt.access.data.write)
         );
     }
@@ -148,23 +143,17 @@ class RelationshipsPlain extends React.Component<Props> {
                         {this.getEntityName(relationship.to)}
                     </div>
                 </div>
-                <div className={classes.relationshipActions}>
-                    <ConditionalTooltip
-                        content={i18n.t('You don\'t have access to delete this relationship')}
-                        enabled={!canDelete}
-                        wrapperClassName={classes.tooltip}
-                    >
+                {canDelete && (
+                    <div className={classes.relationshipActions}>
                         <IconButton
                             dataTest="delete-relationship-button"
                             onClick={() => { onRemoveRelationship(relationship.clientId); }}
-                            disabled={!canDelete}
                             secondary
                         >
                             <IconDelete16 />
                         </IconButton>
-
-                    </ConditionalTooltip>
-                </div>
+                    </div>
+                )}
             </div>
         );
     }
@@ -174,34 +163,33 @@ class RelationshipsPlain extends React.Component<Props> {
 
     render() {
         const {
-            classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton,
+            classes,
+            onOpenAddRelationship,
+            readOnly,
+            writableRelationshipTypes,
+            relationshipsRef,
+            smallMainButton,
         } = this.props;
-        const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
+        const canCreate = !readOnly && writableRelationshipTypes.length > 0;
         return (
             <div className={classes.container} ref={relationshipsRef}>
                 <div className={classes.relationshipsContainer}>
                     {this.renderRelationships()}
                 </div>
-                <div>
-                    <div
-                        className={classes.addButtonContainer}
-                    >
-                        <ConditionalTooltip
-                            content={i18n.t('You don\'t have access to create any relationships')}
-                            enabled={!canCreate}
-                        >
+                {canCreate && (
+                    <div>
+                        <div className={classes.addButtonContainer}>
                             <Button
                                 onClick={onOpenAddRelationship}
-                                disabled={!canCreate}
                                 small={smallMainButton}
                                 dataTest="add-relationship-button"
                                 secondary
                             >
                                 {i18n.t('Add relationship')}
                             </Button>
-                        </ConditionalTooltip>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         );
     }

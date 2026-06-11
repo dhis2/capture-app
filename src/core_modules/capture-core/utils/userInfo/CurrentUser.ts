@@ -6,7 +6,6 @@ export type OrgUnitRef = {
 export type CurrentUserType = {
     firstName: string;
     surname: string;
-    username: string;
     uiLocale: string;
     userRoles: string[];
     organisationUnits: OrgUnitRef[];

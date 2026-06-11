@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
@@ -13,12 +13,10 @@ import {
 } from '@dhis2/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
-import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
-import { dataElementTypes } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
@@ -27,9 +25,7 @@ import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
 import { useProgramExpiryForUser } from '../../../../hooks';
-import { convertFormToClient } from '../../../../converters';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import type { PlainProps } from './EventDetailsSection.types';
 
@@ -70,11 +66,12 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         eventId,
         eventData,
         onOpenEditEvent,
-        showEditEvent,
+        isEditEventPage,
         programStage,
         eventAccess,
         onBackToAllEvents,
         programId,
+        showEditButton,
         ...passOnProps
     } = props;
     const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
@@ -94,38 +91,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         onBackToAllEvents();
     }, [eventId, queryClient, onBackToAllEvents]);
 
-    const occurredAtClient = convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string;
-    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
-    const isDisabled = !eventAccess.write || !isWithinValidPeriod;
-
-    const occurredAtValue = eventData?.dataEntryValues?.occurredAt;
-    const tooltipContent = useMemo(() => {
-        if (!eventAccess.write) {
-            return i18n.t("You don't have access to edit this event");
-        }
-        if (!isWithinValidPeriod) {
-            return i18n.t(
-                '{{occurredAt}} belongs to an expired period. Event cannot be edited',
-                {
-                    occurredAt: occurredAtValue,
-                    interpolation: { escapeValue: false },
-                },
-            );
-        }
-        return undefined;
-    }, [
-        eventAccess.write,
-        isWithinValidPeriod,
-        occurredAtValue,
-    ]);
-
     if (error) {
         return error.errorComponent;
     }
 
     const renderDataEntryContainer = () => (
         <div className={classes.dataEntryContainer}>
-            {showEditEvent ?
+            {isEditEventPage ?
                 <EditEventDataEntry
                     dataEntryId={dataEntryIds.SINGLE_EVENT}
                     formFoundation={formFoundation}
@@ -148,22 +120,16 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
 
     const renderActionsContainer = () => (
         <div className={classes.actionsContainer}>
-            {!showEditEvent && !isLoading &&
+            {showEditButton &&
                 <div className={classes.editButtonContainer}>
-                    <ConditionalTooltip
-                        content={tooltipContent}
-                        enabled={isDisabled}
+                    <Button
+                        className={classes.button}
+                        onClick={() => onOpenEditEvent(orgUnit, programCategory)}
+                        secondary
+                        small
                     >
-                        <Button
-                            className={classes.button}
-                            onClick={() => onOpenEditEvent(orgUnit, programCategory)}
-                            disabled={isDisabled}
-                            secondary
-                            small
-                        >
-                            {i18n.t('Edit event')}
-                        </Button>
-                    </ConditionalTooltip>
+                        {i18n.t('Edit event')}
+                    </Button>
                 </div>}
             {supportsChangelog && (
                 <OverflowButton
@@ -211,7 +177,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 <div className={classes.dataEntryContainer}>
                     {renderDataEntryContainer()}
                 </div>
-                {showEditEvent && (
+                {isEditEventPage && (
                     <NoticeBox
                         formId={`${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`}
                     />

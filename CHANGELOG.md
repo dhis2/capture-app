@@ -1,3 +1,52 @@
+## [106.4.4](https://github.com/dhis2/capture-app/compare/v106.4.3...v106.4.4) (2026-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21580] Sequential errors are not shown in the FeedbackBar ([#4591](https://github.com/dhis2/capture-app/issues/4591)) ([0c4716d](https://github.com/dhis2/capture-app/commit/0c4716d77c706e76fc2cf042d31b1b3300a1ccec))
+
+## [106.4.3](https://github.com/dhis2/capture-app/compare/v106.4.2...v106.4.3) (2026-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21546] User can save empty note ([#4579](https://github.com/dhis2/capture-app/issues/4579)) ([f95106f](https://github.com/dhis2/capture-app/commit/f95106f26532bfe29a87b35726f3ca020c4ea409))
+
+## [106.4.2](https://github.com/dhis2/capture-app/compare/v106.4.1...v106.4.2) (2026-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21592] undefined program rule condition ([#4596](https://github.com/dhis2/capture-app/issues/4596)) ([e1c9758](https://github.com/dhis2/capture-app/commit/e1c9758546e18bfbc25a833eabf0fe7acc0a4241))
+
+## [106.4.1](https://github.com/dhis2/capture-app/compare/v106.4.0...v106.4.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* [DHIS2-21392] Form elements visible when no form access ([#4549](https://github.com/dhis2/capture-app/issues/4549)) ([06319b2](https://github.com/dhis2/capture-app/commit/06319b2674d9cbd17cfbefc744808803e11b6da0))
+
+# [106.4.0](https://github.com/dhis2/capture-app/compare/v106.3.0...v106.4.0) (2026-06-02)
+
+
+### Features
+
+* [DHIS2-21394] Implement read-only mode for event program view event ([#4566](https://github.com/dhis2/capture-app/issues/4566)) ([a90e6a7](https://github.com/dhis2/capture-app/commit/a90e6a73e76c8de071bb8a65c72ea3cb0ed3c0d2))
+
+# [106.3.0](https://github.com/dhis2/capture-app/compare/v106.2.8...v106.3.0) (2026-06-02)
+
+
+### Features
+
+* [DHIS2-21371] Read-only enrollment dashboard ([#4529](https://github.com/dhis2/capture-app/issues/4529)) ([55e0def](https://github.com/dhis2/capture-app/commit/55e0def7f2ae4ffd0dd2d3602afbba0f7e8c03da))
+
+## [106.2.8](https://github.com/dhis2/capture-app/compare/v106.2.7...v106.2.8) (2026-06-01)
+
+
+### Bug Fixes
+
+* [DHIS2-21567] String without spaces overflows form ([#4584](https://github.com/dhis2/capture-app/issues/4584)) ([9dc1fc8](https://github.com/dhis2/capture-app/commit/9dc1fc8698fdbe7f330ccc271c95ffc2a3c6b9f5))
+
 ## [106.2.7](https://github.com/dhis2/capture-app/compare/v106.2.6...v106.2.7) (2026-05-26)
 
 

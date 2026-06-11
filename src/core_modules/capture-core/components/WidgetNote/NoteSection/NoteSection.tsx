@@ -70,6 +70,7 @@ const NoteSectionPlain = ({
     emptyNoteMessage,
     notes,
     handleAddNote,
+    readOnly,
     classes,
 }: Props) => {
     const [isEditing, setEditing] = useState<boolean>(false);
@@ -79,6 +80,12 @@ const NoteSectionPlain = ({
     const handleChange = useCallback((value: string) => {
         setEditing(true);
         setNewNoteValue(value);
+    }, []);
+
+    const handleBlur = useCallback((value: string) => {
+        if (!value.trim()) {
+            setEditing(false);
+        }
     }, []);
 
     const onCancel = useCallback(() => {
@@ -130,34 +137,39 @@ const NoteSectionPlain = ({
                 </div>}
             </div>
 
-            <div className={classes.editor}>
+            {!readOnly && <div className={classes.editor}>
                 <Editor>
                     <FocusTextField
                         placeholder={placeholder}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         value={newNoteValue}
                         data-test="note-textfield"
                     />
                 </Editor>
-            </div>
-
-            {isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
-                <Button
-                    dataTest="add-note-btn"
-                    onClick={onAddNote}
-                    small
-                >
-                    {i18n.t('Save note')}
-                </Button>
-                <Button
-                    dataTest="cancel-note-btn"
-                    onClick={onCancel}
-                    secondary
-                    small
-                >
-                    {i18n.t('Cancel')}
-                </Button>
             </div>}
+
+            {!readOnly && isEditing && (
+                <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+                    <Button
+                        dataTest="add-note-btn"
+                        onClick={onAddNote}
+                        disabled={!newNoteValue.trim()}
+                        primary
+                        small
+                    >
+                        {i18n.t('Save note')}
+                    </Button>
+                    <Button
+                        dataTest="cancel-note-btn"
+                        onClick={onCancel}
+                        secondary
+                        small
+                    >
+                        {i18n.t('Cancel')}
+                    </Button>
+                </div>
+            )}
         </div>);
 };
 

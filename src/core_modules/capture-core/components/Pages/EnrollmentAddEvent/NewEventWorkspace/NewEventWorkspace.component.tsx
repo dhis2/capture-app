@@ -4,9 +4,10 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
-import { getProgramAndStageForProgram } from '../../../../metaData';
+import { getProgramAndStageForProgram, getProgramEventAccess } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
+import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
@@ -20,6 +21,9 @@ import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 const styles: Readonly<any> = () => ({
     innerWrapper: {
         padding: `0 ${spacersNum.dp12}px`,
+    },
+    errorWrapper: {
+        padding: `${spacersNum.dp16}px ${spacersNum.dp12}px`,
     },
     tabs: {
         marginBottom: spacersNum.dp16,
@@ -54,18 +58,35 @@ const NewEventWorkspacePlain = ({
         }
     };
 
+    const renderWidget = (content: React.ReactNode) => (
+        <Widget
+            noncollapsible
+            header={stage ? <WidgetStageHeader stage={stage} /> : null}
+        >
+            {content}
+        </Widget>
+    );
+
     if (!stage) {
-        return null;
+        return renderWidget(
+            <div className={classes.errorWrapper}>{i18n.t('Stage not found')}</div>,
+        );
+    }
+
+    const eventAccess = getProgramEventAccess(programId, stageId);
+    if (!eventAccess?.write) {
+        return renderWidget(
+            <div className={classes.errorWrapper}>
+                <NoWriteAccessMessage
+                    message={i18n.t("You don't have access to create an event in the current selections")}
+                />
+            </div>,
+        );
     }
 
     return (
         <>
-            <Widget
-                noncollapsible
-                header={
-                    <WidgetStageHeader stage={stage} />
-                }
-            >
+            {renderWidget(
                 <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
                     <div className={classes.tabs}>
                         <TabBar dataTest="new-event-tab-bar">
@@ -123,8 +144,8 @@ const NewEventWorkspacePlain = ({
                         hideDueDate={stage?.hideDueDate}
                         enableUserAssignment
                     />}
-                </div>
-            </Widget>
+                </div>,
+            )}
             <DiscardDialog
                 {...defaultDialogProps}
                 onDestroy={() => { setMode(tempMode.current); setWarningVisible(false); }}

@@ -4,11 +4,18 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
+import { ReadOnlyBadge } from '../ReadOnlyBadge';
+import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
+    const {
+        currentStageWriteAccess,
+        trackedEntityTypeName,
+        showWidgetBadge,
+    } = useEnrollmentAccessContext();
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue));
@@ -21,6 +28,13 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
                 placeholder={i18n.t('Write a note about this event')}
                 emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
+                readOnly={!currentStageWriteAccess}
+                badge={showWidgetBadge ? (
+                    <ReadOnlyBadge
+                        programStageWriteAccess={currentStageWriteAccess}
+                        trackedEntityName={trackedEntityTypeName}
+                    />
+                ) : null}
                 onAddNote={onAddNote}
             />
         </div>

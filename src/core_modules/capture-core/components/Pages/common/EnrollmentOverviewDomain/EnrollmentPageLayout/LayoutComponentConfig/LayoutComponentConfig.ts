@@ -76,6 +76,9 @@ export const StagesAndEvents: WidgetConfig = {
 export const TrackedEntityRelationship: WidgetConfig = {
     Component: TrackedEntityRelationshipsWrapper,
     shouldHideWidget: ({ addRelationShipContainerElement }: any) => !addRelationShipContainerElement,
+    getCustomSettings: ({ readOnlyMode }: any) => ({
+        readOnlyMode,
+    }),
     getProps: ({
         program,
         orgUnitId,
@@ -282,7 +285,7 @@ export const AssigneeWidget: WidgetConfig = {
         enabled: programStage?.enableUserAssignment || false,
         assignee,
         getSaveContext: getAssignedUserSaveContext,
-        writeAccess: eventAccess?.write || false,
+        readOnly: !eventAccess?.write,
         onSave: onSaveAssignee,
         onSaveError: onSaveAssigneeError,
     }),
