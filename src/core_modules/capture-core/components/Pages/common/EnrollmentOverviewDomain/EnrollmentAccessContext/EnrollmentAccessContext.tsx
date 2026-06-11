@@ -116,7 +116,17 @@ export const EnrollmentAccessProvider = ({
             ? computeContextValue(
                 program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent,
             )
-            : { ...fallback, trackedEntityInactive }),
+            : {
+                ...fallback,
+                trackedEntityInactive,
+                ...(trackedEntityInactive && {
+                    programWriteAccess: false,
+                    trackedEntityTypeWriteAccess: false,
+                    anyStageWriteAccess: false,
+                    currentStageWriteAccess: false,
+                    allWriteAccessMissing: true,
+                }),
+            }),
         [program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent],
     );
 

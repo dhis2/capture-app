@@ -4,7 +4,7 @@ import { spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
-import { EnrollmentAccessProvider, useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import { EnrollmentAccessProvider } from '../../common/EnrollmentOverviewDomain';
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
@@ -54,11 +54,10 @@ const EnrollmentAddEventPagePain = ({
     pageFailure,
     ready,
     onAccessLostFromTransfer,
+    trackedEntityInactive,
     classes,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const { readOnly: trackedEntityInactive } = useCommonEnrollmentDomainData(teiId, enrollmentId, program?.id ?? '');
-
     if (pageFailure) {
         return (
             <div>
