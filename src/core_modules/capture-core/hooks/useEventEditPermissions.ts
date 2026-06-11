@@ -3,6 +3,7 @@ import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser
 import { getProgramEventAccess, ProgramStage } from '../metaData';
 import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
 import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
+import { useAuthorities } from '../utils/authority/useAuthorities';
 
 type Input = {
     programId: string,
@@ -26,8 +27,8 @@ type Output = {
 //     (overridden by F_EDIT_EXPIRED via useProgramExpiryForUser)
 //   - !isWithinCompleteExpiry: event was completed and the completeEventsExpiryDays window has passed
 //     (overridden by F_EDIT_EXPIRED via useCompleteEventsExpiryForUser)
-//   - !canEditCompletedEvent: stage.blockEntryForm is set AND event status is COMPLETED.
-//     To edit, the user must first uncomplete the event (separate action gated by F_UNCOMPLETE_EVENT).
+//   - !canEditCompletedEvent: stage.blockEntryForm is set AND event status is COMPLETED AND the user
+//     lacks F_UNCOMPLETE_EVENT. Users with that authority can edit a completed, block-entry event.
 
 export const useEventEditPermissions = ({
     programId,
@@ -39,11 +40,16 @@ export const useEventEditPermissions = ({
     const eventAccess = getProgramEventAccess(programId, stage?.id ?? null);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
     const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
 
-    const canEditCompletedEvent = !(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
+    const canEditCompletedEvent = !(
+        stage?.blockEntryForm
+        && !canUncompleteEvent
+        && eventStatus === eventStatuses.COMPLETED
+    );
 
     const readOnly = !eventAccess?.write
         || !isEventWithinValidPeriod
