@@ -1,3 +1,10 @@
+## [106.4.5](https://github.com/dhis2/capture-app/compare/v106.4.4...v106.4.5) (2026-06-12)
+
+
+### Bug Fixes
+
+* plugin issues ([#4597](https://github.com/dhis2/capture-app/issues/4597)) ([da92f12](https://github.com/dhis2/capture-app/commit/da92f1221600a4600ffdfcbaf4fd6591d50f9b97))
+
 ## [106.4.4](https://github.com/dhis2/capture-app/compare/v106.4.3...v106.4.4) (2026-06-10)
 
 
