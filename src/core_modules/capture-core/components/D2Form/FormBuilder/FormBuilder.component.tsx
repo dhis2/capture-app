@@ -352,13 +352,14 @@ export class FormBuilder extends React.Component<Props> {
             onUpdateFieldUIOnly,
             onUpdateField,
             onGetValidationContext,
+            fieldsUI,
             id,
             onIsValidating,
         } = this.props;
 
         const touched = options && isDefined(options.touched) ? options.touched : true;
 
-        if (!FormBuilder.hasCommitedValueChanged(value, oldValue, onIsEqual)) {
+        if (fieldsUI[fieldId] && !FormBuilder.hasCommitedValueChanged(value, oldValue, onIsEqual)) {
             onUpdateFieldUIOnly({ touched }, fieldId, id);
             return;
         }
