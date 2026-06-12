@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
 import { useDataMutation } from '@dhis2/app-runtime';
-import { v4 as uuid } from 'uuid';
+import { processErrorReports, type ErrorReport } from '../processErrorReports';
 
 type TrackedEntityForToggle = {
     trackedEntity: string;
     trackedEntityType: string;
     orgUnit: string;
 };
-
-type ErrorReport = { message: string; uid: string };
 
 type Props = {
     trackedEntity: TrackedEntityForToggle;
@@ -27,11 +25,6 @@ const trackedEntityUpdate = {
         trackedEntities: [trackedEntity],
     }),
 } as const;
-
-const processErrorReports = (error: any): Array<ErrorReport> => {
-    const reports = error?.details?.validationReport?.errorReports;
-    return reports?.length > 0 ? reports : [{ uid: uuid(), message: error.message }];
-};
 
 export const DeactivateModal = ({
     trackedEntity,
