@@ -15,6 +15,7 @@ const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
             });
         });
 };
+
 Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });

@@ -6,6 +6,18 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
+Given(/^you make sure the event .+ is unlinked$/, () => {
+    cy.get('[data-test="related-stages-section"], [data-test="widget-linked-event-overflow-menu"]')
+        .should('exist');
+    cy.get('body').then(($body) => {
+        if ($body.find('[data-test="widget-linked-event-overflow-menu"]').length) {
+            cy.get('[data-test="widget-linked-event-overflow-menu"]').click();
+            cy.get('[data-test="event-overflow-unlink-event"]').click();
+            cy.get('[data-test="event-overflow-unlink-event-confirm"]').click();
+        }
+    });
+});
+
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
     cy.get('[data-test="related-stages-section"]')
         .should(not ? 'not.exist' : 'exist');
