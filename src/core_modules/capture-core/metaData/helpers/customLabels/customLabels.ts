@@ -16,8 +16,6 @@ type TermDef = {
     pluralField?: string,
     singular: () => string,
     plural: () => string,
-    singularLower: () => string,
-    pluralLower: () => string,
 };
 
 export const TERMS: { [key: string]: TermDef } = {
@@ -26,72 +24,54 @@ export const TERMS: { [key: string]: TermDef } = {
         pluralField: 'displayEnrollmentsLabel',
         singular: () => i18n.t('Enrollment'),
         plural: () => i18n.t('Enrollments'),
-        singularLower: () => i18n.t('enrollment'),
-        pluralLower: () => i18n.t('enrollments'),
     },
     followUp: {
         field: 'displayFollowUpLabel',
         singular: () => i18n.t('Follow-up'),
         plural: () => i18n.t('Follow-ups'),
-        singularLower: () => i18n.t('follow-up'),
-        pluralLower: () => i18n.t('follow-ups'),
     },
     orgUnit: {
         field: 'displayOrgUnitLabel',
         singular: () => i18n.t('Organisation unit'),
         plural: () => i18n.t('Organisation units'),
-        singularLower: () => i18n.t('organisation unit'),
-        pluralLower: () => i18n.t('organisation units'),
     },
     relationship: {
         field: 'displayRelationshipLabel',
         singular: () => i18n.t('Relationship'),
         plural: () => i18n.t('Relationships'),
-        singularLower: () => i18n.t('relationship'),
-        pluralLower: () => i18n.t('relationships'),
     },
     note: {
         field: 'displayNoteLabel',
         singular: () => i18n.t('Note'),
         plural: () => i18n.t('Notes'),
-        singularLower: () => i18n.t('note'),
-        pluralLower: () => i18n.t('notes'),
     },
     attribute: {
         field: 'displayTrackedEntityAttributeLabel',
         singular: () => i18n.t('Attribute'),
         plural: () => i18n.t('Attributes'),
-        singularLower: () => i18n.t('attribute'),
-        pluralLower: () => i18n.t('attributes'),
     },
     programStage: {
         field: 'displayProgramStageLabel',
         pluralField: 'displayProgramStagesLabel',
         singular: () => i18n.t('Program stage'),
         plural: () => i18n.t('Program stages'),
-        singularLower: () => i18n.t('program stage'),
-        pluralLower: () => i18n.t('program stages'),
     },
     event: {
         field: 'displayEventLabel',
         pluralField: 'displayEventsLabel',
         singular: () => i18n.t('Event'),
         plural: () => i18n.t('Events'),
-        singularLower: () => i18n.t('event'),
-        pluralLower: () => i18n.t('events'),
     },
     trackedEntityType: {
         pluralField: 'displayTrackedEntityTypesLabel',
         singular: () => i18n.t('Tracked entity type'),
         plural: () => i18n.t('Tracked entity types'),
-        singularLower: () => i18n.t('tracked entity type'),
-        pluralLower: () => i18n.t('tracked entity types'),
     },
 };
 
 export type TermKey = keyof typeof TERMS;
 export type CustomLabels = Record<string, string>;
-export type LabelOptions = { plural?: boolean, lowercase?: boolean };
+export type LabelOptions = { plural?: boolean };
 
 const allFields: Array<string> = Array.from(
     new Set(
@@ -125,7 +105,7 @@ type LabelSource = CustomLabels | undefined | null;
 export const resolveLabel = (
     sources: LabelSource | Array<LabelSource>,
     key: TermKey,
-    { plural = false, lowercase = false }: LabelOptions = {},
+    { plural = false }: LabelOptions = {},
 ): string => {
     const term = TERMS[key];
     const list = Array.isArray(sources) ? sources : [sources];
@@ -133,9 +113,9 @@ export const resolveLabel = (
 
     if (plural) {
         const custom = term.pluralField ? pick(term.pluralField) : pick(term.field);
-        return custom ?? (lowercase ? term.pluralLower() : term.plural());
+        return custom ?? term.plural();
     }
-    return pick(term.field) ?? (lowercase ? term.singularLower() : term.singular());
+    return pick(term.field) ?? term.singular();
 };
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;
