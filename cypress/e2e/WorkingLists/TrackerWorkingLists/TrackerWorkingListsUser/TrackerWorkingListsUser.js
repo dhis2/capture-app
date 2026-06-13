@@ -8,13 +8,11 @@ const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
     cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const match = body[resource]?.find(e => e.displayName === displayName);
-            if (!match) {
-                return null;
-            }
-            return cy
-                .buildApiUrl(resource, match.id)
-                .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            const matches = body[resource]?.filter(e => e.displayName === displayName) ?? [];
+            matches.forEach((match) => {
+                cy.buildApiUrl(resource, match.id)
+                    .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            });
         });
 };
 Given('you open the main page with Ngelehun and child programe context', () => {
@@ -42,6 +40,7 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () =
 });
 
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'M3xtLkYBlKI', 'Custom Program stage list');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
