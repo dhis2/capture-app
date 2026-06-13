@@ -6,6 +6,7 @@ import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
+import type { CustomLabels, LabelKey } from '../helpers/customLabels';
 
 export class Program {
     static errorMessages = {
@@ -26,6 +27,7 @@ export class Program {
     _displayFrontPageList!: boolean;
     _useFirstStageDuringRegistration!: boolean;
     _onlyEnrollOnce!: boolean;
+    _customLabels!: CustomLabels;
 
     constructor(initFn?: (_this: Program) => void) {
         this.programRules = [];
@@ -33,6 +35,7 @@ export class Program {
         this.organisationUnits = {};
         this._stages = new Map();
         this._organisationUnits = {};
+        this._customLabels = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -127,6 +130,16 @@ export class Program {
 
     get onlyEnrollOnce() {
         return this._onlyEnrollOnce;
+    }
+
+    get customLabels(): CustomLabels {
+        return this._customLabels;
+    }
+
+    setCustomLabel(key: LabelKey, value?: string | null) {
+        if (value) {
+            this._customLabels[key] = value;
+        }
     }
 
     get stages(): Map<string, ProgramStage> {

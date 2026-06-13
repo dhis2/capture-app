@@ -17,3 +17,18 @@ export { getScopeInfo } from './getScopeInfo';
 export { getProgramEventAccess } from './getProgramEventAccess';
 export { getProgramAndStageForProgram } from './getProgramAndStageForProgram';
 export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
+export {
+    labelKeys,
+    getDefaultLabel,
+    getProgramLabel,
+    getStageLabel,
+    getTrackedEntityTypeLabel,
+    useProgramLabel,
+    useStageLabel,
+    useTrackedEntityTypeLabel,
+    applyCustomLabels,
+    programLabelFields,
+    programStageLabelFields,
+    trackedEntityTypeLabelFields,
+} from './customLabels';
+export type { LabelKey, CustomLabels } from './customLabels';

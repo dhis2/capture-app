@@ -12,7 +12,14 @@ import type {
     CachedOptionSet,
     CachedDataElement,
 } from '../../../../storageControllers';
-import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
+import {
+    Section,
+    ProgramStage,
+    RenderFoundation,
+    CustomForm,
+    applyCustomLabels,
+    programStageLabelFields,
+} from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
 import { DataElementFactory } from './DataElementFactory';
@@ -242,6 +249,7 @@ export class ProgramStageFactory {
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);
             });
             _stage.icon = buildIcon(cachedProgramStage.style);
+            applyCustomLabels(_stage, cachedProgramStage, programStageLabelFields);
         });
 
         const stageForm = stage.stageForm;

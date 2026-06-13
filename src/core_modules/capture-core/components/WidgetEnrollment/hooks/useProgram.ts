@@ -15,6 +15,9 @@ export const useProgram = (programId: string) => {
                     params: {
                         fields: [
                             'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,' +
+                            'displayEnrollmentLabel,displayEnrollmentsLabel,displayFollowUpLabel,displayOrgUnitLabel,' +
+                            'displayRelationshipLabel,displayNoteLabel,displayTrackedEntityAttributeLabel,' +
+                            'displayProgramStageLabel,displayProgramStagesLabel,displayEventLabel,displayEventsLabel,' +
                             'trackedEntityType[displayName,access],' +
                             'programStages[autoGenerateEvent,name,access,id],' +
                             'access,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture',

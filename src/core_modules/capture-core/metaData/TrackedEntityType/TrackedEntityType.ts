@@ -3,6 +3,7 @@ import type { SearchGroup } from '../SearchGroup';
 import type { DataElement } from '../DataElement';
 import type { TeiRegistration } from './TeiRegistration';
 import type { Access } from '../Access';
+import type { CustomLabels, LabelKey } from '../helpers/customLabels';
 
 /* eslint-disable no-underscore-dangle */
 export class TrackedEntityType {
@@ -12,9 +13,11 @@ export class TrackedEntityType {
     _teiRegistration!: TeiRegistration;
     _attributes!: Array<DataElement>;
     _searchGroups!: Array<SearchGroup>;
+    _customLabels!: CustomLabels;
 
     constructor(initFn: ((_this: TrackedEntityType) => void) | null) {
         this._attributes = [];
+        this._customLabels = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -58,5 +61,15 @@ export class TrackedEntityType {
     }
     get attributes(): Array<DataElement> {
         return this._attributes;
+    }
+
+    get customLabels(): CustomLabels {
+        return this._customLabels;
+    }
+
+    setCustomLabel(key: LabelKey, value?: string | null) {
+        if (value) {
+            this._customLabels[key] = value;
+        }
     }
 }
