@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import {
     TrackedEntityType,
-    applyCustomLabels,
-    trackedEntityTypeLabelFields,
+    extractCustomLabels,
 } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
 import { TeiRegistrationFactory } from './TeiRegistrationFactory';
@@ -88,7 +87,7 @@ export class TrackedEntityTypeFactory {
             o.name = this._getTranslation(
                 cachedType.translations, TrackedEntityTypeFactory.translationPropertyNames.NAME)
                 || cachedType.displayName;
-            applyCustomLabels(o, cachedType, trackedEntityTypeLabelFields);
+            o.customLabels = extractCustomLabels(cachedType);
         });
 
         if (cachedType.trackedEntityTypeAttributes) {

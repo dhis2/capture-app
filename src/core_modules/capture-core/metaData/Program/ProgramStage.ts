@@ -6,7 +6,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
-import type { CustomLabels, LabelKey } from '../helpers/customLabels';
+import type { CustomLabels } from '../helpers/customLabels';
 
 export class ProgramStage {
     _id!: string;
@@ -196,13 +196,10 @@ export class ProgramStage {
         return this._repeatable;
     }
 
+    set customLabels(customLabels: CustomLabels) {
+        this._customLabels = customLabels;
+    }
     get customLabels(): CustomLabels {
         return this._customLabels;
-    }
-
-    setCustomLabel(key: LabelKey, value?: string | null) {
-        if (value) {
-            this._customLabels[key] = value;
-        }
     }
 }

@@ -1,11 +1,10 @@
 export {
-    labelKeys,
-    getDefaultLabel,
-    programLabelFields,
-    programStageLabelFields,
-    trackedEntityTypeLabelFields,
-} from './labels.const';
-export type { LabelKey, CustomLabels } from './labels.const';
-export { getProgramLabel, getStageLabel, getTrackedEntityTypeLabel } from './getCustomLabel';
-export { useProgramLabel, useStageLabel, useTrackedEntityTypeLabel } from './useCustomLabel';
-export { applyCustomLabels } from './applyCustomLabels';
+    TERMS,
+    resolveLabel,
+    extractCustomLabels,
+    getProgramLabel,
+    getStageLabel,
+    getTrackedEntityTypeLabel,
+} from './customLabels';
+export type { TermKey, CustomLabels, LabelOptions } from './customLabels';
+export { useProgramLabel, useStageLabel, useTrackedEntityTypeLabel } from './useLabel';

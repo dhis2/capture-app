@@ -17,8 +17,7 @@ import {
     ProgramStage,
     RenderFoundation,
     CustomForm,
-    applyCustomLabels,
-    programStageLabelFields,
+    extractCustomLabels,
 } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
@@ -249,7 +248,7 @@ export class ProgramStageFactory {
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);
             });
             _stage.icon = buildIcon(cachedProgramStage.style);
-            applyCustomLabels(_stage, cachedProgramStage, programStageLabelFields);
+            _stage.customLabels = extractCustomLabels(cachedProgramStage);
         });
 
         const stageForm = stage.stageForm;

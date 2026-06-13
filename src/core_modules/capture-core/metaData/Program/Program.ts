@@ -6,7 +6,7 @@ import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
-import type { CustomLabels, LabelKey } from '../helpers/customLabels';
+import type { CustomLabels } from '../helpers/customLabels';
 
 export class Program {
     static errorMessages = {
@@ -132,14 +132,11 @@ export class Program {
         return this._onlyEnrollOnce;
     }
 
+    set customLabels(customLabels: CustomLabels) {
+        this._customLabels = customLabels;
+    }
     get customLabels(): CustomLabels {
         return this._customLabels;
-    }
-
-    setCustomLabel(key: LabelKey, value?: string | null) {
-        if (value) {
-            this._customLabels[key] = value;
-        }
     }
 
     get stages(): Map<string, ProgramStage> {

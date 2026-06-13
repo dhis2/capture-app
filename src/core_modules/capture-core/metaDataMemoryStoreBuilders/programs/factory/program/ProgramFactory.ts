@@ -5,8 +5,7 @@ import {
     EventProgram,
     TrackerProgram,
     CategoryCombination,
-    applyCustomLabels,
-    programLabelFields,
+    extractCustomLabels,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
@@ -189,7 +188,7 @@ export class ProgramFactory {
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;
         program.useFirstStageDuringRegistration = cachedProgram.useFirstStageDuringRegistration;
-        applyCustomLabels(program, cachedProgram, programLabelFields);
+        program.customLabels = extractCustomLabels(cachedProgram);
 
         return program;
     }
