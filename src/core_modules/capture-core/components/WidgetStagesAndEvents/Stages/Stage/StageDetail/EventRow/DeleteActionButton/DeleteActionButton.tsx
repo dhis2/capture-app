@@ -38,13 +38,13 @@ export const DeleteActionButton = ({
     expiryPeriod,
     completeEventsExpiryDays,
 }: Props) => {
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const { hasAuthority: canEditExpired } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
     const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
     const occurredAtClientView = convertFn(occurredAt, dataElementTypes.DATE);
 
     const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
-    const canEditCompletedEvent = !(blockEntryForm && !canUncompleteEvent && eventStatus === eventStatuses.COMPLETED);
+    const canEditCompletedEvent = canEditExpired || !(blockEntryForm && eventStatus === eventStatuses.COMPLETED);
 
     const canDelete = isWithinValidPeriod && isWithinCompleteExpiry && canEditCompletedEvent;
 
