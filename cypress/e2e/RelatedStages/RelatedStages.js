@@ -6,6 +6,21 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
+Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
+    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const relationships = body.relationships ?? [];
+            if (relationships.length) {
+                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((deleteUrl) => {
+                    cy.request('POST', deleteUrl, {
+                        relationships: relationships.map(({ relationship }) => ({ relationship })),
+                    });
+                });
+            }
+        });
+});
+
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
     cy.get('[data-test="related-stages-section"]')
         .should(not ? 'not.exist' : 'exist');

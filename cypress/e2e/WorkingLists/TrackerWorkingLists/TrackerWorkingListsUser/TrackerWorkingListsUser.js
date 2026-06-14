@@ -8,13 +8,11 @@ const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
     cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const match = body[resource]?.find(e => e.displayName === displayName);
-            if (!match) {
-                return null;
-            }
-            return cy
-                .buildApiUrl(resource, match.id)
-                .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            const matches = body[resource]?.filter(e => e.displayName === displayName) ?? [];
+            matches.forEach((match) => {
+                cy.buildApiUrl(resource, match.id)
+                    .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            });
         });
 };
 Given('you open the main page with Ngelehun and child programe context', () => {
@@ -656,6 +654,11 @@ When('you open the program stage More filters menu for Birth on the tracker work
 });
 
 When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    // See the matching event-working-list step: setting many filters wraps the filter bar,
+    // pushing the Popper-positioned popover's "Update" button below the default 1000x660
+    // viewport fold ("center hidden from view"). A taller/wider viewport keeps it clickable;
+    // scrollIntoView is avoided because Popper repositions the popover on scroll.
+    cy.viewport(1440, 1080);
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
         .then(($anchors) => {
@@ -673,6 +676,9 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
+    // Confirm the apply registered (popover closed) before moving on, so the next filter
+    // step starts from a settled state rather than racing a still-open popover.
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
 });
 
 When('you set the boolean filter', () => {
