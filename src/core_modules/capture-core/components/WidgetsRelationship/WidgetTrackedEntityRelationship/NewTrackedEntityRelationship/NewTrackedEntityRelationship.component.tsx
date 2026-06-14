@@ -14,6 +14,7 @@ import type { ComponentProps } from './NewTrackedEntityRelationship.types';
 import { useAddRelationship } from './hooks/useAddRelationship';
 import { TARGET_SIDES } from './common';
 import { generateUID } from '../../../../utils/uid/generateUID';
+import { useProgramLabel } from '../../../../metaData';
 
 const styles = {
     container: {
@@ -58,6 +59,7 @@ const NewTrackedEntityRelationshipPlain = ({
         teiId,
         onMutate: () => onSave && onSave(),
     });
+    const relationship = useProgramLabel('relationship', { programId }) ?? i18n.t('relationship');
 
 
     const onLinkToTrackedEntityFromSearch = useCallback(
@@ -275,7 +277,7 @@ const NewTrackedEntityRelationshipPlain = ({
         <div className={classes.container}>
             <div className={classes.bar}>
                 <LinkButton onClick={onCancel} className={classes.linkText}>
-                    {i18n.t('Go back without saving relationship')}
+                    {i18n.t('Go back without saving {{relationship}}', { relationship })}
                 </LinkButton>
             </div>
             <Widget

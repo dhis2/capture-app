@@ -13,6 +13,7 @@ import {
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { useProgramLabel } from '../../../../../metaData';
 import type { Props } from './DeleteRelationship.types';
 
 const styles: Readonly<any> = {
@@ -28,6 +29,7 @@ export const DeleteRelationshipPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const relationship = useProgramLabel('relationship') ?? i18n.t('relationship');
     return (
         <>
             <DataTableCell className={classes.tableCell}>
@@ -48,11 +50,11 @@ export const DeleteRelationshipPlain = ({
                     onClose={() => setIsModalOpen(false)}
                     dataTest={'delete-relationship-modal'}
                 >
-                    <ModalTitle>{i18n.t('Delete relationship')}</ModalTitle>
+                    <ModalTitle>{i18n.t('Delete {{relationship}}', { relationship })}</ModalTitle>
                     <ModalContent>
-                        {i18n.t('Deleting the relationship is permanent and cannot be undone.')}
+                        {i18n.t('Deleting the {{relationship}} is permanent and cannot be undone.', { relationship })}
                         {' '}
-                        {i18n.t('Are you sure you want to delete this relationship?')}
+                        {i18n.t('Are you sure you want to delete this {{relationship}}?', { relationship })}
                     </ModalContent>
 
                     <ModalActions>
@@ -69,7 +71,7 @@ export const DeleteRelationshipPlain = ({
                                     setIsModalOpen(false);
                                 }}
                             >
-                                {i18n.t('Yes, delete relationship')}
+                                {i18n.t('Yes, delete {{relationship}}', { relationship })}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

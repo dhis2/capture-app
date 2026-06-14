@@ -9,7 +9,7 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withFocusSaver } from 'capture-ui';
 import { TextField } from '../FormFields/New';
 import { convertClientToList } from '../../converters';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes, useProgramLabel } from '../../metaData';
 import type { Note } from './notes.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -85,6 +85,7 @@ const NotesPlain = ({
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const { fromServerDate } = useTimeZoneConversion();
+    const note = useProgramLabel('note') ?? i18n.t('note');
 
     useEffect(() => {
         setAddIsOpen(!!propValue);
@@ -134,7 +135,10 @@ const NotesPlain = ({
                     className={classes.addNoteContainer}
                     small
                 >
-                    {i18n.t('Add note')}
+                    {i18n.t('Add {{note}}', {
+                        note,
+                        interpolation: { escapeValue: false },
+                    })}
                 </Button>
                 <Button
                     onClick={onCancel}
@@ -156,7 +160,10 @@ const NotesPlain = ({
                 small={smallMainButton}
                 dataTest="write-note-btn"
             >
-                {i18n.t('Write note')}
+                {i18n.t('Write {{note}}', {
+                    note,
+                    interpolation: { escapeValue: false },
+                })}
             </Button>
         </div>
     );

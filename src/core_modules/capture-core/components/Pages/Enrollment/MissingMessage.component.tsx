@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { useProgramLabel, useStageLabel } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
@@ -151,14 +152,15 @@ const styles: Readonly<any> = {
     },
 };
 
-const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string }) => (
+const EnrollmentSelectionMessage = ({ enrollmentId, enrollment }: { enrollmentId?: string, enrollment: string }) => (
     <IncompleteSelectionsMessage>
         {enrollmentId ?
-            i18n.t('Invalid enrollment id {{enrollmentId}}.', {
+            i18n.t('Invalid {{enrollment}} id {{enrollmentId}}.', {
+                enrollment,
                 enrollmentId,
                 interpolation: { escapeValue: false },
             }) :
-            i18n.t('Choose an enrollment to view the dashboard.')
+            i18n.t('Choose this {{enrollment}} to view the dashboard.', { enrollment })
         }
     </IncompleteSelectionsMessage>
 );
@@ -166,6 +168,12 @@ const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string })
 type PlainProps = Record<string, never>;
 
 type Props = PlainProps & WithStyles<typeof styles>;
+
+const useMissingMessageLabels = (programId?: string) => ({
+    enrollment: useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment'),
+    enrollments: useProgramLabel('enrollment', { programId, plural: true }) ?? i18n.t('enrollments'),
+    event: useStageLabel('event', { programId }) ?? i18n.t('event'),
+});
 
 const MissingMessagePlain = ({
     classes,
@@ -180,6 +188,7 @@ const MissingMessagePlain = ({
     const { resetTeiId } = useResetTeiId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { programId, teiId, enrollmentId } = useLocationQuery();
+    const { enrollment, enrollments, event } = useMissingMessageLabels(programId);
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -188,8 +197,8 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose a program to add new or see existing enrollments for {{teiDisplayName}}', {
-                    teiDisplayName, interpolation: { escapeValue: false },
+                {i18n.t('Choose a program to add new or see existing {{enrollments}} for {{teiDisplayName}}', {
+                    enrollments, teiDisplayName, interpolation: { escapeValue: false },
                 })}
             </IncompleteSelectionsMessage>
         }
@@ -206,20 +215,22 @@ const MissingMessagePlain = ({
 
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
-            <EnrollmentSelectionMessage enrollmentId={enrollmentId} />
+            <EnrollmentSelectionMessage enrollmentId={enrollmentId} enrollment={enrollment} />
         }
 
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('There are no active enrollments.')}
+                    {i18n.t('There are no active {{enrollments}}.', { enrollments })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToTrackerProgramRegistrationPage}
                         >
-                            {i18n.t('Add new enrollment for {{teiDisplayName}} in this program.', { teiDisplayName })}
+                            {i18n.t(
+                                'Add new {{enrollment}} for {{teiDisplayName}} in this program.',
+                                { enrollment, teiDisplayName })}
                         </LinkButton>
                     </div>
                 </div>
@@ -271,8 +282,8 @@ const MissingMessagePlain = ({
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
                     {/* eslint-disable-next-line max-len */}
-                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', {
-                        teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
+                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollment}}. ', {
+                        teiDisplayName, programName, tetName, enrollment, interpolation: { escapeValue: false },
                     })}
                     <div>
                         <LinkButton
@@ -292,15 +303,15 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.EVENT_PROGRAM_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{programName}} is an event program and does not have enrollments.', {
-                        programName, interpolation: { escapeValue: false },
+                    {i18n.t('{{programName}} is an event program and does not have {{enrollments}}.', {
+                        programName, enrollments, interpolation: { escapeValue: false },
                     })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToEventProgramRegistrationPage}
                         >
-                            {i18n.t('Create a new event in this program.')}
+                            {i18n.t('Create a new {{event}} in this program.', { event })}
                         </LinkButton>
                     </div>
                     <div>

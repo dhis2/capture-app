@@ -5,6 +5,7 @@ import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { Widget, WidgetHeaderCountBadge } from '../../../Widget';
 import { ReadOnlyBadge } from '../../../ReadOnlyBadge';
+import { useProgramLabel } from '../../../../metaData';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props } from './relationshipsWidget.types';
@@ -36,6 +37,8 @@ const RelationshipsWidgetPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
+    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('relationships');
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships, readOnly);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
 
@@ -92,7 +95,10 @@ const RelationshipsWidgetPlain = ({
                 }
                 {(relationships?.length ?? 0) === 0 && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This enrollment doesn't have any relationships")}
+                        {i18n.t("This {{enrollment}} doesn't have any {{relationships}}", {
+                            enrollment: enrollmentLabel,
+                            relationships: relationshipsLabel,
+                        })}
                     </div>
                 )}
                 {children}

@@ -6,6 +6,7 @@ import { Stage } from './Stage';
 import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useStageLabel } from '../../../metaData';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,
@@ -23,6 +24,7 @@ export const StagesPlain = ({
     ...passOnProps
 }: PlainProps) => {
     const { stageReadAccessById } = useEnrollmentAccessContext();
+    const stagesLabel = useStageLabel('programStage', { plural: true }) ?? i18n.t('stages');
     const readableStages = useMemo(
         () => stages.filter(stage => stageReadAccessById[stage.id] ?? stage.dataAccess.read),
         [stages, stageReadAccessById],
@@ -52,7 +54,10 @@ export const StagesPlain = ({
     if (!readableStages.length) {
         return (
             <p style={emptyStateStyle}>
-                {i18n.t('No stages found in this program')}
+                {i18n.t('No {{stages}} found in this program', {
+                    stages: stagesLabel,
+                    interpolation: { escapeValue: false },
+                })}
             </p>
         );
     }

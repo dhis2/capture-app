@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
-import { getProgramAndStageForProgram, getProgramEventAccess } from '../../../../metaData';
+import { getProgramAndStageForProgram, getProgramEventAccess, useStageLabel } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
@@ -48,6 +48,8 @@ const NewEventWorkspacePlain = ({
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef<string | undefined>(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('event');
+    const programStageLabel = useStageLabel('programStage', { programId, stageId }) ?? i18n.t('Stage');
 
     const onHandleSwitchTab = (newMode: string) => {
         if (dataEntryHasChanges) {
@@ -69,7 +71,9 @@ const NewEventWorkspacePlain = ({
 
     if (!stage) {
         return renderWidget(
-            <div className={classes.errorWrapper}>{i18n.t('Stage not found')}</div>,
+            <div className={classes.errorWrapper}>
+                {i18n.t('{{programStage}} not found', { programStage: programStageLabel })}
+            </div>,
         );
     }
 
@@ -78,7 +82,7 @@ const NewEventWorkspacePlain = ({
         return renderWidget(
             <div className={classes.errorWrapper}>
                 <NoWriteAccessMessage
-                    message={i18n.t("You don't have access to create an event in the current selections")}
+                    message={i18n.t("You don't have access to create a new {{event}} in the current selections", { event })}
                 />
             </div>,
         );

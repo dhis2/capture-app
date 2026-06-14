@@ -9,7 +9,7 @@ import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
+import { dataElementTypes, getProgramEventAccess, useStageLabel } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -61,6 +61,7 @@ const WidgetHeaderPlain = ({
     const showEditButton = eventAccess?.write && isWithinValidPeriod && !blockEntryForm;
 
     const { programCategory } = useCategoryCombinations(programId);
+    const event = useStageLabel('event', { stageId: stage.id, programId }) ?? i18n.t('event');
 
     const { icon, name } = stage;
 
@@ -89,7 +90,10 @@ const WidgetHeaderPlain = ({
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                                 data-test="widget-enrollment-event-edit-button"
                             >
-                                {i18n.t('Edit event')}
+                                {i18n.t('Edit {{event}}', {
+                                    event,
+                                    interpolation: { escapeValue: false },
+                                })}
                             </Button>
                         )}
 

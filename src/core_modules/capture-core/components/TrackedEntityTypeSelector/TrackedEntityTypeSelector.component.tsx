@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacers, SimpleSingleSelectField } from '@dhis2/ui';
 import type { Props, SelectOption } from './TrackedEntityTypeSelector.types';
-import { scopeTypes } from '../../metaData';
+import { scopeTypes, useTrackedEntityTypeLabel } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
@@ -21,6 +21,9 @@ export const TrackedEntityTypeSelectorPlain =
         const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
         const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
         const [filterValue, setFilterValue] = useState('');
+        const trackedEntityType = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type');
+        const trackedEntityTypes = useTrackedEntityTypeLabel('trackedEntityType', { plural: true })
+            ?? i18n.t('tracked entity types');
 
         const options: SelectOption[] = useMemo(() =>
             Object.values(trackedEntityTypesWithCorrelatedPrograms)
@@ -67,13 +70,13 @@ export const TrackedEntityTypeSelectorPlain =
                     helpText={footerText}
                     options={filteredOptions}
                     value={selectedOption?.value}
-                    placeholder={i18n.t('Select tracked entity type')}
+                    placeholder={i18n.t('Select {{trackedEntityType}}', { trackedEntityType })}
                     filterable
-                    filterPlaceholder={i18n.t('Type to filter tracked entity types')}
+                    filterPlaceholder={i18n.t('Type to filter {{trackedEntityTypes}}', { trackedEntityTypes })}
                     filterValue={filterValue}
                     onFilterChange={setFilterValue}
                     onChange={handleSelectionChange}
-                    empty={i18n.t('No tracked entity types available')}
+                    empty={i18n.t('No {{trackedEntityTypes}} available', { trackedEntityTypes })}
                 />
             </div>
         );

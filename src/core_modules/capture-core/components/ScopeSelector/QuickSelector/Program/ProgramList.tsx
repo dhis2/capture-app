@@ -3,7 +3,7 @@ import { MenuDivider, MenuItem, Button, colors, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
-import type { Program, Icon } from '../../../../metaData';
+import { useProgramLabel, type Program, type Icon } from '../../../../metaData';
 import { OptionLabel } from '../../OptionLabel';
 
 const styles = () => ({
@@ -33,6 +33,7 @@ type Props = OwnProps & WithStyles<typeof styles>;
 const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgUnit, classes }: Props) => {
     const areAllProgramsAvailable =
         programOptions.length === programsArray.filter(program => program.access.data.read).length;
+    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('organisation unit');
 
     return (
         <>
@@ -59,7 +60,7 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
                 <>
                     <MenuDivider />
                     <div className={classes.filterWarning}>
-                        <span>{i18n.t('Some programs are being filtered by the chosen organisation unit')}</span>
+                        <span>{i18n.t('Some programs are being filtered by the chosen {{orgUnit}}', { orgUnit })}</span>
                         <Button small secondary onClick={() => onResetOrgUnit()}>
                             {i18n.t('Show all programs')}
                         </Button>

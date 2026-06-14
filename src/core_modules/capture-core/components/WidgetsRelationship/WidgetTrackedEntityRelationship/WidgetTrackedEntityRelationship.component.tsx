@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useProgramLabel } from '../../../metaData';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
 import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
@@ -40,11 +41,14 @@ export const WidgetTrackedEntityRelationship = ({
     const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
         [isLoadingRelationships, isLoadingTEType],
     );
+    const relationshipsLabel = useProgramLabel('relationship', { plural: true, programId }) ?? i18n.t('relationships');
 
     if (isError) {
         return (
             <div>
-                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
+                {i18n.t('Something went wrong while loading {{relationships}}. Please try again later.', {
+                    relationships: relationshipsLabel,
+                })}
             </div>
         );
     }
@@ -55,8 +59,9 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={i18n.t('{{trackedEntityTypeName}} relationships', {
+            title={i18n.t('{{trackedEntityTypeName}} {{relationships}}', {
                 trackedEntityTypeName,
+                relationships: relationshipsLabel,
                 interpolation: { escapeValue: false },
             })}
             isLoading={isLoading}

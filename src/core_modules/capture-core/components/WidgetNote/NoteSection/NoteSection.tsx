@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, useProgramLabel } from '../../../metaData';
 import type { OwnProps, NoteType } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -76,6 +76,7 @@ const NoteSectionPlain = ({
     const [isEditing, setEditing] = useState<boolean>(false);
     const [newNoteValue, setNewNoteValue] = useState<string>('');
     const { fromServerDate } = useTimeZoneConversion();
+    const note = useProgramLabel('note') ?? i18n.t('note');
 
     const handleChange = useCallback((value: string) => {
         setEditing(true);
@@ -129,7 +130,7 @@ const NoteSectionPlain = ({
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(note => <NoteItem key={`note-item-${note.note || note.value}-`} {...note} />)
+                    .map(noteItem => <NoteItem key={`note-item-${noteItem.note || noteItem.value}-`} {...noteItem} />)
                 }
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
@@ -158,7 +159,10 @@ const NoteSectionPlain = ({
                         primary
                         small
                     >
-                        {i18n.t('Save note')}
+                        {i18n.t('Save {{note}}', {
+                            note,
+                            interpolation: { escapeValue: false },
+                        })}
                     </Button>
                     <Button
                         dataTest="cancel-note-btn"

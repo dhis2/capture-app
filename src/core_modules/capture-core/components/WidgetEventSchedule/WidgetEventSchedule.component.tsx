@@ -14,6 +14,7 @@ import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
+import { useStageLabel } from '../../metaData';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -58,6 +59,9 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
+    const event = useStageLabel('event', { stageId, programId }) ?? i18n.t('event');
+    const eventCapitalized = useStageLabel('event', { stageId, programId }) ?? i18n.t('Event');
+
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -122,12 +126,21 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={i18n.t('Event notes')}
+                    sectionName={i18n.t('{{event}} notes', {
+                        event: eventCapitalized,
+                        interpolation: { escapeValue: false },
+                    })}
                 >
                     <NoteSection
                         notes={notes}
-                        placeholder={i18n.t('Write a note about this scheduled event')}
-                        emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
+                        placeholder={i18n.t('Write a note about this scheduled {{event}}', {
+                            event,
+                            interpolation: { escapeValue: false },
+                        })}
+                        emptyNoteMessage={i18n.t('This {{event}} doesn\'t have any notes', {
+                            event,
+                            interpolation: { escapeValue: false },
+                        })}
                         handleAddNote={onAddNote}
                     />
                 </DataSection>

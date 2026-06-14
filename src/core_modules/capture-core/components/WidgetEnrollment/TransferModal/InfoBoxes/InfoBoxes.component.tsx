@@ -4,6 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
+import { useProgramLabel } from '../../../../metaData';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
@@ -48,6 +49,7 @@ const InfoBoxesPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const { displayName: ownerOrgUnitName } = useOrgUnitNameWithAncestors(ownerOrgUnitId);
     const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId ?? null);
+    const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
 
     const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel as any)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;
@@ -57,10 +59,12 @@ const InfoBoxesPlain = ({
             {newOrgUnitName && (
                 <div className={cx(classes.alert, { info: true })}>
                     <IconInfo16 color={colors.grey600} />
-                    {i18n.t('Transferring enrollment ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
+                    {i18n.t('Transferring {{enrollment}} ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
+                        enrollment,
                         ownerOrgUnit: ownerOrgUnitName,
                         newOrgUnit: newOrgUnitName,
                         escape: '.',
+                        interpolation: { escapeValue: false },
                     })}
                 </div>
             )}
@@ -68,9 +72,13 @@ const InfoBoxesPlain = ({
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
                     <IconWarning16 />
-                    {i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
-                        organisationUnit: newOrgUnitName,
-                    })}
+                    {i18n.t(
+                        'You will lose access to the {{enrollment}} when transferring ownership to {{organisationUnit}}.',
+                        {
+                            enrollment,
+                            organisationUnit: newOrgUnitName,
+                            interpolation: { escapeValue: false },
+                        })}
                 </div>
             )}
         </div>

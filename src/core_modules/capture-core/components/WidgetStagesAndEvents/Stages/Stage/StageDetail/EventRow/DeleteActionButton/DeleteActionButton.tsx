@@ -9,7 +9,7 @@ import { pipe } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
 import { isValidPeriod } from '../../../../../../../utils/validation/validators/form';
 import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
-import { dataElementTypes } from '../../../../../../../metaData';
+import { dataElementTypes, useStageLabel } from '../../../../../../../metaData';
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 type Props = {
@@ -30,11 +30,13 @@ export const DeleteActionButton = ({
 }: Props) => {
     const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
     const occurredAtClientView = convertFn(occurredAt, dataElementTypes.DATE);
+    const event = useStageLabel('event') ?? i18n.t('Event');
 
     return (
         <ConditionalTooltip
-            content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
+            content={i18n.t('{{occurredAt}} belongs to an expired period. {{event}} cannot be deleted', {
                 occurredAt: occurredAtClientView,
+                event,
                 interpolation: { escapeValue: false },
             })}
             enabled={!isWithinValidPeriod}

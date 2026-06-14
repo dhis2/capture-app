@@ -15,6 +15,7 @@ import {
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
+import { useProgramLabel } from '../../../../../../metaData';
 import type { PlainProps } from './CompleteAction.types';
 
 const styles: Readonly<any> = {
@@ -36,9 +37,9 @@ const styles: Readonly<any> = {
     },
 };
 
-const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
+const getTooltipContent = (enrollments: string, programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
     if (!programDataWriteAccess) {
-        return i18n.t('You do not have access to bulk complete enrollments');
+        return i18n.t('You do not have access to bulk complete {{enrollments}}', { enrollments });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -59,6 +60,8 @@ const CompleteActionPlain = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
+    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+    const events = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('events');
     const {
         completeEnrollments,
         enrollmentCounts,
@@ -75,7 +78,7 @@ const CompleteActionPlain = ({
         onUpdateList,
         removeRowsFromSelection,
     });
-    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
+    const tooltipContent = getTooltipContent(enrollments, programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
     const ModalTextContent = () => {
@@ -96,8 +99,9 @@ const CompleteActionPlain = ({
                     <span>
                         {hasPartiallyUploadedEnrollments ?
                             // eslint-disable-next-line max-len
-                            i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.') :
-                            i18n.t('There was an error while completing the enrollments. Please see the details below.')
+                            i18n.t('Some {{enrollments}} were completed successfully, but there was an error while completing the rest. Please see the details below.', { enrollments }) :
+                            // eslint-disable-next-line max-len
+                            i18n.t('There was an error while completing the {{enrollments}}. Please see the details below.', { enrollments })
                         }
                     </span>
 
@@ -129,7 +133,8 @@ const CompleteActionPlain = ({
         if (errorFetchingTrackedEntities) {
             return (
                 <div className={classes.container}>
-                    {i18n.t('An unexpected error occurred while fetching the enrollments. Please try again.')}
+                    {/* eslint-disable-next-line max-len */}
+                    {i18n.t('An unexpected error occurred while fetching the {{enrollments}}. Please try again.', { enrollments })}
                 </div>
             );
         }
@@ -138,9 +143,9 @@ const CompleteActionPlain = ({
         if (enrollmentCounts.active === 0) {
             return (
                 <div className={classes.container}>
-                    {i18n.t('There are currently no active enrollments in the selection.')}
+                    {i18n.t('There are currently no active {{enrollments}} in the selection.', { enrollments })}
                     {' '}
-                    {i18n.t('All enrollments are already completed or cancelled.')}
+                    {i18n.t('All {{enrollments}} are already completed or cancelled.', { enrollments })}
                 </div>
             );
         }
@@ -166,7 +171,7 @@ const CompleteActionPlain = ({
                 }
 
                 <Checkbox
-                    label={i18n.t('Mark all events within enrollments as complete')}
+                    label={i18n.t('Mark all {{events}} within {{enrollments}} as complete', { events, enrollments })}
                     checked={completeEvents}
                     onChange={() => setCompleteEvents(prevState => !prevState)}
                 />
@@ -186,7 +191,7 @@ const CompleteActionPlain = ({
                     disabled={disabled}
                     onClick={() => setModalIsOpen(true)}
                 >
-                    {i18n.t('Complete enrollments')}
+                    {i18n.t('Complete {{enrollments}}', { enrollments })}
                 </Button>
             </ConditionalTooltip>
 
@@ -196,8 +201,8 @@ const CompleteActionPlain = ({
                     dataTest={'bulk-complete-enrollments-dialog'}
                 >
                     <ModalTitle>
-                        {validationError ? i18n.t('Error completing enrollments')
-                            : i18n.t('Complete enrollments')}
+                        {validationError ? i18n.t('Error completing {{enrollments}}', { enrollments })
+                            : i18n.t('Complete {{enrollments}}', { enrollments })}
                     </ModalTitle>
                     <ModalContent>
                         <ModalTextContent />
@@ -215,7 +220,7 @@ const CompleteActionPlain = ({
                             {!validationError && (
                                 <ConditionalTooltip
                                     enabled={enrollmentCounts?.active === 0}
-                                    content={i18n.t('No active enrollments to complete')}
+                                    content={i18n.t('No active {{enrollments}} to complete', { enrollments })}
                                 >
                                     <Button
                                         primary

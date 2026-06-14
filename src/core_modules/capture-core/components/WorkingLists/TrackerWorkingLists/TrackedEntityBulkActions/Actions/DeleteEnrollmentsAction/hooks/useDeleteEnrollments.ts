@@ -6,6 +6,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { useProgramLabel } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -29,6 +30,7 @@ export const useDeleteEnrollments = ({
         cancelled: true,
     });
     const dataEngine = useDataEngine();
+    const enrollmentsLabel = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -86,7 +88,8 @@ export const useDeleteEnrollments = ({
         {
             onError: (error) => {
                 log.error(errorCreator('An error occurred when deleting enrollments')({ error }));
-                showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
+                showAlert({ message: i18n.t(
+                    'An error occurred when deleting {{enrollments}}', { enrollments: enrollmentsLabel }) });
             },
             onSuccess: () => {
                 queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);

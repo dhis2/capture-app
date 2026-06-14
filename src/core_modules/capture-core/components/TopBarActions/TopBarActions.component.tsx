@@ -2,7 +2,7 @@ import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
-import { scopeTypes } from '../../metaData';
+import { scopeTypes, useStageLabel } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
@@ -27,6 +27,7 @@ const ActionButtonsPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
     const [openSearch, setOpenSearch] = useState(false);
+    const event = useStageLabel('event', { programId: selectedProgramId ?? undefined }) ?? i18n.t('event');
 
     useEffect(() => {
         setOpenSearch(false);
@@ -65,7 +66,7 @@ const ActionButtonsPlain = ({
                             trackedEntityType: trackedEntityName,
                             interpolation: { escapeValue: false },
                         })
-                        : i18n.t('Create new event')
+                        : i18n.t('Create new {{event}}', { event })
                     }
                 </SplitButton>
             )}

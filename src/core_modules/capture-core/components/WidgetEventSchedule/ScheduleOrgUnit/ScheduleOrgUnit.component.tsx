@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
+import { useProgramLabel } from '../../../metaData';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import {
@@ -45,6 +46,7 @@ export const ScheduleOrgUnit = ({
     orgUnit,
 }: Props) => {
     const [touched, setTouched] = useState(false);
+    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
 
     const handleSelect = (event: any) => {
         setTouched(true);
@@ -61,7 +63,7 @@ export const ScheduleOrgUnit = ({
 
     return (
         <OrgUnitFieldForForm
-            label={i18n.t('Organisation unit')}
+            label={orgUnitLabel}
             value={orgUnit}
             required
             onSelectClick={handleSelect}

@@ -27,6 +27,7 @@ import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useC
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
+import { useStageLabel } from '../../../../metaData';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -84,6 +85,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const eventLabel = useStageLabel('event', { programId, stageId: programStage?.id });
+    const event = eventLabel ?? i18n.t('event');
+    const eventTitle = eventLabel ?? i18n.t('Event');
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -128,7 +132,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         secondary
                         small
                     >
-                        {i18n.t('Edit event')}
+                        {i18n.t('Edit {{event}}', { event })}
                     </Button>
                 </div>}
             {supportsChangelog && (
@@ -169,7 +173,10 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             <ViewEventSection
                 header={(
                     <div className={classes.headerContainer}>
-                        <ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />
+                        <ViewEventSectionHeader
+                            text={i18n.t('{{event}} details', { event: eventTitle })}
+                            icon={IconFileDocument24}
+                        />
                         {renderActionsContainer()}
                     </div>
                 )}

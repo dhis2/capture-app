@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useProgramLabel } from '../../../../metaData';
 
 type Template = {
     id: string;
@@ -22,19 +23,20 @@ const DefaultFilterKeys = {
 
 type DefaultFilterKey = typeof DefaultFilterKeys[keyof typeof DefaultFilterKeys];
 
-const DefaultFilterLabels: { [key in DefaultFilterKey]: string } = {
-    [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),
-    [DefaultFilterKeys.ACTIVE]: i18n.t('Active enrollments'),
-    [DefaultFilterKeys.COMPLETE]: i18n.t('Completed enrollments'),
-    [DefaultFilterKeys.CANCELLED]: i18n.t('Cancelled enrollments'),
-};
-
 export const useWorkingListLabel = ({
     programId,
     displayFrontPageList,
 }: Props) => {
     const workingListTemplates = useSelector((state: any) => state.workingListsTemplates?.teiList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.teiList?.programIdView);
+    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+
+    const DefaultFilterLabels: { [key in DefaultFilterKey]: string } = useMemo(() => ({
+        [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),
+        [DefaultFilterKeys.ACTIVE]: i18n.t('Active {{enrollments}}', { enrollments }),
+        [DefaultFilterKeys.COMPLETE]: i18n.t('Completed {{enrollments}}', { enrollments }),
+        [DefaultFilterKeys.CANCELLED]: i18n.t('Cancelled {{enrollments}}', { enrollments }),
+    }), [enrollments]);
 
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
 
@@ -66,6 +68,7 @@ export const useWorkingListLabel = ({
         isSameProgram,
         selectedTemplate,
         selectedTemplateId,
+        DefaultFilterLabels,
     ]);
 
     return {

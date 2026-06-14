@@ -5,6 +5,9 @@ import type { PlainProps, PlainPropsWithEvents } from './completeModal.types';
 
 export const CompleteEnrollmentAndEventsModalComponent = ({
     programStageName,
+    enrollmentLabel,
+    eventSingularLabel,
+    eventPluralLabel,
     programStagesWithActiveEvents,
     programStagesWithoutAccess,
     onCancel,
@@ -19,19 +22,28 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
             })}
         </ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?')}</p>
+            <p>
+                {i18n.t('Would you like to complete the {{enrollmentLabel}} and all active {{eventPluralLabel}} as well?', {
+                    enrollmentLabel,
+                    eventPluralLabel,
+                    interpolation: { escapeValue: false },
+                })}
+            </p>
 
             {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                 <>
-                    {i18n.t('The following events will be completed:')}
+                    {i18n.t('The following {{eventPluralLabel}} will be completed:', {
+                        eventPluralLabel,
+                        interpolation: { escapeValue: false },
+                    })}
                     {Object.keys(programStagesWithActiveEvents).map((key) => {
                         const { count, name } = programStagesWithActiveEvents[key];
+                        const eventLabel = count === 1 ? eventSingularLabel : eventPluralLabel;
                         return (
                             <ul key={key}>
-                                {i18n.t('{{count}} event in {{programStageName}}', {
+                                {i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                     count,
-                                    defaultValue: '{{count}} event in {{programStageName}}',
-                                    defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                    eventLabel,
                                     programStageName: name,
                                     interpolation: { escapeValue: false },
                                 })}
@@ -43,16 +55,19 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
 
             {Object.keys(programStagesWithoutAccess).length !== 0 && (
                 <>
-                    {i18n.t('The following events will not be completed due to lack of access:')}
+                    {i18n.t('The following {{eventPluralLabel}} will not be completed due to lack of access:', {
+                        eventPluralLabel,
+                        interpolation: { escapeValue: false },
+                    })}
                     {Object.keys(programStagesWithoutAccess).map((key) => {
                         const { count, name } = programStagesWithoutAccess[key];
+                        const eventLabel = count === 1 ? eventSingularLabel : eventPluralLabel;
 
                         return (
                             <ul key={key}>
-                                {i18n.t('{{count}} event in {{programStageName}}', {
+                                {i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                     count,
-                                    defaultValue: '{{count}} event in {{programStageName}}',
-                                    defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                    eventLabel,
                                     programStageName: name,
                                     interpolation: { escapeValue: false },
                                 })}
@@ -65,10 +80,17 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={onCompleteEnrollmentAndEvents} primary>
-                        {i18n.t('Yes, complete enrollment and events')}
+                        {i18n.t('Yes, complete {{enrollmentLabel}} and {{eventPluralLabel}}', {
+                            enrollmentLabel,
+                            eventPluralLabel,
+                            interpolation: { escapeValue: false },
+                        })}
                     </Button>
                     <Button onClick={onCompleteEnrollment} secondary dataTest="enrollment-actions-complete-button">
-                        {i18n.t('Complete enrollment only')}
+                        {i18n.t('Complete {{enrollmentLabel}} only', {
+                            enrollmentLabel,
+                            interpolation: { escapeValue: false },
+                        })}
                     </Button>
                     <Button onClick={onCancel} secondary>
                         {i18n.t('No, cancel')}
@@ -79,7 +101,12 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
     </Modal>
 );
 
-export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, onCompleteEnrollment }: PlainProps) => (
+export const CompleteEnrollmentModalComponent = ({
+    programStageName,
+    enrollmentLabel,
+    onCancel,
+    onCompleteEnrollment,
+}: PlainProps) => (
     <Modal position="middle" large>
         <ModalTitle>
             {i18n.t('{{programStageName}} completed', {
@@ -88,11 +115,19 @@ export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, o
             })}
         </ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment?')}</p>
+            <p>
+                {i18n.t('Would you like to complete the {{enrollmentLabel}}?', {
+                    enrollmentLabel,
+                    interpolation: { escapeValue: false },
+                })}
+            </p>
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={onCompleteEnrollment} primary>
-                        {i18n.t('Complete enrollment')}
+                        {i18n.t('Complete {{enrollmentLabel}}', {
+                            enrollmentLabel,
+                            interpolation: { escapeValue: false },
+                        })}
                     </Button>
                     <Button onClick={onCancel} secondary>
                         {i18n.t('No, cancel')}

@@ -6,6 +6,7 @@ import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { useProgramLabel } from '../../../../metaData';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -52,6 +53,7 @@ export const EnrollmentPageDefault = () => {
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
+    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
@@ -226,8 +228,9 @@ export const EnrollmentPageDefault = () => {
                 ruleEffects={ruleEffects}
                 widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={i18n.t('No feedback for this enrollment yet')}
-                indicatorEmptyText={i18n.t('No indicator output for this enrollment yet')}
+                feedbackEmptyText={i18n.t('No feedback for this {{enrollment}} yet', { enrollment: enrollmentLabel })}
+                indicatorEmptyText={i18n.t(
+                    'No indicator output for this {{enrollment}} yet', { enrollment: enrollmentLabel })}
             />
         </EnrollmentAccessProvider>
     );

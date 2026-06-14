@@ -3,6 +3,7 @@ import { IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
+import { useStageLabel, useTrackedEntityTypeLabel } from '../../metaData';
 
 const styles = {
     label: {
@@ -27,21 +28,36 @@ type Access = {
     programStage: boolean;
 };
 
-const getEnrollmentMessage = (): string => i18n.t('You only have view access to this enrollment');
+const getEnrollmentMessage = (enrollment: string): string =>
+    i18n.t('You only have view access to this {{enrollment}}', { enrollment, escapeValue: false });
 
 const getProgramMessage = (): string => i18n.t('You only have view access to this program');
 
-const getTrackedEntityMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
+const getTrackedEntityMessage = (
+    trackedEntityName: string | undefined,
+    trackedEntityType: string,
+): string => (trackedEntityName
     ? i18n.t('You only have view access to this {{trackedEntityName}}', { trackedEntityName, escapeValue: false })
-    : i18n.t('You only have view access to this tracked entity type'));
+    : i18n.t('You only have view access to this {{trackedEntityType}}', { trackedEntityType, escapeValue: false }));
 
-const getProgramStageMessage = (multipleStages: boolean): string => (multipleStages
-    ? i18n.t('You only have view access to these program stages')
-    : i18n.t('You only have view access to this program stage'));
+const getProgramStageMessage = (multipleStages: boolean, programStage: string, programStages: string): string =>
+    (multipleStages
+        ? i18n.t('You only have view access to these {{programStages}}', { programStages, escapeValue: false })
+        : i18n.t('You only have view access to this {{programStage}}', { programStage, escapeValue: false }));
 
-const getExpiredPeriodMessage = (): string => i18n.t('This event is outside the valid editing period');
+const getExpiredPeriodMessage = (event: string): string =>
+    i18n.t('This {{event}} is outside the valid editing period', { event, escapeValue: false });
 
-const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
+const getCompletedEventMessage = (event: string): string =>
+    i18n.t('This {{event}} has been completed', { event, escapeValue: false });
+
+type Labels = {
+    enrollment: string;
+    trackedEntityType: string;
+    programStage: string;
+    programStages: string;
+    event: string;
+};
 
 const getReadOnlyMessage = (
     access: Access,
@@ -49,13 +65,16 @@ const getReadOnlyMessage = (
     multipleStages: boolean,
     eventWithinValidPeriod: boolean,
     canEditCompletedEvent: boolean,
+    labels: Labels,
 ): string => {
-    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
+    if (!access.program && !access.trackedEntityType && !access.programStage) {
+        return getEnrollmentMessage(labels.enrollment);
+    }
     if (!access.program) return getProgramMessage();
-    if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
-    if (!access.programStage) return getProgramStageMessage(multipleStages);
-    if (!eventWithinValidPeriod) return getExpiredPeriodMessage();
-    if (!canEditCompletedEvent) return getCompletedEventMessage();
+    if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName, labels.trackedEntityType);
+    if (!access.programStage) return getProgramStageMessage(multipleStages, labels.programStage, labels.programStages);
+    if (!eventWithinValidPeriod) return getExpiredPeriodMessage(labels.event);
+    if (!canEditCompletedEvent) return getCompletedEventMessage(labels.event);
     return '';
 };
 
@@ -75,12 +94,20 @@ const ReadOnlyBadgePlain = ({
         trackedEntityType: trackedEntityTypeWriteAccess,
         programStage: programStageWriteAccess,
     };
+    const labels: Labels = {
+        enrollment: useStageLabel('enrollment') ?? i18n.t('enrollment'),
+        trackedEntityType: useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type'),
+        programStage: useStageLabel('programStage') ?? i18n.t('program stage'),
+        programStages: useStageLabel('programStage', { plural: true }) ?? i18n.t('program stages'),
+        event: useStageLabel('event') ?? i18n.t('event'),
+    };
     const message = getReadOnlyMessage(
         access,
         trackedEntityName,
         multipleStages,
         eventWithinValidPeriod,
         canEditCompletedEvent,
+        labels,
     );
     if (!message) return null;
 

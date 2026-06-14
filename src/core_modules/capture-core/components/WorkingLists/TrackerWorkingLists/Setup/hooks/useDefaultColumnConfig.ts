@@ -1,16 +1,19 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
-import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
+import { dataElementTypes, useStageLabel, type TrackerProgram } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
-const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
+const getMainConfig = (
+    hasDisplayInReportsAttributes: boolean,
+    ownerOrgUnitLabel: string,
+): Array<MainColumnConfig> =>
     [
         {
             id: 'programOwnerId',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: i18n.t('Owner organisation unit'),
+            header: ownerOrgUnitLabel,
             sortDisabled: true,
             filterHidden: true,
             apiViewName: 'programOwner',
@@ -34,13 +37,17 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
         isMainProperty: true,
     }));
 
-const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
+const getProgramStageMainConfig = (
+    programStage,
+    eventStatusLabel: string,
+    eventOrgUnitLabel: string,
+): Array<MetadataColumnConfig> =>
     [
         {
             id: ADDITIONAL_FILTERS.status,
             visible: true,
             type: dataElementTypes.TEXT,
-            header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
+            header: eventStatusLabel,
         },
         {
             id: ADDITIONAL_FILTERS.occurredAt,
@@ -64,7 +71,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             id: ADDITIONAL_FILTERS.orgUnit,
             visible: true,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: ADDITIONAL_FILTERS_LABELS.orgUnit,
+            header: eventOrgUnitLabel,
             apiViewName: 'eventOrgUnit',
         },
         ...(programStage.enableUserAssignment
@@ -148,23 +155,34 @@ export const useDefaultColumnConfig = (
     program: TrackerProgram,
     orgUnitId: string | null | undefined,
     programStageId: string | null | undefined,
-): TrackerWorkingListsColumnConfigs =>
-    useMemo(() => {
+): TrackerWorkingListsColumnConfigs => {
+    const eventTerm =
+        useStageLabel('event', { programId: program.id, stageId: programStageId ?? undefined }) ?? i18n.t('Event');
+    const orgUnitTerm =
+        useStageLabel('orgUnit', { programId: program.id, stageId: programStageId ?? undefined }) ??
+        i18n.t('organisation unit');
+
+    const ownerOrgUnitLabel = i18n.t('Owner {{orgUnit}}', { orgUnit: orgUnitTerm });
+    const eventStatusLabel = i18n.t('{{event}} status', { event: eventTerm });
+    const eventOrgUnitLabel = i18n.t('{{event}} {{orgUnit}}', { event: eventTerm, orgUnit: orgUnitTerm });
+
+    return useMemo(() => {
         const { attributes, stages } = program;
         const searchFilterMetaById = buildSearchFilterMetaById(program);
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
 
         const defaultColumns = [
-            ...getMainConfig(hasDisplayInReportsAttributes),
+            ...getMainConfig(hasDisplayInReportsAttributes, ownerOrgUnitLabel),
             ...getTEIMetaDataConfig(attributes, orgUnitId, searchFilterMetaById),
         ];
 
         if (programStageId && programStage) {
             return defaultColumns.concat([
-                ...getProgramStageMainConfig(programStage),
+                ...getProgramStageMainConfig(programStage, eventStatusLabel, eventOrgUnitLabel),
                 ...getEventsMetaDataConfig(programStage),
             ]);
         }
         return defaultColumns;
-    }, [orgUnitId, program, programStageId]);
+    }, [orgUnitId, program, programStageId, ownerOrgUnitLabel, eventStatusLabel, eventOrgUnitLabel]);
+};
