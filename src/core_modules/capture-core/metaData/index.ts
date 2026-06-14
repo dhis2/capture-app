@@ -40,7 +40,7 @@ export {
     getProgramThrowIfNotFound,
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
-    TERMS,
+    CUSTOM_LABEL_FIELDS,
     resolveLabel,
     extractCustomLabels,
     getProgramLabel,

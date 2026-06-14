@@ -10,7 +10,7 @@ type TermDef = {
     pluralField?: string,
 };
 
-export const TERMS = {
+export const CUSTOM_LABEL_FIELDS = {
     enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
     followUp: { field: 'displayFollowUpLabel' },
     orgUnit: { field: 'displayOrgUnitLabel' },
@@ -22,13 +22,13 @@ export const TERMS = {
     trackedEntityType: { pluralField: 'displayTrackedEntityTypesLabel' },
 } as const satisfies { [key: string]: TermDef };
 
-export type TermKey = keyof typeof TERMS;
+export type TermKey = keyof typeof CUSTOM_LABEL_FIELDS;
 export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
 
 const allFields: Array<string> = Array.from(
     new Set(
-        Object.values(TERMS)
+        Object.values(CUSTOM_LABEL_FIELDS)
             .flatMap((term: TermDef) => [term.field, term.pluralField])
             .filter((field): field is string => Boolean(field)),
     ),
@@ -60,7 +60,7 @@ export const resolveLabel = (
     key: TermKey,
     { plural = false }: LabelOptions = {},
 ): string | undefined => {
-    const term: TermDef = TERMS[key];
+    const term: TermDef = CUSTOM_LABEL_FIELDS[key];
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 

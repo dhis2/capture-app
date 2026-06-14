@@ -18,7 +18,7 @@ export { getProgramEventAccess } from './getProgramEventAccess';
 export { getProgramAndStageForProgram } from './getProgramAndStageForProgram';
 export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
 export {
-    TERMS,
+    CUSTOM_LABEL_FIELDS,
     resolveLabel,
     extractCustomLabels,
     getProgramLabel,
