@@ -673,6 +673,10 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
+    cy.get('[data-test="tracker-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${value}`))
+        .should('exist');
 });
 
 When('you set the boolean filter', () => {

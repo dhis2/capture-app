@@ -544,7 +544,12 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-contents"]')
         .find('[data-test="list-view-filter-apply-button"]')
+        .should('not.be.disabled')
         .click({ force: true });
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${value}`))
+        .should('exist');
 });
 
 Then('the boolean filter should be in effect and show the correct value when opened', () => {
