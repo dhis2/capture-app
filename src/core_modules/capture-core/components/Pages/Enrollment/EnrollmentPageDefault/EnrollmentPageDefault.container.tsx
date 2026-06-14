@@ -6,8 +6,6 @@ import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { useQueryClient } from '@tanstack/react-query';
-import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -43,6 +41,7 @@ import {
 import {
     addPersistedEnrollmentEvents,
     deleteEnrollmentEvent,
+    setTrackedEntityInactiveStatus,
     updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
 import { useHideWidgetByRuleLocations } from '../../../../hooks';
@@ -51,7 +50,6 @@ import { useHideWidgetByRuleLocations } from '../../../../hooks';
 export const EnrollmentPageDefault = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
-    const queryClient = useQueryClient();
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
@@ -75,10 +73,8 @@ export const EnrollmentPageDefault = () => {
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
 
     const onStatusToggleSuccess = useCallback(() => {
-        queryClient.invalidateQueries(
-            [ReactQueryAppNamespace, 'stages&event', 'enrollmentData', teiId, programId, enrollmentId],
-        );
-    }, [queryClient, teiId, programId, enrollmentId]);
+        dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));
+    }, [dispatch, trackedEntityInactive]);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
     /*
