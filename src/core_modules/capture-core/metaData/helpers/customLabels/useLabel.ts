@@ -8,8 +8,8 @@ type ProgramOptions = LabelOptions & { programId?: string };
 type StageOptions = LabelOptions & { programId?: string, stageId?: string };
 type TrackedEntityTypeOptions = LabelOptions & { tetId?: string };
 
-/** Resolves a program-level term; defaults to the currently selected program. */
-export const useProgramLabel = (key: TermKey, { programId, plural }: ProgramOptions = {}): string => {
+/** Resolves a program-level custom term; defaults to the currently selected program. */
+export const useProgramLabel = (key: TermKey, { programId, plural }: ProgramOptions = {}): string | undefined => {
     const currentProgramId = useSelector(({ currentSelections }: any) => currentSelections.programId);
     const id = programId ?? currentProgramId;
     return useMemo(
@@ -18,8 +18,8 @@ export const useProgramLabel = (key: TermKey, { programId, plural }: ProgramOpti
     );
 };
 
-/** Resolves a term with stage → program fallback; defaults to the current program/stage. */
-export const useStageLabel = (key: TermKey, { programId, stageId, plural }: StageOptions = {}): string => {
+/** Resolves a custom term with stage → program fallback; defaults to the current program/stage. */
+export const useStageLabel = (key: TermKey, { programId, stageId, plural }: StageOptions = {}): string | undefined => {
     const currentProgramId = useSelector(({ currentSelections }: any) => currentSelections.programId);
     const currentStageId = useSelector(({ currentSelections }: any) => currentSelections.stageId);
     const pId = programId ?? currentProgramId;
@@ -31,8 +31,11 @@ export const useStageLabel = (key: TermKey, { programId, stageId, plural }: Stag
     }, [pId, sId, key, plural]);
 };
 
-/** Resolves a tracked-entity-type-level term; defaults to the current tracked entity type. */
-export const useTrackedEntityTypeLabel = (key: TermKey, { tetId, plural }: TrackedEntityTypeOptions = {}): string => {
+/** Resolves a tracked-entity-type-level custom term; defaults to the current tracked entity type. */
+export const useTrackedEntityTypeLabel = (
+    key: TermKey,
+    { tetId, plural }: TrackedEntityTypeOptions = {},
+): string | undefined => {
     const currentTetId = useSelector(({ currentSelections }: any) => currentSelections.trackedEntityTypeId);
     const id = tetId ?? currentTetId;
     return useMemo(

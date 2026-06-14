@@ -1,73 +1,26 @@
-import i18n from '@dhis2/d2-i18n';
-
 /**
  * Configurable terminology (DHIS2-16581 + v43 plurals).
  *
- * Single source of truth: each term declares the backend field(s) that hold its
- * custom value and the translated defaults. The resolver returns the custom label
- * if configured, otherwise the translated default.
- *
- * Default strings are wrapped in thunks (not evaluated at module load) so i18n.t()
- * resolves against the active locale, and are written as literals so the i18n
- * extractor can find them.
+ * Each term maps to the backend field(s) that hold the custom (translated) label.
+ * The resolver returns the configured custom string, or `undefined` when none is
+ * set — callers fall back to their existing default term (`?? i18n.t('…')`).
  */
 type TermDef = {
     field?: string,
     pluralField?: string,
-    singular: () => string,
-    plural: () => string,
 };
 
-export const TERMS: { [key: string]: TermDef } = {
-    enrollment: {
-        field: 'displayEnrollmentLabel',
-        pluralField: 'displayEnrollmentsLabel',
-        singular: () => i18n.t('Enrollment'),
-        plural: () => i18n.t('Enrollments'),
-    },
-    followUp: {
-        field: 'displayFollowUpLabel',
-        singular: () => i18n.t('Follow-up'),
-        plural: () => i18n.t('Follow-ups'),
-    },
-    orgUnit: {
-        field: 'displayOrgUnitLabel',
-        singular: () => i18n.t('Organisation unit'),
-        plural: () => i18n.t('Organisation units'),
-    },
-    relationship: {
-        field: 'displayRelationshipLabel',
-        singular: () => i18n.t('Relationship'),
-        plural: () => i18n.t('Relationships'),
-    },
-    note: {
-        field: 'displayNoteLabel',
-        singular: () => i18n.t('Note'),
-        plural: () => i18n.t('Notes'),
-    },
-    attribute: {
-        field: 'displayTrackedEntityAttributeLabel',
-        singular: () => i18n.t('Attribute'),
-        plural: () => i18n.t('Attributes'),
-    },
-    programStage: {
-        field: 'displayProgramStageLabel',
-        pluralField: 'displayProgramStagesLabel',
-        singular: () => i18n.t('Program stage'),
-        plural: () => i18n.t('Program stages'),
-    },
-    event: {
-        field: 'displayEventLabel',
-        pluralField: 'displayEventsLabel',
-        singular: () => i18n.t('Event'),
-        plural: () => i18n.t('Events'),
-    },
-    trackedEntityType: {
-        pluralField: 'displayTrackedEntityTypesLabel',
-        singular: () => i18n.t('Tracked entity type'),
-        plural: () => i18n.t('Tracked entity types'),
-    },
-};
+export const TERMS = {
+    enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
+    followUp: { field: 'displayFollowUpLabel' },
+    orgUnit: { field: 'displayOrgUnitLabel' },
+    relationship: { field: 'displayRelationshipLabel' },
+    note: { field: 'displayNoteLabel' },
+    attribute: { field: 'displayTrackedEntityAttributeLabel' },
+    programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
+    event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
+    trackedEntityType: { pluralField: 'displayTrackedEntityTypesLabel' },
+} as const satisfies { [key: string]: TermDef };
 
 export type TermKey = keyof typeof TERMS;
 export type CustomLabels = Record<string, string>;
@@ -76,7 +29,7 @@ export type LabelOptions = { plural?: boolean };
 const allFields: Array<string> = Array.from(
     new Set(
         Object.values(TERMS)
-            .flatMap(term => [term.field, term.pluralField])
+            .flatMap((term: TermDef) => [term.field, term.pluralField])
             .filter((field): field is string => Boolean(field)),
     ),
 );
@@ -95,32 +48,31 @@ export const extractCustomLabels = (cached: Record<string, any>): CustomLabels =
 type LabelSource = CustomLabels | undefined | null;
 
 /**
- * Resolves a term against one or more label sources, checked in order (e.g. stage
- * then program). Falls back to the translated default when no custom label is set.
+ * Resolves the custom label for a term against one or more sources, checked in
+ * order (e.g. stage then program). Returns `undefined` when no custom label is
+ * configured, so the caller keeps its own default term.
  *
- * Plural rules:
- *  - term with a backend plural field → plural custom, else plural default
- *  - singular-only term → singular custom (reused), else plural default
+ * For a plural slot: a term with a backend plural field uses that field; a
+ * singular-only term reuses its singular custom value.
  */
 export const resolveLabel = (
     sources: LabelSource | Array<LabelSource>,
     key: TermKey,
     { plural = false }: LabelOptions = {},
-): string => {
-    const term = TERMS[key];
+): string | undefined => {
+    const term: TermDef = TERMS[key];
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 
     if (plural) {
-        const custom = term.pluralField ? pick(term.pluralField) : pick(term.field);
-        return custom ?? term.plural();
+        return term.pluralField ? pick(term.pluralField) : pick(term.field);
     }
-    return pick(term.field) ?? term.singular();
+    return pick(term.field);
 };
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;
 
-export const getProgramLabel = (program: WithLabels, key: TermKey, options?: LabelOptions): string =>
+export const getProgramLabel = (program: WithLabels, key: TermKey, options?: LabelOptions): string | undefined =>
     resolveLabel(program?.customLabels, key, options);
 
 export const getStageLabel = (
@@ -128,10 +80,10 @@ export const getStageLabel = (
     program: WithLabels,
     key: TermKey,
     options?: LabelOptions,
-): string => resolveLabel([stage?.customLabels, program?.customLabels], key, options);
+): string | undefined => resolveLabel([stage?.customLabels, program?.customLabels], key, options);
 
 export const getTrackedEntityTypeLabel = (
     trackedEntityType: WithLabels,
     key: TermKey,
     options?: LabelOptions,
-): string => resolveLabel(trackedEntityType?.customLabels, key, options);
+): string | undefined => resolveLabel(trackedEntityType?.customLabels, key, options);
