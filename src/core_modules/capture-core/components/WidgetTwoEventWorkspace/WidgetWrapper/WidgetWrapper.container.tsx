@@ -42,7 +42,7 @@ export const styles: Readonly<any> = {
 const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: PlainProps & WithStyles<typeof styles>) => {
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
-            <div className={classes.container} data-test="two-event-workspace-wrapper">
+            <div className={classes.container}>
                 <div className={classes.header}> {stage?.name} </div>
                 <div className={classes.referalResponse}>
                     <div className={classes.linkedEvent}>

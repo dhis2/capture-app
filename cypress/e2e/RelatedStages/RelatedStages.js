@@ -6,18 +6,6 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
-Given(/^you make sure the event .+ is unlinked$/, () => {
-    cy.get('[data-test="related-stages-section"], [data-test="widget-linked-event-overflow-menu"]')
-        .should('exist');
-    cy.get('body').then(($body) => {
-        if ($body.find('[data-test="widget-linked-event-overflow-menu"]').length) {
-            cy.get('[data-test="widget-linked-event-overflow-menu"]').click();
-            cy.get('[data-test="event-overflow-unlink-event"]').click();
-            cy.get('[data-test="event-overflow-unlink-event-confirm"]').click();
-        }
-    });
-});
-
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
     cy.get('[data-test="related-stages-section"]')
         .should(not ? 'not.exist' : 'exist');
@@ -58,17 +46,13 @@ When('you click the Link button', () => {
 });
 
 Then('you can see the Baby Postnatal linked event', () => {
-    // Single document-scoped selector so Cypress re-queries from the document on
-    // every retry until the linked-event workspace has finished loading and mounted.
-    // (cy.get(parent).find(child) would keep searching a parent subject that a
-    // re-render can detach before the widget loads, causing intermittent failures.)
-    cy.get('[data-test="enrollment-viewEvent-page"] [data-test="two-event-workspace-wrapper"]')
-        .should('exist');
+    cy.get('[data-test="enrollment-viewEvent-page"]')
+        .should('contain', 'This Birth event is linked to a Baby Postnatal event. Review the linked event details before entering data below');
 });
 
 Then('you can see the Birth linked event', () => {
-    cy.get('[data-test="enrollment-editEvent-page"] [data-test="two-event-workspace-wrapper"]')
-        .should('exist');
+    cy.get('[data-test="enrollment-editEvent-page"]')
+        .should('contain', 'This Baby Postnatal event is linked to a Birth event. Review the linked event details before entering data below');
 });
 
 When('you unlink the Baby Postnatal linked event', () => {
