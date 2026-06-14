@@ -58,14 +58,16 @@ When('you click the Link button', () => {
 });
 
 Then('you can see the Baby Postnatal linked event', () => {
-    cy.get('[data-test="enrollment-viewEvent-page"]')
-        .find('[data-test="two-event-workspace-wrapper"]')
+    // Single document-scoped selector so Cypress re-queries from the document on
+    // every retry until the linked-event workspace has finished loading and mounted.
+    // (cy.get(parent).find(child) would keep searching a parent subject that a
+    // re-render can detach before the widget loads, causing intermittent failures.)
+    cy.get('[data-test="enrollment-viewEvent-page"] [data-test="two-event-workspace-wrapper"]')
         .should('exist');
 });
 
 Then('you can see the Birth linked event', () => {
-    cy.get('[data-test="enrollment-editEvent-page"]')
-        .find('[data-test="two-event-workspace-wrapper"]')
+    cy.get('[data-test="enrollment-editEvent-page"] [data-test="two-event-workspace-wrapper"]')
         .should('exist');
 });
 
