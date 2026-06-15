@@ -28,4 +28,4 @@ export {
     useStageLabel,
     useTrackedEntityTypeLabel,
 } from './customLabels';
-export type { TermKey, CustomLabels, LabelOptions } from './customLabels';
+export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels';

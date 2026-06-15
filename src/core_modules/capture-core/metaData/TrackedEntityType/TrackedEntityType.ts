@@ -1,3 +1,6 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-restricted-syntax */
+
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { SearchGroup } from '../SearchGroup';
 import type { DataElement } from '../DataElement';
@@ -5,7 +8,6 @@ import type { TeiRegistration } from './TeiRegistration';
 import type { Access } from '../Access';
 import type { CustomLabels } from '../helpers/customLabels';
 
-/* eslint-disable no-underscore-dangle */
 export class TrackedEntityType {
     _id!: string;
     _access!: Access;
