@@ -17,7 +17,10 @@ export const useProgramLabel = (key: CustomLabelKey, { programId, plural }: Prog
     );
 };
 
-export const useStageLabel = (key: CustomLabelKey, { programId, stageId, plural }: StageOptions = {}): string | undefined => {
+export const useStageLabel = (
+    key: CustomLabelKey,
+    { programId, stageId, plural }: StageOptions = {},
+): string | undefined => {
     const currentProgramId = useSelector(({ currentSelections }: any) => currentSelections.programId);
     const currentStageId = useSelector(({ currentSelections }: any) => currentSelections.stageId);
     const pId = programId ?? currentProgramId;
