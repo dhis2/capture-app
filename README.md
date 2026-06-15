@@ -1,4 +1,4 @@
-# Capture app
+# Capture app DAC
 
 The Capture app serves as a replacement for the Event Capture app. In the future, the intention is to incorporate the Tracker Capture app and the Data Entry app into the Capture app.
 
