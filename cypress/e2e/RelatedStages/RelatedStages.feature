@@ -2,6 +2,7 @@ Feature: Related stages
 
     Scenario: Edit event -> User is able to link and unlink an existing event
         Given you land on a enrollment page domain by having typed #/enrollmentEventEdit?eventId=TwoGi1mUFFw&orgUnitId=lyONqUkY1Bq
+        And you unlink the Birth event first if it is already linked
         And the Related stages Actions is visible at the bottom of the page
         And the schedule and enter details actions are disabled
         And you select the Link to an existing event action
