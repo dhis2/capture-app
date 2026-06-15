@@ -2357,9 +2357,6 @@ msgstr "Visited"
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
 
-msgid "…"
-msgstr "…"
-
 msgid "Program not found"
 msgstr "Program not found"
 

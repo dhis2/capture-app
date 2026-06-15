@@ -50,4 +50,4 @@ export {
     useStageLabel,
     useTrackedEntityTypeLabel,
 } from './helpers';
-export type { TermKey, CustomLabels, LabelOptions } from './helpers';
+export type { CustomLabelKey, CustomLabels, LabelOptions } from './helpers';

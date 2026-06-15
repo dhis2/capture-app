@@ -1,11 +1,4 @@
-/**
- * Configurable terminology (DHIS2-16581 + v43 plurals).
- *
- * Each term maps to the backend field(s) that hold the custom (translated) label.
- * The resolver returns the configured custom string, or `undefined` when none is
- * set — callers fall back to their existing default term (`?? i18n.t('…')`).
- */
-type TermDef = {
+type CustomLabelField = {
     field?: string,
     pluralField?: string,
 };
@@ -20,21 +13,20 @@ export const CUSTOM_LABEL_FIELDS = {
     programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
     event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
     trackedEntityType: { pluralField: 'displayTrackedEntityTypesLabel' },
-} as const satisfies { [key: string]: TermDef };
+} as const satisfies { [key: string]: CustomLabelField };
 
-export type TermKey = keyof typeof CUSTOM_LABEL_FIELDS;
+export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
 export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
 
 const allFields: Array<string> = Array.from(
     new Set(
         Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: TermDef) => [term.field, term.pluralField])
+            .flatMap((term: CustomLabelField) => [term.field, term.pluralField])
             .filter((field): field is string => Boolean(field)),
     ),
 );
 
-/** Copies the present custom-label values out of a cached metadata object. */
 export const extractCustomLabels = (cached: Record<string, any>): CustomLabels => {
     const labels: CustomLabels = {};
     allFields.forEach((field) => {
@@ -47,20 +39,12 @@ export const extractCustomLabels = (cached: Record<string, any>): CustomLabels =
 
 type LabelSource = CustomLabels | undefined | null;
 
-/**
- * Resolves the custom label for a term against one or more sources, checked in
- * order (e.g. stage then program). Returns `undefined` when no custom label is
- * configured, so the caller keeps its own default term.
- *
- * For a plural slot: a term with a backend plural field uses that field; a
- * singular-only term reuses its singular custom value.
- */
 export const resolveLabel = (
     sources: LabelSource | Array<LabelSource>,
-    key: TermKey,
+    key: CustomLabelKey,
     { plural = false }: LabelOptions = {},
 ): string | undefined => {
-    const term: TermDef = CUSTOM_LABEL_FIELDS[key];
+    const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 
@@ -72,18 +56,18 @@ export const resolveLabel = (
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;
 
-export const getProgramLabel = (program: WithLabels, key: TermKey, options?: LabelOptions): string | undefined =>
+export const getProgramLabel = (program: WithLabels, key: CustomLabelKey, options?: LabelOptions): string | undefined =>
     resolveLabel(program?.customLabels, key, options);
 
 export const getStageLabel = (
     stage: WithLabels,
     program: WithLabels,
-    key: TermKey,
+    key: CustomLabelKey,
     options?: LabelOptions,
 ): string | undefined => resolveLabel([stage?.customLabels, program?.customLabels], key, options);
 
 export const getTrackedEntityTypeLabel = (
     trackedEntityType: WithLabels,
-    key: TermKey,
+    key: CustomLabelKey,
     options?: LabelOptions,
 ): string | undefined => resolveLabel(trackedEntityType?.customLabels, key, options);
