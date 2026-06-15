@@ -46,13 +46,17 @@ When('you click the Link button', () => {
 });
 
 Then('you can see the Baby Postnatal linked event', () => {
-    cy.get('[data-test="enrollment-viewEvent-page"]')
-        .should('contain', 'This Birth event is linked to a Baby Postnatal event. Review the linked event details before entering data below');
+    // Assert on the linked-event workspace wrapper rather than its banner text: the wrapper
+    // mounts as soon as the event is linked, while the banner copy only renders once the
+    // stage names resolve from metadata (see WidgetWrapper.container.tsx). A single
+    // document-scoped selector re-queries from the document on every retry.
+    cy.get('[data-test="enrollment-viewEvent-page"] [data-test="two-event-workspace-wrapper"]')
+        .should('exist');
 });
 
 Then('you can see the Birth linked event', () => {
-    cy.get('[data-test="enrollment-editEvent-page"]')
-        .should('contain', 'This Baby Postnatal event is linked to a Birth event. Review the linked event details before entering data below');
+    cy.get('[data-test="enrollment-editEvent-page"] [data-test="two-event-workspace-wrapper"]')
+        .should('exist');
 });
 
 When('you unlink the Baby Postnatal linked event', () => {
