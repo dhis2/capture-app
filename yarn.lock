@@ -2455,21 +2455,6 @@
     webpack "^5.41.1"
     workbox-build "^7.3.0"
 
-"@dhis2/cli-helpers-engine@^2.3.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-2.4.0.tgz#1609d358088f0616fb400aa9f90fc8bb57d4b196"
-  integrity sha512-SRcN3s/sQTkd5VUbWAs2+UeYtJ0zLdj4F/RkrL8x2/RX/79vIxvryqBom4FFw/meY0c2GDpXgrpKNQcST/OHBQ==
-  dependencies:
-    chalk "^3.0.0"
-    cross-spawn "^7.0.3"
-    find-up "^5.0.0"
-    fs-extra "^8.0.1"
-    inquirer "^7.3.3"
-    request "^2.88.0"
-    tar "^4.4.8"
-    update-notifier "^3.0.0"
-    yargs "^13.1.0"
-
 "@dhis2/cli-helpers-engine@^3.0.0", "@dhis2/cli-helpers-engine@^3.2.1", "@dhis2/cli-helpers-engine@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-3.2.2.tgz#e3ab24d3da46c7ecb79a31cb332548ebdac72d1c"
@@ -2517,14 +2502,12 @@
     typescript "^5.6.3"
     yargs "^16.2.0"
 
-"@dhis2/cli-utils-cypress@^9.0.2":
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-cypress/-/cli-utils-cypress-9.0.2.tgz#c3ab5afaffd380579d97f35ff93a69a10000dbb3"
-  integrity sha512-LM6qeghtMOGvjf3lMjKJX4+z0zfzxeAN5Y7J+ShJNs0ErelL/Y+GJiHZRwO766tSgp63wpvjSq1WOoN1UdT6Pw==
+"@dhis2/cli-utils-cypress@^10.1.2":
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-cypress/-/cli-utils-cypress-10.1.2.tgz#54f73f05dcfb43b43d66a0302d352d79e4739fd0"
+  integrity sha512-sjSNEHLlVlXiOzMM3AfvQpQZ3lJUIoM5KHoThBQEasGigokoN4+SOiTBaET6C9s387W8xXyUoYseWyWe4+ZwWA==
   dependencies:
-    "@dhis2/cli-helpers-engine" "^2.3.0"
-    fs-extra "^8.1.0"
-    jscodeshift "^0.11.0"
+    "@dhis2/cli-helpers-engine" "^3.2.2"
 
 "@dhis2/cypress-commands@^10.0.3":
   version "10.1.0"
