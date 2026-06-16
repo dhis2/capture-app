@@ -69,12 +69,18 @@ Then('you can see the Birth linked event', () => {
 });
 
 When('you unlink the Baby Postnatal linked event', () => {
+    // Unlinking deletes the relationship via tracker?importStrategy=DELETE (see UnlinkModal).
+    // Intercept that request and wait for it to finish so the related-stages actions have
+    // actually re-rendered before the next step asserts the section is visible again -
+    // otherwise that assertion races the unlink request and is flaky.
+    cy.intercept('POST', '**/tracker*importStrategy=DELETE*').as('unlinkEvent');
     cy.get('[data-test="widget-linked-event-overflow-menu"]')
         .click();
     cy.get('[data-test="event-overflow-unlink-event"]')
         .click();
     cy.get('[data-test="event-overflow-unlink-event-confirm"]')
         .click();
+    cy.wait('@unlinkEvent');
 });
 
 And('you delete the Birth event', () => {
