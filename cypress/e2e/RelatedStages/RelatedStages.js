@@ -6,17 +6,19 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
-And('you unlink the Birth event first if it is already linked', () => {
-    cy.get('[data-test="related-stages-section"], [data-test="widget-linked-event-overflow-menu"]')
-        .should('exist');
-    cy.get('body').then(($body) => {
-        if ($body.find('[data-test="widget-linked-event-overflow-menu"]').length) {
-            cy.get('[data-test="widget-linked-event-overflow-menu"]').click();
-            cy.get('[data-test="event-overflow-unlink-event"]').click();
-            cy.get('[data-test="event-overflow-unlink-event-confirm"]').click();
-            cy.get('[data-test="related-stages-section"]').should('exist');
-        }
-    });
+Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
+    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const relationships = body.relationships ?? [];
+            if (relationships.length) {
+                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((deleteUrl) => {
+                    cy.request('POST', deleteUrl, {
+                        relationships: relationships.map(({ relationship }) => ({ relationship })),
+                    });
+                });
+            }
+        });
 });
 
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
@@ -69,10 +71,6 @@ Then('you can see the Birth linked event', () => {
 });
 
 When('you unlink the Baby Postnatal linked event', () => {
-    // Unlinking deletes the relationship via tracker?importStrategy=DELETE (see UnlinkModal).
-    // Intercept that request and wait for it to finish so the related-stages actions have
-    // actually re-rendered before the next step asserts the section is visible again -
-    // otherwise that assertion races the unlink request and is flaky.
     cy.intercept('POST', '**/tracker*importStrategy=DELETE*').as('unlinkEvent');
     cy.get('[data-test="widget-linked-event-overflow-menu"]')
         .click();
