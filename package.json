@@ -16,7 +16,7 @@
         "@dhis2/data-engine": "^3.17.0",
         "@dhis2/rule-engine": "3.8.1",
         "@dhis2/rules-engine-javascript": "106.4.5",
-        "@dhis2/ui": "^10.13.1",
+        "@dhis2/ui": "^10.16.2",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
         "@popperjs/core": "^2.11.6",
@@ -61,7 +61,7 @@
         "rxjs": "^7.8.2",
         "typeface-roboto": "^1.1.13",
         "uuid": "^9.0.0",
-        "zod": "^3.24.4"
+        "zod": "^4.4.3"
     },
     "scripts": {
         "start": "yarn verifyCacheVersion && concurrently --kill-others \"yarn workspaces run build:watch\" \"d2-app-scripts start\"",
@@ -83,7 +83,7 @@
     },
     "devDependencies": {
         "@actions/core": "^3.0.0",
-        "@babel/core": "^7.17.8",
+        "@babel/core": "^7.29.6",
         "@babel/eslint-parser": "^7.28.6",
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
         "@babel/preset-env": "^7.16.11",
@@ -94,7 +94,7 @@
         "@dhis2/cli-app-scripts": "^12.11.1",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.7.10",
-        "@dhis2/cli-utils-cypress": "^9.0.2",
+        "@dhis2/cli-utils-cypress": "^10.1.2",
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",
         "@types/node": "^25.6.2",

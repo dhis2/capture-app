@@ -14,8 +14,8 @@ const bulkDataEntryDatastoreSchema = z.object({
             configKey: z.string(),
             dataKey: z.string().optional(),
             pluginSource: z.string(),
-            title: z.record(z.string()),
-            subtitle: z.record(z.string()).optional(),
+            title: z.record(z.string(), z.string()),
+            subtitle: z.record(z.string(), z.string()).optional(),
         }),
     ),
 });
