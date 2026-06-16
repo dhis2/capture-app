@@ -5,27 +5,19 @@ import {
     IconDelete16,
     MenuItem,
 } from '@dhis2/ui';
-import { pipe } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
-import { isValidPeriod, isWithinCompleteEventsExpiry } from '../../../../../../../utils/validation/validators/form';
 import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
-import { dataElementTypes } from '../../../../../../../metaData';
-import { eventStatuses } from '../../../../../../WidgetEventEdit/constants/status.const';
-import { useAuthorities } from '../../../../../../../utils/authority/useAuthorities';
+import { dataElementTypes, type ProgramStage } from '../../../../../../../metaData';
+import { useEventEditPermissions } from '../../../../../../../hooks';
 
-const convertFn = pipe(convertServerToClient, convertClientToView);
 type Props = {
     setActionsOpen: (open: boolean) => void;
     setDeleteModalOpen: (open: boolean) => void;
     occurredAt: string;
     completedAt?: string;
     eventStatus?: string;
-    blockEntryForm?: boolean;
-    expiryPeriod?: {
-        expiryPeriodType?: string | null;
-        expiryDays?: number | null;
-    };
-    completeEventsExpiryDays?: number;
+    programId: string;
+    programStage?: ProgramStage | null;
 };
 
 export const DeleteActionButton = ({
@@ -34,22 +26,26 @@ export const DeleteActionButton = ({
     occurredAt,
     completedAt,
     eventStatus,
-    blockEntryForm,
-    expiryPeriod,
-    completeEventsExpiryDays,
+    programId,
+    programStage,
 }: Props) => {
-    const { hasAuthority: canEditExpired } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
-    const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-    const occurredAtClientView = convertFn(occurredAt, dataElementTypes.DATE);
+    const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
+    const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
 
-    const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
-    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
-    const canEditCompletedEvent = canEditExpired || !(blockEntryForm && eventStatus === eventStatuses.COMPLETED);
-
-    const canDelete = isWithinValidPeriod && isWithinCompleteExpiry && canEditCompletedEvent;
+    const {
+        isEventWithinValidPeriod,
+        canEditCompletedEvent,
+        readOnly,
+    } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus,
+        occurredAtClient,
+        completedAtClient: convertServerToClient(completedAt, dataElementTypes.DATE) as string,
+    });
 
     const getDisabledMessage = (): string => {
-        if (!isWithinValidPeriod) {
+        if (!isEventWithinValidPeriod) {
             return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
                 occurredAt: occurredAtClientView,
                 interpolation: { escapeValue: false },
@@ -64,11 +60,11 @@ export const DeleteActionButton = ({
     return (
         <ConditionalTooltip
             content={getDisabledMessage()}
-            enabled={!canDelete}
+            enabled={readOnly}
         >
             <MenuItem
                 dense
-                disabled={!canDelete}
+                disabled={readOnly}
                 icon={<IconDelete16 color={colors.red600} />}
                 label={i18n.t('Delete')}
                 dataTest="stages-and-events-delete"

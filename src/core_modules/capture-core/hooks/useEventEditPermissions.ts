@@ -53,8 +53,8 @@ export const useEventEditPermissions = ({
 
     const readOnly = !eventAccess?.write
         || !isEventWithinValidPeriod
-        || !canEditCompletedEvent
-        || !isWithinCompleteExpiry;
+        || !isWithinCompleteExpiry
+        || !canEditCompletedEvent;
 
     return {
         eventAccess,

@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import type { ProgramStage } from '../../../../../../metaData';
 
 export type EventRowProps = {
     id: string;
@@ -11,7 +12,7 @@ export type EventRowProps = {
     onUpdateEventStatus: (id: string, status: string) => void;
     onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
     stageWriteAccess: boolean;
-    blockEntryForm: boolean;
+    programStage?: ProgramStage | null;
     teiId: string;
     programId: string;
     enrollmentId: string;

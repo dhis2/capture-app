@@ -223,7 +223,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         eventDetails={eventDetails}
                         teiId={eventDetails.trackedEntity}
                         stageWriteAccess={stageWriteAccess}
-                        blockEntryForm={Boolean(stage?.blockEntryForm)}
+                        programStage={stage}
                         programId={programId}
                         enrollmentId={eventDetails.enrollment}
                         cells={cells}
