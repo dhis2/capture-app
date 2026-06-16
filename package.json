@@ -94,7 +94,7 @@
         "@dhis2/cli-app-scripts": "^12.11.1",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.7.10",
-        "@dhis2/cli-utils-cypress": "^9.0.2",
+        "@dhis2/cli-utils-cypress": "^10.1.2",
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",
         "@types/node": "^25.6.2",
