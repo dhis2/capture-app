@@ -544,8 +544,6 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
-    // Confirm the apply registered (popover closed) before moving on, so the next filter
-    // step starts from a settled state rather than racing a still-open popover.
     cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
 });
 
