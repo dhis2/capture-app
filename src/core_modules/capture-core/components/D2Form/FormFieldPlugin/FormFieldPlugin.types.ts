@@ -49,7 +49,8 @@ export type ContainerProps = {
     pluginContext: PluginContext;
     formId: string;
     customAttributes: { [id: string]: { IdFromPlugin: string; IdFromApp: string } };
-    onUpdateField: (fieldMetadata: PluginFormFieldMetadata, value: any, options?: FieldValueOptions) => void;
+    onUpdateFieldValue:
+        (fieldMetadata: PluginFormFieldMetadata, newValue: any, oldValue: any, options?: FieldValueOptions) => void;
     viewMode?: boolean;
 };
 

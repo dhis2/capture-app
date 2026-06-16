@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import type { FieldCommitOptions } from '../formbuilder.types';
 import type { DataElement } from '../../../../metaData';
 
@@ -19,13 +18,11 @@ export const FormPlugin = ({
         viewMode,
     } = field.props;
 
-    const formValues = useSelector((state: any) => state?.formsValues[formId]);
-
     const commitFieldUpdateFromPlugin = useCallback(
-        (fieldMetadata: DataElement, newValue: any, options?: FieldCommitOptions | null) => {
-            handleCommitField.bind(formThis)(fieldMetadata, newValue, formValues[fieldMetadata.id], options);
+        (fieldMetadata: DataElement, newValue: any, oldValue: any, options?: FieldCommitOptions | null) => {
+            handleCommitField.bind(formThis)(fieldMetadata, newValue, oldValue, options);
         },
-        [formThis, handleCommitField, formValues],
+        [formThis, handleCommitField],
     );
 
     return (
@@ -37,7 +34,7 @@ export const FormPlugin = ({
             fieldsMetadata={fieldsMetadata}
             formId={formId}
             viewMode={viewMode}
-            onUpdateField={commitFieldUpdateFromPlugin}
+            onUpdateFieldValue={commitFieldUpdateFromPlugin}
             pluginContext={pluginContext}
         />
     );

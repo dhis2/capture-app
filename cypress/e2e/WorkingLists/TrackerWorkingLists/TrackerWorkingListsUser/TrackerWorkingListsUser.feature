@@ -230,7 +230,7 @@ Scenario: The assigned user data is kept when switching between working list typ
   Then the assignee filter button should show that None filter is in effect
 
 Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
-  Given you open the main page with Ngelehun and Malaria focus investigation context
+  Given you open a clean main page with Ngelehun and Malaria focus investigation context
   And you filter by assigned Foci investigation & classification events
   When you save the list with the name Custom Program stage list
   Then the new Custom Program stage list is created
