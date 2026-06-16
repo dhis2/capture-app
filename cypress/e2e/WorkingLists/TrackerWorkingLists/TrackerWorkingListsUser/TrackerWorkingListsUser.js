@@ -8,13 +8,11 @@ const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
     cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const match = body[resource]?.find(e => e.displayName === displayName);
-            if (!match) {
-                return null;
-            }
-            return cy
-                .buildApiUrl(resource, match.id)
-                .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            const matches = body[resource]?.filter(e => e.displayName === displayName) ?? [];
+            matches.forEach((match) => {
+                cy.buildApiUrl(resource, match.id)
+                    .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            });
         });
 };
 Given('you open the main page with Ngelehun and child programe context', () => {
@@ -656,6 +654,7 @@ When('you open the program stage More filters menu for Birth on the tracker work
 });
 
 When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    cy.viewport(1440, 1080);
     cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
         .then(($anchors) => {
@@ -673,6 +672,7 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
 });
 
 When('you set the boolean filter', () => {

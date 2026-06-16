@@ -529,6 +529,7 @@ When('you set the organisation unit filter', () => {
 });
 
 When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    cy.viewport(1440, 1080);
     const labelPrefix = truncateFilterLabelForTest(filterName);
     cy.get('[data-test="event-working-lists"]')
         .find('[data-test="filter-button-popover-anchor"]')
@@ -543,6 +544,7 @@ When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filte
         });
     cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
     cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
 });
 
 Then('the boolean filter should be in effect and show the correct value when opened', () => {
