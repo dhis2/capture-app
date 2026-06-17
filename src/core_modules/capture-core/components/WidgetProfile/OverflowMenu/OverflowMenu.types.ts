@@ -37,6 +37,24 @@ export type MenuFlyoutProps = {
     setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
+export type ModalsProps = {
+    deleteModalIsOpen: boolean;
+    deactivateModalIsOpen: boolean;
+    changelogIsOpen: boolean;
+    trackedEntity: PlainProps['trackedEntity'];
+    trackedEntityForToggle: PlainProps['trackedEntityForToggle'];
+    trackedEntityTypeName: string;
+    trackedEntityInactive: boolean;
+    trackedEntityData: PlainProps['trackedEntityData'];
+    teiId: string;
+    programAPI: PlainProps['programAPI'];
+    onDeleteSuccess?: () => void;
+    onStatusToggleSuccess?: () => void;
+    setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setDeactivateModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setChangelogIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
 export type PlainProps = {
     trackedEntity: TrackedEntityRef;
     trackedEntityForToggle?: TrackedEntityForToggle | null;

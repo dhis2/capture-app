@@ -1,7 +1,7 @@
-import React, { useState, type Dispatch, type SetStateAction } from 'react';
+import React, { useState } from 'react';
 import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import type { PlainProps, MenuFlyoutProps } from './OverflowMenu.types';
+import type { PlainProps, MenuFlyoutProps, ModalsProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
 import { DeactivateModal, DeactivateMenuItem } from './Deactivate';
 import { OverflowButton } from '../../Buttons';
@@ -50,24 +50,6 @@ const MenuFlyout = ({
         )}
     </FlyoutMenu>
 );
-
-type ModalsProps = {
-    deleteModalIsOpen: boolean;
-    deactivateModalIsOpen: boolean;
-    changelogIsOpen: boolean;
-    trackedEntity: PlainProps['trackedEntity'];
-    trackedEntityForToggle: PlainProps['trackedEntityForToggle'];
-    trackedEntityTypeName: string;
-    trackedEntityInactive: boolean;
-    trackedEntityData: PlainProps['trackedEntityData'];
-    teiId: string;
-    programAPI: PlainProps['programAPI'];
-    onDeleteSuccess?: () => void;
-    onStatusToggleSuccess?: () => void;
-    setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
-    setDeactivateModalIsOpen: Dispatch<SetStateAction<boolean>>;
-    setChangelogIsOpen: Dispatch<SetStateAction<boolean>>;
-};
 
 const Modals = ({
     deleteModalIsOpen,
