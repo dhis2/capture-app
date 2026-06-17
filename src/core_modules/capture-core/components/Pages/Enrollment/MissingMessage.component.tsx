@@ -160,7 +160,7 @@ const EnrollmentSelectionMessage = ({ enrollmentId, enrollment }: { enrollmentId
                 enrollmentId,
                 interpolation: { escapeValue: false },
             }) :
-            i18n.t('Choose this {{enrollment}} to view the dashboard.', { enrollment })
+            i18n.t('Choose an {{enrollment}} to view the dashboard.', { enrollment })
         }
     </IncompleteSelectionsMessage>
 );

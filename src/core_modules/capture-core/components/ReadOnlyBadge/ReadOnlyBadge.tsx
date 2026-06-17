@@ -3,7 +3,7 @@ import { IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
-import { useStageLabel, useTrackedEntityTypeLabel } from '../../metaData';
+import { useProgramLabel, useStageLabel, useTrackedEntityTypeLabel } from '../../metaData';
 
 const styles = {
     label: {
@@ -95,7 +95,7 @@ const ReadOnlyBadgePlain = ({
         programStage: programStageWriteAccess,
     };
     const labels: Labels = {
-        enrollment: useStageLabel('enrollment') ?? i18n.t('enrollment'),
+        enrollment: useProgramLabel('enrollment') ?? i18n.t('enrollment'),
         trackedEntityType: useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type'),
         programStage: useStageLabel('programStage') ?? i18n.t('program stage'),
         programStages: useStageLabel('programStage', { plural: true }) ?? i18n.t('program stages'),

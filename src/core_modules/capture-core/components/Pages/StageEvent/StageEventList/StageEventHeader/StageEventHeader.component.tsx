@@ -25,7 +25,7 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 const StageEventHeaderPlain = ({ icon, title, events, classes }: Props) => {
     const eventLabel = useStageLabel('event') ?? i18n.t('event');
     const eventsLabel = useStageLabel('event', { plural: true }) ?? i18n.t('events');
-    return (<>
+    return (
         <div data-test="stage-event-header" className={classes.wrapper}>
             <div className={classes.icon}>{
                 icon && (
@@ -46,7 +46,7 @@ const StageEventHeaderPlain = ({ icon, title, events, classes }: Props) => {
                 </span>}
             </div>
         </div>
-    </>);
+    );
 };
 
 export const StageEventHeader = withStyles(

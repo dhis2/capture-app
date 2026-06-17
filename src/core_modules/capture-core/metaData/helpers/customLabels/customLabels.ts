@@ -12,7 +12,7 @@ export const CUSTOM_LABEL_FIELDS = {
     attribute: { field: 'displayTrackedEntityAttributeLabel' },
     programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
     event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
-    trackedEntityType: { pluralField: 'displayTrackedEntityTypesLabel' },
+    trackedEntityType: { field: 'displayName', pluralField: 'displayTrackedEntityTypesLabel' },
 } as const satisfies { [key: string]: CustomLabelField };
 
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
