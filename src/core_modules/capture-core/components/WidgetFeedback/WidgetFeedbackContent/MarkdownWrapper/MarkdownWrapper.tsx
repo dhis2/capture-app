@@ -3,12 +3,8 @@ import { spacersNum, colors } from '@dhis2/ui';
 import Markdown from 'react-markdown';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import remarkGfm from 'remark-gfm';
+import { MarkdownWrapperProps } from './MarkdownWrapper.types';
 
-export type MarkdownWrapperProps = {
-    title: string;
-    content?: string;
-    color?: string;
-}
 
 const styles = {
     container: {

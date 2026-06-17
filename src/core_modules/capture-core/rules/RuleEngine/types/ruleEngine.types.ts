@@ -176,7 +176,7 @@ export type ProgramRuleAction = {
     data: string | null,
     programRuleActionType: string,
     priority?: number,
-    legendSetId?: string,
+    legendSetId?: string | null,
 } & ProgramRuleData;
 
 export type ProgramRule = {
