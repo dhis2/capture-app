@@ -1,3 +1,10 @@
+# [106.5.0](https://github.com/dhis2/capture-app/compare/v106.4.5...v106.5.0) (2026-06-17)
+
+
+### Features
+
+* [DHIS2-16610] Add support for configurable terminology labels  ([#4609](https://github.com/dhis2/capture-app/issues/4609)) ([b23386a](https://github.com/dhis2/capture-app/commit/b23386ae3303e26f448c7bff93eeeb0060191585))
+
 ## [106.4.5](https://github.com/dhis2/capture-app/compare/v106.4.4...v106.4.5) (2026-06-12)
 
 
