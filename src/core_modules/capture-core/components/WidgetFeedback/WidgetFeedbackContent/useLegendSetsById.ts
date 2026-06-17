@@ -17,7 +17,7 @@ const legendSetQuery = {
     },
 };
 
-export const useLegendSetsById = ({feedback}: { feedback: FeedbackProps['feedback'] }) => {
+export const useLegendSetsById = ({ feedback }: { feedback: FeedbackProps['feedback'] }) => {
     const legendSetIds = useMemo(
         () => [
             ...new Set(
@@ -33,8 +33,8 @@ export const useLegendSetsById = ({feedback}: { feedback: FeedbackProps['feedbac
         [feedback],
     );
 
-    const {data: legendSetData} = useDataQuery(legendSetQuery, {
-        variables: {ids: legendSetIds.join(',')},
+    const { data: legendSetData } = useDataQuery(legendSetQuery, {
+        variables: { ids: legendSetIds.join(',') },
         lazy: legendSetIds.length === 0,
     });
 
