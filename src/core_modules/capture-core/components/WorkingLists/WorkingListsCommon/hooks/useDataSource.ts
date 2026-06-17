@@ -48,7 +48,7 @@ export const useDataSource = (
         .map((eventRecord) => {
             const listRecord = columns
                 .filter(column => column.visible)
-                .reduce((acc, column) => {
+                .reduce<Record<string, any>>((acc, column) => {
                     const { id, type, options, resolveValue } = column;
                     const clientValue = eventRecord[id];
                     if (resolveValue) {
@@ -79,7 +79,7 @@ export const useDataSource = (
                     return acc;
                 }, {});
 
-            (listRecord as any).inactive = Boolean(eventRecord.inactive);
+            listRecord.inactive = Boolean(eventRecord.inactive);
             return {
                 ...listRecord,
                 id: eventRecord.id, // used as rowkey
