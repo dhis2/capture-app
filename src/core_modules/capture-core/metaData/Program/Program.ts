@@ -1,11 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
+
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
+import type { CustomLabels } from '../helpers/customLabels';
 
 export class Program {
     static errorMessages = {
@@ -26,6 +28,7 @@ export class Program {
     _displayFrontPageList!: boolean;
     _useFirstStageDuringRegistration!: boolean;
     _onlyEnrollOnce!: boolean;
+    _customLabels!: CustomLabels;
 
     constructor(initFn?: (_this: Program) => void) {
         this.programRules = [];
@@ -33,6 +36,7 @@ export class Program {
         this.organisationUnits = {};
         this._stages = new Map();
         this._organisationUnits = {};
+        this._customLabels = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -127,6 +131,13 @@ export class Program {
 
     get onlyEnrollOnce() {
         return this._onlyEnrollOnce;
+    }
+
+    set customLabels(customLabels: CustomLabels) {
+        this._customLabels = customLabels;
+    }
+    get customLabels(): CustomLabels {
+        return this._customLabels;
     }
 
     get stages(): Map<string, ProgramStage> {
