@@ -1,26 +1,12 @@
 import React, { useState, type Dispatch, type SetStateAction } from 'react';
 import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import type { PlainProps } from './OverflowMenu.types';
+import type { PlainProps, MenuFlyoutProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
 import { DeactivateMenuItem } from './Deactivate/DeactivateMenuItem';
 import { DeactivateModal } from './Deactivate/DeactivateModal';
 import { OverflowButton } from '../../Buttons';
 import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
-
-type MenuFlyoutProps = {
-    displayChangelog: boolean;
-    canShowDeactivate: boolean;
-    canShowDelete: boolean;
-    trackedEntityTypeName: string;
-    trackedEntityInactive: boolean;
-    canWriteData: boolean;
-    canCascadeDeleteTei: boolean;
-    setActionsIsOpen: Dispatch<SetStateAction<boolean>>;
-    setChangelogIsOpen: Dispatch<SetStateAction<boolean>>;
-    setDeactivateModalIsOpen: Dispatch<SetStateAction<boolean>>;
-    setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
-};
 
 const MenuFlyout = ({
     displayChangelog,

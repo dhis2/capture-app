@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from 'react';
+
 type TrackedEntityRef = { trackedEntity: string };
 type TrackedEntityForToggle = {
     trackedEntity: string;
@@ -19,6 +21,20 @@ export type Props = {
     teiId: string;
     programAPI: any;
     readOnlyMode: boolean;
+};
+
+export type MenuFlyoutProps = {
+    displayChangelog: boolean;
+    canShowDeactivate: boolean;
+    canShowDelete: boolean;
+    trackedEntityTypeName: string;
+    trackedEntityInactive: boolean;
+    canWriteData: boolean;
+    canCascadeDeleteTei: boolean;
+    setActionsIsOpen: Dispatch<SetStateAction<boolean>>;
+    setChangelogIsOpen: Dispatch<SetStateAction<boolean>>;
+    setDeactivateModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setDeleteModalIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export type PlainProps = {
