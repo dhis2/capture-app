@@ -40,9 +40,7 @@ const styles = {
 
 
 type Props = FeedbackProps & WithStyles<typeof styles>;
-
 const WidgetFeedbackContentComponent = ({ feedback, feedbackEmptyText, classes }: Props) => {
-
     const { resolveColor } = useLegendSetsById({ feedback });
 
     if (!feedback?.length) {
