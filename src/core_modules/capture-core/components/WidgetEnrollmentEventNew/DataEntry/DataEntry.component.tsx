@@ -4,6 +4,10 @@ import type { WithStyles } from 'capture-core-utils/styles';
 import { withStyles, withTheme } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { isLangRtl } from '../../../utils/rtl';
+import {
+    getOrgUnitOpeningCalendarMin,
+    getOrgUnitClosingCalendarMax,
+} from '../../../utils/orgUnits/getOrgUnitCalendarBounds';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
@@ -160,6 +164,8 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: props.formHorizontal ? 250 : 350,
             orientation: getOrientation(props.formHorizontal),
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMax: getOrgUnitClosingCalendarMax(props.orgUnit),
+            calendarMin: getOrgUnitOpeningCalendarMin(props.orgUnit),
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),

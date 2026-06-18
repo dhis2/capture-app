@@ -27,6 +27,7 @@ export class DateField extends React.Component<Props, State> {
             calendarWidth,
             inputWidth,
             calendarMax,
+            calendarMin,
             value,
             innerMessage,
             calendarType,
@@ -63,6 +64,7 @@ export class DateField extends React.Component<Props, State> {
                     disabled={!!this.props.disabled}
                     locale={locale}
                     maxDate={calendarMax}
+                    minDate={calendarMin}
                     {...errorProps as any}
                 />
             </div>

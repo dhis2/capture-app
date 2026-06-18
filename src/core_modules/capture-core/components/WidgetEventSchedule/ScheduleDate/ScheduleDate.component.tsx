@@ -9,7 +9,15 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from 'capture-core/components/FormFields/New';
-import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
+import {
+    isValidDate,
+    isValidPeriod,
+    getWithinOrgUnitDateRangeValidator,
+} from 'capture-core/utils/validation/validators/form';
+import {
+    getOrgUnitOpeningCalendarMin,
+    getOrgUnitClosingCalendarMax,
+} from 'capture-core/utils/orgUnits/getOrgUnitCalendarBounds';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
@@ -78,6 +86,14 @@ const ScheduleDatePlain = ({
             };
         }
 
+        const orgUnitRangeValidation = getWithinOrgUnitDateRangeValidator(orgUnit)(dateString);
+        if (orgUnitRangeValidation !== true && !orgUnitRangeValidation.valid) {
+            return {
+                error: true,
+                validationText: orgUnitRangeValidation.errorMessage,
+            };
+        }
+
         if (!expiryPeriod) {
             return {
                 error: false,
@@ -113,6 +129,8 @@ const ScheduleDatePlain = ({
                     value={scheduleDate}
                     width="100%"
                     calendarWidth={350}
+                    calendarMin={getOrgUnitOpeningCalendarMin(orgUnit)}
+                    calendarMax={getOrgUnitClosingCalendarMax(orgUnit)}
                     styles={baseInputStyles}
                     onBlur={(date: string, internalComponentError: any) => {
                         setScheduleDate(date);

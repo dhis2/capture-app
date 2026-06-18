@@ -6,6 +6,10 @@ import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import {
+    getOrgUnitOpeningCalendarMin,
+    getOrgUnitClosingCalendarMax,
+} from '../../../utils/orgUnits/getOrgUnitCalendarBounds';
 import { withMainButton } from '../DataEntry/withMainButton';
 import type { RenderFoundation } from '../../../metaData';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
@@ -139,6 +143,8 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
+            calendarMax: getOrgUnitClosingCalendarMax(props.orgUnit),
+            calendarMin: getOrgUnitOpeningCalendarMin(props.orgUnit),
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),

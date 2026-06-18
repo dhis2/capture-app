@@ -22,6 +22,7 @@ export type Props = {
     placeholder?: string;
     label?: string;
     calendarMax?: any;
+    calendarMin?: any;
     innerMessage?: any;
     dateFormat?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | null;
     calendarType?: 'gregory' | 'iso8601' | 'hebrew' | 'islamic' | 'islamic-umalqura' | 'islamic-tbla' |

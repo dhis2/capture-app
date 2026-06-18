@@ -1,6 +1,10 @@
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import { isValidDate, isValidPeriod } from '../../../../utils/validation/validators/form';
+import {
+    isValidDate,
+    isValidPeriod,
+    getWithinOrgUnitDateRangeValidator,
+} from '../../../../utils/validation/validators/form';
 import { convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 
@@ -45,6 +49,10 @@ export const getEventDateValidatorContainers = (props?: any) => [
     },
     {
         validator: (value: string) => validateNotExpired(value, props),
+        errorMessage: '',
+    },
+    {
+        validator: getWithinOrgUnitDateRangeValidator(props?.orgUnit),
         errorMessage: '',
     },
 ];

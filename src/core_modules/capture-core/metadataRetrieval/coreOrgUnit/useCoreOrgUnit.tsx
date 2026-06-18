@@ -14,7 +14,7 @@ export function useCoreOrgUnit(orgUnitId: string): {
     const reduxOrgUnit = useSelector(({ organisationUnits }: any) => organisationUnits && organisationUnits[orgUnitId]);
     const fetchId = reduxOrgUnit ? undefined : orgUnitId;
     // These hooks do no work when id is undefined
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
+    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path,openingDate,closedDate');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
 
     if (reduxOrgUnit) {

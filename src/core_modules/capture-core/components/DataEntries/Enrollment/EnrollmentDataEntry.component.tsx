@@ -4,6 +4,10 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import {
+    getOrgUnitOpeningCalendarMin,
+    getOrgUnitClosingCalendarMax,
+} from 'capture-core/utils/orgUnits/getOrgUnitCalendarBounds';
 import { isLangRtl } from '../../../utils/rtl';
 import {
     DataEntry,
@@ -118,14 +122,13 @@ const getEnrollmentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
-            calendarMax: !props.enrollmentMetadata.allowFutureEnrollmentDate ?
-                convertDateObjectToDateFormatString(moment()) :
-                undefined,
+            calendarMax: getOrgUnitClosingCalendarMax(props.orgUnit, !props.enrollmentMetadata.allowFutureEnrollmentDate),
+            calendarMin: getOrgUnitOpeningCalendarMin(props.orgUnit),
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'enrolledAt',
-        getValidatorContainers: getEnrollmentDateValidatorContainer,
+        getValidatorContainers: (props: any) => getEnrollmentDateValidatorContainer(props?.orgUnit),
         getPassOnFieldData: () => true,
         getMeta: () => ({
             placement: placements.TOP,

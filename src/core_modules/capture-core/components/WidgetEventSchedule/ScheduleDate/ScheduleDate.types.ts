@@ -19,6 +19,8 @@ export type PlainProps = {
         displayName: string;
         path: string;
         selected: string[];
+        openingDate?: string;
+        closedDate?: string;
     } | null;
     expiryPeriod?: {
         expiryPeriodType?: string | null;

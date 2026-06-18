@@ -1,7 +1,7 @@
 import type { UpdateEnrollmentOwnership } from '../Actions/Transfer/hooks/useUpdateOwnership';
 
 export type TransferModalProps = {
-    enrollment: { program: string };
+    enrollment: { program: string, enrolledAt?: string };
     ownerOrgUnitId: string;
     setOpenTransfer: (toggle: boolean) => void;
     onUpdateOwnership: UpdateEnrollmentOwnership;
