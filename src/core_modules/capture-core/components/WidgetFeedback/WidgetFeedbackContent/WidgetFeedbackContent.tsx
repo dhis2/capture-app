@@ -1,16 +1,21 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { MarkdownWrapper } from './MarkdownWrapper';
 import type {
     FilteredFeedbackKeyValue,
     FeedbackWidgetData,
     FilteredFeedbackText,
     FeedbackProps,
 } from '../WidgetFeedback.types';
+import { useLegendSetsById } from './useLegendSetsById';
 
 const styles = {
     container: {
         padding: `0px ${spacersNum.dp12}px`,
+        maxHeight: '70vh',
+        overflowY: 'auto',
+        scrollbarWidth: 'thin',
     },
     unorderedList: {
         paddingInlineStart: spacersNum.dp16,
@@ -33,9 +38,11 @@ const styles = {
     },
 };
 
-type Props = FeedbackProps & WithStyles<typeof styles>;
 
+type Props = FeedbackProps & WithStyles<typeof styles>;
 const WidgetFeedbackContentComponent = ({ feedback, feedbackEmptyText, classes }: Props) => {
+    const { resolveColor } = useLegendSetsById({ feedback });
+
     if (!feedback?.length) {
         return (
             <div
@@ -52,18 +59,21 @@ const WidgetFeedbackContentComponent = ({ feedback, feedbackEmptyText, classes }
             className={classes.listItem}
             key={item.id}
         >
-            {item.message}
+            <MarkdownWrapper title={item.message} />
         </li>
     );
 
-    const renderKeyValue = (item: FilteredFeedbackKeyValue) => (
-        <li
-            key={item.id}
-            className={classes.listItem}
-        >
-            {item.key}{item.key && item.value ? ': ' : null}{item.value}
-        </li>
-    );
+    const renderKeyValue = (item: FilteredFeedbackKeyValue) => {
+        const color = resolveColor(item.legendSetId, item.value);
+        return (
+            <li
+                key={item.id}
+                className={classes.listItem}
+            >
+                <MarkdownWrapper title={item.key} content={item.value} color={color} />
+            </li>
+        );
+    };
 
     const renderString = (item: string, index: number) => (
         <li
