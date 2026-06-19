@@ -30,6 +30,8 @@ export const getEnrollmentDateValidatorContainer = (orgUnit?: OrgUnitDateRange |
             errorMessage: i18n.t('A date in the future is not allowed'),
         },
         {
+            // The message is built by the validator itself (it interpolates the org unit's
+            // opening/closing dates and label), so the static fallback is intentionally empty.
             validator: getWithinOrgUnitDateRangeValidator(orgUnit, orgUnitLabel),
             errorMessage: '',
         },

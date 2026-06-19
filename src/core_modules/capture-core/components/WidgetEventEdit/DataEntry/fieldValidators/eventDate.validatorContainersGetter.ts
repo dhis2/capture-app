@@ -49,6 +49,8 @@ export const getEventDateValidatorContainers = (props: Record<string, unknown> =
         errorMessage: '',
     },
     {
+        // The message is built by the validator itself (it interpolates the org unit's
+        // opening/closing dates and label), so the static fallback is intentionally empty.
         validator: getWithinOrgUnitDateRangeValidator(
             props?.orgUnit as { openingDate?: string, closedDate?: string },
             getOrgUnitLabel(props?.programId as string | undefined),
