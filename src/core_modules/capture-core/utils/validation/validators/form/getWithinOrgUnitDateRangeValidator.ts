@@ -1,5 +1,6 @@
 import { Temporal } from '@js-temporal/polyfill';
 import i18n from '@dhis2/d2-i18n';
+import log from 'loglevel';
 import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { convertIsoToLocalCalendar } from '../../../converters/date';
@@ -17,6 +18,7 @@ const isoToPlainDate = (isoDate?: string | null): Temporal.PlainDate | null => {
     try {
         return Temporal.PlainDate.from(isoDate.split('T')[0]);
     } catch (error) {
+        log.debug(`getWithinOrgUnitDateRangeValidator: could not parse ISO date "${isoDate}"`, error);
         return null;
     }
 };
@@ -33,6 +35,7 @@ const localToPlainDate = (localDate?: string | null): Temporal.PlainDate | null 
         const { year, month, day } = convertToIso8601(localDate, calendar as any);
         return new Temporal.PlainDate(year, month, day);
     } catch (error) {
+        log.debug(`getWithinOrgUnitDateRangeValidator: could not parse local date "${localDate}"`, error);
         return null;
     }
 };

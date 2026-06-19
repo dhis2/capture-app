@@ -11,7 +11,7 @@ describe('getWithinOrgUnitDateRangeValidator', () => {
         closedDate: '2023-06-30T00:00:00.000',
     };
 
-    const isValid = result => result === true || (result && result.valid === true);
+    const isValid = result => result === true || result?.valid === true;
 
     it('passes when no value is provided', () => {
         expect(isValid(getWithinOrgUnitDateRangeValidator(orgUnit)(undefined))).toBe(true);
