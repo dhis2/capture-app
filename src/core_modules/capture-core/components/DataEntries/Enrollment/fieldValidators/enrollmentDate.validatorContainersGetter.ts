@@ -5,8 +5,7 @@ import {
     isValidNonFutureDate,
     getWithinOrgUnitDateRangeValidator,
 } from '../../../../utils/validation/validators/form';
-
-type OrgUnitDateRange = { openingDate?: string | null, closedDate?: string | null };
+import type { OrgUnitDateRange } from '../../../../utils/orgUnits/getOrgUnitCalendarBounds';
 
 const isValidEnrollmentDate = (value: string, internalComponentError?: {error?: string, errorCode?: string}) => {
     if (!value) {
@@ -16,7 +15,7 @@ const isValidEnrollmentDate = (value: string, internalComponentError?: {error?: 
     return isValidDate(value, internalComponentError);
 };
 
-export const getEnrollmentDateValidatorContainer = (orgUnit?: OrgUnitDateRange | null) => {
+export const getEnrollmentDateValidatorContainer = (orgUnit?: OrgUnitDateRange | null, orgUnitLabel?: string | null) => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -31,7 +30,7 @@ export const getEnrollmentDateValidatorContainer = (orgUnit?: OrgUnitDateRange |
             errorMessage: i18n.t('A date in the future is not allowed'),
         },
         {
-            validator: getWithinOrgUnitDateRangeValidator(orgUnit),
+            validator: getWithinOrgUnitDateRangeValidator(orgUnit, orgUnitLabel),
             errorMessage: '',
         },
     ];

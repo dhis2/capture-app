@@ -4,11 +4,7 @@ import log from 'loglevel';
 import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { convertIsoToLocalCalendar } from '../../../converters/date';
-
-type OrgUnitDateRange = {
-    openingDate?: string | null,
-    closedDate?: string | null,
-};
+import type { OrgUnitDateRange } from '../../../orgUnits/getOrgUnitCalendarBounds';
 
 // Parses a Gregorian/ISO date string (date-only or full datetime) into a PlainDate.
 const isoToPlainDate = (isoDate?: string | null): Temporal.PlainDate | null => {
@@ -63,25 +59,30 @@ const isPlainDateWithinOrgUnitRange = (date: Temporal.PlainDate | null, orgUnit?
 export const isIsoDateWithinOrgUnitRange = (isoDate?: string | null, orgUnit?: OrgUnitDateRange | null): boolean =>
     isPlainDateWithinOrgUnitRange(isoToPlainDate(isoDate), orgUnit);
 
-const buildErrorMessage = (openingDate?: string | null, closedDate?: string | null): string => {
+const buildErrorMessage = (
+    openingDate?: string | null,
+    closedDate?: string | null,
+    orgUnitLabel?: string | null,
+): string => {
     const opening = openingDate ? convertIsoToLocalCalendar(openingDate) : undefined;
     const closed = closedDate ? convertIsoToLocalCalendar(closedDate) : undefined;
+    const orgUnit = orgUnitLabel || i18n.t('organisation unit');
 
     if (opening && closed) {
         return i18n.t(
-            "Date must be within the organisation unit's opening and closing dates ({{opening}} – {{closed}})",
-            { opening, closed, interpolation: { escapeValue: false } },
+            "Date must be within the {{orgUnitLabel}}'s opening and closing dates ({{opening}} – {{closed}})",
+            { orgUnitLabel: orgUnit, opening, closed, interpolation: { escapeValue: false } },
         );
     }
     if (opening) {
         return i18n.t(
-            "Date cannot be before the organisation unit's opening date ({{opening}})",
-            { opening, interpolation: { escapeValue: false } },
+            "Date cannot be before the {{orgUnitLabel}}'s opening date ({{opening}})",
+            { orgUnitLabel: orgUnit, opening, interpolation: { escapeValue: false } },
         );
     }
     return i18n.t(
-        "Date cannot be after the organisation unit's closing date ({{closed}})",
-        { closed, interpolation: { escapeValue: false } },
+        "Date cannot be after the {{orgUnitLabel}}'s closing date ({{closed}})",
+        { orgUnitLabel: orgUnit, closed, interpolation: { escapeValue: false } },
     );
 };
 
@@ -90,8 +91,9 @@ const buildErrorMessage = (openingDate?: string | null, closedDate?: string | nu
  * Both bounds are inclusive and compared at day granularity. A missing bound leaves that
  * side unconstrained; if neither is set the validator always passes.
  * @param orgUnit the org unit whose openingDate/closedDate (ISO/Gregorian) bound the date
+ * @param orgUnitLabel the configured custom "organisation unit" label, used in the error message
  */
-export const getWithinOrgUnitDateRangeValidator = (orgUnit?: OrgUnitDateRange | null) =>
+export const getWithinOrgUnitDateRangeValidator = (orgUnit?: OrgUnitDateRange | null, orgUnitLabel?: string | null) =>
     (value?: string | null) => {
         const openingDate = orgUnit?.openingDate;
         const closedDate = orgUnit?.closedDate;
@@ -106,6 +108,6 @@ export const getWithinOrgUnitDateRangeValidator = (orgUnit?: OrgUnitDateRange | 
 
         return {
             valid: false,
-            errorMessage: buildErrorMessage(openingDate, closedDate),
+            errorMessage: buildErrorMessage(openingDate, closedDate, orgUnitLabel),
         };
     };

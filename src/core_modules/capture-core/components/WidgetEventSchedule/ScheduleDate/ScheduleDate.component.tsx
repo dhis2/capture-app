@@ -18,6 +18,7 @@ import {
     getOrgUnitOpeningCalendarMin,
     getOrgUnitClosingCalendarMax,
 } from 'capture-core/utils/orgUnits/getOrgUnitCalendarBounds';
+import { getOrgUnitLabel } from 'capture-core/utils/orgUnits/getOrgUnitLabel';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
@@ -69,6 +70,7 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
+    programId,
 }: Props) => {
     const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
@@ -86,7 +88,7 @@ const ScheduleDatePlain = ({
             };
         }
 
-        const orgUnitRangeValidation = getWithinOrgUnitDateRangeValidator(orgUnit)(dateString);
+        const orgUnitRangeValidation = getWithinOrgUnitDateRangeValidator(orgUnit, getOrgUnitLabel(programId))(dateString);
         if (orgUnitRangeValidation !== true && !orgUnitRangeValidation.valid) {
             return {
                 error: true,

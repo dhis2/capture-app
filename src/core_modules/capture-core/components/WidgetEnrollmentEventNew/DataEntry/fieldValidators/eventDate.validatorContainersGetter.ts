@@ -7,6 +7,7 @@ import {
 } from '../../../../utils/validation/validators/form';
 import { convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
+import { getOrgUnitLabel } from '../../../../utils/orgUnits/getOrgUnitLabel';
 
 const preValidateDate = (
     value?: string | null,
@@ -52,7 +53,7 @@ export const getEventDateValidatorContainers = (props?: any) => [
         errorMessage: '',
     },
     {
-        validator: getWithinOrgUnitDateRangeValidator(props?.orgUnit),
+        validator: getWithinOrgUnitDateRangeValidator(props?.orgUnit, getOrgUnitLabel(props?.programId)),
         errorMessage: '',
     },
 ];

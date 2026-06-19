@@ -15,7 +15,7 @@ import {
 import type { AddEventSaveType } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { useProgramExpiryForUser } from '../../../hooks';
-import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
+import { useOrgUnitWithDates } from '../../../metadataRetrieval/coreOrgUnit';
 
 export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -24,12 +24,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) => dataEntriesFieldsValue[dataEntryKey].orgUnit);
     // Enrich the selected org unit with its opening/closing dates so event date fields can enforce them
-    const { orgUnit: selectedCoreOrgUnit } = useCoreOrgUnit(orgUnitFieldValue?.id);
-    const orgUnitFieldValueWithDates = orgUnitFieldValue ? {
-        ...orgUnitFieldValue,
-        openingDate: selectedCoreOrgUnit?.openingDate,
-        closedDate: selectedCoreOrgUnit?.closedDate,
-    } : orgUnitFieldValue;
+    const orgUnitFieldValueWithDates = useOrgUnitWithDates(orgUnitFieldValue);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;

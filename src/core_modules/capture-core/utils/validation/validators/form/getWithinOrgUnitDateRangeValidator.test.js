@@ -72,4 +72,33 @@ describe('getWithinOrgUnitDateRangeValidator', () => {
             expect(isIsoDateWithinOrgUnitRange('2010-01-01', {})).toBe(true);
         });
     });
+
+    describe('error message org unit label', () => {
+        it('uses the default term when no custom label is provided', () => {
+            const result = getWithinOrgUnitDateRangeValidator(orgUnit)('2022-12-31');
+            expect(result.errorMessage).toContain('organisation unit');
+        });
+
+        it('uses the provided custom org unit label instead of the default term', () => {
+            const result = getWithinOrgUnitDateRangeValidator(orgUnit, 'Facility')('2022-12-31');
+            expect(result.errorMessage).toContain('Facility');
+            expect(result.errorMessage).not.toContain('organisation unit');
+        });
+    });
+
+    describe('with the DHIS2 "gregorian" calendar id', () => {
+        beforeAll(() => {
+            systemSettingsStore.set({ calendar: 'gregorian', dateFormat: 'YYYY-MM-DD' });
+        });
+        afterAll(() => {
+            systemSettingsStore.set({ calendar: 'gregory', dateFormat: 'YYYY-MM-DD' });
+        });
+
+        it('enforces the range using the production calendar id, not just the Temporal id', () => {
+            const validator = getWithinOrgUnitDateRangeValidator(orgUnit);
+            expect(isValid(validator('2023-03-15'))).toBe(true);
+            expect(validator('2022-12-31')).toMatchObject({ valid: false });
+            expect(validator('2023-07-01')).toMatchObject({ valid: false });
+        });
+    });
 });

@@ -8,6 +8,7 @@ import {
     getOrgUnitOpeningCalendarMin,
     getOrgUnitClosingCalendarMax,
 } from 'capture-core/utils/orgUnits/getOrgUnitCalendarBounds';
+import { getOrgUnitLabel } from 'capture-core/utils/orgUnits/getOrgUnitLabel';
 import { isLangRtl } from '../../../utils/rtl';
 import {
     DataEntry,
@@ -128,7 +129,8 @@ const getEnrollmentDateSettings = () => {
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'enrolledAt',
-        getValidatorContainers: (props: any) => getEnrollmentDateValidatorContainer(props?.orgUnit),
+        getValidatorContainers: (props: any) =>
+            getEnrollmentDateValidatorContainer(props?.orgUnit, getOrgUnitLabel(props?.programId)),
         getPassOnFieldData: () => true,
         getMeta: () => ({
             placement: placements.TOP,
