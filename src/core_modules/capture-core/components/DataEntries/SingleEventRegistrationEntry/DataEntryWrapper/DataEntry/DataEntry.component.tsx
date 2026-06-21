@@ -4,6 +4,10 @@ import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { isLangRtl } from '../../../../../utils/rtl';
+import {
+    getOrgUnitOpeningCalendarMin,
+    getOrgUnitClosingCalendarMax,
+} from '../../../../../utils/orgUnits/getOrgUnitCalendarBounds';
 import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
@@ -175,6 +179,8 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: props.formHorizontal ? 250 : 350,
             orientation: getOrientation(props.formHorizontal),
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMax: getOrgUnitClosingCalendarMax(props.orgUnit),
+            calendarMin: getOrgUnitOpeningCalendarMin(props.orgUnit),
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
@@ -521,6 +527,7 @@ type Props = {
     programName: string,
     orgUnitId: string,
     orgUnit: OrgUnit,
+    orgUnitWithDates?: OrgUnit,
     orgUnitName: string,
     stageName: string,
     onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => void,
@@ -650,6 +657,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
             onStartAsyncUpdateField,
             programName, // eslint-disable-line
             orgUnit,
+            orgUnitWithDates,
             orgUnitName, // eslint-disable-line
             classes,
             onSave,
@@ -671,7 +679,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}
                         relationshipsRef={this.setRelationshipsInstance}
-                        orgUnit={orgUnit}
+                        orgUnit={orgUnitWithDates ?? orgUnit}
                         // @ts-expect-error - keeping original functionality as before ts rewrite
                         orgUnitId={orgUnit?.id}
                         {...passOnProps}

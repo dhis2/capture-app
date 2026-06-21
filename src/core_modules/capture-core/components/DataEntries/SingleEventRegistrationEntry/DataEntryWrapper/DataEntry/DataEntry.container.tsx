@@ -1,5 +1,6 @@
+import React from 'react';
 import { v4 as uuid } from 'uuid';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
@@ -24,6 +25,7 @@ import {
 } from './dataEntry.selectors';
 import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
+import { useOrgUnitWithDates } from '../../../../../metadataRetrieval/coreOrgUnit';
 import { newEventSaveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
@@ -110,6 +112,17 @@ const mapDispatchToProps = (dispatch: any) => ({
         },
 });
 
-export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
+const ConnectedDataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
 );
+
+// The org unit is selected within the form (and lives in redux), so we enrich the field value
+// here — not in the parent wrapper — with its opening/closing dates, allowing the occurred-date
+// field to enforce the org unit's open/close range. The bare `orgUnit` (save/rules) is untouched.
+export const DataEntry = (props: any) => {
+    const orgUnitFieldValue = useSelector(
+        (state: any) => state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit,
+    );
+    const orgUnitWithDates = useOrgUnitWithDates(orgUnitFieldValue);
+    return <ConnectedDataEntry {...props} orgUnitWithDates={orgUnitWithDates} />;
+};
