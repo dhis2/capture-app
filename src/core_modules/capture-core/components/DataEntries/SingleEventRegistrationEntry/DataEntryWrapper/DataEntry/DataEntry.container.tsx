@@ -34,8 +34,8 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: any, props: any) => ({
         recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
         ready: !state.activePage.isDataEntryLoading,
-        error: !props.formFoundation ?
-            i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
+        error: props.formFoundation ?
+            null : i18n.t('This is not an event program or the metadata is corrupt. See log for details.'),
         programName: programNameSelector(state),
         orgUnit: state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit,
         orgUnitName: state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit?.name,

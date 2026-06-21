@@ -27,6 +27,7 @@ export const getOrgUnitClosingCalendarMax = (
         return undefined;
     }
     // ISO (YYYY-MM-DD) strings sort chronologically, so the first is the earliest bound
-    const [earliestIso] = candidates.sort((a, b) => a.localeCompare(b));
+    candidates.sort((a, b) => a.localeCompare(b));
+    const [earliestIso] = candidates;
     return convertIsoToLocalCalendar(earliestIso);
 };
