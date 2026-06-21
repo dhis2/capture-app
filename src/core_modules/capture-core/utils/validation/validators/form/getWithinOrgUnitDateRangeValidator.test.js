@@ -54,6 +54,17 @@ describe('getWithinOrgUnitDateRangeValidator', () => {
         expect(isValid(validator('2020-01-01'))).toBe(true);
     });
 
+    it('treats an opening date equal to the closing date as a single valid day', () => {
+        // metadata permits openingDate == closedDate (a one-day window)
+        const oneDay = getWithinOrgUnitDateRangeValidator({
+            openingDate: '2023-04-10T00:00:00.000',
+            closedDate: '2023-04-10T00:00:00.000',
+        });
+        expect(isValid(oneDay('2023-04-10'))).toBe(true);
+        expect(oneDay('2023-04-09')).toMatchObject({ valid: false });
+        expect(oneDay('2023-04-11')).toMatchObject({ valid: false });
+    });
+
     describe('isIsoDateWithinOrgUnitRange', () => {
         it('returns true for an ISO date within the inclusive range', () => {
             expect(isIsoDateWithinOrgUnitRange('2023-03-15T00:00:00.000', orgUnit)).toBe(true);
@@ -83,6 +94,32 @@ describe('getWithinOrgUnitDateRangeValidator', () => {
             const result = getWithinOrgUnitDateRangeValidator(orgUnit, 'Facility')('2022-12-31');
             expect(result.errorMessage).toContain('Facility');
             expect(result.errorMessage).not.toContain('organisation unit');
+        });
+    });
+
+    describe('with a non-Gregorian calendar (nepali)', () => {
+        beforeAll(() => {
+            systemSettingsStore.set({ calendar: 'nepali', dateFormat: 'YYYY-MM-DD' });
+        });
+        afterAll(() => {
+            systemSettingsStore.set({ calendar: 'gregory', dateFormat: 'YYYY-MM-DD' });
+        });
+
+        // The form value is entered in the active (nepali) calendar, while the org unit bounds
+        // stay gregorian ISO. The nepali (Bikram Sambat) dates below are the verified equivalents
+        // of the gregorian org unit range 2023-01-01 .. 2023-06-30:
+        //   2079-09-17 BS == 2023-01-01, 2079-09-16 BS == 2022-12-31,
+        //   2079-10-01 BS == 2023-01-15, 2080-03-15 BS == 2023-06-30, 2080-03-16 BS == 2023-07-01.
+        it('enforces the gregorian org unit range against nepali-calendar input', () => {
+            const validator = getWithinOrgUnitDateRangeValidator(orgUnit);
+            // within the range
+            expect(isValid(validator('2079-10-01'))).toBe(true);
+            // inclusive of both boundaries
+            expect(isValid(validator('2079-09-17'))).toBe(true);
+            expect(isValid(validator('2080-03-15'))).toBe(true);
+            // outside the range on either side
+            expect(validator('2079-09-16')).toMatchObject({ valid: false });
+            expect(validator('2080-03-16')).toMatchObject({ valid: false });
         });
     });
 

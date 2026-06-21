@@ -64,8 +64,10 @@ const buildErrorMessage = (
     closedDate?: string | null,
     orgUnitLabel?: string | null,
 ): string => {
-    const opening = openingDate ? convertIsoToLocalCalendar(openingDate) : undefined;
-    const closed = closedDate ? convertIsoToLocalCalendar(closedDate) : undefined;
+    // Truncate any time component before converting, so the day can't shift across timezones
+    // (kept symmetrical with the parsing in isoToPlainDate and getOrgUnitCalendarBounds).
+    const opening = openingDate ? convertIsoToLocalCalendar(openingDate.split('T')[0]) : undefined;
+    const closed = closedDate ? convertIsoToLocalCalendar(closedDate.split('T')[0]) : undefined;
     const orgUnit = orgUnitLabel || i18n.t('organisation unit');
 
     if (opening && closed) {

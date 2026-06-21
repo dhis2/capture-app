@@ -89,7 +89,7 @@ const ScheduleDatePlain = ({
         }
 
         const orgUnitRangeValidation = getWithinOrgUnitDateRangeValidator(orgUnit, getOrgUnitLabel(programId))(dateString);
-        if (orgUnitRangeValidation !== true && !orgUnitRangeValidation.valid) {
+        if (orgUnitRangeValidation !== true) {
             return {
                 error: true,
                 validationText: orgUnitRangeValidation.errorMessage,
