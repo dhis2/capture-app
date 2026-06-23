@@ -2,6 +2,7 @@ import { ofType } from 'redux-observable';
 import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
+import { statusTypes } from 'capture-core/events/statusTypes';
 import { EMPTY } from 'rxjs';
 import type { ReduxStore } from 'capture-core-utils/types';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
@@ -231,8 +232,8 @@ export const startCreateNewAfterCompletingEpic = (
 
             if (isCreateNew) {
                 const finalParams = availableProgramStages.length === 1 ?
-                    { ...params, stageId: availableProgramStages[0].id, tab: 'SCHEDULE' } :
-                    { ...params, tab: 'SCHEDULE' };
+                    { ...params, stageId: availableProgramStages[0].id, tab: statusTypes.SCHEDULE } :
+                    { ...params, tab: statusTypes.SCHEDULE };
 
                 setTimeout(() => {
                     navigate(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
