@@ -8,54 +8,6 @@ import type { Program } from '../EnrollmentPageDefault.types';
 
 const queryKey = 'useProgramMetadata';
 
-// Exported for unit testing. Builds the enrollment-dashboard program metadata from the cached
-// program and the data elements / option sets the current user is allowed to read. A data element
-// referenced by a program stage is absent from `dataElementDictionary` when the user lacks metadata
-// access to it (the program keeps the reference, but the data element query filters it out by
-// sharing). Such data elements are omitted rather than dereferenced, which previously crashed the
-// dashboard for non-superusers (DHIS2-21669).
-export const buildProgramMetadata = (
-    program: any,
-    dataElementDictionary: { [id: string]: any },
-    optionSetDictionary: { [id: string]: any },
-): Program => ({
-    programStages: program.programStages.map((stage: any) => ({
-        id: stage.id,
-        dataAccess: {
-            read: stage.access.data.read,
-            write: stage.access.data.write,
-        },
-        repeatable: stage.repeatable,
-        hideDueDate: stage.hideDueDate,
-        enableUserAssignment: stage.enableUserAssignment,
-        programStageDataElements: stage.programStageDataElements
-            .filter((programStageDataElement: any) => {
-                const accessible = !!dataElementDictionary[programStageDataElement.dataElementId];
-                if (!accessible) {
-                    log.error(
-                        errorCreator('data element missing from metadata store, likely no user access; omitting it')(
-                            { dataElementId: programStageDataElement.dataElementId },
-                        ),
-                    );
-                }
-                return accessible;
-            })
-            .map((programStageDataElement: any) => {
-                const dataElement = dataElementDictionary[programStageDataElement.dataElementId];
-                return {
-                    displayInReports: programStageDataElement.displayInReports,
-                    dataElement: {
-                        id: dataElement.id,
-                        valueType: dataElement.valueType,
-                        displayName: dataElement.displayName,
-                        displayFormName: dataElement.displayFormName,
-                        optionSet: dataElement.optionSetValue ? optionSetDictionary[dataElement.optionSet.id] : {},
-                    },
-                };
-            }),
-    })),
-});
-
 export const useProgramMetadata = (programId: string) => {
     const { program, isLoading, isError } = useProgramFromIndexedDB(programId, { enabled: !!programId });
 
@@ -112,8 +64,44 @@ export const useProgramMetadata = (programId: string) => {
         if (!program || !derivedDataElementValues || !optionSetDictionary) {
             return undefined;
         }
+        const dataElementDictionary = derivedDataElementValues.dataElementDictionary;
 
-        return buildProgramMetadata(program, derivedDataElementValues.dataElementDictionary, optionSetDictionary);
+        return {
+            programStages: program.programStages.map(stage => ({
+                id: stage.id,
+                dataAccess: {
+                    read: stage.access.data.read,
+                    write: stage.access.data.write,
+                },
+                repeatable: stage.repeatable,
+                hideDueDate: stage.hideDueDate,
+                enableUserAssignment: stage.enableUserAssignment,
+                programStageDataElements: stage.programStageDataElements
+                    .reduce((acc, programStageDataElement) => {
+                        const dataElement = dataElementDictionary[programStageDataElement.dataElementId];
+                        if (!dataElement) {
+                            log.error(
+                                errorCreator('data element missing from metadata store, likely no user access; omitting it')(
+                                    { dataElementId: programStageDataElement.dataElementId },
+                                ),
+                            );
+                            return acc;
+                        }
+
+                        acc.push({
+                            displayInReports: programStageDataElement.displayInReports,
+                            dataElement: {
+                                id: dataElement.id,
+                                valueType: dataElement.valueType,
+                                displayName: dataElement.displayName,
+                                displayFormName: dataElement.displayFormName,
+                                optionSet: dataElement.optionSetValue ? optionSetDictionary[dataElement.optionSet.id] : {},
+                            },
+                        });
+                        return acc;
+                    }, []),
+            })),
+        };
     }, [program, derivedDataElementValues, optionSetDictionary]);
 
 
