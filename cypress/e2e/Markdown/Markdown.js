@@ -30,27 +30,25 @@ const getListItem = (n) =>
         .find('ul li')
         .eq(n - 1);
 
-// FIRST FEEDBACK ELEMENT
+const ordinalToIndex = { first: 1, second: 2, third: 3, fourth: 4 };
 
-And('the first list item should contain {word} with text {string}', (tag, text) => {
-    getListItem(1)
+And('the {word} list item should contain {word} with text {string}', (ordinal, tag, text) => {
+    getListItem(ordinalToIndex[ordinal])
         .find(tag)
         .should('have.text', text);
 });
 
-// SECOND FEEDBACK ELEMENT
-
-Then('the second list item {word} should contain italic text {string}', (tag, text) => {
-    getListItem(2)
+Then('the {word} list item {word} should contain italic text {string}', (ordinal, tag, text) => {
+    getListItem(ordinalToIndex[ordinal])
         .find(tag)
         .find('em')
         .should('have.text', text);
 });
 
-And('the second list item table should match:', (dataTable) => {
+And('the {word} list item table should match:', (ordinal, dataTable) => {
     const [headerRow, ...bodyRows] = dataTable.raw();
 
-    getListItem(2).find('table').within(() => {
+    getListItem(ordinalToIndex[ordinal]).find('table').within(() => {
         cy.get('thead th').each(($th, i) => {
             expect($th.text()).to.equal(headerRow[i]);
         });
