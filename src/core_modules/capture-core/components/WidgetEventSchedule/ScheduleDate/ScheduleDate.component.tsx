@@ -9,7 +9,16 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from 'capture-core/components/FormFields/New';
-import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
+import {
+    isValidDate,
+    isValidPeriod,
+    getWithinOrgUnitDateRangeValidator,
+} from 'capture-core/utils/validation/validators/form';
+import {
+    getOrgUnitOpeningCalendarMin,
+    getOrgUnitClosingCalendarMax,
+} from 'capture-core/utils/orgUnits/getOrgUnitCalendarBounds';
+import { getOrgUnitLabel } from 'capture-core/utils/orgUnits/getOrgUnitLabel';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
@@ -61,6 +70,7 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
+    programId,
 }: Props) => {
     const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
@@ -75,6 +85,14 @@ const ScheduleDatePlain = ({
             return {
                 error: true,
                 validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
+            };
+        }
+
+        const orgUnitRangeValidation = getWithinOrgUnitDateRangeValidator(orgUnit, getOrgUnitLabel(programId))(dateString);
+        if (orgUnitRangeValidation !== true) {
+            return {
+                error: true,
+                validationText: orgUnitRangeValidation.errorMessage,
             };
         }
 
@@ -113,6 +131,8 @@ const ScheduleDatePlain = ({
                     value={scheduleDate}
                     width="100%"
                     calendarWidth={350}
+                    calendarMin={getOrgUnitOpeningCalendarMin(orgUnit)}
+                    calendarMax={getOrgUnitClosingCalendarMax(orgUnit)}
                     styles={baseInputStyles}
                     onBlur={(date: string, internalComponentError: any) => {
                         setScheduleDate(date);

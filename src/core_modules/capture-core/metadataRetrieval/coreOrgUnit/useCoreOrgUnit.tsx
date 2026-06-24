@@ -13,8 +13,11 @@ export function useCoreOrgUnit(orgUnitId: string): {
     const dispatch = useDispatch();
     const reduxOrgUnit = useSelector(({ organisationUnits }: any) => organisationUnits && organisationUnits[orgUnitId]);
     const fetchId = reduxOrgUnit ? undefined : orgUnitId;
-    // These hooks do no work when id is undefined
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
+    // These hooks do no work when id is undefined.
+    // NB: openingDate/closedDate must stay in this field list — they back the org-unit date-range
+    // enforcement. Any other code path dispatching orgUnitFetched must include them too, or a
+    // cached org unit will fail open (undefined bounds → validation passes).
+    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path,openingDate,closedDate');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
 
     if (reduxOrgUnit) {

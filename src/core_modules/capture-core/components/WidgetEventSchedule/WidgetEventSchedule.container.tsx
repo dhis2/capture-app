@@ -6,6 +6,7 @@ import moment from 'moment';
 import { pipe } from 'capture-core-utils';
 import { getProgramAndStageForProgram, TrackerProgram, dataElementTypes } from '../../metaData';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitWithDates } from '../../metadataRetrieval/coreOrgUnit';
 import { useLocationQuery } from '../../utils/routing';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { generateUID } from '../../utils/uid/generateUID';
@@ -62,6 +63,8 @@ export const WidgetEventSchedule = ({
             setScheduledOrgUnit(orgUnit);
         }
     }, [orgUnitName, initialOrgUnitId]);
+    // Enrich the scheduling org unit with its opening/closing dates so the schedule date can enforce them
+    const scheduledOrgUnitWithDates = useOrgUnitWithDates(scheduledOrgUnit);
     const [isFormValid, setIsFormValid] = useState(false);
     const convertScheduleDate = (date: any, validationResult = { error: false }) => {
         if (!date || validationResult?.error) {
@@ -209,7 +212,7 @@ export const WidgetEventSchedule = ({
             onSchedule={onHandleSchedule}
             onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}
-            orgUnit={scheduledOrgUnit}
+            orgUnit={scheduledOrgUnitWithDates}
             notes={notes}
             selectedCategories={selectedCategories}
             categoryOptionsError={categoryOptionsError}

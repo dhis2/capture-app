@@ -1,8 +1,13 @@
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
-import { isValidDate, isValidPeriod } from '../../../../utils/validation/validators/form';
+import {
+    isValidDate,
+    isValidPeriod,
+    getWithinOrgUnitDateRangeValidator,
+} from '../../../../utils/validation/validators/form';
 import { convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
+import { getOrgUnitLabel } from '../../../../utils/orgUnits/getOrgUnitLabel';
 
 const preValidateDate = (value?: string, internalComponentError?: {error?: string, errorCode?: string}) => {
     if (!value) {
@@ -41,6 +46,15 @@ export const getEventDateValidatorContainers = (props: Record<string, unknown> =
     },
     {
         validator: (value: string) => validateNotExpired(value, props),
+        errorMessage: '',
+    },
+    {
+        // The message is built by the validator itself (it interpolates the org unit's
+        // opening/closing dates and label), so the static fallback is intentionally empty.
+        validator: getWithinOrgUnitDateRangeValidator(
+            props?.orgUnit as { openingDate?: string, closedDate?: string },
+            getOrgUnitLabel(props?.programId as string | undefined),
+        ),
         errorMessage: '',
     },
 ];

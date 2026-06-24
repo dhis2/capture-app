@@ -1,6 +1,11 @@
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
-import { isValidDate, isValidNonFutureDate } from '../../../../utils/validation/validators/form';
+import {
+    isValidDate,
+    isValidNonFutureDate,
+    getWithinOrgUnitDateRangeValidator,
+} from '../../../../utils/validation/validators/form';
+import type { OrgUnitDateRange } from '../../../../utils/orgUnits/getOrgUnitCalendarBounds';
 
 const isValidEnrollmentDate = (value: string, internalComponentError?: {error?: string, errorCode?: string}) => {
     if (!value) {
@@ -10,7 +15,7 @@ const isValidEnrollmentDate = (value: string, internalComponentError?: {error?: 
     return isValidDate(value, internalComponentError);
 };
 
-export const getEnrollmentDateValidatorContainer = () => {
+export const getEnrollmentDateValidatorContainer = (orgUnit?: OrgUnitDateRange | null, orgUnitLabel?: string | null) => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -23,6 +28,12 @@ export const getEnrollmentDateValidatorContainer = () => {
         },
         { validator: isValidNonFutureDate,
             errorMessage: i18n.t('A date in the future is not allowed'),
+        },
+        {
+            // The message is built by the validator itself (it interpolates the org unit's
+            // opening/closing dates and label), so the static fallback is intentionally empty.
+            validator: getWithinOrgUnitDateRangeValidator(orgUnit, orgUnitLabel),
+            errorMessage: '',
         },
     ];
     return validatorContainers;

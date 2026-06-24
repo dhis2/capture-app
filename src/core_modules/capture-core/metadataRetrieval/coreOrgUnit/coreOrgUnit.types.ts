@@ -8,6 +8,9 @@ export type CoreOrgUnit = {
     code: string,
     path: string,
     groups: Array<OrgUnitGroup>,
+    // ISO date strings (Gregorian) as returned by the API; either may be absent
+    openingDate?: string,
+    closedDate?: string,
 };
 
 

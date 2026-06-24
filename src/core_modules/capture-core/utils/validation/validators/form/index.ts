@@ -4,6 +4,7 @@ export { isValidAge } from './ageValidator';
 export { isValidNonFutureDate } from './isValidNonFutureDate';
 export { isValidPeriod } from './expiredPeriod';
 export { getDateRangeValidator } from './getDateRangeValidator';
+export { getWithinOrgUnitDateRangeValidator, isIsoDateWithinOrgUnitRange } from './getWithinOrgUnitDateRangeValidator';
 export { getDateTimeRangeValidator } from './getDateTimeRangeValidator';
 export { getNumberRangeValidator } from './getNumberRangeValidator';
 export { getTimeRangeValidator } from './getTimeRangeValidator';

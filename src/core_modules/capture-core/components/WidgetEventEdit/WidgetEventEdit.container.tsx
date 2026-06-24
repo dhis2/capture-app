@@ -19,6 +19,7 @@ import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
 import { useAuthorities } from '../../utils/authority/useAuthorities';
+import { useOrgUnitWithDates } from '../../metadataRetrieval/coreOrgUnit';
 
 const styles: Readonly<any> = {
     container: {
@@ -102,6 +103,8 @@ const WidgetEventEditPlain = ({
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const expiryPeriod = useProgramExpiryForUser(programId);
+    // Enrich the event's org unit with its opening/closing dates so event date fields can enforce them
+    const orgUnitWithDates = useOrgUnitWithDates(orgUnit);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
@@ -155,7 +158,7 @@ const WidgetEventEditPlain = ({
                                 <EditEventDataEntry
                                     dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                                     formFoundation={formFoundation}
-                                    orgUnit={orgUnit}
+                                    orgUnit={orgUnitWithDates}
                                     programId={programId}
                                     stageId={stageId}
                                     teiId={teiId}

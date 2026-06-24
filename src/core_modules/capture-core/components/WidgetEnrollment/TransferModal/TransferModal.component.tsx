@@ -6,12 +6,16 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
+    NoticeBox,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { isIsoDateWithinOrgUnitRange } from 'capture-core/utils/validation/validators/form';
+import { getOrgUnitLabel } from 'capture-core/utils/orgUnits/getOrgUnitLabel';
 import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 
 export const TransferModal = ({
     enrollment,
@@ -30,6 +34,12 @@ export const TransferModal = ({
         programId: enrollment.program,
         ownerOrgUnitId,
     });
+
+    // The enrollment date must fall within the destination org unit's opening/closing range
+    const { orgUnit: destinationOrgUnit } = useCoreOrgUnit(selectedOrgUnit?.id ?? '');
+    const enrollmentDateOutsideRange = !!selectedOrgUnit
+        && !isIsoDateWithinOrgUnitRange(enrollment.enrolledAt, destinationOrgUnit);
+    const orgUnitLabel = getOrgUnitLabel(enrollment.program) || i18n.t('organisation unit');
 
     const handleOnUpdateOwnership = async () => {
         if (!selectedOrgUnit) return;
@@ -65,6 +75,22 @@ export const TransferModal = ({
                     programAccessLevel={programAccessLevel}
                     orgUnitScopes={orgUnitScopes}
                 />
+
+                {enrollmentDateOutsideRange && (
+                    <NoticeBox
+                        error
+                        title={i18n.t('Cannot transfer to this {{orgUnitLabel}}', {
+                            orgUnitLabel,
+                            interpolation: { escapeValue: false },
+                        })}
+                        dataTest={'transfer-enrollment-date-out-of-range'}
+                    >
+                        {i18n.t(
+                            "The enrollment date is outside the selected {{orgUnitLabel}}'s opening and closing dates.",
+                            { orgUnitLabel, interpolation: { escapeValue: false } },
+                        )}
+                    </NoticeBox>
+                )}
             </ModalContent>
 
             <ModalActions>
@@ -76,7 +102,7 @@ export const TransferModal = ({
                     <Button
                         dataTest={'widget-enrollment-transfer-button'}
                         primary
-                        disabled={!ready || !selectedOrgUnit}
+                        disabled={!ready || !selectedOrgUnit || enrollmentDateOutsideRange}
                         loading={isTransferLoading}
                         onClick={handleOnUpdateOwnership}
                     >

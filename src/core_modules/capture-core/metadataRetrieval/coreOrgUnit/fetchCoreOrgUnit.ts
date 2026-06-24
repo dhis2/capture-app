@@ -11,7 +11,7 @@ export async function fetchCoreOrgUnit(
         querySingleResource({
             resource: `organisationUnits/${orgUnitId}`,
             params: {
-                fields: 'displayName,code,path',
+                fields: 'displayName,code,path,openingDate,closedDate',
             },
         }),
         getAssociatedOrgUnitGroups(orgUnitId),
@@ -20,6 +20,8 @@ export async function fetchCoreOrgUnit(
         name: orgUnit.displayName,
         code: orgUnit.code,
         path: orgUnit.path,
+        openingDate: orgUnit.openingDate,
+        closedDate: orgUnit.closedDate,
         groups,
     }));
 }
