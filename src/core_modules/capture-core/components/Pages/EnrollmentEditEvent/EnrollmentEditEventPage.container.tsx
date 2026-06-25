@@ -3,10 +3,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations, useProgramExpiryForUser } from '../../../hooks';
-import { isValidPeriod } from '../../../utils/validation/validators/form/expiredPeriod';
-import { useAuthorities } from '../../../utils/authority/useAuthorities';
-import { eventStatuses } from '../../WidgetEventEdit/constants/status.const';
+import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations, useEventEditPermissions } from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
@@ -43,7 +40,6 @@ import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
 import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
-import { getProgramEventAccess } from '../../../metaData';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer, convertServerToClient } from '../../../converters';
 import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
@@ -266,17 +262,19 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, dataEntryKey));
 
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const eventAccess = getProgramEventAccess(programId, programStage?.id ?? null);
 
-    const expiryPeriod = useProgramExpiryForUser(programId);
-    const occurredAtClient = convertServerToClient(event?.occurredAt, dataElementTypes.DATE) as string;
-    const isEventWithinValidPeriod = isValidPeriod(occurredAtClient, expiryPeriod).isWithinValidPeriod;
-
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const canEditCompletedEvent = !(programStage?.blockEntryForm
-        && !canUncompleteEvent
-        && event?.status === eventStatuses.COMPLETED);
-
+    const {
+        eventAccess,
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
+    } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus: event?.status,
+        occurredAtClient: convertServerToClient(event?.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: convertServerToClient(event?.completedAt, dataElementTypes.DATE) as string,
+    });
 
     const pageStatus = getPageStatus({
         orgUnitId,
@@ -313,6 +311,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             currentStageId={stageId}
             isEventWithinValidPeriod={isEventWithinValidPeriod}
             canEditCompletedEvent={canEditCompletedEvent}
+            isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
         >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}

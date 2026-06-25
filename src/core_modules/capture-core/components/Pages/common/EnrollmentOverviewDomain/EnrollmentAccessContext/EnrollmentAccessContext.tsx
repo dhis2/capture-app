@@ -18,6 +18,7 @@ export type EnrollmentAccessContextValue = {
     showWidgetBadge: boolean;
     isEventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
+    isWithinCompleteEventsExpiry?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -41,6 +42,7 @@ type ProviderProps = {
     currentStageId?: string;
     isEventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
+    isWithinCompleteEventsExpiry?: boolean;
     children: React.ReactNode;
 };
 
@@ -49,6 +51,7 @@ export const EnrollmentAccessProvider = ({
     currentStageId,
     isEventWithinValidPeriod,
     canEditCompletedEvent,
+    isWithinCompleteEventsExpiry,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(() => {
@@ -90,8 +93,9 @@ export const EnrollmentAccessProvider = ({
             showWidgetBadge: !isEventPage && !allWriteAccessMissing,
             isEventWithinValidPeriod,
             canEditCompletedEvent,
+            isWithinCompleteEventsExpiry,
         };
-    }, [program, currentStageId, isEventWithinValidPeriod, canEditCompletedEvent]);
+    }, [program, currentStageId, isEventWithinValidPeriod, canEditCompletedEvent, isWithinCompleteEventsExpiry]);
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
 };
