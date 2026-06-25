@@ -1539,9 +1539,6 @@ msgstr "after"
 msgid "before"
 msgstr "before"
 
-msgid "Schedule date info"
-msgstr "Schedule date info"
-
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 
