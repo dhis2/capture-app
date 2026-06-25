@@ -105,7 +105,7 @@
         "@typescript-eslint/parser": "^4.0.0",
         "babel-eslint": "^10.0.0",
         "babel-plugin-module-resolver": "^5.0.3",
-        "concurrently": "^8.2.2",
+        "concurrently": "^10.0.3",
         "cypress": "12",
         "docdash": "^2.0.2",
         "dotenv": "^17.4.2",
