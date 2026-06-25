@@ -1,10 +1,13 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-restricted-syntax */
+
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { SearchGroup } from '../SearchGroup';
 import type { DataElement } from '../DataElement';
 import type { TeiRegistration } from './TeiRegistration';
 import type { Access } from '../Access';
+import type { CustomLabels } from '../helpers/customLabels';
 
-/* eslint-disable no-underscore-dangle */
 export class TrackedEntityType {
     _id!: string;
     _access!: Access;
@@ -12,9 +15,11 @@ export class TrackedEntityType {
     _teiRegistration!: TeiRegistration;
     _attributes!: Array<DataElement>;
     _searchGroups!: Array<SearchGroup>;
+    _customLabels!: CustomLabels;
 
     constructor(initFn: ((_this: TrackedEntityType) => void) | null) {
         this._attributes = [];
+        this._customLabels = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -58,5 +63,12 @@ export class TrackedEntityType {
     }
     get attributes(): Array<DataElement> {
         return this._attributes;
+    }
+
+    set customLabels(customLabels: CustomLabels) {
+        this._customLabels = customLabels;
+    }
+    get customLabels(): CustomLabels {
+        return this._customLabels;
     }
 }

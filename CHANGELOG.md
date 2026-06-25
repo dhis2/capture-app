@@ -1,3 +1,18 @@
+## [106.5.1](https://github.com/dhis2/capture-app/compare/v106.5.0...v106.5.1) (2026-06-25)
+
+
+### Bug Fixes
+
+* [DHIS2-21550] Not respecting completeEventsExpiryDays ([#4583](https://github.com/dhis2/capture-app/issues/4583)) ([dd6dcc0](https://github.com/dhis2/capture-app/commit/dd6dcc02df8bc2ede317c3e71af5fe5b4695bade))
+* [DHIS2-21618] Fix form layout for scheduled events ([#4600](https://github.com/dhis2/capture-app/issues/4600)) ([2a8135e](https://github.com/dhis2/capture-app/commit/2a8135e18c40c6c5e8abc04bafe03ddbff9d8cc2))
+
+# [106.5.0](https://github.com/dhis2/capture-app/compare/v106.4.5...v106.5.0) (2026-06-17)
+
+
+### Features
+
+* [DHIS2-16610] Add support for configurable terminology labels  ([#4609](https://github.com/dhis2/capture-app/issues/4609)) ([b23386a](https://github.com/dhis2/capture-app/commit/b23386ae3303e26f448c7bff93eeeb0060191585))
+
 ## [106.4.5](https://github.com/dhis2/capture-app/compare/v106.4.4...v106.4.5) (2026-06-12)
 
 

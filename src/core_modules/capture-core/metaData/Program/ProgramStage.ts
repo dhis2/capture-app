@@ -6,6 +6,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
+import type { CustomLabels } from '../helpers/customLabels';
 
 export class ProgramStage {
     _id!: string;
@@ -27,9 +28,11 @@ export class ProgramStage {
     _minDaysFromStart!: number;
     _icon!: Icon | undefined;
     _programRules!: Array<ProgramRule>;
+    _customLabels!: CustomLabels;
 
     constructor(initFn: ((_this: ProgramStage) => void) | null) {
         this.programRules = [];
+        this._customLabels = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -191,5 +194,12 @@ export class ProgramStage {
 
     get repeatable(): boolean {
         return this._repeatable;
+    }
+
+    set customLabels(customLabels: CustomLabels) {
+        this._customLabels = customLabels;
+    }
+    get customLabels(): CustomLabels {
+        return this._customLabels;
     }
 }
