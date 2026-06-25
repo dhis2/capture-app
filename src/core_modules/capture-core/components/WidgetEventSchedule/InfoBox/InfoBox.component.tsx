@@ -48,7 +48,7 @@ const InfoBoxPlain = ({
         });
 
     return (
-        <NoticeBox className={classes.infoBox} title={i18n.t('Schedule date info')}>
+        <NoticeBox className={classes.infoBox}>
             {hideDueDate ? (
                 <>
                     {i18n.t('Scheduled automatically for {{suggestedScheduleDate}}', { suggestedScheduleDate })}

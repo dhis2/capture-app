@@ -157,6 +157,7 @@ const fieldsParam = [
     'accessLevel',
     'expiryPeriodType',
     'expiryDays',
+    'completeEventsExpiryDays',
     'dataEntryForm[id,htmlCode]',
     'displayIncidentDate',
     'access[data[read,write]]',

@@ -17,8 +17,13 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
-import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
-import { useAuthorities } from '../../utils/authority/useAuthorities';
+import {
+    useEnrollmentEditEventPageMode,
+    useAvailableProgramStages,
+    useEventEditPermissions,
+} from '../../hooks';
+import { convertFormToClient } from '../../converters';
+import { dataElementTypes } from '../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -101,10 +106,17 @@ const WidgetEventEditPlain = ({
     const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
-    const expiryPeriod = useProgramExpiryForUser(programId);
+    const completedAt = loadedValues?.eventContainer?.event?.completedAt;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+
+    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
+        programId,
+        stage,
+        eventStatus,
+        occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: completedAt,
+    });
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -128,7 +140,7 @@ const WidgetEventEditPlain = ({
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            occurredAt={occurredAt}
+                            readOnly={readOnly}
                         />
                     }
                     noncollapsible
@@ -165,7 +177,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton
+                                    hasDeleteButton={!readOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
