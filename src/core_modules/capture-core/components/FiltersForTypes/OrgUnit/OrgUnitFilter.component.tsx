@@ -34,7 +34,6 @@ export class OrgUnitFilter extends Component<OrgUnitFilterProps> implements Upda
                         value={filteredValue != null && typeof filteredValue === 'object' ? filteredValue : undefined}
                         onBlur={this.handleOrgUnitChange}
                         maxTreeHeight={280}
-                        inline
                     />
                 )}
             </WithEmptyValueFilter>

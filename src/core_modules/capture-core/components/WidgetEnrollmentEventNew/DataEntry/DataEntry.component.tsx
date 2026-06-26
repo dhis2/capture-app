@@ -200,6 +200,7 @@ const buildOrgUnitSettingsFn = () => {
             width: props && props.formHorizontal ? 150 : 350,
             label: i18n.t('Organisation unit'),
             required: true,
+            collapsed: true,
         }),
         getPropName: () => 'orgUnit',
         getValidatorContainers: () => getOrgUnitValidatorContainers(),

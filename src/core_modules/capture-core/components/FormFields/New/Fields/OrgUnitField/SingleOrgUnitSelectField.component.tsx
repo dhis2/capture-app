@@ -35,8 +35,10 @@ type SingleOrgUnitSelectFieldState = {
 type SingleOrgUnitSelectFieldProps = {
     value?: OrgUnitValue;
     onBlur: (value: any) => void;
+    onSelectClick?: (orgUnit: Record<string, any>) => void;
     disabled?: boolean;
-    inline?: boolean;
+    maxTreeHeight?: number;
+    collapsed?: boolean;
 };
 
 type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
@@ -67,8 +69,13 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         this.props.onBlur(null);
     }
 
-    handleCollapsedBlur = () => {
-        // no-op: selection commits via onSelectClick; avoid clearing the value on popover blur
+    handleCollapsedSelect = (orgUnit: Record<string, any>) => {
+        if (this.props.onSelectClick) {
+            this.props.onSelectClick(orgUnit);
+        } else {
+            this.onSelectOrgUnit(orgUnit);
+        }
+        this.setState({ open: false });
     }
 
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
@@ -86,7 +93,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     renderInlineOrgUnitField = () => {
-        const { classes, inline, ...passOnProps } = this.props;
+        const { classes, collapsed, ...passOnProps } = this.props;
         return (
             <OrgUnitField
                 onSelectClick={this.onSelectOrgUnit}
@@ -97,7 +104,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     renderCollapsedOrgUnitField = () => {
-        const { classes, disabled } = this.props;
+        const { classes, collapsed, value, onBlur, onSelectClick, disabled, maxTreeHeight, ...passOnProps } = this.props;
         return (
             <React.Fragment>
                 <div ref={this.anchorRef} data-test="org-unit-selector-trigger">
@@ -120,11 +127,12 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                     >
                         <div className={classes.popoverContent}>
                             <OrgUnitField
-                                onSelectClick={this.onSelectOrgUnit}
-                                onBlur={this.handleCollapsedBlur}
-                                previousOrgUnitId={this.state.previousOrgUnitId}
-                                maxTreeHeight={350}
+                                {...passOnProps}
                                 disabled={disabled}
+                                maxTreeHeight={maxTreeHeight ?? 350}
+                                onSelectClick={this.handleCollapsedSelect}
+                                onBlur={() => undefined}
+                                previousOrgUnitId={this.state.previousOrgUnitId}
                             />
                         </div>
                     </Popover>
@@ -134,11 +142,11 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     render() {
-        const { value, inline } = this.props;
+        const { value, collapsed } = this.props;
         if (value) {
             return this.renderSelectedOrgUnit(value);
         }
-        return inline ? this.renderInlineOrgUnitField() : this.renderCollapsedOrgUnitField();
+        return collapsed ? this.renderCollapsedOrgUnitField() : this.renderInlineOrgUnitField();
     }
 }
 export const SingleOrgUnitSelectField = withStyles(getStyles)(SingleOrgUnitSelectFieldPlain);
