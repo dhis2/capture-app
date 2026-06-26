@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-11T17:54:31.024Z\n"
-"PO-Revision-Date: 2026-06-11T17:54:31.025Z\n"
+"POT-Creation-Date: 2026-06-26T12:08:56.350Z\n"
+"PO-Revision-Date: 2026-06-26T12:08:56.350Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -593,6 +593,9 @@ msgstr "Type to filter options"
 msgid "No match found"
 msgstr "No match found"
 
+msgid "Choose an organisation unit"
+msgstr "Choose an organisation unit"
+
 msgid "Clear"
 msgstr "Clear"
 
@@ -1112,9 +1115,6 @@ msgstr "Choose an organisation unit in the form below"
 
 msgid "None selected"
 msgstr "None selected"
-
-msgid "Choose an organisation unit"
-msgstr "Choose an organisation unit"
 
 msgid "Choose a {{categoryName}}"
 msgstr "Choose a {{categoryName}}"

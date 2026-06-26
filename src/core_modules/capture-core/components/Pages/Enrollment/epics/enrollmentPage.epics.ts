@@ -24,6 +24,8 @@ import {
 } from '../EnrollmentPage.actions';
 import { enrollmentAccessLevels, selectionStatus } from '../EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../../utils/routing';
+import { getCachedSingleResourceFromKeyAsync } from '../../../../MetaDataStoreUtils/MetaDataStoreUtils';
+import { USER_METADATA_STORES } from '../../../../storageControllers';
 import { deriveTeiName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { getScopeInfo } from '../../../../metaData';
 import { scopeTypes } from '../../../../metaData/helpers/constants';
@@ -41,15 +43,6 @@ const enrollmentIdQuery = enrollmentId => ({
     id: enrollmentId,
     params: {
         fields: ['trackedEntity', 'program'],
-    },
-});
-
-const captureScopeQuery = orgUnitId => ({
-    resource: 'organisationUnits',
-    params: {
-        query: orgUnitId,
-        withinUserHierarchy: true,
-        fields: 'id',
     },
 });
 
@@ -257,18 +250,40 @@ export const verifyFetchedEnrollmentsEpic = (action$: any, store: any) =>
     );
 
 // Auto-switch orgUnit epic
-export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleResource, navigate }: any) =>
+// When opening a tracked entity (e.g. coming from a search), set the context org unit to the
+// program owner org unit, but only when the owner is a valid data entry org unit for the program
+// (i.e. in the user's capture scope for that program). If it is not, clear the org unit selector
+// so the user consciously picks an org unit they can capture in, instead of being blocked by an
+// "Org unit is not valid with current program" error when adding a new event.
+export const autoSwitchOrgUnitEpic = (action$: any, store: any, { navigate }: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS),
         map(({ payload: { programOwnerId } }) => programOwnerId),
         filter(Boolean),
-        concatMap(programOwnerId => from(querySingleResource(captureScopeQuery(programOwnerId)))
+        concatMap((programOwnerId: string) => from(getCachedSingleResourceFromKeyAsync(
+            USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM,
+            store.value.enrollmentPage.programId,
+            { programOwnerId },
+        ))
             .pipe(
-                concatMap(({ organisationUnits }: any) => {
-                    if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
-                        // Update orgUnitId in url
-                        const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                        navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwnerId })}`);
+                concatMap(({ response, programOwnerId: ownerOrgUnitId }: any) => {
+                    // Leave the current selection untouched when the program's org units are not
+                    // cached, or the page is no longer open.
+                    if (!response?.organisationUnits || !store.value.enrollmentPage.pageOpen) {
+                        return EMPTY;
+                    }
+                    const { orgUnitId, ...restOfQueries } = getLocationQuery();
+                    const ownerValidForProgram = Boolean(response.organisationUnits[ownerOrgUnitId]);
+
+                    if (ownerValidForProgram) {
+                        // Switch the context org unit to the program owner.
+                        if (orgUnitId !== ownerOrgUnitId) {
+                            navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: ownerOrgUnitId })}`);
+                        }
+                    } else if (orgUnitId) {
+                        // Owner is outside the user's capture scope for this program: clear the
+                        // selector so the user picks an org unit they can capture in.
+                        navigate(`/enrollment?${buildUrlQueryString(restOfQueries)}`);
                     }
                     return EMPTY;
                 }),
