@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, memo } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import Markdown from 'react-markdown';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
@@ -144,23 +144,26 @@ const styles = {
         },
     },
 };
+const REMARK_PLUGINS = [remarkGfm];
 
 type Props = MarkdownWrapperProps & WithStyles<typeof styles>;
-const MarkdownWrapperComponent = ({ title, content, color, classes }:Props) => (
+const MarkdownWrapperComponent = memo(({ title, content, color, classes }:Props) => (
     <div className={classes.container} >
         <div className={classes.title}>
-            <div className={classes.markdown}><Markdown remarkPlugins={[remarkGfm]}>{title}</Markdown></div>
+            <div className={classes.markdown}>
+                <Markdown remarkPlugins={REMARK_PLUGINS}>{title}</Markdown>
+            </div>
         </div>
 
         { content &&
             <div className={classes.content}>
                 { color && <span className={classes.legend} style={{ backgroundColor: color }} /> }
                 <div className={classes.markdown}>
-                    <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+                    <Markdown remarkPlugins={REMARK_PLUGINS}>{content}</Markdown>
                 </div>
             </div>
         }
     </div>
-);
+));
 
 export const MarkdownWrapper = withStyles(styles)(MarkdownWrapperComponent) as ComponentType<MarkdownWrapperProps>;
