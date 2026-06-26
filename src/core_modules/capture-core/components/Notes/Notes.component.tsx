@@ -9,7 +9,7 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withFocusSaver } from 'capture-ui';
 import { TextField } from '../FormFields/New';
 import { convertClientToList } from '../../converters';
-import { dataElementTypes, useProgramLabel } from '../../metaData';
+import { dataElementTypes } from '../../metaData';
 import type { Note } from './notes.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -85,7 +85,7 @@ const NotesPlain = ({
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const { fromServerDate } = useTimeZoneConversion();
-    const note = useProgramLabel('note') ?? i18n.t('note');
+    const note = i18n.t('note');
 
     useEffect(() => {
         setAddIsOpen(!!propValue);

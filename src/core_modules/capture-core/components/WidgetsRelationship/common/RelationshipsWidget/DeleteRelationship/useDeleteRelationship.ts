@@ -5,7 +5,6 @@ import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from '../../../../../utils/reactQueryHelpers';
-import { useProgramLabel } from '../../../../../metaData';
 
 type Props = {
     sourceId: string;
@@ -29,7 +28,7 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
     const dataEngine = useDataEngine();
     const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const queryClient = useQueryClient();
-    const relationship = useProgramLabel('relationship') ?? i18n.t('relationship');
+    const relationship = i18n.t('relationship');
     const { show: showError } = useAlert(
         i18n.t('An error occurred while deleting the {{relationship}}.', { relationship }),
         {

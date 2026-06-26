@@ -8,7 +8,7 @@ import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import { useStageLabel, useProgramLabel } from '../../../metaData';
+import { useStageLabel } from '../../../metaData';
 import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
@@ -200,7 +200,7 @@ const LinkButton = withStyles(styles)(({
 const useRelatedStagesLabels = (stageId?: string, programId?: string) => ({
     eventLabel: useStageLabel('event', { stageId, programId }) ?? i18n.t('event'),
     eventsLabel: useStageLabel('event', { stageId, programId, plural: true }) ?? i18n.t('events'),
-    relationshipsLabel: useProgramLabel('relationship', { programId, plural: true }) ?? i18n.t('relationships'),
+    relationshipsLabel: i18n.t('relationships'),
 });
 
 const RelatedStagesActionsPlain = ({

@@ -1,7 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withTheme } from 'capture-core-utils/styles';
-import { useProgramLabel } from '../../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../../DataEntries';
@@ -22,7 +21,7 @@ const NewEnrollmentRelationshipPlain =
         ExistingUniqueValueDialogActions,
     }: Props) => {
         const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
-        const relationship = useProgramLabel('relationship', { programId }) ?? i18n.t('relationship');
+        const relationship = i18n.t('relationship');
         const relatedStageActionsOptions = {
             [relatedStageActions.ENTER_DATA]: {
                 disabled: true,

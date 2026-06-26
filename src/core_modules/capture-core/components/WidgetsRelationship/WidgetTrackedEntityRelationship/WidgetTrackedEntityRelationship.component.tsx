@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useProgramLabel } from '../../../metaData';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
 import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
@@ -41,7 +40,7 @@ export const WidgetTrackedEntityRelationship = ({
     const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
         [isLoadingRelationships, isLoadingTEType],
     );
-    const relationshipsLabel = useProgramLabel('relationship', { plural: true, programId }) ?? i18n.t('relationships');
+    const relationshipsLabel = i18n.t('relationships');
 
     if (isError) {
         return (

@@ -13,7 +13,6 @@ import {
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { useProgramLabel } from '../../../../../metaData';
 import type { Props } from './DeleteRelationship.types';
 
 const styles: Readonly<any> = {
@@ -29,7 +28,7 @@ export const DeleteRelationshipPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const relationship = useProgramLabel('relationship') ?? i18n.t('relationship');
+    const relationship = i18n.t('relationship');
     return (
         <>
             <DataTableCell className={classes.tableCell}>

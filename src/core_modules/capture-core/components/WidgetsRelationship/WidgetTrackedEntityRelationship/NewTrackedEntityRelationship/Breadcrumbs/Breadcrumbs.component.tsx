@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.const';
-import { useProgramLabel } from '../../../../../metaData';
 import type { PlainProps } from './breadcrumbs.types';
 
 const styles = {
@@ -44,7 +43,7 @@ const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyle
     <span className={classes.slash}>/</span>);
 
 const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName }: any) => {
-    const relationship = useProgramLabel('relationship') ?? i18n.t('relationship');
+    const relationship = i18n.t('relationship');
     const initialText = i18n.t('New {{trackedEntityTypeName}} {{relationship}}', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
         relationship,

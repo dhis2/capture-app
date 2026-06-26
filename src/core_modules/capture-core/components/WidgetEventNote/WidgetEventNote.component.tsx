@@ -6,13 +6,13 @@ import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useProgramLabel, useStageLabel } from '../../metaData';
+import { useStageLabel } from '../../metaData';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
     const event = useStageLabel('event') ?? i18n.t('event');
-    const notesTitle = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
-    const notesLower = useProgramLabel('note', { plural: true }) ?? i18n.t('notes');
+    const notesTitle = i18n.t('Notes');
+    const notesLower = i18n.t('notes');
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
     const {

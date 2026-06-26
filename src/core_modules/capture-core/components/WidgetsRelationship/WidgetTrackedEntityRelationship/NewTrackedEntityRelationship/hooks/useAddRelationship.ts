@@ -4,7 +4,6 @@ import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import type { Mutation } from 'capture-core-utils/types/app-runtime';
-import { useProgramLabel } from '../../../../../metaData';
 
 type Props = {
     teiId: string;
@@ -24,7 +23,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
     const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const dataEngine = useDataEngine();
-    const relationshipLabel = useProgramLabel('relationship') ?? i18n.t('relationship');
+    const relationshipLabel = i18n.t('relationship');
     const { show: showAlert } = useAlert(
         i18n.t('An error occurred while adding the {{relationship}}', { relationship: relationshipLabel }),
         { critical: true },

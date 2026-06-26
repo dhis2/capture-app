@@ -24,7 +24,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetai
     }));
 
     const eventLabel = useStageLabel('event') ?? i18n.t('event');
-    const relationshipLabel = useStageLabel('relationship') ?? i18n.t('relationship');
+    const relationshipLabel = i18n.t('relationship');
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>

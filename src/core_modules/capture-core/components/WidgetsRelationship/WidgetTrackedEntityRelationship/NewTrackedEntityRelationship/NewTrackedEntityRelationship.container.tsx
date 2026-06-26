@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { useProgramLabel } from '../../../../metaData';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 
@@ -30,7 +29,7 @@ const NewTrackedEntityRelationshipPlain = ({
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
-    const relationship = useProgramLabel('relationship', { programId }) ?? i18n.t('Relationship');
+    const relationship = i18n.t('Relationship');
 
     const closeAddWizard = useCallback(() => {
         setAddWizardVisible(false);

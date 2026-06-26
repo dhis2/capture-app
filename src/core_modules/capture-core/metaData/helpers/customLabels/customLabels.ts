@@ -7,8 +7,6 @@ export const CUSTOM_LABEL_FIELDS = {
     enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
     followUp: { field: 'displayFollowUpLabel' },
     orgUnit: { field: 'displayOrgUnitLabel' },
-    relationship: { field: 'displayRelationshipLabel' },
-    note: { field: 'displayNoteLabel' },
     attribute: { field: 'displayTrackedEntityAttributeLabel' },
     programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
     event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
@@ -39,6 +37,9 @@ export const extractCustomLabels = (cached: Record<string, any>): CustomLabels =
 
 type LabelSource = CustomLabels | undefined | null;
 
+const capitalizeFirstChar = (value?: string): string | undefined =>
+    (value ? value.charAt(0).toUpperCase() + value.slice(1) : value);
+
 export const resolveLabel = (
     sources: LabelSource | Array<LabelSource>,
     key: CustomLabelKey,
@@ -48,10 +49,8 @@ export const resolveLabel = (
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 
-    if (plural) {
-        return term.pluralField ? pick(term.pluralField) : pick(term.field);
-    }
-    return pick(term.field);
+    const field = plural && term.pluralField ? term.pluralField : term.field;
+    return capitalizeFirstChar(pick(field));
 };
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;

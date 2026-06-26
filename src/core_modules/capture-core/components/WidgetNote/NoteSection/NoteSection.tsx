@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
-import { dataElementTypes, useProgramLabel } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type { OwnProps, NoteType } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -76,7 +76,7 @@ const NoteSectionPlain = ({
     const [isEditing, setEditing] = useState<boolean>(false);
     const [newNoteValue, setNewNoteValue] = useState<string>('');
     const { fromServerDate } = useTimeZoneConversion();
-    const note = useProgramLabel('note') ?? i18n.t('note');
+    const note = i18n.t('note');
 
     const handleChange = useCallback((value: string) => {
         setEditing(true);
