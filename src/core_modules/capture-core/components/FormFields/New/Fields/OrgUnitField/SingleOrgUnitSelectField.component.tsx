@@ -1,6 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
+import { Chip, Popover, colors } from '@dhis2/ui';
+import { DebounceField } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
@@ -30,6 +31,7 @@ type OrgUnitValue = {
 type SingleOrgUnitSelectFieldState = {
     previousOrgUnitId: string | null;
     open: boolean;
+    searchText: string;
 };
 
 type SingleOrgUnitSelectFieldProps = {
@@ -38,7 +40,6 @@ type SingleOrgUnitSelectFieldProps = {
     onSelectClick?: (orgUnit: Record<string, any>) => void;
     disabled?: boolean;
     maxTreeHeight?: number;
-    collapsed?: boolean;
 };
 
 type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
@@ -51,6 +52,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         this.state = {
             previousOrgUnitId: null,
             open: false,
+            searchText: '',
         };
         this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
     }
@@ -65,8 +67,12 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     onDeselectOrgUnit = () => {
-        this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
+        this.props.value && this.setState({ previousOrgUnitId: this.props.value.id, searchText: '' });
         this.props.onBlur(null);
+    }
+
+    handleSearchChange = (searchText: string) => {
+        this.setState({ searchText, open: true });
     }
 
     handleCollapsedSelect = (orgUnit: Record<string, any>) => {
@@ -75,7 +81,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         } else {
             this.onSelectOrgUnit(orgUnit);
         }
-        this.setState({ open: false });
+        this.setState({ open: false, searchText: '' });
     }
 
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
@@ -92,30 +98,21 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         );
     }
 
-    renderInlineOrgUnitField = () => {
-        const { classes, collapsed, ...passOnProps } = this.props;
-        return (
-            <OrgUnitField
-                onSelectClick={this.onSelectOrgUnit}
-                previousOrgUnitId={this.state.previousOrgUnitId}
-                {...passOnProps}
-            />
-        );
-    }
-
     renderCollapsedOrgUnitField = () => {
-        const { classes, collapsed, value, onBlur, onSelectClick, disabled, maxTreeHeight, ...passOnProps } = this.props;
+        const { classes, value, onBlur, onSelectClick, disabled, maxTreeHeight, ...passOnProps } = this.props;
         return (
             <React.Fragment>
-                <div ref={this.anchorRef} data-test="org-unit-selector-trigger">
-                    <Button
-                        small
+                <div
+                    ref={this.anchorRef}
+                    data-test="org-unit-selector-trigger"
+                    onFocus={() => this.setState({ open: true })}
+                >
+                    <DebounceField
+                        value={this.state.searchText}
+                        onDebounced={(event: any) => this.handleSearchChange(event.currentTarget.value)}
+                        placeholder={i18n.t('Search for an organisation unit')}
                         disabled={disabled}
-                        icon={<IconChevronDown16 />}
-                        onClick={() => this.setState(prevState => ({ open: !prevState.open }))}
-                    >
-                        {i18n.t('Choose an organisation unit')}
-                    </Button>
+                    />
                 </div>
                 {this.state.open && (
                     <Popover
@@ -128,6 +125,8 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                         <div className={classes.popoverContent}>
                             <OrgUnitField
                                 {...passOnProps}
+                                hideSearchField
+                                searchText={this.state.searchText}
                                 disabled={disabled}
                                 maxTreeHeight={maxTreeHeight ?? 350}
                                 onSelectClick={this.handleCollapsedSelect}
@@ -142,11 +141,8 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     render() {
-        const { value, collapsed } = this.props;
-        if (value) {
-            return this.renderSelectedOrgUnit(value);
-        }
-        return collapsed ? this.renderCollapsedOrgUnitField() : this.renderInlineOrgUnitField();
+        const { value } = this.props;
+        return value ? this.renderSelectedOrgUnit(value) : this.renderCollapsedOrgUnitField();
     }
 }
 export const SingleOrgUnitSelectField = withStyles(getStyles)(SingleOrgUnitSelectFieldPlain);
