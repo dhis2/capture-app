@@ -25,7 +25,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
   lint:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - name: Lint
         run: yarn linter:check
@@ -52,7 +52,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - name: TypeScript
         run: yarn tsc:check
@@ -67,7 +67,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - name: Unit tests
         run: yarn test
@@ -130,7 +130,7 @@ jobs:
           echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
           echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - name: Cypress run
         uses: cypress-io/github-action@v7
@@ -168,7 +168,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - name: Build
         run: yarn build
@@ -198,7 +198,7 @@ jobs:
         with:
           name: app-build
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - uses: dhis2/action-commit-signing@v1
         with:
