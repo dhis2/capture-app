@@ -1,16 +1,18 @@
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
+
 type CustomLabelField = {
-    field?: string,
-    pluralField?: string,
+    singular?: string,
+    plural?: string,
 };
 
 export const CUSTOM_LABEL_FIELDS = {
-    enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
-    followUp: { field: 'displayFollowUpLabel' },
-    orgUnit: { field: 'displayOrgUnitLabel' },
-    attribute: { field: 'displayTrackedEntityAttributeLabel' },
-    programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
-    event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
-    trackedEntityType: { field: 'displayName', pluralField: 'displayTrackedEntityTypesLabel' },
+    enrollment: { singular: 'displayEnrollmentLabel', plural: 'displayEnrollmentsLabel' },
+    followUp: { singular: 'displayFollowUpLabel' },
+    orgUnit: { singular: 'displayOrgUnitLabel' },
+    attribute: { plural: 'displayTrackedEntityAttributeLabel' },
+    programStage: { singular: 'displayProgramStageLabel', plural: 'displayProgramStagesLabel' },
+    event: { singular: 'displayEventLabel', plural: 'displayEventsLabel' },
+    trackedEntityType: { singular: 'displayName', plural: 'displayTrackedEntityTypesLabel' },
 } as const satisfies { [key: string]: CustomLabelField };
 
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
@@ -20,7 +22,7 @@ export type LabelOptions = { plural?: boolean };
 const allFields: Array<string> = Array.from(
     new Set(
         Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: CustomLabelField) => [term.field, term.pluralField])
+            .flatMap((term: CustomLabelField) => [term.singular, term.plural])
             .filter((field): field is string => Boolean(field)),
     ),
 );
@@ -37,9 +39,6 @@ export const extractCustomLabels = (cached: Record<string, any>): CustomLabels =
 
 type LabelSource = CustomLabels | undefined | null;
 
-const capitalizeFirstChar = (value?: string): string | undefined =>
-    (value ? value.charAt(0).toUpperCase() + value.slice(1) : value);
-
 export const resolveLabel = (
     sources: LabelSource | Array<LabelSource>,
     key: CustomLabelKey,
@@ -49,8 +48,9 @@ export const resolveLabel = (
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 
-    const field = plural && term.pluralField ? term.pluralField : term.field;
-    return capitalizeFirstChar(pick(field));
+    const field = plural && term.plural ? term.plural : term.singular;
+    const value = pick(field);
+    return value ? capitalizeFirstLetter(value) : value;
 };
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;
