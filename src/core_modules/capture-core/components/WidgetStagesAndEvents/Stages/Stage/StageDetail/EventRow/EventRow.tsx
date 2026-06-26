@@ -102,6 +102,7 @@ const EventRowPlain = ({
                                 pendingApiResponse={pendingApiResponse}
                                 teiId={teiId}
                                 programId={programId}
+                                stageId={programStage?.id}
                                 enrollmentId={enrollmentId}
                                 onDeleteEvent={onDeleteEvent}
                                 onRollbackDeleteEvent={onRollbackDeleteEvent}

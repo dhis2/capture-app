@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { relatedStageActions } from '../constants';
-import { useProgramLabel } from '../../../metaData';
 
 const ReactQueryAppNamespace = 'capture';
 
@@ -14,6 +13,7 @@ const addEventWithRelationshipMutation = {
 
 export const useAddEventWithRelationship = ({
     eventId,
+    event,
     onUpdateOrAddEnrollmentEvents,
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
@@ -21,6 +21,7 @@ export const useAddEventWithRelationship = ({
     setIsLinking,
 }: {
     eventId: string;
+    event: string;
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
@@ -29,7 +30,6 @@ export const useAddEventWithRelationship = ({
 }) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const event = useProgramLabel('event') ?? i18n.t('event');
     const { show: showSuccess } = useAlert(({ message }) => message, { success: true });
     const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
 

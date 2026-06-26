@@ -18,18 +18,35 @@ export const CUSTOM_LABEL_FIELDS = {
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
 export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
+export type CustomLabelScope = 'program' | 'programStage' | 'trackedEntityType';
 
-const allFields: Array<string> = Array.from(
-    new Set(
-        Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: CustomLabelField) => [term.singular, term.plural])
-            .filter((field): field is string => Boolean(field)),
-    ),
-);
+// Each scope lists only the label keys that its cached object can carry. Tracked entity types
+// are kept separate because their singular label is the generic `displayName`, which also exists
+// on programs and stages — extracting it for them would leak the object's own name.
+const KEYS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<CustomLabelKey>> = {
+    program: ['enrollment', 'followUp', 'orgUnit', 'attribute', 'programStage', 'event'],
+    programStage: ['programStage', 'event'],
+    trackedEntityType: ['trackedEntityType'],
+};
 
-export const extractCustomLabels = (cached: Record<string, any>): CustomLabels => {
+const fieldsForScope = (scope: CustomLabelScope): Array<string> =>
+    Array.from(
+        new Set(
+            KEYS_BY_SCOPE[scope]
+                .flatMap((key) => {
+                    const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
+                    return [term.singular, term.plural];
+                })
+                .filter((field): field is string => Boolean(field)),
+        ),
+    );
+
+export const extractCustomLabels = (
+    cached: Record<string, any>,
+    scope: CustomLabelScope,
+): CustomLabels => {
     const labels: CustomLabels = {};
-    allFields.forEach((field) => {
+    fieldsForScope(scope).forEach((field) => {
         if (cached[field]) {
             labels[field] = cached[field];
         }

@@ -64,6 +64,7 @@ export const WidgetRelatedStagesPlain = ({
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
+        event,
         onUpdateOrAddEnrollmentEvents,
         onUpdateEnrollmentEventsSuccess,
         onUpdateEnrollmentEventsError,

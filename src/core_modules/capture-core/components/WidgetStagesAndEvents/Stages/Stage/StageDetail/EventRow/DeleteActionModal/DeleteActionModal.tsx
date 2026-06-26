@@ -7,13 +7,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { ReactQueryAppNamespace } from '../../../../../../../utils/reactQueryHelpers';
-import { useProgramLabel } from '../../../../../../../metaData';
+import { useStageLabel } from '../../../../../../../metaData';
 
 type Props = {
     eventId: string;
     pendingApiResponse: boolean;
     teiId: string;
     programId: string;
+    stageId?: string;
     enrollmentId: string;
     onDeleteEvent: (eventId: string) => void;
     onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
@@ -26,11 +27,12 @@ export const DeleteActionModal = ({
     eventId,
     teiId,
     programId,
+    stageId,
     enrollmentId,
     onDeleteEvent,
     onRollbackDeleteEvent,
 }: Props) => {
-    const event = useProgramLabel('event', { programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('event');
     const { show: showError } = useAlert(
         ({ message }) => message,
         {
