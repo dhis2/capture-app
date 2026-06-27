@@ -12,6 +12,7 @@ export const CompleteModalComponent = ({
     onCompleteEnrollmentAndEvents,
 }: PlainProps) => {
     const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    const event = useStageLabel('event') ?? i18n.t('event');
     const events = useStageLabel('event', { plural: true }) ?? i18n.t('events');
 
     return (
@@ -38,10 +39,11 @@ export const CompleteModalComponent = ({
                             return (
                                 <ul key={key}>
                                     <li>
-                                        {i18n.t('{{count}} event in {{programStageName}}', {
+                                        {i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                             count,
-                                            defaultValue: '{{count}} event in {{programStageName}}',
-                                            defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                            eventLabel: count === 1 ? event : events,
+                                            defaultValue: '{{count}} {{eventLabel}} in {{programStageName}}',
+                                            defaultValue_plural: '{{count}} {{eventLabel}} in {{programStageName}}',
                                             programStageName: name,
                                             interpolation: { escapeValue: false },
                                         })}
@@ -64,10 +66,11 @@ export const CompleteModalComponent = ({
                             return (
                                 <ul key={key}>
                                     <li>
-                                        {i18n.t('{{count}} event in {{programStageName}}', {
+                                        {i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                             count,
-                                            defaultValue: '{{count}} event in {{programStageName}}',
-                                            defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                            eventLabel: count === 1 ? event : events,
+                                            defaultValue: '{{count}} {{eventLabel}} in {{programStageName}}',
+                                            defaultValue_plural: '{{count}} {{eventLabel}} in {{programStageName}}',
                                             programStageName: name,
                                             interpolation: { escapeValue: false },
                                         })}

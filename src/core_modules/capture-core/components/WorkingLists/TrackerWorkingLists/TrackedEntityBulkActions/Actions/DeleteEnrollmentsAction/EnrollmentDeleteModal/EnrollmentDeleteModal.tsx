@@ -185,10 +185,11 @@ const EnrollmentDeleteModalPlain = ({
                         onClick={deleteEnrollments}
                         disabled={isDeletingEnrollments || numberOfEnrollmentsToDelete === 0}
                     >
-                        {i18n.t('Delete {{count}} enrollment', {
+                        {i18n.t('Delete {{count}} {{enrollmentLabel}}', {
                             count: numberOfEnrollmentsToDelete,
-                            defaultValue: 'Delete {{count}} enrollment',
-                            defaultValue_plural: 'Delete {{count}} enrollments',
+                            enrollmentLabel: numberOfEnrollmentsToDelete === 1 ? enrollment : enrollments,
+                            defaultValue: 'Delete {{count}} {{enrollmentLabel}}',
+                            defaultValue_plural: 'Delete {{count}} {{enrollmentLabel}}',
                         })}
                     </Button>
                 </ButtonStrip>

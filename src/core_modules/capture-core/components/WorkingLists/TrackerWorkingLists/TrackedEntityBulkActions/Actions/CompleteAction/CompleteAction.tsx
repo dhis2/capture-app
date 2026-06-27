@@ -60,7 +60,9 @@ const CompleteActionPlain = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
+    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
     const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+    const enrollmentLabelByCount = (n: number) => (n === 1 ? enrollment : enrollments);
     const events = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('events');
     const {
         completeEnrollments,
@@ -152,21 +154,25 @@ const CompleteActionPlain = ({
 
         return (
             <div className={classes.container}>
-                {i18n.t('This action will complete {{count}} active enrollment in your selection.',
+                {i18n.t('This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
                     {
                         count: enrollmentCounts.active,
-                        defaultValue: 'This action will complete {{count}} active enrollment in your selection.',
-                        defaultValue_plural: 'This action will complete {{count}} active enrollments in your selection.',
+                        enrollmentLabel: enrollmentLabelByCount(enrollmentCounts.active),
+                        defaultValue: 'This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
+                        // eslint-disable-next-line max-len
+                        defaultValue_plural: 'This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
                     })
                 }
 
                 {' '}
 
                 {enrollmentCounts.completed > 0 &&
-                    i18n.t('{{count}} enrollment already marked as completed will not be changed.', {
+                    i18n.t('{{count}} {{enrollmentLabel}} already marked as completed will not be changed.', {
                         count: enrollmentCounts.completed,
-                        defaultValue: '{{count}} enrollment already marked as completed will not be changed.',
-                        defaultValue_plural: '{{count}} enrollments already marked as completed will not be changed.',
+                        enrollmentLabel: enrollmentLabelByCount(enrollmentCounts.completed),
+                        defaultValue: '{{count}} {{enrollmentLabel}} already marked as completed will not be changed.',
+                        // eslint-disable-next-line max-len
+                        defaultValue_plural: '{{count}} {{enrollmentLabel}} already marked as completed will not be changed.',
                     })
                 }
 
@@ -229,10 +235,11 @@ const CompleteActionPlain = ({
                                         loading={isCompleting}
                                         dataTest={'bulk-complete-enrollments-confirm-button'}
                                     >
-                                        {i18n.t('Complete {{count}} enrollment', {
+                                        {i18n.t('Complete {{count}} {{enrollmentLabel}}', {
                                             count: enrollmentCounts.active,
-                                            defaultValue: 'Complete {{count}} enrollment',
-                                            defaultValue_plural: 'Complete {{count}} enrollments',
+                                            enrollmentLabel: enrollmentLabelByCount(enrollmentCounts.active),
+                                            defaultValue: 'Complete {{count}} {{enrollmentLabel}}',
+                                            defaultValue_plural: 'Complete {{count}} {{enrollmentLabel}}',
                                         })}
                                     </Button>
                                 </ConditionalTooltip>
