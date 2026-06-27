@@ -240,7 +240,6 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                         disabled={disabled}
                         placeholder={open ? i18n.t('Search for an organisation unit') : undefined}
                         aria-haspopup="tree"
-                        aria-expanded={open}
                         aria-controls={open ? this.popoverId : undefined}
                         data-test="org-unit-selector-trigger"
                     />
