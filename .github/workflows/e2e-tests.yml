@@ -119,7 +119,7 @@ jobs:
                 echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
                 echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
 
-            - uses: ./.github/actions/safe-yarn-install-using-cache
+            - uses: dhis2/action-safe-yarn-install-with-cache@v1
             
             - name: Cypress run
               uses: cypress-io/github-action@v7
