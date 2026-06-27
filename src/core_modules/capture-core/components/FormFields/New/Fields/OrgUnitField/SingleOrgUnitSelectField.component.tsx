@@ -162,7 +162,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         if (this.props.disabled) {
             return;
         }
-        if (event.key === 'Escape' || event.key === 'Tab') {
+        if (this.state.open && (event.key === 'Escape' || event.key === 'Tab')) {
             this.closeMenu();
         } else if (!this.state.open && (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown')) {
             event.preventDefault();
