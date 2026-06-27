@@ -55,6 +55,7 @@ const getStyles = () => ({
         fontSize: 14,
         lineHeight: '16px',
         color: colors.grey900,
+        cursor: 'inherit',
         '&::placeholder': {
             color: colors.grey600,
             opacity: 1,
@@ -161,7 +162,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         this.debouncedSetSearchText(inputValue);
     }
 
-    handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (this.props.disabled) {
             return;
         }
@@ -226,25 +227,23 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
             <React.Fragment>
                 <div
                     ref={this.anchorRef}
-                    role="combobox"
-                    aria-haspopup="tree"
-                    aria-expanded={open}
-                    aria-controls={open ? this.popoverId : undefined}
-                    tabIndex={disabled || open ? -1 : 0}
-                    data-test="org-unit-selector-trigger"
                     className={triggerClassName}
-                    onClick={this.openMenu}
-                    onKeyDown={this.handleKeyDown}
                 >
-                    {open && (
-                        <input
-                            ref={this.searchInputRef}
-                            className={classes.searchInput}
-                            value={inputValue}
-                            onChange={this.handleInputChange}
-                            placeholder={i18n.t('Search for an organisation unit')}
-                        />
-                    )}
+                    <input
+                        ref={this.searchInputRef}
+                        className={classes.searchInput}
+                        value={open ? inputValue : ''}
+                        onChange={this.handleInputChange}
+                        onClick={this.openMenu}
+                        onKeyDown={this.handleKeyDown}
+                        readOnly={!open}
+                        disabled={disabled}
+                        placeholder={open ? i18n.t('Search for an organisation unit') : undefined}
+                        aria-haspopup="tree"
+                        aria-expanded={open}
+                        aria-controls={open ? this.popoverId : undefined}
+                        data-test="org-unit-selector-trigger"
+                    />
                     <span className={classes.chevron}>
                         <IconChevronDown16 />
                     </span>
