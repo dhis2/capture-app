@@ -1,6 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { debounce } from 'lodash';
+import { v4 as uuid } from 'uuid';
 import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitField } from './OrgUnitField.component';
@@ -95,6 +96,7 @@ type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
 class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnitSelectFieldState> {
     anchorRef: React.RefObject<HTMLDivElement>;
     searchInputRef: React.RefObject<HTMLInputElement>;
+    popoverId: string;
     debouncedSetSearchText: ((searchText: string) => void) & { cancel: () => void };
 
     constructor(props: Props) {
@@ -107,6 +109,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         };
         this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
         this.searchInputRef = React.createRef() as React.RefObject<HTMLInputElement>;
+        this.popoverId = `org-unit-selector-popover-${uuid()}`;
         this.debouncedSetSearchText = debounce((searchText: string) => {
             this.setState({ searchText });
         }, 300);
@@ -121,7 +124,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
             return;
         }
         this.setState({ open: true }, () => {
-            this.searchInputRef.current && this.searchInputRef.current.focus();
+            this.searchInputRef.current?.focus();
         });
     }
 
@@ -184,8 +187,34 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         );
     }
 
-    renderCollapsedOrgUnitField = () => {
+    renderPopover = () => {
         const { classes, value, onBlur, onSelectClick, disabled, maxTreeHeight, ...passOnProps } = this.props;
+        return (
+            <Popover
+                reference={this.anchorRef.current || undefined}
+                arrow={false}
+                placement="bottom-start"
+                onClickOutside={this.closeMenu}
+                maxWidth={400}
+            >
+                <div id={this.popoverId} className={classes.popoverContent}>
+                    <OrgUnitField
+                        {...passOnProps}
+                        hideSearchField
+                        searchText={this.state.searchText}
+                        disabled={disabled}
+                        maxTreeHeight={maxTreeHeight ?? 350}
+                        onSelectClick={this.handleSelect}
+                        onBlur={() => undefined}
+                        previousOrgUnitId={this.state.previousOrgUnitId}
+                    />
+                </div>
+            </Popover>
+        );
+    }
+
+    renderCollapsedOrgUnitField = () => {
+        const { classes, disabled } = this.props;
         const { open, inputValue } = this.state;
         const triggerClassName = [
             classes.trigger,
@@ -200,6 +229,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                     role="combobox"
                     aria-haspopup="tree"
                     aria-expanded={open}
+                    aria-controls={open ? this.popoverId : undefined}
                     tabIndex={disabled || open ? -1 : 0}
                     data-test="org-unit-selector-trigger"
                     className={triggerClassName}
@@ -219,28 +249,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                         <IconChevronDown16 />
                     </span>
                 </div>
-                {open && !disabled && (
-                    <Popover
-                        reference={this.anchorRef.current || undefined}
-                        arrow={false}
-                        placement="bottom-start"
-                        onClickOutside={this.closeMenu}
-                        maxWidth={400}
-                    >
-                        <div className={classes.popoverContent}>
-                            <OrgUnitField
-                                {...passOnProps}
-                                hideSearchField
-                                searchText={this.state.searchText}
-                                disabled={disabled}
-                                maxTreeHeight={maxTreeHeight ?? 350}
-                                onSelectClick={this.handleSelect}
-                                onBlur={() => undefined}
-                                previousOrgUnitId={this.state.previousOrgUnitId}
-                            />
-                        </div>
-                    </Popover>
-                )}
+                {open && !disabled && this.renderPopover()}
             </React.Fragment>
         );
     }
