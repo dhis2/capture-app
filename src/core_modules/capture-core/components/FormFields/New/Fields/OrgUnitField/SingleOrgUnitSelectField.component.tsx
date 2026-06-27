@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Chip, Popover, colors } from '@dhis2/ui';
-import { DebounceField } from 'capture-ui';
+import { debounce } from 'lodash';
+import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
@@ -17,6 +17,53 @@ const getStyles = () => ({
             backgroundColor: `${colors.grey200} !important`,
         },
     },
+    trigger: {
+        display: 'flex',
+        alignItems: 'center',
+        boxSizing: 'border-box' as const,
+        minHeight: 40,
+        padding: '6px 12px',
+        border: `1px solid ${colors.grey500}`,
+        borderRadius: 3,
+        backgroundColor: 'white',
+        boxShadow: 'inset 0 0 1px 0 rgba(48, 54, 60, 0.1)',
+        cursor: 'pointer',
+        '&:focus': {
+            outline: 'none',
+            borderColor: colors.blue600,
+            boxShadow: `inset 0 0 0 2px ${colors.blue600}`,
+        },
+    },
+    triggerOpen: {
+        borderColor: colors.blue600,
+        boxShadow: `inset 0 0 0 2px ${colors.blue600}`,
+    },
+    triggerDisabled: {
+        backgroundColor: colors.grey100,
+        borderColor: colors.grey500,
+        color: colors.grey600,
+        cursor: 'not-allowed',
+    },
+    searchInput: {
+        flexGrow: 1,
+        minWidth: 0,
+        border: 'none',
+        outline: 'none',
+        background: 'transparent',
+        padding: 0,
+        fontSize: 14,
+        lineHeight: '16px',
+        color: colors.grey900,
+        '&::placeholder': {
+            color: colors.grey600,
+            opacity: 1,
+        },
+    },
+    chevron: {
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: 'auto',
+    },
     popoverContent: {
         width: 400,
     },
@@ -31,6 +78,7 @@ type OrgUnitValue = {
 type SingleOrgUnitSelectFieldState = {
     previousOrgUnitId: string | null;
     open: boolean;
+    inputValue: string;
     searchText: string;
 };
 
@@ -46,15 +94,40 @@ type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
 
 class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnitSelectFieldState> {
     anchorRef: React.RefObject<HTMLDivElement>;
+    searchInputRef: React.RefObject<HTMLInputElement>;
+    debouncedSetSearchText: ((searchText: string) => void) & { cancel: () => void };
 
     constructor(props: Props) {
         super(props);
         this.state = {
             previousOrgUnitId: null,
             open: false,
+            inputValue: '',
             searchText: '',
         };
         this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
+        this.searchInputRef = React.createRef() as React.RefObject<HTMLInputElement>;
+        this.debouncedSetSearchText = debounce((searchText: string) => {
+            this.setState({ searchText });
+        }, 300);
+    }
+
+    componentWillUnmount() {
+        this.debouncedSetSearchText.cancel();
+    }
+
+    openMenu = () => {
+        if (this.props.disabled) {
+            return;
+        }
+        this.setState({ open: true }, () => {
+            this.searchInputRef.current && this.searchInputRef.current.focus();
+        });
+    }
+
+    closeMenu = () => {
+        this.debouncedSetSearchText.cancel();
+        this.setState({ open: false, inputValue: '', searchText: '' });
     }
 
     onSelectOrgUnit = (orgUnit: Record<string, any>) => {
@@ -63,25 +136,38 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
             name: orgUnit.displayName,
             path: orgUnit.path,
         });
-        this.setState({ open: false });
     }
 
     onDeselectOrgUnit = () => {
-        this.props.value && this.setState({ previousOrgUnitId: this.props.value.id, searchText: '' });
+        this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
         this.props.onBlur(null);
     }
 
-    handleSearchChange = (searchText: string) => {
-        this.setState({ searchText, open: true });
-    }
-
-    handleCollapsedSelect = (orgUnit: Record<string, any>) => {
+    handleSelect = (orgUnit: Record<string, any>) => {
         if (this.props.onSelectClick) {
             this.props.onSelectClick(orgUnit);
         } else {
             this.onSelectOrgUnit(orgUnit);
         }
-        this.setState({ open: false, searchText: '' });
+        this.closeMenu();
+    }
+
+    handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = event.currentTarget.value;
+        this.setState({ inputValue });
+        this.debouncedSetSearchText(inputValue);
+    }
+
+    handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (this.props.disabled) {
+            return;
+        }
+        if (event.key === 'Escape' || event.key === 'Tab') {
+            this.closeMenu();
+        } else if (!this.state.open && (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown')) {
+            event.preventDefault();
+            this.openMenu();
+        }
     }
 
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
@@ -100,26 +186,45 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
 
     renderCollapsedOrgUnitField = () => {
         const { classes, value, onBlur, onSelectClick, disabled, maxTreeHeight, ...passOnProps } = this.props;
+        const { open, inputValue } = this.state;
+        const triggerClassName = [
+            classes.trigger,
+            open && classes.triggerOpen,
+            disabled && classes.triggerDisabled,
+        ].filter(Boolean).join(' ');
+
         return (
             <React.Fragment>
                 <div
                     ref={this.anchorRef}
+                    role="combobox"
+                    aria-haspopup="tree"
+                    aria-expanded={open}
+                    tabIndex={disabled || open ? -1 : 0}
                     data-test="org-unit-selector-trigger"
-                    onFocus={() => this.setState({ open: true })}
+                    className={triggerClassName}
+                    onClick={this.openMenu}
+                    onKeyDown={this.handleKeyDown}
                 >
-                    <DebounceField
-                        value={this.state.searchText}
-                        onDebounced={(event: any) => this.handleSearchChange(event.currentTarget.value)}
-                        placeholder={i18n.t('Search for an organisation unit')}
-                        disabled={disabled}
-                    />
+                    {open && (
+                        <input
+                            ref={this.searchInputRef}
+                            className={classes.searchInput}
+                            value={inputValue}
+                            onChange={this.handleInputChange}
+                            placeholder={i18n.t('Search for an organisation unit')}
+                        />
+                    )}
+                    <span className={classes.chevron}>
+                        <IconChevronDown16 />
+                    </span>
                 </div>
-                {this.state.open && (
+                {open && !disabled && (
                     <Popover
                         reference={this.anchorRef.current || undefined}
                         arrow={false}
                         placement="bottom-start"
-                        onClickOutside={() => this.setState({ open: false })}
+                        onClickOutside={this.closeMenu}
                         maxWidth={400}
                     >
                         <div className={classes.popoverContent}>
@@ -129,7 +234,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                                 searchText={this.state.searchText}
                                 disabled={disabled}
                                 maxTreeHeight={maxTreeHeight ?? 350}
-                                onSelectClick={this.handleCollapsedSelect}
+                                onSelectClick={this.handleSelect}
                                 onBlur={() => undefined}
                                 previousOrgUnitId={this.state.previousOrgUnitId}
                             />
