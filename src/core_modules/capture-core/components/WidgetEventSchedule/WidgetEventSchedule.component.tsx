@@ -18,7 +18,6 @@ import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 const styles = (theme: any) => ({
     wrapper: {
         paddingInlineStart: spacersNum.dp16,
-        minWidth: '300px',
     },
     evenNumbersRecords: {
         backgroundColor: theme.palette.grey.lightest,

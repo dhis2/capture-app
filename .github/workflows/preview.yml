@@ -14,7 +14,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: ./.github/actions/safe-yarn-install-using-cache
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1
 
       - name: Build
         run: yarn build:standalone
