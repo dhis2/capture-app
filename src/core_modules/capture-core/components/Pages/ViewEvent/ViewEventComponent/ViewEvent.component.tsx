@@ -6,17 +6,17 @@ import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import { dataElementTypes, type ProgramStage } from '../../../../metaData';
+import { convertFormToClient } from '../../../../converters';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { ViewEventReadOnlyBadge } from '../ViewEventReadOnlyBadge';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
-import { useHideWidgetByRuleLocations, useProgramExpiryForUser } from '../../../../hooks';
-import { useAuthorities } from '../../../../utils/authority/useAuthorities';
-import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
-import { convertFormToClient } from '../../../../converters';
-import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
+import {
+    useHideWidgetByRuleLocations,
+    useEventEditPermissions,
+} from '../../../../hooks';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -93,18 +93,22 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules);
 
-    const expiryPeriod = useProgramExpiryForUser(programId);
     const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.dataEntryValues?.occurredAt);
     const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const occurredAtClient = convertFormToClient(occurredAt, dataElementTypes.DATE) as string;
-    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
-    const canEditCompletedEvent = !(
-        programStage?.blockEntryForm
-        && !canUncompleteEvent
-        && eventStatus === eventStatuses.COMPLETED
-    );
-    const readOnly = !eventAccess.write || !isEventWithinValidPeriod || !canEditCompletedEvent;
+    const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
+
+    const {
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
+        readOnly,
+    } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus,
+        occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: completedAt,
+    });
     const showEditButton = !isEditEventPage && !readOnly;
 
     return (
@@ -121,6 +125,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     eventAccess={eventAccess}
                     isEventWithinValidPeriod={isEventWithinValidPeriod}
                     canEditCompletedEvent={canEditCompletedEvent}
+                    isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
                 />
             </div>
             <div className={classes.contentContainer}>
