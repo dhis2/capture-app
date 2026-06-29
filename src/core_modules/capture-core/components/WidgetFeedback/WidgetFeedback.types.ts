@@ -15,7 +15,7 @@ export type FilteredFeedbackKeyValue = {
     legendSetId?: string;
 }
 
-export type FeedbackWidgetData = string | FilteredFeedbackText | FilteredFeedbackKeyValue;
+export type FeedbackWidgetData = FilteredFeedbackText | FilteredFeedbackKeyValue;
 
 export type FeedbackInputProps = {
     widgetEffects?: Record<string, unknown>;

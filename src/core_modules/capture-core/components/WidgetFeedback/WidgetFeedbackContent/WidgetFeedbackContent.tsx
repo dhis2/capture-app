@@ -75,30 +75,19 @@ const WidgetFeedbackContentComponent = ({ feedback, feedbackEmptyText, classes }
         );
     };
 
-    const renderString = (item: string, index: number) => (
-        <li
-            key={index}
-            className={classes.listItem}
-        >
-            {item}
-        </li>
-    );
-
     return (
         <div
             data-test="widget-content"
             className={classes.container}
         >
             <ul className={classes.unorderedList}>
-                {feedback.map((rule: FeedbackWidgetData, index: number) => {
+                {feedback.map((rule: FeedbackWidgetData) => {
                     if (typeof rule === 'object') {
                         if ('key' in rule || 'value' in rule) {
                             return renderKeyValue(rule as FilteredFeedbackKeyValue);
                         } else if ('message' in rule) {
                             return renderTextObject(rule as FilteredFeedbackText);
                         }
-                    } else if (typeof rule === 'string') {
-                        return renderString(rule, index);
                     }
                     return null;
                 })}

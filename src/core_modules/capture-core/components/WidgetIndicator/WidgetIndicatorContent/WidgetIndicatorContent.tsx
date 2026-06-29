@@ -64,15 +64,6 @@ const WidgetIndicatorContentComponent = ({ indicators, indicatorEmptyText, class
         <div className={classes.legendBullet} style={{ backgroundColor: color }} />
     );
 
-    const renderString = (indicator: string, index: number, isLastItem: boolean) => (
-        <div
-            key={index}
-            className={cx(classes.indicatorRow, { isLastItem })}
-        >
-            <div>{indicator}</div>
-        </div>
-    );
-
     const renderTextObject = (indicator: FilteredIndicatorText, isLastItem: boolean) => (
         <div
             key={indicator.id}
@@ -109,8 +100,6 @@ const WidgetIndicatorContentComponent = ({ indicators, indicatorEmptyText, class
                     } else if ('message' in action) {
                         return renderTextObject(action as FilteredIndicatorText, isLast);
                     }
-                } else if (typeof action === 'string') {
-                    return renderString(action, index, isLast);
                 }
                 return null;
             }) }
