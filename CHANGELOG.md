@@ -1,3 +1,10 @@
+## [106.5.2](https://github.com/dhis2/capture-app/compare/v106.5.1...v106.5.2) (2026-06-29)
+
+
+### Bug Fixes
+
+* [DHIS2-21669] omit inaccessible data elements in enrollment dashboard ([#4622](https://github.com/dhis2/capture-app/issues/4622)) ([6bdd3eb](https://github.com/dhis2/capture-app/commit/6bdd3ebafbab17262119383a0b1322e734d87155))
+
 ## [106.5.1](https://github.com/dhis2/capture-app/compare/v106.5.0...v106.5.1) (2026-06-25)
 
 
