@@ -58,7 +58,7 @@ const WidgetIndicatorContentComponent = ({ indicators, indicatorEmptyText, class
                 <p className={classes.noIndicatorText}>{indicatorEmptyText}</p>
             </div>);
     }
-    const sortedWidgetData = indicators.sort(sortIndicatorsFn);
+    const sortedWidgetData = [...indicators].sort(sortIndicatorsFn);
 
     const renderLegend = (color: string) => (
         <div className={classes.legendBullet} style={{ backgroundColor: color }} />

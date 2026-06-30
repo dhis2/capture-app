@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 import type { FilteredFeedbackKeyValue, FeedbackProps } from '../WidgetFeedback.types';
@@ -33,10 +33,16 @@ export const useLegendSetsById = ({ feedback }: { feedback: FeedbackProps['feedb
         [feedback],
     );
 
-    const { data: legendSetData } = useDataQuery(legendSetQuery, {
+    const { data: legendSetData, refetch } = useDataQuery(legendSetQuery, {
         variables: { ids: legendSetIds.join(',') },
-        lazy: legendSetIds.length === 0,
+        lazy: true,
     });
+
+    useEffect(() => {
+        if (legendSetIds.length > 0) {
+            refetch({ ids: legendSetIds.join(',') });
+        }
+    }, [legendSetIds, refetch]);
 
     const legendSetsById = useMemo<Record<string, Legend[]>>(() => {
         const map: Record<string, Legend[]> = {};
