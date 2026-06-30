@@ -28,7 +28,7 @@ const getStyles = () => ({
         borderRadius: 3,
         backgroundColor: 'white',
         boxShadow: 'inset 0 0 1px 0 rgba(48, 54, 60, 0.1)',
-        cursor: 'pointer',
+        color: colors.grey900,
         '&:focus': {
             outline: 'none',
             borderColor: colors.blue600,
@@ -54,17 +54,17 @@ const getStyles = () => ({
         padding: 0,
         fontSize: 14,
         lineHeight: '16px',
-        color: colors.grey900,
+        color: 'inherit',
         cursor: 'inherit',
-        '&::placeholder': {
-            color: colors.grey600,
-            opacity: 1,
-        },
     },
     chevron: {
         display: 'flex',
         alignItems: 'center',
         marginLeft: 'auto',
+        padding: 0,
+        border: 0,
+        background: 'none',
+        cursor: 'inherit',
     },
     popoverContent: {
         width: 400,
@@ -243,9 +243,16 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                         aria-controls={open ? this.popoverId : undefined}
                         data-test="org-unit-selector-trigger"
                     />
-                    <span className={classes.chevron}>
+                    <button
+                        type="button"
+                        className={classes.chevron}
+                        onClick={this.openMenu}
+                        disabled={disabled}
+                        tabIndex={-1}
+                        aria-hidden="true"
+                    >
                         <IconChevronDown16 />
-                    </span>
+                    </button>
                 </div>
                 {open && !disabled && this.renderPopover()}
             </React.Fragment>
