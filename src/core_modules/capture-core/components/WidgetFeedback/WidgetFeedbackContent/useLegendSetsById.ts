@@ -18,7 +18,7 @@ const legendSetQuery = {
 };
 
 export const useLegendSetsById = ({ feedback }: { feedback: FeedbackProps['feedback'] }) => {
-    const legendSetIds = useMemo(
+    const legendSetIdsKey = useMemo(
         () => [
             ...new Set(
                 (feedback ?? [])
@@ -29,20 +29,20 @@ export const useLegendSetsById = ({ feedback }: { feedback: FeedbackProps['feedb
                     .map(rule => rule.legendSetId)
                     .filter((id): id is string => !!id),
             ),
-        ],
+        ].join(','),
         [feedback],
     );
 
     const { data: legendSetData, refetch } = useDataQuery(legendSetQuery, {
-        variables: { ids: legendSetIds.join(',') },
+        variables: { ids: legendSetIdsKey },
         lazy: true,
     });
 
     useEffect(() => {
-        if (legendSetIds.length > 0) {
-            refetch({ ids: legendSetIds.join(',') });
+        if (legendSetIdsKey) {
+            refetch({ ids: legendSetIdsKey });
         }
-    }, [legendSetIds, refetch]);
+    }, [legendSetIdsKey, refetch]);
 
     const legendSetsById = useMemo<Record<string, Legend[]>>(() => {
         const map: Record<string, Legend[]> = {};
