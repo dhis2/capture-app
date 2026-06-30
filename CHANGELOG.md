@@ -1,3 +1,10 @@
+## [106.5.3](https://github.com/dhis2/capture-app/compare/v106.5.2...v106.5.3) (2026-06-30)
+
+
+### Bug Fixes
+
+* [DHIS2-21544] Fix stale optimistic enrollment note state after failed save ([#4599](https://github.com/dhis2/capture-app/issues/4599)) ([b4acfad](https://github.com/dhis2/capture-app/commit/b4acfad34b0817692ffa22adfecd5bac1aca3cd3))
+
 ## [106.5.2](https://github.com/dhis2/capture-app/compare/v106.5.1...v106.5.2) (2026-06-29)
 
 
