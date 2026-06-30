@@ -29,7 +29,7 @@ const getStyles = () => ({
         backgroundColor: 'white',
         boxShadow: 'inset 0 0 1px 0 rgba(48, 54, 60, 0.1)',
         color: colors.grey900,
-        '&:focus': {
+        '&:focus-within': {
             outline: 'none',
             borderColor: colors.blue600,
             boxShadow: `inset 0 0 0 2px ${colors.blue600}`,
@@ -41,7 +41,6 @@ const getStyles = () => ({
     },
     triggerDisabled: {
         backgroundColor: colors.grey100,
-        borderColor: colors.grey500,
         color: colors.grey600,
         cursor: 'not-allowed',
     },
