@@ -521,8 +521,9 @@ When('you set the date filter', () => {
 When('you set the organisation unit filter', () => {
     cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Place of Infection').click());
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.get('input[placeholder="Search"]').type('Ngelehun');
+    cy.get('[data-test="org-unit-selector-trigger"]').click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Ngelehun', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
         cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
         cy.contains('Ngelehun').click();
     });
