@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
+import { useStageLabel } from '../../../../metaData';
 
 type Template = {
     id: string;
@@ -25,6 +26,7 @@ export const useWorkingListLabel = ({ programId }: Props) => {
     const selectedTemplete: Template | undefined = templates?.find(({ id }) => id === selectedTemplateId);
     const isDefaultTemplate: boolean | undefined = selectedTemplete?.isDefault;
     const isSameProgram: boolean = workingListProgramId === programId;
+    const event = useStageLabel('event', { programId }) ?? i18n.t('Event');
 
     const computedLabel: string = useMemo(() => {
         if (loadingTemplates) return i18n.t('Loading...');
@@ -33,8 +35,8 @@ export const useWorkingListLabel = ({ programId }: Props) => {
             return selectedTemplete.name;
         }
 
-        return i18n.t('Event list');
-    }, [isDefaultTemplate, isSameProgram, loadingTemplates, selectedTemplete]);
+        return i18n.t('{{event}} list', { event });
+    }, [isDefaultTemplate, isSameProgram, loadingTemplates, selectedTemplete, event]);
 
     return {
         label: computedLabel,

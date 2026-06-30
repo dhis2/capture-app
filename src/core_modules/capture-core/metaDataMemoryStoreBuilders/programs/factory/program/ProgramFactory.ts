@@ -188,7 +188,7 @@ export class ProgramFactory {
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;
         program.useFirstStageDuringRegistration = cachedProgram.useFirstStageDuringRegistration;
-        program.customLabels = extractCustomLabels(cachedProgram);
+        program.customLabels = extractCustomLabels(cachedProgram, 'program');
 
         return program;
     }

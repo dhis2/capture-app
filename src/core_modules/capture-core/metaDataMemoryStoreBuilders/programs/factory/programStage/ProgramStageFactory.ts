@@ -248,7 +248,7 @@ export class ProgramStageFactory {
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);
             });
             _stage.icon = buildIcon(cachedProgramStage.style);
-            _stage.customLabels = extractCustomLabels(cachedProgramStage);
+            _stage.customLabels = extractCustomLabels(cachedProgramStage, 'programStage');
         });
 
         const stageForm = stage.stageForm;

@@ -3,7 +3,7 @@ import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
-import { programTypes, TrackerProgram } from '../../../../../metaData';
+import { programTypes, TrackerProgram, useProgramLabel } from '../../../../../metaData';
 import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
 
 const styles: Readonly<any> = {
@@ -51,6 +51,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
     classes,
 }: Props) => {
     const { program, programType } = useProgramInfo(programId);
+    const orgUnit = useProgramLabel('orgUnit', { programId }) ?? i18n.t('organisation unit');
     const isTracker = programType === programTypes.TRACKER_PROGRAM;
 
     const trackedEntityName = program instanceof TrackerProgram
@@ -66,7 +67,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
         >
             <IncompleteSelectionsMessage>
                 <div className={classes.incompleteMessageContent}>
-                    <span>{i18n.t('Please select an organisation unit')}</span>
+                    <span>{i18n.t('Please select {{orgUnit}}', { orgUnit })}</span>
                     <div className={classes.actions}>
                         {showWorkingListLink && (
                             <button
@@ -74,7 +75,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
                                 onClick={onNavigateToWorkingList}
                                 data-test={'go-to-working-list-button'}
                             >
-                                {i18n.t('See working list without organisation unit')}
+                                {i18n.t('See working list without {{orgUnit}}', { orgUnit })}
                             </button>
                         )}
                         {showSearchLink && (

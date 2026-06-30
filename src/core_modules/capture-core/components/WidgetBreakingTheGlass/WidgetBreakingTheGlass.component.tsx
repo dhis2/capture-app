@@ -9,6 +9,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
+import { useProgramLabel } from '../../metaData';
 import { Widget } from '../Widget';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
@@ -34,6 +35,7 @@ const WidgetBreakingTheGlassPlain = ({
     onCancel,
     classes,
 }: Props) => {
+    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('enrollments');
     const [reason, setReason] = useState('');
     const reasonChangeHandler = useCallback(({ value }: any) => {
         setReason(value);
@@ -49,11 +51,17 @@ const WidgetBreakingTheGlassPlain = ({
             >
                 <div className={classes.wrapper}>
                     <div className={classes.title}>
-                        {i18n.t('Check for enrollments')}
+                        {i18n.t('Check for {{enrollments}}', {
+                            enrollments,
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
                     <br />
                     <NoticeBox title={noticeBoxTitle} warning>
-                        {i18n.t('You must provide a reason to check for enrollments in this protected program.')}
+                        {i18n.t('You must provide a reason to check for {{enrollments}} in this protected program.', {
+                            enrollments,
+                            interpolation: { escapeValue: false },
+                        })}
                         {' '}
                         {i18n.t('All activity will be logged.')}
                     </NoticeBox>
@@ -70,7 +78,10 @@ const WidgetBreakingTheGlassPlain = ({
                     <br />
                     <ButtonStrip>
                         <Button onClick={() => onBreakingTheGlass(reason)} disabled={disabled} primary>
-                            {i18n.t('Check for enrollments')}
+                            {i18n.t('Check for {{enrollments}}', {
+                                enrollments,
+                                interpolation: { escapeValue: false },
+                            })}
                         </Button>
                         <Button secondary onClick={onCancel}>
                             {i18n.t('Cancel')}

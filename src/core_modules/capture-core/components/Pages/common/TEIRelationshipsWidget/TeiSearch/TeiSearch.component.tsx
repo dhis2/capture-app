@@ -1,6 +1,7 @@
 import React, { type ComponentType, useCallback, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { useProgramLabel } from '../../../../../metaData';
 import { UnsupportedAttributesNotification } from '../../../../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -26,6 +27,8 @@ const getStyles = (theme: any) => ({
 
 const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const [programSectionOpen, setProgramSectionOpen] = useState(true);
+    const attributes = useProgramLabel('attribute', { programId: props.selectedProgramId || undefined, plural: true })
+        ?? i18n.t('attributes');
 
     const getFormId = useCallback((searchGroupId) => {
         const contextId = props.selectedProgramId || props.selectedTrackedEntityTypeId || '';
@@ -99,7 +102,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
         const isUnique = sg.unique;
         const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
-            i18n.t('Search by attributes');
+            i18n.t('Search by {{attributes}}', { attributes });
         const collapsed = props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (

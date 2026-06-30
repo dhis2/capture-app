@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-11T17:54:31.024Z\n"
-"PO-Revision-Date: 2026-06-11T17:54:31.025Z\n"
+"POT-Creation-Date: 2026-06-27T09:38:35.034Z\n"
+"PO-Revision-Date: 2026-06-27T09:38:35.035Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -42,38 +42,53 @@ msgstr "Bulk data entry"
 msgid "Program overview"
 msgstr "Program overview"
 
-msgid "Active enrollments"
-msgstr "Active enrollments"
+msgid "enrollments"
+msgstr "enrollments"
 
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
+msgid "Active {{enrollments}}"
+msgstr "Active {{enrollments}}"
 
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
+msgid "Completed {{enrollments}}"
+msgstr "Completed {{enrollments}}"
+
+msgid "Cancelled {{enrollments}}"
+msgstr "Cancelled {{enrollments}}"
 
 msgid "Search"
 msgstr "Search"
 
-msgid "Enrollment dashboard"
-msgstr "Enrollment dashboard"
+msgid "Enrollment"
+msgstr "Enrollment"
 
-msgid "View event"
-msgstr "View event"
+msgid "event"
+msgstr "event"
 
-msgid "Edit event"
-msgstr "Edit event"
+msgid "{{enrollment}} dashboard"
+msgstr "{{enrollment}} dashboard"
 
-msgid "New event"
-msgstr "New event"
+msgid "View {{event}}"
+msgstr "View {{event}}"
+
+msgid "Edit {{event}}"
+msgstr "Edit {{event}}"
+
+msgid "New {{event}}"
+msgstr "New {{event}}"
 
 msgid "Loading..."
 msgstr "Loading..."
 
-msgid "Event list"
-msgstr "Event list"
+msgid "Event"
+msgstr "Event"
+
+msgid "{{event}} list"
+msgstr "{{event}} list"
 
 msgid "More"
 msgstr "More"
+
+msgid "enrollment"
+msgstr "enrollment"
 
 msgid "View {{programName}} dashboard"
 msgstr "View {{programName}} dashboard"
@@ -81,8 +96,8 @@ msgstr "View {{programName}} dashboard"
 msgid "View dashboard"
 msgstr "View dashboard"
 
-msgid "View active enrollment"
-msgstr "View active enrollment"
+msgid "View active {{enrollment}}"
+msgstr "View active {{enrollment}}"
 
 msgid "Re-enroll in {{programName}}"
 msgstr "Re-enroll in {{programName}}"
@@ -90,17 +105,17 @@ msgstr "Re-enroll in {{programName}}"
 msgid "Re-enroll"
 msgstr "Re-enroll"
 
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
 msgid "Enrolled"
 msgstr "Enrolled"
 
 msgid "Previously enrolled"
 msgstr "Previously enrolled"
 
-msgid "Organisation unit"
-msgstr "Organisation unit"
-
-msgid "Date of enrollment"
-msgstr "Date of enrollment"
+msgid "Date of {{enrollment}}"
+msgstr "Date of {{enrollment}}"
 
 msgid "Last updated"
 msgstr "Last updated"
@@ -140,9 +155,6 @@ msgstr "Area"
 
 msgid "Coordinate"
 msgstr "Coordinate"
-
-msgid "Enrollment"
-msgstr "Enrollment"
 
 msgid "Complete event"
 msgstr "Complete event"
@@ -276,13 +288,16 @@ msgstr "Switch to form view"
 msgid "Switch to row view"
 msgstr "Switch to row view"
 
-msgid "{{count}} event added"
-msgid_plural "{{count}} event added"
-msgstr[0] "{{count}} event added"
-msgstr[1] "{{count}} events added"
+msgid "events"
+msgstr "events"
 
-msgid "No events added"
-msgstr "No events added"
+msgid "No {{eventLabel}} added"
+msgstr "No {{eventLabel}} added"
+
+msgid "{{count}} {{eventLabel}} added"
+msgid_plural "{{count}} {{eventLabel}} added"
+msgstr[0] "{{count}} {{eventLabel}} added"
+msgstr[1] "{{count}} {{eventLabel}} added"
 
 msgid "New event relationship"
 msgstr "New event relationship"
@@ -318,9 +333,6 @@ msgstr "Saving a {{trackedEntityName}}"
 msgid "without"
 msgstr "without"
 
-msgid "enrollment"
-msgstr "enrollment"
-
 msgid "in"
 msgstr "in"
 
@@ -333,25 +345,29 @@ msgstr "An error has occurred. See log for details"
 msgid "{{programStageName}} completed"
 msgstr "{{programStageName}} completed"
 
-msgid "Would you like to complete the enrollment and all active events as well?"
-msgstr "Would you like to complete the enrollment and all active events as well?"
+msgid ""
+"Would you like to complete the {{enrollmentLabel}} and all active "
+"{{eventPluralLabel}} as well?"
+msgstr ""
+"Would you like to complete the {{enrollmentLabel}} and all active "
+"{{eventPluralLabel}} as well?"
 
-msgid "{{count}} event in {{programStageName}}"
-msgid_plural "{{count}} event in {{programStageName}}"
-msgstr[0] "{{count}} event in {{programStageName}}"
-msgstr[1] "{{count}} events in {{programStageName}}"
+msgid "{{count}} {{eventLabel}} in {{programStageName}}"
+msgid_plural "{{count}} {{eventLabel}} in {{programStageName}}"
+msgstr[0] "{{count}} {{eventLabel}} in {{programStageName}}"
+msgstr[1] "{{count}} {{eventLabel}} in {{programStageName}}"
 
-msgid "Yes, complete enrollment and events"
-msgstr "Yes, complete enrollment and events"
+msgid "Yes, complete {{enrollmentLabel}} and {{eventPluralLabel}}"
+msgstr "Yes, complete {{enrollmentLabel}} and {{eventPluralLabel}}"
 
-msgid "Complete enrollment only"
-msgstr "Complete enrollment only"
+msgid "Complete {{enrollmentLabel}} only"
+msgstr "Complete {{enrollmentLabel}} only"
 
-msgid "Would you like to complete the enrollment?"
-msgstr "Would you like to complete the enrollment?"
+msgid "Would you like to complete the {{enrollmentLabel}}?"
+msgstr "Would you like to complete the {{enrollmentLabel}}?"
 
-msgid "Complete enrollment"
-msgstr "Complete enrollment"
+msgid "Complete {{enrollmentLabel}}"
+msgstr "Complete {{enrollmentLabel}}"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "A duplicate exists (but there were some errors, see log for details"
@@ -694,14 +710,20 @@ msgstr "Could not get organisation unit"
 msgid "Program doesn't exist"
 msgstr "Program doesn't exist"
 
-msgid "Selected program is invalid for selected organisation unit"
-msgstr "Selected program is invalid for selected organisation unit"
+msgid "organisation unit"
+msgstr "organisation unit"
 
-msgid "Add note"
-msgstr "Add note"
+msgid "Selected program is invalid for selected {{orgUnit}}"
+msgstr "Selected program is invalid for selected {{orgUnit}}"
 
-msgid "Write note"
-msgstr "Write note"
+msgid "note"
+msgstr "note"
+
+msgid "Add {{note}}"
+msgstr "Add {{note}}"
+
+msgid "Write {{note}}"
+msgstr "Write {{note}}"
 
 msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr "{{fieldName}} was blanked out and hidden by your last action"
@@ -712,11 +734,17 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
+msgid "No feedback for this {{enrollment}} yet"
+msgstr "No feedback for this {{enrollment}} yet"
+
+msgid "No indicator output for this {{enrollment}} yet"
+msgstr "No indicator output for this {{enrollment}} yet"
+
 msgid "Quick actions"
 msgstr "Quick actions"
 
-msgid "Schedule an event"
-msgstr "Schedule an event"
+msgid "Schedule {{event}}"
+msgstr "Schedule {{event}}"
 
 msgid "Make referral"
 msgstr "Make referral"
@@ -724,27 +752,27 @@ msgstr "Make referral"
 msgid "No available program stages"
 msgstr "No available program stages"
 
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "Invalid enrollment id {{enrollmentId}}."
+msgid "Invalid {{enrollment}} id {{enrollmentId}}."
+msgstr "Invalid {{enrollment}} id {{enrollmentId}}."
 
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Choose an enrollment to view the dashboard."
+msgid "Choose an {{enrollment}} to view the dashboard."
+msgstr "Choose an {{enrollment}} to view the dashboard."
 
 msgid ""
-"Choose a program to add new or see existing enrollments for "
+"Choose a program to add new or see existing {{enrollments}} for "
 "{{teiDisplayName}}"
 msgstr ""
-"Choose a program to add new or see existing enrollments for "
+"Choose a program to add new or see existing {{enrollments}} for "
 "{{teiDisplayName}}"
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
 
-msgid "There are no active enrollments."
-msgstr "There are no active enrollments."
+msgid "There are no active {{enrollments}}."
+msgstr "There are no active {{enrollments}}."
 
-msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr "Add new enrollment for {{teiDisplayName}} in this program."
+msgid "Add new {{enrollment}} for {{teiDisplayName}} in this program."
+msgstr "Add new {{enrollment}} for {{teiDisplayName}} in this program."
 
 msgid ""
 "You do not have permissions to access to this program, registering unit or "
@@ -761,19 +789,21 @@ msgstr "Enroll {{teiDisplayName}} in this program."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
-"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+"{{programName}}. Choose another program that allows {{tetName}} "
+"{{enrollment}}. "
 msgstr ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
-"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+"{{programName}}. Choose another program that allows {{tetName}} "
+"{{enrollment}}. "
 
 msgid "Enroll a new {{selectedTetName}} in this program."
 msgstr "Enroll a new {{selectedTetName}} in this program."
 
-msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}} is an event program and does not have enrollments."
+msgid "{{programName}} is an event program and does not have {{enrollments}}."
+msgstr "{{programName}} is an event program and does not have {{enrollments}}."
 
-msgid "Create a new event in this program."
-msgstr "Create a new event in this program."
+msgid "Create a new {{event}} in this program."
+msgstr "Create a new {{event}} in this program."
 
 msgid "View working list in this program."
 msgstr "View working list in this program."
@@ -805,11 +835,26 @@ msgstr "There was an error opening the Page"
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
-msgid "Program stage is invalid"
-msgstr "Program stage is invalid"
+msgid "No feedback for this {{event}} yet"
+msgstr "No feedback for this {{event}} yet"
 
-msgid "Stage not found"
-msgstr "Stage not found"
+msgid "No indicator output for this {{event}} yet"
+msgstr "No indicator output for this {{event}} yet"
+
+msgid "Program stage"
+msgstr "Program stage"
+
+msgid "{{programStage}} is invalid"
+msgstr "{{programStage}} is invalid"
+
+msgid "Stage"
+msgstr "Stage"
+
+msgid "{{programStage}} not found"
+msgstr "{{programStage}} not found"
+
+msgid "You don't have access to create a new {{event}} in the current selections"
+msgstr "You don't have access to create a new {{event}} in the current selections"
 
 msgid "Report"
 msgstr "Report"
@@ -820,26 +865,26 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "New Event"
-msgstr "New Event"
-
-msgid "You can't add any more {{ programStageName }} events"
-msgstr "You can't add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} {{events}}"
+msgstr "You can't add any more {{ programStageName }} {{events}}"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
 
-msgid "Choose a stage for a new event"
-msgstr "Choose a stage for a new event"
+msgid "stage"
+msgstr "stage"
 
-msgid "Program Stages could not be loaded"
-msgstr "Program Stages could not be loaded"
+msgid "Program Stages"
+msgstr "Program Stages"
 
-msgid "Stage"
-msgstr "Stage"
+msgid "Choose the {{programStage}} for a new {{event}}"
+msgstr "Choose the {{programStage}} for a new {{event}}"
 
-msgid "The category option is not valid for the selected organisation unit."
-msgstr "The category option is not valid for the selected organisation unit."
+msgid "{{programStages}} could not be loaded"
+msgstr "{{programStages}} could not be loaded"
+
+msgid "The category option is not valid for the selected {{orgUnit}}."
+msgstr "The category option is not valid for the selected {{orgUnit}}."
 
 msgid "Please select a valid combination."
 msgstr "Please select a valid combination."
@@ -866,17 +911,17 @@ msgstr "Learn more about Capture app"
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
 
-msgid "Please select an organisation unit"
-msgstr "Please select an organisation unit"
+msgid "Please select {{orgUnit}}"
+msgstr "Please select {{orgUnit}}"
 
-msgid "See working list without organisation unit"
-msgstr "See working list without organisation unit"
+msgid "See working list without {{orgUnit}}"
+msgstr "See working list without {{orgUnit}}"
 
 msgid "Search for a {{trackedEntityName}}"
 msgstr "Search for a {{trackedEntityName}}"
 
-msgid "Registered events"
-msgstr "Registered events"
+msgid "Registered {{events}}"
+msgstr "Registered {{events}}"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -885,8 +930,8 @@ msgstr ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
 
-msgid "Choose an organisation unit to start reporting"
-msgstr "Choose an organisation unit to start reporting"
+msgid "Choose {{orgUnit}} to start reporting"
+msgstr "Choose {{orgUnit}} to start reporting"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -900,8 +945,8 @@ msgstr "New"
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr "You can also choose a program from the top bar and create in that program"
 
-msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr "New Enrollment in program{{escape}} {{programName}}"
+msgid "New {{enrollment}} in program{{escape}} {{programName}}"
+msgstr "New {{enrollment}} in program{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
 msgstr "Save {{trackedEntityTypeName}}"
@@ -909,8 +954,11 @@ msgstr "Save {{trackedEntityTypeName}}"
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
 
-msgid "Enter details now is not available when creating a relationship"
-msgstr "Enter details now is not available when creating a relationship"
+msgid "relationship"
+msgstr "relationship"
+
+msgid "Enter details now is not available when creating this {{relationship}}"
+msgstr "Enter details now is not available when creating this {{relationship}}"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
@@ -960,17 +1008,20 @@ msgstr "Register"
 msgid "Back"
 msgstr "Back"
 
-msgid "events"
-msgstr "events"
-
-msgid "event"
-msgstr "event"
-
 msgid "View changelog"
 msgstr "View changelog"
 
-msgid "Event details"
-msgstr "Event details"
+msgid "{{event}} details"
+msgstr "{{event}} details"
+
+msgid "New {{event}} {{relationship}}"
+msgstr "New {{event}} {{relationship}}"
+
+msgid "Adding {{relationship}} to {{event}}."
+msgstr "Adding {{relationship}} to {{event}}."
+
+msgid "Go back to {{event}} without saving {{relationship}}"
+msgstr "Go back to {{event}} without saving {{relationship}}"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -1018,11 +1069,14 @@ msgstr "Organisation unit scope"
 msgid "Selected program"
 msgstr "Selected program"
 
+msgid "attributes"
+msgstr "attributes"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
 
-msgid "Search by attributes"
-msgstr "Search by attributes"
+msgid "Search by {{attributes}}"
+msgstr "Search by {{attributes}}"
 
 msgid "Search {{attributeName}}"
 msgstr "Search {{attributeName}}"
@@ -1044,11 +1098,14 @@ msgstr "Back to search"
 msgid "Search form is missing. See log for details"
 msgstr "Search form is missing. See log for details"
 
+msgid "Search by attributes"
+msgstr "Search by attributes"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
-msgid "The enrollment event data could not be found"
-msgstr "The enrollment event data could not be found"
+msgid "The {{enrollment}} {{event}} data could not be found"
+msgstr "The {{enrollment}} {{event}} data could not be found"
 
 msgid "Loading"
 msgstr "Loading"
@@ -1071,8 +1128,8 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
-msgid "You only have view access to this enrollment"
-msgstr "You only have view access to this enrollment"
+msgid "You only have view access to this {{enrollment}}"
+msgstr "You only have view access to this {{enrollment}}"
 
 msgid "You only have view access to this program"
 msgstr "You only have view access to this program"
@@ -1080,20 +1137,29 @@ msgstr "You only have view access to this program"
 msgid "You only have view access to this {{trackedEntityName}}"
 msgstr "You only have view access to this {{trackedEntityName}}"
 
-msgid "You only have view access to this tracked entity type"
-msgstr "You only have view access to this tracked entity type"
+msgid "You only have view access to this {{trackedEntityType}}"
+msgstr "You only have view access to this {{trackedEntityType}}"
 
-msgid "You only have view access to these program stages"
-msgstr "You only have view access to these program stages"
+msgid "You only have view access to these {{programStages}}"
+msgstr "You only have view access to these {{programStages}}"
 
-msgid "You only have view access to this program stage"
-msgstr "You only have view access to this program stage"
+msgid "You only have view access to this {{programStage}}"
+msgstr "You only have view access to this {{programStage}}"
 
-msgid "This event is outside the editing period"
-msgstr "This event is outside the editing period"
+msgid "This {{event}} is outside the valid editing period"
+msgstr "This {{event}} is outside the valid editing period"
 
-msgid "This event has been completed"
-msgstr "This event has been completed"
+msgid "This {{event}} has been completed"
+msgstr "This {{event}} has been completed"
+
+msgid "tracked entity type"
+msgstr "tracked entity type"
+
+msgid "program stage"
+msgstr "program stage"
+
+msgid "program stages"
+msgstr "program stages"
 
 msgid "View only - {{message}}"
 msgstr "View only - {{message}}"
@@ -1131,8 +1197,8 @@ msgstr "No programs available."
 msgid "Search for a program"
 msgstr "Search for a program"
 
-msgid "Some programs are being filtered by the chosen organisation unit"
-msgstr "Some programs are being filtered by the chosen organisation unit"
+msgid "Some programs are being filtered by the chosen {{orgUnit}}"
+msgstr "Some programs are being filtered by the chosen {{orgUnit}}"
 
 msgid "Show all programs"
 msgstr "Show all programs"
@@ -1160,10 +1226,10 @@ msgid "{{trackedEntityName}} has no searchable attributes"
 msgstr "{{trackedEntityName}} has no searchable attributes"
 
 msgid ""
-"Try selecting a different tracked entity type, or try searching in a "
+"Try selecting a different {{trackedEntityType}}, or try searching in a "
 "program by choosing one from the top bar."
 msgstr ""
-"Try selecting a different tracked entity type, or try searching in a "
+"Try selecting a different {{trackedEntityType}}, or try searching in a "
 "program by choosing one from the top bar."
 
 msgid "Search for {{titleText}}"
@@ -1181,8 +1247,8 @@ msgstr "all programs"
 msgid "Not finding the results you were looking for? Try searching in all programs."
 msgstr "Not finding the results you were looking for? Try searching in all programs."
 
-msgid "No searchable attributes for {{trackedEntityName}}"
-msgstr "No searchable attributes for {{trackedEntityName}}"
+msgid "No searchable {{attributes}} for {{trackedEntityName}}"
+msgstr "No searchable {{attributes}} for {{trackedEntityName}}"
 
 msgid "Search in all programs"
 msgstr "Search in all programs"
@@ -1233,11 +1299,11 @@ msgid "This search returned too many results to show."
 msgstr "This search returned too many results to show."
 
 msgid ""
-"Try changing search terms or searching by more attributes to narrow down "
-"the results."
+"Try changing search terms or searching by more {{attributes}} to narrow "
+"down the results."
 msgstr ""
-"Try changing search terms or searching by more attributes to narrow down "
-"the results."
+"Try changing search terms or searching by more {{attributes}} to narrow "
+"down the results."
 
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
@@ -1267,8 +1333,8 @@ msgstr "Create saved list"
 msgid "Create new in another program..."
 msgstr "Create new in another program..."
 
-msgid "Create new event"
-msgstr "Create new event"
+msgid "Create new {{event}}"
+msgstr "Create new {{event}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
@@ -1276,14 +1342,17 @@ msgstr "Search for a {{trackedEntityName}} in {{programName}}"
 msgid "Search..."
 msgstr "Search..."
 
-msgid "Select tracked entity type"
-msgstr "Select tracked entity type"
+msgid "tracked entity types"
+msgstr "tracked entity types"
 
-msgid "Type to filter tracked entity types"
-msgstr "Type to filter tracked entity types"
+msgid "Select {{trackedEntityType}}"
+msgstr "Select {{trackedEntityType}}"
 
-msgid "No tracked entity types available"
-msgstr "No tracked entity types available"
+msgid "Type to filter {{trackedEntityTypes}}"
+msgstr "Type to filter {{trackedEntityTypes}}"
+
+msgid "No {{trackedEntityTypes}} available"
+msgstr "No {{trackedEntityTypes}} available"
 
 msgid "Assigned to"
 msgstr "Assigned to"
@@ -1291,8 +1360,8 @@ msgstr "Assigned to"
 msgid "Edit"
 msgstr "Edit"
 
-msgid "No one is assigned to this event"
-msgstr "No one is assigned to this event"
+msgid "No one is assigned to this {{event}}"
+msgstr "No one is assigned to this {{event}}"
 
 msgid "Assign"
 msgstr "Assign"
@@ -1310,14 +1379,14 @@ msgstr ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
 
-msgid "Check for enrollments"
-msgstr "Check for enrollments"
+msgid "Check for {{enrollments}}"
+msgstr "Check for {{enrollments}}"
 
 msgid ""
-"You must provide a reason to check for enrollments in this protected "
+"You must provide a reason to check for {{enrollments}} in this protected "
 "program."
 msgstr ""
-"You must provide a reason to check for enrollments in this protected "
+"You must provide a reason to check for {{enrollments}} in this protected "
 "program."
 
 msgid "All activity will be logged."
@@ -1329,14 +1398,14 @@ msgstr "Unsaved changes"
 msgid "Continue data entry"
 msgstr "Continue data entry"
 
-msgid "Enrollment actions"
-msgstr "Enrollment actions"
+msgid "{{enrollment}} actions"
+msgstr "{{enrollment}} actions"
 
 msgid "We are processing your request."
 msgstr "We are processing your request."
 
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr "Only one enrollment per {{tetName}} is allowed in this program"
+msgid "Only one {{enrollment}} per {{tetName}} is allowed in this program"
+msgstr "Only one {{enrollment}} per {{tetName}} is allowed in this program"
 
 msgid "Add new"
 msgstr "Add new"
@@ -1350,26 +1419,45 @@ msgstr "Mark as cancelled"
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
 
-msgid "You do not have access to delete this enrollment"
-msgstr "You do not have access to delete this enrollment"
+msgid "Complete {{enrollment}}"
+msgstr "Complete {{enrollment}}"
 
-msgid "Delete enrollment"
-msgstr "Delete enrollment"
+msgid ""
+"Would you like to complete the {{enrollment}} and all active {{events}} as "
+"well?"
+msgstr ""
+"Would you like to complete the {{enrollment}} and all active {{events}} as "
+"well?"
 
-msgid "Are you sure you want to delete this enrollment?"
-msgstr "Are you sure you want to delete this enrollment?"
+msgid "Yes, complete {{enrollment}} and {{events}}"
+msgstr "Yes, complete {{enrollment}} and {{events}}"
 
-msgid "This will permanently remove the current enrollment."
-msgstr "This will permanently remove the current enrollment."
+msgid "Complete {{enrollment}} only"
+msgstr "Complete {{enrollment}} only"
 
-msgid "Yes, delete enrollment."
-msgstr "Yes, delete enrollment."
+msgid "You do not have access to delete this {{enrollment}}"
+msgstr "You do not have access to delete this {{enrollment}}"
 
-msgid "Remove mark for follow-up"
-msgstr "Remove mark for follow-up"
+msgid "Delete {{enrollment}}"
+msgstr "Delete {{enrollment}}"
 
-msgid "Mark for follow-up"
-msgstr "Mark for follow-up"
+msgid "Are you sure you want to delete this {{enrollment}}?"
+msgstr "Are you sure you want to delete this {{enrollment}}?"
+
+msgid "This will permanently remove the current {{enrollment}}."
+msgstr "This will permanently remove the current {{enrollment}}."
+
+msgid "Yes, delete {{enrollment}}."
+msgstr "Yes, delete {{enrollment}}."
+
+msgid "follow-up"
+msgstr "follow-up"
+
+msgid "Remove mark for {{followUp}}"
+msgstr "Remove mark for {{followUp}}"
+
+msgid "Mark for {{followUp}}"
+msgstr "Mark for {{followUp}}"
 
 msgid "Transfer"
 msgstr "Transfer"
@@ -1408,27 +1496,27 @@ msgid "Set area"
 msgstr "Set area"
 
 msgid ""
-"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"Transferring {{enrollment}} ownership from {{ownerOrgUnit}} to "
 "{{newOrgUnit}}{{escape}}"
 msgstr ""
-"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"Transferring {{enrollment}} ownership from {{ownerOrgUnit}} to "
 "{{newOrgUnit}}{{escape}}"
 
 msgid ""
-"You will lose access to the enrollment when transferring ownership to "
+"You will lose access to the {{enrollment}} when transferring ownership to "
 "{{organisationUnit}}."
 msgstr ""
-"You will lose access to the enrollment when transferring ownership to "
+"You will lose access to the {{enrollment}} when transferring ownership to "
 "{{organisationUnit}}."
 
 msgid "Transfer Ownership"
 msgstr "Transfer Ownership"
 
 msgid ""
-"Choose the organisation unit to which enrollment ownership should be "
+"Choose the {{orgUnit}} to which {{enrollment}} ownership should be "
 "transferred."
 msgstr ""
-"Choose the organisation unit to which enrollment ownership should be "
+"Choose the {{orgUnit}} to which {{enrollment}} ownership should be "
 "transferred."
 
 msgid "Enrollment date"
@@ -1437,11 +1525,11 @@ msgstr "Enrollment date"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "Enrollment widget could not be loaded. Please try again later"
-
 msgid "Follow-up"
 msgstr "Follow-up"
+
+msgid "{{enrollment}} widget could not be loaded. Please try again later"
+msgstr "{{enrollment}} widget could not be loaded. Please try again later"
 
 msgid "Started at{{escape}}"
 msgstr "Started at{{escape}}"
@@ -1461,8 +1549,8 @@ msgstr "Add area"
 msgid "Program stage not found"
 msgstr "Program stage not found"
 
-msgid "organisation unit could not be retrieved. Please try again later."
-msgstr "organisation unit could not be retrieved. Please try again later."
+msgid "{{orgUnit}} could not be retrieved. Please try again later."
+msgstr "{{orgUnit}} could not be retrieved. Please try again later."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1473,14 +1561,17 @@ msgstr "Saving to {{stageName}} for {{programName}}"
 msgid "program or stage is invalid"
 msgstr "program or stage is invalid"
 
-msgid "Notes about this enrollment"
-msgstr "Notes about this enrollment"
+msgid "notes"
+msgstr "notes"
 
-msgid "Write a note about this enrollment"
-msgstr "Write a note about this enrollment"
+msgid "{{notes}} about this {{enrollment}}"
+msgstr "{{notes}} about this {{enrollment}}"
 
-msgid "This enrollment doesn't have any notes"
-msgstr "This enrollment doesn't have any notes"
+msgid "Write a note about this {{enrollment}}"
+msgstr "Write a note about this {{enrollment}}"
+
+msgid "This {{enrollment}} doesn't have any {{notes}}"
+msgstr "This {{enrollment}} doesn't have any {{notes}}"
 
 msgid "Error"
 msgstr "Error"
@@ -1527,17 +1618,33 @@ msgstr "No polygon captured"
 msgid "Event completed"
 msgstr "Event completed"
 
-msgid "Notes about this event"
-msgstr "Notes about this event"
+msgid "{{notes}} about this {{event}}"
+msgstr "{{notes}} about this {{event}}"
 
-msgid "Write a note about this event"
-msgstr "Write a note about this event"
+msgid "Write a note about this {{event}}"
+msgstr "Write a note about this {{event}}"
+
+msgid "This {{event}} doesn't have any {{notes}}"
+msgstr "This {{event}} doesn't have any {{notes}}"
 
 msgid "after"
 msgstr "after"
 
 msgid "before"
 msgstr "before"
+
+msgid ""
+"There are {{count}} scheduled {{eventLabel}} in this program in "
+"{{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled {{eventLabel}} in this program in "
+"{{orgUnitName}} on this day."
+msgstr[0] ""
+"There are {{count}} scheduled {{eventLabel}} in this program in "
+"{{orgUnitName}} on this day."
+msgstr[1] ""
+"There are {{count}} scheduled {{eventLabel}} in this program in "
+"{{orgUnitName}} on this day."
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
@@ -1550,39 +1657,29 @@ msgid_plural "The scheduled date is {{count}} days {{position}} the suggested da
 msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
 msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
 
-msgid ""
-"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
-"this day."
-msgid_plural ""
-"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
-"this day."
-msgstr[0] ""
-"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
-"this day."
-msgstr[1] ""
-"There are {{count}} scheduled events in this program in {{orgUnitName}} on "
-"this day."
-
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Please provide a valid organisation unit"
 
-msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgid "Scheduling {{event}} in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Scheduling {{event}} in {{stageName}} for {{programName}} in {{orgUnitName}}"
 
-msgid "Scheduling an event in {{stageName}} for {{programName}}"
-msgstr "Scheduling an event in {{stageName}} for {{programName}}"
+msgid "Scheduling {{event}} in {{stageName}} for {{programName}}"
+msgstr "Scheduling {{event}} in {{stageName}} for {{programName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
 
-msgid "Event notes"
-msgstr "Event notes"
+msgid "{{event}} notes"
+msgstr "{{event}} notes"
 
-msgid "Write a note about this scheduled event"
-msgstr "Write a note about this scheduled event"
+msgid "Write a note about this scheduled {{event}}"
+msgstr "Write a note about this scheduled {{event}}"
+
+msgid "This {{event}} doesn't have any notes"
+msgstr "This {{event}} doesn't have any notes"
 
 msgid "Program or stage is invalid"
 msgstr "Program or stage is invalid"
@@ -1593,8 +1690,8 @@ msgstr "Feedback"
 msgid "Indicators"
 msgstr "Indicators"
 
-msgid "Save note"
-msgstr "Save note"
+msgid "Save {{note}}"
+msgstr "Save {{note}}"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
@@ -1605,8 +1702,12 @@ msgstr "Save changes"
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."
 
-msgid "Information about this enrollment can be edited in the Enrollment widget."
-msgstr "Information about this enrollment can be edited in the Enrollment widget."
+msgid ""
+"Information about this {{enrollment}} can be edited in the {{Enrollment}} "
+"widget."
+msgstr ""
+"Information about this {{enrollment}} can be edited in the {{Enrollment}} "
+"widget."
 
 msgid "{{trackedEntityName}} profile"
 msgstr "{{trackedEntityName}} profile"
@@ -1638,11 +1739,11 @@ msgstr "Delete {{trackedEntityTypeName}}"
 msgid ""
 "Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
 "permanently remove the {{trackedEntityTypeName}} and all its associated "
-"enrollments and events in all programs."
+"{{enrollments}} and {{events}} in all programs."
 msgstr ""
 "Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
 "permanently remove the {{trackedEntityTypeName}} and all its associated "
-"enrollments and events in all programs."
+"{{enrollments}} and {{events}} in all programs."
 
 msgid "There was a problem deleting the {{trackedEntityTypeName}}"
 msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
@@ -1656,38 +1757,41 @@ msgstr "View profile"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
-msgstr "No attributes configured for {{trackedEntityTypeName}}"
+msgid "No {{attributes}} configured for {{trackedEntityTypeName}}"
+msgstr "No {{attributes}} configured for {{trackedEntityTypeName}}"
 
-msgid "No attributes configured"
-msgstr "No attributes configured"
+msgid "No {{attributes}} configured"
+msgstr "No {{attributes}} configured"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
 
-msgid "Choose a {{linkableStageLabel}} event"
-msgstr "Choose a {{linkableStageLabel}} event"
+msgid "Choose a {{linkableStageLabel}} {{event}}"
+msgstr "Choose a {{linkableStageLabel}} {{event}}"
 
-msgid "Select an event"
-msgstr "Select an event"
+msgid "Select {{event}}"
+msgstr "Select {{event}}"
 
-msgid "{{ linkableStageLabel }} can only have one event"
-msgstr "{{ linkableStageLabel }} can only have one event"
+msgid "{{ linkableStageLabel }} can only have one {{event}}"
+msgstr "{{ linkableStageLabel }} can only have one {{event}}"
 
-msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr "{{ linkableStageLabel }} has no linkable events"
+msgid "{{ linkableStageLabel }} has no linkable {{events}}"
+msgstr "{{ linkableStageLabel }} has no linkable {{events}}"
+
+msgid "relationships"
+msgstr "relationships"
 
 msgid "Actions - {{relationshipName}}"
 msgstr "Actions - {{relationshipName}}"
 
-msgid "Ambiguous relationships, contact system administrator"
-msgstr "Ambiguous relationships, contact system administrator"
+msgid "Ambiguous {{relationships}}, contact system administrator"
+msgstr "Ambiguous {{relationships}}, contact system administrator"
 
 msgid "Enter details"
 msgstr "Enter details"
 
-msgid "Linked event"
-msgstr "Linked event"
+msgid "Linked {{event}}"
+msgstr "Linked {{event}}"
 
 msgid "Enter details now"
 msgstr "Enter details now"
@@ -1695,11 +1799,11 @@ msgstr "Enter details now"
 msgid "Link to an existing event"
 msgstr "Link to an existing event"
 
-msgid "The event was successfully linked"
-msgstr "The event was successfully linked"
+msgid "The {{event}} was successfully linked"
+msgstr "The {{event}} was successfully linked"
 
-msgid "An error occurred while linking the event"
-msgstr "An error occurred while linking the event"
+msgid "An error occurred while linking the {{event}}"
+msgstr "An error occurred while linking the {{event}}"
 
 msgid "Scheduled date"
 msgstr "Scheduled date"
@@ -1713,26 +1817,35 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "This stage can only have one event"
-msgstr "This stage can only have one event"
+msgid "This {{stage}} can only have one {{event}}"
+msgstr "This {{stage}} can only have one {{event}}"
 
-msgid "New {{ eventName }} event"
-msgstr "New {{ eventName }} event"
+msgid "New {{ eventName }} {{event}}"
+msgstr "New {{ eventName }} {{event}}"
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgid "{{occurredAt}} belongs to an expired period. {{event}} cannot be deleted"
+msgstr "{{occurredAt}} belongs to an expired period. {{event}} cannot be deleted"
 
-msgid "This event is outside the edit period"
-msgstr "This event is outside the edit period"
+msgid "This {{event}} is outside the edit period"
+msgstr "This {{event}} is outside the edit period"
 
-msgid "An error occurred while deleting the event"
-msgstr "An error occurred while deleting the event"
+msgid "An error occurred while deleting the {{event}}"
+msgstr "An error occurred while deleting the {{event}}"
 
-msgid "Are you sure you want to delete this event?"
-msgstr "Are you sure you want to delete this event?"
+msgid "Delete {{event}}"
+msgstr "Delete {{event}}"
 
-msgid "An error occurred when updating event status"
-msgstr "An error occurred when updating event status"
+msgid "Deleting this {{event}} is permanent and cannot be undone."
+msgstr "Deleting this {{event}} is permanent and cannot be undone."
+
+msgid "Are you sure you want to delete this {{event}}?"
+msgstr "Are you sure you want to delete this {{event}}?"
+
+msgid "Yes, delete {{event}}"
+msgstr "Yes, delete {{event}}"
+
+msgid "An error occurred when updating {{event}} status"
+msgstr "An error occurred when updating {{event}} status"
 
 msgid "Unskip"
 msgstr "Unskip"
@@ -1740,8 +1853,11 @@ msgstr "Unskip"
 msgid "Skip"
 msgstr "Skip"
 
-msgid "To open this event, please wait until saving is complete"
-msgstr "To open this event, please wait until saving is complete"
+msgid "Events"
+msgstr "Events"
+
+msgid "To open this {{event}}, please wait until saving is complete"
+msgstr "To open this {{event}}, please wait until saving is complete"
 
 msgid "Show {{ rest }} more"
 msgstr "Show {{ rest }} more"
@@ -1749,13 +1865,13 @@ msgstr "Show {{ rest }} more"
 msgid "Go to full {{ eventName }}"
 msgstr "Go to full {{ eventName }}"
 
-msgid "Events could not be retrieved. Please try again later."
-msgstr "Events could not be retrieved. Please try again later."
+msgid "{{events}} could not be retrieved. Please try again later."
+msgstr "{{events}} could not be retrieved. Please try again later."
 
-msgid "{{ count }} event"
-msgid_plural "{{ count }} event"
-msgstr[0] "{{ count }} event"
-msgstr[1] "{{count}} events"
+msgid "{{ count }} {{eventLabel}}"
+msgid_plural "{{ count }} {{eventLabel}}"
+msgstr[0] "{{ count }} {{eventLabel}}"
+msgstr[1] "{{ count }} {{eventLabel}}"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} overdue"
@@ -1763,61 +1879,67 @@ msgstr "{{ overdueEvents }} overdue"
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
 
-msgid "No stages found in this program"
-msgstr "No stages found in this program"
+msgid "stages"
+msgstr "stages"
 
-msgid "Stages and Events"
-msgstr "Stages and Events"
+msgid "No {{stages}} found in this program"
+msgstr "No {{stages}} found in this program"
 
-msgid "An error occurred while unlinking and deleting the event."
-msgstr "An error occurred while unlinking and deleting the event."
+msgid "Stages"
+msgstr "Stages"
 
-msgid "Unlink and delete linked event"
-msgstr "Unlink and delete linked event"
+msgid "{{stages}} and {{events}}"
+msgstr "{{stages}} and {{events}}"
 
-msgid "Are you sure you want to remove the link and delete the linked event?"
-msgstr "Are you sure you want to remove the link and delete the linked event?"
+msgid "An error occurred while unlinking and deleting the {{event}}."
+msgstr "An error occurred while unlinking and deleting the {{event}}."
+
+msgid "Unlink and delete linked {{event}}"
+msgstr "Unlink and delete linked {{event}}"
+
+msgid "Are you sure you want to remove the link and delete the linked {{event}}?"
+msgstr "Are you sure you want to remove the link and delete the linked {{event}}?"
 
 msgid ""
-"This action permanently removes the link, linked event, and all related "
+"This action permanently removes the link, linked {{event}}, and all related "
 "data."
 msgstr ""
-"This action permanently removes the link, linked event, and all related "
+"This action permanently removes the link, linked {{event}}, and all related "
 "data."
 
-msgid "Yes, unlink and delete linked event"
-msgstr "Yes, unlink and delete linked event"
+msgid "Yes, unlink and delete linked {{event}}"
+msgstr "Yes, unlink and delete linked {{event}}"
 
-msgid "Unlink event"
-msgstr "Unlink event"
+msgid "Unlink {{event}}"
+msgstr "Unlink {{event}}"
 
-msgid "Are you sure you want to remove the link between these events?"
-msgstr "Are you sure you want to remove the link between these events?"
+msgid "Are you sure you want to remove the link between these {{events}}?"
+msgstr "Are you sure you want to remove the link between these {{events}}?"
 
-msgid "This action removes the link itself, but the linked event will remain."
-msgstr "This action removes the link itself, but the linked event will remain."
+msgid "This action removes the link itself, but the linked {{event}} will remain."
+msgstr "This action removes the link itself, but the linked {{event}} will remain."
 
-msgid "Yes, unlink event"
-msgstr "Yes, unlink event"
+msgid "Yes, unlink {{event}}"
+msgstr "Yes, unlink {{event}}"
 
-msgid "View linked event"
-msgstr "View linked event"
+msgid "View linked {{event}}"
+msgstr "View linked {{event}}"
 
-msgid "You do not have access to remove the link between these events"
-msgstr "You do not have access to remove the link between these events"
+msgid "You do not have access to remove the link between these {{events}}"
+msgstr "You do not have access to remove the link between these {{events}}"
 
-msgid "You do not have access to remove the link and delete the linked event"
-msgstr "You do not have access to remove the link and delete the linked event"
+msgid "You do not have access to remove the link and delete the linked {{event}}"
+msgstr "You do not have access to remove the link and delete the linked {{event}}"
 
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
 
 msgid ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
+"This {{stageName}} {{event}} is linked to a {{linkedStageName}} {{event}}. "
+"Review the linked {{event}} details before entering data below"
 msgstr ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
+"This {{stageName}} {{event}} is linked to a {{linkedStageName}} {{event}}. "
+"Review the linked {{event}} details before entering data below"
 
 msgid "Scheduled"
 msgstr "Scheduled"
@@ -1864,50 +1986,57 @@ msgstr "File"
 msgid "Image"
 msgstr "Image"
 
-msgid "New {{trackedEntityTypeName}} relationship"
-msgstr "New {{trackedEntityTypeName}} relationship"
+msgid "New {{trackedEntityTypeName}} {{relationship}}"
+msgstr "New {{trackedEntityTypeName}} {{relationship}}"
 
 msgid "Missing implementation step"
 msgstr "Missing implementation step"
 
-msgid "Go back without saving relationship"
-msgstr "Go back without saving relationship"
+msgid "Go back without saving {{relationship}}"
+msgstr "Go back without saving {{relationship}}"
 
-msgid "New Relationship"
-msgstr "New Relationship"
+msgid "Relationship"
+msgstr "Relationship"
+
+msgid "New {{relationship}}"
+msgstr "New {{relationship}}"
 
 msgid "Link to an existing {{tetName}}"
 msgstr "Link to an existing {{tetName}}"
 
-msgid "An error occurred while adding the relationship"
-msgstr "An error occurred while adding the relationship"
+msgid "An error occurred while adding the {{relationship}}"
+msgstr "An error occurred while adding the {{relationship}}"
 
-msgid "Something went wrong while loading relationships. Please try again later."
-msgstr "Something went wrong while loading relationships. Please try again later."
+msgid ""
+"Something went wrong while loading {{relationships}}. Please try again "
+"later."
+msgstr ""
+"Something went wrong while loading {{relationships}}. Please try again "
+"later."
 
-msgid "{{trackedEntityTypeName}} relationships"
-msgstr "{{trackedEntityTypeName}} relationships"
+msgid "{{trackedEntityTypeName}} {{relationships}}"
+msgstr "{{trackedEntityTypeName}} {{relationships}}"
 
-msgid "Delete relationship"
-msgstr "Delete relationship"
+msgid "Delete {{relationship}}"
+msgstr "Delete {{relationship}}"
 
-msgid "Deleting the relationship is permanent and cannot be undone."
-msgstr "Deleting the relationship is permanent and cannot be undone."
+msgid "Deleting the {{relationship}} is permanent and cannot be undone."
+msgstr "Deleting the {{relationship}} is permanent and cannot be undone."
 
-msgid "Are you sure you want to delete this relationship?"
-msgstr "Are you sure you want to delete this relationship?"
+msgid "Are you sure you want to delete this {{relationship}}?"
+msgstr "Are you sure you want to delete this {{relationship}}?"
 
-msgid "Yes, delete relationship"
-msgstr "Yes, delete relationship"
+msgid "Yes, delete {{relationship}}"
+msgstr "Yes, delete {{relationship}}"
 
-msgid "An error occurred while deleting the relationship."
-msgstr "An error occurred while deleting the relationship."
+msgid "An error occurred while deleting the {{relationship}}."
+msgstr "An error occurred while deleting the {{relationship}}."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"
 
-msgid "This enrollment doesn't have any relationships"
-msgstr "This enrollment doesn't have any relationships"
+msgid "This {{enrollment}} doesn't have any {{relationships}}"
+msgstr "This {{enrollment}} doesn't have any {{relationships}}"
 
 msgid "Type"
 msgstr "Type"
@@ -1921,32 +2050,35 @@ msgstr "Program stage name"
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+
 msgid "Download data..."
 msgstr "Download data..."
 
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
-msgid "You do not have access to complete events"
-msgstr "You do not have access to complete events"
+msgid "You do not have access to complete {{events}}"
+msgstr "You do not have access to complete {{events}}"
 
 msgid "There is a bulk data entry with unsaved changes"
 msgstr "There is a bulk data entry with unsaved changes"
 
-msgid "Complete events"
-msgstr "Complete events"
+msgid "Complete {{events}}"
+msgstr "Complete {{events}}"
 
-msgid "Are you sure you want to complete all active events in selection?"
-msgstr "Are you sure you want to complete all active events in selection?"
+msgid "Are you sure you want to complete all active {{events}} in selection?"
+msgstr "Are you sure you want to complete all active {{events}} in selection?"
 
-msgid "There are no active events to complete in the current selection."
-msgstr "There are no active events to complete in the current selection."
+msgid "There are no active {{events}} to complete in the current selection."
+msgstr "There are no active {{events}} to complete in the current selection."
 
-msgid "Error completing events"
-msgstr "Error completing events"
+msgid "Error completing {{events}}"
+msgstr "Error completing {{events}}"
 
-msgid "There was an error completing the events."
-msgstr "There was an error completing the events."
+msgid "There was an error completing the {{events}}."
+msgstr "There was an error completing the {{events}}."
 
 msgid "Details (Advanced)"
 msgstr "Details (Advanced)"
@@ -1954,26 +2086,23 @@ msgstr "Details (Advanced)"
 msgid "An unknown error occurred."
 msgstr "An unknown error occurred."
 
-msgid "An error occurred while completing events"
-msgstr "An error occurred while completing events"
+msgid "An error occurred while completing {{events}}"
+msgstr "An error occurred while completing {{events}}"
 
-msgid "You do not have access to delete events"
-msgstr "You do not have access to delete events"
+msgid "You do not have access to delete {{events}}"
+msgstr "You do not have access to delete {{events}}"
 
-msgid "An error occurred while deleting the events"
-msgstr "An error occurred while deleting the events"
+msgid "An error occurred while deleting the {{events}}"
+msgstr "An error occurred while deleting the {{events}}"
 
-msgid "Delete events"
-msgstr "Delete events"
+msgid "Delete {{events}}"
+msgstr "Delete {{events}}"
 
 msgid "This cannot be undone."
 msgstr "This cannot be undone."
 
-msgid "Are you sure you want to delete the selected events?"
-msgstr "Are you sure you want to delete the selected events?"
-
-msgid "Owner organisation unit"
-msgstr "Owner organisation unit"
+msgid "Are you sure you want to delete the selected {{events}}?"
+msgstr "Are you sure you want to delete the selected {{events}}?"
 
 msgid "Registration Date"
 msgstr "Registration Date"
@@ -1981,119 +2110,148 @@ msgstr "Registration Date"
 msgid "Inactive"
 msgstr "Inactive"
 
-msgid "Enrollment status"
-msgstr "Enrollment status"
+msgid "Owner {{orgUnit}}"
+msgstr "Owner {{orgUnit}}"
+
+msgid "{{event}} status"
+msgstr "{{event}} status"
+
+msgid "{{event}} {{orgUnit}}"
+msgstr "{{event}} {{orgUnit}}"
 
 msgid "Follow up"
 msgstr "Follow up"
 
+msgid "{{enrollment}} status"
+msgstr "{{enrollment}} status"
+
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
 
-msgid "You do not have access to bulk complete enrollments"
-msgstr "You do not have access to bulk complete enrollments"
+msgid "You do not have access to bulk complete {{enrollments}}"
+msgstr "You do not have access to bulk complete {{enrollments}}"
 
 msgid ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
+"Some {{enrollments}} were completed successfully, but there was an error "
+"while completing the rest. Please see the details below."
 msgstr ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
+"Some {{enrollments}} were completed successfully, but there was an error "
+"while completing the rest. Please see the details below."
 
 msgid ""
-"There was an error while completing the enrollments. Please see the details "
-"below."
+"There was an error while completing the {{enrollments}}. Please see the "
+"details below."
 msgstr ""
-"There was an error while completing the enrollments. Please see the details "
-"below."
+"There was an error while completing the {{enrollments}}. Please see the "
+"details below."
 
 msgid ""
-"An unexpected error occurred while fetching the enrollments. Please try "
+"An unexpected error occurred while fetching the {{enrollments}}. Please try "
 "again."
 msgstr ""
-"An unexpected error occurred while fetching the enrollments. Please try "
+"An unexpected error occurred while fetching the {{enrollments}}. Please try "
 "again."
 
-msgid "There are currently no active enrollments in the selection."
-msgstr "There are currently no active enrollments in the selection."
+msgid "There are currently no active {{enrollments}} in the selection."
+msgstr "There are currently no active {{enrollments}} in the selection."
 
-msgid "All enrollments are already completed or cancelled."
-msgstr "All enrollments are already completed or cancelled."
-
-msgid "This action will complete {{count}} active enrollment in your selection."
-msgid_plural "This action will complete {{count}} active enrollment in your selection."
-msgstr[0] "This action will complete {{count}} active enrollment in your selection."
-msgstr[1] "This action will complete {{count}} active enrollments in your selection."
-
-msgid "{{count}} enrollment already marked as completed will not be changed."
-msgid_plural "{{count}} enrollment already marked as completed will not be changed."
-msgstr[0] "{{count}} enrollment already marked as completed will not be changed."
-msgstr[1] "{{count}} enrollments already marked as completed will not be changed."
-
-msgid "Mark all events within enrollments as complete"
-msgstr "Mark all events within enrollments as complete"
-
-msgid "Complete enrollments"
-msgstr "Complete enrollments"
-
-msgid "Error completing enrollments"
-msgstr "Error completing enrollments"
-
-msgid "No active enrollments to complete"
-msgstr "No active enrollments to complete"
-
-msgid "Complete {{count}} enrollment"
-msgid_plural "Complete {{count}} enrollment"
-msgstr[0] "Complete {{count}} enrollment"
-msgstr[1] "Complete {{count}} enrollments"
-
-msgid "An error occurred when completing the enrollments"
-msgstr "An error occurred when completing the enrollments"
-
-msgid "An unknown error occurred when completing enrollments"
-msgstr "An unknown error occurred when completing enrollments"
-
-msgid "You do not have access to delete enrollments"
-msgstr "You do not have access to delete enrollments"
-
-msgid "Delete enrollments"
-msgstr "Delete enrollments"
-
-msgid "Delete selected enrollments"
-msgstr "Delete selected enrollments"
-
-msgid "An error occurred while loading the selected enrollments. Please try again."
-msgstr "An error occurred while loading the selected enrollments. Please try again."
+msgid "All {{enrollments}} are already completed or cancelled."
+msgstr "All {{enrollments}} are already completed or cancelled."
 
 msgid ""
-"This action will permanently delete the selected enrollments, including all "
-"associated data and events."
+"This action will complete {{count}} active {{enrollmentLabel}} in your "
+"selection."
+msgid_plural ""
+"This action will complete {{count}} active {{enrollmentLabel}} in your "
+"selection."
+msgstr[0] ""
+"This action will complete {{count}} active {{enrollmentLabel}} in your "
+"selection."
+msgstr[1] ""
+"This action will complete {{count}} active {{enrollmentLabel}} in your "
+"selection."
+
+msgid ""
+"{{count}} {{enrollmentLabel}} already marked as completed will not be "
+"changed."
+msgid_plural ""
+"{{count}} {{enrollmentLabel}} already marked as completed will not be "
+"changed."
+msgstr[0] ""
+"{{count}} {{enrollmentLabel}} already marked as completed will not be "
+"changed."
+msgstr[1] ""
+"{{count}} {{enrollmentLabel}} already marked as completed will not be "
+"changed."
+
+msgid "Mark all {{events}} within {{enrollments}} as complete"
+msgstr "Mark all {{events}} within {{enrollments}} as complete"
+
+msgid "Complete {{enrollments}}"
+msgstr "Complete {{enrollments}}"
+
+msgid "Error completing {{enrollments}}"
+msgstr "Error completing {{enrollments}}"
+
+msgid "No active {{enrollments}} to complete"
+msgstr "No active {{enrollments}} to complete"
+
+msgid "Complete {{count}} {{enrollmentLabel}}"
+msgid_plural "Complete {{count}} {{enrollmentLabel}}"
+msgstr[0] "Complete {{count}} {{enrollmentLabel}}"
+msgstr[1] "Complete {{count}} {{enrollmentLabel}}"
+
+msgid "An error occurred when completing the {{enrollments}}"
+msgstr "An error occurred when completing the {{enrollments}}"
+
+msgid "An unknown error occurred when completing {{enrollments}}"
+msgstr "An unknown error occurred when completing {{enrollments}}"
+
+msgid "You do not have access to delete {{enrollments}}"
+msgstr "You do not have access to delete {{enrollments}}"
+
+msgid "Delete {{enrollments}}"
+msgstr "Delete {{enrollments}}"
+
+msgid "Delete selected {{enrollments}}"
+msgstr "Delete selected {{enrollments}}"
+
+msgid ""
+"An error occurred while loading the selected {{enrollments}}. Please try "
+"again."
 msgstr ""
-"This action will permanently delete the selected enrollments, including all "
-"associated data and events."
+"An error occurred while loading the selected {{enrollments}}. Please try "
+"again."
 
-msgid "Active enrollments ({{count}})"
-msgid_plural "Active enrollments ({{count}})"
-msgstr[0] "Active enrollments ({{count}})"
-msgstr[1] "Active enrollments ({{count}})"
+msgid ""
+"This action will permanently delete the selected {{enrollments}}, including "
+"all associated data and {{events}}."
+msgstr ""
+"This action will permanently delete the selected {{enrollments}}, including "
+"all associated data and {{events}}."
 
-msgid "Completed enrollments ({{count}})"
-msgid_plural "Completed enrollments ({{count}})"
-msgstr[0] "Completed enrollments ({{count}})"
-msgstr[1] "Completed enrollments ({{count}})"
+msgid "Active {{enrollments}} ({{count}})"
+msgid_plural "Active {{enrollments}} ({{count}})"
+msgstr[0] "Active {{enrollments}} ({{count}})"
+msgstr[1] "Active {{enrollments}} ({{count}})"
 
-msgid "Cancelled enrollments ({{count}})"
-msgid_plural "Cancelled enrollments ({{count}})"
-msgstr[0] "Cancelled enrollments ({{count}})"
-msgstr[1] "Cancelled enrollments ({{count}})"
+msgid "Completed {{enrollments}} ({{count}})"
+msgid_plural "Completed {{enrollments}} ({{count}})"
+msgstr[0] "Completed {{enrollments}} ({{count}})"
+msgstr[1] "Completed {{enrollments}} ({{count}})"
 
-msgid "Delete {{count}} enrollment"
-msgid_plural "Delete {{count}} enrollment"
-msgstr[0] "Delete {{count}} enrollment"
-msgstr[1] "Delete {{count}} enrollments"
+msgid "Cancelled {{enrollments}} ({{count}})"
+msgid_plural "Cancelled {{enrollments}} ({{count}})"
+msgstr[0] "Cancelled {{enrollments}} ({{count}})"
+msgstr[1] "Cancelled {{enrollments}} ({{count}})"
 
-msgid "An error occurred when deleting enrollments"
-msgstr "An error occurred when deleting enrollments"
+msgid "Delete {{count}} {{enrollmentLabel}}"
+msgid_plural "Delete {{count}} {{enrollmentLabel}}"
+msgstr[0] "Delete {{count}} {{enrollmentLabel}}"
+msgstr[1] "Delete {{count}} {{enrollmentLabel}}"
+
+msgid "An error occurred when deleting {{enrollments}}"
+msgstr "An error occurred when deleting {{enrollments}}"
 
 msgid "Delete {{ trackedEntityName }} with all enrollments"
 msgstr "Delete {{ trackedEntityName }} with all enrollments"
@@ -2215,6 +2373,9 @@ msgstr "Program not found"
 
 msgid "Program is not a tracker program"
 msgstr "Program is not a tracker program"
+
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr "organisation unit could not be retrieved. Please try again later."
 
 msgid "Could not save event"
 msgstr "Could not save event"

@@ -9,6 +9,7 @@ import { Followup } from './Followup';
 import { AddNew } from './AddNew';
 import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
+import { useProgramLabel } from '../../../metaData';
 import { LoadingMaskForButton } from '../../LoadingMasks';
 import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
@@ -45,6 +46,7 @@ const ActionsPlain = ({
     onlyEnrollOnce,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
+    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenTransfer, setOpenTransfer] = useState(false);
@@ -121,7 +123,10 @@ const ActionsPlain = ({
                     </FlyoutMenu>
                 }
             >
-                {i18n.t('Enrollment actions')}
+                {i18n.t('{{enrollment}} actions', {
+                    enrollment: enrollmentLabel,
+                    interpolation: { escapeValue: false },
+                })}
             </DropdownButton>
             {loading && (
                 <div className={classes.loading}>

@@ -21,10 +21,12 @@ const NewEnrollmentRelationshipPlain =
         ExistingUniqueValueDialogActions,
     }: Props) => {
         const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
+        const relationship = i18n.t('relationship');
         const relatedStageActionsOptions = {
             [relatedStageActions.ENTER_DATA]: {
                 disabled: true,
-                disabledMessage: i18n.t('Enter details now is not available when creating a relationship'),
+                disabledMessage: i18n.t(
+                    'Enter details now is not available when creating this {{relationship}}', { relationship }),
             },
             [relatedStageActions.LINK_EXISTING_RESPONSE]: { hidden: true },
         };

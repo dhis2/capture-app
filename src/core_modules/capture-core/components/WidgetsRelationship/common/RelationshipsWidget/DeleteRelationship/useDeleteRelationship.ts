@@ -28,8 +28,9 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
     const dataEngine = useDataEngine();
     const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const queryClient = useQueryClient();
+    const relationship = i18n.t('relationship');
     const { show: showError } = useAlert(
-        i18n.t('An error occurred while deleting the relationship.'),
+        i18n.t('An error occurred while deleting the {{relationship}}.', { relationship }),
         {
             critical: true,
         },
@@ -45,7 +46,7 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
                 const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, prevRelationships);
 
                 const newRelationships = apiRelationships
-                    ?.filter(({ relationship }: any) => relationship !== relationshipId);
+                    ?.filter((rel: any) => rel.relationship !== relationshipId);
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', sourceId],

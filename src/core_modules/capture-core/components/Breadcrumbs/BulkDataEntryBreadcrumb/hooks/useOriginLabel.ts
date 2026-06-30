@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
+import { useProgramLabel } from '../../../../metaData';
 
 type Props = {
     programId: string;
@@ -10,19 +11,16 @@ type Props = {
     page: string;
 };
 
-const DefaultFilterLabels = {
-    default: i18n.t('Program overview'),
-    active: i18n.t('Active enrollments'),
-    complete: i18n.t('Completed enrollments'),
-    cancelled: i18n.t('Cancelled enrollments'),
-};
-
-const getWorkingListLabel = (selectedTemplate: any, selectedTemplateId: string) => {
+const getWorkingListLabel = (
+    selectedTemplate: any,
+    selectedTemplateId: string,
+    defaultFilterLabels: { [key: string]: string },
+) => {
     if (selectedTemplate && !selectedTemplate.isDefault) {
         return selectedTemplate.name;
     }
     if (selectedTemplateId && !selectedTemplate) {
-        return DefaultFilterLabels[selectedTemplateId as keyof typeof DefaultFilterLabels];
+        return defaultFilterLabels[selectedTemplateId];
     }
     return i18n.t('Program overview');
 };
@@ -33,6 +31,14 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
     const selectedTemplate = templates?.find(({ id }: any) => id === selectedTemplateId);
     const isSameProgram = workingListProgramId === programId;
+    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+
+    const DefaultFilterLabels = useMemo(() => ({
+        default: i18n.t('Program overview'),
+        active: i18n.t('Active {{enrollments}}', { enrollments }),
+        complete: i18n.t('Completed {{enrollments}}', { enrollments }),
+        cancelled: i18n.t('Cancelled {{enrollments}}', { enrollments }),
+    }), [enrollments]);
 
     const label = useMemo(() => {
         if (page === breadcrumbsKeys.SEARCH_PAGE) {
@@ -44,7 +50,7 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
         }
 
         if (isSameProgram) {
-            return getWorkingListLabel(selectedTemplate, selectedTemplateId);
+            return getWorkingListLabel(selectedTemplate, selectedTemplateId, DefaultFilterLabels);
         }
 
         if (!displayFrontPageList) {
@@ -58,6 +64,7 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
         selectedTemplate,
         selectedTemplateId,
         page,
+        DefaultFilterLabels,
     ]);
 
     return {

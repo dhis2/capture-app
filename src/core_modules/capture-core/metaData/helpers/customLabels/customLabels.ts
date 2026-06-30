@@ -1,35 +1,52 @@
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
+
 type CustomLabelField = {
-    field?: string,
-    pluralField?: string,
+    singular?: string,
+    plural?: string,
 };
 
 export const CUSTOM_LABEL_FIELDS = {
-    enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
-    followUp: { field: 'displayFollowUpLabel' },
-    orgUnit: { field: 'displayOrgUnitLabel' },
-    relationship: { field: 'displayRelationshipLabel' },
-    note: { field: 'displayNoteLabel' },
-    attribute: { field: 'displayTrackedEntityAttributeLabel' },
-    programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
-    event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
-    trackedEntityType: { pluralField: 'displayTrackedEntityTypesLabel' },
+    enrollment: { singular: 'displayEnrollmentLabel', plural: 'displayEnrollmentsLabel' },
+    followUp: { singular: 'displayFollowUpLabel' },
+    orgUnit: { singular: 'displayOrgUnitLabel' },
+    attribute: { plural: 'displayTrackedEntityAttributeLabel' },
+    programStage: { singular: 'displayProgramStageLabel', plural: 'displayProgramStagesLabel' },
+    event: { singular: 'displayEventLabel', plural: 'displayEventsLabel' },
+    trackedEntityType: { singular: 'displayName', plural: 'displayTrackedEntityTypesLabel' },
 } as const satisfies { [key: string]: CustomLabelField };
 
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
 export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
+export type CustomLabelScope = 'program' | 'programStage' | 'trackedEntityType';
 
-const allFields: Array<string> = Array.from(
-    new Set(
-        Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: CustomLabelField) => [term.field, term.pluralField])
-            .filter((field): field is string => Boolean(field)),
-    ),
-);
+// Each scope lists only the label keys that its cached object can carry. Tracked entity types
+// are kept separate because their singular label is the generic `displayName`, which also exists
+// on programs and stages — extracting it for them would leak the object's own name.
+const KEYS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<CustomLabelKey>> = {
+    program: ['enrollment', 'followUp', 'orgUnit', 'attribute', 'programStage', 'event'],
+    programStage: ['programStage', 'event'],
+    trackedEntityType: ['trackedEntityType'],
+};
 
-export const extractCustomLabels = (cached: Record<string, any>): CustomLabels => {
+const fieldsForScope = (scope: CustomLabelScope): Array<string> =>
+    Array.from(
+        new Set(
+            KEYS_BY_SCOPE[scope]
+                .flatMap((key) => {
+                    const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
+                    return [term.singular, term.plural];
+                })
+                .filter((field): field is string => Boolean(field)),
+        ),
+    );
+
+export const extractCustomLabels = (
+    cached: Record<string, any>,
+    scope: CustomLabelScope,
+): CustomLabels => {
     const labels: CustomLabels = {};
-    allFields.forEach((field) => {
+    fieldsForScope(scope).forEach((field) => {
         if (cached[field]) {
             labels[field] = cached[field];
         }
@@ -48,10 +65,9 @@ export const resolveLabel = (
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 
-    if (plural) {
-        return term.pluralField ? pick(term.pluralField) : pick(term.field);
-    }
-    return pick(term.field);
+    const field = plural && term.plural ? term.plural : term.singular;
+    const value = pick(field);
+    return value ? capitalizeFirstLetter(value) : value;
 };
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;

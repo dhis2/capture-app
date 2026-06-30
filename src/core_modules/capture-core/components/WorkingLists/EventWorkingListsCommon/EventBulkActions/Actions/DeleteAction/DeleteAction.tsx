@@ -6,11 +6,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
+import { useProgramLabel } from '../../../../../../metaData';
 import type { Props } from './DeleteAction.types';
 
-const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
+const getTooltipContent = (events: string, stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
     if (!stageDataWriteAccess) {
-        return i18n.t('You do not have access to delete events');
+        return i18n.t('You do not have access to delete {{events}}', { events });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -26,12 +27,13 @@ export const DeleteAction = ({
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dataEngine = useDataEngine();
+    const events = useProgramLabel('event', { plural: true }) ?? i18n.t('events');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
     );
 
-    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
+    const tooltipContent = getTooltipContent(events, stageDataWriteAccess, bulkDataEntryIsActive);
     const disabled = Boolean(!stageDataWriteAccess || !!bulkDataEntryIsActive);
 
     const { mutate: deleteEvents, isLoading }: { mutate: any, isLoading: boolean } = useMutation(
@@ -47,7 +49,7 @@ export const DeleteAction = ({
         {
             onError: (error) => {
                 log.error(errorCreator('An error occurred while deleting the events')({ error }));
-                showAlert({ message: i18n.t('An error occurred while deleting the events') });
+                showAlert({ message: i18n.t('An error occurred while deleting the {{events}}', { events }) });
             },
             onSuccess: () => {
                 onUpdateList();
@@ -78,13 +80,13 @@ export const DeleteAction = ({
                     dataTest={'bulk-delete-events-dialog'}
                 >
                     <ModalTitle>
-                        {i18n.t('Delete events')}
+                        {i18n.t('Delete {{events}}', { events })}
                     </ModalTitle>
 
                     <ModalContent>
                         {i18n.t('This cannot be undone.')}
                         {' '}
-                        {i18n.t('Are you sure you want to delete the selected events?')}
+                        {i18n.t('Are you sure you want to delete the selected {{events}}?', { events })}
                     </ModalContent>
 
                     <ModalActions>

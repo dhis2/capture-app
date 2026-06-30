@@ -6,6 +6,7 @@ import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useStageLabel } from '../../metaData';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -35,6 +36,8 @@ const WidgetStagesAndEventsPlain = ({
         multipleStages,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    const stagesLabel = useStageLabel('programStage', { plural: true, programId }) ?? i18n.t('Stages');
+    const eventsLabel = useStageLabel('event', { plural: true, programId }) ?? i18n.t('Events');
 
     return (
         <div
@@ -44,7 +47,11 @@ const WidgetStagesAndEventsPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('Stages and Events')}</span>
+                        <span>{i18n.t('{{stages}} and {{events}}', {
+                            stages: stagesLabel,
+                            events: eventsLabel,
+                            interpolation: { escapeValue: false },
+                        })}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge

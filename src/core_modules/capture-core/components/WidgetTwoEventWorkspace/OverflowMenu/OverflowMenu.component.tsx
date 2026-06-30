@@ -15,6 +15,7 @@ import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
+import { useStageLabel } from '../../../metaData';
 
 export const OverflowMenuComponent = ({
     linkedEvent,
@@ -27,6 +28,8 @@ export const OverflowMenuComponent = ({
     onDeleteEventRelationship,
 }: Props) => {
     const { navigate } = useNavigate();
+    const event = useStageLabel('event') ?? i18n.t('event');
+    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('events');
     const [isActionsOpen, setIsActionsOpen] = useState(false);
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);
@@ -59,7 +62,10 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
-                            label={i18n.t('View linked event')}
+                            label={i18n.t('View linked {{event}}', {
+                                event,
+                                interpolation: { escapeValue: false },
+                            })}
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
@@ -67,11 +73,17 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link between these events')}
+                            content={i18n.t('You do not have access to remove the link between these {{events}}', {
+                                events: eventsPlural,
+                                interpolation: { escapeValue: false },
+                            })}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink event')}
+                                label={i18n.t('Unlink {{event}}', {
+                                    event,
+                                    interpolation: { escapeValue: false },
+                                })}
                                 icon={<IconLink16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense
@@ -81,11 +93,17 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
+                            content={i18n.t('You do not have access to remove the link and delete the linked {{event}}', {
+                                event,
+                                interpolation: { escapeValue: false },
+                            })}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink and delete linked event')}
+                                label={i18n.t('Unlink and delete linked {{event}}', {
+                                    event,
+                                    interpolation: { escapeValue: false },
+                                })}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense

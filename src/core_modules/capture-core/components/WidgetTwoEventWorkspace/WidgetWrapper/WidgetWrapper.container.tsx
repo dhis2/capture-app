@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
+import { useStageLabel } from '../../../metaData';
 
 export const styles: Readonly<any> = {
     container: {
@@ -40,6 +41,7 @@ export const styles: Readonly<any> = {
 };
 
 const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: PlainProps & WithStyles<typeof styles>) => {
+    const event = useStageLabel('event') ?? i18n.t('event');
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
             <div className={classes.container}>
@@ -49,15 +51,19 @@ const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Plain
                         <span className={classes.icon}>
                             <IconLink16 color={colors.blue800} />
                         </span>
-                        <div>{i18n.t('Linked event')}</div>
+                        <div>{i18n.t('Linked {{event}}', {
+                            event,
+                            interpolation: { escapeValue: false },
+                        })}</div>
                     </div>
                     <div className={classes.decription}>
                         {linkedStage?.name && stage?.name ?
                             // eslint-disable-next-line max-len
-                            i18n.t('This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
+                            i18n.t('This {{stageName}} {{event}} is linked to a {{linkedStageName}} {{event}}. Review the linked {{event}} details before entering data below',
                                 {
                                     linkedStageName: linkedStage.name,
                                     stageName: stage.name,
+                                    event,
                                     interpolation: { escapeValue: false },
                                 },
                             ) : ''}

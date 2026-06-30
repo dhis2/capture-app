@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, IconAdd16, IconCalendar16 } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import type { OutputEffect } from '@dhis2/rules-engine-javascript';
+import { useStageLabel } from '../../../../../metaData';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
@@ -29,12 +30,13 @@ const EnrollmentQuickActionsComponentPlain = ({
     const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
+    const event = useStageLabel('event', { programId }) ?? i18n.t('event');
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
         mutatedStage.eventCount = (events
-            ?.filter(event => event.programStage === stage.id)
+            ?.filter(stageEvent => stageEvent.programStage === stage.id)
             ?.length
         );
         return mutatedStage;
@@ -79,7 +81,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                 >
                     <QuickActionButton
                         icon={<IconAdd16 color={colors.grey700} />}
-                        label={i18n.t('New event')}
+                        label={i18n.t('New {{event}}', { event })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
                         disabled={noStageAvailable}
@@ -87,7 +89,7 @@ const EnrollmentQuickActionsComponentPlain = ({
 
                     <QuickActionButton
                         icon={<IconCalendar16 color={colors.grey700} />}
-                        label={i18n.t('Schedule an event')}
+                        label={i18n.t('Schedule {{event}}', { event })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
                         disabled={noStageAvailable}

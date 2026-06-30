@@ -40,11 +40,14 @@ export const WidgetTrackedEntityRelationship = ({
     const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
         [isLoadingRelationships, isLoadingTEType],
     );
+    const relationshipsLabel = i18n.t('relationships');
 
     if (isError) {
         return (
             <div>
-                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
+                {i18n.t('Something went wrong while loading {{relationships}}. Please try again later.', {
+                    relationships: relationshipsLabel,
+                })}
             </div>
         );
     }
@@ -55,8 +58,9 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={i18n.t('{{trackedEntityTypeName}} relationships', {
+            title={i18n.t('{{trackedEntityTypeName}} {{relationships}}', {
                 trackedEntityTypeName,
+                relationships: relationshipsLabel,
                 interpolation: { escapeValue: false },
             })}
             isLoading={isLoading}

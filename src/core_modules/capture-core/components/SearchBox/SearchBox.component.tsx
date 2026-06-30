@@ -14,7 +14,7 @@ import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
-import { scopeTypes } from '../../metaData';
+import { scopeTypes, useTrackedEntityTypeLabel } from '../../metaData';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -91,6 +91,7 @@ function renderFooterContent(args: {
     searchGroupsForSelectedScope: SearchGroups;
     availableSearchOption?: AvailableSearchOption;
     trackedEntityName: string;
+    trackedEntityTypeLabel: string;
 }) {
     if (args.isLoading) {
         return <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />;
@@ -120,7 +121,7 @@ function renderFooterContent(args: {
                 })}
             >
                 {/* eslint-disable-next-line max-len */}
-                {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
+                {i18n.t('Try selecting a different {{trackedEntityType}}, or try searching in a program by choosing one from the top bar.', { trackedEntityType: args.trackedEntityTypeLabel })}
             </NoticeBox>,
         );
     }
@@ -145,6 +146,7 @@ const Index = ({
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
+    const trackedEntityTypeLabel = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type');
     const {
         searchOption: availableSearchOption,
         isLoading,
@@ -212,6 +214,7 @@ const Index = ({
                 searchGroupsForSelectedScope,
                 availableSearchOption,
                 trackedEntityName,
+                trackedEntityTypeLabel,
             })}
         </>
     );

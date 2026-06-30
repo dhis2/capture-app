@@ -17,7 +17,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes, useProgramLabel } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -56,6 +56,11 @@ const getGeometryType = geometryType =>
 const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
+const useEnrollmentWidgetLabels = () => ({
+    enrollmentLabel: useProgramLabel('enrollment') ?? i18n.t('Enrollment'),
+    followUpLabel: useProgramLabel('followUp') ?? i18n.t('Follow-up'),
+});
+
 const WidgetEnrollmentPlain = ({
     classes,
     events,
@@ -82,6 +87,7 @@ const WidgetEnrollmentPlain = ({
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
+    const { enrollmentLabel, followUpLabel } = useEnrollmentWidgetLabels();
     const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -100,7 +106,7 @@ const WidgetEnrollmentPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('Enrollment')}</span>
+                        <span>{enrollmentLabel}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -117,7 +123,10 @@ const WidgetEnrollmentPlain = ({
             >
                 {initError && (
                     <div className={classes.enrollment}>
-                        {i18n.t('Enrollment widget could not be loaded. Please try again later')}
+                        {i18n.t('{{enrollment}} widget could not be loaded. Please try again later', {
+                            enrollment: enrollmentLabel,
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}
@@ -126,7 +135,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('Follow-up')}
+                                    {followUpLabel}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />

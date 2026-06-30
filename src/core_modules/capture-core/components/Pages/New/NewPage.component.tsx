@@ -10,6 +10,7 @@ import { Button } from '@dhis2/ui';
 import type { ContainerProps } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';
+import { useProgramLabel } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
@@ -43,6 +44,7 @@ const NewPagePlain = ({
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
+    const orgUnit = useProgramLabel('orgUnit', { programId: currentScopeId }) ?? i18n.t('organisation unit');
 
     useEffect(() => {
         setScopeId(currentScopeId);
@@ -101,7 +103,7 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                             <>
                                 <IncompleteSelectionsMessage>
-                                    {i18n.t('Choose an organisation unit to start reporting')}
+                                    {i18n.t('Choose {{orgUnit}} to start reporting', { orgUnit })}
                                 </IncompleteSelectionsMessage>
                                 <Button
                                     dataTest="new-page-cancel-button"
@@ -138,7 +140,7 @@ const NewPagePlain = ({
                         {
                             newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                                 <IncompleteSelectionsMessage>
-                                    {i18n.t('The category option is not valid for the selected organisation unit.')}
+                                    {i18n.t('The category option is not valid for the selected {{orgUnit}}.', { orgUnit })}
                                     {' '}
                                     {i18n.t('Please select a valid combination.')}
                                 </IncompleteSelectionsMessage>

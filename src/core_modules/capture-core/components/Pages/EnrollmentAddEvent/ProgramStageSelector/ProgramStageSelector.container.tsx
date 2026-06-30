@@ -10,10 +10,14 @@ import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/usePr
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
+import { useStageLabel } from '../../../../metaData';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
+    const programStageLabel = useStageLabel('programStage', { programId }) ?? i18n.t('stage');
+    const programStagesLabel = useStageLabel('programStage', { programId, plural: true }) ?? i18n.t('Program Stages');
+    const event = useStageLabel('event', { programId }) ?? i18n.t('event');
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
         teiId,
@@ -51,7 +55,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                 id: currentStage.id,
                 dataAccess: currentStage.access.data,
                 eventCount: (enrollment?.events
-                    ?.filter((event: any) => event.programStage === currentStage.id)
+                    ?.filter((stageEvent: any) => stageEvent.programStage === currentStage.id)
                     ?.length
                 ),
                 displayName: currentStage.displayName,
@@ -103,7 +107,9 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         <>
             {program ?
                 <Widget
-                    header={i18n.t('Choose a stage for a new event')}
+                    header={i18n.t(
+                        'Choose the {{programStage}} for a new {{event}}',
+                        { programStage: programStageLabel, event })}
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent
@@ -112,7 +118,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                         onCancel={onCancel}
                     />
                 </Widget>
-                : i18n.t('Program Stages could not be loaded')}
+                : i18n.t('{{programStages}} could not be loaded', { programStages: programStagesLabel })}
         </>
     );
 };

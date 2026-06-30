@@ -13,6 +13,7 @@ const addEventWithRelationshipMutation = {
 
 export const useAddEventWithRelationship = ({
     eventId,
+    event,
     onUpdateOrAddEnrollmentEvents,
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
@@ -20,6 +21,7 @@ export const useAddEventWithRelationship = ({
     setIsLinking,
 }: {
     eventId: string;
+    event: string;
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
@@ -55,12 +57,12 @@ export const useAddEventWithRelationship = ({
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
                 } else {
-                    showSuccess({ message: i18n.t('The event was successfully linked') });
+                    showSuccess({ message: i18n.t('The {{event}} was successfully linked', { event }) });
                 }
             },
             onError: (_, payload: { serverData: Record<string, unknown> }) => {
                 setIsLinking(false);
-                showAlert({ message: i18n.t('An error occurred while linking the event') });
+                showAlert({ message: i18n.t('An error occurred while linking the {{event}}', { event }) });
                 onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError((payload.serverData as any).events);
             },
         },

@@ -1,5 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useProgramLabel, useStageLabel } from '../../../../metaData';
 import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { WidgetEventEdit } from '../../../WidgetEventEdit';
@@ -23,17 +24,21 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
         isError,
     } = useMetadataForProgramStage({ programId, stageId });
 
+    const orgUnit = useProgramLabel('orgUnit', { programId }) ?? i18n.t('organisation unit');
+    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
+    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('event');
+
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose an organisation unit to start reporting')}
+                {i18n.t('Choose {{orgUnit}} to start reporting', { orgUnit })}
             </IncompleteSelectionsMessage>
         );
     }
 
     if (pageStatus === pageStatuses.MISSING_DATA) {
         return (
-            <span>{i18n.t('The enrollment event data could not be found')}</span>
+            <span>{i18n.t('The {{enrollment}} {{event}} data could not be found', { enrollment, event })}</span>
         );
     }
 
