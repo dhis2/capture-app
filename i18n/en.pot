@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-10T19:29:49.525Z\n"
-"PO-Revision-Date: 2026-06-10T19:29:49.525Z\n"
+"POT-Creation-Date: 2026-06-11T17:54:31.024Z\n"
+"PO-Revision-Date: 2026-06-11T17:54:31.025Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1089,8 +1089,8 @@ msgstr "You only have view access to these program stages"
 msgid "You only have view access to this program stage"
 msgstr "You only have view access to this program stage"
 
-msgid "This event is outside the valid editing period"
-msgstr "This event is outside the valid editing period"
+msgid "This event is outside the editing period"
+msgstr "This event is outside the editing period"
 
 msgid "This event has been completed"
 msgstr "This event has been completed"
@@ -1539,9 +1539,6 @@ msgstr "after"
 msgid "before"
 msgstr "before"
 
-msgid "Schedule date info"
-msgstr "Schedule date info"
-
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 
@@ -1724,6 +1721,9 @@ msgstr "New {{ eventName }} event"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+
+msgid "This event is outside the edit period"
+msgstr "This event is outside the edit period"
 
 msgid "An error occurred while deleting the event"
 msgstr "An error occurred while deleting the event"

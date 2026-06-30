@@ -1,4 +1,6 @@
 import { useMemo } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useProgramFromIndexedDB } from '../../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useDataElementsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useDataElementsFromIndexedDB';
 import { useOptionSetsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useOptionSetsFromIndexedDB';
@@ -62,7 +64,6 @@ export const useProgramMetadata = (programId: string) => {
         if (!program || !derivedDataElementValues || !optionSetDictionary) {
             return undefined;
         }
-
         const dataElementDictionary = derivedDataElementValues.dataElementDictionary;
 
         return {
@@ -76,9 +77,18 @@ export const useProgramMetadata = (programId: string) => {
                 hideDueDate: stage.hideDueDate,
                 enableUserAssignment: stage.enableUserAssignment,
                 programStageDataElements: stage.programStageDataElements
-                    .map((programStageDataElement) => {
+                    .reduce((acc, programStageDataElement) => {
                         const dataElement = dataElementDictionary[programStageDataElement.dataElementId];
-                        return {
+                        if (!dataElement) {
+                            log.error(
+                                errorCreator('data element missing from metadata store, likely no user access; omitting it')(
+                                    { dataElementId: programStageDataElement.dataElementId },
+                                ),
+                            );
+                            return acc;
+                        }
+
+                        acc.push({
                             displayInReports: programStageDataElement.displayInReports,
                             dataElement: {
                                 id: dataElement.id,
@@ -87,8 +97,9 @@ export const useProgramMetadata = (programId: string) => {
                                 displayFormName: dataElement.displayFormName,
                                 optionSet: dataElement.optionSetValue ? optionSetDictionary[dataElement.optionSet.id] : {},
                             },
-                        };
-                    }),
+                        });
+                        return acc;
+                    }, []),
             })),
         };
     }, [program, derivedDataElementValues, optionSetDictionary]);

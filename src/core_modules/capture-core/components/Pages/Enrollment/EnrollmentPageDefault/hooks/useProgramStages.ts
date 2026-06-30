@@ -33,7 +33,7 @@ export const useProgramStages = (program: Program, programStages?: ProgramStages
                     dataAccess,
                     dataElements: programStageDataElements?.reduce((acc: any[], currentStageData) => {
                         const { displayInReports, dataElement } = currentStageData;
-                        if (displayInReports) {
+                        if (displayInReports && dataElement) {
                             const options = buildOptionsFromOptionSet(dataElement.optionSet);
                             acc.push({
                                 id: dataElement.id,
