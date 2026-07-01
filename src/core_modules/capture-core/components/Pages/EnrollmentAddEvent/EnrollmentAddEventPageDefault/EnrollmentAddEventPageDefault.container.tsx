@@ -33,6 +33,7 @@ export const EnrollmentAddEventPageDefault = ({
     enrollment,
     attributeValues,
     commonDataError,
+    trackedEntityInactive,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
@@ -203,6 +204,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
+                trackedEntityInactive={trackedEntityInactive}
             />
         </>
     );

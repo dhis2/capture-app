@@ -41,6 +41,7 @@ import {
 import {
     addPersistedEnrollmentEvents,
     deleteEnrollmentEvent,
+    setTrackedEntityInactiveStatus,
     updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
 import { useHideWidgetByRuleLocations } from '../../../../hooks';
@@ -68,7 +69,12 @@ export const EnrollmentPageDefault = () => {
         error: enrollmentsError,
         enrollment,
         attributeValues,
+        readOnly: trackedEntityInactive,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+
+    const onStatusToggleSuccess = useCallback(() => {
+        dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));
+    }, [dispatch, trackedEntityInactive]);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata?.programStages);
     /*
@@ -192,7 +198,7 @@ export const EnrollmentPageDefault = () => {
     }
 
     return (
-        <EnrollmentAccessProvider program={program}>
+        <EnrollmentAccessProvider program={program} trackedEntityInactive={trackedEntityInactive}>
             <EnrollmentPageLayout
                 pageLayout={pageLayout}
                 currentPage={EnrollmentPageKeys.OVERVIEW}
@@ -206,6 +212,7 @@ export const EnrollmentPageDefault = () => {
                 onAddNew={onAddNew}
                 onDelete={onDelete}
                 onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
+                onStatusToggleSuccess={onStatusToggleSuccess}
                 onViewAll={onViewAll}
                 onBackToMainPage={onBackToMainPage}
                 onCreateNew={onCreateNew}
