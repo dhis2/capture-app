@@ -14,6 +14,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ReactNode } from 'react';
 import type { OptionSet } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip/';
 
 const getStyles: Readonly<any> = {
     tableContainer: {
@@ -25,6 +26,12 @@ const getStyles: Readonly<any> = {
     headerAlign: {
         '&>span.container': {
             alignItems: 'flex-end',
+        },
+    },
+    inactiveRow: {
+        opacity: 0.65,
+        '& td': {
+            fontStyle: 'italic',
         },
     },
 };
@@ -123,7 +130,11 @@ class Index extends React.Component<Props> {
             >
                 <CheckboxField
                     checked={allRowsAreSelected}
-                    onChange={() => onSelectAll(dataSource.map((item: any) => item.id))}
+                    onChange={() => onSelectAll(
+                        dataSource
+                            .filter((item: any) => !item.inactive)
+                            .map((item: any) => item.id),
+                    )}
                 />
             </DataTableColumnHeader>
         ) : null;
@@ -149,7 +160,7 @@ class Index extends React.Component<Props> {
     }
 
     renderRows(visibleColumns: Column[], columnsCount: number) {
-        const { dataSource, rowIdKey, selectedRows, onRowSelect, ...customEndCellBodyProps } = this.props;
+        const { dataSource, rowIdKey, selectedRows, onRowSelect, classes, ...customEndCellBodyProps } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             return (
@@ -164,9 +175,10 @@ class Index extends React.Component<Props> {
                 <DataTableCell
                     key={column.id}
                     align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
-                    style={{ cursor: this.props.isSelectionInProgress ? 'pointer' : 'default' }}
+                    style={{ cursor: this.props.isSelectionInProgress && !row.inactive ? 'pointer' : 'default' }}
                     onClick={() => {
                         if (this.props.isSelectionInProgress) {
+                            if (row.inactive) return;
                             onRowSelect(row[rowIdKey]);
                             return;
                         }
@@ -183,16 +195,23 @@ class Index extends React.Component<Props> {
                     selected={selectedRows[rowId]}
                     key={rowId}
                     dataTest={row[rowIdKey]}
+                    className={cx({ [classes.inactiveRow]: row.inactive })}
                 >
                     {this.props.showSelectCheckBox && (
                         <DataTableCell
                             width={'40px'}
                         >
-                            <CheckboxField
-                                dataTest={'select-row-checkbox'}
-                                checked={selectedRows[rowId]}
-                                onChange={() => onRowSelect(rowId)}
-                            />
+                            <ConditionalTooltip
+                                content={i18n.t('Tracked entity is deactivated')}
+                                enabled={Boolean(row.inactive)}
+                            >
+                                <CheckboxField
+                                    dataTest={'select-row-checkbox'}
+                                    checked={selectedRows[rowId]}
+                                    disabled={row.inactive}
+                                    onChange={() => onRowSelect(rowId)}
+                                />
+                            </ConditionalTooltip>
                         </DataTableCell>
                     )}
                     {cells}

@@ -22,6 +22,7 @@ export type ApiEnrollmentEvent = {
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
     occurredAt: string;
     scheduledAt: string;
+    completedAt?: string;
     updatedAt: string;
     dataValues: Array<ApiDataValue>;
     notes?: Array<any>;

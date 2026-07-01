@@ -13,6 +13,7 @@ export const EnrollmentReadOnlyBadge = () => {
         trackedEntityTypeName,
         isEventWithinValidPeriod,
         canEditCompletedEvent,
+        isWithinCompleteEventsExpiry,
     } = useEnrollmentAccessContext();
 
     if (isEventPage) {
@@ -21,6 +22,7 @@ export const EnrollmentReadOnlyBadge = () => {
                 programStageWriteAccess={currentStageWriteAccess}
                 eventWithinValidPeriod={isEventWithinValidPeriod}
                 canEditCompletedEvent={canEditCompletedEvent}
+                withinCompleteEventsExpiry={isWithinCompleteEventsExpiry}
                 trackedEntityName={trackedEntityTypeName}
                 inlineLabel
             />

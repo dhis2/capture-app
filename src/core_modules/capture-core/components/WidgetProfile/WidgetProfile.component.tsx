@@ -74,6 +74,7 @@ const WidgetProfilePlain = ({
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
+    onStatusToggleSuccess,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
@@ -97,6 +98,8 @@ const WidgetProfilePlain = ({
     const {
         programWriteAccess,
         trackedEntityTypeWriteAccess,
+        canToggleTrackedEntityStatus,
+        trackedEntityInactive,
     } = useEnrollmentAccessContext();
     const {
         loading: userRolesLoading,
@@ -198,9 +201,21 @@ const WidgetProfilePlain = ({
 
     const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
 
-    const trackedEntityProp = useMemo(() => ({
-        trackedEntity: trackedEntity ? (trackedEntity.trackedEntity || teiId) : teiId,
-    }), [trackedEntity, teiId]);
+    const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
+        const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
+        const trackedEntityTypeId = program?.trackedEntityType?.id;
+        const teiOrgUnit = (trackedEntity as any)?.orgUnit;
+        return {
+            trackedEntityProp: { trackedEntity: resolvedId },
+            trackedEntityForToggle: trackedEntity && trackedEntityTypeId && teiOrgUnit
+                ? {
+                    trackedEntity: resolvedId,
+                    trackedEntityType: trackedEntityTypeId,
+                    orgUnit: teiOrgUnit,
+                }
+                : null,
+        };
+    }, [trackedEntity, program, teiId]);
 
     const widgetHeader = (
         <div className={classes.header}>
@@ -221,8 +236,12 @@ const WidgetProfilePlain = ({
                 <OverflowMenu
                     trackedEntityTypeName={trackedEntityTypeName}
                     canWriteData={canWriteData}
+                    canToggleStatus={canToggleTrackedEntityStatus}
+                    trackedEntityInactive={trackedEntityInactive}
                     trackedEntity={trackedEntityProp}
+                    trackedEntityForToggle={trackedEntityForToggle}
                     onDeleteSuccess={onDeleteSuccess}
+                    onStatusToggleSuccess={onStatusToggleSuccess}
                     displayChangelog={!!displayChangelog}
                     trackedEntityData={clientAttributesWithSubvalues}
                     teiId={teiId}

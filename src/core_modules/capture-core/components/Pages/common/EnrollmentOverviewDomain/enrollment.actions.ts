@@ -22,10 +22,14 @@ export const enrollmentSiteActionTypes = {
     ROLLBACK_ENROLLMENT_AND_EVENTS: 'Enrollment.RollbackEnrollmentAndEvents',
     COMMIT_ENROLLMENT_AND_EVENTS: 'Enrollment.CommitEnrollmentAndEvents',
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
+    SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
 };
 
-export const setCommonEnrollmentSiteData = (enrollment: any, attributeValues: any) =>
-    actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues });
+export const setCommonEnrollmentSiteData = (enrollment: any, attributeValues: any, inactive?: boolean) =>
+    actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues, inactive });
+
+export const setTrackedEntityInactiveStatus = (inactive: boolean) =>
+    actionCreator(enrollmentSiteActionTypes.SET_TRACKED_ENTITY_INACTIVE_STATUS)({ inactive });
 
 export const updateEnrollmentDate = (enrollmentDate: string) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_DATE)({
