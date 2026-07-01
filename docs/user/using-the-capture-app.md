@@ -1138,6 +1138,9 @@ Click the **Delete ${tracked entity type}** button to delete the tracked entity.
 On the enrollment dashboard, the feedback widget displays text and values that are triggered by certain conditions. 
 If the current dashboard triggers some rules set up in the program, the text or values will be automatically displayed.
 
+The displayed text and values support Markdown formatting. 
+![](resources/images/enrollment-edit-event-feedback-widget.png)
+
 #### Empty state
 
 If there isn't any feedback for the current dashboard, the widget shows a short _empty_ message.
