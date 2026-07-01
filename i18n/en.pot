@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-01T10:23:03.776Z\n"
-"PO-Revision-Date: 2026-07-01T10:23:03.776Z\n"
+"POT-Creation-Date: 2026-07-01T12:01:25.670Z\n"
+"PO-Revision-Date: 2026-07-01T12:01:25.671Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -798,9 +798,6 @@ msgstr "An error has occurred"
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
-
-msgid "Org unit is not valid with current program"
-msgstr "Org unit is not valid with current program"
 
 msgid "There was an error opening the Page"
 msgstr "There was an error opening the Page"

@@ -204,7 +204,6 @@ import {
     teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
     verifyFetchedEnrollmentsEpic,
-    autoSwitchOrgUnitEpic,
     clearErrorViewEpic,
 } from 'capture-core/components/Pages/Enrollment/epics';
 import {
@@ -361,7 +360,6 @@ export const epics = (combineEpics as any)(
     teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
     verifyFetchedEnrollmentsEpic,
-    autoSwitchOrgUnitEpic,
     clearErrorViewEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
