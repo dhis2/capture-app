@@ -6,7 +6,7 @@ import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types/global';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
-import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
+import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote, removeEnrollmentNote }
     from './WidgetEnrollmentNote.actions';
 import type { ClientNote, SaveContext } from './WidgetEnrollmentNote.types';
 
@@ -46,6 +46,7 @@ export const addNoteForEnrollmentEpic = (
                     uid: clientId,
                 },
                 storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                clientId,
             };
 
             const saveContext: SaveContext = {
@@ -58,3 +59,12 @@ export const addNoteForEnrollmentEpic = (
                 addEnrollmentNote(enrollmentId, clientNote),
             ], batchActionTypes.ADD_NOTE_BATCH_FOR_ENROLLMENT);
         }));
+
+export const removeNoteForEnrollmentEpic = (
+    action$: EpicAction<unknown, { context: SaveContext }>,
+) =>
+    action$.pipe(
+        ofType(actionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT),
+        map((action: { meta: { context: SaveContext } }) =>
+            removeEnrollmentNote(action.meta.context.enrollmentId, action.meta.context.noteClientId),
+        ));

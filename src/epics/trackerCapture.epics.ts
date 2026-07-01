@@ -128,7 +128,10 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
-import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentNote/WidgetEnrollmentNote.epics';
+import {
+    addNoteForEnrollmentEpic,
+    removeNoteForEnrollmentEpic,
+} from 'capture-core/components/WidgetEnrollmentNote/WidgetEnrollmentNote.epics';
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
@@ -373,6 +376,7 @@ export const epics = (combineEpics as any)(
     updateEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
+    removeNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
     scheduleEnrollmentEventEpic,
     orgUnitFetcherEpic,

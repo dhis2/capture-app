@@ -20,6 +20,7 @@ export type EnrollmentAccessContextValue = {
     canToggleTrackedEntityStatus: boolean;
     isEventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
+    isWithinCompleteEventsExpiry?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -46,6 +47,7 @@ type ProviderProps = {
     trackedEntityInactive?: boolean;
     isEventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
+    isWithinCompleteEventsExpiry?: boolean;
     children: React.ReactNode;
 };
 
@@ -66,6 +68,7 @@ const computeContextValue = (
     trackedEntityInactive: boolean,
     isEventWithinValidPeriod?: boolean,
     canEditCompletedEvent?: boolean,
+    isWithinCompleteEventsExpiry?: boolean,
 ): EnrollmentAccessContextValue => {
     const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
     const rawProgramWriteAccess = Boolean(program.access?.data?.write);
@@ -100,6 +103,7 @@ const computeContextValue = (
         canToggleTrackedEntityStatus: rawTrackedEntityTypeWriteAccess,
         isEventWithinValidPeriod,
         canEditCompletedEvent,
+        isWithinCompleteEventsExpiry,
     };
 };
 
@@ -109,12 +113,18 @@ export const EnrollmentAccessProvider = ({
     trackedEntityInactive = false,
     isEventWithinValidPeriod,
     canEditCompletedEvent,
+    isWithinCompleteEventsExpiry,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(
         () => (program
             ? computeContextValue(
-                program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent,
+                program,
+                currentStageId,
+                trackedEntityInactive,
+                isEventWithinValidPeriod,
+                canEditCompletedEvent,
+                isWithinCompleteEventsExpiry,
             )
             : {
                 ...fallback,
@@ -128,7 +138,14 @@ export const EnrollmentAccessProvider = ({
                     showWidgetBadge: false,
                 }),
             }),
-        [program, currentStageId, trackedEntityInactive, isEventWithinValidPeriod, canEditCompletedEvent],
+        [
+            program,
+            currentStageId,
+            trackedEntityInactive,
+            isEventWithinValidPeriod,
+            canEditCompletedEvent,
+            isWithinCompleteEventsExpiry,
+        ],
     );
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

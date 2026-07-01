@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/rules-engine-javascript",
-    "version": "106.4.5",
+    "version": "106.5.3",
     "license": "BSD-3-Clause",
     "main": "./build/cjs/index.js",
     "scripts": {
@@ -14,7 +14,7 @@
         "d2-utilizr": "^0.2.15",
         "loglevel": "^1.9.1",
         "@babel/preset-typescript": "^7.27.0",
-        "@types/node": "^25.6.2",
+        "@types/node": "^25.9.3",
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.1",
         "@types/react-router-dom": "^5.3.3",
