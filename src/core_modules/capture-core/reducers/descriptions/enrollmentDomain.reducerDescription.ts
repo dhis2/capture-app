@@ -26,6 +26,7 @@ const {
     DELETE_ENROLLMENT_EVENT,
     UPDATE_ENROLLMENT_EVENT_STATUS,
     DELETE_ENROLLMENT_EVENT_RELATIONSHIP,
+    SET_TRACKED_ENTITY_INACTIVE_STATUS,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -41,11 +42,16 @@ const setAssignee = (state, action) => {
 
 export const enrollmentDomainDesc = createReducerDescription(
     {
-        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, { payload: { enrollment, attributeValues } }) => ({
+        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, { payload: { enrollment, attributeValues, inactive } }) => ({
             ...state,
             enrollment,
             attributeValues,
             enrollmentId: enrollment?.enrollment,
+            inactive,
+        }),
+        [SET_TRACKED_ENTITY_INACTIVE_STATUS]: (state, { payload: { inactive } }) => ({
+            ...state,
+            inactive,
         }),
         [UPDATE_ENROLLMENT_DATE]: (state, { payload: { enrollmentDate } }) => ({
             ...state,

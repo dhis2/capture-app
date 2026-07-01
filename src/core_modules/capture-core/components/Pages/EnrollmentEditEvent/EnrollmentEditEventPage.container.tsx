@@ -97,7 +97,8 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+    const { enrollment: enrollmentSite, readOnly: trackedEntityInactive } =
+        useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
     useEffect(() => {
@@ -117,6 +118,7 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             initMode={initMode}
             enrollmentSite={enrollmentSite}
+            trackedEntityInactive={trackedEntityInactive}
             event={storedEvent}
         />
     ) : <LoadingMaskForPage />;
@@ -130,6 +132,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     orgUnitId,
     initMode,
     enrollmentSite,
+    trackedEntityInactive,
     event,
 }: Props) => {
     const { navigate } = useNavigate();
@@ -309,6 +312,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         <EnrollmentAccessProvider
             program={program}
             currentStageId={stageId}
+            trackedEntityInactive={trackedEntityInactive}
             isEventWithinValidPeriod={isEventWithinValidPeriod}
             canEditCompletedEvent={canEditCompletedEvent}
             isWithinCompleteEventsExpiry={isWithinCompleteExpiry}

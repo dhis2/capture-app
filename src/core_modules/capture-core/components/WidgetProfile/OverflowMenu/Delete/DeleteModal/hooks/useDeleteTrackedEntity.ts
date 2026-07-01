@@ -1,5 +1,5 @@
 import { useDataMutation } from '@dhis2/app-runtime';
-import { v4 as uuid } from 'uuid';
+import { processErrorReports, type ErrorReport } from '../../../processErrorReports';
 
 const trackedEntityDelete = {
     resource: 'tracker?async=false&importStrategy=DELETE',
@@ -9,14 +9,9 @@ const trackedEntityDelete = {
     }),
 } as const;
 
-const processErrorReports = (error: any): Array<{ message: string; uid: string }> => {
-    const errorReports = error?.details?.validationReport?.errorReports;
-    return errorReports?.length > 0 ? errorReports : [{ uid: uuid(), message: error.message }];
-};
-
 export const useDeleteTrackedEntity = (
     onSuccess?: () => void,
-    onError?: (errorReports: Array<{ message: string; uid: string }>) => void,
+    onError?: (errorReports: Array<ErrorReport>) => void,
 ) => {
     const [deleteMutation, { loading: deleteLoading }] = useDataMutation(trackedEntityDelete, {
         onComplete: () => {
