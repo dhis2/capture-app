@@ -125,8 +125,8 @@ export const verifyFetchedEnrollments = ({ teiId, programId, action }: { teiId: 
 export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_ERROR)({ accessLevel });
 
-export const saveEnrollments = ({ enrollments, programOwnerId }: { enrollments: any, programOwnerId: string | null }) =>
-    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments, programOwnerId });
+export const saveEnrollments = ({ enrollments }: { enrollments: any }) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments });
 
 // Page status
 export const showDefaultViewOnEnrollmentPage = () =>
