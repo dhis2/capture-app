@@ -91,7 +91,7 @@
         "@babel/preset-typescript": "^7.27.0",
         "@badeball/cypress-cucumber-preprocessor": "17.2.1",
         "@cypress/webpack-preprocessor": "^6.0.0",
-        "@dhis2/cli-app-scripts": "^12.11.1",
+        "@dhis2/cli-app-scripts": "^12.11.3",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.7.10",
         "@dhis2/cli-utils-cypress": "^10.1.2",
