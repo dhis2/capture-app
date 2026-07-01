@@ -3,10 +3,11 @@ import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
+import type { ErrorReport } from '../../processErrorReports';
 
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
-    const [errorReports, setErrorReports] = useState<Array<{ message: string; uid: string }>>([]);
-    const handleErrors = (errors: Array<{ message: string; uid: string }>) => {
+    const [errorReports, setErrorReports] = useState<Array<ErrorReport>>([]);
+    const handleErrors = (errors: Array<ErrorReport>) => {
         setErrorReports(errors);
     };
     const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(onDeleteSuccess, handleErrors);

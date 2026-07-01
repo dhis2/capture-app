@@ -8,6 +8,7 @@ export type ApiTeiAttributes = Array<{
 export type ApiTei = {
     trackedEntity: string,
     attributes?: ApiTeiAttributes,
+    inactive?: boolean,
     programOwners: Array<{
         orgUnit: string,
         program: string,

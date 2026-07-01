@@ -11,6 +11,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollmentId: storedEnrollmentId,
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
+        inactive: storedInactive,
     } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain);
 
     const { data, error } = useApiDataQuery(
@@ -20,7 +21,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             id: teiId,
             params: {
                 program: programId,
-                fields: ['enrollments[*,!attributes],attributes'],
+                fields: ['enrollments[*,!attributes],attributes,inactive'],
             },
         },
         {
@@ -35,6 +36,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollment: data?.enrollments
             ?.find((enrollment: any) => enrollment.enrollment === enrollmentId),
         attributeValues: data?.attributes,
+        inactive: Boolean(data?.inactive),
     };
 
     useEffect(() => {
@@ -43,6 +45,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                 fetchedEnrollmentData.enrollment,
                 fetchedEnrollmentData.attributeValues
                     .map(({ attribute, value }: any) => ({ id: attribute, value })),
+                fetchedEnrollmentData.inactive,
             ));
         }
     }, [
@@ -50,12 +53,14 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.reference,
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
+        fetchedEnrollmentData.inactive,
     ]);
 
     const inEffectData = enrollmentId === storedEnrollmentId ? {
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
-    } : { enrollment: undefined, attributeValues: undefined };
+        readOnly: Boolean(storedInactive),
+    } : { enrollment: undefined, attributeValues: undefined, readOnly: false };
 
     return {
         error,

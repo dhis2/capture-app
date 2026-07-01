@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-26T12:08:56.350Z\n"
-"PO-Revision-Date: 2026-06-26T12:08:56.350Z\n"
+"POT-Creation-Date: 2026-07-01T10:23:03.776Z\n"
+"PO-Revision-Date: 2026-07-01T10:23:03.776Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -593,9 +593,6 @@ msgstr "Type to filter options"
 msgid "No match found"
 msgstr "No match found"
 
-msgid "Choose an organisation unit"
-msgstr "Choose an organisation unit"
-
 msgid "Clear"
 msgstr "Clear"
 
@@ -619,6 +616,9 @@ msgstr "suggestions could not be retrieved"
 
 msgid "No items to display"
 msgstr "No items to display"
+
+msgid "Tracked entity is deactivated"
+msgstr "Tracked entity is deactivated"
 
 msgid "Select columns"
 msgstr "Select columns"
@@ -1115,6 +1115,9 @@ msgstr "Choose an organisation unit in the form below"
 
 msgid "None selected"
 msgstr "None selected"
+
+msgid "Choose an organisation unit"
+msgstr "Choose an organisation unit"
 
 msgid "Choose a {{categoryName}}"
 msgstr "Choose a {{categoryName}}"
@@ -1629,6 +1632,38 @@ msgstr "Try again or contact your system administrator for support"
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr "Activate {{trackedEntityTypeName}}"
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr "Deactivate {{trackedEntityTypeName}}"
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr "Yes, activate {{trackedEntityTypeName}}"
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr "Yes, deactivate {{trackedEntityTypeName}}"
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr "There was a problem activating the {{trackedEntityTypeName}}"
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr "There was a problem deactivating the {{trackedEntityTypeName}}"
+
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
 
@@ -1978,9 +2013,6 @@ msgstr "Owner organisation unit"
 msgid "Registration Date"
 msgstr "Registration Date"
 
-msgid "Inactive"
-msgstr "Inactive"
-
 msgid "Enrollment status"
 msgstr "Enrollment status"
 
@@ -2251,6 +2283,12 @@ msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
+
+msgid "Could not save enrollment note"
+msgstr "Could not save enrollment note"
+
+msgid "Could not save event note"
+msgstr "Could not save event note"
 
 msgid "There was an error fetching metadata"
 msgstr "There was an error fetching metadata"
