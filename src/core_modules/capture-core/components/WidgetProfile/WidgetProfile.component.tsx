@@ -201,18 +201,19 @@ const WidgetProfilePlain = ({
 
     const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
 
-    const trackedEntityProp = useMemo(() => ({
-        trackedEntity: trackedEntity ? (trackedEntity.trackedEntity || teiId) : teiId,
-    }), [trackedEntity, teiId]);
-
-    const trackedEntityForToggle = useMemo(() => {
+    const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
+        const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
         const trackedEntityTypeId = program?.trackedEntityType?.id;
         const teiOrgUnit = (trackedEntity as any)?.orgUnit;
-        if (!trackedEntity || !trackedEntityTypeId || !teiOrgUnit) return null;
         return {
-            trackedEntity: trackedEntity.trackedEntity || teiId,
-            trackedEntityType: trackedEntityTypeId,
-            orgUnit: teiOrgUnit,
+            trackedEntityProp: { trackedEntity: resolvedId },
+            trackedEntityForToggle: trackedEntity && trackedEntityTypeId && teiOrgUnit
+                ? {
+                    trackedEntity: resolvedId,
+                    trackedEntityType: trackedEntityTypeId,
+                    orgUnit: teiOrgUnit,
+                }
+                : null,
         };
     }, [trackedEntity, program, teiId]);
 

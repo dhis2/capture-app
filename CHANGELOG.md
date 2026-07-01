@@ -1,3 +1,10 @@
+# [106.6.0](https://github.com/dhis2/capture-app/compare/v106.5.3...v106.6.0) (2026-07-01)
+
+
+### Features
+
+* [DHIS2-20842] Deactivate tracked entity ([#4605](https://github.com/dhis2/capture-app/issues/4605)) ([159aad3](https://github.com/dhis2/capture-app/commit/159aad363469cd8d7088cc968a4e5fcf9c79f163))
+
 ## [106.5.3](https://github.com/dhis2/capture-app/compare/v106.5.2...v106.5.3) (2026-06-30)
 
 
