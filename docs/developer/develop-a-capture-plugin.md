@@ -11,14 +11,14 @@ Developing a capture plugin is almost the same as developing a regular DHIS2 cus
 
 ## Step 1: Create a new DHIS2 custom app
 
-To create a new DHIS2 custom app, you can use the D2 CLI.
+To create a new DHIS2 custom app, you can use the `npm create @dhis2/app` command.
 
-The D2 CLI helps you with many things, such as setting up a new project, building your app, and deploying it to your DHIS2 instance.
+This will prompt you with a series of questions to help you set up your new app, and once completed, it will create all the necessary files and packages for you.
 
-Please read our documentation on the [D2 CLI](/docs/quickstart/quickstart-web) to learn more about how to use it. 
+Please read our documentation for details on how to use the command [here](/docs/cli/create-app). 
 
 ```sh
-d2 app scripts init my-form-field-plugin
+npm create @dhis2/app
 ```
 
 ## Step 2: Add a plugin entrypoint
