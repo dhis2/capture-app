@@ -5,7 +5,7 @@ import { D2SectionContainer } from './D2Section.container';
 import type { Props, PropsForPureComponent } from './D2Form.types';
 import { Section } from '../../metaData';
 
-class D2Form extends React.PureComponent<PropsForPureComponent> {
+export class D2Form extends React.PureComponent<PropsForPureComponent> {
     name: string;
     sectionInstances: Map<string, any>;
 
@@ -17,9 +17,14 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
 
     validateFormIncludeSectionFailedFields(options: any) {
         let failedFormFields: any[] = [];
+        // Evaluate every section without short-circuiting. A section's isValid() inspects the
+        // form-wide field UI state (keyed by formId), so a valid section can still report invalid
+        // when another section has a failing field. Short-circuiting on the first such section
+        // would drop the actual failing fields (collected per-section by getInvalidFields()),
+        // leaving failedFields empty and preventing the scroll-to-error.
         const isValid = Array.from(this.sectionInstances.entries())
             .map((entry: any) => entry[1])
-            .every((sectionInstance) => {
+            .map((sectionInstance) => {
                 const isHidden = sectionInstance.props.isHidden;
                 if (isHidden) {
                     return true;
@@ -44,7 +49,8 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
                     failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
                 }
                 return sectionIsValid;
-            });
+            })
+            .every(Boolean);
 
         return {
             isValid,
@@ -58,8 +64,12 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             return true;
         }
 
-        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
-        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
+        // Scroll to the first failed field that exposes a goto() method. Some fields (e.g. plugins)
+        // register no instance, so picking failedFields[0] blindly could no-op the scroll.
+        const firstFailureInstance = failedFields
+            .map(failedField => failedField.instance)
+            .find(instance => instance && instance.goto);
+        firstFailureInstance && firstFailureInstance.goto();
         return false;
     }
 
