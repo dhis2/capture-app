@@ -2,6 +2,7 @@ export type FilteredFeedbackText = {
     id: string;
     message: string;
     color?: string;
+    legendSetId?: string;
 }
 
 export type FilteredFeedbackKeyValue = {
@@ -9,9 +10,10 @@ export type FilteredFeedbackKeyValue = {
     key: string;
     value: string;
     color?: string;
+    legendSetId?: string;
 }
 
-export type FeedbackWidgetData = string | FilteredFeedbackText | FilteredFeedbackKeyValue;
+export type FeedbackWidgetData = FilteredFeedbackText | FilteredFeedbackKeyValue;
 
 export type FeedbackInputProps = {
     widgetEffects?: Record<string, unknown>;

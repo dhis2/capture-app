@@ -11,7 +11,7 @@ export type FilteredIndicatorKeyValue = {
     color?: string;
 }
 
-export type IndicatorWidgetData = string | FilteredIndicatorText | FilteredIndicatorKeyValue;
+export type IndicatorWidgetData = FilteredIndicatorText | FilteredIndicatorKeyValue;
 
 export type IndicatorProps = {
     indicators?: Array<IndicatorWidgetData>;
