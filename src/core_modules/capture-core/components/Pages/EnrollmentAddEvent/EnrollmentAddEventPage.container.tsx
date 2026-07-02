@@ -20,9 +20,6 @@ import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 
 const getInvalidPageStatus = (validIds: any) => {
     const isProgramIdInvalid = !validIds[IdTypes.PROGRAM_ID]?.valid;
-    if (!isProgramIdInvalid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
-        return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
-    }
     if (isProgramIdInvalid) return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
     return EnrollmentAddEventPageStatuses.PAGE_INVALID;
 };
@@ -63,7 +60,7 @@ const styles = {
 const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => {
     const { navigate } = useNavigate();
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
-    const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
+    const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId });
     const {
         enrollment,
         attributeValues,
@@ -114,10 +111,6 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
             >
                 {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES && (
                     i18n.t('Page is missing required values from URL')
-                )}
-
-                {pageStatus === EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID && (
-                    i18n.t('Org unit is not valid with current program')
                 )}
 
                 {pageStatus === EnrollmentAddEventPageStatuses.PAGE_INVALID && (
