@@ -3,17 +3,14 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { ReactQueryAppNamespace } from '../../../../../../../utils/reactQueryHelpers';
 
 type Props = {
     eventId: string;
     pendingApiResponse: boolean;
-    teiId: string;
-    programId: string;
-    enrollmentId: string;
+    eventDetails: ApiEnrollmentEvent;
     onDeleteEvent: (eventId: string) => void;
     onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
     setDeleteModalOpen: (open: boolean) => void;
@@ -23,9 +20,7 @@ export const DeleteActionModal = ({
     setDeleteModalOpen,
     pendingApiResponse,
     eventId,
-    teiId,
-    programId,
-    enrollmentId,
+    eventDetails,
     onDeleteEvent,
     onRollbackDeleteEvent,
 }: Props) => {
@@ -36,15 +31,6 @@ export const DeleteActionModal = ({
         },
     );
     const dataEngine = useDataEngine();
-    const queryClient = useQueryClient();
-    const enrollmentDomainQueryKey = [
-        ReactQueryAppNamespace,
-        'stages&event',
-        'enrollmentData',
-        teiId,
-        programId,
-        enrollmentId,
-    ];
 
     const { mutate } = useMutation(
         () => dataEngine.mutate({
@@ -60,21 +46,14 @@ export const DeleteActionModal = ({
         }),
         {
             onMutate: () => {
-                const previousData = queryClient
-                    .getQueryData(enrollmentDomainQueryKey) as {
-                        enrollments?: Array<{
-                            events?: Array<ApiEnrollmentEvent>;
-                        }>;
-                    };
-                const eventToRollbackOnFail = previousData
-                    ?.enrollments
-                    ?.flatMap(enrollment => enrollment.events || [])
-                    ?.find(event => event.event === eventId);
+                // Capture the event before the optimistic removal so it can be restored
+                // from the same source of truth (the rendered redux event) if the delete fails.
+                const eventToRollbackOnFail = eventDetails;
 
                 onDeleteEvent(eventId);
                 return eventToRollbackOnFail;
             },
-            onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: any) => {
+            onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: ApiEnrollmentEvent) => {
                 showError({ message: i18n.t('An error occurred while deleting the event') });
                 log.error(errorCreator('An error occurred while deleting the event')({ apiError, payload }));
 

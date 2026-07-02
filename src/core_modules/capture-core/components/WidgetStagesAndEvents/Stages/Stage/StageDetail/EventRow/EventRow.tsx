@@ -41,9 +41,7 @@ const EventRowPlain = ({
     onDeleteEvent,
     onRollbackDeleteEvent,
     onUpdateEventStatus,
-    teiId,
     programId,
-    enrollmentId,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
@@ -100,9 +98,7 @@ const EventRowPlain = ({
                             <DeleteActionModal
                                 eventId={id}
                                 pendingApiResponse={pendingApiResponse}
-                                teiId={teiId}
-                                programId={programId}
-                                enrollmentId={enrollmentId}
+                                eventDetails={eventDetails}
                                 onDeleteEvent={onDeleteEvent}
                                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                                 setDeleteModalOpen={setDeleteModalOpen}
