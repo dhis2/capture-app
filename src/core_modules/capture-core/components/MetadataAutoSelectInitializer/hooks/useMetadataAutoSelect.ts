@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { useOrgUnitAutoSelect } from '../../../dataQueries';
 
 const getAllPrograms = () => {
     const userStorageController = getUserMetadataStorageController();
@@ -29,25 +28,18 @@ export const useMetadataAutoSelect = () => {
         },
     );
 
-    const queryOptions = { enabled: Object.keys(urlParams).length === 0 && !mounted };
-    const { isLoading: loadingOrgUnits, data: searchOrgUnits } = useOrgUnitAutoSelect(queryOptions);
-
     const updateUrlIfApplicable = useCallback(() => {
         const paramsToAdd = {
             programId: null,
-            orgUnitId: null,
         };
         if (programs && programs.length === 1) {
             paramsToAdd.programId = programs[0].id;
-        }
-        if (searchOrgUnits && (searchOrgUnits as any).length === 1) {
-            paramsToAdd.orgUnitId = searchOrgUnits[0].id;
         }
 
         if (Object.keys(paramsToAdd).length) {
             navigate(`?${buildUrlQueryString({ ...paramsToAdd })}`);
         }
-    }, [navigate, programs, searchOrgUnits]);
+    }, [navigate, programs]);
 
     useEffect(() => {
         if (mounted) return;
@@ -56,7 +48,7 @@ export const useMetadataAutoSelect = () => {
             return;
         }
 
-        if (!loadingPrograms && !loadingOrgUnits) {
+        if (!loadingPrograms) {
             updateUrlIfApplicable();
             setMounted(true);
         }
@@ -66,8 +58,6 @@ export const useMetadataAutoSelect = () => {
         loadingPrograms,
         mounted,
         urlParams,
-        loadingOrgUnits,
-        searchOrgUnits,
         updateUrlIfApplicable,
     ]);
 
