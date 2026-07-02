@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-01T15:20:33.746Z\n"
-"PO-Revision-Date: 2026-07-01T15:20:33.746Z\n"
+"POT-Creation-Date: 2026-06-26T15:00:43.776Z\n"
+"PO-Revision-Date: 2026-06-26T15:00:43.777Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -592,6 +592,9 @@ msgstr "Type to filter options"
 
 msgid "No match found"
 msgstr "No match found"
+
+msgid "Search for an organisation unit"
+msgstr "Search for an organisation unit"
 
 msgid "Clear"
 msgstr "Clear"

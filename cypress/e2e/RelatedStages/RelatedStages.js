@@ -126,19 +126,19 @@ And('you open the Birth new event page and fill in the required data in the form
 
 When('you fill in the required values for the Baby postnatal event when scheduling', () => {
     cy.get('[data-test="related-stages-section"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .eq(0)
-                .type(`${getCurrentYear()}-08-01`)
-                .blur();
+        .find('input[type="text"]')
+        .eq(0)
+        .type(`${getCurrentYear()}-08-01`)
+        .blur();
 
-            cy.get('input[type="text"]')
-                .eq(1)
-                .type('Barmoi CH');
-
-            cy.contains('Barmoi CHP')
-                .click();
-        });
+    cy.get('[data-test="related-stages-section"]')
+        .find('[data-test="org-unit-selector-trigger"]')
+        .click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Barmoi CH', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains('Barmoi CHP').click();
+    });
 });
 
 And('you click the Schedule action button', () => {
@@ -148,14 +148,13 @@ And('you click the Schedule action button', () => {
 
 When('you fill in the required values for the Baby postnatal event when entering details', () => {
     cy.get('[data-test="related-stages-section"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .eq(0)
-                .type('Barmoi CH');
-
-            cy.contains('Barmoi CHP')
-                .click();
-        });
+        .find('[data-test="org-unit-selector-trigger"]')
+        .click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Barmoi CH', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains('Barmoi CHP').click();
+    });
 });
 
 And('you click the Enter details action button', () => {
