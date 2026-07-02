@@ -1,3 +1,10 @@
+## [106.6.1](https://github.com/dhis2/capture-app/compare/v106.6.0...v106.6.1) (2026-07-01)
+
+
+### Bug Fixes
+
+* [DHIS2-16363] Navigate to Schedule tab when creating event after stage complete ([#4618](https://github.com/dhis2/capture-app/issues/4618)) ([0cba9a3](https://github.com/dhis2/capture-app/commit/0cba9a3ba8ba2c215481585a6dd3b167f2380459))
+
 # [106.6.0](https://github.com/dhis2/capture-app/compare/v106.5.3...v106.6.0) (2026-07-01)
 
 
