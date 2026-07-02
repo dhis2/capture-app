@@ -1,3 +1,10 @@
+## [106.6.2](https://github.com/dhis2/capture-app/compare/v106.6.1...v106.6.2) (2026-07-02)
+
+
+### Bug Fixes
+
+* [DHIS2-21741] Failed event deletion is not rolled back in the UI ([#4636](https://github.com/dhis2/capture-app/issues/4636)) ([0d64927](https://github.com/dhis2/capture-app/commit/0d64927a93be1fe2947bc98d1ec16e7ea93b1478))
+
 ## [106.6.1](https://github.com/dhis2/capture-app/compare/v106.6.0...v106.6.1) (2026-07-01)
 
 
