@@ -32,6 +32,7 @@ export const OrgUnitFilterManager = ({
     }, [filter, autoSelectOrgUnits, handleCommitValue]);
 
     const onCommitValue = (newValue: Value) => {
+        hasPreselected.current = true;
         setValue(newValue);
         handleCommitValue?.();
     };
