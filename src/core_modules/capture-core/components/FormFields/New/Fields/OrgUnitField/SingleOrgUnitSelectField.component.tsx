@@ -6,6 +6,7 @@ import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
+import { useOrgUnitAutoSelect } from '../../../../../dataQueries';
 
 const getStyles = () => ({
     selectedOrgUnitContainer: {
@@ -66,7 +67,9 @@ const getStyles = () => ({
         cursor: 'inherit',
     },
     popoverContent: {
-        width: 400,
+        width: 'max-content',
+        minWidth: 300,
+        maxWidth: 500,
     },
 });
 
@@ -74,6 +77,25 @@ type OrgUnitValue = {
     id: string;
     name: string;
     path: string;
+};
+
+type AutoSelectSingleOrgUnitProps = {
+    onAutoSelect: (orgUnit: OrgUnitValue) => void;
+};
+
+const AutoSelectSingleOrgUnit = ({ onAutoSelect }: AutoSelectSingleOrgUnitProps) => {
+    const { data: autoSelectOrgUnits } = useOrgUnitAutoSelect();
+    const hasPreselected = React.useRef(false);
+
+    React.useEffect(() => {
+        if (!hasPreselected.current && (autoSelectOrgUnits as any)?.length === 1) {
+            hasPreselected.current = true;
+            const orgUnit = (autoSelectOrgUnits as any)[0];
+            onAutoSelect({ id: orgUnit.id, name: orgUnit.name, path: orgUnit.path });
+        }
+    }, [autoSelectOrgUnits, onAutoSelect]);
+
+    return null;
 };
 
 type SingleOrgUnitSelectFieldState = {
@@ -89,6 +111,7 @@ type SingleOrgUnitSelectFieldProps = {
     onSelectClick?: (orgUnit: Record<string, any>) => void;
     disabled?: boolean;
     maxTreeHeight?: number;
+    autoSelectSingleOrgUnit?: boolean;
 };
 
 type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
@@ -98,6 +121,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     searchInputRef: React.RefObject<HTMLInputElement>;
     popoverId: string;
     debouncedSetSearchText: ((searchText: string) => void) & { cancel: () => void };
+    hasAutoSelected: boolean;
 
     constructor(props: Props) {
         super(props);
@@ -110,6 +134,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
         this.searchInputRef = React.createRef() as React.RefObject<HTMLInputElement>;
         this.popoverId = `org-unit-selector-popover-${uuid()}`;
+        this.hasAutoSelected = false;
         this.debouncedSetSearchText = debounce((searchText: string) => {
             this.setState({ searchText });
         }, 300);
@@ -144,6 +169,15 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     onDeselectOrgUnit = () => {
         this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
         this.props.onBlur(null);
+    }
+
+    handleAutoSelect = (orgUnit: OrgUnitValue) => {
+        this.hasAutoSelected = true;
+        if (this.props.onSelectClick) {
+            this.props.onSelectClick({ id: orgUnit.id, displayName: orgUnit.name, path: orgUnit.path });
+        } else {
+            this.props.onBlur(orgUnit);
+        }
     }
 
     handleSelect = (orgUnit: Record<string, any>) => {
@@ -188,16 +222,23 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     renderPopover = () => {
-        const { classes, value, onBlur, onSelectClick, disabled, maxTreeHeight, ...passOnProps } = this.props;
+        const {
+            classes, value, onBlur, onSelectClick, disabled, maxTreeHeight, autoSelectSingleOrgUnit, ...passOnProps
+        } = this.props;
+        const anchorWidth = this.anchorRef.current?.offsetWidth;
         return (
             <Popover
                 reference={this.anchorRef.current || undefined}
                 arrow={false}
                 placement="bottom-start"
                 onClickOutside={this.closeMenu}
-                maxWidth={400}
+                maxWidth={500}
             >
-                <div id={this.popoverId} className={classes.popoverContent}>
+                <div
+                    id={this.popoverId}
+                    className={classes.popoverContent}
+                    style={anchorWidth ? { minWidth: anchorWidth } : undefined}
+                >
                     <OrgUnitField
                         {...passOnProps}
                         hideSearchField
@@ -259,8 +300,18 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     render() {
-        const { value } = this.props;
-        return value ? this.renderSelectedOrgUnit(value) : this.renderCollapsedOrgUnitField();
+        const { value, autoSelectSingleOrgUnit } = this.props;
+        if (value) {
+            return this.renderSelectedOrgUnit(value);
+        }
+        return (
+            <React.Fragment>
+                {autoSelectSingleOrgUnit !== false && !this.hasAutoSelected &&
+                    <AutoSelectSingleOrgUnit onAutoSelect={this.handleAutoSelect} />
+                }
+                {this.renderCollapsedOrgUnitField()}
+            </React.Fragment>
+        );
     }
 }
 export const SingleOrgUnitSelectField = withStyles(getStyles)(SingleOrgUnitSelectFieldPlain);

@@ -1,40 +1,47 @@
-import * as React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { OrgUnitFilter as OrgUnitFilterInput } from './OrgUnitFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import { useOrgUnitAutoSelect } from '../../../dataQueries';
 import type { OrgUnitFilter, OrgUnitFilterManagerProps, Value } from './orgUnit.types';
 
-type State = {
-    value: Value;
+const calculateInitialValue = (filter: OrgUnitFilter | null | undefined): Value => {
+    if (!filter) return undefined;
+    if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
+
+    const { value, name } = filter;
+    return { id: value, name: name ?? value, path: '' };
 };
 
-export class OrgUnitFilterManager extends React.Component<OrgUnitFilterManagerProps, State> {
-    static calculateDefaultState(filter: OrgUnitFilter | null | undefined): State {
-        if (!filter) return { value: undefined };
-        if (isEmptyFilterData(filter)) return { value: getEmptyValueFilterValue(filter) };
+export const OrgUnitFilterManager = ({
+    filter,
+    filterTypeRef,
+    handleCommitValue,
+    ...passOnProps
+}: OrgUnitFilterManagerProps) => {
+    const [value, setValue] = useState<Value>(() => calculateInitialValue(filter));
+    const { data: autoSelectOrgUnits } = useOrgUnitAutoSelect();
+    const hasPreselected = useRef(false);
 
-        const { value, name } = filter;
-        return { value: { id: value, name: name ?? value, path: '' } };
-    }
+    useEffect(() => {
+        if (!filter && !hasPreselected.current && (autoSelectOrgUnits as any)?.length === 1) {
+            hasPreselected.current = true;
+            const orgUnit = (autoSelectOrgUnits as any)[0];
+            setValue({ id: orgUnit.id, name: orgUnit.name, path: orgUnit.path });
+            handleCommitValue?.();
+        }
+    }, [filter, autoSelectOrgUnits, handleCommitValue]);
 
-    constructor(props: OrgUnitFilterManagerProps) {
-        super(props);
-        this.state = OrgUnitFilterManager.calculateDefaultState(this.props.filter);
-    }
-
-    handleCommitValue = (value: Value) => {
-        this.setState({ value });
-        this.props.handleCommitValue?.();
+    const onCommitValue = (newValue: Value) => {
+        setValue(newValue);
+        handleCommitValue?.();
     };
 
-    render() {
-        const { filter, filterTypeRef, ...passOnProps } = this.props;
-        return (
-            <OrgUnitFilterInput
-                value={this.state.value}
-                ref={filterTypeRef}
-                onCommitValue={this.handleCommitValue}
-                {...passOnProps}
-            />
-        );
-    }
-}
+    return (
+        <OrgUnitFilterInput
+            value={value}
+            ref={filterTypeRef}
+            onCommitValue={onCommitValue}
+            {...passOnProps}
+        />
+    );
+};
