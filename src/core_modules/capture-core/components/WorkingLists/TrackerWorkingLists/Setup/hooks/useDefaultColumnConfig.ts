@@ -25,13 +25,6 @@ const getMainConfig = (
             header: i18n.t('Registration Date'),
             filterHidden: true,
         },
-        {
-            id: 'inactive',
-            visible: false,
-            type: dataElementTypes.BOOLEAN,
-            header: i18n.t('Inactive'),
-            filterHidden: true,
-        },
     ].map(field => ({
         ...field,
         isMainProperty: true,

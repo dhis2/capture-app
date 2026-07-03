@@ -1,5 +1,31 @@
-import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, Then, When, After } from '@badeball/cypress-cucumber-preprocessor';
 import '../../sharedSteps';
+
+const setTrackedEntityInactive = (teiId, inactive) =>
+    cy.buildApiUrl('tracker', `trackedEntities/${teiId}?fields=trackedEntity,trackedEntityType,orgUnit,inactive`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            if (Boolean(body.inactive) === inactive) {
+                return undefined;
+            }
+            const trackedEntity = {
+                trackedEntity: body.trackedEntity,
+                trackedEntityType: body.trackedEntityType,
+                orgUnit: body.orgUnit,
+                inactive,
+            };
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(updateUrl => cy.request('POST', updateUrl, { trackedEntities: [trackedEntity] }));
+        });
+
+After({ tags: '@with-tracked-entity-reactivate-cleanup' }, () => {
+    setTrackedEntityInactive('EaOyKGOIGRp', false);
+});
+
+Given(/^the tracked entity (.*) is deactivated$/, (teiId) => {
+    setTrackedEntityInactive(teiId, true);
+});
 
 Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
@@ -107,6 +133,42 @@ When(/^you select row number (.*)$/, (rowNumber) => {
         .eq(rowNumber)
         .find('[data-test="select-row-checkbox"]')
         .click();
+});
+
+Then('the working list is displayed with 25 rows per page', () => {
+    cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+    cy.get('div[data-test="rows-per-page-selector"]')
+        .click()
+        .get('[role="option"]:visible')
+        .contains('25')
+        .click();
+    cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+});
+
+Then('exactly one working list row is deactivated and not selectable', () => {
+    cy.get('[data-test="online-list-table"]')
+        .find('[data-test="select-row-checkbox"] input:disabled')
+        .should('have.length', 1);
+});
+
+When('you click on the deactivated working list row', () => {
+    cy.get('[data-test="online-list-table"]')
+        .find('[data-test="dhis2-uicore-tablebody"] tr')
+        .each(($tr) => {
+            if ($tr.find('[data-test="select-row-checkbox"] input:disabled').length > 0) {
+                cy.wrap($tr).find('td').eq(1).click();
+            }
+        });
+});
+
+Then('the deactivated working list row should not be selected', () => {
+    cy.get('[data-test="online-list-table"]')
+        .find('[data-test="dhis2-uicore-tablebody"] tr')
+        .each(($tr) => {
+            if ($tr.find('[data-test="select-row-checkbox"] input:disabled').length > 0) {
+                cy.wrap($tr).should('not.have.class', 'selected');
+            }
+        });
 });
 
 Then(/^the modal content should say: (.*)$/, (content) => {

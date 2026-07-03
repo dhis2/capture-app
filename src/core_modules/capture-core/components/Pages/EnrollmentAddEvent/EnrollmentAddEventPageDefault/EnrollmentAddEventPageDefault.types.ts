@@ -37,6 +37,7 @@ export type Props = {
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
+    trackedEntityInactive: boolean;
 };
 
 export type ContainerProps = {
@@ -49,4 +50,5 @@ export type ContainerProps = {
     } | null | undefined;
     attributeValues: Record<string, unknown> | null | undefined;
     commonDataError: boolean;
+    trackedEntityInactive: boolean;
 };

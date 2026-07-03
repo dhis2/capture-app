@@ -18,6 +18,17 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     Then the bulk action bar should say 15 selected
     And all rows should be selected
 
+  @with-tracked-entity-reactivate-cleanup
+  Scenario: a deactivated tracked entity row cannot be selected for bulk actions
+    Given the tracked entity EaOyKGOIGRp is deactivated
+    And you open the main page with Ngelehun and child programe context
+    And the working list is displayed with 25 rows per page
+    Then exactly one working list row is deactivated and not selectable
+    When you select all rows
+    Then the deactivated working list row should not be selected
+    When you click on the deactivated working list row
+    Then the deactivated working list row should not be selected
+
   Scenario: the user should be able to deselect all rows
     Given you open the main page with Ngelehun and child programe context
     When you select all rows

@@ -54,6 +54,8 @@ export const convertToClientTeis = (
                 record.programOwnerId = programOwner;
             }
 
+            record.inactive = Boolean(tei.inactive);
+
             return {
                 id: tei.trackedEntity,
                 record,

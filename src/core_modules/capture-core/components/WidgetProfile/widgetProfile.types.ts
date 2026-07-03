@@ -5,4 +5,5 @@ export type Props = {
     readOnlyMode?: boolean;
     onUpdateTeiAttributeValues?: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void;
     onDeleteSuccess?: () => void;
+    onStatusToggleSuccess?: () => void;
 };

@@ -8,8 +8,6 @@ export const actionTypes = {
     ORG_UNIT_RETRIEVED_ON_URL_UPDATE: 'OrgUnitRetrievedForViewEventOnUrlUpdate',
     ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE: 'OrgUnitRetrievalFailedForViewEventOnUrlUpdate',
     START_OPEN_EVENT_FOR_VIEW: 'StartOpenEventForView',
-    ADD_EVENT_NOTE: 'AddEventNoteForViewEvent',
-    REMOVE_EVENT_NOTE: 'RemoveEventNoteForViewEvent',
     UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE: 'UpdateWorkingListOnBackToMainPageForViewEvent',
     NO_WORKING_LIST_UPDATE_NEEDED_ON_BACK_TO_MAIN_PAGE: 'NoWorkingListUpdateNeededOnBackToMainPageForViewEvent',
     START_GO_BACK_TO_MAIN_PAGE: 'StartGoBackToMainPageForViewEvent',
@@ -48,12 +46,6 @@ export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: any) =>
 
 export const startOpenEventForView = (eventContainer: any, orgUnit: any) =>
     actionCreator(actionTypes.START_OPEN_EVENT_FOR_VIEW)({ eventContainer, orgUnit });
-
-export const addEventNote = (eventId: string, note: any) =>
-    actionCreator(actionTypes.ADD_EVENT_NOTE)({ eventId, note });
-
-export const removeEventNote = (eventId: string, noteClientId: string) =>
-    actionCreator(actionTypes.REMOVE_EVENT_NOTE)({ eventId, noteClientId });
 
 export const startGoBackToMainPage = (orgUnitId: string | null) =>
     actionCreator(actionTypes.START_GO_BACK_TO_MAIN_PAGE)({ orgUnitId });

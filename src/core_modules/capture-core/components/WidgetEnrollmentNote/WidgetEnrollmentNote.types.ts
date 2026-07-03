@@ -6,6 +6,7 @@ export type ClientNote = {
         uid: string;
     };
     storedAt: string;
+    clientId: string;
 };
 
 export type SaveContext = {

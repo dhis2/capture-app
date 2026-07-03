@@ -70,5 +70,6 @@ export type Props = {
     orgUnitId: string;
     event: any;
     enrollmentSite: any;
+    trackedEntityInactive?: boolean;
     initMode?: string;
 };

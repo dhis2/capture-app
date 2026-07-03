@@ -33,6 +33,7 @@ export const EnrollmentAddEventPageDefault = ({
     enrollment,
     attributeValues,
     commonDataError,
+    trackedEntityInactive,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
     const programStageLabel = useStageLabel('programStage', { programId, stageId }) ?? i18n.t('Program stage');
@@ -204,6 +205,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
+                trackedEntityInactive={trackedEntityInactive}
             />
         </>
     );

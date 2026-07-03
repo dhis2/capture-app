@@ -7,12 +7,7 @@ import moment from 'moment';
 import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
-import type { ClientNote, FormNote, SaveContext } from './WidgetEventNote.types';
-
-import {
-    addEventNote,
-    removeEventNote,
-} from '../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import type { FormNote, SaveContext } from './WidgetEventNote.types';
 
 import {
     addNote,
@@ -53,23 +48,15 @@ export const addNoteForEventEpic = (
 
             const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
-            const clientNote: ClientNote = {
-                value: payload.note,
-                lastUpdatedBy: {
-                    firstName,
-                    surname,
-                    uid: clientId,
-                },
-                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-            };
             const formNote: FormNote = {
-                ...clientNote,
-                storedAt: clientNote.storedAt,
+                value: payload.note,
                 createdBy: {
                     firstName,
                     surname,
                     uid: clientId,
                 },
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                clientId,
             };
             const saveContext: SaveContext = {
                 dataEntryId: payload.dataEntryId,
@@ -81,7 +68,6 @@ export const addNoteForEventEpic = (
             return batchActions([
                 startAddNoteForEvent(eventId, serverData, state.currentSelections, saveContext),
                 addNote(payload.dataEntryId, payload.itemId, formNote),
-                addEventNote(eventId, clientNote),
             ], batchActionTypes.ADD_NOTE_BATCH_FOR_EVENT);
         }));
 
@@ -90,8 +76,5 @@ export const removeNoteForEventEpic = (action$: EpicAction<any, RemoveNoteAction
         ofType(actionTypes.ADD_NOTE_FAILED_FOR_EVENT),
         map((action: { meta: { context: SaveContext } }) => {
             const context = action.meta.context;
-            return batchActions([
-                removeNote(context.dataEntryId, context.itemId, context.noteClientId),
-                removeEventNote(context.eventId, context.noteClientId),
-            ], batchActionTypes.REMOVE_NOTE_BATCH_FOR_EVENT);
+            return removeNote(context.dataEntryId, context.itemId, context.noteClientId);
         }));

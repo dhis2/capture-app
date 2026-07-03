@@ -54,6 +54,7 @@ const EnrollmentAddEventPagePain = ({
     pageFailure,
     ready,
     onAccessLostFromTransfer,
+    trackedEntityInactive,
     classes,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
@@ -73,6 +74,7 @@ const EnrollmentAddEventPagePain = ({
         <EnrollmentAccessProvider
             program={program instanceof TrackerProgram ? program : undefined}
             currentStageId={stageId}
+            trackedEntityInactive={trackedEntityInactive}
         >
             <div>
                 <EnrollmentPageLayout

@@ -49,6 +49,7 @@ export type Props = {
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
     onDeleteTrackedEntitySuccess: () => void;
+    onStatusToggleSuccess?: () => void;
 };
 
 
