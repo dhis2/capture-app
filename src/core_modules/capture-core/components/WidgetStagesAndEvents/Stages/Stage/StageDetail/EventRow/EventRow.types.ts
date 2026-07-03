@@ -13,7 +13,5 @@ export type EventRowProps = {
     onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
     stageWriteAccess: boolean;
     programStage?: ProgramStage | null;
-    teiId: string;
     programId: string;
-    enrollmentId: string;
 };
