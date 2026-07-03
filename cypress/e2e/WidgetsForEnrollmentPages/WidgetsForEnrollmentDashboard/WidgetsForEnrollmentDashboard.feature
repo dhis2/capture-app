@@ -53,7 +53,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     Then the profile details should be displayed
 
   Scenario: The TEI rules are triggered correctly in the profile edit modal widget
-    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=ek4WWAgXX5i
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=ek4WWAgXX5i&orgUnitId=DwpbWkiqjMy
     And you see the widget with data-test profile-widget
     When the user clicks the element containing the text: Edit
     Then the user sees the edit profile modal
@@ -152,7 +152,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     Then list should contain the new note: enrollment note
 
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
-    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE&orgUnitId=DiszpKrYNg8
     Then the user can see the program rules effect in the indicator widget
 
   Scenario: User can complete the enrollment and the active events
