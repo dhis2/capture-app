@@ -10,7 +10,7 @@ export const getOrgUnitFieldConfig = (metaData: MetaDataElement, options: any, q
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         maxTreeHeight: 200,
-        autoSelectSingleOrgUnit: options.autoSelectSingleOrgUnit,
+        autoSelectSingleOrgUnit: options.autoSelectSingleOrgUnit ?? !!metaData.compulsory,
     }, options, metaData);
 
     return createFieldConfig({

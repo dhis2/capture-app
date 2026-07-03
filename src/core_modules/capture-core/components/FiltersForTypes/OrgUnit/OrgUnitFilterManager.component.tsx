@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { OrgUnitFilter as OrgUnitFilterInput } from './OrgUnitFilter.component';
 import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
-import { useOrgUnitAutoSelect } from '../../../dataQueries';
 import type { OrgUnitFilter, OrgUnitFilterManagerProps, Value } from './orgUnit.types';
 
 const calculateInitialValue = (filter: OrgUnitFilter | null | undefined): Value => {
@@ -19,20 +18,8 @@ export const OrgUnitFilterManager = ({
     ...passOnProps
 }: OrgUnitFilterManagerProps) => {
     const [value, setValue] = useState<Value>(() => calculateInitialValue(filter));
-    const { data: autoSelectOrgUnits } = useOrgUnitAutoSelect();
-    const hasPreselected = useRef(false);
-
-    useEffect(() => {
-        if (!filter && !hasPreselected.current && (autoSelectOrgUnits as any)?.length === 1) {
-            hasPreselected.current = true;
-            const orgUnit = (autoSelectOrgUnits as any)[0];
-            setValue({ id: orgUnit.id, name: orgUnit.name, path: orgUnit.path });
-            handleCommitValue?.();
-        }
-    }, [filter, autoSelectOrgUnits, handleCommitValue]);
 
     const onCommitValue = (newValue: Value) => {
-        hasPreselected.current = true;
         setValue(newValue);
         handleCommitValue?.();
     };

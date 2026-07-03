@@ -168,13 +168,14 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        const formBuilderFieldsUI = newState[payload.formId];
+        const formBuilderFieldsUI = { ...newState[payload.formId] };
         formBuilderFieldsUI[payload.elementId] = {
             ...formBuilderFieldsUI[payload.elementId],
             ...payload.uiState,
             modified: true,
             validatingMessage: null,
         };
+        newState[payload.formId] = formBuilderFieldsUI;
         return newState;
     },
     [formBuilderActionTypes.UPDATE_FIELD_UI_ONLY]: (state, action) => {

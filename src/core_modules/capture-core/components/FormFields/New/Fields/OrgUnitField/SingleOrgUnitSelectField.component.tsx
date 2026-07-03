@@ -121,7 +121,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     searchInputRef: React.RefObject<HTMLInputElement>;
     popoverId: string;
     debouncedSetSearchText: ((searchText: string) => void) & { cancel: () => void };
-    hasAutoSelected: boolean;
+    hasDeselected: boolean;
     shouldOpenOnClear: boolean;
 
     constructor(props: Props) {
@@ -135,7 +135,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
         this.searchInputRef = React.createRef() as React.RefObject<HTMLInputElement>;
         this.popoverId = `org-unit-selector-popover-${uuid()}`;
-        this.hasAutoSelected = false;
+        this.hasDeselected = false;
         this.shouldOpenOnClear = false;
         this.debouncedSetSearchText = debounce((searchText: string) => {
             this.setState({ searchText });
@@ -177,12 +177,12 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
 
     onDeselectOrgUnit = () => {
         this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
+        this.hasDeselected = true;
         this.shouldOpenOnClear = this.props.autoSelectSingleOrgUnit !== false;
         this.props.onBlur(null);
     }
 
     handleAutoSelect = (orgUnit: OrgUnitValue) => {
-        this.hasAutoSelected = true;
         if (this.props.onSelectClick) {
             this.props.onSelectClick({ id: orgUnit.id, displayName: orgUnit.name, path: orgUnit.path });
         } else {
@@ -316,7 +316,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         }
         return (
             <React.Fragment>
-                {autoSelectSingleOrgUnit !== false && !this.hasAutoSelected &&
+                {autoSelectSingleOrgUnit !== false && !this.hasDeselected &&
                     <AutoSelectSingleOrgUnit onAutoSelect={this.handleAutoSelect} />
                 }
                 {this.renderCollapsedOrgUnitField()}
