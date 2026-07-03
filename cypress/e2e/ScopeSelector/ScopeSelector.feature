@@ -192,12 +192,12 @@ Feature: User uses the ScopeSelector to navigate
   Scenario: Enrollment event edit page > resetting the event
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the stage selection
-    Then you see the enrollment page
+    Then you see the enrollment page with the org unit in the url
 
   Scenario: Enrollment event edit page > resetting the stage
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the event selection
-    Then you see the enrollment page
+    Then you see the enrollment page with the org unit in the url
 
     Scenario: Enrollment event edit page > Fallback for tei missing name
     Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=rBjxtO8npTb

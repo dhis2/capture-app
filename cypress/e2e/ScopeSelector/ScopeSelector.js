@@ -292,11 +292,6 @@ And('you see the enrollment page without org unit in the url', () => {
     cy.get('[data-test="enrollment-overview-page"]');
 });
 
-And('you see the enrollment page without org unit in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
-    cy.get('[data-test="enrollment-overview-page"]');
-});
-
 And('you see the enrollment page with the org unit in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-overview-page"]');
