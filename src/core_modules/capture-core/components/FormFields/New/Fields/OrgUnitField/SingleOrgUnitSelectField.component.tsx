@@ -122,6 +122,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     popoverId: string;
     debouncedSetSearchText: ((searchText: string) => void) & { cancel: () => void };
     hasAutoSelected: boolean;
+    shouldOpenOnClear: boolean;
 
     constructor(props: Props) {
         super(props);
@@ -135,9 +136,17 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         this.searchInputRef = React.createRef() as React.RefObject<HTMLInputElement>;
         this.popoverId = `org-unit-selector-popover-${uuid()}`;
         this.hasAutoSelected = false;
+        this.shouldOpenOnClear = false;
         this.debouncedSetSearchText = debounce((searchText: string) => {
             this.setState({ searchText });
         }, 300);
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.value && !this.props.value && this.shouldOpenOnClear) {
+            this.shouldOpenOnClear = false;
+            this.openMenu();
+        }
     }
 
     componentWillUnmount() {
@@ -168,6 +177,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
 
     onDeselectOrgUnit = () => {
         this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
+        this.shouldOpenOnClear = this.props.autoSelectSingleOrgUnit !== false;
         this.props.onBlur(null);
     }
 
