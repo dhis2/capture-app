@@ -66,20 +66,17 @@ export const TrackerWorkingListsReduxProvider = ({
         }
     }, [selectedTemplateId, viewPreloaded, currentTemplateId, onSelectTemplate]);
 
-    const onClickListRow = useCallback(({ id }: any) => {
-        const record = records[id];
-        const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwnerId;
-
-        return programStage
+    const onClickListRow = useCallback(({ id }: any) => (
+        programStage
             ? navigate(
-                `/enrollmentEventEdit?${buildUrlQueryString({ eventId: id, orgUnitId: orgUnitIdParameter })}`,
+                `/enrollmentEventEdit?${buildUrlQueryString({ eventId: id, orgUnitId })}`,
             )
             : dispatch(navigateToEnrollmentOverview({
                 teiId: id,
                 programId,
-                orgUnitId: orgUnitIdParameter,
-            }));
-    }, [dispatch, orgUnitId, programId, records, programStage, navigate]);
+                orgUnitId,
+            }))
+    ), [dispatch, orgUnitId, programId, programStage, navigate]);
 
     const handlePreserveCurrentViewState = useCallback((templateId: string, criteria: any) => {
         onUpdateDefaultTemplate({ ...defaultTemplate, criteria, isAltered: true });

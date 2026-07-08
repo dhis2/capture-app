@@ -218,7 +218,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const onCancelEditEvent = useCallback((isScheduled: boolean) => {
         if (isScheduled) {
-            navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+            navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
         }
         if (initMode) {
             navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId, orgUnitId })}`);
@@ -226,7 +226,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [initMode, enrollmentId, eventId, orgUnitId, navigate]);
 
     const onGoBack = () =>
-        navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
 
     const onNavigateToEvent = (eventIdToRedirectTo: string) => {
         navigate(
@@ -241,14 +241,14 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const onHandleScheduleSave = useCallback((eventData: Record<string, unknown>) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
-        navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    }, [dispatch, navigate, enrollmentId, eventId]);
+        navigate(`enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
+    }, [dispatch, navigate, orgUnitId, enrollmentId, eventId]);
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
-        navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
-    }, [navigate, enrollmentId, eventId, queryClient]);
+        navigate(`enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
+    }, [navigate, orgUnitId, enrollmentId, eventId, queryClient]);
 
     const onBackToViewEvent = () => {
         dispatch(cancelEditEventDataEntry());

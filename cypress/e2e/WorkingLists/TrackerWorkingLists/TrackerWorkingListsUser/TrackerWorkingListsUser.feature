@@ -196,7 +196,7 @@ Scenario: The program stage working list configureation is kept when navigating
 Scenario: The program stage working list without a orgUnit selected redirects to a tracker event
   Given you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list
   When you open an enrollment event from the working list
-  Then the tracker event URL contains the orgUnitId
+  Then the tracker event URL does not contain the orgUnitId
 
 Scenario: The user can open a program stage list without events
   Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list

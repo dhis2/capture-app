@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-02T15:31:30.388Z\n"
-"PO-Revision-Date: 2026-07-02T15:31:30.388Z\n"
+"POT-Creation-Date: 2026-07-03T08:11:44.134Z\n"
+"PO-Revision-Date: 2026-07-03T08:11:44.134Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -798,9 +798,6 @@ msgstr "An error has occurred"
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
-
-msgid "Org unit is not valid with current program"
-msgstr "Org unit is not valid with current program"
 
 msgid "There was an error opening the Page"
 msgstr "There was an error opening the Page"
@@ -2384,11 +2381,3 @@ msgstr ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Capture"
-
-msgctxt "Title for shortcut used by command palette"
-msgid "__MANIFEST_SHORTCUT_Search TEI"
-msgstr "Search TEI"

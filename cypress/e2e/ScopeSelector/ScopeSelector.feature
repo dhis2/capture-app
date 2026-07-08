@@ -137,12 +137,12 @@ Feature: User uses the ScopeSelector to navigate
 
     Examples:
         | url | state | message |
-      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | Enrollment dashboard |
-      | /#/enrollment?teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                                              | all                  | Enrollment dashboard |
+      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | allWithoutOrgUnit    | Enrollment dashboard |
+      | /#/enrollment?teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                                              | allWithoutOrgUnit    | Enrollment dashboard |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment dashboard |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment dashboard |
-      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment dashboard |
-      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | allWithoutOrgUnit    | Enrollment dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | allWithoutOrgUnit    | Enrollment dashboard |
       | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                    | all                  | Enrollment dashboard |
       | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | Enrollment dashboard |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Choose a program to add new or see existing enrollments for Carlos Cruz |
@@ -160,7 +160,7 @@ Feature: User uses the ScopeSelector to navigate
    Then you see message explaining this is an Event program
    When you reset the program selection
    And you select the Child Programme
-   And you see the enrollment page
+   And you see the enrollment page without org unit in the url
 
   Scenario: Enrollment page > Fallback for tei missing name
     Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollment?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5
@@ -192,12 +192,12 @@ Feature: User uses the ScopeSelector to navigate
   Scenario: Enrollment event edit page > resetting the event
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the stage selection
-    Then you see the enrollment page
+    Then you see the enrollment page with the org unit in the url
 
   Scenario: Enrollment event edit page > resetting the stage
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the event selection
-    Then you see the enrollment page
+    Then you see the enrollment page with the org unit in the url
 
     Scenario: Enrollment event edit page > Fallback for tei missing name
     Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=rBjxtO8npTb
