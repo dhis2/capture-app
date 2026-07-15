@@ -60,7 +60,7 @@
         "reselect": "^4.1.7",
         "rxjs": "^7.8.2",
         "typeface-roboto": "^1.1.13",
-        "uuid": "^9.0.0",
+        "uuid": "^14.0.1",
         "zod": "^4.4.3"
     },
     "scripts": {
