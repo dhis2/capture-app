@@ -2405,15 +2405,10 @@
     markdown-it "^8.4.2"
     prop-types "^15.6.2"
 
-"@dhis2/data-engine@3.17.3":
+"@dhis2/data-engine@3.17.3", "@dhis2/data-engine@^3.17.3":
   version "3.17.3"
   resolved "https://registry.yarnpkg.com/@dhis2/data-engine/-/data-engine-3.17.3.tgz#0347416e9919efbf4d9739c4141fa543f89669ad"
   integrity sha512-hLXt7LFrFitR7QgKfGQ3ComTLrY5IAdtERonhdo/SIrsRYWoeVaMiCOkUUzC48pEaeo1/BL5qwA7Tw7jZgROQw==
-
-"@dhis2/data-engine@^3.17.0":
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/data-engine/-/data-engine-3.17.0.tgz#47a20f2b8d00bf8cf725ae775e9be553c033df49"
-  integrity sha512-T2TKpsKL+sBWLFIevO3grXecrz41NFMH4V79HSAtxn7KDrxkEDalHDNQACuehcgZpUBcYT3Cna1I/TeREp/p0g==
 
 "@dhis2/multi-calendar-dates@2.1.2":
   version "2.1.2"
