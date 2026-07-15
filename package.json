@@ -13,7 +13,7 @@
         "@dhis2/app-runtime": "^3.17.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
-        "@dhis2/data-engine": "^3.17.0",
+        "@dhis2/data-engine": "^3.17.3",
         "@dhis2/rule-engine": "3.8.1",
         "@dhis2/rules-engine-javascript": "106.6.3",
         "@dhis2/ui": "^10.16.4",
