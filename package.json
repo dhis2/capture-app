@@ -114,7 +114,7 @@
         "eslint-config-react-app": "^6.0.0",
         "eslint-friendly-formatter": "^4.0.1",
         "eslint-import-resolver-exports": "^1.0.0-beta.5",
-        "eslint-import-resolver-typescript": "^4.3.1",
+        "eslint-import-resolver-typescript": "^4.4.5",
         "eslint-import-resolver-webpack": "^0.13.11",
         "eslint-plugin-flowtype": "^5.10.0",
         "eslint-plugin-import": "2.32.0",
