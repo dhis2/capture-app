@@ -1,3 +1,10 @@
+## [106.6.3](https://github.com/dhis2/capture-app/compare/v106.6.2...v106.6.3) (2026-07-08)
+
+
+### Bug Fixes
+
+* [DHIS2-21693] Stop auto switching org unit in context selector ([#4630](https://github.com/dhis2/capture-app/issues/4630)) ([f247f5c](https://github.com/dhis2/capture-app/commit/f247f5c6f429e9f5eabfbb438bbb5c85ecd1f188))
+
 ## [106.6.2](https://github.com/dhis2/capture-app/compare/v106.6.1...v106.6.2) (2026-07-02)
 
 

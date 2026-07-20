@@ -87,7 +87,7 @@ const accessLevelHandlers = {
 
 const handleNotFoundError = async ({ programOwnerId, programId, breakTheGlassAccessUntil, querySingleResource }: any) => {
     if (!programOwnerId) {
-        return saveEnrollments({ enrollments: [], programOwnerId });
+        return saveEnrollments({ enrollments: [] });
     }
 
     const programAccessLevel = await getUserMetadataStorageController().get(USER_METADATA_STORES.PROGRAMS, programId, {
@@ -98,7 +98,7 @@ const handleNotFoundError = async ({ programOwnerId, programId, breakTheGlassAcc
 
     return accessLevelHandlers[programAccessLevel](
         checkIsOwnerInScope,
-        saveEnrollments({ enrollments: [], programOwnerId }),
+        saveEnrollments({ enrollments: [] }),
         breakTheGlassAccessUntil,
     );
 };
@@ -153,7 +153,6 @@ export const fetchEnrollmentsEpic = (action$: any, store: any, { querySingleReso
                             .filter((enrollment: any) => enrollment.program === programId));
                         return saveEnrollments({
                             enrollments: enrollmentsSortedByDate,
-                            programOwnerId: store.value.enrollmentPage.programOwners[programId],
                         });
                     }),
                     catchError((error: any) => {

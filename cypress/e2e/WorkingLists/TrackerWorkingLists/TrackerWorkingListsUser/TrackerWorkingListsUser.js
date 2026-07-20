@@ -1077,8 +1077,9 @@ Given('you open the main page with all accesible records in the WHO RMNCH Tracke
         .click();
 });
 
-Then('the tracker event URL contains the orgUnitId', () => {
-    cy.url().should('include', '/enrollmentEventEdit?eventId=cxQ44Gz8yEr&orgUnitId=yMCshbaVExv');
+Then('the tracker event URL does not contain the orgUnitId', () => {
+    cy.url().should('include', '/enrollmentEventEdit?eventId=cxQ44Gz8yEr');
+    cy.url().should('not.include', 'orgUnitId');
 });
 
 When('you open an enrollment event from the working list', () => {
