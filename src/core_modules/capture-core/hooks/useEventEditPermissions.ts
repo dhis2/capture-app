@@ -19,8 +19,27 @@ type Output = {
     isWithinCompleteExpiry: boolean,
     canEditCompletedEvent: boolean,
     canUncompleteEvent: boolean,
+    canChangeCompletionStatus: boolean,
     expiryPeriod: ReturnType<typeof useProgramExpiryForUser>,
     readOnly: boolean,
+};
+
+const getCanChangeCompletionStatus = ({
+    eventStatus,
+    canUncompleteEvent,
+    eventAccess,
+}: {
+    eventStatus?: string,
+    canUncompleteEvent: boolean,
+    eventAccess: { read: boolean, write: boolean } | null,
+}): boolean => {
+    if (!eventAccess?.write) {
+        return false;
+    }
+    if (eventStatus === eventStatuses.COMPLETED) {
+        return canUncompleteEvent;
+    }
+    return eventStatus === eventStatuses.ACTIVE;
 };
 
 // An event is read-only when ANY of the following is true:
@@ -56,12 +75,19 @@ export const useEventEditPermissions = ({
         || !isWithinCompleteExpiry
         || !canEditCompletedEvent;
 
+    const canChangeCompletionStatus = getCanChangeCompletionStatus({
+        eventStatus,
+        canUncompleteEvent,
+        eventAccess,
+    });
+
     return {
         eventAccess,
         isEventWithinValidPeriod,
         isWithinCompleteExpiry,
         canEditCompletedEvent,
         canUncompleteEvent,
+        canChangeCompletionStatus,
         expiryPeriod,
         readOnly,
     };

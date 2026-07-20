@@ -17,8 +17,7 @@ import {
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
-import { eventStatuses } from '../constants/status.const';
-import { UncompleteEventMenuItem } from '../UncompleteEventMenuItem';
+import { EventCompletionMenuItem } from '../../EventCompletionMenuItem';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -46,7 +45,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    canUncompleteEvent,
+    canChangeCompletionStatus,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -56,16 +55,15 @@ const WidgetHeaderPlain = ({
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const showEditButton = !readOnly;
-    const showUncompleteAction = Boolean(canUncompleteEvent) && eventStatus === eventStatuses.COMPLETED;
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
         state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
 
-    const onUncompleted = useCallback(() => {
+    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
         if (storedEvent) {
-            const { completedAt, completedBy, ...uncompletedEvent } = storedEvent;
-            dispatch(updateEnrollmentEvent(eventId, { ...uncompletedEvent, status: eventStatuses.ACTIVE }));
+            const { completedAt, completedBy, ...eventWithoutCompletion } = storedEvent;
+            dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
             dispatch(commitEnrollmentEvent(eventId));
         }
         dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
@@ -102,7 +100,7 @@ const WidgetHeaderPlain = ({
                             </Button>
                         )}
 
-                        {(supportsChangelog || showUncompleteAction) && (
+                        {(supportsChangelog || canChangeCompletionStatus) && (
                             <OverflowButton
                                 open={actionsIsOpen}
                                 onClick={() => setActionsIsOpen(prev => !prev)}
@@ -116,10 +114,11 @@ const WidgetHeaderPlain = ({
                                         maxWidth="250px"
                                         dataTest={'tracker-program-event-overflow-menu'}
                                     >
-                                        {showUncompleteAction && (
-                                            <UncompleteEventMenuItem
+                                        {canChangeCompletionStatus && (
+                                            <EventCompletionMenuItem
                                                 eventId={eventId}
-                                                onUncompleted={onUncompleted}
+                                                eventStatus={eventStatus}
+                                                onUpdated={onCompletionStatusUpdated}
                                                 onClose={() => setActionsIsOpen(false)}
                                             />
                                         )}

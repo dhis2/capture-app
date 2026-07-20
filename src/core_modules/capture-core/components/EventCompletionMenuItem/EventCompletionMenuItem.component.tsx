@@ -1,21 +1,30 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { MenuItem, IconCheckmark16 } from '@dhis2/ui';
+import { MenuItem, IconCheckmark16, IconUndo16 } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { eventStatuses } from '../constants/status.const';
-import type { Props } from './UncompleteEventMenuItem.types';
+import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 
-export const UncompleteEventMenuItem = ({ eventId, onUncompleted, onClose }: Props) => {
+type Props = {
+    eventId: string;
+    eventStatus?: string;
+    onUpdated: (newStatus: string) => void;
+    onClose: () => void;
+};
+
+export const EventCompletionMenuItem = ({ eventId, eventStatus, onUpdated, onClose }: Props) => {
     const dataEngine = useDataEngine();
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
     );
 
-    const { mutate: uncompleteEvent, isLoading } = useMutation(
+    const isCompleted = eventStatus === eventStatuses.COMPLETED;
+    const newStatus = isCompleted ? eventStatuses.ACTIVE : eventStatuses.COMPLETED;
+
+    const { mutate: updateCompletionStatus, isLoading } = useMutation(
         async () => {
             const { event: apiEvent } = await dataEngine.query({
                 event: {
@@ -32,18 +41,18 @@ export const UncompleteEventMenuItem = ({ eventId, onUncompleted, onClose }: Pro
                 data: {
                     events: [{
                         ...apiEvent,
-                        status: eventStatuses.ACTIVE,
+                        status: newStatus,
                     }],
                 },
             });
         },
         {
             onError: (error: unknown) => {
-                showError({ message: i18n.t('An error occurred when uncompleting the event') });
-                log.error(errorCreator('An error occurred when uncompleting the event')({ error, eventId }));
+                showError({ message: i18n.t('An error occurred when updating event status') });
+                log.error(errorCreator('An error occurred when updating event status')({ error, eventId, newStatus }));
             },
             onSuccess: () => {
-                onUncompleted();
+                onUpdated(newStatus);
             },
         },
     );
@@ -51,13 +60,13 @@ export const UncompleteEventMenuItem = ({ eventId, onUncompleted, onClose }: Pro
     return (
         <MenuItem
             dense
-            dataTest="uncomplete-event-menu-item"
-            icon={<IconCheckmark16 />}
-            label={i18n.t('Mark incomplete')}
+            dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
+            icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
+            label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
             suffix=""
             onClick={() => {
                 onClose();
-                !isLoading && uncompleteEvent();
+                !isLoading && updateCompletionStatus();
             }}
         />
     );

@@ -101,6 +101,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         isEventWithinValidPeriod,
         isWithinCompleteExpiry,
         canEditCompletedEvent,
+        canChangeCompletionStatus,
         readOnly,
     } = useEventEditPermissions({
         programId,
@@ -135,6 +136,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     onBackToViewEvent={onBackToViewEvent}
                     onBackToAllEvents={onBackToAllEvents}
                     showEditButton={showEditButton}
+                    canChangeCompletionStatus={canChangeCompletionStatus}
                 />
                 <RightColumnWrapper
                     eventAccess={eventAccess}

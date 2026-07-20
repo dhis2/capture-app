@@ -28,8 +28,7 @@ import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useC
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
-import { UncompleteEventMenuItem } from '../../../WidgetEventEdit/UncompleteEventMenuItem';
-import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
+import { EventCompletionMenuItem } from '../../../EventCompletionMenuItem';
 import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../../App/withAppUrlSync';
 import type { PlainProps } from './EventDetailsSection.types';
@@ -65,21 +64,6 @@ const getStyles: any = () => ({
     editButtonContainer: {},
 });
 
-const getShowUncompleteAction = ({
-    isEditEventPage,
-    eventStatus,
-    canUncompleteEvent,
-    eventAccess,
-}: {
-    isEditEventPage?: boolean;
-    eventStatus?: string;
-    canUncompleteEvent: boolean;
-    eventAccess: { read: boolean, write: boolean };
-}) => !isEditEventPage
-    && eventStatus === eventStatuses.COMPLETED
-    && canUncompleteEvent
-    && Boolean(eventAccess?.write);
-
 const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,
@@ -92,6 +76,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         onBackToAllEvents,
         programId,
         showEditButton,
+        canChangeCompletionStatus,
         ...passOnProps
     } = props;
     const dispatch = useDispatch();
@@ -106,14 +91,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const showUncompleteAction = getShowUncompleteAction({
-        isEditEventPage,
-        eventStatus,
-        canUncompleteEvent,
-        eventAccess,
-    });
+    const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
-    const onUncompleted = useCallback(() => {
+    const onCompletionStatusUpdated = useCallback(() => {
         dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
     }, [dispatch, eventId]);
 
@@ -163,7 +143,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         {i18n.t('Edit event')}
                     </Button>
                 </div>}
-            {(supportsChangelog || showUncompleteAction) && (
+            {(supportsChangelog || showCompletionAction) && (
                 <OverflowButton
                     open={actionsIsOpen}
                     onClick={() => setActionsIsOpen(prev => !prev)}
@@ -177,10 +157,11 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             maxWidth="250px"
                             dataTest="event-program-event-overflow-menu"
                         >
-                            {showUncompleteAction && (
-                                <UncompleteEventMenuItem
+                            {showCompletionAction && (
+                                <EventCompletionMenuItem
                                     eventId={eventId}
-                                    onUncompleted={onUncompleted}
+                                    eventStatus={eventStatus}
+                                    onUpdated={onCompletionStatusUpdated}
                                     onClose={() => setActionsIsOpen(false)}
                                 />
                             )}
