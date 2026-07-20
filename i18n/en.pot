@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-08T07:19:14.135Z\n"
-"PO-Revision-Date: 2026-07-08T07:19:14.135Z\n"
+"POT-Creation-Date: 2026-07-20T11:33:06.165Z\n"
+"PO-Revision-Date: 2026-07-20T11:33:06.165Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1517,6 +1517,9 @@ msgstr "Geometry (Area)"
 
 msgid "Geometry (Coordinate)"
 msgstr "Geometry (Coordinate)"
+
+msgid "An error occurred when uncompleting the event"
+msgstr "An error occurred when uncompleting the event"
 
 msgid "Polygon captured"
 msgstr "Polygon captured"

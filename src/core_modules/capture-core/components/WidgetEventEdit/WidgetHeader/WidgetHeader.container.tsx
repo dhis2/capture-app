@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -11,6 +11,14 @@ import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import {
+    updateEnrollmentEvent,
+    commitEnrollmentEvent,
+} from '../../Pages/common/EnrollmentOverviewDomain';
+import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../App/withAppUrlSync';
+import { eventStatuses } from '../constants/status.const';
+import { UncompleteEventMenuItem } from '../UncompleteEventMenuItem';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -30,6 +38,7 @@ const styles: Readonly<any> = {
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const WidgetHeaderPlain = ({
+    eventId,
     eventStatus,
     stage,
     programId,
@@ -37,6 +46,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
+    canUncompleteEvent,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -46,7 +56,20 @@ const WidgetHeaderPlain = ({
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const showEditButton = !readOnly;
+    const showUncompleteAction = Boolean(canUncompleteEvent) && eventStatus === eventStatuses.COMPLETED;
     const { programCategory } = useCategoryCombinations(programId);
+
+    const storedEvent = useSelector((state: any) =>
+        state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
+
+    const onUncompleted = useCallback(() => {
+        if (storedEvent) {
+            const { completedAt, completedBy, ...uncompletedEvent } = storedEvent;
+            dispatch(updateEnrollmentEvent(eventId, { ...uncompletedEvent, status: eventStatuses.ACTIVE }));
+            dispatch(commitEnrollmentEvent(eventId));
+        }
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+    }, [dispatch, storedEvent, eventId]);
 
     const { icon, name } = stage;
 
@@ -79,7 +102,7 @@ const WidgetHeaderPlain = ({
                             </Button>
                         )}
 
-                        {supportsChangelog && (
+                        {(supportsChangelog || showUncompleteAction) && (
                             <OverflowButton
                                 open={actionsIsOpen}
                                 onClick={() => setActionsIsOpen(prev => !prev)}
@@ -93,14 +116,23 @@ const WidgetHeaderPlain = ({
                                         maxWidth="250px"
                                         dataTest={'tracker-program-event-overflow-menu'}
                                     >
-                                        <MenuItem
-                                            label={i18n.t('View changelog')}
-                                            suffix=""
-                                            onClick={() => {
-                                                setChangeLogIsOpen(true);
-                                                setActionsIsOpen(false);
-                                            }}
-                                        />
+                                        {showUncompleteAction && (
+                                            <UncompleteEventMenuItem
+                                                eventId={eventId}
+                                                onUncompleted={onUncompleted}
+                                                onClose={() => setActionsIsOpen(false)}
+                                            />
+                                        )}
+                                        {supportsChangelog && (
+                                            <MenuItem
+                                                label={i18n.t('View changelog')}
+                                                suffix=""
+                                                onClick={() => {
+                                                    setChangeLogIsOpen(true);
+                                                    setActionsIsOpen(false);
+                                                }}
+                                            />
+                                        )}
                                     </FlyoutMenu>
                                 }
                             />

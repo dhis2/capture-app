@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
 import { FEATURES, useFeature } from 'capture-core-utils';
@@ -27,6 +27,10 @@ import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useC
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
+import { UncompleteEventMenuItem } from '../../../WidgetEventEdit/UncompleteEventMenuItem';
+import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
+import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../../App/withAppUrlSync';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -74,7 +78,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         showEditButton,
         ...passOnProps
     } = props;
+    const dispatch = useDispatch();
     const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
+    const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
@@ -84,6 +90,14 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const showUncompleteAction = !isEditEventPage
+        && eventStatus === eventStatuses.COMPLETED
+        && canUncompleteEvent
+        && Boolean(eventAccess?.write);
+
+    const onUncompleted = useCallback(() => {
+        dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
+    }, [dispatch, eventId]);
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -131,7 +145,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         {i18n.t('Edit event')}
                     </Button>
                 </div>}
-            {supportsChangelog && (
+            {(supportsChangelog || showUncompleteAction) && (
                 <OverflowButton
                     open={actionsIsOpen}
                     onClick={() => setActionsIsOpen(prev => !prev)}
@@ -145,14 +159,23 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             maxWidth="250px"
                             dataTest="event-program-event-overflow-menu"
                         >
-                            <MenuItem
-                                label={i18n.t('View changelog')}
-                                suffix={null}
-                                onClick={() => {
-                                    setChangeLogIsOpen(true);
-                                    setActionsIsOpen(false);
-                                }}
-                            />
+                            {showUncompleteAction && (
+                                <UncompleteEventMenuItem
+                                    eventId={eventId}
+                                    onUncompleted={onUncompleted}
+                                    onClose={() => setActionsIsOpen(false)}
+                                />
+                            )}
+                            {supportsChangelog && (
+                                <MenuItem
+                                    label={i18n.t('View changelog')}
+                                    suffix={null}
+                                    onClick={() => {
+                                        setChangeLogIsOpen(true);
+                                        setActionsIsOpen(false);
+                                    }}
+                                />
+                            )}
                         </FlyoutMenu>
                     )}
                 />
