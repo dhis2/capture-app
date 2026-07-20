@@ -65,6 +65,21 @@ const getStyles: any = () => ({
     editButtonContainer: {},
 });
 
+const getShowUncompleteAction = ({
+    isEditEventPage,
+    eventStatus,
+    canUncompleteEvent,
+    eventAccess,
+}: {
+    isEditEventPage?: boolean;
+    eventStatus?: string;
+    canUncompleteEvent: boolean;
+    eventAccess: { read: boolean, write: boolean };
+}) => !isEditEventPage
+    && eventStatus === eventStatuses.COMPLETED
+    && canUncompleteEvent
+    && Boolean(eventAccess?.write);
+
 const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,
@@ -91,10 +106,12 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const showUncompleteAction = !isEditEventPage
-        && eventStatus === eventStatuses.COMPLETED
-        && canUncompleteEvent
-        && Boolean(eventAccess?.write);
+    const showUncompleteAction = getShowUncompleteAction({
+        isEditEventPage,
+        eventStatus,
+        canUncompleteEvent,
+        eventAccess,
+    });
 
     const onUncompleted = useCallback(() => {
         dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
