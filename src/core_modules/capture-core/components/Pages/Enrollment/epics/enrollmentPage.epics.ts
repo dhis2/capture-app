@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
-import { catchError, concatMap, map, filter } from 'rxjs/operators';
-import { from, EMPTY } from 'rxjs';
+import { concatMap, map, filter } from 'rxjs/operators';
+import { from } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
 
 import {
@@ -41,15 +41,6 @@ const enrollmentIdQuery = enrollmentId => ({
     id: enrollmentId,
     params: {
         fields: ['trackedEntity', 'program'],
-    },
-});
-
-const captureScopeQuery = orgUnitId => ({
-    resource: 'organisationUnits',
-    params: {
-        query: orgUnitId,
-        withinUserHierarchy: true,
-        fields: 'id',
     },
 });
 
@@ -254,26 +245,6 @@ export const verifyFetchedEnrollmentsEpic = (action$: any, store: any) =>
             return fetchedTeiId === teiId && fetchedProgramId === programId;
         }),
         map(({ payload: { action } }) => action),
-    );
-
-// Auto-switch orgUnit epic
-export const autoSwitchOrgUnitEpic = (action$: any, store: any, { querySingleResource, navigate }: any) =>
-    action$.pipe(
-        ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS),
-        map(({ payload: { programOwnerId } }) => programOwnerId),
-        filter(Boolean),
-        concatMap(programOwnerId => from(querySingleResource(captureScopeQuery(programOwnerId)))
-            .pipe(
-                concatMap(({ organisationUnits }: any) => {
-                    if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
-                        // Update orgUnitId in url
-                        const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                        navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwnerId })}`);
-                    }
-                    return EMPTY;
-                }),
-                catchError(() => EMPTY),
-            )),
     );
 
 // Manage error messages for unsuccessful data fetches.

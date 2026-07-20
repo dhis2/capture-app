@@ -802,9 +802,6 @@ msgstr "An error has occurred"
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "Org unit is not valid with current program"
-
 msgid "There was an error opening the Page"
 msgstr "There was an error opening the Page"
 

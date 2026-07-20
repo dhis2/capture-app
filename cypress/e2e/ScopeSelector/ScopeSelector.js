@@ -233,6 +233,7 @@ const selectedEnrollment = ['Enrollment', `${getCurrentYear() + 1}-07-01 12:05`]
 
 const scopeSelectorCases = {
     all: [...selectedChildProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
+    allWithoutOrgUnit: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei, ...selectedEnrollment],
     teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei],
     teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei],
     teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei],
@@ -286,7 +287,12 @@ And('you see the enrollment event New page but there is no stage id in the url',
     cy.contains('Choose a stage for a new event');
 });
 
-And('you see the enrollment page', () => {
+And('you see the enrollment page without org unit in the url', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
+    cy.get('[data-test="enrollment-overview-page"]');
+});
+
+And('you see the enrollment page with the org unit in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-overview-page"]');
 });
