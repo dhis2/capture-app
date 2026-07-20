@@ -85,11 +85,9 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
     const WithMinCharsToSearchValidation = (props: any) => {
         const { filterTypeRef, minCharactersToSearch, handleCommitValue, classes, type, ...rest } = props;
         const committedValueRef = useRef<Value>(undefined);
-        const errorsVisibleRef = useRef(false);
         const [committedValue, setCommittedValue] = useState<Value>(undefined);
 
         const showValidationErrors = useCallback(() => {
-            errorsVisibleRef.current = true;
             setCommittedValue(committedValueRef.current);
         }, []);
 
@@ -112,7 +110,7 @@ export const withMinCharsToSearchValidation = () => (InnerComponent: React.Compo
         const wrappedHandleCommitValue = useCallback(
             (value?: Value, isBlur?: boolean) => {
                 committedValueRef.current = value;
-                if (errorsVisibleRef.current) {
+                if (isBlur) {
                     setCommittedValue(value);
                 }
                 handleCommitValue?.(value, isBlur);
