@@ -3,4 +3,4 @@
 
 # code owners for functionality
 /src/    @dhis2/team-tracker-frontend
-/docs/   @dhis2/team-tracker-frontend @dhis2/team-tracker-frontend-support @dhis2/team-qa
+/docs/   @dhis2/team-tracker-frontend @dhis2/team-tracker-frontend-support
