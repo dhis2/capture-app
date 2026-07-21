@@ -25,8 +25,7 @@ export const DataEntryComponent = ({
     pluginContext,
     accessReadOnly,
 }: PlainProps) => {
-    const enrollmentLower = useProgramLabel('enrollment') ?? i18n.t('enrollment');
-    const enrollmentTitle = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
+    const enrollment = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
 
     return (
         <DataEntryModalWrapper
@@ -57,9 +56,8 @@ export const DataEntryComponent = ({
                 { trackedEntityName, interpolation: { escapeValue: false } },
             )}
             {' '}
-            {i18n.t('Information about this {{enrollment}} can be edited in the {{Enrollment}} widget.', {
-                enrollment: enrollmentLower,
-                Enrollment: enrollmentTitle,
+            {i18n.t('Information about this {{enrollment}} can be edited in the {{enrollment}} widget.', {
+                enrollment,
                 interpolation: { escapeValue: false },
             })}
             <DataEntry
