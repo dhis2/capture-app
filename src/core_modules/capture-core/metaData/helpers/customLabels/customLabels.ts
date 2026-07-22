@@ -9,7 +9,9 @@ export const CUSTOM_LABEL_FIELDS = {
     enrollment: { singular: 'displayEnrollmentLabel', plural: 'displayEnrollmentsLabel' },
     followUp: { singular: 'displayFollowUpLabel' },
     orgUnit: { singular: 'displayOrgUnitLabel' },
-    attribute: { plural: 'displayTrackedEntityAttributeLabel' },
+    note: { plural: 'displayNotesLabel' },
+    relationship: { plural: 'displayRelationshipsLabel' },
+    attribute: { plural: 'displayTrackedEntityAttributesLabel' },
     programStage: { singular: 'displayProgramStageLabel', plural: 'displayProgramStagesLabel' },
     event: { singular: 'displayEventLabel', plural: 'displayEventsLabel' },
     trackedEntityType: { singular: 'displayName', plural: 'displayTrackedEntityTypesLabel' },
@@ -20,13 +22,10 @@ export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
 export type CustomLabelScope = 'program' | 'programStage' | 'trackedEntityType';
 
-// Each scope lists only the label keys that its cached object can carry. Tracked entity types
-// are kept separate because their singular label is the generic `displayName`, which also exists
-// on programs and stages — extracting it for them would leak the object's own name.
 const KEYS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<CustomLabelKey>> = {
-    program: ['enrollment', 'followUp', 'orgUnit', 'attribute', 'programStage', 'event'],
+    program: ['enrollment', 'followUp', 'orgUnit', 'note', 'relationship', 'programStage', 'event'],
     programStage: ['programStage', 'event'],
-    trackedEntityType: ['trackedEntityType'],
+    trackedEntityType: ['trackedEntityType', 'attribute'],
 };
 
 const fieldsForScope = (scope: CustomLabelScope): Array<string> =>
