@@ -8,7 +8,6 @@ import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import { useStageLabel } from '../../../metaData';
 import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
@@ -49,7 +48,6 @@ const Schedule = ({
     updateSelectedAction,
     programStage,
     canAddNewEventToStage,
-    eventLabel,
 }) => {
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
@@ -62,9 +60,8 @@ const Schedule = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one {{event}}', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
-            event: eventLabel,
             interpolation: { escapeValue: false },
         });
     }
@@ -95,7 +92,6 @@ const EnterData = ({
     updateSelectedAction,
     programStage,
     canAddNewEventToStage,
-    eventLabel,
 }) => {
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
@@ -108,9 +104,8 @@ const EnterData = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one {{event}}', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
-            event: eventLabel,
             interpolation: { escapeValue: false },
         });
     }
@@ -141,7 +136,6 @@ const LinkExistingResponse = ({
     selectedAction,
     updateSelectedAction,
     programStage,
-    eventsLabel,
 }) => {
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
@@ -154,9 +148,8 @@ const LinkExistingResponse = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} has no linkable {{events}}', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} has no linkable events', {
             linkableStageLabel: programStage.stageForm.name,
-            events: eventsLabel,
             interpolation: { escapeValue: false },
         });
     }
@@ -197,12 +190,6 @@ const LinkButton = withStyles(styles)(({
     );
 });
 
-const useRelatedStagesLabels = (stageId?: string, programId?: string) => ({
-    eventLabel: useStageLabel('event', { stageId, programId }) ?? i18n.t('Event'),
-    eventsLabel: useStageLabel('event', { stageId, programId, plural: true }) ?? i18n.t('Events'),
-    relationshipsLabel: i18n.t('relationships'),
-});
-
 const RelatedStagesActionsPlain = ({
     classes,
     type,
@@ -220,9 +207,6 @@ const RelatedStagesActionsPlain = ({
     isLinking,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
-    const stageId = constraint?.programStage?.id;
-    const programId = constraint?.programStage?.program?.id;
-    const { eventLabel, eventsLabel, relationshipsLabel } = useRelatedStagesLabels(stageId, programId);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
@@ -252,7 +236,6 @@ const RelatedStagesActionsPlain = ({
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
                             canAddNewEventToStage={canAddNewEventToStage}
-                            eventLabel={eventLabel}
                         />
                         <EnterData
                             actionsOptions={actionsOptions}
@@ -260,7 +243,6 @@ const RelatedStagesActionsPlain = ({
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
                             canAddNewEventToStage={canAddNewEventToStage}
-                            eventLabel={eventLabel}
                         />
                         <LinkExistingResponse
                             actionsOptions={actionsOptions}
@@ -268,15 +250,12 @@ const RelatedStagesActionsPlain = ({
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
-                            eventsLabel={eventsLabel}
                         />
                     </>
                 )}
 
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
-                    <div>{i18n.t('Ambiguous {{relationships}}, contact system administrator', {
-                        relationships: relationshipsLabel,
-                    })}</div>
+                    <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
                 )}
             </div>
 

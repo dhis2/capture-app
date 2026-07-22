@@ -8,7 +8,6 @@ import { availableCardListButtonState, enrollmentTypes } from './CardList.consta
 import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { useProgramLabel } from '../../metaData';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -79,8 +78,6 @@ const CardListButtons: FC<Props> = ({
     programName,
 }) => {
     const dispatch = useDispatch();
-    const programId = currentSearchScopeType === searchScopes.PROGRAM ? currentSearchScopeId : undefined;
-    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
     const navigationButtonsState: AvailableCardListButtonState = deriveNavigationButtonState(enrollmentType);
     const onHandleClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
         event.stopPropagation();
@@ -118,7 +115,7 @@ const CardListButtons: FC<Props> = ({
     {
         dataTest: 'view-active-enrollment-button',
         onClick: onHandleClick,
-        label: i18n.t('View active {{enrollment}}', { enrollment }),
+        label: i18n.t('View active enrollment'),
         hide: navigationButtonsState !== availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON,
     },
     {

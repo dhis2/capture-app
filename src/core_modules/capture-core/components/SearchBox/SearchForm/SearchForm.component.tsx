@@ -9,7 +9,6 @@ import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
-import { useProgramLabel } from '../../../metaData';
 
 const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
@@ -103,7 +102,6 @@ const SearchFormIndex = ({
     keptFallbackSearchFormValues,
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
-    const attributes = useProgramLabel('attribute', { plural: true }) ?? i18n.t('Attributes');
 
     useFormDataLifecycle(
         searchGroupsForSelectedScope,
@@ -289,7 +287,7 @@ const SearchFormIndex = ({
                         minAttributesRequiredToSearch,
                         unsupportedAttributes,
                     }) => {
-                        const searchByText = i18n.t('Search by {{attributes}}', { attributes });
+                        const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
                             <div key={formId} data-test="form-attributes">
@@ -375,7 +373,6 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
-        attributes,
     ]);
 };
 

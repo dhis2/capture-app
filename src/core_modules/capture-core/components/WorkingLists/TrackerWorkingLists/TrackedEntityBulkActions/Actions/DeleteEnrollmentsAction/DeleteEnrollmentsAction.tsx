@@ -4,12 +4,11 @@ import { Button } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { useProgramLabel } from '../../../../../../metaData';
 import type { PlainProps } from './DeleteEnrollmentsAction.types';
 
-const getTooltipContent = (enrollments: string, programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
+const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
     if (!programDataWriteAccess) {
-        return i18n.t('You do not have access to delete {{enrollments}}', { enrollments });
+        return i18n.t('You do not have access to delete enrollments');
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -28,8 +27,7 @@ export const DeleteEnrollmentsAction = ({
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
-    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments');
-    const tooltipContent = getTooltipContent(enrollments, programDataWriteAccess, bulkDataEntryIsActive);
+    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
     if (!hasAuthority) {
@@ -47,7 +45,7 @@ export const DeleteEnrollmentsAction = ({
                     disabled={disabled}
                     onClick={() => setIsDeleteDialogOpen(true)}
                 >
-                    {i18n.t('Delete {{enrollments}}', { enrollments })}
+                    {i18n.t('Delete enrollments')}
                 </Button>
             </ConditionalTooltip>
 

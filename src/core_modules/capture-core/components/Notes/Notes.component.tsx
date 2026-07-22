@@ -85,7 +85,6 @@ const NotesPlain = ({
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const { fromServerDate } = useTimeZoneConversion();
-    const note = i18n.t('note');
 
     useEffect(() => {
         setAddIsOpen(!!propValue);
@@ -135,10 +134,7 @@ const NotesPlain = ({
                     className={classes.addNoteContainer}
                     small
                 >
-                    {i18n.t('Add {{note}}', {
-                        note,
-                        interpolation: { escapeValue: false },
-                    })}
+                    {i18n.t('Add note')}
                 </Button>
                 <Button
                     onClick={onCancel}
@@ -160,10 +156,7 @@ const NotesPlain = ({
                 small={smallMainButton}
                 dataTest="write-note-btn"
             >
-                {i18n.t('Write {{note}}', {
-                    note,
-                    interpolation: { escapeValue: false },
-                })}
+                {i18n.t('Write note')}
             </Button>
         </div>
     );

@@ -16,7 +16,6 @@ import {
     dataElementTypes,
     getTrackerProgramThrowIfNotFound,
     OptionSet,
-    useProgramLabel,
     type TrackerProgram,
 } from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
@@ -157,8 +156,6 @@ const CardListItemIndex = ({
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
     const { fromServerDate } = useTimeZoneConversion();
-    const orgUnit = useProgramLabel('orgUnit', { programId: currentProgramId }) ?? i18n.t('Organisation unit');
-    const enrollment = useProgramLabel('enrollment', { programId: currentProgramId }) ?? i18n.t('Enrollment');
 
     const renderImageDataElement = (imageElement?: CardProfileImageElementInformation): React.ReactNode => {
         if (!imageElement) { return null; }
@@ -220,11 +217,11 @@ const CardListItemIndex = ({
 
         return (<>
             <ListEntry
-                name={orgUnit}
+                name={i18n.t('Organisation unit')}
                 value={orgUnitName}
             />
             <ListEntry
-                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of {{enrollment}}', { enrollment })}
+                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
                 value={enrolledAt}
                 type={dataElementTypes.DATE}
             />

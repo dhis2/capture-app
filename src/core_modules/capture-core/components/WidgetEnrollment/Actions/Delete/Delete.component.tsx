@@ -11,17 +11,12 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
-import { useProgramLabel } from '../../../../metaData';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
 
 export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
     const disabled = !canCascadeDeleteEnrollment;
-    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
-    const tooltipContent = i18n.t('You do not have access to delete this {{enrollment}}', {
-        enrollment: enrollmentLabel,
-        interpolation: { escapeValue: false },
-    });
+    const tooltipContent = i18n.t('You do not have access to delete this enrollment');
 
     return (
         <ConditionalTooltip content={tooltipContent} enabled={disabled}>
@@ -42,20 +37,11 @@ export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Pro
                     onClose={() => setToggle(false)}
                     dataTest="widget-enrollment-actions-modal"
                 >
-                    <ModalTitle>{i18n.t('Delete {{enrollment}}', {
-                        enrollment: enrollmentLabel,
-                        interpolation: { escapeValue: false },
-                    })}</ModalTitle>
+                    <ModalTitle>{i18n.t('Delete enrollment')}</ModalTitle>
                     <ModalContent>
-                        {i18n.t('Are you sure you want to delete this {{enrollment}}?', {
-                            enrollment: enrollmentLabel,
-                            interpolation: { escapeValue: false },
-                        })}
+                        {i18n.t('Are you sure you want to delete this enrollment?')}
                         {' '}
-                        {i18n.t('This will permanently remove the current {{enrollment}}.', {
-                            enrollment: enrollmentLabel,
-                            interpolation: { escapeValue: false },
-                        })}
+                        {i18n.t('This will permanently remove the current enrollment.')}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
@@ -66,10 +52,7 @@ export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Pro
                                 destructive
                                 onClick={() => onDelete(enrollment)}
                             >
-                                {i18n.t('Yes, delete {{enrollment}}.', {
-                                    enrollment: enrollmentLabel,
-                                    interpolation: { escapeValue: false },
-                                })}
+                                {i18n.t('Yes, delete enrollment.')}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

@@ -76,7 +76,6 @@ const NoteSectionPlain = ({
     const [isEditing, setEditing] = useState<boolean>(false);
     const [newNoteValue, setNewNoteValue] = useState<string>('');
     const { fromServerDate } = useTimeZoneConversion();
-    const note = i18n.t('note');
 
     const handleChange = useCallback((value: string) => {
         setEditing(true);
@@ -130,7 +129,7 @@ const NoteSectionPlain = ({
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(noteItem => <NoteItem key={`note-item-${noteItem.note || noteItem.value}-`} {...noteItem} />)
+                    .map(note => <NoteItem key={`note-item-${note.note || note.value}-`} {...note} />)
                 }
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
@@ -159,10 +158,7 @@ const NoteSectionPlain = ({
                         primary
                         small
                     >
-                        {i18n.t('Save {{note}}', {
-                            note,
-                            interpolation: { escapeValue: false },
-                        })}
+                        {i18n.t('Save note')}
                     </Button>
                     <Button
                         dataTest="cancel-note-btn"

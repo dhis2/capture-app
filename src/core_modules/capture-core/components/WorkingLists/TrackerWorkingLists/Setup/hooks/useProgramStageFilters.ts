@@ -2,13 +2,7 @@ import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import {
-    type TrackerProgram,
-    type ProgramStage,
-    dataElementTypes,
-    getProgramEventAccess,
-    useStageLabel,
-} from '../../../../../metaData';
+import { type TrackerProgram, type ProgramStage, dataElementTypes, getProgramEventAccess } from '../../../../../metaData';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>
@@ -51,8 +45,6 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
         program.stages,
     );
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(program.stages, program.id);
-    const programStageLabel = useStageLabel('programStage', { programId: program.id, stageId: programStageId })
-        ?? i18n.t(ADDITIONAL_FILTERS_LABELS.programStage);
 
     return useMemo(() => {
         const translatedStatus = translatedStatusTypes();
@@ -60,7 +52,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
             {
                 id: ADDITIONAL_FILTERS.programStage,
                 type: dataElementTypes.TEXT,
-                header: programStageLabel,
+                header: i18n.t(ADDITIONAL_FILTERS_LABELS.programStage),
                 options,
                 mainButton: true,
                 transformRecordsFilter: () => null,
@@ -156,5 +148,5 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 ]
                 : []),
         ];
-    }, [programStageId, occurredAtLabel, scheduledAtLabel, hideDueDate, options, enableUserAssignment, programStageLabel]);
+    }, [programStageId, occurredAtLabel, scheduledAtLabel, hideDueDate, options, enableUserAssignment]);
 };

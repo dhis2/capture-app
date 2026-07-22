@@ -7,7 +7,6 @@ import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from '@tanstack/react-query';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
-import { useProgramLabel } from '../../metaData';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -108,7 +107,6 @@ const WidgetProfilePlain = ({
         userRoles,
     } = useUserRoles();
     const trackedEntityTypeName = program?.trackedEntityType?.displayName;
-    const attributes = useProgramLabel('attribute', { plural: true, programId }) ?? i18n.t('Attributes');
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 
@@ -179,15 +177,11 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? i18n.t('No {{attributes}} configured for {{trackedEntityTypeName}}', {
-                                attributes,
+                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
                                 trackedEntityTypeName,
                                 interpolation: { escapeValue: false },
                             })
-                            : i18n.t('No {{attributes}} configured', {
-                                attributes,
-                                interpolation: { escapeValue: false },
-                            })}
+                            : i18n.t('No attributes configured')}
                     </p>
                 </div>
             );

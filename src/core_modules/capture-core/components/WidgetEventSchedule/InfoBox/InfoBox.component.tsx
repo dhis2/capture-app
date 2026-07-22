@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
-import { useStageLabel } from '../../../metaData';
 import type { PlainProps } from './InfoBox.types';
 
 const styles = {
@@ -27,9 +26,6 @@ const InfoBoxPlain = ({
     orgUnitName,
     classes,
 }: Props) => {
-    const eventSingular = useStageLabel('event') ?? i18n.t('Event');
-    const eventPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
-
     if (!scheduleDate || !suggestedScheduleDate) {
         return null;
     }
@@ -38,14 +34,6 @@ const InfoBoxPlain = ({
     const absoluteDifference = Math.abs(dayDifference);
     const position = dayDifference > 0 ? i18n.t('after') : i18n.t('before');
     const scheduledDateMatchesSuggested = scheduleDate === suggestedScheduleDate;
-    const orgUnitScheduleText = i18n.t(
-        'There are {{count}} scheduled {{eventLabel}} in this program in {{orgUnitName}} on this day.',
-        {
-            count: eventCountInOrgUnit,
-            eventLabel: eventCountInOrgUnit === 1 ? eventSingular : eventPlural,
-            orgUnitName,
-            interpolation: { escapeValue: false },
-        });
 
     return (
         <NoticeBox className={classes.infoBox}>
@@ -70,7 +58,17 @@ const InfoBoxPlain = ({
                     {!!orgUnitName && (
                         <>
                             {' '}
-                            {orgUnitScheduleText}
+                            {i18n.t('There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.', {
+                                count: eventCountInOrgUnit,
+                                orgUnitName,
+                                // eslint-disable-next-line max-len
+                                defaultValue: 'There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.',
+                                // eslint-disable-next-line max-len
+                                defaultValue_plural: 'There are {{count}} scheduled events in this program in {{orgUnitName}} on this day.',
+                                interpolation: {
+                                    escapeValue: false,
+                                },
+                            })}
                         </>
                     )}
                 </>

@@ -1,8 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { formatMomentEn } from 'capture-core-utils/date';
-import i18n from '@dhis2/d2-i18n';
-import { getTrackerProgramThrowIfNotFound, useProgramLabel, useStageLabel } from '../../../../../../metaData';
+import { getTrackerProgramThrowIfNotFound } from '../../../../../../metaData';
 import { statusTypes } from '../../../../../../enrollment';
 import { statusTypes as eventStatuses } from '../../../../../../events/statusTypes';
 import { CompleteEnrollmentAndEventsModalComponent, CompleteEnrollmentModalComponent } from './CompleteModal.component';
@@ -19,9 +18,6 @@ export const CompleteModal = ({
     programStageName,
 }: Props) => {
     const { fromClientDate } = useTimeZoneConversion();
-    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
-    const eventSingularLabel = useStageLabel('event', { programId }) ?? i18n.t('Event');
-    const eventPluralLabel = useStageLabel('event', { programId, plural: true }) ?? i18n.t('Events');
     const programStages = useMemo(() => {
         const program = getTrackerProgramThrowIfNotFound(programId);
         return [...program.stages.values()];
@@ -80,9 +76,6 @@ export const CompleteModal = ({
     return hasActiveEvents ? (
         <CompleteEnrollmentAndEventsModalComponent
             programStageName={programStageName}
-            enrollmentLabel={enrollmentLabel}
-            eventSingularLabel={eventSingularLabel}
-            eventPluralLabel={eventPluralLabel}
             programStagesWithActiveEvents={programStagesWithActiveEvents}
             programStagesWithoutAccess={programStagesWithoutAccess}
             onCancel={onCancel}
@@ -92,7 +85,6 @@ export const CompleteModal = ({
     ) : (
         <CompleteEnrollmentModalComponent
             programStageName={programStageName}
-            enrollmentLabel={enrollmentLabel}
             onCancel={onCancel}
             onCompleteEnrollment={onHandleCompleteEnrollment}
         />

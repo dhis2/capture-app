@@ -10,7 +10,6 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
-import { useStageLabel } from '../../../../../../../metaData';
 import { EventStatuses } from '../EventRow';
 
 type Props = {
@@ -29,7 +28,6 @@ export const SkipAction = ({
     onUpdateEventStatus,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const event = useStageLabel('event') ?? i18n.t('Event');
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -58,10 +56,7 @@ export const SkipAction = ({
                 return { previousStatus };
             },
             onError: (error: unknown, payload: { status: string }, context?: { previousStatus: string }) => {
-                showError({ message: i18n.t('An error occurred when updating {{event}} status', {
-                    event,
-                    interpolation: { escapeValue: false },
-                }) });
+                showError({ message: i18n.t('An error occurred when updating event status') });
                 log.error(errorCreator('An error occurred when updating event status')({ error, payload, context }));
                 context && onUpdateEventStatus(eventId, context.previousStatus);
             },

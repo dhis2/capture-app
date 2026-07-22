@@ -29,7 +29,6 @@ const NewTrackedEntityRelationshipPlain = ({
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
-    const relationship = i18n.t('Relationship');
 
     const closeAddWizard = useCallback(() => {
         setAddWizardVisible(false);
@@ -49,7 +48,7 @@ const NewTrackedEntityRelationshipPlain = ({
                     small
                     secondary
                 >
-                    {i18n.t('New {{relationship}}', { relationship })}
+                    {i18n.t('New Relationship')}
                 </Button>
             )}
 

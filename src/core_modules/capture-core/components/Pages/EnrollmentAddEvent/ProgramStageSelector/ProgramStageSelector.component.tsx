@@ -4,7 +4,6 @@ import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
-import { useStageLabel } from '../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -51,63 +50,59 @@ const ProgramStageSelectorComponentPlain = ({
     onSelectProgramStage,
     onCancel,
     classes,
-}: ProgramStageSelectorPlainProps) => {
-    const events = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
-    return (
-        <div className={classes.container}>
-            {programStages.map((programStage) => {
-                const disableStage =
+}: ProgramStageSelectorPlainProps) => (
+    <div className={classes.container}>
+        {programStages.map((programStage) => {
+            const disableStage =
                 !programStage.dataAccess.write
                 || (!programStage.repeatable && programStage.eventCount > 0)
                 || programStage.hiddenProgramStage;
-                return (
-                    <div
-                        key={programStage.id}
+            return (
+                <div
+                    key={programStage.id}
+                >
+                    <ConditionalTooltip
+                        content={i18n.t('You can\'t add any more {{ programStageName }} events', {
+                            programStageName: programStage.displayName,
+                            interpolation: { escapeValue: false },
+                        })}
+                        enabled={disableStage}
                     >
-                        <ConditionalTooltip
-                            content={i18n.t('You can\'t add any more {{ programStageName }} {{events}}', {
-                                programStageName: programStage.displayName,
-                                events,
-                                interpolation: { escapeValue: false },
-                            })}
-                            enabled={disableStage}
+                        <Button
+                            className={classes.button}
+                            secondary
+                            disabled={disableStage}
+                            onClick={() => onSelectProgramStage(programStage.id)}
+                            dataTest={'program-stage-selector-button'}
+                            icon={
+                                programStage.style?.icon ? (
+                                    <div className={classes.icon}>
+                                        <NonBundledDhis2Icon
+                                            name={programStage.style?.icon}
+                                            color={programStage.style?.color}
+                                            width={24}
+                                            height={24}
+                                            cornerRadius={5}
+                                        />
+                                    </div>
+                                ) : undefined
+                            }
                         >
-                            <Button
-                                className={classes.button}
-                                secondary
-                                disabled={disableStage}
-                                onClick={() => onSelectProgramStage(programStage.id)}
-                                dataTest={'program-stage-selector-button'}
-                                icon={
-                                    programStage.style?.icon ? (
-                                        <div className={classes.icon}>
-                                            <NonBundledDhis2Icon
-                                                name={programStage.style?.icon}
-                                                color={programStage.style?.color}
-                                                width={24}
-                                                height={24}
-                                                cornerRadius={5}
-                                            />
-                                        </div>
-                                    ) : undefined
-                                }
-                            >
-                                {programStage.displayName}
-                            </Button>
-                        </ConditionalTooltip>
-                    </div>
-                );
-            })}
-            <Button
-                className={classes.cancelbutton}
-                secondary
-                large
-                onClick={onCancel}
-            >
-                {i18n.t('Cancel without saving')}
-            </Button>
-        </div>
-    );
-};
+                            {programStage.displayName}
+                        </Button>
+                    </ConditionalTooltip>
+                </div>
+            );
+        })}
+        <Button
+            className={classes.cancelbutton}
+            secondary
+            large
+            onClick={onCancel}
+        >
+            {i18n.t('Cancel without saving')}
+        </Button>
+    </div>
+);
 
 export const ProgramStageSelectorComponent = withStyles(styles)(ProgramStageSelectorComponentPlain);

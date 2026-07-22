@@ -14,7 +14,6 @@ import {
     completeUrlUpdate,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
-import { getProgramLabel } from '../../metaData';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
@@ -64,10 +63,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
                 }
 
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    const orgUnit = getProgramLabel(program, 'orgUnit') ?? i18n.t('Organisation unit');
-                    return invalidSelectionsFromUrl(
-                        i18n.t('Selected program is invalid for selected {{orgUnit}}', { orgUnit }),
-                    );
+                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for selected organisation unit'));
                 }
             }
 

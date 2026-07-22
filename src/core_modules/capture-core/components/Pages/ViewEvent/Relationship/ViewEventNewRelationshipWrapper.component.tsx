@@ -70,41 +70,27 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
             className={this.props.classes.headerContainer}
         >
             <div className={this.props.classes.header} >
-                {i18n.t('New {{event}} {{relationship}}', {
-                    event: this.props.eventLabel,
-                    relationship: this.props.relationshipLabel,
-                })}
+                {i18n.t('New event relationship')}
             </div>
         </div>
     );
 
     render() {
-        const { classes, onCancel, eventLabel, relationshipLabel, ...passOnProps } = this.props;
+        const { classes, onCancel, ...passOnProps } = this.props;
         return (
             <div className={classes.container}>
                 <div className={classes.backToEventContainer}>
-                    <span>
-                        {i18n.t('Adding {{relationship}} to {{event}}.', {
-                            relationship: relationshipLabel,
-                            event: eventLabel,
-                        })}
-                    </span>
+                    <span>{i18n.t('Adding relationship to event.')}</span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {i18n.t('Go back to {{event}} without saving {{relationship}}', {
-                            event: eventLabel,
-                            relationship: relationshipLabel,
-                        })}
+                        {i18n.t('Go back to event without saving relationship')}
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={i18n.t('New {{event}} {{relationship}}', {
-                            event: eventLabel,
-                            relationship: relationshipLabel,
-                        })}
+                        header={i18n.t('New event relationship')}
                         onCancel={onCancel}
                         {...passOnProps}
                     />

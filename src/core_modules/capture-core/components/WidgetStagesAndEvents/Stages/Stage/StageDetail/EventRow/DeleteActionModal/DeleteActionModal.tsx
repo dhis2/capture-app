@@ -6,14 +6,11 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { useStageLabel } from '../../../../../../../metaData';
 
 type Props = {
     eventId: string;
     pendingApiResponse: boolean;
     eventDetails: ApiEnrollmentEvent;
-    programId: string;
-    stageId?: string;
     onDeleteEvent: (eventId: string) => void;
     onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
     setDeleteModalOpen: (open: boolean) => void;
@@ -24,12 +21,9 @@ export const DeleteActionModal = ({
     pendingApiResponse,
     eventId,
     eventDetails,
-    programId,
-    stageId,
     onDeleteEvent,
     onRollbackDeleteEvent,
 }: Props) => {
-    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('Event');
     const { show: showError } = useAlert(
         ({ message }) => message,
         {
@@ -60,7 +54,7 @@ export const DeleteActionModal = ({
                 return eventToRollbackOnFail;
             },
             onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: ApiEnrollmentEvent) => {
-                showError({ message: i18n.t('An error occurred while deleting the {{event}}', { event }) });
+                showError({ message: i18n.t('An error occurred while deleting the event') });
                 log.error(errorCreator('An error occurred while deleting the event')({ apiError, payload }));
 
                 if (eventToRollbackOnFail) {
@@ -76,13 +70,13 @@ export const DeleteActionModal = ({
             small
         >
             <ModalTitle>
-                {i18n.t('Delete {{event}}', { event })}
+                {i18n.t('Delete event')}
             </ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t('Deleting this {{event}} is permanent and cannot be undone.', { event })}
+                    {i18n.t('Deleting an event is permanent and cannot be undone.')}
                     {' '}
-                    {i18n.t('Are you sure you want to delete this {{event}}?', { event })}
+                    {i18n.t('Are you sure you want to delete this event?')}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -96,7 +90,7 @@ export const DeleteActionModal = ({
                         destructive
                         onClick={() => !pendingApiResponse && mutate({ eventId })}
                     >
-                        {i18n.t('Yes, delete {{event}}', { event })}
+                        {i18n.t('Yes, delete event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

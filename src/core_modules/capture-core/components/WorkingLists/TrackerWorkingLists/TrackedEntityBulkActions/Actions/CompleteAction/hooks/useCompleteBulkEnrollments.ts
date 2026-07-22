@@ -6,7 +6,7 @@ import log from 'loglevel';
 import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { useProgramLabel, type ProgramStage } from '../../../../../../../metaData';
+import type { ProgramStage } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: Record<string, any>;
@@ -89,7 +89,6 @@ export const useCompleteBulkEnrollments = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const enrollmentsLabel = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -166,8 +165,7 @@ export const useCompleteBulkEnrollments = ({
             },
             onError: (serverResponse, variables) => {
                 removeQueries();
-                // eslint-disable-next-line max-len
-                showAlert({ message: i18n.t('An error occurred when completing the {{enrollments}}', { enrollments: enrollmentsLabel }) });
+                showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
                 log.error(
                     errorCreator('An error occurred when completing enrollments')({
                         serverResponse,
@@ -192,8 +190,7 @@ export const useCompleteBulkEnrollments = ({
                 onUpdateList(true);
             },
             onError: (serverResponse, variables) => {
-                // eslint-disable-next-line max-len
-                showAlert({ message: i18n.t('An error occurred when completing the {{enrollments}}', { enrollments: enrollmentsLabel }) });
+                showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
                 log.error(
                     errorCreator('An error occurred when completing enrollments')({
                         serverResponse,
@@ -227,8 +224,7 @@ export const useCompleteBulkEnrollments = ({
                             serverResponse,
                             enrollments,
                         }));
-                    // eslint-disable-next-line max-len
-                    showAlert({ message: i18n.t('An unknown error occurred when completing {{enrollments}}', { enrollments: enrollmentsLabel }) });
+                    showAlert({ message: i18n.t('An unknown error occurred when completing enrollments') });
                     return;
                 }
                 const validEnrollments = filterValidEnrollments(enrollments, errors);

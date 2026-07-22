@@ -1,7 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useProgramLabel } from '../../../../metaData';
 
 type Props = {
     eventId: string;
@@ -10,7 +9,6 @@ type Props = {
 };
 
 export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) => {
-    const event = useProgramLabel('event') ?? i18n.t('Event');
     const handleConfirm = () => {
         onConfirmDelete(eventId);
         onClose();
@@ -22,13 +20,13 @@ export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) =
             small
         >
             <ModalTitle>
-                {i18n.t('Delete {{event}}', { event })}
+                {i18n.t('Delete event')}
             </ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t('Deleting this {{event}} is permanent and cannot be undone.', { event })}
+                    {i18n.t('Deleting an event is permanent and cannot be undone.')}
                     {' '}
-                    {i18n.t('Are you sure you want to delete this {{event}}?', { event })}
+                    {i18n.t('Are you sure you want to delete this event?')}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -42,7 +40,7 @@ export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) =
                         destructive
                         onClick={handleConfirm}
                     >
-                        {i18n.t('Yes, delete {{event}}', { event })}
+                        {i18n.t('Yes, delete event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

@@ -2,7 +2,6 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { useStageLabel } from '../../metaData';
 import type { Assignee } from './WidgetAssignee.types';
 
 const styles = () => ({
@@ -35,10 +34,8 @@ type Props = {
     avatarId?: string;
 } & WithStyles<typeof styles>;
 
-const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classes }: Props) => {
-    const event = useStageLabel('event') ?? i18n.t('Event');
-
-    return assignee ? (
+const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classes }: Props) => (
+    assignee ? (
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
                 {i18n.t('Assigned to')}
@@ -60,10 +57,7 @@ const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classe
     ) : (
         <div>
             <div className={classes.emptyMessage} data-test="widget-assignee-empty-message">
-                {i18n.t('No one is assigned to this {{event}}', {
-                    event,
-                    interpolation: { escapeValue: false },
-                })}
+                {i18n.t('No one is assigned to this event')}
             </div>
             {!readOnly && (
                 <Button
@@ -76,7 +70,7 @@ const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classe
                 </Button>
             )}
         </div>
-    );
-};
+    )
+);
 
 export const DisplayMode = withStyles(styles)(DisplayModePlain);

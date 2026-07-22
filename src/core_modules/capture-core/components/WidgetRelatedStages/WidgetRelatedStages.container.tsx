@@ -15,7 +15,6 @@ import {
 import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useStageLabel } from '../../metaData';
 import type { RequestEvent } from '../DataEntries';
 
 const styles = {
@@ -55,7 +54,6 @@ export const WidgetRelatedStagesPlain = ({
     const stageWriteAccess = Boolean(stageWriteAccessById[programStageId]);
     const linkedStageId = constraint?.programStage?.id;
     const linkedStageWriteAccess = linkedStageId ? Boolean(stageWriteAccessById[linkedStageId]) : false;
-    const event = useStageLabel('event', { stageId: linkedStageId, programId }) ?? i18n.t('Event');
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
@@ -64,7 +62,6 @@ export const WidgetRelatedStagesPlain = ({
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
-        event,
         onUpdateOrAddEnrollmentEvents,
         onUpdateEnrollmentEventsSuccess,
         onUpdateEnrollmentEventsError,
@@ -126,7 +123,7 @@ export const WidgetRelatedStagesPlain = ({
                     <span className={classes.icon}>
                         <IconLink24 />
                     </span>
-                    {i18n.t('Linked {{event}}', { event })}
+                    {i18n.t('Linked event')}
                 </div>
             }
         >
