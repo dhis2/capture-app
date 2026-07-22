@@ -58,6 +58,7 @@ const NewTrackedEntityRelationshipPlain = ({
         teiId,
         onMutate: () => onSave && onSave(),
     });
+    const relationship = i18n.t('relationship');
 
 
     const onLinkToTrackedEntityFromSearch = useCallback(
@@ -275,7 +276,7 @@ const NewTrackedEntityRelationshipPlain = ({
         <div className={classes.container}>
             <div className={classes.bar}>
                 <LinkButton onClick={onCancel} className={classes.linkText}>
-                    {i18n.t('Go back without saving relationship')}
+                    {i18n.t('Go back without saving {{relationship}}', { relationship })}
                 </LinkButton>
             </div>
             <Widget

@@ -43,8 +43,10 @@ const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyle
     <span className={classes.slash}>/</span>);
 
 const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName }: any) => {
-    const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
+    const relationship = i18n.t('relationship');
+    const initialText = i18n.t('New {{trackedEntityTypeName}} {{relationship}}', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
+        relationship,
     });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
         <Breadcrumblink onClick={onNavigate}>{initialText}</Breadcrumblink> :

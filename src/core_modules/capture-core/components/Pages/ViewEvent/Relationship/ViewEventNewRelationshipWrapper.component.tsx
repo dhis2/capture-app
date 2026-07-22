@@ -70,27 +70,41 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
             className={this.props.classes.headerContainer}
         >
             <div className={this.props.classes.header} >
-                {i18n.t('New event relationship')}
+                {i18n.t('New {{event}} {{relationship}}', {
+                    event: this.props.eventLabel,
+                    relationship: this.props.relationshipLabel,
+                })}
             </div>
         </div>
     );
 
     render() {
-        const { classes, onCancel, ...passOnProps } = this.props;
+        const { classes, onCancel, eventLabel, relationshipLabel, ...passOnProps } = this.props;
         return (
             <div className={classes.container}>
                 <div className={classes.backToEventContainer}>
-                    <span>{i18n.t('Adding relationship to event.')}</span>
+                    <span>
+                        {i18n.t('Adding {{relationship}} to {{event}}.', {
+                            relationship: relationshipLabel,
+                            event: eventLabel,
+                        })}
+                    </span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {i18n.t('Go back to event without saving relationship')}
+                        {i18n.t('Go back to {{event}} without saving {{relationship}}', {
+                            event: eventLabel,
+                            relationship: relationshipLabel,
+                        })}
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={i18n.t('New event relationship')}
+                        header={i18n.t('New {{event}} {{relationship}}', {
+                            event: eventLabel,
+                            relationship: relationshipLabel,
+                        })}
                         onCancel={onCancel}
                         {...passOnProps}
                     />

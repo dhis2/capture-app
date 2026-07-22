@@ -13,6 +13,7 @@ export type Props = {
 
 export type PlainProps = {
     programStageName: string;
+    enrollmentLabel: string;
     onCancel: () => void;
     onCompleteEnrollment: () => void;
 };
@@ -20,5 +21,7 @@ export type PlainProps = {
 export type PlainPropsWithEvents = PlainProps & {
     programStagesWithActiveEvents: { [programId: string]: { name: string; count: number } };
     programStagesWithoutAccess: { [programId: string]: { name: string; count: number } };
+    eventSingularLabel: string;
+    eventPluralLabel: string;
     onCompleteEnrollmentAndEvents: () => void;
 };

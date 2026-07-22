@@ -2,6 +2,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
+import { useProgramLabel, useStageLabel } from '../../../../metaData';
 import type { Props } from './topBar.types';
 
 export const EnrollmentAddEventTopBar = ({
@@ -24,6 +25,8 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentsAsOptions,
 }: Props) => {
     const { reset } = useReset();
+    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
+    const programStageLabel = useStageLabel('programStage', { programId }) ?? i18n.t('Stage');
     return (
         <ScopeSelector
             selectedProgramId={programId}
@@ -55,7 +58,7 @@ export const EnrollmentAddEventTopBar = ({
                 onClear={() => onResetEnrollmentId()}
                 options={enrollmentsAsOptions || []}
                 selectedValue={enrollmentId}
-                title={i18n.t('Enrollment')}
+                title={enrollmentLabel}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
             {stageName && (
@@ -72,7 +75,7 @@ export const EnrollmentAddEventTopBar = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={i18n.t('Stage')}
+                        title={programStageLabel}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
 
