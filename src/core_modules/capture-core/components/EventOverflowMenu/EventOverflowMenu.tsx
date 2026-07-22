@@ -38,25 +38,54 @@ type Props = {
     dataTest?: string;
 };
 
-export const EventOverflowMenu = ({
-    eventId,
-    eventStatus,
-    occurredAt,
-    completedAt,
-    programId,
-    programStage,
-    pendingApiResponse,
-    eventDetailsForRollback,
-    onCompletionStatusUpdated,
-    onOptimisticStatusUpdate,
-    onStatusUpdateError,
-    onStatusUpdateSuccess,
-    onOptimisticDelete,
-    onDeleteSuccess,
-    onDeleteError,
-    onOpenChangelog,
-    dataTest = 'event-overflow-menu',
-}: Props) => {
+type Visibility = {
+    completion: boolean;
+    skip: boolean;
+    delete: boolean;
+    changelog: boolean;
+    any: boolean;
+};
+
+const isSkippable = (status?: string) =>
+    status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
+
+const hasHandler = (...handlers: Array<unknown>) => handlers.some(Boolean);
+
+const computeVisibility = (props: Props, ctx: {
+    canChangeCompletionStatus: boolean;
+    canWrite: boolean;
+    supportsChangelog: boolean;
+}): Visibility => {
+    const completion = ctx.canChangeCompletionStatus && hasHandler(props.onCompletionStatusUpdated);
+    const skip = ctx.canWrite
+        && isSkippable(props.eventStatus)
+        && hasHandler(props.onOptimisticStatusUpdate, props.onStatusUpdateSuccess);
+    const del = ctx.canWrite && hasHandler(props.onOptimisticDelete, props.onDeleteSuccess);
+    const changelog = ctx.supportsChangelog && hasHandler(props.onOpenChangelog);
+    return { completion, skip, delete: del, changelog, any: [completion, skip, del, changelog].some(Boolean) };
+};
+
+export const EventOverflowMenu = (props: Props) => {
+    const {
+        eventId,
+        eventStatus,
+        occurredAt,
+        completedAt,
+        programId,
+        programStage,
+        pendingApiResponse,
+        eventDetailsForRollback,
+        onCompletionStatusUpdated,
+        onOptimisticStatusUpdate,
+        onStatusUpdateError,
+        onStatusUpdateSuccess,
+        onOptimisticDelete,
+        onDeleteSuccess,
+        onDeleteError,
+        onOpenChangelog,
+        dataTest = 'event-overflow-menu',
+    } = props;
+
     const [actionsOpen, setActionsOpen] = useState(false);
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { eventAccess, canChangeCompletionStatus } = useEventEditPermissions({
@@ -65,22 +94,17 @@ export const EventOverflowMenu = ({
         eventStatus,
     });
 
-    const close = () => setActionsOpen(false);
+    const visibility = computeVisibility(props, {
+        canChangeCompletionStatus,
+        canWrite: !!eventAccess?.write,
+        supportsChangelog,
+    });
 
-    const skipHandlerProvided = !!(onOptimisticStatusUpdate || onStatusUpdateSuccess);
-    const deleteHandlerProvided = !!(onOptimisticDelete || onDeleteSuccess);
-
-    const showCompletion = canChangeCompletionStatus && !!onCompletionStatusUpdated;
-    const showSkip = skipHandlerProvided && !!eventAccess?.write && (
-        eventStatus === eventStatuses.SCHEDULE
-        || eventStatus === eventStatuses.SKIPPED
-    );
-    const showDelete = deleteHandlerProvided && !!eventAccess?.write;
-    const showChangelog = supportsChangelog && !!onOpenChangelog;
-
-    if (!showCompletion && !showSkip && !showDelete && !showChangelog) {
+    if (!visibility.any) {
         return null;
     }
+
+    const close = () => setActionsOpen(false);
 
     return (
         <OverflowButton
@@ -93,15 +117,15 @@ export const EventOverflowMenu = ({
             disabled={pendingApiResponse}
             component={(
                 <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
-                    {showCompletion && (
+                    {visibility.completion && onCompletionStatusUpdated && (
                         <EventCompletionMenuItem
                             eventId={eventId}
                             eventStatus={eventStatus}
-                            onUpdated={onCompletionStatusUpdated!}
+                            onUpdated={onCompletionStatusUpdated}
                             onClose={close}
                         />
                     )}
-                    {showSkip && (
+                    {visibility.skip && (
                         <SkipMenuItem
                             eventId={eventId}
                             eventStatus={eventStatus}
@@ -112,7 +136,7 @@ export const EventOverflowMenu = ({
                             onStatusUpdateSuccess={onStatusUpdateSuccess}
                         />
                     )}
-                    {showDelete && (
+                    {visibility.delete && (
                         <DeleteMenuItem
                             eventId={eventId}
                             eventStatus={eventStatus}
@@ -128,10 +152,10 @@ export const EventOverflowMenu = ({
                             onDeleteError={onDeleteError}
                         />
                     )}
-                    {showChangelog && (
+                    {visibility.changelog && onOpenChangelog && (
                         <ChangelogMenuItem
                             onClose={close}
-                            onOpenChangelog={onOpenChangelog!}
+                            onOpenChangelog={onOpenChangelog}
                         />
                     )}
                 </FlyoutMenu>
