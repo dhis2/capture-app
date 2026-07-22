@@ -93,11 +93,8 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
     const onCompletionStatusUpdated = useCallback(() => {
-        queryClient.removeQueries({
-            queryKey: [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId],
-        });
         dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
-    }, [dispatch, eventId, queryClient]);
+    }, [dispatch, eventId]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries({
