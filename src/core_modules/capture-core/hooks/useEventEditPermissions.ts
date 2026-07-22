@@ -1,5 +1,6 @@
 import { useProgramExpiryForUser } from './useProgramExpiryForUser';
 import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
+import { useCanChangeCompletionStatus } from './useCanChangeCompletionStatus';
 import { getProgramEventAccess, ProgramStage } from '../metaData';
 import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
 import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
@@ -24,24 +25,6 @@ type Output = {
     readOnly: boolean,
 };
 
-const getCanChangeCompletionStatus = ({
-    eventStatus,
-    canUncompleteEvent,
-    eventAccess,
-}: {
-    eventStatus?: string,
-    canUncompleteEvent: boolean,
-    eventAccess: { read: boolean, write: boolean } | null,
-}): boolean => {
-    if (!eventAccess?.write) {
-        return false;
-    }
-    if (eventStatus === eventStatuses.COMPLETED) {
-        return canUncompleteEvent;
-    }
-    return eventStatus === eventStatuses.ACTIVE;
-};
-
 // An event is read-only when ANY of the following is true:
 //   - No write access to the program stage (eventAccess.write is false).
 //   - occurredAt is outside the program's expiry period (overridden by F_EDIT_EXPIRED).
@@ -61,6 +44,7 @@ export const useEventEditPermissions = ({
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const { hasAuthority: canEditExpired } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
+    const canChangeCompletionStatus = useCanChangeCompletionStatus({ eventStatus, eventAccess });
 
     const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
@@ -74,12 +58,6 @@ export const useEventEditPermissions = ({
         || !isEventWithinValidPeriod
         || !isWithinCompleteExpiry
         || !canEditCompletedEvent;
-
-    const canChangeCompletionStatus = getCanChangeCompletionStatus({
-        eventStatus,
-        canUncompleteEvent,
-        eventAccess,
-    });
 
     return {
         eventAccess,
