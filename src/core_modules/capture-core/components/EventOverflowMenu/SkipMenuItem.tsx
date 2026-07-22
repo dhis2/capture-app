@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { MenuItem, IconCalendar16 } from '@dhis2/ui';
+import { MenuItem } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
@@ -79,7 +79,7 @@ export const SkipMenuItem = ({
         return (
             <MenuItem
                 dense
-                icon={<IconCalendar16 />}
+                icon={<DirectionalArrow reverse />}
                 label={i18n.t('Unskip')}
                 onClick={() => handleClick(eventStatuses.SCHEDULE)}
                 suffix=""
