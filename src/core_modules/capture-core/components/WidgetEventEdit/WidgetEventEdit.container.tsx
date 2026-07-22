@@ -110,7 +110,7 @@ const WidgetEventEditPlain = ({
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const { readOnly, expiryPeriod, canUncompleteEvent, canChangeCompletionStatus } = useEventEditPermissions({
+    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
@@ -140,9 +140,10 @@ const WidgetEventEditPlain = ({
                             stage={stage}
                             programId={programId}
                             orgUnit={orgUnit}
+                            teiId={teiId}
+                            enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={readOnly}
-                            canChangeCompletionStatus={canChangeCompletionStatus}
                         />
                     }
                     noncollapsible

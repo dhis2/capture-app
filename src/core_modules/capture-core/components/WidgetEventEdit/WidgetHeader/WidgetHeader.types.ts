@@ -7,7 +7,8 @@ export type PlainProps = {
     stage: ProgramStage,
     programId: string,
     orgUnit: OrgUnit,
+    teiId: string,
+    enrollmentId: string,
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
-    canChangeCompletionStatus: boolean,
 };

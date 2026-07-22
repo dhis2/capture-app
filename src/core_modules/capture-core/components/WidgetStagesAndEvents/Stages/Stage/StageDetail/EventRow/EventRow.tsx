@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import {
-    DataTableCell,
-    DataTableRow,
-    FlyoutMenu,
-    IconMore16,
-} from '@dhis2/ui';
-import { OverflowButton } from '../../../../../Buttons';
+import { DataTableCell, DataTableRow } from '@dhis2/ui';
+import { EventOverflowMenu } from '../../../../../EventOverflowMenu';
+import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton } from './DeleteActionButton';
-import { SkipAction } from './SkipAction';
-import { DeleteActionModal } from './DeleteActionModal';
 
 const styles: Readonly<any> = {
     row: {
@@ -22,13 +15,6 @@ const styles: Readonly<any> = {
         cursor: 'not-allowed',
         opacity: 0.5,
     },
-};
-
-export const EventStatuses = {
-    ACTIVE: 'ACTIVE',
-    COMPLETED: 'COMPLETED',
-    SKIPPED: 'SKIPPED',
-    SCHEDULE: 'SCHEDULE',
 };
 
 const EventRowPlain = ({
@@ -44,70 +30,58 @@ const EventRowPlain = ({
     programId,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
-    const [actionsOpen, setActionsOpen] = useState(false);
-    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [changelogOpen, setChangelogOpen] = useState(false);
+
+    const changelogEventData = useMemo(
+        () => (eventDetails.dataValues ?? []).reduce<Record<string, { value: string }>>(
+            (acc, { dataElement, value }) => {
+                acc[dataElement] = { value };
+                return acc;
+            },
+            {},
+        ),
+        [eventDetails.dataValues],
+    );
 
     return (
-        <DataTableRow
-            className={!pendingApiResponse ? classes.row : classes.rowDisabled}
-            key={id}
-        >
-            {cells}
+        <>
+            <DataTableRow
+                className={!pendingApiResponse ? classes.row : classes.rowDisabled}
+                key={id}
+            >
+                {cells}
 
-            <DataTableCell>
-                {stageWriteAccess && (
-                    <>
-                        <OverflowButton
-                            open={actionsOpen}
-                            onClick={() => setActionsOpen(prev => !prev)}
-                            dataTest={'overflow-button'}
-                            secondary
-                            small
-                            icon={<IconMore16 />}
-                            disabled={pendingApiResponse}
-                            component={(
-                                <FlyoutMenu
-                                    dense
-                                    dataTest={'overflow-menu'}
-                                >
-                                    {(eventDetails.status === EventStatuses.SCHEDULE ||
-                                        eventDetails.status === EventStatuses.SKIPPED) && (
-                                        <SkipAction
-                                            eventId={id}
-                                            eventDetails={eventDetails}
-                                            setActionsOpen={setActionsOpen}
-                                            pendingApiResponse={pendingApiResponse}
-                                            onUpdateEventStatus={onUpdateEventStatus}
-                                        />
-                                    )}
-
-                                    <DeleteActionButton
-                                        setActionsOpen={setActionsOpen}
-                                        setDeleteModalOpen={setDeleteModalOpen}
-                                        occurredAt={eventDetails.occurredAt}
-                                        completedAt={eventDetails.completedAt}
-                                        eventStatus={eventDetails.status}
-                                        programId={programId}
-                                        programStage={programStage}
-                                    />
-                                </FlyoutMenu>
-                            )}
+                <DataTableCell>
+                    {stageWriteAccess && (
+                        <EventOverflowMenu
+                            eventId={id}
+                            eventStatus={eventDetails.status}
+                            occurredAt={eventDetails.occurredAt}
+                            completedAt={eventDetails.completedAt}
+                            programId={programId}
+                            programStage={programStage}
+                            pendingApiResponse={pendingApiResponse}
+                            eventDetailsForRollback={eventDetails}
+                            onOptimisticStatusUpdate={onUpdateEventStatus}
+                            onStatusUpdateError={onUpdateEventStatus}
+                            onOptimisticDelete={onDeleteEvent}
+                            onDeleteError={onRollbackDeleteEvent}
+                            onOpenChangelog={() => setChangelogOpen(true)}
+                            dataTest="overflow-menu"
                         />
-
-                        {deleteModalOpen && (
-                            <DeleteActionModal
-                                eventId={id}
-                                pendingApiResponse={pendingApiResponse}
-                                eventDetails={eventDetails}
-                                onDeleteEvent={onDeleteEvent}
-                                onRollbackDeleteEvent={onRollbackDeleteEvent}
-                                setDeleteModalOpen={setDeleteModalOpen}
-                            />
-                        )}
-                    </>
-                )}
-            </DataTableCell>
-        </DataTableRow>
+                    )}
+                </DataTableCell>
+            </DataTableRow>
+            {changelogOpen && programStage?.stageForm && (
+                <EventChangelogWrapper
+                    isOpen
+                    setIsOpen={setChangelogOpen}
+                    eventData={changelogEventData}
+                    eventId={id}
+                    formFoundation={programStage.stageForm}
+                />
+            )}
+        </>
     );
 };
 

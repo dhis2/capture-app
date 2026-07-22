@@ -30,6 +30,7 @@ type Output = {
 //   - occurredAt is outside the program's expiry period (overridden by F_EDIT_EXPIRED).
 //   - The event is completed and past the completeEventsExpiryDays window (overridden by F_EDIT_EXPIRED).
 //   - The event is completed on a stage with blockEntryForm set (overridden by F_EDIT_EXPIRED).
+//   - The event is skipped (must be unskipped before it can be edited).
 
 
 export const useEventEditPermissions = ({
@@ -57,7 +58,8 @@ export const useEventEditPermissions = ({
     const readOnly = !eventAccess?.write
         || !isEventWithinValidPeriod
         || !isWithinCompleteExpiry
-        || !canEditCompletedEvent;
+        || !canEditCompletedEvent
+        || eventStatus === eventStatuses.SKIPPED;
 
     return {
         eventAccess,

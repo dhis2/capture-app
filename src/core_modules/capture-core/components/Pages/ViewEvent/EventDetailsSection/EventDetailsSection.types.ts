@@ -10,5 +10,4 @@ export type PlainProps = {
     programId: string;
     onBackToAllEvents: () => void;
     showEditButton: boolean;
-    canChangeCompletionStatus: boolean;
 };

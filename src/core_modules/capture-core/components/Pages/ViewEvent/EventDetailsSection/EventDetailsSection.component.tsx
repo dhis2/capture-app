@@ -3,14 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
 import { FEATURES, useFeature } from 'capture-core-utils';
-import {
-    spacers,
-    IconFileDocument24,
-    Button,
-    IconMore16,
-    FlyoutMenu,
-    MenuItem,
-} from '@dhis2/ui';
+import { spacers, IconFileDocument24, Button } from '@dhis2/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
@@ -20,14 +13,13 @@ import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
-import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
-import { EventCompletionMenuItem } from '../../../EventCompletionMenuItem';
+import { EventOverflowMenu } from '../../../EventOverflowMenu';
 import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../../App/withAppUrlSync';
 import type { PlainProps } from './EventDetailsSection.types';
@@ -71,28 +63,26 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         onOpenEditEvent,
         isEditEventPage,
         programStage,
-        eventAccess,
         onBackToAllEvents,
         programId,
         showEditButton,
-        canChangeCompletionStatus,
         ...passOnProps
     } = props;
     const dispatch = useDispatch();
     const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
     const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
+    const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.occurredAt);
+    const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
-    const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
-    const onCompletionStatusUpdated = useCallback(() => {
+    const reloadEvent = useCallback(() => {
         dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
     }, [dispatch, eventId]);
 
@@ -143,42 +133,19 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         {i18n.t('Edit event')}
                     </Button>
                 </div>}
-            {(supportsChangelog || showCompletionAction) && (
-                <OverflowButton
-                    open={actionsIsOpen}
-                    onClick={() => setActionsIsOpen(prev => !prev)}
-                    secondary
-                    small
-                    icon={<IconMore16 />}
-                    dataTest="event-program-event-overflow-button"
-                    component={(
-                        <FlyoutMenu
-                            dense
-                            maxWidth="250px"
-                            dataTest="event-program-event-overflow-menu"
-                        >
-                            {showCompletionAction && (
-                                <EventCompletionMenuItem
-                                    eventId={eventId}
-                                    eventStatus={eventStatus}
-                                    onUpdated={onCompletionStatusUpdated}
-                                    onClose={() => setActionsIsOpen(false)}
-                                />
-                            )}
-                            {supportsChangelog && (
-                                <MenuItem
-                                    label={i18n.t('View changelog')}
-                                    suffix={null}
-                                    onClick={() => {
-                                        setChangeLogIsOpen(true);
-                                        setActionsIsOpen(false);
-                                    }}
-                                />
-                            )}
-                        </FlyoutMenu>
-                    )}
-                />
-            )}
+            <EventOverflowMenu
+                eventId={eventId}
+                eventStatus={eventStatus}
+                occurredAt={occurredAt}
+                completedAt={completedAt}
+                programId={programId}
+                programStage={programStage}
+                onCompletionStatusUpdated={!isEditEventPage ? reloadEvent : undefined}
+                onStatusUpdateSuccess={!isEditEventPage ? reloadEvent : undefined}
+                onDeleteSuccess={!isEditEventPage ? onBackToAllEvents : undefined}
+                onOpenChangelog={() => setChangeLogIsOpen(true)}
+                dataTest="event-program-event-overflow-menu"
+            />
         </div>
     );
 

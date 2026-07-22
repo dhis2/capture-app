@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
+import { spacersNum, Button, IconEdit24, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
-import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
+    deleteEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
-import { EventCompletionMenuItem } from '../../EventCompletionMenuItem';
+import { EventOverflowMenu } from '../../EventOverflowMenu';
+import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -42,17 +42,17 @@ const WidgetHeaderPlain = ({
     stage,
     programId,
     orgUnit,
+    teiId,
+    enrollmentId,
     setChangeLogIsOpen,
     classes,
     readOnly,
-    canChangeCompletionStatus,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
+    const { navigate } = useNavigate();
 
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
@@ -68,6 +68,26 @@ const WidgetHeaderPlain = ({
         }
         dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, storedEvent, eventId]);
+
+    const onOptimisticStatusUpdate = useCallback((_eventId: string, newStatus: string) => {
+        if (storedEvent) {
+            dispatch(updateEnrollmentEvent(eventId, { ...storedEvent, status: newStatus }));
+            dispatch(commitEnrollmentEvent(eventId));
+        }
+    }, [dispatch, storedEvent, eventId]);
+
+    const onStatusUpdateSuccess = useCallback(() => {
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+    }, [dispatch, eventId]);
+
+    const navigateToEnrollment = useCallback(() => {
+        navigate(`/enrollment?${buildUrlQueryString({ orgUnitId: orgUnit.id, programId, teiId, enrollmentId })}`);
+    }, [navigate, orgUnit.id, programId, teiId, enrollmentId]);
+
+    const onDeleteSuccess = useCallback(() => {
+        dispatch(deleteEnrollmentEvent(eventId));
+        navigateToEnrollment();
+    }, [dispatch, eventId, navigateToEnrollment]);
 
     const { icon, name } = stage;
 
@@ -99,43 +119,20 @@ const WidgetHeaderPlain = ({
                                 {i18n.t('Edit event')}
                             </Button>
                         )}
-
-                        {(supportsChangelog || canChangeCompletionStatus) && (
-                            <OverflowButton
-                                open={actionsIsOpen}
-                                onClick={() => setActionsIsOpen(prev => !prev)}
-                                icon={<IconMore16 />}
-                                small
-                                secondary
-                                dataTest={'tracker-program-event-overflow-button'}
-                                component={
-                                    <FlyoutMenu
-                                        dense
-                                        maxWidth="250px"
-                                        dataTest={'tracker-program-event-overflow-menu'}
-                                    >
-                                        {canChangeCompletionStatus && (
-                                            <EventCompletionMenuItem
-                                                eventId={eventId}
-                                                eventStatus={eventStatus}
-                                                onUpdated={onCompletionStatusUpdated}
-                                                onClose={() => setActionsIsOpen(false)}
-                                            />
-                                        )}
-                                        {supportsChangelog && (
-                                            <MenuItem
-                                                label={i18n.t('View changelog')}
-                                                suffix=""
-                                                onClick={() => {
-                                                    setChangeLogIsOpen(true);
-                                                    setActionsIsOpen(false);
-                                                }}
-                                            />
-                                        )}
-                                    </FlyoutMenu>
-                                }
-                            />
-                        )}
+                        <EventOverflowMenu
+                            eventId={eventId}
+                            eventStatus={eventStatus}
+                            occurredAt={storedEvent?.occurredAt}
+                            completedAt={storedEvent?.completedAt}
+                            programId={programId}
+                            programStage={stage}
+                            onCompletionStatusUpdated={onCompletionStatusUpdated}
+                            onOptimisticStatusUpdate={onOptimisticStatusUpdate}
+                            onStatusUpdateSuccess={onStatusUpdateSuccess}
+                            onDeleteSuccess={onDeleteSuccess}
+                            onOpenChangelog={() => setChangeLogIsOpen(true)}
+                            dataTest="tracker-program-event-overflow-menu"
+                        />
                     </div>
                 )}
             </div>
