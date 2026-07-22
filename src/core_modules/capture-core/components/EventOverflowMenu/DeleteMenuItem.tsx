@@ -141,7 +141,7 @@ export const DeleteMenuItem = ({
                                 onClick={() => {
                                     if (!pendingApiResponse) {
                                         setModalOpen(false);
-                                        deleteEvent();
+                                        deleteEvent(undefined);
                                     }
                                 }}
                             >
