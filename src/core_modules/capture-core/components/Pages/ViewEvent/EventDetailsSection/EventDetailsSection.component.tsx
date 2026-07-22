@@ -85,9 +85,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
-    const eventLabel = useStageLabel('event', { programId, stageId: programStage?.id });
-    const event = eventLabel ?? i18n.t('Event');
-    const eventTitle = eventLabel ?? i18n.t('Event');
+    const event = useStageLabel('event', { programId, stageId: programStage?.id }) ?? i18n.t('Event');
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -174,7 +172,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 header={(
                     <div className={classes.headerContainer}>
                         <ViewEventSectionHeader
-                            text={i18n.t('{{event}} details', { event: eventTitle })}
+                            text={i18n.t('{{event}} details', { event })}
                             icon={IconFileDocument24}
                         />
                         {renderActionsContainer()}
