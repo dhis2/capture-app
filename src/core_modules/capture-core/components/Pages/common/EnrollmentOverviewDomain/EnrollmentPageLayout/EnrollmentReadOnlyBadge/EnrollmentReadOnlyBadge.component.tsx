@@ -33,7 +33,7 @@ export const EnrollmentReadOnlyBadge = () => {
 
     const stagesEffectivelyReadOnly = !anyStageWriteAccess && anyStageReadAccess;
     const showAllMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && stagesEffectivelyReadOnly;
-    if (!showAllMissing) return null;
+    if (!showAllMissing && !trackedEntityInactive) return null;
 
     return (
         <ReadOnlyBadge
