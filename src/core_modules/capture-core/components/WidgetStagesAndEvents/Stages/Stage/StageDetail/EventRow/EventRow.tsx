@@ -62,6 +62,7 @@ const EventRowPlain = ({
                             programStage={programStage}
                             pendingApiResponse={pendingApiResponse}
                             eventDetailsForRollback={eventDetails}
+                            onCompletionStatusUpdated={newStatus => onUpdateEventStatus(id, newStatus)}
                             onOptimisticStatusUpdate={onUpdateEventStatus}
                             onStatusUpdateError={onUpdateEventStatus}
                             onOptimisticDelete={onDeleteEvent}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-22T12:30:15.239Z\n"
-"PO-Revision-Date: 2026-07-22T12:30:15.239Z\n"
+"POT-Creation-Date: 2026-07-22T13:34:27.421Z\n"
+"PO-Revision-Date: 2026-07-22T13:34:27.422Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -449,9 +449,6 @@ msgstr "Mark complete"
 msgid "View changelog"
 msgstr "View changelog"
 
-msgid "An error occurred while deleting the event"
-msgstr "An error occurred while deleting the event"
-
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 
@@ -463,6 +460,9 @@ msgstr "This event is outside the edit period"
 
 msgid "Delete"
 msgstr "Delete"
+
+msgid "An error occurred while deleting the event"
+msgstr "An error occurred while deleting the event"
 
 msgid "Delete event"
 msgstr "Delete event"

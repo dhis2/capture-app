@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import {
@@ -21,40 +21,25 @@ import { convertClientToView, convertServerToClient } from '../../converters';
 import { dataElementTypes, type ProgramStage } from '../../metaData';
 import { useEventEditPermissions } from '../../hooks';
 
-type Props = {
-    eventId: string;
+type TriggerProps = {
     eventStatus?: string;
     occurredAt?: string;
     completedAt?: string;
     programId: string;
     programStage?: ProgramStage | null;
-    pendingApiResponse?: boolean;
-    /** Optional pre-delete snapshot used by callers that need rollback on API error. */
-    eventDetailsForRollback?: ApiEnrollmentEvent;
     onClose: () => void;
-    onOptimisticDelete?: (eventId: string) => void;
-    onDeleteSuccess?: (eventId: string) => void;
-    onDeleteError?: (event: ApiEnrollmentEvent) => void;
+    onRequestDelete: () => void;
 };
 
 export const DeleteMenuItem = ({
-    eventId,
     eventStatus,
     occurredAt,
     completedAt,
     programId,
     programStage,
-    pendingApiResponse,
-    eventDetailsForRollback,
     onClose,
-    onOptimisticDelete,
-    onDeleteSuccess,
-    onDeleteError,
-}: Props) => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const dataEngine = useDataEngine();
-    const { show: showError } = useAlert(({ message }) => message, { critical: true });
-
+    onRequestDelete,
+}: TriggerProps) => {
     const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
     const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
 
@@ -65,6 +50,60 @@ export const DeleteMenuItem = ({
         occurredAtClient,
         completedAtClient: convertServerToClient(completedAt, dataElementTypes.DATE) as string,
     });
+
+    const getDisabledMessage = (): string => {
+        if (!isEventWithinValidPeriod) {
+            return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
+                occurredAt: occurredAtClientView,
+                interpolation: { escapeValue: false },
+            });
+        }
+        if (!canEditCompletedEvent) {
+            return i18n.t('This event has been completed');
+        }
+        return i18n.t('This event is outside the edit period');
+    };
+
+    return (
+        <ConditionalTooltip content={getDisabledMessage()} enabled={readOnly}>
+            <MenuItem
+                dense
+                disabled={readOnly}
+                icon={<IconDelete16 color={colors.red600} />}
+                label={i18n.t('Delete')}
+                dataTest="event-overflow-delete"
+                onClick={() => {
+                    onRequestDelete();
+                    onClose();
+                }}
+                suffix=""
+            />
+        </ConditionalTooltip>
+    );
+};
+
+type ModalProps = {
+    eventId: string;
+    pendingApiResponse?: boolean;
+    /** Optional pre-delete snapshot used by callers that need rollback on API error. */
+    eventDetailsForRollback?: ApiEnrollmentEvent;
+    onClose: () => void;
+    onOptimisticDelete?: (eventId: string) => void;
+    onDeleteSuccess?: (eventId: string) => void;
+    onDeleteError?: (event: ApiEnrollmentEvent) => void;
+};
+
+export const DeleteEventModal = ({
+    eventId,
+    pendingApiResponse,
+    eventDetailsForRollback,
+    onClose,
+    onOptimisticDelete,
+    onDeleteSuccess,
+    onDeleteError,
+}: ModalProps) => {
+    const dataEngine = useDataEngine();
+    const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const { mutate: deleteEvent } = useMutation(
         () => dataEngine.mutate({
@@ -92,65 +131,34 @@ export const DeleteMenuItem = ({
         },
     );
 
-    const getDisabledMessage = (): string => {
-        if (!isEventWithinValidPeriod) {
-            return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
-                occurredAt: occurredAtClientView,
-                interpolation: { escapeValue: false },
-            });
-        }
-        if (!canEditCompletedEvent) {
-            return i18n.t('This event has been completed');
-        }
-        return i18n.t('This event is outside the edit period');
-    };
-
     return (
-        <>
-            <ConditionalTooltip content={getDisabledMessage()} enabled={readOnly}>
-                <MenuItem
-                    dense
-                    disabled={readOnly}
-                    icon={<IconDelete16 color={colors.red600} />}
-                    label={i18n.t('Delete')}
-                    dataTest="event-overflow-delete"
-                    onClick={() => {
-                        setModalOpen(true);
-                        onClose();
-                    }}
-                    suffix=""
-                />
-            </ConditionalTooltip>
-            {modalOpen && (
-                <Modal onClose={() => setModalOpen(false)} small>
-                    <ModalTitle>{i18n.t('Delete event')}</ModalTitle>
-                    <ModalContent>
-                        <p>
-                            {i18n.t('Deleting an event is permanent and cannot be undone.')}
-                            {' '}
-                            {i18n.t('Are you sure you want to delete this event?')}
-                        </p>
-                    </ModalContent>
-                    <ModalActions>
-                        <ButtonStrip>
-                            <Button onClick={() => setModalOpen(false)}>
-                                {i18n.t('No, cancel')}
-                            </Button>
-                            <Button
-                                destructive
-                                onClick={() => {
-                                    if (!pendingApiResponse) {
-                                        setModalOpen(false);
-                                        deleteEvent(undefined);
-                                    }
-                                }}
-                            >
-                                {i18n.t('Yes, delete event')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
-            )}
-        </>
+        <Modal onClose={onClose} small>
+            <ModalTitle>{i18n.t('Delete event')}</ModalTitle>
+            <ModalContent>
+                <p>
+                    {i18n.t('Deleting an event is permanent and cannot be undone.')}
+                    {' '}
+                    {i18n.t('Are you sure you want to delete this event?')}
+                </p>
+            </ModalContent>
+            <ModalActions>
+                <ButtonStrip>
+                    <Button onClick={onClose}>
+                        {i18n.t('No, cancel')}
+                    </Button>
+                    <Button
+                        destructive
+                        onClick={() => {
+                            if (!pendingApiResponse) {
+                                onClose();
+                                deleteEvent(undefined);
+                            }
+                        }}
+                    >
+                        {i18n.t('Yes, delete event')}
+                    </Button>
+                </ButtonStrip>
+            </ModalActions>
+        </Modal>
     );
 };

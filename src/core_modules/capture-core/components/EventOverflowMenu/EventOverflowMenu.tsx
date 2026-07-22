@@ -8,7 +8,7 @@ import { EventCompletionMenuItem } from '../EventCompletionMenuItem';
 import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 import type { ProgramStage } from '../../metaData';
 import { SkipMenuItem } from './SkipMenuItem';
-import { DeleteMenuItem } from './DeleteMenuItem';
+import { DeleteMenuItem, DeleteEventModal } from './DeleteMenuItem';
 import { ChangelogMenuItem } from './ChangelogMenuItem';
 
 type Props = {
@@ -87,6 +87,7 @@ export const EventOverflowMenu = (props: Props) => {
     } = props;
 
     const [actionsOpen, setActionsOpen] = useState(false);
+    const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { eventAccess, canChangeCompletionStatus } = useEventEditPermissions({
         programId,
@@ -107,59 +108,67 @@ export const EventOverflowMenu = (props: Props) => {
     const close = () => setActionsOpen(false);
 
     return (
-        <OverflowButton
-            open={actionsOpen}
-            onClick={() => setActionsOpen(prev => !prev)}
-            secondary
-            small
-            icon={<IconMore16 />}
-            dataTest={`${dataTest}-button`}
-            disabled={pendingApiResponse}
-            component={(
-                <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
-                    {visibility.completion && onCompletionStatusUpdated && (
-                        <EventCompletionMenuItem
-                            eventId={eventId}
-                            eventStatus={eventStatus}
-                            onUpdated={onCompletionStatusUpdated}
-                            onClose={close}
-                        />
-                    )}
-                    {visibility.skip && (
-                        <SkipMenuItem
-                            eventId={eventId}
-                            eventStatus={eventStatus}
-                            pendingApiResponse={pendingApiResponse}
-                            onClose={close}
-                            onOptimisticStatusUpdate={onOptimisticStatusUpdate}
-                            onStatusUpdateError={onStatusUpdateError}
-                            onStatusUpdateSuccess={onStatusUpdateSuccess}
-                        />
-                    )}
-                    {visibility.delete && (
-                        <DeleteMenuItem
-                            eventId={eventId}
-                            eventStatus={eventStatus}
-                            occurredAt={occurredAt}
-                            completedAt={completedAt}
-                            programId={programId}
-                            programStage={programStage}
-                            pendingApiResponse={pendingApiResponse}
-                            eventDetailsForRollback={eventDetailsForRollback}
-                            onClose={close}
-                            onOptimisticDelete={onOptimisticDelete}
-                            onDeleteSuccess={onDeleteSuccess}
-                            onDeleteError={onDeleteError}
-                        />
-                    )}
-                    {visibility.changelog && onOpenChangelog && (
-                        <ChangelogMenuItem
-                            onClose={close}
-                            onOpenChangelog={onOpenChangelog}
-                        />
-                    )}
-                </FlyoutMenu>
+        <>
+            <OverflowButton
+                open={actionsOpen}
+                onClick={() => setActionsOpen(prev => !prev)}
+                secondary
+                small
+                icon={<IconMore16 />}
+                dataTest={`${dataTest}-button`}
+                disabled={pendingApiResponse}
+                component={(
+                    <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
+                        {visibility.completion && onCompletionStatusUpdated && (
+                            <EventCompletionMenuItem
+                                eventId={eventId}
+                                eventStatus={eventStatus}
+                                onUpdated={onCompletionStatusUpdated}
+                                onClose={close}
+                            />
+                        )}
+                        {visibility.skip && (
+                            <SkipMenuItem
+                                eventId={eventId}
+                                eventStatus={eventStatus}
+                                pendingApiResponse={pendingApiResponse}
+                                onClose={close}
+                                onOptimisticStatusUpdate={onOptimisticStatusUpdate}
+                                onStatusUpdateError={onStatusUpdateError}
+                                onStatusUpdateSuccess={onStatusUpdateSuccess}
+                            />
+                        )}
+                        {visibility.changelog && onOpenChangelog && (
+                            <ChangelogMenuItem
+                                onClose={close}
+                                onOpenChangelog={onOpenChangelog}
+                            />
+                        )}
+                        {visibility.delete && (
+                            <DeleteMenuItem
+                                eventStatus={eventStatus}
+                                occurredAt={occurredAt}
+                                completedAt={completedAt}
+                                programId={programId}
+                                programStage={programStage}
+                                onClose={close}
+                                onRequestDelete={() => setDeleteConfirmOpen(true)}
+                            />
+                        )}
+                    </FlyoutMenu>
+                )}
+            />
+            {deleteConfirmOpen && (
+                <DeleteEventModal
+                    eventId={eventId}
+                    pendingApiResponse={pendingApiResponse}
+                    eventDetailsForRollback={eventDetailsForRollback}
+                    onClose={() => setDeleteConfirmOpen(false)}
+                    onOptimisticDelete={onOptimisticDelete}
+                    onDeleteSuccess={onDeleteSuccess}
+                    onDeleteError={onDeleteError}
+                />
             )}
-        />
+        </>
     );
 };
