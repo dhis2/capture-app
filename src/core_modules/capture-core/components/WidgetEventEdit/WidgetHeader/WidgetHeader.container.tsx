@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
+import { useQueryClient } from '@tanstack/react-query';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
@@ -18,6 +19,8 @@ import {
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { EventCompletionMenuItem } from '../../EventCompletionMenuItem';
+import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
+import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -49,6 +52,7 @@ const WidgetHeaderPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
 
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -66,8 +70,11 @@ const WidgetHeaderPlain = ({
             dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
             dispatch(commitEnrollmentEvent(eventId));
         }
+        queryClient.removeQueries({
+            queryKey: [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId],
+        });
         dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
-    }, [dispatch, storedEvent, eventId]);
+    }, [dispatch, storedEvent, eventId, queryClient]);
 
     const { icon, name } = stage;
 

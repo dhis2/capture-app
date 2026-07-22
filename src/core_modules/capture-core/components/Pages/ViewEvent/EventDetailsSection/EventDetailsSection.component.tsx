@@ -93,12 +93,16 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
     const onCompletionStatusUpdated = useCallback(() => {
+        queryClient.removeQueries({
+            queryKey: [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId],
+        });
         dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
-    }, [dispatch, eventId]);
+    }, [dispatch, eventId, queryClient]);
 
     const onSaveExternal = useCallback(() => {
-        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
-        queryClient.removeQueries(queryKey);
+        queryClient.removeQueries({
+            queryKey: [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId],
+        });
         onBackToAllEvents();
     }, [eventId, queryClient, onBackToAllEvents]);
 
