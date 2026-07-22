@@ -8,7 +8,6 @@ import {
     IconFileDocument24,
     Button,
     IconMore16,
-    IconClockHistory16,
     FlyoutMenu,
     MenuItem,
 } from '@dhis2/ui';
@@ -167,7 +166,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             )}
                             {supportsChangelog && (
                                 <MenuItem
-                                    icon={<IconClockHistory16 />}
                                     label={i18n.t('View changelog')}
                                     suffix={null}
                                     onClick={() => {

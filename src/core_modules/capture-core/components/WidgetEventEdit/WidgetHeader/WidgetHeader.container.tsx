@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { spacersNum, Button, IconEdit24, IconMore16, IconClockHistory16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
+import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
@@ -124,7 +124,6 @@ const WidgetHeaderPlain = ({
                                         )}
                                         {supportsChangelog && (
                                             <MenuItem
-                                                icon={<IconClockHistory16 />}
                                                 label={i18n.t('View changelog')}
                                                 suffix=""
                                                 onClick={() => {
