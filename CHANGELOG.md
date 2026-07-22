@@ -1,3 +1,10 @@
+# [106.7.0](https://github.com/dhis2/capture-app/compare/v106.6.3...v106.7.0) (2026-07-22)
+
+
+### Features
+
+* [DHIS2-21266] Integrate react Markdown lib in WidgetFeedback ([#4621](https://github.com/dhis2/capture-app/issues/4621)) ([e83d473](https://github.com/dhis2/capture-app/commit/e83d473dd075f8e4af4906d058026ff46ad6cd7a))
+
 ## [106.6.3](https://github.com/dhis2/capture-app/compare/v106.6.2...v106.6.3) (2026-07-08)
 
 
