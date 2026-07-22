@@ -87,8 +87,8 @@ Then(/^you should be redirect to (.*)$/, (expectedUrl) => {
         .should('eq', `${Cypress.config().baseUrl}/${expectedUrl}`);
 });
 
-Given('you land on the enrollment page by having typed only the enrollmentId in the url', () => {
-    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
+Given('you land on the enrollment page by having typed the enrollmentId and org unit in the url', () => {
+    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh');
     cy.get('[data-test="enrollment-overview-page"]');
     cy.contains('[data-test="scope-selector"]', 'Carlos Cruz');
     cy.contains('[data-test="scope-selector"]', 'Taninahun (Malen) CHP');
