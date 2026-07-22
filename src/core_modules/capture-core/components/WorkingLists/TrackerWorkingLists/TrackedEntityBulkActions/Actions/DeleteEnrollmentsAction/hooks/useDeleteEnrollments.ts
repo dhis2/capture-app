@@ -30,7 +30,7 @@ export const useDeleteEnrollments = ({
         cancelled: true,
     });
     const dataEngine = useDataEngine();
-    const enrollmentsLabel = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+    const enrollmentsLabel = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

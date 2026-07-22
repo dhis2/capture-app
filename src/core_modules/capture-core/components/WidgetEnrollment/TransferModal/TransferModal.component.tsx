@@ -21,8 +21,8 @@ export const TransferModal = ({
     onUpdateOwnership,
     isTransferLoading,
 }: TransferModalProps) => {
-    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('organisation unit');
-    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
+    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
     const {
         selectedOrgUnit,
         handleOrgUnitChange,

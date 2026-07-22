@@ -15,9 +15,9 @@ import { useStageLabel } from '../../../../metaData';
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
-    const programStageLabel = useStageLabel('programStage', { programId }) ?? i18n.t('stage');
+    const programStageLabel = useStageLabel('programStage', { programId }) ?? i18n.t('Stage');
     const programStagesLabel = useStageLabel('programStage', { programId, plural: true }) ?? i18n.t('Program Stages');
-    const event = useStageLabel('event', { programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { programId }) ?? i18n.t('Event');
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
         teiId,

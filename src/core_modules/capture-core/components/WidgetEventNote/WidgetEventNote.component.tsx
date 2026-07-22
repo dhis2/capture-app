@@ -10,7 +10,7 @@ import { useStageLabel } from '../../metaData';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-    const event = useStageLabel('event') ?? i18n.t('event');
+    const event = useStageLabel('event') ?? i18n.t('Event');
     const notesTitle = i18n.t('Notes');
     const notesLower = i18n.t('notes');
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>

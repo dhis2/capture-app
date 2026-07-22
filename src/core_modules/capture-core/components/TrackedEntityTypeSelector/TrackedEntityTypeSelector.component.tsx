@@ -21,9 +21,9 @@ export const TrackedEntityTypeSelectorPlain =
         const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
         const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
         const [filterValue, setFilterValue] = useState('');
-        const trackedEntityType = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type');
+        const trackedEntityType = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('Tracked entity type');
         const trackedEntityTypes = useTrackedEntityTypeLabel('trackedEntityType', { plural: true })
-            ?? i18n.t('tracked entity types');
+            ?? i18n.t('Tracked entity types');
 
         const options: SelectOption[] = useMemo(() =>
             Object.values(trackedEntityTypesWithCorrelatedPrograms)

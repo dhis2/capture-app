@@ -27,7 +27,7 @@ export const DeleteAction = ({
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dataEngine = useDataEngine();
-    const events = useProgramLabel('event', { plural: true }) ?? i18n.t('events');
+    const events = useProgramLabel('event', { plural: true }) ?? i18n.t('Events');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

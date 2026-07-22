@@ -198,8 +198,8 @@ const LinkButton = withStyles(styles)(({
 });
 
 const useRelatedStagesLabels = (stageId?: string, programId?: string) => ({
-    eventLabel: useStageLabel('event', { stageId, programId }) ?? i18n.t('event'),
-    eventsLabel: useStageLabel('event', { stageId, programId, plural: true }) ?? i18n.t('events'),
+    eventLabel: useStageLabel('event', { stageId, programId }) ?? i18n.t('Event'),
+    eventsLabel: useStageLabel('event', { stageId, programId, plural: true }) ?? i18n.t('Events'),
     relationshipsLabel: i18n.t('relationships'),
 });
 

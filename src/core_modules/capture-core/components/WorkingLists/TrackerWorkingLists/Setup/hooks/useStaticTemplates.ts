@@ -4,7 +4,7 @@ import { useProgramLabel } from '../../../../../metaData';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
 
 export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate | undefined, defaultTemplateId: string) => {
-    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('enrollments');
+    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('Enrollments');
     return useMemo(
         () => [
             defaultAlteredTemplate || {

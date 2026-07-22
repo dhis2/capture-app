@@ -58,7 +58,7 @@ const EnrollmentAddEventPagePain = ({
     classes,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const event = useStageLabel('event', { stageId, programId: program?.id }) ?? i18n.t('event');
+    const event = useStageLabel('event', { stageId, programId: program?.id }) ?? i18n.t('Event');
     if (pageFailure) {
         return (
             <div>

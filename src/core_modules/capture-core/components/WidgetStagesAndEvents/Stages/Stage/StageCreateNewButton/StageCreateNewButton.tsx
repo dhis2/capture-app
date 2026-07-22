@@ -19,9 +19,9 @@ export const StageCreateNewButton = ({
     preventAddingEventActionInEffect,
     eventName,
 }: Props) => {
-    const event = useStageLabel('event') ?? i18n.t('event');
-    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('events');
-    const stageLabel = useStageLabel('programStage') ?? i18n.t('stage');
+    const event = useStageLabel('event') ?? i18n.t('Event');
+    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
+    const stageLabel = useStageLabel('programStage') ?? i18n.t('Stage');
     const { isDisabled, tooltipContent } = useMemo(() => {
         if (preventAddingEventActionInEffect) {
             return {

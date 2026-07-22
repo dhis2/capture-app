@@ -19,9 +19,9 @@ export const CompleteModal = ({
     programStageName,
 }: Props) => {
     const { fromClientDate } = useTimeZoneConversion();
-    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
-    const eventSingularLabel = useStageLabel('event', { programId }) ?? i18n.t('event');
-    const eventPluralLabel = useStageLabel('event', { programId, plural: true }) ?? i18n.t('events');
+    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
+    const eventSingularLabel = useStageLabel('event', { programId }) ?? i18n.t('Event');
+    const eventPluralLabel = useStageLabel('event', { programId, plural: true }) ?? i18n.t('Events');
     const programStages = useMemo(() => {
         const program = getTrackerProgramThrowIfNotFound(programId);
         return [...program.stages.values()];

@@ -13,7 +13,7 @@ const styles: Readonly<any> = {
 type Props = WithStyles<typeof styles>;
 
 export const InvalidCategoryCombinationForOrgUnitMessagePlain = ({ classes }: Props) => {
-    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('organisation unit');
+    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
     return (
         <div className={classes.incompleteMessageContainer}>
             <IncompleteSelectionsMessage>

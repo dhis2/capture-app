@@ -5,7 +5,7 @@ import { useProgramLabel } from '../../../../metaData';
 import type { Props } from './followup.types';
 
 export const Followup = ({ enrollment, onUpdate }: Props) => {
-    const followUp = useProgramLabel('followUp') ?? i18n.t('follow-up');
+    const followUp = useProgramLabel('followUp') ?? i18n.t('Follow-up');
 
     return enrollment.followUp ? (
         <MenuItem

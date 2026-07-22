@@ -29,7 +29,7 @@ export const useWorkingListLabel = ({
 }: Props) => {
     const workingListTemplates = useSelector((state: any) => state.workingListsTemplates?.teiList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.teiList?.programIdView);
-    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments');
 
     const DefaultFilterLabels: { [key in DefaultFilterKey]: string } = useMemo(() => ({
         [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),

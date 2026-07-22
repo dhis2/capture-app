@@ -19,8 +19,8 @@ const styles = (theme: any) => ({
 
 const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
     const { classes, ...passOnProps } = props;
-    const eventSingular = useStageLabel('event') ?? i18n.t('event');
-    const eventPlural = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+    const eventSingular = useStageLabel('event') ?? i18n.t('Event');
+    const eventPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     const eventsAdded = props.events ? Object.keys(props.events).length : 0;
     const noEventsText = i18n.t('No {{eventLabel}} added', { eventLabel: eventPlural });
     if (eventsAdded === 0) {

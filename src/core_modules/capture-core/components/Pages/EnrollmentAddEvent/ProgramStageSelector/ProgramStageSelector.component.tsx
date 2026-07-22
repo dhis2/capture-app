@@ -52,7 +52,7 @@ const ProgramStageSelectorComponentPlain = ({
     onCancel,
     classes,
 }: ProgramStageSelectorPlainProps) => {
-    const events = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+    const events = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     return (
         <div className={classes.container}>
             {programStages.map((programStage) => {

@@ -24,9 +24,9 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
         isError,
     } = useMetadataForProgramStage({ programId, stageId });
 
-    const orgUnit = useProgramLabel('orgUnit', { programId }) ?? i18n.t('organisation unit');
-    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
-    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('event');
+    const orgUnit = useProgramLabel('orgUnit', { programId }) ?? i18n.t('Organisation unit');
+    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
+    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('Event');
 
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (

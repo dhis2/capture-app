@@ -30,7 +30,7 @@ export const LinkToExisting = ({
     saveAttempted,
 }: LinkToExistingProps) => {
     const [touched, setTouched] = useState(false);
-    const event = useStageLabel('event') ?? i18n.t('event');
+    const event = useStageLabel('event') ?? i18n.t('Event');
 
     const handleChange = (value: string | null) => {
         setTouched(true);

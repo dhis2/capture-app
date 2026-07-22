@@ -33,7 +33,7 @@ const getTooltipContent = (events: string, stageDataWriteAccess?: boolean, bulkD
 };
 
 const useEventsLabel = (programId?: string) =>
-    useProgramLabel('event', { plural: true, programId }) ?? i18n.t('events');
+    useProgramLabel('event', { plural: true, programId }) ?? i18n.t('Events');
 
 const CompleteActionPlain = ({
     selectedRows,

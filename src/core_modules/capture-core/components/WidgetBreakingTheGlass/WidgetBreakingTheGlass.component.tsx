@@ -35,7 +35,7 @@ const WidgetBreakingTheGlassPlain = ({
     onCancel,
     classes,
 }: Props) => {
-    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('enrollments');
+    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('Enrollments');
     const [reason, setReason] = useState('');
     const reasonChangeHandler = useCallback(({ value }: any) => {
         setReason(value);

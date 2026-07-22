@@ -27,7 +27,7 @@ const ActionButtonsPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
     const [openSearch, setOpenSearch] = useState(false);
-    const event = useStageLabel('event', { programId: selectedProgramId ?? undefined }) ?? i18n.t('event');
+    const event = useStageLabel('event', { programId: selectedProgramId ?? undefined }) ?? i18n.t('Event');
 
     useEffect(() => {
         setOpenSearch(false);

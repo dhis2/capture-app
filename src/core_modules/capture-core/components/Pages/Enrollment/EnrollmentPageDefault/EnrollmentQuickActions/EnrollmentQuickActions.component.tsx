@@ -30,7 +30,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const event = useStageLabel('event', { programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { programId }) ?? i18n.t('Event');
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {

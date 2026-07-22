@@ -58,7 +58,7 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const event = useStageLabel('event', { stageId, programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { stageId, programId }) ?? i18n.t('Event');
     const eventCapitalized = useStageLabel('event', { stageId, programId }) ?? i18n.t('Event');
 
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {

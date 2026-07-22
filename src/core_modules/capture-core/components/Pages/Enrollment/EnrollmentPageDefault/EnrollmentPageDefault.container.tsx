@@ -54,7 +54,7 @@ export const EnrollmentPageDefault = () => {
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
+    const enrollmentLabel = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {

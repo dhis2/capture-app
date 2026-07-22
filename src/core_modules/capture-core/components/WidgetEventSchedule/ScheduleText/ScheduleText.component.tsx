@@ -5,7 +5,7 @@ import { useStageLabel } from '../../../metaData';
 import type { Props } from './scheduleText.types';
 
 export const ScheduleText = ({ orgUnitName, stageName, programName }: Props) => {
-    const event = useStageLabel('event') ?? i18n.t('event');
+    const event = useStageLabel('event') ?? i18n.t('Event');
     return (
         <InfoIconText>
             <span>

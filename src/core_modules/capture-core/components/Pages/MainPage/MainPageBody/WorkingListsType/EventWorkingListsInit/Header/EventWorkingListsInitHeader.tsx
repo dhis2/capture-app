@@ -27,7 +27,7 @@ export const styles = () => ({
 
 const EventWorkingListsInitHeaderPlain =
     ({ children, classes: { container, headerContainer, listContainer, title } }: Props & WithStyles<typeof styles>) => {
-        const events = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+        const events = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
         return (
             <div className={container}>
                 <div

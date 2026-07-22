@@ -33,7 +33,7 @@ type Props = OwnProps & WithStyles<typeof styles>;
 const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgUnit, classes }: Props) => {
     const areAllProgramsAvailable =
         programOptions.length === programsArray.filter(program => program.access.data.read).length;
-    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('organisation unit');
+    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
 
     return (
         <>

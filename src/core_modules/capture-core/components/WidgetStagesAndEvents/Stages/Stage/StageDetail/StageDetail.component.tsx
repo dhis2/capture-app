@@ -108,7 +108,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const eventSingular = useStageLabel('event', { stageId, programId }) ?? i18n.t('event');
+    const eventSingular = useStageLabel('event', { stageId, programId }) ?? i18n.t('Event');
     const eventsPlural = useStageLabel('event', { plural: true, stageId, programId }) ?? i18n.t('Events');
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;

@@ -41,7 +41,7 @@ export const styles: Readonly<any> = {
 };
 
 const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: PlainProps & WithStyles<typeof styles>) => {
-    const event = useStageLabel('event') ?? i18n.t('event');
+    const event = useStageLabel('event') ?? i18n.t('Event');
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
             <div className={classes.container}>

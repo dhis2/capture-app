@@ -23,8 +23,8 @@ export const UnlinkModal = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const event = useStageLabel('event') ?? i18n.t('event');
-    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+    const event = useStageLabel('event') ?? i18n.t('Event');
+    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while unlinking and deleting the {{event}}.', {
             event,

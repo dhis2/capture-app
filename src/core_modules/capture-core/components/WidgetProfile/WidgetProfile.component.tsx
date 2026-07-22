@@ -108,7 +108,7 @@ const WidgetProfilePlain = ({
         userRoles,
     } = useUserRoles();
     const trackedEntityTypeName = program?.trackedEntityType?.displayName;
-    const attributes = useProgramLabel('attribute', { plural: true, programId }) ?? i18n.t('attributes');
+    const attributes = useProgramLabel('attribute', { plural: true, programId }) ?? i18n.t('Attributes');
 
     const hasNoAttributes = !program?.programTrackedEntityAttributes?.length;
 

@@ -31,7 +31,7 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
     const selectedTemplate = templates?.find(({ id }: any) => id === selectedTemplateId);
     const isSameProgram = workingListProgramId === programId;
-    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments');
 
     const DefaultFilterLabels = useMemo(() => ({
         default: i18n.t('Program overview'),

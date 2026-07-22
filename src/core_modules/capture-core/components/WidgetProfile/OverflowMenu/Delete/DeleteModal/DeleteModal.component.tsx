@@ -7,8 +7,8 @@ import type { ErrorReport } from '../../processErrorReports';
 import { useProgramLabel, useStageLabel } from '../../../../../metaData';
 
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
-    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('enrollments');
-    const events = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('Enrollments');
+    const events = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     const [errorReports, setErrorReports] = useState<Array<ErrorReport>>([]);
     const handleErrors = (errors: Array<ErrorReport>) => {
         setErrorReports(errors);

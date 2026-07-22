@@ -60,10 +60,10 @@ const CompleteActionPlain = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
-    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments');
+    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
+    const enrollments = useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments');
     const enrollmentLabelByCount = (n: number) => (n === 1 ? enrollment : enrollments);
-    const events = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('events');
+    const events = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('Events');
     const {
         completeEnrollments,
         enrollmentCounts,

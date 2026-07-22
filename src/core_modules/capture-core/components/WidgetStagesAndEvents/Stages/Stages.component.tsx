@@ -24,7 +24,7 @@ export const StagesPlain = ({
     ...passOnProps
 }: PlainProps) => {
     const { stageReadAccessById } = useEnrollmentAccessContext();
-    const stagesLabel = useStageLabel('programStage', { plural: true }) ?? i18n.t('stages');
+    const stagesLabel = useStageLabel('programStage', { plural: true }) ?? i18n.t('Stages');
     const readableStages = useMemo(
         () => stages.filter(stage => stageReadAccessById[stage.id] ?? stage.dataAccess.read),
         [stages, stageReadAccessById],

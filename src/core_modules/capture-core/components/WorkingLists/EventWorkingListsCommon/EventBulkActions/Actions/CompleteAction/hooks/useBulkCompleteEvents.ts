@@ -25,7 +25,7 @@ export const useBulkCompleteEvents = ({
     programId,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventsLabel = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('events');
+    const eventsLabel = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('Events');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

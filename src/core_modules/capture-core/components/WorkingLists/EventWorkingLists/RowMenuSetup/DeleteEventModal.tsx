@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) => {
-    const event = useProgramLabel('event') ?? i18n.t('event');
+    const event = useProgramLabel('event') ?? i18n.t('Event');
     const handleConfirm = () => {
         onConfirmDelete(eventId);
         onClose();

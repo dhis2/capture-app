@@ -82,11 +82,11 @@ const ReadOnlyBadgePlain = ({
         programStage: programStageWriteAccess,
     };
     const labels: Labels = {
-        enrollment: useProgramLabel('enrollment') ?? i18n.t('enrollment'),
-        trackedEntityType: useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type'),
-        programStage: useStageLabel('programStage') ?? i18n.t('program stage'),
-        programStages: useStageLabel('programStage', { plural: true }) ?? i18n.t('program stages'),
-        event: useStageLabel('event') ?? i18n.t('event'),
+        enrollment: useProgramLabel('enrollment') ?? i18n.t('Enrollment'),
+        trackedEntityType: useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('Tracked entity type'),
+        programStage: useStageLabel('programStage') ?? i18n.t('Program stage'),
+        programStages: useStageLabel('programStage', { plural: true }) ?? i18n.t('Program stages'),
+        event: useStageLabel('event') ?? i18n.t('Event'),
     };
     const message = getReadOnlyMessage({
         access,

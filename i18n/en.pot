@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-22T10:17:13.444Z\n"
-"PO-Revision-Date: 2026-07-22T10:17:13.444Z\n"
+"POT-Creation-Date: 2026-07-22T11:23:30.373Z\n"
+"PO-Revision-Date: 2026-07-22T11:23:30.373Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -42,8 +42,8 @@ msgstr "Bulk data entry"
 msgid "Program overview"
 msgstr "Program overview"
 
-msgid "enrollments"
-msgstr "enrollments"
+msgid "Enrollments"
+msgstr "Enrollments"
 
 msgid "Active {{enrollments}}"
 msgstr "Active {{enrollments}}"
@@ -60,8 +60,8 @@ msgstr "Search"
 msgid "Enrollment"
 msgstr "Enrollment"
 
-msgid "event"
-msgstr "event"
+msgid "Event"
+msgstr "Event"
 
 msgid "{{enrollment}} dashboard"
 msgstr "{{enrollment}} dashboard"
@@ -78,17 +78,11 @@ msgstr "New {{event}}"
 msgid "Loading..."
 msgstr "Loading..."
 
-msgid "Event"
-msgstr "Event"
-
 msgid "{{event}} list"
 msgstr "{{event}} list"
 
 msgid "More"
 msgstr "More"
-
-msgid "enrollment"
-msgstr "enrollment"
 
 msgid "View {{programName}} dashboard"
 msgstr "View {{programName}} dashboard"
@@ -288,8 +282,8 @@ msgstr "Switch to form view"
 msgid "Switch to row view"
 msgstr "Switch to row view"
 
-msgid "events"
-msgstr "events"
+msgid "Events"
+msgstr "Events"
 
 msgid "No {{eventLabel}} added"
 msgstr "No {{eventLabel}} added"
@@ -332,6 +326,9 @@ msgstr "Saving a {{trackedEntityName}}"
 
 msgid "without"
 msgstr "without"
+
+msgid "enrollment"
+msgstr "enrollment"
 
 msgid "in"
 msgstr "in"
@@ -713,9 +710,6 @@ msgstr "Could not get organisation unit"
 msgid "Program doesn't exist"
 msgstr "Program doesn't exist"
 
-msgid "organisation unit"
-msgstr "organisation unit"
-
 msgid "Selected program is invalid for selected {{orgUnit}}"
 msgstr "Selected program is invalid for selected {{orgUnit}}"
 
@@ -870,9 +864,6 @@ msgstr "You can't add any more {{ programStageName }} {{events}}"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
-
-msgid "stage"
-msgstr "stage"
 
 msgid "Program Stages"
 msgstr "Program Stages"
@@ -1069,8 +1060,8 @@ msgstr "Organisation unit scope"
 msgid "Selected program"
 msgstr "Selected program"
 
-msgid "attributes"
-msgstr "attributes"
+msgid "Attributes"
+msgstr "Attributes"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
@@ -1152,14 +1143,11 @@ msgstr "This {{event}} is outside the valid editing period"
 msgid "This {{event}} has been completed"
 msgstr "This {{event}} has been completed"
 
-msgid "tracked entity type"
-msgstr "tracked entity type"
+msgid "Tracked entity type"
+msgstr "Tracked entity type"
 
-msgid "program stage"
-msgstr "program stage"
-
-msgid "program stages"
-msgstr "program stages"
+msgid "Program stages"
+msgstr "Program stages"
 
 msgid "View only - {{message}}"
 msgstr "View only - {{message}}"
@@ -1342,8 +1330,8 @@ msgstr "Search for a {{trackedEntityName}} in {{programName}}"
 msgid "Search..."
 msgstr "Search..."
 
-msgid "tracked entity types"
-msgstr "tracked entity types"
+msgid "Tracked entity types"
+msgstr "Tracked entity types"
 
 msgid "Select {{trackedEntityType}}"
 msgstr "Select {{trackedEntityType}}"
@@ -1450,8 +1438,8 @@ msgstr "This will permanently remove the current {{enrollment}}."
 msgid "Yes, delete {{enrollment}}."
 msgstr "Yes, delete {{enrollment}}."
 
-msgid "follow-up"
-msgstr "follow-up"
+msgid "Follow-up"
+msgstr "Follow-up"
 
 msgid "Remove mark for {{followUp}}"
 msgstr "Remove mark for {{followUp}}"
@@ -1524,9 +1512,6 @@ msgstr "Enrollment date"
 
 msgid "Incident date"
 msgstr "Incident date"
-
-msgid "Follow-up"
-msgstr "Follow-up"
 
 msgid "{{enrollment}} widget could not be loaded. Please try again later"
 msgstr "{{enrollment}} widget could not be loaded. Please try again later"
@@ -1885,9 +1870,6 @@ msgstr "Unskip"
 msgid "Skip"
 msgstr "Skip"
 
-msgid "Events"
-msgstr "Events"
-
 msgid "To open this {{event}}, please wait until saving is complete"
 msgstr "To open this {{event}}, please wait until saving is complete"
 
@@ -1911,14 +1893,11 @@ msgstr "{{ overdueEvents }} overdue"
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
 
-msgid "stages"
-msgstr "stages"
+msgid "Stages"
+msgstr "Stages"
 
 msgid "No {{stages}} found in this program"
 msgstr "No {{stages}} found in this program"
-
-msgid "Stages"
-msgstr "Stages"
 
 msgid "{{stages}} and {{events}}"
 msgstr "{{stages}} and {{events}}"
@@ -2138,6 +2117,9 @@ msgstr "Are you sure you want to delete the selected {{events}}?"
 
 msgid "Registration Date"
 msgstr "Registration Date"
+
+msgid "organisation unit"
+msgstr "organisation unit"
 
 msgid "Owner {{orgUnit}}"
 msgstr "Owner {{orgUnit}}"

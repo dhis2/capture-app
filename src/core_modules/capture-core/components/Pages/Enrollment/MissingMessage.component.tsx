@@ -170,9 +170,9 @@ type PlainProps = Record<string, never>;
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const useMissingMessageLabels = (programId?: string) => ({
-    enrollment: useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment'),
-    enrollments: useProgramLabel('enrollment', { programId, plural: true }) ?? i18n.t('enrollments'),
-    event: useStageLabel('event', { programId }) ?? i18n.t('event'),
+    enrollment: useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment'),
+    enrollments: useProgramLabel('enrollment', { programId, plural: true }) ?? i18n.t('Enrollments'),
+    event: useStageLabel('event', { programId }) ?? i18n.t('Event'),
 });
 
 const MissingMessagePlain = ({

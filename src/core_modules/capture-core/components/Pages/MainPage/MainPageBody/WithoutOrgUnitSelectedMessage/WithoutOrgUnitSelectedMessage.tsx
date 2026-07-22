@@ -51,7 +51,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
     classes,
 }: Props) => {
     const { program, programType } = useProgramInfo(programId);
-    const orgUnit = useProgramLabel('orgUnit', { programId }) ?? i18n.t('organisation unit');
+    const orgUnit = useProgramLabel('orgUnit', { programId }) ?? i18n.t('Organisation unit');
     const isTracker = programType === programTypes.TRACKER_PROGRAM;
 
     const trackedEntityName = program instanceof TrackerProgram

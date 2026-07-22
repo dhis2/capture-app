@@ -103,7 +103,7 @@ const SearchFormIndex = ({
     keptFallbackSearchFormValues,
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
-    const attributes = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');
+    const attributes = useProgramLabel('attribute', { plural: true }) ?? i18n.t('Attributes');
 
     useFormDataLifecycle(
         searchGroupsForSelectedScope,

@@ -43,7 +43,7 @@ export const SearchStatusPlain = ({
     trackedEntityName,
     classes,
 }: ComponentProps & WithStyles<typeof getStyles>) => {
-    const attributes = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');
+    const attributes = useProgramLabel('attribute', { plural: true }) ?? i18n.t('Attributes');
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }

@@ -55,7 +55,7 @@ export const WidgetRelatedStagesPlain = ({
     const stageWriteAccess = Boolean(stageWriteAccessById[programStageId]);
     const linkedStageId = constraint?.programStage?.id;
     const linkedStageWriteAccess = linkedStageId ? Boolean(stageWriteAccessById[linkedStageId]) : false;
-    const event = useStageLabel('event', { stageId: linkedStageId, programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { stageId: linkedStageId, programId }) ?? i18n.t('Event');
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,

@@ -23,7 +23,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetai
         programId: state.currentSelections.programId,
     }));
 
-    const eventLabel = useStageLabel('event') ?? i18n.t('event');
+    const eventLabel = useStageLabel('event') ?? i18n.t('Event');
     const relationshipLabel = i18n.t('relationship');
 
     return (

@@ -11,9 +11,9 @@ export const CompleteModalComponent = ({
     onCompleteEnrollment,
     onCompleteEnrollmentAndEvents,
 }: PlainProps) => {
-    const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
-    const event = useStageLabel('event') ?? i18n.t('event');
-    const events = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+    const enrollment = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
+    const event = useStageLabel('event') ?? i18n.t('Event');
+    const events = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
 
     return (
         <Modal position="middle" large dataTest="widget-enrollment-complete-modal">

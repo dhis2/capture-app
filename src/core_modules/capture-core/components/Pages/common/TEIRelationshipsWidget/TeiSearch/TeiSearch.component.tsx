@@ -28,7 +28,7 @@ const getStyles = (theme: any) => ({
 const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const [programSectionOpen, setProgramSectionOpen] = useState(true);
     const attributes = useProgramLabel('attribute', { programId: props.selectedProgramId || undefined, plural: true })
-        ?? i18n.t('attributes');
+        ?? i18n.t('Attributes');
 
     const getFormId = useCallback((searchGroupId) => {
         const contextId = props.selectedProgramId || props.selectedTrackedEntityTypeId || '';

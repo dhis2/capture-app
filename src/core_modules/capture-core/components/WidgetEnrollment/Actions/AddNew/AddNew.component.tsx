@@ -6,7 +6,7 @@ import { useProgramLabel } from 'capture-core/metaData';
 import type { Props } from './addNew.types';
 
 export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, onAddNew }: Props) => {
-    const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    const enrollment = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
     if (!canAddNew) {
         return null;
     }

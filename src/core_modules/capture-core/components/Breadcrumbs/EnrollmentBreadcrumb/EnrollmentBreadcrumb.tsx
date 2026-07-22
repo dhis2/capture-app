@@ -76,7 +76,7 @@ const BreadcrumbsPlain = ({
     });
 
     const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
-    const event = useStageLabel('event', { programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { programId }) ?? i18n.t('Event');
 
     const handleNavigation = useCallback((callback?: () => void, warningType?: WarningKey) => {
         if (userInteractionInProgress && warningType) {

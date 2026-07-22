@@ -80,7 +80,7 @@ const CardListButtons: FC<Props> = ({
 }) => {
     const dispatch = useDispatch();
     const programId = currentSearchScopeType === searchScopes.PROGRAM ? currentSearchScopeId : undefined;
-    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
+    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
     const navigationButtonsState: AvailableCardListButtonState = deriveNavigationButtonState(enrollmentType);
     const onHandleClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
         event.stopPropagation();

@@ -36,7 +36,7 @@ type Props = {
 } & WithStyles<typeof styles>;
 
 const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classes }: Props) => {
-    const event = useStageLabel('event') ?? i18n.t('event');
+    const event = useStageLabel('event') ?? i18n.t('Event');
 
     return assignee ? (
         <div className={classes.wrapper}>

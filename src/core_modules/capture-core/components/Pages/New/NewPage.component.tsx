@@ -44,7 +44,7 @@ const NewPagePlain = ({
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
-    const orgUnit = useProgramLabel('orgUnit', { programId: currentScopeId }) ?? i18n.t('organisation unit');
+    const orgUnit = useProgramLabel('orgUnit', { programId: currentScopeId }) ?? i18n.t('Organisation unit');
 
     useEffect(() => {
         setScopeId(currentScopeId);

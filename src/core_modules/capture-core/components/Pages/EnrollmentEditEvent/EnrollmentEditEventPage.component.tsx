@@ -64,7 +64,7 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentEventsError,
     userInteractionInProgress,
 }: PlainProps) => {
-    const event = useStageLabel('event', { programId: program?.id, stageId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { programId: program?.id, stageId }) ?? i18n.t('Event');
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <TopBar

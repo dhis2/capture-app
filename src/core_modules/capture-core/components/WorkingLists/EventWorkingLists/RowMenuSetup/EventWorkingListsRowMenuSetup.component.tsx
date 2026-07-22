@@ -12,7 +12,7 @@ import { DeleteEventModal } from './DeleteEventModal';
 
 export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...passOnProps }: Props) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const event = useProgramLabel('event', { programId }) ?? i18n.t('event');
+    const event = useProgramLabel('event', { programId }) ?? i18n.t('Event');
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [eventIdToDelete, setEventIdToDelete] = useState<string | null>(null);
 

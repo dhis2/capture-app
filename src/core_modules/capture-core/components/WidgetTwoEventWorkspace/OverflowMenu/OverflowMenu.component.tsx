@@ -28,8 +28,8 @@ export const OverflowMenuComponent = ({
     onDeleteEventRelationship,
 }: Props) => {
     const { navigate } = useNavigate();
-    const event = useStageLabel('event') ?? i18n.t('event');
-    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('events');
+    const event = useStageLabel('event') ?? i18n.t('Event');
+    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     const [isActionsOpen, setIsActionsOpen] = useState(false);
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);

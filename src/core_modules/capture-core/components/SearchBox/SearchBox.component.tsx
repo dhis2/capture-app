@@ -146,7 +146,7 @@ const Index = ({
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
-    const trackedEntityTypeLabel = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('tracked entity type');
+    const trackedEntityTypeLabel = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('Tracked entity type');
     const {
         searchOption: availableSearchOption,
         isLoading,

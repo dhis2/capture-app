@@ -48,7 +48,7 @@ const WidgetHeaderPlain = ({
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
-    const event = useStageLabel('event', { stageId: stage.id, programId }) ?? i18n.t('event');
+    const event = useStageLabel('event', { stageId: stage.id, programId }) ?? i18n.t('Event');
 
     const { icon, name } = stage;
 

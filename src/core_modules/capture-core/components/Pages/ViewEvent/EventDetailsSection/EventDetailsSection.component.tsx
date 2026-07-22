@@ -86,7 +86,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const eventLabel = useStageLabel('event', { programId, stageId: programStage?.id });
-    const event = eventLabel ?? i18n.t('event');
+    const event = eventLabel ?? i18n.t('Event');
     const eventTitle = eventLabel ?? i18n.t('Event');
 
     const onSaveExternal = useCallback(() => {

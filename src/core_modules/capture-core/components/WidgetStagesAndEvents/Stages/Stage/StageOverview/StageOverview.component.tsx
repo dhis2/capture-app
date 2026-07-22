@@ -93,8 +93,8 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
 };
 
 const useEventLabels = () => ({
-    eventSingular: useStageLabel('event') ?? i18n.t('event'),
-    eventPlural: useStageLabel('event', { plural: true }) ?? i18n.t('events'),
+    eventSingular: useStageLabel('event') ?? i18n.t('Event'),
+    eventPlural: useStageLabel('event', { plural: true }) ?? i18n.t('Events'),
 });
 
 export const StageOverviewPlain = ({

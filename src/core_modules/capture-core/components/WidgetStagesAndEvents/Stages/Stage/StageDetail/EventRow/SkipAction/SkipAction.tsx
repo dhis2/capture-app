@@ -29,7 +29,7 @@ export const SkipAction = ({
     onUpdateEventStatus,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const event = useStageLabel('event') ?? i18n.t('event');
+    const event = useStageLabel('event') ?? i18n.t('Event');
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },

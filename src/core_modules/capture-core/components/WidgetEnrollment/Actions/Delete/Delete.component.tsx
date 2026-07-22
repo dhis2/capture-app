@@ -17,7 +17,7 @@ import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
 export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
     const disabled = !canCascadeDeleteEnrollment;
-    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
     const tooltipContent = i18n.t('You do not have access to delete this {{enrollment}}', {
         enrollment: enrollmentLabel,
         interpolation: { escapeValue: false },

@@ -11,7 +11,7 @@ import { useProgramLabel } from '../../metaData';
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
-    const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    const enrollment = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
     const notesTitle = i18n.t('Notes');
     const notesLower = i18n.t('notes');
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>

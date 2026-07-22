@@ -158,7 +158,7 @@ const CardListItemIndex = ({
         : undefined;
     const { fromServerDate } = useTimeZoneConversion();
     const orgUnit = useProgramLabel('orgUnit', { programId: currentProgramId }) ?? i18n.t('Organisation unit');
-    const enrollment = useProgramLabel('enrollment', { programId: currentProgramId }) ?? i18n.t('enrollment');
+    const enrollment = useProgramLabel('enrollment', { programId: currentProgramId }) ?? i18n.t('Enrollment');
 
     const renderImageDataElement = (imageElement?: CardProfileImageElementInformation): React.ReactNode => {
         if (!imageElement) { return null; }

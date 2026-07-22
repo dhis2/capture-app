@@ -21,9 +21,9 @@ const styles: Readonly<any> = {
 };
 
 const useEnrollmentDeleteLabels = (programId?: string) => ({
-    enrollments: useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('enrollments'),
-    enrollment: useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment'),
-    events: useProgramLabel('event', { plural: true, programId }) ?? i18n.t('events'),
+    enrollments: useProgramLabel('enrollment', { plural: true, programId }) ?? i18n.t('Enrollments'),
+    enrollment: useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment'),
+    events: useProgramLabel('event', { plural: true, programId }) ?? i18n.t('Events'),
 });
 
 const EnrollmentDeleteModalPlain = ({
