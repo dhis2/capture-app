@@ -28,24 +28,27 @@ const KEYS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<CustomLabelKey>> = {
     trackedEntityType: ['trackedEntityType', 'attribute'],
 };
 
-const fieldsForScope = (scope: CustomLabelScope): Array<string> =>
-    Array.from(
-        new Set(
-            KEYS_BY_SCOPE[scope]
-                .flatMap((key) => {
-                    const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
-                    return [term.singular, term.plural];
-                })
-                .filter((field): field is string => Boolean(field)),
-        ),
-    );
+const FIELDS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<string>> = {
+    program: [],
+    programStage: [],
+    trackedEntityType: [],
+};
+(Object.keys(KEYS_BY_SCOPE) as Array<CustomLabelScope>).forEach((scope) => {
+    const fields = new Set<string>();
+    KEYS_BY_SCOPE[scope].forEach((key) => {
+        const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
+        if (term.singular) fields.add(term.singular);
+        if (term.plural) fields.add(term.plural);
+    });
+    FIELDS_BY_SCOPE[scope] = Array.from(fields);
+});
 
 export const extractCustomLabels = (
     cached: Record<string, any>,
     scope: CustomLabelScope,
 ): CustomLabels => {
     const labels: CustomLabels = {};
-    fieldsForScope(scope).forEach((field) => {
+    FIELDS_BY_SCOPE[scope].forEach((field) => {
         if (cached[field]) {
             labels[field] = cached[field];
         }
