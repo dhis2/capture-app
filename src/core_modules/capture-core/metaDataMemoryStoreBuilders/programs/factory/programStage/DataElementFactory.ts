@@ -108,7 +108,7 @@ export class DataElementFactory {
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
 
-        return handleUnsupportedMultiText(dataElement, this.minorServerVersion);
+        return handleUnsupportedMultiText(dataElement);
     }
 
     async _buildDateDataElement(

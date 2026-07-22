@@ -1,4 +1,4 @@
-import { pipe as pipeD2, featureAvailable, FEATURES } from 'capture-core-utils';
+import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { of, from } from 'rxjs';
@@ -76,9 +76,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ?
                     { program: selectedScopeId } :
                     { trackedEntityType: selectedScopeId };
-                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                    ? 'orgUnitMode'
-                    : 'ouMode';
+                const orgUnitModeQueryParam = 'orgUnitMode';
                 const queryArgs = {
                     [orgUnitModeQueryParam]: 'ACCESSIBLE',
                     pageSize,

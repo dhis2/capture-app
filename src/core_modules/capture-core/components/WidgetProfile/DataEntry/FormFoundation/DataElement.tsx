@@ -1,6 +1,6 @@
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import { pipe, errorCreator } from 'capture-core-utils';
 
 import type { ProgramTrackedEntityAttribute, TrackedEntityAttribute, OptionSet as OptionSetType } from './types';
 import {
@@ -44,26 +44,20 @@ const onValidateOnScopeTrackedEntityType = (
     let requestPromise;
     if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
         const orgUnitId = contextProps.orgUnitId;
-        const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-            ? 'orgUnits'
-            : 'orgUnit';
         requestPromise = querySingleResource({
             resource: 'tracker/trackedEntities',
             params: {
                 trackedEntityType: contextProps.trackedEntityTypeId,
-                [orgUnitQueryParam]: orgUnitId,
+                orgUnits: orgUnitId,
                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
             },
         });
     } else {
-        const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-            ? 'orgUnitMode'
-            : 'ouMode';
         requestPromise = querySingleResource({
             resource: 'tracker/trackedEntities',
             params: {
                 trackedEntityType: contextProps.trackedEntityTypeId,
-                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                orgUnitMode: 'ACCESSIBLE',
                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
             },
         });
@@ -130,26 +124,20 @@ const buildDataElementUnique = (
             let requestPromise;
             if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                 const orgUnitId = contextProps.orgUnitId;
-                const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                    ? 'orgUnits'
-                    : 'orgUnit';
                 requestPromise = querySingleResource({
                     resource: 'tracker/trackedEntities',
                     params: {
                         program: contextProps.programId,
-                        [orgUnitQueryParam]: orgUnitId,
+                        orgUnits: orgUnitId,
                         filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });
             } else {
-                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                    ? 'orgUnitMode'
-                    : 'ouMode';
                 requestPromise = querySingleResource({
                     resource: 'tracker/trackedEntities',
                     params: {
                         program: contextProps.programId,
-                        [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                        orgUnitMode: 'ACCESSIBLE',
                         filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });
@@ -231,7 +219,6 @@ const buildBaseDataElement = async (
     programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
     trackedEntityAttribute: TrackedEntityAttribute,
     querySingleResource: QuerySingleResource,
-    minorServerVersion: number,
 ) => {
     const dataElement = new DataElement();
     dataElement.type = trackedEntityAttribute.valueType;
@@ -243,7 +230,7 @@ const buildBaseDataElement = async (
         querySingleResource,
     });
 
-    return handleUnsupportedMultiText(dataElement, minorServerVersion);
+    return handleUnsupportedMultiText(dataElement);
 };
 
 const buildDateDataElement = async (
@@ -333,7 +320,6 @@ export const buildDataElement = (
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSetType>,
     querySingleResource: QuerySingleResource,
-    minorServerVersion: number,
 ) => {
     const trackedEntityAttribute =
         programTrackedEntityAttribute.trackedEntityAttributeId &&
@@ -358,6 +344,5 @@ export const buildDataElement = (
             programTrackedEntityAttribute,
             trackedEntityAttribute,
             querySingleResource,
-            minorServerVersion,
         );
 };

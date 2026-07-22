@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import { pipe, errorCreator } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityTypeAttribute,
@@ -156,26 +156,20 @@ export class DataElementFactory {
                     let requestPromise;
                     if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
-                        const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                            ? 'orgUnits'
-                            : 'orgUnit';
                         requestPromise = querySingleResource({
                             resource: 'tracker/trackedEntities',
                             params: {
                                 trackedEntityType: contextProps.trackedEntityTypeId,
-                                [orgUnitQueryParam]: orgUnitId,
+                                orgUnits: orgUnitId,
                                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                             },
                         });
                     } else {
-                        const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                            ? 'orgUnitMode'
-                            : 'ouMode';
                         requestPromise = querySingleResource({
                             resource: 'tracker/trackedEntities',
                             params: {
                                 trackedEntityType: contextProps.trackedEntityTypeId,
-                                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                                orgUnitMode: 'ACCESSIBLE',
                                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                             },
                         });
@@ -212,6 +206,6 @@ export class DataElementFactory {
             );
         }
 
-        return handleUnsupportedMultiText(dataElement, this.minorServerVersion);
+        return handleUnsupportedMultiText(dataElement);
     }
 }

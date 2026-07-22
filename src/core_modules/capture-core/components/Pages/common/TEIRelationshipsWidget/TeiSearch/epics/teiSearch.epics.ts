@@ -3,7 +3,6 @@ import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertSearchFormToServer } from '../../../../../../converters';
 import {
     actionTypes,
@@ -29,12 +28,8 @@ import {
 import { getSearchFormId } from '../getSearchFormId';
 
 const getOuQueryArgs = (orgUnit: any, orgUnitScope: string) => {
-    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-        ? 'orgUnitMode'
-        : 'ouMode';
-    const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-        ? 'orgUnits'
-        : 'orgUnit';
+    const orgUnitModeQueryParam = 'orgUnitMode';
+    const orgUnitQueryParam = 'orgUnits';
     return orgUnitScope !== 'ACCESSIBLE' ?
         { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope } :
         { [orgUnitModeQueryParam]: orgUnitScope };

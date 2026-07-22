@@ -1,4 +1,4 @@
-import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import { pipe } from 'capture-core-utils';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { dataElementTypes, ProgramStage } from '../../../../metaData';
@@ -29,7 +29,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     if (!firstStageMetadata) {
         return null;
     }
-    const { enrolledAt, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
+    const { stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
 
     const eventAttributeCategoryOptions = attributeCategoryOptions
         ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
@@ -40,9 +40,6 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
-        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ?
-            {} :
-            { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
         programStage: firstStageMetadata.id,
         program: programId,
         orgUnit: orgUnitId,
