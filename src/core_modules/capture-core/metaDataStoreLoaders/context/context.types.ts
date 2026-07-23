@@ -24,4 +24,5 @@ export type ContextInput = {
     onQueryApi: QuerySingleResource,
     storageController: StorageController,
     storeNames: StoreNames,
+    minorServerVersion: number,
 };

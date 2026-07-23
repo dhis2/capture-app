@@ -26,15 +26,22 @@ const convert = (() => {
             }));
 })();
 
-const fieldsParam = 'id,access,displayName,displayTrackedEntityTypesLabel,minAttributesRequiredToSearch,featureType,' +
-    'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
-    'translations[property,locale,value]';
+const CUSTOM_PLURAL_LABELS_MIN_VERSION = 43;
+
+const buildFieldsParam = (includePluralLabels: boolean): string => {
+    const labels = includePluralLabels ? 'displayName,displayTrackedEntityTypesLabel' : 'displayName';
+    return `id,access,${labels},minAttributesRequiredToSearch,featureType,` +
+        'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
+        'translations[property,locale,value]';
+};
 
 export const storeTrackedEntityTypes = (ids: Array<string>) => {
+    const { minorServerVersion } = getContext();
+    const includePluralLabels = minorServerVersion >= CUSTOM_PLURAL_LABELS_MIN_VERSION;
     const query = {
         resource: 'trackedEntityTypes',
         params: {
-            fields: fieldsParam,
+            fields: buildFieldsParam(includePluralLabels),
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
         },

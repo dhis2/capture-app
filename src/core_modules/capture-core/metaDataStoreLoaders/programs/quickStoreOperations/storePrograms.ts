@@ -79,6 +79,8 @@ const convert = (() => {
     };
 })();
 
+const CUSTOM_PLURAL_LABELS_MIN_VERSION = 43;
+
 const programStageDataElementFields = [
     'compulsory',
     'displayInReports',
@@ -97,7 +99,7 @@ const programTrackedEntityAttributeFields = [
     'allowFutureDate',
 ].join(',');
 
-const programStageFields = [
+const baseProgramStageFields = [
     'id',
     'access',
     'autoGenerateEvent',
@@ -117,7 +119,6 @@ const programStageFields = [
     'displayDueDateLabel',
     'displayProgramStageLabel',
     'displayEventLabel',
-    'displayEventsLabel',
     'formType',
     'featureType',
     'validationStrategy',
@@ -126,9 +127,13 @@ const programStageFields = [
     'dataEntryForm[id,htmlCode]',
     'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]]',
     `programStageDataElements[${programStageDataElementFields}]`,
-].join(',');
+];
 
-const fieldsParam = [
+const pluralProgramStageFields = [
+    'displayEventsLabel',
+];
+
+const baseProgramFields = [
     'id',
     'displayName',
     'displayShortName',
@@ -138,19 +143,13 @@ const fieldsParam = [
     'displayIncidentDateLabel',
     'displayEnrollmentDateLabel',
     'displayEnrollmentLabel',
-    'displayEnrollmentsLabel',
     'displayFollowUpLabel',
     'displayOrgUnitLabel',
     'displayRelationshipLabel',
-    'displayRelationshipsLabel',
     'displayNoteLabel',
-    'displayNotesLabel',
     'displayTrackedEntityAttributeLabel',
-    'displayTrackedEntityAttributesLabel',
     'displayProgramStageLabel',
-    'displayProgramStagesLabel',
     'displayEventLabel',
-    'displayEventsLabel',
     'minAttributesRequiredToSearch',
     'useFirstStageDuringRegistration',
     'onlyEnrollOnce',
@@ -166,16 +165,39 @@ const fieldsParam = [
     'access[data[read,write]]',
     'trackedEntityType[id]',
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]]',
-    `programStages[${programStageFields}]`,
     'programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes]',
     `programTrackedEntityAttributes[${programTrackedEntityAttributeFields}]`,
-].join(',');
+];
+
+const pluralProgramFields = [
+    'displayEnrollmentsLabel',
+    'displayRelationshipsLabel',
+    'displayNotesLabel',
+    'displayTrackedEntityAttributesLabel',
+    'displayProgramStagesLabel',
+    'displayEventsLabel',
+];
+
+const buildFieldsParam = (includePluralLabels: boolean): string => {
+    const stageFields = includePluralLabels
+        ? [...baseProgramStageFields, ...pluralProgramStageFields]
+        : baseProgramStageFields;
+    const programFields = includePluralLabels
+        ? [...baseProgramFields, ...pluralProgramFields]
+        : baseProgramFields;
+    return [
+        ...programFields,
+        `programStages[${stageFields.join(',')}]`,
+    ].join(',');
+};
 
 export const storePrograms = (programIds: Array<string>) => {
+    const { minorServerVersion } = getContext();
+    const includePluralLabels = minorServerVersion >= CUSTOM_PLURAL_LABELS_MIN_VERSION;
     const query = {
         resource: 'programs',
         params: {
-            fields: fieldsParam,
+            fields: buildFieldsParam(includePluralLabels),
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,
         },

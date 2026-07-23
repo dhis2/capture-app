@@ -121,7 +121,7 @@ async function setLocaleDataAsync(uiLocale: string) {
 }
 
 async function initializeMetaDataAsync(dbLocale: string, onQueryApi: any, minorServerVersion: number) {
-    await loadMetaData(onQueryApi);
+    await loadMetaData(onQueryApi, minorServerVersion);
     await buildMetaDataAsync(dbLocale, minorServerVersion);
 }
 
