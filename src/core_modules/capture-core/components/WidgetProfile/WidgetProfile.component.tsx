@@ -129,7 +129,7 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes,
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
-    const displayChangelog = program && program.trackedEntityType?.changelogEnabled;
+    const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter((item: any) => item.displayInList)

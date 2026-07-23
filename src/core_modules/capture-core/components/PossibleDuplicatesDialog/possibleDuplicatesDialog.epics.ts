@@ -76,9 +76,9 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ?
                     { program: selectedScopeId } :
                     { trackedEntityType: selectedScopeId };
-                const orgUnitModeQueryParam = 'orgUnitMode';
+
                 const queryArgs = {
-                    [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                    orgUnitMode: 'ACCESSIBLE',
                     pageSize,
                     page,
                     filter: filters,

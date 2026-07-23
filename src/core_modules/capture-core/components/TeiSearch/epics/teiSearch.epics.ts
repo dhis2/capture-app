@@ -29,7 +29,7 @@ import {
 } from '../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
 
-const getOuQueryArgs = (orgUnit: any | null, orgUnitScope: string) =>
+const getOuQueryArgs = (orgUnit: {id: string} | null, orgUnitScope: string) =>
     (['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope)
         ? { orgUnitMode: orgUnitScope }
         : { orgUnits: orgUnit?.id, orgUnitMode: orgUnitScope });

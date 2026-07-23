@@ -27,13 +27,11 @@ import {
 } from '../../../../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
 
-const getOuQueryArgs = (orgUnit: any, orgUnitScope: string) => {
-    const orgUnitModeQueryParam = 'orgUnitMode';
-    const orgUnitQueryParam = 'orgUnits';
-    return orgUnitScope !== 'ACCESSIBLE' ?
-        { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope } :
-        { [orgUnitModeQueryParam]: orgUnitScope };
-};
+const getOuQueryArgs = (orgUnit: {id: string} | null, orgUnitScope: string) =>
+    (orgUnitScope !== 'ACCESSIBLE' ?
+        { orgUnits: orgUnit?.id, orgUnitMode: orgUnitScope } :
+        { orgUnitMode: orgUnitScope }
+    );
 
 const getContextQueryArgs = (programId: string | undefined, trackedEntityTypeId: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });
