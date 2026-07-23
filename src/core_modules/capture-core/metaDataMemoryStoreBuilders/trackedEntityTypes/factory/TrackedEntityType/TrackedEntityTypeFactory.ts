@@ -87,7 +87,10 @@ export class TrackedEntityTypeFactory {
             o.name = this._getTranslation(
                 cachedType.translations, TrackedEntityTypeFactory.translationPropertyNames.NAME)
                 || cachedType.displayName;
-            o.customLabels = extractCustomLabels(cachedType, 'trackedEntityType');
+            o.customLabels = extractCustomLabels({
+                ...cachedType,
+                displayTrackedEntityTypeLabel: cachedType.displayName,
+            });
         });
 
         if (cachedType.trackedEntityTypeAttributes) {

@@ -9,48 +9,32 @@ export const CUSTOM_LABEL_FIELDS = {
     enrollment: { singular: 'displayEnrollmentLabel', plural: 'displayEnrollmentsLabel' },
     followUp: { singular: 'displayFollowUpLabel' },
     orgUnit: { singular: 'displayOrgUnitLabel' },
-    note: { plural: 'displayNotesLabel' },
-    relationship: { plural: 'displayRelationshipsLabel' },
-    attribute: { plural: 'displayTrackedEntityAttributesLabel' },
+    note: { singular: 'displayNoteLabel', plural: 'displayNotesLabel' },
+    relationship: { singular: 'displayRelationshipLabel', plural: 'displayRelationshipsLabel' },
+    attribute: { singular: 'displayTrackedEntityAttributeLabel', plural: 'displayTrackedEntityAttributesLabel' },
     programStage: { singular: 'displayProgramStageLabel', plural: 'displayProgramStagesLabel' },
     event: { singular: 'displayEventLabel', plural: 'displayEventsLabel' },
-    trackedEntityType: { singular: 'displayName', plural: 'displayTrackedEntityTypesLabel' },
+    trackedEntityType: { singular: 'displayTrackedEntityTypeLabel', plural: 'displayTrackedEntityTypesLabel' },
 } as const satisfies { [key: string]: CustomLabelField };
 
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
 export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
-export type CustomLabelScope = 'program' | 'programStage' | 'trackedEntityType';
 
-const KEYS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<CustomLabelKey>> = {
-    program: ['enrollment', 'followUp', 'orgUnit', 'note', 'relationship', 'programStage', 'event'],
-    programStage: ['programStage', 'event'],
-    trackedEntityType: ['trackedEntityType', 'attribute'],
-};
+const ALL_FIELDS: ReadonlyArray<string> = Array.from(
+    new Set(
+        Object.values(CUSTOM_LABEL_FIELDS)
+            .flatMap((term: CustomLabelField) => [term.singular, term.plural])
+            .filter((field): field is string => Boolean(field)),
+    ),
+);
 
-const FIELDS_BY_SCOPE: Record<CustomLabelScope, ReadonlyArray<string>> = {
-    program: [],
-    programStage: [],
-    trackedEntityType: [],
-};
-(Object.keys(KEYS_BY_SCOPE) as Array<CustomLabelScope>).forEach((scope) => {
-    const fields = new Set<string>();
-    KEYS_BY_SCOPE[scope].forEach((key) => {
-        const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
-        if (term.singular) fields.add(term.singular);
-        if (term.plural) fields.add(term.plural);
-    });
-    FIELDS_BY_SCOPE[scope] = Array.from(fields);
-});
-
-export const extractCustomLabels = (
-    cached: Record<string, any>,
-    scope: CustomLabelScope,
-): CustomLabels => {
+export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabels => {
     const labels: CustomLabels = {};
-    FIELDS_BY_SCOPE[scope].forEach((field) => {
-        if (cached[field]) {
-            labels[field] = cached[field];
+    ALL_FIELDS.forEach((field) => {
+        const value = cached[field];
+        if (typeof value === 'string' && value) {
+            labels[field] = value;
         }
     });
     return labels;
