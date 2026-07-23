@@ -5,8 +5,6 @@ const getChangelogTableBody = () =>
 
 const textCollator = new Intl.Collator(undefined, { sensitivity: 'base', numeric: true });
 
-// Retrying assertion: waits for the server-side re-sort refetch to settle, then checks the
-// column is ascending. Each sort step differs only in how a cell maps to a comparable value.
 const assertColumnSortedAscending = (columnSelector, toComparable, compare) =>
     getChangelogTableBody()
         .find(`tr ${columnSelector}`)
@@ -121,7 +119,6 @@ When('you click the sort Date icon', () => {
 });
 
 Then('the changelog data is sorted on Date in ascending order', () => {
-    // Displayed value is a non-ISO "YYYY-MM-DD HH:mm" string; swap space for "T" to parse.
     assertColumnSortedAscending(
         'td:first-child',
         cell => new Date(cell.textContent.trim().replace(' ', 'T')).getTime(),
