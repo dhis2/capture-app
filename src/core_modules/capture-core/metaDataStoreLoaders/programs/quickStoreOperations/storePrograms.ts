@@ -146,6 +146,7 @@ const fieldsParam = [
     'displayNoteLabel',
     'displayNotesLabel',
     'displayTrackedEntityAttributeLabel',
+    'displayTrackedEntityAttributesLabel',
     'displayProgramStageLabel',
     'displayProgramStagesLabel',
     'displayEventLabel',

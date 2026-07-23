@@ -151,6 +151,7 @@ type apiProgram = {
     displayNoteLabel?: string | null,
     displayNotesLabel?: string | null,
     displayTrackedEntityAttributeLabel?: string | null,
+    displayTrackedEntityAttributesLabel?: string | null,
     displayProgramStageLabel?: string | null,
     displayProgramStagesLabel?: string | null,
     displayEventLabel?: string | null,
