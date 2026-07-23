@@ -3,11 +3,10 @@ import { provideContext } from '../context';
 import { loadMetaDataInternal } from './loadMetaDataInternal';
 import type { QuerySingleResource } from '../../utils/api';
 
-export const loadMetaData = async (onQueryApi: QuerySingleResource, minorServerVersion: number) => {
+export const loadMetaData = async (onQueryApi: QuerySingleResource) => {
     await provideContext({
         onQueryApi,
         storageController: getUserMetadataStorageController(),
         storeNames: USER_METADATA_STORES,
-        minorServerVersion,
     }, loadMetaDataInternal);
 };

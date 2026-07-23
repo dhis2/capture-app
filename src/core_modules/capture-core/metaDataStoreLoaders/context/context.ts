@@ -7,14 +7,12 @@ export const provideContext = async (
         onQueryApi,
         storageController,
         storeNames,
-        minorServerVersion,
     }: ContextInput,
     callback: any) => {
     context = {
         onQueryApi,
         storageController,
         storeNames,
-        minorServerVersion,
     };
     await callback();
     context = null;

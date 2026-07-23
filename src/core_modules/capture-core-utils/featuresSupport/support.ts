@@ -18,6 +18,7 @@ export const FEATURES = Object.freeze({
     orgUnitReplaceOuQueryParam: 'orgUnitReplaceOuQueryParam',
     enrollmentStatusReplaceProgramStatusQueryParam: 'enrollmentStatusReplaceProgramStatusQueryParam',
     emptyValueFilter: 'emptyValueFilter',
+    customTerminologyPlurals: 'customTerminologyPlurals',
 });
 
 const MINOR_VERSION_SUPPORT = Object.freeze({
@@ -40,6 +41,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.orgUnitReplaceOuQueryParam]: 42,
     [FEATURES.enrollmentStatusReplaceProgramStatusQueryParam]: 42,
     [FEATURES.emptyValueFilter]: 42,
+    [FEATURES.customTerminologyPlurals]: 43,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

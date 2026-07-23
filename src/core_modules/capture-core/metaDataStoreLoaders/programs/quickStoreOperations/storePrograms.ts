@@ -1,3 +1,4 @@
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
 import type { CachedProgramStageDataElement } from '../../../storageControllers';
@@ -78,8 +79,6 @@ const convert = (() => {
             }));
     };
 })();
-
-const CUSTOM_PLURAL_LABELS_MIN_VERSION = 43;
 
 const programStageDataElementFields = [
     'compulsory',
@@ -192,8 +191,7 @@ const buildFieldsParam = (includePluralLabels: boolean): string => {
 };
 
 export const storePrograms = (programIds: Array<string>) => {
-    const { minorServerVersion } = getContext();
-    const includePluralLabels = minorServerVersion >= CUSTOM_PLURAL_LABELS_MIN_VERSION;
+    const includePluralLabels = featureAvailable(FEATURES.customTerminologyPlurals);
     const query = {
         resource: 'programs',
         params: {
