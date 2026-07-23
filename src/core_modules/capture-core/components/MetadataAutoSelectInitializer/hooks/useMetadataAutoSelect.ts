@@ -33,14 +33,14 @@ export const useMetadataAutoSelect = () => {
     const { isLoading: loadingOrgUnits, data: searchOrgUnits } = useOrgUnitAutoSelect(queryOptions);
 
     const updateUrlIfApplicable = useCallback(() => {
-        const paramsToAdd = {
+        const paramsToAdd: { programId: string | null; orgUnitId: string | null } = {
             programId: null,
             orgUnitId: null,
         };
         if (programs && programs.length === 1) {
             paramsToAdd.programId = programs[0].id;
         }
-        if (searchOrgUnits && (searchOrgUnits as any).length === 1) {
+        if (searchOrgUnits && searchOrgUnits.length === 1) {
             paramsToAdd.orgUnitId = searchOrgUnits[0].id;
         }
 

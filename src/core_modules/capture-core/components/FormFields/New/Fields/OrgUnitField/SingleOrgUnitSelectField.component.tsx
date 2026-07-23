@@ -1,12 +1,13 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { cx } from '@emotion/css';
 import { debounce } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
-import { useOrgUnitAutoSelect } from '../../../../../dataQueries';
+import { useOrgUnitAutoSelect, type AutoSelectOrgUnit } from '../../../../../dataQueries';
 
 const getStyles = () => ({
     selectedOrgUnitContainer: {
@@ -73,14 +74,8 @@ const getStyles = () => ({
     },
 });
 
-type OrgUnitValue = {
-    id: string;
-    name: string;
-    path: string;
-};
-
 type AutoSelectSingleOrgUnitProps = {
-    onAutoSelect: (orgUnit: OrgUnitValue) => void;
+    onAutoSelect: (orgUnit: AutoSelectOrgUnit) => void;
 };
 
 const AutoSelectSingleOrgUnit = ({ onAutoSelect }: AutoSelectSingleOrgUnitProps) => {
@@ -88,10 +83,9 @@ const AutoSelectSingleOrgUnit = ({ onAutoSelect }: AutoSelectSingleOrgUnitProps)
     const hasPreselected = React.useRef(false);
 
     React.useEffect(() => {
-        if (!hasPreselected.current && (autoSelectOrgUnits as any)?.length === 1) {
+        if (!hasPreselected.current && autoSelectOrgUnits?.length === 1) {
             hasPreselected.current = true;
-            const orgUnit = (autoSelectOrgUnits as any)[0];
-            onAutoSelect({ id: orgUnit.id, name: orgUnit.name, path: orgUnit.path });
+            onAutoSelect(autoSelectOrgUnits[0]);
         }
     }, [autoSelectOrgUnits, onAutoSelect]);
 
@@ -103,10 +97,11 @@ type SingleOrgUnitSelectFieldState = {
     open: boolean;
     inputValue: string;
     searchText: string;
+    hasDeselected: boolean;
 };
 
 type SingleOrgUnitSelectFieldProps = {
-    value?: OrgUnitValue;
+    value?: AutoSelectOrgUnit;
     onBlur: (value: any) => void;
     onSelectClick?: (orgUnit: Record<string, any>) => void;
     disabled?: boolean;
@@ -121,7 +116,6 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     searchInputRef: React.RefObject<HTMLInputElement>;
     popoverId: string;
     debouncedSetSearchText: ((searchText: string) => void) & { cancel: () => void };
-    hasDeselected: boolean;
     shouldOpenOnClear: boolean;
 
     constructor(props: Props) {
@@ -131,11 +125,11 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
             open: false,
             inputValue: '',
             searchText: '',
+            hasDeselected: false,
         };
         this.anchorRef = React.createRef() as React.RefObject<HTMLDivElement>;
         this.searchInputRef = React.createRef() as React.RefObject<HTMLInputElement>;
         this.popoverId = `org-unit-selector-popover-${uuid()}`;
-        this.hasDeselected = false;
         this.shouldOpenOnClear = false;
         this.debouncedSetSearchText = debounce((searchText: string) => {
             this.setState({ searchText });
@@ -176,13 +170,15 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     }
 
     onDeselectOrgUnit = () => {
-        this.props.value && this.setState({ previousOrgUnitId: this.props.value.id });
-        this.hasDeselected = true;
+        this.setState({
+            hasDeselected: true,
+            previousOrgUnitId: this.props.value?.id ?? null,
+        });
         this.shouldOpenOnClear = this.props.autoSelectSingleOrgUnit !== false;
         this.props.onBlur(null);
     }
 
-    handleAutoSelect = (orgUnit: OrgUnitValue) => {
+    handleAutoSelect = (orgUnit: AutoSelectOrgUnit) => {
         if (this.props.onSelectClick) {
             this.props.onSelectClick({ id: orgUnit.id, displayName: orgUnit.name, path: orgUnit.path });
         } else {
@@ -217,7 +213,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         }
     }
 
-    renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
+    renderSelectedOrgUnit = (selectedOrgUnit: AutoSelectOrgUnit) => {
         const { classes } = this.props;
         return (
             <div className={classes.selectedOrgUnitContainer}>
@@ -267,11 +263,11 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
     renderCollapsedOrgUnitField = () => {
         const { classes, disabled } = this.props;
         const { open, inputValue } = this.state;
-        const triggerClassName = [
+        const triggerClassName = cx(
             classes.trigger,
             open && classes.triggerOpen,
             disabled && classes.triggerDisabled,
-        ].filter(Boolean).join(' ');
+        );
 
         return (
             <React.Fragment>
@@ -316,7 +312,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         }
         return (
             <React.Fragment>
-                {autoSelectSingleOrgUnit !== false && !this.hasDeselected &&
+                {autoSelectSingleOrgUnit !== false && !this.state.hasDeselected &&
                     <AutoSelectSingleOrgUnit onAutoSelect={this.handleAutoSelect} />
                 }
                 {this.renderCollapsedOrgUnitField()}
