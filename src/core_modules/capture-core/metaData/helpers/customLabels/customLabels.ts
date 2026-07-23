@@ -1,37 +1,40 @@
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
+
 type CustomLabelField = {
-    field?: string,
-    pluralField?: string,
+    singular?: string,
+    plural?: string,
 };
 
 export const CUSTOM_LABEL_FIELDS = {
-    enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
-    followUp: { field: 'displayFollowUpLabel' },
-    orgUnit: { field: 'displayOrgUnitLabel' },
-    relationship: { field: 'displayRelationshipLabel' },
-    note: { field: 'displayNoteLabel' },
-    attribute: { field: 'displayTrackedEntityAttributeLabel' },
-    programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
-    event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
-    trackedEntityType: { pluralField: 'displayTrackedEntityTypesLabel' },
+    enrollment: { singular: 'displayEnrollmentLabel', plural: 'displayEnrollmentsLabel' },
+    followUp: { singular: 'displayFollowUpLabel' },
+    orgUnit: { singular: 'displayOrgUnitLabel' },
+    note: { singular: 'displayNoteLabel', plural: 'displayNotesLabel' },
+    relationship: { singular: 'displayRelationshipLabel', plural: 'displayRelationshipsLabel' },
+    attribute: { singular: 'displayTrackedEntityAttributeLabel', plural: 'displayTrackedEntityAttributesLabel' },
+    programStage: { singular: 'displayProgramStageLabel', plural: 'displayProgramStagesLabel' },
+    event: { singular: 'displayEventLabel', plural: 'displayEventsLabel' },
+    trackedEntityType: { singular: 'displayTrackedEntityTypeLabel', plural: 'displayTrackedEntityTypesLabel' },
 } as const satisfies { [key: string]: CustomLabelField };
 
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
 export type CustomLabels = Record<string, string>;
 export type LabelOptions = { plural?: boolean };
 
-const allFields: Array<string> = Array.from(
+const ALL_FIELDS: ReadonlyArray<string> = Array.from(
     new Set(
         Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: CustomLabelField) => [term.field, term.pluralField])
+            .flatMap((term: CustomLabelField) => [term.singular, term.plural])
             .filter((field): field is string => Boolean(field)),
     ),
 );
 
-export const extractCustomLabels = (cached: Record<string, any>): CustomLabels => {
+export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabels => {
     const labels: CustomLabels = {};
-    allFields.forEach((field) => {
-        if (cached[field]) {
-            labels[field] = cached[field];
+    ALL_FIELDS.forEach((field) => {
+        const value = cached[field];
+        if (typeof value === 'string' && value) {
+            labels[field] = value;
         }
     });
     return labels;
@@ -48,10 +51,9 @@ export const resolveLabel = (
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
 
-    if (plural) {
-        return term.pluralField ? pick(term.pluralField) : pick(term.field);
-    }
-    return pick(term.field);
+    const field = plural && term.plural ? term.plural : term.singular;
+    const value = pick(field);
+    return value ? capitalizeFirstLetter(value) : value;
 };
 
 type WithLabels = { customLabels?: CustomLabels } | undefined | null;
