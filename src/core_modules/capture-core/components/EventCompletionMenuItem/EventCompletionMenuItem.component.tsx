@@ -10,11 +10,20 @@ import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 type Props = {
     eventId: string;
     eventStatus?: string;
+    onMutate?: (newStatus: string) => void;
     onUpdated: (newStatus: string) => void;
+    onError?: () => void;
     onClose: () => void;
 };
 
-export const EventCompletionMenuItem = ({ eventId, eventStatus, onUpdated, onClose }: Props) => {
+export const EventCompletionMenuItem = ({
+    eventId,
+    eventStatus,
+    onMutate,
+    onUpdated,
+    onError,
+    onClose,
+}: Props) => {
     const dataEngine = useDataEngine();
     const { show: showError } = useAlert(
         ({ message }) => message,
@@ -47,9 +56,13 @@ export const EventCompletionMenuItem = ({ eventId, eventStatus, onUpdated, onClo
             });
         },
         {
+            onMutate: () => {
+                onMutate?.(newStatus);
+            },
             onError: (error: unknown) => {
                 showError({ message: i18n.t('An error occurred when updating event status') });
                 log.error(errorCreator('An error occurred when updating event status')({ error, eventId, newStatus }));
+                onError?.();
             },
             onSuccess: () => {
                 onUpdated(newStatus);
@@ -63,7 +76,7 @@ export const EventCompletionMenuItem = ({ eventId, eventStatus, onUpdated, onClo
             dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
             icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
             label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
-            suffix=""
+            suffix={null}
             onClick={() => {
                 onClose();
                 !isLoading && updateCompletionStatus();
