@@ -23,7 +23,9 @@ type Props = {
     /** Optional pre-delete snapshot; only needed when the caller wants delete-rollback. */
     eventDetailsForRollback?: ApiEnrollmentEvent;
 
+    onCompletionStatusMutate?: (newStatus: string) => void;
     onCompletionStatusUpdated?: (newStatus: string) => void;
+    onCompletionStatusError?: () => void;
 
     onOptimisticStatusUpdate?: (eventId: string, newStatus: string) => void;
     onStatusUpdateError?: (eventId: string, previousStatus: string) => void;
@@ -75,7 +77,9 @@ export const EventOverflowMenu = (props: Props) => {
         programStage,
         pendingApiResponse,
         eventDetailsForRollback,
+        onCompletionStatusMutate,
         onCompletionStatusUpdated,
+        onCompletionStatusError,
         onOptimisticStatusUpdate,
         onStatusUpdateError,
         onStatusUpdateSuccess,
@@ -123,7 +127,9 @@ export const EventOverflowMenu = (props: Props) => {
                             <EventCompletionMenuItem
                                 eventId={eventId}
                                 eventStatus={eventStatus}
+                                onMutate={onCompletionStatusMutate}
                                 onUpdated={onCompletionStatusUpdated}
+                                onError={onCompletionStatusError}
                                 onClose={close}
                             />
                         )}

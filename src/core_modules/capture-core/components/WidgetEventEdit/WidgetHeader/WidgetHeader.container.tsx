@@ -12,6 +12,7 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
+    rollbackEnrollmentEvent,
     deleteEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -60,14 +61,21 @@ const WidgetHeaderPlain = ({
     const storedEvent = useSelector((state: any) =>
         state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
 
-    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
+    const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
             const { completedAt, completedBy, ...eventWithoutCompletion } = storedEvent;
             dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
-            dispatch(commitEnrollmentEvent(eventId));
         }
-        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, storedEvent, eventId]);
+
+    const onCompletionStatusUpdated = useCallback(() => {
+        dispatch(commitEnrollmentEvent(eventId));
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+    }, [dispatch, eventId]);
+
+    const onCompletionStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(eventId));
+    }, [dispatch, eventId]);
 
     const onOptimisticStatusUpdate = useCallback((_eventId: string, newStatus: string) => {
         if (storedEvent) {
@@ -126,7 +134,9 @@ const WidgetHeaderPlain = ({
                             completedAt={storedEvent?.completedAt}
                             programId={programId}
                             programStage={stage}
+                            onCompletionStatusMutate={onCompletionStatusMutate}
                             onCompletionStatusUpdated={onCompletionStatusUpdated}
+                            onCompletionStatusError={onCompletionStatusError}
                             onOptimisticStatusUpdate={onOptimisticStatusUpdate}
                             onStatusUpdateSuccess={onStatusUpdateSuccess}
                             onDeleteSuccess={onDeleteSuccess}
