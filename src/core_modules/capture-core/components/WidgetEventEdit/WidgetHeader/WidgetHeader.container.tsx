@@ -80,12 +80,15 @@ const WidgetHeaderPlain = ({
     const onOptimisticStatusUpdate = useCallback((_eventId: string, newStatus: string) => {
         if (storedEvent) {
             dispatch(updateEnrollmentEvent(eventId, { ...storedEvent, status: newStatus }));
-            dispatch(commitEnrollmentEvent(eventId));
         }
     }, [dispatch, storedEvent, eventId]);
 
+    const onStatusUpdateError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(eventId));
+    }, [dispatch, eventId]);
+
     const onStatusUpdateSuccess = useCallback(() => {
-        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+        dispatch(commitEnrollmentEvent(eventId));
     }, [dispatch, eventId]);
 
     const navigateToEnrollment = useCallback(() => {
@@ -138,6 +141,7 @@ const WidgetHeaderPlain = ({
                             onCompletionStatusUpdated={onCompletionStatusUpdated}
                             onCompletionStatusError={onCompletionStatusError}
                             onOptimisticStatusUpdate={onOptimisticStatusUpdate}
+                            onStatusUpdateError={onStatusUpdateError}
                             onStatusUpdateSuccess={onStatusUpdateSuccess}
                             onDeleteSuccess={onDeleteSuccess}
                             onOpenChangelog={() => setChangeLogIsOpen(true)}

@@ -123,6 +123,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <ViewEventReadOnlyBadge
                     eventAccess={eventAccess}
+                    eventStatus={eventStatus}
                     isEventWithinValidPeriod={isEventWithinValidPeriod}
                     canEditCompletedEvent={canEditCompletedEvent}
                     isWithinCompleteEventsExpiry={isWithinCompleteExpiry}

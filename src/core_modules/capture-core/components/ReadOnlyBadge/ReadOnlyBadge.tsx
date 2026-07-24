@@ -27,23 +27,31 @@ const getExpiredMessage = (): string => i18n.t('This event is outside the editin
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 
-const getReadOnlyMessage = ({
-    access,
-    trackedEntityName,
-    multipleStages,
-    eventWithinValidPeriod,
-    canEditCompletedEvent,
-    withinCompleteEventsExpiry,
-}: ReadOnlyMessageInput): string => {
+const getSkippedEventMessage = (): string => i18n.t('This event is skipped');
+
+const getAccessMessage = ({ access, trackedEntityName, multipleStages }: ReadOnlyMessageInput): string => {
     if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages);
+    return '';
+};
+
+const getEventStateMessage = ({
+    eventWithinValidPeriod,
+    canEditCompletedEvent,
+    withinCompleteEventsExpiry,
+    eventIsSkipped,
+}: ReadOnlyMessageInput): string => {
+    if (eventIsSkipped) return getSkippedEventMessage();
     if (!eventWithinValidPeriod) return getExpiredMessage();
     if (!canEditCompletedEvent) return getCompletedEventMessage();
     if (!withinCompleteEventsExpiry) return getExpiredMessage();
     return '';
 };
+
+const getReadOnlyMessage = (input: ReadOnlyMessageInput): string =>
+    getAccessMessage(input) || getEventStateMessage(input);
 
 const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
@@ -52,6 +60,7 @@ const ReadOnlyBadgePlain = ({
     eventWithinValidPeriod = true,
     canEditCompletedEvent = true,
     withinCompleteEventsExpiry = true,
+    eventIsSkipped = false,
     multipleStages = false,
     trackedEntityName,
     inlineLabel = false,
@@ -69,6 +78,7 @@ const ReadOnlyBadgePlain = ({
         eventWithinValidPeriod,
         canEditCompletedEvent,
         withinCompleteEventsExpiry,
+        eventIsSkipped,
     });
     if (!message) return null;
 
