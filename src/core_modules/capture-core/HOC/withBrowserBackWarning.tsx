@@ -1,7 +1,9 @@
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'; //eslint-disable-line
 import { DiscardDialog } from '../components/Dialogs/DiscardDialog.component';
+import { useStageLabel } from '../metaData';
 
 type Props = {
     dataEntryHasChanges?: boolean;
@@ -10,6 +12,7 @@ type Props = {
     location: any;
     match: any;
     staticContext: any;
+    eventLabel?: string;
 };
 
 type State = {
@@ -23,7 +26,9 @@ type DialogConfig = {
     cancelText: string;
 };
 
-const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig: DialogConfig) =>
+type DialogConfigInput = DialogConfig | ((options: { event: string }) => DialogConfig);
+
+const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfigInput: DialogConfigInput) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
         unblock!: () => void;
         Dialog!: React.ReactElement<any>;
@@ -71,7 +76,11 @@ const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig
         }
 
         render() {
-            const { inEffect, history, location, match, staticContext, ...passOnProps } = this.props;
+            const { inEffect, history, location, match, staticContext, eventLabel, ...passOnProps } = this.props;
+            const event = eventLabel ?? i18n.t('event');
+            const dialogConfig = typeof dialogConfigInput === 'function'
+                ? dialogConfigInput({ event })
+                : dialogConfigInput;
             return (
                 <React.Fragment>
                     <InnerComponent
@@ -99,7 +108,13 @@ const getMapStateToProps = (inEffectFn: InEffectFn) => (state: any, props: any) 
 
 const mapDispatchToProps = () => ({});
 
-export const withBrowserBackWarning = (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
+const withEventLabel = (Component: React.ComponentType<any>) => (props: any) => {
+    const eventLabel = useStageLabel('event') ?? i18n.t('event');
+    return <Component {...props} eventLabel={eventLabel} />;
+};
+
+export const withBrowserBackWarning = (dialogConfig: DialogConfigInput, inEffect: InEffectFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-        connect(
-            getMapStateToProps(inEffect), mapDispatchToProps)(withRouter(getEventListener(InnerComponent, dialogConfig)));
+        withEventLabel(connect(getMapStateToProps(inEffect), mapDispatchToProps)(
+            withRouter(getEventListener(InnerComponent, dialogConfig)),
+        ));

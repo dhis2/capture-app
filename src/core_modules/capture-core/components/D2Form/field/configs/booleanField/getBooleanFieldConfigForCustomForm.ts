@@ -18,5 +18,5 @@ export const getBooleanFieldConfigForCustomForm = (
     return createFieldConfig({
         component: BooleanFieldForCustomForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

@@ -18,5 +18,5 @@ export const getImageFieldConfigForCustomForm = (
     return createFieldConfig({
         component: ImageFieldForCustomForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

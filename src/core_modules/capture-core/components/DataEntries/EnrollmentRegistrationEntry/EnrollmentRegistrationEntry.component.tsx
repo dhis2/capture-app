@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useProgramLabel } from '../../../metaData';
+import { scopeTypes, useProgramLabel, useStageLabel } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
@@ -13,7 +13,7 @@ import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = () => ({
     actions: {
@@ -75,6 +75,7 @@ const EnrollmentRegistrationEntryPlain =
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
+      const eventLabel = useStageLabel('event', { programId: selectedScopeId }) ?? i18n.t('event');
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -139,7 +140,7 @@ const EnrollmentRegistrationEntryPlain =
                   </>
               }
               <DiscardDialog
-                  {...defaultDialogProps}
+                  {...getDiscardDialogProps({ event: eventLabel })}
                   onDestroy={onCancel}
                   open={!!showWarning}
                   onCancel={() => { setShowWarning(false); }}

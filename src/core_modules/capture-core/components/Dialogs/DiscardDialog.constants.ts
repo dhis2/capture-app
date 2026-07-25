@@ -7,3 +7,14 @@ export const defaultDialogProps = {
     destructiveText: i18n.t('Yes, discard changes'),
     cancelText: i18n.t('No, cancel'),
 };
+
+export const getDiscardDialogProps = ({ event }: { event?: string } = {}) => ({
+    header: i18n.t('Discard unsaved changes?'),
+    // eslint-disable-next-line max-len
+    text: i18n.t('This {{event}} has unsaved changes. Leaving this page without saving will lose these changes. Are you sure you want to discard unsaved changes?', {
+        event: event ?? i18n.t('event'),
+        interpolation: { escapeValue: false },
+    }),
+    destructiveText: i18n.t('Yes, discard changes'),
+    cancelText: i18n.t('No, cancel'),
+});

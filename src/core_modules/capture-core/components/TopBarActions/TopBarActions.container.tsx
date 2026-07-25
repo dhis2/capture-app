@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { ActionButtons } from './TopBarActions.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import type { Props } from './TopBarActions.types';
 import { useNavigate, buildUrlQueryString } from '../../utils/routing';
-import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../Dialogs/DiscardDialog.constants';
+import { useStageLabel } from '../../metaData';
 
 const defaultContext = {
     openNewRegistrationPage: false,
@@ -19,6 +21,7 @@ export const TopBarActions = ({
     onOpenNewRegistrationPage = () => undefined,
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
+    const eventLabel = useStageLabel('event') ?? i18n.t('event');
     const {
         openNewRegistrationPage,
         openNewRegistrationPageWithoutProgramId,
@@ -112,7 +115,7 @@ export const TopBarActions = ({
                 onDestroy={handleAccept}
                 open={openConfirmDialog}
                 onCancel={() => setContext(defaultContext)}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event: eventLabel })}
             />
         </>
     );

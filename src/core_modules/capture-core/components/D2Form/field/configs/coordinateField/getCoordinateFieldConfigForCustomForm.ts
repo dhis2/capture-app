@@ -18,5 +18,5 @@ export const getCoordinateFieldConfigForCustomForm = (
     return createFieldConfig({
         component: CoordinateFieldForCustomForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

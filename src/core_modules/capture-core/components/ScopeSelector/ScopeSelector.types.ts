@@ -29,6 +29,7 @@ export type Props = {
   selectedOrgUnit: Record<string, any>;
   onResetProgramId: (baseAction: any) => void;
   formIsOpen: boolean;
+  eventLabel?: string;
 } & OwnProps & PropsFromRedux;
 
 export type State = {

@@ -16,5 +16,5 @@ export const getImageFieldConfig = (metaData: MetaDataElement, options: any, que
     return createFieldConfig({
         component: ImageFieldForForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

@@ -16,7 +16,7 @@ import {
 } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
-import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 const styles: Readonly<any> = () => ({
     innerWrapper: {
@@ -151,7 +151,7 @@ const NewEventWorkspacePlain = ({
                 </div>,
             )}
             <DiscardDialog
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event })}
                 onDestroy={() => { setMode(tempMode.current); setWarningVisible(false); }}
                 open={isWarningVisible}
                 onCancel={() => setWarningVisible(false)}

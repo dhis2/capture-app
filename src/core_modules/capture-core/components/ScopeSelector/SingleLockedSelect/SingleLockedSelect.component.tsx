@@ -7,10 +7,10 @@ import { capitalizeFirstLetter, lowerCaseFirstLetter } from 'capture-core-utils/
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
-import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
 import { OptionLabel } from '../OptionLabel';
-import type { Icon } from '../../../metaData';
+import { type Icon, useStageLabel } from '../../../metaData';
 
 type Props = {
     isUserInteractionInProgress?: boolean;
@@ -57,6 +57,7 @@ const SingleLockedSelectPlain = ({
     const [openStartAgainWarning, setOpenStartAgainWarning] = useState(false);
     const [openSelectorBarItem, setOpenSelectorBarItem] = useState(false);
     const hasMenu = !displayOnly && options?.length > 0;
+    const eventLabel = useStageLabel('event') ?? i18n.t('event');
 
     const handleClose = () => {
         setOpenStartAgainWarning(false);
@@ -153,7 +154,7 @@ const SingleLockedSelectPlain = ({
                 onDestroy={handleDestroy}
                 open={openStartAgainWarning}
                 onCancel={handleClose}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event: eventLabel })}
             />
         </span>
     );

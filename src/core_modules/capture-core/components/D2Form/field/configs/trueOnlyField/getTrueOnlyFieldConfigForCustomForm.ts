@@ -17,5 +17,5 @@ export const getTrueOnlyFieldConfigForCustomForm = (
     return createFieldConfig({
         component: TrueOnlyFieldForCustomForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

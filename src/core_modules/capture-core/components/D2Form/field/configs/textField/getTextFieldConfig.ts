@@ -24,5 +24,5 @@ export const getTextFieldConfig = (
     return createFieldConfig({
         component: TextFieldForForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

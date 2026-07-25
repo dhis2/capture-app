@@ -2,7 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
-import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 export type Props = {
     dataEntryHasChanges: boolean;
@@ -11,6 +11,7 @@ export type Props = {
     options: {
         color?: string;
     }
+    eventLabel?: string;
 };
 
 export type State = {
@@ -47,7 +48,7 @@ export class CancelButtonComponent extends React.Component<Props, State> {
                     { i18n.t('Cancel') }
                 </Button>
                 <DiscardDialog
-                    {...defaultDialogProps}
+                    {...getDiscardDialogProps({ event: this.props.eventLabel })}
                     onDestroy={this.props.onCancel}
                     open={this.state.dialogOpen}
                     onCancel={this.handleCancelDiscard}

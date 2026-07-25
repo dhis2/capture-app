@@ -6,7 +6,7 @@ import { DirectionalChevron } from '../../../utils/rtl';
 import { useProgramLabel, useStageLabel } from '../../../metaData';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
-import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import {
     EnrollmentPageKeys,
@@ -166,7 +166,7 @@ const BreadcrumbsPlain = ({
                     onBackToMainPage?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event })}
             />
 
             <DiscardDialog
@@ -176,7 +176,7 @@ const BreadcrumbsPlain = ({
                     onBackToDashboard?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event })}
             />
 
             <DiscardDialog
@@ -186,7 +186,7 @@ const BreadcrumbsPlain = ({
                     onBackToViewEvent?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event })}
             />
         </div>
     );

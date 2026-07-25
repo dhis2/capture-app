@@ -24,5 +24,5 @@ export const getDateTimeFieldConfigForCustomForm = (
     return createFieldConfig({
         component: DateTimeFieldForCustomForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };

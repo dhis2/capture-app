@@ -15,6 +15,8 @@ type Props = {
         expiryPeriodType?: string;
         expiryDays?: number;
     };
+    orgUnitLabel?: string;
+    eventLabel?: string;
 };
 
 export const isScheduledDateValid = (
@@ -55,14 +57,27 @@ export const isScheduledDateValid = (
     };
 };
 
-const scheduleInOrgUnit = (props) => {
+const orgUnitErrorMessage = (orgUnitLabel?: string) =>
+    i18n.t('Please provide a valid {{orgUnit}}', {
+        orgUnit: orgUnitLabel ?? i18n.t('organisation unit'),
+        interpolation: { escapeValue: false },
+    });
+
+const eventErrorMessage = (eventLabel?: string) =>
+    i18n.t('Please select a valid {{event}}', {
+        event: eventLabel ?? i18n.t('event'),
+        interpolation: { escapeValue: false },
+    });
+
+const scheduleInOrgUnit = (props?: Props) => {
     const {
         scheduledAt,
         scheduledAtFormatError,
         orgUnit,
         setErrorMessages,
         expiryPeriod,
-    } = props ?? {};
+        orgUnitLabel,
+    } = props ?? {} as Props;
     const { valid: scheduledAtIsValid, validationText } = isScheduledDateValid(
         scheduledAt,
         scheduledAtFormatError,
@@ -82,7 +97,7 @@ const scheduleInOrgUnit = (props) => {
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
+            orgUnit: orgUnitErrorMessage(orgUnitLabel),
         });
     } else {
         setErrorMessages({
@@ -93,13 +108,13 @@ const scheduleInOrgUnit = (props) => {
     return scheduledAtIsValid && orgUnitIsValid;
 };
 
-const enterData = (props) => {
-    const { orgUnit, setErrorMessages } = props ?? {};
+const enterData = (props?: Props) => {
+    const { orgUnit, setErrorMessages, orgUnitLabel } = props ?? {} as Props;
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
+            orgUnit: orgUnitErrorMessage(orgUnitLabel),
         });
     } else {
         setErrorMessages({
@@ -110,13 +125,13 @@ const enterData = (props) => {
     return orgUnitIsValid;
 };
 
-const linkToExistingResponse = (props) => {
-    const { linkedEventId, setErrorMessages } = props ?? {};
+const linkToExistingResponse = (props?: Props) => {
+    const { linkedEventId, setErrorMessages, eventLabel } = props ?? {} as Props;
     const linkedEventIdIsValid = !!linkedEventId;
 
     if (!linkedEventIdIsValid) {
         setErrorMessages({
-            linkedEventId: i18n.t('Please select a valid event'),
+            linkedEventId: eventErrorMessage(eventLabel),
         });
     } else {
         setErrorMessages({

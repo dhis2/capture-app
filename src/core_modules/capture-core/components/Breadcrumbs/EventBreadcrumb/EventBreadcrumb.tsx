@@ -6,7 +6,7 @@ import { DirectionalChevron } from '../../../utils/rtl';
 import { useStageLabel } from '../../../metaData';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
-import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 
 export const pageKeys = {
@@ -116,7 +116,7 @@ const EventBreadcrumbPlain = ({
                     onBackToMainPage?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event })}
             />
             <DiscardDialog
                 open={openWarning === pageKeys.VIEW_EVENT}
@@ -125,7 +125,7 @@ const EventBreadcrumbPlain = ({
                     onBackToViewEvent?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...defaultDialogProps}
+                {...getDiscardDialogProps({ event })}
             />
         </div>
     );

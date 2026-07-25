@@ -4,7 +4,7 @@ import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useProgramLabel } from '../../../metaData';
+import { scopeTypes, useProgramLabel, useStageLabel } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
@@ -14,7 +14,7 @@ import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const TranslatedTextWithStylesForTei = ({
@@ -62,6 +62,7 @@ const TeiRegistrationEntryPlain =
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
+      const eventLabel = useStageLabel('event') ?? i18n.t('event');
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
       const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
@@ -124,7 +125,7 @@ const TeiRegistrationEntryPlain =
                       </InfoIconText>
 
                       <DiscardDialog
-                          {...defaultDialogProps}
+                          {...getDiscardDialogProps({ event: eventLabel })}
                           onDestroy={onCancel}
                           open={!!showWarning}
                           onCancel={() => { setShowWarning(false); }}

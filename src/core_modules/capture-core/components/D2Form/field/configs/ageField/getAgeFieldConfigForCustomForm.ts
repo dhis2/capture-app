@@ -18,5 +18,5 @@ export const getAgeFieldConfigForCustomForm = (
     return createFieldConfig({
         component: AgeFieldForCustomForm,
         props,
-    }, metaData, querySingleResource);
+    }, metaData, querySingleResource, options);
 };
