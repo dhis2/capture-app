@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
+import { useLocationQuery } from '../../../../../../utils/routing';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
+import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import type { PlainProps } from './DeleteTeiAction.types';
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
@@ -14,14 +16,27 @@ export const DeleteTeiAction = ({
     selectedRowsCount,
     trackedEntityName,
     onUpdateList,
+    programId,
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
-    const { deleteTeis, isLoading } = useCascadeDeleteTei({
+    const { orgUnitId } = useLocationQuery();
+    const {
+        deleteTeis,
+        isLoading,
+        validationError,
+        resetDeleteTeis,
+    } = useCascadeDeleteTei({
         selectedRows,
         setIsDeleteDialogOpen,
         onUpdateList,
     });
+    const knownTeiUids = useMemo(() => new Set(Object.keys(selectedRows)), [selectedRows]);
+
+    const closeModal = () => {
+        setIsDeleteDialogOpen(false);
+        resetDeleteTeis();
+    };
 
     if (!hasAuthority) {
         return null;
@@ -38,10 +53,10 @@ export const DeleteTeiAction = ({
                 })}
             </Button>
 
-            {isDeleteDialogOpen && (
+            {isDeleteDialogOpen && !validationError && (
                 <Modal
                     small
-                    onClose={() => setIsDeleteDialogOpen(false)}
+                    onClose={closeModal}
                 >
                     <ModalTitle>
                         {i18n.t('Delete {{count}} {{ trackedEntityName }}', {
@@ -64,7 +79,7 @@ export const DeleteTeiAction = ({
                         <ButtonStrip>
                             <Button
                                 secondary
-                                onClick={() => setIsDeleteDialogOpen(false)}
+                                onClick={closeModal}
                             >
                                 {i18n.t('Cancel')}
                             </Button>
@@ -75,6 +90,40 @@ export const DeleteTeiAction = ({
                                 loading={isLoading}
                             >
                                 {i18n.t('Delete')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
+            )}
+
+            {isDeleteDialogOpen && validationError && (
+                <Modal
+                    small
+                    onClose={closeModal}
+                >
+                    <ModalTitle>
+                        {i18n.t('Error deleting {{ trackedEntityName }}', {
+                            trackedEntityName: trackedEntityName.toLowerCase(),
+                        })}
+                    </ModalTitle>
+                    <ModalContent>
+                        <BulkActionErrorDetails
+                            introText={i18n.t(
+                                'There was an error while deleting the records. Please see the details below.',
+                            )}
+                            errorReports={validationError?.validationReport?.errorReports}
+                            programId={programId}
+                            orgUnitId={orgUnitId}
+                            knownTeiUids={knownTeiUids}
+                        />
+                    </ModalContent>
+                    <ModalActions>
+                        <ButtonStrip>
+                            <Button
+                                secondary
+                                onClick={closeModal}
+                            >
+                                {i18n.t('Close')}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

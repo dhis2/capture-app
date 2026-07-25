@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../../../../Widget';
-import { getRecordUrlFromErrorReport } from '../utils';
+import { getRecordPathFromErrorReport } from '../utils';
 
 type ErrorReport = {
     uid?: string;
@@ -19,6 +19,7 @@ type Props = {
     orgUnitId?: string;
     enrollmentIdToTeiId?: Record<string, string>;
     knownEventUids?: Set<string>;
+    knownTeiUids?: Set<string>;
 };
 
 const styles: Readonly<any> = {
@@ -49,6 +50,7 @@ const BulkActionErrorDetailsPlain = ({
     orgUnitId,
     enrollmentIdToTeiId,
     knownEventUids,
+    knownTeiUids,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [openAccordion, setOpenAccordion] = useState(false);
@@ -67,12 +69,13 @@ const BulkActionErrorDetailsPlain = ({
                 <span className={classes.errorContainer}>
                     <ul>
                         {errorReports && errorReports.length ? errorReports.map((errorReport) => {
-                            const recordUrl = getRecordUrlFromErrorReport({
+                            const recordPath = getRecordPathFromErrorReport({
                                 errorReport,
                                 programId,
                                 orgUnitId,
                                 enrollmentIdToTeiId,
                                 knownEventUids,
+                                knownTeiUids,
                             });
                             return (
                                 <li
@@ -80,9 +83,9 @@ const BulkActionErrorDetailsPlain = ({
                                     className={classes.errorItem}
                                 >
                                     <div className={classes.errorUidHeader}>
-                                        {recordUrl ? (
+                                        {recordPath ? (
                                             <a
-                                                href={recordUrl}
+                                                href={`#${recordPath}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >

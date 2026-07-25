@@ -42,10 +42,17 @@ export const DeleteAction = ({
 
     const {
         mutate: deleteEvents,
-        isLoading,
+        isPending,
+        data: deleteData,
         error: deleteError,
         reset: resetDeleteEvents,
-    }: { mutate: any, isLoading: boolean, error: any, reset: () => void } = useMutation(
+    }: {
+        mutate: any,
+        isPending: boolean,
+        data: any,
+        error: any,
+        reset: () => void,
+    } = useMutation(
         () => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
@@ -62,7 +69,10 @@ export const DeleteAction = ({
                     showAlert({ message: i18n.t('An error occurred while deleting the events') });
                 }
             },
-            onSuccess: () => {
+            // Defensive against a future switch to atomicMode=OBJECT, where partial-failure
+            // reports would arrive on `data` (HTTP 200) rather than as an HTTP error.
+            onSuccess: (response: any) => {
+                if (response?.validationReport?.errorReports?.length) return;
                 onUpdateList();
                 setIsModalOpen(false);
             },
@@ -70,8 +80,8 @@ export const DeleteAction = ({
     );
 
     const validationError = useMemo(
-        () => extractValidationReport({ error: deleteError }),
-        [deleteError],
+        () => extractValidationReport({ data: deleteData, error: deleteError }),
+        [deleteData, deleteError],
     );
 
     const closeModal = () => {
@@ -121,7 +131,7 @@ export const DeleteAction = ({
                             <Button
                                 destructive
                                 onClick={deleteEvents}
-                                loading={isLoading}
+                                loading={isPending}
                             >
                                 {i18n.t('Delete')}
                             </Button>

@@ -3,4 +3,5 @@ export type PlainProps = {
     selectedRowsCount: number;
     trackedEntityName: string;
     onUpdateList: () => void;
+    programId?: string;
 };

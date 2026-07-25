@@ -90,7 +90,7 @@ const CompleteActionPlain = ({
 
         // If there was an error importing the data, show an error message
         if (validationError) {
-            const errors = (validationError as any)?.details?.validationReport?.errorReports;
+            const errors = validationError?.validationReport?.errorReports;
             const introText = hasPartiallyUploadedEnrollments
                 // eslint-disable-next-line max-len
                 ? i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.')

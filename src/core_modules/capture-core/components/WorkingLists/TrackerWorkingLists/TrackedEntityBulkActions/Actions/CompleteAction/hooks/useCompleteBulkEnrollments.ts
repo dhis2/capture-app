@@ -6,6 +6,7 @@ import log from 'loglevel';
 import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
+import { extractValidationReport } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
 import type { ProgramStage } from '../../../../../../../metaData';
 
 type Props = {
@@ -155,7 +156,7 @@ export const useCompleteBulkEnrollments = ({
 
     const {
         mutate: importEnrollments,
-        isLoading: isImportingEnrollments,
+        isPending: isImportingEnrollments,
     } = useMutation<any>(
         ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
         {
@@ -178,7 +179,7 @@ export const useCompleteBulkEnrollments = ({
 
     const {
         mutate: importPartialEnrollments,
-        isLoading: isImportingPartialEnrollments,
+        isPending: isImportingPartialEnrollments,
         isSuccess: hasPartiallyUploadedEnrollments,
     } = useMutation(
         ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
@@ -203,8 +204,8 @@ export const useCompleteBulkEnrollments = ({
 
     const {
         mutate: onValidateEnrollments,
-        isLoading: isCompletingEnrollments,
-        error: validationError,
+        isPending: isCompletingEnrollments,
+        error: validateError,
         reset: resetCompleteEnrollments,
     } = useMutation<any>(
         ({ enrollments }: any) => validateEnrollments({
@@ -243,6 +244,11 @@ export const useCompleteBulkEnrollments = ({
         completed: trackedEntities?.completedEnrollments?.length ?? 0,
     }), [trackedEntities]);
 
+    const validationError = useMemo(
+        () => extractValidationReport({ error: validateError }),
+        [validateError],
+    );
+
     const enrollmentIdToTeiId = useMemo(() => {
         const allEnrollments = [
             ...(trackedEntities?.activeEnrollments ?? []),
@@ -256,12 +262,11 @@ export const useCompleteBulkEnrollments = ({
         }, {});
     }, [trackedEntities]);
 
+    // Only events from active enrollments are submitted (see formatServerPayload),
+    // so limit the vouched-UID set to that same scope.
     const knownEventUids = useMemo(() => {
         const set = new Set<string>();
-        [
-            ...(trackedEntities?.activeEnrollments ?? []),
-            ...(trackedEntities?.completedEnrollments ?? []),
-        ].forEach((enrollment: any) => {
+        (trackedEntities?.activeEnrollments ?? []).forEach((enrollment: any) => {
             (enrollment?.events ?? []).forEach((event: any) => {
                 if (event?.event) set.add(event.event);
             });

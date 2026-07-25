@@ -79,7 +79,8 @@ export const useDeleteEnrollments = ({
 
     const {
         mutate: deleteEnrollments,
-        isLoading: isDeletingEnrollments,
+        isPending: isDeletingEnrollments,
+        data: deleteData,
         error: deleteError,
     } = useMutation<any, any>(
         () => dataEngine.mutate({
@@ -98,7 +99,10 @@ export const useDeleteEnrollments = ({
                     showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
                 }
             },
-            onSuccess: () => {
+            // Defensive against a future switch to atomicMode=OBJECT, where partial-failure
+            // reports would arrive on `data` (HTTP 200) rather than as an HTTP error.
+            onSuccess: (response: any) => {
+                if (response?.validationReport?.errorReports?.length) return;
                 queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
                 onUpdateList();
                 setIsDeleteDialogOpen(false);
@@ -107,8 +111,8 @@ export const useDeleteEnrollments = ({
     );
 
     const validationError = useMemo(
-        () => extractValidationReport({ error: deleteError }),
-        [deleteError],
+        () => extractValidationReport({ data: deleteData, error: deleteError }),
+        [deleteData, deleteError],
     );
 
     const enrollmentIdToTeiId = useMemo(() => {

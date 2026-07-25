@@ -68,7 +68,7 @@ export const useBulkCompleteEvents = ({
 
     const {
         mutate: completeEvents,
-        isLoading: isCompletingEvents,
+        isPending: isCompletingEvents,
         data,
         error,
         reset: resetCompleteEvents,
