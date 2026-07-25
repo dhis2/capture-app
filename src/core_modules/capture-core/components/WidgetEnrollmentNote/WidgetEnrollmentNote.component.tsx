@@ -12,6 +12,7 @@ export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
     const enrollment = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
+    const noteLabel = useProgramLabel('note') ?? i18n.t('note');
     const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
         enrollmentDomain?.enrollment?.notes ?? []);
@@ -33,7 +34,8 @@ export const WidgetEnrollmentNote = () => {
                     enrollment,
                     interpolation: { escapeValue: false },
                 })}
-                placeholder={i18n.t('Write a note about this {{enrollment}}', {
+                placeholder={i18n.t('Write a {{note}} about this {{enrollment}}', {
+                    note: noteLabel,
                     enrollment,
                     interpolation: { escapeValue: false },
                 })}

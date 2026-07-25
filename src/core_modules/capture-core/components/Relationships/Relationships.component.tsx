@@ -5,7 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
-import type { RelationshipType } from '../../metaData';
+import { type RelationshipType, useProgramLabel } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -185,7 +185,10 @@ class RelationshipsPlain extends React.Component<Props> {
                                 dataTest="add-relationship-button"
                                 secondary
                             >
-                                {i18n.t('Add relationship')}
+                                {i18n.t('Add {{relationship}}', {
+                                    relationship: (this.props as any).relationshipLabel ?? i18n.t('relationship'),
+                                    interpolation: { escapeValue: false },
+                                })}
                             </Button>
                         </div>
                     </div>
@@ -195,4 +198,10 @@ class RelationshipsPlain extends React.Component<Props> {
     }
 }
 
-export const Relationships = withStyles(styles)(RelationshipsPlain);
+const StyledRelationships = withStyles(styles)(RelationshipsPlain) as
+    React.ComponentType<{ [key: string]: unknown; relationshipLabel: string }>;
+
+export const Relationships = (props: { [key: string]: unknown }) => {
+    const relationshipLabel = useProgramLabel('relationship') ?? i18n.t('relationship');
+    return <StyledRelationships {...props} relationshipLabel={relationshipLabel} />;
+};

@@ -178,7 +178,8 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     }
 }
 
-const StyledTeiSearch: any = withStyles(styles)(TeiSearchPlain);
+const StyledTeiSearch = withStyles(styles)(TeiSearchPlain) as
+    React.ComponentType<Props & { attributesLabel: string }>;
 
 export const TeiSearchComponent = (props: Props) => {
     const attributesLabel = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');

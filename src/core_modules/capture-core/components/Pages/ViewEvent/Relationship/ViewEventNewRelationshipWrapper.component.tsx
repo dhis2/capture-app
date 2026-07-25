@@ -111,7 +111,10 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                 </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
-                    text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
+                    text={i18n.t('Leaving this page will discard any selections you made for a new {{relationship}}', {
+                        relationship: relationshipLabel,
+                        interpolation: { escapeValue: false },
+                    })}
                     destructiveText={i18n.t('Yes, discard changes')}
                     cancelText={i18n.t('No, cancel')}
                     onDestroy={onCancel}

@@ -11,6 +11,7 @@ import { useProgramLabel, useStageLabel } from '../../metaData';
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
     const event = useStageLabel('event') ?? i18n.t('Event');
+    const noteLabel = useProgramLabel('note') ?? i18n.t('note');
     const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
@@ -32,7 +33,8 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
                     event,
                     interpolation: { escapeValue: false },
                 })}
-                placeholder={i18n.t('Write a note about this {{event}}', {
+                placeholder={i18n.t('Write a {{note}} about this {{event}}', {
+                    note: noteLabel,
                     event,
                     interpolation: { escapeValue: false },
                 })}

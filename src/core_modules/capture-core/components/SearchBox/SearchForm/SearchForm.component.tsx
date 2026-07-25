@@ -104,6 +104,7 @@ const SearchFormIndex = ({
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
     const attributes = useProgramLabel('attribute', { plural: true }) ?? i18n.t('Attributes');
+    const attribute = useProgramLabel('attribute') ?? i18n.t('attribute');
 
     useFormDataLifecycle(
         searchGroupsForSelectedScope,
@@ -187,10 +188,12 @@ const SearchFormIndex = ({
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
                 {
-                    i18n.t('Fill in at least {{count}} attribute to search', {
+                    i18n.t('Fill in at least {{count}} {{attribute}} to search', {
                         count: minAttributesRequiredToSearch,
-                        defaultValue: 'Fill in at least {{count}} attribute to search',
-                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                        attribute: minAttributesRequiredToSearch === 1 ? attribute : attributes,
+                        defaultValue: 'Fill in at least {{count}} {{attribute}} to search',
+                        defaultValue_plural: 'Fill in at least {{count}} {{attribute}} to search',
+                        interpolation: { escapeValue: false },
                     })
                 }
             </div>);
@@ -376,6 +379,7 @@ const SearchFormIndex = ({
         error,
         expandedFormId,
         attributes,
+        attribute,
     ]);
 };
 

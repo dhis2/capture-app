@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
 import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
@@ -213,7 +213,7 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
+            label: props.orgUnitLabel ?? i18n.t('Organisation unit'),
             required: true,
         }),
         getPropName: () => 'orgUnit',
@@ -544,6 +544,9 @@ type Props = {
     recentlyAddedRelationshipId?: string | null,
     onScrollToRelationships: () => void;
 };
+
+type ExternalProps = { [key: string]: unknown };
+
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements],
     name?: string,
@@ -705,18 +708,21 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
 }
 
 
-const StyledDataEntry: any = withStyles(getStyles)(withTheme()(NewEventDataEntry));
+const StyledDataEntry: ComponentType<{ [key: string]: unknown }> =
+    withStyles(getStyles)(withTheme()(NewEventDataEntry)) as ComponentType<{ [key: string]: unknown }>;
 
-export const DataEntryComponent = (props: any) => {
+export const DataEntryComponent = (props: ExternalProps) => {
     const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
     const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('Relationships');
     const eventLabel = useProgramLabel('event') ?? i18n.t('event');
+    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
     return (
         <StyledDataEntry
             {...props}
             notesLabel={notesLabel}
             relationshipsLabel={relationshipsLabel}
             eventLabel={eventLabel}
+            orgUnitLabel={orgUnitLabel}
         />
     );
 };

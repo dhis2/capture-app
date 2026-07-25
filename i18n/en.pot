@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-25T13:38:28.403Z\n"
-"PO-Revision-Date: 2026-07-25T13:38:28.403Z\n"
+"POT-Creation-Date: 2026-07-25T18:08:03.383Z\n"
+"PO-Revision-Date: 2026-07-25T18:08:03.383Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -749,8 +749,11 @@ msgstr "Schedule {{event}}"
 msgid "Make referral"
 msgstr "Make referral"
 
-msgid "No available program stages"
-msgstr "No available program stages"
+msgid "program stages"
+msgstr "program stages"
+
+msgid "No available {{programStages}}"
+msgstr "No available {{programStages}}"
 
 msgid "Invalid {{enrollment}} id {{enrollmentId}}."
 msgstr "Invalid {{enrollment}} id {{enrollmentId}}."
@@ -1001,10 +1004,10 @@ msgstr "{{event}} details"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
-"relationship"
+"{{relationship}}"
 msgstr ""
 "Leaving this page will discard any selections you made for a new "
-"relationship"
+"{{relationship}}"
 
 msgid "Errors"
 msgstr "Errors"
@@ -1017,12 +1020,6 @@ msgstr "This {{event}} doesn't have any {{relationships}}"
 
 msgid "Warnings"
 msgstr "Warnings"
-
-msgid "No feedback for this event yet"
-msgstr "No feedback for this event yet"
-
-msgid "No indicator output for this event yet"
-msgstr "No indicator output for this event yet"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Event could not be loaded. Are you sure it exists?"
@@ -1063,10 +1060,16 @@ msgstr "Search by {{attributes}}"
 msgid "Search {{attributeName}}"
 msgstr "Search {{attributeName}}"
 
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] "Fill in at least {{count}} attribute to search"
-msgstr[1] "Fill in at least {{count}} attributes to search"
+msgid "attribute"
+msgstr "attribute"
+
+msgid "attributes"
+msgstr "attributes"
+
+msgid "Fill in at least {{count}} {{attribute}} to search"
+msgid_plural "Fill in at least {{count}} {{attribute}} to search"
+msgstr[0] "Fill in at least {{count}} {{attribute}} to search"
+msgstr[1] "Fill in at least {{count}} {{attribute}} to search"
 
 msgid "Missing search criteria"
 msgstr "Missing search criteria"
@@ -1079,9 +1082,6 @@ msgstr "Back to search"
 
 msgid "Search form is missing. See log for details"
 msgstr "Search form is missing. See log for details"
-
-msgid "Search by attributes"
-msgstr "Search by attributes"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
@@ -1146,8 +1146,8 @@ msgstr "View only - {{message}}"
 msgid "View only"
 msgstr "View only"
 
-msgid "Add relationship"
-msgstr "Add relationship"
+msgid "Add {{relationship}}"
+msgstr "Add {{relationship}}"
 
 msgid "No results found for "
 msgstr "No results found for "
@@ -1201,8 +1201,8 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
-msgid "{{trackedEntityName}} has no searchable attributes"
-msgstr "{{trackedEntityName}} has no searchable attributes"
+msgid "{{trackedEntityName}} has no searchable {{attributes}}"
+msgstr "{{trackedEntityName}} has no searchable {{attributes}}"
 
 msgid ""
 "Try selecting a different {{trackedEntityType}}, or try searching in a "
@@ -1292,17 +1292,6 @@ msgstr "Results found in {{currentSearchScopeName}}"
 
 msgid "Results found"
 msgstr "Results found"
-
-msgid "attributes"
-msgstr "attributes"
-
-msgid "attribute"
-msgstr "attribute"
-
-msgid "Fill in at least {{count}} {{attribute}} to search"
-msgid_plural "Fill in at least {{count}} {{attribute}} to search"
-msgstr[0] "Fill in at least {{count}} {{attribute}} to search"
-msgstr[1] "Fill in at least {{count}} {{attribute}} to search"
 
 msgid "Saved lists in this program"
 msgstr "Saved lists in this program"
@@ -1554,8 +1543,8 @@ msgstr "program or stage is invalid"
 msgid "{{notes}} about this {{enrollment}}"
 msgstr "{{notes}} about this {{enrollment}}"
 
-msgid "Write a note about this {{enrollment}}"
-msgstr "Write a note about this {{enrollment}}"
+msgid "Write a {{note}} about this {{enrollment}}"
+msgstr "Write a {{note}} about this {{enrollment}}"
 
 msgid "This {{enrollment}} doesn't have any {{notes}}"
 msgstr "This {{enrollment}} doesn't have any {{notes}}"
@@ -1581,14 +1570,14 @@ msgstr "Are you sure you want to delete this {{event}}? "
 msgid "Yes, delete {{event}}"
 msgstr "Yes, delete {{event}}"
 
-msgid "Go to “Schedule” tab to reschedule this event"
-msgstr "Go to “Schedule” tab to reschedule this event"
+msgid "Go to “Schedule” tab to reschedule this {{event}}"
+msgstr "Go to “Schedule” tab to reschedule this {{event}}"
 
-msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgid "Scheduled date cannot be changed for {{ eventStatus }} {{events}}"
+msgstr "Scheduled date cannot be changed for {{ eventStatus }} {{events}}"
 
-msgid "You do not have access to uncomplete this event"
-msgstr "You do not have access to uncomplete this event"
+msgid "You do not have access to uncomplete this {{event}}"
+msgstr "You do not have access to uncomplete this {{event}}"
 
 msgid "Geometry (Area)"
 msgstr "Geometry (Area)"
@@ -1602,14 +1591,17 @@ msgstr "Polygon captured"
 msgid "No polygon captured"
 msgstr "No polygon captured"
 
+msgid "{{event}} completed"
+msgstr "{{event}} completed"
+
 msgid "Event completed"
 msgstr "Event completed"
 
 msgid "{{notes}} about this {{event}}"
 msgstr "{{notes}} about this {{event}}"
 
-msgid "Write a note about this {{event}}"
-msgstr "Write a note about this {{event}}"
+msgid "Write a {{note}} about this {{event}}"
+msgstr "Write a {{note}} about this {{event}}"
 
 msgid "after"
 msgstr "after"
@@ -1653,17 +1645,17 @@ msgstr "Scheduling {{event}} in {{stageName}} for {{programName}} in {{orgUnitNa
 msgid "Scheduling {{event}} in {{stageName}} for {{programName}}"
 msgstr "Scheduling {{event}} in {{stageName}} for {{programName}}"
 
+msgid "notes"
+msgstr "notes"
+
 msgid "Schedule info"
 msgstr "Schedule info"
 
-msgid "{{event}} notes"
-msgstr "{{event}} notes"
+msgid "{{event}} {{notes}}"
+msgstr "{{event}} {{notes}}"
 
-msgid "Write a note about this scheduled {{event}}"
-msgstr "Write a note about this scheduled {{event}}"
-
-msgid "This {{event}} doesn't have any notes"
-msgstr "This {{event}} doesn't have any notes"
+msgid "Write a {{note}} about this scheduled {{event}}"
+msgstr "Write a {{note}} about this scheduled {{event}}"
 
 msgid "Program or stage is invalid"
 msgstr "Program or stage is invalid"

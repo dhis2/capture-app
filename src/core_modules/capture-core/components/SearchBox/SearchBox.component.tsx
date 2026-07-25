@@ -14,7 +14,7 @@ import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
-import { scopeTypes, useTrackedEntityTypeLabel } from '../../metaData';
+import { scopeTypes, useProgramLabel, useTrackedEntityTypeLabel } from '../../metaData';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -92,6 +92,7 @@ function renderFooterContent(args: {
     availableSearchOption?: AvailableSearchOption;
     trackedEntityName: string;
     trackedEntityTypeLabel: string;
+    attributesLabel: string;
 }) {
     if (args.isLoading) {
         return <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />;
@@ -115,8 +116,9 @@ function renderFooterContent(args: {
         footerNodes.push(
             <NoticeBox
                 warning
-                title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
+                title={i18n.t('{{trackedEntityName}} has no searchable {{attributes}}', {
                     trackedEntityName: capitalizeFirstLetter(args.trackedEntityName),
+                    attributes: args.attributesLabel,
                     interpolation: { escapeValue: false },
                 })}
             >
@@ -147,6 +149,7 @@ const Index = ({
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const trackedEntityTypeLabel = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('Tracked entity type');
+    const attributesLabel = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');
     const {
         searchOption: availableSearchOption,
         isLoading,
@@ -215,6 +218,7 @@ const Index = ({
                 availableSearchOption,
                 trackedEntityName,
                 trackedEntityTypeLabel,
+                attributesLabel,
             })}
         </>
     );

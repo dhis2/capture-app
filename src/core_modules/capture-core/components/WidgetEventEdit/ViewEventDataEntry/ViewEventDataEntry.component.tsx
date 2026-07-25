@@ -223,7 +223,9 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Event completed'),
+            label: props.eventLabel
+                ? i18n.t('{{event}} completed', { event: props.eventLabel, interpolation: { escapeValue: false } })
+                : i18n.t('Event completed'),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
@@ -344,9 +346,12 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     }
 }
 
-const StyledViewEventDataEntry: any = withStyles(getStyles)(ViewEventDataEntryPlain as any);
+const StyledViewEventDataEntry = withStyles(getStyles)(
+    ViewEventDataEntryPlain as React.ComponentType<unknown>,
+) as React.ComponentType<{ [key: string]: unknown }>;
 
-export const ViewEventDataEntryComponent = (props: any) => {
+export const ViewEventDataEntryComponent = (props: { [key: string]: unknown }) => {
     const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
-    return <StyledViewEventDataEntry {...props} notesLabel={notesLabel} />;
+    const eventLabel = useProgramLabel('event') ?? i18n.t('Event');
+    return <StyledViewEventDataEntry {...props} notesLabel={notesLabel} eventLabel={eventLabel} />;
 };

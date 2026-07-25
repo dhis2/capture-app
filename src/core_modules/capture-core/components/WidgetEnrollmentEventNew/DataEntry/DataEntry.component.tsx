@@ -198,7 +198,7 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
+            label: props.orgUnitLabel ?? i18n.t('Organisation unit'),
             required: true,
         }),
         getPropName: () => 'orgUnit',
@@ -443,7 +443,10 @@ type Props = {
     orgUnitFieldValue?: OrgUnit | null;
     notesLabel: string;
     relationshipsLabel: string;
+    orgUnitLabel: string;
 };
+
+type ExternalProps = { programId: string; [key: string]: unknown };
 
 type DataEntrySection = {
     placement: string,
@@ -563,9 +566,17 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 const StyledDataEntry: ComponentType<any> =
     withStyles(getStyles)(withTheme()(DataEntryPlain));
 
-export const DataEntryComponent = (props: any) => {
+export const DataEntryComponent = (props: ExternalProps) => {
     const notesLabel = useProgramLabel('note', { plural: true, programId: props.programId }) ?? i18n.t('Notes');
     const relationshipsLabel =
         useProgramLabel('relationship', { plural: true, programId: props.programId }) ?? i18n.t('Relationships');
-    return <StyledDataEntry {...props} notesLabel={notesLabel} relationshipsLabel={relationshipsLabel} />;
+    const orgUnitLabel = useProgramLabel('orgUnit', { programId: props.programId }) ?? i18n.t('Organisation unit');
+    return (
+        <StyledDataEntry
+            {...props}
+            notesLabel={notesLabel}
+            relationshipsLabel={relationshipsLabel}
+            orgUnitLabel={orgUnitLabel}
+        />
+    );
 };

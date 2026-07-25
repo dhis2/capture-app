@@ -135,9 +135,10 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
     }
 }
 
-const StyledNewRelationshipWrapper: any = withStyles(getStyles)(NewEventNewRelationshipWrapper);
+const StyledNewRelationshipWrapper = withStyles(getStyles)(NewEventNewRelationshipWrapper) as
+    React.ComponentType<{ [key: string]: unknown; eventLabel: string; relationshipLabel: string }>;
 
-export const NewRelationshipWrapperComponent = (props: any) => {
+export const NewRelationshipWrapperComponent = (props: { [key: string]: unknown }) => {
     const eventLabel = useStageLabel('event') ?? i18n.t('event');
     const relationshipLabel = useProgramLabel('relationship') ?? i18n.t('relationship');
     return <StyledNewRelationshipWrapper {...props} eventLabel={eventLabel} relationshipLabel={relationshipLabel} />;

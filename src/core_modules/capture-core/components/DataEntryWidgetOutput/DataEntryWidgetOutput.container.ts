@@ -29,8 +29,16 @@ const makeMapStateToProps = () => {
     };
 };
 
+type ConnectedProps = {
+    ready?: boolean;
+    dataEntryKey?: string | null;
+    programRules?: Array<unknown>;
+    feedbackEmptyText: string;
+    indicatorEmptyText: string;
+};
+
 const ConnectedDataEntryWidgetOutput = connect(makeMapStateToProps, () => ({}))(
-    (props: any) => (props.ready ? React.createElement(DataEntryWidgetOutputComponent, props) : null),
+    (props: ConnectedProps) => (props.ready ? React.createElement(DataEntryWidgetOutputComponent, props) : null),
 );
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> = (props: OwnProps) => {

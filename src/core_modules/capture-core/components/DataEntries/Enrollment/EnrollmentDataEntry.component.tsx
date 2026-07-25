@@ -510,9 +510,17 @@ class EnrollmentDataEntryClass extends React.Component<PreEnrollmentDataEntryPro
     }
 }
 
+const EnrollmentDataEntryWithLabels = EnrollmentDataEntryClass as unknown as
+    React.ComponentType<PreEnrollmentDataEntryProps & { enrollmentLabel: string; eventLabel: string }>;
+
 export const EnrollmentDataEntryComponent = (props: PreEnrollmentDataEntryProps) => {
     const enrollmentLabel = useProgramLabel('enrollment', { programId: props.programId }) ?? i18n.t('Enrollment');
     const eventLabel = useProgramLabel('event', { programId: props.programId }) ?? i18n.t('event');
-    const extraProps: any = { enrollmentLabel, eventLabel };
-    return <EnrollmentDataEntryClass {...props} {...extraProps} />;
+    return (
+        <EnrollmentDataEntryWithLabels
+            {...props}
+            enrollmentLabel={enrollmentLabel}
+            eventLabel={eventLabel}
+        />
+    );
 };
