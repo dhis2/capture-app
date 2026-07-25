@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-24T09:23:05.496Z\n"
-"PO-Revision-Date: 2026-07-24T09:23:05.496Z\n"
+"POT-Creation-Date: 2026-07-25T11:08:31.245Z\n"
+"PO-Revision-Date: 2026-07-25T11:08:31.245Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -458,14 +458,11 @@ msgstr "This event has been completed"
 msgid "This event is outside the edit period"
 msgstr "This event is outside the edit period"
 
-msgid "Delete"
-msgstr "Delete"
+msgid "Delete event"
+msgstr "Delete event"
 
 msgid "An error occurred while deleting the event"
 msgstr "An error occurred while deleting the event"
-
-msgid "Delete event"
-msgstr "Delete event"
 
 msgid "Deleting an event is permanent and cannot be undone."
 msgstr "Deleting an event is permanent and cannot be undone."
@@ -616,6 +613,9 @@ msgstr "Uploading file"
 
 msgid "selected"
 msgstr "selected"
+
+msgid "Delete"
+msgstr "Delete"
 
 msgid "Select file"
 msgstr "Select file"

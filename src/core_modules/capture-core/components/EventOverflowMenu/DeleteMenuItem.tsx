@@ -2,7 +2,6 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import {
-    colors,
     IconDelete16,
     MenuItem,
     Button,
@@ -67,10 +66,11 @@ export const DeleteMenuItem = ({
     return (
         <ConditionalTooltip content={getDisabledMessage()} enabled={readOnly}>
             <MenuItem
+                destructive
                 dense
                 disabled={readOnly}
-                icon={<IconDelete16 color={colors.red600} />}
-                label={i18n.t('Delete')}
+                icon={<IconDelete16 />}
+                label={i18n.t('Delete event')}
                 dataTest="event-overflow-delete"
                 onClick={() => {
                     onRequestDelete();
