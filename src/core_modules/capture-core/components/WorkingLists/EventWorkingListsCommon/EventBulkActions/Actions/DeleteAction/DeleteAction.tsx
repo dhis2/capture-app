@@ -1,27 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { Widget } from '../../../../../Widget';
-import { BulkActionErrorReports } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
+import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
+import { extractValidationReport } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { Props } from './DeleteAction.types';
-
-const styles: Readonly<any> = {
-    container: {
-        fontSize: '14px',
-        lineHeight: '19px',
-        color: colors.grey900,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-    },
-};
 
 const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
     if (!stageDataWriteAccess) {
@@ -33,16 +21,14 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-const DeleteActionPlain = ({
+export const DeleteAction = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,
     onUpdateList,
     programId,
-    classes,
-}: Props & WithStyles<typeof styles>) => {
+}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [openAccordion, setOpenAccordion] = useState(false);
     const dataEngine = useDataEngine();
     const { orgUnitId } = useLocationQuery();
     const { show: showAlert } = useAlert(
@@ -83,11 +69,10 @@ const DeleteActionPlain = ({
         },
     );
 
-    const validationError = useMemo(() => (
-        deleteError?.details?.validationReport?.errorReports?.length
-            ? deleteError.details
-            : null
-    ), [deleteError]);
+    const validationError = useMemo(
+        () => extractValidationReport({ error: deleteError }),
+        [deleteError],
+    );
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -156,23 +141,12 @@ const DeleteActionPlain = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        <span className={classes.container}>
-                            {i18n.t('There was an error while deleting the events. Please see the details below.')}
-
-                            <Widget
-                                open={openAccordion}
-                                onOpen={() => setOpenAccordion(true)}
-                                onClose={() => setOpenAccordion(false)}
-                                borderless
-                                header={i18n.t('Details (Advanced)')}
-                            >
-                                <BulkActionErrorReports
-                                    errorReports={validationError?.validationReport?.errorReports}
-                                    programId={programId}
-                                    orgUnitId={orgUnitId}
-                                />
-                            </Widget>
-                        </span>
+                        <BulkActionErrorDetails
+                            introText={i18n.t('There was an error while deleting the events. Please see the details below.')}
+                            errorReports={validationError?.validationReport?.errorReports}
+                            programId={programId}
+                            orgUnitId={orgUnitId}
+                        />
                     </ModalContent>
 
                     <ModalActions>
@@ -191,4 +165,3 @@ const DeleteActionPlain = ({
     );
 };
 
-export const DeleteAction = withStyles(styles)(DeleteActionPlain);

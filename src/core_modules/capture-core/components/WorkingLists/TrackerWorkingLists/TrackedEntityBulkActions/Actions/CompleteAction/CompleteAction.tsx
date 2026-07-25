@@ -14,8 +14,7 @@ import {
 } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
-import { Widget } from '../../../../../Widget';
-import { BulkActionErrorReports } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
+import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { PlainProps } from './CompleteAction.types';
 
@@ -57,7 +56,6 @@ const CompleteActionPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
-    const [openAccordion, setOpenAccordion] = useState(false);
     const { orgUnitId } = useLocationQuery();
     const {
         completeEnrollments,
@@ -92,31 +90,18 @@ const CompleteActionPlain = ({
         // If there was an error importing the data, show an error message
         if (validationError) {
             const errors = (validationError as any)?.details?.validationReport?.errorReports;
+            const introText = hasPartiallyUploadedEnrollments
+                // eslint-disable-next-line max-len
+                ? i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.')
+                : i18n.t('There was an error while completing the enrollments. Please see the details below.');
             return (
-                <div className={classes.container}>
-                    <span>
-                        {hasPartiallyUploadedEnrollments ?
-                            // eslint-disable-next-line max-len
-                            i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.') :
-                            i18n.t('There was an error while completing the enrollments. Please see the details below.')
-                        }
-                    </span>
-
-                    <Widget
-                        open={openAccordion}
-                        onOpen={() => setOpenAccordion(true)}
-                        onClose={() => setOpenAccordion(false)}
-                        borderless
-                        header={i18n.t('Details (Advanced)')}
-                    >
-                        <BulkActionErrorReports
-                            errorReports={errors}
-                            programId={programId}
-                            orgUnitId={orgUnitId}
-                            enrollmentIdToTeiId={enrollmentIdToTeiId}
-                        />
-                    </Widget>
-                </div>
+                <BulkActionErrorDetails
+                    introText={introText}
+                    errorReports={errors}
+                    programId={programId}
+                    orgUnitId={orgUnitId}
+                    enrollmentIdToTeiId={enrollmentIdToTeiId}
+                />
             );
         }
 

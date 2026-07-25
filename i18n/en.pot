@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-25T12:02:47.298Z\n"
-"PO-Revision-Date: 2026-07-25T12:02:47.298Z\n"
+"POT-Creation-Date: 2026-07-25T12:11:11.156Z\n"
+"PO-Revision-Date: 2026-07-25T12:11:11.156Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1980,9 +1980,6 @@ msgstr "Error completing events"
 msgid "There was an error completing the events."
 msgstr "There was an error completing the events."
 
-msgid "Details (Advanced)"
-msgstr "Details (Advanced)"
-
 msgid "An error occurred while completing events"
 msgstr "An error occurred while completing events"
 
@@ -2215,6 +2212,9 @@ msgstr[1] "{{count}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
+
+msgid "Details (Advanced)"
+msgstr "Details (Advanced)"
 
 msgid "An unknown error occurred."
 msgstr "An unknown error occurred."

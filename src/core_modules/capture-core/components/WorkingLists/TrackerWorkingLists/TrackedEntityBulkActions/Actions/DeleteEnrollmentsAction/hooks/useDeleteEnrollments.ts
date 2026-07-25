@@ -6,6 +6,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { extractValidationReport } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -106,11 +107,10 @@ export const useDeleteEnrollments = ({
         },
     );
 
-    const validationError = useMemo(() => (
-        deleteError?.details?.validationReport?.errorReports?.length
-            ? deleteError.details
-            : null
-    ), [deleteError]);
+    const validationError = useMemo(
+        () => extractValidationReport({ error: deleteError }),
+        [deleteError],
+    );
 
     const enrollmentIdToTeiId = useMemo(() => {
         const map: Record<string, string> = {};

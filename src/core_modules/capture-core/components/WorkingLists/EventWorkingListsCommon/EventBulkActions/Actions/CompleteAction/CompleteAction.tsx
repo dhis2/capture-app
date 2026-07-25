@@ -4,8 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { Widget } from '../../../../../Widget';
-import { BulkActionErrorReports } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
+import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { Props } from './CompleteAction.types';
 
@@ -40,7 +39,6 @@ const CompleteActionPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
-    const [openAccordion, setOpenAccordion] = useState(false);
     const { orgUnitId } = useLocationQuery();
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
@@ -128,23 +126,12 @@ const CompleteActionPlain = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        <span className={classes.container}>
-                            {i18n.t('There was an error completing the events.')}
-
-                            <Widget
-                                open={openAccordion}
-                                onOpen={() => setOpenAccordion(true)}
-                                onClose={() => setOpenAccordion(false)}
-                                borderless
-                                header={i18n.t('Details (Advanced)')}
-                            >
-                                <BulkActionErrorReports
-                                    errorReports={validationError?.validationReport?.errorReports}
-                                    programId={programId}
-                                    orgUnitId={orgUnitId}
-                                />
-                            </Widget>
-                        </span>
+                        <BulkActionErrorDetails
+                            introText={i18n.t('There was an error completing the events.')}
+                            errorReports={validationError?.validationReport?.errorReports}
+                            programId={programId}
+                            orgUnitId={orgUnitId}
+                        />
                     </ModalContent>
 
                     <ModalActions>

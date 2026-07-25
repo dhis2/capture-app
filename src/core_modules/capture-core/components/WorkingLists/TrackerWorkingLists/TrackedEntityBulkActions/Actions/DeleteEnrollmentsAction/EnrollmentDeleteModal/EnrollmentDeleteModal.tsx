@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
-import { Widget } from '../../../../../../Widget';
-import { BulkActionErrorReports } from '../../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
+import { BulkActionErrorDetails } from '../../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import { useLocationQuery } from '../../../../../../../utils/routing';
 import type { PlainProps } from './EnrollmentDeleteModal.types';
 
@@ -46,7 +45,6 @@ const EnrollmentDeleteModalPlain = ({
         onUpdateList,
         setIsDeleteDialogOpen,
     });
-    const [openAccordion, setOpenAccordion] = useState(false);
     const { orgUnitId } = useLocationQuery();
 
     if (isEnrollmentsError) {
@@ -91,26 +89,15 @@ const EnrollmentDeleteModalPlain = ({
                 </ModalTitle>
 
                 <ModalContent>
-                    <div className={classes.modalContent}>
-                        <span>
-                            {i18n.t('There was an error while deleting the enrollments. Please see the details below.')}
-                        </span>
-
-                        <Widget
-                            open={openAccordion}
-                            onOpen={() => setOpenAccordion(true)}
-                            onClose={() => setOpenAccordion(false)}
-                            borderless
-                            header={i18n.t('Details (Advanced)')}
-                        >
-                            <BulkActionErrorReports
-                                errorReports={errors}
-                                programId={programId}
-                                orgUnitId={orgUnitId}
-                                enrollmentIdToTeiId={enrollmentIdToTeiId}
-                            />
-                        </Widget>
-                    </div>
+                    <BulkActionErrorDetails
+                        introText={i18n.t(
+                            'There was an error while deleting the enrollments. Please see the details below.',
+                        )}
+                        errorReports={errors}
+                        programId={programId}
+                        orgUnitId={orgUnitId}
+                        enrollmentIdToTeiId={enrollmentIdToTeiId}
+                    />
                 </ModalContent>
 
                 <ModalActions>

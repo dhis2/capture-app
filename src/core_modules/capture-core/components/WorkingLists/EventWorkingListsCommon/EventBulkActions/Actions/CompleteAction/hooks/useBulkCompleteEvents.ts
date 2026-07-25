@@ -5,6 +5,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
+import { extractValidationReport } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -104,15 +105,10 @@ export const useBulkCompleteEvents = ({
         },
     );
 
-    const validationError = useMemo(() => {
-        if (data?.validationReport?.errorReports?.length) {
-            return data;
-        }
-        if (error?.details?.validationReport?.errorReports?.length) {
-            return error.details;
-        }
-        return null;
-    }, [data, error]);
+    const validationError = useMemo(
+        () => extractValidationReport({ data, error }),
+        [data, error],
+    );
 
     const onCompleteEvents = useCallback(() => {
         if (!events) {
