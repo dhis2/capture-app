@@ -7,7 +7,7 @@ import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRela
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { useLocationQuery } from '../../../utils/routing';
-import { useStageLabel } from '../../../metaData';
+import { useProgramLabel, useStageLabel } from '../../../metaData';
 
 type Props = {
     isUserInteractionInProgress: boolean,
@@ -24,7 +24,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetai
     }));
 
     const eventLabel = useStageLabel('event') ?? i18n.t('Event');
-    const relationshipLabel = i18n.t('relationship');
+    const relationshipLabel = useProgramLabel('relationship') ?? i18n.t('relationship');
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>

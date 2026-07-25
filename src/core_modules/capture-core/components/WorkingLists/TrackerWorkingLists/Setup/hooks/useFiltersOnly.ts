@@ -9,7 +9,7 @@ export const useFiltersOnly = (
     programStageId?: string,
 ) => {
     const enrollmentLabel = useProgramLabel('enrollment', { programId: id }) ?? i18n.t('Enrollment');
-    const followUpLabel = useProgramLabel('followUp', { programId: id }) ?? i18n.t('Follow up');
+    const followUpLabel = useProgramLabel('followUp', { programId: id }) ?? i18n.t('Follow-up');
     return useMemo(() => {
         const enableUserAssignment =
             !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);

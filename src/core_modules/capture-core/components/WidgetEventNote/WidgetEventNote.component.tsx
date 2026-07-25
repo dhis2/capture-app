@@ -6,13 +6,12 @@ import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useStageLabel } from '../../metaData';
+import { useProgramLabel, useStageLabel } from '../../metaData';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
     const event = useStageLabel('event') ?? i18n.t('Event');
-    const notesTitle = i18n.t('Notes');
-    const notesLower = i18n.t('notes');
+    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
     const {
@@ -29,7 +28,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
         <div data-test="event-note-widget">
             <WidgetNote
                 title={i18n.t('{{notes}} about this {{event}}', {
-                    notes: notesTitle,
+                    notes: notesLabel,
                     event,
                     interpolation: { escapeValue: false },
                 })}
@@ -39,7 +38,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
                 })}
                 emptyNoteMessage={i18n.t('This {{event}} doesn\'t have any {{notes}}', {
                     event,
-                    notes: notesLower,
+                    notes: notesLabel,
                     interpolation: { escapeValue: false },
                 })}
                 notes={notes}

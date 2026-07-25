@@ -38,7 +38,7 @@ const RelationshipsWidgetPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const enrollmentLabel = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
-    const relationshipsLabel = i18n.t('relationships');
+    const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('relationships');
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships, readOnly);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
 

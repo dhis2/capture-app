@@ -13,7 +13,7 @@ import {
     withBrowserBackWarning,
 } from '../../../components/DataEntry';
 
-import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
+import { type RenderFoundation, DataElement, dataElementTypes, useProgramLabel } from '../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../converters';
 
 import {
@@ -290,7 +290,7 @@ type DataEntrySection = {
     name?: string;
 };
 
-const dataEntrySectionDefinitions = {
+const getDataEntrySectionDefinitions = ({ notesLabel }: { notesLabel: string }) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -301,13 +301,13 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
+        name: notesLabel,
     },
     [AOCsectionKey]: {
         placement: placements.TOP,
         name: '',
     },
-};
+});
 
 class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
@@ -319,7 +319,9 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = getDataEntrySectionDefinitions({
+            notesLabel: (props as any).notesLabel,
+        });
     }
 
     render() {
@@ -342,4 +344,9 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     }
 }
 
-export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain as any);
+const StyledViewEventDataEntry: any = withStyles(getStyles)(ViewEventDataEntryPlain as any);
+
+export const ViewEventDataEntryComponent = (props: any) => {
+    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
+    return <StyledViewEventDataEntry {...props} notesLabel={notesLabel} />;
+};

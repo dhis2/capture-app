@@ -4,7 +4,7 @@ import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes } from '../../../metaData';
+import { scopeTypes, useProgramLabel } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
@@ -17,18 +17,24 @@ import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCh
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
-const translatedTextWithStylesForTei = (
-    trackedEntityName: string,
-    orgUnitName?: string,
-    hideProgramSelectionMessage?: boolean,
-) =>
-    (<>
+const TranslatedTextWithStylesForTei = ({
+    trackedEntityName,
+    orgUnitName,
+    hideProgramSelectionMessage,
+}: {
+    trackedEntityName: string;
+    orgUnitName?: string;
+    hideProgramSelectionMessage?: boolean;
+}) => {
+    const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
+    return (<>
         {i18n.t('Saving a {{trackedEntityName}}', {
             trackedEntityName, interpolation: { escapeValue: false } })
-        } <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
+        } <b>{i18n.t('without')}</b> {enrollment}
         {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
         {!hideProgramSelectionMessage && i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
+};
 
 const styles: Readonly<any> = {
     actions: {
@@ -110,9 +116,11 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       </div>
                       <InfoIconText>
-                          {translatedTextWithStylesForTei(
-                              trackedEntityName.toLowerCase(), orgUnitName, hideProgramSelectionMessage,
-                          )}
+                          <TranslatedTextWithStylesForTei
+                              trackedEntityName={trackedEntityName.toLowerCase()}
+                              orgUnitName={orgUnitName}
+                              hideProgramSelectionMessage={hideProgramSelectionMessage}
+                          />
                       </InfoIconText>
 
                       <DiscardDialog

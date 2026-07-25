@@ -8,14 +8,13 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { useProgramLabel, useStageLabel } from '../../../../../metaData';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
-
-const headerText = i18n.t('Relationships');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -35,7 +34,7 @@ const getStyles = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type Props = PlainProps & WithStyles<typeof getStyles> & { headerText: string, emptyMessage: string };
 
 class RelationshipsSectionPlain extends React.Component<Props> {
     handleOpenAddRelationship = () => {
@@ -47,7 +46,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     renderHeader = () => {
-        const { classes, relationships, ready } = this.props;
+        const { classes, relationships, ready, headerText } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
@@ -94,7 +93,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This event doesn't have any relationships")}
+                        {this.props.emptyMessage}
                     </div>
                 )}
                 {React.createElement(LoadingRelationships as any, {
@@ -113,4 +112,15 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const RelationshipsSectionComponent = withStyles(getStyles)(RelationshipsSectionPlain) as ComponentType<PlainProps>;
+const StyledRelationshipsSection: any = withStyles(getStyles)(RelationshipsSectionPlain);
+
+export const RelationshipsSectionComponent: ComponentType<PlainProps> = (props: PlainProps) => {
+    const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('Relationships');
+    const event = useStageLabel('event') ?? i18n.t('Event');
+    const emptyMessage = i18n.t("This {{event}} doesn't have any {{relationships}}", {
+        event,
+        relationships: relationshipsLabel,
+        interpolation: { escapeValue: false },
+    });
+    return <StyledRelationshipsSection {...props} headerText={relationshipsLabel} emptyMessage={emptyMessage} />;
+};

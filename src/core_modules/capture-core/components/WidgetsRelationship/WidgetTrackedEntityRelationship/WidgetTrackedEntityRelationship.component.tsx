@@ -6,6 +6,7 @@ import { RelationshipSearchEntities, useRelationships } from '../common/useRelat
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
+import { useProgramLabel } from '../../../metaData';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -40,7 +41,7 @@ export const WidgetTrackedEntityRelationship = ({
     const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
         [isLoadingRelationships, isLoadingTEType],
     );
-    const relationshipsLabel = i18n.t('relationships');
+    const relationshipsLabel = useProgramLabel('relationship', { plural: true, programId }) ?? i18n.t('relationships');
 
     if (isError) {
         return (

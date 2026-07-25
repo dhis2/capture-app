@@ -8,7 +8,7 @@ import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import { useStageLabel } from '../../../metaData';
+import { useProgramLabel, useStageLabel } from '../../../metaData';
 import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
@@ -141,6 +141,7 @@ const LinkExistingResponse = ({
     selectedAction,
     updateSelectedAction,
     programStage,
+    eventLabel,
     eventsLabel,
 }) => {
     const { hidden, disabled, disabledMessage } =
@@ -172,7 +173,10 @@ const LinkExistingResponse = ({
                 name={`related-stage-action-${relatedStageActions.LINK_EXISTING_RESPONSE}`}
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
+                label={i18n.t('Link to an existing {{event}}', {
+                    event: eventLabel,
+                    interpolation: { escapeValue: false },
+                })}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"
@@ -200,7 +204,7 @@ const LinkButton = withStyles(styles)(({
 const useRelatedStagesLabels = (stageId?: string, programId?: string) => ({
     eventLabel: useStageLabel('event', { stageId, programId }) ?? i18n.t('Event'),
     eventsLabel: useStageLabel('event', { stageId, programId, plural: true }) ?? i18n.t('Events'),
-    relationshipsLabel: i18n.t('relationships'),
+    relationshipsLabel: useProgramLabel('relationship', { plural: true, programId }) ?? i18n.t('relationships'),
 });
 
 const RelatedStagesActionsPlain = ({
@@ -268,6 +272,7 @@ const RelatedStagesActionsPlain = ({
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
+                            eventLabel={eventLabel}
                             eventsLabel={eventsLabel}
                         />
                     </>

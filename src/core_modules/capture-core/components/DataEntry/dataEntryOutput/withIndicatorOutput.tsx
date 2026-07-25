@@ -6,6 +6,7 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
+import { useStageLabel } from '../../../metaData';
 
 type Props = {
     dataEntryKey?: string;
@@ -14,6 +15,7 @@ type Props = {
 
 const IndicatorOutputWrapper = (props: Props) => {
     const { dataEntryKey, programRules } = props;
+    const event = useStageLabel('event') ?? i18n.t('event');
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 
@@ -24,7 +26,10 @@ const IndicatorOutputWrapper = (props: Props) => {
     return (
         <WidgetIndicator
             dataEntryKey={dataEntryKey}
-            indicatorEmptyText={i18n.t('No indicator output for this event yet')}
+            indicatorEmptyText={i18n.t('No indicator output for this {{event}} yet', {
+                event,
+                interpolation: { escapeValue: false },
+            })}
         />
     );
 };

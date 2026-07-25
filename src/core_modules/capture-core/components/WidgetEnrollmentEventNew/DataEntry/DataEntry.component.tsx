@@ -13,7 +13,7 @@ import {
     getOrgUnitValidatorContainers,
     getNoteValidatorContainers,
 } from './fieldValidators';
-import { type RenderFoundation, type ProgramStage } from '../../../metaData';
+import { type RenderFoundation, type ProgramStage, useProgramLabel } from '../../../metaData';
 import {
     placements,
     withCleanUp,
@@ -308,7 +308,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Notes'),
+            label: props.notesLabel ?? i18n.t('Notes'),
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
@@ -441,6 +441,8 @@ type Props = {
     placementDomNodeForSavingText?: HTMLElement;
     programName: string;
     orgUnitFieldValue?: OrgUnit | null;
+    notesLabel: string;
+    relationshipsLabel: string;
 };
 
 type DataEntrySection = {
@@ -448,7 +450,13 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const getDataEntrySectionDefinitions = ({
+    notesLabel,
+    relationshipsLabel,
+}: {
+    notesLabel: string,
+    relationshipsLabel: string,
+}) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -459,11 +467,11 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
+        name: notesLabel,
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Relationships'),
+        name: relationshipsLabel,
     },
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
@@ -473,7 +481,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.TOP,
         name: '',
     },
-};
+});
 class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     relationshipsInstance?: HTMLDivElement | null;
     dataEntrySections: { [key: string]: DataEntrySection };
@@ -484,7 +492,10 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = getDataEntrySectionDefinitions({
+            notesLabel: props.notesLabel,
+            relationshipsLabel: props.relationshipsLabel,
+        });
     }
 
     componentDidMount() {
@@ -549,5 +560,12 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 }
 
 
-export const DataEntryComponent =
+const StyledDataEntry: ComponentType<any> =
     withStyles(getStyles)(withTheme()(DataEntryPlain));
+
+export const DataEntryComponent = (props: any) => {
+    const notesLabel = useProgramLabel('note', { plural: true, programId: props.programId }) ?? i18n.t('Notes');
+    const relationshipsLabel =
+        useProgramLabel('relationship', { plural: true, programId: props.programId }) ?? i18n.t('Relationships');
+    return <StyledDataEntry {...props} notesLabel={notesLabel} relationshipsLabel={relationshipsLabel} />;
+};

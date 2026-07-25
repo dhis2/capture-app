@@ -70,7 +70,8 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 type: dataElementTypes.DATE,
                 header: occurredAtLabel,
                 disabled: !programStageId,
-                tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
+                tooltipContent: i18n.t('Choose a {{programStage}} to filter by {{label}}', {
+                    programStage: programStageLabel,
                     label: occurredAtLabel,
                     interpolation: { escapeValue: false },
                 }),
@@ -100,7 +101,8 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                     { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
                 ],
                 disabled: !programStageId,
-                tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
+                tooltipContent: i18n.t('Choose a {{programStage}} to filter by {{label}}', {
+                    programStage: programStageLabel,
                     label: ADDITIONAL_FILTERS_LABELS.status,
                     interpolation: { escapeValue: false },
                 }),
@@ -115,7 +117,8 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         type: dataElementTypes.DATE,
                         header: scheduledAtLabel,
                         disabled: !programStageId,
-                        tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
+                        tooltipContent: i18n.t('Choose a {{programStage}} to filter by {{label}}', {
+                            programStage: programStageLabel,
                             label: scheduledAtLabel,
                             interpolation: { escapeValue: false },
                         }),

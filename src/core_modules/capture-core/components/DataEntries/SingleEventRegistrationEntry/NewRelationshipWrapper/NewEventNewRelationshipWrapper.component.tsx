@@ -5,6 +5,7 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
+import { useProgramLabel, useStageLabel } from '../../../../metaData';
 
 const getStyles = (theme: any) => ({
     headerContainer: {
@@ -79,32 +80,39 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
         this.setState({ discardDialogOpen: false });
     }
 
-    renderHeader = () => (
-        <div
-            className={this.props.classes.headerContainer}
-        >
-            <div className={this.props.classes.header} >
-                {i18n.t('New event relationship')}
-            </div>
-        </div>
-    );
-
     render() {
         const { classes, onCancel, ...passOnProps } = this.props;
+        const event = (this.props as any).eventLabel ?? i18n.t('event');
+        const relationship = (this.props as any).relationshipLabel ?? i18n.t('relationship');
+        const headerText = i18n.t('New {{event}} {{relationship}}', {
+            event,
+            relationship,
+            interpolation: { escapeValue: false },
+        });
         return (
             <div>
                 <div className={classes.backToEventContainer}>
-                    <span>{i18n.t('Adding relationship to event.')}</span>
+                    <span>
+                        {i18n.t('Adding {{relationship}} to {{event}}.', {
+                            event,
+                            relationship,
+                            interpolation: { escapeValue: false },
+                        })}
+                    </span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {i18n.t('Go back to event without saving relationship')}
+                        {i18n.t('Go back to {{event}} without saving {{relationship}}', {
+                            event,
+                            relationship,
+                            interpolation: { escapeValue: false },
+                        })}
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={i18n.t('New event relationship')}
+                        header={headerText}
                         onGetUnsavedAttributeValues={this.onGetUnsavedAttributeValues}
                         onCancel={onCancel}
                         {...passOnProps}
@@ -112,7 +120,10 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
                 </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
-                    text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
+                    text={i18n.t('Leaving this page will discard the selections you made for a new {{relationship}}', {
+                        relationship,
+                        interpolation: { escapeValue: false },
+                    })}
                     destructiveText={i18n.t('Yes, discard changes')}
                     cancelText={i18n.t('No, cancel')}
                     onDestroy={() => this.props.onCancel('relationship')}
@@ -124,4 +135,10 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
     }
 }
 
-export const NewRelationshipWrapperComponent = withStyles(getStyles)(NewEventNewRelationshipWrapper);
+const StyledNewRelationshipWrapper: any = withStyles(getStyles)(NewEventNewRelationshipWrapper);
+
+export const NewRelationshipWrapperComponent = (props: any) => {
+    const eventLabel = useStageLabel('event') ?? i18n.t('event');
+    const relationshipLabel = useProgramLabel('relationship') ?? i18n.t('relationship');
+    return <StyledNewRelationshipWrapper {...props} eventLabel={eventLabel} relationshipLabel={relationshipLabel} />;
+};

@@ -13,7 +13,7 @@ import { withDataEntryRelationshipsHandler } from
     '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from './fieldValidators';
-import { type RenderFoundation } from '../../../../../metaData';
+import { type RenderFoundation, useProgramLabel } from '../../../../../metaData';
 import { withMainButton } from './withMainButton';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
@@ -328,7 +328,9 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: props.eventLabel
+                ? i18n.t('Complete {{event}}', { event: props.eventLabel, interpolation: { escapeValue: false } })
+                : i18n.t('Complete event'),
             id: 'complete',
         }),
         getPropName: () => 'complete',
@@ -402,7 +404,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Notes'),
+            label: props.notesLabel ?? i18n.t('Notes'),
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
@@ -547,7 +549,13 @@ type DataEntrySection = {
     name?: string,
 };
 
-const dataEntrySectionDefinitions = {
+const getDataEntrySectionDefinitions = ({
+    notesLabel,
+    relationshipsLabel,
+}: {
+    notesLabel: string,
+    relationshipsLabel: string,
+}) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -561,17 +569,17 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
+        name: notesLabel,
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Relationships'),
+        name: relationshipsLabel,
     },
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
-};
+});
 
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any };
@@ -581,7 +589,10 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
         this.fieldOptions = {
             theme: props.theme,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = getDataEntrySectionDefinitions({
+            notesLabel: (props as any).notesLabel,
+            relationshipsLabel: (props as any).relationshipsLabel,
+        });
     }
 
     componentDidMount() {
@@ -694,4 +705,18 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
 }
 
 
-export const DataEntryComponent = withStyles(getStyles)(withTheme()(NewEventDataEntry));
+const StyledDataEntry: any = withStyles(getStyles)(withTheme()(NewEventDataEntry));
+
+export const DataEntryComponent = (props: any) => {
+    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
+    const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('Relationships');
+    const eventLabel = useProgramLabel('event') ?? i18n.t('event');
+    return (
+        <StyledDataEntry
+            {...props}
+            notesLabel={notesLabel}
+            relationshipsLabel={relationshipsLabel}
+            eventLabel={eventLabel}
+        />
+    );
+};

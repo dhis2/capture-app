@@ -25,8 +25,6 @@ const styles: Readonly<any> = ({ typography }: any) => ({
 });
 
 const noticeBoxTitle = i18n.t('This program is protected');
-const reasonHeader = i18n.t('Reason to check for enrollments');
-const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollments in this protected program');
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
@@ -36,6 +34,14 @@ const WidgetBreakingTheGlassPlain = ({
     classes,
 }: Props) => {
     const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('Enrollments');
+    const reasonHeader = i18n.t('Reason to check for {{enrollments}}', {
+        enrollments,
+        interpolation: { escapeValue: false },
+    });
+    const reasonPlaceholder = i18n.t('Describe the reason you are checking for {{enrollments}} in this protected program', {
+        enrollments,
+        interpolation: { escapeValue: false },
+    });
     const [reason, setReason] = useState('');
     const reasonChangeHandler = useCallback(({ value }: any) => {
         setReason(value);

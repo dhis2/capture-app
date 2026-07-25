@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
+import { useProgramLabel, useStageLabel } from '../../../../../../metaData';
 import type { PlainProps } from './DeleteTeiAction.types';
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
@@ -16,6 +17,8 @@ export const DeleteTeiAction = ({
     onUpdateList,
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('enrollments');
+    const events = useStageLabel('event', { plural: true }) ?? i18n.t('events');
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
     const { deleteTeis, isLoading } = useCascadeDeleteTei({
         selectedRows,
@@ -33,8 +36,10 @@ export const DeleteTeiAction = ({
                 small
                 onClick={() => setIsDeleteDialogOpen(true)}
             >
-                {i18n.t('Delete {{ trackedEntityName }} with all enrollments', {
+                {i18n.t('Delete {{ trackedEntityName }} with all {{enrollments}}', {
                     trackedEntityName: trackedEntityName.toLowerCase(),
+                    enrollments,
+                    interpolation: { escapeValue: false },
                 })}
             </Button>
 
@@ -53,7 +58,11 @@ export const DeleteTeiAction = ({
                     </ModalTitle>
                     <ModalContent>
                         <span>
-                            {i18n.t('Deleting records will also delete any associated enrollments and events.')}
+                            {i18n.t('Deleting records will also delete any associated {{enrollments}} and {{events}}.', {
+                                enrollments,
+                                events,
+                                interpolation: { escapeValue: false },
+                            })}
                             {' '}
                             {i18n.t('This cannot be undone.')}
                             {' '}
