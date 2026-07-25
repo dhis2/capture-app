@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-25T18:08:03.383Z\n"
-"PO-Revision-Date: 2026-07-25T18:08:03.383Z\n"
+"POT-Creation-Date: 2026-07-25T18:22:36.885Z\n"
+"PO-Revision-Date: 2026-07-25T18:22:36.885Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -232,6 +232,9 @@ msgstr "Saving to {{programName}} in {{orgUnitName}}"
 msgid "Saving to {{programName}}"
 msgstr "Saving to {{programName}}"
 
+msgid "note"
+msgstr "note"
+
 msgid "Relationships"
 msgstr "Relationships"
 
@@ -258,11 +261,14 @@ msgstr "Active"
 msgid "Completed"
 msgstr "Completed"
 
-msgid "Please add or cancel the note before saving the event"
-msgstr "Please add or cancel the note before saving the event"
+msgid "Please add or cancel the {{note}} before saving the {{event}}"
+msgstr "Please add or cancel the {{note}} before saving the {{event}}"
 
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
+msgid "organisation unit"
+msgstr "organisation unit"
+
+msgid "Please provide a valid {{orgUnit}}"
+msgstr "Please provide a valid {{orgUnit}}"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -721,9 +727,6 @@ msgstr "Program doesn't exist"
 
 msgid "Selected program is invalid for selected {{orgUnit}}"
 msgstr "Selected program is invalid for selected {{orgUnit}}"
-
-msgid "note"
-msgstr "note"
 
 msgid "Add {{note}}"
 msgstr "Add {{note}}"
@@ -1558,6 +1561,9 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "Delete {{event}}"
 msgstr "Delete {{event}}"
 
@@ -2102,9 +2108,6 @@ msgstr "Are you sure you want to delete the selected {{events}}?"
 
 msgid "Registration Date"
 msgstr "Registration Date"
-
-msgid "organisation unit"
-msgstr "organisation unit"
 
 msgid "Owner {{orgUnit}}"
 msgstr "Owner {{orgUnit}}"

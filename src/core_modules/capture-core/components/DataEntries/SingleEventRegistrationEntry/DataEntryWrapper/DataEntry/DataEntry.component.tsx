@@ -217,7 +217,9 @@ const buildOrgUnitSettingsFn = () => {
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers({
+            orgUnit: props.orgUnitLabel,
+        }),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -410,7 +412,10 @@ const buildNotesSettingsFn = () => {
             dataEntryId: props.id,
         }),
         getPropName: () => 'note',
-        getValidatorContainers: () => getNoteValidatorContainers(),
+        getValidatorContainers: (props: any) => getNoteValidatorContainers({
+            note: props.noteLabel,
+            event: props.eventLabel,
+        }),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.NOTES,
@@ -713,6 +718,7 @@ const StyledDataEntry: ComponentType<{ [key: string]: unknown }> =
 
 export const DataEntryComponent = (props: ExternalProps) => {
     const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
+    const noteLabel = useProgramLabel('note') ?? i18n.t('note');
     const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('Relationships');
     const eventLabel = useProgramLabel('event') ?? i18n.t('event');
     const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
@@ -720,6 +726,7 @@ export const DataEntryComponent = (props: ExternalProps) => {
         <StyledDataEntry
             {...props}
             notesLabel={notesLabel}
+            noteLabel={noteLabel}
             relationshipsLabel={relationshipsLabel}
             eventLabel={eventLabel}
             orgUnitLabel={orgUnitLabel}

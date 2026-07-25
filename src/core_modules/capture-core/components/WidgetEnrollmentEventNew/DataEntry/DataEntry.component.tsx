@@ -13,7 +13,7 @@ import {
     getOrgUnitValidatorContainers,
     getNoteValidatorContainers,
 } from './fieldValidators';
-import { type RenderFoundation, type ProgramStage, useProgramLabel } from '../../../metaData';
+import { type RenderFoundation, type ProgramStage, useProgramLabel, useStageLabel } from '../../../metaData';
 import {
     placements,
     withCleanUp,
@@ -202,7 +202,9 @@ const buildOrgUnitSettingsFn = () => {
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers({
+            orgUnit: props.orgUnitLabel,
+        }),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -314,7 +316,10 @@ const buildNotesSettingsFn = () => {
             dataEntryId: props.id,
         }),
         getPropName: () => 'note',
-        getValidatorContainers: () => getNoteValidatorContainers(),
+        getValidatorContainers: (props: any) => getNoteValidatorContainers({
+            note: props.noteLabel,
+            event: props.eventLabel,
+        }),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.NOTES,
@@ -568,15 +573,19 @@ const StyledDataEntry: ComponentType<any> =
 
 export const DataEntryComponent = (props: ExternalProps) => {
     const notesLabel = useProgramLabel('note', { plural: true, programId: props.programId }) ?? i18n.t('Notes');
+    const noteLabel = useProgramLabel('note', { programId: props.programId }) ?? i18n.t('note');
     const relationshipsLabel =
         useProgramLabel('relationship', { plural: true, programId: props.programId }) ?? i18n.t('Relationships');
     const orgUnitLabel = useProgramLabel('orgUnit', { programId: props.programId }) ?? i18n.t('Organisation unit');
+    const eventLabel = useStageLabel('event', { programId: props.programId }) ?? i18n.t('event');
     return (
         <StyledDataEntry
             {...props}
             notesLabel={notesLabel}
+            noteLabel={noteLabel}
             relationshipsLabel={relationshipsLabel}
             orgUnitLabel={orgUnitLabel}
+            eventLabel={eventLabel}
         />
     );
 };
