@@ -84,12 +84,13 @@ export class TrackedEntityTypeFactory {
         const trackedEntityType = new TrackedEntityType((o) => {
             o.id = cachedType.id;
             o.access = cachedType.access;
-            o.name = this._getTranslation(
+            const name = this._getTranslation(
                 cachedType.translations, TrackedEntityTypeFactory.translationPropertyNames.NAME)
                 || cachedType.displayName;
+            o.name = name;
             o.customLabels = extractCustomLabels({
                 ...cachedType,
-                displayTrackedEntityTypeLabel: cachedType.displayName,
+                displayTrackedEntityTypeLabel: name,
             });
         });
 
