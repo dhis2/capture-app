@@ -18,6 +18,7 @@ type Props = {
     programId?: string;
     orgUnitId?: string;
     enrollmentIdToTeiId?: Record<string, string>;
+    knownEventUids?: Set<string>;
 };
 
 const styles: Readonly<any> = {
@@ -47,6 +48,7 @@ const BulkActionErrorDetailsPlain = ({
     programId,
     orgUnitId,
     enrollmentIdToTeiId,
+    knownEventUids,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [openAccordion, setOpenAccordion] = useState(false);
@@ -70,6 +72,7 @@ const BulkActionErrorDetailsPlain = ({
                                 programId,
                                 orgUnitId,
                                 enrollmentIdToTeiId,
+                                knownEventUids,
                             });
                             return (
                                 <li

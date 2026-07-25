@@ -61,6 +61,7 @@ const CompleteActionPlain = ({
         completeEnrollments,
         enrollmentCounts,
         enrollmentIdToTeiId,
+        knownEventUids,
         isLoading,
         validationError,
         isCompleting,
@@ -101,6 +102,7 @@ const CompleteActionPlain = ({
                     programId={programId}
                     orgUnitId={orgUnitId}
                     enrollmentIdToTeiId={enrollmentIdToTeiId}
+                    knownEventUids={knownEventUids}
                 />
             );
         }

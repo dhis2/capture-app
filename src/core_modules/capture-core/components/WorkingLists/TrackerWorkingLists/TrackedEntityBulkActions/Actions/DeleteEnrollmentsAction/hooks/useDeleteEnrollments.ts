@@ -86,10 +86,11 @@ export const useDeleteEnrollments = ({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                // TEMP SABOTAGE: replace each enrollment with a valid-format but nonexistent UID so tracker returns per-enrollment errorReports
+                // TEMP SABOTAGE: assign each enrollment a unique nonexistent UID so tracker returns
+                // a distinct errorReport per row (no link, since these aren't in enrollmentIdToTeiId).
                 enrollments: enrollments
                     .filter(({ status }) => status && statusToDelete[status.toLowerCase()])
-                    .map(() => ({ enrollment: 'zzzzzzzzzzz' })),
+                    .map((_, i) => ({ enrollment: `zzzzzzzzzz${(i % 36).toString(36)}` })),
             },
         }),
         {

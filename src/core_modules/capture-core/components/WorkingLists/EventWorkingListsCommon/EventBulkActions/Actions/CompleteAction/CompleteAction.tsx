@@ -1,4 +1,4 @@
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
@@ -40,6 +40,7 @@ const CompleteActionPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const { orgUnitId } = useLocationQuery();
+    const knownEventUids = useMemo(() => new Set(Object.keys(selectedRows)), [selectedRows]);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {
@@ -131,6 +132,7 @@ const CompleteActionPlain = ({
                             errorReports={validationError?.validationReport?.errorReports}
                             programId={programId}
                             orgUnitId={orgUnitId}
+                            knownEventUids={knownEventUids}
                         />
                     </ModalContent>
 

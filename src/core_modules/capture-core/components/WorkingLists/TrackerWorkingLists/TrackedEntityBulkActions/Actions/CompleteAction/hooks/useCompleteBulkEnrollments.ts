@@ -256,6 +256,19 @@ export const useCompleteBulkEnrollments = ({
         }, {});
     }, [trackedEntities]);
 
+    const knownEventUids = useMemo(() => {
+        const set = new Set<string>();
+        [
+            ...(trackedEntities?.activeEnrollments ?? []),
+            ...(trackedEntities?.completedEnrollments ?? []),
+        ].forEach((enrollment: any) => {
+            (enrollment?.events ?? []).forEach((event: any) => {
+                if (event?.event) set.add(event.event);
+            });
+        });
+        return set;
+    }, [trackedEntities]);
+
     useEffect(() => {
         if (!modalIsOpen) {
             resetCompleteEnrollments();
@@ -264,10 +277,11 @@ export const useCompleteBulkEnrollments = ({
 
     const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
         const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
-        // TEMP SABOTAGE: point program at a valid-format but nonexistent UID so validation returns per-enrollment errorReports
+        // TEMP SABOTAGE: point orgUnit at a nonexistent UID so each enrollment fails individually
+        // while keeping the real enrollment UID in the errorReport (linkable in the modal).
         const sabotagedEnrollments = enrollments.map(enrollment => ({
             ...enrollment,
-            program: 'zzzzzzzzzzz',
+            orgUnit: 'zzzzzzzzzzz',
         }));
         onValidateEnrollments({ completeEvents, enrollments: sabotagedEnrollments } as any);
     };
@@ -276,6 +290,7 @@ export const useCompleteBulkEnrollments = ({
         completeEnrollments: onStartCompleteEnrollments,
         enrollmentCounts,
         enrollmentIdToTeiId,
+        knownEventUids,
         isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,

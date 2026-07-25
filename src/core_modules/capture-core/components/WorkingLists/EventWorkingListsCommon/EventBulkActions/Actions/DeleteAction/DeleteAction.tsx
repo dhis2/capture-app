@@ -31,6 +31,7 @@ export const DeleteAction = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dataEngine = useDataEngine();
     const { orgUnitId } = useLocationQuery();
+    const knownEventUids = useMemo(() => new Set(Object.keys(selectedRows)), [selectedRows]);
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -49,10 +50,11 @@ export const DeleteAction = ({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                // TEMP SABOTAGE: replace each event with a valid-format but nonexistent UID so tracker returns per-event errorReports
+                // TEMP SABOTAGE: assign each event a unique nonexistent UID so tracker returns
+                // a distinct errorReport per row (no link, since these UIDs aren't in knownEventUids).
                 events: Object
                     .keys(selectedRows)
-                    .map(() => ({ event: 'zzzzzzzzzzz' })),
+                    .map((_, i) => ({ event: `zzzzzzzzzz${(i % 36).toString(36)}` })),
             },
         }),
         {
@@ -142,10 +144,13 @@ export const DeleteAction = ({
 
                     <ModalContent>
                         <BulkActionErrorDetails
-                            introText={i18n.t('There was an error while deleting the events. Please see the details below.')}
+                            introText={i18n.t(
+                                'There was an error while deleting the events. Please see the details below.',
+                            )}
                             errorReports={validationError?.validationReport?.errorReports}
                             programId={programId}
                             orgUnitId={orgUnitId}
+                            knownEventUids={knownEventUids}
                         />
                     </ModalContent>
 

@@ -13,11 +13,13 @@ export const getRecordUrlFromErrorReport = ({
     programId,
     orgUnitId,
     enrollmentIdToTeiId,
+    knownEventUids,
 }: {
     errorReport: ErrorReport;
     programId?: string;
     orgUnitId?: string;
     enrollmentIdToTeiId?: Record<string, string>;
+    knownEventUids?: Set<string>;
 }): string | null => {
     if (!errorReport.uid || !programId || !orgUnitId) {
         return null;
@@ -34,6 +36,12 @@ export const getRecordUrlFromErrorReport = ({
             orgUnitId,
             enrollmentId: errorReport.uid,
         })}`;
+    }
+
+    // Only link an event UID we can vouch for — the error may reference a UID
+    // the server rejected as nonexistent, and linking there is a dead end.
+    if (!knownEventUids?.has(errorReport.uid)) {
+        return null;
     }
 
     try {
