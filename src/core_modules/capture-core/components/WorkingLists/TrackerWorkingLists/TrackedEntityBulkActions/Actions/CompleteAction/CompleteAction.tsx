@@ -15,7 +15,7 @@ import {
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
-import { getRecordUrlFromErrorReport } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import { BulkActionErrorReports } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { PlainProps } from './CompleteAction.types';
 
@@ -32,16 +32,6 @@ const styles: Readonly<any> = {
         display: 'flex',
         justifyContent: 'center',
         margin: '20px 0',
-    },
-    errorContainer: {
-        padding: '0px 20px',
-    },
-    errorItem: {
-        marginBottom: '8px',
-    },
-    errorUidHeader: {
-        fontWeight: 'bold',
-        fontFamily: 'monospace',
     },
 };
 
@@ -119,41 +109,12 @@ const CompleteActionPlain = ({
                         borderless
                         header={i18n.t('Details (Advanced)')}
                     >
-                        <span className={classes.errorContainer}>
-                            <ul>
-                                {errors ? errors.map((errorReport) => {
-                                    const recordUrl = getRecordUrlFromErrorReport({
-                                        errorReport,
-                                        programId,
-                                        orgUnitId,
-                                        enrollmentIdToTeiId,
-                                    });
-                                    return (
-                                        <li
-                                            key={`${errorReport.uid}-${errorReport.errorCode}`}
-                                            className={classes.errorItem}
-                                        >
-                                            <div className={classes.errorUidHeader}>
-                                                {recordUrl ? (
-                                                    <a
-                                                        href={recordUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
-                                                        {errorReport.uid}
-                                                    </a>
-                                                ) : errorReport.uid}
-                                            </div>
-                                            <div>{errorReport?.message}</div>
-                                        </li>
-                                    );
-                                }) : (
-                                    <li>
-                                        {i18n.t('An unknown error occurred.')}
-                                    </li>
-                                )}
-                            </ul>
-                        </span>
+                        <BulkActionErrorReports
+                            errorReports={errors}
+                            programId={programId}
+                            orgUnitId={orgUnitId}
+                            enrollmentIdToTeiId={enrollmentIdToTeiId}
+                        />
                     </Widget>
                 </div>
             );

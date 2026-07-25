@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
+import { Widget } from '../../../../../../Widget';
+import { BulkActionErrorReports } from '../../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
+import { useLocationQuery } from '../../../../../../../utils/routing';
 import type { PlainProps } from './EnrollmentDeleteModal.types';
 
 const styles: Readonly<any> = {
@@ -35,12 +38,16 @@ const EnrollmentDeleteModalPlain = ({
         updateStatusToDelete,
         numberOfEnrollmentsToDelete,
         isEnrollmentsError,
+        validationError,
+        enrollmentIdToTeiId,
     } = useDeleteEnrollments({
         selectedRows,
         programId,
         onUpdateList,
         setIsDeleteDialogOpen,
     });
+    const [openAccordion, setOpenAccordion] = useState(false);
+    const { orgUnitId } = useLocationQuery();
 
     if (isEnrollmentsError) {
         return (
@@ -65,6 +72,54 @@ const EnrollmentDeleteModalPlain = ({
                             onClick={() => setIsDeleteDialogOpen(false)}
                         >
                             {i18n.t('Cancel')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </Modal>
+        );
+    }
+
+    if (validationError) {
+        const errors = validationError?.validationReport?.errorReports;
+        return (
+            <Modal
+                onClose={() => setIsDeleteDialogOpen(false)}
+                dataTest={'bulk-delete-enrollments-dialog'}
+            >
+                <ModalTitle>
+                    {i18n.t('Error deleting enrollments')}
+                </ModalTitle>
+
+                <ModalContent>
+                    <div className={classes.modalContent}>
+                        <span>
+                            {i18n.t('There was an error while deleting the enrollments. Please see the details below.')}
+                        </span>
+
+                        <Widget
+                            open={openAccordion}
+                            onOpen={() => setOpenAccordion(true)}
+                            onClose={() => setOpenAccordion(false)}
+                            borderless
+                            header={i18n.t('Details (Advanced)')}
+                        >
+                            <BulkActionErrorReports
+                                errorReports={errors}
+                                programId={programId}
+                                orgUnitId={orgUnitId}
+                                enrollmentIdToTeiId={enrollmentIdToTeiId}
+                            />
+                        </Widget>
+                    </div>
+                </ModalContent>
+
+                <ModalActions>
+                    <ButtonStrip>
+                        <Button
+                            secondary
+                            onClick={() => setIsDeleteDialogOpen(false)}
+                        >
+                            {i18n.t('Close')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>

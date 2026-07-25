@@ -3,4 +3,5 @@ export type Props = {
     stageDataWriteAccess?: boolean;
     onUpdateList: () => void;
     bulkDataEntryIsActive?: boolean;
+    programId?: string;
 };

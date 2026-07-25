@@ -68,10 +68,10 @@ export const useBulkCompleteEvents = ({
     const {
         mutate: completeEvents,
         isLoading: isCompletingEvents,
-        data: validationError,
+        data,
         error,
         reset: resetCompleteEvents,
-    } = useMutation<any, unknown, { payload: any }>(
+    } = useMutation<any, any, { payload: any }>(
         ({ payload }: { payload: any }) => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
             type: 'create',
@@ -80,8 +80,10 @@ export const useBulkCompleteEvents = ({
             },
         }),
         {
-            onError: () => {
-                showAlert({ message: i18n.t('An error occurred while completing events') });
+            onError: (serverResponse) => {
+                if (!serverResponse?.details?.validationReport?.errorReports?.length) {
+                    showAlert({ message: i18n.t('An error occurred while completing events') });
+                }
             },
             onSuccess: (response, { payload }: any) => {
                 const errorReports = response?.validationReport?.errorReports;
@@ -102,6 +104,16 @@ export const useBulkCompleteEvents = ({
         },
     );
 
+    const validationError = useMemo(() => {
+        if (data?.validationReport?.errorReports?.length) {
+            return data;
+        }
+        if (error?.details?.validationReport?.errorReports?.length) {
+            return error.details;
+        }
+        return null;
+    }, [data, error]);
+
     const onCompleteEvents = useCallback(() => {
         if (!events) {
             return;
@@ -111,6 +123,8 @@ export const useBulkCompleteEvents = ({
             ...event,
             status: 'COMPLETED',
             program: event.program || programId || event.programId,
+            // TEMP SABOTAGE: replace with a valid-format but nonexistent UID so tracker returns per-event errorReports
+            event: 'zzzzzzzzzzz',
         }));
 
         completeEvents({ payload: serverPayload });

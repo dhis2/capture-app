@@ -264,7 +264,12 @@ export const useCompleteBulkEnrollments = ({
 
     const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
         const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
-        onValidateEnrollments({ completeEvents, enrollments } as any);
+        // TEMP SABOTAGE: point program at a valid-format but nonexistent UID so validation returns per-enrollment errorReports
+        const sabotagedEnrollments = enrollments.map(enrollment => ({
+            ...enrollment,
+            program: 'zzzzzzzzzzz',
+        }));
+        onValidateEnrollments({ completeEvents, enrollments: sabotagedEnrollments } as any);
     };
 
     return {

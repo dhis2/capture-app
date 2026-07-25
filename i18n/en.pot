@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-25T11:20:21.107Z\n"
-"PO-Revision-Date: 2026-07-25T11:20:21.107Z\n"
+"POT-Creation-Date: 2026-07-25T12:02:47.298Z\n"
+"PO-Revision-Date: 2026-07-25T12:02:47.298Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1983,9 +1983,6 @@ msgstr "There was an error completing the events."
 msgid "Details (Advanced)"
 msgstr "Details (Advanced)"
 
-msgid "An unknown error occurred."
-msgstr "An unknown error occurred."
-
 msgid "An error occurred while completing events"
 msgstr "An error occurred while completing events"
 
@@ -2003,6 +2000,12 @@ msgstr "This cannot be undone."
 
 msgid "Are you sure you want to delete the selected events?"
 msgstr "Are you sure you want to delete the selected events?"
+
+msgid "Error deleting events"
+msgstr "Error deleting events"
+
+msgid "There was an error while deleting the events. Please see the details below."
+msgstr "There was an error while deleting the events. Please see the details below."
 
 msgid "Owner organisation unit"
 msgstr "Owner organisation unit"
@@ -2093,6 +2096,16 @@ msgstr "Delete selected enrollments"
 
 msgid "An error occurred while loading the selected enrollments. Please try again."
 msgstr "An error occurred while loading the selected enrollments. Please try again."
+
+msgid "Error deleting enrollments"
+msgstr "Error deleting enrollments"
+
+msgid ""
+"There was an error while deleting the enrollments. Please see the details "
+"below."
+msgstr ""
+"There was an error while deleting the enrollments. Please see the details "
+"below."
 
 msgid ""
 "This action will permanently delete the selected enrollments, including all "
@@ -2202,6 +2215,9 @@ msgstr[1] "{{count}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
 
 msgid "Download as JSON"
 msgstr "Download as JSON"

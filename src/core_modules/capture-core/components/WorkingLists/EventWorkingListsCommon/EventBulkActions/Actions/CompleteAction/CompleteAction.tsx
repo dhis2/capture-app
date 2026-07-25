@@ -5,7 +5,7 @@ import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTi
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
-import { getRecordUrlFromErrorReport } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import { BulkActionErrorReports } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorReports';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { Props } from './CompleteAction.types';
 
@@ -17,16 +17,6 @@ const styles: Readonly<any> = {
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-    },
-    errorContainer: {
-        padding: '0px 20px',
-    },
-    errorItem: {
-        marginBottom: '8px',
-    },
-    errorUidHeader: {
-        fontWeight: 'bold',
-        fontFamily: 'monospace',
     },
 };
 
@@ -148,42 +138,11 @@ const CompleteActionPlain = ({
                                 borderless
                                 header={i18n.t('Details (Advanced)')}
                             >
-                                <span className={classes.errorContainer}>
-                                    <ul>
-                                        {validationError?.validationReport?.errorReports ?
-                                            validationError.validationReport.errorReports.map((errorReport) => {
-                                                const recordUrl = getRecordUrlFromErrorReport({
-                                                    errorReport,
-                                                    programId,
-                                                    orgUnitId,
-                                                });
-                                                return (
-                                                    <li
-                                                        key={`${errorReport.uid}-${errorReport.errorCode}`}
-                                                        className={classes.errorItem}
-                                                    >
-                                                        <div className={classes.errorUidHeader}>
-                                                            {recordUrl ? (
-                                                                <a
-                                                                    href={recordUrl}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                >
-                                                                    {errorReport.uid}
-                                                                </a>
-                                                            ) : errorReport.uid}
-                                                        </div>
-                                                        <div>{errorReport?.message}</div>
-                                                    </li>
-                                                );
-                                            }) : (
-                                                <li>
-                                                    {i18n.t('An unknown error occurred.')}
-                                                </li>
-                                            )
-                                        }
-                                    </ul>
-                                </span>
+                                <BulkActionErrorReports
+                                    errorReports={validationError?.validationReport?.errorReports}
+                                    programId={programId}
+                                    orgUnitId={orgUnitId}
+                                />
                             </Widget>
                         </span>
                     </ModalContent>

@@ -54,7 +54,7 @@ export const useDeleteEnrollments = ({
                 const filterQueryParam = supportForFeature ? 'trackedEntities' : 'trackedEntity';
 
                 return ({
-                    fields: 'trackedEntity,enrollments[enrollment,program,status]',
+                    fields: 'trackedEntity,enrollments[enrollment,program,status,trackedEntity]',
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
                     pageSize: 100,
                     program: programId,
@@ -68,25 +68,35 @@ export const useDeleteEnrollments = ({
                 if (!apiTrackedEntities) return [];
 
                 return apiTrackedEntities
-                    .flatMap(apiTrackedEntity => apiTrackedEntity.enrollments);
+                    .flatMap(apiTrackedEntity => (apiTrackedEntity.enrollments ?? []).map((enrollment: any) => ({
+                        ...enrollment,
+                        trackedEntity: enrollment.trackedEntity ?? apiTrackedEntity.trackedEntity,
+                    })));
             },
         },
     );
 
-    const { mutate: deleteEnrollments, isLoading: isDeletingEnrollments } = useMutation<any>(
+    const {
+        mutate: deleteEnrollments,
+        isLoading: isDeletingEnrollments,
+        error: deleteError,
+    } = useMutation<any, any>(
         () => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
+                // TEMP SABOTAGE: replace each enrollment with a valid-format but nonexistent UID so tracker returns per-enrollment errorReports
                 enrollments: enrollments
                     .filter(({ status }) => status && statusToDelete[status.toLowerCase()])
-                    .map(({ enrollment }) => ({ enrollment })),
+                    .map(() => ({ enrollment: 'zzzzzzzzzzz' })),
             },
         }),
         {
-            onError: (error) => {
-                log.error(errorCreator('An error occurred when deleting enrollments')({ error }));
-                showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
+            onError: (serverResponse) => {
+                log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));
+                if (!serverResponse?.details?.validationReport?.errorReports?.length) {
+                    showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
+                }
             },
             onSuccess: () => {
                 queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
@@ -95,6 +105,22 @@ export const useDeleteEnrollments = ({
             },
         },
     );
+
+    const validationError = useMemo(() => (
+        deleteError?.details?.validationReport?.errorReports?.length
+            ? deleteError.details
+            : null
+    ), [deleteError]);
+
+    const enrollmentIdToTeiId = useMemo(() => {
+        const map: Record<string, string> = {};
+        (enrollments ?? []).forEach((enrollment: any) => {
+            if (enrollment?.enrollment && enrollment?.trackedEntity) {
+                map[enrollment.enrollment] = enrollment.trackedEntity;
+            }
+        });
+        return map;
+    }, [enrollments]);
 
     const enrollmentCounts = useMemo(() => {
         if (!enrollments) {
@@ -153,5 +179,7 @@ export const useDeleteEnrollments = ({
         statusToDelete,
         updateStatusToDelete,
         numberOfEnrollmentsToDelete,
+        validationError,
+        enrollmentIdToTeiId,
     };
 };
