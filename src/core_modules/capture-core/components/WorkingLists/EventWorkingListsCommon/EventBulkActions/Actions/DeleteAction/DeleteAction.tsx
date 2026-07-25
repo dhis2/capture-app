@@ -50,11 +50,9 @@ export const DeleteAction = ({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                // TEMP SABOTAGE: assign each event a unique nonexistent UID so tracker returns
-                // a distinct errorReport per row (no link, since these UIDs aren't in knownEventUids).
                 events: Object
                     .keys(selectedRows)
-                    .map((_, i) => ({ event: `zzzzzzzzzz${(i % 36).toString(36)}` })),
+                    .map(id => ({ event: id })),
             },
         }),
         {

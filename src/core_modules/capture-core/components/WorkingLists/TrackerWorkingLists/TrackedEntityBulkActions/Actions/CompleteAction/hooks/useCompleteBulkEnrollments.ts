@@ -277,13 +277,7 @@ export const useCompleteBulkEnrollments = ({
 
     const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
         const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
-        // TEMP SABOTAGE: point orgUnit at a nonexistent UID so each enrollment fails individually
-        // while keeping the real enrollment UID in the errorReport (linkable in the modal).
-        const sabotagedEnrollments = enrollments.map(enrollment => ({
-            ...enrollment,
-            orgUnit: 'zzzzzzzzzzz',
-        }));
-        onValidateEnrollments({ completeEvents, enrollments: sabotagedEnrollments } as any);
+        onValidateEnrollments({ completeEvents, enrollments } as any);
     };
 
     return {

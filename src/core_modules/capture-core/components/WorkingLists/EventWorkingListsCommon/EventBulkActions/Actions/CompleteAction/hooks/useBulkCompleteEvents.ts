@@ -119,9 +119,6 @@ export const useBulkCompleteEvents = ({
             ...event,
             status: 'COMPLETED',
             program: event.program || programId || event.programId,
-            // TEMP SABOTAGE: point orgUnit at a nonexistent UID so each event fails individually
-            // while keeping the real event UID in the errorReport (linkable in the modal).
-            orgUnit: 'zzzzzzzzzzz',
         }));
 
         completeEvents({ payload: serverPayload });
