@@ -237,7 +237,6 @@ const validatorsForTypes = {
 
 function buildTypeValidators(
     metaData: DataElement | DateDataElement,
-    _querySingleResource?: any,
     labels?: { orgUnit?: string },
 ): Array<ValidatorContainer> {
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
@@ -271,11 +270,7 @@ function buildTypeValidators(
     return validatorContainersForType;
 }
 
-function buildCompulsoryValidator(
-    metaData: DataElement,
-    _querySingleResource?: any,
-    _labels?: { orgUnit?: string },
-): Array<ValidatorContainer> {
+function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContainer> {
     return metaData.compulsory
         ?
         [
@@ -289,11 +284,7 @@ function buildCompulsoryValidator(
         [];
 }
 
-function buildMinCharactersToSearchValidator(
-    metaData: DataElement,
-    _querySingleResource?: any,
-    _labels?: { orgUnit?: string },
-): Array<ValidatorContainer> {
+function buildMinCharactersToSearchValidator(metaData: DataElement): Array<ValidatorContainer> {
     const { minCharactersToSearch } = metaData;
 
     if (minCharactersToSearch === undefined || minCharactersToSearch === 0) {
@@ -313,7 +304,6 @@ function buildMinCharactersToSearchValidator(
 function buildUniqueValidator(
     metaData: DataElement,
     querySingleResource: QuerySingleResource,
-    _labels?: { orgUnit?: string },
 ): Array<ValidatorContainer> {
     return metaData.unique
         ?
@@ -344,8 +334,8 @@ export const getValidators = (
     querySingleResource?: any,
     labels?: { orgUnit?: string },
 ): Array<ValidatorContainer> => [
-    buildCompulsoryValidator,
-    buildTypeValidators,
-    buildUniqueValidator,
-    buildMinCharactersToSearchValidator,
-].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource, labels));
+    ...buildCompulsoryValidator(metaData),
+    ...buildTypeValidators(metaData, labels),
+    ...buildUniqueValidator(metaData, querySingleResource),
+    ...buildMinCharactersToSearchValidator(metaData),
+];
