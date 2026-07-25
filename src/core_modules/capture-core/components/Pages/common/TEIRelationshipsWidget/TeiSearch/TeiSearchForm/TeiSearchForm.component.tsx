@@ -149,6 +149,7 @@ class SearchFormPlain extends React.Component<Props, State> {
             }}
             searchId={this.props.searchId}
             searchAttempted={this.props.searchAttempted}
+            orgUnitLabel={(this.props as any).orgUnitLabel}
         />
     );
 
@@ -253,10 +254,23 @@ class SearchFormPlain extends React.Component<Props, State> {
 }
 
 const StyledTeiSearchForm = withStyles(getStyles)(SearchFormPlain) as
-    React.ComponentType<{ [key: string]: unknown; attributeLabel: string; attributesLabel: string }>;
+    React.ComponentType<{
+        [key: string]: unknown;
+        attributeLabel: string;
+        attributesLabel: string;
+        orgUnitLabel: string;
+    }>;
 
 export const TeiSearchFormComponent = (props: { [key: string]: unknown }) => {
     const attributeLabel = useProgramLabel('attribute') ?? i18n.t('attribute');
     const attributesLabel = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');
-    return <StyledTeiSearchForm {...props} attributeLabel={attributeLabel} attributesLabel={attributesLabel} />;
+    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
+    return (
+        <StyledTeiSearchForm
+            {...props}
+            attributeLabel={attributeLabel}
+            attributesLabel={attributesLabel}
+            orgUnitLabel={orgUnitLabel}
+        />
+    );
 };

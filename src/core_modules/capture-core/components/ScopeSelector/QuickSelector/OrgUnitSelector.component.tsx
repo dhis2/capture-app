@@ -5,6 +5,7 @@ import { SelectorBarItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { OrgUnitField } from '../../FormFields/New';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
+import { useProgramLabel } from '../../../metaData';
 
 const styles = () => ({
     selectBarMenu: {
@@ -28,6 +29,7 @@ type OwnProps = {
     previousOrgUnitId?: string;
     isReadOnly?: boolean;
     tooltip?: boolean;
+    orgUnitLabel?: string;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -54,16 +56,32 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 
     render() {
-        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, tooltip, classes } = this.props;
+        const {
+            selectedOrgUnitId,
+            selectedOrgUnit,
+            previousOrgUnitId,
+            onReset,
+            isReadOnly,
+            tooltip,
+            classes,
+            orgUnitLabel,
+        } = this.props;
+        const orgUnit = orgUnitLabel ?? i18n.t('Organisation unit');
 
         return (
             <ConditionalTooltip
                 enabled={Boolean(tooltip)}
-                content={i18n.t('Choose an organisation unit in the form below')}
+                content={i18n.t('Choose an {{orgUnit}} in the form below', {
+                    orgUnit,
+                    interpolation: { escapeValue: false },
+                })}
             >
                 <SelectorBarItem
-                    label={i18n.t('Organisation unit')}
-                    noValueMessage={isReadOnly ? i18n.t('None selected') : i18n.t('Choose an organisation unit')}
+                    label={orgUnit}
+                    noValueMessage={isReadOnly ? i18n.t('None selected') : i18n.t('Choose an {{orgUnit}}', {
+                        orgUnit,
+                        interpolation: { escapeValue: false },
+                    })}
                     value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                     open={!isReadOnly && this.state.open}
                     setOpen={open => this.setState({ open })}
@@ -89,4 +107,10 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 }
 
-export const OrgUnitSelector = withStyles(styles)(OrgUnitSelectorPlain);
+const StyledOrgUnitSelector = withStyles(styles)(OrgUnitSelectorPlain) as
+    React.ComponentType<{ [key: string]: unknown; orgUnitLabel?: string }>;
+
+export const OrgUnitSelector = (props: { [key: string]: unknown }) => {
+    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
+    return <StyledOrgUnitSelector {...props} orgUnitLabel={orgUnitLabel} />;
+};
