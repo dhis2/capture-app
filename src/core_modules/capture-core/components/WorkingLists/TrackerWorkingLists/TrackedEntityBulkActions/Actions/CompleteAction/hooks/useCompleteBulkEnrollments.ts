@@ -243,6 +243,19 @@ export const useCompleteBulkEnrollments = ({
         completed: trackedEntities?.completedEnrollments?.length ?? 0,
     }), [trackedEntities]);
 
+    const enrollmentIdToTeiId = useMemo(() => {
+        const allEnrollments = [
+            ...(trackedEntities?.activeEnrollments ?? []),
+            ...(trackedEntities?.completedEnrollments ?? []),
+        ];
+        return allEnrollments.reduce<Record<string, string>>((acc, enrollment) => {
+            if (enrollment?.enrollment && enrollment?.trackedEntity) {
+                acc[enrollment.enrollment] = enrollment.trackedEntity;
+            }
+            return acc;
+        }, {});
+    }, [trackedEntities]);
+
     useEffect(() => {
         if (!modalIsOpen) {
             resetCompleteEnrollments();
@@ -257,6 +270,7 @@ export const useCompleteBulkEnrollments = ({
     return {
         completeEnrollments: onStartCompleteEnrollments,
         enrollmentCounts,
+        enrollmentIdToTeiId,
         isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,

@@ -15,6 +15,8 @@ import {
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
+import { getRecordUrlFromErrorReport } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import { useLocationQuery } from '../../../../../../utils/routing';
 import type { PlainProps } from './CompleteAction.types';
 
 const styles: Readonly<any> = {
@@ -33,6 +35,13 @@ const styles: Readonly<any> = {
     },
     errorContainer: {
         padding: '0px 20px',
+    },
+    errorItem: {
+        marginBottom: '8px',
+    },
+    errorUidHeader: {
+        fontWeight: 'bold',
+        fontFamily: 'monospace',
     },
 };
 
@@ -59,9 +68,11 @@ const CompleteActionPlain = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
+    const { orgUnitId } = useLocationQuery();
     const {
         completeEnrollments,
         enrollmentCounts,
+        enrollmentIdToTeiId,
         isLoading,
         validationError,
         isCompleting,
@@ -110,11 +121,33 @@ const CompleteActionPlain = ({
                     >
                         <span className={classes.errorContainer}>
                             <ul>
-                                {errors ? errors.map(errorReport => (
-                                    <li key={`${errorReport.uid}-${errorReport.errorCode}`}>
-                                        {errorReport?.message}
-                                    </li>
-                                )) : (
+                                {errors ? errors.map((errorReport) => {
+                                    const recordUrl = getRecordUrlFromErrorReport({
+                                        errorReport,
+                                        programId,
+                                        orgUnitId,
+                                        enrollmentIdToTeiId,
+                                    });
+                                    return (
+                                        <li
+                                            key={`${errorReport.uid}-${errorReport.errorCode}`}
+                                            className={classes.errorItem}
+                                        >
+                                            <div className={classes.errorUidHeader}>
+                                                {recordUrl ? (
+                                                    <a
+                                                        href={recordUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        {errorReport.uid}
+                                                    </a>
+                                                ) : errorReport.uid}
+                                            </div>
+                                            <div>{errorReport?.message}</div>
+                                        </li>
+                                    );
+                                }) : (
                                     <li>
                                         {i18n.t('An unknown error occurred.')}
                                     </li>

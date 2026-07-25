@@ -5,6 +5,8 @@ import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTi
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
+import { getRecordUrlFromErrorReport } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import { useLocationQuery } from '../../../../../../utils/routing';
 import type { Props } from './CompleteAction.types';
 
 const styles: Readonly<any> = {
@@ -18,6 +20,13 @@ const styles: Readonly<any> = {
     },
     errorContainer: {
         padding: '0px 20px',
+    },
+    errorItem: {
+        marginBottom: '8px',
+    },
+    errorUidHeader: {
+        fontWeight: 'bold',
+        fontFamily: 'monospace',
     },
 };
 
@@ -42,6 +51,7 @@ const CompleteActionPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
+    const { orgUnitId } = useLocationQuery();
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {
@@ -141,11 +151,32 @@ const CompleteActionPlain = ({
                                 <span className={classes.errorContainer}>
                                     <ul>
                                         {validationError?.validationReport?.errorReports ?
-                                            validationError.validationReport.errorReports.map(errorReport => (
-                                                <li key={`${errorReport.uid}-${errorReport.errorCode}`}>
-                                                    {errorReport?.message}
-                                                </li>
-                                            )) : (
+                                            validationError.validationReport.errorReports.map((errorReport) => {
+                                                const recordUrl = getRecordUrlFromErrorReport({
+                                                    errorReport,
+                                                    programId,
+                                                    orgUnitId,
+                                                });
+                                                return (
+                                                    <li
+                                                        key={`${errorReport.uid}-${errorReport.errorCode}`}
+                                                        className={classes.errorItem}
+                                                    >
+                                                        <div className={classes.errorUidHeader}>
+                                                            {recordUrl ? (
+                                                                <a
+                                                                    href={recordUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                >
+                                                                    {errorReport.uid}
+                                                                </a>
+                                                            ) : errorReport.uid}
+                                                        </div>
+                                                        <div>{errorReport?.message}</div>
+                                                    </li>
+                                                );
+                                            }) : (
                                                 <li>
                                                     {i18n.t('An unknown error occurred.')}
                                                 </li>
