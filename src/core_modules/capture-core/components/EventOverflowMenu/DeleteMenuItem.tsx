@@ -62,7 +62,7 @@ export const DeleteMenuItem = ({
                     onRequestDelete();
                     onClose();
                 }}
-                suffix=""
+                suffix={null}
             />
         </ConditionalTooltip>
     );
@@ -71,7 +71,6 @@ export const DeleteMenuItem = ({
 type ModalProps = {
     eventId: string;
     pendingApiResponse?: boolean;
-    /** Optional pre-delete snapshot used by callers that need rollback on API error. */
     eventDetailsForRollback?: ApiEnrollmentEvent;
     onClose: () => void;
     onOptimisticDelete?: (eventId: string) => void;

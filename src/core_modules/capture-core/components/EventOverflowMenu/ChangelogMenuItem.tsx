@@ -12,7 +12,7 @@ export const ChangelogMenuItem = ({ onClose, onOpenChangelog }: Props) => (
         dense
         icon={<IconClockHistory16 />}
         label={i18n.t('View changelog')}
-        suffix=""
+        suffix={null}
         dataTest="event-overflow-changelog"
         onClick={() => {
             onOpenChangelog();

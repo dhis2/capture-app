@@ -12,7 +12,6 @@ export const enrollmentSiteActionTypes = {
     ROLLBACK_ENROLLMENT_EVENTS: 'Enrollment.RollbackEnrollmentEvents',
     DELETE_ENROLLMENT_EVENT: 'Enrollment.DeleteEnrollmentEvent',
     DELETE_ENROLLMENT_EVENT_RELATIONSHIP: 'Enrollment.DeleteEnrollmentEventRelationship',
-    UPDATE_ENROLLMENT_EVENT_STATUS: 'Enrollment.UpdateEnrollmentEventStatus',
     COMMIT_ENROLLMENT_EVENT: 'Enrollment.CommitEnrollmentEvent',
     COMMIT_ENROLLMENT_EVENTS: 'Enrollment.CommitEnrollmentEvents',
     SAVE_FAILED: 'Enrollment.SaveFailed',
@@ -65,13 +64,6 @@ export const deleteEnrollmentEvent = (eventId: string) =>
 
 export const deleteEnrollmentEventRelationship = (relationshipId: string) =>
     actionCreator(enrollmentSiteActionTypes.DELETE_ENROLLMENT_EVENT_RELATIONSHIP)({ relationshipId });
-
-export const updateEnrollmentEventStatus = (eventId: string, status: string, updatedAt: string) =>
-    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT_STATUS)({
-        eventId,
-        status,
-        updatedAt,
-    });
 
 export const rollbackEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENTS)({ events });

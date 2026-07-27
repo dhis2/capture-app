@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import { spacers, IconFileDocument24, Button } from '@dhis2/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
@@ -77,7 +76,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
@@ -172,7 +170,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     />
                 )}
             </ViewEventSection>
-            {supportsChangelog && changeLogIsOpen && (
+            {changeLogIsOpen && (
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}

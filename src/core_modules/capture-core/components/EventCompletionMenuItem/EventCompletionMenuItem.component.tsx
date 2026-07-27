@@ -45,7 +45,7 @@ export const EventCompletionMenuItem = ({
                 },
             }) as any;
             return dataEngine.mutate({
-                resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
+                resource: 'tracker?async=false&importStrategy=UPDATE',
                 type: 'create',
                 data: {
                     events: [{

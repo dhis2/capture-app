@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FlyoutMenu, IconMore16 } from '@dhis2/ui';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { OverflowButton } from '../Buttons';
 import { useEventEditPermissions } from '../../hooks';
@@ -57,14 +56,13 @@ const hasHandler = (...handlers: Array<unknown>) => handlers.some(Boolean);
 const computeVisibility = (props: Props, ctx: {
     canChangeCompletionStatus: boolean;
     canWrite: boolean;
-    supportsChangelog: boolean;
 }): Visibility => {
     const completion = ctx.canChangeCompletionStatus && hasHandler(props.onCompletionStatusUpdated);
     const skip = ctx.canWrite
         && isSkippable(props.eventStatus)
         && hasHandler(props.onOptimisticStatusUpdate, props.onStatusUpdateSuccess);
     const del = ctx.canWrite && hasHandler(props.onOptimisticDelete, props.onDeleteSuccess);
-    const changelog = ctx.supportsChangelog && hasHandler(props.onOpenChangelog);
+    const changelog = hasHandler(props.onOpenChangelog);
     return { completion, skip, delete: del, changelog, any: [completion, skip, del, changelog].some(Boolean) };
 };
 
@@ -93,7 +91,6 @@ export const EventOverflowMenu = (props: Props) => {
 
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
     const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
     const {
@@ -113,7 +110,6 @@ export const EventOverflowMenu = (props: Props) => {
     const visibility = computeVisibility(props, {
         canChangeCompletionStatus,
         canWrite: !!eventAccess?.write,
-        supportsChangelog,
     });
 
     if (!visibility.any) {
