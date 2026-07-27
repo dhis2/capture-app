@@ -97,7 +97,7 @@ export type ApiUtils = {
         resource: string;
         id?: string;
         data?: any;
-        type?: 'create' | 'replace' | 'update' | 'delete';
+        type?: 'create' | 'replace' | 'update' | 'delete' | 'json-patch';
     }) => Promise<any>;
 };
 

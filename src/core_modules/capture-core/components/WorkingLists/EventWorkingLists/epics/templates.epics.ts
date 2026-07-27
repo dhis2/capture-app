@@ -15,6 +15,7 @@ import {
     addTemplateError,
     deleteTemplateSuccess,
     deleteTemplateError,
+    toJsonPatchReplaceOps,
 } from '../../WorkingListsCommon';
 import { getTemplates } from './getTemplates';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
@@ -60,36 +61,24 @@ export const updateTemplateEpic = (
             template: {
                 id,
                 name,
-                externalAccess,
-                publicAccess,
-                user,
-                userGroupAccesses,
-                userAccesses,
             },
             criteria: eventQueryCriteria,
-            programId,
             storeId,
         } }: any) => {
             const { occurredAt, ...restCriteria } = eventQueryCriteria;
-            const eventFilterData = {
+            const eventFilterPatch = toJsonPatchReplaceOps({
                 name,
-                program: programId,
                 eventQueryCriteria: {
                     ...restCriteria,
                     ...(occurredAt && { eventDate: occurredAt }),
                 },
-                externalAccess,
-                publicAccess,
-                user,
-                userGroupAccesses,
-                userAccesses,
-            };
+            });
 
             const requestPromise = mutate({
                 resource: 'eventFilters',
                 id,
-                data: eventFilterData,
-                type: 'replace',
+                data: eventFilterPatch,
+                type: 'json-patch',
             }).then(() => {
                 const isActiveTemplate =
                     store.value.workingListsTemplates[storeId].selectedTemplateId === id;
@@ -105,7 +94,7 @@ export const updateTemplateEpic = (
                     log.error(
                         errorCreator('could not update template')({
                             error,
-                            eventFilterData,
+                            eventFilterPatch,
                         }),
                     );
                     const isActiveTemplate =

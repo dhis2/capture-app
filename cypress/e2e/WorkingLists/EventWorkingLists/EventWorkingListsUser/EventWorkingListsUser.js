@@ -480,7 +480,7 @@ When(/^you update the view with the name (.+)$/, (_name) => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
-    cy.intercept('PUT', '**/eventFilters/**').as('updateEventFilter');
+    cy.intercept('PATCH', '**/eventFilters/**').as('updateEventFilter');
     cy.contains('Update view')
         .click();
     cy.wait('@updateEventFilter', { timeout: 30000 });
