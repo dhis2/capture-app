@@ -97,7 +97,7 @@
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.7.10",
         "@dhis2/cli-utils-cypress": "^10.1.2",
-        "@dhis2/cypress-commands": "^10.0.3",
+        "@dhis2/cypress-commands": "^10.1.2",
         "@dhis2/cypress-plugins": "^10.1.2",
         "@types/node": "^25.9.3",
         "@types/react": "18.3.1",
