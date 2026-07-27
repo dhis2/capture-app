@@ -13,7 +13,6 @@ export const buildProgramStageMetadata = async ({
     cachedDataElements,
     cachedOptionSets,
     locale,
-    minorServerVersion,
     dataEntryFormConfig,
 }: {
     cachedProgramStage: CachedProgramStage;
@@ -22,7 +21,6 @@ export const buildProgramStageMetadata = async ({
     cachedDataElements: Array<CachedDataElement>;
     dataEntryFormConfig: DataEntryFormConfig | null;
     locale: string;
-    minorServerVersion: number;
 }) => {
     const storageController = getUserMetadataStorageController();
 
@@ -36,7 +34,6 @@ export const buildProgramStageMetadata = async ({
         cachedRelationshipTypes,
         cachedDataElements: new Map(cachedDataElements.map(dataElement => [dataElement.id, dataElement])),
         locale,
-        minorServerVersion,
         dataEntryFormConfig,
     });
 

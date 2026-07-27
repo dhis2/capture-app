@@ -20,8 +20,8 @@ import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { escapeString } from '../../../../utils/escapeString';
 import {
-    handleUnsupportedMultiText,
-} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+    isMultiTextWithoutOptionset,
+} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/multiTextValidation';
 
 export class DataElementFactory {
     static translationPropertyNames = {
@@ -54,12 +54,10 @@ export class DataElementFactory {
     locale: string | null;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    minorServerVersion: number;
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
-        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
@@ -67,7 +65,6 @@ export class DataElementFactory {
             cachedOptionSets,
             locale,
         );
-        this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
@@ -206,6 +203,10 @@ export class DataElementFactory {
             );
         }
 
-        return handleUnsupportedMultiText(dataElement);
+        if (isMultiTextWithoutOptionset(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator('MULTI_TEXT without optionset is not supported')({ dataElement }));
+            return null;
+        }
+        return dataElement;
     }
 }

@@ -112,7 +112,6 @@ const getApiCategoriesQueryArgument = (
         return null;
     }
 
-
     return {
         attributeCategoryCombo: categoryCombinationId,
         attributeCategoryOptions: Object

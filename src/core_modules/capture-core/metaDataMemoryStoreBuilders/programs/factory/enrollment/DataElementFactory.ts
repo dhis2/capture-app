@@ -22,8 +22,8 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import {
-    handleUnsupportedMultiText,
-} from '../../../common/helpers/dataElement/unsupportedMultiText';
+    isMultiTextWithoutOptionset,
+} from '../../../common/helpers/dataElement/multiTextValidation';
 import { escapeString } from '../../../../utils/escapeString';
 
 export class DataElementFactory {
@@ -200,12 +200,10 @@ export class DataElementFactory {
     locale: string | null;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    minorServerVersion: number;
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
-        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
@@ -213,7 +211,6 @@ export class DataElementFactory {
             cachedOptionSets,
             locale,
         );
-        this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
@@ -293,7 +290,11 @@ export class DataElementFactory {
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
         );
-        return handleUnsupportedMultiText(dataElement);
+        if (isMultiTextWithoutOptionset(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator('MULTI_TEXT without optionset is not supported')({ dataElement }));
+            return null;
+        }
+        return dataElement;
     }
 
     async _buildDateDataElement(

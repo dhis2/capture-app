@@ -11,8 +11,8 @@ import { DataElement, DateDataElement, dataElementTypes, Section } from '../../.
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
 import {
-    handleUnsupportedMultiText,
-} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+    isMultiTextWithoutOptionset,
+} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/multiTextValidation';
 
 export class DataElementFactory {
     static propertyNames = {
@@ -35,16 +35,13 @@ export class DataElementFactory {
     }
 
     locale: string | null;
-    minorServerVersion: number;
     optionSetFactory: OptionSetFactory;
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
         locale: string | null,
-        minorServerVersion: number,
     ) {
         this.locale = locale;
-        this.minorServerVersion = minorServerVersion;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
             locale,
@@ -108,7 +105,11 @@ export class DataElementFactory {
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
 
-        return handleUnsupportedMultiText(dataElement);
+        if (isMultiTextWithoutOptionset(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator('MULTI_TEXT without optionset is not supported')({ dataElement }));
+            return null;
+        }
+        return dataElement;
     }
 
     async _buildDateDataElement(

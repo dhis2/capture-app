@@ -26,8 +26,8 @@ import {
     REQUESTED_ENTITIES,
 } from '../helpers';
 import {
-    handleUnsupportedMultiText,
-} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+    isMultiTextWithoutOptionset,
+} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/multiTextValidation';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
@@ -230,7 +230,11 @@ const buildBaseDataElement = async (
         querySingleResource,
     });
 
-    return handleUnsupportedMultiText(dataElement);
+    if (isMultiTextWithoutOptionset(dataElement.type, dataElement.optionSet)) {
+        log.error(errorCreator('MULTI_TEXT without optionset is not supported')({ dataElement }));
+        return null;
+    }
+    return dataElement;
 };
 
 const buildDateDataElement = async (
