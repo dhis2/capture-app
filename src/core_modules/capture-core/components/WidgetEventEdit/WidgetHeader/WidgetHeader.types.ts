@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ProgramStage } from '../../../metaData';
 
@@ -11,4 +12,5 @@ export type PlainProps = {
     enrollmentId: string,
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
+    readOnlyBadge?: ReactNode,
 };

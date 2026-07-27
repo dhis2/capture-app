@@ -6,7 +6,8 @@ import { OverflowButton } from '../Buttons';
 import { useEventEditPermissions } from '../../hooks';
 import { EventCompletionMenuItem } from '../EventCompletionMenuItem';
 import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
-import type { ProgramStage } from '../../metaData';
+import { convertServerToClient } from '../../converters';
+import { dataElementTypes, type ProgramStage } from '../../metaData';
 import { SkipMenuItem } from './SkipMenuItem';
 import { DeleteMenuItem, DeleteEventModal } from './DeleteMenuItem';
 import { ChangelogMenuItem } from './ChangelogMenuItem';
@@ -93,10 +94,20 @@ export const EventOverflowMenu = (props: Props) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const supportsChangelog = useFeature(FEATURES.changelogs);
-    const { eventAccess, canChangeCompletionStatus } = useEventEditPermissions({
+    const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
+    const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
+    const {
+        eventAccess,
+        canChangeCompletionStatus,
+        isEventWithinValidPeriod,
+        canEditCompletedEvent,
+        readOnly,
+    } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus,
+        occurredAtClient,
+        completedAtClient,
     });
 
     const visibility = computeVisibility(props, {
@@ -152,11 +163,10 @@ export const EventOverflowMenu = (props: Props) => {
                         )}
                         {visibility.delete && (
                             <DeleteMenuItem
-                                eventStatus={eventStatus}
-                                occurredAt={occurredAt}
-                                completedAt={completedAt}
-                                programId={programId}
-                                programStage={programStage}
+                                occurredAtClient={occurredAtClient}
+                                isEventWithinValidPeriod={isEventWithinValidPeriod}
+                                canEditCompletedEvent={canEditCompletedEvent}
+                                disabled={readOnly}
                                 onClose={close}
                                 onRequestDelete={() => setDeleteConfirmOpen(true)}
                             />

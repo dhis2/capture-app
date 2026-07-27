@@ -17,6 +17,8 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
+import { ReadOnlyBadge } from '../ReadOnlyBadge';
+import { eventStatuses } from './constants/status.const';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
@@ -110,13 +112,32 @@ const WidgetEventEditPlain = ({
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
+    const {
+        readOnly,
+        expiryPeriod,
+        canUncompleteEvent,
+        eventAccess,
+        isEventWithinValidPeriod,
+        canEditCompletedEvent,
+        isWithinCompleteExpiry,
+    } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
+
+    const readOnlyBadge = (
+        <ReadOnlyBadge
+            programStageWriteAccess={eventAccess?.write ?? true}
+            eventWithinValidPeriod={isEventWithinValidPeriod}
+            canEditCompletedEvent={canEditCompletedEvent}
+            withinCompleteEventsExpiry={isWithinCompleteExpiry}
+            eventIsSkipped={eventStatus === eventStatuses.SKIPPED}
+            inlineLabel
+        />
+    );
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -144,6 +165,7 @@ const WidgetEventEditPlain = ({
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={readOnly}
+                            readOnlyBadge={readOnlyBadge}
                         />
                     }
                     noncollapsible

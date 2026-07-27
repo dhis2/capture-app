@@ -16,44 +16,30 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
-import { convertClientToView, convertServerToClient } from '../../converters';
-import { dataElementTypes, type ProgramStage } from '../../metaData';
-import { useEventEditPermissions } from '../../hooks';
+import { convertClientToView } from '../../converters';
+import { dataElementTypes } from '../../metaData';
 
 type TriggerProps = {
-    eventStatus?: string;
-    occurredAt?: string;
-    completedAt?: string;
-    programId: string;
-    programStage?: ProgramStage | null;
+    occurredAtClient?: string;
+    isEventWithinValidPeriod: boolean;
+    canEditCompletedEvent: boolean;
+    disabled: boolean;
     onClose: () => void;
     onRequestDelete: () => void;
 };
 
 export const DeleteMenuItem = ({
-    eventStatus,
-    occurredAt,
-    completedAt,
-    programId,
-    programStage,
+    occurredAtClient,
+    isEventWithinValidPeriod,
+    canEditCompletedEvent,
+    disabled,
     onClose,
     onRequestDelete,
 }: TriggerProps) => {
-    const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
-    const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
-
-    const { isEventWithinValidPeriod, canEditCompletedEvent, readOnly } = useEventEditPermissions({
-        programId,
-        stage: programStage,
-        eventStatus,
-        occurredAtClient,
-        completedAtClient: convertServerToClient(completedAt, dataElementTypes.DATE) as string,
-    });
-
     const getDisabledMessage = (): string => {
         if (!isEventWithinValidPeriod) {
             return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
-                occurredAt: occurredAtClientView,
+                occurredAt: convertClientToView(occurredAtClient ?? '', dataElementTypes.DATE),
                 interpolation: { escapeValue: false },
             });
         }
@@ -64,11 +50,11 @@ export const DeleteMenuItem = ({
     };
 
     return (
-        <ConditionalTooltip content={getDisabledMessage()} enabled={readOnly}>
+        <ConditionalTooltip content={getDisabledMessage()} enabled={disabled}>
             <MenuItem
                 destructive
                 dense
-                disabled={readOnly}
+                disabled={disabled}
                 icon={<IconDelete16 />}
                 label={i18n.t('Delete event')}
                 dataTest="event-overflow-delete"

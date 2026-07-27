@@ -15,9 +15,8 @@ import {
     rollbackEnrollmentEvent,
     deleteEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { pageKeys } from '../../App/withAppUrlSync';
 import { EventOverflowMenu } from '../../EventOverflowMenu';
+import { eventStatuses } from '../constants/status.const';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
 
@@ -48,6 +47,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
+    readOnlyBadge,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const WidgetHeaderPlain = ({
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
 
-    const showEditButton = !readOnly;
+    const showEditButton = !readOnly && eventStatus !== eventStatuses.SKIPPED;
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
@@ -70,7 +70,6 @@ const WidgetHeaderPlain = ({
 
     const onCompletionStatusUpdated = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
-        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, eventId]);
 
     const onCompletionStatusError = useCallback(() => {
@@ -119,6 +118,7 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
+                        {readOnlyBadge}
                         {showEditButton && (
                             <Button
                                 small

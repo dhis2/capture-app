@@ -30,8 +30,9 @@ type Output = {
 //   - occurredAt is outside the program's expiry period (overridden by F_EDIT_EXPIRED).
 //   - The event is completed and past the completeEventsExpiryDays window (overridden by F_EDIT_EXPIRED).
 //   - The event is completed on a stage with blockEntryForm set (overridden by F_EDIT_EXPIRED).
-//   - The event is skipped (must be unskipped before it can be edited).
-
+// Note: skipped events also block the edit-event button, but that's applied at the
+// consumer level (not in `readOnly`) so side actions (notes, relationships,
+// assignee, delete) still work on a skipped event.
 
 export const useEventEditPermissions = ({
     programId,
@@ -58,8 +59,7 @@ export const useEventEditPermissions = ({
     const readOnly = !eventAccess?.write
         || !isEventWithinValidPeriod
         || !isWithinCompleteExpiry
-        || !canEditCompletedEvent
-        || eventStatus === eventStatuses.SKIPPED;
+        || !canEditCompletedEvent;
 
     return {
         eventAccess,

@@ -11,6 +11,7 @@ import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import { ViewEventReadOnlyBadge } from '../ViewEventReadOnlyBadge';
+import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
 import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import {
@@ -109,7 +110,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-    const showEditButton = !isEditEventPage && !readOnly;
+    const showEditButton = !isEditEventPage && !readOnly && eventStatus !== eventStatuses.SKIPPED;
 
     return (
         <div className={classes.container}>
