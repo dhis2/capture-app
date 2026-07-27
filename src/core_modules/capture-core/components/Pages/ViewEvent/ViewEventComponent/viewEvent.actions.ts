@@ -17,6 +17,7 @@ export const actionTypes = {
     INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE: 'InitializeWorkingListsOnBackToMainPage',
     ASSIGNEE_SET: 'SingleEvent.AssigneeSet',
     ASSIGNEE_SAVE_FAILED: 'SingleEvent.AssigneeSaveFailed',
+    EVENT_STATUS_SET: 'SingleEvent.EventStatusSet',
 };
 
 export const viewEventFromUrl = (data: any) =>
@@ -73,3 +74,6 @@ export const setAssignee = (assignee: UserFormField, eventId: string) =>
 
 export const rollbackAssignee = (assignee: UserFormField, eventId: string) =>
     actionCreator(actionTypes.ASSIGNEE_SAVE_FAILED)({ assignee, eventId });
+
+export const setEventStatus = (status: string, eventId: string) =>
+    actionCreator(actionTypes.EVENT_STATUS_SET)({ status, eventId });

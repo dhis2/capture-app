@@ -14,8 +14,9 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
-    rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
+import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../App/withAppUrlSync';
 import { EventCompletionMenuItem } from '../../EventCompletionMenuItem';
 import type { PlainProps } from './WidgetHeader.types';
 
@@ -59,20 +60,14 @@ const WidgetHeaderPlain = ({
     const storedEvent = useSelector((state: any) =>
         state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
 
-    const onCompletionStatusMutate = useCallback((newStatus: string) => {
+    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
         if (storedEvent) {
             const { completedAt, completedBy, ...eventWithoutCompletion } = storedEvent;
             dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
+            dispatch(commitEnrollmentEvent(eventId));
         }
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, storedEvent, eventId]);
-
-    const onCompletionStatusUpdated = useCallback(() => {
-        dispatch(commitEnrollmentEvent(eventId));
-    }, [dispatch, eventId]);
-
-    const onCompletionStatusError = useCallback(() => {
-        dispatch(rollbackEnrollmentEvent(eventId));
-    }, [dispatch, eventId]);
 
     const { icon, name } = stage;
 
@@ -123,16 +118,14 @@ const WidgetHeaderPlain = ({
                                             <EventCompletionMenuItem
                                                 eventId={eventId}
                                                 eventStatus={eventStatus}
-                                                onMutate={onCompletionStatusMutate}
                                                 onUpdated={onCompletionStatusUpdated}
-                                                onError={onCompletionStatusError}
                                                 onClose={() => setActionsIsOpen(false)}
                                             />
                                         )}
                                         {supportsChangelog && (
                                             <MenuItem
                                                 label={i18n.t('View changelog')}
-                                                suffix={null}
+                                                suffix=""
                                                 onClick={() => {
                                                     setChangeLogIsOpen(true);
                                                     setActionsIsOpen(false);

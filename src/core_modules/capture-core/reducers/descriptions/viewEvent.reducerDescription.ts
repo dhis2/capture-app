@@ -42,6 +42,27 @@ const setAssignee = (state, action) => {
     return newState;
 };
 
+const setEventStatus = (state, action) => {
+    const { status, eventId } = action.payload;
+    if (eventId !== state.eventId || !state.loadedValues?.eventContainer?.event) {
+        return state;
+    }
+
+    return {
+        ...state,
+        loadedValues: {
+            ...state.loadedValues,
+            eventContainer: {
+                ...state.loadedValues.eventContainer,
+                event: {
+                    ...state.loadedValues.eventContainer.event,
+                    status,
+                },
+            },
+        },
+    };
+};
+
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
         const newState = {
@@ -168,4 +189,5 @@ export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,
     [enrollmentEditEventActionTypes.ASSIGNEE_SET]: setAssignee,
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,
+    [viewEventActionTypes.EVENT_STATUS_SET]: setEventStatus,
 }, 'viewEventPage');

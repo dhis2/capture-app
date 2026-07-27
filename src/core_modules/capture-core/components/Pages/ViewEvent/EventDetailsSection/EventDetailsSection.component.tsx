@@ -28,8 +28,7 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import { EventCompletionMenuItem } from '../../../EventCompletionMenuItem';
-import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
-import { pageKeys } from '../../../App/withAppUrlSync';
+import { setEventStatus } from '../ViewEventComponent/viewEvent.actions';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -92,8 +91,8 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
-    const onCompletionStatusUpdated = useCallback(() => {
-        dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
+    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
+        dispatch(setEventStatus(newStatus, eventId));
     }, [dispatch, eventId]);
 
     const onSaveExternal = useCallback(() => {
