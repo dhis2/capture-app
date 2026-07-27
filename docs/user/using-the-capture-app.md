@@ -927,6 +927,30 @@ You can change your context by clicking the "x" button.
 
 ![](resources/images/enrollment-dash-03.png)
 
+#### What each context box shows
+
+The context selector shows one box for each level of your context, from left to right:
+
+- **Program** - the selected program. You only see programs that are shared with you and your user group, and if you have selected an organisation unit, that are assigned to that organisation unit.
+- **Organisation unit** - the organisation unit you are working in.
+- **Tracked entity** - this box is titled with the *tracked entity type* (for example "Person" or "Building"), and its value shows the display name of the specific tracked entity instance (see [How the tracked entity display name is built](#capture_tei_display_name) below).
+- **Enrollment** - the selected enrollment, labelled with its enrollment date.
+
+When you open an event from the program stage list, two more boxes are added to the right:
+
+- **Stage** - the program stage the event belongs to.
+- **Report date** - the event's date, labelled with the stage's date label (for example "Date of discharge").
+
+##### How the tracked entity display name is built { #capture_tei_display_name }
+
+The name shown for the tracked entity in the top bar is derived from the tracked entity's attribute values, in the following order:
+
+1. The values of the first two tracked entity type attributes that are set to **Display in list**, shown together (for example the "First name" and "Last name" attributes, giving "Anna Jones").
+2. If that produces no value - either because no attributes are set to *Display in list*, or because the tracked entity has no value for them - the values of the first two attributes configured on the tracked entity type (in their configured order) are used instead.
+3. If no attribute value can be shown at all, the tracked entity's **unique identifier (UID)** is shown as a fallback.
+
+> **Note for implementers/administrators:** If the top bar shows a UID instead of a readable name, it means no suitable attribute value could be shown for the tracked entity. To control which attributes are used for the name, set the relevant tracked entity type attributes to **Display in list** in the Metadata Management app, and make sure the tracked entity has values for them.
+
 #### Deselecting the program
 
 When you deselect the program you see the following
@@ -980,6 +1004,10 @@ When you deselect the tracked entity, in this case "Anna Jones" you are taken to
 When you deselect the enrollment you see the following
 
 ![](resources/images/enrollment-dash-08.png)
+
+#### Clearing all selections
+
+In addition to deselecting individual boxes, the top bar provides an action to clear all current selections at once. This resets the organisation unit, program, tracked entity and enrollment and returns you to an empty scope. If you have unsaved changes in an open form, you are first asked to confirm before the selections are discarded.
 
 
 ### Quick actions
