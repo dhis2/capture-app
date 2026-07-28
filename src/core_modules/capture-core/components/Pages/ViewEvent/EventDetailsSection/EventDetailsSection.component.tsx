@@ -89,9 +89,14 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { canChangeCompletionStatus } = useEventEditPermissions({ programId, stage: programStage, eventStatus });
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
-    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
+    const onCompletionStatusMutate = useCallback((newStatus: string) => {
         dispatch(setEventStatus(newStatus, eventId));
     }, [dispatch, eventId]);
+
+    const onCompletionStatusError = useCallback(() => {
+        const previousStatus = eventStatus === 'COMPLETED' ? 'ACTIVE' : 'COMPLETED';
+        dispatch(setEventStatus(previousStatus, eventId));
+    }, [dispatch, eventId, eventStatus]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries({
@@ -157,7 +162,8 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             <EventCompletionMenuItem
                                 eventId={eventId}
                                 eventStatus={eventStatus}
-                                onUpdated={onCompletionStatusUpdated}
+                                onMutate={onCompletionStatusMutate}
+                                onError={onCompletionStatusError}
                                 onClose={() => setActionsIsOpen(false)}
                             />
                         )}
