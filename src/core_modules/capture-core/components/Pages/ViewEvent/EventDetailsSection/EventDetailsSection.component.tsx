@@ -19,7 +19,8 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import { EventOverflowMenu } from '../../../EventOverflowMenu';
-import { setEventStatus } from '../ViewEventComponent/viewEvent.actions';
+import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -79,17 +80,12 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
-    const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        dispatch(setEventStatus(newStatus, eventId));
+    const onCompletionStatusUpdated = useCallback(() => {
+        dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
     }, [dispatch, eventId]);
 
-    const onCompletionStatusError = useCallback(() => {
-        const previousStatus = eventStatus === 'COMPLETED' ? 'ACTIVE' : 'COMPLETED';
-        dispatch(setEventStatus(previousStatus, eventId));
-    }, [dispatch, eventId, eventStatus]);
-
-    const onStatusUpdateSuccess = useCallback((_eventId: string, newStatus: string) => {
-        dispatch(setEventStatus(newStatus, eventId));
+    const onStatusUpdateSuccess = useCallback(() => {
+        dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
     }, [dispatch, eventId]);
 
     const onSaveExternal = useCallback(() => {
@@ -146,9 +142,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 completedAt={completedAt}
                 programId={programId}
                 programStage={programStage}
-                onCompletionStatusMutate={!isEditEventPage ? onCompletionStatusMutate : undefined}
-                onCompletionStatusUpdated={!isEditEventPage ? onCompletionStatusMutate : undefined}
-                onCompletionStatusError={!isEditEventPage ? onCompletionStatusError : undefined}
+                onCompletionStatusUpdated={!isEditEventPage ? onCompletionStatusUpdated : undefined}
                 onStatusUpdateSuccess={!isEditEventPage ? onStatusUpdateSuccess : undefined}
                 onDeleteSuccess={!isEditEventPage ? onBackToAllEvents : undefined}
                 onOpenChangelog={() => setChangeLogIsOpen(true)}
