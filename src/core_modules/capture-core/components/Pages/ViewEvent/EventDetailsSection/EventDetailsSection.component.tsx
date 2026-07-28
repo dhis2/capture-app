@@ -79,9 +79,14 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
-    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
+    const onCompletionStatusMutate = useCallback((newStatus: string) => {
         dispatch(setEventStatus(newStatus, eventId));
     }, [dispatch, eventId]);
+
+    const onCompletionStatusError = useCallback(() => {
+        const previousStatus = eventStatus === 'COMPLETED' ? 'ACTIVE' : 'COMPLETED';
+        dispatch(setEventStatus(previousStatus, eventId));
+    }, [dispatch, eventId, eventStatus]);
 
     const onStatusUpdateSuccess = useCallback((_eventId: string, newStatus: string) => {
         dispatch(setEventStatus(newStatus, eventId));
@@ -141,7 +146,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 completedAt={completedAt}
                 programId={programId}
                 programStage={programStage}
-                onCompletionStatusUpdated={!isEditEventPage ? onCompletionStatusUpdated : undefined}
+                onCompletionStatusMutate={!isEditEventPage ? onCompletionStatusMutate : undefined}
+                onCompletionStatusUpdated={!isEditEventPage ? onCompletionStatusMutate : undefined}
+                onCompletionStatusError={!isEditEventPage ? onCompletionStatusError : undefined}
                 onStatusUpdateSuccess={!isEditEventPage ? onStatusUpdateSuccess : undefined}
                 onDeleteSuccess={!isEditEventPage ? onBackToAllEvents : undefined}
                 onOpenChangelog={() => setChangeLogIsOpen(true)}

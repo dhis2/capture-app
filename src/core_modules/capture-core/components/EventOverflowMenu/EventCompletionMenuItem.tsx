@@ -11,7 +11,7 @@ type Props = {
     eventId: string;
     eventStatus?: string;
     onMutate?: (newStatus: string) => void;
-    onUpdated: (newStatus: string) => void;
+    onUpdated?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
 };
@@ -65,7 +65,7 @@ export const EventCompletionMenuItem = ({
                 onError?.();
             },
             onSuccess: () => {
-                onUpdated(newStatus);
+                onUpdated?.(newStatus);
             },
         },
     );
