@@ -27,6 +27,7 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import { EventCompletionMenuItem } from '../../../EventOverflowMenu/EventCompletionMenuItem';
+import { updateField } from '../../../DataEntry/actions/dataEntry.actions';
 import { setEventStatus } from '../ViewEventComponent/viewEvent.actions';
 import type { PlainProps } from './EventDetailsSection.types';
 
@@ -91,11 +92,25 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         dispatch(setEventStatus(newStatus, eventId));
+        dispatch(updateField(
+            newStatus === 'COMPLETED' ? 'true' : 'false',
+            {},
+            'complete',
+            dataEntryIds.SINGLE_EVENT,
+            dataEntryKeys.VIEW,
+        ));
     }, [dispatch, eventId]);
 
     const onCompletionStatusError = useCallback(() => {
         const previousStatus = eventStatus === 'COMPLETED' ? 'ACTIVE' : 'COMPLETED';
         dispatch(setEventStatus(previousStatus, eventId));
+        dispatch(updateField(
+            previousStatus === 'COMPLETED' ? 'true' : 'false',
+            {},
+            'complete',
+            dataEntryIds.SINGLE_EVENT,
+            dataEntryKeys.VIEW,
+        ));
     }, [dispatch, eventId, eventStatus]);
 
     const onSaveExternal = useCallback(() => {
