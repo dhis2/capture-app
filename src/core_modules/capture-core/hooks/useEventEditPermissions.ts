@@ -1,6 +1,5 @@
 import { useProgramExpiryForUser } from './useProgramExpiryForUser';
 import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
-import { useCanChangeCompletionStatus } from './useCanChangeCompletionStatus';
 import { getProgramEventAccess, ProgramStage } from '../metaData';
 import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
 import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
@@ -20,7 +19,6 @@ type Output = {
     isWithinCompleteExpiry: boolean,
     canEditCompletedEvent: boolean,
     canUncompleteEvent: boolean,
-    canChangeCompletionStatus: boolean,
     expiryPeriod: ReturnType<typeof useProgramExpiryForUser>,
     readOnly: boolean,
 };
@@ -44,7 +42,6 @@ export const useEventEditPermissions = ({
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const { hasAuthority: canEditExpired } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
-    const canChangeCompletionStatus = useCanChangeCompletionStatus({ eventStatus, eventAccess });
 
     const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
@@ -65,7 +62,6 @@ export const useEventEditPermissions = ({
         isWithinCompleteExpiry,
         canEditCompletedEvent,
         canUncompleteEvent,
-        canChangeCompletionStatus,
         expiryPeriod,
         readOnly,
     };

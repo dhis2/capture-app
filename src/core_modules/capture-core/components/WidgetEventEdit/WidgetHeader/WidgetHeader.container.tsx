@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode, useEventEditPermissions } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useCanChangeCompletionStatus } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -48,7 +48,7 @@ const WidgetHeaderPlain = ({
     const dispatch = useDispatch();
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const { canChangeCompletionStatus } = useEventEditPermissions({ programId, stage, eventStatus });
+    const canChangeCompletionStatus = useCanChangeCompletionStatus({ programId, stage, eventStatus });
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const showEditButton = !readOnly;

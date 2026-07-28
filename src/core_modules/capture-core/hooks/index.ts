@@ -9,3 +9,4 @@ export { useProgramExpiryForUser } from './useProgramExpiryForUser';
 export { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
 export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
 export { useEventEditPermissions } from './useEventEditPermissions';
+export { useCanChangeCompletionStatus } from './useCanChangeCompletionStatus';

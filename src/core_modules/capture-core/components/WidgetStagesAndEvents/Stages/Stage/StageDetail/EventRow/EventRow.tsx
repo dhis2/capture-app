@@ -7,7 +7,7 @@ import {
     FlyoutMenu,
     IconMore16,
 } from '@dhis2/ui';
-import { useEventEditPermissions } from 'capture-core/hooks';
+import { useCanChangeCompletionStatus } from 'capture-core/hooks';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton } from '../../../../../EventOverflowMenu/DeleteMenuItem';
@@ -56,7 +56,7 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { canChangeCompletionStatus } = useEventEditPermissions({
+    const canChangeCompletionStatus = useCanChangeCompletionStatus({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
