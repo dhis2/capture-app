@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { OverflowButton } from '../Buttons';
-import { useEventEditPermissions } from '../../hooks';
+import { useEventEditPermissions, useCanChangeCompletionStatus } from '../../hooks';
 import { EventCompletionMenuItem } from './EventCompletionMenuItem';
 import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 import { convertServerToClient } from '../../converters';
@@ -95,7 +95,6 @@ export const EventOverflowMenu = (props: Props) => {
     const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
     const {
         eventAccess,
-        canChangeCompletionStatus,
         isEventWithinValidPeriod,
         canEditCompletedEvent,
         readOnly,
@@ -105,6 +104,11 @@ export const EventOverflowMenu = (props: Props) => {
         eventStatus,
         occurredAtClient,
         completedAtClient,
+    });
+    const canChangeCompletionStatus = useCanChangeCompletionStatus({
+        programId,
+        stage: programStage,
+        eventStatus,
     });
 
     const visibility = computeVisibility(props, {
