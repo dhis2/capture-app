@@ -16,6 +16,8 @@ import {
     rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { EventCompletionMenuItem } from '../../EventOverflowMenu/EventCompletionMenuItem';
+import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -66,6 +68,7 @@ const WidgetHeaderPlain = ({
 
     const onCompletionStatusUpdated = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, eventId]);
 
     const onCompletionStatusError = useCallback(() => {
