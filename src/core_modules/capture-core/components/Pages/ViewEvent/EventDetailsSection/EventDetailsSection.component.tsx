@@ -25,9 +25,9 @@ import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { useProgramExpiryForUser } from '../../../../hooks';
+import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
-import { EventCompletionMenuItem } from '../../../EventCompletionMenuItem';
+import { EventCompletionMenuItem } from '../../../EventOverflowMenu/EventCompletionMenuItem';
 import { setEventStatus } from '../ViewEventComponent/viewEvent.actions';
 import type { PlainProps } from './EventDetailsSection.types';
 
@@ -74,7 +74,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         onBackToAllEvents,
         programId,
         showEditButton,
-        canChangeCompletionStatus,
         ...passOnProps
     } = props;
     const dispatch = useDispatch();
@@ -89,6 +88,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const { canChangeCompletionStatus } = useEventEditPermissions({ programId, stage: programStage, eventStatus });
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
     const onCompletionStatusUpdated = useCallback((newStatus: string) => {

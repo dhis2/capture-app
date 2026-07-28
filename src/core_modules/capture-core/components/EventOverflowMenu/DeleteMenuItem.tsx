@@ -5,10 +5,10 @@ import {
     IconDelete16,
     MenuItem,
 } from '@dhis2/ui';
-import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
-import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
-import { dataElementTypes, type ProgramStage } from '../../../../../../../metaData';
-import { useEventEditPermissions } from '../../../../../../../hooks';
+import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
+import { convertClientToView, convertServerToClient } from '../../converters';
+import { dataElementTypes, type ProgramStage } from '../../metaData';
+import { useEventEditPermissions } from '../../hooks';
 
 type Props = {
     setActionsOpen: (open: boolean) => void;

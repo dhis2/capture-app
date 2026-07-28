@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-27T13:06:05.301Z\n"
-"PO-Revision-Date: 2026-07-27T13:06:05.301Z\n"
+"POT-Creation-Date: 2026-07-28T15:04:20.277Z\n"
+"PO-Revision-Date: 2026-07-28T15:04:20.277Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -437,6 +437,33 @@ msgstr ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 
+msgid "An error occurred while deleting the event"
+msgstr "An error occurred while deleting the event"
+
+msgid "Delete event"
+msgstr "Delete event"
+
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr "Deleting an event is permanent and cannot be undone."
+
+msgid "Are you sure you want to delete this event?"
+msgstr "Are you sure you want to delete this event?"
+
+msgid "Yes, delete event"
+msgstr "Yes, delete event"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+
+msgid "This event has been completed"
+msgstr "This event has been completed"
+
+msgid "This event is outside the edit period"
+msgstr "This event is outside the edit period"
+
+msgid "Delete"
+msgstr "Delete"
+
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"
 
@@ -580,9 +607,6 @@ msgstr "Uploading file"
 
 msgid "selected"
 msgstr "selected"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Select file"
 msgstr "Select file"
@@ -1101,9 +1125,6 @@ msgstr "You only have view access to this program stage"
 msgid "This event is outside the editing period"
 msgstr "This event is outside the editing period"
 
-msgid "This event has been completed"
-msgstr "This event has been completed"
-
 msgid "View only - {{message}}"
 msgstr "View only - {{message}}"
 
@@ -1497,17 +1518,8 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
-msgid "Delete event"
-msgstr "Delete event"
-
-msgid "Deleting an event is permanent and cannot be undone."
-msgstr "Deleting an event is permanent and cannot be undone."
-
 msgid "Are you sure you want to delete this event? "
 msgstr "Are you sure you want to delete this event? "
-
-msgid "Yes, delete event"
-msgstr "Yes, delete event"
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Go to “Schedule” tab to reschedule this event"
@@ -1756,18 +1768,6 @@ msgstr "This stage can only have one event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-
-msgid "This event is outside the edit period"
-msgstr "This event is outside the edit period"
-
-msgid "An error occurred while deleting the event"
-msgstr "An error occurred while deleting the event"
-
-msgid "Are you sure you want to delete this event?"
-msgstr "Are you sure you want to delete this event?"
 
 msgid "Unskip"
 msgstr "Unskip"

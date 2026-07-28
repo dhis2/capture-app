@@ -8,9 +8,9 @@ import {
 } from '@dhis2/ui';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton } from './DeleteActionButton';
+import { DeleteActionButton } from '../../../../../EventOverflowMenu/DeleteMenuItem';
 import { SkipAction } from './SkipAction';
-import { DeleteActionModal } from './DeleteActionModal';
+import { DeleteActionModal } from '../../../../../EventOverflowMenu/DeleteEventModal';
 
 const styles: Readonly<any> = {
     row: {

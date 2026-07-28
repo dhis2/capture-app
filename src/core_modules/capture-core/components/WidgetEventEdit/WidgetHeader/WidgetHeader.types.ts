@@ -9,5 +9,4 @@ export type PlainProps = {
     orgUnit: OrgUnit,
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
-    canChangeCompletionStatus: boolean,
 };
