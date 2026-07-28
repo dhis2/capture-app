@@ -76,7 +76,7 @@ export const EventCompletionMenuItem = ({
             dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
             icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
             label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
-            suffix={null}
+            suffix=""
             onClick={() => {
                 onClose();
                 !isLoading && updateCompletionStatus();

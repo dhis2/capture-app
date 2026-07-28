@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-27T13:03:57.941Z\n"
-"PO-Revision-Date: 2026-07-27T13:03:57.941Z\n"
+"POT-Creation-Date: 2026-07-28T15:21:31.427Z\n"
+"PO-Revision-Date: 2026-07-28T15:21:31.427Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -437,15 +437,6 @@ msgstr ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 
-msgid "An error occurred when updating event status"
-msgstr "An error occurred when updating event status"
-
-msgid "Mark incomplete"
-msgstr "Mark incomplete"
-
-msgid "Mark complete"
-msgstr "Mark complete"
-
 msgid "View changelog"
 msgstr "View changelog"
 
@@ -472,6 +463,15 @@ msgstr "Are you sure you want to delete this event?"
 
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
+
+msgid "An error occurred when updating event status"
+msgstr "An error occurred when updating event status"
+
+msgid "Mark incomplete"
+msgstr "Mark incomplete"
+
+msgid "Mark complete"
+msgstr "Mark complete"
 
 msgid "Unskip"
 msgstr "Unskip"

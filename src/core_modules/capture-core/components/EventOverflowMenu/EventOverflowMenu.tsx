@@ -3,7 +3,7 @@ import { FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { OverflowButton } from '../Buttons';
 import { useEventEditPermissions } from '../../hooks';
-import { EventCompletionMenuItem } from '../EventCompletionMenuItem';
+import { EventCompletionMenuItem } from './EventCompletionMenuItem';
 import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 import { convertServerToClient } from '../../converters';
 import { dataElementTypes, type ProgramStage } from '../../metaData';

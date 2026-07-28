@@ -19,8 +19,7 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import { EventOverflowMenu } from '../../../EventOverflowMenu';
-import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
-import { pageKeys } from '../../../App/withAppUrlSync';
+import { setEventStatus } from '../ViewEventComponent/viewEvent.actions';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -80,8 +79,12 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
 
-    const reloadEvent = useCallback(() => {
-        dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
+    const onCompletionStatusUpdated = useCallback((newStatus: string) => {
+        dispatch(setEventStatus(newStatus, eventId));
+    }, [dispatch, eventId]);
+
+    const onStatusUpdateSuccess = useCallback((_eventId: string, newStatus: string) => {
+        dispatch(setEventStatus(newStatus, eventId));
     }, [dispatch, eventId]);
 
     const onSaveExternal = useCallback(() => {
@@ -138,8 +141,8 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 completedAt={completedAt}
                 programId={programId}
                 programStage={programStage}
-                onCompletionStatusUpdated={!isEditEventPage ? reloadEvent : undefined}
-                onStatusUpdateSuccess={!isEditEventPage ? reloadEvent : undefined}
+                onCompletionStatusUpdated={!isEditEventPage ? onCompletionStatusUpdated : undefined}
+                onStatusUpdateSuccess={!isEditEventPage ? onStatusUpdateSuccess : undefined}
                 onDeleteSuccess={!isEditEventPage ? onBackToAllEvents : undefined}
                 onOpenChangelog={() => setChangeLogIsOpen(true)}
                 dataTest="event-program-event-overflow-menu"
