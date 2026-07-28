@@ -79,7 +79,7 @@
         "cy:open": "[ \"$IN_DEVCONTAINER\" = \"true\" ] && ./scripts/package/cy-open-devcontainer.sh || ./scripts/package/cy-open-local.sh",
         "cy:run": "./scripts/package/cy-run.sh",
         "verifyCacheVersion": "node scripts/verifyCacheVersion.js",
-        "postinstall": "husky && node scripts/createSymlinkToInternalPackages.mjs",
+        "postinstall": "husky && patch-package && node scripts/createSymlinkToInternalPackages.mjs",
         "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/",
         "clean": "./scripts/clean.sh && yarn workspaces run clean"
     },
@@ -128,6 +128,9 @@
         "jsdoc": "^4.0.5",
         "jsdoc-babel": "^0.5.0",
         "jsdoc-export-default-interop": "^0.3.1",
+        "p-limit": "^7.3.1",
+        "patch-package": "^8.0.1",
+        "postinstall-postinstall": "^2.1.0",
         "redux-devtools-extension": "^2.13.9",
         "serve": "^14.2.5",
         "typescript": "^5.8.2",
