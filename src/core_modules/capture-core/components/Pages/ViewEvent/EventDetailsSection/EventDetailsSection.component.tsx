@@ -27,8 +27,8 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import { EventCompletionMenuItem } from '../../../EventOverflowMenu/EventCompletionMenuItem';
-import { updateField } from '../../../DataEntry/actions/dataEntry.actions';
-import { setEventStatus } from '../ViewEventComponent/viewEvent.actions';
+import { changeEventFromUrl } from '../ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -90,28 +90,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { canChangeCompletionStatus } = useEventEditPermissions({ programId, stage: programStage, eventStatus });
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
-    const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        dispatch(setEventStatus(newStatus, eventId));
-        dispatch(updateField(
-            newStatus === 'COMPLETED' ? 'true' : 'false',
-            {},
-            'complete',
-            dataEntryIds.SINGLE_EVENT,
-            dataEntryKeys.VIEW,
-        ));
+    const onCompletionStatusUpdated = useCallback(() => {
+        dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
     }, [dispatch, eventId]);
-
-    const onCompletionStatusError = useCallback(() => {
-        const previousStatus = eventStatus === 'COMPLETED' ? 'ACTIVE' : 'COMPLETED';
-        dispatch(setEventStatus(previousStatus, eventId));
-        dispatch(updateField(
-            previousStatus === 'COMPLETED' ? 'true' : 'false',
-            {},
-            'complete',
-            dataEntryIds.SINGLE_EVENT,
-            dataEntryKeys.VIEW,
-        ));
-    }, [dispatch, eventId, eventStatus]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries({
@@ -177,8 +158,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             <EventCompletionMenuItem
                                 eventId={eventId}
                                 eventStatus={eventStatus}
-                                onMutate={onCompletionStatusMutate}
-                                onError={onCompletionStatusError}
+                                onUpdated={onCompletionStatusUpdated}
                                 onClose={() => setActionsIsOpen(false)}
                             />
                         )}
