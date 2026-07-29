@@ -87,16 +87,13 @@ When('you select {string} from the data item filter flyout menu', (dataItem) => 
 });
 
 Then('only rows with Data item {string} should be displayed', (dataItem) => {
-    cy.get('[data-test="changelog-data-table-body"] tr')
-        .first()
-        .should('contain.text', dataItem);
-
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(2)
-            .should('contain.text', dataItem);
-    });
+    getChangelogTableBody()
+        .find('tr td:nth-child(3)')
+        .should(($cells) => {
+            [...$cells].forEach((cell) => {
+                expect(cell.textContent).to.contain(dataItem);
+            });
+        });
 });
 
 Then('the filter pill should be visible with label {string}', (filterLabel) => {
