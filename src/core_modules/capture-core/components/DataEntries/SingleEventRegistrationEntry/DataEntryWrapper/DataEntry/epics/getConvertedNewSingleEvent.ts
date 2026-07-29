@@ -1,4 +1,3 @@
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
@@ -9,14 +8,12 @@ const getApiCategoriesArgument = (categories: { [id: string]: string } | null) =
     if (!categories) {
         return null;
     }
-    const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
-
     return {
         attributeCategoryOptions: Object
             .keys(categories)
 
             .map(key => categories[key])
-            .join(newUIDsSeparator ? ',' : ';'),
+            .join(','),
     };
 };
 

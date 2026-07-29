@@ -1,4 +1,3 @@
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
@@ -23,9 +22,7 @@ const getFileResourceSubvalue = async ({
     return {
         id,
         name,
-        url: featureAvailable(FEATURES.trackerFileEndpoint)
-            ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElement.id}/file`
-            : `${absoluteApiPath}/events/files?dataElementUid=${dataElement.id}&eventUid=${eventId}`,
+        url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElement.id}/file`,
     };
 };
 
@@ -37,15 +34,8 @@ const getImageSubvalue = async ({ dataElement, querySingleResource, eventId, abs
     return {
         id,
         name,
-        ...(featureAvailable(FEATURES.trackerImageEndpoint) ?
-            {
-                url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image`,
-                previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image?dimension=small`,
-            } : {
-                url: `${absoluteApiPath}/events/files?dataElementUid=${dataElementId}&eventUid=${eventId}`,
-                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${dataElementId}&eventUid=${eventId}`,
-            }
-        ),
+        url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image`,
+        previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image?dimension=small`,
     };
 };
 
