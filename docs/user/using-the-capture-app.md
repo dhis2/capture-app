@@ -391,7 +391,7 @@ You now have two options:
 > If you cannot edit the event, the **Edit event** button is replaced by a **View only** badge explaining why. This happens when:
 >
 > - You only have view access to the program, program stage(s), or tracked entity type.
-> - The event's date is outside the program's editing period, or the event is completed and outside the program's **complete events expiry days** window.
+> - The event's date is outside the program's editing period (expiry days), or the event is completed and outside the program's **complete events expiry days** window.
 > - The event is completed and the program stage has **Block entry form after completed** enabled.
 >
 > Users with the **Edit expired data** authority can still edit events affected by the last two cases.
