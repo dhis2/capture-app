@@ -15,7 +15,7 @@ Feature: The user interacts with the changelog widget
     When you change the page size to 20
     Then the number of changelog table rows should be 19
     And you change the page size to 100
-    Then the number of changelog table rows should be 37
+    Then the number of changelog table rows should be 39
     And the table footer should display page 1
 
   @v>=41
