@@ -959,15 +959,15 @@ When you deselect the program you see the following
 
 ##### Selecting a program with enrollments
 
-When program _and_ enrollment selections are empty, you first have to select a program. 
-If the tracked entity (in this case "Anna Jones") has enrollments under the program you select you will see the following message.
-
-![](resources/images/enrollment-dash-09.png)
+When program _and_ enrollment selections are empty, you first have to select a program.
+Since only one enrollment can be active per program at a time, if the tracked entity (in
+this case "Anna Jones") already has an active enrollment under the program you select,
+you will be taken directly to that enrollment's dashboard.
 
 ##### Selecting a program with zero enrollments
 
-If the tracked entity (in this case "Anna Jenkins") does not have enrollments under the program you select you will see a message explaining that there are no enrollments for that program.
-You will also be given the option to enroll "Anna Jenkins" in that program.
+If the tracked entity (in this case "Anna Jones") does not have enrollments under the program you select you will see a message explaining that there are no enrollments for that program.
+You will also be given the option to enroll "Anna Jones" in that program.
 
 ![](resources/images/enrollment-dash-10.png)
 
@@ -981,7 +981,7 @@ You will also be given the option to either create a new event for the selected 
 
 ##### Selecting a program with a different tracked entity type 
 
-When your selected tracked entity type is a person, as in our example with Anna Jenkins, and you select a program that is not of type person but for example of a type Malaria case you will see the following.
+When your selected tracked entity type is a person, as in our example with Anna Jones, and you select a program that is not of type person but for example of a type Malaria case you will see the following.
 
 ![](resources/images/enrollment-dash-12.png)
 
@@ -1048,20 +1048,11 @@ When clicking  **New {stage event name}** button, you will be redirected to the 
 
 ![](resources/images/enrollment-dash-stages-events-06.png)
 
-
-When clicking  **Go to full {stage event name}** button, you will be redirected to the  **Program stage list page** for this selected stage.
-
-![](resources/images/enrollment-dash-stages-events-08.png)
-
 #### Expanded stages with more than 5 events 
 
 In case there are more than 5 events in the list, only the first 5 are shown. You will be able to view the rest by clicking  **Show more**.
 
 ![](resources/images/enrollment-dash-stages-events-05.png)
-
-If you want to collapse events, you can use  **Reset list** button which will return the table back to the default sorting and initial 5 events.
-
-![](resources/images/enrollment-dash-stages-events-07.png)
 
 ### Enrollment widget
 
