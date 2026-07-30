@@ -1,17 +1,17 @@
 # Translators:
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
-# Namwan Chanthavisouk, 2026
-# Viktor Varland <viktor@dhis2.org>, 2026
 # Saysamone Sibounma, 2026
 # Philip Larsen Donnelly, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Namwan Chanthavisouk, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Namwan Chanthavisouk, 2026\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -315,9 +315,6 @@ msgstr "ບໍ່, ຍົກເລີກ"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "ທ່ານບໍ່ໄດ້ອະນຸຍາດໃຫ້ສ້າງເຫດການໃນຕົວເລືອກນີ້"
-
-msgid "Save"
-msgstr "ບັນທຶກ"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "ບັນທຶກ {{trackedEntityName}} "
@@ -623,11 +620,17 @@ msgstr "ບໍ່ສາມາດເອົາຂໍ້ມູນຄຳແນະນ
 msgid "No items to display"
 msgstr "ບໍ່ມີລາຍການໃຫ້ສະແດງ"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "ເລືອກຖັນ"
 
 msgid "Columns to show in table"
 msgstr "ຖັນທີ່ຈະສະແດງຢູ່ໃນຕາຕະລາງ"
+
+msgid "Save"
+msgstr "ບັນທຶກ"
 
 msgid "Column"
 msgstr "ຖັນ"
@@ -702,9 +705,6 @@ msgstr "ໂປແກຣມທີ່ເລືອກໄວ້ບໍ່ຖືກຕ
 
 msgid "Add note"
 msgstr "ຂຽນບັນທຶກລົງ"
-
-msgid "You don't have access to write notes"
-msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃນການຂຽນຂໍ້ຄວາມ"
 
 msgid "Write note"
 msgstr "ຂຽນຂໍ້ຄວາມ"
@@ -801,9 +801,6 @@ msgstr "ພົບຂໍ້ຜິດພາດ"
 msgid "Page is missing required values from URL"
 msgstr "ບໍ່ພົບໜ້ານີ້ ຕ້ອງການຄ່າຈາກ URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "ຫົວໜ່ວຍການຈັດຕັ້ງບໍ່ຖືກຕ້ອງກັບໂປແກຼມນີ້"
-
 msgid "There was an error opening the Page"
 msgstr "ພົບຂໍ້ຜິດພາດໃນການເປີດໜ້ານີ້"
 
@@ -812,6 +809,9 @@ msgstr "ພົບຂໍ້ຜິດພາດໃນການໂຫຼດໜ້າ
 
 msgid "Program stage is invalid"
 msgstr "ຂັ້ນຕອນໂປແກຼມບໍ່ຖືກຕ້ອງ"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "ການລາຍງານ"
@@ -967,12 +967,6 @@ msgstr "ກໍລະນີ"
 msgid "event"
 msgstr "ເຫດການ"
 
-msgid "You don't have access to edit this event"
-msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃນການແກ້ໄຂເຫດການນີ້"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr "ເບິ່ງບັນທຶກການປ່ຽນແປງ"
 
@@ -986,6 +980,12 @@ msgstr "ການອອກຈາກໜ້ານີ້ແມ່ນຈະຖືກ
 
 msgid "Errors"
 msgstr "ຜິດພາດ"
+
+msgid "This event doesn't have any notes"
+msgstr "ບໍ່ມີຂໍຄວາມໃນເຫດການນີ້"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "ແຈ້ງເຕືອນ"
@@ -1024,7 +1024,7 @@ msgid "Search by attributes"
 msgstr "ຄົ້ນຫາໂດຍຄຸນລັກສະນະ"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "ຄົ້ນຫາ {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1069,11 +1069,35 @@ msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ
 msgid "An error occurred loading possible duplicates"
 msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດຂໍ້ມູນຊໍ້າກັນ"
 
-msgid "You don't have access to delete this relationship"
-msgstr "ທ່ານບໍ່ມີສິດໃນການລົບຄວາມສຳພັນນີ້"
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "ທ່ານບໍ່ສິດເຂົ້າເຖິງເພື່ອສ້າງຄວາມສໍາພັນໃດໆ"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "ເບິ່ງໄດ້ເທົ່ານັ້ນ"
 
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
@@ -1091,7 +1115,7 @@ msgid "Choose an organisation unit"
 msgstr "ເລືອກຫົວໜ່ວຍການຈັດຕັງ"
 
 msgid "Choose a {{categoryName}}"
-msgstr ""
+msgstr "ເລືອກ {{categoryName}}"
 
 msgid "Search for a {{categoryName}}"
 msgstr ""
@@ -1115,7 +1139,7 @@ msgid "Choose a program"
 msgstr "ເລືອກໂປແກຼມ"
 
 msgid "Choose a {{title}}"
-msgstr ""
+msgstr "ເລືອກ {{title}}"
 
 msgid "Search for a {{title}}"
 msgstr ""
@@ -1185,7 +1209,7 @@ msgid ""
 msgstr "ທ່ານສາມາດປ່ຽນຄໍາຄົ້ນຫາ ແລະ ຄົ້ນຫາອີກເທື່ອຫນຶ່ງ"
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "ສ້າງໃໝ່ {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1254,17 +1278,11 @@ msgstr "ບໍ່ມີປະເພດບາຍບຸກຄົນທີ່ສາ
 msgid "Assigned to"
 msgstr "ມອບໝາຍໃຫ້"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "ແກ້ໄຂ"
 
 msgid "No one is assigned to this event"
 msgstr "ບໍ່ມີຜູ້ຖືກມອບໝາຍໃຫ້ກັບເຫດການນີ້"
-
-msgid "You don't have access to assign a user to this event"
-msgstr ""
 
 msgid "Assign"
 msgstr "ມອບໝາຍ"
@@ -1295,9 +1313,6 @@ msgid "Unsaved changes"
 msgstr "ການປ່ຽນແປງທີ່ບໍ່ໄດ້ບັນທຶກໄວ້"
 
 msgid "Continue data entry"
-msgstr ""
-
-msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1494,26 +1509,17 @@ msgstr "ບໍ່ມີການບັນທຶກຮູບຫຼາຍຫຼ່
 msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "ເຫດການດັ່ງກ່າວບໍ່ສາມາດແກ້ໄຂໄດ້ຫຼັງຈາກສໍາເລັດແລ້ວ"
-
 msgid "Notes about this event"
 msgstr "ຂໍ້ຄວາມກ່ຽວກັບເຫດການນີ້"
 
 msgid "Write a note about this event"
 msgstr "ຂຽນຂໍ້ຄວາມກ່ຽວກັບເຫດການນີ້"
 
-msgid "This event doesn't have any notes"
-msgstr "ບໍ່ມີຂໍຄວາມໃນເຫດການນີ້"
-
 msgid "after"
 msgstr "ກ່ອນ"
 
 msgid "before"
 msgstr "ຫຼັງ"
-
-msgid "Schedule date info"
-msgstr "ຂໍ້ມູນຕາຕະລາງວັນທີ"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "ກຳນົດເວລາອັດຕະໂນມັດສຳລັບ {{suggestedScheduleDate}}"
@@ -1573,6 +1579,9 @@ msgstr "ບັນທຶກ"
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
+msgid "Save changes"
+msgstr "ບັນທຶກ"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1580,8 +1589,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr "ບັນທຶກ"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} ລາຍລະອຽດສ່ວນຕົວ"
 
 msgid "Profile"
 msgstr "ລາຍລະອຽດສ່ວນຕົວ"
@@ -1600,6 +1609,34 @@ msgstr "ລອງອີກຄັ້ງ ຫຼື ຕິດຕໍ່ຜູ້ເ�
 
 msgid "Fix errors in the form to continue."
 msgstr "ແກ້ໄຂຂໍ້ຜິດພາດໃນແບບຟອມເພື່ອສືບຕໍ່."
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "ທ່ານບໍ່ມີສິດເຂົ້າເຖິງເພື່ອລຶບ {{trackedEntityTypeName}} ນີ້"
@@ -1621,6 +1658,9 @@ msgstr "ມີບັນຫາໃນການລຶບ {{trackedEntityTypeName}}"
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "ຕົກລົງ, ລຶບ {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "ເບີ່ງຂໍ້ມູນ"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "ບໍ່ສາມາດໂຫຼດລາຍການຂໍ້ມູນສ່ວນຕົວໄດ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ"
@@ -1682,9 +1722,6 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr "ກະລຸນາເລືອກເຫດການທີ່ຖືກຕ້ອງ"
 
-msgid "You do not have access to create events in this stage"
-msgstr "ທ່ານບໍ່ມີສິດເຂົ້າເຖິງເພື່ອສ້າງເຫດການໃນຂັ້ນຕອນນີ້"
-
 msgid "This stage can only have one event"
 msgstr "ຂັ້ນຕອນນີ້ສາມາດມີເຫດການດຽວເທົ່ານັ້ນ"
 
@@ -1692,6 +1729,9 @@ msgid "New {{ eventName }} event"
 msgstr "ເຫດການໃໝ່ {{ eventName }}"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1730,6 +1770,9 @@ msgstr "{{ overdueEvents }} ເກີນກຳນົດ"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} ກຳນົດເວລາ"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "ຂັ້ນຕອນ ແລະ ເຫດການ"
@@ -1868,6 +1911,9 @@ msgstr "ພົບຂໍ້ຜິດພາດໃນຂະນະທີ່ກຳລ
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "ເພື່ອເປີດເບິ່ງຄວາມສໍາພັນນີ້, ກະລຸນາລໍຖ້າຈົນກ່ວາການບັນທຶກຈະສໍາເລັດ"
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "ປະເພດ"
 
@@ -1936,9 +1982,6 @@ msgstr ""
 
 msgid "Registration Date"
 msgstr "ວັນທີລົງທະບຽນ"
-
-msgid "Inactive"
-msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
 
 msgid "Enrollment status"
 msgstr "ສະຖານະການລົງທະບຽນ"
@@ -2199,6 +2242,12 @@ msgstr "ເກີດຄວາມຜິດພາດໃນການແກ້ໄຂ
 msgid "Error updating the Assignee"
 msgstr "ເກີດຄວາມຜິດພາດໃນການອັບເດດຜູ້ຮັບຜິດຊອບ"
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2282,4 +2331,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "ເລືອກແລ້ວ"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""
