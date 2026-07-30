@@ -80,11 +80,10 @@ Then('only rows with Data item {string} should be displayed', (dataItem) => {
         .first()
         .should('contain.text', dataItem);
 
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(2)
-            .should('contain.text', dataItem);
+    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(3)').then(($cells) => {
+        [...$cells].forEach((cell) => {
+            expect(cell.textContent.trim()).to.contain(dataItem);
+        });
     });
 });
 
