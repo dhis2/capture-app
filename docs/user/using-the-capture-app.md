@@ -365,10 +365,9 @@ You now have two options:
 >
 > When filling in data you might face a warning telling you that a possible duplicate has been found. You can click the warning to see these
 > duplicates and if the duplicate is a match you can choose to link that **tracked entity** by clicking the **Link** button.
-> If the warning is still present when you are done filling in data, you will not see the **Save new _[tracked entity type]_ and link** button.
-> Instead you will be presented with a button called **Review duplicates**. When you click this button a list of possible duplicates will be displayed.
-> If any of these duplicates matches the **tracked entity** you are trying to create you can click the **Link** button, if not you can click
-> the **Save as new _[tracked entity type]_** button to register a new **tracked entity**.
+> If the warning is still present when you click **Save new _[tracked entity type]_ and link**, a dialog listing the possible duplicates opens
+> automatically instead of saving. If any of these duplicates matches the **tracked entity** you are trying to create you can click the **Link**
+> button, if not you can click **Save as new _[tracked entity type]_** to register a new **tracked entity**, or **Cancel** to go back.
 
 
 ## Edit an event { #capture_edit_event } 
@@ -377,7 +376,7 @@ You now have two options:
 
 2. Select a program.
 
-3. Select an organisation unit or click the _all events_-link to view all events accessible to you.
+3. Select an organisation unit, or if none is selected, click the **See working list without organisation unit** link to view events across all accessible organisation units.
 
     ![](resources/images/main-page-all-accessible-records.png)
     All events registered to the selected program show up in a list.
@@ -389,7 +388,13 @@ You now have two options:
 6. Modify the event details and click **Save**.
 
 > **Note**  
-> The **Edit event** button is disabled if the program stage has **Block entry form after completed** enabled and your user role does not include the **Uncomplete events** authority.
+> If you cannot edit the event, the **Edit event** button is replaced by a **View only** badge explaining why. This happens when:
+>
+> - You only have view access to the program, program stage(s), or tracked entity type.
+> - The event's date is outside the program's editing period, or the event is completed and outside the program's **complete events expiry days** window.
+> - The event is completed and the program stage has **Block entry form after completed** enabled.
+>
+> Users with the **Edit expired data** authority can still edit events affected by the last two cases.
 
 
 ## Delete an event { #capture_delete_event } 
@@ -407,6 +412,8 @@ You now have two options:
 5. In the menu that is displayed click **Delete event**.
 
     ![delete event](resources/images/delete_event.png)
+
+6. A confirmation dialog opens warning that deleting an event is permanent and cannot be undone. Click **Yes, delete event** to confirm, or **No, cancel** to back out.
 
 ## Modify an event list layout { #capture_modify_event_list_layout } 
 
@@ -1318,7 +1325,7 @@ The widgets seen in the right-hand column will display and function the same way
 ## Enrollment event new page
 
 You can reach this page add event page by clicking in the **New {stage event name}** button in the overview page. 
-In this page you can switch between different tabs: **Report** to add new event, **Schedule** to schedule an event and **Refer** to refer event.
+In this page you can switch between different tabs: **Report** to add new event and **Schedule** to schedule an event.
 If you have unsaved changes in one tab and switch to another tab, there will be a warning displayed.
 
 ### New event widget form
