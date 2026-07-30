@@ -1,3 +1,10 @@
+## [106.7.1](https://github.com/dhis2/capture-app/compare/v106.7.0...v106.7.1) (2026-07-30)
+
+
+### Bug Fixes
+
+* [DHIS2-19814] re-enable and de-flake changelog sort by date test ([#4650](https://github.com/dhis2/capture-app/issues/4650)) ([150b135](https://github.com/dhis2/capture-app/commit/150b135351b9b75d8eeea42aeb0de19d20b481cc))
+
 # [106.7.0](https://github.com/dhis2/capture-app/compare/v106.6.3...v106.7.0) (2026-07-22)
 
 
