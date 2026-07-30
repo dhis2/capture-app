@@ -76,7 +76,7 @@ The second option, is to register a tracked entity with program and enroll it.
     ![image](resources/images/register-without-enrollment-new-button.png)
 
     You'll now be navigated to the registration page. In that page you will see a drop down 
-    menu similar to the one in the image below. From the dropdown menu you can select a tracked entity 
+    menu similar to the one in the image below. You can type to filter and select a tracked entity 
     type, eg. Building, Person etc.
     
     ![image](resources/images/register-without-enrollment-dropdown-menu.png)
@@ -415,6 +415,8 @@ You now have two options:
 
 6. A confirmation dialog opens warning that deleting an event is permanent and cannot be undone. Click **Yes, delete event** to confirm, or **No, cancel** to back out.
 
+    ![delete event confirmation](resources/images/delete_event_confirm.png)
+
 ## Modify an event list layout { #capture_modify_event_list_layout } 
 
 You can select which columns to show or hide in an event list. This can
@@ -736,7 +738,7 @@ The search terms that you typed in before will be prefilled in the registration 
 
 2. Click the **Search** button to open the search page.
 
-3. Click on the drop down menu and select the type of entity you want to search for.
+3. Click the **Search for** field. You can type to filter the list of tracked entity types.
 
     ![](resources/images/search-by-attributes-domain-selector-overview-0.png)
 
@@ -1227,12 +1229,12 @@ You can reach the enrollment event edit page is by clicking any event in the Pro
 
 ### Top bar context 
 
-At the top of the page you can see various information related to the current context. You can see the program, the organisation unit, the tracked entity, the enrollment date, the stage and the enrollment event date.
+At the top of the page you can see various information related to the current context. You can see the program, the organisation unit, the tracked entity, the enrollment date, the stage and the report date.
 
-To go to Enrollment Overview page you can:
-- click the "Back to all stages and events" button.
+To go to the Enrollment Overview page you can:
+- click **Enrollment dashboard** in the breadcrumb.
 - deselect the stage from the top bar.
-- deselect the event from the top bar.
+- deselect the event (report date) from the top bar.
 
 ![](resources/images/enrollment-event-view-edit-navigation.png)
 
@@ -1245,17 +1247,6 @@ This is the form where you can see and edit the enrollment event details.
 In the view/edit event form you can see the stage name and icon.
 
 ![](resources/images/enrollment-event-view-edit-header.png)
-
-### Top bar context  
-
-At the top of the page you can see different information related to the current context. You can see the program, the organisation unit, the tracked entity, the enrollment date, the stage. 
-
-To go to Enrollment Overview page you can: 
-- deselect the stage from the top bar. 
-- deselect the event from the top bar. 
-
-![](resources/images/enrollment-event-new-navigation.png) 
-
 
 ### Scheduled date in edit event form
 If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
