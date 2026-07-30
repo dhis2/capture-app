@@ -80,7 +80,7 @@ Then('only rows with Data item {string} should be displayed', (dataItem) => {
         .first()
         .should('contain.text', dataItem);
 
-    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(3)').then(($cells) => {
+    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(3)').should(($cells) => {
         [...$cells].forEach((cell) => {
             expect(cell.textContent.trim()).to.contain(dataItem);
         });
@@ -107,19 +107,11 @@ When('you click the sort Date icon', () => {
 });
 
 Then('the changelog data is sorted on Date in ascending order', () => {
-    const parseDate = text => new Date(text).getTime();
-    let previous = 0;
-
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(0)
-            .invoke('text')
-            .then((text) => {
-                const current = parseDate(text.trim());
-                expect(current).to.be.at.least(previous);
-                previous = current;
-            });
+    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(1)').should(($cells) => {
+        const parseDate = text => new Date(text).getTime();
+        const values = [...$cells].map(cell => parseDate(cell.textContent.trim()));
+        const sorted = [...values].sort((a, b) => a - b);
+        expect(values).to.deep.equal(sorted);
     });
 });
 
