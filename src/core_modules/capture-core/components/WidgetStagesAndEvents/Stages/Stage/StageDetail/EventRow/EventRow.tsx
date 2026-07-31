@@ -26,9 +26,9 @@ const EventRowPlain = ({
     programStage,
     onDeleteEvent,
     onRollbackDeleteEvent,
-    onOptimisticStatusUpdate,
-    onStatusUpdateSuccess,
-    onStatusUpdateError,
+    onStatusMutate,
+    onStatusUpdated,
+    onStatusError,
     programId,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
@@ -64,12 +64,12 @@ const EventRowPlain = ({
                             programStage={programStage}
                             pendingApiResponse={pendingApiResponse}
                             eventDetailsForRollback={eventDetails}
-                            onCompletionStatusMutate={newStatus => onOptimisticStatusUpdate(eventDetails, newStatus)}
-                            onCompletionStatusUpdated={() => onStatusUpdateSuccess(id)}
-                            onCompletionStatusError={() => onStatusUpdateError(id)}
-                            onOptimisticStatusUpdate={(_id, newStatus) => onOptimisticStatusUpdate(eventDetails, newStatus)}
-                            onStatusUpdateSuccess={() => onStatusUpdateSuccess(id)}
-                            onStatusUpdateError={() => onStatusUpdateError(id)}
+                            onCompletionStatusMutate={newStatus => onStatusMutate(eventDetails, newStatus)}
+                            onCompletionStatusUpdated={() => onStatusUpdated(id)}
+                            onCompletionStatusError={() => onStatusError(id)}
+                            onStatusMutate={(_id, newStatus) => onStatusMutate(eventDetails, newStatus)}
+                            onStatusUpdated={() => onStatusUpdated(id)}
+                            onStatusError={() => onStatusError(id)}
                             onOptimisticDelete={onDeleteEvent}
                             onDeleteError={onRollbackDeleteEvent}
                             onOpenChangelog={() => setChangelogOpen(true)}

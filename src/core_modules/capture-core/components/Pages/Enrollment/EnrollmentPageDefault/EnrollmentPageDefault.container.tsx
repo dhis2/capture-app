@@ -150,16 +150,16 @@ export const EnrollmentPageDefault = () => {
         dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
     }, [dispatch]);
 
-    const onOptimisticStatusUpdate = useCallback((event: ApiEnrollmentEvent, newStatus: string) => {
+    const onStatusMutate = useCallback((event: ApiEnrollmentEvent, newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = event;
         dispatch(updateEnrollmentEvent(event.event, { ...eventWithoutCompletion, status: newStatus }));
     }, [dispatch]);
 
-    const onStatusUpdateSuccess = useCallback((eventId: string) => {
+    const onStatusUpdated = useCallback((eventId: string) => {
         dispatch(commitEnrollmentEvent(eventId));
     }, [dispatch]);
 
-    const onStatusUpdateError = useCallback((eventId: string) => {
+    const onStatusError = useCallback((eventId: string) => {
         dispatch(rollbackEnrollmentEvent(eventId));
     }, [dispatch]);
 
@@ -224,9 +224,9 @@ export const EnrollmentPageDefault = () => {
                 hideWidgets={hideWidgets}
                 onEventClick={onEventClick}
                 onDeleteEvent={onDeleteEvent}
-                onOptimisticStatusUpdate={onOptimisticStatusUpdate}
-                onStatusUpdateSuccess={onStatusUpdateSuccess}
-                onStatusUpdateError={onStatusUpdateError}
+                onStatusMutate={onStatusMutate}
+                onStatusUpdated={onStatusUpdated}
+                onStatusError={onStatusError}
                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                 onLinkedRecordClick={onLinkedRecordClick}
                 onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}

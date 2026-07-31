@@ -13,9 +13,9 @@ type Props = {
     eventStatus?: string;
     pendingApiResponse?: boolean;
     onClose: () => void;
-    onOptimisticStatusUpdate?: (eventId: string, newStatus: string) => void;
-    onStatusUpdateError?: (eventId: string, previousStatus: string) => void;
-    onStatusUpdateSuccess?: (eventId: string, newStatus: string) => void;
+    onStatusMutate?: (eventId: string, newStatus: string) => void;
+    onStatusError?: (eventId: string, previousStatus: string) => void;
+    onStatusUpdated?: (eventId: string, newStatus: string) => void;
 };
 
 export const SkipMenuItem = ({
@@ -23,9 +23,9 @@ export const SkipMenuItem = ({
     eventStatus,
     pendingApiResponse,
     onClose,
-    onOptimisticStatusUpdate,
-    onStatusUpdateError,
-    onStatusUpdateSuccess,
+    onStatusMutate,
+    onStatusError,
+    onStatusUpdated,
 }: Props) => {
     const dataEngine = useDataEngine();
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
@@ -52,18 +52,18 @@ export const SkipMenuItem = ({
         {
             onMutate: (payload: { status: string }) => {
                 const previousStatus = eventStatus;
-                onOptimisticStatusUpdate?.(eventId, payload.status);
+                onStatusMutate?.(eventId, payload.status);
                 return { previousStatus };
             },
             onError: (error: unknown, payload: { status: string }, context?: { previousStatus?: string }) => {
                 showError({ message: i18n.t('An error occurred when updating event status') });
                 log.error(errorCreator('An error occurred when updating event status')({ error, payload, context }));
                 if (context?.previousStatus) {
-                    onStatusUpdateError?.(eventId, context.previousStatus);
+                    onStatusError?.(eventId, context.previousStatus);
                 }
             },
             onSuccess: (_data, payload) => {
-                onStatusUpdateSuccess?.(eventId, payload.status);
+                onStatusUpdated?.(eventId, payload.status);
             },
         },
     );

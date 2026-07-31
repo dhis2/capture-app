@@ -27,9 +27,9 @@ type Props = {
     onCompletionStatusUpdated?: (newStatus: string) => void;
     onCompletionStatusError?: () => void;
 
-    onOptimisticStatusUpdate?: (eventId: string, newStatus: string) => void;
-    onStatusUpdateError?: (eventId: string, previousStatus: string) => void;
-    onStatusUpdateSuccess?: (eventId: string, newStatus: string) => void;
+    onStatusMutate?: (eventId: string, newStatus: string) => void;
+    onStatusError?: (eventId: string, previousStatus: string) => void;
+    onStatusUpdated?: (eventId: string, newStatus: string) => void;
 
     onOptimisticDelete?: (eventId: string) => void;
     onDeleteSuccess?: (eventId: string) => void;
@@ -60,7 +60,7 @@ const computeVisibility = (props: Props, ctx: {
     const completion = ctx.canChangeCompletionStatus && hasHandler(props.onCompletionStatusUpdated);
     const skip = ctx.canWrite
         && isSkippable(props.eventStatus)
-        && hasHandler(props.onOptimisticStatusUpdate, props.onStatusUpdateSuccess);
+        && hasHandler(props.onStatusMutate, props.onStatusUpdated);
     const del = ctx.canWrite && hasHandler(props.onOptimisticDelete, props.onDeleteSuccess);
     const changelog = hasHandler(props.onOpenChangelog);
     return { completion, skip, delete: del, changelog, any: [completion, skip, del, changelog].some(Boolean) };
@@ -79,9 +79,9 @@ export const EventOverflowMenu = (props: Props) => {
         onCompletionStatusMutate,
         onCompletionStatusUpdated,
         onCompletionStatusError,
-        onOptimisticStatusUpdate,
-        onStatusUpdateError,
-        onStatusUpdateSuccess,
+        onStatusMutate,
+        onStatusError,
+        onStatusUpdated,
         onOptimisticDelete,
         onDeleteSuccess,
         onDeleteError,
@@ -150,9 +150,9 @@ export const EventOverflowMenu = (props: Props) => {
                                 eventStatus={eventStatus}
                                 pendingApiResponse={pendingApiResponse}
                                 onClose={close}
-                                onOptimisticStatusUpdate={onOptimisticStatusUpdate}
-                                onStatusUpdateError={onStatusUpdateError}
-                                onStatusUpdateSuccess={onStatusUpdateSuccess}
+                                onStatusMutate={onStatusMutate}
+                                onStatusError={onStatusError}
+                                onStatusUpdated={onStatusUpdated}
                             />
                         )}
                         {visibility.changelog && onOpenChangelog && (
