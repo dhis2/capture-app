@@ -6,15 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
-    commitEnrollmentEvent,
     EnrollmentAccessProvider,
     rollbackEnrollmentAndEvents,
-    rollbackEnrollmentEvent,
     showEnrollmentError,
     updateEnrollmentAndEvents,
     updateEnrollmentAttributeValues,
     updateEnrollmentDate,
-    updateEnrollmentEvent,
     updateIncidentDate,
     useCommonEnrollmentDomainData,
     useRuleEffects,
@@ -150,19 +147,6 @@ export const EnrollmentPageDefault = () => {
         dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
     }, [dispatch]);
 
-    const onStatusMutate = useCallback((event: ApiEnrollmentEvent, newStatus: string) => {
-        const { completedAt, completedBy, ...eventWithoutCompletion } = event;
-        dispatch(updateEnrollmentEvent(event.event, { ...eventWithoutCompletion, status: newStatus }));
-    }, [dispatch]);
-
-    const onStatusUpdated = useCallback((eventId: string) => {
-        dispatch(commitEnrollmentEvent(eventId));
-    }, [dispatch]);
-
-    const onStatusError = useCallback((eventId: string) => {
-        dispatch(rollbackEnrollmentEvent(eventId));
-    }, [dispatch]);
-
     const onAddNew = () => {
         navigate(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
@@ -224,9 +208,6 @@ export const EnrollmentPageDefault = () => {
                 hideWidgets={hideWidgets}
                 onEventClick={onEventClick}
                 onDeleteEvent={onDeleteEvent}
-                onStatusMutate={onStatusMutate}
-                onStatusUpdated={onStatusUpdated}
-                onStatusError={onStatusError}
                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                 onLinkedRecordClick={onLinkedRecordClick}
                 onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}

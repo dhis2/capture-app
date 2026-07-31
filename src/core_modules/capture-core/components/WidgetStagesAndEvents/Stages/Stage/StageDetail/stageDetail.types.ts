@@ -11,9 +11,6 @@ type ExtractedProps = {
     stageId: string;
     onCreateNew: (stageId: string) => void;
     onDeleteEvent: (eventId: string) => void;
-    onStatusMutate: (event: ApiEnrollmentEvent, newStatus: string) => void;
-    onStatusUpdated: (eventId: string) => void;
-    onStatusError: (eventId: string) => void;
     onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
     hiddenProgramStage?: boolean;
 };

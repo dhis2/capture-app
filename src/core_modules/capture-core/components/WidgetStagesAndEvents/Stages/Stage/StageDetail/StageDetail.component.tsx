@@ -95,9 +95,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         enableUserAssignment = false,
         onEventClick,
         onDeleteEvent,
-        onStatusMutate,
-        onStatusUpdated,
-        onStatusError,
         onRollbackDeleteEvent,
         onViewAll,
         onCreateNew,
@@ -230,9 +227,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         onEventClick={onEventClick}
                         onDeleteEvent={onDeleteEvent}
                         onRollbackDeleteEvent={onRollbackDeleteEvent}
-                        onStatusMutate={onStatusMutate}
-                        onStatusUpdated={onStatusUpdated}
-                        onStatusError={onStatusError}
                     />
                 );
             });
