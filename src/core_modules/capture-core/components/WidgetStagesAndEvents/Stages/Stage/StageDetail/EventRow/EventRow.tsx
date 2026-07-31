@@ -14,6 +14,7 @@ import { DeleteActionButton } from '../../../../../EventOverflowMenu/DeleteMenuI
 import { SkipAction } from './SkipAction';
 import { DeleteActionModal } from '../../../../../EventOverflowMenu/DeleteEventModal';
 import { EventCompletionMenuItem } from '../../../../../EventOverflowMenu/EventCompletionMenuItem';
+import { eventStatuses } from '../../../../../WidgetEventEdit/constants/status.const';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -30,13 +31,6 @@ const styles: Readonly<any> = {
         cursor: 'not-allowed',
         opacity: 0.5,
     },
-};
-
-export const EventStatuses = {
-    ACTIVE: 'ACTIVE',
-    COMPLETED: 'COMPLETED',
-    SKIPPED: 'SKIPPED',
-    SCHEDULE: 'SCHEDULE',
 };
 
 const EventRowPlain = ({
@@ -98,8 +92,8 @@ const EventRowPlain = ({
                                     dense
                                     dataTest={'overflow-menu'}
                                 >
-                                    {(eventDetails.status === EventStatuses.SCHEDULE ||
-                                        eventDetails.status === EventStatuses.SKIPPED) && (
+                                    {(eventDetails.status === eventStatuses.SCHEDULE ||
+                                        eventDetails.status === eventStatuses.SKIPPED) && (
                                         <SkipAction
                                             eventId={id}
                                             eventDetails={eventDetails}
