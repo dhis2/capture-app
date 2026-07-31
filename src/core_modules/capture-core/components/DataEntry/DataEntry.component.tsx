@@ -143,6 +143,7 @@ export type DataEntryOutputProps = {
     orgUnitId?: string,
     pluginContext?: PluginContext,
     viewMode?: boolean,
+    fieldOptions?: Record<string, any>,
 };
 
 type OwnProps = DataEntryOutputProps & {

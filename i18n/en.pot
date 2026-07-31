@@ -626,6 +626,9 @@ msgstr "Type to filter options"
 msgid "No match found"
 msgstr "No match found"
 
+msgid "Search for an organisation unit"
+msgstr "Search for an organisation unit"
+
 msgid "Clear"
 msgstr "Clear"
 
