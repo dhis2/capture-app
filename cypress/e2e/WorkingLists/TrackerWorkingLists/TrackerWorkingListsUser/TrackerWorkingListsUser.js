@@ -39,6 +39,40 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () =
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
+// DHIS2-13960: stub the trackedEntities list so the assignee-filter result is deterministic
+// across demo databases, which return a varying number of matching teis for this filter.
+Given('the tracked entities endpoint is stubbed with two active unassigned teis', () => {
+    cy.intercept('GET', '**/tracker/trackedEntities**', {
+        statusCode: 200,
+        body: {
+            pager: { page: 1, pageSize: 15 },
+            trackedEntities: [
+                {
+                    trackedEntity: 'S3JjTA4QMNe',
+                    createdAt: '2019-08-21T13:27:35.295',
+                    inactive: false,
+                    attributes: [
+                        { attribute: 'coaSpbzZiTB', value: 'ZDA984904' },
+                        { attribute: 'Kv4fmHVAzwX', value: 'Village 5 Alfred Nzo Municipality' },
+                    ],
+                    programOwners: [{ orgUnit: 'DiszpKrYNg8', program: 'M3xtLkYBlKI' }],
+                },
+                {
+                    trackedEntity: 'Imv2o18b9wX',
+                    createdAt: '2019-08-21T13:27:27.917',
+                    inactive: false,
+                    attributes: [
+                        { attribute: 'QRg7SZ6VOAV', value: 'FID0001' },
+                        { attribute: 'coaSpbzZiTB', value: 'FSL054948' },
+                        { attribute: 'Kv4fmHVAzwX', value: 'Focus A focus' },
+                    ],
+                    programOwners: [{ orgUnit: 'DiszpKrYNg8', program: 'M3xtLkYBlKI' }],
+                },
+            ],
+        },
+    }).as('getTeis');
+});
+
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
