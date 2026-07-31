@@ -67,7 +67,7 @@ const EventRowPlain = ({
         dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
     }, [dispatch, eventDetails, id]);
 
-    const onCompletionStatusUpdated = useCallback(() => {
+    const onCompletionStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(id));
     }, [dispatch, id]);
 
@@ -114,7 +114,7 @@ const EventRowPlain = ({
                                             eventId={id}
                                             eventStatus={eventDetails.status}
                                             onMutate={onCompletionStatusMutate}
-                                            onUpdated={onCompletionStatusUpdated}
+                                            onSuccess={onCompletionStatusSuccess}
                                             onError={onCompletionStatusError}
                                             onClose={() => setActionsOpen(false)}
                                         />

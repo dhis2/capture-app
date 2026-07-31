@@ -66,7 +66,7 @@ const WidgetHeaderPlain = ({
         }
     }, [dispatch, storedEvent, eventId]);
 
-    const onCompletionStatusUpdated = useCallback(() => {
+    const onCompletionStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
         dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, eventId]);
@@ -124,7 +124,7 @@ const WidgetHeaderPlain = ({
                                             eventId={eventId}
                                             eventStatus={eventStatus}
                                             onMutate={onCompletionStatusMutate}
-                                            onUpdated={onCompletionStatusUpdated}
+                                            onSuccess={onCompletionStatusSuccess}
                                             onError={onCompletionStatusError}
                                             onClose={() => setActionsIsOpen(false)}
                                         />

@@ -90,7 +90,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const canChangeCompletionStatus = useCanChangeCompletionStatus({ programId, stage: programStage, eventStatus });
     const showCompletionAction = !isEditEventPage && canChangeCompletionStatus;
 
-    const onCompletionStatusUpdated = useCallback(() => {
+    const onCompletionStatusSuccess = useCallback(() => {
         dispatch(changeEventFromUrl(eventId, pageKeys.VIEW_EVENT));
     }, [dispatch, eventId]);
 
@@ -158,7 +158,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                             <EventCompletionMenuItem
                                 eventId={eventId}
                                 eventStatus={eventStatus}
-                                onUpdated={onCompletionStatusUpdated}
+                                onSuccess={onCompletionStatusSuccess}
                                 onClose={() => setActionsIsOpen(false)}
                             />
                         )}
