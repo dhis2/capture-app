@@ -11,7 +11,7 @@ type Props = {
     eventId: string;
     eventStatus?: string;
     onMutate?: (newStatus: string) => void;
-    onUpdated?: (newStatus: string) => void;
+    onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
 };
@@ -20,7 +20,7 @@ export const EventCompletionMenuItem = ({
     eventId,
     eventStatus,
     onMutate,
-    onUpdated,
+    onSuccess,
     onError,
     onClose,
 }: Props) => {
@@ -33,7 +33,7 @@ export const EventCompletionMenuItem = ({
     const isCompleted = eventStatus === eventStatuses.COMPLETED;
     const newStatus = isCompleted ? eventStatuses.ACTIVE : eventStatuses.COMPLETED;
 
-    const { mutate: updateCompletionStatus, isLoading } = useMutation(
+    const { mutate: updateCompletionStatus } = useMutation(
         async () => {
             const { event: apiEvent } = await dataEngine.query({
                 event: {
@@ -65,7 +65,7 @@ export const EventCompletionMenuItem = ({
                 onError?.();
             },
             onSuccess: () => {
-                onUpdated?.(newStatus);
+                onSuccess?.(newStatus);
             },
         },
     );
@@ -79,7 +79,7 @@ export const EventCompletionMenuItem = ({
             suffix=""
             onClick={() => {
                 onClose();
-                !isLoading && updateCompletionStatus();
+                updateCompletionStatus();
             }}
         />
     );

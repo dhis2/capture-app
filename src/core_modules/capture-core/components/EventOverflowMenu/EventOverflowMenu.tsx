@@ -139,7 +139,7 @@ export const EventOverflowMenu = (props: Props) => {
                                 eventId={eventId}
                                 eventStatus={eventStatus}
                                 onMutate={onCompletionStatusMutate}
-                                onUpdated={onCompletionStatusUpdated}
+                                onSuccess={onCompletionStatusUpdated}
                                 onError={onCompletionStatusError}
                                 onClose={close}
                             />
