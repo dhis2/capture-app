@@ -285,7 +285,7 @@ Note that rules can be configured in the maintenance app.
 
 To see a rule being executed while enrolling a tracked entity you will have to take the following steps. 
 
-1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when the date of birth is less than a year.
+1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when a tracked entity's age is outside the expected range for the program.
 
 2. Open the **Capture** app.
 ![](resources/images/duplicates-on-creation-00.png)
@@ -293,7 +293,7 @@ To see a rule being executed while enrolling a tracked entity you will have to t
 3. Select your organisation unit and program from the menu on the top.
 ![](resources/images/program-rules-on-creation-00.png)
 
-4. Fill in the date of birth with a value which is less than a year. In our case this is 27th of January 2021. 
+4. Fill in the birth date with a value that falls outside the expected age range. In our case this is 27th of January 2024. 
 ![](resources/images/program-rules-on-creation-01.png)
 
 5. You will now be able to see the warning produced by the program rule underneath the birth date field. 
@@ -318,9 +318,9 @@ You now have two options:
 
 - **Link to an existing _[tracked entity type]_** or 
 
-- **Create new _[tracked entity type]_**.
+- **Create new**.
 
-> The button labels reflect your program's tracked entity type, for example **Link to an existing Person** or **Create new Building**.
+> The **Link to an existing** button label reflects your program's tracked entity type, for example **Link to an existing Person**. The **Create new** button does not.
 
 ![relationship options](resources/images/relationship_options.png)
 
