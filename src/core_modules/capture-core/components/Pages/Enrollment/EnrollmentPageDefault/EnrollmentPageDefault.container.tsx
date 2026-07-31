@@ -151,7 +151,7 @@ export const EnrollmentPageDefault = () => {
     }, [dispatch]);
 
     const onStatusMutate = useCallback((event: ApiEnrollmentEvent, newStatus: string) => {
-        const { completedAt, ...eventWithoutCompletion } = event;
+        const { completedAt, completedBy, ...eventWithoutCompletion } = event;
         dispatch(updateEnrollmentEvent(event.event, { ...eventWithoutCompletion, status: newStatus }));
     }, [dispatch]);
 
