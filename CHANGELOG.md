@@ -1,3 +1,10 @@
+## [106.7.3](https://github.com/dhis2/capture-app/compare/v106.7.2...v106.7.3) (2026-07-31)
+
+
+### Bug Fixes
+
+* [DHIS2-21708] Org unit selector is expanded when form open if no org unit in top bar ([#4629](https://github.com/dhis2/capture-app/issues/4629)) ([9a568ba](https://github.com/dhis2/capture-app/commit/9a568ba1ffd63bfa219b4d527a8b704477b4105f))
+
 ## [106.7.2](https://github.com/dhis2/capture-app/compare/v106.7.1...v106.7.2) (2026-07-30)
 
 
