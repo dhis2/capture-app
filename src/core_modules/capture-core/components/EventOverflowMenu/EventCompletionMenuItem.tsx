@@ -33,7 +33,7 @@ export const EventCompletionMenuItem = ({
     const isCompleted = eventStatus === eventStatuses.COMPLETED;
     const newStatus = isCompleted ? eventStatuses.ACTIVE : eventStatuses.COMPLETED;
 
-    const { mutate: updateCompletionStatus, isLoading } = useMutation(
+    const { mutate: updateCompletionStatus } = useMutation(
         async () => {
             const { event: apiEvent } = await dataEngine.query({
                 event: {
@@ -79,7 +79,7 @@ export const EventCompletionMenuItem = ({
             suffix=""
             onClick={() => {
                 onClose();
-                !isLoading && updateCompletionStatus();
+                updateCompletionStatus();
             }}
         />
     );

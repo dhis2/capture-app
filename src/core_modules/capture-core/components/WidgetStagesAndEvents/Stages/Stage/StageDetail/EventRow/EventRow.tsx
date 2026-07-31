@@ -63,7 +63,7 @@ const EventRowPlain = ({
     });
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        const { completedAt, ...eventWithoutCompletion } = eventDetails;
+        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
         dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
     }, [dispatch, eventDetails, id]);
 
