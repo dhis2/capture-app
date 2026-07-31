@@ -31,9 +31,9 @@ The form configuration is a JSON object that defines the structure of the form. 
 ```
 :::info What does this ID mean?
 This is the ID of the context that the form is being used in. In this case, it is the ID of the program that the form is being used for, and you can find this ID by looking at the URL of the Capture app.
-- **Program ID ->** *Registration form* (the form that shows up when enrolling a new tracked entity instance)
+- **Program ID ->** *Registration form* (the form that shows up when enrolling a new tracked entity)
 - **Program Stage ID ->** *New event in program stage*
-- **Tracked Entity Type ID ->** Tracked entity type form (the form that shows up when registering a new tracked entity instance without a program)
+- **Tracked Entity Type ID ->** Tracked entity type form (the form that shows up when registering a new tracked entity without a program)
 :::
 
 2. Now let's our first section of the form by adding an object to the array. This object should have an `id` and a `name` property. The `id` is a unique identifier for the section, and the `name` is the title of the section. We will also add an `elements` array to the section object, which will contain the fields that we want to add to the form.
@@ -50,7 +50,7 @@ This is the ID of the context that the form is being used in. In this case, it i
 }
 ```
 
-3. Now let's add our first field to the form. Each object in the elements array will represent an element in the form. There are currently two types of elements supported: `TrackedEntityAttribute` and `plugin`. We will start by adding a `TrackedEntityAttribute` element to the form. This element will be used to capture the first name of the tracked entity instance.
+3. Now let's add our first field to the form. Each object in the elements array will represent an element in the form. There are currently two types of elements supported: `TrackedEntityAttribute` and `plugin`. We will start by adding a `TrackedEntityAttribute` element to the form. This element will be used to capture the first name of the tracked entity.
 
 ```json title="capture/dataEntryForms" showLineNumbers
 {
