@@ -1,14 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo, useState } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
+import { useOptimisticEventStatus } from 'capture-core/hooks';
 import { EventOverflowMenu } from '../../../../../EventOverflowMenu';
 import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
-import {
-    updateEnrollmentEvent,
-    commitEnrollmentEvent,
-    rollbackEnrollmentEvent,
-} from '../../../../../Pages/common/EnrollmentOverviewDomain';
 import type { EventRowProps } from './EventRow.types';
 
 const styles: Readonly<any> = {
@@ -36,32 +31,15 @@ const EventRowPlain = ({
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [changelogOpen, setChangelogOpen] = useState(false);
-    const dispatch = useDispatch();
 
-    const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
-        dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
-    }, [dispatch, eventDetails, id]);
-
-    const onCompletionStatusUpdated = useCallback(() => {
-        dispatch(commitEnrollmentEvent(id));
-    }, [dispatch, id]);
-
-    const onCompletionStatusError = useCallback(() => {
-        dispatch(rollbackEnrollmentEvent(id));
-    }, [dispatch, id]);
-
-    const onStatusMutate = useCallback((_id: string, newStatus: string) => {
-        dispatch(updateEnrollmentEvent(id, { ...eventDetails, status: newStatus }));
-    }, [dispatch, eventDetails, id]);
-
-    const onStatusUpdated = useCallback(() => {
-        dispatch(commitEnrollmentEvent(id));
-    }, [dispatch, id]);
-
-    const onStatusError = useCallback(() => {
-        dispatch(rollbackEnrollmentEvent(id));
-    }, [dispatch, id]);
+    const {
+        onCompletionStatusMutate,
+        onCompletionStatusUpdated,
+        onCompletionStatusError,
+        onStatusMutate,
+        onStatusUpdated,
+        onStatusError,
+    } = useOptimisticEventStatus(eventDetails, id);
 
     const changelogEventData = useMemo(
         () => (eventDetails.dataValues ?? []).reduce<Record<string, { value: string }>>(

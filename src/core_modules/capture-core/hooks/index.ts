@@ -10,3 +10,4 @@ export { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser
 export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
 export { useEventEditPermissions } from './useEventEditPermissions';
 export { useCanChangeCompletionStatus } from './useCanChangeCompletionStatus';
+export { useOptimisticEventStatus } from './useOptimisticEventStatus';

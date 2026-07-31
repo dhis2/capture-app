@@ -4,18 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, IconEdit24, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useOptimisticEventStatus } from 'capture-core/hooks';
 import { eventStatuses } from '../constants/status.const';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
-import {
-    updateEnrollmentEvent,
-    commitEnrollmentEvent,
-    rollbackEnrollmentEvent,
-    deleteEnrollmentEvent,
-} from '../../Pages/common/EnrollmentOverviewDomain';
+import { deleteEnrollmentEvent } from '../../Pages/common/EnrollmentOverviewDomain';
 import { EventOverflowMenu } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
@@ -62,35 +57,18 @@ const WidgetHeaderPlain = ({
     const storedEvent = useSelector((state: any) =>
         state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
 
-    const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        if (storedEvent) {
-            const { completedAt, completedBy, ...eventWithoutCompletion } = storedEvent;
-            dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
-        }
-    }, [dispatch, storedEvent, eventId]);
-
-    const onCompletionStatusUpdated = useCallback(() => {
-        dispatch(commitEnrollmentEvent(eventId));
+    const onCompletionSuccess = useCallback(() => {
         dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, eventId]);
 
-    const onCompletionStatusError = useCallback(() => {
-        dispatch(rollbackEnrollmentEvent(eventId));
-    }, [dispatch, eventId]);
-
-    const onStatusMutate = useCallback((_id: string, newStatus: string) => {
-        if (storedEvent) {
-            dispatch(updateEnrollmentEvent(eventId, { ...storedEvent, status: newStatus }));
-        }
-    }, [dispatch, storedEvent, eventId]);
-
-    const onStatusUpdated = useCallback(() => {
-        dispatch(commitEnrollmentEvent(eventId));
-    }, [dispatch, eventId]);
-
-    const onStatusError = useCallback(() => {
-        dispatch(rollbackEnrollmentEvent(eventId));
-    }, [dispatch, eventId]);
+    const {
+        onCompletionStatusMutate,
+        onCompletionStatusUpdated,
+        onCompletionStatusError,
+        onStatusMutate,
+        onStatusUpdated,
+        onStatusError,
+    } = useOptimisticEventStatus(storedEvent, eventId, { onCompletionSuccess });
 
     const onDeleteSuccess = useCallback(() => {
         dispatch(deleteEnrollmentEvent(eventId));
