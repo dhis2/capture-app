@@ -1,17 +1,17 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2021
 # Ulanbek Abakirov <ulans@mail.ru>, 2025
-# Nadiia <semchuk@aph.org.ua>, 2025
-# Yury Rogachev <yury@dhis2.org>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Philip Larsen Donnelly, 2026
+# Nadiia <semchuk@aph.org.ua>, 2026
+# Yury Rogachev <yury@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -327,9 +327,6 @@ msgstr "Нет, отменить"
 msgid "You don't have access to create an event in the current selections"
 msgstr "Не достаточно прав для создания события с текущим выбором"
 
-msgid "Save"
-msgstr "Сохранить"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Сохранение объекта {{trackedEntityName}}"
 
@@ -640,11 +637,17 @@ msgstr "подсказки не найдены"
 msgid "No items to display"
 msgstr "Нет элементов для отображения"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Выбрать столбцы"
 
 msgid "Columns to show in table"
 msgstr "Столбцы, для отображения в таблице"
+
+msgid "Save"
+msgstr "Сохранить"
 
 msgid "Column"
 msgstr "Столбец"
@@ -723,9 +726,6 @@ msgstr ""
 
 msgid "Add note"
 msgstr "Добавить заметку"
-
-msgid "You don't have access to write notes"
-msgstr "У вас нет возможности писать заметки"
 
 msgid "Write note"
 msgstr "Напишите заметку"
@@ -836,9 +836,6 @@ msgstr "Произошла ошибка"
 msgid "Page is missing required values from URL"
 msgstr "Страница не содержит необходимых данных в URL адресе"
 
-msgid "Org unit is not valid with current program"
-msgstr "Организационная единица не действительна для данной программы"
-
 msgid "There was an error opening the Page"
 msgstr "Произошла ошибка при открытии страницы"
 
@@ -847,6 +844,9 @@ msgstr "Произошла ошибка при загрузке страницы
 
 msgid "Program stage is invalid"
 msgstr "Этап программы недействителен"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Форма ввода данных"
@@ -1002,12 +1002,6 @@ msgstr "событий"
 msgid "event"
 msgstr "событие"
 
-msgid "You don't have access to edit this event"
-msgstr "У вас нет доступа к редактированию этого события"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr "Посмотреть лог изменений"
 
@@ -1022,6 +1016,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Ошибки"
+
+msgid "This event doesn't have any notes"
+msgstr "У этого события нет заметок"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Предупреждения"
@@ -1060,7 +1060,7 @@ msgid "Search by attributes"
 msgstr "Искать по атрибутам"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Искать {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1108,11 +1108,35 @@ msgstr "Найдены возможные дубликаты "
 msgid "An error occurred loading possible duplicates"
 msgstr "Произошла ошибка при загрузке возможных дубликатов"
 
-msgid "You don't have access to delete this relationship"
-msgstr "У вас нет доступа к удалению этой связи"
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "У вас нет доступа к созданию связей"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "Только просмотр"
 
 msgid "Add relationship"
 msgstr "Добавить связь"
@@ -1130,7 +1154,7 @@ msgid "Choose an organisation unit"
 msgstr "Выбрать организационную единицу"
 
 msgid "Choose a {{categoryName}}"
-msgstr ""
+msgstr "Выбрать этап {{categoryName}}"
 
 msgid "Search for a {{categoryName}}"
 msgstr ""
@@ -1154,7 +1178,7 @@ msgid "Choose a program"
 msgstr "Выбрать программу"
 
 msgid "Choose a {{title}}"
-msgstr ""
+msgstr "Выбрать этап {{title}}"
 
 msgid "Search for a {{title}}"
 msgstr ""
@@ -1225,7 +1249,7 @@ msgid ""
 msgstr "Вы можете изменить параметры и перезапустить поиск "
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Создать нового {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1297,17 +1321,11 @@ msgstr "Нет доступных отслеживаемых типов объе
 msgid "Assigned to"
 msgstr "Назначено пользователю"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "Редактировать"
 
 msgid "No one is assigned to this event"
 msgstr "Никто не назначен для данного события"
-
-msgid "You don't have access to assign a user to this event"
-msgstr ""
 
 msgid "Assign"
 msgstr "Назначить"
@@ -1341,9 +1359,6 @@ msgstr "Не сохраненные изменения"
 
 msgid "Continue data entry"
 msgstr "Продолжить ввод данных"
-
-msgid "You do not have access to modify this enrollment"
-msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Действия с регистрационной записью"
@@ -1554,26 +1569,17 @@ msgstr "Полигон не зафиксирован"
 msgid "Event completed"
 msgstr "Событие завершено"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "Событие нельзя редактировать после его завершения"
-
 msgid "Notes about this event"
 msgstr "Заметки об этом событии"
 
 msgid "Write a note about this event"
 msgstr "Напишите примечание об этом событии"
 
-msgid "This event doesn't have any notes"
-msgstr "У этого события нет заметок"
-
 msgid "after"
 msgstr "после"
 
 msgid "before"
 msgstr "до"
-
-msgid "Schedule date info"
-msgstr "Информация о запланированной дате"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Запланировано автоматически на {{suggestedScheduleDate}}"
@@ -1646,6 +1652,9 @@ msgstr "Сохранить заметку"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Редактировать {{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "Сохранить изменения"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1653,8 +1662,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr "Сохранить изменения"
+msgid "{{trackedEntityName}} profile"
+msgstr "Профиль объекта {{trackedEntityName}}"
 
 msgid "Profile"
 msgstr "Профиль"
@@ -1674,6 +1683,34 @@ msgstr ""
 
 msgid "Fix errors in the form to continue."
 msgstr "Исправьте ошибки в форме для продолжения работы."
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
@@ -1696,6 +1733,9 @@ msgstr "Возникла проблема с удалением объекта {
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Да, удалить объект {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "Просмотреть профиль"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Не удалось загрузить виджет \"Профиль\". Повторите попытку позже"
@@ -1757,9 +1797,6 @@ msgstr "Пожалуйста, введите дату"
 msgid "Please select a valid event"
 msgstr "Выберите действительное событие"
 
-msgid "You do not have access to create events in this stage"
-msgstr "На этом этапе у вас нет доступа к созданию событий"
-
 msgid "This stage can only have one event"
 msgstr "Данный этап позволяет создать только одно событие"
 
@@ -1767,6 +1804,9 @@ msgid "New {{ eventName }} event"
 msgstr "Новое событие {{ eventName }} "
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1808,6 +1848,9 @@ msgstr "Событий  просрочено: {{ overdueEvents }}"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr " Событий запланировано: {{ scheduledEvents }}"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "Этапы и события"
@@ -1946,6 +1989,9 @@ msgstr "Произошла ошибка при удалении связи."
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "Чтобы открыть данную связь, дождитесь завершения сохранения"
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "Тип"
 
@@ -2014,9 +2060,6 @@ msgstr ""
 
 msgid "Registration Date"
 msgstr "Дата регистрации"
-
-msgid "Inactive"
-msgstr "Неактивный"
 
 msgid "Enrollment status"
 msgstr "Статус регистрации"
@@ -2318,6 +2361,12 @@ msgstr "Ошибка редактирования события, внесенн
 msgid "Error updating the Assignee"
 msgstr "Ошибка при обновлении назначенного пользователя"
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2404,4 +2453,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Capture"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""

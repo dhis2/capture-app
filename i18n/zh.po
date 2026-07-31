@@ -2,12 +2,13 @@
 # Philip Larsen Donnelly, 2024
 # 晓东 林 <13981924470@126.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Transifex Bot <>, 2026
 # easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-19T07:38:15.345Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -310,9 +311,6 @@ msgstr "不，取消"
 msgid "You don't have access to create an event in the current selections"
 msgstr "您无权在当前选择中创建活动"
 
-msgid "Save"
-msgstr "保存"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
 
@@ -612,11 +610,17 @@ msgstr "建议不能提取"
 msgid "No items to display"
 msgstr "无条目可显示"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "选择列"
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
+
+msgid "Save"
+msgstr "保存"
 
 msgid "Column"
 msgstr "列"
@@ -691,9 +695,6 @@ msgstr "所选项目对所选机构无效"
 
 msgid "Add note"
 msgstr "添加笔记"
-
-msgid "You don't have access to write notes"
-msgstr "您无法写笔记"
 
 msgid "Write note"
 msgstr "编写说明"
@@ -788,9 +789,6 @@ msgstr "发生了错误"
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
 
-msgid "Org unit is not valid with current program"
-msgstr "机构对当前项目无效"
-
 msgid "There was an error opening the Page"
 msgstr "打开页面时出错"
 
@@ -799,6 +797,9 @@ msgstr "加载页面时出错"
 
 msgid "Program stage is invalid"
 msgstr "项目阶段无效"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "报表"
@@ -952,12 +953,6 @@ msgstr "事件"
 msgid "event"
 msgstr "事件"
 
-msgid "You don't have access to edit this event"
-msgstr "您无权编辑此事件"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr "{{occurredAt}} 属于过期时间。事件不可编辑"
-
 msgid "View changelog"
 msgstr "查看变更日志"
 
@@ -971,6 +966,12 @@ msgstr "离开该页将丢失你创建新关系的所有选择"
 
 msgid "Errors"
 msgstr "错误"
+
+msgid "This event doesn't have any notes"
+msgstr "该事件没有任何说明"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "错误"
@@ -1054,11 +1055,35 @@ msgstr "发现可能的重复"
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
-msgid "You don't have access to delete this relationship"
-msgstr "您无权删除此关系"
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "您无权创建任何关系"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "只读"
 
 msgid "Add relationship"
 msgstr "添加关系"
@@ -1237,17 +1262,11 @@ msgstr "没有可跟踪的实体类型"
 msgid "Assigned to"
 msgstr "指派到"
 
-msgid "You don't have access to edit the assigned user"
-msgstr "您没有编辑已分配用户的权限"
-
 msgid "Edit"
 msgstr "编辑"
 
 msgid "No one is assigned to this event"
 msgstr "没有人被分配到的该事件"
-
-msgid "You don't have access to assign a user to this event"
-msgstr "您没有为该事件分配用户的权限"
 
 msgid "Assign"
 msgstr "分配"
@@ -1279,9 +1298,6 @@ msgstr "未保存的更改"
 
 msgid "Continue data entry"
 msgstr "继续输入数据"
-
-msgid "You do not have access to modify this enrollment"
-msgstr "您没有权限修改此注册"
 
 msgid "Enrollment actions"
 msgstr "登记行动"
@@ -1475,26 +1491,17 @@ msgstr "没有采集到多边形"
 msgid "Event completed"
 msgstr "事件完成"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "事件完成后不可编辑"
-
 msgid "Notes about this event"
 msgstr "事件注意事项"
 
 msgid "Write a note about this event"
 msgstr "撰写关于此次事件的说明"
 
-msgid "This event doesn't have any notes"
-msgstr "该事件没有任何说明"
-
 msgid "after"
 msgstr "后"
 
 msgid "before"
 msgstr "前"
-
-msgid "Schedule date info"
-msgstr "预定日期信息"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "自动安排在 {{suggestedScheduleDate}}"
@@ -1553,6 +1560,9 @@ msgstr "保存笔记"
 msgid "Edit {{trackedEntityName}}"
 msgstr "编辑{{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "保存修改"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "在此更改有关{{trackedEntityName}} 的信息。"
 
@@ -1560,8 +1570,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "有关此注册的信息可在注册部件中编辑。"
 
-msgid "Save changes"
-msgstr "保存修改"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} 个人资料"
 
 msgid "Profile"
 msgstr "基本信息"
@@ -1580,6 +1590,34 @@ msgstr "重试或联系您的系统管理员寻求支持"
 
 msgid "Fix errors in the form to continue."
 msgstr "修正表单中的错误以继续。"
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "您无权删除此{{trackedEntityTypeName}}"
@@ -1600,6 +1638,9 @@ msgstr "删除{{trackedEntityTypeName}}时出现问题"
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "是，删除 {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "查看简介"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
@@ -1661,9 +1702,6 @@ msgstr "请输入日期"
 msgid "Please select a valid event"
 msgstr "请选择一个有效的事件"
 
-msgid "You do not have access to create events in this stage"
-msgstr "在此阶段，您无权限创建事件"
-
 msgid "This stage can only have one event"
 msgstr "这个阶段只能有一个事件"
 
@@ -1672,6 +1710,9 @@ msgstr "新的 {{ eventName }} 事件"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr "{{occurredAt}} 属于过期时段。事件无法删除"
+
+msgid "This event is outside the edit period"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "删除事件时发生错误"
@@ -1709,6 +1750,9 @@ msgstr "{{ overdueEvents }} 逾期"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} 已安排"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "阶段与活动"
@@ -1847,6 +1891,9 @@ msgstr "删除关系时出错。"
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "要打开此关系，请等待保存完成"
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "类型"
 
@@ -1915,9 +1962,6 @@ msgstr "业主组织机构"
 
 msgid "Registration Date"
 msgstr "登记日期"
-
-msgid "Inactive"
-msgstr "闲置"
 
 msgid "Enrollment status"
 msgstr "报名登记状态"
@@ -2178,6 +2222,12 @@ msgstr "编辑事件时出错，所做的更改未保存"
 msgid "Error updating the Assignee"
 msgstr "更新受托人时出错"
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr "获取元数据时出现错误"
 
@@ -2262,3 +2312,11 @@ msgid ""
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
 msgstr "由于浏览器的限制，此应用程序目前在兼容模式下运行。如果当前使用的是兼容模式，请使用其他浏览器或退出隐私模式，以获得更好的性能。"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "采集"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
+msgstr ""

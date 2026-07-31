@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -318,9 +318,6 @@ msgstr "Ne, zrušit"
 msgid "You don't have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
-msgid "Save"
-msgstr "Uložit"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Ukládání {{trackedEntityName}}"
 
@@ -630,11 +627,17 @@ msgstr "návrhy nelze načíst"
 msgid "No items to display"
 msgstr "Žádné položky k zobrazení"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Vybrat sloupce"
 
 msgid "Columns to show in table"
 msgstr "Sloupce k zobrazení v tabulce"
+
+msgid "Save"
+msgstr "Uložit"
 
 msgid "Column"
 msgstr "Sloupec"
@@ -712,9 +715,6 @@ msgstr "Vybraný program je pro vybranou organizační jednotku neplatný"
 
 msgid "Add note"
 msgstr "Přidat poznámku"
-
-msgid "You don't have access to write notes"
-msgstr "Nemáte přístup k psaní poznámek"
 
 msgid "Write note"
 msgstr "Napište poznámku"
@@ -817,9 +817,6 @@ msgstr "Došlo k chybě"
 msgid "Page is missing required values from URL"
 msgstr "Na stránce chybí požadované hodnoty z adresy URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "Organizační jednotka není platná pro aktuální program"
-
 msgid "There was an error opening the Page"
 msgstr "Při otevírání stránky došlo k chybě"
 
@@ -828,6 +825,9 @@ msgstr "Při načítání stránky došlo k chybě"
 
 msgid "Program stage is invalid"
 msgstr "Fáze programu je neplatná"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Zpráva"
@@ -987,12 +987,6 @@ msgstr "události"
 msgid "event"
 msgstr "událost"
 
-msgid "You don't have access to edit this event"
-msgstr "Nemáte přístup k úpravám této události"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr "{{occurredAt}} patří do uplynulého období. Událost nelze upravovat"
-
 msgid "View changelog"
 msgstr "Zobrazit seznam změn"
 
@@ -1008,6 +1002,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Chyby"
+
+msgid "This event doesn't have any notes"
+msgstr "Tato událost nemá žádné poznámky"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Varování"
@@ -1046,7 +1046,7 @@ msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Hledat {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1094,11 +1094,35 @@ msgstr "Byly nalezeny možné duplikáty"
 msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
 
-msgid "You don't have access to delete this relationship"
-msgstr "K odstranění tohoto vztahu nemáte přístup."
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "Nemáte přístup k vytváření žádných vztahů."
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "Pouze zobrazení"
 
 msgid "Add relationship"
 msgstr "Přidat vztah"
@@ -1116,7 +1140,7 @@ msgid "Choose an organisation unit"
 msgstr "Vyberte organizační jednotku"
 
 msgid "Choose a {{categoryName}}"
-msgstr ""
+msgstr "Vyberte {{categoryName}}"
 
 msgid "Search for a {{categoryName}}"
 msgstr ""
@@ -1140,7 +1164,7 @@ msgid "Choose a program"
 msgstr "Vyberte program"
 
 msgid "Choose a {{title}}"
-msgstr ""
+msgstr "Vyberte {{title}}"
 
 msgid "Search for a {{title}}"
 msgstr ""
@@ -1217,7 +1241,7 @@ msgstr ""
 "Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Vytvořit nový {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1295,17 +1319,11 @@ msgstr "Nejsou k dispozici žádné typy trasované entity"
 msgid "Assigned to"
 msgstr "Přiřazen k"
 
-msgid "You don't have access to edit the assigned user"
-msgstr "Nemáte přístup k úpravám přiřazeného uživatele."
-
 msgid "Edit"
 msgstr "Upravit"
 
 msgid "No one is assigned to this event"
 msgstr "K této události není nikdo přiřazen"
-
-msgid "You don't have access to assign a user to this event"
-msgstr "Nemáte přístup k přiřazení uživatele k této události."
 
 msgid "Assign"
 msgstr "Přiřadit"
@@ -1337,9 +1355,6 @@ msgstr "Neuložené změny"
 
 msgid "Continue data entry"
 msgstr "Pokračovat v zadávání dat"
-
-msgid "You do not have access to modify this enrollment"
-msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Akce zápisu"
@@ -1537,26 +1552,17 @@ msgstr "Nebyl zachycen žádný polygon"
 msgid "Event completed"
 msgstr "Událost dokončena"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "Událost nelze upravovat po jejím dokončení."
-
 msgid "Notes about this event"
 msgstr "Poznámky k této události"
 
 msgid "Write a note about this event"
 msgstr "Napište poznámku o této události"
 
-msgid "This event doesn't have any notes"
-msgstr "Tato událost nemá žádné poznámky"
-
 msgid "after"
 msgstr "po"
 
 msgid "before"
 msgstr "před"
-
-msgid "Schedule date info"
-msgstr "Informace o termínu"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Naplánováno automaticky na {{suggestedScheduleDate}}"
@@ -1624,6 +1630,9 @@ msgstr "Uložit poznámku"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Upravit {{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "Uložit změny"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Změňte informace o této stránce {{trackedEntityName}} zde."
 
@@ -1631,8 +1640,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr "Informace o tomto zápisu lze upravit ve widgetu Zápis."
 
-msgid "Save changes"
-msgstr "Uložit změny"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profil"
 
 msgid "Profile"
 msgstr "Profil"
@@ -1651,6 +1660,34 @@ msgstr "Zkuste to znovu nebo požádejte o podporu správce systému"
 
 msgid "Fix errors in the form to continue."
 msgstr "Chcete-li pokračovat, opravte chyby ve formuláři."
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "Nemáte přístup ke smazání tohoto {{trackedEntityTypeName}}"
@@ -1672,6 +1709,9 @@ msgstr "Vyskytl se problém s odstraněním {{trackedEntityTypeName}}"
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Ano, smazat {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "Zobrazit profil"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
@@ -1733,9 +1773,6 @@ msgstr "Zadejte datum"
 msgid "Please select a valid event"
 msgstr "Vyberte prosím platnou událost"
 
-msgid "You do not have access to create events in this stage"
-msgstr "V této fázi nemáte přístup k vytváření událostí."
-
 msgid "This stage can only have one event"
 msgstr "Tato fáze může mít pouze jednu událost"
 
@@ -1744,6 +1781,9 @@ msgstr "Nová událost {{ eventName }}"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr "{{occurredAt}} patří do uplynulého období. Událost nelze smazat"
+
+msgid "This event is outside the edit period"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Při mazání události došlo k chybě"
@@ -1784,6 +1824,9 @@ msgstr "{{ overdueEvents }} vypršelo"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} naplánováno"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "Fáze a události"
@@ -1928,6 +1971,9 @@ msgstr "Při odstraňování vztahu došlo k chybě."
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "Chcete-li otevřít tento vztah, počkejte na dokončení ukládání"
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "Typ"
 
@@ -1996,9 +2042,6 @@ msgstr "Organizační jednotka vlastníka"
 
 msgid "Registration Date"
 msgstr "Datum registrace"
-
-msgid "Inactive"
-msgstr "Neaktivní"
 
 msgid "Enrollment status"
 msgstr "Stav zápisu"
@@ -2292,6 +2335,12 @@ msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 msgid "Error updating the Assignee"
 msgstr "Chyba při aktualizaci Příjemce"
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2382,3 +2431,11 @@ msgstr ""
 "Tato aplikace je v současné době spuštěna v režimu kompatibility z důvodu "
 "omezení prohlížeče. Pro lepší výkon použijte jiný prohlížeč nebo ukončete "
 "soukromý režim, pokud jej právě používáte."
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Sběr dat"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
+msgstr ""
