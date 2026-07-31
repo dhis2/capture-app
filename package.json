@@ -129,7 +129,7 @@
         "jsdoc-babel": "^0.5.0",
         "jsdoc-export-default-interop": "^0.3.1",
         "redux-devtools-extension": "^2.13.9",
-        "serve": "^14.2.5",
+        "serve": "^14.2.6",
         "typescript": "^5.8.2",
         "wait-on": "^8.0.1"
     },
