@@ -1,10 +1,8 @@
 import React from 'react';
 import { ReadOnlyBadge } from '../../../ReadOnlyBadge';
-import { eventStatuses } from '../../../WidgetEventEdit/constants/status.const';
 
 type Props = {
     eventAccess: { read: boolean; write: boolean };
-    eventStatus?: string;
     isEventWithinValidPeriod: boolean;
     canEditCompletedEvent: boolean;
     isWithinCompleteEventsExpiry: boolean;
@@ -12,7 +10,6 @@ type Props = {
 
 export const ViewEventReadOnlyBadge = ({
     eventAccess,
-    eventStatus,
     isEventWithinValidPeriod,
     canEditCompletedEvent,
     isWithinCompleteEventsExpiry,
@@ -22,7 +19,6 @@ export const ViewEventReadOnlyBadge = ({
         eventWithinValidPeriod={isEventWithinValidPeriod}
         canEditCompletedEvent={canEditCompletedEvent}
         withinCompleteEventsExpiry={isWithinCompleteEventsExpiry}
-        eventIsSkipped={eventStatus === eventStatuses.SKIPPED}
         inlineLabel
     />
 );
