@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-30T15:19:06.739Z\n"
-"PO-Revision-Date: 2026-07-30T15:19:06.741Z\n"
+"POT-Creation-Date: 2026-08-03T09:35:14.393Z\n"
+"PO-Revision-Date: 2026-08-03T09:35:14.395Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -592,6 +592,9 @@ msgstr "Type to filter options"
 
 msgid "No match found"
 msgstr "No match found"
+
+msgid "Search for an organisation unit"
+msgstr "Search for an organisation unit"
 
 msgid "Clear"
 msgstr "Clear"
@@ -2381,3 +2384,11 @@ msgstr ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Capture"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
+msgstr "Search TEI"
