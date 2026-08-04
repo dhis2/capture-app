@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlyoutMenu, IconMore16 } from '@dhis2/ui';
+import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { OverflowButton } from '../Buttons';
@@ -127,56 +127,59 @@ export const EventOverflowMenu = (props: Props) => {
 
     return (
         <>
-            <OverflowButton
-                open={actionsOpen}
-                onClick={() => setActionsOpen(prev => !prev)}
-                secondary
-                small
-                icon={<IconMore16 />}
-                dataTest={`${dataTest}-button`}
-                disabled={pendingApiResponse}
-                component={(
-                    <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
-                        {visibility.completion && onCompletionStatusUpdated && (
-                            <CompletionMenuItem
-                                eventId={eventId}
-                                eventStatus={eventStatus}
-                                onMutate={onCompletionStatusMutate}
-                                onSuccess={onCompletionStatusUpdated}
-                                onError={onCompletionStatusError}
-                                onClose={close}
-                            />
-                        )}
-                        {visibility.skip && (
-                            <SkipMenuItem
-                                eventId={eventId}
-                                eventStatus={eventStatus}
-                                pendingApiResponse={pendingApiResponse}
-                                onClose={close}
-                                onStatusMutate={onStatusMutate}
-                                onStatusError={onStatusError}
-                                onStatusUpdated={onStatusUpdated}
-                            />
-                        )}
-                        {visibility.changelog && onOpenChangelog && (
-                            <ChangelogMenuItem
-                                onClose={close}
-                                onOpenChangelog={onOpenChangelog}
-                            />
-                        )}
-                        {visibility.delete && (
-                            <DeleteMenuItem
-                                occurredAtClient={occurredAtClient}
-                                isEventWithinValidPeriod={isEventWithinValidPeriod}
-                                canEditCompletedEvent={canEditCompletedEvent}
-                                disabled={readOnly}
-                                onClose={close}
-                                onRequestDelete={() => setDeleteConfirmOpen(true)}
-                            />
-                        )}
-                    </FlyoutMenu>
-                )}
-            />
+            {pendingApiResponse ? (
+                <CircularLoader small dataTest={`${dataTest}-saving-loader`} />
+            ) : (
+                <OverflowButton
+                    open={actionsOpen}
+                    onClick={() => setActionsOpen(prev => !prev)}
+                    secondary
+                    small
+                    icon={<IconMore16 />}
+                    dataTest={`${dataTest}-button`}
+                    component={(
+                        <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
+                            {visibility.completion && onCompletionStatusUpdated && (
+                                <CompletionMenuItem
+                                    eventId={eventId}
+                                    eventStatus={eventStatus}
+                                    onMutate={onCompletionStatusMutate}
+                                    onSuccess={onCompletionStatusUpdated}
+                                    onError={onCompletionStatusError}
+                                    onClose={close}
+                                />
+                            )}
+                            {visibility.skip && (
+                                <SkipMenuItem
+                                    eventId={eventId}
+                                    eventStatus={eventStatus}
+                                    pendingApiResponse={pendingApiResponse}
+                                    onClose={close}
+                                    onStatusMutate={onStatusMutate}
+                                    onStatusError={onStatusError}
+                                    onStatusUpdated={onStatusUpdated}
+                                />
+                            )}
+                            {visibility.changelog && onOpenChangelog && (
+                                <ChangelogMenuItem
+                                    onClose={close}
+                                    onOpenChangelog={onOpenChangelog}
+                                />
+                            )}
+                            {visibility.delete && (
+                                <DeleteMenuItem
+                                    occurredAtClient={occurredAtClient}
+                                    isEventWithinValidPeriod={isEventWithinValidPeriod}
+                                    canEditCompletedEvent={canEditCompletedEvent}
+                                    disabled={readOnly}
+                                    onClose={close}
+                                    onRequestDelete={() => setDeleteConfirmOpen(true)}
+                                />
+                            )}
+                        </FlyoutMenu>
+                    )}
+                />
+            )}
             {deleteConfirmOpen && (
                 <DeleteEventModal
                     eventId={eventId}

@@ -14,7 +14,6 @@ import {
     DataTableCell,
     DataTableColumnHeader,
     Button,
-    Tooltip,
 } from '@dhis2/ui';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -177,35 +176,14 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             .map(row => formatRowForView(row, dataElementsClient))
             .map((row: any) => {
                 const cells = headerColumns.map(({ id }) => (
-                    <Tooltip
-                        key={`${id}-${row.id}`}
-                        content={i18n.t('To open this event, please wait until saving is complete')}
-                        closeDelay={50}
+                    <DataTableCell
+                        key={id}
+                        onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
                     >
-                        {({ onMouseOver, onMouseOut, ref }) => (
-                            <DataTableCell
-                                key={id}
-                                onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
-                                // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
-                                ref={(tableCell) => {
-                                    if (tableCell) {
-                                        if (row.pendingApiResponse) {
-                                            tableCell.onmouseover = onMouseOver;
-                                            tableCell.onmouseout = onMouseOut;
-                                            ref.current = tableCell;
-                                        } else {
-                                            tableCell.onmouseover = null;
-                                            tableCell.onmouseout = null;
-                                        }
-                                    }
-                                }}
-                            >
-                                <div>
-                                    {row[id] as React.ReactNode}
-                                </div>
-                            </DataTableCell>
-                        )}
-                    </Tooltip>
+                        <div>
+                            {row[id] as React.ReactNode}
+                        </div>
+                    </DataTableCell>
                 ));
                 const eventDetails = events.find(event => event.event === row.id);
 
