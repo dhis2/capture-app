@@ -5,7 +5,7 @@ import { Button, IconEdit24, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { useEnrollmentEditEventPageMode, useOptimisticEventStatus } from 'capture-core/hooks';
-import { eventStatuses } from '../constants/status.const';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';

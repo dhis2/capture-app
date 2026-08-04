@@ -1,6 +1,6 @@
 import { useAuthorities } from '../utils/authority/useAuthorities';
 import { getProgramEventAccess, ProgramStage } from '../metaData';
-import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
+import { statusTypes as eventStatuses } from '../events/statusTypes';
 
 type Input = {
     programId: string,

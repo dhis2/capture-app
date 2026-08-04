@@ -7,6 +7,7 @@ import {
     spacers,
 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -17,7 +18,6 @@ import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
-import { eventStatuses } from './constants/status.const';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,

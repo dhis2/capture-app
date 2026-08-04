@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { OverflowButton } from '../Buttons';
 import { useEventEditPermissions, useCanChangeCompletionStatus } from '../../hooks';
-import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 import { convertServerToClient } from '../../converters';
 import { dataElementTypes, type ProgramStage } from '../../metaData';
 import {

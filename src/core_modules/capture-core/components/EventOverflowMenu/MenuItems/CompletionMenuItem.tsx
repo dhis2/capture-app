@@ -5,7 +5,7 @@ import { MenuItem, IconCheckmark16, IconUndo16 } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { eventStatuses } from '../../WidgetEventEdit/constants/status.const';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 
 type Props = {
     eventId: string;
