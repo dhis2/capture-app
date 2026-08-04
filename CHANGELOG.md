@@ -1,3 +1,10 @@
+## [106.7.4](https://github.com/dhis2/capture-app/compare/v106.7.3...v106.7.4) (2026-08-03)
+
+
+### Bug Fixes
+
+* align Error/Warning widget body text size with other widgets ([#4678](https://github.com/dhis2/capture-app/issues/4678)) ([c266110](https://github.com/dhis2/capture-app/commit/c26611031f23d9efbb257c91dd28d442660691d5))
+
 ## [106.7.3](https://github.com/dhis2/capture-app/compare/v106.7.2...v106.7.3) (2026-07-31)
 
 
