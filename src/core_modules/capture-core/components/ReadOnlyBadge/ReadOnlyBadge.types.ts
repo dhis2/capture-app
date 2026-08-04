@@ -7,6 +7,7 @@ export type Props = {
     withinCompleteEventsExpiry?: boolean;
     multipleStages?: boolean;
     trackedEntityName?: string;
+    trackedEntityInactive?: boolean;
     inlineLabel?: boolean;
 };
 
@@ -23,4 +24,5 @@ export type ReadOnlyMessageInput = {
     eventWithinValidPeriod: boolean;
     canEditCompletedEvent: boolean;
     withinCompleteEventsExpiry: boolean;
+    trackedEntityInactive: boolean;
 };
