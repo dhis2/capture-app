@@ -2,7 +2,7 @@ import { useProgramExpiryForUser } from './useProgramExpiryForUser';
 import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
 import { getProgramEventAccess, ProgramStage } from '../metaData';
 import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
-import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
+import { statusTypes as eventStatuses } from '../events/statusTypes';
 import { useAuthorities } from '../utils/authority/useAuthorities';
 
 type Input = {
