@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { formatMomentEn } from 'capture-core-utils/date';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { CompleteModalComponent } from './CompleteModal.component';
-import { eventStatuses, plainStatus } from '../../../constants/status.const';
+import { plainStatus } from '../../../constants/status.const';
 import type { Props } from './completeModal.types';
 
 export const CompleteModal = ({ enrollment, events, programStages, setOpenCompleteModal, onUpdateStatus }: Props) => {

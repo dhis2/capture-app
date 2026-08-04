@@ -36,7 +36,6 @@ import {
     withConditionalTooltip,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
-import { eventStatuses } from '../constants/status.const';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -324,7 +323,7 @@ const buildCompleteFieldSettingsFn = () => {
                         withDisplayMessages()(
                             withInternalChangeHandler()(
                                 withConditionalTooltip((props: any) => {
-                                    const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+                                    const isEventCompleted = props.eventStatus === statusTypes.COMPLETED;
                                     const canUncompleteEvent = props.canUncompleteEvent;
                                     const shouldDisable = isEventCompleted && !canUncompleteEvent;
                                     return shouldDisable
@@ -341,7 +340,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => {
-            const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
+            const isEventCompleted = props.eventStatus === statusTypes.COMPLETED;
             const canUncompleteEvent = props.canUncompleteEvent;
             const shouldDisable = isEventCompleted && !canUncompleteEvent;
 
