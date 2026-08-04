@@ -11,7 +11,6 @@ import { DirectionalArrow } from '../../../utils/rtl';
 type Props = {
     eventId: string;
     eventStatus?: string;
-    pendingApiResponse?: boolean;
     onClose: () => void;
     onStatusMutate?: (eventId: string, newStatus: string) => void;
     onStatusError?: (eventId: string, previousStatus: string) => void;
@@ -21,7 +20,6 @@ type Props = {
 export const SkipMenuItem = ({
     eventId,
     eventStatus,
-    pendingApiResponse,
     onClose,
     onStatusMutate,
     onStatusError,
@@ -70,9 +68,7 @@ export const SkipMenuItem = ({
 
     const handleClick = (nextStatus: string) => {
         onClose();
-        if (!pendingApiResponse) {
-            updateEventStatus({ status: nextStatus });
-        }
+        updateEventStatus({ status: nextStatus });
     };
 
     if (eventStatus === eventStatuses.SKIPPED) {

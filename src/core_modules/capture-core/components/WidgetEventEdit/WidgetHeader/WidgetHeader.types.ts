@@ -11,6 +11,6 @@ export type PlainProps = {
     teiId: string,
     enrollmentId: string,
     setChangeLogIsOpen: (toggle: boolean) => void,
-    readOnly: boolean,
+    canEditEvent: boolean,
     readOnlyBadge?: ReactNode,
 };

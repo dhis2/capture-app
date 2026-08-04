@@ -70,7 +70,6 @@ export const DeleteMenuItem = ({
 
 type ModalProps = {
     eventId: string;
-    pendingApiResponse?: boolean;
     eventDetailsForRollback?: ApiEnrollmentEvent;
     onClose: () => void;
     onOptimisticDelete?: (eventId: string) => void;
@@ -80,7 +79,6 @@ type ModalProps = {
 
 export const DeleteEventModal = ({
     eventId,
-    pendingApiResponse,
     eventDetailsForRollback,
     onClose,
     onOptimisticDelete,
@@ -134,10 +132,8 @@ export const DeleteEventModal = ({
                     <Button
                         destructive
                         onClick={() => {
-                            if (!pendingApiResponse) {
-                                onClose();
-                                deleteEvent(undefined);
-                            }
+                            onClose();
+                            deleteEvent(undefined);
                         }}
                     >
                         {i18n.t('Yes, delete event')}

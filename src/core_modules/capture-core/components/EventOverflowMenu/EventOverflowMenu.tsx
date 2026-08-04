@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { OverflowButton } from '../Buttons';
-import { useEventEditPermissions, useCanChangeCompletionStatus } from '../../hooks';
+import { useEventPermissions } from '../../hooks';
 import { convertServerToClient } from '../../converters';
 import { dataElementTypes, type ProgramStage } from '../../metaData';
 import {
@@ -51,20 +50,18 @@ type Visibility = {
     any: boolean;
 };
 
-const isSkippable = (status?: string) =>
-    status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
-
 const hasHandler = (...handlers: Array<unknown>) => handlers.some(Boolean);
 
-const computeVisibility = (props: Props, ctx: {
-    canChangeCompletionStatus: boolean;
-    canWrite: boolean;
+// An item shows when the user is allowed to perform the action (`useEventPermissions`) AND the
+// host wired up the handlers it needs - hosts opt into actions by passing the callbacks.
+const computeVisibility = (props: Props, permissions: {
+    canCompleteEvent: boolean;
+    canSkipEvent: boolean;
+    canDeleteEvent: boolean;
 }): Visibility => {
-    const completion = ctx.canChangeCompletionStatus && hasHandler(props.onCompletionStatusUpdated);
-    const skip = ctx.canWrite
-        && isSkippable(props.eventStatus)
-        && hasHandler(props.onStatusMutate, props.onStatusUpdated);
-    const del = ctx.canWrite && hasHandler(props.onOptimisticDelete, props.onDeleteSuccess);
+    const completion = permissions.canCompleteEvent && hasHandler(props.onCompletionStatusUpdated);
+    const skip = permissions.canSkipEvent && hasHandler(props.onStatusMutate, props.onStatusUpdated);
+    const del = permissions.canDeleteEvent && hasHandler(props.onOptimisticDelete, props.onDeleteSuccess);
     const changelog = hasHandler(props.onOpenChangelog);
     return { completion, skip, delete: del, changelog, any: [completion, skip, del, changelog].some(Boolean) };
 };
@@ -97,27 +94,21 @@ export const EventOverflowMenu = (props: Props) => {
     const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
     const completedAtClient = convertServerToClient(completedAt, dataElementTypes.DATE) as string;
     const {
-        eventAccess,
         isEventWithinValidPeriod,
         canEditCompletedEvent,
         readOnly,
-    } = useEventEditPermissions({
+        canCompleteEvent,
+        canSkipEvent,
+        canDeleteEvent,
+    } = useEventPermissions({
         programId,
         stage: programStage,
         eventStatus,
         occurredAtClient,
         completedAtClient,
     });
-    const canChangeCompletionStatus = useCanChangeCompletionStatus({
-        programId,
-        stage: programStage,
-        eventStatus,
-    });
 
-    const visibility = computeVisibility(props, {
-        canChangeCompletionStatus,
-        canWrite: !!eventAccess?.write,
-    });
+    const visibility = computeVisibility(props, { canCompleteEvent, canSkipEvent, canDeleteEvent });
 
     if (!visibility.any) {
         return null;
@@ -153,7 +144,6 @@ export const EventOverflowMenu = (props: Props) => {
                                 <SkipMenuItem
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    pendingApiResponse={pendingApiResponse}
                                     onClose={close}
                                     onStatusMutate={onStatusMutate}
                                     onStatusError={onStatusError}
@@ -183,7 +173,6 @@ export const EventOverflowMenu = (props: Props) => {
             {deleteConfirmOpen && (
                 <DeleteEventModal
                     eventId={eventId}
-                    pendingApiResponse={pendingApiResponse}
                     eventDetailsForRollback={eventDetailsForRollback}
                     onClose={() => setDeleteConfirmOpen(false)}
                     onOptimisticDelete={onOptimisticDelete}

@@ -8,6 +8,5 @@ export { useScopeTitleText } from './useScopeTitleText';
 export { useProgramExpiryForUser } from './useProgramExpiryForUser';
 export { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
 export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
-export { useEventEditPermissions } from './useEventEditPermissions';
-export { useCanChangeCompletionStatus } from './useCanChangeCompletionStatus';
+export { useEventPermissions } from './useEventPermissions';
 export { useOptimisticEventStatus } from './useOptimisticEventStatus';

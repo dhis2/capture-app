@@ -21,7 +21,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
-    useEventEditPermissions,
+    useEventPermissions,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -112,13 +112,14 @@ const WidgetEventEditPlain = ({
 
     const {
         readOnly,
+        canEditEvent,
         expiryPeriod,
         canUncompleteEvent,
         eventAccess,
         isEventWithinValidPeriod,
         canEditCompletedEvent,
         isWithinCompleteExpiry,
-    } = useEventEditPermissions({
+    } = useEventPermissions({
         programId,
         stage,
         eventStatus,
@@ -162,7 +163,7 @@ const WidgetEventEditPlain = ({
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            readOnly={readOnly}
+                            canEditEvent={canEditEvent}
                             readOnlyBadge={readOnlyBadge}
                         />
                     }

@@ -15,7 +15,7 @@ import { startGoBackToMainPage } from './viewEvent.actions';
 import { useLocationQuery } from '../../../../utils/routing';
 import {
     useHideWidgetByRuleLocations,
-    useEventEditPermissions,
+    useEventPermissions,
 } from '../../../../hooks';
 
 const getStyles = (theme: any) => ({
@@ -102,14 +102,15 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         isWithinCompleteExpiry,
         canEditCompletedEvent,
         readOnly,
-    } = useEventEditPermissions({
+        canEditEvent,
+    } = useEventPermissions({
         programId,
         stage: programStage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-    const showEditButton = !isEditEventPage && !readOnly;
+    const showEditButton = !isEditEventPage && canEditEvent;
 
     return (
         <div className={classes.container}>

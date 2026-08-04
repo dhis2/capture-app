@@ -3,7 +3,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations, useEventEditPermissions } from '../../../hooks';
+import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations, useEventPermissions } from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
@@ -271,7 +271,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         isEventWithinValidPeriod,
         isWithinCompleteExpiry,
         canEditCompletedEvent,
-    } = useEventEditPermissions({
+    } = useEventPermissions({
         programId,
         stage: programStage,
         eventStatus: event?.status,

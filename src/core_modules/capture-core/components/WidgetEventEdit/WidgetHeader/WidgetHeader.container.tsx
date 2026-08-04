@@ -5,7 +5,6 @@ import { Button, IconEdit24, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { useEnrollmentEditEventPageMode, useOptimisticEventStatus } from 'capture-core/hooks';
-import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -43,7 +42,7 @@ const WidgetHeaderPlain = ({
     enrollmentId,
     setChangeLogIsOpen,
     classes,
-    readOnly,
+    canEditEvent,
     readOnlyBadge,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -51,7 +50,6 @@ const WidgetHeaderPlain = ({
     const { navigate } = useNavigate();
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const showEditButton = !readOnly && eventStatus !== eventStatuses.SKIPPED;
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
@@ -95,7 +93,7 @@ const WidgetHeaderPlain = ({
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
                         {readOnlyBadge}
-                        {showEditButton && (
+                        {canEditEvent && (
                             <Button
                                 small
                                 secondary
