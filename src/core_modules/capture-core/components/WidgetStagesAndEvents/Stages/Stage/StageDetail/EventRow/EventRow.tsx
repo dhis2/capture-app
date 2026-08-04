@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
+    CircularLoader,
     DataTableCell,
     DataTableRow,
     FlyoutMenu,
@@ -77,53 +78,56 @@ const EventRowPlain = ({
             <DataTableCell>
                 {stageWriteAccess && (
                     <>
-                        <OverflowButton
-                            open={actionsOpen}
-                            onClick={() => setActionsOpen(prev => !prev)}
-                            dataTest={'overflow-button'}
-                            secondary
-                            small
-                            icon={<IconMore16 />}
-                            disabled={pendingApiResponse}
-                            component={(
-                                <FlyoutMenu
-                                    dense
-                                    dataTest={'overflow-menu'}
-                                >
-                                    {(eventDetails.status === eventStatuses.SCHEDULE ||
-                                        eventDetails.status === eventStatuses.SKIPPED) && (
-                                        <SkipAction
-                                            eventId={id}
-                                            eventDetails={eventDetails}
+                        {pendingApiResponse ? (
+                            <CircularLoader small dataTest={'event-row-saving-loader'} />
+                        ) : (
+                            <OverflowButton
+                                open={actionsOpen}
+                                onClick={() => setActionsOpen(prev => !prev)}
+                                dataTest={'overflow-button'}
+                                secondary
+                                small
+                                icon={<IconMore16 />}
+                                component={(
+                                    <FlyoutMenu
+                                        dense
+                                        dataTest={'overflow-menu'}
+                                    >
+                                        {(eventDetails.status === eventStatuses.SCHEDULE ||
+                                            eventDetails.status === eventStatuses.SKIPPED) && (
+                                            <SkipAction
+                                                eventId={id}
+                                                eventDetails={eventDetails}
+                                                setActionsOpen={setActionsOpen}
+                                                pendingApiResponse={pendingApiResponse}
+                                                onUpdateEventStatus={onUpdateEventStatus}
+                                            />
+                                        )}
+
+                                        {canChangeCompletionStatus && (
+                                            <CompletionMenuItem
+                                                eventId={id}
+                                                eventStatus={eventDetails.status}
+                                                onMutate={onCompletionStatusMutate}
+                                                onSuccess={onCompletionStatusSuccess}
+                                                onError={onCompletionStatusError}
+                                                onClose={() => setActionsOpen(false)}
+                                            />
+                                        )}
+
+                                        <DeleteActionButton
                                             setActionsOpen={setActionsOpen}
-                                            pendingApiResponse={pendingApiResponse}
-                                            onUpdateEventStatus={onUpdateEventStatus}
-                                        />
-                                    )}
-
-                                    {canChangeCompletionStatus && (
-                                        <CompletionMenuItem
-                                            eventId={id}
+                                            setDeleteModalOpen={setDeleteModalOpen}
+                                            occurredAt={eventDetails.occurredAt}
+                                            completedAt={eventDetails.completedAt}
                                             eventStatus={eventDetails.status}
-                                            onMutate={onCompletionStatusMutate}
-                                            onSuccess={onCompletionStatusSuccess}
-                                            onError={onCompletionStatusError}
-                                            onClose={() => setActionsOpen(false)}
+                                            programId={programId}
+                                            programStage={programStage}
                                         />
-                                    )}
-
-                                    <DeleteActionButton
-                                        setActionsOpen={setActionsOpen}
-                                        setDeleteModalOpen={setDeleteModalOpen}
-                                        occurredAt={eventDetails.occurredAt}
-                                        completedAt={eventDetails.completedAt}
-                                        eventStatus={eventDetails.status}
-                                        programId={programId}
-                                        programStage={programStage}
-                                    />
-                                </FlyoutMenu>
-                            )}
-                        />
+                                    </FlyoutMenu>
+                                )}
+                            />
+                        )}
 
                         {deleteModalOpen && (
                             <DeleteActionModal
