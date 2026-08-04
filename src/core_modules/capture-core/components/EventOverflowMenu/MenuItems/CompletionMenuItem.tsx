@@ -16,7 +16,7 @@ type Props = {
     onClose: () => void;
 };
 
-export const EventCompletionMenuItem = ({
+export const CompletionMenuItem = ({
     eventId,
     eventStatus,
     onMutate,

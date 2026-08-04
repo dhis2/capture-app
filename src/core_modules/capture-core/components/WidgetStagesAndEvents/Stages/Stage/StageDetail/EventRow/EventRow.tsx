@@ -11,7 +11,7 @@ import { useCanChangeCompletionStatus } from 'capture-core/hooks';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton, DeleteActionModal, EventCompletionMenuItem } from '../../../../../EventOverflowMenu';
+import { DeleteActionButton, DeleteActionModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
 import { SkipAction } from './SkipAction';
 import {
     updateEnrollmentEvent,
@@ -102,7 +102,7 @@ const EventRowPlain = ({
                                     )}
 
                                     {canChangeCompletionStatus && (
-                                        <EventCompletionMenuItem
+                                        <CompletionMenuItem
                                             eventId={id}
                                             eventStatus={eventDetails.status}
                                             onMutate={onCompletionStatusMutate}

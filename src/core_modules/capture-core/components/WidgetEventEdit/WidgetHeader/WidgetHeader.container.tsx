@@ -15,7 +15,7 @@ import {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { EventCompletionMenuItem } from '../../EventOverflowMenu';
+import { CompletionMenuItem } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
@@ -120,7 +120,7 @@ const WidgetHeaderPlain = ({
                                     dataTest={'tracker-program-event-overflow-menu'}
                                 >
                                     {canChangeCompletionStatus && (
-                                        <EventCompletionMenuItem
+                                        <CompletionMenuItem
                                             eventId={eventId}
                                             eventStatus={eventStatus}
                                             onMutate={onCompletionStatusMutate}
