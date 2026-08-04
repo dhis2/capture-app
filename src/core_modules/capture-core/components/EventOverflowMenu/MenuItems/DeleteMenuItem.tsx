@@ -15,9 +15,9 @@ import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
-import { convertClientToView } from '../../converters';
-import { dataElementTypes } from '../../metaData';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
+import { convertClientToView } from '../../../converters';
+import { dataElementTypes } from '../../../metaData';
 
 type TriggerProps = {
     occurredAtClient?: string;

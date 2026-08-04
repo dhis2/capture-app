@@ -3,13 +3,16 @@ import { FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { OverflowButton } from '../Buttons';
 import { useEventEditPermissions, useCanChangeCompletionStatus } from '../../hooks';
-import { EventCompletionMenuItem } from './EventCompletionMenuItem';
 import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
 import { convertServerToClient } from '../../converters';
 import { dataElementTypes, type ProgramStage } from '../../metaData';
-import { SkipMenuItem } from './SkipMenuItem';
-import { DeleteMenuItem, DeleteEventModal } from './DeleteMenuItem';
-import { ChangelogMenuItem } from './ChangelogMenuItem';
+import {
+    SkipMenuItem,
+    DeleteMenuItem,
+    DeleteEventModal,
+    ChangelogMenuItem,
+    CompletionMenuItem,
+} from './MenuItems';
 
 type Props = {
     eventId: string;
@@ -135,7 +138,7 @@ export const EventOverflowMenu = (props: Props) => {
                 component={(
                     <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
                         {visibility.completion && onCompletionStatusUpdated && (
-                            <EventCompletionMenuItem
+                            <CompletionMenuItem
                                 eventId={eventId}
                                 eventStatus={eventStatus}
                                 onMutate={onCompletionStatusMutate}

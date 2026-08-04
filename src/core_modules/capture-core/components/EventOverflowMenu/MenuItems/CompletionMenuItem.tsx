@@ -5,7 +5,7 @@ import { MenuItem, IconCheckmark16, IconUndo16 } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
+import { eventStatuses } from '../../WidgetEventEdit/constants/status.const';
 
 type Props = {
     eventId: string;
@@ -16,7 +16,7 @@ type Props = {
     onClose: () => void;
 };
 
-export const EventCompletionMenuItem = ({
+export const CompletionMenuItem = ({
     eventId,
     eventStatus,
     onMutate,

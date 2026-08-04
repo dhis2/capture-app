@@ -5,8 +5,8 @@ import { MenuItem } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { DirectionalArrow } from '../../utils/rtl';
-import { eventStatuses } from '../WidgetEventEdit/constants/status.const';
+import { DirectionalArrow } from '../../../utils/rtl';
+import { eventStatuses } from '../../WidgetEventEdit/constants/status.const';
 
 type Props = {
     eventId: string;
@@ -82,7 +82,7 @@ export const SkipMenuItem = ({
                 icon={<DirectionalArrow reverse />}
                 label={i18n.t('Unskip')}
                 onClick={() => handleClick(eventStatuses.SCHEDULE)}
-                suffix=""
+                suffix={null}
                 dataTest="event-overflow-unskip"
             />
         );
@@ -94,7 +94,7 @@ export const SkipMenuItem = ({
             icon={<DirectionalArrow />}
             label={i18n.t('Skip')}
             onClick={() => handleClick(eventStatuses.SKIPPED)}
-            suffix=""
+            suffix={null}
             dataTest="event-overflow-skip"
         />
     );
