@@ -105,13 +105,13 @@ type fieldsMetadata = {
     compulsory: boolean;
     description: string;
     type: string;
-    optionSet: any;
     displayInForms: boolean;
     displayInReports: boolean;
-    icon: any;
-    unique: any;
-    searchable: boolean | undefined;
-    url: string | undefined;
+    optionSet?: any;
+    icon?: any;
+    unique?: any;
+    searchable?: boolean;
+    url?: string;
     attributes?: Record<string, any>;
 }
 
