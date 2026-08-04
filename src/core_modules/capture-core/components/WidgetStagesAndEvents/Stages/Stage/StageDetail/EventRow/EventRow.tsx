@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
+    CircularLoader,
     DataTableCell,
     DataTableRow,
     FlyoutMenu,
     IconMore16,
 } from '@dhis2/ui';
+import { useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton } from './DeleteActionButton';
+import { DeleteActionButton, DeleteActionModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
 import { SkipAction } from './SkipAction';
-import { DeleteActionModal } from './DeleteActionModal';
+import {
+    updateEnrollmentEvent,
+    commitEnrollmentEvent,
+    rollbackEnrollmentEvent,
+} from '../../../../../Pages/common/EnrollmentOverviewDomain';
 
 const styles: Readonly<any> = {
     row: {
@@ -22,13 +30,6 @@ const styles: Readonly<any> = {
         cursor: 'not-allowed',
         opacity: 0.5,
     },
-};
-
-export const EventStatuses = {
-    ACTIVE: 'ACTIVE',
-    COMPLETED: 'COMPLETED',
-    SKIPPED: 'SKIPPED',
-    SCHEDULE: 'SCHEDULE',
 };
 
 const EventRowPlain = ({
@@ -46,6 +47,26 @@ const EventRowPlain = ({
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    const canChangeCompletionStatus = useCanChangeCompletionStatus({
+        programId,
+        stage: programStage,
+        eventStatus: eventDetails.status,
+    });
+
+    const onCompletionStatusMutate = useCallback((newStatus: string) => {
+        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
+        dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
+    }, [dispatch, eventDetails, id]);
+
+    const onCompletionStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentEvent(id));
+    }, [dispatch, id]);
+
+    const onCompletionStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(id));
+    }, [dispatch, id]);
 
     return (
         <DataTableRow
@@ -57,42 +78,56 @@ const EventRowPlain = ({
             <DataTableCell>
                 {stageWriteAccess && (
                     <>
-                        <OverflowButton
-                            open={actionsOpen}
-                            onClick={() => setActionsOpen(prev => !prev)}
-                            dataTest={'overflow-button'}
-                            secondary
-                            small
-                            icon={<IconMore16 />}
-                            disabled={pendingApiResponse}
-                            component={(
-                                <FlyoutMenu
-                                    dense
-                                    dataTest={'overflow-menu'}
-                                >
-                                    {(eventDetails.status === EventStatuses.SCHEDULE ||
-                                        eventDetails.status === EventStatuses.SKIPPED) && (
-                                        <SkipAction
-                                            eventId={id}
-                                            eventDetails={eventDetails}
-                                            setActionsOpen={setActionsOpen}
-                                            pendingApiResponse={pendingApiResponse}
-                                            onUpdateEventStatus={onUpdateEventStatus}
-                                        />
-                                    )}
+                        {pendingApiResponse ? (
+                            <CircularLoader small dataTest={'event-row-saving-loader'} />
+                        ) : (
+                            <OverflowButton
+                                open={actionsOpen}
+                                onClick={() => setActionsOpen(prev => !prev)}
+                                dataTest={'overflow-button'}
+                                secondary
+                                small
+                                icon={<IconMore16 />}
+                                component={(
+                                    <FlyoutMenu
+                                        dense
+                                        dataTest={'overflow-menu'}
+                                    >
+                                        {(eventDetails.status === eventStatuses.SCHEDULE ||
+                                            eventDetails.status === eventStatuses.SKIPPED) && (
+                                            <SkipAction
+                                                eventId={id}
+                                                eventDetails={eventDetails}
+                                                setActionsOpen={setActionsOpen}
+                                                pendingApiResponse={pendingApiResponse}
+                                                onUpdateEventStatus={onUpdateEventStatus}
+                                            />
+                                        )}
 
-                                    <DeleteActionButton
-                                        setActionsOpen={setActionsOpen}
-                                        setDeleteModalOpen={setDeleteModalOpen}
-                                        occurredAt={eventDetails.occurredAt}
-                                        completedAt={eventDetails.completedAt}
-                                        eventStatus={eventDetails.status}
-                                        programId={programId}
-                                        programStage={programStage}
-                                    />
-                                </FlyoutMenu>
-                            )}
-                        />
+                                        {canChangeCompletionStatus && (
+                                            <CompletionMenuItem
+                                                eventId={id}
+                                                eventStatus={eventDetails.status}
+                                                onMutate={onCompletionStatusMutate}
+                                                onSuccess={onCompletionStatusSuccess}
+                                                onError={onCompletionStatusError}
+                                                onClose={() => setActionsOpen(false)}
+                                            />
+                                        )}
+
+                                        <DeleteActionButton
+                                            setActionsOpen={setActionsOpen}
+                                            setDeleteModalOpen={setDeleteModalOpen}
+                                            occurredAt={eventDetails.occurredAt}
+                                            completedAt={eventDetails.completedAt}
+                                            eventStatus={eventDetails.status}
+                                            programId={programId}
+                                            programStage={programStage}
+                                        />
+                                    </FlyoutMenu>
+                                )}
+                            />
+                        )}
 
                         {deleteModalOpen && (
                             <DeleteActionModal

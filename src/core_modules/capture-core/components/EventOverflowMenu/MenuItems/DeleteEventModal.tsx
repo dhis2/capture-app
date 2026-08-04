@@ -46,8 +46,6 @@ export const DeleteActionModal = ({
         }),
         {
             onMutate: () => {
-                // Capture the event before the optimistic removal so it can be restored
-                // from the same source of truth (the rendered redux event) if the delete fails.
                 const eventToRollbackOnFail = eventDetails;
 
                 onDeleteEvent(eventId);

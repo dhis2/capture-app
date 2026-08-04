@@ -23,6 +23,7 @@ export type ApiEnrollmentEvent = {
     occurredAt: string;
     scheduledAt: string;
     completedAt?: string;
+    completedBy?: string;
     updatedAt: string;
     dataValues: Array<ApiDataValue>;
     notes?: Array<any>;
