@@ -12,10 +12,8 @@ import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentP
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
-import { useHideWidgetByRuleLocations } from '../../../../hooks';
+import { useHideWidgetByRuleLocations, useOptimisticEnrollmentStatus } from '../../../../hooks';
 import {
-    commitEnrollmentAndEvents,
-    rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
     showEnrollmentError,
     updateEnrollmentAndEvents,
@@ -53,19 +51,13 @@ export const EnrollmentAddEventPageDefault = ({
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
 
-    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate: any) => {
-        dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
-    }, [dispatch]);
-
-    const onUpdateEnrollmentStatusError = useCallback((message: string) => {
-        dispatch(rollbackEnrollmentAndEvents());
-        dispatch(showEnrollmentError({ message }));
-    }, [dispatch]);
-
-    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
-        dispatch(commitEnrollmentAndEvents());
-        redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-    }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
+    const {
+        onUpdateEnrollmentStatus,
+        onUpdateEnrollmentStatusError,
+        onUpdateEnrollmentStatusSuccess,
+    } = useOptimisticEnrollmentStatus({
+        redirectUrl: `enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`,
+    });
 
     const handleSave = useCallback(
         ({ enrollments, events, linkMode }: any) => {

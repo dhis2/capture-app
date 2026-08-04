@@ -3,12 +3,15 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
-import { useEnrollmentEditEventPageMode, useHideWidgetByRuleLocations, useEventPermissions } from '../../../hooks';
+import {
+    useEnrollmentEditEventPageMode,
+    useHideWidgetByRuleLocations,
+    useEventPermissions,
+    useOptimisticEnrollmentStatus,
+} from '../../../hooks';
 import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
-    commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
-    rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
     showEnrollmentError,
     updateEnrollmentAndEvents,
@@ -172,19 +175,13 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const onEnrollmentError = (message: string) => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
-    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate: Record<string, unknown>) => {
-        dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
-    }, [dispatch]);
-
-    const onUpdateEnrollmentStatusError = useCallback((message: string) => {
-        dispatch(rollbackEnrollmentAndEvents());
-        dispatch(showEnrollmentError({ message }));
-    }, [dispatch]);
-
-    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
-        dispatch(commitEnrollmentAndEvents());
-        redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-    }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
+    const {
+        onUpdateEnrollmentStatus,
+        onUpdateEnrollmentStatusError,
+        onUpdateEnrollmentStatusSuccess,
+    } = useOptimisticEnrollmentStatus({
+        redirectUrl: `enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`,
+    });
 
     const onDeleteEvent = useCallback((linkedEventId: string) => {
         dispatch(deleteEnrollmentEvent(linkedEventId));

@@ -10,3 +10,4 @@ export { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser
 export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
 export { useEventPermissions } from './useEventPermissions';
 export { useOptimisticEventStatus } from './useOptimisticEventStatus';
+export { useOptimisticEnrollmentStatus } from './useOptimisticEnrollmentStatus';

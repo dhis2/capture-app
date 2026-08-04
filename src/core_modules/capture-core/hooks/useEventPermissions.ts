@@ -27,28 +27,6 @@ type Output = {
     canDeleteEvent: boolean,
 };
 
-// Single source of truth for what a user may do with an event. Consumers should read these flags
-// rather than re-deriving rules from `eventStatus` / `eventAccess`:
-//   - `eventAccess`: the user's read/write access to the program stage.
-//   - `isEventWithinValidPeriod`: whether occurredAt still falls inside the program's expiry period.
-//   - `isWithinCompleteExpiry`: whether a completed event is still inside the
-//     completeEventsExpiryDays window.
-//   - `canEditCompletedEvent`: false only when a completed event sits on a stage with
-//     blockEntryForm; F_EDIT_EXPIRED overrides it.
-//   - `canUncompleteEvent`: whether the user holds F_UNCOMPLETE_EVENT.
-//   - `expiryPeriod`: the program's expiry period, for consumers that validate dates themselves.
-//   - `readOnly`: blocks the data entry form - no write access, or any of the expiry rules above
-//     fails. Side actions (notes, relationships, assignee, delete) stay available on a read-only
-//     event.
-//   - `canEditEvent`: shows the edit-event button. Not read-only, and not skipped - a skipped event
-//     is unskipped rather than edited in place.
-//   - `canCompleteEvent`: an ACTIVE event can be completed; reopening a COMPLETED one needs
-//     F_UNCOMPLETE_EVENT.
-//   - `canSkipEvent`: only scheduled events can be skipped, and only skipped ones unskipped.
-//   - `canDeleteEvent`: write access alone, deliberately not gated on `readOnly` - an expired or
-//     completed event still offers Delete, disabled with a tooltip explaining why, so consumers
-//     combine this with `readOnly` for the disabled state.
-
 const getCanEditCompletedEvent = (
     stage: ProgramStage | null | undefined,
     eventStatus: string | undefined,
