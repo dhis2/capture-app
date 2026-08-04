@@ -9,8 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
-import { eventStatuses } from '../../../../../../WidgetEventEdit/constants/status.const';
 
 type Props = {
     eventId: string;

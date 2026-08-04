@@ -15,7 +15,7 @@ import {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { EventCompletionMenuItem } from '../../EventOverflowMenu/EventCompletionMenuItem';
+import { EventCompletionMenuItem } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';

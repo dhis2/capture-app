@@ -8,13 +8,11 @@ import {
     IconMore16,
 } from '@dhis2/ui';
 import { useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton } from '../../../../../EventOverflowMenu/DeleteMenuItem';
+import { DeleteActionButton, DeleteActionModal, EventCompletionMenuItem } from '../../../../../EventOverflowMenu';
 import { SkipAction } from './SkipAction';
-import { DeleteActionModal } from '../../../../../EventOverflowMenu/DeleteEventModal';
-import { EventCompletionMenuItem } from '../../../../../EventOverflowMenu/EventCompletionMenuItem';
-import { eventStatuses } from '../../../../../WidgetEventEdit/constants/status.const';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
