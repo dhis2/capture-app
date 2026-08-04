@@ -11,6 +11,7 @@ export const EnrollmentReadOnlyBadge = () => {
         anyStageWriteAccess,
         anyStageReadAccess,
         trackedEntityTypeName,
+        trackedEntityInactive,
         isEventWithinValidPeriod,
         canEditCompletedEvent,
         isWithinCompleteEventsExpiry,
@@ -24,6 +25,7 @@ export const EnrollmentReadOnlyBadge = () => {
                 canEditCompletedEvent={canEditCompletedEvent}
                 withinCompleteEventsExpiry={isWithinCompleteEventsExpiry}
                 trackedEntityName={trackedEntityTypeName}
+                trackedEntityInactive={trackedEntityInactive}
                 inlineLabel
             />
         );
@@ -31,7 +33,7 @@ export const EnrollmentReadOnlyBadge = () => {
 
     const stagesEffectivelyReadOnly = !anyStageWriteAccess && anyStageReadAccess;
     const showAllMissing = !programWriteAccess && !trackedEntityTypeWriteAccess && stagesEffectivelyReadOnly;
-    if (!showAllMissing) return null;
+    if (!showAllMissing && !trackedEntityInactive) return null;
 
     return (
         <ReadOnlyBadge
@@ -39,6 +41,7 @@ export const EnrollmentReadOnlyBadge = () => {
             trackedEntityTypeWriteAccess={false}
             programStageWriteAccess={false}
             trackedEntityName={trackedEntityTypeName}
+            trackedEntityInactive={trackedEntityInactive}
             inlineLabel
         />
     );
