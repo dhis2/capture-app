@@ -11,15 +11,11 @@ Developing a capture plugin is almost the same as developing a regular DHIS2 cus
 
 ## Step 1: Create a new DHIS2 custom app
 
-To create a new DHIS2 custom app, you can use the `npm create @dhis2/app` command.
+To create a new DHIS2 custom app, you can use the create-app command.
 
 This will prompt you with a series of questions to help you set up your new app, and once completed, it will create all the necessary files and packages for you.
 
 Please read our documentation for details on how to use the command [here](/docs/cli/create-app). 
-
-```sh
-npm create @dhis2/app
-```
 
 ## Step 2: Add a plugin entrypoint
 
