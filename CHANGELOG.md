@@ -1,3 +1,38 @@
+## [106.7.4](https://github.com/dhis2/capture-app/compare/v106.7.3...v106.7.4) (2026-08-03)
+
+
+### Bug Fixes
+
+* align Error/Warning widget body text size with other widgets ([#4678](https://github.com/dhis2/capture-app/issues/4678)) ([c266110](https://github.com/dhis2/capture-app/commit/c26611031f23d9efbb257c91dd28d442660691d5))
+
+## [106.7.3](https://github.com/dhis2/capture-app/compare/v106.7.2...v106.7.3) (2026-07-31)
+
+
+### Bug Fixes
+
+* [DHIS2-21708] Org unit selector is expanded when form open if no org unit in top bar ([#4629](https://github.com/dhis2/capture-app/issues/4629)) ([9a568ba](https://github.com/dhis2/capture-app/commit/9a568ba1ffd63bfa219b4d527a8b704477b4105f))
+
+## [106.7.2](https://github.com/dhis2/capture-app/compare/v106.7.1...v106.7.2) (2026-07-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4674](https://github.com/dhis2/capture-app/issues/4674)) ([31e9203](https://github.com/dhis2/capture-app/commit/31e92032c4c455290dabb1d7252b102079df02f7))
+
+## [106.7.1](https://github.com/dhis2/capture-app/compare/v106.7.0...v106.7.1) (2026-07-30)
+
+
+### Bug Fixes
+
+* [DHIS2-19814] re-enable and de-flake changelog sort by date test ([#4650](https://github.com/dhis2/capture-app/issues/4650)) ([150b135](https://github.com/dhis2/capture-app/commit/150b135351b9b75d8eeea42aeb0de19d20b481cc))
+
+# [106.7.0](https://github.com/dhis2/capture-app/compare/v106.6.3...v106.7.0) (2026-07-22)
+
+
+### Features
+
+* [DHIS2-21266] Integrate react Markdown lib in WidgetFeedback ([#4621](https://github.com/dhis2/capture-app/issues/4621)) ([e83d473](https://github.com/dhis2/capture-app/commit/e83d473dd075f8e4af4906d058026ff46ad6cd7a))
+
 ## [106.6.3](https://github.com/dhis2/capture-app/compare/v106.6.2...v106.6.3) (2026-07-08)
 
 
