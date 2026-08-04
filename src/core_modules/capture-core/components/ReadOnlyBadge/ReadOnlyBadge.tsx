@@ -29,6 +29,10 @@ const getCompletedEventMessage = (): string => i18n.t('This event has been compl
 
 const getSkippedEventMessage = (): string => i18n.t('This event is skipped');
 
+const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
+    ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
+    : i18n.t('This tracked entity is deactivated'));
+
 const getAccessMessage = ({ access, trackedEntityName, multipleStages }: ReadOnlyMessageInput): string => {
     if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
     if (!access.program) return getProgramMessage();
@@ -50,8 +54,10 @@ const getEventStateMessage = ({
     return '';
 };
 
-const getReadOnlyMessage = (input: ReadOnlyMessageInput): string =>
-    getAccessMessage(input) || getEventStateMessage(input);
+const getReadOnlyMessage = (input: ReadOnlyMessageInput): string => {
+    if (input.trackedEntityInactive) return getDeactivatedMessage(input.trackedEntityName);
+    return getAccessMessage(input) || getEventStateMessage(input);
+};
 
 const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
@@ -63,6 +69,7 @@ const ReadOnlyBadgePlain = ({
     eventIsSkipped = false,
     multipleStages = false,
     trackedEntityName,
+    trackedEntityInactive = false,
     inlineLabel = false,
     classes,
 }: Props & WithStyles<typeof styles>) => {
@@ -79,6 +86,7 @@ const ReadOnlyBadgePlain = ({
         canEditCompletedEvent,
         withinCompleteEventsExpiry,
         eventIsSkipped,
+        trackedEntityInactive,
     });
     if (!message) return null;
 

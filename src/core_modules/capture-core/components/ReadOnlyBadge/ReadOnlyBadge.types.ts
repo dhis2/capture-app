@@ -8,6 +8,7 @@ export type Props = {
     eventIsSkipped?: boolean;
     multipleStages?: boolean;
     trackedEntityName?: string;
+    trackedEntityInactive?: boolean;
     inlineLabel?: boolean;
 };
 
@@ -25,4 +26,5 @@ export type ReadOnlyMessageInput = {
     canEditCompletedEvent: boolean;
     withinCompleteEventsExpiry: boolean;
     eventIsSkipped: boolean;
+    trackedEntityInactive: boolean;
 };
