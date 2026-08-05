@@ -10,7 +10,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
-import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog/common/utils/removeChangelogQueries';
+import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
 
 type Props = {

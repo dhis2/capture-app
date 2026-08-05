@@ -40,31 +40,14 @@ const fetchFormattedValues = async ({
 }) => {
     if (!rawRecords) return [];
 
-    const getFieldId = (change: Change) => change.dataElement ?? change.attribute ?? change.field;
-
-    const getChange = (changelog: any): Change => changelog.change[Object.keys(changelog.change)[0]];
-
     const getItemDefinition = (change: Change) => {
-        const fieldId = getFieldId(change);
+        const fieldId = change.dataElement ?? change.attribute ?? change.field;
         if (!fieldId) {
             log.error('Could not find fieldId in change:', change);
             return null;
         }
         return dataItemDefinitions[fieldId];
     };
-
-    const newestChangeAtByFieldId = rawRecords.changeLogs.reduce(
-        (acc: Record<string, string>, changelog: any) => {
-            const fieldId = getFieldId(getChange(changelog));
-            if (!fieldId) return acc;
-            const newestSoFar = acc[fieldId];
-            if (!newestSoFar || new Date(changelog.createdAt) > new Date(newestSoFar)) {
-                acc[fieldId] = changelog.createdAt;
-            }
-            return acc;
-        },
-        {} as Record<string, string>,
-    );
 
     const results = await Promise.all(
         rawRecords.changeLogs.map(async (changelog) => {
@@ -108,8 +91,7 @@ const fetchFormattedValues = async ({
                 return null;
             };
 
-            const isLatestValue = newestChangeAtByFieldId[metadataElement.id] === createdAt &&
-                currentValues[metadataElement.id] === change.currentValue;
+            const isLatestValue = currentValues[metadataElement.id] === change.currentValue;
 
             const [previousValueClient, currentValueClient] = await Promise.all([
                 change.previousValue ? getValue(change.previousValue, false) : null,

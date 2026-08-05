@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
-import { removeEventChangelogQueries } from '../../WidgetsChangelog/common/utils/removeChangelogQueries';
+import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 
 type Props = {
     eventId: string;
