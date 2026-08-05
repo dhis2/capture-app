@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
-import { CircularLoader, FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
+import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
@@ -16,8 +15,9 @@ import {
 import {
     CompletionMenuItem,
     SkipMenuItem,
-    DeleteActionButton,
-    DeleteActionModal,
+    ChangelogMenuItem,
+    DeleteMenuItem,
+    DeleteEventModal,
 } from './MenuItems';
 
 type Props = {
@@ -112,37 +112,31 @@ export const EventOverflowMenu = ({
                             />
                         )}
                         {supportsChangelog && (
-                            <MenuItem
-                                dense
-                                label={i18n.t('View changelog')}
-                                suffix=""
-                                onClick={() => {
-                                    onOpenChangelog();
-                                    setActionsOpen(false);
-                                }}
+                            <ChangelogMenuItem
+                                onOpenChangelog={onOpenChangelog}
+                                onClose={() => setActionsOpen(false)}
                             />
                         )}
-                        <DeleteActionButton
-                            setActionsOpen={setActionsOpen}
-                            setDeleteModalOpen={setDeleteModalOpen}
+                        <DeleteMenuItem
                             occurredAt={eventDetails.occurredAt}
                             completedAt={eventDetails.completedAt}
                             eventStatus={eventDetails.status}
                             programId={programId}
                             programStage={programStage}
+                            onRequestDelete={() => setDeleteModalOpen(true)}
+                            onClose={() => setActionsOpen(false)}
                         />
                     </FlyoutMenu>
                 }
             />
 
             {deleteModalOpen && (
-                <DeleteActionModal
+                <DeleteEventModal
                     eventId={eventId}
-                    pendingApiResponse={!!pendingApiResponse}
                     eventDetails={eventDetails}
                     onDeleteEvent={onDeleteEvent}
                     onRollbackDeleteEvent={onRollbackDeleteEvent}
-                    setDeleteModalOpen={setDeleteModalOpen}
+                    onClose={() => setDeleteModalOpen(false)}
                 />
             )}
         </>

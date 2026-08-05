@@ -1,4 +1,4 @@
 export { CompletionMenuItem } from './CompletionMenuItem';
 export { SkipMenuItem } from './SkipMenuItem';
-export { DeleteActionButton } from './DeleteMenuItem';
-export { DeleteActionModal } from './DeleteEventModal';
+export { ChangelogMenuItem } from './ChangelogMenuItem';
+export { DeleteMenuItem, DeleteEventModal } from './DeleteMenuItem';
