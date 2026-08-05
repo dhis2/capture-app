@@ -4,7 +4,6 @@ import { Changelog, CHANGELOG_ENTITY_TYPES } from '../common/Changelog';
 
 type Props = {
     eventId: string;
-    eventData: Record<string, unknown>;
     dataItemDefinitions: ItemDefinitions;
     isOpen: boolean;
     setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
@@ -12,7 +11,6 @@ type Props = {
 
 export const WidgetEventChangelog = ({
     eventId,
-    eventData,
     setIsOpen,
     ...passOnProps
 }: Props) => (
@@ -20,7 +18,6 @@ export const WidgetEventChangelog = ({
         {...passOnProps}
         close={() => setIsOpen(false)}
         entityId={eventId}
-        entityData={eventData}
         entityType={CHANGELOG_ENTITY_TYPES.EVENT}
     />
 );
