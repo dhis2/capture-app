@@ -79,24 +79,19 @@ And('you enroll the tei from Njandama MCHP', () => {
 });
 
 And('you log out', () => {
-    cy.get('[data-test="headerbar-profile"')
-        .click();
-    cy.get('[data-test="headerbar-profile-menu"')
-        .contains('Logout')
-        .click();
-    // Wait for login screen
-    cy.get('#j_username')
-        .should('exist');
+    cy.clearCookies();
 });
 
 And('you log in as tracker2 user', () => {
-    cy.clearCookies();
-    cy.visit('/').then(() => {
-        cy.get('#j_username').type('tracker2');
-        cy.get('#j_password').type('Tracker@123');
-        cy.get('form').submit();
+    const baseUrl = Cypress.env('dhis2BaseUrl');
+
+    cy.session('userTracker2', () => {
+        cy.loginByApi({ username: 'tracker2', password: 'Tracker@123', baseUrl }); // NOSONAR - non-production test-instance credential, not a secret
+    }, {
+        cacheAcrossSpecs: true,
     });
 
+    cy.visit('/');
     cy.get('[data-test="scope-selector"]', { timeout: 60000 })
         .should('exist');
 });
