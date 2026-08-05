@@ -1,104 +1,148 @@
 import React, { useState } from 'react';
-import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
+import { useDispatch } from 'react-redux';
+import { CircularLoader, FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
+import { FEATURES, useFeature } from 'capture-core-utils';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { useCanChangeCompletionStatus } from 'capture-core/hooks';
 import { OverflowButton } from '../Buttons';
+import { type ProgramStage } from '../../metaData';
 import {
-    SkipMenuItem,
-    DeleteMenuItem,
-    DeleteEventModal,
-    ChangelogMenuItem,
+    updateEnrollmentEvent,
+    commitEnrollmentEvent,
+    rollbackEnrollmentEvent,
+} from '../Pages/common/EnrollmentOverviewDomain';
+import {
     CompletionMenuItem,
+    SkipMenuItem,
+    DeleteActionButton,
+    DeleteActionModal,
 } from './MenuItems';
-import { useEventMenu } from './useEventMenu';
-import type { Props } from './EventOverflowMenu.types';
 
-export const EventOverflowMenu = (props: Props) => {
-    const {
-        eventId,
-        eventStatus,
-        pendingApiResponse,
-        eventDetailsForRollback,
-        onCompletionStatusMutate,
-        onCompletionStatusUpdated,
-        onCompletionStatusError,
-        onStatusMutate,
-        onStatusError,
-        onStatusUpdated,
-        onOptimisticDelete,
-        onDeleteSuccess,
-        onDeleteError,
-        onOpenChangelog,
-        dataTest = 'event-overflow-menu',
-    } = props;
+type Props = {
+    eventId: string;
+    eventDetails: ApiEnrollmentEvent;
+    programId: string;
+    programStage?: ProgramStage | null;
+    pendingApiResponse?: boolean;
+    onDeleteEvent: (eventId: string) => void;
+    onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
+    onOpenChangelog: () => void;
+    onStatusUpdated?: (newStatus: string) => void;
+    dataTest: string;
+};
 
+export const EventOverflowMenu = ({
+    eventId,
+    eventDetails,
+    programId,
+    programStage,
+    pendingApiResponse,
+    onDeleteEvent,
+    onRollbackDeleteEvent,
+    onOpenChangelog,
+    onStatusUpdated,
+    dataTest,
+}: Props) => {
     const [actionsOpen, setActionsOpen] = useState(false);
-    const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-    const { visibility, deleteItemProps } = useEventMenu(props);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const dispatch = useDispatch();
+    const supportsChangelog = useFeature(FEATURES.changelogs);
 
-    if (!visibility.any) {
-        return null;
+    const canChangeCompletionStatus = useCanChangeCompletionStatus({
+        programId,
+        stage: programStage,
+        eventStatus: eventDetails.status,
+    });
+    const canSkip = eventDetails.status === eventStatuses.SCHEDULE ||
+        eventDetails.status === eventStatuses.SKIPPED;
+
+    // Optimistic update shared by both status toggles (complete/incomplete and skip/unskip):
+    // apply the new status right away, then commit on success or roll back on error.
+    const onStatusMutate = (newStatus: string) => {
+        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
+        dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
+    };
+    const onStatusSuccess = (newStatus: string) => {
+        dispatch(commitEnrollmentEvent(eventId));
+        onStatusUpdated?.(newStatus);
+    };
+    const onStatusError = () => {
+        dispatch(rollbackEnrollmentEvent(eventId));
+    };
+
+    if (pendingApiResponse) {
+        return <CircularLoader small dataTest={'event-row-saving-loader'} />;
     }
-
-    const close = () => setActionsOpen(false);
 
     return (
         <>
-            {pendingApiResponse ? (
-                <CircularLoader small dataTest={`${dataTest}-saving-loader`} />
-            ) : (
-                <OverflowButton
-                    open={actionsOpen}
-                    onClick={() => setActionsOpen(prev => !prev)}
-                    secondary
-                    small
-                    icon={<IconMore16 />}
-                    dataTest={`${dataTest}-button`}
-                    component={(
-                        <FlyoutMenu dense maxWidth="250px" dataTest={dataTest}>
-                            {visibility.completion && onCompletionStatusUpdated && (
-                                <CompletionMenuItem
-                                    eventId={eventId}
-                                    eventStatus={eventStatus}
-                                    onMutate={onCompletionStatusMutate}
-                                    onSuccess={onCompletionStatusUpdated}
-                                    onError={onCompletionStatusError}
-                                    onClose={close}
-                                />
-                            )}
-                            {visibility.skip && (
-                                <SkipMenuItem
-                                    eventId={eventId}
-                                    eventStatus={eventStatus}
-                                    onClose={close}
-                                    onStatusMutate={onStatusMutate}
-                                    onStatusError={onStatusError}
-                                    onStatusUpdated={onStatusUpdated}
-                                />
-                            )}
-                            {visibility.changelog && onOpenChangelog && (
-                                <ChangelogMenuItem
-                                    onClose={close}
-                                    onOpenChangelog={onOpenChangelog}
-                                />
-                            )}
-                            {visibility.delete && (
-                                <DeleteMenuItem
-                                    {...deleteItemProps}
-                                    onClose={close}
-                                    onRequestDelete={() => setDeleteConfirmOpen(true)}
-                                />
-                            )}
-                        </FlyoutMenu>
-                    )}
-                />
-            )}
-            {deleteConfirmOpen && (
-                <DeleteEventModal
+            <OverflowButton
+                open={actionsOpen}
+                onClick={() => setActionsOpen(prev => !prev)}
+                icon={<IconMore16 />}
+                small
+                secondary
+                dataTest={`${dataTest}-button`}
+                component={
+                    <FlyoutMenu
+                        dense
+                        maxWidth="250px"
+                        dataTest={`${dataTest}-menu`}
+                    >
+                        {canChangeCompletionStatus && (
+                            <CompletionMenuItem
+                                eventId={eventId}
+                                eventStatus={eventDetails.status}
+                                onMutate={onStatusMutate}
+                                onSuccess={onStatusSuccess}
+                                onError={onStatusError}
+                                onClose={() => setActionsOpen(false)}
+                            />
+                        )}
+                        {canSkip && (
+                            <SkipMenuItem
+                                eventId={eventId}
+                                eventDetails={eventDetails}
+                                onMutate={onStatusMutate}
+                                onSuccess={onStatusSuccess}
+                                onError={onStatusError}
+                                onClose={() => setActionsOpen(false)}
+                            />
+                        )}
+                        {supportsChangelog && (
+                            <MenuItem
+                                dense
+                                label={i18n.t('View changelog')}
+                                suffix=""
+                                onClick={() => {
+                                    onOpenChangelog();
+                                    setActionsOpen(false);
+                                }}
+                            />
+                        )}
+                        <DeleteActionButton
+                            setActionsOpen={setActionsOpen}
+                            setDeleteModalOpen={setDeleteModalOpen}
+                            occurredAt={eventDetails.occurredAt}
+                            completedAt={eventDetails.completedAt}
+                            eventStatus={eventDetails.status}
+                            programId={programId}
+                            programStage={programStage}
+                        />
+                    </FlyoutMenu>
+                }
+            />
+
+            {deleteModalOpen && (
+                <DeleteActionModal
                     eventId={eventId}
-                    eventDetailsForRollback={eventDetailsForRollback}
-                    onClose={() => setDeleteConfirmOpen(false)}
-                    onOptimisticDelete={onOptimisticDelete}
-                    onDeleteSuccess={onDeleteSuccess}
-                    onDeleteError={onDeleteError}
+                    pendingApiResponse={!!pendingApiResponse}
+                    eventDetails={eventDetails}
+                    onDeleteEvent={onDeleteEvent}
+                    onRollbackDeleteEvent={onRollbackDeleteEvent}
+                    setDeleteModalOpen={setDeleteModalOpen}
                 />
             )}
         </>

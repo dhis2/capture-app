@@ -5,8 +5,11 @@ import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import {
+    commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
+    rollbackEnrollmentAndEvents,
     showEnrollmentError,
+    updateEnrollmentAndEvents,
     updateEnrollmentAttributeValues,
     updateEnrollmentDate,
     updateIncidentDate,
@@ -38,7 +41,7 @@ import {
     deleteEnrollmentEvent,
     setTrackedEntityInactiveStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
-import { useHideWidgetByRuleLocations, useOptimisticEnrollmentStatus } from '../../../../hooks';
+import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
 
 export const EnrollmentPageDefault = () => {
@@ -153,11 +156,20 @@ export const EnrollmentPageDefault = () => {
     };
 
     const onEnrollmentError = (message: string) => dispatch(showEnrollmentError({ message }));
-    const {
-        onUpdateEnrollmentStatus,
-        onUpdateEnrollmentStatusError,
-        onUpdateEnrollmentStatusSuccess,
-    } = useOptimisticEnrollmentStatus();
+    const onUpdateEnrollmentStatus = useCallback(
+        (enrollmentToUpdate: any) => dispatch(updateEnrollmentAndEvents(enrollmentToUpdate)),
+        [dispatch],
+    );
+    const onUpdateEnrollmentStatusError = useCallback(
+        (message: string) => {
+            dispatch(rollbackEnrollmentAndEvents());
+            dispatch(showEnrollmentError({ message }));
+        },
+        [dispatch],
+    );
+    const onUpdateEnrollmentStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentAndEvents());
+    }, [dispatch]);
 
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);

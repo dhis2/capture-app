@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
-import { useOptimisticEventStatus } from 'capture-core/hooks';
 import { EventOverflowMenu } from '../../../../../EventOverflowMenu';
 import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
 import type { EventRowProps } from './EventRow.types';
@@ -32,15 +31,6 @@ const EventRowPlain = ({
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [changelogOpen, setChangelogOpen] = useState(false);
 
-    const {
-        onCompletionStatusMutate,
-        onCompletionStatusUpdated,
-        onCompletionStatusError,
-        onStatusMutate,
-        onStatusUpdated,
-        onStatusError,
-    } = useOptimisticEventStatus(eventDetails, id);
-
     const changelogEventData = useMemo(
         () => (eventDetails.dataValues ?? []).reduce<Record<string, { value: string }>>(
             (acc, { dataElement, value }) => {
@@ -53,48 +43,40 @@ const EventRowPlain = ({
     );
 
     return (
-        <>
-            <DataTableRow
-                className={!pendingApiResponse ? classes.row : classes.rowDisabled}
-                key={id}
-            >
-                {cells}
+        <DataTableRow
+            className={!pendingApiResponse ? classes.row : classes.rowDisabled}
+            key={id}
+        >
+            {cells}
 
-                <DataTableCell>
-                    {stageWriteAccess && (
+            <DataTableCell>
+                {stageWriteAccess && (
+                    <>
                         <EventOverflowMenu
                             eventId={id}
-                            eventStatus={eventDetails.status}
-                            occurredAt={eventDetails.occurredAt}
-                            completedAt={eventDetails.completedAt}
+                            eventDetails={eventDetails}
                             programId={programId}
                             programStage={programStage}
                             pendingApiResponse={pendingApiResponse}
-                            eventDetailsForRollback={eventDetails}
-                            onCompletionStatusMutate={onCompletionStatusMutate}
-                            onCompletionStatusUpdated={onCompletionStatusUpdated}
-                            onCompletionStatusError={onCompletionStatusError}
-                            onStatusMutate={onStatusMutate}
-                            onStatusUpdated={onStatusUpdated}
-                            onStatusError={onStatusError}
-                            onOptimisticDelete={onDeleteEvent}
-                            onDeleteError={onRollbackDeleteEvent}
+                            onDeleteEvent={onDeleteEvent}
+                            onRollbackDeleteEvent={onRollbackDeleteEvent}
                             onOpenChangelog={() => setChangelogOpen(true)}
-                            dataTest="overflow-menu"
+                            dataTest={'overflow'}
                         />
-                    )}
-                </DataTableCell>
-            </DataTableRow>
-            {changelogOpen && programStage?.stageForm && (
-                <EventChangelogWrapper
-                    isOpen
-                    setIsOpen={setChangelogOpen}
-                    eventData={changelogEventData}
-                    eventId={id}
-                    formFoundation={programStage.stageForm}
-                />
-            )}
-        </>
+
+                        {changelogOpen && programStage?.stageForm && (
+                            <EventChangelogWrapper
+                                isOpen
+                                setIsOpen={setChangelogOpen}
+                                eventData={changelogEventData}
+                                eventId={id}
+                                formFoundation={programStage.stageForm}
+                            />
+                        )}
+                    </>
+                )}
+            </DataTableCell>
+        </DataTableRow>
     );
 };
 

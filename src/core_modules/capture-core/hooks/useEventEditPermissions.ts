@@ -21,41 +21,16 @@ type Output = {
     canUncompleteEvent: boolean,
     expiryPeriod: ReturnType<typeof useProgramExpiryForUser>,
     readOnly: boolean,
-    canEditEvent: boolean,
-    canCompleteEvent: boolean,
-    canSkipEvent: boolean,
-    canDeleteEvent: boolean,
 };
 
-const getCanEditCompletedEvent = (
-    stage: ProgramStage | null | undefined,
-    eventStatus: string | undefined,
-    canEditExpired: boolean,
-) =>
-    canEditExpired || !(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
+// An event is read-only when ANY of the following is true:
+//   - No write access to the program stage (eventAccess.write is false).
+//   - occurredAt is outside the program's expiry period (overridden by F_EDIT_EXPIRED).
+//   - The event is completed and past the completeEventsExpiryDays window (overridden by F_EDIT_EXPIRED).
+//   - The event is completed on a stage with blockEntryForm set (overridden by F_EDIT_EXPIRED).
 
-const getReadOnly = ({ hasWriteAccess, isEventWithinValidPeriod, isWithinCompleteExpiry, canEditCompletedEvent }: {
-    hasWriteAccess: boolean,
-    isEventWithinValidPeriod: boolean,
-    isWithinCompleteExpiry: boolean,
-    canEditCompletedEvent: boolean,
-}) =>
-    !hasWriteAccess
-    || !isEventWithinValidPeriod
-    || !isWithinCompleteExpiry
-    || !canEditCompletedEvent;
 
-const getCanCompleteEvent = (eventStatus?: string, canUncompleteEvent?: boolean) => {
-    if (eventStatus === eventStatuses.COMPLETED) {
-        return !!canUncompleteEvent;
-    }
-    return eventStatus === eventStatuses.ACTIVE;
-};
-
-const getCanSkipEvent = (eventStatus?: string) =>
-    eventStatus === eventStatuses.SCHEDULE || eventStatus === eventStatuses.SKIPPED;
-
-export const useEventPermissions = ({
+export const useEventEditPermissions = ({
     programId,
     stage,
     eventStatus,
@@ -71,14 +46,15 @@ export const useEventPermissions = ({
     const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
 
-    const hasWriteAccess = !!eventAccess?.write;
-    const canEditCompletedEvent = getCanEditCompletedEvent(stage, eventStatus, canEditExpired);
-    const readOnly = getReadOnly({
-        hasWriteAccess,
-        isEventWithinValidPeriod,
-        isWithinCompleteExpiry,
-        canEditCompletedEvent,
-    });
+    const canEditCompletedEvent = canEditExpired || !(
+        stage?.blockEntryForm
+        && eventStatus === eventStatuses.COMPLETED
+    );
+
+    const readOnly = !eventAccess?.write
+        || !isEventWithinValidPeriod
+        || !isWithinCompleteExpiry
+        || !canEditCompletedEvent;
 
     return {
         eventAccess,
@@ -88,9 +64,5 @@ export const useEventPermissions = ({
         canUncompleteEvent,
         expiryPeriod,
         readOnly,
-        canEditEvent: !readOnly && eventStatus !== eventStatuses.SKIPPED,
-        canCompleteEvent: hasWriteAccess && getCanCompleteEvent(eventStatus, canUncompleteEvent),
-        canSkipEvent: hasWriteAccess && getCanSkipEvent(eventStatus),
-        canDeleteEvent: hasWriteAccess,
     };
 };

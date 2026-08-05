@@ -7,7 +7,7 @@ import {
     spacers,
 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -17,11 +17,10 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
-import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
-    useEventPermissions,
+    useEventEditPermissions,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -100,6 +99,7 @@ const WidgetEventEditPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
+    const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
@@ -110,33 +110,13 @@ const WidgetEventEditPlain = ({
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const {
-        readOnly,
-        canEditEvent,
-        expiryPeriod,
-        canUncompleteEvent,
-        eventAccess,
-        isEventWithinValidPeriod,
-        canEditCompletedEvent,
-        isWithinCompleteExpiry,
-    } = useEventPermissions({
+    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-
-    const readOnlyBadge = (
-        <ReadOnlyBadge
-            programStageWriteAccess={eventAccess?.write ?? true}
-            eventWithinValidPeriod={isEventWithinValidPeriod}
-            canEditCompletedEvent={canEditCompletedEvent}
-            withinCompleteEventsExpiry={isWithinCompleteExpiry}
-            eventIsSkipped={eventStatus === eventStatuses.SKIPPED}
-            inlineLabel
-        />
-    );
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -163,8 +143,7 @@ const WidgetEventEditPlain = ({
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            canEditEvent={canEditEvent}
-                            readOnlyBadge={readOnlyBadge}
+                            readOnly={readOnly}
                         />
                     }
                     noncollapsible
@@ -222,7 +201,7 @@ const WidgetEventEditPlain = ({
                 </Widget>
             </div>
 
-            {changeLogIsOpen && (
+            {supportsChangelog && changeLogIsOpen && (
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}

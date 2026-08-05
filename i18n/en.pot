@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-04T15:43:41.660Z\n"
-"PO-Revision-Date: 2026-08-04T15:43:41.660Z\n"
+"POT-Creation-Date: 2026-08-05T07:05:49.438Z\n"
+"PO-Revision-Date: 2026-08-05T07:05:49.444Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -449,20 +449,11 @@ msgstr "Mark incomplete"
 msgid "Mark complete"
 msgstr "Mark complete"
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-
-msgid "This event has been completed"
-msgstr "This event has been completed"
-
-msgid "This event is outside the edit period"
-msgstr "This event is outside the edit period"
+msgid "An error occurred while deleting the event"
+msgstr "An error occurred while deleting the event"
 
 msgid "Delete event"
 msgstr "Delete event"
-
-msgid "An error occurred while deleting the event"
-msgstr "An error occurred while deleting the event"
 
 msgid "Deleting an event is permanent and cannot be undone."
 msgstr "Deleting an event is permanent and cannot be undone."
@@ -472,6 +463,18 @@ msgstr "Are you sure you want to delete this event?"
 
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+
+msgid "This event has been completed"
+msgstr "This event has been completed"
+
+msgid "This event is outside the edit period"
+msgstr "This event is outside the edit period"
+
+msgid "Delete"
+msgstr "Delete"
 
 msgid "Unskip"
 msgstr "Unskip"
@@ -613,9 +616,6 @@ msgstr "Uploading file"
 
 msgid "selected"
 msgstr "selected"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Select file"
 msgstr "Select file"
@@ -1133,9 +1133,6 @@ msgstr "You only have view access to this program stage"
 
 msgid "This event is outside the editing period"
 msgstr "This event is outside the editing period"
-
-msgid "This event is skipped"
-msgstr "This event is skipped"
 
 msgid "This {{trackedEntityName}} is deactivated"
 msgstr "This {{trackedEntityName}} is deactivated"
