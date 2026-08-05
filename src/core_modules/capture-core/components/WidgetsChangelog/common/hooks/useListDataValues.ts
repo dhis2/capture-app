@@ -20,8 +20,11 @@ type Props = {
     entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
     programId?: string;
     sortDirection: SortDirection;
+    columnToSortBy: string;
+    filterParam?: string;
     page: number;
     pageSize: number;
+    rawDataUpdatedAt: number;
 };
 
 const fetchFormattedValues = async ({
@@ -37,15 +40,31 @@ const fetchFormattedValues = async ({
 }) => {
     if (!rawRecords) return [];
 
+    const getFieldId = (change: Change) => change.dataElement ?? change.attribute ?? change.field;
+
+    const getChange = (changelog: any): Change => changelog.change[Object.keys(changelog.change)[0]];
+
     const getItemDefinition = (change: Change) => {
-        const { dataElement, attribute, field } = change;
-        const fieldId = dataElement ?? attribute ?? field;
+        const fieldId = getFieldId(change);
         if (!fieldId) {
             log.error('Could not find fieldId in change:', change);
             return null;
         }
         return dataItemDefinitions[fieldId];
     };
+
+    const newestChangeAtByFieldId = rawRecords.changeLogs.reduce(
+        (acc: Record<string, string>, changelog: any) => {
+            const fieldId = getFieldId(getChange(changelog));
+            if (!fieldId) return acc;
+            const newestSoFar = acc[fieldId];
+            if (!newestSoFar || new Date(changelog.createdAt) > new Date(newestSoFar)) {
+                acc[fieldId] = changelog.createdAt;
+            }
+            return acc;
+        },
+        {} as Record<string, string>,
+    );
 
     const results = await Promise.all(
         rawRecords.changeLogs.map(async (changelog) => {
@@ -89,12 +108,12 @@ const fetchFormattedValues = async ({
                 return null;
             };
 
+            const isLatestValue = newestChangeAtByFieldId[metadataElement.id] === createdAt &&
+                currentValues[metadataElement.id] === change.currentValue;
+
             const [previousValueClient, currentValueClient] = await Promise.all([
                 change.previousValue ? getValue(change.previousValue, false) : null,
-                getValue(
-                    change.currentValue,
-                    currentValues[change.attribute ?? change.dataElement] === change.currentValue,
-                ),
+                getValue(change.currentValue, isLatestValue),
             ]);
 
             const { firstName, surname, username } = createdBy;
@@ -126,11 +145,18 @@ export const useListDataValues = ({
     entityType,
     programId,
     sortDirection,
+    columnToSortBy,
+    filterParam,
     page,
     pageSize,
+    rawDataUpdatedAt,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const { currentValues, isLoading: isCurrentValuesLoading } = useCurrentEntityValues({
+    const {
+        currentValues,
+        isLoading: isCurrentValuesLoading,
+        dataUpdatedAt: currentValuesUpdatedAt,
+    } = useCurrentEntityValues({
         entityId,
         entityType,
         programId,
@@ -150,7 +176,16 @@ export const useListDataValues = ({
         entityType,
         entityId,
         'formattedData',
-        { sortDirection, page, pageSize, programId, rawRecords, currentValues },
+        {
+            columnToSortBy,
+            sortDirection,
+            page,
+            pageSize,
+            programId,
+            filterParam,
+            rawDataUpdatedAt,
+            currentValuesUpdatedAt,
+        },
     ];
 
     const { data: processedRecords, isError, isInitialLoading } = useQuery(

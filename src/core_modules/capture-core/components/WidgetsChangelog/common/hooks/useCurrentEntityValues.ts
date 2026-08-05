@@ -17,7 +17,7 @@ const FIELDS_BY_ENTITY_TYPE = Object.freeze({
 const NO_VALUES: CurrentValues = Object.freeze({});
 
 export const useCurrentEntityValues = ({ entityId, entityType, programId }: Props) => {
-    const { data, isInitialLoading } = useApiDataQuery<CurrentValues>(
+    const { data, isInitialLoading, dataUpdatedAt } = useApiDataQuery<CurrentValues>(
         ['changelog', entityType, entityId, 'currentValues', { programId }],
         {
             resource: `tracker/${QUERY_KEYS_BY_ENTITY_TYPE[entityType]}/${entityId}`,
@@ -43,5 +43,6 @@ export const useCurrentEntityValues = ({ entityId, entityType, programId }: Prop
     return {
         currentValues: data ?? NO_VALUES,
         isLoading: isInitialLoading,
+        dataUpdatedAt,
     };
 };
