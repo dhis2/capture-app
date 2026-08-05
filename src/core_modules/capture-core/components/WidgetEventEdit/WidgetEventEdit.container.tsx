@@ -206,7 +206,6 @@ const WidgetEventEditPlain = ({
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
                     eventId={loadedValues.eventContainer.id}
-                    eventData={loadedValues.eventContainer.values}
                     formFoundation={formFoundation}
                 />
             )}

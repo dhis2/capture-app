@@ -7,7 +7,6 @@ import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
     entityId: string;
-    entityData: Record<string, any>;
     entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
     isOpen: boolean;
     close: () => void;
@@ -17,7 +16,6 @@ type Props = {
 
 export const Changelog = ({
     entityId,
-    entityData,
     entityType,
     programId,
     isOpen,
@@ -49,7 +47,6 @@ export const Changelog = ({
         rawRecords,
         dataItemDefinitions,
         entityId,
-        entityData,
         entityType,
         programId,
         sortDirection,

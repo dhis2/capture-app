@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
 import { EventOverflowMenu } from '../../../../../EventOverflowMenu';
@@ -31,17 +31,6 @@ const EventRowPlain = ({
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [changelogOpen, setChangelogOpen] = useState(false);
 
-    const changelogEventData = useMemo(
-        () => (eventDetails.dataValues ?? []).reduce<Record<string, { value: string }>>(
-            (acc, { dataElement, value }) => {
-                acc[dataElement] = { value };
-                return acc;
-            },
-            {},
-        ),
-        [eventDetails.dataValues],
-    );
-
     return (
         <DataTableRow
             className={!pendingApiResponse ? classes.row : classes.rowDisabled}
@@ -68,7 +57,6 @@ const EventRowPlain = ({
                             <EventChangelogWrapper
                                 isOpen
                                 setIsOpen={setChangelogOpen}
-                                eventData={changelogEventData}
                                 eventId={id}
                                 formFoundation={programStage.stageForm}
                             />

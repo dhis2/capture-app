@@ -11,12 +11,12 @@ import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
 import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
+import { useCurrentEntityValues } from './useCurrentEntityValues';
 
 type Props = {
     rawRecords: any;
     dataItemDefinitions: ItemDefinitions;
     entityId: string;
-    entityData: any;
     entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
     programId?: string;
     sortDirection: SortDirection;
@@ -28,7 +28,7 @@ const fetchFormattedValues = async ({
     rawRecords,
     dataItemDefinitions,
     entityId,
-    entityData,
+    currentValues,
     entityType,
     programId,
     absoluteApiPath,
@@ -93,7 +93,7 @@ const fetchFormattedValues = async ({
                 change.previousValue ? getValue(change.previousValue, false) : null,
                 getValue(
                     change.currentValue,
-                    entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue,
+                    currentValues[change.attribute ?? change.dataElement] === change.currentValue,
                 ),
             ]);
 
@@ -123,7 +123,6 @@ export const useListDataValues = ({
     rawRecords,
     dataItemDefinitions,
     entityId,
-    entityData,
     entityType,
     programId,
     sortDirection,
@@ -131,6 +130,11 @@ export const useListDataValues = ({
     pageSize,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const { currentValues, isLoading: isCurrentValuesLoading } = useCurrentEntityValues({
+        entityId,
+        entityType,
+        programId,
+    });
     const { baseUrl, apiVersion } = useConfig();
     const { fromServerDate } = useTimeZoneConversion();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
@@ -146,7 +150,7 @@ export const useListDataValues = ({
         entityType,
         entityId,
         'formattedData',
-        { sortDirection, page, pageSize, programId, rawRecords },
+        { sortDirection, page, pageSize, programId, rawRecords, currentValues },
     ];
 
     const { data: processedRecords, isError, isInitialLoading } = useQuery(
@@ -155,7 +159,7 @@ export const useListDataValues = ({
             rawRecords,
             dataItemDefinitions,
             entityId,
-            entityData,
+            currentValues,
             entityType,
             programId,
             absoluteApiPath,
@@ -163,12 +167,12 @@ export const useListDataValues = ({
             fromServerDate,
         }),
         {
-            enabled: !!rawRecords && !!dataItemDefinitions && !!entityId && !!entityType,
+            enabled: !!rawRecords && !!dataItemDefinitions && !!entityId && !!entityType && !isCurrentValuesLoading,
             keepPreviousData: true,
             staleTime: Infinity,
             cacheTime: Infinity,
         },
     );
 
-    return { processedRecords, isLoading: isInitialLoading, isError };
+    return { processedRecords, isLoading: isInitialLoading || isCurrentValuesLoading, isError };
 };

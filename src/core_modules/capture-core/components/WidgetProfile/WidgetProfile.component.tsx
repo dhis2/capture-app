@@ -19,8 +19,7 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
-import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
+import { removeTrackedEntityChangelogQueries } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
 import {
     useDataEntryFormConfig,
@@ -143,7 +142,7 @@ const WidgetProfilePlain = ({
         }), [clientAttributesWithSubvalues]);
 
     const onSaveExternal = useCallback(() => {
-        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
+        removeTrackedEntityChangelogQueries(queryClient, teiId);
     }, [queryClient, teiId]);
 
     useEffect(() => {
