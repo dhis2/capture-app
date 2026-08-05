@@ -12,8 +12,8 @@ const styles: Readonly<any> = {
     unorderedList: {
         padding: `0px ${spacers.dp12}`,
         marginTop: '0px',
-        lineHeight: '1.375',
-        fontSize: spacers.dp16,
+        lineHeight: '19px',
+        fontSize: '14px',
         fontWeight: 400,
         color: colors.grey900,
         display: 'flex',
