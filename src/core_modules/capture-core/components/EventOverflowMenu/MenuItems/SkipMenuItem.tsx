@@ -1,20 +1,16 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import {
-    MenuItem,
-    IconRedo16,
-} from '@dhis2/ui';
+import { MenuItem } from '@dhis2/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { DirectionalArrow } from '../../../utils/rtl';
 
 type Props = {
     eventId: string;
-    eventDetails: ApiEnrollmentEvent;
+    eventStatus?: string;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
@@ -23,7 +19,7 @@ type Props = {
 
 export const SkipMenuItem = ({
     eventId,
-    eventDetails,
+    eventStatus,
     onMutate,
     onSuccess,
     onError,
@@ -35,59 +31,57 @@ export const SkipMenuItem = ({
         { critical: true },
     );
 
+    const isSkipped = eventStatus === eventStatuses.SKIPPED;
+    const newStatus = isSkipped ? eventStatuses.SCHEDULE : eventStatuses.SKIPPED;
+
     const { mutate: updateEventStatus } = useMutation(
-        ({ status }: { status: string }) => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=UPDATE',
-            type: 'create',
-            data: {
-                events: [
-                    {
-                        ...eventDetails,
-                        event: eventId,
-                        status,
+        async () => {
+            const { event: apiEvent } = await dataEngine.query({
+                event: {
+                    resource: 'tracker/events',
+                    id: eventId,
+                    params: {
+                        fields: '*,!dataValues,!relationships',
                     },
-                ],
-            },
-        }),
+                },
+            }) as any;
+            return dataEngine.mutate({
+                resource: 'tracker?async=false&importStrategy=UPDATE',
+                type: 'create',
+                data: {
+                    events: [{
+                        ...apiEvent,
+                        status: newStatus,
+                    }],
+                },
+            });
+        },
         {
-            onMutate: (payload: { status: string }) => {
-                onMutate?.(payload.status);
+            onMutate: () => {
+                onMutate?.(newStatus);
             },
-            onError: (error: unknown, payload: { status: string }) => {
+            onError: (error: unknown) => {
                 showError({ message: i18n.t('An error occurred when updating event status') });
-                log.error(errorCreator('An error occurred when updating event status')({ error, payload }));
+                log.error(errorCreator('An error occurred when updating event status')({ error, eventId, newStatus }));
                 onError?.();
             },
-            onSuccess: (_data: unknown, payload: { status: string }) => {
-                onSuccess?.(payload.status);
+            onSuccess: () => {
+                onSuccess?.(newStatus);
             },
         },
     );
 
-    const handleMenuItemClick = (status: string) => {
-        onClose();
-        updateEventStatus({ status });
-    };
-
-    if (eventDetails.status === eventStatuses.SKIPPED) {
-        return (
-            <MenuItem
-                dense
-                icon={<IconRedo16 />}
-                label={i18n.t('Unskip')}
-                onClick={() => handleMenuItemClick(eventStatuses.SCHEDULE)}
-                suffix=""
-            />
-        );
-    }
-
     return (
         <MenuItem
             dense
-            icon={<DirectionalArrow />}
-            label={i18n.t('Skip')}
-            onClick={() => handleMenuItemClick(eventStatuses.SKIPPED)}
+            dataTest={isSkipped ? 'unskip-event-menu-item' : 'skip-event-menu-item'}
+            icon={isSkipped ? <DirectionalArrow reverse /> : <DirectionalArrow />}
+            label={isSkipped ? i18n.t('Unskip') : i18n.t('Skip')}
             suffix=""
+            onClick={() => {
+                onClose();
+                updateEventStatus();
+            }}
         />
     );
 };

@@ -109,6 +109,7 @@ const WidgetHeaderPlain = ({
                                 eventDetails={storedEvent}
                                 programId={programId}
                                 programStage={stage}
+                                pendingApiResponse={storedEvent.pendingApiResponse}
                                 onDeleteEvent={onDeleteEvent}
                                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                                 onOpenChangelog={() => setChangeLogIsOpen(true)}

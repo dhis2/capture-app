@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useQueryClient } from '@tanstack/react-query';
 import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { OverflowButton } from '../Buttons';
+import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { type ProgramStage } from '../../metaData';
 import {
     updateEnrollmentEvent,
@@ -48,6 +51,7 @@ export const EventOverflowMenu = ({
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const supportsChangelog = useFeature(FEATURES.changelogs);
 
     const canChangeCompletionStatus = useCanChangeCompletionStatus({
@@ -66,6 +70,11 @@ export const EventOverflowMenu = ({
     };
     const onStatusSuccess = (newStatus: string) => {
         dispatch(commitEnrollmentEvent(eventId));
+        // Drop the cached changelog for this event, the way the event pages do on save. Status
+        // changes are not rendered today (no `status` item definition, so those rows are
+        // discarded), but this sits with the mutation rather than in each host, so it stays correct
+        // if they become displayable.
+        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId]);
         onStatusUpdated?.(newStatus);
     };
     const onStatusError = () => {
@@ -73,7 +82,7 @@ export const EventOverflowMenu = ({
     };
 
     if (pendingApiResponse) {
-        return <CircularLoader small dataTest={'event-row-saving-loader'} />;
+        return <CircularLoader small dataTest={`${dataTest}-loader`} />;
     }
 
     return (
@@ -104,7 +113,7 @@ export const EventOverflowMenu = ({
                         {canSkip && (
                             <SkipMenuItem
                                 eventId={eventId}
-                                eventDetails={eventDetails}
+                                eventStatus={eventDetails.status}
                                 onMutate={onStatusMutate}
                                 onSuccess={onStatusSuccess}
                                 onError={onStatusError}
