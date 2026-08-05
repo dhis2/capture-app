@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-08T07:19:14.135Z\n"
+"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Thiago Rocha, 2026\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
@@ -589,6 +589,9 @@ msgstr ""
 msgid "No match found"
 msgstr ""
 
+msgid "Search for an organisation unit"
+msgstr "Pesquisar uma unidade organizacional"
+
 msgid "Clear"
 msgstr "Limpar"
 
@@ -1083,6 +1086,12 @@ msgid "This event is outside the editing period"
 msgstr ""
 
 msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
 msgstr ""
 
 msgid "View only - {{message}}"

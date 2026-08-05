@@ -6,19 +6,19 @@
 # Elise Desailly, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Bram Piot <bram.piot@gmail.com>, 2026
 # Philip Larsen Donnelly, 2026
 # Esther Tokouli, 2026
 # Cyrille Kabrane, 2026
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
+"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Cyrille Kabrane, 2026\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -628,6 +628,9 @@ msgstr "Taper pour filtrer les options"
 msgid "No match found"
 msgstr "Aucune correspondance trouvée"
 
+msgid "Search for an organisation unit"
+msgstr "Rechercher une unité d'organisation"
+
 msgid "Clear"
 msgstr "Effacer"
 
@@ -1162,6 +1165,12 @@ msgid "This event is outside the editing period"
 msgstr ""
 
 msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
 msgstr ""
 
 msgid "View only - {{message}}"
