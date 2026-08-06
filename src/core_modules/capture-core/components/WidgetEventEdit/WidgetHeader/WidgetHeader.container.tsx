@@ -15,11 +15,7 @@ import {
     deleteEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
 import { EventOverflowMenu } from '../../EventOverflowMenu';
-import { ReadOnlyBadge } from '../../ReadOnlyBadge';
-import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
-import { statusTypes as eventStatuses } from '../../../events/statusTypes';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -56,15 +52,10 @@ const WidgetHeaderPlain = ({
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const showEditButton = !readOnly;
-    const isEventSkipped = eventStatus === eventStatuses.SKIPPED;
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
         state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
-
-    const onStatusUpdated = useCallback(() => {
-        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
-    }, [dispatch, eventId]);
 
     const onDeleteEvent = useCallback(() => {
         dispatch(deleteEnrollmentEvent(eventId));
@@ -94,12 +85,6 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {isEventSkipped && (
-                            <ReadOnlyBadge
-                                eventSkipped
-                                inlineLabel
-                            />
-                        )}
                         {showEditButton && (
                             <Button
                                 small
@@ -122,7 +107,6 @@ const WidgetHeaderPlain = ({
                                 onDeleteEvent={onDeleteEvent}
                                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                                 onOpenChangelog={() => setChangeLogIsOpen(true)}
-                                onStatusUpdated={onStatusUpdated}
                                 dataTest={'tracker-program-event-overflow'}
                             />
                         )}

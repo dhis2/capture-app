@@ -269,6 +269,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         isEventWithinValidPeriod,
         isWithinCompleteExpiry,
         canEditCompletedEvent,
+        isEventSkipped,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -314,6 +315,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             isEventWithinValidPeriod={isEventWithinValidPeriod}
             canEditCompletedEvent={canEditCompletedEvent}
             isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
+            isEventSkipped={isEventSkipped}
         >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}

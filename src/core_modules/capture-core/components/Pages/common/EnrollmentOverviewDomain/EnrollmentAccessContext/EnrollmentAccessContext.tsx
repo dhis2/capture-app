@@ -21,6 +21,7 @@ export type EnrollmentAccessContextValue = {
     isEventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
     isWithinCompleteEventsExpiry?: boolean;
+    isEventSkipped?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -48,6 +49,7 @@ type ProviderProps = {
     isEventWithinValidPeriod?: boolean;
     canEditCompletedEvent?: boolean;
     isWithinCompleteEventsExpiry?: boolean;
+    isEventSkipped?: boolean;
     children: React.ReactNode;
 };
 
@@ -69,6 +71,7 @@ const computeContextValue = (
     isEventWithinValidPeriod?: boolean,
     canEditCompletedEvent?: boolean,
     isWithinCompleteEventsExpiry?: boolean,
+    isEventSkipped?: boolean,
 ): EnrollmentAccessContextValue => {
     const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
     const rawProgramWriteAccess = Boolean(program.access?.data?.write);
@@ -104,6 +107,7 @@ const computeContextValue = (
         isEventWithinValidPeriod,
         canEditCompletedEvent,
         isWithinCompleteEventsExpiry,
+        isEventSkipped,
     };
 };
 
@@ -114,6 +118,7 @@ export const EnrollmentAccessProvider = ({
     isEventWithinValidPeriod,
     canEditCompletedEvent,
     isWithinCompleteEventsExpiry,
+    isEventSkipped,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(
@@ -125,6 +130,7 @@ export const EnrollmentAccessProvider = ({
                 isEventWithinValidPeriod,
                 canEditCompletedEvent,
                 isWithinCompleteEventsExpiry,
+                isEventSkipped,
             )
             : {
                 ...fallback,
@@ -145,6 +151,7 @@ export const EnrollmentAccessProvider = ({
             isEventWithinValidPeriod,
             canEditCompletedEvent,
             isWithinCompleteEventsExpiry,
+            isEventSkipped,
         ],
     );
 
