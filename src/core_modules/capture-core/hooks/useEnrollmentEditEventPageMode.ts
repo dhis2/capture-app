@@ -7,15 +7,17 @@ import { useLocationQuery } from '../utils/routing';
 const isScheduledStatus = (status?: string) =>
     status === statusTypes.SCHEDULE || status === statusTypes.OVERDUE;
 
-export const useEnrollmentEditEventPageMode = (eventStatus?: string) => {
+export const useEnrollmentEditEventPageMode = (eventStatus?: string, eventId?: string) => {
     const showEditEvent = useSelector(({ viewEventPage }: any) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const { initMode } = useLocationQuery();
 
-    const initialStatusRef = useRef<string>();
-    if (initialStatusRef.current === undefined && eventStatus !== undefined) {
-        initialStatusRef.current = eventStatus;
+    const initialStatusRef = useRef<{ eventId?: string; status?: string }>({});
+    if (initialStatusRef.current.eventId !== eventId) {
+        initialStatusRef.current = { eventId, status: eventStatus };
+    } else if (initialStatusRef.current.status === undefined && eventStatus !== undefined) {
+        initialStatusRef.current.status = eventStatus;
     }
-    const landedAsSkipped = initialStatusRef.current === statusTypes.SKIPPED;
+    const landedAsSkipped = initialStatusRef.current.status === statusTypes.SKIPPED;
 
     return useMemo(() => {
         if (initMode) return { currentPageMode: initMode };

@@ -54,7 +54,7 @@ const WidgetHeaderPlain = ({
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
 
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const showEditButton = !readOnly;
     const isEventSkipped = eventStatus === eventStatuses.SKIPPED;
     const { programCategory } = useCategoryCombinations(programId);

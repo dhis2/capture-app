@@ -83,7 +83,7 @@ export const DeleteMenuItem = ({
                     onRequestDelete();
                     onClose();
                 }}
-                suffix=""
+                suffix={null}
             />
         </ConditionalTooltip>
     );
