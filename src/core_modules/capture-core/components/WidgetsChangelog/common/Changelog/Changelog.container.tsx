@@ -36,8 +36,10 @@ export const Changelog = ({
         setSortDirection,
         filterValue,
         setFilterValue,
+        filterParam,
         attributeToFilterBy,
         setAttributeToFilterBy,
+        dataUpdatedAt: rawDataUpdatedAt,
     } = useChangelogData({ entityId, entityType, programId });
 
     const {
@@ -50,8 +52,11 @@ export const Changelog = ({
         entityType,
         programId,
         sortDirection,
+        columnToSortBy,
+        filterParam,
         page,
         pageSize,
+        rawDataUpdatedAt,
     });
 
     const loading = (isChangelogLoading || isProcessingLoading);
