@@ -15,9 +15,11 @@ import {
     deleteEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
 import { EventOverflowMenu } from '../../EventOverflowMenu';
+import { ReadOnlyBadge } from '../../ReadOnlyBadge';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
+import { statusTypes as eventStatuses } from '../../../events/statusTypes';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -54,6 +56,7 @@ const WidgetHeaderPlain = ({
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const showEditButton = !readOnly;
+    const isEventSkipped = eventStatus === eventStatuses.SKIPPED;
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
@@ -91,6 +94,12 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
+                        {isEventSkipped && (
+                            <ReadOnlyBadge
+                                eventSkipped
+                                inlineLabel
+                            />
+                        )}
                         {showEditButton && (
                             <Button
                                 small

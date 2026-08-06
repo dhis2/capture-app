@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-06T07:54:35.143Z\n"
-"PO-Revision-Date: 2026-08-06T07:54:35.143Z\n"
+"POT-Creation-Date: 2026-08-06T08:25:22.449Z\n"
+"PO-Revision-Date: 2026-08-06T08:25:22.449Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1133,6 +1133,9 @@ msgstr "You only have view access to this program stage"
 
 msgid "This event is outside the editing period"
 msgstr "This event is outside the editing period"
+
+msgid "This event has been skipped"
+msgstr "This event has been skipped"
 
 msgid "This {{trackedEntityName}} is deactivated"
 msgstr "This {{trackedEntityName}} is deactivated"

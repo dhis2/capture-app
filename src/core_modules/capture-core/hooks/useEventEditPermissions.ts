@@ -19,6 +19,7 @@ type Output = {
     isWithinCompleteExpiry: boolean,
     canEditCompletedEvent: boolean,
     canUncompleteEvent: boolean,
+    isEventSkipped: boolean,
     expiryPeriod: ReturnType<typeof useProgramExpiryForUser>,
     readOnly: boolean,
 };
@@ -28,6 +29,7 @@ type Output = {
 //   - occurredAt is outside the program's expiry period (overridden by F_EDIT_EXPIRED).
 //   - The event is completed and past the completeEventsExpiryDays window (overridden by F_EDIT_EXPIRED).
 //   - The event is completed on a stage with blockEntryForm set (overridden by F_EDIT_EXPIRED).
+//   - The event has been skipped.
 
 
 export const useEventEditPermissions = ({
@@ -51,10 +53,13 @@ export const useEventEditPermissions = ({
         && eventStatus === eventStatuses.COMPLETED
     );
 
+    const isEventSkipped = eventStatus === eventStatuses.SKIPPED;
+
     const readOnly = !eventAccess?.write
         || !isEventWithinValidPeriod
         || !isWithinCompleteExpiry
-        || !canEditCompletedEvent;
+        || !canEditCompletedEvent
+        || isEventSkipped;
 
     return {
         eventAccess,
@@ -62,6 +67,7 @@ export const useEventEditPermissions = ({
         isWithinCompleteExpiry,
         canEditCompletedEvent,
         canUncompleteEvent,
+        isEventSkipped,
         expiryPeriod,
         readOnly,
     };
