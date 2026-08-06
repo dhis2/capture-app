@@ -20,7 +20,6 @@ type StatusToDelete = { active: boolean; completed: boolean; cancelled: boolean 
 type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
-    active: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     setIsDeleteDialogOpen: (open: boolean) => void;
@@ -50,7 +49,6 @@ const findFullyDeletedTeiIds = (
 export const useDeleteEnrollments = ({
     selectedRows,
     programId,
-    active,
     onUpdateList,
     removeRowsFromSelection,
     setIsDeleteDialogOpen,
@@ -128,7 +126,6 @@ export const useDeleteEnrollments = ({
         validationError,
     } = useBulkMutationWithValidation<any, void>({
         mutationFn,
-        active,
         onSuccess: () => {
             queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
             onUpdateList();

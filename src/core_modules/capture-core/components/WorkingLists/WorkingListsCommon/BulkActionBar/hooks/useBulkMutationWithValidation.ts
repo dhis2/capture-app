@@ -9,7 +9,7 @@ type Options<TData, TVariables> = {
     onPartialSuccess?: (report: ValidationReportContainer, variables: TVariables) => void;
     onValidationError?: (report: ValidationReportContainer, variables: TVariables) => void;
     onFatalError?: (error: any, variables: TVariables) => void;
-    active: boolean;
+    active?: boolean;
 };
 
 export const useBulkMutationWithValidation = <TData, TVariables>({
@@ -51,7 +51,7 @@ export const useBulkMutationWithValidation = <TData, TVariables>({
     );
 
     useEffect(() => {
-        if (!active) reset();
+        if (active === false) reset();
     }, [active, reset]);
 
     return { mutate, isPending, validationError, reset };

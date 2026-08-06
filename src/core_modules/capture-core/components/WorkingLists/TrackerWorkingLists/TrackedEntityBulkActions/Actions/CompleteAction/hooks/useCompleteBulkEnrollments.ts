@@ -7,7 +7,7 @@ import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
-import type { ErrorReport } from '../../../../../WorkingListsCommon/BulkActionBar/types';
+import type { ErrorReport, ValidationReportContainer } from '../../../../../WorkingListsCommon/BulkActionBar/types';
 import type { ProgramStage } from '../../../../../../../metaData';
 
 type Enrollment = {
@@ -201,6 +201,18 @@ export const useCompleteBulkEnrollments = ({
         [dataEngine],
     );
 
+    const importValidSubset = (
+        report: ValidationReportContainer,
+        { enrollments }: { enrollments: Enrollment[] },
+    ) => {
+        const validEnrollments = filterValidEnrollments(
+            enrollments,
+            report.validationReport.errorReports,
+        );
+        if (validEnrollments.length === 0) return;
+        importPartialEnrollments({ enrollments: validEnrollments });
+    };
+
     const {
         mutate: validateAndImportEnrollments,
         isPending: isValidatingEnrollments,
@@ -211,14 +223,8 @@ export const useCompleteBulkEnrollments = ({
         onSuccess: (_response, { enrollments }) => {
             importEnrollments({ enrollments });
         },
-        onValidationError: (report, { enrollments }) => {
-            const validEnrollments = filterValidEnrollments(
-                enrollments,
-                report.validationReport.errorReports,
-            );
-            if (validEnrollments.length === 0) return;
-            importPartialEnrollments({ enrollments: validEnrollments });
-        },
+        onPartialSuccess: importValidSubset,
+        onValidationError: importValidSubset,
         onFatalError: (error, { enrollments }) => {
             log.error(errorCreator('An unknown error occurred when completing enrollments')({
                 error, enrollments,

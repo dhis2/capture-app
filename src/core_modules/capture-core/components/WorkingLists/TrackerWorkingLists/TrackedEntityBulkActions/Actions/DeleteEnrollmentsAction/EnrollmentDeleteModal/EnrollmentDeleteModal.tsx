@@ -47,7 +47,6 @@ const EnrollmentDeleteModalPlain = ({
     } = useDeleteEnrollments({
         selectedRows,
         programId,
-        active: true,
         onUpdateList,
         removeRowsFromSelection,
         setIsDeleteDialogOpen,

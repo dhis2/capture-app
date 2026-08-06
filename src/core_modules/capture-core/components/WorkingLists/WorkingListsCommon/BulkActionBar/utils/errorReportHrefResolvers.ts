@@ -25,17 +25,16 @@ type EventFlavorDeps = {
 
 export const createEventErrorHrefResolver = ({
     programId, orgUnitId, knownEventUids,
-}: EventFlavorDeps): ErrorReportHrefResolver => {
-    const route = programId ? resolveEventRoute(programId) : null;
-
-    return (errorReport: ErrorReport) => {
+}: EventFlavorDeps): ErrorReportHrefResolver =>
+    (errorReport: ErrorReport) => {
         const uid = errorReport.uid;
-        if (!uid || !orgUnitId || !route || !knownEventUids.has(uid)) return null;
+        if (!uid || !programId || !orgUnitId || !knownEventUids.has(uid)) return null;
+        const route = resolveEventRoute(programId);
+        if (!route) return null;
         return route === 'viewEvent'
             ? `#/viewEvent?${buildUrlQueryString({ viewEventId: uid, orgUnitId })}`
             : `#/enrollmentEventEdit?${buildUrlQueryString({ eventId: uid, orgUnitId })}`;
     };
-};
 
 type EnrollmentFlavorDeps = {
     programId?: string;
