@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -316,9 +316,6 @@ msgstr "Nu, anulare"
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
-msgid "Save"
-msgstr "salva"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Salvarea la {{trackedEntityName}}"
 
@@ -622,11 +619,17 @@ msgstr "sugestiile nu au putut fi preluate"
 msgid "No items to display"
 msgstr "Nu există elemente pentru afișare"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Selectați coloanele"
 
 msgid "Columns to show in table"
 msgstr "Coloane pentru afișare în tabel"
+
+msgid "Save"
+msgstr "salva"
 
 msgid "Column"
 msgstr "Coloană"
@@ -702,9 +705,6 @@ msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
 msgid "Add note"
-msgstr ""
-
-msgid "You don't have access to write notes"
 msgstr ""
 
 msgid "Write note"
@@ -799,9 +799,6 @@ msgstr "A avut loc o eroare"
 msgid "Page is missing required values from URL"
 msgstr "În pagină lipsesc valorile obligatorii din URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "Unitatea organizațională nu este validă cu programul curent"
-
 msgid "There was an error opening the Page"
 msgstr "A apărut o eroare la deschiderea paginii"
 
@@ -810,6 +807,9 @@ msgstr "A apărut o eroare la încărcarea paginii"
 
 msgid "Program stage is invalid"
 msgstr "Etapa programului este nevalidă"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Raport"
@@ -965,12 +965,6 @@ msgstr "evenimente"
 msgid "event"
 msgstr "eveniment"
 
-msgid "You don't have access to edit this event"
-msgstr ""
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr ""
 
@@ -984,6 +978,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Erori"
+
+msgid "This event doesn't have any notes"
+msgstr ""
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Avertizări"
@@ -1022,7 +1022,7 @@ msgid "Search by attributes"
 msgstr "Căutare după atribute"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Căutare {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1069,10 +1069,34 @@ msgstr "S-au găsit posibile duplicate"
 msgid "An error occurred loading possible duplicates"
 msgstr "A apărut o eroare la încărcarea posibilelor duplicate"
 
-msgid "You don't have access to delete this relationship"
+msgid "You only have view access to this enrollment"
 msgstr ""
 
-msgid "You don't have access to create any relationships"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
 msgstr ""
 
 msgid "Add relationship"
@@ -1184,7 +1208,7 @@ msgstr ""
 "căutați."
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Crearea unui nou {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1252,16 +1276,10 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "Editare"
 
 msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1293,9 +1311,6 @@ msgid "Unsaved changes"
 msgstr "Modificări nesalvate"
 
 msgid "Continue data entry"
-msgstr ""
-
-msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1490,16 +1505,10 @@ msgstr ""
 msgid "Event completed"
 msgstr "Eveniment finalizat"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
 msgid "Notes about this event"
 msgstr ""
 
 msgid "Write a note about this event"
-msgstr ""
-
-msgid "This event doesn't have any notes"
 msgstr ""
 
 msgid "after"
@@ -1507,9 +1516,6 @@ msgstr "după"
 
 msgid "before"
 msgstr "pînă la"
-
-msgid "Schedule date info"
-msgstr ""
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
@@ -1572,6 +1578,9 @@ msgstr ""
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
+msgid "Save changes"
+msgstr "Salvarea modificărilor"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1579,8 +1588,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr "Salvarea modificărilor"
+msgid "{{trackedEntityName}} profile"
+msgstr ""
 
 msgid "Profile"
 msgstr "Profil"
@@ -1601,6 +1610,34 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr "Corectați erorile din formular pentru a continua."
 
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
 
@@ -1617,6 +1654,9 @@ msgid "There was a problem deleting the {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "View profile"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -1679,9 +1719,6 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
 msgid "This stage can only have one event"
 msgstr "Această etapă poate avea un singur eveniment"
 
@@ -1689,6 +1726,9 @@ msgid "New {{ eventName }} event"
 msgstr "Eveniment nou {{ eventName }}"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1728,6 +1768,9 @@ msgid "{{ overdueEvents }} overdue"
 msgstr ""
 
 msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
+msgid "No stages found in this program"
 msgstr ""
 
 msgid "Stages and Events"
@@ -1867,6 +1910,9 @@ msgstr ""
 msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr ""
 
@@ -1935,9 +1981,6 @@ msgstr ""
 
 msgid "Registration Date"
 msgstr "Data Înregistrării"
-
-msgid "Inactive"
-msgstr "Inactiv"
 
 msgid "Enrollment status"
 msgstr "Starea înrolării"
@@ -2216,6 +2259,12 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2301,4 +2350,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr ""
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""

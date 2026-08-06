@@ -46,6 +46,9 @@ const getImageResourceSubvalue = async ({ attribute }: SubValueFunctionParams) =
 };
 
 const getOrganisationUnitSubvalue = async ({ attribute: { value }, querySingleResource }: SubValueFunctionParams) => {
+    if (!value) {
+        return undefined;
+    }
     const organisationUnits = await getOrgUnitNames([value], querySingleResource);
     return organisationUnits[value];
 };

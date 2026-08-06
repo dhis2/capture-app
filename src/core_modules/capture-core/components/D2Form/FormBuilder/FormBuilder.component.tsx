@@ -243,6 +243,7 @@ export class FormBuilder extends React.Component<Props> {
             .promise
             .then((validationContainerArray) => {
                 const validationContainers = validationContainerArray
+                    .filter(container => !this.commitUpdateTriggeredForFields[container.id])
                     .reduce((accFieldsUI, container) => {
                         accFieldsUI[container.id] = container.validationData;
                         return accFieldsUI;

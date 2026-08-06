@@ -43,6 +43,11 @@ const getExpiredMessage = (event: string): string =>
 const getCompletedEventMessage = (event: string): string =>
     i18n.t('This {{event}} has been completed', { event, escapeValue: false });
 
+const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
+    ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
+    : i18n.t('This tracked entity is deactivated'));
+
+// eslint-disable-next-line complexity
 const getReadOnlyMessage = ({
     access,
     trackedEntityName,
@@ -51,7 +56,9 @@ const getReadOnlyMessage = ({
     canEditCompletedEvent,
     withinCompleteEventsExpiry,
     labels,
+    trackedEntityInactive,
 }: ReadOnlyMessageInput & { labels: Labels }): string => {
+    if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
     if (!access.program && !access.trackedEntityType && !access.programStage) {
         return getEnrollmentMessage(labels.enrollment);
     }
@@ -73,6 +80,7 @@ const ReadOnlyBadgePlain = ({
     withinCompleteEventsExpiry = true,
     multipleStages = false,
     trackedEntityName,
+    trackedEntityInactive = false,
     inlineLabel = false,
     classes,
 }: Props & WithStyles<typeof styles>) => {
@@ -96,6 +104,7 @@ const ReadOnlyBadgePlain = ({
         canEditCompletedEvent,
         withinCompleteEventsExpiry,
         labels,
+        trackedEntityInactive,
     });
     if (!message) return null;
 

@@ -130,6 +130,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
                 validationAttempted={this.props.searchAttempted}
                 errorMessage={this.getErrorMessage()}
                 onSearch={this.handleFilterOrgUnits}
+                autoSelectSingleOrgUnit={false}
             />
         );
     }

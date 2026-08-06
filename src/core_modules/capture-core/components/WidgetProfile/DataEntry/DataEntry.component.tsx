@@ -69,6 +69,7 @@ export const DataEntryComponent = ({
                 onGetValidationContext={onGetValidationContext}
                 orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
+                fieldOptions={{ autoSelectSingleOrgUnit: false }}
             />
             <NoticeBoxes
                 errorsMessages={errorsMessages}

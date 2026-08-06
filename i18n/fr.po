@@ -6,19 +6,19 @@
 # Elise Desailly, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
-# Philip Larsen Donnelly, 2026
 # Bram Piot <bram.piot@gmail.com>, 2026
+# Philip Larsen Donnelly, 2026
 # Esther Tokouli, 2026
 # Cyrille Kabrane, 2026
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Cyrille Kabrane, 2026\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -339,9 +339,6 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 "Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
 
-msgid "Save"
-msgstr "Enregistrer"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Enregistrer un {{trackedEntityName}}"
 
@@ -631,6 +628,9 @@ msgstr "Taper pour filtrer les options"
 msgid "No match found"
 msgstr "Aucune correspondance trouvée"
 
+msgid "Search for an organisation unit"
+msgstr "Rechercher une unité d'organisation"
+
 msgid "Clear"
 msgstr "Effacer"
 
@@ -655,11 +655,17 @@ msgstr "les suggestions n'ont pas pu être récupérées"
 msgid "No items to display"
 msgstr "Aucun élément à afficher"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Sélectionner des colonnes"
 
 msgid "Columns to show in table"
 msgstr "Colonnes à afficher dans le tableau"
+
+msgid "Save"
+msgstr "Enregistrer"
 
 msgid "Column"
 msgstr "Colonne"
@@ -743,9 +749,6 @@ msgstr ""
 
 msgid "Add note"
 msgstr "Ajouter une note"
-
-msgid "You don't have access to write notes"
-msgstr "Vous n'êtes pas autorisé à écrire des notes"
 
 msgid "Write note"
 msgstr "Écrire une note"
@@ -853,9 +856,6 @@ msgstr "Une erreur s'est produite"
 msgid "Page is missing required values from URL"
 msgstr "Des valeurs obligatoires ne figurent pas dans l'URL de la page"
 
-msgid "Org unit is not valid with current program"
-msgstr "L'unité d'organisation n'est pas valide avec le programme actuel"
-
 msgid "There was an error opening the Page"
 msgstr "Une erreur s'est produite lors de l'ouverture de la page"
 
@@ -864,6 +864,9 @@ msgstr "Une erreur s'est produite lors du chargement de la page"
 
 msgid "Program stage is invalid"
 msgstr "Le stade de programme n'est pas valide"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Rapport"
@@ -925,13 +928,13 @@ msgid "Please select {{category}}."
 msgstr "Veuillez sélectionner {{category}}."
 
 msgid "Please select an organisation unit"
-msgstr ""
+msgstr "Veuillez choisir une unité d'organisation"
 
 msgid "See working list without organisation unit"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}}"
-msgstr ""
+msgstr "Rechercher pour un {{trackedEntityName}}"
 
 msgid "Registered events"
 msgstr "Événements enregistrés"
@@ -1031,14 +1034,6 @@ msgstr "événements"
 msgid "event"
 msgstr "événement"
 
-msgid "You don't have access to edit this event"
-msgstr "Vous n'êtes pas autorisé à modifier cet événement"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-"{{occurredAt}} appartient à une période expirée. L'événement ne peut être "
-"modifié."
-
 msgid "View changelog"
 msgstr "Voir le journal des modifications"
 
@@ -1054,6 +1049,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Erreurs"
+
+msgid "This event doesn't have any notes"
+msgstr "Cet événement n'a pas de notes"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Avertissements"
@@ -1142,11 +1143,41 @@ msgstr "Doublons potentiels détectés"
 msgid "An error occurred loading possible duplicates"
 msgstr "Une erreur s'est produite lors du chargement des doublons potentiels"
 
-msgid "You don't have access to delete this relationship"
-msgstr "Vous n'êtes pas autorisé à supprimer cette relation"
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "Vous n'êtes pas autorisé à créer des relations"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "Visualiser uniquement"
 
 msgid "Add relationship"
 msgstr "Ajouter une relation"
@@ -1347,17 +1378,11 @@ msgstr "Aucun type d'entité suivie n'est disponible"
 msgid "Assigned to"
 msgstr "Assigné à"
 
-msgid "You don't have access to edit the assigned user"
-msgstr "Vous n'êtes pas autorisé à modifier l'utilisateur assigné "
-
 msgid "Edit"
 msgstr "Modifier"
 
 msgid "No one is assigned to this event"
 msgstr "Personne n'est assigné à cet événement"
-
-msgid "You don't have access to assign a user to this event"
-msgstr "Vous n'êtes pas autorisé à assigner un utilisateur à cet événement"
 
 msgid "Assign"
 msgstr "Assigner"
@@ -1393,9 +1418,6 @@ msgstr "Modifications non enregistrées"
 
 msgid "Continue data entry"
 msgstr "Continuer la saisie des données"
-
-msgid "You do not have access to modify this enrollment"
-msgstr "Vous n'êtes pas autorisé à modifier cette inscription"
 
 msgid "Enrollment actions"
 msgstr "Actions d'inscription"
@@ -1604,26 +1626,17 @@ msgstr "Aucun polygone défini"
 msgid "Event completed"
 msgstr "Événement terminé"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "L'événement ne peut pas être modifié une fois terminé."
-
 msgid "Notes about this event"
 msgstr "Notes sur cet événement"
 
 msgid "Write a note about this event"
 msgstr "Écrire une note sur cet événement"
 
-msgid "This event doesn't have any notes"
-msgstr "Cet événement n'a pas de notes"
-
 msgid "after"
 msgstr "après"
 
 msgid "before"
 msgstr "avant"
-
-msgid "Schedule date info"
-msgstr "Informations sur la date prévue"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Planifié automatiquement pour {{suggestedScheduleDate}}"
@@ -1696,6 +1709,9 @@ msgstr "Enregistrer une note"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Modifier {{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "Enregistrer les modifications"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Modifier les informations sur {{trackedEntityName}} ici."
 
@@ -1705,8 +1721,8 @@ msgstr ""
 "Les informations relatives à cette inscription peuvent être modifiées dans "
 "le widget Inscription."
 
-msgid "Save changes"
-msgstr "Enregistrer les modifications"
+msgid "{{trackedEntityName}} profile"
+msgstr "Profil de {{trackedEntityName}}"
 
 msgid "Profile"
 msgstr "Profil"
@@ -1727,6 +1743,34 @@ msgstr ""
 
 msgid "Fix errors in the form to continue."
 msgstr "Corrigez les erreurs dans le formulaire pour continuer."
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "Vous n'êtes pas autorisé à supprimer {{trackedEntityTypeName}}"
@@ -1750,6 +1794,9 @@ msgstr ""
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Oui, supprimer {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "Voir le profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1812,9 +1859,6 @@ msgstr "Veuillez saisir une date"
 msgid "Please select a valid event"
 msgstr "Veuillez sélectionner un événement valide"
 
-msgid "You do not have access to create events in this stage"
-msgstr "Vous n'êtes pas autorisé à créer des événements à ce stade"
-
 msgid "This stage can only have one event"
 msgstr "Ce stade ne peut avoir qu'un seul événement"
 
@@ -1825,6 +1869,9 @@ msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr ""
 "{{occurredAt}} appartient à une période expirée. L'événement ne peut être "
 "supprimé."
+
+msgid "This event is outside the edit period"
+msgstr ""
 
 msgid "An error occurred while deleting the event"
 msgstr "Une erreur s'est produite lors de la suppression de l'événement"
@@ -1868,6 +1915,9 @@ msgstr "{{ overdueEvents }} en retard"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} planifiés"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "Stades et événements"
@@ -2020,6 +2070,9 @@ msgstr ""
 "Pour ouvrir cette relation, veuillez patienter jusqu'à ce que "
 "l'enregistrement soit terminé."
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "Type"
 
@@ -2091,9 +2144,6 @@ msgstr "Unité d'organisation propriétaire"
 
 msgid "Registration Date"
 msgstr "Date d'inscription"
-
-msgid "Inactive"
-msgstr "Inactif"
 
 msgid "Enrollment status"
 msgstr "Statut de l'inscription"
@@ -2398,6 +2448,12 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr "Erreur lors de la de mise à jour de l'attributaire"
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr "Une erreur s'est produite lors de l'extraction des métadonnées."
 
@@ -2496,3 +2552,11 @@ msgstr ""
 " des restrictions du navigateur. Pour obtenir de meilleures performances, "
 "utilisez un autre navigateur ou quittez le mode privé si celui-ci est en "
 "cours d'utilisation."
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Saisie"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
+msgstr ""

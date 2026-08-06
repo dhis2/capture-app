@@ -1,14 +1,14 @@
 # Translators:
-# Merethe Wollan Blisten, 2025
 # Karoline Tufte Lien <karoline@dhis2.org>, 2026
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2026
+# Merethe Wollan Blisten, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2026\n"
+"Last-Translator: Merethe Wollan Blisten, 2026\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -319,9 +319,6 @@ msgstr "Nei, avbryt"
 msgid "You don't have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
 
-msgid "Save"
-msgstr "Lagre"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Lagrer en {{trackedEntityName}}"
 
@@ -629,11 +626,17 @@ msgstr "forslag kunne ikke hentes"
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Velg kolonner"
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
+
+msgid "Save"
+msgstr "Lagre"
 
 msgid "Column"
 msgstr "Kolonne"
@@ -709,9 +712,6 @@ msgstr "Valgt program er ugyldig for valgt organisajonsenhet"
 
 msgid "Add note"
 msgstr "Legg til notat"
-
-msgid "You don't have access to write notes"
-msgstr "Du har ikke tilgang til å skrive notater"
 
 msgid "Write note"
 msgstr "Skriv notat"
@@ -816,9 +816,6 @@ msgstr "Det har oppstått en feil"
 msgid "Page is missing required values from URL"
 msgstr "Siden mangler nødvendige verdier fra URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "Organisasjonsenheten er ikke gyldig med gjeldende program"
-
 msgid "There was an error opening the Page"
 msgstr "Det oppsto en feil ved åpning av siden"
 
@@ -827,6 +824,9 @@ msgstr "Det oppsto en feil under lasting av siden"
 
 msgid "Program stage is invalid"
 msgstr "Programfase er ugyldig"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Rapport"
@@ -982,12 +982,6 @@ msgstr "hendelser"
 msgid "event"
 msgstr "hendelse"
 
-msgid "You don't have access to edit this event"
-msgstr "Du har ikke tilgang til å redigere denne hendelsen"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr "Vis endringslogg"
 
@@ -1003,6 +997,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Feil"
+
+msgid "This event doesn't have any notes"
+msgstr "Denne hendelsen har ingen notater"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Advarsler"
@@ -1041,7 +1041,7 @@ msgid "Search by attributes"
 msgstr "Søk etter attributter"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Søk {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1087,11 +1087,35 @@ msgstr "Mulige duplikater funnet"
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
-msgid "You don't have access to delete this relationship"
-msgstr "Du har ikke tilgang til å slette denne relasjonen"
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "Du har ikke tilgang til å opprette noen relasjoner"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Legg til relasjon"
@@ -1109,7 +1133,7 @@ msgid "Choose an organisation unit"
 msgstr "Velg en organisasjonsenhet"
 
 msgid "Choose a {{categoryName}}"
-msgstr ""
+msgstr "Velg en {{categoryName}}"
 
 msgid "Search for a {{categoryName}}"
 msgstr ""
@@ -1133,7 +1157,7 @@ msgid "Choose a program"
 msgstr "Velg et program"
 
 msgid "Choose a {{title}}"
-msgstr ""
+msgstr "Velg en {{title}}"
 
 msgid "Search for a {{title}}"
 msgstr ""
@@ -1202,7 +1226,7 @@ msgid ""
 msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Opprett ny {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1273,18 +1297,11 @@ msgstr "Det er ingen sporbare enhetstyper tilgjengelig"
 msgid "Assigned to"
 msgstr "Tildelt til"
 
-msgid "You don't have access to edit the assigned user"
-msgstr "Du har ikke tilgang til å redigere den tildelte programbrukeren"
-
 msgid "Edit"
 msgstr "Rediger"
 
 msgid "No one is assigned to this event"
 msgstr "Ingen er tildelt denne hendelsen"
-
-msgid "You don't have access to assign a user to this event"
-msgstr ""
-"Du har ikke tilgang til å tilordne en programbruker til denne hendelsen"
 
 msgid "Assign"
 msgstr "Tildel"
@@ -1317,9 +1334,6 @@ msgid "Unsaved changes"
 msgstr "Ikke lagrede endringer"
 
 msgid "Continue data entry"
-msgstr ""
-
-msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1522,26 +1536,17 @@ msgstr "Ingen polygon oppfanget"
 msgid "Event completed"
 msgstr "Hendelse fullført"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "Hendelsen kan ikke redigeres etter at den er fullført"
-
 msgid "Notes about this event"
 msgstr "Notater om denne hendelsen"
 
 msgid "Write a note about this event"
 msgstr "Skriv et notat om denne hendelsen"
 
-msgid "This event doesn't have any notes"
-msgstr "Denne hendelsen har ingen notater"
-
 msgid "after"
 msgstr "etter"
 
 msgid "before"
 msgstr "før"
-
-msgid "Schedule date info"
-msgstr "Informasjon for planlagt dato"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Planlagt automatisk for {{suggestedScheduleDate}}"
@@ -1607,6 +1612,9 @@ msgstr "Lagre notat"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Rediger {{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "Lagre endringer"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1614,8 +1622,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr "Lagre endringer"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profil"
 
 msgid "Profile"
 msgstr "Profil"
@@ -1634,6 +1642,34 @@ msgstr "Prøv igjen eller kontakt systemadministratoren din for hjelp"
 
 msgid "Fix errors in the form to continue."
 msgstr "Rett opp feil i skjemaet for å fortsette."
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "Du har ikke tilgang til å slette denne {{trackedEntityTypeName}}"
@@ -1655,6 +1691,9 @@ msgstr "Det oppsto et problem ved sletting av {{trackedEntityTypeName}}"
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Ja, slett {{trackedEntityTypeName}}"
+
+msgid "View profile"
+msgstr "Vis profil"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
@@ -1716,10 +1755,6 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr "Velg en gyldig hendelse"
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-"Du har ikke rettigheter til å opprette en hendelse i dette programsteget. "
-
 msgid "This stage can only have one event"
 msgstr "Denne fasen kan bare ha en hendelse"
 
@@ -1727,6 +1762,9 @@ msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1766,6 +1804,9 @@ msgstr "{{ overdueEvents }} forfalt"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} planlagt"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
@@ -1904,6 +1945,9 @@ msgstr "Det oppsto en feil ved sletting av relasjonen. "
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "For å åpne denne relasjonen, vennligst vent til lagringen er fullført"
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "Type"
 
@@ -1972,9 +2016,6 @@ msgstr ""
 
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
-
-msgid "Inactive"
-msgstr "Inaktiv"
 
 msgid "Enrollment status"
 msgstr "Registreringsstatus"
@@ -2247,6 +2288,12 @@ msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
 msgid "Error updating the Assignee"
 msgstr "Feil under oppdatering av tildelt bruker"
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2331,4 +2378,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Registrer"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""

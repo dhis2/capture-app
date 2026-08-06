@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-07-25T20:09:13.981Z\n"
-"PO-Revision-Date: 2026-07-25T20:09:13.981Z\n"
+"POT-Creation-Date: 2026-08-06T14:40:51.936Z\n"
+"PO-Revision-Date: 2026-08-06T14:40:51.937Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -631,6 +631,9 @@ msgstr "Type to filter options"
 msgid "No match found"
 msgstr "No match found"
 
+msgid "Search for an organisation unit"
+msgstr "Search for an organisation unit"
+
 msgid "Clear"
 msgstr "Clear"
 
@@ -1146,6 +1149,12 @@ msgstr "This {{event}} is outside the valid editing period"
 
 msgid "This {{event}} has been completed"
 msgstr "This {{event}} has been completed"
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr "This {{trackedEntityName}} is deactivated"
+
+msgid "This tracked entity is deactivated"
+msgstr "This tracked entity is deactivated"
 
 msgid "Tracked entity type"
 msgstr "Tracked entity type"
