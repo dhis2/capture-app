@@ -15,6 +15,7 @@ export const EnrollmentReadOnlyBadge = () => {
         isEventWithinValidPeriod,
         canEditCompletedEvent,
         isWithinCompleteEventsExpiry,
+        isEventSkipped,
     } = useEnrollmentAccessContext();
 
     if (isEventPage) {
@@ -24,6 +25,7 @@ export const EnrollmentReadOnlyBadge = () => {
                 eventWithinValidPeriod={isEventWithinValidPeriod}
                 canEditCompletedEvent={canEditCompletedEvent}
                 withinCompleteEventsExpiry={isWithinCompleteEventsExpiry}
+                eventSkipped={isEventSkipped}
                 trackedEntityName={trackedEntityTypeName}
                 trackedEntityInactive={trackedEntityInactive}
                 inlineLabel

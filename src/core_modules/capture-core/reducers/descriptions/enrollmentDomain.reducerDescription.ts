@@ -24,7 +24,6 @@ const {
     ADD_PERSISTED_ENROLLMENT_EVENTS,
     COMMIT_ENROLLMENT_AND_EVENTS,
     DELETE_ENROLLMENT_EVENT,
-    UPDATE_ENROLLMENT_EVENT_STATUS,
     DELETE_ENROLLMENT_EVENT_RELATIONSHIP,
     SET_TRACKED_ENTITY_INACTIVE_STATUS,
 } = enrollmentSiteActionTypes;
@@ -118,15 +117,6 @@ export const enrollmentDomainDesc = createReducerDescription(
                 );
                 return [...acc, { ...event, relationships }];
             }, []);
-
-            return { ...state, enrollment: { ...state.enrollment, events } };
-        },
-        [UPDATE_ENROLLMENT_EVENT_STATUS]: (state, { payload: { eventId, status, updatedAt } }) => {
-            const events = state.enrollment.events?.map(event =>
-                (event.event === eventId
-                    ? { ...event, status, updatedAt }
-                    : event),
-            );
 
             return { ...state, enrollment: { ...state.enrollment, events } };
         },

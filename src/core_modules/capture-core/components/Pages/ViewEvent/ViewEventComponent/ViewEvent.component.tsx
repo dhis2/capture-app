@@ -101,6 +101,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         isEventWithinValidPeriod,
         isWithinCompleteExpiry,
         canEditCompletedEvent,
+        isEventSkipped,
         readOnly,
     } = useEventEditPermissions({
         programId,
@@ -126,6 +127,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                     isEventWithinValidPeriod={isEventWithinValidPeriod}
                     canEditCompletedEvent={canEditCompletedEvent}
                     isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
+                    isEventSkipped={isEventSkipped}
                 />
             </div>
             <div className={classes.contentContainer}>
