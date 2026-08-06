@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-06T09:19:30.694Z\n"
-"PO-Revision-Date: 2026-08-06T09:19:30.694Z\n"
+"POT-Creation-Date: 2026-08-06T09:57:09.241Z\n"
+"PO-Revision-Date: 2026-08-06T09:57:09.241Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1995,9 +1995,6 @@ msgstr "An error occurred while completing events"
 msgid "You do not have access to delete events"
 msgstr "You do not have access to delete events"
 
-msgid "An error occurred while deleting the events"
-msgstr "An error occurred while deleting the events"
-
 msgid "Delete events"
 msgstr "Delete events"
 
@@ -2012,6 +2009,9 @@ msgstr "Error deleting events"
 
 msgid "There was an error while deleting the events. Please see the details below."
 msgstr "There was an error while deleting the events. Please see the details below."
+
+msgid "An error occurred while deleting the events"
+msgstr "An error occurred while deleting the events"
 
 msgid "Owner organisation unit"
 msgstr "Owner organisation unit"

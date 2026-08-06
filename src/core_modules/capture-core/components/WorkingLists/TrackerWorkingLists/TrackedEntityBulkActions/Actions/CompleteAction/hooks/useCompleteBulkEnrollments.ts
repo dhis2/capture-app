@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
@@ -6,11 +6,20 @@ import log from 'loglevel';
 import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { extractValidationReport } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
+import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
+import type { ErrorReport } from '../../../../../WorkingListsCommon/BulkActionBar/types';
 import type { ProgramStage } from '../../../../../../../metaData';
 
+type Enrollment = {
+    enrollment: string;
+    trackedEntity: string;
+    status?: string;
+    events?: Array<{ event: string; programStage: string; status?: string; [key: string]: any }>;
+    [key: string]: any;
+};
+
 type Props = {
-    selectedRows: Record<string, any>;
+    selectedRows: Record<string, boolean>;
     programId: string;
     stages: Map<string, ProgramStage>;
     modalIsOpen: boolean;
@@ -18,27 +27,32 @@ type Props = {
     removeRowsFromSelection: (rows: Array<string>) => void;
 };
 
-const validateEnrollments = async ({ dataEngine, enrollments }) => dataEngine.mutate({
-    resource: 'tracker?async=false&importStrategy=UPDATE&importMode=VALIDATE',
-    type: 'create',
-    data: () => ({ enrollments }),
-});
+const validateEnrollments = async ({ dataEngine, enrollments }: { dataEngine: any; enrollments: Enrollment[] }) =>
+    dataEngine.mutate({
+        resource: 'tracker?async=false&importStrategy=UPDATE&importMode=VALIDATE',
+        type: 'create',
+        data: () => ({ enrollments }),
+    });
 
-const importValidEnrollments = async ({ dataEngine, enrollments }) => dataEngine.mutate({
-    resource: 'tracker?async=false&importStrategy=UPDATE&importMode=COMMIT',
-    type: 'create',
-    data: () => ({ enrollments }),
-});
+const importValidEnrollments = async ({ dataEngine, enrollments }: { dataEngine: any; enrollments: Enrollment[] }) =>
+    dataEngine.mutate({
+        resource: 'tracker?async=false&importStrategy=UPDATE&importMode=COMMIT',
+        type: 'create',
+        data: () => ({ enrollments }),
+    });
 
-const formatServerPayload = (trackedEntities, completeEvents, stages) => {
-    const enrollments = trackedEntities?.activeEnrollments ?? [];
-    let updatedEnrollments;
+const formatServerPayload = (
+    trackedEntities: any,
+    completeEvents: boolean,
+    stages: Map<string, ProgramStage>,
+): Enrollment[] => {
+    const enrollments: Enrollment[] = trackedEntities?.activeEnrollments ?? [];
 
     if (completeEvents) {
-        updatedEnrollments = enrollments.map(enrollment => ({
+        return enrollments.map(enrollment => ({
             ...enrollment,
             status: 'COMPLETED',
-            events: enrollment.events
+            events: (enrollment.events ?? [])
                 .filter((event) => {
                     const access = stages.get(event.programStage)?.access?.data?.write;
                     const isEventActive = event.status === 'ACTIVE';
@@ -46,37 +60,32 @@ const formatServerPayload = (trackedEntities, completeEvents, stages) => {
                 })
                 .map(event => ({ ...event, status: 'COMPLETED' })),
         }));
-    } else {
-        updatedEnrollments = enrollments.map(enrollment => ({
-            ...enrollment,
-            status: 'COMPLETED',
-            events: [],
-        }));
     }
 
-    return updatedEnrollments;
+    return enrollments.map(enrollment => ({
+        ...enrollment,
+        status: 'COMPLETED',
+        events: [],
+    }));
 };
 
-const filterValidEnrollments = (enrollments, errors) => {
-    const invalidEnrollments = new Set();
+const filterValidEnrollments = (enrollments: Enrollment[], errors: ErrorReport[]): Enrollment[] => {
+    const invalidEnrollments = new Set<string>();
 
-    errors.forEach((apiErrorMessage) => {
-        if (apiErrorMessage.trackerType === 'ENROLLMENT') {
-            invalidEnrollments.add(apiErrorMessage.uid);
-        } else if (apiErrorMessage.trackerType === 'EVENT') {
+    errors.forEach((errorReport) => {
+        if (errorReport.trackerType === 'ENROLLMENT' && errorReport.uid) {
+            invalidEnrollments.add(errorReport.uid);
+        } else if (errorReport.trackerType === 'EVENT' && errorReport.uid) {
             const invalidEnrollment = enrollments.find(enrollment =>
-                enrollment.events.some(event => event.event === apiErrorMessage.uid),
+                enrollment.events?.some(event => event.event === errorReport.uid),
             );
-
             if (invalidEnrollment) {
                 invalidEnrollments.add(invalidEnrollment.enrollment);
             }
         }
     });
 
-    return enrollments.filter(
-        enrollment => !invalidEnrollments.has(enrollment.enrollment),
-    );
+    return enrollments.filter(enrollment => !invalidEnrollments.has(enrollment.enrollment));
 };
 
 
@@ -95,17 +104,12 @@ export const useCompleteBulkEnrollments = ({
         { critical: true },
     );
 
-    const removeQueries = () => {
-        queryClient.removeQueries(
-            [
-                ReactQueryAppNamespace,
-                'WorkingLists',
-                'BulkActionBar',
-                'CompleteAction',
-                'trackedEntities',
-            ],
-        );
-    };
+    const removeQueries = useCallback(() => {
+        queryClient.removeQueries([
+            ReactQueryAppNamespace,
+            'WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities',
+        ]);
+    }, [queryClient]);
 
     const {
         data: trackedEntities,
@@ -134,22 +138,17 @@ export const useCompleteBulkEnrollments = ({
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return null;
 
-                const { activeEnrollments, completedEnrollments } = apiTrackedEntities
-                    .flatMap(trackedEntity => trackedEntity.enrollments)
-                    .reduce((acc, enrollment) => {
+                return apiTrackedEntities
+                    .flatMap((trackedEntity: any) => trackedEntity.enrollments)
+                    .reduce((acc: { activeEnrollments: Enrollment[]; completedEnrollments: Enrollment[] },
+                        enrollment: Enrollment) => {
                         if (enrollment.status === 'ACTIVE') {
                             acc.activeEnrollments.push(enrollment);
                         } else {
                             acc.completedEnrollments.push(enrollment);
                         }
-
                         return acc;
                     }, { activeEnrollments: [], completedEnrollments: [] });
-
-                return {
-                    activeEnrollments,
-                    completedEnrollments,
-                };
             },
         },
     );
@@ -157,8 +156,8 @@ export const useCompleteBulkEnrollments = ({
     const {
         mutate: importEnrollments,
         isPending: isImportingEnrollments,
-    } = useMutation<any>(
-        ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
+    } = useMutation(
+        ({ enrollments }: { enrollments: Enrollment[] }) => importValidEnrollments({ dataEngine, enrollments }),
         {
             onSuccess: () => {
                 onUpdateList();
@@ -167,12 +166,9 @@ export const useCompleteBulkEnrollments = ({
             onError: (serverResponse, variables) => {
                 removeQueries();
                 showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
-                log.error(
-                    errorCreator('An error occurred when completing enrollments')({
-                        serverResponse,
-                        variables,
-                    }),
-                );
+                log.error(errorCreator('An error occurred when completing enrollments')({
+                    serverResponse, variables,
+                }));
             },
         },
     );
@@ -182,9 +178,9 @@ export const useCompleteBulkEnrollments = ({
         isPending: isImportingPartialEnrollments,
         isSuccess: hasPartiallyUploadedEnrollments,
     } = useMutation(
-        ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
+        ({ enrollments }: { enrollments: Enrollment[] }) => importValidEnrollments({ dataEngine, enrollments }),
         {
-            onSuccess: (serverResponse, { enrollments }) => {
+            onSuccess: (_response, { enrollments }) => {
                 const enrollmentIds = enrollments.map(enrollment => enrollment.trackedEntity);
                 removeRowsFromSelection(enrollmentIds);
                 removeQueries();
@@ -192,65 +188,52 @@ export const useCompleteBulkEnrollments = ({
             },
             onError: (serverResponse, variables) => {
                 showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
-                log.error(
-                    errorCreator('An error occurred when completing enrollments')({
-                        serverResponse,
-                        variables,
-                    }),
-                );
+                log.error(errorCreator('An error occurred when completing enrollments')({
+                    serverResponse, variables,
+                }));
             },
         },
+    );
+
+    const validateMutationFn = useCallback(
+        ({ enrollments }: { enrollments: Enrollment[] }) =>
+            validateEnrollments({ dataEngine, enrollments }) as Promise<any>,
+        [dataEngine],
     );
 
     const {
-        mutate: onValidateEnrollments,
-        isPending: isCompletingEnrollments,
-        error: validateError,
-        reset: resetCompleteEnrollments,
-    } = useMutation<any>(
-        ({ enrollments }: any) => validateEnrollments({
-            dataEngine,
-            enrollments,
-        }),
-        {
-            onSuccess: (serverResponse: any, { enrollments }: any) => {
-                importEnrollments({ enrollments } as any);
-            },
-            onError: (serverResponse: any, { enrollments }: any) => {
-                const errors = serverResponse?.details?.validationReport?.errorReports;
-                if (!errors) {
-                    log.error(
-                        errorCreator('An unknown error occurred when completing enrollments',
-                        )({
-                            serverResponse,
-                            enrollments,
-                        }));
-                    showAlert({ message: i18n.t('An unknown error occurred when completing enrollments') });
-                    return;
-                }
-                const validEnrollments = filterValidEnrollments(enrollments, errors);
-
-                if (validEnrollments.length === 0) {
-                    return;
-                }
-
-                importPartialEnrollments({ enrollments: validEnrollments });
-            },
+        mutate: validateAndImportEnrollments,
+        isPending: isValidatingEnrollments,
+        validationError,
+    } = useBulkMutationWithValidation<any, { enrollments: Enrollment[] }>({
+        mutationFn: validateMutationFn,
+        active: modalIsOpen,
+        onSuccess: (_response, { enrollments }) => {
+            importEnrollments({ enrollments });
         },
-    );
+        onValidationError: (report, { enrollments }) => {
+            const validEnrollments = filterValidEnrollments(
+                enrollments,
+                report.validationReport.errorReports,
+            );
+            if (validEnrollments.length === 0) return;
+            importPartialEnrollments({ enrollments: validEnrollments });
+        },
+        onFatalError: (error, { enrollments }) => {
+            log.error(errorCreator('An unknown error occurred when completing enrollments')({
+                error, enrollments,
+            }));
+            showAlert({ message: i18n.t('An unknown error occurred when completing enrollments') });
+        },
+    });
 
     const enrollmentCounts = useMemo(() => ({
         active: trackedEntities?.activeEnrollments?.length ?? 0,
         completed: trackedEntities?.completedEnrollments?.length ?? 0,
     }), [trackedEntities]);
 
-    const validationError = useMemo(
-        () => extractValidationReport({ error: validateError }),
-        [validateError],
-    );
-
     const enrollmentIdToTeiId = useMemo(() => {
-        const allEnrollments = [
+        const allEnrollments: Enrollment[] = [
             ...(trackedEntities?.activeEnrollments ?? []),
             ...(trackedEntities?.completedEnrollments ?? []),
         ];
@@ -266,24 +249,18 @@ export const useCompleteBulkEnrollments = ({
     // so limit the vouched-UID set to that same scope.
     const knownEventUids = useMemo(() => {
         const set = new Set<string>();
-        (trackedEntities?.activeEnrollments ?? []).forEach((enrollment: any) => {
-            (enrollment?.events ?? []).forEach((event: any) => {
-                if (event?.event) set.add(event.event);
+        (trackedEntities?.activeEnrollments ?? []).forEach((enrollment: Enrollment) => {
+            (enrollment.events ?? []).forEach((event) => {
+                if (event.event) set.add(event.event);
             });
         });
         return set;
     }, [trackedEntities]);
 
-    useEffect(() => {
-        if (!modalIsOpen) {
-            resetCompleteEnrollments();
-        }
-    }, [modalIsOpen, resetCompleteEnrollments]);
-
-    const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
+    const onStartCompleteEnrollments = useCallback(({ completeEvents }: { completeEvents: boolean }) => {
         const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
-        onValidateEnrollments({ completeEvents, enrollments } as any);
-    };
+        validateAndImportEnrollments({ enrollments });
+    }, [trackedEntities, stages, validateAndImportEnrollments]);
 
     return {
         completeEnrollments: onStartCompleteEnrollments,
@@ -293,7 +270,7 @@ export const useCompleteBulkEnrollments = ({
         isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,
-        isCompleting: isImportingEnrollments || isImportingPartialEnrollments || isCompletingEnrollments,
+        isCompleting: isImportingEnrollments || isImportingPartialEnrollments || isValidatingEnrollments,
         hasPartiallyUploadedEnrollments,
     };
 };

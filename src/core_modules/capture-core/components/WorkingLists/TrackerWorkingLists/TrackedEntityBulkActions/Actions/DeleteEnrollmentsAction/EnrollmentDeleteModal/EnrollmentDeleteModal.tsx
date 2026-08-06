@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
-import { BulkActionErrorDetails } from '../../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
+import {
+    BulkActionErrorModal,
+} from '../../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
+import { createEnrollmentErrorHrefResolver } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../../utils/routing';
 import type { PlainProps } from './EnrollmentDeleteModal.types';
 
@@ -28,6 +31,7 @@ const EnrollmentDeleteModalPlain = ({
     setIsDeleteDialogOpen,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
+    const { orgUnitId } = useLocationQuery();
     const {
         deleteEnrollments,
         isDeletingEnrollments,
@@ -42,32 +46,39 @@ const EnrollmentDeleteModalPlain = ({
     } = useDeleteEnrollments({
         selectedRows,
         programId,
+        active: true,
         onUpdateList,
         setIsDeleteDialogOpen,
     });
-    const { orgUnitId } = useLocationQuery();
+
+    const getRecordHref = useMemo(
+        () => createEnrollmentErrorHrefResolver({
+            programId,
+            orgUnitId,
+            enrollmentIdToTeiId,
+        }),
+        [programId, orgUnitId, enrollmentIdToTeiId],
+    );
+
+    const closeDialog = () => setIsDeleteDialogOpen(false);
 
     if (isEnrollmentsError) {
         return (
             <Modal
-                onClose={() => setIsDeleteDialogOpen(false)}
+                onClose={closeDialog}
                 small
             >
-                <ModalTitle>
-                    {i18n.t('Delete selected enrollments')}
-                </ModalTitle>
-
+                <ModalTitle>{i18n.t('Delete selected enrollments')}</ModalTitle>
                 <ModalContent>
                     <div className={classes.modalContent}>
                         {i18n.t('An error occurred while loading the selected enrollments. Please try again.')}
                     </div>
                 </ModalContent>
-
                 <ModalActions>
                     <ButtonStrip>
                         <Button
                             secondary
-                            onClick={() => setIsDeleteDialogOpen(false)}
+                            onClick={closeDialog}
                         >
                             {i18n.t('Cancel')}
                         </Button>
@@ -78,62 +89,34 @@ const EnrollmentDeleteModalPlain = ({
     }
 
     if (validationError) {
-        const errors = validationError?.validationReport?.errorReports;
         return (
-            <Modal
-                onClose={() => setIsDeleteDialogOpen(false)}
-                dataTest={'bulk-delete-enrollments-dialog'}
-            >
-                <ModalTitle>
-                    {i18n.t('Error deleting enrollments')}
-                </ModalTitle>
-
-                <ModalContent>
-                    <BulkActionErrorDetails
-                        introText={i18n.t(
-                            'There was an error while deleting the enrollments. Please see the details below.',
-                        )}
-                        errorReports={errors}
-                        programId={programId}
-                        orgUnitId={orgUnitId}
-                        enrollmentIdToTeiId={enrollmentIdToTeiId}
-                    />
-                </ModalContent>
-
-                <ModalActions>
-                    <ButtonStrip>
-                        <Button
-                            secondary
-                            onClick={() => setIsDeleteDialogOpen(false)}
-                        >
-                            {i18n.t('Close')}
-                        </Button>
-                    </ButtonStrip>
-                </ModalActions>
-            </Modal>
+            <BulkActionErrorModal
+                title={i18n.t('Error deleting enrollments')}
+                introText={i18n.t(
+                    'There was an error while deleting the enrollments. Please see the details below.',
+                )}
+                errorReports={validationError.validationReport.errorReports}
+                getRecordHref={getRecordHref}
+                onClose={closeDialog}
+                dataTest="bulk-delete-enrollments-dialog"
+            />
         );
     }
 
     if (isLoadingEnrollments || !enrollmentCounts) {
         return (
-            <Modal
-                onClose={() => setIsDeleteDialogOpen(false)}
-            >
-                <ModalTitle>
-                    {i18n.t('Delete selected enrollments')}
-                </ModalTitle>
-
+            <Modal onClose={closeDialog}>
+                <ModalTitle>{i18n.t('Delete selected enrollments')}</ModalTitle>
                 <ModalContent>
                     <span className={classes.loadingContainer}>
                         <CircularLoader />
                     </span>
                 </ModalContent>
-
                 <ModalActions>
                     <ButtonStrip>
                         <Button
                             secondary
-                            onClick={() => setIsDeleteDialogOpen(false)}
+                            onClick={closeDialog}
                         >
                             {i18n.t('Cancel')}
                         </Button>
@@ -145,24 +128,17 @@ const EnrollmentDeleteModalPlain = ({
 
     return (
         <Modal
-            onClose={() => setIsDeleteDialogOpen(false)}
-            dataTest={'bulk-delete-enrollments-dialog'}
+            onClose={closeDialog}
+            dataTest="bulk-delete-enrollments-dialog"
         >
-            <ModalTitle>
-                {i18n.t('Delete selected enrollments')}
-            </ModalTitle>
-
+            <ModalTitle>{i18n.t('Delete selected enrollments')}</ModalTitle>
             <ModalContent>
                 <div className={classes.modalContent}>
                     <div>
                         {/* eslint-disable-next-line max-len */}
                         {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
                     </div>
-
-                    <div>
-                        {i18n.t('Please select which enrollment statuses you want to delete:')}
-                    </div>
-
+                    <div>{i18n.t('Please select which enrollment statuses you want to delete:')}</div>
                     <div>
                         <CustomCheckbox
                             disabled={enrollmentCounts.active === 0}
@@ -170,39 +146,35 @@ const EnrollmentDeleteModalPlain = ({
                             id="active"
                             checked={enrollmentCounts.active === 0 ? false : statusToDelete.active}
                             onChange={updateStatusToDelete}
-                            dataTest={'bulk-delete-enrollments-active-checkbox'}
+                            dataTest="bulk-delete-enrollments-active-checkbox"
                         />
-
                         <CustomCheckbox
                             disabled={enrollmentCounts.completed === 0}
                             label={i18n.t('Completed enrollments ({{count}})', { count: enrollmentCounts.completed })}
                             id="completed"
                             checked={enrollmentCounts.completed === 0 ? false : statusToDelete.completed}
                             onChange={updateStatusToDelete}
-                            dataTest={'bulk-delete-enrollments-completed-checkbox'}
+                            dataTest="bulk-delete-enrollments-completed-checkbox"
                         />
-
                         <CustomCheckbox
                             disabled={enrollmentCounts.cancelled === 0}
                             label={i18n.t('Cancelled enrollments ({{count}})', { count: enrollmentCounts.cancelled })}
                             id="cancelled"
                             onChange={updateStatusToDelete}
                             checked={enrollmentCounts.cancelled === 0 ? false : statusToDelete.cancelled}
-                            dataTest={'bulk-delete-enrollments-cancelled-checkbox'}
+                            dataTest="bulk-delete-enrollments-cancelled-checkbox"
                         />
                     </div>
                 </div>
             </ModalContent>
-
             <ModalActions>
                 <ButtonStrip>
                     <Button
                         secondary
-                        onClick={() => setIsDeleteDialogOpen(false)}
+                        onClick={closeDialog}
                     >
                         {i18n.t('Cancel')}
                     </Button>
-
                     <Button
                         destructive
                         // @ts-expect-error - keeping original functionality as before ts rewrite

@@ -1,20 +1,21 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { extractValidationReport } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
+import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
 
 type Props = {
-    selectedRows: { [key: string]: boolean };
+    selectedRows: Record<string, boolean>;
     isCompleteDialogOpen: boolean;
     setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     programId?: string;
 };
+
+type Payload = Array<{ event: string; [key: string]: any }>;
 
 export const useBulkCompleteEvents = ({
     selectedRows,
@@ -59,63 +60,50 @@ export const useBulkCompleteEvents = ({
                     } else {
                         acc.completedEvents.push(event);
                     }
-
                     return acc;
                 }, { activeEvents: [], completedEvents: [] });
             },
         },
     );
 
+    const mutationFn = useCallback(
+        ({ payload }: { payload: Payload }) => dataEngine.mutate({
+            resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
+            type: 'create',
+            data: { events: payload },
+        }) as Promise<any>,
+        [dataEngine],
+    );
+
     const {
         mutate: completeEvents,
         isPending: isCompletingEvents,
-        data,
-        error,
-        reset: resetCompleteEvents,
-    } = useMutation<any, any, { payload: any }>(
-        ({ payload }: { payload: any }) => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
-            type: 'create',
-            data: {
-                events: payload,
-            },
-        }),
-        {
-            onError: (serverResponse) => {
-                if (!serverResponse?.details?.validationReport?.errorReports?.length) {
-                    showAlert({ message: i18n.t('An error occurred while completing events') });
-                }
-            },
-            onSuccess: (response, { payload }: any) => {
-                const errorReports = response?.validationReport?.errorReports;
-                if (errorReports && errorReports.length) {
-                    const eventIds = payload.map(event => event.event);
-                    const validEventIds = eventIds
-                        .filter(eventId => !errorReports
-                            .find(errorReport => errorReport.uid === eventId),
-                        );
-
-                    removeRowsFromSelection(validEventIds);
-                    onUpdateList(true);
-                } else {
-                    onUpdateList();
-                    setIsCompleteDialogOpen(false);
-                }
-            },
+        validationError,
+    } = useBulkMutationWithValidation<any, { payload: Payload }>({
+        mutationFn,
+        active: isCompleteDialogOpen,
+        onSuccess: () => {
+            onUpdateList();
+            setIsCompleteDialogOpen(false);
         },
-    );
-
-    const validationError = useMemo(
-        () => extractValidationReport({ data, error }),
-        [data, error],
-    );
+        onPartialSuccess: (report, { payload }) => {
+            const errorReports = report.validationReport.errorReports;
+            const erroredUids = new Set(errorReports.map(e => e.uid).filter(Boolean));
+            const validEventIds = payload
+                .map(event => event.event)
+                .filter(id => !erroredUids.has(id));
+            removeRowsFromSelection(validEventIds);
+            onUpdateList(true);
+        },
+        onFatalError: () => {
+            showAlert({ message: i18n.t('An error occurred while completing events') });
+        },
+    });
 
     const onCompleteEvents = useCallback(() => {
-        if (!events) {
-            return;
-        }
+        if (!events) return;
 
-        const serverPayload = events.activeEvents.map(event => ({
+        const serverPayload: Payload = events.activeEvents.map((event: any) => ({
             ...event,
             status: 'COMPLETED',
             program: event.program || programId || event.programId,
@@ -125,25 +113,15 @@ export const useBulkCompleteEvents = ({
     }, [completeEvents, events, programId]);
 
     const eventCounts = useMemo(() => {
-        if (!events) {
-            return null;
-        }
-
+        if (!events) return null;
         return {
             active: events.activeEvents.length,
             completed: events.completedEvents.length,
         };
     }, [events]);
 
-    useEffect(() => {
-        if (!isCompleteDialogOpen) {
-            resetCompleteEvents();
-        }
-    }, [isCompleteDialogOpen, resetCompleteEvents]);
-
     return {
         eventCounts,
-        error,
         validationError,
         onCompleteEvents,
         isCompletingEvents,

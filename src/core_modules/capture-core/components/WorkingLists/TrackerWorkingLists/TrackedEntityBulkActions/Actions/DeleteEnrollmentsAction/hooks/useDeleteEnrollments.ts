@@ -1,16 +1,26 @@
 import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { extractValidationReport } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
+import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
+
+type Enrollment = {
+    enrollment: string;
+    program?: string;
+    status?: string;
+    trackedEntity: string;
+};
+
+type StatusToDelete = { active: boolean; completed: boolean; cancelled: boolean };
 
 type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
+    active: boolean;
     onUpdateList: () => void;
     setIsDeleteDialogOpen: (open: boolean) => void;
 };
@@ -20,11 +30,12 @@ const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 't
 export const useDeleteEnrollments = ({
     selectedRows,
     programId,
+    active,
     onUpdateList,
     setIsDeleteDialogOpen,
 }: Props) => {
     const queryClient = useQueryClient();
-    const [statusToDelete, setStatusToDelete] = useState({
+    const [statusToDelete, setStatusToDelete] = useState<StatusToDelete>({
         active: true,
         completed: true,
         cancelled: true,
@@ -38,7 +49,7 @@ export const useDeleteEnrollments = ({
     const updateStatusToDelete = useCallback((status: string) => {
         setStatusToDelete(prevStatus => ({
             ...prevStatus,
-            [status]: !prevStatus[status],
+            [status]: !prevStatus[status as keyof StatusToDelete],
         }));
     }, []);
 
@@ -64,12 +75,12 @@ export const useDeleteEnrollments = ({
         },
         {
             enabled: Object.keys(selectedRows).length > 0,
-            select: (data: any) => {
+            select: (data: any): Enrollment[] => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return [];
 
-                return apiTrackedEntities
-                    .flatMap(apiTrackedEntity => (apiTrackedEntity.enrollments ?? []).map((enrollment: any) => ({
+                return apiTrackedEntities.flatMap((apiTrackedEntity: any) =>
+                    (apiTrackedEntity.enrollments ?? []).map((enrollment: Enrollment) => ({
                         ...enrollment,
                         trackedEntity: enrollment.trackedEntity ?? apiTrackedEntity.trackedEntity,
                     })));
@@ -77,48 +88,41 @@ export const useDeleteEnrollments = ({
         },
     );
 
-    const {
-        mutate: deleteEnrollments,
-        isPending: isDeletingEnrollments,
-        data: deleteData,
-        error: deleteError,
-    } = useMutation<any, any>(
+    const mutationFn = useCallback(
         () => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                enrollments: enrollments
-                    .filter(({ status }) => status && statusToDelete[status.toLowerCase()])
+                enrollments: (enrollments ?? [])
+                    .filter(({ status }) => status && statusToDelete[status.toLowerCase() as keyof StatusToDelete])
                     .map(({ enrollment }) => ({ enrollment })),
             },
-        }),
-        {
-            onError: (serverResponse) => {
-                log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));
-                if (!serverResponse?.details?.validationReport?.errorReports?.length) {
-                    showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
-                }
-            },
-            // Defensive against a future switch to atomicMode=OBJECT, where partial-failure
-            // reports would arrive on `data` (HTTP 200) rather than as an HTTP error.
-            onSuccess: (response: any) => {
-                if (response?.validationReport?.errorReports?.length) return;
-                queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
-                onUpdateList();
-                setIsDeleteDialogOpen(false);
-            },
-        },
+        }) as Promise<any>,
+        [dataEngine, enrollments, statusToDelete],
     );
 
-    const validationError = useMemo(
-        () => extractValidationReport({ data: deleteData, error: deleteError }),
-        [deleteData, deleteError],
-    );
+    const {
+        mutate: deleteEnrollments,
+        isPending: isDeletingEnrollments,
+        validationError,
+    } = useBulkMutationWithValidation<any, void>({
+        mutationFn,
+        active,
+        onSuccess: () => {
+            queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
+            onUpdateList();
+            setIsDeleteDialogOpen(false);
+        },
+        onFatalError: (serverResponse) => {
+            log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));
+            showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
+        },
+    });
 
     const enrollmentIdToTeiId = useMemo(() => {
         const map: Record<string, string> = {};
-        (enrollments ?? []).forEach((enrollment: any) => {
-            if (enrollment?.enrollment && enrollment?.trackedEntity) {
+        (enrollments ?? []).forEach((enrollment) => {
+            if (enrollment.enrollment && enrollment.trackedEntity) {
                 map[enrollment.enrollment] = enrollment.trackedEntity;
             }
         });
@@ -126,52 +130,24 @@ export const useDeleteEnrollments = ({
     }, [enrollments]);
 
     const enrollmentCounts = useMemo(() => {
-        if (!enrollments) {
-            return null;
-        }
+        if (!enrollments) return null;
 
-        const {
-            activeEnrollments,
-            completedEnrollments,
-            cancelledEnrollments,
-        } = enrollments.reduce((acc, enrollment) => {
-            if (enrollment.status === 'ACTIVE') {
-                acc.activeEnrollments += 1;
-            } else if (enrollment.status === 'CANCELLED') {
-                acc.cancelledEnrollments += 1;
-            } else {
-                acc.completedEnrollments += 1;
-            }
-
+        const counts = enrollments.reduce((acc, enrollment) => {
+            if (enrollment.status === 'ACTIVE') acc.active += 1;
+            else if (enrollment.status === 'CANCELLED') acc.cancelled += 1;
+            else acc.completed += 1;
             return acc;
-        }, { activeEnrollments: 0, completedEnrollments: 0, cancelledEnrollments: 0 });
+        }, { active: 0, completed: 0, cancelled: 0 });
 
-        return {
-            active: activeEnrollments,
-            completed: completedEnrollments,
-            cancelled: cancelledEnrollments,
-            total: enrollments.length,
-        };
+        return { ...counts, total: enrollments.length };
     }, [enrollments]);
 
     const numberOfEnrollmentsToDelete = useMemo(() => {
-        if (!enrollments || !enrollmentCounts) {
-            return 0;
-        }
-
-        let total = 0;
-        if (statusToDelete.active) {
-            total += enrollmentCounts.active;
-        }
-        if (statusToDelete.completed) {
-            total += enrollmentCounts.completed;
-        }
-        if (statusToDelete.cancelled) {
-            total += enrollmentCounts.cancelled;
-        }
-
-        return total;
-    }, [enrollments, enrollmentCounts, statusToDelete]);
+        if (!enrollmentCounts) return 0;
+        return (['active', 'completed', 'cancelled'] as const)
+            .filter(status => statusToDelete[status])
+            .reduce((total, status) => total + enrollmentCounts[status], 0);
+    }, [enrollmentCounts, statusToDelete]);
 
     return {
         deleteEnrollments,

@@ -1,10 +1,13 @@
 import React, { type ComponentType, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
+import {
+    Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle,
+} from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
+import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
+import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { Props } from './CompleteAction.types';
 
@@ -40,9 +43,9 @@ const CompleteActionPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const { orgUnitId } = useLocationQuery();
-    const knownEventUids = useMemo(() => new Set(Object.keys(selectedRows)), [selectedRows]);
+    const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
+
     const {
         eventCounts,
         isLoading,
@@ -57,6 +60,17 @@ const CompleteActionPlain = ({
         onUpdateList,
         programId,
     });
+
+    const getRecordHref = useMemo(
+        () => createEventErrorHrefResolver({
+            programId,
+            orgUnitId,
+            knownEventUids: new Set(Object.keys(selectedRows)),
+        }),
+        [programId, orgUnitId, selectedRows],
+    );
+
+    const closeDialog = () => setIsCompleteDialogOpen(false);
 
     return (
         <>
@@ -76,77 +90,48 @@ const CompleteActionPlain = ({
             {isCompleteDialogOpen && eventCounts && !validationError && (
                 <Modal
                     small
-                    onClose={() => setIsCompleteDialogOpen(false)}
-                    dataTest={'bulk-complete-events-dialog'}
+                    onClose={closeDialog}
+                    dataTest="bulk-complete-events-dialog"
                 >
-                    <ModalTitle>
-                        {i18n.t('Complete events')}
-                    </ModalTitle>
-
+                    <ModalTitle>{i18n.t('Complete events')}</ModalTitle>
                     <ModalContent>
                         <span className={classes.container}>
-                            {eventCounts.active > 0 ?
-                                i18n.t('Are you sure you want to complete all active events in selection?')
-                                :
-                                i18n.t('There are no active events to complete in the current selection.')
+                            {eventCounts.active > 0
+                                ? i18n.t('Are you sure you want to complete all active events in selection?')
+                                : i18n.t('There are no active events to complete in the current selection.')
                             }
                         </span>
                     </ModalContent>
-
                     <ModalActions>
                         <ButtonStrip>
                             <Button
                                 secondary
-                                onClick={() => setIsCompleteDialogOpen(false)}
+                                onClick={closeDialog}
                             >
                                 {i18n.t('Cancel')}
                             </Button>
-
                             <Button
                                 primary
                                 onClick={onCompleteEvents}
-                                disabled={isLoading || eventCounts?.active === 0}
+                                disabled={isLoading || eventCounts.active === 0}
                                 loading={isCompletingEvents}
                             >
                                 {i18n.t('Complete')}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>
-
                 </Modal>
             )}
 
             {isCompleteDialogOpen && validationError && (
-                <Modal
-                    small
-                    onClose={() => setIsCompleteDialogOpen(false)}
-                    dataTest={'bulk-complete-events-dialog'}
-                >
-                    <ModalTitle>
-                        {i18n.t('Error completing events')}
-                    </ModalTitle>
-
-                    <ModalContent>
-                        <BulkActionErrorDetails
-                            introText={i18n.t('There was an error completing the events.')}
-                            errorReports={validationError?.validationReport?.errorReports}
-                            programId={programId}
-                            orgUnitId={orgUnitId}
-                            knownEventUids={knownEventUids}
-                        />
-                    </ModalContent>
-
-                    <ModalActions>
-                        <ButtonStrip>
-                            <Button
-                                secondary
-                                onClick={() => setIsCompleteDialogOpen(false)}
-                            >
-                                {i18n.t('Close')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
+                <BulkActionErrorModal
+                    title={i18n.t('Error completing events')}
+                    introText={i18n.t('There was an error completing the events.')}
+                    errorReports={validationError.validationReport.errorReports}
+                    getRecordHref={getRecordHref}
+                    onClose={closeDialog}
+                    dataTest="bulk-complete-events-dialog"
+                />
             )}
         </>
     );

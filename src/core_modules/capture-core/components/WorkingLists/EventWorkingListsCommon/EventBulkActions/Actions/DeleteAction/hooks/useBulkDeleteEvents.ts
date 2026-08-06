@@ -8,15 +8,15 @@ import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon
 type Props = {
     selectedRows: Record<string, boolean>;
     active: boolean;
-    setIsDeleteDialogOpen: (open: boolean) => void;
     onUpdateList: () => void;
+    setIsModalOpen: (open: boolean) => void;
 };
 
-export const useCascadeDeleteTei = ({
+export const useBulkDeleteEvents = ({
     selectedRows,
     active,
-    setIsDeleteDialogOpen,
     onUpdateList,
+    setIsModalOpen,
 }: Props) => {
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
@@ -29,7 +29,7 @@ export const useCascadeDeleteTei = ({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                trackedEntities: Object.keys(selectedRows).map(id => ({ trackedEntity: id })),
+                events: Object.keys(selectedRows).map(id => ({ event: id })),
             },
         }),
         [dataEngine, selectedRows],
@@ -40,11 +40,11 @@ export const useCascadeDeleteTei = ({
         active,
         onSuccess: () => {
             onUpdateList();
-            setIsDeleteDialogOpen(false);
+            setIsModalOpen(false);
         },
         onFatalError: (serverResponse) => {
-            log.error(errorCreator('An error occurred while deleting the tracked entities')({ serverResponse }));
-            showAlert({ message: i18n.t('An error occurred while deleting the records') });
+            log.error(errorCreator('An error occurred while deleting the events')({ serverResponse }));
+            showAlert({ message: i18n.t('An error occurred while deleting the events') });
         },
     });
 };

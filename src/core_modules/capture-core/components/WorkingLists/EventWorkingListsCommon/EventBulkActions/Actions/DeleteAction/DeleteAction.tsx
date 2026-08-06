@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useMutation } from '@tanstack/react-query';
-import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { errorCreator } from 'capture-core-utils';
+import { Button } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
-import { extractValidationReport } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import {
+    BulkActionConfirmModal,
+} from '../../../../WorkingListsCommon/BulkActionBar/BulkActionConfirmModal';
+import {
+    BulkActionErrorModal,
+} from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
+import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
+import { useBulkDeleteEvents } from './hooks/useBulkDeleteEvents';
 import type { Props } from './DeleteAction.types';
 
 const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
@@ -29,64 +31,34 @@ export const DeleteAction = ({
     programId,
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const dataEngine = useDataEngine();
     const { orgUnitId } = useLocationQuery();
-    const knownEventUids = useMemo(() => new Set(Object.keys(selectedRows)), [selectedRows]);
-    const { show: showAlert } = useAlert(
-        ({ message }) => message,
-        { critical: true },
-    );
-
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = Boolean(!stageDataWriteAccess || !!bulkDataEntryIsActive);
+    const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
 
     const {
         mutate: deleteEvents,
         isPending,
-        data: deleteData,
-        error: deleteError,
-        reset: resetDeleteEvents,
-    }: {
-        mutate: any,
-        isPending: boolean,
-        data: any,
-        error: any,
-        reset: () => void,
-    } = useMutation(
-        () => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=DELETE',
-            type: 'create',
-            data: {
-                events: Object
-                    .keys(selectedRows)
-                    .map(id => ({ event: id })),
-            },
-        }),
-        {
-            onError: (serverResponse: any) => {
-                log.error(errorCreator('An error occurred while deleting the events')({ serverResponse }));
-                if (!serverResponse?.details?.validationReport?.errorReports?.length) {
-                    showAlert({ message: i18n.t('An error occurred while deleting the events') });
-                }
-            },
-            // Defensive against a future switch to atomicMode=OBJECT, where partial-failure
-            // reports would arrive on `data` (HTTP 200) rather than as an HTTP error.
-            onSuccess: (response: any) => {
-                if (response?.validationReport?.errorReports?.length) return;
-                onUpdateList();
-                setIsModalOpen(false);
-            },
-        },
-    );
+        validationError,
+        reset,
+    } = useBulkDeleteEvents({
+        selectedRows,
+        active: isModalOpen,
+        onUpdateList,
+        setIsModalOpen,
+    });
 
-    const validationError = useMemo(
-        () => extractValidationReport({ data: deleteData, error: deleteError }),
-        [deleteData, deleteError],
+    const getRecordHref = useMemo(
+        () => createEventErrorHrefResolver({
+            programId,
+            orgUnitId,
+            knownEventUids: new Set(Object.keys(selectedRows)),
+        }),
+        [programId, orgUnitId, selectedRows],
     );
 
     const closeModal = () => {
         setIsModalOpen(false);
-        resetDeleteEvents();
+        reset();
     };
 
     return (
@@ -105,76 +77,32 @@ export const DeleteAction = ({
             </ConditionalTooltip>
 
             {isModalOpen && !validationError && (
-                <Modal
-                    small
-                    onClose={closeModal}
-                    dataTest={'bulk-delete-events-dialog'}
+                <BulkActionConfirmModal
+                    title={i18n.t('Delete events')}
+                    confirmLabel={i18n.t('Delete')}
+                    onConfirm={() => deleteEvents()}
+                    onCancel={closeModal}
+                    isPending={isPending}
+                    dataTest="bulk-delete-events-dialog"
                 >
-                    <ModalTitle>
-                        {i18n.t('Delete events')}
-                    </ModalTitle>
-
-                    <ModalContent>
-                        {i18n.t('This cannot be undone.')}
-                        {' '}
-                        {i18n.t('Are you sure you want to delete the selected events?')}
-                    </ModalContent>
-
-                    <ModalActions>
-                        <ButtonStrip>
-                            <Button
-                                secondary
-                                onClick={closeModal}
-                            >
-                                {i18n.t('Cancel')}
-                            </Button>
-                            <Button
-                                destructive
-                                onClick={deleteEvents}
-                                loading={isPending}
-                            >
-                                {i18n.t('Delete')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
+                    {i18n.t('This cannot be undone.')}
+                    {' '}
+                    {i18n.t('Are you sure you want to delete the selected events?')}
+                </BulkActionConfirmModal>
             )}
 
             {isModalOpen && validationError && (
-                <Modal
-                    small
+                <BulkActionErrorModal
+                    title={i18n.t('Error deleting events')}
+                    introText={i18n.t(
+                        'There was an error while deleting the events. Please see the details below.',
+                    )}
+                    errorReports={validationError.validationReport.errorReports}
+                    getRecordHref={getRecordHref}
                     onClose={closeModal}
-                    dataTest={'bulk-delete-events-dialog'}
-                >
-                    <ModalTitle>
-                        {i18n.t('Error deleting events')}
-                    </ModalTitle>
-
-                    <ModalContent>
-                        <BulkActionErrorDetails
-                            introText={i18n.t(
-                                'There was an error while deleting the events. Please see the details below.',
-                            )}
-                            errorReports={validationError?.validationReport?.errorReports}
-                            programId={programId}
-                            orgUnitId={orgUnitId}
-                            knownEventUids={knownEventUids}
-                        />
-                    </ModalContent>
-
-                    <ModalActions>
-                        <ButtonStrip>
-                            <Button
-                                secondary
-                                onClick={closeModal}
-                            >
-                                {i18n.t('Close')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
+                    dataTest="bulk-delete-events-dialog"
+                />
             )}
         </>
     );
 };
-

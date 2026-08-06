@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
     Button,
     ButtonStrip,
@@ -15,6 +15,7 @@ import {
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
+import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { PlainProps } from './CompleteAction.types';
 
@@ -78,6 +79,16 @@ const CompleteActionPlain = ({
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
+    const getRecordHref = useMemo(
+        () => createEnrollmentErrorHrefResolver({
+            programId,
+            orgUnitId,
+            enrollmentIdToTeiId,
+            knownEventUids,
+        }),
+        [programId, orgUnitId, enrollmentIdToTeiId, knownEventUids],
+    );
+
     const ModalTextContent = () => {
         // If the data is still loading, show a spinner
         if (!enrollmentCounts || isLoading) {
@@ -90,7 +101,7 @@ const CompleteActionPlain = ({
 
         // If there was an error importing the data, show an error message
         if (validationError) {
-            const errors = validationError?.validationReport?.errorReports;
+            const errors = validationError.validationReport.errorReports;
             const introText = hasPartiallyUploadedEnrollments
                 // eslint-disable-next-line max-len
                 ? i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.')
@@ -99,10 +110,7 @@ const CompleteActionPlain = ({
                 <BulkActionErrorDetails
                     introText={introText}
                     errorReports={errors}
-                    programId={programId}
-                    orgUnitId={orgUnitId}
-                    enrollmentIdToTeiId={enrollmentIdToTeiId}
-                    knownEventUids={knownEventUids}
+                    getRecordHref={getRecordHref}
                 />
             );
         }

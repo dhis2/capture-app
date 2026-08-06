@@ -3,23 +3,12 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../../../../Widget';
-import { getRecordPathFromErrorReport } from '../utils';
-
-type ErrorReport = {
-    uid?: string;
-    errorCode?: string;
-    message?: string;
-    trackerType?: 'ENROLLMENT' | 'EVENT' | string;
-};
+import type { ErrorReport, ErrorReportHrefResolver } from '../types';
 
 type Props = {
     introText: ReactNode;
-    errorReports?: Array<ErrorReport>;
-    programId?: string;
-    orgUnitId?: string;
-    enrollmentIdToTeiId?: Record<string, string>;
-    knownEventUids?: Set<string>;
-    knownTeiUids?: Set<string>;
+    errorReports?: ErrorReport[];
+    getRecordHref?: ErrorReportHrefResolver;
 };
 
 const styles: Readonly<any> = {
@@ -46,11 +35,7 @@ const styles: Readonly<any> = {
 const BulkActionErrorDetailsPlain = ({
     introText,
     errorReports,
-    programId,
-    orgUnitId,
-    enrollmentIdToTeiId,
-    knownEventUids,
-    knownTeiUids,
+    getRecordHref,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [openAccordion, setOpenAccordion] = useState(false);
@@ -69,23 +54,16 @@ const BulkActionErrorDetailsPlain = ({
                 <span className={classes.errorContainer}>
                     <ul>
                         {errorReports && errorReports.length ? errorReports.map((errorReport) => {
-                            const recordPath = getRecordPathFromErrorReport({
-                                errorReport,
-                                programId,
-                                orgUnitId,
-                                enrollmentIdToTeiId,
-                                knownEventUids,
-                                knownTeiUids,
-                            });
+                            const href = getRecordHref?.(errorReport) ?? null;
                             return (
                                 <li
-                                    key={`${errorReport.uid}-${errorReport.errorCode}`}
+                                    key={`${errorReport.uid}-${errorReport.errorCode}-${errorReport.message}`}
                                     className={classes.errorItem}
                                 >
                                     <div className={classes.errorUidHeader}>
-                                        {recordPath ? (
+                                        {href ? (
                                             <a
-                                                href={`#${recordPath}`}
+                                                href={href}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
@@ -93,7 +71,7 @@ const BulkActionErrorDetailsPlain = ({
                                             </a>
                                         ) : errorReport.uid}
                                     </div>
-                                    <div>{errorReport?.message}</div>
+                                    <div>{errorReport.message}</div>
                                 </li>
                             );
                         }) : (
