@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "106.7.0",
+    "version": "106.7.6",
     "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
@@ -9,14 +9,14 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2-ui/calendar": "^10.16.4",
+        "@dhis2-ui/calendar": "^10.17.0",
         "@dhis2/app-runtime": "^3.17.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/data-engine": "^3.17.3",
         "@dhis2/rule-engine": "3.8.1",
-        "@dhis2/rules-engine-javascript": "106.7.0",
-        "@dhis2/ui": "^10.16.4",
+        "@dhis2/rules-engine-javascript": "106.7.6",
+        "@dhis2/ui": "^10.17.0",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
         "@popperjs/core": "^2.11.6",
@@ -132,13 +132,13 @@
         "patch-package": "^8.0.1",
         "postinstall-postinstall": "^2.1.0",
         "redux-devtools-extension": "^2.13.9",
-        "serve": "^14.2.5",
+        "serve": "^14.2.6",
         "typescript": "^5.8.2",
         "wait-on": "^8.0.1"
     },
     "resolutions": {
         "@babel/preset-react": "7.29.7",
-        "@dhis2-ui/calendar": "^10.16.4",
+        "@dhis2-ui/calendar": "^10.17.0",
         "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7",
         "i18next": "^20.5.0",

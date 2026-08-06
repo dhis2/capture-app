@@ -1,19 +1,19 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2024
 # Nadiia <semchuk@aph.org.ua>, 2025
-# Yury Rogachev <yury@dhis2.org>, 2025
-# Éva Tamási, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
-# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
 # Nancy Espinoza, 2026
 # Philip Larsen Donnelly, 2026
+# Yury Rogachev <yury@dhis2.org>, 2026
+# Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
+# Éva Tamási, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Éva Tamási, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -319,9 +319,6 @@ msgstr "Ні, скасувати"
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
-msgid "Save"
-msgstr "Зберегти"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
@@ -603,6 +600,9 @@ msgstr "Введіть параметри фільтра"
 msgid "No match found"
 msgstr ""
 
+msgid "Search for an organisation unit"
+msgstr "Пошук організаційного підрозділу"
+
 msgid "Clear"
 msgstr "Очистити"
 
@@ -627,11 +627,17 @@ msgstr ""
 msgid "No items to display"
 msgstr "Немає елементів для показу"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr ""
 
 msgid "Columns to show in table"
 msgstr "Стовпці для відображення в таблиці"
+
+msgid "Save"
+msgstr "Зберегти"
 
 msgid "Column"
 msgstr "Стовпчик"
@@ -709,9 +715,6 @@ msgstr ""
 
 msgid "Add note"
 msgstr "Додати нотатку"
-
-msgid "You don't have access to write notes"
-msgstr "У вас немає доступу до написання приміток"
 
 msgid "Write note"
 msgstr "Створіть примітку"
@@ -807,9 +810,6 @@ msgstr ""
 msgid "Page is missing required values from URL"
 msgstr ""
 
-msgid "Org unit is not valid with current program"
-msgstr ""
-
 msgid "There was an error opening the Page"
 msgstr ""
 
@@ -818,6 +818,9 @@ msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "Етап програми недійсний"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Звіт"
@@ -975,12 +978,6 @@ msgstr "події"
 msgid "event"
 msgstr "подія"
 
-msgid "You don't have access to edit this event"
-msgstr ""
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr "Переглянути зміни"
 
@@ -994,6 +991,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Помилки"
+
+msgid "This event doesn't have any notes"
+msgstr "Ця подія не має приміток"
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
@@ -1032,7 +1035,7 @@ msgid "Search by attributes"
 msgstr "Пошук за атрибутами"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Пошук {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1080,11 +1083,41 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You don't have access to delete this relationship"
+msgid "You only have view access to this enrollment"
 msgstr ""
 
-msgid "You don't have access to create any relationships"
+msgid "You only have view access to this program"
 msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "Тільки перегляд"
 
 msgid "Add relationship"
 msgstr "Додати зв'язок"
@@ -1202,7 +1235,7 @@ msgid ""
 msgstr ""
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Зареєструвати новий {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1274,16 +1307,10 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "Редагувати"
 
 msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1315,9 +1342,6 @@ msgid "Unsaved changes"
 msgstr ""
 
 msgid "Continue data entry"
-msgstr ""
-
-msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1512,26 +1536,17 @@ msgstr "Не зафіксовано жодного багатокутника"
 msgid "Event completed"
 msgstr "Подія завершена"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr "Подія не може бути відредагована після її завершення"
-
 msgid "Notes about this event"
 msgstr "Примітки про цю подію"
 
 msgid "Write a note about this event"
 msgstr "Напишіть примітку щодо цієї події"
 
-msgid "This event doesn't have any notes"
-msgstr "Ця подія не має приміток"
-
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
-
-msgid "Schedule date info"
-msgstr "Інформація про дату нагадування"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Заплановано автоматично на {{suggestedScheduleDate}}"
@@ -1603,6 +1618,9 @@ msgstr "Зберегти нотатку"
 msgid "Edit {{trackedEntityName}}"
 msgstr "Відредагуйте{{trackedEntityName}}"
 
+msgid "Save changes"
+msgstr "Зберегти зміни"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1610,8 +1628,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr "Зберегти зміни"
+msgid "{{trackedEntityName}} profile"
+msgstr "Профіль {{trackedEntityName}}а"
 
 msgid "Profile"
 msgstr "Профіль"
@@ -1631,6 +1649,34 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr ""
 
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "У вас немає доступу для видалення цього {{trackedEntityTypeName}}"
 
@@ -1648,6 +1694,9 @@ msgstr ""
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr ""
+
+msgid "View profile"
+msgstr "Переглянути профіль"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1709,9 +1758,6 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
 msgid "This stage can only have one event"
 msgstr ""
 
@@ -1719,6 +1765,9 @@ msgid "New {{ eventName }} event"
 msgstr "Нова подія {{ eventName }} "
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1760,6 +1809,9 @@ msgstr "{{ overdueEvents }}  протерміновано"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} заплановано"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "Етапи і Події"
@@ -1898,6 +1950,9 @@ msgstr ""
 msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "Тип"
 
@@ -1966,9 +2021,6 @@ msgstr "Організаційний підрозділ - власник"
 
 msgid "Registration Date"
 msgstr "Дата Реєстрації"
-
-msgid "Inactive"
-msgstr "Неактивне"
 
 msgid "Enrollment status"
 msgstr "Статус реєстрації"
@@ -2256,6 +2308,12 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2342,4 +2400,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Фіксація"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""
