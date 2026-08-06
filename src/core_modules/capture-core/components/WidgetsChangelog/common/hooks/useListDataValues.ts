@@ -134,6 +134,14 @@ export const useListDataValues = ({
     rawDataUpdatedAt,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const hasFileOrImageField = useMemo(
+        () => Object.values(dataItemDefinitions ?? {}).some(
+            (definition: any) =>
+                definition?.type === dataElementTypes.FILE_RESOURCE ||
+                definition?.type === dataElementTypes.IMAGE,
+        ),
+        [dataItemDefinitions],
+    );
     const {
         currentValues,
         isLoading: isCurrentValuesLoading,
@@ -142,6 +150,7 @@ export const useListDataValues = ({
         entityId,
         entityType,
         programId,
+        enabled: hasFileOrImageField,
     });
     const { baseUrl, apiVersion } = useConfig();
     const { fromServerDate } = useTimeZoneConversion();
