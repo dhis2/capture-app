@@ -1,17 +1,17 @@
 # Translators:
 # Yury Rogachev <yury@dhis2.org>, 2021
-# Philip Larsen Donnelly, 2025
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
-# Charel van den Elsen <zobeadzorg@gmail.com>, 2026
 # Cherise Beek <cherise.beek@gmail.com>, 2026
 # Rica, 2026
+# Charel van den Elsen <zobeadzorg@gmail.com>, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Rica, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -323,9 +323,6 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 "Je hebt geen toegang om een evenement te maken in de huidige selecties"
 
-msgid "Save"
-msgstr "Sla op"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Een {{trackedEntityName}} opslaan"
 
@@ -633,11 +630,17 @@ msgstr "suggesties konden niet worden opgehaald"
 msgid "No items to display"
 msgstr "Geen items om weer te geven"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Selecteer kolommen"
 
 msgid "Columns to show in table"
 msgstr "Kolommen om in tabel weer te geven"
+
+msgid "Save"
+msgstr "Sla op"
 
 msgid "Column"
 msgstr "Kolom"
@@ -713,9 +716,6 @@ msgstr ""
 
 msgid "Add note"
 msgstr "Notitie toevoegen"
-
-msgid "You don't have access to write notes"
-msgstr ""
 
 msgid "Write note"
 msgstr ""
@@ -820,9 +820,6 @@ msgstr "er is een fout opgetreden"
 msgid "Page is missing required values from URL"
 msgstr "Pagina mist vereiste waarden van URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "Organisatie-eenheid is niet geldig met het huidige programma"
-
 msgid "There was an error opening the Page"
 msgstr "Er is een fout opgetreden bij het openen van de pagina"
 
@@ -831,6 +828,9 @@ msgstr "Er is een fout opgetreden bij het laden van de pagina"
 
 msgid "Program stage is invalid"
 msgstr "Programmafase is ongeldig"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Rapport"
@@ -986,12 +986,6 @@ msgstr "evenementen"
 msgid "event"
 msgstr "evenement"
 
-msgid "You don't have access to edit this event"
-msgstr "Je hebt geen toegangsrechten om dit evenement te bewerken"
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr ""
 
@@ -1007,6 +1001,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Fouten"
+
+msgid "This event doesn't have any notes"
+msgstr ""
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Waarschuwingen"
@@ -1045,7 +1045,7 @@ msgid "Search by attributes"
 msgstr "Zoek op attributen"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Zoek {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1092,11 +1092,35 @@ msgstr "Mogelijke duplicaten gevonden"
 msgid "An error occurred loading possible duplicates"
 msgstr "Er is een fout opgetreden bij het laden van mogelijke duplicaten"
 
-msgid "You don't have access to delete this relationship"
-msgstr "U heeft geen toegang om deze relatie te verwijderen"
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "U heeft geen toegang om relaties aan te maken"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "Alleen bekijken"
 
 msgid "Add relationship"
 msgstr "Relatie toevoegen"
@@ -1208,7 +1232,7 @@ msgstr ""
 "U kunt uw zoektermen wijzigen en opnieuw zoeken om te vinden wat u zoekt."
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Nieuwe {{trackedEntityName}} maken"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1280,17 +1304,11 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Toegewezen aan"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "Bewerk"
 
 msgid "No one is assigned to this event"
 msgstr "Er is niemand toegewezen aan dit evenement"
-
-msgid "You don't have access to assign a user to this event"
-msgstr ""
 
 msgid "Assign"
 msgstr "Toewijzen"
@@ -1323,9 +1341,6 @@ msgid "Unsaved changes"
 msgstr "Niet-opgeslagen wijzigingen"
 
 msgid "Continue data entry"
-msgstr ""
-
-msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1524,16 +1539,10 @@ msgstr "Geen polygoon vastgelegd"
 msgid "Event completed"
 msgstr "Evenement voltooid"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
 msgid "Notes about this event"
 msgstr ""
 
 msgid "Write a note about this event"
-msgstr ""
-
-msgid "This event doesn't have any notes"
 msgstr ""
 
 msgid "after"
@@ -1541,9 +1550,6 @@ msgstr "na"
 
 msgid "before"
 msgstr "voor"
-
-msgid "Schedule date info"
-msgstr "Plan datum info"
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr "Automatisch gepland voor {{suggestedScheduleDate}}"
@@ -1610,6 +1616,9 @@ msgstr "Notitie opslaan"
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
+msgid "Save changes"
+msgstr "Wijzigingen opslaan"
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1617,8 +1626,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr "Wijzigingen opslaan"
+msgid "{{trackedEntityName}} profile"
+msgstr "{{trackedEntityName}} profiel"
 
 msgid "Profile"
 msgstr "Profiel"
@@ -1640,6 +1649,34 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr "Corrigeer fouten in het formulier om door te gaan."
 
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
 
@@ -1657,6 +1694,9 @@ msgstr ""
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr ""
+
+msgid "View profile"
+msgstr "Bekijk profiel"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profielwidget kan niet worden geladen. Probeer het later opnieuw"
@@ -1718,9 +1758,6 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
 msgid "This stage can only have one event"
 msgstr "Deze fase kan maar één evenement hebben"
 
@@ -1728,6 +1765,9 @@ msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1768,6 +1808,9 @@ msgstr "{{ overdueEvents }} te laat"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} gepland"
+
+msgid "No stages found in this program"
+msgstr ""
 
 msgid "Stages and Events"
 msgstr "stadiums en evenementen"
@@ -1906,6 +1949,9 @@ msgstr ""
 msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr "Soort"
 
@@ -1974,9 +2020,6 @@ msgstr ""
 
 msgid "Registration Date"
 msgstr "registratie datum"
-
-msgid "Inactive"
-msgstr "Inactief"
 
 msgid "Enrollment status"
 msgstr "Inschrijving Status"
@@ -2248,6 +2291,12 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2332,4 +2381,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Vastlegging"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""
