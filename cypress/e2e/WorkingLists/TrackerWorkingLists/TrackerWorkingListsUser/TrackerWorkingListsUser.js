@@ -692,8 +692,9 @@ When(/^you set the option filter "([^"]+)" to (Yes|No)$/, (filterName, value) =>
 When(/^you set the program stage organisation unit filter "([^"]+)" to "([^"]+)"$/, (filterName, searchTerm) => {
     cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.get('input[placeholder="Search"]').type(searchTerm);
+    cy.get('[data-test="org-unit-selector-trigger"]').click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type(searchTerm, { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
         cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
         cy.contains(searchTerm).click();
     });
