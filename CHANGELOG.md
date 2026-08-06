@@ -1,3 +1,17 @@
+## [106.7.6](https://github.com/dhis2/capture-app/compare/v106.7.5...v106.7.6) (2026-08-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4689](https://github.com/dhis2/capture-app/issues/4689)) ([773d9b0](https://github.com/dhis2/capture-app/commit/773d9b0f72b3d5eb82c3c6379070ac5a3a9b4184))
+
+## [106.7.5](https://github.com/dhis2/capture-app/compare/v106.7.4...v106.7.5) (2026-08-04)
+
+
+### Bug Fixes
+
+* [DHIS2-21874] Deactivated TEI shows wrong readonly reason ([#4656](https://github.com/dhis2/capture-app/issues/4656)) ([fac59e3](https://github.com/dhis2/capture-app/commit/fac59e3f857a68763a13994ea082710031096f7e))
+
 ## [106.7.4](https://github.com/dhis2/capture-app/compare/v106.7.3...v106.7.4) (2026-08-03)
 
 
