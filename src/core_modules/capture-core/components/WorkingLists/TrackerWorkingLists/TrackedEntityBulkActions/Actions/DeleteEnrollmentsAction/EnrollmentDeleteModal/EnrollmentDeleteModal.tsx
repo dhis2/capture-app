@@ -28,6 +28,7 @@ const EnrollmentDeleteModalPlain = ({
     selectedRows,
     programId,
     onUpdateList,
+    removeRowsFromSelection,
     setIsDeleteDialogOpen,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
@@ -48,6 +49,7 @@ const EnrollmentDeleteModalPlain = ({
         programId,
         active: true,
         onUpdateList,
+        removeRowsFromSelection,
         setIsDeleteDialogOpen,
     });
 

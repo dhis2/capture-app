@@ -21,17 +21,38 @@ type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
     active: boolean;
-    onUpdateList: () => void;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
     setIsDeleteDialogOpen: (open: boolean) => void;
 };
 
 const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities'];
+
+const findFullyDeletedTeiIds = (
+    enrollments: Enrollment[],
+    statusToDelete: StatusToDelete,
+    failedEnrollmentUids: Set<string>,
+): string[] => {
+    const wasDeleted = ({ enrollment, status }: Enrollment) => {
+        const key = status?.toLowerCase();
+        if (!key || !(key in statusToDelete)) return false;
+        return statusToDelete[key as keyof StatusToDelete] && !failedEnrollmentUids.has(enrollment);
+    };
+    const grouped = enrollments.reduce<Record<string, Enrollment[]>>((acc, e) => ({
+        ...acc,
+        [e.trackedEntity]: [...(acc[e.trackedEntity] ?? []), e],
+    }), {});
+    return Object.entries(grouped)
+        .filter(([, teiEnrollments]) => teiEnrollments.every(wasDeleted))
+        .map(([teiId]) => teiId);
+};
 
 export const useDeleteEnrollments = ({
     selectedRows,
     programId,
     active,
     onUpdateList,
+    removeRowsFromSelection,
     setIsDeleteDialogOpen,
 }: Props) => {
     const queryClient = useQueryClient();
@@ -112,6 +133,17 @@ export const useDeleteEnrollments = ({
             queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
             onUpdateList();
             setIsDeleteDialogOpen(false);
+        },
+        onPartialSuccess: (report) => {
+            const failedEnrollmentUids = new Set(
+                report.validationReport.errorReports.map(e => e.uid).filter(Boolean) as string[],
+            );
+            const fullyDeletedTeiIds = findFullyDeletedTeiIds(
+                enrollments ?? [], statusToDelete, failedEnrollmentUids,
+            );
+            removeRowsFromSelection(fullyDeletedTeiIds);
+            queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
+            onUpdateList(true);
         },
         onFatalError: (serverResponse) => {
             log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));

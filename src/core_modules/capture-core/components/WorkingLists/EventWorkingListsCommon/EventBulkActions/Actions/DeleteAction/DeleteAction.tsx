@@ -28,6 +28,7 @@ export const DeleteAction = ({
     stageDataWriteAccess,
     bulkDataEntryIsActive,
     onUpdateList,
+    removeRowsFromSelection,
     programId,
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,6 +45,7 @@ export const DeleteAction = ({
         selectedRows,
         active: isModalOpen,
         onUpdateList,
+        removeRowsFromSelection,
         setIsModalOpen,
     });
 

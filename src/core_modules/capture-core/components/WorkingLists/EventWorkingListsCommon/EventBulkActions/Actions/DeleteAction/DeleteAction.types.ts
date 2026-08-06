@@ -1,7 +1,8 @@
 export type Props = {
-    selectedRows: { [id: string]: boolean };
+    selectedRows: Record<string, boolean>;
     stageDataWriteAccess?: boolean;
-    onUpdateList: () => void;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
     bulkDataEntryIsActive?: boolean;
     programId?: string;
 };

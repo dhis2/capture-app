@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-06T10:04:24.691Z\n"
-"PO-Revision-Date: 2026-08-06T10:04:24.691Z\n"
+"POT-Creation-Date: 2026-08-06T12:15:48.962Z\n"
+"PO-Revision-Date: 2026-08-06T12:15:48.962Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2142,29 +2142,6 @@ msgstr[1] "Delete {{count}} enrollments"
 
 msgid "An error occurred when deleting enrollments"
 msgstr "An error occurred when deleting enrollments"
-
-msgid "Delete {{ trackedEntityName }} with all enrollments"
-msgstr "Delete {{ trackedEntityName }} with all enrollments"
-
-msgid "Delete {{count}} {{ trackedEntityName }}"
-msgid_plural "Delete {{count}} {{ trackedEntityName }}"
-msgstr[0] "Delete {{count}} {{ trackedEntityName }}"
-msgstr[1] "Delete {{count}} {{ trackedEntityName }}"
-
-msgid "Deleting records will also delete any associated enrollments and events."
-msgstr "Deleting records will also delete any associated enrollments and events."
-
-msgid "Are you sure you want to delete?"
-msgstr "Are you sure you want to delete?"
-
-msgid "Error deleting {{ trackedEntityName }}"
-msgstr "Error deleting {{ trackedEntityName }}"
-
-msgid "There was an error while deleting the records. Please see the details below."
-msgstr "There was an error while deleting the records. Please see the details below."
-
-msgid "An error occurred while deleting the records"
-msgstr "An error occurred while deleting the records"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
