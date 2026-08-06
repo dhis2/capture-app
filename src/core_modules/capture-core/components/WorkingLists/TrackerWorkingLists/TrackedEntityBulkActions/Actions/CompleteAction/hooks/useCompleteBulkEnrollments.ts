@@ -245,8 +245,6 @@ export const useCompleteBulkEnrollments = ({
         }, {});
     }, [trackedEntities]);
 
-    // Only events from active enrollments are submitted (see formatServerPayload),
-    // so limit the vouched-UID set to that same scope.
     const knownEventUids = useMemo(() => {
         const set = new Set<string>();
         (trackedEntities?.activeEnrollments ?? []).forEach((enrollment: Enrollment) => {

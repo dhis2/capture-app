@@ -15,5 +15,4 @@ export type ValidationReportContainer = {
     validationReport: ValidationReport;
 };
 
-// Already-anchor-ready (`#/...` for HashRouter). Null means render the UID as plain text.
 export type ErrorReportHrefResolver = (errorReport: ErrorReport) => string | null;

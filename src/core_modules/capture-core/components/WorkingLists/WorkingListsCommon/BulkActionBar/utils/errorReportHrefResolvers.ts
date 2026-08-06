@@ -4,10 +4,6 @@ import { EventProgram, getProgramFromProgramIdThrowIfNotFound } from '../../../.
 import { buildUrlQueryString } from '../../../../../utils/routing';
 import type { ErrorReport, ErrorReportHrefResolver } from '../types';
 
-// Resolvers return an anchor-ready href (`#/...`) or null when we can't (or shouldn't)
-// link to the record. Each resolver only links a UID it can vouch for — the server may
-// reference a UID it rejected as nonexistent, and following that is a dead end.
-
 type EventFlavorDeps = {
     programId?: string;
     orgUnitId?: string;
@@ -17,7 +13,6 @@ type EventFlavorDeps = {
 export const createEventErrorHrefResolver = ({
     programId, orgUnitId, knownEventUids,
 }: EventFlavorDeps): ErrorReportHrefResolver => {
-    // Resolve the program flavor once; programId doesn't vary across reports.
     let isEventProgram = false;
     let programResolvable = false;
     if (programId) {
@@ -65,7 +60,6 @@ type EnrollmentFlavorDeps = {
     programId?: string;
     orgUnitId?: string;
     enrollmentIdToTeiId: Record<string, string>;
-    // Optional — enrollment Complete has these because it submits events too.
     knownEventUids?: Set<string>;
 };
 
