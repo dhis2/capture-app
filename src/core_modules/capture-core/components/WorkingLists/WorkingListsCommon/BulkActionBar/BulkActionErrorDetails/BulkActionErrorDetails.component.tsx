@@ -53,7 +53,7 @@ const BulkActionErrorDetailsPlain = ({
             >
                 <span className={classes.errorContainer}>
                     <ul>
-                        {errorReports && errorReports.length ? errorReports.map((errorReport) => {
+                        {errorReports?.length ? errorReports.map((errorReport) => {
                             const href = getRecordHref?.(errorReport) ?? null;
                             return (
                                 <li
