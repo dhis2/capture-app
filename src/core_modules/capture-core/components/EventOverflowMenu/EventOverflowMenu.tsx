@@ -6,9 +6,8 @@ import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { useCanChangeCompletionStatus } from 'capture-core/hooks';
-import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { OverflowButton } from '../Buttons';
-import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
+import { removeEventChangelogQueries } from '../WidgetsChangelog';
 import { type ProgramStage } from '../../metaData';
 import {
     updateEnrollmentEvent,
@@ -74,7 +73,7 @@ export const EventOverflowMenu = ({
         // changes are not rendered today (no `status` item definition, so those rows are
         // discarded), but this sits with the mutation rather than in each host, so it stays correct
         // if they become displayable.
-        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId]);
+        removeEventChangelogQueries(queryClient, eventId);
         onStatusUpdated?.(newStatus);
     };
     const onStatusError = () => {
