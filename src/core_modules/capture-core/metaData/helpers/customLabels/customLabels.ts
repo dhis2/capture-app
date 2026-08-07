@@ -1,15 +1,3 @@
-// Owns the shape and lookup of program/stage/tracked-entity-type custom labels:
-//   - CUSTOM_LABEL_FIELDS is the single source of truth: for each DHIS2 term it
-//     names the API field to read (per singular/plural), the English word to
-//     look for in translated strings, and any aliases.
-//   - extractCustomLabels reads them off the API cache when domain objects are
-//     built (ProgramFactory / ProgramStageFactory / TrackedEntityTypeFactory).
-//   - resolveCustomLabel picks a label from those sources at substitution time
-//     (called by the postProcessor in applyCustomTerminology).
-// Previously also exported resolveLabel/getProgramLabel/useProgramLabel which
-// forced capitalization at every call site; that pattern is gone since the
-// postProcessor now handles case at the point of substitution.
-
 export type CustomLabelForm = {
     field: string,
     english: string,
@@ -40,18 +28,12 @@ export const CUSTOM_LABEL_FIELDS = {
         singular: { field: 'displayTrackedEntityAttributeLabel', english: 'attribute' },
     },
     programStage: {
-        singular: { field: 'displayProgramStageLabel', english: 'program stage', aliases: ['stage'] },
-        plural: { field: 'displayProgramStagesLabel', english: 'program stages', aliases: ['stages'] },
+        singular: { field: 'displayProgramStageLabel', english: 'program stage' },
+        plural: { field: 'displayProgramStagesLabel', english: 'program stages' },
     },
-    // API only exposes a singular custom label for orgUnit; we reuse it for the
-    // plural form so "organisation units" resolves to the same admin-set string.
     orgUnit: {
         singular: { field: 'displayOrgUnitLabel', english: 'organisation unit' },
         plural: { field: 'displayOrgUnitLabel', english: 'organisation units' },
-    },
-    trackedEntityType: {
-        singular: { field: 'displayTrackedEntityTypeLabel', english: 'tracked entity' },
-        plural: { field: 'displayTrackedEntityTypesLabel', english: 'tracked entities' },
     },
     followUp: {
         singular: { field: 'displayFollowUpLabel', english: 'follow-up' },
