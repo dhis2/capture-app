@@ -28,7 +28,7 @@ const TERM_ENTRIES: ReadonlyArray<TermEntry> = (
         (form.aliases ?? []).forEach(alias => out.push({ key, plural, english: alias }));
     };
     if (forms.plural) addForm(forms.plural, true);
-    addForm(forms.singular, false);
+    if (forms.singular) addForm(forms.singular, false);
     return out;
 }).sort((a, b) => b.english.length - a.english.length);
 
