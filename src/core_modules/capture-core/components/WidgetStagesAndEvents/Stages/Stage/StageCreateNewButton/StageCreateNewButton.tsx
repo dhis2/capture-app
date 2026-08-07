@@ -31,7 +31,7 @@ export const StageCreateNewButton = ({
         if (!repeatable && eventCount > 0) {
             return {
                 isDisabled: true,
-                tooltipContent: i18n.t('This stage can only have one event'),
+                tooltipContent: i18n.t('This program stage can only have one event'),
             };
         }
         return {

@@ -52,7 +52,7 @@ export const StagesPlain = ({
     if (!readableStages.length) {
         return (
             <p style={emptyStateStyle}>
-                {i18n.t('No stages found in this program')}
+                {i18n.t('No program stages found in this program')}
             </p>
         );
     }
