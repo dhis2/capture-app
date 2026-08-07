@@ -1,3 +1,10 @@
+## [106.7.7](https://github.com/dhis2/capture-app/compare/v106.7.6...v106.7.7) (2026-08-07)
+
+
+### Bug Fixes
+
+* [DHIS2-21855] limit concurrent api requests ([#4668](https://github.com/dhis2/capture-app/issues/4668)) ([61c63fd](https://github.com/dhis2/capture-app/commit/61c63fd41482c5d88d4cf2f5960574030b7bd20b))
+
 ## [106.7.6](https://github.com/dhis2/capture-app/compare/v106.7.5...v106.7.6) (2026-08-05)
 
 
