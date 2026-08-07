@@ -50,6 +50,7 @@ export const CUSTOM_LABEL_FIELDS = {
         plural: { field: 'displayOrgUnitLabel', english: 'organisation units' },
     },
     trackedEntityType: {
+        singular: { field: 'displayTrackedEntityTypeLabel', english: 'tracked entity' },
         plural: { field: 'displayTrackedEntityTypesLabel', english: 'tracked entities' },
     },
     followUp: {
