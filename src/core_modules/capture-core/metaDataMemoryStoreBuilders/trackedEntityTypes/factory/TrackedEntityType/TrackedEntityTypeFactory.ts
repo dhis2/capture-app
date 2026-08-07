@@ -1,8 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import {
-    TrackedEntityType,
-    extractCustomLabels,
-} from '../../../../metaData';
+import { TrackedEntityType } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
 import { TeiRegistrationFactory } from './TeiRegistrationFactory';
 import { SearchGroupFactory } from '../../../common/factory';
@@ -84,14 +81,9 @@ export class TrackedEntityTypeFactory {
         const trackedEntityType = new TrackedEntityType((o) => {
             o.id = cachedType.id;
             o.access = cachedType.access;
-            const name = this._getTranslation(
+            o.name = this._getTranslation(
                 cachedType.translations, TrackedEntityTypeFactory.translationPropertyNames.NAME)
                 || cachedType.displayName;
-            o.name = name;
-            o.customLabels = extractCustomLabels({
-                ...cachedType,
-                displayTrackedEntityTypeLabel: name,
-            });
         });
 
         if (cachedType.trackedEntityTypeAttributes) {

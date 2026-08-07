@@ -1,12 +1,11 @@
 import i18n from '@dhis2/d2-i18n';
-import { programCollection, trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
+import { programCollection } from '../../../metaDataMemoryStores';
 import { CUSTOM_LABEL_FIELDS, resolveCustomLabel } from './customLabels';
 import type { CustomLabelKey, CustomLabels, CustomLabelField } from './customLabels';
 
 export type TerminologyContext = {
     programId?: string,
     stageId?: string,
-    trackedEntityTypeId?: string,
 };
 
 type TermEntry = {
@@ -15,10 +14,6 @@ type TermEntry = {
     english: string,
 };
 
-// Derive the flat list of match candidates from CUSTOM_LABEL_FIELDS (single source
-// of truth). Includes each form's English word plus any aliases (e.g. "stage" for
-// programStage.singular). Sorted longest-first so multi-word forms are tried before
-// their sub-strings — the combined regex's alternation then respects that order.
 const TERM_ENTRIES: ReadonlyArray<TermEntry> = (
     Object.entries(CUSTOM_LABEL_FIELDS) as ReadonlyArray<[CustomLabelKey, CustomLabelField]>
 ).flatMap(([key, forms]) => {
@@ -58,34 +53,19 @@ const preserveCase = (match: string, replacement: string, locale: string): strin
 const getLabelSources = ({
     programId,
     stageId,
-    trackedEntityTypeId,
 }: TerminologyContext): Array<CustomLabels | undefined> => {
     const program = programId ? programCollection.get(programId) : undefined;
     const stage = program && stageId ? program.getStage(stageId) : undefined;
-    const tet = trackedEntityTypeId ? trackedEntityTypesCollection.get(trackedEntityTypeId) : undefined;
-    // Precedence: stage overrides program overrides TET.
-    return [stage?.customLabels, program?.customLabels, tet?.customLabels];
+    return [stage?.customLabels, program?.customLabels];
 };
 
-/**
- * Substitute DHIS2 terminology (enrollment, event, note, relationship, ...) in a
- * translated string with per-program custom labels when configured. Case in the
- * source string is preserved on the substituted term. Locale-aware via `i18n.language`.
- *
- * @example
- *   applyCustomTerminology(i18n.t('Write a note about this enrollment'), { programId })
- */
 export const applyCustomTerminology = (
     translatedText: string,
     context: TerminologyContext = {},
 ): string => {
-    // Defensive: t() can return non-string values (arrays/objects when
-    // returnObjects: true, undefined for missing keys with certain configs).
-    // Only strings go through the substitution pipeline; everything else is
-    // returned as-is so callers see the original i18next output unchanged.
     if (typeof translatedText !== 'string' || !translatedText) return translatedText;
-    const { programId, stageId, trackedEntityTypeId } = context;
-    if (!programId && !stageId && !trackedEntityTypeId) return translatedText;
+    const { programId, stageId } = context;
+    if (!programId && !stageId) return translatedText;
 
     const sources = getLabelSources(context);
     const locale = i18n.language || 'en';
