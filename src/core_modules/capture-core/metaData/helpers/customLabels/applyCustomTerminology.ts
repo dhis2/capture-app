@@ -32,10 +32,10 @@ const TERM_ENTRIES: ReadonlyArray<TermEntry> = (
     return out;
 }).sort((a, b) => b.english.length - a.english.length);
 
-const escapeRegExp = (input: string): string => input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRegExp = (input: string): string => input.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 
 const COMBINED_PATTERN = new RegExp(
-    `\\b(${TERM_ENTRIES.map(entry => escapeRegExp(entry.english)).join('|')})\\b`,
+    String.raw`\b(${TERM_ENTRIES.map(entry => escapeRegExp(entry.english)).join('|')})\b`,
     'gi',
 );
 
@@ -48,7 +48,8 @@ const preserveCase = (match: string, replacement: string, locale: string): strin
     if (match.length > 1 && match === match.toLocaleUpperCase(locale)) {
         return replacement.toLocaleUpperCase(locale);
     }
-    if (match[0] === match[0].toLocaleUpperCase(locale)) {
+    const firstUpper = match.charAt(0).toLocaleUpperCase(locale);
+    if (match.startsWith(firstUpper)) {
         return replacement.charAt(0).toLocaleUpperCase(locale) + replacement.slice(1);
     }
     return replacement;
