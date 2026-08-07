@@ -9,6 +9,7 @@ import { environments } from 'capture-core/constants/environments';
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
 import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/trackerOffline';
+import { bootstrapCustomTerminology } from 'capture-core/metaData/helpers/customLabels';
 import { getPersistOptions } from './persist/persistOptionsGetter';
 import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import { epics } from '../epics/trackerCapture.epics';
@@ -54,6 +55,8 @@ export async function getStore(
     );
 
     epicMiddleware.run(epics);
+
+    bootstrapCustomTerminology(store);
 
     return store;
 }
