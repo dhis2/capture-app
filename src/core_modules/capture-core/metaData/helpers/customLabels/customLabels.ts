@@ -17,7 +17,7 @@ export type CustomLabelForm = {
 };
 
 export type CustomLabelField = {
-    singular?: CustomLabelForm,
+    singular: CustomLabelForm,
     plural?: CustomLabelForm,
 };
 
@@ -32,12 +32,15 @@ export const CUSTOM_LABEL_FIELDS = {
     },
     note: {
         singular: { field: 'displayNoteLabel', english: 'note' },
+        plural: { field: 'displayNotesLabel', english: 'notes' },
     },
     relationship: {
         singular: { field: 'displayRelationshipLabel', english: 'relationship' },
+        plural: { field: 'displayRelationshipsLabel', english: 'relationships' },
     },
     attribute: {
         singular: { field: 'displayTrackedEntityAttributeLabel', english: 'attribute' },
+        plural: { field: 'displayTrackedEntityAttributesLabel', english: 'attributes' },
     },
     programStage: {
         singular: { field: 'displayProgramStageLabel', english: 'program stage', aliases: ['stage'] },
@@ -50,6 +53,7 @@ export const CUSTOM_LABEL_FIELDS = {
         plural: { field: 'displayOrgUnitLabel', english: 'organisation units' },
     },
     trackedEntityType: {
+        singular: { field: 'displayTrackedEntityTypeLabel', english: 'tracked entity' },
         plural: { field: 'displayTrackedEntityTypesLabel', english: 'tracked entities' },
     },
     followUp: {
@@ -64,7 +68,7 @@ export type LabelOptions = { plural?: boolean };
 const ALL_FIELDS: ReadonlyArray<string> = Array.from(
     new Set(
         Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: CustomLabelField) => [term.singular?.field, term.plural?.field])
+            .flatMap((term: CustomLabelField) => [term.singular.field, term.plural?.field])
             .filter((field): field is string => Boolean(field)),
     ),
 );
@@ -90,6 +94,5 @@ export const resolveCustomLabel = (
     const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
     const list = Array.isArray(sources) ? sources : [sources];
     const form = plural && term.plural ? term.plural : term.singular;
-    if (!form) return undefined;
     return list.find(source => source?.[form.field])?.[form.field];
 };
