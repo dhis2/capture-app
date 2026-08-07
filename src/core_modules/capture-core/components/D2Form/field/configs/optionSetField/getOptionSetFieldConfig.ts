@@ -54,5 +54,5 @@ export const getOptionSetFieldConfig = (metaData: DataElement, options: any, que
         component: mapInputTypeToComponent[inputType],
         props,
         commitEvent: inputType === inputTypes.DROPDOWN ? 'onBlur' : 'onSelect',
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

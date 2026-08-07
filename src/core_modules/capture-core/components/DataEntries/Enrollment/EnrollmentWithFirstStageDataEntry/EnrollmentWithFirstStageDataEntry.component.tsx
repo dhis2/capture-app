@@ -177,9 +177,7 @@ const getCompleteFieldSettingsFn = () => {
         isApplicable: (props: any) => props.firstStageMetaData && props.firstStageMetaData.stage?.stageForm,
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.eventLabel
-                ? i18n.t('Complete {{event}}', { event: props.eventLabel, interpolation: { escapeValue: false } })
-                : i18n.t('Complete event'),
+            label: i18n.t('Complete event'),
             id: 'complete',
         }),
         getPropName: () => stageMainDataIds.COMPLETE,

@@ -7,7 +7,7 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
-import { type RenderFoundation, useStageLabel } from '../../../metaData';
+import type { RenderFoundation } from '../../../metaData';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
     DataEntry,
@@ -162,23 +162,14 @@ const buildScheduleDateSettingsFn = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        customTooltip: (fieldProps: any) => {
+                        customTooltip: () => {
                             const isScheduleableStatus =
                             [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
-                            const event = fieldProps?.eventLabel ?? i18n.t('event');
-                            const events = fieldProps?.eventsLabel ?? i18n.t('events');
 
                             return isScheduleableStatus ?
-                                i18n.t('Go to “Schedule” tab to reschedule this {{event}}', {
-                                    event,
-                                    interpolation: { escapeValue: false },
-                                }) :
-                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} {{events}}',
-                                    {
-                                        eventStatus: translatedStatusTypes()[innerProps.eventStatus],
-                                        events,
-                                        interpolation: { escapeValue: false },
-                                    });
+                                i18n.t('Go to “Schedule” tab to reschedule this event') :
+                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
+                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
                         },
                     })(
                         withDisplayMessages()(
@@ -336,12 +327,8 @@ const buildCompleteFieldSettingsFn = () => {
                                     const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
                                     const canUncompleteEvent = props.canUncompleteEvent;
                                     const shouldDisable = isEventCompleted && !canUncompleteEvent;
-                                    const event = props?.eventLabel ?? i18n.t('event');
                                     return shouldDisable
-                                        ? i18n.t('You do not have access to uncomplete this {{event}}', {
-                                            event,
-                                            interpolation: { escapeValue: false },
-                                        })
+                                        ? i18n.t('You do not have access to uncomplete this event')
                                         : undefined;
                                 })(TrueOnlyField),
                             ),
@@ -359,14 +346,11 @@ const buildCompleteFieldSettingsFn = () => {
             const shouldDisable = isEventCompleted && !canUncompleteEvent;
 
             return createComponentProps(props, {
-                label: props.eventLabel
-                    ? i18n.t('Complete {{event}}', { event: props.eventLabel, interpolation: { escapeValue: false } })
-                    : i18n.t('Complete event'),
+                label: i18n.t('Complete event'),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,
                 canUncompleteEvent: props.canUncompleteEvent,
-                eventLabel: props.eventLabel,
             });
         },
         getPropName: () => 'complete',
@@ -607,11 +591,4 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     }
 }
 
-const StyledEditEventDataEntry = withStyles(getStyles)(EditEventDataEntryPlain) as
-    React.ComponentType<{ [key: string]: unknown }>;
-
-export const EditEventDataEntryComponent = (props: { [key: string]: unknown }) => {
-    const eventLabel = useStageLabel('event') ?? i18n.t('event');
-    const eventsLabel = useStageLabel('event', { plural: true }) ?? i18n.t('events');
-    return <StyledEditEventDataEntry {...props} eventLabel={eventLabel} eventsLabel={eventsLabel} />;
-};
+export const EditEventDataEntryComponent = withStyles(getStyles)(EditEventDataEntryPlain);

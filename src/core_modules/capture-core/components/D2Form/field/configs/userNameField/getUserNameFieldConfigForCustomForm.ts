@@ -14,5 +14,5 @@ export const getUserNameFieldConfigForCustomForm = (
     return createFieldConfig({
         component: UserNameFieldForCustomForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

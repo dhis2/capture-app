@@ -16,5 +16,5 @@ export const getTextRangeFieldConfig = (
     return createFieldConfig({
         component: TextRangeFieldForForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

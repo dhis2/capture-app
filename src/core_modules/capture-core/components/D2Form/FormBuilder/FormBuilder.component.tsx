@@ -307,8 +307,8 @@ export class FormBuilder extends React.Component<Props> {
         options?: FieldCommitOptions | null,
     ) {
         const { id: fieldId } = fieldMetadata;
-        const { querySingleResource, orgUnitLabel } = this.props as any;
-        const validators = getValidators(fieldMetadata, querySingleResource, { orgUnit: orgUnitLabel });
+        const { querySingleResource } = this.props;
+        const validators = getValidators(fieldMetadata, querySingleResource);
 
         this.commitFieldUpdate({ fieldId, validators }, value, oldValue, { ...options, plugin: true });
     }

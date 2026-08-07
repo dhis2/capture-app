@@ -4,7 +4,6 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Card } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
-import { useStageLabel } from '../../../../../metaData';
 import { listId } from './RecentlyAddedEventsList.const';
 import type { Props } from './RecentlyAddedEventsList.types';
 
@@ -19,10 +18,7 @@ const styles = (theme: any) => ({
 
 const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
     const { classes, ...passOnProps } = props;
-    const eventSingular = useStageLabel('event') ?? i18n.t('Event');
-    const eventPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     const eventsAdded = props.events ? Object.keys(props.events).length : 0;
-    const noEventsText = i18n.t('No {{eventLabel}} added', { eventLabel: eventPlural });
     if (eventsAdded === 0) {
         return null;
     }
@@ -31,15 +27,16 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             <div
                 className={classes.header}
             >
-                {i18n.t('{{count}} {{eventLabel}} added', {
+                {i18n.t('{{count}} event added', {
                     count: eventsAdded,
-                    eventLabel: eventsAdded === 1 ? eventSingular : eventPlural,
+                    defaultValue: '{{count}} event added',
+                    defaultValue_plural: '{{count}} events added',
                 })}
             </div>
             <OfflineEventsList
                 listId={listId}
-                noItemsText={noEventsText}
-                emptyListText={noEventsText}
+                noItemsText={i18n.t('No events added')}
+                emptyListText={i18n.t('No events added')}
                 {...passOnProps}
             />
         </Card>

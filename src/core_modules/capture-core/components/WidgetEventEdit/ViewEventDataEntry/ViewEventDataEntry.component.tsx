@@ -13,7 +13,7 @@ import {
     withBrowserBackWarning,
 } from '../../../components/DataEntry';
 
-import { type RenderFoundation, DataElement, dataElementTypes, useProgramLabel } from '../../../metaData';
+import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../converters';
 
 import {
@@ -223,9 +223,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.eventLabel
-                ? i18n.t('{{event}} completed', { event: props.eventLabel, interpolation: { escapeValue: false } })
-                : i18n.t('Event completed'),
+            label: i18n.t('Event completed'),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
@@ -292,7 +290,7 @@ type DataEntrySection = {
     name?: string;
 };
 
-const getDataEntrySectionDefinitions = ({ notesLabel }: { notesLabel: string }) => ({
+const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -303,13 +301,13 @@ const getDataEntrySectionDefinitions = ({ notesLabel }: { notesLabel: string }) 
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: notesLabel,
+        name: i18n.t('Notes'),
     },
     [AOCsectionKey]: {
         placement: placements.TOP,
         name: '',
     },
-});
+};
 
 class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
@@ -321,9 +319,7 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = getDataEntrySectionDefinitions({
-            notesLabel: (props as any).notesLabel,
-        });
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     render() {
@@ -346,12 +342,4 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     }
 }
 
-const StyledViewEventDataEntry = withStyles(getStyles)(
-    ViewEventDataEntryPlain as React.ComponentType<unknown>,
-) as React.ComponentType<{ [key: string]: unknown }>;
-
-export const ViewEventDataEntryComponent = (props: { [key: string]: unknown }) => {
-    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
-    const eventLabel = useProgramLabel('event') ?? i18n.t('Event');
-    return <StyledViewEventDataEntry {...props} notesLabel={notesLabel} eventLabel={eventLabel} />;
-};
+export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain as any);

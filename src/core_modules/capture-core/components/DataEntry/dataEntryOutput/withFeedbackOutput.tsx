@@ -6,7 +6,6 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
-import { useStageLabel } from '../../../metaData';
 
 type Props = {
     dataEntryKey?: string;
@@ -15,7 +14,6 @@ type Props = {
 
 const FeedbackOutputWrapper = (props: Props) => {
     const { dataEntryKey, programRules } = props;
-    const event = useStageLabel('event') ?? i18n.t('event');
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 
@@ -26,10 +24,7 @@ const FeedbackOutputWrapper = (props: Props) => {
     return (
         <WidgetFeedback
             dataEntryKey={dataEntryKey}
-            feedbackEmptyText={i18n.t('No feedback for this {{event}} yet', {
-                event,
-                interpolation: { escapeValue: false },
-            })}
+            feedbackEmptyText={i18n.t('No feedback for this event yet')}
         />
     );
 };

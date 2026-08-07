@@ -31,5 +31,5 @@ export const getDateFieldConfig = (metaData: DateDataElement, options: any, quer
     return createFieldConfig({
         component: DateFieldForForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

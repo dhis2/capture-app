@@ -18,5 +18,5 @@ export const getFileResourceFieldConfigForCustomForm = (
     return createFieldConfig({
         component: FileResourceFieldForCustomForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

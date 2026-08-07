@@ -3,10 +3,9 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { DirectionalChevron } from '../../../utils/rtl';
-import { useProgramLabel, useStageLabel } from '../../../metaData';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
-import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import {
     EnrollmentPageKeys,
@@ -75,9 +74,6 @@ const BreadcrumbsPlain = ({
         displayFrontPageList,
     });
 
-    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('Enrollment');
-    const event = useStageLabel('event', { programId }) ?? i18n.t('Event');
-
     const handleNavigation = useCallback((callback?: () => void, warningType?: WarningKey) => {
         if (userInteractionInProgress && warningType) {
             setOpenWarning(warningType);
@@ -105,14 +101,14 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.OVERVIEW,
             onClick: () => handleNavigation(onBackToDashboard, pageKeys.OVERVIEW),
-            label: i18n.t('{{enrollment}} dashboard', { enrollment }),
+            label: i18n.t('Enrollment dashboard'),
             selected: page === pageKeys.OVERVIEW,
             condition: true,
         },
         {
             key: pageKeys.VIEW_EVENT,
             onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
-            label: i18n.t('View {{event}}', { event }),
+            label: i18n.t('View event'),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT ||
                 (page === pageKeys.EDIT_EVENT && !eventIsScheduled(eventStatus)),
@@ -120,14 +116,14 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.EDIT_EVENT,
             onClick: () => undefined,
-            label: i18n.t('Edit {{event}}', { event }),
+            label: i18n.t('Edit event'),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.NEW_EVENT,
             onClick: () => undefined,
-            label: i18n.t('New {{event}}', { event }),
+            label: i18n.t('New event'),
             selected: page === pageKeys.NEW_EVENT,
             condition: page === pageKeys.NEW_EVENT,
         },
@@ -139,8 +135,6 @@ const BreadcrumbsPlain = ({
         onBackToMainPage,
         onBackToDashboard,
         onBackToViewEvent,
-        enrollment,
-        event,
     ]);
 
     return (
@@ -166,7 +160,7 @@ const BreadcrumbsPlain = ({
                     onBackToMainPage?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...getDiscardDialogProps({ event })}
+                {...defaultDialogProps}
             />
 
             <DiscardDialog
@@ -176,7 +170,7 @@ const BreadcrumbsPlain = ({
                     onBackToDashboard?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...getDiscardDialogProps({ event })}
+                {...defaultDialogProps}
             />
 
             <DiscardDialog
@@ -186,7 +180,7 @@ const BreadcrumbsPlain = ({
                     onBackToViewEvent?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...getDiscardDialogProps({ event })}
+                {...defaultDialogProps}
             />
         </div>
     );

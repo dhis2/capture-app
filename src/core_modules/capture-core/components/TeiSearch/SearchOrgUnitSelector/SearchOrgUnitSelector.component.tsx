@@ -65,12 +65,11 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
     }
     renderOrgUnitScopeSelector = () => {
-        const { selectedOrgUnitScope, orgUnitLabel } = this.props;
-        const orgUnit = orgUnitLabel ?? i18n.t('Organisation unit');
+        const { selectedOrgUnitScope } = this.props;
         return (
             <TeiSearchSelectionBoxes
                 options={options}
-                label={i18n.t('{{orgUnit}} scope', { orgUnit, interpolation: { escapeValue: false } })}
+                label={i18n.t('Organisation unit scope')}
                 styles={selectionBoxesStyles}
                 onSelect={this.onSelectOrgUnitScope}
                 value={selectedOrgUnitScope}
@@ -102,11 +101,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
 
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
-            const orgUnit = this.props.orgUnitLabel ?? i18n.t('organisation unit');
-            return i18n.t('Please select an {{orgUnit}}.', {
-                orgUnit,
-                interpolation: { escapeValue: false },
-            });
+            return i18n.t('Please select an organisation unit.');
         }
         return null;
     }
@@ -116,10 +111,10 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
     }
 
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, orgUnitLabel } = this.props;
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText } = this.props;
         return (
             <TeiSearchOrgUnitField
-                label={orgUnitLabel ?? i18n.t('Organisation unit')}
+                label={i18n.t('Organisation unit')}
                 styles={orgUnitFieldStyles}
                 searchText={treeSearchText}
                 roots={treeRoots}

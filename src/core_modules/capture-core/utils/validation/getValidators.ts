@@ -235,37 +235,22 @@ const validatorsForTypes = {
     }],
 };
 
-function buildTypeValidators(
-    metaData: DataElement | DateDataElement,
-    labels?: { orgUnit?: string },
-): Array<ValidatorContainer> {
+function buildTypeValidators(metaData: DataElement | DateDataElement): Array<ValidatorContainer> {
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 
-    const orgUnitMessage = labels?.orgUnit
-        ? i18n.t('Please provide a valid {{orgUnit}}', {
-            orgUnit: labels.orgUnit,
-            interpolation: { escapeValue: false },
-        })
-        : errorMessages.ORGANISATION_UNIT;
 
-    validatorContainersForType = validatorContainersForType.map((validatorContainer) => {
-        const message = metaData.type === dataElementTypes.ORGANISATION_UNIT
-            ? orgUnitMessage
-            : validatorContainer.message;
-        return {
-            ...validatorContainer,
-            message,
-            errorMessage: message,
-            validator: (value: any, internalComponentError?: { error: string | null; errorCode: string | null } | null) => {
-                if (!value && value !== 0 && value !== false) {
-                    return true;
-                }
+    validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
+        ...validatorContainer,
+        errorMessage: validatorContainer.message,
+        validator: (value: any, internalComponentError?: {error: string | null; errorCode: string | null} | null) => {
+            if (!value && value !== 0 && value !== false) {
+                return true;
+            }
 
-                const toValidateValue = isString(value) ? value.trim() : value;
-                return validatorContainer.validator(toValidateValue, internalComponentError);
-            },
-        };
-    });
+            const toValidateValue = isString(value) ? value.trim() : value;
+            return validatorContainer.validator(toValidateValue, internalComponentError);
+        },
+    }));
 
     return validatorContainersForType;
 }
@@ -332,10 +317,9 @@ function buildUniqueValidator(
 export const getValidators = (
     metaData: DataElement | DateDataElement,
     querySingleResource?: any,
-    labels?: { orgUnit?: string },
 ): Array<ValidatorContainer> => [
-    ...buildCompulsoryValidator(metaData),
-    ...buildTypeValidators(metaData, labels),
-    ...buildUniqueValidator(metaData, querySingleResource),
-    ...buildMinCharactersToSearchValidator(metaData),
-];
+    buildCompulsoryValidator,
+    buildTypeValidators,
+    buildUniqueValidator,
+    buildMinCharactersToSearchValidator,
+].flatMap(validatorBuilder => validatorBuilder(metaData, querySingleResource));

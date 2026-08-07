@@ -1,12 +1,10 @@
 import * as React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntryHasChanges';
-import { getDiscardDialogProps } from '../Dialogs/DiscardDialog.constants';
-import { useStageLabel } from '../../metaData';
+import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 type Props = {
     dataEntryHasChanges: boolean;
@@ -14,7 +12,6 @@ type Props = {
     location: any;
     match: any;
     staticContext: any;
-    eventLabel?: string;
 };
 
 type State = {
@@ -65,22 +62,14 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const {
-                dataEntryHasChanges,
-                history,
-                location,
-                match,
-                staticContext,
-                eventLabel,
-                ...passOnProps
-            } = this.props;
+            const { dataEntryHasChanges, history, location, match, staticContext, ...passOnProps } = this.props;
             return (
                 <React.Fragment>
                     <InnerComponent
                         {...passOnProps}
                     />
                     <DiscardDialog
-                        {...getDiscardDialogProps({ event: eventLabel })}
+                        {...defaultDialogProps}
                         onDestroy={this.handleDialogConfirm}
                         open={this.state.dialogOpen}
                         onCancel={this.handleDialogCancel}
@@ -101,13 +90,6 @@ const mapStateToProps = (state: any, props: { id: string }) => {
 
 const mapDispatchToProps = () => ({});
 
-const withEventLabel = (Component: React.ComponentType<any>) => (props: any) => {
-    const eventLabel = useStageLabel('event') ?? i18n.t('event');
-    return <Component {...props} eventLabel={eventLabel} />;
-};
-
 export const withBrowserBackWarning = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        withEventLabel(connect(mapStateToProps, mapDispatchToProps)(
-            withRouter(getEventListener(InnerComponent)),
-        ));
+        connect(mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(InnerComponent))) as any;

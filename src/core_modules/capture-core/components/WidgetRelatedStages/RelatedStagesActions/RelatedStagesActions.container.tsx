@@ -1,5 +1,4 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 import type { Props, ErrorMessagesForRelatedStages } from './RelatedStagesActions.types';
@@ -8,7 +7,6 @@ import { relatedStageStatus, relatedStageActions } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 import { useProgramExpiryForUser } from '../../../hooks';
-import { useProgramLabel, useStageLabel } from '../../../metaData';
 
 type RefHandle = {
     eventHasLinkableStageRelationship: () => boolean;
@@ -52,11 +50,6 @@ const RelatedStagesActionsPlain = ({
     });
     const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const orgUnitLabel = useProgramLabel('orgUnit', { programId }) ?? i18n.t('organisation unit');
-    const eventLabel = useStageLabel('event', {
-        programId,
-        stageId: constraint?.programStage?.id,
-    }) ?? i18n.t('event');
 
     useEffect(() => {
         if (!orgUnitLoading && (data as any)?.length === 1) {
@@ -91,10 +84,8 @@ const RelatedStagesActionsPlain = ({
             linkedEventId,
             expiryPeriod,
             setErrorMessages: addErrorMessage,
-            orgUnitLabel,
-            eventLabel,
         });
-    }, [relatedStageDataValues, expiryPeriod, orgUnitLabel, eventLabel]);
+    }, [relatedStageDataValues, expiryPeriod]);
 
     const getLinkedStageValues = () => ({
         linkMode: relatedStageDataValues.linkMode,

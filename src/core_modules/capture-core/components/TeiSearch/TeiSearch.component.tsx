@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { SearchGroup, useProgramLabel } from '../../metaData';
+import { SearchGroup } from '../../metaData';
 import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -105,10 +105,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
         const isUnique = sg.unique;
         const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
-            i18n.t('Search by {{attributes}}', {
-                attributes: (this.props as any).attributesLabel ?? i18n.t('attributes'),
-                interpolation: { escapeValue: false },
-            });
+            i18n.t('Search by attributes');
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (
@@ -178,10 +175,4 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     }
 }
 
-const StyledTeiSearch = withStyles(styles)(TeiSearchPlain) as
-    React.ComponentType<Props & { attributesLabel: string }>;
-
-export const TeiSearchComponent = (props: Props) => {
-    const attributesLabel = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');
-    return <StyledTeiSearch {...props} attributesLabel={attributesLabel} />;
-};
+export const TeiSearchComponent = withStyles(styles)(TeiSearchPlain);

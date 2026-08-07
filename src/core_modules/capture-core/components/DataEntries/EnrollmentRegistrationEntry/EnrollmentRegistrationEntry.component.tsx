@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useProgramLabel, useStageLabel } from '../../../metaData';
+import { scopeTypes } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
@@ -13,7 +13,7 @@ import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = () => ({
     actions: {
@@ -22,23 +22,14 @@ const styles = () => ({
     },
 });
 
-const TranslatedTextWithStylesForProgram = ({
-    trackedEntityName,
-    programName,
-    orgUnitName,
-    teiId,
-    programId,
-}: {
-    trackedEntityName: string;
-    programName: string;
-    orgUnitName: string;
-    teiId?: string;
-    programId?: string;
-}) => {
-    const enrollment = useProgramLabel('enrollment', { programId }) ?? i18n.t('enrollment');
-    return teiId ? <span>
-        {i18n.t('Saving a new {{enrollment}} in {{programName}} in {{orgUnitName}}.', {
-            enrollment,
+const translatedTextWithStylesForProgram = (
+    trackedEntityName: string,
+    programName: string,
+    orgUnitName: string,
+    teiId?: string,
+) => (
+    teiId ? <span>
+        {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
             programName,
             orgUnitName,
             interpolation: { escapeValue: false },
@@ -50,8 +41,7 @@ const TranslatedTextWithStylesForProgram = ({
             orgUnitName,
             interpolation: { escapeValue: false },
         })}
-    </span>;
-};
+    </span>);
 
 
 const EnrollmentRegistrationEntryPlain =
@@ -75,7 +65,6 @@ const EnrollmentRegistrationEntryPlain =
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
-      const eventLabel = useStageLabel('event', { programId: selectedScopeId }) ?? i18n.t('event');
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -129,18 +118,17 @@ const EnrollmentRegistrationEntryPlain =
                       </div>
 
                       <InfoIconText>
-                          <TranslatedTextWithStylesForProgram
-                              trackedEntityName={trackedEntityName.toLowerCase()}
-                              programName={programName}
-                              orgUnitName={orgUnit.name}
-                              teiId={teiId}
-                              programId={selectedScopeId}
-                          />
+                          {translatedTextWithStylesForProgram(
+                              trackedEntityName.toLowerCase(),
+                              programName,
+                              orgUnit.name,
+                              teiId,
+                          )}
                       </InfoIconText>
                   </>
               }
               <DiscardDialog
-                  {...getDiscardDialogProps({ event: eventLabel })}
+                  {...defaultDialogProps}
                   onDestroy={onCancel}
                   open={!!showWarning}
                   onCancel={() => { setShowWarning(false); }}

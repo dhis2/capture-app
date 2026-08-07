@@ -33,13 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import {
-    type Enrollment,
-    ProgramStage,
-    RenderFoundation,
-    getProgramThrowIfNotFound,
-    useProgramLabel,
-} from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -368,24 +362,18 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         inMemoryFileStore.clear();
     }
 
-    render() {
-        const {
-            enrollmentMetadata,
-            firstStageMetaData,
-            relatedStageActionsOptions,
-            enrollmentLabel,
-            ...passOnProps
-        } = this.props as any;
+    static dataEntrySectionDefinitions = {
+        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
+            placement: placements.TOP,
+            name: i18n.t('Enrollment'),
+        },
+        [AOCsectionKey]: {
+            placement: placements.BOTTOM,
+        },
+    };
 
-        const dataEntrySectionDefinitions = {
-            [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
-                placement: placements.TOP,
-                name: enrollmentLabel ?? i18n.t('Enrollment'),
-            },
-            [AOCsectionKey]: {
-                placement: placements.BOTTOM,
-            },
-        };
+    render() {
+        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, ...passOnProps } = this.props;
 
         return (
             firstStageMetaData ? (
@@ -397,7 +385,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             ) : (
                 <DataEntry
                     {...passOnProps}
-                    dataEntrySections={dataEntrySectionDefinitions}
+                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 />
             )
         );
@@ -438,7 +426,7 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
     }
 }
 
-class EnrollmentDataEntryClass extends React.Component<PreEnrollmentDataEntryProps> {
+export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
         const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
@@ -509,18 +497,3 @@ class EnrollmentDataEntryClass extends React.Component<PreEnrollmentDataEntryPro
         );
     }
 }
-
-const EnrollmentDataEntryWithLabels = EnrollmentDataEntryClass as unknown as
-    React.ComponentType<PreEnrollmentDataEntryProps & { enrollmentLabel: string; eventLabel: string }>;
-
-export const EnrollmentDataEntryComponent = (props: PreEnrollmentDataEntryProps) => {
-    const enrollmentLabel = useProgramLabel('enrollment', { programId: props.programId }) ?? i18n.t('Enrollment');
-    const eventLabel = useProgramLabel('event', { programId: props.programId }) ?? i18n.t('event');
-    return (
-        <EnrollmentDataEntryWithLabels
-            {...props}
-            enrollmentLabel={enrollmentLabel}
-            eventLabel={eventLabel}
-        />
-    );
-};

@@ -1,4 +1,4 @@
-import React, { Component, type ComponentType } from 'react';
+import React, { Component } from 'react';
 import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
@@ -13,7 +13,7 @@ import { withDataEntryRelationshipsHandler } from
     '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from './fieldValidators';
-import { type RenderFoundation, useProgramLabel } from '../../../../../metaData';
+import { type RenderFoundation } from '../../../../../metaData';
 import { withMainButton } from './withMainButton';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
@@ -213,13 +213,11 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: props.orgUnitLabel ?? i18n.t('Organisation unit'),
+            label: i18n.t('Organisation unit'),
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers({
-            orgUnit: props.orgUnitLabel,
-        }),
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -330,9 +328,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.eventLabel
-                ? i18n.t('Complete {{event}}', { event: props.eventLabel, interpolation: { escapeValue: false } })
-                : i18n.t('Complete event'),
+            label: i18n.t('Complete event'),
             id: 'complete',
         }),
         getPropName: () => 'complete',
@@ -406,16 +402,13 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.notesLabel ?? i18n.t('Notes'),
+            label: i18n.t('Notes'),
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
         }),
         getPropName: () => 'note',
-        getValidatorContainers: (props: any) => getNoteValidatorContainers({
-            note: props.noteLabel,
-            event: props.eventLabel,
-        }),
+        getValidatorContainers: () => getNoteValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.NOTES,
@@ -549,21 +542,12 @@ type Props = {
     recentlyAddedRelationshipId?: string | null,
     onScrollToRelationships: () => void;
 };
-
-type ExternalProps = { [key: string]: unknown };
-
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements],
     name?: string,
 };
 
-const getDataEntrySectionDefinitions = ({
-    notesLabel,
-    relationshipsLabel,
-}: {
-    notesLabel: string,
-    relationshipsLabel: string,
-}) => ({
+const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -577,17 +561,17 @@ const getDataEntrySectionDefinitions = ({
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: notesLabel,
+        name: i18n.t('Notes'),
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: relationshipsLabel,
+        name: i18n.t('Relationships'),
     },
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
-});
+};
 
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any };
@@ -597,10 +581,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
         this.fieldOptions = {
             theme: props.theme,
         };
-        this.dataEntrySections = getDataEntrySectionDefinitions({
-            notesLabel: (props as any).notesLabel,
-            relationshipsLabel: (props as any).relationshipsLabel,
-        });
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     componentDidMount() {
@@ -713,23 +694,4 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
 }
 
 
-const StyledDataEntry: ComponentType<{ [key: string]: unknown }> =
-    withStyles(getStyles)(withTheme()(NewEventDataEntry)) as ComponentType<{ [key: string]: unknown }>;
-
-export const DataEntryComponent = (props: ExternalProps) => {
-    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
-    const noteLabel = useProgramLabel('note') ?? i18n.t('note');
-    const relationshipsLabel = useProgramLabel('relationship', { plural: true }) ?? i18n.t('Relationships');
-    const eventLabel = useProgramLabel('event') ?? i18n.t('event');
-    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
-    return (
-        <StyledDataEntry
-            {...props}
-            notesLabel={notesLabel}
-            noteLabel={noteLabel}
-            relationshipsLabel={relationshipsLabel}
-            eventLabel={eventLabel}
-            orgUnitLabel={orgUnitLabel}
-        />
-    );
-};
+export const DataEntryComponent = withStyles(getStyles)(withTheme()(NewEventDataEntry));

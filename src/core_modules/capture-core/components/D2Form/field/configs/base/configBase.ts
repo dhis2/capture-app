@@ -23,12 +23,8 @@ export const commitEvents = {
     ON_BLUR: 'onBlur',
 };
 
-export const getBaseConfigForField = (
-    metaData: DataElement,
-    querySingleResource: QuerySingleResource,
-    options?: { orgUnitLabel?: string },
-) => ({
+export const getBaseConfigForField = (metaData: DataElement, querySingleResource: QuerySingleResource) => ({
     id: metaData.id,
-    validators: getValidators(metaData, querySingleResource, { orgUnit: options?.orgUnitLabel }),
+    validators: getValidators(metaData, querySingleResource),
     commitEvent: commitEvents.ON_BLUR,
 });

@@ -17,5 +17,5 @@ export const getPolygonFieldConfigForCustomForm = (
     return createFieldConfig({
         component: PolygonFieldForCustomForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

@@ -4,8 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, spacers } from '@dhis2/ui';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import type { PlainProps } from './ScheduleButtons.types';
-import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
-import { useStageLabel } from '../../../metaData';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = {
     container: {
@@ -20,7 +19,6 @@ type Props = PlainProps & WithStyles<typeof styles>;
 
 const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, validation }: Props) => {
     const [cancelDialogVisible, setCancelDialogVisible] = useState(false);
-    const eventLabel = useStageLabel('event') ?? i18n.t('event');
     const handleCancelClick = () => {
         if (hasChanges) { setCancelDialogVisible(true); } else { onCancel(); }
     };
@@ -43,7 +41,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, valid
             </Button>
         </div>
         <DiscardDialog
-            {...getDiscardDialogProps({ event: eventLabel })}
+            {...defaultDialogProps}
             onDestroy={onCancel}
             open={cancelDialogVisible}
             onCancel={() => { setCancelDialogVisible(false); }}

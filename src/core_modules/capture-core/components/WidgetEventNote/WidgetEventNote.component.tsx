@@ -6,13 +6,9 @@ import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useProgramLabel, useStageLabel } from '../../metaData';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-    const event = useStageLabel('event') ?? i18n.t('Event');
-    const noteLabel = useProgramLabel('note') ?? i18n.t('note');
-    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
     const {
@@ -28,21 +24,9 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={i18n.t('{{notes}} about this {{event}}', {
-                    notes: notesLabel,
-                    event,
-                    interpolation: { escapeValue: false },
-                })}
-                placeholder={i18n.t('Write a {{note}} about this {{event}}', {
-                    note: noteLabel,
-                    event,
-                    interpolation: { escapeValue: false },
-                })}
-                emptyNoteMessage={i18n.t('This {{event}} doesn\'t have any {{notes}}', {
-                    event,
-                    notes: notesLabel,
-                    interpolation: { escapeValue: false },
-                })}
+                title={i18n.t('Notes about this event')}
+                placeholder={i18n.t('Write a note about this event')}
+                emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}
                 badge={showWidgetBadge ? (

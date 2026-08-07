@@ -12,7 +12,6 @@ import log from 'loglevel';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import { useStageLabel } from '../../../../metaData';
 import type { Props } from './UnlinkAndDeleteModal.types';
 
 export const UnlinkAndDeleteModal = ({
@@ -25,12 +24,8 @@ export const UnlinkAndDeleteModal = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const event = useStageLabel('event') ?? i18n.t('Event');
     const { show: showErrorAlert } = useAlert(
-        i18n.t('An error occurred while unlinking and deleting the {{event}}.', {
-            event,
-            interpolation: { escapeValue: false },
-        }),
+        i18n.t('An error occurred while unlinking and deleting the event.'),
         { critical: true },
     );
 
@@ -66,21 +61,12 @@ export const UnlinkAndDeleteModal = ({
 
     return (
         <Modal dataTest="event-unlink-and-delete-modal">
-            <ModalTitle>{i18n.t('Unlink and delete linked {{event}}', {
-                event,
-                interpolation: { escapeValue: false },
-            })}</ModalTitle>
+            <ModalTitle>{i18n.t('Unlink and delete linked event')}</ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t('Are you sure you want to remove the link and delete the linked {{event}}?', {
-                        event,
-                        interpolation: { escapeValue: false },
-                    })}
+                    {i18n.t('Are you sure you want to remove the link and delete the linked event?')}
                     {' '}
-                    {i18n.t('This action permanently removes the link, linked {{event}}, and all related data.', {
-                        event,
-                        interpolation: { escapeValue: false },
-                    })}
+                    {i18n.t('This action permanently removes the link, linked event, and all related data.')}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -96,10 +82,7 @@ export const UnlinkAndDeleteModal = ({
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
                     >
-                        {i18n.t('Yes, unlink and delete linked {{event}}', {
-                            event,
-                            interpolation: { escapeValue: false },
-                        })}
+                        {i18n.t('Yes, unlink and delete linked event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

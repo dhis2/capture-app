@@ -14,7 +14,7 @@ import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
-import { scopeTypes, useProgramLabel, useTrackedEntityTypeLabel } from '../../metaData';
+import { scopeTypes } from '../../metaData';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -91,8 +91,6 @@ function renderFooterContent(args: {
     searchGroupsForSelectedScope: SearchGroups;
     availableSearchOption?: AvailableSearchOption;
     trackedEntityName: string;
-    trackedEntityTypeLabel: string;
-    attributesLabel: string;
 }) {
     if (args.isLoading) {
         return <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />;
@@ -116,14 +114,13 @@ function renderFooterContent(args: {
         footerNodes.push(
             <NoticeBox
                 warning
-                title={i18n.t('{{trackedEntityName}} has no searchable {{attributes}}', {
+                title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
                     trackedEntityName: capitalizeFirstLetter(args.trackedEntityName),
-                    attributes: args.attributesLabel,
                     interpolation: { escapeValue: false },
                 })}
             >
                 {/* eslint-disable-next-line max-len */}
-                {i18n.t('Try selecting a different {{trackedEntityType}}, or try searching in a program by choosing one from the top bar.', { trackedEntityType: args.trackedEntityTypeLabel })}
+                {i18n.t('Try selecting a different tracked entity type, or try searching in a program by choosing one from the top bar.')}
             </NoticeBox>,
         );
     }
@@ -148,8 +145,6 @@ const Index = ({
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
-    const trackedEntityTypeLabel = useTrackedEntityTypeLabel('trackedEntityType') ?? i18n.t('Tracked entity type');
-    const attributesLabel = useProgramLabel('attribute', { plural: true }) ?? i18n.t('attributes');
     const {
         searchOption: availableSearchOption,
         isLoading,
@@ -217,8 +212,6 @@ const Index = ({
                 searchGroupsForSelectedScope,
                 availableSearchOption,
                 trackedEntityName,
-                trackedEntityTypeLabel,
-                attributesLabel,
             })}
         </>
     );

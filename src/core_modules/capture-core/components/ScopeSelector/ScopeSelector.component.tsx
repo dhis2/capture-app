@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
-import { getDiscardDialogProps } from '../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 import type { Props, State } from './ScopeSelector.types';
 import { withLoadingIndicator } from '../../HOC';
-import { useStageLabel } from '../../metaData';
 
 const styles = {
     stickyTopBar: {
@@ -134,37 +132,32 @@ class ScopeSelectorClass extends Component<Props & WithStyles<typeof styles>, St
                     onDestroy={this.handleAcceptOrgUnit}
                     open={this.state.openOrgUnitWarning}
                     onCancel={this.handleClose}
-                    {...getDiscardDialogProps({ event: this.props.eventLabel })}
+                    {...defaultDialogProps}
                 />
                 <DiscardDialog
                     onDestroy={this.handleAcceptProgram}
                     open={!!this.state.openProgramWarning}
                     onCancel={this.handleClose}
-                    {...getDiscardDialogProps({ event: this.props.eventLabel })}
+                    {...defaultDialogProps}
                 />
                 <DiscardDialog
                     onDestroy={this.handleAcceptCatCombo}
                     open={this.state.openCatComboWarning}
                     onCancel={this.handleClose}
-                    {...getDiscardDialogProps({ event: this.props.eventLabel })}
+                    {...defaultDialogProps}
                 />
                 <DiscardDialog
                     onDestroy={this.handleAcceptStartAgain}
                     open={this.state.openStartAgainWarning}
                     onCancel={this.handleClose}
-                    {...getDiscardDialogProps({ event: this.props.eventLabel })}
+                    {...defaultDialogProps}
                 />
             </div>
         );
     }
 }
 
-const StyledScopeSelector = compose(
+export const ScopeSelectorComponent = compose(
     withLoadingIndicator(() => ({ height: '100px' })),
     withStyles(styles),
 )(ScopeSelectorClass) as any;
-
-export const ScopeSelectorComponent = (props: any) => {
-    const eventLabel = useStageLabel('event') ?? i18n.t('event');
-    return <StyledScopeSelector {...props} eventLabel={eventLabel} />;
-};

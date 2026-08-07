@@ -20,7 +20,7 @@ const StatusLabels = {
     SCHEDULE: i18n.t('Scheduled'),
 };
 
-const getDataEntryFieldsToInclude = ({ orgUnitLabel }: { orgUnitLabel: string }) => ({
+const DataEntryFieldsToInclude = {
     occurredAt: {
         apiKey: 'occurredAt',
         type: dataElementTypes.DATE,
@@ -35,7 +35,7 @@ const getDataEntryFieldsToInclude = ({ orgUnitLabel }: { orgUnitLabel: string })
         apiKey: 'orgUnit',
         type: dataElementTypes.ORGANISATION_UNIT,
         placement: Placements.TOP,
-        label: orgUnitLabel,
+        label: i18n.t('Organisation unit'),
         convertFn: (orgUnitId: string) => React.createElement(TooltipOrgUnit, { orgUnitId }),
     },
     status: {
@@ -45,14 +45,10 @@ const getDataEntryFieldsToInclude = ({ orgUnitLabel }: { orgUnitLabel: string })
         label: i18n.t('Status'),
         convertFn: (value: keyof typeof StatusLabels) => StatusLabels[value],
     },
-});
+};
 
-export const getDataEntryDetails = (
-    linkedEvent: LinkedEvent,
-    formFoundation: RenderFoundation,
-    { orgUnitLabel }: { orgUnitLabel: string },
-) => {
-    const dataEntryValues = Object.values(getDataEntryFieldsToInclude({ orgUnitLabel })).map((entry: any) => {
+export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation) => {
+    const dataEntryValues = Object.values(DataEntryFieldsToInclude).map((entry: any) => {
         const value = linkedEvent[entry.apiKey];
         if (!value) return null;
 

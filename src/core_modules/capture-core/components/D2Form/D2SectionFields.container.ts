@@ -1,9 +1,6 @@
-import React, { forwardRef } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import { D2SectionFieldsComponent } from './D2SectionFields.component';
 import { updateField } from './D2SectionFields.actions';
-import { useProgramLabel } from '../../metaData';
 import {
     makeGetSectionValues,
     makeGetHiddenFieldsValues,
@@ -46,14 +43,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return mergedProps;
 };
 
-const ConnectedD2SectionFields = connect(
+export const D2SectionFields = connect(
     makeMapStateToProps,
     mapDispatchToProps,
     mergeProps,
     { forwardRef: true },
 )(D2SectionFieldsComponent);
-
-export const D2SectionFields = forwardRef((props: any, ref) => {
-    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('organisation unit');
-    return React.createElement(ConnectedD2SectionFields, { ...props, ref, orgUnitLabel });
-});

@@ -5,7 +5,7 @@ import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { dataElementTypes, DataElement, OptionSet, Option, useProgramLabel } from '../../../../../../metaData';
+import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
@@ -33,17 +33,17 @@ const basedFieldTypes = [
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertNoteForView },
 ] as any;
-const getBaseColumnHeaders = (props: any) => [
+const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Assigned to'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: props.orgUnitLabel, sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: i18n.t('Organisation unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('scheduledAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: '', sortDirection: null, isPredefined: true },
 ];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
-const getBaseColumns = (props: any) => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
+const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
 
 const getAllFieldsWithValue = (
     eventId: string,
@@ -118,7 +118,6 @@ const useComputeHeaderColumn = (
     enableUserAssignment: boolean,
     formFoundation?: { getLabel: (key: string) => string },
 ) => {
-    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
@@ -132,13 +131,13 @@ const useComputeHeaderColumn = (
             return acc;
         }, [] as Array<{ id: string; header: string; type: keyof typeof dataElementTypes; sortDirection: string }>);
         return [
-            ...getBaseColumns({ formFoundation, orgUnitLabel })
+            ...getBaseColumns({ formFoundation })
                 .filter(col =>
                     (enableUserAssignment || col.id !== 'assignedUser') &&
                     (!hideDueDate || col.id !== 'scheduledAt'),
                 ),
             ...dataElementHeaders];
-    }, [dataElements, hideDueDate, enableUserAssignment, formFoundation, orgUnitLabel]);
+    }, [dataElements, hideDueDate, enableUserAssignment, formFoundation]);
 
     return headerColumns;
 };

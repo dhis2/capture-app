@@ -8,7 +8,7 @@ import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
 import { withLoadingIndicator } from '../../../HOC';
-import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps as dialogConfig } from '../../Dialogs/DiscardDialog.constants';
 import { getOpenDataEntryActions } from './DataEntryWrapper/DataEntry';
 import type { ContainerProps, StateProps, MapStateToProps } from './SingleEventRegistrationEntry.types';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -63,8 +63,5 @@ export const SingleEventRegistrationEntry: React.ComponentType<ContainerProps> =
         openSingleEventDataEntry,
         connect(makeMapStateToProps, mapDispatchToProps, mergeProps),
         withLoadingIndicator(),
-        withBrowserBackWarning(
-            ({ event }: { event: string }) => getDiscardDialogProps({ event }),
-            inEffect,
-        ),
+        withBrowserBackWarning(dialogConfig, inEffect),
     )(SingleEventRegistrationEntryComponent) as React.ComponentType<ContainerProps>;

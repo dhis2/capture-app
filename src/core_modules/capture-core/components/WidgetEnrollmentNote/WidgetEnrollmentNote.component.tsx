@@ -6,14 +6,10 @@ import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
-import { useProgramLabel } from '../../metaData';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
-    const enrollment = useProgramLabel('enrollment') ?? i18n.t('Enrollment');
-    const noteLabel = useProgramLabel('note') ?? i18n.t('note');
-    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
     const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
         enrollmentDomain?.enrollment?.notes ?? []);
     const {
@@ -29,21 +25,9 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={i18n.t('{{notes}} about this {{enrollment}}', {
-                    notes: notesLabel,
-                    enrollment,
-                    interpolation: { escapeValue: false },
-                })}
-                placeholder={i18n.t('Write a {{note}} about this {{enrollment}}', {
-                    note: noteLabel,
-                    enrollment,
-                    interpolation: { escapeValue: false },
-                })}
-                emptyNoteMessage={i18n.t('This {{enrollment}} doesn\'t have any {{notes}}', {
-                    enrollment,
-                    notes: notesLabel,
-                    interpolation: { escapeValue: false },
-                })}
+                title={i18n.t('Notes about this enrollment')}
+                placeholder={i18n.t('Write a note about this enrollment')}
+                emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 readOnly={!programWriteAccess}
                 badge={showWidgetBadge ? (

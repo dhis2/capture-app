@@ -3,10 +3,9 @@ import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { DirectionalChevron } from '../../../utils/rtl';
-import { useStageLabel } from '../../../metaData';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
-import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 
 export const pageKeys = {
@@ -44,7 +43,6 @@ const EventBreadcrumbPlain = ({
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<PageKeys | null>(null);
     const { label } = useWorkingListLabel({ programId });
-    const event = useStageLabel('event', { programId }) ?? i18n.t('Event');
 
     const handleNavigation = useCallback((callback?: () => void, warningType?: PageKeys) => {
         if (userInteractionInProgress && warningType) {
@@ -73,14 +71,14 @@ const EventBreadcrumbPlain = ({
         {
             key: pageKeys.VIEW_EVENT,
             onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
-            label: i18n.t('View {{event}}', { event }),
+            label: i18n.t('View event'),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT || page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.EDIT_EVENT,
             onClick: () => undefined,
-            label: i18n.t('Edit {{event}}', { event }),
+            label: i18n.t('Edit event'),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
@@ -90,7 +88,6 @@ const EventBreadcrumbPlain = ({
         onBackToViewEvent,
         onBackToMainPage,
         page,
-        event,
     ]);
 
     return (
@@ -116,7 +113,7 @@ const EventBreadcrumbPlain = ({
                     onBackToMainPage?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...getDiscardDialogProps({ event })}
+                {...defaultDialogProps}
             />
             <DiscardDialog
                 open={openWarning === pageKeys.VIEW_EVENT}
@@ -125,7 +122,7 @@ const EventBreadcrumbPlain = ({
                     onBackToViewEvent?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
-                {...getDiscardDialogProps({ event })}
+                {...defaultDialogProps}
             />
         </div>
     );

@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
 import { FlatList } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { type RenderFoundation, useProgramLabel } from '../../metaData';
+import type { RenderFoundation } from '../../metaData';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 
 type OwnProps = {
@@ -24,12 +23,10 @@ const styles: Readonly<any> = {
 };
 
 const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation, classes }: Props) => {
-    const orgUnitLabel = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
     const dataEntryValues = useMemo(() => getDataEntryDetails(
         linkedEvent,
         formFoundation,
-        { orgUnitLabel },
-    ), [linkedEvent, formFoundation, orgUnitLabel]);
+    ), [linkedEvent, formFoundation]);
 
     const listValues = useMemo(() => {
         const elements = formFoundation.getElements();

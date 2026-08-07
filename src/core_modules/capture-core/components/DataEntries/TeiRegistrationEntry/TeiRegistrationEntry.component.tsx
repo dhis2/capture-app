@@ -4,7 +4,7 @@ import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useProgramLabel, useStageLabel } from '../../../metaData';
+import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
@@ -14,27 +14,21 @@ import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { getDiscardDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
-const TranslatedTextWithStylesForTei = ({
-    trackedEntityName,
-    orgUnitName,
-    hideProgramSelectionMessage,
-}: {
-    trackedEntityName: string;
-    orgUnitName?: string;
-    hideProgramSelectionMessage?: boolean;
-}) => {
-    const enrollment = useProgramLabel('enrollment') ?? i18n.t('enrollment');
-    return (<>
+const translatedTextWithStylesForTei = (
+    trackedEntityName: string,
+    orgUnitName?: string,
+    hideProgramSelectionMessage?: boolean,
+) =>
+    (<>
         {i18n.t('Saving a {{trackedEntityName}}', {
             trackedEntityName, interpolation: { escapeValue: false } })
-        } <b>{i18n.t('without')}</b> {enrollment}
+        } <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
         {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
         {!hideProgramSelectionMessage && i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
-};
 
 const styles: Readonly<any> = {
     actions: {
@@ -62,7 +56,6 @@ const TeiRegistrationEntryPlain =
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
-      const eventLabel = useStageLabel('event') ?? i18n.t('event');
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
       const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
@@ -117,15 +110,13 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       </div>
                       <InfoIconText>
-                          <TranslatedTextWithStylesForTei
-                              trackedEntityName={trackedEntityName.toLowerCase()}
-                              orgUnitName={orgUnitName}
-                              hideProgramSelectionMessage={hideProgramSelectionMessage}
-                          />
+                          {translatedTextWithStylesForTei(
+                              trackedEntityName.toLowerCase(), orgUnitName, hideProgramSelectionMessage,
+                          )}
                       </InfoIconText>
 
                       <DiscardDialog
-                          {...getDiscardDialogProps({ event: eventLabel })}
+                          {...defaultDialogProps}
                           onDestroy={onCancel}
                           open={!!showWarning}
                           onCancel={() => { setShowWarning(false); }}

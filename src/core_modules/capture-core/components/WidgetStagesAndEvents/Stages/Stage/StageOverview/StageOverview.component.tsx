@@ -15,7 +15,7 @@ import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentO
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
-import { dataElementTypes, useStageLabel } from '../../../../../metaData';
+import { dataElementTypes } from '../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -92,17 +92,11 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
     return null;
 };
 
-const useEventLabels = () => ({
-    eventSingular: useStageLabel('event') ?? i18n.t('Event'),
-    eventPlural: useStageLabel('event', { plural: true }) ?? i18n.t('Events'),
-});
-
 export const StageOverviewPlain = ({
     title, icon, description, events, stageWriteAccess = true, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const { anyStageWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
-    const { eventSingular, eventPlural } = useEventLabels();
     const showStageBadge = showWidgetBadge && anyStageWriteAccess;
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
@@ -142,10 +136,10 @@ export const StageOverviewPlain = ({
             </div>
             <div className={classes.infoItems}>
                 <div className={classes.indicator}>
-                    {i18n.t('{{ count }} {{eventLabel}}', {
+                    {i18n.t('{{ count }} event', {
                         count: totalEvents,
-                        eventLabel: totalEvents === 1 ? eventSingular : eventPlural,
-                        interpolation: { escapeValue: false },
+                        defaultValue: '{{ count }} event',
+                        defaultValue_plural: '{{count}} events',
                     })}
                 </div>
                 {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>

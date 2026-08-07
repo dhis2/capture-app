@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
-import { getProgramAndStageForProgram, getProgramEventAccess, useStageLabel } from '../../../../metaData';
+import { getProgramAndStageForProgram, getProgramEventAccess } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
@@ -16,7 +16,7 @@ import {
 } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
-import { getDiscardDialogProps } from '../../../Dialogs/DiscardDialog.constants';
+import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
 const styles: Readonly<any> = () => ({
     innerWrapper: {
@@ -48,8 +48,6 @@ const NewEventWorkspacePlain = ({
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef<string | undefined>(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const event = useStageLabel('event', { programId, stageId }) ?? i18n.t('Event');
-    const programStageLabel = useStageLabel('programStage', { programId, stageId }) ?? i18n.t('Stage');
 
     const onHandleSwitchTab = (newMode: string) => {
         if (dataEntryHasChanges) {
@@ -71,9 +69,7 @@ const NewEventWorkspacePlain = ({
 
     if (!stage) {
         return renderWidget(
-            <div className={classes.errorWrapper}>
-                {i18n.t('{{programStage}} not found', { programStage: programStageLabel })}
-            </div>,
+            <div className={classes.errorWrapper}>{i18n.t('Stage not found')}</div>,
         );
     }
 
@@ -82,7 +78,7 @@ const NewEventWorkspacePlain = ({
         return renderWidget(
             <div className={classes.errorWrapper}>
                 <NoWriteAccessMessage
-                    message={i18n.t("You don't have access to create a new {{event}} in the current selections", { event })}
+                    message={i18n.t("You don't have access to create an event in the current selections")}
                 />
             </div>,
         );
@@ -151,7 +147,7 @@ const NewEventWorkspacePlain = ({
                 </div>,
             )}
             <DiscardDialog
-                {...getDiscardDialogProps({ event })}
+                {...defaultDialogProps}
                 onDestroy={() => { setMode(tempMode.current); setWarningVisible(false); }}
                 open={isWarningVisible}
                 onCancel={() => setWarningVisible(false)}

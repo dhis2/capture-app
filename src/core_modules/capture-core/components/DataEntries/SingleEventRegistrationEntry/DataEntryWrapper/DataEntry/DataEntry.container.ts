@@ -1,4 +1,3 @@
-import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -6,7 +5,6 @@ import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { DataEntryComponent } from './DataEntry.component';
-import { useProgramLabel } from '../../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
@@ -34,7 +32,8 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: any, props: any) => ({
         recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
         ready: !state.activePage.isDataEntryLoading,
-        error: !props.formFoundation ? props.formFoundationErrorText : null,
+        error: !props.formFoundation ?
+            i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
         programName: programNameSelector(state),
         orgUnit: state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit,
         orgUnitName: state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit?.name,
@@ -111,15 +110,6 @@ const mapDispatchToProps = (dispatch: any) => ({
         },
 });
 
-const ConnectedDataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
+export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
 );
-
-export const DataEntry = (props: { [key: string]: unknown }) => {
-    const event = useProgramLabel('event') ?? i18n.t('event');
-    const formFoundationErrorText = i18n.t(
-        'This is not an {{event}} program or the metadata is corrupt. See log for details.',
-        { event, interpolation: { escapeValue: false } },
-    );
-    return React.createElement(ConnectedDataEntry, { ...props, formFoundationErrorText });
-};

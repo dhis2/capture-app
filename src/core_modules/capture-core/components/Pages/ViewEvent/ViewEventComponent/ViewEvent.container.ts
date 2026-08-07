@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
@@ -8,7 +7,6 @@ import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventData
 import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
-import { useStageLabel } from '../../../../metaData';
 import {
     makeAssignedUserContextSelector,
     makeEventAccessSelector,
@@ -41,6 +39,8 @@ const makeMapStateToProps = () => {
             getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
             isEditEventPage: eventDetailsSection.showEditEvent,
+            feedbackEmptyText: i18n.t('No feedback for this event yet'),
+            indicatorEmptyText: i18n.t('No indicator output for this event yet'),
             programRules: programRulesSelector(state),
         };
     };
@@ -69,23 +69,8 @@ const mergeProps = (stateProps: any, dispatchProps: any, ownProps: any) => {
     return Object.assign({}, ownProps, stateProps, dispatchProps, mergedProps);
 };
 
-const ConnectedViewEvent = connect(
+export const ViewEvent = connect(
     makeMapStateToProps,
     mapDispatchToProps,
     mergeProps,
 )(withErrorMessageHandler()(ViewEventComponent));
-
-export const ViewEvent = (props: any) => {
-    const event = useStageLabel('event') ?? i18n.t('event');
-    return React.createElement(ConnectedViewEvent, {
-        ...props,
-        feedbackEmptyText: i18n.t('No feedback for this {{event}} yet', {
-            event,
-            interpolation: { escapeValue: false },
-        }),
-        indicatorEmptyText: i18n.t('No indicator output for this {{event}} yet', {
-            event,
-            interpolation: { escapeValue: false },
-        }),
-    });
-};

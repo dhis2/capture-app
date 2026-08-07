@@ -3,13 +3,13 @@ import log from 'loglevel';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { dataElementTypes, useStageLabel } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
 import { RELATIONSHIP_ENTITIES } from '../constants';
 import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
 import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '../Types';
 
-const getFallbackFieldsByRelationshipEntity = ({ programStageLabel }: { programStageLabel: string }) => ({
+const getFallbackFieldsByRelationshipEntity = {
     [RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE]: () => [{
         id: 'trackedEntityTypeName',
         displayName: i18n.t('Type'),
@@ -23,10 +23,7 @@ const getFallbackFieldsByRelationshipEntity = ({ programStageLabel }: { programS
     }],
     [RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE]: () => [{
         id: 'programStageName',
-        displayName: i18n.t('{{programStage}} name', {
-            programStage: programStageLabel,
-            interpolation: { escapeValue: false },
-        }),
+        displayName: i18n.t('Program stage name'),
         convertValue: (programStageName: any) => programStageName,
     },
     {
@@ -36,9 +33,9 @@ const getFallbackFieldsByRelationshipEntity = ({ programStageLabel }: { programS
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
         ),
     }],
-});
+};
 
-const getColumns = ({ relationshipEntity, trackerDataView }: any, { programStageLabel }: { programStageLabel: string }) => {
+const getColumns = ({ relationshipEntity, trackerDataView }: any) => {
     let fields;
     if (relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
         fields = trackerDataView.attributes;
@@ -47,7 +44,7 @@ const getColumns = ({ relationshipEntity, trackerDataView }: any, { programStage
     }
 
     if (!fields?.length) {
-        fields = getFallbackFieldsByRelationshipEntity({ programStageLabel })[relationshipEntity]();
+        fields = getFallbackFieldsByRelationshipEntity[relationshipEntity]();
     }
 
     return fields;
@@ -172,76 +169,73 @@ export const useGroupedLinkedEntities = (
     relationshipTypes: RelationshipTypes | null | undefined,
     relationships?: Array<InputRelationshipData>,
     readOnly?: boolean,
-): GroupedLinkedEntities => {
-    const programStageLabel = useStageLabel('programStage') ?? i18n.t('Program stage');
-    return useMemo(() => {
-        if (!relationships?.length || !relationshipTypes?.length) {
-            return [];
-        }
+): GroupedLinkedEntities => useMemo(() => {
+    if (!relationships?.length || !relationshipTypes?.length) {
+        return [];
+    }
 
-        return relationships
-            .sort((a, b) => moment(b.createdAt)
-                .diff(moment(a.createdAt)))
-            .reduce((accGroupedLinkedEntities, relationship) => {
-                const {
-                    relationship: relationshipId,
-                    relationshipType: relationshipTypeId,
-                    from: fromEntity,
-                    to: toEntity,
-                    pendingApiResponse,
-                    createdAt: relationshipCreatedAt,
-                } = relationship;
+    return relationships
+        .sort((a, b) => moment(b.createdAt)
+            .diff(moment(a.createdAt)))
+        .reduce((accGroupedLinkedEntities, relationship) => {
+            const {
+                relationship: relationshipId,
+                relationshipType: relationshipTypeId,
+                from: fromEntity,
+                to: toEntity,
+                pendingApiResponse,
+                createdAt: relationshipCreatedAt,
+            } = relationship;
 
-                const relationshipType = relationshipTypes.find(type => type.id === relationshipTypeId);
-                if (!relationshipType) {
-                    log.error(
-                        errorCreator('Could not find relationshipType')({ relationshipTypeId, relationshipTypes }),
-                    );
-                    return accGroupedLinkedEntities;
-                }
-
-                const apiLinkedEntity = determineLinkedEntity(fromEntity, toEntity, sourceId);
-                if (!apiLinkedEntity) {
-                    return accGroupedLinkedEntities;
-                }
-
-                if (!relationshipType.bidirectional && apiLinkedEntity === fromEntity) {
-                    return accGroupedLinkedEntities;
-                }
-
-                const linkedEntityData = getLinkedEntityData(
-                    apiLinkedEntity,
-                    { relationshipCreatedAt, relationshipId },
-                    pendingApiResponse);
-                if (!linkedEntityData) {
-                    return accGroupedLinkedEntities;
-                }
-
-                const groupId = `${relationshipTypeId}-${apiLinkedEntity === fromEntity ? 'from' : 'to'}`;
-                const group = accGroupedLinkedEntities.find(({ id }) => id === groupId);
-                if (group) {
-                    group.linkedEntities = [
-                        ...group.linkedEntities,
-                        linkedEntityData,
-                    ];
-                } else {
-                    const { constraint, name } = apiLinkedEntity === fromEntity ?
-                        { constraint: relationshipType.fromConstraint, name: relationshipType.toFromName } :
-                        { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
-
-                    const columns = getColumns(constraint, { programStageLabel });
-                    const context = getContext(constraint, relationshipType.access, readOnly);
-
-                    accGroupedLinkedEntities.push({
-                        id: groupId,
-                        name: name || relationshipType.displayName,
-                        linkedEntities: [linkedEntityData],
-                        columns,
-                        context,
-                    });
-                }
-
+            const relationshipType = relationshipTypes.find(type => type.id === relationshipTypeId);
+            if (!relationshipType) {
+                log.error(
+                    errorCreator('Could not find relationshipType')({ relationshipTypeId, relationshipTypes }),
+                );
                 return accGroupedLinkedEntities;
-            }, [] as any);
-    }, [relationships, relationshipTypes, sourceId, readOnly, programStageLabel]);
-};
+            }
+
+            const apiLinkedEntity = determineLinkedEntity(fromEntity, toEntity, sourceId);
+            if (!apiLinkedEntity) {
+                return accGroupedLinkedEntities;
+            }
+
+            if (!relationshipType.bidirectional && apiLinkedEntity === fromEntity) {
+                return accGroupedLinkedEntities;
+            }
+
+            const linkedEntityData = getLinkedEntityData(
+                apiLinkedEntity,
+                { relationshipCreatedAt, relationshipId },
+                pendingApiResponse);
+            if (!linkedEntityData) {
+                return accGroupedLinkedEntities;
+            }
+
+            const groupId = `${relationshipTypeId}-${apiLinkedEntity === fromEntity ? 'from' : 'to'}`;
+            const group = accGroupedLinkedEntities.find(({ id }) => id === groupId);
+            if (group) {
+                group.linkedEntities = [
+                    ...group.linkedEntities,
+                    linkedEntityData,
+                ];
+            } else {
+                const { constraint, name } = apiLinkedEntity === fromEntity ?
+                    { constraint: relationshipType.fromConstraint, name: relationshipType.toFromName } :
+                    { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
+
+                const columns = getColumns(constraint);
+                const context = getContext(constraint, relationshipType.access, readOnly);
+
+                accGroupedLinkedEntities.push({
+                    id: groupId,
+                    name: name || relationshipType.displayName,
+                    linkedEntities: [linkedEntityData],
+                    columns,
+                    context,
+                });
+            }
+
+            return accGroupedLinkedEntities;
+        }, [] as any);
+}, [relationships, relationshipTypes, sourceId, readOnly]);

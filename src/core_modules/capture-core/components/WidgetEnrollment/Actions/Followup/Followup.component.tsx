@@ -1,13 +1,10 @@
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { useProgramLabel } from '../../../../metaData';
 import type { Props } from './followup.types';
 
-export const Followup = ({ enrollment, onUpdate }: Props) => {
-    const followUp = useProgramLabel('followUp') ?? i18n.t('Follow-up');
-
-    return enrollment.followUp ? (
+export const Followup = ({ enrollment, onUpdate }: Props) =>
+    (enrollment.followUp ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-followup-remove"
@@ -18,10 +15,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) => {
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Remove mark for {{followUp}}', {
-                followUp,
-                interpolation: { escapeValue: false },
-            })}
+            label={i18n.t('Remove mark for follow-up')}
             suffix=""
         />
     ) : (
@@ -35,11 +29,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) => {
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Mark for {{followUp}}', {
-                followUp,
-                interpolation: { escapeValue: false },
-            })}
+            label={i18n.t('Mark for follow-up')}
             suffix=""
         />
-    );
-};
+    ));

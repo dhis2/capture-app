@@ -8,10 +8,11 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { useProgramLabel, useStageLabel } from '../../../../../metaData';
 import type { PlainProps } from './NotesSection.types';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
+
+const headerText = i18n.t('Notes');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -31,11 +32,11 @@ const getStyles = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles> & { headerText: string, emptyMessage: string };
+type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready, headerText } = this.props;
+        const { classes, notes, ready } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
@@ -49,7 +50,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly, emptyMessage } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -58,7 +59,7 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {emptyMessage}
+                        {i18n.t("This event doesn't have any notes")}
                     </div>
                 )}
                 {React.createElement(LoadingNotes as any, {
@@ -75,15 +76,4 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 }
 
-const StyledNotesSection: any = withStyles(getStyles)(NotesSectionPlain);
-
-export const NotesSectionComponent: ComponentType<PlainProps> = (props: PlainProps) => {
-    const notesLabel = useProgramLabel('note', { plural: true }) ?? i18n.t('Notes');
-    const event = useStageLabel('event') ?? i18n.t('Event');
-    const emptyMessage = i18n.t("This {{event}} doesn't have any {{notes}}", {
-        event,
-        notes: notesLabel,
-        interpolation: { escapeValue: false },
-    });
-    return <StyledNotesSection {...props} headerText={notesLabel} emptyMessage={emptyMessage} />;
-};
+export const NotesSectionComponent = withStyles(getStyles)(NotesSectionPlain) as ComponentType<PlainProps>;

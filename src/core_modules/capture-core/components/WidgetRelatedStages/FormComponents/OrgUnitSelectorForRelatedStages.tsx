@@ -9,7 +9,6 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
-import { useProgramLabel } from '../../../metaData';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
@@ -50,7 +49,6 @@ export const OrgUnitSelectorForRelatedStages = ({
     saveAttempted,
 }: Props) => {
     const [touched, setTouched] = useState(false);
-    const orgUnit = useProgramLabel('orgUnit') ?? i18n.t('Organisation unit');
 
     const handleSelect = (event: OrgUnitValue) => {
         setTouched(true);
@@ -66,7 +64,7 @@ export const OrgUnitSelectorForRelatedStages = ({
 
     return (
         <OrgUnitFieldForForm
-            label={orgUnit}
+            label={i18n.t('Organisation unit')}
             value={relatedStagesDataValues.orgUnit}
             required
             onSelectClick={handleSelect}

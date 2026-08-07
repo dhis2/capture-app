@@ -8,7 +8,6 @@ import {
 } from '../../FormFields/New';
 import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css';
 import { baseInputStyles } from '../FormComponents/commonProps';
-import { useStageLabel } from '../../../metaData';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
 const SingleSelectForForm = withDefaultFieldContainer()(
@@ -30,7 +29,6 @@ export const LinkToExisting = ({
     saveAttempted,
 }: LinkToExistingProps) => {
     const [touched, setTouched] = useState(false);
-    const event = useStageLabel('event') ?? i18n.t('Event');
 
     const handleChange = (value: string | null) => {
         setTouched(true);
@@ -44,14 +42,13 @@ export const LinkToExisting = ({
         setTouched(true);
     };
 
-    const options = linkableEvents.map(linkableEvent => ({
-        value: linkableEvent.id,
-        label: linkableEvent.label,
+    const options = linkableEvents.map(event => ({
+        value: event.id,
+        label: event.label,
     }));
 
-    const label = i18n.t('Choose a {{linkableStageLabel}} {{event}}', {
+    const label = i18n.t('Choose a {{linkableStageLabel}} event', {
         linkableStageLabel,
-        event,
     });
 
     const shouldShowError = (saveAttempted || touched);
@@ -64,7 +61,7 @@ export const LinkToExisting = ({
             onChange={handleChange}
             onBlur={handleBlur}
             options={options}
-            placeholder={i18n.t('Select {{event}}', { event })}
+            placeholder={i18n.t('Select an event')}
             clearable
             styles={baseInputStyles}
             errorMessage={shouldShowError ? errorMessages.linkedEventId : undefined}

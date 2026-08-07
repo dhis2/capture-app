@@ -4,7 +4,6 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
-import { useProgramLabel } from '../../../../metaData';
 
 const styles = {
     container: {
@@ -30,7 +29,6 @@ const NewTrackedEntityRelationshipPlain = ({
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
-    const relationship = useProgramLabel('relationship', { programId }) ?? i18n.t('Relationship');
 
     const closeAddWizard = useCallback(() => {
         setAddWizardVisible(false);
@@ -50,7 +48,7 @@ const NewTrackedEntityRelationshipPlain = ({
                     small
                     secondary
                 >
-                    {i18n.t('New {{relationship}}', { relationship })}
+                    {i18n.t('New Relationship')}
                 </Button>
             )}
 

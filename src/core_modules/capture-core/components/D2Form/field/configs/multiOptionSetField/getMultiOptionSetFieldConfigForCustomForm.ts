@@ -35,6 +35,5 @@ export const getMultiOptionSetFieldConfigForCustomForm = (
         },
         metaData,
         querySingleResource,
-        options,
     );
 };

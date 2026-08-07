@@ -1,44 +1,8 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import { type RenderFoundation, useStageLabel } from '../../metaData';
+import type { RenderFoundation } from '../../metaData';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
-
-const AskToCreateNewModal = ({
-    onCancel,
-    onConfirm,
-}: {
-    onCancel: () => void;
-    onConfirm: () => void;
-}) => {
-    const event = useStageLabel('event') ?? i18n.t('event');
-    return (
-        <Modal hide={false} dataTest="modal-ask-to-create-new">
-            <ModalTitle>
-                {i18n.t('Generate new {{event}}', { event, interpolation: { escapeValue: false } })}
-            </ModalTitle>
-            <ModalContent>
-                {i18n.t('Do you want to create another {{event}}?', {
-                    event,
-                    interpolation: { escapeValue: false },
-                })}
-            </ModalContent>
-            <ModalActions>
-                <ButtonStrip end>
-                    <Button onClick={onCancel} secondary>
-                        {i18n.t('No, cancel')}
-                    </Button>
-                    <Button onClick={onConfirm} primary>
-                        {i18n.t('Yes, create new {{event}}', {
-                            event,
-                            interpolation: { escapeValue: false },
-                        })}
-                    </Button>
-                </ButtonStrip>
-            </ModalActions>
-        </Modal>
-    );
-};
 
 type Props = {
     onCancelCreateNew: (itemId: string) => void;
@@ -89,16 +53,39 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             }
 
             return (
-                <AskToCreateNewModal
-                    onCancel={() => {
-                        this.props.onCancelCreateNew(this.props.itemId);
-                        this.setState({ isOpen: false });
-                    }}
-                    onConfirm={() => {
-                        this.props.onConfirmCreateNew(this.props.itemId);
-                        this.setState({ isOpen: false });
-                    }}
-                />
+                <Modal
+                    hide={!this.state.isOpen}
+                    dataTest="modal-ask-to-create-new"
+                >
+                    <ModalTitle>
+                        {i18n.t('Generate new event')}
+                    </ModalTitle>
+                    <ModalContent>
+                        {i18n.t('Do you want to create another event?')}
+                    </ModalContent>
+                    <ModalActions>
+                        <ButtonStrip end>
+                            <Button
+                                onClick={() => {
+                                    this.props.onCancelCreateNew(this.props.itemId);
+                                    this.setState({ isOpen: false });
+                                }}
+                                secondary
+                            >
+                                {i18n.t('No, cancel')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    this.props.onConfirmCreateNew(this.props.itemId);
+                                    this.setState({ isOpen: false });
+                                }}
+                                primary
+                            >
+                                {i18n.t('Yes, create new event')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
             );
         }
 

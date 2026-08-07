@@ -1,4 +1,3 @@
-import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
 import type { CachedProgramStageDataElement } from '../../../storageControllers';
@@ -98,7 +97,7 @@ const programTrackedEntityAttributeFields = [
     'allowFutureDate',
 ].join(',');
 
-const baseProgramStageFields = [
+const programStageFields = [
     'id',
     'access',
     'autoGenerateEvent',
@@ -118,6 +117,7 @@ const baseProgramStageFields = [
     'displayDueDateLabel',
     'displayProgramStageLabel',
     'displayEventLabel',
+    'displayEventsLabel',
     'formType',
     'featureType',
     'validationStrategy',
@@ -126,13 +126,9 @@ const baseProgramStageFields = [
     'dataEntryForm[id,htmlCode]',
     'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]]',
     `programStageDataElements[${programStageDataElementFields}]`,
-];
+].join(',');
 
-const pluralProgramStageFields = [
-    'displayEventsLabel',
-];
-
-const baseProgramFields = [
+const fieldsParam = [
     'id',
     'displayName',
     'displayShortName',
@@ -142,16 +138,16 @@ const baseProgramFields = [
     'displayIncidentDateLabel',
     'displayEnrollmentDateLabel',
     'displayEnrollmentLabel',
+    'displayEnrollmentsLabel',
     'displayFollowUpLabel',
     'displayOrgUnitLabel',
     'displayRelationshipLabel',
-    'displayRelationshipsLabel',
     'displayNoteLabel',
-    'displayNotesLabel',
     'displayTrackedEntityAttributeLabel',
-    'displayTrackedEntityAttributesLabel',
     'displayProgramStageLabel',
+    'displayProgramStagesLabel',
     'displayEventLabel',
+    'displayEventsLabel',
     'minAttributesRequiredToSearch',
     'useFirstStageDuringRegistration',
     'onlyEnrollOnce',
@@ -167,38 +163,16 @@ const baseProgramFields = [
     'access[data[read,write]]',
     'trackedEntityType[id]',
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]]',
+    `programStages[${programStageFields}]`,
     'programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes]',
     `programTrackedEntityAttributes[${programTrackedEntityAttributeFields}]`,
-];
-
-const pluralProgramFields = [
-    'displayEnrollmentsLabel',
-    'displayRelationshipsLabel',
-    'displayNotesLabel',
-    'displayTrackedEntityAttributesLabel',
-    'displayProgramStagesLabel',
-    'displayEventsLabel',
-];
-
-const buildFieldsParam = (includePluralLabels: boolean): string => {
-    const stageFields = includePluralLabels
-        ? [...baseProgramStageFields, ...pluralProgramStageFields]
-        : baseProgramStageFields;
-    const programFields = includePluralLabels
-        ? [...baseProgramFields, ...pluralProgramFields]
-        : baseProgramFields;
-    return [
-        ...programFields,
-        `programStages[${stageFields.join(',')}]`,
-    ].join(',');
-};
+].join(',');
 
 export const storePrograms = (programIds: Array<string>) => {
-    const includePluralLabels = featureAvailable(FEATURES.customTerminologyPlurals);
     const query = {
         resource: 'programs',
         params: {
-            fields: buildFieldsParam(includePluralLabels),
+            fields: fieldsParam,
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,
         },

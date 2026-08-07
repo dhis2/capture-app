@@ -4,11 +4,8 @@ import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, Not
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
 import type { ErrorReport } from '../../processErrorReports';
-import { useProgramLabel, useStageLabel } from '../../../../../metaData';
 
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
-    const enrollments = useProgramLabel('enrollment', { plural: true }) ?? i18n.t('Enrollments');
-    const events = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
     const [errorReports, setErrorReports] = useState<Array<ErrorReport>>([]);
     const handleErrors = (errors: Array<ErrorReport>) => {
         setErrorReports(errors);
@@ -26,11 +23,9 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
             <ModalContent>
                 <p>
                     {/* eslint-disable-next-line max-len */}
-                    {i18n.t('Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated {{enrollments}} and {{events}} in all programs.',
+                    {i18n.t('Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated enrollments and events in all programs.',
                         {
                             trackedEntityTypeName,
-                            enrollments,
-                            events,
                             interpolation: { escapeValue: false },
                         },
                     )}

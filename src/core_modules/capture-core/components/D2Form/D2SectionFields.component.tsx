@@ -116,7 +116,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
                     formHorizontal: props.formHorizontal,
                     formId: props.formId,
                     viewMode: props.viewMode,
-                    orgUnitLabel: (props as any).orgUnitLabel,
                     ...fieldOptions,
                 },
                 !!customForm,

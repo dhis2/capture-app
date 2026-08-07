@@ -14,5 +14,5 @@ export const getOrgUnitFieldConfigForCustomForm = (
     return createFieldConfig({
         component: OrgUnitFieldForCustomForm,
         props,
-    }, metaData, querySingleResource, options);
+    }, metaData, querySingleResource);
 };

@@ -14,7 +14,6 @@ import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
-import { useProgramLabel, useStageLabel } from '../../metaData';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -58,11 +57,6 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const event = useStageLabel('event', { stageId, programId }) ?? i18n.t('Event');
-    const eventCapitalized = useStageLabel('event', { stageId, programId }) ?? i18n.t('Event');
-    const noteLabel = useProgramLabel('note', { programId }) ?? i18n.t('note');
-    const notesLabel = useProgramLabel('note', { plural: true, programId }) ?? i18n.t('notes');
-
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -127,24 +121,12 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={i18n.t('{{event}} {{notes}}', {
-                        event: eventCapitalized,
-                        notes: notesLabel,
-                        interpolation: { escapeValue: false },
-                    })}
+                    sectionName={i18n.t('Event notes')}
                 >
                     <NoteSection
                         notes={notes}
-                        placeholder={i18n.t('Write a {{note}} about this scheduled {{event}}', {
-                            note: noteLabel,
-                            event,
-                            interpolation: { escapeValue: false },
-                        })}
-                        emptyNoteMessage={i18n.t('This {{event}} doesn\'t have any {{notes}}', {
-                            event,
-                            notes: notesLabel,
-                            interpolation: { escapeValue: false },
-                        })}
+                        placeholder={i18n.t('Write a note about this scheduled event')}
+                        emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                         handleAddNote={onAddNote}
                     />
                 </DataSection>

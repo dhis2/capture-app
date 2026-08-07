@@ -5,7 +5,6 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { useProgramLabel } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -25,7 +24,6 @@ export const useBulkCompleteEvents = ({
     programId,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventsLabel = useProgramLabel('event', { plural: true, programId }) ?? i18n.t('Events');
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -83,7 +81,7 @@ export const useBulkCompleteEvents = ({
         }),
         {
             onError: () => {
-                showAlert({ message: i18n.t('An error occurred while completing {{events}}', { events: eventsLabel }) });
+                showAlert({ message: i18n.t('An error occurred while completing events') });
             },
             onSuccess: (response, { payload }: any) => {
                 const errorReports = response?.validationReport?.errorReports;

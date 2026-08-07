@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Button, IconAdd16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
-import { useStageLabel } from '../../../../../metaData';
 
 type Props = {
     onCreateNew: () => void;
@@ -19,16 +18,12 @@ export const StageCreateNewButton = ({
     preventAddingEventActionInEffect,
     eventName,
 }: Props) => {
-    const event = useStageLabel('event') ?? i18n.t('Event');
-    const eventsPlural = useStageLabel('event', { plural: true }) ?? i18n.t('Events');
-    const stageLabel = useStageLabel('programStage') ?? i18n.t('Stage');
     const { isDisabled, tooltipContent } = useMemo(() => {
         if (preventAddingEventActionInEffect) {
             return {
                 isDisabled: true,
-                tooltipContent: i18n.t("You can't add any more {{ programStageName }} {{events}}", {
+                tooltipContent: i18n.t("You can't add any more {{ programStageName }} events", {
                     programStageName: eventName,
-                    events: eventsPlural,
                     interpolation: { escapeValue: false },
                 }),
             };
@@ -36,18 +31,14 @@ export const StageCreateNewButton = ({
         if (!repeatable && eventCount > 0) {
             return {
                 isDisabled: true,
-                tooltipContent: i18n.t('This {{stage}} can only have one {{event}}', {
-                    stage: stageLabel,
-                    event,
-                    interpolation: { escapeValue: false },
-                }),
+                tooltipContent: i18n.t('This stage can only have one event'),
             };
         }
         return {
             isDisabled: false,
             tooltipContent: '',
         };
-    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable, event, eventsPlural, stageLabel]);
+    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable]);
 
     return (
         <ConditionalTooltip
@@ -63,8 +54,8 @@ export const StageCreateNewButton = ({
                 dataTest={'create-new-button'}
                 disabled={isDisabled}
             >
-                {i18n.t('New {{ eventName }} {{event}}', {
-                    eventName, event, interpolation: { escapeValue: false },
+                {i18n.t('New {{ eventName }} event', {
+                    eventName, interpolation: { escapeValue: false },
                 })}
             </Button>
         </ConditionalTooltip>
