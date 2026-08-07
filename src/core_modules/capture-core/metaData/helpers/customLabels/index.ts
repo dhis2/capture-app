@@ -1,10 +1,8 @@
 export {
     CUSTOM_LABEL_FIELDS,
-    resolveLabel,
+    resolveCustomLabel,
     extractCustomLabels,
-    getProgramLabel,
-    getStageLabel,
-    getTrackedEntityTypeLabel,
 } from './customLabels';
 export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels';
-export { useProgramLabel, useStageLabel, useTrackedEntityTypeLabel } from './useLabel';
+export { applyCustomTerminology } from './applyCustomTerminology';
+export { bootstrapCustomTerminology } from './bootstrapCustomTerminology';
