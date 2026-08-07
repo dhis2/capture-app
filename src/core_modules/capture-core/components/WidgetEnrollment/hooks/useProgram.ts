@@ -18,7 +18,8 @@ const baseFields = [
 ];
 
 const pluralFields = [
-    'displayEnrollmentsLabel,displayProgramStagesLabel,displayEventsLabel',
+    'displayEnrollmentsLabel,displayRelationshipsLabel,displayNotesLabel,' +
+    'displayTrackedEntityAttributesLabel,displayProgramStagesLabel,displayEventsLabel',
 ];
 
 export const useProgram = (programId: string) => {
