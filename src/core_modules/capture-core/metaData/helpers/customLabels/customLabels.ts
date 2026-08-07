@@ -17,7 +17,7 @@ export type CustomLabelForm = {
 };
 
 export type CustomLabelField = {
-    singular?: CustomLabelForm,
+    singular: CustomLabelForm,
     plural?: CustomLabelForm,
 };
 
@@ -65,7 +65,7 @@ export type LabelOptions = { plural?: boolean };
 const ALL_FIELDS: ReadonlyArray<string> = Array.from(
     new Set(
         Object.values(CUSTOM_LABEL_FIELDS)
-            .flatMap((term: CustomLabelField) => [term.singular?.field, term.plural?.field])
+            .flatMap((term: CustomLabelField) => [term.singular.field, term.plural?.field])
             .filter((field): field is string => Boolean(field)),
     ),
 );
