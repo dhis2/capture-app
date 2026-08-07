@@ -41,13 +41,9 @@ export {
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
     CUSTOM_LABEL_FIELDS,
-    resolveLabel,
+    resolveCustomLabel,
     extractCustomLabels,
-    getProgramLabel,
-    getStageLabel,
-    getTrackedEntityTypeLabel,
-    useProgramLabel,
-    useStageLabel,
-    useTrackedEntityTypeLabel,
+    applyCustomTerminology,
+    bootstrapCustomTerminology,
 } from './helpers';
 export type { CustomLabelKey, CustomLabels, LabelOptions } from './helpers';
