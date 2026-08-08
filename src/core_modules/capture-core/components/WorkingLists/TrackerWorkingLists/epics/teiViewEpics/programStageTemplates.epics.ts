@@ -15,6 +15,7 @@ import {
     updateTemplateSuccess,
     workingListsCommonActionTypes,
     workingListsCommonActionTypesBatchActionTypes,
+    toJsonPatchReplaceOps,
 } from '../../../WorkingListsCommon';
 import { TRACKER_WORKING_LISTS_TYPE } from '../../constants';
 import { getLocationQuery } from '../../../../../utils/routing';
@@ -172,9 +173,7 @@ export const updateProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
         ),
         concatMap((action) => {
             const {
-                template: { id, name, externalAccess, publicAccess, user, userGroupAccesses, userAccesses },
-                program,
-                programStage,
+                template: { id, name },
                 storeId,
                 criteria,
             } = action.payload;
@@ -194,37 +193,28 @@ export const updateProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
                 scheduledAt,
             } = criteria;
 
-            const programStageWorkingLists = {
-                name,
-                program,
-                programStage,
-                externalAccess,
-                publicAccess,
-                user,
-                userGroupAccesses,
-                userAccesses,
-                programStageQueryCriteria: {
-                    displayColumnOrder,
-                    order,
-                    enrolledAt,
-                    eventStatus: status,
-                    ...(assignedUserMode && { assignedUserMode }),
-                    ...(assignedUsers?.length > 0 && { assignedUsers }),
-                    ...(programStatus && { enrollmentStatus: programStatus }),
-                    ...(occurredAt && { enrollmentOccurredAt: occurredAt }),
-                    ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
-                    ...(eventOccurredAt && { eventOccurredAt }),
-                    ...(scheduledAt && { eventScheduledAt: scheduledAt }),
-                    attributeValueFilters,
-                    dataFilters,
-                },
+            const programStageQueryCriteria = {
+                displayColumnOrder,
+                order,
+                enrolledAt,
+                eventStatus: status,
+                ...(assignedUserMode && { assignedUserMode }),
+                ...(assignedUsers?.length > 0 && { assignedUsers }),
+                ...(programStatus && { enrollmentStatus: programStatus }),
+                ...(occurredAt && { enrollmentOccurredAt: occurredAt }),
+                ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
+                ...(eventOccurredAt && { eventOccurredAt }),
+                ...(scheduledAt && { eventScheduledAt: scheduledAt }),
+                attributeValueFilters,
+                dataFilters,
             };
+            const programStageWorkingListPatch = toJsonPatchReplaceOps({ name, programStageQueryCriteria });
 
             const requestPromise = mutate({
                 resource: 'programStageWorkingLists',
                 id,
-                type: 'replace',
-                data: programStageWorkingLists,
+                type: 'json-patch',
+                data: programStageWorkingListPatch,
             })
                 .then(() => {
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === id;
@@ -237,7 +227,7 @@ export const updateProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
                     log.error(
                         errorCreator('could not update template')({
                             error,
-                            programStageWorkingLists,
+                            programStageWorkingListPatch,
                         }),
                     );
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === id;
