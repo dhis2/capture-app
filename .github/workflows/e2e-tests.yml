@@ -27,8 +27,8 @@ on:
 
 env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
-    NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
-    NAME_PATTERN_DEV_INSTANCE: ca-test-dev
+    NAME_PATTERN_LEGACY_INSTANCES: tracker-{version}
+    NAME_PATTERN_DEV_INSTANCE: tracker-dev
     CYPRESS_CONTAINERS: 5
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -99,7 +99,7 @@ jobs:
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}"
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/${version#*.}}"
               env:
                   version: ${{ matrix.versions }}
 

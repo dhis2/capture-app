@@ -27,6 +27,11 @@ const getExpiredMessage = (): string => i18n.t('This event is outside the editin
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 
+const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
+    ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
+    : i18n.t('This tracked entity is deactivated'));
+
+// eslint-disable-next-line complexity
 const getReadOnlyMessage = ({
     access,
     trackedEntityName,
@@ -34,7 +39,9 @@ const getReadOnlyMessage = ({
     eventWithinValidPeriod,
     canEditCompletedEvent,
     withinCompleteEventsExpiry,
+    trackedEntityInactive,
 }: ReadOnlyMessageInput): string => {
+    if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
     if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
@@ -54,6 +61,7 @@ const ReadOnlyBadgePlain = ({
     withinCompleteEventsExpiry = true,
     multipleStages = false,
     trackedEntityName,
+    trackedEntityInactive = false,
     inlineLabel = false,
     classes,
 }: Props & WithStyles<typeof styles>) => {
@@ -69,6 +77,7 @@ const ReadOnlyBadgePlain = ({
         eventWithinValidPeriod,
         canEditCompletedEvent,
         withinCompleteEventsExpiry,
+        trackedEntityInactive,
     });
     if (!message) return null;
 
