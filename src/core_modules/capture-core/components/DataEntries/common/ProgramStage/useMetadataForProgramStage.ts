@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useConfig } from '@dhis2/app-runtime';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
 import { useDataEntryFormConfig, useOptionSetsForAttributes } from '../TEIAndEnrollment';
@@ -14,7 +13,6 @@ function isProgramStageMetadataQueryEnabled({
     dataElements,
     optionSets,
     locale,
-    minor,
     configIsFetched,
 }: {
     program: unknown;
@@ -22,7 +20,6 @@ function isProgramStageMetadataQueryEnabled({
     dataElements: unknown;
     optionSets: unknown;
     locale: unknown;
-    minor: number | undefined;
     configIsFetched: boolean;
 }): boolean {
     return [
@@ -31,7 +28,6 @@ function isProgramStageMetadataQueryEnabled({
         dataElements,
         optionSets,
         locale,
-        minor,
         configIsFetched,
     ].every(Boolean);
 }
@@ -43,8 +39,6 @@ export const useMetadataForProgramStage = ({
     const scopeId = stageId || programId;
     const { program } = useProgramFromIndexedDB(programId, { enabled: !!programId });
     const locale = CurrentUser.get().uiLocale;
-    const { serverVersion } = useConfig();
-    const minor = serverVersion?.minor;
     const {
         dataEntryFormConfig,
         configIsFetched,
@@ -86,7 +80,6 @@ export const useMetadataForProgramStage = ({
             programId,
             cachedOptionSets: optionSets,
             locale,
-            minorServerVersion: minor || 0,
             dataEntryFormConfig,
         }),
         {
@@ -98,7 +91,6 @@ export const useMetadataForProgramStage = ({
                 dataElements,
                 optionSets,
                 locale,
-                minor,
                 configIsFetched,
             }),
         },

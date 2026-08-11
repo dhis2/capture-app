@@ -14,7 +14,6 @@ export type ConstructorInput = {
     cachedRelationshipTypes: Array<CachedRelationshipType>,
     dataEntryFormConfig?: DataEntryFormConfig | null,
     locale: string | null,
-    minorServerVersion: number,
 };
 
 export type SectionSpecs = {
