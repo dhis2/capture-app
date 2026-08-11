@@ -47,7 +47,6 @@ export class ProgramStageFactory {
         cachedRelationshipTypes,
         cachedDataElements,
         locale,
-        minorServerVersion,
         dataEntryFormConfig,
     }: ConstructorInput) {
         this.cachedOptionSets = cachedOptionSets;
@@ -59,7 +58,6 @@ export class ProgramStageFactory {
         this.dataElementFactory = new DataElementFactory(
             cachedOptionSets,
             locale,
-            minorServerVersion,
         );
         this.dataEntryFormConfig = dataEntryFormConfig;
     }

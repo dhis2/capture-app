@@ -1,5 +1,4 @@
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertToClientTeis } from './convertToClientTeis';
 import {
     getSubvalues,
@@ -27,27 +26,17 @@ export const createApiQueryArgs = ({
 }: RawQueryArgs,
 columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
 filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
-): { [key: string]: any } => {
-    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-        ? 'orgUnitMode'
-        : 'ouMode';
-
-    const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-        ? 'orgUnits'
-        : 'orgUnit';
-
-    return {
-        ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-        ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-        order: getOrderQueryArgs({ sortById, sortByDirection, withAPINameConverter: true }),
-        page,
-        pageSize,
-        [orgUnitQueryParam]: orgUnitId,
-        [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
-        program,
-        fields: LISTING_FIELDS,
-    };
-};
+): { [key: string]: any } => ({
+    ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
+    ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
+    order: getOrderQueryArgs({ sortById, sortByDirection, withAPINameConverter: true }),
+    page,
+    pageSize,
+    orgUnits: orgUnitId,
+    orgUnitMode: orgUnitId ? 'SELECTED' : 'CAPTURE',
+    program,
+    fields: LISTING_FIELDS,
+});
 
 export const getTeiListData = async (
     rawQueryArgs: RawQueryArgs, {
