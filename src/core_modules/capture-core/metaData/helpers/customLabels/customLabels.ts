@@ -44,5 +44,8 @@ export const resolveLabel = (
     const term = CUSTOM_LABEL_FIELDS[key] as CustomLabelField;
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(s => s?.[field])?.[field] : undefined);
-    return plural && term.pluralField ? pick(term.pluralField) : pick(term.field);
+    if (plural && term.pluralField) {
+        return pick(term.pluralField) ?? pick(term.field);
+    }
+    return pick(term.field);
 };
