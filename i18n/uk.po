@@ -3,17 +3,17 @@
 # Nadiia <semchuk@aph.org.ua>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Nancy Espinoza, 2026
-# Éva Tamási, 2026
 # Philip Larsen Donnelly, 2026
 # Yury Rogachev <yury@dhis2.org>, 2026
 # Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026
+# Éva Tamási, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
+"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Mykhailo Siusko <m.siusko@redcross.org.ua>, 2026\n"
+"Last-Translator: Éva Tamási, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -600,6 +600,9 @@ msgstr "Введіть параметри фільтра"
 msgid "No match found"
 msgstr ""
 
+msgid "Search for an organisation unit"
+msgstr "Пошук організаційного підрозділу"
+
 msgid "Clear"
 msgstr "Очистити"
 
@@ -1102,6 +1105,12 @@ msgid "This event is outside the editing period"
 msgstr ""
 
 msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
 msgstr ""
 
 msgid "View only - {{message}}"

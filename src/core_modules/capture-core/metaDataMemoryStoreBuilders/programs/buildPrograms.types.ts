@@ -11,5 +11,4 @@ export type BuildProgramsInput = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
-    minorServerVersion: number;
 };

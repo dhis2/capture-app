@@ -1,3 +1,36 @@
+# [107.0.0](https://github.com/dhis2/capture-app/compare/v106.7.8...v107.0.0) (2026-08-11)
+
+
+### chore
+
+* **release:** [DHIS2-21692] stop support for 2.40 ([#4662](https://github.com/dhis2/capture-app/issues/4662)) ([22fa85d](https://github.com/dhis2/capture-app/commit/22fa85d256e27a962716fd85487e85773832c477))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 107.0.0 to facilitate potential fixes for 2.40.
+
+## [106.7.8](https://github.com/dhis2/capture-app/compare/v106.7.7...v106.7.8) (2026-08-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4697](https://github.com/dhis2/capture-app/issues/4697)) ([e8bdb2f](https://github.com/dhis2/capture-app/commit/e8bdb2f9486847e3fe90e1135bb468c15ebc687c))
+
+## [106.7.7](https://github.com/dhis2/capture-app/compare/v106.7.6...v106.7.7) (2026-08-07)
+
+
+### Bug Fixes
+
+* [DHIS2-21855] limit concurrent api requests ([#4668](https://github.com/dhis2/capture-app/issues/4668)) ([61c63fd](https://github.com/dhis2/capture-app/commit/61c63fd41482c5d88d4cf2f5960574030b7bd20b))
+
+## [106.7.6](https://github.com/dhis2/capture-app/compare/v106.7.5...v106.7.6) (2026-08-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4689](https://github.com/dhis2/capture-app/issues/4689)) ([773d9b0](https://github.com/dhis2/capture-app/commit/773d9b0f72b3d5eb82c3c6379070ac5a3a9b4184))
+
 ## [106.7.5](https://github.com/dhis2/capture-app/compare/v106.7.4...v106.7.5) (2026-08-04)
 
 

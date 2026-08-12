@@ -162,7 +162,6 @@ function getBuiltPrograms(
     cachedCategories: {[categoryId: string]: CachedCategory},
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: string | null,
-    minorServerVersion: number,
 ) {
     const programFactory = new ProgramFactory(
         cachedOptionSets,
@@ -172,7 +171,6 @@ function getBuiltPrograms(
         cachedCategories,
         trackedEntityTypeCollection,
         locale,
-        minorServerVersion,
     );
 
     const promisePrograms = cachedPrograms
@@ -231,7 +229,6 @@ export async function buildPrograms({
     cachedTrackedEntityTypes,
     trackedEntityTypeCollection,
     locale,
-    minorServerVersion,
 }: BuildProgramsInput) {
     const [
         cachedPrograms,
@@ -251,7 +248,6 @@ export async function buildPrograms({
         cachedCategories,
         trackedEntityTypeCollection,
         locale,
-        minorServerVersion,
     );
 
     postProcessPrograms(

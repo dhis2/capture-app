@@ -7,7 +7,6 @@ import {
     spacers,
 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -99,7 +98,6 @@ const WidgetEventEditPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
@@ -199,7 +197,7 @@ const WidgetEventEditPlain = ({
                 </Widget>
             </div>
 
-            {supportsChangelog && changeLogIsOpen && (
+            {changeLogIsOpen && (
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}

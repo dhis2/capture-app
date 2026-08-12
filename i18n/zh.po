@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
+"POT-Creation-Date: 2026-08-07T10:34:07.592Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -586,6 +586,9 @@ msgstr "键入过滤选项"
 msgid "No match found"
 msgstr "未找到匹配项"
 
+msgid "Search for an organisation unit"
+msgstr "搜索组织单位"
+
 msgid "Clear"
 msgstr "清除"
 
@@ -611,7 +614,7 @@ msgid "No items to display"
 msgstr "无条目可显示"
 
 msgid "Tracked entity is deactivated"
-msgstr ""
+msgstr "跟踪实体 已停用"
 
 msgid "Select columns"
 msgstr "选择列"
@@ -799,7 +802,7 @@ msgid "Program stage is invalid"
 msgstr "项目阶段无效"
 
 msgid "Stage not found"
-msgstr ""
+msgstr "未找到该阶段"
 
 msgid "Report"
 msgstr "报表"
@@ -971,7 +974,7 @@ msgid "This event doesn't have any notes"
 msgstr "该事件没有任何说明"
 
 msgid "This event doesn't have any relationships"
-msgstr ""
+msgstr "该事件 没有关联关系"
 
 msgid "Warnings"
 msgstr "错误"
@@ -1056,31 +1059,37 @@ msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
 msgid "You only have view access to this enrollment"
-msgstr ""
+msgstr "您对此仅具有查看权限注册"
 
 msgid "You only have view access to this program"
-msgstr ""
+msgstr "您对该程序仅具有查看权限"
 
 msgid "You only have view access to this {{trackedEntityName}}"
-msgstr ""
+msgstr "您对此仅具有查看权限{{trackedEntityName}}"
 
 msgid "You only have view access to this tracked entity type"
-msgstr ""
+msgstr "您对该跟踪实体 类型仅具有查看权限"
 
 msgid "You only have view access to these program stages"
-msgstr ""
+msgstr "您对这些程序阶段仅具有查看权限"
 
 msgid "You only have view access to this program stage"
-msgstr ""
+msgstr "您对此仅具有查看权限项目阶段"
 
 msgid "This event is outside the editing period"
-msgstr ""
+msgstr "该事件 已超出编辑期限"
 
 msgid "This event has been completed"
-msgstr ""
+msgstr "该事件 项目已完工"
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr "该{{trackedEntityName}} 已停用"
+
+msgid "This tracked entity is deactivated"
+msgstr "该跟踪实体 已停用"
 
 msgid "View only - {{message}}"
-msgstr ""
+msgstr "仅限查看 -{{message}}"
 
 msgid "View only"
 msgstr "只读"
@@ -1592,32 +1601,32 @@ msgid "Fix errors in the form to continue."
 msgstr "修正表单中的错误以继续。"
 
 msgid "Activate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "激活{{trackedEntityTypeName}}"
 
 msgid "Deactivate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "停用{{trackedEntityTypeName}}"
 
 msgid ""
 "Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
 "change its status to active and write operations will be allowed."
-msgstr ""
+msgstr "您确定要激活此{{trackedEntityTypeName}} 吗？此操作将使其状态变为“活动”，并允许写入操作。"
 
 msgid ""
 "Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
 "will change its status to inactive and only read operations will be allowed."
-msgstr ""
+msgstr "您确定要停用此{{trackedEntityTypeName}} 吗？此操作将使其状态变为“停用”，且仅允许读取操作。"
 
 msgid "Yes, activate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "是的，激活{{trackedEntityTypeName}}"
 
 msgid "Yes, deactivate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "是的，停用{{trackedEntityTypeName}}"
 
 msgid "There was a problem activating the {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "激活时出现了一个问题，{{trackedEntityTypeName}}"
 
 msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "停用该功能时出现了一个问题，{{trackedEntityTypeName}}"
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "您无权删除此{{trackedEntityTypeName}}"
@@ -1712,7 +1721,7 @@ msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr "{{occurredAt}} 属于过期时段。事件无法删除"
 
 msgid "This event is outside the edit period"
-msgstr ""
+msgstr "该事件 已超出编辑时段"
 
 msgid "An error occurred while deleting the event"
 msgstr "删除事件时发生错误"
@@ -1752,7 +1761,7 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} 已安排"
 
 msgid "No stages found in this program"
-msgstr ""
+msgstr "未在此节目中找到任何环节"
 
 msgid "Stages and Events"
 msgstr "阶段与活动"
@@ -1892,7 +1901,7 @@ msgid "To open this relationship, please wait until saving is complete"
 msgstr "要打开此关系，请等待保存完成"
 
 msgid "This enrollment doesn't have any relationships"
-msgstr ""
+msgstr "该注册 没有关联关系"
 
 msgid "Type"
 msgstr "类型"
@@ -2223,10 +2232,10 @@ msgid "Error updating the Assignee"
 msgstr "更新受托人时出错"
 
 msgid "Could not save enrollment note"
-msgstr ""
+msgstr "无法保存注册 笔记"
 
 msgid "Could not save event note"
-msgstr ""
+msgstr "无法保存事件 笔记"
 
 msgid "There was an error fetching metadata"
 msgstr "获取元数据时出现错误"
@@ -2319,4 +2328,4 @@ msgstr "采集"
 
 msgctxt "Title for shortcut used by command palette"
 msgid "__MANIFEST_SHORTCUT_Search TEI"
-msgstr ""
+msgstr "搜索 TEI"

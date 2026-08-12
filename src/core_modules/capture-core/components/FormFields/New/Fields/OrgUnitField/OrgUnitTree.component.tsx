@@ -28,19 +28,7 @@ type Props = OrgUnitTreeProps & WithStyles<typeof getStyles>;
 const OrgUnitTreePlain = (props: Props) => {
     const { roots, classes, treeKey, previousOrgUnitId, onSelectClick, selected } = props;
     const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId ?? undefined);
-    const getExpandedItems = () => {
-        if (roots && roots.length === 1) {
-            return [`/${roots[0].id}`];
-        } else if (roots?.length > 1) {
-            return roots.map(root => root.path);
-        }
-
-        return undefined;
-    };
-
-    const initiallyExpanded = getExpandedItems();
-
-    const [expanded, setExpanded] = React.useState<string[] | undefined>(initiallyExpanded);
+    const [expanded, setExpanded] = React.useState<string[]>(roots.map(root => root.path));
 
     React.useEffect(() => {
         if (previousSelectedOrgUnit?.expandedPaths) {

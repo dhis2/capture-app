@@ -49,14 +49,12 @@ export class ProgramFactory {
         cachedCategories: {[categoryId: string]: CachedCategory},
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
         locale: string | null,
-        minorServerVersion: number,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
         this.programStageFactory = new ProgramStageFactory({
             cachedOptionSets,
             cachedRelationshipTypes,
             locale,
-            minorServerVersion,
         });
         this.enrollmentFactory = new EnrollmentFactory({
             cachedTrackedEntityAttributes,
@@ -64,7 +62,6 @@ export class ProgramFactory {
             cachedTrackedEntityTypes,
             trackedEntityTypeCollection,
             locale,
-            minorServerVersion,
         });
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
@@ -75,7 +72,6 @@ export class ProgramFactory {
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-            minorServerVersion,
         });
         this.categoryFactory = new CategoryFactory(
             cachedCategories,
