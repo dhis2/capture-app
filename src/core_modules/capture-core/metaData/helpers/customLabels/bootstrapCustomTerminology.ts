@@ -1,5 +1,10 @@
 import i18n from '@dhis2/d2-i18n';
-import { applyCustomTerminology, INTERPOLATION_OPEN, INTERPOLATION_CLOSE } from './applyCustomTerminology';
+import {
+    applyCustomTerminology,
+    hasCustomTerminologyTokens,
+    INTERPOLATION_OPEN,
+    INTERPOLATION_CLOSE,
+} from './applyCustomTerminology';
 import { resolveTerminologyContext } from './resolveTerminologyContext';
 
 type ReduxStore = { getState: () => unknown };
@@ -44,6 +49,10 @@ export const bootstrapCustomTerminology = (store: ReduxStore) => {
     const originalT = i18n.t.bind(i18n);
     i18n.t = (key: string, options?: any) => {
         const translated = originalT(key, wrapInterpolationValues(options));
+        // Skip context resolution + regex replace when no terminology token
+        // appears anywhere in the translated string — the common case for
+        // most UI strings (buttons, dates, generic labels).
+        if (!hasCustomTerminologyTokens(translated)) return translated;
         return applyCustomTerminology(translated, resolveTerminologyContext(store));
     };
 };

@@ -38,10 +38,14 @@ const TERM_ENTRIES: ReadonlyArray<TermEntry> = (
 
 const escapeRegExp = (input: string): string => input.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 
-const COMBINED_PATTERN = new RegExp(
-    String.raw`\b(${TERM_ENTRIES.map(entry => escapeRegExp(entry.english)).join('|')})\b`,
-    'gi',
-);
+const COMBINED_PATTERN_SOURCE = String.raw`\b(${TERM_ENTRIES.map(entry => escapeRegExp(entry.english)).join('|')})\b`;
+const COMBINED_PATTERN = new RegExp(COMBINED_PATTERN_SOURCE, 'gi');
+// Non-global variant used only for the wrapper fast-path — `.test` on a
+// global regex is stateful (advances lastIndex), which we want to avoid.
+const HAS_ANY_TOKEN_PATTERN = new RegExp(COMBINED_PATTERN_SOURCE, 'i');
+
+export const hasCustomTerminologyTokens = (text: string): boolean =>
+    typeof text === 'string' && HAS_ANY_TOKEN_PATTERN.test(text);
 
 const findEntry = (match: string): TermEntry | undefined => {
     const lower = match.toLowerCase();
