@@ -6,7 +6,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from '@tanstack/react-query';
-import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -76,7 +76,6 @@ const WidgetProfilePlain = ({
     onStatusToggleSuccess,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
@@ -129,7 +128,7 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes,
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
-    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
+    const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter((item: any) => item.displayInList)

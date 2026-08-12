@@ -1,4 +1,3 @@
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
@@ -17,9 +16,7 @@ const getFileResourceSubvalue = async (
                 return {
                     id,
                     name,
-                    url: featureAvailable(FEATURES.trackerFileEndpoint)
-                        ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/file`
-                        : `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
+                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/file`,
                 };
             }
             return {};
@@ -41,17 +38,9 @@ const getImageSubvalue = (keys: any, querySingleResource: QuerySingleResource, e
             if (value) {
                 return {
                     value,
-                    ...(featureAvailable(FEATURES.trackerImageEndpoint) ?
-                        {
-                            url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image`,
-                            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues` +
-                                `/${key}/image?dimension=small`,
-                        } : {
-                            url: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
-                            previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${key}` +
-                                `&eventUid=${eventId}&dimension=SMALL`,
-                        }
-                    ),
+                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image`,
+                    previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues` +
+                        `/${key}/image?dimension=small`,
                 };
             }
             return {};

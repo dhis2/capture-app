@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
@@ -21,7 +20,6 @@ const addRelationshipMutation: Mutation = {
 
 export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
-    const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
         i18n.t('An error occurred while adding the relationship'),
@@ -53,7 +51,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', teiId],
-                    { [queryKey]: newRelationships },
+                    { relationships: newRelationships },
                 );
             },
             onMutate: (...props) => {
@@ -64,7 +62,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                 queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (apiResponse: any) => {
                     const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
                     const updatedInstances = [clientRelationship, ...apiRelationships];
-                    return { [queryKey]: updatedInstances };
+                    return { relationships: updatedInstances };
                 });
             },
             onSuccess: async (apiResponse: any, requestData: any) => {
@@ -92,7 +90,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', teiId],
-                    { [queryKey]: newRelationships },
+                    { relationships: newRelationships },
                 );
                 onSuccess && onSuccess(apiResponse, requestData);
             },

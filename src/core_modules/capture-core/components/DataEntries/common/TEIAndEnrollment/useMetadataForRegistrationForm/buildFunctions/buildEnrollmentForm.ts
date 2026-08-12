@@ -17,7 +17,6 @@ type Props = {
     cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
     dataEntryFormConfig: DataEntryFormConfig | null;
     locale: string;
-    minorServerVersion: number;
 };
 
 export const buildEnrollmentForm = async ({
@@ -28,7 +27,6 @@ export const buildEnrollmentForm = async ({
     cachedTrackedEntityAttributes,
     dataEntryFormConfig,
     locale,
-    minorServerVersion,
 }: Props) => {
     const searchGroups = await buildSearchGroup(cachedProgram, locale);
     const enrollmentFactory = new EnrollmentFactory({
@@ -38,7 +36,6 @@ export const buildEnrollmentForm = async ({
         trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
         locale,
         dataEntryFormConfig,
-        minorServerVersion,
     });
 
     return enrollmentFactory.build(cachedProgram, searchGroups);
