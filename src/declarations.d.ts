@@ -13,9 +13,7 @@ declare module 'src/core_modules/*';
 declare module '@dhis2/d2-i18n' {
     const i18n: {
         t: (key: string, options?: any) => any;
-        language: string;
-        use: (module: any) => typeof i18n;
-        options: Record<string, any>;
+        // Add other methods as needed
     };
     export default i18n;
 }

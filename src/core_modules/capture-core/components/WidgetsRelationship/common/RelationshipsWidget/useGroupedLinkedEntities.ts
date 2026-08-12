@@ -9,7 +9,6 @@ import { convertClientToList, convertServerToClient } from '../../../../converte
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
 import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '../Types';
 
-
 const getFallbackFieldsByRelationshipEntity = {
     [RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE]: () => [{
         id: 'trackedEntityTypeName',
