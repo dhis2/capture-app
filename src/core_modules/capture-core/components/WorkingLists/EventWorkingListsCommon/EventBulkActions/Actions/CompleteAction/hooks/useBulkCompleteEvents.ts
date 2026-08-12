@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
@@ -35,17 +34,12 @@ export const useBulkCompleteEvents = ({
         ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'Events', selectedRows, programId],
         {
             resource: 'tracker/events',
-            params: () => {
-                const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
-                const filterQueryParam: string = supportForFeature ? 'events' : 'event';
-
-                return {
-                    fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
-                    pageSize: 100,
-                    program: programId,
-                    [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
-                };
-            },
+            params: () => ({
+                fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
+                pageSize: 100,
+                program: programId,
+                events: Object.keys(selectedRows).join(','),
+            }),
         },
         {
             enabled: Object.keys(selectedRows).length > 0 && isCompleteDialogOpen && !!programId,

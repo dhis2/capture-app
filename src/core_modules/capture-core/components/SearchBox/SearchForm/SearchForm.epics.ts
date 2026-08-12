@@ -1,7 +1,6 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import type { ApiUtils, EpicAction, ReduxStore } from 'capture-core-utils/types';
 import {
     searchBoxActionTypes,
@@ -162,14 +161,11 @@ export const searchViaUniqueIdOnScopeProgramEpic = (
             const {
                 formsValues,
             } = store.value;
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
-                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                orgUnitMode: 'ACCESSIBLE',
             };
 
             const { attributes, trackedEntityType } = getTrackerProgramThrowIfNotFound(programId);
@@ -197,14 +193,11 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
             const {
                 formsValues,
             } = store.value;
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
-                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                orgUnitMode: 'ACCESSIBLE',
                 fields: 'trackedEntity,orgUnit,attributes,enrollments',
             };
 
@@ -232,9 +225,6 @@ export const searchViaAttributesOnScopeProgramEpic = (
             const { searchGroups, attributes } = getTrackerProgramThrowIfNotFound(programId);
             const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(
                     formsValues[formId],
@@ -245,7 +235,7 @@ export const searchViaAttributesOnScopeProgramEpic = (
                 program: programId,
                 page,
                 pageSize: 5,
-                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                orgUnitMode: 'ACCESSIBLE',
             };
 
             return searchViaAttributesStream({
@@ -271,9 +261,6 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
             const { attributes, searchGroups } = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
             const availableSearchGroup = searchGroups.find((group: any) => group.id === 'main');
 
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(
                     formsValues[formId],
@@ -283,7 +270,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
                 trackedEntityType: trackedEntityTypeId,
                 page,
                 pageSize: 5,
-                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                orgUnitMode: 'ACCESSIBLE',
             };
 
             return searchViaAttributesStream({
@@ -363,15 +350,12 @@ export const fallbackSearchEpic = (
                 availableSearchGroup?.searchForm.getElements(),
             ).filter(Boolean);
 
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const queryArgs = {
                 filter,
                 trackedEntityType: trackedEntityTypeId,
                 page,
                 pageSize,
-                [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                orgUnitMode: 'ACCESSIBLE',
                 fields: 'trackedEntity,orgUnit,attributes,enrollments',
             };
 

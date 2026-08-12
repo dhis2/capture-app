@@ -49,7 +49,7 @@ export const useUpdateOwnership = ({
         i18n.t('An error occurred while transferring ownership'),
         { critical: true },
     );
-    const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
+    const teiParamKey = 'trackedEntity';
     const orgUnitKey = useFeature(FEATURES.orgUnitReplaceOuQueryParam) ? 'orgUnit' : 'ou';
 
     const { mutateAsync: updateEnrollmentOwnership, isLoading } = useMutation(

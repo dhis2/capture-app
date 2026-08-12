@@ -6,7 +6,7 @@ import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
 import { isMultiTextWithoutOptionset } from
-    '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+    '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/multiTextValidation';
 import type { InputProgramData, InputAttribute } from './hooks.types';
 
 const MULIT_TEXT_WITH_NO_OPTIONS_SET =

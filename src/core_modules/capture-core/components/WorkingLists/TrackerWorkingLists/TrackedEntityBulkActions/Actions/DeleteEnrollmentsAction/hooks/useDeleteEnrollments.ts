@@ -3,7 +3,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
@@ -80,17 +80,12 @@ export const useDeleteEnrollments = ({
         [...QueryKey, selectedRows],
         {
             resource: 'tracker/trackedEntities',
-            params: () => {
-                const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
-                const filterQueryParam = supportForFeature ? 'trackedEntities' : 'trackedEntity';
-
-                return ({
-                    fields: 'trackedEntity,enrollments[enrollment,program,status,trackedEntity]',
-                    [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
-                    pageSize: 100,
-                    program: programId,
-                });
-            },
+            params: () => ({
+                fields: 'trackedEntity,enrollments[enrollment,program,status,trackedEntity]',
+                trackedEntities: Object.keys(selectedRows).join(','),
+                pageSize: 100,
+                program: programId,
+            }),
         },
         {
             enabled: Object.keys(selectedRows).length > 0,

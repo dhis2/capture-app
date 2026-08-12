@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
@@ -41,7 +40,6 @@ const WidgetHeaderPlain = ({
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
 
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
@@ -79,32 +77,30 @@ const WidgetHeaderPlain = ({
                             </Button>
                         )}
 
-                        {supportsChangelog && (
-                            <OverflowButton
-                                open={actionsIsOpen}
-                                onClick={() => setActionsIsOpen(prev => !prev)}
-                                icon={<IconMore16 />}
-                                small
-                                secondary
-                                dataTest={'tracker-program-event-overflow-button'}
-                                component={
-                                    <FlyoutMenu
-                                        dense
-                                        maxWidth="250px"
-                                        dataTest={'tracker-program-event-overflow-menu'}
-                                    >
-                                        <MenuItem
-                                            label={i18n.t('View changelog')}
-                                            suffix=""
-                                            onClick={() => {
-                                                setChangeLogIsOpen(true);
-                                                setActionsIsOpen(false);
-                                            }}
-                                        />
-                                    </FlyoutMenu>
-                                }
-                            />
-                        )}
+                        <OverflowButton
+                            open={actionsIsOpen}
+                            onClick={() => setActionsIsOpen(prev => !prev)}
+                            icon={<IconMore16 />}
+                            small
+                            secondary
+                            dataTest={'tracker-program-event-overflow-button'}
+                            component={
+                                <FlyoutMenu
+                                    dense
+                                    maxWidth="250px"
+                                    dataTest={'tracker-program-event-overflow-menu'}
+                                >
+                                    <MenuItem
+                                        label={i18n.t('View changelog')}
+                                        suffix=""
+                                        onClick={() => {
+                                            setChangeLogIsOpen(true);
+                                            setActionsIsOpen(false);
+                                        }}
+                                    />
+                                </FlyoutMenu>
+                            }
+                        />
                     </div>
                 )}
             </div>
