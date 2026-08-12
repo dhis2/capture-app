@@ -4,16 +4,11 @@ import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
-import { withProgramTerminologyContext } from '../../../../metaData/helpers/customLabels';
 import { RELATIONSHIP_ENTITIES } from '../constants';
 import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
 import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '../Types';
 
-const getConstraintTerminologyContext = (constraint: any) => ({
-    programId: constraint.program?.id,
-    stageId: 'programStage' in constraint ? constraint.programStage.id : undefined,
-});
 
 const getFallbackFieldsByRelationshipEntity = {
     [RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE]: () => [{
@@ -230,13 +225,7 @@ export const useGroupedLinkedEntities = (
                     { constraint: relationshipType.fromConstraint, name: relationshipType.toFromName } :
                     { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
 
-                // Use the constraint's own program for terminology so that
-                // column headers (e.g. "Program stage name") reflect the
-                // linked program's labels, not the currently-selected program.
-                const columns = withProgramTerminologyContext(
-                    getConstraintTerminologyContext(constraint),
-                    () => getColumns(constraint),
-                );
+                const columns = getColumns(constraint);
                 const context = getContext(constraint, relationshipType.access, readOnly);
 
                 accGroupedLinkedEntities.push({
