@@ -14,7 +14,8 @@ declare module '@dhis2/d2-i18n' {
     const i18n: {
         t: (key: string, options?: any) => any;
         language: string;
-        // Add other methods as needed
+        use: (module: any) => typeof i18n;
+        options: Record<string, any>;
     };
     export default i18n;
 }

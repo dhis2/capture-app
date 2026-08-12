@@ -46,13 +46,23 @@ export const bootstrapCustomTerminology = (store: ReduxStore) => {
     if (bootstrapped) return;
     bootstrapped = true;
 
+    // Register terminology replacement as an i18next postProcessor plugin so it
+    // uses the framework's documented extension point rather than overwriting t.
+    i18n.use({
+        type: 'postProcessor' as const,
+        name: 'customTerminology',
+        process(value: string): string {
+            if (!hasCustomTerminologyTokens(value)) return value;
+            return applyCustomTerminology(value, resolveTerminologyContext(store));
+        },
+    });
+    // Enable the plugin globally — i18next reads this from options at call time.
+    (i18n.options as any).postProcess = 'customTerminology';
+
+    // Thin intercept solely to bracket interpolated values with sentinel markers
+    // before i18next performs interpolation. This prevents terminology replacement
+    // from rewriting server-supplied names (e.g. a stage called "Birth event").
+    // No equivalent pre-interpolation hook exists in the i18next plugin API.
     const originalT = i18n.t.bind(i18n);
-    i18n.t = (key: string, options?: any) => {
-        const translated = originalT(key, wrapInterpolationValues(options));
-        // Skip context resolution + regex replace when no terminology token
-        // appears anywhere in the translated string — the common case for
-        // most UI strings (buttons, dates, generic labels).
-        if (!hasCustomTerminologyTokens(translated)) return translated;
-        return applyCustomTerminology(translated, resolveTerminologyContext(store));
-    };
+    i18n.t = (key: string, options?: any) => originalT(key, wrapInterpolationValues(options));
 };

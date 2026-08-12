@@ -1,4 +1,3 @@
-import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
 
@@ -27,19 +26,16 @@ const convert = (() => {
             }));
 })();
 
-const buildFieldsParam = (includePluralLabels: boolean): string => {
-    const labels = includePluralLabels ? 'displayName,displayTrackedEntityTypesLabel' : 'displayName';
-    return `id,access,${labels},minAttributesRequiredToSearch,featureType,` +
-        'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
-        'translations[property,locale,value]';
-};
+const FIELDS =
+    'id,access,displayName,minAttributesRequiredToSearch,featureType,' +
+    'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
+    'translations[property,locale,value]';
 
 export const storeTrackedEntityTypes = (ids: Array<string>) => {
-    const includePluralLabels = featureAvailable(FEATURES.customTerminologyPlurals);
     const query = {
         resource: 'trackedEntityTypes',
         params: {
-            fields: buildFieldsParam(includePluralLabels),
+            fields: FIELDS,
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
         },

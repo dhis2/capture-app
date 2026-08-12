@@ -7,3 +7,5 @@ export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels'
 export { applyCustomTerminology } from './applyCustomTerminology';
 export type { TerminologyContext } from './applyCustomTerminology';
 export { bootstrapCustomTerminology } from './bootstrapCustomTerminology';
+export { withProgramTerminologyContext } from './programTerminologyContext';
+export { useProgramT } from './useProgramT';
