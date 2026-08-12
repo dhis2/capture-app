@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
+"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -622,6 +622,9 @@ msgstr "Escriba para filtrar opciones"
 msgid "No match found"
 msgstr "No se encontraron coincidencias"
 
+msgid "Search for an organisation unit"
+msgstr "Buscar una unidad organizativa"
+
 msgid "Clear"
 msgstr "Limpiar"
 
@@ -1146,6 +1149,12 @@ msgid "This event is outside the editing period"
 msgstr ""
 
 msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
 msgstr ""
 
 msgid "View only - {{message}}"

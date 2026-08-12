@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQueryClient } from '@tanstack/react-query';
 import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { useCanChangeCompletionStatus } from 'capture-core/hooks';
@@ -51,7 +50,6 @@ export const EventOverflowMenu = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const supportsChangelog = useFeature(FEATURES.changelogs);
 
     const canChangeCompletionStatus = useCanChangeCompletionStatus({
         programId,
@@ -119,12 +117,10 @@ export const EventOverflowMenu = ({
                                 onClose={() => setActionsOpen(false)}
                             />
                         )}
-                        {supportsChangelog && (
-                            <ChangelogMenuItem
-                                onOpenChangelog={onOpenChangelog}
-                                onClose={() => setActionsOpen(false)}
-                            />
-                        )}
+                        <ChangelogMenuItem
+                            onOpenChangelog={onOpenChangelog}
+                            onClose={() => setActionsOpen(false)}
+                        />
                         <DeleteMenuItem
                             occurredAt={eventDetails.occurredAt}
                             completedAt={eventDetails.completedAt}

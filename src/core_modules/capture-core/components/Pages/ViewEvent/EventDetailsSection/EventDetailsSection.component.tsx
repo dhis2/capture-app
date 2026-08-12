@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from 'capture-core-utils/styles';
-import { FEATURES, useFeature } from 'capture-core-utils';
 import {
     spacers,
     IconFileDocument24,
@@ -77,7 +76,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
@@ -128,32 +126,30 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         {i18n.t('Edit event')}
                     </Button>
                 </div>}
-            {supportsChangelog && (
-                <OverflowButton
-                    open={actionsIsOpen}
-                    onClick={() => setActionsIsOpen(prev => !prev)}
-                    secondary
-                    small
-                    icon={<IconMore16 />}
-                    dataTest="event-program-event-overflow-button"
-                    component={(
-                        <FlyoutMenu
-                            dense
-                            maxWidth="250px"
-                            dataTest="event-program-event-overflow-menu"
-                        >
-                            <MenuItem
-                                label={i18n.t('View changelog')}
-                                suffix={null}
-                                onClick={() => {
-                                    setChangeLogIsOpen(true);
-                                    setActionsIsOpen(false);
-                                }}
-                            />
-                        </FlyoutMenu>
-                    )}
-                />
-            )}
+            <OverflowButton
+                open={actionsIsOpen}
+                onClick={() => setActionsIsOpen(prev => !prev)}
+                secondary
+                small
+                icon={<IconMore16 />}
+                dataTest="event-program-event-overflow-button"
+                component={(
+                    <FlyoutMenu
+                        dense
+                        maxWidth="250px"
+                        dataTest="event-program-event-overflow-menu"
+                    >
+                        <MenuItem
+                            label={i18n.t('View changelog')}
+                            suffix={null}
+                            onClick={() => {
+                                setChangeLogIsOpen(true);
+                                setActionsIsOpen(false);
+                            }}
+                        />
+                    </FlyoutMenu>
+                )}
+            />
         </div>
     );
 
@@ -180,7 +176,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     />
                 )}
             </ViewEventSection>
-            {supportsChangelog && changeLogIsOpen && (
+            {changeLogIsOpen && (
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
