@@ -8,6 +8,15 @@ export type TerminologyContext = {
     stageId?: string,
 };
 
+// Unicode "non-characters" (U+FDD0 / U+FDD1) — the Unicode standard reserves
+// these to never be used for text, so they never collide with real content.
+// The bootstrap wrapper brackets every interpolated value with these markers
+// so we can skip them here and avoid rewriting server-supplied names that
+// happen to contain a token word (e.g. a stage named "Birth event").
+export const INTERPOLATION_OPEN = '﷐';
+export const INTERPOLATION_CLOSE = '﷑';
+const INTERPOLATION_PATTERN = new RegExp(`${INTERPOLATION_OPEN}(.*?)${INTERPOLATION_CLOSE}`, 'g');
+
 type TermEntry = {
     key: CustomLabelKey,
     plural: boolean,
@@ -70,11 +79,19 @@ export const applyCustomTerminology = (
     const sources = getLabelSources(context);
     const locale = i18n.language || 'en';
 
-    return translatedText.replace(COMBINED_PATTERN, (match) => {
+    const substitute = (text: string): string => text.replace(COMBINED_PATTERN, (match) => {
         const entry = findEntry(match);
         if (!entry) return match;
         const custom = resolveCustomLabel(sources, entry.key, { plural: entry.plural });
         if (!custom) return match;
         return preserveCase(match, custom, locale);
     });
+
+    // Split on sentinel-wrapped interpolation regions. String.split with a
+    // capturing group returns [outside, inside, outside, ...] — substitute
+    // only in the outside parts so server-supplied values pass through
+    // unchanged. If no sentinels are present, we get [translatedText] and
+    // just substitute the whole thing.
+    const parts = translatedText.split(INTERPOLATION_PATTERN);
+    return parts.map((part, i) => (i % 2 === 0 ? substitute(part) : part)).join('');
 };

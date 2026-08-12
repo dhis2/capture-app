@@ -6,7 +6,7 @@ type ReduxStore = { getState: () => unknown };
 type DomainState = {
     viewEventPage?: {
         loadedValues?: {
-            eventContainer?: { event?: { program?: string, programStage?: string } },
+            eventContainer?: { event?: { programId?: string, programStageId?: string } },
         },
     },
     enrollmentDomain?: {
@@ -26,10 +26,10 @@ export const resolveTerminologyContext = (store: ReduxStore): TerminologyContext
 
     const state = (store.getState() ?? {}) as DomainState;
 
-    if (query.eventId || query.viewEventId) {
+    if (query.eventId) {
         const event = state.viewEventPage?.loadedValues?.eventContainer?.event;
-        if (event?.program) {
-            return { programId: event.program, stageId: event.programStage };
+        if (event?.programId) {
+            return { programId: event.programId, stageId: event.programStageId };
         }
     }
 

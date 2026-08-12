@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-07T13:57:55.501Z\n"
-"PO-Revision-Date: 2026-08-07T13:57:55.501Z\n"
+"POT-Creation-Date: 2026-08-12T11:19:55.588Z\n"
+"PO-Revision-Date: 2026-08-12T11:19:55.588Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1306,21 +1306,11 @@ msgstr "No one is assigned to this event"
 msgid "Assign"
 msgstr "Assign"
 
-msgid "This program is protected"
-msgstr "This program is protected"
-
-msgid "Reason to check for enrollments"
-msgstr "Reason to check for enrollments"
-
-msgid ""
-"Describe the reason you are checking for enrollments in this protected "
-"program"
-msgstr ""
-"Describe the reason you are checking for enrollments in this protected "
-"program"
-
 msgid "Check for enrollments"
 msgstr "Check for enrollments"
+
+msgid "This program is protected"
+msgstr "This program is protected"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
@@ -1331,6 +1321,16 @@ msgstr ""
 
 msgid "All activity will be logged."
 msgstr "All activity will be logged."
+
+msgid "Reason to check for enrollments"
+msgstr "Reason to check for enrollments"
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
 
 msgid "Unsaved changes"
 msgstr "Unsaved changes"

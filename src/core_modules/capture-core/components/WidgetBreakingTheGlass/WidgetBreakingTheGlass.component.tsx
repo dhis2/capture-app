@@ -23,10 +23,6 @@ const styles: Readonly<any> = ({ typography }: any) => ({
     },
 });
 
-const noticeBoxTitle = i18n.t('This program is protected');
-const reasonHeader = i18n.t('Reason to check for enrollments');
-const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollments in this protected program');
-
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const WidgetBreakingTheGlassPlain = ({
@@ -52,15 +48,17 @@ const WidgetBreakingTheGlassPlain = ({
                         {i18n.t('Check for enrollments')}
                     </div>
                     <br />
-                    <NoticeBox title={noticeBoxTitle} warning>
+                    <NoticeBox title={i18n.t('This program is protected')} warning>
                         {i18n.t('You must provide a reason to check for enrollments in this protected program.')}
                         {' '}
                         {i18n.t('All activity will be logged.')}
                     </NoticeBox>
                     <br />
                     <TextAreaField
-                        label={reasonHeader}
-                        placeholder={reasonPlaceholder}
+                        label={i18n.t('Reason to check for enrollments')}
+                        placeholder={
+                            i18n.t('Describe the reason you are checking for enrollments in this protected program')
+                        }
                         onChange={reasonChangeHandler}
                         value={reason}
                         inputWidth="680px"
