@@ -1,9 +1,3 @@
-export {
-    CUSTOM_LABEL_FIELDS,
-    resolveLabel,
-    extractCustomLabels,
-    getProgramLabel,
-    getStageLabel,
-} from './customLabels';
+export { CUSTOM_LABEL_FIELDS, extractCustomLabels, resolveLabel } from './customLabels';
 export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels';
-export { useProgramLabel, useStageLabel } from './useLabel';
+export { getTermLabel, useTermLabel } from './useLabel';

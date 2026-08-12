@@ -5,13 +5,13 @@ type CustomLabelField = {
 
 export const CUSTOM_LABEL_FIELDS = {
     enrollment: { field: 'displayEnrollmentLabel', pluralField: 'displayEnrollmentsLabel' },
-    followUp: { field: 'displayFollowUpLabel' },
-    orgUnit: { field: 'displayOrgUnitLabel' },
-    relationship: { field: 'displayRelationshipLabel' },
-    note: { field: 'displayNoteLabel' },
-    attribute: { field: 'displayTrackedEntityAttributeLabel' },
-    programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
     event: { field: 'displayEventLabel', pluralField: 'displayEventsLabel' },
+    programStage: { field: 'displayProgramStageLabel', pluralField: 'displayProgramStagesLabel' },
+    note: { field: 'displayNoteLabel' },
+    relationship: { field: 'displayRelationshipLabel' },
+    attribute: { field: 'displayTrackedEntityAttributeLabel' },
+    orgUnit: { field: 'displayOrgUnitLabel' },
+    followUp: { field: 'displayFollowUpLabel' },
 } as const satisfies { [key: string]: CustomLabelField };
 
 export type CustomLabelKey = keyof typeof CUSTOM_LABEL_FIELDS;
@@ -29,9 +29,7 @@ const allFields: Array<string> = Array.from(
 export const extractCustomLabels = (cached: Record<string, any>): CustomLabels => {
     const labels: CustomLabels = {};
     allFields.forEach((field) => {
-        if (cached[field]) {
-            labels[field] = cached[field];
-        }
+        if (cached[field]) labels[field] = cached[field];
     });
     return labels;
 };
@@ -43,24 +41,8 @@ export const resolveLabel = (
     key: CustomLabelKey,
     { plural = false }: LabelOptions = {},
 ): string | undefined => {
-    const term: CustomLabelField = CUSTOM_LABEL_FIELDS[key];
+    const term = CUSTOM_LABEL_FIELDS[key] as CustomLabelField;
     const list = Array.isArray(sources) ? sources : [sources];
-    const pick = (field?: string) => (field ? list.find(source => source?.[field])?.[field] : undefined);
-
-    if (plural) {
-        return term.pluralField ? pick(term.pluralField) : pick(term.field);
-    }
-    return pick(term.field);
+    const pick = (field?: string) => (field ? list.find(s => s?.[field])?.[field] : undefined);
+    return plural && term.pluralField ? pick(term.pluralField) : pick(term.field);
 };
-
-type WithLabels = { customLabels?: CustomLabels } | undefined | null;
-
-export const getProgramLabel = (program: WithLabels, key: CustomLabelKey, options?: LabelOptions): string | undefined =>
-    resolveLabel(program?.customLabels, key, options);
-
-export const getStageLabel = (
-    stage: WithLabels,
-    program: WithLabels,
-    key: CustomLabelKey,
-    options?: LabelOptions,
-): string | undefined => resolveLabel([stage?.customLabels, program?.customLabels], key, options);
