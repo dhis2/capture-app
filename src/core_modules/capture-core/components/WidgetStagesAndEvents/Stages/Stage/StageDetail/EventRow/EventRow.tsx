@@ -8,8 +8,10 @@ import {
     FlyoutMenu,
     IconMore16,
 } from '@dhis2/ui';
-import { useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { useEventEditPermissions } from 'capture-core/hooks';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { convertServerToClient } from 'capture-core/converters';
+import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton, DeleteActionModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
@@ -49,10 +51,12 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const canChangeCompletionStatus = useCanChangeCompletionStatus({
+    const { canEditCompletionStatus } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
+        occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
     });
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
@@ -104,7 +108,7 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        {canChangeCompletionStatus && (
+                                        {canEditCompletionStatus && (
                                             <CompletionMenuItem
                                                 eventId={id}
                                                 eventStatus={eventDetails.status}

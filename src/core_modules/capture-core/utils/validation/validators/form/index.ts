@@ -4,6 +4,8 @@ export { isValidAge } from './ageValidator';
 export { isValidNonFutureDate } from './isValidNonFutureDate';
 export { isValidPeriod } from './expiredPeriod';
 export { isWithinCompleteEventsExpiry } from './completeEventsExpiry';
+export { canChangeCompletionStatus } from './canChangeCompletionStatus';
+export { canEditExpiredEvent } from './canEditExpiredEvent';
 export { getDateRangeValidator } from './getDateRangeValidator';
 export { getDateTimeRangeValidator } from './getDateTimeRangeValidator';
 export { getNumberRangeValidator } from './getNumberRangeValidator';

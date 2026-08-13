@@ -24,8 +24,9 @@ import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { useProgramExpiryForUser } from '../../../../hooks';
-import { useAuthorities } from '../../../../utils/authority/useAuthorities';
+import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
+import { convertFormToClient } from '../../../../converters';
+import { dataElementTypes } from '../../../../metaData';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -81,7 +82,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const { canEditCompletionStatus } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus: eventData?.eventContainer?.event?.status,
+        occurredAtClient: convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: eventData?.eventContainer?.event?.completedAt,
+    });
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -103,7 +110,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
-                    canUncompleteEvent={canUncompleteEvent}
+                    canEditCompletionStatus={canEditCompletionStatus}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry

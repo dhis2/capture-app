@@ -8,7 +8,8 @@ import {
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { convertClientToView, convertServerToClient } from '../../../converters';
 import { dataElementTypes, type ProgramStage } from '../../../metaData';
-import { useEventEditPermissions } from '../../../hooks';
+import { useEventEditPermissions, useProgramExpiryForUser } from '../../../hooks';
+import { isValidPeriod } from '../../../utils/validation/validators/form';
 
 type Props = {
     setActionsOpen: (open: boolean) => void;
@@ -31,11 +32,12 @@ export const DeleteActionButton = ({
 }: Props) => {
     const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
     const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
 
     const {
-        isEventWithinValidPeriod,
         canEditCompletedEvent,
-        readOnly,
+        canEditEvent,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -60,11 +62,11 @@ export const DeleteActionButton = ({
     return (
         <ConditionalTooltip
             content={getDisabledMessage()}
-            enabled={readOnly}
+            enabled={!canEditEvent}
         >
             <MenuItem
                 dense
-                disabled={readOnly}
+                disabled={!canEditEvent}
                 icon={<IconDelete16 color={colors.red600} />}
                 label={i18n.t('Delete')}
                 dataTest="stages-and-events-delete"

@@ -20,6 +20,7 @@ import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
     useEventEditPermissions,
+    useProgramExpiryForUser,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -108,7 +109,8 @@ const WidgetEventEditPlain = ({
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const { canEditEvent, canEditCompletionStatus } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
@@ -139,7 +141,8 @@ const WidgetEventEditPlain = ({
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            readOnly={readOnly}
+                            readOnly={!canEditEvent}
+                            canEditCompletionStatus={canEditCompletionStatus}
                         />
                     }
                     noncollapsible
@@ -174,9 +177,9 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canUncompleteEvent={canUncompleteEvent}
+                                    canEditCompletionStatus={canEditCompletionStatus}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!readOnly}
+                                    hasDeleteButton={canEditEvent}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}

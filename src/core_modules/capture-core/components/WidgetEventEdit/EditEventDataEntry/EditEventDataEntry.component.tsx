@@ -323,9 +323,7 @@ const buildCompleteFieldSettingsFn = () => {
                         withDisplayMessages()(
                             withInternalChangeHandler()(
                                 withConditionalTooltip((props: any) => {
-                                    const isEventCompleted = props.eventStatus === statusTypes.COMPLETED;
-                                    const canUncompleteEvent = props.canUncompleteEvent;
-                                    const shouldDisable = isEventCompleted && !canUncompleteEvent;
+                                    const shouldDisable = !props.canEditCompletionStatus;
                                     return shouldDisable
                                         ? i18n.t('You do not have access to uncomplete this event')
                                         : undefined;
@@ -340,16 +338,14 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => {
-            const isEventCompleted = props.eventStatus === statusTypes.COMPLETED;
-            const canUncompleteEvent = props.canUncompleteEvent;
-            const shouldDisable = isEventCompleted && !canUncompleteEvent;
+            const shouldDisable = !props.canEditCompletionStatus;
 
             return createComponentProps(props, {
                 label: i18n.t('Complete event'),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,
-                canUncompleteEvent: props.canUncompleteEvent,
+                canEditCompletionStatus: props.canEditCompletionStatus,
             });
         },
         getPropName: () => 'complete',
@@ -448,7 +444,7 @@ type Props = {
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
-    canUncompleteEvent?: boolean;
+    canEditCompletionStatus?: boolean;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;

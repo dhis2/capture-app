@@ -18,9 +18,8 @@ export type EnrollmentAccessContextValue = {
     showWidgetBadge: boolean;
     trackedEntityInactive: boolean;
     canToggleTrackedEntityStatus: boolean;
-    isEventWithinValidPeriod?: boolean;
+    canEditExpiredEvent?: boolean;
     canEditCompletedEvent?: boolean;
-    isWithinCompleteEventsExpiry?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -45,9 +44,8 @@ type ProviderProps = {
     program?: TrackerProgram;
     currentStageId?: string;
     trackedEntityInactive?: boolean;
-    isEventWithinValidPeriod?: boolean;
+    canEditExpiredEvent?: boolean;
     canEditCompletedEvent?: boolean;
-    isWithinCompleteEventsExpiry?: boolean;
     children: React.ReactNode;
 };
 
@@ -66,9 +64,8 @@ const computeContextValue = (
     program: TrackerProgram,
     currentStageId: string | undefined,
     trackedEntityInactive: boolean,
-    isEventWithinValidPeriod?: boolean,
+    canEditExpiredEvent?: boolean,
     canEditCompletedEvent?: boolean,
-    isWithinCompleteEventsExpiry?: boolean,
 ): EnrollmentAccessContextValue => {
     const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
     const rawProgramWriteAccess = Boolean(program.access?.data?.write);
@@ -101,9 +98,8 @@ const computeContextValue = (
         showWidgetBadge: !isEventPage && !allWriteAccessMissing,
         trackedEntityInactive,
         canToggleTrackedEntityStatus: rawTrackedEntityTypeWriteAccess,
-        isEventWithinValidPeriod,
+        canEditExpiredEvent,
         canEditCompletedEvent,
-        isWithinCompleteEventsExpiry,
     };
 };
 
@@ -111,9 +107,8 @@ export const EnrollmentAccessProvider = ({
     program,
     currentStageId,
     trackedEntityInactive = false,
-    isEventWithinValidPeriod,
+    canEditExpiredEvent,
     canEditCompletedEvent,
-    isWithinCompleteEventsExpiry,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(
@@ -122,9 +117,8 @@ export const EnrollmentAccessProvider = ({
                 program,
                 currentStageId,
                 trackedEntityInactive,
-                isEventWithinValidPeriod,
+                canEditExpiredEvent,
                 canEditCompletedEvent,
-                isWithinCompleteEventsExpiry,
             )
             : {
                 ...fallback,
@@ -142,9 +136,8 @@ export const EnrollmentAccessProvider = ({
             program,
             currentStageId,
             trackedEntityInactive,
-            isEventWithinValidPeriod,
+            canEditExpiredEvent,
             canEditCompletedEvent,
-            isWithinCompleteEventsExpiry,
         ],
     );
 

@@ -98,10 +98,9 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
 
     const {
-        isEventWithinValidPeriod,
-        isWithinCompleteExpiry,
+        canEditExpiredEvent,
         canEditCompletedEvent,
-        readOnly,
+        canEditEvent,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -109,7 +108,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-    const showEditButton = !isEditEventPage && !readOnly;
+    const showEditButton = !isEditEventPage && canEditEvent;
 
     return (
         <div className={classes.container}>
@@ -123,9 +122,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <ViewEventReadOnlyBadge
                     eventAccess={eventAccess}
-                    isEventWithinValidPeriod={isEventWithinValidPeriod}
+                    canEditExpiredEvent={canEditExpiredEvent}
                     canEditCompletedEvent={canEditCompletedEvent}
-                    isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
                 />
             </div>
             <div className={classes.contentContainer}>
@@ -138,7 +136,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
-                    readOnly={readOnly}
+                    readOnly={!canEditEvent}
                     programStage={programStage}
                     dataEntryKey={currentDataEntryKey}
                     assignee={assignee}
