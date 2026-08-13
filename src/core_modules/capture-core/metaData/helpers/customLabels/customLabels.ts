@@ -45,7 +45,7 @@ export const resolveLabel = (
     const list = Array.isArray(sources) ? sources : [sources];
     const pick = (field?: string) => (field ? list.find(s => s?.[field])?.[field] : undefined);
     if (plural && term.pluralField) {
-        return pick(term.pluralField) ?? pick(term.field);
+        return pick(term.pluralField);
     }
     return pick(term.field);
 };
