@@ -45,7 +45,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    canEditCompletionStatus,
+    canUncompleteEvent,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -119,7 +119,7 @@ const WidgetHeaderPlain = ({
                                     maxWidth="250px"
                                     dataTest={'tracker-program-event-overflow-menu'}
                                 >
-                                    {canEditCompletionStatus && (
+                                    {canUncompleteEvent && (
                                         <CompletionMenuItem
                                             eventId={eventId}
                                             eventStatus={eventStatus}

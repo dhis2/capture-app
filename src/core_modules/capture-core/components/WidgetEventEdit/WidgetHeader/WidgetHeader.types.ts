@@ -9,5 +9,5 @@ export type PlainProps = {
     orgUnit: OrgUnit,
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
-    canEditCompletionStatus: boolean,
+    canUncompleteEvent: boolean,
 };

@@ -36,6 +36,8 @@ const fallback: EnrollmentAccessContextValue = {
     showWidgetBadge: true,
     trackedEntityInactive: false,
     canToggleTrackedEntityStatus: false,
+    isEventBlockedByExpiry: false,
+    isFormBlockedByCompletion: false,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);

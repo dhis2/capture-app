@@ -51,7 +51,7 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { canEditCompletionStatus } = useEventEditPermissions({
+    const { canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
@@ -108,7 +108,7 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        {canEditCompletionStatus && (
+                                        {canUncompleteEvent && (
                                             <CompletionMenuItem
                                                 eventId={id}
                                                 eventStatus={eventDetails.status}

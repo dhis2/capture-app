@@ -20,8 +20,8 @@ type Input = {
 type Output = {
     isEventBlockedByExpiry: boolean,
     isFormBlockedByCompletion: boolean,
-    canEditCompletionStatus: boolean,
-    canEditEvent: boolean,
+    canUncompleteEvent: boolean,
+    isEventReadOnly: boolean,
 };
 
 export const useEventEditPermissions = ({
@@ -34,7 +34,7 @@ export const useEventEditPermissions = ({
     const eventAccess = getProgramEventAccess(programId, stage?.id ?? null);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
-    const { hasAuthority: canUncompleteEvent } = useAuthority(Authorities.UNCOMPLETE_EVENT);
+    const { hasAuthority: hasUncompleteAuthority } = useAuthority(Authorities.UNCOMPLETE_EVENT);
     const { hasAuthority: hasEditExpiredAuthority } = useAuthority(Authorities.EDIT_EXPIRED);
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
@@ -43,22 +43,22 @@ export const useEventEditPermissions = ({
     const isFormBlockedByCompletion = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
     const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
 
-    const canEditCompletionStatus = computeCanChangeCompletionStatus({
+    const canUncompleteEvent = computeCanChangeCompletionStatus({
         hasWriteAccess: !!eventAccess?.write,
         eventStatus,
-        canUncompleteEvent,
+        canUncompleteEvent: hasUncompleteAuthority,
         isExpired,
         hasEditExpiredAuthority,
     });
 
-    const canEditEvent = !!eventAccess?.write
-        && !isEventBlockedByExpiry
-        && !isFormBlockedByCompletion;
+    const isEventReadOnly = !eventAccess?.write
+        || isEventBlockedByExpiry
+        || isFormBlockedByCompletion;
 
     return {
         isEventBlockedByExpiry,
         isFormBlockedByCompletion,
-        canEditCompletionStatus,
-        canEditEvent,
+        canUncompleteEvent,
+        isEventReadOnly,
     };
 };

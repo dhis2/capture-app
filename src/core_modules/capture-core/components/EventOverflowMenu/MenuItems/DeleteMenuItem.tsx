@@ -37,7 +37,7 @@ export const DeleteActionButton = ({
 
     const {
         isFormBlockedByCompletion,
-        canEditEvent,
+        isEventReadOnly,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -62,11 +62,11 @@ export const DeleteActionButton = ({
     return (
         <ConditionalTooltip
             content={getDisabledMessage()}
-            enabled={!canEditEvent}
+            enabled={isEventReadOnly}
         >
             <MenuItem
                 dense
-                disabled={!canEditEvent}
+                disabled={isEventReadOnly}
                 icon={<IconDelete16 color={colors.red600} />}
                 label={i18n.t('Delete')}
                 dataTest="stages-and-events-delete"
