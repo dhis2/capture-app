@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { serverToClientExpiryPeriod } from '../converters/serverToClientExpiryPeriod';
-import { useAuthority } from '../utils/authority/useAuthority';
-import { Authorities } from '../utils/authority/authorities';
+import { useAuthority, Authorities } from '../utils/authority';
 import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useProgramExpiryForUser = (programId: string) => {

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useAuthority } from '../../../utils/authority/useAuthority';
-import { Authorities } from '../../../utils/authority/authorities';
+import { useAuthority, Authorities } from '../../../utils/authority';
 import type { Props } from './OverflowMenu.types';
 import { OverflowMenuComponent } from './OverflowMenu.component';
 

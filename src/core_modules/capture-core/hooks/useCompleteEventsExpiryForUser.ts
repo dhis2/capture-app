@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import { useAuthority } from '../utils/authority/useAuthority';
-import { Authorities } from '../utils/authority/authorities';
+import { useAuthority, Authorities } from '../utils/authority';
 import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useCompleteEventsExpiryForUser = (programId: string): number | undefined => {

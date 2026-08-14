@@ -7,8 +7,7 @@ import {
     canChangeCompletionStatus as computeCanChangeCompletionStatus,
 } from '../utils/validation/validators/form';
 import { statusTypes as eventStatuses } from '../events/statusTypes';
-import { useAuthority } from '../utils/authority/useAuthority';
-import { Authorities } from '../utils/authority/authorities';
+import { useAuthority, Authorities } from '../utils/authority';
 
 type Input = {
     programId: string,

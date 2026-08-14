@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { useAuthority } from '../../../../../../utils/authority/useAuthority';
-import { Authorities } from '../../../../../../utils/authority/authorities';
+import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { PlainProps } from './DeleteEnrollmentsAction.types';

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useAuthority } from '../../../../../../utils/authority/useAuthority';
-import { Authorities } from '../../../../../../utils/authority/authorities';
+import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
 

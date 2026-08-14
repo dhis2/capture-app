@@ -3,8 +3,7 @@ import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
 import { useUpdateEnrollment, useDeleteEnrollment } from '../dataMutation/dataMutation';
 import { useUpdateOwnership } from './Transfer/hooks';
-import { useAuthority } from '../../../utils/authority/useAuthority';
-import { Authorities } from '../../../utils/authority/authorities';
+import { useAuthority, Authorities } from '../../../utils/authority';
 
 export const Actions = ({
     enrollment = {},
