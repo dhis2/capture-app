@@ -40,7 +40,7 @@ export const useEventEditPermissions = ({
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
     const isExpired = !isWithinValidPeriod || !isWithinCompleteExpiry;
 
-    const isFormBlockedByCompletion = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
+    const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
     const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
 
     const canUncompleteEvent = computeCanChangeCompletionStatus({
@@ -51,9 +51,11 @@ export const useEventEditPermissions = ({
         hasEditExpiredAuthority,
     });
 
+    const isFormBlockedByCompletion = isCompletedAndBlockingForm;
+
     const isEventReadOnly = !eventAccess?.write
         || isEventBlockedByExpiry
-        || isFormBlockedByCompletion;
+        || isCompletedAndBlockingForm;
 
     return {
         isEventBlockedByExpiry,

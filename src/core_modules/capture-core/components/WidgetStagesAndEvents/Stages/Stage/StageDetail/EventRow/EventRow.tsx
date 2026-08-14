@@ -22,6 +22,7 @@ import {
     rollbackEnrollmentEvent,
 } from '../../../../../Pages/common/EnrollmentOverviewDomain';
 
+
 const styles: Readonly<any> = {
     row: {
         maxWidth: '100%',
@@ -33,6 +34,9 @@ const styles: Readonly<any> = {
         opacity: 0.5,
     },
 };
+
+const isSkippableStatus = (status?: string) =>
+    status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
 
 const EventRowPlain = ({
     id,
@@ -51,7 +55,7 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { canUncompleteEvent } = useEventEditPermissions({
+    const { canUncompleteEvent, isEventReadOnly } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
@@ -82,9 +86,9 @@ const EventRowPlain = ({
             <DataTableCell>
                 {stageWriteAccess && (
                     <>
-                        {pendingApiResponse ? (
-                            <CircularLoader small dataTest={'event-row-saving-loader'} />
-                        ) : (
+                        {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
+
+                        {!pendingApiResponse && (!isEventReadOnly || canUncompleteEvent) && (
                             <OverflowButton
                                 open={actionsOpen}
                                 onClick={() => setActionsOpen(prev => !prev)}
@@ -97,8 +101,7 @@ const EventRowPlain = ({
                                         dense
                                         dataTest={'overflow-menu'}
                                     >
-                                        {(eventDetails.status === eventStatuses.SCHEDULE ||
-                                            eventDetails.status === eventStatuses.SKIPPED) && (
+                                        {isSkippableStatus(eventDetails.status) && (
                                             <SkipAction
                                                 eventId={id}
                                                 eventDetails={eventDetails}
@@ -122,11 +125,6 @@ const EventRowPlain = ({
                                         <DeleteActionButton
                                             setActionsOpen={setActionsOpen}
                                             setDeleteModalOpen={setDeleteModalOpen}
-                                            occurredAt={eventDetails.occurredAt}
-                                            completedAt={eventDetails.completedAt}
-                                            eventStatus={eventDetails.status}
-                                            programId={programId}
-                                            programStage={programStage}
                                         />
                                     </FlyoutMenu>
                                 )}
