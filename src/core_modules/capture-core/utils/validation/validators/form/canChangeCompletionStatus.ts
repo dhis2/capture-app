@@ -4,18 +4,21 @@ type Input = {
     hasWriteAccess: boolean,
     eventStatus?: string,
     canUncompleteEvent: boolean,
-    canEditExpiredEvent: boolean,
+    isExpired: boolean,
+    hasEditExpiredAuthority: boolean,
 };
 
 export const canChangeCompletionStatus = ({
     hasWriteAccess,
     eventStatus,
     canUncompleteEvent,
-    canEditExpiredEvent,
+    isExpired,
+    hasEditExpiredAuthority,
 }: Input): boolean => {
     if (!hasWriteAccess) return false;
     if (eventStatus === eventStatuses.COMPLETED) {
-        return canUncompleteEvent && canEditExpiredEvent;
+        if (isExpired && !hasEditExpiredAuthority) return false;
+        return canUncompleteEvent;
     }
     return eventStatus === eventStatuses.ACTIVE;
 };

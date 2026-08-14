@@ -2,8 +2,8 @@ export type Props = {
     programWriteAccess?: boolean;
     trackedEntityTypeWriteAccess?: boolean;
     programStageWriteAccess?: boolean;
-    canEditExpiredEvent?: boolean;
-    canEditCompletedEvent?: boolean;
+    isEventBlockedByExpiry?: boolean;
+    isFormBlockedByCompletion?: boolean;
     multipleStages?: boolean;
     trackedEntityName?: string;
     trackedEntityInactive?: boolean;
@@ -20,7 +20,7 @@ export type ReadOnlyMessageInput = {
     access: Access;
     trackedEntityName: string | undefined;
     multipleStages: boolean;
-    canEditExpiredEvent: boolean;
-    canEditCompletedEvent: boolean;
+    isEventBlockedByExpiry: boolean;
+    isFormBlockedByCompletion: boolean;
     trackedEntityInactive: boolean;
 };

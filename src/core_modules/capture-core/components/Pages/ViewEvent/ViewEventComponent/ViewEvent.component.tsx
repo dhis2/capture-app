@@ -98,8 +98,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
 
     const {
-        canEditExpiredEvent,
-        canEditCompletedEvent,
+        isEventBlockedByExpiry,
+        isFormBlockedByCompletion,
         canEditEvent,
     } = useEventEditPermissions({
         programId,
@@ -122,8 +122,8 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <ViewEventReadOnlyBadge
                     eventAccess={eventAccess}
-                    canEditExpiredEvent={canEditExpiredEvent}
-                    canEditCompletedEvent={canEditCompletedEvent}
+                    isEventBlockedByExpiry={isEventBlockedByExpiry}
+                    isFormBlockedByCompletion={isFormBlockedByCompletion}
                 />
             </div>
             <div className={classes.contentContainer}>

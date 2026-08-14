@@ -36,7 +36,7 @@ export const DeleteActionButton = ({
     const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod ?? null);
 
     const {
-        canEditCompletedEvent,
+        isFormBlockedByCompletion,
         canEditEvent,
     } = useEventEditPermissions({
         programId,
@@ -53,7 +53,7 @@ export const DeleteActionButton = ({
                 interpolation: { escapeValue: false },
             });
         }
-        if (!canEditCompletedEvent) {
+        if (isFormBlockedByCompletion) {
             return i18n.t('This event has been completed');
         }
         return i18n.t('This event is outside the edit period');

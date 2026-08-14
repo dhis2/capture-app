@@ -36,8 +36,8 @@ const getReadOnlyMessage = ({
     access,
     trackedEntityName,
     multipleStages,
-    canEditExpiredEvent,
-    canEditCompletedEvent,
+    isEventBlockedByExpiry,
+    isFormBlockedByCompletion,
     trackedEntityInactive,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
@@ -45,8 +45,8 @@ const getReadOnlyMessage = ({
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages);
-    if (!canEditExpiredEvent) return getExpiredMessage();
-    if (!canEditCompletedEvent) return getCompletedEventMessage();
+    if (isEventBlockedByExpiry) return getExpiredMessage();
+    if (isFormBlockedByCompletion) return getCompletedEventMessage();
     return '';
 };
 
@@ -54,8 +54,8 @@ const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
     programStageWriteAccess = true,
-    canEditExpiredEvent = true,
-    canEditCompletedEvent = true,
+    isEventBlockedByExpiry = false,
+    isFormBlockedByCompletion = false,
     multipleStages = false,
     trackedEntityName,
     trackedEntityInactive = false,
@@ -71,8 +71,8 @@ const ReadOnlyBadgePlain = ({
         access,
         trackedEntityName,
         multipleStages,
-        canEditExpiredEvent,
-        canEditCompletedEvent,
+        isEventBlockedByExpiry,
+        isFormBlockedByCompletion,
         trackedEntityInactive,
     });
     if (!message) return null;

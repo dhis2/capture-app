@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
+import { useAuthority } from '../../../../../../utils/authority/useAuthority';
+import { Authorities } from '../../../../../../utils/authority/authorities';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { PlainProps } from './DeleteEnrollmentsAction.types';
@@ -16,8 +17,6 @@ const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActiv
     return '';
 };
 
-const CASCADE_DELETE_TEI_AUTHORITY = 'F_ENROLLMENT_CASCADE_DELETE';
-
 export const DeleteEnrollmentsAction = ({
     selectedRows,
     programDataWriteAccess,
@@ -26,7 +25,7 @@ export const DeleteEnrollmentsAction = ({
     bulkDataEntryIsActive,
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
+    const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
