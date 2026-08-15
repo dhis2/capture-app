@@ -4,10 +4,24 @@ import { getProgramEventAccess, type ProgramStage } from '../metaData';
 import {
     isValidPeriod,
     isWithinCompleteEventsExpiry,
-    canChangeCompletionStatus as computeCanChangeCompletionStatus,
 } from '../utils/validation/validators/form';
 import { statusTypes as eventStatuses } from '../events/statusTypes';
 import { useAuthority, Authorities } from '../utils/authority';
+
+const computeCanUncompleteEvent = (
+    hasWriteAccess: boolean,
+    eventStatus: string | undefined,
+    isExpired: boolean,
+    hasEditExpiredAuthority: boolean,
+    hasUncompleteAuthority: boolean,
+): boolean => {
+    if (!hasWriteAccess) return false;
+    if (eventStatus === eventStatuses.COMPLETED) {
+        if (isExpired && !hasEditExpiredAuthority) return false;
+        return hasUncompleteAuthority;
+    }
+    return eventStatus === eventStatuses.ACTIVE;
+};
 
 type Input = {
     programId: string,
@@ -43,13 +57,13 @@ export const useEventEditPermissions = ({
     const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
     const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
 
-    const canUncompleteEvent = computeCanChangeCompletionStatus({
-        hasWriteAccess: !!eventAccess?.write,
+    const canUncompleteEvent = computeCanUncompleteEvent(
+        !!eventAccess?.write,
         eventStatus,
-        canUncompleteEvent: hasUncompleteAuthority,
         isExpired,
         hasEditExpiredAuthority,
-    });
+        hasUncompleteAuthority,
+    );
 
     const isFormBlockedByCompletion = isCompletedAndBlockingForm;
 

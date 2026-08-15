@@ -24,6 +24,6 @@ export const DeleteActionButton = ({
             setDeleteModalOpen(true);
             setActionsOpen(false);
         }}
-        suffix=""
+        suffix={null}
     />
 );

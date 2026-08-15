@@ -38,6 +38,9 @@ const styles: Readonly<any> = {
 const isSkippableStatus = (status?: string) =>
     status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
 
+const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
+    (disabled ? classes.rowDisabled : classes.row);
+
 const EventRowPlain = ({
     id,
     pendingApiResponse,
@@ -78,7 +81,7 @@ const EventRowPlain = ({
 
     return (
         <DataTableRow
-            className={!pendingApiResponse ? classes.row : classes.rowDisabled}
+            className={getRowClass(classes, !!pendingApiResponse)}
             key={id}
         >
             {cells}
