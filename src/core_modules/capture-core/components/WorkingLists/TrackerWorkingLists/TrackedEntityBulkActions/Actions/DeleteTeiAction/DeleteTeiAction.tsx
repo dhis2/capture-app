@@ -4,6 +4,7 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
+import { useTermLabel } from '../../../../../../metaData';
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 
@@ -17,6 +18,7 @@ export const DeleteTeiAction = ({
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
+    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
     const { deleteTeis, isLoading } = useCascadeDeleteTei({
         selectedRows,
         setIsDeleteDialogOpen,
@@ -53,7 +55,10 @@ export const DeleteTeiAction = ({
                     </ModalTitle>
                     <ModalContent>
                         <span>
-                            {i18n.t('Deleting records will also delete any associated enrollments and events.')}
+                            {i18n.t(
+                                'Deleting records will also delete any associated {{enrollmentsLabel}} and events.',
+                                { enrollmentsLabel },
+                            )}
                             {' '}
                             {i18n.t('This cannot be undone.')}
                             {' '}

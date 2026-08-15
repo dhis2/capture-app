@@ -10,6 +10,7 @@ import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
+import { useTermLabel } from '../../../../metaData';
 
 const styles = {
     header: {},
@@ -38,6 +39,7 @@ const RelationshipsWidgetPlain = ({
     const [open, setOpenStatus] = useState(true);
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships, readOnly);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
+    const enrollmentLabel = useTermLabel('enrollment');
 
     if (isLoading) {
         return (
@@ -92,7 +94,7 @@ const RelationshipsWidgetPlain = ({
                 }
                 {(relationships?.length ?? 0) === 0 && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This enrollment doesn't have any relationships")}
+                        {i18n.t("This {{enrollmentLabel}} doesn't have any relationships", { enrollmentLabel })}
                     </div>
                 )}
                 {children}

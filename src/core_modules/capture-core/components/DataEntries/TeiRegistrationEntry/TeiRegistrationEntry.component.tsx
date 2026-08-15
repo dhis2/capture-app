@@ -4,7 +4,7 @@ import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes } from '../../../metaData';
+import { scopeTypes, useTermLabel } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
@@ -19,13 +19,14 @@ import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMe
 
 const translatedTextWithStylesForTei = (
     trackedEntityName: string,
+    enrollmentLabel: string,
     orgUnitName?: string,
     hideProgramSelectionMessage?: boolean,
 ) =>
     (<>
         {i18n.t('Saving a {{trackedEntityName}}', {
             trackedEntityName, interpolation: { escapeValue: false } })
-        } <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
+        } <b>{i18n.t('without')}</b> {enrollmentLabel}
         {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
         {!hideProgramSelectionMessage && i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
@@ -59,6 +60,7 @@ const TeiRegistrationEntryPlain =
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
       const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
+      const enrollmentLabel = useTermLabel('enrollment');
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -111,7 +113,7 @@ const TeiRegistrationEntryPlain =
                       </div>
                       <InfoIconText>
                           {translatedTextWithStylesForTei(
-                              trackedEntityName.toLowerCase(), orgUnitName, hideProgramSelectionMessage,
+                              trackedEntityName.toLowerCase(), enrollmentLabel, orgUnitName, hideProgramSelectionMessage,
                           )}
                       </InfoIconText>
 

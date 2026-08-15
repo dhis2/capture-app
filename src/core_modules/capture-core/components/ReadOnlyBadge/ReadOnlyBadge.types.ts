@@ -25,4 +25,5 @@ export type ReadOnlyMessageInput = {
     canEditCompletedEvent: boolean;
     withinCompleteEventsExpiry: boolean;
     trackedEntityInactive: boolean;
+    enrollmentLabel: string;
 };

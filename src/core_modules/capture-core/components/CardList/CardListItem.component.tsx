@@ -17,6 +17,7 @@ import {
     getTrackerProgramThrowIfNotFound,
     OptionSet,
     type TrackerProgram,
+    useTermLabel,
 } from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
@@ -152,6 +153,7 @@ const CardListItemIndex = ({
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
     const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId ?? null);
+    const enrollmentLabel = useTermLabel('enrollment', { programId: currentProgramId });
     const program: TrackerProgram | undefined = enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
@@ -221,7 +223,7 @@ const CardListItemIndex = ({
                 value={orgUnitName}
             />
             <ListEntry
-                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
+                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of {{enrollmentLabel}}', { enrollmentLabel })}
                 value={enrolledAt}
                 type={dataElementTypes.DATE}
             />
