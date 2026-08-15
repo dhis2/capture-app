@@ -1,26 +1,42 @@
-import { useAuthorities } from '../utils/authority/useAuthorities';
-import { getProgramEventAccess, ProgramStage } from '../metaData';
-import { statusTypes as eventStatuses } from '../events/statusTypes';
+import { getProgramEventAccess, type ProgramStage } from '../metaData';
+import { useProgramExpiryForUser } from './useProgramExpiryForUser';
+import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
+import {
+    isValidPeriod,
+    isWithinCompleteEventsExpiry,
+} from '../utils/validation/validators/form';
+import { useAuthority, Authorities } from '../utils/authority';
+import { computeCanUncompleteEvent } from './computeCanUncompleteEvent';
 
 type Input = {
-    programId: string,
-    stage?: ProgramStage | null,
-    eventStatus?: string,
+    programId: string;
+    stage?: ProgramStage | null;
+    eventStatus?: string;
+    occurredAtClient?: string;
+    completedAtClient?: string;
 };
 
-// canChangeCompletionStatus is true when ALL of the following hold:
-//   - Write access to the program stage (eventAccess.write is true).
-//   - Event status is ACTIVE, OR status is COMPLETED and the user has F_UNCOMPLETE_EVENT.
-
-export const useCanChangeCompletionStatus = ({ programId, stage, eventStatus }: Input): boolean => {
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+export const useCanChangeCompletionStatus = ({
+    programId,
+    stage,
+    eventStatus,
+    occurredAtClient,
+    completedAtClient,
+}: Input): boolean => {
     const eventAccess = getProgramEventAccess(programId, stage?.id ?? null);
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
+    const { hasAuthority: hasUncompleteAuthority } = useAuthority(Authorities.UNCOMPLETE_EVENT);
+    const { hasAuthority: hasEditExpiredAuthority } = useAuthority(Authorities.EDIT_EXPIRED);
+    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
+    const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
+    const isExpired = !isWithinValidPeriod || !isWithinCompleteExpiry;
 
-    if (!eventAccess?.write) {
-        return false;
-    }
-    if (eventStatus === eventStatuses.COMPLETED) {
-        return canUncompleteEvent;
-    }
-    return eventStatus === eventStatuses.ACTIVE;
+    return computeCanUncompleteEvent({
+        hasWriteAccess: !!eventAccess?.write,
+        eventStatus,
+        isExpired,
+        hasEditExpiredAuthority,
+        hasUncompleteAuthority,
+    });
 };

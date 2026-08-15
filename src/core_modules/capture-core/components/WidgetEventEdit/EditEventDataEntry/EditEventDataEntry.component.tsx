@@ -323,9 +323,7 @@ const buildCompleteFieldSettingsFn = () => {
                         withDisplayMessages()(
                             withInternalChangeHandler()(
                                 withConditionalTooltip((props: any) => {
-                                    const isEventCompleted = props.eventStatus === statusTypes.COMPLETED;
-                                    const canUncompleteEvent = props.canUncompleteEvent;
-                                    const shouldDisable = isEventCompleted && !canUncompleteEvent;
+                                    const shouldDisable = !props.canUncompleteEvent;
                                     return shouldDisable
                                         ? i18n.t('You do not have access to uncomplete this event')
                                         : undefined;
@@ -340,9 +338,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => {
-            const isEventCompleted = props.eventStatus === statusTypes.COMPLETED;
-            const canUncompleteEvent = props.canUncompleteEvent;
-            const shouldDisable = isEventCompleted && !canUncompleteEvent;
+            const shouldDisable = !props.canUncompleteEvent;
 
             return createComponentProps(props, {
                 label: i18n.t('Complete event'),

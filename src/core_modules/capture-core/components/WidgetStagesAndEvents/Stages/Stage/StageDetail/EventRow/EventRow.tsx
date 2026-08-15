@@ -8,8 +8,10 @@ import {
     FlyoutMenu,
     IconMore16,
 } from '@dhis2/ui';
-import { useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { useEventEditPermissions } from 'capture-core/hooks';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { convertServerToClient } from 'capture-core/converters';
+import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton, DeleteActionModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
@@ -19,6 +21,7 @@ import {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
 } from '../../../../../Pages/common/EnrollmentOverviewDomain';
+
 
 const styles: Readonly<any> = {
     row: {
@@ -31,6 +34,17 @@ const styles: Readonly<any> = {
         opacity: 0.5,
     },
 };
+
+const isSkippableStatus = (status?: string) =>
+    status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
+
+const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
+    (disabled ? classes.rowDisabled : classes.row);
+
+const isCompletionToggleable = (status: string, blockedByCompletion: boolean, blockedByExpiry: boolean) =>
+    !blockedByCompletion
+    && !blockedByExpiry
+    && (status === eventStatuses.ACTIVE || status === eventStatuses.COMPLETED);
 
 const EventRowPlain = ({
     id,
@@ -49,14 +63,21 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const canChangeCompletionStatus = useCanChangeCompletionStatus({
+    const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
+        occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
     });
+    const canToggleCompletion = isCompletionToggleable(
+        eventDetails.status,
+        isEventBlockedByCompletion,
+        isEventBlockedByExpiry,
+    );
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
+        const { completedAt, ...eventWithoutCompletion } = eventDetails;
         dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
     }, [dispatch, eventDetails, id]);
 
@@ -70,7 +91,7 @@ const EventRowPlain = ({
 
     return (
         <DataTableRow
-            className={!pendingApiResponse ? classes.row : classes.rowDisabled}
+            className={getRowClass(classes, !!pendingApiResponse)}
             key={id}
         >
             {cells}
@@ -78,9 +99,9 @@ const EventRowPlain = ({
             <DataTableCell>
                 {stageWriteAccess && (
                     <>
-                        {pendingApiResponse ? (
-                            <CircularLoader small dataTest={'event-row-saving-loader'} />
-                        ) : (
+                        {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
+
+                        {!pendingApiResponse && (!isEventReadOnly || canToggleCompletion) && (
                             <OverflowButton
                                 open={actionsOpen}
                                 onClick={() => setActionsOpen(prev => !prev)}
@@ -93,8 +114,7 @@ const EventRowPlain = ({
                                         dense
                                         dataTest={'overflow-menu'}
                                     >
-                                        {(eventDetails.status === eventStatuses.SCHEDULE ||
-                                            eventDetails.status === eventStatuses.SKIPPED) && (
+                                        {isSkippableStatus(eventDetails.status) && (
                                             <SkipAction
                                                 eventId={id}
                                                 eventDetails={eventDetails}
@@ -104,7 +124,7 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        {canChangeCompletionStatus && (
+                                        {canToggleCompletion && (
                                             <CompletionMenuItem
                                                 eventId={id}
                                                 eventStatus={eventDetails.status}
@@ -118,11 +138,6 @@ const EventRowPlain = ({
                                         <DeleteActionButton
                                             setActionsOpen={setActionsOpen}
                                             setDeleteModalOpen={setDeleteModalOpen}
-                                            occurredAt={eventDetails.occurredAt}
-                                            completedAt={eventDetails.completedAt}
-                                            eventStatus={eventDetails.status}
-                                            programId={programId}
-                                            programStage={programStage}
                                         />
                                     </FlyoutMenu>
                                 )}

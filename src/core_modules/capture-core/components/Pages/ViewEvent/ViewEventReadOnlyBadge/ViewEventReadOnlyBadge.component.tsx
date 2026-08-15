@@ -3,22 +3,19 @@ import { ReadOnlyBadge } from '../../../ReadOnlyBadge';
 
 type Props = {
     eventAccess: { read: boolean; write: boolean };
-    isEventWithinValidPeriod: boolean;
-    canEditCompletedEvent: boolean;
-    isWithinCompleteEventsExpiry: boolean;
+    isEventBlockedByExpiry: boolean;
+    isEventBlockedByCompletion: boolean;
 };
 
 export const ViewEventReadOnlyBadge = ({
     eventAccess,
-    isEventWithinValidPeriod,
-    canEditCompletedEvent,
-    isWithinCompleteEventsExpiry,
+    isEventBlockedByExpiry,
+    isEventBlockedByCompletion,
 }: Props) => (
     <ReadOnlyBadge
         programWriteAccess={eventAccess.write}
-        eventWithinValidPeriod={isEventWithinValidPeriod}
-        canEditCompletedEvent={canEditCompletedEvent}
-        withinCompleteEventsExpiry={isWithinCompleteEventsExpiry}
+        isEventBlockedByExpiry={isEventBlockedByExpiry}
+        isEventBlockedByCompletion={isEventBlockedByCompletion}
         inlineLabel
     />
 );

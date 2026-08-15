@@ -23,8 +23,9 @@ import { OverflowButton } from '../../../Buttons';
 import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { useProgramExpiryForUser } from '../../../../hooks';
-import { useAuthorities } from '../../../../utils/authority/useAuthorities';
+import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
+import { convertFormToClient } from '../../../../converters';
+import { dataElementTypes } from '../../../../metaData';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -72,6 +73,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         ...passOnProps
     } = props;
     const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
+    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
@@ -79,7 +81,14 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const { isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus: loadedValues?.eventContainer?.event?.status,
+        occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
+    });
+    const canUncompleteEvent = !isEventBlockedByCompletion && !isEventBlockedByExpiry;
 
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);

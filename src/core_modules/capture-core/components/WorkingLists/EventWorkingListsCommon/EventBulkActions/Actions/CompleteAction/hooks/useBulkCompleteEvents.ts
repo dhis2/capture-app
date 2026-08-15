@@ -35,7 +35,8 @@ export const useBulkCompleteEvents = ({
         {
             resource: 'tracker/events',
             params: () => ({
-                fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
+                fields: 'event,status,program,programStage,orgUnit,occurredAt,scheduledAt,' +
+                    'enrollment,trackedEntity,attributeOptionCombo,notes,assignedUser,geometry,followUp',
                 pageSize: 100,
                 program: programId,
                 events: Object.keys(selectedRows).join(','),

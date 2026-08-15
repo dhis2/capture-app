@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode, useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -45,12 +45,12 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
+    canUncompleteEvent,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const canChangeCompletionStatus = useCanChangeCompletionStatus({ programId, stage, eventStatus });
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const showEditButton = !readOnly;
@@ -61,7 +61,7 @@ const WidgetHeaderPlain = ({
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
-            const { completedAt, completedBy, ...eventWithoutCompletion } = storedEvent;
+            const { completedAt, ...eventWithoutCompletion } = storedEvent;
             dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
         }
     }, [dispatch, storedEvent, eventId]);
@@ -119,7 +119,7 @@ const WidgetHeaderPlain = ({
                                     maxWidth="250px"
                                     dataTest={'tracker-program-event-overflow-menu'}
                                 >
-                                    {canChangeCompletionStatus && (
+                                    {canUncompleteEvent && (
                                         <CompletionMenuItem
                                             eventId={eventId}
                                             eventStatus={eventStatus}
