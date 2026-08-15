@@ -5,9 +5,10 @@ import { CircularLoader, FlyoutMenu, IconMore16 } from '@dhis2/ui';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { useCanChangeCompletionStatus } from 'capture-core/hooks';
+import { convertServerToClient } from '../../converters';
+import { dataElementTypes, type ProgramStage } from '../../metaData';
 import { OverflowButton } from '../Buttons';
 import { removeEventChangelogQueries } from '../WidgetsChangelog';
-import { type ProgramStage } from '../../metaData';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -55,6 +56,8 @@ export const EventOverflowMenu = ({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
+        occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
     });
     const canSkip = eventDetails.status === eventStatuses.SCHEDULE ||
         eventDetails.status === eventStatuses.SKIPPED;
@@ -62,7 +65,7 @@ export const EventOverflowMenu = ({
     // Optimistic update shared by both status toggles (complete/incomplete and skip/unskip):
     // apply the new status right away, then commit on success or roll back on error.
     const onStatusMutate = (newStatus: string) => {
-        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
+        const { completedAt, ...eventWithoutCompletion } = eventDetails;
         dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
     };
     const onStatusSuccess = (newStatus: string) => {

@@ -20,6 +20,7 @@ import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
     useEventEditPermissions,
+    useProgramExpiryForUser,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -108,13 +109,15 @@ const WidgetEventEditPlain = ({
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
+    const canUncompleteEvent = !isEventBlockedByCompletion && !isEventBlockedByExpiry;
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -141,7 +144,7 @@ const WidgetEventEditPlain = ({
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            readOnly={readOnly}
+                            readOnly={isEventReadOnly}
                         />
                     }
                     noncollapsible
@@ -178,7 +181,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!readOnly}
+                                    hasDeleteButton={!isEventReadOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}

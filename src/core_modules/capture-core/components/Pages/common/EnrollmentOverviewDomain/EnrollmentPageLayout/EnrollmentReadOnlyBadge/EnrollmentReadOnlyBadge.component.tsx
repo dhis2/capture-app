@@ -12,20 +12,16 @@ export const EnrollmentReadOnlyBadge = () => {
         anyStageReadAccess,
         trackedEntityTypeName,
         trackedEntityInactive,
-        isEventWithinValidPeriod,
-        canEditCompletedEvent,
-        isWithinCompleteEventsExpiry,
-        isEventSkipped,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
     } = useEnrollmentAccessContext();
 
     if (isEventPage) {
         return (
             <ReadOnlyBadge
                 programStageWriteAccess={currentStageWriteAccess}
-                eventWithinValidPeriod={isEventWithinValidPeriod}
-                canEditCompletedEvent={canEditCompletedEvent}
-                withinCompleteEventsExpiry={isWithinCompleteEventsExpiry}
-                eventSkipped={isEventSkipped}
+                isEventBlockedByExpiry={isEventBlockedByExpiry}
+                isEventBlockedByCompletion={isEventBlockedByCompletion}
                 trackedEntityName={trackedEntityTypeName}
                 trackedEntityInactive={trackedEntityInactive}
                 inlineLabel

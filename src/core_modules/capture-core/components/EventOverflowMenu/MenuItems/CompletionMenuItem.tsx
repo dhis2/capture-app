@@ -42,7 +42,8 @@ export const CompletionMenuItem = ({
                     resource: 'tracker/events',
                     id: eventId,
                     params: {
-                        fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
+                        fields: 'event,status,program,programStage,orgUnit,occurredAt,scheduledAt,' +
+                            'enrollment,trackedEntity,attributeOptionCombo,notes,assignedUser,geometry,followUp',
                     },
                 },
             }) as any;
@@ -79,7 +80,7 @@ export const CompletionMenuItem = ({
             dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
             icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
             label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
-            suffix=""
+            suffix={null}
             onClick={() => {
                 onClose();
                 updateCompletionStatus();

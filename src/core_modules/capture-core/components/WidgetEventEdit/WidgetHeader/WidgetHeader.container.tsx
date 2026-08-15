@@ -16,6 +16,8 @@ import {
 } from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
 import { EventOverflowMenu } from '../../EventOverflowMenu';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
+import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -107,6 +109,7 @@ const WidgetHeaderPlain = ({
                                 onDeleteEvent={onDeleteEvent}
                                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                                 onOpenChangelog={() => setChangeLogIsOpen(true)}
+                                onStatusUpdated={() => dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT))}
                                 dataTest={'tracker-program-event-overflow'}
                             />
                         )}

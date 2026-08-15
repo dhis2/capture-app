@@ -27,8 +27,6 @@ const getExpiredMessage = (): string => i18n.t('This event is outside the editin
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 
-const getSkippedEventMessage = (): string => i18n.t('This event has been skipped');
-
 const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
     ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
     : i18n.t('This tracked entity is deactivated'));
@@ -38,10 +36,8 @@ const getReadOnlyMessage = ({
     access,
     trackedEntityName,
     multipleStages,
-    eventWithinValidPeriod,
-    canEditCompletedEvent,
-    withinCompleteEventsExpiry,
-    eventSkipped,
+    isEventBlockedByExpiry,
+    isEventBlockedByCompletion,
     trackedEntityInactive,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
@@ -49,10 +45,8 @@ const getReadOnlyMessage = ({
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages);
-    if (!eventWithinValidPeriod) return getExpiredMessage();
-    if (eventSkipped) return getSkippedEventMessage();
-    if (!canEditCompletedEvent) return getCompletedEventMessage();
-    if (!withinCompleteEventsExpiry) return getExpiredMessage();
+    if (isEventBlockedByExpiry) return getExpiredMessage();
+    if (isEventBlockedByCompletion) return getCompletedEventMessage();
     return '';
 };
 
@@ -60,10 +54,8 @@ const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
     programStageWriteAccess = true,
-    eventWithinValidPeriod = true,
-    canEditCompletedEvent = true,
-    withinCompleteEventsExpiry = true,
-    eventSkipped = false,
+    isEventBlockedByExpiry = false,
+    isEventBlockedByCompletion = false,
     multipleStages = false,
     trackedEntityName,
     trackedEntityInactive = false,
@@ -79,10 +71,8 @@ const ReadOnlyBadgePlain = ({
         access,
         trackedEntityName,
         multipleStages,
-        eventWithinValidPeriod,
-        canEditCompletedEvent,
-        withinCompleteEventsExpiry,
-        eventSkipped,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
         trackedEntityInactive,
     });
     if (!message) return null;

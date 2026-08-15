@@ -18,10 +18,8 @@ export type EnrollmentAccessContextValue = {
     showWidgetBadge: boolean;
     trackedEntityInactive: boolean;
     canToggleTrackedEntityStatus: boolean;
-    isEventWithinValidPeriod?: boolean;
-    canEditCompletedEvent?: boolean;
-    isWithinCompleteEventsExpiry?: boolean;
-    isEventSkipped?: boolean;
+    isEventBlockedByExpiry?: boolean;
+    isEventBlockedByCompletion?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -38,6 +36,8 @@ const fallback: EnrollmentAccessContextValue = {
     showWidgetBadge: true,
     trackedEntityInactive: false,
     canToggleTrackedEntityStatus: false,
+    isEventBlockedByExpiry: false,
+    isEventBlockedByCompletion: false,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
@@ -46,10 +46,8 @@ type ProviderProps = {
     program?: TrackerProgram;
     currentStageId?: string;
     trackedEntityInactive?: boolean;
-    isEventWithinValidPeriod?: boolean;
-    canEditCompletedEvent?: boolean;
-    isWithinCompleteEventsExpiry?: boolean;
-    isEventSkipped?: boolean;
+    isEventBlockedByExpiry?: boolean;
+    isEventBlockedByCompletion?: boolean;
     children: React.ReactNode;
 };
 
@@ -68,10 +66,8 @@ const computeContextValue = (
     program: TrackerProgram,
     currentStageId: string | undefined,
     trackedEntityInactive: boolean,
-    isEventWithinValidPeriod?: boolean,
-    canEditCompletedEvent?: boolean,
-    isWithinCompleteEventsExpiry?: boolean,
-    isEventSkipped?: boolean,
+    isEventBlockedByExpiry?: boolean,
+    isEventBlockedByCompletion?: boolean,
 ): EnrollmentAccessContextValue => {
     const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
     const rawProgramWriteAccess = Boolean(program.access?.data?.write);
@@ -104,10 +100,8 @@ const computeContextValue = (
         showWidgetBadge: !isEventPage && !allWriteAccessMissing,
         trackedEntityInactive,
         canToggleTrackedEntityStatus: rawTrackedEntityTypeWriteAccess,
-        isEventWithinValidPeriod,
-        canEditCompletedEvent,
-        isWithinCompleteEventsExpiry,
-        isEventSkipped,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
     };
 };
 
@@ -115,10 +109,8 @@ export const EnrollmentAccessProvider = ({
     program,
     currentStageId,
     trackedEntityInactive = false,
-    isEventWithinValidPeriod,
-    canEditCompletedEvent,
-    isWithinCompleteEventsExpiry,
-    isEventSkipped,
+    isEventBlockedByExpiry,
+    isEventBlockedByCompletion,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(
@@ -127,10 +119,8 @@ export const EnrollmentAccessProvider = ({
                 program,
                 currentStageId,
                 trackedEntityInactive,
-                isEventWithinValidPeriod,
-                canEditCompletedEvent,
-                isWithinCompleteEventsExpiry,
-                isEventSkipped,
+                isEventBlockedByExpiry,
+                isEventBlockedByCompletion,
             )
             : {
                 ...fallback,
@@ -148,10 +138,8 @@ export const EnrollmentAccessProvider = ({
             program,
             currentStageId,
             trackedEntityInactive,
-            isEventWithinValidPeriod,
-            canEditCompletedEvent,
-            isWithinCompleteEventsExpiry,
-            isEventSkipped,
+            isEventBlockedByExpiry,
+            isEventBlockedByCompletion,
         ],
     );
 

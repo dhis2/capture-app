@@ -44,9 +44,9 @@ export const DeleteMenuItem = ({
     const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
 
     const {
-        isEventWithinValidPeriod,
-        canEditCompletedEvent,
-        readOnly,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
+        isEventReadOnly,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -56,13 +56,13 @@ export const DeleteMenuItem = ({
     });
 
     const getDisabledMessage = (): string => {
-        if (!isEventWithinValidPeriod) {
+        if (isEventBlockedByExpiry) {
             return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
                 occurredAt: occurredAtClientView,
                 interpolation: { escapeValue: false },
             });
         }
-        if (!canEditCompletedEvent) {
+        if (isEventBlockedByCompletion) {
             return i18n.t('This event has been completed');
         }
         return i18n.t('This event is outside the edit period');
@@ -71,11 +71,11 @@ export const DeleteMenuItem = ({
     return (
         <ConditionalTooltip
             content={getDisabledMessage()}
-            enabled={readOnly}
+            enabled={isEventReadOnly}
         >
             <MenuItem
                 dense
-                disabled={readOnly}
+                disabled={isEventReadOnly}
                 icon={<IconDelete16 color={colors.red600} />}
                 label={i18n.t('Delete')}
                 dataTest="stages-and-events-delete"

@@ -5,6 +5,7 @@ import { EventOverflowMenu } from '../../../../../EventOverflowMenu';
 import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
 import type { EventRowProps } from './EventRow.types';
 
+
 const styles: Readonly<any> = {
     row: {
         maxWidth: '100%',
@@ -16,6 +17,9 @@ const styles: Readonly<any> = {
         opacity: 0.5,
     },
 };
+
+const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
+    (disabled ? classes.rowDisabled : classes.row);
 
 const EventRowPlain = ({
     id,
@@ -33,7 +37,7 @@ const EventRowPlain = ({
 
     return (
         <DataTableRow
-            className={!pendingApiResponse ? classes.row : classes.rowDisabled}
+            className={getRowClass(classes, !!pendingApiResponse)}
             key={id}
         >
             {cells}
