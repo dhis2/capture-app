@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { determineLinkedEntity } from
     'capture-core/components/WidgetsRelationship/common/RelationshipsWidget/useGroupedLinkedEntities';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
@@ -21,24 +20,18 @@ type Props = {
 type ReturnData = Array<InputRelationshipData>;
 
 export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Props) => {
-    const query = useMemo(() => {
-        const supportForFeature = featureAvailable(FEATURES.newPagingQueryParam);
-
-        return {
-            resource: 'tracker/relationships',
-            params: {
-                [searchMode]: entityId,
-                fields: 'relationship,relationshipType,createdAt,'
-                    + 'from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],'
-                    + 'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],'
-                    + 'to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],'
-                    + 'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
-                ...(supportForFeature
-                    ? { paging: false }
-                    : { skipPaging: true }),
-            },
-        };
-    }, [entityId, searchMode]);
+    const query = useMemo(() => ({
+        resource: 'tracker/relationships',
+        params: {
+            [searchMode]: entityId,
+            fields: 'relationship,relationshipType,createdAt,'
+                + 'from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],'
+                + 'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],'
+                + 'to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],'
+                + 'event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
+            paging: false,
+        },
+    }), [entityId, searchMode]);
 
     return useApiDataQuery(
         ['relationships', entityId],

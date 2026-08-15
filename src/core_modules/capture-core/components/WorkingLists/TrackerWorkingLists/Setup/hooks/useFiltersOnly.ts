@@ -87,13 +87,10 @@ export const useFiltersOnly = (
                         header: i18n.t('Assigned to'),
                         transformRecordsFilter: (rawFilter: any) => {
                             const { assignedUserMode } = rawFilter;
-                            const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                                ? 'assignedUsers'
-                                : 'assignedUser';
-                            const assignedUser = rawFilter[assignedUsersQueryParam];
+                            const assignedUsers = rawFilter.assignedUsers;
                             return {
                                 assignedUserMode,
-                                ...(assignedUser && { [assignedUsersQueryParam]: assignedUser }),
+                                ...(assignedUsers && { assignedUsers }),
                             };
                         },
                     },

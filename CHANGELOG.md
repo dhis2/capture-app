@@ -1,3 +1,29 @@
+## [107.0.1](https://github.com/dhis2/capture-app/compare/v107.0.0...v107.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* [DHIS2-21685] show min characters filter validation only on update attempt ([#4647](https://github.com/dhis2/capture-app/issues/4647)) ([c68ab6f](https://github.com/dhis2/capture-app/commit/c68ab6f8e80f3214f7792230cc060c08a646ed5b))
+
+# [107.0.0](https://github.com/dhis2/capture-app/compare/v106.7.8...v107.0.0) (2026-08-11)
+
+
+### chore
+
+* **release:** [DHIS2-21692] stop support for 2.40 ([#4662](https://github.com/dhis2/capture-app/issues/4662)) ([22fa85d](https://github.com/dhis2/capture-app/commit/22fa85d256e27a962716fd85487e85773832c477))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 107.0.0 to facilitate potential fixes for 2.40.
+
+## [106.7.8](https://github.com/dhis2/capture-app/compare/v106.7.7...v106.7.8) (2026-08-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4697](https://github.com/dhis2/capture-app/issues/4697)) ([e8bdb2f](https://github.com/dhis2/capture-app/commit/e8bdb2f9486847e3fe90e1135bb468c15ebc687c))
+
 ## [106.7.7](https://github.com/dhis2/capture-app/compare/v106.7.6...v106.7.7) (2026-08-07)
 
 
