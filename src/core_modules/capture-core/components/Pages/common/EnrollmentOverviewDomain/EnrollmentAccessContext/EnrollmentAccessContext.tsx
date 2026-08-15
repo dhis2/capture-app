@@ -19,7 +19,7 @@ export type EnrollmentAccessContextValue = {
     trackedEntityInactive: boolean;
     canToggleTrackedEntityStatus: boolean;
     isEventBlockedByExpiry?: boolean;
-    isFormBlockedByCompletion?: boolean;
+    isEventBlockedByCompletion?: boolean;
 };
 
 const fallback: EnrollmentAccessContextValue = {
@@ -37,7 +37,7 @@ const fallback: EnrollmentAccessContextValue = {
     trackedEntityInactive: false,
     canToggleTrackedEntityStatus: false,
     isEventBlockedByExpiry: false,
-    isFormBlockedByCompletion: false,
+    isEventBlockedByCompletion: false,
 };
 
 const Context = createContext<EnrollmentAccessContextValue>(fallback);
@@ -47,7 +47,7 @@ type ProviderProps = {
     currentStageId?: string;
     trackedEntityInactive?: boolean;
     isEventBlockedByExpiry?: boolean;
-    isFormBlockedByCompletion?: boolean;
+    isEventBlockedByCompletion?: boolean;
     children: React.ReactNode;
 };
 
@@ -67,7 +67,7 @@ const computeContextValue = (
     currentStageId: string | undefined,
     trackedEntityInactive: boolean,
     isEventBlockedByExpiry?: boolean,
-    isFormBlockedByCompletion?: boolean,
+    isEventBlockedByCompletion?: boolean,
 ): EnrollmentAccessContextValue => {
     const { rawStageWriteAccessById, stageReadAccessById } = buildStageAccessMaps(program);
     const rawProgramWriteAccess = Boolean(program.access?.data?.write);
@@ -101,7 +101,7 @@ const computeContextValue = (
         trackedEntityInactive,
         canToggleTrackedEntityStatus: rawTrackedEntityTypeWriteAccess,
         isEventBlockedByExpiry,
-        isFormBlockedByCompletion,
+        isEventBlockedByCompletion,
     };
 };
 
@@ -110,7 +110,7 @@ export const EnrollmentAccessProvider = ({
     currentStageId,
     trackedEntityInactive = false,
     isEventBlockedByExpiry,
-    isFormBlockedByCompletion,
+    isEventBlockedByCompletion,
     children,
 }: ProviderProps) => {
     const value = useMemo<EnrollmentAccessContextValue>(
@@ -120,7 +120,7 @@ export const EnrollmentAccessProvider = ({
                 currentStageId,
                 trackedEntityInactive,
                 isEventBlockedByExpiry,
-                isFormBlockedByCompletion,
+                isEventBlockedByCompletion,
             )
             : {
                 ...fallback,
@@ -139,7 +139,7 @@ export const EnrollmentAccessProvider = ({
             currentStageId,
             trackedEntityInactive,
             isEventBlockedByExpiry,
-            isFormBlockedByCompletion,
+            isEventBlockedByCompletion,
         ],
     );
 

@@ -7,21 +7,7 @@ import {
 } from '../utils/validation/validators/form';
 import { statusTypes as eventStatuses } from '../events/statusTypes';
 import { useAuthority, Authorities } from '../utils/authority';
-
-const computeCanUncompleteEvent = (
-    hasWriteAccess: boolean,
-    eventStatus: string | undefined,
-    isExpired: boolean,
-    hasEditExpiredAuthority: boolean,
-    hasUncompleteAuthority: boolean,
-): boolean => {
-    if (!hasWriteAccess) return false;
-    if (eventStatus === eventStatuses.COMPLETED) {
-        if (isExpired && !hasEditExpiredAuthority) return false;
-        return hasUncompleteAuthority;
-    }
-    return eventStatus === eventStatuses.ACTIVE;
-};
+import { computeCanUncompleteEvent } from './computeCanUncompleteEvent';
 
 type Input = {
     programId: string,
@@ -33,8 +19,7 @@ type Input = {
 
 type Output = {
     isEventBlockedByExpiry: boolean,
-    isFormBlockedByCompletion: boolean,
-    canUncompleteEvent: boolean,
+    isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
 };
 
@@ -57,15 +42,15 @@ export const useEventEditPermissions = ({
     const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
     const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
 
-    const canUncompleteEvent = computeCanUncompleteEvent(
-        !!eventAccess?.write,
+    const canUncompleteEvent = computeCanUncompleteEvent({
+        hasWriteAccess: !!eventAccess?.write,
         eventStatus,
         isExpired,
         hasEditExpiredAuthority,
         hasUncompleteAuthority,
-    );
+    });
 
-    const isFormBlockedByCompletion = isCompletedAndBlockingForm;
+    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canUncompleteEvent;
 
     const isEventReadOnly = !eventAccess?.write
         || isEventBlockedByExpiry
@@ -73,8 +58,7 @@ export const useEventEditPermissions = ({
 
     return {
         isEventBlockedByExpiry,
-        isFormBlockedByCompletion,
-        canUncompleteEvent,
+        isEventBlockedByCompletion,
         isEventReadOnly,
     };
 };

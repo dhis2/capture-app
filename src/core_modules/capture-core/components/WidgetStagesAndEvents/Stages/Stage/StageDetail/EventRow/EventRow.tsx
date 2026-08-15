@@ -41,6 +41,11 @@ const isSkippableStatus = (status?: string) =>
 const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
     (disabled ? classes.rowDisabled : classes.row);
 
+const isCompletionToggleable = (status: string, blockedByCompletion: boolean, blockedByExpiry: boolean) =>
+    !blockedByCompletion
+    && !blockedByExpiry
+    && (status === eventStatuses.ACTIVE || status === eventStatuses.COMPLETED);
+
 const EventRowPlain = ({
     id,
     pendingApiResponse,
@@ -58,16 +63,21 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { canUncompleteEvent, isEventReadOnly } = useEventEditPermissions({
+    const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
         occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
     });
+    const canToggleCompletion = isCompletionToggleable(
+        eventDetails.status,
+        isEventBlockedByCompletion,
+        isEventBlockedByExpiry,
+    );
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
-        const { completedAt, completedBy, ...eventWithoutCompletion } = eventDetails;
+        const { completedAt, ...eventWithoutCompletion } = eventDetails;
         dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
     }, [dispatch, eventDetails, id]);
 
@@ -91,7 +101,7 @@ const EventRowPlain = ({
                     <>
                         {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                        {!pendingApiResponse && (!isEventReadOnly || canUncompleteEvent) && (
+                        {!pendingApiResponse && (!isEventReadOnly || canToggleCompletion) && (
                             <OverflowButton
                                 open={actionsOpen}
                                 onClick={() => setActionsOpen(prev => !prev)}
@@ -114,7 +124,7 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        {canUncompleteEvent && (
+                                        {canToggleCompletion && (
                                             <CompletionMenuItem
                                                 eventId={id}
                                                 eventStatus={eventDetails.status}

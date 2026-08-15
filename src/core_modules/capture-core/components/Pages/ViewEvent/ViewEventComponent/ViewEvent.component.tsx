@@ -99,7 +99,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
 
     const {
         isEventBlockedByExpiry,
-        isFormBlockedByCompletion,
+        isEventBlockedByCompletion,
         isEventReadOnly,
     } = useEventEditPermissions({
         programId,
@@ -123,7 +123,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 <ViewEventReadOnlyBadge
                     eventAccess={eventAccess}
                     isEventBlockedByExpiry={isEventBlockedByExpiry}
-                    isFormBlockedByCompletion={isFormBlockedByCompletion}
+                    isEventBlockedByCompletion={isEventBlockedByCompletion}
                 />
             </div>
             <div className={classes.contentContainer}>

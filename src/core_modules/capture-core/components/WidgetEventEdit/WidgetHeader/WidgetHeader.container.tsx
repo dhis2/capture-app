@@ -61,7 +61,7 @@ const WidgetHeaderPlain = ({
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
-            const { completedAt, completedBy, ...eventWithoutCompletion } = storedEvent;
+            const { completedAt, ...eventWithoutCompletion } = storedEvent;
             dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
         }
     }, [dispatch, storedEvent, eventId]);

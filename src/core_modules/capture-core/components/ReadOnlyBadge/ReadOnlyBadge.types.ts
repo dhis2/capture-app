@@ -3,7 +3,7 @@ export type Props = {
     trackedEntityTypeWriteAccess?: boolean;
     programStageWriteAccess?: boolean;
     isEventBlockedByExpiry?: boolean;
-    isFormBlockedByCompletion?: boolean;
+    isEventBlockedByCompletion?: boolean;
     multipleStages?: boolean;
     trackedEntityName?: string;
     trackedEntityInactive?: boolean;
@@ -21,6 +21,6 @@ export type ReadOnlyMessageInput = {
     trackedEntityName: string | undefined;
     multipleStages: boolean;
     isEventBlockedByExpiry: boolean;
-    isFormBlockedByCompletion: boolean;
+    isEventBlockedByCompletion: boolean;
     trackedEntityInactive: boolean;
 };
