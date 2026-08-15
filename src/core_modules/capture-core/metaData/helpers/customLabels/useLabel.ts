@@ -25,8 +25,8 @@ const resolve = (
 ): string => {
     const program = programId ? programCollection.get(programId) : undefined;
     const stage = program && stageId ? program.getStage(stageId) : undefined;
-    return resolveLabel([stage?.customLabels, program?.customLabels], key, { plural })
-        ?? defaults[key]();
+    const customLabel = resolveLabel([stage?.customLabels, program?.customLabels], key, { plural });
+    return customLabel ?? defaults[key]();
 };
 
 /**
@@ -51,5 +51,8 @@ export const useTermLabel = (
     const { programId, stageId, plural } = options;
     const currentProgramId = useSelector(({ currentSelections }: any) => currentSelections.programId);
     const id = programId ?? currentProgramId;
-    return useMemo(() => resolve(id, key, { stageId, plural }), [id, key, stageId, plural]);
+    return useMemo(
+        () => resolve(id, key, { stageId, plural }),
+        [id, key, stageId, plural],
+    );
 };
