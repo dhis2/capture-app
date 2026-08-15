@@ -17,7 +17,12 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes, useTermLabel } from '../../metaData';
+import {
+    dataElementTypes,
+    useTermLabel,
+    tLabel,
+    capitalizeFirstLetter,
+} from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -102,7 +107,7 @@ const WidgetEnrollmentPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{enrollmentLabel}</span>
+                        <span>{capitalizeFirstLetter(enrollmentLabel)}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -117,12 +122,10 @@ const WidgetEnrollmentPlain = ({
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                {initError && (
+                {true && (
                     <div className={classes.enrollment}>
-                        {i18n.t(
-                            '{{enrollmentLabel}} widget could not be loaded. Please try again later',
-                            { enrollmentLabel },
-                        )}
+                        {tLabel('{{enrollmentLabel}} widget could not be loaded. Please try again later',
+                            { enrollmentLabel })}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}
