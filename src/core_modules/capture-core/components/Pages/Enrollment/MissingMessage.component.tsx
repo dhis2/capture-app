@@ -5,7 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { useTermLabel } from '../../../metaData';
+import { useTermLabel, tLabel } from '../../../metaData';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -302,8 +302,8 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.EVENT_PROGRAM_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{programName}} is an event program and does not have enrollments.', {
-                        programName, interpolation: { escapeValue: false },
+                    {tLabel('{{programName}} is an event program and does not have {{enrollmentsLabel}}.', {
+                        programName, enrollmentsLabel, interpolation: { escapeValue: false },
                     })}
                     <div>
                         <LinkButton
