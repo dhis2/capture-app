@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
@@ -95,10 +94,7 @@ export const loadViewEventDataEntry =
         let attributeCategoryOptions;
 
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-            const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
-            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(
-                newUIDsSeparator ? ',' : ';',
-            );
+            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(',');
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {
                 const categoryOptionsPromises = optionIds.map(async (optionId) => {
                     const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(

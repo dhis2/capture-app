@@ -29,14 +29,12 @@ export class TrackedEntityTypeFactory {
         cachedOptionSets,
         locale,
         dataEntryFormConfig,
-        minorServerVersion,
     }: ConstructorInput) {
         this.locale = locale;
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-            minorServerVersion,
         });
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
@@ -48,7 +46,6 @@ export class TrackedEntityTypeFactory {
             cachedOptionSets,
             dataEntryFormConfig,
             locale,
-            minorServerVersion,
         });
     }
 

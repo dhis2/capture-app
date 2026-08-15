@@ -2,7 +2,7 @@ import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import log from 'loglevel';
-import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import type { EpicAction, ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
 import {
     actionTypes,
@@ -37,9 +37,6 @@ export const initEventListEpic = (
                 ...(selectedTemplate.nextCriteria || selectedTemplate.criteria),
                 ...lockedFilters,
             };
-            const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const initialPromise =
                 initEventWorkingListAsync(
                     eventQueryCriteria, {
@@ -48,7 +45,7 @@ export const initEventListEpic = (
                             orgUnitId,
                             categories,
                             programStageId,
-                            [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
+                            orgUnitMode: orgUnitId ? 'SELECTED' : 'CAPTURE',
                         },
                         columnsMetaForDataFetching,
                         categoryCombinationId,
@@ -77,9 +74,6 @@ export const updateEventListEpic = (
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             const {
                 queryArgs,
                 columnsMetaForDataFetching,
@@ -87,14 +81,14 @@ export const updateEventListEpic = (
                 storeId,
                 queryArgs: { programId, orgUnitId, programStageId, categories },
             } = action.payload;
-            !queryArgs?.orgUnitId && (queryArgs[orgUnitModeQueryParam] = 'CAPTURE');
+            !queryArgs?.orgUnitId && (queryArgs.orgUnitMode = 'CAPTURE');
             const updatePromise = updateEventWorkingListAsync(queryArgs, {
                 commonQueryData: {
                     programId,
                     orgUnitId,
                     categories,
                     programStageId,
-                    [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
+                    orgUnitMode: orgUnitId ? 'SELECTED' : 'CAPTURE',
                 },
                 columnsMetaForDataFetching,
                 categoryCombinationId,
