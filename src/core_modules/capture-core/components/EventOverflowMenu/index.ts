@@ -1,1 +1,1 @@
-export { DeleteMenuItem, CompletionMenuItem, ChangelogMenuItem, SkipMenuItem } from './MenuItems';
+export { DeleteMenuItem, DeleteMenuItemModal, CompletionMenuItem, ChangelogMenuItem, SkipMenuItem } from './MenuItems';

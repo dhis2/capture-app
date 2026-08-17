@@ -18,7 +18,9 @@ import {
     deleteEnrollmentEvent,
     addPersistedEnrollmentEvents,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { CompletionMenuItem, ChangelogMenuItem, SkipMenuItem, DeleteMenuItem } from '../../EventOverflowMenu';
+import {
+    CompletionMenuItem, ChangelogMenuItem, SkipMenuItem, DeleteMenuItem, DeleteMenuItemModal,
+} from '../../EventOverflowMenu';
 import { statusTypes as eventStatuses } from '../../../events/statusTypes';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
@@ -60,6 +62,7 @@ const WidgetHeaderPlain = ({
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
@@ -178,13 +181,9 @@ const WidgetHeaderPlain = ({
                                         onOpenChangelog={() => setChangeLogIsOpen(true)}
                                         onClose={() => setActionsIsOpen(false)}
                                     />
-                                    {!readOnly && storedEvent && (
+                                    {!readOnly && (
                                         <DeleteMenuItem
-                                            eventId={eventId}
-                                            pendingApiResponse={false}
-                                            eventDetails={storedEvent}
-                                            onDeleteEvent={onDeleteEvent}
-                                            onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                            onDeleteRequest={() => setDeleteModalOpen(true)}
                                             onClose={() => setActionsIsOpen(false)}
                                         />
                                     )}
@@ -194,6 +193,16 @@ const WidgetHeaderPlain = ({
                     </div>
                 )}
             </div>
+            {deleteModalOpen && storedEvent && (
+                <DeleteMenuItemModal
+                    eventId={eventId}
+                    pendingApiResponse={false}
+                    eventDetails={storedEvent}
+                    onDeleteEvent={onDeleteEvent}
+                    onRollbackDeleteEvent={onRollbackDeleteEvent}
+                    setDeleteModalOpen={setDeleteModalOpen}
+                />
+            )}
         </>
     );
 };

@@ -14,7 +14,7 @@ import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteMenuItem, CompletionMenuItem, SkipMenuItem } from '../../../../../EventOverflowMenu';
+import { DeleteMenuItem, DeleteMenuItemModal, CompletionMenuItem, SkipMenuItem } from '../../../../../EventOverflowMenu';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -58,6 +58,7 @@ const EventRowPlain = ({
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
     const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
@@ -147,15 +148,21 @@ const EventRowPlain = ({
                                         )}
 
                                         <DeleteMenuItem
-                                            eventId={id}
-                                            pendingApiResponse={pendingApiResponse}
-                                            eventDetails={eventDetails}
-                                            onDeleteEvent={onDeleteEvent}
-                                            onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                            onDeleteRequest={() => setDeleteModalOpen(true)}
                                             onClose={() => setActionsOpen(false)}
                                         />
                                     </FlyoutMenu>
                                 )}
+                            />
+                        )}
+                        {deleteModalOpen && (
+                            <DeleteMenuItemModal
+                                eventId={id}
+                                pendingApiResponse={pendingApiResponse}
+                                eventDetails={eventDetails}
+                                onDeleteEvent={onDeleteEvent}
+                                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                setDeleteModalOpen={setDeleteModalOpen}
                             />
                         )}
                     </>

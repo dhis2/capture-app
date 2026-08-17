@@ -110,14 +110,13 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
+    const { isEventReadOnly, isEventBlockedByCompletion, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-    const canUncompleteEvent = !isEventBlockedByCompletion && !isEventBlockedByExpiry;
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -145,7 +144,7 @@ const WidgetEventEditPlain = ({
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
-                            canUncompleteEvent={canUncompleteEvent}
+                            canUncompleteEvent={!isEventBlockedByCompletion}
                         />
                     }
                     noncollapsible
@@ -180,7 +179,7 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canUncompleteEvent={canUncompleteEvent}
+                                    canUncompleteEvent={!isEventBlockedByCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
                                     hasDeleteButton={!isEventReadOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-17T14:48:08.250Z\n"
-"PO-Revision-Date: 2026-08-17T14:48:08.250Z\n"
+"POT-Creation-Date: 2026-08-17T15:03:38.299Z\n"
+"PO-Revision-Date: 2026-08-17T15:03:38.299Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -449,6 +449,9 @@ msgstr "Mark incomplete"
 msgid "Mark complete"
 msgstr "Mark complete"
 
+msgid "Delete"
+msgstr "Delete"
+
 msgid "An error occurred while deleting the event"
 msgstr "An error occurred while deleting the event"
 
@@ -463,9 +466,6 @@ msgstr "Are you sure you want to delete this event?"
 
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Unskip"
 msgstr "Unskip"

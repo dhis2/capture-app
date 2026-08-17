@@ -1,51 +1,98 @@
-import React, { useState } from 'react';
+import React from 'react';
+import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { colors, IconDelete16, MenuItem } from '@dhis2/ui';
+import {
+    Button, ButtonStrip, colors, IconDelete16, MenuItem, Modal, ModalActions, ModalContent, ModalTitle,
+} from '@dhis2/ui';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { useMutation } from '@tanstack/react-query';
+import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { DeleteActionModal } from './DeleteEventModal';
 
-type Props = {
+type DeleteMenuItemProps = {
+    onDeleteRequest: () => void;
+    onClose: () => void;
+};
+
+export const DeleteMenuItem = ({ onDeleteRequest, onClose }: DeleteMenuItemProps) => (
+    <MenuItem
+        dense
+        icon={<IconDelete16 color={colors.red600} />}
+        label={i18n.t('Delete')}
+        dataTest="stages-and-events-delete"
+        onClick={() => {
+            onDeleteRequest();
+            onClose();
+        }}
+        suffix={null}
+    />
+);
+
+type DeleteMenuItemModalProps = {
     eventId: string;
     pendingApiResponse: boolean;
     eventDetails: ApiEnrollmentEvent;
     onDeleteEvent: (eventId: string) => void;
-    onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
-    onClose: () => void;
+    onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
+    setDeleteModalOpen: (open: boolean) => void;
 };
 
-export const DeleteMenuItem = ({
-    eventId,
+export const DeleteMenuItemModal = ({
+    setDeleteModalOpen,
     pendingApiResponse,
+    eventId,
     eventDetails,
     onDeleteEvent,
     onRollbackDeleteEvent,
-    onClose,
-}: Props) => {
-    const [modalOpen, setModalOpen] = useState(false);
+}: DeleteMenuItemModalProps) => {
+    const { show: showError } = useAlert(
+        ({ message }) => message,
+        { critical: true },
+    );
+    const dataEngine = useDataEngine();
+
+    const { mutate } = useMutation(
+        () => dataEngine.mutate({
+            resource: 'tracker?async=false&importStrategy=DELETE',
+            type: 'create',
+            data: { events: [{ event: eventId }] },
+        }),
+        {
+            onMutate: () => {
+                const eventToRollbackOnFail = eventDetails;
+                onDeleteEvent(eventId);
+                return eventToRollbackOnFail;
+            },
+            onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: ApiEnrollmentEvent) => {
+                showError({ message: i18n.t('An error occurred while deleting the event') });
+                log.error(errorCreator('An error occurred while deleting the event')({ apiError, payload }));
+                if (eventToRollbackOnFail) {
+                    onRollbackDeleteEvent(eventToRollbackOnFail);
+                }
+            },
+        },
+    );
 
     return (
-        <>
-            <MenuItem
-                dense
-                icon={<IconDelete16 color={colors.red600} />}
-                label={i18n.t('Delete')}
-                dataTest="stages-and-events-delete"
-                onClick={() => {
-                    setModalOpen(true);
-                    onClose();
-                }}
-                suffix={null}
-            />
-            {modalOpen && (
-                <DeleteActionModal
-                    eventId={eventId}
-                    pendingApiResponse={pendingApiResponse}
-                    eventDetails={eventDetails}
-                    onDeleteEvent={onDeleteEvent}
-                    onRollbackDeleteEvent={onRollbackDeleteEvent}
-                    setDeleteModalOpen={setModalOpen}
-                />
-            )}
-        </>
+        <Modal onClose={() => setDeleteModalOpen(false)} small>
+            <ModalTitle>{i18n.t('Delete event')}</ModalTitle>
+            <ModalContent>
+                <p>
+                    {i18n.t('Deleting an event is permanent and cannot be undone.')}
+                    {' '}
+                    {i18n.t('Are you sure you want to delete this event?')}
+                </p>
+            </ModalContent>
+            <ModalActions>
+                <ButtonStrip>
+                    <Button onClick={() => setDeleteModalOpen(false)}>
+                        {i18n.t('No, cancel')}
+                    </Button>
+                    <Button destructive onClick={() => !pendingApiResponse && mutate(undefined)}>
+                        {i18n.t('Yes, delete event')}
+                    </Button>
+                </ButtonStrip>
+            </ModalActions>
+        </Modal>
     );
 };
