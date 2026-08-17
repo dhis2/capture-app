@@ -205,8 +205,8 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         cells={cells}
                         onEventClick={onEventClick}
                         onDeleteEvent={onDeleteEvent}
-                        onUpdateEventStatus={onUpdateEventStatus}
                         onRollbackDeleteEvent={onRollbackDeleteEvent}
+                        onUpdateEventStatus={onUpdateEventStatus}
                     />
                 );
             });

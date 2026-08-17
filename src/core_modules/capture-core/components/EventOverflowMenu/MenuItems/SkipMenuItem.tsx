@@ -47,6 +47,7 @@ export const SkipMenuItem = ({
                     },
                 },
             }) as any;
+
             return dataEngine.mutate({
                 resource: 'tracker?async=false&importStrategy=UPDATE',
                 type: 'create',
@@ -80,7 +81,7 @@ export const SkipMenuItem = ({
             dataTest={isSkipped ? 'unskip-event-menu-item' : 'skip-event-menu-item'}
             icon={isSkipped ? <DirectionalArrow reverse /> : <DirectionalArrow />}
             label={isSkipped ? i18n.t('Unskip') : i18n.t('Skip')}
-            suffix=""
+            suffix={null}
             onClick={() => {
                 onClose();
                 updateEventStatus();

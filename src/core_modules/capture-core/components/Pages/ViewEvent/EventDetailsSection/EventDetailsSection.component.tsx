@@ -72,8 +72,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         showEditButton,
         ...passOnProps
     } = props;
-    const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
-    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
+    const orgUnitId = useSelector((state: { viewEventPage: { loadedValues: any } }) =>
+        state.viewEventPage.loadedValues?.orgUnit?.id);
+    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);

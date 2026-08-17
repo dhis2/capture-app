@@ -12,6 +12,7 @@ export const enrollmentSiteActionTypes = {
     ROLLBACK_ENROLLMENT_EVENTS: 'Enrollment.RollbackEnrollmentEvents',
     DELETE_ENROLLMENT_EVENT: 'Enrollment.DeleteEnrollmentEvent',
     DELETE_ENROLLMENT_EVENT_RELATIONSHIP: 'Enrollment.DeleteEnrollmentEventRelationship',
+    UPDATE_ENROLLMENT_EVENT_STATUS: 'Enrollment.UpdateEnrollmentEventStatus',
     COMMIT_ENROLLMENT_EVENT: 'Enrollment.CommitEnrollmentEvent',
     COMMIT_ENROLLMENT_EVENTS: 'Enrollment.CommitEnrollmentEvents',
     SAVE_FAILED: 'Enrollment.SaveFailed',
@@ -20,7 +21,6 @@ export const enrollmentSiteActionTypes = {
     UPDATE_ENROLLMENT_AND_EVENTS: 'Enrollment.UpdateEnrollmentAndEvents',
     ROLLBACK_ENROLLMENT_AND_EVENTS: 'Enrollment.RollbackEnrollmentAndEvents',
     COMMIT_ENROLLMENT_AND_EVENTS: 'Enrollment.CommitEnrollmentAndEvents',
-    UPDATE_ENROLLMENT_EVENT_STATUS: 'Enrollment.UpdateEnrollmentEventStatus',
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
     SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
 };
