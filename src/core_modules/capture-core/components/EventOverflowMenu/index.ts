@@ -1,1 +1,1 @@
-export { DeleteActionButton, DeleteActionModal, CompletionMenuItem, ChangelogMenuItem } from './MenuItems';
+export { DeleteMenuItem, CompletionMenuItem, ChangelogMenuItem, SkipMenuItem } from './MenuItems';

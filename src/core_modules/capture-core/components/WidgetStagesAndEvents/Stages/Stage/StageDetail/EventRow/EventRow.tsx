@@ -14,8 +14,7 @@ import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton, DeleteActionModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
-import { SkipAction } from './SkipAction';
+import { DeleteMenuItem, CompletionMenuItem, SkipMenuItem } from '../../../../../EventOverflowMenu';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -55,12 +54,10 @@ const EventRowPlain = ({
     programStage,
     onDeleteEvent,
     onRollbackDeleteEvent,
-    onUpdateEventStatus,
     programId,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
-    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
     const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
@@ -75,6 +72,7 @@ const EventRowPlain = ({
         isEventBlockedByCompletion,
         isEventBlockedByExpiry,
     );
+    const showOverflowButton = !isEventReadOnly || canToggleCompletion || isSkippableStatus(eventDetails.status);
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = eventDetails;
@@ -86,6 +84,18 @@ const EventRowPlain = ({
     }, [dispatch, id]);
 
     const onCompletionStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(id));
+    }, [dispatch, id]);
+
+    const onSkipStatusMutate = useCallback((newStatus: string) => {
+        dispatch(updateEnrollmentEvent(id, { ...eventDetails, status: newStatus }));
+    }, [dispatch, eventDetails, id]);
+
+    const onSkipStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentEvent(id));
+    }, [dispatch, id]);
+
+    const onSkipStatusError = useCallback(() => {
         dispatch(rollbackEnrollmentEvent(id));
     }, [dispatch, id]);
 
@@ -101,7 +111,7 @@ const EventRowPlain = ({
                     <>
                         {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                        {!pendingApiResponse && (!isEventReadOnly || canToggleCompletion) && (
+                        {!pendingApiResponse && showOverflowButton && (
                             <OverflowButton
                                 open={actionsOpen}
                                 onClick={() => setActionsOpen(prev => !prev)}
@@ -115,12 +125,13 @@ const EventRowPlain = ({
                                         dataTest={'overflow-menu'}
                                     >
                                         {isSkippableStatus(eventDetails.status) && (
-                                            <SkipAction
+                                            <SkipMenuItem
                                                 eventId={id}
-                                                eventDetails={eventDetails}
-                                                setActionsOpen={setActionsOpen}
-                                                pendingApiResponse={pendingApiResponse}
-                                                onUpdateEventStatus={onUpdateEventStatus}
+                                                eventStatus={eventDetails.status}
+                                                onMutate={onSkipStatusMutate}
+                                                onSuccess={onSkipStatusSuccess}
+                                                onError={onSkipStatusError}
+                                                onClose={() => setActionsOpen(false)}
                                             />
                                         )}
 
@@ -135,23 +146,16 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        <DeleteActionButton
-                                            setActionsOpen={setActionsOpen}
-                                            setDeleteModalOpen={setDeleteModalOpen}
+                                        <DeleteMenuItem
+                                            eventId={id}
+                                            pendingApiResponse={pendingApiResponse}
+                                            eventDetails={eventDetails}
+                                            onDeleteEvent={onDeleteEvent}
+                                            onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                            onClose={() => setActionsOpen(false)}
                                         />
                                     </FlyoutMenu>
                                 )}
-                            />
-                        )}
-
-                        {deleteModalOpen && (
-                            <DeleteActionModal
-                                eventId={id}
-                                pendingApiResponse={pendingApiResponse}
-                                eventDetails={eventDetails}
-                                onDeleteEvent={onDeleteEvent}
-                                onRollbackDeleteEvent={onRollbackDeleteEvent}
-                                setDeleteModalOpen={setDeleteModalOpen}
                             />
                         )}
                     </>

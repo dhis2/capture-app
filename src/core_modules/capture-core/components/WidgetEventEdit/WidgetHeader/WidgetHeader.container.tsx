@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import i18n from '@dhis2/d2-i18n';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
@@ -14,10 +15,14 @@ import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
+    deleteEnrollmentEvent,
+    addPersistedEnrollmentEvents,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { CompletionMenuItem, ChangelogMenuItem } from '../../EventOverflowMenu';
+import { CompletionMenuItem, ChangelogMenuItem, SkipMenuItem, DeleteMenuItem } from '../../EventOverflowMenu';
+import { statusTypes as eventStatuses } from '../../../events/statusTypes';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
+import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -42,6 +47,8 @@ const WidgetHeaderPlain = ({
     stage,
     programId,
     orgUnit,
+    teiId,
+    enrollmentId,
     setChangeLogIsOpen,
     classes,
     readOnly,
@@ -49,6 +56,7 @@ const WidgetHeaderPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
+    const { navigate } = useNavigate();
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
@@ -75,7 +83,34 @@ const WidgetHeaderPlain = ({
         dispatch(rollbackEnrollmentEvent(eventId));
     }, [dispatch, eventId]);
 
+    const onSkipStatusMutate = useCallback((newStatus: string) => {
+        if (storedEvent) {
+            dispatch(updateEnrollmentEvent(eventId, { ...storedEvent, status: newStatus }));
+        }
+    }, [dispatch, storedEvent, eventId]);
+
+    const onSkipStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentEvent(eventId));
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+    }, [dispatch, eventId]);
+
+    const onSkipStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(eventId));
+    }, [dispatch, eventId]);
+
+    const onDeleteEvent = useCallback((eventToDeleteId: string) => {
+        dispatch(deleteEnrollmentEvent(eventToDeleteId));
+        navigate(`/enrollment?${buildUrlQueryString({ orgUnitId: orgUnit.id, teiId, enrollmentId })}`);
+    }, [dispatch, navigate, orgUnit.id, teiId, enrollmentId]);
+
+    const onRollbackDeleteEvent = useCallback((eventDetails: ApiEnrollmentEvent) => {
+        dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
+    }, [dispatch]);
+
     const { icon, name } = stage;
+
+    const isSkippableStatus = (status?: string) =>
+        status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
 
     return (
         <>
@@ -119,6 +154,16 @@ const WidgetHeaderPlain = ({
                                     maxWidth="250px"
                                     dataTest={'tracker-program-event-overflow-menu'}
                                 >
+                                    {isSkippableStatus(eventStatus) && (
+                                        <SkipMenuItem
+                                            eventId={eventId}
+                                            eventStatus={eventStatus}
+                                            onMutate={onSkipStatusMutate}
+                                            onSuccess={onSkipStatusSuccess}
+                                            onError={onSkipStatusError}
+                                            onClose={() => setActionsIsOpen(false)}
+                                        />
+                                    )}
                                     {canUncompleteEvent && (
                                         <CompletionMenuItem
                                             eventId={eventId}
@@ -133,6 +178,16 @@ const WidgetHeaderPlain = ({
                                         onOpenChangelog={() => setChangeLogIsOpen(true)}
                                         onClose={() => setActionsIsOpen(false)}
                                     />
+                                    {!readOnly && storedEvent && (
+                                        <DeleteMenuItem
+                                            eventId={eventId}
+                                            pendingApiResponse={false}
+                                            eventDetails={storedEvent}
+                                            onDeleteEvent={onDeleteEvent}
+                                            onRollbackDeleteEvent={onRollbackDeleteEvent}
+                                            onClose={() => setActionsIsOpen(false)}
+                                        />
+                                    )}
                                 </FlyoutMenu>
                             }
                         />
