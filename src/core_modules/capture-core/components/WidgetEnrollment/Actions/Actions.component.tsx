@@ -2,6 +2,7 @@ import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dh
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import React, { type ComponentType, useState } from 'react';
+import { useTermLabel } from '../../../metaData';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
 import { Delete } from './Delete';
@@ -49,6 +50,7 @@ const ActionsPlain = ({
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenTransfer, setOpenTransfer] = useState(false);
     const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
+    const enrollmentLabel = useTermLabel('enrollment');
 
     const handleOnUpdate = (arg) => {
         setOpenActions(false);
@@ -121,7 +123,7 @@ const ActionsPlain = ({
                     </FlyoutMenu>
                 }
             >
-                {i18n.t('Enrollment actions')}
+                {i18n.t('{{enrollmentLabel}} actions', { enrollmentLabel })}
             </DropdownButton>
             {loading && (
                 <div className={classes.loading}>

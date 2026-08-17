@@ -44,7 +44,7 @@ const WidgetStagesAndEventsPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('Program stages and Events')}</span>
+                        <span>{i18n.t('Program stages and events')}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge

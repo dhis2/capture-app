@@ -6,8 +6,6 @@ import { getAttributesFromScopeId } from '../../../../metaData/helpers';
 import type { DataElement } from '../../../../metaData/DataElement';
 import { convertServerToClient, convertClientToView } from '../../../../converters';
 
-const DEFAULT_NAME = i18n.t('tracked entity instance');
-
 type Attribute = {
     valueType: string;
     attribute: string;
@@ -39,7 +37,7 @@ const getTetAttributes = (attributes: Array<Attribute>, tetAttributes: Array<Dat
 export const deriveTeiName = (attributes: Array<Attribute>, trackedEntityType: string, teiId: string) => {
     const tetAttributes = getAttributesFromScopeId(trackedEntityType);
 
-    if (!attributes || !tetAttributes) return teiId ?? DEFAULT_NAME;
+    if (!attributes || !tetAttributes) return teiId ?? i18n.t('tracked entity instance');
 
     const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
     if (teiNameDisplayInReports) return teiNameDisplayInReports;

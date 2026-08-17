@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
+import { useTermLabel } from '../../metaData';
 
 const styles = {
     label: {
@@ -11,7 +12,8 @@ const styles = {
     },
 } as const;
 
-const getEnrollmentMessage = (): string => i18n.t('You only have view access to this enrollment');
+const getEnrollmentMessage = (enrollmentLabel: string): string =>
+    i18n.t('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
 
 const getProgramMessage = (): string => i18n.t('You only have view access to this program');
 
@@ -40,9 +42,10 @@ const getReadOnlyMessage = ({
     canEditCompletedEvent,
     withinCompleteEventsExpiry,
     trackedEntityInactive,
+    enrollmentLabel,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
-    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
+    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage(enrollmentLabel);
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages);
@@ -65,6 +68,7 @@ const ReadOnlyBadgePlain = ({
     inlineLabel = false,
     classes,
 }: Props & WithStyles<typeof styles>) => {
+    const enrollmentLabel = useTermLabel('enrollment');
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,
@@ -78,6 +82,7 @@ const ReadOnlyBadgePlain = ({
         canEditCompletedEvent,
         withinCompleteEventsExpiry,
         trackedEntityInactive,
+        enrollmentLabel,
     });
     if (!message) return null;
 

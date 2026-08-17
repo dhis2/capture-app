@@ -15,8 +15,6 @@ import type { PlainProps } from './RelationshipsSection.types';
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
 
-const headerText = i18n.t('Relationships');
-
 const getStyles = (theme: any) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -53,7 +51,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={headerText}
+                text={i18n.t('Relationships')}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
