@@ -5,7 +5,6 @@
 
 * **translations:** sync translations from transifex (master) ([#4701](https://github.com/dhis2/capture-app/issues/4701)) ([6b89633](https://github.com/dhis2/capture-app/commit/6b896332c76e75c531250eab227f2460e94442c1))
 
-
 ## [107.0.1](https://github.com/dhis2/capture-app/compare/v107.0.0...v107.0.1) (2026-08-12)
 
 
