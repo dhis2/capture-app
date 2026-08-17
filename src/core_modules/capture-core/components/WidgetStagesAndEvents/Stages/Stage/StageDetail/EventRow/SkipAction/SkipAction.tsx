@@ -80,7 +80,7 @@ export const SkipAction = ({
                 icon={<IconRedo16 />}
                 label={i18n.t('Unskip')}
                 onClick={() => handleMenuItemClick(eventStatuses.SCHEDULE)}
-                suffix=""
+                suffix={null}
             />
         );
     }
@@ -91,7 +91,7 @@ export const SkipAction = ({
             icon={<DirectionalArrow />}
             label={i18n.t('Skip')}
             onClick={() => handleMenuItemClick(eventStatuses.SKIPPED)}
-            suffix=""
+            suffix={null}
         />
     );
 };
