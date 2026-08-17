@@ -145,6 +145,7 @@ const WidgetEventEditPlain = ({
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
+                            canUncompleteEvent={canUncompleteEvent}
                         />
                     }
                     noncollapsible

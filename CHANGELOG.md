@@ -1,3 +1,18 @@
+## [107.0.2](https://github.com/dhis2/capture-app/compare/v107.0.1...v107.0.2) (2026-08-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4701](https://github.com/dhis2/capture-app/issues/4701)) ([6b89633](https://github.com/dhis2/capture-app/commit/6b896332c76e75c531250eab227f2460e94442c1))
+
+
+## [107.0.1](https://github.com/dhis2/capture-app/compare/v107.0.0...v107.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* [DHIS2-21685] show min characters filter validation only on update attempt ([#4647](https://github.com/dhis2/capture-app/issues/4647)) ([c68ab6f](https://github.com/dhis2/capture-app/commit/c68ab6f8e80f3214f7792230cc060c08a646ed5b))
+
 # [107.0.0](https://github.com/dhis2/capture-app/compare/v106.7.8...v107.0.0) (2026-08-11)
 
 

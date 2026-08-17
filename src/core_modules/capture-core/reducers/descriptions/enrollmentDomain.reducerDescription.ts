@@ -13,6 +13,7 @@ const {
     UPDATE_ENROLLMENT_DATE,
     UPDATE_INCIDENT_DATE,
     UPDATE_ENROLLMENT_EVENT,
+    UPDATE_ENROLLMENT_EVENT_STATUS,
     UPDATE_OR_ADD_ENROLLMENT_EVENTS,
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES,
     UPDATE_ENROLLMENT_AND_EVENTS,
@@ -117,6 +118,15 @@ export const enrollmentDomainDesc = createReducerDescription(
                 );
                 return [...acc, { ...event, relationships }];
             }, []);
+
+            return { ...state, enrollment: { ...state.enrollment, events } };
+        },
+        [UPDATE_ENROLLMENT_EVENT_STATUS]: (state, { payload: { eventId, status, updatedAt } }) => {
+            const events = state.enrollment.events?.map(event =>
+                (event.event === eventId
+                    ? { ...event, status, updatedAt }
+                    : event),
+            );
 
             return { ...state, enrollment: { ...state.enrollment, events } };
         },

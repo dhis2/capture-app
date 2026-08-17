@@ -94,6 +94,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         enableUserAssignment = false,
         onEventClick,
         onDeleteEvent,
+        onUpdateEventStatus,
         onRollbackDeleteEvent,
         onViewAll,
         onCreateNew,
@@ -204,6 +205,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         cells={cells}
                         onEventClick={onEventClick}
                         onDeleteEvent={onDeleteEvent}
+                        onUpdateEventStatus={onUpdateEventStatus}
                         onRollbackDeleteEvent={onRollbackDeleteEvent}
                     />
                 );

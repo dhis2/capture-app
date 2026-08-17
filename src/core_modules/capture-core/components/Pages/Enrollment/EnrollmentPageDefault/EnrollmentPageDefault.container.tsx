@@ -2,8 +2,12 @@ import React, { useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { useQueryClient } from '@tanstack/react-query';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -40,6 +44,7 @@ import {
     addPersistedEnrollmentEvents,
     deleteEnrollmentEvent,
     setTrackedEntityInactiveStatus,
+    updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
 import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
@@ -47,6 +52,8 @@ import { useHideWidgetByRuleLocations } from '../../../../hooks';
 export const EnrollmentPageDefault = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
+    const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
@@ -147,6 +154,14 @@ export const EnrollmentPageDefault = () => {
         dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
     }, [dispatch]);
 
+    const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
+        const nowClient = fromClientDate(new Date());
+        const nowServer = new Date(nowClient.getServerZonedISOString());
+        const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
+
+        dispatch(updateEnrollmentEventStatus(eventId, status, updatedAt));
+    }, [dispatch, fromClientDate]);
+
     const onAddNew = () => {
         navigate(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
@@ -169,7 +184,8 @@ export const EnrollmentPageDefault = () => {
     );
     const onUpdateEnrollmentStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentAndEvents());
-    }, [dispatch]);
+        removeEventChangelogQueries(queryClient);
+    }, [dispatch, queryClient]);
 
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
@@ -208,6 +224,7 @@ export const EnrollmentPageDefault = () => {
                 hideWidgets={hideWidgets}
                 onEventClick={onEventClick}
                 onDeleteEvent={onDeleteEvent}
+                onUpdateEventStatus={onUpdateEventStatus}
                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                 onLinkedRecordClick={onLinkedRecordClick}
                 onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}

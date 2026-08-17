@@ -9,6 +9,7 @@ export type EventRowProps = {
     cells: Array<ReactElement>;
     onEventClick: (id: string, options?: Record<string, unknown>) => void;
     onDeleteEvent: (id: string) => void;
+    onUpdateEventStatus: (id: string, status: string) => void;
     onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
     stageWriteAccess: boolean;
     programStage?: ProgramStage | null;
