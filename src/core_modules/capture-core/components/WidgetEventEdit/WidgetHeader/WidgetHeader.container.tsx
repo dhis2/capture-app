@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
+import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
@@ -15,7 +15,7 @@ import {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { CompletionMenuItem } from '../../EventOverflowMenu';
+import { CompletionMenuItem, ChangelogMenuItem } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
@@ -129,13 +129,9 @@ const WidgetHeaderPlain = ({
                                             onClose={() => setActionsIsOpen(false)}
                                         />
                                     )}
-                                    <MenuItem
-                                        label={i18n.t('View changelog')}
-                                        suffix=""
-                                        onClick={() => {
-                                            setChangeLogIsOpen(true);
-                                            setActionsIsOpen(false);
-                                        }}
+                                    <ChangelogMenuItem
+                                        onOpenChangelog={() => setChangeLogIsOpen(true)}
+                                        onClose={() => setActionsIsOpen(false)}
                                     />
                                 </FlyoutMenu>
                             }
