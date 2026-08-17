@@ -1,5 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useTermLabel } from '../../../../metaData';
 import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
 import type { Props } from './topBar.types';
@@ -24,6 +25,7 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentsAsOptions,
 }: Props) => {
     const { reset } = useReset();
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
     return (
         <ScopeSelector
             selectedProgramId={programId}
@@ -55,7 +57,7 @@ export const EnrollmentAddEventTopBar = ({
                 onClear={() => onResetEnrollmentId()}
                 options={enrollmentsAsOptions || []}
                 selectedValue={enrollmentId}
-                title={i18n.t('Enrollment')}
+                title={enrollmentLabel}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
             {stageName && (

@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
 import type { PlainProps } from './EnrollmentDeleteModal.types';
+import { useTermLabel } from '../../../../../../../metaData';
 
 const styles: Readonly<any> = {
     modalContent: {
@@ -26,6 +27,8 @@ const EnrollmentDeleteModalPlain = ({
     setIsDeleteDialogOpen,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
     const {
         deleteEnrollments,
         isDeletingEnrollments,
@@ -49,12 +52,15 @@ const EnrollmentDeleteModalPlain = ({
                 small
             >
                 <ModalTitle>
-                    {i18n.t('Delete selected enrollments')}
+                    {i18n.t('Delete selected {{enrollmentsLabel}}', { enrollmentsLabel })}
                 </ModalTitle>
 
                 <ModalContent>
                     <div className={classes.modalContent}>
-                        {i18n.t('An error occurred while loading the selected enrollments. Please try again.')}
+                        {i18n.t(
+                            'An error occurred while loading the selected {{enrollmentsLabel}}. Please try again.',
+                            { enrollmentsLabel },
+                        )}
                     </div>
                 </ModalContent>
 
@@ -78,7 +84,7 @@ const EnrollmentDeleteModalPlain = ({
                 onClose={() => setIsDeleteDialogOpen(false)}
             >
                 <ModalTitle>
-                    {i18n.t('Delete selected enrollments')}
+                    {i18n.t('Delete selected {{enrollmentsLabel}}', { enrollmentsLabel })}
                 </ModalTitle>
 
                 <ModalContent>
@@ -107,24 +113,24 @@ const EnrollmentDeleteModalPlain = ({
             dataTest={'bulk-delete-enrollments-dialog'}
         >
             <ModalTitle>
-                {i18n.t('Delete selected enrollments')}
+                {i18n.t('Delete selected {{enrollmentsLabel}}', { enrollmentsLabel })}
             </ModalTitle>
 
             <ModalContent>
                 <div className={classes.modalContent}>
                     <div>
                         {/* eslint-disable-next-line max-len */}
-                        {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
+                        {i18n.t('This action will permanently delete the selected {{enrollmentsLabel}}, including all associated data and events.', { enrollmentsLabel })}
                     </div>
 
                     <div>
-                        {i18n.t('Please select which enrollment statuses you want to delete:')}
+                        {i18n.t('Please select which {{enrollmentLabel}} statuses you want to delete:', { enrollmentLabel })}
                     </div>
 
                     <div>
                         <CustomCheckbox
                             disabled={enrollmentCounts.active === 0}
-                            label={i18n.t('Active enrollments ({{count}})', { count: enrollmentCounts.active })}
+                            label={i18n.t('Active {{enrollmentsLabel}} ({{count}})', { enrollmentsLabel, count: enrollmentCounts.active })} // eslint-disable-line max-len
                             id="active"
                             checked={enrollmentCounts.active === 0 ? false : statusToDelete.active}
                             onChange={updateStatusToDelete}
@@ -133,7 +139,7 @@ const EnrollmentDeleteModalPlain = ({
 
                         <CustomCheckbox
                             disabled={enrollmentCounts.completed === 0}
-                            label={i18n.t('Completed enrollments ({{count}})', { count: enrollmentCounts.completed })}
+                            label={i18n.t('Completed {{enrollmentsLabel}} ({{count}})', { enrollmentsLabel, count: enrollmentCounts.completed })} // eslint-disable-line max-len
                             id="completed"
                             checked={enrollmentCounts.completed === 0 ? false : statusToDelete.completed}
                             onChange={updateStatusToDelete}
@@ -142,7 +148,7 @@ const EnrollmentDeleteModalPlain = ({
 
                         <CustomCheckbox
                             disabled={enrollmentCounts.cancelled === 0}
-                            label={i18n.t('Cancelled enrollments ({{count}})', { count: enrollmentCounts.cancelled })}
+                            label={i18n.t('Cancelled {{enrollmentsLabel}} ({{count}})', { enrollmentsLabel, count: enrollmentCounts.cancelled })} // eslint-disable-line max-len
                             id="cancelled"
                             onChange={updateStatusToDelete}
                             checked={enrollmentCounts.cancelled === 0 ? false : statusToDelete.cancelled}
@@ -167,10 +173,12 @@ const EnrollmentDeleteModalPlain = ({
                         onClick={deleteEnrollments}
                         disabled={isDeletingEnrollments || numberOfEnrollmentsToDelete === 0}
                     >
-                        {i18n.t('Delete {{count}} enrollment', {
+                        {i18n.t('Delete {{count}} {{enrollmentLabel}}', {
                             count: numberOfEnrollmentsToDelete,
-                            defaultValue: 'Delete {{count}} enrollment',
-                            defaultValue_plural: 'Delete {{count}} enrollments',
+                            enrollmentLabel,
+                            defaultValue: 'Delete {{count}} {{enrollmentLabel}}',
+                            defaultValue_plural: 'Delete {{count}} {{enrollmentsLabel}}',
+                            enrollmentsLabel,
                         })}
                     </Button>
                 </ButtonStrip>

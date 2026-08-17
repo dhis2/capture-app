@@ -10,6 +10,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
+import { useTermLabel } from '../../metaData';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     title: {
@@ -35,6 +36,7 @@ const WidgetBreakingTheGlassPlain = ({
         setReason(value);
     }, [setReason]);
     const disabled = useMemo(() => reason.length === 0, [reason]);
+    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
 
     return (
         <div data-test="breaking-the-glass-widget" className={classes.background}>
@@ -45,19 +47,25 @@ const WidgetBreakingTheGlassPlain = ({
             >
                 <div className={classes.wrapper}>
                     <div className={classes.title}>
-                        {i18n.t('Check for enrollments')}
+                        {i18n.t('Check for {{enrollmentsLabel}}', { enrollmentsLabel })}
                     </div>
                     <br />
                     <NoticeBox title={i18n.t('This program is protected')} warning>
-                        {i18n.t('You must provide a reason to check for enrollments in this protected program.')}
+                        {i18n.t(
+                            'You must provide a reason to check for {{enrollmentsLabel}} in this protected program.',
+                            { enrollmentsLabel },
+                        )}
                         {' '}
                         {i18n.t('All activity will be logged.')}
                     </NoticeBox>
                     <br />
                     <TextAreaField
-                        label={i18n.t('Reason to check for enrollments')}
+                        label={i18n.t('Reason to check for {{enrollmentsLabel}}', { enrollmentsLabel })}
                         placeholder={
-                            i18n.t('Describe the reason you are checking for enrollments in this protected program')
+                            i18n.t(
+                                'Describe the reason you are checking for {{enrollmentsLabel}} in this protected program',
+                                { enrollmentsLabel },
+                            )
                         }
                         onChange={reasonChangeHandler}
                         value={reason}
@@ -68,7 +76,7 @@ const WidgetBreakingTheGlassPlain = ({
                     <br />
                     <ButtonStrip>
                         <Button onClick={() => onBreakingTheGlass(reason)} disabled={disabled} primary>
-                            {i18n.t('Check for enrollments')}
+                            {i18n.t('Check for {{enrollmentsLabel}}', { enrollmentsLabel })}
                         </Button>
                         <Button secondary onClick={onCancel}>
                             {i18n.t('Cancel')}
