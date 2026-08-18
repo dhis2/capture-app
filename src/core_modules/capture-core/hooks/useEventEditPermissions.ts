@@ -26,13 +26,12 @@ type Output = {
 const canUncompletEvent = (
     hasWriteAccess: boolean,
     eventStatus: string | undefined,
-    isExpired: boolean,
-    hasEditExpiredAuthority: boolean,
     hasUncompleteAuthority: boolean,
+    isEventBlockedByExpiry: boolean,
 ): boolean => {
     if (!hasWriteAccess) return false;
     if (eventStatus === eventStatuses.COMPLETED) {
-        if (isExpired && !hasEditExpiredAuthority) return false;
+        if (isEventBlockedByExpiry) return false;
         return hasUncompleteAuthority;
     }
     return eventStatus === eventStatuses.ACTIVE;
@@ -60,9 +59,8 @@ export const useEventEditPermissions = ({
     const canUncompleteEvent = canUncompletEvent(
         !!eventAccess?.write,
         eventStatus,
-        isExpired,
-        hasEditExpiredAuthority,
         hasUncompleteAuthority,
+        isEventBlockedByExpiry,
     );
 
     const isEventBlockedByCompletion = eventStatus === eventStatuses.COMPLETED && !canUncompleteEvent;
