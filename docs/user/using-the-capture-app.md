@@ -791,8 +791,6 @@ In practice, clicking **View dashboard** or **View active enrollment** from a se
 
 Even once you can open an enrollment, whether you can also edit it depends separately on the program's sharing settings; you may still see a **View only** label if you don't have write access.
 
-For how access levels are configured and how they're intended to be used, see the DHIS2 [Program access levels guide](https://docs.dhis2.org/en/topics/training-docs/tracker-configuration-academy/breaking-the-glass-and-program-access-levels/learneraposs-guide-to-program-access-levels.html).
-
 ### Breaking the glass { #capture_break_glass }
 
 If a program is configured with the **Protected** access level and you open a tracked entity whose enrollment is owned by an organisation unit you only have search access to (not data capture access), you'll be prompted to provide a reason before you can view the enrollment. This is informally known as "breaking the glass."
