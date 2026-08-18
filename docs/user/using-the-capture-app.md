@@ -293,7 +293,7 @@ To see a rule being executed while enrolling a tracked entity you will have to t
 3. Select your organisation unit and program from the menu on the top.
 ![](resources/images/program-rules-on-creation-00.png)
 
-4. Fill in the birth date with a value that falls outside the expected age range. In our case this is 27th of January 2024. 
+4. Fill in the birth date with a value that falls outside the expected age range. In our case this is 18th of August 2026.
 ![](resources/images/program-rules-on-creation-01.png)
 
 5. You will now be able to see the warning produced by the program rule underneath the birth date field. 
