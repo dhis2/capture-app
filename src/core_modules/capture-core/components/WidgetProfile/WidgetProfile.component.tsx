@@ -7,6 +7,7 @@ import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
+import { effectActions } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -72,6 +73,7 @@ const WidgetProfilePlain = ({
     programId,
     readOnlyMode = false,
     orgUnitId = '',
+    ruleEffects,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -131,15 +133,21 @@ const WidgetProfilePlain = ({
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
+    const hiddenFieldIds = useMemo(() => new Set(
+        (ruleEffects ?? [])
+            .filter(effect => effect.type === effectActions.HIDE_FIELD)
+            .map(effect => effect.id),
+    ), [ruleEffects]);
+
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter((item: any) => item.displayInList)
+        .filter((item: any) => item.displayInList && !hiddenFieldIds.has(item.attribute))
         .map((clientAttribute: any) => {
             const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
-        }), [clientAttributesWithSubvalues]);
+        }), [clientAttributesWithSubvalues, hiddenFieldIds]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
