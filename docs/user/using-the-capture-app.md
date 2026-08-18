@@ -781,11 +781,11 @@ The results page shows up to five results at a time. You should try to use speci
 
 Every enrollment of a tracked entity in a program has an **owning organisation unit**. Ownership starts out as the organisation unit that first enrolled the tracked entity into that program, and changes if the enrollment is later [transferred to another organisation unit](#transfer-the-enrollment-to-another-organisation-unit). Ownership is tracked per tracked entity/program combination: the same tracked entity can be owned by different organisation units for different programs (for example, one facility could own a person's HIV programme enrollment, while a different facility owns the same person's MCH programme enrollment).
 
-Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Maintenance app:
+Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Maintenance app, together with which organisation units you have been assigned data capture or search access to:
 
-- **Open** or **Audited**: you can open the enrollment as long as the owning organisation unit is within your search scope. (Audited additionally logs the access.)
-- **Protected**: you can open the enrollment if the owning organisation unit is in your data capture scope. If it's only in your search scope, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
-- **Closed**: you can open the enrollment only if the owning organisation unit is in your data capture scope. If it's only in your search scope, you cannot open it at all, and there is no option to request access.
+- **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited additionally logs the access.)
+- **Protected**: you can open the enrollment if you have data capture access to the owning organisation unit. If you only have search access to it, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
+- **Closed**: you can open the enrollment only if you have data capture access to the owning organisation unit. If you only have search access to it, you cannot open it at all, and there is no option to request access.
 
 In practice, clicking **View dashboard** or **View active enrollment** from a search result doesn't always show the enrollment's content. For a Closed program you'll see an access-denied message if you don't have data capture access to the owning organisation unit. For a Protected program you'll see the breaking the glass prompt if you only have search access, or the same access-denied message if you have neither.
 
@@ -795,7 +795,7 @@ For how access levels are configured and how they're intended to be used, see th
 
 ### Breaking the glass { #capture_break_glass }
 
-If a program is configured with the **Protected** access level and you open a tracked entity whose enrollment is owned by an organisation unit that's only in your search scope (not your data capture scope), you'll be prompted to provide a reason before you can view the enrollment. This is informally known as "breaking the glass."
+If a program is configured with the **Protected** access level and you open a tracked entity whose enrollment is owned by an organisation unit you only have search access to (not data capture access), you'll be prompted to provide a reason before you can view the enrollment. This is informally known as "breaking the glass."
 
 1. Search for and open the tracked entity as normal.
 2. A **Check for enrollments** panel appears, explaining that the program is protected and that you must provide a reason to check for enrollments. All activity is logged.
