@@ -45,12 +45,12 @@ const buildFormValues = async ({
 export const useFormValues = ({
     formFoundation,
     orgUnit,
-    orgUnitId,
+    waitForOrgUnit,
     clientAttributesWithSubvalues,
 }: {
     formFoundation: RenderFoundation;
     orgUnit: any;
-    orgUnitId: string;
+    waitForOrgUnit: boolean;
     clientAttributesWithSubvalues: Array<any>;
 }) => {
     const [formValues, setFormValues] = useState<any>({});
@@ -60,7 +60,7 @@ export const useFormValues = ({
 
     useEffect(() => {
         if (
-            (orgUnit?.id || !orgUnitId) &&
+            (!waitForOrgUnit || orgUnit?.id) &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(formValues).length === 0 &&
             formValuesReadyRef.current === false
@@ -77,7 +77,7 @@ export const useFormValues = ({
                 querySingleResource,
             });
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, orgUnitId, dataEngine]);
+    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, waitForOrgUnit, dataEngine]);
 
     return { formValues, clientValues };
 };

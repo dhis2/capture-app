@@ -54,7 +54,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 type Context = {
-    orgUnit: OrgUnit;
+    orgUnit: OrgUnit | undefined;
     programName: string;
     trackedEntityAttributes?: TrackedEntityAttributes;
     optionSets: OptionSets;
