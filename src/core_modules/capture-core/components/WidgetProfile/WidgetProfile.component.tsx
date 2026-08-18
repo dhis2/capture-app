@@ -94,7 +94,6 @@ const WidgetProfilePlain = ({
         error: trackedEntityInstancesError,
         trackedEntity,
         trackedEntityInstanceAttributes,
-        teiOrgUnit,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
@@ -230,6 +229,7 @@ const WidgetProfilePlain = ({
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
         const trackedEntityTypeId = program?.trackedEntityType?.id;
+        const teiOrgUnit = (trackedEntity as any)?.orgUnit;
         return {
             trackedEntityProp: { trackedEntity: resolvedId },
             trackedEntityForToggle: trackedEntity && trackedEntityTypeId && teiOrgUnit
@@ -240,7 +240,7 @@ const WidgetProfilePlain = ({
                 }
                 : null,
         };
-    }, [trackedEntity, program, teiId, teiOrgUnit]);
+    }, [trackedEntity, program, teiId]);
 
     const widgetHeader = (
         <div className={classes.header}>
@@ -296,7 +296,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        orgUnitId={orgUnitId || teiOrgUnit || ''}
+                        orgUnitId={orgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}

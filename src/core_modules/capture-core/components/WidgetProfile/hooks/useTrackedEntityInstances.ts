@@ -6,7 +6,6 @@ type TrackedEntityInstance = {
     attributes?: Array<{ attribute: string; value: string }>;
     geometry?: Geometry;
     trackedEntityType?: string;
-    orgUnit?: string;
     [key: string]: any;
 };
 
@@ -69,12 +68,10 @@ export const useTrackedEntityInstances = (
     }, [storedGeometry]);
 
 
-    return {
-        error,
+    return { error,
         loading,
         trackedEntity: !loading && data?.trackedEntityInstance,
         trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
-        teiOrgUnit: !loading ? data?.trackedEntityInstance?.orgUnit : undefined,
         geometry,
     };
 };

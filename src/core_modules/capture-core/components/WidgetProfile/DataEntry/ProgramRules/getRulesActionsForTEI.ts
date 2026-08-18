@@ -69,7 +69,7 @@ export const getRulesActionsForTEIAsync = async ({
 }: {
     foundation: RenderFoundation;
     formId: string;
-    orgUnit: OrgUnit | null;
+    orgUnit: OrgUnit;
     enrollmentData?: EnrollmentData;
     teiValues?: TEIValues;
     trackedEntityAttributes?: TrackedEntityAttributes;
