@@ -104,7 +104,7 @@ export const getUpdateFieldActions = async ({
     const rulesActions = await getRulesActionsForTEIAsync({
         foundation: formFoundation,
         formId,
-        orgUnit,
+        orgUnit: orgUnit ?? null,
         enrollmentData: enrollment,
         teiValues: currentTEIValues,
         trackedEntityAttributes,
