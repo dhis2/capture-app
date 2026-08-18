@@ -76,7 +76,7 @@ export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeVa
     const otherEvents = useEventsData(apiEnrollment, program);
 
     useEffect(() => {
-        if (attributeValues && enrollmentData && otherEvents) {
+        if (orgUnit && attributeValues && enrollmentData && otherEvents) {
             const effects = getApplicableRuleEffectsForTrackerProgram({
                 program,
                 orgUnit,

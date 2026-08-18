@@ -53,7 +53,14 @@ export const EnrollmentPageDefault = () => {
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const {
+        error: enrollmentsError,
+        enrollment,
+        attributeValues,
+        readOnly: trackedEntityInactive,
+    } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const effectiveOrgUnitId = orgUnitId ?? enrollment?.orgUnit;
+    const { orgUnit, error } = useCoreOrgUnit(effectiveOrgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
         pageLayout,
@@ -65,12 +72,6 @@ export const EnrollmentPageDefault = () => {
     });
 
     const program = useTrackerProgram(programId);
-    const {
-        error: enrollmentsError,
-        enrollment,
-        attributeValues,
-        readOnly: trackedEntityInactive,
-    } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
 
     const onStatusToggleSuccess = useCallback(() => {
         dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));

@@ -99,7 +99,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const { enrollment: enrollmentSite, readOnly: trackedEntityInactive } =
+    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive } =
         useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
@@ -120,6 +120,7 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             initMode={initMode}
             enrollmentSite={enrollmentSite}
+            attributeValues={attributeValues}
             trackedEntityInactive={trackedEntityInactive}
             event={storedEvent}
         />
@@ -134,6 +135,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     orgUnitId,
     initMode,
     enrollmentSite,
+    attributeValues,
     trackedEntityInactive,
     event,
 }: Props) => {
@@ -159,12 +161,11 @@ const EnrollmentEditEventPageWithContextPlain = ({
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
     const { orgUnit } = useCoreOrgUnit(orgUnitId);
-    const attributeValues = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.attributeValues);
     const ruleEffects = useRuleEffects({
         orgUnit,
         program,
         apiEnrollment: enrollmentSite,
-        apiAttributeValues: attributeValues,
+        apiAttributeValues: attributeValues ?? undefined,
     });
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {

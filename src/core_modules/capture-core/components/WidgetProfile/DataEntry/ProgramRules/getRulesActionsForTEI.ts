@@ -95,8 +95,7 @@ export const getRulesActionsForTEIAsync = async ({
         optionSets,
     });
 
-    const flatEffects = postProcessRulesEffects(effects, foundation);
-    const effectsHierarchy = buildEffectsHierarchy(flatEffects);
+    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
     const effectsWithValidations = await validateAssignEffects({
         dataElements: foundation.getElements(),
         effects: effectsHierarchy,
