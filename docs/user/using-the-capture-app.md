@@ -802,6 +802,8 @@ If a program is configured with the **Protected** access level and you open a tr
 3. Enter a reason in the **Reason to check for enrollments** field. This is required; you cannot submit without one.
 4. Click **Check for enrollments** to proceed, or **Cancel** to go back to search.
 
+![](resources/images/break-the-glass.png)
+
 Once submitted, you get access to the enrollment for about 3 hours. This access is tied to your current browser session rather than the record itself: if you refresh the page or come back later, you may be asked to provide a reason again even if the 3 hours haven't elapsed. Every request is logged for audit purposes.
 
 Whether you can edit the enrollment once you have access still depends on the program's sharing settings, the same as for any enrollment you own. Breaking the glass only grants visibility, not special edit rights.
