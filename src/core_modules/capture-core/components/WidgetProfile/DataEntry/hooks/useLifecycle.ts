@@ -110,7 +110,6 @@ export const useLifecycle = ({
                 programName: programAPI.displayName,
                 querySingleResource,
                 onGetValidationContext,
-                isInitialLoad: true,
             }).then((action) => {
                 dispatch(action);
             });

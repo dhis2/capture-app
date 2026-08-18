@@ -1,4 +1,3 @@
-import { effectActions } from '@dhis2/rules-engine-javascript';
 import type {
     Enrollment,
     TEIValues,
@@ -67,7 +66,6 @@ export const getRulesActionsForTEIAsync = async ({
     programName,
     querySingleResource,
     onGetValidationContext,
-    isInitialLoad = false,
 }: {
     foundation: RenderFoundation;
     formId: string;
@@ -83,7 +81,6 @@ export const getRulesActionsForTEIAsync = async ({
     programName: string;
     querySingleResource: QuerySingleResource;
     onGetValidationContext: () => Record<string, any>;
-    isInitialLoad?: boolean;
 }) => {
     const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
@@ -99,15 +96,7 @@ export const getRulesActionsForTEIAsync = async ({
     });
 
     const flatEffects = postProcessRulesEffects(effects, foundation);
-
-    // On initial load the form is pre-populated with existing values, so the rules engine
-    // would mark hidden fields as hadValue=true and show the "was blanked out" notice —
-    // even though the user didn't take any action. Strip it here before building the hierarchy.
-    const effectsHierarchy = buildEffectsHierarchy(
-        isInitialLoad
-            ? flatEffects.map(e => (e.type === effectActions.HIDE_FIELD ? { ...e, hadValue: false } : e))
-            : flatEffects,
-    );
+    const effectsHierarchy = buildEffectsHierarchy(flatEffects);
     const effectsWithValidations = await validateAssignEffects({
         dataElements: foundation.getElements(),
         effects: effectsHierarchy,

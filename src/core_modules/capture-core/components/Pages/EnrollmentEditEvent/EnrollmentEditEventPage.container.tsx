@@ -14,6 +14,7 @@ import {
     updateEnrollmentAndEvents,
     updateEnrollmentEvent,
     useCommonEnrollmentDomainData,
+    useRuleEffects,
     deleteEnrollmentEvent,
     deleteEnrollmentEventRelationship,
     updateOrAddEnrollmentEvents,
@@ -22,6 +23,7 @@ import {
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useTrackerProgram } from '../../../hooks/useTrackerProgram';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
@@ -156,6 +158,14 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
+    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const attributeValues = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.attributeValues);
+    const ruleEffects = useRuleEffects({
+        orgUnit,
+        program,
+        apiEnrollment: enrollmentSite,
+        apiAttributeValues: attributeValues,
+    });
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
@@ -327,6 +337,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onBackToViewEvent={onBackToViewEvent}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
+                ruleEffects={ruleEffects}
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 eventId={eventId}

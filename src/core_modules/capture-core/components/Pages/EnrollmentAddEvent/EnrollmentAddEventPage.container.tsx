@@ -96,7 +96,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
             <EnrollmentAddEventPageDefault
                 pageLayout={pageLayout!}
                 enrollment={enrollment}
-                attributeValues={attributeValues as Record<string, unknown> | null | undefined}
+                attributeValues={attributeValues}
                 commonDataError={Boolean(commonDataError)}
                 trackedEntityInactive={Boolean(trackedEntityInactive)}
             />

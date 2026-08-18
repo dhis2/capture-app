@@ -123,7 +123,10 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
+    // ruleEffects starts as undefined and resolves to an array once computed.
+    // Delay rendering the list until rules are ready so hidden attributes never flash visible.
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched)
+        || ruleEffects === undefined;
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
@@ -148,6 +151,13 @@ const WidgetProfilePlain = ({
                 attribute, key, value, valueType, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues, hiddenFieldIds]);
+
+    const allDisplayInListHiddenByRules = useMemo(() => {
+        if (!hiddenFieldIds.size) return false;
+        const displayInListItems = clientAttributesWithSubvalues.filter((item: any) => item.displayInList);
+        return displayInListItems.length > 0
+            && displayInListItems.every((item: any) => hiddenFieldIds.has(item.attribute));
+    }, [clientAttributesWithSubvalues, hiddenFieldIds]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
@@ -194,6 +204,16 @@ const WidgetProfilePlain = ({
             );
         }
 
+        if (allDisplayInListHiddenByRules) {
+            return (
+                <div className={classes.container}>
+                    <p className={classes.emptyText}>
+                        {i18n.t('All attributes are hidden by program rules')}
+                    </p>
+                </div>
+            );
+        }
+
         return (
             <div className={classes.container}>
                 <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
@@ -206,7 +226,8 @@ const WidgetProfilePlain = ({
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
 
-    const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
+    const isEmptyList = !loading && !error && !hasNoAttributes
+        && displayInListAttributes.length === 0 && !allDisplayInListHiddenByRules;
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;

@@ -1,3 +1,4 @@
+import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import type { ProgramStage } from '../../../metaData';
 import { Program } from '../../../metaData';
 import type { HideWidgets, WidgetEffects } from '../common/EnrollmentOverviewDomain';
@@ -12,6 +13,7 @@ export type PlainProps = {
     programStage?: ProgramStage | null;
     widgetEffects: WidgetEffects;
     hideWidgets: HideWidgets;
+    ruleEffects?: Array<OutputEffect>;
     teiId: string;
     enrollmentId: string;
     eventId: string;
