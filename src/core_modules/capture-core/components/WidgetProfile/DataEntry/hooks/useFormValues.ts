@@ -45,10 +45,12 @@ const buildFormValues = async ({
 export const useFormValues = ({
     formFoundation,
     orgUnit,
+    orgUnitId,
     clientAttributesWithSubvalues,
 }: {
     formFoundation: RenderFoundation;
     orgUnit: any;
+    orgUnitId?: string;
     clientAttributesWithSubvalues: Array<any>;
 }) => {
     const [formValues, setFormValues] = useState<any>({});
@@ -58,12 +60,12 @@ export const useFormValues = ({
 
     useEffect(() => {
         if (
-            orgUnit?.id &&
+            (orgUnit?.id || !orgUnitId) &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(formValues).length === 0 &&
             formValuesReadyRef.current === false
         ) {
-            const staticPatternValues = { orgUnitCode: orgUnit.code };
+            const staticPatternValues = { orgUnitCode: orgUnit?.code ?? '' };
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             formValuesReadyRef.current = true;
             buildFormValues({
@@ -75,7 +77,7 @@ export const useFormValues = ({
                 querySingleResource,
             });
         }
-    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, dataEngine]);
+    }, [formFoundation, clientAttributesWithSubvalues, formValues, formValuesReadyRef, orgUnit, orgUnitId, dataEngine]);
 
     return { formValues, clientValues };
 };
