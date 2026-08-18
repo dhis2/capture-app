@@ -54,7 +54,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 type Context = {
-    orgUnit: OrgUnit;
+    orgUnit: OrgUnit | undefined;
     programName: string;
     trackedEntityAttributes?: TrackedEntityAttributes;
     optionSets: OptionSets;
@@ -104,7 +104,7 @@ export const getUpdateFieldActions = async ({
     const rulesActions = await getRulesActionsForTEIAsync({
         foundation: formFoundation,
         formId,
-        orgUnit,
+        orgUnit: orgUnit ?? null,
         enrollmentData: enrollment,
         teiValues: currentTEIValues,
         trackedEntityAttributes,

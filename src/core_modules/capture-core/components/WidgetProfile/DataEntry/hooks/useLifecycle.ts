@@ -57,10 +57,16 @@ export const useLifecycle = ({
     const enrollment: EnrollmentData = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollment);
     const dataElements: DataElements = useDataElements(programAPI);
     const otherEvents = useEvents(enrollment, dataElements);
-    const orgUnit: any = useCoreOrgUnit(orgUnitId).orgUnit;
+    const { orgUnit, error: orgUnitError } = useCoreOrgUnit(orgUnitId);
+    const waitForOrgUnit = !!orgUnitId && !orgUnitError;
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI, dataEntryFormConfig);
-    const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });
+    const { formValues, clientValues } = useFormValues({
+        formFoundation,
+        clientAttributesWithSubvalues,
+        orgUnit,
+        waitForOrgUnit,
+    });
     const { formGeometryValues, clientGeometryValues } = useGeometryValues({
         geometry,
         featureType: programAPI.trackedEntityType.featureType,
@@ -88,8 +94,7 @@ export const useLifecycle = ({
     useEffect(() => {
         if (
             awaitingInitialRulesExecution.current &&
-            orgUnit &&
-            Object.entries(orgUnit).length > 0 &&
+            (!waitForOrgUnit || (orgUnit && Object.entries(orgUnit).length > 0)) &&
             Object.entries(formFoundation).length > 0 &&
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
@@ -98,7 +103,7 @@ export const useLifecycle = ({
             getRulesActionsForTEIAsync({
                 foundation: formFoundation,
                 formId: `${dataEntryId}-${itemId}`,
-                orgUnit,
+                orgUnit: orgUnit ?? null,
                 trackedEntityAttributes: programTrackedEntityAttributes,
                 teiValues: { ...clientValues, ...clientGeometryValues },
                 optionSets,
@@ -117,6 +122,7 @@ export const useLifecycle = ({
     }, [
         dispatch,
         orgUnit,
+        waitForOrgUnit,
         formFoundation,
         programTrackedEntityAttributes,
         clientAttributesWithSubvalues,
