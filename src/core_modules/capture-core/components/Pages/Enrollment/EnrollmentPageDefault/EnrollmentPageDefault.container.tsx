@@ -205,7 +205,7 @@ export const EnrollmentPageDefault = () => {
                 currentPage={EnrollmentPageKeys.OVERVIEW}
                 availableWidgets={WidgetsForEnrollmentPageDefault}
                 teiId={teiId}
-                orgUnitId={orgUnitId}
+                orgUnitId={effectiveOrgUnitId}
                 program={program}
                 stages={stages}
                 events={enrollment?.events}
