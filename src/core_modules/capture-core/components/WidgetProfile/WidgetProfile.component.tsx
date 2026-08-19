@@ -132,7 +132,8 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched)
+        || ruleEffects === undefined;
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
@@ -233,11 +234,7 @@ const WidgetProfilePlain = ({
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
 
     const isEmptyList = computeIsEmptyList(
-        loading,
-        error,
-        hasNoAttributes,
-        displayInListAttributes.length,
-        allDisplayInListHiddenByRules,
+        loading, error, hasNoAttributes, displayInListAttributes.length, allDisplayInListHiddenByRules,
     );
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
