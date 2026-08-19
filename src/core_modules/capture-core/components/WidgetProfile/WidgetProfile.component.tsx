@@ -262,7 +262,7 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
+            {teiOrgUnit && showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
                 <>
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
@@ -271,7 +271,7 @@ const WidgetProfilePlain = ({
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
                         orgUnitId={orgUnitId}
-                        saveOrgUnitId={orgUnitId || teiOrgUnit || ''}
+                        saveOrgUnitId={teiOrgUnit}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}
