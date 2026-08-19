@@ -28,7 +28,7 @@ export const createEventErrorHrefResolver = ({
 }: EventFlavorDeps): ErrorReportHrefResolver =>
     (errorReport: ErrorReport) => {
         const uid = errorReport.uid;
-        if (!uid || !programId || !orgUnitId || !knownEventUids.has(uid)) return null;
+        if (!uid || !programId || !knownEventUids.has(uid)) return null;
         const route = resolveEventRoute(programId);
         if (!route) return null;
         return route === 'viewEvent'
@@ -48,7 +48,7 @@ export const createEnrollmentErrorHrefResolver = ({
 }: EnrollmentFlavorDeps): ErrorReportHrefResolver =>
     (errorReport: ErrorReport) => {
         const uid = errorReport.uid;
-        if (!uid || !programId || !orgUnitId) return null;
+        if (!uid || !programId) return null;
 
         if (errorReport.trackerType === 'ENROLLMENT') {
             const teiId = enrollmentIdToTeiId[uid];
