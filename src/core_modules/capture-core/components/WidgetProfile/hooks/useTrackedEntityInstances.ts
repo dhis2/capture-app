@@ -31,7 +31,6 @@ export const useTrackedEntityInstances = (
                     id: teiId,
                     params: {
                         program: programId,
-                        fields: 'trackedEntity,trackedEntityType,orgUnit,geometry,attributes',
                     },
                 },
             }),
