@@ -1,6 +1,8 @@
+import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import type { ProgramStage } from '../../../metaData';
 import { Program } from '../../../metaData';
 import type { HideWidgets, WidgetEffects } from '../common/EnrollmentOverviewDomain';
+import type { AttributeValue } from '../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { UserFormField } from '../../FormFields/UserField';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
@@ -12,6 +14,7 @@ export type PlainProps = {
     programStage?: ProgramStage | null;
     widgetEffects: WidgetEffects;
     hideWidgets: HideWidgets;
+    ruleEffects?: Array<OutputEffect>;
     teiId: string;
     enrollmentId: string;
     eventId: string;
@@ -70,6 +73,7 @@ export type Props = {
     orgUnitId: string;
     event: any;
     enrollmentSite: any;
+    attributeValues: Array<AttributeValue> | null | undefined;
     trackedEntityInactive?: boolean;
     initMode?: string;
 };

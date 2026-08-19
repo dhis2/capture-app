@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-19T11:06:34.578Z\n"
-"PO-Revision-Date: 2026-08-19T11:06:34.578Z\n"
+"POT-Creation-Date: 2026-08-19T12:14:22.126Z\n"
+"PO-Revision-Date: 2026-08-19T12:14:22.126Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1702,6 +1702,9 @@ msgstr "No attributes configured for {{trackedEntityTypeName}}"
 
 msgid "No attributes configured"
 msgstr "No attributes configured"
+
+msgid "Attributes are hidden by program rules"
+msgstr "Attributes are hidden by program rules"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"

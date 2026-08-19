@@ -1,5 +1,7 @@
+import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
+import type { AttributeValue } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 import type {
     PageLayoutConfig,
@@ -26,6 +28,7 @@ export type Props = {
     onEnrollmentSuccess: () => void;
     widgetEffects: WidgetEffects | null | undefined;
     hideWidgets: HideWidgets;
+    ruleEffects?: Array<OutputEffect>;
     rulesExecutionDependencies: Record<string, unknown>;
     pageFailure: boolean;
     ready: boolean;
@@ -48,7 +51,7 @@ export type ContainerProps = {
         occurredAt?: string;
         enrollment?: string;
     } | null | undefined;
-    attributeValues: Record<string, unknown> | null | undefined;
+    attributeValues: Array<AttributeValue> | null | undefined;
     commonDataError: boolean;
     trackedEntityInactive: boolean;
 };

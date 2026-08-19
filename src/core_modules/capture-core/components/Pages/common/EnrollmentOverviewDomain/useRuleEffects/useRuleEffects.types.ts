@@ -6,7 +6,7 @@ import type {
 
 export type UseRuleEffectsInput = {
     orgUnit?: any;
-    program: TrackerProgram;
+    program?: TrackerProgram;
     apiEnrollment?: EnrollmentData;
     apiAttributeValues?: Array<AttributeValue>;
 };

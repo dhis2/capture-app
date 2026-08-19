@@ -7,6 +7,7 @@ import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
+import { effectActions } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -67,11 +68,20 @@ const computeError = (
     userRolesError: any,
 ) => programsError || trackedEntityInstancesError || userRolesError;
 
+const computeIsEmptyList = (
+    loading: boolean,
+    error: any,
+    hasNoAttributes: boolean,
+    displayInListLength: number,
+    allHiddenByRules: boolean,
+) => !loading && !error && !hasNoAttributes && displayInListLength === 0 && !allHiddenByRules;
+
 const WidgetProfilePlain = ({
     teiId,
     programId,
     readOnlyMode = false,
     orgUnitId = '',
+    ruleEffects,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -132,15 +142,28 @@ const WidgetProfilePlain = ({
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
+    const hiddenFieldIds = useMemo(() => new Set(
+        (ruleEffects ?? [])
+            .filter(effect => effect.type === effectActions.HIDE_FIELD)
+            .map(effect => effect.id),
+    ), [ruleEffects]);
+
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter((item: any) => item.displayInList)
+        .filter((item: any) => item.displayInList && !hiddenFieldIds.has(item.attribute))
         .map((clientAttribute: any) => {
             const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
-        }), [clientAttributesWithSubvalues]);
+        }), [clientAttributesWithSubvalues, hiddenFieldIds]);
+
+    const allDisplayInListHiddenByRules = useMemo(() => {
+        if (!hiddenFieldIds.size) return false;
+        const displayInListItems = clientAttributesWithSubvalues.filter((item: any) => item.displayInList);
+        return displayInListItems.length > 0
+            && displayInListItems.every((item: any) => hiddenFieldIds.has(item.attribute));
+    }, [clientAttributesWithSubvalues, hiddenFieldIds]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
@@ -187,6 +210,16 @@ const WidgetProfilePlain = ({
             );
         }
 
+        if (allDisplayInListHiddenByRules) {
+            return (
+                <div className={classes.container}>
+                    <p className={classes.emptyText}>
+                        {i18n.t('Attributes are hidden by program rules')}
+                    </p>
+                </div>
+            );
+        }
+
         return (
             <div className={classes.container}>
                 <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
@@ -199,7 +232,13 @@ const WidgetProfilePlain = ({
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
 
-    const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
+    const isEmptyList = computeIsEmptyList(
+        loading,
+        error,
+        hasNoAttributes,
+        displayInListAttributes.length,
+        allDisplayInListHiddenByRules,
+    );
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
