@@ -43,6 +43,7 @@ export class RuleEngine {
         selectedOrgUnit,
         selectedUserRoles,
         optionSets,
+        isFirstStageEventForm,
     }: RulesEngineInput): OutputEffects {
         if (!programRulesContainer.programRules ||
             !selectedOrgUnit ||
@@ -71,23 +72,45 @@ export class RuleEngine {
             [];
 
         const ruleEngine = new RuleEngineJs(this.flags.verbose || false);
-        const effects = (currentEvent ?
-            ruleEngine.evaluateEvent(
-                inputBuilder.convertEvent(currentEvent),
-                enrollment,
-                events,
-                executionContext,
-            ) :
-            ruleEngine.evaluateEnrollment(
+        let effects;
+        if (currentEvent) {
+            const event = inputBuilder.convertEvent(currentEvent);
+            if (!isFirstStageEventForm) {
+                effects = ruleEngine.evaluateEvent(
+                    event,
+                    enrollment,
+                    events,
+                    executionContext,
+                );
+            } else {
+                const duplicateActionIds = new Set<String>;
+                effects = ruleEngine.evaluateAll(enrollment, [event], executionContext)
+                    .flatMap((entry) => entry.ruleEffects)
+                    .filter((effect) => {
+                        const actionId = effect.ruleAction.values.get('id');
+                        if (!actionId) {
+                            return true;
+                        }
+                        if (duplicateActionIds.has(actionId)) {
+                            return false;
+                        }
+                        duplicateActionIds.add(actionId);
+                        return true;
+                    }
+                );
+            }
+        } else {
+            effects = ruleEngine.evaluateEnrollment(
                 enrollment!,
                 events,
                 executionContext,
-            ))
-            .map(effect => ({
-                ...Object.fromEntries(effect.ruleAction.values),
-                action: effect.ruleAction.type,
-                data: effect.data,
-            })) as Array<ProgramRuleEffect>;
+            );
+        }
+        effects = effects.map(effect => ({
+            ...Object.fromEntries(effect.ruleAction.values),
+            action: effect.ruleAction.type,
+            data: effect.data,
+        })) as Array<ProgramRuleEffect>;
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects({
