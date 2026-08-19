@@ -205,7 +205,7 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {i18n.t('All attributes are hidden by program rules')}
+                        {i18n.t('Attributes are hidden by program rules')}
                     </p>
                 </div>
             );
