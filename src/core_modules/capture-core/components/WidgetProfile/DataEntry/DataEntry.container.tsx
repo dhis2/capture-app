@@ -56,7 +56,7 @@ export const DataEntry = ({
 
     const context = useLifecycle({
         programAPI,
-        orgUnitId,
+        orgUnitId: saveOrgUnitId,
         clientAttributesWithSubvalues,
         userRoles,
         dataEntryId,
