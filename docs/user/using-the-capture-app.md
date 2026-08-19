@@ -916,6 +916,17 @@ For performance reasons the Capture app caches metadata in the client browser. W
 
 3. The exception to the two rules above is option sets. Option sets have their own version property, i.e. increasing the option set version should ensure the option set metadata are propagated to the clients.
 
+## Share a record via URL { #capture_share_url }
+
+You can link directly to a specific enrollment or event by typing or pasting a URL in your browser's address bar, without navigating there through the app's menus.
+
+### Share an enrollment
+
+Enrollment dashboards can be reached using only the enrollment ID, for example `.../dhis-web-capture/#/enrollment?enrollmentId=<id>`. See [Reaching the enrollment dashboard via url](#reaching-the-enrollment-dashboard-via-url) below for how the rest of the context (program, organisation unit, tracked entity) is resolved from the enrollment ID alone.
+
+### Share a single event
+
+A single event, such as one registered in an event program, can be reached using its event ID together with its organisation unit, for example `.../dhis-web-capture/#/viewEvent?viewEventId=<id>&orgUnitId=<id>`.
 
 ## Enrollment dashboard
 
@@ -1158,9 +1169,36 @@ Click the **Edit** button to make changes to the tracked entity profile. Editing
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
 
-Click the **Delete _[tracked entity type]_** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
+The **⋮** (more) icon next to the **Edit** button opens an overflow menu with further actions on the tracked entity: **View changelog** (if enabled for the tracked entity type), **Deactivate**/**Activate**, and **Delete**.
+
+![](resources/images/enrollment-dash-tei-profile-widget-overflow-menu.png)
+
+Select **Delete _[tracked entity type]_** from the overflow menu to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, the tracked entity and all its associated enrollments and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
+
+#### Deactivate or activate a tracked entity { #capture_deactivate_activate_tei }
+
+Deactivating a tracked entity marks it read-only: its profile can no longer be edited, and no new enrollments or events can be created for it in any program, without deleting any of its existing data. This is useful for records that should be preserved for historical or reporting purposes but should no longer receive new data — for example, a person who is deceased or has permanently left the catchment area.
+
+To deactivate a tracked entity:
+
+1. Open the enrollment dashboard for the tracked entity.
+2. In the tracked entity profile widget, click the **⋮** (more) icon and select **Deactivate _[tracked entity type]_**.
+
+   ![](resources/images/enrollment-dash-tei-profile-widget-deactivate-menu-item.png)
+
+3. Confirm by clicking **Yes, deactivate _[tracked entity type]_** in the dialog.
+
+   ![](resources/images/enrollment-dash-tei-profile-widget-deactivate-modal.png)
+
+This option is only shown to users with write access to the tracked entity type.
+
+Once deactivated, the tracked entity shows a **View only** badge wherever it's opened, and appears dimmed with its checkbox disabled in tracked entity working lists, so it can't be picked up for bulk actions.
+
+![](resources/images/enrollment-dash-tei-profile-widget-deactivated-badge.png)
+
+To reverse this, open the overflow menu again and select **Activate _[tracked entity type]_**, then confirm. This restores normal write access according to the user's existing data access permissions.
 
 ### Feedback widget
 
@@ -1211,6 +1249,14 @@ If there aren't any warnings to show for the current dashboard then the widget i
 
 On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
 If there aren't any errors to show for the current dashboard then the widget is hidden.
+
+### Customize the dashboard layout (for administrators) { #capture_dashboard_layout }
+
+The widgets described above, and their left/right column order, form the *default* dashboard layout. Individual users cannot rearrange these widgets from within the Capture app itself.
+
+An administrator can instead define a custom layout per tracker program by adding a configuration entry to the `capture` datastore namespace. This lets you choose which widgets appear, in which column, and in what order, and even embed custom plugins alongside the built-in widgets. The same mechanism also applies to the **Add event** and **Edit event** pages.
+
+This is an experimental, implementer-facing feature. We recommend configuring it through the Tracker Configurator App rather than editing the datastore by hand. See [Manual setup (Advanced)](/docs/capture-plugins/developer/enrollment-plugins/manual-setup) for the full configuration reference, including the list of supported widgets and how to embed plugins.
 
 ## Enrollment event view and edit page
 
