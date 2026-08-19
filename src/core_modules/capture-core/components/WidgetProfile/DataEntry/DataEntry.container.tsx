@@ -20,6 +20,7 @@ const convertFn = pipe(convertServerToClient, convertClientToView);
 export const DataEntry = ({
     programAPI,
     orgUnitId,
+    saveOrgUnitId,
     onCancel,
     onDisable,
     onEnable,
@@ -123,7 +124,7 @@ export const DataEntry = ({
                 updateTeiRequest({
                     itemId,
                     dataEntryId,
-                    orgUnitId,
+                    orgUnitId: saveOrgUnitId,
                     trackedEntityInstanceId,
                     trackedEntityTypeId: programAPI.trackedEntityType.id,
                     onSaveExternal,
@@ -137,7 +138,7 @@ export const DataEntry = ({
         dispatch,
         itemId,
         dataEntryId,
-        orgUnitId,
+        saveOrgUnitId,
         trackedEntityInstanceId,
         programAPI,
         formValidated,
