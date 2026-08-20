@@ -789,7 +789,7 @@ Whether you can open an enrollment you don't own depends on the program's **acce
 
 In practice, clicking **View dashboard** or **View active enrollment** from a search result doesn't always show the enrollment's content. For a Closed program you'll see an access-denied message if you don't have data capture access to the owning organisation unit. For a Protected program you'll see the breaking the glass prompt if you only have search access, or the same access-denied message if you have neither.
 
-Even once you can open an enrollment, whether you can also edit it depends separately on the program's sharing settings; you may still see a **View only** label if you don't have write access.
+Being able to open an enrollment doesn't necessarily mean you can edit it: edit access depends separately on the program's sharing settings, and you may still see a **View only** label if you don't have write access.
 
 ### Breaking the glass { #capture_break_glass }
 
