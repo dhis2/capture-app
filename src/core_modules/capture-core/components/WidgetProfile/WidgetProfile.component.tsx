@@ -149,6 +149,9 @@ const WidgetProfilePlain = ({
             };
         }), [clientAttributesWithSubvalues, hiddenFieldIds]);
 
+    const isEmptyList = !loading && !error && Boolean(orgUnitId)
+        && (hasNoAttributes || displayInListAttributes.length === 0);
+
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
     }, [queryClient, teiId]);
@@ -170,13 +173,13 @@ const WidgetProfilePlain = ({
     );
 
     const renderProfile = () => {
+        if (loading) {
+            return <LoadingMaskElementCenter />;
+        }
+
         if (!orgUnitId) {
             log.error(errorCreator('Profile widget could not be loaded: missing orgUnitId')({ teiId }));
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
-        }
-
-        if (loading) {
-            return <LoadingMaskElementCenter />;
         }
 
         if (error) {
@@ -274,6 +277,7 @@ const WidgetProfilePlain = ({
                 onOpen={handleOpen}
                 onClose={handleClose}
                 open={open}
+                noncollapsible={isEmptyList}
             >
                 {renderProfile()}
             </Widget>
