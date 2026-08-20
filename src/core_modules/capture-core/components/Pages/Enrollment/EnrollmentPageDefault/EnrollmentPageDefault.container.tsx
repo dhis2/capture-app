@@ -203,6 +203,7 @@ export const EnrollmentPageDefault = () => {
                 availableWidgets={WidgetsForEnrollmentPageDefault}
                 teiId={teiId}
                 orgUnitId={orgUnitId}
+                programOwnerId={programOwnerId}
                 program={program}
                 stages={stages}
                 events={enrollment?.events}

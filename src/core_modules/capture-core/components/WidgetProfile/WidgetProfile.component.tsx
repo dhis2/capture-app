@@ -170,6 +170,11 @@ const WidgetProfilePlain = ({
     );
 
     const renderProfile = () => {
+        if (!orgUnitId) {
+            log.error(errorCreator('Profile widget could not be loaded: missing orgUnitId')({ teiId }));
+            return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
+        }
+
         if (loading) {
             return <LoadingMaskElementCenter />;
         }
@@ -269,7 +274,6 @@ const WidgetProfilePlain = ({
                 onOpen={handleOpen}
                 onClose={handleClose}
                 open={open}
-
             >
                 {renderProfile()}
             </Widget>
