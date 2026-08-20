@@ -1244,7 +1244,7 @@ The widgets described above, and their left/right column order, form the *defaul
 
 An administrator can instead define a custom layout per tracker program by adding a configuration entry to the `capture` datastore namespace. This lets you choose which widgets appear, in which column, and in what order, and even embed custom plugins alongside the built-in widgets. The same mechanism also applies to the **Add event** and **Edit event** pages.
 
-This is an experimental, implementer-facing feature. You can set it up using the Tracker Configurator App, or directly through the Datastore Management app. See the Manual setup (Advanced) page in the developer docs for the full configuration reference, including the list of supported widgets and how to embed plugins.
+This is an experimental, implementer-facing feature. You can set it up using the Tracker Configurator App, or directly through the Datastore Management app. See [Manual setup (Advanced)](https://developers.dhis2.org/docs/capture-plugins/developer/enrollment-plugins/manual-setup) for the full configuration reference, including the list of supported widgets and how to embed plugins.
 
 ## Enrollment event view and edit page
 
