@@ -69,14 +69,6 @@ const computeError = (
     userRolesError: any,
 ) => programsError || trackedEntityInstancesError || userRolesError;
 
-const computeIsEmptyList = (
-    loading: boolean,
-    error: any,
-    hasNoAttributes: boolean,
-    displayInListLength: number,
-    allHiddenByRules: boolean,
-) => !loading && !error && !hasNoAttributes && displayInListLength === 0 && !allHiddenByRules;
-
 const WidgetProfilePlain = ({
     teiId,
     programId,
@@ -103,7 +95,6 @@ const WidgetProfilePlain = ({
         error: trackedEntityInstancesError,
         trackedEntity,
         trackedEntityInstanceAttributes,
-        teiOrgUnit,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
@@ -235,13 +226,13 @@ const WidgetProfilePlain = ({
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
 
-    const isEmptyList = computeIsEmptyList(
-        loading, error, hasNoAttributes, displayInListAttributes.length, allDisplayInListHiddenByRules,
-    );
+    const isEmptyList = !loading && !error && !hasNoAttributes
+        && displayInListAttributes.length === 0 && !allDisplayInListHiddenByRules;
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
         const trackedEntityTypeId = program?.trackedEntityType?.id;
+        const teiOrgUnit = (trackedEntity as any)?.orgUnit;
         return {
             trackedEntityProp: { trackedEntity: resolvedId },
             trackedEntityForToggle: trackedEntity && trackedEntityTypeId && teiOrgUnit
@@ -252,7 +243,7 @@ const WidgetProfilePlain = ({
                 }
                 : null,
         };
-    }, [trackedEntity, program, teiId, teiOrgUnit]);
+    }, [trackedEntity, program, teiId]);
 
     const widgetHeader = (
         <div className={classes.header}>
@@ -300,7 +291,7 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {teiOrgUnit && showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
+            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
                 <>
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
@@ -308,8 +299,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        orgUnitId={orgUnitId || teiOrgUnit}
-                        saveOrgUnitId={teiOrgUnit}
+                        orgUnitId={orgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}

@@ -63,7 +63,7 @@ export const useFormValues = ({
             Object.entries(formValues).length === 0 &&
             formValuesReadyRef.current === false
         ) {
-            const staticPatternValues = { orgUnitCode: orgUnit?.code ?? '' };
+            const staticPatternValues = { orgUnitCode: orgUnit.code };
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             formValuesReadyRef.current = true;
             buildFormValues({

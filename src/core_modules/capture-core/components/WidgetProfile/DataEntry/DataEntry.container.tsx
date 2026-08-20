@@ -20,7 +20,6 @@ const convertFn = pipe(convertServerToClient, convertClientToView);
 export const DataEntry = ({
     programAPI,
     orgUnitId,
-    saveOrgUnitId,
     onCancel,
     onDisable,
     onEnable,
@@ -56,7 +55,7 @@ export const DataEntry = ({
 
     const context = useLifecycle({
         programAPI,
-        orgUnitId: saveOrgUnitId,
+        orgUnitId,
         clientAttributesWithSubvalues,
         userRoles,
         dataEntryId,
@@ -124,7 +123,7 @@ export const DataEntry = ({
                 updateTeiRequest({
                     itemId,
                     dataEntryId,
-                    orgUnitId: saveOrgUnitId,
+                    orgUnitId,
                     trackedEntityInstanceId,
                     trackedEntityTypeId: programAPI.trackedEntityType.id,
                     onSaveExternal,
@@ -138,7 +137,7 @@ export const DataEntry = ({
         dispatch,
         itemId,
         dataEntryId,
-        saveOrgUnitId,
+        orgUnitId,
         trackedEntityInstanceId,
         programAPI,
         formValidated,

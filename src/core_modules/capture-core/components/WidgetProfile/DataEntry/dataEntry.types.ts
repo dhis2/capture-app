@@ -39,7 +39,6 @@ export type ReadOnlyPlainProps = {
 export type Props = {
     programAPI: any;
     orgUnitId: string;
-    saveOrgUnitId: string;
     dataEntryFormConfig: DataEntryFormConfig | null;
     onCancel: () => void;
     onDisable: () => void;
