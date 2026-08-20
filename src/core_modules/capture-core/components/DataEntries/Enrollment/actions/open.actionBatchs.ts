@@ -71,9 +71,9 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
 
-    const fabricateFirstStageEvent = (firstStage: ProgramStage) => ({
-        programStageId: firstStage.id,
-        programStageName: firstStage.name,
+    const fabricateFirstStageEvent = (stage: ProgramStage) => ({
+        programStageId: stage.id,
+        programStageName: stage.name,
     });
     const firstStageEvent = firstStage && fabricateFirstStageEvent(firstStage);
 

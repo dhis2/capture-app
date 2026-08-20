@@ -2,6 +2,7 @@ import { RuleEngineJs } from '@dhis2/rule-engine';
 import {
     InputBuilder,
     ValueProcessor,
+    evaluateRules,
     getRulesEffectsProcessor,
 } from './helpers';
 import type {
@@ -72,41 +73,15 @@ export class RuleEngine {
             [];
 
         const ruleEngine = new RuleEngineJs(this.flags.verbose || false);
-        let effects;
-        if (currentEvent) {
-            const event = inputBuilder.convertEvent(currentEvent);
-            if (!isFirstStageEventForm) {
-                effects = ruleEngine.evaluateEvent(
-                    event,
-                    enrollment,
-                    events,
-                    executionContext,
-                );
-            } else {
-                const duplicateActionIds = new Set<String>;
-                effects = ruleEngine.evaluateAll(enrollment, [event], executionContext)
-                    .flatMap((entry) => entry.ruleEffects)
-                    .filter((effect) => {
-                        const actionId = effect.ruleAction.values.get('id');
-                        if (!actionId) {
-                            return true;
-                        }
-                        if (duplicateActionIds.has(actionId)) {
-                            return false;
-                        }
-                        duplicateActionIds.add(actionId);
-                        return true;
-                    }
-                );
-            }
-        } else {
-            effects = ruleEngine.evaluateEnrollment(
-                enrollment!,
-                events,
-                executionContext,
-            );
-        }
-        effects = effects.map(effect => ({
+
+        const effects = evaluateRules({
+            ruleEngine,
+            enrollment,
+            currentEvent: currentEvent && inputBuilder.convertEvent(currentEvent),
+            events,
+            executionContext,
+            isFirstStageEventForm,
+        }).map(effect => ({
             ...Object.fromEntries(effect.ruleAction.values),
             action: effect.ruleAction.type,
             data: effect.data,
