@@ -802,7 +802,7 @@ If a program is configured with the **Protected** access level and you open a tr
 
 ![](resources/images/break-the-glass.png)
 
-Once submitted, you get access to the enrollment for about 3 hours. This is tied to your user account rather than your browser, so it carries over across page reloads, other devices, or a fresh login; once the 3 hours pass, you'll need to provide a reason again. Every request is logged for audit purposes.
+Once submitted, you get access to the enrollment for about 3 hours. This is tied to your user account rather than the organisation unit. So only the user gains access for 3 hours. Once the 3 hours pass, you'll need to provide a reason again. Every request is logged for audit purposes.
 
 Whether you can edit the enrollment once you have access still depends on the program's sharing settings, the same as for any enrollment you own. Breaking the glass only grants visibility, not special edit rights.
 
