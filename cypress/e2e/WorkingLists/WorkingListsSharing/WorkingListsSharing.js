@@ -3,6 +3,10 @@ import '../sharedSteps';
 
 const ORG_UNIT_ID = 'DiszpKrYNg8'; // Ngelehun CHC
 const EVENT_PROGRAM_ID = 'VBqh0ynB2wv'; // Malaria case registration
+// Malaria case registration is shared as public rw------, i.e. metadata only, so the restricted user
+// the non-owner scenarios log in as sees no events there and its list renders no table. This program
+// is public rwrw----, so that user can read its events.
+const SHARED_EVENT_PROGRAM_ID = 'MoUd5BTQ3lY'; // XX MAL RDT - Case Registration
 const TRACKER_PROGRAM_ID = 'WSGAb5XwJ3Y'; // WHO RMNCH Tracker
 const VIEW_NAME = 'sharedWorkingListView';
 const VIEW_AND_EDIT = 'rw------';
@@ -18,6 +22,15 @@ const LIST_TYPES = {
         programFilter: 'program',
         sharingType: 'eventFilter',
         programId: EVENT_PROGRAM_ID,
+        criteriaKey: 'eventQueryCriteria',
+        programAsObject: false,
+    },
+    // Same resource and code path as `event`, on a program whose events the non-owner can read.
+    eventShared: {
+        resource: 'eventFilters',
+        programFilter: 'program',
+        sharingType: 'eventFilter',
+        programId: SHARED_EVENT_PROGRAM_ID,
         criteriaKey: 'eventQueryCriteria',
         programAsObject: false,
     },
@@ -90,7 +103,7 @@ const visitWorkingList = (listType) => {
     const { programId } = LIST_TYPES[listType];
     // The tracker list needs the default template spelled out in the url, the same way the existing
     // tracker steps do; without it the list does not render.
-    const templateParam = listType === 'event' ? '' : `&selectedTemplateId=${programId}-default`;
+    const templateParam = LIST_TYPES[listType].resource === 'eventFilters' ? '' : `&selectedTemplateId=${programId}-default`;
     cy.visit(`#/?programId=${programId}&orgUnitId=${ORG_UNIT_ID}${templateParam}`);
 };
 
@@ -232,7 +245,7 @@ const seedSharedView = (listType) => {
 };
 
 Given('an event working list view owned by another user is shared with you with view and edit access', () =>
-    seedSharedView('event'));
+    seedSharedView('eventShared'));
 
 Given('a tracker working list view owned by another user is shared with you with view and edit access', () =>
     seedSharedView('tracker'));
