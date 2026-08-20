@@ -123,9 +123,7 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(
-        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched,
-    );
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
@@ -150,13 +148,6 @@ const WidgetProfilePlain = ({
                 attribute, key, value, valueType, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues, hiddenFieldIds]);
-
-    const allDisplayInListHiddenByRules = useMemo(() => {
-        if (!hiddenFieldIds.size) return false;
-        const displayInListItems = clientAttributesWithSubvalues.filter((item: any) => item.displayInList);
-        return displayInListItems.length > 0
-            && displayInListItems.every((item: any) => hiddenFieldIds.has(item.attribute));
-    }, [clientAttributesWithSubvalues, hiddenFieldIds]);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
@@ -192,22 +183,17 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {trackedEntityTypeName
-                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
-                                trackedEntityTypeName,
-                                interpolation: { escapeValue: false },
-                            })
-                            : i18n.t('No attributes configured')}
+                        {i18n.t('No attributes configured')}
                     </p>
                 </div>
             );
         }
 
-        if (allDisplayInListHiddenByRules) {
+        if (displayInListAttributes.length === 0) {
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {i18n.t('Attributes are hidden by program rules')}
+                        {i18n.t('No attributes configured to display')}
                     </p>
                 </div>
             );
@@ -224,9 +210,6 @@ const WidgetProfilePlain = ({
     const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
-
-    const isEmptyList = !loading && !error && !hasNoAttributes
-        && displayInListAttributes.length === 0 && !allDisplayInListHiddenByRules;
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
@@ -286,7 +269,7 @@ const WidgetProfilePlain = ({
                 onOpen={handleOpen}
                 onClose={handleClose}
                 open={open}
-                noncollapsible={isEmptyList}
+
             >
                 {renderProfile()}
             </Widget>
