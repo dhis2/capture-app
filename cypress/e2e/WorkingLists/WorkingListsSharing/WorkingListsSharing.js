@@ -33,6 +33,7 @@ const LIST_TYPES = {
         programId: SHARED_EVENT_PROGRAM_ID,
         criteriaKey: 'eventQueryCriteria',
         programAsObject: false,
+        requiresDataRead: true,
     },
     tracker: {
         resource: 'trackedEntityInstanceFilters',
@@ -61,6 +62,24 @@ const otherPassword = () => Cypress.env('dhis2Password_trackerAutoTestRestricted
 // A request carrying basic auth comes back with a session cookie for that user, which replaces the
 // cookie of the user the scenario is logged in as. Anything reading the session after an owner
 // request would run as the owner, so the session has to be re-established.
+// A failure here is the instance or the account being wrong for the scenario, not the behaviour under
+// test. Without it, missing access surfaces as an opaque "table header never appeared" timeout — which
+// is exactly how much time the first CI run cost. Metadata read is required for every list type; the
+// event list additionally needs data read, because its table only renders once events resolve, while
+// the tracker list builds its columns from the template.
+const assertLoggedInUserCanUseProgram = (listType) => {
+    const { programId, requiresDataRead } = LIST_TYPES[listType];
+
+    cy.buildApiUrl(`programs/${programId}?fields=name,access`)
+        .then(url => cy.request(url))
+        .then(({ body: { name, access } }) => {
+            expect(access.read, `${otherUsername()} can read the metadata of ${name}`).to.equal(true);
+            if (requiresDataRead) {
+                expect(access.data.read, `${otherUsername()} can read the events of ${name}`).to.equal(true);
+            }
+        });
+};
+
 const restoreSessionForLoggedInUser = () => {
     cy.loginByApi({
         username: otherUsername(),
@@ -199,10 +218,13 @@ const seedSharedView = (listType) => {
 
     cy.wrap(listType).as('listType');
 
-    // Read the logged-in user before any request carrying basic auth, or this returns the owner.
+    // Both of these read the session, so they have to run before any request carrying basic auth,
+    // which would otherwise replace the session cookie with the owner's.
     cy.buildApiUrl('me?fields=id')
         .then(url => cy.request(url))
         .then(({ body }) => cy.wrap(body.id).as('myId'));
+
+    assertLoggedInUserCanUseProgram(listType);
 
     deleteViewsNamed(VIEW_NAME);
 
