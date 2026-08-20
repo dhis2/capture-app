@@ -651,7 +651,7 @@ In the event list you will be able to view the assignee per event. Moreover, you
 
 ## Tracker programs { #capture_tracker_programs } 
 
-The Capture app supports the workinglists in tracker programs, but when you open a tracked entity, you will be redirected to the enrollment dashboard in the Tracker Capture app.
+The Capture app supports the working lists in tracker programs, and opening a tracked entity takes you to its enrollment dashboard within the Capture app.
 
 ![](resources/images/tracker_program.png)
 
@@ -692,9 +692,9 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-2.png)
 
-    In this list you can see the entries that match your search. The actions available for each entry depend on the **tracked entity**'s enrollment status in the program you are searching within.
+    In this list you can see the entries that match your search. The actions available for each entry depend on the **tracked entity**'s enrollment status in the program you are searching within. Whether an entry's enrollment actually opens once you click into it depends on who owns it and your access to that organisation unit; see [Tracked entity ownership](#capture_tei_ownership) below.
 
-    a. **View dashboard** is always available. It opens the enrollment dashboard for the **tracked entity** in the program you are searching within. The enrollment shown is selected automatically: if there is a single enrollment in the program that one is opened, and if there are several, the active enrollment is opened.
+    a. **View dashboard** is always shown as an option. It opens the enrollment dashboard for the **tracked entity** in the program you are searching within. The enrollment shown is selected automatically: if there is a single enrollment in the program that one is opened, and if there are several, the active enrollment is opened.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-5.png)
 
@@ -776,6 +776,35 @@ The program or tracked entity type you are searching within may be configured wi
 The results page shows up to five results at a time. You should try to use specific search criteria so that there are not too many matches. However, if there are more than five results, you can see the next results by using the **>** button at the end of the page.
 
 ![](resources/images/search-by-attributes-on-scope-program-overview-pagination.png)
+
+### Tracked entity ownership { #capture_tei_ownership }
+
+Every enrollment of a tracked entity in a program has an **owning organisation unit**. Ownership starts out as the organisation unit that first enrolled the tracked entity into that program, and changes if the enrollment is later [transferred to another organisation unit](#transfer-the-enrollment-to-another-organisation-unit). Ownership is tracked per tracked entity/program combination: the same tracked entity can be owned by different organisation units for different programs (for example, one facility could own a person's HIV program enrollment, while a different facility owns the same person's MCH program enrollment).
+
+Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Maintenance app, together with which organisation units you have been assigned data capture or search access to:
+
+- **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited additionally logs the access.)
+- **Protected**: you can open the enrollment if you have data capture access to the owning organisation unit. If you only have search access to it, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
+- **Closed**: you can open the enrollment only if you have data capture access to the owning organisation unit. If you only have search access to it, you cannot open it at all, and there is no option to request access.
+
+In practice, clicking **View dashboard** or **View active enrollment** from a search result doesn't always show the enrollment's content. For a Closed program you'll see an access-denied message if you don't have data capture access to the owning organisation unit. For a Protected program you'll see the breaking the glass prompt if you only have search access, or the same access-denied message if you have neither.
+
+Being able to open an enrollment doesn't necessarily mean you can edit it: edit access depends separately on the program's sharing settings, and you may still see a **View only** label if you don't have write access.
+
+### Breaking the glass { #capture_break_glass }
+
+If a program is configured with the **Protected** access level and you open a tracked entity whose enrollment is owned by an organisation unit you only have search access to (not data capture access), you'll be prompted to provide a reason before you can view the enrollment. This is informally known as "breaking the glass."
+
+1. Search for and open the tracked entity as normal.
+2. A **Check for enrollments** panel appears, explaining that the program is protected and that you must provide a reason to check for enrollments. All activity is logged.
+3. Enter a reason in the **Reason to check for enrollments** field. This is required; you cannot submit without one.
+4. Click **Check for enrollments** to proceed, or **Cancel** to go back to search.
+
+![](resources/images/break-the-glass.png)
+
+Once submitted, you get access to the enrollment for about 3 hours. This is tied to your user account rather than the organisation unit. So only the user gains access for 3 hours. Once the 3 hours pass, you'll need to provide a reason again. Every request is logged for audit purposes.
+
+Whether you can edit the enrollment once you have access still depends on the program's sharing settings, the same as for any enrollment you own. Breaking the glass only grants visibility, not special edit rights.
 
 ## List tracked entities enrolled in program
 
@@ -1090,7 +1119,7 @@ If the program only allows one enrollment per tracked entity, the **Add new** bu
 
 In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
 
-Transferring changes the **owning organisation unit** of the enrollment, which affects data visibility and access. After the transfer, the tracked entity will be owned by the new organisation unit, meaning users without access to that organisation unit may no longer be able to view or edit the enrollment. The transfer does not move historical event data; it only changes the ownership going forward.
+Transferring changes the **owning organisation unit** of the enrollment, which affects data visibility and access. After the transfer, the tracked entity will be owned by the new organisation unit, meaning users without access to that organisation unit may no longer be able to view or edit the enrollment. The transfer does not move historical event data; it only changes the ownership going forward. See [Tracked entity ownership](#capture_tei_ownership) for how ownership determines who can view and edit an enrollment.
 
 ![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
 
