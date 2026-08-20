@@ -11,6 +11,8 @@ import { Program } from '../../../../metaData';
 
 export type Props = {
     program: Program | null | undefined;
+    programOwnerId?: string;
+    ruleEffects?: Array<OutputEffect>;
     stageId: string;
     orgUnitId: string;
     teiId: string;
@@ -28,7 +30,6 @@ export type Props = {
     onEnrollmentSuccess: () => void;
     widgetEffects: WidgetEffects | null | undefined;
     hideWidgets: HideWidgets;
-    ruleEffects?: Array<OutputEffect>;
     rulesExecutionDependencies: Record<string, unknown>;
     pageFailure: boolean;
     ready: boolean;
@@ -54,4 +55,5 @@ export type ContainerProps = {
     attributeValues: Array<AttributeValue> | null | undefined;
     commonDataError: boolean;
     trackedEntityInactive: boolean;
+    programOwnerId?: string;
 };

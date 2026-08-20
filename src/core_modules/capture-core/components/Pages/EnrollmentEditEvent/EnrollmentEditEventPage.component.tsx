@@ -28,6 +28,7 @@ export const EnrollmentEditEventPageComponent = ({
     widgetEffects,
     hideWidgets,
     ruleEffects,
+    programOwnerId,
     onDelete,
     onAddNew,
     onLinkedRecordClick,
@@ -120,6 +121,7 @@ export const EnrollmentEditEventPageComponent = ({
             widgetEffects={widgetEffects}
             hideWidgets={hideWidgets}
             ruleEffects={ruleEffects}
+            programOwnerId={programOwnerId}
             onDelete={onDelete}
             onAddNew={onAddNew}
             eventAccess={eventAccess}

@@ -15,6 +15,7 @@ export type PlainProps = {
     widgetEffects: WidgetEffects;
     hideWidgets: HideWidgets;
     ruleEffects?: Array<OutputEffect>;
+    programOwnerId?: string;
     teiId: string;
     enrollmentId: string;
     eventId: string;
@@ -73,7 +74,8 @@ export type Props = {
     orgUnitId: string;
     event: any;
     enrollmentSite: any;
-    attributeValues: Array<AttributeValue> | null | undefined;
+    attributeValues?: Array<AttributeValue>;
     trackedEntityInactive?: boolean;
+    programOwnerId?: string;
     initMode?: string;
 };

@@ -99,7 +99,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive } =
+    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive, programOwnerId } =
         useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
@@ -122,6 +122,7 @@ export const EnrollmentEditEventPage = () => {
             enrollmentSite={enrollmentSite}
             attributeValues={attributeValues}
             trackedEntityInactive={trackedEntityInactive}
+            programOwnerId={programOwnerId}
             event={storedEvent}
         />
     ) : <LoadingMaskForPage />;
@@ -137,6 +138,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     enrollmentSite,
     attributeValues,
     trackedEntityInactive,
+    programOwnerId,
     event,
 }: Props) => {
     const { navigate } = useNavigate();
@@ -160,14 +162,13 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
-    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId ?? '');
     const ruleEffects = useRuleEffects({
-        orgUnit,
+        orgUnit: programOwnerOrgUnit,
         program,
         apiEnrollment: enrollmentSite,
         apiAttributeValues: attributeValues ?? undefined,
     });
-
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
@@ -338,7 +339,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onBackToViewEvent={onBackToViewEvent}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
-                ruleEffects={ruleEffects}
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 eventId={eventId}
@@ -379,6 +379,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
                 onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
                 userInteractionInProgress={userInteractionInProgress}
+                ruleEffects={ruleEffects}
+                programOwnerId={programOwnerId}
             />
         </EnrollmentAccessProvider>
     );

@@ -60,8 +60,7 @@ const computeLoadingState = (
     trackedEntityInstancesLoading: boolean,
     userRolesLoading: boolean,
     configIsFetched: boolean,
-    ruleEffectsPending: boolean,
-) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched || ruleEffectsPending;
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
 
 const computeError = (
     programsError: any,
@@ -124,9 +123,7 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(
-        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched, ruleEffects === undefined,
-    );
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
@@ -152,12 +149,8 @@ const WidgetProfilePlain = ({
             };
         }), [clientAttributesWithSubvalues, hiddenFieldIds]);
 
-    const allDisplayInListHiddenByRules = useMemo(() => {
-        if (!hiddenFieldIds.size) return false;
-        const displayInListItems = clientAttributesWithSubvalues.filter((item: any) => item.displayInList);
-        return displayInListItems.length > 0
-            && displayInListItems.every((item: any) => hiddenFieldIds.has(item.attribute));
-    }, [clientAttributesWithSubvalues, hiddenFieldIds]);
+    const isEmptyList = !loading && !error && Boolean(orgUnitId)
+        && (hasNoAttributes || displayInListAttributes.length === 0);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
@@ -184,6 +177,11 @@ const WidgetProfilePlain = ({
             return <LoadingMaskElementCenter />;
         }
 
+        if (!orgUnitId) {
+            log.error(errorCreator('Profile widget could not be loaded: missing orgUnitId')({ teiId }));
+            return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
+        }
+
         if (error) {
             log.error(errorCreator('Profile widget could not be loaded')({ error }));
             return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
@@ -193,22 +191,17 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {trackedEntityTypeName
-                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
-                                trackedEntityTypeName,
-                                interpolation: { escapeValue: false },
-                            })
-                            : i18n.t('No attributes configured')}
+                        {i18n.t('No attributes configured')}
                     </p>
                 </div>
             );
         }
 
-        if (allDisplayInListHiddenByRules) {
+        if (displayInListAttributes.length === 0) {
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {i18n.t('Attributes are hidden by program rules')}
+                        {i18n.t('No attributes configured to display')}
                     </p>
                 </div>
             );
@@ -225,9 +218,6 @@ const WidgetProfilePlain = ({
     const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
-
-    const isEmptyList = !loading && !error && !hasNoAttributes
-        && displayInListAttributes.length === 0 && !allDisplayInListHiddenByRules;
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
