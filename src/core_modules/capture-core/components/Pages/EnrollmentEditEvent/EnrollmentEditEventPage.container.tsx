@@ -14,7 +14,6 @@ import {
     updateEnrollmentAndEvents,
     updateEnrollmentEvent,
     useCommonEnrollmentDomainData,
-    useRuleEffects,
     deleteEnrollmentEvent,
     deleteEnrollmentEventRelationship,
     updateOrAddEnrollmentEvents,
@@ -23,7 +22,6 @@ import {
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useTrackerProgram } from '../../../hooks/useTrackerProgram';
-import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
@@ -99,7 +97,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive } =
+    const { enrollment: enrollmentSite, readOnly: trackedEntityInactive } =
         useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
@@ -120,7 +118,6 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             initMode={initMode}
             enrollmentSite={enrollmentSite}
-            attributeValues={attributeValues}
             trackedEntityInactive={trackedEntityInactive}
             event={storedEvent}
         />
@@ -135,7 +132,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
     orgUnitId,
     initMode,
     enrollmentSite,
-    attributeValues,
     trackedEntityInactive,
     event,
 }: Props) => {
@@ -160,14 +156,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
-    const { orgUnit } = useCoreOrgUnit(orgUnitId);
-    const ruleEffects = useRuleEffects({
-        orgUnit,
-        program,
-        apiEnrollment: enrollmentSite,
-        apiAttributeValues: attributeValues ?? undefined,
-    });
-
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
@@ -338,7 +326,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onBackToViewEvent={onBackToViewEvent}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
-                ruleEffects={ruleEffects}
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 eventId={eventId}

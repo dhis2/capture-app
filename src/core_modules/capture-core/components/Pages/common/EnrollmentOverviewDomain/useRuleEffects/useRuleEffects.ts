@@ -22,8 +22,8 @@ const getClientFormattedDataValuesAsObject = (dataValues: any, elementsById: any
         return acc;
     }, {});
 
-const useEventsData = (enrollment: any, program?: TrackerProgram) => {
-    const elementsById = useMemo(() => (program ? getDataElementsInProgram(program) : {}), [program]);
+const useEventsData = (enrollment: any, program: TrackerProgram) => {
+    const elementsById = useMemo(() => getDataElementsInProgram(program), [program]);
 
     return useMemo(() => enrollment && enrollment.events.map((event: any) => ({
         eventId: event.event,
@@ -59,10 +59,10 @@ const useEnrollmentData = (enrollment: any) => useMemo(() => {
 export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeValues }: UseRuleEffectsInput) => {
     const [ruleEffects, setRuleEffects] = useState<any>(undefined);
     const attributesObject = useMemo(() =>
-        (program?.attributes ?? []).reduce((acc: any, attribute: any) => {
+        program.attributes.reduce((acc: any, attribute: any) => {
             acc[attribute.id] = attribute;
             return acc;
-        }, {}), [program?.attributes]);
+        }, {}), [program.attributes]);
 
     const attributeValues = useMemo(() => apiAttributeValues &&
         apiAttributeValues
@@ -76,7 +76,7 @@ export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeVa
     const otherEvents = useEventsData(apiEnrollment, program);
 
     useEffect(() => {
-        if (program && orgUnit && attributeValues && enrollmentData && otherEvents) {
+        if (orgUnit && attributeValues && enrollmentData && otherEvents) {
             const effects = getApplicableRuleEffectsForTrackerProgram({
                 program,
                 orgUnit,

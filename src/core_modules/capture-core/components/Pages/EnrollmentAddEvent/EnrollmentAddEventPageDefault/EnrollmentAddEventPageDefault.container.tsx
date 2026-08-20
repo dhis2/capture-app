@@ -20,18 +20,13 @@ import {
     showEnrollmentError,
     updateEnrollmentAndEvents,
     updateOrAddEnrollmentEvents,
-    useRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
-import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 import { TrackerProgram } from '../../../../metaData';
-
-const getTrackerProgram = (program: any): TrackerProgram | undefined =>
-    (program instanceof TrackerProgram ? program : undefined);
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -119,15 +114,6 @@ export const EnrollmentAddEventPageDefault = ({
     const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
-    const trackerProgram = getTrackerProgram(program);
-    const effectiveOrgUnitId = orgUnitId ?? enrollment?.orgUnit;
-    const { orgUnit } = useCoreOrgUnit(effectiveOrgUnitId);
-    const ruleEffects = useRuleEffects({
-        orgUnit,
-        program: trackerProgram,
-        apiEnrollment: enrollment ?? undefined,
-        apiAttributeValues: attributeValues ?? undefined,
-    });
     const trackedEntityName = (program instanceof TrackerProgram) ? program.trackedEntityType?.name ?? '' : '';
 
     const rulesExecutionDependencies = useMemo(() => ({
@@ -206,7 +192,6 @@ export const EnrollmentAddEventPageDefault = ({
                 onAddNew={handleAddNew}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
-                ruleEffects={ruleEffects}
                 widgetReducerName={widgetReducerName}
                 pageFailure={commonDataError}
                 rulesExecutionDependencies={rulesExecutionDependencies}

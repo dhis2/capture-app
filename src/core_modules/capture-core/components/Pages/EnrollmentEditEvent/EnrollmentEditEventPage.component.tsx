@@ -27,7 +27,6 @@ export const EnrollmentEditEventPageComponent = ({
     teiDisplayName,
     widgetEffects,
     hideWidgets,
-    ruleEffects,
     onDelete,
     onAddNew,
     onLinkedRecordClick,
@@ -119,7 +118,6 @@ export const EnrollmentEditEventPageComponent = ({
             pageStatus={pageStatus}
             widgetEffects={widgetEffects}
             hideWidgets={hideWidgets}
-            ruleEffects={ruleEffects}
             onDelete={onDelete}
             onAddNew={onAddNew}
             eventAccess={eventAccess}
