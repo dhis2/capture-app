@@ -45,6 +45,8 @@ export const EventBulkActions = ({
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
+                removeRowsFromSelection={removeRowsFromSelection}
+                programId={programId}
             />
         </BulkActionBar>
     );

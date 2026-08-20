@@ -23,6 +23,7 @@ export const DeleteEnrollmentsAction = ({
     programDataWriteAccess,
     programId,
     onUpdateList,
+    removeRowsFromSelection,
     bulkDataEntryIsActive,
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -54,6 +55,7 @@ export const DeleteEnrollmentsAction = ({
                     selectedRows={selectedRows}
                     programId={programId}
                     onUpdateList={onUpdateList}
+                    removeRowsFromSelection={removeRowsFromSelection}
                     setIsDeleteDialogOpen={setIsDeleteDialogOpen}
                 />
             )}
