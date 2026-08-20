@@ -59,7 +59,7 @@ export const EnrollmentPageDefault = () => {
         attributeValues,
         readOnly: trackedEntityInactive,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+
     const programOwnerId = useSelector(({ enrollmentPage }: any) => enrollmentPage.programOwners?.[programId]);
     const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
@@ -96,7 +96,7 @@ export const EnrollmentPageDefault = () => {
     }
 
     const ruleEffects = useRuleEffects({
-        orgUnit: programOwnerOrgUnit ?? orgUnit,
+        orgUnit: programOwnerOrgUnit,
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
@@ -193,10 +193,6 @@ export const EnrollmentPageDefault = () => {
         return (
             <LoadingMaskForPage />
         );
-    }
-
-    if (error) {
-        return error?.errorComponent;
     }
 
     return (

@@ -1,4 +1,3 @@
-import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { AttributeValue } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
@@ -28,7 +27,6 @@ export type Props = {
     onEnrollmentSuccess: () => void;
     widgetEffects: WidgetEffects | null | undefined;
     hideWidgets: HideWidgets;
-    ruleEffects?: Array<OutputEffect>;
     rulesExecutionDependencies: Record<string, unknown>;
     pageFailure: boolean;
     ready: boolean;
@@ -50,7 +48,6 @@ export type ContainerProps = {
         enrolledAt?: string;
         occurredAt?: string;
         enrollment?: string;
-        orgUnit?: string;
     } | null | undefined;
     attributeValues: Array<AttributeValue> | null | undefined;
     commonDataError: boolean;
