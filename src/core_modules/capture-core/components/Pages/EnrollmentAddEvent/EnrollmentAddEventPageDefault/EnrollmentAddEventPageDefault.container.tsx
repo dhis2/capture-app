@@ -30,6 +30,9 @@ import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPage
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 import { TrackerProgram } from '../../../../metaData';
 
+const getTrackerProgram = (program: any): TrackerProgram | undefined =>
+    (program instanceof TrackerProgram ? program : undefined);
+
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
     enrollment,
@@ -116,8 +119,9 @@ export const EnrollmentAddEventPageDefault = ({
     const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
-    const trackerProgram = program instanceof TrackerProgram ? program : undefined;
-    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const trackerProgram = getTrackerProgram(program);
+    const effectiveOrgUnitId = orgUnitId ?? enrollment?.orgUnit;
+    const { orgUnit } = useCoreOrgUnit(effectiveOrgUnitId);
     const ruleEffects = useRuleEffects({
         orgUnit,
         program: trackerProgram,

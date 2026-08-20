@@ -50,6 +50,7 @@ export type ContainerProps = {
         enrolledAt?: string;
         occurredAt?: string;
         enrollment?: string;
+        orgUnit?: string;
     } | null | undefined;
     attributeValues: Array<AttributeValue> | null | undefined;
     commonDataError: boolean;

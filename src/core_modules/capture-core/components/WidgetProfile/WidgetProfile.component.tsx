@@ -60,8 +60,7 @@ const computeLoadingState = (
     trackedEntityInstancesLoading: boolean,
     userRolesLoading: boolean,
     configIsFetched: boolean,
-    ruleEffectsPending: boolean,
-) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched || ruleEffectsPending;
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
 
 const computeError = (
     programsError: any,
@@ -125,7 +124,7 @@ const WidgetProfilePlain = ({
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
     const loading = computeLoadingState(
-        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched, ruleEffects === undefined,
+        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched,
     );
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(

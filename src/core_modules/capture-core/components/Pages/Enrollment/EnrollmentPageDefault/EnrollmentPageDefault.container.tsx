@@ -59,8 +59,7 @@ export const EnrollmentPageDefault = () => {
         attributeValues,
         readOnly: trackedEntityInactive,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-    const effectiveOrgUnitId = orgUnitId ?? enrollment?.orgUnit;
-    const { orgUnit, error } = useCoreOrgUnit(effectiveOrgUnitId);
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
         pageLayout,
@@ -205,7 +204,7 @@ export const EnrollmentPageDefault = () => {
                 currentPage={EnrollmentPageKeys.OVERVIEW}
                 availableWidgets={WidgetsForEnrollmentPageDefault}
                 teiId={teiId}
-                orgUnitId={effectiveOrgUnitId}
+                orgUnitId={orgUnitId}
                 program={program}
                 stages={stages}
                 events={enrollment?.events}
