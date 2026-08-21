@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-17T06:08:25.172Z\n"
-"PO-Revision-Date: 2026-08-17T06:08:25.172Z\n"
+"POT-Creation-Date: 2026-08-17T07:54:36.289Z\n"
+"PO-Revision-Date: 2026-08-17T07:54:36.289Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -688,8 +688,8 @@ msgstr "before or equal to"
 msgid "More filters"
 msgstr "More filters"
 
-msgid "Stage filters"
-msgstr "Stage filters"
+msgid "Program stage filters"
+msgstr "Program stage filters"
 
 msgid "Rows per page"
 msgstr "Rows per page"
@@ -811,8 +811,8 @@ msgstr "There was an error loading the page"
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
 
-msgid "Stage not found"
-msgstr "Stage not found"
+msgid "Program stage not found"
+msgstr "Program stage not found"
 
 msgid "Report"
 msgstr "Report"
@@ -832,14 +832,14 @@ msgstr "You can't add any more {{ programStageName }} events"
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
 
-msgid "Choose a stage for a new event"
-msgstr "Choose a stage for a new event"
+msgid "Choose a program stage for a new event"
+msgstr "Choose a program stage for a new event"
 
 msgid "Program Stages could not be loaded"
 msgstr "Program Stages could not be loaded"
 
-msgid "Stage"
-msgstr "Stage"
+msgid "Program stage"
+msgstr "Program stage"
 
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "The category option is not valid for the selected organisation unit."
@@ -1306,21 +1306,11 @@ msgstr "No one is assigned to this event"
 msgid "Assign"
 msgstr "Assign"
 
-msgid "This program is protected"
-msgstr "This program is protected"
-
-msgid "Reason to check for enrollments"
-msgstr "Reason to check for enrollments"
-
-msgid ""
-"Describe the reason you are checking for enrollments in this protected "
-"program"
-msgstr ""
-"Describe the reason you are checking for enrollments in this protected "
-"program"
-
 msgid "Check for enrollments"
 msgstr "Check for enrollments"
+
+msgid "This program is protected"
+msgstr "This program is protected"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
@@ -1331,6 +1321,16 @@ msgstr ""
 
 msgid "All activity will be logged."
 msgstr "All activity will be logged."
+
+msgid "Reason to check for enrollments"
+msgstr "Reason to check for enrollments"
+
+msgid ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
+msgstr ""
+"Describe the reason you are checking for enrollments in this protected "
+"program"
 
 msgid "Unsaved changes"
 msgstr "Unsaved changes"
@@ -1446,9 +1446,6 @@ msgstr "Enrollment date"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "Enrollment widget could not be loaded. Please try again later"
-
 msgid "Follow-up"
 msgstr "Follow-up"
 
@@ -1467,9 +1464,6 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
-msgid "Program stage not found"
-msgstr "Program stage not found"
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1479,8 +1473,8 @@ msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgid "Saving to {{stageName}} for {{programName}}"
 msgstr "Saving to {{stageName}} for {{programName}}"
 
-msgid "program or stage is invalid"
-msgstr "program or stage is invalid"
+msgid "Program or program stage is invalid"
+msgstr "Program or program stage is invalid"
 
 msgid "Notes about this enrollment"
 msgstr "Notes about this enrollment"
@@ -1497,8 +1491,8 @@ msgstr "Error"
 msgid "Warning"
 msgstr "Warning"
 
-msgid "stage not found in rules execution"
-msgstr "stage not found in rules execution"
+msgid "Program stage not found in rules execution"
+msgstr "Program stage not found in rules execution"
 
 msgid "Delete event"
 msgstr "Delete event"
@@ -1592,9 +1586,6 @@ msgstr "Event notes"
 
 msgid "Write a note about this scheduled event"
 msgstr "Write a note about this scheduled event"
-
-msgid "Program or stage is invalid"
-msgstr "Program or stage is invalid"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -1754,8 +1745,8 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "This stage can only have one event"
-msgstr "This stage can only have one event"
+msgid "This program stage can only have one event"
+msgstr "This program stage can only have one event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
@@ -1804,11 +1795,11 @@ msgstr "{{ overdueEvents }} overdue"
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
 
-msgid "No stages found in this program"
-msgstr "No stages found in this program"
+msgid "No program stages found in this program"
+msgstr "No program stages found in this program"
 
-msgid "Stages and Events"
-msgstr "Stages and Events"
+msgid "Program stages and events"
+msgstr "Program stages and events"
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr "An error occurred while unlinking and deleting the event."
@@ -2247,6 +2238,24 @@ msgstr "Visited"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
+
+msgid "program stage"
+msgstr "program stage"
+
+msgid "note"
+msgstr "note"
+
+msgid "relationship"
+msgstr "relationship"
+
+msgid "attribute"
+msgstr "attribute"
+
+msgid "organisation unit"
+msgstr "organisation unit"
+
+msgid "follow-up"
+msgstr "follow-up"
 
 msgid "Program not found"
 msgstr "Program not found"

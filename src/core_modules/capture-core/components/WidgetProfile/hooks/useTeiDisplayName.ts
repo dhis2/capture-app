@@ -2,8 +2,6 @@ import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { convertClientToView } from '../DataEntry';
 
-const DEFAULT_NAME = i18n.t('tracked entity instance');
-
 type TeiAttribute = {
     attribute: string;
     value?: string;
@@ -49,7 +47,7 @@ const deriveTeiName = (
     tetAttributes: TetAttribute[],
     teiId?: string,
 ) => {
-    if (!attributes || !tetAttributes) return teiId ?? DEFAULT_NAME;
+    if (!attributes || !tetAttributes) return teiId ?? i18n.t('tracked entity instance');
 
     const teiNameDisplayInList = getTetAttributesDisplayInList(attributes, tetAttributes as TetAttribute[]);
     if (teiNameDisplayInList) return teiNameDisplayInList;
@@ -57,7 +55,7 @@ const deriveTeiName = (
     const teiName = getTetAttributes(attributes, tetAttributes);
     if (teiName) return teiName;
 
-    return teiId ?? DEFAULT_NAME;
+    return teiId ?? i18n.t('tracked entity instance');
 };
 
 export const useTeiDisplayName = (

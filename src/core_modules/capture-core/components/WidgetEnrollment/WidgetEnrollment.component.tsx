@@ -17,7 +17,12 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes } from '../../metaData';
+import {
+    dataElementTypes,
+    useTermLabel,
+    tLabel,
+    capitalizeFirstLetter,
+} from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -82,6 +87,7 @@ const WidgetEnrollmentPlain = ({
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
+    const enrollmentLabel = useTermLabel('enrollment');
     const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -100,7 +106,7 @@ const WidgetEnrollmentPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('Enrollment')}</span>
+                        <span>{capitalizeFirstLetter(enrollmentLabel)}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -115,9 +121,10 @@ const WidgetEnrollmentPlain = ({
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                {initError && (
+                {true && (
                     <div className={classes.enrollment}>
-                        {i18n.t('Enrollment widget could not be loaded. Please try again later')}
+                        {tLabel('{{enrollmentLabel}} widget could not be loaded. Please try again later',
+                            { enrollmentLabel })}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}

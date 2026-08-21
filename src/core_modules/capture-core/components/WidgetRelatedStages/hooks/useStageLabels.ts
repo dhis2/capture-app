@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 
@@ -23,8 +24,12 @@ export const useStageLabels = (programId: string, programStageId?: string) => {
     );
 
     return {
-        scheduledLabel: data?.displayDueDateLabel ?? i18n.t('Scheduled date'),
-        occurredLabel: data?.displayExecutionDateLabel ?? i18n.t('Report date'),
+        scheduledLabel: data?.displayDueDateLabel
+            ? capitalizeFirstLetter(data.displayDueDateLabel)
+            : i18n.t('Scheduled date'),
+        occurredLabel: data?.displayExecutionDateLabel
+            ? capitalizeFirstLetter(data.displayExecutionDateLabel)
+            : i18n.t('Report date'),
         isLoading: isInitialLoading,
         error,
     };
