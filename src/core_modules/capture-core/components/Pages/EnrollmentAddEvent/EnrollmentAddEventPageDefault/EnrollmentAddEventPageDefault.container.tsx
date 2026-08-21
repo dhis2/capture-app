@@ -116,7 +116,7 @@ export const EnrollmentAddEventPageDefault = ({
     const dataEntryHasChanges = useSelector((state: ReduxState) => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
     const trackerProgram = useTrackerProgram(programId);
-    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId ?? '');
+    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
 
     const ruleEffects = useRuleEffects({
         orgUnit: programOwnerOrgUnit,

@@ -162,7 +162,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
-    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId ?? '');
+    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
     const ruleEffects = useRuleEffects({
         orgUnit: programOwnerOrgUnit,
         program,
