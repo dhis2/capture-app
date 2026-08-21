@@ -1259,13 +1259,13 @@ If there aren't any warnings to show for the current dashboard then the widget i
 On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
 If there aren't any errors to show for the current dashboard then the widget is hidden.
 
-### Customize the dashboard layout (for administrators) { #capture_dashboard_layout }
+### Customize the dashboard layout { #capture_dashboard_layout }
 
 The widgets described above, and their left/right column order, form the *default* dashboard layout. Individual users cannot rearrange these widgets from within the Capture app itself.
 
-An administrator can instead define a custom layout per tracker program by adding a configuration entry to the `capture` datastore namespace. This lets you choose which widgets appear, in which column, and in what order, and even embed custom plugins alongside the built-in widgets. The same mechanism also applies to the **Add event** and **Edit event** pages.
+A user with access to the Datastore Management app or the Tracker Configurator App can instead define a custom layout per tracker program, by adding a configuration entry to the `capture` datastore namespace. This lets you choose which widgets appear, in which column, and in what order, and even embed custom plugins alongside the built-in widgets. The same mechanism also applies to the **Add event** and **Edit event** pages.
 
-This is an experimental, implementer-facing feature. You can set it up using the Tracker Configurator App, or directly through the Datastore Management app. See [Manual setup (Advanced)](https://developers.dhis2.org/docs/capture-plugins/developer/enrollment-plugins/manual-setup) for the full configuration reference, including the list of supported widgets and how to embed plugins.
+See [Manual setup (Advanced)](https://developers.dhis2.org/docs/capture-plugins/developer/enrollment-plugins/manual-setup) for the full configuration reference, including the list of supported widgets and how to embed plugins.
 
 ## Enrollment event view and edit page
 
