@@ -82,11 +82,15 @@ And('you log out', () => {
 
 And('you log in as tracker2 user', () => {
     const baseUrl = Cypress.env('dhis2BaseUrl');
+    const username = 'tracker2';
 
-    cy.session('userTracker2', () => {
-        cy.loginByApi({ username: 'tracker2', password: 'Tracker@123', baseUrl }); // NOSONAR - non-production test-instance credential, not a secret
+    cy.session(`user${username}`, () => {
+        cy.loginByApi({ username, password: 'Tracker@123', baseUrl }); // NOSONAR - non-production test-instance credential, not a secret
     }, {
         cacheAcrossSpecs: true,
+        validate: () => {
+            cy.validateUserIsLoggedIn({ baseUrl, username });
+        },
     });
 
     cy.visit('/');
