@@ -149,7 +149,7 @@ const WidgetProfilePlain = ({
             };
         }), [clientAttributesWithSubvalues, hiddenFieldIds]);
 
-    const isEmptyList = !loading && !error && Boolean(orgUnitId)
+    const isEmptyList = !loading && !error
         && (hasNoAttributes || displayInListAttributes.length === 0);
 
     const onSaveExternal = useCallback(() => {
@@ -175,11 +175,6 @@ const WidgetProfilePlain = ({
     const renderProfile = () => {
         if (loading) {
             return <LoadingMaskElementCenter />;
-        }
-
-        if (!orgUnitId) {
-            log.error(errorCreator('Profile widget could not be loaded: missing orgUnitId')({ teiId }));
-            return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
         }
 
         if (error) {

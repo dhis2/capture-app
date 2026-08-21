@@ -15,7 +15,7 @@ import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
     const { tab } = useLocationQuery();
-    const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
+    const { error: enrollmentsError, enrollment, attributeValues, programOwnerId } = useCommonEnrollmentDomainData(
         teiId,
         enrollmentId,
         programId,
@@ -26,7 +26,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         isError: programError,
     } = useProgramFromIndexedDB(programId);
 
-    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const { orgUnit } = useCoreOrgUnit(programOwnerId);
     const programRules = useTrackerProgram(programId);
 
     const ruleEffects = useRuleEffects({
