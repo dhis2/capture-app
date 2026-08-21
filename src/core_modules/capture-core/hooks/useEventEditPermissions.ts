@@ -20,7 +20,6 @@ type Output = {
     isEventBlockedByExpiry: boolean,
     isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
-    canUncompleteEvent: boolean,
 };
 
 const canUncompletEvent = (
@@ -73,6 +72,5 @@ export const useEventEditPermissions = ({
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
         isEventReadOnly,
-        canUncompleteEvent,
     };
 };

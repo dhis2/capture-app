@@ -41,6 +41,13 @@ const styles: Readonly<any> = {
     },
 };
 
+const getCanChangeCompletionStatus = (
+    eventStatus: string | undefined,
+    readOnly: boolean,
+    isEventBlockedByCompletion: boolean,
+): boolean => (eventStatus === eventStatuses.ACTIVE && !readOnly)
+    || (eventStatus === eventStatuses.COMPLETED && !isEventBlockedByCompletion);
+
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const WidgetHeaderPlain = ({
@@ -54,7 +61,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    canUncompleteEvent,
+    isEventBlockedByCompletion,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -65,6 +72,7 @@ const WidgetHeaderPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
+    const canChangeCompletionStatus = getCanChangeCompletionStatus(eventStatus, readOnly, isEventBlockedByCompletion);
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
@@ -167,7 +175,7 @@ const WidgetHeaderPlain = ({
                                             onClose={() => setActionsIsOpen(false)}
                                         />
                                     )}
-                                    {canUncompleteEvent && (
+                                    {canChangeCompletionStatus && (
                                         <CompletionMenuItem
                                             eventId={eventId}
                                             eventStatus={eventStatus}

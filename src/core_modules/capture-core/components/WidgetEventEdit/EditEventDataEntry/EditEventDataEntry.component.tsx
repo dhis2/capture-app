@@ -323,7 +323,7 @@ const buildCompleteFieldSettingsFn = () => {
                         withDisplayMessages()(
                             withInternalChangeHandler()(
                                 withConditionalTooltip((props: any) => {
-                                    const shouldDisable = !props.canUncompleteEvent;
+                                    const shouldDisable = props.isEventBlockedByCompletion;
                                     return shouldDisable
                                         ? i18n.t('You do not have access to uncomplete this event')
                                         : undefined;
@@ -338,14 +338,14 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => {
-            const shouldDisable = !props.canUncompleteEvent;
+            const shouldDisable = props.isEventBlockedByCompletion;
 
             return createComponentProps(props, {
                 label: i18n.t('Complete event'),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,
-                canUncompleteEvent: props.canUncompleteEvent,
+                isEventBlockedByCompletion: props.isEventBlockedByCompletion,
             });
         },
         getPropName: () => 'complete',
@@ -444,7 +444,7 @@ type Props = {
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
-    canUncompleteEvent?: boolean;
+    isEventBlockedByCompletion?: boolean;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;

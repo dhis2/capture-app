@@ -89,8 +89,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
     });
-    const canUncompleteEvent = !isEventBlockedByCompletion && !isEventBlockedByExpiry;
-
+    const isCompletionBlocked = isEventBlockedByCompletion || isEventBlockedByExpiry;
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();
@@ -110,7 +109,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
-                    canUncompleteEvent={canUncompleteEvent}
+                    isEventBlockedByCompletion={isCompletionBlocked}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry
