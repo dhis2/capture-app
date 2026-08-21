@@ -25,6 +25,7 @@ Object {
       "valueType": "TEXT",
     },
   },
+  "isFirstStageEventForm": undefined,
   "optionSets": Object {
     "0": Object {
       "displayName": undefined,
