@@ -117,6 +117,7 @@ export const EnrollmentAddEventPageDefault = ({
     const { program } = useProgramInfo(programId);
     const trackerProgram = useTrackerProgram(programId);
     const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId ?? '');
+
     const ruleEffects = useRuleEffects({
         orgUnit: programOwnerOrgUnit,
         program: trackerProgram,

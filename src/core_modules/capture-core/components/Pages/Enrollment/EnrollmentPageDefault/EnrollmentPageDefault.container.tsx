@@ -71,7 +71,7 @@ export const EnrollmentPageDefault = () => {
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const program = useTrackerProgram(programId);
     const programOwnerId = useSelector(({ enrollmentPage }: any) => enrollmentPage.programOwners?.[programId]);
-    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
+    const { orgUnit: programOwnerOrgUnit, error: programOwnerOrgUnitError } = useCoreOrgUnit(programOwnerId);
 
     const onStatusToggleSuccess = useCallback(() => {
         dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));
@@ -88,9 +88,9 @@ export const EnrollmentPageDefault = () => {
         https://dhis2.atlassian.net/browse/DHIS2-17574
     */
 
-    if (programMetaDataError || enrollmentsError) {
+    if (programMetaDataError || enrollmentsError || programOwnerOrgUnitError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
-            { programMetaDataError, enrollmentsError },
+            { programMetaDataError, enrollmentsError, programOwnerOrgUnitError },
         ));
     }
 
