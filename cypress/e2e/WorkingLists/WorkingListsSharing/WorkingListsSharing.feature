@@ -7,8 +7,7 @@ Scenario: The sharing settings on an event working list view survive an update
   And you share the view with the other user
   And you change the sorting
   And you update the event view
-  Then the update is accepted by the server
-  And the view no longer has unsaved changes
+  Then the view no longer has unsaved changes
   And the event view is still shared with the other user
 
 @user:trackerAutoTestRestricted
@@ -18,8 +17,7 @@ Scenario: A user with view and edit access can update a shared event working lis
   And you change the sorting
   Then you are offered the option to update the view
   When you update the event view
-  Then the update is accepted by the server
-  And the event view is still shared with you
+  Then the event view is still shared with you
 
 Scenario: The sharing settings on a tracker working list view survive an update
   Given you open the tracker working list
@@ -27,8 +25,7 @@ Scenario: The sharing settings on a tracker working list view survive an update
   And you share the view with the other user
   And you change the sorting
   And you update the tracker view
-  Then the update is accepted by the server
-  And the view no longer has unsaved changes
+  Then the view no longer has unsaved changes
   And the tracker view is still shared with the other user
 
 @user:trackerAutoTestRestricted
@@ -38,8 +35,7 @@ Scenario: A user with view and edit access can update a shared tracker working l
   And you change the sorting
   Then you are offered the option to update the view
   When you update the tracker view
-  Then the update is accepted by the server
-  And the tracker view is still shared with you
+  Then the tracker view is still shared with you
 
 Scenario: The sharing settings on a program stage working list view survive an update
   Given you open the tracker working list filtered by the First antenatal care visit stage
@@ -47,8 +43,7 @@ Scenario: The sharing settings on a program stage working list view survive an u
   And you share the view with the other user
   And you change the sorting
   And you update the program stage view
-  Then the update is accepted by the server
-  And the view no longer has unsaved changes
+  Then the view no longer has unsaved changes
   And the program stage view is still shared with the other user
 
 @user:trackerAutoTestRestricted
@@ -58,5 +53,4 @@ Scenario: A user with view and edit access can update a shared program stage wor
   And you change the sorting
   Then you are offered the option to update the view
   When you update the program stage view
-  Then the update is accepted by the server
-  And the program stage view is still shared with you
+  Then the program stage view is still shared with you

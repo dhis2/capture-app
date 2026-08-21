@@ -319,17 +319,14 @@ Then('you are offered the option to update the view', () => {
     cy.get('[data-test="list-view-menu-button"]').click({ force: true });
 });
 
+// The update is only done if the server accepted it, so the status is asserted here rather than in a
+// step of its own. DHIS2-13020: it used to come back 409 for a user who is not the owner.
 When(/^you update the (event|tracker|program stage) view$/, (listName) => {
     cy.intercept('PUT', `**/${resourceFor(listName)}/*`).as('updateView');
 
     clickListViewMenuItem('Update view');
 
-    cy.wait('@updateView');
-});
-
-// DHIS2-13020: the update used to fail with 409 for a user who is not the owner.
-Then('the update is accepted by the server', () => {
-    cy.get('@updateView')
+    cy.wait('@updateView')
         .its('response.statusCode')
         .should('equal', 200);
 });
