@@ -1,4 +1,3 @@
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { formatMomentEn } from 'capture-core-utils/date';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
@@ -81,7 +80,7 @@ export function convertCategoryOptionsToServer(
                 acc.push(value[categoryId]);
             }
             return acc;
-        }, []).join(featureAvailable(FEATURES.newUIDsSeparator) ? ',' : ';');
+        }, []).join(',');
     }
     return value;
 }
