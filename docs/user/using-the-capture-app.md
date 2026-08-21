@@ -1022,18 +1022,28 @@ In addition to deselecting individual boxes, the top bar provides an action to c
 The enrollment dashboard becomes read-only when you don't have full write access, or when the tracked entity is [deactivated](#capture_deactivate_activate_tei). In read-only mode you can still view all data, but actions that would create, edit, delete, or complete data are hidden rather than just disabled.
 
 - If you have no write access at all — to the program, the tracked entity type, and every program stage — a single **View only** badge is shown next to the context bar at the top of the dashboard, explaining why.
+
+  ![](resources/images/enrollment-dash-read-only-full.png)
+
 - If you have write access to some parts but not others (for example, write access to some program stages but not others, or to the program but not the tracked entity type), the page-level badge is not shown. Instead, each affected widget shows its own **View only** badge and hides only the actions it doesn't allow.
 
-The sections below note which actions are affected in each widget.
+  ![](resources/images/enrollment-dash-read-only-partial.png)
+
+What's hidden in each widget when it doesn't have write access:
+
+- **Quick actions**: the whole widget is hidden without write access to any program stage.
+- **Program stage list**: the **New {stage event name}** button and each event's **⋮** action menu (Skip, Delete) are hidden per stage without write access to that stage.
+- **Enrollment widget**: the **Enrollment actions** button and the pencil icons for editing the enrollment date and incident date are hidden without program write access.
+- **Enrollment and event note widgets**: the text field and **Save note**/**Cancel** buttons are hidden without write access — existing notes remain visible.
+- **Relationships widget**: the **New Relationship** button is hidden without write access to the tracked entity type.
+- **Tracked entity profile widget**: the **Edit** button reads **View profile** instead, without write access to the tracked entity type.
+- **Enrollment event view/edit page**: the same **View only** badge appears next to the breadcrumb, and the `Edit event` button is hidden without write access to that program stage.
 
 ### Quick actions
 
 The quick actions widget offers shortcuts for frequently used actions for the current enrollment.
 
 ![](resources/images/enrollment-dashboard-quick-actions.png)
-
-> **Note**
-> This widget is hidden entirely if you don't have write access to any program stage in this enrollment.
 
 ### Program stage list
 
@@ -1067,9 +1077,6 @@ When clicking  **New {stage event name}** button, you will be redirected to the 
 
 ![](resources/images/enrollment-dash-stages-events-06.png)
 
-> **Note**
-> For a stage you don't have write access to, the **New {stage event name}** button and each event's **⋮** action menu (Skip, Delete) are hidden, and the stage shows its own **View only** badge. If you have write access to none of the stages, see [Read-only mode](#capture_enrollment_dashboard_read_only) — a single dashboard-level badge is shown instead of one per stage.
-
 #### Expanded stages with more than 5 events 
 
 In case there are more than 5 events in the list, only the first 5 are shown. You will be able to view the rest by clicking  **Show more**.
@@ -1081,9 +1088,6 @@ In case there are more than 5 events in the list, only the first 5 are shown. Yo
 On the enrollment page you can see the enrollment widget
 
 ![](resources/images/enrollment-dash-enrollment-widget-1.png)
-
-> **Note**
-> Without write access to the program, the **Enrollment actions** button and the pencil icons for editing the enrollment date and incident date are hidden, and the widget shows a **View only** badge instead.
 
 #### Enrollment actions
 
@@ -1130,9 +1134,6 @@ The enrollment note widget displays notes and allows addition of notes, associat
 
 By clicking in the text field, you will be able to enter new text and see action buttons **Save note** and **Cancel**. Be aware that Enrollment notes are attributed to a user and cannot be deleted. 
 
-> **Note**
-> Without write access to the program, the text field and **Save note**/**Cancel** buttons are hidden — existing notes remain visible.
-
 
 ### Relationship widget
 
@@ -1150,9 +1151,6 @@ When clicking a tracked entity you should be taken to the Enrollment Dashboard. 
 Click the **New Relationship** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
 
 ![](resources/images/enrollment-dash-relationship-widget-add.png)
-
-> **Note**
-> Without write access to the tracked entity type, the **New Relationship** button is hidden and the widget shows a **View only** badge instead. This applies to all relationship types on this tracked entity.
 
 Choose between linking to an existing tracked entity or creating a new one.
 
@@ -1179,9 +1177,6 @@ On the enrollment dashboard, you can view the tracked entity profile widget. Ins
 Click the **Edit** button to make changes to the tracked entity profile. Editing the profile opens a dialog where the profile attributes can be changed.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
-
-> **Note**
-> Without write access to the tracked entity type, the button reads **View profile** instead, opening the same dialog in a read-only view.
 
 The **⋮** (more) icon next to the **Edit** button opens an overflow menu with further actions on the tracked entity: **View changelog** (if enabled for the tracked entity type), **Deactivate**/**Activate**, and **Delete**.
 
@@ -1289,9 +1284,6 @@ To go to the Enrollment Overview page you can:
 
 ![](resources/images/enrollment-event-view-edit-navigation.png)
 
-> **Note**
-> If you cannot edit this event, a **View only** badge is shown next to the breadcrumb explaining why — see [Read-only mode](#capture_enrollment_dashboard_read_only) on the enrollment dashboard for the possible causes.
-
 ### View/Edit event form 
 
 This is the form where you can see and edit the enrollment event details.
@@ -1334,9 +1326,6 @@ When the form is in the view mode the title of the page will appear as: `Enrollm
 This mode is bypassed for events that are scheduled.
 
 ![](resources/images/enrollment-event-view-edit-view.png)
-
-> **Note**
-> If you don't have write access to this program stage, the `Edit event` button is hidden and the event stays in view mode.
 
 #### Edit mode
 
