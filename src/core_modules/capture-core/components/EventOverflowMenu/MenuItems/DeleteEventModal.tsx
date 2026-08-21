@@ -16,7 +16,7 @@ type Props = {
     setDeleteModalOpen: (open: boolean) => void;
 };
 
-export const DeleteActionModal = ({
+export const DeleteEventModal = ({
     setDeleteModalOpen,
     pendingApiResponse,
     eventId,

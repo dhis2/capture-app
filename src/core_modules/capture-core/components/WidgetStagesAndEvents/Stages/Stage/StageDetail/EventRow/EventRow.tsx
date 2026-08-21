@@ -14,7 +14,7 @@ import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteActionButton, DeleteActionModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
+import { DeleteMenuItem, DeleteEventModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
 import { SkipAction } from './SkipAction';
 import {
     updateEnrollmentEvent,
@@ -135,7 +135,7 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        <DeleteActionButton
+                                        <DeleteMenuItem
                                             setActionsOpen={setActionsOpen}
                                             setDeleteModalOpen={setDeleteModalOpen}
                                         />
@@ -145,7 +145,7 @@ const EventRowPlain = ({
                         )}
 
                         {deleteModalOpen && (
-                            <DeleteActionModal
+                            <DeleteEventModal
                                 eventId={id}
                                 pendingApiResponse={pendingApiResponse}
                                 eventDetails={eventDetails}

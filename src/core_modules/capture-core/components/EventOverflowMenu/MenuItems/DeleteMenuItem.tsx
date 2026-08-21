@@ -11,7 +11,7 @@ type Props = {
     setDeleteModalOpen: (open: boolean) => void;
 };
 
-export const DeleteActionButton = ({
+export const DeleteMenuItem = ({
     setActionsOpen,
     setDeleteModalOpen,
 }: Props) => (

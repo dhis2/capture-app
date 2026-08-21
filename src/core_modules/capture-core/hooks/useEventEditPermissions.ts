@@ -62,7 +62,7 @@ export const useEventEditPermissions = ({
         isEventBlockedByExpiry,
     );
 
-    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canUncompleteEvent;
+    const isEventBlockedByCompletion = eventStatus === eventStatuses.COMPLETED && !canUncompleteEvent;
 
     const isEventReadOnly = !eventAccess?.write
         || isEventBlockedByExpiry
