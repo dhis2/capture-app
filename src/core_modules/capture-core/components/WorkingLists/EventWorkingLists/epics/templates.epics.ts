@@ -60,11 +60,7 @@ export const updateTemplateEpic = (
             template: {
                 id,
                 name,
-                externalAccess,
-                publicAccess,
-                user,
-                userGroupAccesses,
-                userAccesses,
+                sharing,
             },
             criteria: eventQueryCriteria,
             programId,
@@ -78,11 +74,7 @@ export const updateTemplateEpic = (
                     ...restCriteria,
                     ...(occurredAt && { eventDate: occurredAt }),
                 },
-                externalAccess,
-                publicAccess,
-                user,
-                userGroupAccesses,
-                userAccesses,
+                sharing,
             };
 
             const requestPromise = mutate({
