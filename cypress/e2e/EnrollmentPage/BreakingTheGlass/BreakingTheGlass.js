@@ -1,7 +1,7 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, After, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
 
-Given('the tei created by this test is cleared from the database', () => {
+const clearTestTei = () =>
     cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&orgUnitMode=ACCESSIBLE')
         .then(url => cy.request(url))
         .then(({ body }) => {
@@ -12,6 +12,19 @@ Given('the tei created by this test is cleared from the database', () => {
                     .then(trackedEntityUrl => cy.request('POST', trackedEntityUrl, { trackedEntities: [{ trackedEntity }] })),
             );
         });
+
+After({ tags: '@with-breaking-the-glass-tei-cleanup' }, () => {
+    // The scenario ends logged in as the search-scope-only user, which cannot delete the tei.
+    cy.loginByApi({
+        username: Cypress.env('dhis2Username'),
+        password: Cypress.env('dhis2Password'),
+        baseUrl: Cypress.env('dhis2BaseUrl'),
+    });
+    clearTestTei();
+});
+
+Given('the tei created by this test is cleared from the database', () => {
+    clearTestTei();
 });
 
 And('you create a new tei in Child programme from Ngelehun CHC', () => {
