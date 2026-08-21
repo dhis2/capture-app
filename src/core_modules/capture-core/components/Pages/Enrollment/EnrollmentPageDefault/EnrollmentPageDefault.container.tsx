@@ -53,7 +53,6 @@ export const EnrollmentPageDefault = () => {
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
         pageLayout,
@@ -64,13 +63,15 @@ export const EnrollmentPageDefault = () => {
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_OVERVIEW,
     });
 
-    const program = useTrackerProgram(programId);
     const {
         error: enrollmentsError,
         enrollment,
         attributeValues,
         readOnly: trackedEntityInactive,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const program = useTrackerProgram(programId);
+    const programOwnerId = useSelector(({ enrollmentPage }: any) => enrollmentPage.programOwners?.[programId]);
+    const { orgUnit: programOwnerOrgUnit, error: programOwnerOrgUnitError } = useCoreOrgUnit(programOwnerId);
 
     const onStatusToggleSuccess = useCallback(() => {
         dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));
@@ -87,14 +88,14 @@ export const EnrollmentPageDefault = () => {
         https://dhis2.atlassian.net/browse/DHIS2-17574
     */
 
-    if (programMetaDataError || enrollmentsError) {
+    if (programMetaDataError || enrollmentsError || programOwnerOrgUnitError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
-            { programMetaDataError, enrollmentsError },
+            { programMetaDataError, enrollmentsError, programOwnerOrgUnitError },
         ));
     }
 
     const ruleEffects = useRuleEffects({
-        orgUnit,
+        orgUnit: programOwnerOrgUnit,
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
@@ -193,10 +194,6 @@ export const EnrollmentPageDefault = () => {
         );
     }
 
-    if (error) {
-        return error?.errorComponent;
-    }
-
     return (
         <EnrollmentAccessProvider program={program} trackedEntityInactive={trackedEntityInactive}>
             <EnrollmentPageLayout
@@ -205,6 +202,7 @@ export const EnrollmentPageDefault = () => {
                 availableWidgets={WidgetsForEnrollmentPageDefault}
                 teiId={teiId}
                 orgUnitId={orgUnitId}
+                programOwnerId={programOwnerId}
                 program={program}
                 stages={stages}
                 events={enrollment?.events}
