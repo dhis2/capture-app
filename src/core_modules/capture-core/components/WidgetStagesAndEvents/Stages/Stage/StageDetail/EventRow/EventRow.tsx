@@ -45,6 +45,9 @@ const isCompletionToggleable = (status: string, blockedByCompletion: boolean, bl
     && !blockedByExpiry
     && (status === eventStatuses.ACTIVE || status === eventStatuses.COMPLETED);
 
+const canShowOverflowMenu = (isEventReadOnly: boolean, canToggleCompletion: boolean, eventStatus?: string) =>
+    !isEventReadOnly || canToggleCompletion || isSkippableStatus(eventStatus);
+
 const EventRowPlain = ({
     id,
     pendingApiResponse,
@@ -61,7 +64,9 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
+    const {
+        isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry, isEventDeletable,
+    } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
@@ -73,7 +78,7 @@ const EventRowPlain = ({
         isEventBlockedByCompletion,
         isEventBlockedByExpiry,
     );
-    const showOverflowButton = !isEventReadOnly || canToggleCompletion || isSkippableStatus(eventDetails.status);
+    const showOverflowButton = canShowOverflowMenu(isEventReadOnly, canToggleCompletion, eventDetails.status);
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = eventDetails;
@@ -147,10 +152,12 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        <DeleteMenuItem
-                                            onDeleteRequest={() => setDeleteModalOpen(true)}
-                                            onClose={() => setActionsOpen(false)}
-                                        />
+                                        {isEventDeletable && (
+                                            <DeleteMenuItem
+                                                onDeleteRequest={() => setDeleteModalOpen(true)}
+                                                onClose={() => setActionsOpen(false)}
+                                            />
+                                        )}
                                     </FlyoutMenu>
                                 )}
                             />

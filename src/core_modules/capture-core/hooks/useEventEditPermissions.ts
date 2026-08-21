@@ -20,7 +20,27 @@ type Output = {
     isEventBlockedByExpiry: boolean,
     isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
+    isEventDeletable: boolean,
 };
+
+const computeExpiryBlocked = (
+    isWithinValidPeriod: boolean,
+    isWithinCompleteExpiry: boolean,
+    hasEditExpiredAuthority: boolean,
+): boolean => (!isWithinValidPeriod || !isWithinCompleteExpiry) && !hasEditExpiredAuthority;
+
+const computeEditAccess = (
+    hasWriteAccess: boolean,
+    isEventBlockedByExpiry: boolean,
+    isCompletedAndBlockingForm: boolean,
+    eventStatus?: string,
+) => ({
+    isEventReadOnly: !hasWriteAccess
+        || isEventBlockedByExpiry
+        || isCompletedAndBlockingForm
+        || eventStatus === eventStatuses.SKIPPED,
+    isEventDeletable: hasWriteAccess && !isEventBlockedByExpiry && !isCompletedAndBlockingForm,
+});
 
 const canUncompletEvent = (
     hasWriteAccess: boolean,
@@ -50,10 +70,10 @@ export const useEventEditPermissions = ({
     const { hasAuthority: hasEditExpiredAuthority } = useAuthority(Authorities.EDIT_EXPIRED);
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
-    const isExpired = !isWithinValidPeriod || !isWithinCompleteExpiry;
-
     const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
-    const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
+    const isEventBlockedByExpiry = computeExpiryBlocked(
+        isWithinValidPeriod, isWithinCompleteExpiry, hasEditExpiredAuthority,
+    );
 
     const canUncompleteEvent = canUncompletEvent(
         !!eventAccess?.write,
@@ -64,13 +84,17 @@ export const useEventEditPermissions = ({
 
     const isEventBlockedByCompletion = eventStatus === eventStatuses.COMPLETED && !canUncompleteEvent;
 
-    const isEventReadOnly = !eventAccess?.write
-        || isEventBlockedByExpiry
-        || isCompletedAndBlockingForm;
+    const { isEventReadOnly, isEventDeletable } = computeEditAccess(
+        !!eventAccess?.write,
+        isEventBlockedByExpiry,
+        isCompletedAndBlockingForm,
+        eventStatus,
+    );
 
     return {
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
         isEventReadOnly,
+        isEventDeletable,
     };
 };

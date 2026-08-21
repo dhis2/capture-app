@@ -61,6 +61,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
+    isEventDeletable,
     isEventBlockedByCompletion,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -189,7 +190,7 @@ const WidgetHeaderPlain = ({
                                         onOpenChangelog={() => setChangeLogIsOpen(true)}
                                         onClose={() => setActionsIsOpen(false)}
                                     />
-                                    {!readOnly && (
+                                    {isEventDeletable && (
                                         <DeleteMenuItem
                                             onDeleteRequest={() => setDeleteModalOpen(true)}
                                             onClose={() => setActionsIsOpen(false)}
