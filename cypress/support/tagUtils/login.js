@@ -1,4 +1,4 @@
-const loginUser = (_username) => {
+export const loginUser = (_username) => {
     const username = _username ? Cypress.env(`dhis2Username_${_username}`) : Cypress.env('dhis2Username');
     const password = _username ? Cypress.env(`dhis2Password_${_username}`) : Cypress.env('dhis2Password');
     const baseUrl = Cypress.env('dhis2BaseUrl');

@@ -1,4 +1,5 @@
 import { After, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { loginUser } from '../../../support/tagUtils';
 import '../sharedSteps';
 
 const ORG_UNIT_ID = 'DiszpKrYNg8'; // Ngelehun CHC
@@ -8,6 +9,7 @@ const EVENT_PROGRAM_ID = 'VBqh0ynB2wv'; // Malaria case registration
 // is public rwrw----, so that user can read its events.
 const SHARED_EVENT_PROGRAM_ID = 'MoUd5BTQ3lY'; // XX MAL RDT - Case Registration
 const TRACKER_PROGRAM_ID = 'WSGAb5XwJ3Y'; // WHO RMNCH Tracker
+const ANTENATAL_STAGE_ID = 'edqlbukwRfQ'; // Second antenatal care visit, in WHO RMNCH Tracker
 const VIEW_NAME = 'sharedWorkingListView';
 const VIEW_AND_EDIT = 'rw------';
 const NO_ACCESS = '--------';
@@ -43,25 +45,31 @@ const LIST_TYPES = {
         criteriaKey: 'entityQueryCriteria',
         programAsObject: true,
     },
+    // programStageWorkingLists is the only resource that also requires a program stage on create.
     programStage: {
         resource: 'programStageWorkingLists',
         programFilter: 'program.id',
         sharingType: 'programStageWorkingList',
         programId: TRACKER_PROGRAM_ID,
+        programStageId: ANTENATAL_STAGE_ID,
         criteriaKey: 'programStageQueryCriteria',
         programAsObject: true,
     },
 };
 
-// The scenarios tagged @user:trackerAutoTestRestricted are logged in as that user, so the views they
-// act on have to be created by somebody else — the default user, addressed with basic auth.
-const ownerAuth = () => ({ user: Cypress.env('dhis2Username'), pass: Cypress.env('dhis2Password') });
-const otherUsername = () => Cypress.env('dhis2Username_trackerAutoTestRestricted');
-const otherPassword = () => Cypress.env('dhis2Password_trackerAutoTestRestricted');
+const RESTRICTED_USER = 'trackerAutoTestRestricted';
+const otherUsername = () => Cypress.env(`dhis2Username_${RESTRICTED_USER}`);
 
-// A request carrying basic auth comes back with a session cookie for that user, which replaces the
-// cookie of the user the scenario is logged in as. Anything reading the session after an owner
-// request would run as the owner, so the session has to be re-established.
+// The scenarios tagged @user:trackerAutoTestRestricted are logged in as that user, so the views they
+// act on have to be created by somebody else. Switching session is how that is done, and it goes
+// through the harness helper rather than a local copy of it: a cy.session id has to be declared with
+// the same setup and validate every time, so redefining `user<name>` here would fail with "this
+// session already exists". Going through loginUser keeps one definition per user for the whole suite,
+// and means no request needs credentials of its own.
+const switchToOwner = () => loginUser();
+
+const switchToRestrictedUser = () => loginUser(RESTRICTED_USER);
+
 // A failure here is the instance or the account being wrong for the scenario, not the behaviour under
 // test. Without it, missing access surfaces as an opaque "table header never appeared" timeout — which
 // is exactly how much time the first CI run cost. Metadata read is required for every list type; the
@@ -80,23 +88,16 @@ const assertLoggedInUserCanUseProgram = (listType) => {
         });
 };
 
-const restoreSessionForLoggedInUser = () => {
-    cy.loginByApi({
-        username: otherUsername(),
-        password: otherPassword(),
-        baseUrl: Cypress.env('dhis2BaseUrl'),
-    });
-};
-
+// Runs against whichever session is active, so callers switch to the owner first.
 const deleteViewsNamed = (name) => {
     Object.values(LIST_TYPES).forEach(({ resource, programFilter, programId }) => {
         cy.buildApiUrl(`${resource}?filter=${programFilter}:eq:${programId}&fields=id,displayName`)
-            .then(url => cy.request({ url, auth: ownerAuth() }))
+            .then(url => cy.request(url))
             .then(({ body }) => {
                 const leftovers = body[resource]?.filter(view => view.displayName === name) ?? [];
                 leftovers.forEach(({ id }) => {
                     cy.buildApiUrl(resource, id)
-                        .then(url => cy.request({ method: 'DELETE', url, auth: ownerAuth(), failOnStatusCode: false }));
+                        .then(url => cy.request({ method: 'DELETE', url, failOnStatusCode: false }));
                 });
             });
     });
@@ -105,6 +106,7 @@ const deleteViewsNamed = (name) => {
 // Teardown by API rather than through the UI: a failing assertion must not leave the view behind for
 // the next run to trip over.
 After({ tags: '@working-list-sharing' }, () => {
+    switchToOwner();
     deleteViewsNamed(VIEW_NAME);
 });
 
@@ -204,27 +206,44 @@ When('you save the current view', () => {
 When('you share the view with the other user', () => {
     clickListViewMenuItem('Share view');
 
-    cy.get('[placeholder="Search"]').type(otherUsername());
-    lookUpOtherUser().then(({ displayName }) => cy.contains(displayName).click());
+    // The display name is resolved before the dialog scope opens, so the lookup request is not
+    // enqueued inside it.
+    lookUpOtherUser().then(({ displayName }) => {
+        cy.get('[data-test="sharing-dialog"]').within(() => {
+            cy.get('[placeholder="Search"]').type(otherUsername());
+        });
 
-    cy.contains('Choose a level').click();
-    cy.contains('View and edit').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+        // The search results and the access-level menu render in poppers outside the dialog element,
+        // so these two clicks are the only ones that cannot be scoped to it.
+        cy.contains(displayName).click();
+
+        cy.get('[data-test="sharing-dialog"]').within(() => {
+            cy.contains('Choose a level').click();
+        });
+
+        cy.contains('View and edit').click({ force: true });
+
+        cy.get('[data-test="sharing-dialog"]').within(() => {
+            cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
+            cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
+        });
+    });
 });
 
 const seedSharedView = (listType) => {
-    const { resource, sharingType, programId, criteriaKey, programAsObject } = LIST_TYPES[listType];
+    const { resource, sharingType, programId, programStageId, criteriaKey, programAsObject } = LIST_TYPES[listType];
 
     cy.wrap(listType).as('listType');
 
-    // Both of these read the session, so they have to run before any request carrying basic auth,
-    // which would otherwise replace the session cookie with the owner's.
+    // Read who the scenario is logged in as, and check that account against the program, before
+    // switching away from its session.
     cy.buildApiUrl('me?fields=id')
         .then(url => cy.request(url))
         .then(({ body }) => cy.wrap(body.id).as('myId'));
 
     assertLoggedInUserCanUseProgram(listType);
+
+    switchToOwner();
 
     deleteViewsNamed(VIEW_NAME);
 
@@ -232,10 +251,10 @@ const seedSharedView = (listType) => {
         .then(url => cy.request({
             method: 'POST',
             url,
-            auth: ownerAuth(),
             body: {
                 name: VIEW_NAME,
                 program: programAsObject ? { id: programId } : programId,
+                ...(programStageId && { programStage: { id: programStageId } }),
                 [criteriaKey]: { order: 'createdAt:desc' },
             },
         }))
@@ -247,21 +266,20 @@ const seedSharedView = (listType) => {
                 .then(url => cy.request({
                     method: 'POST',
                     url,
-                    auth: ownerAuth(),
                     body: { object: { publicAccess: NO_ACCESS, userAccesses: [{ id: myId, access: VIEW_AND_EDIT }] } },
                 }));
 
             // Guards the premise of the scenario: DHIS2-13020 only reproduces for a non-owner, so if
             // the seeding ran as the logged-in user after all, fail here rather than pass vacuously.
             cy.buildApiUrl(`${resource}/${viewId}?fields=sharing`)
-                .then(url => cy.request({ url, auth: ownerAuth() }))
+                .then(url => cy.request(url))
                 .its('body.sharing.owner')
                 .should((owner) => {
                     expect(owner, 'owner of the seeded view, which must not be the logged-in user')
                         .to.not.equal(myId);
                 });
 
-            restoreSessionForLoggedInUser();
+            switchToRestrictedUser();
         });
     });
 };
@@ -271,6 +289,9 @@ Given('an event working list view owned by another user is shared with you with 
 
 Given('a tracker working list view owned by another user is shared with you with view and edit access', () =>
     seedSharedView('tracker'));
+
+Given('a program stage working list view owned by another user is shared with you with view and edit access', () =>
+    seedSharedView('programStage'));
 
 When('you open the shared view', () => {
     cy.get('@listType').then(listType => visitWorkingList(listType));
@@ -310,11 +331,13 @@ Then('the update is accepted by the server', () => {
 // DHIS2-21871: read the answer from the server, never from the sharing dialog — the dialog serves
 // stale client state and reported the access as intact while the server had already dropped it.
 const assertStillSharedWith = (userIdAlias) => {
+    switchToOwner();
+
     cy.get('@listType').then((listType) => {
         cy.get('@viewId').then((viewId) => {
             cy.get(userIdAlias).then((userId) => {
                 cy.buildApiUrl(`${LIST_TYPES[listType].resource}/${viewId}?fields=sharing`)
-                    .then(url => cy.request({ url, auth: ownerAuth() }))
+                    .then(url => cy.request(url))
                     .its('body.sharing')
                     .should((sharing) => {
                         expect(Object.keys(sharing.users), 'users the view is shared with').to.include(userId);

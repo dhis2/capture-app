@@ -8,8 +8,8 @@ Scenario: The sharing settings on an event working list view survive an update
   And you change the sorting
   And you update the view
   Then the update is accepted by the server
-  And the view is still shared with the other user
   And the view no longer has unsaved changes
+  And the view is still shared with the other user
 
 @user:trackerAutoTestRestricted
 Scenario: A user with view and edit access can update a shared event working list view
@@ -28,8 +28,8 @@ Scenario: The sharing settings on a tracker working list view survive an update
   And you change the sorting
   And you update the view
   Then the update is accepted by the server
-  And the view is still shared with the other user
   And the view no longer has unsaved changes
+  And the view is still shared with the other user
 
 @user:trackerAutoTestRestricted
 Scenario: A user with view and edit access can update a shared tracker working list view
@@ -48,5 +48,15 @@ Scenario: The sharing settings on a program stage working list view survive an u
   And you change the sorting
   And you update the view
   Then the update is accepted by the server
-  And the view is still shared with the other user
   And the view no longer has unsaved changes
+  And the view is still shared with the other user
+
+@user:trackerAutoTestRestricted
+Scenario: A user with view and edit access can update a shared program stage working list view
+  Given a program stage working list view owned by another user is shared with you with view and edit access
+  When you open the shared view
+  And you change the sorting
+  Then you are offered the option to update the view
+  When you update the view
+  Then the update is accepted by the server
+  And the view is still shared with you
