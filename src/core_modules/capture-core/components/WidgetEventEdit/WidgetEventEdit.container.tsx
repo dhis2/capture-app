@@ -16,6 +16,7 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
+import { getReadOnlyMessage } from '../ReadOnlyBadge';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
@@ -110,12 +111,23 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventReadOnly, canDeleteEvent, canToggleCompletion } = useEventEditPermissions({
+    const {
+        isEventReadOnly, canDeleteEvent, canToggleCompletion,
+        isEventBlockedByExpiry, isEventBlockedByCompletion,
+    } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
+    });
+    const readOnlyMessage = getReadOnlyMessage({
+        access: { program: true, trackedEntityType: true, programStage: true },
+        trackedEntityName: undefined,
+        multipleStages: false,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
+        trackedEntityInactive: false,
     });
 
     return orgUnit && loadedValues ? (
@@ -146,6 +158,7 @@ const WidgetEventEditPlain = ({
                             readOnly={isEventReadOnly}
                             canDeleteEvent={canDeleteEvent}
                             canToggleCompletion={canToggleCompletion}
+                            readOnlyMessage={readOnlyMessage}
                         />
                     }
                     noncollapsible

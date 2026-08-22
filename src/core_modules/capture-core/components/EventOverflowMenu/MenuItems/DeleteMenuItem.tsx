@@ -8,25 +8,33 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
 type DeleteMenuItemProps = {
     onDeleteRequest: () => void;
     onClose: () => void;
+    disabledMessage?: string;
 };
 
-export const DeleteMenuItem = ({ onDeleteRequest, onClose }: DeleteMenuItemProps) => (
-    <MenuItem
-        dense
-        icon={<IconDelete16 color={colors.red600} />}
-        label={i18n.t('Delete')}
-        dataTest="stages-and-events-delete"
-        onClick={() => {
-            onDeleteRequest();
-            onClose();
-        }}
-        suffix={null}
-    />
-);
+export const DeleteMenuItem = ({ onDeleteRequest, onClose, disabledMessage }: DeleteMenuItemProps) => {
+    const disabled = !!disabledMessage;
+    return (
+        <ConditionalTooltip content={disabledMessage ?? ''} enabled={disabled}>
+            <MenuItem
+                dense
+                disabled={disabled}
+                icon={<IconDelete16 color={disabled ? undefined : colors.red600} />}
+                label={i18n.t('Delete')}
+                dataTest="stages-and-events-delete"
+                onClick={() => {
+                    onDeleteRequest();
+                    onClose();
+                }}
+                suffix={null}
+            />
+        </ConditionalTooltip>
+    );
+};
 
 type DeleteMenuItemModalProps = {
     eventId: string;

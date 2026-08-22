@@ -8,6 +8,7 @@ import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { DirectionalArrow } from '../../../utils/rtl';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
 type Props = {
     eventId: string;
@@ -16,6 +17,7 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
+    disabledMessage?: string;
 };
 
 export const SkipMenuItem = ({
@@ -25,6 +27,7 @@ export const SkipMenuItem = ({
     onSuccess,
     onError,
     onClose,
+    disabledMessage,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -75,17 +78,21 @@ export const SkipMenuItem = ({
         },
     );
 
+    const disabled = !!disabledMessage;
     return (
-        <MenuItem
-            dense
-            dataTest={isSkipped ? 'unskip-event-menu-item' : 'skip-event-menu-item'}
-            icon={isSkipped ? <DirectionalArrow reverse /> : <DirectionalArrow />}
-            label={isSkipped ? i18n.t('Unskip') : i18n.t('Skip')}
-            suffix={null}
-            onClick={() => {
-                onClose();
-                updateEventStatus();
-            }}
-        />
+        <ConditionalTooltip content={disabledMessage ?? ''} enabled={disabled}>
+            <MenuItem
+                dense
+                disabled={disabled}
+                dataTest={isSkipped ? 'unskip-event-menu-item' : 'skip-event-menu-item'}
+                icon={isSkipped ? <DirectionalArrow reverse /> : <DirectionalArrow />}
+                label={isSkipped ? i18n.t('Unskip') : i18n.t('Skip')}
+                suffix={null}
+                onClick={() => {
+                    onClose();
+                    updateEventStatus();
+                }}
+            />
+        </ConditionalTooltip>
     );
 };

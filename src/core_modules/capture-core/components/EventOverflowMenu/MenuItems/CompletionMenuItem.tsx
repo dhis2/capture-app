@@ -7,6 +7,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
 type Props = {
     eventId: string;
@@ -15,6 +16,7 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
+    disabledMessage?: string;
 };
 
 export const CompletionMenuItem = ({
@@ -24,6 +26,7 @@ export const CompletionMenuItem = ({
     onSuccess,
     onError,
     onClose,
+    disabledMessage,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -74,17 +77,21 @@ export const CompletionMenuItem = ({
         },
     );
 
+    const disabled = !!disabledMessage;
     return (
-        <MenuItem
-            dense
-            dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
-            icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
-            label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
-            suffix={null}
-            onClick={() => {
-                onClose();
-                updateCompletionStatus();
-            }}
-        />
+        <ConditionalTooltip content={disabledMessage ?? ''} enabled={disabled}>
+            <MenuItem
+                dense
+                disabled={disabled}
+                dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
+                icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
+                label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
+                suffix={null}
+                onClick={() => {
+                    onClose();
+                    updateCompletionStatus();
+                }}
+            />
+        </ConditionalTooltip>
     );
 };
